@@ -1,2 +1,3 @@
-# dbecore
-MPSI Technologies WhizniumDBE core library
+# WhizniumDBE
+
+The Whiznium Device Builder's Edition, finally as Open Source Software project.
