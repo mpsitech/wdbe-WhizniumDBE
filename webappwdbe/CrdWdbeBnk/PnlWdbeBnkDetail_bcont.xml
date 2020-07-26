@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<head>
+		<title>Detail_bcont</title>
+		<script>
+			function handleButUntViewClick() {parent.parent.window.handleButCrdopenClick("ButUntView");};
+			function handlePupVstChange() {parent.parent.window.handlePupChange(document,"PupVst","");};
+			function handleButVstToggleClick() {parent.parent.window.handleButToggleClick("PupVst");};
+			function handleTxfVstKey(evt) {return parent.parent.window.handleTxfKey(document,"TxfVst","",evt);};
+			function handleTxfVstChange() {parent.parent.window.handleTxfChange(document,"TxfVst","");};
+			function handleButVstEditClick() {parent.parent.window.handleButDlgopenClick("ButVstEdit");};
+			<!-- IP custScript - INSERT -->
+		</script>
+		<link href="../style/pnlDetail.css" rel="styleSheet" type="text/css"/>
+		<!-- IP custStyle - INSERT -->
+	</head>
+	<body marginwidth="0" marginheight="0">
+		<table cellspacing="0" border="0" cellpadding="0"><form action="">
+			<colgroup>
+				<col width="5"/>
+				<col width="155"/>
+				<col width="5"/>
+				<col width="78"/>
+				<col width="2"/>
+				<col width="38"/>
+				<col width="2"/>
+				<col width="78"/>
+				<col width="2"/>
+				<col width="1"/>
+				<col width="74"/>
+			</colgroup>
+			<tbody id="tbl">
+				<tr><td colspan="11" height="5"></td></tr>
+				<tr id="trSrf" class="show">
+					<td height="25"></td>
+					<td align="right">
+						<span id="CptSrf" class="cpt">CptSrf</span>
+					</td>
+					<td></td>
+					<td colspan="3" align="left">
+						<input id="TxtSrf" class="txfsnoed" type="text" readonly="readonly" value="TxtSrf"/>
+					</td>
+					<td></td>
+					<td colspan="4"></td>
+				</tr>
+				<tr id="trA1" class="show"><td colspan="11" height="3"></td></tr>
+				<tr id="trA2" class="show">
+					<td height="1"></td>
+					<td colspan="10" bgcolor="#7f7f7f"></td>
+				</tr>
+				<tr id="trA3" class="show"><td colspan="11" height="3"></td></tr>
+				<tr id="trUnt" class="show">
+					<td height="25"></td>
+					<td align="right">
+						<span id="CptUnt" class="cpt">CptUnt</span>
+					</td>
+					<td></td>
+					<td colspan="5" align="left">
+						<input id="TxtUnt" class="txfnoed" type="text" readonly="readonly" value="TxtUnt"/>
+					</td>
+					<td></td>
+					<td id="rdynUnt" colspan="2" align="left">
+					</td>
+				</tr>
+				<tr id="trVst" class="show">
+					<td height="25"></td>
+					<td align="right">
+						<span id="CptVst" class="cpt">CptVst</span>
+						&#160;<img id="ButVstToggle" class="but" src="../icon/toggle.png" width="16" height="16" valign="bottom" alt="ButVstToggle" onmouseover="src='../icon/toggle_hlt.png'" onmouseout="src='../icon/toggle.png'" onclick="handleButVstToggleClick()"/>
+					</td>
+					<td></td>
+					<td id="dynVst" colspan="5" align="left">
+					</td>
+					<td></td>
+					<td id="rdynVst" colspan="2" align="left">
+					</td>
+				</tr>
+				<tr><td colspan="11" height="4"></td></tr>
+			</tbody>
+		</form></table>
+	</body>
+</html>
+

@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<title>MenSes</title>
+		<script>
+			function initMenSes() {parent.window.initMenSes();};
+			function handleMitSesSpsClick() {parent.window.handleMitClick("Ses","MitSesSps");};
+			function handleMitSesTrmClick() {parent.window.handleMitClick("Ses","MitSesTrm");};
+		</script>
+		<link href="../style/menu.css" rel="styleSheet" type="text/css">
+	</head>
+	<body marginwidth="0" marginheight="0" onload="initMenSes()">
+		<table cellspacing="0" border="0" cellpadding="0">
+			<colgroup>
+				<col width="1">
+				<col width="2">
+				<col id="colCont" width="250">
+			</colgroup>
+			<tr id="trMspSes1" class="show">
+				<td height="1" colspan="3" class="frame"></td>
+			</tr>
+			<tr id="trMtxSesSes1" class="show">
+				<td height="20" class="frame"></td><td class="iframe"></td>
+				<td class="iframe"><span id="MtxSesSes1" class="itemdis"">MtxSesSes1</span></td>
+			</tr>
+			<tr id="trMtxSesSes2" class="show">
+				<td height="20" class="frame"></td><td class="iframe"></td>
+				<td class="iframe"><span id="MtxSesSes2" class="itemdis"">MtxSesSes2</span></td>
+			</tr>
+			<tr id="trMtxSesSes3" class="show">
+				<td height="20" class="frame"></td><td class="iframe"></td>
+				<td class="iframe"><span id="MtxSesSes3" class="itemdis"">MtxSesSes3</span></td>
+			</tr>
+			<tr id="trMspSes2" class="show">
+				<td height="1" colspan="3" class="frame"></td>
+			</tr>
+			<tr id="trMitSesSps" class="show">
+				<td height="20" class="frame"></td><td class="iframe"></td>
+				<td class="iframe"><span id="MitSesSps" class="item" onclick="handleMitSesSpsClick()">MitSesSps</span></td>
+			</tr>
+			<tr id="trMitSesTrm" class="show">
+				<td height="20" class="frame"></td><td class="iframe"></td>
+				<td class="iframe"><span id="MitSesTrm" class="item" onclick="handleMitSesTrmClick()">MitSesTrm</span></td>
+			</tr>
+			<tr id="trMspSes3" class="show">
+				<td height="1" colspan="3" class="frame"></td>
+			</tr>
+		</table>
+	</body>
+</html>
+

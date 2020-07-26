@@ -1,0 +1,47 @@
+.frame {
+	background-color:#000000;
+	opacity:1;
+}
+
+.iframe {
+	background-color:#ffffff;
+	opacity:1;
+}
+
+.item {
+	font-size:12px;
+	font-family:Verdana,sans-serif;
+	font-weight:normal;
+	cursor:pointer;
+}
+
+.item:hover {
+	color:#ff7f00;
+	border-color:#ff7f00;
+}
+
+.itemsel {
+	color:#ff7f00;
+	font-size:12px;
+	font-family:Verdana,sans-serif;
+	font-weight:normal;
+}
+
+.itemdis {
+	color: #a0a0a0;
+	font-size:12px;
+	font-family:Verdana,sans-serif;
+	font-weight:normal;
+}
+
+.hide {
+	display:none;
+}
+
+.show {
+	display:table-row;
+}
+
+
+
+

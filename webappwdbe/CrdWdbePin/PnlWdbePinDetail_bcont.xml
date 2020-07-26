@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<head>
+		<title>Detail_bcont</title>
+		<script>
+			function handlePupJsrChange() {parent.parent.window.handlePupChange(document,"PupJsr","s");};
+			function handleButJsrEditClick() {parent.parent.window.handleButDlgopenClick("ButJsrEdit");};
+			function handleButCluExpandClick() {parent.parent.window.handleButExpandClick("LstClu");};
+			function handleButCluCollapseClick() {parent.parent.window.handleButCollapseClick("LstClu");};
+			function handleButCluViewClick() {parent.parent.window.handleButCrdopenClick("ButCluView");};
+			function handleButCluClusterClick() {parent.parent.window.handleButClick("ButCluCluster");};
+			function handleButCluUnclusterClick() {parent.parent.window.handleButClick("ButCluUncluster");};
+			function handleButBnkViewClick() {parent.parent.window.handleButCrdopenClick("ButBnkView");};
+			function handleTxfLocKey(evt) {return parent.parent.window.handleTxfKey(document,"TxfLoc","xs",evt);};
+			function handleTxfLocChange() {parent.parent.window.handleTxfChange(document,"TxfLoc","xs");};
+			<!-- IP custScript - INSERT -->
+		</script>
+		<link href="../style/pnlDetail.css" rel="styleSheet" type="text/css"/>
+		<!-- IP custStyle - INSERT -->
+	</head>
+	<body marginwidth="0" marginheight="0">
+		<table cellspacing="0" border="0" cellpadding="0"><form action="">
+			<colgroup>
+				<col width="5"/>
+				<col width="155"/>
+				<col width="5"/>
+				<col width="78"/>
+				<col width="2"/>
+				<col width="38"/>
+				<col width="2"/>
+				<col width="78"/>
+				<col width="2"/>
+				<col width="1"/>
+				<col width="74"/>
+			</colgroup>
+			<tbody id="tbl">
+				<tr><td colspan="11" height="5"></td></tr>
+				<tr id="trJsr" class="show">
+					<td height="25"></td>
+					<td colspan="2"></td>
+					<td colspan="3" align="left">
+						<select class="pups" id="PupJsr" size="1" onchange="handlePupJsrChange()">
+						</select>
+					</td>
+					<td></td>
+					<td id="rdynJsr" align="left">
+					</td>
+					<td></td>
+					<td bgcolor="#000000"></td>
+					<td></td>
+				</tr>
+				<tr id="trSrf" class="show">
+					<td height="25"></td>
+					<td align="right">
+						<span id="CptSrf" class="cpt">CptSrf</span>
+					</td>
+					<td></td>
+					<td colspan="3" align="left">
+						<input id="TxtSrf" class="txfsnoed" type="text" readonly="readonly" value="TxtSrf"/>
+					</td>
+					<td></td>
+					<td colspan="2"></td>
+					<td bgcolor="#000000"></td>
+					<td></td>
+				</tr>
+				<tr id="trA1" class="show"><td colspan="11" height="3"></td></tr>
+				<tr id="trA2" class="show">
+					<td height="1"></td>
+					<td colspan="10" bgcolor="#7f7f7f"></td>
+				</tr>
+				<tr id="trA3" class="show"><td colspan="11" height="3"></td></tr>
+				<tr id="trClu" class="show">
+					<td height="25"></td>
+					<td id="ldynClu" align="right">
+					</td>
+					<td></td>
+					<td id="dynClu" rowspan="1" colspan="5">
+					</td>
+					<td></td>
+					<td id="rdynClu" colspan="2" align="left">
+					</td>
+				</tr>
+				<tr id="trClu2" class="hide">
+					<td colspan="3" height="67"></td>
+					<td colspan="3"></td>
+				</tr>
+				<tr id="trBnk" class="show">
+					<td height="25"></td>
+					<td align="right">
+						<span id="CptBnk" class="cpt">CptBnk</span>
+					</td>
+					<td></td>
+					<td colspan="5" align="left">
+						<input id="TxtBnk" class="txfnoed" type="text" readonly="readonly" value="TxtBnk"/>
+					</td>
+					<td></td>
+					<td id="rdynBnk" colspan="2" align="left">
+					</td>
+				</tr>
+				<tr id="trLoc" class="show">
+					<td height="25"></td>
+					<td align="right">
+						<span id="CptLoc" class="cpt">CptLoc</span>
+					</td>
+					<td></td>
+					<td colspan="1" align="left">
+						<input id="TxfLoc" class="txfxs" type="text" value="TxfLoc" onchange="handleTxfLocChange()" onkeypress="return handleTxfLocKey(event)"/>
+					</td>
+					<td></td>
+					<td colspan="6"></td>
+				</tr>
+				<tr><td colspan="11" height="4"></td></tr>
+			</tbody>
+		</form></table>
+	</body>
+</html>
+

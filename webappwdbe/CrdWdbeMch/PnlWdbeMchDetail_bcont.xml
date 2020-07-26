@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<head>
+		<title>Detail_bcont</title>
+		<script>
+			function handlePupPlaChange() {parent.parent.window.handlePupChange(document,"PupPla","");};
+			function handleButPlaToggleClick() {parent.parent.window.handleButToggleClick("PupPla");};
+			function handleTxfPlaKey(evt) {return parent.parent.window.handleTxfKey(document,"TxfPla","",evt);};
+			function handleTxfPlaChange() {parent.parent.window.handleTxfChange(document,"TxfPla","");};
+			function handleButPlaEditClick() {parent.parent.window.handleButDlgopenClick("ButPlaEdit");};
+			function handleButCchViewClick() {parent.parent.window.handleButCrdopenClick("ButCchView");};
+			function handleTxfCmtKey(evt) {return parent.parent.window.handleTxftKey(document,"TxfCmt",evt);};
+			function handleTxfCmtChange() {parent.parent.window.handleTxftChange(document,"TxfCmt");};
+			<!-- IP custScript - INSERT -->
+		</script>
+		<link href="../style/pnlDetail.css" rel="styleSheet" type="text/css"/>
+		<!-- IP custStyle - INSERT -->
+	</head>
+	<body marginwidth="0" marginheight="0">
+		<table cellspacing="0" border="0" cellpadding="0"><form action="">
+			<colgroup>
+				<col width="5"/>
+				<col width="155"/>
+				<col width="5"/>
+				<col width="78"/>
+				<col width="2"/>
+				<col width="38"/>
+				<col width="2"/>
+				<col width="78"/>
+				<col width="2"/>
+				<col width="1"/>
+				<col width="74"/>
+			</colgroup>
+			<tbody id="tbl">
+				<tr><td colspan="11" height="5"></td></tr>
+				<tr id="trSrf" class="show">
+					<td height="25"></td>
+					<td align="right">
+						<span id="CptSrf" class="cpt">CptSrf</span>
+					</td>
+					<td></td>
+					<td colspan="3" align="left">
+						<input id="TxtSrf" class="txfsnoed" type="text" readonly="readonly" value="TxtSrf"/>
+					</td>
+					<td></td>
+					<td colspan="4"></td>
+				</tr>
+				<tr id="trA1" class="show"><td colspan="11" height="3"></td></tr>
+				<tr id="trA2" class="show">
+					<td height="1"></td>
+					<td colspan="10" bgcolor="#7f7f7f"></td>
+				</tr>
+				<tr id="trA3" class="show"><td colspan="11" height="3"></td></tr>
+				<tr id="trPla" class="show">
+					<td height="25"></td>
+					<td align="right">
+						<span id="CptPla" class="cpt">CptPla</span>
+						&#160;<img id="ButPlaToggle" class="but" src="../icon/toggle.png" width="16" height="16" valign="bottom" alt="ButPlaToggle" onmouseover="src='../icon/toggle_hlt.png'" onmouseout="src='../icon/toggle.png'" onclick="handleButPlaToggleClick()"/>
+					</td>
+					<td></td>
+					<td id="dynPla" colspan="5" align="left">
+					</td>
+					<td></td>
+					<td id="rdynPla" colspan="2" align="left">
+					</td>
+				</tr>
+				<tr id="trCch" class="show">
+					<td height="25"></td>
+					<td align="right">
+						<span id="CptCch" class="cpt">CptCch</span>
+					</td>
+					<td></td>
+					<td colspan="5" align="left">
+						<input id="TxtCch" class="txfnoed" type="text" readonly="readonly" value="TxtCch"/>
+					</td>
+					<td></td>
+					<td id="rdynCch" colspan="2" align="left">
+					</td>
+				</tr>
+				<tr id="trCmt" class="show">
+					<td height="75"></td>
+					<td align="right" valign="top">
+						<span id="CptCmt" class="cpt">CptCmt</span>
+					</td>
+					<td></td>
+					<td colspan="5" align="left">
+						<textarea id="TxfCmt" class="txf" rows="4" cols="20" type="text" value="TxfCmt" onchange="handleTxfCmtChange()" onkeypress="return handleTxfCmtKey(event)"/>
+					</td>
+					<td></td>
+					<td colspan="2"></td>
+				</tr>
+				<tr><td colspan="11" height="4"></td></tr>
+			</tbody>
+		</form></table>
+	</body>
+</html>
+

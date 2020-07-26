@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<head>
+		<title>_cont</title>
+		<script>
+			function handleDetPupPrjChange() {parent.window.handlePupChange(document,"DetPupPrj","");};
+			function handleDetPupBvrChange() {parent.window.handlePupChange(document,"DetPupBvr","");};
+			function handleDetRbuVniSelect(num) {parent.window.handleRbuSelect(document,"DetRbuVni",num);};
+			function handleDetTxfCmtKey(evt) {return parent.window.handleTxftKey(document,"DetTxfCmt",evt);};
+			function handleDetTxfCmtChange() {parent.window.handleTxftChange(document,"DetTxfCmt");};
+			<!-- IP custScript - INSERT -->
+		</script>
+		<link href="../style/pnlDetail3_2.css" rel="styleSheet" type="text/css"/>
+		<!-- IP custStyle - INSERT -->
+	</head>
+	<body marginwidth="0" marginheight="0">
+		<table cellspacing="0" border="0" cellpadding="0"><form id="form" action="" method="POST" onsubmit="return true" enctype="multipart/form-data">
+			<colgroup>
+				<col width="5"/>
+				<col width="215"/>
+				<col width="5"/>
+				<col width="138"/>
+				<col width="2"/>
+				<col width="68"/>
+				<col width="2"/>
+				<col width="138"/>
+				<col width="2"/>
+				<col width="1"/>
+				<col width="114"/>
+			</colgroup>
+			<tbody id="tbl">
+				<tr><td colspan="11" height="5"></td></tr>
+				<tr id="trDetPrj" class="show">
+					<td height="25"></td>
+					<td align="right">
+						<span id="DetCptPrj" class="cpt">DetCptPrj</span>
+					</td>
+					<td></td>
+					<td colspan="5" align="left">
+						<select id="DetPupPrj" class="pup" size="1" onchange="handleDetPupPrjChange()"/>
+					</td>
+					<td></td>
+					<td colspan="2"></td>
+				</tr>
+				<tr id="trDetBvr" class="show">
+					<td height="25"></td>
+					<td align="right">
+						<span id="DetCptBvr" class="cpt">DetCptBvr</span>
+					</td>
+					<td></td>
+					<td colspan="5" align="left">
+						<select id="DetPupBvr" class="pup" size="1" onchange="handleDetPupBvrChange()"/>
+					</td>
+					<td></td>
+					<td colspan="2"></td>
+				</tr>
+				<tr id="trDetVni" class="show">
+					<td height="25"></td>
+					<td align="right">
+						<span id="DetCptVni" class="cpt">DetCptVni</span>
+					</td>
+					<td></td>
+					<td id="DetRbuVni" colspan="5" align="left">
+					</td>
+					<td colspan="3"></td>
+				</tr>
+				<tr id="trDetCmt" class="show">
+					<td height="75"></td>
+					<td align="right" valign="top">
+						<span id="DetCptCmt" class="cpt">DetCptCmt</span>
+					</td>
+					<td></td>
+					<td colspan="5" align="left">
+						<textarea id="DetTxfCmt" class="txf" rows="4" cols="20" type="text" value="DetTxfCmt" onchange="handleDetTxfCmtChange()" onkeypress="return handleDetTxfCmtKey(event)"/>
+					</td>
+					<td></td>
+					<td colspan="2"></td>
+				</tr>
+				<tr><td colspan="11" height="4"></td></tr>
+			</tbody>
+		</form></table>
+	</body>
+</html>
+

@@ -1,0 +1,71 @@
+/**
+	* \file WdbeopdOpprc.h
+	* operation processor for Wdbe operation daemon wdbeopd2 (declarations)
+	* \author Alexander Wirthmueller
+	* \date created: 11 Jul 2020
+	* \date modified: 11 Jul 2020
+	*/
+
+#ifndef WDBEOPDOPPRC_H
+#define WDBEOPDOPPRC_H
+
+#include "WdbeMtpWrfpgaCmdbus_v1_0.h"
+#include "WdbeMtpWrfpgaCmdinv_v1_0.h"
+#include "WdbeMtpWrfpgaCmdret_v1_0.h"
+#include "WdbeMtpWrfpgaCrcspec_32_v1_0.h"
+#include "WdbeMtpWrfpgaCrcspec_v1_0.h"
+#include "WdbeMtpWrfpgaDpbram_v1_0.h"
+#include "WdbeMtpWrfpgaPmmu_v1_0.h"
+#include "WdbeMtpWrfpgaSpbram_v1_0.h"
+#include "WdbeMtpWrfpgaSpifwd_v1_0.h"
+#include "WdbeMtpWrfpgaTkclksrc_v1_0.h"
+#include "WdbeMtpWrfpgaTop_v1_0.h"
+#include "WdbeMtpModdetPmmu_v1_0.h"
+#include "WdbeMtpModdetSpifwd_v1_0.h"
+#include "WdbeMtpModdetTkclksrc_v1_0.h"
+#include "WdbeMtpModdetTop_v1_0.h"
+#include "WdbeMtpModbsctdCmdinv_v1_0.h"
+#include "WdbeMtpModbsctdCmdret_v1_0.h"
+#include "WdbeMtpModbsctdDpbram_v1_0.h"
+#include "WdbeMtpModbsctdPmmu_v1_0.h"
+#include "WdbeMtpModbsctdSpbram_v1_0.h"
+#include "WdbeMtpModbscbuAdd_v12_0.h"
+#include "WdbeMtpModbscbuAxihostif_Easy_v1_0.h"
+#include "WdbeMtpModbscbuAxihostif_Easy_v2_0.h"
+#include "WdbeMtpModbscbuAxihostif_v1_0.h"
+#include "WdbeMtpModbscbuCmdinv_v1_0.h"
+#include "WdbeMtpModbscbuCmdret_v1_0.h"
+#include "WdbeMtpModbscbuDft_v4_0.h"
+#include "WdbeMtpModbscbuDiv_v3_0.h"
+#include "WdbeMtpModbscbuDiv_v5_1.h"
+#include "WdbeMtpModbscbuDotmx2x16_v1_0.h"
+#include "WdbeMtpModbscbuDpbram_v1_0.h"
+#include "WdbeMtpModbscbuDpbram_v8_4.h"
+#include "WdbeMtpModbscbuDsp48_v3_0_aMultB.h"
+#include "WdbeMtpModbscbuDsp48_v3_0_aPlusDPlusC.h"
+#include "WdbeMtpModbscbuMult_v12_0.h"
+#include "WdbeMtpModbscbuOled128x32_v1_0.h"
+#include "WdbeMtpModbscbuPmmu_v1_0.h"
+#include "WdbeMtpModbscbuSpbram_v1_0.h"
+#include "WdbeMtpModbscbuSpifwd_v1_0.h"
+#include "WdbeMtpModbscbuSpihostif_Easy_v1_0.h"
+#include "WdbeMtpModbscbuSpihostif_v1_0.h"
+#include "WdbeMtpModbscbuSub_v12_0.h"
+#include "WdbeMtpModbscbuUarthostif_Easy_v1_0.h"
+#include "WdbeMtpModbscbuUarthostif_v1_0.h"
+#include "WdbeMtpModbscbuXadc_v3_3.h"
+#include "WdbeMtpModbscbuZynq_ip_AXI_v1_0.h"
+#include "WdbeMtpModbscbuZynq_ip_AXI_v2_0.h"
+#include "WdbeMtpModbscbuZynq_ip_v1_0.h"
+#include "WdbeMtpPlhfpgaPmmu_v1_0.h"
+
+/**
+	* WdbeopdOpprc
+	*/
+namespace WdbeopdOpprc {
+	void* run(void* arg);
+	void cleanup(void* arg);
+};
+
+#endif
+

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<head>
+		<title>LstUsg</title>
+		<script>
+			function handleLstLoad() {parent.parent.parent.window.handleLstLoad(document,"LstUsg",1,false)};
+			function handleLstSelect(num) {parent.parent.parent.window.handleLstSelect("LstUsg",false,num);};
+			function handleLsbUpClick() {parent.parent.parent.window.handleLsbUpClick(document,"LstUsg",1,false);};
+			function handleLsbJpupClick() {parent.parent.parent.window.handleLsbJpupClick(document,"LstUsg",1,false);};
+			function handleLsbJpdownClick() {parent.parent.parent.window.handleLsbJpdownClick(document,"LstUsg",1,false);};
+			function handleLsbDownClick() {parent.parent.parent.window.handleLsbDownClick(document,"LstUsg",1,false);};
+			function handleLsbMdn() {parent.parent.parent.window.handleLsbMdn(document,"LstUsg");};
+			function handleLsbMove(evt) {parent.parent.parent.window.handleLsbMove(document,evt);};
+			function handleLsbMup(evt) {parent.parent.parent.window.handleLsbMup(document,"LstUsg",1,false,evt);};
+		</script>
+		<link href="../style/lst.css" rel="styleSheet" type="text/css"/>
+	</head>
+	<body marginwidth="0" marginheight="0" onload="handleLstLoad()">
+		<table cellspacing="0" border="0" cellpadding="0">
+			<colgroup>
+				<col width="1"/>
+				<col width="324"/>
+				<col width="15"/>
+			</colgroup>
+			<thead>
+				<tr>
+					<td height="1" colspan="3" class="frame"></td>
+				</tr>
+			</thead>
+			<tbody id="tbl">
+			</tbody>
+			<tfoot>
+				<tr>
+					<td height="1" colspan="3" class="frame"></td>
+				</tr>
+			</tfoot>
+		</table>
+	</body>
+</html>
+

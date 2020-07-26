@@ -1,0 +1,131 @@
+/**
+	* \file QryWdbeMtpMge1NSignal.h
+	* job handler for job QryWdbeMtpMge1NSignal (declarations)
+	* \author Alexander Wirthmueller
+	* \date created: 11 Jul 2020
+	* \date modified: 11 Jul 2020
+	*/
+
+#ifndef QRYWDBEMTPMGE1NSIGNAL_H
+#define QRYWDBEMTPMGE1NSIGNAL_H
+
+// IP include.spec --- INSERT
+
+// IP include.cust --- INSERT
+
+#define StatAppQryWdbeMtpMge1NSignal QryWdbeMtpMge1NSignal::StatApp
+#define StatShrQryWdbeMtpMge1NSignal QryWdbeMtpMge1NSignal::StatShr
+#define StgIacQryWdbeMtpMge1NSignal QryWdbeMtpMge1NSignal::StgIac
+
+/**
+	* QryWdbeMtpMge1NSignal
+	*/
+class QryWdbeMtpMge1NSignal : public JobWdbe {
+
+public:
+	/**
+		* StatApp (full: StatAppQryWdbeMtpMge1NSignal)
+		*/
+	class StatApp {
+
+	public:
+		static void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true, const Sbecore::uint firstcol = 1, const Sbecore::uint jnumFirstdisp = 1, const Sbecore::uint ncol = 1, const Sbecore::uint ndisp = 10);
+	};
+
+	/**
+		* StatShr (full: StatShrQryWdbeMtpMge1NSignal)
+		*/
+	class StatShr : public Sbecore::Xmlio::Block {
+
+	public:
+		static const Sbecore::uint NTOT = 1;
+		static const Sbecore::uint JNUMFIRSTLOAD = 2;
+		static const Sbecore::uint NLOAD = 3;
+
+	public:
+		StatShr(const Sbecore::uint ntot = 0, const Sbecore::uint jnumFirstload = 0, const Sbecore::uint nload = 0);
+
+	public:
+		Sbecore::uint ntot;
+		Sbecore::uint jnumFirstload;
+		Sbecore::uint nload;
+
+	public:
+		void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
+		std::set<Sbecore::uint> comm(const StatShr* comp);
+		std::set<Sbecore::uint> diff(const StatShr* comp);
+	};
+
+	/**
+		* StgIac (full: StgIacQryWdbeMtpMge1NSignal)
+		*/
+	class StgIac : public Sbecore::Xmlio::Block {
+
+	public:
+		static const Sbecore::uint JNUM = 1;
+		static const Sbecore::uint JNUMFIRSTLOAD = 2;
+		static const Sbecore::uint NLOAD = 3;
+
+	public:
+		StgIac(const Sbecore::uint jnum = 0, const Sbecore::uint jnumFirstload = 1, const Sbecore::uint nload = 100);
+
+	public:
+		Sbecore::uint jnum;
+		Sbecore::uint jnumFirstload;
+		Sbecore::uint nload;
+
+	public:
+		bool readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
+		void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
+		std::set<Sbecore::uint> comm(const StgIac* comp);
+		std::set<Sbecore::uint> diff(const StgIac* comp);
+	};
+
+public:
+	QryWdbeMtpMge1NSignal(XchgWdbe* xchg, DbsWdbe* dbswdbe, const Sbecore::ubigint jrefSup, const Sbecore::uint ixWdbeVLocale);
+	~QryWdbeMtpMge1NSignal();
+
+public:
+	StatShr statshr;
+	StgIac stgiac;
+
+	ListWdbeQMtpMge1NSignal rst;
+
+	Sbecore::uint ixWdbeVQrystate;
+
+	// IP vars.cust --- INSERT
+
+public:
+	// IP cust --- INSERT
+
+public:
+	void refreshJnum();
+
+	void rerun(DbsWdbe* dbswdbe, const bool call = false);
+
+	void fetch(DbsWdbe* dbswdbe);
+
+	Sbecore::uint getJnumByRef(const Sbecore::ubigint ref);
+	Sbecore::ubigint getRefByJnum(const Sbecore::uint jnum);
+	WdbeQMtpMge1NSignal* getRecByJnum(const Sbecore::uint jnum);
+
+public:
+
+public:
+	void handleRequest(DbsWdbe* dbswdbe, ReqWdbe* req);
+
+private:
+	bool handleRerun(DbsWdbe* dbswdbe);
+	bool handleShow(DbsWdbe* dbswdbe);
+
+public:
+	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
+
+private:
+	bool handleCallWdbeSigMod_mgtMguEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbeStubChgFromSelf(DbsWdbe* dbswdbe);
+
+};
+
+#endif
+

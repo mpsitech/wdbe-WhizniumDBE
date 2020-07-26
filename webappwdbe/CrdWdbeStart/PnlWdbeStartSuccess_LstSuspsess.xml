@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<head>
+		<title>LstSuspsess</title>
+		<script>
+			function handleLstLoad() {parent.parent.window.handleLstSuccessSuspsessLoad(document)};
+			function handleLstSelect(num) {parent.parent.window.handleLstSuccessSuspsessSelect(num);};
+			function handleLsbUpClick() {parent.parent.window.handleLsbSuccessSuspsessUpClick(document);};
+			function handleLsbJpupClick() {parent.parent.window.handleLsbSuccessSuspsessJpupClick(document);};
+			function handleLsbJpdownClick() {parent.parent.window.handleLsbSuccessSuspsessJpdownClick(document);};
+			function handleLsbDownClick() {parent.parent.window.handleLsbSuccessSuspsessDownClick(document);};
+			function handleLsbMdn() {parent.parent.window.handleLsbSuccessSuspsessMdn(document);};
+			function handleLsbMove(evt) {parent.parent.window.handleLsbSuccessSuspsessMove(document,evt);};
+			function handleLsbMup(evt) {parent.parent.window.handleLsbSuccessSuspsessMup(document,evt);};
+		</script>
+		<link href="../style/lst.css" rel="styleSheet" type="text/css"/>
+	</head>
+	<body marginwidth="0" marginheight="0" onload="handleLstLoad()">
+		<table cellspacing="0" border="0" cellpadding="0">
+			<colgroup>
+				<col width="1"/>
+				<col width="179"/>
+				<col width="15"/>
+			</colgroup>
+			<thead>
+				<tr>
+					<td height="1" colspan="3" class="frame"></td>
+				</tr>
+			</thead>
+			<tbody id="tbl">
+			</tbody>
+			<tfoot>
+				<tr>
+					<td height="1" colspan="3" class="frame"></td>
+				</tr>
+			</tfoot>
+		</table>
+	</body>
+</html>
+

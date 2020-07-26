@@ -1,0 +1,38 @@
+# file Makefile
+# make file for CrdWdbeSil card job handler, release wdbecmbd_genio
+# author Alexander Wirthmueller
+# date created: 11 Jul 2020
+# modified: 11 Jul 2020
+
+include ../Makefile.inc
+
+CPP = g++
+CPPFLAGS = -std=c++11 -g -Wall -Os -pthread -DWDBECMBD
+
+STATLIB = ar
+STATLIBFLAGS = rcs
+
+INCPATH = -I$(SRCROOT)/dbswdbe -I$(SRCROOT)/wdbecmbd/VecWdbe -I$(SRCROOT)/wdbecmbd/IexWdbe -I$(SRCROOT)/wdbecmbd
+INCPATH += -I/usr/include -I/usr/include/jsoncpp -I/usr/include/libxml2 -I/usr/include/mysql -I/usr/include/postgresql -I/usr/local/include
+
+OBJS = CrdWdbeSil.o PnlWdbeSilList.o QryWdbeSilList.o PnlWdbeSilHeadbar.o PnlWdbeSilRec.o PnlWdbeSilHk1NModule.o QryWdbeSilHk1NModule.o PnlWdbeSilRef1NCommand.o QryWdbeSilRef1NCommand.o PnlWdbeSilHk1NVector.o QryWdbeSilHk1NVector.o PnlWdbeSilRef1NError.o QryWdbeSilRef1NError.o PnlWdbeSil1NTarget.o QryWdbeSil1NTarget.o PnlWdbeSilFwd1NController.o QryWdbeSilFwd1NController.o PnlWdbeSil1NBank.o QryWdbeSil1NBank.o PnlWdbeSilSil1NUnit.o QryWdbeSilSil1NUnit.o PnlWdbeSil1NPeripheral.o QryWdbeSil1NPeripheral.o PnlWdbeSilDetail.o
+
+LIB = libcrdwdbesil
+
+.SUFFIXES: .cpp
+
+.cpp.o :
+	$(CPP) $(CPPFLAGS) $(INCPATH) -o $@ -c $<
+
+all:	$(LIB)
+
+$(LIB):	$(OBJS)
+	$(STATLIB) $(STATLIBFLAGS) $(LIB).a $(OBJS)
+	rm -f *.o
+
+install:
+	mv $(LIB).a $(LIBROOT)/wdbecmbd/
+
+clean:
+	rm -f *.o
+

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:wdbe="http://www.mpsitech.com/wdbe">
+	<head>
+		<title>Source</title>
+	</head>
+	<body marginwidth="0" marginheight="0">
+		<src xmlns="http://www.mpsitech.com/wdbe">
+			<Cont>
+				<Ci sref="numFPupLoginLocale">1</Ci>
+				<Ci sref="numFLstSuccessSuspsess">1</Ci>
+				<Ci sref="TxfLoginUsername">test</Ci>
+				<Ci sref="TxfLoginPassword">test</Ci>
+			</Cont>
+			<Stat>
+				<Si sref="LstSuccessSuspsessNumFirstdisp">1</Si>
+			</Stat>
+			<FeedFPupLoginLocale.enus>
+				<Fi num="1">
+					<sref>enus</sref>
+					<tit1>English (United States)</tit1>
+				</Fi>
+			</FeedFPupLoginLocale.enus>
+			<Tag.enus>
+				<Ti sref="ButFailureBack">Back</Ti>
+				<Ti sref="ButLoginLogin">Log in</Ti>
+				<Ti sref="ButLoginReset">Reset</Ti>
+				<Ti sref="ButLogoutLogin">Login screen</Ti>
+				<Ti sref="ButSuccessBack">Back</Ti>
+				<Ti sref="ButSuccessNewsess">Start new session</Ti>
+				<Ti sref="ButSuccessSuspsessResume">Resume</Ti>
+				<Ti sref="CptFailure">Error</Ti>
+				<Ti sref="CptFailureMessage">Login failed.</Ti>
+				<Ti sref="CptLogin">Login</Ti>
+				<Ti sref="CptLoginPassword">Password</Ti>
+				<Ti sref="CptLoginUsername">User name</Ti>
+				<Ti sref="CptLogout">Logout</Ti>
+				<Ti sref="CptLogoutMessage">Your session has been terminated.</Ti>
+				<Ti sref="CptSuccess">Login successful</Ti>
+				<Ti sref="CptSuccessSuspsess">Suspended sessions</Ti>
+			</Tag.enus>
+			<FeedFEnsSps/>
+			<FeedFEnsSec/>
+		</src>
+	</body>
+</html>
+

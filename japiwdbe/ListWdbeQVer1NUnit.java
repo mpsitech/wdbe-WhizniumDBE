@@ -1,0 +1,61 @@
+/**
+  * \file ListWdbeQVer1NUnit.java
+  * Java API code for record set of table TblWdbeQVer1NUnit
+  * \author Alexander Wirthmueller
+  * \date created: 11 Jul 2020
+  * \date modified: 11 Jul 2020
+  */
+
+package apiwdbe;
+
+import java.util.*;
+import org.w3c.dom.*;
+import sbecore.*;
+
+public class ListWdbeQVer1NUnit {
+
+	public ListWdbeQVer1NUnit() {
+		nodes = new ArrayList<WdbeQVer1NUnit>();
+	};
+	
+	public void clear() {
+		nodes.clear();
+	};
+
+	public ArrayList<WdbeQVer1NUnit> nodes;
+
+	public boolean readXML(
+				Document doc
+				, String basexpath
+				, boolean addbasetag
+			) {
+		Vector<Integer> ics = new Vector<Integer>();
+		Vector<Boolean> shorttags = new Vector<Boolean>();
+
+		WdbeQVer1NUnit rec;
+
+		String s;
+
+		if (addbasetag) basexpath = Xmlio.checkUclcXPaths(doc, basexpath, "ListWdbeQVer1NUnit");
+
+		if (Xmlio.checkXPath(doc, basexpath)) {
+			Xmlio.extractList(doc, basexpath, "WdbeQVer1NUnit", "row", "jnum", ics, shorttags);
+
+			clear();
+			
+			for (int i = 0; i < ics.size(); i++) {
+				rec = new WdbeQVer1NUnit(i+1, "");
+
+				if (shorttags.get(i)) s = basexpath + "/row[@jnum='" + ics.get(i).toString() + "']";
+				else s = basexpath + "/WdbeQVer1NUnit[@jnum='" + ics.get(i).toString() + "']";
+				
+				if (rec.readXML(doc, s, false)) nodes.add(rec);
+			};
+			
+			return true;
+		};
+
+		return false;
+	};
+};
+

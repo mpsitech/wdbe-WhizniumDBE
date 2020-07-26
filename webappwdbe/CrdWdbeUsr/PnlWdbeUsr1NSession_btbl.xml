@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<head>
+		<title>1NSession_btbl</title>
+		<script>
+			function handleTblSelect(jnum) {parent.parent.window.handleTblSelect(jnum);};
+			function handleTblCpreviousClick() {parent.parent.window.handleTblCpreviousClick();};
+			function handleTblCnextClick() {parent.parent.window.handleTblCnextClick();};
+			function setTsbPos(pos) {parent.parent.window.setTsbPos(pos);};
+			function handleTsbUpClick() {parent.parent.window.handleTsbUpClick();};
+			function handleTsbJpupClick() {parent.parent.window.handleTsbJpupClick();};
+			function handleTsbJpdownClick() {parent.parent.window.handleTsbJpdownClick();};
+			function handleTsbDownClick() {parent.parent.window.handleTsbDownClick();};
+			function handleTsbMdn() {parent.parent.window.handleTsbMdn();};
+			function handleTsbMup(evt) {parent.parent.window.handleTsbMup(evt);};
+			function handleTsbMove(evt) {parent.parent.window.handleTsbMove(evt);};
+		</script>
+		<link href="../style/pnlTbl.css" rel="styleSheet" type="text/css"/>
+	</head>
+	<body marginwidth="0" marginheight="0">
+		<table cellspacing="0" border="0" cellpadding="0"><form action="">
+			<colgroup id="cols">
+				<col width="20"></col>
+				<col width="405"></col>
+				<col width="15"></col>
+			</colgroup>
+			<tbody id="tbl">
+				<tr id="hdr">
+					<td height="20" class="col" id="rhcl"><img width="10" height="10" alt="rhcl" src="../icon/void.png"></img></td>
+				<td class="col" id="TcoRef">TcoRef</td>
+					<td class="nonsel" rowspan="11" id="tdTsb">sb</td>
+				</tr>
+			</tbody>
+		</form></table>
+	</body>
+</html>
+

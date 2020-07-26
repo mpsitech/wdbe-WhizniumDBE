@@ -1,0 +1,51 @@
+/**
+  * \file WdbeQUsgMNUser.h
+  * Java API code for record of table TblWdbeQUsgMNUser
+  * \author Alexander Wirthmueller
+  * \date created: 11 Jul 2020
+  * \date modified: 11 Jul 2020
+  */
+
+package apiwdbe;
+
+import org.w3c.dom.*;
+import sbecore.*;
+
+public class WdbeQUsgMNUser {
+	
+	public WdbeQUsgMNUser(
+				int jnum
+				, String stubMref
+				, String srefIxWdbeVUserlevel
+				, String titIxWdbeVUserlevel
+			) {
+		this.jnum = jnum;
+		this.stubMref = stubMref;
+		this.srefIxWdbeVUserlevel = srefIxWdbeVUserlevel;
+		this.titIxWdbeVUserlevel = titIxWdbeVUserlevel;
+	};
+
+	public int jnum;
+	public String stubMref;
+	public String srefIxWdbeVUserlevel;
+	public String titIxWdbeVUserlevel;
+	
+	public boolean readXML(
+				Document doc
+				, String basexpath
+				, boolean addbasetag
+			) {
+		if (addbasetag) basexpath = Xmlio.checkUclcXPaths(doc, basexpath, "WdbeQUsgMNUser");
+
+		if (Xmlio.checkXPath(doc, basexpath)) {
+			stubMref = Xmlio.extractStringUclc(doc, basexpath, "stubMref", "mref", null, 0);
+			srefIxWdbeVUserlevel = Xmlio.extractStringUclc(doc, basexpath, "srefIxWdbeVUserlevel", "ulv", null, 0);
+			titIxWdbeVUserlevel = Xmlio.extractStringUclc(doc, basexpath, "titIxWdbeVUserlevel", "ulv2", null, 0);
+			
+			return true;
+		};
+
+		return false;
+	};
+};
+

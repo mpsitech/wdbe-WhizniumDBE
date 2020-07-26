@@ -1,0 +1,39 @@
+# file Makefile
+# make file for operation pack WdbeMtpModdet, release wdbeopd2_awsubt
+# author Alexander Wirthmueller
+# date created: 11 Jul 2020
+# modified: 11 Jul 2020
+
+include ../Makefile.inc
+
+CPP = g++
+CPPFLAGS = -std=c++11 -g -Wall -Os -pthread
+
+STATLIB = ar
+STATLIBFLAGS = rcs
+
+INCPATH = -I$(SRCROOT)/dbswdbe -I$(SRCROOT)/wdbeopd2/VecWdbe -I$(SRCROOT)/wdbeopd2/IexWdbe -I$(SRCROOT)/wdbeopd2
+INCPATH += -I/usr/include -I/usr/include/libxml2 -I/usr/include/mysql -I/usr/local/include
+
+OBJS = WdbeMtpModdet_blks.o WdbeMtpModdet.o
+OBJS += WdbeMtpModdetPmmu_v1_0.o WdbeMtpModdetSpifwd_v1_0.o WdbeMtpModdetTkclksrc_v1_0.o WdbeMtpModdetTop_v1_0.o
+
+LIB = libwdbemtpmoddet
+
+.SUFFIXES:	.cpp
+
+.cpp.o :
+	$(CPP) $(CPPFLAGS) $(INCPATH) -o $@ -c $<
+
+all:	$(LIB)
+
+$(LIB):	$(OBJS)
+	$(STATLIB) $(STATLIBFLAGS) $(LIB).a $(OBJS)
+	rm -f *.o
+
+install:
+	mv $(LIB).a $(LIBROOT)/wdbeopd2/
+
+clean:
+	rm -f *.o
+

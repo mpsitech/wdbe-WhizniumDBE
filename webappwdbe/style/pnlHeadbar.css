@@ -1,0 +1,57 @@
+.menu {
+	font-size:14px;
+	font-family:Verdana,sans-serif;
+	font-weight:normal;
+	cursor:pointer;
+}
+
+.menu:hover {
+	color:#ff7f00;
+}
+
+.menuact {
+	font-size:14px;
+	font-family:Verdana,sans-serif;
+	font-weight:normal;
+	color:#ff7f00;
+	cursor:pointer;
+}
+
+.menuapp {
+	font-size:14px;
+	font-family:Verdana,sans-serif;
+	font-weight:bold;
+	cursor:pointer;
+}
+
+.menuapp:hover {
+	color:#ff7f00;
+}
+
+.menuappact {
+	font-size:14px;
+	font-family:Verdana,sans-serif;
+	font-weight:bold;
+	color:#ff7f00;
+	cursor:pointer;
+}
+
+.menuline {
+	background-color:#ffffff;
+}
+
+.menulineact {
+	background-color:#000000;
+}
+
+.hide {
+	visibility:collapse;
+}
+
+.show {
+	visibility:visible;
+}
+
+
+
+

@@ -1,0 +1,27 @@
+.cpt {
+	vertical-align:middle;
+	font-size:12px;
+	font-family:Verdana,sans-serif;
+	font-weight:normal;
+}
+
+.but {
+	color:#000000;
+	font-size:12px;
+	font-family:Verdana,sans-serif;
+	font-weight:normal;
+	text-decoration:none;
+	background-color:#ffffff;
+	border:none;
+}
+
+.but:hover {
+	color:#ff7f00;
+	font-size:12px;
+	font-family:Verdana,sans-serif;
+	font-weight:normal;
+	text-decoration:none;
+	cursor:pointer;
+	background-color:#ffffff;
+	border:none;
+}

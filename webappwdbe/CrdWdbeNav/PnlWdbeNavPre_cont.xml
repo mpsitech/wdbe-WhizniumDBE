@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<head>
+		<title>Pre_cont</title>
+		<script>
+			function handleButCvrRemoveClick() {parent.window.handleButClick("ButCvrRemove");};
+			function handleButUntRemoveClick() {parent.window.handleButClick("ButUntRemove");};
+			function handleButVerRemoveClick() {parent.window.handleButClick("ButVerRemove");};
+		</script>
+		<link href="../style/pnlHeadline.css" rel="styleSheet" type="text/css"/>
+	</head>
+	<body marginwidth="0" marginheight="0">
+		<table cellspacing="0" border="0" cellpadding="0">
+			<colgroup>
+				<col width="5"/>
+				<col width="990"/>
+				<col width="5"/>
+			</colgroup>
+			<tr>
+				<td height="18"></td>
+				<td id="line" align="left">
+				</td>
+				<td></td>
+			</tr>
+		</table>
+	</body>
+</html>
+

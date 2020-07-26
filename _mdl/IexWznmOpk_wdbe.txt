@@ -1,0 +1,872 @@
+- IexWznmOpk v0.9.23											
+- ImeIMOppack.srefIxVBasetype	sref	Title	Shrdat	Comment							
+- stat	WdbeModbsc	modify basic device/core description	false								
+	- ImeIRMComponentMOppack.srefRefWznmMComponent										
+	- wdbeopd1										
+	- ImeIRMComponentMOppack.end										
+	- ImeIMOp.sref	Shrdat	Comment								
+	- WdbeModbscSys	false	add standard vectors								
+		- ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment			
+		- 0	refWdbeMVersion	ubigint							
+		- ImeIAMOpInvarg.end									
+		- ImeIMSquawk2.Title	Example								
+		- 	add standard vectors for version 'ICARUSDetectorHardwareControl 0.1.0'								
+			- ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title							
+			- enus	add standard vectors for version '&StubWdbeVerStd'							
+			- ImeIJMSquawkTitle2.end								
+			- ImeIRMSquawkMStub2.srefRefWznmMStub								
+			- StubWdbeVerStd								
+			- ImeIRMSquawkMStub2.end								
+		- ImeIMSquawk2.end									
+	- WdbeModbscUnt	false	add standard vectors								
+		- ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment			
+		- 0	refWdbeMUnit	ubigint							
+		- ImeIAMOpInvarg.end									
+		- ImeIMSquawk2.Title	Example								
+		- 	add standard vectors for unit 'icacam2'								
+			- ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title							
+			- enus	add standard vectors for unit '&StubWdbeUntStd'							
+			- ImeIJMSquawkTitle2.end								
+			- ImeIRMSquawkMStub2.srefRefWznmMStub								
+			- StubWdbeUntStd								
+			- ImeIRMSquawkMStub2.end								
+		- ImeIMSquawk2.end									
+	- WdbeModbscImbuftd	false	add parameters								
+		- ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment			
+		- 0	refWdbeMModule	ubigint							
+		- ImeIAMOpInvarg.end									
+		- ImeIMSquawk2.Title	Example								
+		- 	add parameters for module 'icm2-acq-buf (dpbram_v1_0)'								
+			- ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title							
+			- enus	add parameters for module '&StubWdbeMdlStd'							
+			- ImeIJMSquawkTitle2.end								
+			- ImeIRMSquawkMStub2.srefRefWznmMStub								
+			- StubWdbeMdlStd								
+			- ImeIRMSquawkMStub2.end								
+		- ImeIMSquawk2.end									
+	- WdbeModbscCtrtd	false	add controller								
+		- ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment			
+		- 0	refWdbeMModule	ubigint							
+		- ImeIAMOpInvarg.end									
+		- ImeIMSquawk2.Title	Example								
+		- 	add controller for module 'dcx3-pmmu (controller)'								
+			- ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title							
+			- enus	add controller for module '&StubWdbeMdlStd'							
+			- ImeIJMSquawkTitle2.end								
+			- ImeIRMSquawkMStub2.srefRefWznmMStub								
+			- StubWdbeMdlStd								
+			- ImeIRMSquawkMStub2.end								
+		- ImeIMSquawk2.end									
+	- WdbeModbscFwdctrtd	false	add read and write buffers and commands								
+		- ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment			
+		- 0	refWdbeMModule	ubigint							
+		- ImeIAMOpInvarg.end									
+		- ImeIMSquawk2.Title	Example								
+		- 	add read and write buffers and commands for module 'dcx3-qcdif (spifwd_v1_0 forwarding controller)'								
+			- ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title							
+			- enus	add read and write buffers and commands for module '&StubWdbeMdlStd'							
+			- ImeIJMSquawkTitle2.end								
+			- ImeIRMSquawkMStub2.srefRefWznmMStub								
+			- StubWdbeMdlStd								
+			- ImeIRMSquawkMStub2.end								
+		- ImeIMSquawk2.end									
+	- WdbeModbscTplcpy	false	copy parameters, subs, generics and ports from template								
+		- ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment			
+		- 0	refWdbeMModule	ubigint							
+		- ImeIAMOpInvarg.end									
+		- ImeIMSquawk2.Title	Example								
+		- 	copy parameters, subs, generics and ports from template for module 'icm2-acq-buf (bpbram_v1_0)'								
+			- ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title							
+			- enus	copy parameters, subs, generics and ports from template for module '&StubWdbeMdlStd'							
+			- ImeIJMSquawkTitle2.end								
+			- ImeIRMSquawkMStub2.srefRefWznmMStub								
+			- StubWdbeMdlStd								
+			- ImeIRMSquawkMStub2.end								
+		- ImeIMSquawk2.end									
+	- ImeIMOp.end										
+- stat	WdbeModdet	modify detailed device/core description	false								
+	- ImeIRMComponentMOppack.srefRefWznmMComponent										
+	- wdbeopd1										
+	- ImeIRMComponentMOppack.end										
+	- ImeIMOp.sref	Shrdat	Comment								
+	- WdbeModdetUnt	false	fill standard vectors								
+		- ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment			
+		- 0	refWdbeMUnit	ubigint							
+		- ImeIAMOpInvarg.end									
+		- ImeIMSquawk2.Title	Example								
+		- 	fill standard vectors for unit 'icacam2'								
+			- ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title							
+			- enus	fill standard vectors for unit '&StubWdbeUntStd'							
+			- ImeIJMSquawkTitle2.end								
+			- ImeIRMSquawkMStub2.srefRefWznmMStub								
+			- StubWdbeUntStd								
+			- ImeIRMSquawkMStub2.end								
+		- ImeIMSquawk2.end									
+	- WdbeModdetEhostif	false	add command wiring								
+		- ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment			
+		- 0	refWdbeMModule	ubigint							
+		- 0	mcuNotFpga	boolean							
+		- ImeIAMOpInvarg.end									
+		- ImeIMSquawk2.Title	Example								
+		- 	add command wiring for module 'icm2-hostif (easy model host interface)'								
+			- ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title							
+			- enus	add command wiring for module '&StubWdbeMdlStd'							
+			- ImeIJMSquawkTitle2.end								
+			- ImeIRMSquawkMStub2.srefRefWznmMStub								
+			- StubWdbeMdlStd								
+			- ImeIRMSquawkMStub2.end								
+		- ImeIMSquawk2.end									
+	- WdbeModdetCmdbus	false	add command bus wiring								
+		- ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment			
+		- 0	refWdbeMModule	ubigint							
+		- 0	mcuNotFpga	boolean							
+		- ImeIAMOpInvarg.end									
+		- ImeIMSquawk2.Title	Example								
+		- 	add command bus wiring for module 'icm2-cmdbus (cmdbus_v1_0 command bus controller)'								
+			- ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title							
+			- enus	add command bus wiring for module '&StubWdbeMdlStd'							
+			- ImeIJMSquawkTitle2.end								
+			- ImeIRMSquawkMStub2.srefRefWznmMStub								
+			- StubWdbeMdlStd								
+			- ImeIRMSquawkMStub2.end								
+		- ImeIMSquawk2.end									
+	- WdbeModdetImbuf	false	add inter-module buffer wiring								
+		- ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment			
+		- 0	refWdbeMModule	ubigint							
+		- ImeIAMOpInvarg.end									
+		- ImeIMSquawk2.Title	Example								
+		- 	add inter-module buffer wiring for module 'icm2-cmdinv-buf (dpbram_v1_0)'								
+			- ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title							
+			- enus	add inter-module buffer wiring for module '&StubWdbeMdlStd'							
+			- ImeIJMSquawkTitle2.end								
+			- ImeIRMSquawkMStub2.srefRefWznmMStub								
+			- StubWdbeMdlStd								
+			- ImeIRMSquawkMStub2.end								
+		- ImeIMSquawk2.end									
+	- WdbeModdetCtrFwdctr	false	add command process and FSM debug ports								
+		- ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment			
+		- 0	refWdbeMModule	ubigint							
+		- 0	Prjshort	string							
+		- 0	Untsref	string							
+		- ImeIAMOpInvarg.end									
+		- ImeIMSquawk2.Title	Example								
+		- 	add command process and FSM debug ports for module 'icm2-acq (controller)'								
+			- ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title							
+			- enus	add command process and FSM debug ports for module '&StubWdbeMdlStd'							
+			- ImeIJMSquawkTitle2.end								
+			- ImeIRMSquawkMStub2.srefRefWznmMStub								
+			- StubWdbeMdlStd								
+			- ImeIRMSquawkMStub2.end								
+		- ImeIMSquawk2.end									
+	- WdbeModdetEctr	false	add vector constants and FSM debug ports								
+		- ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment			
+		- 0	refWdbeMModule	ubigint							
+		- 0	Prjshort	string							
+		- 0	Untsref	string							
+		- ImeIAMOpInvarg.end									
+		- ImeIMSquawk2.Title	Example								
+		- 	add vector constants and FSM debug ports for module 'icm2-acq (easy model controller)'								
+			- ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title							
+			- enus	add vector constants and FSM debug ports for module '&StubWdbeMdlStd'							
+			- ImeIJMSquawkTitle2.end								
+			- ImeIRMSquawkMStub2.srefRefWznmMStub								
+			- StubWdbeMdlStd								
+			- ImeIRMSquawkMStub2.end								
+		- ImeIMSquawk2.end									
+	- WdbeModdetWiring	false	add hierarchical wiring								
+		- ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment			
+		- 0	refWdbeMModule	ubigint							
+		- ImeIAMOpInvarg.end									
+		- ImeIAMOpRetval.irefRefWznmCAMOpRetval	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment			
+		- 0	logfile	string							
+		- ImeIAMOpRetval.end									
+		- ImeIMSquawk2.Title	Example								
+		- 	add hierarchical wiring for module 'icm2 (top_v1_0 top module)'								
+			- ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title							
+			- enus	add hierarchical wiring for module '&StubWdbeMdlStd'							
+			- ImeIJMSquawkTitle2.end								
+			- ImeIRMSquawkMStub2.srefRefWznmMStub								
+			- StubWdbeMdlStd								
+			- ImeIRMSquawkMStub2.end								
+		- ImeIMSquawk2.end									
+	- ImeIMOp.end										
+- cust	WdbeMtpPlhfpga	fill module template-specific FPGA code placeholders	false								
+	- ImeIAMOppackInvarg.irefRefWznmCAMOppackInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment				
+	- 0	refWdbeMModule	ubigint								
+	- ImeIAMOppackInvarg.end										
+	- ImeIAMOppackRetval.irefRefWznmCAMOppackRetval	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment				
+	- 0	keys	stringvec								
+	- 0	vals	stringvec								
+	- ImeIAMOppackRetval.end										
+	- ImeIMSquawk1.Title	Example									
+	- 	fill module template-specific FPGA code placeholders for module 'icm2-cmdinv (cmdinv_v1_0 command invocation buffer)'									
+		- ImeIJMSquawkTitle1.srefX1RefWznmMLocale	Title								
+		- enus	fill module template-specific FPGA code placeholders for module '&StubWdbeModStd;'								
+		- ImeIJMSquawkTitle1.end									
+		- ImeIRMSquawkMStub1.srefRefWznmMStub									
+		- StubWdbeModStd									
+		- ImeIRMSquawkMStub1.end									
+	- ImeIMSquawk1.end										
+	- ImeIRMComponentMOppack.srefRefWznmMComponent										
+	- wdbeopd2										
+	- ImeIRMComponentMOppack.end										
+	- ImeIMOp.sref	Shrdat	Comment								
+	- WdbeMtpPlhfpgaPmmu_v1_0	false									
+	- ImeIMOp.end										
+- cust	WdbeMtpPlhmcu	fill module template-specific MCU code placeholders	false								
+	- ImeIAMOppackInvarg.irefRefWznmCAMOppackInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment				
+	- 0	refWdbeMModule	ubigint								
+	- ImeIAMOppackInvarg.end										
+	- ImeIAMOppackRetval.irefRefWznmCAMOppackRetval	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment				
+	- 0	keys	stringvec								
+	- 0	vals	stringvec								
+	- ImeIAMOppackRetval.end										
+	- ImeIMSquawk1.Title	Example									
+	- 	fill module template-specific MCU code placeholders for module 'icm2-cmdinv (cmdinv_v1_0 command invocation buffer)'									
+		- ImeIJMSquawkTitle1.srefX1RefWznmMLocale	Title								
+		- enus	fill module template-specific MCU code placeholders for module '&StubWdbeModStd;'								
+		- ImeIJMSquawkTitle1.end									
+		- ImeIRMSquawkMStub1.srefRefWznmMStub									
+		- StubWdbeModStd									
+		- ImeIRMSquawkMStub1.end									
+	- ImeIMSquawk1.end										
+	- ImeIRMComponentMOppack.srefRefWznmMComponent										
+	- wdbeopd2										
+	- ImeIRMComponentMOppack.end										
+- cust	WdbeMtpModbscbu	modify module template-specific basic device description bottom-up	false								
+	- ImeIAMOppackInvarg.irefRefWznmCAMOppackInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment				
+	- 0	refWdbeMModule	ubigint								
+	- ImeIAMOppackInvarg.end										
+	- ImeIMSquawk1.Title	Example									
+	- 	modify module template-specific basic device description bottom-up for module 'icm2-cmdinv (cmdinv_v1_0 command invocation buffer)' / connect buffer									
+		- ImeIJMSquawkTitle1.srefX1RefWznmMLocale	Title								
+		- enus	modify module template-specific basic device description bottom-up for module '&StubWdbeModStd;' / &optit;								
+		- ImeIJMSquawkTitle1.end									
+		- ImeIRMSquawkMStub1.srefRefWznmMStub									
+		- StubWdbeModStd									
+		- ImeIRMSquawkMStub1.end									
+	- ImeIMSquawk1.end										
+	- ImeIRMComponentMOppack.srefRefWznmMComponent										
+	- wdbeopd2										
+	- ImeIRMComponentMOppack.end										
+	- ImeIMOp.sref	Shrdat	Comment								
+	- WdbeMtpModbscbuAxihostif_v1_0	false	connect AXI controllers, CRC and timeout								
+	- WdbeMtpModbscbuAxihostif_Easy_v1_0	false	connect AXI controllers, CRC and timeout								
+	- WdbeMtpModbscbuAxihostif_Easy_v2_0	false	connect AXI controllers, CRC and timeout								
+	- WdbeMtpModbscbuSpihostif_v1_0	false	connect SPI interface, CRC and timeout								
+	- WdbeMtpModbscbuSpihostif_Easy_v1_0	false	connect SPI interface, CRC and timeout								
+	- WdbeMtpModbscbuUarthostif_v1_0	false	connect UART controllers, CRC and timeout								
+	- WdbeMtpModbscbuUarthostif_Easy_v1_0	false	connect UART controllers, CRC and timeout								
+	- WdbeMtpModbscbuCmdinv_v1_0	false	connect buffer								
+	- WdbeMtpModbscbuCmdret_v1_0	false	connect buffer								
+	- WdbeMtpModbscbuPmmu_v1_0	false	connect buffers, fill slot vector								
+	- WdbeMtpModbscbuSpifwd_v1_0	false	connect buffers, SPI interface, CRC and timeout								
+	- WdbeMtpModbscbuDotmx2x16_v1_0	false	connect SPI interface								
+	- WdbeMtpModbscbuDpbram_v1_0	false	adapt internal wiring								
+	- WdbeMtpModbscbuAdd_v12_0	false	adapt port widths								
+	- WdbeMtpModbscbuDft_v4_0	false	adapt port widths								
+	- WdbeMtpModbscbuDiv_v3_0	false	adapt port widths								
+	- WdbeMtpModbscbuDiv_v5_1	false	adapt port widths								
+	- WdbeMtpModbscbuDpbram_v8_4	false	adapt port widths								
+	- WdbeMtpModbscbuDsp48_v3_0_aMultB	false	adapt port widths								
+	- WdbeMtpModbscbuDsp48_v3_0_aPlusDPlusC	false	adapt port widths								
+	- WdbeMtpModbscbuMult_v12_0	false	adapt port widths								
+	- WdbeMtpModbscbuSub_v12_0	false	adapt port widths								
+	- WdbeMtpModbscbuOled128x32_v1_0	false	connect SPI interface								
+	- WdbeMtpModbscbuSpbram_v1_0	false	adapt internal wiring								
+	- WdbeMtpModbscbuXadc_v3_3	false	adapt port names								
+	- WdbeMtpModbscbuZynq_ip_AXI_v1_0	false	add pin substitute signals								
+	- WdbeMtpModbscbuZynq_ip_AXI_v2_0	false	add pin substitute signals								
+	- WdbeMtpModbscbuZynq_ip_v1_0	false	connect AXI bus functionality								
+	- ImeIMOp.end										
+- cust	WdbeMtpModbsctd	modify module template-specific basic device description top-down	false								
+	- ImeIAMOppackInvarg.irefRefWznmCAMOppackInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment				
+	- 0	refWdbeMModule	ubigint								
+	- ImeIAMOppackInvarg.end										
+	- ImeIMSquawk1.Title	Example									
+	- 	modify module template-specific basic device description top-down for module 'icm2-cmdinv (cmdinv_v1_0 command invocation buffer)' / adapt buffer size									
+		- ImeIJMSquawkTitle1.srefX1RefWznmMLocale	Title								
+		- enus	modify module template-specific basic device description top-down for module '&StubWdbeModStd;' / &optit;								
+		- ImeIJMSquawkTitle1.end									
+		- ImeIRMSquawkMStub1.srefRefWznmMStub									
+		- StubWdbeModStd									
+		- ImeIRMSquawkMStub1.end									
+	- ImeIMSquawk1.end										
+	- ImeIRMComponentMOppack.srefRefWznmMComponent										
+	- wdbeopd2										
+	- ImeIRMComponentMOppack.end										
+	- ImeIMOp.sref	Shrdat	Comment								
+	- WdbeMtpModbsctdCmdinv_v1_0	false	adapt buffer size								
+	- WdbeMtpModbsctdCmdret_v1_0	false	adapt buffer size								
+	- WdbeMtpModbsctdPmmu_v1_0	false	adapt buffer sizes								
+	- WdbeMtpModbsctdDpbram_v1_0	false	infer BRAM primitives and adapt port widths								
+	- WdbeMtpModbsctdSpbram_v1_0	false	infer BRAM primitives and adapt port widths								
+	- ImeIMOp.end										
+- cust	WdbeMtpModdet	modify module template-specific detailed device description	false								
+	- ImeIAMOppackInvarg.irefRefWznmCAMOppackInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment				
+	- 0	refWdbeMModule	ubigint								
+	- ImeIAMOppackInvarg.end										
+	- ImeIMSquawk1.Title	Example									
+	- 	modify module template-specific detailed device description for module 'icm2-tkclksrc (tkclksrc_v1_0 controller)' / add command process handshake									
+		- ImeIJMSquawkTitle1.srefX1RefWznmMLocale	Title								
+		- enus	modify module template-specific detailed device description for module '&StubWdbeModStd;' / &optit;								
+		- ImeIJMSquawkTitle1.end									
+		- ImeIRMSquawkMStub1.srefRefWznmMStub									
+		- StubWdbeModStd									
+		- ImeIRMSquawkMStub1.end									
+	- ImeIMSquawk1.end										
+	- ImeIRMComponentMOppack.srefRefWznmMComponent										
+	- wdbeopd2										
+	- ImeIRMComponentMOppack.end										
+	- ImeIMOp.sref	Shrdat	Comment								
+	- WdbeMtpModdetPmmu_v1_0	false	add command process handshake								
+	- WdbeMtpModdetSpifwd_v1_0	false	add command process handshake								
+	- WdbeMtpModdetTkclksrc_v1_0	false	add command process handshake								
+	- WdbeMtpModdetTop_v1_0	false	add reset and master clock								
+	- ImeIMOp.end										
+- cust	WdbeMtpWrfpga	write module template-specific FPGA code	false								
+	- ImeIAMOppackInvarg.irefRefWznmCAMOppackInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment				
+	- 0	refWdbeMModule	ubigint								
+	- 0	folder	string								
+	- 0	Prjshort	string								
+	- 0	Untsref	string								
+	- ImeIAMOppackInvarg.end										
+	- ImeIMSquawk1.Title	Example									
+	- 	write module template-specific FPGA code for module 'icm2-cmdinv (cmdinv_v1_0 command invocation buffer)'									
+		- ImeIJMSquawkTitle1.srefX1RefWznmMLocale	Title								
+		- enus	write module template-specific FPGA code for module '&StubWdbeModStd;'								
+		- ImeIJMSquawkTitle1.end									
+		- ImeIRMSquawkMStub1.srefRefWznmMStub									
+		- StubWdbeModStd									
+		- ImeIRMSquawkMStub1.end									
+	- ImeIMSquawk1.end										
+	- ImeIRMComponentMOppack.srefRefWznmMComponent										
+	- wdbeopd2										
+	- ImeIRMComponentMOppack.end										
+	- ImeIMOp.sref	Shrdat	Comment								
+	- WdbeMtpWrfpgaTop_v1_0	false									
+	- WdbeMtpWrfpgaCmdbus_v1_0	false									
+	- WdbeMtpWrfpgaCmdinv_v1_0	false									
+	- WdbeMtpWrfpgaCmdret_v1_0	false									
+	- WdbeMtpWrfpgaCrcspec_v1_0	false									
+	- WdbeMtpWrfpgaCrcspec_32_v1_0	false									
+	- WdbeMtpWrfpgaDpbram_v1_0	false									
+	- WdbeMtpWrfpgaSpbram_v1_0	false									
+	- WdbeMtpWrfpgaPmmu_v1_0	false									
+	- WdbeMtpWrfpgaTkclksrc_v1_0	false									
+	- WdbeMtpWrfpgaSpifwd_v1_0	false									
+	- ImeIMOp.end										
+- cust	WdbeMtpWrmcu	write module template-specific MCU code	false								
+	- ImeIAMOppackInvarg.irefRefWznmCAMOppackInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment				
+	- 0	refWdbeMModule	ubigint								
+	- 0	folder	string								
+	- 0	Prjshort	string								
+	- 0	Untsref	string								
+	- ImeIAMOppackInvarg.end										
+	- ImeIMSquawk1.Title	Example									
+	- 	write module template-specific MCU code for module 'icm2-cmdinv (cmdinv_v1_0 command invocation buffer)'									
+		- ImeIJMSquawkTitle1.srefX1RefWznmMLocale	Title								
+		- enus	write module template-specific MCU code for module '&StubWdbeModStd;'								
+		- ImeIJMSquawkTitle1.end									
+		- ImeIRMSquawkMStub1.srefRefWznmMStub									
+		- StubWdbeModStd									
+		- ImeIRMSquawkMStub1.end									
+	- ImeIMSquawk1.end										
+	- ImeIRMComponentMOppack.srefRefWznmMComponent										
+	- wdbeopd2										
+	- ImeIRMComponentMOppack.end										
+- stat	WdbePlhfpga	fill FPGA code placeholders	false								
+	- ImeIRMComponentMOppack.srefRefWznmMComponent										
+	- wdbeopd1										
+	- ImeIRMComponentMOppack.end										
+	- ImeIMOp.sref	Shrdat	Comment								
+	- WdbePlhfpgaEhostif	false	fill type-specific placeholders								
+		- ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment			
+		- 0	refWdbeMModule	ubigint							
+		- ImeIAMOpInvarg.end									
+		- ImeIAMOpRetval.irefRefWznmCAMOpRetval	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment			
+		- 0	keys	stringvec							
+		- 0	vals	stringvec							
+		- ImeIAMOpRetval.end									
+		- ImeIMSquawk2.Title	Example								
+		- 	fill type-specific placeholders for module 'icm2-hostif (uarthostif_Easy_v1_0 easy model host interface)'								
+			- ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title							
+			- enus	fill type-specific placeholders for module '&StubWdbeModStd;'							
+			- ImeIJMSquawkTitle2.end								
+			- ImeIRMSquawkMStub2.srefRefWznmMStub								
+			- StubWdbeModStd								
+			- ImeIRMSquawkMStub2.end								
+		- ImeIMSquawk2.end									
+	- WdbePlhfpgaCmdinv	false	fill type-specific placeholders								
+		- ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment			
+		- 0	refWdbeMModule	ubigint							
+		- ImeIAMOpInvarg.end									
+		- ImeIAMOpRetval.irefRefWznmCAMOpRetval	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment			
+		- 0	keys	stringvec							
+		- 0	vals	stringvec							
+		- ImeIAMOpRetval.end									
+		- ImeIMSquawk2.Title	Example								
+		- 	fill type-specific placeholders for module 'icm2-cmdinv (cmdinv_v1_0 command invocation buffer)'								
+			- ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title							
+			- enus	fill type-specific placeholders for module '&StubWdbeModStd;'							
+			- ImeIJMSquawkTitle2.end								
+			- ImeIRMSquawkMStub2.srefRefWznmMStub								
+			- StubWdbeModStd								
+			- ImeIRMSquawkMStub2.end								
+		- ImeIMSquawk2.end									
+	- WdbePlhfpgaCmdret	false	fill type-specific placeholders								
+		- ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment			
+		- 0	refWdbeMModule	ubigint							
+		- ImeIAMOpInvarg.end									
+		- ImeIAMOpRetval.irefRefWznmCAMOpRetval	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment			
+		- 0	keys	stringvec							
+		- 0	vals	stringvec							
+		- ImeIAMOpRetval.end									
+		- ImeIMSquawk2.Title	Example								
+		- 	fill type-specific placeholders for module 'dcx3-cmdret (cmdret_v1_0 command return buffer)'								
+			- ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title							
+			- enus	fill type-specific placeholders for module '&StubWdbeModStd;'							
+			- ImeIJMSquawkTitle2.end								
+			- ImeIRMSquawkMStub2.srefRefWznmMStub								
+			- StubWdbeModStd								
+			- ImeIRMSquawkMStub2.end								
+		- ImeIMSquawk2.end									
+	- WdbePlhfpgaFwdctr	false	fill type-specific placeholders								
+		- ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment			
+		- 0	refWdbeMModule	ubigint							
+		- ImeIAMOpInvarg.end									
+		- ImeIAMOpRetval.irefRefWznmCAMOpRetval	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment			
+		- 0	keys	stringvec							
+		- 0	vals	stringvec							
+		- ImeIAMOpRetval.end									
+		- ImeIMSquawk2.Title	Example								
+		- 	fill type-specific placeholders for module 'dcx3-qcdif (fwdctr_v1_0 forwarding controller)'								
+			- ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title							
+			- enus	fill type-specific placeholders for module '&StubWdbeModStd;'							
+			- ImeIJMSquawkTitle2.end								
+			- ImeIRMSquawkMStub2.srefRefWznmMStub								
+			- StubWdbeModStd								
+			- ImeIRMSquawkMStub2.end								
+		- ImeIMSquawk2.end									
+	- ImeIMOp.end										
+- stat	WdbePlhmcu	fill MCU code placeholders	false								
+	- ImeIRMComponentMOppack.srefRefWznmMComponent										
+	- wdbeopd1										
+	- ImeIRMComponentMOppack.end										
+	- ImeIMOp.sref	Shrdat	Comment								
+	- WdbePlhmcuEhostif	false	fill type-specific placeholders								
+		- ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment			
+		- 0	refWdbeMModule	ubigint							
+		- ImeIAMOpInvarg.end									
+		- ImeIAMOpRetval.irefRefWznmCAMOpRetval	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment			
+		- 0	keys	stringvec							
+		- 0	vals	stringvec							
+		- ImeIAMOpRetval.end									
+		- ImeIMSquawk2.Title	Example								
+		- 	fill type-specific placeholders for module 'icm2-hostif (uarthostif_Easy_v1_0_Mcu easy model host interface)'								
+			- ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title							
+			- enus	fill type-specific placeholders for module '&StubWdbeModStd;'							
+			- ImeIJMSquawkTitle2.end								
+			- ImeIRMSquawkMStub2.srefRefWznmMStub								
+			- StubWdbeModStd								
+			- ImeIRMSquawkMStub2.end								
+		- ImeIMSquawk2.end									
+	- ImeIMOp.end										
+- stat	WdbePrcfile	process file	false								
+	- ImeIRMComponentMOppack.srefRefWznmMComponent										
+	- wdbeopd1										
+	- ImeIRMComponentMOppack.end										
+	- ImeIMOp.sref	Shrdat	Comment								
+	- WdbePrcfileConcat	false	concatenate text from multiple input files into output file								
+		- ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment			
+		- 0	infiles	stringvec							
+		- 0	headers	stringvec							
+		- 0	outfile	string							
+		- ImeIAMOpInvarg.end									
+		- ImeIMSquawk2.Title	Example								
+		- 	concatenate text from mutliple input files into output file 'test/abcd/test.txt'								
+			- ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title							
+			- enus	concatenate text from mutliple input files into output file '&outfile;'							
+			- ImeIJMSquawkTitle2.end								
+		- ImeIMSquawk2.end									
+	- WdbePrcfileIexconv	false	convert text import input file into output file								
+		- ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment			
+		- 0	infile	string							
+		- 0	outfile	string							
+		- ImeIAMOpInvarg.end									
+		- ImeIMSquawk2.Title	Example								
+		- 	convert text import input file 'test/abcd/testin.txt' into output file 'test/abcd/testout.txt'								
+			- ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title							
+			- enus	convert text import input file '&infile;' into output file '&outfile;'							
+			- ImeIJMSquawkTitle2.end								
+		- ImeIMSquawk2.end									
+	- WdbePrcfilePlhrpl	false	replace placeholders in template file and write into output file								
+		- ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment			
+		- 0	inRefWdbeMFile	ubigint							
+		- 0	infile	string							
+		- 0	outfile	string							
+		- 0	keys	stringvec							
+		- 0	vals	stringvec							
+		- ImeIAMOpInvarg.end									
+		- ImeIMSquawk2.Title	Example								
+		- 	replace placeholders by text into file 'test/abcd/test.txt'								
+			- ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title							
+			- enus	replace placeholders by text into file '&outfile;'							
+			- ImeIJMSquawkTitle2.end								
+		- ImeIMSquawk2.end									
+	- ImeIMOp.end										
+- stat	WdbePrctree	process file tree	false								
+	- ImeIRMComponentMOppack.srefRefWznmMComponent										
+	- wdbeopd1										
+	- ImeIRMComponentMOppack.end										
+	- ImeIMOp.sref	Shrdat	Comment								
+	- WdbePrctreeExtract	false	extract from file tree into extract file tree								
+		- ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment			
+		- 0	infile	string							
+		- 0	infolder	string							
+		- 0	extfile	string							
+		- 0	extfolder	string							
+		- ImeIAMOpInvarg.end									
+		- ImeIAMOpRetval.irefRefWznmCAMOpRetval	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment			
+		- 0	logfile	string							
+		- ImeIAMOpRetval.end									
+		- ImeIMSquawk2.Title	Example								
+		- 	extract from file tree 'test/abcd' into extract file tree 'test/efgh'								
+			- ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title							
+			- enus	extract from file tree '&infolder;' into extract file tree '&extfolder;'							
+			- ImeIJMSquawkTitle2.end								
+		- ImeIMSquawk2.end									
+	- WdbePrctreeMerge	false	merge extract file tree into template file tree								
+		- ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment			
+		- 0	extfile	string							
+		- 0	extfolder	string							
+		- 0	tplfile	string							
+		- 0	tplfolder	string							
+		- 0	notrace	boolean							
+		- 0	skipmultvoid	boolean							
+		- ImeIAMOpInvarg.end									
+		- ImeIAMOpRetval.irefRefWznmCAMOpRetval	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment			
+		- 0	logfile	string							
+		- ImeIAMOpRetval.end									
+		- ImeIMSquawk2.Title	Example								
+		- 	merge extract file tree 'test/abcd' into template file tree 'test/efgh'								
+			- ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title							
+			- enus	merge extract file tree '&extfolder;' into template file tree '&tplfolder;'							
+			- ImeIJMSquawkTitle2.end								
+		- ImeIMSquawk2.end									
+	- WdbePrctreeValidate	false	validate file tree								
+		- ImeIMSquawk2.Title	Example								
+		- 	validate file tree								
+			- ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title							
+			- enus	validate file tree							
+			- ImeIJMSquawkTitle2.end								
+		- ImeIMSquawk2.end									
+	- ImeIMOp.end										
+- stat	WdbeWrdev	write device access library code	false								
+	- ImeIRMComponentMOppack.srefRefWznmMComponent										
+	- wdbeopd1										
+	- ImeIRMComponentMOppack.end										
+	- ImeIMOp.sref	Shrdat	Comment								
+	- WdbeWrdevBase	false	write device access library C++ code basics								
+		- ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment			
+		- 0	refWdbeMVersion	ubigint							
+		- 0	folder	string							
+		- 0	Prjshort	string							
+		- 0	Easy	boolean							
+		- ImeIAMOpInvarg.end									
+		- ImeIMSquawk2.Title	Example								
+		- 	write device access library C++ code basics for version 'ICARUSDetectorHardware 0.1'								
+			- ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title							
+			- enus	write device access library C++ code basics for version '&StubWdbeVerStd;'							
+			- ImeIJMSquawkTitle2.end								
+			- ImeIRMSquawkMStub2.srefRefWznmMStub								
+			- StubWdbeVerStd								
+			- ImeIRMSquawkMStub2.end								
+		- ImeIMSquawk2.end									
+	- WdbeWrdevCtr	false	write C++ code for controller								
+		- ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment			
+		- 0	refWdbeMController	ubigint							
+		- 0	folder	string							
+		- 0	Easy	boolean							
+		- ImeIAMOpInvarg.end									
+		- ImeIMSquawk2.Title	Example								
+		- 	write C++ code for controller 'acq'								
+			- ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title							
+			- enus	write C++ code for controller '&StubWdbeCtrStd;'							
+			- ImeIJMSquawkTitle2.end								
+			- ImeIRMSquawkMStub2.srefRefWznmMStub								
+			- StubWdbeCtrStd								
+			- ImeIRMSquawkMStub2.end								
+		- ImeIMSquawk2.end									
+	- WdbeWrdevDeploy	false	write device access library deployment scripts								
+		- ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment			
+		- 0	refWdbeMRelease	ubigint							
+		- 0	folder	string							
+		- 0	Easy	boolean							
+		- ImeIAMOpInvarg.end									
+		- ImeIMSquawk2.Title	Example								
+		- 	write device access library deployment scripts for release 'Idhw_genio'								
+			- ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title							
+			- enus	write device access library deployment scripts for release '&StubWdbeRlsStd;'							
+			- ImeIJMSquawkTitle2.end								
+			- ImeIRMSquawkMStub2.srefRefWznmMStub								
+			- StubWdbeRlsStd								
+			- ImeIRMSquawkMStub2.end								
+		- ImeIMSquawk2.end									
+	- WdbeWrdevSys	false	write C++ code for system								
+		- ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment			
+		- 0	refWdbeMSystem	ubigint							
+		- 0	folder	string							
+		- ImeIAMOpInvarg.end									
+		- ImeIMSquawk2.Title	Example								
+		- 	write C++ code for system 'Basys2fwd'								
+			- ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title							
+			- enus	write C++ code for system '&StubWdbeSysStd;'							
+			- ImeIJMSquawkTitle2.end								
+			- ImeIRMSquawkMStub2.srefRefWznmMStub								
+			- StubWdbeSysStd								
+			- ImeIRMSquawkMStub2.end								
+		- ImeIMSquawk2.end									
+	- WdbeWrdevUnt	false	write C++ code for unit								
+		- ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment			
+		- 0	refWdbeMUnit	ubigint							
+		- 0	folder	string							
+		- 0	Easy	boolean							
+		- ImeIAMOpInvarg.end									
+		- ImeIMSquawk2.Title	Example								
+		- 	write C++ code for unit 'Axis2'								
+			- ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title							
+			- enus	write C++ code for unit '&StubWdbeUntStd;'							
+			- ImeIJMSquawkTitle2.end								
+			- ImeIRMSquawkMStub2.srefRefWznmMStub								
+			- StubWdbeUntStd								
+			- ImeIRMSquawkMStub2.end								
+		- ImeIMSquawk2.end									
+	- ImeIMOp.end										
+- stat	WdbeWrfpga	write FPGA code	false								
+	- ImeIRMComponentMOppack.srefRefWznmMComponent										
+	- wdbeopd1										
+	- ImeIRMComponentMOppack.end										
+	- ImeIMOp.sref	Shrdat	Comment								
+	- WdbeWrfpgaBase	false	write VHDL/UCF/XDC code basics								
+		- ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment			
+		- 0	refWdbeMUnit	ubigint							
+		- 0	folder	string							
+		- 0	Prjshort	string							
+		- 0	Untsref	string							
+		- ImeIAMOpInvarg.end									
+		- ImeIMSquawk2.Title	Example								
+		- 	write VHDL/UCF/XDC code basics for unit 'icacam2'								
+			- ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title							
+			- enus	write VHDL/UCF/XDC code basics for unit '&StubWdbeUntStd;'							
+			- ImeIJMSquawkTitle2.end								
+			- ImeIRMSquawkMStub2.srefRefWznmMStub								
+			- StubWdbeUntStd								
+			- ImeIRMSquawkMStub2.end								
+		- ImeIMSquawk2.end									
+	- WdbeWrfpgaDeploy	false	write FPGA code deployment scripts								
+		- ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment			
+		- 0	refWdbeMRelease	ubigint							
+		- 0	folder	string							
+		- ImeIAMOpInvarg.end									
+		- ImeIMSquawk2.Title	Example								
+		- 	write FPGA code deployment scripts for release 'Idhw_genio'								
+			- ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title							
+			- enus	write FPGA code deployment scripts for release '&StubWdbeRlsStd;'							
+			- ImeIJMSquawkTitle2.end								
+			- ImeIRMSquawkMStub2.srefRefWznmMStub								
+			- StubWdbeRlsStd								
+			- ImeIRMSquawkMStub2.end								
+		- ImeIMSquawk2.end									
+	- WdbeWrfpgaMdlraw	false	write raw VHDL code								
+		- ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment			
+		- 0	refWdbeMModule	ubigint							
+		- 0	folder	string							
+		- 0	Prjshort	string							
+		- 0	Untsref	string							
+		- ImeIAMOpInvarg.end									
+		- ImeIMSquawk2.Title	Example								
+		- 	write raw VHDL code for module 'icm2 (top_v1_0 top)'								
+			- ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title							
+			- enus	write raw VHDL code for module '&StubWdbeModStd;'							
+			- ImeIJMSquawkTitle2.end								
+			- ImeIRMSquawkMStub2.srefRefWznmMStub								
+			- StubWdbeModStd								
+			- ImeIRMSquawkMStub2.end								
+		- ImeIMSquawk2.end									
+	- WdbeWrfpgaMdlfine	false	write in-detail VHDL code								
+		- ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment			
+		- 0	refWdbeMModule	ubigint							
+		- 0	folder	string							
+		- ImeIAMOpInvarg.end									
+		- ImeIMSquawk2.Title	Example								
+		- 	write in-detail VHDL code for module 'icm2 (top_v1_0 top)'								
+			- ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title							
+			- enus	write in-detail VHDL code for module '&StubWdbeModStd;'							
+			- ImeIJMSquawkTitle2.end								
+			- ImeIRMSquawkMStub2.srefRefWznmMStub								
+			- StubWdbeModStd								
+			- ImeIRMSquawkMStub2.end								
+		- ImeIMSquawk2.end									
+	- WdbeWrfpgaCtrFwdctr	false	write type-specific VHDL code								
+		- ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment			
+		- 0	refWdbeMModule	ubigint							
+		- 0	folder	string							
+		- 0	Prjshort	string							
+		- 0	Untsref	string							
+		- ImeIAMOpInvarg.end									
+		- ImeIMSquawk2.Title	Example								
+		- 	write type-specific VHDL code for module 'icm2-acq (controller)'								
+			- ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title							
+			- enus	write type-specific VHDL code for module '&StubWdbeModStd;'							
+			- ImeIJMSquawkTitle2.end								
+			- ImeIRMSquawkMStub2.srefRefWznmMStub								
+			- StubWdbeModStd								
+			- ImeIRMSquawkMStub2.end								
+		- ImeIMSquawk2.end									
+	- WdbeWrfpgaHostif	false	write template-specific VHDL code								
+		- ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment			
+		- 0	refWdbeMModule	ubigint							
+		- 0	folder	string							
+		- 0	Prjshort	string							
+		- 0	Untsref	string							
+		- ImeIAMOpInvarg.end									
+		- ImeIMSquawk2.Title	Example								
+		- 	write template-specific VHDL code for module 'zedb-hostif (host interface)'								
+			- ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title							
+			- enus	write template-specific VHDL code for module '&StubWdbeModStd;'							
+			- ImeIJMSquawkTitle2.end								
+			- ImeIRMSquawkMStub2.srefRefWznmMStub								
+			- StubWdbeModStd								
+			- ImeIRMSquawkMStub2.end								
+		- ImeIMSquawk2.end									
+	- WdbeWrfpgaEhostif	false	write template-specific VHDL code								
+		- ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment			
+		- 0	refWdbeMModule	ubigint							
+		- 0	folder	string							
+		- 0	Prjshort	string							
+		- 0	Untsref	string							
+		- ImeIAMOpInvarg.end									
+		- ImeIMSquawk2.Title	Example								
+		- 	write template-specific VHDL code for module 'zedb-ehostif (easy host interface)'								
+			- ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title							
+			- enus	write template-specific VHDL code for module '&StubWdbeModStd;'							
+			- ImeIJMSquawkTitle2.end								
+			- ImeIRMSquawkMStub2.srefRefWznmMStub								
+			- StubWdbeModStd								
+			- ImeIRMSquawkMStub2.end								
+		- ImeIMSquawk2.end									
+	- WdbeWrfpgaIpclr	false	write VHDL code to clear unused specific insertion points								
+		- ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment			
+		- 0	refWdbeMModule	ubigint							
+		- 0	folder	string							
+		- ImeIAMOpInvarg.end									
+		- ImeIMSquawk2.Title	Example								
+		- 	write VHDL code to clear unused specific insertion points for module 'icm2 (top_v1_0 top)'								
+			- ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title							
+			- enus	write VHDL code to clear unused specific insertion points for module '&StubWdbeModStd;'							
+			- ImeIJMSquawkTitle2.end								
+			- ImeIRMSquawkMStub2.srefRefWznmMStub								
+			- StubWdbeModStd								
+			- ImeIRMSquawkMStub2.end								
+		- ImeIMSquawk2.end									
+	- ImeIMOp.end										
+- stat	WdbeWrmcu	write MCU code	false								
+	- ImeIRMComponentMOppack.srefRefWznmMComponent										
+	- wdbeopd1										
+	- ImeIRMComponentMOppack.end										
+	- ImeIMOp.sref	Shrdat	Comment								
+	- WdbeWrmcuBase	false	write C code basics								
+		- ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment			
+		- 0	refWdbeMUnit	ubigint							
+		- 0	folder	string							
+		- 0	Prjshort	string							
+		- 0	Untsref	string							
+		- ImeIAMOpInvarg.end									
+		- ImeIMSquawk2.Title	Example								
+		- 	write C code basics for unit 'icacam2'								
+			- ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title							
+			- enus	write C code basics for unit '&StubWdbeUntStd;'							
+			- ImeIJMSquawkTitle2.end								
+			- ImeIRMSquawkMStub2.srefRefWznmMStub								
+			- StubWdbeUntStd								
+			- ImeIRMSquawkMStub2.end								
+		- ImeIMSquawk2.end									
+	- WdbeWrmcuDeploy	false	write MCU code deployment scripts								
+		- ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment			
+		- 0	refWdbeMRelease	ubigint							
+		- 0	folder	string							
+		- ImeIAMOpInvarg.end									
+		- ImeIMSquawk2.Title	Example								
+		- 	write MCU code deployment scripts for release 'Idhw_genio'								
+			- ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title							
+			- enus	write MCU code deployment scripts for release '&StubWdbeRlsStd;'							
+			- ImeIJMSquawkTitle2.end								
+			- ImeIRMSquawkMStub2.srefRefWznmMStub								
+			- StubWdbeRlsStd								
+			- ImeIRMSquawkMStub2.end								
+		- ImeIMSquawk2.end									
+	- WdbeWrmcuMdlraw	false	write raw C code								
+		- ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment			
+		- 0	refWdbeMModule	ubigint							
+		- 0	folder	string							
+		- 0	Prjshort	string							
+		- 0	Untsref	string							
+		- ImeIAMOpInvarg.end									
+		- ImeIMSquawk2.Title	Example								
+		- 	write raw C code for module 'icm2 (top_v1_0 top)'								
+			- ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title							
+			- enus	write raw C code for module '&StubWdbeModStd;'							
+			- ImeIJMSquawkTitle2.end								
+			- ImeIRMSquawkMStub2.srefRefWznmMStub								
+			- StubWdbeModStd								
+			- ImeIRMSquawkMStub2.end								
+		- ImeIMSquawk2.end									
+	- WdbeWrmcuMdlfine	false	write in-detail C code								
+		- ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment			
+		- 0	refWdbeMModule	ubigint							
+		- 0	folder	string							
+		- ImeIAMOpInvarg.end									
+		- ImeIMSquawk2.Title	Example								
+		- 	write in-detail C code for module 'icm2 (top_v1_0 top)'								
+			- ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title							
+			- enus	write in-detail C code for module '&StubWdbeModStd;'							
+			- ImeIJMSquawkTitle2.end								
+			- ImeIRMSquawkMStub2.srefRefWznmMStub								
+			- StubWdbeModStd								
+			- ImeIRMSquawkMStub2.end								
+		- ImeIMSquawk2.end									
+	- WdbeWrmcuCtrFwdctr	false	write type-specific C code								
+		- ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment			
+		- 0	refWdbeMModule	ubigint							
+		- 0	folder	string							
+		- 0	Prjshort	string							
+		- 0	Untsref	string							
+		- ImeIAMOpInvarg.end									
+		- ImeIMSquawk2.Title	Example								
+		- 	write type-specific C code for module 'icm2-acq (controller)'								
+			- ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title							
+			- enus	write type-specific C code for module '&StubWdbeModStd;'							
+			- ImeIJMSquawkTitle2.end								
+			- ImeIRMSquawkMStub2.srefRefWznmMStub								
+			- StubWdbeModStd								
+			- ImeIRMSquawkMStub2.end								
+		- ImeIMSquawk2.end									
+	- WdbeWrmcuEhostif	false	write template-specific C code								
+		- ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment			
+		- 0	refWdbeMModule	ubigint							
+		- 0	folder	string							
+		- 0	Prjshort	string							
+		- 0	Untsref	string							
+		- ImeIAMOpInvarg.end									
+		- ImeIMSquawk2.Title	Example								
+		- 	write template-specific C code for module 'zedb-ehostif (easy host interface)'								
+			- ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title							
+			- enus	write template-specific C code for module '&StubWdbeModStd;'							
+			- ImeIJMSquawkTitle2.end								
+			- ImeIRMSquawkMStub2.srefRefWznmMStub								
+			- StubWdbeModStd								
+			- ImeIRMSquawkMStub2.end								
+		- ImeIMSquawk2.end									
+	- ImeIMOp.end										
+- ImeIMOppack.end											

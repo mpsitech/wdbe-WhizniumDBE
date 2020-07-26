@@ -1,0 +1,44 @@
+.cpt {
+	font-size:12px;
+	font-family:Verdana,sans-serif;
+	font-weight:normal;
+}
+
+.frame {
+	background-color:#000000;
+	opacity:1;
+}
+
+.iframe {
+	background-color:#ffffff;
+	opacity:1;
+}
+
+.hdr_cpt {
+	font-size:16px;
+	font-family:Verdana,sans-serif;
+	font-weight:normal;
+}
+
+.ftr_but {
+	font-size:12px;
+	font-family:Verdana,sans-serif;
+	font-weight:normal;
+}
+
+.ftr_but:hover {
+	color: #ff7f00;
+	font-size:12px;
+	font-family:Verdana,sans-serif;
+	font-weight:normal;
+	cursor:pointer;
+}
+
+
+
+
+
+
+
+
+

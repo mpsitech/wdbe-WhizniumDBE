@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:wdbe="http://www.mpsitech.com/wdbe">
+	<head>
+		<title>Login</title>
+		<script>
+			function initLogin() {parent.window.initLogin();};
+			function handlePupLocaleChange() {parent.window.handlePupLoginLocaleChange();};
+			function handleTxfUsernameKey(evt) {return parent.window.handleTxfLoginUsernameKey(evt);};
+			function handleTxfUsernameChange() {parent.window.handleTxfLoginUsernameChange();};
+			function handleTxfPasswordKey(evt) {return parent.window.handleTxfLoginPasswordKey(evt);};
+			function handleTxfPasswordChange() {parent.window.handleTxfLoginPasswordChange();};
+			function handleButResetClick() {parent.window.handleButLoginResetClick();};
+			function handleButLoginClick() {parent.window.handleButLoginLoginClick();};
+		</script>
+		<link href="../style/pnlDetail.css" rel="styleSheet" type="text/css"/>
+	</head>
+	<body marginwidth="0" marginheight="0" onload="initLogin()">
+		<table cellspacing="0" border="0" cellpadding="0"><form id="form" action="" method="POST" onsubmit="return true" enctype="multipart/form-data">
+			<colgroup>
+				<col width="1"/>
+				<col width="5"/>
+				<col width="155"/>
+				<col width="5"/>
+				<col width="198"/>
+				<col width="2"/>
+				<col width="75"/>
+			</colgroup>
+			<tbody>
+				<tr>
+					<td rowspan="7" height="15" bgcolor="#000000"></td>
+					<td></td>
+					<td colspan="5" align="left" valign="center" style="font-size:12px;font-family:Verdana,sans-serif;font-weight:normal;text-decoration:underline;">
+						<span id="CptVersion">WhizniumDBE 1.0.2</span>
+					</td>
+				</tr>
+				<tr>
+					<td height="29"></td>
+					<td colspan="2" align="left" valign="center" class="hdr_cpt">
+						<span id="Cpt">Cpt</span>
+					</td>
+					<td colspan="3" align="right">
+						<select id="PupLocale" class="pup" size="1" onchange="handlePupLocaleChange()"/>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="6" height="1" bgcolor="#000000"></td>
+				</tr>
+				<tr>
+					<td colspan="2" height="25" align="right" class="cpt">
+						<span id="CptUsername">CptUsername</span>
+					</td>
+					<td></td>
+					<td colspan="3" align="left">
+						<input id="TxfUsername" class="txf" type="text" value="TxfUsername"  onchange="handleTxfUsernameChange()" onkeypress="return handleTxfUsernameKey(event)"/>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2" height="25" align="right" class="cpt">
+						<span id="CptPassword">CptPassword</span>
+					</td>
+					<td></td>
+					<td colspan="3" align="left">
+						<input id="TxfPassword" class="txf" type="password" value="TxfPassword" onchange="handleTxfPasswordChange()" onkeypress="return handleTxfPasswordKey(event)"/>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="6" height="1" bgcolor="#000000"></td>
+				</tr>
+				<tr>
+					<td colspan="6" height="24" align="right" valign="center">
+						<span id="ButReset" class="ftr_but" onclick="handleButResetClick()">ButReset</span>
+						&nbsp;
+						<span id="ButLogin" class="ftr_but" onclick="handleButLoginClick()">ButLogin</span>
+					</td>
+				</tr>
+			</tbody>
+		</form></table>
+	</body>
+</html>
+

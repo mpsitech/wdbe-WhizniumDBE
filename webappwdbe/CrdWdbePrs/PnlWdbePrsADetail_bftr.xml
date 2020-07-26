@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<head>
+		<title>ADetail_bftr</title>
+		<script>
+			function handleTrsFirstClick() {parent.parent.window.handleTrsFirstClick();};
+			function handleTrsPreviousClick() {parent.parent.window.handleTrsPreviousClick();};
+			function handleTrsNextClick() {parent.parent.window.handleTrsNextClick();};
+			function handleTrsLastClick() {parent.parent.window.handleTrsLastClick();};
+			function handleTrsGotoClick() {parent.parent.window.handleTrsGotoClick();};
+			function handleTrsRowMou() {parent.parent.window.handleTrsRowMou();};
+			function handleTrsRowKey(evt) {return parent.parent.window.handleTrsRowKey(evt);};
+			function handleButRefreshClick() {parent.parent.window.handleButClick("ButRefresh");};
+		</script>
+		<link href="../style/pnlTbl.css" rel="styleSheet" type="text/css"/>
+	</head>
+	<body marginwidth="0" marginheight="0">
+		<table cellspacing="0" border="0" cellpadding="0">
+			<colgroup>
+				<col width="5"></col>
+				<col width="275"></col>
+				<col width="80"></col>
+				<col width="80"></col>
+			</colgroup>
+			<tr>
+				<td height="24"></td>
+				<td align="left" valign="center"><form action="">
+					<span id="TxtShowing" class="ftr_txt">TxtShowing</span>
+					&nbsp;
+					<span id="TrsGoto" class="ftr_but" onclick="handleTrsGotoClick()">TrsGoto</span>
+					<input id="TrsRow" class="ftr_gto" type="text" size="4" style="display:none;" onmouseout="handleTrsRowMou()" onkeypress="return handleTrsRowKey(event)"/>
+				</form></td>
+				<td align="center" valign="center">
+					<img id="TrsFirst" class="ftr_but" src="../icon/first.png" width="8" height="16" alt="TrsFirst"/>
+					<img id="TrsPrevious" class="ftr_but" src="../icon/previous.png" width="8" height="16" alt="TrsPrevious"/>
+					<img id="TrsNext" class="ftr_but" src="../icon/next.png" width="8" height="16" alt="TrsNext"/>
+					<img id="TrsLast" class="ftr_but" src="../icon/last.png" width="8" height="16" alt="TrsLast"/>
+				</td>
+				<td class="ftr_txt" align="right" valign="center">
+					<svg width="40px" height="16px" version="1.1" xmlns="http://www.w3.org/2000/svg">
+						<circle id="CsiQst" style="fill:limegreen" cx="8" cy="8" r="3"/>
+						<image id="ButRefresh" class="ftr_but" xlink:href="../icon/refresh.png" x="24" y="0" width="16" height="16" alt="ButRefresh" onmouseover="setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', '../icon/refresh_hlt.png')" onmouseout="setAttributeNS('http://www.w3.org/1999/xlink', 'xlink:href', '../icon/refresh.png')" onclick="handleButRefreshClick()"/>
+					</svg>
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>
+

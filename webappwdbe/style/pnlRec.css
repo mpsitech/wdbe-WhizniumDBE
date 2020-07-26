@@ -1,0 +1,66 @@
+svg {
+	display:block;
+}
+
+.but {
+	color:#000000;
+	font-size:12px;
+	font-family:Verdana,sans-serif;
+	font-weight:normal;
+	text-decoration:none;
+	background-color:#ffffff;
+	border:none;
+}
+
+.but:hover {
+	color:#ff7f00;
+	font-size:12px;
+	font-family:Verdana,sans-serif;
+	font-weight:normal;
+	text-decoration:none;
+	cursor:pointer;
+	background-color:#ffffff;
+	border:none;
+}
+
+.butdis {
+	color:#7f7f7f;
+	font-size:12px;
+	font-family:Verdana,sans-serif;
+	font-weight:normal;
+}
+
+.side_pm {
+	cursor:pointer;
+}
+
+.hdr_cpt {
+	font-size:12px;
+	font-family:Verdana,sans-serif;
+	font-weight:normal;
+	text-decoration:underline;
+}
+
+.hdr_txt {
+	font-size:16px;
+	font-family:Verdana,sans-serif;
+	font-weight:normal;
+}
+
+.hdr_but {
+	font-size:12px;
+	font-family:Verdana,sans-serif;
+	font-weight:normal;
+}
+
+.hdr_but:hover {
+	color:#ff7f00;
+	font-size:12px;
+	font-family:Verdana,sans-serif;
+	font-weight:normal;
+	cursor:pointer;
+}
+
+
+
+

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:wdbe="http://www.mpsitech.com/wdbe">
+	<head>
+		<title>Banner</title>
+		<link href="../style/pnlDetail.css" rel="styleSheet" type="text/css"/>
+		<style>
+			a {color:white;font-family:Sans-serif;font-size:12px}
+			a:hover {color:#E1345F}
+		</style>
+	</head>
+	<body marginwidth="0" marginheight="0">
+		<table cellspacing="0" border="0" cellpadding="0">
+			<colgroup>
+				<col width="10"/>
+				<col width="60"/>
+				<col width="10"/>
+				<col width="910"/>
+				<col width="10"/>
+			</colgroup>
+			<tbody>
+				<tr><td colspan="5" height="10" bgcolor="#000000"></td></tr>
+				<tr>
+					<td height="30" rowspan="3" bgcolor="#000000"></td>
+					<td rowspan="3" bgcolor="#000000">
+						<a href="https://www.mpsitech.com" target="blank"><img src="./MPSI_v_invcolor.png" height="80"/></a>
+					</td>
+					<td rowspan="3" bgcolor="#000000"></td>
+					<td bgcolor="#000000" style="vertical-align:top">
+						<span style="color:white;font-family:Sans-serif;font-size:24px;vertical-align:top">WhizniumDBE</span>
+					</td>
+					<td rowspan="3" bgcolor="#000000"></td>
+				</tr>
+				<tr>
+					<td height="30" bgcolor="#000000" style="vertical-align:top">
+						<span style="color:rgb(173,181,189);font-family:Sans-serif;font-size:14px">Please use Chrome or Safari for the best experience. User name: 'mpsitech', password: 'testdrive'</span>
+					</td>
+				</tr>
+				<tr>
+					<td height="20" bgcolor="#000000" style="vertical-align:bottom">
+						<a href="./WdbeTour.xml" target="blank">Open guided tour in separate window</a>
+					</td>
+				</tr>
+				<tr><td colspan="5" height="10" bgcolor="#000000"></td></tr>
+			</tbody>
+		</table>
+	</body>
+</html>
+

@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+	<head>
+		<title>MenCrd</title>
+		<script>
+			function initMenCrd() {parent.window.initMenCrd();};
+			function handleMitCrdNewClick() {parent.window.handleMitClick("Crd","MitCrdNew");};
+			function handleMitCrdSrtClick() {parent.window.handleMitClick("Crd","MitCrdSrt");};
+			function handleMitCrdCrtClick() {parent.window.handleMitClick("Crd","MitCrdCrt");};
+			function handleMitCrdFrtClick() {parent.window.handleMitClick("Crd","MitCrdFrt");};
+			function handleMitCrdWcoClick() {parent.window.handleMitClick("Crd","MitCrdWco");};
+		</script>
+		<link href="../style/menu.css" rel="styleSheet" type="text/css">
+	</head>
+	<body marginwidth="0" marginheight="0" onload="initMenCrd()">
+		<table cellspacing="0" border="0" cellpadding="0">
+			<colgroup>
+				<col width="1">
+				<col width="2">
+				<col id="colCont" width="250">
+			</colgroup>
+			<tr id="trMspCrd1" class="show">
+				<td height="1" colspan="3" class="frame"></td>
+			</tr>
+			<tr id="trMitCrdNew" class="show">
+				<td height="20" class="frame"></td><td class="iframe"></td>
+				<td class="iframe"><span id="MitCrdNew" class="item" onclick="handleMitCrdNewClick()">MitCrdNew</span></td>
+			</tr>
+			<tr id="trMitCrdSrt" class="show">
+				<td height="20" class="frame"></td><td class="iframe"></td>
+				<td class="iframe"><span id="MitCrdSrt" class="item" onclick="handleMitCrdSrtClick()">MitCrdSrt</span></td>
+			</tr>
+			<tr id="trMitCrdCrt" class="show">
+				<td height="20" class="frame"></td><td class="iframe"></td>
+				<td class="iframe"><span id="MitCrdCrt" class="item" onclick="handleMitCrdCrtClick()">MitCrdCrt</span></td>
+			</tr>
+			<tr id="trMitCrdFrt" class="show">
+				<td height="20" class="frame"></td><td class="iframe"></td>
+				<td class="iframe"><span id="MitCrdFrt" class="item" onclick="handleMitCrdFrtClick()">MitCrdFrt</span></td>
+			</tr>
+			<tr id="trMspCrd2" class="show">
+				<td height="1" colspan="3" class="frame"></td>
+			</tr>
+			<tr id="trMtxCrdRls" class="show">
+				<td height="20" class="frame"></td><td class="iframe"></td>
+				<td class="iframe"><span id="MtxCrdRls" class="itemdis"">MtxCrdRls</span></td>
+			</tr>
+			<tr id="trMitCrdWco" class="show">
+				<td height="20" class="frame"></td><td class="iframe"></td>
+				<td class="iframe"><span id="MitCrdWco" class="item" onclick="handleMitCrdWcoClick()">MitCrdWco</span></td>
+			</tr>
+			<tr id="trMspCrd3" class="show">
+				<td height="1" colspan="3" class="frame"></td>
+			</tr>
+		</table>
+	</body>
+</html>
+

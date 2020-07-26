@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<head>
+		<title>Alert</title>
+		<script>
+			function initAlr() {parent.window.initAlr();};
+			function hideAlr(numFMcb) {parent.window.hideAlr(numFMcb);};
+		</script>
+		<link href="../style/alr.css" rel="styleSheet" type="text/css"/>
+	</head>
+	<body marginwidth="0" marginheight="0" onload="initAlr()">
+		<table cellspacing="0" border="0" cellpadding="0">
+			<colgroup>
+				<col width="1"/>
+				<col width="5"/>
+				<col width="495"/>
+			</colgroup>
+			<thead>
+				<tr>
+					<td height="29" class="frame"></td>
+					<td></td>
+					<td align="left" valign="center">
+						<span class="hdr_cpt" id="TxtCpt">TxtCpt</span>
+					</td>
+				</tr>
+				<tr><td height="1" colspan="3" class="frame"></td></tr>
+				<tr><td height="2" class="frame"></td><td colspan="2"></td></tr>
+			</thead>
+			<tbody id="tbl">
+			</tbody>
+			<tfoot>
+				<tr><td height="3" class="frame"></td><td colspan="2"></td></tr>
+				<tr><td height="1" colspan="3" class="frame"></td></tr>
+				<tr>
+					<td height="24" class="frame"></td>
+					<td></td>
+					<td id="tdMcb" align="right" valign="center">
+					</td>
+				</tr>
+			</tfoot>
+		</table>
+	</body>
+</html>
+
+

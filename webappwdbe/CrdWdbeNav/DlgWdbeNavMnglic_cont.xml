@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<head>
+		<title>_cont</title>
+		<script>
+			function handleDetButScnClick() {parent.window.handleButClick("DetButScn");};
+			function handleDetButSdcClick() {parent.window.handleButClick("DetButSdc");};
+			function handleDetPupFisChange() {parent.window.handlePupChange(document,"DetPupFis","");};
+			function handleDetChkFisChange() {parent.window.handleChkChange(document,"DetChkFis");};
+			function handleDetButActClick() {parent.window.handleButClick("DetButAct");};
+			<!-- IP custScript - INSERT -->
+		</script>
+		<link href="../style/pnlDetail3_2.css" rel="styleSheet" type="text/css"/>
+		<!-- IP custStyle - INSERT -->
+	</head>
+	<body marginwidth="0" marginheight="0">
+		<table cellspacing="0" border="0" cellpadding="0"><form id="form" action="" method="POST" onsubmit="return true" enctype="multipart/form-data">
+			<colgroup>
+				<col width="5"/>
+				<col width="215"/>
+				<col width="5"/>
+				<col width="138"/>
+				<col width="2"/>
+				<col width="68"/>
+				<col width="2"/>
+				<col width="138"/>
+				<col width="2"/>
+				<col width="1"/>
+				<col width="114"/>
+			</colgroup>
+			<tbody id="tbl">
+				<tr><td colspan="11" height="5"></td></tr>
+				<tr id="trDetSrv" class="show">
+					<td height="25"></td>
+					<td colspan="2"></td>
+					<td colspan="8" align="left">
+						<span id="DetHdgSrv" class="cpt">DetHdgSrv</span>&#160;&#160;
+					</td>
+				</tr>
+				<tr id="trDetSip" class="show">
+					<td height="25"></td>
+					<td align="right">
+						<span id="DetCptSip" class="cpt">DetCptSip</span>
+					</td>
+					<td></td>
+					<td colspan="5" align="left">
+						<input id="DetTxtSip" class="txfnoed" type="text" readonly="readonly" value="DetTxtSip"/>
+					</td>
+					<td></td>
+					<td colspan="2"></td>
+				</tr>
+				<tr id="trDetScp" class="show">
+					<td height="25"></td>
+					<td align="right">
+						<span id="DetCptScp" class="cpt">DetCptScp</span>
+					</td>
+					<td></td>
+					<td colspan="5" align="left">
+						<input id="DetTxtScp" class="txfnoed" type="text" readonly="readonly" value="DetTxtScp"/>
+					</td>
+					<td></td>
+					<td colspan="2"></td>
+				</tr>
+				<tr id="trButscnbutsdc" class="show">
+					<td height="25"></td>
+					<td colspan="2"></td>
+					<td colspan="8" align="left">
+						<span id="DetButScn" class="but" onclick="handleDetButScnClick()">DetButScn</span>
+						&#160;&#160;<span id="DetButSdc" class="but" onclick="handleDetButSdcClick()">DetButSdc</span>
+					</td>
+				</tr>
+				<tr id="trDet11" class="show"><td colspan="11" height="3"></td></tr>
+				<tr id="trDet12" class="show">
+					<td height="1"></td>
+					<td colspan="10" bgcolor="#7f7f7f"></td>
+				</tr>
+				<tr id="trDet13" class="show"><td colspan="11" height="3"></td></tr>
+				<tr id="trDetFis" class="show">
+					<td height="25"></td>
+					<td align="right">
+						<input id="DetChkFis" class="chk" name="DetChkFis" type="checkbox" checked="checked" onchange="handleDetChkFisChange()"/>
+						<span id="DetCptFis" class="cpt">DetCptFis</span>
+					</td>
+					<td></td>
+					<td colspan="5" align="left">
+						<select id="DetPupFis" class="pup" size="1" onchange="handleDetPupFisChange()"/>
+					</td>
+					<td></td>
+					<td colspan="2"></td>
+				</tr>
+				<tr id="trDetLcs" class="show">
+					<td height="25"></td>
+					<td align="right">
+						<span id="DetCptLcs" class="cpt">DetCptLcs</span>
+					</td>
+					<td></td>
+					<td rowspan="2" colspan="5">
+						<iframe id="DetLstLcs" name="DetLstLcs" src="./DlgWdbeNavMnglic_DetLstLcs.xml" width="340" height="92" frameborder="0" scrolling="no">This page needs a web-browser capable of displaying inline frames!</iframe>
+					</td>
+					<td></td>
+					<td colspan="2"></td>
+				</tr>
+				<tr id="trDetLcs2" class="show">
+					<td colspan="3" height="67"></td>
+					<td colspan="3"></td>
+				</tr>
+				<tr id="trButact" class="show">
+					<td height="25"></td>
+					<td colspan="2"></td>
+					<td colspan="8" align="left">
+						<span id="DetButAct" class="but" onclick="handleDetButActClick()">DetButAct</span>
+					</td>
+				</tr>
+				<tr id="trDet21" class="show"><td colspan="11" height="3"></td></tr>
+				<tr id="trDet22" class="show">
+					<td height="1"></td>
+					<td colspan="10" bgcolor="#7f7f7f"></td>
+				</tr>
+				<tr id="trDet23" class="show"><td colspan="11" height="3"></td></tr>
+				<tr id="trDetLic" class="show">
+					<td height="25"></td>
+					<td colspan="2"></td>
+					<td colspan="8" align="left">
+						<span id="DetHdgLic" class="cpt">DetHdgLic</span>&#160;&#160;
+					</td>
+				</tr>
+				<tr id="trDetLsr" class="show">
+					<td height="25"></td>
+					<td align="right">
+						<span id="DetCptLsr" class="cpt">DetCptLsr</span>
+					</td>
+					<td></td>
+					<td colspan="5" align="left">
+						<input id="DetTxtLsr" class="txfnoed" type="text" readonly="readonly" value="DetTxtLsr"/>
+					</td>
+					<td></td>
+					<td colspan="2"></td>
+				</tr>
+				<tr id="trDetLar" class="show">
+					<td height="25"></td>
+					<td align="right">
+						<span id="DetCptLar" class="cpt">DetCptLar</span>
+					</td>
+					<td></td>
+					<td colspan="5" align="left">
+						<input id="DetTxtLar" class="txfnoed" type="text" readonly="readonly" value="DetTxtLar"/>
+					</td>
+					<td></td>
+					<td colspan="2"></td>
+				</tr>
+				<tr id="trDetLst" class="show">
+					<td height="25"></td>
+					<td align="right">
+						<span id="DetCptLst" class="cpt">DetCptLst</span>
+					</td>
+					<td></td>
+					<td colspan="5" align="left">
+						<input id="DetTxtLst" class="txfnoed" type="text" readonly="readonly" value="DetTxtLst"/>
+					</td>
+					<td></td>
+					<td colspan="2"></td>
+				</tr>
+				<tr id="trDetLex" class="show">
+					<td height="25"></td>
+					<td align="right">
+						<span id="DetCptLex" class="cpt">DetCptLex</span>
+					</td>
+					<td></td>
+					<td colspan="5" align="left">
+						<input id="DetTxtLex" class="txfnoed" type="text" readonly="readonly" value="DetTxtLex"/>
+					</td>
+					<td></td>
+					<td colspan="2"></td>
+				</tr>
+				<tr><td colspan="11" height="4"></td></tr>
+			</tbody>
+		</form></table>
+	</body>
+</html>
+

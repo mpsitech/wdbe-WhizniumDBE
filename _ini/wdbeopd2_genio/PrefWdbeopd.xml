@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PrefWdbeopd>
+	<StgWdbeDatabase>
+		<Si sref="srefIxDbsVDbstype"/>
+		<Si sref="dbspath"></Si>
+		<Si sref="dbsname"></Si>
+		<Si sref="username">mpsitech</Si>
+		<Si sref="password">f9w8feeh</Si>
+		<Si sref="ip"></Si>
+		<Si sref="port"></Si>
+	</StgWdbeDatabase>
+	<StgWdbeMonitor>
+		<Si sref="username"></Si>
+		<Si sref="password"></Si>
+		<Si sref="ip"></Si>
+		<Si sref="port"></Si>
+		<Si sref="srefIxDbsVDbstype"/>
+		<Si sref="dbspath"></Si>
+		<Si sref="dbsname"></Si>
+		<Si sref="dbsusername"></Si>
+		<Si sref="dbspassword"></Si>
+	</StgWdbeMonitor>
+	<StgWdbeopd>
+		<Si sref="engip"></Si>
+		<Si sref="engport"></Si>
+		<Si sref="engsrvportbase"></Si>
+		<Si sref="engsrvportofs"></Si>
+		<Si sref="opprcn">1</Si>
+	</StgWdbeopd>
+	<StgWdbePath>
+		<Si sref="acvpath"></Si>
+		<Si sref="keypath"></Si>
+		<Si sref="monpath"></Si>
+		<Si sref="tmppath"></Si>
+		<Si sref="webpath"></Si>
+		<Si sref="helpurl"></Si>
+	</StgWdbePath>
+</PrefWdbeopd>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:wdbe="http://www.mpsitech.com/wdbe">
+	<head>
+		<title>Failure</title>
+		<script>
+			function initFailure() {parent.window.initFailure();};
+			function handleButBackClick() {parent.window.handleButFailureBackClick();};
+		</script>
+		<link href="../style/pnlDetail.css" rel="styleSheet" type="text/css"/>
+	</head>
+	<body marginwidth="0" marginheight="0" onload="initFailure()">
+		<table cellspacing="0" border="0" cellpadding="0">
+			<colgroup>
+				<col width="1"/>
+				<col width="5"/>
+				<col width="155"/>
+				<col width="5"/>
+				<col width="275"/>
+			</colgroup>
+			<tr>
+				<td rowspan="6" height="15" bgcolor="#000000"></td>
+				<td></td>
+				<td colspan="3" align="left" valign="center" style="font-size:12px;font-family:Verdana,sans-serif;font-weight:normal;text-decoration:underline;">
+					<span id="CptVersion">WhizniumDBE 1.0.2</span>
+				</td>
+			</tr>
+			<tr>
+				<td height="29"></td>
+				<td colspan="3" align="left" valign="center" class="hdr_cpt">
+					<span id="Cpt">Cpt</span>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="4" height="1" bgcolor="#000000"></td>
+			</tr>
+			<tr>
+				<td height="25"></td>
+				<td colspan="3" align="left" class="cpt">
+					<span id="CptMessage">CptMessage</span>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="4" height="1" bgcolor="#000000"></td>
+			</tr>
+			<tr>
+				<td colspan="4" height="24" align="right" valign="center">
+					<span id="ButBack" class="ftr_but" onclick="handleButBackClick()">ButBack</span>
+				</td>
+			</tr>
+		</table>
+	</body>
+</html>
+

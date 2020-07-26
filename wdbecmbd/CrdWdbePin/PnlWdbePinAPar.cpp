@@ -1,0 +1,328 @@
+/**
+	* \file PnlWdbePinAPar.cpp
+	* job handler for job PnlWdbePinAPar (implementation)
+	* \author Alexander Wirthmueller
+	* \date created: 11 Jul 2020
+	* \date modified: 11 Jul 2020
+	*/
+
+#ifdef WDBECMBD
+	#include <Wdbecmbd.h>
+#else
+	#include <Wdbed.h>
+#endif
+
+#include "PnlWdbePinAPar.h"
+
+#include "PnlWdbePinAPar_blks.cpp"
+#include "PnlWdbePinAPar_evals.cpp"
+
+using namespace std;
+using namespace Sbecore;
+using namespace Xmlio;
+
+// IP ns.cust --- INSERT
+
+/******************************************************************************
+ class PnlWdbePinAPar
+ ******************************************************************************/
+
+PnlWdbePinAPar::PnlWdbePinAPar(
+			XchgWdbe* xchg
+			, DbsWdbe* dbswdbe
+			, const ubigint jrefSup
+			, const uint ixWdbeVLocale
+		) :
+			JobWdbe(xchg, VecWdbeVJob::PNLWDBEPINAPAR, jrefSup, ixWdbeVLocale)
+		{
+	jref = xchg->addJob(dbswdbe, this, jrefSup);
+
+	feedFCsiQst.tag = "FeedFCsiQst";
+	feedFCsiQst.appendIxSrefTitles(VecWdbeVQrystate::MNR, "ong", VecWdbeVQrystate::getTitle(VecWdbeVQrystate::MNR, ixWdbeVLocale));
+	feedFCsiQst.appendIxSrefTitles(VecWdbeVQrystate::OOD, "red", VecWdbeVQrystate::getTitle(VecWdbeVQrystate::OOD, ixWdbeVLocale));
+	feedFCsiQst.appendIxSrefTitles(VecWdbeVQrystate::SLM, "yel", VecWdbeVQrystate::getTitle(VecWdbeVQrystate::SLM, ixWdbeVLocale));
+	feedFCsiQst.appendIxSrefTitles(VecWdbeVQrystate::UTD, "grn", VecWdbeVQrystate::getTitle(VecWdbeVQrystate::UTD, ixWdbeVLocale));
+
+	qry = NULL;
+
+	// IP constructor.cust1 --- INSERT
+
+	xchg->addRefPreset(VecWdbeVPreset::PREWDBEREFSEL, jref, 0);
+
+	qry = new QryWdbePinAPar(xchg, dbswdbe, jref, ixWdbeVLocale);
+
+	// IP constructor.cust2 --- INSERT
+
+	set<uint> moditems;
+	refresh(dbswdbe, moditems);
+
+	xchg->addClstn(VecWdbeVCall::CALLWDBESTATCHG, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+
+	// IP constructor.cust3 --- INSERT
+
+};
+
+PnlWdbePinAPar::~PnlWdbePinAPar() {
+	// IP destructor.spec --- INSERT
+
+	// IP destructor.cust --- INSERT
+
+	xchg->removeJobByJref(jref);
+};
+
+// IP cust --- INSERT
+
+DpchEngWdbe* PnlWdbePinAPar::getNewDpchEng(
+			set<uint> items
+		) {
+	DpchEngWdbe* dpcheng = NULL;
+
+	if (items.empty()) {
+		dpcheng = new DpchEngWdbeConfirm(true, jref, "");
+	} else {
+		insert(items, DpchEngData::JREF);
+		dpcheng = new DpchEngData(jref, &continf, &feedFCsiQst, &statshr, &stgiac, &(qry->rst), &(qry->statshr), &(qry->stgiac), items);
+	};
+
+	return dpcheng;
+};
+
+void PnlWdbePinAPar::refresh(
+			DbsWdbe* dbswdbe
+			, set<uint>& moditems
+		) {
+	ContInf oldContinf(continf);
+	StatShr oldStatshr(statshr);
+
+	// IP refresh --- BEGIN
+	// continf
+	continf.numFCsiQst = feedFCsiQst.getNumByIx(qry->ixWdbeVQrystate);
+
+	// statshr
+	statshr.ButNewAvail = evalButNewAvail(dbswdbe);
+	statshr.ButDuplicateAvail = evalButDuplicateAvail(dbswdbe);
+	statshr.ButDuplicateActive = evalButDuplicateActive(dbswdbe);
+	statshr.ButDeleteAvail = evalButDeleteAvail(dbswdbe);
+	statshr.ButDeleteActive = evalButDeleteActive(dbswdbe);
+
+	// IP refresh --- END
+	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
+	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
+};
+
+void PnlWdbePinAPar::updatePreset(
+			DbsWdbe* dbswdbe
+			, const uint ixWdbeVPreset
+			, const ubigint jrefTrig
+			, const bool notif
+		) {
+	// IP updatePreset --- BEGIN
+	set<uint> moditems;
+
+	if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFPIN) {
+		recPinApar = WdbeAMPinPar();
+
+		xchg->addRefPreset(VecWdbeVPreset::PREWDBEREFSEL, jref, 0);
+
+		qry->stgiac.jnumFirstload = 1;
+
+		qry->rerun(dbswdbe);
+		refresh(dbswdbe, moditems);
+
+		if (notif) {
+			insert(moditems, {DpchEngData::STATSHRQRY, DpchEngData::STGIACQRY, DpchEngData::RST});
+			xchg->submitDpch(getNewDpchEng(moditems));
+		};
+	};
+	// IP updatePreset --- END
+};
+
+void PnlWdbePinAPar::handleRequest(
+			DbsWdbe* dbswdbe
+			, ReqWdbe* req
+		) {
+	if (req->ixVBasetype == ReqWdbe::VecVBasetype::CMD) {
+		reqCmd = req;
+
+		if (req->cmd == "cmdset") {
+
+		} else {
+			cout << "\tinvalid command!" << endl;
+		};
+
+		if (!req->retain) reqCmd = NULL;
+
+	} else if (req->ixVBasetype == ReqWdbe::VecVBasetype::DPCHAPP) {
+		if (req->dpchapp->ixWdbeVDpch == VecWdbeVDpch::DPCHAPPWDBEINIT) {
+			handleDpchAppWdbeInit(dbswdbe, (DpchAppWdbeInit*) (req->dpchapp), &(req->dpcheng));
+
+		} else if (req->dpchapp->ixWdbeVDpch == VecWdbeVDpch::DPCHAPPWDBEPINAPARDATA) {
+			DpchAppData* dpchappdata = (DpchAppData*) (req->dpchapp);
+
+			if (dpchappdata->has(DpchAppData::STGIAC)) {
+				handleDpchAppDataStgiac(dbswdbe, &(dpchappdata->stgiac), &(req->dpcheng));
+			} else if (dpchappdata->has(DpchAppData::STGIACQRY)) {
+				handleDpchAppDataStgiacqry(dbswdbe, &(dpchappdata->stgiacqry), &(req->dpcheng));
+			};
+
+		} else if (req->dpchapp->ixWdbeVDpch == VecWdbeVDpch::DPCHAPPWDBEPINAPARDO) {
+			DpchAppDo* dpchappdo = (DpchAppDo*) (req->dpchapp);
+
+			if (dpchappdo->ixVDo != 0) {
+				if (dpchappdo->ixVDo == VecVDo::BUTNEWCLICK) {
+					handleDpchAppDoButNewClick(dbswdbe, &(req->dpcheng));
+				} else if (dpchappdo->ixVDo == VecVDo::BUTDUPLICATECLICK) {
+					handleDpchAppDoButDuplicateClick(dbswdbe, &(req->dpcheng));
+				} else if (dpchappdo->ixVDo == VecVDo::BUTDELETECLICK) {
+					handleDpchAppDoButDeleteClick(dbswdbe, &(req->dpcheng));
+				} else if (dpchappdo->ixVDo == VecVDo::BUTREFRESHCLICK) {
+					handleDpchAppDoButRefreshClick(dbswdbe, &(req->dpcheng));
+				};
+
+			};
+
+		};
+	};
+};
+
+void PnlWdbePinAPar::handleDpchAppWdbeInit(
+			DbsWdbe* dbswdbe
+			, DpchAppWdbeInit* dpchappwdbeinit
+			, DpchEngWdbe** dpcheng
+		) {
+	*dpcheng = getNewDpchEng({DpchEngData::ALL});
+};
+
+void PnlWdbePinAPar::handleDpchAppDataStgiac(
+			DbsWdbe* dbswdbe
+			, StgIac* _stgiac
+			, DpchEngWdbe** dpcheng
+		) {
+	set<uint> diffitems;
+	set<uint> moditems;
+
+	diffitems = _stgiac->diff(&stgiac);
+	// IP handleDpchAppDataStgiac --- INSERT
+	insert(moditems, DpchEngData::STGIAC);
+	*dpcheng = getNewDpchEng(moditems);
+};
+
+void PnlWdbePinAPar::handleDpchAppDataStgiacqry(
+			DbsWdbe* dbswdbe
+			, QryWdbePinAPar::StgIac* _stgiacqry
+			, DpchEngWdbe** dpcheng
+		) {
+	set<uint> diffitems;
+	set<uint> moditems;
+
+	diffitems = _stgiacqry->diff(&(qry->stgiac));
+
+	WdbeQPinAPar* recSelNew = NULL;
+
+	WdbeAMPinPar* _recPinApar = NULL;
+
+	muteRefresh = true;
+
+	if (!diffitems.empty()) {
+		qry->stgiac = *_stgiacqry;
+
+		if (has(diffitems, QryWdbePinAPar::StgIac::JNUM)) recSelNew = qry->getRecByJnum(_stgiacqry->jnum);
+
+		if (!has(diffitems, QryWdbePinAPar::StgIac::JNUM) || (diffitems.size() > 1)) {
+			qry->rerun(dbswdbe);
+			insert(moditems, {DpchEngData::STATSHRQRY, DpchEngData::RST});
+		};
+
+		if (has(diffitems, QryWdbePinAPar::StgIac::JNUM)) {
+			if (!recSelNew) recSelNew = qry->getRecByJnum(_stgiacqry->jnum);
+
+			recPinApar = WdbeAMPinPar();
+
+			if (recSelNew) {
+				if (dbswdbe->tblwdbeampinpar->loadRecByRef(recSelNew->ref, &_recPinApar)) {
+					recPinApar = *_recPinApar;
+					delete _recPinApar;
+				};
+			};
+
+			xchg->addRefPreset(VecWdbeVPreset::PREWDBEREFSEL, jref, ((recSelNew) ? recSelNew->ref : 0));
+			qry->refreshJnum();
+		};
+
+		refresh(dbswdbe, moditems);
+	};
+
+	muteRefresh = false;
+
+	insert(moditems, DpchEngData::STGIACQRY);
+	*dpcheng = getNewDpchEng(moditems);
+};
+
+void PnlWdbePinAPar::handleDpchAppDoButNewClick(
+			DbsWdbe* dbswdbe
+			, DpchEngWdbe** dpcheng
+		) {
+	// IP handleDpchAppDoButNewClick --- INSERT
+};
+
+void PnlWdbePinAPar::handleDpchAppDoButDuplicateClick(
+			DbsWdbe* dbswdbe
+			, DpchEngWdbe** dpcheng
+		) {
+	// IP handleDpchAppDoButDuplicateClick --- INSERT
+};
+
+void PnlWdbePinAPar::handleDpchAppDoButDeleteClick(
+			DbsWdbe* dbswdbe
+			, DpchEngWdbe** dpcheng
+		) {
+	// IP handleDpchAppDoButDeleteClick --- INSERT
+};
+
+void PnlWdbePinAPar::handleDpchAppDoButRefreshClick(
+			DbsWdbe* dbswdbe
+			, DpchEngWdbe** dpcheng
+		) {
+	set<uint> moditems;
+
+	muteRefresh = true;
+
+	qry->rerun(dbswdbe, false);
+	refresh(dbswdbe, moditems);
+
+	muteRefresh = false;
+
+	insert(moditems, {DpchEngData::STATSHRQRY, DpchEngData::STGIACQRY, DpchEngData::RST});
+	*dpcheng = getNewDpchEng(moditems);
+};
+
+void PnlWdbePinAPar::handleCall(
+			DbsWdbe* dbswdbe
+			, Call* call
+		) {
+	if (call->ixVCall == VecWdbeVCall::CALLWDBESTATCHG) {
+		call->abort = handleCallWdbeStatChg(dbswdbe, call->jref);
+	};
+};
+
+bool PnlWdbePinAPar::handleCallWdbeStatChg(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+	// IP handleCallWdbeStatChg --- BEGIN
+
+	set<uint> moditems;
+
+	if (jrefTrig == qry->jref) {
+		if (!muteRefresh) {
+			refresh(dbswdbe, moditems);
+			if (qry->ixWdbeVQrystate == VecWdbeVQrystate::UTD) insert(moditems, {DpchEngData::STATSHRQRY, DpchEngData::STGIACQRY, DpchEngData::RST});
+			if (!moditems.empty()) xchg->submitDpch(getNewDpchEng(moditems));
+		};
+	};
+
+	// IP handleCallWdbeStatChg --- END
+	return retval;
+};
+

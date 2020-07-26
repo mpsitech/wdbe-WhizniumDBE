@@ -1,0 +1,406 @@
+.hide {
+	display:none;
+}
+
+.show {
+	display:table-row;
+}
+
+.but {
+	color:#000000;
+	font-size:12px;
+	font-family:Verdana,sans-serif;
+	font-weight:normal;
+	text-decoration:none;
+	cursor:pointer;
+	background-color:#ffffff;
+	border:none;
+}
+
+.but:hover {
+	color:#ff7f00;
+}
+
+.buthlt {
+	color:#ff7f00;
+	font-size:12px;
+	font-family:Verdana,sans-serif;
+	font-weight:normal;
+	text-decoration:none;
+	cursor:pointer;
+	background-color:#ffffff;
+	border:none;
+}
+
+.butinact {
+	color:#7f7f7f;
+	font-size:12px;
+	font-family:Verdana,sans-serif;
+	font-weight:normal;
+	text-decoration:none;
+	cursor:default;
+	background-color:#ffffff;
+	border:none;
+}
+
+.chk {
+	font-size:12px;
+	font-family:Verdana,sans-serif;
+	font-weight:normal;
+}
+
+.chkmod {
+	color:#ff7f00;
+	font-size:12px;
+	font-family:Verdana,sans-serif;
+	font-weight:normal;
+}
+
+.cpt {
+	font-size:12px;
+	font-family:Verdana,sans-serif;
+	font-weight:normal;
+}
+
+.cptmod {
+	color:#ff7f00;
+	font-size:12px;
+	font-family:Verdana,sans-serif;
+	font-weight:normal;
+}
+
+.pup {
+	font-size:12px;
+	font-family:Verdana,sans-serif;
+	font-weight:normal;
+	width:335px;
+}
+
+.pupmod {
+	color:#ff7f00;
+	font-size:12px;
+	font-family:Verdana,sans-serif;
+	font-weight:normal;
+	width:335px;
+}
+
+.pups {
+	font-size:12px;
+	font-family:Verdana,sans-serif;
+	font-weight:normal;
+	width:195px;
+}
+
+.pupsmod {
+	color:#ff7f00;
+	font-size:12px;
+	font-family:Verdana,sans-serif;
+	font-weight:normal;
+	width:195px;
+}
+
+.pupxs {
+	font-size:12px;
+	font-family:Verdana,sans-serif;
+	font-weight:normal;
+	width:105px;
+}
+
+.pupxsmod {
+	color:#ff7f00;
+	font-size:12px;
+	font-family:Verdana,sans-serif;
+	font-weight:normal;
+	width:105px;
+}
+
+.sep {
+	background-color:#7f7f7f;
+}
+
+.sld {
+	cursor:pointer;
+}
+
+.sldinact {
+}
+
+.sldl {
+	stroke:#000000;
+	stroke-width:1;
+	cursor:pointer;
+}
+
+.sldlhlt {
+	stroke:#ff7f00;
+	stroke-width:1;
+	cursor:pointer;
+}
+
+.sldlinact {
+	stroke:#7f7f7f;
+	stroke-width:1;
+}
+
+.sldr {
+	fill:#ffffff;
+	stroke:none;
+	cursor:pointer;
+}
+
+.sldrinact {
+	fill:#ffffff;
+	stroke:none;
+}
+
+svg {
+	display:block;
+}
+
+.txf {
+	font-size:12px;
+	font-family:Verdana,sans-serif;
+	font-weight:normal;
+	width:340px;
+	background-color:#ffffff;
+	border-left-style:solid;
+	border-right-style:none;
+	border-top-style:none;
+	border-bottom-style:solid;
+	border-width:1px;
+	border-color:#000000;
+}
+
+.txferr {
+	color:#ff0000;
+	font-size:12px;
+	font-family:Verdana,sans-serif;
+	font-weight:normal;
+	width:340px;
+	background-color:#ffffff;
+	border-left-style:solid;
+	border-right-style:none;
+	border-top-style:none;
+	border-bottom-style:solid;
+	border-width:1px;
+	border-color:#000000;
+}
+
+.txfmod {
+	color:#ff7f00;
+	font-size:12px;
+	font-family:Verdana,sans-serif;
+	font-weight:normal;
+	width:340px;
+	background-color:#ffffff;
+	border-left-style:solid;
+	border-right-style:none;
+	border-top-style:none;
+	border-bottom-style:solid;
+	border-width:1px;
+	border-color:#000000;
+}
+
+.txfnoed {
+	font-size:12px;
+	font-family:Verdana,sans-serif;
+	font-weight:normal;
+	width:340px;
+	background-color:#ffffff;
+	background-color:#ffffff;
+	border-style:solid;
+	border-width:1px;
+	border-color:#000000;
+}
+
+.txfs {
+	font-size:12px;
+	font-family:Verdana,sans-serif;
+	font-weight:normal;
+	width:200px;
+	background-color:#ffffff;
+	border-left-style:solid;
+	border-right-style:none;
+	border-top-style:none;
+	border-bottom-style:solid;
+	border-width:1px;
+	border-color:#000000;
+}
+
+.txfserr {
+	color:#ff0000;
+	font-size:12px;
+	font-family:Verdana,sans-serif;
+	font-weight:normal;
+	width:200px;
+	background-color:#ffffff;
+	border-left-style:solid;
+	border-right-style:none;
+	border-top-style:none;
+	border-bottom-style:solid;
+	border-width:1px;
+	border-color:#000000;
+}
+
+.txfsmod {
+	color:#ff7f00;
+	font-size:12px;
+	font-family:Verdana,sans-serif;
+	font-weight:normal;
+	width:200px;
+	background-color:#ffffff;
+	border-left-style:solid;
+	border-right-style:none;
+	border-top-style:none;
+	border-bottom-style:solid;
+	border-width:1px;
+	border-color:#000000;
+}
+
+.txfsnoed {
+	font-size:12px;
+	font-family:Verdana,sans-serif;
+	font-weight:normal;
+	width:200px;
+	background-color:#ffffff;
+	background-color:#ffffff;
+	border-style:solid;
+	border-width:1px;
+	border-color:#000000;
+}
+
+.txfxs {
+	font-size:12px;
+	font-family:Verdana,sans-serif;
+	font-weight:normal;
+	width:110px;
+	background-color:#ffffff;
+	border-left-style:solid;
+	border-right-style:none;
+	border-top-style:none;
+	border-bottom-style:solid;
+	border-width:1px;
+	border-color:#000000;
+}
+
+.txfxserr {
+	color:#ff0000;
+	font-size:12px;
+	font-family:Verdana,sans-serif;
+	font-weight:normal;
+	width:110px;
+	background-color:#ffffff;
+	border-left-style:solid;
+	border-right-style:none;
+	border-top-style:none;
+	border-bottom-style:solid;
+	border-width:1px;
+	border-color:#000000;
+}
+
+.txfxsmod {
+	color:#ff7f00;
+	font-size:12px;
+	font-family:Verdana,sans-serif;
+	font-weight:normal;
+	width:110px;
+	background-color:#ffffff;
+	border-left-style:solid;
+	border-right-style:none;
+	border-top-style:none;
+	border-bottom-style:solid;
+	border-width:1px;
+	border-color:#000000;
+}
+
+.txfxsnoed {
+	font-size:12px;
+	font-family:Verdana,sans-serif;
+	font-weight:normal;
+	width:110px;
+	background-color:#ffffff;
+	background-color:#ffffff;
+	border-style:solid;
+	border-width:1px;
+	border-color:#000000;
+}
+
+.uld {
+	font-size:12px;
+	font-family:Verdana,sans-serif;
+	font-weight:normal;
+	width:295px;
+	background-color:#ffffff;
+	border:none;
+}
+
+.upd {
+	stroke:#000000;
+	cursor:pointer;
+}
+
+.upd:hover {
+	stroke:#ff7f00;
+}
+
+.updhlt {
+	stroke:#ff7f00;
+	cursor:pointer;
+}
+
+.updinact {
+	stroke:#7f7f7f;
+}
+
+.side_pm {
+	cursor:pointer;
+}
+
+.hdr_cpt {
+	font-size:16px;
+	font-family:Verdana,sans-serif;
+	font-weight:normal;
+}
+
+.hdr_txt {
+	font-size:12px;
+	font-family:Verdana,sans-serif;
+	font-weight:normal;
+}
+
+.hdr_but {
+	color:#000000;
+	font-size:12px;
+	font-family:Verdana,sans-serif;
+	font-weight:normal;
+	cursor:pointer;
+}
+
+.hdr_but:hover {
+	color:#ff7f00;
+}
+
+.ftr_txt {
+	font-size:12px;
+	font-family:Verdana,sans-serif;
+	font-weight:normal;
+}
+
+.ftr_but {
+	color:#000000;
+	font-size:12px;
+	font-family:Verdana,sans-serif;
+	font-weight:normal;
+	cursor:pointer;
+}
+
+.ftr_but:hover {
+	color:#ff7f00;
+}
+
+.ftr_butdis {
+	color:#7f7f7f;
+	font-size:12px;
+	font-family:Verdana,sans-serif;
+	font-weight:normal;
+}

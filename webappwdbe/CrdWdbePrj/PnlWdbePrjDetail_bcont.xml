@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<head>
+		<title>Detail_bcont</title>
+		<script>
+			function handleTxfShoKey(evt) {return parent.parent.window.handleTxfKey(document,"TxfSho","xs",evt);};
+			function handleTxfShoChange() {parent.parent.window.handleTxfChange(document,"TxfSho","xs");};
+			function handleTxfTitKey(evt) {return parent.parent.window.handleTxfKey(document,"TxfTit","",evt);};
+			function handleTxfTitChange() {parent.parent.window.handleTxfChange(document,"TxfTit","");};
+			function handleButVerViewClick() {parent.parent.window.handleButCrdopenClick("ButVerView");};
+			function handleChkEsyChange() {parent.parent.window.handleChkChange(document,"ChkEsy");};
+			function handleTxfGrlKey(evt) {return parent.parent.window.handleTxfKey(document,"TxfGrl","",evt);};
+			function handleTxfGrlChange() {parent.parent.window.handleTxfChange(document,"TxfGrl","");};
+			function handleTxfCmtKey(evt) {return parent.parent.window.handleTxftKey(document,"TxfCmt",evt);};
+			function handleTxfCmtChange() {parent.parent.window.handleTxftChange(document,"TxfCmt");};
+			<!-- IP custScript - INSERT -->
+		</script>
+		<link href="../style/pnlDetail.css" rel="styleSheet" type="text/css"/>
+		<!-- IP custStyle - INSERT -->
+	</head>
+	<body marginwidth="0" marginheight="0">
+		<table cellspacing="0" border="0" cellpadding="0"><form action="">
+			<colgroup>
+				<col width="5"/>
+				<col width="155"/>
+				<col width="5"/>
+				<col width="78"/>
+				<col width="2"/>
+				<col width="38"/>
+				<col width="2"/>
+				<col width="78"/>
+				<col width="2"/>
+				<col width="1"/>
+				<col width="74"/>
+			</colgroup>
+			<tbody id="tbl">
+				<tr><td colspan="11" height="5"></td></tr>
+				<tr id="trSho" class="show">
+					<td height="25"></td>
+					<td align="right">
+						<span id="CptSho" class="cpt">CptSho</span>
+					</td>
+					<td></td>
+					<td colspan="1" align="left">
+						<input id="TxfSho" class="txfxs" type="text" value="TxfSho" onchange="handleTxfShoChange()" onkeypress="return handleTxfShoKey(event)"/>
+					</td>
+					<td></td>
+					<td colspan="6"></td>
+				</tr>
+				<tr id="trTit" class="show">
+					<td height="25"></td>
+					<td align="right">
+						<span id="CptTit" class="cpt">CptTit</span>
+					</td>
+					<td></td>
+					<td colspan="5" align="left">
+						<input id="TxfTit" class="txf" type="text" value="TxfTit" onchange="handleTxfTitChange()" onkeypress="return handleTxfTitKey(event)"/>
+					</td>
+					<td></td>
+					<td colspan="2"></td>
+				</tr>
+				<tr id="trA1" class="show"><td colspan="11" height="3"></td></tr>
+				<tr id="trA2" class="show">
+					<td height="1"></td>
+					<td colspan="10" bgcolor="#7f7f7f"></td>
+				</tr>
+				<tr id="trA3" class="show"><td colspan="11" height="3"></td></tr>
+				<tr id="trVer" class="show">
+					<td height="25"></td>
+					<td align="right">
+						<span id="CptVer" class="cpt">CptVer</span>
+					</td>
+					<td></td>
+					<td colspan="5" align="left">
+						<input id="TxtVer" class="txfnoed" type="text" readonly="readonly" value="TxtVer"/>
+					</td>
+					<td></td>
+					<td id="rdynVer" colspan="2" align="left">
+					</td>
+				</tr>
+				<tr id="trEsy" class="show">
+					<td height="25"></td>
+					<td align="right">
+						<span id="CptEsy" class="cpt">CptEsy</span>
+					</td>
+					<td></td>
+					<td align="left">
+						<input id="ChkEsy" class="chk" name="ChkEsy" type="checkbox" checked="checked" onchange="handleChkEsyChange()"/>
+					</td>
+					<td colspan="7"></td>
+				</tr>
+				<tr id="trGrl" class="show">
+					<td height="25"></td>
+					<td align="right">
+						<span id="CptGrl" class="cpt">CptGrl</span>
+					</td>
+					<td></td>
+					<td colspan="5" align="left">
+						<input id="TxfGrl" class="txf" type="text" value="TxfGrl" onchange="handleTxfGrlChange()" onkeypress="return handleTxfGrlKey(event)"/>
+					</td>
+					<td></td>
+					<td colspan="2"></td>
+				</tr>
+				<tr id="trCmt" class="show">
+					<td height="75"></td>
+					<td align="right" valign="top">
+						<span id="CptCmt" class="cpt">CptCmt</span>
+					</td>
+					<td></td>
+					<td colspan="5" align="left">
+						<textarea id="TxfCmt" class="txf" rows="4" cols="20" type="text" value="TxfCmt" onchange="handleTxfCmtChange()" onkeypress="return handleTxfCmtKey(event)"/>
+					</td>
+					<td></td>
+					<td colspan="2"></td>
+				</tr>
+				<tr><td colspan="11" height="4"></td></tr>
+			</tbody>
+		</form></table>
+	</body>
+</html>
+

@@ -1,0 +1,112 @@
+svg {
+	display:block;
+}
+
+.menu {
+	z-index:1;
+	position:absolute;
+	display:block;
+	top:54px;
+	padding:0px 2px 2px;
+	-webkit-box-shadow:3px 3px 3px #cccccc, -1px 0px 1px #dddddd;
+	background-color:#ffffff;
+	opacity:0.9;
+}
+
+.cpt {
+	font-size:12px;
+	font-family:Verdana,sans-serif;
+	font-weight:normal;
+}
+
+.frame {
+	background-color:#000000;
+	opacity:1;
+}
+
+.iframe {
+	background-color:#ffffff;
+	opacity:1;
+}
+
+.hdr_cpt {
+	font-size:16px;
+	font-family:Verdana,sans-serif;
+	font-weight:normal;
+}
+
+.hdr_dit {
+	font-size:12px;
+	font-family:Verdana,sans-serif;
+	font-weight:normal;
+}
+
+.hdr_dit:hover {
+	color: #ff7f00;
+	font-size:12px;
+	font-family:Verdana,sans-serif;
+	font-weight:normal;
+	cursor:pointer;
+}
+
+.hdr_ditsel {
+	color: #ff7f00;
+	font-size:12px;
+	font-family:Verdana,sans-serif;
+	font-weight:normal;
+}
+
+.hdr_ditdis {
+	color: #7f7f7f;
+	font-size:12px;
+	font-family:Verdana,sans-serif;
+	font-weight:normal;
+}
+
+.hdr_dits {
+	fill:black;
+	stroke:none;
+	cursor:pointer;
+}
+
+.hdr_dits:hover {
+	fill:#ff7f00;
+	stroke:none;
+	cursor:pointer;
+}
+
+.hdr_ditsels {
+	fill:#ff7f00;
+	stroke:none;
+}
+
+.hdr_ditdiss {
+	fill:#7f7f7f;
+	stroke:none;
+}
+
+.but {
+	color:#000000;
+	font-size:12px;
+	font-family:Verdana,sans-serif;
+	font-weight:normal;
+	text-decoration:none;
+	cursor:pointer;
+	background-color:#ffffff;
+	border:none;
+}
+
+.but:hover {
+	color:#ff7f00;
+}
+
+.butinact {
+	color:#7f7f7f;
+	font-size:12px;
+	font-family:Verdana,sans-serif;
+	font-weight:normal;
+	text-decoration:none;
+	cursor:default;
+	background-color:#ffffff;
+	border:none;
+}

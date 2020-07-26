@@ -1,0 +1,58 @@
+- IexWznmBui v0.9.23						
+- ImeIMModule.sref	Title					
+- MdlWdbeAdmin	administration module					
+	- ImeIMCard.srefRefIxVTbl	srefRefUref	sref	Title	Avail	Active
+	- tbl	TblWdbeMUsergroup	CrdWdbeUsg			
+	- tbl	TblWdbeMUser	CrdWdbeUsr			
+	- tbl	TblWdbeMPerson	CrdWdbePrs			
+	- tbl	TblWdbeMFile	CrdWdbeFil			
+	- ImeIMCard.end					
+- MdlWdbeGlobal	global data module					
+	- ImeIMCard.srefRefIxVTbl	srefRefUref	sref	Title	Avail	Active
+	- tbl	TblWdbeMMachine	CrdWdbeMch			
+	- tbl	TblWdbeMLibrary	CrdWdbeLib			
+	- tbl	TblWdbeMFamily	CrdWdbeFam			
+	- sbs	SbsWdbeBMUnitSil	CrdWdbeSil			
+	- sbs	SbsWdbeBMModuleMtp	CrdWdbeMtp			
+	- ImeIMCard.end					
+- MdlWdbeDevdev	device development module					
+	- ImeIMCard.srefRefIxVTbl	srefRefUref	sref	Title	Avail	Active
+	- tbl	TblWdbeMProject	CrdWdbePrj			
+	- tbl	TblWdbeMVersion	CrdWdbeVer			pre.refPrj() > pre.void()
+	- tbl	TblWdbeMSystem	CrdWdbeSys			pre.refVer()
+	- tbl	TblWdbeMTarget	CrdWdbeTrg			pre.refVer()
+	- tbl	TblWdbeMUnit	CrdWdbeUnt			pre.refVer()
+	- tbl	TblWdbeMRelease	CrdWdbeRls			pre.refVer()
+	- ImeIMCard.end					
+- MdlWdbeCoredev	core development module					
+	- ImeIMCard.srefRefIxVTbl	srefRefUref	sref	Title	Avail	Active
+	- tbl	TblWdbeMCoreproject	CrdWdbeCpr			
+	- tbl	TblWdbeMCoreversion	CrdWdbeCvr			pre.refCpr() > pre.void()
+	- ImeIMCard.end					
+- MdlWdbeDescr	device/core description module					
+	- ImeIMCard.srefRefIxVTbl	srefRefUref	sref	Title	Avail	Active
+	- sbs	SbsWdbeBMModuleMod	CrdWdbeMod			pre.refUnt() > pre.refCvr()
+	- tbl	TblWdbeMVector	CrdWdbeVec			pre.refUnt() > pre.refCvr() > pre.refVer()
+	- tbl	TblWdbeMVectoritem	CrdWdbeVit			pre.refVec()
+	- tbl	TblWdbeMCommand	CrdWdbeCmd			pre.refUnt() > pre.refCtr()
+	- tbl	TblWdbeMError	CrdWdbeErr			pre.refUnt() > pre.refCtr()
+	- tbl	TblWdbeMPeripheral	CrdWdbePph			pre.refUnt()
+	- tbl	TblWdbeMBank	CrdWdbeBnk			pre.refUnt()
+	- tbl	TblWdbeMPin	CrdWdbePin			pre.refBnk() > pre.refUnt()
+	- tbl	TblWdbeMGeneric	CrdWdbeGen			pre.refMtp() > pre.refMod()
+	- tbl	TblWdbeMPort	CrdWdbePrt			pre.refMtp() > pre.refMod()
+	- tbl	TblWdbeMSignal	CrdWdbeSig			pre.refMtp() > pre.refMod()
+	- tbl	TblWdbeMProcess	CrdWdbePrc			pre.refMtp() > pre.refMod()
+	- tbl	TblWdbeMFsmstate	CrdWdbeFst			pre.refFsm() > pre.refMtp() > pre.refMod()
+	- tbl	TblWdbeMVariable	CrdWdbeVar			pre.refPrc()
+	- ImeIMCard.end					
+- MdlWdbeAuxfct	auxiliary functionality					
+	- ImeIMCard.srefRefIxVTbl	srefRefUref	sref	Title	Avail	Active
+	- void		CrdWdbeUtl	utilities		
+	- ImeIMCard.end					
+- ImeIMModule.end						
+- ImeIMPreset.srefIxVIop	srefRefIxVTbl	srefRefUref	srefIxVScope	sref	srefIxWznmWArgtype	
+- retrupd			sess	PreWdbeRefCvr		
+- retrupd			sess	PreWdbeRefUnt		
+- retrupd			sess	PreWdbeRefVer		
+- ImeIMPreset.end						

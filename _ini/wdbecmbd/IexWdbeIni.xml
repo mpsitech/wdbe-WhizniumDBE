@@ -1,0 +1,924 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<IexWdbeIni version="1.0.2">
+	<ImeIAVKeylistKey1>
+		<Ii num="1">
+			<kls>KlstKWdbeMtpModbscbuCustop</kls>
+			<srf>WdbeMtpModbscbuAdd_v12_0</srf>
+			<tit>adapt port widths</tit>
+		</Ii>
+		<Ii num="2">
+			<kls>KlstKWdbeMtpModbscbuCustop</kls>
+			<srf>WdbeMtpModbscbuAxihostif_Easy_v1_0</srf>
+			<tit>connect AXI controllers, CRC and timeout</tit>
+		</Ii>
+		<Ii num="3">
+			<kls>KlstKWdbeMtpModbscbuCustop</kls>
+			<srf>WdbeMtpModbscbuAxihostif_Easy_v2_0</srf>
+			<tit>connect AXI controllers, CRC and timeout</tit>
+		</Ii>
+		<Ii num="4">
+			<kls>KlstKWdbeMtpModbscbuCustop</kls>
+			<srf>WdbeMtpModbscbuAxihostif_v1_0</srf>
+			<tit>connect AXI controllers, CRC and timeout</tit>
+		</Ii>
+		<Ii num="5">
+			<kls>KlstKWdbeMtpModbscbuCustop</kls>
+			<srf>WdbeMtpModbscbuCmdinv_v1_0</srf>
+			<tit>connect buffer</tit>
+		</Ii>
+		<Ii num="6">
+			<kls>KlstKWdbeMtpModbscbuCustop</kls>
+			<srf>WdbeMtpModbscbuCmdret_v1_0</srf>
+			<tit>connect buffer</tit>
+		</Ii>
+		<Ii num="7">
+			<kls>KlstKWdbeMtpModbscbuCustop</kls>
+			<srf>WdbeMtpModbscbuDft_v4_0</srf>
+			<tit>adapt port widths</tit>
+		</Ii>
+		<Ii num="8">
+			<kls>KlstKWdbeMtpModbscbuCustop</kls>
+			<srf>WdbeMtpModbscbuDiv_v3_0</srf>
+			<tit>adapt port widths</tit>
+		</Ii>
+		<Ii num="9">
+			<kls>KlstKWdbeMtpModbscbuCustop</kls>
+			<srf>WdbeMtpModbscbuDiv_v5_1</srf>
+			<tit>adapt port widths</tit>
+		</Ii>
+		<Ii num="10">
+			<kls>KlstKWdbeMtpModbscbuCustop</kls>
+			<srf>WdbeMtpModbscbuDotmx2x16_v1_0</srf>
+			<tit>connect SPI interface</tit>
+		</Ii>
+		<Ii num="11">
+			<kls>KlstKWdbeMtpModbscbuCustop</kls>
+			<srf>WdbeMtpModbscbuDpbram_v1_0</srf>
+			<tit>adapt internal wiring</tit>
+		</Ii>
+		<Ii num="12">
+			<kls>KlstKWdbeMtpModbscbuCustop</kls>
+			<srf>WdbeMtpModbscbuDpbram_v8_4</srf>
+			<tit>adapt port widths</tit>
+		</Ii>
+		<Ii num="13">
+			<kls>KlstKWdbeMtpModbscbuCustop</kls>
+			<srf>WdbeMtpModbscbuDsp48_v3_0_aMultB</srf>
+			<tit>adapt port widths</tit>
+		</Ii>
+		<Ii num="14">
+			<kls>KlstKWdbeMtpModbscbuCustop</kls>
+			<srf>WdbeMtpModbscbuDsp48_v3_0_aPlusDPlusC</srf>
+			<tit>adapt port widths</tit>
+		</Ii>
+		<Ii num="15">
+			<kls>KlstKWdbeMtpModbscbuCustop</kls>
+			<srf>WdbeMtpModbscbuMult_v12_0</srf>
+			<tit>adapt port widths</tit>
+		</Ii>
+		<Ii num="16">
+			<kls>KlstKWdbeMtpModbscbuCustop</kls>
+			<srf>WdbeMtpModbscbuOled128x32_v1_0</srf>
+			<tit>connect SPI interface</tit>
+		</Ii>
+		<Ii num="17">
+			<kls>KlstKWdbeMtpModbscbuCustop</kls>
+			<srf>WdbeMtpModbscbuPmmu_v1_0</srf>
+			<tit>connect buffers, fill slot vector</tit>
+		</Ii>
+		<Ii num="18">
+			<kls>KlstKWdbeMtpModbscbuCustop</kls>
+			<srf>WdbeMtpModbscbuSpbram_v1_0</srf>
+			<tit>adapt internal wiring</tit>
+		</Ii>
+		<Ii num="19">
+			<kls>KlstKWdbeMtpModbscbuCustop</kls>
+			<srf>WdbeMtpModbscbuSpifwd_v1_0</srf>
+			<tit>connect buffers, SPI interface, CRC and timeout</tit>
+		</Ii>
+		<Ii num="20">
+			<kls>KlstKWdbeMtpModbscbuCustop</kls>
+			<srf>WdbeMtpModbscbuSpihostif_Easy_v1_0</srf>
+			<tit>connect SPI interface, CRC and timeout</tit>
+		</Ii>
+		<Ii num="21">
+			<kls>KlstKWdbeMtpModbscbuCustop</kls>
+			<srf>WdbeMtpModbscbuSpihostif_v1_0</srf>
+			<tit>connect SPI interface, CRC and timeout</tit>
+		</Ii>
+		<Ii num="22">
+			<kls>KlstKWdbeMtpModbscbuCustop</kls>
+			<srf>WdbeMtpModbscbuSub_v12_0</srf>
+			<tit>adapt port widths</tit>
+		</Ii>
+		<Ii num="23">
+			<kls>KlstKWdbeMtpModbscbuCustop</kls>
+			<srf>WdbeMtpModbscbuUarthostif_Easy_v1_0</srf>
+			<tit>connect UART controllers, CRC and timeout</tit>
+		</Ii>
+		<Ii num="24">
+			<kls>KlstKWdbeMtpModbscbuCustop</kls>
+			<srf>WdbeMtpModbscbuUarthostif_v1_0</srf>
+			<tit>connect UART controllers, CRC and timeout</tit>
+		</Ii>
+		<Ii num="25">
+			<kls>KlstKWdbeMtpModbscbuCustop</kls>
+			<srf>WdbeMtpModbscbuXadc_v3_3</srf>
+			<tit>adapt port names</tit>
+		</Ii>
+		<Ii num="26">
+			<kls>KlstKWdbeMtpModbscbuCustop</kls>
+			<srf>WdbeMtpModbscbuZynq_ip_AXI_v1_0</srf>
+			<tit>add pin substitute signals</tit>
+		</Ii>
+		<Ii num="27">
+			<kls>KlstKWdbeMtpModbscbuCustop</kls>
+			<srf>WdbeMtpModbscbuZynq_ip_AXI_v2_0</srf>
+			<tit>add pin substitute signals</tit>
+		</Ii>
+		<Ii num="28">
+			<kls>KlstKWdbeMtpModbscbuCustop</kls>
+			<srf>WdbeMtpModbscbuZynq_ip_v1_0</srf>
+			<tit>connect AXI bus functionality</tit>
+		</Ii>
+		<Ii num="29">
+			<kls>KlstKWdbeMtpModbsctdCustop</kls>
+			<srf>WdbeMtpModbsctdCmdinv_v1_0</srf>
+			<tit>adapt buffer size</tit>
+		</Ii>
+		<Ii num="30">
+			<kls>KlstKWdbeMtpModbsctdCustop</kls>
+			<srf>WdbeMtpModbsctdCmdret_v1_0</srf>
+			<tit>adapt buffer size</tit>
+		</Ii>
+		<Ii num="31">
+			<kls>KlstKWdbeMtpModbsctdCustop</kls>
+			<srf>WdbeMtpModbsctdDpbram_v1_0</srf>
+			<tit>infer BRAM primitives and adapt port widths</tit>
+		</Ii>
+		<Ii num="32">
+			<kls>KlstKWdbeMtpModbsctdCustop</kls>
+			<srf>WdbeMtpModbsctdPmmu_v1_0</srf>
+			<tit>adapt buffer sizes</tit>
+		</Ii>
+		<Ii num="33">
+			<kls>KlstKWdbeMtpModbsctdCustop</kls>
+			<srf>WdbeMtpModbsctdSpbram_v1_0</srf>
+			<tit>infer BRAM primitives and adapt port widths</tit>
+		</Ii>
+		<Ii num="34">
+			<kls>KlstKWdbeMtpModdetCustop</kls>
+			<srf>WdbeMtpModdetPmmu_v1_0</srf>
+			<tit>add command process handshake</tit>
+		</Ii>
+		<Ii num="35">
+			<kls>KlstKWdbeMtpModdetCustop</kls>
+			<srf>WdbeMtpModdetSpifwd_v1_0</srf>
+			<tit>add command process handshake</tit>
+		</Ii>
+		<Ii num="36">
+			<kls>KlstKWdbeMtpModdetCustop</kls>
+			<srf>WdbeMtpModdetTkclksrc_v1_0</srf>
+			<tit>add command process handshake</tit>
+		</Ii>
+		<Ii num="37">
+			<kls>KlstKWdbeMtpModdetCustop</kls>
+			<srf>WdbeMtpModdetTop_v1_0</srf>
+			<tit>add reset and master clock</tit>
+		</Ii>
+		<Ii num="38">
+			<kls>KlstKWdbeMtpPlhfpgaCustop</kls>
+			<srf>WdbeMtpPlhfpgaPmmu_v1_0</srf>
+			<tit></tit>
+		</Ii>
+		<Ii num="39">
+			<kls>KlstKWdbeMtpWrfpgaCustop</kls>
+			<srf>WdbeMtpWrfpgaCmdbus_v1_0</srf>
+			<tit></tit>
+		</Ii>
+		<Ii num="40">
+			<kls>KlstKWdbeMtpWrfpgaCustop</kls>
+			<srf>WdbeMtpWrfpgaCmdinv_v1_0</srf>
+			<tit></tit>
+		</Ii>
+		<Ii num="41">
+			<kls>KlstKWdbeMtpWrfpgaCustop</kls>
+			<srf>WdbeMtpWrfpgaCmdret_v1_0</srf>
+			<tit></tit>
+		</Ii>
+		<Ii num="42">
+			<kls>KlstKWdbeMtpWrfpgaCustop</kls>
+			<srf>WdbeMtpWrfpgaCrcspec_32_v1_0</srf>
+			<tit></tit>
+		</Ii>
+		<Ii num="43">
+			<kls>KlstKWdbeMtpWrfpgaCustop</kls>
+			<srf>WdbeMtpWrfpgaCrcspec_v1_0</srf>
+			<tit></tit>
+		</Ii>
+		<Ii num="44">
+			<kls>KlstKWdbeMtpWrfpgaCustop</kls>
+			<srf>WdbeMtpWrfpgaDpbram_v1_0</srf>
+			<tit></tit>
+		</Ii>
+		<Ii num="45">
+			<kls>KlstKWdbeMtpWrfpgaCustop</kls>
+			<srf>WdbeMtpWrfpgaPmmu_v1_0</srf>
+			<tit></tit>
+		</Ii>
+		<Ii num="46">
+			<kls>KlstKWdbeMtpWrfpgaCustop</kls>
+			<srf>WdbeMtpWrfpgaSpbram_v1_0</srf>
+			<tit></tit>
+		</Ii>
+		<Ii num="47">
+			<kls>KlstKWdbeMtpWrfpgaCustop</kls>
+			<srf>WdbeMtpWrfpgaSpifwd_v1_0</srf>
+			<tit></tit>
+		</Ii>
+		<Ii num="48">
+			<kls>KlstKWdbeMtpWrfpgaCustop</kls>
+			<srf>WdbeMtpWrfpgaTkclksrc_v1_0</srf>
+			<tit></tit>
+		</Ii>
+		<Ii num="49">
+			<kls>KlstKWdbeMtpWrfpgaCustop</kls>
+			<srf>WdbeMtpWrfpgaTop_v1_0</srf>
+			<tit></tit>
+		</Ii>
+		<Ii num="50">
+			<kls>KlstWdbeKAMLibraryMakefileTag</kls>
+			<srf>incpath</srf>
+			<tit>include path</tit>
+		</Ii>
+		<Ii num="51">
+			<kls>KlstWdbeKAMMachineMakefileTag</kls>
+			<srf>cpp</srf>
+			<tit>C++ compiler</tit>
+		</Ii>
+		<Ii num="52">
+			<kls>KlstWdbeKAMMachineMakefileTag</kls>
+			<srf>cppflags</srf>
+			<tit>C++ compiler flags</tit>
+		</Ii>
+		<Ii num="53">
+			<kls>KlstWdbeKAMMachineMakefileTag</kls>
+			<srf>statlib</srf>
+			<tit>static library tool</tit>
+		</Ii>
+		<Ii num="54">
+			<kls>KlstWdbeKAMMachineMakefileTag</kls>
+			<srf>statlibflags</srf>
+			<tit>static library tool flags</tit>
+		</Ii>
+		<Ii num="55">
+			<kls>KlstWdbeKAMMachineMakefileTag</kls>
+			<srf>dynlib</srf>
+			<tit>dynamic link library tool</tit>
+		</Ii>
+		<Ii num="56">
+			<kls>KlstWdbeKAMMachineMakefileTag</kls>
+			<srf>dynlibflags</srf>
+			<tit>dynamic link library tool flags</tit>
+		</Ii>
+		<Ii num="57">
+			<kls>KlstWdbeKAMMachineMakefileTag</kls>
+			<srf>dynlibext</srf>
+			<tit>dynamic link library file extension</tit>
+		</Ii>
+		<Ii num="58">
+			<kls>KlstWdbeKAMMachineMakefileTag</kls>
+			<srf>incpath</srf>
+			<tit>include path</tit>
+		</Ii>
+		<Ii num="59">
+			<kls>KlstWdbeKAMMachineParKey</kls>
+			<srf>rootfs</srf>
+			<tit>root file system path</tit>
+		</Ii>
+		<Ii num="60">
+			<kls>KlstWdbeKAMMachineParKey</kls>
+			<srf>reproot</srf>
+			<tit>repository root directory</tit>
+		</Ii>
+		<Ii num="61">
+			<kls>KlstWdbeKAMMachineParKey</kls>
+			<srf>srcroot</srf>
+			<tit>source root directory</tit>
+		</Ii>
+		<Ii num="62">
+			<kls>KlstWdbeKAMMachineParKey</kls>
+			<srf>libroot</srf>
+			<tit>library root directory</tit>
+		</Ii>
+		<Ii num="63">
+			<kls>KlstWdbeKAMMachineParKey</kls>
+			<srf>fpgaroot</srf>
+			<tit>FPGA root directory</tit>
+		</Ii>
+		<Ii num="64">
+			<kls>KlstWdbeKAMMachineParKey</kls>
+			<srf>mcuroot</srf>
+			<tit>MCU root directory</tit>
+		</Ii>
+		<Ii num="65">
+			<kls>KlstWdbeKAMMachineParKey</kls>
+			<srf>ncore</srf>
+			<tit>number of cores</tit>
+		</Ii>
+		<Ii num="66">
+			<kls>KlstWdbeKAMPersonDetailType</kls>
+			<srf>eml</srf>
+			<tit>e-mail</tit>
+		</Ii>
+		<Ii num="67">
+			<kls>KlstWdbeKAMPersonDetailType</kls>
+			<srf>fax</srf>
+			<tit>fax</tit>
+		</Ii>
+		<Ii num="68">
+			<kls>KlstWdbeKAMPersonDetailType</kls>
+			<srf>mbl</srf>
+			<tit>mobile</tit>
+		</Ii>
+		<Ii num="69">
+			<kls>KlstWdbeKAMPersonDetailType</kls>
+			<srf>tel</srf>
+			<tit>phone</tit>
+		</Ii>
+		<Ii num="70">
+			<kls>KlstWdbeKAMPinParKey</kls>
+			<srf>fclk</srf>
+			<tit>clock frequency [kHz]</tit>
+		</Ii>
+		<Ii num="71">
+			<kls>KlstWdbeKAMPinParKey</kls>
+			<srf>lvds</srf>
+			<tit>low-voltage differential signal</tit>
+		</Ii>
+		<Ii num="72">
+			<kls>KlstWdbeKAMPinParKey</kls>
+			<srf>noclkdr</srf>
+			<tit>no clock dedicated route</tit>
+		</Ii>
+		<Ii num="73">
+			<kls>KlstWdbeKAMUnitPackage</kls>
+			<srf>bga132</srf>
+			<tit></tit>
+		</Ii>
+		<Ii num="74">
+			<kls>KlstWdbeKAMUnitPackage</kls>
+			<srf>bga236</srf>
+			<tit></tit>
+		</Ii>
+		<Ii num="75">
+			<kls>KlstWdbeKAMUnitPackage</kls>
+			<srf>bga320</srf>
+			<tit></tit>
+		</Ii>
+		<Ii num="76">
+			<kls>KlstWdbeKAMUnitPackage</kls>
+			<srf>lqfp48</srf>
+			<tit></tit>
+		</Ii>
+		<Ii num="77">
+			<kls>KlstWdbeKAMUnitPackage</kls>
+			<srf>qfp100</srf>
+			<tit></tit>
+		</Ii>
+		<Ii num="78">
+			<kls>KlstWdbeKAMUnitPackage</kls>
+			<srf>ssop20</srf>
+			<tit></tit>
+		</Ii>
+		<Ii num="79">
+			<kls>KlstWdbeKAMUnitPackage</kls>
+			<srf>ssop28</srf>
+			<tit></tit>
+		</Ii>
+		<Ii num="80">
+			<kls>KlstWdbeKAMUnitToolch</kls>
+			<srf>ise</srf>
+			<tit>Xilinx ISE</tit>
+		</Ii>
+		<Ii num="81">
+			<kls>KlstWdbeKAMUnitToolch</kls>
+			<srf>mplab</srf>
+			<tit>Microchip MPLAB X</tit>
+		</Ii>
+		<Ii num="82">
+			<kls>KlstWdbeKAMUnitToolch</kls>
+			<srf>syswb</srf>
+			<tit>ST SystemWorkbench</tit>
+		</Ii>
+		<Ii num="83">
+			<kls>KlstWdbeKAMUnitToolch</kls>
+			<srf>vivado</srf>
+			<tit>Xilinx Vivado</tit>
+		</Ii>
+		<Ii num="84">
+			<kls>KlstWdbeKAMUnitToolch</kls>
+			<srf>vivzynq</srf>
+			<tit>Xilinx Vivado for Zynq</tit>
+		</Ii>
+		<Ii num="85">
+			<kls>KlstWdbeKHdltype</kls>
+			<srf>char</srf>
+			<tit>character</tit>
+		</Ii>
+		<Ii num="86">
+			<kls>KlstWdbeKHdltype</kls>
+			<srf>int</srf>
+			<tit>integer</tit>
+		</Ii>
+		<Ii num="87">
+			<kls>KlstWdbeKHdltype</kls>
+			<srf>nat</srf>
+			<tit>natural</tit>
+		</Ii>
+		<Ii num="88">
+			<kls>KlstWdbeKHdltype</kls>
+			<srf>sl</srf>
+			<tit>standard logic</tit>
+		</Ii>
+		<Ii num="89">
+			<kls>KlstWdbeKHdltype</kls>
+			<srf>slvup</srf>
+			<tit>standard logic vector up</tit>
+		</Ii>
+		<Ii num="90">
+			<kls>KlstWdbeKHdltype</kls>
+			<srf>slvdn</srf>
+			<tit>standard logic vector down</tit>
+		</Ii>
+		<Ii num="91">
+			<kls>KlstWdbeKHdltype</kls>
+			<srf>str</srf>
+			<tit>string</tit>
+		</Ii>
+		<Ii num="92">
+			<kls>KlstWdbeKMBankVoltstd</kls>
+			<srf>_1v2</srf>
+			<tit>1.2V</tit>
+		</Ii>
+		<Ii num="93">
+			<kls>KlstWdbeKMBankVoltstd</kls>
+			<srf>_1v8</srf>
+			<tit>1.8V</tit>
+		</Ii>
+		<Ii num="94">
+			<kls>KlstWdbeKMBankVoltstd</kls>
+			<srf>_2v5</srf>
+			<tit>2.5V</tit>
+		</Ii>
+		<Ii num="95">
+			<kls>KlstWdbeKMBankVoltstd</kls>
+			<srf>_3v3</srf>
+			<tit>3.3V</tit>
+		</Ii>
+		<Ii num="96">
+			<kls>KlstWdbeKMFamilyVendor</kls>
+			<srf>mchp</srf>
+			<tit>Microchip</tit>
+		</Ii>
+		<Ii num="97">
+			<kls>KlstWdbeKMFamilyVendor</kls>
+			<srf>st</srf>
+			<tit>STMicroelectronics</tit>
+		</Ii>
+		<Ii num="98">
+			<kls>KlstWdbeKMFamilyVendor</kls>
+			<srf>xlnx</srf>
+			<tit>Xilinx</tit>
+		</Ii>
+		<Ii num="99">
+			<kls>KlstWdbeKMFileContent</kls>
+			<srf>cftpl</srf>
+			<tit>code file template</tit>
+		</Ii>
+		<Ii num="100">
+			<kls>KlstWdbeKMFileContent</kls>
+			<srf>custip</srf>
+			<tit>custom insertion points</tit>
+		</Ii>
+		<Ii num="101">
+			<kls>KlstWdbeKMFileContent</kls>
+			<srf>mod</srf>
+			<tit>model data</tit>
+		</Ii>
+		<Ii num="102">
+			<kls>KlstWdbeKMFileMimetype</kls>
+			<srf>bmp</srf>
+			<tit>image/bmp</tit>
+		</Ii>
+		<Ii num="103">
+			<kls>KlstWdbeKMFileMimetype</kls>
+			<srf>cpp</srf>
+			<tit>text/x-c</tit>
+		</Ii>
+		<Ii num="104">
+			<kls>KlstWdbeKMFileMimetype</kls>
+			<srf>css</srf>
+			<tit>text/css</tit>
+		</Ii>
+		<Ii num="105">
+			<kls>KlstWdbeKMFileMimetype</kls>
+			<srf>csv</srf>
+			<tit>text/comma-separated-values</tit>
+		</Ii>
+		<Ii num="106">
+			<kls>KlstWdbeKMFileMimetype</kls>
+			<srf>doc</srf>
+			<tit>application/msword</tit>
+		</Ii>
+		<Ii num="107">
+			<kls>KlstWdbeKMFileMimetype</kls>
+			<srf>docx</srf>
+			<tit>application/vnd.openxmlformats-officedocument.wordprocessingml.document</tit>
+		</Ii>
+		<Ii num="108">
+			<kls>KlstWdbeKMFileMimetype</kls>
+			<srf>eps</srf>
+			<tit>application/postscript</tit>
+		</Ii>
+		<Ii num="109">
+			<kls>KlstWdbeKMFileMimetype</kls>
+			<srf>gif</srf>
+			<tit>image/gif</tit>
+		</Ii>
+		<Ii num="110">
+			<kls>KlstWdbeKMFileMimetype</kls>
+			<srf>h</srf>
+			<tit>text/x-h</tit>
+		</Ii>
+		<Ii num="111">
+			<kls>KlstWdbeKMFileMimetype</kls>
+			<srf>hdf</srf>
+			<tit>application/x-hdf</tit>
+		</Ii>
+		<Ii num="112">
+			<kls>KlstWdbeKMFileMimetype</kls>
+			<srf>html</srf>
+			<tit>text/html</tit>
+		</Ii>
+		<Ii num="113">
+			<kls>KlstWdbeKMFileMimetype</kls>
+			<srf>jpg</srf>
+			<tit>image/jpeg</tit>
+		</Ii>
+		<Ii num="114">
+			<kls>KlstWdbeKMFileMimetype</kls>
+			<srf>js</srf>
+			<tit>text/javascript</tit>
+		</Ii>
+		<Ii num="115">
+			<kls>KlstWdbeKMFileMimetype</kls>
+			<srf>make</srf>
+			<tit>text/x-makefile</tit>
+		</Ii>
+		<Ii num="116">
+			<kls>KlstWdbeKMFileMimetype</kls>
+			<srf>nc</srf>
+			<tit>application/x-netcdf</tit>
+		</Ii>
+		<Ii num="117">
+			<kls>KlstWdbeKMFileMimetype</kls>
+			<srf>pdf</srf>
+			<tit>application/pdf</tit>
+		</Ii>
+		<Ii num="118">
+			<kls>KlstWdbeKMFileMimetype</kls>
+			<srf>png</srf>
+			<tit>image/png</tit>
+		</Ii>
+		<Ii num="119">
+			<kls>KlstWdbeKMFileMimetype</kls>
+			<srf>ppt</srf>
+			<tit>application/mspowerpoint</tit>
+		</Ii>
+		<Ii num="120">
+			<kls>KlstWdbeKMFileMimetype</kls>
+			<srf>pptx</srf>
+			<tit>application/vnd.openxmlformats-officedocument.presentationml.presentation</tit>
+		</Ii>
+		<Ii num="121">
+			<kls>KlstWdbeKMFileMimetype</kls>
+			<srf>sh</srf>
+			<tit>application/x-sh</tit>
+		</Ii>
+		<Ii num="122">
+			<kls>KlstWdbeKMFileMimetype</kls>
+			<srf>sql</srf>
+			<tit>text/x-sql</tit>
+		</Ii>
+		<Ii num="123">
+			<kls>KlstWdbeKMFileMimetype</kls>
+			<srf>svg</srf>
+			<tit>image/svg+xml</tit>
+		</Ii>
+		<Ii num="124">
+			<kls>KlstWdbeKMFileMimetype</kls>
+			<srf>tex</srf>
+			<tit>application/x-tex</tit>
+		</Ii>
+		<Ii num="125">
+			<kls>KlstWdbeKMFileMimetype</kls>
+			<srf>tgz</srf>
+			<tit>application/x-gzip</tit>
+		</Ii>
+		<Ii num="126">
+			<kls>KlstWdbeKMFileMimetype</kls>
+			<srf>tif</srf>
+			<tit>image/tiff</tit>
+		</Ii>
+		<Ii num="127">
+			<kls>KlstWdbeKMFileMimetype</kls>
+			<srf>txt</srf>
+			<tit>text/plain</tit>
+		</Ii>
+		<Ii num="128">
+			<kls>KlstWdbeKMFileMimetype</kls>
+			<srf>xls</srf>
+			<tit>application/msexcel</tit>
+		</Ii>
+		<Ii num="129">
+			<kls>KlstWdbeKMFileMimetype</kls>
+			<srf>xlsx</srf>
+			<tit>application/vnd.openxmlformats-officedocument.spreadsheetml.sheet</tit>
+		</Ii>
+		<Ii num="130">
+			<kls>KlstWdbeKMFileMimetype</kls>
+			<srf>xml</srf>
+			<tit>text/xml</tit>
+		</Ii>
+		<Ii num="131">
+			<kls>KlstWdbeKMFileMimetype</kls>
+			<srf>zip</srf>
+			<tit>application/zip</tit>
+		</Ii>
+		<Ii num="132">
+			<kls>KlstWdbeKMMachinePlatform</kls>
+			<srf>imx6</srf>
+			<tit>ARM i.MX6 Yocto</tit>
+		</Ii>
+		<Ii num="133">
+			<kls>KlstWdbeKMMachinePlatform</kls>
+			<srf>zynq_armv7</srf>
+			<tit>PetaLinux 2017.2 for Zynq</tit>
+		</Ii>
+		<Ii num="134">
+			<kls>KlstWdbeKMMachinePlatform</kls>
+			<srf>mac</srf>
+			<tit>Mac (Intel) desktop/notebook</tit>
+		</Ii>
+		<Ii num="135">
+			<kls>KlstWdbeKMMachinePlatform</kls>
+			<srf>ubt_x86_64</srf>
+			<tit>ubuntu workstation</tit>
+		</Ii>
+		<Ii num="136">
+			<kls>KlstWdbeKMReleaseOption</kls>
+			<srf>dynlib</srf>
+			<tit>generate dynamic link library</tit>
+		</Ii>
+		<Ii num="137">
+			<kls>KlstWdbeKMVectorOption</kls>
+			<srf>notit</srf>
+			<tit>no titles</tit>
+		</Ii>
+		<Ii num="138">
+			<kls>KlstWdbeKMVectorOption</kls>
+			<srf>cmt</srf>
+			<tit>comments</tit>
+		</Ii>
+		<Ii num="139">
+			<kls>KlstWdbeKMVectorOption</kls>
+			<srf>apdfed</srf>
+			<tit>append to feed</tit>
+		</Ii>
+		<Ii num="140">
+			<kls>KlstWdbeKMVectorOption</kls>
+			<srf>filfed</srf>
+			<tit>fill feed</tit>
+		</Ii>
+		<Ii num="141">
+			<kls>KlstWdbeKRMCoreprojectMPersonFunction</kls>
+			<srf>mgr</srf>
+			<tit>manager</tit>
+		</Ii>
+		<Ii num="142">
+			<kls>KlstWdbeKRMCoreprojectMPersonFunction</kls>
+			<srf>cur</srf>
+			<tit>curator</tit>
+		</Ii>
+		<Ii num="143">
+			<kls>KlstWdbeKRMCoreprojectMPersonFunction</kls>
+			<srf>heng</srf>
+			<tit>hardware engineer</tit>
+		</Ii>
+		<Ii num="144">
+			<kls>KlstWdbeKRMCoreprojectMPersonFunction</kls>
+			<srf>seng</srf>
+			<tit>software engineer</tit>
+		</Ii>
+		<Ii num="145">
+			<kls>KlstWdbeKRMPersonMProjectFunction</kls>
+			<srf>mgr</srf>
+			<tit>manager</tit>
+		</Ii>
+		<Ii num="146">
+			<kls>KlstWdbeKRMPersonMProjectFunction</kls>
+			<srf>heng</srf>
+			<tit>hardware engineer</tit>
+		</Ii>
+		<Ii num="147">
+			<kls>KlstWdbeKRMPersonMProjectFunction</kls>
+			<srf>seng</srf>
+			<tit>software engineer</tit>
+		</Ii>
+	</ImeIAVKeylistKey1>
+	<ImeIMUsergroup>
+		<Ii num="1">
+			<srf>wdbeusers</srf>
+			<ImeIAMUsergroupAccess>
+				<Ii num="1">
+					<feg>VecWdbeVCard</feg>
+					<fea>CrdWdbeUsg</fea>
+					<acc>edit;exec;view</acc>
+				</Ii>
+				<Ii num="2">
+					<feg>VecWdbeVCard</feg>
+					<fea>CrdWdbeUsr</fea>
+					<acc>edit;exec;view</acc>
+				</Ii>
+				<Ii num="3">
+					<feg>VecWdbeVCard</feg>
+					<fea>CrdWdbePrs</fea>
+					<acc>edit;exec;view</acc>
+				</Ii>
+				<Ii num="4">
+					<feg>VecWdbeVCard</feg>
+					<fea>CrdWdbeFil</fea>
+					<acc>edit;exec;view</acc>
+				</Ii>
+				<Ii num="5">
+					<feg>VecWdbeVCard</feg>
+					<fea>CrdWdbeMch</fea>
+					<acc>edit;exec;view</acc>
+				</Ii>
+				<Ii num="6">
+					<feg>VecWdbeVCard</feg>
+					<fea>CrdWdbeLib</fea>
+					<acc>edit;exec;view</acc>
+				</Ii>
+				<Ii num="7">
+					<feg>VecWdbeVCard</feg>
+					<fea>CrdWdbeFam</fea>
+					<acc>edit;exec;view</acc>
+				</Ii>
+				<Ii num="8">
+					<feg>VecWdbeVCard</feg>
+					<fea>CrdWdbeSil</fea>
+					<acc>edit;exec;view</acc>
+				</Ii>
+				<Ii num="9">
+					<feg>VecWdbeVCard</feg>
+					<fea>CrdWdbeMtp</fea>
+					<acc>edit;exec;view</acc>
+				</Ii>
+				<Ii num="10">
+					<feg>VecWdbeVCard</feg>
+					<fea>CrdWdbePrj</fea>
+					<acc>edit;exec;view</acc>
+				</Ii>
+				<Ii num="11">
+					<feg>VecWdbeVCard</feg>
+					<fea>CrdWdbeVer</fea>
+					<acc>edit;exec;view</acc>
+				</Ii>
+				<Ii num="12">
+					<feg>VecWdbeVCard</feg>
+					<fea>CrdWdbeSys</fea>
+					<acc>edit;exec;view</acc>
+				</Ii>
+				<Ii num="13">
+					<feg>VecWdbeVCard</feg>
+					<fea>CrdWdbeTrg</fea>
+					<acc>edit;exec;view</acc>
+				</Ii>
+				<Ii num="14">
+					<feg>VecWdbeVCard</feg>
+					<fea>CrdWdbeUnt</fea>
+					<acc>edit;exec;view</acc>
+				</Ii>
+				<Ii num="15">
+					<feg>VecWdbeVCard</feg>
+					<fea>CrdWdbeRls</fea>
+					<acc>edit;exec;view</acc>
+				</Ii>
+				<Ii num="16">
+					<feg>VecWdbeVCard</feg>
+					<fea>CrdWdbeCpr</fea>
+					<acc>edit;exec;view</acc>
+				</Ii>
+				<Ii num="17">
+					<feg>VecWdbeVCard</feg>
+					<fea>CrdWdbeCvr</fea>
+					<acc>edit;exec;view</acc>
+				</Ii>
+				<Ii num="18">
+					<feg>VecWdbeVCard</feg>
+					<fea>CrdWdbeMod</fea>
+					<acc>edit;exec;view</acc>
+				</Ii>
+				<Ii num="19">
+					<feg>VecWdbeVCard</feg>
+					<fea>CrdWdbeVec</fea>
+					<acc>edit;exec;view</acc>
+				</Ii>
+				<Ii num="20">
+					<feg>VecWdbeVCard</feg>
+					<fea>CrdWdbeVit</fea>
+					<acc>edit;exec;view</acc>
+				</Ii>
+				<Ii num="21">
+					<feg>VecWdbeVCard</feg>
+					<fea>CrdWdbeCmd</fea>
+					<acc>edit;exec;view</acc>
+				</Ii>
+				<Ii num="22">
+					<feg>VecWdbeVCard</feg>
+					<fea>CrdWdbeErr</fea>
+					<acc>edit;exec;view</acc>
+				</Ii>
+				<Ii num="23">
+					<feg>VecWdbeVCard</feg>
+					<fea>CrdWdbePph</fea>
+					<acc>edit;exec;view</acc>
+				</Ii>
+				<Ii num="24">
+					<feg>VecWdbeVCard</feg>
+					<fea>CrdWdbeBnk</fea>
+					<acc>edit;exec;view</acc>
+				</Ii>
+				<Ii num="25">
+					<feg>VecWdbeVCard</feg>
+					<fea>CrdWdbePin</fea>
+					<acc>edit;exec;view</acc>
+				</Ii>
+				<Ii num="26">
+					<feg>VecWdbeVCard</feg>
+					<fea>CrdWdbeGen</fea>
+					<acc>edit;exec;view</acc>
+				</Ii>
+				<Ii num="27">
+					<feg>VecWdbeVCard</feg>
+					<fea>CrdWdbePrt</fea>
+					<acc>edit;exec;view</acc>
+				</Ii>
+				<Ii num="28">
+					<feg>VecWdbeVCard</feg>
+					<fea>CrdWdbeSig</fea>
+					<acc>edit;exec;view</acc>
+				</Ii>
+				<Ii num="29">
+					<feg>VecWdbeVCard</feg>
+					<fea>CrdWdbePrc</fea>
+					<acc>edit;exec;view</acc>
+				</Ii>
+				<Ii num="30">
+					<feg>VecWdbeVCard</feg>
+					<fea>CrdWdbeFst</fea>
+					<acc>edit;exec;view</acc>
+				</Ii>
+				<Ii num="31">
+					<feg>VecWdbeVCard</feg>
+					<fea>CrdWdbeVar</fea>
+					<acc>edit;exec;view</acc>
+				</Ii>
+				<Ii num="32">
+					<feg>VecWdbeVCard</feg>
+					<fea>CrdWdbeUtl</fea>
+					<acc>edit;exec;view</acc>
+				</Ii>
+			</ImeIAMUsergroupAccess>
+			<ImeIMUser>
+				<Ii num="1">
+					<srf>wdbeuser</srf>
+					<ste>act</ste>
+					<lcl>enus</lcl>
+					<ulv>adm</ulv>
+					<pwd>asdf1234</pwd>
+					<ImeIMPerson>
+						<Ii num="1">
+							<sex>f</sex>
+							<tit>Mrs.</tit>
+							<fnm>Emily</fnm>
+							<lnm>Johnson</lnm>
+						</Ii>
+					</ImeIMPerson>
+				</Ii>
+			</ImeIMUser>
+		</Ii>
+	</ImeIMUsergroup>
+</IexWdbeIni>
