@@ -8,6 +8,63 @@ WhizniumDBE extends the concept of model-based source code generation to the wor
 
 ![](_exp/dbe.png)
 
+## Source code
+
+### Directory structure
+
+Sub-folder|Content|
+-|-|
+_ini|database/tool initialization files|
+_mdl|model files, text-based and diff-able between versions|
+_rls|Makefiles and build/deploy scripts|
+apiwdbe|auto-generated C++ API library (not in use for now)|
+dbswdbe|auto-generated C++ database access library|
+japiwdbe|auto-generated Java API library (used for WhizniumDBE Bootstrap and WhizniumDBE Iterator)|
+webappwdbe|mixed auto-generated/manual HTML5/JS web-based user interface|
+wdbecmbd|mixed auto-generated/manual C++ sources for all WhizniumDBE functionality|
+wdbed|auto-generated C++ code specific for WhizniumDBE engine|
+wdbeopd1|auto-generated C++ code specific for WhizniumDBE operation engine 1 / non-template functionality|
+wdbeopd2|auto-generated C++ code specific for WhizniumDBE operation engine 2 / user-specific template functionality|
+
+### Code highlights
+
+Below is a non-exhaustive list of C++ source code files where interesting things happen:
+
+File|Functionality|
+-|-|
+wdbecmbd/CrdWdbeVer/DlgWdbeVerNew.cpp|UI element (dialog) where a new project version can be created|
+wdbecmbd/CrdWdbeRls/DlgWdbeRlsWrite.cpp|dialog which (re-)composes a project's source code tree, handles the required repository transactions, and which delegates code writing - fragmented into thousands of atomic operations - to the operation engines|
+wdbecmbd/IexWdbe/JobWdbeIexBdd.cpp|mixed auto-generared/manual parsing (and data collecting/writing) of basic device description model files; relevant method enterSgeParse()|
+wdbecmbd/IexWdbe/IexWdbeBdd.cpp|auto-generated combined XML/text reader/writer for basic device description model files|
+wdbecmbd/WdbeModbsc/WdbeModbscTplcpy.cpp|instantiate template modules using parameters from basic device description|
+wdbecmbd/WdbeModdet/WdbeModdetWiring.cpp|add ports and signals where necessary in order to establish connections to pins / higher-level ports and signals|
+wdbecmbd/WdbeMtpWrfpga/WdbeMtpWrfpgaCrcspec_32_v1_0.cpp|write polynomial-specific VHDL code for CRC algorithm|
+wdbecmbd/WdbeWrdev/WdbeWrdevCtr.cpp|write C++ code to conveniently invoke controller commands from the host system|
+wdbecmbd/WdbeWrfpga/WdbeWrfpgaEhostif.cpp|write unit-specific VHDL code for easy model host interface|
+wdbecmbd/WdbeWrfpga/WdbeWrfpgaMdlfine.cpp|fill in VHDL module skeleton with specifics such as conditional FSM transitions|
+wdbecmbd/WdbeWrfpga/WdbeWrfpgaMdlraw.cpp|write VHDL module skeleton|
+wdbecmbd/WdbeWrmcu/WdbeWrmcuMdlfine.cpp|write C code equivalent of VHDL state machine (part of experimental WhizniumDBE MCU suppport)|
+
+## Template files
+
+WhizniumDBE's automated source code generation relies on template files with inline placeholders and insertion points for multi-line code fragments. For each version of WhizniumDBE, the relevant template files can be found [online](https://mpsitech-public.s3.eu-central-1.amazonaws.com/WhizniumDBE/v1.0.2/files.tgz); they are part of the tool initialization routine.
+
+### Some highlights
+
+File|Functionality|
+-|-|
+Axihostif_Easy_v2_0.vhd|VHDL code to perform communications with the host system (commands and buffer transfers)|
+Axirx_v2_0.vhd|32bit AXI slave receiver VHDL code corresponding to handshake established in module Zynq_ip_AXI_v2.0.vhd (see below)|
+Spimaster_v1_0.vhd|SPI master interface VHDL code with adjustable bit rate, CPOL/CPHA and transfer length|
+Uartrx_v1_1.vhd|UART receiver VHDL code with adjustable baud rate and transfer length|
+UntXxxxYyyy_Easy.cpp|easy-model C++ code managing rx/tx protocol with device driver connecting to FPGA/MCU subsystem|
+SysXxxxYyyyy.cpp|full-model C++ code managing non-blocking command execution and buffer transfers with FPGA subsystem|
+Xxxx.vhd|VHDL constant definitions, "header file" for RTL module tree|
+Xxxxx.vhd|base VHDL module file|
+Zynq_ip_AXI_v2_0.vhd|AXI4-lite bus slave VHDL code based on Xilinx example, enhanced by protocol using distinct host write patterns to commence/end 32-bit transfers|
+
+## Deployment
+
 ## Resources for now
 
 ### Use cases
@@ -27,12 +84,12 @@ Most of these publications pre-date Whiznium's Open Source era.
 
 ## Upcoming documentation
 
-- The Whiznium book (draft available [here](https://mpsitech-public.s3.eu-central-1.amazonaws.com/book.pdf)), offering an introduction to WhizniumSBE/DBE by means of a handy use case in the first chapters, but also with a complete reference in the later chapters
+- The Whiznium book (draft available [here](https://mpsitech-public.s3.eu-central-1.amazonaws.com/book.pdf)), offering an introduction to WhizniumDBE/DBE by means of a handy use case in the first chapters, but also with a complete reference in the later chapters
 
 ## Related Repositories
 
 - The [WhizniumDBE core library](https://github.com/mpsitech/dbecore-WhizniumDBE-Core-Library)
-- [WhizniumSBE](https://github.com/mpsitech/wznm-WhizniumSBE), Whiznium Service Builder's Edition, the big brother for developing feature-rich single board computer applications with C++ as main programming language
+- [WhizniumDBE](https://github.com/mpsitech/wdbe-WhizniumDBE), Whiznium Service Builder's Edition, the big brother for developing feature-rich single board computer applications with C++ as main programming language
 
 ## Contact
 
