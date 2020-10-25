@@ -2,8 +2,8 @@
 	* \file Wdbe.cpp
 	* Wdbe global functionality (implementation)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #include "Wdbe.h"
@@ -1672,6 +1672,7 @@ string StubWdbe::getStub(
 	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEPINSTD) return getStubPinStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
 	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEPPHSTD) return getStubPphStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
 	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEPRCSTD) return getStubPrcStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEPRJSHORT) return getStubPrjShort(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
 	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEPRJSTD) return getStubPrjStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
 	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEPRSSTD) return getStubPrsStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
 	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEPRTSREF) return getStubPrtSref(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
@@ -1695,6 +1696,7 @@ string StubWdbe::getStub(
 	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEVARSTD) return getStubVarStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
 	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEVECSTD) return getStubVecStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
 	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEVERNO) return getStubVerNo(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEVERSHORT) return getStubVerShort(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
 	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEVERSTD) return getStubVerStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
 	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEVITSTD) return getStubVitStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
 
@@ -3017,6 +3019,48 @@ string StubWdbe::getStubPrcStd(
 	return stub;
 };
 
+string StubWdbe::getStubPrjShort(
+			DbsWdbe* dbswdbe
+			, const ubigint ref
+			, const uint ixWdbeVLocale
+			, const uint ixVNonetype
+			, Stcch* stcch
+			, stcchitemref_t* strefSub
+			, const bool refresh
+		) {
+	// example: "idhw"
+	string stub;
+
+	stcchitemref_t stref(VecWdbeVStub::STUBWDBEPRJSHORT, ref, ixWdbeVLocale);
+	Stcchitem* stit = NULL;
+
+	if (stcch) {
+		stit = stcch->getStitByStref(stref);
+		if (stit && !refresh) {
+			if (strefSub) stcch->link(stref, *strefSub);
+			return stit->stub;
+		};
+	};
+
+	if (ixVNonetype == Stub::VecVNonetype::DASH) stub = "-";
+	else if (ixVNonetype == Stub::VecVNonetype::SHORT) {
+		if (ixWdbeVLocale == VecWdbeVLocale::ENUS) stub = "(none)";
+	} else if (ixVNonetype == Stub::VecVNonetype::FULL) {
+		if (ixWdbeVLocale == VecWdbeVLocale::ENUS) stub = "(no project)";
+	};
+
+	if (ref != 0) {
+		if (dbswdbe->tblwdbemproject->loadShoByRef(ref, stub)) {
+			if (stcch) {
+				if (!stit) stit = stcch->addStit(stref);
+				stit->stub = stub;
+			};
+		};
+	};
+
+	return stub;
+};
+
 string StubWdbe::getStubPrjStd(
 			DbsWdbe* dbswdbe
 			, const ubigint ref
@@ -4032,6 +4076,50 @@ string StubWdbe::getStubVerNo(
 	return stub;
 };
 
+string StubWdbe::getStubVerShort(
+			DbsWdbe* dbswdbe
+			, const ubigint ref
+			, const uint ixWdbeVLocale
+			, const uint ixVNonetype
+			, Stcch* stcch
+			, stcchitemref_t* strefSub
+			, const bool refresh
+		) {
+	// example: "idhw v0.1.0"
+	string stub;
+
+	WdbeMVersion* rec = NULL;
+
+	stcchitemref_t stref(VecWdbeVStub::STUBWDBEVERSHORT, ref, ixWdbeVLocale);
+	Stcchitem* stit = NULL;
+
+	if (stcch) {
+		stit = stcch->getStitByStref(stref);
+		if (stit && !refresh) {
+			if (strefSub) stcch->link(stref, *strefSub);
+			return stit->stub;
+		};
+	};
+
+	if (ixVNonetype == Stub::VecVNonetype::DASH) stub = "-";
+	else if (ixVNonetype == Stub::VecVNonetype::SHORT) {
+		if (ixWdbeVLocale == VecWdbeVLocale::ENUS) stub = "(none)";
+	} else if (ixVNonetype == Stub::VecVNonetype::FULL) {
+		if (ixWdbeVLocale == VecWdbeVLocale::ENUS) stub = "(no version)";
+	};
+
+	if (ref != 0) {
+		if (dbswdbe->tblwdbemversion->loadRecByRef(ref, &rec)) {
+			if (stcch && !stit) stit = stcch->addStit(stref);
+			stub = getStubPrjShort(dbswdbe, rec->refWdbeMProject, ixWdbeVLocale, ixVNonetype, stcch, &stref) + " v" + to_string((int) (rec->Major)) + "." + to_string((int) (rec->Minor)) + "." + to_string((int) (rec->Sub)); // IP getStubVerShort --- ILINE
+			if (stit) stit->stub = stub;
+			delete rec;
+		};
+	};
+
+	return stub;
+};
+
 string StubWdbe::getStubVerStd(
 			DbsWdbe* dbswdbe
 			, const ubigint ref
@@ -4041,7 +4129,7 @@ string StubWdbe::getStubVerStd(
 			, stcchitemref_t* strefSub
 			, const bool refresh
 		) {
-	// example: "ICARUSDetectorHardwareControl 0.1.0"
+	// example: "ICARUSDetectorHardwareControl v0.1.0"
 	string stub;
 
 	WdbeMVersion* rec = NULL;
@@ -4070,7 +4158,7 @@ string StubWdbe::getStubVerStd(
 			// IP getStubVerStd --- IBEGIN
 			WdbeJMVersionState* verJste = NULL;
 
-			stub = getStubPrjStd(dbswdbe, rec->refWdbeMProject, ixWdbeVLocale, ixVNonetype, stcch, &stref) + " " + to_string((int) (rec->Major)) + "." + to_string((int) (rec->Minor)) + "." + to_string((int) (rec->Sub));
+			stub = getStubPrjStd(dbswdbe, rec->refWdbeMProject, ixWdbeVLocale, ixVNonetype, stcch, &stref) + " v" + to_string((int) (rec->Major)) + "." + to_string((int) (rec->Minor)) + "." + to_string((int) (rec->Sub));
 
 			if ((rec->ixVState != VecWdbeVMVersionState::READY) && (rec->ixVState != VecWdbeVMVersionState::ABANDON)) {
 				stub += " " + VecWdbeVMVersionState::getTitle(rec->ixVState, ixWdbeVLocale);

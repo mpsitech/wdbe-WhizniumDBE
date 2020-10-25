@@ -2,48 +2,57 @@
 	* \file DlgWdbeVerDetdd_evals.cpp
 	* job handler for job DlgWdbeVerDetdd (implementation of availability/activation evaluation)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 using namespace std;
 using namespace Sbecore;
 using namespace Xmlio;
 
-bool DlgWdbeVerDetdd::evalButDneActive(
+bool DlgWdbeVerDetdd::evalIfiUldActive(
 			DbsWdbe* dbswdbe
 		) {
-	// sge(idle|fail|done)
-
-	vector<bool> args;
-	bool a, b;
-
-	a = false; a = (ixVSge == VecVSge::IDLE);
-	args.push_back(a);
-	a = false; a = (ixVSge == VecVSge::FAIL);
-	args.push_back(a);
-	a = false; a = (ixVSge == VecVSge::DONE);
-	args.push_back(a);
-	b = args.back(); args.pop_back();
-	a = args.back(); args.pop_back();
-	args.push_back(a || b);
-	b = args.back(); args.pop_back();
-	a = args.back(); args.pop_back();
-	args.push_back(a || b);
-
-	return(args.back());
-};
-
-bool DlgWdbeVerDetdd::evalLfiDldActive(
-			DbsWdbe* dbswdbe
-		) {
-	// sge(fail)
+	// sge(idle)
 
 	vector<bool> args;
 	bool a;
 
-	a = false; a = (ixVSge == VecVSge::FAIL);
+	a = false; a = (ixVSge == VecVSge::IDLE);
 	args.push_back(a);
+
+	return(args.back());
+};
+
+bool DlgWdbeVerDetdd::evalImpButRunActive(
+			DbsWdbe* dbswdbe
+		) {
+	// sge(prsdone)
+
+	vector<bool> args;
+	bool a;
+
+	a = false; a = (ixVSge == VecVSge::PRSDONE);
+	args.push_back(a);
+
+	return(args.back());
+};
+
+bool DlgWdbeVerDetdd::evalImpButStoActive(
+			DbsWdbe* dbswdbe
+		) {
+	// sge(impidle|import)
+
+	vector<bool> args;
+	bool a, b;
+
+	a = false; a = (ixVSge == VecVSge::IMPIDLE);
+	args.push_back(a);
+	a = false; a = (ixVSge == VecVSge::IMPORT);
+	args.push_back(a);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
 
 	return(args.back());
 };
@@ -86,49 +95,40 @@ bool DlgWdbeVerDetdd::evalPprButStoActive(
 	return(args.back());
 };
 
-bool DlgWdbeVerDetdd::evalImpButRunActive(
+bool DlgWdbeVerDetdd::evalLfiDldActive(
 			DbsWdbe* dbswdbe
 		) {
-	// sge(prsdone)
+	// sge(fail)
 
 	vector<bool> args;
 	bool a;
 
-	a = false; a = (ixVSge == VecVSge::PRSDONE);
+	a = false; a = (ixVSge == VecVSge::FAIL);
 	args.push_back(a);
 
 	return(args.back());
 };
 
-bool DlgWdbeVerDetdd::evalImpButStoActive(
+bool DlgWdbeVerDetdd::evalButDneActive(
 			DbsWdbe* dbswdbe
 		) {
-	// sge(impidle|import)
+	// sge(idle|fail|done)
 
 	vector<bool> args;
 	bool a, b;
 
-	a = false; a = (ixVSge == VecVSge::IMPIDLE);
+	a = false; a = (ixVSge == VecVSge::IDLE);
 	args.push_back(a);
-	a = false; a = (ixVSge == VecVSge::IMPORT);
+	a = false; a = (ixVSge == VecVSge::FAIL);
+	args.push_back(a);
+	a = false; a = (ixVSge == VecVSge::DONE);
 	args.push_back(a);
 	b = args.back(); args.pop_back();
 	a = args.back(); args.pop_back();
 	args.push_back(a || b);
-
-	return(args.back());
-};
-
-bool DlgWdbeVerDetdd::evalIfiUldActive(
-			DbsWdbe* dbswdbe
-		) {
-	// sge(idle)
-
-	vector<bool> args;
-	bool a;
-
-	a = false; a = (ixVSge == VecVSge::IDLE);
-	args.push_back(a);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
 
 	return(args.back());
 };

@@ -2,8 +2,8 @@
 	* \file QryWdbePrcPrc1NVariable.h
 	* job handler for job QryWdbePrcPrc1NVariable (declarations)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifndef QRYWDBEPRCPRC1NVARIABLE_H
@@ -122,8 +122,8 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeVarMod_prcEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 	bool handleCallWdbeStubChgFromSelf(DbsWdbe* dbswdbe);
+	bool handleCallWdbeVarMod_prcEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 
 };
 

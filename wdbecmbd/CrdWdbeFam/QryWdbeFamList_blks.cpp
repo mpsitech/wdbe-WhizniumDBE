@@ -2,8 +2,8 @@
 	* \file QryWdbeFamList_blks.cpp
 	* job handler for job QryWdbeFamList (implementation of blocks)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 using namespace std;
@@ -19,8 +19,8 @@ uint QryWdbeFamList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "tit") return TIT;
 	if (s == "vnd") return VND;
+	if (s == "tit") return TIT;
 
 	return(0);
 };
@@ -28,8 +28,8 @@ uint QryWdbeFamList::VecVOrd::getIx(
 string QryWdbeFamList::VecVOrd::getSref(
 			const uint ix
 		) {
-	if (ix == TIT) return("tit");
 	if (ix == VND) return("vnd");
+	if (ix == TIT) return("tit");
 
 	return("");
 };

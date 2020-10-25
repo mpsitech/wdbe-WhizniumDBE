@@ -2,8 +2,8 @@
 	* \file CrdWdbeNav.h
 	* job handler for job CrdWdbeNav (declarations)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifndef CRDWDBENAV_H
@@ -13,16 +13,16 @@
 
 // IP include.cust --- INSERT
 
-#include "PnlWdbeNavAuxfct.h"
-#include "PnlWdbeNavDescr.h"
-#include "PnlWdbeNavCoredev.h"
-#include "PnlWdbeNavDevdev.h"
-#include "PnlWdbeNavGlobal.h"
-#include "PnlWdbeNavAdmin.h"
-#include "PnlWdbeNavPre.h"
-#include "PnlWdbeNavHeadbar.h"
-#include "DlgWdbeNavMnglic.h"
 #include "DlgWdbeNavLoaini.h"
+#include "DlgWdbeNavMnglic.h"
+#include "PnlWdbeNavHeadbar.h"
+#include "PnlWdbeNavPre.h"
+#include "PnlWdbeNavAdmin.h"
+#include "PnlWdbeNavGlobal.h"
+#include "PnlWdbeNavDevdev.h"
+#include "PnlWdbeNavCoredev.h"
+#include "PnlWdbeNavDescr.h"
+#include "PnlWdbeNavAuxfct.h"
 
 #define VecVWdbeNavDo CrdWdbeNav::VecVDo
 #define VecVWdbeNavSge CrdWdbeNav::VecVSge
@@ -403,16 +403,16 @@ public:
 	Sbecore::Xmlio::Feed feedFMcbAlert;
 	Sbecore::Xmlio::Feed feedFSge;
 
-	PnlWdbeNavAuxfct* pnlauxfct;
-	PnlWdbeNavDescr* pnldescr;
-	PnlWdbeNavCoredev* pnlcoredev;
-	PnlWdbeNavDevdev* pnldevdev;
-	PnlWdbeNavGlobal* pnlglobal;
-	PnlWdbeNavAdmin* pnladmin;
-	PnlWdbeNavPre* pnlpre;
-	PnlWdbeNavHeadbar* pnlheadbar;
-	DlgWdbeNavMnglic* dlgmnglic;
 	DlgWdbeNavLoaini* dlgloaini;
+	DlgWdbeNavMnglic* dlgmnglic;
+	PnlWdbeNavHeadbar* pnlheadbar;
+	PnlWdbeNavPre* pnlpre;
+	PnlWdbeNavAdmin* pnladmin;
+	PnlWdbeNavGlobal* pnlglobal;
+	PnlWdbeNavDevdev* pnldevdev;
+	PnlWdbeNavCoredev* pnlcoredev;
+	PnlWdbeNavDescr* pnldescr;
+	PnlWdbeNavAuxfct* pnlauxfct;
 
 	// IP vars.cust --- INSERT
 

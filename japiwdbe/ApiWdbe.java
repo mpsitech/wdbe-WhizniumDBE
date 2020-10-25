@@ -2,8 +2,8 @@
   * \file ApiWdbe.java
   * Wdbe Java API package global functionality
   * \author Alexander Wirthmueller
-  * \date created: 11 Jul 2020
-  * \date modified: 11 Jul 2020
+  * \date created: 23 Aug 2020
+  * \date modified: 23 Aug 2020
   */
 
 package apiwdbe;
@@ -22,10 +22,10 @@ import sbecore.*;
 
 public class ApiWdbe {
 
-	public static final String WDBE_VERSION = "1.0.2";
+	public static final String WDBE_VERSION = "1.0.3";
 	public static final int WDBE_VERSION_MAJOR = 1;
 	public static final int WDBE_VERSION_MINOR = 0;
-	public static final int WDBE_VERSION_SUB = 2;
+	public static final int WDBE_VERSION_SUB = 3;
 
 	public static DpchEngWdbe readDpchEng(
 				String s

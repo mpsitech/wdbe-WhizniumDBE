@@ -2,8 +2,8 @@
 	* \file QryWdbeMchList.cpp
 	* API code for job QryWdbeMchList (implementation)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #include "QryWdbeMchList.h"
@@ -21,8 +21,8 @@ uint QryWdbeMchList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "pla") return PLA;
 	if (s == "srf") return SRF;
+	if (s == "pla") return PLA;
 
 	return(0);
 };
@@ -30,8 +30,8 @@ uint QryWdbeMchList::VecVOrd::getIx(
 string QryWdbeMchList::VecVOrd::getSref(
 			const uint ix
 		) {
-	if (ix == PLA) return("pla");
 	if (ix == SRF) return("srf");
+	if (ix == PLA) return("pla");
 
 	return("");
 };

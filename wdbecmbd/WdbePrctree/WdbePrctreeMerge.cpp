@@ -2,8 +2,8 @@
 	* \file WdbePrctreeMerge.cpp
 	* Wdbe operation processor - merge extract file tree into template file tree (implementation)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifdef WDBECMBD

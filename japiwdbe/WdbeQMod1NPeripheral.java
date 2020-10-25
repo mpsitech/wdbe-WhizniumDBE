@@ -2,8 +2,8 @@
   * \file WdbeQMod1NPeripheral.h
   * Java API code for record of table TblWdbeQMod1NPeripheral
   * \author Alexander Wirthmueller
-  * \date created: 11 Jul 2020
-  * \date modified: 11 Jul 2020
+  * \date created: 23 Aug 2020
+  * \date modified: 23 Aug 2020
   */
 
 package apiwdbe;

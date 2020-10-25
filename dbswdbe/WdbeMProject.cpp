@@ -2,8 +2,8 @@
 	* \file WdbeMProject.cpp
 	* database access for table TblWdbeMProject (implementation)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #include "WdbeMProject.h"
@@ -237,6 +237,13 @@ void TblWdbeMProject::removeRecByRef(
 bool TblWdbeMProject::loadRecByRef(
 			ubigint ref
 			, WdbeMProject** rec
+		) {
+	return false;
+};
+
+bool TblWdbeMProject::loadShoByRef(
+			ubigint ref
+			, string& Short
 		) {
 	return false;
 };
@@ -504,6 +511,13 @@ bool MyTblWdbeMProject::loadRecByRef(
 	return loadRecBySQL("SELECT * FROM TblWdbeMProject WHERE ref = " + to_string(ref), rec);
 };
 
+bool MyTblWdbeMProject::loadShoByRef(
+			ubigint ref
+			, string& Short
+		) {
+	return loadStringBySQL("SELECT Short FROM TblWdbeMProject WHERE ref = " + to_string(ref) + "", Short);
+};
+
 bool MyTblWdbeMProject::loadTitByRef(
 			ubigint ref
 			, string& Title
@@ -534,6 +548,7 @@ void PgTblWdbeMProject::initStatements() {
 	createStatement("TblWdbeMProject_removeRecByRef", "DELETE FROM TblWdbeMProject WHERE ref = $1", 1);
 
 	createStatement("TblWdbeMProject_loadRecByRef", "SELECT ref, grp, own, refWdbeMVersion, Short, Title, Easy, Giturl, Comment FROM TblWdbeMProject WHERE ref = $1", 1);
+	createStatement("TblWdbeMProject_loadShoByRef", "SELECT Short FROM TblWdbeMProject WHERE ref = $1", 1);
 	createStatement("TblWdbeMProject_loadTitByRef", "SELECT Title FROM TblWdbeMProject WHERE ref = $1", 1);
 };
 
@@ -839,6 +854,23 @@ bool PgTblWdbeMProject::loadRecByRef(
 	const int f[] = {1};
 
 	return loadRecByStmt("TblWdbeMProject_loadRecByRef", 1, vals, l, f, rec);
+};
+
+bool PgTblWdbeMProject::loadShoByRef(
+			ubigint ref
+			, string& Short
+		) {
+	ubigint _ref = htonl64(ref);
+
+	const char* vals[] = {
+		(char*) &_ref
+	};
+	const int l[] = {
+		sizeof(ubigint)
+	};
+	const int f[] = {1};
+
+	return loadStringByStmt("TblWdbeMProject_loadShoByRef", 1, vals, l, f, Short);
 };
 
 bool PgTblWdbeMProject::loadTitByRef(

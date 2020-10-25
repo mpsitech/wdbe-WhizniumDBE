@@ -2,8 +2,8 @@
 	* \file QryWdbeVarList_blks.cpp
 	* job handler for job QryWdbeVarList (implementation of blocks)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 using namespace std;
@@ -19,8 +19,8 @@ uint QryWdbeVarList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "prc") return PRC;
 	if (s == "srf") return SRF;
+	if (s == "prc") return PRC;
 
 	return(0);
 };
@@ -28,8 +28,8 @@ uint QryWdbeVarList::VecVOrd::getIx(
 string QryWdbeVarList::VecVOrd::getSref(
 			const uint ix
 		) {
-	if (ix == PRC) return("prc");
 	if (ix == SRF) return("srf");
+	if (ix == PRC) return("prc");
 
 	return("");
 };

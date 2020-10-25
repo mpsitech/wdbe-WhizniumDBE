@@ -1,8 +1,8 @@
 # file Makefile
 # make file for CrdWdbeMch card job handler, release wdbed_jack
 # author Alexander Wirthmueller
-# date created: 11 Jul 2020
-# modified: 11 Jul 2020
+# date created: 23 Aug 2020
+# modified: 23 Aug 2020
 
 include ../Makefile.inc
 
@@ -15,7 +15,7 @@ STATLIBFLAGS = rcs
 INCPATH = -I$(SRCROOT)/dbswdbe -I$(SRCROOT)/wdbed/VecWdbe -I$(SRCROOT)/wdbed/IexWdbe -I$(SRCROOT)/wdbed
 INCPATH += -I/home/mpsitech/src/apiwzlm -I/usr/include -I/usr/include/jsoncpp -I/usr/include/libxml2 -I/usr/include/mysql -I/usr/include/postgresql -I/usr/local/include
 
-OBJS = CrdWdbeMch.o PnlWdbeMchList.o QryWdbeMchList.o PnlWdbeMchHeadbar.o PnlWdbeMchRec.o PnlWdbeMch1NRelease.o QryWdbeMch1NRelease.o PnlWdbeMchAPar.o QryWdbeMchAPar.o PnlWdbeMchAMakefile.o QryWdbeMchAMakefile.o PnlWdbeMchDetail.o
+OBJS = CrdWdbeMch.o PnlWdbeMchRec.o PnlWdbeMchDetail.o PnlWdbeMchAPar.o QryWdbeMchAPar.o PnlWdbeMchAMakefile.o QryWdbeMchAMakefile.o PnlWdbeMch1NRelease.o QryWdbeMch1NRelease.o PnlWdbeMchHeadbar.o PnlWdbeMchList.o QryWdbeMchList.o
 
 LIB = libcrdwdbemch
 

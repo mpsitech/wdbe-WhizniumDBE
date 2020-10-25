@@ -2,8 +2,8 @@
 	* \file PnlWdbeBnkRec.h
 	* job handler for job PnlWdbeBnkRec (declarations)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifndef PNLWDBEBNKREC_H
@@ -13,8 +13,8 @@
 
 // IP include.cust --- INSERT
 
-#include "PnlWdbeBnk1NPin.h"
 #include "PnlWdbeBnkDetail.h"
+#include "PnlWdbeBnk1NPin.h"
 
 #define VecVWdbeBnkRecDo PnlWdbeBnkRec::VecVDo
 
@@ -167,8 +167,8 @@ public:
 	ContInf continf;
 	StatShr statshr;
 
-	PnlWdbeBnk1NPin* pnl1npin;
 	PnlWdbeBnkDetail* pnldetail;
+	PnlWdbeBnk1NPin* pnl1npin;
 
 	WdbeMBank recBnk;
 
@@ -202,9 +202,9 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeBnkUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
-	bool handleCallWdbeBnk_untEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
 	bool handleCallWdbeBnk_unt_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
+	bool handleCallWdbeBnk_untEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeBnkUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 
 };
 

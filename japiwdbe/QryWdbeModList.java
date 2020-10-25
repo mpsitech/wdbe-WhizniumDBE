@@ -2,8 +2,8 @@
   * \file QryWdbeModList.java
   * Java API code for job QryWdbeModList
   * \author Alexander Wirthmueller
-  * \date created: 11 Jul 2020
-  * \date modified: 11 Jul 2020
+  * \date created: 23 Aug 2020
+  * \date modified: 23 Aug 2020
   */
 
 package apiwdbe;
@@ -18,24 +18,24 @@ public class QryWdbeModList {
 		*/
 	public static class VecVOrd {
 
-		public static final int TPL = 1;
-		public static final int SUP = 2;
-		public static final int HKU = 3;
-		public static final int HKT = 4;
-		public static final int TYP = 5;
-		public static final int SRF = 6;
+		public static final int SRF = 1;
+		public static final int TYP = 2;
+		public static final int HKT = 3;
+		public static final int HKU = 4;
+		public static final int SUP = 5;
+		public static final int TPL = 6;
 
 		public static int getIx(
 					String sref
 				) {
 			String s = sref.toLowerCase();
 
-			if (s.equals("tpl")) return TPL;
-			if (s.equals("sup")) return SUP;
-			if (s.equals("hku")) return HKU;
-			if (s.equals("hkt")) return HKT;
-			if (s.equals("typ")) return TYP;
 			if (s.equals("srf")) return SRF;
+			if (s.equals("typ")) return TYP;
+			if (s.equals("hkt")) return HKT;
+			if (s.equals("hku")) return HKU;
+			if (s.equals("sup")) return SUP;
+			if (s.equals("tpl")) return TPL;
 
 			return 0;
 		};
@@ -43,12 +43,12 @@ public class QryWdbeModList {
 		public static String getSref(
 					int ix
 				) {
-			if (ix == TPL) return("tpl");
-			if (ix == SUP) return("sup");
-			if (ix == HKU) return("hku");
-			if (ix == HKT) return("hkt");
-			if (ix == TYP) return("typ");
 			if (ix == SRF) return("srf");
+			if (ix == TYP) return("typ");
+			if (ix == HKT) return("hkt");
+			if (ix == HKU) return("hku");
+			if (ix == SUP) return("sup");
+			if (ix == TPL) return("tpl");
 
 			return "";
 		};

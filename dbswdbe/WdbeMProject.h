@@ -2,8 +2,8 @@
 	* \file WdbeMProject.h
 	* database access for table TblWdbeMProject (declarations)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifndef WDBEMPROJECT_H
@@ -89,6 +89,7 @@ public:
 	virtual void removeRecByRef(Sbecore::ubigint ref);
 
 	virtual bool loadRecByRef(Sbecore::ubigint ref, WdbeMProject** rec);
+	virtual bool loadShoByRef(Sbecore::ubigint ref, std::string& Short);
 	virtual bool loadTitByRef(Sbecore::ubigint ref, std::string& Title);
 	Sbecore::ubigint loadRstByRefs(std::vector<Sbecore::ubigint>& refs, const bool append, ListWdbeMProject& rst);
 };
@@ -122,6 +123,7 @@ public:
 	void removeRecByRef(Sbecore::ubigint ref);
 
 	bool loadRecByRef(Sbecore::ubigint ref, WdbeMProject** rec);
+	bool loadShoByRef(Sbecore::ubigint ref, std::string& Short);
 	bool loadTitByRef(Sbecore::ubigint ref, std::string& Title);
 };
 #endif
@@ -155,6 +157,7 @@ public:
 	void removeRecByRef(Sbecore::ubigint ref);
 
 	bool loadRecByRef(Sbecore::ubigint ref, WdbeMProject** rec);
+	bool loadShoByRef(Sbecore::ubigint ref, std::string& Short);
 	bool loadTitByRef(Sbecore::ubigint ref, std::string& Title);
 };
 #endif

@@ -2,8 +2,8 @@
 	* \file PnlWdbeMchRec_blks.cpp
 	* job handler for job PnlWdbeMchRec (implementation of blocks)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 using namespace std;
@@ -97,8 +97,8 @@ void PnlWdbeMchRec::StatApp::writeXML(
 			, string difftag
 			, bool shorttags
 			, const bool initdoneDetail
-			, const bool initdoneAMakefile
 			, const bool initdoneAPar
+			, const bool initdoneAMakefile
 			, const bool initdone1NRelease
 		) {
 	if (difftag.length() == 0) difftag = "StatAppWdbeMchRec";
@@ -109,8 +109,8 @@ void PnlWdbeMchRec::StatApp::writeXML(
 
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
 		writeBoolAttr(wr, itemtag, "sref", "initdoneDetail", initdoneDetail);
-		writeBoolAttr(wr, itemtag, "sref", "initdoneAMakefile", initdoneAMakefile);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneAPar", initdoneAPar);
+		writeBoolAttr(wr, itemtag, "sref", "initdoneAMakefile", initdoneAMakefile);
 		writeBoolAttr(wr, itemtag, "sref", "initdone1NRelease", initdone1NRelease);
 	xmlTextWriterEndElement(wr);
 };
@@ -122,8 +122,8 @@ void PnlWdbeMchRec::StatApp::writeXML(
 PnlWdbeMchRec::StatShr::StatShr(
 			const uint ixWdbeVExpstate
 			, const ubigint jrefDetail
-			, const ubigint jrefAMakefile
 			, const ubigint jrefAPar
+			, const ubigint jrefAMakefile
 			, const ubigint jref1NRelease
 			, const bool ButRegularizeActive
 		) :
@@ -131,12 +131,12 @@ PnlWdbeMchRec::StatShr::StatShr(
 		{
 	this->ixWdbeVExpstate = ixWdbeVExpstate;
 	this->jrefDetail = jrefDetail;
-	this->jrefAMakefile = jrefAMakefile;
 	this->jrefAPar = jrefAPar;
+	this->jrefAMakefile = jrefAMakefile;
 	this->jref1NRelease = jref1NRelease;
 	this->ButRegularizeActive = ButRegularizeActive;
 
-	mask = {IXWDBEVEXPSTATE, JREFDETAIL, JREFAMAKEFILE, JREFAPAR, JREF1NRELEASE, BUTREGULARIZEACTIVE};
+	mask = {IXWDBEVEXPSTATE, JREFDETAIL, JREFAPAR, JREFAMAKEFILE, JREF1NRELEASE, BUTREGULARIZEACTIVE};
 };
 
 void PnlWdbeMchRec::StatShr::writeXML(
@@ -153,8 +153,8 @@ void PnlWdbeMchRec::StatShr::writeXML(
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
 		writeStringAttr(wr, itemtag, "sref", "srefIxWdbeVExpstate", VecWdbeVExpstate::getSref(ixWdbeVExpstate));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefDetail", Scr::scramble(jrefDetail));
-		writeStringAttr(wr, itemtag, "sref", "scrJrefAMakefile", Scr::scramble(jrefAMakefile));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefAPar", Scr::scramble(jrefAPar));
+		writeStringAttr(wr, itemtag, "sref", "scrJrefAMakefile", Scr::scramble(jrefAMakefile));
 		writeStringAttr(wr, itemtag, "sref", "scrJref1NRelease", Scr::scramble(jref1NRelease));
 		writeBoolAttr(wr, itemtag, "sref", "ButRegularizeActive", ButRegularizeActive);
 	xmlTextWriterEndElement(wr);
@@ -167,8 +167,8 @@ set<uint> PnlWdbeMchRec::StatShr::comm(
 
 	if (ixWdbeVExpstate == comp->ixWdbeVExpstate) insert(items, IXWDBEVEXPSTATE);
 	if (jrefDetail == comp->jrefDetail) insert(items, JREFDETAIL);
-	if (jrefAMakefile == comp->jrefAMakefile) insert(items, JREFAMAKEFILE);
 	if (jrefAPar == comp->jrefAPar) insert(items, JREFAPAR);
+	if (jrefAMakefile == comp->jrefAMakefile) insert(items, JREFAMAKEFILE);
 	if (jref1NRelease == comp->jref1NRelease) insert(items, JREF1NRELEASE);
 	if (ButRegularizeActive == comp->ButRegularizeActive) insert(items, BUTREGULARIZEACTIVE);
 
@@ -183,7 +183,7 @@ set<uint> PnlWdbeMchRec::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {IXWDBEVEXPSTATE, JREFDETAIL, JREFAMAKEFILE, JREFAPAR, JREF1NRELEASE, BUTREGULARIZEACTIVE};
+	diffitems = {IXWDBEVEXPSTATE, JREFDETAIL, JREFAPAR, JREFAMAKEFILE, JREF1NRELEASE, BUTREGULARIZEACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);

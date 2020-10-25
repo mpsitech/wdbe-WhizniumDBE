@@ -2,8 +2,8 @@
 	* \file CrdWdbeUtl.h
 	* job handler for job CrdWdbeUtl (declarations)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifndef CRDWDBEUTL_H
@@ -13,10 +13,10 @@
 
 // IP include.cust --- INSERT
 
-#include "PnlWdbeUtlHeadbar.h"
 #include "DlgWdbeUtlExtrip.h"
-#include "DlgWdbeUtlMrgip.h"
 #include "DlgWdbeUtlIexconv.h"
+#include "DlgWdbeUtlMrgip.h"
+#include "PnlWdbeUtlHeadbar.h"
 
 #define VecVWdbeUtlDo CrdWdbeUtl::VecVDo
 #define VecVWdbeUtlSge CrdWdbeUtl::VecVSge
@@ -193,10 +193,10 @@ public:
 	Sbecore::Xmlio::Feed feedFMcbAlert;
 	Sbecore::Xmlio::Feed feedFSge;
 
-	PnlWdbeUtlHeadbar* pnlheadbar;
 	DlgWdbeUtlExtrip* dlgextrip;
-	DlgWdbeUtlMrgip* dlgmrgip;
 	DlgWdbeUtlIexconv* dlgiexconv;
+	DlgWdbeUtlMrgip* dlgmrgip;
+	PnlWdbeUtlHeadbar* pnlheadbar;
 
 	// IP vars.cust --- INSERT
 

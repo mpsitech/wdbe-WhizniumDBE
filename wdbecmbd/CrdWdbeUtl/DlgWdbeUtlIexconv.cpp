@@ -2,8 +2,8 @@
 	* \file DlgWdbeUtlIexconv.cpp
 	* job handler for job DlgWdbeUtlIexconv (implementation)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifdef WDBECMBD
@@ -99,8 +99,8 @@ void DlgWdbeUtlIexconv::refreshCnv(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
 		) {
-	StatShrCnv oldStatshrcnv(statshrcnv);
 	ContInfCnv oldContinfcnv(continfcnv);
+	StatShrCnv oldStatshrcnv(statshrcnv);
 
 	// IP refreshCnv --- RBEGIN
 	// continfcnv
@@ -111,16 +111,16 @@ void DlgWdbeUtlIexconv::refreshCnv(
 	statshrcnv.ButStoActive = evalCnvButStoActive(dbswdbe);
 
 	// IP refreshCnv --- REND
-	if (statshrcnv.diff(&oldStatshrcnv).size() != 0) insert(moditems, DpchEngData::STATSHRCNV);
 	if (continfcnv.diff(&oldContinfcnv).size() != 0) insert(moditems, DpchEngData::CONTINFCNV);
+	if (statshrcnv.diff(&oldStatshrcnv).size() != 0) insert(moditems, DpchEngData::STATSHRCNV);
 };
 
 void DlgWdbeUtlIexconv::refreshRes(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
 		) {
-	ContInfRes oldContinfres(continfres);
 	StatShrRes oldStatshrres(statshrres);
+	ContInfRes oldContinfres(continfres);
 
 	// IP refreshRes --- RBEGIN
 	// statshrres
@@ -131,32 +131,32 @@ void DlgWdbeUtlIexconv::refreshRes(
 	else continfres.Dld = "converted";
 
 	// IP refreshRes --- REND
-	if (continfres.diff(&oldContinfres).size() != 0) insert(moditems, DpchEngData::CONTINFRES);
 	if (statshrres.diff(&oldStatshrres).size() != 0) insert(moditems, DpchEngData::STATSHRRES);
+	if (continfres.diff(&oldContinfres).size() != 0) insert(moditems, DpchEngData::CONTINFRES);
 };
 
 void DlgWdbeUtlIexconv::refresh(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
 		) {
-	StatShr oldStatshr(statshr);
-	ContIac oldContiac(contiac);
 	ContInf oldContinf(continf);
+	ContIac oldContiac(contiac);
+	StatShr oldStatshr(statshr);
 
 	// IP refresh --- BEGIN
-	// statshr
-	statshr.ButDneActive = evalButDneActive(dbswdbe);
+	// continf
+	continf.numFSge = ixVSge;
 
 	// contiac
 	contiac.numFDse = ixVDit;
 
-	// continf
-	continf.numFSge = ixVSge;
+	// statshr
+	statshr.ButDneActive = evalButDneActive(dbswdbe);
 
 	// IP refresh --- END
-	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
-	if (contiac.diff(&oldContiac).size() != 0) insert(moditems, DpchEngData::CONTIAC);
 	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
+	if (contiac.diff(&oldContiac).size() != 0) insert(moditems, DpchEngData::CONTIAC);
+	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
 
 	refreshSrc(dbswdbe, moditems);
 	refreshCnv(dbswdbe, moditems);

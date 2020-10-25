@@ -1,8 +1,8 @@
 # file Makefile
 # make file for CrdWdbeSil card job handler, release wdbed_jack
 # author Alexander Wirthmueller
-# date created: 11 Jul 2020
-# modified: 11 Jul 2020
+# date created: 23 Aug 2020
+# modified: 23 Aug 2020
 
 include ../Makefile.inc
 
@@ -15,7 +15,7 @@ STATLIBFLAGS = rcs
 INCPATH = -I$(SRCROOT)/dbswdbe -I$(SRCROOT)/wdbed/VecWdbe -I$(SRCROOT)/wdbed/IexWdbe -I$(SRCROOT)/wdbed
 INCPATH += -I/home/mpsitech/src/apiwzlm -I/usr/include -I/usr/include/jsoncpp -I/usr/include/libxml2 -I/usr/include/mysql -I/usr/include/postgresql -I/usr/local/include
 
-OBJS = CrdWdbeSil.o PnlWdbeSilList.o QryWdbeSilList.o PnlWdbeSilHeadbar.o PnlWdbeSilRec.o PnlWdbeSilHk1NModule.o QryWdbeSilHk1NModule.o PnlWdbeSilRef1NCommand.o QryWdbeSilRef1NCommand.o PnlWdbeSilHk1NVector.o QryWdbeSilHk1NVector.o PnlWdbeSilRef1NError.o QryWdbeSilRef1NError.o PnlWdbeSil1NTarget.o QryWdbeSil1NTarget.o PnlWdbeSilFwd1NController.o QryWdbeSilFwd1NController.o PnlWdbeSil1NBank.o QryWdbeSil1NBank.o PnlWdbeSilSil1NUnit.o QryWdbeSilSil1NUnit.o PnlWdbeSil1NPeripheral.o QryWdbeSil1NPeripheral.o PnlWdbeSilDetail.o
+OBJS = CrdWdbeSil.o PnlWdbeSilRec.o PnlWdbeSilDetail.o PnlWdbeSil1NBank.o QryWdbeSil1NBank.o PnlWdbeSilFwd1NController.o QryWdbeSilFwd1NController.o PnlWdbeSil1NTarget.o QryWdbeSil1NTarget.o PnlWdbeSilSil1NUnit.o QryWdbeSilSil1NUnit.o PnlWdbeSil1NPeripheral.o QryWdbeSil1NPeripheral.o PnlWdbeSilRef1NCommand.o QryWdbeSilRef1NCommand.o PnlWdbeSilHk1NModule.o QryWdbeSilHk1NModule.o PnlWdbeSilHk1NVector.o QryWdbeSilHk1NVector.o PnlWdbeSilRef1NError.o QryWdbeSilRef1NError.o PnlWdbeSilHeadbar.o PnlWdbeSilList.o QryWdbeSilList.o
 
 LIB = libcrdwdbesil
 

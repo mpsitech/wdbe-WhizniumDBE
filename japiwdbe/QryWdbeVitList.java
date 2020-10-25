@@ -2,8 +2,8 @@
   * \file QryWdbeVitList.java
   * Java API code for job QryWdbeVitList
   * \author Alexander Wirthmueller
-  * \date created: 11 Jul 2020
-  * \date modified: 11 Jul 2020
+  * \date created: 23 Aug 2020
+  * \date modified: 23 Aug 2020
   */
 
 package apiwdbe;
@@ -18,16 +18,16 @@ public class QryWdbeVitList {
 		*/
 	public static class VecVOrd {
 
-		public static final int VEC = 1;
-		public static final int SRF = 2;
+		public static final int SRF = 1;
+		public static final int VEC = 2;
 
 		public static int getIx(
 					String sref
 				) {
 			String s = sref.toLowerCase();
 
-			if (s.equals("vec")) return VEC;
 			if (s.equals("srf")) return SRF;
+			if (s.equals("vec")) return VEC;
 
 			return 0;
 		};
@@ -35,8 +35,8 @@ public class QryWdbeVitList {
 		public static String getSref(
 					int ix
 				) {
-			if (ix == VEC) return("vec");
 			if (ix == SRF) return("srf");
+			if (ix == VEC) return("vec");
 
 			return "";
 		};

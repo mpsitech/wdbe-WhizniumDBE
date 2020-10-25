@@ -2,8 +2,8 @@
 	* \file QryWdbePrjList_blks.cpp
 	* job handler for job QryWdbePrjList (implementation of blocks)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 using namespace std;
@@ -19,11 +19,11 @@ uint QryWdbePrjList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "ver") return VER;
-	if (s == "tit") return TIT;
-	if (s == "sho") return SHO;
-	if (s == "own") return OWN;
 	if (s == "grp") return GRP;
+	if (s == "own") return OWN;
+	if (s == "sho") return SHO;
+	if (s == "tit") return TIT;
+	if (s == "ver") return VER;
 
 	return(0);
 };
@@ -31,11 +31,11 @@ uint QryWdbePrjList::VecVOrd::getIx(
 string QryWdbePrjList::VecVOrd::getSref(
 			const uint ix
 		) {
-	if (ix == VER) return("ver");
-	if (ix == TIT) return("tit");
-	if (ix == SHO) return("sho");
-	if (ix == OWN) return("own");
 	if (ix == GRP) return("grp");
+	if (ix == OWN) return("own");
+	if (ix == SHO) return("sho");
+	if (ix == TIT) return("tit");
+	if (ix == VER) return("ver");
 
 	return("");
 };

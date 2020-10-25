@@ -2,15 +2,15 @@
 	* \file PnlWdbeModRec_evals.cpp
 	* job handler for job PnlWdbeModRec (implementation of availability/activation evaluation)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 using namespace std;
 using namespace Sbecore;
 using namespace Xmlio;
 
-bool PnlWdbeModRec::evalPnlctrref1nerrorAvail(
+bool PnlWdbeModRec::evalPnlctrref1ncommandAvail(
 			DbsWdbe* dbswdbe
 		) {
 	// !mdl.ctrEq(0)
@@ -42,7 +42,7 @@ bool PnlWdbeModRec::evalPnlctrhk1nvectorAvail(
 	return(args.back());
 };
 
-bool PnlWdbeModRec::evalPnlctrref1ncommandAvail(
+bool PnlWdbeModRec::evalPnlctrref1nerrorAvail(
 			DbsWdbe* dbswdbe
 		) {
 	// !mdl.ctrEq(0)

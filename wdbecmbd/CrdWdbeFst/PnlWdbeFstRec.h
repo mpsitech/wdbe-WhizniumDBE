@@ -2,8 +2,8 @@
 	* \file PnlWdbeFstRec.h
 	* job handler for job PnlWdbeFstRec (declarations)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifndef PNLWDBEFSTREC_H
@@ -13,8 +13,8 @@
 
 // IP include.cust --- INSERT
 
-#include "PnlWdbeFstAStep.h"
 #include "PnlWdbeFstDetail.h"
+#include "PnlWdbeFstAStep.h"
 
 #define VecVWdbeFstRecDo PnlWdbeFstRec::VecVDo
 
@@ -167,8 +167,8 @@ public:
 	ContInf continf;
 	StatShr statshr;
 
-	PnlWdbeFstAStep* pnlastep;
 	PnlWdbeFstDetail* pnldetail;
+	PnlWdbeFstAStep* pnlastep;
 
 	WdbeMFsmstate recFst;
 
@@ -202,9 +202,9 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeFstUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
-	bool handleCallWdbeFst_fsmEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
 	bool handleCallWdbeFst_cluEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeFst_fsmEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeFstUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 
 };
 

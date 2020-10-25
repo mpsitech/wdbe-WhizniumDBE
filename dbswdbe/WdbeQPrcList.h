@@ -2,8 +2,8 @@
 	* \file WdbeQPrcList.h
 	* Dbs and XML wrapper for table TblWdbeQPrcList (declarations)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifndef WDBEQPRCLIST_H

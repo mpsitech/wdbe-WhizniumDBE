@@ -2,8 +2,8 @@
 	* \file QryWdbeUntHk1NModule.h
 	* job handler for job QryWdbeUntHk1NModule (declarations)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifndef QRYWDBEUNTHK1NMODULE_H
@@ -122,8 +122,8 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeMdlMod_hktHkuEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 	bool handleCallWdbeStubChgFromSelf(DbsWdbe* dbswdbe);
+	bool handleCallWdbeMdlMod_hktHkuEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 
 };
 

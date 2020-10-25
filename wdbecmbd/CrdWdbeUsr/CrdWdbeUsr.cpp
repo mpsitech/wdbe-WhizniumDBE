@@ -2,8 +2,8 @@
 	* \file CrdWdbeUsr.cpp
 	* job handler for job CrdWdbeUsr (implementation)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifdef WDBECMBD
@@ -42,19 +42,21 @@ CrdWdbeUsr::CrdWdbeUsr(
 	feedFSge.tag = "FeedFSge";
 	VecVSge::fillFeed(feedFSge);
 
-	pnllist = NULL;
-	pnlheadbar = NULL;
-	pnlrec = NULL;
 	dlgmngkeypair = NULL;
+	pnlrec = NULL;
+	pnlheadbar = NULL;
+	pnllist = NULL;
 
 	// IP constructor.cust1 --- INSERT
 
-	// initialize according to ref
-	changeRef(dbswdbe, jref, ((ref+1) == 0) ? 0 : ref, false);
+	if ((ref + 1) != 0) xchg->triggerIxRefCall(dbswdbe, VecWdbeVCall::CALLWDBEREFPRESET, jref, VecWdbeVPreset::PREWDBEREFUSR, ref);
 
-	pnllist = new PnlWdbeUsrList(xchg, dbswdbe, jref, ixWdbeVLocale);
-	pnlheadbar = new PnlWdbeUsrHeadbar(xchg, dbswdbe, jref, ixWdbeVLocale);
+	// initialize according to ref
+	changeRef(dbswdbe, jref, ((ref + 1) == 0) ? 0 : ref, false);
+
 	pnlrec = new PnlWdbeUsrRec(xchg, dbswdbe, jref, ixWdbeVLocale);
+	pnlheadbar = new PnlWdbeUsrHeadbar(xchg, dbswdbe, jref, ixWdbeVLocale);
+	pnllist = new PnlWdbeUsrList(xchg, dbswdbe, jref, ixWdbeVLocale);
 
 	// IP constructor.cust2 --- INSERT
 
@@ -67,9 +69,9 @@ CrdWdbeUsr::CrdWdbeUsr(
 
 	changeStage(dbswdbe, VecVSge::IDLE);
 
-	xchg->addClstn(VecWdbeVCall::CALLWDBEREFPRESET, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecWdbeVCall::CALLWDBESTATCHG, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBEDLGCLOSE, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBESTATCHG, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBEREFPRESET, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -253,39 +255,13 @@ void CrdWdbeUsr::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBEREFPRESET) {
-		call->abort = handleCallWdbeRefPreSet(dbswdbe, call->jref, call->argInv.ix, call->argInv.ref);
+	if (call->ixVCall == VecWdbeVCall::CALLWDBEDLGCLOSE) {
+		call->abort = handleCallWdbeDlgClose(dbswdbe, call->jref);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBESTATCHG) {
 		call->abort = handleCallWdbeStatChg(dbswdbe, call->jref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEDLGCLOSE) {
-		call->abort = handleCallWdbeDlgClose(dbswdbe, call->jref);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEREFPRESET) {
+		call->abort = handleCallWdbeRefPreSet(dbswdbe, call->jref, call->argInv.ix, call->argInv.ref);
 	};
-};
-
-bool CrdWdbeUsr::handleCallWdbeRefPreSet(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-			, const uint ixInv
-			, const ubigint refInv
-		) {
-	bool retval = false;
-
-	if (ixInv == VecWdbeVPreset::PREWDBEREFUSR) {
-		changeRef(dbswdbe, jrefTrig, refInv, true);
-
-		if (refInv == 0) pnlrec->minimize(dbswdbe, true);
-	};
-
-	return retval;
-};
-
-bool CrdWdbeUsr::handleCallWdbeStatChg(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-	if (jrefTrig == pnlrec->jref) if ((pnllist->statshr.ixWdbeVExpstate == VecWdbeVExpstate::REGD) && (pnlrec->statshr.ixWdbeVExpstate == VecWdbeVExpstate::REGD)) pnllist->minimize(dbswdbe, true);
-	return retval;
 };
 
 bool CrdWdbeUsr::handleCallWdbeDlgClose(
@@ -300,6 +276,32 @@ bool CrdWdbeUsr::handleCallWdbeDlgClose(
 		statshr.jrefDlgmngkeypair = 0;
 
 		xchg->submitDpch(getNewDpchEng({DpchEngData::STATSHR}));
+	};
+
+	return retval;
+};
+
+bool CrdWdbeUsr::handleCallWdbeStatChg(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+	if (jrefTrig == pnlrec->jref) if ((pnllist->statshr.ixWdbeVExpstate == VecWdbeVExpstate::REGD) && (pnlrec->statshr.ixWdbeVExpstate == VecWdbeVExpstate::REGD)) pnllist->minimize(dbswdbe, true);
+	return retval;
+};
+
+bool CrdWdbeUsr::handleCallWdbeRefPreSet(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+			, const uint ixInv
+			, const ubigint refInv
+		) {
+	bool retval = false;
+
+	if (ixInv == VecWdbeVPreset::PREWDBEREFUSR) {
+		changeRef(dbswdbe, jrefTrig, refInv, true);
+
+		if (refInv == 0) pnlrec->minimize(dbswdbe, true);
 	};
 
 	return retval;

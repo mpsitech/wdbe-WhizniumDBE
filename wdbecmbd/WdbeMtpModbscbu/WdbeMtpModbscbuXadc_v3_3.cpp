@@ -2,8 +2,8 @@
 	* \file WdbeMtpModbscbuXadc_v3_3.cpp
 	* Wdbe operation processor - adapt port names (implementation)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifdef WDBECMBD
@@ -33,15 +33,27 @@ DpchRetWdbe* WdbeMtpModbscbuXadc_v3_3::run(
 	utinyint ixOpVOpres = VecOpVOpres::SUCCESS;
 
 	// IP run --- IBEGIN
-	string chA, chB;
+	string Naux, aux;
 
-	if (Wdbe::getMpa(dbswdbe, refWdbeMModule, "chA", chA)) {
-		dbswdbe->executeQuery("UPDATE TblWdbeMPort SET sref = 'vauxp" + chA + "' WHERE mdlRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'vauxpA'");
-		dbswdbe->executeQuery("UPDATE TblWdbeMPort SET sref = 'vauxn" + chA + "' WHERE mdlRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'vauxnA'");
-	};
-	if (Wdbe::getMpa(dbswdbe, refWdbeMModule, "chB", chB)) {
-		dbswdbe->executeQuery("UPDATE TblWdbeMPort SET sref = 'vauxp" + chB + "' WHERE mdlRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'vauxpB'");
-		dbswdbe->executeQuery("UPDATE TblWdbeMPort SET sref = 'vauxn" + chB + "' WHERE mdlRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'vauxnB'");
+	ubigint refC;
+	uint mdlNum;
+
+	vector<string> ss;
+
+	if (Wdbe::getMpa(dbswdbe, refWdbeMModule, "Naux", Naux) && Wdbe::getMpa(dbswdbe, refWdbeMModule, "aux", aux)) {
+		StrMod::stringToVector(aux, ss);
+
+		if (ss.size() == atoi(Naux.c_str())) {
+			dbswdbe->loadUintBySQL("SELECT COUNT(ref) FROM TblWdbeMPort WHERE mdlRefWdbeMModule = " + to_string(refWdbeMModule), mdlNum);
+			mdlNum++;
+
+			for (unsigned int i = 0; i < ss.size(); i++) {
+				refC = dbswdbe->tblwdbecport->getNewRef();
+
+				dbswdbe->tblwdbemport->insertNewRec(NULL, refC, refWdbeMModule, mdlNum++, VecWdbeVMPortMdlCat::RTEPIN, "vauxn" + ss[i], VecWdbeVMPortDir::IN, "sl", 1, "", "", "", "", "", "");
+				dbswdbe->tblwdbemport->insertNewRec(NULL, refC, refWdbeMModule, mdlNum++, VecWdbeVMPortMdlCat::RTEPIN, "vauxp" + ss[i], VecWdbeVMPortDir::IN, "sl", 1, "", "", "", "", "", "");
+			};
+		};
 	};
 	// IP run --- IEND
 

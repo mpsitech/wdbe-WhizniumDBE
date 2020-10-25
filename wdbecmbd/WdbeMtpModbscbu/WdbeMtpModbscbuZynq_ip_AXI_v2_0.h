@@ -2,8 +2,8 @@
 	* \file WdbeMtpModbscbuZynq_ip_AXI_v2_0.h
 	* Wdbe operation processor - add pin substitute signals (declarations)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifndef WDBEMTPMODBSCBUZYNQ_IP_AXI_V2_0_H

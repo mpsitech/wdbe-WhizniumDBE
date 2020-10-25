@@ -2,28 +2,28 @@
   * \file PnlWdbeMchRec.js
   * web client functionality for panel PnlWdbeMchRec
   * \author Alexander Wirthmueller
-  * \date created: 11 Jul 2020
-  * \date modified: 11 Jul 2020
+  * \date created: 23 Aug 2020
+  * \date modified: 23 Aug 2020
   */
 
 function updateScrJrefs() {
 	scrJrefDetail = retrieveSi(srcdoc, "StatShrWdbeMchRec", "scrJrefDetail");
-	scrJrefAMakefile = retrieveSi(srcdoc, "StatShrWdbeMchRec", "scrJrefAMakefile");
 	scrJrefAPar = retrieveSi(srcdoc, "StatShrWdbeMchRec", "scrJrefAPar");
+	scrJrefAMakefile = retrieveSi(srcdoc, "StatShrWdbeMchRec", "scrJrefAMakefile");
 	scrJref1NRelease = retrieveSi(srcdoc, "StatShrWdbeMchRec", "scrJref1NRelease");
 };
 
 function resetInitdones() {
 	setSi(srcdoc, "StatAppWdbeMchRec", "initdoneDetail", "false");
-	setSi(srcdoc, "StatAppWdbeMchRec", "initdoneAMakefile", "false");
 	setSi(srcdoc, "StatAppWdbeMchRec", "initdoneAPar", "false");
+	setSi(srcdoc, "StatAppWdbeMchRec", "initdoneAMakefile", "false");
 	setSi(srcdoc, "StatAppWdbeMchRec", "initdone1NRelease", "false");
 };
 
 function resetHeights() {
 	heightDetail = 30;
-	heightAMakefile = 30;
 	heightAPar = 30;
+	heightAMakefile = 30;
 	height1NRelease = 30;
 };
 
@@ -43,16 +43,16 @@ function checkInitdone() {
 	var initdone1NRelease = (retrieveSi(srcdoc, "StatAppWdbeMchRec", "initdone1NRelease") == "true");
 
 	var initdoneDetail = (retrieveSi(srcdoc, "StatAppWdbeMchRec", "initdoneDetail") == "true");
-	var initdoneAMakefile = (retrieveSi(srcdoc, "StatAppWdbeMchRec", "initdoneAMakefile") == "true");
 	var initdoneAPar = (retrieveSi(srcdoc, "StatAppWdbeMchRec", "initdoneAPar") == "true");
+	var initdoneAMakefile = (retrieveSi(srcdoc, "StatAppWdbeMchRec", "initdoneAMakefile") == "true");
 	var initdone1NRelease = (retrieveSi(srcdoc, "StatAppWdbeMchRec", "initdone1NRelease") == "true");
 
 	if (!initdoneDetail) {
 		lhsdoc.getElementById("Detail").src = "./PnlWdbeMchDetail.html?scrJref=" + scrJrefDetail;
-	} else if (!initdoneAMakefile) {
-		lhsdoc.getElementById("AMakefile").src = "./PnlWdbeMchAMakefile.html?scrJref=" + scrJrefAMakefile;
 	} else if (!initdoneAPar) {
 		lhsdoc.getElementById("APar").src = "./PnlWdbeMchAPar.html?scrJref=" + scrJrefAPar;
+	} else if (!initdoneAMakefile) {
+		lhsdoc.getElementById("AMakefile").src = "./PnlWdbeMchAMakefile.html?scrJref=" + scrJrefAMakefile;
 	} else if (!initdone1NRelease) {
 		rhsdoc.getElementById("1NRelease").src = "./PnlWdbeMch1NRelease.html?scrJref=" + scrJref1NRelease;
 
@@ -67,7 +67,7 @@ function reinitPnl(scrJrefPnl) {
 function setPnlAvail(short, avail) {
 	var lhsrhsdoc;
 
-	if ((short == "Detail") || (short == "AMakefile") || (short == "APar")) lhsrhsdoc = lhsdoc;
+	if ((short == "Detail") || (short == "APar") || (short == "AMakefile")) lhsrhsdoc = lhsdoc;
 	else lhsrhsdoc = rhsdoc;
 
 	var oldAvail = (lhsrhsdoc.getElementById("tr" + short).getAttribute("class") == "show");
@@ -94,8 +94,8 @@ function setPnlAvail(short, avail) {
 		else if (short == "List") heightList = height;
 		else if (short == "Rec") heightRec = height;
 		else if (short == "Detail") heightDetail = height;
-		else if (short == "AMakefile") heightAMakefile = height;
 		else if (short == "APar") heightAPar = height;
+		else if (short == "AMakefile") heightAMakefile = height;
 		else if (short == "1NRelease") height1NRelease = height;
 	};
 
@@ -130,7 +130,7 @@ function regularize() {
 function changeHeight(pnlshort, height, update) {
 	var lhsrhsdoc;
 
-	if ((pnlshort == "Detail") || (pnlshort == "AMakefile") || (pnlshort == "APar")) lhsrhsdoc = lhsdoc;
+	if ((pnlshort == "Detail") || (pnlshort == "APar") || (pnlshort == "AMakefile")) lhsrhsdoc = lhsdoc;
 	else lhsrhsdoc = rhsdoc;
 
 	lhsrhsdoc.getElementById("td" + pnlshort).setAttribute("height", "" + height);
@@ -140,8 +140,8 @@ function changeHeight(pnlshort, height, update) {
 	else if (pnlshort == "List") heightList = height;
 	else if (pnlshort == "Rec") heightRec = height;
 	else if (pnlshort == "Detail") heightDetail = height;
-	else if (pnlshort == "AMakefile") heightAMakefile = height;
 	else if (pnlshort == "APar") heightAPar = height;
+	else if (pnlshort == "AMakefile") heightAMakefile = height;
 	else if (pnlshort == "1NRelease") height1NRelease = height;
 
 	if (update) updateHeight();
@@ -150,7 +150,7 @@ function changeHeight(pnlshort, height, update) {
 function updateHeight() {
 	var heightLhs, heightRhs, heightGt;
 
-	heightLhs = heightDetail+13 + heightAMakefile+13 + heightAPar+13 + 5;
+	heightLhs = heightDetail+13 + heightAPar+13 + heightAMakefile+13 + 5;
 	heightRhs = height1NRelease+13 + 5;
 
 	if (heightLhs > heightRhs) {
@@ -342,10 +342,10 @@ function handleDpchEng(dom, dpch) {
 
 			if (_scrJref == scrJrefDetail) {
 				if (getInitdone("Detail")) lhsdoc.getElementById("Detail").contentWindow.handleDpchEng(dom, dpch);
-			} else if (_scrJref == scrJrefAMakefile) {
-				if (getInitdone("AMakefile")) lhsdoc.getElementById("AMakefile").contentWindow.handleDpchEng(dom, dpch);
 			} else if (_scrJref == scrJrefAPar) {
 				if (getInitdone("APar")) lhsdoc.getElementById("APar").contentWindow.handleDpchEng(dom, dpch);
+			} else if (_scrJref == scrJrefAMakefile) {
+				if (getInitdone("AMakefile")) lhsdoc.getElementById("AMakefile").contentWindow.handleDpchEng(dom, dpch);
 			} else if (_scrJref == scrJref1NRelease) {
 				if (getInitdone("1NRelease")) rhsdoc.getElementById("1NRelease").contentWindow.handleDpchEng(dom, dpch);
 			} else {

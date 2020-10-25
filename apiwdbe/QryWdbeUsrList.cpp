@@ -2,8 +2,8 @@
 	* \file QryWdbeUsrList.cpp
 	* API code for job QryWdbeUsrList (implementation)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #include "QryWdbeUsrList.h"
@@ -21,12 +21,12 @@ uint QryWdbeUsrList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
+	if (s == "grp") return GRP;
+	if (s == "own") return OWN;
+	if (s == "prs") return PRS;
+	if (s == "srf") return SRF;
 	if (s == "usg") return USG;
 	if (s == "ste") return STE;
-	if (s == "srf") return SRF;
-	if (s == "prs") return PRS;
-	if (s == "own") return OWN;
-	if (s == "grp") return GRP;
 
 	return(0);
 };
@@ -34,12 +34,12 @@ uint QryWdbeUsrList::VecVOrd::getIx(
 string QryWdbeUsrList::VecVOrd::getSref(
 			const uint ix
 		) {
+	if (ix == GRP) return("grp");
+	if (ix == OWN) return("own");
+	if (ix == PRS) return("prs");
+	if (ix == SRF) return("srf");
 	if (ix == USG) return("usg");
 	if (ix == STE) return("ste");
-	if (ix == SRF) return("srf");
-	if (ix == PRS) return("prs");
-	if (ix == OWN) return("own");
-	if (ix == GRP) return("grp");
 
 	return("");
 };

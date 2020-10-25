@@ -2,8 +2,8 @@
 	* \file WdbeQSilSil1NUnit.cpp
 	* Dbs and XML wrapper for table TblWdbeQSilSil1NUnit (implementation)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #include "WdbeQSilSil1NUnit.h"

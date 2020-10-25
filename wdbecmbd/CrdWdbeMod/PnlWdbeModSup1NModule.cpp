@@ -2,8 +2,8 @@
 	* \file PnlWdbeModSup1NModule.cpp
 	* job handler for job PnlWdbeModSup1NModule (implementation)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifdef WDBECMBD

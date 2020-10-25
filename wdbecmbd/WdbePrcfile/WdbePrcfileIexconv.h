@@ -2,8 +2,8 @@
 	* \file WdbePrcfileIexconv.h
 	* Wdbe operation processor - convert text import input file into output file (declarations)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifndef WDBEPRCFILEIEXCONV_H

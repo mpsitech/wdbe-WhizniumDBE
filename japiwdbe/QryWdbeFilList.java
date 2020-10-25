@@ -2,8 +2,8 @@
   * \file QryWdbeFilList.java
   * Java API code for job QryWdbeFilList
   * \author Alexander Wirthmueller
-  * \date created: 11 Jul 2020
-  * \date modified: 11 Jul 2020
+  * \date created: 23 Aug 2020
+  * \date modified: 23 Aug 2020
   */
 
 package apiwdbe;
@@ -18,22 +18,22 @@ public class QryWdbeFilList {
 		*/
 	public static class VecVOrd {
 
-		public static final int REU = 1;
-		public static final int FNM = 2;
-		public static final int RET = 3;
-		public static final int OWN = 4;
-		public static final int GRP = 5;
+		public static final int GRP = 1;
+		public static final int OWN = 2;
+		public static final int FNM = 3;
+		public static final int RET = 4;
+		public static final int REU = 5;
 
 		public static int getIx(
 					String sref
 				) {
 			String s = sref.toLowerCase();
 
-			if (s.equals("reu")) return REU;
+			if (s.equals("grp")) return GRP;
+			if (s.equals("own")) return OWN;
 			if (s.equals("fnm")) return FNM;
 			if (s.equals("ret")) return RET;
-			if (s.equals("own")) return OWN;
-			if (s.equals("grp")) return GRP;
+			if (s.equals("reu")) return REU;
 
 			return 0;
 		};
@@ -41,11 +41,11 @@ public class QryWdbeFilList {
 		public static String getSref(
 					int ix
 				) {
-			if (ix == REU) return("reu");
+			if (ix == GRP) return("grp");
+			if (ix == OWN) return("own");
 			if (ix == FNM) return("fnm");
 			if (ix == RET) return("ret");
-			if (ix == OWN) return("own");
-			if (ix == GRP) return("grp");
+			if (ix == REU) return("reu");
 
 			return "";
 		};

@@ -2,8 +2,8 @@
 	* \file PnlWdbeFstList.cpp
 	* job handler for job PnlWdbeFstList (implementation)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifdef WDBECMBD
@@ -106,9 +106,9 @@ void PnlWdbeFstList::refresh(
 	if ((ixPre != 0) && (ixPre != VecWdbeVPreset::VOID)) {
 		continf.TxtFor = VecWdbeVPreset::getTitle(ixPre, ixWdbeVLocale);
 
-		if (ixPre == VecWdbeVPreset::PREWDBEREFMOD) continf.TxtPre = StubWdbe::getStubMdlStd(dbswdbe, xchg->getRefPreset(ixPre, jref), ixWdbeVLocale, Stub::VecVNonetype::FULL);
+		if (ixPre == VecWdbeVPreset::PREWDBEREFFSM) continf.TxtPre = StubWdbe::getStubFsmStd(dbswdbe, xchg->getRefPreset(ixPre, jref), ixWdbeVLocale, Stub::VecVNonetype::FULL);
 		else if (ixPre == VecWdbeVPreset::PREWDBEREFMTP) continf.TxtPre = StubWdbe::getStubMdlStd(dbswdbe, xchg->getRefPreset(ixPre, jref), ixWdbeVLocale, Stub::VecVNonetype::FULL);
-		else if (ixPre == VecWdbeVPreset::PREWDBEREFFSM) continf.TxtPre = StubWdbe::getStubFsmStd(dbswdbe, xchg->getRefPreset(ixPre, jref), ixWdbeVLocale, Stub::VecVNonetype::FULL);
+		else if (ixPre == VecWdbeVPreset::PREWDBEREFMOD) continf.TxtPre = StubWdbe::getStubMdlStd(dbswdbe, xchg->getRefPreset(ixPre, jref), ixWdbeVLocale, Stub::VecVNonetype::FULL);
 
 	} else {
 		continf.TxtFor = "";
@@ -254,7 +254,7 @@ void PnlWdbeFstList::handleDpchAppDataContiac(
 	muteRefresh = true;
 
 	if (has(diffitems, ContIac::NUMFTOS)) {
-		if ((_contiac->numFTos >= QryWdbeFstList::VecVOrd::FSM) && (_contiac->numFTos <= QryWdbeFstList::VecVOrd::SRF)) {
+		if ((_contiac->numFTos >= QryWdbeFstList::VecVOrd::SRF) && (_contiac->numFTos <= QryWdbeFstList::VecVOrd::FSM)) {
 			xchg->addIxPreset(VecWdbeVPreset::PREWDBEIXORD, jref, _contiac->numFTos);
 
 			qry->rerun(dbswdbe);

@@ -2,8 +2,8 @@
 	* \file PnlWdbePrcRec.h
 	* job handler for job PnlWdbePrcRec (declarations)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifndef PNLWDBEPRCREC_H
@@ -13,11 +13,11 @@
 
 // IP include.cust --- INSERT
 
-#include "PnlWdbePrcFsmFsm1NFsmstate.h"
-#include "PnlWdbePrcMge1NSignal.h"
-#include "PnlWdbePrcPrc1NVariable.h"
-#include "PnlWdbePrcKHdltype.h"
 #include "PnlWdbePrcDetail.h"
+#include "PnlWdbePrcKHdltype.h"
+#include "PnlWdbePrcPrc1NVariable.h"
+#include "PnlWdbePrcMge1NSignal.h"
+#include "PnlWdbePrcFsmFsm1NFsmstate.h"
 
 #define VecVWdbePrcRecDo PnlWdbePrcRec::VecVDo
 
@@ -179,11 +179,11 @@ public:
 	ContInf continf;
 	StatShr statshr;
 
-	PnlWdbePrcFsmFsm1NFsmstate* pnlfsmfsm1nfsmstate;
-	PnlWdbePrcMge1NSignal* pnlmge1nsignal;
-	PnlWdbePrcPrc1NVariable* pnlprc1nvariable;
-	PnlWdbePrcKHdltype* pnlkhdltype;
 	PnlWdbePrcDetail* pnldetail;
+	PnlWdbePrcKHdltype* pnlkhdltype;
+	PnlWdbePrcPrc1NVariable* pnlprc1nvariable;
+	PnlWdbePrcMge1NSignal* pnlmge1nsignal;
+	PnlWdbePrcFsmFsm1NFsmstate* pnlfsmfsm1nfsmstate;
 
 	WdbeMProcess recPrc;
 
@@ -219,10 +219,10 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbePrcUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
-	bool handleCallWdbeFsmUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
-	bool handleCallWdbePrc_mdlEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
 	bool handleCallWdbePrc_fsmEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbePrc_mdlEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeFsmUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbePrcUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 
 };
 

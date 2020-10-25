@@ -2,8 +2,8 @@
 	* \file QryWdbePrsList.h
 	* job handler for job QryWdbePrsList (declarations)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifndef QRYWDBEPRSLIST_H
@@ -31,9 +31,9 @@ public:
 	class VecVOrd {
 
 	public:
-		static const Sbecore::uint LNM = 1;
+		static const Sbecore::uint GRP = 1;
 		static const Sbecore::uint OWN = 2;
-		static const Sbecore::uint GRP = 3;
+		static const Sbecore::uint LNM = 3;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);
@@ -143,9 +143,9 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbePrsUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
-	bool handleCallWdbePrsMod(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 	bool handleCallWdbeStubChgFromSelf(DbsWdbe* dbswdbe);
+	bool handleCallWdbePrsMod(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbePrsUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 
 };
 

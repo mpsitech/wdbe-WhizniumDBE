@@ -2,8 +2,8 @@
 	* \file DlgWdbeRlsStareptr.cpp
 	* job handler for job DlgWdbeRlsStareptr (implementation)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifdef WDBECMBD
@@ -144,8 +144,8 @@ void DlgWdbeRlsStareptr::refreshDet(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
 		) {
-	StatShrDet oldStatshrdet(statshrdet);
 	ContIacDet oldContiacdet(contiacdet);
+	StatShrDet oldStatshrdet(statshrdet);
 
 	// IP refreshDet --- RBEGIN
 	// contiacdet
@@ -155,16 +155,16 @@ void DlgWdbeRlsStareptr::refreshDet(
 	statshrdet.ButStaActive = evalDetButStaActive(dbswdbe);
 
 	// IP refreshDet --- REND
-	if (statshrdet.diff(&oldStatshrdet).size() != 0) insert(moditems, DpchEngData::STATSHRDET);
 	if (contiacdet.diff(&oldContiacdet).size() != 0) insert(moditems, DpchEngData::CONTIACDET);
+	if (statshrdet.diff(&oldStatshrdet).size() != 0) insert(moditems, DpchEngData::STATSHRDET);
 };
 
 void DlgWdbeRlsStareptr::refreshIni(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
 		) {
-	ContInfIni oldContinfini(continfini);
 	StatShrIni oldStatshrini(statshrini);
+	ContInfIni oldContinfini(continfini);
 
 	// IP refreshIni --- RBEGIN
 
@@ -180,16 +180,16 @@ void DlgWdbeRlsStareptr::refreshIni(
 	continfini.TxtPrg = getSquawk(dbswdbe);
 
 	// IP refreshIni --- REND
-	if (continfini.diff(&oldContinfini).size() != 0) insert(moditems, DpchEngData::CONTINFINI);
 	if (statshrini.diff(&oldStatshrini).size() != 0) insert(moditems, DpchEngData::STATSHRINI);
+	if (continfini.diff(&oldContinfini).size() != 0) insert(moditems, DpchEngData::CONTINFINI);
 };
 
 void DlgWdbeRlsStareptr::refreshExt(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
 		) {
-	StatShrExt oldStatshrext(statshrext);
 	ContInfExt oldContinfext(continfext);
+	StatShrExt oldStatshrext(statshrext);
 
 	// IP refreshExt --- RBEGIN
 	// continfext
@@ -200,16 +200,16 @@ void DlgWdbeRlsStareptr::refreshExt(
 	statshrext.ButStoActive = evalExtButStoActive(dbswdbe);
 
 	// IP refreshExt --- REND
-	if (statshrext.diff(&oldStatshrext).size() != 0) insert(moditems, DpchEngData::STATSHREXT);
 	if (continfext.diff(&oldContinfext).size() != 0) insert(moditems, DpchEngData::CONTINFEXT);
+	if (statshrext.diff(&oldStatshrext).size() != 0) insert(moditems, DpchEngData::STATSHREXT);
 };
 
 void DlgWdbeRlsStareptr::refreshLfi(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
 		) {
-	ContInfLfi oldContinflfi(continflfi);
 	StatShrLfi oldStatshrlfi(statshrlfi);
+	ContInfLfi oldContinflfi(continflfi);
 
 	// IP refreshLfi --- RBEGIN
 	// statshrlfi
@@ -219,32 +219,32 @@ void DlgWdbeRlsStareptr::refreshLfi(
 	continflfi.Dld = "log.txt";
 
 	// IP refreshLfi --- REND
-	if (continflfi.diff(&oldContinflfi).size() != 0) insert(moditems, DpchEngData::CONTINFLFI);
 	if (statshrlfi.diff(&oldStatshrlfi).size() != 0) insert(moditems, DpchEngData::STATSHRLFI);
+	if (continflfi.diff(&oldContinflfi).size() != 0) insert(moditems, DpchEngData::CONTINFLFI);
 };
 
 void DlgWdbeRlsStareptr::refresh(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
 		) {
-	StatShr oldStatshr(statshr);
 	ContInf oldContinf(continf);
 	ContIac oldContiac(contiac);
+	StatShr oldStatshr(statshr);
 
 	// IP refresh --- BEGIN
-	// statshr
-	statshr.ButDneActive = evalButDneActive(dbswdbe);
-
 	// continf
 	continf.numFSge = ixVSge;
 
 	// contiac
 	contiac.numFDse = ixVDit;
 
+	// statshr
+	statshr.ButDneActive = evalButDneActive(dbswdbe);
+
 	// IP refresh --- END
-	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
 	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
 	if (contiac.diff(&oldContiac).size() != 0) insert(moditems, DpchEngData::CONTIAC);
+	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
 
 	refreshDet(dbswdbe, moditems);
 	refreshIni(dbswdbe, moditems);

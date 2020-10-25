@@ -2,8 +2,8 @@
 	* \file QryWdbeVer1NSystem.h
 	* job handler for job QryWdbeVer1NSystem (declarations)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifndef QRYWDBEVER1NSYSTEM_H
@@ -122,8 +122,8 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeSysMod_verEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 	bool handleCallWdbeStubChgFromSelf(DbsWdbe* dbswdbe);
+	bool handleCallWdbeSysMod_verEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 
 };
 

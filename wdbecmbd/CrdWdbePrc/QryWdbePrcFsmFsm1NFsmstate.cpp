@@ -2,8 +2,8 @@
 	* \file QryWdbePrcFsmFsm1NFsmstate.cpp
 	* job handler for job QryWdbePrcFsmFsm1NFsmstate (implementation)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifdef WDBECMBD
@@ -271,11 +271,19 @@ void QryWdbePrcFsmFsm1NFsmstate::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBEFSTMOD_FSMEQ) {
-		call->abort = handleCallWdbeFstMod_fsmEq(dbswdbe, call->jref);
-	} else if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
+	if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
 		call->abort = handleCallWdbeStubChgFromSelf(dbswdbe);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEFSTMOD_FSMEQ) {
+		call->abort = handleCallWdbeFstMod_fsmEq(dbswdbe, call->jref);
 	};
+};
+
+bool QryWdbePrcFsmFsm1NFsmstate::handleCallWdbeStubChgFromSelf(
+			DbsWdbe* dbswdbe
+		) {
+	bool retval = false;
+	// IP handleCallWdbeStubChgFromSelf --- INSERT
+	return retval;
 };
 
 bool QryWdbePrcFsmFsm1NFsmstate::handleCallWdbeFstMod_fsmEq(
@@ -289,14 +297,6 @@ bool QryWdbePrcFsmFsm1NFsmstate::handleCallWdbeFstMod_fsmEq(
 		xchg->triggerCall(dbswdbe, VecWdbeVCall::CALLWDBESTATCHG, jref);
 	};
 
-	return retval;
-};
-
-bool QryWdbePrcFsmFsm1NFsmstate::handleCallWdbeStubChgFromSelf(
-			DbsWdbe* dbswdbe
-		) {
-	bool retval = false;
-	// IP handleCallWdbeStubChgFromSelf --- INSERT
 	return retval;
 };
 

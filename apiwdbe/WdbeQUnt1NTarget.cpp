@@ -2,8 +2,8 @@
 	* \file WdbeQUnt1NTarget.cpp
 	* API code for table TblWdbeQUnt1NTarget (implementation)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #include "WdbeQUnt1NTarget.h"

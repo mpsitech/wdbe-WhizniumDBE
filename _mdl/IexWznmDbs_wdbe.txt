@@ -2878,6 +2878,7 @@
 - tco	TblWdbeMPeripheral		StubWdbePphStd	false	sref	false	spi1					
 - cust	TblWdbeMPin		StubWdbePinStd	false		false	mclkn (bank3, P23)					
 - tco	TblWdbeMProcess		StubWdbePrcStd	false	sref	false	op					
+- tco	TblWdbeMProject		StubWdbePrjShort	false	Short	false	idhw					
 - tco	TblWdbeMProject		StubWdbePrjStd	false	Title	false	ICARUSDetectorHardwareControl					
 - cust	TblWdbeMPerson		StubWdbePrsStd	false		false	Franz Kuntz					
 - tco	TblWdbeMPort		StubWdbePrtSref	false	sref	false	mclk					
@@ -2901,7 +2902,8 @@
 - tco	TblWdbeMVariable		StubWdbeVarStd	false	sref	false	bytecnt					
 - tco	TblWdbeMVector		StubWdbeVecStd	false	sref	false	VecIcm2VCmd					
 - cust	TblWdbeMVersion		StubWdbeVerNo	false		false	0.1.0					
-- cust	TblWdbeMVersion		StubWdbeVerStd	false		false	ICARUSDetectorHardwareControl 0.1.0					
+- cust	TblWdbeMVersion		StubWdbeVerShort	false		false	idhw v0.1.0					
+- cust	TblWdbeMVersion		StubWdbeVerStd	false		false	ICARUSDetectorHardwareControl v0.1.0					
 - cust	TblWdbeMVectoritem		StubWdbeVitStd	false		false	VecIcm2VCmd.syncSetTon					
 - ImeIMStub.end												
 - ImeIRMStubMStub.srefSupRefWznmMStub	srefSubRefWznmMStub											
@@ -2927,6 +2929,7 @@
 - StubWdbeSysStd	StubWdbeTrgStd											
 - StubWdbePrsStd	StubWdbeUsrPrs											
 - StubWdbePrsStd	StubWdbeUsrStd											
+- StubWdbePrjShort	StubWdbeVerShort											
 - StubWdbePrjStd	StubWdbeVerStd											
 - StubWdbeVecStd	StubWdbeVitStd											
 - ImeIRMStubMStub.end												

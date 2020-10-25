@@ -2,8 +2,8 @@
 	* \file RootWdbe.h
 	* job handler for job RootWdbe (declarations)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifndef ROOTWDBE_H
@@ -15,8 +15,8 @@
 #include <openssl/sha.h>
 // IP include.cust --- IEND
 
-#include "JobWdbeLicense.h"
 #include "SessWdbe.h"
+#include "JobWdbeLicense.h"
 
 #define VecVRootWdbeSge RootWdbe::VecVSge
 
@@ -100,8 +100,8 @@ public:
 
 public:
 
-	JobWdbeLicense* license;
 	std::list<SessWdbe*> sesss;
+	JobWdbeLicense* license;
 
 	// IP vars.spec --- INSERT
 
@@ -135,8 +135,8 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeSuspsess(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 	bool handleCallWdbeLogout(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const bool boolvalInv);
+	bool handleCallWdbeSuspsess(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 
 private:
 	void changeStage(DbsWdbe* dbswdbe, Sbecore::uint _ixVSge, DpchEngWdbe** dpcheng = NULL);

@@ -1,8 +1,8 @@
 # file Makefile
 # make file for CrdWdbeMtp card job handler, release wdbecmbd_jack
 # author Alexander Wirthmueller
-# date created: 11 Jul 2020
-# modified: 11 Jul 2020
+# date created: 23 Aug 2020
+# modified: 23 Aug 2020
 
 include ../Makefile.inc
 
@@ -15,7 +15,7 @@ STATLIBFLAGS = rcs
 INCPATH = -I$(SRCROOT)/dbswdbe -I$(SRCROOT)/wdbecmbd/VecWdbe -I$(SRCROOT)/wdbecmbd/IexWdbe -I$(SRCROOT)/wdbecmbd
 INCPATH += -I/home/mpsitech/src/apiwzlm -I/usr/include -I/usr/include/jsoncpp -I/usr/include/libxml2 -I/usr/include/mysql -I/usr/include/postgresql -I/usr/local/include
 
-OBJS = CrdWdbeMtp.o PnlWdbeMtpList.o QryWdbeMtpList.o PnlWdbeMtpHeadbar.o PnlWdbeMtpRec.o PnlWdbeMtpRef1NFile.o QryWdbeMtpRef1NFile.o PnlWdbeMtpMge1NSignal.o QryWdbeMtpMge1NSignal.o PnlWdbeMtpSup1NModule.o QryWdbeMtpSup1NModule.o PnlWdbeMtpMdl1NPort.o QryWdbeMtpMdl1NPort.o PnlWdbeMtpTpl1NModule.o QryWdbeMtpTpl1NModule.o PnlWdbeMtpMdl1NGeneric.o QryWdbeMtpMdl1NGeneric.o PnlWdbeMtpAPar.o QryWdbeMtpAPar.o PnlWdbeMtpKHdltype.o QryWdbeMtpKHdltype.o PnlWdbeMtpKParKey.o QryWdbeMtpKParKey.o PnlWdbeMtpDetail.o
+OBJS = CrdWdbeMtp.o PnlWdbeMtpRec.o PnlWdbeMtpDetail.o PnlWdbeMtpKParKey.o QryWdbeMtpKParKey.o PnlWdbeMtpKHdltype.o QryWdbeMtpKHdltype.o PnlWdbeMtpAPar.o QryWdbeMtpAPar.o PnlWdbeMtpMdl1NGeneric.o QryWdbeMtpMdl1NGeneric.o PnlWdbeMtpTpl1NModule.o QryWdbeMtpTpl1NModule.o PnlWdbeMtpMdl1NPort.o QryWdbeMtpMdl1NPort.o PnlWdbeMtpSup1NModule.o QryWdbeMtpSup1NModule.o PnlWdbeMtpRef1NFile.o QryWdbeMtpRef1NFile.o PnlWdbeMtpMge1NSignal.o QryWdbeMtpMge1NSignal.o PnlWdbeMtpHeadbar.o PnlWdbeMtpList.o QryWdbeMtpList.o
 
 LIB = libcrdwdbemtp
 

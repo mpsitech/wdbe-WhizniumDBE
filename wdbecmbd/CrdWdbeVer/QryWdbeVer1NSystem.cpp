@@ -2,8 +2,8 @@
 	* \file QryWdbeVer1NSystem.cpp
 	* job handler for job QryWdbeVer1NSystem (implementation)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifdef WDBECMBD
@@ -269,11 +269,19 @@ void QryWdbeVer1NSystem::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBESYSMOD_VEREQ) {
-		call->abort = handleCallWdbeSysMod_verEq(dbswdbe, call->jref);
-	} else if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
+	if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
 		call->abort = handleCallWdbeStubChgFromSelf(dbswdbe);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBESYSMOD_VEREQ) {
+		call->abort = handleCallWdbeSysMod_verEq(dbswdbe, call->jref);
 	};
+};
+
+bool QryWdbeVer1NSystem::handleCallWdbeStubChgFromSelf(
+			DbsWdbe* dbswdbe
+		) {
+	bool retval = false;
+	// IP handleCallWdbeStubChgFromSelf --- INSERT
+	return retval;
 };
 
 bool QryWdbeVer1NSystem::handleCallWdbeSysMod_verEq(
@@ -287,14 +295,6 @@ bool QryWdbeVer1NSystem::handleCallWdbeSysMod_verEq(
 		xchg->triggerCall(dbswdbe, VecWdbeVCall::CALLWDBESTATCHG, jref);
 	};
 
-	return retval;
-};
-
-bool QryWdbeVer1NSystem::handleCallWdbeStubChgFromSelf(
-			DbsWdbe* dbswdbe
-		) {
-	bool retval = false;
-	// IP handleCallWdbeStubChgFromSelf --- INSERT
 	return retval;
 };
 

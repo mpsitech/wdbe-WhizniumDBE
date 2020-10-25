@@ -2,8 +2,8 @@
 	* \file PnlWdbeModCor1NImbuf.h
 	* API code for job PnlWdbeModCor1NImbuf (declarations)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifndef PNLWDBEMODCOR1NIMBUF_H

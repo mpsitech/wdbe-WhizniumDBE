@@ -2,14 +2,14 @@
   * \file Wdbe.js
   * web client global functionality for Wdbe
   * \author Alexander Wirthmueller
-  * \date created: 11 Jul 2020
-  * \date modified: 11 Jul 2020
+  * \date created: 23 Aug 2020
+  * \date modified: 23 Aug 2020
   */
 
-WDBE_VERSION = "1.0.2";
+WDBE_VERSION = "1.0.3";
 WDBE_VERSION_MAJOR = 1;
 WDBE_VERSION_MINOR = 0;
-WDBE_VERSION_SUB = 2;
+WDBE_VERSION_SUB = 3;
 
 function getCrdwnd() {
 	if (window.name == "Crd") return window;

@@ -2,8 +2,8 @@
 	* \file PnlWdbeCvrRec.h
 	* job handler for job PnlWdbeCvrRec (declarations)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifndef PNLWDBECVRREC_H
@@ -13,11 +13,11 @@
 
 // IP include.cust --- INSERT
 
-#include "PnlWdbeCvrHk1NModule.h"
-#include "PnlWdbeCvrBcv1NCoreversion.h"
+#include "PnlWdbeCvrDetail.h"
 #include "PnlWdbeCvrAIp.h"
 #include "PnlWdbeCvrAPlh.h"
-#include "PnlWdbeCvrDetail.h"
+#include "PnlWdbeCvrBcv1NCoreversion.h"
+#include "PnlWdbeCvrHk1NModule.h"
 
 #define VecVWdbeCvrRecDo PnlWdbeCvrRec::VecVDo
 
@@ -74,7 +74,7 @@ public:
 	class StatApp {
 
 	public:
-		static void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true, const bool initdoneDetail = false, const bool initdoneAPlh = false, const bool initdoneAIp = false, const bool initdoneBcv1NCoreversion = false, const bool initdoneHk1NModule = false);
+		static void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true, const bool initdoneDetail = false, const bool initdoneAIp = false, const bool initdoneAPlh = false, const bool initdoneBcv1NCoreversion = false, const bool initdoneHk1NModule = false);
 	};
 
 	/**
@@ -85,20 +85,20 @@ public:
 	public:
 		static const Sbecore::uint IXWDBEVEXPSTATE = 1;
 		static const Sbecore::uint JREFDETAIL = 2;
-		static const Sbecore::uint JREFAPLH = 3;
-		static const Sbecore::uint JREFAIP = 4;
+		static const Sbecore::uint JREFAIP = 3;
+		static const Sbecore::uint JREFAPLH = 4;
 		static const Sbecore::uint JREFBCV1NCOREVERSION = 5;
 		static const Sbecore::uint JREFHK1NMODULE = 6;
 		static const Sbecore::uint BUTREGULARIZEACTIVE = 7;
 
 	public:
-		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const Sbecore::ubigint jrefDetail = 0, const Sbecore::ubigint jrefAPlh = 0, const Sbecore::ubigint jrefAIp = 0, const Sbecore::ubigint jrefBcv1NCoreversion = 0, const Sbecore::ubigint jrefHk1NModule = 0, const bool ButRegularizeActive = true);
+		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const Sbecore::ubigint jrefDetail = 0, const Sbecore::ubigint jrefAIp = 0, const Sbecore::ubigint jrefAPlh = 0, const Sbecore::ubigint jrefBcv1NCoreversion = 0, const Sbecore::ubigint jrefHk1NModule = 0, const bool ButRegularizeActive = true);
 
 	public:
 		Sbecore::uint ixWdbeVExpstate;
 		Sbecore::ubigint jrefDetail;
-		Sbecore::ubigint jrefAPlh;
 		Sbecore::ubigint jrefAIp;
+		Sbecore::ubigint jrefAPlh;
 		Sbecore::ubigint jrefBcv1NCoreversion;
 		Sbecore::ubigint jrefHk1NModule;
 		bool ButRegularizeActive;
@@ -176,11 +176,11 @@ public:
 	ContInf continf;
 	StatShr statshr;
 
-	PnlWdbeCvrHk1NModule* pnlhk1nmodule;
-	PnlWdbeCvrBcv1NCoreversion* pnlbcv1ncoreversion;
+	PnlWdbeCvrDetail* pnldetail;
 	PnlWdbeCvrAIp* pnlaip;
 	PnlWdbeCvrAPlh* pnlaplh;
-	PnlWdbeCvrDetail* pnldetail;
+	PnlWdbeCvrBcv1NCoreversion* pnlbcv1ncoreversion;
+	PnlWdbeCvrHk1NModule* pnlhk1nmodule;
 
 	WdbeMCoreversion recCvr;
 
@@ -214,9 +214,9 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeCvrUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
-	bool handleCallWdbeCvr_cprEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
 	bool handleCallWdbeCvr_bcvEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeCvr_cprEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeCvrUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 
 };
 

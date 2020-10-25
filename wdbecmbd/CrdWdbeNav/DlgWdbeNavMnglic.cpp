@@ -2,8 +2,8 @@
 	* \file DlgWdbeNavMnglic.cpp
 	* job handler for job DlgWdbeNavMnglic (implementation)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifdef WDBECMBD
@@ -87,23 +87,23 @@ void DlgWdbeNavMnglic::refresh(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
 		) {
-	StatShr oldStatshr(statshr);
-	ContIac oldContiac(contiac);
 	ContInf oldContinf(continf);
+	ContIac oldContiac(contiac);
+	StatShr oldStatshr(statshr);
 
 	// IP refresh --- BEGIN
-	// statshr
-	//statshr.DetButActActive = CUSTOM;
-
-	// contiac
-
 	// continf
 	continf.numFSge = ixVSge;
 
+	// contiac
+
+	// statshr
+	//statshr.DetButActActive = CUSTOM;
+
 	// IP refresh --- END
-	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
-	if (contiac.diff(&oldContiac).size() != 0) insert(moditems, DpchEngData::CONTIAC);
 	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
+	if (contiac.diff(&oldContiac).size() != 0) insert(moditems, DpchEngData::CONTIAC);
+	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
 };
 
 void DlgWdbeNavMnglic::handleRequest(

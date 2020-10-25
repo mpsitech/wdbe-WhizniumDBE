@@ -2,17 +2,17 @@
 	* \file Wdbe.h
 	* Wdbe global functionality (declarations)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifndef WDBE_H
 #define WDBE_H
 
-#define WDBE_VERSION "1.0.2"
+#define WDBE_VERSION "1.0.3"
 #define WDBE_VERSION_MAJOR 1
 #define WDBE_VERSION_MINOR 0
-#define WDBE_VERSION_SUB 2
+#define WDBE_VERSION_SUB 3
 
 #include <sys/wait.h> // IP include.cust --- ILINE
 
@@ -194,6 +194,7 @@ namespace StubWdbe {
 	std::string getStubPinStd(DbsWdbe* dbswdbe, const Sbecore::ubigint ref, const Sbecore::uint ixWdbeVLocale = VecWdbeVLocale::ENUS, const Sbecore::uint ixVNonetype = Sbecore::Stub::VecVNonetype::DASH, Sbecore::Stcch* stcch = NULL, Sbecore::stcchitemref_t* strefSub = NULL, const bool refresh = false);
 	std::string getStubPphStd(DbsWdbe* dbswdbe, const Sbecore::ubigint ref, const Sbecore::uint ixWdbeVLocale = VecWdbeVLocale::ENUS, const Sbecore::uint ixVNonetype = Sbecore::Stub::VecVNonetype::DASH, Sbecore::Stcch* stcch = NULL, Sbecore::stcchitemref_t* strefSub = NULL, const bool refresh = false);
 	std::string getStubPrcStd(DbsWdbe* dbswdbe, const Sbecore::ubigint ref, const Sbecore::uint ixWdbeVLocale = VecWdbeVLocale::ENUS, const Sbecore::uint ixVNonetype = Sbecore::Stub::VecVNonetype::DASH, Sbecore::Stcch* stcch = NULL, Sbecore::stcchitemref_t* strefSub = NULL, const bool refresh = false);
+	std::string getStubPrjShort(DbsWdbe* dbswdbe, const Sbecore::ubigint ref, const Sbecore::uint ixWdbeVLocale = VecWdbeVLocale::ENUS, const Sbecore::uint ixVNonetype = Sbecore::Stub::VecVNonetype::DASH, Sbecore::Stcch* stcch = NULL, Sbecore::stcchitemref_t* strefSub = NULL, const bool refresh = false);
 	std::string getStubPrjStd(DbsWdbe* dbswdbe, const Sbecore::ubigint ref, const Sbecore::uint ixWdbeVLocale = VecWdbeVLocale::ENUS, const Sbecore::uint ixVNonetype = Sbecore::Stub::VecVNonetype::DASH, Sbecore::Stcch* stcch = NULL, Sbecore::stcchitemref_t* strefSub = NULL, const bool refresh = false);
 	std::string getStubPrsStd(DbsWdbe* dbswdbe, const Sbecore::ubigint ref, const Sbecore::uint ixWdbeVLocale = VecWdbeVLocale::ENUS, const Sbecore::uint ixVNonetype = Sbecore::Stub::VecVNonetype::DASH, Sbecore::Stcch* stcch = NULL, Sbecore::stcchitemref_t* strefSub = NULL, const bool refresh = false);
 	std::string getStubPrtSref(DbsWdbe* dbswdbe, const Sbecore::ubigint ref, const Sbecore::uint ixWdbeVLocale = VecWdbeVLocale::ENUS, const Sbecore::uint ixVNonetype = Sbecore::Stub::VecVNonetype::DASH, Sbecore::Stcch* stcch = NULL, Sbecore::stcchitemref_t* strefSub = NULL, const bool refresh = false);
@@ -217,6 +218,7 @@ namespace StubWdbe {
 	std::string getStubVarStd(DbsWdbe* dbswdbe, const Sbecore::ubigint ref, const Sbecore::uint ixWdbeVLocale = VecWdbeVLocale::ENUS, const Sbecore::uint ixVNonetype = Sbecore::Stub::VecVNonetype::DASH, Sbecore::Stcch* stcch = NULL, Sbecore::stcchitemref_t* strefSub = NULL, const bool refresh = false);
 	std::string getStubVecStd(DbsWdbe* dbswdbe, const Sbecore::ubigint ref, const Sbecore::uint ixWdbeVLocale = VecWdbeVLocale::ENUS, const Sbecore::uint ixVNonetype = Sbecore::Stub::VecVNonetype::DASH, Sbecore::Stcch* stcch = NULL, Sbecore::stcchitemref_t* strefSub = NULL, const bool refresh = false);
 	std::string getStubVerNo(DbsWdbe* dbswdbe, const Sbecore::ubigint ref, const Sbecore::uint ixWdbeVLocale = VecWdbeVLocale::ENUS, const Sbecore::uint ixVNonetype = Sbecore::Stub::VecVNonetype::DASH, Sbecore::Stcch* stcch = NULL, Sbecore::stcchitemref_t* strefSub = NULL, const bool refresh = false);
+	std::string getStubVerShort(DbsWdbe* dbswdbe, const Sbecore::ubigint ref, const Sbecore::uint ixWdbeVLocale = VecWdbeVLocale::ENUS, const Sbecore::uint ixVNonetype = Sbecore::Stub::VecVNonetype::DASH, Sbecore::Stcch* stcch = NULL, Sbecore::stcchitemref_t* strefSub = NULL, const bool refresh = false);
 	std::string getStubVerStd(DbsWdbe* dbswdbe, const Sbecore::ubigint ref, const Sbecore::uint ixWdbeVLocale = VecWdbeVLocale::ENUS, const Sbecore::uint ixVNonetype = Sbecore::Stub::VecVNonetype::DASH, Sbecore::Stcch* stcch = NULL, Sbecore::stcchitemref_t* strefSub = NULL, const bool refresh = false);
 	std::string getStubVitStd(DbsWdbe* dbswdbe, const Sbecore::ubigint ref, const Sbecore::uint ixWdbeVLocale = VecWdbeVLocale::ENUS, const Sbecore::uint ixVNonetype = Sbecore::Stub::VecVNonetype::DASH, Sbecore::Stcch* stcch = NULL, Sbecore::stcchitemref_t* strefSub = NULL, const bool refresh = false);
 };

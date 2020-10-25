@@ -2,8 +2,8 @@
 	* \file PnlWdbeUntList.cpp
 	* job handler for job PnlWdbeUntList (implementation)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifdef WDBECMBD
@@ -252,7 +252,7 @@ void PnlWdbeUntList::handleDpchAppDataContiac(
 	muteRefresh = true;
 
 	if (has(diffitems, ContIac::NUMFTOS)) {
-		if ((_contiac->numFTos >= QryWdbeUntList::VecVOrd::MDL) && (_contiac->numFTos <= QryWdbeUntList::VecVOrd::SRF)) {
+		if ((_contiac->numFTos >= QryWdbeUntList::VecVOrd::SRF) && (_contiac->numFTos <= QryWdbeUntList::VecVOrd::MDL)) {
 			xchg->addIxPreset(VecWdbeVPreset::PREWDBEIXORD, jref, _contiac->numFTos);
 
 			qry->rerun(dbswdbe);

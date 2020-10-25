@@ -2,8 +2,8 @@
 	* \file Wdbed.h
 	* inter-thread exchange object for Wdbe daemon (declarations)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifndef WDBED_H

@@ -2,8 +2,8 @@
   * \file PnlWdbeErrAPar.js
   * web client functionality for panel PnlWdbeErrAPar
   * \author Alexander Wirthmueller
-  * \date created: 11 Jul 2020
-  * \date modified: 11 Jul 2020
+  * \date created: 23 Aug 2020
+  * \date modified: 23 Aug 2020
   */
 
 // --- expand state management

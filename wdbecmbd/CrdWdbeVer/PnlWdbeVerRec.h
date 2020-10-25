@@ -2,8 +2,8 @@
 	* \file PnlWdbeVerRec.h
 	* job handler for job PnlWdbeVerRec (declarations)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifndef PNLWDBEVERREC_H
@@ -13,13 +13,13 @@
 
 // IP include.cust --- INSERT
 
-#include "PnlWdbeVerMNLibrary.h"
+#include "PnlWdbeVerDetail.h"
+#include "PnlWdbeVer1NRelease.h"
+#include "PnlWdbeVer1NSystem.h"
+#include "PnlWdbeVerBvr1NVersion.h"
 #include "PnlWdbeVerRef1NFile.h"
 #include "PnlWdbeVer1NUnit.h"
-#include "PnlWdbeVerBvr1NVersion.h"
-#include "PnlWdbeVer1NSystem.h"
-#include "PnlWdbeVer1NRelease.h"
-#include "PnlWdbeVerDetail.h"
+#include "PnlWdbeVerMNLibrary.h"
 
 #define VecVWdbeVerRecDo PnlWdbeVerRec::VecVDo
 
@@ -76,7 +76,7 @@ public:
 	class StatApp {
 
 	public:
-		static void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true, const bool initdoneDetail = false, const bool initdone1NRelease = false, const bool initdone1NSystem = false, const bool initdoneBvr1NVersion = false, const bool initdone1NUnit = false, const bool initdoneRef1NFile = false, const bool initdoneMNLibrary = false);
+		static void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true, const bool initdoneDetail = false, const bool initdone1NRelease = false, const bool initdone1NSystem = false, const bool initdoneBvr1NVersion = false, const bool initdoneRef1NFile = false, const bool initdone1NUnit = false, const bool initdoneMNLibrary = false);
 	};
 
 	/**
@@ -90,13 +90,13 @@ public:
 		static const Sbecore::uint JREF1NRELEASE = 3;
 		static const Sbecore::uint JREF1NSYSTEM = 4;
 		static const Sbecore::uint JREFBVR1NVERSION = 5;
-		static const Sbecore::uint JREF1NUNIT = 6;
-		static const Sbecore::uint JREFREF1NFILE = 7;
+		static const Sbecore::uint JREFREF1NFILE = 6;
+		static const Sbecore::uint JREF1NUNIT = 7;
 		static const Sbecore::uint JREFMNLIBRARY = 8;
 		static const Sbecore::uint BUTREGULARIZEACTIVE = 9;
 
 	public:
-		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const Sbecore::ubigint jrefDetail = 0, const Sbecore::ubigint jref1NRelease = 0, const Sbecore::ubigint jref1NSystem = 0, const Sbecore::ubigint jrefBvr1NVersion = 0, const Sbecore::ubigint jref1NUnit = 0, const Sbecore::ubigint jrefRef1NFile = 0, const Sbecore::ubigint jrefMNLibrary = 0, const bool ButRegularizeActive = true);
+		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const Sbecore::ubigint jrefDetail = 0, const Sbecore::ubigint jref1NRelease = 0, const Sbecore::ubigint jref1NSystem = 0, const Sbecore::ubigint jrefBvr1NVersion = 0, const Sbecore::ubigint jrefRef1NFile = 0, const Sbecore::ubigint jref1NUnit = 0, const Sbecore::ubigint jrefMNLibrary = 0, const bool ButRegularizeActive = true);
 
 	public:
 		Sbecore::uint ixWdbeVExpstate;
@@ -104,8 +104,8 @@ public:
 		Sbecore::ubigint jref1NRelease;
 		Sbecore::ubigint jref1NSystem;
 		Sbecore::ubigint jrefBvr1NVersion;
-		Sbecore::ubigint jref1NUnit;
 		Sbecore::ubigint jrefRef1NFile;
+		Sbecore::ubigint jref1NUnit;
 		Sbecore::ubigint jrefMNLibrary;
 		bool ButRegularizeActive;
 
@@ -182,13 +182,13 @@ public:
 	ContInf continf;
 	StatShr statshr;
 
-	PnlWdbeVerMNLibrary* pnlmnlibrary;
+	PnlWdbeVerDetail* pnldetail;
+	PnlWdbeVer1NRelease* pnl1nrelease;
+	PnlWdbeVer1NSystem* pnl1nsystem;
+	PnlWdbeVerBvr1NVersion* pnlbvr1nversion;
 	PnlWdbeVerRef1NFile* pnlref1nfile;
 	PnlWdbeVer1NUnit* pnl1nunit;
-	PnlWdbeVerBvr1NVersion* pnlbvr1nversion;
-	PnlWdbeVer1NSystem* pnl1nsystem;
-	PnlWdbeVer1NRelease* pnl1nrelease;
-	PnlWdbeVerDetail* pnldetail;
+	PnlWdbeVerMNLibrary* pnlmnlibrary;
 
 	WdbeMVersion recVer;
 
@@ -222,10 +222,10 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeVerUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
-	bool handleCallWdbeVer_steEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
-	bool handleCallWdbeVer_prjEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
 	bool handleCallWdbeVer_bvrEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeVer_prjEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeVer_steEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
+	bool handleCallWdbeVerUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 
 };
 

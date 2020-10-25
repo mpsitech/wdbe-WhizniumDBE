@@ -2,8 +2,8 @@
 	* \file QryWdbeUsr1NSession.h
 	* job handler for job QryWdbeUsr1NSession (declarations)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifndef QRYWDBEUSR1NSESSION_H
@@ -122,8 +122,8 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeSesMod_usrEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 	bool handleCallWdbeStubChgFromSelf(DbsWdbe* dbswdbe);
+	bool handleCallWdbeSesMod_usrEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 
 };
 

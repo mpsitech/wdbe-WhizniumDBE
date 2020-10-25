@@ -2,8 +2,8 @@
 	* \file PnlWdbeMchRec.h
 	* job handler for job PnlWdbeMchRec (declarations)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifndef PNLWDBEMCHREC_H
@@ -13,10 +13,10 @@
 
 // IP include.cust --- INSERT
 
-#include "PnlWdbeMch1NRelease.h"
+#include "PnlWdbeMchDetail.h"
 #include "PnlWdbeMchAPar.h"
 #include "PnlWdbeMchAMakefile.h"
-#include "PnlWdbeMchDetail.h"
+#include "PnlWdbeMch1NRelease.h"
 
 #define VecVWdbeMchRecDo PnlWdbeMchRec::VecVDo
 
@@ -73,7 +73,7 @@ public:
 	class StatApp {
 
 	public:
-		static void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true, const bool initdoneDetail = false, const bool initdoneAMakefile = false, const bool initdoneAPar = false, const bool initdone1NRelease = false);
+		static void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true, const bool initdoneDetail = false, const bool initdoneAPar = false, const bool initdoneAMakefile = false, const bool initdone1NRelease = false);
 	};
 
 	/**
@@ -84,19 +84,19 @@ public:
 	public:
 		static const Sbecore::uint IXWDBEVEXPSTATE = 1;
 		static const Sbecore::uint JREFDETAIL = 2;
-		static const Sbecore::uint JREFAMAKEFILE = 3;
-		static const Sbecore::uint JREFAPAR = 4;
+		static const Sbecore::uint JREFAPAR = 3;
+		static const Sbecore::uint JREFAMAKEFILE = 4;
 		static const Sbecore::uint JREF1NRELEASE = 5;
 		static const Sbecore::uint BUTREGULARIZEACTIVE = 6;
 
 	public:
-		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const Sbecore::ubigint jrefDetail = 0, const Sbecore::ubigint jrefAMakefile = 0, const Sbecore::ubigint jrefAPar = 0, const Sbecore::ubigint jref1NRelease = 0, const bool ButRegularizeActive = true);
+		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const Sbecore::ubigint jrefDetail = 0, const Sbecore::ubigint jrefAPar = 0, const Sbecore::ubigint jrefAMakefile = 0, const Sbecore::ubigint jref1NRelease = 0, const bool ButRegularizeActive = true);
 
 	public:
 		Sbecore::uint ixWdbeVExpstate;
 		Sbecore::ubigint jrefDetail;
-		Sbecore::ubigint jrefAMakefile;
 		Sbecore::ubigint jrefAPar;
+		Sbecore::ubigint jrefAMakefile;
 		Sbecore::ubigint jref1NRelease;
 		bool ButRegularizeActive;
 
@@ -173,10 +173,10 @@ public:
 	ContInf continf;
 	StatShr statshr;
 
-	PnlWdbeMch1NRelease* pnl1nrelease;
+	PnlWdbeMchDetail* pnldetail;
 	PnlWdbeMchAPar* pnlapar;
 	PnlWdbeMchAMakefile* pnlamakefile;
-	PnlWdbeMchDetail* pnldetail;
+	PnlWdbeMch1NRelease* pnl1nrelease;
 
 	WdbeMMachine recMch;
 
@@ -210,8 +210,8 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeMchUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 	bool handleCallWdbeMch_cchEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeMchUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 
 };
 

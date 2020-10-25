@@ -2,8 +2,8 @@
 	* \file QryWdbeUntFwd1NController.h
 	* API code for job QryWdbeUntFwd1NController (declarations)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifndef QRYWDBEUNTFWD1NCONTROLLER_H

@@ -2,8 +2,8 @@
 	* \file PnlWdbeMchRec.h
 	* API code for job PnlWdbeMchRec (declarations)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifndef PNLWDBEMCHREC_H
@@ -65,17 +65,17 @@ namespace PnlWdbeMchRec {
 
 	public:
 		static const Sbecore::uint INITDONEDETAIL = 1;
-		static const Sbecore::uint INITDONEAMAKEFILE = 2;
-		static const Sbecore::uint INITDONEAPAR = 3;
+		static const Sbecore::uint INITDONEAPAR = 2;
+		static const Sbecore::uint INITDONEAMAKEFILE = 3;
 		static const Sbecore::uint INITDONE1NRELEASE = 4;
 
 	public:
-		StatApp(const bool initdoneDetail = false, const bool initdoneAMakefile = false, const bool initdoneAPar = false, const bool initdone1NRelease = false);
+		StatApp(const bool initdoneDetail = false, const bool initdoneAPar = false, const bool initdoneAMakefile = false, const bool initdone1NRelease = false);
 
 	public:
 		bool initdoneDetail;
-		bool initdoneAMakefile;
 		bool initdoneAPar;
+		bool initdoneAMakefile;
 		bool initdone1NRelease;
 
 	public:
@@ -92,19 +92,19 @@ namespace PnlWdbeMchRec {
 	public:
 		static const Sbecore::uint IXWDBEVEXPSTATE = 1;
 		static const Sbecore::uint SCRJREFDETAIL = 2;
-		static const Sbecore::uint SCRJREFAMAKEFILE = 3;
-		static const Sbecore::uint SCRJREFAPAR = 4;
+		static const Sbecore::uint SCRJREFAPAR = 3;
+		static const Sbecore::uint SCRJREFAMAKEFILE = 4;
 		static const Sbecore::uint SCRJREF1NRELEASE = 5;
 		static const Sbecore::uint BUTREGULARIZEACTIVE = 6;
 
 	public:
-		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const std::string& scrJrefDetail = "", const std::string& scrJrefAMakefile = "", const std::string& scrJrefAPar = "", const std::string& scrJref1NRelease = "", const bool ButRegularizeActive = true);
+		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const std::string& scrJrefDetail = "", const std::string& scrJrefAPar = "", const std::string& scrJrefAMakefile = "", const std::string& scrJref1NRelease = "", const bool ButRegularizeActive = true);
 
 	public:
 		Sbecore::uint ixWdbeVExpstate;
 		std::string scrJrefDetail;
-		std::string scrJrefAMakefile;
 		std::string scrJrefAPar;
+		std::string scrJrefAMakefile;
 		std::string scrJref1NRelease;
 		bool ButRegularizeActive;
 

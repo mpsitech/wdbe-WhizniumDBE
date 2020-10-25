@@ -2,8 +2,8 @@
 	* \file PnlWdbeRlsRec.cpp
 	* job handler for job PnlWdbeRlsRec (implementation)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifdef WDBECMBD
@@ -43,8 +43,8 @@ PnlWdbeRlsRec::PnlWdbeRlsRec(
 
 	// IP constructor.cust2 --- INSERT
 
-	xchg->addClstn(VecWdbeVCall::CALLWDBERLS_VEREQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBERLS_MCHEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBERLS_VEREQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -234,21 +234,23 @@ void PnlWdbeRlsRec::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBERLSUPD_REFEQ) {
-		call->abort = handleCallWdbeRlsUpd_refEq(dbswdbe, call->jref);
+	if (call->ixVCall == VecWdbeVCall::CALLWDBERLS_MCHEQ) {
+		call->abort = handleCallWdbeRls_mchEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBERLS_VEREQ) {
 		call->abort = handleCallWdbeRls_verEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBERLS_MCHEQ) {
-		call->abort = handleCallWdbeRls_mchEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBERLSUPD_REFEQ) {
+		call->abort = handleCallWdbeRlsUpd_refEq(dbswdbe, call->jref);
 	};
 };
 
-bool PnlWdbeRlsRec::handleCallWdbeRlsUpd_refEq(
+bool PnlWdbeRlsRec::handleCallWdbeRls_mchEq(
 			DbsWdbe* dbswdbe
 			, const ubigint jrefTrig
+			, const ubigint refInv
+			, bool& boolvalRet
 		) {
 	bool retval = false;
-	// IP handleCallWdbeRlsUpd_refEq --- INSERT
+	boolvalRet = (recRls.refWdbeMMachine == refInv); // IP handleCallWdbeRls_mchEq --- LINE
 	return retval;
 };
 
@@ -263,14 +265,12 @@ bool PnlWdbeRlsRec::handleCallWdbeRls_verEq(
 	return retval;
 };
 
-bool PnlWdbeRlsRec::handleCallWdbeRls_mchEq(
+bool PnlWdbeRlsRec::handleCallWdbeRlsUpd_refEq(
 			DbsWdbe* dbswdbe
 			, const ubigint jrefTrig
-			, const ubigint refInv
-			, bool& boolvalRet
 		) {
 	bool retval = false;
-	boolvalRet = (recRls.refWdbeMMachine == refInv); // IP handleCallWdbeRls_mchEq --- LINE
+	// IP handleCallWdbeRlsUpd_refEq --- INSERT
 	return retval;
 };
 

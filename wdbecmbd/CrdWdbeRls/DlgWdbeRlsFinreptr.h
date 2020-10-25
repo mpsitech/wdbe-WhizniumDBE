@@ -2,8 +2,8 @@
 	* \file DlgWdbeRlsFinreptr.h
 	* job handler for job DlgWdbeRlsFinreptr (declarations)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifndef DLGWDBERLSFINREPTR_H
@@ -400,15 +400,15 @@ public:
 		void writeXML(const Sbecore::uint ixWdbeVLocale, xmlTextWriter* wr);
 	};
 
-	bool evalButDneActive(DbsWdbe* dbswdbe);
+	bool evalFinButRunActive(DbsWdbe* dbswdbe);
+	bool evalFinButStoActive(DbsWdbe* dbswdbe);
 	bool evalResDldAvail(DbsWdbe* dbswdbe);
 	bool evalResDldActive(DbsWdbe* dbswdbe);
 	bool evalResTxtPrgAvail(DbsWdbe* dbswdbe);
 	bool evalResSep1Avail(DbsWdbe* dbswdbe);
 	bool evalResButPsgAvail(DbsWdbe* dbswdbe);
 	bool evalResButPsgActive(DbsWdbe* dbswdbe);
-	bool evalFinButRunActive(DbsWdbe* dbswdbe);
-	bool evalFinButStoActive(DbsWdbe* dbswdbe);
+	bool evalButDneActive(DbsWdbe* dbswdbe);
 
 public:
 	DlgWdbeRlsFinreptr(XchgWdbe* xchg, DbsWdbe* dbswdbe, const Sbecore::ubigint jrefSup, const Sbecore::uint ixWdbeVLocale);

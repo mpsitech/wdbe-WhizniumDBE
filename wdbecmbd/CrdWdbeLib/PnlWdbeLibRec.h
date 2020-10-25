@@ -2,8 +2,8 @@
 	* \file PnlWdbeLibRec.h
 	* job handler for job PnlWdbeLibRec (declarations)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifndef PNLWDBELIBREC_H
@@ -13,9 +13,9 @@
 
 // IP include.cust --- INSERT
 
-#include "PnlWdbeLibMNVersion.h"
-#include "PnlWdbeLibAMakefile.h"
 #include "PnlWdbeLibDetail.h"
+#include "PnlWdbeLibAMakefile.h"
+#include "PnlWdbeLibMNVersion.h"
 
 #define VecVWdbeLibRecDo PnlWdbeLibRec::VecVDo
 
@@ -170,9 +170,9 @@ public:
 	ContInf continf;
 	StatShr statshr;
 
-	PnlWdbeLibMNVersion* pnlmnversion;
-	PnlWdbeLibAMakefile* pnlamakefile;
 	PnlWdbeLibDetail* pnldetail;
+	PnlWdbeLibAMakefile* pnlamakefile;
+	PnlWdbeLibMNVersion* pnlmnversion;
 
 	WdbeMLibrary recLib;
 

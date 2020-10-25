@@ -2,8 +2,8 @@
 	* \file QryWdbeCvrList.cpp
 	* job handler for job QryWdbeCvrList (implementation)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifdef WDBECMBD
@@ -45,8 +45,8 @@ QryWdbeCvrList::QryWdbeCvrList(
 
 	rerun(dbswdbe);
 
-	xchg->addClstn(VecWdbeVCall::CALLWDBECVRMOD, jref, Clstn::VecVJobmask::ALL, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBESTUBCHG, jref, Clstn::VecVJobmask::SELF, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBECVRMOD, jref, Clstn::VecVJobmask::ALL, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -245,11 +245,11 @@ void QryWdbeCvrList::rerun_orderSQL(
 			string& sqlstr
 			, const uint preIxOrd
 		) {
-	if (preIxOrd == VecVOrd::STE) sqlstr += " ORDER BY TblWdbeMCoreversion.ixVState ASC";
-	else if (preIxOrd == VecVOrd::BCV) sqlstr += " ORDER BY TblWdbeMCoreversion.bcvRefWdbeMCoreversion ASC";
-	else if (preIxOrd == VecVOrd::CPR) sqlstr += " ORDER BY TblWdbeMCoreversion.refWdbeMCoreproject ASC";
+	if (preIxOrd == VecVOrd::GRP) sqlstr += " ORDER BY TblWdbeMCoreversion.grp ASC";
 	else if (preIxOrd == VecVOrd::OWN) sqlstr += " ORDER BY TblWdbeMCoreversion.own ASC";
-	else if (preIxOrd == VecVOrd::GRP) sqlstr += " ORDER BY TblWdbeMCoreversion.grp ASC";
+	else if (preIxOrd == VecVOrd::CPR) sqlstr += " ORDER BY TblWdbeMCoreversion.refWdbeMCoreproject ASC";
+	else if (preIxOrd == VecVOrd::BCV) sqlstr += " ORDER BY TblWdbeMCoreversion.bcvRefWdbeMCoreversion ASC";
+	else if (preIxOrd == VecVOrd::STE) sqlstr += " ORDER BY TblWdbeMCoreversion.ixVState ASC";
 };
 
 void QryWdbeCvrList::fetch(
@@ -435,26 +435,20 @@ void QryWdbeCvrList::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBECVRUPD_REFEQ) {
-		call->abort = handleCallWdbeCvrUpd_refEq(dbswdbe, call->jref);
+	if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
+		call->abort = handleCallWdbeStubChgFromSelf(dbswdbe);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECVRMOD) {
 		call->abort = handleCallWdbeCvrMod(dbswdbe, call->jref);
-	} else if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
-		call->abort = handleCallWdbeStubChgFromSelf(dbswdbe);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECVRUPD_REFEQ) {
+		call->abort = handleCallWdbeCvrUpd_refEq(dbswdbe, call->jref);
 	};
 };
 
-bool QryWdbeCvrList::handleCallWdbeCvrUpd_refEq(
+bool QryWdbeCvrList::handleCallWdbeStubChgFromSelf(
 			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
 		) {
 	bool retval = false;
-
-	if (ixWdbeVQrystate != VecWdbeVQrystate::OOD) {
-		ixWdbeVQrystate = VecWdbeVQrystate::OOD;
-		xchg->triggerCall(dbswdbe, VecWdbeVCall::CALLWDBESTATCHG, jref);
-	};
-
+	// IP handleCallWdbeStubChgFromSelf --- INSERT
 	return retval;
 };
 
@@ -472,11 +466,17 @@ bool QryWdbeCvrList::handleCallWdbeCvrMod(
 	return retval;
 };
 
-bool QryWdbeCvrList::handleCallWdbeStubChgFromSelf(
+bool QryWdbeCvrList::handleCallWdbeCvrUpd_refEq(
 			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
 		) {
 	bool retval = false;
-	// IP handleCallWdbeStubChgFromSelf --- INSERT
+
+	if (ixWdbeVQrystate != VecWdbeVQrystate::OOD) {
+		ixWdbeVQrystate = VecWdbeVQrystate::OOD;
+		xchg->triggerCall(dbswdbe, VecWdbeVCall::CALLWDBESTATCHG, jref);
+	};
+
 	return retval;
 };
 

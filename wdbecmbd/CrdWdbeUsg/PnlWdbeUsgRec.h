@@ -2,8 +2,8 @@
 	* \file PnlWdbeUsgRec.h
 	* job handler for job PnlWdbeUsgRec (declarations)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifndef PNLWDBEUSGREC_H
@@ -13,9 +13,9 @@
 
 // IP include.cust --- INSERT
 
-#include "PnlWdbeUsgMNUser.h"
-#include "PnlWdbeUsgAAccess.h"
 #include "PnlWdbeUsgDetail.h"
+#include "PnlWdbeUsgAAccess.h"
+#include "PnlWdbeUsgMNUser.h"
 
 #define VecVWdbeUsgRecDo PnlWdbeUsgRec::VecVDo
 
@@ -170,9 +170,9 @@ public:
 	ContInf continf;
 	StatShr statshr;
 
-	PnlWdbeUsgMNUser* pnlmnuser;
-	PnlWdbeUsgAAccess* pnlaaccess;
 	PnlWdbeUsgDetail* pnldetail;
+	PnlWdbeUsgAAccess* pnlaaccess;
+	PnlWdbeUsgMNUser* pnlmnuser;
 
 	WdbeMUsergroup recUsg;
 

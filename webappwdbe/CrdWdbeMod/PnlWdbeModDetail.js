@@ -2,8 +2,8 @@
   * \file PnlWdbeModDetail.js
   * web client functionality for panel PnlWdbeModDetail
   * \author Alexander Wirthmueller
-  * \date created: 11 Jul 2020
-  * \date modified: 11 Jul 2020
+  * \date created: 23 Aug 2020
+  * \date modified: 23 Aug 2020
   */
 
 // IP cust --- INSERT
@@ -68,14 +68,14 @@ function initBD(bNotD) {
 	initCpt(contcontdoc, "CptTpl", retrieveTi(srcdoc, "TagWdbeModDetail", "CptTpl"));
 	initCpt(contcontdoc, "CptSrr", retrieveTi(srcdoc, "TagWdbeModDetail", "CptSrr"));
 	initCpt(contcontdoc, "CptCmt", retrieveTi(srcdoc, "TagWdbeModDetail", "CptCmt"));
+	initCpt(contcontdoc, "CptCtrFsr", retrieveTi(srcdoc, "TagWdbeModDetail", "CptCtrFsr"));
+	initCpt(contcontdoc, "CptCtrFwd", retrieveTi(srcdoc, "TagWdbeModDetail", "CptCtrFwd"));
+	initCpt(contcontdoc, "CptCtrClr", retrieveTi(srcdoc, "TagWdbeModDetail", "CptCtrClr"));
 	initCpt(contcontdoc, "CptImbSrf", retrieveTi(srcdoc, "TagWdbeModDetail", "CptImbSrf"));
 	initCpt(contcontdoc, "CptImbCor", retrieveTi(srcdoc, "TagWdbeModDetail", "CptImbCor"));
 	initCpt(contcontdoc, "CptImbDir", retrieveTi(srcdoc, "TagWdbeModDetail", "CptImbDir"));
 	refreshPup(contcontdoc, srcdoc, "PupImbDir", "", "FeedFPupImbDir", retrieveCi(srcdoc, "ContIacWdbeModDetail", "numFPupImbDir"), retrieveSi(srcdoc, "StatShrWdbeModDetail", "PupImbDirActive"), false);
 	initCpt(contcontdoc, "CptImbPri", retrieveTi(srcdoc, "TagWdbeModDetail", "CptImbPri"));
-	initCpt(contcontdoc, "CptCtrFsr", retrieveTi(srcdoc, "TagWdbeModDetail", "CptCtrFsr"));
-	initCpt(contcontdoc, "CptCtrFwd", retrieveTi(srcdoc, "TagWdbeModDetail", "CptCtrFwd"));
-	initCpt(contcontdoc, "CptCtrClr", retrieveTi(srcdoc, "TagWdbeModDetail", "CptCtrClr"));
 	// IP initBD --- END
 
 	refreshBD(bNotD);
@@ -122,6 +122,25 @@ function refreshBD(bNotD) {
 
 	var TxfCmtActive = (retrieveSi(srcdoc, "StatShrWdbeModDetail", "TxfCmtActive") == "true");
 
+	var SepCtrAvail = (retrieveSi(srcdoc, "StatShrWdbeModDetail", "SepCtrAvail") == "true");
+
+	var HdgCtrAvail = (retrieveSi(srcdoc, "StatShrWdbeModDetail", "HdgCtrAvail") == "true");
+	var ButCtrNewAvail = (retrieveSi(srcdoc, "StatShrWdbeModDetail", "ButCtrNewAvail") == "true");
+	var ButCtrDeleteAvail = (retrieveSi(srcdoc, "StatShrWdbeModDetail", "ButCtrDeleteAvail") == "true");
+
+	var TxfCtrFsrAvail = (retrieveSi(srcdoc, "StatShrWdbeModDetail", "TxfCtrFsrAvail") == "true");
+	var TxfCtrFsrActive = (retrieveSi(srcdoc, "StatShrWdbeModDetail", "TxfCtrFsrActive") == "true");
+
+	var TxtCtrFwdAvail = (retrieveSi(srcdoc, "StatShrWdbeModDetail", "TxtCtrFwdAvail") == "true");
+	var TxtCtrFwdActive = (retrieveSi(srcdoc, "StatShrWdbeModDetail", "TxtCtrFwdActive") == "true");
+	var ButCtrFwdViewAvail = (retrieveSi(srcdoc, "StatShrWdbeModDetail", "ButCtrFwdViewAvail") == "true");
+	var ButCtrFwdViewActive = (retrieveSi(srcdoc, "StatShrWdbeModDetail", "ButCtrFwdViewActive") == "true");
+
+	var TxtCtrClrAvail = (retrieveSi(srcdoc, "StatShrWdbeModDetail", "TxtCtrClrAvail") == "true");
+	var TxtCtrClrActive = (retrieveSi(srcdoc, "StatShrWdbeModDetail", "TxtCtrClrActive") == "true");
+	var ButCtrClrViewAvail = (retrieveSi(srcdoc, "StatShrWdbeModDetail", "ButCtrClrViewAvail") == "true");
+	var ButCtrClrViewActive = (retrieveSi(srcdoc, "StatShrWdbeModDetail", "ButCtrClrViewActive") == "true");
+
 	var SepImbAvail = (retrieveSi(srcdoc, "StatShrWdbeModDetail", "SepImbAvail") == "true");
 
 	var HdgImbAvail = (retrieveSi(srcdoc, "StatShrWdbeModDetail", "HdgImbAvail") == "true");
@@ -141,25 +160,6 @@ function refreshBD(bNotD) {
 
 	var TxfImbPriAvail = (retrieveSi(srcdoc, "StatShrWdbeModDetail", "TxfImbPriAvail") == "true");
 	var TxfImbPriActive = (retrieveSi(srcdoc, "StatShrWdbeModDetail", "TxfImbPriActive") == "true");
-
-	var SepCtrAvail = (retrieveSi(srcdoc, "StatShrWdbeModDetail", "SepCtrAvail") == "true");
-
-	var HdgCtrAvail = (retrieveSi(srcdoc, "StatShrWdbeModDetail", "HdgCtrAvail") == "true");
-	var ButCtrNewAvail = (retrieveSi(srcdoc, "StatShrWdbeModDetail", "ButCtrNewAvail") == "true");
-	var ButCtrDeleteAvail = (retrieveSi(srcdoc, "StatShrWdbeModDetail", "ButCtrDeleteAvail") == "true");
-
-	var TxfCtrFsrAvail = (retrieveSi(srcdoc, "StatShrWdbeModDetail", "TxfCtrFsrAvail") == "true");
-	var TxfCtrFsrActive = (retrieveSi(srcdoc, "StatShrWdbeModDetail", "TxfCtrFsrActive") == "true");
-
-	var TxtCtrFwdAvail = (retrieveSi(srcdoc, "StatShrWdbeModDetail", "TxtCtrFwdAvail") == "true");
-	var TxtCtrFwdActive = (retrieveSi(srcdoc, "StatShrWdbeModDetail", "TxtCtrFwdActive") == "true");
-	var ButCtrFwdViewAvail = (retrieveSi(srcdoc, "StatShrWdbeModDetail", "ButCtrFwdViewAvail") == "true");
-	var ButCtrFwdViewActive = (retrieveSi(srcdoc, "StatShrWdbeModDetail", "ButCtrFwdViewActive") == "true");
-
-	var TxtCtrClrAvail = (retrieveSi(srcdoc, "StatShrWdbeModDetail", "TxtCtrClrAvail") == "true");
-	var TxtCtrClrActive = (retrieveSi(srcdoc, "StatShrWdbeModDetail", "TxtCtrClrActive") == "true");
-	var ButCtrClrViewAvail = (retrieveSi(srcdoc, "StatShrWdbeModDetail", "ButCtrClrViewAvail") == "true");
-	var ButCtrClrViewActive = (retrieveSi(srcdoc, "StatShrWdbeModDetail", "ButCtrClrViewActive") == "true");
 
 	var ButSaveActive = (retrieveSi(srcdoc, "StatShrWdbeModDetail", "ButSaveActive") == "true");
 	var mytd, first;
@@ -225,78 +225,6 @@ function refreshBD(bNotD) {
 	refreshTxf(contcontdoc, "TxfSrr", "", retrieveCi(srcdoc, "ContIacWdbeModDetail", "TxfSrr"), TxfSrrActive, false, true);
 
 	refreshTxft(contcontdoc, "TxfCmt", retrieveCi(srcdoc, "ContIacWdbeModDetail", "TxfCmt"), TxfCmtActive, false, true);
-
-	height -= setCtlAvail(contcontdoc, "Imb1", SepImbAvail, 0);
-	setCtlAvail(contcontdoc, "Imb2", SepImbAvail, 7);
-	setCtlAvail(contcontdoc, "Imb3", SepImbAvail, 0);
-	if (SepImbAvail) {
-
-	};
-
-	height -= setCtlAvail(contcontdoc, "Imb", HdgImbAvail, 25);
-	if (HdgImbAvail) {
-		if ((ButImbNewAvail == !contcontdoc.getElementById("ButImbNew")) || (ButImbDeleteAvail == !contcontdoc.getElementById("ButImbDelete"))) {
-			mytd = contcontdoc.getElementById("dynImb");
-			clearElem(mytd);
-
-			mytd.appendChild(makeSpanCpt(contcontdoc, "HdgImb", retrieveTi(srcdoc, "TagWdbeModDetail", "HdgImb")));
-			mytd.appendChild(contcontdoc.createTextNode("\u00a0\u00a0"));
-
-			first = true;
-
-			if (ButImbNewAvail) {
-				if (first) first = false;
-				else mytd.appendChild(contcontdoc.createTextNode("\u00a0"));
-				mytd.appendChild(makeImgBut(contcontdoc, "ButImbNew", "icon/new"));
-			};
-
-			if (ButImbDeleteAvail) {
-				if (first) first = false;
-				else mytd.appendChild(contcontdoc.createTextNode("\u00a0"));
-				mytd.appendChild(makeImgBut(contcontdoc, "ButImbDelete", "icon/delete"));
-			};
-		};
-
-	};
-
-	height -= setCtlAvail(contcontdoc, "ImbSrf", TxtImbSrfAvail, 25);
-	if (TxtImbSrfAvail) {
-		refreshTxt(contcontdoc, "TxtImbSrf", retrieveCi(srcdoc, "ContInfWdbeModDetail", "TxtImbSrf"));
-
-	};
-
-	height -= setCtlAvail(contcontdoc, "ImbCor", TxtImbCorAvail, 25);
-	if (TxtImbCorAvail) {
-		if ((ButImbCorViewAvail == !contcontdoc.getElementById("ButImbCorView"))) {
-			mytd = contcontdoc.getElementById("rdynImbCor");
-			clearElem(mytd);
-
-			first = true;
-
-			if (ButImbCorViewAvail) {
-				if (first) first = false;
-				else mytd.appendChild(contcontdoc.createTextNode("\u00a0"));
-				mytd.appendChild(makeImgBut(contcontdoc, "ButImbCorView", "icon/view"));
-			};
-		};
-
-		refreshTxt(contcontdoc, "TxtImbCor", retrieveCi(srcdoc, "ContInfWdbeModDetail", "TxtImbCor"));
-
-		if (ButImbCorViewAvail) refreshButicon(contcontdoc, "ButImbCorView", "icon/view", ButImbCorViewActive, false);
-
-	};
-
-	height -= setCtlAvail(contcontdoc, "ImbDir", PupImbDirAvail, 25);
-	if (PupImbDirAvail) {
-		contcontdoc.getElementById("PupImbDir").value = retrieveCi(srcdoc, "ContIacWdbeModDetail", "numFPupImbDir");
-
-	};
-
-	height -= setCtlAvail(contcontdoc, "ImbPri", TxfImbPriAvail, 25);
-	if (TxfImbPriAvail) {
-		refreshTxf(contcontdoc, "TxfImbPri", "s", retrieveCi(srcdoc, "ContIacWdbeModDetail", "TxfImbPri"), TxfImbPriActive, false, true);
-
-	};
 
 	height -= setCtlAvail(contcontdoc, "Ctr1", SepCtrAvail, 0);
 	setCtlAvail(contcontdoc, "Ctr2", SepCtrAvail, 7);
@@ -376,6 +304,78 @@ function refreshBD(bNotD) {
 		refreshTxt(contcontdoc, "TxtCtrClr", retrieveCi(srcdoc, "ContInfWdbeModDetail", "TxtCtrClr"));
 
 		if (ButCtrClrViewAvail) refreshButicon(contcontdoc, "ButCtrClrView", "icon/view", ButCtrClrViewActive, false);
+
+	};
+
+	height -= setCtlAvail(contcontdoc, "Imb1", SepImbAvail, 0);
+	setCtlAvail(contcontdoc, "Imb2", SepImbAvail, 7);
+	setCtlAvail(contcontdoc, "Imb3", SepImbAvail, 0);
+	if (SepImbAvail) {
+
+	};
+
+	height -= setCtlAvail(contcontdoc, "Imb", HdgImbAvail, 25);
+	if (HdgImbAvail) {
+		if ((ButImbNewAvail == !contcontdoc.getElementById("ButImbNew")) || (ButImbDeleteAvail == !contcontdoc.getElementById("ButImbDelete"))) {
+			mytd = contcontdoc.getElementById("dynImb");
+			clearElem(mytd);
+
+			mytd.appendChild(makeSpanCpt(contcontdoc, "HdgImb", retrieveTi(srcdoc, "TagWdbeModDetail", "HdgImb")));
+			mytd.appendChild(contcontdoc.createTextNode("\u00a0\u00a0"));
+
+			first = true;
+
+			if (ButImbNewAvail) {
+				if (first) first = false;
+				else mytd.appendChild(contcontdoc.createTextNode("\u00a0"));
+				mytd.appendChild(makeImgBut(contcontdoc, "ButImbNew", "icon/new"));
+			};
+
+			if (ButImbDeleteAvail) {
+				if (first) first = false;
+				else mytd.appendChild(contcontdoc.createTextNode("\u00a0"));
+				mytd.appendChild(makeImgBut(contcontdoc, "ButImbDelete", "icon/delete"));
+			};
+		};
+
+	};
+
+	height -= setCtlAvail(contcontdoc, "ImbSrf", TxtImbSrfAvail, 25);
+	if (TxtImbSrfAvail) {
+		refreshTxt(contcontdoc, "TxtImbSrf", retrieveCi(srcdoc, "ContInfWdbeModDetail", "TxtImbSrf"));
+
+	};
+
+	height -= setCtlAvail(contcontdoc, "ImbCor", TxtImbCorAvail, 25);
+	if (TxtImbCorAvail) {
+		if ((ButImbCorViewAvail == !contcontdoc.getElementById("ButImbCorView"))) {
+			mytd = contcontdoc.getElementById("rdynImbCor");
+			clearElem(mytd);
+
+			first = true;
+
+			if (ButImbCorViewAvail) {
+				if (first) first = false;
+				else mytd.appendChild(contcontdoc.createTextNode("\u00a0"));
+				mytd.appendChild(makeImgBut(contcontdoc, "ButImbCorView", "icon/view"));
+			};
+		};
+
+		refreshTxt(contcontdoc, "TxtImbCor", retrieveCi(srcdoc, "ContInfWdbeModDetail", "TxtImbCor"));
+
+		if (ButImbCorViewAvail) refreshButicon(contcontdoc, "ButImbCorView", "icon/view", ButImbCorViewActive, false);
+
+	};
+
+	height -= setCtlAvail(contcontdoc, "ImbDir", PupImbDirAvail, 25);
+	if (PupImbDirAvail) {
+		contcontdoc.getElementById("PupImbDir").value = retrieveCi(srcdoc, "ContIacWdbeModDetail", "numFPupImbDir");
+
+	};
+
+	height -= setCtlAvail(contcontdoc, "ImbPri", TxfImbPriAvail, 25);
+	if (TxfImbPriAvail) {
+		refreshTxf(contcontdoc, "TxfImbPri", "s", retrieveCi(srcdoc, "ContIacWdbeModDetail", "TxfImbPri"), TxfImbPriActive, false, true);
 
 	};
 

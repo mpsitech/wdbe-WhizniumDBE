@@ -2,8 +2,8 @@
 	* \file QryWdbeModMdl1NPort.h
 	* job handler for job QryWdbeModMdl1NPort (declarations)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifndef QRYWDBEMODMDL1NPORT_H
@@ -122,8 +122,8 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbePrtMod_mdlEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 	bool handleCallWdbeStubChgFromSelf(DbsWdbe* dbswdbe);
+	bool handleCallWdbePrtMod_mdlEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 
 };
 

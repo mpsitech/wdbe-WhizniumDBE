@@ -2,8 +2,8 @@
   * \file PnlWdbeSigList.js
   * web client functionality for panel PnlWdbeSigList
   * \author Alexander Wirthmueller
-  * \date created: 11 Jul 2020
-  * \date modified: 11 Jul 2020
+  * \date created: 23 Aug 2020
+  * \date modified: 23 Aug 2020
   */
 
 // --- expand state management
@@ -140,19 +140,19 @@ function refreshB(chgcol) {
 			ix++;
 
 			if (i == 1) {
-				doc.cols.push("TcoSrf"); doc.widths.push(TcoSrfWidth); doc.fs.push("srf"); doc.tos.push(7); wtot += TcoSrfWidth;
+				doc.cols.push("TcoSrf"); doc.widths.push(TcoSrfWidth); doc.fs.push("srf"); doc.tos.push(1); wtot += TcoSrfWidth;
 			} else if (i == 2) {
 				doc.cols.push("TcoTyp"); doc.widths.push(TcoTypWidth); doc.fs.push("typ2"); doc.tos.push(0); wtot += TcoTypWidth;
 			} else if (i == 3) {
-				doc.cols.push("TcoMdl"); doc.widths.push(TcoMdlWidth); doc.fs.push("mdl"); doc.tos.push(5); wtot += TcoMdlWidth;
+				doc.cols.push("TcoMdl"); doc.widths.push(TcoMdlWidth); doc.fs.push("mdl"); doc.tos.push(3); wtot += TcoMdlWidth;
 			} else if (i == 4) {
 				doc.cols.push("TcoMgt"); doc.widths.push(TcoMgtWidth); doc.fs.push("mgt2"); doc.tos.push(0); wtot += TcoMgtWidth;
 			} else if (i == 5) {
-				doc.cols.push("TcoMgu"); doc.widths.push(TcoMguWidth); doc.fs.push("mgu"); doc.tos.push(3); wtot += TcoMguWidth;
+				doc.cols.push("TcoMgu"); doc.widths.push(TcoMguWidth); doc.fs.push("mgu"); doc.tos.push(5); wtot += TcoMguWidth;
 			} else if (i == 6) {
-				doc.cols.push("TcoVec"); doc.widths.push(TcoVecWidth); doc.fs.push("vec"); doc.tos.push(2); wtot += TcoVecWidth;
+				doc.cols.push("TcoVec"); doc.widths.push(TcoVecWidth); doc.fs.push("vec"); doc.tos.push(6); wtot += TcoVecWidth;
 			} else if (i == 7) {
-				doc.cols.push("TcoCon"); doc.widths.push(TcoConWidth); doc.fs.push("con"); doc.tos.push(1); wtot += TcoConWidth;
+				doc.cols.push("TcoCon"); doc.widths.push(TcoConWidth); doc.fs.push("con"); doc.tos.push(7); wtot += TcoConWidth;
 			} else if (i == 8) {
 				doc.cols.push("TcoHty"); doc.widths.push(TcoHtyWidth); doc.fs.push("hty2"); doc.tos.push(0); wtot += TcoHtyWidth;
 			} else if (i == 9) {

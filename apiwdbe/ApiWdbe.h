@@ -2,17 +2,17 @@
 	* \file ApiWdbe.h
 	* Wdbe API library global functionality (declarations)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifndef APIWDBE_H
 #define APIWDBE_H
 
-#define WDBE_VERSION "1.0.2"
+#define WDBE_VERSION "1.0.3"
 #define WDBE_VERSION_MAJOR 1
 #define WDBE_VERSION_MINOR 0
-#define WDBE_VERSION_SUB 2
+#define WDBE_VERSION_SUB 3
 
 #include "ApiWdbe_blks.h"
 

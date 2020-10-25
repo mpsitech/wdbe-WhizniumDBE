@@ -2,8 +2,8 @@
   * \file PnlWdbeCvrRec.java
   * Java API code for job PnlWdbeCvrRec
   * \author Alexander Wirthmueller
-  * \date created: 11 Jul 2020
-  * \date modified: 11 Jul 2020
+  * \date created: 23 Aug 2020
+  * \date modified: 23 Aug 2020
   */
 
 package apiwdbe;
@@ -113,30 +113,30 @@ public class PnlWdbeCvrRec {
 	public class StatApp extends Block {
 
 		public static final int INITDONEDETAIL = 1;
-		public static final int INITDONEAPLH = 2;
-		public static final int INITDONEAIP = 3;
+		public static final int INITDONEAIP = 2;
+		public static final int INITDONEAPLH = 3;
 		public static final int INITDONEBCV1NCOREVERSION = 4;
 		public static final int INITDONEHK1NMODULE = 5;
 
 		public StatApp(
 					boolean initdoneDetail
-					, boolean initdoneAPlh
 					, boolean initdoneAIp
+					, boolean initdoneAPlh
 					, boolean initdoneBcv1NCoreversion
 					, boolean initdoneHk1NModule
 				) {
 			this.initdoneDetail = initdoneDetail;
-			this.initdoneAPlh = initdoneAPlh;
 			this.initdoneAIp = initdoneAIp;
+			this.initdoneAPlh = initdoneAPlh;
 			this.initdoneBcv1NCoreversion = initdoneBcv1NCoreversion;
 			this.initdoneHk1NModule = initdoneHk1NModule;
 
-			mask = new HashSet<Integer>(Arrays.asList(INITDONEDETAIL, INITDONEAPLH, INITDONEAIP, INITDONEBCV1NCOREVERSION, INITDONEHK1NMODULE));
+			mask = new HashSet<Integer>(Arrays.asList(INITDONEDETAIL, INITDONEAIP, INITDONEAPLH, INITDONEBCV1NCOREVERSION, INITDONEHK1NMODULE));
 		};
 
 		public boolean initdoneDetail;
-		public boolean initdoneAPlh;
 		public boolean initdoneAIp;
+		public boolean initdoneAPlh;
 		public boolean initdoneBcv1NCoreversion;
 		public boolean initdoneHk1NModule;
 
@@ -154,8 +154,8 @@ public class PnlWdbeCvrRec {
 
 			if (Xmlio.checkXPath(doc, basexpath)) {
 				initdoneDetail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneDetail", mask, INITDONEDETAIL);
-				initdoneAPlh = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneAPlh", mask, INITDONEAPLH);
 				initdoneAIp = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneAIp", mask, INITDONEAIP);
+				initdoneAPlh = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneAPlh", mask, INITDONEAPLH);
 				initdoneBcv1NCoreversion = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneBcv1NCoreversion", mask, INITDONEBCV1NCOREVERSION);
 				initdoneHk1NModule = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneHk1NModule", mask, INITDONEHK1NMODULE);
 
@@ -171,8 +171,8 @@ public class PnlWdbeCvrRec {
 			HashSet<Integer> items = new HashSet<Integer>();
 
 			if (initdoneDetail == comp.initdoneDetail) items.add(INITDONEDETAIL);
-			if (initdoneAPlh == comp.initdoneAPlh) items.add(INITDONEAPLH);
 			if (initdoneAIp == comp.initdoneAIp) items.add(INITDONEAIP);
+			if (initdoneAPlh == comp.initdoneAPlh) items.add(INITDONEAPLH);
 			if (initdoneBcv1NCoreversion == comp.initdoneBcv1NCoreversion) items.add(INITDONEBCV1NCOREVERSION);
 			if (initdoneHk1NModule == comp.initdoneHk1NModule) items.add(INITDONEHK1NMODULE);
 
@@ -187,7 +187,7 @@ public class PnlWdbeCvrRec {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(INITDONEDETAIL, INITDONEAPLH, INITDONEAIP, INITDONEBCV1NCOREVERSION, INITDONEHK1NMODULE));
+			diffitems = new HashSet<Integer>(Arrays.asList(INITDONEDETAIL, INITDONEAIP, INITDONEAPLH, INITDONEBCV1NCOREVERSION, INITDONEHK1NMODULE));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);
@@ -202,8 +202,8 @@ public class PnlWdbeCvrRec {
 
 		public static final int IXWDBEVEXPSTATE = 1;
 		public static final int SCRJREFDETAIL = 2;
-		public static final int SCRJREFAPLH = 3;
-		public static final int SCRJREFAIP = 4;
+		public static final int SCRJREFAIP = 3;
+		public static final int SCRJREFAPLH = 4;
 		public static final int SCRJREFBCV1NCOREVERSION = 5;
 		public static final int SCRJREFHK1NMODULE = 6;
 		public static final int BUTREGULARIZEACTIVE = 7;
@@ -211,27 +211,27 @@ public class PnlWdbeCvrRec {
 		public StatShr(
 					int ixWdbeVExpstate
 					, String scrJrefDetail
-					, String scrJrefAPlh
 					, String scrJrefAIp
+					, String scrJrefAPlh
 					, String scrJrefBcv1NCoreversion
 					, String scrJrefHk1NModule
 					, boolean ButRegularizeActive
 				) {
 			this.ixWdbeVExpstate = ixWdbeVExpstate;
 			this.scrJrefDetail = scrJrefDetail;
-			this.scrJrefAPlh = scrJrefAPlh;
 			this.scrJrefAIp = scrJrefAIp;
+			this.scrJrefAPlh = scrJrefAPlh;
 			this.scrJrefBcv1NCoreversion = scrJrefBcv1NCoreversion;
 			this.scrJrefHk1NModule = scrJrefHk1NModule;
 			this.ButRegularizeActive = ButRegularizeActive;
 
-			mask = new HashSet<Integer>(Arrays.asList(IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFAPLH, SCRJREFAIP, SCRJREFBCV1NCOREVERSION, SCRJREFHK1NMODULE, BUTREGULARIZEACTIVE));
+			mask = new HashSet<Integer>(Arrays.asList(IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFAIP, SCRJREFAPLH, SCRJREFBCV1NCOREVERSION, SCRJREFHK1NMODULE, BUTREGULARIZEACTIVE));
 		};
 
 		public int ixWdbeVExpstate;
 		public String scrJrefDetail;
-		public String scrJrefAPlh;
 		public String scrJrefAIp;
+		public String scrJrefAPlh;
 		public String scrJrefBcv1NCoreversion;
 		public String scrJrefHk1NModule;
 		public boolean ButRegularizeActive;
@@ -253,8 +253,8 @@ public class PnlWdbeCvrRec {
 				srefIxWdbeVExpstate = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "srefIxWdbeVExpstate", mask, IXWDBEVEXPSTATE);
 				ixWdbeVExpstate = VecWdbeVExpstate.getIx(srefIxWdbeVExpstate);
 				scrJrefDetail = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefDetail", mask, SCRJREFDETAIL);
-				scrJrefAPlh = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefAPlh", mask, SCRJREFAPLH);
 				scrJrefAIp = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefAIp", mask, SCRJREFAIP);
+				scrJrefAPlh = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefAPlh", mask, SCRJREFAPLH);
 				scrJrefBcv1NCoreversion = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefBcv1NCoreversion", mask, SCRJREFBCV1NCOREVERSION);
 				scrJrefHk1NModule = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefHk1NModule", mask, SCRJREFHK1NMODULE);
 				ButRegularizeActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButRegularizeActive", mask, BUTREGULARIZEACTIVE);
@@ -272,8 +272,8 @@ public class PnlWdbeCvrRec {
 
 			if (ixWdbeVExpstate == comp.ixWdbeVExpstate) items.add(IXWDBEVEXPSTATE);
 			if (scrJrefDetail.equals(comp.scrJrefDetail)) items.add(SCRJREFDETAIL);
-			if (scrJrefAPlh.equals(comp.scrJrefAPlh)) items.add(SCRJREFAPLH);
 			if (scrJrefAIp.equals(comp.scrJrefAIp)) items.add(SCRJREFAIP);
+			if (scrJrefAPlh.equals(comp.scrJrefAPlh)) items.add(SCRJREFAPLH);
 			if (scrJrefBcv1NCoreversion.equals(comp.scrJrefBcv1NCoreversion)) items.add(SCRJREFBCV1NCOREVERSION);
 			if (scrJrefHk1NModule.equals(comp.scrJrefHk1NModule)) items.add(SCRJREFHK1NMODULE);
 			if (ButRegularizeActive == comp.ButRegularizeActive) items.add(BUTREGULARIZEACTIVE);
@@ -289,7 +289,7 @@ public class PnlWdbeCvrRec {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFAPLH, SCRJREFAIP, SCRJREFBCV1NCOREVERSION, SCRJREFHK1NMODULE, BUTREGULARIZEACTIVE));
+			diffitems = new HashSet<Integer>(Arrays.asList(IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFAIP, SCRJREFAPLH, SCRJREFBCV1NCOREVERSION, SCRJREFHK1NMODULE, BUTREGULARIZEACTIVE));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);

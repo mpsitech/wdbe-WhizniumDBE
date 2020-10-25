@@ -2,8 +2,8 @@
 	* \file WdbeQSysHk1NVector.h
 	* API code for table TblWdbeQSysHk1NVector (declarations)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifndef WDBEQSYSHK1NVECTOR_H

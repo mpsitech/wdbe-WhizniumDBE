@@ -2,8 +2,8 @@
 	* \file QryWdbeMtpList.cpp
 	* API code for job QryWdbeMtpList (implementation)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #include "QryWdbeMtpList.h"
@@ -21,10 +21,10 @@ uint QryWdbeMtpList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "hku") return HKU;
-	if (s == "hkt") return HKT;
-	if (s == "typ") return TYP;
 	if (s == "srf") return SRF;
+	if (s == "typ") return TYP;
+	if (s == "hkt") return HKT;
+	if (s == "hku") return HKU;
 
 	return(0);
 };
@@ -32,10 +32,10 @@ uint QryWdbeMtpList::VecVOrd::getIx(
 string QryWdbeMtpList::VecVOrd::getSref(
 			const uint ix
 		) {
-	if (ix == HKU) return("hku");
-	if (ix == HKT) return("hkt");
-	if (ix == TYP) return("typ");
 	if (ix == SRF) return("srf");
+	if (ix == TYP) return("typ");
+	if (ix == HKT) return("hkt");
+	if (ix == HKU) return("hku");
 
 	return("");
 };

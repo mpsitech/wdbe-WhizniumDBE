@@ -2,8 +2,8 @@
 	* \file QryWdbeUsgList.cpp
 	* API code for job QryWdbeUsgList (implementation)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #include "QryWdbeUsgList.h"
@@ -21,9 +21,9 @@ uint QryWdbeUsgList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "srf") return SRF;
-	if (s == "own") return OWN;
 	if (s == "grp") return GRP;
+	if (s == "own") return OWN;
+	if (s == "srf") return SRF;
 
 	return(0);
 };
@@ -31,9 +31,9 @@ uint QryWdbeUsgList::VecVOrd::getIx(
 string QryWdbeUsgList::VecVOrd::getSref(
 			const uint ix
 		) {
-	if (ix == SRF) return("srf");
-	if (ix == OWN) return("own");
 	if (ix == GRP) return("grp");
+	if (ix == OWN) return("own");
+	if (ix == SRF) return("srf");
 
 	return("");
 };

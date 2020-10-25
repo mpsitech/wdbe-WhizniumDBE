@@ -2,8 +2,8 @@
 	* \file QryWdbeSilRef1NError.h
 	* job handler for job QryWdbeSilRef1NError (declarations)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifndef QRYWDBESILREF1NERROR_H
@@ -122,8 +122,8 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeErrMod_retReuEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 	bool handleCallWdbeStubChgFromSelf(DbsWdbe* dbswdbe);
+	bool handleCallWdbeErrMod_retReuEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 
 };
 

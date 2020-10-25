@@ -1,8 +1,8 @@
 # file Makefile
 # make file for CrdWdbeErr card job handler, release wdbecmbd_jack
 # author Alexander Wirthmueller
-# date created: 11 Jul 2020
-# modified: 11 Jul 2020
+# date created: 23 Aug 2020
+# modified: 23 Aug 2020
 
 include ../Makefile.inc
 
@@ -15,7 +15,7 @@ STATLIBFLAGS = rcs
 INCPATH = -I$(SRCROOT)/dbswdbe -I$(SRCROOT)/wdbecmbd/VecWdbe -I$(SRCROOT)/wdbecmbd/IexWdbe -I$(SRCROOT)/wdbecmbd
 INCPATH += -I/home/mpsitech/src/apiwzlm -I/usr/include -I/usr/include/jsoncpp -I/usr/include/libxml2 -I/usr/include/mysql -I/usr/include/postgresql -I/usr/local/include
 
-OBJS = CrdWdbeErr.o PnlWdbeErrList.o QryWdbeErrList.o PnlWdbeErrHeadbar.o PnlWdbeErrRec.o PnlWdbeErrAPar.o QryWdbeErrAPar.o PnlWdbeErrDetail.o
+OBJS = CrdWdbeErr.o PnlWdbeErrRec.o PnlWdbeErrDetail.o PnlWdbeErrAPar.o QryWdbeErrAPar.o PnlWdbeErrHeadbar.o PnlWdbeErrList.o QryWdbeErrList.o
 
 LIB = libcrdwdbeerr
 

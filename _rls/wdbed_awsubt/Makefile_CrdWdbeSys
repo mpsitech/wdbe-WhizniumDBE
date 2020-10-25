@@ -1,8 +1,8 @@
 # file Makefile
 # make file for CrdWdbeSys card job handler, release wdbed_awsubt
 # author Alexander Wirthmueller
-# date created: 11 Jul 2020
-# modified: 11 Jul 2020
+# date created: 23 Aug 2020
+# modified: 23 Aug 2020
 
 include ../Makefile.inc
 
@@ -15,7 +15,7 @@ STATLIBFLAGS = rcs
 INCPATH = -I$(SRCROOT)/dbswdbe -I$(SRCROOT)/wdbed/VecWdbe -I$(SRCROOT)/wdbed/IexWdbe -I$(SRCROOT)/wdbed
 INCPATH += -I/home/ubuntu/src/apiwzlm -I/usr/include -I/usr/include/jsoncpp -I/usr/include/libxml2 -I/usr/include/mysql -I/usr/local/include
 
-OBJS = CrdWdbeSys.o PnlWdbeSysList.o QryWdbeSysList.o PnlWdbeSysHeadbar.o PnlWdbeSysRec.o PnlWdbeSysHk1NVector.o QryWdbeSysHk1NVector.o PnlWdbeSysSys1NTarget.o QryWdbeSysSys1NTarget.o PnlWdbeSysDetail.o
+OBJS = CrdWdbeSys.o PnlWdbeSysRec.o PnlWdbeSysDetail.o PnlWdbeSysSys1NTarget.o QryWdbeSysSys1NTarget.o PnlWdbeSysHk1NVector.o QryWdbeSysHk1NVector.o PnlWdbeSysHeadbar.o PnlWdbeSysList.o QryWdbeSysList.o
 
 LIB = libcrdwdbesys
 

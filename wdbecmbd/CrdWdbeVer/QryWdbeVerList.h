@@ -2,8 +2,8 @@
 	* \file QryWdbeVerList.h
 	* job handler for job QryWdbeVerList (declarations)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifndef QRYWDBEVERLIST_H
@@ -31,11 +31,11 @@ public:
 	class VecVOrd {
 
 	public:
-		static const Sbecore::uint STE = 1;
-		static const Sbecore::uint BVR = 2;
+		static const Sbecore::uint GRP = 1;
+		static const Sbecore::uint OWN = 2;
 		static const Sbecore::uint PRJ = 3;
-		static const Sbecore::uint OWN = 4;
-		static const Sbecore::uint GRP = 5;
+		static const Sbecore::uint BVR = 4;
+		static const Sbecore::uint STE = 5;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);
@@ -146,9 +146,9 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeVerUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
-	bool handleCallWdbeVerMod(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 	bool handleCallWdbeStubChgFromSelf(DbsWdbe* dbswdbe);
+	bool handleCallWdbeVerMod(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbeVerUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 
 };
 

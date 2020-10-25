@@ -2,8 +2,8 @@
 	* \file QryWdbeLibMNVersion.cpp
 	* job handler for job QryWdbeLibMNVersion (implementation)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifdef WDBECMBD
@@ -84,7 +84,7 @@ void QryWdbeLibMNVersion::rerun(
 	dbswdbe->tblwdbeqlibmnversion->removeRstByJref(jref);
 
 	sqlstr = "SELECT COUNT(TblWdbeRMLibraryMVersion.ref)";
-	sqlstr += " FROM TblWdbeMVersion, TblWdbeRMLibraryMVersion";
+	sqlstr += " FROM TblWdbeRMLibraryMVersion, TblWdbeMVersion";
 	sqlstr += " WHERE TblWdbeRMLibraryMVersion.refWdbeMVersion = TblWdbeMVersion.ref";
 	sqlstr += " AND TblWdbeRMLibraryMVersion.refWdbeMLibrary = " + to_string(preRefLib) + "";
 	dbswdbe->loadUintBySQL(sqlstr, cnt);
@@ -99,7 +99,7 @@ void QryWdbeLibMNVersion::rerun(
 
 	sqlstr = "INSERT INTO TblWdbeQLibMNVersion(jref, jnum, mref, ref)";
 	sqlstr += " SELECT " + to_string(jref) + ", 0, TblWdbeMVersion.ref, TblWdbeRMLibraryMVersion.ref";
-	sqlstr += " FROM TblWdbeMVersion, TblWdbeRMLibraryMVersion";
+	sqlstr += " FROM TblWdbeRMLibraryMVersion, TblWdbeMVersion";
 	sqlstr += " WHERE TblWdbeRMLibraryMVersion.refWdbeMVersion = TblWdbeMVersion.ref";
 	sqlstr += " AND TblWdbeRMLibraryMVersion.refWdbeMLibrary = " + to_string(preRefLib) + "";
 	sqlstr += " LIMIT " + to_string(stgiac.nload) + " OFFSET " + to_string(stgiac.jnumFirstload-1);
@@ -272,11 +272,19 @@ void QryWdbeLibMNVersion::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBELIBRVERMOD_LIBEQ) {
-		call->abort = handleCallWdbeLibRverMod_libEq(dbswdbe, call->jref);
-	} else if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
+	if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
 		call->abort = handleCallWdbeStubChgFromSelf(dbswdbe);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBELIBRVERMOD_LIBEQ) {
+		call->abort = handleCallWdbeLibRverMod_libEq(dbswdbe, call->jref);
 	};
+};
+
+bool QryWdbeLibMNVersion::handleCallWdbeStubChgFromSelf(
+			DbsWdbe* dbswdbe
+		) {
+	bool retval = false;
+	// IP handleCallWdbeStubChgFromSelf --- INSERT
+	return retval;
 };
 
 bool QryWdbeLibMNVersion::handleCallWdbeLibRverMod_libEq(
@@ -290,14 +298,6 @@ bool QryWdbeLibMNVersion::handleCallWdbeLibRverMod_libEq(
 		xchg->triggerCall(dbswdbe, VecWdbeVCall::CALLWDBESTATCHG, jref);
 	};
 
-	return retval;
-};
-
-bool QryWdbeLibMNVersion::handleCallWdbeStubChgFromSelf(
-			DbsWdbe* dbswdbe
-		) {
-	bool retval = false;
-	// IP handleCallWdbeStubChgFromSelf --- INSERT
 	return retval;
 };
 

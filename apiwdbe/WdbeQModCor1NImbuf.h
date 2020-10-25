@@ -2,8 +2,8 @@
 	* \file WdbeQModCor1NImbuf.h
 	* API code for table TblWdbeQModCor1NImbuf (declarations)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifndef WDBEQMODCOR1NIMBUF_H

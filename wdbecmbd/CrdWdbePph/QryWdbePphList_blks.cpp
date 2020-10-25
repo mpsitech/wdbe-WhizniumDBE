@@ -2,8 +2,8 @@
 	* \file QryWdbePphList_blks.cpp
 	* job handler for job QryWdbePphList (implementation of blocks)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 using namespace std;
@@ -19,9 +19,9 @@ uint QryWdbePphList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "mdl") return MDL;
-	if (s == "unt") return UNT;
 	if (s == "srf") return SRF;
+	if (s == "unt") return UNT;
+	if (s == "mdl") return MDL;
 
 	return(0);
 };
@@ -29,9 +29,9 @@ uint QryWdbePphList::VecVOrd::getIx(
 string QryWdbePphList::VecVOrd::getSref(
 			const uint ix
 		) {
-	if (ix == MDL) return("mdl");
-	if (ix == UNT) return("unt");
 	if (ix == SRF) return("srf");
+	if (ix == UNT) return("unt");
+	if (ix == MDL) return("mdl");
 
 	return("");
 };

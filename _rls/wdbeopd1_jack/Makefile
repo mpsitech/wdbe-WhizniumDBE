@@ -1,8 +1,8 @@
 # file Makefile
 # make file for Wdbe operation daemon, release wdbeopd1_jack
 # author Alexander Wirthmueller
-# date created: 11 Jul 2020
-# modified: 11 Jul 2020
+# date created: 23 Aug 2020
+# modified: 23 Aug 2020
 
 include Makefile.inc
 
@@ -13,7 +13,7 @@ LINK = g++
 LINKFLAGS =
 
 INCPATH = -I$(SRCROOT)/dbswdbe -I$(SRCROOT)/wdbeopd1/VecWdbe -I$(SRCROOT)/wdbeopd1/IexWdbe -I$(SRCROOT)/wdbeopd1
-INCPATH += -I$(SRCROOT)/wdbeopd1/WdbeWrmcu -I$(SRCROOT)/wdbeopd1/WdbeWrfpga -I$(SRCROOT)/wdbeopd1/WdbeWrdev -I$(SRCROOT)/wdbeopd1/WdbePrctree -I$(SRCROOT)/wdbeopd1/WdbePrcfile -I$(SRCROOT)/wdbeopd1/WdbePlhmcu -I$(SRCROOT)/wdbeopd1/WdbePlhfpga -I$(SRCROOT)/wdbeopd1/WdbeModdet -I$(SRCROOT)/wdbeopd1/WdbeModbsc
+INCPATH += -I$(SRCROOT)/wdbeopd1/WdbeModbsc -I$(SRCROOT)/wdbeopd1/WdbeModdet -I$(SRCROOT)/wdbeopd1/WdbePlhfpga -I$(SRCROOT)/wdbeopd1/WdbePlhmcu -I$(SRCROOT)/wdbeopd1/WdbePrcfile -I$(SRCROOT)/wdbeopd1/WdbePrctree -I$(SRCROOT)/wdbeopd1/WdbeWrdev -I$(SRCROOT)/wdbeopd1/WdbeWrfpga -I$(SRCROOT)/wdbeopd1/WdbeWrmcu
 INCPATH += -I/usr/include -I/usr/include/libxml2 -I/usr/include/mysql -I/usr/include/postgresql -I/usr/local/include
 
 PCHS = Wdbeopd.h.gch
@@ -26,7 +26,7 @@ LIBPATH += -L$(LIBROOT)/wdbeopd1
 LIBPATH += -L/usr/lib/x86_64-linux-gnu -L/usr/local/lib
 LIBPATH += -L/lib/x86_64-linux-gnu
 
-LIBS = -lwdbewrmcu -lwdbewrfpga -lwdbewrdev -lwdbeprctree -lwdbeprcfile -lwdbeplhmcu -lwdbeplhfpga -lwdbemoddet -lwdbemodbsc
+LIBS = -lwdbemodbsc -lwdbemoddet -lwdbeplhfpga -lwdbeplhmcu -lwdbeprcfile -lwdbeprctree -lwdbewrdev -lwdbewrfpga -lwdbewrmcu
 LIBS += -liexwdbe -lvecwdbe -ldbswdbe
 LIBS += -lcurl -lmicrohttpd -lsbecore_my -lsbecore_pg
 LIBS += -lmysqlclient -lpq -lsbecore_plus

@@ -2,8 +2,8 @@
 	* \file PnlWdbeErrDetail.cpp
 	* job handler for job PnlWdbeErrDetail (implementation)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifdef WDBECMBD
@@ -46,10 +46,10 @@ PnlWdbeErrDetail::PnlWdbeErrDetail(
 
 	// IP constructor.cust2 --- INSERT
 
-	xchg->addClstn(VecWdbeVCall::CALLWDBEERR_REUEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecWdbeVCall::CALLWDBEERR_REU_MDL_INSBS, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecWdbeVCall::CALLWDBEERR_REU_INSBS, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBEERR_RETEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBEERR_REU_INSBS, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBEERR_REU_MDL_INSBS, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBEERR_REUEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -281,47 +281,27 @@ void PnlWdbeErrDetail::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBEERRUPD_REFEQ) {
-		call->abort = handleCallWdbeErrUpd_refEq(dbswdbe, call->jref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEERR_REUEQ) {
-		call->abort = handleCallWdbeErr_reuEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEERR_REU_MDL_INSBS) {
-		call->abort = handleCallWdbeErr_reu_mdl_inSbs(dbswdbe, call->jref, call->argInv.ix, call->argRet.boolval);
+	if (call->ixVCall == VecWdbeVCall::CALLWDBEERR_RETEQ) {
+		call->abort = handleCallWdbeErr_retEq(dbswdbe, call->jref, call->argInv.ix, call->argRet.boolval);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEERR_REU_INSBS) {
 		call->abort = handleCallWdbeErr_reu_inSbs(dbswdbe, call->jref, call->argInv.ix, call->argRet.boolval);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEERR_RETEQ) {
-		call->abort = handleCallWdbeErr_retEq(dbswdbe, call->jref, call->argInv.ix, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEERR_REU_MDL_INSBS) {
+		call->abort = handleCallWdbeErr_reu_mdl_inSbs(dbswdbe, call->jref, call->argInv.ix, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEERR_REUEQ) {
+		call->abort = handleCallWdbeErr_reuEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEERRUPD_REFEQ) {
+		call->abort = handleCallWdbeErrUpd_refEq(dbswdbe, call->jref);
 	};
 };
 
-bool PnlWdbeErrDetail::handleCallWdbeErrUpd_refEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-	// IP handleCallWdbeErrUpd_refEq --- INSERT
-	return retval;
-};
-
-bool PnlWdbeErrDetail::handleCallWdbeErr_reuEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-			, const ubigint refInv
-			, bool& boolvalRet
-		) {
-	bool retval = false;
-	boolvalRet = (recErr.refUref == refInv); // IP handleCallWdbeErr_reuEq --- LINE
-	return retval;
-};
-
-bool PnlWdbeErrDetail::handleCallWdbeErr_reu_mdl_inSbs(
+bool PnlWdbeErrDetail::handleCallWdbeErr_retEq(
 			DbsWdbe* dbswdbe
 			, const ubigint jrefTrig
 			, const uint ixInv
 			, bool& boolvalRet
 		) {
 	bool retval = false;
-	boolvalRet = ((dbswdbe->getIxWSubsetByRefWdbeMModule([&](){ubigint ref; dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMModule WHERE refWdbeMController = " + to_string(recErr.refUref), ref); return ref;}()) & ixInv) != 0); // IP handleCallWdbeErr_reu_mdl_inSbs --- LINE
+	boolvalRet = (recErr.refIxVTbl == ixInv); // IP handleCallWdbeErr_retEq --- LINE
 	return retval;
 };
 
@@ -336,14 +316,34 @@ bool PnlWdbeErrDetail::handleCallWdbeErr_reu_inSbs(
 	return retval;
 };
 
-bool PnlWdbeErrDetail::handleCallWdbeErr_retEq(
+bool PnlWdbeErrDetail::handleCallWdbeErr_reu_mdl_inSbs(
 			DbsWdbe* dbswdbe
 			, const ubigint jrefTrig
 			, const uint ixInv
 			, bool& boolvalRet
 		) {
 	bool retval = false;
-	boolvalRet = (recErr.refIxVTbl == ixInv); // IP handleCallWdbeErr_retEq --- LINE
+	boolvalRet = ((dbswdbe->getIxWSubsetByRefWdbeMModule([&](){ubigint ref; dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMModule WHERE refWdbeMController = " + to_string(recErr.refUref), ref); return ref;}()) & ixInv) != 0); // IP handleCallWdbeErr_reu_mdl_inSbs --- LINE
+	return retval;
+};
+
+bool PnlWdbeErrDetail::handleCallWdbeErr_reuEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+			, const ubigint refInv
+			, bool& boolvalRet
+		) {
+	bool retval = false;
+	boolvalRet = (recErr.refUref == refInv); // IP handleCallWdbeErr_reuEq --- LINE
+	return retval;
+};
+
+bool PnlWdbeErrDetail::handleCallWdbeErrUpd_refEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+	// IP handleCallWdbeErrUpd_refEq --- INSERT
 	return retval;
 };
 

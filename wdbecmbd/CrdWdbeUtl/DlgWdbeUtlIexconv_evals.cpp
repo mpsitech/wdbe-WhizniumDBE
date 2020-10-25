@@ -2,42 +2,23 @@
 	* \file DlgWdbeUtlIexconv_evals.cpp
 	* job handler for job DlgWdbeUtlIexconv (implementation of availability/activation evaluation)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 using namespace std;
 using namespace Sbecore;
 using namespace Xmlio;
 
-bool DlgWdbeUtlIexconv::evalButDneActive(
+bool DlgWdbeUtlIexconv::evalSrcUldActive(
 			DbsWdbe* dbswdbe
 		) {
-	// sge(idle|done)
-
-	vector<bool> args;
-	bool a, b;
-
-	a = false; a = (ixVSge == VecVSge::IDLE);
-	args.push_back(a);
-	a = false; a = (ixVSge == VecVSge::DONE);
-	args.push_back(a);
-	b = args.back(); args.pop_back();
-	a = args.back(); args.pop_back();
-	args.push_back(a || b);
-
-	return(args.back());
-};
-
-bool DlgWdbeUtlIexconv::evalResDldActive(
-			DbsWdbe* dbswdbe
-		) {
-	// sge(done)
+	// sge(idle)
 
 	vector<bool> args;
 	bool a;
 
-	a = false; a = (ixVSge == VecVSge::DONE);
+	a = false; a = (ixVSge == VecVSge::IDLE);
 	args.push_back(a);
 
 	return(args.back());
@@ -76,16 +57,35 @@ bool DlgWdbeUtlIexconv::evalCnvButStoActive(
 	return(args.back());
 };
 
-bool DlgWdbeUtlIexconv::evalSrcUldActive(
+bool DlgWdbeUtlIexconv::evalResDldActive(
 			DbsWdbe* dbswdbe
 		) {
-	// sge(idle)
+	// sge(done)
 
 	vector<bool> args;
 	bool a;
 
+	a = false; a = (ixVSge == VecVSge::DONE);
+	args.push_back(a);
+
+	return(args.back());
+};
+
+bool DlgWdbeUtlIexconv::evalButDneActive(
+			DbsWdbe* dbswdbe
+		) {
+	// sge(idle|done)
+
+	vector<bool> args;
+	bool a, b;
+
 	a = false; a = (ixVSge == VecVSge::IDLE);
 	args.push_back(a);
+	a = false; a = (ixVSge == VecVSge::DONE);
+	args.push_back(a);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
 
 	return(args.back());
 };

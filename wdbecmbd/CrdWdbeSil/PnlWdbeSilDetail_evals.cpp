@@ -2,8 +2,8 @@
 	* \file PnlWdbeSilDetail_evals.cpp
 	* job handler for job PnlWdbeSilDetail (implementation of availability/activation evaluation)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 using namespace std;
@@ -111,23 +111,23 @@ bool PnlWdbeSilDetail::evalTxtReuActive(
 bool PnlWdbeSilDetail::evalButReuViewAvail(
 			DbsWdbe* dbswdbe
 		) {
-	// unt.reuEq(0)|((pre.ixCrdaccVer()&unt.retEq(ver))|(pre.ixCrdaccFam()&unt.retEq(fam)))
+	// unt.reuEq(0)|((pre.ixCrdaccFam()&unt.retEq(fam))|(pre.ixCrdaccVer()&unt.retEq(ver)))
 
 	vector<bool> args;
 	bool a, b;
 
 	a = false; a = (recUnt.refUref == 0);
 	args.push_back(a);
-	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCVER, jref) != 0);
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCFAM, jref) != 0);
 	args.push_back(a);
-	a = false; a = (recUnt.refIxVTbl == VecWdbeVMUnitRefTbl::VER);
+	a = false; a = (recUnt.refIxVTbl == VecWdbeVMUnitRefTbl::FAM);
 	args.push_back(a);
 	b = args.back(); args.pop_back();
 	a = args.back(); args.pop_back();
 	args.push_back(a && b);
-	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCFAM, jref) != 0);
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCVER, jref) != 0);
 	args.push_back(a);
-	a = false; a = (recUnt.refIxVTbl == VecWdbeVMUnitRefTbl::FAM);
+	a = false; a = (recUnt.refIxVTbl == VecWdbeVMUnitRefTbl::VER);
 	args.push_back(a);
 	b = args.back(); args.pop_back();
 	a = args.back(); args.pop_back();

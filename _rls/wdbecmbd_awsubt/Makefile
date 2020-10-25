@@ -1,8 +1,8 @@
 # file Makefile
 # make file for Wdbe combined daemon, release wdbecmbd_awsubt
 # author Alexander Wirthmueller
-# date created: 11 Jul 2020
-# modified: 11 Jul 2020
+# date created: 23 Aug 2020
+# modified: 23 Aug 2020
 
 include Makefile.inc
 
@@ -13,8 +13,8 @@ LINK = g++
 LINKFLAGS =
 
 INCPATH = -I$(SRCROOT)/dbswdbe -I$(SRCROOT)/wdbecmbd/VecWdbe -I$(SRCROOT)/wdbecmbd/IexWdbe -I$(SRCROOT)/wdbecmbd
-INCPATH += -I$(SRCROOT)/wdbecmbd/CrdWdbeUsg -I$(SRCROOT)/wdbecmbd/CrdWdbeUsr -I$(SRCROOT)/wdbecmbd/CrdWdbePrs -I$(SRCROOT)/wdbecmbd/CrdWdbeFil -I$(SRCROOT)/wdbecmbd/CrdWdbeNav -I$(SRCROOT)/wdbecmbd/CrdWdbeMch -I$(SRCROOT)/wdbecmbd/CrdWdbeLib -I$(SRCROOT)/wdbecmbd/CrdWdbeFam -I$(SRCROOT)/wdbecmbd/CrdWdbeSil -I$(SRCROOT)/wdbecmbd/CrdWdbeMtp -I$(SRCROOT)/wdbecmbd/CrdWdbePrj -I$(SRCROOT)/wdbecmbd/CrdWdbeVer -I$(SRCROOT)/wdbecmbd/CrdWdbeSys -I$(SRCROOT)/wdbecmbd/CrdWdbeTrg -I$(SRCROOT)/wdbecmbd/CrdWdbeUnt -I$(SRCROOT)/wdbecmbd/CrdWdbeRls -I$(SRCROOT)/wdbecmbd/CrdWdbeCpr -I$(SRCROOT)/wdbecmbd/CrdWdbeCvr -I$(SRCROOT)/wdbecmbd/CrdWdbeMod -I$(SRCROOT)/wdbecmbd/CrdWdbeVec -I$(SRCROOT)/wdbecmbd/CrdWdbeVit -I$(SRCROOT)/wdbecmbd/CrdWdbeCmd -I$(SRCROOT)/wdbecmbd/CrdWdbeErr -I$(SRCROOT)/wdbecmbd/CrdWdbePph -I$(SRCROOT)/wdbecmbd/CrdWdbeBnk -I$(SRCROOT)/wdbecmbd/CrdWdbePin -I$(SRCROOT)/wdbecmbd/CrdWdbeGen -I$(SRCROOT)/wdbecmbd/CrdWdbePrt -I$(SRCROOT)/wdbecmbd/CrdWdbeSig -I$(SRCROOT)/wdbecmbd/CrdWdbePrc -I$(SRCROOT)/wdbecmbd/CrdWdbeFst -I$(SRCROOT)/wdbecmbd/CrdWdbeVar -I$(SRCROOT)/wdbecmbd/CrdWdbeUtl
-INCPATH += -I$(SRCROOT)/wdbecmbd/WdbeWrmcu -I$(SRCROOT)/wdbecmbd/WdbeWrfpga -I$(SRCROOT)/wdbecmbd/WdbeWrdev -I$(SRCROOT)/wdbecmbd/WdbePrctree -I$(SRCROOT)/wdbecmbd/WdbePrcfile -I$(SRCROOT)/wdbecmbd/WdbePlhmcu -I$(SRCROOT)/wdbecmbd/WdbePlhfpga -I$(SRCROOT)/wdbecmbd/WdbeMtpWrmcu -I$(SRCROOT)/wdbecmbd/WdbeMtpWrfpga -I$(SRCROOT)/wdbecmbd/WdbeMtpModdet -I$(SRCROOT)/wdbecmbd/WdbeMtpModbsctd -I$(SRCROOT)/wdbecmbd/WdbeMtpModbscbu -I$(SRCROOT)/wdbecmbd/WdbeMtpPlhmcu -I$(SRCROOT)/wdbecmbd/WdbeMtpPlhfpga -I$(SRCROOT)/wdbecmbd/WdbeModdet -I$(SRCROOT)/wdbecmbd/WdbeModbsc
+INCPATH += -I$(SRCROOT)/wdbecmbd/CrdWdbeNav -I$(SRCROOT)/wdbecmbd/CrdWdbeUsg -I$(SRCROOT)/wdbecmbd/CrdWdbeUsr -I$(SRCROOT)/wdbecmbd/CrdWdbePrs -I$(SRCROOT)/wdbecmbd/CrdWdbeFil -I$(SRCROOT)/wdbecmbd/CrdWdbeMch -I$(SRCROOT)/wdbecmbd/CrdWdbeLib -I$(SRCROOT)/wdbecmbd/CrdWdbeFam -I$(SRCROOT)/wdbecmbd/CrdWdbeSil -I$(SRCROOT)/wdbecmbd/CrdWdbeMtp -I$(SRCROOT)/wdbecmbd/CrdWdbePrj -I$(SRCROOT)/wdbecmbd/CrdWdbeVer -I$(SRCROOT)/wdbecmbd/CrdWdbeSys -I$(SRCROOT)/wdbecmbd/CrdWdbeTrg -I$(SRCROOT)/wdbecmbd/CrdWdbeUnt -I$(SRCROOT)/wdbecmbd/CrdWdbeRls -I$(SRCROOT)/wdbecmbd/CrdWdbeCpr -I$(SRCROOT)/wdbecmbd/CrdWdbeCvr -I$(SRCROOT)/wdbecmbd/CrdWdbeMod -I$(SRCROOT)/wdbecmbd/CrdWdbeVec -I$(SRCROOT)/wdbecmbd/CrdWdbeVit -I$(SRCROOT)/wdbecmbd/CrdWdbeCmd -I$(SRCROOT)/wdbecmbd/CrdWdbeErr -I$(SRCROOT)/wdbecmbd/CrdWdbePph -I$(SRCROOT)/wdbecmbd/CrdWdbeBnk -I$(SRCROOT)/wdbecmbd/CrdWdbePin -I$(SRCROOT)/wdbecmbd/CrdWdbeGen -I$(SRCROOT)/wdbecmbd/CrdWdbePrt -I$(SRCROOT)/wdbecmbd/CrdWdbeSig -I$(SRCROOT)/wdbecmbd/CrdWdbePrc -I$(SRCROOT)/wdbecmbd/CrdWdbeFst -I$(SRCROOT)/wdbecmbd/CrdWdbeVar -I$(SRCROOT)/wdbecmbd/CrdWdbeUtl
+INCPATH += -I$(SRCROOT)/wdbecmbd/WdbeModbsc -I$(SRCROOT)/wdbecmbd/WdbeModdet -I$(SRCROOT)/wdbecmbd/WdbeMtpPlhfpga -I$(SRCROOT)/wdbecmbd/WdbeMtpPlhmcu -I$(SRCROOT)/wdbecmbd/WdbeMtpModbscbu -I$(SRCROOT)/wdbecmbd/WdbeMtpModbsctd -I$(SRCROOT)/wdbecmbd/WdbeMtpModdet -I$(SRCROOT)/wdbecmbd/WdbeMtpWrfpga -I$(SRCROOT)/wdbecmbd/WdbeMtpWrmcu -I$(SRCROOT)/wdbecmbd/WdbePlhfpga -I$(SRCROOT)/wdbecmbd/WdbePlhmcu -I$(SRCROOT)/wdbecmbd/WdbePrcfile -I$(SRCROOT)/wdbecmbd/WdbePrctree -I$(SRCROOT)/wdbecmbd/WdbeWrdev -I$(SRCROOT)/wdbecmbd/WdbeWrfpga -I$(SRCROOT)/wdbecmbd/WdbeWrmcu
 INCPATH += -I/home/ubuntu/src/apiwzlm -I/usr/include -I/usr/include/jsoncpp -I/usr/include/libxml2 -I/usr/include/mysql -I/usr/local/include
 
 PCHS = Wdbecmbd.h.gch
@@ -28,8 +28,8 @@ LIBPATH += -L$(LIBROOT)/wdbecmbd
 LIBPATH += -L/home/ubuntu/lib -L/usr/lib/x86_64-linux-gnu -L/usr/local/lib
 LIBPATH += -L/lib/x86_64-linux-gnu
 
-LIBS = -lcrdwdbeusg -lcrdwdbeusr -lcrdwdbeprs -lcrdwdbefil -lcrdwdbenav -lcrdwdbemch -lcrdwdbelib -lcrdwdbefam -lcrdwdbesil -lcrdwdbemtp -lcrdwdbeprj -lcrdwdbever -lcrdwdbesys -lcrdwdbetrg -lcrdwdbeunt -lcrdwdberls -lcrdwdbecpr -lcrdwdbecvr -lcrdwdbemod -lcrdwdbevec -lcrdwdbevit -lcrdwdbecmd -lcrdwdbeerr -lcrdwdbepph -lcrdwdbebnk -lcrdwdbepin -lcrdwdbegen -lcrdwdbeprt -lcrdwdbesig -lcrdwdbeprc -lcrdwdbefst -lcrdwdbevar -lcrdwdbeutl
-LIBS += -lwdbewrmcu -lwdbewrfpga -lwdbewrdev -lwdbeprctree -lwdbeprcfile -lwdbeplhmcu -lwdbeplhfpga -lwdbemtpwrmcu -lwdbemtpwrfpga -lwdbemtpmoddet -lwdbemtpmodbsctd -lwdbemtpmodbscbu -lwdbemtpplhmcu -lwdbemtpplhfpga -lwdbemoddet -lwdbemodbsc
+LIBS = -lcrdwdbenav -lcrdwdbeusg -lcrdwdbeusr -lcrdwdbeprs -lcrdwdbefil -lcrdwdbemch -lcrdwdbelib -lcrdwdbefam -lcrdwdbesil -lcrdwdbemtp -lcrdwdbeprj -lcrdwdbever -lcrdwdbesys -lcrdwdbetrg -lcrdwdbeunt -lcrdwdberls -lcrdwdbecpr -lcrdwdbecvr -lcrdwdbemod -lcrdwdbevec -lcrdwdbevit -lcrdwdbecmd -lcrdwdbeerr -lcrdwdbepph -lcrdwdbebnk -lcrdwdbepin -lcrdwdbegen -lcrdwdbeprt -lcrdwdbesig -lcrdwdbeprc -lcrdwdbefst -lcrdwdbevar -lcrdwdbeutl
+LIBS += -lwdbemodbsc -lwdbemoddet -lwdbemtpplhfpga -lwdbemtpplhmcu -lwdbemtpmodbscbu -lwdbemtpmodbsctd -lwdbemtpmoddet -lwdbemtpwrfpga -lwdbemtpwrmcu -lwdbeplhfpga -lwdbeplhmcu -lwdbeprcfile -lwdbeprctree -lwdbewrdev -lwdbewrfpga -lwdbewrmcu
 LIBS += -liexwdbe -lvecwdbe -ldbswdbe
 LIBS += -lapiwzlm -lcurl -lgit2 -ljsoncpp -lmicrohttpd -lsbecore_dbsmon -lsbecore_mar -lsbecore_mon
 LIBS += -ldbswzem -lmariadbclient -lsbecore_plus -lssl

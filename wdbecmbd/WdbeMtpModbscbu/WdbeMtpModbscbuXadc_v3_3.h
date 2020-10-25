@@ -2,8 +2,8 @@
 	* \file WdbeMtpModbscbuXadc_v3_3.h
 	* Wdbe operation processor - adapt port names (declarations)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifndef WDBEMTPMODBSCBUXADC_V3_3_H

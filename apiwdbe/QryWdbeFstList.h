@@ -2,8 +2,8 @@
 	* \file QryWdbeFstList.h
 	* API code for job QryWdbeFstList (declarations)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifndef QRYWDBEFSTLIST_H
@@ -27,8 +27,8 @@ namespace QryWdbeFstList {
 	class VecVOrd {
 
 	public:
-		static const Sbecore::uint FSM = 1;
-		static const Sbecore::uint SRF = 2;
+		static const Sbecore::uint SRF = 1;
+		static const Sbecore::uint FSM = 2;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);

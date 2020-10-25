@@ -2,8 +2,8 @@
   * \file QryWdbeFamList.java
   * Java API code for job QryWdbeFamList
   * \author Alexander Wirthmueller
-  * \date created: 11 Jul 2020
-  * \date modified: 11 Jul 2020
+  * \date created: 23 Aug 2020
+  * \date modified: 23 Aug 2020
   */
 
 package apiwdbe;
@@ -18,16 +18,16 @@ public class QryWdbeFamList {
 		*/
 	public static class VecVOrd {
 
-		public static final int TIT = 1;
-		public static final int VND = 2;
+		public static final int VND = 1;
+		public static final int TIT = 2;
 
 		public static int getIx(
 					String sref
 				) {
 			String s = sref.toLowerCase();
 
-			if (s.equals("tit")) return TIT;
 			if (s.equals("vnd")) return VND;
+			if (s.equals("tit")) return TIT;
 
 			return 0;
 		};
@@ -35,8 +35,8 @@ public class QryWdbeFamList {
 		public static String getSref(
 					int ix
 				) {
-			if (ix == TIT) return("tit");
 			if (ix == VND) return("vnd");
+			if (ix == TIT) return("tit");
 
 			return "";
 		};

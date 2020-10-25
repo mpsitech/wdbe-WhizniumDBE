@@ -2,8 +2,8 @@
 	* \file QryWdbeMchList.h
 	* API code for job QryWdbeMchList (declarations)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifndef QRYWDBEMCHLIST_H
@@ -27,8 +27,8 @@ namespace QryWdbeMchList {
 	class VecVOrd {
 
 	public:
-		static const Sbecore::uint PLA = 1;
-		static const Sbecore::uint SRF = 2;
+		static const Sbecore::uint SRF = 1;
+		static const Sbecore::uint PLA = 2;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);

@@ -2,8 +2,8 @@
 	* \file QryWdbeSysSys1NTarget.h
 	* job handler for job QryWdbeSysSys1NTarget (declarations)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifndef QRYWDBESYSSYS1NTARGET_H
@@ -122,8 +122,8 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeTrgMod_sysEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 	bool handleCallWdbeStubChgFromSelf(DbsWdbe* dbswdbe);
+	bool handleCallWdbeTrgMod_sysEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 
 };
 

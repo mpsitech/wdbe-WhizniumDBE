@@ -2,8 +2,8 @@
 	* \file DlgWdbeFilNew.h
 	* job handler for job DlgWdbeFilNew (declarations)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifndef DLGWDBEFILNEW_H
@@ -358,9 +358,9 @@ public:
 		void writeXML(const Sbecore::uint ixWdbeVLocale, xmlTextWriter* wr);
 	};
 
-	bool evalButDneActive(DbsWdbe* dbswdbe);
-	bool evalFilUldActive(DbsWdbe* dbswdbe);
 	bool evalDetButCreActive(DbsWdbe* dbswdbe);
+	bool evalFilUldActive(DbsWdbe* dbswdbe);
+	bool evalButDneActive(DbsWdbe* dbswdbe);
 
 public:
 	DlgWdbeFilNew(XchgWdbe* xchg, DbsWdbe* dbswdbe, const Sbecore::ubigint jrefSup, const Sbecore::uint ixWdbeVLocale);

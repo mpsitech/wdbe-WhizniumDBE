@@ -2,8 +2,8 @@
 	* \file QryWdbeVitList_blks.cpp
 	* job handler for job QryWdbeVitList (implementation of blocks)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 using namespace std;
@@ -19,8 +19,8 @@ uint QryWdbeVitList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "vec") return VEC;
 	if (s == "srf") return SRF;
+	if (s == "vec") return VEC;
 
 	return(0);
 };
@@ -28,8 +28,8 @@ uint QryWdbeVitList::VecVOrd::getIx(
 string QryWdbeVitList::VecVOrd::getSref(
 			const uint ix
 		) {
-	if (ix == VEC) return("vec");
 	if (ix == SRF) return("srf");
+	if (ix == VEC) return("vec");
 
 	return("");
 };

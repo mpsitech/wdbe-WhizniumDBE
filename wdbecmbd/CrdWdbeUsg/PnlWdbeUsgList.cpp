@@ -2,8 +2,8 @@
 	* \file PnlWdbeUsgList.cpp
 	* job handler for job PnlWdbeUsgList (implementation)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifdef WDBECMBD
@@ -242,7 +242,7 @@ void PnlWdbeUsgList::handleDpchAppDataContiac(
 	muteRefresh = true;
 
 	if (has(diffitems, ContIac::NUMFTOS)) {
-		if ((_contiac->numFTos >= QryWdbeUsgList::VecVOrd::SRF) && (_contiac->numFTos <= QryWdbeUsgList::VecVOrd::GRP)) {
+		if ((_contiac->numFTos >= QryWdbeUsgList::VecVOrd::GRP) && (_contiac->numFTos <= QryWdbeUsgList::VecVOrd::SRF)) {
 			xchg->addIxPreset(VecWdbeVPreset::PREWDBEIXORD, jref, _contiac->numFTos);
 
 			qry->rerun(dbswdbe);

@@ -2,8 +2,8 @@
 # file checkout.sh
 # checkout script for Wdbe daemon, release wdbed_awsubt
 # author Alexander Wirthmueller
-# date created: 11 Jul 2020
-# modified: 11 Jul 2020
+# date created: 23 Aug 2020
+# modified: 23 Aug 2020
 
 export set SRCROOT=/home/ubuntu/src
 export set LIBROOT=/home/ubuntu/lib
@@ -14,11 +14,11 @@ export set CMBDSRCROOT=$REPROOT/wdbe/wdbecmbd
 mkdir $SRCROOT/wdbed
 mkdir $SRCROOT/wdbed/IexWdbe
 mkdir $SRCROOT/wdbed/VecWdbe
+mkdir $SRCROOT/wdbed/CrdWdbeNav
 mkdir $SRCROOT/wdbed/CrdWdbeUsg
 mkdir $SRCROOT/wdbed/CrdWdbeUsr
 mkdir $SRCROOT/wdbed/CrdWdbePrs
 mkdir $SRCROOT/wdbed/CrdWdbeFil
-mkdir $SRCROOT/wdbed/CrdWdbeNav
 mkdir $SRCROOT/wdbed/CrdWdbeMch
 mkdir $SRCROOT/wdbed/CrdWdbeLib
 mkdir $SRCROOT/wdbed/CrdWdbeFam
@@ -104,6 +104,11 @@ cp Makefile_VecWdbe $SRCROOT/wdbed/VecWdbe/Makefile
 cp $CMBDSRCROOT/VecWdbe/Vec*.h $SRCROOT/wdbed/VecWdbe/
 cp $CMBDSRCROOT/VecWdbe/Vec*.cpp $SRCROOT/wdbed/VecWdbe/
 
+cp Makefile_CrdWdbeNav $SRCROOT/wdbed/CrdWdbeNav/Makefile
+
+cp $CMBDSRCROOT/CrdWdbeNav/*.h $SRCROOT/wdbed/CrdWdbeNav/
+cp $CMBDSRCROOT/CrdWdbeNav/*.cpp $SRCROOT/wdbed/CrdWdbeNav/
+
 cp Makefile_CrdWdbeUsg $SRCROOT/wdbed/CrdWdbeUsg/Makefile
 
 cp $CMBDSRCROOT/CrdWdbeUsg/*.h $SRCROOT/wdbed/CrdWdbeUsg/
@@ -123,11 +128,6 @@ cp Makefile_CrdWdbeFil $SRCROOT/wdbed/CrdWdbeFil/Makefile
 
 cp $CMBDSRCROOT/CrdWdbeFil/*.h $SRCROOT/wdbed/CrdWdbeFil/
 cp $CMBDSRCROOT/CrdWdbeFil/*.cpp $SRCROOT/wdbed/CrdWdbeFil/
-
-cp Makefile_CrdWdbeNav $SRCROOT/wdbed/CrdWdbeNav/Makefile
-
-cp $CMBDSRCROOT/CrdWdbeNav/*.h $SRCROOT/wdbed/CrdWdbeNav/
-cp $CMBDSRCROOT/CrdWdbeNav/*.cpp $SRCROOT/wdbed/CrdWdbeNav/
 
 cp Makefile_CrdWdbeMch $SRCROOT/wdbed/CrdWdbeMch/Makefile
 
@@ -269,83 +269,83 @@ cp Makefile_CrdWdbeUtl $SRCROOT/wdbed/CrdWdbeUtl/Makefile
 cp $CMBDSRCROOT/CrdWdbeUtl/*.h $SRCROOT/wdbed/CrdWdbeUtl/
 cp $CMBDSRCROOT/CrdWdbeUtl/*.cpp $SRCROOT/wdbed/CrdWdbeUtl/
 
-cp $CMBDSRCROOT/WdbeWrmcu/WdbeWrmcu_blks.h $SRCROOT/wdbed/
-cp $CMBDSRCROOT/WdbeWrmcu/WdbeWrmcu_blks.cpp $SRCROOT/wdbed/
-cp $CMBDSRCROOT/WdbeWrmcu/SqkWdbeWrmcu.h $SRCROOT/wdbed/
-cp $CMBDSRCROOT/WdbeWrmcu/SqkWdbeWrmcu.cpp $SRCROOT/wdbed/
-
-cp $CMBDSRCROOT/WdbeWrfpga/WdbeWrfpga_blks.h $SRCROOT/wdbed/
-cp $CMBDSRCROOT/WdbeWrfpga/WdbeWrfpga_blks.cpp $SRCROOT/wdbed/
-cp $CMBDSRCROOT/WdbeWrfpga/SqkWdbeWrfpga.h $SRCROOT/wdbed/
-cp $CMBDSRCROOT/WdbeWrfpga/SqkWdbeWrfpga.cpp $SRCROOT/wdbed/
-
-cp $CMBDSRCROOT/WdbeWrdev/WdbeWrdev_blks.h $SRCROOT/wdbed/
-cp $CMBDSRCROOT/WdbeWrdev/WdbeWrdev_blks.cpp $SRCROOT/wdbed/
-cp $CMBDSRCROOT/WdbeWrdev/SqkWdbeWrdev.h $SRCROOT/wdbed/
-cp $CMBDSRCROOT/WdbeWrdev/SqkWdbeWrdev.cpp $SRCROOT/wdbed/
-
-cp $CMBDSRCROOT/WdbePrctree/WdbePrctree_blks.h $SRCROOT/wdbed/
-cp $CMBDSRCROOT/WdbePrctree/WdbePrctree_blks.cpp $SRCROOT/wdbed/
-cp $CMBDSRCROOT/WdbePrctree/SqkWdbePrctree.h $SRCROOT/wdbed/
-cp $CMBDSRCROOT/WdbePrctree/SqkWdbePrctree.cpp $SRCROOT/wdbed/
-
-cp $CMBDSRCROOT/WdbePrcfile/WdbePrcfile_blks.h $SRCROOT/wdbed/
-cp $CMBDSRCROOT/WdbePrcfile/WdbePrcfile_blks.cpp $SRCROOT/wdbed/
-cp $CMBDSRCROOT/WdbePrcfile/SqkWdbePrcfile.h $SRCROOT/wdbed/
-cp $CMBDSRCROOT/WdbePrcfile/SqkWdbePrcfile.cpp $SRCROOT/wdbed/
-
-cp $CMBDSRCROOT/WdbePlhmcu/WdbePlhmcu_blks.h $SRCROOT/wdbed/
-cp $CMBDSRCROOT/WdbePlhmcu/WdbePlhmcu_blks.cpp $SRCROOT/wdbed/
-cp $CMBDSRCROOT/WdbePlhmcu/SqkWdbePlhmcu.h $SRCROOT/wdbed/
-cp $CMBDSRCROOT/WdbePlhmcu/SqkWdbePlhmcu.cpp $SRCROOT/wdbed/
-
-cp $CMBDSRCROOT/WdbePlhfpga/WdbePlhfpga_blks.h $SRCROOT/wdbed/
-cp $CMBDSRCROOT/WdbePlhfpga/WdbePlhfpga_blks.cpp $SRCROOT/wdbed/
-cp $CMBDSRCROOT/WdbePlhfpga/SqkWdbePlhfpga.h $SRCROOT/wdbed/
-cp $CMBDSRCROOT/WdbePlhfpga/SqkWdbePlhfpga.cpp $SRCROOT/wdbed/
-
-cp $CMBDSRCROOT/WdbeMtpWrmcu/WdbeMtpWrmcu_blks.h $SRCROOT/wdbed/
-cp $CMBDSRCROOT/WdbeMtpWrmcu/WdbeMtpWrmcu_blks.cpp $SRCROOT/wdbed/
-cp $CMBDSRCROOT/WdbeMtpWrmcu/SqkWdbeMtpWrmcu.h $SRCROOT/wdbed/
-cp $CMBDSRCROOT/WdbeMtpWrmcu/SqkWdbeMtpWrmcu.cpp $SRCROOT/wdbed/
-
-cp $CMBDSRCROOT/WdbeMtpWrfpga/WdbeMtpWrfpga_blks.h $SRCROOT/wdbed/
-cp $CMBDSRCROOT/WdbeMtpWrfpga/WdbeMtpWrfpga_blks.cpp $SRCROOT/wdbed/
-cp $CMBDSRCROOT/WdbeMtpWrfpga/SqkWdbeMtpWrfpga.h $SRCROOT/wdbed/
-cp $CMBDSRCROOT/WdbeMtpWrfpga/SqkWdbeMtpWrfpga.cpp $SRCROOT/wdbed/
-
-cp $CMBDSRCROOT/WdbeMtpModdet/WdbeMtpModdet_blks.h $SRCROOT/wdbed/
-cp $CMBDSRCROOT/WdbeMtpModdet/WdbeMtpModdet_blks.cpp $SRCROOT/wdbed/
-cp $CMBDSRCROOT/WdbeMtpModdet/SqkWdbeMtpModdet.h $SRCROOT/wdbed/
-cp $CMBDSRCROOT/WdbeMtpModdet/SqkWdbeMtpModdet.cpp $SRCROOT/wdbed/
-
-cp $CMBDSRCROOT/WdbeMtpModbsctd/WdbeMtpModbsctd_blks.h $SRCROOT/wdbed/
-cp $CMBDSRCROOT/WdbeMtpModbsctd/WdbeMtpModbsctd_blks.cpp $SRCROOT/wdbed/
-cp $CMBDSRCROOT/WdbeMtpModbsctd/SqkWdbeMtpModbsctd.h $SRCROOT/wdbed/
-cp $CMBDSRCROOT/WdbeMtpModbsctd/SqkWdbeMtpModbsctd.cpp $SRCROOT/wdbed/
-
-cp $CMBDSRCROOT/WdbeMtpModbscbu/WdbeMtpModbscbu_blks.h $SRCROOT/wdbed/
-cp $CMBDSRCROOT/WdbeMtpModbscbu/WdbeMtpModbscbu_blks.cpp $SRCROOT/wdbed/
-cp $CMBDSRCROOT/WdbeMtpModbscbu/SqkWdbeMtpModbscbu.h $SRCROOT/wdbed/
-cp $CMBDSRCROOT/WdbeMtpModbscbu/SqkWdbeMtpModbscbu.cpp $SRCROOT/wdbed/
-
-cp $CMBDSRCROOT/WdbeMtpPlhmcu/WdbeMtpPlhmcu_blks.h $SRCROOT/wdbed/
-cp $CMBDSRCROOT/WdbeMtpPlhmcu/WdbeMtpPlhmcu_blks.cpp $SRCROOT/wdbed/
-cp $CMBDSRCROOT/WdbeMtpPlhmcu/SqkWdbeMtpPlhmcu.h $SRCROOT/wdbed/
-cp $CMBDSRCROOT/WdbeMtpPlhmcu/SqkWdbeMtpPlhmcu.cpp $SRCROOT/wdbed/
-
-cp $CMBDSRCROOT/WdbeMtpPlhfpga/WdbeMtpPlhfpga_blks.h $SRCROOT/wdbed/
-cp $CMBDSRCROOT/WdbeMtpPlhfpga/WdbeMtpPlhfpga_blks.cpp $SRCROOT/wdbed/
-cp $CMBDSRCROOT/WdbeMtpPlhfpga/SqkWdbeMtpPlhfpga.h $SRCROOT/wdbed/
-cp $CMBDSRCROOT/WdbeMtpPlhfpga/SqkWdbeMtpPlhfpga.cpp $SRCROOT/wdbed/
+cp $CMBDSRCROOT/WdbeModbsc/WdbeModbsc_blks.h $SRCROOT/wdbed/
+cp $CMBDSRCROOT/WdbeModbsc/WdbeModbsc_blks.cpp $SRCROOT/wdbed/
+cp $CMBDSRCROOT/WdbeModbsc/SqkWdbeModbsc.h $SRCROOT/wdbed/
+cp $CMBDSRCROOT/WdbeModbsc/SqkWdbeModbsc.cpp $SRCROOT/wdbed/
 
 cp $CMBDSRCROOT/WdbeModdet/WdbeModdet_blks.h $SRCROOT/wdbed/
 cp $CMBDSRCROOT/WdbeModdet/WdbeModdet_blks.cpp $SRCROOT/wdbed/
 cp $CMBDSRCROOT/WdbeModdet/SqkWdbeModdet.h $SRCROOT/wdbed/
 cp $CMBDSRCROOT/WdbeModdet/SqkWdbeModdet.cpp $SRCROOT/wdbed/
 
-cp $CMBDSRCROOT/WdbeModbsc/WdbeModbsc_blks.h $SRCROOT/wdbed/
-cp $CMBDSRCROOT/WdbeModbsc/WdbeModbsc_blks.cpp $SRCROOT/wdbed/
-cp $CMBDSRCROOT/WdbeModbsc/SqkWdbeModbsc.h $SRCROOT/wdbed/
-cp $CMBDSRCROOT/WdbeModbsc/SqkWdbeModbsc.cpp $SRCROOT/wdbed/
+cp $CMBDSRCROOT/WdbeMtpPlhfpga/WdbeMtpPlhfpga_blks.h $SRCROOT/wdbed/
+cp $CMBDSRCROOT/WdbeMtpPlhfpga/WdbeMtpPlhfpga_blks.cpp $SRCROOT/wdbed/
+cp $CMBDSRCROOT/WdbeMtpPlhfpga/SqkWdbeMtpPlhfpga.h $SRCROOT/wdbed/
+cp $CMBDSRCROOT/WdbeMtpPlhfpga/SqkWdbeMtpPlhfpga.cpp $SRCROOT/wdbed/
+
+cp $CMBDSRCROOT/WdbeMtpPlhmcu/WdbeMtpPlhmcu_blks.h $SRCROOT/wdbed/
+cp $CMBDSRCROOT/WdbeMtpPlhmcu/WdbeMtpPlhmcu_blks.cpp $SRCROOT/wdbed/
+cp $CMBDSRCROOT/WdbeMtpPlhmcu/SqkWdbeMtpPlhmcu.h $SRCROOT/wdbed/
+cp $CMBDSRCROOT/WdbeMtpPlhmcu/SqkWdbeMtpPlhmcu.cpp $SRCROOT/wdbed/
+
+cp $CMBDSRCROOT/WdbeMtpModbscbu/WdbeMtpModbscbu_blks.h $SRCROOT/wdbed/
+cp $CMBDSRCROOT/WdbeMtpModbscbu/WdbeMtpModbscbu_blks.cpp $SRCROOT/wdbed/
+cp $CMBDSRCROOT/WdbeMtpModbscbu/SqkWdbeMtpModbscbu.h $SRCROOT/wdbed/
+cp $CMBDSRCROOT/WdbeMtpModbscbu/SqkWdbeMtpModbscbu.cpp $SRCROOT/wdbed/
+
+cp $CMBDSRCROOT/WdbeMtpModbsctd/WdbeMtpModbsctd_blks.h $SRCROOT/wdbed/
+cp $CMBDSRCROOT/WdbeMtpModbsctd/WdbeMtpModbsctd_blks.cpp $SRCROOT/wdbed/
+cp $CMBDSRCROOT/WdbeMtpModbsctd/SqkWdbeMtpModbsctd.h $SRCROOT/wdbed/
+cp $CMBDSRCROOT/WdbeMtpModbsctd/SqkWdbeMtpModbsctd.cpp $SRCROOT/wdbed/
+
+cp $CMBDSRCROOT/WdbeMtpModdet/WdbeMtpModdet_blks.h $SRCROOT/wdbed/
+cp $CMBDSRCROOT/WdbeMtpModdet/WdbeMtpModdet_blks.cpp $SRCROOT/wdbed/
+cp $CMBDSRCROOT/WdbeMtpModdet/SqkWdbeMtpModdet.h $SRCROOT/wdbed/
+cp $CMBDSRCROOT/WdbeMtpModdet/SqkWdbeMtpModdet.cpp $SRCROOT/wdbed/
+
+cp $CMBDSRCROOT/WdbeMtpWrfpga/WdbeMtpWrfpga_blks.h $SRCROOT/wdbed/
+cp $CMBDSRCROOT/WdbeMtpWrfpga/WdbeMtpWrfpga_blks.cpp $SRCROOT/wdbed/
+cp $CMBDSRCROOT/WdbeMtpWrfpga/SqkWdbeMtpWrfpga.h $SRCROOT/wdbed/
+cp $CMBDSRCROOT/WdbeMtpWrfpga/SqkWdbeMtpWrfpga.cpp $SRCROOT/wdbed/
+
+cp $CMBDSRCROOT/WdbeMtpWrmcu/WdbeMtpWrmcu_blks.h $SRCROOT/wdbed/
+cp $CMBDSRCROOT/WdbeMtpWrmcu/WdbeMtpWrmcu_blks.cpp $SRCROOT/wdbed/
+cp $CMBDSRCROOT/WdbeMtpWrmcu/SqkWdbeMtpWrmcu.h $SRCROOT/wdbed/
+cp $CMBDSRCROOT/WdbeMtpWrmcu/SqkWdbeMtpWrmcu.cpp $SRCROOT/wdbed/
+
+cp $CMBDSRCROOT/WdbePlhfpga/WdbePlhfpga_blks.h $SRCROOT/wdbed/
+cp $CMBDSRCROOT/WdbePlhfpga/WdbePlhfpga_blks.cpp $SRCROOT/wdbed/
+cp $CMBDSRCROOT/WdbePlhfpga/SqkWdbePlhfpga.h $SRCROOT/wdbed/
+cp $CMBDSRCROOT/WdbePlhfpga/SqkWdbePlhfpga.cpp $SRCROOT/wdbed/
+
+cp $CMBDSRCROOT/WdbePlhmcu/WdbePlhmcu_blks.h $SRCROOT/wdbed/
+cp $CMBDSRCROOT/WdbePlhmcu/WdbePlhmcu_blks.cpp $SRCROOT/wdbed/
+cp $CMBDSRCROOT/WdbePlhmcu/SqkWdbePlhmcu.h $SRCROOT/wdbed/
+cp $CMBDSRCROOT/WdbePlhmcu/SqkWdbePlhmcu.cpp $SRCROOT/wdbed/
+
+cp $CMBDSRCROOT/WdbePrcfile/WdbePrcfile_blks.h $SRCROOT/wdbed/
+cp $CMBDSRCROOT/WdbePrcfile/WdbePrcfile_blks.cpp $SRCROOT/wdbed/
+cp $CMBDSRCROOT/WdbePrcfile/SqkWdbePrcfile.h $SRCROOT/wdbed/
+cp $CMBDSRCROOT/WdbePrcfile/SqkWdbePrcfile.cpp $SRCROOT/wdbed/
+
+cp $CMBDSRCROOT/WdbePrctree/WdbePrctree_blks.h $SRCROOT/wdbed/
+cp $CMBDSRCROOT/WdbePrctree/WdbePrctree_blks.cpp $SRCROOT/wdbed/
+cp $CMBDSRCROOT/WdbePrctree/SqkWdbePrctree.h $SRCROOT/wdbed/
+cp $CMBDSRCROOT/WdbePrctree/SqkWdbePrctree.cpp $SRCROOT/wdbed/
+
+cp $CMBDSRCROOT/WdbeWrdev/WdbeWrdev_blks.h $SRCROOT/wdbed/
+cp $CMBDSRCROOT/WdbeWrdev/WdbeWrdev_blks.cpp $SRCROOT/wdbed/
+cp $CMBDSRCROOT/WdbeWrdev/SqkWdbeWrdev.h $SRCROOT/wdbed/
+cp $CMBDSRCROOT/WdbeWrdev/SqkWdbeWrdev.cpp $SRCROOT/wdbed/
+
+cp $CMBDSRCROOT/WdbeWrfpga/WdbeWrfpga_blks.h $SRCROOT/wdbed/
+cp $CMBDSRCROOT/WdbeWrfpga/WdbeWrfpga_blks.cpp $SRCROOT/wdbed/
+cp $CMBDSRCROOT/WdbeWrfpga/SqkWdbeWrfpga.h $SRCROOT/wdbed/
+cp $CMBDSRCROOT/WdbeWrfpga/SqkWdbeWrfpga.cpp $SRCROOT/wdbed/
+
+cp $CMBDSRCROOT/WdbeWrmcu/WdbeWrmcu_blks.h $SRCROOT/wdbed/
+cp $CMBDSRCROOT/WdbeWrmcu/WdbeWrmcu_blks.cpp $SRCROOT/wdbed/
+cp $CMBDSRCROOT/WdbeWrmcu/SqkWdbeWrmcu.h $SRCROOT/wdbed/
+cp $CMBDSRCROOT/WdbeWrmcu/SqkWdbeWrmcu.cpp $SRCROOT/wdbed/
 

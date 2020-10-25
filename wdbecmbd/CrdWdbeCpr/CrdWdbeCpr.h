@@ -2,8 +2,8 @@
 	* \file CrdWdbeCpr.h
 	* job handler for job CrdWdbeCpr (declarations)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifndef CRDWDBECPR_H
@@ -13,10 +13,10 @@
 
 // IP include.cust --- INSERT
 
-#include "PnlWdbeCprList.h"
-#include "PnlWdbeCprHeadbar.h"
-#include "PnlWdbeCprRec.h"
 #include "DlgWdbeCprNew.h"
+#include "PnlWdbeCprRec.h"
+#include "PnlWdbeCprHeadbar.h"
+#include "PnlWdbeCprList.h"
 
 #define VecVWdbeCprDo CrdWdbeCpr::VecVDo
 #define VecVWdbeCprSge CrdWdbeCpr::VecVSge
@@ -200,10 +200,10 @@ public:
 	Sbecore::Xmlio::Feed feedFMcbAlert;
 	Sbecore::Xmlio::Feed feedFSge;
 
-	PnlWdbeCprList* pnllist;
-	PnlWdbeCprHeadbar* pnlheadbar;
-	PnlWdbeCprRec* pnlrec;
 	DlgWdbeCprNew* dlgnew;
+	PnlWdbeCprRec* pnlrec;
+	PnlWdbeCprHeadbar* pnlheadbar;
+	PnlWdbeCprList* pnllist;
 
 	// IP vars.cust --- INSERT
 
@@ -234,9 +234,9 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeRefPreSet(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, const Sbecore::ubigint refInv);
 	bool handleCallWdbeDlgClose(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 	bool handleCallWdbeStatChg(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbeRefPreSet(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, const Sbecore::ubigint refInv);
 
 private:
 	void changeStage(DbsWdbe* dbswdbe, Sbecore::uint _ixVSge, DpchEngWdbe** dpcheng = NULL);

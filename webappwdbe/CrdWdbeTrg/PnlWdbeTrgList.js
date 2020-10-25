@@ -2,8 +2,8 @@
   * \file PnlWdbeTrgList.js
   * web client functionality for panel PnlWdbeTrgList
   * \author Alexander Wirthmueller
-  * \date created: 11 Jul 2020
-  * \date modified: 11 Jul 2020
+  * \date created: 23 Aug 2020
+  * \date modified: 23 Aug 2020
   */
 
 // --- expand state management
@@ -133,11 +133,11 @@ function refreshB(chgcol) {
 			ix++;
 
 			if (i == 1) {
-				doc.cols.push("TcoSrf"); doc.widths.push(TcoSrfWidth); doc.fs.push("srf"); doc.tos.push(3); wtot += TcoSrfWidth;
+				doc.cols.push("TcoSrf"); doc.widths.push(TcoSrfWidth); doc.fs.push("srf"); doc.tos.push(1); wtot += TcoSrfWidth;
 			} else if (i == 2) {
 				doc.cols.push("TcoSys"); doc.widths.push(TcoSysWidth); doc.fs.push("sys"); doc.tos.push(2); wtot += TcoSysWidth;
 			} else if (i == 3) {
-				doc.cols.push("TcoUnt"); doc.widths.push(TcoUntWidth); doc.fs.push("unt"); doc.tos.push(1); wtot += TcoUntWidth;
+				doc.cols.push("TcoUnt"); doc.widths.push(TcoUntWidth); doc.fs.push("unt"); doc.tos.push(3); wtot += TcoUntWidth;
 			} else {
 				ix--;
 			};

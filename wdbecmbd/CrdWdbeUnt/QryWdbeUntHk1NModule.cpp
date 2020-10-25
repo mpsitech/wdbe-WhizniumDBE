@@ -2,8 +2,8 @@
 	* \file QryWdbeUntHk1NModule.cpp
 	* job handler for job QryWdbeUntHk1NModule (implementation)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifdef WDBECMBD
@@ -273,11 +273,19 @@ void QryWdbeUntHk1NModule::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBEMDLMOD_HKTHKUEQ) {
-		call->abort = handleCallWdbeMdlMod_hktHkuEq(dbswdbe, call->jref);
-	} else if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
+	if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
 		call->abort = handleCallWdbeStubChgFromSelf(dbswdbe);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEMDLMOD_HKTHKUEQ) {
+		call->abort = handleCallWdbeMdlMod_hktHkuEq(dbswdbe, call->jref);
 	};
+};
+
+bool QryWdbeUntHk1NModule::handleCallWdbeStubChgFromSelf(
+			DbsWdbe* dbswdbe
+		) {
+	bool retval = false;
+	// IP handleCallWdbeStubChgFromSelf --- INSERT
+	return retval;
 };
 
 bool QryWdbeUntHk1NModule::handleCallWdbeMdlMod_hktHkuEq(
@@ -291,14 +299,6 @@ bool QryWdbeUntHk1NModule::handleCallWdbeMdlMod_hktHkuEq(
 		xchg->triggerCall(dbswdbe, VecWdbeVCall::CALLWDBESTATCHG, jref);
 	};
 
-	return retval;
-};
-
-bool QryWdbeUntHk1NModule::handleCallWdbeStubChgFromSelf(
-			DbsWdbe* dbswdbe
-		) {
-	bool retval = false;
-	// IP handleCallWdbeStubChgFromSelf --- INSERT
 	return retval;
 };
 

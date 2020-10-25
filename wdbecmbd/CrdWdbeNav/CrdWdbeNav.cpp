@@ -2,8 +2,8 @@
 	* \file CrdWdbeNav.cpp
 	* job handler for job CrdWdbeNav (implementation)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifdef WDBECMBD
@@ -41,30 +41,30 @@ CrdWdbeNav::CrdWdbeNav(
 	feedFSge.tag = "FeedFSge";
 	VecVSge::fillFeed(feedFSge);
 
-	pnlauxfct = NULL;
-	pnldescr = NULL;
-	pnlcoredev = NULL;
-	pnldevdev = NULL;
-	pnlglobal = NULL;
-	pnladmin = NULL;
-	pnlpre = NULL;
-	pnlheadbar = NULL;
-	dlgmnglic = NULL;
 	dlgloaini = NULL;
+	dlgmnglic = NULL;
+	pnlheadbar = NULL;
+	pnlpre = NULL;
+	pnladmin = NULL;
+	pnlglobal = NULL;
+	pnldevdev = NULL;
+	pnlcoredev = NULL;
+	pnldescr = NULL;
+	pnlauxfct = NULL;
 
 	// IP constructor.cust1 --- INSERT
 
 	set<uint> moditems;
 	refresh(dbswdbe, moditems);
 
-	pnlauxfct = new PnlWdbeNavAuxfct(xchg, dbswdbe, jref, ixWdbeVLocale);
-	pnldescr = new PnlWdbeNavDescr(xchg, dbswdbe, jref, ixWdbeVLocale);
-	pnlcoredev = new PnlWdbeNavCoredev(xchg, dbswdbe, jref, ixWdbeVLocale);
-	pnldevdev = new PnlWdbeNavDevdev(xchg, dbswdbe, jref, ixWdbeVLocale);
-	pnlglobal = new PnlWdbeNavGlobal(xchg, dbswdbe, jref, ixWdbeVLocale);
-	pnladmin = new PnlWdbeNavAdmin(xchg, dbswdbe, jref, ixWdbeVLocale);
-	pnlpre = new PnlWdbeNavPre(xchg, dbswdbe, jref, ixWdbeVLocale);
 	pnlheadbar = new PnlWdbeNavHeadbar(xchg, dbswdbe, jref, ixWdbeVLocale);
+	pnlpre = new PnlWdbeNavPre(xchg, dbswdbe, jref, ixWdbeVLocale);
+	pnladmin = new PnlWdbeNavAdmin(xchg, dbswdbe, jref, ixWdbeVLocale);
+	pnlglobal = new PnlWdbeNavGlobal(xchg, dbswdbe, jref, ixWdbeVLocale);
+	pnldevdev = new PnlWdbeNavDevdev(xchg, dbswdbe, jref, ixWdbeVLocale);
+	pnlcoredev = new PnlWdbeNavCoredev(xchg, dbswdbe, jref, ixWdbeVLocale);
+	pnldescr = new PnlWdbeNavDescr(xchg, dbswdbe, jref, ixWdbeVLocale);
+	pnlauxfct = new PnlWdbeNavAuxfct(xchg, dbswdbe, jref, ixWdbeVLocale);
 
 	// IP constructor.cust2 --- INSERT
 

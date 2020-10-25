@@ -2,8 +2,8 @@
 	* \file PnlWdbeUsgRec.cpp
 	* job handler for job PnlWdbeUsgRec (implementation)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifdef WDBECMBD
@@ -37,9 +37,9 @@ PnlWdbeUsgRec::PnlWdbeUsgRec(
 		{
 	jref = xchg->addJob(dbswdbe, this, jrefSup);
 
-	pnlmnuser = NULL;
-	pnlaaccess = NULL;
 	pnldetail = NULL;
+	pnlaaccess = NULL;
+	pnlmnuser = NULL;
 
 	// IP constructor.cust1 --- INSERT
 

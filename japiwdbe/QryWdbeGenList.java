@@ -2,8 +2,8 @@
   * \file QryWdbeGenList.java
   * Java API code for job QryWdbeGenList
   * \author Alexander Wirthmueller
-  * \date created: 11 Jul 2020
-  * \date modified: 11 Jul 2020
+  * \date created: 23 Aug 2020
+  * \date modified: 23 Aug 2020
   */
 
 package apiwdbe;
@@ -18,16 +18,16 @@ public class QryWdbeGenList {
 		*/
 	public static class VecVOrd {
 
-		public static final int MDL = 1;
-		public static final int SRF = 2;
+		public static final int SRF = 1;
+		public static final int MDL = 2;
 
 		public static int getIx(
 					String sref
 				) {
 			String s = sref.toLowerCase();
 
-			if (s.equals("mdl")) return MDL;
 			if (s.equals("srf")) return SRF;
+			if (s.equals("mdl")) return MDL;
 
 			return 0;
 		};
@@ -35,8 +35,8 @@ public class QryWdbeGenList {
 		public static String getSref(
 					int ix
 				) {
-			if (ix == MDL) return("mdl");
 			if (ix == SRF) return("srf");
+			if (ix == MDL) return("mdl");
 
 			return "";
 		};

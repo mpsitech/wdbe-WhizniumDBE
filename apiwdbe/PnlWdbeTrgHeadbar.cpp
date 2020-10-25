@@ -2,8 +2,8 @@
 	* \file PnlWdbeTrgHeadbar.cpp
 	* API code for job PnlWdbeTrgHeadbar (implementation)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #include "PnlWdbeTrgHeadbar.h"

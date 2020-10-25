@@ -2,8 +2,8 @@
 	* \file WdbeQModCor1NImbuf.cpp
 	* Dbs and XML wrapper for table TblWdbeQModCor1NImbuf (implementation)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #include "WdbeQModCor1NImbuf.h"

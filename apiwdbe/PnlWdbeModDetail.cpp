@@ -2,8 +2,8 @@
 	* \file PnlWdbeModDetail.cpp
 	* API code for job PnlWdbeModDetail (implementation)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #include "PnlWdbeModDetail.h"
@@ -25,13 +25,13 @@ uint PnlWdbeModDetail::VecVDo::getIx(
 	if (s == "buthkuviewclick") return BUTHKUVIEWCLICK;
 	if (s == "butsupviewclick") return BUTSUPVIEWCLICK;
 	if (s == "buttplviewclick") return BUTTPLVIEWCLICK;
-	if (s == "butimbnewclick") return BUTIMBNEWCLICK;
-	if (s == "butimbdeleteclick") return BUTIMBDELETECLICK;
-	if (s == "butimbcorviewclick") return BUTIMBCORVIEWCLICK;
 	if (s == "butctrnewclick") return BUTCTRNEWCLICK;
 	if (s == "butctrdeleteclick") return BUTCTRDELETECLICK;
 	if (s == "butctrfwdviewclick") return BUTCTRFWDVIEWCLICK;
 	if (s == "butctrclrviewclick") return BUTCTRCLRVIEWCLICK;
+	if (s == "butimbnewclick") return BUTIMBNEWCLICK;
+	if (s == "butimbdeleteclick") return BUTIMBDELETECLICK;
+	if (s == "butimbcorviewclick") return BUTIMBCORVIEWCLICK;
 
 	return(0);
 };
@@ -43,13 +43,13 @@ string PnlWdbeModDetail::VecVDo::getSref(
 	if (ix == BUTHKUVIEWCLICK) return("ButHkuViewClick");
 	if (ix == BUTSUPVIEWCLICK) return("ButSupViewClick");
 	if (ix == BUTTPLVIEWCLICK) return("ButTplViewClick");
-	if (ix == BUTIMBNEWCLICK) return("ButImbNewClick");
-	if (ix == BUTIMBDELETECLICK) return("ButImbDeleteClick");
-	if (ix == BUTIMBCORVIEWCLICK) return("ButImbCorViewClick");
 	if (ix == BUTCTRNEWCLICK) return("ButCtrNewClick");
 	if (ix == BUTCTRDELETECLICK) return("ButCtrDeleteClick");
 	if (ix == BUTCTRFWDVIEWCLICK) return("ButCtrFwdViewClick");
 	if (ix == BUTCTRCLRVIEWCLICK) return("ButCtrClrViewClick");
+	if (ix == BUTIMBNEWCLICK) return("ButImbNewClick");
+	if (ix == BUTIMBDELETECLICK) return("ButImbDeleteClick");
+	if (ix == BUTIMBCORVIEWCLICK) return("ButImbCorViewClick");
 
 	return("");
 };
@@ -63,9 +63,9 @@ PnlWdbeModDetail::ContIac::ContIac(
 			, const uint numFPupHkt
 			, const string& TxfSrr
 			, const string& TxfCmt
+			, const string& TxfCtrFsr
 			, const uint numFPupImbDir
 			, const string& TxfImbPri
-			, const string& TxfCtrFsr
 		) :
 			Block()
 		{
@@ -73,11 +73,11 @@ PnlWdbeModDetail::ContIac::ContIac(
 	this->numFPupHkt = numFPupHkt;
 	this->TxfSrr = TxfSrr;
 	this->TxfCmt = TxfCmt;
+	this->TxfCtrFsr = TxfCtrFsr;
 	this->numFPupImbDir = numFPupImbDir;
 	this->TxfImbPri = TxfImbPri;
-	this->TxfCtrFsr = TxfCtrFsr;
 
-	mask = {NUMFPUPTYP, NUMFPUPHKT, TXFSRR, TXFCMT, NUMFPUPIMBDIR, TXFIMBPRI, TXFCTRFSR};
+	mask = {NUMFPUPTYP, NUMFPUPHKT, TXFSRR, TXFCMT, TXFCTRFSR, NUMFPUPIMBDIR, TXFIMBPRI};
 };
 
 bool PnlWdbeModDetail::ContIac::readXML(
@@ -101,9 +101,9 @@ bool PnlWdbeModDetail::ContIac::readXML(
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "numFPupHkt", numFPupHkt)) add(NUMFPUPHKT);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "TxfSrr", TxfSrr)) add(TXFSRR);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "TxfCmt", TxfCmt)) add(TXFCMT);
+		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "TxfCtrFsr", TxfCtrFsr)) add(TXFCTRFSR);
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "numFPupImbDir", numFPupImbDir)) add(NUMFPUPIMBDIR);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "TxfImbPri", TxfImbPri)) add(TXFIMBPRI);
-		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "TxfCtrFsr", TxfCtrFsr)) add(TXFCTRFSR);
 	};
 
 	return basefound;
@@ -125,9 +125,9 @@ void PnlWdbeModDetail::ContIac::writeXML(
 		writeUintAttr(wr, itemtag, "sref", "numFPupHkt", numFPupHkt);
 		writeStringAttr(wr, itemtag, "sref", "TxfSrr", TxfSrr);
 		writeStringAttr(wr, itemtag, "sref", "TxfCmt", TxfCmt);
+		writeStringAttr(wr, itemtag, "sref", "TxfCtrFsr", TxfCtrFsr);
 		writeUintAttr(wr, itemtag, "sref", "numFPupImbDir", numFPupImbDir);
 		writeStringAttr(wr, itemtag, "sref", "TxfImbPri", TxfImbPri);
-		writeStringAttr(wr, itemtag, "sref", "TxfCtrFsr", TxfCtrFsr);
 	xmlTextWriterEndElement(wr);
 };
 
@@ -140,9 +140,9 @@ set<uint> PnlWdbeModDetail::ContIac::comm(
 	if (numFPupHkt == comp->numFPupHkt) insert(items, NUMFPUPHKT);
 	if (TxfSrr == comp->TxfSrr) insert(items, TXFSRR);
 	if (TxfCmt == comp->TxfCmt) insert(items, TXFCMT);
+	if (TxfCtrFsr == comp->TxfCtrFsr) insert(items, TXFCTRFSR);
 	if (numFPupImbDir == comp->numFPupImbDir) insert(items, NUMFPUPIMBDIR);
 	if (TxfImbPri == comp->TxfImbPri) insert(items, TXFIMBPRI);
-	if (TxfCtrFsr == comp->TxfCtrFsr) insert(items, TXFCTRFSR);
 
 	return(items);
 };
@@ -155,7 +155,7 @@ set<uint> PnlWdbeModDetail::ContIac::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {NUMFPUPTYP, NUMFPUPHKT, TXFSRR, TXFCMT, NUMFPUPIMBDIR, TXFIMBPRI, TXFCTRFSR};
+	diffitems = {NUMFPUPTYP, NUMFPUPHKT, TXFSRR, TXFCMT, TXFCTRFSR, NUMFPUPIMBDIR, TXFIMBPRI};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -170,10 +170,10 @@ PnlWdbeModDetail::ContInf::ContInf(
 			, const string& TxtHku
 			, const string& TxtSup
 			, const string& TxtTpl
-			, const string& TxtImbSrf
-			, const string& TxtImbCor
 			, const string& TxtCtrFwd
 			, const string& TxtCtrClr
+			, const string& TxtImbSrf
+			, const string& TxtImbCor
 		) :
 			Block()
 		{
@@ -181,12 +181,12 @@ PnlWdbeModDetail::ContInf::ContInf(
 	this->TxtHku = TxtHku;
 	this->TxtSup = TxtSup;
 	this->TxtTpl = TxtTpl;
-	this->TxtImbSrf = TxtImbSrf;
-	this->TxtImbCor = TxtImbCor;
 	this->TxtCtrFwd = TxtCtrFwd;
 	this->TxtCtrClr = TxtCtrClr;
+	this->TxtImbSrf = TxtImbSrf;
+	this->TxtImbCor = TxtImbCor;
 
-	mask = {TXTSRF, TXTHKU, TXTSUP, TXTTPL, TXTIMBSRF, TXTIMBCOR, TXTCTRFWD, TXTCTRCLR};
+	mask = {TXTSRF, TXTHKU, TXTSUP, TXTTPL, TXTCTRFWD, TXTCTRCLR, TXTIMBSRF, TXTIMBCOR};
 };
 
 bool PnlWdbeModDetail::ContInf::readXML(
@@ -210,10 +210,10 @@ bool PnlWdbeModDetail::ContInf::readXML(
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "TxtHku", TxtHku)) add(TXTHKU);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "TxtSup", TxtSup)) add(TXTSUP);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "TxtTpl", TxtTpl)) add(TXTTPL);
-		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "TxtImbSrf", TxtImbSrf)) add(TXTIMBSRF);
-		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "TxtImbCor", TxtImbCor)) add(TXTIMBCOR);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "TxtCtrFwd", TxtCtrFwd)) add(TXTCTRFWD);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "TxtCtrClr", TxtCtrClr)) add(TXTCTRCLR);
+		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "TxtImbSrf", TxtImbSrf)) add(TXTIMBSRF);
+		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "TxtImbCor", TxtImbCor)) add(TXTIMBCOR);
 	};
 
 	return basefound;
@@ -228,10 +228,10 @@ set<uint> PnlWdbeModDetail::ContInf::comm(
 	if (TxtHku == comp->TxtHku) insert(items, TXTHKU);
 	if (TxtSup == comp->TxtSup) insert(items, TXTSUP);
 	if (TxtTpl == comp->TxtTpl) insert(items, TXTTPL);
-	if (TxtImbSrf == comp->TxtImbSrf) insert(items, TXTIMBSRF);
-	if (TxtImbCor == comp->TxtImbCor) insert(items, TXTIMBCOR);
 	if (TxtCtrFwd == comp->TxtCtrFwd) insert(items, TXTCTRFWD);
 	if (TxtCtrClr == comp->TxtCtrClr) insert(items, TXTCTRCLR);
+	if (TxtImbSrf == comp->TxtImbSrf) insert(items, TXTIMBSRF);
+	if (TxtImbCor == comp->TxtImbCor) insert(items, TXTIMBCOR);
 
 	return(items);
 };
@@ -244,7 +244,7 @@ set<uint> PnlWdbeModDetail::ContInf::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {TXTSRF, TXTHKU, TXTSUP, TXTTPL, TXTIMBSRF, TXTIMBCOR, TXTCTRFWD, TXTCTRCLR};
+	diffitems = {TXTSRF, TXTHKU, TXTSUP, TXTTPL, TXTCTRFWD, TXTCTRCLR, TXTIMBSRF, TXTIMBCOR};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -336,20 +336,6 @@ PnlWdbeModDetail::StatShr::StatShr(
 			, const bool ButTplViewActive
 			, const bool TxfSrrActive
 			, const bool TxfCmtActive
-			, const bool SepImbAvail
-			, const bool HdgImbAvail
-			, const bool ButImbNewAvail
-			, const bool ButImbDeleteAvail
-			, const bool TxtImbSrfAvail
-			, const bool TxtImbSrfActive
-			, const bool TxtImbCorAvail
-			, const bool TxtImbCorActive
-			, const bool ButImbCorViewAvail
-			, const bool ButImbCorViewActive
-			, const bool PupImbDirAvail
-			, const bool PupImbDirActive
-			, const bool TxfImbPriAvail
-			, const bool TxfImbPriActive
 			, const bool SepCtrAvail
 			, const bool HdgCtrAvail
 			, const bool ButCtrNewAvail
@@ -364,6 +350,20 @@ PnlWdbeModDetail::StatShr::StatShr(
 			, const bool TxtCtrClrActive
 			, const bool ButCtrClrViewAvail
 			, const bool ButCtrClrViewActive
+			, const bool SepImbAvail
+			, const bool HdgImbAvail
+			, const bool ButImbNewAvail
+			, const bool ButImbDeleteAvail
+			, const bool TxtImbSrfAvail
+			, const bool TxtImbSrfActive
+			, const bool TxtImbCorAvail
+			, const bool TxtImbCorActive
+			, const bool ButImbCorViewAvail
+			, const bool ButImbCorViewActive
+			, const bool PupImbDirAvail
+			, const bool PupImbDirActive
+			, const bool TxfImbPriAvail
+			, const bool TxfImbPriActive
 		) :
 			Block()
 		{
@@ -382,20 +382,6 @@ PnlWdbeModDetail::StatShr::StatShr(
 	this->ButTplViewActive = ButTplViewActive;
 	this->TxfSrrActive = TxfSrrActive;
 	this->TxfCmtActive = TxfCmtActive;
-	this->SepImbAvail = SepImbAvail;
-	this->HdgImbAvail = HdgImbAvail;
-	this->ButImbNewAvail = ButImbNewAvail;
-	this->ButImbDeleteAvail = ButImbDeleteAvail;
-	this->TxtImbSrfAvail = TxtImbSrfAvail;
-	this->TxtImbSrfActive = TxtImbSrfActive;
-	this->TxtImbCorAvail = TxtImbCorAvail;
-	this->TxtImbCorActive = TxtImbCorActive;
-	this->ButImbCorViewAvail = ButImbCorViewAvail;
-	this->ButImbCorViewActive = ButImbCorViewActive;
-	this->PupImbDirAvail = PupImbDirAvail;
-	this->PupImbDirActive = PupImbDirActive;
-	this->TxfImbPriAvail = TxfImbPriAvail;
-	this->TxfImbPriActive = TxfImbPriActive;
 	this->SepCtrAvail = SepCtrAvail;
 	this->HdgCtrAvail = HdgCtrAvail;
 	this->ButCtrNewAvail = ButCtrNewAvail;
@@ -410,8 +396,22 @@ PnlWdbeModDetail::StatShr::StatShr(
 	this->TxtCtrClrActive = TxtCtrClrActive;
 	this->ButCtrClrViewAvail = ButCtrClrViewAvail;
 	this->ButCtrClrViewActive = ButCtrClrViewActive;
+	this->SepImbAvail = SepImbAvail;
+	this->HdgImbAvail = HdgImbAvail;
+	this->ButImbNewAvail = ButImbNewAvail;
+	this->ButImbDeleteAvail = ButImbDeleteAvail;
+	this->TxtImbSrfAvail = TxtImbSrfAvail;
+	this->TxtImbSrfActive = TxtImbSrfActive;
+	this->TxtImbCorAvail = TxtImbCorAvail;
+	this->TxtImbCorActive = TxtImbCorActive;
+	this->ButImbCorViewAvail = ButImbCorViewAvail;
+	this->ButImbCorViewActive = ButImbCorViewActive;
+	this->PupImbDirAvail = PupImbDirAvail;
+	this->PupImbDirActive = PupImbDirActive;
+	this->TxfImbPriAvail = TxfImbPriAvail;
+	this->TxfImbPriActive = TxfImbPriActive;
 
-	mask = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, PUPTYPACTIVE, TXTHKUACTIVE, BUTHKUVIEWAVAIL, BUTHKUVIEWACTIVE, TXTSUPACTIVE, BUTSUPVIEWAVAIL, BUTSUPVIEWACTIVE, TXTTPLACTIVE, BUTTPLVIEWAVAIL, BUTTPLVIEWACTIVE, TXFSRRACTIVE, TXFCMTACTIVE, SEPIMBAVAIL, HDGIMBAVAIL, BUTIMBNEWAVAIL, BUTIMBDELETEAVAIL, TXTIMBSRFAVAIL, TXTIMBSRFACTIVE, TXTIMBCORAVAIL, TXTIMBCORACTIVE, BUTIMBCORVIEWAVAIL, BUTIMBCORVIEWACTIVE, PUPIMBDIRAVAIL, PUPIMBDIRACTIVE, TXFIMBPRIAVAIL, TXFIMBPRIACTIVE, SEPCTRAVAIL, HDGCTRAVAIL, BUTCTRNEWAVAIL, BUTCTRDELETEAVAIL, TXFCTRFSRAVAIL, TXFCTRFSRACTIVE, TXTCTRFWDAVAIL, TXTCTRFWDACTIVE, BUTCTRFWDVIEWAVAIL, BUTCTRFWDVIEWACTIVE, TXTCTRCLRAVAIL, TXTCTRCLRACTIVE, BUTCTRCLRVIEWAVAIL, BUTCTRCLRVIEWACTIVE};
+	mask = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, PUPTYPACTIVE, TXTHKUACTIVE, BUTHKUVIEWAVAIL, BUTHKUVIEWACTIVE, TXTSUPACTIVE, BUTSUPVIEWAVAIL, BUTSUPVIEWACTIVE, TXTTPLACTIVE, BUTTPLVIEWAVAIL, BUTTPLVIEWACTIVE, TXFSRRACTIVE, TXFCMTACTIVE, SEPCTRAVAIL, HDGCTRAVAIL, BUTCTRNEWAVAIL, BUTCTRDELETEAVAIL, TXFCTRFSRAVAIL, TXFCTRFSRACTIVE, TXTCTRFWDAVAIL, TXTCTRFWDACTIVE, BUTCTRFWDVIEWAVAIL, BUTCTRFWDVIEWACTIVE, TXTCTRCLRAVAIL, TXTCTRCLRACTIVE, BUTCTRCLRVIEWAVAIL, BUTCTRCLRVIEWACTIVE, SEPIMBAVAIL, HDGIMBAVAIL, BUTIMBNEWAVAIL, BUTIMBDELETEAVAIL, TXTIMBSRFAVAIL, TXTIMBSRFACTIVE, TXTIMBCORAVAIL, TXTIMBCORACTIVE, BUTIMBCORVIEWAVAIL, BUTIMBCORVIEWACTIVE, PUPIMBDIRAVAIL, PUPIMBDIRACTIVE, TXFIMBPRIAVAIL, TXFIMBPRIACTIVE};
 };
 
 bool PnlWdbeModDetail::StatShr::readXML(
@@ -446,20 +446,6 @@ bool PnlWdbeModDetail::StatShr::readXML(
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButTplViewActive", ButTplViewActive)) add(BUTTPLVIEWACTIVE);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TxfSrrActive", TxfSrrActive)) add(TXFSRRACTIVE);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TxfCmtActive", TxfCmtActive)) add(TXFCMTACTIVE);
-		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "SepImbAvail", SepImbAvail)) add(SEPIMBAVAIL);
-		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "HdgImbAvail", HdgImbAvail)) add(HDGIMBAVAIL);
-		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButImbNewAvail", ButImbNewAvail)) add(BUTIMBNEWAVAIL);
-		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButImbDeleteAvail", ButImbDeleteAvail)) add(BUTIMBDELETEAVAIL);
-		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TxtImbSrfAvail", TxtImbSrfAvail)) add(TXTIMBSRFAVAIL);
-		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TxtImbSrfActive", TxtImbSrfActive)) add(TXTIMBSRFACTIVE);
-		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TxtImbCorAvail", TxtImbCorAvail)) add(TXTIMBCORAVAIL);
-		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TxtImbCorActive", TxtImbCorActive)) add(TXTIMBCORACTIVE);
-		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButImbCorViewAvail", ButImbCorViewAvail)) add(BUTIMBCORVIEWAVAIL);
-		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButImbCorViewActive", ButImbCorViewActive)) add(BUTIMBCORVIEWACTIVE);
-		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "PupImbDirAvail", PupImbDirAvail)) add(PUPIMBDIRAVAIL);
-		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "PupImbDirActive", PupImbDirActive)) add(PUPIMBDIRACTIVE);
-		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TxfImbPriAvail", TxfImbPriAvail)) add(TXFIMBPRIAVAIL);
-		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TxfImbPriActive", TxfImbPriActive)) add(TXFIMBPRIACTIVE);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "SepCtrAvail", SepCtrAvail)) add(SEPCTRAVAIL);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "HdgCtrAvail", HdgCtrAvail)) add(HDGCTRAVAIL);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButCtrNewAvail", ButCtrNewAvail)) add(BUTCTRNEWAVAIL);
@@ -474,6 +460,20 @@ bool PnlWdbeModDetail::StatShr::readXML(
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TxtCtrClrActive", TxtCtrClrActive)) add(TXTCTRCLRACTIVE);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButCtrClrViewAvail", ButCtrClrViewAvail)) add(BUTCTRCLRVIEWAVAIL);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButCtrClrViewActive", ButCtrClrViewActive)) add(BUTCTRCLRVIEWACTIVE);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "SepImbAvail", SepImbAvail)) add(SEPIMBAVAIL);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "HdgImbAvail", HdgImbAvail)) add(HDGIMBAVAIL);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButImbNewAvail", ButImbNewAvail)) add(BUTIMBNEWAVAIL);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButImbDeleteAvail", ButImbDeleteAvail)) add(BUTIMBDELETEAVAIL);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TxtImbSrfAvail", TxtImbSrfAvail)) add(TXTIMBSRFAVAIL);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TxtImbSrfActive", TxtImbSrfActive)) add(TXTIMBSRFACTIVE);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TxtImbCorAvail", TxtImbCorAvail)) add(TXTIMBCORAVAIL);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TxtImbCorActive", TxtImbCorActive)) add(TXTIMBCORACTIVE);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButImbCorViewAvail", ButImbCorViewAvail)) add(BUTIMBCORVIEWAVAIL);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButImbCorViewActive", ButImbCorViewActive)) add(BUTIMBCORVIEWACTIVE);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "PupImbDirAvail", PupImbDirAvail)) add(PUPIMBDIRAVAIL);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "PupImbDirActive", PupImbDirActive)) add(PUPIMBDIRACTIVE);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TxfImbPriAvail", TxfImbPriAvail)) add(TXFIMBPRIAVAIL);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TxfImbPriActive", TxfImbPriActive)) add(TXFIMBPRIACTIVE);
 	};
 
 	return basefound;
@@ -499,20 +499,6 @@ set<uint> PnlWdbeModDetail::StatShr::comm(
 	if (ButTplViewActive == comp->ButTplViewActive) insert(items, BUTTPLVIEWACTIVE);
 	if (TxfSrrActive == comp->TxfSrrActive) insert(items, TXFSRRACTIVE);
 	if (TxfCmtActive == comp->TxfCmtActive) insert(items, TXFCMTACTIVE);
-	if (SepImbAvail == comp->SepImbAvail) insert(items, SEPIMBAVAIL);
-	if (HdgImbAvail == comp->HdgImbAvail) insert(items, HDGIMBAVAIL);
-	if (ButImbNewAvail == comp->ButImbNewAvail) insert(items, BUTIMBNEWAVAIL);
-	if (ButImbDeleteAvail == comp->ButImbDeleteAvail) insert(items, BUTIMBDELETEAVAIL);
-	if (TxtImbSrfAvail == comp->TxtImbSrfAvail) insert(items, TXTIMBSRFAVAIL);
-	if (TxtImbSrfActive == comp->TxtImbSrfActive) insert(items, TXTIMBSRFACTIVE);
-	if (TxtImbCorAvail == comp->TxtImbCorAvail) insert(items, TXTIMBCORAVAIL);
-	if (TxtImbCorActive == comp->TxtImbCorActive) insert(items, TXTIMBCORACTIVE);
-	if (ButImbCorViewAvail == comp->ButImbCorViewAvail) insert(items, BUTIMBCORVIEWAVAIL);
-	if (ButImbCorViewActive == comp->ButImbCorViewActive) insert(items, BUTIMBCORVIEWACTIVE);
-	if (PupImbDirAvail == comp->PupImbDirAvail) insert(items, PUPIMBDIRAVAIL);
-	if (PupImbDirActive == comp->PupImbDirActive) insert(items, PUPIMBDIRACTIVE);
-	if (TxfImbPriAvail == comp->TxfImbPriAvail) insert(items, TXFIMBPRIAVAIL);
-	if (TxfImbPriActive == comp->TxfImbPriActive) insert(items, TXFIMBPRIACTIVE);
 	if (SepCtrAvail == comp->SepCtrAvail) insert(items, SEPCTRAVAIL);
 	if (HdgCtrAvail == comp->HdgCtrAvail) insert(items, HDGCTRAVAIL);
 	if (ButCtrNewAvail == comp->ButCtrNewAvail) insert(items, BUTCTRNEWAVAIL);
@@ -527,6 +513,20 @@ set<uint> PnlWdbeModDetail::StatShr::comm(
 	if (TxtCtrClrActive == comp->TxtCtrClrActive) insert(items, TXTCTRCLRACTIVE);
 	if (ButCtrClrViewAvail == comp->ButCtrClrViewAvail) insert(items, BUTCTRCLRVIEWAVAIL);
 	if (ButCtrClrViewActive == comp->ButCtrClrViewActive) insert(items, BUTCTRCLRVIEWACTIVE);
+	if (SepImbAvail == comp->SepImbAvail) insert(items, SEPIMBAVAIL);
+	if (HdgImbAvail == comp->HdgImbAvail) insert(items, HDGIMBAVAIL);
+	if (ButImbNewAvail == comp->ButImbNewAvail) insert(items, BUTIMBNEWAVAIL);
+	if (ButImbDeleteAvail == comp->ButImbDeleteAvail) insert(items, BUTIMBDELETEAVAIL);
+	if (TxtImbSrfAvail == comp->TxtImbSrfAvail) insert(items, TXTIMBSRFAVAIL);
+	if (TxtImbSrfActive == comp->TxtImbSrfActive) insert(items, TXTIMBSRFACTIVE);
+	if (TxtImbCorAvail == comp->TxtImbCorAvail) insert(items, TXTIMBCORAVAIL);
+	if (TxtImbCorActive == comp->TxtImbCorActive) insert(items, TXTIMBCORACTIVE);
+	if (ButImbCorViewAvail == comp->ButImbCorViewAvail) insert(items, BUTIMBCORVIEWAVAIL);
+	if (ButImbCorViewActive == comp->ButImbCorViewActive) insert(items, BUTIMBCORVIEWACTIVE);
+	if (PupImbDirAvail == comp->PupImbDirAvail) insert(items, PUPIMBDIRAVAIL);
+	if (PupImbDirActive == comp->PupImbDirActive) insert(items, PUPIMBDIRACTIVE);
+	if (TxfImbPriAvail == comp->TxfImbPriAvail) insert(items, TXFIMBPRIAVAIL);
+	if (TxfImbPriActive == comp->TxfImbPriActive) insert(items, TXFIMBPRIACTIVE);
 
 	return(items);
 };
@@ -539,7 +539,7 @@ set<uint> PnlWdbeModDetail::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, PUPTYPACTIVE, TXTHKUACTIVE, BUTHKUVIEWAVAIL, BUTHKUVIEWACTIVE, TXTSUPACTIVE, BUTSUPVIEWAVAIL, BUTSUPVIEWACTIVE, TXTTPLACTIVE, BUTTPLVIEWAVAIL, BUTTPLVIEWACTIVE, TXFSRRACTIVE, TXFCMTACTIVE, SEPIMBAVAIL, HDGIMBAVAIL, BUTIMBNEWAVAIL, BUTIMBDELETEAVAIL, TXTIMBSRFAVAIL, TXTIMBSRFACTIVE, TXTIMBCORAVAIL, TXTIMBCORACTIVE, BUTIMBCORVIEWAVAIL, BUTIMBCORVIEWACTIVE, PUPIMBDIRAVAIL, PUPIMBDIRACTIVE, TXFIMBPRIAVAIL, TXFIMBPRIACTIVE, SEPCTRAVAIL, HDGCTRAVAIL, BUTCTRNEWAVAIL, BUTCTRDELETEAVAIL, TXFCTRFSRAVAIL, TXFCTRFSRACTIVE, TXTCTRFWDAVAIL, TXTCTRFWDACTIVE, BUTCTRFWDVIEWAVAIL, BUTCTRFWDVIEWACTIVE, TXTCTRCLRAVAIL, TXTCTRCLRACTIVE, BUTCTRCLRVIEWAVAIL, BUTCTRCLRVIEWACTIVE};
+	diffitems = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, PUPTYPACTIVE, TXTHKUACTIVE, BUTHKUVIEWAVAIL, BUTHKUVIEWACTIVE, TXTSUPACTIVE, BUTSUPVIEWAVAIL, BUTSUPVIEWACTIVE, TXTTPLACTIVE, BUTTPLVIEWAVAIL, BUTTPLVIEWACTIVE, TXFSRRACTIVE, TXFCMTACTIVE, SEPCTRAVAIL, HDGCTRAVAIL, BUTCTRNEWAVAIL, BUTCTRDELETEAVAIL, TXFCTRFSRAVAIL, TXFCTRFSRACTIVE, TXTCTRFWDAVAIL, TXTCTRFWDACTIVE, BUTCTRFWDVIEWAVAIL, BUTCTRFWDVIEWACTIVE, TXTCTRCLRAVAIL, TXTCTRCLRACTIVE, BUTCTRCLRVIEWAVAIL, BUTCTRCLRVIEWACTIVE, SEPIMBAVAIL, HDGIMBAVAIL, BUTIMBNEWAVAIL, BUTIMBDELETEAVAIL, TXTIMBSRFAVAIL, TXTIMBSRFACTIVE, TXTIMBCORAVAIL, TXTIMBCORACTIVE, BUTIMBCORVIEWAVAIL, BUTIMBCORVIEWACTIVE, PUPIMBDIRAVAIL, PUPIMBDIRACTIVE, TXFIMBPRIAVAIL, TXFIMBPRIACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -558,15 +558,15 @@ PnlWdbeModDetail::Tag::Tag(
 			, const string& CptTpl
 			, const string& CptSrr
 			, const string& CptCmt
+			, const string& HdgCtr
+			, const string& CptCtrFsr
+			, const string& CptCtrFwd
+			, const string& CptCtrClr
 			, const string& HdgImb
 			, const string& CptImbSrf
 			, const string& CptImbCor
 			, const string& CptImbDir
 			, const string& CptImbPri
-			, const string& HdgCtr
-			, const string& CptCtrFsr
-			, const string& CptCtrFwd
-			, const string& CptCtrClr
 		) :
 			Block()
 		{
@@ -578,17 +578,17 @@ PnlWdbeModDetail::Tag::Tag(
 	this->CptTpl = CptTpl;
 	this->CptSrr = CptSrr;
 	this->CptCmt = CptCmt;
+	this->HdgCtr = HdgCtr;
+	this->CptCtrFsr = CptCtrFsr;
+	this->CptCtrFwd = CptCtrFwd;
+	this->CptCtrClr = CptCtrClr;
 	this->HdgImb = HdgImb;
 	this->CptImbSrf = CptImbSrf;
 	this->CptImbCor = CptImbCor;
 	this->CptImbDir = CptImbDir;
 	this->CptImbPri = CptImbPri;
-	this->HdgCtr = HdgCtr;
-	this->CptCtrFsr = CptCtrFsr;
-	this->CptCtrFwd = CptCtrFwd;
-	this->CptCtrClr = CptCtrClr;
 
-	mask = {CPT, CPTSRF, CPTTYP, CPTHKU, CPTSUP, CPTTPL, CPTSRR, CPTCMT, HDGIMB, CPTIMBSRF, CPTIMBCOR, CPTIMBDIR, CPTIMBPRI, HDGCTR, CPTCTRFSR, CPTCTRFWD, CPTCTRCLR};
+	mask = {CPT, CPTSRF, CPTTYP, CPTHKU, CPTSUP, CPTTPL, CPTSRR, CPTCMT, HDGCTR, CPTCTRFSR, CPTCTRFWD, CPTCTRCLR, HDGIMB, CPTIMBSRF, CPTIMBCOR, CPTIMBDIR, CPTIMBPRI};
 };
 
 bool PnlWdbeModDetail::Tag::readXML(
@@ -616,15 +616,15 @@ bool PnlWdbeModDetail::Tag::readXML(
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "CptTpl", CptTpl)) add(CPTTPL);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "CptSrr", CptSrr)) add(CPTSRR);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "CptCmt", CptCmt)) add(CPTCMT);
+		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "HdgCtr", HdgCtr)) add(HDGCTR);
+		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "CptCtrFsr", CptCtrFsr)) add(CPTCTRFSR);
+		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "CptCtrFwd", CptCtrFwd)) add(CPTCTRFWD);
+		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "CptCtrClr", CptCtrClr)) add(CPTCTRCLR);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "HdgImb", HdgImb)) add(HDGIMB);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "CptImbSrf", CptImbSrf)) add(CPTIMBSRF);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "CptImbCor", CptImbCor)) add(CPTIMBCOR);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "CptImbDir", CptImbDir)) add(CPTIMBDIR);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "CptImbPri", CptImbPri)) add(CPTIMBPRI);
-		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "HdgCtr", HdgCtr)) add(HDGCTR);
-		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "CptCtrFsr", CptCtrFsr)) add(CPTCTRFSR);
-		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "CptCtrFwd", CptCtrFwd)) add(CPTCTRFWD);
-		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "CptCtrClr", CptCtrClr)) add(CPTCTRCLR);
 	};
 
 	return basefound;

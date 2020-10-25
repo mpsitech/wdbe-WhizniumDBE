@@ -2,8 +2,8 @@
 	* \file PnlWdbeCprDetail.cpp
 	* job handler for job PnlWdbeCprDetail (implementation)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifdef WDBECMBD
@@ -251,20 +251,11 @@ void PnlWdbeCprDetail::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBECPRUPD_REFEQ) {
-		call->abort = handleCallWdbeCprUpd_refEq(dbswdbe, call->jref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECPR_CVREQ) {
+	if (call->ixVCall == VecWdbeVCall::CALLWDBECPR_CVREQ) {
 		call->abort = handleCallWdbeCpr_cvrEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECPRUPD_REFEQ) {
+		call->abort = handleCallWdbeCprUpd_refEq(dbswdbe, call->jref);
 	};
-};
-
-bool PnlWdbeCprDetail::handleCallWdbeCprUpd_refEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-	// IP handleCallWdbeCprUpd_refEq --- INSERT
-	return retval;
 };
 
 bool PnlWdbeCprDetail::handleCallWdbeCpr_cvrEq(
@@ -275,6 +266,15 @@ bool PnlWdbeCprDetail::handleCallWdbeCpr_cvrEq(
 		) {
 	bool retval = false;
 	boolvalRet = (recCpr.refWdbeMCoreversion == refInv); // IP handleCallWdbeCpr_cvrEq --- LINE
+	return retval;
+};
+
+bool PnlWdbeCprDetail::handleCallWdbeCprUpd_refEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+	// IP handleCallWdbeCprUpd_refEq --- INSERT
 	return retval;
 };
 

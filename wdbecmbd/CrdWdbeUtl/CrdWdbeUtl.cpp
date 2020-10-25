@@ -2,8 +2,8 @@
 	* \file CrdWdbeUtl.cpp
 	* job handler for job CrdWdbeUtl (implementation)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifdef WDBECMBD
@@ -40,10 +40,10 @@ CrdWdbeUtl::CrdWdbeUtl(
 	feedFSge.tag = "FeedFSge";
 	VecVSge::fillFeed(feedFSge);
 
-	pnlheadbar = NULL;
 	dlgextrip = NULL;
-	dlgmrgip = NULL;
 	dlgiexconv = NULL;
+	dlgmrgip = NULL;
+	pnlheadbar = NULL;
 
 	// IP constructor.cust1 --- INSERT
 

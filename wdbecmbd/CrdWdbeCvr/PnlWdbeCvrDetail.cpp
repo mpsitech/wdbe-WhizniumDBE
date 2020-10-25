@@ -2,8 +2,8 @@
 	* \file PnlWdbeCvrDetail.cpp
 	* job handler for job PnlWdbeCvrDetail (implementation)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifdef WDBECMBD
@@ -49,8 +49,8 @@ PnlWdbeCvrDetail::PnlWdbeCvrDetail(
 
 	// IP constructor.cust2 --- INSERT
 
-	xchg->addClstn(VecWdbeVCall::CALLWDBECVR_CPREQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBECVR_BCVEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBECVR_CPREQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -388,36 +388,25 @@ void PnlWdbeCvrDetail::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBECVRJSTEMOD_CVREQ) {
-		call->abort = handleCallWdbeCvrJsteMod_cvrEq(dbswdbe, call->jref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECVRUPD_REFEQ) {
-		call->abort = handleCallWdbeCvrUpd_refEq(dbswdbe, call->jref);
+	if (call->ixVCall == VecWdbeVCall::CALLWDBECVR_BCVEQ) {
+		call->abort = handleCallWdbeCvr_bcvEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECVR_CPREQ) {
 		call->abort = handleCallWdbeCvr_cprEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECVR_BCVEQ) {
-		call->abort = handleCallWdbeCvr_bcvEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECVRUPD_REFEQ) {
+		call->abort = handleCallWdbeCvrUpd_refEq(dbswdbe, call->jref);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECVRJSTEMOD_CVREQ) {
+		call->abort = handleCallWdbeCvrJsteMod_cvrEq(dbswdbe, call->jref);
 	};
 };
 
-bool PnlWdbeCvrDetail::handleCallWdbeCvrJsteMod_cvrEq(
+bool PnlWdbeCvrDetail::handleCallWdbeCvr_bcvEq(
 			DbsWdbe* dbswdbe
 			, const ubigint jrefTrig
+			, const ubigint refInv
+			, bool& boolvalRet
 		) {
 	bool retval = false;
-	set<uint> moditems;
-
-	refreshJst(dbswdbe, moditems);
-
-	xchg->submitDpch(getNewDpchEng(moditems));
-	return retval;
-};
-
-bool PnlWdbeCvrDetail::handleCallWdbeCvrUpd_refEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-	// IP handleCallWdbeCvrUpd_refEq --- INSERT
+	boolvalRet = (recCvr.bcvRefWdbeMCoreversion == refInv); // IP handleCallWdbeCvr_bcvEq --- LINE
 	return retval;
 };
 
@@ -432,14 +421,25 @@ bool PnlWdbeCvrDetail::handleCallWdbeCvr_cprEq(
 	return retval;
 };
 
-bool PnlWdbeCvrDetail::handleCallWdbeCvr_bcvEq(
+bool PnlWdbeCvrDetail::handleCallWdbeCvrUpd_refEq(
 			DbsWdbe* dbswdbe
 			, const ubigint jrefTrig
-			, const ubigint refInv
-			, bool& boolvalRet
 		) {
 	bool retval = false;
-	boolvalRet = (recCvr.bcvRefWdbeMCoreversion == refInv); // IP handleCallWdbeCvr_bcvEq --- LINE
+	// IP handleCallWdbeCvrUpd_refEq --- INSERT
+	return retval;
+};
+
+bool PnlWdbeCvrDetail::handleCallWdbeCvrJsteMod_cvrEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+	set<uint> moditems;
+
+	refreshJst(dbswdbe, moditems);
+
+	xchg->submitDpch(getNewDpchEng(moditems));
 	return retval;
 };
 

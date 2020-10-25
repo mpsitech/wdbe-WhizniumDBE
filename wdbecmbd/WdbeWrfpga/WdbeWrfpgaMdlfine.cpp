@@ -2,8 +2,8 @@
 	* \file WdbeWrfpgaMdlfine.cpp
 	* Wdbe operation processor - write in-detail VHDL code (implementation)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifdef WDBECMBD
@@ -194,7 +194,9 @@ void WdbeWrfpgaMdlfine::writeMdlVhd(
 			if (first) first = false;
 			else if (sig->refWdbeCSignal != refC) outfile << endl;
 
-			outfile << "\tconstant " << sig->sref << ": " << getVarStr(sig) << ";" << endl;
+			outfile << "\tconstant " << sig->sref << ": " << getVarStr(sig) << ";";
+			if (sig->Comment != "") outfile << " -- " << sig->Comment;
+			outfile << endl;
 
 			refC = sig->refWdbeCSignal;
 
@@ -271,7 +273,9 @@ void WdbeWrfpgaMdlfine::writeMdlVhd(
 				outfile << sig->sref;
 				if ((sig->ixVBasetype == VecWdbeVMSignalBasetype::CLK) && (sig->drvRefWdbeMPort == 0)) outfile << ", " << sig->sref << "_sig";
 				
-				outfile << ": " << getVarStr(sig) << ";" << endl;
+				outfile << ": " << getVarStr(sig) << ";";
+				if (sig->Comment != "") outfile << " -- " << sig->Comment;
+				outfile << endl;
 
 				refC = sig->refWdbeCSignal;
 
@@ -307,7 +311,9 @@ void WdbeWrfpgaMdlfine::writeMdlVhd(
 				outfile << sig->sref;
 				if ((sig->ixVBasetype == VecWdbeVMSignalBasetype::CLK) && (sig->drvRefWdbeMPort == 0)) outfile << ", " << sig->sref << "_sig";
 				
-				outfile << ": " << getVarStr(sig) << ";" << endl;
+				outfile << ": " << getVarStr(sig) << ";";
+				if (sig->Comment != "") outfile << " -- " << sig->Comment;
+				outfile << endl;
 
 				refC = sig->refWdbeCSignal;
 
@@ -382,28 +388,36 @@ void WdbeWrfpgaMdlfine::writeMdlVhd(
 				for (unsigned int j = 0; j < sigreqs.size();j++) {
 					sig = sigreqs[j];
 
-					outfile << "\tsignal " << sig->sref << ": " << getVarStr(sig) << ";" << endl;
+					outfile << "\tsignal " << sig->sref << ": " << getVarStr(sig) << ";";
+					if (sig->Comment != "") outfile << " -- " << sig->Comment;
+					outfile << endl;
 
 					refsSigs.insert(sig->ref);
 				};
 				for (unsigned int j = 0; j < sigacks.size();j++) {
 					sig = sigacks[j];
 
-					outfile << "\tsignal " << sig->sref << ": " << getVarStr(sig) << ";" << endl;
+					outfile << "\tsignal " << sig->sref << ": " << getVarStr(sig) << ";";
+					if (sig->Comment != "") outfile << " -- " << sig->Comment;
+					outfile << endl;
 
 					refsSigs.insert(sig->ref);
 				};
 				for (unsigned int j = 0; j < sigdnys.size();j++) {
 					sig = sigdnys[j];
 
-					outfile << "\tsignal " << sig->sref << ": " << getVarStr(sig) << ";" << endl;
+					outfile << "\tsignal " << sig->sref << ": " << getVarStr(sig) << ";";
+					if (sig->Comment != "") outfile << " -- " << sig->Comment;
+					outfile << endl;
 
 					refsSigs.insert(sig->ref);
 				};
 				for (unsigned int j = 0; j < sigdnes.size();j++) {
 					sig = sigdnes[j];
 
-					outfile << "\tsignal " << sig->sref << ": " << getVarStr(sig) << ";" << endl;
+					outfile << "\tsignal " << sig->sref << ": " << getVarStr(sig) << ";";
+					if (sig->Comment != "") outfile << " -- " << sig->Comment;
+					outfile << endl;
 
 					refsSigs.insert(sig->ref);
 				};
@@ -428,7 +442,9 @@ void WdbeWrfpgaMdlfine::writeMdlVhd(
 
 			if (sig->Const) outfile << "\tconstant ";
 			else outfile << "\tsignal ";
-			outfile << sig->sref << ": " << getVarStr(sig) << ";" << endl;
+			outfile << sig->sref << ": " << getVarStr(sig) << ";";
+			if (sig->Comment != "") outfile << " -- " << sig->Comment;
+			outfile << endl;
 
 			refC = sig->refWdbeCSignal;
 		};
@@ -576,7 +592,9 @@ void WdbeWrfpgaMdlfine::writeMdlVhd(
 
 					if (var->Const) outfile << "\t\tconstant ";
 					else outfile << "\t\tvariable ";
-					outfile << var->sref << ": " << getVarStr(var) << ";" << endl;
+					outfile << var->sref << ": " << getVarStr(var) << ";";
+					if (var->Comment != "") outfile << " -- " << var->Comment;
+					outfile << endl;
 
 					refC = var->refWdbeCVariable;
 				};
@@ -851,7 +869,7 @@ void WdbeWrfpgaMdlfine::writeMdlVhd_reset(
 	for (unsigned int i = 0; i < sigs.nodes.size(); i++) {
 		sig = sigs.nodes[i];
 
-		if ((sig->mgeIxVTbl == VecWdbeVMSignalMgeTbl::PRC) && (sig->mgeUref == refWdbeMProcess) && (sig->Comb == "") && ((!sig->Defon && (sig->Offval != "")) || (sig->Defon && (sig->Onval != "")))) {
+		if ((sig->mgeIxVTbl == VecWdbeVMSignalMgeTbl::PRC) && (sig->mgeUref == refWdbeMProcess) && !sig->Const && (sig->Comb == "") && ((!sig->Defon && (sig->Offval != "")) || (sig->Defon && (sig->Onval != "")))) {
 			first = false;
 
 			outfile << string(il, '\t') << sig->sref << " <= ";
@@ -866,7 +884,7 @@ void WdbeWrfpgaMdlfine::writeMdlVhd_reset(
 		for (unsigned int i = 0; i < vars.nodes.size(); i++) {
 			var = vars.nodes[i];
 
-			if ((!var->Defon && (var->Offval != "")) || (var->Defon && (var->Onval != ""))) {
+			if (!var->Const && ((!var->Defon && (var->Offval != "")) || (var->Defon && (var->Onval != ""))) ) {
 				outfile << string(il, '\t') << var->sref << " := ";
 				if (!var->Defon) outfile << getValStr(var, true) << ";" << endl;
 				else outfile << getValStr(var, true, var->Onval) << ";" << endl;

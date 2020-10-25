@@ -2,8 +2,8 @@
   * \file PnlWdbePrcList.js
   * web client functionality for panel PnlWdbePrcList
   * \author Alexander Wirthmueller
-  * \date created: 11 Jul 2020
-  * \date modified: 11 Jul 2020
+  * \date created: 23 Aug 2020
+  * \date modified: 23 Aug 2020
   */
 
 // --- expand state management
@@ -133,9 +133,9 @@ function refreshB(chgcol) {
 			ix++;
 
 			if (i == 1) {
-				doc.cols.push("TcoSrf"); doc.widths.push(TcoSrfWidth); doc.fs.push("srf"); doc.tos.push(2); wtot += TcoSrfWidth;
+				doc.cols.push("TcoSrf"); doc.widths.push(TcoSrfWidth); doc.fs.push("srf"); doc.tos.push(1); wtot += TcoSrfWidth;
 			} else if (i == 2) {
-				doc.cols.push("TcoMdl"); doc.widths.push(TcoMdlWidth); doc.fs.push("mdl"); doc.tos.push(1); wtot += TcoMdlWidth;
+				doc.cols.push("TcoMdl"); doc.widths.push(TcoMdlWidth); doc.fs.push("mdl"); doc.tos.push(2); wtot += TcoMdlWidth;
 			} else if (i == 3) {
 				doc.cols.push("TcoFal"); doc.widths.push(TcoFalWidth); doc.fs.push("fal"); doc.tos.push(0); wtot += TcoFalWidth;
 			} else {

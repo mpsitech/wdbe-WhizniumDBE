@@ -2,8 +2,8 @@
 	* \file PnlWdbePrjRec.cpp
 	* job handler for job PnlWdbePrjRec (implementation)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifdef WDBECMBD
@@ -37,9 +37,9 @@ PnlWdbePrjRec::PnlWdbePrjRec(
 		{
 	jref = xchg->addJob(dbswdbe, this, jrefSup);
 
-	pnlmnperson = NULL;
-	pnl1nversion = NULL;
 	pnldetail = NULL;
+	pnl1nversion = NULL;
+	pnlmnperson = NULL;
 
 	// IP constructor.cust1 --- INSERT
 
@@ -243,20 +243,11 @@ void PnlWdbePrjRec::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBEPRJUPD_REFEQ) {
-		call->abort = handleCallWdbePrjUpd_refEq(dbswdbe, call->jref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEPRJ_VEREQ) {
+	if (call->ixVCall == VecWdbeVCall::CALLWDBEPRJ_VEREQ) {
 		call->abort = handleCallWdbePrj_verEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEPRJUPD_REFEQ) {
+		call->abort = handleCallWdbePrjUpd_refEq(dbswdbe, call->jref);
 	};
-};
-
-bool PnlWdbePrjRec::handleCallWdbePrjUpd_refEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-	// IP handleCallWdbePrjUpd_refEq --- INSERT
-	return retval;
 };
 
 bool PnlWdbePrjRec::handleCallWdbePrj_verEq(
@@ -267,6 +258,15 @@ bool PnlWdbePrjRec::handleCallWdbePrj_verEq(
 		) {
 	bool retval = false;
 	boolvalRet = (recPrj.refWdbeMVersion == refInv); // IP handleCallWdbePrj_verEq --- LINE
+	return retval;
+};
+
+bool PnlWdbePrjRec::handleCallWdbePrjUpd_refEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+	// IP handleCallWdbePrjUpd_refEq --- INSERT
 	return retval;
 };
 

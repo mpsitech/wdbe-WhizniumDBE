@@ -2,8 +2,8 @@
 	* \file PnlWdbeMtpRec_blks.cpp
 	* job handler for job PnlWdbeMtpRec (implementation of blocks)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 using namespace std;
@@ -104,8 +104,8 @@ void PnlWdbeMtpRec::StatApp::writeXML(
 			, const bool initdoneTpl1NModule
 			, const bool initdoneMdl1NPort
 			, const bool initdoneSup1NModule
-			, const bool initdoneMge1NSignal
 			, const bool initdoneRef1NFile
+			, const bool initdoneMge1NSignal
 		) {
 	if (difftag.length() == 0) difftag = "StatAppWdbeMtpRec";
 
@@ -122,8 +122,8 @@ void PnlWdbeMtpRec::StatApp::writeXML(
 		writeBoolAttr(wr, itemtag, "sref", "initdoneTpl1NModule", initdoneTpl1NModule);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneMdl1NPort", initdoneMdl1NPort);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneSup1NModule", initdoneSup1NModule);
-		writeBoolAttr(wr, itemtag, "sref", "initdoneMge1NSignal", initdoneMge1NSignal);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneRef1NFile", initdoneRef1NFile);
+		writeBoolAttr(wr, itemtag, "sref", "initdoneMge1NSignal", initdoneMge1NSignal);
 	xmlTextWriterEndElement(wr);
 };
 
@@ -141,8 +141,8 @@ PnlWdbeMtpRec::StatShr::StatShr(
 			, const ubigint jrefTpl1NModule
 			, const ubigint jrefMdl1NPort
 			, const ubigint jrefSup1NModule
-			, const ubigint jrefMge1NSignal
 			, const ubigint jrefRef1NFile
+			, const ubigint jrefMge1NSignal
 			, const bool ButRegularizeActive
 		) :
 			Block()
@@ -156,11 +156,11 @@ PnlWdbeMtpRec::StatShr::StatShr(
 	this->jrefTpl1NModule = jrefTpl1NModule;
 	this->jrefMdl1NPort = jrefMdl1NPort;
 	this->jrefSup1NModule = jrefSup1NModule;
-	this->jrefMge1NSignal = jrefMge1NSignal;
 	this->jrefRef1NFile = jrefRef1NFile;
+	this->jrefMge1NSignal = jrefMge1NSignal;
 	this->ButRegularizeActive = ButRegularizeActive;
 
-	mask = {IXWDBEVEXPSTATE, JREFDETAIL, JREFKPARKEY, JREFKHDLTYPE, JREFAPAR, JREFMDL1NGENERIC, JREFTPL1NMODULE, JREFMDL1NPORT, JREFSUP1NMODULE, JREFMGE1NSIGNAL, JREFREF1NFILE, BUTREGULARIZEACTIVE};
+	mask = {IXWDBEVEXPSTATE, JREFDETAIL, JREFKPARKEY, JREFKHDLTYPE, JREFAPAR, JREFMDL1NGENERIC, JREFTPL1NMODULE, JREFMDL1NPORT, JREFSUP1NMODULE, JREFREF1NFILE, JREFMGE1NSIGNAL, BUTREGULARIZEACTIVE};
 };
 
 void PnlWdbeMtpRec::StatShr::writeXML(
@@ -184,8 +184,8 @@ void PnlWdbeMtpRec::StatShr::writeXML(
 		writeStringAttr(wr, itemtag, "sref", "scrJrefTpl1NModule", Scr::scramble(jrefTpl1NModule));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefMdl1NPort", Scr::scramble(jrefMdl1NPort));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefSup1NModule", Scr::scramble(jrefSup1NModule));
-		writeStringAttr(wr, itemtag, "sref", "scrJrefMge1NSignal", Scr::scramble(jrefMge1NSignal));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefRef1NFile", Scr::scramble(jrefRef1NFile));
+		writeStringAttr(wr, itemtag, "sref", "scrJrefMge1NSignal", Scr::scramble(jrefMge1NSignal));
 		writeBoolAttr(wr, itemtag, "sref", "ButRegularizeActive", ButRegularizeActive);
 	xmlTextWriterEndElement(wr);
 };
@@ -204,8 +204,8 @@ set<uint> PnlWdbeMtpRec::StatShr::comm(
 	if (jrefTpl1NModule == comp->jrefTpl1NModule) insert(items, JREFTPL1NMODULE);
 	if (jrefMdl1NPort == comp->jrefMdl1NPort) insert(items, JREFMDL1NPORT);
 	if (jrefSup1NModule == comp->jrefSup1NModule) insert(items, JREFSUP1NMODULE);
-	if (jrefMge1NSignal == comp->jrefMge1NSignal) insert(items, JREFMGE1NSIGNAL);
 	if (jrefRef1NFile == comp->jrefRef1NFile) insert(items, JREFREF1NFILE);
+	if (jrefMge1NSignal == comp->jrefMge1NSignal) insert(items, JREFMGE1NSIGNAL);
 	if (ButRegularizeActive == comp->ButRegularizeActive) insert(items, BUTREGULARIZEACTIVE);
 
 	return(items);
@@ -219,7 +219,7 @@ set<uint> PnlWdbeMtpRec::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {IXWDBEVEXPSTATE, JREFDETAIL, JREFKPARKEY, JREFKHDLTYPE, JREFAPAR, JREFMDL1NGENERIC, JREFTPL1NMODULE, JREFMDL1NPORT, JREFSUP1NMODULE, JREFMGE1NSIGNAL, JREFREF1NFILE, BUTREGULARIZEACTIVE};
+	diffitems = {IXWDBEVEXPSTATE, JREFDETAIL, JREFKPARKEY, JREFKHDLTYPE, JREFAPAR, JREFMDL1NGENERIC, JREFTPL1NMODULE, JREFMDL1NPORT, JREFSUP1NMODULE, JREFREF1NFILE, JREFMGE1NSIGNAL, BUTREGULARIZEACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);

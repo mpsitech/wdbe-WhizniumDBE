@@ -2,8 +2,8 @@
   * \file QryWdbeFstList.java
   * Java API code for job QryWdbeFstList
   * \author Alexander Wirthmueller
-  * \date created: 11 Jul 2020
-  * \date modified: 11 Jul 2020
+  * \date created: 23 Aug 2020
+  * \date modified: 23 Aug 2020
   */
 
 package apiwdbe;
@@ -18,16 +18,16 @@ public class QryWdbeFstList {
 		*/
 	public static class VecVOrd {
 
-		public static final int FSM = 1;
-		public static final int SRF = 2;
+		public static final int SRF = 1;
+		public static final int FSM = 2;
 
 		public static int getIx(
 					String sref
 				) {
 			String s = sref.toLowerCase();
 
-			if (s.equals("fsm")) return FSM;
 			if (s.equals("srf")) return SRF;
+			if (s.equals("fsm")) return FSM;
 
 			return 0;
 		};
@@ -35,8 +35,8 @@ public class QryWdbeFstList {
 		public static String getSref(
 					int ix
 				) {
-			if (ix == FSM) return("fsm");
 			if (ix == SRF) return("srf");
+			if (ix == FSM) return("fsm");
 
 			return "";
 		};

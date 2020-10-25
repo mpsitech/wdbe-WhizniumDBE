@@ -2,8 +2,8 @@
 	* \file QryWdbeVerBvr1NVersion.h
 	* API code for job QryWdbeVerBvr1NVersion (declarations)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifndef QRYWDBEVERBVR1NVERSION_H

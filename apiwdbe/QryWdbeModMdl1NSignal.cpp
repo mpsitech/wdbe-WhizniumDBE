@@ -2,8 +2,8 @@
 	* \file QryWdbeModMdl1NSignal.cpp
 	* API code for job QryWdbeModMdl1NSignal (implementation)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #include "QryWdbeModMdl1NSignal.h"

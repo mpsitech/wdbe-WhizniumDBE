@@ -2,8 +2,8 @@
 	* \file QryWdbeRlsList.cpp
 	* API code for job QryWdbeRlsList (implementation)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #include "QryWdbeRlsList.h"
@@ -21,10 +21,10 @@ uint QryWdbeRlsList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "mch") return MCH;
-	if (s == "ver") return VER;
-	if (s == "typ") return TYP;
 	if (s == "srf") return SRF;
+	if (s == "typ") return TYP;
+	if (s == "ver") return VER;
+	if (s == "mch") return MCH;
 
 	return(0);
 };
@@ -32,10 +32,10 @@ uint QryWdbeRlsList::VecVOrd::getIx(
 string QryWdbeRlsList::VecVOrd::getSref(
 			const uint ix
 		) {
-	if (ix == MCH) return("mch");
-	if (ix == VER) return("ver");
-	if (ix == TYP) return("typ");
 	if (ix == SRF) return("srf");
+	if (ix == TYP) return("typ");
+	if (ix == VER) return("ver");
+	if (ix == MCH) return("mch");
 
 	return("");
 };

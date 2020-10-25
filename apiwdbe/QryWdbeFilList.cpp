@@ -2,8 +2,8 @@
 	* \file QryWdbeFilList.cpp
 	* API code for job QryWdbeFilList (implementation)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #include "QryWdbeFilList.h"
@@ -21,11 +21,11 @@ uint QryWdbeFilList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "reu") return REU;
+	if (s == "grp") return GRP;
+	if (s == "own") return OWN;
 	if (s == "fnm") return FNM;
 	if (s == "ret") return RET;
-	if (s == "own") return OWN;
-	if (s == "grp") return GRP;
+	if (s == "reu") return REU;
 
 	return(0);
 };
@@ -33,11 +33,11 @@ uint QryWdbeFilList::VecVOrd::getIx(
 string QryWdbeFilList::VecVOrd::getSref(
 			const uint ix
 		) {
-	if (ix == REU) return("reu");
+	if (ix == GRP) return("grp");
+	if (ix == OWN) return("own");
 	if (ix == FNM) return("fnm");
 	if (ix == RET) return("ret");
-	if (ix == OWN) return("own");
-	if (ix == GRP) return("grp");
+	if (ix == REU) return("reu");
 
 	return("");
 };

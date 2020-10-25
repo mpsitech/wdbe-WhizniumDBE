@@ -2,8 +2,8 @@
 	* \file PnlWdbeMchRec.cpp
 	* job handler for job PnlWdbeMchRec (implementation)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifdef WDBECMBD
@@ -37,10 +37,10 @@ PnlWdbeMchRec::PnlWdbeMchRec(
 		{
 	jref = xchg->addJob(dbswdbe, this, jrefSup);
 
-	pnl1nrelease = NULL;
+	pnldetail = NULL;
 	pnlapar = NULL;
 	pnlamakefile = NULL;
-	pnldetail = NULL;
+	pnl1nrelease = NULL;
 
 	// IP constructor.cust1 --- INSERT
 
@@ -96,19 +96,19 @@ void PnlWdbeMchRec::refresh(
 
 	if (statshr.ixWdbeVExpstate == VecWdbeVExpstate::MIND) {
 		if (pnldetail) {delete pnldetail; pnldetail = NULL;};
-		if (pnlamakefile) {delete pnlamakefile; pnlamakefile = NULL;};
 		if (pnlapar) {delete pnlapar; pnlapar = NULL;};
+		if (pnlamakefile) {delete pnlamakefile; pnlamakefile = NULL;};
 		if (pnl1nrelease) {delete pnl1nrelease; pnl1nrelease = NULL;};
 	} else {
 		if (!pnldetail) pnldetail = new PnlWdbeMchDetail(xchg, dbswdbe, jref, ixWdbeVLocale);
-		if (!pnlamakefile) pnlamakefile = new PnlWdbeMchAMakefile(xchg, dbswdbe, jref, ixWdbeVLocale);
 		if (!pnlapar) pnlapar = new PnlWdbeMchAPar(xchg, dbswdbe, jref, ixWdbeVLocale);
+		if (!pnlamakefile) pnlamakefile = new PnlWdbeMchAMakefile(xchg, dbswdbe, jref, ixWdbeVLocale);
 		if (!pnl1nrelease) pnl1nrelease = new PnlWdbeMch1NRelease(xchg, dbswdbe, jref, ixWdbeVLocale);
 	};
 
 	statshr.jrefDetail = ((pnldetail) ? pnldetail->jref : 0);
-	statshr.jrefAMakefile = ((pnlamakefile) ? pnlamakefile->jref : 0);
 	statshr.jrefAPar = ((pnlapar) ? pnlapar->jref : 0);
+	statshr.jrefAMakefile = ((pnlamakefile) ? pnlamakefile->jref : 0);
 	statshr.jref1NRelease = ((pnl1nrelease) ? pnl1nrelease->jref : 0);
 
 	// IP refresh --- END
@@ -136,8 +136,8 @@ void PnlWdbeMchRec::updatePreset(
 
 		if (recMch.ref != 0) {
 			if (pnldetail) pnldetail->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
-			if (pnlamakefile) pnlamakefile->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
 			if (pnlapar) pnlapar->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
+			if (pnlamakefile) pnlamakefile->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
 			if (pnl1nrelease) pnl1nrelease->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
 		};
 
@@ -248,20 +248,11 @@ void PnlWdbeMchRec::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBEMCHUPD_REFEQ) {
-		call->abort = handleCallWdbeMchUpd_refEq(dbswdbe, call->jref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEMCH_CCHEQ) {
+	if (call->ixVCall == VecWdbeVCall::CALLWDBEMCH_CCHEQ) {
 		call->abort = handleCallWdbeMch_cchEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEMCHUPD_REFEQ) {
+		call->abort = handleCallWdbeMchUpd_refEq(dbswdbe, call->jref);
 	};
-};
-
-bool PnlWdbeMchRec::handleCallWdbeMchUpd_refEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-	// IP handleCallWdbeMchUpd_refEq --- INSERT
-	return retval;
 };
 
 bool PnlWdbeMchRec::handleCallWdbeMch_cchEq(
@@ -272,6 +263,15 @@ bool PnlWdbeMchRec::handleCallWdbeMch_cchEq(
 		) {
 	bool retval = false;
 	boolvalRet = (recMch.cchRefWdbeMMachine == refInv); // IP handleCallWdbeMch_cchEq --- LINE
+	return retval;
+};
+
+bool PnlWdbeMchRec::handleCallWdbeMchUpd_refEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+	// IP handleCallWdbeMchUpd_refEq --- INSERT
 	return retval;
 };
 

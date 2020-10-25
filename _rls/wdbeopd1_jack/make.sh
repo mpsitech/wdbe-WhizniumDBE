@@ -2,8 +2,8 @@
 # file make.sh
 # make script for Wdbe operation daemon, release wdbeopd1_jack
 # author Alexander Wirthmueller
-# date created: 11 Jul 2020
-# modified: 11 Jul 2020
+# date created: 23 Aug 2020
+# modified: 23 Aug 2020
 
 make Wdbeopd.h.gch
 if [ $? -ne 0 ]; then
@@ -11,7 +11,7 @@ if [ $? -ne 0 ]; then
 fi
 
 if [ "$1" = "all" ]; then
-	subs=("IexWdbe" "VecWdbe" "WdbeWrmcu" "WdbeWrfpga" "WdbeWrdev" "WdbePrctree" "WdbePrcfile" "WdbePlhmcu" "WdbePlhfpga" "WdbeModdet" "WdbeModbsc")
+	subs=("IexWdbe" "VecWdbe" "WdbeModbsc" "WdbeModdet" "WdbePlhfpga" "WdbePlhmcu" "WdbePrcfile" "WdbePrctree" "WdbeWrdev" "WdbeWrfpga" "WdbeWrmcu")
 else
 	subs=("$@")
 fi

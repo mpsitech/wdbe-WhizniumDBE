@@ -2,8 +2,8 @@
   * \file ListWdbeQPrcFsmFsm1NFsmstate.java
   * Java API code for record set of table TblWdbeQPrcFsmFsm1NFsmstate
   * \author Alexander Wirthmueller
-  * \date created: 11 Jul 2020
-  * \date modified: 11 Jul 2020
+  * \date created: 23 Aug 2020
+  * \date modified: 23 Aug 2020
   */
 
 package apiwdbe;

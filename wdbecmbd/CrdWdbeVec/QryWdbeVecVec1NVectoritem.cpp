@@ -2,8 +2,8 @@
 	* \file QryWdbeVecVec1NVectoritem.cpp
 	* job handler for job QryWdbeVecVec1NVectoritem (implementation)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifdef WDBECMBD
@@ -271,11 +271,19 @@ void QryWdbeVecVec1NVectoritem::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBEVITMOD_VECEQ) {
-		call->abort = handleCallWdbeVitMod_vecEq(dbswdbe, call->jref);
-	} else if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
+	if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
 		call->abort = handleCallWdbeStubChgFromSelf(dbswdbe);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEVITMOD_VECEQ) {
+		call->abort = handleCallWdbeVitMod_vecEq(dbswdbe, call->jref);
 	};
+};
+
+bool QryWdbeVecVec1NVectoritem::handleCallWdbeStubChgFromSelf(
+			DbsWdbe* dbswdbe
+		) {
+	bool retval = false;
+	// IP handleCallWdbeStubChgFromSelf --- INSERT
+	return retval;
 };
 
 bool QryWdbeVecVec1NVectoritem::handleCallWdbeVitMod_vecEq(
@@ -289,14 +297,6 @@ bool QryWdbeVecVec1NVectoritem::handleCallWdbeVitMod_vecEq(
 		xchg->triggerCall(dbswdbe, VecWdbeVCall::CALLWDBESTATCHG, jref);
 	};
 
-	return retval;
-};
-
-bool QryWdbeVecVec1NVectoritem::handleCallWdbeStubChgFromSelf(
-			DbsWdbe* dbswdbe
-		) {
-	bool retval = false;
-	// IP handleCallWdbeStubChgFromSelf --- INSERT
 	return retval;
 };
 

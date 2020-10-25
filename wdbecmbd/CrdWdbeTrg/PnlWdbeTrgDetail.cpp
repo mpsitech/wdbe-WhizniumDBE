@@ -2,8 +2,8 @@
 	* \file PnlWdbeTrgDetail.cpp
 	* job handler for job PnlWdbeTrgDetail (implementation)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifdef WDBECMBD
@@ -45,9 +45,9 @@ PnlWdbeTrgDetail::PnlWdbeTrgDetail(
 
 	// IP constructor.cust2 --- INSERT
 
-	xchg->addClstn(VecWdbeVCall::CALLWDBETRG_UNTEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecWdbeVCall::CALLWDBETRG_UNT_INSBS, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBETRG_SYSEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBETRG_UNT_INSBS, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBETRG_UNTEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -325,34 +325,25 @@ void PnlWdbeTrgDetail::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBETRGUPD_REFEQ) {
-		call->abort = handleCallWdbeTrgUpd_refEq(dbswdbe, call->jref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBETRG_UNTEQ) {
-		call->abort = handleCallWdbeTrg_untEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
+	if (call->ixVCall == VecWdbeVCall::CALLWDBETRG_SYSEQ) {
+		call->abort = handleCallWdbeTrg_sysEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBETRG_UNT_INSBS) {
 		call->abort = handleCallWdbeTrg_unt_inSbs(dbswdbe, call->jref, call->argInv.ix, call->argRet.boolval);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBETRG_SYSEQ) {
-		call->abort = handleCallWdbeTrg_sysEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBETRG_UNTEQ) {
+		call->abort = handleCallWdbeTrg_untEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBETRGUPD_REFEQ) {
+		call->abort = handleCallWdbeTrgUpd_refEq(dbswdbe, call->jref);
 	};
 };
 
-bool PnlWdbeTrgDetail::handleCallWdbeTrgUpd_refEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-	// IP handleCallWdbeTrgUpd_refEq --- INSERT
-	return retval;
-};
-
-bool PnlWdbeTrgDetail::handleCallWdbeTrg_untEq(
+bool PnlWdbeTrgDetail::handleCallWdbeTrg_sysEq(
 			DbsWdbe* dbswdbe
 			, const ubigint jrefTrig
 			, const ubigint refInv
 			, bool& boolvalRet
 		) {
 	bool retval = false;
-	boolvalRet = (recTrg.refWdbeMUnit == refInv); // IP handleCallWdbeTrg_untEq --- LINE
+	boolvalRet = (recTrg.sysRefWdbeMSystem == refInv); // IP handleCallWdbeTrg_sysEq --- LINE
 	return retval;
 };
 
@@ -367,14 +358,23 @@ bool PnlWdbeTrgDetail::handleCallWdbeTrg_unt_inSbs(
 	return retval;
 };
 
-bool PnlWdbeTrgDetail::handleCallWdbeTrg_sysEq(
+bool PnlWdbeTrgDetail::handleCallWdbeTrg_untEq(
 			DbsWdbe* dbswdbe
 			, const ubigint jrefTrig
 			, const ubigint refInv
 			, bool& boolvalRet
 		) {
 	bool retval = false;
-	boolvalRet = (recTrg.sysRefWdbeMSystem == refInv); // IP handleCallWdbeTrg_sysEq --- LINE
+	boolvalRet = (recTrg.refWdbeMUnit == refInv); // IP handleCallWdbeTrg_untEq --- LINE
+	return retval;
+};
+
+bool PnlWdbeTrgDetail::handleCallWdbeTrgUpd_refEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+	// IP handleCallWdbeTrgUpd_refEq --- INSERT
 	return retval;
 };
 

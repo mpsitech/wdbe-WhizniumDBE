@@ -2,8 +2,8 @@
 	* \file CrdWdbeCvr.cpp
 	* job handler for job CrdWdbeCvr (implementation)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifdef WDBECMBD
@@ -44,25 +44,27 @@ CrdWdbeCvr::CrdWdbeCvr(
 	feedFSge.tag = "FeedFSge";
 	VecVSge::fillFeed(feedFSge);
 
-	pnllist = NULL;
-	pnlheadbar = NULL;
-	pnlrec = NULL;
 	dlgbsccd = NULL;
 	dlgdetcd = NULL;
 	dlgnew = NULL;
 	dlgwrite = NULL;
+	pnlrec = NULL;
+	pnlheadbar = NULL;
+	pnllist = NULL;
 
 	// IP constructor.cust1 --- INSERT
 
 	xchg->addIxPreset(VecWdbeVPreset::PREWDBEIXPRE, jref, ixWdbeVPreset);
 	if (ixWdbeVPreset != VecWdbeVPreset::VOID) xchg->addRefPreset(ixWdbeVPreset, jref, preUref);
 
-	// initialize according to ref
-	changeRef(dbswdbe, jref, ((ref+1) == 0) ? 0 : ref, false);
+	if ((ref + 1) != 0) xchg->triggerIxRefCall(dbswdbe, VecWdbeVCall::CALLWDBEREFPRESET, jref, VecWdbeVPreset::PREWDBEREFCVR, ref);
 
-	pnllist = new PnlWdbeCvrList(xchg, dbswdbe, jref, ixWdbeVLocale);
-	pnlheadbar = new PnlWdbeCvrHeadbar(xchg, dbswdbe, jref, ixWdbeVLocale);
+	// initialize according to ref
+	changeRef(dbswdbe, jref, ((ref + 1) == 0) ? 0 : ref, false);
+
 	pnlrec = new PnlWdbeCvrRec(xchg, dbswdbe, jref, ixWdbeVLocale);
+	pnlheadbar = new PnlWdbeCvrHeadbar(xchg, dbswdbe, jref, ixWdbeVLocale);
+	pnllist = new PnlWdbeCvrList(xchg, dbswdbe, jref, ixWdbeVLocale);
 
 	// IP constructor.cust2 --- INSERT
 
@@ -73,16 +75,16 @@ CrdWdbeCvr::CrdWdbeCvr(
 	set<uint> moditems;
 	refresh(dbswdbe, moditems);
 
-	if ((ref+1) == 0) {
+	if ((ref + 1) == 0) {
 		dlgnew = new DlgWdbeCvrNew(xchg, dbswdbe, jref, ixWdbeVLocale);
 		statshr.jrefDlgnew = dlgnew->jref;
 	};
 
 	changeStage(dbswdbe, VecVSge::IDLE);
 
-	xchg->addClstn(VecWdbeVCall::CALLWDBEREFPRESET, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBEDLGCLOSE, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBESTATCHG, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBEREFPRESET, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -317,35 +319,13 @@ void CrdWdbeCvr::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBEREFPRESET) {
-		call->abort = handleCallWdbeRefPreSet(dbswdbe, call->jref, call->argInv.ix, call->argInv.ref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEDLGCLOSE) {
+	if (call->ixVCall == VecWdbeVCall::CALLWDBEDLGCLOSE) {
 		call->abort = handleCallWdbeDlgClose(dbswdbe, call->jref);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBESTATCHG) {
 		call->abort = handleCallWdbeStatChg(dbswdbe, call->jref);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEREFPRESET) {
+		call->abort = handleCallWdbeRefPreSet(dbswdbe, call->jref, call->argInv.ix, call->argInv.ref);
 	};
-};
-
-bool CrdWdbeCvr::handleCallWdbeRefPreSet(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-			, const uint ixInv
-			, const ubigint refInv
-		) {
-	bool retval = false;
-
-	if (ixInv == VecWdbeVPreset::PREWDBEREFCVR) {
-		changeRef(dbswdbe, jrefTrig, refInv, true);
-
-		if (refInv == 0) pnlrec->minimize(dbswdbe, true);
-		else if ((jrefTrig == statshr.jrefDlgnew) && (refInv != 0)) {
-			pnllist->qry->rerun(dbswdbe, true);
-			pnllist->minimize(dbswdbe, true);
-			pnlrec->regularize(dbswdbe, true);
-		};
-	};
-
-	return retval;
 };
 
 bool CrdWdbeCvr::handleCallWdbeDlgClose(
@@ -389,6 +369,28 @@ bool CrdWdbeCvr::handleCallWdbeStatChg(
 		) {
 	bool retval = false;
 	if (jrefTrig == pnlrec->jref) if ((pnllist->statshr.ixWdbeVExpstate == VecWdbeVExpstate::REGD) && (pnlrec->statshr.ixWdbeVExpstate == VecWdbeVExpstate::REGD)) pnllist->minimize(dbswdbe, true);
+	return retval;
+};
+
+bool CrdWdbeCvr::handleCallWdbeRefPreSet(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+			, const uint ixInv
+			, const ubigint refInv
+		) {
+	bool retval = false;
+
+	if (ixInv == VecWdbeVPreset::PREWDBEREFCVR) {
+		changeRef(dbswdbe, jrefTrig, refInv, true);
+
+		if (refInv == 0) pnlrec->minimize(dbswdbe, true);
+		else if ((jrefTrig == statshr.jrefDlgnew) && (refInv != 0)) {
+			pnllist->qry->rerun(dbswdbe, true);
+			pnllist->minimize(dbswdbe, true);
+			pnlrec->regularize(dbswdbe, true);
+		};
+	};
+
 	return retval;
 };
 

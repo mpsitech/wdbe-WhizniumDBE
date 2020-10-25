@@ -2,8 +2,8 @@
 	* \file PnlWdbePrsDetail.cpp
 	* job handler for job PnlWdbePrsDetail (implementation)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifdef WDBECMBD
@@ -336,11 +336,20 @@ void PnlWdbePrsDetail::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBEPRSJLNMMOD_PRSEQ) {
-		call->abort = handleCallWdbePrsJlnmMod_prsEq(dbswdbe, call->jref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEPRSUPD_REFEQ) {
+	if (call->ixVCall == VecWdbeVCall::CALLWDBEPRSUPD_REFEQ) {
 		call->abort = handleCallWdbePrsUpd_refEq(dbswdbe, call->jref);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEPRSJLNMMOD_PRSEQ) {
+		call->abort = handleCallWdbePrsJlnmMod_prsEq(dbswdbe, call->jref);
 	};
+};
+
+bool PnlWdbePrsDetail::handleCallWdbePrsUpd_refEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+	// IP handleCallWdbePrsUpd_refEq --- INSERT
+	return retval;
 };
 
 bool PnlWdbePrsDetail::handleCallWdbePrsJlnmMod_prsEq(
@@ -353,15 +362,6 @@ bool PnlWdbePrsDetail::handleCallWdbePrsJlnmMod_prsEq(
 	refreshJ(dbswdbe, moditems);
 
 	xchg->submitDpch(getNewDpchEng(moditems));
-	return retval;
-};
-
-bool PnlWdbePrsDetail::handleCallWdbePrsUpd_refEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-	// IP handleCallWdbePrsUpd_refEq --- INSERT
 	return retval;
 };
 

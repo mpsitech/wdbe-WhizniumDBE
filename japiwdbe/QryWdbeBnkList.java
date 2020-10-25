@@ -2,8 +2,8 @@
   * \file QryWdbeBnkList.java
   * Java API code for job QryWdbeBnkList
   * \author Alexander Wirthmueller
-  * \date created: 11 Jul 2020
-  * \date modified: 11 Jul 2020
+  * \date created: 23 Aug 2020
+  * \date modified: 23 Aug 2020
   */
 
 package apiwdbe;
@@ -18,16 +18,16 @@ public class QryWdbeBnkList {
 		*/
 	public static class VecVOrd {
 
-		public static final int UNT = 1;
-		public static final int SRF = 2;
+		public static final int SRF = 1;
+		public static final int UNT = 2;
 
 		public static int getIx(
 					String sref
 				) {
 			String s = sref.toLowerCase();
 
-			if (s.equals("unt")) return UNT;
 			if (s.equals("srf")) return SRF;
+			if (s.equals("unt")) return UNT;
 
 			return 0;
 		};
@@ -35,8 +35,8 @@ public class QryWdbeBnkList {
 		public static String getSref(
 					int ix
 				) {
-			if (ix == UNT) return("unt");
 			if (ix == SRF) return("srf");
+			if (ix == UNT) return("unt");
 
 			return "";
 		};

@@ -2,8 +2,8 @@
 	* \file QryWdbeSigList.h
 	* job handler for job QryWdbeSigList (declarations)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifndef QRYWDBESIGLIST_H
@@ -31,13 +31,13 @@ public:
 	class VecVOrd {
 
 	public:
-		static const Sbecore::uint CON = 1;
-		static const Sbecore::uint VEC = 2;
-		static const Sbecore::uint MGU = 3;
+		static const Sbecore::uint SRF = 1;
+		static const Sbecore::uint TYP = 2;
+		static const Sbecore::uint MDL = 3;
 		static const Sbecore::uint MGT = 4;
-		static const Sbecore::uint MDL = 5;
-		static const Sbecore::uint TYP = 6;
-		static const Sbecore::uint SRF = 7;
+		static const Sbecore::uint MGU = 5;
+		static const Sbecore::uint VEC = 6;
+		static const Sbecore::uint CON = 7;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);
@@ -148,9 +148,9 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeSigUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
-	bool handleCallWdbeSigMod(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 	bool handleCallWdbeStubChgFromSelf(DbsWdbe* dbswdbe);
+	bool handleCallWdbeSigMod(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbeSigUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 
 };
 

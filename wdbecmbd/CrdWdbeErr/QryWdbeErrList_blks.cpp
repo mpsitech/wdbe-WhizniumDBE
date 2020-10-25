@@ -2,8 +2,8 @@
 	* \file QryWdbeErrList_blks.cpp
 	* job handler for job QryWdbeErrList (implementation of blocks)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 using namespace std;
@@ -19,9 +19,9 @@ uint QryWdbeErrList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "reu") return REU;
-	if (s == "ret") return RET;
 	if (s == "srf") return SRF;
+	if (s == "ret") return RET;
+	if (s == "reu") return REU;
 
 	return(0);
 };
@@ -29,9 +29,9 @@ uint QryWdbeErrList::VecVOrd::getIx(
 string QryWdbeErrList::VecVOrd::getSref(
 			const uint ix
 		) {
-	if (ix == REU) return("reu");
-	if (ix == RET) return("ret");
 	if (ix == SRF) return("srf");
+	if (ix == RET) return("ret");
+	if (ix == REU) return("reu");
 
 	return("");
 };

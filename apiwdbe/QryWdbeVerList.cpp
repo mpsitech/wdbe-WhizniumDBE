@@ -2,8 +2,8 @@
 	* \file QryWdbeVerList.cpp
 	* API code for job QryWdbeVerList (implementation)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #include "QryWdbeVerList.h"
@@ -21,11 +21,11 @@ uint QryWdbeVerList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "ste") return STE;
-	if (s == "bvr") return BVR;
-	if (s == "prj") return PRJ;
-	if (s == "own") return OWN;
 	if (s == "grp") return GRP;
+	if (s == "own") return OWN;
+	if (s == "prj") return PRJ;
+	if (s == "bvr") return BVR;
+	if (s == "ste") return STE;
 
 	return(0);
 };
@@ -33,11 +33,11 @@ uint QryWdbeVerList::VecVOrd::getIx(
 string QryWdbeVerList::VecVOrd::getSref(
 			const uint ix
 		) {
-	if (ix == STE) return("ste");
-	if (ix == BVR) return("bvr");
-	if (ix == PRJ) return("prj");
-	if (ix == OWN) return("own");
 	if (ix == GRP) return("grp");
+	if (ix == OWN) return("own");
+	if (ix == PRJ) return("prj");
+	if (ix == BVR) return("bvr");
+	if (ix == STE) return("ste");
 
 	return("");
 };

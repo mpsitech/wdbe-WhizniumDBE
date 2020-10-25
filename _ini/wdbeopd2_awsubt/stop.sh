@@ -2,8 +2,8 @@
 # file stopall.sh
 # stop script for Wdbe operation daemon(s), release wdbeopd2_awsubt
 # author Alexander Wirthmueller
-# date created: 11 Jul 2020
-# modified: 11 Jul 2020
+# date created: 23 Aug 2020
+# modified: 23 Aug 2020
 
 IFS=$'\n'
 pids=$(pgrep Wdbeopd2)

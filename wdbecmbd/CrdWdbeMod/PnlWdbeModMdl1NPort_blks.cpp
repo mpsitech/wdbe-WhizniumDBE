@@ -2,8 +2,8 @@
 	* \file PnlWdbeModMdl1NPort_blks.cpp
 	* job handler for job PnlWdbeModMdl1NPort (implementation of blocks)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 using namespace std;

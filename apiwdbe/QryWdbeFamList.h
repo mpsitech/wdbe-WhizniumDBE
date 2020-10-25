@@ -2,8 +2,8 @@
 	* \file QryWdbeFamList.h
 	* API code for job QryWdbeFamList (declarations)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifndef QRYWDBEFAMLIST_H
@@ -27,8 +27,8 @@ namespace QryWdbeFamList {
 	class VecVOrd {
 
 	public:
-		static const Sbecore::uint TIT = 1;
-		static const Sbecore::uint VND = 2;
+		static const Sbecore::uint VND = 1;
+		static const Sbecore::uint TIT = 2;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);

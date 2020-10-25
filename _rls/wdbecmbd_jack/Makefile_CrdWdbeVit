@@ -1,8 +1,8 @@
 # file Makefile
 # make file for CrdWdbeVit card job handler, release wdbecmbd_jack
 # author Alexander Wirthmueller
-# date created: 11 Jul 2020
-# modified: 11 Jul 2020
+# date created: 23 Aug 2020
+# modified: 23 Aug 2020
 
 include ../Makefile.inc
 
@@ -15,7 +15,7 @@ STATLIBFLAGS = rcs
 INCPATH = -I$(SRCROOT)/dbswdbe -I$(SRCROOT)/wdbecmbd/VecWdbe -I$(SRCROOT)/wdbecmbd/IexWdbe -I$(SRCROOT)/wdbecmbd
 INCPATH += -I/home/mpsitech/src/apiwzlm -I/usr/include -I/usr/include/jsoncpp -I/usr/include/libxml2 -I/usr/include/mysql -I/usr/include/postgresql -I/usr/local/include
 
-OBJS = CrdWdbeVit.o PnlWdbeVitList.o QryWdbeVitList.o PnlWdbeVitHeadbar.o PnlWdbeVitRec.o PnlWdbeVitDetail.o
+OBJS = CrdWdbeVit.o PnlWdbeVitRec.o PnlWdbeVitDetail.o PnlWdbeVitHeadbar.o PnlWdbeVitList.o QryWdbeVitList.o
 
 LIB = libcrdwdbevit
 

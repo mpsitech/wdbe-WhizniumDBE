@@ -2,8 +2,8 @@
 	* \file PnlWdbePrsRec.h
 	* job handler for job PnlWdbePrsRec (declarations)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifndef PNLWDBEPRSREC_H
@@ -13,10 +13,10 @@
 
 // IP include.cust --- INSERT
 
-#include "PnlWdbePrsMNCoreproject.h"
-#include "PnlWdbePrsMNProject.h"
-#include "PnlWdbePrsADetail.h"
 #include "PnlWdbePrsDetail.h"
+#include "PnlWdbePrsADetail.h"
+#include "PnlWdbePrsMNProject.h"
+#include "PnlWdbePrsMNCoreproject.h"
 
 #define VecVWdbePrsRecDo PnlWdbePrsRec::VecVDo
 
@@ -173,10 +173,10 @@ public:
 	ContInf continf;
 	StatShr statshr;
 
-	PnlWdbePrsMNCoreproject* pnlmncoreproject;
-	PnlWdbePrsMNProject* pnlmnproject;
-	PnlWdbePrsADetail* pnladetail;
 	PnlWdbePrsDetail* pnldetail;
+	PnlWdbePrsADetail* pnladetail;
+	PnlWdbePrsMNProject* pnlmnproject;
+	PnlWdbePrsMNCoreproject* pnlmncoreproject;
 
 	WdbeMPerson recPrs;
 

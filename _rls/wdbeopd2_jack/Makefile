@@ -1,8 +1,8 @@
 # file Makefile
 # make file for Wdbe operation daemon, release wdbeopd2_jack
 # author Alexander Wirthmueller
-# date created: 11 Jul 2020
-# modified: 11 Jul 2020
+# date created: 23 Aug 2020
+# modified: 23 Aug 2020
 
 include Makefile.inc
 
@@ -13,7 +13,7 @@ LINK = g++
 LINKFLAGS =
 
 INCPATH = -I$(SRCROOT)/dbswdbe -I$(SRCROOT)/wdbeopd2/VecWdbe -I$(SRCROOT)/wdbeopd2/IexWdbe -I$(SRCROOT)/wdbeopd2
-INCPATH += -I$(SRCROOT)/wdbeopd2/WdbeMtpWrmcu -I$(SRCROOT)/wdbeopd2/WdbeMtpWrfpga -I$(SRCROOT)/wdbeopd2/WdbeMtpModdet -I$(SRCROOT)/wdbeopd2/WdbeMtpModbsctd -I$(SRCROOT)/wdbeopd2/WdbeMtpModbscbu -I$(SRCROOT)/wdbeopd2/WdbeMtpPlhmcu -I$(SRCROOT)/wdbeopd2/WdbeMtpPlhfpga
+INCPATH += -I$(SRCROOT)/wdbeopd2/WdbeMtpPlhfpga -I$(SRCROOT)/wdbeopd2/WdbeMtpPlhmcu -I$(SRCROOT)/wdbeopd2/WdbeMtpModbscbu -I$(SRCROOT)/wdbeopd2/WdbeMtpModbsctd -I$(SRCROOT)/wdbeopd2/WdbeMtpModdet -I$(SRCROOT)/wdbeopd2/WdbeMtpWrfpga -I$(SRCROOT)/wdbeopd2/WdbeMtpWrmcu
 INCPATH += -I/usr/include -I/usr/include/libxml2 -I/usr/include/mysql -I/usr/include/postgresql -I/usr/local/include
 
 PCHS = Wdbeopd.h.gch
@@ -26,7 +26,7 @@ LIBPATH += -L$(LIBROOT)/wdbeopd2
 LIBPATH += -L/usr/lib/x86_64-linux-gnu -L/usr/local/lib
 LIBPATH += -L/lib/x86_64-linux-gnu
 
-LIBS = -lwdbemtpwrmcu -lwdbemtpwrfpga -lwdbemtpmoddet -lwdbemtpmodbsctd -lwdbemtpmodbscbu -lwdbemtpplhmcu -lwdbemtpplhfpga
+LIBS = -lwdbemtpplhfpga -lwdbemtpplhmcu -lwdbemtpmodbscbu -lwdbemtpmodbsctd -lwdbemtpmoddet -lwdbemtpwrfpga -lwdbemtpwrmcu
 LIBS += -liexwdbe -lvecwdbe -ldbswdbe
 LIBS += -lcurl -lmicrohttpd -lsbecore_my -lsbecore_pg
 LIBS += -lmysqlclient -lpq -lsbecore_plus

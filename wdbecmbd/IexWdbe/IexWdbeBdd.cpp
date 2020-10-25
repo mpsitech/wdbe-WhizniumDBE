@@ -2,8 +2,8 @@
 	* \file IexWdbeBdd.cpp
 	* data blocks and readers/writers for import/export complex IexWdbeBdd (implementation)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #include "IexWdbeBdd.h"

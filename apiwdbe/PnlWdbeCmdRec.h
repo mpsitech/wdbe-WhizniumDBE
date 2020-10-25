@@ -2,8 +2,8 @@
 	* \file PnlWdbeCmdRec.h
 	* API code for job PnlWdbeCmdRec (declarations)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifndef PNLWDBECMDREC_H
@@ -65,17 +65,17 @@ namespace PnlWdbeCmdRec {
 
 	public:
 		static const Sbecore::uint INITDONEDETAIL = 1;
-		static const Sbecore::uint INITDONEARETPAR = 2;
-		static const Sbecore::uint INITDONEAINVPAR = 3;
+		static const Sbecore::uint INITDONEAINVPAR = 2;
+		static const Sbecore::uint INITDONEARETPAR = 3;
 		static const Sbecore::uint INITDONEMNCONTROLLER = 4;
 
 	public:
-		StatApp(const bool initdoneDetail = false, const bool initdoneARetpar = false, const bool initdoneAInvpar = false, const bool initdoneMNController = false);
+		StatApp(const bool initdoneDetail = false, const bool initdoneAInvpar = false, const bool initdoneARetpar = false, const bool initdoneMNController = false);
 
 	public:
 		bool initdoneDetail;
-		bool initdoneARetpar;
 		bool initdoneAInvpar;
+		bool initdoneARetpar;
 		bool initdoneMNController;
 
 	public:
@@ -92,19 +92,19 @@ namespace PnlWdbeCmdRec {
 	public:
 		static const Sbecore::uint IXWDBEVEXPSTATE = 1;
 		static const Sbecore::uint SCRJREFDETAIL = 2;
-		static const Sbecore::uint SCRJREFARETPAR = 3;
-		static const Sbecore::uint SCRJREFAINVPAR = 4;
+		static const Sbecore::uint SCRJREFAINVPAR = 3;
+		static const Sbecore::uint SCRJREFARETPAR = 4;
 		static const Sbecore::uint SCRJREFMNCONTROLLER = 5;
 		static const Sbecore::uint BUTREGULARIZEACTIVE = 6;
 
 	public:
-		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const std::string& scrJrefDetail = "", const std::string& scrJrefARetpar = "", const std::string& scrJrefAInvpar = "", const std::string& scrJrefMNController = "", const bool ButRegularizeActive = true);
+		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const std::string& scrJrefDetail = "", const std::string& scrJrefAInvpar = "", const std::string& scrJrefARetpar = "", const std::string& scrJrefMNController = "", const bool ButRegularizeActive = true);
 
 	public:
 		Sbecore::uint ixWdbeVExpstate;
 		std::string scrJrefDetail;
-		std::string scrJrefARetpar;
 		std::string scrJrefAInvpar;
+		std::string scrJrefARetpar;
 		std::string scrJrefMNController;
 		bool ButRegularizeActive;
 

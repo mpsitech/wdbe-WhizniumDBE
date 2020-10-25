@@ -2,8 +2,8 @@
 	* \file Wdbed_exe.cpp
 	* Wdbe daemon main (implementation)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #include "Wdbed.h"
@@ -493,7 +493,7 @@ int main(
 
 	try {
 		// welcome message
-		cout << "Welcome to WhizniumDBE 1.0.2!" << endl;
+		cout << "Welcome to WhizniumDBE v1.0.3!" << endl;
 
 		// calls wdbed.init()
 		wdbed = new Wdbed(exedir, clearAll, startMon);

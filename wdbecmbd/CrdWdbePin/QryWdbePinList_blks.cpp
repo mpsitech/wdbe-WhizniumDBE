@@ -2,8 +2,8 @@
 	* \file QryWdbePinList_blks.cpp
 	* job handler for job QryWdbePinList (implementation of blocks)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 using namespace std;
@@ -19,8 +19,8 @@ uint QryWdbePinList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "bnk") return BNK;
 	if (s == "srf") return SRF;
+	if (s == "bnk") return BNK;
 
 	return(0);
 };
@@ -28,8 +28,8 @@ uint QryWdbePinList::VecVOrd::getIx(
 string QryWdbePinList::VecVOrd::getSref(
 			const uint ix
 		) {
-	if (ix == BNK) return("bnk");
 	if (ix == SRF) return("srf");
+	if (ix == BNK) return("bnk");
 
 	return("");
 };

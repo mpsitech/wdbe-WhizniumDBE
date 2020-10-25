@@ -2,8 +2,8 @@
 	* \file QryWdbeUsgMNUser.cpp
 	* job handler for job QryWdbeUsgMNUser (implementation)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #ifdef WDBECMBD
@@ -84,7 +84,7 @@ void QryWdbeUsgMNUser::rerun(
 	dbswdbe->tblwdbequsgmnuser->removeRstByJref(jref);
 
 	sqlstr = "SELECT COUNT(TblWdbeRMUserMUsergroup.ref)";
-	sqlstr += " FROM TblWdbeMUser, TblWdbeRMUserMUsergroup";
+	sqlstr += " FROM TblWdbeRMUserMUsergroup, TblWdbeMUser";
 	sqlstr += " WHERE TblWdbeRMUserMUsergroup.refWdbeMUser = TblWdbeMUser.ref";
 	sqlstr += " AND TblWdbeRMUserMUsergroup.refWdbeMUsergroup = " + to_string(preRefUsg) + "";
 	dbswdbe->loadUintBySQL(sqlstr, cnt);
@@ -99,7 +99,7 @@ void QryWdbeUsgMNUser::rerun(
 
 	sqlstr = "INSERT INTO TblWdbeQUsgMNUser(jref, jnum, mref, ref, ixWdbeVUserlevel)";
 	sqlstr += " SELECT " + to_string(jref) + ", 0, TblWdbeMUser.ref, TblWdbeRMUserMUsergroup.ref, TblWdbeRMUserMUsergroup.ixWdbeVUserlevel";
-	sqlstr += " FROM TblWdbeMUser, TblWdbeRMUserMUsergroup";
+	sqlstr += " FROM TblWdbeRMUserMUsergroup, TblWdbeMUser";
 	sqlstr += " WHERE TblWdbeRMUserMUsergroup.refWdbeMUser = TblWdbeMUser.ref";
 	sqlstr += " AND TblWdbeRMUserMUsergroup.refWdbeMUsergroup = " + to_string(preRefUsg) + "";
 	sqlstr += " ORDER BY TblWdbeMUser.sref ASC";
@@ -281,11 +281,19 @@ void QryWdbeUsgMNUser::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBEUSRRUSGMOD_USGEQ) {
-		call->abort = handleCallWdbeUsrRusgMod_usgEq(dbswdbe, call->jref);
-	} else if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
+	if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
 		call->abort = handleCallWdbeStubChgFromSelf(dbswdbe);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEUSRRUSGMOD_USGEQ) {
+		call->abort = handleCallWdbeUsrRusgMod_usgEq(dbswdbe, call->jref);
 	};
+};
+
+bool QryWdbeUsgMNUser::handleCallWdbeStubChgFromSelf(
+			DbsWdbe* dbswdbe
+		) {
+	bool retval = false;
+	// IP handleCallWdbeStubChgFromSelf --- INSERT
+	return retval;
 };
 
 bool QryWdbeUsgMNUser::handleCallWdbeUsrRusgMod_usgEq(
@@ -299,14 +307,6 @@ bool QryWdbeUsgMNUser::handleCallWdbeUsrRusgMod_usgEq(
 		xchg->triggerCall(dbswdbe, VecWdbeVCall::CALLWDBESTATCHG, jref);
 	};
 
-	return retval;
-};
-
-bool QryWdbeUsgMNUser::handleCallWdbeStubChgFromSelf(
-			DbsWdbe* dbswdbe
-		) {
-	bool retval = false;
-	// IP handleCallWdbeStubChgFromSelf --- INSERT
 	return retval;
 };
 

@@ -2,8 +2,8 @@
 	* \file DbsWdbe.cpp
 	* C++ wrapper for database DbsWdbe (implementation)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 #include "DbsWdbe.h"
@@ -1381,10 +1381,10 @@ uint DbsWdbe::getIxWSubsetByWdbeMModule(
 		args.push_back(a && b);
 		if (args.back()) {
 			ixWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMCT;
-			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMTP;
+			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMIB;
 			ixWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMOD;
 			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMOD;
-			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMIB;
+			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMTP;
 		} else {
 		};
 
@@ -1414,10 +1414,10 @@ uint DbsWdbe::getIxWSubsetByWdbeMModule(
 		args.push_back(a && b);
 		if (args.back()) {
 			ixWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMIB;
-			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMTP;
+			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMCT;
 			ixWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMOD;
 			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMOD;
-			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMCT;
+			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMTP;
 		} else {
 		};
 
@@ -1443,9 +1443,9 @@ uint DbsWdbe::getIxWSubsetByWdbeMModule(
 		if (args.back()) {
 			ixWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMOD;
 		} else {
-			ixWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMTP;
-			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMIB;
 			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMCT;
+			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMIB;
+			ixWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMTP;
 		};
 
 		dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMOD;
@@ -1468,8 +1468,8 @@ uint DbsWdbe::getIxWSubsetByWdbeMModule(
 		args.push_back(a && b);
 		if (args.back()) {
 			ixWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMTP;
-			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMIB;
 			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMCT;
+			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMIB;
 		} else {
 			ixWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMOD;
 		};

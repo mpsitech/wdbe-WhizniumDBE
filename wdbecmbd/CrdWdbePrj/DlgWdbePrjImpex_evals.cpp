@@ -2,42 +2,23 @@
 	* \file DlgWdbePrjImpex_evals.cpp
 	* job handler for job DlgWdbePrjImpex (implementation of availability/activation evaluation)
 	* \author Alexander Wirthmueller
-	* \date created: 11 Jul 2020
-	* \date modified: 11 Jul 2020
+	* \date created: 23 Aug 2020
+	* \date modified: 23 Aug 2020
 	*/
 
 using namespace std;
 using namespace Sbecore;
 using namespace Xmlio;
 
-bool DlgWdbePrjImpex::evalButDneActive(
+bool DlgWdbePrjImpex::evalIfiUldActive(
 			DbsWdbe* dbswdbe
 		) {
-	// sge(idle|done)
-
-	vector<bool> args;
-	bool a, b;
-
-	a = false; a = (ixVSge == VecVSge::IDLE);
-	args.push_back(a);
-	a = false; a = (ixVSge == VecVSge::DONE);
-	args.push_back(a);
-	b = args.back(); args.pop_back();
-	a = args.back(); args.pop_back();
-	args.push_back(a || b);
-
-	return(args.back());
-};
-
-bool DlgWdbePrjImpex::evalLfiDldActive(
-			DbsWdbe* dbswdbe
-		) {
-	// sge(done)
+	// sge(idle)
 
 	vector<bool> args;
 	bool a;
 
-	a = false; a = (ixVSge == VecVSge::DONE);
+	a = false; a = (ixVSge == VecVSge::IDLE);
 	args.push_back(a);
 
 	return(args.back());
@@ -90,16 +71,35 @@ bool DlgWdbePrjImpex::evalImpButStoActive(
 	return(args.back());
 };
 
-bool DlgWdbePrjImpex::evalIfiUldActive(
+bool DlgWdbePrjImpex::evalLfiDldActive(
 			DbsWdbe* dbswdbe
 		) {
-	// sge(idle)
+	// sge(done)
 
 	vector<bool> args;
 	bool a;
 
+	a = false; a = (ixVSge == VecVSge::DONE);
+	args.push_back(a);
+
+	return(args.back());
+};
+
+bool DlgWdbePrjImpex::evalButDneActive(
+			DbsWdbe* dbswdbe
+		) {
+	// sge(idle|done)
+
+	vector<bool> args;
+	bool a, b;
+
 	a = false; a = (ixVSge == VecVSge::IDLE);
 	args.push_back(a);
+	a = false; a = (ixVSge == VecVSge::DONE);
+	args.push_back(a);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
 
 	return(args.back());
 };

@@ -2,8 +2,8 @@
 # file checkout.sh
 # checkout script for Wdbe combined daemon, release wdbecmbd_awsubt
 # author Alexander Wirthmueller
-# date created: 11 Jul 2020
-# modified: 11 Jul 2020
+# date created: 23 Aug 2020
+# modified: 23 Aug 2020
 
 export set SRCROOT=/home/ubuntu/src
 export set LIBROOT=/home/ubuntu/lib
@@ -12,11 +12,11 @@ export set BINROOT=/home/ubuntu/bin
 mkdir $SRCROOT/wdbecmbd
 mkdir $SRCROOT/wdbecmbd/IexWdbe
 mkdir $SRCROOT/wdbecmbd/VecWdbe
+mkdir $SRCROOT/wdbecmbd/CrdWdbeNav
 mkdir $SRCROOT/wdbecmbd/CrdWdbeUsg
 mkdir $SRCROOT/wdbecmbd/CrdWdbeUsr
 mkdir $SRCROOT/wdbecmbd/CrdWdbePrs
 mkdir $SRCROOT/wdbecmbd/CrdWdbeFil
-mkdir $SRCROOT/wdbecmbd/CrdWdbeNav
 mkdir $SRCROOT/wdbecmbd/CrdWdbeMch
 mkdir $SRCROOT/wdbecmbd/CrdWdbeLib
 mkdir $SRCROOT/wdbecmbd/CrdWdbeFam
@@ -45,22 +45,22 @@ mkdir $SRCROOT/wdbecmbd/CrdWdbePrc
 mkdir $SRCROOT/wdbecmbd/CrdWdbeFst
 mkdir $SRCROOT/wdbecmbd/CrdWdbeVar
 mkdir $SRCROOT/wdbecmbd/CrdWdbeUtl
-mkdir $SRCROOT/wdbecmbd/WdbeWrmcu
-mkdir $SRCROOT/wdbecmbd/WdbeWrfpga
-mkdir $SRCROOT/wdbecmbd/WdbeWrdev
-mkdir $SRCROOT/wdbecmbd/WdbePrctree
-mkdir $SRCROOT/wdbecmbd/WdbePrcfile
-mkdir $SRCROOT/wdbecmbd/WdbePlhmcu
-mkdir $SRCROOT/wdbecmbd/WdbePlhfpga
-mkdir $SRCROOT/wdbecmbd/WdbeMtpWrmcu
-mkdir $SRCROOT/wdbecmbd/WdbeMtpWrfpga
-mkdir $SRCROOT/wdbecmbd/WdbeMtpModdet
-mkdir $SRCROOT/wdbecmbd/WdbeMtpModbsctd
-mkdir $SRCROOT/wdbecmbd/WdbeMtpModbscbu
-mkdir $SRCROOT/wdbecmbd/WdbeMtpPlhmcu
-mkdir $SRCROOT/wdbecmbd/WdbeMtpPlhfpga
-mkdir $SRCROOT/wdbecmbd/WdbeModdet
 mkdir $SRCROOT/wdbecmbd/WdbeModbsc
+mkdir $SRCROOT/wdbecmbd/WdbeModdet
+mkdir $SRCROOT/wdbecmbd/WdbeMtpPlhfpga
+mkdir $SRCROOT/wdbecmbd/WdbeMtpPlhmcu
+mkdir $SRCROOT/wdbecmbd/WdbeMtpModbscbu
+mkdir $SRCROOT/wdbecmbd/WdbeMtpModbsctd
+mkdir $SRCROOT/wdbecmbd/WdbeMtpModdet
+mkdir $SRCROOT/wdbecmbd/WdbeMtpWrfpga
+mkdir $SRCROOT/wdbecmbd/WdbeMtpWrmcu
+mkdir $SRCROOT/wdbecmbd/WdbePlhfpga
+mkdir $SRCROOT/wdbecmbd/WdbePlhmcu
+mkdir $SRCROOT/wdbecmbd/WdbePrcfile
+mkdir $SRCROOT/wdbecmbd/WdbePrctree
+mkdir $SRCROOT/wdbecmbd/WdbeWrdev
+mkdir $SRCROOT/wdbecmbd/WdbeWrfpga
+mkdir $SRCROOT/wdbecmbd/WdbeWrmcu
 
 mkdir $LIBROOT/wdbecmbd
 
@@ -112,6 +112,11 @@ cp Makefile_VecWdbe $SRCROOT/wdbecmbd/VecWdbe/Makefile
 cp ../../wdbecmbd/VecWdbe/Vec*.h $SRCROOT/wdbecmbd/VecWdbe/
 cp ../../wdbecmbd/VecWdbe/Vec*.cpp $SRCROOT/wdbecmbd/VecWdbe/
 
+cp Makefile_CrdWdbeNav $SRCROOT/wdbecmbd/CrdWdbeNav/Makefile
+
+cp ../../wdbecmbd/CrdWdbeNav/*.h $SRCROOT/wdbecmbd/CrdWdbeNav/
+cp ../../wdbecmbd/CrdWdbeNav/*.cpp $SRCROOT/wdbecmbd/CrdWdbeNav/
+
 cp Makefile_CrdWdbeUsg $SRCROOT/wdbecmbd/CrdWdbeUsg/Makefile
 
 cp ../../wdbecmbd/CrdWdbeUsg/*.h $SRCROOT/wdbecmbd/CrdWdbeUsg/
@@ -131,11 +136,6 @@ cp Makefile_CrdWdbeFil $SRCROOT/wdbecmbd/CrdWdbeFil/Makefile
 
 cp ../../wdbecmbd/CrdWdbeFil/*.h $SRCROOT/wdbecmbd/CrdWdbeFil/
 cp ../../wdbecmbd/CrdWdbeFil/*.cpp $SRCROOT/wdbecmbd/CrdWdbeFil/
-
-cp Makefile_CrdWdbeNav $SRCROOT/wdbecmbd/CrdWdbeNav/Makefile
-
-cp ../../wdbecmbd/CrdWdbeNav/*.h $SRCROOT/wdbecmbd/CrdWdbeNav/
-cp ../../wdbecmbd/CrdWdbeNav/*.cpp $SRCROOT/wdbecmbd/CrdWdbeNav/
 
 cp Makefile_CrdWdbeMch $SRCROOT/wdbecmbd/CrdWdbeMch/Makefile
 
@@ -277,83 +277,83 @@ cp Makefile_CrdWdbeUtl $SRCROOT/wdbecmbd/CrdWdbeUtl/Makefile
 cp ../../wdbecmbd/CrdWdbeUtl/*.h $SRCROOT/wdbecmbd/CrdWdbeUtl/
 cp ../../wdbecmbd/CrdWdbeUtl/*.cpp $SRCROOT/wdbecmbd/CrdWdbeUtl/
 
-cp Makefile_WdbeWrmcu $SRCROOT/wdbecmbd/WdbeWrmcu/Makefile
+cp Makefile_WdbeModbsc $SRCROOT/wdbecmbd/WdbeModbsc/Makefile
 
-cp ../../wdbecmbd/WdbeWrmcu/*.h $SRCROOT/wdbecmbd/WdbeWrmcu/
-cp ../../wdbecmbd/WdbeWrmcu/*.cpp $SRCROOT/wdbecmbd/WdbeWrmcu/
-
-cp Makefile_WdbeWrfpga $SRCROOT/wdbecmbd/WdbeWrfpga/Makefile
-
-cp ../../wdbecmbd/WdbeWrfpga/*.h $SRCROOT/wdbecmbd/WdbeWrfpga/
-cp ../../wdbecmbd/WdbeWrfpga/*.cpp $SRCROOT/wdbecmbd/WdbeWrfpga/
-
-cp Makefile_WdbeWrdev $SRCROOT/wdbecmbd/WdbeWrdev/Makefile
-
-cp ../../wdbecmbd/WdbeWrdev/*.h $SRCROOT/wdbecmbd/WdbeWrdev/
-cp ../../wdbecmbd/WdbeWrdev/*.cpp $SRCROOT/wdbecmbd/WdbeWrdev/
-
-cp Makefile_WdbePrctree $SRCROOT/wdbecmbd/WdbePrctree/Makefile
-
-cp ../../wdbecmbd/WdbePrctree/*.h $SRCROOT/wdbecmbd/WdbePrctree/
-cp ../../wdbecmbd/WdbePrctree/*.cpp $SRCROOT/wdbecmbd/WdbePrctree/
-
-cp Makefile_WdbePrcfile $SRCROOT/wdbecmbd/WdbePrcfile/Makefile
-
-cp ../../wdbecmbd/WdbePrcfile/*.h $SRCROOT/wdbecmbd/WdbePrcfile/
-cp ../../wdbecmbd/WdbePrcfile/*.cpp $SRCROOT/wdbecmbd/WdbePrcfile/
-
-cp Makefile_WdbePlhmcu $SRCROOT/wdbecmbd/WdbePlhmcu/Makefile
-
-cp ../../wdbecmbd/WdbePlhmcu/*.h $SRCROOT/wdbecmbd/WdbePlhmcu/
-cp ../../wdbecmbd/WdbePlhmcu/*.cpp $SRCROOT/wdbecmbd/WdbePlhmcu/
-
-cp Makefile_WdbePlhfpga $SRCROOT/wdbecmbd/WdbePlhfpga/Makefile
-
-cp ../../wdbecmbd/WdbePlhfpga/*.h $SRCROOT/wdbecmbd/WdbePlhfpga/
-cp ../../wdbecmbd/WdbePlhfpga/*.cpp $SRCROOT/wdbecmbd/WdbePlhfpga/
-
-cp Makefile_WdbeMtpWrmcu $SRCROOT/wdbecmbd/WdbeMtpWrmcu/Makefile
-
-cp ../../wdbecmbd/WdbeMtpWrmcu/*.h $SRCROOT/wdbecmbd/WdbeMtpWrmcu/
-cp ../../wdbecmbd/WdbeMtpWrmcu/*.cpp $SRCROOT/wdbecmbd/WdbeMtpWrmcu/
-
-cp Makefile_WdbeMtpWrfpga $SRCROOT/wdbecmbd/WdbeMtpWrfpga/Makefile
-
-cp ../../wdbecmbd/WdbeMtpWrfpga/*.h $SRCROOT/wdbecmbd/WdbeMtpWrfpga/
-cp ../../wdbecmbd/WdbeMtpWrfpga/*.cpp $SRCROOT/wdbecmbd/WdbeMtpWrfpga/
-
-cp Makefile_WdbeMtpModdet $SRCROOT/wdbecmbd/WdbeMtpModdet/Makefile
-
-cp ../../wdbecmbd/WdbeMtpModdet/*.h $SRCROOT/wdbecmbd/WdbeMtpModdet/
-cp ../../wdbecmbd/WdbeMtpModdet/*.cpp $SRCROOT/wdbecmbd/WdbeMtpModdet/
-
-cp Makefile_WdbeMtpModbsctd $SRCROOT/wdbecmbd/WdbeMtpModbsctd/Makefile
-
-cp ../../wdbecmbd/WdbeMtpModbsctd/*.h $SRCROOT/wdbecmbd/WdbeMtpModbsctd/
-cp ../../wdbecmbd/WdbeMtpModbsctd/*.cpp $SRCROOT/wdbecmbd/WdbeMtpModbsctd/
-
-cp Makefile_WdbeMtpModbscbu $SRCROOT/wdbecmbd/WdbeMtpModbscbu/Makefile
-
-cp ../../wdbecmbd/WdbeMtpModbscbu/*.h $SRCROOT/wdbecmbd/WdbeMtpModbscbu/
-cp ../../wdbecmbd/WdbeMtpModbscbu/*.cpp $SRCROOT/wdbecmbd/WdbeMtpModbscbu/
-
-cp Makefile_WdbeMtpPlhmcu $SRCROOT/wdbecmbd/WdbeMtpPlhmcu/Makefile
-
-cp ../../wdbecmbd/WdbeMtpPlhmcu/*.h $SRCROOT/wdbecmbd/WdbeMtpPlhmcu/
-cp ../../wdbecmbd/WdbeMtpPlhmcu/*.cpp $SRCROOT/wdbecmbd/WdbeMtpPlhmcu/
-
-cp Makefile_WdbeMtpPlhfpga $SRCROOT/wdbecmbd/WdbeMtpPlhfpga/Makefile
-
-cp ../../wdbecmbd/WdbeMtpPlhfpga/*.h $SRCROOT/wdbecmbd/WdbeMtpPlhfpga/
-cp ../../wdbecmbd/WdbeMtpPlhfpga/*.cpp $SRCROOT/wdbecmbd/WdbeMtpPlhfpga/
+cp ../../wdbecmbd/WdbeModbsc/*.h $SRCROOT/wdbecmbd/WdbeModbsc/
+cp ../../wdbecmbd/WdbeModbsc/*.cpp $SRCROOT/wdbecmbd/WdbeModbsc/
 
 cp Makefile_WdbeModdet $SRCROOT/wdbecmbd/WdbeModdet/Makefile
 
 cp ../../wdbecmbd/WdbeModdet/*.h $SRCROOT/wdbecmbd/WdbeModdet/
 cp ../../wdbecmbd/WdbeModdet/*.cpp $SRCROOT/wdbecmbd/WdbeModdet/
 
-cp Makefile_WdbeModbsc $SRCROOT/wdbecmbd/WdbeModbsc/Makefile
+cp Makefile_WdbeMtpPlhfpga $SRCROOT/wdbecmbd/WdbeMtpPlhfpga/Makefile
 
-cp ../../wdbecmbd/WdbeModbsc/*.h $SRCROOT/wdbecmbd/WdbeModbsc/
-cp ../../wdbecmbd/WdbeModbsc/*.cpp $SRCROOT/wdbecmbd/WdbeModbsc/
+cp ../../wdbecmbd/WdbeMtpPlhfpga/*.h $SRCROOT/wdbecmbd/WdbeMtpPlhfpga/
+cp ../../wdbecmbd/WdbeMtpPlhfpga/*.cpp $SRCROOT/wdbecmbd/WdbeMtpPlhfpga/
+
+cp Makefile_WdbeMtpPlhmcu $SRCROOT/wdbecmbd/WdbeMtpPlhmcu/Makefile
+
+cp ../../wdbecmbd/WdbeMtpPlhmcu/*.h $SRCROOT/wdbecmbd/WdbeMtpPlhmcu/
+cp ../../wdbecmbd/WdbeMtpPlhmcu/*.cpp $SRCROOT/wdbecmbd/WdbeMtpPlhmcu/
+
+cp Makefile_WdbeMtpModbscbu $SRCROOT/wdbecmbd/WdbeMtpModbscbu/Makefile
+
+cp ../../wdbecmbd/WdbeMtpModbscbu/*.h $SRCROOT/wdbecmbd/WdbeMtpModbscbu/
+cp ../../wdbecmbd/WdbeMtpModbscbu/*.cpp $SRCROOT/wdbecmbd/WdbeMtpModbscbu/
+
+cp Makefile_WdbeMtpModbsctd $SRCROOT/wdbecmbd/WdbeMtpModbsctd/Makefile
+
+cp ../../wdbecmbd/WdbeMtpModbsctd/*.h $SRCROOT/wdbecmbd/WdbeMtpModbsctd/
+cp ../../wdbecmbd/WdbeMtpModbsctd/*.cpp $SRCROOT/wdbecmbd/WdbeMtpModbsctd/
+
+cp Makefile_WdbeMtpModdet $SRCROOT/wdbecmbd/WdbeMtpModdet/Makefile
+
+cp ../../wdbecmbd/WdbeMtpModdet/*.h $SRCROOT/wdbecmbd/WdbeMtpModdet/
+cp ../../wdbecmbd/WdbeMtpModdet/*.cpp $SRCROOT/wdbecmbd/WdbeMtpModdet/
+
+cp Makefile_WdbeMtpWrfpga $SRCROOT/wdbecmbd/WdbeMtpWrfpga/Makefile
+
+cp ../../wdbecmbd/WdbeMtpWrfpga/*.h $SRCROOT/wdbecmbd/WdbeMtpWrfpga/
+cp ../../wdbecmbd/WdbeMtpWrfpga/*.cpp $SRCROOT/wdbecmbd/WdbeMtpWrfpga/
+
+cp Makefile_WdbeMtpWrmcu $SRCROOT/wdbecmbd/WdbeMtpWrmcu/Makefile
+
+cp ../../wdbecmbd/WdbeMtpWrmcu/*.h $SRCROOT/wdbecmbd/WdbeMtpWrmcu/
+cp ../../wdbecmbd/WdbeMtpWrmcu/*.cpp $SRCROOT/wdbecmbd/WdbeMtpWrmcu/
+
+cp Makefile_WdbePlhfpga $SRCROOT/wdbecmbd/WdbePlhfpga/Makefile
+
+cp ../../wdbecmbd/WdbePlhfpga/*.h $SRCROOT/wdbecmbd/WdbePlhfpga/
+cp ../../wdbecmbd/WdbePlhfpga/*.cpp $SRCROOT/wdbecmbd/WdbePlhfpga/
+
+cp Makefile_WdbePlhmcu $SRCROOT/wdbecmbd/WdbePlhmcu/Makefile
+
+cp ../../wdbecmbd/WdbePlhmcu/*.h $SRCROOT/wdbecmbd/WdbePlhmcu/
+cp ../../wdbecmbd/WdbePlhmcu/*.cpp $SRCROOT/wdbecmbd/WdbePlhmcu/
+
+cp Makefile_WdbePrcfile $SRCROOT/wdbecmbd/WdbePrcfile/Makefile
+
+cp ../../wdbecmbd/WdbePrcfile/*.h $SRCROOT/wdbecmbd/WdbePrcfile/
+cp ../../wdbecmbd/WdbePrcfile/*.cpp $SRCROOT/wdbecmbd/WdbePrcfile/
+
+cp Makefile_WdbePrctree $SRCROOT/wdbecmbd/WdbePrctree/Makefile
+
+cp ../../wdbecmbd/WdbePrctree/*.h $SRCROOT/wdbecmbd/WdbePrctree/
+cp ../../wdbecmbd/WdbePrctree/*.cpp $SRCROOT/wdbecmbd/WdbePrctree/
+
+cp Makefile_WdbeWrdev $SRCROOT/wdbecmbd/WdbeWrdev/Makefile
+
+cp ../../wdbecmbd/WdbeWrdev/*.h $SRCROOT/wdbecmbd/WdbeWrdev/
+cp ../../wdbecmbd/WdbeWrdev/*.cpp $SRCROOT/wdbecmbd/WdbeWrdev/
+
+cp Makefile_WdbeWrfpga $SRCROOT/wdbecmbd/WdbeWrfpga/Makefile
+
+cp ../../wdbecmbd/WdbeWrfpga/*.h $SRCROOT/wdbecmbd/WdbeWrfpga/
+cp ../../wdbecmbd/WdbeWrfpga/*.cpp $SRCROOT/wdbecmbd/WdbeWrfpga/
+
+cp Makefile_WdbeWrmcu $SRCROOT/wdbecmbd/WdbeWrmcu/Makefile
+
+cp ../../wdbecmbd/WdbeWrmcu/*.h $SRCROOT/wdbecmbd/WdbeWrmcu/
+cp ../../wdbecmbd/WdbeWrmcu/*.cpp $SRCROOT/wdbecmbd/WdbeWrmcu/
 
