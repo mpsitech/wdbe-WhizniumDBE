@@ -1,10 +1,11 @@
 /**
 	* \file WdbeQCmdARetpar.h
 	* Dbs and XML wrapper for table TblWdbeQCmdARetpar (declarations)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
-	*/
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 5 Dec 2020
+  */
+// IP header --- ABOVE
 
 #ifndef WDBEQCMDARETPAR_H
 #define WDBEQCMDARETPAR_H

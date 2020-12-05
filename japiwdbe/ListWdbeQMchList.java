@@ -1,10 +1,11 @@
 /**
-  * \file ListWdbeQMchList.java
-  * Java API code for record set of table TblWdbeQMchList
-  * \author Alexander Wirthmueller
-  * \date created: 23 Aug 2020
-  * \date modified: 23 Aug 2020
-  */
+	* \file ListWdbeQMchList.java
+	* Java API code for record set of table TblWdbeQMchList
+	* \copyright (C) 2018-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 5 Dec 2020
+	*/
+// IP header --- ABOVE
 
 package apiwdbe;
 
@@ -44,7 +45,7 @@ public class ListWdbeQMchList {
 			clear();
 			
 			for (int i = 0; i < ics.size(); i++) {
-				rec = new WdbeQMchList(i+1, "", "", "");
+				rec = new WdbeQMchList(i+1, "", "");
 
 				if (shorttags.get(i)) s = basexpath + "/row[@jnum='" + ics.get(i).toString() + "']";
 				else s = basexpath + "/WdbeQMchList[@jnum='" + ics.get(i).toString() + "']";

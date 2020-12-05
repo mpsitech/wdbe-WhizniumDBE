@@ -1,10 +1,11 @@
 /**
 	* \file WdbeWrfpgaEhostif.cpp
 	* Wdbe operation processor - write template-specific VHDL code (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
-	*/
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
+  */
+// IP header --- ABOVE
 
 #ifdef WDBECMBD
 	#include <Wdbecmbd.h>
@@ -139,7 +140,7 @@ void WdbeWrfpgaEhostif::writeMdlVhd(
 					dbswdbe->loadUintBySQL("SELECT COUNT(ref) FROM TblWdbeAMCommandInvpar WHERE cmdRefWdbeMCommand = " + to_string(cmd->ref), cnt);
 
 					if (cnt == 0) {
-						outfile << "\treqInv" << StrMod::cap(untmdl->sref) << StrMod::cap(cmd->sref) << " <= '1' when (stateOp=stateOpVoidinv and opbuf(ixOpbufController)=tixVController"
+						outfile << "\treqInv" << StrMod::cap(untmdl->sref) << StrMod::cap(cmd->sref) << " <= '1' when (stateOp=stateOpVoidinv and opbuf(ixOpbufController)=tixV" << Untsref << "Controller"
 									<< StrMod::cap(untmdl->sref) << " and opbuf(ixOpbufCommand)=tixV" << StrMod::cap(untmdl->sref) << "Command" << StrMod::cap(cmd->sref) << ") else '0';" << endl;
 					};
 				};
@@ -167,7 +168,7 @@ void WdbeWrfpgaEhostif::writeMdlVhd(
 						if (first) first = false;
 						else outfile << "\t\t\t\telse";
 
-						outfile << " ackInv" << StrMod::cap(untmdl->sref) << StrMod::cap(cmd->sref) << " when (opbuf(ixOpbufController)=tixVController" << StrMod::cap(untmdl->sref)
+						outfile << " ackInv" << StrMod::cap(untmdl->sref) << StrMod::cap(cmd->sref) << " when (opbuf(ixOpbufController)=tixV" << Untsref << "Controller" << StrMod::cap(untmdl->sref)
 									<< " and opbuf(ixOpbufCommand)=tixV" << StrMod::cap(untmdl->sref) << "Command" << StrMod::cap(cmd->sref) << ")" << endl;
 					};
 				};
@@ -197,7 +198,7 @@ void WdbeWrfpgaEhostif::writeMdlVhd(
 				dbswdbe->loadUintBySQL("SELECT COUNT(ref) FROM TblWdbeAMCommandRetpar WHERE cmdRefWdbeMCommand = " + to_string(cmd->ref), cnt);
 
 				if (cnt == 0) {
-					outfile << "\treqInv" << StrMod::cap(untmdl->sref) << StrMod::cap(cmd->sref) << " <= '1' when (stateOp=stateOpCopyRxB and opbuf(ixOpbufController)=tixVController"
+					outfile << "\treqInv" << StrMod::cap(untmdl->sref) << StrMod::cap(cmd->sref) << " <= '1' when (stateOp=stateOpCopyRxB and opbuf(ixOpbufController)=tixV" << Untsref << "Controller"
 								<< StrMod::cap(untmdl->sref) << " and opbuf(ixOpbufCommand)=tixV" << StrMod::cap(untmdl->sref) << "Command" << StrMod::cap(cmd->sref) << ") else '0';" << endl;
 				};
 			};
@@ -223,7 +224,7 @@ void WdbeWrfpgaEhostif::writeMdlVhd(
 					if (first) first = false;
 					else outfile << "\t\t\t\telse";
 
-					outfile << " ackInv" << StrMod::cap(untmdl->sref) << StrMod::cap(cmd->sref) << " when (opbuf(ixOpbufController)=tixVController" << StrMod::cap(untmdl->sref)
+					outfile << " ackInv" << StrMod::cap(untmdl->sref) << StrMod::cap(cmd->sref) << " when (opbuf(ixOpbufController)=tixV" << Untsref << "Controller" << StrMod::cap(untmdl->sref)
 								<< " and opbuf(ixOpbufCommand)=tixV" << StrMod::cap(untmdl->sref) << "Command" << StrMod::cap(cmd->sref) << ")" << endl;
 				};
 			};
@@ -243,7 +244,7 @@ void WdbeWrfpgaEhostif::writeMdlVhd(
 		if (refsImbsRd.find(imb->ref) != refsImbsRd.end()) {
 			Imbsigsref = getImbsigsref(dbswdbe, imb);
 
-			outfile << "\treq" << Imbsigsref << " <= reqTxbuf when opbuf(ixOpbufBuffer)=tixWBuffer" << StrMod::cap(imb->sref) << " else '0';" << endl;
+			outfile << "\treq" << Imbsigsref << " <= reqTxbuf when opbuf(ixOpbufBuffer)=tixW" << Untsref << "Buffer" << StrMod::cap(imb->sref) << " else '0';" << endl;
 		};
 	};
 	outfile << endl;
@@ -259,7 +260,7 @@ void WdbeWrfpgaEhostif::writeMdlVhd(
 			if (first) first = false;
 			else outfile << "\t\t\t\telse";
 			
-			outfile << " ack" << Imbsigsref << " when opbuf(ixOpbufBuffer)=tixWBuffer" << StrMod::cap(imb->sref) << endl;
+			outfile << " ack" << Imbsigsref << " when opbuf(ixOpbufBuffer)=tixW" << Untsref << "Buffer" << StrMod::cap(imb->sref) << endl;
 		};
 	};
 
@@ -273,7 +274,7 @@ void WdbeWrfpgaEhostif::writeMdlVhd(
 		if (refsImbsRd.find(imb->ref) != refsImbsRd.end()) {
 			Imbsigsref = getImbsigsref(dbswdbe, imb);
 
-			outfile << "\tdne" << Imbsigsref << " <= dneTxbuf when opbuf(ixOpbufBuffer)=tixWBuffer" << StrMod::cap(imb->sref) << " else '0';" << endl;
+			outfile << "\tdne" << Imbsigsref << " <= dneTxbuf when opbuf(ixOpbufBuffer)=tixW" << Untsref << "Buffer" << StrMod::cap(imb->sref) << " else '0';" << endl;
 		};
 	};
 	outfile << endl;
@@ -289,7 +290,7 @@ void WdbeWrfpgaEhostif::writeMdlVhd(
 			if (first) first = false;
 			else outfile << "\t\t\t\telse";
 			
-			outfile << " to_integer(unsigned(avllen" << Imbsigsref << ")) when opbuf(ixOpbufBuffer)=tixWBuffer" << StrMod::cap(imb->sref) << endl;
+			outfile << " to_integer(unsigned(avllen" << Imbsigsref << ")) when opbuf(ixOpbufBuffer)=tixW" << Untsref << "Buffer" << StrMod::cap(imb->sref) << endl;
 		};
 	};
 
@@ -308,8 +309,8 @@ void WdbeWrfpgaEhostif::writeMdlVhd(
 			if (first) first = false;
 			else outfile << "\t\t\t\telse";
 			
-			if (!w32Not8) outfile << " d" << Imbsigsref << " when opbuf(ixOpbufBuffer)=tixWBuffer" << StrMod::cap(imb->sref) << endl;
-			else outfile << " d" << Imbsigsref << "(7 downto 0) & d" << Imbsigsref << "(15 downto 8) & d" << Imbsigsref << "(23 downto 16) & d" << Imbsigsref << "(31 downto 24) when opbuf(ixOpbufBuffer)=tixWBuffer" << StrMod::cap(imb->sref) << endl;
+			if (!w32Not8) outfile << " d" << Imbsigsref << " when opbuf(ixOpbufBuffer)=tixW" << Untsref << "Buffer" << StrMod::cap(imb->sref) << endl;
+			else outfile << " d" << Imbsigsref << "(7 downto 0) & d" << Imbsigsref << "(15 downto 8) & d" << Imbsigsref << "(23 downto 16) & d" << Imbsigsref << "(31 downto 24) when opbuf(ixOpbufBuffer)=tixW" << Untsref << "Buffer" << StrMod::cap(imb->sref) << endl;
 		};
 	};
 
@@ -323,7 +324,7 @@ void WdbeWrfpgaEhostif::writeMdlVhd(
 		if (refsImbsRd.find(imb->ref) != refsImbsRd.end()) {
 			Imbsigsref = getImbsigsref(dbswdbe, imb);
 
-			outfile << "\tstrbD" << Imbsigsref << " <= strbDTxbuf when opbuf(ixOpbufBuffer)=tixWBuffer" << StrMod::cap(imb->sref) << " else '0';" << endl;
+			outfile << "\tstrbD" << Imbsigsref << " <= strbDTxbuf when opbuf(ixOpbufBuffer)=tixW" << Untsref << "Buffer" << StrMod::cap(imb->sref) << " else '0';" << endl;
 		};
 	};
 	outfile << "-- IP impl.op.wiring.txbuf --- IEND" << endl;
@@ -336,7 +337,7 @@ void WdbeWrfpgaEhostif::writeMdlVhd(
 		if (refsImbsWr.find(imb->ref) != refsImbsWr.end()) {
 			Imbsigsref = getImbsigsref(dbswdbe, imb);
 
-			outfile << "\treq" << Imbsigsref << " <= reqRxbuf when opbuf(ixOpbufBuffer)=tixWBuffer" << StrMod::cap(imb->sref) << " else '0';" << endl;
+			outfile << "\treq" << Imbsigsref << " <= reqRxbuf when opbuf(ixOpbufBuffer)=tixW" << Untsref << "Buffer" << StrMod::cap(imb->sref) << " else '0';" << endl;
 		};
 	};
 	outfile << endl;
@@ -352,7 +353,7 @@ void WdbeWrfpgaEhostif::writeMdlVhd(
 			if (first) first = false;
 			else outfile << "\t\t\t\telse";
 			
-			outfile << " ack" << Imbsigsref << " when opbuf(ixOpbufBuffer)=tixWBuffer" << StrMod::cap(imb->sref) << endl;
+			outfile << " ack" << Imbsigsref << " when opbuf(ixOpbufBuffer)=tixW" << Untsref << "Buffer" << StrMod::cap(imb->sref) << endl;
 		};
 	};
 
@@ -366,7 +367,7 @@ void WdbeWrfpgaEhostif::writeMdlVhd(
 		if (refsImbsWr.find(imb->ref) != refsImbsWr.end()) {
 			Imbsigsref = getImbsigsref(dbswdbe, imb);
 
-			outfile << "\tdne" << Imbsigsref << " <= dneRxbuf when opbuf(ixOpbufBuffer)=tixWBuffer" << StrMod::cap(imb->sref) << " else '0';" << endl;
+			outfile << "\tdne" << Imbsigsref << " <= dneRxbuf when opbuf(ixOpbufBuffer)=tixW" << Untsref << "Buffer" << StrMod::cap(imb->sref) << " else '0';" << endl;
 		};
 	};
 	outfile << endl;
@@ -382,7 +383,7 @@ void WdbeWrfpgaEhostif::writeMdlVhd(
 			if (first) first = false;
 			else outfile << "\t\t\t\telse";
 			
-			outfile << " to_integer(unsigned(avllen" << Imbsigsref << ")) when opbuf(ixOpbufBuffer)=tixWBuffer" << StrMod::cap(imb->sref) << endl;
+			outfile << " to_integer(unsigned(avllen" << Imbsigsref << ")) when opbuf(ixOpbufBuffer)=tixW" << Untsref << "Buffer" << StrMod::cap(imb->sref) << endl;
 		};
 	};
 
@@ -408,7 +409,7 @@ void WdbeWrfpgaEhostif::writeMdlVhd(
 		if (refsImbsWr.find(imb->ref) != refsImbsWr.end()) {
 			Imbsigsref = getImbsigsref(dbswdbe, imb);
 
-			outfile << "\tstrbD" << Imbsigsref << " <= strbDRxbuf when opbuf(ixOpbufBuffer)=tixWBuffer" << StrMod::cap(imb->sref) << " else '0';" << endl;
+			outfile << "\tstrbD" << Imbsigsref << " <= strbDRxbuf when opbuf(ixOpbufBuffer)=tixW" << Untsref << "Buffer" << StrMod::cap(imb->sref) << " else '0';" << endl;
 		};
 	};
 	outfile << "-- IP impl.op.wiring.rxbuf --- IEND" << endl;
@@ -455,7 +456,7 @@ void WdbeWrfpgaEhostif::writeMdlVhd(
 								outfile << "\t\t\t\t\t\t\t\tor ";
 							};
 
-							outfile << "(opbuf(ixOpbufController)=tixVController" << StrMod::cap(untmdl->sref) << " and (";
+							outfile << "(opbuf(ixOpbufController)=tixV" << Untsref << "Controller" << StrMod::cap(untmdl->sref) << " and (";
 
 							first2 = false;
 						} else outfile << " or ";
@@ -504,7 +505,7 @@ void WdbeWrfpgaEhostif::writeMdlVhd(
 								outfile << "\t\t\t\t\t\t\t\tor ";
 							};
 
-							outfile << "(opbuf(ixOpbufController)=tixVController" << StrMod::cap(untmdl->sref) << " and (";
+							outfile << "(opbuf(ixOpbufController)=tixV" << Untsref << "Controller" << StrMod::cap(untmdl->sref) << " and (";
 
 							first2 = false;
 						} else outfile << " or ";
@@ -551,7 +552,7 @@ void WdbeWrfpgaEhostif::writeMdlVhd(
 							outfile << "\t\t\t\t\t\t\t\tor ";
 						};
 
-						outfile << "(opbuf(ixOpbufController)=tixVController" << StrMod::cap(untmdl->sref) << " and (";
+						outfile << "(opbuf(ixOpbufController)=tixV" << Untsref << "Controller" << StrMod::cap(untmdl->sref) << " and (";
 
 						first2 = false;
 					} else outfile << " or ";
@@ -592,7 +593,7 @@ void WdbeWrfpgaEhostif::writeMdlVhd(
 						if (first) first = false;
 						else outfile << "els";
 						
-						outfile << "if opbuf(ixOpbufController)=tixVController" << StrMod::cap(untmdl->sref) << " then" << endl;
+						outfile << "if opbuf(ixOpbufController)=tixV" << Untsref << "Controller" << StrMod::cap(untmdl->sref) << " then" << endl;
 					};
 
 					outfile << "\t\t\t\t\t";
@@ -671,7 +672,7 @@ void WdbeWrfpgaEhostif::writeMdlVhd(
 						if (first) first = false;
 						else outfile << "els";
 						
-						outfile << "if opbuf(ixOpbufController)=tixVController" << StrMod::cap(untmdl->sref) << " then" << endl;
+						outfile << "if opbuf(ixOpbufController)=tixV" << Untsref << "Controller" << StrMod::cap(untmdl->sref) << " then" << endl;
 					};
 
 					outfile << "\t\t\t\t\t";
@@ -727,5 +728,6 @@ void WdbeWrfpgaEhostif::writeMdlVhd(
 	outfile << "-- IP impl.op.copyRxA --- IEND" << endl;
 };
 // IP cust --- IEND
+
 
 

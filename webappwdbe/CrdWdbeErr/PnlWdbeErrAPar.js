@@ -1,11 +1,3 @@
-/**
-  * \file PnlWdbeErrAPar.js
-  * web client functionality for panel PnlWdbeErrAPar
-  * \author Alexander Wirthmueller
-  * \date created: 23 Aug 2020
-  * \date modified: 23 Aug 2020
-  */
-
 // --- expand state management
 function minimize(updh) {
 	if (retrieveSi(srcdoc, "StatAppWdbeErrAPar", "srefIxWdbeVExpstate") == "mind") return;

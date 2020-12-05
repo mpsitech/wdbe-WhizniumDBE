@@ -1,10 +1,11 @@
 /**
 	* \file Wdbecmbd.cpp
 	* inter-thread exchange object for Wdbe combined daemon (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
-	*/
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
+  */
+// IP header --- ABOVE
 
 #include "Wdbecmbd.h"
 
@@ -1017,10 +1018,10 @@ DpchEngWdbeAlert* AlrWdbe::prepareAlrAbt(
 	continf.TxtCpt = StrMod::cap(continf.TxtCpt);
 
 	if (ixWdbeVLocale == VecWdbeVLocale::ENUS) {
-		continf.TxtMsg1 = "WhizniumDBE version v1.0.3 released on 23-8-2020";
+		continf.TxtMsg1 = "WhizniumDBE version v1.1.0 released on 5-12-2020";
 		continf.TxtMsg2 = "\\u00a9 MPSI Technologies GmbH";
 		continf.TxtMsg4 = "contributors: Alexander Wirthmueller";
-		continf.TxtMsg6 = "libraries: curl 7.24, jsoncpp 1.8, git2 0.24.0 and apiwzlm 0.9.27";
+		continf.TxtMsg6 = "libraries: apiwzlm 1.0.0, curl 7.65, git2 0.24.0, openssl 1.1.1 and jsoncpp 1.8";
 		continf.TxtMsg8 = "WhizniumDBE implements all functionality of the Whiznium Device Builder's Edition framework for automated code generation and iteration.";
 	};
 
@@ -1277,18 +1278,21 @@ DpchEngWdbe* JobWdbe::getNewDpchEng(
 void JobWdbe::refresh(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
+			, const bool unmute
 		) {
 };
 
 void JobWdbe::refreshWithDpchEng(
 			DbsWdbe* dbswdbe
 			, DpchEngWdbe** dpcheng
+			, const bool unmute
 		) {
 	set<uint> moditems;
 
 	DpchEngWdbe* _dpcheng = NULL;
 
-	refresh(dbswdbe, moditems);
+	refresh(dbswdbe, moditems, unmute);
+	if (muteRefresh) return;
 
 	if (dpcheng) {
 		_dpcheng = getNewDpchEng(moditems);
@@ -1489,8 +1493,6 @@ void JobWdbe::addOp(
 	};
 	if (inv->ixWdbeVDpch == VecWdbeVDpch::DPCHINVWDBEPRCFILECONCAT) {
 		squawk = SqkWdbePrcfile::getSquawkConcat(dbswdbe, (DpchInvWdbePrcfileConcat*) inv);
-	} else if (inv->ixWdbeVDpch == VecWdbeVDpch::DPCHINVWDBEPRCFILEIEXCONV) {
-		squawk = SqkWdbePrcfile::getSquawkIexconv(dbswdbe, (DpchInvWdbePrcfileIexconv*) inv);
 	} else if (inv->ixWdbeVDpch == VecWdbeVDpch::DPCHINVWDBEPRCFILEPLHRPL) {
 		squawk = SqkWdbePrcfile::getSquawkPlhrpl(dbswdbe, (DpchInvWdbePrcfilePlhrpl*) inv);
 	};
@@ -1755,12 +1757,12 @@ void StmgrWdbe::handleCall(
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECPRUPD_REFEQ) {
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBECPRSTD);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECTRUPD_REFEQ) {
-		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBECTRSREF);
-		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBECTRLONG);
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBECTRSTD);
+		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBECTRLONG);
+		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBECTRSREF);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECVRUPD_REFEQ) {
-		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBECVRNO);
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBECVRSTD);
+		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBECVRNO);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEERRUPD_REFEQ) {
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEERRSTD);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEFAMUPD_REFEQ) {
@@ -1776,16 +1778,17 @@ void StmgrWdbe::handleCall(
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEIMBUPD_REFEQ) {
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEIMBSTD);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBELIBUPD_REFEQ) {
-		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBELIBSREF);
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBELIBSTD);
+		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBELIBSREF);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEMCHUPD_REFEQ) {
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEMCHSTD);
+		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEMCHSREF);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEMDLUPD_REFEQ) {
-		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEMDLHSREF);
+		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEMTPSTD);
+		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEMODSTD);
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEMDLSREF);
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEMDLSTD);
-		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEMODSTD);
-		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEMTPSTD);
+		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEMDLHSREF);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEPINUPD_REFEQ) {
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEPINSTD);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEPPHUPD_REFEQ) {
@@ -1798,17 +1801,17 @@ void StmgrWdbe::handleCall(
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEPRSUPD_REFEQ) {
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEPRSSTD);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEPRTUPD_REFEQ) {
-		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEPRTSTD);
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEPRTSREF);
+		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEPRTSTD);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBERLSUPD_REFEQ) {
-		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBERLSLONG);
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBERLSSTD);
+		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBERLSLONG);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBESESUPD_REFEQ) {
-		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBESESMENU);
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBESESSTD);
+		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBESESMENU);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBESIGUPD_REFEQ) {
-		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBESIGSTD);
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBESIGSREF);
+		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBESIGSTD);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBESYSUPD_REFEQ) {
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBESYSSTD);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBETRGUPD_REFEQ) {
@@ -1816,24 +1819,24 @@ void StmgrWdbe::handleCall(
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBETRGSTD);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEUNTUPD_REFEQ) {
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEUNISTD);
-		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBESILSTD);
-		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEUNTSTD);
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEUNTSREF);
+		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEUNTSTD);
+		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBESILSTD);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEUSGUPD_REFEQ) {
-		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEUSGSTD);
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEGROUP);
+		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEUSGSTD);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEUSRUPD_REFEQ) {
-		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEUSRPRS);
-		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEUSRSTD);
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEOWNER);
+		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEUSRSTD);
+		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEUSRPRS);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEVARUPD_REFEQ) {
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEVARSTD);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEVECUPD_REFEQ) {
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEVECSTD);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEVERUPD_REFEQ) {
+		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEVERSTD);
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEVERNO);
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEVERSHORT);
-		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEVERSTD);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEVITUPD_REFEQ) {
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEVITSTD);
 	};
@@ -1912,6 +1915,8 @@ void StmgrWdbe::commit() {
 			xchg->addClstnStmgr(VecWdbeVCall::CALLWDBELIBUPD_REFEQ, jref);
 		} else if (*it == VecWdbeVStub::STUBWDBELIBSTD) {
 			xchg->addClstnStmgr(VecWdbeVCall::CALLWDBELIBUPD_REFEQ, jref);
+		} else if (*it == VecWdbeVStub::STUBWDBEMCHSREF) {
+			xchg->addClstnStmgr(VecWdbeVCall::CALLWDBEMCHUPD_REFEQ, jref);
 		} else if (*it == VecWdbeVStub::STUBWDBEMCHSTD) {
 			xchg->addClstnStmgr(VecWdbeVCall::CALLWDBEMCHUPD_REFEQ, jref);
 		} else if (*it == VecWdbeVStub::STUBWDBEMDLHSREF) {
@@ -2146,7 +2151,7 @@ void XchgWdbecmbd::startMon() {
 	Clstn* clstn = NULL;
 	Preset* preset = NULL;
 
-	mon.start("WhizniumDBE v1.0.3", stgwdbemonitor.ixDbsVDbstype, stgwdbemonitor.dbspath, stgwdbemonitor.dbsname, stgwdbemonitor.ip, stgwdbemonitor.port, stgwdbemonitor.dbsusername, stgwdbemonitor.dbspassword, stgwdbemonitor.username, stgwdbemonitor.password);
+	mon.start("WhizniumDBE v1.1.0", stgwdbemonitor.ixDbsVDbstype, stgwdbemonitor.dbspath, stgwdbemonitor.dbsname, stgwdbemonitor.ip, stgwdbemonitor.port, stgwdbemonitor.dbsusername, stgwdbemonitor.dbspassword, stgwdbemonitor.username, stgwdbemonitor.password);
 
 	rwmJobs.rlock("XchgWdbecmbd", "startMon");
 	for (auto it = jobs.begin(); it != jobs.end(); it++) {
@@ -2213,6 +2218,8 @@ void XchgWdbecmbd::appendToLogfile(
 void XchgWdbecmbd::addReq(
 			ReqWdbe* req
 		) {
+	if (jrefRoot == 0) return;
+
 	mReqs.lock("XchgWdbecmbd", "addReq", "jref=" + to_string(req->jref));
 
 	req->ixVState = ReqWdbe::VecVState::WAITPRC;
@@ -3929,7 +3936,7 @@ void XchgWdbecmbd::addCsjobClaim(
 
 		csjob->srv->lockAccess("XchgWdbecmbd", "addCsjobClaim");
 
-		csjobinfo->mClaims.lock("XchgWdbecmbd", "addCsjobClaim", "jref=" + to_string(csjob->jref));
+		csjobinfo->mClaims.wlock("XchgWdbecmbd", "addCsjobClaim", "jref=" + to_string(csjob->jref));
 
 		auto it = csjobinfo->claims.find(csjob->jref);
 		if (it != csjobinfo->claims.end()) delete it->second;
@@ -3938,7 +3945,7 @@ void XchgWdbecmbd::addCsjobClaim(
 
 		mod = csjob->srv->handleClaim(dbswdbe, csjobinfo->claims, csjob->jref);
 
-		csjobinfo->mClaims.unlock("XchgWdbecmbd", "addCsjobClaim", "jref=" + to_string(csjob->jref));
+		csjobinfo->mClaims.wunlock("XchgWdbecmbd", "addCsjobClaim", "jref=" + to_string(csjob->jref));
 
 		csjob->srv->unlockAccess("XchgWdbecmbd", "addCsjobClaim");
 
@@ -3946,12 +3953,14 @@ void XchgWdbecmbd::addCsjobClaim(
 	};
 };
 
-void XchgWdbecmbd::getCsjobClaim(
+bool XchgWdbecmbd::getCsjobClaim(
 			CsjobWdbe* csjob
 			, bool& takenNotAvailable
 			, bool& fulfilled
 			, bool& run
 		) {
+	bool retval = false;
+
 	Csjobinfo* csjobinfo = NULL;;
 
 	takenNotAvailable = false;
@@ -3963,29 +3972,33 @@ void XchgWdbecmbd::getCsjobClaim(
 
 		csjobinfo = csjobinfos[csjob->ixWdbeVJob];
 
-		csjobinfo->mClaims.lock("XchgWdbecmbd", "getCsjobClaim", "jref=" + to_string(csjob->jref));
+		csjobinfo->mClaims.rlock("XchgWdbecmbd", "getCsjobClaim", "jref=" + to_string(csjob->jref));
 
 		auto it = csjobinfo->claims.find(csjob->jref);
-		if (it != csjobinfo->claims.end()) {
+		retval = (it != csjobinfo->claims.end());
+
+		if (retval) {
 			takenNotAvailable = it->second->takenNotAvailable;
 			fulfilled = it->second->fulfilled;
 			run = it->second->run;
 		};
 
-		csjobinfo->mClaims.unlock("XchgWdbecmbd", "getCsjobClaim", "jref=" + to_string(csjob->jref));
+		csjobinfo->mClaims.runlock("XchgWdbecmbd", "getCsjobClaim", "jref=" + to_string(csjob->jref));
 
 		rwmCsjobinfos.runlock("XchgWdbecmbd", "getCsjobClaim", "jref=" + to_string(csjob->jref));
 	};
+
+	return retval;
 };
 
-void XchgWdbecmbd::getCsjobClaim(
+bool XchgWdbecmbd::getCsjobClaim(
 			CsjobWdbe* csjob
 			, bool& takenNotAvailable
 			, bool& fulfilled
 		) {
 	bool run;
 
-	getCsjobClaim(csjob, takenNotAvailable, fulfilled, run);
+	return getCsjobClaim(csjob, takenNotAvailable, fulfilled, run);
 };
 
 void XchgWdbecmbd::clearCsjobRun(
@@ -4005,7 +4018,7 @@ void XchgWdbecmbd::clearCsjobRun(
 	rwmCsjobinfos.runlock("XchgWdbecmbd", "clearCsjobRun", "srefIxWdbeVJob=" + VecWdbeVJob::getSref(ixWdbeVJob));
 
 	if (csjobinfo) {
-		csjobinfo->mClaims.lock("XchgWdbecmbd", "clearCsjobRun", "srefIxWdbeVJob=" + VecWdbeVJob::getSref(ixWdbeVJob));
+		csjobinfo->mClaims.wlock("XchgWdbecmbd", "clearCsjobRun", "srefIxWdbeVJob=" + VecWdbeVJob::getSref(ixWdbeVJob));
 
 		for (auto it2 = csjobinfo->claims.begin(); it2 != csjobinfo->claims.end(); it2++) {
 			claim = it2->second;
@@ -4016,7 +4029,7 @@ void XchgWdbecmbd::clearCsjobRun(
 			};
 		};
 
-		csjobinfo->mClaims.unlock("XchgWdbecmbd", "clearCsjobRun", "srefIxWdbeVJob=" + VecWdbeVJob::getSref(ixWdbeVJob));
+		csjobinfo->mClaims.wunlock("XchgWdbecmbd", "clearCsjobRun", "srefIxWdbeVJob=" + VecWdbeVJob::getSref(ixWdbeVJob));
 
 		if (mod) triggerCall(dbswdbe, VecWdbeVCall::CALLWDBECLAIMCHG, csjobinfo->jrefSrv);
 	};
@@ -4028,7 +4041,7 @@ void XchgWdbecmbd::removeCsjobClaim(
 		) {
 	Csjobinfo* csjobinfo = NULL;;
 
-	bool mod;
+	bool mod = false;
 
 	if (!csjob->srvNotCli && csjob->srv) {
 		rwmCsjobinfos.rlock("XchgWdbecmbd", "removeCsjobClaim", "jref=" + to_string(csjob->jref));
@@ -4039,17 +4052,17 @@ void XchgWdbecmbd::removeCsjobClaim(
 
 		csjob->srv->lockAccess("XchgWdbecmbd", "removeCsjobClaim");
 
-		csjobinfo->mClaims.lock("XchgWdbecmbd", "removeCsjobClaim", "jref=" + to_string(csjob->jref));
+		csjobinfo->mClaims.wlock("XchgWdbecmbd", "removeCsjobClaim", "jref=" + to_string(csjob->jref));
 
 		auto it = csjobinfo->claims.find(csjob->jref);
 		if (it != csjobinfo->claims.end()) {
 			delete it->second;
 			csjobinfo->claims.erase(it);
+
+			mod = csjob->srv->handleClaim(dbswdbe, csjobinfo->claims, 0);
 		};
 
-		mod = csjob->srv->handleClaim(dbswdbe, csjobinfo->claims, 0);
-
-		csjobinfo->mClaims.unlock("XchgWdbecmbd", "removeCsjobClaim", "jref=" + to_string(csjob->jref));
+		csjobinfo->mClaims.wunlock("XchgWdbecmbd", "removeCsjobClaim", "jref=" + to_string(csjob->jref));
 
 		csjob->srv->unlockAccess("XchgWdbecmbd", "removeCsjobClaim");
 
@@ -4115,10 +4128,15 @@ ubigint XchgWdbecmbd::addWakeup(
 		// delayed callback: generate dedicated wait thread
 		WakeupWdbe* wakeup = new WakeupWdbe(this, wref, jref, sref, deltat, weak);
 
-		res = pthread_create(&timer, NULL, &runWakeup, (void*) wakeup);
+		for (unsigned int i = 0; i < 3; i++) {
+			res = pthread_create(&timer, NULL, &runWakeup, (void*) wakeup);
+			if ((res == 0) || (res != EAGAIN)) break;
+		};
 		if (res != 0) cout << "XchgWdbecmbd::addWakeup() error creating timer thread (" << res << ")" << endl;
-		res = pthread_detach(timer);
-		if (res != 0) cout << "XchgWdbecmbd::addWakeup() error detaching timer thread (" << res << ")" << endl;
+		else {
+			res = pthread_detach(timer);
+			if (res != 0) cout << "XchgWdbecmbd::addWakeup() error detaching timer thread (" << res << ")" << endl;
+		};
 	};
 
 	return(wref);
@@ -4164,4 +4182,6 @@ void XchgWdbecmbd::runExtcall(
 
 	extcall->xchg->addReq(req);
 };
+
+
 

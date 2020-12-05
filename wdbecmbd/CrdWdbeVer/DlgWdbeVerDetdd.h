@@ -1,10 +1,11 @@
 /**
 	* \file DlgWdbeVerDetdd.h
 	* job handler for job DlgWdbeVerDetdd (declarations)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifndef DLGWDBEVERDETDD_H
 #define DLGWDBEVERDETDD_H
@@ -13,8 +14,8 @@
 
 // IP include.cust --- INSERT
 
-#include "JobWdbeIexDdd.h"
 #include "JobWdbeLicense.h"
+#include "JobWdbeIexDdd.h"
 
 #define VecVDlgWdbeVerDetddDit DlgWdbeVerDetdd::VecVDit
 #define VecVDlgWdbeVerDetddDo DlgWdbeVerDetdd::VecVDo
@@ -492,13 +493,13 @@ public:
 		void writeXML(const Sbecore::uint ixWdbeVLocale, xmlTextWriter* wr);
 	};
 
-	bool evalIfiUldActive(DbsWdbe* dbswdbe);
-	bool evalImpButRunActive(DbsWdbe* dbswdbe);
-	bool evalImpButStoActive(DbsWdbe* dbswdbe);
+	bool evalButDneActive(DbsWdbe* dbswdbe);
+	bool evalLfiDldActive(DbsWdbe* dbswdbe);
 	bool evalPprButRunActive(DbsWdbe* dbswdbe);
 	bool evalPprButStoActive(DbsWdbe* dbswdbe);
-	bool evalLfiDldActive(DbsWdbe* dbswdbe);
-	bool evalButDneActive(DbsWdbe* dbswdbe);
+	bool evalImpButRunActive(DbsWdbe* dbswdbe);
+	bool evalImpButStoActive(DbsWdbe* dbswdbe);
+	bool evalIfiUldActive(DbsWdbe* dbswdbe);
 
 public:
 	DlgWdbeVerDetdd(XchgWdbe* xchg, DbsWdbe* dbswdbe, const Sbecore::ubigint jrefSup, const Sbecore::uint ixWdbeVLocale);
@@ -520,8 +521,8 @@ public:
 	Sbecore::Xmlio::Feed feedFDse;
 	Sbecore::Xmlio::Feed feedFSge;
 
-	JobWdbeIexDdd* iex;
 	JobWdbeLicense* license;
+	JobWdbeIexDdd* iex;
 
 	Sbecore::uint ixVDit;
 
@@ -562,7 +563,7 @@ public:
 	void refreshPpr(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems);
 	void refreshLfi(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems);
 
-	void refresh(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems);
+	void refresh(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems, const bool unmute = false);
 
 public:
 
@@ -585,18 +586,18 @@ private:
 
 	void handleUploadInSgeIdle(DbsWdbe* dbswdbe, const std::string& filename);
 
-	std::string handleDownloadInSgeFail(DbsWdbe* dbswdbe);
 	std::string handleDownloadInSgeDone(DbsWdbe* dbswdbe);
+	std::string handleDownloadInSgeFail(DbsWdbe* dbswdbe);
 
 	void handleDpchRetWdbe(DbsWdbe* dbswdbe, DpchRetWdbe* dpchret);
 	void handleDpchRetWdbeModdetWiring(DbsWdbe* dbswdbe, DpchRetWdbeModdetWiring* dpchret);
 
 	void handleTimerInSgePrsidle(DbsWdbe* dbswdbe, const std::string& sref);
 	void handleTimerInSgeImpidle(DbsWdbe* dbswdbe, const std::string& sref);
-	void handleTimerWithSrefMonInSgeImport(DbsWdbe* dbswdbe);
 	void handleTimerWithSrefMonInSgePostprc1(DbsWdbe* dbswdbe);
 	void handleTimerWithSrefMonInSgePostprc2(DbsWdbe* dbswdbe);
 	void handleTimerWithSrefMonInSgePostprc3(DbsWdbe* dbswdbe);
+	void handleTimerWithSrefMonInSgeImport(DbsWdbe* dbswdbe);
 
 private:
 	void changeStage(DbsWdbe* dbswdbe, Sbecore::uint _ixVSge, DpchEngWdbe** dpcheng = NULL);
@@ -643,5 +644,6 @@ private:
 };
 
 #endif
+
 
 

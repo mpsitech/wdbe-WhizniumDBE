@@ -1,10 +1,11 @@
 /**
 	* \file PnlWdbeSil1NBank_evals.cpp
 	* job handler for job PnlWdbeSil1NBank (implementation of availability/activation evaluation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 using namespace std;
 using namespace Sbecore;
@@ -96,4 +97,6 @@ bool PnlWdbeSil1NBank::evalButDeleteActive(
 
 	return(args.back());
 };
+
+
 

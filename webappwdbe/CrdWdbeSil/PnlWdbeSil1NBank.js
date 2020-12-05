@@ -1,11 +1,3 @@
-/**
-  * \file PnlWdbeSil1NBank.js
-  * web client functionality for panel PnlWdbeSil1NBank
-  * \author Alexander Wirthmueller
-  * \date created: 23 Aug 2020
-  * \date modified: 23 Aug 2020
-  */
-
 // --- expand state management
 function minimize(updh) {
 	if (retrieveSi(srcdoc, "StatAppWdbeSil1NBank", "srefIxWdbeVExpstate") == "mind") return;

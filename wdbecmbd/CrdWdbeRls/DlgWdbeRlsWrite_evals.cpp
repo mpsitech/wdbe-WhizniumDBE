@@ -1,16 +1,41 @@
 /**
 	* \file DlgWdbeRlsWrite_evals.cpp
 	* job handler for job DlgWdbeRlsWrite (implementation of availability/activation evaluation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 using namespace std;
 using namespace Sbecore;
 using namespace Xmlio;
 
-bool DlgWdbeRlsWrite::evalCucUldAvail(
+bool DlgWdbeRlsWrite::evalButDneActive(
+			DbsWdbe* dbswdbe
+		) {
+	// sge(idle|fail|done)
+
+	vector<bool> args;
+	bool a, b;
+
+	a = false; a = (ixVSge == VecVSge::IDLE);
+	args.push_back(a);
+	a = false; a = (ixVSge == VecVSge::FAIL);
+	args.push_back(a);
+	a = false; a = (ixVSge == VecVSge::DONE);
+	args.push_back(a);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
+
+	return(args.back());
+};
+
+bool DlgWdbeRlsWrite::evalFiaDldAvail(
 			DbsWdbe* dbswdbe
 		) {
 	// !pre.ixBasereptype()
@@ -26,15 +51,29 @@ bool DlgWdbeRlsWrite::evalCucUldAvail(
 	return(args.back());
 };
 
-bool DlgWdbeRlsWrite::evalCucUldActive(
+bool DlgWdbeRlsWrite::evalFiaDldActive(
 			DbsWdbe* dbswdbe
 		) {
-	// sge(idle)
+	// sge(done)
 
 	vector<bool> args;
 	bool a;
 
-	a = false; a = (ixVSge == VecVSge::IDLE);
+	a = false; a = (ixVSge == VecVSge::DONE);
+	args.push_back(a);
+
+	return(args.back());
+};
+
+bool DlgWdbeRlsWrite::evalLfiDldActive(
+			DbsWdbe* dbswdbe
+		) {
+	// sge(fail)
+
+	vector<bool> args;
+	bool a;
+
+	a = false; a = (ixVSge == VecVSge::FAIL);
 	args.push_back(a);
 
 	return(args.back());
@@ -131,21 +170,7 @@ bool DlgWdbeRlsWrite::evalWrcButStoActive(
 	return(args.back());
 };
 
-bool DlgWdbeRlsWrite::evalLfiDldActive(
-			DbsWdbe* dbswdbe
-		) {
-	// sge(fail)
-
-	vector<bool> args;
-	bool a;
-
-	a = false; a = (ixVSge == VecVSge::FAIL);
-	args.push_back(a);
-
-	return(args.back());
-};
-
-bool DlgWdbeRlsWrite::evalFiaDldAvail(
+bool DlgWdbeRlsWrite::evalCucUldAvail(
 			DbsWdbe* dbswdbe
 		) {
 	// !pre.ixBasereptype()
@@ -161,41 +186,19 @@ bool DlgWdbeRlsWrite::evalFiaDldAvail(
 	return(args.back());
 };
 
-bool DlgWdbeRlsWrite::evalFiaDldActive(
+bool DlgWdbeRlsWrite::evalCucUldActive(
 			DbsWdbe* dbswdbe
 		) {
-	// sge(done)
+	// sge(idle)
 
 	vector<bool> args;
 	bool a;
 
-	a = false; a = (ixVSge == VecVSge::DONE);
-	args.push_back(a);
-
-	return(args.back());
-};
-
-bool DlgWdbeRlsWrite::evalButDneActive(
-			DbsWdbe* dbswdbe
-		) {
-	// sge(idle|fail|done)
-
-	vector<bool> args;
-	bool a, b;
-
 	a = false; a = (ixVSge == VecVSge::IDLE);
 	args.push_back(a);
-	a = false; a = (ixVSge == VecVSge::FAIL);
-	args.push_back(a);
-	a = false; a = (ixVSge == VecVSge::DONE);
-	args.push_back(a);
-	b = args.back(); args.pop_back();
-	a = args.back(); args.pop_back();
-	args.push_back(a || b);
-	b = args.back(); args.pop_back();
-	a = args.back(); args.pop_back();
-	args.push_back(a || b);
 
 	return(args.back());
 };
+
+
 

@@ -1,10 +1,11 @@
 /**
 	* \file WdbeMtpModdetTop_v1_0.h
 	* Wdbe operation processor - add reset and master clock (declarations)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
-	*/
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
+  */
+// IP header --- ABOVE
 
 #ifndef WDBEMTPMODDETTOP_V1_0_H
 #define WDBEMTPMODDETTOP_V1_0_H
@@ -20,4 +21,6 @@ namespace WdbeMtpModdetTop_v1_0 {
 };
 
 #endif
+
+
 

@@ -1,10 +1,11 @@
 /**
 	* \file PnlWdbeMchList.cpp
 	* job handler for job PnlWdbeMchList (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifdef WDBECMBD
 	#include <Wdbecmbd.h>
@@ -94,7 +95,11 @@ DpchEngWdbe* PnlWdbeMchList::getNewDpchEng(
 void PnlWdbeMchList::refresh(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
+			, const bool unmute
 		) {
+	if (muteRefresh && !unmute) return;
+	muteRefresh = true;
+
 	ContInf oldContinf(continf);
 	ContIac oldContiac(contiac);
 
@@ -108,6 +113,8 @@ void PnlWdbeMchList::refresh(
 	// IP refresh --- END
 	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
 	if (contiac.diff(&oldContiac).size() != 0) insert(moditems, DpchEngData::CONTIAC);
+
+	muteRefresh = false;
 };
 
 void PnlWdbeMchList::updatePreset(
@@ -239,19 +246,18 @@ void PnlWdbeMchList::handleDpchAppDataContiac(
 
 	diffitems = _contiac->diff(&contiac);
 
-	muteRefresh = true;
-
 	if (has(diffitems, ContIac::NUMFTOS)) {
-		if ((_contiac->numFTos >= QryWdbeMchList::VecVOrd::SRF) && (_contiac->numFTos <= QryWdbeMchList::VecVOrd::PLA)) {
+		if ((_contiac->numFTos >= QryWdbeMchList::VecVOrd::SUP) && (_contiac->numFTos <= QryWdbeMchList::VecVOrd::SRF)) {
+			muteRefresh = true;
+
 			xchg->addIxPreset(VecWdbeVPreset::PREWDBEIXORD, jref, _contiac->numFTos);
 
 			qry->rerun(dbswdbe);
-			refresh(dbswdbe, moditems);
+
+			refresh(dbswdbe, moditems, true);
 			insert(moditems, {DpchEngData::STATSHRQRY, DpchEngData::STGIACQRY, DpchEngData::RST});
 		};
 	};
-
-	muteRefresh = false;
 
 	insert(moditems, DpchEngData::CONTIAC);
 	*dpcheng = getNewDpchEng(moditems);
@@ -283,16 +289,17 @@ void PnlWdbeMchList::handleDpchAppDataStgiacqry(
 
 	ubigint refSelNew = 0;
 
-	muteRefresh = true;
-
 	if (!diffitems.empty()) {
 		qry->stgiac = *_stgiacqry;
 
 		if (has(diffitems, QryWdbeMchList::StgIac::JNUM)) refSelNew = qry->getRefByJnum(_stgiacqry->jnum);
 
 		if (!has(diffitems, QryWdbeMchList::StgIac::JNUM) || (diffitems.size() > 1)) {
+			muteRefresh = true;
+
 			qry->rerun(dbswdbe);
-			refresh(dbswdbe, moditems);
+
+			refresh(dbswdbe, moditems, true);
 			insert(moditems, {DpchEngData::STATSHRQRY, DpchEngData::RST});
 		};
 
@@ -301,8 +308,6 @@ void PnlWdbeMchList::handleDpchAppDataStgiacqry(
 			xchg->triggerIxRefCall(dbswdbe, VecWdbeVCall::CALLWDBEREFPRESET, jref, VecWdbeVPreset::PREWDBEREFMCH, refSelNew);
 		};
 	};
-
-	muteRefresh = false;
 
 	insert(moditems, DpchEngData::STGIACQRY);
 	*dpcheng = getNewDpchEng(moditems);
@@ -352,9 +357,8 @@ void PnlWdbeMchList::handleDpchAppDoButRefreshClick(
 	muteRefresh = true;
 
 	qry->rerun(dbswdbe, false);
-	refresh(dbswdbe, moditems);
 
-	muteRefresh = false;
+	refresh(dbswdbe, moditems, true);
 
 	insert(moditems, {DpchEngData::STATSHRQRY, DpchEngData::STGIACQRY, DpchEngData::RST});
 	*dpcheng = getNewDpchEng(moditems);
@@ -389,4 +393,6 @@ bool PnlWdbeMchList::handleCallWdbeStatChg(
 	// IP handleCallWdbeStatChg --- END
 	return retval;
 };
+
+
 

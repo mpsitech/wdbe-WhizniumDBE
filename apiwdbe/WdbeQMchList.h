@@ -1,10 +1,11 @@
 /**
 	* \file WdbeQMchList.h
 	* API code for table TblWdbeQMchList (declarations)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
-	*/
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 5 Dec 2020
+  */
+// IP header --- ABOVE
 
 #ifndef WDBEQMCHLIST_H
 #define WDBEQMCHLIST_H
@@ -17,13 +18,12 @@
 class WdbeQMchList {
 
 public:
-	WdbeQMchList(const Sbecore::uint jnum = 0, const std::string sref = "", const std::string srefKPlatform = "", const std::string titSrefKPlatform = "");
+	WdbeQMchList(const Sbecore::uint jnum = 0, const std::string sref = "", const std::string stubSupRefWdbeMMachine = "");
 
 public:
 	Sbecore::uint jnum;
 	std::string sref;
-	std::string srefKPlatform;
-	std::string titSrefKPlatform;
+	std::string stubSupRefWdbeMMachine;
 
 public:
 	bool readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);

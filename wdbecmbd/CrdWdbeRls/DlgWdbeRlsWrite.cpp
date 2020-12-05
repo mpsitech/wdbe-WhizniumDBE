@@ -1,10 +1,11 @@
 /**
 	* \file DlgWdbeRlsWrite.cpp
 	* job handler for job DlgWdbeRlsWrite (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifdef WDBECMBD
 	#include <Wdbecmbd.h>
@@ -52,12 +53,16 @@ DlgWdbeRlsWrite::DlgWdbeRlsWrite(
 	license = new JobWdbeLicense(xchg, dbswdbe, jref, ixWdbeVLocale);
 
 	// IP constructor.cust2 --- IBEGIN
+	vector<ubigint> refs;
+	ubigint ref;
+
 	WdbeMRelease* rls = NULL;
 	WdbeMProject* prj = NULL;
 
 	if (dbswdbe->tblwdbemrelease->loadRecByRef(xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFRLS, jref), &rls)) {
 		ixRlstype = rls->ixVBasetype;
 
+		// find project short
 		if (dbswdbe->tblwdbemproject->loadRecBySQL("SELECT TblWdbeMProject.* FROM TblWdbeMProject, TblWdbeMVersion WHERE TblWdbeMProject.ref = TblWdbeMVersion.refWdbeMProject AND TblWdbeMVersion.ref = "
 					+ to_string(rls->refWdbeMVersion), &prj)) {
 
@@ -70,8 +75,37 @@ DlgWdbeRlsWrite::DlgWdbeRlsWrite(
 			delete prj;
 		};
 
+		// (cross-)compilation parameters
+		if ((ixRlstype == VecWdbeVMReleaseBasetype::DEV) || (ixRlstype == VecWdbeVMReleaseBasetype::EZDEV)) {
+			dbswdbe->tblwdbemmachine->loadHrefsup(rls->refWdbeMMachine, refs);
+
+			dbswdbe->loadRefBySQL("SELECT cchRefWdbeMMachine FROM TblWdbeMMachine WHERE ref = " + to_string(rls->refWdbeMMachine), ref);
+
+			if (ref == 0) {
+				for (unsigned int i = 0; i < refs.size(); i++) {
+					dbswdbe->loadRefBySQL("SELECT cchRefWdbeMMachine FROM TblWdbeMMachine WHERE ref = " + to_string(refs[i]), ref);
+					if (ref != 0) break;
+				};
+			};
+
+			if (ref == 0) {
+				Wdbe::getMchpar(dbswdbe, rls->refWdbeMMachine, refs, "ncore", ncore);
+
+			} else {
+				// cross-compilation
+				Wdbe::getMchpar(dbswdbe, rls->refWdbeMMachine, refs, "sysroot", sysroot);
+
+				cchost = " (" + StubWdbe::getStubMchSref(dbswdbe, ref) + " cross-compilation)";
+				inceq = "=";
+
+				dbswdbe->tblwdbemmachine->loadHrefsup(ref, refs);
+				Wdbe::getMchpar(dbswdbe, ref, refs, "ncore", ncore);
+			};
+		};
+
 		delete rls;
 	};
+
 	// IP constructor.cust2 --- IEND
 
 	set<uint> moditems;
@@ -142,8 +176,10 @@ void DlgWdbeRlsWrite::createFpga(
 	WdbeMRelease* rls = NULL;
 	WdbeMVersion* ver = NULL;
 
-	string author, created, modified;
-	string fpgaroot, reproot;
+	vector<ubigint> hrefsMch;
+
+	string author, created;
+	string reproot;
 
 	vector<string> keys;
 	vector<string> vals;
@@ -180,6 +216,8 @@ void DlgWdbeRlsWrite::createFpga(
 	// --- load basics
 	dbswdbe->tblwdbemrelease->loadRecByRef(xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFRLS, jref), &rls);
 	dbswdbe->tblwdbemversion->loadRecByRef(rls->refWdbeMVersion, &ver);
+
+	dbswdbe->tblwdbemmachine->loadHrefsup(rls->refWdbeMMachine, hrefsMch);
 
 	dbswdbe->tblwdbemunit->loadRstBySQL("SELECT * FROM TblWdbeMUnit WHERE refIxVTbl = " + to_string(VecWdbeVMUnitRefTbl::VER) + " AND refUref = " + to_string(ver->ref) + " AND ixVBasetype = " + to_string(VecWdbeVMUnitBasetype::FPGA)
 				+ " ORDER BY sref ASC", false, unts);
@@ -236,26 +274,22 @@ void DlgWdbeRlsWrite::createFpga(
 
 	author = StubWdbe::getStubPrsStd(dbswdbe, ref);
 
-	// -- created/modified date
+	// -- created date
 	time_t rawtime;
 	time(&rawtime);
 
 	created = StrMod::timetToString(rawtime);
-	modified = StrMod::timetToString(rawtime);
 
-	// -- directories and number of cores
-	dbswdbe->loadStringBySQL("SELECT Val FROM TblWdbeAMMachinePar WHERE refWdbeMMachine = " + to_string(rls->refWdbeMMachine) + " AND x1SrefKKey = 'fpgaroot'", fpgaroot);
-	dbswdbe->loadStringBySQL("SELECT Val FROM TblWdbeAMMachinePar WHERE refWdbeMMachine = " + to_string(rls->refWdbeMMachine) + " AND x1SrefKKey = 'reproot'", reproot);
+	// -- directories
+	Wdbe::getMchpar(dbswdbe, rls->refWdbeMMachine, hrefsMch, "reproot", reproot);
 
 	// --- deployment scripts (WdbeWrfpgaDeploy)
 	keys.resize(0); vals.resize(0);
 	keys.push_back("author"); vals.push_back(author);
 	keys.push_back("created"); vals.push_back(created);
-	keys.push_back("modified"); vals.push_back(modified);
 	keys.push_back("Prjshort"); vals.push_back(Prjshort);
 	keys.push_back("prjshort"); vals.push_back(prjshort);
 	keys.push_back("rlssref"); vals.push_back(rls->sref);
-	keys.push_back("fpgaroot"); vals.push_back(fpgaroot);
 	keys.push_back("reproot"); vals.push_back(reproot);
 
 	keys.push_back("untsref"); vals.push_back("untsref");
@@ -283,7 +317,6 @@ void DlgWdbeRlsWrite::createFpga(
 		keys.resize(0); vals.resize(0);
 		keys.push_back("author"); vals.push_back(author);
 		keys.push_back("created"); vals.push_back(created);
-		keys.push_back("modified"); vals.push_back(modified);
 		keys.push_back("Prjshort"); vals.push_back(Prjshort);
 
 		keys.push_back("Untsref"); vals.push_back("Untsref");
@@ -310,7 +343,6 @@ void DlgWdbeRlsWrite::createFpga(
 		keys.resize(0); vals.resize(0);
 		keys.push_back("author"); vals.push_back(author);
 		keys.push_back("created"); vals.push_back(created);
-		keys.push_back("modified"); vals.push_back(modified);
 
 		keys.push_back("Compsref"); vals.push_back("Compsref");
 		keys.push_back("mdltype"); vals.push_back("mdltype");
@@ -449,8 +481,10 @@ void DlgWdbeRlsWrite::createMcu(
 	WdbeMRelease* rls = NULL;
 	WdbeMVersion* ver = NULL;
 
-	string author, created, modified;
-	string mcuroot, reproot;
+	vector<ubigint> hrefsMch;
+
+	string author, created;
+	string reproot;
 
 	vector<string> keys;
 	vector<string> vals;
@@ -491,6 +525,8 @@ void DlgWdbeRlsWrite::createMcu(
 	// --- load basics
 	dbswdbe->tblwdbemrelease->loadRecByRef(xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFRLS, jref), &rls);
 	dbswdbe->tblwdbemversion->loadRecByRef(rls->refWdbeMVersion, &ver);
+
+	dbswdbe->tblwdbemmachine->loadHrefsup(rls->refWdbeMMachine, hrefsMch);
 
 	dbswdbe->tblwdbemunit->loadRstBySQL("SELECT * FROM TblWdbeMUnit WHERE refIxVTbl = " + to_string(VecWdbeVMUnitRefTbl::VER) + " AND refUref = " + to_string(ver->ref) + " AND ixVBasetype = " + to_string(VecWdbeVMUnitBasetype::MCU)
 				+ " ORDER BY sref ASC", false, unts);
@@ -545,26 +581,22 @@ void DlgWdbeRlsWrite::createMcu(
 
 	author = StubWdbe::getStubPrsStd(dbswdbe, ref);
 
-	// -- created/modified date
+	// -- created date
 	time_t rawtime;
 	time(&rawtime);
 
 	created = StrMod::timetToString(rawtime);
-	modified = StrMod::timetToString(rawtime);
 
 	// -- directories and number of cores
-	dbswdbe->loadStringBySQL("SELECT Val FROM TblWdbeAMMachinePar WHERE refWdbeMMachine = " + to_string(rls->refWdbeMMachine) + " AND x1SrefKKey = 'mcuroot'", mcuroot);
-	dbswdbe->loadStringBySQL("SELECT Val FROM TblWdbeAMMachinePar WHERE refWdbeMMachine = " + to_string(rls->refWdbeMMachine) + " AND x1SrefKKey = 'reproot'", reproot);
+	Wdbe::getMchpar(dbswdbe, rls->refWdbeMMachine, hrefsMch, "reproot", reproot);
 
 	// --- deployment scripts (WdbeWrmcuDeploy)
 	keys.resize(0); vals.resize(0);
 	keys.push_back("author"); vals.push_back(author);
 	keys.push_back("created"); vals.push_back(created);
-	keys.push_back("modified"); vals.push_back(modified);
 	keys.push_back("Prjshort"); vals.push_back(Prjshort);
 	keys.push_back("prjshort"); vals.push_back(prjshort);
 	keys.push_back("rlssref"); vals.push_back(rls->sref);
-	keys.push_back("mcuroot"); vals.push_back(mcuroot);
 	keys.push_back("reproot"); vals.push_back(reproot);
 
 	keys.push_back("untsref"); vals.push_back("untsref");
@@ -581,7 +613,6 @@ void DlgWdbeRlsWrite::createMcu(
 		keys.resize(0); vals.resize(0);
 		keys.push_back("author"); vals.push_back(author);
 		keys.push_back("created"); vals.push_back(created);
-		keys.push_back("modified"); vals.push_back(modified);
 		keys.push_back("Prjshort"); vals.push_back(Prjshort);
 
 		keys.push_back("UNTSREF"); vals.push_back("UNTSREF");
@@ -609,7 +640,6 @@ void DlgWdbeRlsWrite::createMcu(
 		keys.resize(0); vals.resize(0);
 		keys.push_back("author"); vals.push_back(author);
 		keys.push_back("created"); vals.push_back(created);
-		keys.push_back("modified"); vals.push_back(modified);
 
 		keys.push_back("Untsref"); vals.push_back("Untsref");
 		keys.push_back("COMPSREF"); vals.push_back("COMPSREF");
@@ -741,10 +771,11 @@ void DlgWdbeRlsWrite::createDev(
 	WdbeMRelease* rls = NULL;
 	WdbeMVersion* ver = NULL;
 
-	string author, created, modified;
+	vector<ubigint> hrefsMch;
+
+	string author, created;
 	string vermajor, verminor, versub;
-	string rootfs, srcroot, libroot, ncore;
-	string inceq, cchost;
+	string buildroot, libroot;
 
 	vector<string> keys;
 	vector<string> vals;
@@ -779,6 +810,8 @@ void DlgWdbeRlsWrite::createDev(
 	// --- load basics
 	dbswdbe->tblwdbemrelease->loadRecByRef(xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFRLS, jref), &rls);
 	dbswdbe->tblwdbemversion->loadRecByRef(rls->refWdbeMVersion, &ver);
+
+	dbswdbe->tblwdbemmachine->loadHrefsup(rls->refWdbeMMachine, hrefsMch);
 
 	dbswdbe->tblwdbemsystem->loadRstBySQL("SELECT * FROM TblWdbeMSystem WHERE refWdbeMVersion = " + to_string(ver->ref) + " ORDER BY sref ASC", false, syss);
 	dbswdbe->tblwdbemunit->loadRstBySQL("SELECT * FROM TblWdbeMUnit WHERE refIxVTbl = " + to_string(VecWdbeVMUnitRefTbl::VER) + " AND refUref = " + to_string(ver->ref) + " ORDER BY sref ASC", false, unts);
@@ -830,35 +863,25 @@ void DlgWdbeRlsWrite::createDev(
 
 	author = StubWdbe::getStubPrsStd(dbswdbe, ref);
 
-	// -- created/modified date
+	// -- created date
 	time_t rawtime;
 	time(&rawtime);
 
 	created = StrMod::timetToString(rawtime);
-	modified = StrMod::timetToString(rawtime);
 
 	// -- version
 	vermajor = to_string(ver->Major);
 	verminor = to_string(ver->Minor);
 	versub = to_string(ver->Sub);
 
-	// -- directories and number of cores
-	dbswdbe->loadStringBySQL("SELECT Val FROM TblWdbeAMMachinePar WHERE refWdbeMMachine = " + to_string(rls->refWdbeMMachine) + " AND x1SrefKKey = 'rootfs'", rootfs);
-	if (dbswdbe->loadRefBySQL("SELECT cchRefWdbeMMachine FROM TblWdbeMMachine WHERE ref = " + to_string(rls->refWdbeMMachine) + " AND cchRefWdbeMMachine <> 0" , ref)) {
-		inceq = "=";
-		cchost = " (" + StubWdbe::getStubMchStd(dbswdbe, ref) + " cross-compilation)";
-	};
-	dbswdbe->loadStringBySQL("SELECT Val FROM TblWdbeAMMachinePar WHERE refWdbeMMachine = " + to_string(rls->refWdbeMMachine) + " AND x1SrefKKey = 'srcroot'", srcroot);
-	dbswdbe->loadStringBySQL("SELECT Val FROM TblWdbeAMMachinePar WHERE refWdbeMMachine = " + to_string(rls->refWdbeMMachine) + " AND x1SrefKKey = 'libroot'", libroot);
-
-	ncore = "1";
-	dbswdbe->loadStringBySQL("SELECT Val FROM TblWdbeAMMachinePar WHERE refWdbeMMachine = " + to_string(rls->refWdbeMMachine) + " AND x1SrefKKey = 'ncore'", ncore);
+	// -- directories
+	Wdbe::getMchpar(dbswdbe, rls->refWdbeMMachine, hrefsMch, "buildroot", buildroot);
+	Wdbe::getMchpar(dbswdbe, rls->refWdbeMMachine, hrefsMch, "libroot", libroot);
 
 	// --- deployment scripts (WdbeWrdevDeploy)
 	keys.resize(0); vals.resize(0);
 	keys.push_back("author"); vals.push_back(author);
 	keys.push_back("created"); vals.push_back(created);
-	keys.push_back("modified"); vals.push_back(modified);
 
 	keys.push_back("inceq"); vals.push_back(inceq);
 	keys.push_back("ez"); vals.push_back("");
@@ -868,8 +891,8 @@ void DlgWdbeRlsWrite::createDev(
 	keys.push_back("rlssref"); vals.push_back(rls->sref);
 	keys.push_back("cchost"); vals.push_back(cchost);
 
-	keys.push_back("rootfs"); vals.push_back(rootfs);
-	keys.push_back("srcroot"); vals.push_back(srcroot);
+	keys.push_back("sysroot"); vals.push_back(sysroot);
+	keys.push_back("buildroot"); vals.push_back(buildroot);
 	keys.push_back("libroot"); vals.push_back(libroot);
 	keys.push_back("ncore"); vals.push_back(ncore);
 
@@ -884,7 +907,6 @@ void DlgWdbeRlsWrite::createDev(
 		keys.resize(0); vals.resize(0);
 		keys.push_back("author"); vals.push_back(author);
 		keys.push_back("created"); vals.push_back(created);
-		keys.push_back("modified"); vals.push_back(modified);
 		keys.push_back("PRJSHORT"); vals.push_back(PRJSHORT);
 		keys.push_back("Prjshort"); vals.push_back(Prjshort);
 		keys.push_back("vermajor"); vals.push_back(vermajor);
@@ -901,7 +923,6 @@ void DlgWdbeRlsWrite::createDev(
 		keys.resize(0); vals.resize(0);
 		keys.push_back("author"); vals.push_back(author);
 		keys.push_back("created"); vals.push_back(created);
-		keys.push_back("modified"); vals.push_back(modified);
 		keys.push_back("Prjshort"); vals.push_back(Prjshort);
 
 		keys.push_back("SYSSREF"); vals.push_back("SYSSREF");
@@ -940,7 +961,6 @@ void DlgWdbeRlsWrite::createDev(
 		keys.resize(0); vals.resize(0);
 		keys.push_back("author"); vals.push_back(author);
 		keys.push_back("created"); vals.push_back(created);
-		keys.push_back("modified"); vals.push_back(modified);
 		keys.push_back("Prjshort"); vals.push_back(Prjshort);
 
 		keys.push_back("Untsref"); vals.push_back("Untsref");
@@ -968,7 +988,6 @@ void DlgWdbeRlsWrite::createDev(
 		keys.resize(0); vals.resize(0);
 		keys.push_back("author"); vals.push_back(author);
 		keys.push_back("created"); vals.push_back(created);
-		keys.push_back("modified"); vals.push_back(modified);
 		keys.push_back("Prjshort"); vals.push_back(Prjshort);
 
 		keys.push_back("mdlsref"); vals.push_back("mdlsref");
@@ -1019,10 +1038,11 @@ void DlgWdbeRlsWrite::createEzdev(
 	WdbeMRelease* rls = NULL;
 	WdbeMVersion* ver = NULL;
 
-	string author, created, modified;
+	vector<ubigint> hrefsMch;
+
+	string author, created;
 	string vermajor, verminor, versub;
-	string rootfs, srcroot, libroot, ncore;
-	string inceq, cchost;
+	string buildroot, libroot;
 
 	vector<string> keys;
 	vector<string> vals;
@@ -1054,6 +1074,8 @@ void DlgWdbeRlsWrite::createEzdev(
 	// --- load basics
 	dbswdbe->tblwdbemrelease->loadRecByRef(xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFRLS, jref), &rls);
 	dbswdbe->tblwdbemversion->loadRecByRef(rls->refWdbeMVersion, &ver);
+
+	dbswdbe->tblwdbemmachine->loadHrefsup(rls->refWdbeMMachine, hrefsMch);
 
 	if (Prjeasy) dbswdbe->tblwdbemunit->loadRstBySQL("SELECT * FROM TblWdbeMUnit WHERE refIxVTbl = " + to_string(VecWdbeVMUnitRefTbl::VER) + " AND refUref = " + to_string(ver->ref) + " ORDER BY sref ASC", false, unts);
 	else dbswdbe->tblwdbemunit->loadRstBySQL("SELECT * FROM TblWdbeMUnit WHERE refIxVTbl = " + to_string(VecWdbeVMUnitRefTbl::VER) + " AND refUref = " + to_string(ver->ref) + " AND Easy = 1 ORDER BY sref ASC", false, unts);
@@ -1101,35 +1123,25 @@ void DlgWdbeRlsWrite::createEzdev(
 
 	author = StubWdbe::getStubPrsStd(dbswdbe, ref);
 
-	// -- created/modified date
+	// -- created date
 	time_t rawtime;
 	time(&rawtime);
 
 	created = StrMod::timetToString(rawtime);
-	modified = StrMod::timetToString(rawtime);
 
 	// -- version
 	vermajor = to_string(ver->Major);
 	verminor = to_string(ver->Minor);
 	versub = to_string(ver->Sub);
 
-	// -- directories and number of cores
-	dbswdbe->loadStringBySQL("SELECT Val FROM TblWdbeAMMachinePar WHERE refWdbeMMachine = " + to_string(rls->refWdbeMMachine) + " AND x1SrefKKey = 'rootfs'", rootfs);
-	if (dbswdbe->loadRefBySQL("SELECT cchRefWdbeMMachine FROM TblWdbeMMachine WHERE ref = " + to_string(rls->refWdbeMMachine) + " AND cchRefWdbeMMachine <> 0" , ref)) {
-		inceq = "=";
-		cchost = " (" + StubWdbe::getStubMchStd(dbswdbe, ref) + " cross-compilation)";
-	};
-	dbswdbe->loadStringBySQL("SELECT Val FROM TblWdbeAMMachinePar WHERE refWdbeMMachine = " + to_string(rls->refWdbeMMachine) + " AND x1SrefKKey = 'srcroot'", srcroot);
-	dbswdbe->loadStringBySQL("SELECT Val FROM TblWdbeAMMachinePar WHERE refWdbeMMachine = " + to_string(rls->refWdbeMMachine) + " AND x1SrefKKey = 'libroot'", libroot);
-
-	ncore = "1";
-	dbswdbe->loadStringBySQL("SELECT Val FROM TblWdbeAMMachinePar WHERE refWdbeMMachine = " + to_string(rls->refWdbeMMachine) + " AND x1SrefKKey = 'ncore'", ncore);
+	// -- directories
+	Wdbe::getMchpar(dbswdbe, rls->refWdbeMMachine, hrefsMch, "buildroot", buildroot);
+	Wdbe::getMchpar(dbswdbe, rls->refWdbeMMachine, hrefsMch, "libroot", libroot);
 
 	// --- deployment scripts (WdbeWrdevDeploy)
 	keys.resize(0); vals.resize(0);
 	keys.push_back("author"); vals.push_back(author);
 	keys.push_back("created"); vals.push_back(created);
-	keys.push_back("modified"); vals.push_back(modified);
 
 	keys.push_back("inceq"); vals.push_back(inceq);
 	keys.push_back("ez"); vals.push_back("ez");
@@ -1139,8 +1151,8 @@ void DlgWdbeRlsWrite::createEzdev(
 	keys.push_back("rlssref"); vals.push_back(rls->sref);
 	keys.push_back("cchost"); vals.push_back(cchost);
 
-	keys.push_back("rootfs"); vals.push_back(rootfs);
-	keys.push_back("srcroot"); vals.push_back(srcroot);
+	keys.push_back("sysroot"); vals.push_back(sysroot);
+	keys.push_back("buildroot"); vals.push_back(buildroot);
 	keys.push_back("libroot"); vals.push_back(libroot);
 	keys.push_back("ncore"); vals.push_back(ncore);
 
@@ -1155,7 +1167,6 @@ void DlgWdbeRlsWrite::createEzdev(
 		keys.resize(0); vals.resize(0);
 		keys.push_back("author"); vals.push_back(author);
 		keys.push_back("created"); vals.push_back(created);
-		keys.push_back("modified"); vals.push_back(modified);
 		keys.push_back("PRJSHORT"); vals.push_back(PRJSHORT);
 		keys.push_back("Prjshort"); vals.push_back(Prjshort);
 		keys.push_back("vermajor"); vals.push_back(vermajor);
@@ -1173,7 +1184,6 @@ void DlgWdbeRlsWrite::createEzdev(
 		keys.resize(0); vals.resize(0);
 		keys.push_back("author"); vals.push_back(author);
 		keys.push_back("created"); vals.push_back(created);
-		keys.push_back("modified"); vals.push_back(modified);
 		keys.push_back("Prjshort"); vals.push_back(Prjshort);
 
 		keys.push_back("Untsref"); vals.push_back("Untsref");
@@ -1232,7 +1242,6 @@ void DlgWdbeRlsWrite::createEzdev(
 		keys.resize(0); vals.resize(0);
 		keys.push_back("author"); vals.push_back(author);
 		keys.push_back("created"); vals.push_back(created);
-		keys.push_back("modified"); vals.push_back(modified);
 		keys.push_back("Prjshort"); vals.push_back(Prjshort);
 
 		keys.push_back("mdlsref"); vals.push_back("mdlsref");
@@ -1344,8 +1353,8 @@ void DlgWdbeRlsWrite::refreshWrc(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
 		) {
-	ContInfWrc oldContinfwrc(continfwrc);
 	StatShrWrc oldStatshrwrc(statshrwrc);
+	ContInfWrc oldContinfwrc(continfwrc);
 
 	// IP refreshWrc --- RBEGIN
 	// continfwrc
@@ -1357,16 +1366,16 @@ void DlgWdbeRlsWrite::refreshWrc(
 	statshrwrc.ButStoActive = evalWrcButStoActive(dbswdbe);
 
 	// IP refreshWrc --- REND
-	if (continfwrc.diff(&oldContinfwrc).size() != 0) insert(moditems, DpchEngData::CONTINFWRC);
 	if (statshrwrc.diff(&oldStatshrwrc).size() != 0) insert(moditems, DpchEngData::STATSHRWRC);
+	if (continfwrc.diff(&oldContinfwrc).size() != 0) insert(moditems, DpchEngData::CONTINFWRC);
 };
 
 void DlgWdbeRlsWrite::refreshLfi(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
 		) {
-	StatShrLfi oldStatshrlfi(statshrlfi);
 	ContInfLfi oldContinflfi(continflfi);
+	StatShrLfi oldStatshrlfi(statshrlfi);
 
 	// IP refreshLfi --- RBEGIN
 	// statshrlfi
@@ -1376,16 +1385,16 @@ void DlgWdbeRlsWrite::refreshLfi(
 	continflfi.Dld = "log.txt";
 
 	// IP refreshLfi --- REND
-	if (statshrlfi.diff(&oldStatshrlfi).size() != 0) insert(moditems, DpchEngData::STATSHRLFI);
 	if (continflfi.diff(&oldContinflfi).size() != 0) insert(moditems, DpchEngData::CONTINFLFI);
+	if (statshrlfi.diff(&oldStatshrlfi).size() != 0) insert(moditems, DpchEngData::STATSHRLFI);
 };
 
 void DlgWdbeRlsWrite::refreshFia(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
 		) {
-	StatShrFia oldStatshrfia(statshrfia);
 	ContInfFia oldContinffia(continffia);
+	StatShrFia oldStatshrfia(statshrfia);
 
 	// IP refreshFia --- RBEGIN
 	// statshrfia
@@ -1395,38 +1404,44 @@ void DlgWdbeRlsWrite::refreshFia(
 	continffia.Dld = StubWdbe::getStubRlsStd(dbswdbe, xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFRLS, jref)) + ".tgz";
 
 	// IP refreshFia --- REND
-	if (statshrfia.diff(&oldStatshrfia).size() != 0) insert(moditems, DpchEngData::STATSHRFIA);
 	if (continffia.diff(&oldContinffia).size() != 0) insert(moditems, DpchEngData::CONTINFFIA);
+	if (statshrfia.diff(&oldStatshrfia).size() != 0) insert(moditems, DpchEngData::STATSHRFIA);
 };
 
 void DlgWdbeRlsWrite::refresh(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
+			, const bool unmute
 		) {
-	ContInf oldContinf(continf);
-	ContIac oldContiac(contiac);
+	if (muteRefresh && !unmute) return;
+	muteRefresh = true;
+
 	StatShr oldStatshr(statshr);
+	ContIac oldContiac(contiac);
+	ContInf oldContinf(continf);
 
 	// IP refresh --- BEGIN
-	// continf
-	continf.numFSge = ixVSge;
+	// statshr
+	statshr.ButDneActive = evalButDneActive(dbswdbe);
 
 	// contiac
 	contiac.numFDse = ixVDit;
 
-	// statshr
-	statshr.ButDneActive = evalButDneActive(dbswdbe);
+	// continf
+	continf.numFSge = ixVSge;
 
 	// IP refresh --- END
-	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
-	if (contiac.diff(&oldContiac).size() != 0) insert(moditems, DpchEngData::CONTIAC);
 	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
+	if (contiac.diff(&oldContiac).size() != 0) insert(moditems, DpchEngData::CONTIAC);
+	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
 
 	refreshDet(dbswdbe, moditems);
 	refreshCuc(dbswdbe, moditems);
 	refreshWrc(dbswdbe, moditems);
 	refreshLfi(dbswdbe, moditems);
 	refreshFia(dbswdbe, moditems);
+
+	muteRefresh = false;
 };
 
 void DlgWdbeRlsWrite::handleRequest(
@@ -1765,7 +1780,7 @@ void DlgWdbeRlsWrite::changeStage(
 
 			setStage(dbswdbe, _ixVSge);
 			reenter = false;
-			if (!muteRefresh) refreshWithDpchEng(dbswdbe, dpcheng); // IP changeStage.refresh1 --- LINE
+			refreshWithDpchEng(dbswdbe, dpcheng); // IP changeStage.refresh1 --- LINE
 		};
 
 		switch (_ixVSge) {
@@ -2445,5 +2460,6 @@ void DlgWdbeRlsWrite::leaveSgeDone(
 		) {
 	// IP leaveSgeDone --- INSERT
 };
+
 
 

@@ -1,10 +1,11 @@
 /**
 	* \file WdbeWrfpgaBase.cpp
 	* Wdbe operation processor - write VHDL/UCF/XDC code basics (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
-	*/
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
+  */
+// IP header --- ABOVE
 
 #ifdef WDBECMBD
 	#include <Wdbecmbd.h>
@@ -397,9 +398,32 @@ void WdbeWrfpgaBase::writeUntVhd(
 	if (unt->Easy) {
 		// vectors associated with unit or controller command sets
 		dbswdbe->tblwdbemvector->loadRstBySQL("SELECT * FROM TblWdbeMVector WHERE hkIxVTbl = " + to_string(VecWdbeVMVectorHkTbl::UNT) + " AND hkUref = " + to_string(unt->ref) + " ORDER BY sref ASC", false, vecs);
+
+		for (unsigned int i = 0; i < vecs.nodes.size(); i++) {
+			vec = vecs.nodes[i];
+
+			if (i != 0) outfile << endl;
+
+			dbswdbe->tblwdbemvectoritem->loadRstByVec(vec->ref, false, vits);
+
+			if (vec->ixVBasetype == VecWdbeVMVectorBasetype::IXLIN) {
+				for (unsigned int j = 0; j < vits.nodes.size(); j++) {
+					vit = vits.nodes[j];
+					outfile << "\tconstant ix" << vec->sref.substr(3, 1) << vec->sref.substr(3+1+4) << StrMod::cap(vit->sref) << ": natural := " << vit->vecNum << ";" << endl;
+				};
+			} else {
+				for (unsigned int j = 0; j < vits.nodes.size(); j++) {
+					vit = vits.nodes[j];
+
+					// ex. VecWSimdArtyBuffer -> tixWArtyBuffer...
+					outfile << "\tconstant tix" << vec->sref.substr(3, 1) << vec->sref.substr(3+1+4) << StrMod::cap(vit->sref) << ": std_logic_vector(7 downto 0) := x\"" << Wdbe::binToHex(vit->vecNum) << "\";" << endl;
+				};
+			};
+		};
+
 		dbswdbe->tblwdbemvector->loadRstBySQL("SELECT TblWdbeMVector.* FROM TblWdbeMModule, TblWdbeMVector WHERE TblWdbeMModule.hkIxVTbl = " + to_string(VecWdbeVMModuleHkTbl::UNT) + " AND TblWdbeMModule.hkUref = "
 					+ to_string(unt->ref) + " AND TblWdbeMModule.ixVBasetype = " + to_string(VecWdbeVMModuleBasetype::ECTR) + " AND TblWdbeMVector.hkIxVTbl = " + to_string(VecWdbeVMVectorHkTbl::CTR)
-					+ " AND TblWdbeMVector.hkUref = TblWdbeMModule.refWdbeMController AND TblWdbeMVector.sref LIKE 'VecV%Command' ORDER BY TblWdbeMVector.sref ASC", true, vecs);
+					+ " AND TblWdbeMVector.hkUref = TblWdbeMModule.refWdbeMController AND TblWdbeMVector.sref LIKE 'VecV%Command' ORDER BY TblWdbeMVector.sref ASC", false, vecs);
 
 		for (unsigned int i = 0; i < vecs.nodes.size(); i++) {
 			vec = vecs.nodes[i];
@@ -416,6 +440,8 @@ void WdbeWrfpgaBase::writeUntVhd(
 			} else {
 				for (unsigned int j = 0; j < vits.nodes.size(); j++) {
 					vit = vits.nodes[j];
+
+					// ex. VecVSimdArtyCoulcntCommand -> tixVCoulcntCommand...
 					outfile << "\tconstant tix" << vec->sref.substr(3, 1) << vec->sref.substr(3+1+4+4) << StrMod::cap(vit->sref) << ": std_logic_vector(7 downto 0) := x\"" << Wdbe::binToHex(vit->vecNum) << "\";" << endl;
 				};
 			};
@@ -485,5 +511,6 @@ void WdbeWrfpgaBase::writeUntVhd(
 	outfile << "-- IP untpkgs --- IEND" << endl;
 };
 // IP cust --- IEND
+
 
 

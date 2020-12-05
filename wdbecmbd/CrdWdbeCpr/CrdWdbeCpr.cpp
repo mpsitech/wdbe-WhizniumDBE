@@ -1,10 +1,11 @@
 /**
 	* \file CrdWdbeCpr.cpp
 	* job handler for job CrdWdbeCpr (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifdef WDBECMBD
 	#include <Wdbecmbd.h>
@@ -42,10 +43,10 @@ CrdWdbeCpr::CrdWdbeCpr(
 	feedFSge.tag = "FeedFSge";
 	VecVSge::fillFeed(feedFSge);
 
-	dlgnew = NULL;
-	pnlrec = NULL;
-	pnlheadbar = NULL;
 	pnllist = NULL;
+	pnlheadbar = NULL;
+	pnlrec = NULL;
+	dlgnew = NULL;
 
 	// IP constructor.cust1 --- INSERT
 
@@ -54,9 +55,9 @@ CrdWdbeCpr::CrdWdbeCpr(
 	// initialize according to ref
 	changeRef(dbswdbe, jref, ((ref + 1) == 0) ? 0 : ref, false);
 
-	pnlrec = new PnlWdbeCprRec(xchg, dbswdbe, jref, ixWdbeVLocale);
-	pnlheadbar = new PnlWdbeCprHeadbar(xchg, dbswdbe, jref, ixWdbeVLocale);
 	pnllist = new PnlWdbeCprList(xchg, dbswdbe, jref, ixWdbeVLocale);
+	pnlheadbar = new PnlWdbeCprHeadbar(xchg, dbswdbe, jref, ixWdbeVLocale);
+	pnlrec = new PnlWdbeCprRec(xchg, dbswdbe, jref, ixWdbeVLocale);
 
 	// IP constructor.cust2 --- INSERT
 
@@ -74,9 +75,9 @@ CrdWdbeCpr::CrdWdbeCpr(
 
 	changeStage(dbswdbe, VecVSge::IDLE);
 
-	xchg->addClstn(VecWdbeVCall::CALLWDBEDLGCLOSE, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecWdbeVCall::CALLWDBESTATCHG, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBEREFPRESET, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBESTATCHG, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBEDLGCLOSE, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -111,7 +112,11 @@ DpchEngWdbe* CrdWdbeCpr::getNewDpchEng(
 void CrdWdbeCpr::refresh(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
+			, const bool unmute
 		) {
+	if (muteRefresh && !unmute) return;
+	muteRefresh = true;
+
 	ContInf oldContinf(continf);
 	StatShr oldStatshr(statshr);
 
@@ -127,6 +132,8 @@ void CrdWdbeCpr::refresh(
 	// IP refresh --- END
 	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
 	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
+
+	muteRefresh = false;
 };
 
 void CrdWdbeCpr::changeRef(
@@ -260,39 +267,13 @@ void CrdWdbeCpr::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBEDLGCLOSE) {
-		call->abort = handleCallWdbeDlgClose(dbswdbe, call->jref);
+	if (call->ixVCall == VecWdbeVCall::CALLWDBEREFPRESET) {
+		call->abort = handleCallWdbeRefPreSet(dbswdbe, call->jref, call->argInv.ix, call->argInv.ref);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBESTATCHG) {
 		call->abort = handleCallWdbeStatChg(dbswdbe, call->jref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEREFPRESET) {
-		call->abort = handleCallWdbeRefPreSet(dbswdbe, call->jref, call->argInv.ix, call->argInv.ref);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEDLGCLOSE) {
+		call->abort = handleCallWdbeDlgClose(dbswdbe, call->jref);
 	};
-};
-
-bool CrdWdbeCpr::handleCallWdbeDlgClose(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-
-	if (dlgnew) {
-		delete dlgnew;
-		dlgnew = NULL;
-		statshr.jrefDlgnew = 0;
-
-		xchg->submitDpch(getNewDpchEng({DpchEngData::STATSHR}));
-	};
-
-	return retval;
-};
-
-bool CrdWdbeCpr::handleCallWdbeStatChg(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-	if (jrefTrig == pnlrec->jref) if ((pnllist->statshr.ixWdbeVExpstate == VecWdbeVExpstate::REGD) && (pnlrec->statshr.ixWdbeVExpstate == VecWdbeVExpstate::REGD)) pnllist->minimize(dbswdbe, true);
-	return retval;
 };
 
 bool CrdWdbeCpr::handleCallWdbeRefPreSet(
@@ -317,6 +298,32 @@ bool CrdWdbeCpr::handleCallWdbeRefPreSet(
 	return retval;
 };
 
+bool CrdWdbeCpr::handleCallWdbeStatChg(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+	if (jrefTrig == pnlrec->jref) if ((pnllist->statshr.ixWdbeVExpstate == VecWdbeVExpstate::REGD) && (pnlrec->statshr.ixWdbeVExpstate == VecWdbeVExpstate::REGD)) pnllist->minimize(dbswdbe, true);
+	return retval;
+};
+
+bool CrdWdbeCpr::handleCallWdbeDlgClose(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+
+	if (dlgnew) {
+		delete dlgnew;
+		dlgnew = NULL;
+		statshr.jrefDlgnew = 0;
+
+		xchg->submitDpch(getNewDpchEng({DpchEngData::STATSHR}));
+	};
+
+	return retval;
+};
+
 void CrdWdbeCpr::changeStage(
 			DbsWdbe* dbswdbe
 			, uint _ixVSge
@@ -333,7 +340,7 @@ void CrdWdbeCpr::changeStage(
 
 			setStage(dbswdbe, _ixVSge);
 			reenter = false;
-			if (!muteRefresh) refreshWithDpchEng(dbswdbe, dpcheng); // IP changeStage.refresh1 --- LINE
+			refreshWithDpchEng(dbswdbe, dpcheng); // IP changeStage.refresh1 --- LINE
 		};
 
 		switch (_ixVSge) {
@@ -389,4 +396,6 @@ void CrdWdbeCpr::leaveSgeAlrwdbeabt(
 		) {
 	// IP leaveSgeAlrwdbeabt --- INSERT
 };
+
+
 

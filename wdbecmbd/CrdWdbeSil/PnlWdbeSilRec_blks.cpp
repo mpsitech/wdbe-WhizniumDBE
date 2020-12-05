@@ -1,10 +1,11 @@
 /**
 	* \file PnlWdbeSilRec_blks.cpp
 	* job handler for job PnlWdbeSilRec (implementation of blocks)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 using namespace std;
 using namespace Sbecore;
@@ -100,8 +101,8 @@ void PnlWdbeSilRec::StatApp::writeXML(
 			, const bool initdone1NBank
 			, const bool initdoneFwd1NController
 			, const bool initdone1NTarget
-			, const bool initdoneSil1NUnit
 			, const bool initdone1NPeripheral
+			, const bool initdoneSil1NUnit
 			, const bool initdoneRef1NCommand
 			, const bool initdoneHk1NModule
 			, const bool initdoneHk1NVector
@@ -118,8 +119,8 @@ void PnlWdbeSilRec::StatApp::writeXML(
 		writeBoolAttr(wr, itemtag, "sref", "initdone1NBank", initdone1NBank);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneFwd1NController", initdoneFwd1NController);
 		writeBoolAttr(wr, itemtag, "sref", "initdone1NTarget", initdone1NTarget);
-		writeBoolAttr(wr, itemtag, "sref", "initdoneSil1NUnit", initdoneSil1NUnit);
 		writeBoolAttr(wr, itemtag, "sref", "initdone1NPeripheral", initdone1NPeripheral);
+		writeBoolAttr(wr, itemtag, "sref", "initdoneSil1NUnit", initdoneSil1NUnit);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneRef1NCommand", initdoneRef1NCommand);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneHk1NModule", initdoneHk1NModule);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneHk1NVector", initdoneHk1NVector);
@@ -137,8 +138,8 @@ PnlWdbeSilRec::StatShr::StatShr(
 			, const ubigint jref1NBank
 			, const ubigint jrefFwd1NController
 			, const ubigint jref1NTarget
-			, const ubigint jrefSil1NUnit
 			, const ubigint jref1NPeripheral
+			, const ubigint jrefSil1NUnit
 			, const ubigint jrefRef1NCommand
 			, const ubigint jrefHk1NModule
 			, const ubigint jrefHk1NVector
@@ -152,15 +153,15 @@ PnlWdbeSilRec::StatShr::StatShr(
 	this->jref1NBank = jref1NBank;
 	this->jrefFwd1NController = jrefFwd1NController;
 	this->jref1NTarget = jref1NTarget;
-	this->jrefSil1NUnit = jrefSil1NUnit;
 	this->jref1NPeripheral = jref1NPeripheral;
+	this->jrefSil1NUnit = jrefSil1NUnit;
 	this->jrefRef1NCommand = jrefRef1NCommand;
 	this->jrefHk1NModule = jrefHk1NModule;
 	this->jrefHk1NVector = jrefHk1NVector;
 	this->jrefRef1NError = jrefRef1NError;
 	this->ButRegularizeActive = ButRegularizeActive;
 
-	mask = {IXWDBEVEXPSTATE, JREFDETAIL, JREF1NBANK, JREFFWD1NCONTROLLER, JREF1NTARGET, JREFSIL1NUNIT, JREF1NPERIPHERAL, JREFREF1NCOMMAND, JREFHK1NMODULE, JREFHK1NVECTOR, JREFREF1NERROR, BUTREGULARIZEACTIVE};
+	mask = {IXWDBEVEXPSTATE, JREFDETAIL, JREF1NBANK, JREFFWD1NCONTROLLER, JREF1NTARGET, JREF1NPERIPHERAL, JREFSIL1NUNIT, JREFREF1NCOMMAND, JREFHK1NMODULE, JREFHK1NVECTOR, JREFREF1NERROR, BUTREGULARIZEACTIVE};
 };
 
 void PnlWdbeSilRec::StatShr::writeXML(
@@ -180,8 +181,8 @@ void PnlWdbeSilRec::StatShr::writeXML(
 		writeStringAttr(wr, itemtag, "sref", "scrJref1NBank", Scr::scramble(jref1NBank));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefFwd1NController", Scr::scramble(jrefFwd1NController));
 		writeStringAttr(wr, itemtag, "sref", "scrJref1NTarget", Scr::scramble(jref1NTarget));
-		writeStringAttr(wr, itemtag, "sref", "scrJrefSil1NUnit", Scr::scramble(jrefSil1NUnit));
 		writeStringAttr(wr, itemtag, "sref", "scrJref1NPeripheral", Scr::scramble(jref1NPeripheral));
+		writeStringAttr(wr, itemtag, "sref", "scrJrefSil1NUnit", Scr::scramble(jrefSil1NUnit));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefRef1NCommand", Scr::scramble(jrefRef1NCommand));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefHk1NModule", Scr::scramble(jrefHk1NModule));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefHk1NVector", Scr::scramble(jrefHk1NVector));
@@ -200,8 +201,8 @@ set<uint> PnlWdbeSilRec::StatShr::comm(
 	if (jref1NBank == comp->jref1NBank) insert(items, JREF1NBANK);
 	if (jrefFwd1NController == comp->jrefFwd1NController) insert(items, JREFFWD1NCONTROLLER);
 	if (jref1NTarget == comp->jref1NTarget) insert(items, JREF1NTARGET);
-	if (jrefSil1NUnit == comp->jrefSil1NUnit) insert(items, JREFSIL1NUNIT);
 	if (jref1NPeripheral == comp->jref1NPeripheral) insert(items, JREF1NPERIPHERAL);
+	if (jrefSil1NUnit == comp->jrefSil1NUnit) insert(items, JREFSIL1NUNIT);
 	if (jrefRef1NCommand == comp->jrefRef1NCommand) insert(items, JREFREF1NCOMMAND);
 	if (jrefHk1NModule == comp->jrefHk1NModule) insert(items, JREFHK1NMODULE);
 	if (jrefHk1NVector == comp->jrefHk1NVector) insert(items, JREFHK1NVECTOR);
@@ -219,7 +220,7 @@ set<uint> PnlWdbeSilRec::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {IXWDBEVEXPSTATE, JREFDETAIL, JREF1NBANK, JREFFWD1NCONTROLLER, JREF1NTARGET, JREFSIL1NUNIT, JREF1NPERIPHERAL, JREFREF1NCOMMAND, JREFHK1NMODULE, JREFHK1NVECTOR, JREFREF1NERROR, BUTREGULARIZEACTIVE};
+	diffitems = {IXWDBEVEXPSTATE, JREFDETAIL, JREF1NBANK, JREFFWD1NCONTROLLER, JREF1NTARGET, JREF1NPERIPHERAL, JREFSIL1NUNIT, JREFREF1NCOMMAND, JREFHK1NMODULE, JREFHK1NVECTOR, JREFREF1NERROR, BUTREGULARIZEACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -359,4 +360,6 @@ void PnlWdbeSilRec::DpchEngData::writeXML(
 		if (has(TAG)) Tag::writeXML(ixWdbeVLocale, wr);
 	xmlTextWriterEndElement(wr);
 };
+
+
 

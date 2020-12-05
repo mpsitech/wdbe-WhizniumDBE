@@ -1,10 +1,11 @@
 /**
 	* \file WdbeAMMachinePar.cpp
 	* database access for table TblWdbeAMMachinePar (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
-	*/
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 5 Dec 2020
+  */
+// IP header --- ABOVE
 
 #include "WdbeAMMachinePar.h"
 
@@ -235,6 +236,14 @@ ubigint TblWdbeAMMachinePar::loadRstByMch(
 			, ListWdbeAMMachinePar& rst
 		) {
 	return 0;
+};
+
+bool TblWdbeAMMachinePar::loadValByMchKey(
+			ubigint refWdbeMMachine
+			, string x1SrefKKey
+			, string& Val
+		) {
+	return false;
 };
 
 ubigint TblWdbeAMMachinePar::loadRstByRefs(
@@ -483,6 +492,14 @@ ubigint MyTblWdbeAMMachinePar::loadRstByMch(
 	return loadRstBySQL("SELECT ref, refWdbeMMachine, x1SrefKKey, Val FROM TblWdbeAMMachinePar WHERE refWdbeMMachine = " + to_string(refWdbeMMachine) + " ORDER BY x1SrefKKey ASC", append, rst);
 };
 
+bool MyTblWdbeAMMachinePar::loadValByMchKey(
+			ubigint refWdbeMMachine
+			, string x1SrefKKey
+			, string& Val
+		) {
+	return loadStringBySQL("SELECT Val FROM TblWdbeAMMachinePar WHERE refWdbeMMachine = " + to_string(refWdbeMMachine) + " AND x1SrefKKey = '" + x1SrefKKey + "'", Val);
+};
+
 #endif
 
 #if defined(SBECORE_PG)
@@ -508,6 +525,7 @@ void PgTblWdbeAMMachinePar::initStatements() {
 	createStatement("TblWdbeAMMachinePar_loadRecByRef", "SELECT ref, refWdbeMMachine, x1SrefKKey, Val FROM TblWdbeAMMachinePar WHERE ref = $1", 1);
 	createStatement("TblWdbeAMMachinePar_loadRefsByMch", "SELECT ref FROM TblWdbeAMMachinePar WHERE refWdbeMMachine = $1", 1);
 	createStatement("TblWdbeAMMachinePar_loadRstByMch", "SELECT ref, refWdbeMMachine, x1SrefKKey, Val FROM TblWdbeAMMachinePar WHERE refWdbeMMachine = $1 ORDER BY x1SrefKKey ASC", 1);
+	createStatement("TblWdbeAMMachinePar_loadValByMchKey", "SELECT Val FROM TblWdbeAMMachinePar WHERE refWdbeMMachine = $1 AND x1SrefKKey = $2", 2);
 };
 
 bool PgTblWdbeAMMachinePar::loadRec(
@@ -823,6 +841,26 @@ ubigint PgTblWdbeAMMachinePar::loadRstByMch(
 	const int f[] = {1};
 
 	return loadRstByStmt("TblWdbeAMMachinePar_loadRstByMch", 1, vals, l, f, append, rst);
+};
+
+bool PgTblWdbeAMMachinePar::loadValByMchKey(
+			ubigint refWdbeMMachine
+			, string x1SrefKKey
+			, string& Val
+		) {
+	ubigint _refWdbeMMachine = htonl64(refWdbeMMachine);
+
+	const char* vals[] = {
+		(char*) &_refWdbeMMachine,
+		x1SrefKKey.c_str()
+	};
+	const int l[] = {
+		sizeof(ubigint),
+		0
+	};
+	const int f[] = {1,0};
+
+	return loadStringByStmt("TblWdbeAMMachinePar_loadValByMchKey", 2, vals, l, f, Val);
 };
 
 #endif

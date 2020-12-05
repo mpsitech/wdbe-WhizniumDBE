@@ -1,10 +1,11 @@
 /**
 	* \file IexWdbeDdd.cpp
 	* data blocks and readers/writers for import/export complex IexWdbeDdd (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #include "IexWdbeDdd.h"
 
@@ -10467,6 +10468,7 @@ void IexWdbeDdd::ImeIMUnit::writeXML(
 void IexWdbeDdd::parseFromFile(
 			const string& fullpath
 			, const bool xmlNotTxt
+			, const string& rectpath
 			, ImeIMUnit& imeimunit
 		) {
 	if (xmlNotTxt) {
@@ -10484,7 +10486,7 @@ void IexWdbeDdd::parseFromFile(
 		};
 
 	} else {
-			Txtrd rd(fullpath, "IexWdbeDdd", Version("0.9.51"), VecVIme::getIx);
+			Txtrd rd(fullpath, rectpath, "IexWdbeDdd", Version("0.9.51"), VecVIme::getIx);
 			readTxt(rd, imeimunit);
 	};
 };
@@ -10594,4 +10596,6 @@ uint IexWdbeDdd::getIxWdbeVIop(
 
 	return ixWdbeVIop;
 };
+
+
 

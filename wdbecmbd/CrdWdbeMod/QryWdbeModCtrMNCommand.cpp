@@ -1,10 +1,11 @@
 /**
 	* \file QryWdbeModCtrMNCommand.cpp
 	* job handler for job QryWdbeModCtrMNCommand (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifdef WDBECMBD
 	#include <Wdbecmbd.h>
@@ -84,7 +85,7 @@ void QryWdbeModCtrMNCommand::rerun(
 	dbswdbe->tblwdbeqmodctrmncommand->removeRstByJref(jref);
 
 	sqlstr = "SELECT COUNT(TblWdbeRMCommandMController.ref)";
-	sqlstr += " FROM TblWdbeRMCommandMController, TblWdbeMCommand";
+	sqlstr += " FROM TblWdbeMCommand, TblWdbeRMCommandMController";
 	sqlstr += " WHERE TblWdbeRMCommandMController.refWdbeMCommand = TblWdbeMCommand.ref";
 	sqlstr += " AND TblWdbeRMCommandMController.refWdbeMController = " + to_string(preRefCtr) + "";
 	dbswdbe->loadUintBySQL(sqlstr, cnt);
@@ -99,7 +100,7 @@ void QryWdbeModCtrMNCommand::rerun(
 
 	sqlstr = "INSERT INTO TblWdbeQModCtrMNCommand(jref, jnum, mref, ref, ivrRefWdbeMSignal, rvrRefWdbeMSignal)";
 	sqlstr += " SELECT " + to_string(jref) + ", 0, TblWdbeMCommand.ref, TblWdbeRMCommandMController.ref, TblWdbeRMCommandMController.ivrRefWdbeMSignal, TblWdbeRMCommandMController.rvrRefWdbeMSignal";
-	sqlstr += " FROM TblWdbeRMCommandMController, TblWdbeMCommand";
+	sqlstr += " FROM TblWdbeMCommand, TblWdbeRMCommandMController";
 	sqlstr += " WHERE TblWdbeRMCommandMController.refWdbeMCommand = TblWdbeMCommand.ref";
 	sqlstr += " AND TblWdbeRMCommandMController.refWdbeMController = " + to_string(preRefCtr) + "";
 	sqlstr += " ORDER BY TblWdbeMCommand.sref ASC";
@@ -283,19 +284,11 @@ void QryWdbeModCtrMNCommand::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
-		call->abort = handleCallWdbeStubChgFromSelf(dbswdbe);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECMDRCTRMOD_CTREQ) {
+	if (call->ixVCall == VecWdbeVCall::CALLWDBECMDRCTRMOD_CTREQ) {
 		call->abort = handleCallWdbeCmdRctrMod_ctrEq(dbswdbe, call->jref);
+	} else if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
+		call->abort = handleCallWdbeStubChgFromSelf(dbswdbe);
 	};
-};
-
-bool QryWdbeModCtrMNCommand::handleCallWdbeStubChgFromSelf(
-			DbsWdbe* dbswdbe
-		) {
-	bool retval = false;
-	// IP handleCallWdbeStubChgFromSelf --- INSERT
-	return retval;
 };
 
 bool QryWdbeModCtrMNCommand::handleCallWdbeCmdRctrMod_ctrEq(
@@ -311,4 +304,14 @@ bool QryWdbeModCtrMNCommand::handleCallWdbeCmdRctrMod_ctrEq(
 
 	return retval;
 };
+
+bool QryWdbeModCtrMNCommand::handleCallWdbeStubChgFromSelf(
+			DbsWdbe* dbswdbe
+		) {
+	bool retval = false;
+	// IP handleCallWdbeStubChgFromSelf --- INSERT
+	return retval;
+};
+
+
 

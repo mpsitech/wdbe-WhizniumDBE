@@ -1,10 +1,11 @@
 /**
 	* \file QryWdbeTrgList_blks.cpp
 	* job handler for job QryWdbeTrgList (implementation of blocks)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 using namespace std;
 using namespace Sbecore;
@@ -19,9 +20,9 @@ uint QryWdbeTrgList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "srf") return SRF;
-	if (s == "sys") return SYS;
 	if (s == "unt") return UNT;
+	if (s == "sys") return SYS;
+	if (s == "srf") return SRF;
 
 	return(0);
 };
@@ -29,9 +30,9 @@ uint QryWdbeTrgList::VecVOrd::getIx(
 string QryWdbeTrgList::VecVOrd::getSref(
 			const uint ix
 		) {
-	if (ix == SRF) return("srf");
-	if (ix == SYS) return("sys");
 	if (ix == UNT) return("unt");
+	if (ix == SYS) return("sys");
+	if (ix == SRF) return("srf");
 
 	return("");
 };
@@ -218,4 +219,6 @@ set<uint> QryWdbeTrgList::StgIac::diff(
 
 	return(diffitems);
 };
+
+
 

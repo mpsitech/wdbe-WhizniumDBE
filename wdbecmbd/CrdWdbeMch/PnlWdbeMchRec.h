@@ -1,10 +1,11 @@
 /**
 	* \file PnlWdbeMchRec.h
 	* job handler for job PnlWdbeMchRec (declarations)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifndef PNLWDBEMCHREC_H
 #define PNLWDBEMCHREC_H
@@ -13,10 +14,11 @@
 
 // IP include.cust --- INSERT
 
-#include "PnlWdbeMchDetail.h"
-#include "PnlWdbeMchAPar.h"
-#include "PnlWdbeMchAMakefile.h"
+#include "PnlWdbeMchSup1NMachine.h"
 #include "PnlWdbeMch1NRelease.h"
+#include "PnlWdbeMchAMakefile.h"
+#include "PnlWdbeMchAPar.h"
+#include "PnlWdbeMchDetail.h"
 
 #define VecVWdbeMchRecDo PnlWdbeMchRec::VecVDo
 
@@ -73,7 +75,7 @@ public:
 	class StatApp {
 
 	public:
-		static void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true, const bool initdoneDetail = false, const bool initdoneAPar = false, const bool initdoneAMakefile = false, const bool initdone1NRelease = false);
+		static void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true, const bool initdoneDetail = false, const bool initdoneAPar = false, const bool initdoneAMakefile = false, const bool initdone1NRelease = false, const bool initdoneSup1NMachine = false);
 	};
 
 	/**
@@ -87,10 +89,11 @@ public:
 		static const Sbecore::uint JREFAPAR = 3;
 		static const Sbecore::uint JREFAMAKEFILE = 4;
 		static const Sbecore::uint JREF1NRELEASE = 5;
-		static const Sbecore::uint BUTREGULARIZEACTIVE = 6;
+		static const Sbecore::uint JREFSUP1NMACHINE = 6;
+		static const Sbecore::uint BUTREGULARIZEACTIVE = 7;
 
 	public:
-		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const Sbecore::ubigint jrefDetail = 0, const Sbecore::ubigint jrefAPar = 0, const Sbecore::ubigint jrefAMakefile = 0, const Sbecore::ubigint jref1NRelease = 0, const bool ButRegularizeActive = true);
+		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const Sbecore::ubigint jrefDetail = 0, const Sbecore::ubigint jrefAPar = 0, const Sbecore::ubigint jrefAMakefile = 0, const Sbecore::ubigint jref1NRelease = 0, const Sbecore::ubigint jrefSup1NMachine = 0, const bool ButRegularizeActive = true);
 
 	public:
 		Sbecore::uint ixWdbeVExpstate;
@@ -98,6 +101,7 @@ public:
 		Sbecore::ubigint jrefAPar;
 		Sbecore::ubigint jrefAMakefile;
 		Sbecore::ubigint jref1NRelease;
+		Sbecore::ubigint jrefSup1NMachine;
 		bool ButRegularizeActive;
 
 	public:
@@ -173,10 +177,11 @@ public:
 	ContInf continf;
 	StatShr statshr;
 
-	PnlWdbeMchDetail* pnldetail;
-	PnlWdbeMchAPar* pnlapar;
-	PnlWdbeMchAMakefile* pnlamakefile;
+	PnlWdbeMchSup1NMachine* pnlsup1nmachine;
 	PnlWdbeMch1NRelease* pnl1nrelease;
+	PnlWdbeMchAMakefile* pnlamakefile;
+	PnlWdbeMchAPar* pnlapar;
+	PnlWdbeMchDetail* pnldetail;
 
 	WdbeMMachine recMch;
 
@@ -188,7 +193,7 @@ public:
 public:
 	DpchEngWdbe* getNewDpchEng(std::set<Sbecore::uint> items);
 
-	void refresh(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems);
+	void refresh(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems, const bool unmute = false);
 
 	void updatePreset(DbsWdbe* dbswdbe, const Sbecore::uint ixWdbeVPreset, const Sbecore::ubigint jrefTrig, const bool notif = false);
 	void minimize(DbsWdbe* dbswdbe, const bool notif = false, DpchEngWdbe** dpcheng = NULL);
@@ -210,10 +215,13 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeMch_cchEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
 	bool handleCallWdbeMchUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbeMch_supEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeMch_cchEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
 
 };
 
 #endif
+
+
 

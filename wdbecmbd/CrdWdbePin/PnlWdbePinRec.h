@@ -1,10 +1,11 @@
 /**
 	* \file PnlWdbePinRec.h
 	* job handler for job PnlWdbePinRec (declarations)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifndef PNLWDBEPINREC_H
 #define PNLWDBEPINREC_H
@@ -13,8 +14,8 @@
 
 // IP include.cust --- INSERT
 
-#include "PnlWdbePinDetail.h"
 #include "PnlWdbePinAPar.h"
+#include "PnlWdbePinDetail.h"
 
 #define VecVWdbePinRecDo PnlWdbePinRec::VecVDo
 
@@ -167,8 +168,8 @@ public:
 	ContInf continf;
 	StatShr statshr;
 
-	PnlWdbePinDetail* pnldetail;
 	PnlWdbePinAPar* pnlapar;
+	PnlWdbePinDetail* pnldetail;
 
 	WdbeMPin recPin;
 
@@ -180,7 +181,7 @@ public:
 public:
 	DpchEngWdbe* getNewDpchEng(std::set<Sbecore::uint> items);
 
-	void refresh(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems);
+	void refresh(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems, const bool unmute = false);
 
 	void updatePreset(DbsWdbe* dbswdbe, const Sbecore::uint ixWdbeVPreset, const Sbecore::ubigint jrefTrig, const bool notif = false);
 	void minimize(DbsWdbe* dbswdbe, const bool notif = false, DpchEngWdbe** dpcheng = NULL);
@@ -202,11 +203,13 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbePin_bnkEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
-	bool handleCallWdbePin_cluEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
 	bool handleCallWdbePinUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbePin_cluEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbePin_bnkEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
 
 };
 
 #endif
+
+
 

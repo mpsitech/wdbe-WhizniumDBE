@@ -1,10 +1,11 @@
 /**
 	* \file SqkWdbeModdet.cpp
 	* squawk generation for operation pack WdbeModdet (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
-	*/
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
+  */
+// IP header --- ABOVE
 
 #include "SqkWdbeModdet.h"
 
@@ -71,5 +72,6 @@ string SqkWdbeModdet::getSquawkWiring(
 	// example: "add hierarchical wiring for module 'icm2 (top_v1_0 top module)'"
 	return("add hierarchical wiring for module '" + StubWdbe::getStubMdlStd(dbswdbe, dpchinv->refWdbeMModule) + "'"); // IP getSquawkWiring --- RLINE
 };
+
 
 

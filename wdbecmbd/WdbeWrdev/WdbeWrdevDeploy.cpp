@@ -1,10 +1,11 @@
 /**
 	* \file WdbeWrdevDeploy.cpp
 	* Wdbe operation processor - write device access library deployment scripts (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
-	*/
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
+  */
+// IP header --- ABOVE
 
 #ifdef WDBECMBD
 	#include <Wdbecmbd.h>
@@ -39,6 +40,8 @@ DpchRetWdbe* WdbeWrdevDeploy::run(
 
 	WdbeMRelease* rls = NULL;
 
+	vector<ubigint> hrefsMch;
+
 	ListWdbeMSystem syss;
 	ListWdbeMUnit unts;
 
@@ -51,6 +54,8 @@ DpchRetWdbe* WdbeWrdevDeploy::run(
 	string s;
 
 	if (dbswdbe->tblwdbemrelease->loadRecByRef(refWdbeMRelease, &rls)) {
+		dbswdbe->tblwdbemmachine->loadHrefsup(rls->refWdbeMMachine, hrefsMch);
+
 		if (Easy) {
 			dbswdbe->tblwdbemunit->loadRstBySQL("SELECT * FROM TblWdbeMUnit WHERE refIxVTbl = " + to_string(VecWdbeVMUnitRefTbl::VER) + " AND refUref = " + to_string(rls->refWdbeMVersion) + " AND Easy = 1 ORDER BY sref ASC", false, unts);
 		} else {
@@ -59,10 +64,10 @@ DpchRetWdbe* WdbeWrdevDeploy::run(
 		};
 
 		// libraries
-		addLibBySref(dbswdbe, "dbecore", rls->refWdbeMMachine, incpaths);
+		addLibBySref(dbswdbe, "dbecore", rls->refWdbeMMachine, hrefsMch, incpaths);
 
 		dbswdbe->tblwdbermlibrarymversion->loadVersByLib(rls->refWdbeMVersion, false, refs);
-		for (unsigned int i = 0; i < refs.size();i++) addLibByRef(dbswdbe, refs[i], rls->refWdbeMMachine, incpaths);
+		for (unsigned int i = 0; i < refs.size(); i++) addLibByRef(dbswdbe, refs[i], rls->refWdbeMMachine, hrefsMch, incpaths);
 
 		Prjshort = Wdbe::getPrjshort(dbswdbe, rls->refWdbeMVersion);
 
@@ -75,7 +80,7 @@ DpchRetWdbe* WdbeWrdevDeploy::run(
 		// Makefile
 		s = xchg->tmppath + "/" + folder + "/Makefile.ip";
 		outfile.open(s.c_str(), ios::out);
-		writeMakefile(dbswdbe, outfile, rls, syss, unts, incpaths);
+		writeMakefile(dbswdbe, outfile, rls, hrefsMch, syss, unts, incpaths);
 		outfile.close();
 
 		delete rls;
@@ -105,8 +110,8 @@ void WdbeWrdevDeploy::writeChkoutSh(
 	for (unsigned int i = 0; i < unts.nodes.size(); i++) {
 		unt = unts.nodes[i];
 
-		outfile << "cp ../../" << folder << "/" << unt->Fullsref << "/*.h $SRCROOT/" << folder << "/" << endl;
-		outfile << "cp ../../" << folder << "/" << unt->Fullsref << "/*.cpp $SRCROOT/" << folder << "/" << endl;
+		outfile << "cp ../../" << folder << "/" << unt->Fullsref << "/*.h $BUILDROOT/" << folder << "/" << endl;
+		outfile << "cp ../../" << folder << "/" << unt->Fullsref << "/*.cpp $BUILDROOT/" << folder << "/" << endl;
 		outfile << endl;
 	};
 
@@ -117,10 +122,12 @@ void WdbeWrdevDeploy::writeMakefile(
 			DbsWdbe* dbswdbe
 			, fstream& outfile
 			, WdbeMRelease* rls
+			, vector<ubigint>& hrefsMch
 			, ListWdbeMSystem& syss
 			, ListWdbeMUnit& unts
 			, set<string>& incpaths
 		) {
+
 	WdbeMSystem* sys = NULL;
 
 	WdbeMUnit* unt = NULL;
@@ -128,51 +135,46 @@ void WdbeWrdevDeploy::writeMakefile(
 	ListWdbeMController ctrs;
 	WdbeMController* ctr = NULL;
 
-	string rootfs, inceq;
+	string sysroot, inceq;
 
 	bool dynlib = StrMod::srefInSrefs(rls->srefsKOption, "dynlib");
 
 	string s;
 
-	dbswdbe->loadStringBySQL("SELECT Val FROM TblWdbeAMMachinePar WHERE refWdbeMMachine = " + to_string(rls->refWdbeMMachine) + " AND x1SrefKKey = 'rootfs'", rootfs);
-	if (rootfs != "") inceq = "=";
+	Wdbe::getMchpar(dbswdbe, rls->refWdbeMMachine, hrefsMch, "sysroot", sysroot);
+	if (sysroot != "") inceq = "=";
 
 	// --- tools
 	outfile << "# IP tools --- IBEGIN" << endl;
-	s = "";
-	dbswdbe->tblwdbeammachinemakefile->loadValByMchTag(rls->refWdbeMMachine, "cpp", s);
+	Wdbe::getMchmkf(dbswdbe, rls->refWdbeMMachine, hrefsMch, "cpp", s);
 	outfile << "CPP = " << s << endl;
 
 	outfile << "CPPFLAGS =";
-	if (rootfs != "") outfile << " --sysroot=" << rootfs;
+	if (sysroot != "") outfile << " --sysroot=" << sysroot;
 
-	if (dbswdbe->tblwdbeammachinemakefile->loadValByMchTag(rls->refWdbeMMachine, "cppflags", s)) outfile << " " << s;
-	if (dynlib) outfile << " -fpic";
+	if (Wdbe::getMchmkf(dbswdbe, rls->refWdbeMMachine, hrefsMch, "cppflags", s)) outfile << " " << s;
+	if (dynlib) outfile << " -fPIC";
 	outfile << endl;
 	outfile << endl;
 
-	s = "";
-	dbswdbe->tblwdbeammachinemakefile->loadValByMchTag(rls->refWdbeMMachine, "statlib", s);
+	Wdbe::getMchmkf(dbswdbe, rls->refWdbeMMachine, hrefsMch, "statlib", s);
 	outfile << "STATLIB = " << s << endl;
 
-	s = "";
-	dbswdbe->tblwdbeammachinemakefile->loadValByMchTag(rls->refWdbeMMachine, "statlibflags", s);
+	Wdbe::getMchmkf(dbswdbe, rls->refWdbeMMachine, hrefsMch, "statlibflags", s);
 	outfile << "STATLIBFLAGS = " << s << endl;
 
 	if (dynlib) {
 		outfile << endl;
 
-		s = "";
-		dbswdbe->tblwdbeammachinemakefile->loadValByMchTag(rls->refWdbeMMachine, "dynlib", s);
+		Wdbe::getMchmkf(dbswdbe, rls->refWdbeMMachine, hrefsMch, "dynlib", s);
 		outfile << "DYNLIB = " << s << endl;
 
 		outfile << "DYNLIBFLAGS =";
-		if (rootfs != "") outfile << " --sysroot=" << rootfs;
-		if (dbswdbe->tblwdbeammachinemakefile->loadValByMchTag(rls->refWdbeMMachine, "dynlibflags", s)) outfile << " " << s;
+		if (sysroot != "") outfile << " --sysroot=" << sysroot;
+		if (Wdbe::getMchmkf(dbswdbe, rls->refWdbeMMachine, hrefsMch, "dynlibflags", s)) outfile << " " << s;
 		outfile << endl;
 
-		s = "";
-		dbswdbe->tblwdbeammachinemakefile->loadValByMchTag(rls->refWdbeMMachine, "dynlibext", s);
+		Wdbe::getMchmkf(dbswdbe, rls->refWdbeMMachine, hrefsMch, "dynlibext", s);
 		outfile << "DYNLIBEXT = " << s << endl;
 	};
 	outfile << "# IP tools --- IEND" << endl;
@@ -186,7 +188,7 @@ void WdbeWrdevDeploy::writeMakefile(
 
 	// --- incpath.mchspec
 	outfile << "# IP incpath.mchspec --- IBEGIN" << endl;
-	if (dbswdbe->tblwdbeammachinemakefile->loadValByMchTag(rls->refWdbeMMachine, "incpath", s)) outfile << "INCPATH += " << pathToPathstr(s, inceq) << endl;
+	if (Wdbe::getMchmkf(dbswdbe, rls->refWdbeMMachine, hrefsMch, "incpath", s)) outfile << "INCPATH += " << pathToPathstr(s, inceq) << endl;
 	outfile << "# IP incpath.mchspec --- IEND" << endl;
 
 	// --- objs
@@ -228,17 +230,19 @@ void WdbeWrdevDeploy::addLibBySref(
 			DbsWdbe* dbswdbe
 			, const string& srefLib
 			, const ubigint refMch
+			, vector<ubigint>& hrefsMch
 			, set<string>& incpaths
 		) {
 	ubigint refLib;
 
-	if (dbswdbe->tblwdbemlibrary->loadRefBySrf(srefLib, refLib)) addLibByRef(dbswdbe, refLib, refMch, incpaths);
+	if (dbswdbe->tblwdbemlibrary->loadRefBySrf(srefLib, refLib)) addLibByRef(dbswdbe, refLib, refMch, hrefsMch, incpaths);
 };
 
 void WdbeWrdevDeploy::addLibByRef(
 			DbsWdbe* dbswdbe
 			, const ubigint refLib
 			, const ubigint refMch
+			, vector<ubigint>& hrefsMch
 			, set<string>& incpaths
 		) {
 	WdbeMLibrary* lib = NULL;
@@ -247,12 +251,10 @@ void WdbeWrdevDeploy::addLibByRef(
 	string s;
 
 	if (dbswdbe->tblwdbemlibrary->loadRecByRef(refLib, &lib)) {
-		s = "";
-		dbswdbe->tblwdbeamlibrarymakefile->loadValByLibMchTag(refLib, refMch, "incpath", s);
-		if (s != "") incpaths.insert(s);
+		if (Wdbe::getLibmkf(dbswdbe, refLib, refMch, hrefsMch, "incpath", s)) incpaths.insert(s);
 
 		StrMod::stringToVector(lib->depSrefsWdbeMLibrary, ss);
-		for (unsigned int i = 0; i < ss.size();i++) addLibBySref(dbswdbe, ss[i], refMch, incpaths);
+		for (unsigned int i = 0; i < ss.size();i++) addLibBySref(dbswdbe, ss[i], refMch, hrefsMch, incpaths);
 
 		delete lib;
 	};
@@ -276,5 +278,6 @@ string WdbeWrdevDeploy::pathToPathstr(
 	return pathstr;
 };
 // IP cust --- IEND
+
 
 

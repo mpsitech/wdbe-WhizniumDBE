@@ -1,10 +1,11 @@
 /**
 	* \file JobWdbeIexIni.cpp
 	* job handler for job JobWdbeIexIni (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifdef WDBECMBD
 	#include <Wdbecmbd.h>
@@ -68,10 +69,12 @@ void JobWdbeIexIni::parseFromFile(
 			DbsWdbe* dbswdbe
 			, const string& _fullpath
 			, const bool _xmlNotTxt
+			, const string& _rectpath
 		) {
 	if (ixVSge == VecVSge::IDLE) {
 		fullpath = _fullpath;
 		xmlNotTxt = _xmlNotTxt;
+		rectpath = _rectpath;
 
 		changeStage(dbswdbe, VecVSge::PARSE);
 	};
@@ -211,6 +214,7 @@ uint JobWdbeIexIni::enterSgeIdle(
 
 	fullpath = "";
 	xmlNotTxt = false;
+	rectpath = "";
 
 	lineno = 0;
 	impcnt = 0;
@@ -248,7 +252,7 @@ uint JobWdbeIexIni::enterSgeParse(
 	nextIxVSgeFailure = VecVSge::PRSERR;
 
 	try {
-		IexWdbeIni::parseFromFile(fullpath, xmlNotTxt, imeiavcontrolpar, imeiavkeylistkey1, imeiavvaluelistval, imeimcoreproject, imeimfamily, imeimfile1, imeimlibrary, imeimmachine, imeimmodule, imeimunit, imeimusergroup);
+		IexWdbeIni::parseFromFile(fullpath, xmlNotTxt, rectpath, imeiavcontrolpar, imeiavkeylistkey1, imeiavvaluelistval, imeimcoreproject, imeimfamily, imeimfile1, imeimlibrary, imeimmachine, imeimmodule, imeimunit, imeimusergroup);
 
 	} catch (SbeException& e) {
 		if (e.ix == SbeException::PATHNF) e.vals["path"] = "<hidden>";
@@ -363,7 +367,7 @@ uint JobWdbeIexIni::enterSgeImport(
 	// IP enterSgeImport.prep --- IBEGIN
 	WdbeRMUserMUsergroup uru;
 
-	ImeitemIMMachine* mch2 = NULL;
+	map<string,ubigint> refsMchs; // by hsref
 
 	ImeitemIMModule* mdl2 = NULL;
 
@@ -618,13 +622,16 @@ uint JobWdbeIexIni::enterSgeImport(
 		for (unsigned int ix0 = 0; ix0 < imeimmachine.nodes.size(); ix0++) {
 			mch = imeimmachine.nodes[ix0];
 
-			//mch->srefKPlatform: TBL
+			//mch->supRefWdbeMMachine: IMPPP
 			//mch->sref: TBL
 			//mch->cchRefWdbeMMachine: IMPPP
 			//mch->Comment: TBL
 
 			dbswdbe->tblwdbemmachine->insertRec(mch);
 			impcnt++;
+
+			if (mch->hsrefSupRefWdbeMMachine == "") refsMchs[mch->sref] = mch->ref;
+			else refsMchs[mch->hsrefSupRefWdbeMMachine + ";" + mch->sref] = mch->ref;
 
 			for (unsigned int ix1 = 0; ix1 < mch->imeiammachinemakefile.nodes.size(); ix1++) {
 				mchAmkf = mch->imeiammachinemakefile.nodes[ix1];
@@ -667,13 +674,10 @@ uint JobWdbeIexIni::enterSgeImport(
 
 				libAmkf->refWdbeMLibrary = lib->ref;
 				//libAmkf->x1RefWdbeMMachine: PREVIMP
-				if (libAmkf->srefX1RefWdbeMMachine != "") {
-					for (unsigned int i = 0; i < imeimmachine.nodes.size(); i++)
-						if (imeimmachine.nodes[i]->sref == libAmkf->srefX1RefWdbeMMachine) {
-							libAmkf->x1RefWdbeMMachine = imeimmachine.nodes[i]->ref;
-							break;
-						};
-					if (libAmkf->x1RefWdbeMMachine == 0) throw SbeException(SbeException::IEX_TSREF, {{"tsref",libAmkf->srefX1RefWdbeMMachine}, {"iel","srefX1RefWdbeMMachine"}, {"lineno",to_string(libAmkf->lineno)}});
+				if (libAmkf->hsrefX1RefWdbeMMachine != "") {
+					auto it = refsMchs.find(libAmkf->hsrefX1RefWdbeMMachine);
+					if (it != refsMchs.end()) libAmkf->x1RefWdbeMMachine = it->second;
+					else throw SbeException(SbeException::IEX_TSREF, {{"tsref",libAmkf->hsrefX1RefWdbeMMachine}, {"iel","hsrefX1RefWdbeMMachine"}, {"lineno",to_string(libAmkf->lineno)}});
 				};
 				//libAmkf->x2SrefKTag: TBL
 				//libAmkf->Val: TBL
@@ -1260,17 +1264,18 @@ uint JobWdbeIexIni::enterSgeImport(
 		for (unsigned int ix0 = 0; ix0 < imeimmachine.nodes.size(); ix0++) {
 			mch = imeimmachine.nodes[ix0];
 
-			if (mch->srefCchRefWdbeMMachine != "") {
-				for (unsigned int i = 0; i < imeimmachine.nodes.size(); i++) {
-					mch2 = imeimmachine.nodes[i];
-					if (mch2->sref == mch->srefCchRefWdbeMMachine) {
-						mch->cchRefWdbeMMachine = mch2->ref;
-
-						dbswdbe->tblwdbemmachine->updateRec(mch);
-						break;
-					};
-				};
+			if (mch->hsrefSupRefWdbeMMachine != "") {
+				auto it = refsMchs.find(mch->hsrefSupRefWdbeMMachine);
+				if (it != refsMchs.end()) mch->supRefWdbeMMachine = it->second;
+				else throw SbeException(SbeException::IEX_TSREF, {{"tsref",mch->hsrefSupRefWdbeMMachine}, {"iel","hsrefSupRefWdbeMMachine"}, {"lineno",to_string(mch->lineno)}});
 			};
+			if (mch->hsrefCchRefWdbeMMachine != "") {
+				auto it = refsMchs.find(mch->hsrefCchRefWdbeMMachine);
+				if (it != refsMchs.end()) mch->cchRefWdbeMMachine = it->second;
+				else throw SbeException(SbeException::IEX_TSREF, {{"tsref",mch->hsrefCchRefWdbeMMachine}, {"iel","hsrefCchRefWdbeMMachine"}, {"lineno",to_string(mch->lineno)}});
+			};
+
+			if ((mch->supRefWdbeMMachine != 0) || (mch->cchRefWdbeMMachine != 0)) dbswdbe->tblwdbemmachine->updateRec(mch);
 		};
 
 		// -- ImeIMModule
@@ -1808,7 +1813,7 @@ uint JobWdbeIexIni::enterSgeCollect(
 			libAmkf = lib->imeiamlibrarymakefile.nodes[ix1];
 
 			if (libAmkf->ref != 0) {
-				libAmkf->srefX1RefWdbeMMachine = StubWdbe::getStubMchStd(dbswdbe, libAmkf->x1RefWdbeMMachine, ixWdbeVLocale, Stub::VecVNonetype::VOID, stcch);
+				libAmkf->hsrefX1RefWdbeMMachine = StubWdbe::getStubMchStd(dbswdbe, libAmkf->x1RefWdbeMMachine, ixWdbeVLocale, Stub::VecVNonetype::VOID, stcch);
 			};
 		};
 	};
@@ -1818,7 +1823,8 @@ uint JobWdbeIexIni::enterSgeCollect(
 		mch = imeimmachine.nodes[ix0];
 
 		if (mch->ref != 0) {
-			//mch->srefCchRefWdbeMMachine: STUB
+			mch->hsrefSupRefWdbeMMachine = StubWdbe::getStubMchStd(dbswdbe, mch->supRefWdbeMMachine, ixWdbeVLocale, Stub::VecVNonetype::VOID, stcch);
+			//mch->hsrefCchRefWdbeMMachine: STUB
 		};
 
 		if (getIxWdbeVIop(icsWdbeVIop, VecVIme::IMEIAMMACHINEMAKEFILE, ixWdbeVIop)) {
@@ -2273,5 +2279,6 @@ void JobWdbeIexIni::leaveSgeDone(
 		) {
 	// IP leaveSgeDone --- INSERT
 };
+
 
 

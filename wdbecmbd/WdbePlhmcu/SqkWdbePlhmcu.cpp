@@ -1,10 +1,11 @@
 /**
 	* \file SqkWdbePlhmcu.cpp
 	* squawk generation for operation pack WdbePlhmcu (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
-	*/
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
+  */
+// IP header --- ABOVE
 
 #include "SqkWdbePlhmcu.h"
 
@@ -23,4 +24,6 @@ string SqkWdbePlhmcu::getSquawkEhostif(
 	// example: "fill type-specific placeholders for module 'icm2-hostif (uarthostif_Easy_v1_0_Mcu easy model host interface)'"
 	return(""); // IP getSquawkEhostif --- LINE
 };
+
+
 

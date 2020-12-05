@@ -1,11 +1,3 @@
-/**
-  * \file PnlWdbeMtpKParKey.js
-  * web client functionality for panel PnlWdbeMtpKParKey
-  * \author Alexander Wirthmueller
-  * \date created: 23 Aug 2020
-  * \date modified: 23 Aug 2020
-  */
-
 // --- expand state management
 function minimize(updh) {
 	if (retrieveSi(srcdoc, "StatAppWdbeMtpKParKey", "srefIxWdbeVExpstate") == "mind") return;

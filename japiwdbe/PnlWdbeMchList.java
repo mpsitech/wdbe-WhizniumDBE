@@ -1,10 +1,11 @@
 /**
   * \file PnlWdbeMchList.java
   * Java API code for job PnlWdbeMchList
-  * \author Alexander Wirthmueller
-  * \date created: 23 Aug 2020
-  * \date modified: 23 Aug 2020
-  */
+	* \copyright (C) 2018-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 5 Dec 2020
+	*/
+// IP header --- ABOVE
 
 package apiwdbe;
 
@@ -288,20 +289,20 @@ public class PnlWdbeMchList {
 	public class StgIac extends Block {
 
 		public static final int TCOSRFWIDTH = 1;
-		public static final int TCOPLAWIDTH = 2;
+		public static final int TCOSUPWIDTH = 2;
 
 		public StgIac(
 					int TcoSrfWidth
-					, int TcoPlaWidth
+					, int TcoSupWidth
 				) {
 			this.TcoSrfWidth = TcoSrfWidth;
-			this.TcoPlaWidth = TcoPlaWidth;
+			this.TcoSupWidth = TcoSupWidth;
 
-			mask = new HashSet<Integer>(Arrays.asList(TCOSRFWIDTH, TCOPLAWIDTH));
+			mask = new HashSet<Integer>(Arrays.asList(TCOSRFWIDTH, TCOSUPWIDTH));
 		};
 
 		public int TcoSrfWidth;
-		public int TcoPlaWidth;
+		public int TcoSupWidth;
 
 		public boolean readXML(
 					Document doc
@@ -317,7 +318,7 @@ public class PnlWdbeMchList {
 
 			if (Xmlio.checkXPath(doc, basexpath)) {
 				TcoSrfWidth = Xmlio.extractIntegerAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TcoSrfWidth", mask, TCOSRFWIDTH);
-				TcoPlaWidth = Xmlio.extractIntegerAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TcoPlaWidth", mask, TCOPLAWIDTH);
+				TcoSupWidth = Xmlio.extractIntegerAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TcoSupWidth", mask, TCOSUPWIDTH);
 
 				return true;
 			};
@@ -344,7 +345,7 @@ public class PnlWdbeMchList {
 			else sup.appendChild(el);
 
 			Xmlio.writeIntegerAttr(doc, el, itemtag, "sref", "TcoSrfWidth", TcoSrfWidth);
-			Xmlio.writeIntegerAttr(doc, el, itemtag, "sref", "TcoPlaWidth", TcoPlaWidth);
+			Xmlio.writeIntegerAttr(doc, el, itemtag, "sref", "TcoSupWidth", TcoSupWidth);
 		};
 
 		public HashSet<Integer> comm(
@@ -353,7 +354,7 @@ public class PnlWdbeMchList {
 			HashSet<Integer> items = new HashSet<Integer>();
 
 			if (TcoSrfWidth == comp.TcoSrfWidth) items.add(TCOSRFWIDTH);
-			if (TcoPlaWidth == comp.TcoPlaWidth) items.add(TCOPLAWIDTH);
+			if (TcoSupWidth == comp.TcoSupWidth) items.add(TCOSUPWIDTH);
 
 			return(items);
 		};
@@ -366,7 +367,7 @@ public class PnlWdbeMchList {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(TCOSRFWIDTH, TCOPLAWIDTH));
+			diffitems = new HashSet<Integer>(Arrays.asList(TCOSRFWIDTH, TCOSUPWIDTH));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);
@@ -386,7 +387,7 @@ public class PnlWdbeMchList {
 		public static final int TXTSHOWING1 = 5;
 		public static final int TXTSHOWING2 = 6;
 		public static final int TCOSRF = 7;
-		public static final int TCOPLA = 8;
+		public static final int TCOSUP = 8;
 
 		public Tag(
 					String Cpt
@@ -396,7 +397,7 @@ public class PnlWdbeMchList {
 					, String TxtShowing1
 					, String TxtShowing2
 					, String TcoSrf
-					, String TcoPla
+					, String TcoSup
 				) {
 			this.Cpt = Cpt;
 			this.TxtRecord1 = TxtRecord1;
@@ -405,9 +406,9 @@ public class PnlWdbeMchList {
 			this.TxtShowing1 = TxtShowing1;
 			this.TxtShowing2 = TxtShowing2;
 			this.TcoSrf = TcoSrf;
-			this.TcoPla = TcoPla;
+			this.TcoSup = TcoSup;
 
-			mask = new HashSet<Integer>(Arrays.asList(CPT, TXTRECORD1, TXTRECORD2, TRS, TXTSHOWING1, TXTSHOWING2, TCOSRF, TCOPLA));
+			mask = new HashSet<Integer>(Arrays.asList(CPT, TXTRECORD1, TXTRECORD2, TRS, TXTSHOWING1, TXTSHOWING2, TCOSRF, TCOSUP));
 		};
 
 		public String Cpt;
@@ -417,7 +418,7 @@ public class PnlWdbeMchList {
 		public String TxtShowing1;
 		public String TxtShowing2;
 		public String TcoSrf;
-		public String TcoPla;
+		public String TcoSup;
 
 		public boolean readXML(
 					Document doc
@@ -439,7 +440,7 @@ public class PnlWdbeMchList {
 				TxtShowing1 = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "TxtShowing1", mask, TXTSHOWING1);
 				TxtShowing2 = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "TxtShowing2", mask, TXTSHOWING2);
 				TcoSrf = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "TcoSrf", mask, TCOSRF);
-				TcoPla = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "TcoPla", mask, TCOPLA);
+				TcoSup = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "TcoSup", mask, TCOSUP);
 
 				return true;
 			};
@@ -459,7 +460,7 @@ public class PnlWdbeMchList {
 			if (TxtShowing1.equals(comp.TxtShowing1)) items.add(TXTSHOWING1);
 			if (TxtShowing2.equals(comp.TxtShowing2)) items.add(TXTSHOWING2);
 			if (TcoSrf.equals(comp.TcoSrf)) items.add(TCOSRF);
-			if (TcoPla.equals(comp.TcoPla)) items.add(TCOPLA);
+			if (TcoSup.equals(comp.TcoSup)) items.add(TCOSUP);
 
 			return(items);
 		};
@@ -472,7 +473,7 @@ public class PnlWdbeMchList {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(CPT, TXTRECORD1, TXTRECORD2, TRS, TXTSHOWING1, TXTSHOWING2, TCOSRF, TCOPLA));
+			diffitems = new HashSet<Integer>(Arrays.asList(CPT, TXTRECORD1, TXTRECORD2, TRS, TXTSHOWING1, TXTSHOWING2, TCOSRF, TCOSUP));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);

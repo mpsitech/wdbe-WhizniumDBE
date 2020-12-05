@@ -1,10 +1,11 @@
 /**
 	* \file WdbeQModCtrRef1NCommand.h
 	* API code for table TblWdbeQModCtrRef1NCommand (declarations)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
-	*/
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 5 Dec 2020
+  */
+// IP header --- ABOVE
 
 #ifndef WDBEQMODCTRREF1NCOMMAND_H
 #define WDBEQMODCTRREF1NCOMMAND_H

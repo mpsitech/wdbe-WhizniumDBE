@@ -1,11 +1,3 @@
-/**
-  * \file PnlWdbeFamList.js
-  * web client functionality for panel PnlWdbeFamList
-  * \author Alexander Wirthmueller
-  * \date created: 23 Aug 2020
-  * \date modified: 23 Aug 2020
-  */
-
 // --- expand state management
 function minimize() {
 	// change container heights

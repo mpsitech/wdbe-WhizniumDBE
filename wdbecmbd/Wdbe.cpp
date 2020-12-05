@@ -1,10 +1,11 @@
 /**
 	* \file Wdbe.cpp
 	* Wdbe global functionality (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
-	*/
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
+  */
+// IP header --- ABOVE
 
 #include "Wdbe.h"
 
@@ -521,6 +522,52 @@ void Wdbe::updateVerste(
 		ref = dbswdbe->tblwdbejmversionstate->insertNewRec(NULL, refWdbeMVersion, rawtime, ixVState);
 		dbswdbe->executeQuery("UPDATE TblWdbeMVersion SET refJState = " + to_string(ref) + ", ixVState = " + to_string(ixVState) + " WHERE ref = " + to_string(refWdbeMVersion));
 	};
+};
+
+bool Wdbe::getLibmkf(
+			DbsWdbe* dbswdbe
+			, const ubigint refWdbeMLibrary
+			, const ubigint x1RefWdbeMMachine
+			, vector<ubigint>& hrefsMch
+			, const string& x2SrefKTag
+			, string& Val
+		) {
+	Val = "";
+
+	if (dbswdbe->tblwdbeamlibrarymakefile->loadValByLibMchTag(refWdbeMLibrary, x1RefWdbeMMachine, x2SrefKTag, Val)) return true;
+	for (unsigned int i = 0; i < hrefsMch.size(); i++) if (dbswdbe->tblwdbeamlibrarymakefile->loadValByLibMchTag(refWdbeMLibrary, hrefsMch[i], x2SrefKTag, Val)) return true;
+
+	return false;
+};
+
+bool Wdbe::getMchmkf(
+			DbsWdbe* dbswdbe
+			, const ubigint refWdbeMMachine
+			, vector<ubigint>& hrefsMch
+			, const string& x1SrefKTag
+			, string& Val
+		) {
+	Val = "";
+
+	if (dbswdbe->tblwdbeammachinemakefile->loadValByMchTag(refWdbeMMachine, x1SrefKTag, Val)) return true;
+	for (unsigned int i = 0; i < hrefsMch.size(); i++) if (dbswdbe->tblwdbeammachinemakefile->loadValByMchTag(hrefsMch[i], x1SrefKTag, Val)) return true;
+
+	return false;
+};
+
+bool Wdbe::getMchpar(
+			DbsWdbe* dbswdbe
+			, const ubigint refWdbeMMachine
+			, vector<ubigint>& hrefsMch
+			, const string& x1SrefKKey
+			, string& Val
+		) {
+	Val = "";
+
+	if (dbswdbe->tblwdbeammachinepar->loadValByMchKey(refWdbeMMachine, x1SrefKKey, Val)) return true;
+	for (unsigned int i = 0; i < hrefsMch.size(); i++) if (dbswdbe->tblwdbeammachinepar->loadValByMchKey(hrefsMch[i], x1SrefKKey, Val)) return true;
+
+	return false;
 };
 
 void Wdbe::analyzeUnt(
@@ -1598,7 +1645,6 @@ void OpengWdbe::getIcsWdbeVDpchByIxWdbeVOppack(
 		insert(icsWdbeVDpch, VecWdbeVDpch::DPCHINVWDBEPLHMCUEHOSTIF);
 	} else if (ixWdbeVOppack == VecWdbeVOppack::WDBEPRCFILE) {
 		insert(icsWdbeVDpch, VecWdbeVDpch::DPCHINVWDBEPRCFILECONCAT);
-		insert(icsWdbeVDpch, VecWdbeVDpch::DPCHINVWDBEPRCFILEIEXCONV);
 		insert(icsWdbeVDpch, VecWdbeVDpch::DPCHINVWDBEPRCFILEPLHRPL);
 	} else if (ixWdbeVOppack == VecWdbeVOppack::WDBEPRCTREE) {
 		insert(icsWdbeVDpch, VecWdbeVDpch::DPCHINVWDBEPRCTREEEXTRACT);
@@ -1662,6 +1708,7 @@ string StubWdbe::getStub(
 	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEIMBSTD) return getStubImbStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
 	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBELIBSREF) return getStubLibSref(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
 	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBELIBSTD) return getStubLibStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEMCHSREF) return getStubMchSref(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
 	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEMCHSTD) return getStubMchStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
 	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEMDLHSREF) return getStubMdlHsref(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
 	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEMDLSREF) return getStubMdlSref(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
@@ -2561,7 +2608,7 @@ string StubWdbe::getStubLibStd(
 	return stub;
 };
 
-string StubWdbe::getStubMchStd(
+string StubWdbe::getStubMchSref(
 			DbsWdbe* dbswdbe
 			, const ubigint ref
 			, const uint ixWdbeVLocale
@@ -2570,10 +2617,10 @@ string StubWdbe::getStubMchStd(
 			, stcchitemref_t* strefSub
 			, const bool refresh
 		) {
-	// example: "genio"
+	// example: "jack"
 	string stub;
 
-	stcchitemref_t stref(VecWdbeVStub::STUBWDBEMCHSTD, ref, ixWdbeVLocale);
+	stcchitemref_t stref(VecWdbeVStub::STUBWDBEMCHSREF, ref, ixWdbeVLocale);
 	Stcchitem* stit = NULL;
 
 	if (stcch) {
@@ -2597,6 +2644,51 @@ string StubWdbe::getStubMchStd(
 				if (!stit) stit = stcch->addStit(stref);
 				stit->stub = stub;
 			};
+		};
+	};
+
+	return stub;
+};
+
+string StubWdbe::getStubMchStd(
+			DbsWdbe* dbswdbe
+			, const ubigint ref
+			, const uint ixWdbeVLocale
+			, const uint ixVNonetype
+			, Stcch* stcch
+			, stcchitemref_t* strefSub
+			, const bool refresh
+		) {
+	// example: "any;ubuntu;mpsitech;jack"
+	string stub;
+
+	WdbeMMachine* rec = NULL;
+
+	stcchitemref_t stref(VecWdbeVStub::STUBWDBEMCHSTD, ref, ixWdbeVLocale);
+	Stcchitem* stit = NULL;
+
+	if (stcch) {
+		stit = stcch->getStitByStref(stref);
+		if (stit && !refresh) {
+			if (strefSub) stcch->link(stref, *strefSub);
+			return stit->stub;
+		};
+	};
+
+	if (ixVNonetype == Stub::VecVNonetype::DASH) stub = "-";
+	else if (ixVNonetype == Stub::VecVNonetype::SHORT) {
+		if (ixWdbeVLocale == VecWdbeVLocale::ENUS) stub = "(none)";
+	} else if (ixVNonetype == Stub::VecVNonetype::FULL) {
+		if (ixWdbeVLocale == VecWdbeVLocale::ENUS) stub = "(no machine)";
+	};
+
+	if (ref != 0) {
+		if (dbswdbe->tblwdbemmachine->loadRecByRef(ref, &rec)) {
+			if (stcch && !stit) stit = stcch->addStit(stref);
+			stub = rec->sref;
+			if (rec->supRefWdbeMMachine != 0) stub = getStubMchStd(dbswdbe, rec->supRefWdbeMMachine, ixWdbeVLocale, ixVNonetype, stcch, &stref) + ";" + stub;
+			if (stit) stit->stub = stub;
+			delete rec;
 		};
 	};
 
@@ -4483,5 +4575,6 @@ void DpchRetWdbe::writeXML(
 		writeUtinyint(wr, "pdone", pdone);
 	xmlTextWriterEndElement(wr);
 };
+
 
 

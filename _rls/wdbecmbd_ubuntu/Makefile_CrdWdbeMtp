@@ -1,0 +1,39 @@
+# file Makefile
+# make file for CrdWdbeMtp card job handler, release wdbecmbd_ubuntu
+# copyright: (C) 2016-2020 MPSI Technologies GmbH
+# author: Alexander Wirthmueller (auto-generation)
+# date created: 5 Dec 2020
+# IP header --- ABOVE
+
+include ../Makefile.inc
+
+CPP = g++
+CPPFLAGS = -std=c++11 -g -Wall -Os -pthread -DWDBECMBD
+
+STATLIB = ar
+STATLIBFLAGS = rcs
+
+INCPATH = -I$(BUILDROOT)/dbswdbe -I$(BUILDROOT)/wdbecmbd/VecWdbe -I$(BUILDROOT)/wdbecmbd/IexWdbe -I$(BUILDROOT)/wdbecmbd
+INCPATH += -I${WHIZSDKROOT}/build -I${WHIZSDKROOT}/build/apiwzlm -I/usr/include -I/usr/include/jsoncpp -I/usr/include/libxml2 -I/usr/include/mariadb
+
+OBJS = CrdWdbeMtp.o PnlWdbeMtpList.o QryWdbeMtpList.o PnlWdbeMtpHeadbar.o PnlWdbeMtpRec.o PnlWdbeMtpMge1NSignal.o QryWdbeMtpMge1NSignal.o PnlWdbeMtpRef1NFile.o QryWdbeMtpRef1NFile.o PnlWdbeMtpSup1NModule.o QryWdbeMtpSup1NModule.o PnlWdbeMtpMdl1NPort.o QryWdbeMtpMdl1NPort.o PnlWdbeMtpTpl1NModule.o QryWdbeMtpTpl1NModule.o PnlWdbeMtpMdl1NGeneric.o QryWdbeMtpMdl1NGeneric.o PnlWdbeMtpAPar.o QryWdbeMtpAPar.o PnlWdbeMtpKHdltype.o QryWdbeMtpKHdltype.o PnlWdbeMtpKParKey.o QryWdbeMtpKParKey.o PnlWdbeMtpDetail.o
+
+LIB = libcrdwdbemtp
+
+.SUFFIXES: .cpp
+
+.cpp.o :
+	$(CPP) $(CPPFLAGS) $(INCPATH) -o $@ -c $<
+
+all:	$(LIB)
+
+$(LIB):	$(OBJS)
+	$(STATLIB) $(STATLIBFLAGS) $(LIB).a $(OBJS)
+	rm -f *.o
+
+install:
+	mv $(LIB).a $(LIBROOT)/wdbecmbd/
+
+clean:
+	rm -f *.o
+

@@ -1,11 +1,3 @@
-/**
-  * \file PnlWdbeVarList.js
-  * web client functionality for panel PnlWdbeVarList
-  * \author Alexander Wirthmueller
-  * \date created: 23 Aug 2020
-  * \date modified: 23 Aug 2020
-  */
-
 // --- expand state management
 function minimize() {
 	// change container heights
@@ -137,9 +129,9 @@ function refreshB(chgcol) {
 			ix++;
 
 			if (i == 1) {
-				doc.cols.push("TcoSrf"); doc.widths.push(TcoSrfWidth); doc.fs.push("srf"); doc.tos.push(1); wtot += TcoSrfWidth;
+				doc.cols.push("TcoSrf"); doc.widths.push(TcoSrfWidth); doc.fs.push("srf"); doc.tos.push(2); wtot += TcoSrfWidth;
 			} else if (i == 2) {
-				doc.cols.push("TcoPrc"); doc.widths.push(TcoPrcWidth); doc.fs.push("prc"); doc.tos.push(2); wtot += TcoPrcWidth;
+				doc.cols.push("TcoPrc"); doc.widths.push(TcoPrcWidth); doc.fs.push("prc"); doc.tos.push(1); wtot += TcoPrcWidth;
 			} else if (i == 3) {
 				doc.cols.push("TcoCon"); doc.widths.push(TcoConWidth); doc.fs.push("con"); doc.tos.push(0); wtot += TcoConWidth;
 			} else if (i == 4) {

@@ -1,18 +1,19 @@
 /**
 	* \file Wdbe.h
 	* Wdbe global functionality (declarations)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
-	*/
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
+  */
+// IP header --- ABOVE
 
 #ifndef WDBE_H
 #define WDBE_H
 
-#define WDBE_VERSION "1.0.3"
+#define WDBE_VERSION "1.1.0"
 #define WDBE_VERSION_MAJOR 1
-#define WDBE_VERSION_MINOR 0
-#define WDBE_VERSION_SUB 3
+#define WDBE_VERSION_MINOR 1
+#define WDBE_VERSION_SUB 0
 
 #include <sys/wait.h> // IP include.cust --- ILINE
 
@@ -100,6 +101,11 @@ namespace Wdbe {
 	std::string getPrjshort(DbsWdbe* dbswdbe, const Sbecore::ubigint refWdbeMVersion);
 	void updateVerste(DbsWdbe* dbswdbe, const Sbecore::ubigint refWdbeMVersion, const Sbecore::uint ixVState);
 
+	bool getLibmkf(DbsWdbe* dbswdbe, const Sbecore::ubigint refWdbeMLibrary, const Sbecore::ubigint x1RefWdbeMMachine, std::vector<Sbecore::ubigint>& hrefsMch, const std::string& x2SrefKTag, std::string& Val);
+
+	bool getMchmkf(DbsWdbe* dbswdbe, const Sbecore::ubigint refWdbeMMachine, std::vector<Sbecore::ubigint>& hrefsMch, const std::string& x1SrefKTag, std::string& Val);
+	bool getMchpar(DbsWdbe* dbswdbe, const Sbecore::ubigint refWdbeMMachine, std::vector<Sbecore::ubigint>& hrefsMch, const std::string& x1SrefKKey, std::string& Val);
+
 	void analyzeUnt(DbsWdbe* dbswdbe, WdbeMUnit* unt, std::string& srefroot, ListWdbeMVector& vecs, ListWdbeMController& ctrs, ListWdbeMImbuf& imbs, ListWdbeMCommand& cmds, ListWdbeMError& errs, Sbecore::ubigint& refHostif, Sbecore::uint& ixImbCmdinv, Sbecore::uint& ixImbCmdret, bool& hasvecbuf, bool& hasvecctr, bool& hasveccmd, bool& hasvecerr, bool& hasspeccmd);
 
 	void getPairsCmdbus(DbsWdbe* dbswdbe, ListWdbeMModule& mdls, std::set<std::pair<std::string,std::string> >& pairsCmdbus);
@@ -184,6 +190,7 @@ namespace StubWdbe {
 	std::string getStubImbStd(DbsWdbe* dbswdbe, const Sbecore::ubigint ref, const Sbecore::uint ixWdbeVLocale = VecWdbeVLocale::ENUS, const Sbecore::uint ixVNonetype = Sbecore::Stub::VecVNonetype::DASH, Sbecore::Stcch* stcch = NULL, Sbecore::stcchitemref_t* strefSub = NULL, const bool refresh = false);
 	std::string getStubLibSref(DbsWdbe* dbswdbe, const Sbecore::ubigint ref, const Sbecore::uint ixWdbeVLocale = VecWdbeVLocale::ENUS, const Sbecore::uint ixVNonetype = Sbecore::Stub::VecVNonetype::DASH, Sbecore::Stcch* stcch = NULL, Sbecore::stcchitemref_t* strefSub = NULL, const bool refresh = false);
 	std::string getStubLibStd(DbsWdbe* dbswdbe, const Sbecore::ubigint ref, const Sbecore::uint ixWdbeVLocale = VecWdbeVLocale::ENUS, const Sbecore::uint ixVNonetype = Sbecore::Stub::VecVNonetype::DASH, Sbecore::Stcch* stcch = NULL, Sbecore::stcchitemref_t* strefSub = NULL, const bool refresh = false);
+	std::string getStubMchSref(DbsWdbe* dbswdbe, const Sbecore::ubigint ref, const Sbecore::uint ixWdbeVLocale = VecWdbeVLocale::ENUS, const Sbecore::uint ixVNonetype = Sbecore::Stub::VecVNonetype::DASH, Sbecore::Stcch* stcch = NULL, Sbecore::stcchitemref_t* strefSub = NULL, const bool refresh = false);
 	std::string getStubMchStd(DbsWdbe* dbswdbe, const Sbecore::ubigint ref, const Sbecore::uint ixWdbeVLocale = VecWdbeVLocale::ENUS, const Sbecore::uint ixVNonetype = Sbecore::Stub::VecVNonetype::DASH, Sbecore::Stcch* stcch = NULL, Sbecore::stcchitemref_t* strefSub = NULL, const bool refresh = false);
 	std::string getStubMdlHsref(DbsWdbe* dbswdbe, const Sbecore::ubigint ref, const Sbecore::uint ixWdbeVLocale = VecWdbeVLocale::ENUS, const Sbecore::uint ixVNonetype = Sbecore::Stub::VecVNonetype::DASH, Sbecore::Stcch* stcch = NULL, Sbecore::stcchitemref_t* strefSub = NULL, const bool refresh = false);
 	std::string getStubMdlSref(DbsWdbe* dbswdbe, const Sbecore::ubigint ref, const Sbecore::uint ixWdbeVLocale = VecWdbeVLocale::ENUS, const Sbecore::uint ixVNonetype = Sbecore::Stub::VecVNonetype::DASH, Sbecore::Stcch* stcch = NULL, Sbecore::stcchitemref_t* strefSub = NULL, const bool refresh = false);
@@ -357,5 +364,6 @@ public:
 };
 
 #endif
+
 
 

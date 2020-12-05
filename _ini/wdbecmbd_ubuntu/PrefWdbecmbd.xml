@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PrefWdbecmbd>
+	<StgWdbeAppearance>
+		<Si sref="histlength">20</Si>
+		<Si sref="suspsess">true</Si>
+	</StgWdbeAppearance>
+	<StgWdbeAppsrv>
+		<Si sref="port">13100</Si>
+		<Si sref="https">false</Si>
+	</StgWdbeAppsrv>
+	<StgWdbecmbd>
+		<Si sref="jobprcn">4</Si>
+		<Si sref="opprcn">1</Si>
+		<Si sref="appsrv">true</Si>
+	</StgWdbecmbd>
+	<StgWdbeDatabase>
+		<Si sref="srefIxDbsVDbstype">mar</Si>
+		<Si sref="dbspath">./DbsWdbe.sql</Si>
+		<Si sref="dbsname">DbsWdbe</Si>
+		<Si sref="username">default</Si>
+		<Si sref="password">asdf1234</Si>
+		<Si sref="ip">127.0.0.1</Si>
+		<Si sref="port">3306</Si>
+	</StgWdbeDatabase>
+	<StgWdbeMonitor>
+		<Si sref="username">wzemuser</Si>
+		<Si sref="password">asdf1234</Si>
+		<Si sref="ip">127.0.0.1</Si>
+		<Si sref="port">14100</Si>
+		<Si sref="srefIxDbsVDbstype"></Si>
+		<Si sref="dbspath">./DbsWzem.sql</Si>
+		<Si sref="dbsname">DbsWzem</Si>
+		<Si sref="dbsusername"></Si>
+		<Si sref="dbspassword"></Si>
+	</StgWdbeMonitor>
+	<StgWdbePath>
+		<Si sref="acvpath">${WHIZROOT}/acv/wdbe</Si>
+		<Si sref="keypath"></Si>
+		<Si sref="monpath">${WHIZROOT}/mon/wdbe</Si>
+		<Si sref="tmppath">${WHIZROOT}/tmp/wdbe</Si>
+		<Si sref="webpath">${WHIZROOT}/web/appwdbe</Si>
+		<Si sref="helpurl">http://www.mpsitech.com/wdbe</Si>
+	</StgWdbePath>
+	<StgWdbeTenant>
+		<Si sref="orgname"></Si>
+		<Si sref="orgweb"></Si>
+	</StgWdbeTenant>
+	<StgJobWdbeLicense>
+		<Si sref="engip">license.mpsitech.cloud</Si>
+		<Si sref="engport">13110</Si>
+		<Si sref="username"></Si>
+		<Si sref="password"></Si>
+		<Si sref="licenseBase"></Si>
+		<Si sref="licenseFull"></Si>
+		<Si sref="licenseTpl"></Si>
+		<Si sref="lastAttempt"></Si>
+		<Si sref="lastSuccess"></Si>
+		<Si sref="lastSync"></Si>
+	</StgJobWdbeLicense>
+</PrefWdbecmbd>

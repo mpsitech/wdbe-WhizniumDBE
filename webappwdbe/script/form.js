@@ -136,15 +136,15 @@ function refreshChk(contdoc, id, chk, act) {
 
 	myinput = contdoc.getElementById(id);
 
-	if (chk) myinput.setAttribute("checked", "checked");
-	else myinput.removeAttribute("checked");
+	myinput.checked = chk;
+	myinput.disabled = !act;
 
 	if (act) {
 		myinput.setAttribute("class", "chk");
 		myinput.setAttribute("onchange", "handle" + id + "Change()");
 	} else {
 		myinput.setAttribute("class", "chk");
-		myinput.setAttribute("onchange", "");
+		myinput.onchange = null;
 	};
 };
 

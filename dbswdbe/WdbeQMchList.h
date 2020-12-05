@@ -1,10 +1,11 @@
 /**
 	* \file WdbeQMchList.h
 	* Dbs and XML wrapper for table TblWdbeQMchList (declarations)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
-	*/
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 5 Dec 2020
+  */
+// IP header --- ABOVE
 
 #ifndef WDBEQMCHLIST_H
 #define WDBEQMCHLIST_H
@@ -24,7 +25,7 @@
 class WdbeQMchList {
 
 public:
-	WdbeQMchList(const Sbecore::ubigint qref = 0, const Sbecore::ubigint jref = 0, const Sbecore::uint jnum = 0, const Sbecore::ubigint ref = 0, const std::string sref = "", const std::string srefKPlatform = "", const std::string titSrefKPlatform = "");
+	WdbeQMchList(const Sbecore::ubigint qref = 0, const Sbecore::ubigint jref = 0, const Sbecore::uint jnum = 0, const Sbecore::ubigint ref = 0, const std::string sref = "", const Sbecore::ubigint supRefWdbeMMachine = 0, const std::string stubSupRefWdbeMMachine = "");
 
 public:
 	Sbecore::ubigint qref;
@@ -32,8 +33,8 @@ public:
 	Sbecore::uint jnum;
 	Sbecore::ubigint ref;
 	std::string sref;
-	std::string srefKPlatform;
-	std::string titSrefKPlatform;
+	Sbecore::ubigint supRefWdbeMMachine;
+	std::string stubSupRefWdbeMMachine;
 
 public:
 	void writeXML(xmlTextWriter* wr, std::string difftag = "", bool jnumattr = false, bool shorttags = false);
@@ -76,8 +77,8 @@ public:
 	virtual Sbecore::ubigint loadRstBySQL(const std::string& sqlstr, const bool append, ListWdbeQMchList& rst);
 
 	virtual Sbecore::ubigint insertRec(WdbeQMchList* rec);
-	Sbecore::ubigint insertNewRec(WdbeQMchList** rec = NULL, const Sbecore::ubigint jref = 0, const Sbecore::uint jnum = 0, const Sbecore::ubigint ref = 0, const std::string sref = "", const std::string srefKPlatform = "", const std::string titSrefKPlatform = "");
-	Sbecore::ubigint appendNewRecToRst(ListWdbeQMchList& rst, WdbeQMchList** rec = NULL, const Sbecore::ubigint jref = 0, const Sbecore::uint jnum = 0, const Sbecore::ubigint ref = 0, const std::string sref = "", const std::string srefKPlatform = "", const std::string titSrefKPlatform = "");
+	Sbecore::ubigint insertNewRec(WdbeQMchList** rec = NULL, const Sbecore::ubigint jref = 0, const Sbecore::uint jnum = 0, const Sbecore::ubigint ref = 0, const std::string sref = "", const Sbecore::ubigint supRefWdbeMMachine = 0, const std::string stubSupRefWdbeMMachine = "");
+	Sbecore::ubigint appendNewRecToRst(ListWdbeQMchList& rst, WdbeQMchList** rec = NULL, const Sbecore::ubigint jref = 0, const Sbecore::uint jnum = 0, const Sbecore::ubigint ref = 0, const std::string sref = "", const Sbecore::ubigint supRefWdbeMMachine = 0, const std::string stubSupRefWdbeMMachine = "");
 	virtual void insertRst(ListWdbeQMchList& rst);
 	virtual void updateRec(WdbeQMchList* rec);
 	virtual void updateRst(ListWdbeQMchList& rst);

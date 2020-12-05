@@ -1,10 +1,11 @@
 /**
 	* \file VecWdbeVCall.cpp
 	* vector VecWdbeVCall (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
-	*/
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
+  */
+// IP header --- ABOVE
 
 #include "VecWdbeVCall.h"
 
@@ -120,9 +121,11 @@ uint VecWdbeVCall::getIx(
 	if (s == "callwdbelog") return CALLWDBELOG;
 	if (s == "callwdbelogout") return CALLWDBELOGOUT;
 	if (s == "callwdbemch.ccheq") return CALLWDBEMCH_CCHEQ;
+	if (s == "callwdbemch.supeq") return CALLWDBEMCH_SUPEQ;
 	if (s == "callwdbemchamkfmod.mcheq") return CALLWDBEMCHAMKFMOD_MCHEQ;
 	if (s == "callwdbemchaparmod.mcheq") return CALLWDBEMCHAPARMOD_MCHEQ;
 	if (s == "callwdbemchmod") return CALLWDBEMCHMOD;
+	if (s == "callwdbemchmod.supeq") return CALLWDBEMCHMOD_SUPEQ;
 	if (s == "callwdbemchupd.refeq") return CALLWDBEMCHUPD_REFEQ;
 	if (s == "callwdbemdl.ctreq") return CALLWDBEMDL_CTREQ;
 	if (s == "callwdbemdl.hkteq") return CALLWDBEMDL_HKTEQ;
@@ -378,9 +381,11 @@ string VecWdbeVCall::getSref(
 	if (ix == CALLWDBELOG) return("CallWdbeLog");
 	if (ix == CALLWDBELOGOUT) return("CallWdbeLogout");
 	if (ix == CALLWDBEMCH_CCHEQ) return("CallWdbeMch.cchEq");
+	if (ix == CALLWDBEMCH_SUPEQ) return("CallWdbeMch.supEq");
 	if (ix == CALLWDBEMCHAMKFMOD_MCHEQ) return("CallWdbeMchAmkfMod.mchEq");
 	if (ix == CALLWDBEMCHAPARMOD_MCHEQ) return("CallWdbeMchAparMod.mchEq");
 	if (ix == CALLWDBEMCHMOD) return("CallWdbeMchMod");
+	if (ix == CALLWDBEMCHMOD_SUPEQ) return("CallWdbeMchMod.supEq");
 	if (ix == CALLWDBEMCHUPD_REFEQ) return("CallWdbeMchUpd.refEq");
 	if (ix == CALLWDBEMDL_CTREQ) return("CallWdbeMdl.ctrEq");
 	if (ix == CALLWDBEMDL_HKTEQ) return("CallWdbeMdl.hktEq");
@@ -533,4 +538,6 @@ string VecWdbeVCall::getSref(
 
 	return("");
 };
+
+
 

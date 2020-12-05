@@ -1,10 +1,11 @@
 /**
 	* \file DlgWdbeFilDownload.h
 	* job handler for job DlgWdbeFilDownload (declarations)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifndef DLGWDBEFILDOWNLOAD_H
 #define DLGWDBEFILDOWNLOAD_H
@@ -139,7 +140,7 @@ public:
 public:
 	DpchEngWdbe* getNewDpchEng(std::set<Sbecore::uint> items);
 
-	void refresh(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems);
+	void refresh(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems, const bool unmute = false);
 
 public:
 
@@ -157,4 +158,6 @@ private:
 };
 
 #endif
+
+
 

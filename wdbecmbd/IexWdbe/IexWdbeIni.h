@@ -1,10 +1,11 @@
 /**
 	* \file IexWdbeIni.h
 	* data blocks and readers/writers for import/export complex IexWdbeIni (declarations)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifndef IEXWDBEINI_H
 #define IEXWDBEINI_H
@@ -891,14 +892,14 @@ namespace IexWdbeIni {
 	class ImeitemIAMLibraryMakefile : public WdbeAMLibraryMakefile {
 
 	public:
-		ImeitemIAMLibraryMakefile(const std::string& srefX1RefWdbeMMachine = "", const std::string& x2SrefKTag = "", const std::string& Val = "");
+		ImeitemIAMLibraryMakefile(const std::string& hsrefX1RefWdbeMMachine = "", const std::string& x2SrefKTag = "", const std::string& Val = "");
 		ImeitemIAMLibraryMakefile(DbsWdbe* dbswdbe, const Sbecore::ubigint ref);
 
 	public:
 		Sbecore::uint lineno;
 		Sbecore::uint ixWIelValid;
 
-		std::string srefX1RefWdbeMMachine;
+		std::string hsrefX1RefWdbeMMachine;
 
 	public:
 		void readTxt(Sbecore::Txtrd& txtrd);
@@ -920,7 +921,7 @@ namespace IexWdbeIni {
 		class VecWIel {
 
 		public:
-			static const Sbecore::uint SREFX1REFWDBEMMACHINE = 1;
+			static const Sbecore::uint HSREFX1REFWDBEMMACHINE = 1;
 			static const Sbecore::uint X2SREFKTAG = 2;
 			static const Sbecore::uint VAL = 4;
 
@@ -1131,14 +1132,15 @@ namespace IexWdbeIni {
 	class ImeitemIMMachine : public WdbeMMachine {
 
 	public:
-		ImeitemIMMachine(const std::string& srefKPlatform = "", const std::string& sref = "", const std::string& srefCchRefWdbeMMachine = "", const std::string& Comment = "");
+		ImeitemIMMachine(const std::string& hsrefSupRefWdbeMMachine = "", const std::string& sref = "", const std::string& hsrefCchRefWdbeMMachine = "", const std::string& Comment = "");
 		ImeitemIMMachine(DbsWdbe* dbswdbe, const Sbecore::ubigint ref);
 
 	public:
 		Sbecore::uint lineno;
 		Sbecore::uint ixWIelValid;
 
-		std::string srefCchRefWdbeMMachine;
+		std::string hsrefSupRefWdbeMMachine;
+		std::string hsrefCchRefWdbeMMachine;
 
 		ImeIAMMachineMakefile imeiammachinemakefile;
 		ImeIAMMachinePar imeiammachinepar;
@@ -1163,9 +1165,9 @@ namespace IexWdbeIni {
 		class VecWIel {
 
 		public:
-			static const Sbecore::uint SREFKPLATFORM = 1;
+			static const Sbecore::uint HSREFSUPREFWDBEMMACHINE = 1;
 			static const Sbecore::uint SREF = 2;
-			static const Sbecore::uint SREFCCHREFWDBEMMACHINE = 4;
+			static const Sbecore::uint HSREFCCHREFWDBEMMACHINE = 4;
 			static const Sbecore::uint COMMENT = 8;
 
 			static Sbecore::uint getIx(const std::string& srefs);
@@ -3126,7 +3128,7 @@ namespace IexWdbeIni {
 		void writeXML(xmlTextWriter* wr, const bool shorttags = true);
 	};
 
-	void parseFromFile(const std::string& fullpath, const bool xmlNotTxt, ImeIAVControlPar& imeiavcontrolpar, ImeIAVKeylistKey1& imeiavkeylistkey1, ImeIAVValuelistVal& imeiavvaluelistval, ImeIMCoreproject& imeimcoreproject, ImeIMFamily& imeimfamily, ImeIMFile1& imeimfile1, ImeIMLibrary& imeimlibrary, ImeIMMachine& imeimmachine, ImeIMModule& imeimmodule, ImeIMUnit& imeimunit, ImeIMUsergroup& imeimusergroup);
+	void parseFromFile(const std::string& fullpath, const bool xmlNotTxt, const std::string& rectpath, ImeIAVControlPar& imeiavcontrolpar, ImeIAVKeylistKey1& imeiavkeylistkey1, ImeIAVValuelistVal& imeiavvaluelistval, ImeIMCoreproject& imeimcoreproject, ImeIMFamily& imeimfamily, ImeIMFile1& imeimfile1, ImeIMLibrary& imeimlibrary, ImeIMMachine& imeimmachine, ImeIMModule& imeimmodule, ImeIMUnit& imeimunit, ImeIMUsergroup& imeimusergroup);
 	void exportToFile(const std::string& fullpath, const bool xmlNotTxt, const bool shorttags, ImeIAVControlPar& imeiavcontrolpar, ImeIAVKeylistKey1& imeiavkeylistkey1, ImeIAVValuelistVal& imeiavvaluelistval, ImeIMCoreproject& imeimcoreproject, ImeIMFamily& imeimfamily, ImeIMFile1& imeimfile1, ImeIMLibrary& imeimlibrary, ImeIMMachine& imeimmachine, ImeIMModule& imeimmodule, ImeIMUnit& imeimunit, ImeIMUsergroup& imeimusergroup);
 
 	void readTxt(Sbecore::Txtrd& txtrd, ImeIAVControlPar& imeiavcontrolpar, ImeIAVKeylistKey1& imeiavkeylistkey1, ImeIAVValuelistVal& imeiavvaluelistval, ImeIMCoreproject& imeimcoreproject, ImeIMFamily& imeimfamily, ImeIMFile1& imeimfile1, ImeIMLibrary& imeimlibrary, ImeIMMachine& imeimmachine, ImeIMModule& imeimmodule, ImeIMUnit& imeimunit, ImeIMUsergroup& imeimusergroup);
@@ -3140,4 +3142,6 @@ namespace IexWdbeIni {
 };
 
 #endif
+
+
 

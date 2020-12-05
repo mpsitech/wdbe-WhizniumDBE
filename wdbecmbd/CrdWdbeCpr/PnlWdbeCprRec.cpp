@@ -1,10 +1,11 @@
 /**
 	* \file PnlWdbeCprRec.cpp
 	* job handler for job PnlWdbeCprRec (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifdef WDBECMBD
 	#include <Wdbecmbd.h>
@@ -37,9 +38,9 @@ PnlWdbeCprRec::PnlWdbeCprRec(
 		{
 	jref = xchg->addJob(dbswdbe, this, jrefSup);
 
-	pnldetail = NULL;
-	pnl1ncoreversion = NULL;
 	pnlmnperson = NULL;
+	pnl1ncoreversion = NULL;
+	pnldetail = NULL;
 
 	// IP constructor.cust1 --- INSERT
 
@@ -80,7 +81,11 @@ DpchEngWdbe* PnlWdbeCprRec::getNewDpchEng(
 void PnlWdbeCprRec::refresh(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
+			, const bool unmute
 		) {
+	if (muteRefresh && !unmute) return;
+	muteRefresh = true;
+
 	ContInf oldContinf(continf);
 	StatShr oldStatshr(statshr);
 
@@ -111,6 +116,7 @@ void PnlWdbeCprRec::refresh(
 	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
 	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
 
+	muteRefresh = false;
 };
 
 void PnlWdbeCprRec::updatePreset(
@@ -243,11 +249,20 @@ void PnlWdbeCprRec::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBECPR_CVREQ) {
-		call->abort = handleCallWdbeCpr_cvrEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECPRUPD_REFEQ) {
+	if (call->ixVCall == VecWdbeVCall::CALLWDBECPRUPD_REFEQ) {
 		call->abort = handleCallWdbeCprUpd_refEq(dbswdbe, call->jref);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECPR_CVREQ) {
+		call->abort = handleCallWdbeCpr_cvrEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
 	};
+};
+
+bool PnlWdbeCprRec::handleCallWdbeCprUpd_refEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+	// IP handleCallWdbeCprUpd_refEq --- INSERT
+	return retval;
 };
 
 bool PnlWdbeCprRec::handleCallWdbeCpr_cvrEq(
@@ -261,12 +276,5 @@ bool PnlWdbeCprRec::handleCallWdbeCpr_cvrEq(
 	return retval;
 };
 
-bool PnlWdbeCprRec::handleCallWdbeCprUpd_refEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-	// IP handleCallWdbeCprUpd_refEq --- INSERT
-	return retval;
-};
+
 

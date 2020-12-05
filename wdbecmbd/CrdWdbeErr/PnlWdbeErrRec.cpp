@@ -1,10 +1,11 @@
 /**
 	* \file PnlWdbeErrRec.cpp
 	* job handler for job PnlWdbeErrRec (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifdef WDBECMBD
 	#include <Wdbecmbd.h>
@@ -37,17 +38,17 @@ PnlWdbeErrRec::PnlWdbeErrRec(
 		{
 	jref = xchg->addJob(dbswdbe, this, jrefSup);
 
-	pnldetail = NULL;
 	pnlapar = NULL;
+	pnldetail = NULL;
 
 	// IP constructor.cust1 --- INSERT
 
 	// IP constructor.cust2 --- INSERT
 
-	xchg->addClstn(VecWdbeVCall::CALLWDBEERR_RETEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecWdbeVCall::CALLWDBEERR_REU_INSBS, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecWdbeVCall::CALLWDBEERR_REU_MDL_INSBS, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBEERR_REUEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBEERR_REU_MDL_INSBS, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBEERR_REU_INSBS, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBEERR_RETEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -82,7 +83,11 @@ DpchEngWdbe* PnlWdbeErrRec::getNewDpchEng(
 void PnlWdbeErrRec::refresh(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
+			, const bool unmute
 		) {
+	if (muteRefresh && !unmute) return;
+	muteRefresh = true;
+
 	ContInf oldContinf(continf);
 	StatShr oldStatshr(statshr);
 
@@ -110,6 +115,7 @@ void PnlWdbeErrRec::refresh(
 	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
 	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
 
+	muteRefresh = false;
 };
 
 void PnlWdbeErrRec::updatePreset(
@@ -241,49 +247,25 @@ void PnlWdbeErrRec::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBEERR_RETEQ) {
-		call->abort = handleCallWdbeErr_retEq(dbswdbe, call->jref, call->argInv.ix, call->argRet.boolval);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEERR_REU_INSBS) {
-		call->abort = handleCallWdbeErr_reu_inSbs(dbswdbe, call->jref, call->argInv.ix, call->argRet.boolval);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEERR_REU_MDL_INSBS) {
-		call->abort = handleCallWdbeErr_reu_mdl_inSbs(dbswdbe, call->jref, call->argInv.ix, call->argRet.boolval);
+	if (call->ixVCall == VecWdbeVCall::CALLWDBEERRUPD_REFEQ) {
+		call->abort = handleCallWdbeErrUpd_refEq(dbswdbe, call->jref);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEERR_REUEQ) {
 		call->abort = handleCallWdbeErr_reuEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEERRUPD_REFEQ) {
-		call->abort = handleCallWdbeErrUpd_refEq(dbswdbe, call->jref);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEERR_REU_MDL_INSBS) {
+		call->abort = handleCallWdbeErr_reu_mdl_inSbs(dbswdbe, call->jref, call->argInv.ix, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEERR_REU_INSBS) {
+		call->abort = handleCallWdbeErr_reu_inSbs(dbswdbe, call->jref, call->argInv.ix, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEERR_RETEQ) {
+		call->abort = handleCallWdbeErr_retEq(dbswdbe, call->jref, call->argInv.ix, call->argRet.boolval);
 	};
 };
 
-bool PnlWdbeErrRec::handleCallWdbeErr_retEq(
+bool PnlWdbeErrRec::handleCallWdbeErrUpd_refEq(
 			DbsWdbe* dbswdbe
 			, const ubigint jrefTrig
-			, const uint ixInv
-			, bool& boolvalRet
 		) {
 	bool retval = false;
-	boolvalRet = (recErr.refIxVTbl == ixInv); // IP handleCallWdbeErr_retEq --- LINE
-	return retval;
-};
-
-bool PnlWdbeErrRec::handleCallWdbeErr_reu_inSbs(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-			, const uint ixInv
-			, bool& boolvalRet
-		) {
-	bool retval = false;
-	boolvalRet = ((dbswdbe->getIxWSubsetByRefWdbeMUnit(recErr.refUref) & ixInv) != 0); // IP handleCallWdbeErr_reu_inSbs --- LINE
-	return retval;
-};
-
-bool PnlWdbeErrRec::handleCallWdbeErr_reu_mdl_inSbs(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-			, const uint ixInv
-			, bool& boolvalRet
-		) {
-	bool retval = false;
-	boolvalRet = ((dbswdbe->getIxWSubsetByRefWdbeMModule([&](){ubigint ref; dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMModule WHERE refWdbeMController = " + to_string(recErr.refUref), ref); return ref;}()) & ixInv) != 0); // IP handleCallWdbeErr_reu_mdl_inSbs --- LINE
+	// IP handleCallWdbeErrUpd_refEq --- INSERT
 	return retval;
 };
 
@@ -298,12 +280,38 @@ bool PnlWdbeErrRec::handleCallWdbeErr_reuEq(
 	return retval;
 };
 
-bool PnlWdbeErrRec::handleCallWdbeErrUpd_refEq(
+bool PnlWdbeErrRec::handleCallWdbeErr_reu_mdl_inSbs(
 			DbsWdbe* dbswdbe
 			, const ubigint jrefTrig
+			, const uint ixInv
+			, bool& boolvalRet
 		) {
 	bool retval = false;
-	// IP handleCallWdbeErrUpd_refEq --- INSERT
+	boolvalRet = ((dbswdbe->getIxWSubsetByRefWdbeMModule([&](){ubigint ref; dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMModule WHERE refWdbeMController = " + to_string(recErr.refUref), ref); return ref;}()) & ixInv) != 0); // IP handleCallWdbeErr_reu_mdl_inSbs --- LINE
 	return retval;
 };
+
+bool PnlWdbeErrRec::handleCallWdbeErr_reu_inSbs(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+			, const uint ixInv
+			, bool& boolvalRet
+		) {
+	bool retval = false;
+	boolvalRet = ((dbswdbe->getIxWSubsetByRefWdbeMUnit(recErr.refUref) & ixInv) != 0); // IP handleCallWdbeErr_reu_inSbs --- LINE
+	return retval;
+};
+
+bool PnlWdbeErrRec::handleCallWdbeErr_retEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+			, const uint ixInv
+			, bool& boolvalRet
+		) {
+	bool retval = false;
+	boolvalRet = (recErr.refIxVTbl == ixInv); // IP handleCallWdbeErr_retEq --- LINE
+	return retval;
+};
+
+
 

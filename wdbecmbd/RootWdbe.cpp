@@ -1,10 +1,11 @@
 /**
 	* \file RootWdbe.cpp
 	* job handler for job RootWdbe (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifdef WDBECMBD
 	#include <Wdbecmbd.h>
@@ -54,8 +55,8 @@ RootWdbe::RootWdbe(
 
 	// IP constructor.spec2 --- INSERT
 
-	xchg->addClstn(VecWdbeVCall::CALLWDBELOGOUT, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBESUSPSESS, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBELOGOUT, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -234,6 +235,7 @@ void RootWdbe::clearQtb(
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQMchAMakefile");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQMchAPar");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQMchList");
+	dbswdbe->executeQuery("DELETE FROM TblWdbeQMchSup1NMachine");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQMod1NPeripheral");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQMod1NProcess");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQModAPar");
@@ -373,6 +375,7 @@ void RootWdbe::handleRequest(
 			cout << "\tclearAll" << endl;
 			cout << "\tcreateSess" << endl;
 			cout << "\teraseSess" << endl;
+			cout << "\texportIni" << endl;
 			cout << "\ttest" << endl;
 		} else if (req->cmd == "clearAll") {
 			req->retain = handleClearAll(dbswdbe);
@@ -382,6 +385,9 @@ void RootWdbe::handleRequest(
 
 		} else if (req->cmd == "eraseSess") {
 			req->retain = handleEraseSess(dbswdbe);
+
+		} else if (req->cmd == "exportIni") {
+			req->retain = handleExportIni(dbswdbe);
 
 		} else if (req->cmd == "test") {
 			req->retain = handleTest(dbswdbe);
@@ -469,6 +475,14 @@ bool RootWdbe::handleEraseSess(
 	};
 
 	return false;
+	return retval;
+};
+
+bool RootWdbe::handleExportIni(
+			DbsWdbe* dbswdbe
+		) {
+	bool retval = false;
+	// IP handleExportIni --- INSERT
 	return retval;
 };
 
@@ -696,11 +710,23 @@ void RootWdbe::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBELOGOUT) {
-		call->abort = handleCallWdbeLogout(dbswdbe, call->jref, call->argInv.boolval);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBESUSPSESS) {
+	if (call->ixVCall == VecWdbeVCall::CALLWDBESUSPSESS) {
 		call->abort = handleCallWdbeSuspsess(dbswdbe, call->jref);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBELOGOUT) {
+		call->abort = handleCallWdbeLogout(dbswdbe, call->jref, call->argInv.boolval);
 	};
+};
+
+bool RootWdbe::handleCallWdbeSuspsess(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+
+	xchg->addBoolvalPreset(VecWdbeVPreset::PREWDBESUSPSESS, jrefTrig, true);
+	xchg->removeDcolsByJref(jrefTrig);
+
+	return retval;
 };
 
 bool RootWdbe::handleCallWdbeLogout(
@@ -728,18 +754,6 @@ bool RootWdbe::handleCallWdbeLogout(
 	return retval;
 };
 
-bool RootWdbe::handleCallWdbeSuspsess(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-
-	xchg->addBoolvalPreset(VecWdbeVPreset::PREWDBESUSPSESS, jrefTrig, true);
-	xchg->removeDcolsByJref(jrefTrig);
-
-	return retval;
-};
-
 void RootWdbe::changeStage(
 			DbsWdbe* dbswdbe
 			, uint _ixVSge
@@ -756,7 +770,7 @@ void RootWdbe::changeStage(
 
 			setStage(dbswdbe, _ixVSge);
 			reenter = false;
-			if (!muteRefresh) refreshWithDpchEng(dbswdbe, dpcheng); // IP changeStage.refresh1 --- LINE
+			refreshWithDpchEng(dbswdbe, dpcheng); // IP changeStage.refresh1 --- LINE
 		};
 
 		switch (_ixVSge) {
@@ -831,5 +845,6 @@ void RootWdbe::leaveSgeSync(
 		) {
 	// IP leaveSgeSync --- INSERT
 };
+
 
 

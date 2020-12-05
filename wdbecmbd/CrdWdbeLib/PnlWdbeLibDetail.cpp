@@ -1,10 +1,11 @@
 /**
 	* \file PnlWdbeLibDetail.cpp
 	* job handler for job PnlWdbeLibDetail (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifdef WDBECMBD
 	#include <Wdbecmbd.h>
@@ -152,7 +153,11 @@ void PnlWdbeLibDetail::refreshRecLib(
 void PnlWdbeLibDetail::refresh(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
+			, const bool unmute
 		) {
+	if (muteRefresh && !unmute) return;
+	muteRefresh = true;
+
 	StatShr oldStatshr(statshr);
 
 	// IP refresh --- BEGIN
@@ -162,6 +167,8 @@ void PnlWdbeLibDetail::refresh(
 	// IP refresh --- END
 
 	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
+
+	muteRefresh = false;
 };
 
 void PnlWdbeLibDetail::updatePreset(
@@ -291,4 +298,6 @@ bool PnlWdbeLibDetail::handleCallWdbeLibUpd_refEq(
 	// IP handleCallWdbeLibUpd_refEq --- INSERT
 	return retval;
 };
+
+
 

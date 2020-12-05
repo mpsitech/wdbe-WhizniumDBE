@@ -1,10 +1,11 @@
 /**
 	* \file ApiWdbe.cpp
 	* Wdbe API library global functionality (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
-	*/
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 5 Dec 2020
+  */
+// IP header --- ABOVE
 
 #include "ApiWdbe.h"
 
@@ -174,9 +175,6 @@ uint ApiWdbe::readDpchEng(
 		} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHENGDLGWDBEUTLEXTRIPDATA) {
 			*dpcheng = new DlgWdbeUtlExtrip::DpchEngData();
 			((DlgWdbeUtlExtrip::DpchEngData*) *dpcheng)->readXML(docctx, "/", true);
-		} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHENGDLGWDBEUTLIEXCONVDATA) {
-			*dpcheng = new DlgWdbeUtlIexconv::DpchEngData();
-			((DlgWdbeUtlIexconv::DpchEngData*) *dpcheng)->readXML(docctx, "/", true);
 		} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHENGDLGWDBEUTLMRGIPDATA) {
 			*dpcheng = new DlgWdbeUtlMrgip::DpchEngData();
 			((DlgWdbeUtlMrgip::DpchEngData*) *dpcheng)->readXML(docctx, "/", true);
@@ -423,6 +421,9 @@ uint ApiWdbe::readDpchEng(
 		} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHENGWDBEMCHRECDATA) {
 			*dpcheng = new PnlWdbeMchRec::DpchEngData();
 			((PnlWdbeMchRec::DpchEngData*) *dpcheng)->readXML(docctx, "/", true);
+		} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHENGWDBEMCHSUP1NMACHINEDATA) {
+			*dpcheng = new PnlWdbeMchSup1NMachine::DpchEngData();
+			((PnlWdbeMchSup1NMachine::DpchEngData*) *dpcheng)->readXML(docctx, "/", true);
 		} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHENGWDBEMOD1NPERIPHERALDATA) {
 			*dpcheng = new PnlWdbeMod1NPeripheral::DpchEngData();
 			((PnlWdbeMod1NPeripheral::DpchEngData*) *dpcheng)->readXML(docctx, "/", true);

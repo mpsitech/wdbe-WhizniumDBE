@@ -1,10 +1,11 @@
 /**
 	* \file PnlWdbeUsgDetail.cpp
 	* job handler for job PnlWdbeUsgDetail (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifdef WDBECMBD
 	#include <Wdbecmbd.h>
@@ -104,7 +105,11 @@ void PnlWdbeUsgDetail::refreshRecUsg(
 void PnlWdbeUsgDetail::refresh(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
+			, const bool unmute
 		) {
+	if (muteRefresh && !unmute) return;
+	muteRefresh = true;
+
 	StatShr oldStatshr(statshr);
 
 	// IP refresh --- BEGIN
@@ -114,6 +119,8 @@ void PnlWdbeUsgDetail::refresh(
 	// IP refresh --- END
 
 	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
+
+	muteRefresh = false;
 };
 
 void PnlWdbeUsgDetail::updatePreset(
@@ -224,4 +231,6 @@ bool PnlWdbeUsgDetail::handleCallWdbeUsgUpd_refEq(
 	// IP handleCallWdbeUsgUpd_refEq --- INSERT
 	return retval;
 };
+
+
 

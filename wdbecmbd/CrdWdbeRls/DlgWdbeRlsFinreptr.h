@@ -1,10 +1,11 @@
 /**
 	* \file DlgWdbeRlsFinreptr.h
 	* job handler for job DlgWdbeRlsFinreptr (declarations)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifndef DLGWDBERLSFINREPTR_H
 #define DLGWDBERLSFINREPTR_H
@@ -400,15 +401,15 @@ public:
 		void writeXML(const Sbecore::uint ixWdbeVLocale, xmlTextWriter* wr);
 	};
 
-	bool evalFinButRunActive(DbsWdbe* dbswdbe);
-	bool evalFinButStoActive(DbsWdbe* dbswdbe);
+	bool evalButDneActive(DbsWdbe* dbswdbe);
 	bool evalResDldAvail(DbsWdbe* dbswdbe);
 	bool evalResDldActive(DbsWdbe* dbswdbe);
 	bool evalResTxtPrgAvail(DbsWdbe* dbswdbe);
 	bool evalResSep1Avail(DbsWdbe* dbswdbe);
 	bool evalResButPsgAvail(DbsWdbe* dbswdbe);
 	bool evalResButPsgActive(DbsWdbe* dbswdbe);
-	bool evalButDneActive(DbsWdbe* dbswdbe);
+	bool evalFinButRunActive(DbsWdbe* dbswdbe);
+	bool evalFinButStoActive(DbsWdbe* dbswdbe);
 
 public:
 	DlgWdbeRlsFinreptr(XchgWdbe* xchg, DbsWdbe* dbswdbe, const Sbecore::ubigint jrefSup, const Sbecore::uint ixWdbeVLocale);
@@ -457,7 +458,7 @@ public:
 	void refreshFin(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems);
 	void refreshRes(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems);
 
-	void refresh(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems);
+	void refresh(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems, const bool unmute = false);
 
 public:
 
@@ -514,5 +515,6 @@ private:
 };
 
 #endif
+
 
 

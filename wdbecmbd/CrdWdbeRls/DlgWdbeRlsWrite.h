@@ -1,10 +1,11 @@
 /**
 	* \file DlgWdbeRlsWrite.h
 	* job handler for job DlgWdbeRlsWrite (declarations)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifndef DLGWDBERLSWRITE_H
 #define DLGWDBERLSWRITE_H
@@ -521,15 +522,15 @@ public:
 		void writeXML(const Sbecore::uint ixWdbeVLocale, xmlTextWriter* wr);
 	};
 
-	bool evalCucUldAvail(DbsWdbe* dbswdbe);
-	bool evalCucUldActive(DbsWdbe* dbswdbe);
+	bool evalButDneActive(DbsWdbe* dbswdbe);
+	bool evalFiaDldAvail(DbsWdbe* dbswdbe);
+	bool evalFiaDldActive(DbsWdbe* dbswdbe);
+	bool evalLfiDldActive(DbsWdbe* dbswdbe);
 	bool evalWrcButAutActive(DbsWdbe* dbswdbe);
 	bool evalWrcButRunActive(DbsWdbe* dbswdbe);
 	bool evalWrcButStoActive(DbsWdbe* dbswdbe);
-	bool evalLfiDldActive(DbsWdbe* dbswdbe);
-	bool evalFiaDldAvail(DbsWdbe* dbswdbe);
-	bool evalFiaDldActive(DbsWdbe* dbswdbe);
-	bool evalButDneActive(DbsWdbe* dbswdbe);
+	bool evalCucUldAvail(DbsWdbe* dbswdbe);
+	bool evalCucUldActive(DbsWdbe* dbswdbe);
 
 public:
 	DlgWdbeRlsWrite(XchgWdbe* xchg, DbsWdbe* dbswdbe, const Sbecore::ubigint jrefSup, const Sbecore::uint ixWdbeVLocale);
@@ -564,6 +565,11 @@ public:
 	bool Prjeasy;
 
 	Sbecore::uint ixRlstype;
+
+	std::string cchost;
+	std::string ncore;
+	std::string sysroot;
+	std::string inceq;
 
 	std::string infilename;
 	std::string outfolder; // working directory
@@ -608,7 +614,7 @@ public:
 	void refreshLfi(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems);
 	void refreshFia(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems);
 
-	void refresh(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems);
+	void refresh(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems, const bool unmute = false);
 
 public:
 
@@ -697,5 +703,6 @@ private:
 };
 
 #endif
+
 
 

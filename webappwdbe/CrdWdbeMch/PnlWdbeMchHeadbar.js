@@ -1,11 +1,3 @@
-/**
-  * \file PnlWdbeMchHeadbar.js
-  * web client functionality for panel PnlWdbeMchHeadbar
-  * \author Alexander Wirthmueller
-  * \date created: 23 Aug 2020
-  * \date modified: 23 Aug 2020
-  */
-
 // --- view initialization
 function getMenAvail(short) {
 	return(retrieveSi(srcdoc, "StatShrWdbeMchHeadbar", "Men" + short + "Avail") == "true");

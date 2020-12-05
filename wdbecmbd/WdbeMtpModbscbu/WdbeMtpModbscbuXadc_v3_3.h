@@ -1,10 +1,11 @@
 /**
 	* \file WdbeMtpModbscbuXadc_v3_3.h
-	* Wdbe operation processor - adapt port names (declarations)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
-	*/
+	* Wdbe operation processor - add analog input ports (declarations)
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
+  */
+// IP header --- ABOVE
 
 #ifndef WDBEMTPMODBSCBUXADC_V3_3_H
 #define WDBEMTPMODBSCBUXADC_V3_3_H
@@ -20,4 +21,6 @@ namespace WdbeMtpModbscbuXadc_v3_3 {
 };
 
 #endif
+
+
 

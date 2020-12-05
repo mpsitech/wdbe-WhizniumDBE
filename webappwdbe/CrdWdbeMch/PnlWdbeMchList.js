@@ -1,11 +1,3 @@
-/**
-  * \file PnlWdbeMchList.js
-  * web client functionality for panel PnlWdbeMchList
-  * \author Alexander Wirthmueller
-  * \date created: 23 Aug 2020
-  * \date modified: 23 Aug 2020
-  */
-
 // --- expand state management
 function minimize() {
 	// change container heights
@@ -96,7 +88,7 @@ function refreshB(chgcol) {
 		var ncol = parseInt(retrieveSi(srcdoc, "StatAppQryWdbeMchList", "ncol"));
 
 		var TcoSrfWidth = parseInt(retrieveSi(srcdoc, "StgIacWdbeMchList", "TcoSrfWidth"));
-		var TcoPlaWidth = parseInt(retrieveSi(srcdoc, "StgIacWdbeMchList", "TcoPlaWidth"));
+		var TcoSupWidth = parseInt(retrieveSi(srcdoc, "StgIacWdbeMchList", "TcoSupWidth"));
 
 		var numFTos = parseInt(retrieveCi(srcdoc, "ContIacWdbeMchList", "numFTos"));
 
@@ -114,9 +106,9 @@ function refreshB(chgcol) {
 			ix++;
 
 			if (i == 1) {
-				doc.cols.push("TcoSrf"); doc.widths.push(TcoSrfWidth); doc.fs.push("srf"); doc.tos.push(1); wtot += TcoSrfWidth;
+				doc.cols.push("TcoSrf"); doc.widths.push(TcoSrfWidth); doc.fs.push("srf"); doc.tos.push(2); wtot += TcoSrfWidth;
 			} else if (i == 2) {
-				doc.cols.push("TcoPla"); doc.widths.push(TcoPlaWidth); doc.fs.push("pla2"); doc.tos.push(0); wtot += TcoPlaWidth;
+				doc.cols.push("TcoSup"); doc.widths.push(TcoSupWidth); doc.fs.push("sup"); doc.tos.push(1); wtot += TcoSupWidth;
 			} else {
 				ix--;
 			};
@@ -426,8 +418,8 @@ function handleLoad() {
 
 function handleButClipboardClick() {
 	copyToClipboard(document, srcdoc, "WdbeMchList", "ListWdbeQMchList", retrieveTi(srcdoc, "TagWdbeMchList", "TxtRecord1"), retrieveTi(srcdoc, "TagWdbeMchList", "TxtRecord2"),
-				["Srf","","Pla"],
-				["srf","pla","pla2"]);
+				["Srf","Sup"],
+				["srf","sup"]);
 };
 
 // --- generalized event handlers for app controls

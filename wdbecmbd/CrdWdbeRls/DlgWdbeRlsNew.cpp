@@ -1,10 +1,11 @@
 /**
 	* \file DlgWdbeRlsNew.cpp
 	* job handler for job DlgWdbeRlsNew (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifdef WDBECMBD
 	#include <Wdbecmbd.h>
@@ -94,25 +95,31 @@ DpchEngWdbe* DlgWdbeRlsNew::getNewDpchEng(
 void DlgWdbeRlsNew::refresh(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
+			, const bool unmute
 		) {
-	ContInf oldContinf(continf);
-	ContIac oldContiac(contiac);
+	if (muteRefresh && !unmute) return;
+	muteRefresh = true;
+
 	StatShr oldStatshr(statshr);
+	ContIac oldContiac(contiac);
+	ContInf oldContinf(continf);
 
 	// IP refresh --- BEGIN
-	// continf
-	continf.numFSge = ixVSge;
-
-	// contiac
-
 	// statshr
 	statshr.ButCncActive = evalButCncActive(dbswdbe);
 	statshr.ButCreActive = evalButCreActive(dbswdbe);
 
+	// contiac
+
+	// continf
+	continf.numFSge = ixVSge;
+
 	// IP refresh --- END
-	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
-	if (contiac.diff(&oldContiac).size() != 0) insert(moditems, DpchEngData::CONTIAC);
 	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
+	if (contiac.diff(&oldContiac).size() != 0) insert(moditems, DpchEngData::CONTIAC);
+	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
+
+	muteRefresh = false;
 };
 
 void DlgWdbeRlsNew::handleRequest(
@@ -249,7 +256,7 @@ void DlgWdbeRlsNew::changeStage(
 
 			setStage(dbswdbe, _ixVSge);
 			reenter = false;
-			if (!muteRefresh) refreshWithDpchEng(dbswdbe, dpcheng); // IP changeStage.refresh1 --- LINE
+			refreshWithDpchEng(dbswdbe, dpcheng); // IP changeStage.refresh1 --- LINE
 		};
 
 		switch (_ixVSge) {
@@ -341,5 +348,6 @@ void DlgWdbeRlsNew::leaveSgeDone(
 		) {
 	// IP leaveSgeDone --- INSERT
 };
+
 
 

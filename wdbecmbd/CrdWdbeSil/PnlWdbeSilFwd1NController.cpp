@@ -1,10 +1,11 @@
 /**
 	* \file PnlWdbeSilFwd1NController.cpp
 	* job handler for job PnlWdbeSilFwd1NController (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifdef WDBECMBD
 	#include <Wdbecmbd.h>
@@ -90,7 +91,11 @@ DpchEngWdbe* PnlWdbeSilFwd1NController::getNewDpchEng(
 void PnlWdbeSilFwd1NController::refresh(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
+			, const bool unmute
 		) {
+	if (muteRefresh && !unmute) return;
+	muteRefresh = true;
+
 	ContInf oldContinf(continf);
 	StatShr oldStatshr(statshr);
 
@@ -105,6 +110,8 @@ void PnlWdbeSilFwd1NController::refresh(
 	// IP refresh --- END
 	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
 	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
+
+	muteRefresh = false;
 };
 
 void PnlWdbeSilFwd1NController::updatePreset(
@@ -214,9 +221,9 @@ void PnlWdbeSilFwd1NController::handleDpchAppDataStgiacqry(
 
 	WdbeMController* _recCtr = NULL;
 
-	muteRefresh = true;
-
 	if (!diffitems.empty()) {
+		muteRefresh = true;
+
 		qry->stgiac = *_stgiacqry;
 
 		if (has(diffitems, QryWdbeSilFwd1NController::StgIac::JNUM)) recSelNew = qry->getRecByJnum(_stgiacqry->jnum);
@@ -242,10 +249,8 @@ void PnlWdbeSilFwd1NController::handleDpchAppDataStgiacqry(
 			qry->refreshJnum();
 		};
 
-		refresh(dbswdbe, moditems);
+		refresh(dbswdbe, moditems, true);
 	};
-
-	muteRefresh = false;
 
 	insert(moditems, DpchEngData::STGIACQRY);
 	*dpcheng = getNewDpchEng(moditems);
@@ -286,9 +291,8 @@ void PnlWdbeSilFwd1NController::handleDpchAppDoButRefreshClick(
 	muteRefresh = true;
 
 	qry->rerun(dbswdbe, false);
-	refresh(dbswdbe, moditems);
 
-	muteRefresh = false;
+	refresh(dbswdbe, moditems, true);
 
 	insert(moditems, {DpchEngData::STATSHRQRY, DpchEngData::STGIACQRY, DpchEngData::RST});
 	*dpcheng = getNewDpchEng(moditems);
@@ -323,4 +327,6 @@ bool PnlWdbeSilFwd1NController::handleCallWdbeStatChg(
 	// IP handleCallWdbeStatChg --- END
 	return retval;
 };
+
+
 

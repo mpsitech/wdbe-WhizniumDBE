@@ -1,10 +1,11 @@
 /**
 	* \file QryWdbeVarList.cpp
 	* API code for job QryWdbeVarList (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 5 Dec 2020
 	*/
+// IP header --- ABOVE
 
 #include "QryWdbeVarList.h"
 
@@ -21,8 +22,8 @@ uint QryWdbeVarList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "srf") return SRF;
 	if (s == "prc") return PRC;
+	if (s == "srf") return SRF;
 
 	return(0);
 };
@@ -30,8 +31,8 @@ uint QryWdbeVarList::VecVOrd::getIx(
 string QryWdbeVarList::VecVOrd::getSref(
 			const uint ix
 		) {
-	if (ix == SRF) return("srf");
 	if (ix == PRC) return("prc");
+	if (ix == SRF) return("srf");
 
 	return("");
 };

@@ -1,10 +1,11 @@
 /**
 	* \file CrdWdbeUtl.h
 	* job handler for job CrdWdbeUtl (declarations)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifndef CRDWDBEUTL_H
 #define CRDWDBEUTL_H
@@ -13,10 +14,9 @@
 
 // IP include.cust --- INSERT
 
-#include "DlgWdbeUtlExtrip.h"
-#include "DlgWdbeUtlIexconv.h"
-#include "DlgWdbeUtlMrgip.h"
 #include "PnlWdbeUtlHeadbar.h"
+#include "DlgWdbeUtlMrgip.h"
+#include "DlgWdbeUtlExtrip.h"
 
 #define VecVWdbeUtlDo CrdWdbeUtl::VecVDo
 #define VecVWdbeUtlSge CrdWdbeUtl::VecVSge
@@ -43,9 +43,8 @@ public:
 	public:
 		static const Sbecore::uint CLOSE = 1;
 		static const Sbecore::uint MITAPPABTCLICK = 2;
-		static const Sbecore::uint MITCRDCIFCLICK = 3;
-		static const Sbecore::uint MITCRDXIPCLICK = 4;
-		static const Sbecore::uint MITCRDMIPCLICK = 5;
+		static const Sbecore::uint MITCRDXIPCLICK = 3;
+		static const Sbecore::uint MITCRDMIPCLICK = 4;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);
@@ -104,16 +103,14 @@ public:
 
 	public:
 		static const Sbecore::uint JREFDLGEXTRIP = 1;
-		static const Sbecore::uint JREFDLGIEXCONV = 2;
-		static const Sbecore::uint JREFDLGMRGIP = 3;
-		static const Sbecore::uint JREFHEADBAR = 4;
+		static const Sbecore::uint JREFDLGMRGIP = 2;
+		static const Sbecore::uint JREFHEADBAR = 3;
 
 	public:
-		StatShr(const Sbecore::ubigint jrefDlgextrip = 0, const Sbecore::ubigint jrefDlgiexconv = 0, const Sbecore::ubigint jrefDlgmrgip = 0, const Sbecore::ubigint jrefHeadbar = 0);
+		StatShr(const Sbecore::ubigint jrefDlgextrip = 0, const Sbecore::ubigint jrefDlgmrgip = 0, const Sbecore::ubigint jrefHeadbar = 0);
 
 	public:
 		Sbecore::ubigint jrefDlgextrip;
-		Sbecore::ubigint jrefDlgiexconv;
 		Sbecore::ubigint jrefDlgmrgip;
 		Sbecore::ubigint jrefHeadbar;
 
@@ -193,10 +190,9 @@ public:
 	Sbecore::Xmlio::Feed feedFMcbAlert;
 	Sbecore::Xmlio::Feed feedFSge;
 
-	DlgWdbeUtlExtrip* dlgextrip;
-	DlgWdbeUtlIexconv* dlgiexconv;
-	DlgWdbeUtlMrgip* dlgmrgip;
 	PnlWdbeUtlHeadbar* pnlheadbar;
+	DlgWdbeUtlMrgip* dlgmrgip;
+	DlgWdbeUtlExtrip* dlgextrip;
 
 	// IP vars.cust --- INSERT
 
@@ -205,7 +201,7 @@ public:
 
 public:
 	DpchEngWdbe* getNewDpchEng(std::set<Sbecore::uint> items);
-	void refresh(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems);
+	void refresh(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems, const bool unmute = false);
 	void updatePreset(DbsWdbe* dbswdbe, const Sbecore::uint ixWdbeVPreset, const Sbecore::ubigint jrefTrig, const bool notif = false);
 
 public:
@@ -219,7 +215,6 @@ private:
 
 	void handleDpchAppDoClose(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
 	void handleDpchAppDoMitAppAbtClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
-	void handleDpchAppDoMitCrdCifClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
 	void handleDpchAppDoMitCrdXipClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
 	void handleDpchAppDoMitCrdMipClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
 	void handleDpchAppWdbeAlert(DbsWdbe* dbswdbe, DpchAppWdbeAlert* dpchappwdbealert, DpchEngWdbe** dpcheng);
@@ -245,4 +240,6 @@ private:
 };
 
 #endif
+
+
 

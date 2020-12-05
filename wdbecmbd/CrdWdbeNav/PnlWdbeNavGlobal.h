@@ -1,10 +1,11 @@
 /**
 	* \file PnlWdbeNavGlobal.h
 	* job handler for job PnlWdbeNavGlobal (declarations)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifndef PNLWDBENAVGLOBAL_H
 #define PNLWDBENAVGLOBAL_H
@@ -258,7 +259,7 @@ public:
 	void refreshSil(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems);
 	void refreshLstMtp(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems);
 	void refreshMtp(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems);
-	void refresh(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems);
+	void refresh(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems, const bool unmute = false);
 
 	void updatePreset(DbsWdbe* dbswdbe, const Sbecore::uint ixWdbeVPreset, const Sbecore::ubigint jrefTrig, const bool notif = false);
 
@@ -292,4 +293,6 @@ private:
 };
 
 #endif
+
+
 

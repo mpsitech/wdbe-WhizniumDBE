@@ -1,10 +1,11 @@
 /**
 	* \file DlgWdbeCvrWrite.h
 	* job handler for job DlgWdbeCvrWrite (declarations)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifndef DLGWDBECVRWRITE_H
 #define DLGWDBECVRWRITE_H
@@ -407,11 +408,11 @@ public:
 		void writeXML(const Sbecore::uint ixWdbeVLocale, xmlTextWriter* wr);
 	};
 
-	bool evalCucUldActive(DbsWdbe* dbswdbe);
+	bool evalButDneActive(DbsWdbe* dbswdbe);
+	bool evalFiaDldActive(DbsWdbe* dbswdbe);
 	bool evalWrcButRunActive(DbsWdbe* dbswdbe);
 	bool evalWrcButStoActive(DbsWdbe* dbswdbe);
-	bool evalFiaDldActive(DbsWdbe* dbswdbe);
-	bool evalButDneActive(DbsWdbe* dbswdbe);
+	bool evalCucUldActive(DbsWdbe* dbswdbe);
 
 public:
 	DlgWdbeCvrWrite(XchgWdbe* xchg, DbsWdbe* dbswdbe, const Sbecore::ubigint jrefSup, const Sbecore::uint ixWdbeVLocale);
@@ -444,7 +445,7 @@ public:
 	void refreshWrc(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems);
 	void refreshFia(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems);
 
-	void refresh(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems);
+	void refresh(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems, const bool unmute = false);
 
 public:
 
@@ -505,4 +506,6 @@ private:
 };
 
 #endif
+
+
 

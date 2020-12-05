@@ -1,11 +1,3 @@
-/**
-  * \file PnlWdbeSysRec.js
-  * web client functionality for panel PnlWdbeSysRec
-  * \author Alexander Wirthmueller
-  * \date created: 23 Aug 2020
-  * \date modified: 23 Aug 2020
-  */
-
 function updateScrJrefs() {
 	scrJrefDetail = retrieveSi(srcdoc, "StatShrWdbeSysRec", "scrJrefDetail");
 	scrJrefSys1NTarget = retrieveSi(srcdoc, "StatShrWdbeSysRec", "scrJrefSys1NTarget");

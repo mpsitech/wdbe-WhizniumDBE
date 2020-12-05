@@ -1,10 +1,11 @@
 /**
 	* \file PnlWdbeBnk1NPin.cpp
 	* job handler for job PnlWdbeBnk1NPin (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifdef WDBECMBD
 	#include <Wdbecmbd.h>
@@ -90,7 +91,11 @@ DpchEngWdbe* PnlWdbeBnk1NPin::getNewDpchEng(
 void PnlWdbeBnk1NPin::refresh(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
+			, const bool unmute
 		) {
+	if (muteRefresh && !unmute) return;
+	muteRefresh = true;
+
 	ContInf oldContinf(continf);
 	StatShr oldStatshr(statshr);
 
@@ -108,6 +113,8 @@ void PnlWdbeBnk1NPin::refresh(
 	// IP refresh --- END
 	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
 	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
+
+	muteRefresh = false;
 };
 
 void PnlWdbeBnk1NPin::updatePreset(
@@ -221,9 +228,9 @@ void PnlWdbeBnk1NPin::handleDpchAppDataStgiacqry(
 
 	WdbeMPin* _recPin = NULL;
 
-	muteRefresh = true;
-
 	if (!diffitems.empty()) {
+		muteRefresh = true;
+
 		qry->stgiac = *_stgiacqry;
 
 		if (has(diffitems, QryWdbeBnk1NPin::StgIac::JNUM)) recSelNew = qry->getRecByJnum(_stgiacqry->jnum);
@@ -249,10 +256,8 @@ void PnlWdbeBnk1NPin::handleDpchAppDataStgiacqry(
 			qry->refreshJnum();
 		};
 
-		refresh(dbswdbe, moditems);
+		refresh(dbswdbe, moditems, true);
 	};
-
-	muteRefresh = false;
 
 	insert(moditems, DpchEngData::STGIACQRY);
 	*dpcheng = getNewDpchEng(moditems);
@@ -314,9 +319,8 @@ void PnlWdbeBnk1NPin::handleDpchAppDoButRefreshClick(
 	muteRefresh = true;
 
 	qry->rerun(dbswdbe, false);
-	refresh(dbswdbe, moditems);
 
-	muteRefresh = false;
+	refresh(dbswdbe, moditems, true);
 
 	insert(moditems, {DpchEngData::STATSHRQRY, DpchEngData::STGIACQRY, DpchEngData::RST});
 	*dpcheng = getNewDpchEng(moditems);
@@ -351,4 +355,6 @@ bool PnlWdbeBnk1NPin::handleCallWdbeStatChg(
 	// IP handleCallWdbeStatChg --- END
 	return retval;
 };
+
+
 

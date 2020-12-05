@@ -1,10 +1,11 @@
 /**
 	* \file QryWdbeUsgList.h
 	* API code for job QryWdbeUsgList (declarations)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 5 Dec 2020
 	*/
+// IP header --- ABOVE
 
 #ifndef QRYWDBEUSGLIST_H
 #define QRYWDBEUSGLIST_H
@@ -27,9 +28,9 @@ namespace QryWdbeUsgList {
 	class VecVOrd {
 
 	public:
-		static const Sbecore::uint GRP = 1;
+		static const Sbecore::uint SRF = 1;
 		static const Sbecore::uint OWN = 2;
-		static const Sbecore::uint SRF = 3;
+		static const Sbecore::uint GRP = 3;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);

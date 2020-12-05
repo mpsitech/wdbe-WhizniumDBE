@@ -1,10 +1,11 @@
 /**
 	* \file PnlWdbeModRec.h
 	* job handler for job PnlWdbeModRec (declarations)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifndef PNLWDBEMODREC_H
 #define PNLWDBEMODREC_H
@@ -13,21 +14,21 @@
 
 // IP include.cust --- INSERT
 
-#include "PnlWdbeModDetail.h"
-#include "PnlWdbeModKHdltype.h"
-#include "PnlWdbeModAPar.h"
-#include "PnlWdbeModMdl1NGeneric.h"
-#include "PnlWdbeModCor1NImbuf.h"
-#include "PnlWdbeModMdl1NPort.h"
-#include "PnlWdbeMod1NProcess.h"
-#include "PnlWdbeModMdl1NSignal.h"
-#include "PnlWdbeMod1NPeripheral.h"
-#include "PnlWdbeModSup1NModule.h"
-#include "PnlWdbeModMge1NSignal.h"
-#include "PnlWdbeModCtrRef1NCommand.h"
-#include "PnlWdbeModCtrHk1NVector.h"
-#include "PnlWdbeModCtrRef1NError.h"
 #include "PnlWdbeModCtrMNCommand.h"
+#include "PnlWdbeModCtrRef1NError.h"
+#include "PnlWdbeModCtrHk1NVector.h"
+#include "PnlWdbeModCtrRef1NCommand.h"
+#include "PnlWdbeModMge1NSignal.h"
+#include "PnlWdbeModSup1NModule.h"
+#include "PnlWdbeMod1NPeripheral.h"
+#include "PnlWdbeModMdl1NSignal.h"
+#include "PnlWdbeMod1NProcess.h"
+#include "PnlWdbeModMdl1NPort.h"
+#include "PnlWdbeModCor1NImbuf.h"
+#include "PnlWdbeModMdl1NGeneric.h"
+#include "PnlWdbeModAPar.h"
+#include "PnlWdbeModKHdltype.h"
+#include "PnlWdbeModDetail.h"
 
 #define VecVWdbeModRecDo PnlWdbeModRec::VecVDo
 
@@ -218,21 +219,21 @@ public:
 	ContInf continf;
 	StatShr statshr;
 
-	PnlWdbeModDetail* pnldetail;
-	PnlWdbeModKHdltype* pnlkhdltype;
-	PnlWdbeModAPar* pnlapar;
-	PnlWdbeModMdl1NGeneric* pnlmdl1ngeneric;
-	PnlWdbeModCor1NImbuf* pnlcor1nimbuf;
-	PnlWdbeModMdl1NPort* pnlmdl1nport;
-	PnlWdbeMod1NProcess* pnl1nprocess;
-	PnlWdbeModMdl1NSignal* pnlmdl1nsignal;
-	PnlWdbeMod1NPeripheral* pnl1nperipheral;
-	PnlWdbeModSup1NModule* pnlsup1nmodule;
-	PnlWdbeModMge1NSignal* pnlmge1nsignal;
-	PnlWdbeModCtrRef1NCommand* pnlctrref1ncommand;
-	PnlWdbeModCtrHk1NVector* pnlctrhk1nvector;
-	PnlWdbeModCtrRef1NError* pnlctrref1nerror;
 	PnlWdbeModCtrMNCommand* pnlctrmncommand;
+	PnlWdbeModCtrRef1NError* pnlctrref1nerror;
+	PnlWdbeModCtrHk1NVector* pnlctrhk1nvector;
+	PnlWdbeModCtrRef1NCommand* pnlctrref1ncommand;
+	PnlWdbeModMge1NSignal* pnlmge1nsignal;
+	PnlWdbeModSup1NModule* pnlsup1nmodule;
+	PnlWdbeMod1NPeripheral* pnl1nperipheral;
+	PnlWdbeModMdl1NSignal* pnlmdl1nsignal;
+	PnlWdbeMod1NProcess* pnl1nprocess;
+	PnlWdbeModMdl1NPort* pnlmdl1nport;
+	PnlWdbeModCor1NImbuf* pnlcor1nimbuf;
+	PnlWdbeModMdl1NGeneric* pnlmdl1ngeneric;
+	PnlWdbeModAPar* pnlapar;
+	PnlWdbeModKHdltype* pnlkhdltype;
+	PnlWdbeModDetail* pnldetail;
 
 	WdbeMModule recMdl;
 	Sbecore::uint ixWSubsetMdl;
@@ -249,7 +250,7 @@ public:
 public:
 	DpchEngWdbe* getNewDpchEng(std::set<Sbecore::uint> items);
 
-	void refresh(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems);
+	void refresh(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems, const bool unmute = false);
 
 	void updatePreset(DbsWdbe* dbswdbe, const Sbecore::uint ixWdbeVPreset, const Sbecore::ubigint jrefTrig, const bool notif = false);
 	void minimize(DbsWdbe* dbswdbe, const bool notif = false, DpchEngWdbe** dpcheng = NULL);
@@ -271,27 +272,29 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeCtr_clrEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
-	bool handleCallWdbeCtr_fwd_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
-	bool handleCallWdbeCtr_fwdEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
-	bool handleCallWdbeCtr_mdl_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
-	bool handleCallWdbeImb_corEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
-	bool handleCallWdbeImb_mdl_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
-	bool handleCallWdbeMdl_ctrEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
-	bool handleCallWdbeMdl_hktEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
-	bool handleCallWdbeMdl_hku_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
-	bool handleCallWdbeMdl_hkuEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
-	bool handleCallWdbeMdl_imbEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
-	bool handleCallWdbeMdl_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
-	bool handleCallWdbeMdl_sup_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
-	bool handleCallWdbeMdl_supEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
-	bool handleCallWdbeMdl_tplEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
-	bool handleCallWdbeMdl_typEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
-	bool handleCallWdbeCtrUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
-	bool handleCallWdbeImbUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 	bool handleCallWdbeMdlUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbeImbUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbeCtrUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbeMdl_typEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
+	bool handleCallWdbeMdl_tplEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeMdl_supEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeMdl_sup_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
+	bool handleCallWdbeMdl_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
+	bool handleCallWdbeMdl_imbEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeMdl_hkuEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeMdl_hku_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
+	bool handleCallWdbeMdl_hktEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
+	bool handleCallWdbeMdl_ctrEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeImb_mdl_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
+	bool handleCallWdbeImb_corEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeCtr_mdl_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
+	bool handleCallWdbeCtr_fwdEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeCtr_fwd_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
+	bool handleCallWdbeCtr_clrEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
 
 };
 
 #endif
+
+
 

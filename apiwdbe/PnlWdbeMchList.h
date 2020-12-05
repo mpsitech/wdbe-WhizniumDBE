@@ -1,10 +1,11 @@
 /**
 	* \file PnlWdbeMchList.h
 	* API code for job PnlWdbeMchList (declarations)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 5 Dec 2020
 	*/
+// IP header --- ABOVE
 
 #ifndef PNLWDBEMCHLIST_H
 #define PNLWDBEMCHLIST_H
@@ -120,14 +121,14 @@ namespace PnlWdbeMchList {
 
 	public:
 		static const Sbecore::uint TCOSRFWIDTH = 1;
-		static const Sbecore::uint TCOPLAWIDTH = 2;
+		static const Sbecore::uint TCOSUPWIDTH = 2;
 
 	public:
-		StgIac(const Sbecore::uint TcoSrfWidth = 100, const Sbecore::uint TcoPlaWidth = 100);
+		StgIac(const Sbecore::uint TcoSrfWidth = 100, const Sbecore::uint TcoSupWidth = 100);
 
 	public:
 		Sbecore::uint TcoSrfWidth;
-		Sbecore::uint TcoPlaWidth;
+		Sbecore::uint TcoSupWidth;
 
 	public:
 		bool readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
@@ -149,10 +150,10 @@ namespace PnlWdbeMchList {
 		static const Sbecore::uint TXTSHOWING1 = 5;
 		static const Sbecore::uint TXTSHOWING2 = 6;
 		static const Sbecore::uint TCOSRF = 7;
-		static const Sbecore::uint TCOPLA = 8;
+		static const Sbecore::uint TCOSUP = 8;
 
 	public:
-		Tag(const std::string& Cpt = "", const std::string& TxtRecord1 = "", const std::string& TxtRecord2 = "", const std::string& Trs = "", const std::string& TxtShowing1 = "", const std::string& TxtShowing2 = "", const std::string& TcoSrf = "", const std::string& TcoPla = "");
+		Tag(const std::string& Cpt = "", const std::string& TxtRecord1 = "", const std::string& TxtRecord2 = "", const std::string& Trs = "", const std::string& TxtShowing1 = "", const std::string& TxtShowing2 = "", const std::string& TcoSrf = "", const std::string& TcoSup = "");
 
 	public:
 		std::string Cpt;
@@ -162,7 +163,7 @@ namespace PnlWdbeMchList {
 		std::string TxtShowing1;
 		std::string TxtShowing2;
 		std::string TcoSrf;
-		std::string TcoPla;
+		std::string TcoSup;
 
 	public:
 		bool readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);

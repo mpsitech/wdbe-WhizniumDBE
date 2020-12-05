@@ -1,10 +1,11 @@
 /**
 	* \file PnlWdbeBnkHeadbar.cpp
 	* job handler for job PnlWdbeBnkHeadbar (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifdef WDBECMBD
 	#include <Wdbecmbd.h>
@@ -75,7 +76,12 @@ DpchEngWdbe* PnlWdbeBnkHeadbar::getNewDpchEng(
 void PnlWdbeBnkHeadbar::refresh(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
+			, const bool unmute
 		) {
+	if (muteRefresh && !unmute) return;
+	muteRefresh = true;
+
+	muteRefresh = false;
 };
 
 void PnlWdbeBnkHeadbar::handleRequest(
@@ -108,4 +114,6 @@ void PnlWdbeBnkHeadbar::handleDpchAppWdbeInit(
 		) {
 	*dpcheng = getNewDpchEng({DpchEngData::ALL});
 };
+
+
 

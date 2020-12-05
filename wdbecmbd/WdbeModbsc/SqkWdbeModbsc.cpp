@@ -1,10 +1,11 @@
 /**
 	* \file SqkWdbeModbsc.cpp
 	* squawk generation for operation pack WdbeModbsc (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
-	*/
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
+  */
+// IP header --- ABOVE
 
 #include "SqkWdbeModbsc.h"
 
@@ -63,5 +64,6 @@ string SqkWdbeModbsc::getSquawkUnt(
 	// example: "add standard vectors for unit 'icacam2'"
 	return("add standard vectors for unit '" + StubWdbe::getStubUntStd(dbswdbe, dpchinv->refWdbeMUnit) + "'"); // IP getSquawkUnt --- RLINE
 };
+
 
 

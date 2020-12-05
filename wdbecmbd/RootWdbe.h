@@ -1,10 +1,11 @@
 /**
 	* \file RootWdbe.h
 	* job handler for job RootWdbe (declarations)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifndef ROOTWDBE_H
 #define ROOTWDBE_H
@@ -15,8 +16,8 @@
 #include <openssl/sha.h>
 // IP include.cust --- IEND
 
-#include "SessWdbe.h"
 #include "JobWdbeLicense.h"
+#include "SessWdbe.h"
 
 #define VecVRootWdbeSge RootWdbe::VecVSge
 
@@ -100,8 +101,8 @@ public:
 
 public:
 
-	std::list<SessWdbe*> sesss;
 	JobWdbeLicense* license;
+	std::list<SessWdbe*> sesss;
 
 	// IP vars.spec --- INSERT
 
@@ -125,6 +126,7 @@ private:
 	bool handleClearAll(DbsWdbe* dbswdbe);
 	bool handleCreateSess(DbsWdbe* dbswdbe);
 	bool handleEraseSess(DbsWdbe* dbswdbe);
+	bool handleExportIni(DbsWdbe* dbswdbe);
 	bool handleTest(DbsWdbe* dbswdbe);
 
 	void handleDpchAppLogin(DbsWdbe* dbswdbe, DpchAppLogin* dpchapplogin, const std::string ip, DpchEngWdbe** dpcheng);
@@ -135,8 +137,8 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeLogout(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const bool boolvalInv);
 	bool handleCallWdbeSuspsess(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbeLogout(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const bool boolvalInv);
 
 private:
 	void changeStage(DbsWdbe* dbswdbe, Sbecore::uint _ixVSge, DpchEngWdbe** dpcheng = NULL);
@@ -153,5 +155,6 @@ private:
 };
 
 #endif
+
 
 

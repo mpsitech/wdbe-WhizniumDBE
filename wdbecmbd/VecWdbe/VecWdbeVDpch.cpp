@@ -1,10 +1,11 @@
 /**
 	* \file VecWdbeVDpch.cpp
 	* vector VecWdbeVDpch (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
-	*/
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
+  */
+// IP header --- ABOVE
 
 #include "VecWdbeVDpch.h"
 
@@ -53,8 +54,6 @@ uint VecWdbeVDpch::getIx(
 	if (s == "dpchappdlgwdbeusrmngkeypairdo") return DPCHAPPDLGWDBEUSRMNGKEYPAIRDO;
 	if (s == "dpchappdlgwdbeutlextripdata") return DPCHAPPDLGWDBEUTLEXTRIPDATA;
 	if (s == "dpchappdlgwdbeutlextripdo") return DPCHAPPDLGWDBEUTLEXTRIPDO;
-	if (s == "dpchappdlgwdbeutliexconvdata") return DPCHAPPDLGWDBEUTLIEXCONVDATA;
-	if (s == "dpchappdlgwdbeutliexconvdo") return DPCHAPPDLGWDBEUTLIEXCONVDO;
 	if (s == "dpchappdlgwdbeutlmrgipdata") return DPCHAPPDLGWDBEUTLMRGIPDATA;
 	if (s == "dpchappdlgwdbeutlmrgipdo") return DPCHAPPDLGWDBEUTLMRGIPDO;
 	if (s == "dpchappdlgwdbeverbscdddata") return DPCHAPPDLGWDBEVERBSCDDDATA;
@@ -168,6 +167,8 @@ uint VecWdbeVDpch::getIx(
 	if (s == "dpchappwdbemchlistdata") return DPCHAPPWDBEMCHLISTDATA;
 	if (s == "dpchappwdbemchlistdo") return DPCHAPPWDBEMCHLISTDO;
 	if (s == "dpchappwdbemchrecdo") return DPCHAPPWDBEMCHRECDO;
+	if (s == "dpchappwdbemchsup1nmachinedata") return DPCHAPPWDBEMCHSUP1NMACHINEDATA;
+	if (s == "dpchappwdbemchsup1nmachinedo") return DPCHAPPWDBEMCHSUP1NMACHINEDO;
 	if (s == "dpchappwdbemod1nperipheraldata") return DPCHAPPWDBEMOD1NPERIPHERALDATA;
 	if (s == "dpchappwdbemod1nperipheraldo") return DPCHAPPWDBEMOD1NPERIPHERALDO;
 	if (s == "dpchappwdbemod1nprocessdata") return DPCHAPPWDBEMOD1NPROCESSDATA;
@@ -452,7 +453,6 @@ uint VecWdbeVDpch::getIx(
 	if (s == "dpchengdlgwdberlswritedata") return DPCHENGDLGWDBERLSWRITEDATA;
 	if (s == "dpchengdlgwdbeusrmngkeypairdata") return DPCHENGDLGWDBEUSRMNGKEYPAIRDATA;
 	if (s == "dpchengdlgwdbeutlextripdata") return DPCHENGDLGWDBEUTLEXTRIPDATA;
-	if (s == "dpchengdlgwdbeutliexconvdata") return DPCHENGDLGWDBEUTLIEXCONVDATA;
 	if (s == "dpchengdlgwdbeutlmrgipdata") return DPCHENGDLGWDBEUTLMRGIPDATA;
 	if (s == "dpchengdlgwdbeverbscdddata") return DPCHENGDLGWDBEVERBSCDDDATA;
 	if (s == "dpchengdlgwdbeverdetdddata") return DPCHENGDLGWDBEVERDETDDDATA;
@@ -535,6 +535,7 @@ uint VecWdbeVDpch::getIx(
 	if (s == "dpchengwdbemchheadbardata") return DPCHENGWDBEMCHHEADBARDATA;
 	if (s == "dpchengwdbemchlistdata") return DPCHENGWDBEMCHLISTDATA;
 	if (s == "dpchengwdbemchrecdata") return DPCHENGWDBEMCHRECDATA;
+	if (s == "dpchengwdbemchsup1nmachinedata") return DPCHENGWDBEMCHSUP1NMACHINEDATA;
 	if (s == "dpchengwdbemod1nperipheraldata") return DPCHENGWDBEMOD1NPERIPHERALDATA;
 	if (s == "dpchengwdbemod1nprocessdata") return DPCHENGWDBEMOD1NPROCESSDATA;
 	if (s == "dpchengwdbemodapardata") return DPCHENGWDBEMODAPARDATA;
@@ -740,7 +741,6 @@ uint VecWdbeVDpch::getIx(
 	if (s == "dpchinvwdbeplhfpgafwdctr") return DPCHINVWDBEPLHFPGAFWDCTR;
 	if (s == "dpchinvwdbeplhmcuehostif") return DPCHINVWDBEPLHMCUEHOSTIF;
 	if (s == "dpchinvwdbeprcfileconcat") return DPCHINVWDBEPRCFILECONCAT;
-	if (s == "dpchinvwdbeprcfileiexconv") return DPCHINVWDBEPRCFILEIEXCONV;
 	if (s == "dpchinvwdbeprcfileplhrpl") return DPCHINVWDBEPRCFILEPLHRPL;
 	if (s == "dpchinvwdbeprctreeextract") return DPCHINVWDBEPRCTREEEXTRACT;
 	if (s == "dpchinvwdbeprctreemerge") return DPCHINVWDBEPRCTREEMERGE;
@@ -819,8 +819,6 @@ string VecWdbeVDpch::getSref(
 	if (ix == DPCHAPPDLGWDBEUSRMNGKEYPAIRDO) return("DpchAppDlgWdbeUsrMngkeypairDo");
 	if (ix == DPCHAPPDLGWDBEUTLEXTRIPDATA) return("DpchAppDlgWdbeUtlExtripData");
 	if (ix == DPCHAPPDLGWDBEUTLEXTRIPDO) return("DpchAppDlgWdbeUtlExtripDo");
-	if (ix == DPCHAPPDLGWDBEUTLIEXCONVDATA) return("DpchAppDlgWdbeUtlIexconvData");
-	if (ix == DPCHAPPDLGWDBEUTLIEXCONVDO) return("DpchAppDlgWdbeUtlIexconvDo");
 	if (ix == DPCHAPPDLGWDBEUTLMRGIPDATA) return("DpchAppDlgWdbeUtlMrgipData");
 	if (ix == DPCHAPPDLGWDBEUTLMRGIPDO) return("DpchAppDlgWdbeUtlMrgipDo");
 	if (ix == DPCHAPPDLGWDBEVERBSCDDDATA) return("DpchAppDlgWdbeVerBscddData");
@@ -934,6 +932,8 @@ string VecWdbeVDpch::getSref(
 	if (ix == DPCHAPPWDBEMCHLISTDATA) return("DpchAppWdbeMchListData");
 	if (ix == DPCHAPPWDBEMCHLISTDO) return("DpchAppWdbeMchListDo");
 	if (ix == DPCHAPPWDBEMCHRECDO) return("DpchAppWdbeMchRecDo");
+	if (ix == DPCHAPPWDBEMCHSUP1NMACHINEDATA) return("DpchAppWdbeMchSup1NMachineData");
+	if (ix == DPCHAPPWDBEMCHSUP1NMACHINEDO) return("DpchAppWdbeMchSup1NMachineDo");
 	if (ix == DPCHAPPWDBEMOD1NPERIPHERALDATA) return("DpchAppWdbeMod1NPeripheralData");
 	if (ix == DPCHAPPWDBEMOD1NPERIPHERALDO) return("DpchAppWdbeMod1NPeripheralDo");
 	if (ix == DPCHAPPWDBEMOD1NPROCESSDATA) return("DpchAppWdbeMod1NProcessData");
@@ -1218,7 +1218,6 @@ string VecWdbeVDpch::getSref(
 	if (ix == DPCHENGDLGWDBERLSWRITEDATA) return("DpchEngDlgWdbeRlsWriteData");
 	if (ix == DPCHENGDLGWDBEUSRMNGKEYPAIRDATA) return("DpchEngDlgWdbeUsrMngkeypairData");
 	if (ix == DPCHENGDLGWDBEUTLEXTRIPDATA) return("DpchEngDlgWdbeUtlExtripData");
-	if (ix == DPCHENGDLGWDBEUTLIEXCONVDATA) return("DpchEngDlgWdbeUtlIexconvData");
 	if (ix == DPCHENGDLGWDBEUTLMRGIPDATA) return("DpchEngDlgWdbeUtlMrgipData");
 	if (ix == DPCHENGDLGWDBEVERBSCDDDATA) return("DpchEngDlgWdbeVerBscddData");
 	if (ix == DPCHENGDLGWDBEVERDETDDDATA) return("DpchEngDlgWdbeVerDetddData");
@@ -1301,6 +1300,7 @@ string VecWdbeVDpch::getSref(
 	if (ix == DPCHENGWDBEMCHHEADBARDATA) return("DpchEngWdbeMchHeadbarData");
 	if (ix == DPCHENGWDBEMCHLISTDATA) return("DpchEngWdbeMchListData");
 	if (ix == DPCHENGWDBEMCHRECDATA) return("DpchEngWdbeMchRecData");
+	if (ix == DPCHENGWDBEMCHSUP1NMACHINEDATA) return("DpchEngWdbeMchSup1NMachineData");
 	if (ix == DPCHENGWDBEMOD1NPERIPHERALDATA) return("DpchEngWdbeMod1NPeripheralData");
 	if (ix == DPCHENGWDBEMOD1NPROCESSDATA) return("DpchEngWdbeMod1NProcessData");
 	if (ix == DPCHENGWDBEMODAPARDATA) return("DpchEngWdbeModAParData");
@@ -1506,7 +1506,6 @@ string VecWdbeVDpch::getSref(
 	if (ix == DPCHINVWDBEPLHFPGAFWDCTR) return("DpchInvWdbePlhfpgaFwdctr");
 	if (ix == DPCHINVWDBEPLHMCUEHOSTIF) return("DpchInvWdbePlhmcuEhostif");
 	if (ix == DPCHINVWDBEPRCFILECONCAT) return("DpchInvWdbePrcfileConcat");
-	if (ix == DPCHINVWDBEPRCFILEIEXCONV) return("DpchInvWdbePrcfileIexconv");
 	if (ix == DPCHINVWDBEPRCFILEPLHRPL) return("DpchInvWdbePrcfilePlhrpl");
 	if (ix == DPCHINVWDBEPRCTREEEXTRACT) return("DpchInvWdbePrctreeExtract");
 	if (ix == DPCHINVWDBEPRCTREEMERGE) return("DpchInvWdbePrctreeMerge");
@@ -1549,4 +1548,6 @@ string VecWdbeVDpch::getSref(
 
 	return("");
 };
+
+
 

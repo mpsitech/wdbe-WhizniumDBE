@@ -1,11 +1,3 @@
-/**
-  * \file PnlWdbeSysSys1NTarget.js
-  * web client functionality for panel PnlWdbeSysSys1NTarget
-  * \author Alexander Wirthmueller
-  * \date created: 23 Aug 2020
-  * \date modified: 23 Aug 2020
-  */
-
 // --- expand state management
 function minimize(updh) {
 	if (retrieveSi(srcdoc, "StatAppWdbeSysSys1NTarget", "srefIxWdbeVExpstate") == "mind") return;

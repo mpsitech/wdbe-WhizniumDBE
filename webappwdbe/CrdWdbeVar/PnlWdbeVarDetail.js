@@ -1,11 +1,3 @@
-/**
-  * \file PnlWdbeVarDetail.js
-  * web client functionality for panel PnlWdbeVarDetail
-  * \author Alexander Wirthmueller
-  * \date created: 23 Aug 2020
-  * \date modified: 23 Aug 2020
-  */
-
 // IP cust --- INSERT
 
 // --- expand state management
@@ -383,6 +375,8 @@ function handleChkChange(_doc, ctlsref) {
 };
 
 function handleLstLoad(lstdoc, ctlsref, ncol, multsel) {
+	if (!srcdoc) return;
+
 	if (multsel) {
 		refreshLst(lstdoc, srcdoc, ncol, false, multsel, "FeedF" + ctlsref, parseInt(retrieveSi(srcdoc, "StatAppWdbeVarDetail", ctlsref + "NumFirstdisp")),
 					parseUintvec(retrieveCi(srcdoc, "ContIacWdbeVarDetail", "numsF" + ctlsref)));

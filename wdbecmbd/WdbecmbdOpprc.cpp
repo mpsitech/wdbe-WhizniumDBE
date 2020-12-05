@@ -1,10 +1,11 @@
 /**
 	* \file WdbecmbdOpprc.cpp
 	* operation processor for Wdbe combined daemon (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
-	*/
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
+  */
+// IP header --- ABOVE
 
 #include "Wdbecmbd.h"
 
@@ -185,8 +186,6 @@ void* WdbecmbdOpprc::run(
 			};
 			if (req->dpchinv->ixWdbeVDpch == VecWdbeVDpch::DPCHINVWDBEPRCFILECONCAT) {
 				req->dpchret = WdbePrcfileConcat::run(xchg, &dbswdbe, (DpchInvWdbePrcfileConcat*) req->dpchinv);
-			} else if (req->dpchinv->ixWdbeVDpch == VecWdbeVDpch::DPCHINVWDBEPRCFILEIEXCONV) {
-				req->dpchret = WdbePrcfileIexconv::run(xchg, &dbswdbe, (DpchInvWdbePrcfileIexconv*) req->dpchinv);
 			} else if (req->dpchinv->ixWdbeVDpch == VecWdbeVDpch::DPCHINVWDBEPRCFILEPLHRPL) {
 				req->dpchret = WdbePrcfilePlhrpl::run(xchg, &dbswdbe, (DpchInvWdbePrcfilePlhrpl*) req->dpchinv);
 			};
@@ -271,4 +270,6 @@ void WdbecmbdOpprc::cleanup(
 
 	xchg->cOpprcs.unlockMutex("WdbecmbdOpprc", "cleanup");
 };
+
+
 

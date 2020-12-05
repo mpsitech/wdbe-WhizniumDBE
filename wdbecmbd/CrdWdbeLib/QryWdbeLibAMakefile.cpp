@@ -1,10 +1,11 @@
 /**
 	* \file QryWdbeLibAMakefile.cpp
 	* job handler for job QryWdbeLibAMakefile (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifdef WDBECMBD
 	#include <Wdbecmbd.h>
@@ -310,19 +311,11 @@ void QryWdbeLibAMakefile::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
-		call->abort = handleCallWdbeStubChgFromSelf(dbswdbe);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBELIBAMKFMOD_LIBEQ) {
+	if (call->ixVCall == VecWdbeVCall::CALLWDBELIBAMKFMOD_LIBEQ) {
 		call->abort = handleCallWdbeLibAmkfMod_libEq(dbswdbe, call->jref);
+	} else if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
+		call->abort = handleCallWdbeStubChgFromSelf(dbswdbe);
 	};
-};
-
-bool QryWdbeLibAMakefile::handleCallWdbeStubChgFromSelf(
-			DbsWdbe* dbswdbe
-		) {
-	bool retval = false;
-	// IP handleCallWdbeStubChgFromSelf --- INSERT
-	return retval;
 };
 
 bool QryWdbeLibAMakefile::handleCallWdbeLibAmkfMod_libEq(
@@ -338,4 +331,14 @@ bool QryWdbeLibAMakefile::handleCallWdbeLibAmkfMod_libEq(
 
 	return retval;
 };
+
+bool QryWdbeLibAMakefile::handleCallWdbeStubChgFromSelf(
+			DbsWdbe* dbswdbe
+		) {
+	bool retval = false;
+	// IP handleCallWdbeStubChgFromSelf --- INSERT
+	return retval;
+};
+
+
 

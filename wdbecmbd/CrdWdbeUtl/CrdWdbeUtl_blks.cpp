@@ -1,10 +1,11 @@
 /**
 	* \file CrdWdbeUtl_blks.cpp
 	* job handler for job CrdWdbeUtl (implementation of blocks)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 using namespace std;
 using namespace Sbecore;
@@ -21,7 +22,6 @@ uint CrdWdbeUtl::VecVDo::getIx(
 
 	if (s == "close") return CLOSE;
 	if (s == "mitappabtclick") return MITAPPABTCLICK;
-	if (s == "mitcrdcifclick") return MITCRDCIFCLICK;
 	if (s == "mitcrdxipclick") return MITCRDXIPCLICK;
 	if (s == "mitcrdmipclick") return MITCRDMIPCLICK;
 
@@ -33,7 +33,6 @@ string CrdWdbeUtl::VecVDo::getSref(
 		) {
 	if (ix == CLOSE) return("close");
 	if (ix == MITAPPABTCLICK) return("MitAppAbtClick");
-	if (ix == MITCRDCIFCLICK) return("MitCrdCifClick");
 	if (ix == MITCRDXIPCLICK) return("MitCrdXipClick");
 	if (ix == MITCRDMIPCLICK) return("MitCrdMipClick");
 
@@ -165,18 +164,16 @@ void CrdWdbeUtl::StatApp::writeXML(
 
 CrdWdbeUtl::StatShr::StatShr(
 			const ubigint jrefDlgextrip
-			, const ubigint jrefDlgiexconv
 			, const ubigint jrefDlgmrgip
 			, const ubigint jrefHeadbar
 		) :
 			Block()
 		{
 	this->jrefDlgextrip = jrefDlgextrip;
-	this->jrefDlgiexconv = jrefDlgiexconv;
 	this->jrefDlgmrgip = jrefDlgmrgip;
 	this->jrefHeadbar = jrefHeadbar;
 
-	mask = {JREFDLGEXTRIP, JREFDLGIEXCONV, JREFDLGMRGIP, JREFHEADBAR};
+	mask = {JREFDLGEXTRIP, JREFDLGMRGIP, JREFHEADBAR};
 };
 
 void CrdWdbeUtl::StatShr::writeXML(
@@ -192,7 +189,6 @@ void CrdWdbeUtl::StatShr::writeXML(
 
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
 		writeStringAttr(wr, itemtag, "sref", "scrJrefDlgextrip", Scr::scramble(jrefDlgextrip));
-		writeStringAttr(wr, itemtag, "sref", "scrJrefDlgiexconv", Scr::scramble(jrefDlgiexconv));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefDlgmrgip", Scr::scramble(jrefDlgmrgip));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefHeadbar", Scr::scramble(jrefHeadbar));
 	xmlTextWriterEndElement(wr);
@@ -204,7 +200,6 @@ set<uint> CrdWdbeUtl::StatShr::comm(
 	set<uint> items;
 
 	if (jrefDlgextrip == comp->jrefDlgextrip) insert(items, JREFDLGEXTRIP);
-	if (jrefDlgiexconv == comp->jrefDlgiexconv) insert(items, JREFDLGIEXCONV);
 	if (jrefDlgmrgip == comp->jrefDlgmrgip) insert(items, JREFDLGMRGIP);
 	if (jrefHeadbar == comp->jrefHeadbar) insert(items, JREFHEADBAR);
 
@@ -219,7 +214,7 @@ set<uint> CrdWdbeUtl::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {JREFDLGEXTRIP, JREFDLGIEXCONV, JREFDLGMRGIP, JREFHEADBAR};
+	diffitems = {JREFDLGEXTRIP, JREFDLGMRGIP, JREFHEADBAR};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -243,7 +238,6 @@ void CrdWdbeUtl::Tag::writeXML(
 
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
 		if (ixWdbeVLocale == VecWdbeVLocale::ENUS) {
-			writeStringAttr(wr, itemtag, "sref", "MitCrdCif", "Convert text import data ...");
 			writeStringAttr(wr, itemtag, "sref", "MitCrdXip", "Extract insertion points ...");
 			writeStringAttr(wr, itemtag, "sref", "MitCrdMip", "Merge insertion points ...");
 		};
@@ -368,4 +362,6 @@ void CrdWdbeUtl::DpchEngData::writeXML(
 		if (has(TAG)) Tag::writeXML(ixWdbeVLocale, wr);
 	xmlTextWriterEndElement(wr);
 };
+
+
 

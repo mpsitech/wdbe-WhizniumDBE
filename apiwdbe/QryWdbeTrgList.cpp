@@ -1,10 +1,11 @@
 /**
 	* \file QryWdbeTrgList.cpp
 	* API code for job QryWdbeTrgList (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 5 Dec 2020
 	*/
+// IP header --- ABOVE
 
 #include "QryWdbeTrgList.h"
 
@@ -21,9 +22,9 @@ uint QryWdbeTrgList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "srf") return SRF;
-	if (s == "sys") return SYS;
 	if (s == "unt") return UNT;
+	if (s == "sys") return SYS;
+	if (s == "srf") return SRF;
 
 	return(0);
 };
@@ -31,9 +32,9 @@ uint QryWdbeTrgList::VecVOrd::getIx(
 string QryWdbeTrgList::VecVOrd::getSref(
 			const uint ix
 		) {
-	if (ix == SRF) return("srf");
-	if (ix == SYS) return("sys");
 	if (ix == UNT) return("unt");
+	if (ix == SYS) return("sys");
+	if (ix == SRF) return("srf");
 
 	return("");
 };

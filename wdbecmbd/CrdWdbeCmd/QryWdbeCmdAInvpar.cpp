@@ -1,10 +1,11 @@
 /**
 	* \file QryWdbeCmdAInvpar.cpp
 	* job handler for job QryWdbeCmdAInvpar (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifdef WDBECMBD
 	#include <Wdbecmbd.h>
@@ -294,19 +295,11 @@ void QryWdbeCmdAInvpar::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
-		call->abort = handleCallWdbeStubChgFromSelf(dbswdbe);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECMDAIPAMOD_CMDEQ) {
+	if (call->ixVCall == VecWdbeVCall::CALLWDBECMDAIPAMOD_CMDEQ) {
 		call->abort = handleCallWdbeCmdAipaMod_cmdEq(dbswdbe, call->jref);
+	} else if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
+		call->abort = handleCallWdbeStubChgFromSelf(dbswdbe);
 	};
-};
-
-bool QryWdbeCmdAInvpar::handleCallWdbeStubChgFromSelf(
-			DbsWdbe* dbswdbe
-		) {
-	bool retval = false;
-	// IP handleCallWdbeStubChgFromSelf --- INSERT
-	return retval;
 };
 
 bool QryWdbeCmdAInvpar::handleCallWdbeCmdAipaMod_cmdEq(
@@ -322,4 +315,14 @@ bool QryWdbeCmdAInvpar::handleCallWdbeCmdAipaMod_cmdEq(
 
 	return retval;
 };
+
+bool QryWdbeCmdAInvpar::handleCallWdbeStubChgFromSelf(
+			DbsWdbe* dbswdbe
+		) {
+	bool retval = false;
+	// IP handleCallWdbeStubChgFromSelf --- INSERT
+	return retval;
+};
+
+
 

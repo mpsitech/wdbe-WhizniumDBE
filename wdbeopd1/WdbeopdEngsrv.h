@@ -1,10 +1,11 @@
 /**
 	* \file WdbeopdEngsrv.h
 	* engine server for Wdbe operation daemon (declarations)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
-	*/
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
+  */
+// IP header --- ABOVE
 
 #ifndef WDBEOPDENGSRV_H
 #define WDBEOPDENGSRV_H
@@ -13,15 +14,15 @@
 	#include <arpa/inet.h>
 #endif
 
-#include "WdbeModbsc_blks.h"
-#include "WdbeModdet_blks.h"
-#include "WdbePlhfpga_blks.h"
-#include "WdbePlhmcu_blks.h"
-#include "WdbePrcfile_blks.h"
-#include "WdbePrctree_blks.h"
-#include "WdbeWrdev_blks.h"
-#include "WdbeWrfpga_blks.h"
 #include "WdbeWrmcu_blks.h"
+#include "WdbeWrfpga_blks.h"
+#include "WdbeWrdev_blks.h"
+#include "WdbePrctree_blks.h"
+#include "WdbePrcfile_blks.h"
+#include "WdbePlhmcu_blks.h"
+#include "WdbePlhfpga_blks.h"
+#include "WdbeModdet_blks.h"
+#include "WdbeModbsc_blks.h"
 
 /**
 	* WdbeopdEngsrv
@@ -41,4 +42,7 @@ namespace WdbeopdEngsrv {
 };
 
 #endif
+
+
+
 

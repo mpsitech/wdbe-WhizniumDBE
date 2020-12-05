@@ -1,11 +1,3 @@
-/**
-  * \file CrdWdbeUtl.js
-  * web client functionality for card CrdWdbeUtl
-  * \author Alexander Wirthmueller
-  * \date created: 23 Aug 2020
-  * \date modified: 23 Aug 2020
-  */
-
 function getInitdone(pnlshort) {
 	return(retrieveSi(srcdoc, "StatAppWdbeUtl", "initdone" + pnlshort) == "true");
 };
@@ -129,7 +121,6 @@ function initMenCrd() {
 
 	mendoc.getElementById("colCont").setAttribute("width", retrieveSi(srcdoc, "StatAppWdbeUtl", "widthMenu"));
 
-	setTextContent(mendoc, mendoc.getElementById("MitCrdCif"), retrieveTi(srcdoc, "TagWdbeUtl", "MitCrdCif"));
 	setTextContent(mendoc, mendoc.getElementById("MitCrdXip"), retrieveTi(srcdoc, "TagWdbeUtl", "MitCrdXip"));
 	setTextContent(mendoc, mendoc.getElementById("MitCrdMip"), retrieveTi(srcdoc, "TagWdbeUtl", "MitCrdMip"));
 };
@@ -224,7 +215,7 @@ function showDlg(sref, _scrJref)  {
 	myif.setAttribute("id", "Dlg");
 	myif.setAttribute("src", "./" + sref + ".html?scrJref=" + _scrJref);
 	myif.setAttribute("width", "691");
-	if ((sref == "DlgWdbeUtlIexconv") || (sref == "DlgWdbeUtlExtrip") || (sref == "DlgWdbeUtlMrgip")) myif.setAttribute("height", "585");
+	if ((sref == "DlgWdbeUtlExtrip") || (sref == "DlgWdbeUtlMrgip")) myif.setAttribute("height", "585");
 	else myif.setAttribute("height", "555");
 	myif.setAttribute("frameborder", "0");
 	myif.setAttribute("scrolling", "no");
@@ -315,13 +306,10 @@ function changeHeight(pnlshort, height) {
 // --- view initialization and refresh
 function refresh() {
 	var scrJrefDlgextrip = retrieveSi(srcdoc, "StatShrWdbeUtl", "scrJrefDlgextrip");
-	var scrJrefDlgiexconv = retrieveSi(srcdoc, "StatShrWdbeUtl", "scrJrefDlgiexconv");
 	var scrJrefDlgmrgip = retrieveSi(srcdoc, "StatShrWdbeUtl", "scrJrefDlgmrgip");
 
 	if (scrJrefDlgextrip != "") {
 		if (scrJrefDlg != scrJrefDlgextrip) showDlg("DlgWdbeUtlExtrip", scrJrefDlgextrip);
-	} else if (scrJrefDlgiexconv != "") {
-		if (scrJrefDlg != scrJrefDlgiexconv) showDlg("DlgWdbeUtlIexconv", scrJrefDlgiexconv);
 	} else if (scrJrefDlgmrgip != "") {
 		if (scrJrefDlg != scrJrefDlgmrgip) showDlg("DlgWdbeUtlMrgip", scrJrefDlgmrgip);
 	} else if (scrJrefDlg != "") hideDlg();

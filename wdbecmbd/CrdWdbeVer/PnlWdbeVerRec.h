@@ -1,10 +1,11 @@
 /**
 	* \file PnlWdbeVerRec.h
 	* job handler for job PnlWdbeVerRec (declarations)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifndef PNLWDBEVERREC_H
 #define PNLWDBEVERREC_H
@@ -13,13 +14,13 @@
 
 // IP include.cust --- INSERT
 
-#include "PnlWdbeVerDetail.h"
-#include "PnlWdbeVer1NRelease.h"
-#include "PnlWdbeVer1NSystem.h"
-#include "PnlWdbeVerBvr1NVersion.h"
-#include "PnlWdbeVerRef1NFile.h"
-#include "PnlWdbeVer1NUnit.h"
 #include "PnlWdbeVerMNLibrary.h"
+#include "PnlWdbeVer1NUnit.h"
+#include "PnlWdbeVerRef1NFile.h"
+#include "PnlWdbeVerBvr1NVersion.h"
+#include "PnlWdbeVer1NSystem.h"
+#include "PnlWdbeVer1NRelease.h"
+#include "PnlWdbeVerDetail.h"
 
 #define VecVWdbeVerRecDo PnlWdbeVerRec::VecVDo
 
@@ -182,13 +183,13 @@ public:
 	ContInf continf;
 	StatShr statshr;
 
-	PnlWdbeVerDetail* pnldetail;
-	PnlWdbeVer1NRelease* pnl1nrelease;
-	PnlWdbeVer1NSystem* pnl1nsystem;
-	PnlWdbeVerBvr1NVersion* pnlbvr1nversion;
-	PnlWdbeVerRef1NFile* pnlref1nfile;
-	PnlWdbeVer1NUnit* pnl1nunit;
 	PnlWdbeVerMNLibrary* pnlmnlibrary;
+	PnlWdbeVer1NUnit* pnl1nunit;
+	PnlWdbeVerRef1NFile* pnlref1nfile;
+	PnlWdbeVerBvr1NVersion* pnlbvr1nversion;
+	PnlWdbeVer1NSystem* pnl1nsystem;
+	PnlWdbeVer1NRelease* pnl1nrelease;
+	PnlWdbeVerDetail* pnldetail;
 
 	WdbeMVersion recVer;
 
@@ -200,7 +201,7 @@ public:
 public:
 	DpchEngWdbe* getNewDpchEng(std::set<Sbecore::uint> items);
 
-	void refresh(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems);
+	void refresh(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems, const bool unmute = false);
 
 	void updatePreset(DbsWdbe* dbswdbe, const Sbecore::uint ixWdbeVPreset, const Sbecore::ubigint jrefTrig, const bool notif = false);
 	void minimize(DbsWdbe* dbswdbe, const bool notif = false, DpchEngWdbe** dpcheng = NULL);
@@ -222,12 +223,14 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeVer_bvrEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
-	bool handleCallWdbeVer_prjEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
-	bool handleCallWdbeVer_steEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
 	bool handleCallWdbeVerUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbeVer_steEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
+	bool handleCallWdbeVer_prjEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeVer_bvrEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
 
 };
 
 #endif
+
+
 

@@ -1,11 +1,3 @@
-/**
-  * \file PnlWdbeMchAMakefile.js
-  * web client functionality for panel PnlWdbeMchAMakefile
-  * \author Alexander Wirthmueller
-  * \date created: 23 Aug 2020
-  * \date modified: 23 Aug 2020
-  */
-
 // --- expand state management
 function minimize(updh) {
 	if (retrieveSi(srcdoc, "StatAppWdbeMchAMakefile", "srefIxWdbeVExpstate") == "mind") return;

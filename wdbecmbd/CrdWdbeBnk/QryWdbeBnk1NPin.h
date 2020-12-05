@@ -1,10 +1,11 @@
 /**
 	* \file QryWdbeBnk1NPin.h
 	* job handler for job QryWdbeBnk1NPin (declarations)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifndef QRYWDBEBNK1NPIN_H
 #define QRYWDBEBNK1NPIN_H
@@ -122,10 +123,12 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeStubChgFromSelf(DbsWdbe* dbswdbe);
 	bool handleCallWdbePinMod_bnkEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbeStubChgFromSelf(DbsWdbe* dbswdbe);
 
 };
 
 #endif
+
+
 

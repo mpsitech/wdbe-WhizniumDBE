@@ -1,10 +1,11 @@
 /**
-  * \file ListWdbeQSilFwd1NController.java
-  * Java API code for record set of table TblWdbeQSilFwd1NController
-  * \author Alexander Wirthmueller
-  * \date created: 23 Aug 2020
-  * \date modified: 23 Aug 2020
-  */
+	* \file ListWdbeQSilFwd1NController.java
+	* Java API code for record set of table TblWdbeQSilFwd1NController
+	* \copyright (C) 2018-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 5 Dec 2020
+	*/
+// IP header --- ABOVE
 
 package apiwdbe;
 

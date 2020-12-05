@@ -1,10 +1,11 @@
 /**
 	* \file PnlWdbeSil1NTarget.cpp
 	* job handler for job PnlWdbeSil1NTarget (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifdef WDBECMBD
 	#include <Wdbecmbd.h>
@@ -90,7 +91,11 @@ DpchEngWdbe* PnlWdbeSil1NTarget::getNewDpchEng(
 void PnlWdbeSil1NTarget::refresh(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
+			, const bool unmute
 		) {
+	if (muteRefresh && !unmute) return;
+	muteRefresh = true;
+
 	ContInf oldContinf(continf);
 	StatShr oldStatshr(statshr);
 
@@ -105,6 +110,8 @@ void PnlWdbeSil1NTarget::refresh(
 	// IP refresh --- END
 	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
 	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
+
+	muteRefresh = false;
 };
 
 void PnlWdbeSil1NTarget::updatePreset(
@@ -214,9 +221,9 @@ void PnlWdbeSil1NTarget::handleDpchAppDataStgiacqry(
 
 	WdbeMTarget* _recTrg = NULL;
 
-	muteRefresh = true;
-
 	if (!diffitems.empty()) {
+		muteRefresh = true;
+
 		qry->stgiac = *_stgiacqry;
 
 		if (has(diffitems, QryWdbeSil1NTarget::StgIac::JNUM)) recSelNew = qry->getRecByJnum(_stgiacqry->jnum);
@@ -242,10 +249,8 @@ void PnlWdbeSil1NTarget::handleDpchAppDataStgiacqry(
 			qry->refreshJnum();
 		};
 
-		refresh(dbswdbe, moditems);
+		refresh(dbswdbe, moditems, true);
 	};
-
-	muteRefresh = false;
 
 	insert(moditems, DpchEngData::STGIACQRY);
 	*dpcheng = getNewDpchEng(moditems);
@@ -280,9 +285,8 @@ void PnlWdbeSil1NTarget::handleDpchAppDoButRefreshClick(
 	muteRefresh = true;
 
 	qry->rerun(dbswdbe, false);
-	refresh(dbswdbe, moditems);
 
-	muteRefresh = false;
+	refresh(dbswdbe, moditems, true);
 
 	insert(moditems, {DpchEngData::STATSHRQRY, DpchEngData::STGIACQRY, DpchEngData::RST});
 	*dpcheng = getNewDpchEng(moditems);
@@ -317,4 +321,6 @@ bool PnlWdbeSil1NTarget::handleCallWdbeStatChg(
 	// IP handleCallWdbeStatChg --- END
 	return retval;
 };
+
+
 

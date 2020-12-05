@@ -1,10 +1,11 @@
 /**
-  * \file WdbeQVecVec1NVectoritem.h
-  * Java API code for record of table TblWdbeQVecVec1NVectoritem
-  * \author Alexander Wirthmueller
-  * \date created: 23 Aug 2020
-  * \date modified: 23 Aug 2020
+	* \file WdbeQVecVec1NVectoritem.h
+	* Java API code for record of table TblWdbeQVecVec1NVectoritem
+	* \copyright (C) 2018-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 5 Dec 2020
   */
+// IP header --- ABOVE
 
 package apiwdbe;
 

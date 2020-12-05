@@ -1,10 +1,11 @@
 /**
 	* \file WdbeQMtpKParKey.h
 	* API code for table TblWdbeQMtpKParKey (declarations)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
-	*/
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 5 Dec 2020
+  */
+// IP header --- ABOVE
 
 #ifndef WDBEQMTPKPARKEY_H
 #define WDBEQMTPKPARKEY_H

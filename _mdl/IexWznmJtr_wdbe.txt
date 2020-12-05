@@ -1,1260 +1,1201 @@
-- IexWznmJtr v0.9.29												
-- ImeIMJob.sref												
-- CrdWdbeRls												
-	- ImeIMSensitivity1.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode	
-	- cal	CallWdbeReptrStart	lock	imm					cust			
-	- cal	CallWdbeReptrStop	lock	imm					cust			
-	- ImeIMSensitivity1.end											
-- CrdWdbeUnt												
-	- ImeIAMJobCmd.sref	Comment										
-	- showMdls											
-	- showCmds											
-	- showGens											
-	- showPrts											
-	- showSigs											
-	- ImeIAMJobCmd.end											
-- CrdWdbeVer												
-	- ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment					
-	- other	setprjcvr		idle								
-	- ImeIMStage.end											
-- DlgWdbeCprNew												
-	- ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment					
-	- other	idle										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- con		lock	void			ButCre		chgsge	create	
-		- ImeIMSensitivity2.end										
-	- other	create		done	idle							
-	- other	done										
-	- ImeIMStage.end											
-- DlgWdbeCvrBsccd												
-	- ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment					
-	- other	idle										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- uld		lock	void					chgsge	prsidle	
-		- ImeIMSensitivity2.end										
-	- immcb	prsidle		parse								
-	- other	parse		prsdone	alrwdbeper							
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	parsing basic core description								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- alr	alrwdbeper		idle								
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	parse error								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- other	prsdone										
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	basic core description parsed								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- con		lock	void			ImpButRun		chgsge	impidle	
-		- ImeIMSensitivity2.end										
-	- immcb	impidle		import								
-	- other	import	250000	impdone	alrwdbeier							
-		- ImeIMSquawk.Title	Example									
-		- 	importing basic core description (1234 records added)									
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	importing basic core description (&impcnt; records added)								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- alr	alrwdbeier		idle								
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	import error								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- other	impdone										
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	import done								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- con		lock	void			PprButRun		chgsge	postprc	
-		- ImeIMSensitivity2.end										
-	- oppiw	postprc		done								
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	postprocessing								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- other	done										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- dld		lock	void					cust		
-		- ImeIMSensitivity2.end										
-	- ImeIMStage.end											
-- DlgWdbeCvrDetcd												
-	- ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment					
-	- other	idle										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- uld		lock	void					chgsge	prsidle	
-		- ImeIMSensitivity2.end										
-	- immcb	prsidle		parse								
-	- other	parse		prsdone	alrwdbeper							
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	parsing detailed core description								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- alr	alrwdbeper		idle								
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	parse error								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- other	prsdone										
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	detailed core description parsed								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- con		lock	void			ImpButRun		chgsge	impidle	
-		- ImeIMSensitivity2.end										
-	- immcb	impidle		import								
-	- other	import	250000	impdone	alrwdbeier							
-		- ImeIMSquawk.Title	Example									
-		- 	importing detailed core description (1234 records added)									
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	importing detailed core description (&impcnt; records added)								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- alr	alrwdbeier		idle								
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	import error								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- other	impdone										
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	import done								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- con		lock	void			PprButRun		chgsge	postprc	
-		- ImeIMSensitivity2.end										
-	- oppiw	postprc	250000	done								
-		- ImeIMSquawk.Title	Example									
-		- 	postprocessing (123/1234 operations completed)									
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	postprocessing (&Ndone;/&N; operations completed)								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- other	done										
-	- ImeIMStage.end											
-- DlgWdbeCvrNew												
-	- ImeIMVector.srefIxVOp	srefIxVBasetype	sref	osrefWznmKTaggrp	srefsKOption							
-	- retrupd		VecVDlgWdbeCvrNewVni									
-		- ImeIMVectoritem.sref	Title	Comment								
-		- maj										
-			- ImeIJMVectoritem.srefX1RefWznmMLocale	Title	Comment							
-			- enus	major								
-			- ImeIJMVectoritem.end									
-		- min										
-			- ImeIJMVectoritem.srefX1RefWznmMLocale	Title	Comment							
-			- enus	minor								
-			- ImeIJMVectoritem.end									
-		- sub										
-			- ImeIJMVectoritem.srefX1RefWznmMLocale	Title	Comment							
-			- enus	sub								
-			- ImeIJMVectoritem.end									
-		- ImeIMVectoritem.end										
-	- ImeIMVector.end											
-	- ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment					
-	- other	idle										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- con		lock	void			ButCre		chgsge	create	
-		- ImeIMSensitivity2.end										
-	- other	create		done	idle							
-	- other	done										
-	- ImeIMStage.end											
-- DlgWdbeCvrWrite												
-	- ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment					
-	- other	idle										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- uld		lock	void					chgsge	upkidle	
-		- con		lock	void			WrcButRun		chgsge	creidle	
-		- ImeIMSensitivity2.end										
-	- immcb	upkidle		unpack								
-	- other	unpack		upkdone								
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	unpacking custom code fragments								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- other	upkdone										
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	custom code fragments unpacked								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- con		lock	void			WrcButRun		chgsge	creidle	
-		- ImeIMSensitivity2.end										
-	- immcb	creidle		create								
-	- opp	create	250000	write								
-		- ImeIMSquawk.Title	Example									
-		- 	creating write operations (1234 operations prepared)									
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	creating write operations (&N; operations prepared)								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- opiw	write	250000	mrg		idle						
-		- ImeIMSquawk.Title	Example									
-		- 	writing code (123/1234 operations completed)									
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	writing code (&Ndone;/&N; operations completed)								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- oppiw	mrg		mrgcust		mrgcust						
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	merging code fragments								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- oppiw	mrgcust		pack		pack						
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	merging custom code fragments								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- other	pack		done								
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	packing code tree								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- other	done										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- dld		lock	void					cust		
-		- ImeIMSensitivity2.end										
-	- ImeIMStage.end											
-	- ImeIRMJobMOp.srefRefWznmMOp											
-	- WdbePrctreeMerge											
-	- ImeIRMJobMOp.end											
-- DlgWdbeFilNew												
-	- ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment					
-	- other	idle										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- con		lock	void			DetButCre		chgsge	create	
-		- ImeIMSensitivity2.end										
-	- other	create		credone	idle							
-	- other	credone										
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	new file created								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- uld		lock	void					chgsge	done	
-		- ImeIMSensitivity2.end										
-	- other	done										
-	- ImeIMStage.end											
-- DlgWdbeNavLoaini												
-	- ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment					
-	- other	idle										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- uld		lock	void					chgsge	prsidle	
-		- ImeIMSensitivity2.end										
-	- immcb	prsidle		parse								
-	- other	parse		prsdone	alrwdbeper							
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	parsing initialization data								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- alr	alrwdbeper		idle								
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	parse error								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- other	prsdone										
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	initialization data parsed								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- con		lock	void			ImpButRun		chgsge	impidle	
-		- ImeIMSensitivity2.end										
-	- immcb	impidle		import								
-	- other	import	250000	impdone	alrwdbeier							
-		- ImeIMSquawk.Title	Example									
-		- 	importing initialization data (1234 records added)									
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	importing initialization data (&impcnt; records added)								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- alr	alrwdbeier		idle								
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	import error								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- other	impdone										
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	import done								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- uld		lock	void					chgsge	upkidle	
-		- ImeIMSensitivity2.end										
-	- immcb	upkidle		unpack								
-	- other	unpack		done								
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	unpacking inizialization files								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- other	done										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- dld		lock	void					cust		
-		- ImeIMSensitivity2.end										
-	- ImeIMStage.end											
-- DlgWdbeNavMnglic												
-	- ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment					
-	- other	idle										
-	- other	ready										
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	connected								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- ImeIMStage.end											
-	- ImeIRMJobMJob.srefSubRefWznmMJob	Short	Multi	srefIxVConstract								
-	- JobWdbeLicense	license	false	cre								
-	- ImeIRMJobMJob.end											
-- DlgWdbePrjImpex												
-	- ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment					
-	- other	idle										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- uld		lock	void					chgsge	prsidle	
-		- ImeIMSensitivity2.end										
-	- immcb	prsidle		parse								
-	- other	parse		prsdone	alrwdbeper							
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	parsing existing projects and versions								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- alr	alrwdbeper		idle								
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	parse error								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- other	prsdone										
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	existing projects and versions parsed								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- con		lock	void			ImpButAut		chgsge	auth	
-		- ImeIMSensitivity2.end										
-	- other	auth		autdone	alraer							
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	authenticating								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- other	autdone										
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	authentication successful								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- con		lock	void			ImpButRun		chgsge	impidle	
-		- ImeIMSensitivity2.end										
-	- immcb	impidle		import								
-	- other	import	250000	sync	alrwdbeier							
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	importing existing projects and versions (&impcnt; records added)								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- alr	alrwdbeier		idle								
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	import error								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- other	sync		done								
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	synchronizing projects and versions with licensing server								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- other	done										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- dld		lock	void					cust		
-		- ImeIMSensitivity2.end										
-	- ImeIMStage.end											
-	- ImeIRMJobMJob.srefSubRefWznmMJob	Short	Multi	srefIxVConstract								
-	- JobWdbeLicense	license	false	cre								
-	- ImeIRMJobMJob.end											
-- DlgWdbePrjNew												
-	- ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment					
-	- other	idle										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- con		lock	void			DetButAut		chgsge	auth	
-		- ImeIMSensitivity2.end										
-	- other	auth		autdone	alraer							
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	authenticating								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- other	autdone										
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	authentication successful								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- con		lock	void			ButCre		chgsge	create	
-		- ImeIMSensitivity2.end										
-	- other	create		sync	idle							
-	- other	sync		done								
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	synchronizing new project with licensing server								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- other	done										
-	- ImeIMStage.end											
-	- ImeIRMJobMJob.srefSubRefWznmMJob	Short	Multi	srefIxVConstract								
-	- JobWdbeLicense	license	false	cre								
-	- ImeIRMJobMJob.end											
-- DlgWdbeRlsFinreptr												
-	- ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment					
-	- other	idle										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- con		lock	void			FinButRun		chgsge	pack	
-		- ImeIMSensitivity2.end										
-	- immcb	finidle										
-	- other	pack		done								
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	packing repository								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- other	commit		findone	idle							
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	commiting to local Git repository								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- other	findone										
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	repository transaction finalized								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- con		lock	void			ResButPsg		chgsge	psgidle	
-		- ImeIMSensitivity2.end										
-	- immcb	psgidle		pushgit								
-	- other	pushgit	250000	done	idle							
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	pushing to Git repository at &giturl;&gitprg;								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- other	done										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- dld		lock	void					cust		
-		- ImeIMSensitivity2.end										
-	- ImeIMStage.end											
-- DlgWdbeRlsNew												
-	- ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment					
-	- other	idle										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- con		lock	void			ButCre		chgsge	create	
-		- ImeIMSensitivity2.end										
-	- other	create		done	idle							
-	- other	done										
-	- ImeIMStage.end											
-- DlgWdbeRlsStareptr												
-	- ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment					
-	- other	stadone										
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	repository transaction started								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- uld		lock	void					chgsge	upkidle	
-		- con		lock	void			IniButClg		chgsge	clgidle	
-		- ImeIMSensitivity2.end										
-	- immcb	upkidle		unpack								
-	- other	unpack		upkdone								
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	unpacking base repository								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- other	upkdone										
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	base repository unpacked								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- con		lock	void			ExtButRun		chgsge	extract	
-		- ImeIMSensitivity2.end										
-	- immcb	clgidle		clonegit								
-	- other	clonegit	250000	clgdone	idle							
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	cloning Git repository at &giturl;&gitprg;								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- other	clgdone										
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	Git repository cloned								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- con		lock	void			ExtButRun		chgsge	extract	
-		- ImeIMSensitivity2.end										
-	- oppiw	extract		pack	alrxer							
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	extracting insertion points								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- other	pack		done								
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	packing result								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- other	fail	other									
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- dld		lock	void					cust		
-		- ImeIMSensitivity2.end										
-	- other	done	other									
-	- ImeIMStage.end											
-	- ImeIRMJobMOp.srefRefWznmMOp											
-	- WdbePrctreeExtract											
-	- ImeIRMJobMOp.end											
-- DlgWdbeRlsWrite												
-	- ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment					
-	- other	idle										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- uld		lock	void					chgsge	upkidle	
-		- con		lock	void			WrcButAut		chgsge	auth	
-		- ImeIMSensitivity2.end										
-	- immcb	upkidle		unpack								
-	- other	unpack		upkdone								
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	unpacking custom code fragments								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- other	upkdone										
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	custom code fragments unpacked								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- con		lock	void			WrcButAut		chgsge	auth	
-		- ImeIMSensitivity2.end										
-	- other	auth		autdone	alraer							
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	authenticating								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- other	autdone										
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	authentication successful								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- con		lock	void			WrcButRun		chgsge	fillplh	
-		- ImeIMSensitivity2.end										
-	- oppiw	fillplh		create		create						
-		- ImeIMSquawk.Title	Example									
-		- 	filling placeholders (123/1234 operations completed, last: fill template-specific placeholders for module 'icm2-cmdinv (cmdinv_v1_0 command invocation buffer)')									
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	filling placeholders (&Ndone;/&N; operations completed, last: &sqklast;)								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- opp	create	250000	write								
-		- ImeIMSquawk.Title	Example									
-		- 	creating write operations (1234 operations prepared)									
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	creating write operations (&N; operations prepared)								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- opiw	write	250000	mrg		idle						
-		- ImeIMSquawk.Title	Example									
-		- 	writing code (123/1234 operations completed, last: write VHDL code for module 'icm2 (top_v1_0 top)')									
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	writing code (&Ndone;/&N; operations completed, last: &sqklast;)								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- oppiw	mrg		mrgfine	alrmer							
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	merging code fragments								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- oppiw	mrgfine		mrgtypspec	alrmer	mrgtypspec						
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	merging in-detail code fragments								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- oppiw	mrgtypspec		mrgtplspec	alrmer	mrgtplspec						
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWdbeMLocale	Title								
-			- enus	merging module type specific code fragments								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- oppiw	mrgtplspec		clrspec	alrmer	clrspec						
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWdbeMLocale	Title								
-			- enus	merging module template specific code fragments								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- oppiw	clrspec		mrgcust		mrgcust						
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWdbeMLocale	Title								
-			- enus	clearing unused specific insertion points								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- oppiw	mrgcust		pack	alrmer	pack						
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	merging custom code fragments								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- other	pack		done								
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	packing code tree								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- other	fail										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- dld		lock	void					cust		
-		- ImeIMSensitivity2.end										
-	- other	done										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- dld		lock	void					cust		
-		- ImeIMSensitivity2.end										
-	- ImeIMStage.end											
-	- ImeIRMJobMJob.srefSubRefWznmMJob	Short	Multi	srefIxVConstract								
-	- JobWdbeLicense	license	false	cre								
-	- ImeIRMJobMJob.end											
-	- ImeIRMJobMOp.srefRefWznmMOp											
-	- WdbePlhfpgaCmdinv											
-	- WdbePlhfpgaCmdret											
-	- WdbePlhfpgaEhostif											
-	- WdbePlhfpgaFwdctr											
-	- WdbePlhmcuEhostif											
-	- WdbePrctreeMerge											
-	- ImeIRMJobMOp.end											
-	- ImeIRMJobMOppack.srefRefWznmMOppack											
-	- WdbeMtpPlhfpga											
-	- WdbeMtpPlhmcu											
-	- ImeIRMJobMOppack.end											
-- DlgWdbeUsrMngkeypair												
-	- ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment					
-	- other	nf										
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	SSH key pair not found								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- other	found										
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	SSH key pair found								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- dld		lock	void					cust		
-		- ImeIMSensitivity2.end										
-	- ImeIMStage.end											
-- DlgWdbeUtlExtrip												
-	- ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment					
-	- other	idle										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- uld		lock	void					chgsge	upkidle	
-		- ImeIMSensitivity2.end										
-	- immcb	upkidle		unpack								
-	- other	unpack		upkdone								
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	unpacking source								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- other	upkdone										
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	source unpacked								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- con		lock	void			ExtButRun		chgsge	extract	
-		- ImeIMSensitivity2.end										
-	- other	ulddone										
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	source uploaded								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- con		lock	void			ExtButRun		chgsge	extract	
-		- ImeIMSensitivity2.end										
-	- oppiw	extract		pack	alrxer							
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	extracting insertion points								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- other	pack		done								
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	packing result								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- other	fail										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- dld		lock	void					cust		
-		- ImeIMSensitivity2.end										
-	- other	done										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- dld		lock	void					cust		
-		- ImeIMSensitivity2.end										
-	- ImeIMStage.end											
-	- ImeIRMJobMOp.srefRefWznmMOp											
-	- WdbePrctreeExtract											
-	- ImeIRMJobMOp.end											
-- DlgWdbeUtlIexconv												
-	- ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment					
-	- other	idle										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- uld		lock	void					chgsge	upkidle	
-		- ImeIMSensitivity2.end										
-	- immcb	upkidle		unpack								
-	- other	unpack		upkdone								
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	unpacking source								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- other	upkdone										
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	source unpacked								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- con		lock	void			CnvButRun		chgsge	conv	
-		- ImeIMSensitivity2.end										
-	- other	ulddone										
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	source uploaded								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- con		lock	void			CnvButRun		chgsge	conv	
-		- ImeIMSensitivity2.end										
-	- oppiw	conv	250000	pack		idle						
-		- ImeIMSquawk.Title	Example									
-		- 	converting files (123/1234 operations completed, last: convert text import input file 'test/abcd/testin.txt' into output file 'test/abcd/testout.txt')									
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	converting files (&Ndone;/&N; operations completed, last: &sqklast;)								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- other	pack		done								
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	packing result								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- other	done										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- dld		lock	void					cust		
-		- ImeIMSensitivity2.end										
-	- ImeIMStage.end											
-- DlgWdbeUtlMrgip												
-	- ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment					
-	- other	idle										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- uld		lock	void					chgsge	supidle	
-		- ImeIMSensitivity2.end										
-	- immcb	supidle		srcunpack								
-	- other	srcunpack		supdone								
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	unpacking source								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- other	supdone										
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	source unpacked								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- uld		lock	void					chgsge	tupidle	
-		- ImeIMSensitivity2.end										
-	- other	suldone										
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	source uploaded								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- uld		lock	void					chgsge	tupidle	
-		- ImeIMSensitivity2.end										
-	- immcb	tupidle		trgunpack								
-	- other	trgunpack		tupdone								
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	unpacking target								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- other	tupdone										
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	target unpacked								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- con		lock	void			MrgButRun		chgsge	merge	
-		- ImeIMSensitivity2.end										
-	- other	tuldone										
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	target uploaded								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- con		lock	void			MrgButRun		chgsge	merge	
-		- ImeIMSensitivity2.end										
-	- oppiw	merge		pack	alrmer							
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	merging								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- other	pack		done								
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	packing result								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- other	fail										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- dld		lock	void					cust		
-		- ImeIMSensitivity2.end										
-	- other	done										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- dld		lock	void					cust		
-		- ImeIMSensitivity2.end										
-	- ImeIMStage.end											
-	- ImeIRMJobMOp.srefRefWznmMOp											
-	- WdbePrctreeMerge											
-	- ImeIRMJobMOp.end											
-- DlgWdbeVerBscdd												
-	- ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment					
-	- other	idle										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- uld		lock	void					chgsge	prsidle	
-		- ImeIMSensitivity2.end										
-	- immcb	prsidle		parse								
-	- other	parse		prsdone	alrwdbeper							
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	parsing basic device description								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- alr	alrwdbeper		idle								
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	parse error								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- other	prsdone										
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	basic device description parsed								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- con		lock	void			ImpButRun		chgsge	impidle	
-		- ImeIMSensitivity2.end										
-	- immcb	impidle		import								
-	- other	import	250000	impdone	alrwdbeier							
-		- ImeIMSquawk.Title	Example									
-		- 	importing basic device description (1234 records added)									
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	importing basic device description (&impcnt; records added)								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- alr	alrwdbeier		idle								
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	import error								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- other	impdone										
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	import done								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- con		lock	void			PprButRun		chgsge	postprc1	
-		- ImeIMSensitivity2.end										
-	- oppiw	postprc1	250000	postprc2								
-		- ImeIMSquawk.Title	Example									
-		- 	complementing basic features (123/1234 operations completed, last: add standard vectors for unit 'icacam2')									
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	complementing basic features (&Ndone;/&N; operations completed, last: &sqklast;)								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- oppiw	postprc2	250000	postprc2		postprc3						
-		- ImeIMSquawk.Title	Example									
-		- 	applying module modifications top-down (123/1234 operations completed, last: adapt buffer size for module 'icm2-cmdinv (cmdinv_v1_0 command invocation buffer)')									
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	applying module modifications top-down (&Ndone;/&N; operations completed, last: &sqklast;)								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- oppiw	postprc3	250000	postprc3		done						
-		- ImeIMSquawk.Title	Example									
-		- 	applying module modifications bottom-up (123/1234 operations completed, last: adapt port widths for module 'icm2-tc-div (div_v3_0)')									
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	applying module modifications bottom-up (&Ndone;/&N; operations completed, last: &sqklast;)								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- other	done	other									
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- dld		lock	void					cust		
-		- ImeIMSensitivity2.end										
-	- ImeIMStage.end											
-- DlgWdbeVerDetdd												
-	- ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment					
-	- other	idle										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- uld		lock	void					chgsge	prsidle	
-		- ImeIMSensitivity2.end										
-	- immcb	prsidle		parse								
-	- other	parse		prsdone	alrwdbeper							
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	parsing detailed device description								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- alr	alrwdbeper		idle								
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	parse error								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- other	prsdone										
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	detailed device description parsed								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- con		lock	void			ImpButRun		chgsge	impidle	
-		- ImeIMSensitivity2.end										
-	- immcb	impidle		import								
-	- other	import	250000	impdone	alrwdbeier							
-		- ImeIMSquawk.Title	Example									
-		- 	importing detailed device description (1234 records added)									
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	importing detailed device description (&impcnt; records added)								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- alr	alrwdbeier		idle								
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	import error								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- other	impdone										
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	import done								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- con		lock	void			PprButRun		chgsge	postprc1	
-		- ImeIMSensitivity2.end										
-	- oppiw	postprc1	250000	postprc1		postprc2						
-		- ImeIMSquawk.Title	Example									
-		- 	applying module modifications top-down (123/1234 operations completed, last: add command bus wiring for module 'icm2-cmdbus (cmdbus_v1_0 command bus controller)')									
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	applying module modifications top-down (&Ndone;/&N; operations completed, last: &sqklast;)								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- oppiw	postprc2	250000	postprc2	asmlfi	postprc3						
-		- ImeIMSquawk.Title	Example									
-		- 	complementing inter-module wiring bottom-up (123/1234 operations completed, last: add intermediate generics and ports for unit 'icacam2')									
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	complementing inter-module wiring bottom-up (&Ndone;/&N; operations completed, last: &sqklast;)								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- oppiw	asmlfi		alrwer								
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	assembling log file								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- oppiw	postprc3	250000	sync								
-		- ImeIMSquawk.Title	Example									
-		- 	deriving detailed features (123/1234 operations completed, last: fill standard vectors for unit 'icacam2')									
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	deriving detailed features (&Ndone;/&N; operations completed, last: &sqklast;)								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- other	sync		done								
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	synchronizing build-ready version with licensing server								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- other	fail										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- dld		lock	void					cust		
-		- ImeIMSensitivity2.end										
-	- other	done										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- dld		lock	void					cust		
-		- ImeIMSensitivity2.end										
-	- ImeIMStage.end											
-	- ImeIRMJobMJob.srefSubRefWznmMJob	Short	Multi	srefIxVConstract								
-	- JobWdbeLicense	license	false	cre								
-	- ImeIRMJobMJob.end											
-	- ImeIRMJobMOp.srefRefWznmMOp											
-	- WdbeModdetWiring											
-	- WdbePrcfileConcat											
-	- ImeIRMJobMOp.end											
-- DlgWdbeVerNew												
-	- ImeIMVector.srefIxVOp	srefIxVBasetype	sref	osrefWznmKTaggrp	srefsKOption							
-	- retrupd		VecVDlgWdbeVerNewVni									
-		- ImeIMVectoritem.sref	Title	Comment								
-		- maj										
-			- ImeIJMVectoritem.srefX1RefWznmMLocale	Title	Comment							
-			- enus	major								
-			- ImeIJMVectoritem.end									
-		- min										
-			- ImeIJMVectoritem.srefX1RefWznmMLocale	Title	Comment							
-			- enus	minor								
-			- ImeIJMVectoritem.end									
-		- sub										
-			- ImeIJMVectoritem.srefX1RefWznmMLocale	Title	Comment							
-			- enus	sub								
-			- ImeIJMVectoritem.end									
-		- void	none									
-		- ImeIMVectoritem.end										
-	- ImeIMVector.end											
-	- ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment					
-	- other	idle										
-		- ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		- con		lock	void			ButCre		chgsge	create	
-		- ImeIMSensitivity2.end										
-	- other	create		done	idle							
-	- other	done										
-	- ImeIMStage.end											
-	- ImeIRMJobMJob.srefSubRefWznmMJob	Short	Multi	srefIxVConstract								
-	- JobWdbeIexPrj	iexprj	false	cre								
-	- ImeIRMJobMJob.end											
-- JobWdbeLicense	true	true										
-	- ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment					
-	- other	idle										
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	not connected								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- other	conn		conn	conerr							
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	connected								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- other	conerr		idle								
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	connection failure								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- other	auth		conn	auterr							
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	authenticating								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- other	auterr		conn								
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	authentication failure								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- other	sync		conn	sncerr							
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	synchronizing								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- other	sncerr		conn								
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	synchronization failure								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- ImeIMStage.end											
-	- ImeIAMJobCmd.sref	Comment										
-	- test											
-	- ImeIAMJobCmd.end											
-- RootWdbe												
-	- ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment					
-	- other	idle	240000000	idle								
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	idle								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- other	sync		idle								
-		- ImeIMSquawk.Title	Example									
-		- 										
-			- ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title								
-			- enus	synchronizing projects and versions with licensing server								
-			- ImeIJMSquawkTitle.end									
-		- ImeIMSquawk.end										
-	- ImeIMStage.end											
-	- ImeIAMJobCmd.sref	Comment										
-	- test											
-	- ImeIAMJobCmd.end											
-- ImeIMJob.end												
-- ImeIMCall.srefIxVBasetype	srefsInvIxWznmWArgtype	srefsRetIxWznmWArgtype	sref	Comment								
-- evt	ix;txtval		CallWdbeReptrStart									
-- evt			CallWdbeReptrStop									
-- ImeIMCall.end												
-- ImeIMBlock2.sref												
-- StgWdbeDatabase												
-	- ImeIAMBlockItem2.srefIxWznmVIop	ImeIAMBlockItem2.irefRefWznmCAMBlockItem	srefIxVBasetype	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment			
-	- retrupd	0		username			mpsitech					
-	- retrupd	0		password			f9w8feeh					
-	- ImeIAMBlockItem2.end											
-- ImeIMBlock2.end												
+IexWznmJtr v0.9.29
+ImeIMJob.sref
+CrdWdbeRls
+	ImeIMSensitivity1.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+	cal	CallWdbeReptrStart	lock	imm					cust
+	cal	CallWdbeReptrStop	lock	imm					cust
+	ImeIMSensitivity1.end
+CrdWdbeUnt
+	ImeIAMJobCmd.sref	Comment
+	showMdls
+	showCmds
+	showGens
+	showPrts
+	showSigs
+	ImeIAMJobCmd.end
+CrdWdbeVer
+	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment
+	other	setprjcvr		idle
+	ImeIMStage.end
+DlgWdbeCprNew
+	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment
+	other	idle
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		con		lock	void			ButCre		chgsge	create
+		ImeIMSensitivity2.end
+	other	create		done	idle
+	other	done
+	ImeIMStage.end
+DlgWdbeCvrBsccd
+	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment
+	other	idle
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		uld		lock	void					chgsge	prsidle
+		ImeIMSensitivity2.end
+	immcb	prsidle		parse
+	other	parse		prsdone	alrwdbeper
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	parsing basic core description
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	alr	alrwdbeper		idle
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	parse error
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	other	prsdone
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	basic core description parsed
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		con		lock	void			ImpButRun		chgsge	impidle
+		ImeIMSensitivity2.end
+	immcb	impidle		import
+	other	import	250000	impdone	alrwdbeier
+		ImeIMSquawk.Title	Example
+			importing basic core description (1234 records added)
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	importing basic core description (&impcnt; records added)
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	alr	alrwdbeier		idle
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	import error
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	other	impdone
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	import done
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		con		lock	void			PprButRun		chgsge	postprc
+		ImeIMSensitivity2.end
+	oppiw	postprc		done
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	postprocessing
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	other	done
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		dld		lock	void					cust
+		ImeIMSensitivity2.end
+	ImeIMStage.end
+DlgWdbeCvrDetcd
+	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment
+	other	idle
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		uld		lock	void					chgsge	prsidle
+		ImeIMSensitivity2.end
+	immcb	prsidle		parse
+	other	parse		prsdone	alrwdbeper
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	parsing detailed core description
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	alr	alrwdbeper		idle
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	parse error
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	other	prsdone
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	detailed core description parsed
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		con		lock	void			ImpButRun		chgsge	impidle
+		ImeIMSensitivity2.end
+	immcb	impidle		import
+	other	import	250000	impdone	alrwdbeier
+		ImeIMSquawk.Title	Example
+			importing detailed core description (1234 records added)
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	importing detailed core description (&impcnt; records added)
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	alr	alrwdbeier		idle
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	import error
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	other	impdone
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	import done
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		con		lock	void			PprButRun		chgsge	postprc
+		ImeIMSensitivity2.end
+	oppiw	postprc	250000	done
+		ImeIMSquawk.Title	Example
+			postprocessing (123/1234 operations completed)
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	postprocessing (&Ndone;/&N; operations completed)
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	other	done
+	ImeIMStage.end
+DlgWdbeCvrNew
+	ImeIMVector.srefIxVOp	srefIxVBasetype	sref	osrefWznmKTaggrp	srefsKOption
+	retrupd		VecVDlgWdbeCvrNewVni
+		ImeIMVectoritem.sref	Title	Comment
+		maj
+			ImeIJMVectoritem.srefX1RefWznmMLocale	Title	Comment
+			enus	major
+			ImeIJMVectoritem.end
+		min
+			ImeIJMVectoritem.srefX1RefWznmMLocale	Title	Comment
+			enus	minor
+			ImeIJMVectoritem.end
+		sub
+			ImeIJMVectoritem.srefX1RefWznmMLocale	Title	Comment
+			enus	sub
+			ImeIJMVectoritem.end
+		ImeIMVectoritem.end
+	ImeIMVector.end
+	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment
+	other	idle
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		con		lock	void			ButCre		chgsge	create
+		ImeIMSensitivity2.end
+	other	create		done	idle
+	other	done
+	ImeIMStage.end
+DlgWdbeCvrWrite
+	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment
+	other	idle
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		uld		lock	void					chgsge	upkidle
+		con		lock	void			WrcButRun		chgsge	creidle
+		ImeIMSensitivity2.end
+	immcb	upkidle		unpack
+	other	unpack		upkdone
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	unpacking custom code fragments
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	other	upkdone
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	custom code fragments unpacked
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		con		lock	void			WrcButRun		chgsge	creidle
+		ImeIMSensitivity2.end
+	immcb	creidle		create
+	opp	create	250000	write
+		ImeIMSquawk.Title	Example
+			creating write operations (1234 operations prepared)
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	creating write operations (&N; operations prepared)
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	opiw	write	250000	mrg		idle
+		ImeIMSquawk.Title	Example
+			writing code (123/1234 operations completed)
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	writing code (&Ndone;/&N; operations completed)
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	oppiw	mrg		mrgcust		mrgcust
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	merging code fragments
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	oppiw	mrgcust		pack		pack
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	merging custom code fragments
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	other	pack		done
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	packing code tree
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	other	done
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		dld		lock	void					cust
+		ImeIMSensitivity2.end
+	ImeIMStage.end
+	ImeIRMJobMOp.srefRefWznmMOp
+	WdbePrctreeMerge
+	ImeIRMJobMOp.end
+DlgWdbeFilNew
+	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment
+	other	idle
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		con		lock	void			DetButCre		chgsge	create
+		ImeIMSensitivity2.end
+	other	create		credone	idle
+	other	credone
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	new file created
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		uld		lock	void					chgsge	done
+		ImeIMSensitivity2.end
+	other	done
+	ImeIMStage.end
+DlgWdbeNavLoaini
+	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment
+	other	idle
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		uld		lock	void					chgsge	prsidle
+		ImeIMSensitivity2.end
+	immcb	prsidle		parse
+	other	parse		prsdone	alrwdbeper
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	parsing initialization data
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	alr	alrwdbeper		idle
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	parse error
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	other	prsdone
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	initialization data parsed
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		con		lock	void			ImpButRun		chgsge	impidle
+		ImeIMSensitivity2.end
+	immcb	impidle		import
+	other	import	250000	impdone	alrwdbeier
+		ImeIMSquawk.Title	Example
+			importing initialization data (1234 records added)
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	importing initialization data (&impcnt; records added)
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	alr	alrwdbeier		idle
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	import error
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	other	impdone
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	import done
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		uld		lock	void					chgsge	upkidle
+		ImeIMSensitivity2.end
+	immcb	upkidle		unpack
+	other	unpack		done
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	unpacking inizialization files
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	other	done
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		dld		lock	void					cust
+		ImeIMSensitivity2.end
+	ImeIMStage.end
+DlgWdbeNavMnglic
+	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment
+	other	idle
+	other	ready
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	connected
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	ImeIMStage.end
+	ImeIRMJobMJob.srefSubRefWznmMJob	Short	Multi	srefIxVConstract
+	JobWdbeLicense	license	false	cre
+	ImeIRMJobMJob.end
+DlgWdbePrjImpex
+	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment
+	other	idle
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		uld		lock	void					chgsge	prsidle
+		ImeIMSensitivity2.end
+	immcb	prsidle		parse
+	other	parse		prsdone	alrwdbeper
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	parsing existing projects and versions
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	alr	alrwdbeper		idle
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	parse error
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	other	prsdone
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	existing projects and versions parsed
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		con		lock	void			ImpButAut		chgsge	auth
+		ImeIMSensitivity2.end
+	other	auth		autdone	alraer
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	authenticating
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	other	autdone
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	authentication successful
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		con		lock	void			ImpButRun		chgsge	impidle
+		ImeIMSensitivity2.end
+	immcb	impidle		import
+	other	import	250000	sync	alrwdbeier
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	importing existing projects and versions (&impcnt; records added)
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	alr	alrwdbeier		idle
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	import error
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	other	sync		done
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	synchronizing projects and versions with licensing server
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	other	done
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		dld		lock	void					cust
+		ImeIMSensitivity2.end
+	ImeIMStage.end
+	ImeIRMJobMJob.srefSubRefWznmMJob	Short	Multi	srefIxVConstract
+	JobWdbeLicense	license	false	cre
+	ImeIRMJobMJob.end
+DlgWdbePrjNew
+	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment
+	other	idle
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		con		lock	void			DetButAut		chgsge	auth
+		ImeIMSensitivity2.end
+	other	auth		autdone	alraer
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	authenticating
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	other	autdone
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	authentication successful
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		con		lock	void			ButCre		chgsge	create
+		ImeIMSensitivity2.end
+	other	create		sync	idle
+	other	sync		done
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	synchronizing new project with licensing server
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	other	done
+	ImeIMStage.end
+	ImeIRMJobMJob.srefSubRefWznmMJob	Short	Multi	srefIxVConstract
+	JobWdbeLicense	license	false	cre
+	ImeIRMJobMJob.end
+DlgWdbeRlsFinreptr
+	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment
+	other	idle
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		con		lock	void			FinButRun		chgsge	pack
+		ImeIMSensitivity2.end
+	immcb	finidle
+	other	pack		done
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	packing repository
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	other	commit		findone	idle
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	commiting to local Git repository
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	other	findone
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	repository transaction finalized
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		con		lock	void			ResButPsg		chgsge	psgidle
+		ImeIMSensitivity2.end
+	immcb	psgidle		pushgit
+	other	pushgit	250000	done	idle
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	pushing to Git repository at &giturl;&gitprg;
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	other	done
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		dld		lock	void					cust
+		ImeIMSensitivity2.end
+	ImeIMStage.end
+DlgWdbeRlsNew
+	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment
+	other	idle
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		con		lock	void			ButCre		chgsge	create
+		ImeIMSensitivity2.end
+	other	create		done	idle
+	other	done
+	ImeIMStage.end
+DlgWdbeRlsStareptr
+	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment
+	other	stadone
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	repository transaction started
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		uld		lock	void					chgsge	upkidle
+		con		lock	void			IniButClg		chgsge	clgidle
+		ImeIMSensitivity2.end
+	immcb	upkidle		unpack
+	other	unpack		upkdone
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	unpacking base repository
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	other	upkdone
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	base repository unpacked
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		con		lock	void			ExtButRun		chgsge	extract
+		ImeIMSensitivity2.end
+	immcb	clgidle		clonegit
+	other	clonegit	250000	clgdone	idle
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	cloning Git repository at &giturl;&gitprg;
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	other	clgdone
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	Git repository cloned
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		con		lock	void			ExtButRun		chgsge	extract
+		ImeIMSensitivity2.end
+	oppiw	extract		pack	alrxer
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	extracting insertion points
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	other	pack		done
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	packing result
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	other	fail	other
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		dld		lock	void					cust
+		ImeIMSensitivity2.end
+	other	done	other
+	ImeIMStage.end
+	ImeIRMJobMOp.srefRefWznmMOp
+	WdbePrctreeExtract
+	ImeIRMJobMOp.end
+DlgWdbeRlsWrite
+	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment
+	other	idle
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		uld		lock	void					chgsge	upkidle
+		con		lock	void			WrcButAut		chgsge	auth
+		ImeIMSensitivity2.end
+	immcb	upkidle		unpack
+	other	unpack		upkdone
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	unpacking custom code fragments
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	other	upkdone
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	custom code fragments unpacked
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		con		lock	void			WrcButAut		chgsge	auth
+		ImeIMSensitivity2.end
+	other	auth		autdone	alraer
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	authenticating
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	other	autdone
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	authentication successful
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		con		lock	void			WrcButRun		chgsge	fillplh
+		ImeIMSensitivity2.end
+	oppiw	fillplh		create		create
+		ImeIMSquawk.Title	Example
+			filling placeholders (123/1234 operations completed, last: fill template-specific placeholders for module 'icm2-cmdinv (cmdinv_v1_0 command invocation buffer)')
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	filling placeholders (&Ndone;/&N; operations completed, last: &sqklast;)
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	opp	create	250000	write
+		ImeIMSquawk.Title	Example
+			creating write operations (1234 operations prepared)
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	creating write operations (&N; operations prepared)
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	opiw	write	250000	mrg		idle
+		ImeIMSquawk.Title	Example
+			writing code (123/1234 operations completed, last: write VHDL code for module 'icm2 (top_v1_0 top)')
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	writing code (&Ndone;/&N; operations completed, last: &sqklast;)
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	oppiw	mrg		mrgfine	alrmer
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	merging code fragments
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	oppiw	mrgfine		mrgtypspec	alrmer	mrgtypspec
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	merging in-detail code fragments
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	oppiw	mrgtypspec		mrgtplspec	alrmer	mrgtplspec
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWdbeMLocale	Title
+			enus	merging module type specific code fragments
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	oppiw	mrgtplspec		clrspec	alrmer	clrspec
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWdbeMLocale	Title
+			enus	merging module template specific code fragments
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	oppiw	clrspec		mrgcust		mrgcust
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWdbeMLocale	Title
+			enus	clearing unused specific insertion points
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	oppiw	mrgcust		pack	alrmer	pack
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	merging custom code fragments
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	other	pack		done
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	packing code tree
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	other	fail
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		dld		lock	void					cust
+		ImeIMSensitivity2.end
+	other	done
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		dld		lock	void					cust
+		ImeIMSensitivity2.end
+	ImeIMStage.end
+	ImeIRMJobMJob.srefSubRefWznmMJob	Short	Multi	srefIxVConstract
+	JobWdbeLicense	license	false	cre
+	ImeIRMJobMJob.end
+	ImeIRMJobMOp.srefRefWznmMOp
+	WdbePlhfpgaCmdinv
+	WdbePlhfpgaCmdret
+	WdbePlhfpgaEhostif
+	WdbePlhfpgaFwdctr
+	WdbePlhmcuEhostif
+	WdbePrctreeMerge
+	ImeIRMJobMOp.end
+	ImeIRMJobMOppack.srefRefWznmMOppack
+	WdbeMtpPlhfpga
+	WdbeMtpPlhmcu
+	ImeIRMJobMOppack.end
+DlgWdbeUsrMngkeypair
+	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment
+	other	nf
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	SSH key pair not found
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	other	found
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	SSH key pair found
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		dld		lock	void					cust
+		ImeIMSensitivity2.end
+	ImeIMStage.end
+DlgWdbeUtlExtrip
+	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment
+	other	idle
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		uld		lock	void					chgsge	upkidle
+		ImeIMSensitivity2.end
+	immcb	upkidle		unpack
+	other	unpack		upkdone
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	unpacking source
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	other	upkdone
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	source unpacked
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		con		lock	void			ExtButRun		chgsge	extract
+		ImeIMSensitivity2.end
+	other	ulddone
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	source uploaded
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		con		lock	void			ExtButRun		chgsge	extract
+		ImeIMSensitivity2.end
+	oppiw	extract		pack	alrxer
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	extracting insertion points
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	other	pack		done
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	packing result
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	other	fail
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		dld		lock	void					cust
+		ImeIMSensitivity2.end
+	other	done
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		dld		lock	void					cust
+		ImeIMSensitivity2.end
+	ImeIMStage.end
+	ImeIRMJobMOp.srefRefWznmMOp
+	WdbePrctreeExtract
+	ImeIRMJobMOp.end
+DlgWdbeUtlMrgip
+	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment
+	other	idle
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		uld		lock	void					chgsge	supidle
+		ImeIMSensitivity2.end
+	immcb	supidle		srcunpack
+	other	srcunpack		supdone
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	unpacking source
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	other	supdone
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	source unpacked
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		uld		lock	void					chgsge	tupidle
+		ImeIMSensitivity2.end
+	other	suldone
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	source uploaded
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		uld		lock	void					chgsge	tupidle
+		ImeIMSensitivity2.end
+	immcb	tupidle		trgunpack
+	other	trgunpack		tupdone
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	unpacking target
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	other	tupdone
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	target unpacked
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		con		lock	void			MrgButRun		chgsge	merge
+		ImeIMSensitivity2.end
+	other	tuldone
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	target uploaded
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		con		lock	void			MrgButRun		chgsge	merge
+		ImeIMSensitivity2.end
+	oppiw	merge		pack	alrmer
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	merging
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	other	pack		done
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	packing result
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	other	fail
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		dld		lock	void					cust
+		ImeIMSensitivity2.end
+	other	done
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		dld		lock	void					cust
+		ImeIMSensitivity2.end
+	ImeIMStage.end
+	ImeIRMJobMOp.srefRefWznmMOp
+	WdbePrctreeMerge
+	ImeIRMJobMOp.end
+DlgWdbeVerBscdd
+	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment
+	other	idle
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		uld		lock	void					chgsge	prsidle
+		ImeIMSensitivity2.end
+	immcb	prsidle		parse
+	other	parse		prsdone	alrwdbeper
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	parsing basic device description
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	alr	alrwdbeper		idle
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	parse error
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	other	prsdone
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	basic device description parsed
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		con		lock	void			ImpButRun		chgsge	impidle
+		ImeIMSensitivity2.end
+	immcb	impidle		import
+	other	import	250000	impdone	alrwdbeier
+		ImeIMSquawk.Title	Example
+			importing basic device description (1234 records added)
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	importing basic device description (&impcnt; records added)
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	alr	alrwdbeier		idle
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	import error
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	other	impdone
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	import done
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		con		lock	void			PprButRun		chgsge	postprc1
+		ImeIMSensitivity2.end
+	oppiw	postprc1	250000	postprc2
+		ImeIMSquawk.Title	Example
+			complementing basic features (123/1234 operations completed, last: add standard vectors for unit 'icacam2')
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	complementing basic features (&Ndone;/&N; operations completed, last: &sqklast;)
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	oppiw	postprc2	250000	postprc2		postprc3
+		ImeIMSquawk.Title	Example
+			applying module modifications top-down (123/1234 operations completed, last: adapt buffer size for module 'icm2-cmdinv (cmdinv_v1_0 command invocation buffer)')
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	applying module modifications top-down (&Ndone;/&N; operations completed, last: &sqklast;)
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	oppiw	postprc3	250000	postprc3		done
+		ImeIMSquawk.Title	Example
+			applying module modifications bottom-up (123/1234 operations completed, last: adapt port widths for module 'icm2-tc-div (div_v3_0)')
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	applying module modifications bottom-up (&Ndone;/&N; operations completed, last: &sqklast;)
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	other	done	other
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		dld		lock	void					cust
+		ImeIMSensitivity2.end
+	ImeIMStage.end
+DlgWdbeVerDetdd
+	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment
+	other	idle
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		uld		lock	void					chgsge	prsidle
+		ImeIMSensitivity2.end
+	immcb	prsidle		parse
+	other	parse		prsdone	alrwdbeper
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	parsing detailed device description
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	alr	alrwdbeper		idle
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	parse error
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	other	prsdone
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	detailed device description parsed
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		con		lock	void			ImpButRun		chgsge	impidle
+		ImeIMSensitivity2.end
+	immcb	impidle		import
+	other	import	250000	impdone	alrwdbeier
+		ImeIMSquawk.Title	Example
+			importing detailed device description (1234 records added)
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	importing detailed device description (&impcnt; records added)
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	alr	alrwdbeier		idle
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	import error
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	other	impdone
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	import done
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		con		lock	void			PprButRun		chgsge	postprc1
+		ImeIMSensitivity2.end
+	oppiw	postprc1	250000	postprc1		postprc2
+		ImeIMSquawk.Title	Example
+			applying module modifications top-down (123/1234 operations completed, last: add command bus wiring for module 'icm2-cmdbus (cmdbus_v1_0 command bus controller)')
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	applying module modifications top-down (&Ndone;/&N; operations completed, last: &sqklast;)
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	oppiw	postprc2	250000	postprc2	asmlfi	postprc3
+		ImeIMSquawk.Title	Example
+			complementing inter-module wiring bottom-up (123/1234 operations completed, last: add intermediate generics and ports for unit 'icacam2')
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	complementing inter-module wiring bottom-up (&Ndone;/&N; operations completed, last: &sqklast;)
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	oppiw	asmlfi		alrwer
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	assembling log file
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	oppiw	postprc3	250000	sync
+		ImeIMSquawk.Title	Example
+			deriving detailed features (123/1234 operations completed, last: fill standard vectors for unit 'icacam2')
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	deriving detailed features (&Ndone;/&N; operations completed, last: &sqklast;)
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	other	sync		done
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	synchronizing build-ready version with licensing server
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	other	fail
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		dld		lock	void					cust
+		ImeIMSensitivity2.end
+	other	done
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		dld		lock	void					cust
+		ImeIMSensitivity2.end
+	ImeIMStage.end
+	ImeIRMJobMJob.srefSubRefWznmMJob	Short	Multi	srefIxVConstract
+	JobWdbeLicense	license	false	cre
+	ImeIRMJobMJob.end
+	ImeIRMJobMOp.srefRefWznmMOp
+	WdbeModdetWiring
+	WdbePrcfileConcat
+	ImeIRMJobMOp.end
+DlgWdbeVerNew
+	ImeIMVector.srefIxVOp	srefIxVBasetype	sref	osrefWznmKTaggrp	srefsKOption
+	retrupd		VecVDlgWdbeVerNewVni
+		ImeIMVectoritem.sref	Title	Comment
+		maj
+			ImeIJMVectoritem.srefX1RefWznmMLocale	Title	Comment
+			enus	major
+			ImeIJMVectoritem.end
+		min
+			ImeIJMVectoritem.srefX1RefWznmMLocale	Title	Comment
+			enus	minor
+			ImeIJMVectoritem.end
+		sub
+			ImeIJMVectoritem.srefX1RefWznmMLocale	Title	Comment
+			enus	sub
+			ImeIJMVectoritem.end
+		void	none
+		ImeIMVectoritem.end
+	ImeIMVector.end
+	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment
+	other	idle
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		con		lock	void			ButCre		chgsge	create
+		ImeIMSensitivity2.end
+	other	create		done	idle
+	other	done
+	ImeIMStage.end
+	ImeIRMJobMJob.srefSubRefWznmMJob	Short	Multi	srefIxVConstract
+	JobWdbeIexPrj	iexprj	false	cre
+	ImeIRMJobMJob.end
+JobWdbeLicense	true	true
+	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment
+	other	idle
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	not connected
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	other	conn		conn	conerr
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	connected
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	other	conerr		idle
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	connection failure
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	other	auth		conn	auterr
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	authenticating
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	other	auterr		conn
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	authentication failure
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	other	sync		conn	sncerr
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	synchronizing
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	other	sncerr		conn
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	synchronization failure
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	ImeIMStage.end
+	ImeIAMJobCmd.sref	Comment
+	test
+	ImeIAMJobCmd.end
+RootWdbe
+	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment
+	other	idle	240000000	idle
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	idle
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	other	sync		idle
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	synchronizing projects and versions with licensing server
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	ImeIMStage.end
+	ImeIAMJobCmd.sref	Comment
+	exportIni
+	test
+	ImeIAMJobCmd.end
+ImeIMJob.end
+ImeIMCall.srefIxVBasetype	srefsInvIxWznmWArgtype	srefsRetIxWznmWArgtype	sref	Comment
+evt	ix;txtval		CallWdbeReptrStart
+evt			CallWdbeReptrStop
+ImeIMCall.end

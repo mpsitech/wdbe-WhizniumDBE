@@ -1,11 +1,3 @@
-/**
-  * \file PnlWdbeModCtrMNCommand.js
-  * web client functionality for panel PnlWdbeModCtrMNCommand
-  * \author Alexander Wirthmueller
-  * \date created: 23 Aug 2020
-  * \date modified: 23 Aug 2020
-  */
-
 // --- expand state management
 function minimize(updh) {
 	if (retrieveSi(srcdoc, "StatAppWdbeModCtrMNCommand", "srefIxWdbeVExpstate") == "mind") return;

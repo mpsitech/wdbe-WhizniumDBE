@@ -1,10 +1,11 @@
 /**
 	* \file PnlWdbeTrgRec.cpp
 	* job handler for job PnlWdbeTrgRec (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifdef WDBECMBD
 	#include <Wdbecmbd.h>
@@ -43,9 +44,9 @@ PnlWdbeTrgRec::PnlWdbeTrgRec(
 
 	// IP constructor.cust2 --- INSERT
 
-	xchg->addClstn(VecWdbeVCall::CALLWDBETRG_SYSEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecWdbeVCall::CALLWDBETRG_UNT_INSBS, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBETRG_UNTEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBETRG_UNT_INSBS, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBETRG_SYSEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -80,7 +81,11 @@ DpchEngWdbe* PnlWdbeTrgRec::getNewDpchEng(
 void PnlWdbeTrgRec::refresh(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
+			, const bool unmute
 		) {
+	if (muteRefresh && !unmute) return;
+	muteRefresh = true;
+
 	ContInf oldContinf(continf);
 	StatShr oldStatshr(statshr);
 
@@ -105,6 +110,7 @@ void PnlWdbeTrgRec::refresh(
 	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
 	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
 
+	muteRefresh = false;
 };
 
 void PnlWdbeTrgRec::updatePreset(
@@ -235,36 +241,23 @@ void PnlWdbeTrgRec::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBETRG_SYSEQ) {
-		call->abort = handleCallWdbeTrg_sysEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBETRG_UNT_INSBS) {
-		call->abort = handleCallWdbeTrg_unt_inSbs(dbswdbe, call->jref, call->argInv.ix, call->argRet.boolval);
+	if (call->ixVCall == VecWdbeVCall::CALLWDBETRGUPD_REFEQ) {
+		call->abort = handleCallWdbeTrgUpd_refEq(dbswdbe, call->jref);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBETRG_UNTEQ) {
 		call->abort = handleCallWdbeTrg_untEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBETRGUPD_REFEQ) {
-		call->abort = handleCallWdbeTrgUpd_refEq(dbswdbe, call->jref);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBETRG_UNT_INSBS) {
+		call->abort = handleCallWdbeTrg_unt_inSbs(dbswdbe, call->jref, call->argInv.ix, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBETRG_SYSEQ) {
+		call->abort = handleCallWdbeTrg_sysEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
 	};
 };
 
-bool PnlWdbeTrgRec::handleCallWdbeTrg_sysEq(
+bool PnlWdbeTrgRec::handleCallWdbeTrgUpd_refEq(
 			DbsWdbe* dbswdbe
 			, const ubigint jrefTrig
-			, const ubigint refInv
-			, bool& boolvalRet
 		) {
 	bool retval = false;
-	boolvalRet = (recTrg.sysRefWdbeMSystem == refInv); // IP handleCallWdbeTrg_sysEq --- LINE
-	return retval;
-};
-
-bool PnlWdbeTrgRec::handleCallWdbeTrg_unt_inSbs(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-			, const uint ixInv
-			, bool& boolvalRet
-		) {
-	bool retval = false;
-	boolvalRet = ((dbswdbe->getIxWSubsetByRefWdbeMUnit(recTrg.refWdbeMUnit) & ixInv) != 0); // IP handleCallWdbeTrg_unt_inSbs --- LINE
+	// IP handleCallWdbeTrgUpd_refEq --- INSERT
 	return retval;
 };
 
@@ -279,12 +272,27 @@ bool PnlWdbeTrgRec::handleCallWdbeTrg_untEq(
 	return retval;
 };
 
-bool PnlWdbeTrgRec::handleCallWdbeTrgUpd_refEq(
+bool PnlWdbeTrgRec::handleCallWdbeTrg_unt_inSbs(
 			DbsWdbe* dbswdbe
 			, const ubigint jrefTrig
+			, const uint ixInv
+			, bool& boolvalRet
 		) {
 	bool retval = false;
-	// IP handleCallWdbeTrgUpd_refEq --- INSERT
+	boolvalRet = ((dbswdbe->getIxWSubsetByRefWdbeMUnit(recTrg.refWdbeMUnit) & ixInv) != 0); // IP handleCallWdbeTrg_unt_inSbs --- LINE
 	return retval;
 };
+
+bool PnlWdbeTrgRec::handleCallWdbeTrg_sysEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+			, const ubigint refInv
+			, bool& boolvalRet
+		) {
+	bool retval = false;
+	boolvalRet = (recTrg.sysRefWdbeMSystem == refInv); // IP handleCallWdbeTrg_sysEq --- LINE
+	return retval;
+};
+
+
 

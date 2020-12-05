@@ -1,10 +1,11 @@
 /**
 	* \file WdbePrctreeExtract.cpp
 	* Wdbe operation processor - extract from file tree into extract file tree (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
-	*/
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
+  */
+// IP header --- ABOVE
 
 #ifdef WDBECMBD
 	#include <Wdbecmbd.h>
@@ -151,6 +152,8 @@ bool WdbePrctreeExtract::scanFile(
 	bool success;
 
 	vector<Ip*> ips;
+	bool hasIpAbove;
+	bool hasIpKeep;
 	map<string,unsigned int> icsIpsAffirm;
 	map<string,unsigned int> icsIpsRemove;
 	map<string,unsigned int> icsIpsIline;
@@ -160,26 +163,20 @@ bool WdbePrctreeExtract::scanFile(
 
 	unsigned int fmt;
 
-	bool keep = false;
-
 	// parse infile
 	logfi << "processing file '" << infile << "'" << endl;
 	success = parseFile(tmppath + "/" + infile, logfi, true, ips, fmt);
 
 	if (success) {
-		// check if file is to be kept w/o modification
-		if (ips.size() > 0) if (ips[0]->type == Iptype::KEEP) keep = true;
+		readFileContent(tmppath + "/" + infile, ips, hasIpAbove, hasIpKeep, icsIpsAffirm, icsIpsRemove, icsIpsIline, icsIpsIbegin, icsIpsRline, icsIpsRbegin);
 
-		if (keep) {
+		if (hasIpKeep) {
 			// copy entire file
 			Wdbe::run("cp -p " + tmppath + "/" + infile + " " + tmppath + "/" + extfile);
 
 		} else {
-			// copy IP's only
-			readFileContent(tmppath + "/" + infile, ips, icsIpsAffirm, icsIpsRemove, icsIpsIline, icsIpsIbegin, icsIpsRline, icsIpsRbegin);
-
-			// omit files with no relevant content
-			if (!(icsIpsAffirm.empty() && icsIpsRemove.empty() && icsIpsIline.empty() && icsIpsIbegin.empty() && icsIpsRline.empty() && icsIpsRbegin.empty())) writeExtfile(tmppath, extfile, ips);
+			// copy IP's only, omitting files with no relevant content
+			if (!(!hasIpAbove && icsIpsAffirm.empty() && icsIpsRemove.empty() && icsIpsIline.empty() && icsIpsIbegin.empty() && icsIpsRline.empty() && icsIpsRbegin.empty())) writeExtfile(tmppath, extfile, ips);
 		};
 	};
 
@@ -211,8 +208,9 @@ void WdbePrctreeExtract::writeExtfile(
 
 	for (unsigned int i = 0; i < ips.size();i++) {
 		ip = ips[i];
-		if ((ip->type == Iptype::AFFIRM) || (ip->type == Iptype::REMOVE) || (ip->type == Iptype::ILINE) || (ip->type == Iptype::IBEGIN) || (ip->type == Iptype::RLINE) || (ip->type == Iptype::RBEGIN)) {
-			for (unsigned int j = 0; j < ip->content.size();j++) extfi << ip->content[j] << endl;
+
+		if ((ip->type == Iptype::ABOVE) ||(ip->type == Iptype::AFFIRM) || (ip->type == Iptype::REMOVE) || (ip->type == Iptype::ILINE) || (ip->type == Iptype::IBEGIN) || (ip->type == Iptype::RLINE) || (ip->type == Iptype::RBEGIN)) {
+			for (unsigned int j = 0; j < ip->content.size(); j++) extfi << ip->content[j] << endl;
 		};
 
 		if ((ip->type == Iptype::IBEGIN) || (ip->type == Iptype::RBEGIN)) {
@@ -220,7 +218,7 @@ void WdbePrctreeExtract::writeExtfile(
 			skiptolineno = ip->par->lineno;
 
 			// skip insertion points up to END, will be adjusted to the next one after further down the code
-			for (unsigned int j=i;j<ips.size();j++) {
+			for (unsigned int j = i; j < ips.size(); j++) {
 				if (ip->par == ips[j]) {
 					i = j;
 					break;
@@ -232,5 +230,6 @@ void WdbePrctreeExtract::writeExtfile(
 	extfi.close();
 };
 // IP cust --- IEND
+
 
 

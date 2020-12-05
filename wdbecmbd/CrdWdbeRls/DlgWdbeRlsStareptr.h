@@ -1,10 +1,11 @@
 /**
 	* \file DlgWdbeRlsStareptr.h
 	* job handler for job DlgWdbeRlsStareptr (declarations)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifndef DLGWDBERLSSTAREPTR_H
 #define DLGWDBERLSSTAREPTR_H
@@ -544,18 +545,18 @@ public:
 		void writeXML(const Sbecore::uint ixWdbeVLocale, xmlTextWriter* wr);
 	};
 
-	bool evalDetTxfGrlAvail(DbsWdbe* dbswdbe);
-	bool evalDetButStaActive(DbsWdbe* dbswdbe);
+	bool evalButDneActive(DbsWdbe* dbswdbe);
+	bool evalLfiDldActive(DbsWdbe* dbswdbe);
+	bool evalExtButRunActive(DbsWdbe* dbswdbe);
+	bool evalExtButStoActive(DbsWdbe* dbswdbe);
 	bool evalIniUldAvail(DbsWdbe* dbswdbe);
 	bool evalIniUldActive(DbsWdbe* dbswdbe);
 	bool evalIniTxtPrgAvail(DbsWdbe* dbswdbe);
 	bool evalIniSep1Avail(DbsWdbe* dbswdbe);
 	bool evalIniButClgAvail(DbsWdbe* dbswdbe);
 	bool evalIniButClgActive(DbsWdbe* dbswdbe);
-	bool evalExtButRunActive(DbsWdbe* dbswdbe);
-	bool evalExtButStoActive(DbsWdbe* dbswdbe);
-	bool evalLfiDldActive(DbsWdbe* dbswdbe);
-	bool evalButDneActive(DbsWdbe* dbswdbe);
+	bool evalDetTxfGrlAvail(DbsWdbe* dbswdbe);
+	bool evalDetButStaActive(DbsWdbe* dbswdbe);
 
 public:
 	DlgWdbeRlsStareptr(XchgWdbe* xchg, DbsWdbe* dbswdbe, const Sbecore::ubigint jrefSup, const Sbecore::uint ixWdbeVLocale);
@@ -611,7 +612,7 @@ public:
 	void refreshExt(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems);
 	void refreshLfi(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems);
 
-	void refresh(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems);
+	void refresh(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems, const bool unmute = false);
 
 public:
 
@@ -687,5 +688,6 @@ private:
 };
 
 #endif
+
 
 

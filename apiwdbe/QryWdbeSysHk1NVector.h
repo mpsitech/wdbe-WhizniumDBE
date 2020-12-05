@@ -1,10 +1,11 @@
 /**
 	* \file QryWdbeSysHk1NVector.h
 	* API code for job QryWdbeSysHk1NVector (declarations)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 5 Dec 2020
 	*/
+// IP header --- ABOVE
 
 #ifndef QRYWDBESYSHK1NVECTOR_H
 #define QRYWDBESYSHK1NVECTOR_H

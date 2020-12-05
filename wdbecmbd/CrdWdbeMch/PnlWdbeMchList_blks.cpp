@@ -1,10 +1,11 @@
 /**
 	* \file PnlWdbeMchList_blks.cpp
 	* job handler for job PnlWdbeMchList (implementation of blocks)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 using namespace std;
 using namespace Sbecore;
@@ -241,13 +242,13 @@ set<uint> PnlWdbeMchList::StatShr::diff(
 
 PnlWdbeMchList::StgIac::StgIac(
 			const uint TcoSrfWidth
-			, const uint TcoPlaWidth
+			, const uint TcoSupWidth
 		) :
 			Block()
 		{
 	this->TcoSrfWidth = TcoSrfWidth;
-	this->TcoPlaWidth = TcoPlaWidth;
-	mask = {TCOSRFWIDTH, TCOPLAWIDTH};
+	this->TcoSupWidth = TcoSupWidth;
+	mask = {TCOSRFWIDTH, TCOSUPWIDTH};
 };
 
 bool PnlWdbeMchList::StgIac::readXML(
@@ -268,7 +269,7 @@ bool PnlWdbeMchList::StgIac::readXML(
 
 	if (basefound) {
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoSrfWidth", TcoSrfWidth)) add(TCOSRFWIDTH);
-		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoPlaWidth", TcoPlaWidth)) add(TCOPLAWIDTH);
+		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoSupWidth", TcoSupWidth)) add(TCOSUPWIDTH);
 	};
 
 	return basefound;
@@ -287,7 +288,7 @@ void PnlWdbeMchList::StgIac::writeXML(
 
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
 		writeUintAttr(wr, itemtag, "sref", "TcoSrfWidth", TcoSrfWidth);
-		writeUintAttr(wr, itemtag, "sref", "TcoPlaWidth", TcoPlaWidth);
+		writeUintAttr(wr, itemtag, "sref", "TcoSupWidth", TcoSupWidth);
 	xmlTextWriterEndElement(wr);
 };
 
@@ -297,7 +298,7 @@ set<uint> PnlWdbeMchList::StgIac::comm(
 	set<uint> items;
 
 	if (TcoSrfWidth == comp->TcoSrfWidth) insert(items, TCOSRFWIDTH);
-	if (TcoPlaWidth == comp->TcoPlaWidth) insert(items, TCOPLAWIDTH);
+	if (TcoSupWidth == comp->TcoSupWidth) insert(items, TCOSUPWIDTH);
 
 	return(items);
 };
@@ -310,7 +311,7 @@ set<uint> PnlWdbeMchList::StgIac::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {TCOSRFWIDTH, TCOPLAWIDTH};
+	diffitems = {TCOSRFWIDTH, TCOSUPWIDTH};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -336,7 +337,7 @@ void PnlWdbeMchList::Tag::writeXML(
 		if (ixWdbeVLocale == VecWdbeVLocale::ENUS) {
 			writeStringAttr(wr, itemtag, "sref", "Cpt", "Machines");
 			writeStringAttr(wr, itemtag, "sref", "TcoSrf", "Identifier");
-			writeStringAttr(wr, itemtag, "sref", "TcoPla", "Platform");
+			writeStringAttr(wr, itemtag, "sref", "TcoSup", "Base machine");
 		};
 		writeStringAttr(wr, itemtag, "sref", "TxtRecord1", StrMod::cap(VecWdbeVTag::getTitle(VecWdbeVTag::REC, ixWdbeVLocale)));
 		writeStringAttr(wr, itemtag, "sref", "TxtRecord2", StrMod::cap(VecWdbeVTag::getTitle(VecWdbeVTag::EMPLONG, ixWdbeVLocale)));
@@ -546,4 +547,6 @@ void PnlWdbeMchList::DpchEngData::writeXML(
 		if (has(STGIACQRY)) stgiacqry.writeXML(wr);
 	xmlTextWriterEndElement(wr);
 };
+
+
 

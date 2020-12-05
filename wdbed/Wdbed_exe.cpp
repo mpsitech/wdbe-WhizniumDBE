@@ -1,10 +1,11 @@
 /**
-	* \file Wdbed_exe.cpp
-	* Wdbe daemon main (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
-	*/
+	* \file Wdbecmbd_exe.cpp
+	* Wdbe combined daemon main (implementation)
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
+  */
+// IP header --- ABOVE
 
 #include "Wdbed.h"
 
@@ -493,7 +494,7 @@ int main(
 
 	try {
 		// welcome message
-		cout << "Welcome to WhizniumDBE v1.0.3!" << endl;
+		cout << "Welcome to WhizniumDBE v1.1.0!" << endl;
 
 		// calls wdbed.init()
 		wdbed = new Wdbed(exedir, clearAll, startMon);
@@ -664,4 +665,7 @@ int main(
 
 	return(0);
 };
+
+
+
 

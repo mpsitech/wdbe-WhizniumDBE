@@ -1,10 +1,11 @@
 /**
 	* \file QryWdbeSysSys1NTarget.h
 	* API code for job QryWdbeSysSys1NTarget (declarations)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 5 Dec 2020
 	*/
+// IP header --- ABOVE
 
 #ifndef QRYWDBESYSSYS1NTARGET_H
 #define QRYWDBESYSSYS1NTARGET_H

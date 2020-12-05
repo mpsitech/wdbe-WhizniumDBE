@@ -1,10 +1,11 @@
 /**
 	* \file PnlWdbeMchDetail.cpp
 	* API code for job PnlWdbeMchDetail (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 5 Dec 2020
 	*/
+// IP header --- ABOVE
 
 #include "PnlWdbeMchDetail.h"
 
@@ -22,7 +23,7 @@ uint PnlWdbeMchDetail::VecVDo::getIx(
 	string s = StrMod::lc(sref);
 
 	if (s == "butsaveclick") return BUTSAVECLICK;
-	if (s == "butplaeditclick") return BUTPLAEDITCLICK;
+	if (s == "butsupviewclick") return BUTSUPVIEWCLICK;
 	if (s == "butcchviewclick") return BUTCCHVIEWCLICK;
 
 	return(0);
@@ -32,7 +33,7 @@ string PnlWdbeMchDetail::VecVDo::getSref(
 			const uint ix
 		) {
 	if (ix == BUTSAVECLICK) return("ButSaveClick");
-	if (ix == BUTPLAEDITCLICK) return("ButPlaEditClick");
+	if (ix == BUTSUPVIEWCLICK) return("ButSupViewClick");
 	if (ix == BUTCCHVIEWCLICK) return("ButCchViewClick");
 
 	return("");
@@ -43,17 +44,13 @@ string PnlWdbeMchDetail::VecVDo::getSref(
  ******************************************************************************/
 
 PnlWdbeMchDetail::ContIac::ContIac(
-			const uint numFPupPla
-			, const string& TxfPla
-			, const string& TxfCmt
+			const string& TxfCmt
 		) :
 			Block()
 		{
-	this->numFPupPla = numFPupPla;
-	this->TxfPla = TxfPla;
 	this->TxfCmt = TxfCmt;
 
-	mask = {NUMFPUPPLA, TXFPLA, TXFCMT};
+	mask = {TXFCMT};
 };
 
 bool PnlWdbeMchDetail::ContIac::readXML(
@@ -73,8 +70,6 @@ bool PnlWdbeMchDetail::ContIac::readXML(
 	string itemtag = "ContitemIacWdbeMchDetail";
 
 	if (basefound) {
-		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "numFPupPla", numFPupPla)) add(NUMFPUPPLA);
-		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "TxfPla", TxfPla)) add(TXFPLA);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "TxfCmt", TxfCmt)) add(TXFCMT);
 	};
 
@@ -93,8 +88,6 @@ void PnlWdbeMchDetail::ContIac::writeXML(
 	else itemtag = "ContitemIacWdbeMchDetail";
 
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
-		writeUintAttr(wr, itemtag, "sref", "numFPupPla", numFPupPla);
-		writeStringAttr(wr, itemtag, "sref", "TxfPla", TxfPla);
 		writeStringAttr(wr, itemtag, "sref", "TxfCmt", TxfCmt);
 	xmlTextWriterEndElement(wr);
 };
@@ -104,8 +97,6 @@ set<uint> PnlWdbeMchDetail::ContIac::comm(
 		) {
 	set<uint> items;
 
-	if (numFPupPla == comp->numFPupPla) insert(items, NUMFPUPPLA);
-	if (TxfPla == comp->TxfPla) insert(items, TXFPLA);
 	if (TxfCmt == comp->TxfCmt) insert(items, TXFCMT);
 
 	return(items);
@@ -119,7 +110,7 @@ set<uint> PnlWdbeMchDetail::ContIac::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {NUMFPUPPLA, TXFPLA, TXFCMT};
+	diffitems = {TXFCMT};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -131,14 +122,16 @@ set<uint> PnlWdbeMchDetail::ContIac::diff(
 
 PnlWdbeMchDetail::ContInf::ContInf(
 			const string& TxtSrf
+			, const string& TxtSup
 			, const string& TxtCch
 		) :
 			Block()
 		{
 	this->TxtSrf = TxtSrf;
+	this->TxtSup = TxtSup;
 	this->TxtCch = TxtCch;
 
-	mask = {TXTSRF, TXTCCH};
+	mask = {TXTSRF, TXTSUP, TXTCCH};
 };
 
 bool PnlWdbeMchDetail::ContInf::readXML(
@@ -159,6 +152,7 @@ bool PnlWdbeMchDetail::ContInf::readXML(
 
 	if (basefound) {
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "TxtSrf", TxtSrf)) add(TXTSRF);
+		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "TxtSup", TxtSup)) add(TXTSUP);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "TxtCch", TxtCch)) add(TXTCCH);
 	};
 
@@ -171,6 +165,7 @@ set<uint> PnlWdbeMchDetail::ContInf::comm(
 	set<uint> items;
 
 	if (TxtSrf == comp->TxtSrf) insert(items, TXTSRF);
+	if (TxtSup == comp->TxtSup) insert(items, TXTSUP);
 	if (TxtCch == comp->TxtCch) insert(items, TXTCCH);
 
 	return(items);
@@ -184,7 +179,7 @@ set<uint> PnlWdbeMchDetail::ContInf::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {TXTSRF, TXTCCH};
+	diffitems = {TXTSRF, TXTSUP, TXTCCH};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -196,14 +191,12 @@ set<uint> PnlWdbeMchDetail::ContInf::diff(
 
 PnlWdbeMchDetail::StatApp::StatApp(
 			const uint ixWdbeVExpstate
-			, const bool PupPlaAlt
 		) :
 			Block()
 		{
 	this->ixWdbeVExpstate = ixWdbeVExpstate;
-	this->PupPlaAlt = PupPlaAlt;
 
-	mask = {IXWDBEVEXPSTATE, PUPPLAALT};
+	mask = {IXWDBEVEXPSTATE};
 };
 
 bool PnlWdbeMchDetail::StatApp::readXML(
@@ -229,7 +222,6 @@ bool PnlWdbeMchDetail::StatApp::readXML(
 			ixWdbeVExpstate = VecWdbeVExpstate::getIx(srefIxWdbeVExpstate);
 			add(IXWDBEVEXPSTATE);
 		};
-		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "PupPlaAlt", PupPlaAlt)) add(PUPPLAALT);
 	};
 
 	return basefound;
@@ -241,7 +233,6 @@ set<uint> PnlWdbeMchDetail::StatApp::comm(
 	set<uint> items;
 
 	if (ixWdbeVExpstate == comp->ixWdbeVExpstate) insert(items, IXWDBEVEXPSTATE);
-	if (PupPlaAlt == comp->PupPlaAlt) insert(items, PUPPLAALT);
 
 	return(items);
 };
@@ -254,7 +245,7 @@ set<uint> PnlWdbeMchDetail::StatApp::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {IXWDBEVEXPSTATE, PUPPLAALT};
+	diffitems = {IXWDBEVEXPSTATE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -265,12 +256,12 @@ set<uint> PnlWdbeMchDetail::StatApp::diff(
  ******************************************************************************/
 
 PnlWdbeMchDetail::StatShr::StatShr(
-			const bool TxfPlaValid
-			, const bool ButSaveAvail
+			const bool ButSaveAvail
 			, const bool ButSaveActive
 			, const bool TxtSrfActive
-			, const bool PupPlaActive
-			, const bool ButPlaEditAvail
+			, const bool TxtSupActive
+			, const bool ButSupViewAvail
+			, const bool ButSupViewActive
 			, const bool TxtCchActive
 			, const bool ButCchViewAvail
 			, const bool ButCchViewActive
@@ -278,18 +269,18 @@ PnlWdbeMchDetail::StatShr::StatShr(
 		) :
 			Block()
 		{
-	this->TxfPlaValid = TxfPlaValid;
 	this->ButSaveAvail = ButSaveAvail;
 	this->ButSaveActive = ButSaveActive;
 	this->TxtSrfActive = TxtSrfActive;
-	this->PupPlaActive = PupPlaActive;
-	this->ButPlaEditAvail = ButPlaEditAvail;
+	this->TxtSupActive = TxtSupActive;
+	this->ButSupViewAvail = ButSupViewAvail;
+	this->ButSupViewActive = ButSupViewActive;
 	this->TxtCchActive = TxtCchActive;
 	this->ButCchViewAvail = ButCchViewAvail;
 	this->ButCchViewActive = ButCchViewActive;
 	this->TxfCmtActive = TxfCmtActive;
 
-	mask = {TXFPLAVALID, BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, PUPPLAACTIVE, BUTPLAEDITAVAIL, TXTCCHACTIVE, BUTCCHVIEWAVAIL, BUTCCHVIEWACTIVE, TXFCMTACTIVE};
+	mask = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXTSUPACTIVE, BUTSUPVIEWAVAIL, BUTSUPVIEWACTIVE, TXTCCHACTIVE, BUTCCHVIEWAVAIL, BUTCCHVIEWACTIVE, TXFCMTACTIVE};
 };
 
 bool PnlWdbeMchDetail::StatShr::readXML(
@@ -309,12 +300,12 @@ bool PnlWdbeMchDetail::StatShr::readXML(
 	string itemtag = "StatitemShrWdbeMchDetail";
 
 	if (basefound) {
-		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TxfPlaValid", TxfPlaValid)) add(TXFPLAVALID);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButSaveAvail", ButSaveAvail)) add(BUTSAVEAVAIL);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButSaveActive", ButSaveActive)) add(BUTSAVEACTIVE);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TxtSrfActive", TxtSrfActive)) add(TXTSRFACTIVE);
-		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "PupPlaActive", PupPlaActive)) add(PUPPLAACTIVE);
-		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButPlaEditAvail", ButPlaEditAvail)) add(BUTPLAEDITAVAIL);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TxtSupActive", TxtSupActive)) add(TXTSUPACTIVE);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButSupViewAvail", ButSupViewAvail)) add(BUTSUPVIEWAVAIL);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButSupViewActive", ButSupViewActive)) add(BUTSUPVIEWACTIVE);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TxtCchActive", TxtCchActive)) add(TXTCCHACTIVE);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButCchViewAvail", ButCchViewAvail)) add(BUTCCHVIEWAVAIL);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButCchViewActive", ButCchViewActive)) add(BUTCCHVIEWACTIVE);
@@ -329,12 +320,12 @@ set<uint> PnlWdbeMchDetail::StatShr::comm(
 		) {
 	set<uint> items;
 
-	if (TxfPlaValid == comp->TxfPlaValid) insert(items, TXFPLAVALID);
 	if (ButSaveAvail == comp->ButSaveAvail) insert(items, BUTSAVEAVAIL);
 	if (ButSaveActive == comp->ButSaveActive) insert(items, BUTSAVEACTIVE);
 	if (TxtSrfActive == comp->TxtSrfActive) insert(items, TXTSRFACTIVE);
-	if (PupPlaActive == comp->PupPlaActive) insert(items, PUPPLAACTIVE);
-	if (ButPlaEditAvail == comp->ButPlaEditAvail) insert(items, BUTPLAEDITAVAIL);
+	if (TxtSupActive == comp->TxtSupActive) insert(items, TXTSUPACTIVE);
+	if (ButSupViewAvail == comp->ButSupViewAvail) insert(items, BUTSUPVIEWAVAIL);
+	if (ButSupViewActive == comp->ButSupViewActive) insert(items, BUTSUPVIEWACTIVE);
 	if (TxtCchActive == comp->TxtCchActive) insert(items, TXTCCHACTIVE);
 	if (ButCchViewAvail == comp->ButCchViewAvail) insert(items, BUTCCHVIEWAVAIL);
 	if (ButCchViewActive == comp->ButCchViewActive) insert(items, BUTCCHVIEWACTIVE);
@@ -351,7 +342,7 @@ set<uint> PnlWdbeMchDetail::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {TXFPLAVALID, BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, PUPPLAACTIVE, BUTPLAEDITAVAIL, TXTCCHACTIVE, BUTCCHVIEWAVAIL, BUTCCHVIEWACTIVE, TXFCMTACTIVE};
+	diffitems = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXTSUPACTIVE, BUTSUPVIEWAVAIL, BUTSUPVIEWACTIVE, TXTCCHACTIVE, BUTCCHVIEWAVAIL, BUTCCHVIEWACTIVE, TXFCMTACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -364,7 +355,7 @@ set<uint> PnlWdbeMchDetail::StatShr::diff(
 PnlWdbeMchDetail::Tag::Tag(
 			const string& Cpt
 			, const string& CptSrf
-			, const string& CptPla
+			, const string& CptSup
 			, const string& CptCch
 			, const string& CptCmt
 		) :
@@ -372,11 +363,11 @@ PnlWdbeMchDetail::Tag::Tag(
 		{
 	this->Cpt = Cpt;
 	this->CptSrf = CptSrf;
-	this->CptPla = CptPla;
+	this->CptSup = CptSup;
 	this->CptCch = CptCch;
 	this->CptCmt = CptCmt;
 
-	mask = {CPT, CPTSRF, CPTPLA, CPTCCH, CPTCMT};
+	mask = {CPT, CPTSRF, CPTSUP, CPTCCH, CPTCMT};
 };
 
 bool PnlWdbeMchDetail::Tag::readXML(
@@ -398,7 +389,7 @@ bool PnlWdbeMchDetail::Tag::readXML(
 	if (basefound) {
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "Cpt", Cpt)) add(CPT);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "CptSrf", CptSrf)) add(CPTSRF);
-		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "CptPla", CptPla)) add(CPTPLA);
+		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "CptSup", CptSup)) add(CPTSUP);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "CptCch", CptCch)) add(CPTCCH);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "CptCmt", CptCmt)) add(CPTCMT);
 	};
@@ -491,7 +482,6 @@ void PnlWdbeMchDetail::DpchAppDo::writeXML(
 PnlWdbeMchDetail::DpchEngData::DpchEngData() :
 			DpchEngWdbe(VecWdbeVDpch::DPCHENGWDBEMCHDETAILDATA)
 		{
-	feedFPupPla.tag = "FeedFPupPla";
 };
 
 string PnlWdbeMchDetail::DpchEngData::getSrefsMask() {
@@ -501,7 +491,6 @@ string PnlWdbeMchDetail::DpchEngData::getSrefsMask() {
 	if (has(SCRJREF)) ss.push_back("scrJref");
 	if (has(CONTIAC)) ss.push_back("contiac");
 	if (has(CONTINF)) ss.push_back("continf");
-	if (has(FEEDFPUPPLA)) ss.push_back("feedFPupPla");
 	if (has(STATAPP)) ss.push_back("statapp");
 	if (has(STATSHR)) ss.push_back("statshr");
 	if (has(TAG)) ss.push_back("tag");
@@ -529,14 +518,12 @@ void PnlWdbeMchDetail::DpchEngData::readXML(
 		if (extractStringUclc(docctx, basexpath, "scrJref", "", scrJref)) add(SCRJREF);
 		if (contiac.readXML(docctx, basexpath, true)) add(CONTIAC);
 		if (continf.readXML(docctx, basexpath, true)) add(CONTINF);
-		if (feedFPupPla.readXML(docctx, basexpath, true)) add(FEEDFPUPPLA);
 		if (statapp.readXML(docctx, basexpath, true)) add(STATAPP);
 		if (statshr.readXML(docctx, basexpath, true)) add(STATSHR);
 		if (tag.readXML(docctx, basexpath, true)) add(TAG);
 	} else {
 		contiac = ContIac();
 		continf = ContInf();
-		feedFPupPla.clear();
 		statapp = StatApp();
 		statshr = StatShr();
 		tag = Tag();

@@ -1,11 +1,3 @@
-/**
-  * \file DlgWdbeVerBscdd.js
-  * web client functionality for dialog DlgWdbeVerBscdd
-  * \author Alexander Wirthmueller
-  * \date created: 23 Aug 2020
-  * \date modified: 23 Aug 2020
-  */
-
 // IP cust --- INSERT
 
 // --- view initialization and refresh

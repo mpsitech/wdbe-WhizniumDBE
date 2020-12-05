@@ -1,10 +1,11 @@
 /**
 	* \file VecWdbeVOpengtype.cpp
 	* vector VecWdbeVOpengtype (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
-	*/
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
+  */
+// IP header --- ABOVE
 
 #include "VecWdbeVOpengtype.h"
 
@@ -65,4 +66,6 @@ void VecWdbeVOpengtype::fillFeed(
 
 	for (unsigned int i = 1; i <= 2; i++) feed.appendIxSrefTitles(i, getSref(i), getTitle(i, ixWdbeVLocale));
 };
+
+
 

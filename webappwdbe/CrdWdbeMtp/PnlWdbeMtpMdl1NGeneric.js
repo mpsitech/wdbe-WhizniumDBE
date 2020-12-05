@@ -1,11 +1,3 @@
-/**
-  * \file PnlWdbeMtpMdl1NGeneric.js
-  * web client functionality for panel PnlWdbeMtpMdl1NGeneric
-  * \author Alexander Wirthmueller
-  * \date created: 23 Aug 2020
-  * \date modified: 23 Aug 2020
-  */
-
 // --- expand state management
 function minimize(updh) {
 	if (retrieveSi(srcdoc, "StatAppWdbeMtpMdl1NGeneric", "srefIxWdbeVExpstate") == "mind") return;

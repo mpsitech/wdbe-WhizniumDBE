@@ -1,10 +1,11 @@
 /**
 	* \file SqkWdbeWrdev.cpp
 	* squawk generation for operation pack WdbeWrdev (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
-	*/
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
+  */
+// IP header --- ABOVE
 
 #include "SqkWdbeWrdev.h"
 
@@ -55,5 +56,6 @@ string SqkWdbeWrdev::getSquawkUnt(
 	// example: "write C++ code for unit 'Axis2'"
 	return("write C++ code for unit '" + StubWdbe::getStubUntStd(dbswdbe, dpchinv->refWdbeMUnit) + "'"); // IP getSquawkUnt --- RLINE
 };
+
 
 

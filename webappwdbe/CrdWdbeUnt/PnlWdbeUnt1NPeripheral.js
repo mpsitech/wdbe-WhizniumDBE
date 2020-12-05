@@ -1,11 +1,3 @@
-/**
-  * \file PnlWdbeUnt1NPeripheral.js
-  * web client functionality for panel PnlWdbeUnt1NPeripheral
-  * \author Alexander Wirthmueller
-  * \date created: 23 Aug 2020
-  * \date modified: 23 Aug 2020
-  */
-
 // --- expand state management
 function minimize(updh) {
 	if (retrieveSi(srcdoc, "StatAppWdbeUnt1NPeripheral", "srefIxWdbeVExpstate") == "mind") return;

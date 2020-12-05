@@ -1,10 +1,11 @@
 /**
 	* \file PnlWdbeFstDetail.cpp
 	* job handler for job PnlWdbeFstDetail (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifdef WDBECMBD
 	#include <Wdbecmbd.h>
@@ -45,8 +46,8 @@ PnlWdbeFstDetail::PnlWdbeFstDetail(
 
 	// IP constructor.cust2 --- INSERT
 
-	xchg->addClstn(VecWdbeVCall::CALLWDBEFST_CLUEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBEFST_FSMEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBEFST_CLUEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -174,7 +175,11 @@ void PnlWdbeFstDetail::refreshRecFst(
 void PnlWdbeFstDetail::refresh(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
+			, const bool unmute
 		) {
+	if (muteRefresh && !unmute) return;
+	muteRefresh = true;
+
 	StatShr oldStatshr(statshr);
 
 	// IP refresh --- BEGIN
@@ -184,6 +189,8 @@ void PnlWdbeFstDetail::refresh(
 	// IP refresh --- END
 
 	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
+
+	muteRefresh = false;
 };
 
 void PnlWdbeFstDetail::updatePreset(
@@ -343,46 +350,15 @@ void PnlWdbeFstDetail::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBEFST_CLUEQ) {
-		call->abort = handleCallWdbeFst_cluEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEFST_FSMEQ) {
-		call->abort = handleCallWdbeFst_fsmEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
+	if (call->ixVCall == VecWdbeVCall::CALLWDBEFSTMOD_CLUEQ) {
+		call->abort = handleCallWdbeFstMod_cluEq(dbswdbe, call->jref);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEFSTUPD_REFEQ) {
 		call->abort = handleCallWdbeFstUpd_refEq(dbswdbe, call->jref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEFSTMOD_CLUEQ) {
-		call->abort = handleCallWdbeFstMod_cluEq(dbswdbe, call->jref);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEFST_FSMEQ) {
+		call->abort = handleCallWdbeFst_fsmEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEFST_CLUEQ) {
+		call->abort = handleCallWdbeFst_cluEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
 	};
-};
-
-bool PnlWdbeFstDetail::handleCallWdbeFst_cluEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-			, const ubigint refInv
-			, bool& boolvalRet
-		) {
-	bool retval = false;
-	boolvalRet = (recFst.refWdbeCFsmstate == refInv); // IP handleCallWdbeFst_cluEq --- LINE
-	return retval;
-};
-
-bool PnlWdbeFstDetail::handleCallWdbeFst_fsmEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-			, const ubigint refInv
-			, bool& boolvalRet
-		) {
-	bool retval = false;
-	boolvalRet = (recFst.fsmRefWdbeMFsm == refInv); // IP handleCallWdbeFst_fsmEq --- LINE
-	return retval;
-};
-
-bool PnlWdbeFstDetail::handleCallWdbeFstUpd_refEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-	// IP handleCallWdbeFstUpd_refEq --- INSERT
-	return retval;
 };
 
 bool PnlWdbeFstDetail::handleCallWdbeFstMod_cluEq(
@@ -397,4 +373,37 @@ bool PnlWdbeFstDetail::handleCallWdbeFstMod_cluEq(
 	xchg->submitDpch(getNewDpchEng(moditems));
 	return retval;
 };
+
+bool PnlWdbeFstDetail::handleCallWdbeFstUpd_refEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+	// IP handleCallWdbeFstUpd_refEq --- INSERT
+	return retval;
+};
+
+bool PnlWdbeFstDetail::handleCallWdbeFst_fsmEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+			, const ubigint refInv
+			, bool& boolvalRet
+		) {
+	bool retval = false;
+	boolvalRet = (recFst.fsmRefWdbeMFsm == refInv); // IP handleCallWdbeFst_fsmEq --- LINE
+	return retval;
+};
+
+bool PnlWdbeFstDetail::handleCallWdbeFst_cluEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+			, const ubigint refInv
+			, bool& boolvalRet
+		) {
+	bool retval = false;
+	boolvalRet = (recFst.refWdbeCFsmstate == refInv); // IP handleCallWdbeFst_cluEq --- LINE
+	return retval;
+};
+
+
 

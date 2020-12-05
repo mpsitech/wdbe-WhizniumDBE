@@ -1,69 +1,54 @@
-- IexWznmDpl v0.9.15				
-- ImeIMComponent.srefIxVBasetype	sref	Title	Comment	
-- eng	wdbed	WhizniumDBE main engine		
-	- ImeIMRelease.srefRefWznmMMachine	sref	srefsKOption	Comment
-	- genio	wdbed_genio		
-	- jack	wdbed_jack		
-	- awsubt	wdbed_awsubt		
-	- ungenio	wdbed_ungenio		
-	- ImeIMRelease.end			
-	- ImeIRMComponentMLibrary.srefRefWznmMLibrary			
-	- git2			
-	- jsoncpp			
-	- apiwzlm			
-	- curl			
-	- ImeIRMComponentMLibrary.end			
-- openg	wdbeopd1	WhizniumDBE operation engine		
-	- ImeIMRelease.srefRefWznmMMachine	sref	srefsKOption	Comment
-	- genio	wdbeopd1_genio		
-	- jack	wdbeopd1_jack		
-	- awsubt	wdbeopd1_awsubt		
-	- ungenio	wdbeopd1_ungenio		
-	- ImeIMRelease.end			
-- openg	wdbeopd2	WhizniumDBE operation engine (module templates)		
-	- ImeIMRelease.srefRefWznmMMachine	sref	srefsKOption	Comment
-	- genio	wdbeopd2_genio		
-	- jack	wdbeopd2_jack		
-	- awsubt	wdbeopd2_awsubt		
-	- ungenio	wdbeopd2_ungenio		
-	- ImeIMRelease.end			
-- cmbeng	wdbecmbd	WhizniumDBE combined engine		
-	- ImeIMRelease.srefRefWznmMMachine	sref	srefsKOption	Comment
-	- genio	wdbecmbd_genio		
-	- jack	wdbecmbd_jack		
-	- awsubt	wdbecmbd_awsubt		
-	- ungenio	wdbecmbd_ungenio		
-	- ImeIMRelease.end			
-	- ImeIRMComponentMLibrary.srefRefWznmMLibrary			
-	- git2			
-	- jsoncpp			
-	- apiwzlm			
-	- curl			
-	- ImeIRMComponentMLibrary.end			
-- dbs	dbswdbe	WhizniumDBE database access library		
-	- ImeIMRelease.srefRefWznmMMachine	sref	srefsKOption	Comment
-	- genio	dbswdbe_genio		
-	- jack	dbswdbe_jack		
-	- awsubt	dbswdbe_awsubt		
-	- ungenio	dbswdbe_ungenio		
-	- ImeIMRelease.end			
-- webapp	webappwdbe	WhizniumDBE web app user interface files		
-	- ImeIMRelease.srefRefWznmMMachine	sref	srefsKOption	Comment
-	- genio	webappwdbe_genio		
-	- jack	webappwdbe_jack		
-	- awsubt	webappwdbe_awsubt		
-	- ungenio	webappwdbe_ungenio		
-	- ImeIMRelease.end			
-- api	apiwdbe	WhizniumDBE API library		
-	- ImeIMRelease.srefRefWznmMMachine	sref	srefsKOption	Comment
-	- genio	apiwdbe_genio	dynlib	
-	- jack	apiwdbe_jack	dynlib	
-	- awsubt	apiwdbe_awsubt	dynlib	
-	- ungenio	apiwdbe_ungenio	dynlib	
-	- ImeIMRelease.end			
-- japi	japiwdbe	WhizniumDBE Java API library		
-	- ImeIMRelease.srefRefWznmMMachine	sref	srefsKOption	Comment
-	- ungenio	japiwdbe_ungenio		
-	- jack	japiwdbe_jack		
-	- ImeIMRelease.end			
-- ImeIMComponent.end				
+IexWznmDpl v1.0.9
+ImeIMComponent.srefIxVBasetype	sref	Title	Comment
+eng	wdbed	WhizniumDBE main engine
+	ImeIMRelease.srefRefWznmMMachine	sref	srefsKOption	Comment
+	any;mac	wdbed_mac
+	any;ubuntu	wdbed_ubuntu
+	ImeIMRelease.end
+	ImeIRMComponentMLibrary.srefRefWznmMLibrary
+	apiwzlm
+	curl
+	git2
+	jsoncpp
+	openssl
+	ImeIRMComponentMLibrary.end
+openg	wdbeopd1	WhizniumDBE operation engine
+	ImeIMRelease.srefRefWznmMMachine	sref	srefsKOption	Comment
+	any;mac	wdbeopd1_mac
+	any;ubuntu	wdbeopd1_ubuntu
+	ImeIMRelease.end
+openg	wdbeopd2	WhizniumDBE operation engine (module templates)
+	ImeIMRelease.srefRefWznmMMachine	sref	srefsKOption	Comment
+	any;mac	wdbeopd2_mac
+	any;ubuntu	wdbeopd2_ubuntu
+	ImeIMRelease.end
+cmbeng	wdbecmbd	WhizniumDBE combined engine
+	ImeIMRelease.srefRefWznmMMachine	sref	srefsKOption	Comment
+	any;mac	wdbecmbd_mac
+	any;ubuntu	wdbecmbd_ubuntu
+	ImeIMRelease.end
+	ImeIRMComponentMLibrary.srefRefWznmMLibrary
+	git2
+	jsoncpp
+	apiwzlm
+	curl
+	ImeIRMComponentMLibrary.end
+dbs	dbswdbe	WhizniumDBE database access library
+	ImeIMRelease.srefRefWznmMMachine	sref	srefsKOption	Comment
+	any;mac	dbswdbe_mac
+	any;ubuntu	dbswdbe_ubuntu
+	ImeIMRelease.end
+webapp	webappwdbe	WhizniumDBE web app user interface files
+	ImeIMRelease.srefRefWznmMMachine	sref	srefsKOption	Comment
+	any	webappwznm_any
+	ImeIMRelease.end
+api	apiwdbe	WhizniumDBE API library
+	ImeIMRelease.srefRefWznmMMachine	sref	srefsKOption	Comment
+	any;mac	apiwdbe_mac
+	any;ubuntu	apiwdbe_ubuntu
+	ImeIMRelease.end
+japi	japiwdbe	WhizniumDBE Java API library
+	ImeIMRelease.srefRefWznmMMachine	sref	srefsKOption	Comment
+	any	japiwdbe_any
+	ImeIMRelease.end
+ImeIMComponent.end

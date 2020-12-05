@@ -1,10 +1,11 @@
 /**
 	* \file DlgWdbeFilNew.cpp
 	* job handler for job DlgWdbeFilNew (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifdef WDBECMBD
 	#include <Wdbecmbd.h>
@@ -144,18 +145,18 @@ void DlgWdbeFilNew::refreshDet(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
 		) {
-	ContIacDet oldContiacdet(contiacdet);
 	StatShrDet oldStatshrdet(statshrdet);
+	ContIacDet oldContiacdet(contiacdet);
 
 	// IP refreshDet --- BEGIN
-	// contiacdet
-
 	// statshrdet
 	statshrdet.ButCreActive = evalDetButCreActive(dbswdbe);
 
+	// contiacdet
+
 	// IP refreshDet --- END
-	if (contiacdet.diff(&oldContiacdet).size() != 0) insert(moditems, DpchEngData::CONTIACDET);
 	if (statshrdet.diff(&oldStatshrdet).size() != 0) insert(moditems, DpchEngData::STATSHRDET);
+	if (contiacdet.diff(&oldContiacdet).size() != 0) insert(moditems, DpchEngData::CONTIACDET);
 };
 
 void DlgWdbeFilNew::refreshFil(
@@ -175,28 +176,34 @@ void DlgWdbeFilNew::refreshFil(
 void DlgWdbeFilNew::refresh(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
+			, const bool unmute
 		) {
-	ContInf oldContinf(continf);
-	ContIac oldContiac(contiac);
+	if (muteRefresh && !unmute) return;
+	muteRefresh = true;
+
 	StatShr oldStatshr(statshr);
+	ContIac oldContiac(contiac);
+	ContInf oldContinf(continf);
 
 	// IP refresh --- BEGIN
-	// continf
-	continf.numFSge = ixVSge;
+	// statshr
+	statshr.ButDneActive = evalButDneActive(dbswdbe);
 
 	// contiac
 	contiac.numFDse = ixVDit;
 
-	// statshr
-	statshr.ButDneActive = evalButDneActive(dbswdbe);
+	// continf
+	continf.numFSge = ixVSge;
 
 	// IP refresh --- END
-	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
-	if (contiac.diff(&oldContiac).size() != 0) insert(moditems, DpchEngData::CONTIAC);
 	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
+	if (contiac.diff(&oldContiac).size() != 0) insert(moditems, DpchEngData::CONTIAC);
+	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
 
 	refreshDet(dbswdbe, moditems);
 	refreshFil(dbswdbe, moditems);
+
+	muteRefresh = false;
 };
 
 void DlgWdbeFilNew::handleRequest(
@@ -389,7 +396,7 @@ void DlgWdbeFilNew::changeStage(
 
 			setStage(dbswdbe, _ixVSge);
 			reenter = false;
-			if (!muteRefresh) refreshWithDpchEng(dbswdbe, dpcheng); // IP changeStage.refresh1 --- LINE
+			refreshWithDpchEng(dbswdbe, dpcheng); // IP changeStage.refresh1 --- LINE
 		};
 
 		switch (_ixVSge) {
@@ -508,5 +515,6 @@ void DlgWdbeFilNew::leaveSgeDone(
 		) {
 	// IP leaveSgeDone --- INSERT
 };
+
 
 

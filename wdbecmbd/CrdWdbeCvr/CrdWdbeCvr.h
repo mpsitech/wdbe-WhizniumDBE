@@ -1,10 +1,11 @@
 /**
 	* \file CrdWdbeCvr.h
 	* job handler for job CrdWdbeCvr (declarations)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifndef CRDWDBECVR_H
 #define CRDWDBECVR_H
@@ -13,13 +14,13 @@
 
 // IP include.cust --- INSERT
 
-#include "DlgWdbeCvrBsccd.h"
+#include "PnlWdbeCvrList.h"
+#include "PnlWdbeCvrHeadbar.h"
+#include "PnlWdbeCvrRec.h"
+#include "DlgWdbeCvrWrite.h"
 #include "DlgWdbeCvrDetcd.h"
 #include "DlgWdbeCvrNew.h"
-#include "DlgWdbeCvrWrite.h"
-#include "PnlWdbeCvrRec.h"
-#include "PnlWdbeCvrHeadbar.h"
-#include "PnlWdbeCvrList.h"
+#include "DlgWdbeCvrBsccd.h"
 
 #define VecVWdbeCvrDo CrdWdbeCvr::VecVDo
 #define VecVWdbeCvrSge CrdWdbeCvr::VecVSge
@@ -233,13 +234,13 @@ public:
 	Sbecore::Xmlio::Feed feedFMcbAlert;
 	Sbecore::Xmlio::Feed feedFSge;
 
-	DlgWdbeCvrBsccd* dlgbsccd;
+	PnlWdbeCvrList* pnllist;
+	PnlWdbeCvrHeadbar* pnlheadbar;
+	PnlWdbeCvrRec* pnlrec;
+	DlgWdbeCvrWrite* dlgwrite;
 	DlgWdbeCvrDetcd* dlgdetcd;
 	DlgWdbeCvrNew* dlgnew;
-	DlgWdbeCvrWrite* dlgwrite;
-	PnlWdbeCvrRec* pnlrec;
-	PnlWdbeCvrHeadbar* pnlheadbar;
-	PnlWdbeCvrList* pnllist;
+	DlgWdbeCvrBsccd* dlgbsccd;
 
 	// IP vars.cust --- INSERT
 
@@ -248,7 +249,7 @@ public:
 
 public:
 	DpchEngWdbe* getNewDpchEng(std::set<Sbecore::uint> items);
-	void refresh(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems);
+	void refresh(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems, const bool unmute = false);
 	void changeRef(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint ref, const bool notif = false);
 	void updatePreset(DbsWdbe* dbswdbe, const Sbecore::uint ixWdbeVPreset, const Sbecore::ubigint jrefTrig, const bool notif = false);
 
@@ -273,9 +274,9 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeDlgClose(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
-	bool handleCallWdbeStatChg(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 	bool handleCallWdbeRefPreSet(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, const Sbecore::ubigint refInv);
+	bool handleCallWdbeStatChg(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbeDlgClose(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 
 private:
 	void changeStage(DbsWdbe* dbswdbe, Sbecore::uint _ixVSge, DpchEngWdbe** dpcheng = NULL);
@@ -292,4 +293,6 @@ private:
 };
 
 #endif
+
+
 

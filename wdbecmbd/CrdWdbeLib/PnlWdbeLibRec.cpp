@@ -1,10 +1,11 @@
 /**
 	* \file PnlWdbeLibRec.cpp
 	* job handler for job PnlWdbeLibRec (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifdef WDBECMBD
 	#include <Wdbecmbd.h>
@@ -37,9 +38,9 @@ PnlWdbeLibRec::PnlWdbeLibRec(
 		{
 	jref = xchg->addJob(dbswdbe, this, jrefSup);
 
-	pnldetail = NULL;
-	pnlamakefile = NULL;
 	pnlmnversion = NULL;
+	pnlamakefile = NULL;
+	pnldetail = NULL;
 
 	// IP constructor.cust1 --- INSERT
 
@@ -78,7 +79,11 @@ DpchEngWdbe* PnlWdbeLibRec::getNewDpchEng(
 void PnlWdbeLibRec::refresh(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
+			, const bool unmute
 		) {
+	if (muteRefresh && !unmute) return;
+	muteRefresh = true;
+
 	ContInf oldContinf(continf);
 	StatShr oldStatshr(statshr);
 
@@ -109,6 +114,7 @@ void PnlWdbeLibRec::refresh(
 	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
 	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
 
+	muteRefresh = false;
 };
 
 void PnlWdbeLibRec::updatePreset(
@@ -254,4 +260,6 @@ bool PnlWdbeLibRec::handleCallWdbeLibUpd_refEq(
 	// IP handleCallWdbeLibUpd_refEq --- INSERT
 	return retval;
 };
+
+
 

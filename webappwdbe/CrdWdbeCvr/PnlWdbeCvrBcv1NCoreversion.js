@@ -1,11 +1,3 @@
-/**
-  * \file PnlWdbeCvrBcv1NCoreversion.js
-  * web client functionality for panel PnlWdbeCvrBcv1NCoreversion
-  * \author Alexander Wirthmueller
-  * \date created: 23 Aug 2020
-  * \date modified: 23 Aug 2020
-  */
-
 // --- expand state management
 function minimize(updh) {
 	if (retrieveSi(srcdoc, "StatAppWdbeCvrBcv1NCoreversion", "srefIxWdbeVExpstate") == "mind") return;

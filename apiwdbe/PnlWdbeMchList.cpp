@@ -1,10 +1,11 @@
 /**
 	* \file PnlWdbeMchList.cpp
 	* API code for job PnlWdbeMchList (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 5 Dec 2020
 	*/
+// IP header --- ABOVE
 
 #include "PnlWdbeMchList.h"
 
@@ -262,14 +263,14 @@ set<uint> PnlWdbeMchList::StatShr::diff(
 
 PnlWdbeMchList::StgIac::StgIac(
 			const uint TcoSrfWidth
-			, const uint TcoPlaWidth
+			, const uint TcoSupWidth
 		) :
 			Block()
 		{
 	this->TcoSrfWidth = TcoSrfWidth;
-	this->TcoPlaWidth = TcoPlaWidth;
+	this->TcoSupWidth = TcoSupWidth;
 
-	mask = {TCOSRFWIDTH, TCOPLAWIDTH};
+	mask = {TCOSRFWIDTH, TCOSUPWIDTH};
 };
 
 bool PnlWdbeMchList::StgIac::readXML(
@@ -290,7 +291,7 @@ bool PnlWdbeMchList::StgIac::readXML(
 
 	if (basefound) {
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoSrfWidth", TcoSrfWidth)) add(TCOSRFWIDTH);
-		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoPlaWidth", TcoPlaWidth)) add(TCOPLAWIDTH);
+		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoSupWidth", TcoSupWidth)) add(TCOSUPWIDTH);
 	};
 
 	return basefound;
@@ -309,7 +310,7 @@ void PnlWdbeMchList::StgIac::writeXML(
 
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
 		writeUintAttr(wr, itemtag, "sref", "TcoSrfWidth", TcoSrfWidth);
-		writeUintAttr(wr, itemtag, "sref", "TcoPlaWidth", TcoPlaWidth);
+		writeUintAttr(wr, itemtag, "sref", "TcoSupWidth", TcoSupWidth);
 	xmlTextWriterEndElement(wr);
 };
 
@@ -319,7 +320,7 @@ set<uint> PnlWdbeMchList::StgIac::comm(
 	set<uint> items;
 
 	if (TcoSrfWidth == comp->TcoSrfWidth) insert(items, TCOSRFWIDTH);
-	if (TcoPlaWidth == comp->TcoPlaWidth) insert(items, TCOPLAWIDTH);
+	if (TcoSupWidth == comp->TcoSupWidth) insert(items, TCOSUPWIDTH);
 
 	return(items);
 };
@@ -332,7 +333,7 @@ set<uint> PnlWdbeMchList::StgIac::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {TCOSRFWIDTH, TCOPLAWIDTH};
+	diffitems = {TCOSRFWIDTH, TCOSUPWIDTH};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -350,7 +351,7 @@ PnlWdbeMchList::Tag::Tag(
 			, const string& TxtShowing1
 			, const string& TxtShowing2
 			, const string& TcoSrf
-			, const string& TcoPla
+			, const string& TcoSup
 		) :
 			Block()
 		{
@@ -361,9 +362,9 @@ PnlWdbeMchList::Tag::Tag(
 	this->TxtShowing1 = TxtShowing1;
 	this->TxtShowing2 = TxtShowing2;
 	this->TcoSrf = TcoSrf;
-	this->TcoPla = TcoPla;
+	this->TcoSup = TcoSup;
 
-	mask = {CPT, TXTRECORD1, TXTRECORD2, TRS, TXTSHOWING1, TXTSHOWING2, TCOSRF, TCOPLA};
+	mask = {CPT, TXTRECORD1, TXTRECORD2, TRS, TXTSHOWING1, TXTSHOWING2, TCOSRF, TCOSUP};
 };
 
 bool PnlWdbeMchList::Tag::readXML(
@@ -390,7 +391,7 @@ bool PnlWdbeMchList::Tag::readXML(
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "TxtShowing1", TxtShowing1)) add(TXTSHOWING1);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "TxtShowing2", TxtShowing2)) add(TXTSHOWING2);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "TcoSrf", TcoSrf)) add(TCOSRF);
-		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "TcoPla", TcoPla)) add(TCOPLA);
+		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "TcoSup", TcoSup)) add(TCOSUP);
 	};
 
 	return basefound;

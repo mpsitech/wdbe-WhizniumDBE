@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<IexWdbeIni version="v1.0.3">
+<IexWdbeIni version="1.1.0">
 	<ImeIAVKeylistKey1>
 		<Ii num="1">
 			<kls>KlstKWdbeMtpModbscbuCustop</kls>
@@ -124,7 +124,7 @@
 		<Ii num="25">
 			<kls>KlstKWdbeMtpModbscbuCustop</kls>
 			<srf>WdbeMtpModbscbuXadc_v3_3</srf>
-			<tit>adapt port names</tit>
+			<tit>add analog input ports</tit>
 		</Ii>
 		<Ii num="26">
 			<kls>KlstKWdbeMtpModbscbuCustop</kls>
@@ -293,18 +293,18 @@
 		</Ii>
 		<Ii num="59">
 			<kls>KlstWdbeKAMMachineParKey</kls>
-			<srf>rootfs</srf>
-			<tit>root file system path</tit>
+			<srf>whizsdkroot</srf>
+			<tit>SDK root directory</tit>
 		</Ii>
 		<Ii num="60">
 			<kls>KlstWdbeKAMMachineParKey</kls>
-			<srf>reproot</srf>
-			<tit>repository root directory</tit>
+			<srf>ncore</srf>
+			<tit>number of cores</tit>
 		</Ii>
 		<Ii num="61">
 			<kls>KlstWdbeKAMMachineParKey</kls>
-			<srf>srcroot</srf>
-			<tit>source root directory</tit>
+			<srf>buildroot</srf>
+			<tit>build root directory</tit>
 		</Ii>
 		<Ii num="62">
 			<kls>KlstWdbeKAMMachineParKey</kls>
@@ -313,425 +313,410 @@
 		</Ii>
 		<Ii num="63">
 			<kls>KlstWdbeKAMMachineParKey</kls>
-			<srf>fpgaroot</srf>
-			<tit>FPGA root directory</tit>
+			<srf>sysroot</srf>
+			<tit>root file system path</tit>
 		</Ii>
 		<Ii num="64">
 			<kls>KlstWdbeKAMMachineParKey</kls>
-			<srf>mcuroot</srf>
-			<tit>MCU root directory</tit>
+			<srf>tchroot</srf>
+			<tit>tool chain executable directory</tit>
 		</Ii>
 		<Ii num="65">
 			<kls>KlstWdbeKAMMachineParKey</kls>
-			<srf>ncore</srf>
-			<tit>number of cores</tit>
+			<srf>whizdevroot</srf>
+			<tit>development root directory</tit>
 		</Ii>
 		<Ii num="66">
+			<kls>KlstWdbeKAMMachineParKey</kls>
+			<srf>reproot</srf>
+			<tit>repository root directory</tit>
+		</Ii>
+		<Ii num="67">
 			<kls>KlstWdbeKAMPersonDetailType</kls>
 			<srf>eml</srf>
 			<tit>e-mail</tit>
 		</Ii>
-		<Ii num="67">
+		<Ii num="68">
 			<kls>KlstWdbeKAMPersonDetailType</kls>
 			<srf>fax</srf>
 			<tit>fax</tit>
 		</Ii>
-		<Ii num="68">
+		<Ii num="69">
 			<kls>KlstWdbeKAMPersonDetailType</kls>
 			<srf>mbl</srf>
 			<tit>mobile</tit>
 		</Ii>
-		<Ii num="69">
+		<Ii num="70">
 			<kls>KlstWdbeKAMPersonDetailType</kls>
 			<srf>tel</srf>
 			<tit>phone</tit>
 		</Ii>
-		<Ii num="70">
+		<Ii num="71">
 			<kls>KlstWdbeKAMPinParKey</kls>
 			<srf>fclk</srf>
 			<tit>clock frequency [kHz]</tit>
 		</Ii>
-		<Ii num="71">
+		<Ii num="72">
 			<kls>KlstWdbeKAMPinParKey</kls>
 			<srf>lvds</srf>
 			<tit>low-voltage differential signal</tit>
 		</Ii>
-		<Ii num="72">
+		<Ii num="73">
 			<kls>KlstWdbeKAMPinParKey</kls>
 			<srf>noclkdr</srf>
 			<tit>no clock dedicated route</tit>
 		</Ii>
-		<Ii num="73">
+		<Ii num="74">
 			<kls>KlstWdbeKAMUnitPackage</kls>
 			<srf>bga132</srf>
 			<tit></tit>
 		</Ii>
-		<Ii num="74">
+		<Ii num="75">
 			<kls>KlstWdbeKAMUnitPackage</kls>
 			<srf>bga236</srf>
 			<tit></tit>
 		</Ii>
-		<Ii num="75">
+		<Ii num="76">
 			<kls>KlstWdbeKAMUnitPackage</kls>
 			<srf>bga320</srf>
 			<tit></tit>
 		</Ii>
-		<Ii num="76">
+		<Ii num="77">
 			<kls>KlstWdbeKAMUnitPackage</kls>
 			<srf>lqfp48</srf>
 			<tit></tit>
 		</Ii>
-		<Ii num="77">
+		<Ii num="78">
 			<kls>KlstWdbeKAMUnitPackage</kls>
 			<srf>qfp100</srf>
 			<tit></tit>
 		</Ii>
-		<Ii num="78">
+		<Ii num="79">
 			<kls>KlstWdbeKAMUnitPackage</kls>
 			<srf>ssop20</srf>
 			<tit></tit>
 		</Ii>
-		<Ii num="79">
+		<Ii num="80">
 			<kls>KlstWdbeKAMUnitPackage</kls>
 			<srf>ssop28</srf>
 			<tit></tit>
 		</Ii>
-		<Ii num="80">
+		<Ii num="81">
 			<kls>KlstWdbeKAMUnitToolch</kls>
 			<srf>ise</srf>
 			<tit>Xilinx ISE</tit>
 		</Ii>
-		<Ii num="81">
+		<Ii num="82">
 			<kls>KlstWdbeKAMUnitToolch</kls>
 			<srf>mplab</srf>
 			<tit>Microchip MPLAB X</tit>
 		</Ii>
-		<Ii num="82">
+		<Ii num="83">
 			<kls>KlstWdbeKAMUnitToolch</kls>
 			<srf>syswb</srf>
 			<tit>ST SystemWorkbench</tit>
 		</Ii>
-		<Ii num="83">
+		<Ii num="84">
 			<kls>KlstWdbeKAMUnitToolch</kls>
 			<srf>vivado</srf>
 			<tit>Xilinx Vivado</tit>
 		</Ii>
-		<Ii num="84">
+		<Ii num="85">
 			<kls>KlstWdbeKAMUnitToolch</kls>
 			<srf>vivzynq</srf>
 			<tit>Xilinx Vivado for Zynq</tit>
 		</Ii>
-		<Ii num="85">
+		<Ii num="86">
 			<kls>KlstWdbeKHdltype</kls>
 			<srf>char</srf>
 			<tit>character</tit>
 		</Ii>
-		<Ii num="86">
+		<Ii num="87">
 			<kls>KlstWdbeKHdltype</kls>
 			<srf>int</srf>
 			<tit>integer</tit>
 		</Ii>
-		<Ii num="87">
+		<Ii num="88">
 			<kls>KlstWdbeKHdltype</kls>
 			<srf>nat</srf>
 			<tit>natural</tit>
 		</Ii>
-		<Ii num="88">
+		<Ii num="89">
 			<kls>KlstWdbeKHdltype</kls>
 			<srf>sl</srf>
 			<tit>standard logic</tit>
 		</Ii>
-		<Ii num="89">
+		<Ii num="90">
 			<kls>KlstWdbeKHdltype</kls>
 			<srf>slvup</srf>
 			<tit>standard logic vector up</tit>
 		</Ii>
-		<Ii num="90">
+		<Ii num="91">
 			<kls>KlstWdbeKHdltype</kls>
 			<srf>slvdn</srf>
 			<tit>standard logic vector down</tit>
 		</Ii>
-		<Ii num="91">
+		<Ii num="92">
 			<kls>KlstWdbeKHdltype</kls>
 			<srf>str</srf>
 			<tit>string</tit>
 		</Ii>
-		<Ii num="92">
+		<Ii num="93">
 			<kls>KlstWdbeKMBankVoltstd</kls>
 			<srf>_1v2</srf>
 			<tit>1.2V</tit>
 		</Ii>
-		<Ii num="93">
+		<Ii num="94">
 			<kls>KlstWdbeKMBankVoltstd</kls>
 			<srf>_1v8</srf>
 			<tit>1.8V</tit>
 		</Ii>
-		<Ii num="94">
+		<Ii num="95">
 			<kls>KlstWdbeKMBankVoltstd</kls>
 			<srf>_2v5</srf>
 			<tit>2.5V</tit>
 		</Ii>
-		<Ii num="95">
+		<Ii num="96">
 			<kls>KlstWdbeKMBankVoltstd</kls>
 			<srf>_3v3</srf>
 			<tit>3.3V</tit>
 		</Ii>
-		<Ii num="96">
+		<Ii num="97">
 			<kls>KlstWdbeKMFamilyVendor</kls>
 			<srf>mchp</srf>
 			<tit>Microchip</tit>
 		</Ii>
-		<Ii num="97">
+		<Ii num="98">
 			<kls>KlstWdbeKMFamilyVendor</kls>
 			<srf>st</srf>
 			<tit>STMicroelectronics</tit>
 		</Ii>
-		<Ii num="98">
+		<Ii num="99">
 			<kls>KlstWdbeKMFamilyVendor</kls>
 			<srf>xlnx</srf>
 			<tit>Xilinx</tit>
 		</Ii>
-		<Ii num="99">
+		<Ii num="100">
 			<kls>KlstWdbeKMFileContent</kls>
 			<srf>cftpl</srf>
 			<tit>code file template</tit>
 		</Ii>
-		<Ii num="100">
+		<Ii num="101">
 			<kls>KlstWdbeKMFileContent</kls>
 			<srf>custip</srf>
 			<tit>custom insertion points</tit>
 		</Ii>
-		<Ii num="101">
+		<Ii num="102">
 			<kls>KlstWdbeKMFileContent</kls>
 			<srf>mod</srf>
 			<tit>model data</tit>
 		</Ii>
-		<Ii num="102">
+		<Ii num="103">
 			<kls>KlstWdbeKMFileMimetype</kls>
 			<srf>bmp</srf>
 			<tit>image/bmp</tit>
 		</Ii>
-		<Ii num="103">
+		<Ii num="104">
 			<kls>KlstWdbeKMFileMimetype</kls>
 			<srf>cpp</srf>
 			<tit>text/x-c</tit>
 		</Ii>
-		<Ii num="104">
+		<Ii num="105">
 			<kls>KlstWdbeKMFileMimetype</kls>
 			<srf>css</srf>
 			<tit>text/css</tit>
 		</Ii>
-		<Ii num="105">
+		<Ii num="106">
 			<kls>KlstWdbeKMFileMimetype</kls>
 			<srf>csv</srf>
 			<tit>text/comma-separated-values</tit>
 		</Ii>
-		<Ii num="106">
+		<Ii num="107">
 			<kls>KlstWdbeKMFileMimetype</kls>
 			<srf>doc</srf>
 			<tit>application/msword</tit>
 		</Ii>
-		<Ii num="107">
+		<Ii num="108">
 			<kls>KlstWdbeKMFileMimetype</kls>
 			<srf>docx</srf>
 			<tit>application/vnd.openxmlformats-officedocument.wordprocessingml.document</tit>
 		</Ii>
-		<Ii num="108">
+		<Ii num="109">
 			<kls>KlstWdbeKMFileMimetype</kls>
 			<srf>eps</srf>
 			<tit>application/postscript</tit>
 		</Ii>
-		<Ii num="109">
+		<Ii num="110">
 			<kls>KlstWdbeKMFileMimetype</kls>
 			<srf>gif</srf>
 			<tit>image/gif</tit>
 		</Ii>
-		<Ii num="110">
+		<Ii num="111">
 			<kls>KlstWdbeKMFileMimetype</kls>
 			<srf>h</srf>
 			<tit>text/x-h</tit>
 		</Ii>
-		<Ii num="111">
+		<Ii num="112">
 			<kls>KlstWdbeKMFileMimetype</kls>
 			<srf>hdf</srf>
 			<tit>application/x-hdf</tit>
 		</Ii>
-		<Ii num="112">
+		<Ii num="113">
 			<kls>KlstWdbeKMFileMimetype</kls>
 			<srf>html</srf>
 			<tit>text/html</tit>
 		</Ii>
-		<Ii num="113">
+		<Ii num="114">
 			<kls>KlstWdbeKMFileMimetype</kls>
 			<srf>jpg</srf>
 			<tit>image/jpeg</tit>
 		</Ii>
-		<Ii num="114">
+		<Ii num="115">
 			<kls>KlstWdbeKMFileMimetype</kls>
 			<srf>js</srf>
 			<tit>text/javascript</tit>
 		</Ii>
-		<Ii num="115">
+		<Ii num="116">
 			<kls>KlstWdbeKMFileMimetype</kls>
 			<srf>make</srf>
 			<tit>text/x-makefile</tit>
 		</Ii>
-		<Ii num="116">
+		<Ii num="117">
 			<kls>KlstWdbeKMFileMimetype</kls>
 			<srf>nc</srf>
 			<tit>application/x-netcdf</tit>
 		</Ii>
-		<Ii num="117">
+		<Ii num="118">
 			<kls>KlstWdbeKMFileMimetype</kls>
 			<srf>pdf</srf>
 			<tit>application/pdf</tit>
 		</Ii>
-		<Ii num="118">
+		<Ii num="119">
 			<kls>KlstWdbeKMFileMimetype</kls>
 			<srf>png</srf>
 			<tit>image/png</tit>
 		</Ii>
-		<Ii num="119">
+		<Ii num="120">
 			<kls>KlstWdbeKMFileMimetype</kls>
 			<srf>ppt</srf>
 			<tit>application/mspowerpoint</tit>
 		</Ii>
-		<Ii num="120">
+		<Ii num="121">
 			<kls>KlstWdbeKMFileMimetype</kls>
 			<srf>pptx</srf>
 			<tit>application/vnd.openxmlformats-officedocument.presentationml.presentation</tit>
 		</Ii>
-		<Ii num="121">
+		<Ii num="122">
 			<kls>KlstWdbeKMFileMimetype</kls>
 			<srf>sh</srf>
 			<tit>application/x-sh</tit>
 		</Ii>
-		<Ii num="122">
+		<Ii num="123">
 			<kls>KlstWdbeKMFileMimetype</kls>
 			<srf>sql</srf>
 			<tit>text/x-sql</tit>
 		</Ii>
-		<Ii num="123">
+		<Ii num="124">
 			<kls>KlstWdbeKMFileMimetype</kls>
 			<srf>svg</srf>
 			<tit>image/svg+xml</tit>
 		</Ii>
-		<Ii num="124">
+		<Ii num="125">
 			<kls>KlstWdbeKMFileMimetype</kls>
 			<srf>tex</srf>
 			<tit>application/x-tex</tit>
 		</Ii>
-		<Ii num="125">
+		<Ii num="126">
 			<kls>KlstWdbeKMFileMimetype</kls>
 			<srf>tgz</srf>
 			<tit>application/x-gzip</tit>
 		</Ii>
-		<Ii num="126">
+		<Ii num="127">
 			<kls>KlstWdbeKMFileMimetype</kls>
 			<srf>tif</srf>
 			<tit>image/tiff</tit>
 		</Ii>
-		<Ii num="127">
+		<Ii num="128">
 			<kls>KlstWdbeKMFileMimetype</kls>
 			<srf>txt</srf>
 			<tit>text/plain</tit>
 		</Ii>
-		<Ii num="128">
+		<Ii num="129">
 			<kls>KlstWdbeKMFileMimetype</kls>
 			<srf>xls</srf>
 			<tit>application/msexcel</tit>
 		</Ii>
-		<Ii num="129">
+		<Ii num="130">
 			<kls>KlstWdbeKMFileMimetype</kls>
 			<srf>xlsx</srf>
 			<tit>application/vnd.openxmlformats-officedocument.spreadsheetml.sheet</tit>
 		</Ii>
-		<Ii num="130">
+		<Ii num="131">
 			<kls>KlstWdbeKMFileMimetype</kls>
 			<srf>xml</srf>
 			<tit>text/xml</tit>
 		</Ii>
-		<Ii num="131">
+		<Ii num="132">
 			<kls>KlstWdbeKMFileMimetype</kls>
 			<srf>zip</srf>
 			<tit>application/zip</tit>
 		</Ii>
-		<Ii num="132">
-			<kls>KlstWdbeKMMachinePlatform</kls>
-			<srf>imx6</srf>
-			<tit>ARM i.MX6 Yocto</tit>
-		</Ii>
 		<Ii num="133">
-			<kls>KlstWdbeKMMachinePlatform</kls>
-			<srf>zynq_armv7</srf>
-			<tit>PetaLinux 2017.2 for Zynq</tit>
-		</Ii>
-		<Ii num="134">
-			<kls>KlstWdbeKMMachinePlatform</kls>
-			<srf>mac</srf>
-			<tit>Mac (Intel) desktop/notebook</tit>
-		</Ii>
-		<Ii num="135">
-			<kls>KlstWdbeKMMachinePlatform</kls>
-			<srf>ubt_x86_64</srf>
-			<tit>ubuntu workstation</tit>
-		</Ii>
-		<Ii num="136">
 			<kls>KlstWdbeKMReleaseOption</kls>
 			<srf>dynlib</srf>
 			<tit>generate dynamic link library</tit>
 		</Ii>
-		<Ii num="137">
+		<Ii num="134">
 			<kls>KlstWdbeKMVectorOption</kls>
 			<srf>notit</srf>
 			<tit>no titles</tit>
 		</Ii>
-		<Ii num="138">
+		<Ii num="135">
 			<kls>KlstWdbeKMVectorOption</kls>
 			<srf>cmt</srf>
 			<tit>comments</tit>
 		</Ii>
-		<Ii num="139">
+		<Ii num="136">
 			<kls>KlstWdbeKMVectorOption</kls>
 			<srf>apdfed</srf>
 			<tit>append to feed</tit>
 		</Ii>
-		<Ii num="140">
+		<Ii num="137">
 			<kls>KlstWdbeKMVectorOption</kls>
 			<srf>filfed</srf>
 			<tit>fill feed</tit>
 		</Ii>
-		<Ii num="141">
+		<Ii num="138">
 			<kls>KlstWdbeKRMCoreprojectMPersonFunction</kls>
 			<srf>mgr</srf>
 			<tit>manager</tit>
 		</Ii>
-		<Ii num="142">
+		<Ii num="139">
 			<kls>KlstWdbeKRMCoreprojectMPersonFunction</kls>
 			<srf>cur</srf>
 			<tit>curator</tit>
 		</Ii>
-		<Ii num="143">
+		<Ii num="140">
 			<kls>KlstWdbeKRMCoreprojectMPersonFunction</kls>
 			<srf>heng</srf>
 			<tit>hardware engineer</tit>
 		</Ii>
-		<Ii num="144">
+		<Ii num="141">
 			<kls>KlstWdbeKRMCoreprojectMPersonFunction</kls>
 			<srf>seng</srf>
 			<tit>software engineer</tit>
 		</Ii>
-		<Ii num="145">
+		<Ii num="142">
 			<kls>KlstWdbeKRMPersonMProjectFunction</kls>
 			<srf>mgr</srf>
 			<tit>manager</tit>
 		</Ii>
-		<Ii num="146">
+		<Ii num="143">
 			<kls>KlstWdbeKRMPersonMProjectFunction</kls>
 			<srf>heng</srf>
 			<tit>hardware engineer</tit>
 		</Ii>
-		<Ii num="147">
+		<Ii num="144">
 			<kls>KlstWdbeKRMPersonMProjectFunction</kls>
 			<srf>seng</srf>
 			<tit>software engineer</tit>

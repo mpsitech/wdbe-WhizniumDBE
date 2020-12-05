@@ -1,24 +1,72 @@
 /**
 	* \file DlgWdbeCvrBsccd_evals.cpp
 	* job handler for job DlgWdbeCvrBsccd (implementation of availability/activation evaluation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 using namespace std;
 using namespace Sbecore;
 using namespace Xmlio;
 
-bool DlgWdbeCvrBsccd::evalIfiUldActive(
+bool DlgWdbeCvrBsccd::evalButDneActive(
 			DbsWdbe* dbswdbe
 		) {
-	// sge(idle)
+	// sge(idle|done)
+
+	vector<bool> args;
+	bool a, b;
+
+	a = false; a = (ixVSge == VecVSge::IDLE);
+	args.push_back(a);
+	a = false; a = (ixVSge == VecVSge::DONE);
+	args.push_back(a);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
+
+	return(args.back());
+};
+
+bool DlgWdbeCvrBsccd::evalLfiDldActive(
+			DbsWdbe* dbswdbe
+		) {
+	// sge(done)
 
 	vector<bool> args;
 	bool a;
 
-	a = false; a = (ixVSge == VecVSge::IDLE);
+	a = false; a = (ixVSge == VecVSge::DONE);
+	args.push_back(a);
+
+	return(args.back());
+};
+
+bool DlgWdbeCvrBsccd::evalPprButRunActive(
+			DbsWdbe* dbswdbe
+		) {
+	// sge(impdone)
+
+	vector<bool> args;
+	bool a;
+
+	a = false; a = (ixVSge == VecVSge::IMPDONE);
+	args.push_back(a);
+
+	return(args.back());
+};
+
+bool DlgWdbeCvrBsccd::evalPprButStoActive(
+			DbsWdbe* dbswdbe
+		) {
+	// sge(postprc)
+
+	vector<bool> args;
+	bool a;
+
+	a = false; a = (ixVSge == VecVSge::POSTPRC);
 	args.push_back(a);
 
 	return(args.back());
@@ -57,64 +105,19 @@ bool DlgWdbeCvrBsccd::evalImpButStoActive(
 	return(args.back());
 };
 
-bool DlgWdbeCvrBsccd::evalPprButRunActive(
+bool DlgWdbeCvrBsccd::evalIfiUldActive(
 			DbsWdbe* dbswdbe
 		) {
-	// sge(impdone)
+	// sge(idle)
 
 	vector<bool> args;
 	bool a;
-
-	a = false; a = (ixVSge == VecVSge::IMPDONE);
-	args.push_back(a);
-
-	return(args.back());
-};
-
-bool DlgWdbeCvrBsccd::evalPprButStoActive(
-			DbsWdbe* dbswdbe
-		) {
-	// sge(postprc)
-
-	vector<bool> args;
-	bool a;
-
-	a = false; a = (ixVSge == VecVSge::POSTPRC);
-	args.push_back(a);
-
-	return(args.back());
-};
-
-bool DlgWdbeCvrBsccd::evalLfiDldActive(
-			DbsWdbe* dbswdbe
-		) {
-	// sge(done)
-
-	vector<bool> args;
-	bool a;
-
-	a = false; a = (ixVSge == VecVSge::DONE);
-	args.push_back(a);
-
-	return(args.back());
-};
-
-bool DlgWdbeCvrBsccd::evalButDneActive(
-			DbsWdbe* dbswdbe
-		) {
-	// sge(idle|done)
-
-	vector<bool> args;
-	bool a, b;
 
 	a = false; a = (ixVSge == VecVSge::IDLE);
 	args.push_back(a);
-	a = false; a = (ixVSge == VecVSge::DONE);
-	args.push_back(a);
-	b = args.back(); args.pop_back();
-	a = args.back(); args.pop_back();
-	args.push_back(a || b);
 
 	return(args.back());
 };
+
+
 

@@ -1,10 +1,11 @@
 /**
 	* \file WdbeRMUserMUsergroup.h
 	* database access for table TblWdbeRMUserMUsergroup (declarations)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
-	*/
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 5 Dec 2020
+  */
+// IP header --- ABOVE
 
 #ifndef WDBERMUSERMUSERGROUP_H
 #define WDBERMUSERMUSERGROUP_H

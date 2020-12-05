@@ -1,11 +1,3 @@
-/**
-  * \file CrdWdbeVit.js
-  * web client functionality for card CrdWdbeVit
-  * \author Alexander Wirthmueller
-  * \date created: 23 Aug 2020
-  * \date modified: 23 Aug 2020
-  */
-
 function getInitdone(pnlshort) {
 	return(retrieveSi(srcdoc, "StatAppWdbeVit", "initdone" + pnlshort) == "true");
 };
@@ -332,7 +324,7 @@ function changeHeight(pnlshort, height) {
 // --- view initialization and refresh
 function refresh() {
 
-	doc.title = retrieveCi(srcdoc, "ContInfWdbeVit", "MtxCrdVit") + " - WhizniumDBE v1.0.3";
+	doc.title = retrieveCi(srcdoc, "ContInfWdbeVit", "MtxCrdVit") + " - WhizniumDBE v1.1.0";
 };
 
 // --- event handlers

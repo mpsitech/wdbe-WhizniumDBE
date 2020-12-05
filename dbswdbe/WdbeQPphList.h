@@ -1,10 +1,11 @@
 /**
 	* \file WdbeQPphList.h
 	* Dbs and XML wrapper for table TblWdbeQPphList (declarations)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
-	*/
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 5 Dec 2020
+  */
+// IP header --- ABOVE
 
 #ifndef WDBEQPPHLIST_H
 #define WDBEQPPHLIST_H

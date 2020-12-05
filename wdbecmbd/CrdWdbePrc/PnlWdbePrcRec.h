@@ -1,10 +1,11 @@
 /**
 	* \file PnlWdbePrcRec.h
 	* job handler for job PnlWdbePrcRec (declarations)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifndef PNLWDBEPRCREC_H
 #define PNLWDBEPRCREC_H
@@ -13,11 +14,11 @@
 
 // IP include.cust --- INSERT
 
-#include "PnlWdbePrcDetail.h"
-#include "PnlWdbePrcKHdltype.h"
-#include "PnlWdbePrcPrc1NVariable.h"
-#include "PnlWdbePrcMge1NSignal.h"
 #include "PnlWdbePrcFsmFsm1NFsmstate.h"
+#include "PnlWdbePrcMge1NSignal.h"
+#include "PnlWdbePrcPrc1NVariable.h"
+#include "PnlWdbePrcKHdltype.h"
+#include "PnlWdbePrcDetail.h"
 
 #define VecVWdbePrcRecDo PnlWdbePrcRec::VecVDo
 
@@ -179,11 +180,11 @@ public:
 	ContInf continf;
 	StatShr statshr;
 
-	PnlWdbePrcDetail* pnldetail;
-	PnlWdbePrcKHdltype* pnlkhdltype;
-	PnlWdbePrcPrc1NVariable* pnlprc1nvariable;
-	PnlWdbePrcMge1NSignal* pnlmge1nsignal;
 	PnlWdbePrcFsmFsm1NFsmstate* pnlfsmfsm1nfsmstate;
+	PnlWdbePrcMge1NSignal* pnlmge1nsignal;
+	PnlWdbePrcPrc1NVariable* pnlprc1nvariable;
+	PnlWdbePrcKHdltype* pnlkhdltype;
+	PnlWdbePrcDetail* pnldetail;
 
 	WdbeMProcess recPrc;
 
@@ -197,7 +198,7 @@ public:
 public:
 	DpchEngWdbe* getNewDpchEng(std::set<Sbecore::uint> items);
 
-	void refresh(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems);
+	void refresh(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems, const bool unmute = false);
 
 	void updatePreset(DbsWdbe* dbswdbe, const Sbecore::uint ixWdbeVPreset, const Sbecore::ubigint jrefTrig, const bool notif = false);
 	void minimize(DbsWdbe* dbswdbe, const bool notif = false, DpchEngWdbe** dpcheng = NULL);
@@ -219,12 +220,14 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbePrc_fsmEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
-	bool handleCallWdbePrc_mdlEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
-	bool handleCallWdbeFsmUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 	bool handleCallWdbePrcUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbeFsmUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbePrc_mdlEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbePrc_fsmEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
 
 };
 
 #endif
+
+
 

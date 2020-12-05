@@ -1,10 +1,11 @@
 /**
 	* \file PnlWdbeNavPre.cpp
 	* job handler for job PnlWdbeNavPre (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifdef WDBECMBD
 	#include <Wdbecmbd.h>
@@ -76,7 +77,11 @@ DpchEngWdbe* PnlWdbeNavPre::getNewDpchEng(
 void PnlWdbeNavPre::refresh(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
+			, const bool unmute
 		) {
+	if (muteRefresh && !unmute) return;
+	muteRefresh = true;
+
 	ContInf oldContinf(continf);
 	StatShr oldStatshr(statshr);
 
@@ -94,6 +99,8 @@ void PnlWdbeNavPre::refresh(
 	// IP refresh --- END
 	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
 	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
+
+	muteRefresh = false;
 };
 
 void PnlWdbeNavPre::updatePreset(
@@ -194,4 +201,6 @@ void PnlWdbeNavPre::handleDpchAppDoButVerRemoveClick(
 
 	*dpcheng = getNewDpchEng(moditems);
 };
+
+
 

@@ -1,10 +1,11 @@
 /**
 	* \file SqkWdbeWrfpga.cpp
 	* squawk generation for operation pack WdbeWrfpga (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
-	*/
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
+  */
+// IP header --- ABOVE
 
 #include "SqkWdbeWrfpga.h"
 
@@ -79,4 +80,6 @@ string SqkWdbeWrfpga::getSquawkMdlraw(
 	// example: "write raw VHDL code for module 'icm2 (top_v1_0 top)'"
 	return(""); // IP getSquawkMdlraw --- LINE
 };
+
+
 

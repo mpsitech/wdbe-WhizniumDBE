@@ -1,10 +1,11 @@
 /**
 	* \file WdbeQMchList.cpp
 	* Dbs and XML wrapper for table TblWdbeQMchList (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
-	*/
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 5 Dec 2020
+  */
+// IP header --- ABOVE
 
 #include "WdbeQMchList.h"
 
@@ -22,16 +23,16 @@ WdbeQMchList::WdbeQMchList(
 			, const uint jnum
 			, const ubigint ref
 			, const string sref
-			, const string srefKPlatform
-			, const string titSrefKPlatform
+			, const ubigint supRefWdbeMMachine
+			, const string stubSupRefWdbeMMachine
 		) {
 	this->qref = qref;
 	this->jref = jref;
 	this->jnum = jnum;
 	this->ref = ref;
 	this->sref = sref;
-	this->srefKPlatform = srefKPlatform;
-	this->titSrefKPlatform = titSrefKPlatform;
+	this->supRefWdbeMMachine = supRefWdbeMMachine;
+	this->stubSupRefWdbeMMachine = stubSupRefWdbeMMachine;
 };
 
 void WdbeQMchList::writeXML(
@@ -46,12 +47,10 @@ void WdbeQMchList::writeXML(
 	if (jnumattr) xmlTextWriterWriteAttribute(wr, BAD_CAST "jnum", BAD_CAST to_string(jnum).c_str());
 	if (shorttags) {
 		writeString(wr, "srf", sref);
-		writeString(wr, "pla", srefKPlatform);
-		writeString(wr, "pla2", titSrefKPlatform);
+		writeString(wr, "sup", stubSupRefWdbeMMachine);
 	} else {
 		writeString(wr, "sref", sref);
-		writeString(wr, "srefKPlatform", srefKPlatform);
-		writeString(wr, "titSrefKPlatform", titSrefKPlatform);
+		writeString(wr, "stubSupRefWdbeMMachine", stubSupRefWdbeMMachine);
 	};
 	xmlTextWriterEndElement(wr);
 };
@@ -155,13 +154,13 @@ ubigint TblWdbeQMchList::insertNewRec(
 			, const uint jnum
 			, const ubigint ref
 			, const string sref
-			, const string srefKPlatform
-			, const string titSrefKPlatform
+			, const ubigint supRefWdbeMMachine
+			, const string stubSupRefWdbeMMachine
 		) {
 	ubigint retval = 0;
 	WdbeQMchList* _rec = NULL;
 
-	_rec = new WdbeQMchList(0, jref, jnum, ref, sref, srefKPlatform, titSrefKPlatform);
+	_rec = new WdbeQMchList(0, jref, jnum, ref, sref, supRefWdbeMMachine, stubSupRefWdbeMMachine);
 	insertRec(_rec);
 
 	retval = _rec->qref;
@@ -179,13 +178,13 @@ ubigint TblWdbeQMchList::appendNewRecToRst(
 			, const uint jnum
 			, const ubigint ref
 			, const string sref
-			, const string srefKPlatform
-			, const string titSrefKPlatform
+			, const ubigint supRefWdbeMMachine
+			, const string stubSupRefWdbeMMachine
 		) {
 	ubigint retval = 0;
 	WdbeQMchList* _rec = NULL;
 
-	retval = insertNewRec(&_rec, jref, jnum, ref, sref, srefKPlatform, titSrefKPlatform);
+	retval = insertNewRec(&_rec, jref, jnum, ref, sref, supRefWdbeMMachine, stubSupRefWdbeMMachine);
 	rst.nodes.push_back(_rec);
 
 	if (rec != NULL) *rec = _rec;
@@ -256,8 +255,8 @@ MyTblWdbeQMchList::~MyTblWdbeQMchList() {
 };
 
 void MyTblWdbeQMchList::initStatements() {
-	stmtInsertRec = createStatement("INSERT INTO TblWdbeQMchList (jref, jnum, ref, sref, srefKPlatform) VALUES (?,?,?,?,?)", false);
-	stmtUpdateRec = createStatement("UPDATE TblWdbeQMchList SET jref = ?, jnum = ?, ref = ?, sref = ?, srefKPlatform = ? WHERE qref = ?", false);
+	stmtInsertRec = createStatement("INSERT INTO TblWdbeQMchList (jref, jnum, ref, sref, supRefWdbeMMachine) VALUES (?,?,?,?,?)", false);
+	stmtUpdateRec = createStatement("UPDATE TblWdbeQMchList SET jref = ?, jnum = ?, ref = ?, sref = ?, supRefWdbeMMachine = ? WHERE qref = ?", false);
 	stmtRemoveRecByQref = createStatement("DELETE FROM TblWdbeQMchList WHERE qref = ?", false);
 	stmtRemoveRstByJref = createStatement("DELETE FROM TblWdbeQMchList WHERE jref = ?", false);
 };
@@ -293,7 +292,7 @@ bool MyTblWdbeQMchList::loadRecBySQL(
 		if (dbrow[2]) _rec->jnum = atol((char*) dbrow[2]); else _rec->jnum = 0;
 		if (dbrow[3]) _rec->ref = atoll((char*) dbrow[3]); else _rec->ref = 0;
 		if (dbrow[4]) _rec->sref.assign(dbrow[4], dblengths[4]); else _rec->sref = "";
-		if (dbrow[5]) _rec->srefKPlatform.assign(dbrow[5], dblengths[5]); else _rec->srefKPlatform = "";
+		if (dbrow[5]) _rec->supRefWdbeMMachine = atoll((char*) dbrow[5]); else _rec->supRefWdbeMMachine = 0;
 
 		retval = true;
 	};
@@ -341,7 +340,7 @@ ubigint MyTblWdbeQMchList::loadRstBySQL(
 			if (dbrow[2]) rec->jnum = atol((char*) dbrow[2]); else rec->jnum = 0;
 			if (dbrow[3]) rec->ref = atoll((char*) dbrow[3]); else rec->ref = 0;
 			if (dbrow[4]) rec->sref.assign(dbrow[4], dblengths[4]); else rec->sref = "";
-			if (dbrow[5]) rec->srefKPlatform.assign(dbrow[5], dblengths[5]); else rec->srefKPlatform = "";
+			if (dbrow[5]) rec->supRefWdbeMMachine = atoll((char*) dbrow[5]); else rec->supRefWdbeMMachine = 0;
 			rst.nodes.push_back(rec);
 
 			numread++;
@@ -359,14 +358,13 @@ ubigint MyTblWdbeQMchList::insertRec(
 	unsigned long l[5]; my_bool n[5]; my_bool e[5];
 
 	l[3] = rec->sref.length();
-	l[4] = rec->srefKPlatform.length();
 
 	MYSQL_BIND bind[] = {
 		bindUbigint(&rec->jref,&(l[0]),&(n[0]),&(e[0])),
 		bindUint(&rec->jnum,&(l[1]),&(n[1]),&(e[1])),
 		bindUbigint(&rec->ref,&(l[2]),&(n[2]),&(e[2])),
 		bindCstring((char*) (rec->sref.c_str()),&(l[3]),&(n[3]),&(e[3])),
-		bindCstring((char*) (rec->srefKPlatform.c_str()),&(l[4]),&(n[4]),&(e[4]))
+		bindUbigint(&rec->supRefWdbeMMachine,&(l[4]),&(n[4]),&(e[4]))
 	};
 
 	if (mysql_stmt_bind_param(stmtInsertRec, bind)) {
@@ -394,14 +392,13 @@ void MyTblWdbeQMchList::updateRec(
 	unsigned long l[6]; my_bool n[6]; my_bool e[6];
 
 	l[3] = rec->sref.length();
-	l[4] = rec->srefKPlatform.length();
 
 	MYSQL_BIND bind[] = {
 		bindUbigint(&rec->jref,&(l[0]),&(n[0]),&(e[0])),
 		bindUint(&rec->jnum,&(l[1]),&(n[1]),&(e[1])),
 		bindUbigint(&rec->ref,&(l[2]),&(n[2]),&(e[2])),
 		bindCstring((char*) (rec->sref.c_str()),&(l[3]),&(n[3]),&(e[3])),
-		bindCstring((char*) (rec->srefKPlatform.c_str()),&(l[4]),&(n[4]),&(e[4])),
+		bindUbigint(&rec->supRefWdbeMMachine,&(l[4]),&(n[4]),&(e[4])),
 		bindUbigint(&rec->qref,&(l[5]),&(n[5]),&(e[5]))
 	};
 
@@ -491,13 +488,13 @@ PgTblWdbeQMchList::~PgTblWdbeQMchList() {
 };
 
 void PgTblWdbeQMchList::initStatements() {
-	createStatement("TblWdbeQMchList_insertRec", "INSERT INTO TblWdbeQMchList (jref, jnum, ref, sref, srefKPlatform) VALUES ($1,$2,$3,$4,$5) RETURNING qref", 5);
-	createStatement("TblWdbeQMchList_updateRec", "UPDATE TblWdbeQMchList SET jref = $1, jnum = $2, ref = $3, sref = $4, srefKPlatform = $5 WHERE qref = $6", 6);
+	createStatement("TblWdbeQMchList_insertRec", "INSERT INTO TblWdbeQMchList (jref, jnum, ref, sref, supRefWdbeMMachine) VALUES ($1,$2,$3,$4,$5) RETURNING qref", 5);
+	createStatement("TblWdbeQMchList_updateRec", "UPDATE TblWdbeQMchList SET jref = $1, jnum = $2, ref = $3, sref = $4, supRefWdbeMMachine = $5 WHERE qref = $6", 6);
 	createStatement("TblWdbeQMchList_removeRecByQref", "DELETE FROM TblWdbeQMchList WHERE qref = $1", 1);
 	createStatement("TblWdbeQMchList_removeRstByJref", "DELETE FROM TblWdbeQMchList WHERE jref = $1", 1);
 
-	createStatement("TblWdbeQMchList_loadRecByQref", "SELECT qref, jref, jnum, ref, sref, srefKPlatform FROM TblWdbeQMchList WHERE qref = $1", 1);
-	createStatement("TblWdbeQMchList_loadRstByJref", "SELECT qref, jref, jnum, ref, sref, srefKPlatform FROM TblWdbeQMchList WHERE jref = $1 ORDER BY jnum ASC", 1);
+	createStatement("TblWdbeQMchList_loadRecByQref", "SELECT qref, jref, jnum, ref, sref, supRefWdbeMMachine FROM TblWdbeQMchList WHERE qref = $1", 1);
+	createStatement("TblWdbeQMchList_loadRstByJref", "SELECT qref, jref, jnum, ref, sref, supRefWdbeMMachine FROM TblWdbeQMchList WHERE jref = $1 ORDER BY jnum ASC", 1);
 };
 
 bool PgTblWdbeQMchList::loadRec(
@@ -518,7 +515,7 @@ bool PgTblWdbeQMchList::loadRec(
 			PQfnumber(res, "jnum"),
 			PQfnumber(res, "ref"),
 			PQfnumber(res, "sref"),
-			PQfnumber(res, "srefkplatform")
+			PQfnumber(res, "suprefwdbemmachine")
 		};
 
 		ptr = PQgetvalue(res, 0, fnum[0]); _rec->qref = atoll(ptr);
@@ -526,7 +523,7 @@ bool PgTblWdbeQMchList::loadRec(
 		ptr = PQgetvalue(res, 0, fnum[2]); _rec->jnum = atol(ptr);
 		ptr = PQgetvalue(res, 0, fnum[3]); _rec->ref = atoll(ptr);
 		ptr = PQgetvalue(res, 0, fnum[4]); _rec->sref.assign(ptr, PQgetlength(res, 0, fnum[4]));
-		ptr = PQgetvalue(res, 0, fnum[5]); _rec->srefKPlatform.assign(ptr, PQgetlength(res, 0, fnum[5]));
+		ptr = PQgetvalue(res, 0, fnum[5]); _rec->supRefWdbeMMachine = atoll(ptr);
 
 		retval = true;
 	};
@@ -558,7 +555,7 @@ ubigint PgTblWdbeQMchList::loadRst(
 			PQfnumber(res, "jnum"),
 			PQfnumber(res, "ref"),
 			PQfnumber(res, "sref"),
-			PQfnumber(res, "srefkplatform")
+			PQfnumber(res, "suprefwdbemmachine")
 		};
 
 		while (numread < numrow) {
@@ -569,7 +566,7 @@ ubigint PgTblWdbeQMchList::loadRst(
 			ptr = PQgetvalue(res, numread, fnum[2]); rec->jnum = atol(ptr);
 			ptr = PQgetvalue(res, numread, fnum[3]); rec->ref = atoll(ptr);
 			ptr = PQgetvalue(res, numread, fnum[4]); rec->sref.assign(ptr, PQgetlength(res, numread, fnum[4]));
-			ptr = PQgetvalue(res, numread, fnum[5]); rec->srefKPlatform.assign(ptr, PQgetlength(res, numread, fnum[5]));
+			ptr = PQgetvalue(res, numread, fnum[5]); rec->supRefWdbeMMachine = atoll(ptr);
 
 			rst.nodes.push_back(rec);
 
@@ -665,22 +662,23 @@ ubigint PgTblWdbeQMchList::insertRec(
 	ubigint _jref = htonl64(rec->jref);
 	uint _jnum = htonl(rec->jnum);
 	ubigint _ref = htonl64(rec->ref);
+	ubigint _supRefWdbeMMachine = htonl64(rec->supRefWdbeMMachine);
 
 	const char* vals[] = {
 		(char*) &_jref,
 		(char*) &_jnum,
 		(char*) &_ref,
 		rec->sref.c_str(),
-		rec->srefKPlatform.c_str()
+		(char*) &_supRefWdbeMMachine
 	};
 	const int l[] = {
 		sizeof(ubigint),
 		sizeof(uint),
 		sizeof(ubigint),
 		0,
-		0
+		sizeof(ubigint)
 	};
-	const int f[] = {1, 1, 1, 0, 0};
+	const int f[] = {1, 1, 1, 0, 1};
 
 	res = PQexecPrepared(dbs, "TblWdbeQMchList_insertRec", 5, vals, l, f, 0);
 
@@ -710,6 +708,7 @@ void PgTblWdbeQMchList::updateRec(
 	ubigint _jref = htonl64(rec->jref);
 	uint _jnum = htonl(rec->jnum);
 	ubigint _ref = htonl64(rec->ref);
+	ubigint _supRefWdbeMMachine = htonl64(rec->supRefWdbeMMachine);
 	ubigint _qref = htonl64(rec->qref);
 
 	const char* vals[] = {
@@ -717,7 +716,7 @@ void PgTblWdbeQMchList::updateRec(
 		(char*) &_jnum,
 		(char*) &_ref,
 		rec->sref.c_str(),
-		rec->srefKPlatform.c_str(),
+		(char*) &_supRefWdbeMMachine,
 		(char*) &_qref
 	};
 	const int l[] = {
@@ -725,10 +724,10 @@ void PgTblWdbeQMchList::updateRec(
 		sizeof(uint),
 		sizeof(ubigint),
 		0,
-		0,
+		sizeof(ubigint),
 		sizeof(ubigint)
 	};
-	const int f[] = {1, 1, 1, 0, 0, 1};
+	const int f[] = {1, 1, 1, 0, 1, 1};
 
 	res = PQexecPrepared(dbs, "TblWdbeQMchList_updateRec", 6, vals, l, f, 0);
 

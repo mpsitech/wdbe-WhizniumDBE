@@ -1,10 +1,11 @@
 /**
   * \file QryWdbeUsrList.java
   * Java API code for job QryWdbeUsrList
-  * \author Alexander Wirthmueller
-  * \date created: 23 Aug 2020
-  * \date modified: 23 Aug 2020
-  */
+	* \copyright (C) 2018-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 5 Dec 2020
+	*/
+// IP header --- ABOVE
 
 package apiwdbe;
 
@@ -18,24 +19,24 @@ public class QryWdbeUsrList {
 		*/
 	public static class VecVOrd {
 
-		public static final int GRP = 1;
-		public static final int OWN = 2;
-		public static final int PRS = 3;
-		public static final int SRF = 4;
-		public static final int USG = 5;
-		public static final int STE = 6;
+		public static final int USG = 1;
+		public static final int STE = 2;
+		public static final int SRF = 3;
+		public static final int PRS = 4;
+		public static final int OWN = 5;
+		public static final int GRP = 6;
 
 		public static int getIx(
 					String sref
 				) {
 			String s = sref.toLowerCase();
 
-			if (s.equals("grp")) return GRP;
-			if (s.equals("own")) return OWN;
-			if (s.equals("prs")) return PRS;
-			if (s.equals("srf")) return SRF;
 			if (s.equals("usg")) return USG;
 			if (s.equals("ste")) return STE;
+			if (s.equals("srf")) return SRF;
+			if (s.equals("prs")) return PRS;
+			if (s.equals("own")) return OWN;
+			if (s.equals("grp")) return GRP;
 
 			return 0;
 		};
@@ -43,12 +44,12 @@ public class QryWdbeUsrList {
 		public static String getSref(
 					int ix
 				) {
-			if (ix == GRP) return("grp");
-			if (ix == OWN) return("own");
-			if (ix == PRS) return("prs");
-			if (ix == SRF) return("srf");
 			if (ix == USG) return("usg");
 			if (ix == STE) return("ste");
+			if (ix == SRF) return("srf");
+			if (ix == PRS) return("prs");
+			if (ix == OWN) return("own");
+			if (ix == GRP) return("grp");
 
 			return "";
 		};

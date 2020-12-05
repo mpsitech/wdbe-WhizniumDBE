@@ -1,11 +1,3 @@
-/**
-  * \file PnlWdbeBnkDetail.js
-  * web client functionality for panel PnlWdbeBnkDetail
-  * \author Alexander Wirthmueller
-  * \date created: 23 Aug 2020
-  * \date modified: 23 Aug 2020
-  */
-
 // IP cust --- INSERT
 
 // --- expand state management

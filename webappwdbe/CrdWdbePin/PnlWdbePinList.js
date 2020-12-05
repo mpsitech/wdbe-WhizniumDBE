@@ -1,11 +1,3 @@
-/**
-  * \file PnlWdbePinList.js
-  * web client functionality for panel PnlWdbePinList
-  * \author Alexander Wirthmueller
-  * \date created: 23 Aug 2020
-  * \date modified: 23 Aug 2020
-  */
-
 // --- expand state management
 function minimize() {
 	// change container heights
@@ -133,9 +125,9 @@ function refreshB(chgcol) {
 			ix++;
 
 			if (i == 1) {
-				doc.cols.push("TcoSrf"); doc.widths.push(TcoSrfWidth); doc.fs.push("srf"); doc.tos.push(1); wtot += TcoSrfWidth;
+				doc.cols.push("TcoSrf"); doc.widths.push(TcoSrfWidth); doc.fs.push("srf"); doc.tos.push(2); wtot += TcoSrfWidth;
 			} else if (i == 2) {
-				doc.cols.push("TcoBnk"); doc.widths.push(TcoBnkWidth); doc.fs.push("bnk"); doc.tos.push(2); wtot += TcoBnkWidth;
+				doc.cols.push("TcoBnk"); doc.widths.push(TcoBnkWidth); doc.fs.push("bnk"); doc.tos.push(1); wtot += TcoBnkWidth;
 			} else if (i == 3) {
 				doc.cols.push("TcoLoc"); doc.widths.push(TcoLocWidth); doc.fs.push("loc"); doc.tos.push(0); wtot += TcoLocWidth;
 			} else {

@@ -1,10 +1,11 @@
 /**
 	* \file DlgWdbeNavLoaini.h
 	* job handler for job DlgWdbeNavLoaini (declarations)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifndef DLGWDBENAVLOAINI_H
 #define DLGWDBENAVLOAINI_H
@@ -448,12 +449,12 @@ public:
 		void writeXML(const Sbecore::uint ixWdbeVLocale, xmlTextWriter* wr);
 	};
 
-	bool evalIfiUldActive(DbsWdbe* dbswdbe);
+	bool evalButDneActive(DbsWdbe* dbswdbe);
+	bool evalLfiDldActive(DbsWdbe* dbswdbe);
+	bool evalAcvUldActive(DbsWdbe* dbswdbe);
 	bool evalImpButRunActive(DbsWdbe* dbswdbe);
 	bool evalImpButStoActive(DbsWdbe* dbswdbe);
-	bool evalAcvUldActive(DbsWdbe* dbswdbe);
-	bool evalLfiDldActive(DbsWdbe* dbswdbe);
-	bool evalButDneActive(DbsWdbe* dbswdbe);
+	bool evalIfiUldActive(DbsWdbe* dbswdbe);
 
 public:
 	DlgWdbeNavLoaini(XchgWdbe* xchg, DbsWdbe* dbswdbe, const Sbecore::ubigint jrefSup, const Sbecore::uint ixWdbeVLocale);
@@ -493,7 +494,7 @@ public:
 	void refreshAcv(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems);
 	void refreshLfi(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems);
 
-	void refresh(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems);
+	void refresh(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems, const bool unmute = false);
 
 public:
 
@@ -511,8 +512,8 @@ private:
 	void handleDpchAppDoImpButStoClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
 	void handleDpchAppWdbeAlert(DbsWdbe* dbswdbe, DpchAppWdbeAlert* dpchappwdbealert, DpchEngWdbe** dpcheng);
 
-	void handleUploadInSgeIdle(DbsWdbe* dbswdbe, const std::string& filename);
 	void handleUploadInSgeImpdone(DbsWdbe* dbswdbe, const std::string& filename);
+	void handleUploadInSgeIdle(DbsWdbe* dbswdbe, const std::string& filename);
 
 	std::string handleDownloadInSgeDone(DbsWdbe* dbswdbe);
 
@@ -556,5 +557,6 @@ private:
 };
 
 #endif
+
 
 

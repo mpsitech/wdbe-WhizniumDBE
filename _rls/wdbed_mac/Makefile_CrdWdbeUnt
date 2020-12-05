@@ -1,0 +1,39 @@
+# file Makefile
+# make file for CrdWdbeUnt card job handler, release wdbed_mac
+# copyright: (C) 2016-2020 MPSI Technologies GmbH
+# author: Alexander Wirthmueller (auto-generation)
+# date created: 5 Dec 2020
+# IP header --- ABOVE
+
+include ../Makefile.inc
+
+CPP = g++
+CPPFLAGS = -std=c++11 -g -Wall -Os -pthread -DWDBED
+
+STATLIB = ar
+STATLIBFLAGS = rcs
+
+INCPATH = -I$(BUILDROOT)/dbswdbe -I$(BUILDROOT)/wdbed/VecWdbe -I$(BUILDROOT)/wdbed/IexWdbe -I$(BUILDROOT)/wdbed
+INCPATH += -I${WHIZSDKROOT}/build -I${WHIZSDKROOT}/build/apiwzlm -I/usr/local/include -I/usr/local/include/curl -I/usr/local/include/libxml2 -I/usr/local/mysql/include -I/usr/local/opt/sqlite/include
+
+OBJS = CrdWdbeUnt.o PnlWdbeUntList.o QryWdbeUntList.o PnlWdbeUntHeadbar.o PnlWdbeUntRec.o PnlWdbeUntRef1NError.o QryWdbeUntRef1NError.o PnlWdbeUntHk1NVector.o QryWdbeUntHk1NVector.o PnlWdbeUntHk1NModule.o QryWdbeUntHk1NModule.o PnlWdbeUntRef1NCommand.o QryWdbeUntRef1NCommand.o PnlWdbeUntSil1NUnit.o QryWdbeUntSil1NUnit.o PnlWdbeUnt1NPeripheral.o QryWdbeUnt1NPeripheral.o PnlWdbeUnt1NTarget.o QryWdbeUnt1NTarget.o PnlWdbeUntFwd1NController.o QryWdbeUntFwd1NController.o PnlWdbeUnt1NBank.o QryWdbeUnt1NBank.o PnlWdbeUntDetail.o
+
+LIB = libcrdwdbeunt
+
+.SUFFIXES: .cpp
+
+.cpp.o :
+	$(CPP) $(CPPFLAGS) $(INCPATH) -o $@ -c $<
+
+all:	$(LIB)
+
+$(LIB):	$(OBJS)
+	$(STATLIB) $(STATLIBFLAGS) $(LIB).a $(OBJS)
+	rm -f *.o
+
+install:
+	mv $(LIB).a $(LIBROOT)/wdbed/
+
+clean:
+	rm -f *.o
+

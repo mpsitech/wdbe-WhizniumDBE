@@ -1,10 +1,11 @@
 /**
 	* \file WdbePrcfile_blks.cpp
 	* invocation / return data blocks for operation pack WdbePrcfile (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
-	*/
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
+  */
+// IP header --- ABOVE
 
 #include "WdbePrcfile_blks.h"
 
@@ -62,56 +63,6 @@ void DpchInvWdbePrcfileConcat::writeXML(
 		writeString(wr, "scrJref", Scr::scramble(jref));
 		writeStringvec(wr, "infiles", infiles);
 		writeStringvec(wr, "headers", headers);
-		writeString(wr, "outfile", outfile);
-	xmlTextWriterEndElement(wr);
-};
-
-/******************************************************************************
- class DpchInvWdbePrcfileIexconv
- ******************************************************************************/
-
-DpchInvWdbePrcfileIexconv::DpchInvWdbePrcfileIexconv(
-			const ubigint oref
-			, const ubigint jref
-			, const string& infile
-			, const string& outfile
-		) :
-			DpchInvWdbe(VecWdbeVDpch::DPCHINVWDBEPRCFILEIEXCONV, oref, jref)
-		{
-	this->infile = infile;
-	this->outfile = outfile;
-};
-
-void DpchInvWdbePrcfileIexconv::readXML(
-			xmlXPathContext* docctx
-			, string basexpath
-			, bool addbasetag
-		) {
-	clear();
-
-	bool basefound;
-
-	if (addbasetag)
-		basefound = checkUclcXPaths(docctx, basexpath, basexpath, "DpchInvWdbePrcfileIexconv");
-	else
-		basefound = checkXPath(docctx, basexpath);
-
-	if (basefound) {
-		if (extractStringUclc(docctx, basexpath, "scrOref", "", scrOref)) add(SCROREF);
-		if (extractStringUclc(docctx, basexpath, "scrJref", "", scrJref)) add(SCRJREF);
-		if (extractStringUclc(docctx, basexpath, "infile", "", infile)) add(INFILE);
-		if (extractStringUclc(docctx, basexpath, "outfile", "", outfile)) add(OUTFILE);
-	};
-};
-
-void DpchInvWdbePrcfileIexconv::writeXML(
-			xmlTextWriter* wr
-		) {
-	xmlTextWriterStartElement(wr, BAD_CAST "DpchInvWdbePrcfileIexconv");
-	xmlTextWriterWriteAttribute(wr, BAD_CAST "xmlns", BAD_CAST "http://www.mpsitech.com/wdbe");
-		writeString(wr, "scrOref", Scr::scramble(oref));
-		writeString(wr, "scrJref", Scr::scramble(jref));
-		writeString(wr, "infile", infile);
 		writeString(wr, "outfile", outfile);
 	xmlTextWriterEndElement(wr);
 };
@@ -179,4 +130,6 @@ void DpchInvWdbePrcfilePlhrpl::writeXML(
 };
 
 // IP cust --- INSERT
+
+
 

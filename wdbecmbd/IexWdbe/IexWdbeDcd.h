@@ -1,10 +1,11 @@
 /**
 	* \file IexWdbeDcd.h
 	* data blocks and readers/writers for import/export complex IexWdbeDcd (declarations)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifndef IEXWDBEDCD_H
 #define IEXWDBEDCD_H
@@ -1765,7 +1766,7 @@ namespace IexWdbeDcd {
 		void writeXML(xmlTextWriter* wr, const bool shorttags = true);
 	};
 
-	void parseFromFile(const std::string& fullpath, const bool xmlNotTxt, ImeIAMCoreversionIp& imeiamcoreversionip, ImeIAMCoreversionPlh& imeiamcoreversionplh, ImeIMModule& imeimmodule);
+	void parseFromFile(const std::string& fullpath, const bool xmlNotTxt, const std::string& rectpath, ImeIAMCoreversionIp& imeiamcoreversionip, ImeIAMCoreversionPlh& imeiamcoreversionplh, ImeIMModule& imeimmodule);
 	void exportToFile(const std::string& fullpath, const bool xmlNotTxt, const bool shorttags, ImeIAMCoreversionIp& imeiamcoreversionip, ImeIAMCoreversionPlh& imeiamcoreversionplh, ImeIMModule& imeimmodule);
 
 	void readTxt(Sbecore::Txtrd& txtrd, ImeIAMCoreversionIp& imeiamcoreversionip, ImeIAMCoreversionPlh& imeiamcoreversionplh, ImeIMModule& imeimmodule);
@@ -1779,4 +1780,6 @@ namespace IexWdbeDcd {
 };
 
 #endif
+
+
 

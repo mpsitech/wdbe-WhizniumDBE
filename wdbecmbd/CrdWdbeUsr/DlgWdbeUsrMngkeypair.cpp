@@ -1,10 +1,11 @@
 /**
 	* \file DlgWdbeUsrMngkeypair.cpp
 	* job handler for job DlgWdbeUsrMngkeypair (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifdef WDBECMBD
 	#include <Wdbecmbd.h>
@@ -87,9 +88,13 @@ DpchEngWdbe* DlgWdbeUsrMngkeypair::getNewDpchEng(
 void DlgWdbeUsrMngkeypair::refresh(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
+			, const bool unmute
 		) {
-	ContInf oldContinf(continf);
+	if (muteRefresh && !unmute) return;
+	muteRefresh = true;
+
 	StatShr oldStatshr(statshr);
+	ContInf oldContinf(continf);
 
 	// IP refresh --- RBEGIN
 	// continf
@@ -103,8 +108,10 @@ void DlgWdbeUsrMngkeypair::refresh(
 	statshr.DetDldActive = evalDetDldActive(dbswdbe);
 
 	// IP refresh --- REND
-	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
 	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
+	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
+
+	muteRefresh = false;
 };
 
 void DlgWdbeUsrMngkeypair::handleRequest(
@@ -220,7 +227,7 @@ void DlgWdbeUsrMngkeypair::changeStage(
 
 			setStage(dbswdbe, _ixVSge);
 			reenter = false;
-			if (!muteRefresh) refreshWithDpchEng(dbswdbe, dpcheng); // IP changeStage.refresh1 --- LINE
+			refreshWithDpchEng(dbswdbe, dpcheng); // IP changeStage.refresh1 --- LINE
 		};
 
 		switch (_ixVSge) {
@@ -283,5 +290,6 @@ void DlgWdbeUsrMngkeypair::leaveSgeFound(
 		) {
 	// IP leaveSgeFound --- INSERT
 };
+
 
 

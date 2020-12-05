@@ -1,10 +1,11 @@
 /**
 	* \file PnlWdbeUsgRec.h
 	* job handler for job PnlWdbeUsgRec (declarations)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifndef PNLWDBEUSGREC_H
 #define PNLWDBEUSGREC_H
@@ -13,9 +14,9 @@
 
 // IP include.cust --- INSERT
 
-#include "PnlWdbeUsgDetail.h"
-#include "PnlWdbeUsgAAccess.h"
 #include "PnlWdbeUsgMNUser.h"
+#include "PnlWdbeUsgAAccess.h"
+#include "PnlWdbeUsgDetail.h"
 
 #define VecVWdbeUsgRecDo PnlWdbeUsgRec::VecVDo
 
@@ -170,9 +171,9 @@ public:
 	ContInf continf;
 	StatShr statshr;
 
-	PnlWdbeUsgDetail* pnldetail;
-	PnlWdbeUsgAAccess* pnlaaccess;
 	PnlWdbeUsgMNUser* pnlmnuser;
+	PnlWdbeUsgAAccess* pnlaaccess;
+	PnlWdbeUsgDetail* pnldetail;
 
 	WdbeMUsergroup recUsg;
 
@@ -184,7 +185,7 @@ public:
 public:
 	DpchEngWdbe* getNewDpchEng(std::set<Sbecore::uint> items);
 
-	void refresh(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems);
+	void refresh(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems, const bool unmute = false);
 
 	void updatePreset(DbsWdbe* dbswdbe, const Sbecore::uint ixWdbeVPreset, const Sbecore::ubigint jrefTrig, const bool notif = false);
 	void minimize(DbsWdbe* dbswdbe, const bool notif = false, DpchEngWdbe** dpcheng = NULL);
@@ -211,4 +212,6 @@ private:
 };
 
 #endif
+
+
 

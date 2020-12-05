@@ -1,11 +1,3 @@
-/**
-  * \file DlgWdbeRlsWrite.js
-  * web client functionality for dialog DlgWdbeRlsWrite
-  * \author Alexander Wirthmueller
-  * \date created: 23 Aug 2020
-  * \date modified: 23 Aug 2020
-  */
-
 // IP cust --- INSERT
 
 // --- view initialization and refresh

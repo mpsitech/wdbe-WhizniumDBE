@@ -1,10 +1,11 @@
 /**
 	* \file PnlWdbeMchDetail_evals.cpp
 	* job handler for job PnlWdbeMchDetail (implementation of availability/activation evaluation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 using namespace std;
 using namespace Sbecore;
@@ -52,7 +53,7 @@ bool PnlWdbeMchDetail::evalTxtSrfActive(
 	return(args.back());
 };
 
-bool PnlWdbeMchDetail::evalPupPlaActive(
+bool PnlWdbeMchDetail::evalTxtSupActive(
 			DbsWdbe* dbswdbe
 		) {
 	// pre.ixCrdaccMchIncl(edit)
@@ -66,16 +67,37 @@ bool PnlWdbeMchDetail::evalPupPlaActive(
 	return(args.back());
 };
 
-bool PnlWdbeMchDetail::evalButPlaEditAvail(
+bool PnlWdbeMchDetail::evalButSupViewAvail(
 			DbsWdbe* dbswdbe
 		) {
-	// pre.adm()
+	// mch.supEq(0)|(pre.ixCrdaccMch())
+
+	vector<bool> args;
+	bool a, b;
+
+	a = false; a = (recMch.supRefWdbeMMachine == 0);
+	args.push_back(a);
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCMCH, jref) != 0);
+	args.push_back(a);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
+
+	return(args.back());
+};
+
+bool PnlWdbeMchDetail::evalButSupViewActive(
+			DbsWdbe* dbswdbe
+		) {
+	// !mch.supEq(0)
 
 	vector<bool> args;
 	bool a;
 
-	a = false;
+	a = false; a = (recMch.supRefWdbeMMachine == 0);
 	args.push_back(a);
+	a = args.back(); args.pop_back();
+	args.push_back(!a);
 
 	return(args.back());
 };
@@ -142,4 +164,6 @@ bool PnlWdbeMchDetail::evalTxfCmtActive(
 
 	return(args.back());
 };
+
+
 

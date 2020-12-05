@@ -1,10 +1,11 @@
 /**
 	* \file CrdWdbeNav.h
 	* job handler for job CrdWdbeNav (declarations)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifndef CRDWDBENAV_H
 #define CRDWDBENAV_H
@@ -13,16 +14,16 @@
 
 // IP include.cust --- INSERT
 
+#include "PnlWdbeNavAuxfct.h"
+#include "PnlWdbeNavDescr.h"
+#include "PnlWdbeNavCoredev.h"
+#include "PnlWdbeNavDevdev.h"
+#include "PnlWdbeNavGlobal.h"
+#include "PnlWdbeNavAdmin.h"
+#include "PnlWdbeNavPre.h"
+#include "PnlWdbeNavHeadbar.h"
 #include "DlgWdbeNavLoaini.h"
 #include "DlgWdbeNavMnglic.h"
-#include "PnlWdbeNavHeadbar.h"
-#include "PnlWdbeNavPre.h"
-#include "PnlWdbeNavAdmin.h"
-#include "PnlWdbeNavGlobal.h"
-#include "PnlWdbeNavDevdev.h"
-#include "PnlWdbeNavCoredev.h"
-#include "PnlWdbeNavDescr.h"
-#include "PnlWdbeNavAuxfct.h"
 
 #define VecVWdbeNavDo CrdWdbeNav::VecVDo
 #define VecVWdbeNavSge CrdWdbeNav::VecVSge
@@ -403,16 +404,16 @@ public:
 	Sbecore::Xmlio::Feed feedFMcbAlert;
 	Sbecore::Xmlio::Feed feedFSge;
 
+	PnlWdbeNavAuxfct* pnlauxfct;
+	PnlWdbeNavDescr* pnldescr;
+	PnlWdbeNavCoredev* pnlcoredev;
+	PnlWdbeNavDevdev* pnldevdev;
+	PnlWdbeNavGlobal* pnlglobal;
+	PnlWdbeNavAdmin* pnladmin;
+	PnlWdbeNavPre* pnlpre;
+	PnlWdbeNavHeadbar* pnlheadbar;
 	DlgWdbeNavLoaini* dlgloaini;
 	DlgWdbeNavMnglic* dlgmnglic;
-	PnlWdbeNavHeadbar* pnlheadbar;
-	PnlWdbeNavPre* pnlpre;
-	PnlWdbeNavAdmin* pnladmin;
-	PnlWdbeNavGlobal* pnlglobal;
-	PnlWdbeNavDevdev* pnldevdev;
-	PnlWdbeNavCoredev* pnlcoredev;
-	PnlWdbeNavDescr* pnldescr;
-	PnlWdbeNavAuxfct* pnlauxfct;
 
 	// IP vars.cust --- INSERT
 
@@ -421,7 +422,7 @@ public:
 
 public:
 	DpchEngWdbe* getNewDpchEng(std::set<Sbecore::uint> items);
-	void refresh(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems);
+	void refresh(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems, const bool unmute = false);
 	void updatePreset(DbsWdbe* dbswdbe, const Sbecore::uint ixWdbeVPreset, const Sbecore::ubigint jrefTrig, const bool notif = false);
 
 public:
@@ -487,4 +488,6 @@ private:
 };
 
 #endif
+
+
 

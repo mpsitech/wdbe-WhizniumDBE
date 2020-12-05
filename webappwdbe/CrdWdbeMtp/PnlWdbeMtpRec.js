@@ -1,11 +1,3 @@
-/**
-  * \file PnlWdbeMtpRec.js
-  * web client functionality for panel PnlWdbeMtpRec
-  * \author Alexander Wirthmueller
-  * \date created: 23 Aug 2020
-  * \date modified: 23 Aug 2020
-  */
-
 function updateScrJrefs() {
 	scrJrefDetail = retrieveSi(srcdoc, "StatShrWdbeMtpRec", "scrJrefDetail");
 	scrJrefKParKey = retrieveSi(srcdoc, "StatShrWdbeMtpRec", "scrJrefKParKey");

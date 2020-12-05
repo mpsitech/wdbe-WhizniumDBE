@@ -1,11 +1,3 @@
-/**
-  * \file PnlWdbeModMdl1NSignal.js
-  * web client functionality for panel PnlWdbeModMdl1NSignal
-  * \author Alexander Wirthmueller
-  * \date created: 23 Aug 2020
-  * \date modified: 23 Aug 2020
-  */
-
 // --- expand state management
 function minimize(updh) {
 	if (retrieveSi(srcdoc, "StatAppWdbeModMdl1NSignal", "srefIxWdbeVExpstate") == "mind") return;

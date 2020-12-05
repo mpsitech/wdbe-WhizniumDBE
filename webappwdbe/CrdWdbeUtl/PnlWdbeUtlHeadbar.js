@@ -1,11 +1,3 @@
-/**
-  * \file PnlWdbeUtlHeadbar.js
-  * web client functionality for panel PnlWdbeUtlHeadbar
-  * \author Alexander Wirthmueller
-  * \date created: 23 Aug 2020
-  * \date modified: 23 Aug 2020
-  */
-
 // --- view initialization
 function getMenAvail(short) {
 	return(retrieveSi(srcdoc, "StatShrWdbeUtlHeadbar", "Men" + short + "Avail") == "true");
@@ -57,7 +49,7 @@ function handleMenAppClick() {
 };
 
 function handleMenCrdClick() {
-	getCrdwnd().toggleMenu("Crd", getMenLeft("Crd"), parseInt(retrieveSi(srcdoc, "StgInfWdbeUtlHeadbar", "MenCrdWidth")), 63);
+	getCrdwnd().toggleMenu("Crd", getMenLeft("Crd"), parseInt(retrieveSi(srcdoc, "StgInfWdbeUtlHeadbar", "MenCrdWidth")), 42);
 };
 
 // --- server interaction

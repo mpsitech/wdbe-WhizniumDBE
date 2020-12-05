@@ -1,10 +1,11 @@
 /**
 	* \file VecWdbeVJob.cpp
 	* vector VecWdbeVJob (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
-	*/
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
+  */
+// IP header --- ABOVE
 
 #include "VecWdbeVJob.h"
 
@@ -71,7 +72,6 @@ uint VecWdbeVJob::getIx(
 	if (s == "dlgwdberlswrite") return DLGWDBERLSWRITE;
 	if (s == "dlgwdbeusrmngkeypair") return DLGWDBEUSRMNGKEYPAIR;
 	if (s == "dlgwdbeutlextrip") return DLGWDBEUTLEXTRIP;
-	if (s == "dlgwdbeutliexconv") return DLGWDBEUTLIEXCONV;
 	if (s == "dlgwdbeutlmrgip") return DLGWDBEUTLMRGIP;
 	if (s == "dlgwdbeverbscdd") return DLGWDBEVERBSCDD;
 	if (s == "dlgwdbeverdetdd") return DLGWDBEVERDETDD;
@@ -145,6 +145,7 @@ uint VecWdbeVJob::getIx(
 	if (s == "pnlwdbemchheadbar") return PNLWDBEMCHHEADBAR;
 	if (s == "pnlwdbemchlist") return PNLWDBEMCHLIST;
 	if (s == "pnlwdbemchrec") return PNLWDBEMCHREC;
+	if (s == "pnlwdbemchsup1nmachine") return PNLWDBEMCHSUP1NMACHINE;
 	if (s == "pnlwdbemod1nperipheral") return PNLWDBEMOD1NPERIPHERAL;
 	if (s == "pnlwdbemod1nprocess") return PNLWDBEMOD1NPROCESS;
 	if (s == "pnlwdbemodapar") return PNLWDBEMODAPAR;
@@ -329,6 +330,7 @@ uint VecWdbeVJob::getIx(
 	if (s == "qrywdbemchamakefile") return QRYWDBEMCHAMAKEFILE;
 	if (s == "qrywdbemchapar") return QRYWDBEMCHAPAR;
 	if (s == "qrywdbemchlist") return QRYWDBEMCHLIST;
+	if (s == "qrywdbemchsup1nmachine") return QRYWDBEMCHSUP1NMACHINE;
 	if (s == "qrywdbemod1nperipheral") return QRYWDBEMOD1NPERIPHERAL;
 	if (s == "qrywdbemod1nprocess") return QRYWDBEMOD1NPROCESS;
 	if (s == "qrywdbemodapar") return QRYWDBEMODAPAR;
@@ -474,7 +476,6 @@ string VecWdbeVJob::getSref(
 	if (ix == DLGWDBERLSWRITE) return("DlgWdbeRlsWrite");
 	if (ix == DLGWDBEUSRMNGKEYPAIR) return("DlgWdbeUsrMngkeypair");
 	if (ix == DLGWDBEUTLEXTRIP) return("DlgWdbeUtlExtrip");
-	if (ix == DLGWDBEUTLIEXCONV) return("DlgWdbeUtlIexconv");
 	if (ix == DLGWDBEUTLMRGIP) return("DlgWdbeUtlMrgip");
 	if (ix == DLGWDBEVERBSCDD) return("DlgWdbeVerBscdd");
 	if (ix == DLGWDBEVERDETDD) return("DlgWdbeVerDetdd");
@@ -548,6 +549,7 @@ string VecWdbeVJob::getSref(
 	if (ix == PNLWDBEMCHHEADBAR) return("PnlWdbeMchHeadbar");
 	if (ix == PNLWDBEMCHLIST) return("PnlWdbeMchList");
 	if (ix == PNLWDBEMCHREC) return("PnlWdbeMchRec");
+	if (ix == PNLWDBEMCHSUP1NMACHINE) return("PnlWdbeMchSup1NMachine");
 	if (ix == PNLWDBEMOD1NPERIPHERAL) return("PnlWdbeMod1NPeripheral");
 	if (ix == PNLWDBEMOD1NPROCESS) return("PnlWdbeMod1NProcess");
 	if (ix == PNLWDBEMODAPAR) return("PnlWdbeModAPar");
@@ -732,6 +734,7 @@ string VecWdbeVJob::getSref(
 	if (ix == QRYWDBEMCHAMAKEFILE) return("QryWdbeMchAMakefile");
 	if (ix == QRYWDBEMCHAPAR) return("QryWdbeMchAPar");
 	if (ix == QRYWDBEMCHLIST) return("QryWdbeMchList");
+	if (ix == QRYWDBEMCHSUP1NMACHINE) return("QryWdbeMchSup1NMachine");
 	if (ix == QRYWDBEMOD1NPERIPHERAL) return("QryWdbeMod1NPeripheral");
 	if (ix == QRYWDBEMOD1NPROCESS) return("QryWdbeMod1NProcess");
 	if (ix == QRYWDBEMODAPAR) return("QryWdbeModAPar");
@@ -823,4 +826,6 @@ string VecWdbeVJob::getSref(
 
 	return("");
 };
+
+
 

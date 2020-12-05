@@ -1,10 +1,11 @@
 /**
 	* \file PnlWdbeFamDetail.cpp
 	* job handler for job PnlWdbeFamDetail (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifdef WDBECMBD
 	#include <Wdbecmbd.h>
@@ -167,7 +168,11 @@ void PnlWdbeFamDetail::refreshRecFam(
 void PnlWdbeFamDetail::refresh(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
+			, const bool unmute
 		) {
+	if (muteRefresh && !unmute) return;
+	muteRefresh = true;
+
 	StatShr oldStatshr(statshr);
 
 	// IP refresh --- BEGIN
@@ -177,6 +182,8 @@ void PnlWdbeFamDetail::refresh(
 	// IP refresh --- END
 
 	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
+
+	muteRefresh = false;
 };
 
 void PnlWdbeFamDetail::updatePreset(
@@ -292,20 +299,11 @@ void PnlWdbeFamDetail::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBEFAMUPD_REFEQ) {
-		call->abort = handleCallWdbeFamUpd_refEq(dbswdbe, call->jref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEKLSAKEYMOD_KLSEQ) {
+	if (call->ixVCall == VecWdbeVCall::CALLWDBEKLSAKEYMOD_KLSEQ) {
 		call->abort = handleCallWdbeKlsAkeyMod_klsEq(dbswdbe, call->jref, call->argInv.ix);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEFAMUPD_REFEQ) {
+		call->abort = handleCallWdbeFamUpd_refEq(dbswdbe, call->jref);
 	};
-};
-
-bool PnlWdbeFamDetail::handleCallWdbeFamUpd_refEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-	// IP handleCallWdbeFamUpd_refEq --- INSERT
-	return retval;
 };
 
 bool PnlWdbeFamDetail::handleCallWdbeKlsAkeyMod_klsEq(
@@ -323,4 +321,15 @@ bool PnlWdbeFamDetail::handleCallWdbeKlsAkeyMod_klsEq(
 	xchg->submitDpch(getNewDpchEng(moditems));
 	return retval;
 };
+
+bool PnlWdbeFamDetail::handleCallWdbeFamUpd_refEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+	// IP handleCallWdbeFamUpd_refEq --- INSERT
+	return retval;
+};
+
+
 

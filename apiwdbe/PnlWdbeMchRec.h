@@ -1,10 +1,11 @@
 /**
 	* \file PnlWdbeMchRec.h
 	* API code for job PnlWdbeMchRec (declarations)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 5 Dec 2020
 	*/
+// IP header --- ABOVE
 
 #ifndef PNLWDBEMCHREC_H
 #define PNLWDBEMCHREC_H
@@ -68,15 +69,17 @@ namespace PnlWdbeMchRec {
 		static const Sbecore::uint INITDONEAPAR = 2;
 		static const Sbecore::uint INITDONEAMAKEFILE = 3;
 		static const Sbecore::uint INITDONE1NRELEASE = 4;
+		static const Sbecore::uint INITDONESUP1NMACHINE = 5;
 
 	public:
-		StatApp(const bool initdoneDetail = false, const bool initdoneAPar = false, const bool initdoneAMakefile = false, const bool initdone1NRelease = false);
+		StatApp(const bool initdoneDetail = false, const bool initdoneAPar = false, const bool initdoneAMakefile = false, const bool initdone1NRelease = false, const bool initdoneSup1NMachine = false);
 
 	public:
 		bool initdoneDetail;
 		bool initdoneAPar;
 		bool initdoneAMakefile;
 		bool initdone1NRelease;
+		bool initdoneSup1NMachine;
 
 	public:
 		bool readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
@@ -95,10 +98,11 @@ namespace PnlWdbeMchRec {
 		static const Sbecore::uint SCRJREFAPAR = 3;
 		static const Sbecore::uint SCRJREFAMAKEFILE = 4;
 		static const Sbecore::uint SCRJREF1NRELEASE = 5;
-		static const Sbecore::uint BUTREGULARIZEACTIVE = 6;
+		static const Sbecore::uint SCRJREFSUP1NMACHINE = 6;
+		static const Sbecore::uint BUTREGULARIZEACTIVE = 7;
 
 	public:
-		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const std::string& scrJrefDetail = "", const std::string& scrJrefAPar = "", const std::string& scrJrefAMakefile = "", const std::string& scrJref1NRelease = "", const bool ButRegularizeActive = true);
+		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const std::string& scrJrefDetail = "", const std::string& scrJrefAPar = "", const std::string& scrJrefAMakefile = "", const std::string& scrJref1NRelease = "", const std::string& scrJrefSup1NMachine = "", const bool ButRegularizeActive = true);
 
 	public:
 		Sbecore::uint ixWdbeVExpstate;
@@ -106,6 +110,7 @@ namespace PnlWdbeMchRec {
 		std::string scrJrefAPar;
 		std::string scrJrefAMakefile;
 		std::string scrJref1NRelease;
+		std::string scrJrefSup1NMachine;
 		bool ButRegularizeActive;
 
 	public:

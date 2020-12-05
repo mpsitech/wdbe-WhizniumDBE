@@ -1,11 +1,3 @@
-/**
-  * \file PnlWdbePrcPrc1NVariable.js
-  * web client functionality for panel PnlWdbePrcPrc1NVariable
-  * \author Alexander Wirthmueller
-  * \date created: 23 Aug 2020
-  * \date modified: 23 Aug 2020
-  */
-
 // --- expand state management
 function minimize(updh) {
 	if (retrieveSi(srcdoc, "StatAppWdbePrcPrc1NVariable", "srefIxWdbeVExpstate") == "mind") return;

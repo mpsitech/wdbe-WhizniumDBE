@@ -1,10 +1,11 @@
 /**
 	* \file JobWdbeIexPrj.cpp
 	* job handler for job JobWdbeIexPrj (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifdef WDBECMBD
 	#include <Wdbecmbd.h>
@@ -68,10 +69,12 @@ void JobWdbeIexPrj::parseFromFile(
 			DbsWdbe* dbswdbe
 			, const string& _fullpath
 			, const bool _xmlNotTxt
+			, const string& _rectpath
 		) {
 	if (ixVSge == VecVSge::IDLE) {
 		fullpath = _fullpath;
 		xmlNotTxt = _xmlNotTxt;
+		rectpath = _rectpath;
 
 		changeStage(dbswdbe, VecVSge::PARSE);
 	};
@@ -211,6 +214,7 @@ uint JobWdbeIexPrj::enterSgeIdle(
 
 	fullpath = "";
 	xmlNotTxt = false;
+	rectpath = "";
 
 	lineno = 0;
 	impcnt = 0;
@@ -238,7 +242,7 @@ uint JobWdbeIexPrj::enterSgeParse(
 	nextIxVSgeFailure = VecVSge::PRSERR;
 
 	try {
-		IexWdbePrj::parseFromFile(fullpath, xmlNotTxt, imeimproject);
+		IexWdbePrj::parseFromFile(fullpath, xmlNotTxt, rectpath, imeimproject);
 
 	} catch (SbeException& e) {
 		if (e.ix == SbeException::PATHNF) e.vals["path"] = "<hidden>";
@@ -314,6 +318,12 @@ uint JobWdbeIexPrj::enterSgeImport(
 
 	ubigint own;
 	own = xchg->getRefPreset(VecWdbeVPreset::PREWDBEOWNER, jref);
+
+	vector<ubigint> refs;
+	map<string,ubigint> refsMchs; // by hsref
+
+	dbswdbe->loadRefsBySQL("SELECT ref FROM TblWdbeMMachine", false, refs);
+	for (unsigned int i = 0; i < refs.size(); i++) refsMchs[StubWdbe::getStubMchStd(dbswdbe, refs[i])] = refs[i];
 
 	time_t rawtime;
 	time(&rawtime);
@@ -424,9 +434,12 @@ uint JobWdbeIexPrj::enterSgeImport(
 					rls->ixVBasetype = VecWdbeVMReleaseBasetype::getIx(rls->srefIxVBasetype);
 					if (rls->ixVBasetype == 0) throw SbeException(SbeException::IEX_VSREF, {{"vsref",rls->srefIxVBasetype}, {"iel","srefIxVBasetype"}, {"lineno",to_string(rls->lineno)}});
 					rls->refWdbeMVersion = ver->ref;
-					//rls->refWdbeMMachine: CUSTSQL
-					dbswdbe->tblwdbemmachine->loadRefBySrf(rls->srefRefWdbeMMachine, rls->refWdbeMMachine);
-					if (rls->refWdbeMMachine == 0) throw SbeException(SbeException::IEX_TSREF, {{"tsref",rls->srefRefWdbeMMachine}, {"iel","srefRefWdbeMMachine"}, {"lineno",to_string(rls->lineno)}});
+					//rls->refWdbeMMachine: CUST
+					if (rls->hsrefRefWdbeMMachine != "") {
+						auto it = refsMchs.find(rls->hsrefRefWdbeMMachine);
+						if (it != refsMchs.end()) rls->refWdbeMMachine = it->second;
+						else throw SbeException(SbeException::IEX_TSREF, {{"tsref",rls->hsrefRefWdbeMMachine}, {"iel","hsrefRefWdbeMMachine"}, {"lineno",to_string(rls->lineno)}});
+					};
 					//rls->sref: TBL
 					//rls->srefsKOption: TBL
 					//rls->Comment: TBL
@@ -600,7 +613,7 @@ uint JobWdbeIexPrj::enterSgeCollect(
 				rls = ver->imeimrelease.nodes[ix2];
 
 				if (rls->ref != 0) {
-					rls->srefRefWdbeMMachine = StubWdbe::getStubMchStd(dbswdbe, rls->refWdbeMMachine, ixWdbeVLocale, Stub::VecVNonetype::VOID, stcch);
+					rls->hsrefRefWdbeMMachine = StubWdbe::getStubMchStd(dbswdbe, rls->refWdbeMMachine, ixWdbeVLocale, Stub::VecVNonetype::VOID, stcch);
 				};
 			};
 
@@ -697,5 +710,6 @@ void JobWdbeIexPrj::leaveSgeDone(
 		) {
 	// IP leaveSgeDone --- INSERT
 };
+
 
 

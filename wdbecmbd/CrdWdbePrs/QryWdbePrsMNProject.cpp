@@ -1,10 +1,11 @@
 /**
 	* \file QryWdbePrsMNProject.cpp
 	* job handler for job QryWdbePrsMNProject (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifdef WDBECMBD
 	#include <Wdbecmbd.h>
@@ -85,7 +86,7 @@ void QryWdbePrsMNProject::rerun(
 	dbswdbe->tblwdbeqprsmnproject->removeRstByJref(jref);
 
 	sqlstr = "SELECT COUNT(TblWdbeRMPersonMProject.ref)";
-	sqlstr += " FROM TblWdbeRMPersonMProject, TblWdbeMProject";
+	sqlstr += " FROM TblWdbeMProject, TblWdbeRMPersonMProject";
 	sqlstr += " WHERE TblWdbeRMPersonMProject.refWdbeMProject = TblWdbeMProject.ref";
 	sqlstr += " AND TblWdbeRMPersonMProject.refWdbeMPerson = " + to_string(preRefPrs) + "";
 	rerun_filtSQL(sqlstr, preX1, false);
@@ -101,7 +102,7 @@ void QryWdbePrsMNProject::rerun(
 
 	sqlstr = "INSERT INTO TblWdbeQPrsMNProject(jref, jnum, mref, ref, x1Startd, x1Stopd, srefKFunction)";
 	sqlstr += " SELECT " + to_string(jref) + ", 0, TblWdbeMProject.ref, TblWdbeRMPersonMProject.ref, TblWdbeRMPersonMProject.x1Startd, TblWdbeRMPersonMProject.x1Stopd, TblWdbeRMPersonMProject.srefKFunction";
-	sqlstr += " FROM TblWdbeRMPersonMProject, TblWdbeMProject";
+	sqlstr += " FROM TblWdbeMProject, TblWdbeRMPersonMProject";
 	sqlstr += " WHERE TblWdbeRMPersonMProject.refWdbeMProject = TblWdbeMProject.ref";
 	sqlstr += " AND TblWdbeRMPersonMProject.refWdbeMPerson = " + to_string(preRefPrs) + "";
 	rerun_filtSQL(sqlstr, preX1, false);
@@ -319,19 +320,11 @@ void QryWdbePrsMNProject::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
-		call->abort = handleCallWdbeStubChgFromSelf(dbswdbe);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEPRSRPRJMOD_PRSEQ) {
+	if (call->ixVCall == VecWdbeVCall::CALLWDBEPRSRPRJMOD_PRSEQ) {
 		call->abort = handleCallWdbePrsRprjMod_prsEq(dbswdbe, call->jref);
+	} else if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
+		call->abort = handleCallWdbeStubChgFromSelf(dbswdbe);
 	};
-};
-
-bool QryWdbePrsMNProject::handleCallWdbeStubChgFromSelf(
-			DbsWdbe* dbswdbe
-		) {
-	bool retval = false;
-	// IP handleCallWdbeStubChgFromSelf --- INSERT
-	return retval;
 };
 
 bool QryWdbePrsMNProject::handleCallWdbePrsRprjMod_prsEq(
@@ -347,4 +340,14 @@ bool QryWdbePrsMNProject::handleCallWdbePrsRprjMod_prsEq(
 
 	return retval;
 };
+
+bool QryWdbePrsMNProject::handleCallWdbeStubChgFromSelf(
+			DbsWdbe* dbswdbe
+		) {
+	bool retval = false;
+	// IP handleCallWdbeStubChgFromSelf --- INSERT
+	return retval;
+};
+
+
 

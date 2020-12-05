@@ -1,10 +1,11 @@
 /**
 	* \file PnlWdbeFamRec.cpp
 	* job handler for job PnlWdbeFamRec (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifdef WDBECMBD
 	#include <Wdbecmbd.h>
@@ -37,8 +38,8 @@ PnlWdbeFamRec::PnlWdbeFamRec(
 		{
 	jref = xchg->addJob(dbswdbe, this, jrefSup);
 
-	pnldetail = NULL;
 	pnl1nunit = NULL;
+	pnldetail = NULL;
 
 	// IP constructor.cust1 --- INSERT
 
@@ -77,7 +78,11 @@ DpchEngWdbe* PnlWdbeFamRec::getNewDpchEng(
 void PnlWdbeFamRec::refresh(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
+			, const bool unmute
 		) {
+	if (muteRefresh && !unmute) return;
+	muteRefresh = true;
+
 	ContInf oldContinf(continf);
 	StatShr oldStatshr(statshr);
 
@@ -105,6 +110,7 @@ void PnlWdbeFamRec::refresh(
 	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
 	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
 
+	muteRefresh = false;
 };
 
 void PnlWdbeFamRec::updatePreset(
@@ -249,4 +255,6 @@ bool PnlWdbeFamRec::handleCallWdbeFamUpd_refEq(
 	// IP handleCallWdbeFamUpd_refEq --- INSERT
 	return retval;
 };
+
+
 

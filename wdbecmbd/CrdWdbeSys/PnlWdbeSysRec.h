@@ -1,10 +1,11 @@
 /**
 	* \file PnlWdbeSysRec.h
 	* job handler for job PnlWdbeSysRec (declarations)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifndef PNLWDBESYSREC_H
 #define PNLWDBESYSREC_H
@@ -13,9 +14,9 @@
 
 // IP include.cust --- INSERT
 
-#include "PnlWdbeSysDetail.h"
-#include "PnlWdbeSysSys1NTarget.h"
 #include "PnlWdbeSysHk1NVector.h"
+#include "PnlWdbeSysSys1NTarget.h"
+#include "PnlWdbeSysDetail.h"
 
 #define VecVWdbeSysRecDo PnlWdbeSysRec::VecVDo
 
@@ -170,9 +171,9 @@ public:
 	ContInf continf;
 	StatShr statshr;
 
-	PnlWdbeSysDetail* pnldetail;
-	PnlWdbeSysSys1NTarget* pnlsys1ntarget;
 	PnlWdbeSysHk1NVector* pnlhk1nvector;
+	PnlWdbeSysSys1NTarget* pnlsys1ntarget;
+	PnlWdbeSysDetail* pnldetail;
 
 	WdbeMSystem recSys;
 
@@ -184,7 +185,7 @@ public:
 public:
 	DpchEngWdbe* getNewDpchEng(std::set<Sbecore::uint> items);
 
-	void refresh(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems);
+	void refresh(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems, const bool unmute = false);
 
 	void updatePreset(DbsWdbe* dbswdbe, const Sbecore::uint ixWdbeVPreset, const Sbecore::ubigint jrefTrig, const bool notif = false);
 	void minimize(DbsWdbe* dbswdbe, const bool notif = false, DpchEngWdbe** dpcheng = NULL);
@@ -206,12 +207,14 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeSys_unt_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
-	bool handleCallWdbeSys_untEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
-	bool handleCallWdbeSys_verEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
 	bool handleCallWdbeSysUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbeSys_verEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeSys_untEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeSys_unt_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
 
 };
 
 #endif
+
+
 

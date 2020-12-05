@@ -1,10 +1,11 @@
 /**
 	* \file WdbecmbdAppsrv.cpp
 	* application server for Wdbe combined daemon (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
-	*/
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
+  */
+// IP header --- ABOVE
 
 #include "Wdbecmbd.h"
 
@@ -769,12 +770,6 @@ uint WdbecmbdAppsrv::readDpchApp(
 		} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHAPPDLGWDBEUTLEXTRIPDO) {
 			req->dpchapp = new DlgWdbeUtlExtrip::DpchAppDo();
 			((DlgWdbeUtlExtrip::DpchAppDo*) (req->dpchapp))->readXML(docctx, "/", true);
-		} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHAPPDLGWDBEUTLIEXCONVDATA) {
-			req->dpchapp = new DlgWdbeUtlIexconv::DpchAppData();
-			((DlgWdbeUtlIexconv::DpchAppData*) (req->dpchapp))->readXML(docctx, "/", true);
-		} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHAPPDLGWDBEUTLIEXCONVDO) {
-			req->dpchapp = new DlgWdbeUtlIexconv::DpchAppDo();
-			((DlgWdbeUtlIexconv::DpchAppDo*) (req->dpchapp))->readXML(docctx, "/", true);
 		} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHAPPDLGWDBEUTLMRGIPDATA) {
 			req->dpchapp = new DlgWdbeUtlMrgip::DpchAppData();
 			((DlgWdbeUtlMrgip::DpchAppData*) (req->dpchapp))->readXML(docctx, "/", true);
@@ -1114,6 +1109,12 @@ uint WdbecmbdAppsrv::readDpchApp(
 		} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHAPPWDBEMCHRECDO) {
 			req->dpchapp = new PnlWdbeMchRec::DpchAppDo();
 			((PnlWdbeMchRec::DpchAppDo*) (req->dpchapp))->readXML(docctx, "/", true);
+		} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHAPPWDBEMCHSUP1NMACHINEDATA) {
+			req->dpchapp = new PnlWdbeMchSup1NMachine::DpchAppData();
+			((PnlWdbeMchSup1NMachine::DpchAppData*) (req->dpchapp))->readXML(docctx, "/", true);
+		} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHAPPWDBEMCHSUP1NMACHINEDO) {
+			req->dpchapp = new PnlWdbeMchSup1NMachine::DpchAppDo();
+			((PnlWdbeMchSup1NMachine::DpchAppDo*) (req->dpchapp))->readXML(docctx, "/", true);
 		} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHAPPWDBEMOD1NPERIPHERALDATA) {
 			req->dpchapp = new PnlWdbeMod1NPeripheral::DpchAppData();
 			((PnlWdbeMod1NPeripheral::DpchAppData*) (req->dpchapp))->readXML(docctx, "/", true);
@@ -1949,4 +1950,6 @@ void WdbecmbdAppsrv::writeDpchEng(
 
 	xmlBufferFree(buf);
 };
+
+
 

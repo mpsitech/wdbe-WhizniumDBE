@@ -1,10 +1,11 @@
 /**
 	* \file QryWdbeVecList_blks.cpp
 	* job handler for job QryWdbeVecList (implementation of blocks)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 using namespace std;
 using namespace Sbecore;
@@ -19,10 +20,10 @@ uint QryWdbeVecList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "srf") return SRF;
-	if (s == "typ") return TYP;
-	if (s == "hkt") return HKT;
 	if (s == "hku") return HKU;
+	if (s == "hkt") return HKT;
+	if (s == "typ") return TYP;
+	if (s == "srf") return SRF;
 
 	return(0);
 };
@@ -30,10 +31,10 @@ uint QryWdbeVecList::VecVOrd::getIx(
 string QryWdbeVecList::VecVOrd::getSref(
 			const uint ix
 		) {
-	if (ix == SRF) return("srf");
-	if (ix == TYP) return("typ");
-	if (ix == HKT) return("hkt");
 	if (ix == HKU) return("hku");
+	if (ix == HKT) return("hkt");
+	if (ix == TYP) return("typ");
+	if (ix == SRF) return("srf");
 
 	return("");
 };
@@ -220,4 +221,6 @@ set<uint> QryWdbeVecList::StgIac::diff(
 
 	return(diffitems);
 };
+
+
 

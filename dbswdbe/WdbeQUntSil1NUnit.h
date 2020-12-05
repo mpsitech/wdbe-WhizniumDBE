@@ -1,10 +1,11 @@
 /**
 	* \file WdbeQUntSil1NUnit.h
 	* Dbs and XML wrapper for table TblWdbeQUntSil1NUnit (declarations)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
-	*/
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 5 Dec 2020
+  */
+// IP header --- ABOVE
 
 #ifndef WDBEQUNTSIL1NUNIT_H
 #define WDBEQUNTSIL1NUNIT_H

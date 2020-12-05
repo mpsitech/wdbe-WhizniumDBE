@@ -1,10 +1,11 @@
 /**
 	* \file JobWdbeIexDcd.h
 	* job handler for job JobWdbeIexDcd (declarations)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifndef JOBWDBEIEXDCD_H
 #define JOBWDBEIEXDCD_H
@@ -53,6 +54,7 @@ public:
 
 	std::string fullpath;
 	bool xmlNotTxt;
+	std::string rectpath;
 
 	Sbecore::uint lineno;
 	Sbecore::uint impcnt;
@@ -73,7 +75,7 @@ public:
 public:
 	void reset(DbsWdbe* dbswdbe);
 
-	void parseFromFile(DbsWdbe* dbswdbe, const std::string& _fullpath, const bool _xmlNotTxt);
+	void parseFromFile(DbsWdbe* dbswdbe, const std::string& _fullpath, const bool _xmlNotTxt, const std::string& _rectpath = "");
 	void import(DbsWdbe* dbswdbe);
 	void reverse(DbsWdbe* dbswdbe);
 	void collect(DbsWdbe* dbswdbe, const std::map<Sbecore::uint,Sbecore::uint>& _icsWdbeVIop = IexWdbeDcd::icsWdbeVIopInsAll());
@@ -119,4 +121,6 @@ private:
 };
 
 #endif
+
+
 

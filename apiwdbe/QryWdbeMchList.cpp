@@ -1,10 +1,11 @@
 /**
 	* \file QryWdbeMchList.cpp
 	* API code for job QryWdbeMchList (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 5 Dec 2020
 	*/
+// IP header --- ABOVE
 
 #include "QryWdbeMchList.h"
 
@@ -21,8 +22,8 @@ uint QryWdbeMchList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
+	if (s == "sup") return SUP;
 	if (s == "srf") return SRF;
-	if (s == "pla") return PLA;
 
 	return(0);
 };
@@ -30,8 +31,8 @@ uint QryWdbeMchList::VecVOrd::getIx(
 string QryWdbeMchList::VecVOrd::getSref(
 			const uint ix
 		) {
+	if (ix == SUP) return("sup");
 	if (ix == SRF) return("srf");
-	if (ix == PLA) return("pla");
 
 	return("");
 };

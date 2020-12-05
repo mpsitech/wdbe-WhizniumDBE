@@ -1,11 +1,3 @@
-/**
-  * \file PnlWdbeUntRef1NError.js
-  * web client functionality for panel PnlWdbeUntRef1NError
-  * \author Alexander Wirthmueller
-  * \date created: 23 Aug 2020
-  * \date modified: 23 Aug 2020
-  */
-
 // --- expand state management
 function minimize(updh) {
 	if (retrieveSi(srcdoc, "StatAppWdbeUntRef1NError", "srefIxWdbeVExpstate") == "mind") return;

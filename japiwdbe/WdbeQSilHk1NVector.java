@@ -1,10 +1,11 @@
 /**
-  * \file WdbeQSilHk1NVector.h
-  * Java API code for record of table TblWdbeQSilHk1NVector
-  * \author Alexander Wirthmueller
-  * \date created: 23 Aug 2020
-  * \date modified: 23 Aug 2020
+	* \file WdbeQSilHk1NVector.h
+	* Java API code for record of table TblWdbeQSilHk1NVector
+	* \copyright (C) 2018-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 5 Dec 2020
   */
+// IP header --- ABOVE
 
 package apiwdbe;
 

@@ -1,10 +1,11 @@
 /**
 	* \file SqkWdbePlhfpga.cpp
 	* squawk generation for operation pack WdbePlhfpga (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
-	*/
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
+  */
+// IP header --- ABOVE
 
 #include "SqkWdbePlhfpga.h"
 
@@ -47,4 +48,6 @@ string SqkWdbePlhfpga::getSquawkFwdctr(
 	// example: "fill type-specific placeholders for module 'dcx3-qcdif (fwdctr_v1_0 forwarding controller)'"
 	return(""); // IP getSquawkFwdctr --- LINE
 };
+
+
 

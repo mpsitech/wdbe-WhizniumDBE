@@ -1,10 +1,11 @@
 /**
 	* \file WdbeQUntHk1NVector.h
 	* Dbs and XML wrapper for table TblWdbeQUntHk1NVector (declarations)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
-	*/
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 5 Dec 2020
+  */
+// IP header --- ABOVE
 
 #ifndef WDBEQUNTHK1NVECTOR_H
 #define WDBEQUNTHK1NVECTOR_H

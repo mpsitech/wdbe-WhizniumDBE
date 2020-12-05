@@ -1,11 +1,3 @@
-/**
-  * \file PnlWdbeVecRec.js
-  * web client functionality for panel PnlWdbeVecRec
-  * \author Alexander Wirthmueller
-  * \date created: 23 Aug 2020
-  * \date modified: 23 Aug 2020
-  */
-
 function updateScrJrefs() {
 	scrJrefDetail = retrieveSi(srcdoc, "StatShrWdbeVecRec", "scrJrefDetail");
 	scrJrefVec1NVectoritem = retrieveSi(srcdoc, "StatShrWdbeVecRec", "scrJrefVec1NVectoritem");

@@ -1,10 +1,11 @@
 /**
 	* \file JobWdbeIexDcd.cpp
 	* job handler for job JobWdbeIexDcd (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifdef WDBECMBD
 	#include <Wdbecmbd.h>
@@ -68,10 +69,12 @@ void JobWdbeIexDcd::parseFromFile(
 			DbsWdbe* dbswdbe
 			, const string& _fullpath
 			, const bool _xmlNotTxt
+			, const string& _rectpath
 		) {
 	if (ixVSge == VecVSge::IDLE) {
 		fullpath = _fullpath;
 		xmlNotTxt = _xmlNotTxt;
+		rectpath = _rectpath;
 
 		changeStage(dbswdbe, VecVSge::PARSE);
 	};
@@ -211,6 +214,7 @@ uint JobWdbeIexDcd::enterSgeIdle(
 
 	fullpath = "";
 	xmlNotTxt = false;
+	rectpath = "";
 
 	lineno = 0;
 	impcnt = 0;
@@ -240,7 +244,7 @@ uint JobWdbeIexDcd::enterSgeParse(
 	nextIxVSgeFailure = VecVSge::PRSERR;
 
 	try {
-		IexWdbeDcd::parseFromFile(fullpath, xmlNotTxt, imeiamcoreversionip, imeiamcoreversionplh, imeimmodule);
+		IexWdbeDcd::parseFromFile(fullpath, xmlNotTxt, rectpath, imeiamcoreversionip, imeiamcoreversionplh, imeimmodule);
 
 	} catch (SbeException& e) {
 		if (e.ix == SbeException::PATHNF) e.vals["path"] = "<hidden>";
@@ -1356,5 +1360,6 @@ void JobWdbeIexDcd::leaveSgeDone(
 		) {
 	// IP leaveSgeDone --- INSERT
 };
+
 
 

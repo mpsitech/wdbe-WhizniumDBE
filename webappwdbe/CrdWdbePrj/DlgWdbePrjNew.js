@@ -1,11 +1,3 @@
-/**
-  * \file DlgWdbePrjNew.js
-  * web client functionality for dialog DlgWdbePrjNew
-  * \author Alexander Wirthmueller
-  * \date created: 23 Aug 2020
-  * \date modified: 23 Aug 2020
-  */
-
 // IP cust --- INSERT
 
 // --- view initialization and refresh

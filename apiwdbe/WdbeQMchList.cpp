@@ -1,10 +1,11 @@
 /**
 	* \file WdbeQMchList.cpp
 	* API code for table TblWdbeQMchList (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
-	*/
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 5 Dec 2020
+  */
+// IP header --- ABOVE
 
 #include "WdbeQMchList.h"
 
@@ -19,13 +20,11 @@ using namespace Xmlio;
 WdbeQMchList::WdbeQMchList(
 			const uint jnum
 			, const string sref
-			, const string srefKPlatform
-			, const string titSrefKPlatform
+			, const string stubSupRefWdbeMMachine
 		) {
 	this->jnum = jnum;
 	this->sref = sref;
-	this->srefKPlatform = srefKPlatform;
-	this->titSrefKPlatform = titSrefKPlatform;
+	this->stubSupRefWdbeMMachine = stubSupRefWdbeMMachine;
 };
 
 bool WdbeQMchList::readXML(
@@ -42,8 +41,7 @@ bool WdbeQMchList::readXML(
 
 	if (basefound) {
 		extractStringUclc(docctx, basexpath, "sref", "srf", sref);
-		extractStringUclc(docctx, basexpath, "srefKPlatform", "pla", srefKPlatform);
-		extractStringUclc(docctx, basexpath, "titSrefKPlatform", "pla2", titSrefKPlatform);
+		extractStringUclc(docctx, basexpath, "stubSupRefWdbeMMachine", "sup", stubSupRefWdbeMMachine);
 	};
 
 	return basefound;

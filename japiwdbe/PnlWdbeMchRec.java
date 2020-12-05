@@ -1,10 +1,11 @@
 /**
   * \file PnlWdbeMchRec.java
   * Java API code for job PnlWdbeMchRec
-  * \author Alexander Wirthmueller
-  * \date created: 23 Aug 2020
-  * \date modified: 23 Aug 2020
-  */
+	* \copyright (C) 2018-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 5 Dec 2020
+	*/
+// IP header --- ABOVE
 
 package apiwdbe;
 
@@ -116,25 +117,29 @@ public class PnlWdbeMchRec {
 		public static final int INITDONEAPAR = 2;
 		public static final int INITDONEAMAKEFILE = 3;
 		public static final int INITDONE1NRELEASE = 4;
+		public static final int INITDONESUP1NMACHINE = 5;
 
 		public StatApp(
 					boolean initdoneDetail
 					, boolean initdoneAPar
 					, boolean initdoneAMakefile
 					, boolean initdone1NRelease
+					, boolean initdoneSup1NMachine
 				) {
 			this.initdoneDetail = initdoneDetail;
 			this.initdoneAPar = initdoneAPar;
 			this.initdoneAMakefile = initdoneAMakefile;
 			this.initdone1NRelease = initdone1NRelease;
+			this.initdoneSup1NMachine = initdoneSup1NMachine;
 
-			mask = new HashSet<Integer>(Arrays.asList(INITDONEDETAIL, INITDONEAPAR, INITDONEAMAKEFILE, INITDONE1NRELEASE));
+			mask = new HashSet<Integer>(Arrays.asList(INITDONEDETAIL, INITDONEAPAR, INITDONEAMAKEFILE, INITDONE1NRELEASE, INITDONESUP1NMACHINE));
 		};
 
 		public boolean initdoneDetail;
 		public boolean initdoneAPar;
 		public boolean initdoneAMakefile;
 		public boolean initdone1NRelease;
+		public boolean initdoneSup1NMachine;
 
 		public boolean readXML(
 					Document doc
@@ -153,6 +158,7 @@ public class PnlWdbeMchRec {
 				initdoneAPar = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneAPar", mask, INITDONEAPAR);
 				initdoneAMakefile = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneAMakefile", mask, INITDONEAMAKEFILE);
 				initdone1NRelease = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdone1NRelease", mask, INITDONE1NRELEASE);
+				initdoneSup1NMachine = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneSup1NMachine", mask, INITDONESUP1NMACHINE);
 
 				return true;
 			};
@@ -169,6 +175,7 @@ public class PnlWdbeMchRec {
 			if (initdoneAPar == comp.initdoneAPar) items.add(INITDONEAPAR);
 			if (initdoneAMakefile == comp.initdoneAMakefile) items.add(INITDONEAMAKEFILE);
 			if (initdone1NRelease == comp.initdone1NRelease) items.add(INITDONE1NRELEASE);
+			if (initdoneSup1NMachine == comp.initdoneSup1NMachine) items.add(INITDONESUP1NMACHINE);
 
 			return(items);
 		};
@@ -181,7 +188,7 @@ public class PnlWdbeMchRec {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(INITDONEDETAIL, INITDONEAPAR, INITDONEAMAKEFILE, INITDONE1NRELEASE));
+			diffitems = new HashSet<Integer>(Arrays.asList(INITDONEDETAIL, INITDONEAPAR, INITDONEAMAKEFILE, INITDONE1NRELEASE, INITDONESUP1NMACHINE));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);
@@ -199,7 +206,8 @@ public class PnlWdbeMchRec {
 		public static final int SCRJREFAPAR = 3;
 		public static final int SCRJREFAMAKEFILE = 4;
 		public static final int SCRJREF1NRELEASE = 5;
-		public static final int BUTREGULARIZEACTIVE = 6;
+		public static final int SCRJREFSUP1NMACHINE = 6;
+		public static final int BUTREGULARIZEACTIVE = 7;
 
 		public StatShr(
 					int ixWdbeVExpstate
@@ -207,6 +215,7 @@ public class PnlWdbeMchRec {
 					, String scrJrefAPar
 					, String scrJrefAMakefile
 					, String scrJref1NRelease
+					, String scrJrefSup1NMachine
 					, boolean ButRegularizeActive
 				) {
 			this.ixWdbeVExpstate = ixWdbeVExpstate;
@@ -214,9 +223,10 @@ public class PnlWdbeMchRec {
 			this.scrJrefAPar = scrJrefAPar;
 			this.scrJrefAMakefile = scrJrefAMakefile;
 			this.scrJref1NRelease = scrJref1NRelease;
+			this.scrJrefSup1NMachine = scrJrefSup1NMachine;
 			this.ButRegularizeActive = ButRegularizeActive;
 
-			mask = new HashSet<Integer>(Arrays.asList(IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFAPAR, SCRJREFAMAKEFILE, SCRJREF1NRELEASE, BUTREGULARIZEACTIVE));
+			mask = new HashSet<Integer>(Arrays.asList(IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFAPAR, SCRJREFAMAKEFILE, SCRJREF1NRELEASE, SCRJREFSUP1NMACHINE, BUTREGULARIZEACTIVE));
 		};
 
 		public int ixWdbeVExpstate;
@@ -224,6 +234,7 @@ public class PnlWdbeMchRec {
 		public String scrJrefAPar;
 		public String scrJrefAMakefile;
 		public String scrJref1NRelease;
+		public String scrJrefSup1NMachine;
 		public boolean ButRegularizeActive;
 
 		public boolean readXML(
@@ -246,6 +257,7 @@ public class PnlWdbeMchRec {
 				scrJrefAPar = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefAPar", mask, SCRJREFAPAR);
 				scrJrefAMakefile = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefAMakefile", mask, SCRJREFAMAKEFILE);
 				scrJref1NRelease = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJref1NRelease", mask, SCRJREF1NRELEASE);
+				scrJrefSup1NMachine = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefSup1NMachine", mask, SCRJREFSUP1NMACHINE);
 				ButRegularizeActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButRegularizeActive", mask, BUTREGULARIZEACTIVE);
 
 				return true;
@@ -264,6 +276,7 @@ public class PnlWdbeMchRec {
 			if (scrJrefAPar.equals(comp.scrJrefAPar)) items.add(SCRJREFAPAR);
 			if (scrJrefAMakefile.equals(comp.scrJrefAMakefile)) items.add(SCRJREFAMAKEFILE);
 			if (scrJref1NRelease.equals(comp.scrJref1NRelease)) items.add(SCRJREF1NRELEASE);
+			if (scrJrefSup1NMachine.equals(comp.scrJrefSup1NMachine)) items.add(SCRJREFSUP1NMACHINE);
 			if (ButRegularizeActive == comp.ButRegularizeActive) items.add(BUTREGULARIZEACTIVE);
 
 			return(items);
@@ -277,7 +290,7 @@ public class PnlWdbeMchRec {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFAPAR, SCRJREFAMAKEFILE, SCRJREF1NRELEASE, BUTREGULARIZEACTIVE));
+			diffitems = new HashSet<Integer>(Arrays.asList(IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFAPAR, SCRJREFAMAKEFILE, SCRJREF1NRELEASE, SCRJREFSUP1NMACHINE, BUTREGULARIZEACTIVE));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);
@@ -419,8 +432,8 @@ public class PnlWdbeMchRec {
 			super(VecWdbeVDpch.DPCHENGWDBEMCHRECDATA);
 
 			continf = new ContInf("");
-			statapp = new StatApp(false, false, false, false);
-			statshr = new StatShr(0, "", "", "", "", false);
+			statapp = new StatApp(false, false, false, false, false);
+			statshr = new StatShr(0, "", "", "", "", "", false);
 			tag = new Tag("");
 		};
 
@@ -460,8 +473,8 @@ public class PnlWdbeMchRec {
 			} else {
 				scrJref = "";
 				continf = new ContInf("");
-				statapp = new StatApp(false, false, false, false);
-				statshr = new StatShr(0, "", "", "", "", false);
+				statapp = new StatApp(false, false, false, false, false);
+				statshr = new StatShr(0, "", "", "", "", "", false);
 				tag = new Tag("");
 			};
 		};

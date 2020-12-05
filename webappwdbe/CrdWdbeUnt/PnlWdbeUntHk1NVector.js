@@ -1,11 +1,3 @@
-/**
-  * \file PnlWdbeUntHk1NVector.js
-  * web client functionality for panel PnlWdbeUntHk1NVector
-  * \author Alexander Wirthmueller
-  * \date created: 23 Aug 2020
-  * \date modified: 23 Aug 2020
-  */
-
 // --- expand state management
 function minimize(updh) {
 	if (retrieveSi(srcdoc, "StatAppWdbeUntHk1NVector", "srefIxWdbeVExpstate") == "mind") return;

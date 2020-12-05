@@ -1,10 +1,11 @@
 /**
 	* \file DlgWdbeVerBscdd.h
 	* job handler for job DlgWdbeVerBscdd (declarations)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifndef DLGWDBEVERBSCDD_H
 #define DLGWDBEVERBSCDD_H
@@ -487,13 +488,13 @@ public:
 		void writeXML(const Sbecore::uint ixWdbeVLocale, xmlTextWriter* wr);
 	};
 
-	bool evalIfiUldActive(DbsWdbe* dbswdbe);
-	bool evalImpButRunActive(DbsWdbe* dbswdbe);
-	bool evalImpButStoActive(DbsWdbe* dbswdbe);
+	bool evalButDneActive(DbsWdbe* dbswdbe);
+	bool evalLfiDldActive(DbsWdbe* dbswdbe);
 	bool evalPprButRunActive(DbsWdbe* dbswdbe);
 	bool evalPprButStoActive(DbsWdbe* dbswdbe);
-	bool evalLfiDldActive(DbsWdbe* dbswdbe);
-	bool evalButDneActive(DbsWdbe* dbswdbe);
+	bool evalImpButRunActive(DbsWdbe* dbswdbe);
+	bool evalImpButStoActive(DbsWdbe* dbswdbe);
+	bool evalIfiUldActive(DbsWdbe* dbswdbe);
 
 public:
 	DlgWdbeVerBscdd(XchgWdbe* xchg, DbsWdbe* dbswdbe, const Sbecore::ubigint jrefSup, const Sbecore::uint ixWdbeVLocale);
@@ -521,6 +522,7 @@ public:
 
 	// IP vars.cust --- IBEGIN
 	std::string infilename;
+	std::string rectpath;
 
 	bool ifitxt;
 	bool ifixml;
@@ -546,7 +548,7 @@ public:
 	void refreshPpr(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems);
 	void refreshLfi(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems);
 
-	void refresh(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems);
+	void refresh(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems, const bool unmute = false);
 
 public:
 
@@ -571,12 +573,12 @@ private:
 
 	std::string handleDownloadInSgeDone(DbsWdbe* dbswdbe);
 
+	void handleTimerWithSrefMonInSgePostprc2(DbsWdbe* dbswdbe);
+	void handleTimerWithSrefMonInSgePostprc3(DbsWdbe* dbswdbe);
 	void handleTimerInSgePrsidle(DbsWdbe* dbswdbe, const std::string& sref);
 	void handleTimerInSgeImpidle(DbsWdbe* dbswdbe, const std::string& sref);
 	void handleTimerWithSrefMonInSgeImport(DbsWdbe* dbswdbe);
 	void handleTimerWithSrefMonInSgePostprc1(DbsWdbe* dbswdbe);
-	void handleTimerWithSrefMonInSgePostprc2(DbsWdbe* dbswdbe);
-	void handleTimerWithSrefMonInSgePostprc3(DbsWdbe* dbswdbe);
 
 private:
 	void changeStage(DbsWdbe* dbswdbe, Sbecore::uint _ixVSge, DpchEngWdbe** dpcheng = NULL);
@@ -615,5 +617,6 @@ private:
 };
 
 #endif
+
 
 

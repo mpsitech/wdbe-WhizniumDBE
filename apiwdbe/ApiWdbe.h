@@ -1,18 +1,19 @@
 /**
 	* \file ApiWdbe.h
 	* Wdbe API library global functionality (declarations)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
-	*/
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 5 Dec 2020
+  */
+// IP header --- ABOVE
 
 #ifndef APIWDBE_H
 #define APIWDBE_H
 
-#define WDBE_VERSION "1.0.3"
+#define WDBE_VERSION "1.1.0"
 #define WDBE_VERSION_MAJOR 1
-#define WDBE_VERSION_MINOR 0
-#define WDBE_VERSION_SUB 3
+#define WDBE_VERSION_MINOR 1
+#define WDBE_VERSION_SUB 0
 
 #include "ApiWdbe_blks.h"
 
@@ -45,6 +46,7 @@
 #include "WdbeQMchAMakefile.h"
 #include "WdbeQMchAPar.h"
 #include "WdbeQMchList.h"
+#include "WdbeQMchSup1NMachine.h"
 #include "WdbeQMod1NPeripheral.h"
 #include "WdbeQMod1NProcess.h"
 #include "WdbeQModAPar.h"
@@ -182,7 +184,6 @@
 #include "DlgWdbeRlsWrite.h"
 #include "DlgWdbeUsrMngkeypair.h"
 #include "DlgWdbeUtlExtrip.h"
-#include "DlgWdbeUtlIexconv.h"
 #include "DlgWdbeUtlMrgip.h"
 #include "DlgWdbeVerBscdd.h"
 #include "DlgWdbeVerDetdd.h"
@@ -249,6 +250,7 @@
 #include "PnlWdbeMchHeadbar.h"
 #include "PnlWdbeMchList.h"
 #include "PnlWdbeMchRec.h"
+#include "PnlWdbeMchSup1NMachine.h"
 #include "PnlWdbeMod1NPeripheral.h"
 #include "PnlWdbeMod1NProcess.h"
 #include "PnlWdbeModAPar.h"
@@ -433,6 +435,7 @@
 #include "QryWdbeMchAMakefile.h"
 #include "QryWdbeMchAPar.h"
 #include "QryWdbeMchList.h"
+#include "QryWdbeMchSup1NMachine.h"
 #include "QryWdbeMod1NPeripheral.h"
 #include "QryWdbeMod1NProcess.h"
 #include "QryWdbeModAPar.h"

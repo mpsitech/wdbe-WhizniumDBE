@@ -1,10 +1,11 @@
 /**
   * \file QryWdbePrsList.java
   * Java API code for job QryWdbePrsList
-  * \author Alexander Wirthmueller
-  * \date created: 23 Aug 2020
-  * \date modified: 23 Aug 2020
-  */
+	* \copyright (C) 2018-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 5 Dec 2020
+	*/
+// IP header --- ABOVE
 
 package apiwdbe;
 
@@ -18,18 +19,18 @@ public class QryWdbePrsList {
 		*/
 	public static class VecVOrd {
 
-		public static final int GRP = 1;
+		public static final int LNM = 1;
 		public static final int OWN = 2;
-		public static final int LNM = 3;
+		public static final int GRP = 3;
 
 		public static int getIx(
 					String sref
 				) {
 			String s = sref.toLowerCase();
 
-			if (s.equals("grp")) return GRP;
-			if (s.equals("own")) return OWN;
 			if (s.equals("lnm")) return LNM;
+			if (s.equals("own")) return OWN;
+			if (s.equals("grp")) return GRP;
 
 			return 0;
 		};
@@ -37,9 +38,9 @@ public class QryWdbePrsList {
 		public static String getSref(
 					int ix
 				) {
-			if (ix == GRP) return("grp");
-			if (ix == OWN) return("own");
 			if (ix == LNM) return("lnm");
+			if (ix == OWN) return("own");
+			if (ix == GRP) return("grp");
 
 			return "";
 		};

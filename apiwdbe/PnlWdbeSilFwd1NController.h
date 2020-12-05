@@ -1,10 +1,11 @@
 /**
 	* \file PnlWdbeSilFwd1NController.h
 	* API code for job PnlWdbeSilFwd1NController (declarations)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 5 Dec 2020
 	*/
+// IP header --- ABOVE
 
 #ifndef PNLWDBESILFWD1NCONTROLLER_H
 #define PNLWDBESILFWD1NCONTROLLER_H

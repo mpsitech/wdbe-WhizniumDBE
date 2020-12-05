@@ -1,11 +1,3 @@
-/**
-  * \file PnlWdbeMod1NProcess.js
-  * web client functionality for panel PnlWdbeMod1NProcess
-  * \author Alexander Wirthmueller
-  * \date created: 23 Aug 2020
-  * \date modified: 23 Aug 2020
-  */
-
 // --- expand state management
 function minimize(updh) {
 	if (retrieveSi(srcdoc, "StatAppWdbeMod1NProcess", "srefIxWdbeVExpstate") == "mind") return;

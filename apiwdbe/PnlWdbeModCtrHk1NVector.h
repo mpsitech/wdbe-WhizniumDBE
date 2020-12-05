@@ -1,10 +1,11 @@
 /**
 	* \file PnlWdbeModCtrHk1NVector.h
 	* API code for job PnlWdbeModCtrHk1NVector (declarations)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 5 Dec 2020
 	*/
+// IP header --- ABOVE
 
 #ifndef PNLWDBEMODCTRHK1NVECTOR_H
 #define PNLWDBEMODCTRHK1NVECTOR_H

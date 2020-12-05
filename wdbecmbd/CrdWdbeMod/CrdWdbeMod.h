@@ -1,10 +1,11 @@
 /**
 	* \file CrdWdbeMod.h
 	* job handler for job CrdWdbeMod (declarations)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifndef CRDWDBEMOD_H
 #define CRDWDBEMOD_H
@@ -13,9 +14,9 @@
 
 // IP include.cust --- INSERT
 
-#include "PnlWdbeModRec.h"
-#include "PnlWdbeModHeadbar.h"
 #include "PnlWdbeModList.h"
+#include "PnlWdbeModHeadbar.h"
+#include "PnlWdbeModRec.h"
 
 #define VecVWdbeModDo CrdWdbeMod::VecVDo
 #define VecVWdbeModSge CrdWdbeMod::VecVSge
@@ -189,9 +190,9 @@ public:
 	Sbecore::Xmlio::Feed feedFMcbAlert;
 	Sbecore::Xmlio::Feed feedFSge;
 
-	PnlWdbeModRec* pnlrec;
-	PnlWdbeModHeadbar* pnlheadbar;
 	PnlWdbeModList* pnllist;
+	PnlWdbeModHeadbar* pnlheadbar;
+	PnlWdbeModRec* pnlrec;
 
 	// IP vars.cust --- INSERT
 
@@ -200,7 +201,7 @@ public:
 
 public:
 	DpchEngWdbe* getNewDpchEng(std::set<Sbecore::uint> items);
-	void refresh(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems);
+	void refresh(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems, const bool unmute = false);
 	void changeRef(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint ref, const bool notif = false);
 	void updatePreset(DbsWdbe* dbswdbe, const Sbecore::uint ixWdbeVPreset, const Sbecore::ubigint jrefTrig, const bool notif = false);
 
@@ -221,9 +222,9 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeDlgClose(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
-	bool handleCallWdbeStatChg(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 	bool handleCallWdbeRefPreSet(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, const Sbecore::ubigint refInv);
+	bool handleCallWdbeStatChg(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbeDlgClose(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 
 private:
 	void changeStage(DbsWdbe* dbswdbe, Sbecore::uint _ixVSge, DpchEngWdbe** dpcheng = NULL);
@@ -240,4 +241,6 @@ private:
 };
 
 #endif
+
+
 

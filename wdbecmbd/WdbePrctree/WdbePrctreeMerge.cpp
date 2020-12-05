@@ -1,10 +1,11 @@
 /**
 	* \file WdbePrctreeMerge.cpp
 	* Wdbe operation processor - merge extract file tree into template file tree (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
-	*/
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
+  */
+// IP header --- ABOVE
 
 #ifdef WDBECMBD
 	#include <Wdbecmbd.h>
@@ -192,12 +193,18 @@ void WdbePrctreeMerge::invscanFolder(
 				// corresponding tplfile does not exist
 				parseFile(tmppath + "/" + extroot + extsub + "/" + files[i], logfi, false, ips, fmt);
 
-				if (ips.size() > 0) {
-					if (ips[0]->type == Iptype::KEEP) Wdbe::run("cp -p " + tmppath + "/" + extroot + extsub + "/" + files[i] + " " + s);
+				keep = false;
 
-					for (unsigned int j = 0; j < ips.size(); j++) delete ips[j];
-					ips.resize(0);
-				};
+				for (unsigned int j = 0; j < ips.size(); j++)
+					if (ips[j]->type == Iptype::KEEP) {
+						keep = true;
+						break;
+					};
+
+				if (keep) Wdbe::run("cp -p " + tmppath + "/" + extroot + extsub + "/" + files[i] + " " + s);
+
+				for (unsigned int j = 0; j < ips.size(); j++) delete ips[j];
+				ips.resize(0);
 			};
 		};
 
@@ -221,6 +228,8 @@ bool WdbePrctreeMerge::scanFile(
 	vector<Ip*> ips;
 
 	vector<Ip*> extips;
+	bool hasExtipAbove;
+	bool hasExtipKeep;
 	map<string,unsigned int> icsExtipsAffirm;
 	map<string,unsigned int> icsExtipsRemove;
 	map<string,unsigned int> icsExtipsIline;
@@ -236,7 +245,6 @@ bool WdbePrctreeMerge::scanFile(
 	mode_t mode;
 
 	bool hasextfi;
-	bool extkeep = false;
 
 	string s;
 
@@ -250,17 +258,14 @@ bool WdbePrctreeMerge::scanFile(
 		success = parseFile(tmppath + "/" + extfile, logfi, true, extips, fmt);
 
 		if (success) {
-			// check if file is to be kept w/o modification
-			if (extips.size() > 0) if (extips[0]->type == Iptype::KEEP) extkeep = true;
+			// read extfile content
+			readFileContent(tmppath + "/" + extfile, extips, hasExtipAbove, hasExtipKeep, icsExtipsAffirm, icsExtipsRemove, icsExtipsIline, icsExtipsIbegin, icsExtipsRline, icsExtipsRbegin);
 
-			if (extkeep) {
+			if (hasExtipKeep) {
 				// copy file without looking at tplfile
 				Wdbe::run("cp -p " + tmppath + "/" + extfile + " " + tmppath + "/" + tplfile);
 
 			} else {
-				// read extfile content
-				readFileContent(tmppath + "/" + extfile, extips, icsExtipsAffirm, icsExtipsRemove, icsExtipsIline, icsExtipsIbegin, icsExtipsRline, icsExtipsRbegin);
-
 				// parse tplfile
 				logfi << "processing template file '" << tplfile << "'" << endl;
 				success = parseFile(tmppath + "/" + tplfile, logfi, true, ips, fmt);
@@ -279,7 +284,7 @@ bool WdbePrctreeMerge::scanFile(
 					tmpfi.open(s.c_str(), ios::out | ios::trunc);
 
 					// copy from tplfile to tmpfi while replacing parts from extfile
-					writeTmpfile(tmppath, tmpfi, tplfile, extfile, ips, extips, icsExtipsAffirm, icsExtipsRemove, icsExtipsIline, icsExtipsIbegin, icsExtipsRline, icsExtipsRbegin, notrace, skipmultvoid);
+					writeTmpfile(tmppath, tmpfi, tplfile, extfile, ips, extips, hasExtipAbove, icsExtipsAffirm, icsExtipsRemove, icsExtipsIline, icsExtipsIbegin, icsExtipsRline, icsExtipsRbegin, notrace, skipmultvoid);
 
 					// close temporary file and adapt permissions
 					tmpfi.close();
@@ -309,6 +314,7 @@ void WdbePrctreeMerge::writeTmpfile(
 			, const string& extfile
 			, const vector<Ip*>& ips
 			, const vector<Ip*>& extips
+			, const bool hasExtipAbove
 			, map<string,unsigned int>& icsExtipsAffirm
 			, map<string,unsigned int>& icsExtipsRemove
 			, map<string,unsigned int>& icsExtipsIline
@@ -350,6 +356,10 @@ void WdbePrctreeMerge::writeTmpfile(
 	// initialize next insertion point line number to first entry in ips
 	if (ips.size() > 0) {
 		nextiplineno = ips[0]->lineno;
+
+		// special case of ABOVE ip
+		if (hasExtipAbove && (ips[0]->type == Iptype::ABOVE)) skiptolineno = ips[0]->lineno - 1;
+
 	} else {
 		// big number
 		nextiplineno--;
@@ -370,8 +380,19 @@ void WdbePrctreeMerge::writeTmpfile(
 
 			if (lineno == nextiplineno) {
 				// arrived at next insertion point
-				if (ips[ipsix]->type == Iptype::INSERT) {
+				if (ips[ipsix]->type == Iptype::ABOVE) {
+					if (hasExtipAbove) {
+						// ABOVE: copy entire content from extfile
+						extip = extips[0];
+	
+						for (unsigned int j = 0; j < extip->content.size(); j++) writeTmpfile_line(tmpfi, extip->content[j], lastvoid, skipmultvoid);
 
+					} else {
+						// copy line from tplfile to leave a trace
+						writeTmpfile_line(tmpfi, s, lastvoid, skipmultvoid);
+					};
+
+				} else if (ips[ipsix]->type == Iptype::INSERT) {
 					if ((it = icsExtipsRemove.find(ips[ipsix]->tag)) != icsExtipsRemove.end()) {
 						// REMOVE: copy line from extfile to leave a trace
 						extip = extips[it->second];
@@ -390,7 +411,7 @@ void WdbePrctreeMerge::writeTmpfile(
 						extip = extips[it->second];
 
 						if (notrace) {
-							for (unsigned int j=1;j<(extip->content.size()-1); j++) writeTmpfile_line(tmpfi, extip->content[j], lastvoid, skipmultvoid);
+							for (unsigned int j = 1; j < (extip->content.size() - 1); j++) writeTmpfile_line(tmpfi, extip->content[j], lastvoid, skipmultvoid);
 						} else {
 							for (unsigned int j = 0; j < extip->content.size(); j++) writeTmpfile_line(tmpfi, extip->content[j], lastvoid, skipmultvoid);
 						};
@@ -406,7 +427,7 @@ void WdbePrctreeMerge::writeTmpfile(
 					if ((it = icsExtipsAffirm.find(ips[ipsix]->tag)) != icsExtipsAffirm.end()) {
 						// AFFIRM
 						if (ips[ipsix]->type == Iptype::LINE) {
-							// copy line from tplfi skipping IP part
+							// copy line from tplfile skipping IP part
 							writeTmpfile_line(tmpfi, s.substr(0, ips[ipsix]->ptr0-ips[ipsix]->il), lastvoid, skipmultvoid);
 
 						} else {
@@ -430,7 +451,7 @@ void WdbePrctreeMerge::writeTmpfile(
 						// RBEGIN/REND: copy entire content from extfile
 						extip = extips[it->second];
 
-						if (notrace) for (unsigned int j=1;j<(extip->content.size()-1); j++) writeTmpfile_line(tmpfi, extip->content[j], lastvoid, skipmultvoid);
+						if (notrace) for (unsigned int j = 1; j < (extip->content.size() - 1); j++) writeTmpfile_line(tmpfi, extip->content[j], lastvoid, skipmultvoid);
 						else for (unsigned int j = 0; j < extip->content.size(); j++) writeTmpfile_line(tmpfi, extip->content[j], lastvoid, skipmultvoid);
 
 					} else {
@@ -445,7 +466,7 @@ void WdbePrctreeMerge::writeTmpfile(
 						skiptolineno = ips[ipsix]->par->lineno;
 
 						// skip insertion points up to END, will be adjusted to the next one after further down the code
-						for (unsigned int j=ipsix;j<ips.size(); j++) {
+						for (unsigned int j = ipsix; j < ips.size(); j++) {
 							if (ips[ipsix]->par == ips[j]) {
 								ipsix = j;
 								break;
@@ -501,5 +522,6 @@ void WdbePrctreeMerge::writeTmpfile_line(
 	lastvoid = (line.length() == 0);
 };
 // IP cust --- IEND
+
 
 

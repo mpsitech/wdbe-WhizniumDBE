@@ -1,10 +1,11 @@
 /**
 	* \file PnlWdbeVitRec.cpp
 	* job handler for job PnlWdbeVitRec (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifdef WDBECMBD
 	#include <Wdbecmbd.h>
@@ -78,7 +79,11 @@ DpchEngWdbe* PnlWdbeVitRec::getNewDpchEng(
 void PnlWdbeVitRec::refresh(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
+			, const bool unmute
 		) {
+	if (muteRefresh && !unmute) return;
+	muteRefresh = true;
+
 	ContInf oldContinf(continf);
 	StatShr oldStatshr(statshr);
 
@@ -103,6 +108,7 @@ void PnlWdbeVitRec::refresh(
 	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
 	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
 
+	muteRefresh = false;
 };
 
 void PnlWdbeVitRec::updatePreset(
@@ -233,11 +239,20 @@ void PnlWdbeVitRec::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBEVIT_VECEQ) {
-		call->abort = handleCallWdbeVit_vecEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEVITUPD_REFEQ) {
+	if (call->ixVCall == VecWdbeVCall::CALLWDBEVITUPD_REFEQ) {
 		call->abort = handleCallWdbeVitUpd_refEq(dbswdbe, call->jref);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEVIT_VECEQ) {
+		call->abort = handleCallWdbeVit_vecEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
 	};
+};
+
+bool PnlWdbeVitRec::handleCallWdbeVitUpd_refEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+	// IP handleCallWdbeVitUpd_refEq --- INSERT
+	return retval;
 };
 
 bool PnlWdbeVitRec::handleCallWdbeVit_vecEq(
@@ -251,12 +266,5 @@ bool PnlWdbeVitRec::handleCallWdbeVit_vecEq(
 	return retval;
 };
 
-bool PnlWdbeVitRec::handleCallWdbeVitUpd_refEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-	// IP handleCallWdbeVitUpd_refEq --- INSERT
-	return retval;
-};
+
 

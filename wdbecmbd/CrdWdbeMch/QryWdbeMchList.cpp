@@ -1,10 +1,11 @@
 /**
 	* \file QryWdbeMchList.cpp
 	* job handler for job QryWdbeMchList (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifdef WDBECMBD
 	#include <Wdbecmbd.h>
@@ -45,8 +46,8 @@ QryWdbeMchList::QryWdbeMchList(
 
 	rerun(dbswdbe);
 
-	xchg->addClstn(VecWdbeVCall::CALLWDBESTUBCHG, jref, Clstn::VecVJobmask::SELF, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBEMCHMOD, jref, Clstn::VecVJobmask::ALL, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBESTUBCHG, jref, Clstn::VecVJobmask::SELF, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -82,14 +83,14 @@ void QryWdbeMchList::rerun(
 
 	uint preIxOrd = xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXORD, jref);
 	string preSrf = xchg->getSrefPreset(VecWdbeVPreset::PREWDBEMCHLIST_SRF, jref);
-	string prePla = xchg->getSrefPreset(VecWdbeVPreset::PREWDBEMCHLIST_PLA, jref);
+	ubigint preSup = xchg->getRefPreset(VecWdbeVPreset::PREWDBEMCHLIST_SUP, jref);
 
 	dbswdbe->tblwdbeqselect->removeRstByJref(jref);
 	dbswdbe->tblwdbeqmchlist->removeRstByJref(jref);
 
 	sqlstr = "SELECT COUNT(TblWdbeMMachine.ref)";
 	sqlstr += " FROM TblWdbeMMachine";
-	rerun_filtSQL(sqlstr, preSrf, prePla, true);
+	rerun_filtSQL(sqlstr, preSrf, preSup, true);
 	dbswdbe->loadUintBySQL(sqlstr, cnt);
 
 	statshr.ntot = cnt;
@@ -100,10 +101,10 @@ void QryWdbeMchList::rerun(
 		else stgiac.jnumFirstload = 1;
 	};
 
-	sqlstr = "INSERT INTO TblWdbeQMchList(jref, jnum, ref, sref, srefKPlatform)";
-	sqlstr += " SELECT " + to_string(jref) + ", 0, TblWdbeMMachine.ref, TblWdbeMMachine.sref, TblWdbeMMachine.srefKPlatform";
+	sqlstr = "INSERT INTO TblWdbeQMchList(jref, jnum, ref, sref, supRefWdbeMMachine)";
+	sqlstr += " SELECT " + to_string(jref) + ", 0, TblWdbeMMachine.ref, TblWdbeMMachine.sref, TblWdbeMMachine.supRefWdbeMMachine";
 	sqlstr += " FROM TblWdbeMMachine";
-	rerun_filtSQL(sqlstr, preSrf, prePla, true);
+	rerun_filtSQL(sqlstr, preSrf, preSup, true);
 	rerun_orderSQL(sqlstr, preIxOrd);
 	sqlstr += " LIMIT " + to_string(stgiac.nload) + " OFFSET " + to_string(stgiac.jnumFirstload-1);
 	dbswdbe->executeQuery(sqlstr);
@@ -123,7 +124,7 @@ void QryWdbeMchList::rerun(
 void QryWdbeMchList::rerun_filtSQL(
 			string& sqlstr
 			, const string& preSrf
-			, const string& prePla
+			, const ubigint preSup
 			, const bool addwhere
 		) {
 	bool first = addwhere;
@@ -133,9 +134,9 @@ void QryWdbeMchList::rerun_filtSQL(
 		sqlstr += "TblWdbeMMachine.sref = '" + preSrf + "'";
 	};
 
-	if (prePla.length() > 0) {
+	if (preSup != 0) {
 		rerun_filtSQL_append(sqlstr, first);
-		sqlstr += "TblWdbeMMachine.srefKPlatform = '" + prePla + "'";
+		sqlstr += "TblWdbeMMachine.supRefWdbeMMachine = " + to_string(preSup) + "";
 	};
 };
 
@@ -153,8 +154,8 @@ void QryWdbeMchList::rerun_orderSQL(
 			string& sqlstr
 			, const uint preIxOrd
 		) {
-	if (preIxOrd == VecVOrd::SRF) sqlstr += " ORDER BY TblWdbeMMachine.sref ASC";
-	else if (preIxOrd == VecVOrd::PLA) sqlstr += " ORDER BY TblWdbeMMachine.srefKPlatform ASC";
+	if (preIxOrd == VecVOrd::SUP) sqlstr += " ORDER BY TblWdbeMMachine.supRefWdbeMMachine ASC";
+	else if (preIxOrd == VecVOrd::SRF) sqlstr += " ORDER BY TblWdbeMMachine.sref ASC";
 };
 
 void QryWdbeMchList::fetch(
@@ -182,7 +183,7 @@ void QryWdbeMchList::fetch(
 			rec = rst.nodes[i];
 
 			rec->jnum = statshr.jnumFirstload + i;
-			rec->titSrefKPlatform = dbswdbe->getKlstTitleBySref(VecWdbeVKeylist::KLSTWDBEKMMACHINEPLATFORM, rec->srefKPlatform, ixWdbeVLocale);
+			rec->stubSupRefWdbeMMachine = StubWdbe::getStubMchStd(dbswdbe, rec->supRefWdbeMMachine, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
 		};
 
 		stmgr->commit();
@@ -289,8 +290,8 @@ bool QryWdbeMchList::handleShow(
 	cout << "\tjnum";
 	cout << "\tref";
 	cout << "\tsref";
-	cout << "\tsrefKPlatform";
-	cout << "\ttitSrefKPlatform";
+	cout << "\tsupRefWdbeMMachine";
+	cout << "\tstubSupRefWdbeMMachine";
 	cout << endl;
 
 	// record rows
@@ -302,8 +303,8 @@ bool QryWdbeMchList::handleShow(
 		cout << "\t" << rec->jnum;
 		cout << "\t" << rec->ref;
 		cout << "\t" << rec->sref;
-		cout << "\t" << rec->srefKPlatform;
-		cout << "\t" << rec->titSrefKPlatform;
+		cout << "\t" << rec->supRefWdbeMMachine;
+		cout << "\t" << rec->stubSupRefWdbeMMachine;
 		cout << endl;
 	};
 	return retval;
@@ -313,20 +314,26 @@ void QryWdbeMchList::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
-		call->abort = handleCallWdbeStubChgFromSelf(dbswdbe);
+	if (call->ixVCall == VecWdbeVCall::CALLWDBEMCHUPD_REFEQ) {
+		call->abort = handleCallWdbeMchUpd_refEq(dbswdbe, call->jref);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEMCHMOD) {
 		call->abort = handleCallWdbeMchMod(dbswdbe, call->jref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEMCHUPD_REFEQ) {
-		call->abort = handleCallWdbeMchUpd_refEq(dbswdbe, call->jref);
+	} else if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
+		call->abort = handleCallWdbeStubChgFromSelf(dbswdbe);
 	};
 };
 
-bool QryWdbeMchList::handleCallWdbeStubChgFromSelf(
+bool QryWdbeMchList::handleCallWdbeMchUpd_refEq(
 			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
 		) {
 	bool retval = false;
-	// IP handleCallWdbeStubChgFromSelf --- INSERT
+
+	if (ixWdbeVQrystate != VecWdbeVQrystate::OOD) {
+		ixWdbeVQrystate = VecWdbeVQrystate::OOD;
+		xchg->triggerCall(dbswdbe, VecWdbeVCall::CALLWDBESTATCHG, jref);
+	};
+
 	return retval;
 };
 
@@ -344,17 +351,13 @@ bool QryWdbeMchList::handleCallWdbeMchMod(
 	return retval;
 };
 
-bool QryWdbeMchList::handleCallWdbeMchUpd_refEq(
+bool QryWdbeMchList::handleCallWdbeStubChgFromSelf(
 			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
 		) {
 	bool retval = false;
-
-	if (ixWdbeVQrystate != VecWdbeVQrystate::OOD) {
-		ixWdbeVQrystate = VecWdbeVQrystate::OOD;
-		xchg->triggerCall(dbswdbe, VecWdbeVCall::CALLWDBESTATCHG, jref);
-	};
-
+	// IP handleCallWdbeStubChgFromSelf --- INSERT
 	return retval;
 };
+
+
 

@@ -1,11 +1,3 @@
-/**
-  * \file PnlWdbeMchDetail.js
-  * web client functionality for panel PnlWdbeMchDetail
-  * \author Alexander Wirthmueller
-  * \date created: 23 Aug 2020
-  * \date modified: 23 Aug 2020
-  */
-
 // IP cust --- INSERT
 
 // --- expand state management
@@ -60,7 +52,7 @@ function initBD(bNotD) {
 
 	// IP initBD --- BEGIN
 	initCpt(contcontdoc, "CptSrf", retrieveTi(srcdoc, "TagWdbeMchDetail", "CptSrf"));
-	initCpt(contcontdoc, "CptPla", retrieveTi(srcdoc, "TagWdbeMchDetail", "CptPla"));
+	initCpt(contcontdoc, "CptSup", retrieveTi(srcdoc, "TagWdbeMchDetail", "CptSup"));
 	initCpt(contcontdoc, "CptCch", retrieveTi(srcdoc, "TagWdbeMchDetail", "CptCch"));
 	initCpt(contcontdoc, "CptCmt", retrieveTi(srcdoc, "TagWdbeMchDetail", "CptCmt"));
 	// IP initBD --- END
@@ -91,10 +83,9 @@ function refreshBD(bNotD) {
 	// IP refreshBD.vars --- BEGIN
 	var TxtSrfActive = (retrieveSi(srcdoc, "StatShrWdbeMchDetail", "TxtSrfActive") == "true");
 
-	var PupPlaAlt = (retrieveSi(srcdoc, "StatAppWdbeMchDetail", "PupPlaAlt") == "true");
-	var TxfPlaValid = (retrieveSi(srcdoc, "StatShrWdbeMchDetail", "TxfPlaValid") == "true");
-	var PupPlaActive = (retrieveSi(srcdoc, "StatShrWdbeMchDetail", "PupPlaActive") == "true");
-	var ButPlaEditAvail = (retrieveSi(srcdoc, "StatShrWdbeMchDetail", "ButPlaEditAvail") == "true");
+	var TxtSupActive = (retrieveSi(srcdoc, "StatShrWdbeMchDetail", "TxtSupActive") == "true");
+	var ButSupViewAvail = (retrieveSi(srcdoc, "StatShrWdbeMchDetail", "ButSupViewAvail") == "true");
+	var ButSupViewActive = (retrieveSi(srcdoc, "StatShrWdbeMchDetail", "ButSupViewActive") == "true");
 
 	var TxtCchActive = (retrieveSi(srcdoc, "StatShrWdbeMchDetail", "TxtCchActive") == "true");
 	var ButCchViewAvail = (retrieveSi(srcdoc, "StatShrWdbeMchDetail", "ButCchViewAvail") == "true");
@@ -109,29 +100,22 @@ function refreshBD(bNotD) {
 	// IP refreshBD --- BEGIN
 	refreshTxt(contcontdoc, "TxtSrf", retrieveCi(srcdoc, "ContInfWdbeMchDetail", "TxtSrf"));
 
-	if ( (PupPlaAlt == !contcontdoc.getElementById("TxfPla")) || (!PupPlaAlt == !contcontdoc.getElementById("PupPla")) ) {
-		mytd = contcontdoc.getElementById("dynPla");
-		clearElem(mytd);
-
-		if (PupPlaAlt) mytd.appendChild(makeInputTxf(contcontdoc, "TxfPla", ""));
-		else mytd.appendChild(makeSelectPup(contcontdoc, "PupPla", ""));
-	};
-
-	if (PupPlaAlt) refreshTxf(contcontdoc, "TxfPla", "", retrieveCi(srcdoc, "ContIacWdbeMchDetail", "TxfPla"), PupPlaActive, false, TxfPlaValid);
-	else refreshPup(contcontdoc, srcdoc, "PupPla", "", "FeedFPupPla", retrieveCi(srcdoc, "ContIacWdbeMchDetail", "numFPupPla"), true, false);
-
-	if ((ButPlaEditAvail == !contcontdoc.getElementById("ButPlaEdit"))) {
-		mytd = contcontdoc.getElementById("rdynPla");
+	if ((ButSupViewAvail == !contcontdoc.getElementById("ButSupView"))) {
+		mytd = contcontdoc.getElementById("rdynSup");
 		clearElem(mytd);
 
 		first = true;
 
-		if (ButPlaEditAvail) {
+		if (ButSupViewAvail) {
 			if (first) first = false;
 			else mytd.appendChild(contcontdoc.createTextNode("\u00a0"));
-			mytd.appendChild(makeImgBut(contcontdoc, "ButPlaEdit", "icon/edit"));
+			mytd.appendChild(makeImgBut(contcontdoc, "ButSupView", "icon/view"));
 		};
 	};
+
+	refreshTxt(contcontdoc, "TxtSup", retrieveCi(srcdoc, "ContInfWdbeMchDetail", "TxtSup"));
+
+	if (ButSupViewAvail) refreshButicon(contcontdoc, "ButSupView", "icon/view", ButSupViewActive, false);
 
 	if ((ButCchViewAvail == !contcontdoc.getElementById("ButCchView"))) {
 		mytd = contcontdoc.getElementById("rdynCch");
@@ -199,15 +183,6 @@ function handleButRegularizeClick() {
 
 // --- generalized event handlers for app controls
 
-function handleButToggleClick(basectlsref) {
-	var alt;
-
-	if (retrieveSi(srcdoc, "StatAppWdbeMchDetail", basectlsref + "Alt") == "true") alt = "false"; else alt = "true";
-	setSi(srcdoc, "StatAppWdbeMchDetail", basectlsref + "Alt", alt);
-
-	refresh();
-};
-
 // --- generalized event handlers for shared controls
 
 function handleButClick(ctlsref) {
@@ -218,49 +193,6 @@ function handleButClick(ctlsref) {
 function handleButCrdopenClick(ctlsref) {
 	var str = serializeDpchAppDo(srcdoc, "DpchAppWdbeMchDetailDo", scrJref, ctlsref + "Click");
 	sendReq(str, doc, handleDpchAppDoCrdopenReply);
-};
-
-function handleButDlgopenClick(ctlsref) {
-	var str = serializeDpchAppDo(srcdoc, "DpchAppWdbeMchDetailDo", scrJref, ctlsref + "Click");
-	sendReq(str, doc, handleDpchAppDoDlgopenReply);
-};
-
-function handlePupChange(_doc, ctlsref, size) {
-	var elem = _doc.getElementById(ctlsref);
-
-	elem.setAttribute("class", "pup" + size + "mod");
-	setCi(srcdoc, "ContIacWdbeMchDetail", "numF" + ctlsref, elem.value);
-
-	var str = serializeDpchAppData(srcdoc, "DpchAppWdbeMchDetailData", scrJref, "ContIacWdbeMchDetail");
-	sendReq(str, doc, handleDpchAppDataDoReply);
-};
-
-function handleTxfKey(_doc, ctlsref, size, evt) {
-	var elem = _doc.getElementById(ctlsref);
-
-	elem.setAttribute("class", "txf" + size + "mod");
-
-	if (evt.keyCode == 13) {
-		setCi(srcdoc, "ContIacWdbeMchDetail", ctlsref, elem.value);
-
-		var str = serializeDpchAppData(srcdoc, "DpchAppWdbeMchDetailData", scrJref, "ContIacWdbeMchDetail");
-		sendReq(str, doc, handleDpchAppDataDoReply);
-
-		return false;
-	};
-
-	return true;
-};
-
-function handleTxfChange(_doc, ctlsref, size) {
-	var elem = _doc.getElementById(ctlsref);
-
-	elem.setAttribute("class", "txf" + size + "mod");
-
-	setCi(srcdoc, "ContIacWdbeMchDetail", ctlsref, elem.value);
-
-	var str = serializeDpchAppData(srcdoc, "DpchAppWdbeMchDetailData", scrJref, "ContIacWdbeMchDetail");
-	sendReq(str, doc, handleDpchAppDataDoReply);
 };
 
 function handleTxftKey(_doc, ctlsref, evt) {
@@ -288,7 +220,6 @@ function mergeDpchEngData(dom) {
 
 	if (updateSrcblock(dom, "DpchEngWdbeMchDetailData", "ContIacWdbeMchDetail", srcdoc)) mask.push("contiac");
 	if (updateSrcblock(dom, "DpchEngWdbeMchDetailData", "ContInfWdbeMchDetail", srcdoc)) mask.push("continf");
-	if (updateSrcblock(dom, "DpchEngWdbeMchDetailData", "FeedFPupPla", srcdoc)) mask.push("feedFPupPla");
 	if (updateSrcblock(dom, "DpchEngWdbeMchDetailData", "StatAppWdbeMchDetail", srcdoc)) mask.push("statapp");
 	if (updateSrcblock(dom, "DpchEngWdbeMchDetailData", "StatShrWdbeMchDetail", srcdoc)) mask.push("statshr");
 	if (updateSrcblock(dom, "DpchEngWdbeMchDetailData", "TagWdbeMchDetail", srcdoc)) mask.push("tag");
@@ -364,28 +295,6 @@ function handleDpchAppDoCrdopenReply() {
 				getCrdwnd().showAlr(retrieveValue(dom, "//wdbe:DpchEngWdbeAlert/wdbe:scrJref"),
 						retrieveBlock(dom, "//wdbe:DpchEngWdbeAlert/wdbe:ContInfWdbeAlert"),
 						retrieveBlock(dom, "//wdbe:DpchEngWdbeAlert/wdbe:FeedFMcbAlert"));
-			};
-		};
-	};
-};
-
-function handleDpchAppDoDlgopenReply() {
-	var dom, blk;
-
-	var accepted, _scrJref, sref;
-
-	if (doc.req.readyState == 4) {
-		dom = doc.req.responseXML;
-
-		blk = retrieveBlock(dom, "//wdbe:*");
-
-		if (blk) {
-			if (blk.nodeName == "DpchEngWdbeConfirm") {
-				accepted = retrieveValue(dom, "//wdbe:DpchEngWdbeConfirm/wdbe:accepted");
-				_scrJref = retrieveValue(dom, "//wdbe:DpchEngWdbeConfirm/wdbe:scrJref");
-				sref = retrieveValue(dom, "//wdbe:DpchEngWdbeConfirm/wdbe:sref");
-
-				if ((accepted == "true") && (sref != "")) getCrdwnd().showDlg(sref, _scrJref);
 			};
 		};
 	};

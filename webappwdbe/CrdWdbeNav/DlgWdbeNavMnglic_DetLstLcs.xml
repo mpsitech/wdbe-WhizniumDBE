@@ -4,7 +4,6 @@
 	<head>
 		<title>DetLstLcs</title>
 		<script>
-			<!-- IP evthdls - BEGIN -->
 			function handleLstLoad() {parent.parent.window.handleLstLoad(document,"DetLstLcs",2,false)};
 			function handleLstSelect(num) {parent.parent.window.handleLstSelect("DetLstLcs",false,num);};
 			function handleLsbUpClick() {parent.parent.window.handleLsbUpClick(document,"DetLstLcs",2,false);};
@@ -14,18 +13,6 @@
 			function handleLsbMdn() {parent.parent.window.handleLsbMdn(document,"DetLstLcs");};
 			function handleLsbMove(evt) {parent.parent.window.handleLsbMove(document,evt);};
 			function handleLsbMup(evt) {parent.parent.window.handleLsbMup(document,"DetLstLcs",2,false,evt);};
-			<!-- IP evthdls - END -->
-			<!-- IP ditevthdls - BEGIN -->
-			function handleLstLoad() {parent.parent.window.handleLstLoad(document,"ditshort","DetLstLcs",2,false)};
-			function handleLstSelect(num) {parent.parent.window.handleLstSelect("ditshort","DetLstLcs",false,num);};
-			function handleLsbUpClick() {parent.parent.window.handleLsbUpClick(document,"ditshort","DetLstLcs",2,false);};
-			function handleLsbJpupClick() {parent.parent.window.handleLsbJpupClick(document,"ditshort","DetLstLcs",2,false);};
-			function handleLsbJpdownClick() {parent.parent.window.handleLsbJpdownClick(document,"ditshort","DetLstLcs",2,false);};
-			function handleLsbDownClick() {parent.parent.window.handleLsbDownClick(document,"ditshort","DetLstLcs",2,false);};
-			function handleLsbMdn() {parent.parent.window.handleLsbMdn(document,"DetLstLcs");};
-			function handleLsbMove(evt) {parent.parent.window.handleLsbMove(document,evt);};
-			function handleLsbMup(evt) {parent.parent.window.handleLsbMup(document,"ditshort","DetLstLcs",2,false,evt);};
-			<!-- IP ditevthdls - END -->
 		</script>
 		<link href="../style/lst.css" rel="styleSheet" type="text/css"/>
 	</head>
@@ -33,7 +20,8 @@
 		<table cellspacing="0" border="0" cellpadding="0">
 			<colgroup>
 				<col width="1"/>
-					<!-- IP colgrp - INSERT -->
+				<col width="174"/>
+				<col width="150"/>
 				<col width="15"/>
 			</colgroup>
 			<thead>

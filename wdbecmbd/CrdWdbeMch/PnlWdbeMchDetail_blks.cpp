@@ -1,10 +1,11 @@
 /**
 	* \file PnlWdbeMchDetail_blks.cpp
 	* job handler for job PnlWdbeMchDetail (implementation of blocks)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 using namespace std;
 using namespace Sbecore;
@@ -20,7 +21,7 @@ uint PnlWdbeMchDetail::VecVDo::getIx(
 	string s = StrMod::lc(sref);
 
 	if (s == "butsaveclick") return BUTSAVECLICK;
-	if (s == "butplaeditclick") return BUTPLAEDITCLICK;
+	if (s == "butsupviewclick") return BUTSUPVIEWCLICK;
 	if (s == "butcchviewclick") return BUTCCHVIEWCLICK;
 
 	return(0);
@@ -30,7 +31,7 @@ string PnlWdbeMchDetail::VecVDo::getSref(
 			const uint ix
 		) {
 	if (ix == BUTSAVECLICK) return("ButSaveClick");
-	if (ix == BUTPLAEDITCLICK) return("ButPlaEditClick");
+	if (ix == BUTSUPVIEWCLICK) return("ButSupViewClick");
 	if (ix == BUTCCHVIEWCLICK) return("ButCchViewClick");
 
 	return("");
@@ -41,17 +42,13 @@ string PnlWdbeMchDetail::VecVDo::getSref(
  ******************************************************************************/
 
 PnlWdbeMchDetail::ContIac::ContIac(
-			const uint numFPupPla
-			, const string& TxfPla
-			, const string& TxfCmt
+			const string& TxfCmt
 		) :
 			Block()
 		{
-	this->numFPupPla = numFPupPla;
-	this->TxfPla = TxfPla;
 	this->TxfCmt = TxfCmt;
 
-	mask = {NUMFPUPPLA, TXFPLA, TXFCMT};
+	mask = {TXFCMT};
 };
 
 bool PnlWdbeMchDetail::ContIac::readXML(
@@ -71,8 +68,6 @@ bool PnlWdbeMchDetail::ContIac::readXML(
 	string itemtag = "ContitemIacWdbeMchDetail";
 
 	if (basefound) {
-		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "numFPupPla", numFPupPla)) add(NUMFPUPPLA);
-		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "TxfPla", TxfPla)) add(TXFPLA);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "TxfCmt", TxfCmt)) add(TXFCMT);
 	};
 
@@ -91,8 +86,6 @@ void PnlWdbeMchDetail::ContIac::writeXML(
 	else itemtag = "ContitemIacWdbeMchDetail";
 
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
-		writeUintAttr(wr, itemtag, "sref", "numFPupPla", numFPupPla);
-		writeStringAttr(wr, itemtag, "sref", "TxfPla", TxfPla);
 		writeStringAttr(wr, itemtag, "sref", "TxfCmt", TxfCmt);
 	xmlTextWriterEndElement(wr);
 };
@@ -102,8 +95,6 @@ set<uint> PnlWdbeMchDetail::ContIac::comm(
 		) {
 	set<uint> items;
 
-	if (numFPupPla == comp->numFPupPla) insert(items, NUMFPUPPLA);
-	if (TxfPla == comp->TxfPla) insert(items, TXFPLA);
 	if (TxfCmt == comp->TxfCmt) insert(items, TXFCMT);
 
 	return(items);
@@ -117,7 +108,7 @@ set<uint> PnlWdbeMchDetail::ContIac::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {NUMFPUPPLA, TXFPLA, TXFCMT};
+	diffitems = {TXFCMT};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -129,14 +120,16 @@ set<uint> PnlWdbeMchDetail::ContIac::diff(
 
 PnlWdbeMchDetail::ContInf::ContInf(
 			const string& TxtSrf
+			, const string& TxtSup
 			, const string& TxtCch
 		) :
 			Block()
 		{
 	this->TxtSrf = TxtSrf;
+	this->TxtSup = TxtSup;
 	this->TxtCch = TxtCch;
 
-	mask = {TXTSRF, TXTCCH};
+	mask = {TXTSRF, TXTSUP, TXTCCH};
 };
 
 void PnlWdbeMchDetail::ContInf::writeXML(
@@ -152,6 +145,7 @@ void PnlWdbeMchDetail::ContInf::writeXML(
 
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
 		writeStringAttr(wr, itemtag, "sref", "TxtSrf", TxtSrf);
+		writeStringAttr(wr, itemtag, "sref", "TxtSup", TxtSup);
 		writeStringAttr(wr, itemtag, "sref", "TxtCch", TxtCch);
 	xmlTextWriterEndElement(wr);
 };
@@ -162,6 +156,7 @@ set<uint> PnlWdbeMchDetail::ContInf::comm(
 	set<uint> items;
 
 	if (TxtSrf == comp->TxtSrf) insert(items, TXTSRF);
+	if (TxtSup == comp->TxtSup) insert(items, TXTSUP);
 	if (TxtCch == comp->TxtCch) insert(items, TXTCCH);
 
 	return(items);
@@ -175,7 +170,7 @@ set<uint> PnlWdbeMchDetail::ContInf::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {TXTSRF, TXTCCH};
+	diffitems = {TXTSRF, TXTSUP, TXTCCH};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -190,7 +185,6 @@ void PnlWdbeMchDetail::StatApp::writeXML(
 			, string difftag
 			, bool shorttags
 			, const uint ixWdbeVExpstate
-			, const bool PupPlaAlt
 		) {
 	if (difftag.length() == 0) difftag = "StatAppWdbeMchDetail";
 
@@ -200,7 +194,6 @@ void PnlWdbeMchDetail::StatApp::writeXML(
 
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
 		writeStringAttr(wr, itemtag, "sref", "srefIxWdbeVExpstate", VecWdbeVExpstate::getSref(ixWdbeVExpstate));
-		writeBoolAttr(wr, itemtag, "sref", "PupPlaAlt", PupPlaAlt);
 	xmlTextWriterEndElement(wr);
 };
 
@@ -209,12 +202,12 @@ void PnlWdbeMchDetail::StatApp::writeXML(
  ******************************************************************************/
 
 PnlWdbeMchDetail::StatShr::StatShr(
-			const bool TxfPlaValid
-			, const bool ButSaveAvail
+			const bool ButSaveAvail
 			, const bool ButSaveActive
 			, const bool TxtSrfActive
-			, const bool PupPlaActive
-			, const bool ButPlaEditAvail
+			, const bool TxtSupActive
+			, const bool ButSupViewAvail
+			, const bool ButSupViewActive
 			, const bool TxtCchActive
 			, const bool ButCchViewAvail
 			, const bool ButCchViewActive
@@ -222,18 +215,18 @@ PnlWdbeMchDetail::StatShr::StatShr(
 		) :
 			Block()
 		{
-	this->TxfPlaValid = TxfPlaValid;
 	this->ButSaveAvail = ButSaveAvail;
 	this->ButSaveActive = ButSaveActive;
 	this->TxtSrfActive = TxtSrfActive;
-	this->PupPlaActive = PupPlaActive;
-	this->ButPlaEditAvail = ButPlaEditAvail;
+	this->TxtSupActive = TxtSupActive;
+	this->ButSupViewAvail = ButSupViewAvail;
+	this->ButSupViewActive = ButSupViewActive;
 	this->TxtCchActive = TxtCchActive;
 	this->ButCchViewAvail = ButCchViewAvail;
 	this->ButCchViewActive = ButCchViewActive;
 	this->TxfCmtActive = TxfCmtActive;
 
-	mask = {TXFPLAVALID, BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, PUPPLAACTIVE, BUTPLAEDITAVAIL, TXTCCHACTIVE, BUTCCHVIEWAVAIL, BUTCCHVIEWACTIVE, TXFCMTACTIVE};
+	mask = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXTSUPACTIVE, BUTSUPVIEWAVAIL, BUTSUPVIEWACTIVE, TXTCCHACTIVE, BUTCCHVIEWAVAIL, BUTCCHVIEWACTIVE, TXFCMTACTIVE};
 };
 
 void PnlWdbeMchDetail::StatShr::writeXML(
@@ -248,12 +241,12 @@ void PnlWdbeMchDetail::StatShr::writeXML(
 	else itemtag = "StatitemShrWdbeMchDetail";
 
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
-		writeBoolAttr(wr, itemtag, "sref", "TxfPlaValid", TxfPlaValid);
 		writeBoolAttr(wr, itemtag, "sref", "ButSaveAvail", ButSaveAvail);
 		writeBoolAttr(wr, itemtag, "sref", "ButSaveActive", ButSaveActive);
 		writeBoolAttr(wr, itemtag, "sref", "TxtSrfActive", TxtSrfActive);
-		writeBoolAttr(wr, itemtag, "sref", "PupPlaActive", PupPlaActive);
-		writeBoolAttr(wr, itemtag, "sref", "ButPlaEditAvail", ButPlaEditAvail);
+		writeBoolAttr(wr, itemtag, "sref", "TxtSupActive", TxtSupActive);
+		writeBoolAttr(wr, itemtag, "sref", "ButSupViewAvail", ButSupViewAvail);
+		writeBoolAttr(wr, itemtag, "sref", "ButSupViewActive", ButSupViewActive);
 		writeBoolAttr(wr, itemtag, "sref", "TxtCchActive", TxtCchActive);
 		writeBoolAttr(wr, itemtag, "sref", "ButCchViewAvail", ButCchViewAvail);
 		writeBoolAttr(wr, itemtag, "sref", "ButCchViewActive", ButCchViewActive);
@@ -266,12 +259,12 @@ set<uint> PnlWdbeMchDetail::StatShr::comm(
 		) {
 	set<uint> items;
 
-	if (TxfPlaValid == comp->TxfPlaValid) insert(items, TXFPLAVALID);
 	if (ButSaveAvail == comp->ButSaveAvail) insert(items, BUTSAVEAVAIL);
 	if (ButSaveActive == comp->ButSaveActive) insert(items, BUTSAVEACTIVE);
 	if (TxtSrfActive == comp->TxtSrfActive) insert(items, TXTSRFACTIVE);
-	if (PupPlaActive == comp->PupPlaActive) insert(items, PUPPLAACTIVE);
-	if (ButPlaEditAvail == comp->ButPlaEditAvail) insert(items, BUTPLAEDITAVAIL);
+	if (TxtSupActive == comp->TxtSupActive) insert(items, TXTSUPACTIVE);
+	if (ButSupViewAvail == comp->ButSupViewAvail) insert(items, BUTSUPVIEWAVAIL);
+	if (ButSupViewActive == comp->ButSupViewActive) insert(items, BUTSUPVIEWACTIVE);
 	if (TxtCchActive == comp->TxtCchActive) insert(items, TXTCCHACTIVE);
 	if (ButCchViewAvail == comp->ButCchViewAvail) insert(items, BUTCCHVIEWAVAIL);
 	if (ButCchViewActive == comp->ButCchViewActive) insert(items, BUTCCHVIEWACTIVE);
@@ -288,7 +281,7 @@ set<uint> PnlWdbeMchDetail::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {TXFPLAVALID, BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, PUPPLAACTIVE, BUTPLAEDITAVAIL, TXTCCHACTIVE, BUTCCHVIEWAVAIL, BUTCCHVIEWACTIVE, TXFCMTACTIVE};
+	diffitems = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXTSUPACTIVE, BUTSUPVIEWAVAIL, BUTSUPVIEWACTIVE, TXTCCHACTIVE, BUTCCHVIEWAVAIL, BUTCCHVIEWACTIVE, TXFCMTACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -313,7 +306,7 @@ void PnlWdbeMchDetail::Tag::writeXML(
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
 		if (ixWdbeVLocale == VecWdbeVLocale::ENUS) {
 			writeStringAttr(wr, itemtag, "sref", "CptSrf", "identifier");
-			writeStringAttr(wr, itemtag, "sref", "CptPla", "platform");
+			writeStringAttr(wr, itemtag, "sref", "CptSup", "base machine");
 			writeStringAttr(wr, itemtag, "sref", "CptCch", "cross-compile host");
 			writeStringAttr(wr, itemtag, "sref", "CptCmt", "comment");
 		};
@@ -429,18 +422,16 @@ PnlWdbeMchDetail::DpchEngData::DpchEngData(
 			const ubigint jref
 			, ContIac* contiac
 			, ContInf* continf
-			, Feed* feedFPupPla
 			, StatShr* statshr
 			, const set<uint>& mask
 		) :
 			DpchEngWdbe(VecWdbeVDpch::DPCHENGWDBEMCHDETAILDATA, jref)
 		{
-	if (find(mask, ALL)) this->mask = {JREF, CONTIAC, CONTINF, FEEDFPUPPLA, STATAPP, STATSHR, TAG};
+	if (find(mask, ALL)) this->mask = {JREF, CONTIAC, CONTINF, STATAPP, STATSHR, TAG};
 	else this->mask = mask;
 
 	if (find(this->mask, CONTIAC) && contiac) this->contiac = *contiac;
 	if (find(this->mask, CONTINF) && continf) this->continf = *continf;
-	if (find(this->mask, FEEDFPUPPLA) && feedFPupPla) this->feedFPupPla = *feedFPupPla;
 	if (find(this->mask, STATSHR) && statshr) this->statshr = *statshr;
 };
 
@@ -451,7 +442,6 @@ string PnlWdbeMchDetail::DpchEngData::getSrefsMask() {
 	if (has(JREF)) ss.push_back("jref");
 	if (has(CONTIAC)) ss.push_back("contiac");
 	if (has(CONTINF)) ss.push_back("continf");
-	if (has(FEEDFPUPPLA)) ss.push_back("feedFPupPla");
 	if (has(STATAPP)) ss.push_back("statapp");
 	if (has(STATSHR)) ss.push_back("statshr");
 	if (has(TAG)) ss.push_back("tag");
@@ -469,7 +459,6 @@ void PnlWdbeMchDetail::DpchEngData::merge(
 	if (src->has(JREF)) {jref = src->jref; add(JREF);};
 	if (src->has(CONTIAC)) {contiac = src->contiac; add(CONTIAC);};
 	if (src->has(CONTINF)) {continf = src->continf; add(CONTINF);};
-	if (src->has(FEEDFPUPPLA)) {feedFPupPla = src->feedFPupPla; add(FEEDFPUPPLA);};
 	if (src->has(STATAPP)) add(STATAPP);
 	if (src->has(STATSHR)) {statshr = src->statshr; add(STATSHR);};
 	if (src->has(TAG)) add(TAG);
@@ -484,10 +473,11 @@ void PnlWdbeMchDetail::DpchEngData::writeXML(
 		if (has(JREF)) writeString(wr, "scrJref", Scr::scramble(jref));
 		if (has(CONTIAC)) contiac.writeXML(wr);
 		if (has(CONTINF)) continf.writeXML(wr);
-		if (has(FEEDFPUPPLA)) feedFPupPla.writeXML(wr);
 		if (has(STATAPP)) StatApp::writeXML(wr);
 		if (has(STATSHR)) statshr.writeXML(wr);
 		if (has(TAG)) Tag::writeXML(ixWdbeVLocale, wr);
 	xmlTextWriterEndElement(wr);
 };
+
+
 

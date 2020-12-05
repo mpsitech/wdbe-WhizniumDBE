@@ -1,10 +1,11 @@
 /**
 	* \file DlgWdbePrjImpex.h
 	* job handler for job DlgWdbePrjImpex (declarations)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifndef DLGWDBEPRJIMPEX_H
 #define DLGWDBEPRJIMPEX_H
@@ -13,8 +14,8 @@
 
 // IP include.cust --- INSERT
 
-#include "JobWdbeIexPrj.h"
 #include "JobWdbeLicense.h"
+#include "JobWdbeIexPrj.h"
 
 #define VecVDlgWdbePrjImpexDit DlgWdbePrjImpex::VecVDit
 #define VecVDlgWdbePrjImpexDo DlgWdbePrjImpex::VecVDo
@@ -415,12 +416,12 @@ public:
 		void writeXML(const Sbecore::uint ixWdbeVLocale, xmlTextWriter* wr);
 	};
 
-	bool evalIfiUldActive(DbsWdbe* dbswdbe);
+	bool evalButDneActive(DbsWdbe* dbswdbe);
+	bool evalLfiDldActive(DbsWdbe* dbswdbe);
 	bool evalImpButAutActive(DbsWdbe* dbswdbe);
 	bool evalImpButRunActive(DbsWdbe* dbswdbe);
 	bool evalImpButStoActive(DbsWdbe* dbswdbe);
-	bool evalLfiDldActive(DbsWdbe* dbswdbe);
-	bool evalButDneActive(DbsWdbe* dbswdbe);
+	bool evalIfiUldActive(DbsWdbe* dbswdbe);
 
 public:
 	DlgWdbePrjImpex(XchgWdbe* xchg, DbsWdbe* dbswdbe, const Sbecore::ubigint jrefSup, const Sbecore::uint ixWdbeVLocale);
@@ -440,8 +441,8 @@ public:
 	Sbecore::Xmlio::Feed feedFDse;
 	Sbecore::Xmlio::Feed feedFSge;
 
-	JobWdbeIexPrj* iex;
 	JobWdbeLicense* license;
+	JobWdbeIexPrj* iex;
 
 	Sbecore::uint ixVDit;
 
@@ -462,7 +463,7 @@ public:
 	void refreshImp(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems);
 	void refreshLfi(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems);
 
-	void refresh(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems);
+	void refresh(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems, const bool unmute = false);
 
 public:
 
@@ -526,5 +527,6 @@ private:
 };
 
 #endif
+
 
 

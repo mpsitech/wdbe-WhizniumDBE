@@ -1,11 +1,3 @@
-/**
-  * \file CrdWdbeStart.js
-  * web client functionality for Wdbe start page
-  * \author Alexander Wirthmueller
-  * \date created: 23 Aug 2020
-  * \date modified: 23 Aug 2020
-  */
-
 function initLogin() {
 	doc.getElementById("tdCont").setAttribute("height", "128");
 	doc.getElementById("Cont").setAttribute("height", "120");

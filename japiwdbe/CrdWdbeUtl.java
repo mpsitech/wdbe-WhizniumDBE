@@ -1,10 +1,11 @@
 /**
   * \file CrdWdbeUtl.java
   * Java API code for job CrdWdbeUtl
-  * \author Alexander Wirthmueller
-  * \date created: 23 Aug 2020
-  * \date modified: 23 Aug 2020
-  */
+	* \copyright (C) 2018-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 5 Dec 2020
+	*/
+// IP header --- ABOVE
 
 package apiwdbe;
 
@@ -20,9 +21,8 @@ public class CrdWdbeUtl {
 
 		public static final int CLOSE = 1;
 		public static final int MITAPPABTCLICK = 2;
-		public static final int MITCRDCIFCLICK = 3;
-		public static final int MITCRDXIPCLICK = 4;
-		public static final int MITCRDMIPCLICK = 5;
+		public static final int MITCRDXIPCLICK = 3;
+		public static final int MITCRDMIPCLICK = 4;
 
 		public static int getIx(
 					String sref
@@ -31,7 +31,6 @@ public class CrdWdbeUtl {
 
 			if (s.equals("close")) return CLOSE;
 			if (s.equals("mitappabtclick")) return MITAPPABTCLICK;
-			if (s.equals("mitcrdcifclick")) return MITCRDCIFCLICK;
 			if (s.equals("mitcrdxipclick")) return MITCRDXIPCLICK;
 			if (s.equals("mitcrdmipclick")) return MITCRDMIPCLICK;
 
@@ -43,7 +42,6 @@ public class CrdWdbeUtl {
 				) {
 			if (ix == CLOSE) return("close");
 			if (ix == MITAPPABTCLICK) return("MitAppAbtClick");
-			if (ix == MITCRDCIFCLICK) return("MitCrdCifClick");
 			if (ix == MITCRDXIPCLICK) return("MitCrdXipClick");
 			if (ix == MITCRDMIPCLICK) return("MitCrdMipClick");
 
@@ -248,26 +246,22 @@ public class CrdWdbeUtl {
 	public class StatShr extends Block {
 
 		public static final int SCRJREFDLGEXTRIP = 1;
-		public static final int SCRJREFDLGIEXCONV = 2;
-		public static final int SCRJREFDLGMRGIP = 3;
-		public static final int SCRJREFHEADBAR = 4;
+		public static final int SCRJREFDLGMRGIP = 2;
+		public static final int SCRJREFHEADBAR = 3;
 
 		public StatShr(
 					String scrJrefDlgextrip
-					, String scrJrefDlgiexconv
 					, String scrJrefDlgmrgip
 					, String scrJrefHeadbar
 				) {
 			this.scrJrefDlgextrip = scrJrefDlgextrip;
-			this.scrJrefDlgiexconv = scrJrefDlgiexconv;
 			this.scrJrefDlgmrgip = scrJrefDlgmrgip;
 			this.scrJrefHeadbar = scrJrefHeadbar;
 
-			mask = new HashSet<Integer>(Arrays.asList(SCRJREFDLGEXTRIP, SCRJREFDLGIEXCONV, SCRJREFDLGMRGIP, SCRJREFHEADBAR));
+			mask = new HashSet<Integer>(Arrays.asList(SCRJREFDLGEXTRIP, SCRJREFDLGMRGIP, SCRJREFHEADBAR));
 		};
 
 		public String scrJrefDlgextrip;
-		public String scrJrefDlgiexconv;
 		public String scrJrefDlgmrgip;
 		public String scrJrefHeadbar;
 
@@ -285,7 +279,6 @@ public class CrdWdbeUtl {
 
 			if (Xmlio.checkXPath(doc, basexpath)) {
 				scrJrefDlgextrip = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefDlgextrip", mask, SCRJREFDLGEXTRIP);
-				scrJrefDlgiexconv = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefDlgiexconv", mask, SCRJREFDLGIEXCONV);
 				scrJrefDlgmrgip = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefDlgmrgip", mask, SCRJREFDLGMRGIP);
 				scrJrefHeadbar = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefHeadbar", mask, SCRJREFHEADBAR);
 
@@ -301,7 +294,6 @@ public class CrdWdbeUtl {
 			HashSet<Integer> items = new HashSet<Integer>();
 
 			if (scrJrefDlgextrip.equals(comp.scrJrefDlgextrip)) items.add(SCRJREFDLGEXTRIP);
-			if (scrJrefDlgiexconv.equals(comp.scrJrefDlgiexconv)) items.add(SCRJREFDLGIEXCONV);
 			if (scrJrefDlgmrgip.equals(comp.scrJrefDlgmrgip)) items.add(SCRJREFDLGMRGIP);
 			if (scrJrefHeadbar.equals(comp.scrJrefHeadbar)) items.add(SCRJREFHEADBAR);
 
@@ -316,7 +308,7 @@ public class CrdWdbeUtl {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(SCRJREFDLGEXTRIP, SCRJREFDLGIEXCONV, SCRJREFDLGMRGIP, SCRJREFHEADBAR));
+			diffitems = new HashSet<Integer>(Arrays.asList(SCRJREFDLGEXTRIP, SCRJREFDLGMRGIP, SCRJREFHEADBAR));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);
@@ -331,29 +323,25 @@ public class CrdWdbeUtl {
 
 		public static final int MITAPPABT = 1;
 		public static final int MRLAPPHLP = 2;
-		public static final int MITCRDCIF = 3;
-		public static final int MITCRDXIP = 4;
-		public static final int MITCRDMIP = 5;
+		public static final int MITCRDXIP = 3;
+		public static final int MITCRDMIP = 4;
 
 		public Tag(
 					String MitAppAbt
 					, String MrlAppHlp
-					, String MitCrdCif
 					, String MitCrdXip
 					, String MitCrdMip
 				) {
 			this.MitAppAbt = MitAppAbt;
 			this.MrlAppHlp = MrlAppHlp;
-			this.MitCrdCif = MitCrdCif;
 			this.MitCrdXip = MitCrdXip;
 			this.MitCrdMip = MitCrdMip;
 
-			mask = new HashSet<Integer>(Arrays.asList(MITAPPABT, MRLAPPHLP, MITCRDCIF, MITCRDXIP, MITCRDMIP));
+			mask = new HashSet<Integer>(Arrays.asList(MITAPPABT, MRLAPPHLP, MITCRDXIP, MITCRDMIP));
 		};
 
 		public String MitAppAbt;
 		public String MrlAppHlp;
-		public String MitCrdCif;
 		public String MitCrdXip;
 		public String MitCrdMip;
 
@@ -372,7 +360,6 @@ public class CrdWdbeUtl {
 			if (Xmlio.checkXPath(doc, basexpath)) {
 				MitAppAbt = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "MitAppAbt", mask, MITAPPABT);
 				MrlAppHlp = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "MrlAppHlp", mask, MRLAPPHLP);
-				MitCrdCif = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "MitCrdCif", mask, MITCRDCIF);
 				MitCrdXip = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "MitCrdXip", mask, MITCRDXIP);
 				MitCrdMip = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "MitCrdMip", mask, MITCRDMIP);
 
@@ -389,7 +376,6 @@ public class CrdWdbeUtl {
 
 			if (MitAppAbt.equals(comp.MitAppAbt)) items.add(MITAPPABT);
 			if (MrlAppHlp.equals(comp.MrlAppHlp)) items.add(MRLAPPHLP);
-			if (MitCrdCif.equals(comp.MitCrdCif)) items.add(MITCRDCIF);
 			if (MitCrdXip.equals(comp.MitCrdXip)) items.add(MITCRDXIP);
 			if (MitCrdMip.equals(comp.MitCrdMip)) items.add(MITCRDMIP);
 
@@ -404,7 +390,7 @@ public class CrdWdbeUtl {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(MITAPPABT, MRLAPPHLP, MITCRDCIF, MITCRDXIP, MITCRDMIP));
+			diffitems = new HashSet<Integer>(Arrays.asList(MITAPPABT, MRLAPPHLP, MITCRDXIP, MITCRDMIP));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);
@@ -485,8 +471,8 @@ public class CrdWdbeUtl {
 			continf = new ContInf(0, "");
 			feedFSge = new Feed("FeedFSge");
 			statapp = new StatApp(0, 0, "", 0, false);
-			statshr = new StatShr("", "", "", "");
-			tag = new Tag("", "", "", "", "");
+			statshr = new StatShr("", "", "");
+			tag = new Tag("", "", "", "");
 		};
 
 		public ContInf continf;
@@ -530,8 +516,8 @@ public class CrdWdbeUtl {
 				continf = new ContInf(0, "");
 				feedFSge = new Feed("FeedFSge");
 				statapp = new StatApp(0, 0, "", 0, false);
-				statshr = new StatShr("", "", "", "");
-				tag = new Tag("", "", "", "", "");
+				statshr = new StatShr("", "", "");
+				tag = new Tag("", "", "", "");
 			};
 		};
 

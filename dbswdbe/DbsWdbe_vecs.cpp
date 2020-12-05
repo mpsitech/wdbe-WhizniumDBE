@@ -1,10 +1,11 @@
 /**
 	* \file DbsWdbe_vecs.cpp
 	* C++ wrapper for database DbsWdbe (implementation of vectors)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
-	*/
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 5 Dec 2020
+  */
+// IP header --- ABOVE
 
 using namespace std;
 using namespace Sbecore;
@@ -19,11 +20,11 @@ uint DbsWdbe::VecVCard::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "crdwdbenav") return CRDWDBENAV;
 	if (s == "crdwdbeusg") return CRDWDBEUSG;
 	if (s == "crdwdbeusr") return CRDWDBEUSR;
 	if (s == "crdwdbeprs") return CRDWDBEPRS;
 	if (s == "crdwdbefil") return CRDWDBEFIL;
+	if (s == "crdwdbenav") return CRDWDBENAV;
 	if (s == "crdwdbemch") return CRDWDBEMCH;
 	if (s == "crdwdbelib") return CRDWDBELIB;
 	if (s == "crdwdbefam") return CRDWDBEFAM;
@@ -59,11 +60,11 @@ uint DbsWdbe::VecVCard::getIx(
 string DbsWdbe::VecVCard::getSref(
 			const uint ix
 		) {
-	if (ix == CRDWDBENAV) return("CrdWdbeNav");
 	if (ix == CRDWDBEUSG) return("CrdWdbeUsg");
 	if (ix == CRDWDBEUSR) return("CrdWdbeUsr");
 	if (ix == CRDWDBEPRS) return("CrdWdbePrs");
 	if (ix == CRDWDBEFIL) return("CrdWdbeFil");
+	if (ix == CRDWDBENAV) return("CrdWdbeNav");
 	if (ix == CRDWDBEMCH) return("CrdWdbeMch");
 	if (ix == CRDWDBELIB) return("CrdWdbeLib");
 	if (ix == CRDWDBEFAM) return("CrdWdbeFam");
@@ -206,12 +207,13 @@ uint DbsWdbe::VecVControl::getIx(
 	if (s == "pnlwdbefillist.tcomim") return PNLWDBEFILLIST_TCOMIM;
 	if (s == "pnlwdbefillist.tcosiz") return PNLWDBEFILLIST_TCOSIZ;
 	if (s == "pnlwdbemchlist.tcosrf") return PNLWDBEMCHLIST_TCOSRF;
-	if (s == "pnlwdbemchlist.tcopla") return PNLWDBEMCHLIST_TCOPLA;
+	if (s == "pnlwdbemchlist.tcosup") return PNLWDBEMCHLIST_TCOSUP;
 	if (s == "pnlwdbemchapar.tcokey") return PNLWDBEMCHAPAR_TCOKEY;
 	if (s == "pnlwdbemchapar.tcoval") return PNLWDBEMCHAPAR_TCOVAL;
 	if (s == "pnlwdbemchamakefile.tcotag") return PNLWDBEMCHAMAKEFILE_TCOTAG;
 	if (s == "pnlwdbemchamakefile.tcoval") return PNLWDBEMCHAMAKEFILE_TCOVAL;
 	if (s == "pnlwdbemch1nrelease.tcoref") return PNLWDBEMCH1NRELEASE_TCOREF;
+	if (s == "pnlwdbemchsup1nmachine.tcoref") return PNLWDBEMCHSUP1NMACHINE_TCOREF;
 	if (s == "pnlwdbeliblist.tcosrf") return PNLWDBELIBLIST_TCOSRF;
 	if (s == "pnlwdbeliblist.tcotit") return PNLWDBELIBLIST_TCOTIT;
 	if (s == "pnlwdbeliblist.tcover") return PNLWDBELIBLIST_TCOVER;
@@ -236,8 +238,8 @@ uint DbsWdbe::VecVControl::getIx(
 	if (s == "pnlwdbesil1nbank.tcoref") return PNLWDBESIL1NBANK_TCOREF;
 	if (s == "pnlwdbesilfwd1ncontroller.tcoref") return PNLWDBESILFWD1NCONTROLLER_TCOREF;
 	if (s == "pnlwdbesil1ntarget.tcoref") return PNLWDBESIL1NTARGET_TCOREF;
-	if (s == "pnlwdbesilsil1nunit.tcoref") return PNLWDBESILSIL1NUNIT_TCOREF;
 	if (s == "pnlwdbesil1nperipheral.tcoref") return PNLWDBESIL1NPERIPHERAL_TCOREF;
+	if (s == "pnlwdbesilsil1nunit.tcoref") return PNLWDBESILSIL1NUNIT_TCOREF;
 	if (s == "pnlwdbesilref1ncommand.tcoref") return PNLWDBESILREF1NCOMMAND_TCOREF;
 	if (s == "pnlwdbesilhk1nmodule.tcoref") return PNLWDBESILHK1NMODULE_TCOREF;
 	if (s == "pnlwdbesilhk1nvector.tcoref") return PNLWDBESILHK1NVECTOR_TCOREF;
@@ -313,8 +315,8 @@ uint DbsWdbe::VecVControl::getIx(
 	if (s == "pnlwdbeunt1nbank.tcoref") return PNLWDBEUNT1NBANK_TCOREF;
 	if (s == "pnlwdbeuntfwd1ncontroller.tcoref") return PNLWDBEUNTFWD1NCONTROLLER_TCOREF;
 	if (s == "pnlwdbeunt1ntarget.tcoref") return PNLWDBEUNT1NTARGET_TCOREF;
-	if (s == "pnlwdbeuntsil1nunit.tcoref") return PNLWDBEUNTSIL1NUNIT_TCOREF;
 	if (s == "pnlwdbeunt1nperipheral.tcoref") return PNLWDBEUNT1NPERIPHERAL_TCOREF;
+	if (s == "pnlwdbeuntsil1nunit.tcoref") return PNLWDBEUNTSIL1NUNIT_TCOREF;
 	if (s == "pnlwdbeuntref1ncommand.tcoref") return PNLWDBEUNTREF1NCOMMAND_TCOREF;
 	if (s == "pnlwdbeunthk1nmodule.tcoref") return PNLWDBEUNTHK1NMODULE_TCOREF;
 	if (s == "pnlwdbeunthk1nvector.tcoref") return PNLWDBEUNTHK1NVECTOR_TCOREF;
@@ -537,12 +539,13 @@ string DbsWdbe::VecVControl::getSref(
 	if (ix == PNLWDBEFILLIST_TCOMIM) return("PnlWdbeFilList.TcoMim");
 	if (ix == PNLWDBEFILLIST_TCOSIZ) return("PnlWdbeFilList.TcoSiz");
 	if (ix == PNLWDBEMCHLIST_TCOSRF) return("PnlWdbeMchList.TcoSrf");
-	if (ix == PNLWDBEMCHLIST_TCOPLA) return("PnlWdbeMchList.TcoPla");
+	if (ix == PNLWDBEMCHLIST_TCOSUP) return("PnlWdbeMchList.TcoSup");
 	if (ix == PNLWDBEMCHAPAR_TCOKEY) return("PnlWdbeMchAPar.TcoKey");
 	if (ix == PNLWDBEMCHAPAR_TCOVAL) return("PnlWdbeMchAPar.TcoVal");
 	if (ix == PNLWDBEMCHAMAKEFILE_TCOTAG) return("PnlWdbeMchAMakefile.TcoTag");
 	if (ix == PNLWDBEMCHAMAKEFILE_TCOVAL) return("PnlWdbeMchAMakefile.TcoVal");
 	if (ix == PNLWDBEMCH1NRELEASE_TCOREF) return("PnlWdbeMch1NRelease.TcoRef");
+	if (ix == PNLWDBEMCHSUP1NMACHINE_TCOREF) return("PnlWdbeMchSup1NMachine.TcoRef");
 	if (ix == PNLWDBELIBLIST_TCOSRF) return("PnlWdbeLibList.TcoSrf");
 	if (ix == PNLWDBELIBLIST_TCOTIT) return("PnlWdbeLibList.TcoTit");
 	if (ix == PNLWDBELIBLIST_TCOVER) return("PnlWdbeLibList.TcoVer");
@@ -567,8 +570,8 @@ string DbsWdbe::VecVControl::getSref(
 	if (ix == PNLWDBESIL1NBANK_TCOREF) return("PnlWdbeSil1NBank.TcoRef");
 	if (ix == PNLWDBESILFWD1NCONTROLLER_TCOREF) return("PnlWdbeSilFwd1NController.TcoRef");
 	if (ix == PNLWDBESIL1NTARGET_TCOREF) return("PnlWdbeSil1NTarget.TcoRef");
-	if (ix == PNLWDBESILSIL1NUNIT_TCOREF) return("PnlWdbeSilSil1NUnit.TcoRef");
 	if (ix == PNLWDBESIL1NPERIPHERAL_TCOREF) return("PnlWdbeSil1NPeripheral.TcoRef");
+	if (ix == PNLWDBESILSIL1NUNIT_TCOREF) return("PnlWdbeSilSil1NUnit.TcoRef");
 	if (ix == PNLWDBESILREF1NCOMMAND_TCOREF) return("PnlWdbeSilRef1NCommand.TcoRef");
 	if (ix == PNLWDBESILHK1NMODULE_TCOREF) return("PnlWdbeSilHk1NModule.TcoRef");
 	if (ix == PNLWDBESILHK1NVECTOR_TCOREF) return("PnlWdbeSilHk1NVector.TcoRef");
@@ -644,8 +647,8 @@ string DbsWdbe::VecVControl::getSref(
 	if (ix == PNLWDBEUNT1NBANK_TCOREF) return("PnlWdbeUnt1NBank.TcoRef");
 	if (ix == PNLWDBEUNTFWD1NCONTROLLER_TCOREF) return("PnlWdbeUntFwd1NController.TcoRef");
 	if (ix == PNLWDBEUNT1NTARGET_TCOREF) return("PnlWdbeUnt1NTarget.TcoRef");
-	if (ix == PNLWDBEUNTSIL1NUNIT_TCOREF) return("PnlWdbeUntSil1NUnit.TcoRef");
 	if (ix == PNLWDBEUNT1NPERIPHERAL_TCOREF) return("PnlWdbeUnt1NPeripheral.TcoRef");
+	if (ix == PNLWDBEUNTSIL1NUNIT_TCOREF) return("PnlWdbeUntSil1NUnit.TcoRef");
 	if (ix == PNLWDBEUNTREF1NCOMMAND_TCOREF) return("PnlWdbeUntRef1NCommand.TcoRef");
 	if (ix == PNLWDBEUNTHK1NMODULE_TCOREF) return("PnlWdbeUntHk1NModule.TcoRef");
 	if (ix == PNLWDBEUNTHK1NVECTOR_TCOREF) return("PnlWdbeUntHk1NVector.TcoRef");
@@ -882,7 +885,6 @@ uint DbsWdbe::VecVKeylist::getIx(
 	if (s == "klstwdbekmfamilyvendor") return KLSTWDBEKMFAMILYVENDOR;
 	if (s == "klstwdbekmfilecontent") return KLSTWDBEKMFILECONTENT;
 	if (s == "klstwdbekmfilemimetype") return KLSTWDBEKMFILEMIMETYPE;
-	if (s == "klstwdbekmmachineplatform") return KLSTWDBEKMMACHINEPLATFORM;
 	if (s == "klstwdbekmreleaseoption") return KLSTWDBEKMRELEASEOPTION;
 	if (s == "klstwdbekmvectoroption") return KLSTWDBEKMVECTOROPTION;
 	if (s == "klstwdbekrmcoreprojectmpersonfunction") return KLSTWDBEKRMCOREPROJECTMPERSONFUNCTION;
@@ -915,7 +917,6 @@ string DbsWdbe::VecVKeylist::getSref(
 	if (ix == KLSTWDBEKMFAMILYVENDOR) return("KlstWdbeKMFamilyVendor");
 	if (ix == KLSTWDBEKMFILECONTENT) return("KlstWdbeKMFileContent");
 	if (ix == KLSTWDBEKMFILEMIMETYPE) return("KlstWdbeKMFileMimetype");
-	if (ix == KLSTWDBEKMMACHINEPLATFORM) return("KlstWdbeKMMachinePlatform");
 	if (ix == KLSTWDBEKMRELEASEOPTION) return("KlstWdbeKMReleaseOption");
 	if (ix == KLSTWDBEKMVECTOROPTION) return("KlstWdbeKMVectorOption");
 	if (ix == KLSTWDBEKRMCOREPROJECTMPERSONFUNCTION) return("KlstWdbeKRMCoreprojectMPersonFunction");
@@ -950,7 +951,6 @@ string DbsWdbe::VecVKeylist::getTitle(
 		if (ix == KLSTWDBEKMFAMILYVENDOR) return("vendor");
 		if (ix == KLSTWDBEKMFILECONTENT) return("content");
 		if (ix == KLSTWDBEKMFILEMIMETYPE) return("MIME type");
-		if (ix == KLSTWDBEKMMACHINEPLATFORM) return("platform");
 		if (ix == KLSTWDBEKMRELEASEOPTION) return("options");
 		if (ix == KLSTWDBEKMVECTOROPTION) return("options");
 		if (ix == KLSTWDBEKRMCOREPROJECTMPERSONFUNCTION) return("function");
@@ -1389,8 +1389,8 @@ uint DbsWdbe::VecVPreset::getIx(
 	if (s == "prewdbeliblist.srf") return PREWDBELIBLIST_SRF;
 	if (s == "prewdbemchamakefile.x1") return PREWDBEMCHAMAKEFILE_X1;
 	if (s == "prewdbemchapar.x1") return PREWDBEMCHAPAR_X1;
-	if (s == "prewdbemchlist.pla") return PREWDBEMCHLIST_PLA;
 	if (s == "prewdbemchlist.srf") return PREWDBEMCHLIST_SRF;
+	if (s == "prewdbemchlist.sup") return PREWDBEMCHLIST_SUP;
 	if (s == "prewdbemodapar.x1") return PREWDBEMODAPAR_X1;
 	if (s == "prewdbemodlist.hkt") return PREWDBEMODLIST_HKT;
 	if (s == "prewdbemodlist.hku") return PREWDBEMODLIST_HKU;
@@ -1619,8 +1619,8 @@ string DbsWdbe::VecVPreset::getSref(
 	if (ix == PREWDBELIBLIST_SRF) return("PreWdbeLibList.srf");
 	if (ix == PREWDBEMCHAMAKEFILE_X1) return("PreWdbeMchAMakefile.x1");
 	if (ix == PREWDBEMCHAPAR_X1) return("PreWdbeMchAPar.x1");
-	if (ix == PREWDBEMCHLIST_PLA) return("PreWdbeMchList.pla");
 	if (ix == PREWDBEMCHLIST_SRF) return("PreWdbeMchList.srf");
+	if (ix == PREWDBEMCHLIST_SUP) return("PreWdbeMchList.sup");
 	if (ix == PREWDBEMODAPAR_X1) return("PreWdbeModAPar.x1");
 	if (ix == PREWDBEMODLIST_HKT) return("PreWdbeModList.hkt");
 	if (ix == PREWDBEMODLIST_HKU) return("PreWdbeModList.hku");

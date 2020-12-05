@@ -1,10 +1,11 @@
 /**
 	* \file DlgWdbeVerDetdd.cpp
 	* job handler for job DlgWdbeVerDetdd (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifdef WDBECMBD
 	#include <Wdbecmbd.h>
@@ -43,15 +44,15 @@ DlgWdbeVerDetdd::DlgWdbeVerDetdd(
 	feedFSge.tag = "FeedFSge";
 	VecVSge::fillFeed(feedFSge);
 
-	iex = NULL;
 	license = NULL;
+	iex = NULL;
 
 	// IP constructor.cust1 --- INSERT
 
 	ixVDit = VecVDit::IFI;
 
-	iex = new JobWdbeIexDdd(xchg, dbswdbe, jref, ixWdbeVLocale);
 	license = new JobWdbeLicense(xchg, dbswdbe, jref, ixWdbeVLocale);
+	iex = new JobWdbeIexDdd(xchg, dbswdbe, jref, ixWdbeVLocale);
 
 	// IP constructor.cust2 --- INSERT
 
@@ -106,8 +107,8 @@ void DlgWdbeVerDetdd::refreshImp(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
 		) {
-	ContInfImp oldContinfimp(continfimp);
 	StatShrImp oldStatshrimp(statshrimp);
+	ContInfImp oldContinfimp(continfimp);
 
 	// IP refreshImp --- RBEGIN
 	// continfimp
@@ -118,16 +119,16 @@ void DlgWdbeVerDetdd::refreshImp(
 	statshrimp.ButStoActive = evalImpButStoActive(dbswdbe);
 
 	// IP refreshImp --- REND
-	if (continfimp.diff(&oldContinfimp).size() != 0) insert(moditems, DpchEngData::CONTINFIMP);
 	if (statshrimp.diff(&oldStatshrimp).size() != 0) insert(moditems, DpchEngData::STATSHRIMP);
+	if (continfimp.diff(&oldContinfimp).size() != 0) insert(moditems, DpchEngData::CONTINFIMP);
 };
 
 void DlgWdbeVerDetdd::refreshPpr(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
 		) {
-	ContInfPpr oldContinfppr(continfppr);
 	StatShrPpr oldStatshrppr(statshrppr);
+	ContInfPpr oldContinfppr(continfppr);
 
 	// IP refreshPpr --- RBEGIN
 	// continfppr
@@ -138,16 +139,16 @@ void DlgWdbeVerDetdd::refreshPpr(
 	statshrppr.ButStoActive = evalPprButStoActive(dbswdbe);
 
 	// IP refreshPpr --- REND
-	if (continfppr.diff(&oldContinfppr).size() != 0) insert(moditems, DpchEngData::CONTINFPPR);
 	if (statshrppr.diff(&oldStatshrppr).size() != 0) insert(moditems, DpchEngData::STATSHRPPR);
+	if (continfppr.diff(&oldContinfppr).size() != 0) insert(moditems, DpchEngData::CONTINFPPR);
 };
 
 void DlgWdbeVerDetdd::refreshLfi(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
 		) {
-	StatShrLfi oldStatshrlfi(statshrlfi);
 	ContInfLfi oldContinflfi(continflfi);
+	StatShrLfi oldStatshrlfi(statshrlfi);
 
 	// IP refreshLfi --- RBEGIN
 	// statshrlfi
@@ -157,37 +158,43 @@ void DlgWdbeVerDetdd::refreshLfi(
 	continflfi.Dld = "log.txt";
 
 	// IP refreshLfi --- REND
-	if (statshrlfi.diff(&oldStatshrlfi).size() != 0) insert(moditems, DpchEngData::STATSHRLFI);
 	if (continflfi.diff(&oldContinflfi).size() != 0) insert(moditems, DpchEngData::CONTINFLFI);
+	if (statshrlfi.diff(&oldStatshrlfi).size() != 0) insert(moditems, DpchEngData::STATSHRLFI);
 };
 
 void DlgWdbeVerDetdd::refresh(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
+			, const bool unmute
 		) {
-	ContInf oldContinf(continf);
-	ContIac oldContiac(contiac);
+	if (muteRefresh && !unmute) return;
+	muteRefresh = true;
+
 	StatShr oldStatshr(statshr);
+	ContIac oldContiac(contiac);
+	ContInf oldContinf(continf);
 
 	// IP refresh --- BEGIN
-	// continf
-	continf.numFSge = ixVSge;
+	// statshr
+	statshr.ButDneActive = evalButDneActive(dbswdbe);
 
 	// contiac
 	contiac.numFDse = ixVDit;
 
-	// statshr
-	statshr.ButDneActive = evalButDneActive(dbswdbe);
+	// continf
+	continf.numFSge = ixVSge;
 
 	// IP refresh --- END
-	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
-	if (contiac.diff(&oldContiac).size() != 0) insert(moditems, DpchEngData::CONTIAC);
 	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
+	if (contiac.diff(&oldContiac).size() != 0) insert(moditems, DpchEngData::CONTIAC);
+	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
 
 	refreshIfi(dbswdbe, moditems);
 	refreshImp(dbswdbe, moditems);
 	refreshPpr(dbswdbe, moditems);
 	refreshLfi(dbswdbe, moditems);
+
+	muteRefresh = false;
 };
 
 void DlgWdbeVerDetdd::handleRequest(
@@ -249,8 +256,8 @@ void DlgWdbeVerDetdd::handleRequest(
 		if (ixVSge == VecVSge::IDLE) handleUploadInSgeIdle(dbswdbe, req->filename);
 
 	} else if (req->ixVBasetype == ReqWdbe::VecVBasetype::DOWNLOAD) {
-		if (ixVSge == VecVSge::FAIL) req->filename = handleDownloadInSgeFail(dbswdbe);
-		else if (ixVSge == VecVSge::DONE) req->filename = handleDownloadInSgeDone(dbswdbe);
+		if (ixVSge == VecVSge::DONE) req->filename = handleDownloadInSgeDone(dbswdbe);
+		else if (ixVSge == VecVSge::FAIL) req->filename = handleDownloadInSgeFail(dbswdbe);
 
 	} else if (req->ixVBasetype == ReqWdbe::VecVBasetype::DPCHRET) {
 		if (req->dpchret->ixOpVOpres == VecOpVOpres::PROGRESS) {
@@ -281,10 +288,10 @@ void DlgWdbeVerDetdd::handleRequest(
 	} else if (req->ixVBasetype == ReqWdbe::VecVBasetype::TIMER) {
 		if (ixVSge == VecVSge::PRSIDLE) handleTimerInSgePrsidle(dbswdbe, req->sref);
 		else if (ixVSge == VecVSge::IMPIDLE) handleTimerInSgeImpidle(dbswdbe, req->sref);
-		else if ((req->sref == "mon") && (ixVSge == VecVSge::IMPORT)) handleTimerWithSrefMonInSgeImport(dbswdbe);
 		else if ((req->sref == "mon") && (ixVSge == VecVSge::POSTPRC1)) handleTimerWithSrefMonInSgePostprc1(dbswdbe);
 		else if ((req->sref == "mon") && (ixVSge == VecVSge::POSTPRC2)) handleTimerWithSrefMonInSgePostprc2(dbswdbe);
 		else if ((req->sref == "mon") && (ixVSge == VecVSge::POSTPRC3)) handleTimerWithSrefMonInSgePostprc3(dbswdbe);
+		else if ((req->sref == "mon") && (ixVSge == VecVSge::IMPORT)) handleTimerWithSrefMonInSgeImport(dbswdbe);
 	};
 };
 
@@ -420,16 +427,16 @@ void DlgWdbeVerDetdd::handleUploadInSgeIdle(
 	changeStage(dbswdbe, VecVSge::PRSIDLE);
 };
 
-string DlgWdbeVerDetdd::handleDownloadInSgeFail(
-			DbsWdbe* dbswdbe
-		) {
-	return(xchg->tmppath + "/" + logfile); // IP handleDownloadInSgeFail --- RLINE
-};
-
 string DlgWdbeVerDetdd::handleDownloadInSgeDone(
 			DbsWdbe* dbswdbe
 		) {
 	return(""); // IP handleDownloadInSgeDone --- LINE
+};
+
+string DlgWdbeVerDetdd::handleDownloadInSgeFail(
+			DbsWdbe* dbswdbe
+		) {
+	return(xchg->tmppath + "/" + logfile); // IP handleDownloadInSgeFail --- RLINE
 };
 
 void DlgWdbeVerDetdd::handleTimerInSgePrsidle(
@@ -444,13 +451,6 @@ void DlgWdbeVerDetdd::handleTimerInSgeImpidle(
 			, const string& sref
 		) {
 	changeStage(dbswdbe, nextIxVSgeSuccess);
-};
-
-void DlgWdbeVerDetdd::handleTimerWithSrefMonInSgeImport(
-			DbsWdbe* dbswdbe
-		) {
-	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
-	refreshWithDpchEng(dbswdbe); // IP handleTimerWithSrefMonInSgeImport --- ILINE
 };
 
 void DlgWdbeVerDetdd::handleTimerWithSrefMonInSgePostprc1(
@@ -472,6 +472,13 @@ void DlgWdbeVerDetdd::handleTimerWithSrefMonInSgePostprc3(
 		) {
 	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
 	refreshWithDpchEng(dbswdbe); // IP handleTimerWithSrefMonInSgePostprc3 --- ILINE
+};
+
+void DlgWdbeVerDetdd::handleTimerWithSrefMonInSgeImport(
+			DbsWdbe* dbswdbe
+		) {
+	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
+	refreshWithDpchEng(dbswdbe); // IP handleTimerWithSrefMonInSgeImport --- ILINE
 };
 
 void DlgWdbeVerDetdd::changeStage(
@@ -505,7 +512,7 @@ void DlgWdbeVerDetdd::changeStage(
 
 			setStage(dbswdbe, _ixVSge);
 			reenter = false;
-			if (!muteRefresh) refreshWithDpchEng(dbswdbe, dpcheng); // IP changeStage.refresh1 --- LINE
+			refreshWithDpchEng(dbswdbe, dpcheng); // IP changeStage.refresh1 --- LINE
 		};
 
 		switch (_ixVSge) {
@@ -640,6 +647,8 @@ uint DlgWdbeVerDetdd::enterSgeParse(
 	// IP enterSgeParse --- IBEGIN
 	ifstream ififile;
 
+	string rectfile;
+
 	char* buf;
 	string s;
 
@@ -652,15 +661,19 @@ uint DlgWdbeVerDetdd::enterSgeParse(
 	ififile.get(buf, 16);
 	s = string(buf);
 
-	ifitxt = (s.find("- ") == 0);
+	ifitxt = (s.find("IexWdbeDdd") == 0);
 	ifixml = (s.find("<?xml") == 0);		
 
 	delete[] buf;
 	ififile.close();
 
 	// parse file accordingly
-	if (ifitxt) iex->parseFromFile(dbswdbe, infilename, false);
-	else if (ifixml) iex->parseFromFile(dbswdbe, infilename, true);
+	if (ifitxt) {
+		rectfile = Tmp::newfile(xchg->tmppath, "txt");
+		iex->parseFromFile(dbswdbe, infilename, false, xchg->tmppath + "/" + rectfile);
+		infilename = xchg->tmppath + "/" + rectfile;
+
+	} else if (ifixml) iex->parseFromFile(dbswdbe, infilename, true, "");
 
 	if (iex->ixVSge != JobWdbeIexDdd::VecVSge::PRSDONE) {
 		if (reqCmd) {
@@ -1181,5 +1194,6 @@ void DlgWdbeVerDetdd::leaveSgeDone(
 		) {
 	// IP leaveSgeDone --- INSERT
 };
+
 
 

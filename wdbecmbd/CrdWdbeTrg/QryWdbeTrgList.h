@@ -1,10 +1,11 @@
 /**
 	* \file QryWdbeTrgList.h
 	* job handler for job QryWdbeTrgList (declarations)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifndef QRYWDBETRGLIST_H
 #define QRYWDBETRGLIST_H
@@ -31,9 +32,9 @@ public:
 	class VecVOrd {
 
 	public:
-		static const Sbecore::uint SRF = 1;
+		static const Sbecore::uint UNT = 1;
 		static const Sbecore::uint SYS = 2;
-		static const Sbecore::uint UNT = 3;
+		static const Sbecore::uint SRF = 3;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);
@@ -144,11 +145,13 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeStubChgFromSelf(DbsWdbe* dbswdbe);
-	bool handleCallWdbeTrgMod(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 	bool handleCallWdbeTrgUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbeTrgMod(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbeStubChgFromSelf(DbsWdbe* dbswdbe);
 
 };
 
 #endif
+
+
 

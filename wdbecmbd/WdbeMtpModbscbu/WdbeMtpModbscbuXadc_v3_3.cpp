@@ -1,10 +1,11 @@
 /**
 	* \file WdbeMtpModbscbuXadc_v3_3.cpp
-	* Wdbe operation processor - adapt port names (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
-	*/
+	* Wdbe operation processor - add analog input ports (implementation)
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
+  */
+// IP header --- ABOVE
 
 #ifdef WDBECMBD
 	#include <Wdbecmbd.h>
@@ -61,5 +62,6 @@ DpchRetWdbe* WdbeMtpModbscbuXadc_v3_3::run(
 };
 
 // IP cust --- INSERT
+
 
 

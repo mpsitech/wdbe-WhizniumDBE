@@ -1,11 +1,3 @@
-/**
-  * \file PnlWdbeVecVec1NVectoritem.js
-  * web client functionality for panel PnlWdbeVecVec1NVectoritem
-  * \author Alexander Wirthmueller
-  * \date created: 23 Aug 2020
-  * \date modified: 23 Aug 2020
-  */
-
 // --- expand state management
 function minimize(updh) {
 	if (retrieveSi(srcdoc, "StatAppWdbeVecVec1NVectoritem", "srefIxWdbeVExpstate") == "mind") return;

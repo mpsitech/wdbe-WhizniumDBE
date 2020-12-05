@@ -1,10 +1,11 @@
 /**
 	* \file WdbeAMMachinePar.h
 	* database access for table TblWdbeAMMachinePar (declarations)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
-	*/
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 5 Dec 2020
+  */
+// IP header --- ABOVE
 
 #ifndef WDBEAMMACHINEPAR_H
 #define WDBEAMMACHINEPAR_H
@@ -86,6 +87,7 @@ public:
 	virtual bool loadRecByRef(Sbecore::ubigint ref, WdbeAMMachinePar** rec);
 	virtual Sbecore::ubigint loadRefsByMch(Sbecore::ubigint refWdbeMMachine, const bool append, std::vector<Sbecore::ubigint>& refs);
 	virtual Sbecore::ubigint loadRstByMch(Sbecore::ubigint refWdbeMMachine, const bool append, ListWdbeAMMachinePar& rst);
+	virtual bool loadValByMchKey(Sbecore::ubigint refWdbeMMachine, std::string x1SrefKKey, std::string& Val);
 	Sbecore::ubigint loadRstByRefs(std::vector<Sbecore::ubigint>& refs, const bool append, ListWdbeAMMachinePar& rst);
 };
 
@@ -120,6 +122,7 @@ public:
 	bool loadRecByRef(Sbecore::ubigint ref, WdbeAMMachinePar** rec);
 	Sbecore::ubigint loadRefsByMch(Sbecore::ubigint refWdbeMMachine, const bool append, std::vector<Sbecore::ubigint>& refs);
 	Sbecore::ubigint loadRstByMch(Sbecore::ubigint refWdbeMMachine, const bool append, ListWdbeAMMachinePar& rst);
+	bool loadValByMchKey(Sbecore::ubigint refWdbeMMachine, std::string x1SrefKKey, std::string& Val);
 };
 #endif
 
@@ -155,6 +158,7 @@ public:
 	bool loadRecByRef(Sbecore::ubigint ref, WdbeAMMachinePar** rec);
 	Sbecore::ubigint loadRefsByMch(Sbecore::ubigint refWdbeMMachine, const bool append, std::vector<Sbecore::ubigint>& refs);
 	Sbecore::ubigint loadRstByMch(Sbecore::ubigint refWdbeMMachine, const bool append, ListWdbeAMMachinePar& rst);
+	bool loadValByMchKey(Sbecore::ubigint refWdbeMMachine, std::string x1SrefKKey, std::string& Val);
 };
 #endif
 

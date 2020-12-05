@@ -1,10 +1,11 @@
 /**
 	* \file PnlWdbeMch1NRelease_evals.cpp
 	* job handler for job PnlWdbeMch1NRelease (implementation of availability/activation evaluation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 using namespace std;
 using namespace Sbecore;
@@ -49,4 +50,6 @@ bool PnlWdbeMch1NRelease::evalButViewActive(
 
 	return(args.back());
 };
+
+
 

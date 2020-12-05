@@ -1,10 +1,11 @@
 /**
 	* \file PnlWdbeUsrRec.h
 	* job handler for job PnlWdbeUsrRec (declarations)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifndef PNLWDBEUSRREC_H
 #define PNLWDBEUSRREC_H
@@ -13,10 +14,10 @@
 
 // IP include.cust --- INSERT
 
-#include "PnlWdbeUsrDetail.h"
-#include "PnlWdbeUsrAAccess.h"
-#include "PnlWdbeUsr1NSession.h"
 #include "PnlWdbeUsrMNUsergroup.h"
+#include "PnlWdbeUsr1NSession.h"
+#include "PnlWdbeUsrAAccess.h"
+#include "PnlWdbeUsrDetail.h"
 
 #define VecVWdbeUsrRecDo PnlWdbeUsrRec::VecVDo
 
@@ -173,10 +174,10 @@ public:
 	ContInf continf;
 	StatShr statshr;
 
-	PnlWdbeUsrDetail* pnldetail;
-	PnlWdbeUsrAAccess* pnlaaccess;
-	PnlWdbeUsr1NSession* pnl1nsession;
 	PnlWdbeUsrMNUsergroup* pnlmnusergroup;
+	PnlWdbeUsr1NSession* pnl1nsession;
+	PnlWdbeUsrAAccess* pnlaaccess;
+	PnlWdbeUsrDetail* pnldetail;
 
 	WdbeMUser recUsr;
 
@@ -188,7 +189,7 @@ public:
 public:
 	DpchEngWdbe* getNewDpchEng(std::set<Sbecore::uint> items);
 
-	void refresh(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems);
+	void refresh(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems, const bool unmute = false);
 
 	void updatePreset(DbsWdbe* dbswdbe, const Sbecore::uint ixWdbeVPreset, const Sbecore::ubigint jrefTrig, const bool notif = false);
 	void minimize(DbsWdbe* dbswdbe, const bool notif = false, DpchEngWdbe** dpcheng = NULL);
@@ -210,11 +211,13 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeUsr_prsEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
-	bool handleCallWdbeUsr_usgEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
 	bool handleCallWdbeUsrUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbeUsr_usgEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeUsr_prsEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
 
 };
 
 #endif
+
+
 

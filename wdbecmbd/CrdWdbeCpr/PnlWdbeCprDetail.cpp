@@ -1,10 +1,11 @@
 /**
 	* \file PnlWdbeCprDetail.cpp
 	* job handler for job PnlWdbeCprDetail (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifdef WDBECMBD
 	#include <Wdbecmbd.h>
@@ -119,7 +120,11 @@ void PnlWdbeCprDetail::refreshRecCpr(
 void PnlWdbeCprDetail::refresh(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
+			, const bool unmute
 		) {
+	if (muteRefresh && !unmute) return;
+	muteRefresh = true;
+
 	StatShr oldStatshr(statshr);
 
 	// IP refresh --- BEGIN
@@ -129,6 +134,8 @@ void PnlWdbeCprDetail::refresh(
 	// IP refresh --- END
 
 	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
+
+	muteRefresh = false;
 };
 
 void PnlWdbeCprDetail::updatePreset(
@@ -251,11 +258,20 @@ void PnlWdbeCprDetail::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBECPR_CVREQ) {
-		call->abort = handleCallWdbeCpr_cvrEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECPRUPD_REFEQ) {
+	if (call->ixVCall == VecWdbeVCall::CALLWDBECPRUPD_REFEQ) {
 		call->abort = handleCallWdbeCprUpd_refEq(dbswdbe, call->jref);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECPR_CVREQ) {
+		call->abort = handleCallWdbeCpr_cvrEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
 	};
+};
+
+bool PnlWdbeCprDetail::handleCallWdbeCprUpd_refEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+	// IP handleCallWdbeCprUpd_refEq --- INSERT
+	return retval;
 };
 
 bool PnlWdbeCprDetail::handleCallWdbeCpr_cvrEq(
@@ -269,12 +285,5 @@ bool PnlWdbeCprDetail::handleCallWdbeCpr_cvrEq(
 	return retval;
 };
 
-bool PnlWdbeCprDetail::handleCallWdbeCprUpd_refEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-	// IP handleCallWdbeCprUpd_refEq --- INSERT
-	return retval;
-};
+
 

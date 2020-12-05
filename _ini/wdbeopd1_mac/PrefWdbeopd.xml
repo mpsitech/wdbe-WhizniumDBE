@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PrefWdbeopd>
+	<StgWdbeDatabase>
+		<Si sref="srefIxDbsVDbstype">my</Si>
+		<Si sref="dbspath">./DbsWdbe.sql</Si>
+		<Si sref="dbsname">DbsWdbe</Si>
+		<Si sref="username">default</Si>
+		<Si sref="password">asdf1234</Si>
+		<Si sref="ip">127.0.0.1</Si>
+		<Si sref="port">3306</Si>
+	</StgWdbeDatabase>
+	<StgWdbeMonitor>
+		<Si sref="username">wzemuser</Si>
+		<Si sref="password">asdf1234</Si>
+		<Si sref="ip">127.0.0.1</Si>
+		<Si sref="port">14100</Si>
+		<Si sref="srefIxDbsVDbstype"></Si>
+		<Si sref="dbspath">./DbsWzem.sql</Si>
+		<Si sref="dbsname">DbsWzem</Si>
+		<Si sref="dbsusername"></Si>
+		<Si sref="dbspassword"></Si>
+	</StgWdbeMonitor>
+	<StgWdbeopd>
+		<Si sref="engip">127.0.0.1</Si>
+		<Si sref="engport"></Si>
+		<Si sref="engsrvportbase">13140</Si>
+		<Si sref="engsrvportofs">0</Si>
+		<Si sref="opprcn">4</Si>
+	</StgWdbeopd>
+	<StgWdbePath>
+		<Si sref="acvpath">${WHIZROOT}/acv/wdbe</Si>
+		<Si sref="keypath"></Si>
+		<Si sref="monpath">${WHIZROOT}/mon/wdbe</Si>
+		<Si sref="tmppath">${WHIZROOT}/tmp/wdbe</Si>
+		<Si sref="webpath">${WHIZROOT}/web/appwdbe</Si>
+		<Si sref="helpurl">http://www.mpsitech.com/wdbe</Si>
+	</StgWdbePath>
+</PrefWdbeopd>

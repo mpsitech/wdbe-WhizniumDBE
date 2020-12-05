@@ -1,10 +1,11 @@
 /**
 	* \file CrdWdbeUtl.h
 	* API code for job CrdWdbeUtl (declarations)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 5 Dec 2020
 	*/
+// IP header --- ABOVE
 
 #ifndef CRDWDBEUTL_H
 #define CRDWDBEUTL_H
@@ -34,9 +35,8 @@ namespace CrdWdbeUtl {
 	public:
 		static const Sbecore::uint CLOSE = 1;
 		static const Sbecore::uint MITAPPABTCLICK = 2;
-		static const Sbecore::uint MITCRDCIFCLICK = 3;
-		static const Sbecore::uint MITCRDXIPCLICK = 4;
-		static const Sbecore::uint MITCRDMIPCLICK = 5;
+		static const Sbecore::uint MITCRDXIPCLICK = 3;
+		static const Sbecore::uint MITCRDMIPCLICK = 4;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);
@@ -112,16 +112,14 @@ namespace CrdWdbeUtl {
 
 	public:
 		static const Sbecore::uint SCRJREFDLGEXTRIP = 1;
-		static const Sbecore::uint SCRJREFDLGIEXCONV = 2;
-		static const Sbecore::uint SCRJREFDLGMRGIP = 3;
-		static const Sbecore::uint SCRJREFHEADBAR = 4;
+		static const Sbecore::uint SCRJREFDLGMRGIP = 2;
+		static const Sbecore::uint SCRJREFHEADBAR = 3;
 
 	public:
-		StatShr(const std::string& scrJrefDlgextrip = "", const std::string& scrJrefDlgiexconv = "", const std::string& scrJrefDlgmrgip = "", const std::string& scrJrefHeadbar = "");
+		StatShr(const std::string& scrJrefDlgextrip = "", const std::string& scrJrefDlgmrgip = "", const std::string& scrJrefHeadbar = "");
 
 	public:
 		std::string scrJrefDlgextrip;
-		std::string scrJrefDlgiexconv;
 		std::string scrJrefDlgmrgip;
 		std::string scrJrefHeadbar;
 
@@ -139,17 +137,15 @@ namespace CrdWdbeUtl {
 	public:
 		static const Sbecore::uint MITAPPABT = 1;
 		static const Sbecore::uint MRLAPPHLP = 2;
-		static const Sbecore::uint MITCRDCIF = 3;
-		static const Sbecore::uint MITCRDXIP = 4;
-		static const Sbecore::uint MITCRDMIP = 5;
+		static const Sbecore::uint MITCRDXIP = 3;
+		static const Sbecore::uint MITCRDMIP = 4;
 
 	public:
-		Tag(const std::string& MitAppAbt = "", const std::string& MrlAppHlp = "", const std::string& MitCrdCif = "", const std::string& MitCrdXip = "", const std::string& MitCrdMip = "");
+		Tag(const std::string& MitAppAbt = "", const std::string& MrlAppHlp = "", const std::string& MitCrdXip = "", const std::string& MitCrdMip = "");
 
 	public:
 		std::string MitAppAbt;
 		std::string MrlAppHlp;
-		std::string MitCrdCif;
 		std::string MitCrdXip;
 		std::string MitCrdMip;
 

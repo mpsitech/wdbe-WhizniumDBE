@@ -1,10 +1,11 @@
 /**
 	* \file QryWdbeUsrList.h
 	* job handler for job QryWdbeUsrList (declarations)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifndef QRYWDBEUSRLIST_H
 #define QRYWDBEUSRLIST_H
@@ -31,12 +32,12 @@ public:
 	class VecVOrd {
 
 	public:
-		static const Sbecore::uint GRP = 1;
-		static const Sbecore::uint OWN = 2;
-		static const Sbecore::uint PRS = 3;
-		static const Sbecore::uint SRF = 4;
-		static const Sbecore::uint USG = 5;
-		static const Sbecore::uint STE = 6;
+		static const Sbecore::uint USG = 1;
+		static const Sbecore::uint STE = 2;
+		static const Sbecore::uint SRF = 3;
+		static const Sbecore::uint PRS = 4;
+		static const Sbecore::uint OWN = 5;
+		static const Sbecore::uint GRP = 6;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);
@@ -146,11 +147,13 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeStubChgFromSelf(DbsWdbe* dbswdbe);
-	bool handleCallWdbeUsrMod(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 	bool handleCallWdbeUsrUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbeUsrMod(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbeStubChgFromSelf(DbsWdbe* dbswdbe);
 
 };
 
 #endif
+
+
 

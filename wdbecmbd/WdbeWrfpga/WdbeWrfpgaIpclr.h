@@ -1,10 +1,11 @@
 /**
 	* \file WdbeWrfpgaIpclr.h
 	* Wdbe operation processor - write VHDL code to clear unused specific insertion points (declarations)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
-	*/
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
+  */
+// IP header --- ABOVE
 
 #ifndef WDBEWRFPGAIPCLR_H
 #define WDBEWRFPGAIPCLR_H
@@ -23,5 +24,6 @@ namespace WdbeWrfpgaIpclr {
 };
 
 #endif
+
 
 

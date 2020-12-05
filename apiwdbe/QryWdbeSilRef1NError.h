@@ -1,10 +1,11 @@
 /**
 	* \file QryWdbeSilRef1NError.h
 	* API code for job QryWdbeSilRef1NError (declarations)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 5 Dec 2020
 	*/
+// IP header --- ABOVE
 
 #ifndef QRYWDBESILREF1NERROR_H
 #define QRYWDBESILREF1NERROR_H

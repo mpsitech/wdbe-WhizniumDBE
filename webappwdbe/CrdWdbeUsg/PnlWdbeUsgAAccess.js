@@ -1,11 +1,3 @@
-/**
-  * \file PnlWdbeUsgAAccess.js
-  * web client functionality for panel PnlWdbeUsgAAccess
-  * \author Alexander Wirthmueller
-  * \date created: 23 Aug 2020
-  * \date modified: 23 Aug 2020
-  */
-
 // --- expand state management
 function minimize(updh) {
 	if (retrieveSi(srcdoc, "StatAppWdbeUsgAAccess", "srefIxWdbeVExpstate") == "mind") return;

@@ -1,10 +1,11 @@
 /**
-  * \file ApiWdbe.java
-  * Wdbe Java API package global functionality
-  * \author Alexander Wirthmueller
-  * \date created: 23 Aug 2020
-  * \date modified: 23 Aug 2020
+	* \file ApiWdbe.java
+	* Wdbe Java API package global functionality
+	* \copyright (C) 2018-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 5 Dec 2020
   */
+// IP header --- ABOVE
 
 package apiwdbe;
 
@@ -22,10 +23,10 @@ import sbecore.*;
 
 public class ApiWdbe {
 
-	public static final String WDBE_VERSION = "1.0.3";
+	public static final String WDBE_VERSION = "1.1.0";
 	public static final int WDBE_VERSION_MAJOR = 1;
-	public static final int WDBE_VERSION_MINOR = 0;
-	public static final int WDBE_VERSION_SUB = 3;
+	public static final int WDBE_VERSION_MINOR = 1;
+	public static final int WDBE_VERSION_SUB = 0;
 
 	public static DpchEngWdbe readDpchEng(
 				String s
@@ -57,7 +58,6 @@ public class ApiWdbe {
 			else if (ixWdbeVDpch == VecWdbeVDpch.DPCHENGDLGWDBERLSWRITEDATA) dpcheng = (new DlgWdbeRlsWrite()).new DpchEngData();
 			else if (ixWdbeVDpch == VecWdbeVDpch.DPCHENGDLGWDBEUSRMNGKEYPAIRDATA) dpcheng = (new DlgWdbeUsrMngkeypair()).new DpchEngData();
 			else if (ixWdbeVDpch == VecWdbeVDpch.DPCHENGDLGWDBEUTLEXTRIPDATA) dpcheng = (new DlgWdbeUtlExtrip()).new DpchEngData();
-			else if (ixWdbeVDpch == VecWdbeVDpch.DPCHENGDLGWDBEUTLIEXCONVDATA) dpcheng = (new DlgWdbeUtlIexconv()).new DpchEngData();
 			else if (ixWdbeVDpch == VecWdbeVDpch.DPCHENGDLGWDBEUTLMRGIPDATA) dpcheng = (new DlgWdbeUtlMrgip()).new DpchEngData();
 			else if (ixWdbeVDpch == VecWdbeVDpch.DPCHENGDLGWDBEVERBSCDDDATA) dpcheng = (new DlgWdbeVerBscdd()).new DpchEngData();
 			else if (ixWdbeVDpch == VecWdbeVDpch.DPCHENGDLGWDBEVERDETDDDATA) dpcheng = (new DlgWdbeVerDetdd()).new DpchEngData();
@@ -140,6 +140,7 @@ public class ApiWdbe {
 			else if (ixWdbeVDpch == VecWdbeVDpch.DPCHENGWDBEMCHHEADBARDATA) dpcheng = (new PnlWdbeMchHeadbar()).new DpchEngData();
 			else if (ixWdbeVDpch == VecWdbeVDpch.DPCHENGWDBEMCHLISTDATA) dpcheng = (new PnlWdbeMchList()).new DpchEngData();
 			else if (ixWdbeVDpch == VecWdbeVDpch.DPCHENGWDBEMCHRECDATA) dpcheng = (new PnlWdbeMchRec()).new DpchEngData();
+			else if (ixWdbeVDpch == VecWdbeVDpch.DPCHENGWDBEMCHSUP1NMACHINEDATA) dpcheng = (new PnlWdbeMchSup1NMachine()).new DpchEngData();
 			else if (ixWdbeVDpch == VecWdbeVDpch.DPCHENGWDBEMOD1NPERIPHERALDATA) dpcheng = (new PnlWdbeMod1NPeripheral()).new DpchEngData();
 			else if (ixWdbeVDpch == VecWdbeVDpch.DPCHENGWDBEMOD1NPROCESSDATA) dpcheng = (new PnlWdbeMod1NProcess()).new DpchEngData();
 			else if (ixWdbeVDpch == VecWdbeVDpch.DPCHENGWDBEMODAPARDATA) dpcheng = (new PnlWdbeModAPar()).new DpchEngData();

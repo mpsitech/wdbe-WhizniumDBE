@@ -1,10 +1,11 @@
 /**
 	* \file PnlWdbeSysRec.cpp
 	* job handler for job PnlWdbeSysRec (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifdef WDBECMBD
 	#include <Wdbecmbd.h>
@@ -37,17 +38,17 @@ PnlWdbeSysRec::PnlWdbeSysRec(
 		{
 	jref = xchg->addJob(dbswdbe, this, jrefSup);
 
-	pnldetail = NULL;
-	pnlsys1ntarget = NULL;
 	pnlhk1nvector = NULL;
+	pnlsys1ntarget = NULL;
+	pnldetail = NULL;
 
 	// IP constructor.cust1 --- INSERT
 
 	// IP constructor.cust2 --- INSERT
 
-	xchg->addClstn(VecWdbeVCall::CALLWDBESYS_UNT_INSBS, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecWdbeVCall::CALLWDBESYS_UNTEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBESYS_VEREQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBESYS_UNTEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBESYS_UNT_INSBS, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -82,7 +83,11 @@ DpchEngWdbe* PnlWdbeSysRec::getNewDpchEng(
 void PnlWdbeSysRec::refresh(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
+			, const bool unmute
 		) {
+	if (muteRefresh && !unmute) return;
+	muteRefresh = true;
+
 	ContInf oldContinf(continf);
 	StatShr oldStatshr(statshr);
 
@@ -113,6 +118,7 @@ void PnlWdbeSysRec::refresh(
 	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
 	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
 
+	muteRefresh = false;
 };
 
 void PnlWdbeSysRec::updatePreset(
@@ -245,36 +251,23 @@ void PnlWdbeSysRec::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBESYS_UNT_INSBS) {
-		call->abort = handleCallWdbeSys_unt_inSbs(dbswdbe, call->jref, call->argInv.ix, call->argRet.boolval);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBESYS_UNTEQ) {
-		call->abort = handleCallWdbeSys_untEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
+	if (call->ixVCall == VecWdbeVCall::CALLWDBESYSUPD_REFEQ) {
+		call->abort = handleCallWdbeSysUpd_refEq(dbswdbe, call->jref);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBESYS_VEREQ) {
 		call->abort = handleCallWdbeSys_verEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBESYSUPD_REFEQ) {
-		call->abort = handleCallWdbeSysUpd_refEq(dbswdbe, call->jref);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBESYS_UNTEQ) {
+		call->abort = handleCallWdbeSys_untEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBESYS_UNT_INSBS) {
+		call->abort = handleCallWdbeSys_unt_inSbs(dbswdbe, call->jref, call->argInv.ix, call->argRet.boolval);
 	};
 };
 
-bool PnlWdbeSysRec::handleCallWdbeSys_unt_inSbs(
+bool PnlWdbeSysRec::handleCallWdbeSysUpd_refEq(
 			DbsWdbe* dbswdbe
 			, const ubigint jrefTrig
-			, const uint ixInv
-			, bool& boolvalRet
 		) {
 	bool retval = false;
-	boolvalRet = ((dbswdbe->getIxWSubsetByRefWdbeMUnit(recSys.refWdbeMUnit) & ixInv) != 0); // IP handleCallWdbeSys_unt_inSbs --- LINE
-	return retval;
-};
-
-bool PnlWdbeSysRec::handleCallWdbeSys_untEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-			, const ubigint refInv
-			, bool& boolvalRet
-		) {
-	bool retval = false;
-	boolvalRet = (recSys.refWdbeMUnit == refInv); // IP handleCallWdbeSys_untEq --- LINE
+	// IP handleCallWdbeSysUpd_refEq --- INSERT
 	return retval;
 };
 
@@ -289,12 +282,27 @@ bool PnlWdbeSysRec::handleCallWdbeSys_verEq(
 	return retval;
 };
 
-bool PnlWdbeSysRec::handleCallWdbeSysUpd_refEq(
+bool PnlWdbeSysRec::handleCallWdbeSys_untEq(
 			DbsWdbe* dbswdbe
 			, const ubigint jrefTrig
+			, const ubigint refInv
+			, bool& boolvalRet
 		) {
 	bool retval = false;
-	// IP handleCallWdbeSysUpd_refEq --- INSERT
+	boolvalRet = (recSys.refWdbeMUnit == refInv); // IP handleCallWdbeSys_untEq --- LINE
 	return retval;
 };
+
+bool PnlWdbeSysRec::handleCallWdbeSys_unt_inSbs(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+			, const uint ixInv
+			, bool& boolvalRet
+		) {
+	bool retval = false;
+	boolvalRet = ((dbswdbe->getIxWSubsetByRefWdbeMUnit(recSys.refWdbeMUnit) & ixInv) != 0); // IP handleCallWdbeSys_unt_inSbs --- LINE
+	return retval;
+};
+
+
 

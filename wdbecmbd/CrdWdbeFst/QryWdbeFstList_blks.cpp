@@ -1,10 +1,11 @@
 /**
 	* \file QryWdbeFstList_blks.cpp
 	* job handler for job QryWdbeFstList (implementation of blocks)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 using namespace std;
 using namespace Sbecore;
@@ -19,8 +20,8 @@ uint QryWdbeFstList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "srf") return SRF;
 	if (s == "fsm") return FSM;
+	if (s == "srf") return SRF;
 
 	return(0);
 };
@@ -28,8 +29,8 @@ uint QryWdbeFstList::VecVOrd::getIx(
 string QryWdbeFstList::VecVOrd::getSref(
 			const uint ix
 		) {
-	if (ix == SRF) return("srf");
 	if (ix == FSM) return("fsm");
+	if (ix == SRF) return("srf");
 
 	return("");
 };
@@ -216,4 +217,6 @@ set<uint> QryWdbeFstList::StgIac::diff(
 
 	return(diffitems);
 };
+
+
 

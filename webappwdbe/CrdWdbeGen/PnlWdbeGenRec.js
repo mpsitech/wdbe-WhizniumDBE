@@ -1,11 +1,3 @@
-/**
-  * \file PnlWdbeGenRec.js
-  * web client functionality for panel PnlWdbeGenRec
-  * \author Alexander Wirthmueller
-  * \date created: 23 Aug 2020
-  * \date modified: 23 Aug 2020
-  */
-
 function updateScrJrefs() {
 	scrJrefDetail = retrieveSi(srcdoc, "StatShrWdbeGenRec", "scrJrefDetail");
 };

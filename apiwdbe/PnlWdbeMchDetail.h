@@ -1,10 +1,11 @@
 /**
 	* \file PnlWdbeMchDetail.h
 	* API code for job PnlWdbeMchDetail (declarations)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 5 Dec 2020
 	*/
+// IP header --- ABOVE
 
 #ifndef PNLWDBEMCHDETAIL_H
 #define PNLWDBEMCHDETAIL_H
@@ -34,7 +35,7 @@ namespace PnlWdbeMchDetail {
 
 	public:
 		static const Sbecore::uint BUTSAVECLICK = 1;
-		static const Sbecore::uint BUTPLAEDITCLICK = 2;
+		static const Sbecore::uint BUTSUPVIEWCLICK = 2;
 		static const Sbecore::uint BUTCCHVIEWCLICK = 3;
 
 		static Sbecore::uint getIx(const std::string& sref);
@@ -47,16 +48,12 @@ namespace PnlWdbeMchDetail {
 	class ContIac : public Sbecore::Xmlio::Block {
 
 	public:
-		static const Sbecore::uint NUMFPUPPLA = 1;
-		static const Sbecore::uint TXFPLA = 2;
-		static const Sbecore::uint TXFCMT = 3;
+		static const Sbecore::uint TXFCMT = 1;
 
 	public:
-		ContIac(const Sbecore::uint numFPupPla = 1, const std::string& TxfPla = "", const std::string& TxfCmt = "");
+		ContIac(const std::string& TxfCmt = "");
 
 	public:
-		Sbecore::uint numFPupPla;
-		std::string TxfPla;
 		std::string TxfCmt;
 
 	public:
@@ -73,13 +70,15 @@ namespace PnlWdbeMchDetail {
 
 	public:
 		static const Sbecore::uint TXTSRF = 1;
-		static const Sbecore::uint TXTCCH = 2;
+		static const Sbecore::uint TXTSUP = 2;
+		static const Sbecore::uint TXTCCH = 3;
 
 	public:
-		ContInf(const std::string& TxtSrf = "", const std::string& TxtCch = "");
+		ContInf(const std::string& TxtSrf = "", const std::string& TxtSup = "", const std::string& TxtCch = "");
 
 	public:
 		std::string TxtSrf;
+		std::string TxtSup;
 		std::string TxtCch;
 
 	public:
@@ -95,14 +94,12 @@ namespace PnlWdbeMchDetail {
 
 	public:
 		static const Sbecore::uint IXWDBEVEXPSTATE = 1;
-		static const Sbecore::uint PUPPLAALT = 2;
 
 	public:
-		StatApp(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::MIND, const bool PupPlaAlt = false);
+		StatApp(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::MIND);
 
 	public:
 		Sbecore::uint ixWdbeVExpstate;
-		bool PupPlaAlt;
 
 	public:
 		bool readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
@@ -116,27 +113,27 @@ namespace PnlWdbeMchDetail {
 	class StatShr : public Sbecore::Xmlio::Block {
 
 	public:
-		static const Sbecore::uint TXFPLAVALID = 1;
-		static const Sbecore::uint BUTSAVEAVAIL = 2;
-		static const Sbecore::uint BUTSAVEACTIVE = 3;
-		static const Sbecore::uint TXTSRFACTIVE = 4;
-		static const Sbecore::uint PUPPLAACTIVE = 5;
-		static const Sbecore::uint BUTPLAEDITAVAIL = 6;
+		static const Sbecore::uint BUTSAVEAVAIL = 1;
+		static const Sbecore::uint BUTSAVEACTIVE = 2;
+		static const Sbecore::uint TXTSRFACTIVE = 3;
+		static const Sbecore::uint TXTSUPACTIVE = 4;
+		static const Sbecore::uint BUTSUPVIEWAVAIL = 5;
+		static const Sbecore::uint BUTSUPVIEWACTIVE = 6;
 		static const Sbecore::uint TXTCCHACTIVE = 7;
 		static const Sbecore::uint BUTCCHVIEWAVAIL = 8;
 		static const Sbecore::uint BUTCCHVIEWACTIVE = 9;
 		static const Sbecore::uint TXFCMTACTIVE = 10;
 
 	public:
-		StatShr(const bool TxfPlaValid = false, const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxtSrfActive = true, const bool PupPlaActive = true, const bool ButPlaEditAvail = true, const bool TxtCchActive = true, const bool ButCchViewAvail = true, const bool ButCchViewActive = true, const bool TxfCmtActive = true);
+		StatShr(const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxtSrfActive = true, const bool TxtSupActive = true, const bool ButSupViewAvail = true, const bool ButSupViewActive = true, const bool TxtCchActive = true, const bool ButCchViewAvail = true, const bool ButCchViewActive = true, const bool TxfCmtActive = true);
 
 	public:
-		bool TxfPlaValid;
 		bool ButSaveAvail;
 		bool ButSaveActive;
 		bool TxtSrfActive;
-		bool PupPlaActive;
-		bool ButPlaEditAvail;
+		bool TxtSupActive;
+		bool ButSupViewAvail;
+		bool ButSupViewActive;
 		bool TxtCchActive;
 		bool ButCchViewAvail;
 		bool ButCchViewActive;
@@ -156,17 +153,17 @@ namespace PnlWdbeMchDetail {
 	public:
 		static const Sbecore::uint CPT = 1;
 		static const Sbecore::uint CPTSRF = 2;
-		static const Sbecore::uint CPTPLA = 3;
+		static const Sbecore::uint CPTSUP = 3;
 		static const Sbecore::uint CPTCCH = 4;
 		static const Sbecore::uint CPTCMT = 5;
 
 	public:
-		Tag(const std::string& Cpt = "", const std::string& CptSrf = "", const std::string& CptPla = "", const std::string& CptCch = "", const std::string& CptCmt = "");
+		Tag(const std::string& Cpt = "", const std::string& CptSrf = "", const std::string& CptSup = "", const std::string& CptCch = "", const std::string& CptCmt = "");
 
 	public:
 		std::string Cpt;
 		std::string CptSrf;
-		std::string CptPla;
+		std::string CptSup;
 		std::string CptCch;
 		std::string CptCmt;
 
@@ -227,10 +224,9 @@ namespace PnlWdbeMchDetail {
 		static const Sbecore::uint SCRJREF = 1;
 		static const Sbecore::uint CONTIAC = 2;
 		static const Sbecore::uint CONTINF = 3;
-		static const Sbecore::uint FEEDFPUPPLA = 4;
-		static const Sbecore::uint STATAPP = 5;
-		static const Sbecore::uint STATSHR = 6;
-		static const Sbecore::uint TAG = 7;
+		static const Sbecore::uint STATAPP = 4;
+		static const Sbecore::uint STATSHR = 5;
+		static const Sbecore::uint TAG = 6;
 
 	public:
 		DpchEngData();
@@ -238,7 +234,6 @@ namespace PnlWdbeMchDetail {
 	public:
 		ContIac contiac;
 		ContInf continf;
-		Sbecore::Xmlio::Feed feedFPupPla;
 		StatApp statapp;
 		StatShr statshr;
 		Tag tag;

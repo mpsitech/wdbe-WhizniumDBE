@@ -1,10 +1,11 @@
 /**
 	* \file DbsWdbe.cpp
 	* C++ wrapper for database DbsWdbe (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
-	*/
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 5 Dec 2020
+  */
+// IP header --- ABOVE
 
 #include "DbsWdbe.h"
 
@@ -294,6 +295,8 @@ void DbsWdbe::initMy() {
 	((MyTblWdbeQMchAPar*) tblwdbeqmchapar)->init(dbsMy);
 	tblwdbeqmchlist = new MyTblWdbeQMchList();
 	((MyTblWdbeQMchList*) tblwdbeqmchlist)->init(dbsMy);
+	tblwdbeqmchsup1nmachine = new MyTblWdbeQMchSup1NMachine();
+	((MyTblWdbeQMchSup1NMachine*) tblwdbeqmchsup1nmachine)->init(dbsMy);
 	tblwdbeqmod1nperipheral = new MyTblWdbeQMod1NPeripheral();
 	((MyTblWdbeQMod1NPeripheral*) tblwdbeqmod1nperipheral)->init(dbsMy);
 	tblwdbeqmod1nprocess = new MyTblWdbeQMod1NProcess();
@@ -691,6 +694,8 @@ void DbsWdbe::initPg() {
 	((PgTblWdbeQMchAPar*) tblwdbeqmchapar)->init(dbsPg);
 	tblwdbeqmchlist = new PgTblWdbeQMchList();
 	((PgTblWdbeQMchList*) tblwdbeqmchlist)->init(dbsPg);
+	tblwdbeqmchsup1nmachine = new PgTblWdbeQMchSup1NMachine();
+	((PgTblWdbeQMchSup1NMachine*) tblwdbeqmchsup1nmachine)->init(dbsPg);
 	tblwdbeqmod1nperipheral = new PgTblWdbeQMod1NPeripheral();
 	((PgTblWdbeQMod1NPeripheral*) tblwdbeqmod1nperipheral)->init(dbsPg);
 	tblwdbeqmod1nprocess = new PgTblWdbeQMod1NProcess();
@@ -1381,10 +1386,10 @@ uint DbsWdbe::getIxWSubsetByWdbeMModule(
 		args.push_back(a && b);
 		if (args.back()) {
 			ixWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMCT;
-			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMIB;
+			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMTP;
 			ixWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMOD;
 			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMOD;
-			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMTP;
+			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMIB;
 		} else {
 		};
 
@@ -1414,10 +1419,10 @@ uint DbsWdbe::getIxWSubsetByWdbeMModule(
 		args.push_back(a && b);
 		if (args.back()) {
 			ixWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMIB;
-			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMCT;
+			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMTP;
 			ixWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMOD;
 			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMOD;
-			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMTP;
+			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMCT;
 		} else {
 		};
 
@@ -1443,9 +1448,9 @@ uint DbsWdbe::getIxWSubsetByWdbeMModule(
 		if (args.back()) {
 			ixWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMOD;
 		} else {
-			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMCT;
-			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMIB;
 			ixWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMTP;
+			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMIB;
+			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMCT;
 		};
 
 		dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMOD;
@@ -1468,8 +1473,8 @@ uint DbsWdbe::getIxWSubsetByWdbeMModule(
 		args.push_back(a && b);
 		if (args.back()) {
 			ixWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMTP;
-			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMCT;
 			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMIB;
+			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMCT;
 		} else {
 			ixWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMOD;
 		};

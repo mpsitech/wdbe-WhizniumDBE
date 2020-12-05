@@ -1,10 +1,11 @@
 /**
 	* \file QryWdbePrsList.cpp
 	* API code for job QryWdbePrsList (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 5 Dec 2020
 	*/
+// IP header --- ABOVE
 
 #include "QryWdbePrsList.h"
 
@@ -21,9 +22,9 @@ uint QryWdbePrsList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "grp") return GRP;
-	if (s == "own") return OWN;
 	if (s == "lnm") return LNM;
+	if (s == "own") return OWN;
+	if (s == "grp") return GRP;
 
 	return(0);
 };
@@ -31,9 +32,9 @@ uint QryWdbePrsList::VecVOrd::getIx(
 string QryWdbePrsList::VecVOrd::getSref(
 			const uint ix
 		) {
-	if (ix == GRP) return("grp");
-	if (ix == OWN) return("own");
 	if (ix == LNM) return("lnm");
+	if (ix == OWN) return("own");
+	if (ix == GRP) return("grp");
 
 	return("");
 };

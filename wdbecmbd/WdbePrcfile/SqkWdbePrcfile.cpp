@@ -1,10 +1,11 @@
 /**
 	* \file SqkWdbePrcfile.cpp
 	* squawk generation for operation pack WdbePrcfile (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
-	*/
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
+  */
+// IP header --- ABOVE
 
 #include "SqkWdbePrcfile.h"
 
@@ -24,14 +25,6 @@ string SqkWdbePrcfile::getSquawkConcat(
 	return("concatenate text from mutliple input files into output file '" + dpchinv->outfile + "'"); // IP getSquawkConcat --- RLINE
 };
 
-string SqkWdbePrcfile::getSquawkIexconv(
-			DbsWdbe* dbswdbe
-			, DpchInvWdbePrcfileIexconv* dpchinv
-		) {
-	// example: "convert text import input file 'test/abcd/testin.txt' into output file 'test/abcd/testout.txt'"
-	return("convert text import file '" + dpchinv->infile + "' into output file '" + dpchinv->outfile + "'"); // IP getSquawkIexconv --- RLINE
-};
-
 string SqkWdbePrcfile::getSquawkPlhrpl(
 			DbsWdbe* dbswdbe
 			, DpchInvWdbePrcfilePlhrpl* dpchinv
@@ -39,5 +32,6 @@ string SqkWdbePrcfile::getSquawkPlhrpl(
 	// example: "replace placeholders by text into file 'test/abcd/test.txt'"
 	return("replace placeholders by text into file '" + dpchinv->outfile + "'"); // IP getSquawkPlhrpl --- RLINE
 };
+
 
 

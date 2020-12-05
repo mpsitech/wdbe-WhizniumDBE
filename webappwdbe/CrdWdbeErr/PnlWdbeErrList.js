@@ -1,11 +1,3 @@
-/**
-  * \file PnlWdbeErrList.js
-  * web client functionality for panel PnlWdbeErrList
-  * \author Alexander Wirthmueller
-  * \date created: 23 Aug 2020
-  * \date modified: 23 Aug 2020
-  */
-
 // --- expand state management
 function minimize() {
 	// change container heights
@@ -134,13 +126,13 @@ function refreshB(chgcol) {
 			ix++;
 
 			if (i == 1) {
-				doc.cols.push("TcoSrf"); doc.widths.push(TcoSrfWidth); doc.fs.push("srf"); doc.tos.push(1); wtot += TcoSrfWidth;
+				doc.cols.push("TcoSrf"); doc.widths.push(TcoSrfWidth); doc.fs.push("srf"); doc.tos.push(3); wtot += TcoSrfWidth;
 			} else if (i == 2) {
 				doc.cols.push("TcoFsr"); doc.widths.push(TcoFsrWidth); doc.fs.push("fsr"); doc.tos.push(0); wtot += TcoFsrWidth;
 			} else if (i == 3) {
 				doc.cols.push("TcoRet"); doc.widths.push(TcoRetWidth); doc.fs.push("ret2"); doc.tos.push(0); wtot += TcoRetWidth;
 			} else if (i == 4) {
-				doc.cols.push("TcoReu"); doc.widths.push(TcoReuWidth); doc.fs.push("reu"); doc.tos.push(3); wtot += TcoReuWidth;
+				doc.cols.push("TcoReu"); doc.widths.push(TcoReuWidth); doc.fs.push("reu"); doc.tos.push(1); wtot += TcoReuWidth;
 			} else {
 				ix--;
 			};

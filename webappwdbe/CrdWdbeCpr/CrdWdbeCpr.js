@@ -1,11 +1,3 @@
-/**
-  * \file CrdWdbeCpr.js
-  * web client functionality for card CrdWdbeCpr
-  * \author Alexander Wirthmueller
-  * \date created: 23 Aug 2020
-  * \date modified: 23 Aug 2020
-  */
-
 function getInitdone(pnlshort) {
 	return(retrieveSi(srcdoc, "StatAppWdbeCpr", "initdone" + pnlshort) == "true");
 };
@@ -348,7 +340,7 @@ function refresh() {
 		if (scrJrefDlg != scrJrefDlgnew) showDlg("DlgWdbeCprNew", scrJrefDlgnew);
 	} else if (scrJrefDlg != "") hideDlg();
 
-	doc.title = retrieveCi(srcdoc, "ContInfWdbeCpr", "MtxCrdCpr") + " - WhizniumDBE v1.0.3";
+	doc.title = retrieveCi(srcdoc, "ContInfWdbeCpr", "MtxCrdCpr") + " - WhizniumDBE v1.1.0";
 };
 
 // --- event handlers

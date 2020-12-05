@@ -1,10 +1,11 @@
 /**
 	* \file WdbeAMCommandInvpar.h
 	* database access for table TblWdbeAMCommandInvpar (declarations)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
-	*/
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 5 Dec 2020
+  */
+// IP header --- ABOVE
 
 #ifndef WDBEAMCOMMANDINVPAR_H
 #define WDBEAMCOMMANDINVPAR_H

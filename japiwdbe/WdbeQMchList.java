@@ -1,10 +1,11 @@
 /**
-  * \file WdbeQMchList.h
-  * Java API code for record of table TblWdbeQMchList
-  * \author Alexander Wirthmueller
-  * \date created: 23 Aug 2020
-  * \date modified: 23 Aug 2020
+	* \file WdbeQMchList.h
+	* Java API code for record of table TblWdbeQMchList
+	* \copyright (C) 2018-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 5 Dec 2020
   */
+// IP header --- ABOVE
 
 package apiwdbe;
 
@@ -16,19 +17,16 @@ public class WdbeQMchList {
 	public WdbeQMchList(
 				int jnum
 				, String sref
-				, String srefKPlatform
-				, String titSrefKPlatform
+				, String stubSupRefWdbeMMachine
 			) {
 		this.jnum = jnum;
 		this.sref = sref;
-		this.srefKPlatform = srefKPlatform;
-		this.titSrefKPlatform = titSrefKPlatform;
+		this.stubSupRefWdbeMMachine = stubSupRefWdbeMMachine;
 	};
 
 	public int jnum;
 	public String sref;
-	public String srefKPlatform;
-	public String titSrefKPlatform;
+	public String stubSupRefWdbeMMachine;
 	
 	public boolean readXML(
 				Document doc
@@ -39,8 +37,7 @@ public class WdbeQMchList {
 
 		if (Xmlio.checkXPath(doc, basexpath)) {
 			sref = Xmlio.extractStringUclc(doc, basexpath, "sref", "srf", null, 0);
-			srefKPlatform = Xmlio.extractStringUclc(doc, basexpath, "srefKPlatform", "pla", null, 0);
-			titSrefKPlatform = Xmlio.extractStringUclc(doc, basexpath, "titSrefKPlatform", "pla2", null, 0);
+			stubSupRefWdbeMMachine = Xmlio.extractStringUclc(doc, basexpath, "stubSupRefWdbeMMachine", "sup", null, 0);
 			
 			return true;
 		};

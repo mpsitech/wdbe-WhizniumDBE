@@ -1,10 +1,11 @@
 /**
 	* \file PnlWdbeCvrRec.cpp
 	* job handler for job PnlWdbeCvrRec (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifdef WDBECMBD
 	#include <Wdbecmbd.h>
@@ -37,18 +38,18 @@ PnlWdbeCvrRec::PnlWdbeCvrRec(
 		{
 	jref = xchg->addJob(dbswdbe, this, jrefSup);
 
-	pnldetail = NULL;
-	pnlaip = NULL;
-	pnlaplh = NULL;
-	pnlbcv1ncoreversion = NULL;
 	pnlhk1nmodule = NULL;
+	pnlbcv1ncoreversion = NULL;
+	pnlaplh = NULL;
+	pnlaip = NULL;
+	pnldetail = NULL;
 
 	// IP constructor.cust1 --- INSERT
 
 	// IP constructor.cust2 --- INSERT
 
-	xchg->addClstn(VecWdbeVCall::CALLWDBECVR_BCVEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBECVR_CPREQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBECVR_BCVEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -83,7 +84,11 @@ DpchEngWdbe* PnlWdbeCvrRec::getNewDpchEng(
 void PnlWdbeCvrRec::refresh(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
+			, const bool unmute
 		) {
+	if (muteRefresh && !unmute) return;
+	muteRefresh = true;
+
 	ContInf oldContinf(continf);
 	StatShr oldStatshr(statshr);
 
@@ -120,6 +125,7 @@ void PnlWdbeCvrRec::refresh(
 	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
 	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
 
+	muteRefresh = false;
 };
 
 void PnlWdbeCvrRec::updatePreset(
@@ -254,23 +260,21 @@ void PnlWdbeCvrRec::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBECVR_BCVEQ) {
-		call->abort = handleCallWdbeCvr_bcvEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
+	if (call->ixVCall == VecWdbeVCall::CALLWDBECVRUPD_REFEQ) {
+		call->abort = handleCallWdbeCvrUpd_refEq(dbswdbe, call->jref);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECVR_CPREQ) {
 		call->abort = handleCallWdbeCvr_cprEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECVRUPD_REFEQ) {
-		call->abort = handleCallWdbeCvrUpd_refEq(dbswdbe, call->jref);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECVR_BCVEQ) {
+		call->abort = handleCallWdbeCvr_bcvEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
 	};
 };
 
-bool PnlWdbeCvrRec::handleCallWdbeCvr_bcvEq(
+bool PnlWdbeCvrRec::handleCallWdbeCvrUpd_refEq(
 			DbsWdbe* dbswdbe
 			, const ubigint jrefTrig
-			, const ubigint refInv
-			, bool& boolvalRet
 		) {
 	bool retval = false;
-	boolvalRet = (recCvr.bcvRefWdbeMCoreversion == refInv); // IP handleCallWdbeCvr_bcvEq --- LINE
+	// IP handleCallWdbeCvrUpd_refEq --- INSERT
 	return retval;
 };
 
@@ -285,12 +289,16 @@ bool PnlWdbeCvrRec::handleCallWdbeCvr_cprEq(
 	return retval;
 };
 
-bool PnlWdbeCvrRec::handleCallWdbeCvrUpd_refEq(
+bool PnlWdbeCvrRec::handleCallWdbeCvr_bcvEq(
 			DbsWdbe* dbswdbe
 			, const ubigint jrefTrig
+			, const ubigint refInv
+			, bool& boolvalRet
 		) {
 	bool retval = false;
-	// IP handleCallWdbeCvrUpd_refEq --- INSERT
+	boolvalRet = (recCvr.bcvRefWdbeMCoreversion == refInv); // IP handleCallWdbeCvr_bcvEq --- LINE
 	return retval;
 };
+
+
 

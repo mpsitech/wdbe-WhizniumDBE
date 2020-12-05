@@ -1,10 +1,11 @@
 /**
 	* \file WdbeMtpModdet_blks.cpp
 	* invocation / return data blocks for operation pack WdbeMtpModdet (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
-	*/
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
+  */
+// IP header --- ABOVE
 
 #include "WdbeMtpModdet_blks.h"
 
@@ -63,4 +64,6 @@ void DpchInvWdbeMtpModdet::writeXML(
 };
 
 // IP cust --- INSERT
+
+
 

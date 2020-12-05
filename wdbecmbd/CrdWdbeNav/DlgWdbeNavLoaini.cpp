@@ -1,10 +1,11 @@
 /**
 	* \file DlgWdbeNavLoaini.cpp
 	* job handler for job DlgWdbeNavLoaini (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifdef WDBECMBD
 	#include <Wdbecmbd.h>
@@ -104,8 +105,8 @@ void DlgWdbeNavLoaini::refreshImp(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
 		) {
-	ContInfImp oldContinfimp(continfimp);
 	StatShrImp oldStatshrimp(statshrimp);
+	ContInfImp oldContinfimp(continfimp);
 
 	// IP refreshImp --- RBEGIN
 	// continfimp
@@ -116,8 +117,8 @@ void DlgWdbeNavLoaini::refreshImp(
 	statshrimp.ButStoActive = evalImpButStoActive(dbswdbe);
 
 	// IP refreshImp --- REND
-	if (continfimp.diff(&oldContinfimp).size() != 0) insert(moditems, DpchEngData::CONTINFIMP);
 	if (statshrimp.diff(&oldStatshrimp).size() != 0) insert(moditems, DpchEngData::STATSHRIMP);
+	if (continfimp.diff(&oldContinfimp).size() != 0) insert(moditems, DpchEngData::CONTINFIMP);
 };
 
 void DlgWdbeNavLoaini::refreshAcv(
@@ -138,8 +139,8 @@ void DlgWdbeNavLoaini::refreshLfi(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
 		) {
-	StatShrLfi oldStatshrlfi(statshrlfi);
 	ContInfLfi oldContinflfi(continflfi);
+	StatShrLfi oldStatshrlfi(statshrlfi);
 
 	// IP refreshLfi --- RBEGIN
 	// statshrlfi
@@ -149,37 +150,43 @@ void DlgWdbeNavLoaini::refreshLfi(
 	continflfi.Dld = "log.txt";
 
 	// IP refreshLfi --- REND
-	if (statshrlfi.diff(&oldStatshrlfi).size() != 0) insert(moditems, DpchEngData::STATSHRLFI);
 	if (continflfi.diff(&oldContinflfi).size() != 0) insert(moditems, DpchEngData::CONTINFLFI);
+	if (statshrlfi.diff(&oldStatshrlfi).size() != 0) insert(moditems, DpchEngData::STATSHRLFI);
 };
 
 void DlgWdbeNavLoaini::refresh(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
+			, const bool unmute
 		) {
-	ContInf oldContinf(continf);
-	ContIac oldContiac(contiac);
+	if (muteRefresh && !unmute) return;
+	muteRefresh = true;
+
 	StatShr oldStatshr(statshr);
+	ContIac oldContiac(contiac);
+	ContInf oldContinf(continf);
 
 	// IP refresh --- BEGIN
-	// continf
-	continf.numFSge = ixVSge;
+	// statshr
+	statshr.ButDneActive = evalButDneActive(dbswdbe);
 
 	// contiac
 	contiac.numFDse = ixVDit;
 
-	// statshr
-	statshr.ButDneActive = evalButDneActive(dbswdbe);
+	// continf
+	continf.numFSge = ixVSge;
 
 	// IP refresh --- END
-	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
-	if (contiac.diff(&oldContiac).size() != 0) insert(moditems, DpchEngData::CONTIAC);
 	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
+	if (contiac.diff(&oldContiac).size() != 0) insert(moditems, DpchEngData::CONTIAC);
+	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
 
 	refreshIfi(dbswdbe, moditems);
 	refreshImp(dbswdbe, moditems);
 	refreshAcv(dbswdbe, moditems);
 	refreshLfi(dbswdbe, moditems);
+
+	muteRefresh = false;
 };
 
 void DlgWdbeNavLoaini::handleRequest(
@@ -231,8 +238,8 @@ void DlgWdbeNavLoaini::handleRequest(
 		};
 
 	} else if (req->ixVBasetype == ReqWdbe::VecVBasetype::UPLOAD) {
-		if (ixVSge == VecVSge::IDLE) handleUploadInSgeIdle(dbswdbe, req->filename);
-		else if (ixVSge == VecVSge::IMPDONE) handleUploadInSgeImpdone(dbswdbe, req->filename);
+		if (ixVSge == VecVSge::IMPDONE) handleUploadInSgeImpdone(dbswdbe, req->filename);
+		else if (ixVSge == VecVSge::IDLE) handleUploadInSgeIdle(dbswdbe, req->filename);
 
 	} else if (req->ixVBasetype == ReqWdbe::VecVBasetype::DOWNLOAD) {
 		if (ixVSge == VecVSge::DONE) req->filename = handleDownloadInSgeDone(dbswdbe);
@@ -317,20 +324,20 @@ void DlgWdbeNavLoaini::handleDpchAppWdbeAlert(
 	// IP handleDpchAppWdbeAlert --- IEND
 };
 
-void DlgWdbeNavLoaini::handleUploadInSgeIdle(
-			DbsWdbe* dbswdbe
-			, const string& filename
-		) {
-	infilename = filename; // IP handleUploadInSgeIdle --- ILINE
-	changeStage(dbswdbe, VecVSge::PRSIDLE);
-};
-
 void DlgWdbeNavLoaini::handleUploadInSgeImpdone(
 			DbsWdbe* dbswdbe
 			, const string& filename
 		) {
 	infilename = filename; // IP handleUploadInSgeImpdone --- ILINE
 	changeStage(dbswdbe, VecVSge::UPKIDLE);
+};
+
+void DlgWdbeNavLoaini::handleUploadInSgeIdle(
+			DbsWdbe* dbswdbe
+			, const string& filename
+		) {
+	infilename = filename; // IP handleUploadInSgeIdle --- ILINE
+	changeStage(dbswdbe, VecVSge::PRSIDLE);
 };
 
 string DlgWdbeNavLoaini::handleDownloadInSgeDone(
@@ -393,7 +400,7 @@ void DlgWdbeNavLoaini::changeStage(
 
 			setStage(dbswdbe, _ixVSge);
 			reenter = false;
-			if (!muteRefresh) refreshWithDpchEng(dbswdbe, dpcheng); // IP changeStage.refresh1 --- LINE
+			refreshWithDpchEng(dbswdbe, dpcheng); // IP changeStage.refresh1 --- LINE
 		};
 
 		switch (_ixVSge) {
@@ -502,15 +509,15 @@ uint DlgWdbeNavLoaini::enterSgeParse(
 	ififile.get(buf, 16);
 	s = string(buf);
 
-	ifitxt = (s.find("- ") == 0);
+	ifitxt = (s.find("IexWdbeIni") == 0);
 	ifixml = (s.find("<?xml") == 0);		
 
 	delete[] buf;
 	ififile.close();
 
 	// parse file accordingly
-	if (ifitxt) iex->parseFromFile(dbswdbe, infilename, false);
-	else if (ifixml) iex->parseFromFile(dbswdbe, infilename, true);
+	if (ifitxt) iex->parseFromFile(dbswdbe, infilename, false, "");
+	else if (ifixml) iex->parseFromFile(dbswdbe, infilename, true, "");
 
 	if (iex->ixVSge != JobWdbeIexIni::VecVSge::PRSDONE) {
 		if (reqCmd) {
@@ -777,5 +784,6 @@ void DlgWdbeNavLoaini::leaveSgeDone(
 		) {
 	// IP leaveSgeDone --- INSERT
 };
+
 
 

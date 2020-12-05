@@ -1,10 +1,11 @@
 /**
-	* \file Wdbed.h
-	* inter-thread exchange object for Wdbe daemon (declarations)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
-	*/
+	* \file Wdbecmbd.h
+	* inter-thread exchange object for Wdbe combined daemon (declarations)
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
+  */
+// IP header --- ABOVE
 
 #ifndef WDBED_H
 #define WDBED_H
@@ -310,7 +311,7 @@ public:
 	static const Sbecore::uint HTTPS = 2;
 
 public:
-	StgWdbeAppsrv(const Sbecore::usmallint port = 0, const bool https = false);
+	StgWdbeAppsrv(const Sbecore::usmallint port = 13100, const bool https = false);
 
 public:
 	Sbecore::usmallint port;
@@ -334,7 +335,7 @@ public:
 	static const Sbecore::uint APPSRV = 3;
 
 public:
-	StgWdbed(const Sbecore::usmallint jobprcn = 1, const Sbecore::usmallint opengsrvport = 0, const bool appsrv = true);
+	StgWdbed(const Sbecore::usmallint jobprcn = 4, const Sbecore::usmallint opengsrvport = 13120, const bool appsrv = true);
 
 public:
 	Sbecore::usmallint jobprcn;
@@ -363,7 +364,7 @@ public:
 	static const Sbecore::uint PORT = 7;
 
 public:
-	StgWdbeDatabase(const Sbecore::uint ixDbsVDbstype = 0, const std::string& dbspath = "", const std::string& dbsname = "", const std::string& username = "mpsitech", const std::string& password = "f9w8feeh", const std::string& ip = "", const Sbecore::usmallint port = 0);
+	StgWdbeDatabase(const Sbecore::uint ixDbsVDbstype = 0, const std::string& dbspath = "./DbsWdbe.sql", const std::string& dbsname = "DbsWdbe", const std::string& username = "default", const std::string& password = "asdf1234", const std::string& ip = "127.0.0.1", const Sbecore::usmallint port = 3306);
 
 public:
 	Sbecore::uint ixDbsVDbstype;
@@ -398,7 +399,7 @@ public:
 	static const Sbecore::uint DBSPASSWORD = 9;
 
 public:
-	StgWdbeMonitor(const std::string& username = "", const std::string& password = "", const std::string& ip = "", const Sbecore::usmallint port = 0, const Sbecore::uint ixDbsVDbstype = 0, const std::string& dbspath = "", const std::string& dbsname = "", const std::string& dbsusername = "", const std::string& dbspassword = "");
+	StgWdbeMonitor(const std::string& username = "wzemuser", const std::string& password = "asdf1234", const std::string& ip = "127.0.0.1", const Sbecore::usmallint port = 14100, const Sbecore::uint ixDbsVDbstype = 0, const std::string& dbspath = "./DbsWzem.sql", const std::string& dbsname = "DbsWzem", const std::string& dbsusername = "", const std::string& dbspassword = "");
 
 public:
 	std::string username;
@@ -432,7 +433,7 @@ public:
 	static const Sbecore::uint HELPURL = 6;
 
 public:
-	StgWdbePath(const std::string& acvpath = "", const std::string& keypath = "", const std::string& monpath = "", const std::string& tmppath = "", const std::string& webpath = "", const std::string& helpurl = "");
+	StgWdbePath(const std::string& acvpath = "${WHIZROOT}/acv/wdbe", const std::string& keypath = "", const std::string& monpath = "${WHIZROOT}/mon/wdbe", const std::string& tmppath = "${WHIZROOT}/tmp/wdbe", const std::string& webpath = "${WHIZROOT}/web/appwdbe", const std::string& helpurl = "http://www.mpsitech.com/wdbe");
 
 public:
 	std::string acvpath;
@@ -695,8 +696,8 @@ public:
 public:
 	virtual DpchEngWdbe* getNewDpchEng(std::set<Sbecore::uint> items);
 
-	virtual void refresh(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems);
-	void refreshWithDpchEng(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng = NULL);
+	virtual void refresh(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems, const bool unmute = false);
+	void refreshWithDpchEng(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng = NULL, const bool unmute = false);
 
 	virtual std::string getSquawk(DbsWdbe* dbswdbe);
 
@@ -1114,8 +1115,8 @@ public:
 	// client/server job methods
 	void addCsjobClaim(DbsWdbe* dbswdbe, CsjobWdbe* csjob, Sbecore::Claim* claim);
 
-	void getCsjobClaim(CsjobWdbe* csjob, bool& takenNotAvailable, bool& fulfilled, bool& run);
-	void getCsjobClaim(CsjobWdbe* csjob, bool& takenNotAvailable, bool& fulfilled);
+	bool getCsjobClaim(CsjobWdbe* csjob, bool& takenNotAvailable, bool& fulfilled, bool& run);
+	bool getCsjobClaim(CsjobWdbe* csjob, bool& takenNotAvailable, bool& fulfilled);
 
 	void clearCsjobRun(DbsWdbe* dbswdbe, const Sbecore::uint ixWdbeVJob);
 
@@ -1141,4 +1142,7 @@ public:
 	void setNodeState(NodeWdbe* node, const Sbecore::uint ixVState);
 };
 #endif
+
+
+
 

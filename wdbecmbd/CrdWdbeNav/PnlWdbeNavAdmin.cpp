@@ -1,10 +1,11 @@
 /**
 	* \file PnlWdbeNavAdmin.cpp
 	* job handler for job PnlWdbeNavAdmin (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifdef WDBECMBD
 	#include <Wdbecmbd.h>
@@ -251,8 +252,14 @@ void PnlWdbeNavAdmin::refreshFil(
 void PnlWdbeNavAdmin::refresh(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
+			, const bool unmute
 		) {
+	if (muteRefresh && !unmute) return;
+	muteRefresh = true;
+
 	// IP refresh --- INSERT
+
+	muteRefresh = false;
 };
 
 void PnlWdbeNavAdmin::updatePreset(
@@ -521,4 +528,6 @@ bool PnlWdbeNavAdmin::handleCallWdbeHusrRunvMod_crdUsrEq(
 	xchg->submitDpch(getNewDpchEng(moditems));
 	return retval;
 };
+
+
 

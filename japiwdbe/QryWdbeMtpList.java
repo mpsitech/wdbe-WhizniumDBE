@@ -1,10 +1,11 @@
 /**
   * \file QryWdbeMtpList.java
   * Java API code for job QryWdbeMtpList
-  * \author Alexander Wirthmueller
-  * \date created: 23 Aug 2020
-  * \date modified: 23 Aug 2020
-  */
+	* \copyright (C) 2018-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 5 Dec 2020
+	*/
+// IP header --- ABOVE
 
 package apiwdbe;
 
@@ -18,20 +19,20 @@ public class QryWdbeMtpList {
 		*/
 	public static class VecVOrd {
 
-		public static final int SRF = 1;
-		public static final int TYP = 2;
-		public static final int HKT = 3;
-		public static final int HKU = 4;
+		public static final int HKU = 1;
+		public static final int HKT = 2;
+		public static final int TYP = 3;
+		public static final int SRF = 4;
 
 		public static int getIx(
 					String sref
 				) {
 			String s = sref.toLowerCase();
 
-			if (s.equals("srf")) return SRF;
-			if (s.equals("typ")) return TYP;
-			if (s.equals("hkt")) return HKT;
 			if (s.equals("hku")) return HKU;
+			if (s.equals("hkt")) return HKT;
+			if (s.equals("typ")) return TYP;
+			if (s.equals("srf")) return SRF;
 
 			return 0;
 		};
@@ -39,10 +40,10 @@ public class QryWdbeMtpList {
 		public static String getSref(
 					int ix
 				) {
-			if (ix == SRF) return("srf");
-			if (ix == TYP) return("typ");
-			if (ix == HKT) return("hkt");
 			if (ix == HKU) return("hku");
+			if (ix == HKT) return("hkt");
+			if (ix == TYP) return("typ");
+			if (ix == SRF) return("srf");
 
 			return "";
 		};

@@ -1,10 +1,11 @@
 /**
 	* \file QryWdbePrjList.cpp
 	* API code for job QryWdbePrjList (implementation)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 5 Dec 2020
 	*/
+// IP header --- ABOVE
 
 #include "QryWdbePrjList.h"
 
@@ -21,11 +22,11 @@ uint QryWdbePrjList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "grp") return GRP;
+	if (s == "ver") return VER;
+	if (s == "tit") return TIT;
 	if (s == "own") return OWN;
 	if (s == "sho") return SHO;
-	if (s == "tit") return TIT;
-	if (s == "ver") return VER;
+	if (s == "grp") return GRP;
 
 	return(0);
 };
@@ -33,11 +34,11 @@ uint QryWdbePrjList::VecVOrd::getIx(
 string QryWdbePrjList::VecVOrd::getSref(
 			const uint ix
 		) {
-	if (ix == GRP) return("grp");
+	if (ix == VER) return("ver");
+	if (ix == TIT) return("tit");
 	if (ix == OWN) return("own");
 	if (ix == SHO) return("sho");
-	if (ix == TIT) return("tit");
-	if (ix == VER) return("ver");
+	if (ix == GRP) return("grp");
 
 	return("");
 };

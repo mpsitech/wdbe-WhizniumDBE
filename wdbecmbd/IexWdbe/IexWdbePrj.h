@@ -1,10 +1,11 @@
 /**
 	* \file IexWdbePrj.h
 	* data blocks and readers/writers for import/export complex IexWdbePrj (declarations)
-	* \author Alexander Wirthmueller
-	* \date created: 23 Aug 2020
-	* \date modified: 23 Aug 2020
+	* \copyright (C) 2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 28 Nov 2020
 	*/
+// IP header --- ABOVE
 
 #ifndef IEXWDBEPRJ_H
 #define IEXWDBEPRJ_H
@@ -127,7 +128,7 @@ namespace IexWdbePrj {
 	class ImeitemIMRelease : public WdbeMRelease {
 
 	public:
-		ImeitemIMRelease(const Sbecore::uint ixVBasetype = 0, const std::string& srefRefWdbeMMachine = "", const std::string& sref = "", const std::string& srefsKOption = "", const std::string& Comment = "");
+		ImeitemIMRelease(const Sbecore::uint ixVBasetype = 0, const std::string& hsrefRefWdbeMMachine = "", const std::string& sref = "", const std::string& srefsKOption = "", const std::string& Comment = "");
 		ImeitemIMRelease(DbsWdbe* dbswdbe, const Sbecore::ubigint ref);
 
 	public:
@@ -135,7 +136,7 @@ namespace IexWdbePrj {
 		Sbecore::uint ixWIelValid;
 
 		std::string srefIxVBasetype;
-		std::string srefRefWdbeMMachine;
+		std::string hsrefRefWdbeMMachine;
 
 	public:
 		void readTxt(Sbecore::Txtrd& txtrd);
@@ -158,7 +159,7 @@ namespace IexWdbePrj {
 
 		public:
 			static const Sbecore::uint SREFIXVBASETYPE = 1;
-			static const Sbecore::uint SREFREFWDBEMMACHINE = 2;
+			static const Sbecore::uint HSREFREFWDBEMMACHINE = 2;
 			static const Sbecore::uint SREF = 4;
 			static const Sbecore::uint SREFSKOPTION = 8;
 			static const Sbecore::uint COMMENT = 16;
@@ -436,7 +437,7 @@ namespace IexWdbePrj {
 		void writeXML(xmlTextWriter* wr, const bool shorttags = true);
 	};
 
-	void parseFromFile(const std::string& fullpath, const bool xmlNotTxt, ImeIMProject& imeimproject);
+	void parseFromFile(const std::string& fullpath, const bool xmlNotTxt, const std::string& rectpath, ImeIMProject& imeimproject);
 	void exportToFile(const std::string& fullpath, const bool xmlNotTxt, const bool shorttags, ImeIMProject& imeimproject);
 
 	void readTxt(Sbecore::Txtrd& txtrd, ImeIMProject& imeimproject);
@@ -450,4 +451,6 @@ namespace IexWdbePrj {
 };
 
 #endif
+
+
 
