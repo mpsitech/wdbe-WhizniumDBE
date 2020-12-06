@@ -895,4 +895,3 @@ ubigint PgTblWdbeQVecList::loadRstByJref(
 	return loadRstByStmt("TblWdbeQVecList_loadRstByJref", 1, vals, l, f, append, rst);
 };
 #endif
-

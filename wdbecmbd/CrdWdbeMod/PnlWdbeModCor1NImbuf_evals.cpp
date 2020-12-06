@@ -80,6 +80,3 @@ bool PnlWdbeModCor1NImbuf::evalButViewActive(
 
 	return(args.back());
 };
-
-
-

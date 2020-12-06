@@ -494,7 +494,7 @@ int main(
 
 	try {
 		// welcome message
-		cout << "Welcome to WhizniumDBE v1.1.0!" << endl;
+		cout << "Welcome to WhizniumDBE v1.1.1!" << endl;
 
 		// calls wdbecmbd.init()
 		wdbecmbd = new Wdbecmbd(exedir, clearAll, startMon);
@@ -651,6 +651,3 @@ int main(
 
 	return(0);
 };
-
-
-

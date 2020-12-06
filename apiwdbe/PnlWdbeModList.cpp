@@ -600,4 +600,3 @@ void PnlWdbeModList::DpchEngData::readXML(
 		stgiacqry = QryWdbeModList::StgIac();
 	};
 };
-

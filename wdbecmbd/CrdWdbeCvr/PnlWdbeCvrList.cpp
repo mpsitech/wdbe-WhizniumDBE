@@ -403,6 +403,3 @@ bool PnlWdbeCvrList::handleCallWdbeStatChg(
 	// IP handleCallWdbeStatChg --- END
 	return retval;
 };
-
-
-

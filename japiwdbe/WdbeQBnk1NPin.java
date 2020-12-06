@@ -41,4 +41,3 @@ public class WdbeQBnk1NPin {
 		return false;
 	};
 };
-

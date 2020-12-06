@@ -60,6 +60,3 @@ bool PnlWdbeMtpTpl1NModule::evalButViewActive(
 
 	return(args.back());
 };
-
-
-

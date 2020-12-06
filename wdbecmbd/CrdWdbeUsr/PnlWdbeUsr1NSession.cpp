@@ -308,6 +308,3 @@ bool PnlWdbeUsr1NSession::handleCallWdbeStatChg(
 	// IP handleCallWdbeStatChg --- END
 	return retval;
 };
-
-
-

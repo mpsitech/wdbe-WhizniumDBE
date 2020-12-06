@@ -117,4 +117,3 @@ bool ListWdbeQCmdMNController::readXML(
 
 	return basefound;
 };
-

@@ -41,4 +41,3 @@ public class WdbeQSilRef1NCommand {
 		return false;
 	};
 };
-

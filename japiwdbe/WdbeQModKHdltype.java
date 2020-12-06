@@ -61,4 +61,3 @@ public class WdbeQModKHdltype {
 		return false;
 	};
 };
-

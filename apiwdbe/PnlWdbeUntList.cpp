@@ -640,4 +640,3 @@ void PnlWdbeUntList::DpchEngData::readXML(
 		stgiacqry = QryWdbeUntList::StgIac();
 	};
 };
-

@@ -254,4 +254,3 @@ namespace DlgWdbePrjNew {
 };
 
 #endif
-

@@ -176,6 +176,3 @@ string WdbeWrmcu::getVarCtype(
 	return s;
 };
 // IP cust --- IEND
-
-
-

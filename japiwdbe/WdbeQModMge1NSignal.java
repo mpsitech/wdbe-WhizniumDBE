@@ -41,4 +41,3 @@ public class WdbeQModMge1NSignal {
 		return false;
 	};
 };
-

@@ -61,4 +61,3 @@ public class WdbeQGenList {
 		return false;
 	};
 };
-

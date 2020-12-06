@@ -72,4 +72,3 @@ public class DpchAppWdbeAlert extends DpchAppWdbe {
 		if (has(NUMFMCB)) Xmlio.writeInteger(doc, el, "numFMcb", numFMcb);
 	};
 };
-

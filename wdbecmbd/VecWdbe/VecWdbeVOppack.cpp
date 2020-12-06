@@ -110,6 +110,3 @@ void VecWdbeVOppack::fillFeed(
 
 	for (unsigned int i = 1; i <= 16; i++) feed.appendIxSrefTitles(i, getSref(i), getTitle(i));
 };
-
-
-

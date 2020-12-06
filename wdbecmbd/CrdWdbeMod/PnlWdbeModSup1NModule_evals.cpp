@@ -130,6 +130,3 @@ bool PnlWdbeModSup1NModule::evalButViewActive(
 
 	return(args.back());
 };
-
-
-

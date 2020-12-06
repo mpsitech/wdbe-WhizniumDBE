@@ -443,4 +443,3 @@ void PnlWdbeSilSil1NUnit::DpchEngData::readXML(
 		stgiacqry = QryWdbeSilSil1NUnit::StgIac();
 	};
 };
-

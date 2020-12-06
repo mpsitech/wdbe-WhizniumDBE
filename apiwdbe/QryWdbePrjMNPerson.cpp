@@ -241,4 +241,3 @@ set<uint> QryWdbePrjMNPerson::StgIac::diff(
 
 	return(diffitems);
 };
-

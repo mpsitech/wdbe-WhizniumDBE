@@ -192,10 +192,10 @@ void QryWdbeCprList::rerun_orderSQL(
 			, const uint preIxOrd
 		) {
 	if (preIxOrd == VecVOrd::CVR) sqlstr += " ORDER BY TblWdbeMCoreproject.refWdbeMCoreversion ASC";
-	else if (preIxOrd == VecVOrd::TYP) sqlstr += " ORDER BY TblWdbeMCoreproject.ixVBasetype ASC";
 	else if (preIxOrd == VecVOrd::TIT) sqlstr += " ORDER BY TblWdbeMCoreproject.Title ASC";
-	else if (preIxOrd == VecVOrd::SRF) sqlstr += " ORDER BY TblWdbeMCoreproject.sref ASC";
+	else if (preIxOrd == VecVOrd::TYP) sqlstr += " ORDER BY TblWdbeMCoreproject.ixVBasetype ASC";
 	else if (preIxOrd == VecVOrd::OWN) sqlstr += " ORDER BY TblWdbeMCoreproject.own ASC";
+	else if (preIxOrd == VecVOrd::SRF) sqlstr += " ORDER BY TblWdbeMCoreproject.sref ASC";
 	else if (preIxOrd == VecVOrd::GRP) sqlstr += " ORDER BY TblWdbeMCoreproject.grp ASC";
 };
 
@@ -421,6 +421,3 @@ bool QryWdbeCprList::handleCallWdbeStubChgFromSelf(
 	// IP handleCallWdbeStubChgFromSelf --- INSERT
 	return retval;
 };
-
-
-

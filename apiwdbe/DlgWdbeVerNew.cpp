@@ -569,4 +569,3 @@ void DlgWdbeVerNew::DpchEngData::readXML(
 		tag = Tag();
 	};
 };
-

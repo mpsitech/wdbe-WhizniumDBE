@@ -48,6 +48,3 @@ string SqkWdbePlhfpga::getSquawkFwdctr(
 	// example: "fill type-specific placeholders for module 'dcx3-qcdif (fwdctr_v1_0 forwarding controller)'"
 	return(""); // IP getSquawkFwdctr --- LINE
 };
-
-
-

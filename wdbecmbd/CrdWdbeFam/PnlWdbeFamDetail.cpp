@@ -330,6 +330,3 @@ bool PnlWdbeFamDetail::handleCallWdbeFamUpd_refEq(
 	// IP handleCallWdbeFamUpd_refEq --- INSERT
 	return retval;
 };
-
-
-

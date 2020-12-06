@@ -179,6 +179,3 @@ public:
 };
 
 #endif
-
-
-

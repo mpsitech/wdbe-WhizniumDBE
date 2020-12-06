@@ -355,6 +355,3 @@ bool PnlWdbeSil1NBank::handleCallWdbeStatChg(
 	// IP handleCallWdbeStatChg --- END
 	return retval;
 };
-
-
-

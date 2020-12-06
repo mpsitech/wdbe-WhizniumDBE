@@ -21,7 +21,3 @@ namespace WdbedJobprc {
 };
 
 #endif
-
-
-
-

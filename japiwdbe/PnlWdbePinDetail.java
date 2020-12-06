@@ -726,4 +726,3 @@ public class PnlWdbePinDetail {
 	};
 
 };
-

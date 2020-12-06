@@ -861,4 +861,3 @@ ubigint PgTblWdbeJMVersionState::loadRstByVer(
 };
 
 #endif
-

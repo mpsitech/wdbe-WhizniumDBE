@@ -45,4 +45,3 @@ public class WdbeQCvrAPlh {
 		return false;
 	};
 };
-

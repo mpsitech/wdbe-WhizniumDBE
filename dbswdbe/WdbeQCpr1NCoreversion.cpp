@@ -793,4 +793,3 @@ ubigint PgTblWdbeQCpr1NCoreversion::loadRstByJref(
 	return loadRstByStmt("TblWdbeQCpr1NCoreversion_loadRstByJref", 1, vals, l, f, append, rst);
 };
 #endif
-

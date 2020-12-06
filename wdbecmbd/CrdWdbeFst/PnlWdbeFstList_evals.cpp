@@ -24,6 +24,3 @@ bool PnlWdbeFstList::evalButDeleteActive(
 
 	return(args.back());
 };
-
-
-

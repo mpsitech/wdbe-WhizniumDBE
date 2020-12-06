@@ -64,6 +64,3 @@ void DpchInvWdbeMtpModbscbu::writeXML(
 };
 
 // IP cust --- INSERT
-
-
-

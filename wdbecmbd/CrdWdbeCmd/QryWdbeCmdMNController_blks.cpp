@@ -185,6 +185,3 @@ set<uint> QryWdbeCmdMNController::StgIac::diff(
 
 	return(diffitems);
 };
-
-
-

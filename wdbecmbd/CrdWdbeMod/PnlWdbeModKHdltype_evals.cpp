@@ -80,6 +80,3 @@ bool PnlWdbeModKHdltype::evalButDeleteActive(
 
 	return(args.back());
 };
-
-
-

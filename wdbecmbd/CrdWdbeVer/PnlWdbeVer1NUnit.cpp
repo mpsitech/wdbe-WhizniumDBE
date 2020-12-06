@@ -363,6 +363,3 @@ bool PnlWdbeVer1NUnit::handleCallWdbeStatChg(
 	// IP handleCallWdbeStatChg --- END
 	return retval;
 };
-
-
-

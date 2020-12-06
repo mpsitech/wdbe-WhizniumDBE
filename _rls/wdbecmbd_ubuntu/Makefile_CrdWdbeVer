@@ -2,7 +2,7 @@
 # make file for CrdWdbeVer card job handler, release wdbecmbd_ubuntu
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 5 Dec 2020
+# date created: 6 Dec 2020
 # IP header --- ABOVE
 
 include ../Makefile.inc
@@ -16,7 +16,7 @@ STATLIBFLAGS = rcs
 INCPATH = -I$(BUILDROOT)/dbswdbe -I$(BUILDROOT)/wdbecmbd/VecWdbe -I$(BUILDROOT)/wdbecmbd/IexWdbe -I$(BUILDROOT)/wdbecmbd
 INCPATH += -I${WHIZSDKROOT}/build -I${WHIZSDKROOT}/build/apiwzlm -I/usr/include -I/usr/include/jsoncpp -I/usr/include/libxml2 -I/usr/include/mariadb
 
-OBJS = CrdWdbeVer.o PnlWdbeVerList.o QryWdbeVerList.o PnlWdbeVerHeadbar.o PnlWdbeVerRec.o PnlWdbeVerMNLibrary.o QryWdbeVerMNLibrary.o PnlWdbeVer1NUnit.o QryWdbeVer1NUnit.o PnlWdbeVerRef1NFile.o QryWdbeVerRef1NFile.o PnlWdbeVerBvr1NVersion.o QryWdbeVerBvr1NVersion.o PnlWdbeVer1NSystem.o QryWdbeVer1NSystem.o PnlWdbeVer1NRelease.o QryWdbeVer1NRelease.o PnlWdbeVerDetail.o DlgWdbeVerBscdd.o DlgWdbeVerDetdd.o DlgWdbeVerNew.o
+OBJS = CrdWdbeVer.o PnlWdbeVerList.o QryWdbeVerList.o PnlWdbeVerHeadbar.o PnlWdbeVerRec.o PnlWdbeVerRef1NFile.o QryWdbeVerRef1NFile.o PnlWdbeVerMNLibrary.o QryWdbeVerMNLibrary.o PnlWdbeVer1NUnit.o QryWdbeVer1NUnit.o PnlWdbeVer1NSystem.o QryWdbeVer1NSystem.o PnlWdbeVer1NRelease.o QryWdbeVer1NRelease.o PnlWdbeVerBvr1NVersion.o QryWdbeVerBvr1NVersion.o PnlWdbeVerDetail.o DlgWdbeVerDetdd.o DlgWdbeVerNew.o DlgWdbeVerBscdd.o
 
 LIB = libcrdwdbever
 
@@ -36,4 +36,3 @@ install:
 
 clean:
 	rm -f *.o
-

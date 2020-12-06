@@ -129,4 +129,3 @@ bool ListWdbeQMtpList::readXML(
 
 	return basefound;
 };
-

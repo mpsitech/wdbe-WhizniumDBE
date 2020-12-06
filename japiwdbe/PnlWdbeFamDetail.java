@@ -585,4 +585,3 @@ public class PnlWdbeFamDetail {
 	};
 
 };
-

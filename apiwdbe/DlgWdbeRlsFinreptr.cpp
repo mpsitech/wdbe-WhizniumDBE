@@ -973,4 +973,3 @@ void DlgWdbeRlsFinreptr::DpchEngData::readXML(
 		tagres = TagRes();
 	};
 };
-

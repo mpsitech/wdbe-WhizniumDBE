@@ -76,6 +76,3 @@ void DpchInvWdbeMtpWrmcu::writeXML(
 };
 
 // IP cust --- INSERT
-
-
-

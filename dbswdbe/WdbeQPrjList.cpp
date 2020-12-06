@@ -949,4 +949,3 @@ ubigint PgTblWdbeQPrjList::loadRstByJref(
 	return loadRstByStmt("TblWdbeQPrjList_loadRstByJref", 1, vals, l, f, append, rst);
 };
 #endif
-

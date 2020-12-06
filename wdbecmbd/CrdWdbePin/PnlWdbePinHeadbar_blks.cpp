@@ -110,6 +110,3 @@ void PnlWdbePinHeadbar::DpchEngData::writeXML(
 		if (has(TAG)) Tag::writeXML(ixWdbeVLocale, wr);
 	xmlTextWriterEndElement(wr);
 };
-
-
-

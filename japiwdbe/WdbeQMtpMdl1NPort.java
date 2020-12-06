@@ -41,4 +41,3 @@ public class WdbeQMtpMdl1NPort {
 		return false;
 	};
 };
-

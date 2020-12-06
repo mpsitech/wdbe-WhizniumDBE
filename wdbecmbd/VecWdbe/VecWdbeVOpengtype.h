@@ -29,6 +29,3 @@ namespace VecWdbeVOpengtype {
 };
 
 #endif
-
-
-

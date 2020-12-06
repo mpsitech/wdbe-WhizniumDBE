@@ -272,4 +272,3 @@ public class QryWdbeVecVec1NVectoritem {
 	};
 
 };
-

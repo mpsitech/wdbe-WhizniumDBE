@@ -278,6 +278,3 @@ private:
 };
 
 #endif
-
-
-

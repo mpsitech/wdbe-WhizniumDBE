@@ -960,6 +960,3 @@ void DlgWdbePrjImpex::DpchEngData::writeXML(
 		if (has(TAGLFI)) TagLfi::writeXML(ixWdbeVLocale, wr);
 	xmlTextWriterEndElement(wr);
 };
-
-
-

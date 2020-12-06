@@ -48,8 +48,8 @@ PnlWdbePrcRec::PnlWdbePrcRec(
 
 	// IP constructor.cust2 --- INSERT
 
-	xchg->addClstn(VecWdbeVCall::CALLWDBEPRC_MDLEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBEPRC_FSMEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBEPRC_MDLEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -271,10 +271,10 @@ void PnlWdbePrcRec::handleCall(
 		call->abort = handleCallWdbePrcUpd_refEq(dbswdbe, call->jref);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEFSMUPD_REFEQ) {
 		call->abort = handleCallWdbeFsmUpd_refEq(dbswdbe, call->jref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEPRC_MDLEQ) {
-		call->abort = handleCallWdbePrc_mdlEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEPRC_FSMEQ) {
 		call->abort = handleCallWdbePrc_fsmEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEPRC_MDLEQ) {
+		call->abort = handleCallWdbePrc_mdlEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
 	};
 };
 
@@ -296,17 +296,6 @@ bool PnlWdbePrcRec::handleCallWdbeFsmUpd_refEq(
 	return retval;
 };
 
-bool PnlWdbePrcRec::handleCallWdbePrc_mdlEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-			, const ubigint refInv
-			, bool& boolvalRet
-		) {
-	bool retval = false;
-	boolvalRet = (recPrc.refWdbeMModule == refInv); // IP handleCallWdbePrc_mdlEq --- LINE
-	return retval;
-};
-
 bool PnlWdbePrcRec::handleCallWdbePrc_fsmEq(
 			DbsWdbe* dbswdbe
 			, const ubigint jrefTrig
@@ -318,5 +307,13 @@ bool PnlWdbePrcRec::handleCallWdbePrc_fsmEq(
 	return retval;
 };
 
-
-
+bool PnlWdbePrcRec::handleCallWdbePrc_mdlEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+			, const ubigint refInv
+			, bool& boolvalRet
+		) {
+	bool retval = false;
+	boolvalRet = (recPrc.refWdbeMModule == refInv); // IP handleCallWdbePrc_mdlEq --- LINE
+	return retval;
+};

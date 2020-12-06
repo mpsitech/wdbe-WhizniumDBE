@@ -26,6 +26,3 @@ namespace WdbeWrfpgaHostif {
 };
 
 #endif
-
-
-

@@ -24,6 +24,3 @@ bool PnlWdbeSigList::evalButDeleteActive(
 
 	return(args.back());
 };
-
-
-

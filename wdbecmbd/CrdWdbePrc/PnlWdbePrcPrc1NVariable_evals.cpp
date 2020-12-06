@@ -167,6 +167,3 @@ bool PnlWdbePrcPrc1NVariable::evalButDeleteActive(
 
 	return(args.back());
 };
-
-
-

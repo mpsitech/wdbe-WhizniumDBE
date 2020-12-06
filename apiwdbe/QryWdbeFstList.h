@@ -113,4 +113,3 @@ namespace QryWdbeFstList {
 };
 
 #endif
-

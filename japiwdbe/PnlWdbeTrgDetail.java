@@ -711,4 +711,3 @@ public class PnlWdbeTrgDetail {
 	};
 
 };
-

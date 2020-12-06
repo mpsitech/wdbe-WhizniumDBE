@@ -300,6 +300,3 @@ bool QryWdbeUntHk1NVector::handleCallWdbeStubChgFromSelf(
 	// IP handleCallWdbeStubChgFromSelf --- INSERT
 	return retval;
 };
-
-
-

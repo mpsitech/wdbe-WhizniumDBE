@@ -238,6 +238,3 @@ bool PnlWdbeVecDetail::evalButOptEditAvail(
 
 	return(args.back());
 };
-
-
-

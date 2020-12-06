@@ -272,4 +272,3 @@ public class QryWdbePrcMge1NSignal {
 	};
 
 };
-

@@ -560,4 +560,3 @@ void PnlWdbeVecDetail::DpchEngData::readXML(
 		tag = Tag();
 	};
 };
-

@@ -229,8 +229,8 @@ void QryWdbePrcList::rerun_orderSQL(
 			string& sqlstr
 			, const uint preIxOrd
 		) {
-	if (preIxOrd == VecVOrd::SRF) sqlstr += " ORDER BY TblWdbeMProcess.sref ASC";
-	else if (preIxOrd == VecVOrd::MDL) sqlstr += " ORDER BY TblWdbeMProcess.refWdbeMModule ASC";
+	if (preIxOrd == VecVOrd::MDL) sqlstr += " ORDER BY TblWdbeMProcess.refWdbeMModule ASC";
+	else if (preIxOrd == VecVOrd::SRF) sqlstr += " ORDER BY TblWdbeMProcess.sref ASC";
 };
 
 void QryWdbePrcList::fetch(
@@ -438,6 +438,3 @@ bool QryWdbePrcList::handleCallWdbeStubChgFromSelf(
 	// IP handleCallWdbeStubChgFromSelf --- INSERT
 	return retval;
 };
-
-
-

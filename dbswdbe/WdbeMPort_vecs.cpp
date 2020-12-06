@@ -126,4 +126,3 @@ void TblWdbeMPort::VecVMdlCat::fillFeed(
 
 	for (unsigned int i = 1; i <= 9; i++) feed.appendIxSrefTitles(i, getSref(i), getTitle(i, ixWdbeVLocale));
 };
-

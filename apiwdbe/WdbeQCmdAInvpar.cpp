@@ -132,4 +132,3 @@ bool ListWdbeQCmdAInvpar::readXML(
 
 	return basefound;
 };
-

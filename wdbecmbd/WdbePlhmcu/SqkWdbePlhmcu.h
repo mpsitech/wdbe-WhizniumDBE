@@ -20,6 +20,3 @@ namespace SqkWdbePlhmcu {
 };
 
 #endif
-
-
-

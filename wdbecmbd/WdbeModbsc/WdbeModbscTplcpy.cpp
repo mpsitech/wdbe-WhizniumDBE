@@ -335,6 +335,3 @@ DpchRetWdbe* WdbeModbscTplcpy::run(
 };
 
 // IP cust --- INSERT
-
-
-

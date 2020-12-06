@@ -777,4 +777,3 @@ public class PnlWdbeCmdAInvpar {
 	};
 
 };
-

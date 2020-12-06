@@ -6920,6 +6920,3 @@ uint IexWdbeDcd::getIxWdbeVIop(
 
 	return ixWdbeVIop;
 };
-
-
-

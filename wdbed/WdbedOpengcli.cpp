@@ -266,7 +266,3 @@ uint WdbedOpengcli::CurlPostrecv(
 
 	return(size*blocksize);
 };
-
-
-
-

@@ -57,4 +57,3 @@ public class WdbeQRlsList {
 		return false;
 	};
 };
-

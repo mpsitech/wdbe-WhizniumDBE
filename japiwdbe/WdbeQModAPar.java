@@ -49,4 +49,3 @@ public class WdbeQModAPar {
 		return false;
 	};
 };
-

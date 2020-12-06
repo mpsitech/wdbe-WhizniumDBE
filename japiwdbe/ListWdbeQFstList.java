@@ -59,4 +59,3 @@ public class ListWdbeQFstList {
 		return false;
 	};
 };
-

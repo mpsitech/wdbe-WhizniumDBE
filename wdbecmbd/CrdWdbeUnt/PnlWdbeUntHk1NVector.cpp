@@ -355,6 +355,3 @@ bool PnlWdbeUntHk1NVector::handleCallWdbeStatChg(
 	// IP handleCallWdbeStatChg --- END
 	return retval;
 };
-
-
-

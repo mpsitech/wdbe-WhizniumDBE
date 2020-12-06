@@ -152,6 +152,3 @@ bool CrdWdbeRls::evalMitCrdWcoActive(
 
 	return(args.back());
 };
-
-
-

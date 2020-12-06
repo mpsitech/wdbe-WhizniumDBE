@@ -557,4 +557,3 @@ void PnlWdbeModAPar::DpchEngData::readXML(
 		stgiacqry = QryWdbeModAPar::StgIac();
 	};
 };
-

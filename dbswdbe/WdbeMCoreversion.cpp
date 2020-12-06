@@ -969,4 +969,3 @@ ubigint PgTblWdbeMCoreversion::loadRstByCpr(
 };
 
 #endif
-

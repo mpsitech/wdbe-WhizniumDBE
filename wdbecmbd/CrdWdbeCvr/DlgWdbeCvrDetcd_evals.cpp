@@ -118,6 +118,3 @@ bool DlgWdbeCvrDetcd::evalIfiUldActive(
 
 	return(args.back());
 };
-
-
-

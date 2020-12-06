@@ -73,4 +73,3 @@ public class WdbeQModList {
 		return false;
 	};
 };
-

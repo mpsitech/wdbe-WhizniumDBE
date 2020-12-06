@@ -863,4 +863,3 @@ ubigint PgTblWdbeMVectoritem::loadRstByVec(
 };
 
 #endif
-

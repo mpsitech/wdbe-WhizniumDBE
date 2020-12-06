@@ -20,10 +20,10 @@ public class QryWdbeCprList {
 	public static class VecVOrd {
 
 		public static final int CVR = 1;
-		public static final int TYP = 2;
-		public static final int TIT = 3;
-		public static final int SRF = 4;
-		public static final int OWN = 5;
+		public static final int TIT = 2;
+		public static final int TYP = 3;
+		public static final int OWN = 4;
+		public static final int SRF = 5;
 		public static final int GRP = 6;
 
 		public static int getIx(
@@ -32,10 +32,10 @@ public class QryWdbeCprList {
 			String s = sref.toLowerCase();
 
 			if (s.equals("cvr")) return CVR;
-			if (s.equals("typ")) return TYP;
 			if (s.equals("tit")) return TIT;
-			if (s.equals("srf")) return SRF;
+			if (s.equals("typ")) return TYP;
 			if (s.equals("own")) return OWN;
+			if (s.equals("srf")) return SRF;
 			if (s.equals("grp")) return GRP;
 
 			return 0;
@@ -45,10 +45,10 @@ public class QryWdbeCprList {
 					int ix
 				) {
 			if (ix == CVR) return("cvr");
-			if (ix == TYP) return("typ");
 			if (ix == TIT) return("tit");
-			if (ix == SRF) return("srf");
+			if (ix == TYP) return("typ");
 			if (ix == OWN) return("own");
+			if (ix == SRF) return("srf");
 			if (ix == GRP) return("grp");
 
 			return "";
@@ -314,4 +314,3 @@ public class QryWdbeCprList {
 	};
 
 };
-

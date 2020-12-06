@@ -463,6 +463,3 @@ void PnlWdbeModMge1NSignal::DpchEngData::writeXML(
 		if (has(STGIACQRY)) stgiacqry.writeXML(wr);
 	xmlTextWriterEndElement(wr);
 };
-
-
-

@@ -569,4 +569,3 @@ void PnlWdbePrcKHdltype::DpchEngData::readXML(
 		stgiacqry = QryWdbePrcKHdltype::StgIac();
 	};
 };
-

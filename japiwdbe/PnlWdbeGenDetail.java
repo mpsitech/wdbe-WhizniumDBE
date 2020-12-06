@@ -854,4 +854,3 @@ public class PnlWdbeGenDetail {
 	};
 
 };
-

@@ -59,4 +59,3 @@ public class ListWdbeQCvrHk1NModule {
 		return false;
 	};
 };
-

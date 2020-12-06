@@ -80,6 +80,3 @@ bool PnlWdbePphAPar::evalButDeleteActive(
 
 	return(args.back());
 };
-
-
-

@@ -59,4 +59,3 @@ public class ListWdbeQSilRef1NCommand {
 		return false;
 	};
 };
-

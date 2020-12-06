@@ -312,6 +312,3 @@ bool PnlWdbeVecRec::handleCallWdbeVec_hktEq(
 	boolvalRet = (recVec.hkIxVTbl == ixInv); // IP handleCallWdbeVec_hktEq --- LINE
 	return retval;
 };
-
-
-

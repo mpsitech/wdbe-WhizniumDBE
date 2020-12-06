@@ -21,6 +21,3 @@ namespace WdbeMtpModdetTop_v1_0 {
 };
 
 #endif
-
-
-

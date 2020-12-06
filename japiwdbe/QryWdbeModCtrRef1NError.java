@@ -272,4 +272,3 @@ public class QryWdbeModCtrRef1NError {
 	};
 
 };
-

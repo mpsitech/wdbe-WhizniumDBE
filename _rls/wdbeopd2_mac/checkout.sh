@@ -3,7 +3,7 @@
 # checkout script for Wdbe operation daemon, release wdbeopd2_mac
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 5 Dec 2020
+# date created: 6 Dec 2020
 # IP header --- ABOVE
 
 if [ -z ${WHIZROOT+x} ]; then
@@ -97,4 +97,3 @@ cp Makefile_WdbeMtpPlhfpga $BUILDROOT/wdbeopd2/WdbeMtpPlhfpga/Makefile
 
 cp $CMBDBUILDROOT/WdbeMtpPlhfpga/WdbeMtpPlhfpga*.h $BUILDROOT/wdbeopd2/WdbeMtpPlhfpga/
 cp $CMBDBUILDROOT/WdbeMtpPlhfpga/WdbeMtpPlhfpga*.cpp $BUILDROOT/wdbeopd2/WdbeMtpPlhfpga/
-

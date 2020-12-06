@@ -583,6 +583,3 @@ void PnlWdbePrsList::DpchEngData::writeXML(
 		if (has(STGIACQRY)) stgiacqry.writeXML(wr);
 	xmlTextWriterEndElement(wr);
 };
-
-
-

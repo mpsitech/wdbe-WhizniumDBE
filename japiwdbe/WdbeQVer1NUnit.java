@@ -41,4 +41,3 @@ public class WdbeQVer1NUnit {
 		return false;
 	};
 };
-

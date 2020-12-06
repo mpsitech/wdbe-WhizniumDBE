@@ -49,4 +49,3 @@ public class WdbeQPphAPar {
 		return false;
 	};
 };
-

@@ -534,4 +534,3 @@ void DlgWdbePrjNew::DpchEngData::readXML(
 		tag = Tag();
 	};
 };
-

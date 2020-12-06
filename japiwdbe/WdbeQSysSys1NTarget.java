@@ -41,4 +41,3 @@ public class WdbeQSysSys1NTarget {
 		return false;
 	};
 };
-

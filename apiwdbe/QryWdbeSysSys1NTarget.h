@@ -98,4 +98,3 @@ namespace QryWdbeSysSys1NTarget {
 };
 
 #endif
-

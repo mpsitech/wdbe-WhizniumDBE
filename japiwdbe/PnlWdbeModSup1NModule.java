@@ -675,4 +675,3 @@ public class PnlWdbeModSup1NModule {
 	};
 
 };
-

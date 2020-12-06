@@ -71,6 +71,3 @@ bool CrdWdbeFil::evalMitCrdDldActive(
 
 	return(args.back());
 };
-
-
-

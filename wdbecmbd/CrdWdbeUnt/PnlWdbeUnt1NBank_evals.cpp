@@ -97,6 +97,3 @@ bool PnlWdbeUnt1NBank::evalButDeleteActive(
 
 	return(args.back());
 };
-
-
-

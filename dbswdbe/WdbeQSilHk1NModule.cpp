@@ -811,4 +811,3 @@ ubigint PgTblWdbeQSilHk1NModule::loadRstByJref(
 	return loadRstByStmt("TblWdbeQSilHk1NModule_loadRstByJref", 1, vals, l, f, append, rst);
 };
 #endif
-

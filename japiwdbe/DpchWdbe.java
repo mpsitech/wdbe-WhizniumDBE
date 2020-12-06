@@ -21,4 +21,3 @@ public class DpchWdbe extends Block {
 
 	public int ixWdbeVDpch;
 };
-

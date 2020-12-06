@@ -40,7 +40,3 @@ namespace WdbeopdEngsrv {
 };
 
 #endif
-
-
-
-

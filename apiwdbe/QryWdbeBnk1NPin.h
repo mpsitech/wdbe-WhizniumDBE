@@ -98,4 +98,3 @@ namespace QryWdbeBnk1NPin {
 };
 
 #endif
-

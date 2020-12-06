@@ -216,6 +216,3 @@ bool PnlWdbePinDetail::evalTxfLocActive(
 
 	return(args.back());
 };
-
-
-

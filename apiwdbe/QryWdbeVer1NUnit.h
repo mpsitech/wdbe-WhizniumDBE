@@ -98,4 +98,3 @@ namespace QryWdbeVer1NUnit {
 };
 
 #endif
-

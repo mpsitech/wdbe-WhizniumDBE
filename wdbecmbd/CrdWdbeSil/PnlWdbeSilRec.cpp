@@ -39,14 +39,14 @@ PnlWdbeSilRec::PnlWdbeSilRec(
 	jref = xchg->addJob(dbswdbe, this, jrefSup);
 
 	pnlref1nerror = NULL;
-	pnlhk1nvector = NULL;
-	pnlhk1nmodule = NULL;
 	pnlref1ncommand = NULL;
-	pnlsil1nunit = NULL;
-	pnl1nperipheral = NULL;
+	pnlhk1nmodule = NULL;
+	pnlhk1nvector = NULL;
 	pnl1ntarget = NULL;
 	pnlfwd1ncontroller = NULL;
 	pnl1nbank = NULL;
+	pnl1nperipheral = NULL;
+	pnlsil1nunit = NULL;
 	pnldetail = NULL;
 
 	// IP constructor.cust1 --- INSERT
@@ -112,37 +112,37 @@ void PnlWdbeSilRec::refresh(
 
 	if (statshr.ixWdbeVExpstate == VecWdbeVExpstate::MIND) {
 		if (pnldetail) {delete pnldetail; pnldetail = NULL;};
+		if (pnlsil1nunit) {delete pnlsil1nunit; pnlsil1nunit = NULL;};
+		if (pnl1nperipheral) {delete pnl1nperipheral; pnl1nperipheral = NULL;};
 		if (pnl1nbank) {delete pnl1nbank; pnl1nbank = NULL;};
 		if (pnlfwd1ncontroller) {delete pnlfwd1ncontroller; pnlfwd1ncontroller = NULL;};
 		if (pnl1ntarget) {delete pnl1ntarget; pnl1ntarget = NULL;};
-		if (pnl1nperipheral) {delete pnl1nperipheral; pnl1nperipheral = NULL;};
-		if (pnlsil1nunit) {delete pnlsil1nunit; pnlsil1nunit = NULL;};
-		if (pnlref1ncommand) {delete pnlref1ncommand; pnlref1ncommand = NULL;};
-		if (pnlhk1nmodule) {delete pnlhk1nmodule; pnlhk1nmodule = NULL;};
 		if (pnlhk1nvector) {delete pnlhk1nvector; pnlhk1nvector = NULL;};
+		if (pnlhk1nmodule) {delete pnlhk1nmodule; pnlhk1nmodule = NULL;};
+		if (pnlref1ncommand) {delete pnlref1ncommand; pnlref1ncommand = NULL;};
 		if (pnlref1nerror) {delete pnlref1nerror; pnlref1nerror = NULL;};
 	} else {
 		if (!pnldetail) pnldetail = new PnlWdbeSilDetail(xchg, dbswdbe, jref, ixWdbeVLocale);
+		if (!pnlsil1nunit) pnlsil1nunit = new PnlWdbeSilSil1NUnit(xchg, dbswdbe, jref, ixWdbeVLocale);
+		if (!pnl1nperipheral) pnl1nperipheral = new PnlWdbeSil1NPeripheral(xchg, dbswdbe, jref, ixWdbeVLocale);
 		if (!pnl1nbank) pnl1nbank = new PnlWdbeSil1NBank(xchg, dbswdbe, jref, ixWdbeVLocale);
 		if (!pnlfwd1ncontroller) pnlfwd1ncontroller = new PnlWdbeSilFwd1NController(xchg, dbswdbe, jref, ixWdbeVLocale);
 		if (!pnl1ntarget) pnl1ntarget = new PnlWdbeSil1NTarget(xchg, dbswdbe, jref, ixWdbeVLocale);
-		if (!pnl1nperipheral) pnl1nperipheral = new PnlWdbeSil1NPeripheral(xchg, dbswdbe, jref, ixWdbeVLocale);
-		if (!pnlsil1nunit) pnlsil1nunit = new PnlWdbeSilSil1NUnit(xchg, dbswdbe, jref, ixWdbeVLocale);
-		if (!pnlref1ncommand) pnlref1ncommand = new PnlWdbeSilRef1NCommand(xchg, dbswdbe, jref, ixWdbeVLocale);
-		if (!pnlhk1nmodule) pnlhk1nmodule = new PnlWdbeSilHk1NModule(xchg, dbswdbe, jref, ixWdbeVLocale);
 		if (!pnlhk1nvector) pnlhk1nvector = new PnlWdbeSilHk1NVector(xchg, dbswdbe, jref, ixWdbeVLocale);
+		if (!pnlhk1nmodule) pnlhk1nmodule = new PnlWdbeSilHk1NModule(xchg, dbswdbe, jref, ixWdbeVLocale);
+		if (!pnlref1ncommand) pnlref1ncommand = new PnlWdbeSilRef1NCommand(xchg, dbswdbe, jref, ixWdbeVLocale);
 		if (!pnlref1nerror) pnlref1nerror = new PnlWdbeSilRef1NError(xchg, dbswdbe, jref, ixWdbeVLocale);
 	};
 
 	statshr.jrefDetail = ((pnldetail) ? pnldetail->jref : 0);
+	statshr.jrefSil1NUnit = ((pnlsil1nunit) ? pnlsil1nunit->jref : 0);
+	statshr.jref1NPeripheral = ((pnl1nperipheral) ? pnl1nperipheral->jref : 0);
 	statshr.jref1NBank = ((pnl1nbank) ? pnl1nbank->jref : 0);
 	statshr.jrefFwd1NController = ((pnlfwd1ncontroller) ? pnlfwd1ncontroller->jref : 0);
 	statshr.jref1NTarget = ((pnl1ntarget) ? pnl1ntarget->jref : 0);
-	statshr.jref1NPeripheral = ((pnl1nperipheral) ? pnl1nperipheral->jref : 0);
-	statshr.jrefSil1NUnit = ((pnlsil1nunit) ? pnlsil1nunit->jref : 0);
-	statshr.jrefRef1NCommand = ((pnlref1ncommand) ? pnlref1ncommand->jref : 0);
-	statshr.jrefHk1NModule = ((pnlhk1nmodule) ? pnlhk1nmodule->jref : 0);
 	statshr.jrefHk1NVector = ((pnlhk1nvector) ? pnlhk1nvector->jref : 0);
+	statshr.jrefHk1NModule = ((pnlhk1nmodule) ? pnlhk1nmodule->jref : 0);
+	statshr.jrefRef1NCommand = ((pnlref1ncommand) ? pnlref1ncommand->jref : 0);
 	statshr.jrefRef1NError = ((pnlref1nerror) ? pnlref1nerror->jref : 0);
 
 	// IP refresh --- END
@@ -175,14 +175,14 @@ void PnlWdbeSilRec::updatePreset(
 
 		if (recUnt.ref != 0) {
 			if (pnldetail) pnldetail->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
+			if (pnlsil1nunit) pnlsil1nunit->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
+			if (pnl1nperipheral) pnl1nperipheral->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
 			if (pnl1nbank) pnl1nbank->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
 			if (pnlfwd1ncontroller) pnlfwd1ncontroller->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
 			if (pnl1ntarget) pnl1ntarget->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
-			if (pnl1nperipheral) pnl1nperipheral->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
-			if (pnlsil1nunit) pnlsil1nunit->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
-			if (pnlref1ncommand) pnlref1ncommand->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
-			if (pnlhk1nmodule) pnlhk1nmodule->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
 			if (pnlhk1nvector) pnlhk1nvector->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
+			if (pnlhk1nmodule) pnlhk1nmodule->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
+			if (pnlref1ncommand) pnlref1ncommand->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
 			if (pnlref1nerror) pnlref1nerror->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
 		};
 
@@ -384,6 +384,3 @@ bool PnlWdbeSilRec::handleCallWdbeUnt_inSbs(
 	boolvalRet = ((ixWSubsetUnt & ixInv) != 0); // IP handleCallWdbeUnt_inSbs --- LINE
 	return retval;
 };
-
-
-

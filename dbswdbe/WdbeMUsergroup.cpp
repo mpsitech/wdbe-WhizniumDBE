@@ -848,4 +848,3 @@ bool PgTblWdbeMUsergroup::loadSrfByRef(
 };
 
 #endif
-

@@ -311,6 +311,3 @@ bool QryWdbeCmdMNController::handleCallWdbeStubChgFromSelf(
 	// IP handleCallWdbeStubChgFromSelf --- INSERT
 	return retval;
 };
-
-
-

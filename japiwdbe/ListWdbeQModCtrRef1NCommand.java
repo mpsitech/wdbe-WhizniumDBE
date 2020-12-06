@@ -59,4 +59,3 @@ public class ListWdbeQModCtrRef1NCommand {
 		return false;
 	};
 };
-

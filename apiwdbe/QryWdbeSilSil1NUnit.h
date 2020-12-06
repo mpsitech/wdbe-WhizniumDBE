@@ -98,4 +98,3 @@ namespace QryWdbeSilSil1NUnit {
 };
 
 #endif
-

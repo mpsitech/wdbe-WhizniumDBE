@@ -529,4 +529,3 @@ void PnlWdbeUnt1NPeripheral::DpchEngData::readXML(
 		stgiacqry = QryWdbeUnt1NPeripheral::StgIac();
 	};
 };
-

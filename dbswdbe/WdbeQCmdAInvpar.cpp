@@ -967,4 +967,3 @@ ubigint PgTblWdbeQCmdAInvpar::loadRstByJref(
 	return loadRstByStmt("TblWdbeQCmdAInvpar_loadRstByJref", 1, vals, l, f, append, rst);
 };
 #endif
-

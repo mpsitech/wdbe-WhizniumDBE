@@ -24,6 +24,3 @@ bool PnlWdbeUsgList::evalButDeleteActive(
 
 	return(args.back());
 };
-
-
-

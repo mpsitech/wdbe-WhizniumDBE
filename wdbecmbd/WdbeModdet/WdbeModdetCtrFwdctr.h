@@ -25,6 +25,3 @@ namespace WdbeModdetCtrFwdctr {
 };
 
 #endif
-
-
-

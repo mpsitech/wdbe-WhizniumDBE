@@ -21,6 +21,3 @@ namespace WdbeMtpModbscbuMult_v12_0 {
 };
 
 #endif
-
-
-

@@ -845,4 +845,3 @@ ubigint PgTblWdbeAMUserAccess::loadRstByUsr(
 };
 
 #endif
-

@@ -272,4 +272,3 @@ public class QryWdbeVerBvr1NVersion {
 	};
 
 };
-

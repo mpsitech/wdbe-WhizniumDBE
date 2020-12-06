@@ -98,4 +98,3 @@ namespace QryWdbeCmdAInvpar {
 };
 
 #endif
-

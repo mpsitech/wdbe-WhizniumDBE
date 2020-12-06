@@ -98,4 +98,3 @@ namespace QryWdbeSilHk1NModule {
 };
 
 #endif
-

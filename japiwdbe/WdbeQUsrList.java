@@ -81,4 +81,3 @@ public class WdbeQUsrList {
 		return false;
 	};
 };
-

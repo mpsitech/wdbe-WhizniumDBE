@@ -793,4 +793,3 @@ ubigint PgTblWdbeQSilSil1NUnit::loadRstByJref(
 	return loadRstByStmt("TblWdbeQSilSil1NUnit_loadRstByJref", 1, vals, l, f, append, rst);
 };
 #endif
-

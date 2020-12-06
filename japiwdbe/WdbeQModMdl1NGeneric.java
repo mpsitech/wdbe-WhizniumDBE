@@ -41,4 +41,3 @@ public class WdbeQModMdl1NGeneric {
 		return false;
 	};
 };
-

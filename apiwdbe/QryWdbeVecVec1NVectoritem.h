@@ -98,4 +98,3 @@ namespace QryWdbeVecVec1NVectoritem {
 };
 
 #endif
-

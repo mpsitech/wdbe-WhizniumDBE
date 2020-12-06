@@ -272,4 +272,3 @@ public class QryWdbeModCtrHk1NVector {
 	};
 
 };
-

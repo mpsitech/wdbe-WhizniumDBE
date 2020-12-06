@@ -377,6 +377,3 @@ bool PnlWdbeSilRef1NCommand::handleCallWdbeStatChg(
 	// IP handleCallWdbeStatChg --- END
 	return retval;
 };
-
-
-

@@ -120,4 +120,3 @@ bool ListWdbeQLibAMakefile::readXML(
 
 	return basefound;
 };
-

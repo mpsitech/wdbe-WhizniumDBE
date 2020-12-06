@@ -167,6 +167,3 @@ bool PnlWdbeModMdl1NPort::evalButDeleteActive(
 
 	return(args.back());
 };
-
-
-

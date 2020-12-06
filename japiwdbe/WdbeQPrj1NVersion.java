@@ -41,4 +41,3 @@ public class WdbeQPrj1NVersion {
 		return false;
 	};
 };
-

@@ -38,4 +38,3 @@ function setRbuValue(contdoc, id, numSel, act) {
 		else elems[i].setAttribute("disabled", "disabled");
 	};
 };
-

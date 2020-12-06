@@ -59,4 +59,3 @@ public class ListWdbeQUntFwd1NController {
 		return false;
 	};
 };
-

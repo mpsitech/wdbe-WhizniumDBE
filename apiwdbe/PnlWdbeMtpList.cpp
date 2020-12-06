@@ -565,4 +565,3 @@ void PnlWdbeMtpList::DpchEngData::readXML(
 		stgiacqry = QryWdbeMtpList::StgIac();
 	};
 };
-

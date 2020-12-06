@@ -647,4 +647,3 @@ public class PnlWdbeVitDetail {
 	};
 
 };
-

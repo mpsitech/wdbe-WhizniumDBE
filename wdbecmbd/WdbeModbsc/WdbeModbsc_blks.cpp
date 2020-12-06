@@ -290,6 +290,3 @@ void DpchInvWdbeModbscUnt::writeXML(
 };
 
 // IP cust --- INSERT
-
-
-

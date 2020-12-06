@@ -87,6 +87,3 @@ bool PnlWdbeLibMNVersion::evalButSubActive(
 
 	return(args.back());
 };
-
-
-

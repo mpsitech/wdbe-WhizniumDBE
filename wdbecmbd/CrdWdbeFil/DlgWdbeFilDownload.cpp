@@ -158,6 +158,3 @@ string DlgWdbeFilDownload::handleDownload(
 	return retval;
 	// IP handleDownload --- REND
 };
-
-
-

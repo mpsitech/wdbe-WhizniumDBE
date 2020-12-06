@@ -167,6 +167,3 @@ bool PnlWdbeMtpMdl1NGeneric::evalButDeleteActive(
 
 	return(args.back());
 };
-
-
-

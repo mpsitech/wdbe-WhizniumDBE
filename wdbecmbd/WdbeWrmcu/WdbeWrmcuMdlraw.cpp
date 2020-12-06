@@ -312,6 +312,3 @@ void WdbeWrmcuMdlraw::writeMdlC(
 	outfile << "// IP run.prcs --- IEND" << endl;
 };
 // IP cust --- IEND
-
-
-

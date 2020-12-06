@@ -45,6 +45,3 @@ DpchRetWdbe* WdbeMtpModbscbuMult_v12_0::run(
 };
 
 // IP cust --- INSERT
-
-
-

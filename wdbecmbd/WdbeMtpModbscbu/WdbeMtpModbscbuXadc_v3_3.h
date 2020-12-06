@@ -21,6 +21,3 @@ namespace WdbeMtpModbscbuXadc_v3_3 {
 };
 
 #endif
-
-
-

@@ -272,4 +272,3 @@ public class QryWdbeSysSys1NTarget {
 	};
 
 };
-

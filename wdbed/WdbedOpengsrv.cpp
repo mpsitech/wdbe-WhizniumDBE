@@ -283,7 +283,3 @@ void WdbedOpengsrv::writeDpchReg(
 
 	xmlBufferFree(buf);
 };
-
-
-
-

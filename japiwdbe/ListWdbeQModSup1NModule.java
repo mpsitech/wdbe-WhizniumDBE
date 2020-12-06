@@ -59,4 +59,3 @@ public class ListWdbeQModSup1NModule {
 		return false;
 	};
 };
-

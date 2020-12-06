@@ -265,4 +265,3 @@ set<uint> QryWdbeMchList::StgIac::diff(
 
 	return(diffitems);
 };
-

@@ -21,6 +21,3 @@ namespace WdbeMtpModbscbuAxihostif_Easy_v2_0 {
 };
 
 #endif
-
-
-

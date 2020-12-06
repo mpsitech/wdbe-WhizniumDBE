@@ -793,4 +793,3 @@ ubigint PgTblWdbeQFam1NUnit::loadRstByJref(
 	return loadRstByStmt("TblWdbeQFam1NUnit_loadRstByJref", 1, vals, l, f, append, rst);
 };
 #endif
-

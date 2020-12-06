@@ -270,6 +270,3 @@ void WdbecmbdOpprc::cleanup(
 
 	xchg->cOpprcs.unlockMutex("WdbecmbdOpprc", "cleanup");
 };
-
-
-

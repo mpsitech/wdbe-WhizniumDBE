@@ -910,6 +910,3 @@ void WdbeWrdev::wrIparpa(
 	if (((ixWdbeVPartype == VecWdbeVPartype::BLOB) || (ixWdbeVPartype == VecWdbeVPartype::VBLOB)) && !len) wrIparpa(outfile, sref, ixWdbeVPartype, false, newline, refNotConst, ns, init, true);
 };
 // IP cust --- IEND
-
-
-

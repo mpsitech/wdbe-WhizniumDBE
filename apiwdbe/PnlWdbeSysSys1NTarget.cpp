@@ -549,4 +549,3 @@ void PnlWdbeSysSys1NTarget::DpchEngData::readXML(
 		stgiacqry = QryWdbeSysSys1NTarget::StgIac();
 	};
 };
-

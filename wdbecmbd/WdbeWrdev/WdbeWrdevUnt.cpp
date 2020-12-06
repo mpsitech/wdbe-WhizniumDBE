@@ -743,6 +743,3 @@ void WdbeWrdevUnt::writeUntvecsCpp(
 	outfile << "// IP vecs --- IEND" << endl;
 };
 // IP cust --- IEND
-
-
-

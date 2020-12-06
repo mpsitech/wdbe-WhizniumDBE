@@ -537,4 +537,3 @@ void PnlWdbeMchAMakefile::DpchEngData::readXML(
 		stgiacqry = QryWdbeMchAMakefile::StgIac();
 	};
 };
-

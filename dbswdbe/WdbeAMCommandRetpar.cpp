@@ -899,4 +899,3 @@ ubigint PgTblWdbeAMCommandRetpar::loadRstByCmd(
 };
 
 #endif
-

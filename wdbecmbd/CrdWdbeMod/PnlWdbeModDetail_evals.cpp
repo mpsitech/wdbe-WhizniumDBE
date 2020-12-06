@@ -797,6 +797,3 @@ bool PnlWdbeModDetail::evalTxfImbPriActive(
 
 	return(args.back());
 };
-
-
-

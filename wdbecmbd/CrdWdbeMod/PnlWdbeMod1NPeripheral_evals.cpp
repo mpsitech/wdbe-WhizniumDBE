@@ -50,6 +50,3 @@ bool PnlWdbeMod1NPeripheral::evalButViewActive(
 
 	return(args.back());
 };
-
-
-

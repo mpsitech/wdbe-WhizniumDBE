@@ -529,4 +529,3 @@ void PnlWdbeCpr1NCoreversion::DpchEngData::readXML(
 		stgiacqry = QryWdbeCpr1NCoreversion::StgIac();
 	};
 };
-

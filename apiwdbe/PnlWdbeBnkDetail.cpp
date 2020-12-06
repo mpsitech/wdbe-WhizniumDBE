@@ -531,4 +531,3 @@ void PnlWdbeBnkDetail::DpchEngData::readXML(
 		tag = Tag();
 	};
 };
-

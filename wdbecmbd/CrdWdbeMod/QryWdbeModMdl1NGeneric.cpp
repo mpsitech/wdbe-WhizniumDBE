@@ -300,6 +300,3 @@ bool QryWdbeModMdl1NGeneric::handleCallWdbeStubChgFromSelf(
 	// IP handleCallWdbeStubChgFromSelf --- INSERT
 	return retval;
 };
-
-
-

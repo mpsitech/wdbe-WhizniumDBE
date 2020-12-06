@@ -794,4 +794,3 @@ bool PgTblWdbeRMUsergroupUniversal::loadRecByUsgMtbUnv(
 };
 
 #endif
-

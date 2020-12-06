@@ -103,4 +103,3 @@ ubigint PgTblWdbeCFsmstate::getNewRef() {
 	return ref;
 };
 #endif
-

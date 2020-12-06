@@ -170,8 +170,8 @@ void QryWdbeUsgList::rerun_orderSQL(
 			string& sqlstr
 			, const uint preIxOrd
 		) {
-	if (preIxOrd == VecVOrd::SRF) sqlstr += " ORDER BY TblWdbeMUsergroup.sref ASC";
-	else if (preIxOrd == VecVOrd::OWN) sqlstr += " ORDER BY TblWdbeMUsergroup.own ASC";
+	if (preIxOrd == VecVOrd::OWN) sqlstr += " ORDER BY TblWdbeMUsergroup.own ASC";
+	else if (preIxOrd == VecVOrd::SRF) sqlstr += " ORDER BY TblWdbeMUsergroup.sref ASC";
 	else if (preIxOrd == VecVOrd::GRP) sqlstr += " ORDER BY TblWdbeMUsergroup.grp ASC";
 };
 
@@ -380,6 +380,3 @@ bool QryWdbeUsgList::handleCallWdbeStubChgFromSelf(
 	// IP handleCallWdbeStubChgFromSelf --- INSERT
 	return retval;
 };
-
-
-

@@ -39,8 +39,8 @@ PnlWdbePrjRec::PnlWdbePrjRec(
 	jref = xchg->addJob(dbswdbe, this, jrefSup);
 
 	pnlmnperson = NULL;
-	pnl1nversion = NULL;
 	pnldetail = NULL;
+	pnl1nversion = NULL;
 
 	// IP constructor.cust1 --- INSERT
 
@@ -275,6 +275,3 @@ bool PnlWdbePrjRec::handleCallWdbePrj_verEq(
 	boolvalRet = (recPrj.refWdbeMVersion == refInv); // IP handleCallWdbePrj_verEq --- LINE
 	return retval;
 };
-
-
-

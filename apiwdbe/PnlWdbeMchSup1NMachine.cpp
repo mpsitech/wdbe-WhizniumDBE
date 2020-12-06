@@ -513,4 +513,3 @@ void PnlWdbeMchSup1NMachine::DpchEngData::readXML(
 		stgiacqry = QryWdbeMchSup1NMachine::StgIac();
 	};
 };
-

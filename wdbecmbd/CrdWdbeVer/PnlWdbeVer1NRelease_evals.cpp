@@ -97,6 +97,3 @@ bool PnlWdbeVer1NRelease::evalButDeleteActive(
 
 	return(args.back());
 };
-
-
-

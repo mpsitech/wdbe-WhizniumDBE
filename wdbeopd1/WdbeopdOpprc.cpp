@@ -195,7 +195,3 @@ void WdbeopdOpprc::cleanup(
 
 	xchg->cOpprcs.unlockMutex("WdbeopdOpprc", "cleanup");
 };
-
-
-
-

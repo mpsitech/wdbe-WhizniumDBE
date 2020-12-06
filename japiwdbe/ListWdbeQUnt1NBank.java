@@ -59,4 +59,3 @@ public class ListWdbeQUnt1NBank {
 		return false;
 	};
 };
-

@@ -59,4 +59,3 @@ public class ListWdbeQUntList {
 		return false;
 	};
 };
-

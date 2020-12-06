@@ -98,4 +98,3 @@ namespace QryWdbeLibAMakefile {
 };
 
 #endif
-

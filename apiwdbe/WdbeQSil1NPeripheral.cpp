@@ -111,4 +111,3 @@ bool ListWdbeQSil1NPeripheral::readXML(
 
 	return basefound;
 };
-

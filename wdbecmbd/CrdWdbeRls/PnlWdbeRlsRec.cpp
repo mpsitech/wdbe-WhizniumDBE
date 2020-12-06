@@ -44,8 +44,8 @@ PnlWdbeRlsRec::PnlWdbeRlsRec(
 
 	// IP constructor.cust2 --- INSERT
 
-	xchg->addClstn(VecWdbeVCall::CALLWDBERLS_VEREQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBERLS_MCHEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBERLS_VEREQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -242,10 +242,10 @@ void PnlWdbeRlsRec::handleCall(
 		) {
 	if (call->ixVCall == VecWdbeVCall::CALLWDBERLSUPD_REFEQ) {
 		call->abort = handleCallWdbeRlsUpd_refEq(dbswdbe, call->jref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBERLS_VEREQ) {
-		call->abort = handleCallWdbeRls_verEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBERLS_MCHEQ) {
 		call->abort = handleCallWdbeRls_mchEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBERLS_VEREQ) {
+		call->abort = handleCallWdbeRls_verEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
 	};
 };
 
@@ -255,17 +255,6 @@ bool PnlWdbeRlsRec::handleCallWdbeRlsUpd_refEq(
 		) {
 	bool retval = false;
 	// IP handleCallWdbeRlsUpd_refEq --- INSERT
-	return retval;
-};
-
-bool PnlWdbeRlsRec::handleCallWdbeRls_verEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-			, const ubigint refInv
-			, bool& boolvalRet
-		) {
-	bool retval = false;
-	boolvalRet = (recRls.refWdbeMVersion == refInv); // IP handleCallWdbeRls_verEq --- LINE
 	return retval;
 };
 
@@ -280,5 +269,13 @@ bool PnlWdbeRlsRec::handleCallWdbeRls_mchEq(
 	return retval;
 };
 
-
-
+bool PnlWdbeRlsRec::handleCallWdbeRls_verEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+			, const ubigint refInv
+			, bool& boolvalRet
+		) {
+	bool retval = false;
+	boolvalRet = (recRls.refWdbeMVersion == refInv); // IP handleCallWdbeRls_verEq --- LINE
+	return retval;
+};

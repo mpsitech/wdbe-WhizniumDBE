@@ -316,6 +316,3 @@ bool PnlWdbeGenDetail::evalTxfCmtActive(
 
 	return(args.back());
 };
-
-
-

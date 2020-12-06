@@ -875,4 +875,3 @@ public class PnlWdbeFilDetail {
 	};
 
 };
-

@@ -98,4 +98,3 @@ namespace QryWdbeSil1NTarget {
 };
 
 #endif
-

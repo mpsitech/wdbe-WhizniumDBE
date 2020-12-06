@@ -272,4 +272,3 @@ public class QryWdbeMtpMdl1NPort {
 	};
 
 };
-

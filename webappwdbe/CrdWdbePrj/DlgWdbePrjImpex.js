@@ -286,4 +286,3 @@ function handleDpchAppDataDoReply() {
 		};
 	};
 };
-

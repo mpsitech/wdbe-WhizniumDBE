@@ -575,4 +575,3 @@ function handleDpchAppDoCrdopenReply() {
 		};
 	};
 };
-

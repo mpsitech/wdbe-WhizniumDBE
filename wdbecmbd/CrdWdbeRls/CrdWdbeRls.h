@@ -17,10 +17,10 @@
 #include "PnlWdbeRlsList.h"
 #include "PnlWdbeRlsHeadbar.h"
 #include "PnlWdbeRlsRec.h"
+#include "DlgWdbeRlsFinreptr.h"
 #include "DlgWdbeRlsNew.h"
 #include "DlgWdbeRlsStareptr.h"
 #include "DlgWdbeRlsWrite.h"
-#include "DlgWdbeRlsFinreptr.h"
 
 #define VecVWdbeRlsDo CrdWdbeRls::VecVDo
 #define VecVWdbeRlsSge CrdWdbeRls::VecVSge
@@ -241,10 +241,10 @@ public:
 	PnlWdbeRlsList* pnllist;
 	PnlWdbeRlsHeadbar* pnlheadbar;
 	PnlWdbeRlsRec* pnlrec;
+	DlgWdbeRlsFinreptr* dlgfinreptr;
 	DlgWdbeRlsNew* dlgnew;
 	DlgWdbeRlsStareptr* dlgstareptr;
 	DlgWdbeRlsWrite* dlgwrite;
-	DlgWdbeRlsFinreptr* dlgfinreptr;
 
 	// IP vars.cust --- INSERT
 
@@ -300,6 +300,3 @@ private:
 };
 
 #endif
-
-
-

@@ -313,4 +313,3 @@ namespace PnlWdbeVarDetail {
 };
 
 #endif
-

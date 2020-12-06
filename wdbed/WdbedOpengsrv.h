@@ -32,7 +32,3 @@ namespace WdbedOpengsrv {
 };
 
 #endif
-
-
-
-

@@ -419,6 +419,3 @@ namespace VecWdbeVJob {
 };
 
 #endif
-
-
-

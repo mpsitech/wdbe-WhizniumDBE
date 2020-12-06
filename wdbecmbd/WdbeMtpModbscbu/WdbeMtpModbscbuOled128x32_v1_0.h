@@ -21,6 +21,3 @@ namespace WdbeMtpModbscbuOled128x32_v1_0 {
 };
 
 #endif
-
-
-

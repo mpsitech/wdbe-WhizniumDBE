@@ -678,4 +678,3 @@ public class PnlWdbeErrDetail {
 	};
 
 };
-

@@ -103,4 +103,3 @@ ubigint PgTblWdbeCVariable::getNewRef() {
 	return ref;
 };
 #endif
-

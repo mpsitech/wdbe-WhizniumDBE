@@ -274,6 +274,3 @@ bool PnlWdbeVarDetail::evalTxfCmtActive(
 
 	return(args.back());
 };
-
-
-

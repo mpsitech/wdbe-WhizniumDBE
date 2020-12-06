@@ -21,9 +21,9 @@ public class QryWdbeUntList {
 
 		public static final int MDL = 1;
 		public static final int SYS = 2;
-		public static final int REU = 3;
+		public static final int TYP = 3;
 		public static final int RET = 4;
-		public static final int TYP = 5;
+		public static final int REU = 5;
 		public static final int TIT = 6;
 		public static final int SRF = 7;
 
@@ -34,9 +34,9 @@ public class QryWdbeUntList {
 
 			if (s.equals("mdl")) return MDL;
 			if (s.equals("sys")) return SYS;
-			if (s.equals("reu")) return REU;
-			if (s.equals("ret")) return RET;
 			if (s.equals("typ")) return TYP;
+			if (s.equals("ret")) return RET;
+			if (s.equals("reu")) return REU;
 			if (s.equals("tit")) return TIT;
 			if (s.equals("srf")) return SRF;
 
@@ -48,9 +48,9 @@ public class QryWdbeUntList {
 				) {
 			if (ix == MDL) return("mdl");
 			if (ix == SYS) return("sys");
-			if (ix == REU) return("reu");
-			if (ix == RET) return("ret");
 			if (ix == TYP) return("typ");
+			if (ix == RET) return("ret");
+			if (ix == REU) return("reu");
 			if (ix == TIT) return("tit");
 			if (ix == SRF) return("srf");
 
@@ -317,4 +317,3 @@ public class QryWdbeUntList {
 	};
 
 };
-

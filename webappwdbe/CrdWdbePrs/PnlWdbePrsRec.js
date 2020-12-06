@@ -409,4 +409,3 @@ function handleDpchAppDataDoReply() {
 		};
 	};
 };
-

@@ -300,6 +300,3 @@ bool QryWdbePrcFsmFsm1NFsmstate::handleCallWdbeStubChgFromSelf(
 	// IP handleCallWdbeStubChgFromSelf --- INSERT
 	return retval;
 };
-
-
-

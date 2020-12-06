@@ -439,6 +439,3 @@ bool PnlWdbeVerDetail::handleCallWdbeVer_bvrEq(
 	boolvalRet = (recVer.bvrRefWdbeMVersion == refInv); // IP handleCallWdbeVer_bvrEq --- LINE
 	return retval;
 };
-
-
-

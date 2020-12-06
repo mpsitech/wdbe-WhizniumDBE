@@ -241,4 +241,3 @@ set<uint> QryWdbeSil1NPeripheral::StgIac::diff(
 
 	return(diffitems);
 };
-

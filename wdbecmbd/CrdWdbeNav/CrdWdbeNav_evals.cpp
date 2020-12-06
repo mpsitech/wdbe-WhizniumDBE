@@ -1007,6 +1007,3 @@ bool CrdWdbeNav::evalMitAppLoiAvail(
 
 	return(args.back());
 };
-
-
-

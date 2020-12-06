@@ -1570,4 +1570,3 @@ public class DlgWdbeVerBscdd {
 	};
 
 };
-

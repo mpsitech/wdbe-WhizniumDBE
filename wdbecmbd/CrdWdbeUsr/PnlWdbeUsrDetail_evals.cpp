@@ -234,6 +234,3 @@ bool PnlWdbeUsrDetail::evalTxfCmtActive(
 
 	return(args.back());
 };
-
-
-

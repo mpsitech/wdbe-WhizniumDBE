@@ -154,6 +154,3 @@ bool PnlWdbeVitDetail::evalTxfCmtActive(
 
 	return(args.back());
 };
-
-
-

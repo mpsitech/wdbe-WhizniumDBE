@@ -24,6 +24,3 @@ string SqkWdbeMtpPlhfpga::getSquawk(
 	// example: "fill module template-specific FPGA code placeholders for module 'icm2-cmdinv (cmdinv_v1_0 command invocation buffer)'"
 	return("fill module template-specific FPGA code placeholders for module '" + StubWdbe::getStubMdlStd(dbswdbe, dpchinv->refWdbeMModule) + "'"); // IP getSquawk --- RLINE
 };
-
-
-

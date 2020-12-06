@@ -499,6 +499,3 @@ void PnlWdbeSilRef1NError::DpchEngData::writeXML(
 		if (has(STGIACQRY)) stgiacqry.writeXML(wr);
 	xmlTextWriterEndElement(wr);
 };
-
-
-

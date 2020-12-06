@@ -73,4 +73,3 @@ public class WdbeQVerList {
 		return false;
 	};
 };
-

@@ -57,4 +57,3 @@ public class WdbeQPrsMNCoreproject {
 		return false;
 	};
 };
-

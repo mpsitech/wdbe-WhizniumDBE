@@ -282,6 +282,3 @@ bool PnlWdbePrjDetail::handleCallWdbePrj_verEq(
 	boolvalRet = (recPrj.refWdbeMVersion == refInv); // IP handleCallWdbePrj_verEq --- LINE
 	return retval;
 };
-
-
-

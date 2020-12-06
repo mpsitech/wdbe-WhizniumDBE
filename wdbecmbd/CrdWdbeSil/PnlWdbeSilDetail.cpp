@@ -407,13 +407,13 @@ void PnlWdbeSilDetail::handleDpchAppDoButReuViewClick(
 	string sref;
 
 	if (statshr.ButReuViewAvail && statshr.ButReuViewActive) {
-		if (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCVER, jref)) if (recUnt.refIxVTbl == VecWdbeVMUnitRefTbl::VER) {
-			sref = "CrdWdbeVer";
+		if (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCFAM, jref)) if (recUnt.refIxVTbl == VecWdbeVMUnitRefTbl::FAM) {
+			sref = "CrdWdbeFam";
 			xchg->triggerIxRefSrefIntvalToRefCall(dbswdbe, VecWdbeVCall::CALLWDBECRDOPEN, jref, 0, 0, sref, recUnt.refUref, jrefNew);
 		};
 		if (jrefNew == 0) {
-			if (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCFAM, jref)) if (recUnt.refIxVTbl == VecWdbeVMUnitRefTbl::FAM) {
-				sref = "CrdWdbeFam";
+			if (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCVER, jref)) if (recUnt.refIxVTbl == VecWdbeVMUnitRefTbl::VER) {
+				sref = "CrdWdbeVer";
 				xchg->triggerIxRefSrefIntvalToRefCall(dbswdbe, VecWdbeVCall::CALLWDBECRDOPEN, jref, 0, 0, sref, recUnt.refUref, jrefNew);
 			};
 		};
@@ -586,6 +586,3 @@ bool PnlWdbeSilDetail::handleCallWdbeUnt_inSbs(
 	boolvalRet = ((ixWSubsetUnt & ixInv) != 0); // IP handleCallWdbeUnt_inSbs --- LINE
 	return retval;
 };
-
-
-

@@ -154,4 +154,3 @@ function refreshSld(contdoc, id, large, log, min, max, val, act, chg) {
 		contdoc.getElementById(id + "Val").removeAttribute("onkeypress");
 	};
 };
-

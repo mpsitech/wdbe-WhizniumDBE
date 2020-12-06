@@ -15,8 +15,8 @@
 // IP include.cust --- INSERT
 
 #include "PnlWdbePrjMNPerson.h"
-#include "PnlWdbePrj1NVersion.h"
 #include "PnlWdbePrjDetail.h"
+#include "PnlWdbePrj1NVersion.h"
 
 #define VecVWdbePrjRecDo PnlWdbePrjRec::VecVDo
 
@@ -172,8 +172,8 @@ public:
 	StatShr statshr;
 
 	PnlWdbePrjMNPerson* pnlmnperson;
-	PnlWdbePrj1NVersion* pnl1nversion;
 	PnlWdbePrjDetail* pnldetail;
+	PnlWdbePrj1NVersion* pnl1nversion;
 
 	WdbeMProject recPrj;
 
@@ -213,6 +213,3 @@ private:
 };
 
 #endif
-
-
-

@@ -1158,4 +1158,3 @@ public class DlgWdbeFilNew {
 	};
 
 };
-

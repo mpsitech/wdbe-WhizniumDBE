@@ -312,6 +312,3 @@ void WdbeWrdevCtr::writeCtrCpp(
 	outfile << "// IP errs --- IEND" << endl;
 };
 // IP cust --- IEND
-
-
-

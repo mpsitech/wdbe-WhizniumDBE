@@ -513,4 +513,3 @@ void PnlWdbeModCor1NImbuf::DpchEngData::readXML(
 		stgiacqry = QryWdbeModCor1NImbuf::StgIac();
 	};
 };
-

@@ -793,4 +793,3 @@ ubigint PgTblWdbeQSysHk1NVector::loadRstByJref(
 	return loadRstByStmt("TblWdbeQSysHk1NVector_loadRstByJref", 1, vals, l, f, append, rst);
 };
 #endif
-

@@ -185,6 +185,3 @@ set<uint> QryWdbePrsMNCoreproject::StgIac::diff(
 
 	return(diffitems);
 };
-
-
-

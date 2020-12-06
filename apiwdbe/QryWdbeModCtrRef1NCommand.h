@@ -98,4 +98,3 @@ namespace QryWdbeModCtrRef1NCommand {
 };
 
 #endif
-

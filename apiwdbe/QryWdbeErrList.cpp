@@ -267,4 +267,3 @@ set<uint> QryWdbeErrList::StgIac::diff(
 
 	return(diffitems);
 };
-

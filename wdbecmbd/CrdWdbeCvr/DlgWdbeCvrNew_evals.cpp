@@ -45,6 +45,3 @@ bool DlgWdbeCvrNew::evalButCreActive(
 
 	return(args.back());
 };
-
-
-

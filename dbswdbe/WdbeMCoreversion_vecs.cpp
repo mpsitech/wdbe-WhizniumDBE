@@ -135,4 +135,3 @@ void TblWdbeMCoreversion::VecWSpectype::fillFeed(
 
 	for (unsigned int i = 1; i <= IP; i *= 2) feed.appendIxSrefTitles(i, getSrefs(i), getTitle(i, ixWdbeVLocale));
 };
-

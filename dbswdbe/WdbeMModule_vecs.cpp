@@ -202,4 +202,3 @@ string TblWdbeMModule::VecWSubset::getTitle(
 
 	return("");
 };
-

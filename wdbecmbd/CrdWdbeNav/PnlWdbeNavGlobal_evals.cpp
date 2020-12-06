@@ -150,6 +150,3 @@ bool PnlWdbeNavGlobal::evalButMtpViewActive(
 
 	return(args.back());
 };
-
-
-

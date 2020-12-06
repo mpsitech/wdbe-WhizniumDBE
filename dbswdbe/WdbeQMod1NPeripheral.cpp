@@ -793,4 +793,3 @@ ubigint PgTblWdbeQMod1NPeripheral::loadRstByJref(
 	return loadRstByStmt("TblWdbeQMod1NPeripheral_loadRstByJref", 1, vals, l, f, append, rst);
 };
 #endif
-

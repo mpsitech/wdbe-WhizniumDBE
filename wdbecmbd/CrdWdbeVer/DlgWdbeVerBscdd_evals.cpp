@@ -128,6 +128,3 @@ bool DlgWdbeVerBscdd::evalIfiUldActive(
 
 	return(args.back());
 };
-
-
-

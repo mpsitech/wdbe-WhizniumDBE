@@ -59,4 +59,3 @@ public class ListWdbeQPrcMge1NSignal {
 		return false;
 	};
 };
-

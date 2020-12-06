@@ -98,4 +98,3 @@ namespace QryWdbeMch1NRelease {
 };
 
 #endif
-

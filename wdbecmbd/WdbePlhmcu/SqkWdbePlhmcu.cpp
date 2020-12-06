@@ -24,6 +24,3 @@ string SqkWdbePlhmcu::getSquawkEhostif(
 	// example: "fill type-specific placeholders for module 'icm2-hostif (uarthostif_Easy_v1_0_Mcu easy model host interface)'"
 	return(""); // IP getSquawkEhostif --- LINE
 };
-
-
-

@@ -59,4 +59,3 @@ public class ListWdbeQSysSys1NTarget {
 		return false;
 	};
 };
-

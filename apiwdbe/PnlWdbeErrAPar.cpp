@@ -581,4 +581,3 @@ void PnlWdbeErrAPar::DpchEngData::readXML(
 		stgiacqry = QryWdbeErrAPar::StgIac();
 	};
 };
-

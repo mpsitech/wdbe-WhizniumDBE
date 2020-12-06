@@ -80,6 +80,3 @@ string SqkWdbeWrfpga::getSquawkMdlraw(
 	// example: "write raw VHDL code for module 'icm2 (top_v1_0 top)'"
 	return(""); // IP getSquawkMdlraw --- LINE
 };
-
-
-

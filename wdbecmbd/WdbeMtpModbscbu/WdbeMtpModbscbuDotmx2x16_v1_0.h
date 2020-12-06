@@ -21,6 +21,3 @@ namespace WdbeMtpModbscbuDotmx2x16_v1_0 {
 };
 
 #endif
-
-
-

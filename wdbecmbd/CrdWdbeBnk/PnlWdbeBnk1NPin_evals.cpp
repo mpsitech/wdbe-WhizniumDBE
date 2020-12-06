@@ -97,6 +97,3 @@ bool PnlWdbeBnk1NPin::evalButDeleteActive(
 
 	return(args.back());
 };
-
-
-

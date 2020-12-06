@@ -913,6 +913,3 @@ void DlgWdbeRlsFinreptr::DpchEngData::writeXML(
 		if (has(TAGRES)) TagRes::writeXML(ixWdbeVLocale, wr);
 	xmlTextWriterEndElement(wr);
 };
-
-
-

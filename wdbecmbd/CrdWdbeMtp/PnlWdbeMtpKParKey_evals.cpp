@@ -80,6 +80,3 @@ bool PnlWdbeMtpKParKey::evalButDeleteActive(
 
 	return(args.back());
 };
-
-
-

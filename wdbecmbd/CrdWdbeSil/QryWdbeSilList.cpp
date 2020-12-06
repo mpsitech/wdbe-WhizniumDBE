@@ -192,11 +192,11 @@ void QryWdbeSilList::rerun_orderSQL(
 			, const uint preIxOrd
 		) {
 	if (preIxOrd == VecVOrd::MDL) sqlstr += " ORDER BY TblWdbeMUnit.refWdbeMModule ASC";
-	else if (preIxOrd == VecVOrd::SYS) sqlstr += " ORDER BY TblWdbeMUnit.refWdbeMSystem ASC";
-	else if (preIxOrd == VecVOrd::REU) sqlstr += " ORDER BY TblWdbeMUnit.refUref ASC";
 	else if (preIxOrd == VecVOrd::RET) sqlstr += " ORDER BY TblWdbeMUnit.refIxVTbl ASC";
-	else if (preIxOrd == VecVOrd::TYP) sqlstr += " ORDER BY TblWdbeMUnit.ixVBasetype ASC";
+	else if (preIxOrd == VecVOrd::REU) sqlstr += " ORDER BY TblWdbeMUnit.refUref ASC";
+	else if (preIxOrd == VecVOrd::SYS) sqlstr += " ORDER BY TblWdbeMUnit.refWdbeMSystem ASC";
 	else if (preIxOrd == VecVOrd::TIT) sqlstr += " ORDER BY TblWdbeMUnit.Title ASC";
+	else if (preIxOrd == VecVOrd::TYP) sqlstr += " ORDER BY TblWdbeMUnit.ixVBasetype ASC";
 	else if (preIxOrd == VecVOrd::SRF) sqlstr += " ORDER BY TblWdbeMUnit.sref ASC";
 };
 
@@ -229,10 +229,10 @@ void QryWdbeSilList::fetch(
 			rec->titIxVBasetype = VecWdbeVMUnitBasetype::getTitle(rec->ixVBasetype, ixWdbeVLocale);
 			rec->srefRefIxVTbl = VecWdbeVMUnitRefTbl::getSref(rec->refIxVTbl);
 			rec->titRefIxVTbl = VecWdbeVMUnitRefTbl::getTitle(rec->refIxVTbl, ixWdbeVLocale);
-			if (rec->refIxVTbl == VecWdbeVMUnitRefTbl::FAM) {
-				rec->stubRefUref = StubWdbe::getStubFamStd(dbswdbe, rec->refUref, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
-			} else if (rec->refIxVTbl == VecWdbeVMUnitRefTbl::VER) {
+			if (rec->refIxVTbl == VecWdbeVMUnitRefTbl::VER) {
 				rec->stubRefUref = StubWdbe::getStubVerStd(dbswdbe, rec->refUref, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
+			} else if (rec->refIxVTbl == VecWdbeVMUnitRefTbl::FAM) {
+				rec->stubRefUref = StubWdbe::getStubFamStd(dbswdbe, rec->refUref, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
 			} else rec->stubRefUref = "-";
 			rec->stubRefWdbeMSystem = StubWdbe::getStubSysStd(dbswdbe, rec->refWdbeMSystem, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
 			rec->stubRefWdbeMModule = StubWdbe::getStubMdlStd(dbswdbe, rec->refWdbeMModule, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
@@ -447,6 +447,3 @@ bool QryWdbeSilList::handleCallWdbeStubChgFromSelf(
 	// IP handleCallWdbeStubChgFromSelf --- INSERT
 	return retval;
 };
-
-
-

@@ -792,4 +792,3 @@ public class PnlWdbeVarList {
 	};
 
 };
-

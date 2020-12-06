@@ -284,6 +284,3 @@ bool PnlWdbeBnkRec::handleCallWdbeBnk_unt_inSbs(
 	boolvalRet = ((dbswdbe->getIxWSubsetByRefWdbeMUnit(recBnk.refWdbeMUnit) & ixInv) != 0); // IP handleCallWdbeBnk_unt_inSbs --- LINE
 	return retval;
 };
-
-
-

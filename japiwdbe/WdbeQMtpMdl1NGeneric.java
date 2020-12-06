@@ -41,4 +41,3 @@ public class WdbeQMtpMdl1NGeneric {
 		return false;
 	};
 };
-

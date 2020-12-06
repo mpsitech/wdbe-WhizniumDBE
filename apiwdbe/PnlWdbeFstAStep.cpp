@@ -613,4 +613,3 @@ void PnlWdbeFstAStep::DpchEngData::readXML(
 		stgiacqry = QryWdbeFstAStep::StgIac();
 	};
 };
-

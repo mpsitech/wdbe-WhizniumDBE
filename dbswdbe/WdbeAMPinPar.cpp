@@ -827,4 +827,3 @@ ubigint PgTblWdbeAMPinPar::loadRstByPin(
 };
 
 #endif
-

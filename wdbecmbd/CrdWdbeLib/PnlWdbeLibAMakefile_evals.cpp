@@ -80,6 +80,3 @@ bool PnlWdbeLibAMakefile::evalButDeleteActive(
 
 	return(args.back());
 };
-
-
-

@@ -167,6 +167,3 @@ bool PnlWdbePrcFsmFsm1NFsmstate::evalButDeleteActive(
 
 	return(args.back());
 };
-
-
-

@@ -139,8 +139,8 @@ void DlgWdbeNavLoaini::refreshLfi(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
 		) {
-	ContInfLfi oldContinflfi(continflfi);
 	StatShrLfi oldStatshrlfi(statshrlfi);
+	ContInfLfi oldContinflfi(continflfi);
 
 	// IP refreshLfi --- RBEGIN
 	// statshrlfi
@@ -150,8 +150,8 @@ void DlgWdbeNavLoaini::refreshLfi(
 	continflfi.Dld = "log.txt";
 
 	// IP refreshLfi --- REND
-	if (continflfi.diff(&oldContinflfi).size() != 0) insert(moditems, DpchEngData::CONTINFLFI);
 	if (statshrlfi.diff(&oldStatshrlfi).size() != 0) insert(moditems, DpchEngData::STATSHRLFI);
+	if (continflfi.diff(&oldContinflfi).size() != 0) insert(moditems, DpchEngData::CONTINFLFI);
 };
 
 void DlgWdbeNavLoaini::refresh(
@@ -163,23 +163,23 @@ void DlgWdbeNavLoaini::refresh(
 	muteRefresh = true;
 
 	StatShr oldStatshr(statshr);
-	ContIac oldContiac(contiac);
 	ContInf oldContinf(continf);
+	ContIac oldContiac(contiac);
 
 	// IP refresh --- BEGIN
 	// statshr
 	statshr.ButDneActive = evalButDneActive(dbswdbe);
 
-	// contiac
-	contiac.numFDse = ixVDit;
-
 	// continf
 	continf.numFSge = ixVSge;
 
+	// contiac
+	contiac.numFDse = ixVDit;
+
 	// IP refresh --- END
 	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
-	if (contiac.diff(&oldContiac).size() != 0) insert(moditems, DpchEngData::CONTIAC);
 	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
+	if (contiac.diff(&oldContiac).size() != 0) insert(moditems, DpchEngData::CONTIAC);
 
 	refreshIfi(dbswdbe, moditems);
 	refreshImp(dbswdbe, moditems);
@@ -245,10 +245,10 @@ void DlgWdbeNavLoaini::handleRequest(
 		if (ixVSge == VecVSge::DONE) req->filename = handleDownloadInSgeDone(dbswdbe);
 
 	} else if (req->ixVBasetype == ReqWdbe::VecVBasetype::TIMER) {
-		if (ixVSge == VecVSge::PRSIDLE) handleTimerInSgePrsidle(dbswdbe, req->sref);
+		if (ixVSge == VecVSge::UPKIDLE) handleTimerInSgeUpkidle(dbswdbe, req->sref);
+		else if (ixVSge == VecVSge::PRSIDLE) handleTimerInSgePrsidle(dbswdbe, req->sref);
 		else if (ixVSge == VecVSge::IMPIDLE) handleTimerInSgeImpidle(dbswdbe, req->sref);
 		else if ((req->sref == "mon") && (ixVSge == VecVSge::IMPORT)) handleTimerWithSrefMonInSgeImport(dbswdbe);
-		else if (ixVSge == VecVSge::UPKIDLE) handleTimerInSgeUpkidle(dbswdbe, req->sref);
 	};
 };
 
@@ -346,6 +346,13 @@ string DlgWdbeNavLoaini::handleDownloadInSgeDone(
 	return(""); // IP handleDownloadInSgeDone --- LINE
 };
 
+void DlgWdbeNavLoaini::handleTimerInSgeUpkidle(
+			DbsWdbe* dbswdbe
+			, const string& sref
+		) {
+	changeStage(dbswdbe, nextIxVSgeSuccess);
+};
+
 void DlgWdbeNavLoaini::handleTimerInSgePrsidle(
 			DbsWdbe* dbswdbe
 			, const string& sref
@@ -365,13 +372,6 @@ void DlgWdbeNavLoaini::handleTimerWithSrefMonInSgeImport(
 		) {
 	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
 	refreshWithDpchEng(dbswdbe); // IP handleTimerWithSrefMonInSgeImport --- ILINE
-};
-
-void DlgWdbeNavLoaini::handleTimerInSgeUpkidle(
-			DbsWdbe* dbswdbe
-			, const string& sref
-		) {
-	changeStage(dbswdbe, nextIxVSgeSuccess);
 };
 
 void DlgWdbeNavLoaini::changeStage(
@@ -784,6 +784,3 @@ void DlgWdbeNavLoaini::leaveSgeDone(
 		) {
 	// IP leaveSgeDone --- INSERT
 };
-
-
-

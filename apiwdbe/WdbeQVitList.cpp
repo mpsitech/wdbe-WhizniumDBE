@@ -117,4 +117,3 @@ bool ListWdbeQVitList::readXML(
 
 	return basefound;
 };
-

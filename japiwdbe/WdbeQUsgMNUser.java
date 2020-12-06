@@ -49,4 +49,3 @@ public class WdbeQUsgMNUser {
 		return false;
 	};
 };
-

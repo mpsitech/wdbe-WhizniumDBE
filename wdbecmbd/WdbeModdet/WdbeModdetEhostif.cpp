@@ -351,6 +351,3 @@ void WdbeModdetEhostif::mergeCreateOprt(
 	if (!found) dbswdbe->tblwdbemport->insertNewRec(NULL, refC, refMdl, mdlNum++, VecWdbeVMPortMdlCat::CMDBUS, sref, ixVDir, srefHty, Width, "", "", "", "", srefCsi, "");
 };
 // IP cust --- IEND
-
-
-

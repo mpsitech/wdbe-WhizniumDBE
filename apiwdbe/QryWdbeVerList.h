@@ -30,9 +30,9 @@ namespace QryWdbeVerList {
 	public:
 		static const Sbecore::uint STE = 1;
 		static const Sbecore::uint BVR = 2;
-		static const Sbecore::uint PRJ = 3;
+		static const Sbecore::uint GRP = 3;
 		static const Sbecore::uint OWN = 4;
-		static const Sbecore::uint GRP = 5;
+		static const Sbecore::uint PRJ = 5;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);
@@ -116,4 +116,3 @@ namespace QryWdbeVerList {
 };
 
 #endif
-

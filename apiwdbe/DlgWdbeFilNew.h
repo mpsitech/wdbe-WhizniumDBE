@@ -412,4 +412,3 @@ namespace DlgWdbeFilNew {
 };
 
 #endif
-

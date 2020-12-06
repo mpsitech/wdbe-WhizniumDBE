@@ -111,4 +111,3 @@ bool ListWdbeQSilFwd1NController::readXML(
 
 	return basefound;
 };
-

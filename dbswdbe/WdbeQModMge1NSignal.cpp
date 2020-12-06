@@ -793,4 +793,3 @@ ubigint PgTblWdbeQModMge1NSignal::loadRstByJref(
 	return loadRstByStmt("TblWdbeQModMge1NSignal_loadRstByJref", 1, vals, l, f, append, rst);
 };
 #endif
-

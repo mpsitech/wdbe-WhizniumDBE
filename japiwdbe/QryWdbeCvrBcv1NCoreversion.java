@@ -272,4 +272,3 @@ public class QryWdbeCvrBcv1NCoreversion {
 	};
 
 };
-

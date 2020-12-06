@@ -709,4 +709,3 @@ public class PnlWdbeMchList {
 	};
 
 };
-

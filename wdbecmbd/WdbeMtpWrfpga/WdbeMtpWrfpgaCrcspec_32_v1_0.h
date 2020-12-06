@@ -24,6 +24,3 @@ namespace WdbeMtpWrfpgaCrcspec_32_v1_0 {
 };
 
 #endif
-
-
-

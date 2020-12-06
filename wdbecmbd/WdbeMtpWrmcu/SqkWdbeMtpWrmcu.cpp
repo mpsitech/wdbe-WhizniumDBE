@@ -24,6 +24,3 @@ string SqkWdbeMtpWrmcu::getSquawk(
 	// example: "write module template-specific MCU code for module 'icm2-cmdinv (cmdinv_v1_0 command invocation buffer)'"
 	return(""); // IP getSquawk --- LINE
 };
-
-
-

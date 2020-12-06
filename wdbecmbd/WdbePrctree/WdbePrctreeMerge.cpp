@@ -342,7 +342,7 @@ void WdbePrctreeMerge::writeTmpfile(
 
 	map<string,unsigned int>::iterator it;
 
-	bool lastvoid = false;
+	unsigned int newlinecnt = 0;
 
 	// open template file
 	s = tmppath + "/" + tplfile;
@@ -385,11 +385,11 @@ void WdbePrctreeMerge::writeTmpfile(
 						// ABOVE: copy entire content from extfile
 						extip = extips[0];
 	
-						for (unsigned int j = 0; j < extip->content.size(); j++) writeTmpfile_line(tmpfi, extip->content[j], lastvoid, skipmultvoid);
+						for (unsigned int j = 0; j < extip->content.size(); j++) writeTmpfile_line(tmpfi, extip->content[j], newlinecnt, skipmultvoid);
 
 					} else {
 						// copy line from tplfile to leave a trace
-						writeTmpfile_line(tmpfi, s, lastvoid, skipmultvoid);
+						writeTmpfile_line(tmpfi, s, newlinecnt, skipmultvoid);
 					};
 
 				} else if (ips[ipsix]->type == Iptype::INSERT) {
@@ -397,28 +397,28 @@ void WdbePrctreeMerge::writeTmpfile(
 						// REMOVE: copy line from extfile to leave a trace
 						extip = extips[it->second];
 
-						if (!notrace) writeTmpfile_line(tmpfi, extip->content[0], lastvoid, skipmultvoid);
+						if (!notrace) writeTmpfile_line(tmpfi, extip->content[0], newlinecnt, skipmultvoid);
 
 					} else if ((it = icsExtipsIline.find(ips[ipsix]->tag)) != icsExtipsIline.end()) {
 						// ILINE: copy line from extfile, optionally skipping IP part
 						extip = extips[it->second];
 
-						if (notrace) writeTmpfile_line(tmpfi, extip->content[0].substr(0, extip->ptr0-extip->il), lastvoid, skipmultvoid);
-						else writeTmpfile_line(tmpfi, extip->content[0], lastvoid, skipmultvoid);
+						if (notrace) writeTmpfile_line(tmpfi, extip->content[0].substr(0, extip->ptr0-extip->il), newlinecnt, skipmultvoid);
+						else writeTmpfile_line(tmpfi, extip->content[0], newlinecnt, skipmultvoid);
 
 					} else if ((it = icsExtipsIbegin.find(ips[ipsix]->tag)) != icsExtipsIbegin.end()) {
 						// IBEGIN/IEND: copy entire content from extfile
 						extip = extips[it->second];
 
 						if (notrace) {
-							for (unsigned int j = 1; j < (extip->content.size() - 1); j++) writeTmpfile_line(tmpfi, extip->content[j], lastvoid, skipmultvoid);
+							for (unsigned int j = 1; j < (extip->content.size() - 1); j++) writeTmpfile_line(tmpfi, extip->content[j], newlinecnt, skipmultvoid);
 						} else {
-							for (unsigned int j = 0; j < extip->content.size(); j++) writeTmpfile_line(tmpfi, extip->content[j], lastvoid, skipmultvoid);
+							for (unsigned int j = 0; j < extip->content.size(); j++) writeTmpfile_line(tmpfi, extip->content[j], newlinecnt, skipmultvoid);
 						};
 
 					} else {
 						// copy line from tplfile to leave a trace
-						writeTmpfile_line(tmpfi, s, lastvoid, skipmultvoid);
+						writeTmpfile_line(tmpfi, s, newlinecnt, skipmultvoid);
 					};
 
 				} else if ((ips[ipsix]->type == Iptype::LINE) || (ips[ipsix]->type == Iptype::BEGIN)) {
@@ -428,7 +428,7 @@ void WdbePrctreeMerge::writeTmpfile(
 						// AFFIRM
 						if (ips[ipsix]->type == Iptype::LINE) {
 							// copy line from tplfile skipping IP part
-							writeTmpfile_line(tmpfi, s.substr(0, ips[ipsix]->ptr0-ips[ipsix]->il), lastvoid, skipmultvoid);
+							writeTmpfile_line(tmpfi, s.substr(0, ips[ipsix]->ptr0-ips[ipsix]->il), newlinecnt, skipmultvoid);
 
 						} else {
 							// don't write BEGIN line
@@ -438,25 +438,25 @@ void WdbePrctreeMerge::writeTmpfile(
 						// REMOVE: copy line from extfile to leave a trace
 						extip = extips[it->second];
 
-						if (!notrace) writeTmpfile_line(tmpfi, extip->content[0], lastvoid, skipmultvoid);
+						if (!notrace) writeTmpfile_line(tmpfi, extip->content[0], newlinecnt, skipmultvoid);
 
 					} else if ((it = icsExtipsRline.find(ips[ipsix]->tag)) != icsExtipsRline.end()) {
 						// RLINE: copy line from extfile, optionally skipping IP part
 						extip = extips[it->second];
 
-						if (notrace) writeTmpfile_line(tmpfi, extip->content[0].substr(0, extip->ptr0-extip->il), lastvoid, skipmultvoid);
-						else writeTmpfile_line(tmpfi, extip->content[0], lastvoid, skipmultvoid);
+						if (notrace) writeTmpfile_line(tmpfi, extip->content[0].substr(0, extip->ptr0-extip->il), newlinecnt, skipmultvoid);
+						else writeTmpfile_line(tmpfi, extip->content[0], newlinecnt, skipmultvoid);
 
 					} else if ((it = icsExtipsRbegin.find(ips[ipsix]->tag)) != icsExtipsRbegin.end()) {
 						// RBEGIN/REND: copy entire content from extfile
 						extip = extips[it->second];
 
-						if (notrace) for (unsigned int j = 1; j < (extip->content.size() - 1); j++) writeTmpfile_line(tmpfi, extip->content[j], lastvoid, skipmultvoid);
-						else for (unsigned int j = 0; j < extip->content.size(); j++) writeTmpfile_line(tmpfi, extip->content[j], lastvoid, skipmultvoid);
+						if (notrace) for (unsigned int j = 1; j < (extip->content.size() - 1); j++) writeTmpfile_line(tmpfi, extip->content[j], newlinecnt, skipmultvoid);
+						else for (unsigned int j = 0; j < extip->content.size(); j++) writeTmpfile_line(tmpfi, extip->content[j], newlinecnt, skipmultvoid);
 
 					} else {
 						// copy line from tplfile to leave a trace
-						writeTmpfile_line(tmpfi, s, lastvoid, skipmultvoid);
+						writeTmpfile_line(tmpfi, s, newlinecnt, skipmultvoid);
 					};
 					
 					if ((ips[ipsix]->type == Iptype::BEGIN) && extip) {
@@ -481,12 +481,12 @@ void WdbePrctreeMerge::writeTmpfile(
 
 					} else {
 						// copy line from tplfile to leave a trace
-						writeTmpfile_line(tmpfi, s, lastvoid, skipmultvoid);
+						writeTmpfile_line(tmpfi, s, newlinecnt, skipmultvoid);
 					};
 
 				} else {
 					// copy line from tplfile to leave a trace
-					writeTmpfile_line(tmpfi, s, lastvoid, skipmultvoid);
+					writeTmpfile_line(tmpfi, s, newlinecnt, skipmultvoid);
 				};
 
 				// find line number of next insertion point
@@ -496,7 +496,7 @@ void WdbePrctreeMerge::writeTmpfile(
 
 			} else {
 				// copy line from tplfile
-				writeTmpfile_line(tmpfi, s, lastvoid, skipmultvoid);
+				writeTmpfile_line(tmpfi, s, newlinecnt, skipmultvoid);
 			};
 
 		} else {
@@ -513,15 +513,19 @@ void WdbePrctreeMerge::writeTmpfile(
 void WdbePrctreeMerge::writeTmpfile_line(
 			fstream& tmpfi
 			, const string& line
-			, bool& lastvoid
+			, unsigned int& newlinecnt
 			, const bool skipmultvoid
 		) {
-	if (line.length() > 0) tmpfi << line << endl;
-	else if (!lastvoid || !skipmultvoid) tmpfi << endl;
+	if (line.length() == 0) newlinecnt++;
+	else {
+		if (newlinecnt > 0) {
+			if (skipmultvoid) tmpfi << endl;
+			else for (unsigned int i = 0; i < newlinecnt; i++) tmpfi << endl;
 
-	lastvoid = (line.length() == 0);
+			newlinecnt = 0;
+		};
+
+		tmpfi << line << endl;
+	};
 };
 // IP cust --- IEND
-
-
-

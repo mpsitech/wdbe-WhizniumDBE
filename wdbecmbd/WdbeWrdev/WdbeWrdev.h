@@ -45,6 +45,3 @@ namespace WdbeWrdev {
 };
 
 #endif
-
-
-

@@ -29,6 +29,3 @@ bool DlgWdbeVerNew::evalButCreActive(
 
 	return(args.back());
 };
-
-
-

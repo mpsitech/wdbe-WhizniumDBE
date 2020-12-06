@@ -987,4 +987,3 @@ void ApiWdbe::writeDpchApp(
 
 	xmlBufferFree(xbuf);
 };
-

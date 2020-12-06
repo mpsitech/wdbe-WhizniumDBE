@@ -20,8 +20,8 @@ uint QryWdbeUsgList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "srf") return SRF;
 	if (s == "own") return OWN;
+	if (s == "srf") return SRF;
 	if (s == "grp") return GRP;
 
 	return(0);
@@ -30,8 +30,8 @@ uint QryWdbeUsgList::VecVOrd::getIx(
 string QryWdbeUsgList::VecVOrd::getSref(
 			const uint ix
 		) {
-	if (ix == SRF) return("srf");
 	if (ix == OWN) return("own");
+	if (ix == SRF) return("srf");
 	if (ix == GRP) return("grp");
 
 	return("");
@@ -219,6 +219,3 @@ set<uint> QryWdbeUsgList::StgIac::diff(
 
 	return(diffitems);
 };
-
-
-

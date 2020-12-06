@@ -241,4 +241,3 @@ set<uint> QryWdbeFstAStep::StgIac::diff(
 
 	return(diffitems);
 };
-

@@ -94,6 +94,3 @@ bool PnlWdbeFamDetail::evalTxfCmtActive(
 
 	return(args.back());
 };
-
-
-

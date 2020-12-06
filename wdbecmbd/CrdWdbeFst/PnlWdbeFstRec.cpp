@@ -284,6 +284,3 @@ bool PnlWdbeFstRec::handleCallWdbeFst_cluEq(
 	boolvalRet = (recFst.refWdbeCFsmstate == refInv); // IP handleCallWdbeFst_cluEq --- LINE
 	return retval;
 };
-
-
-

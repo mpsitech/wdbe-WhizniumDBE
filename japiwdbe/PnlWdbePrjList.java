@@ -774,4 +774,3 @@ public class PnlWdbePrjList {
 	};
 
 };
-

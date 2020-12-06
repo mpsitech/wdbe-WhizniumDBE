@@ -115,4 +115,3 @@ namespace QryWdbeRlsList {
 };
 
 #endif
-

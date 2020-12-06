@@ -605,6 +605,3 @@ bool PnlWdbeSigDetail::evalTxfCmtActive(
 
 	return(args.back());
 };
-
-
-

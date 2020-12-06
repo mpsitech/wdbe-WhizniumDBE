@@ -1115,4 +1115,3 @@ bool PgTblWdbeMVariable::loadSrfByRef(
 };
 
 #endif
-

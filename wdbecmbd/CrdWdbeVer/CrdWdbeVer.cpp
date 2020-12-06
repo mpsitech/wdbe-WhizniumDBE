@@ -48,9 +48,9 @@ CrdWdbeVer::CrdWdbeVer(
 	pnllist = NULL;
 	pnlheadbar = NULL;
 	pnlrec = NULL;
-	dlgbscdd = NULL;
 	dlgdetdd = NULL;
 	dlgnew = NULL;
+	dlgbscdd = NULL;
 
 	// IP constructor.cust1 --- INSERT
 
@@ -540,6 +540,3 @@ void CrdWdbeVer::leaveSgeSetprjcvr(
 		) {
 	// IP leaveSgeSetprjcvr --- INSERT
 };
-
-
-

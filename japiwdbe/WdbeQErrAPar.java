@@ -61,4 +61,3 @@ public class WdbeQErrAPar {
 		return false;
 	};
 };
-

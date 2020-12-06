@@ -41,4 +41,3 @@ public class WdbeQUntRef1NCommand {
 		return false;
 	};
 };
-

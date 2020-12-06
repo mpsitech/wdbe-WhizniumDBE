@@ -59,4 +59,3 @@ public class ListWdbeQVitList {
 		return false;
 	};
 };
-

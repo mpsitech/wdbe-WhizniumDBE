@@ -98,4 +98,3 @@ namespace QryWdbeFstAStep {
 };
 
 #endif
-

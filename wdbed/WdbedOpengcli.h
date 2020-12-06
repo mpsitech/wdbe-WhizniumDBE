@@ -32,7 +32,3 @@ struct WdbedOpengcli_curlarg {
 };
 
 #endif
-
-
-
-

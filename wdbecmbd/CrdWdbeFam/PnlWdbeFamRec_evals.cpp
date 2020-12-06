@@ -24,6 +24,3 @@ bool PnlWdbeFamRec::evalButRegularizeActive(
 
 	return(args.back());
 };
-
-
-

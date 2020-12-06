@@ -513,4 +513,3 @@ void PnlWdbeUntFwd1NController::DpchEngData::readXML(
 		stgiacqry = QryWdbeUntFwd1NController::StgIac();
 	};
 };
-

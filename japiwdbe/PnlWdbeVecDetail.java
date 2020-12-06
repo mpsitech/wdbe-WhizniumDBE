@@ -706,4 +706,3 @@ public class PnlWdbeVecDetail {
 	};
 
 };
-

@@ -1243,6 +1243,3 @@ void DlgWdbeRlsWrite::DpchEngData::writeXML(
 		if (has(TAGWRC)) TagWrc::writeXML(ixWdbeVLocale, wr);
 	xmlTextWriterEndElement(wr);
 };
-
-
-

@@ -298,6 +298,3 @@ bool QryWdbeMod1NPeripheral::handleCallWdbeStubChgFromSelf(
 	// IP handleCallWdbeStubChgFromSelf --- INSERT
 	return retval;
 };
-
-
-

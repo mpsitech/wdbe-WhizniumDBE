@@ -1507,4 +1507,3 @@ public class DlgWdbeUtlExtrip {
 	};
 
 };
-

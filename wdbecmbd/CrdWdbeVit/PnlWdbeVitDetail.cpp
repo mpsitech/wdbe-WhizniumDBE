@@ -289,6 +289,3 @@ bool PnlWdbeVitDetail::handleCallWdbeVit_vecEq(
 	boolvalRet = (recVit.vecRefWdbeMVector == refInv); // IP handleCallWdbeVit_vecEq --- LINE
 	return retval;
 };
-
-
-

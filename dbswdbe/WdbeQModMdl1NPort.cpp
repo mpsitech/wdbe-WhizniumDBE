@@ -811,4 +811,3 @@ ubigint PgTblWdbeQModMdl1NPort::loadRstByJref(
 	return loadRstByStmt("TblWdbeQModMdl1NPort_loadRstByJref", 1, vals, l, f, append, rst);
 };
 #endif
-

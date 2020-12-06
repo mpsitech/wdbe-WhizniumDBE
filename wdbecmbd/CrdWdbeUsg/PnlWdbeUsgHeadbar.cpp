@@ -114,6 +114,3 @@ void PnlWdbeUsgHeadbar::handleDpchAppWdbeInit(
 		) {
 	*dpcheng = getNewDpchEng({DpchEngData::ALL});
 };
-
-
-

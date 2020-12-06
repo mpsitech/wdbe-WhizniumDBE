@@ -111,4 +111,3 @@ bool ListWdbeQPrcPrc1NVariable::readXML(
 
 	return basefound;
 };
-

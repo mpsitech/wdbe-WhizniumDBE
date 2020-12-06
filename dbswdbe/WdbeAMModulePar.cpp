@@ -845,4 +845,3 @@ ubigint PgTblWdbeAMModulePar::loadRstByMdl(
 };
 
 #endif
-

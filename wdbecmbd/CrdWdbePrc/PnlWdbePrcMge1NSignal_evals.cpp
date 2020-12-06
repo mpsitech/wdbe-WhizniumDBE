@@ -60,6 +60,3 @@ bool PnlWdbePrcMge1NSignal::evalButViewActive(
 
 	return(args.back());
 };
-
-
-

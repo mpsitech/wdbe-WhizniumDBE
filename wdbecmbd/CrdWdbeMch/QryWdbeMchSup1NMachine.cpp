@@ -298,6 +298,3 @@ bool QryWdbeMchSup1NMachine::handleCallWdbeStubChgFromSelf(
 	// IP handleCallWdbeStubChgFromSelf --- INSERT
 	return retval;
 };
-
-
-

@@ -33,6 +33,3 @@ string SqkWdbeMtpModbsctd::getSquawk(
 	return stub;
 	// IP getSquawk --- REND
 };
-
-
-

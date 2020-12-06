@@ -370,6 +370,3 @@ private:
 };
 
 #endif
-
-
-

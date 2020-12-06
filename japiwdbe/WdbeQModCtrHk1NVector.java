@@ -41,4 +41,3 @@ public class WdbeQModCtrHk1NVector {
 		return false;
 	};
 };
-

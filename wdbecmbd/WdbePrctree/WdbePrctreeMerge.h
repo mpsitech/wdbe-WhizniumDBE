@@ -24,11 +24,8 @@ namespace WdbePrctreeMerge {
 	bool scanFile(const std::string& tmppath, const std::string& tplfile, const std::string& extfile, const bool notrace, const bool skipmultvoid, std::fstream& logfi);
 
 	void writeTmpfile(const std::string& tmppath, std::fstream& tmpfi, const std::string& tplfile, const std::string& extfile, const std::vector<WdbePrctree::Ip*>& ips, const std::vector<WdbePrctree::Ip*>& extips, const bool hasExtipAbove, std::map<std::string,unsigned int>& icsExtipsAffirm, std::map<std::string,unsigned int>& icsExtipsRemove, std::map<std::string,unsigned int>& icsExtipsIline, std::map<std::string,unsigned int>& icsExtipsIbegin, std::map<std::string,unsigned int>& icsExtipsRline, std::map<std::string,unsigned int>& icsExtipsRbegin, const bool notrace, const bool skipmultvoid);
-	void writeTmpfile_line(std::fstream& tmpfi, const std::string& line, bool& lastvoid, const bool skipmultvoid);
+	void writeTmpfile_line(std::fstream& tmpfi, const std::string& line, unsigned int& newlinecnt, const bool skipmultvoid);
 	// IP cust --- IEND
 };
 
 #endif
-
-
-

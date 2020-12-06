@@ -114,6 +114,3 @@ bool DlgWdbeUtlExtrip::evalSrcUldActive(
 
 	return(args.back());
 };
-
-
-

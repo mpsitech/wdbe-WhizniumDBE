@@ -316,6 +316,3 @@ bool QryWdbeErrAPar::handleCallWdbeStubChgFromSelf(
 	// IP handleCallWdbeStubChgFromSelf --- INSERT
 	return retval;
 };
-
-
-

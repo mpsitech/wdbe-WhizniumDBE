@@ -45,6 +45,8 @@ DpchRetWdbe* WdbePrcfilePlhrpl::run(
 	size_t keylen;
 	size_t ptr1, ptr2;
 
+	unsigned int newlinecnt;
+
 	ifstream infi;
 	fstream outfi;
 
@@ -64,27 +66,35 @@ DpchRetWdbe* WdbePrcfilePlhrpl::run(
 	s = xchg->tmppath + "/" + outfile;
 	outfi.open(s.c_str(), ios::out | ios::trunc);
 
+	newlinecnt = 0;
+
 	while (infi.good() && (!infi.eof())) {
 		// read single line
 		s = StrMod::readLine(infi, buf, 1048576);
 
-		// look for srefsKey, one after the other
-		for (unsigned int i = 0; i < keys.size();i++) {
-			key = "&" + keys[i] + ";";
-			keylen = key.length();
+		if (s.length() == 0) newlinecnt++;
+		else {
+			for (unsigned int i = 0; i < newlinecnt; i++) outfi << endl;
+			newlinecnt = 0;
 
-			ptr1 = 0;
-			ptr2 = s.find(key, ptr1);
-			while ((ptr2 >= ptr1) && (ptr2 != string::npos)) {
-				// replace by value
-				s = s.substr(0, ptr2) + vals[i] + s.substr(ptr2+keylen);
+			// look for srefsKey, one after the other
+			for (unsigned int i = 0; i < keys.size(); i++) {
+				key = "&" + keys[i] + ";";
+				keylen = key.length();
 
-				ptr1 = ptr2+1;
+				ptr1 = 0;
 				ptr2 = s.find(key, ptr1);
-			};
-		};
+				while ((ptr2 >= ptr1) && (ptr2 != string::npos)) {
+					// replace by value
+					s = s.substr(0, ptr2) + vals[i] + s.substr(ptr2+keylen);
 
-		outfi << s << endl;
+					ptr1 = ptr2+1;
+					ptr2 = s.find(key, ptr1);
+				};
+			};
+
+			outfi << s << endl;
+		};
 	};
 
 	delete[] buf;
@@ -103,6 +113,3 @@ DpchRetWdbe* WdbePrcfilePlhrpl::run(
 };
 
 // IP cust --- INSERT
-
-
-

@@ -40,4 +40,3 @@ function refreshUpd(contdoc, id, min, max, val, act, chg) {
 		contdoc.getElementById(id + "Up").removeAttribute("onclick");
 	};
 };
-

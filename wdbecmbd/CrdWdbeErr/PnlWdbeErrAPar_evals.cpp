@@ -150,6 +150,3 @@ bool PnlWdbeErrAPar::evalButDeleteActive(
 
 	return(args.back());
 };
-
-
-

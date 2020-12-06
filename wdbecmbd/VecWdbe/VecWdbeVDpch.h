@@ -780,6 +780,3 @@ namespace VecWdbeVDpch {
 };
 
 #endif
-
-
-

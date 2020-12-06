@@ -49,4 +49,3 @@ public class WdbeQLibList {
 		return false;
 	};
 };
-

@@ -40,4 +40,3 @@ string VecWdbeVBasereptype::getSref(
 
 	return("");
 };
-

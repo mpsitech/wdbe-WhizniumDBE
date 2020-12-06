@@ -680,6 +680,3 @@ void DlgWdbeUtlExtrip::leaveSgeDone(
 		) {
 	// IP leaveSgeDone --- INSERT
 };
-
-
-

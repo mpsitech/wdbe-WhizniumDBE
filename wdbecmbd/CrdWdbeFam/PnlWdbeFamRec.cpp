@@ -255,6 +255,3 @@ bool PnlWdbeFamRec::handleCallWdbeFamUpd_refEq(
 	// IP handleCallWdbeFamUpd_refEq --- INSERT
 	return retval;
 };
-
-
-

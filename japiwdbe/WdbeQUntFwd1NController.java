@@ -41,4 +41,3 @@ public class WdbeQUntFwd1NController {
 		return false;
 	};
 };
-

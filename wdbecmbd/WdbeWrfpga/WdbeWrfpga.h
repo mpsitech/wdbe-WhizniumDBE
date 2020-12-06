@@ -36,6 +36,3 @@ namespace WdbeWrfpga {
 };
 
 #endif
-
-
-

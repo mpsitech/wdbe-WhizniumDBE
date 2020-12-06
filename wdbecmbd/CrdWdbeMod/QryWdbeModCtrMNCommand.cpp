@@ -312,6 +312,3 @@ bool QryWdbeModCtrMNCommand::handleCallWdbeStubChgFromSelf(
 	// IP handleCallWdbeStubChgFromSelf --- INSERT
 	return retval;
 };
-
-
-

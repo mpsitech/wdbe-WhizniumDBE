@@ -21,8 +21,8 @@ uint QryWdbeCmdList::VecVOrd::getIx(
 	string s = StrMod::lc(sref);
 
 	if (s == "reu") return REU;
-	if (s == "srf") return SRF;
 	if (s == "ret") return RET;
+	if (s == "srf") return SRF;
 
 	return(0);
 };
@@ -31,8 +31,8 @@ string QryWdbeCmdList::VecVOrd::getSref(
 			const uint ix
 		) {
 	if (ix == REU) return("reu");
-	if (ix == SRF) return("srf");
 	if (ix == RET) return("ret");
+	if (ix == SRF) return("srf");
 
 	return("");
 };
@@ -219,6 +219,3 @@ set<uint> QryWdbeCmdList::StgIac::diff(
 
 	return(diffitems);
 };
-
-
-

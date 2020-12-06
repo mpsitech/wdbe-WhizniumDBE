@@ -50,6 +50,3 @@ bool PnlWdbeModMge1NSignal::evalButViewActive(
 
 	return(args.back());
 };
-
-
-

@@ -114,4 +114,3 @@ bool ListWdbeQFstList::readXML(
 
 	return basefound;
 };
-

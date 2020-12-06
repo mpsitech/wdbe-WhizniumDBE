@@ -1105,4 +1105,3 @@ ubigint PgTblWdbeMFile::loadRstByRetReu(
 };
 
 #endif
-

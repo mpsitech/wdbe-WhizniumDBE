@@ -48,10 +48,10 @@ CrdWdbeRls::CrdWdbeRls(
 	pnllist = NULL;
 	pnlheadbar = NULL;
 	pnlrec = NULL;
+	dlgfinreptr = NULL;
 	dlgnew = NULL;
 	dlgstareptr = NULL;
 	dlgwrite = NULL;
-	dlgfinreptr = NULL;
 
 	// IP constructor.cust1 --- INSERT
 
@@ -532,6 +532,3 @@ void CrdWdbeRls::leaveSgeAlrwdbeabt(
 		) {
 	// IP leaveSgeAlrwdbeabt --- INSERT
 };
-
-
-

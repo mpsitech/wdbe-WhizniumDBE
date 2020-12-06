@@ -234,6 +234,3 @@ bool PnlWdbeNavDevdev::evalButRlsNewcrdActive(
 
 	return(args.back());
 };
-
-
-

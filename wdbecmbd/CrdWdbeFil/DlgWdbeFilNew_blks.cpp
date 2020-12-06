@@ -852,6 +852,3 @@ void DlgWdbeFilNew::DpchEngData::writeXML(
 		if (has(TAGFIL)) TagFil::writeXML(ixWdbeVLocale, wr);
 	xmlTextWriterEndElement(wr);
 };
-
-
-

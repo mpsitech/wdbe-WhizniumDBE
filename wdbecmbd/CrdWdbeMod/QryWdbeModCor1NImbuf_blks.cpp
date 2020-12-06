@@ -185,6 +185,3 @@ set<uint> QryWdbeModCor1NImbuf::StgIac::diff(
 
 	return(diffitems);
 };
-
-
-

@@ -529,4 +529,3 @@ void PnlWdbeUnt1NBank::DpchEngData::readXML(
 		stgiacqry = QryWdbeUnt1NBank::StgIac();
 	};
 };
-

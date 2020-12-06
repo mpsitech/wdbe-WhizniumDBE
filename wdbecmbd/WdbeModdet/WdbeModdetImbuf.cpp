@@ -197,6 +197,3 @@ void WdbeModdetImbuf::mergeCreateOprt(
 	} else dbswdbe->tblwdbemport->insertNewRec(NULL, refC, refMdl, mdlNum++, VecWdbeVMPortMdlCat::IMB, sref, VecWdbeVMPortDir::OUT, srefHty, Width, "", "", "", "", srefCsi, "");
 };
 // IP cust --- IEND
-
-
-

@@ -728,6 +728,3 @@ void WdbeWrfpgaEhostif::writeMdlVhd(
 	outfile << "-- IP impl.op.copyRxA --- IEND" << endl;
 };
 // IP cust --- IEND
-
-
-

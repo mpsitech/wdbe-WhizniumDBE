@@ -272,4 +272,3 @@ public class QryWdbeUnt1NBank {
 	};
 
 };
-

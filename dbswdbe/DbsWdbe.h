@@ -10,10 +10,10 @@
 #ifndef DBSWDBE_H
 #define DBSWDBE_H
 
-#define WDBE_VERSION "1.1.0"
+#define WDBE_VERSION "1.1.1"
 #define WDBE_VERSION_MAJOR 1
 #define WDBE_VERSION_MINOR 1
-#define WDBE_VERSION_SUB 0
+#define WDBE_VERSION_SUB 1
 
 #include <sbecore/Types.h>
 
@@ -369,14 +369,14 @@ public:
 		static const Sbecore::uint PNLWDBESILLIST_TCOPKG = 75;
 		static const Sbecore::uint PNLWDBESILLIST_TCOESY = 76;
 		static const Sbecore::uint PNLWDBESILLIST_TCOTCH = 77;
-		static const Sbecore::uint PNLWDBESIL1NBANK_TCOREF = 78;
-		static const Sbecore::uint PNLWDBESILFWD1NCONTROLLER_TCOREF = 79;
-		static const Sbecore::uint PNLWDBESIL1NTARGET_TCOREF = 80;
-		static const Sbecore::uint PNLWDBESIL1NPERIPHERAL_TCOREF = 81;
-		static const Sbecore::uint PNLWDBESILSIL1NUNIT_TCOREF = 82;
-		static const Sbecore::uint PNLWDBESILREF1NCOMMAND_TCOREF = 83;
+		static const Sbecore::uint PNLWDBESILSIL1NUNIT_TCOREF = 78;
+		static const Sbecore::uint PNLWDBESIL1NPERIPHERAL_TCOREF = 79;
+		static const Sbecore::uint PNLWDBESIL1NBANK_TCOREF = 80;
+		static const Sbecore::uint PNLWDBESILFWD1NCONTROLLER_TCOREF = 81;
+		static const Sbecore::uint PNLWDBESIL1NTARGET_TCOREF = 82;
+		static const Sbecore::uint PNLWDBESILHK1NVECTOR_TCOREF = 83;
 		static const Sbecore::uint PNLWDBESILHK1NMODULE_TCOREF = 84;
-		static const Sbecore::uint PNLWDBESILHK1NVECTOR_TCOREF = 85;
+		static const Sbecore::uint PNLWDBESILREF1NCOMMAND_TCOREF = 85;
 		static const Sbecore::uint PNLWDBESILREF1NERROR_TCOREF = 86;
 		static const Sbecore::uint PNLWDBEMTPLIST_TCOSRF = 87;
 		static const Sbecore::uint PNLWDBEMTPLIST_TCOTYP = 88;
@@ -395,12 +395,12 @@ public:
 		static const Sbecore::uint PNLWDBEMTPKHDLTYPE_TCOCMT = 101;
 		static const Sbecore::uint PNLWDBEMTPAPAR_TCOKEY = 102;
 		static const Sbecore::uint PNLWDBEMTPAPAR_TCOVAL = 103;
-		static const Sbecore::uint PNLWDBEMTPMDL1NGENERIC_TCOREF = 104;
-		static const Sbecore::uint PNLWDBEMTPTPL1NMODULE_TCOREF = 105;
-		static const Sbecore::uint PNLWDBEMTPMDL1NPORT_TCOREF = 106;
+		static const Sbecore::uint PNLWDBEMTPMDL1NPORT_TCOREF = 104;
+		static const Sbecore::uint PNLWDBEMTPMDL1NGENERIC_TCOREF = 105;
+		static const Sbecore::uint PNLWDBEMTPTPL1NMODULE_TCOREF = 106;
 		static const Sbecore::uint PNLWDBEMTPSUP1NMODULE_TCOREF = 107;
-		static const Sbecore::uint PNLWDBEMTPREF1NFILE_TCOREF = 108;
-		static const Sbecore::uint PNLWDBEMTPMGE1NSIGNAL_TCOREF = 109;
+		static const Sbecore::uint PNLWDBEMTPMGE1NSIGNAL_TCOREF = 108;
+		static const Sbecore::uint PNLWDBEMTPREF1NFILE_TCOREF = 109;
 		static const Sbecore::uint PNLWDBEPRJLIST_TCOGRP = 110;
 		static const Sbecore::uint PNLWDBEPRJLIST_TCOOWN = 111;
 		static const Sbecore::uint PNLWDBEPRJLIST_TCOSHO = 112;
@@ -421,11 +421,11 @@ public:
 		static const Sbecore::uint PNLWDBEVERLIST_TCOSUB = 127;
 		static const Sbecore::uint PNLWDBEVERLIST_TCOBVR = 128;
 		static const Sbecore::uint PNLWDBEVERLIST_TCOSTE = 129;
-		static const Sbecore::uint PNLWDBEVER1NRELEASE_TCOREF = 130;
-		static const Sbecore::uint PNLWDBEVER1NSYSTEM_TCOREF = 131;
-		static const Sbecore::uint PNLWDBEVERBVR1NVERSION_TCOREF = 132;
-		static const Sbecore::uint PNLWDBEVERREF1NFILE_TCOREF = 133;
-		static const Sbecore::uint PNLWDBEVER1NUNIT_TCOREF = 134;
+		static const Sbecore::uint PNLWDBEVERBVR1NVERSION_TCOREF = 130;
+		static const Sbecore::uint PNLWDBEVER1NRELEASE_TCOREF = 131;
+		static const Sbecore::uint PNLWDBEVER1NSYSTEM_TCOREF = 132;
+		static const Sbecore::uint PNLWDBEVER1NUNIT_TCOREF = 133;
+		static const Sbecore::uint PNLWDBEVERREF1NFILE_TCOREF = 134;
 		static const Sbecore::uint PNLWDBEVERMNLIBRARY_TCOMREF = 135;
 		static const Sbecore::uint PNLWDBESYSLIST_TCOSRF = 136;
 		static const Sbecore::uint PNLWDBESYSLIST_TCOVER = 137;
@@ -446,14 +446,14 @@ public:
 		static const Sbecore::uint PNLWDBEUNTLIST_TCOPKG = 152;
 		static const Sbecore::uint PNLWDBEUNTLIST_TCOESY = 153;
 		static const Sbecore::uint PNLWDBEUNTLIST_TCOTCH = 154;
-		static const Sbecore::uint PNLWDBEUNT1NBANK_TCOREF = 155;
-		static const Sbecore::uint PNLWDBEUNTFWD1NCONTROLLER_TCOREF = 156;
-		static const Sbecore::uint PNLWDBEUNT1NTARGET_TCOREF = 157;
-		static const Sbecore::uint PNLWDBEUNT1NPERIPHERAL_TCOREF = 158;
-		static const Sbecore::uint PNLWDBEUNTSIL1NUNIT_TCOREF = 159;
-		static const Sbecore::uint PNLWDBEUNTREF1NCOMMAND_TCOREF = 160;
+		static const Sbecore::uint PNLWDBEUNTSIL1NUNIT_TCOREF = 155;
+		static const Sbecore::uint PNLWDBEUNT1NPERIPHERAL_TCOREF = 156;
+		static const Sbecore::uint PNLWDBEUNT1NBANK_TCOREF = 157;
+		static const Sbecore::uint PNLWDBEUNTFWD1NCONTROLLER_TCOREF = 158;
+		static const Sbecore::uint PNLWDBEUNT1NTARGET_TCOREF = 159;
+		static const Sbecore::uint PNLWDBEUNTHK1NVECTOR_TCOREF = 160;
 		static const Sbecore::uint PNLWDBEUNTHK1NMODULE_TCOREF = 161;
-		static const Sbecore::uint PNLWDBEUNTHK1NVECTOR_TCOREF = 162;
+		static const Sbecore::uint PNLWDBEUNTREF1NCOMMAND_TCOREF = 162;
 		static const Sbecore::uint PNLWDBEUNTREF1NERROR_TCOREF = 163;
 		static const Sbecore::uint PNLWDBERLSLIST_TCOSRF = 164;
 		static const Sbecore::uint PNLWDBERLSLIST_TCOTYP = 165;
@@ -500,17 +500,17 @@ public:
 		static const Sbecore::uint PNLWDBEMODKHDLTYPE_TCOCMT = 206;
 		static const Sbecore::uint PNLWDBEMODAPAR_TCOKEY = 207;
 		static const Sbecore::uint PNLWDBEMODAPAR_TCOVAL = 208;
-		static const Sbecore::uint PNLWDBEMODMDL1NGENERIC_TCOREF = 209;
-		static const Sbecore::uint PNLWDBEMODCOR1NIMBUF_TCOREF = 210;
-		static const Sbecore::uint PNLWDBEMODMDL1NPORT_TCOREF = 211;
-		static const Sbecore::uint PNLWDBEMOD1NPROCESS_TCOREF = 212;
-		static const Sbecore::uint PNLWDBEMODMDL1NSIGNAL_TCOREF = 213;
+		static const Sbecore::uint PNLWDBEMODMDL1NPORT_TCOREF = 209;
+		static const Sbecore::uint PNLWDBEMOD1NPROCESS_TCOREF = 210;
+		static const Sbecore::uint PNLWDBEMODMDL1NSIGNAL_TCOREF = 211;
+		static const Sbecore::uint PNLWDBEMODMDL1NGENERIC_TCOREF = 212;
+		static const Sbecore::uint PNLWDBEMODCOR1NIMBUF_TCOREF = 213;
 		static const Sbecore::uint PNLWDBEMOD1NPERIPHERAL_TCOREF = 214;
 		static const Sbecore::uint PNLWDBEMODSUP1NMODULE_TCOREF = 215;
 		static const Sbecore::uint PNLWDBEMODMGE1NSIGNAL_TCOREF = 216;
-		static const Sbecore::uint PNLWDBEMODCTRREF1NCOMMAND_TCOREF = 217;
+		static const Sbecore::uint PNLWDBEMODCTRREF1NERROR_TCOREF = 217;
 		static const Sbecore::uint PNLWDBEMODCTRHK1NVECTOR_TCOREF = 218;
-		static const Sbecore::uint PNLWDBEMODCTRREF1NERROR_TCOREF = 219;
+		static const Sbecore::uint PNLWDBEMODCTRREF1NCOMMAND_TCOREF = 219;
 		static const Sbecore::uint PNLWDBEMODCTRMNCOMMAND_TCOMREF = 220;
 		static const Sbecore::uint PNLWDBEMODCTRMNCOMMAND_TCOIVR = 221;
 		static const Sbecore::uint PNLWDBEMODCTRMNCOMMAND_TCORVR = 222;
@@ -1401,4 +1401,3 @@ public:
 	TblWdbeQVitList* tblwdbeqvitlist;
 };
 #endif
-

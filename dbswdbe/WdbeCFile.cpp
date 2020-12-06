@@ -103,4 +103,3 @@ ubigint PgTblWdbeCFile::getNewRef() {
 	return ref;
 };
 #endif
-

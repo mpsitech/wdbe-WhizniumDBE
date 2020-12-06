@@ -1133,6 +1133,3 @@ void DlgWdbeCvrDetcd::DpchEngData::writeXML(
 		if (has(TAGPPR)) TagPpr::writeXML(ixWdbeVLocale, wr);
 	xmlTextWriterEndElement(wr);
 };
-
-
-

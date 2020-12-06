@@ -21,6 +21,3 @@ namespace WdbeMtpModbscbuZynq_ip_AXI_v2_0 {
 };
 
 #endif
-
-
-

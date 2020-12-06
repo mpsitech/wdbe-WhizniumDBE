@@ -103,4 +103,3 @@ ubigint PgTblWdbeCSignal::getNewRef() {
 	return ref;
 };
 #endif
-

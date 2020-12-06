@@ -628,4 +628,3 @@ function handleDpchAppDoDlgopenReply() {
 		};
 	};
 };
-

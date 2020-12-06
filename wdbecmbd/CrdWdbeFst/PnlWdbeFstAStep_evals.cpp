@@ -150,6 +150,3 @@ bool PnlWdbeFstAStep::evalButDeleteActive(
 
 	return(args.back());
 };
-
-
-

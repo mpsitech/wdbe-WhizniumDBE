@@ -1634,4 +1634,3 @@ void DbsWdbe::fillFeedFromVlst(
 		feed.appendTitles(vlsAval->Val);
 	};
 };
-

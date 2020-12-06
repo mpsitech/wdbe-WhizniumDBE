@@ -28,6 +28,3 @@ namespace WdbeWrmcu {
 };
 
 #endif
-
-
-

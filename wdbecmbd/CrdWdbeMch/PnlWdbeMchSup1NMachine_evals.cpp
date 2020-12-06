@@ -45,6 +45,3 @@ bool PnlWdbeMchSup1NMachine::evalButViewActive(
 
 	return(args.back());
 };
-
-
-

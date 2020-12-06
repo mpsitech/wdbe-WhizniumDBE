@@ -98,4 +98,3 @@ namespace QryWdbeSilRef1NError {
 };
 
 #endif
-

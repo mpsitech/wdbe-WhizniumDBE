@@ -41,4 +41,3 @@ public class WdbeQLibMNVersion {
 		return false;
 	};
 };
-

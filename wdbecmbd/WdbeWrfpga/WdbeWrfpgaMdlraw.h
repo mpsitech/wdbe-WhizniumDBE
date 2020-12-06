@@ -27,6 +27,3 @@ namespace WdbeWrfpgaMdlraw {
 };
 
 #endif
-
-
-

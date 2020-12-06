@@ -734,4 +734,3 @@ public class PnlWdbePrcKHdltype {
 	};
 
 };
-

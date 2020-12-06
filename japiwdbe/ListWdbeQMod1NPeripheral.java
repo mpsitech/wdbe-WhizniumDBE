@@ -59,4 +59,3 @@ public class ListWdbeQMod1NPeripheral {
 		return false;
 	};
 };
-

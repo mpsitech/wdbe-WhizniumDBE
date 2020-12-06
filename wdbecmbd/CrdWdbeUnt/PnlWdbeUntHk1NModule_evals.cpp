@@ -97,6 +97,3 @@ bool PnlWdbeUntHk1NModule::evalButDeleteActive(
 
 	return(args.back());
 };
-
-
-

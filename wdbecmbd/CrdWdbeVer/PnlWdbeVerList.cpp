@@ -257,7 +257,7 @@ void PnlWdbeVerList::handleDpchAppDataContiac(
 	diffitems = _contiac->diff(&contiac);
 
 	if (has(diffitems, ContIac::NUMFTOS)) {
-		if ((_contiac->numFTos >= QryWdbeVerList::VecVOrd::STE) && (_contiac->numFTos <= QryWdbeVerList::VecVOrd::GRP)) {
+		if ((_contiac->numFTos >= QryWdbeVerList::VecVOrd::STE) && (_contiac->numFTos <= QryWdbeVerList::VecVOrd::PRJ)) {
 			muteRefresh = true;
 
 			xchg->addIxPreset(VecWdbeVPreset::PREWDBEIXORD, jref, _contiac->numFTos);
@@ -403,6 +403,3 @@ bool PnlWdbeVerList::handleCallWdbeStatChg(
 	// IP handleCallWdbeStatChg --- END
 	return retval;
 };
-
-
-

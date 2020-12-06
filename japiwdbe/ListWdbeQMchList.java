@@ -59,4 +59,3 @@ public class ListWdbeQMchList {
 		return false;
 	};
 };
-

@@ -111,4 +111,3 @@ bool ListWdbeQModSup1NModule::readXML(
 
 	return basefound;
 };
-

@@ -584,4 +584,3 @@ void PnlWdbeVecList::DpchEngData::readXML(
 		stgiacqry = QryWdbeVecList::StgIac();
 	};
 };
-

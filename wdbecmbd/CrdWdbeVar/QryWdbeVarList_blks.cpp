@@ -217,6 +217,3 @@ set<uint> QryWdbeVarList::StgIac::diff(
 
 	return(diffitems);
 };
-
-
-

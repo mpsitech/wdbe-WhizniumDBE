@@ -72,6 +72,8 @@ DlgWdbeRlsWrite::DlgWdbeRlsWrite(
 
 			Prjeasy = prj->Easy;
 
+			rtysref = VecWdbeVMReleaseBasetype::getSref(ixRlstype) + prjshort;
+
 			delete prj;
 		};
 
@@ -259,12 +261,12 @@ void DlgWdbeRlsWrite::createFpga(
 	createIpoutSubfolder(false, "_rls");
 	createIpoutSubfolder(false, "_rls", rls->sref);
 
-	createIpoutSubfolder(true, "fpga" + prjshort);
+	createIpoutSubfolder(true, rtysref);
 
 	// -- all units
 	for (unsigned int i = 0; i < unts.nodes.size(); i++) {
 		unt = unts.nodes[i];
-		createIpoutSubfolder(true, "fpga" + prjshort, unt->sref);
+		createIpoutSubfolder(true, rtysref, unt->sref);
 	};
 
 	// --- prepare standard key/value pairs
@@ -330,13 +332,13 @@ void DlgWdbeRlsWrite::createFpga(
 			vals[vals.size()-2] = Untsref;
 			vals[vals.size()-1] = unt->Title;
 
-			if (unt->srefKToolch == "ise") addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refUntUcffile, "", outfolder + "/fpga" + prjshort + "/" + unt->sref + "/" + Untsref + ".ucf", keys, vals));
-			else if ((unt->srefKToolch == "vivado") || (unt->srefKToolch == "vivzynq")) addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refUntXdcfile, "", outfolder + "/fpga" + prjshort + "/" + unt->sref + "/" + Untsref + ".xdc", keys, vals));
+			if (unt->srefKToolch == "ise") addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refUntUcffile, "", outfolder + "/" + rtysref + "/" + unt->sref + "/" + Untsref + ".ucf", keys, vals));
+			else if ((unt->srefKToolch == "vivado") || (unt->srefKToolch == "vivzynq")) addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refUntXdcfile, "", outfolder + "/" + rtysref + "/" + unt->sref + "/" + Untsref + ".xdc", keys, vals));
 
-			if (unt->Easy) addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refEzuntVhdfile, "", outfolder + "/fpga" + prjshort + "/" + unt->sref + "/" + Untsref + ".vhd", keys, vals));
-			else addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refUntVhdfile, "", outfolder + "/fpga" + prjshort + "/" + unt->sref + "/" + Untsref + ".vhd", keys, vals));
+			if (unt->Easy) addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refEzuntVhdfile, "", outfolder + "/" + rtysref + "/" + unt->sref + "/" + Untsref + ".vhd", keys, vals));
+			else addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refUntVhdfile, "", outfolder + "/" + rtysref + "/" + unt->sref + "/" + Untsref + ".vhd", keys, vals));
 
-			addInv(new DpchInvWdbeWrfpgaBase(0, 0, unt->ref, ipfolder + "/fpga" + prjshort + "/" + unt->sref, Prjshort, Untsref));
+			addInv(new DpchInvWdbeWrfpgaBase(0, 0, unt->ref, ipfolder + "/" + rtysref + "/" + unt->sref, Prjshort, Untsref));
 		};
 
 		// --- modules (WdbeWrfpga...)
@@ -405,11 +407,11 @@ void DlgWdbeRlsWrite::createFpga(
 							// template-specific file
 							if ( (srefsMtpPlhfpgaCustops.find(mtp->ref) == srefsMtpPlhfpgaCustops.end()) && (mdl->ixVBasetype != VecWdbeVMModuleBasetype::HOSTIF) && (mdl->ixVBasetype != VecWdbeVMModuleBasetype::EHOSTIF) && (srefsMtpWrfpgaCustops.find(mtp->ref) == srefsMtpWrfpgaCustops.end()) && !hassub ) {
 								// no specific placeholders or IP's, no specific wiring of sub-modules to be done
-								copyAcvtmp(dbswdbe, mtf->ref, outfolder + "/fpga" + prjshort + "/" + unt->sref + "/" + Compsref + ".vhd");
+								copyAcvtmp(dbswdbe, mtf->ref, outfolder + "/" + rtysref + "/" + unt->sref + "/" + Compsref + ".vhd");
 
 							} else {
 								// specific placeholders or IP's
-								addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, mtf->ref, "", outfolder + "/fpga" + prjshort + "/" + unt->sref + "/" + Compsref + ".vhd", keys, vals));
+								addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, mtf->ref, "", outfolder + "/" + rtysref + "/" + unt->sref + "/" + Compsref + ".vhd", keys, vals));
 							};
 
 						} else {
@@ -417,13 +419,13 @@ void DlgWdbeRlsWrite::createFpga(
 								// LogiCORE is handled without file
 							} else {
 								// empty module template file
-								addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refMdlVhdfile, "", outfolder + "/fpga" + prjshort + "/" + unt->sref + "/" + Compsref + ".vhd", keys, vals));
+								addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refMdlVhdfile, "", outfolder + "/" + rtysref + "/" + unt->sref + "/" + Compsref + ".vhd", keys, vals));
 							};
 						};
 
 					} else {
 						// empty module template file
-						addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refMdlVhdfile, "", outfolder + "/fpga" + prjshort + "/" + unt->sref + "/" + Compsref + ".vhd", keys, vals));
+						addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refMdlVhdfile, "", outfolder + "/" + rtysref + "/" + unt->sref + "/" + Compsref + ".vhd", keys, vals));
 					};
 
 					// remove specific placeholders
@@ -437,32 +439,32 @@ void DlgWdbeRlsWrite::createFpga(
 						} else if (mtp->ixVBasetype == VecWdbeVMModuleBasetype::MNFCORE) {
 
 						} else {
-							addInv(new DpchInvWdbeWrfpgaMdlraw(0, 0, mdl->ref, ipfolder + "/fpga" + prjshort + "/" + unt->sref, Prjshort, Untsref));
-							addInv(new DpchInvWdbeWrfpgaMdlfine(0, 0, mdl->ref, finefolder + "/fpga" + prjshort + "/" + unt->sref));
+							addInv(new DpchInvWdbeWrfpgaMdlraw(0, 0, mdl->ref, ipfolder + "/" + rtysref + "/" + unt->sref, Prjshort, Untsref));
+							addInv(new DpchInvWdbeWrfpgaMdlfine(0, 0, mdl->ref, finefolder + "/" + rtysref + "/" + unt->sref));
 						};
 
 					} else {
-						addInv(new DpchInvWdbeWrfpgaMdlraw(0, 0, mdl->ref, ipfolder + "/fpga" + prjshort + "/" + unt->sref, Prjshort, Untsref));
-						addInv(new DpchInvWdbeWrfpgaMdlfine(0, 0, mdl->ref, finefolder + "/fpga" + prjshort + "/" + unt->sref));
+						addInv(new DpchInvWdbeWrfpgaMdlraw(0, 0, mdl->ref, ipfolder + "/" + rtysref + "/" + unt->sref, Prjshort, Untsref));
+						addInv(new DpchInvWdbeWrfpgaMdlfine(0, 0, mdl->ref, finefolder + "/" + rtysref + "/" + unt->sref));
 					};
 
 					// - type-specific IP's (WdbeWrfpga<type>)
 					if (mdl->ixVBasetype == VecWdbeVMModuleBasetype::HOSTIF) {
-						addInv(new DpchInvWdbeWrfpgaHostif(0, 0, mdl->ref, typspecfolder + "/fpga" + prjshort + "/" + unt->sref, Prjshort, Untsref));
+						addInv(new DpchInvWdbeWrfpgaHostif(0, 0, mdl->ref, typspecfolder + "/" + rtysref + "/" + unt->sref, Prjshort, Untsref));
 					} else if (mdl->ixVBasetype == VecWdbeVMModuleBasetype::EHOSTIF) {
-						addInv(new DpchInvWdbeWrfpgaEhostif(0, 0, mdl->ref, typspecfolder + "/fpga" + prjshort + "/" + unt->sref, Prjshort, Untsref));
+						addInv(new DpchInvWdbeWrfpgaEhostif(0, 0, mdl->ref, typspecfolder + "/" + rtysref + "/" + unt->sref, Prjshort, Untsref));
 					} else if ((mdl->ixVBasetype == VecWdbeVMModuleBasetype::CTR) || (mdl->ixVBasetype == VecWdbeVMModuleBasetype::FWDCTR)) {
-						addInv(new DpchInvWdbeWrfpgaCtrFwdctr(0, 0, mdl->ref, typspecfolder + "/fpga" + prjshort + "/" + unt->sref, Prjshort, Untsref));
+						addInv(new DpchInvWdbeWrfpgaCtrFwdctr(0, 0, mdl->ref, typspecfolder + "/" + rtysref + "/" + unt->sref, Prjshort, Untsref));
 					};
 
 					// - template-specific IP's (WdbeMtpWrfpga<template>)
 					if (mtp) {
 						auto it = srefsMtpWrfpgaCustops.find(mtp->ref);
-						if (it != srefsMtpWrfpgaCustops.end()) addInv(new DpchInvWdbeMtpWrfpga(0, it->second, 0, mdl->ref, tplspecfolder + "/fpga" + prjshort + "/" + unt->sref, Prjshort, Untsref));
+						if (it != srefsMtpWrfpgaCustops.end()) addInv(new DpchInvWdbeMtpWrfpga(0, it->second, 0, mdl->ref, tplspecfolder + "/" + rtysref + "/" + unt->sref, Prjshort, Untsref));
 					};
 				};
 
-				addInv(new DpchInvWdbeWrfpgaIpclr(0, 0, mdl->ref, ipclrfolder + "/fpga" + prjshort + "/" + unt->sref));
+				addInv(new DpchInvWdbeWrfpgaIpclr(0, 0, mdl->ref, ipclrfolder + "/" + rtysref + "/" + unt->sref));
 			};
 		};
 	};
@@ -566,12 +568,12 @@ void DlgWdbeRlsWrite::createMcu(
 	createIpoutSubfolder(false, "_rls");
 	createIpoutSubfolder(false, "_rls", rls->sref);
 
-	createIpoutSubfolder(true, "mcu" + prjshort);
+	createIpoutSubfolder(true, rtysref);
 
 	// -- all units
 	for (unsigned int i = 0; i < unts.nodes.size(); i++) {
 		unt = unts.nodes[i];
-		createIpoutSubfolder(true, "mcu" + prjshort, unt->sref);
+		createIpoutSubfolder(true, rtysref, unt->sref);
 	};
 
 	// --- prepare standard key/value pairs
@@ -628,12 +630,12 @@ void DlgWdbeRlsWrite::createMcu(
 			vals[vals.size()-2] = Untsref;
 			vals[vals.size()-1] = StrMod::lc(unt->sref);
 
-			addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refUntHfile, "", outfolder + "/mcu" + prjshort + "/" + unt->sref + "/" + Untsref + ".h", keys, vals));
-			addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refUntCfile, "", outfolder + "/mcu" + prjshort + "/" + unt->sref + "/" + Untsref + ".c", keys, vals));
+			addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refUntHfile, "", outfolder + "/" + rtysref + "/" + unt->sref + "/" + Untsref + ".h", keys, vals));
+			addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refUntCfile, "", outfolder + "/" + rtysref + "/" + unt->sref + "/" + Untsref + ".c", keys, vals));
 
-			addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refUntExeCfile, "", outfolder + "/mcu" + prjshort + "/" + unt->sref + "/" + Untsref + "_exe.c", keys, vals));
+			addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refUntExeCfile, "", outfolder + "/" + rtysref + "/" + unt->sref + "/" + Untsref + "_exe.c", keys, vals));
 
-			addInv(new DpchInvWdbeWrmcuBase(0, 0, unt->ref, ipfolder + "/mcu" + prjshort + "/" + unt->sref, Prjshort, Untsref));
+			addInv(new DpchInvWdbeWrmcuBase(0, 0, unt->ref, ipfolder + "/" + rtysref + "/" + unt->sref, Prjshort, Untsref));
 		};
 
 		// --- modules (WdbeWrmcu...) ; adapted copy (no MNFPRIM/MNFCORE) from createFpga()
@@ -708,16 +710,16 @@ void DlgWdbeRlsWrite::createMcu(
 				};
 
 				if (mtp) {
-					if (mthf) addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, mthf->ref, "", outfolder + "/mcu" + prjshort + "/" + unt->sref + "/" + Compsref + ".h", keys, vals));
-					else addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refMdlHfile, "", outfolder + "/mcu" + prjshort + "/" + unt->sref + "/" + Compsref + ".h", keys, vals));
+					if (mthf) addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, mthf->ref, "", outfolder + "/" + rtysref + "/" + unt->sref + "/" + Compsref + ".h", keys, vals));
+					else addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refMdlHfile, "", outfolder + "/" + rtysref + "/" + unt->sref + "/" + Compsref + ".h", keys, vals));
 
-					if (mtf) addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, mtf->ref, "", outfolder + "/mcu" + prjshort + "/" + unt->sref + "/" + Compsref + ".c", keys, vals));
-					else addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refMdlCfile, "", outfolder + "/mcu" + prjshort + "/" + unt->sref + "/" + Compsref + ".c", keys, vals));
+					if (mtf) addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, mtf->ref, "", outfolder + "/" + rtysref + "/" + unt->sref + "/" + Compsref + ".c", keys, vals));
+					else addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refMdlCfile, "", outfolder + "/" + rtysref + "/" + unt->sref + "/" + Compsref + ".c", keys, vals));
 
 				} else {
 					// empty module template file
-					addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refMdlHfile, "", outfolder + "/mcu" + prjshort + "/" + unt->sref + "/" + Compsref + ".h", keys, vals));
-					addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refMdlCfile, "", outfolder + "/mcu" + prjshort + "/" + unt->sref + "/" + Compsref + ".c", keys, vals));
+					addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refMdlHfile, "", outfolder + "/" + rtysref + "/" + unt->sref + "/" + Compsref + ".h", keys, vals));
+					addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refMdlCfile, "", outfolder + "/" + rtysref + "/" + unt->sref + "/" + Compsref + ".c", keys, vals));
 				};
 
 				// remove specific placeholders
@@ -729,28 +731,28 @@ void DlgWdbeRlsWrite::createMcu(
 					if ( (srefsMtpPlhmcuCustops.find(mtp->ref) == srefsMtpPlhmcuCustops.end()) && (mdl->ixVBasetype != VecWdbeVMModuleBasetype::HOSTIF) && (mdl->ixVBasetype != VecWdbeVMModuleBasetype::EHOSTIF) && (srefsMtpWrmcuCustops.find(mtp->ref) == srefsMtpWrmcuCustops.end()) && !hassub ) {
 
 					} else {
-						addInv(new DpchInvWdbeWrmcuMdlraw(0, 0, mdl->ref, ipfolder + "/mcu" + prjshort + "/" + unt->sref, Prjshort, Untsref));
-						addInv(new DpchInvWdbeWrmcuMdlfine(0, 0, mdl->ref, finefolder + "/mcu" + prjshort + "/" + unt->sref));
+						addInv(new DpchInvWdbeWrmcuMdlraw(0, 0, mdl->ref, ipfolder + "/" + rtysref + "/" + unt->sref, Prjshort, Untsref));
+						addInv(new DpchInvWdbeWrmcuMdlfine(0, 0, mdl->ref, finefolder + "/" + rtysref + "/" + unt->sref));
 					};
 
 				} else {
-					addInv(new DpchInvWdbeWrmcuMdlraw(0, 0, mdl->ref, ipfolder + "/mcu" + prjshort + "/" + unt->sref, Prjshort, Untsref));
-					addInv(new DpchInvWdbeWrmcuMdlfine(0, 0, mdl->ref, finefolder + "/mcu" + prjshort + "/" + unt->sref));
+					addInv(new DpchInvWdbeWrmcuMdlraw(0, 0, mdl->ref, ipfolder + "/" + rtysref + "/" + unt->sref, Prjshort, Untsref));
+					addInv(new DpchInvWdbeWrmcuMdlfine(0, 0, mdl->ref, finefolder + "/" + rtysref + "/" + unt->sref));
 				};
 
 				// - type-specific IP's (WdbeWrmcu<type>)
 				if (mdl->ixVBasetype == VecWdbeVMModuleBasetype::HOSTIF) {
-					//addInv(new DpchInvWdbeWrmcuHostif(0, 0, mdl->ref, typspecfolder + "/mcu" + prjshort + "/" + unt->sref, Prjshort, Untsref));
+					//addInv(new DpchInvWdbeWrmcuHostif(0, 0, mdl->ref, typspecfolder + "/" + rtysref + "/" + unt->sref, Prjshort, Untsref));
 				} else if (mdl->ixVBasetype == VecWdbeVMModuleBasetype::EHOSTIF) {
-					addInv(new DpchInvWdbeWrmcuEhostif(0, 0, mdl->ref, typspecfolder + "/mcu" + prjshort + "/" + unt->sref, Prjshort, Untsref));
+					addInv(new DpchInvWdbeWrmcuEhostif(0, 0, mdl->ref, typspecfolder + "/" + rtysref + "/" + unt->sref, Prjshort, Untsref));
 				} else if ((mdl->ixVBasetype == VecWdbeVMModuleBasetype::CTR) || (mdl->ixVBasetype == VecWdbeVMModuleBasetype::FWDCTR)) {
-					addInv(new DpchInvWdbeWrmcuCtrFwdctr(0, 0, mdl->ref, typspecfolder + "/mcu" + prjshort + "/" + unt->sref, Prjshort, Untsref));
+					addInv(new DpchInvWdbeWrmcuCtrFwdctr(0, 0, mdl->ref, typspecfolder + "/" + rtysref + "/" + unt->sref, Prjshort, Untsref));
 				};
 
 				// - template-specific IP's (WdbeMtpWrmcu<template>)
 				if (mtp) {
 					auto it = srefsMtpWrmcuCustops.find(mtp->ref);
-					if (it != srefsMtpWrmcuCustops.end()) addInv(new DpchInvWdbeMtpWrmcu(0, it->second, 0, mdl->ref, tplspecfolder + "/mcu" + prjshort + "/" + unt->sref, Prjshort, Untsref));
+					if (it != srefsMtpWrmcuCustops.end()) addInv(new DpchInvWdbeMtpWrmcu(0, it->second, 0, mdl->ref, tplspecfolder + "/" + rtysref + "/" + unt->sref, Prjshort, Untsref));
 				};
 			};
 		};
@@ -848,12 +850,12 @@ void DlgWdbeRlsWrite::createDev(
 	createIpoutSubfolder(false, "_rls");
 	createIpoutSubfolder(false, "_rls", rls->sref);
 
-	createIpoutSubfolder(false, "dev" + prjshort);
+	createIpoutSubfolder(false, rtysref);
 
 	// -- all units
 	for (unsigned int i = 0; i < unts.nodes.size(); i++) {
 		unt = unts.nodes[i];
-		createIpoutSubfolder(false, "dev" + prjshort, unt->Fullsref);
+		createIpoutSubfolder(false, rtysref, unt->Fullsref);
 	};
 
 	// --- prepare standard key/value pairs
@@ -913,11 +915,11 @@ void DlgWdbeRlsWrite::createDev(
 		keys.push_back("verminor"); vals.push_back(verminor);
 		keys.push_back("versub"); vals.push_back(versub);
 
-		addInv(new DpchInvWdbeWrdevBase(0, 0, ver->ref, ipfolder + "/dev" + prjshort, Prjshort, false));
+		addInv(new DpchInvWdbeWrdevBase(0, 0, ver->ref, ipfolder + "/" + rtysref, Prjshort, false));
 
-		addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refGblhfile, "", outfolder + "/dev" + prjshort + "/" + Prjshort + ".h", keys, vals));
-		addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refGblcppfile, "", outfolder + "/dev" + prjshort + "/" + Prjshort + ".cpp", keys, vals));
-		addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refDevhfile, "", outfolder + "/dev" + prjshort + "/Dev" + Prjshort + ".h", keys, vals));
+		addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refGblhfile, "", outfolder + "/" + rtysref + "/" + Prjshort + ".h", keys, vals));
+		addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refGblcppfile, "", outfolder + "/" + rtysref + "/" + Prjshort + ".cpp", keys, vals));
+		addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refDevhfile, "", outfolder + "/" + rtysref + "/Dev" + Prjshort + ".h", keys, vals));
 
 		// --- systems (WdbeWrdevSys)
 		keys.resize(0); vals.resize(0);
@@ -950,11 +952,11 @@ void DlgWdbeRlsWrite::createDev(
 				delete unt;
 			};
 
-			addInv(new DpchInvWdbeWrdevSys(0, 0, sys->ref, ipfolder + "/dev" + prjshort));
+			addInv(new DpchInvWdbeWrdevSys(0, 0, sys->ref, ipfolder + "/" + rtysref));
 
-			addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refSyshfile, "", outfolder + "/dev" + prjshort + "/" + sys->sref + ".h", keys, vals));
-			addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refSyscppfile, "", outfolder + "/dev" + prjshort + "/" + sys->sref + ".cpp", keys, vals));
-			addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refSysveccppfile, "", outfolder + "/dev" + prjshort + "/" + sys->sref + "_vecs.cpp", keys, vals));
+			addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refSyshfile, "", outfolder + "/" + rtysref + "/" + sys->sref + ".h", keys, vals));
+			addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refSyscppfile, "", outfolder + "/" + rtysref + "/" + sys->sref + ".cpp", keys, vals));
+			addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refSysveccppfile, "", outfolder + "/" + rtysref + "/" + sys->sref + "_vecs.cpp", keys, vals));
 		};
 
 		// --- units (WdbeWrdevUnt)
@@ -976,12 +978,12 @@ void DlgWdbeRlsWrite::createDev(
 			vals[vals.size()-2] = unt->Fullsref;
 			vals[vals.size()-1] = unt->Title;
 
-			addInv(new DpchInvWdbeWrdevUnt(0, 0, unt->ref, ipfolder + "/dev" + prjshort + "/" + unt->Fullsref, false));
+			addInv(new DpchInvWdbeWrdevUnt(0, 0, unt->ref, ipfolder + "/" + rtysref + "/" + unt->Fullsref, false));
 
-			addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refUnthfile, "", outfolder + "/dev" + prjshort + "/" + unt->Fullsref + "/" + unt->Fullsref + ".h", keys, vals));
-			addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refUntcppfile, "", outfolder + "/dev" + prjshort + "/" + unt->Fullsref + "/" + unt->Fullsref + ".cpp", keys, vals));
-			addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refUntvechfile, "", outfolder + "/dev" + prjshort + "/" + unt->Fullsref + "/" + unt->Fullsref + "_vecs.h", keys, vals));
-			addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refUntveccppfile, "", outfolder + "/dev" + prjshort + "/" + unt->Fullsref + "/" + unt->Fullsref + "_vecs.cpp", keys, vals));
+			addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refUnthfile, "", outfolder + "/" + rtysref + "/" + unt->Fullsref + "/" + unt->Fullsref + ".h", keys, vals));
+			addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refUntcppfile, "", outfolder + "/" + rtysref + "/" + unt->Fullsref + "/" + unt->Fullsref + ".cpp", keys, vals));
+			addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refUntvechfile, "", outfolder + "/" + rtysref + "/" + unt->Fullsref + "/" + unt->Fullsref + "_vecs.h", keys, vals));
+			addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refUntveccppfile, "", outfolder + "/" + rtysref + "/" + unt->Fullsref + "/" + unt->Fullsref + "_vecs.cpp", keys, vals));
 		};
 
 		// --- controllers (WdbeWrdevCtr)
@@ -1015,10 +1017,10 @@ void DlgWdbeRlsWrite::createDev(
 							+ " AND TblWdbeMVectoritem.vecRefWdbeMVector = TblWdbeMVector.ref AND TblWdbeMVector.sref = 'VecV" + unt->Fullsref.substr(3) + "Controller' AND TblWdbeMVectoritem.sref = '" + vals[vals.size()-4] + "'", num))
 					vals[vals.size()-1] = "0x" + Wdbe::binToHex(num);
 
-				addInv(new DpchInvWdbeWrdevCtr(0, 0, ctr->ref, ipfolder + "/dev" + prjshort + "/" + unt->Fullsref, false));
+				addInv(new DpchInvWdbeWrdevCtr(0, 0, ctr->ref, ipfolder + "/" + rtysref + "/" + unt->Fullsref, false));
 
-				addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refCtrhfile, "", outfolder + "/dev" + prjshort + "/" + unt->Fullsref + "/" + ctr->Fullsref + ".h", keys, vals));
-				addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refCtrcppfile, "", outfolder + "/dev" + prjshort + "/" + unt->Fullsref + "/" + ctr->Fullsref + ".cpp", keys, vals));
+				addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refCtrhfile, "", outfolder + "/" + rtysref + "/" + unt->Fullsref + "/" + ctr->Fullsref + ".h", keys, vals));
+				addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refCtrcppfile, "", outfolder + "/" + rtysref + "/" + unt->Fullsref + "/" + ctr->Fullsref + ".cpp", keys, vals));
 			};
 		};
 	};
@@ -1108,12 +1110,12 @@ void DlgWdbeRlsWrite::createEzdev(
 	createIpoutSubfolder(false, "_rls");
 	createIpoutSubfolder(false, "_rls", rls->sref);
 
-	createIpoutSubfolder(false, "ezdev" + prjshort);
+	createIpoutSubfolder(false, rtysref);
 
 	// -- all units
 	for (unsigned int i = 0; i < unts.nodes.size(); i++) {
 		unt = unts.nodes[i];
-		createIpoutSubfolder(false, "ezdev" + prjshort, unt->Fullsref);
+		createIpoutSubfolder(false, rtysref, unt->Fullsref);
 	};
 
 	// --- prepare standard key/value pairs
@@ -1173,12 +1175,12 @@ void DlgWdbeRlsWrite::createEzdev(
 		keys.push_back("verminor"); vals.push_back(verminor);
 		keys.push_back("versub"); vals.push_back(versub);
 
-		addInv(new DpchInvWdbeWrdevBase(0, 0, ver->ref, ipfolder + "/ezdev" + prjshort, Prjshort, true));
+		addInv(new DpchInvWdbeWrdevBase(0, 0, ver->ref, ipfolder + "/" + rtysref, Prjshort, true));
 
-		addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refEzgblhfile, "", outfolder + "/ezdev" + prjshort + "/" + Prjshort + ".h", keys, vals));
-		addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refEzgblcppfile, "", outfolder + "/ezdev" + prjshort + "/" + Prjshort + ".cpp", keys, vals));
+		addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refEzgblhfile, "", outfolder + "/" + rtysref + "/" + Prjshort + ".h", keys, vals));
+		addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refEzgblcppfile, "", outfolder + "/" + rtysref + "/" + Prjshort + ".cpp", keys, vals));
 
-		addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refDevhfile, "", outfolder + "/ezdev" + prjshort + "/Dev" + Prjshort + ".h", keys, vals));
+		addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refDevhfile, "", outfolder + "/" + rtysref + "/Dev" + Prjshort + ".h", keys, vals));
 
 		// --- units (WdbeWrdevUnt)
 		keys.resize(0); vals.resize(0);
@@ -1199,7 +1201,7 @@ void DlgWdbeRlsWrite::createEzdev(
 			vals[vals.size()-2] = unt->Fullsref;
 			vals[vals.size()-1] = unt->Title;
 
-			addInv(new DpchInvWdbeWrdevUnt(0, 0, unt->ref, ipfolder + "/ezdev" + prjshort + "/" + unt->Fullsref, true));
+			addInv(new DpchInvWdbeWrdevUnt(0, 0, unt->ref, ipfolder + "/" + rtysref + "/" + unt->Fullsref, true));
 
 			keys.push_back("sizeRxbuf"); vals.push_back("sizeRxbuf");
 			keys.push_back("sizeTxbuf"); vals.push_back("sizeTxbuf");
@@ -1227,15 +1229,15 @@ void DlgWdbeRlsWrite::createEzdev(
 			vals[vals.size()-2] = to_string(sizeRxbuf);
 			vals[vals.size()-1] = to_string(sizeTxbuf);
 
-			addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refEzunthfile, "", outfolder + "/ezdev" + prjshort + "/" + unt->Fullsref + "/" + unt->Fullsref + ".h", keys, vals));
-			addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refEzuntcppfile, "", outfolder + "/ezdev" + prjshort + "/" + unt->Fullsref + "/" + unt->Fullsref + ".cpp", keys, vals));
+			addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refEzunthfile, "", outfolder + "/" + rtysref + "/" + unt->Fullsref + "/" + unt->Fullsref + ".h", keys, vals));
+			addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refEzuntcppfile, "", outfolder + "/" + rtysref + "/" + unt->Fullsref + "/" + unt->Fullsref + ".cpp", keys, vals));
 
 			keys.pop_back(); vals.pop_back();
 			keys.pop_back(); vals.pop_back();
 			// -
 
-			addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refUntvechfile, "", outfolder + "/ezdev" + prjshort + "/" + unt->Fullsref + "/" + unt->Fullsref + "_vecs.h", keys, vals));
-			addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refUntveccppfile, "", outfolder + "/ezdev" + prjshort + "/" + unt->Fullsref + "/" + unt->Fullsref + "_vecs.cpp", keys, vals));
+			addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refUntvechfile, "", outfolder + "/" + rtysref + "/" + unt->Fullsref + "/" + unt->Fullsref + "_vecs.h", keys, vals));
+			addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refUntveccppfile, "", outfolder + "/" + rtysref + "/" + unt->Fullsref + "/" + unt->Fullsref + "_vecs.cpp", keys, vals));
 		};
 
 		// --- controllers (WdbeWrdevCtr)
@@ -1269,10 +1271,10 @@ void DlgWdbeRlsWrite::createEzdev(
 							+ " AND TblWdbeMVectoritem.vecRefWdbeMVector = TblWdbeMVector.ref AND TblWdbeMVector.sref = 'VecV" + unt->Fullsref.substr(3) + "Controller' AND TblWdbeMVectoritem.sref = '" + vals[vals.size()-4] + "'", num))
 					vals[vals.size()-1] = "0x" + Wdbe::binToHex(num);
 
-				addInv(new DpchInvWdbeWrdevCtr(0, 0, ctr->ref, ipfolder + "/ezdev" + prjshort + "/" + unt->Fullsref, true));
+				addInv(new DpchInvWdbeWrdevCtr(0, 0, ctr->ref, ipfolder + "/" + rtysref + "/" + unt->Fullsref, true));
 
-				addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refCtrhfile, "", outfolder + "/ezdev" + prjshort + "/" + unt->Fullsref + "/" + ctr->Fullsref + ".h", keys, vals));
-				addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refCtrcppfile, "", outfolder + "/ezdev" + prjshort + "/" + unt->Fullsref + "/" + ctr->Fullsref + ".cpp", keys, vals));
+				addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refCtrhfile, "", outfolder + "/" + rtysref + "/" + unt->Fullsref + "/" + ctr->Fullsref + ".h", keys, vals));
+				addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refCtrcppfile, "", outfolder + "/" + rtysref + "/" + unt->Fullsref + "/" + ctr->Fullsref + ".cpp", keys, vals));
 			};
 		};
 	};
@@ -1500,8 +1502,8 @@ void DlgWdbeRlsWrite::handleRequest(
 		if (ixVSge == VecVSge::IDLE) handleUploadInSgeIdle(dbswdbe, req->filename);
 
 	} else if (req->ixVBasetype == ReqWdbe::VecVBasetype::DOWNLOAD) {
-		if (ixVSge == VecVSge::FAIL) req->filename = handleDownloadInSgeFail(dbswdbe);
-		else if (ixVSge == VecVSge::DONE) req->filename = handleDownloadInSgeDone(dbswdbe);
+		if (ixVSge == VecVSge::DONE) req->filename = handleDownloadInSgeDone(dbswdbe);
+		else if (ixVSge == VecVSge::FAIL) req->filename = handleDownloadInSgeFail(dbswdbe);
 
 	} else if (req->ixVBasetype == ReqWdbe::VecVBasetype::DPCHRET) {
 		if (req->dpchret->ixOpVOpres == VecOpVOpres::PROGRESS) {
@@ -1543,8 +1545,8 @@ void DlgWdbeRlsWrite::handleRequest(
 
 	} else if (req->ixVBasetype == ReqWdbe::VecVBasetype::TIMER) {
 		if (ixVSge == VecVSge::UPKIDLE) handleTimerInSgeUpkidle(dbswdbe, req->sref);
-		else if ((req->sref == "mon") && (ixVSge == VecVSge::CREATE)) handleTimerWithSrefMonInSgeCreate(dbswdbe);
 		else if ((req->sref == "mon") && (ixVSge == VecVSge::WRITE)) handleTimerWithSrefMonInSgeWrite(dbswdbe);
+		else if ((req->sref == "mon") && (ixVSge == VecVSge::CREATE)) handleTimerWithSrefMonInSgeCreate(dbswdbe);
 	};
 };
 
@@ -1713,16 +1715,16 @@ void DlgWdbeRlsWrite::handleUploadInSgeIdle(
 	changeStage(dbswdbe, VecVSge::UPKIDLE);
 };
 
-string DlgWdbeRlsWrite::handleDownloadInSgeFail(
-			DbsWdbe* dbswdbe
-		) {
-	return(xchg->tmppath + "/" + logfile); // IP handleDownloadInSgeFail --- RLINE
-};
-
 string DlgWdbeRlsWrite::handleDownloadInSgeDone(
 			DbsWdbe* dbswdbe
 		) {
 	return(xchg->tmppath + "/" + outfolder + ".tgz"); // IP handleDownloadInSgeDone --- RLINE
+};
+
+string DlgWdbeRlsWrite::handleDownloadInSgeFail(
+			DbsWdbe* dbswdbe
+		) {
+	return(xchg->tmppath + "/" + logfile); // IP handleDownloadInSgeFail --- RLINE
 };
 
 void DlgWdbeRlsWrite::handleTimerInSgeUpkidle(
@@ -1732,18 +1734,18 @@ void DlgWdbeRlsWrite::handleTimerInSgeUpkidle(
 	changeStage(dbswdbe, nextIxVSgeSuccess);
 };
 
-void DlgWdbeRlsWrite::handleTimerWithSrefMonInSgeCreate(
-			DbsWdbe* dbswdbe
-		) {
-	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
-	refreshWithDpchEng(dbswdbe); // IP handleTimerWithSrefMonInSgeCreate --- ILINE
-};
-
 void DlgWdbeRlsWrite::handleTimerWithSrefMonInSgeWrite(
 			DbsWdbe* dbswdbe
 		) {
 	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
 	refreshWithDpchEng(dbswdbe); // IP handleTimerWithSrefMonInSgeWrite --- ILINE
+};
+
+void DlgWdbeRlsWrite::handleTimerWithSrefMonInSgeCreate(
+			DbsWdbe* dbswdbe
+		) {
+	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
+	refreshWithDpchEng(dbswdbe); // IP handleTimerWithSrefMonInSgeCreate --- ILINE
 };
 
 void DlgWdbeRlsWrite::changeStage(
@@ -2246,7 +2248,7 @@ uint DlgWdbeRlsWrite::enterSgeMrgfine(
 	// IP enterSgeMrgfine --- IBEGIN
 	if ((ixRlstype == VecWdbeVMReleaseBasetype::FPGA) || (ixRlstype == VecWdbeVMReleaseBasetype::MCU)) {
 		// in-detail IP's -> finefolder -> outfolder
-		addInv(new DpchInvWdbePrctreeMerge(0, 0, "", finefolder, "", outfolder, true, true));
+		if (!contiacdet.ChkBso) addInv(new DpchInvWdbePrctreeMerge(0, 0, "", finefolder, "", outfolder, true, true));
 	};
 	// IP enterSgeMrgfine --- IEND
 
@@ -2273,7 +2275,7 @@ uint DlgWdbeRlsWrite::enterSgeMrgtypspec(
 	// IP enterSgeMrgtypspec --- IBEGIN
 	if ((ixRlstype == VecWdbeVMReleaseBasetype::FPGA) || (ixRlstype == VecWdbeVMReleaseBasetype::MCU)) {
 		// module-type specific IP's -> typspecfolder -> outfolder
-		addInv(new DpchInvWdbePrctreeMerge(0, 0, "", typspecfolder, "", outfolder, true, true));
+		if (!contiacdet.ChkBso) addInv(new DpchInvWdbePrctreeMerge(0, 0, "", typspecfolder, "", outfolder, true, true));
 	};
 	// IP enterSgeMrgtypspec --- IEND
 
@@ -2300,7 +2302,7 @@ uint DlgWdbeRlsWrite::enterSgeMrgtplspec(
 	// IP enterSgeMrgtplspec --- IBEGIN
 	if ((ixRlstype == VecWdbeVMReleaseBasetype::FPGA) || (ixRlstype == VecWdbeVMReleaseBasetype::MCU)) {
 		// module-template specific IP's -> tplspecfolder -> outfolder
-		addInv(new DpchInvWdbePrctreeMerge(0, 0, "", tplspecfolder, "", outfolder, true, true));
+		if (!contiacdet.ChkBso) addInv(new DpchInvWdbePrctreeMerge(0, 0, "", tplspecfolder, "", outfolder, true, true));
 	};
 	// IP enterSgeMrgtplspec --- IEND
 
@@ -2326,7 +2328,7 @@ uint DlgWdbeRlsWrite::enterSgeClrspec(
 	// IP enterSgeClrspec --- IBEGIN
 	if (ixRlstype == VecWdbeVMReleaseBasetype::FPGA) {
 		// clearing IP's -> ipclrfolder -> outfolder
-		addInv(new DpchInvWdbePrctreeMerge(0, 0, "", ipclrfolder, "", outfolder, true, true));
+		if (!contiacdet.ChkBso) addInv(new DpchInvWdbePrctreeMerge(0, 0, "", ipclrfolder, "", outfolder, true, true));
 	};
 	// IP enterSgeClrspec --- IEND
 
@@ -2352,41 +2354,13 @@ uint DlgWdbeRlsWrite::enterSgeMrgcust(
 
 	// IP enterSgeMrgcust --- IBEGIN
 
-	if (ixRlstype == VecWdbeVMReleaseBasetype::FPGA) {
-		// (optional) custom IP's -> custfolder -> outfolder
+	if (!contiacdet.ChkBso) {
 		if (custfolder == "") {
 			custfolder = xchg->getTxtvalPreset(VecWdbeVPreset::PREWDBEEXTFOLDER, jref);
-			if (custfolder != "") custfolder += "/fpga" + prjshort;
+			if (custfolder != "") custfolder += "/" + rtysref;
 		};
 
-		if (custfolder != "") addInv(new DpchInvWdbePrctreeMerge(0, 0, "", custfolder, "", outfolder + "/fpga" + prjshort, false, false));
-
-	} else if (ixRlstype == VecWdbeVMReleaseBasetype::MCU) {
-		// (optional) custom IP's -> custfolder -> outfolder
-		if (custfolder == "") {
-			custfolder = xchg->getTxtvalPreset(VecWdbeVPreset::PREWDBEEXTFOLDER, jref);
-			if (custfolder != "") custfolder += "/mcu" + prjshort;
-		};
-
-		if (custfolder != "") addInv(new DpchInvWdbePrctreeMerge(0, 0, "", custfolder, "", outfolder + "/mcu" + prjshort, false, false));
-
-	} else if (ixRlstype == VecWdbeVMReleaseBasetype::DEV) {
-		// (optional) custom IP's -> custfolder -> outfolder
-		if (custfolder == "") {
-			custfolder = xchg->getTxtvalPreset(VecWdbeVPreset::PREWDBEEXTFOLDER, jref);
-			if (custfolder != "") custfolder += "/dev" + prjshort;
-		};
-
-		if (custfolder != "") addInv(new DpchInvWdbePrctreeMerge(0, 0, "", custfolder, "", outfolder + "/dev" + prjshort, false, false));
-
-	} else if (ixRlstype == VecWdbeVMReleaseBasetype::EZDEV) {
-		// (optional) custom IP's -> custfolder -> outfolder
-		if (custfolder == "") {
-			custfolder = xchg->getTxtvalPreset(VecWdbeVPreset::PREWDBEEXTFOLDER, jref);
-			if (custfolder != "") custfolder += "/ezdev" + prjshort;
-		};
-
-		if (custfolder != "") addInv(new DpchInvWdbePrctreeMerge(0, 0, "", custfolder, "", outfolder + "/ezdev" + prjshort, false, false));
+		if (custfolder != "") addInv(new DpchInvWdbePrctreeMerge(0, 0, "", custfolder, "", outfolder + "/" + rtysref, false, false));
 	};
 
 	// IP enterSgeMrgcust --- IEND
@@ -2460,6 +2434,3 @@ void DlgWdbeRlsWrite::leaveSgeDone(
 		) {
 	// IP leaveSgeDone --- INSERT
 };
-
-
-

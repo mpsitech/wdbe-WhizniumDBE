@@ -167,6 +167,3 @@ bool PnlWdbeVecVec1NVectoritem::evalButDeleteActive(
 
 	return(args.back());
 };
-
-
-

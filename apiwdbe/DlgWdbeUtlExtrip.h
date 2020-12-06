@@ -530,4 +530,3 @@ namespace DlgWdbeUtlExtrip {
 };
 
 #endif
-

@@ -417,10 +417,10 @@ public:
 	};
 
 	bool evalButDneActive(DbsWdbe* dbswdbe);
-	bool evalLfiDldActive(DbsWdbe* dbswdbe);
 	bool evalImpButAutActive(DbsWdbe* dbswdbe);
 	bool evalImpButRunActive(DbsWdbe* dbswdbe);
 	bool evalImpButStoActive(DbsWdbe* dbswdbe);
+	bool evalLfiDldActive(DbsWdbe* dbswdbe);
 	bool evalIfiUldActive(DbsWdbe* dbswdbe);
 
 public:
@@ -527,6 +527,3 @@ private:
 };
 
 #endif
-
-
-

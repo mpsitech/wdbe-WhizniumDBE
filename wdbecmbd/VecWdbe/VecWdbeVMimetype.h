@@ -54,6 +54,3 @@ namespace VecWdbeVMimetype {
 };
 
 #endif
-
-
-

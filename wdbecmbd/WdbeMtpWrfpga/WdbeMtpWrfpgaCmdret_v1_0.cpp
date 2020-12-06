@@ -130,6 +130,3 @@ void WdbeMtpWrfpgaCmdret_v1_0::writeMdlVhd(
 	outfile << "-- IP impl.buf.rd --- IEND" << endl;
 };
 // IP cust --- IEND
-
-
-

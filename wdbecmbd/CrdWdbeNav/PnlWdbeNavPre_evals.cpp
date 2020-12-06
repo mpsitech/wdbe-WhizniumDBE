@@ -52,6 +52,3 @@ bool PnlWdbeNavPre::evalTxtVerAvail(
 
 	return(args.back());
 };
-
-
-

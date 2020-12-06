@@ -184,6 +184,3 @@ DpchRetWdbe* WdbeMtpModbscbuAxihostif_Easy_v2_0::run(
 };
 
 // IP cust --- INSERT
-
-
-

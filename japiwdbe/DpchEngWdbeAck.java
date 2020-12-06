@@ -15,4 +15,3 @@ public class DpchEngWdbeAck extends DpchEngWdbe {
 		super(VecWdbeVDpch.DPCHENGWDBEACK);
 	};
 };
-

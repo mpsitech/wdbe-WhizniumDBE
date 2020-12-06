@@ -133,6 +133,3 @@ bool DlgWdbeUtlMrgip::evalSrcUldActive(
 
 	return(args.back());
 };
-
-
-

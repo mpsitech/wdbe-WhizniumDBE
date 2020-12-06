@@ -223,6 +223,3 @@ bool PnlWdbeErrDetail::evalTxfCmtActive(
 
 	return(args.back());
 };
-
-
-

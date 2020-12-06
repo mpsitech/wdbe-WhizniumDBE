@@ -463,6 +463,3 @@ void PnlWdbeModCor1NImbuf::DpchEngData::writeXML(
 		if (has(STGIACQRY)) stgiacqry.writeXML(wr);
 	xmlTextWriterEndElement(wr);
 };
-
-
-

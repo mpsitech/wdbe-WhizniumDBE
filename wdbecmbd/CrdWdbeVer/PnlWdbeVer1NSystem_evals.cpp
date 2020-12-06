@@ -97,6 +97,3 @@ bool PnlWdbeVer1NSystem::evalButDeleteActive(
 
 	return(args.back());
 };
-
-
-

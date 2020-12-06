@@ -17,4 +17,3 @@ public class DpchAppWdbeResume extends DpchAppWdbe {
 		super(VecWdbeVDpch.DPCHAPPWDBERESUME, scrJref);
 	};
 };
-

@@ -698,4 +698,3 @@ public class PnlWdbeLibDetail {
 	};
 
 };
-

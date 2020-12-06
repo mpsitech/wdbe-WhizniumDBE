@@ -14,16 +14,16 @@
 
 // IP include.cust --- INSERT
 
-#include "PnlWdbeMtpMge1NSignal.h"
 #include "PnlWdbeMtpRef1NFile.h"
+#include "PnlWdbeMtpMge1NSignal.h"
 #include "PnlWdbeMtpSup1NModule.h"
-#include "PnlWdbeMtpMdl1NPort.h"
 #include "PnlWdbeMtpTpl1NModule.h"
 #include "PnlWdbeMtpMdl1NGeneric.h"
+#include "PnlWdbeMtpMdl1NPort.h"
 #include "PnlWdbeMtpAPar.h"
 #include "PnlWdbeMtpKHdltype.h"
-#include "PnlWdbeMtpKParKey.h"
 #include "PnlWdbeMtpDetail.h"
+#include "PnlWdbeMtpKParKey.h"
 
 #define VecVWdbeMtpRecDo PnlWdbeMtpRec::VecVDo
 
@@ -80,7 +80,7 @@ public:
 	class StatApp {
 
 	public:
-		static void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true, const bool initdoneDetail = false, const bool initdoneKParKey = false, const bool initdoneKHdltype = false, const bool initdoneAPar = false, const bool initdoneMdl1NGeneric = false, const bool initdoneTpl1NModule = false, const bool initdoneMdl1NPort = false, const bool initdoneSup1NModule = false, const bool initdoneRef1NFile = false, const bool initdoneMge1NSignal = false);
+		static void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true, const bool initdoneDetail = false, const bool initdoneKParKey = false, const bool initdoneKHdltype = false, const bool initdoneAPar = false, const bool initdoneMdl1NPort = false, const bool initdoneMdl1NGeneric = false, const bool initdoneTpl1NModule = false, const bool initdoneSup1NModule = false, const bool initdoneMge1NSignal = false, const bool initdoneRef1NFile = false);
 	};
 
 	/**
@@ -94,16 +94,16 @@ public:
 		static const Sbecore::uint JREFKPARKEY = 3;
 		static const Sbecore::uint JREFKHDLTYPE = 4;
 		static const Sbecore::uint JREFAPAR = 5;
-		static const Sbecore::uint JREFMDL1NGENERIC = 6;
-		static const Sbecore::uint JREFTPL1NMODULE = 7;
-		static const Sbecore::uint JREFMDL1NPORT = 8;
+		static const Sbecore::uint JREFMDL1NPORT = 6;
+		static const Sbecore::uint JREFMDL1NGENERIC = 7;
+		static const Sbecore::uint JREFTPL1NMODULE = 8;
 		static const Sbecore::uint JREFSUP1NMODULE = 9;
-		static const Sbecore::uint JREFREF1NFILE = 10;
-		static const Sbecore::uint JREFMGE1NSIGNAL = 11;
+		static const Sbecore::uint JREFMGE1NSIGNAL = 10;
+		static const Sbecore::uint JREFREF1NFILE = 11;
 		static const Sbecore::uint BUTREGULARIZEACTIVE = 12;
 
 	public:
-		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const Sbecore::ubigint jrefDetail = 0, const Sbecore::ubigint jrefKParKey = 0, const Sbecore::ubigint jrefKHdltype = 0, const Sbecore::ubigint jrefAPar = 0, const Sbecore::ubigint jrefMdl1NGeneric = 0, const Sbecore::ubigint jrefTpl1NModule = 0, const Sbecore::ubigint jrefMdl1NPort = 0, const Sbecore::ubigint jrefSup1NModule = 0, const Sbecore::ubigint jrefRef1NFile = 0, const Sbecore::ubigint jrefMge1NSignal = 0, const bool ButRegularizeActive = true);
+		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const Sbecore::ubigint jrefDetail = 0, const Sbecore::ubigint jrefKParKey = 0, const Sbecore::ubigint jrefKHdltype = 0, const Sbecore::ubigint jrefAPar = 0, const Sbecore::ubigint jrefMdl1NPort = 0, const Sbecore::ubigint jrefMdl1NGeneric = 0, const Sbecore::ubigint jrefTpl1NModule = 0, const Sbecore::ubigint jrefSup1NModule = 0, const Sbecore::ubigint jrefMge1NSignal = 0, const Sbecore::ubigint jrefRef1NFile = 0, const bool ButRegularizeActive = true);
 
 	public:
 		Sbecore::uint ixWdbeVExpstate;
@@ -111,12 +111,12 @@ public:
 		Sbecore::ubigint jrefKParKey;
 		Sbecore::ubigint jrefKHdltype;
 		Sbecore::ubigint jrefAPar;
+		Sbecore::ubigint jrefMdl1NPort;
 		Sbecore::ubigint jrefMdl1NGeneric;
 		Sbecore::ubigint jrefTpl1NModule;
-		Sbecore::ubigint jrefMdl1NPort;
 		Sbecore::ubigint jrefSup1NModule;
-		Sbecore::ubigint jrefRef1NFile;
 		Sbecore::ubigint jrefMge1NSignal;
+		Sbecore::ubigint jrefRef1NFile;
 		bool ButRegularizeActive;
 
 	public:
@@ -192,16 +192,16 @@ public:
 	ContInf continf;
 	StatShr statshr;
 
-	PnlWdbeMtpMge1NSignal* pnlmge1nsignal;
 	PnlWdbeMtpRef1NFile* pnlref1nfile;
+	PnlWdbeMtpMge1NSignal* pnlmge1nsignal;
 	PnlWdbeMtpSup1NModule* pnlsup1nmodule;
-	PnlWdbeMtpMdl1NPort* pnlmdl1nport;
 	PnlWdbeMtpTpl1NModule* pnltpl1nmodule;
 	PnlWdbeMtpMdl1NGeneric* pnlmdl1ngeneric;
+	PnlWdbeMtpMdl1NPort* pnlmdl1nport;
 	PnlWdbeMtpAPar* pnlapar;
 	PnlWdbeMtpKHdltype* pnlkhdltype;
-	PnlWdbeMtpKParKey* pnlkparkey;
 	PnlWdbeMtpDetail* pnldetail;
+	PnlWdbeMtpKParKey* pnlkparkey;
 
 	WdbeMModule recMdl;
 	Sbecore::uint ixWSubsetMdl;
@@ -237,20 +237,17 @@ public:
 
 private:
 	bool handleCallWdbeMdlUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
-	bool handleCallWdbeMdl_typEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
-	bool handleCallWdbeMdl_tplEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
-	bool handleCallWdbeMdl_supEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
-	bool handleCallWdbeMdl_sup_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
-	bool handleCallWdbeMdl_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
-	bool handleCallWdbeMdl_imbEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
-	bool handleCallWdbeMdl_hkuEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
-	bool handleCallWdbeMdl_hku_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
-	bool handleCallWdbeMdl_hktEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
 	bool handleCallWdbeMdl_ctrEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeMdl_hktEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
+	bool handleCallWdbeMdl_hku_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
+	bool handleCallWdbeMdl_hkuEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeMdl_imbEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeMdl_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
+	bool handleCallWdbeMdl_sup_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
+	bool handleCallWdbeMdl_supEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeMdl_tplEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeMdl_typEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
 
 };
 
 #endif
-
-
-

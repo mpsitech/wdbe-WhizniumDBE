@@ -113,4 +113,3 @@ namespace QryWdbeVitList {
 };
 
 #endif
-

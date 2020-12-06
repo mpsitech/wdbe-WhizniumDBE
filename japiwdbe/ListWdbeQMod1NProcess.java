@@ -59,4 +59,3 @@ public class ListWdbeQMod1NProcess {
 		return false;
 	};
 };
-

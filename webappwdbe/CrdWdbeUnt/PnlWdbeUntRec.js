@@ -1,39 +1,39 @@
 function updateScrJrefs() {
 	scrJrefDetail = retrieveSi(srcdoc, "StatShrWdbeUntRec", "scrJrefDetail");
+	scrJrefSil1NUnit = retrieveSi(srcdoc, "StatShrWdbeUntRec", "scrJrefSil1NUnit");
+	scrJref1NPeripheral = retrieveSi(srcdoc, "StatShrWdbeUntRec", "scrJref1NPeripheral");
 	scrJref1NBank = retrieveSi(srcdoc, "StatShrWdbeUntRec", "scrJref1NBank");
 	scrJrefFwd1NController = retrieveSi(srcdoc, "StatShrWdbeUntRec", "scrJrefFwd1NController");
 	scrJref1NTarget = retrieveSi(srcdoc, "StatShrWdbeUntRec", "scrJref1NTarget");
-	scrJref1NPeripheral = retrieveSi(srcdoc, "StatShrWdbeUntRec", "scrJref1NPeripheral");
-	scrJrefSil1NUnit = retrieveSi(srcdoc, "StatShrWdbeUntRec", "scrJrefSil1NUnit");
-	scrJrefRef1NCommand = retrieveSi(srcdoc, "StatShrWdbeUntRec", "scrJrefRef1NCommand");
-	scrJrefHk1NModule = retrieveSi(srcdoc, "StatShrWdbeUntRec", "scrJrefHk1NModule");
 	scrJrefHk1NVector = retrieveSi(srcdoc, "StatShrWdbeUntRec", "scrJrefHk1NVector");
+	scrJrefHk1NModule = retrieveSi(srcdoc, "StatShrWdbeUntRec", "scrJrefHk1NModule");
+	scrJrefRef1NCommand = retrieveSi(srcdoc, "StatShrWdbeUntRec", "scrJrefRef1NCommand");
 	scrJrefRef1NError = retrieveSi(srcdoc, "StatShrWdbeUntRec", "scrJrefRef1NError");
 };
 
 function resetInitdones() {
 	setSi(srcdoc, "StatAppWdbeUntRec", "initdoneDetail", "false");
+	setSi(srcdoc, "StatAppWdbeUntRec", "initdoneSil1NUnit", "false");
+	setSi(srcdoc, "StatAppWdbeUntRec", "initdone1NPeripheral", "false");
 	setSi(srcdoc, "StatAppWdbeUntRec", "initdone1NBank", "false");
 	setSi(srcdoc, "StatAppWdbeUntRec", "initdoneFwd1NController", "false");
 	setSi(srcdoc, "StatAppWdbeUntRec", "initdone1NTarget", "false");
-	setSi(srcdoc, "StatAppWdbeUntRec", "initdone1NPeripheral", "false");
-	setSi(srcdoc, "StatAppWdbeUntRec", "initdoneSil1NUnit", "false");
-	setSi(srcdoc, "StatAppWdbeUntRec", "initdoneRef1NCommand", "false");
-	setSi(srcdoc, "StatAppWdbeUntRec", "initdoneHk1NModule", "false");
 	setSi(srcdoc, "StatAppWdbeUntRec", "initdoneHk1NVector", "false");
+	setSi(srcdoc, "StatAppWdbeUntRec", "initdoneHk1NModule", "false");
+	setSi(srcdoc, "StatAppWdbeUntRec", "initdoneRef1NCommand", "false");
 	setSi(srcdoc, "StatAppWdbeUntRec", "initdoneRef1NError", "false");
 };
 
 function resetHeights() {
 	heightDetail = 30;
+	heightSil1NUnit = 30;
+	height1NPeripheral = 30;
 	height1NBank = 30;
 	heightFwd1NController = 30;
 	height1NTarget = 30;
-	height1NPeripheral = 30;
-	heightSil1NUnit = 30;
-	heightRef1NCommand = 30;
-	heightHk1NModule = 30;
 	heightHk1NVector = 30;
+	heightHk1NModule = 30;
+	heightRef1NCommand = 30;
 	heightRef1NError = 30;
 };
 
@@ -53,34 +53,34 @@ function checkInitdone() {
 	var initdone1NRelease = (retrieveSi(srcdoc, "StatAppWdbeUntRec", "initdone1NRelease") == "true");
 
 	var initdoneDetail = (retrieveSi(srcdoc, "StatAppWdbeUntRec", "initdoneDetail") == "true");
+	var initdoneSil1NUnit = (retrieveSi(srcdoc, "StatAppWdbeUntRec", "initdoneSil1NUnit") == "true");
+	var initdone1NPeripheral = (retrieveSi(srcdoc, "StatAppWdbeUntRec", "initdone1NPeripheral") == "true");
 	var initdone1NBank = (retrieveSi(srcdoc, "StatAppWdbeUntRec", "initdone1NBank") == "true");
 	var initdoneFwd1NController = (retrieveSi(srcdoc, "StatAppWdbeUntRec", "initdoneFwd1NController") == "true");
 	var initdone1NTarget = (retrieveSi(srcdoc, "StatAppWdbeUntRec", "initdone1NTarget") == "true");
-	var initdone1NPeripheral = (retrieveSi(srcdoc, "StatAppWdbeUntRec", "initdone1NPeripheral") == "true");
-	var initdoneSil1NUnit = (retrieveSi(srcdoc, "StatAppWdbeUntRec", "initdoneSil1NUnit") == "true");
-	var initdoneRef1NCommand = (retrieveSi(srcdoc, "StatAppWdbeUntRec", "initdoneRef1NCommand") == "true");
-	var initdoneHk1NModule = (retrieveSi(srcdoc, "StatAppWdbeUntRec", "initdoneHk1NModule") == "true");
 	var initdoneHk1NVector = (retrieveSi(srcdoc, "StatAppWdbeUntRec", "initdoneHk1NVector") == "true");
+	var initdoneHk1NModule = (retrieveSi(srcdoc, "StatAppWdbeUntRec", "initdoneHk1NModule") == "true");
+	var initdoneRef1NCommand = (retrieveSi(srcdoc, "StatAppWdbeUntRec", "initdoneRef1NCommand") == "true");
 	var initdoneRef1NError = (retrieveSi(srcdoc, "StatAppWdbeUntRec", "initdoneRef1NError") == "true");
 
 	if (!initdoneDetail) {
 		lhsdoc.getElementById("Detail").src = "./PnlWdbeUntDetail.html?scrJref=" + scrJrefDetail;
+	} else if (!initdoneSil1NUnit) {
+		rhsdoc.getElementById("Sil1NUnit").src = "./PnlWdbeUntSil1NUnit.html?scrJref=" + scrJrefSil1NUnit;
+	} else if (!initdone1NPeripheral) {
+		rhsdoc.getElementById("1NPeripheral").src = "./PnlWdbeUnt1NPeripheral.html?scrJref=" + scrJref1NPeripheral;
 	} else if (!initdone1NBank) {
 		rhsdoc.getElementById("1NBank").src = "./PnlWdbeUnt1NBank.html?scrJref=" + scrJref1NBank;
 	} else if (!initdoneFwd1NController) {
 		rhsdoc.getElementById("Fwd1NController").src = "./PnlWdbeUntFwd1NController.html?scrJref=" + scrJrefFwd1NController;
 	} else if (!initdone1NTarget) {
 		rhsdoc.getElementById("1NTarget").src = "./PnlWdbeUnt1NTarget.html?scrJref=" + scrJref1NTarget;
-	} else if (!initdone1NPeripheral) {
-		rhsdoc.getElementById("1NPeripheral").src = "./PnlWdbeUnt1NPeripheral.html?scrJref=" + scrJref1NPeripheral;
-	} else if (!initdoneSil1NUnit) {
-		rhsdoc.getElementById("Sil1NUnit").src = "./PnlWdbeUntSil1NUnit.html?scrJref=" + scrJrefSil1NUnit;
-	} else if (!initdoneRef1NCommand) {
-		rhsdoc.getElementById("Ref1NCommand").src = "./PnlWdbeUntRef1NCommand.html?scrJref=" + scrJrefRef1NCommand;
-	} else if (!initdoneHk1NModule) {
-		rhsdoc.getElementById("Hk1NModule").src = "./PnlWdbeUntHk1NModule.html?scrJref=" + scrJrefHk1NModule;
 	} else if (!initdoneHk1NVector) {
 		rhsdoc.getElementById("Hk1NVector").src = "./PnlWdbeUntHk1NVector.html?scrJref=" + scrJrefHk1NVector;
+	} else if (!initdoneHk1NModule) {
+		rhsdoc.getElementById("Hk1NModule").src = "./PnlWdbeUntHk1NModule.html?scrJref=" + scrJrefHk1NModule;
+	} else if (!initdoneRef1NCommand) {
+		rhsdoc.getElementById("Ref1NCommand").src = "./PnlWdbeUntRef1NCommand.html?scrJref=" + scrJrefRef1NCommand;
 	} else if (!initdoneRef1NError) {
 		rhsdoc.getElementById("Ref1NError").src = "./PnlWdbeUntRef1NError.html?scrJref=" + scrJrefRef1NError;
 
@@ -122,14 +122,14 @@ function setPnlAvail(short, avail) {
 		else if (short == "List") heightList = height;
 		else if (short == "Rec") heightRec = height;
 		else if (short == "Detail") heightDetail = height;
+		else if (short == "Sil1NUnit") heightSil1NUnit = height;
+		else if (short == "1NPeripheral") height1NPeripheral = height;
 		else if (short == "1NBank") height1NBank = height;
 		else if (short == "Fwd1NController") heightFwd1NController = height;
 		else if (short == "1NTarget") height1NTarget = height;
-		else if (short == "1NPeripheral") height1NPeripheral = height;
-		else if (short == "Sil1NUnit") heightSil1NUnit = height;
-		else if (short == "Ref1NCommand") heightRef1NCommand = height;
-		else if (short == "Hk1NModule") heightHk1NModule = height;
 		else if (short == "Hk1NVector") heightHk1NVector = height;
+		else if (short == "Hk1NModule") heightHk1NModule = height;
+		else if (short == "Ref1NCommand") heightRef1NCommand = height;
 		else if (short == "Ref1NError") heightRef1NError = height;
 	};
 
@@ -174,14 +174,14 @@ function changeHeight(pnlshort, height, update) {
 	else if (pnlshort == "List") heightList = height;
 	else if (pnlshort == "Rec") heightRec = height;
 	else if (pnlshort == "Detail") heightDetail = height;
+	else if (pnlshort == "Sil1NUnit") heightSil1NUnit = height;
+	else if (pnlshort == "1NPeripheral") height1NPeripheral = height;
 	else if (pnlshort == "1NBank") height1NBank = height;
 	else if (pnlshort == "Fwd1NController") heightFwd1NController = height;
 	else if (pnlshort == "1NTarget") height1NTarget = height;
-	else if (pnlshort == "1NPeripheral") height1NPeripheral = height;
-	else if (pnlshort == "Sil1NUnit") heightSil1NUnit = height;
-	else if (pnlshort == "Ref1NCommand") heightRef1NCommand = height;
-	else if (pnlshort == "Hk1NModule") heightHk1NModule = height;
 	else if (pnlshort == "Hk1NVector") heightHk1NVector = height;
+	else if (pnlshort == "Hk1NModule") heightHk1NModule = height;
+	else if (pnlshort == "Ref1NCommand") heightRef1NCommand = height;
 	else if (pnlshort == "Ref1NError") heightRef1NError = height;
 
 	if (update) updateHeight();
@@ -191,7 +191,7 @@ function updateHeight() {
 	var heightLhs, heightRhs, heightGt;
 
 	heightLhs = heightDetail+13 + 5;
-	heightRhs = height1NBank+13 + heightFwd1NController+13 + height1NTarget+13 + height1NPeripheral+13 + heightSil1NUnit+13 + heightRef1NCommand+13 + heightHk1NModule+13 + heightHk1NVector+13 + heightRef1NError+13 + 5;
+	heightRhs = heightSil1NUnit+13 + height1NPeripheral+13 + height1NBank+13 + heightFwd1NController+13 + height1NTarget+13 + heightHk1NVector+13 + heightHk1NModule+13 + heightRef1NCommand+13 + heightRef1NError+13 + 5;
 
 	if (heightLhs > heightRhs) {
 		lhsdoc.getElementById("tdFill").setAttribute("height", "5");
@@ -388,22 +388,22 @@ function handleDpchEng(dom, dpch) {
 
 			if (_scrJref == scrJrefDetail) {
 				if (getInitdone("Detail")) lhsdoc.getElementById("Detail").contentWindow.handleDpchEng(dom, dpch);
+			} else if (_scrJref == scrJrefSil1NUnit) {
+				if (getInitdone("Sil1NUnit")) rhsdoc.getElementById("Sil1NUnit").contentWindow.handleDpchEng(dom, dpch);
+			} else if (_scrJref == scrJref1NPeripheral) {
+				if (getInitdone("1NPeripheral")) rhsdoc.getElementById("1NPeripheral").contentWindow.handleDpchEng(dom, dpch);
 			} else if (_scrJref == scrJref1NBank) {
 				if (getInitdone("1NBank")) rhsdoc.getElementById("1NBank").contentWindow.handleDpchEng(dom, dpch);
 			} else if (_scrJref == scrJrefFwd1NController) {
 				if (getInitdone("Fwd1NController")) rhsdoc.getElementById("Fwd1NController").contentWindow.handleDpchEng(dom, dpch);
 			} else if (_scrJref == scrJref1NTarget) {
 				if (getInitdone("1NTarget")) rhsdoc.getElementById("1NTarget").contentWindow.handleDpchEng(dom, dpch);
-			} else if (_scrJref == scrJref1NPeripheral) {
-				if (getInitdone("1NPeripheral")) rhsdoc.getElementById("1NPeripheral").contentWindow.handleDpchEng(dom, dpch);
-			} else if (_scrJref == scrJrefSil1NUnit) {
-				if (getInitdone("Sil1NUnit")) rhsdoc.getElementById("Sil1NUnit").contentWindow.handleDpchEng(dom, dpch);
-			} else if (_scrJref == scrJrefRef1NCommand) {
-				if (getInitdone("Ref1NCommand")) rhsdoc.getElementById("Ref1NCommand").contentWindow.handleDpchEng(dom, dpch);
-			} else if (_scrJref == scrJrefHk1NModule) {
-				if (getInitdone("Hk1NModule")) rhsdoc.getElementById("Hk1NModule").contentWindow.handleDpchEng(dom, dpch);
 			} else if (_scrJref == scrJrefHk1NVector) {
 				if (getInitdone("Hk1NVector")) rhsdoc.getElementById("Hk1NVector").contentWindow.handleDpchEng(dom, dpch);
+			} else if (_scrJref == scrJrefHk1NModule) {
+				if (getInitdone("Hk1NModule")) rhsdoc.getElementById("Hk1NModule").contentWindow.handleDpchEng(dom, dpch);
+			} else if (_scrJref == scrJrefRef1NCommand) {
+				if (getInitdone("Ref1NCommand")) rhsdoc.getElementById("Ref1NCommand").contentWindow.handleDpchEng(dom, dpch);
 			} else if (_scrJref == scrJrefRef1NError) {
 				if (getInitdone("Ref1NError")) rhsdoc.getElementById("Ref1NError").contentWindow.handleDpchEng(dom, dpch);
 			} else {
@@ -475,4 +475,3 @@ function handleDpchAppDataDoReply() {
 		};
 	};
 };
-

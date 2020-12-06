@@ -645,4 +645,3 @@ public class PnlWdbeModMge1NSignal {
 	};
 
 };
-

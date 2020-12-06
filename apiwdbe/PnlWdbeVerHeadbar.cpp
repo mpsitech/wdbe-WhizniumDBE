@@ -171,4 +171,3 @@ void PnlWdbeVerHeadbar::DpchEngData::readXML(
 		tag = Tag();
 	};
 };
-

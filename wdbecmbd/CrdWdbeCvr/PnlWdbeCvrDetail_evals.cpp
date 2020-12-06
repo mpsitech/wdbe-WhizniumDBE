@@ -244,6 +244,3 @@ bool PnlWdbeCvrDetail::evalLstStyActive(
 
 	return(args.back());
 };
-
-
-

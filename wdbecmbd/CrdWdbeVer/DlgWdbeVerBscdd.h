@@ -573,12 +573,12 @@ private:
 
 	std::string handleDownloadInSgeDone(DbsWdbe* dbswdbe);
 
-	void handleTimerWithSrefMonInSgePostprc2(DbsWdbe* dbswdbe);
-	void handleTimerWithSrefMonInSgePostprc3(DbsWdbe* dbswdbe);
 	void handleTimerInSgePrsidle(DbsWdbe* dbswdbe, const std::string& sref);
 	void handleTimerInSgeImpidle(DbsWdbe* dbswdbe, const std::string& sref);
 	void handleTimerWithSrefMonInSgeImport(DbsWdbe* dbswdbe);
 	void handleTimerWithSrefMonInSgePostprc1(DbsWdbe* dbswdbe);
+	void handleTimerWithSrefMonInSgePostprc2(DbsWdbe* dbswdbe);
+	void handleTimerWithSrefMonInSgePostprc3(DbsWdbe* dbswdbe);
 
 private:
 	void changeStage(DbsWdbe* dbswdbe, Sbecore::uint _ixVSge, DpchEngWdbe** dpcheng = NULL);
@@ -617,6 +617,3 @@ private:
 };
 
 #endif
-
-
-

@@ -66,6 +66,3 @@ bool PnlWdbeNavCoredev::evalButCvrViewActive(
 
 	return(args.back());
 };
-
-
-

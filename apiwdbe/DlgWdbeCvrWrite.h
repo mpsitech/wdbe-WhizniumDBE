@@ -463,4 +463,3 @@ namespace DlgWdbeCvrWrite {
 };
 
 #endif
-

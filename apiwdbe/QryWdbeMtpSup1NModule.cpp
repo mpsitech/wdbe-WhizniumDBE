@@ -241,4 +241,3 @@ set<uint> QryWdbeMtpSup1NModule::StgIac::diff(
 
 	return(diffitems);
 };
-

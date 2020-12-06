@@ -132,7 +132,7 @@ function refreshB(chgcol) {
 			ix++;
 
 			if (i == 1) {
-				doc.cols.push("TcoSrf"); doc.widths.push(TcoSrfWidth); doc.fs.push("srf"); doc.tos.push(7); wtot += TcoSrfWidth;
+				doc.cols.push("TcoSrf"); doc.widths.push(TcoSrfWidth); doc.fs.push("srf"); doc.tos.push(6); wtot += TcoSrfWidth;
 			} else if (i == 2) {
 				doc.cols.push("TcoTyp"); doc.widths.push(TcoTypWidth); doc.fs.push("typ2"); doc.tos.push(0); wtot += TcoTypWidth;
 			} else if (i == 3) {
@@ -140,7 +140,7 @@ function refreshB(chgcol) {
 			} else if (i == 4) {
 				doc.cols.push("TcoMgt"); doc.widths.push(TcoMgtWidth); doc.fs.push("mgt2"); doc.tos.push(0); wtot += TcoMgtWidth;
 			} else if (i == 5) {
-				doc.cols.push("TcoMgu"); doc.widths.push(TcoMguWidth); doc.fs.push("mgu"); doc.tos.push(3); wtot += TcoMguWidth;
+				doc.cols.push("TcoMgu"); doc.widths.push(TcoMguWidth); doc.fs.push("mgu"); doc.tos.push(4); wtot += TcoMguWidth;
 			} else if (i == 6) {
 				doc.cols.push("TcoVec"); doc.widths.push(TcoVecWidth); doc.fs.push("vec"); doc.tos.push(2); wtot += TcoVecWidth;
 			} else if (i == 7) {
@@ -769,4 +769,3 @@ function handleDpchAppDataDoReply() {
 		};
 	};
 };
-

@@ -348,6 +348,3 @@ bool QryWdbeCprMNPerson::handleCallWdbeStubChgFromSelf(
 	// IP handleCallWdbeStubChgFromSelf --- INSERT
 	return retval;
 };
-
-
-

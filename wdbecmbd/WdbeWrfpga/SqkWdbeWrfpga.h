@@ -27,6 +27,3 @@ namespace SqkWdbeWrfpga {
 };
 
 #endif
-
-
-

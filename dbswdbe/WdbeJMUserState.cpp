@@ -861,4 +861,3 @@ ubigint PgTblWdbeJMUserState::loadRstByUsr(
 };
 
 #endif
-

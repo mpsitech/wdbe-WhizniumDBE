@@ -97,6 +97,3 @@ bool PnlWdbeMod1NProcess::evalButDeleteActive(
 
 	return(args.back());
 };
-
-
-

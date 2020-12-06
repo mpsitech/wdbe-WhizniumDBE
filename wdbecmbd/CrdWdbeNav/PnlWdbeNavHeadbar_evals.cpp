@@ -578,6 +578,3 @@ bool PnlWdbeNavHeadbar::evalMitCrdUtlAvail(
 
 	return(args.back());
 };
-
-
-

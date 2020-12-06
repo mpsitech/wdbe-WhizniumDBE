@@ -97,6 +97,3 @@ bool PnlWdbeCpr1NCoreversion::evalButDeleteActive(
 
 	return(args.back());
 };
-
-
-

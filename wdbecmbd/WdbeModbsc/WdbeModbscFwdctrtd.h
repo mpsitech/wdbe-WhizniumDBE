@@ -21,6 +21,3 @@ namespace WdbeModbscFwdctrtd {
 };
 
 #endif
-
-
-

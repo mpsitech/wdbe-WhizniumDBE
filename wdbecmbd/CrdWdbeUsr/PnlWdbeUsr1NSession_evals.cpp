@@ -38,6 +38,3 @@ bool PnlWdbeUsr1NSession::evalButDeleteActive(
 
 	return(args.back());
 };
-
-
-

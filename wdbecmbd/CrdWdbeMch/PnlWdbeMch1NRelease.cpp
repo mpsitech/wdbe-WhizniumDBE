@@ -321,6 +321,3 @@ bool PnlWdbeMch1NRelease::handleCallWdbeStatChg(
 	// IP handleCallWdbeStatChg --- END
 	return retval;
 };
-
-
-

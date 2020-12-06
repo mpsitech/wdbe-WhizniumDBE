@@ -861,4 +861,3 @@ ubigint PgTblWdbeJMCoreversionState::loadRstByCvr(
 };
 
 #endif
-

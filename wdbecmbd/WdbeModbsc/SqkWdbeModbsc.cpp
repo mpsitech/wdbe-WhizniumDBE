@@ -64,6 +64,3 @@ string SqkWdbeModbsc::getSquawkUnt(
 	// example: "add standard vectors for unit 'icacam2'"
 	return("add standard vectors for unit '" + StubWdbe::getStubUntStd(dbswdbe, dpchinv->refWdbeMUnit) + "'"); // IP getSquawkUnt --- RLINE
 };
-
-
-

@@ -360,6 +360,3 @@ private:
 };
 
 #endif
-
-
-

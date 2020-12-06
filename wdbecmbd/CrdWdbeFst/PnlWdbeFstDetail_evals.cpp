@@ -212,6 +212,3 @@ bool PnlWdbeFstDetail::evalTxfCmtActive(
 
 	return(args.back());
 };
-
-
-

@@ -38,6 +38,3 @@ bool CrdWdbeCpr::evalMitCrdNewAvail(
 
 	return(args.back());
 };
-
-
-

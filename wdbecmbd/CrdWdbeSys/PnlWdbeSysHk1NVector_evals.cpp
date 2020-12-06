@@ -137,6 +137,3 @@ bool PnlWdbeSysHk1NVector::evalButDeleteActive(
 
 	return(args.back());
 };
-
-
-

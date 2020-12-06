@@ -143,23 +143,23 @@ void DlgWdbeCvrWrite::refresh(
 	muteRefresh = true;
 
 	StatShr oldStatshr(statshr);
-	ContIac oldContiac(contiac);
 	ContInf oldContinf(continf);
+	ContIac oldContiac(contiac);
 
 	// IP refresh --- BEGIN
 	// statshr
 	statshr.ButDneActive = evalButDneActive(dbswdbe);
 
-	// contiac
-	contiac.numFDse = ixVDit;
-
 	// continf
 	continf.numFSge = ixVSge;
 
+	// contiac
+	contiac.numFDse = ixVDit;
+
 	// IP refresh --- END
 	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
-	if (contiac.diff(&oldContiac).size() != 0) insert(moditems, DpchEngData::CONTIAC);
 	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
+	if (contiac.diff(&oldContiac).size() != 0) insert(moditems, DpchEngData::CONTIAC);
 
 	refreshCuc(dbswdbe, moditems);
 	refreshWrc(dbswdbe, moditems);
@@ -244,10 +244,10 @@ void DlgWdbeCvrWrite::handleRequest(
 		};
 
 	} else if (req->ixVBasetype == ReqWdbe::VecVBasetype::TIMER) {
-		if (ixVSge == VecVSge::UPKIDLE) handleTimerInSgeUpkidle(dbswdbe, req->sref);
-		else if (ixVSge == VecVSge::CREIDLE) handleTimerInSgeCreidle(dbswdbe, req->sref);
+		if ((req->sref == "mon") && (ixVSge == VecVSge::WRITE)) handleTimerWithSrefMonInSgeWrite(dbswdbe);
 		else if ((req->sref == "mon") && (ixVSge == VecVSge::CREATE)) handleTimerWithSrefMonInSgeCreate(dbswdbe);
-		else if ((req->sref == "mon") && (ixVSge == VecVSge::WRITE)) handleTimerWithSrefMonInSgeWrite(dbswdbe);
+		else if (ixVSge == VecVSge::CREIDLE) handleTimerInSgeCreidle(dbswdbe, req->sref);
+		else if (ixVSge == VecVSge::UPKIDLE) handleTimerInSgeUpkidle(dbswdbe, req->sref);
 	};
 };
 
@@ -324,18 +324,11 @@ string DlgWdbeCvrWrite::handleDownloadInSgeDone(
 	return(""); // IP handleDownloadInSgeDone --- LINE
 };
 
-void DlgWdbeCvrWrite::handleTimerInSgeUpkidle(
+void DlgWdbeCvrWrite::handleTimerWithSrefMonInSgeWrite(
 			DbsWdbe* dbswdbe
-			, const string& sref
 		) {
-	changeStage(dbswdbe, nextIxVSgeSuccess);
-};
-
-void DlgWdbeCvrWrite::handleTimerInSgeCreidle(
-			DbsWdbe* dbswdbe
-			, const string& sref
-		) {
-	changeStage(dbswdbe, nextIxVSgeSuccess);
+	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
+	// IP handleTimerWithSrefMonInSgeWrite --- INSERT
 };
 
 void DlgWdbeCvrWrite::handleTimerWithSrefMonInSgeCreate(
@@ -345,11 +338,18 @@ void DlgWdbeCvrWrite::handleTimerWithSrefMonInSgeCreate(
 	// IP handleTimerWithSrefMonInSgeCreate --- INSERT
 };
 
-void DlgWdbeCvrWrite::handleTimerWithSrefMonInSgeWrite(
+void DlgWdbeCvrWrite::handleTimerInSgeCreidle(
 			DbsWdbe* dbswdbe
+			, const string& sref
 		) {
-	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
-	// IP handleTimerWithSrefMonInSgeWrite --- INSERT
+	changeStage(dbswdbe, nextIxVSgeSuccess);
+};
+
+void DlgWdbeCvrWrite::handleTimerInSgeUpkidle(
+			DbsWdbe* dbswdbe
+			, const string& sref
+		) {
+	changeStage(dbswdbe, nextIxVSgeSuccess);
 };
 
 void DlgWdbeCvrWrite::changeStage(
@@ -637,6 +637,3 @@ void DlgWdbeCvrWrite::leaveSgeDone(
 		) {
 	// IP leaveSgeDone --- INSERT
 };
-
-
-

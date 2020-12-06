@@ -845,4 +845,3 @@ ubigint PgTblWdbeMSession::loadRstByUsr(
 };
 
 #endif
-

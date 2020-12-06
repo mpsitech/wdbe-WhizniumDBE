@@ -77,4 +77,3 @@ public class WdbeQPrtList {
 		return false;
 	};
 };
-

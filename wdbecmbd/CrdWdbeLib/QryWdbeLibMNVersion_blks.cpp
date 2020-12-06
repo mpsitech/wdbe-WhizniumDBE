@@ -185,6 +185,3 @@ set<uint> QryWdbeLibMNVersion::StgIac::diff(
 
 	return(diffitems);
 };
-
-
-

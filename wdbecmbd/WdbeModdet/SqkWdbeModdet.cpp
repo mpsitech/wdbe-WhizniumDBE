@@ -72,6 +72,3 @@ string SqkWdbeModdet::getSquawkWiring(
 	// example: "add hierarchical wiring for module 'icm2 (top_v1_0 top module)'"
 	return("add hierarchical wiring for module '" + StubWdbe::getStubMdlStd(dbswdbe, dpchinv->refWdbeMModule) + "'"); // IP getSquawkWiring --- RLINE
 };
-
-
-

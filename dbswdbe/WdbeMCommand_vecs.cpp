@@ -111,4 +111,3 @@ void TblWdbeMCommand::VecVRettype::fillFeed(
 
 	for (unsigned int i = 1; i <= 5; i++) feed.appendIxSrefTitles(i, getSref(i), getTitle(i, ixWdbeVLocale));
 };
-

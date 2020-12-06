@@ -21,6 +21,3 @@ namespace WdbeMtpModbscbuSpbram_v1_0 {
 };
 
 #endif
-
-
-

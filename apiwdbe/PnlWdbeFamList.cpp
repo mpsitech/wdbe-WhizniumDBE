@@ -557,4 +557,3 @@ void PnlWdbeFamList::DpchEngData::readXML(
 		stgiacqry = QryWdbeFamList::StgIac();
 	};
 };
-

@@ -547,6 +547,3 @@ void PnlWdbeCvrDetail::DpchEngData::writeXML(
 		if (has(TAG)) Tag::writeXML(ixWdbeVLocale, wr);
 	xmlTextWriterEndElement(wr);
 };
-
-
-

@@ -545,4 +545,3 @@ void PnlWdbeLibAMakefile::DpchEngData::readXML(
 		stgiacqry = QryWdbeLibAMakefile::StgIac();
 	};
 };
-

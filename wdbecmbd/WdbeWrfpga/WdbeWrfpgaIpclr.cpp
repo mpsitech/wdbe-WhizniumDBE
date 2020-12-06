@@ -98,6 +98,3 @@ void WdbeWrfpgaIpclr::writeMdlVhd(
 	outfile << "\t-- IP impl.oth.tplspec --- IEND" << endl;
 };
 // IP cust --- IEND
-
-
-

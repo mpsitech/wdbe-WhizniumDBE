@@ -41,4 +41,3 @@ public class WdbeQCvrBcv1NCoreversion {
 		return false;
 	};
 };
-

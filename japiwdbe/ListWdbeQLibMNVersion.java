@@ -59,4 +59,3 @@ public class ListWdbeQLibMNVersion {
 		return false;
 	};
 };
-

@@ -417,10 +417,10 @@ void PnlWdbeVarDetail::handleCall(
 		) {
 	if (call->ixVCall == VecWdbeVCall::CALLWDBEVARMOD_CLUEQ) {
 		call->abort = handleCallWdbeVarMod_cluEq(dbswdbe, call->jref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEKLSAKEYMOD_KLSMTBURFEQ) {
-		call->abort = handleCallWdbeKlsAkeyMod_klsMtbUrfEq(dbswdbe, call->jref, call->argInv.ix, call->argInv.ref, call->argInv.sref);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEVARUPD_REFEQ) {
 		call->abort = handleCallWdbeVarUpd_refEq(dbswdbe, call->jref);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEKLSAKEYMOD_KLSMTBURFEQ) {
+		call->abort = handleCallWdbeKlsAkeyMod_klsMtbUrfEq(dbswdbe, call->jref, call->argInv.ix, call->argInv.ref, call->argInv.sref);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEVAR_CLUEQ) {
 		call->abort = handleCallWdbeVar_cluEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
 	};
@@ -439,6 +439,15 @@ bool PnlWdbeVarDetail::handleCallWdbeVarMod_cluEq(
 	return retval;
 };
 
+bool PnlWdbeVarDetail::handleCallWdbeVarUpd_refEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+	// IP handleCallWdbeVarUpd_refEq --- INSERT
+	return retval;
+};
+
 bool PnlWdbeVarDetail::handleCallWdbeKlsAkeyMod_klsMtbUrfEq(
 			DbsWdbe* dbswdbe
 			, const ubigint jrefTrig
@@ -448,15 +457,6 @@ bool PnlWdbeVarDetail::handleCallWdbeKlsAkeyMod_klsMtbUrfEq(
 		) {
 	bool retval = false;
 	// IP handleCallWdbeKlsAkeyMod_klsMtbUrfEq --- INSERT
-	return retval;
-};
-
-bool PnlWdbeVarDetail::handleCallWdbeVarUpd_refEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-	// IP handleCallWdbeVarUpd_refEq --- INSERT
 	return retval;
 };
 
@@ -470,6 +470,3 @@ bool PnlWdbeVarDetail::handleCallWdbeVar_cluEq(
 	boolvalRet = (recVar.refWdbeCVariable == refInv); // IP handleCallWdbeVar_cluEq --- LINE
 	return retval;
 };
-
-
-

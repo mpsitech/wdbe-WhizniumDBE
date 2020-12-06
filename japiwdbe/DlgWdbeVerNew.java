@@ -716,4 +716,3 @@ public class DlgWdbeVerNew {
 	};
 
 };
-

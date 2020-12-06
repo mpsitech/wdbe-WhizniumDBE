@@ -58,4 +58,3 @@ public class DpchAppWdbe extends DpchWdbe {
 		if (has(SCRJREF)) Xmlio.writeString(doc, el, "scrJref", scrJref);
 	};
 };
-

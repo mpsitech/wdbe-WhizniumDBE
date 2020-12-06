@@ -553,4 +553,3 @@ void PnlWdbePrsMNCoreproject::DpchEngData::readXML(
 		stgiacqry = QryWdbePrsMNCoreproject::StgIac();
 	};
 };
-

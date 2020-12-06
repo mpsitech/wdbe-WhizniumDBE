@@ -595,4 +595,3 @@ public class PnlWdbeUsgDetail {
 	};
 
 };
-

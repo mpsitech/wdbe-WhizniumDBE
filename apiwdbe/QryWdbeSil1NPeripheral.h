@@ -98,4 +98,3 @@ namespace QryWdbeSil1NPeripheral {
 };
 
 #endif
-

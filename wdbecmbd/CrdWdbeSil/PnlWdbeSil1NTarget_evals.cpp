@@ -50,6 +50,3 @@ bool PnlWdbeSil1NTarget::evalButViewActive(
 
 	return(args.back());
 };
-
-
-

@@ -117,4 +117,3 @@ bool ListWdbeQSysList::readXML(
 
 	return basefound;
 };
-

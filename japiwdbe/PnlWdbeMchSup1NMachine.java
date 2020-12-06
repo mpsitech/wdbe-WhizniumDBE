@@ -645,4 +645,3 @@ public class PnlWdbeMchSup1NMachine {
 	};
 
 };
-

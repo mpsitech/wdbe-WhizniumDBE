@@ -549,4 +549,3 @@ void PnlWdbePrcPrc1NVariable::DpchEngData::readXML(
 		stgiacqry = QryWdbePrcPrc1NVariable::StgIac();
 	};
 };
-

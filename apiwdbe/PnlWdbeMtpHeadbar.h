@@ -93,4 +93,3 @@ namespace PnlWdbeMtpHeadbar {
 };
 
 #endif
-

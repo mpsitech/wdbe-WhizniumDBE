@@ -185,6 +185,3 @@ set<uint> QryWdbeErrAPar::StgIac::diff(
 
 	return(diffitems);
 };
-
-
-

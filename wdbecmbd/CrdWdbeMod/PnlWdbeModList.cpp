@@ -404,6 +404,3 @@ bool PnlWdbeModList::handleCallWdbeStatChg(
 	// IP handleCallWdbeStatChg --- END
 	return retval;
 };
-
-
-

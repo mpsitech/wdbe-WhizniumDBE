@@ -39,7 +39,7 @@
 		<Si sref="monpath">${WHIZROOT}/mon/wdbe</Si>
 		<Si sref="tmppath">${WHIZROOT}/tmp/wdbe</Si>
 		<Si sref="webpath">${WHIZROOT}/web/appwdbe</Si>
-		<Si sref="helpurl">http://www.mpsitech.com/wdbe</Si>
+		<Si sref="helpurl">/wdbe</Si>
 	</StgWdbePath>
 	<StgWdbeTenant>
 		<Si sref="orgname"></Si>

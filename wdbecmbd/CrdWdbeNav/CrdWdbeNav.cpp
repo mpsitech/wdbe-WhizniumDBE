@@ -50,8 +50,8 @@ CrdWdbeNav::CrdWdbeNav(
 	pnladmin = NULL;
 	pnlpre = NULL;
 	pnlheadbar = NULL;
-	dlgloaini = NULL;
 	dlgmnglic = NULL;
+	dlgloaini = NULL;
 
 	// IP constructor.cust1 --- INSERT
 
@@ -807,6 +807,3 @@ void CrdWdbeNav::leaveSgeAlrwdbeabt(
 		) {
 	// IP leaveSgeAlrwdbeabt --- INSERT
 };
-
-
-

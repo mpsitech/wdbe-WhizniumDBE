@@ -130,6 +130,3 @@ void DpchInvWdbePrcfilePlhrpl::writeXML(
 };
 
 // IP cust --- INSERT
-
-
-

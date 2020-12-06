@@ -433,7 +433,7 @@ public:
 	static const Sbecore::uint HELPURL = 6;
 
 public:
-	StgWdbePath(const std::string& acvpath = "${WHIZROOT}/acv/wdbe", const std::string& keypath = "", const std::string& monpath = "${WHIZROOT}/mon/wdbe", const std::string& tmppath = "${WHIZROOT}/tmp/wdbe", const std::string& webpath = "${WHIZROOT}/web/appwdbe", const std::string& helpurl = "http://www.mpsitech.com/wdbe");
+	StgWdbePath(const std::string& acvpath = "${WHIZROOT}/acv/wdbe", const std::string& keypath = "", const std::string& monpath = "${WHIZROOT}/mon/wdbe", const std::string& tmppath = "${WHIZROOT}/tmp/wdbe", const std::string& webpath = "${WHIZROOT}/web/appwdbe", const std::string& helpurl = "/wdbe");
 
 public:
 	std::string acvpath;
@@ -1142,7 +1142,3 @@ public:
 	void setNodeState(NodeWdbe* node, const Sbecore::uint ixVState);
 };
 #endif
-
-
-
-

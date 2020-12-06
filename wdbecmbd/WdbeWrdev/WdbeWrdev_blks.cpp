@@ -284,6 +284,3 @@ void DpchInvWdbeWrdevUnt::writeXML(
 };
 
 // IP cust --- INSERT
-
-
-

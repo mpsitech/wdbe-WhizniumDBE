@@ -608,4 +608,3 @@ void PnlWdbeVarList::DpchEngData::readXML(
 		stgiacqry = QryWdbeVarList::StgIac();
 	};
 };
-

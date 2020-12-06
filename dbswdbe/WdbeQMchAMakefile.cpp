@@ -837,4 +837,3 @@ ubigint PgTblWdbeQMchAMakefile::loadRstByJref(
 	return loadRstByStmt("TblWdbeQMchAMakefile_loadRstByJref", 1, vals, l, f, append, rst);
 };
 #endif
-

@@ -22,8 +22,8 @@ uint QryWdbePinList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "bnk") return BNK;
 	if (s == "srf") return SRF;
+	if (s == "bnk") return BNK;
 
 	return(0);
 };
@@ -31,8 +31,8 @@ uint QryWdbePinList::VecVOrd::getIx(
 string QryWdbePinList::VecVOrd::getSref(
 			const uint ix
 		) {
-	if (ix == BNK) return("bnk");
 	if (ix == SRF) return("srf");
+	if (ix == BNK) return("bnk");
 
 	return("");
 };
@@ -265,4 +265,3 @@ set<uint> QryWdbePinList::StgIac::diff(
 
 	return(diffitems);
 };
-

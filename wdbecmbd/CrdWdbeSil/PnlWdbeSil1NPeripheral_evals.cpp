@@ -97,6 +97,3 @@ bool PnlWdbeSil1NPeripheral::evalButDeleteActive(
 
 	return(args.back());
 };
-
-
-

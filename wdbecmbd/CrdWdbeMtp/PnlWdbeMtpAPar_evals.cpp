@@ -150,6 +150,3 @@ bool PnlWdbeMtpAPar::evalButDeleteActive(
 
 	return(args.back());
 };
-
-
-

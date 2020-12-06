@@ -41,4 +41,3 @@ public class WdbeQModSup1NModule {
 		return false;
 	};
 };
-

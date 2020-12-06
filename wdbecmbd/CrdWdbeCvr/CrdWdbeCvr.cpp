@@ -48,10 +48,10 @@ CrdWdbeCvr::CrdWdbeCvr(
 	pnllist = NULL;
 	pnlheadbar = NULL;
 	pnlrec = NULL;
-	dlgwrite = NULL;
-	dlgdetcd = NULL;
 	dlgnew = NULL;
+	dlgdetcd = NULL;
 	dlgbsccd = NULL;
+	dlgwrite = NULL;
 
 	// IP constructor.cust1 --- INSERT
 
@@ -473,6 +473,3 @@ void CrdWdbeCvr::leaveSgeAlrwdbeabt(
 		) {
 	// IP leaveSgeAlrwdbeabt --- INSERT
 };
-
-
-

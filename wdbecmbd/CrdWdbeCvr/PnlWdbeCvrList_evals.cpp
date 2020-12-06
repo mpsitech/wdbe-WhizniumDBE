@@ -24,6 +24,3 @@ bool PnlWdbeCvrList::evalButDeleteActive(
 
 	return(args.back());
 };
-
-
-

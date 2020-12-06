@@ -59,4 +59,3 @@ public class ListWdbeQModCor1NImbuf {
 		return false;
 	};
 };
-

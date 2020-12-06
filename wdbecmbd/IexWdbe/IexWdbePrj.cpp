@@ -1732,6 +1732,3 @@ uint IexWdbePrj::getIxWdbeVIop(
 
 	return ixWdbeVIop;
 };
-
-
-

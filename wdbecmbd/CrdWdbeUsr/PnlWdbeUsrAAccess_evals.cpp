@@ -80,6 +80,3 @@ bool PnlWdbeUsrAAccess::evalButDeleteActive(
 
 	return(args.back());
 };
-
-
-

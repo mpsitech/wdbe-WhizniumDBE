@@ -30,20 +30,6 @@ bool DlgWdbePrjImpex::evalButDneActive(
 	return(args.back());
 };
 
-bool DlgWdbePrjImpex::evalLfiDldActive(
-			DbsWdbe* dbswdbe
-		) {
-	// sge(done)
-
-	vector<bool> args;
-	bool a;
-
-	a = false; a = (ixVSge == VecVSge::DONE);
-	args.push_back(a);
-
-	return(args.back());
-};
-
 bool DlgWdbePrjImpex::evalImpButAutActive(
 			DbsWdbe* dbswdbe
 		) {
@@ -91,6 +77,20 @@ bool DlgWdbePrjImpex::evalImpButStoActive(
 	return(args.back());
 };
 
+bool DlgWdbePrjImpex::evalLfiDldActive(
+			DbsWdbe* dbswdbe
+		) {
+	// sge(done)
+
+	vector<bool> args;
+	bool a;
+
+	a = false; a = (ixVSge == VecVSge::DONE);
+	args.push_back(a);
+
+	return(args.back());
+};
+
 bool DlgWdbePrjImpex::evalIfiUldActive(
 			DbsWdbe* dbswdbe
 		) {
@@ -104,6 +104,3 @@ bool DlgWdbePrjImpex::evalIfiUldActive(
 
 	return(args.back());
 };
-
-
-

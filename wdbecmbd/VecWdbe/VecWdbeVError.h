@@ -53,6 +53,3 @@ namespace VecWdbeVError {
 };
 
 #endif
-
-
-

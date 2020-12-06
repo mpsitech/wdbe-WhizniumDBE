@@ -241,4 +241,3 @@ set<uint> QryWdbeUntSil1NUnit::StgIac::diff(
 
 	return(diffitems);
 };
-

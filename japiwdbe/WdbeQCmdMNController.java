@@ -49,4 +49,3 @@ public class WdbeQCmdMNController {
 		return false;
 	};
 };
-

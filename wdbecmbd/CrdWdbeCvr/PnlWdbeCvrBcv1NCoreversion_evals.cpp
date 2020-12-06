@@ -55,6 +55,3 @@ bool PnlWdbeCvrBcv1NCoreversion::evalButViewActive(
 
 	return(args.back());
 };
-
-
-

@@ -92,6 +92,3 @@ bool PnlWdbeModCtrMNCommand::evalButSubActive(
 
 	return(args.back());
 };
-
-
-

@@ -1548,6 +1548,3 @@ string VecWdbeVDpch::getSref(
 
 	return("");
 };
-
-
-

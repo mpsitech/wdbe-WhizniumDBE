@@ -739,4 +739,3 @@ public class PnlWdbeCmdDetail {
 	};
 
 };
-

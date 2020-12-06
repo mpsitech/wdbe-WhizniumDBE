@@ -59,4 +59,3 @@ public class ListWdbeQCmdMNController {
 		return false;
 	};
 };
-

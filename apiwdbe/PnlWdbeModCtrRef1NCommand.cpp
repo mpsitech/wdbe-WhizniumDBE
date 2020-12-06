@@ -549,4 +549,3 @@ void PnlWdbeModCtrRef1NCommand::DpchEngData::readXML(
 		stgiacqry = QryWdbeModCtrRef1NCommand::StgIac();
 	};
 };
-

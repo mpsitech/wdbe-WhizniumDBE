@@ -586,4 +586,3 @@ void DlgWdbeNavMnglic::DpchEngData::readXML(
 		tag = Tag();
 	};
 };
-

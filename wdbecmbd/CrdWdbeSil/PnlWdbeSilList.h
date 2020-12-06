@@ -312,6 +312,3 @@ private:
 };
 
 #endif
-
-
-

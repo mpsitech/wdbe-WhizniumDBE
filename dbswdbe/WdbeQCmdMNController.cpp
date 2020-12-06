@@ -859,4 +859,3 @@ ubigint PgTblWdbeQCmdMNController::loadRstByJref(
 	return loadRstByStmt("TblWdbeQCmdMNController_loadRstByJref", 1, vals, l, f, append, rst);
 };
 #endif
-

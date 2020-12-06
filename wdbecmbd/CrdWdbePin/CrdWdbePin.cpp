@@ -74,8 +74,8 @@ CrdWdbePin::CrdWdbePin(
 	changeStage(dbswdbe, VecVSge::IDLE);
 
 	xchg->addClstn(VecWdbeVCall::CALLWDBEREFPRESET, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecWdbeVCall::CALLWDBEDLGCLOSE, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBESTATCHG, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBEDLGCLOSE, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -242,10 +242,10 @@ void CrdWdbePin::handleCall(
 		) {
 	if (call->ixVCall == VecWdbeVCall::CALLWDBEREFPRESET) {
 		call->abort = handleCallWdbeRefPreSet(dbswdbe, call->jref, call->argInv.ix, call->argInv.ref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEDLGCLOSE) {
-		call->abort = handleCallWdbeDlgClose(dbswdbe, call->jref);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBESTATCHG) {
 		call->abort = handleCallWdbeStatChg(dbswdbe, call->jref);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEDLGCLOSE) {
+		call->abort = handleCallWdbeDlgClose(dbswdbe, call->jref);
 	};
 };
 
@@ -266,21 +266,21 @@ bool CrdWdbePin::handleCallWdbeRefPreSet(
 	return retval;
 };
 
-bool CrdWdbePin::handleCallWdbeDlgClose(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-	// IP handleCallWdbeDlgClose --- INSERT
-	return retval;
-};
-
 bool CrdWdbePin::handleCallWdbeStatChg(
 			DbsWdbe* dbswdbe
 			, const ubigint jrefTrig
 		) {
 	bool retval = false;
 	if (jrefTrig == pnlrec->jref) if ((pnllist->statshr.ixWdbeVExpstate == VecWdbeVExpstate::REGD) && (pnlrec->statshr.ixWdbeVExpstate == VecWdbeVExpstate::REGD)) pnllist->minimize(dbswdbe, true);
+	return retval;
+};
+
+bool CrdWdbePin::handleCallWdbeDlgClose(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+	// IP handleCallWdbeDlgClose --- INSERT
 	return retval;
 };
 
@@ -356,6 +356,3 @@ void CrdWdbePin::leaveSgeAlrwdbeabt(
 		) {
 	// IP leaveSgeAlrwdbeabt --- INSERT
 };
-
-
-

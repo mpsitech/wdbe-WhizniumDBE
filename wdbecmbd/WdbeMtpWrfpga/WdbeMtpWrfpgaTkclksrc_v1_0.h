@@ -24,6 +24,3 @@ namespace WdbeMtpWrfpgaTkclksrc_v1_0 {
 };
 
 #endif
-
-
-

@@ -826,6 +826,3 @@ string VecWdbeVJob::getSref(
 
 	return("");
 };
-
-
-

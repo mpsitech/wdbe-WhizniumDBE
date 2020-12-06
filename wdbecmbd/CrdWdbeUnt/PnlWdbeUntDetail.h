@@ -386,6 +386,3 @@ private:
 };
 
 #endif
-
-
-

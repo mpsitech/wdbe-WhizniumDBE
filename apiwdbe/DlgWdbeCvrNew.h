@@ -270,4 +270,3 @@ namespace DlgWdbeCvrNew {
 };
 
 #endif
-

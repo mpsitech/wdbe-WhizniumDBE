@@ -1186,4 +1186,3 @@ public class PnlWdbeNavDescr {
 	};
 
 };
-

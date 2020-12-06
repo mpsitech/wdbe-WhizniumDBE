@@ -158,6 +158,3 @@ void WdbeMtpWrfpgaCrcspec_v1_0::writeMdlVhd(
 	outfile << "-- IP crccalc --- IEND" << endl;
 };
 // IP cust --- IEND
-
-
-

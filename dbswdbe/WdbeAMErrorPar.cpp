@@ -899,4 +899,3 @@ ubigint PgTblWdbeAMErrorPar::loadRstByErr(
 };
 
 #endif
-

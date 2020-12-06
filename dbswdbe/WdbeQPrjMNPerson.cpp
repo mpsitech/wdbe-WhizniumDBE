@@ -889,4 +889,3 @@ ubigint PgTblWdbeQPrjMNPerson::loadRstByJref(
 	return loadRstByStmt("TblWdbeQPrjMNPerson_loadRstByJref", 1, vals, l, f, append, rst);
 };
 #endif
-

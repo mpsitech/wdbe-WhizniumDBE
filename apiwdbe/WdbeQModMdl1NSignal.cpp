@@ -111,4 +111,3 @@ bool ListWdbeQModMdl1NSignal::readXML(
 
 	return basefound;
 };
-

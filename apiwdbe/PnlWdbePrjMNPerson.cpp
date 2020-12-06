@@ -553,4 +553,3 @@ void PnlWdbePrjMNPerson::DpchEngData::readXML(
 		stgiacqry = QryWdbePrjMNPerson::StgIac();
 	};
 };
-

@@ -65,4 +65,3 @@ public class WdbeQPrjList {
 		return false;
 	};
 };
-

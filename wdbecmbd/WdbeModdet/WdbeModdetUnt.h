@@ -21,6 +21,3 @@ namespace WdbeModdetUnt {
 };
 
 #endif
-
-
-

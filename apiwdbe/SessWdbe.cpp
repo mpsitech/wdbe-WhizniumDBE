@@ -120,4 +120,3 @@ void SessWdbe::DpchEngData::readXML(
 		statshr = StatShr();
 	};
 };
-

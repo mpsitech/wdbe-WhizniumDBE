@@ -167,6 +167,3 @@ bool PnlWdbeSilRef1NCommand::evalButDeleteActive(
 
 	return(args.back());
 };
-
-
-

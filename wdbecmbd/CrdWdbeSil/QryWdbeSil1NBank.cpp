@@ -298,6 +298,3 @@ bool QryWdbeSil1NBank::handleCallWdbeStubChgFromSelf(
 	// IP handleCallWdbeStubChgFromSelf --- INSERT
 	return retval;
 };
-
-
-

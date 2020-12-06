@@ -454,6 +454,3 @@ void DpchInvWdbeWrfpgaMdlraw::writeXML(
 };
 
 // IP cust --- INSERT
-
-
-

@@ -538,6 +538,3 @@ string VecWdbeVCall::getSref(
 
 	return("");
 };
-
-
-

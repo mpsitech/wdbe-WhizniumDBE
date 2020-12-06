@@ -513,4 +513,3 @@ void PnlWdbePrcMge1NSignal::DpchEngData::readXML(
 		stgiacqry = QryWdbePrcMge1NSignal::StgIac();
 	};
 };
-

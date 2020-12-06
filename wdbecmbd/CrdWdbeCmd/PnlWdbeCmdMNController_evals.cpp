@@ -122,6 +122,3 @@ bool PnlWdbeCmdMNController::evalButSubActive(
 
 	return(args.back());
 };
-
-
-

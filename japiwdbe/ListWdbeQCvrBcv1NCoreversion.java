@@ -59,4 +59,3 @@ public class ListWdbeQCvrBcv1NCoreversion {
 		return false;
 	};
 };
-

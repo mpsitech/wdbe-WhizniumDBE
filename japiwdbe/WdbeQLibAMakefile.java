@@ -53,4 +53,3 @@ public class WdbeQLibAMakefile {
 		return false;
 	};
 };
-

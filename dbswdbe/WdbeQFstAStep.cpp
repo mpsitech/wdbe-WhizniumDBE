@@ -993,4 +993,3 @@ ubigint PgTblWdbeQFstAStep::loadRstByJref(
 	return loadRstByStmt("TblWdbeQFstAStep_loadRstByJref", 1, vals, l, f, append, rst);
 };
 #endif
-

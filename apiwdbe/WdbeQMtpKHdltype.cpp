@@ -126,4 +126,3 @@ bool ListWdbeQMtpKHdltype::readXML(
 
 	return basefound;
 };
-

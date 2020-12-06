@@ -24,6 +24,3 @@ bool PnlWdbeVecList::evalButDeleteActive(
 
 	return(args.back());
 };
-
-
-

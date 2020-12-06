@@ -298,6 +298,3 @@ private:
 };
 
 #endif
-
-
-

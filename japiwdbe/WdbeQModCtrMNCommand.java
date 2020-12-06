@@ -49,4 +49,3 @@ public class WdbeQModCtrMNCommand {
 		return false;
 	};
 };
-

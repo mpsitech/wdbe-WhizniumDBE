@@ -369,4 +369,3 @@ function handleDpchAppDataDoReply() {
 		};
 	};
 };
-

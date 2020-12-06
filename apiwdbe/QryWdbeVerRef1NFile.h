@@ -98,4 +98,3 @@ namespace QryWdbeVerRef1NFile {
 };
 
 #endif
-

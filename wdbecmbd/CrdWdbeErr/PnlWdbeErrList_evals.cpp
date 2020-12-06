@@ -24,6 +24,3 @@ bool PnlWdbeErrList::evalButDeleteActive(
 
 	return(args.back());
 };
-
-
-

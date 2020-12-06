@@ -111,4 +111,3 @@ bool ListWdbeQCvrBcv1NCoreversion::readXML(
 
 	return basefound;
 };
-

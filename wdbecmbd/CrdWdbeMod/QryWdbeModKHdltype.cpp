@@ -318,6 +318,3 @@ bool QryWdbeModKHdltype::handleCallWdbeStubChgFromSelf(
 	// IP handleCallWdbeStubChgFromSelf --- INSERT
 	return retval;
 };
-
-
-

@@ -112,6 +112,3 @@ bool PnlWdbeVer1NUnit::evalButDeleteActive(
 
 	return(args.back());
 };
-
-
-

@@ -645,4 +645,3 @@ public class PnlWdbeMch1NRelease {
 	};
 
 };
-

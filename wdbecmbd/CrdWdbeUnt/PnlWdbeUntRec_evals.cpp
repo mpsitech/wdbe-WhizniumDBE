@@ -38,6 +38,3 @@ bool PnlWdbeUntRec::evalButRegularizeActive(
 
 	return(args.back());
 };
-
-
-

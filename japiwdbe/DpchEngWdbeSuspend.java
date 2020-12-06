@@ -15,4 +15,3 @@ public class DpchEngWdbeSuspend extends DpchEngWdbe {
 		super(VecWdbeVDpch.DPCHENGWDBESUSPEND);
 	};
 };
-

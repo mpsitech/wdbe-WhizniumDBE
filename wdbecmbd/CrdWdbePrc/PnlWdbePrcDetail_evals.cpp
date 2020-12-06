@@ -268,6 +268,3 @@ bool PnlWdbePrcDetail::evalButFsmDeleteAvail(
 
 	return(args.back());
 };
-
-
-

@@ -1272,6 +1272,3 @@ void DlgWdbeRlsStareptr::leaveSgeDone(
 		) {
 	// IP leaveSgeDone --- INSERT
 };
-
-
-

@@ -59,4 +59,3 @@ public class ListWdbeQMtpMdl1NPort {
 		return false;
 	};
 };
-

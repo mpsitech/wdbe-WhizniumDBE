@@ -59,4 +59,3 @@ public class ListWdbeQBnk1NPin {
 		return false;
 	};
 };
-

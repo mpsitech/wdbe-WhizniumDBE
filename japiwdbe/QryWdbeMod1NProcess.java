@@ -272,4 +272,3 @@ public class QryWdbeMod1NProcess {
 	};
 
 };
-

@@ -829,4 +829,3 @@ ubigint PgTblWdbeAMPersonDetail::loadRstByPrs(
 };
 
 #endif
-

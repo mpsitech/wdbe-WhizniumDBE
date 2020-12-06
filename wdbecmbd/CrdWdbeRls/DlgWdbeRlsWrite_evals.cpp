@@ -199,6 +199,3 @@ bool DlgWdbeRlsWrite::evalCucUldActive(
 
 	return(args.back());
 };
-
-
-

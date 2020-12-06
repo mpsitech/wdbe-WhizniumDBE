@@ -300,6 +300,3 @@ private:
 };
 
 #endif
-
-
-

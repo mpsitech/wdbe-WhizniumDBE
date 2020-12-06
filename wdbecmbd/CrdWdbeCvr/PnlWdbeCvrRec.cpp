@@ -299,6 +299,3 @@ bool PnlWdbeCvrRec::handleCallWdbeCvr_bcvEq(
 	boolvalRet = (recCvr.bcvRefWdbeMCoreversion == refInv); // IP handleCallWdbeCvr_bcvEq --- LINE
 	return retval;
 };
-
-
-

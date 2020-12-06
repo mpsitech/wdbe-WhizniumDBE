@@ -580,4 +580,3 @@ function iterateReqit(ev) {
 		};
 	};
 };
-

@@ -173,6 +173,3 @@ set<uint> JobWdbeLicense::Stg::diff(
 
 	return(diffitems);
 };
-
-
-

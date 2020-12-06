@@ -655,6 +655,3 @@ namespace IexWdbeBdd {
 };
 
 #endif
-
-
-

@@ -667,4 +667,3 @@ public class DlgWdbeRlsNew {
 	};
 
 };
-

@@ -21,6 +21,3 @@ namespace WdbeModdetEctr {
 };
 
 #endif
-
-
-

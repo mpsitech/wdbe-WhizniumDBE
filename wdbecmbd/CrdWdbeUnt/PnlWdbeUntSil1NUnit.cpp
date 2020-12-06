@@ -294,6 +294,3 @@ bool PnlWdbeUntSil1NUnit::handleCallWdbeStatChg(
 	// IP handleCallWdbeStatChg --- END
 	return retval;
 };
-
-
-

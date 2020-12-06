@@ -56,6 +56,3 @@ string SqkWdbeWrdev::getSquawkUnt(
 	// example: "write C++ code for unit 'Axis2'"
 	return("write C++ code for unit '" + StubWdbe::getStubUntStd(dbswdbe, dpchinv->refWdbeMUnit) + "'"); // IP getSquawkUnt --- RLINE
 };
-
-
-

@@ -272,4 +272,3 @@ public class QryWdbeMtpTpl1NModule {
 	};
 
 };
-

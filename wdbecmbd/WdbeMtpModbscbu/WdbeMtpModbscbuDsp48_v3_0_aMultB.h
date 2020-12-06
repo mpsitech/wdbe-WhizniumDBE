@@ -21,6 +21,3 @@ namespace WdbeMtpModbscbuDsp48_v3_0_aMultB {
 };
 
 #endif
-
-
-

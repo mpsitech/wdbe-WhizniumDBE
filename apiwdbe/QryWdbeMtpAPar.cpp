@@ -241,4 +241,3 @@ set<uint> QryWdbeMtpAPar::StgIac::diff(
 
 	return(diffitems);
 };
-

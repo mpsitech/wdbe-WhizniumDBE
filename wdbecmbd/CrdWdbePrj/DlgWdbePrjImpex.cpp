@@ -760,6 +760,3 @@ void DlgWdbePrjImpex::leaveSgeDone(
 		) {
 	// IP leaveSgeDone --- INSERT
 };
-
-
-

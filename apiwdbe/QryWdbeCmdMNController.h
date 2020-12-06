@@ -98,4 +98,3 @@ namespace QryWdbeCmdMNController {
 };
 
 #endif
-

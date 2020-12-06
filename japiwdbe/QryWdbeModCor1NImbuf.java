@@ -272,4 +272,3 @@ public class QryWdbeModCor1NImbuf {
 	};
 
 };
-

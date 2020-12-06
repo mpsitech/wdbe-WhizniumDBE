@@ -740,4 +740,3 @@ public class PnlWdbePrcList {
 	};
 
 };
-

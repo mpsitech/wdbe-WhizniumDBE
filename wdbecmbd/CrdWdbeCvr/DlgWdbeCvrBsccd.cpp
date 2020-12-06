@@ -670,6 +670,3 @@ void DlgWdbeCvrBsccd::leaveSgeDone(
 		) {
 	// IP leaveSgeDone --- INSERT
 };
-
-
-

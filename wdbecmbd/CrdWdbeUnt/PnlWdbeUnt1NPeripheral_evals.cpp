@@ -97,6 +97,3 @@ bool PnlWdbeUnt1NPeripheral::evalButDeleteActive(
 
 	return(args.back());
 };
-
-
-

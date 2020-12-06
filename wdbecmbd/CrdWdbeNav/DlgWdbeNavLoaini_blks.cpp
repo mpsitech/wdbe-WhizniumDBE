@@ -1040,6 +1040,3 @@ void DlgWdbeNavLoaini::DpchEngData::writeXML(
 		if (has(TAGLFI)) TagLfi::writeXML(ixWdbeVLocale, wr);
 	xmlTextWriterEndElement(wr);
 };
-
-
-

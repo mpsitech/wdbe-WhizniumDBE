@@ -185,6 +185,3 @@ set<uint> QryWdbePrcPrc1NVariable::StgIac::diff(
 
 	return(diffitems);
 };
-
-
-

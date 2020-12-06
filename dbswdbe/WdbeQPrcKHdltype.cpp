@@ -953,4 +953,3 @@ ubigint PgTblWdbeQPrcKHdltype::loadRstByJref(
 	return loadRstByStmt("TblWdbeQPrcKHdltype_loadRstByJref", 1, vals, l, f, append, rst);
 };
 #endif
-

@@ -339,6 +339,3 @@ bool QryWdbeLibAMakefile::handleCallWdbeStubChgFromSelf(
 	// IP handleCallWdbeStubChgFromSelf --- INSERT
 	return retval;
 };
-
-
-

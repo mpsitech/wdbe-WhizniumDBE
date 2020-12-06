@@ -98,4 +98,3 @@ namespace QryWdbeModMdl1NPort {
 };
 
 #endif
-

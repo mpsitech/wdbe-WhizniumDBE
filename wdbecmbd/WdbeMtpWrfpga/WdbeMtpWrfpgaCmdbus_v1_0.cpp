@@ -123,6 +123,3 @@ void WdbeMtpWrfpgaCmdbus_v1_0::writeMdlVhd(
 	};
 };
 // IP cust --- IEND
-
-
-

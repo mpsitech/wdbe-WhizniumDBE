@@ -841,4 +841,3 @@ ubigint PgTblWdbeMImbuf::loadRefsByMdl(
 };
 
 #endif
-

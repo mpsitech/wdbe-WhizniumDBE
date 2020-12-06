@@ -21,6 +21,3 @@ namespace WdbeMtpModbscbuSpihostif_v1_0 {
 };
 
 #endif
-
-
-

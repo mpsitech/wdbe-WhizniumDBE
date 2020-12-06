@@ -41,4 +41,3 @@ public class WdbeQModCtrRef1NError {
 		return false;
 	};
 };
-

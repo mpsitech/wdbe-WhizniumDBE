@@ -87,6 +87,3 @@ bool PnlWdbePrsMNProject::evalButSubActive(
 
 	return(args.back());
 };
-
-
-

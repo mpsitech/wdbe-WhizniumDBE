@@ -545,4 +545,3 @@ void PnlWdbeCmdMNController::DpchEngData::readXML(
 		stgiacqry = QryWdbeCmdMNController::StgIac();
 	};
 };
-

@@ -529,4 +529,3 @@ void PnlWdbeMod1NProcess::DpchEngData::readXML(
 		stgiacqry = QryWdbeMod1NProcess::StgIac();
 	};
 };
-

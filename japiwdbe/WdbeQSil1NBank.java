@@ -41,4 +41,3 @@ public class WdbeQSil1NBank {
 		return false;
 	};
 };
-

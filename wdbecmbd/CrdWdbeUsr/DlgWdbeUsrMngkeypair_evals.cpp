@@ -52,6 +52,3 @@ bool DlgWdbeUsrMngkeypair::evalDetDldActive(
 
 	return(args.back());
 };
-
-
-

@@ -21,6 +21,3 @@ namespace WdbePrctreeValidate {
 };
 
 #endif
-
-
-

@@ -241,4 +241,3 @@ set<uint> QryWdbePrcMge1NSignal::StgIac::diff(
 
 	return(diffitems);
 };
-

@@ -185,6 +185,3 @@ void VecWdbeVTag::appendToFeed(
 		) {
 	feed.appendIxSrefTitles(ix, getSref(ix), getTitle(ix, ixWdbeVLocale));
 };
-
-
-

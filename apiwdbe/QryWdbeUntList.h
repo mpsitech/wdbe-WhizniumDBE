@@ -30,9 +30,9 @@ namespace QryWdbeUntList {
 	public:
 		static const Sbecore::uint MDL = 1;
 		static const Sbecore::uint SYS = 2;
-		static const Sbecore::uint REU = 3;
+		static const Sbecore::uint TYP = 3;
 		static const Sbecore::uint RET = 4;
-		static const Sbecore::uint TYP = 5;
+		static const Sbecore::uint REU = 5;
 		static const Sbecore::uint TIT = 6;
 		static const Sbecore::uint SRF = 7;
 
@@ -118,4 +118,3 @@ namespace QryWdbeUntList {
 };
 
 #endif
-

@@ -819,4 +819,3 @@ ubigint PgTblWdbeRMLibraryMVersion::loadVersByLib(
 };
 
 #endif
-

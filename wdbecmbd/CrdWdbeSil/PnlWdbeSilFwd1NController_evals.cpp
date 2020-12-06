@@ -65,6 +65,3 @@ bool PnlWdbeSilFwd1NController::evalButViewActive(
 
 	return(args.back());
 };
-
-
-

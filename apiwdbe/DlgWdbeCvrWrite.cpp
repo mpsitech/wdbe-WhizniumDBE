@@ -1028,4 +1028,3 @@ void DlgWdbeCvrWrite::DpchEngData::readXML(
 		tagwrc = TagWrc();
 	};
 };
-

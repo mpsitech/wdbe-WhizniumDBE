@@ -98,4 +98,3 @@ namespace QryWdbeVerBvr1NVersion {
 };
 
 #endif
-

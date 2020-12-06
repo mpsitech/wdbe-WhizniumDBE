@@ -813,6 +813,3 @@ void DlgWdbeUtlMrgip::leaveSgeDone(
 		) {
 	// IP leaveSgeDone --- INSERT
 };
-
-
-

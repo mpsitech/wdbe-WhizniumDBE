@@ -23,10 +23,10 @@ uint QryWdbeCprList::VecVOrd::getIx(
 	string s = StrMod::lc(sref);
 
 	if (s == "cvr") return CVR;
-	if (s == "typ") return TYP;
 	if (s == "tit") return TIT;
-	if (s == "srf") return SRF;
+	if (s == "typ") return TYP;
 	if (s == "own") return OWN;
+	if (s == "srf") return SRF;
 	if (s == "grp") return GRP;
 
 	return(0);
@@ -36,10 +36,10 @@ string QryWdbeCprList::VecVOrd::getSref(
 			const uint ix
 		) {
 	if (ix == CVR) return("cvr");
-	if (ix == TYP) return("typ");
 	if (ix == TIT) return("tit");
-	if (ix == SRF) return("srf");
+	if (ix == TYP) return("typ");
 	if (ix == OWN) return("own");
+	if (ix == SRF) return("srf");
 	if (ix == GRP) return("grp");
 
 	return("");
@@ -273,4 +273,3 @@ set<uint> QryWdbeCprList::StgIac::diff(
 
 	return(diffitems);
 };
-

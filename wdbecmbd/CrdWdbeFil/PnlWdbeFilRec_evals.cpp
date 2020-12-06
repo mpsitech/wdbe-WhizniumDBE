@@ -24,6 +24,3 @@ bool PnlWdbeFilRec::evalButRegularizeActive(
 
 	return(args.back());
 };
-
-
-

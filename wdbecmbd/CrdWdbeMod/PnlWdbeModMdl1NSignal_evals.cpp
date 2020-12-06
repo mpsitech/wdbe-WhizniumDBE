@@ -167,6 +167,3 @@ bool PnlWdbeModMdl1NSignal::evalButDeleteActive(
 
 	return(args.back());
 };
-
-
-

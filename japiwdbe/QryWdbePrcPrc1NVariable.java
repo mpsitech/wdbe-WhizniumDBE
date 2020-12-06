@@ -272,4 +272,3 @@ public class QryWdbePrcPrc1NVariable {
 	};
 
 };
-

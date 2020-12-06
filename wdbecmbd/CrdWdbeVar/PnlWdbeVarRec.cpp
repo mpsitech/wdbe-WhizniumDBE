@@ -265,6 +265,3 @@ bool PnlWdbeVarRec::handleCallWdbeVar_cluEq(
 	boolvalRet = (recVar.refWdbeCVariable == refInv); // IP handleCallWdbeVar_cluEq --- LINE
 	return retval;
 };
-
-
-

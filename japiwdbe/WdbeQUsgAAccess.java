@@ -57,4 +57,3 @@ public class WdbeQUsgAAccess {
 		return false;
 	};
 };
-

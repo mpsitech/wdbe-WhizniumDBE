@@ -805,4 +805,3 @@ public class PnlWdbeCvrList {
 	};
 
 };
-

@@ -629,4 +629,3 @@ void PnlWdbeSilList::DpchEngData::readXML(
 		stgiacqry = QryWdbeSilList::StgIac();
 	};
 };
-

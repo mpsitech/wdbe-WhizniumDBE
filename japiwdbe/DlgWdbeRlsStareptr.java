@@ -1761,4 +1761,3 @@ public class DlgWdbeRlsStareptr {
 	};
 
 };
-

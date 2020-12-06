@@ -24,8 +24,8 @@ uint QryWdbePrjList::VecVOrd::getIx(
 
 	if (s == "ver") return VER;
 	if (s == "tit") return TIT;
-	if (s == "own") return OWN;
 	if (s == "sho") return SHO;
+	if (s == "own") return OWN;
 	if (s == "grp") return GRP;
 
 	return(0);
@@ -36,8 +36,8 @@ string QryWdbePrjList::VecVOrd::getSref(
 		) {
 	if (ix == VER) return("ver");
 	if (ix == TIT) return("tit");
-	if (ix == OWN) return("own");
 	if (ix == SHO) return("sho");
+	if (ix == OWN) return("own");
 	if (ix == GRP) return("grp");
 
 	return("");
@@ -271,4 +271,3 @@ set<uint> QryWdbePrjList::StgIac::diff(
 
 	return(diffitems);
 };
-

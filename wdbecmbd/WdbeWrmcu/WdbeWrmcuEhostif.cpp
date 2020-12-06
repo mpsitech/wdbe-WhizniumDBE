@@ -540,6 +540,3 @@ void WdbeWrmcuEhostif::writeMdlC(
 	outfile << "// IP op.inv --- IEND" << endl;
 };
 // IP cust --- IEND
-
-
-

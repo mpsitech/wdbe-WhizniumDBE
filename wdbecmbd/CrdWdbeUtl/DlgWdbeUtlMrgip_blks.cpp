@@ -1191,6 +1191,3 @@ void DlgWdbeUtlMrgip::DpchEngData::writeXML(
 		if (has(TAGTRG)) TagTrg::writeXML(ixWdbeVLocale, wr);
 	xmlTextWriterEndElement(wr);
 };
-
-
-

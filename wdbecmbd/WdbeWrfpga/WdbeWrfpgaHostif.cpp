@@ -505,6 +505,3 @@ usmallint WdbeWrfpgaHostif::getImbwavllen(
 	return w;
 };
 // IP cust --- IEND
-
-
-

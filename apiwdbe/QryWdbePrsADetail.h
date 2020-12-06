@@ -98,4 +98,3 @@ namespace QryWdbePrsADetail {
 };
 
 #endif
-

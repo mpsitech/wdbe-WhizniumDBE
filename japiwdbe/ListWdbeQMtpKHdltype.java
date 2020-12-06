@@ -59,4 +59,3 @@ public class ListWdbeQMtpKHdltype {
 		return false;
 	};
 };
-

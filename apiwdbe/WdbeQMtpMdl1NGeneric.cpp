@@ -111,4 +111,3 @@ bool ListWdbeQMtpMdl1NGeneric::readXML(
 
 	return basefound;
 };
-

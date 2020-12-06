@@ -123,4 +123,3 @@ bool ListWdbeQRlsList::readXML(
 
 	return basefound;
 };
-

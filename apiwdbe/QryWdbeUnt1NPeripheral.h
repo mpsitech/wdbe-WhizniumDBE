@@ -98,4 +98,3 @@ namespace QryWdbeUnt1NPeripheral {
 };
 
 #endif
-

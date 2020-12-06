@@ -2527,6 +2527,3 @@ uint IexWdbeBdd::getIxWdbeVIop(
 
 	return ixWdbeVIop;
 };
-
-
-

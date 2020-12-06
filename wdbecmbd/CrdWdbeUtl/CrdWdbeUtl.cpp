@@ -42,8 +42,8 @@ CrdWdbeUtl::CrdWdbeUtl(
 	VecVSge::fillFeed(feedFSge);
 
 	pnlheadbar = NULL;
-	dlgmrgip = NULL;
 	dlgextrip = NULL;
+	dlgmrgip = NULL;
 
 	// IP constructor.cust1 --- INSERT
 
@@ -330,6 +330,3 @@ void CrdWdbeUtl::leaveSgeAlrwdbeabt(
 		) {
 	// IP leaveSgeAlrwdbeabt --- INSERT
 };
-
-
-

@@ -345,4 +345,3 @@ function handleDpchAppDoCrdopenReply() {
 		};
 	};
 };
-

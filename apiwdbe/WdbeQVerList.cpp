@@ -135,4 +135,3 @@ bool ListWdbeQVerList::readXML(
 
 	return basefound;
 };
-

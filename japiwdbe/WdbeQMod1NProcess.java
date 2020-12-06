@@ -41,4 +41,3 @@ public class WdbeQMod1NProcess {
 		return false;
 	};
 };
-

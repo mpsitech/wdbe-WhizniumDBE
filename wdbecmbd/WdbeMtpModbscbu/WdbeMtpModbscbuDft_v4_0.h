@@ -21,6 +21,3 @@ namespace WdbeMtpModbscbuDft_v4_0 {
 };
 
 #endif
-
-
-

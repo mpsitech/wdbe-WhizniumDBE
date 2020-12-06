@@ -304,6 +304,3 @@ private:
 };
 
 #endif
-
-
-

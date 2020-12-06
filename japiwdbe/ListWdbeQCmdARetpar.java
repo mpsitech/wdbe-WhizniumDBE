@@ -59,4 +59,3 @@ public class ListWdbeQCmdARetpar {
 		return false;
 	};
 };
-

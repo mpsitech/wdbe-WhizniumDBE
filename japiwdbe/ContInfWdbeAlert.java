@@ -147,4 +147,3 @@ public class ContInfWdbeAlert extends Block {
 		return items;
 	};
 };
-

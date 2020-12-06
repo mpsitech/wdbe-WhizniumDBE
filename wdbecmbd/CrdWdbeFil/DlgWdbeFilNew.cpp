@@ -515,6 +515,3 @@ void DlgWdbeFilNew::leaveSgeDone(
 		) {
 	// IP leaveSgeDone --- INSERT
 };
-
-
-

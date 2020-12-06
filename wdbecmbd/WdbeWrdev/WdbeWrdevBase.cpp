@@ -90,6 +90,3 @@ void WdbeWrdevBase::writeDevH(
 	outfile << "// IP include.unts --- IEND" << endl;
 };
 // IP cust --- IEND
-
-
-

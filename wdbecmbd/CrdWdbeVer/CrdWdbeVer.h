@@ -17,9 +17,9 @@
 #include "PnlWdbeVerList.h"
 #include "PnlWdbeVerHeadbar.h"
 #include "PnlWdbeVerRec.h"
-#include "DlgWdbeVerBscdd.h"
 #include "DlgWdbeVerDetdd.h"
 #include "DlgWdbeVerNew.h"
+#include "DlgWdbeVerBscdd.h"
 
 #define VecVWdbeVerDo CrdWdbeVer::VecVDo
 #define VecVWdbeVerSge CrdWdbeVer::VecVSge
@@ -239,9 +239,9 @@ public:
 	PnlWdbeVerList* pnllist;
 	PnlWdbeVerHeadbar* pnlheadbar;
 	PnlWdbeVerRec* pnlrec;
-	DlgWdbeVerBscdd* dlgbscdd;
 	DlgWdbeVerDetdd* dlgdetdd;
 	DlgWdbeVerNew* dlgnew;
+	DlgWdbeVerBscdd* dlgbscdd;
 
 	// IP vars.cust --- INSERT
 
@@ -298,6 +298,3 @@ private:
 };
 
 #endif
-
-
-

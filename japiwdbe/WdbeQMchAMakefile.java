@@ -49,4 +49,3 @@ public class WdbeQMchAMakefile {
 		return false;
 	};
 };
-

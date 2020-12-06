@@ -117,4 +117,3 @@ bool ListWdbeQPinAPar::readXML(
 
 	return basefound;
 };
-

@@ -287,6 +287,3 @@ void DlgWdbeNavMnglic::leaveSgeReady(
 		) {
 	// IP leaveSgeReady --- INSERT
 };
-
-
-

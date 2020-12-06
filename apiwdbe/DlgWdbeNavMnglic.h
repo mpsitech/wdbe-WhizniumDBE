@@ -284,4 +284,3 @@ namespace DlgWdbeNavMnglic {
 };
 
 #endif
-

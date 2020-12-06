@@ -329,6 +329,3 @@ bool PnlWdbeLibAMakefile::handleCallWdbeStatChg(
 	// IP handleCallWdbeStatChg --- END
 	return retval;
 };
-
-
-

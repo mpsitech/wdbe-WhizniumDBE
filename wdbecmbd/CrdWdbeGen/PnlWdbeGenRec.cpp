@@ -293,6 +293,3 @@ bool PnlWdbeGenRec::handleCallWdbeGen_cluEq(
 	boolvalRet = (recGen.refWdbeCGeneric == refInv); // IP handleCallWdbeGen_cluEq --- LINE
 	return retval;
 };
-
-
-

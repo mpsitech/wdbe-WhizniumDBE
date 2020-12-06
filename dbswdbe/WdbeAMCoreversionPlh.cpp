@@ -810,4 +810,3 @@ ubigint PgTblWdbeAMCoreversionPlh::loadRstByCvr(
 };
 
 #endif
-

@@ -111,4 +111,3 @@ bool ListWdbeQVerRef1NFile::readXML(
 
 	return basefound;
 };
-

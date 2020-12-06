@@ -843,6 +843,3 @@ void WdbeMtpWrfpgaSpifwd_v1_0::writeMdlVhd(
 	else outfile << "-- IP impl.wrbufBWrite --- REMOVE" << endl;
 };
 // IP cust --- IEND
-
-
-

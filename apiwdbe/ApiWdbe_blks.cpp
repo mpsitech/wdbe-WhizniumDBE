@@ -427,4 +427,3 @@ DpchEngWdbeSuspend::DpchEngWdbeSuspend() :
 			DpchEngWdbe(VecWdbeVDpch::DPCHENGWDBESUSPEND)
 		{
 };
-

@@ -482,4 +482,3 @@ public class PnlWdbeMchRec {
 	};
 
 };
-

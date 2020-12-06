@@ -185,6 +185,3 @@ set<uint> QryWdbeMod1NProcess::StgIac::diff(
 
 	return(diffitems);
 };
-
-
-

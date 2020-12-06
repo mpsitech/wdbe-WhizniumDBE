@@ -98,4 +98,3 @@ namespace QryWdbeUntFwd1NController {
 };
 
 #endif
-

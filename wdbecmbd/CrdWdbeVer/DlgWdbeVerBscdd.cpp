@@ -277,12 +277,12 @@ void DlgWdbeVerBscdd::handleRequest(
 		};
 
 	} else if (req->ixVBasetype == ReqWdbe::VecVBasetype::TIMER) {
-		if ((req->sref == "mon") && (ixVSge == VecVSge::POSTPRC2)) handleTimerWithSrefMonInSgePostprc2(dbswdbe);
-		else if ((req->sref == "mon") && (ixVSge == VecVSge::POSTPRC3)) handleTimerWithSrefMonInSgePostprc3(dbswdbe);
-		else if (ixVSge == VecVSge::PRSIDLE) handleTimerInSgePrsidle(dbswdbe, req->sref);
+		if (ixVSge == VecVSge::PRSIDLE) handleTimerInSgePrsidle(dbswdbe, req->sref);
 		else if (ixVSge == VecVSge::IMPIDLE) handleTimerInSgeImpidle(dbswdbe, req->sref);
 		else if ((req->sref == "mon") && (ixVSge == VecVSge::IMPORT)) handleTimerWithSrefMonInSgeImport(dbswdbe);
 		else if ((req->sref == "mon") && (ixVSge == VecVSge::POSTPRC1)) handleTimerWithSrefMonInSgePostprc1(dbswdbe);
+		else if ((req->sref == "mon") && (ixVSge == VecVSge::POSTPRC2)) handleTimerWithSrefMonInSgePostprc2(dbswdbe);
+		else if ((req->sref == "mon") && (ixVSge == VecVSge::POSTPRC3)) handleTimerWithSrefMonInSgePostprc3(dbswdbe);
 	};
 };
 
@@ -390,20 +390,6 @@ string DlgWdbeVerBscdd::handleDownloadInSgeDone(
 	return(""); // IP handleDownloadInSgeDone --- LINE
 };
 
-void DlgWdbeVerBscdd::handleTimerWithSrefMonInSgePostprc2(
-			DbsWdbe* dbswdbe
-		) {
-	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
-	refreshWithDpchEng(dbswdbe); // IP handleTimerWithSrefMonInSgePostprc2 --- ILINE
-};
-
-void DlgWdbeVerBscdd::handleTimerWithSrefMonInSgePostprc3(
-			DbsWdbe* dbswdbe
-		) {
-	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
-	refreshWithDpchEng(dbswdbe); // IP handleTimerWithSrefMonInSgePostprc3 --- ILINE
-};
-
 void DlgWdbeVerBscdd::handleTimerInSgePrsidle(
 			DbsWdbe* dbswdbe
 			, const string& sref
@@ -430,6 +416,20 @@ void DlgWdbeVerBscdd::handleTimerWithSrefMonInSgePostprc1(
 		) {
 	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
 	refreshWithDpchEng(dbswdbe); // IP handleTimerWithSrefMonInSgePostprc1 --- ILINE
+};
+
+void DlgWdbeVerBscdd::handleTimerWithSrefMonInSgePostprc2(
+			DbsWdbe* dbswdbe
+		) {
+	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
+	refreshWithDpchEng(dbswdbe); // IP handleTimerWithSrefMonInSgePostprc2 --- ILINE
+};
+
+void DlgWdbeVerBscdd::handleTimerWithSrefMonInSgePostprc3(
+			DbsWdbe* dbswdbe
+		) {
+	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
+	refreshWithDpchEng(dbswdbe); // IP handleTimerWithSrefMonInSgePostprc3 --- ILINE
 };
 
 void DlgWdbeVerBscdd::changeStage(
@@ -1004,6 +1004,3 @@ void DlgWdbeVerBscdd::leaveSgeDone(
 		) {
 	// IP leaveSgeDone --- INSERT
 };
-
-
-

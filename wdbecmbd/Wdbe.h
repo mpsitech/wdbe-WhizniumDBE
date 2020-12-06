@@ -10,10 +10,10 @@
 #ifndef WDBE_H
 #define WDBE_H
 
-#define WDBE_VERSION "1.1.0"
+#define WDBE_VERSION "1.1.1"
 #define WDBE_VERSION_MAJOR 1
 #define WDBE_VERSION_MINOR 1
-#define WDBE_VERSION_SUB 0
+#define WDBE_VERSION_SUB 1
 
 #include <sys/wait.h> // IP include.cust --- ILINE
 
@@ -364,6 +364,3 @@ public:
 };
 
 #endif
-
-
-

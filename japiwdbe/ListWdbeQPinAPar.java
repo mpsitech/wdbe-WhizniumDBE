@@ -59,4 +59,3 @@ public class ListWdbeQPinAPar {
 		return false;
 	};
 };
-

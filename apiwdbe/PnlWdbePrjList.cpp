@@ -597,4 +597,3 @@ void PnlWdbePrjList::DpchEngData::readXML(
 		stgiacqry = QryWdbePrjList::StgIac();
 	};
 };
-

@@ -15,8 +15,8 @@
 // IP include.cust --- INSERT
 
 #include "PnlWdbeCmdMNController.h"
-#include "PnlWdbeCmdARetpar.h"
 #include "PnlWdbeCmdAInvpar.h"
+#include "PnlWdbeCmdARetpar.h"
 #include "PnlWdbeCmdDetail.h"
 
 #define VecVWdbeCmdRecDo PnlWdbeCmdRec::VecVDo
@@ -175,8 +175,8 @@ public:
 	StatShr statshr;
 
 	PnlWdbeCmdMNController* pnlmncontroller;
-	PnlWdbeCmdARetpar* pnlaretpar;
 	PnlWdbeCmdAInvpar* pnlainvpar;
+	PnlWdbeCmdARetpar* pnlaretpar;
 	PnlWdbeCmdDetail* pnldetail;
 
 	WdbeMCommand recCmd;
@@ -213,13 +213,10 @@ public:
 private:
 	bool handleCallWdbeCmdUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 	bool handleCallWdbeCmd_reuEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
-	bool handleCallWdbeCmd_reu_mdl_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
 	bool handleCallWdbeCmd_reu_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
+	bool handleCallWdbeCmd_reu_mdl_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
 	bool handleCallWdbeCmd_retEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
 
 };
 
 #endif
-
-
-

@@ -99,4 +99,3 @@ function fillAlrMcbFromFeed(alrdoc, srcdoc, blk) {
 		finode = res.iterateNext();
 	};
 };
-

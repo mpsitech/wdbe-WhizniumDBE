@@ -150,6 +150,3 @@ bool PnlWdbeCvrAPlh::evalButDeleteActive(
 
 	return(args.back());
 };
-
-
-

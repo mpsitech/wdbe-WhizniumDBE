@@ -15,8 +15,8 @@
 // IP include.cust --- INSERT
 
 #include "PnlWdbeLibList.h"
-#include "PnlWdbeLibHeadbar.h"
 #include "PnlWdbeLibRec.h"
+#include "PnlWdbeLibHeadbar.h"
 
 #define VecVWdbeLibDo CrdWdbeLib::VecVDo
 #define VecVWdbeLibSge CrdWdbeLib::VecVSge
@@ -191,8 +191,8 @@ public:
 	Sbecore::Xmlio::Feed feedFSge;
 
 	PnlWdbeLibList* pnllist;
-	PnlWdbeLibHeadbar* pnlheadbar;
 	PnlWdbeLibRec* pnlrec;
+	PnlWdbeLibHeadbar* pnlheadbar;
 
 	// IP vars.cust --- INSERT
 
@@ -241,6 +241,3 @@ private:
 };
 
 #endif
-
-
-

@@ -98,4 +98,3 @@ namespace QryWdbeMtpMge1NSignal {
 };
 
 #endif
-

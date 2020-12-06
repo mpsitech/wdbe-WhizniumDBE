@@ -272,4 +272,3 @@ public class QryWdbeMchSup1NMachine {
 	};
 
 };
-

@@ -98,4 +98,3 @@ namespace QryWdbeModCtrHk1NVector {
 };
 
 #endif
-

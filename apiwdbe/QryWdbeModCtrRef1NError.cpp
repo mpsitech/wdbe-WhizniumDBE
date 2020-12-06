@@ -241,4 +241,3 @@ set<uint> QryWdbeModCtrRef1NError::StgIac::diff(
 
 	return(diffitems);
 };
-

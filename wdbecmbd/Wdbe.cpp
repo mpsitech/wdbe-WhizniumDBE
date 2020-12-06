@@ -4575,6 +4575,3 @@ void DpchRetWdbe::writeXML(
 		writeUtinyint(wr, "pdone", pdone);
 	xmlTextWriterEndElement(wr);
 };
-
-
-

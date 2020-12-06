@@ -225,6 +225,3 @@ set<uint> QryWdbeModList::StgIac::diff(
 
 	return(diffitems);
 };
-
-
-

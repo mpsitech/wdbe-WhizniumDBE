@@ -98,4 +98,3 @@ namespace QryWdbeMod1NProcess {
 };
 
 #endif
-

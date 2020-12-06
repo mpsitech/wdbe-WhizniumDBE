@@ -576,4 +576,3 @@ void PnlWdbePinList::DpchEngData::readXML(
 		stgiacqry = QryWdbePinList::StgIac();
 	};
 };
-

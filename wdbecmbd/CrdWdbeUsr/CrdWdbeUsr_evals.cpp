@@ -38,6 +38,3 @@ bool CrdWdbeUsr::evalMitCrdMkpActive(
 
 	return(args.back());
 };
-
-
-

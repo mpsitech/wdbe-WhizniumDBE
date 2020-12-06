@@ -566,6 +566,8 @@ public:
 
 	Sbecore::uint ixRlstype;
 
+	std::string rtysref;
+
 	std::string cchost;
 	std::string ncore;
 	std::string sysroot;
@@ -636,8 +638,8 @@ private:
 
 	void handleUploadInSgeIdle(DbsWdbe* dbswdbe, const std::string& filename);
 
-	std::string handleDownloadInSgeFail(DbsWdbe* dbswdbe);
 	std::string handleDownloadInSgeDone(DbsWdbe* dbswdbe);
+	std::string handleDownloadInSgeFail(DbsWdbe* dbswdbe);
 
 	void handleDpchRetWdbeMtpPlhfpga(DbsWdbe* dbswdbe, DpchRetWdbeMtpPlhfpga* dpchret);
 	void handleDpchRetWdbeMtpPlhmcu(DbsWdbe* dbswdbe, DpchRetWdbeMtpPlhmcu* dpchret);
@@ -649,8 +651,8 @@ private:
 	void handleDpchRetWdbePrctreeMerge(DbsWdbe* dbswdbe, DpchRetWdbePrctreeMerge* dpchret);
 
 	void handleTimerInSgeUpkidle(DbsWdbe* dbswdbe, const std::string& sref);
-	void handleTimerWithSrefMonInSgeCreate(DbsWdbe* dbswdbe);
 	void handleTimerWithSrefMonInSgeWrite(DbsWdbe* dbswdbe);
+	void handleTimerWithSrefMonInSgeCreate(DbsWdbe* dbswdbe);
 
 private:
 	void changeStage(DbsWdbe* dbswdbe, Sbecore::uint _ixVSge, DpchEngWdbe** dpcheng = NULL);
@@ -703,6 +705,3 @@ private:
 };
 
 #endif
-
-
-

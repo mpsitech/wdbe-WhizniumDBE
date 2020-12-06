@@ -1287,6 +1287,3 @@ void DlgWdbeRlsStareptr::DpchEngData::writeXML(
 		if (has(TAGLFI)) TagLfi::writeXML(ixWdbeVLocale, wr);
 	xmlTextWriterEndElement(wr);
 };
-
-
-

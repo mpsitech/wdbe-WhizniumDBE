@@ -185,6 +185,3 @@ set<uint> QryWdbeVerMNLibrary::StgIac::diff(
 
 	return(diffitems);
 };
-
-
-

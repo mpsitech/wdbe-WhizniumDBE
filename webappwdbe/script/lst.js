@@ -376,5 +376,3 @@ function refreshLst(lstdoc, srcdoc, ncol, large, multsel, blk, numFirstdisp, num
 		mytbl.appendChild(mytr);
 	};
 };
-
-

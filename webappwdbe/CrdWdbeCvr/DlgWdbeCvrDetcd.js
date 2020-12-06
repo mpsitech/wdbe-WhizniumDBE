@@ -319,4 +319,3 @@ function handleDpchAppDataDoReply() {
 		};
 	};
 };
-

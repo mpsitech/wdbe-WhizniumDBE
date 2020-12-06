@@ -118,6 +118,3 @@ void WdbeMtpWrfpgaTop_v1_0::writeMdlVhd(
 	outfile << "\t-- IP impl.rst.falling --- REND" << endl;
 };
 // IP cust --- IEND
-
-
-

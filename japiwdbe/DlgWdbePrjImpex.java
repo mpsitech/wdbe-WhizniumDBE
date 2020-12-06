@@ -1318,4 +1318,3 @@ public class DlgWdbePrjImpex {
 	};
 
 };
-

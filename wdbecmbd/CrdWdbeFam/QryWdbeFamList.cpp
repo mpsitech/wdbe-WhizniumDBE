@@ -154,8 +154,8 @@ void QryWdbeFamList::rerun_orderSQL(
 			string& sqlstr
 			, const uint preIxOrd
 		) {
-	if (preIxOrd == VecVOrd::VND) sqlstr += " ORDER BY TblWdbeMFamily.srefKVendor ASC";
-	else if (preIxOrd == VecVOrd::TIT) sqlstr += " ORDER BY TblWdbeMFamily.Title ASC";
+	if (preIxOrd == VecVOrd::TIT) sqlstr += " ORDER BY TblWdbeMFamily.Title ASC";
+	else if (preIxOrd == VecVOrd::VND) sqlstr += " ORDER BY TblWdbeMFamily.srefKVendor ASC";
 };
 
 void QryWdbeFamList::fetch(
@@ -358,6 +358,3 @@ bool QryWdbeFamList::handleCallWdbeStubChgFromSelf(
 	// IP handleCallWdbeStubChgFromSelf --- INSERT
 	return retval;
 };
-
-
-

@@ -24,9 +24,9 @@ uint QryWdbeUntList::VecVOrd::getIx(
 
 	if (s == "mdl") return MDL;
 	if (s == "sys") return SYS;
-	if (s == "reu") return REU;
-	if (s == "ret") return RET;
 	if (s == "typ") return TYP;
+	if (s == "ret") return RET;
+	if (s == "reu") return REU;
 	if (s == "tit") return TIT;
 	if (s == "srf") return SRF;
 
@@ -38,9 +38,9 @@ string QryWdbeUntList::VecVOrd::getSref(
 		) {
 	if (ix == MDL) return("mdl");
 	if (ix == SYS) return("sys");
-	if (ix == REU) return("reu");
-	if (ix == RET) return("ret");
 	if (ix == TYP) return("typ");
+	if (ix == RET) return("ret");
+	if (ix == REU) return("reu");
 	if (ix == TIT) return("tit");
 	if (ix == SRF) return("srf");
 
@@ -275,4 +275,3 @@ set<uint> QryWdbeUntList::StgIac::diff(
 
 	return(diffitems);
 };
-

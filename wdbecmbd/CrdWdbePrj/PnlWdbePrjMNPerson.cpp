@@ -349,6 +349,3 @@ bool PnlWdbePrjMNPerson::handleCallWdbeStatChg(
 	// IP handleCallWdbeStatChg --- END
 	return retval;
 };
-
-
-

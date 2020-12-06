@@ -59,4 +59,3 @@ public class ListWdbeQVerMNLibrary {
 		return false;
 	};
 };
-

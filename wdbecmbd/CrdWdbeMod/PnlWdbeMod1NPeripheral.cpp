@@ -322,6 +322,3 @@ bool PnlWdbeMod1NPeripheral::handleCallWdbeStatChg(
 	// IP handleCallWdbeStatChg --- END
 	return retval;
 };
-
-
-

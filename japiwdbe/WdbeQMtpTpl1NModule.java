@@ -41,4 +41,3 @@ public class WdbeQMtpTpl1NModule {
 		return false;
 	};
 };
-

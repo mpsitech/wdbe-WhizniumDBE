@@ -272,4 +272,3 @@ public class QryWdbeFam1NUnit {
 	};
 
 };
-

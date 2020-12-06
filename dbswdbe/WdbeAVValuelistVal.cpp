@@ -816,4 +816,3 @@ ubigint PgTblWdbeAVValuelistVal::loadRstByVlsLcl(
 };
 
 #endif
-

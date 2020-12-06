@@ -126,4 +126,3 @@ bool ListWdbeQErrAPar::readXML(
 
 	return basefound;
 };
-

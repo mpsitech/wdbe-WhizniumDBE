@@ -24,6 +24,3 @@ namespace WdbeMtpWrfpgaTop_v1_0 {
 };
 
 #endif
-
-
-

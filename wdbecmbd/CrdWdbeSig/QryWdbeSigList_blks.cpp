@@ -22,11 +22,11 @@ uint QryWdbeSigList::VecVOrd::getIx(
 
 	if (s == "con") return CON;
 	if (s == "vec") return VEC;
-	if (s == "mgu") return MGU;
 	if (s == "mgt") return MGT;
+	if (s == "mgu") return MGU;
 	if (s == "mdl") return MDL;
-	if (s == "typ") return TYP;
 	if (s == "srf") return SRF;
+	if (s == "typ") return TYP;
 
 	return(0);
 };
@@ -36,11 +36,11 @@ string QryWdbeSigList::VecVOrd::getSref(
 		) {
 	if (ix == CON) return("con");
 	if (ix == VEC) return("vec");
-	if (ix == MGU) return("mgu");
 	if (ix == MGT) return("mgt");
+	if (ix == MGU) return("mgu");
 	if (ix == MDL) return("mdl");
-	if (ix == TYP) return("typ");
 	if (ix == SRF) return("srf");
+	if (ix == TYP) return("typ");
 
 	return("");
 };
@@ -227,6 +227,3 @@ set<uint> QryWdbeSigList::StgIac::diff(
 
 	return(diffitems);
 };
-
-
-

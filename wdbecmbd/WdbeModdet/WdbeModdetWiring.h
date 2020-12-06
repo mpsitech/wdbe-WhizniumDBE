@@ -24,6 +24,3 @@ namespace WdbeModdetWiring {
 };
 
 #endif
-
-
-

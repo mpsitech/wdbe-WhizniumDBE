@@ -74,6 +74,3 @@ namespace WdbePrctree {
 };
 
 #endif
-
-
-

@@ -959,6 +959,3 @@ void DlgWdbeRlsFinreptr::leaveSgeDone(
 		) {
 	// IP leaveSgeDone --- INSERT
 };
-
-
-

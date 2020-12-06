@@ -76,6 +76,3 @@ void WdbeMtpWrfpgaTkclksrc_v1_0::writeMdlVhd(
 	outfile << "-- IP impl.cmd.prepRetGetTkst --- IEND" << endl;
 };
 // IP cust --- IEND
-
-
-

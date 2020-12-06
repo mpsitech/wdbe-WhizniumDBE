@@ -529,4 +529,3 @@ void PnlWdbeModCtrHk1NVector::DpchEngData::readXML(
 		stgiacqry = QryWdbeModCtrHk1NVector::StgIac();
 	};
 };
-

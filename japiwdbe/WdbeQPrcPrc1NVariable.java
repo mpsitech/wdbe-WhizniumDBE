@@ -41,4 +41,3 @@ public class WdbeQPrcPrc1NVariable {
 		return false;
 	};
 };
-

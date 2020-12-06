@@ -19,8 +19,8 @@ public class QryWdbePrsList {
 		*/
 	public static class VecVOrd {
 
-		public static final int LNM = 1;
-		public static final int OWN = 2;
+		public static final int OWN = 1;
+		public static final int LNM = 2;
 		public static final int GRP = 3;
 
 		public static int getIx(
@@ -28,8 +28,8 @@ public class QryWdbePrsList {
 				) {
 			String s = sref.toLowerCase();
 
-			if (s.equals("lnm")) return LNM;
 			if (s.equals("own")) return OWN;
+			if (s.equals("lnm")) return LNM;
 			if (s.equals("grp")) return GRP;
 
 			return 0;
@@ -38,8 +38,8 @@ public class QryWdbePrsList {
 		public static String getSref(
 					int ix
 				) {
-			if (ix == LNM) return("lnm");
 			if (ix == OWN) return("own");
+			if (ix == LNM) return("lnm");
 			if (ix == GRP) return("grp");
 
 			return "";
@@ -305,4 +305,3 @@ public class QryWdbePrsList {
 	};
 
 };
-

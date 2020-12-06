@@ -479,6 +479,3 @@ void PnlWdbeFam1NUnit::DpchEngData::writeXML(
 		if (has(STGIACQRY)) stgiacqry.writeXML(wr);
 	xmlTextWriterEndElement(wr);
 };
-
-
-

@@ -41,4 +41,3 @@ public class WdbeQMod1NPeripheral {
 		return false;
 	};
 };
-

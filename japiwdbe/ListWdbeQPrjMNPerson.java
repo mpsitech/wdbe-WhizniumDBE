@@ -59,4 +59,3 @@ public class ListWdbeQPrjMNPerson {
 		return false;
 	};
 };
-

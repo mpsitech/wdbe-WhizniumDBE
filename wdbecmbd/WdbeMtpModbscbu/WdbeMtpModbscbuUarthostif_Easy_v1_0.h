@@ -21,6 +21,3 @@ namespace WdbeMtpModbscbuUarthostif_Easy_v1_0 {
 };
 
 #endif
-
-
-

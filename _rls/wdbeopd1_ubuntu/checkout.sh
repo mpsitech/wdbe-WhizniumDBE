@@ -3,7 +3,7 @@
 # checkout script for Wdbe operation daemon, release wdbeopd1_ubuntu
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 5 Dec 2020
+# date created: 6 Dec 2020
 # IP header --- ABOVE
 
 if [ -z ${WHIZROOT+x} ]; then
@@ -109,4 +109,3 @@ cp Makefile_WdbeModbsc $BUILDROOT/wdbeopd1/WdbeModbsc/Makefile
 
 cp $CMBDBUILDROOT/WdbeModbsc/WdbeModbsc*.h $BUILDROOT/wdbeopd1/WdbeModbsc/
 cp $CMBDBUILDROOT/WdbeModbsc/WdbeModbsc*.cpp $BUILDROOT/wdbeopd1/WdbeModbsc/
-

@@ -967,4 +967,3 @@ ubigint PgTblWdbeMCommand::loadRstByRetReu(
 };
 
 #endif
-

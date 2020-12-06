@@ -549,4 +549,3 @@ void PnlWdbeVecVec1NVectoritem::DpchEngData::readXML(
 		stgiacqry = QryWdbeVecVec1NVectoritem::StgIac();
 	};
 };
-

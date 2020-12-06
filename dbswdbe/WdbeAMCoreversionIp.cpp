@@ -830,4 +830,3 @@ ubigint PgTblWdbeAMCoreversionIp::loadRstByCvr(
 };
 
 #endif
-

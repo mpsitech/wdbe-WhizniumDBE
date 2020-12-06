@@ -126,4 +126,3 @@ bool ListWdbeQVecList::readXML(
 
 	return basefound;
 };
-

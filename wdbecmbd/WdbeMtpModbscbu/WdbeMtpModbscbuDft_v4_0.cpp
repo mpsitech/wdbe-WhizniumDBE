@@ -48,6 +48,3 @@ DpchRetWdbe* WdbeMtpModbscbuDft_v4_0::run(
 };
 
 // IP cust --- INSERT
-
-
-

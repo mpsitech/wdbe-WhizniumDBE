@@ -30,20 +30,6 @@ bool DlgWdbeCvrWrite::evalButDneActive(
 	return(args.back());
 };
 
-bool DlgWdbeCvrWrite::evalFiaDldActive(
-			DbsWdbe* dbswdbe
-		) {
-	// sge(done)
-
-	vector<bool> args;
-	bool a;
-
-	a = false; a = (ixVSge == VecVSge::DONE);
-	args.push_back(a);
-
-	return(args.back());
-};
-
 bool DlgWdbeCvrWrite::evalWrcButRunActive(
 			DbsWdbe* dbswdbe
 		) {
@@ -107,6 +93,20 @@ bool DlgWdbeCvrWrite::evalWrcButStoActive(
 	return(args.back());
 };
 
+bool DlgWdbeCvrWrite::evalFiaDldActive(
+			DbsWdbe* dbswdbe
+		) {
+	// sge(done)
+
+	vector<bool> args;
+	bool a;
+
+	a = false; a = (ixVSge == VecVSge::DONE);
+	args.push_back(a);
+
+	return(args.back());
+};
+
 bool DlgWdbeCvrWrite::evalCucUldActive(
 			DbsWdbe* dbswdbe
 		) {
@@ -120,6 +120,3 @@ bool DlgWdbeCvrWrite::evalCucUldActive(
 
 	return(args.back());
 };
-
-
-

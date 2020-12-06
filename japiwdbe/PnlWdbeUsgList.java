@@ -722,4 +722,3 @@ public class PnlWdbeUsgList {
 	};
 
 };
-

@@ -1226,4 +1226,3 @@ public class DlgWdbeRlsFinreptr {
 	};
 
 };
-

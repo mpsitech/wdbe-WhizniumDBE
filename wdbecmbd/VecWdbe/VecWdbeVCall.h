@@ -275,6 +275,3 @@ namespace VecWdbeVCall {
 };
 
 #endif
-
-
-

@@ -603,6 +603,3 @@ bool PnlWdbeFilDetail::handleCallWdbeFil_cluEq(
 	boolvalRet = (recFil.refWdbeCFile == refInv); // IP handleCallWdbeFil_cluEq --- LINE
 	return retval;
 };
-
-
-

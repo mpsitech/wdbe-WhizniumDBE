@@ -499,6 +499,3 @@ void PnlWdbeMtpMdl1NPort::DpchEngData::writeXML(
 		if (has(STGIACQRY)) stgiacqry.writeXML(wr);
 	xmlTextWriterEndElement(wr);
 };
-
-
-

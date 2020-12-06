@@ -98,4 +98,3 @@ namespace QryWdbePrcPrc1NVariable {
 };
 
 #endif
-

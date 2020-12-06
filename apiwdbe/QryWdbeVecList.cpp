@@ -269,4 +269,3 @@ set<uint> QryWdbeVecList::StgIac::diff(
 
 	return(diffitems);
 };
-

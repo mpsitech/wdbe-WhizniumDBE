@@ -25,6 +25,3 @@ namespace SqkWdbeWrmcu {
 };
 
 #endif
-
-
-

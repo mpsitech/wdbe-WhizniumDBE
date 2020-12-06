@@ -98,11 +98,11 @@ void PnlWdbeVerRec::StatApp::writeXML(
 			, string difftag
 			, bool shorttags
 			, const bool initdoneDetail
+			, const bool initdoneBvr1NVersion
 			, const bool initdone1NRelease
 			, const bool initdone1NSystem
-			, const bool initdoneBvr1NVersion
-			, const bool initdoneRef1NFile
 			, const bool initdone1NUnit
+			, const bool initdoneRef1NFile
 			, const bool initdoneMNLibrary
 		) {
 	if (difftag.length() == 0) difftag = "StatAppWdbeVerRec";
@@ -113,11 +113,11 @@ void PnlWdbeVerRec::StatApp::writeXML(
 
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
 		writeBoolAttr(wr, itemtag, "sref", "initdoneDetail", initdoneDetail);
+		writeBoolAttr(wr, itemtag, "sref", "initdoneBvr1NVersion", initdoneBvr1NVersion);
 		writeBoolAttr(wr, itemtag, "sref", "initdone1NRelease", initdone1NRelease);
 		writeBoolAttr(wr, itemtag, "sref", "initdone1NSystem", initdone1NSystem);
-		writeBoolAttr(wr, itemtag, "sref", "initdoneBvr1NVersion", initdoneBvr1NVersion);
-		writeBoolAttr(wr, itemtag, "sref", "initdoneRef1NFile", initdoneRef1NFile);
 		writeBoolAttr(wr, itemtag, "sref", "initdone1NUnit", initdone1NUnit);
+		writeBoolAttr(wr, itemtag, "sref", "initdoneRef1NFile", initdoneRef1NFile);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneMNLibrary", initdoneMNLibrary);
 	xmlTextWriterEndElement(wr);
 };
@@ -129,11 +129,11 @@ void PnlWdbeVerRec::StatApp::writeXML(
 PnlWdbeVerRec::StatShr::StatShr(
 			const uint ixWdbeVExpstate
 			, const ubigint jrefDetail
+			, const ubigint jrefBvr1NVersion
 			, const ubigint jref1NRelease
 			, const ubigint jref1NSystem
-			, const ubigint jrefBvr1NVersion
-			, const ubigint jrefRef1NFile
 			, const ubigint jref1NUnit
+			, const ubigint jrefRef1NFile
 			, const ubigint jrefMNLibrary
 			, const bool ButRegularizeActive
 		) :
@@ -141,15 +141,15 @@ PnlWdbeVerRec::StatShr::StatShr(
 		{
 	this->ixWdbeVExpstate = ixWdbeVExpstate;
 	this->jrefDetail = jrefDetail;
+	this->jrefBvr1NVersion = jrefBvr1NVersion;
 	this->jref1NRelease = jref1NRelease;
 	this->jref1NSystem = jref1NSystem;
-	this->jrefBvr1NVersion = jrefBvr1NVersion;
-	this->jrefRef1NFile = jrefRef1NFile;
 	this->jref1NUnit = jref1NUnit;
+	this->jrefRef1NFile = jrefRef1NFile;
 	this->jrefMNLibrary = jrefMNLibrary;
 	this->ButRegularizeActive = ButRegularizeActive;
 
-	mask = {IXWDBEVEXPSTATE, JREFDETAIL, JREF1NRELEASE, JREF1NSYSTEM, JREFBVR1NVERSION, JREFREF1NFILE, JREF1NUNIT, JREFMNLIBRARY, BUTREGULARIZEACTIVE};
+	mask = {IXWDBEVEXPSTATE, JREFDETAIL, JREFBVR1NVERSION, JREF1NRELEASE, JREF1NSYSTEM, JREF1NUNIT, JREFREF1NFILE, JREFMNLIBRARY, BUTREGULARIZEACTIVE};
 };
 
 void PnlWdbeVerRec::StatShr::writeXML(
@@ -166,11 +166,11 @@ void PnlWdbeVerRec::StatShr::writeXML(
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
 		writeStringAttr(wr, itemtag, "sref", "srefIxWdbeVExpstate", VecWdbeVExpstate::getSref(ixWdbeVExpstate));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefDetail", Scr::scramble(jrefDetail));
+		writeStringAttr(wr, itemtag, "sref", "scrJrefBvr1NVersion", Scr::scramble(jrefBvr1NVersion));
 		writeStringAttr(wr, itemtag, "sref", "scrJref1NRelease", Scr::scramble(jref1NRelease));
 		writeStringAttr(wr, itemtag, "sref", "scrJref1NSystem", Scr::scramble(jref1NSystem));
-		writeStringAttr(wr, itemtag, "sref", "scrJrefBvr1NVersion", Scr::scramble(jrefBvr1NVersion));
-		writeStringAttr(wr, itemtag, "sref", "scrJrefRef1NFile", Scr::scramble(jrefRef1NFile));
 		writeStringAttr(wr, itemtag, "sref", "scrJref1NUnit", Scr::scramble(jref1NUnit));
+		writeStringAttr(wr, itemtag, "sref", "scrJrefRef1NFile", Scr::scramble(jrefRef1NFile));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefMNLibrary", Scr::scramble(jrefMNLibrary));
 		writeBoolAttr(wr, itemtag, "sref", "ButRegularizeActive", ButRegularizeActive);
 	xmlTextWriterEndElement(wr);
@@ -183,11 +183,11 @@ set<uint> PnlWdbeVerRec::StatShr::comm(
 
 	if (ixWdbeVExpstate == comp->ixWdbeVExpstate) insert(items, IXWDBEVEXPSTATE);
 	if (jrefDetail == comp->jrefDetail) insert(items, JREFDETAIL);
+	if (jrefBvr1NVersion == comp->jrefBvr1NVersion) insert(items, JREFBVR1NVERSION);
 	if (jref1NRelease == comp->jref1NRelease) insert(items, JREF1NRELEASE);
 	if (jref1NSystem == comp->jref1NSystem) insert(items, JREF1NSYSTEM);
-	if (jrefBvr1NVersion == comp->jrefBvr1NVersion) insert(items, JREFBVR1NVERSION);
-	if (jrefRef1NFile == comp->jrefRef1NFile) insert(items, JREFREF1NFILE);
 	if (jref1NUnit == comp->jref1NUnit) insert(items, JREF1NUNIT);
+	if (jrefRef1NFile == comp->jrefRef1NFile) insert(items, JREFREF1NFILE);
 	if (jrefMNLibrary == comp->jrefMNLibrary) insert(items, JREFMNLIBRARY);
 	if (ButRegularizeActive == comp->ButRegularizeActive) insert(items, BUTREGULARIZEACTIVE);
 
@@ -202,7 +202,7 @@ set<uint> PnlWdbeVerRec::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {IXWDBEVEXPSTATE, JREFDETAIL, JREF1NRELEASE, JREF1NSYSTEM, JREFBVR1NVERSION, JREFREF1NFILE, JREF1NUNIT, JREFMNLIBRARY, BUTREGULARIZEACTIVE};
+	diffitems = {IXWDBEVEXPSTATE, JREFDETAIL, JREFBVR1NVERSION, JREF1NRELEASE, JREF1NSYSTEM, JREF1NUNIT, JREFREF1NFILE, JREFMNLIBRARY, BUTREGULARIZEACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -342,6 +342,3 @@ void PnlWdbeVerRec::DpchEngData::writeXML(
 		if (has(TAG)) Tag::writeXML(ixWdbeVLocale, wr);
 	xmlTextWriterEndElement(wr);
 };
-
-
-

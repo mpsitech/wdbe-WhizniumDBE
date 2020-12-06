@@ -185,6 +185,3 @@ set<uint> QryWdbeModMdl1NPort::StgIac::diff(
 
 	return(diffitems);
 };
-
-
-

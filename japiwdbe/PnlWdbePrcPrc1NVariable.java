@@ -699,4 +699,3 @@ public class PnlWdbePrcPrc1NVariable {
 	};
 
 };
-

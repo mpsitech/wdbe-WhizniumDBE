@@ -98,4 +98,3 @@ namespace QryWdbeUsr1NSession {
 };
 
 #endif
-

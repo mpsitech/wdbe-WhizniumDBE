@@ -321,6 +321,3 @@ bool PnlWdbeSil1NTarget::handleCallWdbeStatChg(
 	// IP handleCallWdbeStatChg --- END
 	return retval;
 };
-
-
-

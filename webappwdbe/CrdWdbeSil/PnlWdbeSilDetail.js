@@ -495,4 +495,3 @@ function handleDpchAppDoDlgopenReply() {
 		};
 	};
 };
-

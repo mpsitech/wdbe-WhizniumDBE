@@ -137,6 +137,3 @@ bool PnlWdbeModCtrHk1NVector::evalButDeleteActive(
 
 	return(args.back());
 };
-
-
-

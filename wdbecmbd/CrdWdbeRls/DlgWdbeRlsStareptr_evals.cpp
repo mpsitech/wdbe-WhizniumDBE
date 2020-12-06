@@ -194,6 +194,3 @@ bool DlgWdbeRlsStareptr::evalDetButStaActive(
 
 	return(args.back());
 };
-
-
-

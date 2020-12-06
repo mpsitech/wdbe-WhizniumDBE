@@ -397,6 +397,3 @@ bool JobWdbeLicense::handleClaim(
 
 	return mod;
 };
-
-
-

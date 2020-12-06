@@ -38,12 +38,12 @@ PnlWdbeVerRec::PnlWdbeVerRec(
 		{
 	jref = xchg->addJob(dbswdbe, this, jrefSup);
 
+	pnlref1nfile = NULL;
 	pnlmnlibrary = NULL;
 	pnl1nunit = NULL;
-	pnlref1nfile = NULL;
-	pnlbvr1nversion = NULL;
 	pnl1nsystem = NULL;
 	pnl1nrelease = NULL;
+	pnlbvr1nversion = NULL;
 	pnldetail = NULL;
 
 	// IP constructor.cust1 --- INSERT
@@ -106,28 +106,28 @@ void PnlWdbeVerRec::refresh(
 
 	if (statshr.ixWdbeVExpstate == VecWdbeVExpstate::MIND) {
 		if (pnldetail) {delete pnldetail; pnldetail = NULL;};
+		if (pnlbvr1nversion) {delete pnlbvr1nversion; pnlbvr1nversion = NULL;};
 		if (pnl1nrelease) {delete pnl1nrelease; pnl1nrelease = NULL;};
 		if (pnl1nsystem) {delete pnl1nsystem; pnl1nsystem = NULL;};
-		if (pnlbvr1nversion) {delete pnlbvr1nversion; pnlbvr1nversion = NULL;};
-		if (pnlref1nfile) {delete pnlref1nfile; pnlref1nfile = NULL;};
 		if (pnl1nunit) {delete pnl1nunit; pnl1nunit = NULL;};
+		if (pnlref1nfile) {delete pnlref1nfile; pnlref1nfile = NULL;};
 		if (pnlmnlibrary) {delete pnlmnlibrary; pnlmnlibrary = NULL;};
 	} else {
 		if (!pnldetail) pnldetail = new PnlWdbeVerDetail(xchg, dbswdbe, jref, ixWdbeVLocale);
+		if (!pnlbvr1nversion) pnlbvr1nversion = new PnlWdbeVerBvr1NVersion(xchg, dbswdbe, jref, ixWdbeVLocale);
 		if (!pnl1nrelease) pnl1nrelease = new PnlWdbeVer1NRelease(xchg, dbswdbe, jref, ixWdbeVLocale);
 		if (!pnl1nsystem) pnl1nsystem = new PnlWdbeVer1NSystem(xchg, dbswdbe, jref, ixWdbeVLocale);
-		if (!pnlbvr1nversion) pnlbvr1nversion = new PnlWdbeVerBvr1NVersion(xchg, dbswdbe, jref, ixWdbeVLocale);
-		if (!pnlref1nfile) pnlref1nfile = new PnlWdbeVerRef1NFile(xchg, dbswdbe, jref, ixWdbeVLocale);
 		if (!pnl1nunit) pnl1nunit = new PnlWdbeVer1NUnit(xchg, dbswdbe, jref, ixWdbeVLocale);
+		if (!pnlref1nfile) pnlref1nfile = new PnlWdbeVerRef1NFile(xchg, dbswdbe, jref, ixWdbeVLocale);
 		if (!pnlmnlibrary) pnlmnlibrary = new PnlWdbeVerMNLibrary(xchg, dbswdbe, jref, ixWdbeVLocale);
 	};
 
 	statshr.jrefDetail = ((pnldetail) ? pnldetail->jref : 0);
+	statshr.jrefBvr1NVersion = ((pnlbvr1nversion) ? pnlbvr1nversion->jref : 0);
 	statshr.jref1NRelease = ((pnl1nrelease) ? pnl1nrelease->jref : 0);
 	statshr.jref1NSystem = ((pnl1nsystem) ? pnl1nsystem->jref : 0);
-	statshr.jrefBvr1NVersion = ((pnlbvr1nversion) ? pnlbvr1nversion->jref : 0);
-	statshr.jrefRef1NFile = ((pnlref1nfile) ? pnlref1nfile->jref : 0);
 	statshr.jref1NUnit = ((pnl1nunit) ? pnl1nunit->jref : 0);
+	statshr.jrefRef1NFile = ((pnlref1nfile) ? pnlref1nfile->jref : 0);
 	statshr.jrefMNLibrary = ((pnlmnlibrary) ? pnlmnlibrary->jref : 0);
 
 	// IP refresh --- END
@@ -156,11 +156,11 @@ void PnlWdbeVerRec::updatePreset(
 
 		if (recVer.ref != 0) {
 			if (pnldetail) pnldetail->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
+			if (pnlbvr1nversion) pnlbvr1nversion->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
 			if (pnl1nrelease) pnl1nrelease->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
 			if (pnl1nsystem) pnl1nsystem->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
-			if (pnlbvr1nversion) pnlbvr1nversion->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
-			if (pnlref1nfile) pnlref1nfile->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
 			if (pnl1nunit) pnl1nunit->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
+			if (pnlref1nfile) pnlref1nfile->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
 			if (pnlmnlibrary) pnlmnlibrary->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
 		};
 
@@ -323,6 +323,3 @@ bool PnlWdbeVerRec::handleCallWdbeVer_bvrEq(
 	boolvalRet = (recVer.bvrRefWdbeMVersion == refInv); // IP handleCallWdbeVer_bvrEq --- LINE
 	return retval;
 };
-
-
-

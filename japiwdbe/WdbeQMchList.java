@@ -45,4 +45,3 @@ public class WdbeQMchList {
 		return false;
 	};
 };
-

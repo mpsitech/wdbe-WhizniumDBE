@@ -59,4 +59,3 @@ public class ListWdbeQPrcPrc1NVariable {
 		return false;
 	};
 };
-

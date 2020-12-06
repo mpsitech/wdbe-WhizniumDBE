@@ -111,4 +111,3 @@ bool ListWdbeQLibMNVersion::readXML(
 
 	return basefound;
 };
-

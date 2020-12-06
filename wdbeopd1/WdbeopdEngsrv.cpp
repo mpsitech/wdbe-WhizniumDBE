@@ -469,7 +469,3 @@ void WdbeopdEngsrv::writeDpchRet(
 
 	xmlBufferFree(buf);
 };
-
-
-
-

@@ -98,4 +98,3 @@ namespace QryWdbeMtpMdl1NPort {
 };
 
 #endif
-

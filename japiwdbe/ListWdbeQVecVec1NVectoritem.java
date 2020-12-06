@@ -59,4 +59,3 @@ public class ListWdbeQVecVec1NVectoritem {
 		return false;
 	};
 };
-

@@ -81,4 +81,3 @@ public class WdbeQFilList {
 		return false;
 	};
 };
-

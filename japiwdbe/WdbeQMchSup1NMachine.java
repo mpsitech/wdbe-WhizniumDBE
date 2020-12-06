@@ -41,4 +41,3 @@ public class WdbeQMchSup1NMachine {
 		return false;
 	};
 };
-

@@ -362,6 +362,3 @@ bool PnlWdbeCmdDetail::handleCallWdbeCmd_retEq(
 	boolvalRet = (recCmd.refIxVTbl == ixInv); // IP handleCallWdbeCmd_retEq --- LINE
 	return retval;
 };
-
-
-

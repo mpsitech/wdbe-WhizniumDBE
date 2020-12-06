@@ -144,6 +144,3 @@ bool PnlWdbeBnkDetail::evalButVstEditAvail(
 
 	return(args.back());
 };
-
-
-

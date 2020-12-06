@@ -65,6 +65,3 @@ bool PnlWdbeUntFwd1NController::evalButViewActive(
 
 	return(args.back());
 };
-
-
-

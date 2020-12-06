@@ -721,4 +721,3 @@ function handleDpchAppDoCrdopenReply() {
 		};
 	};
 };
-

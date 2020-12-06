@@ -162,6 +162,3 @@ bool PnlWdbePrjDetail::evalTxfCmtActive(
 
 	return(args.back());
 };
-
-
-

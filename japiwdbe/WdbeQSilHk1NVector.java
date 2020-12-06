@@ -41,4 +41,3 @@ public class WdbeQSilHk1NVector {
 		return false;
 	};
 };
-

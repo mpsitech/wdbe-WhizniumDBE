@@ -616,4 +616,3 @@ namespace DlgWdbeRlsStareptr {
 };
 
 #endif
-

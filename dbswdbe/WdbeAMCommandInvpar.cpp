@@ -935,4 +935,3 @@ ubigint PgTblWdbeAMCommandInvpar::loadRstByCmd(
 };
 
 #endif
-

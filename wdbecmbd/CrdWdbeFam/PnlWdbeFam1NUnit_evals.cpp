@@ -112,6 +112,3 @@ bool PnlWdbeFam1NUnit::evalButDeleteActive(
 
 	return(args.back());
 };
-
-
-

@@ -185,6 +185,3 @@ set<uint> QryWdbeSilHk1NModule::StgIac::diff(
 
 	return(diffitems);
 };
-
-
-

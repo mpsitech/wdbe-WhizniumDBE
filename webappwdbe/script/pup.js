@@ -42,4 +42,3 @@ function refreshPup(contdoc, srcdoc, id, size, blk, numSel, act, chg) {
 	if (act) myselect.removeAttribute("disabled");
 	else myselect.setAttribute("disabled", "disabled");
 };
-

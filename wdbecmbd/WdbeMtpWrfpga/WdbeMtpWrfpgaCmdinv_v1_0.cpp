@@ -183,6 +183,3 @@ void WdbeMtpWrfpgaCmdinv_v1_0::writeMdlVhd(
 	outfile << "-- IP impl.buf.updReqE --- IEND" << endl;
 };
 // IP cust --- IEND
-
-
-

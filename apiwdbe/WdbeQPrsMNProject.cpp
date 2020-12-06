@@ -123,4 +123,3 @@ bool ListWdbeQPrsMNProject::readXML(
 
 	return basefound;
 };
-

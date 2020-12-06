@@ -41,4 +41,3 @@ public class WdbeQUnt1NTarget {
 		return false;
 	};
 };
-

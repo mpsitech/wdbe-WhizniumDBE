@@ -98,4 +98,3 @@ namespace QryWdbeSil1NBank {
 };
 
 #endif
-

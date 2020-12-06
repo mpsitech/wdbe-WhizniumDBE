@@ -113,6 +113,3 @@ void WdbeWrfpgaDeploy::writeChkoutSh(
 	outfile << "# IP iseunts --- IEND" << endl;
 };
 // IP cust --- IEND
-
-
-

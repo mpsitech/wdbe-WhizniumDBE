@@ -59,4 +59,3 @@ public class ListWdbeQLibAMakefile {
 		return false;
 	};
 };
-

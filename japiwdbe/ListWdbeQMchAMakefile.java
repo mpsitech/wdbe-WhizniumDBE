@@ -59,4 +59,3 @@ public class ListWdbeQMchAMakefile {
 		return false;
 	};
 };
-

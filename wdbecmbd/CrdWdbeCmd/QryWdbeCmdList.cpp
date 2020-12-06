@@ -241,8 +241,8 @@ void QryWdbeCmdList::rerun_orderSQL(
 			, const uint preIxOrd
 		) {
 	if (preIxOrd == VecVOrd::REU) sqlstr += " ORDER BY TblWdbeMCommand.refUref ASC";
-	else if (preIxOrd == VecVOrd::SRF) sqlstr += " ORDER BY TblWdbeMCommand.sref ASC";
 	else if (preIxOrd == VecVOrd::RET) sqlstr += " ORDER BY TblWdbeMCommand.refIxVTbl ASC";
+	else if (preIxOrd == VecVOrd::SRF) sqlstr += " ORDER BY TblWdbeMCommand.sref ASC";
 };
 
 void QryWdbeCmdList::fetch(
@@ -423,27 +423,13 @@ void QryWdbeCmdList::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBECMDUPD_REFEQ) {
-		call->abort = handleCallWdbeCmdUpd_refEq(dbswdbe, call->jref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECMDMOD) {
+	if (call->ixVCall == VecWdbeVCall::CALLWDBECMDMOD) {
 		call->abort = handleCallWdbeCmdMod(dbswdbe, call->jref);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECMDUPD_REFEQ) {
+		call->abort = handleCallWdbeCmdUpd_refEq(dbswdbe, call->jref);
 	} else if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
 		call->abort = handleCallWdbeStubChgFromSelf(dbswdbe);
 	};
-};
-
-bool QryWdbeCmdList::handleCallWdbeCmdUpd_refEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-
-	if (ixWdbeVQrystate != VecWdbeVQrystate::OOD) {
-		ixWdbeVQrystate = VecWdbeVQrystate::OOD;
-		xchg->triggerCall(dbswdbe, VecWdbeVCall::CALLWDBESTATCHG, jref);
-	};
-
-	return retval;
 };
 
 bool QryWdbeCmdList::handleCallWdbeCmdMod(
@@ -460,6 +446,20 @@ bool QryWdbeCmdList::handleCallWdbeCmdMod(
 	return retval;
 };
 
+bool QryWdbeCmdList::handleCallWdbeCmdUpd_refEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+
+	if (ixWdbeVQrystate != VecWdbeVQrystate::OOD) {
+		ixWdbeVQrystate = VecWdbeVQrystate::OOD;
+		xchg->triggerCall(dbswdbe, VecWdbeVCall::CALLWDBESTATCHG, jref);
+	};
+
+	return retval;
+};
+
 bool QryWdbeCmdList::handleCallWdbeStubChgFromSelf(
 			DbsWdbe* dbswdbe
 		) {
@@ -467,6 +467,3 @@ bool QryWdbeCmdList::handleCallWdbeStubChgFromSelf(
 	// IP handleCallWdbeStubChgFromSelf --- INSERT
 	return retval;
 };
-
-
-

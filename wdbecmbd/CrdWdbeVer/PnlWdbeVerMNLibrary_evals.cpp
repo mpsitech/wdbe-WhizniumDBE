@@ -87,6 +87,3 @@ bool PnlWdbeVerMNLibrary::evalButSubActive(
 
 	return(args.back());
 };
-
-
-

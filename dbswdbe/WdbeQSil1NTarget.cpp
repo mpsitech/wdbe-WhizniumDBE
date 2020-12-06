@@ -793,4 +793,3 @@ ubigint PgTblWdbeQSil1NTarget::loadRstByJref(
 	return loadRstByStmt("TblWdbeQSil1NTarget_loadRstByJref", 1, vals, l, f, append, rst);
 };
 #endif
-

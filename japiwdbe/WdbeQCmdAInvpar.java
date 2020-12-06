@@ -69,4 +69,3 @@ public class WdbeQCmdAInvpar {
 		return false;
 	};
 };
-

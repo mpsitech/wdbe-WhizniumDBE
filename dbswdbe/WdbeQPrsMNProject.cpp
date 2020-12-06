@@ -889,4 +889,3 @@ ubigint PgTblWdbeQPrsMNProject::loadRstByJref(
 	return loadRstByStmt("TblWdbeQPrsMNProject_loadRstByJref", 1, vals, l, f, append, rst);
 };
 #endif
-

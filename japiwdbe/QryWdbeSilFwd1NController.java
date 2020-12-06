@@ -272,4 +272,3 @@ public class QryWdbeSilFwd1NController {
 	};
 
 };
-

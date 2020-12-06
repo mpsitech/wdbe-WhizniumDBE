@@ -133,6 +133,3 @@ bool DlgWdbeVerDetdd::evalIfiUldActive(
 
 	return(args.back());
 };
-
-
-

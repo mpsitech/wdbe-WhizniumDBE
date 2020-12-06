@@ -17,4 +17,3 @@ public class DpchAppWdbeInit extends DpchAppWdbe {
 		super(VecWdbeVDpch.DPCHAPPWDBEINIT, scrJref);
 	};
 };
-

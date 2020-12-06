@@ -515,6 +515,3 @@ bool PnlWdbeNavDescr::evalButVarViewActive(
 
 	return(args.back());
 };
-
-
-

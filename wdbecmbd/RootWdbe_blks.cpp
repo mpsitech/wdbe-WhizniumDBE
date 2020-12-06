@@ -146,6 +146,3 @@ void RootWdbe::DpchEngData::writeXML(
 		if (has(FEEDFENSSPS)) feedFEnsSps.writeXML(wr);
 	xmlTextWriterEndElement(wr);
 };
-
-
-

@@ -55,6 +55,3 @@ bool PnlWdbeVerBvr1NVersion::evalButViewActive(
 
 	return(args.back());
 };
-
-
-

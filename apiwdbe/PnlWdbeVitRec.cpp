@@ -360,4 +360,3 @@ void PnlWdbeVitRec::DpchEngData::readXML(
 		tag = Tag();
 	};
 };
-

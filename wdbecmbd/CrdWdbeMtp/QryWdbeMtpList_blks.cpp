@@ -221,6 +221,3 @@ set<uint> QryWdbeMtpList::StgIac::diff(
 
 	return(diffitems);
 };
-
-
-

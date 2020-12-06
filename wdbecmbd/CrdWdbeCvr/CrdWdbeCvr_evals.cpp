@@ -141,6 +141,3 @@ bool CrdWdbeCvr::evalMitCrdWcoActive(
 
 	return(args.back());
 };
-
-
-

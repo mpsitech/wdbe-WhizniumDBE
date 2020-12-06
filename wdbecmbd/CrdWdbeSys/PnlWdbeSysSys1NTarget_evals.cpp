@@ -167,6 +167,3 @@ bool PnlWdbeSysSys1NTarget::evalButDeleteActive(
 
 	return(args.back());
 };
-
-
-

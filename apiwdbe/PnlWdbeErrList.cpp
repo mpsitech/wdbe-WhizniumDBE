@@ -584,4 +584,3 @@ void PnlWdbeErrList::DpchEngData::readXML(
 		stgiacqry = QryWdbeErrList::StgIac();
 	};
 };
-

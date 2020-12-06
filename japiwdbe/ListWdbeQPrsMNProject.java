@@ -59,4 +59,3 @@ public class ListWdbeQPrsMNProject {
 		return false;
 	};
 };
-

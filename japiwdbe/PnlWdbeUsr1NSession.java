@@ -645,4 +645,3 @@ public class PnlWdbeUsr1NSession {
 	};
 
 };
-

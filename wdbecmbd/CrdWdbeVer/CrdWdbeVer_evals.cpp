@@ -185,6 +185,3 @@ bool CrdWdbeVer::evalMitCrdIdsActive(
 
 	return(args.back());
 };
-
-
-

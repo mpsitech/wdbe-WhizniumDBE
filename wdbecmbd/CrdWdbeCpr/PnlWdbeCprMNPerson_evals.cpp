@@ -87,6 +87,3 @@ bool PnlWdbeCprMNPerson::evalButSubActive(
 
 	return(args.back());
 };
-
-
-
