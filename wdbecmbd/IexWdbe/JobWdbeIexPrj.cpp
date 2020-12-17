@@ -310,6 +310,8 @@ uint JobWdbeIexPrj::enterSgeImport(
 	ImeitemIMRelease* rls = NULL;
 	ImeitemIRMLibraryMVersion* libRver = NULL;
 
+	uint num1;
+
 	// IP enterSgeImport.prep --- IBEGIN
 	WdbeMProject* prj_r = NULL;
 
@@ -366,12 +368,15 @@ uint JobWdbeIexPrj::enterSgeImport(
 				impcnt++;
 			};
 
+			num1 = 1;
+
 			for (unsigned int ix1 = 0; ix1 < prj->imeimversion.nodes.size(); ix1++) {
 				ver = prj->imeimversion.nodes[ix1];
 
 				ver->grp = grp;
 				ver->own = own;
-				ver->refWdbeMProject = prj->ref;
+				ver->prjRefWdbeMProject = prj->ref;
+				ver->prjNum = num1++;
 				//ver->Major: TBL
 				//ver->Minor: TBL
 				//ver->Sub: TBL

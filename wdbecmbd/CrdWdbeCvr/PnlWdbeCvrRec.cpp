@@ -40,8 +40,8 @@ PnlWdbeCvrRec::PnlWdbeCvrRec(
 
 	pnlhk1nmodule = NULL;
 	pnlbcv1ncoreversion = NULL;
-	pnlaplh = NULL;
 	pnlaip = NULL;
+	pnlaplh = NULL;
 	pnldetail = NULL;
 
 	// IP constructor.cust1 --- INSERT
@@ -103,21 +103,21 @@ void PnlWdbeCvrRec::refresh(
 
 	if (statshr.ixWdbeVExpstate == VecWdbeVExpstate::MIND) {
 		if (pnldetail) {delete pnldetail; pnldetail = NULL;};
-		if (pnlaip) {delete pnlaip; pnlaip = NULL;};
 		if (pnlaplh) {delete pnlaplh; pnlaplh = NULL;};
+		if (pnlaip) {delete pnlaip; pnlaip = NULL;};
 		if (pnlbcv1ncoreversion) {delete pnlbcv1ncoreversion; pnlbcv1ncoreversion = NULL;};
 		if (pnlhk1nmodule) {delete pnlhk1nmodule; pnlhk1nmodule = NULL;};
 	} else {
 		if (!pnldetail) pnldetail = new PnlWdbeCvrDetail(xchg, dbswdbe, jref, ixWdbeVLocale);
-		if (!pnlaip) pnlaip = new PnlWdbeCvrAIp(xchg, dbswdbe, jref, ixWdbeVLocale);
 		if (!pnlaplh) pnlaplh = new PnlWdbeCvrAPlh(xchg, dbswdbe, jref, ixWdbeVLocale);
+		if (!pnlaip) pnlaip = new PnlWdbeCvrAIp(xchg, dbswdbe, jref, ixWdbeVLocale);
 		if (!pnlbcv1ncoreversion) pnlbcv1ncoreversion = new PnlWdbeCvrBcv1NCoreversion(xchg, dbswdbe, jref, ixWdbeVLocale);
 		if (!pnlhk1nmodule) pnlhk1nmodule = new PnlWdbeCvrHk1NModule(xchg, dbswdbe, jref, ixWdbeVLocale);
 	};
 
 	statshr.jrefDetail = ((pnldetail) ? pnldetail->jref : 0);
-	statshr.jrefAIp = ((pnlaip) ? pnlaip->jref : 0);
 	statshr.jrefAPlh = ((pnlaplh) ? pnlaplh->jref : 0);
+	statshr.jrefAIp = ((pnlaip) ? pnlaip->jref : 0);
 	statshr.jrefBcv1NCoreversion = ((pnlbcv1ncoreversion) ? pnlbcv1ncoreversion->jref : 0);
 	statshr.jrefHk1NModule = ((pnlhk1nmodule) ? pnlhk1nmodule->jref : 0);
 
@@ -147,8 +147,8 @@ void PnlWdbeCvrRec::updatePreset(
 
 		if (recCvr.ref != 0) {
 			if (pnldetail) pnldetail->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
-			if (pnlaip) pnlaip->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
 			if (pnlaplh) pnlaplh->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
+			if (pnlaip) pnlaip->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
 			if (pnlbcv1ncoreversion) pnlbcv1ncoreversion->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
 			if (pnlhk1nmodule) pnlhk1nmodule->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
 		};

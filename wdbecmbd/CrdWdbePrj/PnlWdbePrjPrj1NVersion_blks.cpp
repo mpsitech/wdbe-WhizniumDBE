@@ -1,9 +1,9 @@
 /**
-	* \file PnlWdbePrj1NVersion_blks.cpp
-	* job handler for job PnlWdbePrj1NVersion (implementation of blocks)
+	* \file PnlWdbePrjPrj1NVersion_blks.cpp
+	* job handler for job PnlWdbePrjPrj1NVersion (implementation of blocks)
 	* \copyright (C) 2016-2020 MPSI Technologies GmbH
 	* \author Alexander Wirthmueller (auto-generation)
-	* \date created: 28 Nov 2020
+	* \date created: 16 Dec 2020
 	*/
 // IP header --- ABOVE
 
@@ -12,14 +12,16 @@ using namespace Sbecore;
 using namespace Xmlio;
 
 /******************************************************************************
- class PnlWdbePrj1NVersion::VecVDo
+ class PnlWdbePrjPrj1NVersion::VecVDo
  ******************************************************************************/
 
-uint PnlWdbePrj1NVersion::VecVDo::getIx(
+uint PnlWdbePrjPrj1NVersion::VecVDo::getIx(
 			const string& sref
 		) {
 	string s = StrMod::lc(sref);
 
+	if (s == "butupclick") return BUTUPCLICK;
+	if (s == "butdownclick") return BUTDOWNCLICK;
 	if (s == "butviewclick") return BUTVIEWCLICK;
 	if (s == "butnewclick") return BUTNEWCLICK;
 	if (s == "butdeleteclick") return BUTDELETECLICK;
@@ -28,9 +30,11 @@ uint PnlWdbePrj1NVersion::VecVDo::getIx(
 	return(0);
 };
 
-string PnlWdbePrj1NVersion::VecVDo::getSref(
+string PnlWdbePrjPrj1NVersion::VecVDo::getSref(
 			const uint ix
 		) {
+	if (ix == BUTUPCLICK) return("ButUpClick");
+	if (ix == BUTDOWNCLICK) return("ButDownClick");
 	if (ix == BUTVIEWCLICK) return("ButViewClick");
 	if (ix == BUTNEWCLICK) return("ButNewClick");
 	if (ix == BUTDELETECLICK) return("ButDeleteClick");
@@ -40,10 +44,10 @@ string PnlWdbePrj1NVersion::VecVDo::getSref(
 };
 
 /******************************************************************************
- class PnlWdbePrj1NVersion::ContInf
+ class PnlWdbePrjPrj1NVersion::ContInf
  ******************************************************************************/
 
-PnlWdbePrj1NVersion::ContInf::ContInf(
+PnlWdbePrjPrj1NVersion::ContInf::ContInf(
 			const uint numFCsiQst
 		) :
 			Block()
@@ -53,23 +57,23 @@ PnlWdbePrj1NVersion::ContInf::ContInf(
 	mask = {NUMFCSIQST};
 };
 
-void PnlWdbePrj1NVersion::ContInf::writeXML(
+void PnlWdbePrjPrj1NVersion::ContInf::writeXML(
 			xmlTextWriter* wr
 			, string difftag
 			, bool shorttags
 		) {
-	if (difftag.length() == 0) difftag = "ContInfWdbePrj1NVersion";
+	if (difftag.length() == 0) difftag = "ContInfWdbePrjPrj1NVersion";
 
 	string itemtag;
 	if (shorttags) itemtag = "Ci";
-	else itemtag = "ContitemInfWdbePrj1NVersion";
+	else itemtag = "ContitemInfWdbePrjPrj1NVersion";
 
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
 		writeUintAttr(wr, itemtag, "sref", "numFCsiQst", numFCsiQst);
 	xmlTextWriterEndElement(wr);
 };
 
-set<uint> PnlWdbePrj1NVersion::ContInf::comm(
+set<uint> PnlWdbePrjPrj1NVersion::ContInf::comm(
 			const ContInf* comp
 		) {
 	set<uint> items;
@@ -79,7 +83,7 @@ set<uint> PnlWdbePrj1NVersion::ContInf::comm(
 	return(items);
 };
 
-set<uint> PnlWdbePrj1NVersion::ContInf::diff(
+set<uint> PnlWdbePrjPrj1NVersion::ContInf::diff(
 			const ContInf* comp
 		) {
 	set<uint> commitems;
@@ -94,20 +98,20 @@ set<uint> PnlWdbePrj1NVersion::ContInf::diff(
 };
 
 /******************************************************************************
- class PnlWdbePrj1NVersion::StatApp
+ class PnlWdbePrjPrj1NVersion::StatApp
  ******************************************************************************/
 
-void PnlWdbePrj1NVersion::StatApp::writeXML(
+void PnlWdbePrjPrj1NVersion::StatApp::writeXML(
 			xmlTextWriter* wr
 			, string difftag
 			, bool shorttags
 			, const uint ixWdbeVExpstate
 		) {
-	if (difftag.length() == 0) difftag = "StatAppWdbePrj1NVersion";
+	if (difftag.length() == 0) difftag = "StatAppWdbePrjPrj1NVersion";
 
 	string itemtag;
 	if (shorttags) itemtag = "Si";
-	else itemtag = "StatitemAppWdbePrj1NVersion";
+	else itemtag = "StatitemAppWdbePrjPrj1NVersion";
 
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
 		writeStringAttr(wr, itemtag, "sref", "srefIxWdbeVExpstate", VecWdbeVExpstate::getSref(ixWdbeVExpstate));
@@ -115,11 +119,15 @@ void PnlWdbePrj1NVersion::StatApp::writeXML(
 };
 
 /******************************************************************************
- class PnlWdbePrj1NVersion::StatShr
+ class PnlWdbePrjPrj1NVersion::StatShr
  ******************************************************************************/
 
-PnlWdbePrj1NVersion::StatShr::StatShr(
-			const bool ButViewAvail
+PnlWdbePrjPrj1NVersion::StatShr::StatShr(
+			const bool ButUpAvail
+			, const bool ButUpActive
+			, const bool ButDownAvail
+			, const bool ButDownActive
+			, const bool ButViewAvail
 			, const bool ButViewActive
 			, const bool ButNewAvail
 			, const bool ButDeleteAvail
@@ -127,27 +135,35 @@ PnlWdbePrj1NVersion::StatShr::StatShr(
 		) :
 			Block()
 		{
+	this->ButUpAvail = ButUpAvail;
+	this->ButUpActive = ButUpActive;
+	this->ButDownAvail = ButDownAvail;
+	this->ButDownActive = ButDownActive;
 	this->ButViewAvail = ButViewAvail;
 	this->ButViewActive = ButViewActive;
 	this->ButNewAvail = ButNewAvail;
 	this->ButDeleteAvail = ButDeleteAvail;
 	this->ButDeleteActive = ButDeleteActive;
 
-	mask = {BUTVIEWAVAIL, BUTVIEWACTIVE, BUTNEWAVAIL, BUTDELETEAVAIL, BUTDELETEACTIVE};
+	mask = {BUTUPAVAIL, BUTUPACTIVE, BUTDOWNAVAIL, BUTDOWNACTIVE, BUTVIEWAVAIL, BUTVIEWACTIVE, BUTNEWAVAIL, BUTDELETEAVAIL, BUTDELETEACTIVE};
 };
 
-void PnlWdbePrj1NVersion::StatShr::writeXML(
+void PnlWdbePrjPrj1NVersion::StatShr::writeXML(
 			xmlTextWriter* wr
 			, string difftag
 			, bool shorttags
 		) {
-	if (difftag.length() == 0) difftag = "StatShrWdbePrj1NVersion";
+	if (difftag.length() == 0) difftag = "StatShrWdbePrjPrj1NVersion";
 
 	string itemtag;
 	if (shorttags) itemtag = "Si";
-	else itemtag = "StatitemShrWdbePrj1NVersion";
+	else itemtag = "StatitemShrWdbePrjPrj1NVersion";
 
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
+		writeBoolAttr(wr, itemtag, "sref", "ButUpAvail", ButUpAvail);
+		writeBoolAttr(wr, itemtag, "sref", "ButUpActive", ButUpActive);
+		writeBoolAttr(wr, itemtag, "sref", "ButDownAvail", ButDownAvail);
+		writeBoolAttr(wr, itemtag, "sref", "ButDownActive", ButDownActive);
 		writeBoolAttr(wr, itemtag, "sref", "ButViewAvail", ButViewAvail);
 		writeBoolAttr(wr, itemtag, "sref", "ButViewActive", ButViewActive);
 		writeBoolAttr(wr, itemtag, "sref", "ButNewAvail", ButNewAvail);
@@ -156,11 +172,15 @@ void PnlWdbePrj1NVersion::StatShr::writeXML(
 	xmlTextWriterEndElement(wr);
 };
 
-set<uint> PnlWdbePrj1NVersion::StatShr::comm(
+set<uint> PnlWdbePrjPrj1NVersion::StatShr::comm(
 			const StatShr* comp
 		) {
 	set<uint> items;
 
+	if (ButUpAvail == comp->ButUpAvail) insert(items, BUTUPAVAIL);
+	if (ButUpActive == comp->ButUpActive) insert(items, BUTUPACTIVE);
+	if (ButDownAvail == comp->ButDownAvail) insert(items, BUTDOWNAVAIL);
+	if (ButDownActive == comp->ButDownActive) insert(items, BUTDOWNACTIVE);
 	if (ButViewAvail == comp->ButViewAvail) insert(items, BUTVIEWAVAIL);
 	if (ButViewActive == comp->ButViewActive) insert(items, BUTVIEWACTIVE);
 	if (ButNewAvail == comp->ButNewAvail) insert(items, BUTNEWAVAIL);
@@ -170,7 +190,7 @@ set<uint> PnlWdbePrj1NVersion::StatShr::comm(
 	return(items);
 };
 
-set<uint> PnlWdbePrj1NVersion::StatShr::diff(
+set<uint> PnlWdbePrjPrj1NVersion::StatShr::diff(
 			const StatShr* comp
 		) {
 	set<uint> commitems;
@@ -178,17 +198,17 @@ set<uint> PnlWdbePrj1NVersion::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {BUTVIEWAVAIL, BUTVIEWACTIVE, BUTNEWAVAIL, BUTDELETEAVAIL, BUTDELETEACTIVE};
+	diffitems = {BUTUPAVAIL, BUTUPACTIVE, BUTDOWNAVAIL, BUTDOWNACTIVE, BUTVIEWAVAIL, BUTVIEWACTIVE, BUTNEWAVAIL, BUTDELETEAVAIL, BUTDELETEACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
 };
 
 /******************************************************************************
- class PnlWdbePrj1NVersion::StgIac
+ class PnlWdbePrjPrj1NVersion::StgIac
  ******************************************************************************/
 
-PnlWdbePrj1NVersion::StgIac::StgIac(
+PnlWdbePrjPrj1NVersion::StgIac::StgIac(
 			const uint TcoRefWidth
 		) :
 			Block()
@@ -197,7 +217,7 @@ PnlWdbePrj1NVersion::StgIac::StgIac(
 	mask = {TCOREFWIDTH};
 };
 
-bool PnlWdbePrj1NVersion::StgIac::readXML(
+bool PnlWdbePrjPrj1NVersion::StgIac::readXML(
 			xmlXPathContext* docctx
 			, string basexpath
 			, bool addbasetag
@@ -207,11 +227,11 @@ bool PnlWdbePrj1NVersion::StgIac::readXML(
 	bool basefound;
 
 	if (addbasetag)
-		basefound = checkUclcXPaths(docctx, basexpath, basexpath, "StgIacWdbePrj1NVersion");
+		basefound = checkUclcXPaths(docctx, basexpath, basexpath, "StgIacWdbePrjPrj1NVersion");
 	else
 		basefound = checkXPath(docctx, basexpath);
 
-	string itemtag = "StgitemIacWdbePrj1NVersion";
+	string itemtag = "StgitemIacWdbePrjPrj1NVersion";
 
 	if (basefound) {
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoRefWidth", TcoRefWidth)) add(TCOREFWIDTH);
@@ -220,23 +240,23 @@ bool PnlWdbePrj1NVersion::StgIac::readXML(
 	return basefound;
 };
 
-void PnlWdbePrj1NVersion::StgIac::writeXML(
+void PnlWdbePrjPrj1NVersion::StgIac::writeXML(
 			xmlTextWriter* wr
 			, string difftag
 			, bool shorttags
 		) {
-	if (difftag.length() == 0) difftag = "StgIacWdbePrj1NVersion";
+	if (difftag.length() == 0) difftag = "StgIacWdbePrjPrj1NVersion";
 
 	string itemtag;
 	if (shorttags) itemtag = "Si";
-	else itemtag = "StgitemIacWdbePrj1NVersion";
+	else itemtag = "StgitemIacWdbePrjPrj1NVersion";
 
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
 		writeUintAttr(wr, itemtag, "sref", "TcoRefWidth", TcoRefWidth);
 	xmlTextWriterEndElement(wr);
 };
 
-set<uint> PnlWdbePrj1NVersion::StgIac::comm(
+set<uint> PnlWdbePrjPrj1NVersion::StgIac::comm(
 			const StgIac* comp
 		) {
 	set<uint> items;
@@ -246,7 +266,7 @@ set<uint> PnlWdbePrj1NVersion::StgIac::comm(
 	return(items);
 };
 
-set<uint> PnlWdbePrj1NVersion::StgIac::diff(
+set<uint> PnlWdbePrjPrj1NVersion::StgIac::diff(
 			const StgIac* comp
 		) {
 	set<uint> commitems;
@@ -261,20 +281,20 @@ set<uint> PnlWdbePrj1NVersion::StgIac::diff(
 };
 
 /******************************************************************************
- class PnlWdbePrj1NVersion::Tag
+ class PnlWdbePrjPrj1NVersion::Tag
  ******************************************************************************/
 
-void PnlWdbePrj1NVersion::Tag::writeXML(
+void PnlWdbePrjPrj1NVersion::Tag::writeXML(
 			const uint ixWdbeVLocale
 			, xmlTextWriter* wr
 			, string difftag
 			, bool shorttags
 		) {
-	if (difftag.length() == 0) difftag = "TagWdbePrj1NVersion";
+	if (difftag.length() == 0) difftag = "TagWdbePrjPrj1NVersion";
 
 	string itemtag;
 	if (shorttags) itemtag = "Ti";
-	else itemtag = "TagitemWdbePrj1NVersion";
+	else itemtag = "TagitemWdbePrjPrj1NVersion";
 
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
 		if (ixWdbeVLocale == VecWdbeVLocale::ENUS) {
@@ -290,15 +310,15 @@ void PnlWdbePrj1NVersion::Tag::writeXML(
 };
 
 /******************************************************************************
- class PnlWdbePrj1NVersion::DpchAppData
+ class PnlWdbePrjPrj1NVersion::DpchAppData
  ******************************************************************************/
 
-PnlWdbePrj1NVersion::DpchAppData::DpchAppData() :
-			DpchAppWdbe(VecWdbeVDpch::DPCHAPPWDBEPRJ1NVERSIONDATA)
+PnlWdbePrjPrj1NVersion::DpchAppData::DpchAppData() :
+			DpchAppWdbe(VecWdbeVDpch::DPCHAPPWDBEPRJPRJ1NVERSIONDATA)
 		{
 };
 
-string PnlWdbePrj1NVersion::DpchAppData::getSrefsMask() {
+string PnlWdbePrjPrj1NVersion::DpchAppData::getSrefsMask() {
 	vector<string> ss;
 	string srefs;
 
@@ -311,7 +331,7 @@ string PnlWdbePrj1NVersion::DpchAppData::getSrefsMask() {
 	return(srefs);
 };
 
-void PnlWdbePrj1NVersion::DpchAppData::readXML(
+void PnlWdbePrjPrj1NVersion::DpchAppData::readXML(
 			xmlXPathContext* docctx
 			, string basexpath
 			, bool addbasetag
@@ -323,7 +343,7 @@ void PnlWdbePrj1NVersion::DpchAppData::readXML(
 	bool basefound;
 
 	if (addbasetag)
-		basefound = checkUclcXPaths(docctx, basexpath, basexpath, "DpchAppWdbePrj1NVersionData");
+		basefound = checkUclcXPaths(docctx, basexpath, basexpath, "DpchAppWdbePrjPrj1NVersionData");
 	else
 		basefound = checkXPath(docctx, basexpath);
 
@@ -336,21 +356,21 @@ void PnlWdbePrj1NVersion::DpchAppData::readXML(
 		if (stgiacqry.readXML(docctx, basexpath, true)) add(STGIACQRY);
 	} else {
 		stgiac = StgIac();
-		stgiacqry = QryWdbePrj1NVersion::StgIac();
+		stgiacqry = QryWdbePrjPrj1NVersion::StgIac();
 	};
 };
 
 /******************************************************************************
- class PnlWdbePrj1NVersion::DpchAppDo
+ class PnlWdbePrjPrj1NVersion::DpchAppDo
  ******************************************************************************/
 
-PnlWdbePrj1NVersion::DpchAppDo::DpchAppDo() :
-			DpchAppWdbe(VecWdbeVDpch::DPCHAPPWDBEPRJ1NVERSIONDO)
+PnlWdbePrjPrj1NVersion::DpchAppDo::DpchAppDo() :
+			DpchAppWdbe(VecWdbeVDpch::DPCHAPPWDBEPRJPRJ1NVERSIONDO)
 		{
 	ixVDo = 0;
 };
 
-string PnlWdbePrj1NVersion::DpchAppDo::getSrefsMask() {
+string PnlWdbePrjPrj1NVersion::DpchAppDo::getSrefsMask() {
 	vector<string> ss;
 	string srefs;
 
@@ -362,7 +382,7 @@ string PnlWdbePrj1NVersion::DpchAppDo::getSrefsMask() {
 	return(srefs);
 };
 
-void PnlWdbePrj1NVersion::DpchAppDo::readXML(
+void PnlWdbePrjPrj1NVersion::DpchAppDo::readXML(
 			xmlXPathContext* docctx
 			, string basexpath
 			, bool addbasetag
@@ -375,7 +395,7 @@ void PnlWdbePrj1NVersion::DpchAppDo::readXML(
 	bool basefound;
 
 	if (addbasetag)
-		basefound = checkUclcXPaths(docctx, basexpath, basexpath, "DpchAppWdbePrj1NVersionDo");
+		basefound = checkUclcXPaths(docctx, basexpath, basexpath, "DpchAppWdbePrjPrj1NVersionDo");
 	else
 		basefound = checkXPath(docctx, basexpath);
 
@@ -393,21 +413,21 @@ void PnlWdbePrj1NVersion::DpchAppDo::readXML(
 };
 
 /******************************************************************************
- class PnlWdbePrj1NVersion::DpchEngData
+ class PnlWdbePrjPrj1NVersion::DpchEngData
  ******************************************************************************/
 
-PnlWdbePrj1NVersion::DpchEngData::DpchEngData(
+PnlWdbePrjPrj1NVersion::DpchEngData::DpchEngData(
 			const ubigint jref
 			, ContInf* continf
 			, Feed* feedFCsiQst
 			, StatShr* statshr
 			, StgIac* stgiac
-			, ListWdbeQPrj1NVersion* rst
-			, QryWdbePrj1NVersion::StatShr* statshrqry
-			, QryWdbePrj1NVersion::StgIac* stgiacqry
+			, ListWdbeQPrjPrj1NVersion* rst
+			, QryWdbePrjPrj1NVersion::StatShr* statshrqry
+			, QryWdbePrjPrj1NVersion::StgIac* stgiacqry
 			, const set<uint>& mask
 		) :
-			DpchEngWdbe(VecWdbeVDpch::DPCHENGWDBEPRJ1NVERSIONDATA, jref)
+			DpchEngWdbe(VecWdbeVDpch::DPCHENGWDBEPRJPRJ1NVERSIONDATA, jref)
 		{
 	if (find(mask, ALL)) this->mask = {JREF, CONTINF, FEEDFCSIQST, STATAPP, STATSHR, STGIAC, TAG, RST, STATAPPQRY, STATSHRQRY, STGIACQRY};
 	else this->mask = mask;
@@ -421,7 +441,7 @@ PnlWdbePrj1NVersion::DpchEngData::DpchEngData(
 	if (find(this->mask, STGIACQRY) && stgiacqry) this->stgiacqry = *stgiacqry;
 };
 
-string PnlWdbePrj1NVersion::DpchEngData::getSrefsMask() {
+string PnlWdbePrjPrj1NVersion::DpchEngData::getSrefsMask() {
 	vector<string> ss;
 	string srefs;
 
@@ -442,7 +462,7 @@ string PnlWdbePrj1NVersion::DpchEngData::getSrefsMask() {
 	return(srefs);
 };
 
-void PnlWdbePrj1NVersion::DpchEngData::merge(
+void PnlWdbePrjPrj1NVersion::DpchEngData::merge(
 			DpchEngWdbe* dpcheng
 		) {
 	DpchEngData* src = (DpchEngData*) dpcheng;
@@ -460,11 +480,11 @@ void PnlWdbePrj1NVersion::DpchEngData::merge(
 	if (src->has(STGIACQRY)) {stgiacqry = src->stgiacqry; add(STGIACQRY);};
 };
 
-void PnlWdbePrj1NVersion::DpchEngData::writeXML(
+void PnlWdbePrjPrj1NVersion::DpchEngData::writeXML(
 			const uint ixWdbeVLocale
 			, xmlTextWriter* wr
 		) {
-	xmlTextWriterStartElement(wr, BAD_CAST "DpchEngWdbePrj1NVersionData");
+	xmlTextWriterStartElement(wr, BAD_CAST "DpchEngWdbePrjPrj1NVersionData");
 	xmlTextWriterWriteAttribute(wr, BAD_CAST "xmlns", BAD_CAST "http://www.mpsitech.com/wdbe");
 		if (has(JREF)) writeString(wr, "scrJref", Scr::scramble(jref));
 		if (has(CONTINF)) continf.writeXML(wr);
@@ -474,7 +494,7 @@ void PnlWdbePrj1NVersion::DpchEngData::writeXML(
 		if (has(STGIAC)) stgiac.writeXML(wr);
 		if (has(TAG)) Tag::writeXML(ixWdbeVLocale, wr);
 		if (has(RST)) rst.writeXML(wr);
-		if (has(STATAPPQRY)) QryWdbePrj1NVersion::StatApp::writeXML(wr);
+		if (has(STATAPPQRY)) QryWdbePrjPrj1NVersion::StatApp::writeXML(wr);
 		if (has(STATSHRQRY)) statshrqry.writeXML(wr);
 		if (has(STGIACQRY)) stgiacqry.writeXML(wr);
 	xmlTextWriterEndElement(wr);

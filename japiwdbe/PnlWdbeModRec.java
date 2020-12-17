@@ -116,12 +116,12 @@ public class PnlWdbeModRec {
 		public static final int INITDONEDETAIL = 1;
 		public static final int INITDONEKHDLTYPE = 2;
 		public static final int INITDONEAPAR = 3;
-		public static final int INITDONEMDL1NPORT = 4;
-		public static final int INITDONE1NPROCESS = 5;
-		public static final int INITDONEMDL1NSIGNAL = 6;
-		public static final int INITDONEMDL1NGENERIC = 7;
+		public static final int INITDONE1NPERIPHERAL = 4;
+		public static final int INITDONEMDL1NSIGNAL = 5;
+		public static final int INITDONE1NPROCESS = 6;
+		public static final int INITDONEMDL1NPORT = 7;
 		public static final int INITDONECOR1NIMBUF = 8;
-		public static final int INITDONE1NPERIPHERAL = 9;
+		public static final int INITDONEMDL1NGENERIC = 9;
 		public static final int INITDONESUP1NMODULE = 10;
 		public static final int INITDONEMGE1NSIGNAL = 11;
 		public static final int INITDONECTRREF1NERROR = 12;
@@ -133,12 +133,12 @@ public class PnlWdbeModRec {
 					boolean initdoneDetail
 					, boolean initdoneKHdltype
 					, boolean initdoneAPar
-					, boolean initdoneMdl1NPort
-					, boolean initdone1NProcess
-					, boolean initdoneMdl1NSignal
-					, boolean initdoneMdl1NGeneric
-					, boolean initdoneCor1NImbuf
 					, boolean initdone1NPeripheral
+					, boolean initdoneMdl1NSignal
+					, boolean initdone1NProcess
+					, boolean initdoneMdl1NPort
+					, boolean initdoneCor1NImbuf
+					, boolean initdoneMdl1NGeneric
 					, boolean initdoneSup1NModule
 					, boolean initdoneMge1NSignal
 					, boolean initdoneCtrRef1NError
@@ -149,12 +149,12 @@ public class PnlWdbeModRec {
 			this.initdoneDetail = initdoneDetail;
 			this.initdoneKHdltype = initdoneKHdltype;
 			this.initdoneAPar = initdoneAPar;
-			this.initdoneMdl1NPort = initdoneMdl1NPort;
-			this.initdone1NProcess = initdone1NProcess;
-			this.initdoneMdl1NSignal = initdoneMdl1NSignal;
-			this.initdoneMdl1NGeneric = initdoneMdl1NGeneric;
-			this.initdoneCor1NImbuf = initdoneCor1NImbuf;
 			this.initdone1NPeripheral = initdone1NPeripheral;
+			this.initdoneMdl1NSignal = initdoneMdl1NSignal;
+			this.initdone1NProcess = initdone1NProcess;
+			this.initdoneMdl1NPort = initdoneMdl1NPort;
+			this.initdoneCor1NImbuf = initdoneCor1NImbuf;
+			this.initdoneMdl1NGeneric = initdoneMdl1NGeneric;
 			this.initdoneSup1NModule = initdoneSup1NModule;
 			this.initdoneMge1NSignal = initdoneMge1NSignal;
 			this.initdoneCtrRef1NError = initdoneCtrRef1NError;
@@ -162,18 +162,18 @@ public class PnlWdbeModRec {
 			this.initdoneCtrRef1NCommand = initdoneCtrRef1NCommand;
 			this.initdoneCtrMNCommand = initdoneCtrMNCommand;
 
-			mask = new HashSet<Integer>(Arrays.asList(INITDONEDETAIL, INITDONEKHDLTYPE, INITDONEAPAR, INITDONEMDL1NPORT, INITDONE1NPROCESS, INITDONEMDL1NSIGNAL, INITDONEMDL1NGENERIC, INITDONECOR1NIMBUF, INITDONE1NPERIPHERAL, INITDONESUP1NMODULE, INITDONEMGE1NSIGNAL, INITDONECTRREF1NERROR, INITDONECTRHK1NVECTOR, INITDONECTRREF1NCOMMAND, INITDONECTRMNCOMMAND));
+			mask = new HashSet<Integer>(Arrays.asList(INITDONEDETAIL, INITDONEKHDLTYPE, INITDONEAPAR, INITDONE1NPERIPHERAL, INITDONEMDL1NSIGNAL, INITDONE1NPROCESS, INITDONEMDL1NPORT, INITDONECOR1NIMBUF, INITDONEMDL1NGENERIC, INITDONESUP1NMODULE, INITDONEMGE1NSIGNAL, INITDONECTRREF1NERROR, INITDONECTRHK1NVECTOR, INITDONECTRREF1NCOMMAND, INITDONECTRMNCOMMAND));
 		};
 
 		public boolean initdoneDetail;
 		public boolean initdoneKHdltype;
 		public boolean initdoneAPar;
-		public boolean initdoneMdl1NPort;
-		public boolean initdone1NProcess;
-		public boolean initdoneMdl1NSignal;
-		public boolean initdoneMdl1NGeneric;
-		public boolean initdoneCor1NImbuf;
 		public boolean initdone1NPeripheral;
+		public boolean initdoneMdl1NSignal;
+		public boolean initdone1NProcess;
+		public boolean initdoneMdl1NPort;
+		public boolean initdoneCor1NImbuf;
+		public boolean initdoneMdl1NGeneric;
 		public boolean initdoneSup1NModule;
 		public boolean initdoneMge1NSignal;
 		public boolean initdoneCtrRef1NError;
@@ -197,12 +197,12 @@ public class PnlWdbeModRec {
 				initdoneDetail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneDetail", mask, INITDONEDETAIL);
 				initdoneKHdltype = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneKHdltype", mask, INITDONEKHDLTYPE);
 				initdoneAPar = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneAPar", mask, INITDONEAPAR);
-				initdoneMdl1NPort = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneMdl1NPort", mask, INITDONEMDL1NPORT);
-				initdone1NProcess = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdone1NProcess", mask, INITDONE1NPROCESS);
-				initdoneMdl1NSignal = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneMdl1NSignal", mask, INITDONEMDL1NSIGNAL);
-				initdoneMdl1NGeneric = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneMdl1NGeneric", mask, INITDONEMDL1NGENERIC);
-				initdoneCor1NImbuf = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneCor1NImbuf", mask, INITDONECOR1NIMBUF);
 				initdone1NPeripheral = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdone1NPeripheral", mask, INITDONE1NPERIPHERAL);
+				initdoneMdl1NSignal = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneMdl1NSignal", mask, INITDONEMDL1NSIGNAL);
+				initdone1NProcess = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdone1NProcess", mask, INITDONE1NPROCESS);
+				initdoneMdl1NPort = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneMdl1NPort", mask, INITDONEMDL1NPORT);
+				initdoneCor1NImbuf = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneCor1NImbuf", mask, INITDONECOR1NIMBUF);
+				initdoneMdl1NGeneric = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneMdl1NGeneric", mask, INITDONEMDL1NGENERIC);
 				initdoneSup1NModule = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneSup1NModule", mask, INITDONESUP1NMODULE);
 				initdoneMge1NSignal = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneMge1NSignal", mask, INITDONEMGE1NSIGNAL);
 				initdoneCtrRef1NError = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneCtrRef1NError", mask, INITDONECTRREF1NERROR);
@@ -224,12 +224,12 @@ public class PnlWdbeModRec {
 			if (initdoneDetail == comp.initdoneDetail) items.add(INITDONEDETAIL);
 			if (initdoneKHdltype == comp.initdoneKHdltype) items.add(INITDONEKHDLTYPE);
 			if (initdoneAPar == comp.initdoneAPar) items.add(INITDONEAPAR);
-			if (initdoneMdl1NPort == comp.initdoneMdl1NPort) items.add(INITDONEMDL1NPORT);
-			if (initdone1NProcess == comp.initdone1NProcess) items.add(INITDONE1NPROCESS);
-			if (initdoneMdl1NSignal == comp.initdoneMdl1NSignal) items.add(INITDONEMDL1NSIGNAL);
-			if (initdoneMdl1NGeneric == comp.initdoneMdl1NGeneric) items.add(INITDONEMDL1NGENERIC);
-			if (initdoneCor1NImbuf == comp.initdoneCor1NImbuf) items.add(INITDONECOR1NIMBUF);
 			if (initdone1NPeripheral == comp.initdone1NPeripheral) items.add(INITDONE1NPERIPHERAL);
+			if (initdoneMdl1NSignal == comp.initdoneMdl1NSignal) items.add(INITDONEMDL1NSIGNAL);
+			if (initdone1NProcess == comp.initdone1NProcess) items.add(INITDONE1NPROCESS);
+			if (initdoneMdl1NPort == comp.initdoneMdl1NPort) items.add(INITDONEMDL1NPORT);
+			if (initdoneCor1NImbuf == comp.initdoneCor1NImbuf) items.add(INITDONECOR1NIMBUF);
+			if (initdoneMdl1NGeneric == comp.initdoneMdl1NGeneric) items.add(INITDONEMDL1NGENERIC);
 			if (initdoneSup1NModule == comp.initdoneSup1NModule) items.add(INITDONESUP1NMODULE);
 			if (initdoneMge1NSignal == comp.initdoneMge1NSignal) items.add(INITDONEMGE1NSIGNAL);
 			if (initdoneCtrRef1NError == comp.initdoneCtrRef1NError) items.add(INITDONECTRREF1NERROR);
@@ -248,7 +248,7 @@ public class PnlWdbeModRec {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(INITDONEDETAIL, INITDONEKHDLTYPE, INITDONEAPAR, INITDONEMDL1NPORT, INITDONE1NPROCESS, INITDONEMDL1NSIGNAL, INITDONEMDL1NGENERIC, INITDONECOR1NIMBUF, INITDONE1NPERIPHERAL, INITDONESUP1NMODULE, INITDONEMGE1NSIGNAL, INITDONECTRREF1NERROR, INITDONECTRHK1NVECTOR, INITDONECTRREF1NCOMMAND, INITDONECTRMNCOMMAND));
+			diffitems = new HashSet<Integer>(Arrays.asList(INITDONEDETAIL, INITDONEKHDLTYPE, INITDONEAPAR, INITDONE1NPERIPHERAL, INITDONEMDL1NSIGNAL, INITDONE1NPROCESS, INITDONEMDL1NPORT, INITDONECOR1NIMBUF, INITDONEMDL1NGENERIC, INITDONESUP1NMODULE, INITDONEMGE1NSIGNAL, INITDONECTRREF1NERROR, INITDONECTRHK1NVECTOR, INITDONECTRREF1NCOMMAND, INITDONECTRMNCOMMAND));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);
@@ -265,12 +265,12 @@ public class PnlWdbeModRec {
 		public static final int SCRJREFDETAIL = 2;
 		public static final int SCRJREFKHDLTYPE = 3;
 		public static final int SCRJREFAPAR = 4;
-		public static final int SCRJREFMDL1NPORT = 5;
-		public static final int SCRJREF1NPROCESS = 6;
-		public static final int SCRJREFMDL1NSIGNAL = 7;
-		public static final int SCRJREFMDL1NGENERIC = 8;
+		public static final int SCRJREF1NPERIPHERAL = 5;
+		public static final int SCRJREFMDL1NSIGNAL = 6;
+		public static final int SCRJREF1NPROCESS = 7;
+		public static final int SCRJREFMDL1NPORT = 8;
 		public static final int SCRJREFCOR1NIMBUF = 9;
-		public static final int SCRJREF1NPERIPHERAL = 10;
+		public static final int SCRJREFMDL1NGENERIC = 10;
 		public static final int SCRJREFSUP1NMODULE = 11;
 		public static final int SCRJREFMGE1NSIGNAL = 12;
 		public static final int SCRJREFCTRREF1NERROR = 13;
@@ -288,12 +288,12 @@ public class PnlWdbeModRec {
 					, String scrJrefDetail
 					, String scrJrefKHdltype
 					, String scrJrefAPar
-					, String scrJrefMdl1NPort
-					, String scrJref1NProcess
-					, String scrJrefMdl1NSignal
-					, String scrJrefMdl1NGeneric
-					, String scrJrefCor1NImbuf
 					, String scrJref1NPeripheral
+					, String scrJrefMdl1NSignal
+					, String scrJref1NProcess
+					, String scrJrefMdl1NPort
+					, String scrJrefCor1NImbuf
+					, String scrJrefMdl1NGeneric
 					, String scrJrefSup1NModule
 					, String scrJrefMge1NSignal
 					, String scrJrefCtrRef1NError
@@ -310,12 +310,12 @@ public class PnlWdbeModRec {
 			this.scrJrefDetail = scrJrefDetail;
 			this.scrJrefKHdltype = scrJrefKHdltype;
 			this.scrJrefAPar = scrJrefAPar;
-			this.scrJrefMdl1NPort = scrJrefMdl1NPort;
-			this.scrJref1NProcess = scrJref1NProcess;
-			this.scrJrefMdl1NSignal = scrJrefMdl1NSignal;
-			this.scrJrefMdl1NGeneric = scrJrefMdl1NGeneric;
-			this.scrJrefCor1NImbuf = scrJrefCor1NImbuf;
 			this.scrJref1NPeripheral = scrJref1NPeripheral;
+			this.scrJrefMdl1NSignal = scrJrefMdl1NSignal;
+			this.scrJref1NProcess = scrJref1NProcess;
+			this.scrJrefMdl1NPort = scrJrefMdl1NPort;
+			this.scrJrefCor1NImbuf = scrJrefCor1NImbuf;
+			this.scrJrefMdl1NGeneric = scrJrefMdl1NGeneric;
 			this.scrJrefSup1NModule = scrJrefSup1NModule;
 			this.scrJrefMge1NSignal = scrJrefMge1NSignal;
 			this.scrJrefCtrRef1NError = scrJrefCtrRef1NError;
@@ -328,19 +328,19 @@ public class PnlWdbeModRec {
 			this.pnlctrmncommandAvail = pnlctrmncommandAvail;
 			this.ButRegularizeActive = ButRegularizeActive;
 
-			mask = new HashSet<Integer>(Arrays.asList(IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFKHDLTYPE, SCRJREFAPAR, SCRJREFMDL1NPORT, SCRJREF1NPROCESS, SCRJREFMDL1NSIGNAL, SCRJREFMDL1NGENERIC, SCRJREFCOR1NIMBUF, SCRJREF1NPERIPHERAL, SCRJREFSUP1NMODULE, SCRJREFMGE1NSIGNAL, SCRJREFCTRREF1NERROR, PNLCTRREF1NERRORAVAIL, SCRJREFCTRHK1NVECTOR, PNLCTRHK1NVECTORAVAIL, SCRJREFCTRREF1NCOMMAND, PNLCTRREF1NCOMMANDAVAIL, SCRJREFCTRMNCOMMAND, PNLCTRMNCOMMANDAVAIL, BUTREGULARIZEACTIVE));
+			mask = new HashSet<Integer>(Arrays.asList(IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFKHDLTYPE, SCRJREFAPAR, SCRJREF1NPERIPHERAL, SCRJREFMDL1NSIGNAL, SCRJREF1NPROCESS, SCRJREFMDL1NPORT, SCRJREFCOR1NIMBUF, SCRJREFMDL1NGENERIC, SCRJREFSUP1NMODULE, SCRJREFMGE1NSIGNAL, SCRJREFCTRREF1NERROR, PNLCTRREF1NERRORAVAIL, SCRJREFCTRHK1NVECTOR, PNLCTRHK1NVECTORAVAIL, SCRJREFCTRREF1NCOMMAND, PNLCTRREF1NCOMMANDAVAIL, SCRJREFCTRMNCOMMAND, PNLCTRMNCOMMANDAVAIL, BUTREGULARIZEACTIVE));
 		};
 
 		public int ixWdbeVExpstate;
 		public String scrJrefDetail;
 		public String scrJrefKHdltype;
 		public String scrJrefAPar;
-		public String scrJrefMdl1NPort;
-		public String scrJref1NProcess;
-		public String scrJrefMdl1NSignal;
-		public String scrJrefMdl1NGeneric;
-		public String scrJrefCor1NImbuf;
 		public String scrJref1NPeripheral;
+		public String scrJrefMdl1NSignal;
+		public String scrJref1NProcess;
+		public String scrJrefMdl1NPort;
+		public String scrJrefCor1NImbuf;
+		public String scrJrefMdl1NGeneric;
 		public String scrJrefSup1NModule;
 		public String scrJrefMge1NSignal;
 		public String scrJrefCtrRef1NError;
@@ -372,12 +372,12 @@ public class PnlWdbeModRec {
 				scrJrefDetail = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefDetail", mask, SCRJREFDETAIL);
 				scrJrefKHdltype = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefKHdltype", mask, SCRJREFKHDLTYPE);
 				scrJrefAPar = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefAPar", mask, SCRJREFAPAR);
-				scrJrefMdl1NPort = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefMdl1NPort", mask, SCRJREFMDL1NPORT);
-				scrJref1NProcess = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJref1NProcess", mask, SCRJREF1NPROCESS);
-				scrJrefMdl1NSignal = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefMdl1NSignal", mask, SCRJREFMDL1NSIGNAL);
-				scrJrefMdl1NGeneric = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefMdl1NGeneric", mask, SCRJREFMDL1NGENERIC);
-				scrJrefCor1NImbuf = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefCor1NImbuf", mask, SCRJREFCOR1NIMBUF);
 				scrJref1NPeripheral = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJref1NPeripheral", mask, SCRJREF1NPERIPHERAL);
+				scrJrefMdl1NSignal = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefMdl1NSignal", mask, SCRJREFMDL1NSIGNAL);
+				scrJref1NProcess = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJref1NProcess", mask, SCRJREF1NPROCESS);
+				scrJrefMdl1NPort = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefMdl1NPort", mask, SCRJREFMDL1NPORT);
+				scrJrefCor1NImbuf = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefCor1NImbuf", mask, SCRJREFCOR1NIMBUF);
+				scrJrefMdl1NGeneric = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefMdl1NGeneric", mask, SCRJREFMDL1NGENERIC);
 				scrJrefSup1NModule = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefSup1NModule", mask, SCRJREFSUP1NMODULE);
 				scrJrefMge1NSignal = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefMge1NSignal", mask, SCRJREFMGE1NSIGNAL);
 				scrJrefCtrRef1NError = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefCtrRef1NError", mask, SCRJREFCTRREF1NERROR);
@@ -405,12 +405,12 @@ public class PnlWdbeModRec {
 			if (scrJrefDetail.equals(comp.scrJrefDetail)) items.add(SCRJREFDETAIL);
 			if (scrJrefKHdltype.equals(comp.scrJrefKHdltype)) items.add(SCRJREFKHDLTYPE);
 			if (scrJrefAPar.equals(comp.scrJrefAPar)) items.add(SCRJREFAPAR);
-			if (scrJrefMdl1NPort.equals(comp.scrJrefMdl1NPort)) items.add(SCRJREFMDL1NPORT);
-			if (scrJref1NProcess.equals(comp.scrJref1NProcess)) items.add(SCRJREF1NPROCESS);
-			if (scrJrefMdl1NSignal.equals(comp.scrJrefMdl1NSignal)) items.add(SCRJREFMDL1NSIGNAL);
-			if (scrJrefMdl1NGeneric.equals(comp.scrJrefMdl1NGeneric)) items.add(SCRJREFMDL1NGENERIC);
-			if (scrJrefCor1NImbuf.equals(comp.scrJrefCor1NImbuf)) items.add(SCRJREFCOR1NIMBUF);
 			if (scrJref1NPeripheral.equals(comp.scrJref1NPeripheral)) items.add(SCRJREF1NPERIPHERAL);
+			if (scrJrefMdl1NSignal.equals(comp.scrJrefMdl1NSignal)) items.add(SCRJREFMDL1NSIGNAL);
+			if (scrJref1NProcess.equals(comp.scrJref1NProcess)) items.add(SCRJREF1NPROCESS);
+			if (scrJrefMdl1NPort.equals(comp.scrJrefMdl1NPort)) items.add(SCRJREFMDL1NPORT);
+			if (scrJrefCor1NImbuf.equals(comp.scrJrefCor1NImbuf)) items.add(SCRJREFCOR1NIMBUF);
+			if (scrJrefMdl1NGeneric.equals(comp.scrJrefMdl1NGeneric)) items.add(SCRJREFMDL1NGENERIC);
 			if (scrJrefSup1NModule.equals(comp.scrJrefSup1NModule)) items.add(SCRJREFSUP1NMODULE);
 			if (scrJrefMge1NSignal.equals(comp.scrJrefMge1NSignal)) items.add(SCRJREFMGE1NSIGNAL);
 			if (scrJrefCtrRef1NError.equals(comp.scrJrefCtrRef1NError)) items.add(SCRJREFCTRREF1NERROR);
@@ -434,7 +434,7 @@ public class PnlWdbeModRec {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFKHDLTYPE, SCRJREFAPAR, SCRJREFMDL1NPORT, SCRJREF1NPROCESS, SCRJREFMDL1NSIGNAL, SCRJREFMDL1NGENERIC, SCRJREFCOR1NIMBUF, SCRJREF1NPERIPHERAL, SCRJREFSUP1NMODULE, SCRJREFMGE1NSIGNAL, SCRJREFCTRREF1NERROR, PNLCTRREF1NERRORAVAIL, SCRJREFCTRHK1NVECTOR, PNLCTRHK1NVECTORAVAIL, SCRJREFCTRREF1NCOMMAND, PNLCTRREF1NCOMMANDAVAIL, SCRJREFCTRMNCOMMAND, PNLCTRMNCOMMANDAVAIL, BUTREGULARIZEACTIVE));
+			diffitems = new HashSet<Integer>(Arrays.asList(IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFKHDLTYPE, SCRJREFAPAR, SCRJREF1NPERIPHERAL, SCRJREFMDL1NSIGNAL, SCRJREF1NPROCESS, SCRJREFMDL1NPORT, SCRJREFCOR1NIMBUF, SCRJREFMDL1NGENERIC, SCRJREFSUP1NMODULE, SCRJREFMGE1NSIGNAL, SCRJREFCTRREF1NERROR, PNLCTRREF1NERRORAVAIL, SCRJREFCTRHK1NVECTOR, PNLCTRHK1NVECTORAVAIL, SCRJREFCTRREF1NCOMMAND, PNLCTRREF1NCOMMANDAVAIL, SCRJREFCTRMNCOMMAND, PNLCTRMNCOMMANDAVAIL, BUTREGULARIZEACTIVE));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);

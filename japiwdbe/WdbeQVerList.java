@@ -18,7 +18,7 @@ public class WdbeQVerList {
 				int jnum
 				, String stubGrp
 				, String stubOwn
-				, String stubRefWdbeMProject
+				, String stubPrjRefWdbeMProject
 				, int Major
 				, int Minor
 				, int Sub
@@ -29,7 +29,7 @@ public class WdbeQVerList {
 		this.jnum = jnum;
 		this.stubGrp = stubGrp;
 		this.stubOwn = stubOwn;
-		this.stubRefWdbeMProject = stubRefWdbeMProject;
+		this.stubPrjRefWdbeMProject = stubPrjRefWdbeMProject;
 		this.Major = Major;
 		this.Minor = Minor;
 		this.Sub = Sub;
@@ -41,7 +41,7 @@ public class WdbeQVerList {
 	public int jnum;
 	public String stubGrp;
 	public String stubOwn;
-	public String stubRefWdbeMProject;
+	public String stubPrjRefWdbeMProject;
 	public int Major;
 	public int Minor;
 	public int Sub;
@@ -59,7 +59,7 @@ public class WdbeQVerList {
 		if (Xmlio.checkXPath(doc, basexpath)) {
 			stubGrp = Xmlio.extractStringUclc(doc, basexpath, "stubGrp", "grp", null, 0);
 			stubOwn = Xmlio.extractStringUclc(doc, basexpath, "stubOwn", "own", null, 0);
-			stubRefWdbeMProject = Xmlio.extractStringUclc(doc, basexpath, "stubRefWdbeMProject", "prj", null, 0);
+			stubPrjRefWdbeMProject = Xmlio.extractStringUclc(doc, basexpath, "stubPrjRefWdbeMProject", "prj", null, 0);
 			Major = Xmlio.extractIntegerUclc(doc, basexpath, "Major", "maj", null, 0);
 			Minor = Xmlio.extractIntegerUclc(doc, basexpath, "Minor", "min", null, 0);
 			Sub = Xmlio.extractIntegerUclc(doc, basexpath, "Sub", "sub", null, 0);

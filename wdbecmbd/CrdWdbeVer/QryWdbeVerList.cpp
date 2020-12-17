@@ -108,7 +108,7 @@ void QryWdbeVerList::rerun(
 		sqlstr += " WHERE TblWdbeQSelect.jref = " + to_string(preJrefSess) + "";
 		sqlstr += " AND TblWdbeMVersion.grp = TblWdbeQSelect.ref";
 		sqlstr += " AND " + [preNoadm,preOwner](){if (preNoadm) return("TblWdbeMVersion.own = " + to_string(preOwner) + ""); else return(string("1"));}() + "";
-		sqlstr += " AND TblWdbeMVersion.refWdbeMProject = " + to_string(preRefPrj) + "";
+		sqlstr += " AND TblWdbeMVersion.prjRefWdbeMProject = " + to_string(preRefPrj) + "";
 		rerun_filtSQL(sqlstr, preGrp, preOwn, prePrj, preBvr, preSte, false);
 		dbswdbe->loadUintBySQL(sqlstr, cnt);
 		cnts.push_back(cnt); lims.push_back(0); ofss.push_back(0);
@@ -158,7 +158,7 @@ void QryWdbeVerList::rerun(
 		sqlstr += " WHERE TblWdbeQSelect.jref = " + to_string(preJrefSess) + "";
 		sqlstr += " AND TblWdbeMVersion.grp = TblWdbeQSelect.ref";
 		sqlstr += " AND " + [preNoadm,preOwner](){if (preNoadm) return("TblWdbeMVersion.own = " + to_string(preOwner) + ""); else return(string("1"));}() + "";
-		sqlstr += " AND TblWdbeMVersion.refWdbeMProject = " + to_string(preRefPrj) + "";
+		sqlstr += " AND TblWdbeMVersion.prjRefWdbeMProject = " + to_string(preRefPrj) + "";
 		rerun_filtSQL(sqlstr, preGrp, preOwn, prePrj, preBvr, preSte, false);
 		rerun_orderSQL(sqlstr, preIxOrd);
 		sqlstr += " LIMIT " + to_string(lims[0]) + " OFFSET " + to_string(ofss[0]);
@@ -191,8 +191,8 @@ void QryWdbeVerList::rerun(
 void QryWdbeVerList::rerun_baseSQL(
 			string& sqlstr
 		) {
-	sqlstr = "INSERT INTO TblWdbeQVerList(jref, jnum, ref, grp, own, refWdbeMProject, Major, Minor, Sub, bvrRefWdbeMVersion, ixVState)";
-	sqlstr += " SELECT " + to_string(jref) + ", 0, TblWdbeMVersion.ref, TblWdbeMVersion.grp, TblWdbeMVersion.own, TblWdbeMVersion.refWdbeMProject, TblWdbeMVersion.Major, TblWdbeMVersion.Minor, TblWdbeMVersion.Sub, TblWdbeMVersion.bvrRefWdbeMVersion, TblWdbeMVersion.ixVState";
+	sqlstr = "INSERT INTO TblWdbeQVerList(jref, jnum, ref, grp, own, prjRefWdbeMProject, Major, Minor, Sub, bvrRefWdbeMVersion, ixVState)";
+	sqlstr += " SELECT " + to_string(jref) + ", 0, TblWdbeMVersion.ref, TblWdbeMVersion.grp, TblWdbeMVersion.own, TblWdbeMVersion.prjRefWdbeMProject, TblWdbeMVersion.Major, TblWdbeMVersion.Minor, TblWdbeMVersion.Sub, TblWdbeMVersion.bvrRefWdbeMVersion, TblWdbeMVersion.ixVState";
 };
 
 void QryWdbeVerList::rerun_filtSQL(
@@ -218,7 +218,7 @@ void QryWdbeVerList::rerun_filtSQL(
 
 	if (prePrj != 0) {
 		rerun_filtSQL_append(sqlstr, first);
-		sqlstr += "TblWdbeMVersion.refWdbeMProject = " + to_string(prePrj) + "";
+		sqlstr += "TblWdbeMVersion.prjRefWdbeMProject = " + to_string(prePrj) + "";
 	};
 
 	if (preBvr != 0) {
@@ -246,11 +246,11 @@ void QryWdbeVerList::rerun_orderSQL(
 			string& sqlstr
 			, const uint preIxOrd
 		) {
-	if (preIxOrd == VecVOrd::STE) sqlstr += " ORDER BY TblWdbeMVersion.ixVState ASC";
+	if (preIxOrd == VecVOrd::PRJ) sqlstr += " ORDER BY TblWdbeMVersion.prjRefWdbeMProject ASC";
 	else if (preIxOrd == VecVOrd::BVR) sqlstr += " ORDER BY TblWdbeMVersion.bvrRefWdbeMVersion ASC";
+	else if (preIxOrd == VecVOrd::STE) sqlstr += " ORDER BY TblWdbeMVersion.ixVState ASC";
 	else if (preIxOrd == VecVOrd::GRP) sqlstr += " ORDER BY TblWdbeMVersion.grp ASC";
 	else if (preIxOrd == VecVOrd::OWN) sqlstr += " ORDER BY TblWdbeMVersion.own ASC";
-	else if (preIxOrd == VecVOrd::PRJ) sqlstr += " ORDER BY TblWdbeMVersion.refWdbeMProject ASC";
 };
 
 void QryWdbeVerList::fetch(
@@ -280,7 +280,7 @@ void QryWdbeVerList::fetch(
 			rec->jnum = statshr.jnumFirstload + i;
 			rec->stubGrp = StubWdbe::getStubGroup(dbswdbe, rec->grp, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
 			rec->stubOwn = StubWdbe::getStubOwner(dbswdbe, rec->own, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
-			rec->stubRefWdbeMProject = StubWdbe::getStubPrjStd(dbswdbe, rec->refWdbeMProject, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
+			rec->stubPrjRefWdbeMProject = StubWdbe::getStubPrjStd(dbswdbe, rec->prjRefWdbeMProject, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
 			rec->stubBvrRefWdbeMVersion = StubWdbe::getStubVerNo(dbswdbe, rec->bvrRefWdbeMVersion, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
 			rec->srefIxVState = VecWdbeVMVersionState::getSref(rec->ixVState);
 			rec->titIxVState = VecWdbeVMVersionState::getTitle(rec->ixVState, ixWdbeVLocale);
@@ -393,8 +393,8 @@ bool QryWdbeVerList::handleShow(
 	cout << "\tstubGrp";
 	cout << "\town";
 	cout << "\tstubOwn";
-	cout << "\trefWdbeMProject";
-	cout << "\tstubRefWdbeMProject";
+	cout << "\tprjRefWdbeMProject";
+	cout << "\tstubPrjRefWdbeMProject";
 	cout << "\tMajor";
 	cout << "\tMinor";
 	cout << "\tSub";
@@ -417,8 +417,8 @@ bool QryWdbeVerList::handleShow(
 		cout << "\t" << rec->stubGrp;
 		cout << "\t" << rec->own;
 		cout << "\t" << rec->stubOwn;
-		cout << "\t" << rec->refWdbeMProject;
-		cout << "\t" << rec->stubRefWdbeMProject;
+		cout << "\t" << rec->prjRefWdbeMProject;
+		cout << "\t" << rec->stubPrjRefWdbeMProject;
 		cout << "\t" << rec->Major;
 		cout << "\t" << rec->Minor;
 		cout << "\t" << rec->Sub;

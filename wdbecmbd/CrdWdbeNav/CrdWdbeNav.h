@@ -21,9 +21,9 @@
 #include "PnlWdbeNavGlobal.h"
 #include "PnlWdbeNavAdmin.h"
 #include "PnlWdbeNavPre.h"
+#include "DlgWdbeNavLoaini.h"
 #include "PnlWdbeNavHeadbar.h"
 #include "DlgWdbeNavMnglic.h"
-#include "DlgWdbeNavLoaini.h"
 
 #define VecVWdbeNavDo CrdWdbeNav::VecVDo
 #define VecVWdbeNavSge CrdWdbeNav::VecVSge
@@ -411,9 +411,9 @@ public:
 	PnlWdbeNavGlobal* pnlglobal;
 	PnlWdbeNavAdmin* pnladmin;
 	PnlWdbeNavPre* pnlpre;
+	DlgWdbeNavLoaini* dlgloaini;
 	PnlWdbeNavHeadbar* pnlheadbar;
 	DlgWdbeNavMnglic* dlgmnglic;
-	DlgWdbeNavLoaini* dlgloaini;
 
 	// IP vars.cust --- INSERT
 

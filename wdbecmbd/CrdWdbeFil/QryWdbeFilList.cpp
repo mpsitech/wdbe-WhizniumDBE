@@ -220,10 +220,10 @@ void QryWdbeFilList::fetch(
 			rec->stubOwn = StubWdbe::getStubOwner(dbswdbe, rec->own, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
 			rec->srefRefIxVTbl = VecWdbeVMFileRefTbl::getSref(rec->refIxVTbl);
 			rec->titRefIxVTbl = VecWdbeVMFileRefTbl::getTitle(rec->refIxVTbl, ixWdbeVLocale);
-			if (rec->refIxVTbl == VecWdbeVMFileRefTbl::VER) {
-				rec->stubRefUref = StubWdbe::getStubVerStd(dbswdbe, rec->refUref, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
-			} else if (rec->refIxVTbl == VecWdbeVMFileRefTbl::MTP) {
+			if (rec->refIxVTbl == VecWdbeVMFileRefTbl::MTP) {
 				rec->stubRefUref = StubWdbe::getStubMtpStd(dbswdbe, rec->refUref, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
+			} else if (rec->refIxVTbl == VecWdbeVMFileRefTbl::VER) {
+				rec->stubRefUref = StubWdbe::getStubVerStd(dbswdbe, rec->refUref, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
 			} else rec->stubRefUref = "-";
 			rec->titOsrefKContent = dbswdbe->getKlstTitleBySref(VecWdbeVKeylist::KLSTWDBEKMFILECONTENT, rec->osrefKContent, ixWdbeVLocale);
 			rec->titSrefKMimetype = dbswdbe->getKlstTitleBySref(VecWdbeVKeylist::KLSTWDBEKMFILEMIMETYPE, rec->srefKMimetype, ixWdbeVLocale);

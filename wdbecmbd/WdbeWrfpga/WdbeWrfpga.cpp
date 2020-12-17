@@ -217,7 +217,7 @@ void WdbeWrfpga::srefsFstsToVector(
 
 	char c, c2;
 
-	StrMod::stringToVector(s, ss);
+	StrMod::srefsToVector(s, ss);
 
 	for (unsigned int i = 0; i < ss.size();i++) {
 		if (ss[i].length() >= 4) {

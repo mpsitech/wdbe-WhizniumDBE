@@ -246,8 +246,8 @@ void QryWdbeCvrList::rerun_orderSQL(
 			string& sqlstr
 			, const uint preIxOrd
 		) {
-	if (preIxOrd == VecVOrd::STE) sqlstr += " ORDER BY TblWdbeMCoreversion.ixVState ASC";
-	else if (preIxOrd == VecVOrd::BCV) sqlstr += " ORDER BY TblWdbeMCoreversion.bcvRefWdbeMCoreversion ASC";
+	if (preIxOrd == VecVOrd::BCV) sqlstr += " ORDER BY TblWdbeMCoreversion.bcvRefWdbeMCoreversion ASC";
+	else if (preIxOrd == VecVOrd::STE) sqlstr += " ORDER BY TblWdbeMCoreversion.ixVState ASC";
 	else if (preIxOrd == VecVOrd::CPR) sqlstr += " ORDER BY TblWdbeMCoreversion.refWdbeMCoreproject ASC";
 	else if (preIxOrd == VecVOrd::OWN) sqlstr += " ORDER BY TblWdbeMCoreversion.own ASC";
 	else if (preIxOrd == VecVOrd::GRP) sqlstr += " ORDER BY TblWdbeMCoreversion.grp ASC";

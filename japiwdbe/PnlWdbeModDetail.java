@@ -23,13 +23,13 @@ public class PnlWdbeModDetail {
 		public static final int BUTHKUVIEWCLICK = 2;
 		public static final int BUTSUPVIEWCLICK = 3;
 		public static final int BUTTPLVIEWCLICK = 4;
-		public static final int BUTCTRNEWCLICK = 5;
-		public static final int BUTCTRDELETECLICK = 6;
-		public static final int BUTCTRFWDVIEWCLICK = 7;
-		public static final int BUTCTRCLRVIEWCLICK = 8;
-		public static final int BUTIMBNEWCLICK = 9;
-		public static final int BUTIMBDELETECLICK = 10;
-		public static final int BUTIMBCORVIEWCLICK = 11;
+		public static final int BUTIMBNEWCLICK = 5;
+		public static final int BUTIMBDELETECLICK = 6;
+		public static final int BUTIMBCORVIEWCLICK = 7;
+		public static final int BUTCTRNEWCLICK = 8;
+		public static final int BUTCTRDELETECLICK = 9;
+		public static final int BUTCTRFWDVIEWCLICK = 10;
+		public static final int BUTCTRCLRVIEWCLICK = 11;
 
 		public static int getIx(
 					String sref
@@ -40,13 +40,13 @@ public class PnlWdbeModDetail {
 			if (s.equals("buthkuviewclick")) return BUTHKUVIEWCLICK;
 			if (s.equals("butsupviewclick")) return BUTSUPVIEWCLICK;
 			if (s.equals("buttplviewclick")) return BUTTPLVIEWCLICK;
+			if (s.equals("butimbnewclick")) return BUTIMBNEWCLICK;
+			if (s.equals("butimbdeleteclick")) return BUTIMBDELETECLICK;
+			if (s.equals("butimbcorviewclick")) return BUTIMBCORVIEWCLICK;
 			if (s.equals("butctrnewclick")) return BUTCTRNEWCLICK;
 			if (s.equals("butctrdeleteclick")) return BUTCTRDELETECLICK;
 			if (s.equals("butctrfwdviewclick")) return BUTCTRFWDVIEWCLICK;
 			if (s.equals("butctrclrviewclick")) return BUTCTRCLRVIEWCLICK;
-			if (s.equals("butimbnewclick")) return BUTIMBNEWCLICK;
-			if (s.equals("butimbdeleteclick")) return BUTIMBDELETECLICK;
-			if (s.equals("butimbcorviewclick")) return BUTIMBCORVIEWCLICK;
 
 			return 0;
 		};
@@ -58,13 +58,13 @@ public class PnlWdbeModDetail {
 			if (ix == BUTHKUVIEWCLICK) return("ButHkuViewClick");
 			if (ix == BUTSUPVIEWCLICK) return("ButSupViewClick");
 			if (ix == BUTTPLVIEWCLICK) return("ButTplViewClick");
+			if (ix == BUTIMBNEWCLICK) return("ButImbNewClick");
+			if (ix == BUTIMBDELETECLICK) return("ButImbDeleteClick");
+			if (ix == BUTIMBCORVIEWCLICK) return("ButImbCorViewClick");
 			if (ix == BUTCTRNEWCLICK) return("ButCtrNewClick");
 			if (ix == BUTCTRDELETECLICK) return("ButCtrDeleteClick");
 			if (ix == BUTCTRFWDVIEWCLICK) return("ButCtrFwdViewClick");
 			if (ix == BUTCTRCLRVIEWCLICK) return("ButCtrClrViewClick");
-			if (ix == BUTIMBNEWCLICK) return("ButImbNewClick");
-			if (ix == BUTIMBDELETECLICK) return("ButImbDeleteClick");
-			if (ix == BUTIMBCORVIEWCLICK) return("ButImbCorViewClick");
 
 			return "";
 		};
@@ -80,37 +80,37 @@ public class PnlWdbeModDetail {
 		public static final int NUMFPUPHKT = 2;
 		public static final int TXFSRR = 3;
 		public static final int TXFCMT = 4;
-		public static final int TXFCTRFSR = 5;
-		public static final int NUMFPUPIMBDIR = 6;
-		public static final int TXFIMBPRI = 7;
+		public static final int NUMFPUPIMBDIR = 5;
+		public static final int TXFIMBPRI = 6;
+		public static final int TXFCTRFSR = 7;
 
 		public ContIac(
 					int numFPupTyp
 					, int numFPupHkt
 					, String TxfSrr
 					, String TxfCmt
-					, String TxfCtrFsr
 					, int numFPupImbDir
 					, String TxfImbPri
+					, String TxfCtrFsr
 				) {
 			this.numFPupTyp = numFPupTyp;
 			this.numFPupHkt = numFPupHkt;
 			this.TxfSrr = TxfSrr;
 			this.TxfCmt = TxfCmt;
-			this.TxfCtrFsr = TxfCtrFsr;
 			this.numFPupImbDir = numFPupImbDir;
 			this.TxfImbPri = TxfImbPri;
+			this.TxfCtrFsr = TxfCtrFsr;
 
-			mask = new HashSet<Integer>(Arrays.asList(NUMFPUPTYP, NUMFPUPHKT, TXFSRR, TXFCMT, TXFCTRFSR, NUMFPUPIMBDIR, TXFIMBPRI));
+			mask = new HashSet<Integer>(Arrays.asList(NUMFPUPTYP, NUMFPUPHKT, TXFSRR, TXFCMT, NUMFPUPIMBDIR, TXFIMBPRI, TXFCTRFSR));
 		};
 
 		public int numFPupTyp;
 		public int numFPupHkt;
 		public String TxfSrr;
 		public String TxfCmt;
-		public String TxfCtrFsr;
 		public int numFPupImbDir;
 		public String TxfImbPri;
+		public String TxfCtrFsr;
 
 		public boolean readXML(
 					Document doc
@@ -129,9 +129,9 @@ public class PnlWdbeModDetail {
 				numFPupHkt = Xmlio.extractIntegerAttrUclc(doc, basexpath, itemtag, "Ci", "sref", "numFPupHkt", mask, NUMFPUPHKT);
 				TxfSrr = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ci", "sref", "TxfSrr", mask, TXFSRR);
 				TxfCmt = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ci", "sref", "TxfCmt", mask, TXFCMT);
-				TxfCtrFsr = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ci", "sref", "TxfCtrFsr", mask, TXFCTRFSR);
 				numFPupImbDir = Xmlio.extractIntegerAttrUclc(doc, basexpath, itemtag, "Ci", "sref", "numFPupImbDir", mask, NUMFPUPIMBDIR);
 				TxfImbPri = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ci", "sref", "TxfImbPri", mask, TXFIMBPRI);
+				TxfCtrFsr = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ci", "sref", "TxfCtrFsr", mask, TXFCTRFSR);
 
 				return true;
 			};
@@ -161,9 +161,9 @@ public class PnlWdbeModDetail {
 			Xmlio.writeIntegerAttr(doc, el, itemtag, "sref", "numFPupHkt", numFPupHkt);
 			Xmlio.writeStringAttr(doc, el, itemtag, "sref", "TxfSrr", TxfSrr);
 			Xmlio.writeStringAttr(doc, el, itemtag, "sref", "TxfCmt", TxfCmt);
-			Xmlio.writeStringAttr(doc, el, itemtag, "sref", "TxfCtrFsr", TxfCtrFsr);
 			Xmlio.writeIntegerAttr(doc, el, itemtag, "sref", "numFPupImbDir", numFPupImbDir);
 			Xmlio.writeStringAttr(doc, el, itemtag, "sref", "TxfImbPri", TxfImbPri);
+			Xmlio.writeStringAttr(doc, el, itemtag, "sref", "TxfCtrFsr", TxfCtrFsr);
 		};
 
 		public HashSet<Integer> comm(
@@ -175,9 +175,9 @@ public class PnlWdbeModDetail {
 			if (numFPupHkt == comp.numFPupHkt) items.add(NUMFPUPHKT);
 			if (TxfSrr.equals(comp.TxfSrr)) items.add(TXFSRR);
 			if (TxfCmt.equals(comp.TxfCmt)) items.add(TXFCMT);
-			if (TxfCtrFsr.equals(comp.TxfCtrFsr)) items.add(TXFCTRFSR);
 			if (numFPupImbDir == comp.numFPupImbDir) items.add(NUMFPUPIMBDIR);
 			if (TxfImbPri.equals(comp.TxfImbPri)) items.add(TXFIMBPRI);
+			if (TxfCtrFsr.equals(comp.TxfCtrFsr)) items.add(TXFCTRFSR);
 
 			return(items);
 		};
@@ -190,7 +190,7 @@ public class PnlWdbeModDetail {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(NUMFPUPTYP, NUMFPUPHKT, TXFSRR, TXFCMT, TXFCTRFSR, NUMFPUPIMBDIR, TXFIMBPRI));
+			diffitems = new HashSet<Integer>(Arrays.asList(NUMFPUPTYP, NUMFPUPHKT, TXFSRR, TXFCMT, NUMFPUPIMBDIR, TXFIMBPRI, TXFCTRFSR));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);
@@ -207,41 +207,41 @@ public class PnlWdbeModDetail {
 		public static final int TXTHKU = 2;
 		public static final int TXTSUP = 3;
 		public static final int TXTTPL = 4;
-		public static final int TXTCTRFWD = 5;
-		public static final int TXTCTRCLR = 6;
-		public static final int TXTIMBSRF = 7;
-		public static final int TXTIMBCOR = 8;
+		public static final int TXTIMBSRF = 5;
+		public static final int TXTIMBCOR = 6;
+		public static final int TXTCTRFWD = 7;
+		public static final int TXTCTRCLR = 8;
 
 		public ContInf(
 					String TxtSrf
 					, String TxtHku
 					, String TxtSup
 					, String TxtTpl
-					, String TxtCtrFwd
-					, String TxtCtrClr
 					, String TxtImbSrf
 					, String TxtImbCor
+					, String TxtCtrFwd
+					, String TxtCtrClr
 				) {
 			this.TxtSrf = TxtSrf;
 			this.TxtHku = TxtHku;
 			this.TxtSup = TxtSup;
 			this.TxtTpl = TxtTpl;
-			this.TxtCtrFwd = TxtCtrFwd;
-			this.TxtCtrClr = TxtCtrClr;
 			this.TxtImbSrf = TxtImbSrf;
 			this.TxtImbCor = TxtImbCor;
+			this.TxtCtrFwd = TxtCtrFwd;
+			this.TxtCtrClr = TxtCtrClr;
 
-			mask = new HashSet<Integer>(Arrays.asList(TXTSRF, TXTHKU, TXTSUP, TXTTPL, TXTCTRFWD, TXTCTRCLR, TXTIMBSRF, TXTIMBCOR));
+			mask = new HashSet<Integer>(Arrays.asList(TXTSRF, TXTHKU, TXTSUP, TXTTPL, TXTIMBSRF, TXTIMBCOR, TXTCTRFWD, TXTCTRCLR));
 		};
 
 		public String TxtSrf;
 		public String TxtHku;
 		public String TxtSup;
 		public String TxtTpl;
-		public String TxtCtrFwd;
-		public String TxtCtrClr;
 		public String TxtImbSrf;
 		public String TxtImbCor;
+		public String TxtCtrFwd;
+		public String TxtCtrClr;
 
 		public boolean readXML(
 					Document doc
@@ -260,10 +260,10 @@ public class PnlWdbeModDetail {
 				TxtHku = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ci", "sref", "TxtHku", mask, TXTHKU);
 				TxtSup = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ci", "sref", "TxtSup", mask, TXTSUP);
 				TxtTpl = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ci", "sref", "TxtTpl", mask, TXTTPL);
-				TxtCtrFwd = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ci", "sref", "TxtCtrFwd", mask, TXTCTRFWD);
-				TxtCtrClr = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ci", "sref", "TxtCtrClr", mask, TXTCTRCLR);
 				TxtImbSrf = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ci", "sref", "TxtImbSrf", mask, TXTIMBSRF);
 				TxtImbCor = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ci", "sref", "TxtImbCor", mask, TXTIMBCOR);
+				TxtCtrFwd = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ci", "sref", "TxtCtrFwd", mask, TXTCTRFWD);
+				TxtCtrClr = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ci", "sref", "TxtCtrClr", mask, TXTCTRCLR);
 
 				return true;
 			};
@@ -280,10 +280,10 @@ public class PnlWdbeModDetail {
 			if (TxtHku.equals(comp.TxtHku)) items.add(TXTHKU);
 			if (TxtSup.equals(comp.TxtSup)) items.add(TXTSUP);
 			if (TxtTpl.equals(comp.TxtTpl)) items.add(TXTTPL);
-			if (TxtCtrFwd.equals(comp.TxtCtrFwd)) items.add(TXTCTRFWD);
-			if (TxtCtrClr.equals(comp.TxtCtrClr)) items.add(TXTCTRCLR);
 			if (TxtImbSrf.equals(comp.TxtImbSrf)) items.add(TXTIMBSRF);
 			if (TxtImbCor.equals(comp.TxtImbCor)) items.add(TXTIMBCOR);
+			if (TxtCtrFwd.equals(comp.TxtCtrFwd)) items.add(TXTCTRFWD);
+			if (TxtCtrClr.equals(comp.TxtCtrClr)) items.add(TXTCTRCLR);
 
 			return(items);
 		};
@@ -296,7 +296,7 @@ public class PnlWdbeModDetail {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(TXTSRF, TXTHKU, TXTSUP, TXTTPL, TXTCTRFWD, TXTCTRCLR, TXTIMBSRF, TXTIMBCOR));
+			diffitems = new HashSet<Integer>(Arrays.asList(TXTSRF, TXTHKU, TXTSUP, TXTTPL, TXTIMBSRF, TXTIMBCOR, TXTCTRFWD, TXTCTRCLR));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);
@@ -390,34 +390,34 @@ public class PnlWdbeModDetail {
 		public static final int BUTTPLVIEWACTIVE = 13;
 		public static final int TXFSRRACTIVE = 14;
 		public static final int TXFCMTACTIVE = 15;
-		public static final int SEPCTRAVAIL = 16;
-		public static final int HDGCTRAVAIL = 17;
-		public static final int BUTCTRNEWAVAIL = 18;
-		public static final int BUTCTRDELETEAVAIL = 19;
-		public static final int TXFCTRFSRAVAIL = 20;
-		public static final int TXFCTRFSRACTIVE = 21;
-		public static final int TXTCTRFWDAVAIL = 22;
-		public static final int TXTCTRFWDACTIVE = 23;
-		public static final int BUTCTRFWDVIEWAVAIL = 24;
-		public static final int BUTCTRFWDVIEWACTIVE = 25;
-		public static final int TXTCTRCLRAVAIL = 26;
-		public static final int TXTCTRCLRACTIVE = 27;
-		public static final int BUTCTRCLRVIEWAVAIL = 28;
-		public static final int BUTCTRCLRVIEWACTIVE = 29;
-		public static final int SEPIMBAVAIL = 30;
-		public static final int HDGIMBAVAIL = 31;
-		public static final int BUTIMBNEWAVAIL = 32;
-		public static final int BUTIMBDELETEAVAIL = 33;
-		public static final int TXTIMBSRFAVAIL = 34;
-		public static final int TXTIMBSRFACTIVE = 35;
-		public static final int TXTIMBCORAVAIL = 36;
-		public static final int TXTIMBCORACTIVE = 37;
-		public static final int BUTIMBCORVIEWAVAIL = 38;
-		public static final int BUTIMBCORVIEWACTIVE = 39;
-		public static final int PUPIMBDIRAVAIL = 40;
-		public static final int PUPIMBDIRACTIVE = 41;
-		public static final int TXFIMBPRIAVAIL = 42;
-		public static final int TXFIMBPRIACTIVE = 43;
+		public static final int SEPIMBAVAIL = 16;
+		public static final int HDGIMBAVAIL = 17;
+		public static final int BUTIMBNEWAVAIL = 18;
+		public static final int BUTIMBDELETEAVAIL = 19;
+		public static final int TXTIMBSRFAVAIL = 20;
+		public static final int TXTIMBSRFACTIVE = 21;
+		public static final int TXTIMBCORAVAIL = 22;
+		public static final int TXTIMBCORACTIVE = 23;
+		public static final int BUTIMBCORVIEWAVAIL = 24;
+		public static final int BUTIMBCORVIEWACTIVE = 25;
+		public static final int PUPIMBDIRAVAIL = 26;
+		public static final int PUPIMBDIRACTIVE = 27;
+		public static final int TXFIMBPRIAVAIL = 28;
+		public static final int TXFIMBPRIACTIVE = 29;
+		public static final int SEPCTRAVAIL = 30;
+		public static final int HDGCTRAVAIL = 31;
+		public static final int BUTCTRNEWAVAIL = 32;
+		public static final int BUTCTRDELETEAVAIL = 33;
+		public static final int TXFCTRFSRAVAIL = 34;
+		public static final int TXFCTRFSRACTIVE = 35;
+		public static final int TXTCTRFWDAVAIL = 36;
+		public static final int TXTCTRFWDACTIVE = 37;
+		public static final int BUTCTRFWDVIEWAVAIL = 38;
+		public static final int BUTCTRFWDVIEWACTIVE = 39;
+		public static final int TXTCTRCLRAVAIL = 40;
+		public static final int TXTCTRCLRACTIVE = 41;
+		public static final int BUTCTRCLRVIEWAVAIL = 42;
+		public static final int BUTCTRCLRVIEWACTIVE = 43;
 
 		public StatShr(
 					boolean ButSaveAvail
@@ -435,20 +435,6 @@ public class PnlWdbeModDetail {
 					, boolean ButTplViewActive
 					, boolean TxfSrrActive
 					, boolean TxfCmtActive
-					, boolean SepCtrAvail
-					, boolean HdgCtrAvail
-					, boolean ButCtrNewAvail
-					, boolean ButCtrDeleteAvail
-					, boolean TxfCtrFsrAvail
-					, boolean TxfCtrFsrActive
-					, boolean TxtCtrFwdAvail
-					, boolean TxtCtrFwdActive
-					, boolean ButCtrFwdViewAvail
-					, boolean ButCtrFwdViewActive
-					, boolean TxtCtrClrAvail
-					, boolean TxtCtrClrActive
-					, boolean ButCtrClrViewAvail
-					, boolean ButCtrClrViewActive
 					, boolean SepImbAvail
 					, boolean HdgImbAvail
 					, boolean ButImbNewAvail
@@ -463,6 +449,20 @@ public class PnlWdbeModDetail {
 					, boolean PupImbDirActive
 					, boolean TxfImbPriAvail
 					, boolean TxfImbPriActive
+					, boolean SepCtrAvail
+					, boolean HdgCtrAvail
+					, boolean ButCtrNewAvail
+					, boolean ButCtrDeleteAvail
+					, boolean TxfCtrFsrAvail
+					, boolean TxfCtrFsrActive
+					, boolean TxtCtrFwdAvail
+					, boolean TxtCtrFwdActive
+					, boolean ButCtrFwdViewAvail
+					, boolean ButCtrFwdViewActive
+					, boolean TxtCtrClrAvail
+					, boolean TxtCtrClrActive
+					, boolean ButCtrClrViewAvail
+					, boolean ButCtrClrViewActive
 				) {
 			this.ButSaveAvail = ButSaveAvail;
 			this.ButSaveActive = ButSaveActive;
@@ -479,20 +479,6 @@ public class PnlWdbeModDetail {
 			this.ButTplViewActive = ButTplViewActive;
 			this.TxfSrrActive = TxfSrrActive;
 			this.TxfCmtActive = TxfCmtActive;
-			this.SepCtrAvail = SepCtrAvail;
-			this.HdgCtrAvail = HdgCtrAvail;
-			this.ButCtrNewAvail = ButCtrNewAvail;
-			this.ButCtrDeleteAvail = ButCtrDeleteAvail;
-			this.TxfCtrFsrAvail = TxfCtrFsrAvail;
-			this.TxfCtrFsrActive = TxfCtrFsrActive;
-			this.TxtCtrFwdAvail = TxtCtrFwdAvail;
-			this.TxtCtrFwdActive = TxtCtrFwdActive;
-			this.ButCtrFwdViewAvail = ButCtrFwdViewAvail;
-			this.ButCtrFwdViewActive = ButCtrFwdViewActive;
-			this.TxtCtrClrAvail = TxtCtrClrAvail;
-			this.TxtCtrClrActive = TxtCtrClrActive;
-			this.ButCtrClrViewAvail = ButCtrClrViewAvail;
-			this.ButCtrClrViewActive = ButCtrClrViewActive;
 			this.SepImbAvail = SepImbAvail;
 			this.HdgImbAvail = HdgImbAvail;
 			this.ButImbNewAvail = ButImbNewAvail;
@@ -507,8 +493,22 @@ public class PnlWdbeModDetail {
 			this.PupImbDirActive = PupImbDirActive;
 			this.TxfImbPriAvail = TxfImbPriAvail;
 			this.TxfImbPriActive = TxfImbPriActive;
+			this.SepCtrAvail = SepCtrAvail;
+			this.HdgCtrAvail = HdgCtrAvail;
+			this.ButCtrNewAvail = ButCtrNewAvail;
+			this.ButCtrDeleteAvail = ButCtrDeleteAvail;
+			this.TxfCtrFsrAvail = TxfCtrFsrAvail;
+			this.TxfCtrFsrActive = TxfCtrFsrActive;
+			this.TxtCtrFwdAvail = TxtCtrFwdAvail;
+			this.TxtCtrFwdActive = TxtCtrFwdActive;
+			this.ButCtrFwdViewAvail = ButCtrFwdViewAvail;
+			this.ButCtrFwdViewActive = ButCtrFwdViewActive;
+			this.TxtCtrClrAvail = TxtCtrClrAvail;
+			this.TxtCtrClrActive = TxtCtrClrActive;
+			this.ButCtrClrViewAvail = ButCtrClrViewAvail;
+			this.ButCtrClrViewActive = ButCtrClrViewActive;
 
-			mask = new HashSet<Integer>(Arrays.asList(BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, PUPTYPACTIVE, TXTHKUACTIVE, BUTHKUVIEWAVAIL, BUTHKUVIEWACTIVE, TXTSUPACTIVE, BUTSUPVIEWAVAIL, BUTSUPVIEWACTIVE, TXTTPLACTIVE, BUTTPLVIEWAVAIL, BUTTPLVIEWACTIVE, TXFSRRACTIVE, TXFCMTACTIVE, SEPCTRAVAIL, HDGCTRAVAIL, BUTCTRNEWAVAIL, BUTCTRDELETEAVAIL, TXFCTRFSRAVAIL, TXFCTRFSRACTIVE, TXTCTRFWDAVAIL, TXTCTRFWDACTIVE, BUTCTRFWDVIEWAVAIL, BUTCTRFWDVIEWACTIVE, TXTCTRCLRAVAIL, TXTCTRCLRACTIVE, BUTCTRCLRVIEWAVAIL, BUTCTRCLRVIEWACTIVE, SEPIMBAVAIL, HDGIMBAVAIL, BUTIMBNEWAVAIL, BUTIMBDELETEAVAIL, TXTIMBSRFAVAIL, TXTIMBSRFACTIVE, TXTIMBCORAVAIL, TXTIMBCORACTIVE, BUTIMBCORVIEWAVAIL, BUTIMBCORVIEWACTIVE, PUPIMBDIRAVAIL, PUPIMBDIRACTIVE, TXFIMBPRIAVAIL, TXFIMBPRIACTIVE));
+			mask = new HashSet<Integer>(Arrays.asList(BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, PUPTYPACTIVE, TXTHKUACTIVE, BUTHKUVIEWAVAIL, BUTHKUVIEWACTIVE, TXTSUPACTIVE, BUTSUPVIEWAVAIL, BUTSUPVIEWACTIVE, TXTTPLACTIVE, BUTTPLVIEWAVAIL, BUTTPLVIEWACTIVE, TXFSRRACTIVE, TXFCMTACTIVE, SEPIMBAVAIL, HDGIMBAVAIL, BUTIMBNEWAVAIL, BUTIMBDELETEAVAIL, TXTIMBSRFAVAIL, TXTIMBSRFACTIVE, TXTIMBCORAVAIL, TXTIMBCORACTIVE, BUTIMBCORVIEWAVAIL, BUTIMBCORVIEWACTIVE, PUPIMBDIRAVAIL, PUPIMBDIRACTIVE, TXFIMBPRIAVAIL, TXFIMBPRIACTIVE, SEPCTRAVAIL, HDGCTRAVAIL, BUTCTRNEWAVAIL, BUTCTRDELETEAVAIL, TXFCTRFSRAVAIL, TXFCTRFSRACTIVE, TXTCTRFWDAVAIL, TXTCTRFWDACTIVE, BUTCTRFWDVIEWAVAIL, BUTCTRFWDVIEWACTIVE, TXTCTRCLRAVAIL, TXTCTRCLRACTIVE, BUTCTRCLRVIEWAVAIL, BUTCTRCLRVIEWACTIVE));
 		};
 
 		public boolean ButSaveAvail;
@@ -526,20 +526,6 @@ public class PnlWdbeModDetail {
 		public boolean ButTplViewActive;
 		public boolean TxfSrrActive;
 		public boolean TxfCmtActive;
-		public boolean SepCtrAvail;
-		public boolean HdgCtrAvail;
-		public boolean ButCtrNewAvail;
-		public boolean ButCtrDeleteAvail;
-		public boolean TxfCtrFsrAvail;
-		public boolean TxfCtrFsrActive;
-		public boolean TxtCtrFwdAvail;
-		public boolean TxtCtrFwdActive;
-		public boolean ButCtrFwdViewAvail;
-		public boolean ButCtrFwdViewActive;
-		public boolean TxtCtrClrAvail;
-		public boolean TxtCtrClrActive;
-		public boolean ButCtrClrViewAvail;
-		public boolean ButCtrClrViewActive;
 		public boolean SepImbAvail;
 		public boolean HdgImbAvail;
 		public boolean ButImbNewAvail;
@@ -554,6 +540,20 @@ public class PnlWdbeModDetail {
 		public boolean PupImbDirActive;
 		public boolean TxfImbPriAvail;
 		public boolean TxfImbPriActive;
+		public boolean SepCtrAvail;
+		public boolean HdgCtrAvail;
+		public boolean ButCtrNewAvail;
+		public boolean ButCtrDeleteAvail;
+		public boolean TxfCtrFsrAvail;
+		public boolean TxfCtrFsrActive;
+		public boolean TxtCtrFwdAvail;
+		public boolean TxtCtrFwdActive;
+		public boolean ButCtrFwdViewAvail;
+		public boolean ButCtrFwdViewActive;
+		public boolean TxtCtrClrAvail;
+		public boolean TxtCtrClrActive;
+		public boolean ButCtrClrViewAvail;
+		public boolean ButCtrClrViewActive;
 
 		public boolean readXML(
 					Document doc
@@ -583,20 +583,6 @@ public class PnlWdbeModDetail {
 				ButTplViewActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButTplViewActive", mask, BUTTPLVIEWACTIVE);
 				TxfSrrActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxfSrrActive", mask, TXFSRRACTIVE);
 				TxfCmtActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxfCmtActive", mask, TXFCMTACTIVE);
-				SepCtrAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "SepCtrAvail", mask, SEPCTRAVAIL);
-				HdgCtrAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "HdgCtrAvail", mask, HDGCTRAVAIL);
-				ButCtrNewAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButCtrNewAvail", mask, BUTCTRNEWAVAIL);
-				ButCtrDeleteAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButCtrDeleteAvail", mask, BUTCTRDELETEAVAIL);
-				TxfCtrFsrAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxfCtrFsrAvail", mask, TXFCTRFSRAVAIL);
-				TxfCtrFsrActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxfCtrFsrActive", mask, TXFCTRFSRACTIVE);
-				TxtCtrFwdAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxtCtrFwdAvail", mask, TXTCTRFWDAVAIL);
-				TxtCtrFwdActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxtCtrFwdActive", mask, TXTCTRFWDACTIVE);
-				ButCtrFwdViewAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButCtrFwdViewAvail", mask, BUTCTRFWDVIEWAVAIL);
-				ButCtrFwdViewActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButCtrFwdViewActive", mask, BUTCTRFWDVIEWACTIVE);
-				TxtCtrClrAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxtCtrClrAvail", mask, TXTCTRCLRAVAIL);
-				TxtCtrClrActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxtCtrClrActive", mask, TXTCTRCLRACTIVE);
-				ButCtrClrViewAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButCtrClrViewAvail", mask, BUTCTRCLRVIEWAVAIL);
-				ButCtrClrViewActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButCtrClrViewActive", mask, BUTCTRCLRVIEWACTIVE);
 				SepImbAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "SepImbAvail", mask, SEPIMBAVAIL);
 				HdgImbAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "HdgImbAvail", mask, HDGIMBAVAIL);
 				ButImbNewAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButImbNewAvail", mask, BUTIMBNEWAVAIL);
@@ -611,6 +597,20 @@ public class PnlWdbeModDetail {
 				PupImbDirActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "PupImbDirActive", mask, PUPIMBDIRACTIVE);
 				TxfImbPriAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxfImbPriAvail", mask, TXFIMBPRIAVAIL);
 				TxfImbPriActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxfImbPriActive", mask, TXFIMBPRIACTIVE);
+				SepCtrAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "SepCtrAvail", mask, SEPCTRAVAIL);
+				HdgCtrAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "HdgCtrAvail", mask, HDGCTRAVAIL);
+				ButCtrNewAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButCtrNewAvail", mask, BUTCTRNEWAVAIL);
+				ButCtrDeleteAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButCtrDeleteAvail", mask, BUTCTRDELETEAVAIL);
+				TxfCtrFsrAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxfCtrFsrAvail", mask, TXFCTRFSRAVAIL);
+				TxfCtrFsrActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxfCtrFsrActive", mask, TXFCTRFSRACTIVE);
+				TxtCtrFwdAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxtCtrFwdAvail", mask, TXTCTRFWDAVAIL);
+				TxtCtrFwdActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxtCtrFwdActive", mask, TXTCTRFWDACTIVE);
+				ButCtrFwdViewAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButCtrFwdViewAvail", mask, BUTCTRFWDVIEWAVAIL);
+				ButCtrFwdViewActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButCtrFwdViewActive", mask, BUTCTRFWDVIEWACTIVE);
+				TxtCtrClrAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxtCtrClrAvail", mask, TXTCTRCLRAVAIL);
+				TxtCtrClrActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxtCtrClrActive", mask, TXTCTRCLRACTIVE);
+				ButCtrClrViewAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButCtrClrViewAvail", mask, BUTCTRCLRVIEWAVAIL);
+				ButCtrClrViewActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButCtrClrViewActive", mask, BUTCTRCLRVIEWACTIVE);
 
 				return true;
 			};
@@ -638,20 +638,6 @@ public class PnlWdbeModDetail {
 			if (ButTplViewActive == comp.ButTplViewActive) items.add(BUTTPLVIEWACTIVE);
 			if (TxfSrrActive == comp.TxfSrrActive) items.add(TXFSRRACTIVE);
 			if (TxfCmtActive == comp.TxfCmtActive) items.add(TXFCMTACTIVE);
-			if (SepCtrAvail == comp.SepCtrAvail) items.add(SEPCTRAVAIL);
-			if (HdgCtrAvail == comp.HdgCtrAvail) items.add(HDGCTRAVAIL);
-			if (ButCtrNewAvail == comp.ButCtrNewAvail) items.add(BUTCTRNEWAVAIL);
-			if (ButCtrDeleteAvail == comp.ButCtrDeleteAvail) items.add(BUTCTRDELETEAVAIL);
-			if (TxfCtrFsrAvail == comp.TxfCtrFsrAvail) items.add(TXFCTRFSRAVAIL);
-			if (TxfCtrFsrActive == comp.TxfCtrFsrActive) items.add(TXFCTRFSRACTIVE);
-			if (TxtCtrFwdAvail == comp.TxtCtrFwdAvail) items.add(TXTCTRFWDAVAIL);
-			if (TxtCtrFwdActive == comp.TxtCtrFwdActive) items.add(TXTCTRFWDACTIVE);
-			if (ButCtrFwdViewAvail == comp.ButCtrFwdViewAvail) items.add(BUTCTRFWDVIEWAVAIL);
-			if (ButCtrFwdViewActive == comp.ButCtrFwdViewActive) items.add(BUTCTRFWDVIEWACTIVE);
-			if (TxtCtrClrAvail == comp.TxtCtrClrAvail) items.add(TXTCTRCLRAVAIL);
-			if (TxtCtrClrActive == comp.TxtCtrClrActive) items.add(TXTCTRCLRACTIVE);
-			if (ButCtrClrViewAvail == comp.ButCtrClrViewAvail) items.add(BUTCTRCLRVIEWAVAIL);
-			if (ButCtrClrViewActive == comp.ButCtrClrViewActive) items.add(BUTCTRCLRVIEWACTIVE);
 			if (SepImbAvail == comp.SepImbAvail) items.add(SEPIMBAVAIL);
 			if (HdgImbAvail == comp.HdgImbAvail) items.add(HDGIMBAVAIL);
 			if (ButImbNewAvail == comp.ButImbNewAvail) items.add(BUTIMBNEWAVAIL);
@@ -666,6 +652,20 @@ public class PnlWdbeModDetail {
 			if (PupImbDirActive == comp.PupImbDirActive) items.add(PUPIMBDIRACTIVE);
 			if (TxfImbPriAvail == comp.TxfImbPriAvail) items.add(TXFIMBPRIAVAIL);
 			if (TxfImbPriActive == comp.TxfImbPriActive) items.add(TXFIMBPRIACTIVE);
+			if (SepCtrAvail == comp.SepCtrAvail) items.add(SEPCTRAVAIL);
+			if (HdgCtrAvail == comp.HdgCtrAvail) items.add(HDGCTRAVAIL);
+			if (ButCtrNewAvail == comp.ButCtrNewAvail) items.add(BUTCTRNEWAVAIL);
+			if (ButCtrDeleteAvail == comp.ButCtrDeleteAvail) items.add(BUTCTRDELETEAVAIL);
+			if (TxfCtrFsrAvail == comp.TxfCtrFsrAvail) items.add(TXFCTRFSRAVAIL);
+			if (TxfCtrFsrActive == comp.TxfCtrFsrActive) items.add(TXFCTRFSRACTIVE);
+			if (TxtCtrFwdAvail == comp.TxtCtrFwdAvail) items.add(TXTCTRFWDAVAIL);
+			if (TxtCtrFwdActive == comp.TxtCtrFwdActive) items.add(TXTCTRFWDACTIVE);
+			if (ButCtrFwdViewAvail == comp.ButCtrFwdViewAvail) items.add(BUTCTRFWDVIEWAVAIL);
+			if (ButCtrFwdViewActive == comp.ButCtrFwdViewActive) items.add(BUTCTRFWDVIEWACTIVE);
+			if (TxtCtrClrAvail == comp.TxtCtrClrAvail) items.add(TXTCTRCLRAVAIL);
+			if (TxtCtrClrActive == comp.TxtCtrClrActive) items.add(TXTCTRCLRACTIVE);
+			if (ButCtrClrViewAvail == comp.ButCtrClrViewAvail) items.add(BUTCTRCLRVIEWAVAIL);
+			if (ButCtrClrViewActive == comp.ButCtrClrViewActive) items.add(BUTCTRCLRVIEWACTIVE);
 
 			return(items);
 		};
@@ -678,7 +678,7 @@ public class PnlWdbeModDetail {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, PUPTYPACTIVE, TXTHKUACTIVE, BUTHKUVIEWAVAIL, BUTHKUVIEWACTIVE, TXTSUPACTIVE, BUTSUPVIEWAVAIL, BUTSUPVIEWACTIVE, TXTTPLACTIVE, BUTTPLVIEWAVAIL, BUTTPLVIEWACTIVE, TXFSRRACTIVE, TXFCMTACTIVE, SEPCTRAVAIL, HDGCTRAVAIL, BUTCTRNEWAVAIL, BUTCTRDELETEAVAIL, TXFCTRFSRAVAIL, TXFCTRFSRACTIVE, TXTCTRFWDAVAIL, TXTCTRFWDACTIVE, BUTCTRFWDVIEWAVAIL, BUTCTRFWDVIEWACTIVE, TXTCTRCLRAVAIL, TXTCTRCLRACTIVE, BUTCTRCLRVIEWAVAIL, BUTCTRCLRVIEWACTIVE, SEPIMBAVAIL, HDGIMBAVAIL, BUTIMBNEWAVAIL, BUTIMBDELETEAVAIL, TXTIMBSRFAVAIL, TXTIMBSRFACTIVE, TXTIMBCORAVAIL, TXTIMBCORACTIVE, BUTIMBCORVIEWAVAIL, BUTIMBCORVIEWACTIVE, PUPIMBDIRAVAIL, PUPIMBDIRACTIVE, TXFIMBPRIAVAIL, TXFIMBPRIACTIVE));
+			diffitems = new HashSet<Integer>(Arrays.asList(BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, PUPTYPACTIVE, TXTHKUACTIVE, BUTHKUVIEWAVAIL, BUTHKUVIEWACTIVE, TXTSUPACTIVE, BUTSUPVIEWAVAIL, BUTSUPVIEWACTIVE, TXTTPLACTIVE, BUTTPLVIEWAVAIL, BUTTPLVIEWACTIVE, TXFSRRACTIVE, TXFCMTACTIVE, SEPIMBAVAIL, HDGIMBAVAIL, BUTIMBNEWAVAIL, BUTIMBDELETEAVAIL, TXTIMBSRFAVAIL, TXTIMBSRFACTIVE, TXTIMBCORAVAIL, TXTIMBCORACTIVE, BUTIMBCORVIEWAVAIL, BUTIMBCORVIEWACTIVE, PUPIMBDIRAVAIL, PUPIMBDIRACTIVE, TXFIMBPRIAVAIL, TXFIMBPRIACTIVE, SEPCTRAVAIL, HDGCTRAVAIL, BUTCTRNEWAVAIL, BUTCTRDELETEAVAIL, TXFCTRFSRAVAIL, TXFCTRFSRACTIVE, TXTCTRFWDAVAIL, TXTCTRFWDACTIVE, BUTCTRFWDVIEWAVAIL, BUTCTRFWDVIEWACTIVE, TXTCTRCLRAVAIL, TXTCTRCLRACTIVE, BUTCTRCLRVIEWAVAIL, BUTCTRCLRVIEWACTIVE));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);
@@ -699,15 +699,15 @@ public class PnlWdbeModDetail {
 		public static final int CPTTPL = 6;
 		public static final int CPTSRR = 7;
 		public static final int CPTCMT = 8;
-		public static final int HDGCTR = 9;
-		public static final int CPTCTRFSR = 10;
-		public static final int CPTCTRFWD = 11;
-		public static final int CPTCTRCLR = 12;
-		public static final int HDGIMB = 13;
-		public static final int CPTIMBSRF = 14;
-		public static final int CPTIMBCOR = 15;
-		public static final int CPTIMBDIR = 16;
-		public static final int CPTIMBPRI = 17;
+		public static final int HDGIMB = 9;
+		public static final int CPTIMBSRF = 10;
+		public static final int CPTIMBCOR = 11;
+		public static final int CPTIMBDIR = 12;
+		public static final int CPTIMBPRI = 13;
+		public static final int HDGCTR = 14;
+		public static final int CPTCTRFSR = 15;
+		public static final int CPTCTRFWD = 16;
+		public static final int CPTCTRCLR = 17;
 
 		public Tag(
 					String Cpt
@@ -718,15 +718,15 @@ public class PnlWdbeModDetail {
 					, String CptTpl
 					, String CptSrr
 					, String CptCmt
-					, String HdgCtr
-					, String CptCtrFsr
-					, String CptCtrFwd
-					, String CptCtrClr
 					, String HdgImb
 					, String CptImbSrf
 					, String CptImbCor
 					, String CptImbDir
 					, String CptImbPri
+					, String HdgCtr
+					, String CptCtrFsr
+					, String CptCtrFwd
+					, String CptCtrClr
 				) {
 			this.Cpt = Cpt;
 			this.CptSrf = CptSrf;
@@ -736,17 +736,17 @@ public class PnlWdbeModDetail {
 			this.CptTpl = CptTpl;
 			this.CptSrr = CptSrr;
 			this.CptCmt = CptCmt;
-			this.HdgCtr = HdgCtr;
-			this.CptCtrFsr = CptCtrFsr;
-			this.CptCtrFwd = CptCtrFwd;
-			this.CptCtrClr = CptCtrClr;
 			this.HdgImb = HdgImb;
 			this.CptImbSrf = CptImbSrf;
 			this.CptImbCor = CptImbCor;
 			this.CptImbDir = CptImbDir;
 			this.CptImbPri = CptImbPri;
+			this.HdgCtr = HdgCtr;
+			this.CptCtrFsr = CptCtrFsr;
+			this.CptCtrFwd = CptCtrFwd;
+			this.CptCtrClr = CptCtrClr;
 
-			mask = new HashSet<Integer>(Arrays.asList(CPT, CPTSRF, CPTTYP, CPTHKU, CPTSUP, CPTTPL, CPTSRR, CPTCMT, HDGCTR, CPTCTRFSR, CPTCTRFWD, CPTCTRCLR, HDGIMB, CPTIMBSRF, CPTIMBCOR, CPTIMBDIR, CPTIMBPRI));
+			mask = new HashSet<Integer>(Arrays.asList(CPT, CPTSRF, CPTTYP, CPTHKU, CPTSUP, CPTTPL, CPTSRR, CPTCMT, HDGIMB, CPTIMBSRF, CPTIMBCOR, CPTIMBDIR, CPTIMBPRI, HDGCTR, CPTCTRFSR, CPTCTRFWD, CPTCTRCLR));
 		};
 
 		public String Cpt;
@@ -757,15 +757,15 @@ public class PnlWdbeModDetail {
 		public String CptTpl;
 		public String CptSrr;
 		public String CptCmt;
-		public String HdgCtr;
-		public String CptCtrFsr;
-		public String CptCtrFwd;
-		public String CptCtrClr;
 		public String HdgImb;
 		public String CptImbSrf;
 		public String CptImbCor;
 		public String CptImbDir;
 		public String CptImbPri;
+		public String HdgCtr;
+		public String CptCtrFsr;
+		public String CptCtrFwd;
+		public String CptCtrClr;
 
 		public boolean readXML(
 					Document doc
@@ -788,15 +788,15 @@ public class PnlWdbeModDetail {
 				CptTpl = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "CptTpl", mask, CPTTPL);
 				CptSrr = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "CptSrr", mask, CPTSRR);
 				CptCmt = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "CptCmt", mask, CPTCMT);
-				HdgCtr = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "HdgCtr", mask, HDGCTR);
-				CptCtrFsr = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "CptCtrFsr", mask, CPTCTRFSR);
-				CptCtrFwd = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "CptCtrFwd", mask, CPTCTRFWD);
-				CptCtrClr = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "CptCtrClr", mask, CPTCTRCLR);
 				HdgImb = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "HdgImb", mask, HDGIMB);
 				CptImbSrf = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "CptImbSrf", mask, CPTIMBSRF);
 				CptImbCor = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "CptImbCor", mask, CPTIMBCOR);
 				CptImbDir = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "CptImbDir", mask, CPTIMBDIR);
 				CptImbPri = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "CptImbPri", mask, CPTIMBPRI);
+				HdgCtr = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "HdgCtr", mask, HDGCTR);
+				CptCtrFsr = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "CptCtrFsr", mask, CPTCTRFSR);
+				CptCtrFwd = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "CptCtrFwd", mask, CPTCTRFWD);
+				CptCtrClr = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "CptCtrClr", mask, CPTCTRCLR);
 
 				return true;
 			};
@@ -817,15 +817,15 @@ public class PnlWdbeModDetail {
 			if (CptTpl.equals(comp.CptTpl)) items.add(CPTTPL);
 			if (CptSrr.equals(comp.CptSrr)) items.add(CPTSRR);
 			if (CptCmt.equals(comp.CptCmt)) items.add(CPTCMT);
-			if (HdgCtr.equals(comp.HdgCtr)) items.add(HDGCTR);
-			if (CptCtrFsr.equals(comp.CptCtrFsr)) items.add(CPTCTRFSR);
-			if (CptCtrFwd.equals(comp.CptCtrFwd)) items.add(CPTCTRFWD);
-			if (CptCtrClr.equals(comp.CptCtrClr)) items.add(CPTCTRCLR);
 			if (HdgImb.equals(comp.HdgImb)) items.add(HDGIMB);
 			if (CptImbSrf.equals(comp.CptImbSrf)) items.add(CPTIMBSRF);
 			if (CptImbCor.equals(comp.CptImbCor)) items.add(CPTIMBCOR);
 			if (CptImbDir.equals(comp.CptImbDir)) items.add(CPTIMBDIR);
 			if (CptImbPri.equals(comp.CptImbPri)) items.add(CPTIMBPRI);
+			if (HdgCtr.equals(comp.HdgCtr)) items.add(HDGCTR);
+			if (CptCtrFsr.equals(comp.CptCtrFsr)) items.add(CPTCTRFSR);
+			if (CptCtrFwd.equals(comp.CptCtrFwd)) items.add(CPTCTRFWD);
+			if (CptCtrClr.equals(comp.CptCtrClr)) items.add(CPTCTRCLR);
 
 			return(items);
 		};
@@ -838,7 +838,7 @@ public class PnlWdbeModDetail {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(CPT, CPTSRF, CPTTYP, CPTHKU, CPTSUP, CPTTPL, CPTSRR, CPTCMT, HDGCTR, CPTCTRFSR, CPTCTRFWD, CPTCTRCLR, HDGIMB, CPTIMBSRF, CPTIMBCOR, CPTIMBDIR, CPTIMBPRI));
+			diffitems = new HashSet<Integer>(Arrays.asList(CPT, CPTSRF, CPTTYP, CPTHKU, CPTSUP, CPTTPL, CPTSRR, CPTCMT, HDGIMB, CPTIMBSRF, CPTIMBCOR, CPTIMBDIR, CPTIMBPRI, HDGCTR, CPTCTRFSR, CPTCTRFWD, CPTCTRCLR));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);
@@ -974,7 +974,7 @@ public class PnlWdbeModDetail {
 		public DpchEngData() {
 			super(VecWdbeVDpch.DPCHENGWDBEMODDETAILDATA);
 
-			contiac = new ContIac(0, 0, "", "", "", 0, "");
+			contiac = new ContIac(0, 0, "", "", 0, "", "");
 			continf = new ContInf("", "", "", "", "", "", "", "");
 			feedFPupHkt = new Feed("FeedFPupHkt");
 			feedFPupImbDir = new Feed("FeedFPupImbDir");
@@ -1031,7 +1031,7 @@ public class PnlWdbeModDetail {
 				if (tag.readXML(doc, basexpath, true)) add(TAG);
 			} else {
 				scrJref = "";
-				contiac = new ContIac(0, 0, "", "", "", 0, "");
+				contiac = new ContIac(0, 0, "", "", 0, "", "");
 				continf = new ContInf("", "", "", "", "", "", "", "");
 				feedFPupHkt = new Feed("FeedFPupHkt");
 				feedFPupImbDir = new Feed("FeedFPupImbDir");

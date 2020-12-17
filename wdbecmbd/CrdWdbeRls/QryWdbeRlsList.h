@@ -32,8 +32,8 @@ public:
 	class VecVOrd {
 
 	public:
-		static const Sbecore::uint MCH = 1;
-		static const Sbecore::uint VER = 2;
+		static const Sbecore::uint VER = 1;
+		static const Sbecore::uint MCH = 2;
 		static const Sbecore::uint TYP = 3;
 		static const Sbecore::uint SRF = 4;
 

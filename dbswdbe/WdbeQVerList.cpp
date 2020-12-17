@@ -26,8 +26,8 @@ WdbeQVerList::WdbeQVerList(
 			, const string stubGrp
 			, const ubigint own
 			, const string stubOwn
-			, const ubigint refWdbeMProject
-			, const string stubRefWdbeMProject
+			, const ubigint prjRefWdbeMProject
+			, const string stubPrjRefWdbeMProject
 			, const usmallint Major
 			, const usmallint Minor
 			, const usmallint Sub
@@ -45,8 +45,8 @@ WdbeQVerList::WdbeQVerList(
 	this->stubGrp = stubGrp;
 	this->own = own;
 	this->stubOwn = stubOwn;
-	this->refWdbeMProject = refWdbeMProject;
-	this->stubRefWdbeMProject = stubRefWdbeMProject;
+	this->prjRefWdbeMProject = prjRefWdbeMProject;
+	this->stubPrjRefWdbeMProject = stubPrjRefWdbeMProject;
 	this->Major = Major;
 	this->Minor = Minor;
 	this->Sub = Sub;
@@ -70,7 +70,7 @@ void WdbeQVerList::writeXML(
 	if (shorttags) {
 		writeString(wr, "grp", stubGrp);
 		writeString(wr, "own", stubOwn);
-		writeString(wr, "prj", stubRefWdbeMProject);
+		writeString(wr, "prj", stubPrjRefWdbeMProject);
 		writeUint(wr, "maj", Major);
 		writeUint(wr, "min", Minor);
 		writeUint(wr, "sub", Sub);
@@ -80,7 +80,7 @@ void WdbeQVerList::writeXML(
 	} else {
 		writeString(wr, "stubGrp", stubGrp);
 		writeString(wr, "stubOwn", stubOwn);
-		writeString(wr, "stubRefWdbeMProject", stubRefWdbeMProject);
+		writeString(wr, "stubPrjRefWdbeMProject", stubPrjRefWdbeMProject);
 		writeUint(wr, "Major", Major);
 		writeUint(wr, "Minor", Minor);
 		writeUint(wr, "Sub", Sub);
@@ -193,8 +193,8 @@ ubigint TblWdbeQVerList::insertNewRec(
 			, const string stubGrp
 			, const ubigint own
 			, const string stubOwn
-			, const ubigint refWdbeMProject
-			, const string stubRefWdbeMProject
+			, const ubigint prjRefWdbeMProject
+			, const string stubPrjRefWdbeMProject
 			, const usmallint Major
 			, const usmallint Minor
 			, const usmallint Sub
@@ -207,7 +207,7 @@ ubigint TblWdbeQVerList::insertNewRec(
 	ubigint retval = 0;
 	WdbeQVerList* _rec = NULL;
 
-	_rec = new WdbeQVerList(0, jref, jnum, ref, grp, stubGrp, own, stubOwn, refWdbeMProject, stubRefWdbeMProject, Major, Minor, Sub, bvrRefWdbeMVersion, stubBvrRefWdbeMVersion, ixVState, srefIxVState, titIxVState);
+	_rec = new WdbeQVerList(0, jref, jnum, ref, grp, stubGrp, own, stubOwn, prjRefWdbeMProject, stubPrjRefWdbeMProject, Major, Minor, Sub, bvrRefWdbeMVersion, stubBvrRefWdbeMVersion, ixVState, srefIxVState, titIxVState);
 	insertRec(_rec);
 
 	retval = _rec->qref;
@@ -228,8 +228,8 @@ ubigint TblWdbeQVerList::appendNewRecToRst(
 			, const string stubGrp
 			, const ubigint own
 			, const string stubOwn
-			, const ubigint refWdbeMProject
-			, const string stubRefWdbeMProject
+			, const ubigint prjRefWdbeMProject
+			, const string stubPrjRefWdbeMProject
 			, const usmallint Major
 			, const usmallint Minor
 			, const usmallint Sub
@@ -242,7 +242,7 @@ ubigint TblWdbeQVerList::appendNewRecToRst(
 	ubigint retval = 0;
 	WdbeQVerList* _rec = NULL;
 
-	retval = insertNewRec(&_rec, jref, jnum, ref, grp, stubGrp, own, stubOwn, refWdbeMProject, stubRefWdbeMProject, Major, Minor, Sub, bvrRefWdbeMVersion, stubBvrRefWdbeMVersion, ixVState, srefIxVState, titIxVState);
+	retval = insertNewRec(&_rec, jref, jnum, ref, grp, stubGrp, own, stubOwn, prjRefWdbeMProject, stubPrjRefWdbeMProject, Major, Minor, Sub, bvrRefWdbeMVersion, stubBvrRefWdbeMVersion, ixVState, srefIxVState, titIxVState);
 	rst.nodes.push_back(_rec);
 
 	if (rec != NULL) *rec = _rec;
@@ -313,8 +313,8 @@ MyTblWdbeQVerList::~MyTblWdbeQVerList() {
 };
 
 void MyTblWdbeQVerList::initStatements() {
-	stmtInsertRec = createStatement("INSERT INTO TblWdbeQVerList (jref, jnum, ref, grp, own, refWdbeMProject, Major, Minor, Sub, bvrRefWdbeMVersion, ixVState) VALUES (?,?,?,?,?,?,?,?,?,?,?)", false);
-	stmtUpdateRec = createStatement("UPDATE TblWdbeQVerList SET jref = ?, jnum = ?, ref = ?, grp = ?, own = ?, refWdbeMProject = ?, Major = ?, Minor = ?, Sub = ?, bvrRefWdbeMVersion = ?, ixVState = ? WHERE qref = ?", false);
+	stmtInsertRec = createStatement("INSERT INTO TblWdbeQVerList (jref, jnum, ref, grp, own, prjRefWdbeMProject, Major, Minor, Sub, bvrRefWdbeMVersion, ixVState) VALUES (?,?,?,?,?,?,?,?,?,?,?)", false);
+	stmtUpdateRec = createStatement("UPDATE TblWdbeQVerList SET jref = ?, jnum = ?, ref = ?, grp = ?, own = ?, prjRefWdbeMProject = ?, Major = ?, Minor = ?, Sub = ?, bvrRefWdbeMVersion = ?, ixVState = ? WHERE qref = ?", false);
 	stmtRemoveRecByQref = createStatement("DELETE FROM TblWdbeQVerList WHERE qref = ?", false);
 	stmtRemoveRstByJref = createStatement("DELETE FROM TblWdbeQVerList WHERE jref = ?", false);
 };
@@ -350,7 +350,7 @@ bool MyTblWdbeQVerList::loadRecBySQL(
 		if (dbrow[3]) _rec->ref = atoll((char*) dbrow[3]); else _rec->ref = 0;
 		if (dbrow[4]) _rec->grp = atoll((char*) dbrow[4]); else _rec->grp = 0;
 		if (dbrow[5]) _rec->own = atoll((char*) dbrow[5]); else _rec->own = 0;
-		if (dbrow[6]) _rec->refWdbeMProject = atoll((char*) dbrow[6]); else _rec->refWdbeMProject = 0;
+		if (dbrow[6]) _rec->prjRefWdbeMProject = atoll((char*) dbrow[6]); else _rec->prjRefWdbeMProject = 0;
 		if (dbrow[7]) _rec->Major = atoi((char*) dbrow[7]); else _rec->Major = 0;
 		if (dbrow[8]) _rec->Minor = atoi((char*) dbrow[8]); else _rec->Minor = 0;
 		if (dbrow[9]) _rec->Sub = atoi((char*) dbrow[9]); else _rec->Sub = 0;
@@ -403,7 +403,7 @@ ubigint MyTblWdbeQVerList::loadRstBySQL(
 			if (dbrow[3]) rec->ref = atoll((char*) dbrow[3]); else rec->ref = 0;
 			if (dbrow[4]) rec->grp = atoll((char*) dbrow[4]); else rec->grp = 0;
 			if (dbrow[5]) rec->own = atoll((char*) dbrow[5]); else rec->own = 0;
-			if (dbrow[6]) rec->refWdbeMProject = atoll((char*) dbrow[6]); else rec->refWdbeMProject = 0;
+			if (dbrow[6]) rec->prjRefWdbeMProject = atoll((char*) dbrow[6]); else rec->prjRefWdbeMProject = 0;
 			if (dbrow[7]) rec->Major = atoi((char*) dbrow[7]); else rec->Major = 0;
 			if (dbrow[8]) rec->Minor = atoi((char*) dbrow[8]); else rec->Minor = 0;
 			if (dbrow[9]) rec->Sub = atoi((char*) dbrow[9]); else rec->Sub = 0;
@@ -431,7 +431,7 @@ ubigint MyTblWdbeQVerList::insertRec(
 		bindUbigint(&rec->ref,&(l[2]),&(n[2]),&(e[2])),
 		bindUbigint(&rec->grp,&(l[3]),&(n[3]),&(e[3])),
 		bindUbigint(&rec->own,&(l[4]),&(n[4]),&(e[4])),
-		bindUbigint(&rec->refWdbeMProject,&(l[5]),&(n[5]),&(e[5])),
+		bindUbigint(&rec->prjRefWdbeMProject,&(l[5]),&(n[5]),&(e[5])),
 		bindUsmallint(&rec->Major,&(l[6]),&(n[6]),&(e[6])),
 		bindUsmallint(&rec->Minor,&(l[7]),&(n[7]),&(e[7])),
 		bindUsmallint(&rec->Sub,&(l[8]),&(n[8]),&(e[8])),
@@ -469,7 +469,7 @@ void MyTblWdbeQVerList::updateRec(
 		bindUbigint(&rec->ref,&(l[2]),&(n[2]),&(e[2])),
 		bindUbigint(&rec->grp,&(l[3]),&(n[3]),&(e[3])),
 		bindUbigint(&rec->own,&(l[4]),&(n[4]),&(e[4])),
-		bindUbigint(&rec->refWdbeMProject,&(l[5]),&(n[5]),&(e[5])),
+		bindUbigint(&rec->prjRefWdbeMProject,&(l[5]),&(n[5]),&(e[5])),
 		bindUsmallint(&rec->Major,&(l[6]),&(n[6]),&(e[6])),
 		bindUsmallint(&rec->Minor,&(l[7]),&(n[7]),&(e[7])),
 		bindUsmallint(&rec->Sub,&(l[8]),&(n[8]),&(e[8])),
@@ -564,13 +564,13 @@ PgTblWdbeQVerList::~PgTblWdbeQVerList() {
 };
 
 void PgTblWdbeQVerList::initStatements() {
-	createStatement("TblWdbeQVerList_insertRec", "INSERT INTO TblWdbeQVerList (jref, jnum, ref, grp, own, refWdbeMProject, Major, Minor, Sub, bvrRefWdbeMVersion, ixVState) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11) RETURNING qref", 11);
-	createStatement("TblWdbeQVerList_updateRec", "UPDATE TblWdbeQVerList SET jref = $1, jnum = $2, ref = $3, grp = $4, own = $5, refWdbeMProject = $6, Major = $7, Minor = $8, Sub = $9, bvrRefWdbeMVersion = $10, ixVState = $11 WHERE qref = $12", 12);
+	createStatement("TblWdbeQVerList_insertRec", "INSERT INTO TblWdbeQVerList (jref, jnum, ref, grp, own, prjRefWdbeMProject, Major, Minor, Sub, bvrRefWdbeMVersion, ixVState) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11) RETURNING qref", 11);
+	createStatement("TblWdbeQVerList_updateRec", "UPDATE TblWdbeQVerList SET jref = $1, jnum = $2, ref = $3, grp = $4, own = $5, prjRefWdbeMProject = $6, Major = $7, Minor = $8, Sub = $9, bvrRefWdbeMVersion = $10, ixVState = $11 WHERE qref = $12", 12);
 	createStatement("TblWdbeQVerList_removeRecByQref", "DELETE FROM TblWdbeQVerList WHERE qref = $1", 1);
 	createStatement("TblWdbeQVerList_removeRstByJref", "DELETE FROM TblWdbeQVerList WHERE jref = $1", 1);
 
-	createStatement("TblWdbeQVerList_loadRecByQref", "SELECT qref, jref, jnum, ref, grp, own, refWdbeMProject, Major, Minor, Sub, bvrRefWdbeMVersion, ixVState FROM TblWdbeQVerList WHERE qref = $1", 1);
-	createStatement("TblWdbeQVerList_loadRstByJref", "SELECT qref, jref, jnum, ref, grp, own, refWdbeMProject, Major, Minor, Sub, bvrRefWdbeMVersion, ixVState FROM TblWdbeQVerList WHERE jref = $1 ORDER BY jnum ASC", 1);
+	createStatement("TblWdbeQVerList_loadRecByQref", "SELECT qref, jref, jnum, ref, grp, own, prjRefWdbeMProject, Major, Minor, Sub, bvrRefWdbeMVersion, ixVState FROM TblWdbeQVerList WHERE qref = $1", 1);
+	createStatement("TblWdbeQVerList_loadRstByJref", "SELECT qref, jref, jnum, ref, grp, own, prjRefWdbeMProject, Major, Minor, Sub, bvrRefWdbeMVersion, ixVState FROM TblWdbeQVerList WHERE jref = $1 ORDER BY jnum ASC", 1);
 };
 
 bool PgTblWdbeQVerList::loadRec(
@@ -592,7 +592,7 @@ bool PgTblWdbeQVerList::loadRec(
 			PQfnumber(res, "ref"),
 			PQfnumber(res, "grp"),
 			PQfnumber(res, "own"),
-			PQfnumber(res, "refwdbemproject"),
+			PQfnumber(res, "prjrefwdbemproject"),
 			PQfnumber(res, "major"),
 			PQfnumber(res, "minor"),
 			PQfnumber(res, "sub"),
@@ -606,7 +606,7 @@ bool PgTblWdbeQVerList::loadRec(
 		ptr = PQgetvalue(res, 0, fnum[3]); _rec->ref = atoll(ptr);
 		ptr = PQgetvalue(res, 0, fnum[4]); _rec->grp = atoll(ptr);
 		ptr = PQgetvalue(res, 0, fnum[5]); _rec->own = atoll(ptr);
-		ptr = PQgetvalue(res, 0, fnum[6]); _rec->refWdbeMProject = atoll(ptr);
+		ptr = PQgetvalue(res, 0, fnum[6]); _rec->prjRefWdbeMProject = atoll(ptr);
 		ptr = PQgetvalue(res, 0, fnum[7]); _rec->Major = atoi(ptr);
 		ptr = PQgetvalue(res, 0, fnum[8]); _rec->Minor = atoi(ptr);
 		ptr = PQgetvalue(res, 0, fnum[9]); _rec->Sub = atoi(ptr);
@@ -644,7 +644,7 @@ ubigint PgTblWdbeQVerList::loadRst(
 			PQfnumber(res, "ref"),
 			PQfnumber(res, "grp"),
 			PQfnumber(res, "own"),
-			PQfnumber(res, "refwdbemproject"),
+			PQfnumber(res, "prjrefwdbemproject"),
 			PQfnumber(res, "major"),
 			PQfnumber(res, "minor"),
 			PQfnumber(res, "sub"),
@@ -661,7 +661,7 @@ ubigint PgTblWdbeQVerList::loadRst(
 			ptr = PQgetvalue(res, numread, fnum[3]); rec->ref = atoll(ptr);
 			ptr = PQgetvalue(res, numread, fnum[4]); rec->grp = atoll(ptr);
 			ptr = PQgetvalue(res, numread, fnum[5]); rec->own = atoll(ptr);
-			ptr = PQgetvalue(res, numread, fnum[6]); rec->refWdbeMProject = atoll(ptr);
+			ptr = PQgetvalue(res, numread, fnum[6]); rec->prjRefWdbeMProject = atoll(ptr);
 			ptr = PQgetvalue(res, numread, fnum[7]); rec->Major = atoi(ptr);
 			ptr = PQgetvalue(res, numread, fnum[8]); rec->Minor = atoi(ptr);
 			ptr = PQgetvalue(res, numread, fnum[9]); rec->Sub = atoi(ptr);
@@ -764,7 +764,7 @@ ubigint PgTblWdbeQVerList::insertRec(
 	ubigint _ref = htonl64(rec->ref);
 	ubigint _grp = htonl64(rec->grp);
 	ubigint _own = htonl64(rec->own);
-	ubigint _refWdbeMProject = htonl64(rec->refWdbeMProject);
+	ubigint _prjRefWdbeMProject = htonl64(rec->prjRefWdbeMProject);
 	usmallint _Major = htons(rec->Major);
 	usmallint _Minor = htons(rec->Minor);
 	usmallint _Sub = htons(rec->Sub);
@@ -777,7 +777,7 @@ ubigint PgTblWdbeQVerList::insertRec(
 		(char*) &_ref,
 		(char*) &_grp,
 		(char*) &_own,
-		(char*) &_refWdbeMProject,
+		(char*) &_prjRefWdbeMProject,
 		(char*) &_Major,
 		(char*) &_Minor,
 		(char*) &_Sub,
@@ -829,7 +829,7 @@ void PgTblWdbeQVerList::updateRec(
 	ubigint _ref = htonl64(rec->ref);
 	ubigint _grp = htonl64(rec->grp);
 	ubigint _own = htonl64(rec->own);
-	ubigint _refWdbeMProject = htonl64(rec->refWdbeMProject);
+	ubigint _prjRefWdbeMProject = htonl64(rec->prjRefWdbeMProject);
 	usmallint _Major = htons(rec->Major);
 	usmallint _Minor = htons(rec->Minor);
 	usmallint _Sub = htons(rec->Sub);
@@ -843,7 +843,7 @@ void PgTblWdbeQVerList::updateRec(
 		(char*) &_ref,
 		(char*) &_grp,
 		(char*) &_own,
-		(char*) &_refWdbeMProject,
+		(char*) &_prjRefWdbeMProject,
 		(char*) &_Major,
 		(char*) &_Minor,
 		(char*) &_Sub,

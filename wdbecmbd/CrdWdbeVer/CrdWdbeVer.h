@@ -15,11 +15,11 @@
 // IP include.cust --- INSERT
 
 #include "PnlWdbeVerList.h"
-#include "PnlWdbeVerHeadbar.h"
 #include "PnlWdbeVerRec.h"
-#include "DlgWdbeVerDetdd.h"
-#include "DlgWdbeVerNew.h"
+#include "PnlWdbeVerHeadbar.h"
 #include "DlgWdbeVerBscdd.h"
+#include "DlgWdbeVerNew.h"
+#include "DlgWdbeVerDetdd.h"
 
 #define VecVWdbeVerDo CrdWdbeVer::VecVDo
 #define VecVWdbeVerSge CrdWdbeVer::VecVSge
@@ -237,11 +237,11 @@ public:
 	Sbecore::Xmlio::Feed feedFSge;
 
 	PnlWdbeVerList* pnllist;
-	PnlWdbeVerHeadbar* pnlheadbar;
 	PnlWdbeVerRec* pnlrec;
-	DlgWdbeVerDetdd* dlgdetdd;
-	DlgWdbeVerNew* dlgnew;
+	PnlWdbeVerHeadbar* pnlheadbar;
 	DlgWdbeVerBscdd* dlgbscdd;
+	DlgWdbeVerNew* dlgnew;
+	DlgWdbeVerDetdd* dlgdetdd;
 
 	// IP vars.cust --- INSERT
 

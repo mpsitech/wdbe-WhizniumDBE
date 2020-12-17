@@ -203,11 +203,11 @@ uint VecWdbeVJob::getIx(
 	if (s == "pnlwdbeprcmge1nsignal") return PNLWDBEPRCMGE1NSIGNAL;
 	if (s == "pnlwdbeprcprc1nvariable") return PNLWDBEPRCPRC1NVARIABLE;
 	if (s == "pnlwdbeprcrec") return PNLWDBEPRCREC;
-	if (s == "pnlwdbeprj1nversion") return PNLWDBEPRJ1NVERSION;
 	if (s == "pnlwdbeprjdetail") return PNLWDBEPRJDETAIL;
 	if (s == "pnlwdbeprjheadbar") return PNLWDBEPRJHEADBAR;
 	if (s == "pnlwdbeprjlist") return PNLWDBEPRJLIST;
 	if (s == "pnlwdbeprjmnperson") return PNLWDBEPRJMNPERSON;
+	if (s == "pnlwdbeprjprj1nversion") return PNLWDBEPRJPRJ1NVERSION;
 	if (s == "pnlwdbeprjrec") return PNLWDBEPRJREC;
 	if (s == "pnlwdbeprsadetail") return PNLWDBEPRSADETAIL;
 	if (s == "pnlwdbeprsdetail") return PNLWDBEPRSDETAIL;
@@ -365,9 +365,9 @@ uint VecWdbeVJob::getIx(
 	if (s == "qrywdbeprclist") return QRYWDBEPRCLIST;
 	if (s == "qrywdbeprcmge1nsignal") return QRYWDBEPRCMGE1NSIGNAL;
 	if (s == "qrywdbeprcprc1nvariable") return QRYWDBEPRCPRC1NVARIABLE;
-	if (s == "qrywdbeprj1nversion") return QRYWDBEPRJ1NVERSION;
 	if (s == "qrywdbeprjlist") return QRYWDBEPRJLIST;
 	if (s == "qrywdbeprjmnperson") return QRYWDBEPRJMNPERSON;
+	if (s == "qrywdbeprjprj1nversion") return QRYWDBEPRJPRJ1NVERSION;
 	if (s == "qrywdbeprsadetail") return QRYWDBEPRSADETAIL;
 	if (s == "qrywdbeprslist") return QRYWDBEPRSLIST;
 	if (s == "qrywdbeprsmncoreproject") return QRYWDBEPRSMNCOREPROJECT;
@@ -607,11 +607,11 @@ string VecWdbeVJob::getSref(
 	if (ix == PNLWDBEPRCMGE1NSIGNAL) return("PnlWdbePrcMge1NSignal");
 	if (ix == PNLWDBEPRCPRC1NVARIABLE) return("PnlWdbePrcPrc1NVariable");
 	if (ix == PNLWDBEPRCREC) return("PnlWdbePrcRec");
-	if (ix == PNLWDBEPRJ1NVERSION) return("PnlWdbePrj1NVersion");
 	if (ix == PNLWDBEPRJDETAIL) return("PnlWdbePrjDetail");
 	if (ix == PNLWDBEPRJHEADBAR) return("PnlWdbePrjHeadbar");
 	if (ix == PNLWDBEPRJLIST) return("PnlWdbePrjList");
 	if (ix == PNLWDBEPRJMNPERSON) return("PnlWdbePrjMNPerson");
+	if (ix == PNLWDBEPRJPRJ1NVERSION) return("PnlWdbePrjPrj1NVersion");
 	if (ix == PNLWDBEPRJREC) return("PnlWdbePrjRec");
 	if (ix == PNLWDBEPRSADETAIL) return("PnlWdbePrsADetail");
 	if (ix == PNLWDBEPRSDETAIL) return("PnlWdbePrsDetail");
@@ -769,9 +769,9 @@ string VecWdbeVJob::getSref(
 	if (ix == QRYWDBEPRCLIST) return("QryWdbePrcList");
 	if (ix == QRYWDBEPRCMGE1NSIGNAL) return("QryWdbePrcMge1NSignal");
 	if (ix == QRYWDBEPRCPRC1NVARIABLE) return("QryWdbePrcPrc1NVariable");
-	if (ix == QRYWDBEPRJ1NVERSION) return("QryWdbePrj1NVersion");
 	if (ix == QRYWDBEPRJLIST) return("QryWdbePrjList");
 	if (ix == QRYWDBEPRJMNPERSON) return("QryWdbePrjMNPerson");
+	if (ix == QRYWDBEPRJPRJ1NVERSION) return("QryWdbePrjPrj1NVersion");
 	if (ix == QRYWDBEPRSADETAIL) return("QryWdbePrsADetail");
 	if (ix == QRYWDBEPRSLIST) return("QryWdbePrsList");
 	if (ix == QRYWDBEPRSMNCOREPROJECT) return("QryWdbePrsMNCoreproject");

@@ -50,8 +50,8 @@ CrdWdbeRls::CrdWdbeRls(
 	pnlrec = NULL;
 	dlgfinreptr = NULL;
 	dlgnew = NULL;
-	dlgstareptr = NULL;
 	dlgwrite = NULL;
+	dlgstareptr = NULL;
 
 	// IP constructor.cust1 --- INSERT
 

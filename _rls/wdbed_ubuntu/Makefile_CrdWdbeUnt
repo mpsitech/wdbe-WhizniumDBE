@@ -2,7 +2,7 @@
 # make file for CrdWdbeUnt card job handler, release wdbed_ubuntu
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 6 Dec 2020
+# date created: 16 Dec 2020
 # IP header --- ABOVE
 
 include ../Makefile.inc
@@ -16,7 +16,7 @@ STATLIBFLAGS = rcs
 INCPATH = -I$(BUILDROOT)/dbswdbe -I$(BUILDROOT)/wdbed/VecWdbe -I$(BUILDROOT)/wdbed/IexWdbe -I$(BUILDROOT)/wdbed
 INCPATH += -I${WHIZSDKROOT}/build -I${WHIZSDKROOT}/build/apiwzlm -I/usr/include -I/usr/include/jsoncpp -I/usr/include/libxml2 -I/usr/include/mariadb
 
-OBJS = CrdWdbeUnt.o PnlWdbeUntList.o QryWdbeUntList.o PnlWdbeUntHeadbar.o PnlWdbeUntRec.o PnlWdbeUntRef1NCommand.o QryWdbeUntRef1NCommand.o PnlWdbeUntRef1NError.o QryWdbeUntRef1NError.o PnlWdbeUntHk1NVector.o QryWdbeUntHk1NVector.o PnlWdbeUntHk1NModule.o QryWdbeUntHk1NModule.o PnlWdbeUnt1NTarget.o QryWdbeUnt1NTarget.o PnlWdbeUntFwd1NController.o QryWdbeUntFwd1NController.o PnlWdbeUnt1NPeripheral.o QryWdbeUnt1NPeripheral.o PnlWdbeUnt1NBank.o QryWdbeUnt1NBank.o PnlWdbeUntSil1NUnit.o QryWdbeUntSil1NUnit.o PnlWdbeUntDetail.o
+OBJS = CrdWdbeUnt.o PnlWdbeUntList.o QryWdbeUntList.o PnlWdbeUntHeadbar.o PnlWdbeUntRec.o PnlWdbeUntRef1NCommand.o QryWdbeUntRef1NCommand.o PnlWdbeUntHk1NModule.o QryWdbeUntHk1NModule.o PnlWdbeUntHk1NVector.o QryWdbeUntHk1NVector.o PnlWdbeUntRef1NError.o QryWdbeUntRef1NError.o PnlWdbeUnt1NBank.o QryWdbeUnt1NBank.o PnlWdbeUntFwd1NController.o QryWdbeUntFwd1NController.o PnlWdbeUnt1NTarget.o QryWdbeUnt1NTarget.o PnlWdbeUntSil1NUnit.o QryWdbeUntSil1NUnit.o PnlWdbeUnt1NPeripheral.o QryWdbeUnt1NPeripheral.o PnlWdbeUntDetail.o
 
 LIB = libcrdwdbeunt
 

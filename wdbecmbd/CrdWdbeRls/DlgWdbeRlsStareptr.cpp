@@ -431,7 +431,7 @@ void DlgWdbeRlsStareptr::handleDpchAppDoDetButStaClick(
 	string giturl;
 
 	if (feedFDetRbuBrt.getIxByNum(contiacdet.numFRbuBrt) == VecWdbeVBasereptype::PRJGIT) {
-		if (dbswdbe->tblwdbemproject->loadRecBySQL("SELECT TblWdbeMProject.* FROM TblWdbeMProject, TblWdbeMVersion WHERE TblWdbeMProject.ref = TblWdbeMVersion.refWdbeMProject AND TblWdbeMVersion.ref = "
+		if (dbswdbe->tblwdbemproject->loadRecBySQL("SELECT TblWdbeMProject.* FROM TblWdbeMProject, TblWdbeMVersion WHERE TblWdbeMProject.ref = TblWdbeMVersion.prjRefWdbeMProject AND TblWdbeMVersion.ref = "
 					+ to_string(xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFVER, jref)), &prj)) {
 
 			giturl = prj->Giturl;

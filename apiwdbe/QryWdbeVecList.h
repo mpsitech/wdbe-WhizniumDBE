@@ -30,8 +30,8 @@ namespace QryWdbeVecList {
 	public:
 		static const Sbecore::uint HKU = 1;
 		static const Sbecore::uint HKT = 2;
-		static const Sbecore::uint TYP = 3;
-		static const Sbecore::uint SRF = 4;
+		static const Sbecore::uint SRF = 3;
+		static const Sbecore::uint TYP = 4;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);

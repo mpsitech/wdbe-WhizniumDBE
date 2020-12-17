@@ -29,13 +29,14 @@
 class WdbeMVersion {
 
 public:
-	WdbeMVersion(const Sbecore::ubigint ref = 0, const Sbecore::ubigint grp = 0, const Sbecore::ubigint own = 0, const Sbecore::ubigint refWdbeMProject = 0, const Sbecore::ubigint bvrRefWdbeMVersion = 0, const Sbecore::usmallint Major = 0, const Sbecore::usmallint Minor = 0, const Sbecore::usmallint Sub = 0, const Sbecore::ubigint refJState = 0, const Sbecore::uint ixVState = 0, const std::string About = "", const std::string Comment = "");
+	WdbeMVersion(const Sbecore::ubigint ref = 0, const Sbecore::ubigint grp = 0, const Sbecore::ubigint own = 0, const Sbecore::ubigint prjRefWdbeMProject = 0, const Sbecore::uint prjNum = 0, const Sbecore::ubigint bvrRefWdbeMVersion = 0, const Sbecore::usmallint Major = 0, const Sbecore::usmallint Minor = 0, const Sbecore::usmallint Sub = 0, const Sbecore::ubigint refJState = 0, const Sbecore::uint ixVState = 0, const std::string About = "", const std::string Comment = "");
 
 public:
 	Sbecore::ubigint ref;
 	Sbecore::ubigint grp;
 	Sbecore::ubigint own;
-	Sbecore::ubigint refWdbeMProject;
+	Sbecore::ubigint prjRefWdbeMProject;
+	Sbecore::uint prjNum;
 	Sbecore::ubigint bvrRefWdbeMVersion;
 	Sbecore::usmallint Major;
 	Sbecore::usmallint Minor;
@@ -108,16 +109,16 @@ public:
 	virtual Sbecore::ubigint loadRstBySQL(const std::string& sqlstr, const bool append, ListWdbeMVersion& rst);
 
 	virtual Sbecore::ubigint insertRec(WdbeMVersion* rec);
-	Sbecore::ubigint insertNewRec(WdbeMVersion** rec = NULL, const Sbecore::ubigint grp = 0, const Sbecore::ubigint own = 0, const Sbecore::ubigint refWdbeMProject = 0, const Sbecore::ubigint bvrRefWdbeMVersion = 0, const Sbecore::usmallint Major = 0, const Sbecore::usmallint Minor = 0, const Sbecore::usmallint Sub = 0, const Sbecore::ubigint refJState = 0, const Sbecore::uint ixVState = 0, const std::string About = "", const std::string Comment = "");
-	Sbecore::ubigint appendNewRecToRst(ListWdbeMVersion& rst, WdbeMVersion** rec = NULL, const Sbecore::ubigint grp = 0, const Sbecore::ubigint own = 0, const Sbecore::ubigint refWdbeMProject = 0, const Sbecore::ubigint bvrRefWdbeMVersion = 0, const Sbecore::usmallint Major = 0, const Sbecore::usmallint Minor = 0, const Sbecore::usmallint Sub = 0, const Sbecore::ubigint refJState = 0, const Sbecore::uint ixVState = 0, const std::string About = "", const std::string Comment = "");
+	Sbecore::ubigint insertNewRec(WdbeMVersion** rec = NULL, const Sbecore::ubigint grp = 0, const Sbecore::ubigint own = 0, const Sbecore::ubigint prjRefWdbeMProject = 0, const Sbecore::uint prjNum = 0, const Sbecore::ubigint bvrRefWdbeMVersion = 0, const Sbecore::usmallint Major = 0, const Sbecore::usmallint Minor = 0, const Sbecore::usmallint Sub = 0, const Sbecore::ubigint refJState = 0, const Sbecore::uint ixVState = 0, const std::string About = "", const std::string Comment = "");
+	Sbecore::ubigint appendNewRecToRst(ListWdbeMVersion& rst, WdbeMVersion** rec = NULL, const Sbecore::ubigint grp = 0, const Sbecore::ubigint own = 0, const Sbecore::ubigint prjRefWdbeMProject = 0, const Sbecore::uint prjNum = 0, const Sbecore::ubigint bvrRefWdbeMVersion = 0, const Sbecore::usmallint Major = 0, const Sbecore::usmallint Minor = 0, const Sbecore::usmallint Sub = 0, const Sbecore::ubigint refJState = 0, const Sbecore::uint ixVState = 0, const std::string About = "", const std::string Comment = "");
 	virtual void insertRst(ListWdbeMVersion& rst, bool transact = false);
 	virtual void updateRec(WdbeMVersion* rec);
 	virtual void updateRst(ListWdbeMVersion& rst, bool transact = false);
 	virtual void removeRecByRef(Sbecore::ubigint ref);
 
 	virtual bool loadRecByRef(Sbecore::ubigint ref, WdbeMVersion** rec);
-	virtual Sbecore::ubigint loadRefsByPrj(Sbecore::ubigint refWdbeMProject, const bool append, std::vector<Sbecore::ubigint>& refs);
-	virtual Sbecore::ubigint loadRstByPrj(Sbecore::ubigint refWdbeMProject, const bool append, ListWdbeMVersion& rst);
+	virtual Sbecore::ubigint loadRefsByPrj(Sbecore::ubigint prjRefWdbeMProject, const bool append, std::vector<Sbecore::ubigint>& refs);
+	virtual Sbecore::ubigint loadRstByPrj(Sbecore::ubigint prjRefWdbeMProject, const bool append, ListWdbeMVersion& rst);
 	Sbecore::ubigint loadRstByRefs(std::vector<Sbecore::ubigint>& refs, const bool append, ListWdbeMVersion& rst);
 };
 
@@ -150,8 +151,8 @@ public:
 	void removeRecByRef(Sbecore::ubigint ref);
 
 	bool loadRecByRef(Sbecore::ubigint ref, WdbeMVersion** rec);
-	Sbecore::ubigint loadRefsByPrj(Sbecore::ubigint refWdbeMProject, const bool append, std::vector<Sbecore::ubigint>& refs);
-	Sbecore::ubigint loadRstByPrj(Sbecore::ubigint refWdbeMProject, const bool append, ListWdbeMVersion& rst);
+	Sbecore::ubigint loadRefsByPrj(Sbecore::ubigint prjRefWdbeMProject, const bool append, std::vector<Sbecore::ubigint>& refs);
+	Sbecore::ubigint loadRstByPrj(Sbecore::ubigint prjRefWdbeMProject, const bool append, ListWdbeMVersion& rst);
 };
 #endif
 
@@ -185,8 +186,8 @@ public:
 	void removeRecByRef(Sbecore::ubigint ref);
 
 	bool loadRecByRef(Sbecore::ubigint ref, WdbeMVersion** rec);
-	Sbecore::ubigint loadRefsByPrj(Sbecore::ubigint refWdbeMProject, const bool append, std::vector<Sbecore::ubigint>& refs);
-	Sbecore::ubigint loadRstByPrj(Sbecore::ubigint refWdbeMProject, const bool append, ListWdbeMVersion& rst);
+	Sbecore::ubigint loadRefsByPrj(Sbecore::ubigint prjRefWdbeMProject, const bool append, std::vector<Sbecore::ubigint>& refs);
+	Sbecore::ubigint loadRstByPrj(Sbecore::ubigint prjRefWdbeMProject, const bool append, ListWdbeMVersion& rst);
 };
 #endif
 

@@ -15,8 +15,8 @@
 // IP include.cust --- INSERT
 
 #include "PnlWdbeMchSup1NMachine.h"
-#include "PnlWdbeMch1NRelease.h"
 #include "PnlWdbeMchAMakefile.h"
+#include "PnlWdbeMch1NRelease.h"
 #include "PnlWdbeMchAPar.h"
 #include "PnlWdbeMchDetail.h"
 
@@ -75,7 +75,7 @@ public:
 	class StatApp {
 
 	public:
-		static void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true, const bool initdoneDetail = false, const bool initdoneAPar = false, const bool initdoneAMakefile = false, const bool initdone1NRelease = false, const bool initdoneSup1NMachine = false);
+		static void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true, const bool initdoneDetail = false, const bool initdoneAMakefile = false, const bool initdoneAPar = false, const bool initdone1NRelease = false, const bool initdoneSup1NMachine = false);
 	};
 
 	/**
@@ -86,20 +86,20 @@ public:
 	public:
 		static const Sbecore::uint IXWDBEVEXPSTATE = 1;
 		static const Sbecore::uint JREFDETAIL = 2;
-		static const Sbecore::uint JREFAPAR = 3;
-		static const Sbecore::uint JREFAMAKEFILE = 4;
+		static const Sbecore::uint JREFAMAKEFILE = 3;
+		static const Sbecore::uint JREFAPAR = 4;
 		static const Sbecore::uint JREF1NRELEASE = 5;
 		static const Sbecore::uint JREFSUP1NMACHINE = 6;
 		static const Sbecore::uint BUTREGULARIZEACTIVE = 7;
 
 	public:
-		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const Sbecore::ubigint jrefDetail = 0, const Sbecore::ubigint jrefAPar = 0, const Sbecore::ubigint jrefAMakefile = 0, const Sbecore::ubigint jref1NRelease = 0, const Sbecore::ubigint jrefSup1NMachine = 0, const bool ButRegularizeActive = true);
+		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const Sbecore::ubigint jrefDetail = 0, const Sbecore::ubigint jrefAMakefile = 0, const Sbecore::ubigint jrefAPar = 0, const Sbecore::ubigint jref1NRelease = 0, const Sbecore::ubigint jrefSup1NMachine = 0, const bool ButRegularizeActive = true);
 
 	public:
 		Sbecore::uint ixWdbeVExpstate;
 		Sbecore::ubigint jrefDetail;
-		Sbecore::ubigint jrefAPar;
 		Sbecore::ubigint jrefAMakefile;
+		Sbecore::ubigint jrefAPar;
 		Sbecore::ubigint jref1NRelease;
 		Sbecore::ubigint jrefSup1NMachine;
 		bool ButRegularizeActive;
@@ -178,8 +178,8 @@ public:
 	StatShr statshr;
 
 	PnlWdbeMchSup1NMachine* pnlsup1nmachine;
-	PnlWdbeMch1NRelease* pnl1nrelease;
 	PnlWdbeMchAMakefile* pnlamakefile;
+	PnlWdbeMch1NRelease* pnl1nrelease;
 	PnlWdbeMchAPar* pnlapar;
 	PnlWdbeMchDetail* pnldetail;
 
@@ -216,8 +216,8 @@ public:
 
 private:
 	bool handleCallWdbeMchUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
-	bool handleCallWdbeMch_cchEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
 	bool handleCallWdbeMch_supEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeMch_cchEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
 
 };
 

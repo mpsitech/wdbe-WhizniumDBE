@@ -2,7 +2,7 @@
 # make file for Wdbe daemon, release wdbed_ubuntu
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 6 Dec 2020
+# date created: 16 Dec 2020
 # IP header --- ABOVE
 
 include Makefile.inc
@@ -21,7 +21,7 @@ PCHS = Wdbed.h.gch
 
 OBJS = Wdbe.o WdbedAppsrv.o WdbedJobprc.o WdbedOpprc.o WdbedOpengcli.o WdbedOpengsrv.o Wdbed.o
 OBJS += RootWdbe.o SessWdbe.o JobWdbeLicense.o
-OBJS += WdbeWrfpga_blks.o SqkWdbeWrfpga.o WdbeWrmcu_blks.o SqkWdbeWrmcu.o WdbeWrdev_blks.o SqkWdbeWrdev.o WdbePrcfile_blks.o SqkWdbePrcfile.o WdbePrctree_blks.o SqkWdbePrctree.o WdbePlhmcu_blks.o SqkWdbePlhmcu.o WdbeMtpWrmcu_blks.o SqkWdbeMtpWrmcu.o WdbePlhfpga_blks.o SqkWdbePlhfpga.o WdbeMtpModdet_blks.o SqkWdbeMtpModdet.o WdbeMtpWrfpga_blks.o SqkWdbeMtpWrfpga.o WdbeMtpModbsctd_blks.o SqkWdbeMtpModbsctd.o WdbeMtpModbscbu_blks.o SqkWdbeMtpModbscbu.o WdbeMtpPlhfpga_blks.o SqkWdbeMtpPlhfpga.o WdbeMtpPlhmcu_blks.o SqkWdbeMtpPlhmcu.o WdbeModdet_blks.o SqkWdbeModdet.o WdbeModbsc_blks.o SqkWdbeModbsc.o
+OBJS += WdbeWrmcu_blks.o SqkWdbeWrmcu.o WdbeWrfpga_blks.o SqkWdbeWrfpga.o WdbeWrdev_blks.o SqkWdbeWrdev.o WdbePlhmcu_blks.o SqkWdbePlhmcu.o WdbePrcfile_blks.o SqkWdbePrcfile.o WdbePrctree_blks.o SqkWdbePrctree.o WdbeMtpWrfpga_blks.o SqkWdbeMtpWrfpga.o WdbeMtpWrmcu_blks.o SqkWdbeMtpWrmcu.o WdbePlhfpga_blks.o SqkWdbePlhfpga.o WdbeMtpModdet_blks.o SqkWdbeMtpModdet.o WdbeMtpModbsctd_blks.o SqkWdbeMtpModbsctd.o WdbeMtpModbscbu_blks.o SqkWdbeMtpModbscbu.o WdbeMtpPlhmcu_blks.o SqkWdbeMtpPlhmcu.o WdbeMtpPlhfpga_blks.o SqkWdbeMtpPlhfpga.o WdbeModdet_blks.o SqkWdbeModdet.o WdbeModbsc_blks.o SqkWdbeModbsc.o
 OBJS += Wdbed_exe.o
 
 LIBPATH = -L$(LIBROOT)

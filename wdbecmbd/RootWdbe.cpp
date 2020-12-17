@@ -271,9 +271,9 @@ void RootWdbe::clearQtb(
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQPrcMge1NSignal");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQPrcPrc1NVariable");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQPreselect");
-	dbswdbe->executeQuery("DELETE FROM TblWdbeQPrj1NVersion");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQPrjList");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQPrjMNPerson");
+	dbswdbe->executeQuery("DELETE FROM TblWdbeQPrjPrj1NVersion");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQPrsADetail");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQPrsList");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQPrsMNCoreproject");
@@ -543,8 +543,8 @@ bool RootWdbe::handleTest(
 
 		refWdbeMProject = prj->ref;
 
-		dbswdbe->tblwdbemversion->loadRstBySQL("SELECT * FROM TblWdbeMVersion WHERE refWdbeMProject = " + to_string(refWdbeMProject) + " AND ixVState = " + to_string(VecWdbeVMVersionState::READY)
-					+ " ORDER BY Major ASC, Minor ASC, Sub ASC", false, vers);
+		dbswdbe->tblwdbemversion->loadRstBySQL("SELECT * FROM TblWdbeMVersion WHERE prjRefWdbeMProject = " + to_string(refWdbeMProject) + " AND ixVState = " + to_string(VecWdbeVMVersionState::READY)
+					+ " ORDER BY prjNum ASC, Major ASC, Minor ASC, Sub ASC", false, vers);
 		for (unsigned int i = 0; i < vers.nodes.size(); i++) {
 			ver = vers.nodes[i];
 

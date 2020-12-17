@@ -145,8 +145,8 @@ void CrdWdbeMod::changeRef(
 	xchg->addRefPreset(VecWdbeVPreset::PREWDBEREFMOD, jref, ref);
 
 	if (dbswdbe->tblwdbemmodule->loadRecByRef(ref, &rec)) {
-		xchg->addRefPreset(VecWdbeVPreset::PREWDBEREFCTR, jref, rec->refWdbeMController);
 		xchg->addRefPreset(VecWdbeVPreset::PREWDBEREFIMB, jref, rec->refWdbeMImbuf);
+		xchg->addRefPreset(VecWdbeVPreset::PREWDBEREFCTR, jref, rec->refWdbeMController);
 
 		delete rec;
 	};

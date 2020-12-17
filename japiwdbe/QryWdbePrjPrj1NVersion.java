@@ -1,9 +1,9 @@
 /**
-  * \file QryWdbePrj1NVersion.java
-  * Java API code for job QryWdbePrj1NVersion
+  * \file QryWdbePrjPrj1NVersion.java
+  * Java API code for job QryWdbePrjPrj1NVersion
 	* \copyright (C) 2018-2020 MPSI Technologies GmbH
 	* \author Alexander Wirthmueller (auto-generation)
-	* \date created: 5 Dec 2020
+	* \date created: 16 Dec 2020
 	*/
 // IP header --- ABOVE
 
@@ -13,9 +13,9 @@ import java.util.*;
 import org.w3c.dom.*;
 import sbecore.*;
 
-public class QryWdbePrj1NVersion {
+public class QryWdbePrjPrj1NVersion {
 	/**
-	  * StatApp (full: StatAppQryWdbePrj1NVersion)
+	  * StatApp (full: StatAppQryWdbePrjPrj1NVersion)
 	  */
 	public class StatApp extends Block {
 
@@ -51,9 +51,9 @@ public class QryWdbePrj1NVersion {
 
 			clear();
 
-			if (addbasetag) basexpath = Xmlio.checkUclcXPaths(doc, basexpath, "StatAppQryWdbePrj1NVersion");
+			if (addbasetag) basexpath = Xmlio.checkUclcXPaths(doc, basexpath, "StatAppQryWdbePrjPrj1NVersion");
 
-			String itemtag = "StatitemAppQryWdbePrj1NVersion";
+			String itemtag = "StatitemAppQryWdbePrjPrj1NVersion";
 
 			if (Xmlio.checkXPath(doc, basexpath)) {
 				firstcol = Xmlio.extractIntegerAttrUclc(doc, basexpath, itemtag, "Si", "sref", "firstcol", mask, FIRSTCOL);
@@ -97,7 +97,7 @@ public class QryWdbePrj1NVersion {
 	};
 
 	/**
-	  * StatShr (full: StatShrQryWdbePrj1NVersion)
+	  * StatShr (full: StatShrQryWdbePrjPrj1NVersion)
 	  */
 	public class StatShr extends Block {
 
@@ -129,9 +129,9 @@ public class QryWdbePrj1NVersion {
 
 			clear();
 
-			if (addbasetag) basexpath = Xmlio.checkUclcXPaths(doc, basexpath, "StatShrQryWdbePrj1NVersion");
+			if (addbasetag) basexpath = Xmlio.checkUclcXPaths(doc, basexpath, "StatShrQryWdbePrjPrj1NVersion");
 
-			String itemtag = "StatitemShrQryWdbePrj1NVersion";
+			String itemtag = "StatitemShrQryWdbePrjPrj1NVersion";
 
 			if (Xmlio.checkXPath(doc, basexpath)) {
 				ntot = Xmlio.extractIntegerAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ntot", mask, NTOT);
@@ -173,7 +173,7 @@ public class QryWdbePrj1NVersion {
 	};
 
 	/**
-	  * StgIac (full: StgIacQryWdbePrj1NVersion)
+	  * StgIac (full: StgIacQryWdbePrjPrj1NVersion)
 	  */
 	public class StgIac extends Block {
 
@@ -205,9 +205,9 @@ public class QryWdbePrj1NVersion {
 
 			clear();
 
-			if (addbasetag) basexpath = Xmlio.checkUclcXPaths(doc, basexpath, "StgIacQryWdbePrj1NVersion");
+			if (addbasetag) basexpath = Xmlio.checkUclcXPaths(doc, basexpath, "StgIacQryWdbePrjPrj1NVersion");
 
-			String itemtag = "StgitemIacQryWdbePrj1NVersion";
+			String itemtag = "StgitemIacQryWdbePrjPrj1NVersion";
 
 			if (Xmlio.checkXPath(doc, basexpath)) {
 				jnum = Xmlio.extractIntegerAttrUclc(doc, basexpath, itemtag, "Si", "sref", "jnum", mask, JNUM);
@@ -226,12 +226,12 @@ public class QryWdbePrj1NVersion {
 					, String difftag
 					, boolean shorttags
 				) {
-			if (difftag.isEmpty()) difftag = "StgIacQryWdbePrj1NVersion";
+			if (difftag.isEmpty()) difftag = "StgIacQryWdbePrjPrj1NVersion";
 
 			String itemtag;
 
 			if (shorttags) itemtag = "Si";
-			else itemtag = "StgitemIacQryWdbePrj1NVersion";
+			else itemtag = "StgitemIacQryWdbePrjPrj1NVersion";
 
 			Element el = doc.createElement(difftag);
 

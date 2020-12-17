@@ -298,9 +298,9 @@ void DlgWdbeRlsFinreptr::handleRequest(
 		if (ixVSge == VecVSge::DONE) req->filename = handleDownloadInSgeDone(dbswdbe);
 
 	} else if (req->ixVBasetype == ReqWdbe::VecVBasetype::TIMER) {
-		if (ixVSge == VecVSge::FINIDLE) handleTimerInSgeFinidle(dbswdbe, req->sref);
+		if ((req->sref == "mon") && (ixVSge == VecVSge::PUSHGIT)) handleTimerWithSrefMonInSgePushgit(dbswdbe);
 		else if (ixVSge == VecVSge::PSGIDLE) handleTimerInSgePsgidle(dbswdbe, req->sref);
-		else if ((req->sref == "mon") && (ixVSge == VecVSge::PUSHGIT)) handleTimerWithSrefMonInSgePushgit(dbswdbe);
+		else if (ixVSge == VecVSge::FINIDLE) handleTimerInSgeFinidle(dbswdbe, req->sref);
 	};
 };
 
@@ -390,11 +390,11 @@ string DlgWdbeRlsFinreptr::handleDownloadInSgeDone(
 	return(xchg->tmppath + "/" + tgzfile); // IP handleDownloadInSgeDone --- RLINE
 };
 
-void DlgWdbeRlsFinreptr::handleTimerInSgeFinidle(
+void DlgWdbeRlsFinreptr::handleTimerWithSrefMonInSgePushgit(
 			DbsWdbe* dbswdbe
-			, const string& sref
 		) {
-	changeStage(dbswdbe, nextIxVSgeSuccess);
+	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
+	refreshWithDpchEng(dbswdbe); // IP handleTimerWithSrefMonInSgePushgit --- ILINE
 };
 
 void DlgWdbeRlsFinreptr::handleTimerInSgePsgidle(
@@ -404,11 +404,11 @@ void DlgWdbeRlsFinreptr::handleTimerInSgePsgidle(
 	changeStage(dbswdbe, nextIxVSgeSuccess);
 };
 
-void DlgWdbeRlsFinreptr::handleTimerWithSrefMonInSgePushgit(
+void DlgWdbeRlsFinreptr::handleTimerInSgeFinidle(
 			DbsWdbe* dbswdbe
+			, const string& sref
 		) {
-	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
-	refreshWithDpchEng(dbswdbe); // IP handleTimerWithSrefMonInSgePushgit --- ILINE
+	changeStage(dbswdbe, nextIxVSgeSuccess);
 };
 
 void DlgWdbeRlsFinreptr::changeStage(
@@ -667,7 +667,7 @@ uint DlgWdbeRlsFinreptr::enterSgeCommit(
 
 	// --- assemble commit information
 	if (dbswdbe->tblwdbemversion->loadRecByRef(xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFVER, jref), &ver)) {
-		vermsg = StubWdbe::getStubPrjStd(dbswdbe, ver->refWdbeMProject) + " " + to_string(ver->Major) + "." + to_string(ver->Minor) + "." + to_string(ver->Sub) + " initial";
+		vermsg = StubWdbe::getStubPrjStd(dbswdbe, ver->prjRefWdbeMProject) + " " + to_string(ver->Major) + "." + to_string(ver->Minor) + "." + to_string(ver->Sub) + " initial";
 		vertag = "v" + to_string(ver->Major) + "." + to_string(ver->Minor) + "." + to_string(ver->Sub) + "i";
 
 		delete ver;

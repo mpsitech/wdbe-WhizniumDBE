@@ -61,7 +61,7 @@ bool PnlWdbeVerDetail::evalButPrjViewAvail(
 	vector<bool> args;
 	bool a, b;
 
-	a = false; a = (recVer.refWdbeMProject == 0);
+	a = false; a = (recVer.prjRefWdbeMProject == 0);
 	args.push_back(a);
 	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCPRJ, jref) != 0);
 	args.push_back(a);
@@ -80,7 +80,7 @@ bool PnlWdbeVerDetail::evalButPrjViewActive(
 	vector<bool> args;
 	bool a;
 
-	a = false; a = (recVer.refWdbeMProject == 0);
+	a = false; a = (recVer.prjRefWdbeMProject == 0);
 	args.push_back(a);
 	a = args.back(); args.pop_back();
 	args.push_back(!a);

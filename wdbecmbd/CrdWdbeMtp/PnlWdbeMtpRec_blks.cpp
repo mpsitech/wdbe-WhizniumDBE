@@ -102,8 +102,8 @@ void PnlWdbeMtpRec::StatApp::writeXML(
 			, const bool initdoneKHdltype
 			, const bool initdoneAPar
 			, const bool initdoneMdl1NPort
-			, const bool initdoneMdl1NGeneric
 			, const bool initdoneTpl1NModule
+			, const bool initdoneMdl1NGeneric
 			, const bool initdoneSup1NModule
 			, const bool initdoneMge1NSignal
 			, const bool initdoneRef1NFile
@@ -120,8 +120,8 @@ void PnlWdbeMtpRec::StatApp::writeXML(
 		writeBoolAttr(wr, itemtag, "sref", "initdoneKHdltype", initdoneKHdltype);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneAPar", initdoneAPar);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneMdl1NPort", initdoneMdl1NPort);
-		writeBoolAttr(wr, itemtag, "sref", "initdoneMdl1NGeneric", initdoneMdl1NGeneric);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneTpl1NModule", initdoneTpl1NModule);
+		writeBoolAttr(wr, itemtag, "sref", "initdoneMdl1NGeneric", initdoneMdl1NGeneric);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneSup1NModule", initdoneSup1NModule);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneMge1NSignal", initdoneMge1NSignal);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneRef1NFile", initdoneRef1NFile);
@@ -139,8 +139,8 @@ PnlWdbeMtpRec::StatShr::StatShr(
 			, const ubigint jrefKHdltype
 			, const ubigint jrefAPar
 			, const ubigint jrefMdl1NPort
-			, const ubigint jrefMdl1NGeneric
 			, const ubigint jrefTpl1NModule
+			, const ubigint jrefMdl1NGeneric
 			, const ubigint jrefSup1NModule
 			, const ubigint jrefMge1NSignal
 			, const ubigint jrefRef1NFile
@@ -154,14 +154,14 @@ PnlWdbeMtpRec::StatShr::StatShr(
 	this->jrefKHdltype = jrefKHdltype;
 	this->jrefAPar = jrefAPar;
 	this->jrefMdl1NPort = jrefMdl1NPort;
-	this->jrefMdl1NGeneric = jrefMdl1NGeneric;
 	this->jrefTpl1NModule = jrefTpl1NModule;
+	this->jrefMdl1NGeneric = jrefMdl1NGeneric;
 	this->jrefSup1NModule = jrefSup1NModule;
 	this->jrefMge1NSignal = jrefMge1NSignal;
 	this->jrefRef1NFile = jrefRef1NFile;
 	this->ButRegularizeActive = ButRegularizeActive;
 
-	mask = {IXWDBEVEXPSTATE, JREFDETAIL, JREFKPARKEY, JREFKHDLTYPE, JREFAPAR, JREFMDL1NPORT, JREFMDL1NGENERIC, JREFTPL1NMODULE, JREFSUP1NMODULE, JREFMGE1NSIGNAL, JREFREF1NFILE, BUTREGULARIZEACTIVE};
+	mask = {IXWDBEVEXPSTATE, JREFDETAIL, JREFKPARKEY, JREFKHDLTYPE, JREFAPAR, JREFMDL1NPORT, JREFTPL1NMODULE, JREFMDL1NGENERIC, JREFSUP1NMODULE, JREFMGE1NSIGNAL, JREFREF1NFILE, BUTREGULARIZEACTIVE};
 };
 
 void PnlWdbeMtpRec::StatShr::writeXML(
@@ -182,8 +182,8 @@ void PnlWdbeMtpRec::StatShr::writeXML(
 		writeStringAttr(wr, itemtag, "sref", "scrJrefKHdltype", Scr::scramble(jrefKHdltype));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefAPar", Scr::scramble(jrefAPar));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefMdl1NPort", Scr::scramble(jrefMdl1NPort));
-		writeStringAttr(wr, itemtag, "sref", "scrJrefMdl1NGeneric", Scr::scramble(jrefMdl1NGeneric));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefTpl1NModule", Scr::scramble(jrefTpl1NModule));
+		writeStringAttr(wr, itemtag, "sref", "scrJrefMdl1NGeneric", Scr::scramble(jrefMdl1NGeneric));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefSup1NModule", Scr::scramble(jrefSup1NModule));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefMge1NSignal", Scr::scramble(jrefMge1NSignal));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefRef1NFile", Scr::scramble(jrefRef1NFile));
@@ -202,8 +202,8 @@ set<uint> PnlWdbeMtpRec::StatShr::comm(
 	if (jrefKHdltype == comp->jrefKHdltype) insert(items, JREFKHDLTYPE);
 	if (jrefAPar == comp->jrefAPar) insert(items, JREFAPAR);
 	if (jrefMdl1NPort == comp->jrefMdl1NPort) insert(items, JREFMDL1NPORT);
-	if (jrefMdl1NGeneric == comp->jrefMdl1NGeneric) insert(items, JREFMDL1NGENERIC);
 	if (jrefTpl1NModule == comp->jrefTpl1NModule) insert(items, JREFTPL1NMODULE);
+	if (jrefMdl1NGeneric == comp->jrefMdl1NGeneric) insert(items, JREFMDL1NGENERIC);
 	if (jrefSup1NModule == comp->jrefSup1NModule) insert(items, JREFSUP1NMODULE);
 	if (jrefMge1NSignal == comp->jrefMge1NSignal) insert(items, JREFMGE1NSIGNAL);
 	if (jrefRef1NFile == comp->jrefRef1NFile) insert(items, JREFREF1NFILE);
@@ -220,7 +220,7 @@ set<uint> PnlWdbeMtpRec::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {IXWDBEVEXPSTATE, JREFDETAIL, JREFKPARKEY, JREFKHDLTYPE, JREFAPAR, JREFMDL1NPORT, JREFMDL1NGENERIC, JREFTPL1NMODULE, JREFSUP1NMODULE, JREFMGE1NSIGNAL, JREFREF1NFILE, BUTREGULARIZEACTIVE};
+	diffitems = {IXWDBEVEXPSTATE, JREFDETAIL, JREFKPARKEY, JREFKHDLTYPE, JREFAPAR, JREFMDL1NPORT, JREFTPL1NMODULE, JREFMDL1NGENERIC, JREFSUP1NMODULE, JREFMGE1NSIGNAL, JREFREF1NFILE, BUTREGULARIZEACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);

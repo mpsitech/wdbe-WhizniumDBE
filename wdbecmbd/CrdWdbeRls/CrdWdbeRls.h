@@ -19,8 +19,8 @@
 #include "PnlWdbeRlsRec.h"
 #include "DlgWdbeRlsFinreptr.h"
 #include "DlgWdbeRlsNew.h"
-#include "DlgWdbeRlsStareptr.h"
 #include "DlgWdbeRlsWrite.h"
+#include "DlgWdbeRlsStareptr.h"
 
 #define VecVWdbeRlsDo CrdWdbeRls::VecVDo
 #define VecVWdbeRlsSge CrdWdbeRls::VecVSge
@@ -243,8 +243,8 @@ public:
 	PnlWdbeRlsRec* pnlrec;
 	DlgWdbeRlsFinreptr* dlgfinreptr;
 	DlgWdbeRlsNew* dlgnew;
-	DlgWdbeRlsStareptr* dlgstareptr;
 	DlgWdbeRlsWrite* dlgwrite;
+	DlgWdbeRlsStareptr* dlgstareptr;
 
 	// IP vars.cust --- INSERT
 

@@ -142,7 +142,7 @@ function refreshB(chgcol) {
 			} else if (i == 6) {
 				doc.cols.push("TcoSub"); doc.widths.push(TcoSubWidth); doc.fs.push("sub"); doc.tos.push(0); wtot += TcoSubWidth;
 			} else if (i == 7) {
-				doc.cols.push("TcoBcv"); doc.widths.push(TcoBcvWidth); doc.fs.push("bcv"); doc.tos.push(2); wtot += TcoBcvWidth;
+				doc.cols.push("TcoBcv"); doc.widths.push(TcoBcvWidth); doc.fs.push("bcv"); doc.tos.push(1); wtot += TcoBcvWidth;
 			} else if (i == 8) {
 				doc.cols.push("TcoSte"); doc.widths.push(TcoSteWidth); doc.fs.push("ste2"); doc.tos.push(0); wtot += TcoSteWidth;
 			} else {

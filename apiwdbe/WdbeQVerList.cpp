@@ -21,7 +21,7 @@ WdbeQVerList::WdbeQVerList(
 			const uint jnum
 			, const string stubGrp
 			, const string stubOwn
-			, const string stubRefWdbeMProject
+			, const string stubPrjRefWdbeMProject
 			, const usmallint Major
 			, const usmallint Minor
 			, const usmallint Sub
@@ -32,7 +32,7 @@ WdbeQVerList::WdbeQVerList(
 	this->jnum = jnum;
 	this->stubGrp = stubGrp;
 	this->stubOwn = stubOwn;
-	this->stubRefWdbeMProject = stubRefWdbeMProject;
+	this->stubPrjRefWdbeMProject = stubPrjRefWdbeMProject;
 	this->Major = Major;
 	this->Minor = Minor;
 	this->Sub = Sub;
@@ -56,7 +56,7 @@ bool WdbeQVerList::readXML(
 	if (basefound) {
 		extractStringUclc(docctx, basexpath, "stubGrp", "grp", stubGrp);
 		extractStringUclc(docctx, basexpath, "stubOwn", "own", stubOwn);
-		extractStringUclc(docctx, basexpath, "stubRefWdbeMProject", "prj", stubRefWdbeMProject);
+		extractStringUclc(docctx, basexpath, "stubPrjRefWdbeMProject", "prj", stubPrjRefWdbeMProject);
 		extractUsmallintUclc(docctx, basexpath, "Major", "maj", Major);
 		extractUsmallintUclc(docctx, basexpath, "Minor", "min", Minor);
 		extractUsmallintUclc(docctx, basexpath, "Sub", "sub", Sub);

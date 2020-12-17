@@ -1,54 +1,56 @@
 /**
-	* \file PnlWdbePrj1NVersion.h
-	* API code for job PnlWdbePrj1NVersion (declarations)
+	* \file PnlWdbePrjPrj1NVersion.h
+	* API code for job PnlWdbePrjPrj1NVersion (declarations)
 	* \copyright (C) 2016-2020 MPSI Technologies GmbH
 	* \author Alexander Wirthmueller (auto-generation)
-	* \date created: 5 Dec 2020
+	* \date created: 16 Dec 2020
 	*/
 // IP header --- ABOVE
 
-#ifndef PNLWDBEPRJ1NVERSION_H
-#define PNLWDBEPRJ1NVERSION_H
+#ifndef PNLWDBEPRJPRJ1NVERSION_H
+#define PNLWDBEPRJPRJ1NVERSION_H
 
 #include "ApiWdbe_blks.h"
 
-#include "WdbeQPrj1NVersion.h"
+#include "WdbeQPrjPrj1NVersion.h"
 
-#include "QryWdbePrj1NVersion.h"
+#include "QryWdbePrjPrj1NVersion.h"
 
-#define VecVWdbePrj1NVersionDo PnlWdbePrj1NVersion::VecVDo
+#define VecVWdbePrjPrj1NVersionDo PnlWdbePrjPrj1NVersion::VecVDo
 
-#define ContInfWdbePrj1NVersion PnlWdbePrj1NVersion::ContInf
-#define StatAppWdbePrj1NVersion PnlWdbePrj1NVersion::StatApp
-#define StatShrWdbePrj1NVersion PnlWdbePrj1NVersion::StatShr
-#define StgIacWdbePrj1NVersion PnlWdbePrj1NVersion::StgIac
-#define TagWdbePrj1NVersion PnlWdbePrj1NVersion::Tag
+#define ContInfWdbePrjPrj1NVersion PnlWdbePrjPrj1NVersion::ContInf
+#define StatAppWdbePrjPrj1NVersion PnlWdbePrjPrj1NVersion::StatApp
+#define StatShrWdbePrjPrj1NVersion PnlWdbePrjPrj1NVersion::StatShr
+#define StgIacWdbePrjPrj1NVersion PnlWdbePrjPrj1NVersion::StgIac
+#define TagWdbePrjPrj1NVersion PnlWdbePrjPrj1NVersion::Tag
 
-#define DpchAppWdbePrj1NVersionData PnlWdbePrj1NVersion::DpchAppData
-#define DpchAppWdbePrj1NVersionDo PnlWdbePrj1NVersion::DpchAppDo
-#define DpchEngWdbePrj1NVersionData PnlWdbePrj1NVersion::DpchEngData
+#define DpchAppWdbePrjPrj1NVersionData PnlWdbePrjPrj1NVersion::DpchAppData
+#define DpchAppWdbePrjPrj1NVersionDo PnlWdbePrjPrj1NVersion::DpchAppDo
+#define DpchEngWdbePrjPrj1NVersionData PnlWdbePrjPrj1NVersion::DpchEngData
 
 /**
-	* PnlWdbePrj1NVersion
+	* PnlWdbePrjPrj1NVersion
 	*/
-namespace PnlWdbePrj1NVersion {
+namespace PnlWdbePrjPrj1NVersion {
 	/**
-		* VecVDo (full: VecVWdbePrj1NVersionDo)
+		* VecVDo (full: VecVWdbePrjPrj1NVersionDo)
 		*/
 	class VecVDo {
 
 	public:
-		static const Sbecore::uint BUTVIEWCLICK = 1;
-		static const Sbecore::uint BUTNEWCLICK = 2;
-		static const Sbecore::uint BUTDELETECLICK = 3;
-		static const Sbecore::uint BUTREFRESHCLICK = 4;
+		static const Sbecore::uint BUTUPCLICK = 1;
+		static const Sbecore::uint BUTDOWNCLICK = 2;
+		static const Sbecore::uint BUTVIEWCLICK = 3;
+		static const Sbecore::uint BUTNEWCLICK = 4;
+		static const Sbecore::uint BUTDELETECLICK = 5;
+		static const Sbecore::uint BUTREFRESHCLICK = 6;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);
 	};
 
 	/**
-	  * ContInf (full: ContInfWdbePrj1NVersion)
+	  * ContInf (full: ContInfWdbePrjPrj1NVersion)
 	  */
 	class ContInf : public Sbecore::Xmlio::Block {
 
@@ -68,7 +70,7 @@ namespace PnlWdbePrj1NVersion {
 	};
 
 	/**
-	  * StatApp (full: StatAppWdbePrj1NVersion)
+	  * StatApp (full: StatAppWdbePrjPrj1NVersion)
 	  */
 	class StatApp : public Sbecore::Xmlio::Block {
 
@@ -88,21 +90,29 @@ namespace PnlWdbePrj1NVersion {
 	};
 
 	/**
-	  * StatShr (full: StatShrWdbePrj1NVersion)
+	  * StatShr (full: StatShrWdbePrjPrj1NVersion)
 	  */
 	class StatShr : public Sbecore::Xmlio::Block {
 
 	public:
-		static const Sbecore::uint BUTVIEWAVAIL = 1;
-		static const Sbecore::uint BUTVIEWACTIVE = 2;
-		static const Sbecore::uint BUTNEWAVAIL = 3;
-		static const Sbecore::uint BUTDELETEAVAIL = 4;
-		static const Sbecore::uint BUTDELETEACTIVE = 5;
+		static const Sbecore::uint BUTUPAVAIL = 1;
+		static const Sbecore::uint BUTUPACTIVE = 2;
+		static const Sbecore::uint BUTDOWNAVAIL = 3;
+		static const Sbecore::uint BUTDOWNACTIVE = 4;
+		static const Sbecore::uint BUTVIEWAVAIL = 5;
+		static const Sbecore::uint BUTVIEWACTIVE = 6;
+		static const Sbecore::uint BUTNEWAVAIL = 7;
+		static const Sbecore::uint BUTDELETEAVAIL = 8;
+		static const Sbecore::uint BUTDELETEACTIVE = 9;
 
 	public:
-		StatShr(const bool ButViewAvail = true, const bool ButViewActive = true, const bool ButNewAvail = true, const bool ButDeleteAvail = true, const bool ButDeleteActive = true);
+		StatShr(const bool ButUpAvail = true, const bool ButUpActive = true, const bool ButDownAvail = true, const bool ButDownActive = true, const bool ButViewAvail = true, const bool ButViewActive = true, const bool ButNewAvail = true, const bool ButDeleteAvail = true, const bool ButDeleteActive = true);
 
 	public:
+		bool ButUpAvail;
+		bool ButUpActive;
+		bool ButDownAvail;
+		bool ButDownActive;
 		bool ButViewAvail;
 		bool ButViewActive;
 		bool ButNewAvail;
@@ -116,7 +126,7 @@ namespace PnlWdbePrj1NVersion {
 	};
 
 	/**
-	  * StgIac (full: StgIacWdbePrj1NVersion)
+	  * StgIac (full: StgIacWdbePrjPrj1NVersion)
 	  */
 	class StgIac : public Sbecore::Xmlio::Block {
 
@@ -137,7 +147,7 @@ namespace PnlWdbePrj1NVersion {
 	};
 
 	/**
-	  * Tag (full: TagWdbePrj1NVersion)
+	  * Tag (full: TagWdbePrjPrj1NVersion)
 	  */
 	class Tag : public Sbecore::Xmlio::Block {
 
@@ -167,7 +177,7 @@ namespace PnlWdbePrj1NVersion {
 	};
 
 	/**
-		* DpchAppData (full: DpchAppWdbePrj1NVersionData)
+		* DpchAppData (full: DpchAppWdbePrjPrj1NVersionData)
 		*/
 	class DpchAppData : public DpchAppWdbe {
 
@@ -178,11 +188,11 @@ namespace PnlWdbePrj1NVersion {
 		static const Sbecore::uint ALL = 4;
 
 	public:
-		DpchAppData(const std::string& scrJref = "", StgIac* stgiac = NULL, QryWdbePrj1NVersion::StgIac* stgiacqry = NULL, const std::set<Sbecore::uint>& mask = {NONE});
+		DpchAppData(const std::string& scrJref = "", StgIac* stgiac = NULL, QryWdbePrjPrj1NVersion::StgIac* stgiacqry = NULL, const std::set<Sbecore::uint>& mask = {NONE});
 
 	public:
 		StgIac stgiac;
-		QryWdbePrj1NVersion::StgIac stgiacqry;
+		QryWdbePrjPrj1NVersion::StgIac stgiacqry;
 
 	public:
 		std::string getSrefsMask();
@@ -191,7 +201,7 @@ namespace PnlWdbePrj1NVersion {
 	};
 
 	/**
-		* DpchAppDo (full: DpchAppWdbePrj1NVersionDo)
+		* DpchAppDo (full: DpchAppWdbePrjPrj1NVersionDo)
 		*/
 	class DpchAppDo : public DpchAppWdbe {
 
@@ -213,7 +223,7 @@ namespace PnlWdbePrj1NVersion {
 	};
 
 	/**
-		* DpchEngData (full: DpchEngWdbePrj1NVersionData)
+		* DpchEngData (full: DpchEngWdbePrjPrj1NVersionData)
 		*/
 	class DpchEngData : public DpchEngWdbe {
 
@@ -240,10 +250,10 @@ namespace PnlWdbePrj1NVersion {
 		StatShr statshr;
 		StgIac stgiac;
 		Tag tag;
-		ListWdbeQPrj1NVersion rst;
-		QryWdbePrj1NVersion::StatApp statappqry;
-		QryWdbePrj1NVersion::StatShr statshrqry;
-		QryWdbePrj1NVersion::StgIac stgiacqry;
+		ListWdbeQPrjPrj1NVersion rst;
+		QryWdbePrjPrj1NVersion::StatApp statappqry;
+		QryWdbePrjPrj1NVersion::StatShr statshrqry;
+		QryWdbePrjPrj1NVersion::StgIac stgiacqry;
 
 	public:
 		std::string getSrefsMask();

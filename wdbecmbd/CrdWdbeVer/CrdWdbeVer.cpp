@@ -46,11 +46,11 @@ CrdWdbeVer::CrdWdbeVer(
 	VecVSge::fillFeed(feedFSge);
 
 	pnllist = NULL;
-	pnlheadbar = NULL;
 	pnlrec = NULL;
-	dlgdetdd = NULL;
-	dlgnew = NULL;
+	pnlheadbar = NULL;
 	dlgbscdd = NULL;
+	dlgnew = NULL;
+	dlgdetdd = NULL;
 
 	// IP constructor.cust1 --- INSERT
 
@@ -63,8 +63,8 @@ CrdWdbeVer::CrdWdbeVer(
 	changeRef(dbswdbe, jref, ((ref + 1) == 0) ? 0 : ref, false);
 
 	pnllist = new PnlWdbeVerList(xchg, dbswdbe, jref, ixWdbeVLocale);
-	pnlheadbar = new PnlWdbeVerHeadbar(xchg, dbswdbe, jref, ixWdbeVLocale);
 	pnlrec = new PnlWdbeVerRec(xchg, dbswdbe, jref, ixWdbeVLocale);
+	pnlheadbar = new PnlWdbeVerHeadbar(xchg, dbswdbe, jref, ixWdbeVLocale);
 
 	// IP constructor.cust2 --- INSERT
 
@@ -518,18 +518,16 @@ uint CrdWdbeVer::enterSgeSetprjcvr(
 	retval = nextIxVSgeSuccess;
 
 	// IP enterSgeSetprjcvr --- IBEGIN
+	WdbeMVersion* ver = NULL;
 
-	WdbeMProject* prj = NULL;
+	if (dbswdbe->tblwdbemversion->loadRecByRef(xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFVER, jref), &ver)) {
+		if (ver->ixVState == VecWdbeVMVersionState::ABANDON) Wdbe::updateVerste(dbswdbe, ver->ref, VecWdbeVMVersionState::READY);
 
-	ubigint refWdbeMVersion = xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFVER, jref);
+		dbswdbe->executeQuery("UPDATE TblWdbeMProject SET refWdbeMVersion = " + to_string(ver->ref) + " WHERE ref = " + to_string(ver->prjRefWdbeMProject));
+		xchg->triggerCall(dbswdbe, VecWdbeVCall::CALLWDBEPRJMOD, jref);
 
-	if (dbswdbe->tblwdbemproject->loadRecBySQL("SELECT TblWdbeMProject.* FROM TblWdbeMProject, TblWdbeMVersion WHERE TblWdbeMProject.ref = TblWdbeMVersion.refWdbeMProject AND TblWdbeMVersion.ref = " + to_string(refWdbeMVersion), &prj)) {
-		prj->refWdbeMVersion = refWdbeMVersion;
-		dbswdbe->tblwdbemproject->updateRec(prj);
-
-		delete prj;
+		delete ver;
 	};
-
 	// IP enterSgeSetprjcvr --- IEND
 
 	return retval;

@@ -141,7 +141,7 @@ uint IexWdbePrj::ImeIJMVersionState::VecWIel::getIx(
 	uint ix = 0;
 
 	vector<string> ss;
-	StrMod::stringToVector(StrMod::lc(srefs), ss);
+	StrMod::srefsToVector(StrMod::lc(srefs), ss);
 
 	for (unsigned int i = 0; i < ss.size(); i++) {
 		if (ss[i] == "srefixvstate") ix |= SREFIXVSTATE;
@@ -397,7 +397,7 @@ uint IexWdbePrj::ImeIMRelease::VecWIel::getIx(
 	uint ix = 0;
 
 	vector<string> ss;
-	StrMod::stringToVector(StrMod::lc(srefs), ss);
+	StrMod::srefsToVector(StrMod::lc(srefs), ss);
 
 	for (unsigned int i = 0; i < ss.size(); i++) {
 		if (ss[i] == "srefixvbasetype") ix |= SREFIXVBASETYPE;
@@ -637,7 +637,7 @@ uint IexWdbePrj::ImeIRMLibraryMVersion::VecWIel::getIx(
 	uint ix = 0;
 
 	vector<string> ss;
-	StrMod::stringToVector(StrMod::lc(srefs), ss);
+	StrMod::srefsToVector(StrMod::lc(srefs), ss);
 
 	for (unsigned int i = 0; i < ss.size(); i++) {
 		if (ss[i] == "srefrefwdbemlibrary") ix |= SREFREFWDBEMLIBRARY;
@@ -810,7 +810,8 @@ IexWdbePrj::ImeitemIMVersion::ImeitemIMVersion(
 	if (dbswdbe->tblwdbemversion->loadRecByRef(ref, &rec)) {
 		grp = rec->grp;
 		own = rec->own;
-		refWdbeMProject = rec->refWdbeMProject;
+		prjRefWdbeMProject = rec->prjRefWdbeMProject;
+		prjNum = rec->prjNum;
 		Major = rec->Major;
 		Minor = rec->Minor;
 		Sub = rec->Sub;
@@ -928,7 +929,7 @@ uint IexWdbePrj::ImeIMVersion::VecWIel::getIx(
 	uint ix = 0;
 
 	vector<string> ss;
-	StrMod::stringToVector(StrMod::lc(srefs), ss);
+	StrMod::srefsToVector(StrMod::lc(srefs), ss);
 
 	for (unsigned int i = 0; i < ss.size(); i++) {
 		if (ss[i] == "major") ix |= MAJOR;
@@ -1176,7 +1177,7 @@ uint IexWdbePrj::ImeIRMPersonMProject::VecWIel::getIx(
 	uint ix = 0;
 
 	vector<string> ss;
-	StrMod::stringToVector(StrMod::lc(srefs), ss);
+	StrMod::srefsToVector(StrMod::lc(srefs), ss);
 
 	for (unsigned int i = 0; i < ss.size(); i++) {
 		if (ss[i] == "hintrefwdbemperson") ix |= HINTREFWDBEMPERSON;
@@ -1455,7 +1456,7 @@ uint IexWdbePrj::ImeIMProject::VecWIel::getIx(
 	uint ix = 0;
 
 	vector<string> ss;
-	StrMod::stringToVector(StrMod::lc(srefs), ss);
+	StrMod::srefsToVector(StrMod::lc(srefs), ss);
 
 	for (unsigned int i = 0; i < ss.size(); i++) {
 		if (ss[i] == "short") ix |= SHORT;

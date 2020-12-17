@@ -1,9 +1,11 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 	<head>
-		<title>1NVersion_bhdr</title>
+		<title>Prj1NVersion_bhdr</title>
 		<script>
 			function handleButClipboardClick() {parent.parent.window.handleButClipboardClick();};
+			function handleButUpClick() {parent.parent.window.handleButClick("ButUp");};
+			function handleButDownClick() {parent.parent.window.handleButClick("ButDown");};
 			function handleButViewClick() {parent.parent.window.handleButCrdopenClick("ButView");};
 			function handleButNewClick() {parent.parent.window.handleButCrdopenClick("ButNew");};
 			function handleButDeleteClick() {parent.parent.window.handleButClick("ButDelete");};
@@ -24,6 +26,10 @@
 				</td>
 				<td align="right">
 					<img id="ButClipboard" class="but" src="../icon/clipboard.png" width="16" height="16" alt="ButClipboard" onmouseover="src='../icon/clipboard_hlt.png'" onmouseout="src='../icon/clipboard.png'" onclick="handleButClipboardClick()"/>
+					&nbsp;&nbsp;
+					<img id="ButUp" class="but" src="../icon/up.png" width="16" height="16" alt="ButUp" onmouseover="src='../icon/up_hlt.png'" onmouseout="src='../icon/up.png'" onclick="handleButUpClick()"/>
+					&nbsp;
+					<img id="ButDown" class="but" src="../icon/down.png" width="16" height="16" alt="ButDown" onmouseover="src='../icon/down_hlt.png'" onmouseout="src='../icon/down.png'" onclick="handleButDownClick()"/>
 					&nbsp;&nbsp;
 					<img id="ButView" class="but" src="../icon/view.png" width="16" height="16" alt="ButView" onmouseover="src='../icon/view_hlt.png'" onmouseout="src='../icon/view.png'" onclick="handleButViewClick()"/>
 					&nbsp;&nbsp;

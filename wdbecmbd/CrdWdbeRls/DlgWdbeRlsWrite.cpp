@@ -63,7 +63,7 @@ DlgWdbeRlsWrite::DlgWdbeRlsWrite(
 		ixRlstype = rls->ixVBasetype;
 
 		// find project short
-		if (dbswdbe->tblwdbemproject->loadRecBySQL("SELECT TblWdbeMProject.* FROM TblWdbeMProject, TblWdbeMVersion WHERE TblWdbeMProject.ref = TblWdbeMVersion.refWdbeMProject AND TblWdbeMVersion.ref = "
+		if (dbswdbe->tblwdbemproject->loadRecBySQL("SELECT TblWdbeMProject.* FROM TblWdbeMProject, TblWdbeMVersion WHERE TblWdbeMProject.ref = TblWdbeMVersion.prjRefWdbeMProject AND TblWdbeMVersion.ref = "
 					+ to_string(rls->refWdbeMVersion), &prj)) {
 
 			PRJSHORT = StrMod::uc(prj->Short);
@@ -1545,8 +1545,8 @@ void DlgWdbeRlsWrite::handleRequest(
 
 	} else if (req->ixVBasetype == ReqWdbe::VecVBasetype::TIMER) {
 		if (ixVSge == VecVSge::UPKIDLE) handleTimerInSgeUpkidle(dbswdbe, req->sref);
-		else if ((req->sref == "mon") && (ixVSge == VecVSge::WRITE)) handleTimerWithSrefMonInSgeWrite(dbswdbe);
 		else if ((req->sref == "mon") && (ixVSge == VecVSge::CREATE)) handleTimerWithSrefMonInSgeCreate(dbswdbe);
+		else if ((req->sref == "mon") && (ixVSge == VecVSge::WRITE)) handleTimerWithSrefMonInSgeWrite(dbswdbe);
 	};
 };
 
@@ -1734,18 +1734,18 @@ void DlgWdbeRlsWrite::handleTimerInSgeUpkidle(
 	changeStage(dbswdbe, nextIxVSgeSuccess);
 };
 
-void DlgWdbeRlsWrite::handleTimerWithSrefMonInSgeWrite(
-			DbsWdbe* dbswdbe
-		) {
-	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
-	refreshWithDpchEng(dbswdbe); // IP handleTimerWithSrefMonInSgeWrite --- ILINE
-};
-
 void DlgWdbeRlsWrite::handleTimerWithSrefMonInSgeCreate(
 			DbsWdbe* dbswdbe
 		) {
 	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
 	refreshWithDpchEng(dbswdbe); // IP handleTimerWithSrefMonInSgeCreate --- ILINE
+};
+
+void DlgWdbeRlsWrite::handleTimerWithSrefMonInSgeWrite(
+			DbsWdbe* dbswdbe
+		) {
+	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
+	refreshWithDpchEng(dbswdbe); // IP handleTimerWithSrefMonInSgeWrite --- ILINE
 };
 
 void DlgWdbeRlsWrite::changeStage(

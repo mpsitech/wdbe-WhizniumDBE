@@ -1,43 +1,45 @@
 /**
-	* \file WdbeQPrj1NVersion.cpp
-	* Dbs and XML wrapper for table TblWdbeQPrj1NVersion (implementation)
+	* \file WdbeQPrjPrj1NVersion.cpp
+	* Dbs and XML wrapper for table TblWdbeQPrjPrj1NVersion (implementation)
 	* \copyright (C) 2016-2020 MPSI Technologies GmbH
 	* \author Alexander Wirthmueller (auto-generation)
-	* \date created: 5 Dec 2020
+	* \date created: 16 Dec 2020
   */
 // IP header --- ABOVE
 
-#include "WdbeQPrj1NVersion.h"
+#include "WdbeQPrjPrj1NVersion.h"
 
 using namespace std;
 using namespace Sbecore;
 using namespace Xmlio;
 
 /******************************************************************************
- class WdbeQPrj1NVersion
+ class WdbeQPrjPrj1NVersion
  ******************************************************************************/
 
-WdbeQPrj1NVersion::WdbeQPrj1NVersion(
+WdbeQPrjPrj1NVersion::WdbeQPrjPrj1NVersion(
 			const ubigint qref
 			, const ubigint jref
 			, const uint jnum
 			, const ubigint ref
 			, const string stubRef
+			, const uint prjNum
 		) {
 	this->qref = qref;
 	this->jref = jref;
 	this->jnum = jnum;
 	this->ref = ref;
 	this->stubRef = stubRef;
+	this->prjNum = prjNum;
 };
 
-void WdbeQPrj1NVersion::writeXML(
+void WdbeQPrjPrj1NVersion::writeXML(
 			xmlTextWriter* wr
 			, string difftag
 			, bool jnumattr
 			, bool shorttags
 		) {
-	if (difftag.length() == 0) difftag = "WdbeQPrj1NVersion";
+	if (difftag.length() == 0) difftag = "WdbeQPrjPrj1NVersion";
 
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
 	if (jnumattr) xmlTextWriterWriteAttribute(wr, BAD_CAST "jnum", BAD_CAST to_string(jnum).c_str());
@@ -50,47 +52,47 @@ void WdbeQPrj1NVersion::writeXML(
 };
 
 /******************************************************************************
- class ListWdbeQPrj1NVersion
+ class ListWdbeQPrjPrj1NVersion
  ******************************************************************************/
 
-ListWdbeQPrj1NVersion::ListWdbeQPrj1NVersion() {
+ListWdbeQPrjPrj1NVersion::ListWdbeQPrjPrj1NVersion() {
 };
 
-ListWdbeQPrj1NVersion::ListWdbeQPrj1NVersion(
-			const ListWdbeQPrj1NVersion& src
+ListWdbeQPrjPrj1NVersion::ListWdbeQPrjPrj1NVersion(
+			const ListWdbeQPrjPrj1NVersion& src
 		) {
 	nodes.resize(src.nodes.size(), NULL);
-	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i] = new WdbeQPrj1NVersion(*(src.nodes[i]));
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i] = new WdbeQPrjPrj1NVersion(*(src.nodes[i]));
 };
 
-ListWdbeQPrj1NVersion::~ListWdbeQPrj1NVersion() {
+ListWdbeQPrjPrj1NVersion::~ListWdbeQPrjPrj1NVersion() {
 	clear();
 };
 
-void ListWdbeQPrj1NVersion::clear() {
+void ListWdbeQPrjPrj1NVersion::clear() {
 	for (unsigned int i = 0; i < nodes.size(); i++) if (nodes[i]) delete nodes[i];
 	nodes.resize(0);
 };
 
-unsigned int ListWdbeQPrj1NVersion::size() const {
+unsigned int ListWdbeQPrjPrj1NVersion::size() const {
 	return(nodes.size());
 };
 
-void ListWdbeQPrj1NVersion::append(
-			WdbeQPrj1NVersion* rec
+void ListWdbeQPrjPrj1NVersion::append(
+			WdbeQPrjPrj1NVersion* rec
 		) {
 	nodes.push_back(rec);
 };
 
-ListWdbeQPrj1NVersion& ListWdbeQPrj1NVersion::operator=(
-			const ListWdbeQPrj1NVersion& src
+ListWdbeQPrjPrj1NVersion& ListWdbeQPrjPrj1NVersion::operator=(
+			const ListWdbeQPrjPrj1NVersion& src
 		) {
-	WdbeQPrj1NVersion* rec;
+	WdbeQPrjPrj1NVersion* rec;
 
 	if (&src != this) {
 		clear();
 		for (unsigned int i = 0; i < src.size(); i++) {
-			rec = new WdbeQPrj1NVersion(*(src.nodes[i]));
+			rec = new WdbeQPrjPrj1NVersion(*(src.nodes[i]));
 			nodes.push_back(rec);
 		};
 	};
@@ -98,12 +100,12 @@ ListWdbeQPrj1NVersion& ListWdbeQPrj1NVersion::operator=(
 	return(*this);
 };
 
-void ListWdbeQPrj1NVersion::writeXML(
+void ListWdbeQPrjPrj1NVersion::writeXML(
 			xmlTextWriter* wr
 			, string difftag
 		) {
 	// generate top XML tag
-	if (difftag.length() == 0) difftag = "ListWdbeQPrj1NVersion";
+	if (difftag.length() == 0) difftag = "ListWdbeQPrjPrj1NVersion";
 
 	// XML output
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
@@ -112,47 +114,48 @@ void ListWdbeQPrj1NVersion::writeXML(
 };
 
 /******************************************************************************
- class TblWdbeQPrj1NVersion
+ class TblWdbeQPrjPrj1NVersion
  ******************************************************************************/
 
-TblWdbeQPrj1NVersion::TblWdbeQPrj1NVersion() {
+TblWdbeQPrjPrj1NVersion::TblWdbeQPrjPrj1NVersion() {
 };
 
-TblWdbeQPrj1NVersion::~TblWdbeQPrj1NVersion() {
+TblWdbeQPrjPrj1NVersion::~TblWdbeQPrjPrj1NVersion() {
 };
 
-bool TblWdbeQPrj1NVersion::loadRecBySQL(
+bool TblWdbeQPrjPrj1NVersion::loadRecBySQL(
 			const string& sqlstr
-			, WdbeQPrj1NVersion** rec
+			, WdbeQPrjPrj1NVersion** rec
 		) {
 	return false;
 };
 
-ubigint TblWdbeQPrj1NVersion::loadRstBySQL(
+ubigint TblWdbeQPrjPrj1NVersion::loadRstBySQL(
 			const string& sqlstr
 			, const bool append
-			, ListWdbeQPrj1NVersion& rst
+			, ListWdbeQPrjPrj1NVersion& rst
 		) {
 	return 0;
 };
 
-ubigint TblWdbeQPrj1NVersion::insertRec(
-			WdbeQPrj1NVersion* rec
+ubigint TblWdbeQPrjPrj1NVersion::insertRec(
+			WdbeQPrjPrj1NVersion* rec
 		) {
 	return 0;
 };
 
-ubigint TblWdbeQPrj1NVersion::insertNewRec(
-			WdbeQPrj1NVersion** rec
+ubigint TblWdbeQPrjPrj1NVersion::insertNewRec(
+			WdbeQPrjPrj1NVersion** rec
 			, const ubigint jref
 			, const uint jnum
 			, const ubigint ref
 			, const string stubRef
+			, const uint prjNum
 		) {
 	ubigint retval = 0;
-	WdbeQPrj1NVersion* _rec = NULL;
+	WdbeQPrjPrj1NVersion* _rec = NULL;
 
-	_rec = new WdbeQPrj1NVersion(0, jref, jnum, ref, stubRef);
+	_rec = new WdbeQPrjPrj1NVersion(0, jref, jnum, ref, stubRef, prjNum);
 	insertRec(_rec);
 
 	retval = _rec->qref;
@@ -163,18 +166,19 @@ ubigint TblWdbeQPrj1NVersion::insertNewRec(
 	return retval;
 };
 
-ubigint TblWdbeQPrj1NVersion::appendNewRecToRst(
-			ListWdbeQPrj1NVersion& rst
-			, WdbeQPrj1NVersion** rec
+ubigint TblWdbeQPrjPrj1NVersion::appendNewRecToRst(
+			ListWdbeQPrjPrj1NVersion& rst
+			, WdbeQPrjPrj1NVersion** rec
 			, const ubigint jref
 			, const uint jnum
 			, const ubigint ref
 			, const string stubRef
+			, const uint prjNum
 		) {
 	ubigint retval = 0;
-	WdbeQPrj1NVersion* _rec = NULL;
+	WdbeQPrjPrj1NVersion* _rec = NULL;
 
-	retval = insertNewRec(&_rec, jref, jnum, ref, stubRef);
+	retval = insertNewRec(&_rec, jref, jnum, ref, stubRef, prjNum);
 	rst.nodes.push_back(_rec);
 
 	if (rec != NULL) *rec = _rec;
@@ -182,53 +186,53 @@ ubigint TblWdbeQPrj1NVersion::appendNewRecToRst(
 	return retval;
 };
 
-void TblWdbeQPrj1NVersion::insertRst(
-			ListWdbeQPrj1NVersion& rst
+void TblWdbeQPrjPrj1NVersion::insertRst(
+			ListWdbeQPrjPrj1NVersion& rst
 		) {
 };
 
-void TblWdbeQPrj1NVersion::updateRec(
-			WdbeQPrj1NVersion* rec
+void TblWdbeQPrjPrj1NVersion::updateRec(
+			WdbeQPrjPrj1NVersion* rec
 		) {
 };
 
-void TblWdbeQPrj1NVersion::updateRst(
-			ListWdbeQPrj1NVersion& rst
+void TblWdbeQPrjPrj1NVersion::updateRst(
+			ListWdbeQPrjPrj1NVersion& rst
 		) {
 };
 
-void TblWdbeQPrj1NVersion::removeRecByQref(
+void TblWdbeQPrjPrj1NVersion::removeRecByQref(
 			ubigint qref
 		) {
 };
 
-void TblWdbeQPrj1NVersion::removeRstByJref(
+void TblWdbeQPrjPrj1NVersion::removeRstByJref(
 			ubigint jref
 		) {
 };
 
-bool TblWdbeQPrj1NVersion::loadRecByQref(
+bool TblWdbeQPrjPrj1NVersion::loadRecByQref(
 			ubigint qref
-			, WdbeQPrj1NVersion** rec
+			, WdbeQPrjPrj1NVersion** rec
 		) {
 	return false;
 };
 
-ubigint TblWdbeQPrj1NVersion::loadRstByJref(
+ubigint TblWdbeQPrjPrj1NVersion::loadRstByJref(
 			ubigint jref
 			, const bool append
-			, ListWdbeQPrj1NVersion& rst
+			, ListWdbeQPrjPrj1NVersion& rst
 		) {
 	return 0;
 };
 
 #if defined(SBECORE_MAR) || defined(SBECORE_MY)
 /******************************************************************************
- class MyTblWdbeQPrj1NVersion
+ class MyTblWdbeQPrjPrj1NVersion
  ******************************************************************************/
 
-MyTblWdbeQPrj1NVersion::MyTblWdbeQPrj1NVersion() :
-			TblWdbeQPrj1NVersion()
+MyTblWdbeQPrjPrj1NVersion::MyTblWdbeQPrjPrj1NVersion() :
+			TblWdbeQPrjPrj1NVersion()
 			, MyTable()
 		{
 	stmtInsertRec = NULL;
@@ -237,49 +241,50 @@ MyTblWdbeQPrj1NVersion::MyTblWdbeQPrj1NVersion() :
 	stmtRemoveRstByJref = NULL;
 };
 
-MyTblWdbeQPrj1NVersion::~MyTblWdbeQPrj1NVersion() {
+MyTblWdbeQPrjPrj1NVersion::~MyTblWdbeQPrjPrj1NVersion() {
 	if (stmtInsertRec) delete(stmtInsertRec);
 	if (stmtUpdateRec) delete(stmtUpdateRec);
 	if (stmtRemoveRecByQref) delete(stmtRemoveRecByQref);
 	if (stmtRemoveRstByJref) delete(stmtRemoveRstByJref);
 };
 
-void MyTblWdbeQPrj1NVersion::initStatements() {
-	stmtInsertRec = createStatement("INSERT INTO TblWdbeQPrj1NVersion (jref, jnum, ref) VALUES (?,?,?)", false);
-	stmtUpdateRec = createStatement("UPDATE TblWdbeQPrj1NVersion SET jref = ?, jnum = ?, ref = ? WHERE qref = ?", false);
-	stmtRemoveRecByQref = createStatement("DELETE FROM TblWdbeQPrj1NVersion WHERE qref = ?", false);
-	stmtRemoveRstByJref = createStatement("DELETE FROM TblWdbeQPrj1NVersion WHERE jref = ?", false);
+void MyTblWdbeQPrjPrj1NVersion::initStatements() {
+	stmtInsertRec = createStatement("INSERT INTO TblWdbeQPrjPrj1NVersion (jref, jnum, ref, prjNum) VALUES (?,?,?,?)", false);
+	stmtUpdateRec = createStatement("UPDATE TblWdbeQPrjPrj1NVersion SET jref = ?, jnum = ?, ref = ?, prjNum = ? WHERE qref = ?", false);
+	stmtRemoveRecByQref = createStatement("DELETE FROM TblWdbeQPrjPrj1NVersion WHERE qref = ?", false);
+	stmtRemoveRstByJref = createStatement("DELETE FROM TblWdbeQPrjPrj1NVersion WHERE jref = ?", false);
 };
 
-bool MyTblWdbeQPrj1NVersion::loadRecBySQL(
+bool MyTblWdbeQPrjPrj1NVersion::loadRecBySQL(
 			const string& sqlstr
-			, WdbeQPrj1NVersion** rec
+			, WdbeQPrjPrj1NVersion** rec
 		) {
 	MYSQL_RES* dbresult; MYSQL_ROW dbrow;
-	WdbeQPrj1NVersion* _rec = NULL;
+	WdbeQPrjPrj1NVersion* _rec = NULL;
 
 	bool retval = false;
 
 	if (mysql_real_query(dbs, sqlstr.c_str(), sqlstr.length())) {
-		string dbms = "MyTblWdbeQPrj1NVersion::loadRecBySQL() / " + string(mysql_error(dbs));
+		string dbms = "MyTblWdbeQPrjPrj1NVersion::loadRecBySQL() / " + string(mysql_error(dbs));
 		throw SbeException(SbeException::DBS_QUERY, {{"dbms",dbms}, {"sql",sqlstr}});
 	};
 
 	dbresult = mysql_store_result(dbs);
 	if (!dbresult) {
-		string dbms = "MyTblWdbeQPrj1NVersion::loadRecBySQL() / store result / " + string(mysql_error(dbs));
+		string dbms = "MyTblWdbeQPrjPrj1NVersion::loadRecBySQL() / store result / " + string(mysql_error(dbs));
 		throw SbeException(SbeException::DBS_QUERY, {{"dbms",dbms}, {"sql",sqlstr}});
 	};
 
 	if (mysql_num_rows(dbresult) == 1) {
 		dbrow = mysql_fetch_row(dbresult);
 
-		_rec = new WdbeQPrj1NVersion();
+		_rec = new WdbeQPrjPrj1NVersion();
 
 		if (dbrow[0]) _rec->qref = atoll((char*) dbrow[0]); else _rec->qref = 0;
 		if (dbrow[1]) _rec->jref = atoll((char*) dbrow[1]); else _rec->jref = 0;
 		if (dbrow[2]) _rec->jnum = atol((char*) dbrow[2]); else _rec->jnum = 0;
 		if (dbrow[3]) _rec->ref = atoll((char*) dbrow[3]); else _rec->ref = 0;
+		if (dbrow[4]) _rec->prjNum = atol((char*) dbrow[4]); else _rec->prjNum = 0;
 
 		retval = true;
 	};
@@ -290,24 +295,24 @@ bool MyTblWdbeQPrj1NVersion::loadRecBySQL(
 	return retval;
 };
 
-ubigint MyTblWdbeQPrj1NVersion::loadRstBySQL(
+ubigint MyTblWdbeQPrjPrj1NVersion::loadRstBySQL(
 			const string& sqlstr
 			, const bool append
-			, ListWdbeQPrj1NVersion& rst
+			, ListWdbeQPrjPrj1NVersion& rst
 		) {
 	MYSQL_RES* dbresult; MYSQL_ROW dbrow; ubigint numrow; ubigint numread = 0;
-	WdbeQPrj1NVersion* rec;
+	WdbeQPrjPrj1NVersion* rec;
 
 	if (!append) rst.clear();
 
 	if (mysql_real_query(dbs, sqlstr.c_str(), sqlstr.length())) {
-		string dbms = "MyTblWdbeQPrj1NVersion::loadRstBySQL() / " + string(mysql_error(dbs));
+		string dbms = "MyTblWdbeQPrjPrj1NVersion::loadRstBySQL() / " + string(mysql_error(dbs));
 		throw SbeException(SbeException::DBS_QUERY, {{"dbms",dbms}, {"sql",sqlstr}});
 	};
 
 	dbresult = mysql_store_result(dbs);
 	if (!dbresult) {
-		string dbms = "MyTblWdbeQPrj1NVersion::loadRstBySQL() / store result / " + string(mysql_error(dbs));
+		string dbms = "MyTblWdbeQPrjPrj1NVersion::loadRstBySQL() / store result / " + string(mysql_error(dbs));
 		throw SbeException(SbeException::DBS_QUERY, {{"dbms",dbms}, {"sql",sqlstr}});
 	};
 
@@ -319,12 +324,13 @@ ubigint MyTblWdbeQPrj1NVersion::loadRstBySQL(
 		while (numread < numrow) {
 			dbrow = mysql_fetch_row(dbresult);
 
-			rec = new WdbeQPrj1NVersion();
+			rec = new WdbeQPrjPrj1NVersion();
 
 			if (dbrow[0]) rec->qref = atoll((char*) dbrow[0]); else rec->qref = 0;
 			if (dbrow[1]) rec->jref = atoll((char*) dbrow[1]); else rec->jref = 0;
 			if (dbrow[2]) rec->jnum = atol((char*) dbrow[2]); else rec->jnum = 0;
 			if (dbrow[3]) rec->ref = atoll((char*) dbrow[3]); else rec->ref = 0;
+			if (dbrow[4]) rec->prjNum = atol((char*) dbrow[4]); else rec->prjNum = 0;
 			rst.nodes.push_back(rec);
 
 			numread++;
@@ -336,38 +342,8 @@ ubigint MyTblWdbeQPrj1NVersion::loadRstBySQL(
 	return(numread);
 };
 
-ubigint MyTblWdbeQPrj1NVersion::insertRec(
-			WdbeQPrj1NVersion* rec
-		) {
-	unsigned long l[3]; my_bool n[3]; my_bool e[3];
-
-	MYSQL_BIND bind[] = {
-		bindUbigint(&rec->jref,&(l[0]),&(n[0]),&(e[0])),
-		bindUint(&rec->jnum,&(l[1]),&(n[1]),&(e[1])),
-		bindUbigint(&rec->ref,&(l[2]),&(n[2]),&(e[2]))
-	};
-
-	if (mysql_stmt_bind_param(stmtInsertRec, bind)) {
-		string dbms = "MyTblWdbeQPrj1NVersion::insertRec() / bind / " + string(mysql_error(dbs));
-		throw SbeException(SbeException::DBS_STMTEXEC, {{"dbms",dbms}});
-	};
-	if (mysql_stmt_execute(stmtInsertRec)) {
-		string dbms = "MyTblWdbeQPrj1NVersion::insertRec() / " + string(mysql_error(dbs));
-		throw SbeException(SbeException::DBS_STMTEXEC, {{"dbms",dbms}});
-	};
-	rec->qref = mysql_stmt_insert_id(stmtInsertRec);
-	
-	return rec->qref;
-};
-
-void MyTblWdbeQPrj1NVersion::insertRst(
-			ListWdbeQPrj1NVersion& rst
-		) {
-	for (unsigned int i = 0; i < rst.nodes.size(); i++) insertRec(rst.nodes[i]);
-};
-
-void MyTblWdbeQPrj1NVersion::updateRec(
-			WdbeQPrj1NVersion* rec
+ubigint MyTblWdbeQPrjPrj1NVersion::insertRec(
+			WdbeQPrjPrj1NVersion* rec
 		) {
 	unsigned long l[4]; my_bool n[4]; my_bool e[4];
 
@@ -375,26 +351,58 @@ void MyTblWdbeQPrj1NVersion::updateRec(
 		bindUbigint(&rec->jref,&(l[0]),&(n[0]),&(e[0])),
 		bindUint(&rec->jnum,&(l[1]),&(n[1]),&(e[1])),
 		bindUbigint(&rec->ref,&(l[2]),&(n[2]),&(e[2])),
-		bindUbigint(&rec->qref,&(l[3]),&(n[3]),&(e[3]))
+		bindUint(&rec->prjNum,&(l[3]),&(n[3]),&(e[3]))
+	};
+
+	if (mysql_stmt_bind_param(stmtInsertRec, bind)) {
+		string dbms = "MyTblWdbeQPrjPrj1NVersion::insertRec() / bind / " + string(mysql_error(dbs));
+		throw SbeException(SbeException::DBS_STMTEXEC, {{"dbms",dbms}});
+	};
+	if (mysql_stmt_execute(stmtInsertRec)) {
+		string dbms = "MyTblWdbeQPrjPrj1NVersion::insertRec() / " + string(mysql_error(dbs));
+		throw SbeException(SbeException::DBS_STMTEXEC, {{"dbms",dbms}});
+	};
+	rec->qref = mysql_stmt_insert_id(stmtInsertRec);
+	
+	return rec->qref;
+};
+
+void MyTblWdbeQPrjPrj1NVersion::insertRst(
+			ListWdbeQPrjPrj1NVersion& rst
+		) {
+	for (unsigned int i = 0; i < rst.nodes.size(); i++) insertRec(rst.nodes[i]);
+};
+
+void MyTblWdbeQPrjPrj1NVersion::updateRec(
+			WdbeQPrjPrj1NVersion* rec
+		) {
+	unsigned long l[5]; my_bool n[5]; my_bool e[5];
+
+	MYSQL_BIND bind[] = {
+		bindUbigint(&rec->jref,&(l[0]),&(n[0]),&(e[0])),
+		bindUint(&rec->jnum,&(l[1]),&(n[1]),&(e[1])),
+		bindUbigint(&rec->ref,&(l[2]),&(n[2]),&(e[2])),
+		bindUint(&rec->prjNum,&(l[3]),&(n[3]),&(e[3])),
+		bindUbigint(&rec->qref,&(l[4]),&(n[4]),&(e[4]))
 	};
 
 	if (mysql_stmt_bind_param(stmtUpdateRec, bind)) {
-		string dbms = "MyTblWdbeQPrj1NVersion::updateRec() / bind / " + string(mysql_error(dbs));
+		string dbms = "MyTblWdbeQPrjPrj1NVersion::updateRec() / bind / " + string(mysql_error(dbs));
 		throw SbeException(SbeException::DBS_STMTEXEC, {{"dbms",dbms}});
 	};
 	if (mysql_stmt_execute(stmtUpdateRec)) {
-		string dbms = "MyTblWdbeQPrj1NVersion::updateRec() / " + string(mysql_error(dbs));
+		string dbms = "MyTblWdbeQPrjPrj1NVersion::updateRec() / " + string(mysql_error(dbs));
 		throw SbeException(SbeException::DBS_STMTEXEC, {{"dbms",dbms}});
 	};
 };
 
-void MyTblWdbeQPrj1NVersion::updateRst(
-			ListWdbeQPrj1NVersion& rst
+void MyTblWdbeQPrjPrj1NVersion::updateRst(
+			ListWdbeQPrjPrj1NVersion& rst
 		) {
 	for (unsigned int i = 0; i < rst.nodes.size(); i++) updateRec(rst.nodes[i]);
 };
 
-void MyTblWdbeQPrj1NVersion::removeRecByQref(
+void MyTblWdbeQPrjPrj1NVersion::removeRecByQref(
 			ubigint qref
 		) {
 	unsigned long l; my_bool n; my_bool e;
@@ -402,16 +410,16 @@ void MyTblWdbeQPrj1NVersion::removeRecByQref(
 	MYSQL_BIND bind = bindUbigint(&qref,&l,&n,&e);
 
 	if (mysql_stmt_bind_param(stmtRemoveRecByQref, &bind)) {
-		string dbms = "MyTblWdbeQPrj1NVersion::removeRecByQref() / bind / " + string(mysql_error(dbs));
+		string dbms = "MyTblWdbeQPrjPrj1NVersion::removeRecByQref() / bind / " + string(mysql_error(dbs));
 		throw SbeException(SbeException::DBS_STMTEXEC, {{"dbms",dbms}});
 	};
 	if (mysql_stmt_execute(stmtRemoveRecByQref)) {
-		string dbms = "MyTblWdbeQPrj1NVersion::removeRecByQref() / " + string(mysql_error(dbs));
+		string dbms = "MyTblWdbeQPrjPrj1NVersion::removeRecByQref() / " + string(mysql_error(dbs));
 		throw SbeException(SbeException::DBS_STMTEXEC, {{"dbms",dbms}});
 	};
 };
 
-void MyTblWdbeQPrj1NVersion::removeRstByJref(
+void MyTblWdbeQPrjPrj1NVersion::removeRstByJref(
 			ubigint jref
 		) {
 	unsigned long l; my_bool n; my_bool e;
@@ -419,83 +427,85 @@ void MyTblWdbeQPrj1NVersion::removeRstByJref(
 	MYSQL_BIND bind = bindUbigint(&jref,&l,&n,&e);
 
 	if (mysql_stmt_bind_param(stmtRemoveRstByJref, &bind)) {
-		string dbms = "MyTblWdbeQPrj1NVersion::removeRstByJref() / bind / " + string(mysql_error(dbs));
+		string dbms = "MyTblWdbeQPrjPrj1NVersion::removeRstByJref() / bind / " + string(mysql_error(dbs));
 		throw SbeException(SbeException::DBS_STMTEXEC, {{"dbms",dbms}});
 	};
 	if (mysql_stmt_execute(stmtRemoveRstByJref)) {
-		string dbms = "MyTblWdbeQPrj1NVersion::removeRstByJref() / " + string(mysql_error(dbs));
+		string dbms = "MyTblWdbeQPrjPrj1NVersion::removeRstByJref() / " + string(mysql_error(dbs));
 		throw SbeException(SbeException::DBS_STMTEXEC, {{"dbms",dbms}});
 	};
 };
 
-bool MyTblWdbeQPrj1NVersion::loadRecByQref(
+bool MyTblWdbeQPrjPrj1NVersion::loadRecByQref(
 			ubigint qref
-			, WdbeQPrj1NVersion** rec
+			, WdbeQPrjPrj1NVersion** rec
 		) {
 	if (qref == 0) {
 		*rec = NULL;
 		return false;
 	};
 
-	return loadRecBySQL("SELECT * FROM TblWdbeQPrj1NVersion WHERE qref = " + to_string(qref), rec);
+	return loadRecBySQL("SELECT * FROM TblWdbeQPrjPrj1NVersion WHERE qref = " + to_string(qref), rec);
 };
 
-ubigint MyTblWdbeQPrj1NVersion::loadRstByJref(
+ubigint MyTblWdbeQPrjPrj1NVersion::loadRstByJref(
 			ubigint jref
 			, const bool append
-			, ListWdbeQPrj1NVersion& rst
+			, ListWdbeQPrjPrj1NVersion& rst
 		) {
-	return loadRstBySQL("SELECT * FROM TblWdbeQPrj1NVersion WHERE jref = " + to_string(jref) + " ORDER BY jnum ASC", append, rst);
+	return loadRstBySQL("SELECT * FROM TblWdbeQPrjPrj1NVersion WHERE jref = " + to_string(jref) + " ORDER BY jnum ASC", append, rst);
 };
 #endif
 
 #if defined(SBECORE_PG)
 /******************************************************************************
- class PgTblWdbeQPrj1NVersion
+ class PgTblWdbeQPrjPrj1NVersion
  ******************************************************************************/
 
-PgTblWdbeQPrj1NVersion::PgTblWdbeQPrj1NVersion() :
-			TblWdbeQPrj1NVersion()
+PgTblWdbeQPrjPrj1NVersion::PgTblWdbeQPrjPrj1NVersion() :
+			TblWdbeQPrjPrj1NVersion()
 			, PgTable()
 		{
 };
 
-PgTblWdbeQPrj1NVersion::~PgTblWdbeQPrj1NVersion() {
+PgTblWdbeQPrjPrj1NVersion::~PgTblWdbeQPrjPrj1NVersion() {
 };
 
-void PgTblWdbeQPrj1NVersion::initStatements() {
-	createStatement("TblWdbeQPrj1NVersion_insertRec", "INSERT INTO TblWdbeQPrj1NVersion (jref, jnum, ref) VALUES ($1,$2,$3) RETURNING qref", 3);
-	createStatement("TblWdbeQPrj1NVersion_updateRec", "UPDATE TblWdbeQPrj1NVersion SET jref = $1, jnum = $2, ref = $3 WHERE qref = $4", 4);
-	createStatement("TblWdbeQPrj1NVersion_removeRecByQref", "DELETE FROM TblWdbeQPrj1NVersion WHERE qref = $1", 1);
-	createStatement("TblWdbeQPrj1NVersion_removeRstByJref", "DELETE FROM TblWdbeQPrj1NVersion WHERE jref = $1", 1);
+void PgTblWdbeQPrjPrj1NVersion::initStatements() {
+	createStatement("TblWdbeQPrjPrj1NVersion_insertRec", "INSERT INTO TblWdbeQPrjPrj1NVersion (jref, jnum, ref, prjNum) VALUES ($1,$2,$3,$4) RETURNING qref", 4);
+	createStatement("TblWdbeQPrjPrj1NVersion_updateRec", "UPDATE TblWdbeQPrjPrj1NVersion SET jref = $1, jnum = $2, ref = $3, prjNum = $4 WHERE qref = $5", 5);
+	createStatement("TblWdbeQPrjPrj1NVersion_removeRecByQref", "DELETE FROM TblWdbeQPrjPrj1NVersion WHERE qref = $1", 1);
+	createStatement("TblWdbeQPrjPrj1NVersion_removeRstByJref", "DELETE FROM TblWdbeQPrjPrj1NVersion WHERE jref = $1", 1);
 
-	createStatement("TblWdbeQPrj1NVersion_loadRecByQref", "SELECT qref, jref, jnum, ref FROM TblWdbeQPrj1NVersion WHERE qref = $1", 1);
-	createStatement("TblWdbeQPrj1NVersion_loadRstByJref", "SELECT qref, jref, jnum, ref FROM TblWdbeQPrj1NVersion WHERE jref = $1 ORDER BY jnum ASC", 1);
+	createStatement("TblWdbeQPrjPrj1NVersion_loadRecByQref", "SELECT qref, jref, jnum, ref, prjNum FROM TblWdbeQPrjPrj1NVersion WHERE qref = $1", 1);
+	createStatement("TblWdbeQPrjPrj1NVersion_loadRstByJref", "SELECT qref, jref, jnum, ref, prjNum FROM TblWdbeQPrjPrj1NVersion WHERE jref = $1 ORDER BY jnum ASC", 1);
 };
 
-bool PgTblWdbeQPrj1NVersion::loadRec(
+bool PgTblWdbeQPrjPrj1NVersion::loadRec(
 			PGresult* res
-			, WdbeQPrj1NVersion** rec
+			, WdbeQPrjPrj1NVersion** rec
 		) {
 	char* ptr;
 
-	WdbeQPrj1NVersion* _rec = NULL;
+	WdbeQPrjPrj1NVersion* _rec = NULL;
 	bool retval = false;
 
 	if (PQntuples(res) == 1) {
-		_rec = new WdbeQPrj1NVersion();
+		_rec = new WdbeQPrjPrj1NVersion();
 
 		int fnum[] = {
 			PQfnumber(res, "qref"),
 			PQfnumber(res, "jref"),
 			PQfnumber(res, "jnum"),
-			PQfnumber(res, "ref")
+			PQfnumber(res, "ref"),
+			PQfnumber(res, "prjnum")
 		};
 
 		ptr = PQgetvalue(res, 0, fnum[0]); _rec->qref = atoll(ptr);
 		ptr = PQgetvalue(res, 0, fnum[1]); _rec->jref = atoll(ptr);
 		ptr = PQgetvalue(res, 0, fnum[2]); _rec->jnum = atol(ptr);
 		ptr = PQgetvalue(res, 0, fnum[3]); _rec->ref = atoll(ptr);
+		ptr = PQgetvalue(res, 0, fnum[4]); _rec->prjNum = atol(ptr);
 
 		retval = true;
 	};
@@ -506,13 +516,13 @@ bool PgTblWdbeQPrj1NVersion::loadRec(
 	return retval;
 };
 
-ubigint PgTblWdbeQPrj1NVersion::loadRst(
+ubigint PgTblWdbeQPrjPrj1NVersion::loadRst(
 			PGresult* res
 			, const bool append
-			, ListWdbeQPrj1NVersion& rst
+			, ListWdbeQPrjPrj1NVersion& rst
 		) {
 	ubigint numrow; ubigint numread = 0; char* ptr;
-	WdbeQPrj1NVersion* rec;
+	WdbeQPrjPrj1NVersion* rec;
 
 	if (!append) rst.clear();
 
@@ -525,16 +535,18 @@ ubigint PgTblWdbeQPrj1NVersion::loadRst(
 			PQfnumber(res, "qref"),
 			PQfnumber(res, "jref"),
 			PQfnumber(res, "jnum"),
-			PQfnumber(res, "ref")
+			PQfnumber(res, "ref"),
+			PQfnumber(res, "prjnum")
 		};
 
 		while (numread < numrow) {
-			rec = new WdbeQPrj1NVersion();
+			rec = new WdbeQPrjPrj1NVersion();
 
 			ptr = PQgetvalue(res, numread, fnum[0]); rec->qref = atoll(ptr);
 			ptr = PQgetvalue(res, numread, fnum[1]); rec->jref = atoll(ptr);
 			ptr = PQgetvalue(res, numread, fnum[2]); rec->jnum = atol(ptr);
 			ptr = PQgetvalue(res, numread, fnum[3]); rec->ref = atoll(ptr);
+			ptr = PQgetvalue(res, numread, fnum[4]); rec->prjNum = atol(ptr);
 
 			rst.nodes.push_back(rec);
 
@@ -547,82 +559,82 @@ ubigint PgTblWdbeQPrj1NVersion::loadRst(
 	return numread;
 };
 
-bool PgTblWdbeQPrj1NVersion::loadRecByStmt(
+bool PgTblWdbeQPrjPrj1NVersion::loadRecByStmt(
 			const string& srefStmt
 			, const unsigned int N
 			, const char** vals
 			, const int* l
 			, const int* f
-			, WdbeQPrj1NVersion** rec
+			, WdbeQPrjPrj1NVersion** rec
 		) {
 	PGresult* res;
 
 	res = PQexecPrepared(dbs, srefStmt.c_str(), N, vals, l, f, 0);
 	
 	if (PQresultStatus(res) != PGRES_TUPLES_OK)	{
-		string dbms = "PgTblWdbeQPrj1NVersion::loadRecByStmt(" + srefStmt + ") / " + string(PQerrorMessage(dbs));
+		string dbms = "PgTblWdbeQPrjPrj1NVersion::loadRecByStmt(" + srefStmt + ") / " + string(PQerrorMessage(dbs));
 		throw SbeException(SbeException::DBS_STMTEXEC, {{"dbms",dbms}});
 	};
 
 	return loadRec(res, rec);
 };
 
-ubigint PgTblWdbeQPrj1NVersion::loadRstByStmt(
+ubigint PgTblWdbeQPrjPrj1NVersion::loadRstByStmt(
 			const string& srefStmt
 			, const unsigned int N
 			, const char** vals
 			, const int* l
 			, const int* f
 			, const bool append
-			, ListWdbeQPrj1NVersion& rst
+			, ListWdbeQPrjPrj1NVersion& rst
 		) {
 	PGresult* res;
 
 	res = PQexecPrepared(dbs, srefStmt.c_str(), N, vals, l, f, 0);
 
 	if (PQresultStatus(res) != PGRES_TUPLES_OK)	{
-		string dbms = "PgTblWdbeQPrj1NVersion::loadRstByStmt(" + srefStmt + ") / " + string(PQerrorMessage(dbs));
+		string dbms = "PgTblWdbeQPrjPrj1NVersion::loadRstByStmt(" + srefStmt + ") / " + string(PQerrorMessage(dbs));
 		throw SbeException(SbeException::DBS_STMTEXEC, {{"dbms",dbms}});
 	};
 
 	return loadRst(res, append, rst);
 };
 
-bool PgTblWdbeQPrj1NVersion::loadRecBySQL(
+bool PgTblWdbeQPrjPrj1NVersion::loadRecBySQL(
 			const string& sqlstr
-			, WdbeQPrj1NVersion** rec
+			, WdbeQPrjPrj1NVersion** rec
 		) {
 	PGresult* res;
 
 	res = PQexec(dbs, sqlstr.c_str());
 
 	if (PQresultStatus(res) != PGRES_TUPLES_OK) {
-		string dbms = "PgTblWdbeQPrj1NVersion::loadRecBySQL() / " + string(PQerrorMessage(dbs));
+		string dbms = "PgTblWdbeQPrjPrj1NVersion::loadRecBySQL() / " + string(PQerrorMessage(dbs));
 		throw SbeException(SbeException::DBS_QUERY, {{"dbms",dbms}, {"sql",sqlstr}});
 	};
 
 	return loadRec(res, rec);
 };
 
-ubigint PgTblWdbeQPrj1NVersion::loadRstBySQL(
+ubigint PgTblWdbeQPrjPrj1NVersion::loadRstBySQL(
 			const string& sqlstr
 			, const bool append
-			, ListWdbeQPrj1NVersion& rst
+			, ListWdbeQPrjPrj1NVersion& rst
 		) {
 	PGresult* res;
 
 	res = PQexec(dbs, sqlstr.c_str());
 
 	if (PQresultStatus(res) != PGRES_TUPLES_OK) {
-		string dbms = "PgTblWdbeQPrj1NVersion::loadRstBySQL() / " + string(PQerrorMessage(dbs));
+		string dbms = "PgTblWdbeQPrjPrj1NVersion::loadRstBySQL() / " + string(PQerrorMessage(dbs));
 		throw SbeException(SbeException::DBS_QUERY, {{"dbms",dbms}, {"sql",sqlstr}});
 	};
 
 	return loadRst(res, append, rst);
 };
 
-ubigint PgTblWdbeQPrj1NVersion::insertRec(
-			WdbeQPrj1NVersion* rec
+ubigint PgTblWdbeQPrjPrj1NVersion::insertRec(
+			WdbeQPrjPrj1NVersion* rec
 		) {
 	PGresult* res;
 	char* ptr;
@@ -630,23 +642,26 @@ ubigint PgTblWdbeQPrj1NVersion::insertRec(
 	ubigint _jref = htonl64(rec->jref);
 	uint _jnum = htonl(rec->jnum);
 	ubigint _ref = htonl64(rec->ref);
+	uint _prjNum = htonl(rec->prjNum);
 
 	const char* vals[] = {
 		(char*) &_jref,
 		(char*) &_jnum,
-		(char*) &_ref
+		(char*) &_ref,
+		(char*) &_prjNum
 	};
 	const int l[] = {
 		sizeof(ubigint),
 		sizeof(uint),
-		sizeof(ubigint)
+		sizeof(ubigint),
+		sizeof(uint)
 	};
-	const int f[] = {1, 1, 1};
+	const int f[] = {1, 1, 1, 1};
 
-	res = PQexecPrepared(dbs, "TblWdbeQPrj1NVersion_insertRec", 3, vals, l, f, 0);
+	res = PQexecPrepared(dbs, "TblWdbeQPrjPrj1NVersion_insertRec", 4, vals, l, f, 0);
 
 	if (PQresultStatus(res) != PGRES_TUPLES_OK)	{
-		string dbms = "PgTblWdbeQPrj1NVersion::insertRec() / " + string(PQerrorMessage(dbs));
+		string dbms = "PgTblWdbeQPrjPrj1NVersion::insertRec() / " + string(PQerrorMessage(dbs));
 		throw SbeException(SbeException::DBS_STMTEXEC, {{"dbms",dbms}});
 	};
 
@@ -657,53 +672,56 @@ ubigint PgTblWdbeQPrj1NVersion::insertRec(
 	return rec->qref;
 };
 
-void PgTblWdbeQPrj1NVersion::insertRst(
-			ListWdbeQPrj1NVersion& rst
+void PgTblWdbeQPrjPrj1NVersion::insertRst(
+			ListWdbeQPrjPrj1NVersion& rst
 		) {
 	for (unsigned int i = 0; i < rst.nodes.size(); i++) insertRec(rst.nodes[i]);
 };
 
-void PgTblWdbeQPrj1NVersion::updateRec(
-			WdbeQPrj1NVersion* rec
+void PgTblWdbeQPrjPrj1NVersion::updateRec(
+			WdbeQPrjPrj1NVersion* rec
 		) {
 	PGresult* res;
 
 	ubigint _jref = htonl64(rec->jref);
 	uint _jnum = htonl(rec->jnum);
 	ubigint _ref = htonl64(rec->ref);
+	uint _prjNum = htonl(rec->prjNum);
 	ubigint _qref = htonl64(rec->qref);
 
 	const char* vals[] = {
 		(char*) &_jref,
 		(char*) &_jnum,
 		(char*) &_ref,
+		(char*) &_prjNum,
 		(char*) &_qref
 	};
 	const int l[] = {
 		sizeof(ubigint),
 		sizeof(uint),
 		sizeof(ubigint),
+		sizeof(uint),
 		sizeof(ubigint)
 	};
-	const int f[] = {1, 1, 1, 1};
+	const int f[] = {1, 1, 1, 1, 1};
 
-	res = PQexecPrepared(dbs, "TblWdbeQPrj1NVersion_updateRec", 4, vals, l, f, 0);
+	res = PQexecPrepared(dbs, "TblWdbeQPrjPrj1NVersion_updateRec", 5, vals, l, f, 0);
 
 	if (PQresultStatus(res) != PGRES_COMMAND_OK) {
-		string dbms = "PgTblWdbeQPrj1NVersion::updateRec() / " + string(PQerrorMessage(dbs));
+		string dbms = "PgTblWdbeQPrjPrj1NVersion::updateRec() / " + string(PQerrorMessage(dbs));
 		throw SbeException(SbeException::DBS_STMTEXEC, {{"dbms",dbms}});
 	};
 
 	PQclear(res);
 };
 
-void PgTblWdbeQPrj1NVersion::updateRst(
-			ListWdbeQPrj1NVersion& rst
+void PgTblWdbeQPrjPrj1NVersion::updateRst(
+			ListWdbeQPrjPrj1NVersion& rst
 		) {
 	for (unsigned int i = 0; i < rst.nodes.size(); i++) updateRec(rst.nodes[i]);
 };
 
-void PgTblWdbeQPrj1NVersion::removeRecByQref(
+void PgTblWdbeQPrjPrj1NVersion::removeRecByQref(
 			ubigint qref
 		) {
 	PGresult* res;
@@ -718,17 +736,17 @@ void PgTblWdbeQPrj1NVersion::removeRecByQref(
 	};
 	const int f[] = {1};
 
-	res = PQexecPrepared(dbs, "TblWdbeQPrj1NVersion_removeRecByQref", 1, vals, l, f, 0);
+	res = PQexecPrepared(dbs, "TblWdbeQPrjPrj1NVersion_removeRecByQref", 1, vals, l, f, 0);
 
 	if (PQresultStatus(res) != PGRES_COMMAND_OK) {
-		string dbms = "PgTblWdbeQPrj1NVersion::removeRecByQref() / " + string(PQerrorMessage(dbs));
+		string dbms = "PgTblWdbeQPrjPrj1NVersion::removeRecByQref() / " + string(PQerrorMessage(dbs));
 		throw SbeException(SbeException::DBS_STMTEXEC, {{"dbms",dbms}});
 	};
 
 	PQclear(res);
 };
 
-void PgTblWdbeQPrj1NVersion::removeRstByJref(
+void PgTblWdbeQPrjPrj1NVersion::removeRstByJref(
 			ubigint jref
 		) {
 	PGresult* res;
@@ -743,19 +761,19 @@ void PgTblWdbeQPrj1NVersion::removeRstByJref(
 	};
 	const int f[] = {1};
 
-	res = PQexecPrepared(dbs, "TblWdbeQPrj1NVersion_removeRstByJref", 1, vals, l, f, 0);
+	res = PQexecPrepared(dbs, "TblWdbeQPrjPrj1NVersion_removeRstByJref", 1, vals, l, f, 0);
 
 	if (PQresultStatus(res) != PGRES_COMMAND_OK) {
-		string dbms = "PgTblWdbeQPrj1NVersion::removeRstByJref() / " + string(PQerrorMessage(dbs));
+		string dbms = "PgTblWdbeQPrjPrj1NVersion::removeRstByJref() / " + string(PQerrorMessage(dbs));
 		throw SbeException(SbeException::DBS_STMTEXEC, {{"dbms",dbms}});
 	};
 
 	PQclear(res);
 };
 
-bool PgTblWdbeQPrj1NVersion::loadRecByQref(
+bool PgTblWdbeQPrjPrj1NVersion::loadRecByQref(
 			ubigint qref
-			, WdbeQPrj1NVersion** rec
+			, WdbeQPrjPrj1NVersion** rec
 		) {
 	if (qref == 0) {
 		*rec = NULL;
@@ -772,13 +790,13 @@ bool PgTblWdbeQPrj1NVersion::loadRecByQref(
 	};
 	const int f[] = {1};
 
-	return loadRecByStmt("TblWdbeQPrj1NVersion_loadRecByQref", 1, vals, l, f, rec);
+	return loadRecByStmt("TblWdbeQPrjPrj1NVersion_loadRecByQref", 1, vals, l, f, rec);
 };
 
-ubigint PgTblWdbeQPrj1NVersion::loadRstByJref(
+ubigint PgTblWdbeQPrjPrj1NVersion::loadRstByJref(
 			ubigint jref
 			, const bool append
-			, ListWdbeQPrj1NVersion& rst
+			, ListWdbeQPrjPrj1NVersion& rst
 		) {
 	ubigint _jref = htonl64(jref);
 
@@ -790,6 +808,6 @@ ubigint PgTblWdbeQPrj1NVersion::loadRstByJref(
 	};
 	const int f[] = {1};
 
-	return loadRstByStmt("TblWdbeQPrj1NVersion_loadRstByJref", 1, vals, l, f, append, rst);
+	return loadRstByStmt("TblWdbeQPrjPrj1NVersion_loadRstByJref", 1, vals, l, f, append, rst);
 };
 #endif

@@ -38,8 +38,8 @@ PnlWdbeBnkRec::PnlWdbeBnkRec(
 		{
 	jref = xchg->addJob(dbswdbe, this, jrefSup);
 
-	pnl1npin = NULL;
 	pnldetail = NULL;
+	pnl1npin = NULL;
 
 	// IP constructor.cust1 --- INSERT
 

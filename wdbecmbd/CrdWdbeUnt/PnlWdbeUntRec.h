@@ -15,14 +15,14 @@
 // IP include.cust --- INSERT
 
 #include "PnlWdbeUntRef1NCommand.h"
-#include "PnlWdbeUntRef1NError.h"
-#include "PnlWdbeUntHk1NVector.h"
 #include "PnlWdbeUntHk1NModule.h"
-#include "PnlWdbeUnt1NTarget.h"
-#include "PnlWdbeUntFwd1NController.h"
-#include "PnlWdbeUnt1NPeripheral.h"
+#include "PnlWdbeUntHk1NVector.h"
+#include "PnlWdbeUntRef1NError.h"
 #include "PnlWdbeUnt1NBank.h"
+#include "PnlWdbeUntFwd1NController.h"
+#include "PnlWdbeUnt1NTarget.h"
 #include "PnlWdbeUntSil1NUnit.h"
+#include "PnlWdbeUnt1NPeripheral.h"
 #include "PnlWdbeUntDetail.h"
 
 #define VecVWdbeUntRecDo PnlWdbeUntRec::VecVDo
@@ -80,7 +80,7 @@ public:
 	class StatApp {
 
 	public:
-		static void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true, const bool initdoneDetail = false, const bool initdoneSil1NUnit = false, const bool initdone1NPeripheral = false, const bool initdone1NBank = false, const bool initdoneFwd1NController = false, const bool initdone1NTarget = false, const bool initdoneHk1NVector = false, const bool initdoneHk1NModule = false, const bool initdoneRef1NCommand = false, const bool initdoneRef1NError = false);
+		static void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true, const bool initdoneDetail = false, const bool initdone1NPeripheral = false, const bool initdoneSil1NUnit = false, const bool initdone1NTarget = false, const bool initdoneFwd1NController = false, const bool initdone1NBank = false, const bool initdoneRef1NError = false, const bool initdoneHk1NVector = false, const bool initdoneHk1NModule = false, const bool initdoneRef1NCommand = false);
 	};
 
 	/**
@@ -91,34 +91,34 @@ public:
 	public:
 		static const Sbecore::uint IXWDBEVEXPSTATE = 1;
 		static const Sbecore::uint JREFDETAIL = 2;
-		static const Sbecore::uint JREFSIL1NUNIT = 3;
-		static const Sbecore::uint PNLSIL1NUNITAVAIL = 4;
-		static const Sbecore::uint JREF1NPERIPHERAL = 5;
-		static const Sbecore::uint JREF1NBANK = 6;
+		static const Sbecore::uint JREF1NPERIPHERAL = 3;
+		static const Sbecore::uint JREFSIL1NUNIT = 4;
+		static const Sbecore::uint PNLSIL1NUNITAVAIL = 5;
+		static const Sbecore::uint JREF1NTARGET = 6;
 		static const Sbecore::uint JREFFWD1NCONTROLLER = 7;
-		static const Sbecore::uint JREF1NTARGET = 8;
-		static const Sbecore::uint JREFHK1NVECTOR = 9;
-		static const Sbecore::uint JREFHK1NMODULE = 10;
-		static const Sbecore::uint JREFREF1NCOMMAND = 11;
-		static const Sbecore::uint JREFREF1NERROR = 12;
+		static const Sbecore::uint JREF1NBANK = 8;
+		static const Sbecore::uint JREFREF1NERROR = 9;
+		static const Sbecore::uint JREFHK1NVECTOR = 10;
+		static const Sbecore::uint JREFHK1NMODULE = 11;
+		static const Sbecore::uint JREFREF1NCOMMAND = 12;
 		static const Sbecore::uint BUTREGULARIZEACTIVE = 13;
 
 	public:
-		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const Sbecore::ubigint jrefDetail = 0, const Sbecore::ubigint jrefSil1NUnit = 0, const bool pnlsil1nunitAvail = false, const Sbecore::ubigint jref1NPeripheral = 0, const Sbecore::ubigint jref1NBank = 0, const Sbecore::ubigint jrefFwd1NController = 0, const Sbecore::ubigint jref1NTarget = 0, const Sbecore::ubigint jrefHk1NVector = 0, const Sbecore::ubigint jrefHk1NModule = 0, const Sbecore::ubigint jrefRef1NCommand = 0, const Sbecore::ubigint jrefRef1NError = 0, const bool ButRegularizeActive = true);
+		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const Sbecore::ubigint jrefDetail = 0, const Sbecore::ubigint jref1NPeripheral = 0, const Sbecore::ubigint jrefSil1NUnit = 0, const bool pnlsil1nunitAvail = false, const Sbecore::ubigint jref1NTarget = 0, const Sbecore::ubigint jrefFwd1NController = 0, const Sbecore::ubigint jref1NBank = 0, const Sbecore::ubigint jrefRef1NError = 0, const Sbecore::ubigint jrefHk1NVector = 0, const Sbecore::ubigint jrefHk1NModule = 0, const Sbecore::ubigint jrefRef1NCommand = 0, const bool ButRegularizeActive = true);
 
 	public:
 		Sbecore::uint ixWdbeVExpstate;
 		Sbecore::ubigint jrefDetail;
+		Sbecore::ubigint jref1NPeripheral;
 		Sbecore::ubigint jrefSil1NUnit;
 		bool pnlsil1nunitAvail;
-		Sbecore::ubigint jref1NPeripheral;
-		Sbecore::ubigint jref1NBank;
-		Sbecore::ubigint jrefFwd1NController;
 		Sbecore::ubigint jref1NTarget;
+		Sbecore::ubigint jrefFwd1NController;
+		Sbecore::ubigint jref1NBank;
+		Sbecore::ubigint jrefRef1NError;
 		Sbecore::ubigint jrefHk1NVector;
 		Sbecore::ubigint jrefHk1NModule;
 		Sbecore::ubigint jrefRef1NCommand;
-		Sbecore::ubigint jrefRef1NError;
 		bool ButRegularizeActive;
 
 	public:
@@ -196,14 +196,14 @@ public:
 	StatShr statshr;
 
 	PnlWdbeUntRef1NCommand* pnlref1ncommand;
-	PnlWdbeUntRef1NError* pnlref1nerror;
-	PnlWdbeUntHk1NVector* pnlhk1nvector;
 	PnlWdbeUntHk1NModule* pnlhk1nmodule;
-	PnlWdbeUnt1NTarget* pnl1ntarget;
-	PnlWdbeUntFwd1NController* pnlfwd1ncontroller;
-	PnlWdbeUnt1NPeripheral* pnl1nperipheral;
+	PnlWdbeUntHk1NVector* pnlhk1nvector;
+	PnlWdbeUntRef1NError* pnlref1nerror;
 	PnlWdbeUnt1NBank* pnl1nbank;
+	PnlWdbeUntFwd1NController* pnlfwd1ncontroller;
+	PnlWdbeUnt1NTarget* pnl1ntarget;
 	PnlWdbeUntSil1NUnit* pnlsil1nunit;
+	PnlWdbeUnt1NPeripheral* pnl1nperipheral;
 	PnlWdbeUntDetail* pnldetail;
 
 	WdbeMUnit recUnt;

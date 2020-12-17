@@ -20,8 +20,8 @@ public class QryWdbeErrList {
 	public static class VecVOrd {
 
 		public static final int REU = 1;
-		public static final int RET = 2;
-		public static final int SRF = 3;
+		public static final int SRF = 2;
+		public static final int RET = 3;
 
 		public static int getIx(
 					String sref
@@ -29,8 +29,8 @@ public class QryWdbeErrList {
 			String s = sref.toLowerCase();
 
 			if (s.equals("reu")) return REU;
-			if (s.equals("ret")) return RET;
 			if (s.equals("srf")) return SRF;
+			if (s.equals("ret")) return RET;
 
 			return 0;
 		};
@@ -39,8 +39,8 @@ public class QryWdbeErrList {
 					int ix
 				) {
 			if (ix == REU) return("reu");
-			if (ix == RET) return("ret");
 			if (ix == SRF) return("srf");
+			if (ix == RET) return("ret");
 
 			return "";
 		};

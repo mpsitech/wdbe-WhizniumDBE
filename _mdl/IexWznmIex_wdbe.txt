@@ -1115,7 +1115,8 @@ IexWdbePrj	prj		1.0.6
 		ImeIMImpexpcol.srefIxVBasetype	srefsIxWOccurrence	srefRefWznmMTablecol	sref	Short	irefRefWznmMImpexp	srefIxVConvtype	Defval	srefRefWznmMPreset	srefRefWznmMStub	srefRefWznmMVectoritem
 		tbl	tbl	grp	grp		0	preset		PreWdbeGroup
 		tbl	tbl	own	own		0	preset		PreWdbeOwner
-		tbl	tbl	refWdbeMProject	refWdbeMProject		19	sup
+		tbl	tbl	prjRefWdbeMProject	prjRefWdbeMProject		19	sup
+		tbl	tbl	prjNum	prjNum		0	incr
 		tbl	fil;tbl	Major	Major	maj	0	void
 		tbl	fil;tbl	Minor	Minor	min	0	void
 		tbl	fil;tbl	Sub	Sub	sub	0	void

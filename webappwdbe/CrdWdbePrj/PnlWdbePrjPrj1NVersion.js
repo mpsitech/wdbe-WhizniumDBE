@@ -1,40 +1,40 @@
 // --- expand state management
 function minimize(updh) {
-	if (retrieveSi(srcdoc, "StatAppWdbePrj1NVersion", "srefIxWdbeVExpstate") == "mind") return;
+	if (retrieveSi(srcdoc, "StatAppWdbePrjPrj1NVersion", "srefIxWdbeVExpstate") == "mind") return;
 
-	setSi(srcdoc, "StatAppWdbePrj1NVersion", "srefIxWdbeVExpstate", "mind");
+	setSi(srcdoc, "StatAppWdbePrjPrj1NVersion", "srefIxWdbeVExpstate", "mind");
 
-	getRecwnd().changeHeight("1NVersion", 30, updh);
+	getRecwnd().changeHeight("Prj1NVersion", 30, updh);
 	doc.getElementById("tdSide").setAttribute("height", "30");
-	doc.getElementById("1NVersion_side").setAttribute("height", "30");
-	doc.getElementById("1NVersion_cont").setAttribute("height", "30");
+	doc.getElementById("Prj1NVersion_side").setAttribute("height", "30");
+	doc.getElementById("Prj1NVersion_cont").setAttribute("height", "30");
 
 	// change content
-	doc.getElementById("1NVersion_side").src = "./PnlWdbePrj1NVersion_aside.html";
-	doc.getElementById("1NVersion_cont").src = "./PnlWdbePrj1NVersion_a.html";
+	doc.getElementById("Prj1NVersion_side").src = "./PnlWdbePrjPrj1NVersion_aside.html";
+	doc.getElementById("Prj1NVersion_cont").src = "./PnlWdbePrjPrj1NVersion_a.html";
 };
 
 function regularize() {
-	if (retrieveSi(srcdoc, "StatAppWdbePrj1NVersion", "srefIxWdbeVExpstate") == "regd") return;
+	if (retrieveSi(srcdoc, "StatAppWdbePrjPrj1NVersion", "srefIxWdbeVExpstate") == "regd") return;
 
-	setSi(srcdoc, "StatAppWdbePrj1NVersion", "srefIxWdbeVExpstate", "regd");
+	setSi(srcdoc, "StatAppWdbePrjPrj1NVersion", "srefIxWdbeVExpstate", "regd");
 
-	getRecwnd().changeHeight("1NVersion", 255, true);
+	getRecwnd().changeHeight("Prj1NVersion", 255, true);
 	doc.getElementById("tdSide").setAttribute("height", "255");
-	doc.getElementById("1NVersion_side").setAttribute("height", "255");
-	doc.getElementById("1NVersion_cont").setAttribute("height", "255");
+	doc.getElementById("Prj1NVersion_side").setAttribute("height", "255");
+	doc.getElementById("Prj1NVersion_cont").setAttribute("height", "255");
 
 	// change content
-	doc.getElementById("1NVersion_side").src = "./PnlWdbePrj1NVersion_bside.html";
-	doc.getElementById("1NVersion_cont").src = "./PnlWdbePrj1NVersion_b.html";
+	doc.getElementById("Prj1NVersion_side").src = "./PnlWdbePrjPrj1NVersion_bside.html";
+	doc.getElementById("Prj1NVersion_cont").src = "./PnlWdbePrjPrj1NVersion_b.html";
 };
 
 // --- view initialization and refresh
 function initA() {
 	if (!doc) return;
 
-	sidedoc = doc.getElementById("1NVersion_side").contentDocument;
-	contdoc = doc.getElementById("1NVersion_cont").contentDocument;
+	sidedoc = doc.getElementById("Prj1NVersion_side").contentDocument;
+	contdoc = doc.getElementById("Prj1NVersion_cont").contentDocument;
 	hdrdoc = null;
 	tbldoc = null;
 	ftrdoc = null;
@@ -45,23 +45,23 @@ function initA() {
 function initBD(bNotD) {
 	if (!doc) return;
 
-	sidedoc = doc.getElementById("1NVersion_side").contentDocument;
-	contdoc = doc.getElementById("1NVersion_cont").contentDocument;
-	hdrdoc = contdoc.getElementById("1NVersion_hdr").contentDocument;
-	tbldoc = contdoc.getElementById("1NVersion_tbl").contentDocument;
-	ftrdoc = contdoc.getElementById("1NVersion_ftr").contentDocument;
+	sidedoc = doc.getElementById("Prj1NVersion_side").contentDocument;
+	contdoc = doc.getElementById("Prj1NVersion_cont").contentDocument;
+	hdrdoc = contdoc.getElementById("Prj1NVersion_hdr").contentDocument;
+	tbldoc = contdoc.getElementById("Prj1NVersion_tbl").contentDocument;
+	ftrdoc = contdoc.getElementById("Prj1NVersion_ftr").contentDocument;
 
-	setTextContent(hdrdoc, hdrdoc.getElementById("Cpt"), retrieveTi(srcdoc, "TagWdbePrj1NVersion", "Cpt"));
+	setTextContent(hdrdoc, hdrdoc.getElementById("Cpt"), retrieveTi(srcdoc, "TagWdbePrjPrj1NVersion", "Cpt"));
 
 	// column headers in refreshBD() only
 
-	setTextContent(ftrdoc, ftrdoc.getElementById("TrsGoto"), retrieveTi(srcdoc, "TagWdbePrj1NVersion", "Trs"));
+	setTextContent(ftrdoc, ftrdoc.getElementById("TrsGoto"), retrieveTi(srcdoc, "TagWdbePrjPrj1NVersion", "Trs"));
 
 	refreshBD(bNotD, true);
 };
 
 function init() {
-	var srefIxWdbeVExpstate = retrieveSi(srcdoc, "StatAppWdbePrj1NVersion", "srefIxWdbeVExpstate");
+	var srefIxWdbeVExpstate = retrieveSi(srcdoc, "StatAppWdbePrjPrj1NVersion", "srefIxWdbeVExpstate");
 
 	if (srefIxWdbeVExpstate == "mind") initA();
 	else if (srefIxWdbeVExpstate == "regd") initBD(true);
@@ -69,17 +69,17 @@ function init() {
 };
 
 function refreshA() {
-	setTextContent(contdoc, contdoc.getElementById("Cpt"), retrieveTi(srcdoc, "TagWdbePrj1NVersion", "Cpt") + " (" + retrieveSi(srcdoc, "StatShrQryWdbePrj1NVersion", "ntot") + ")");
+	setTextContent(contdoc, contdoc.getElementById("Cpt"), retrieveTi(srcdoc, "TagWdbePrjPrj1NVersion", "Cpt") + " (" + retrieveSi(srcdoc, "StatShrQryWdbePrjPrj1NVersion", "ntot") + ")");
 };
 
 function refreshBD(bNotD, chgcol) {
 	// obtain record set characteristics
-	var jnumSel = parseInt(retrieveSi(srcdoc, "StgIacQryWdbePrj1NVersion", "jnum"));
-	var jnumFirstdisp = parseInt(retrieveSi(srcdoc, "StatAppQryWdbePrj1NVersion", "jnumFirstdisp"));
-	var ndisp = parseInt(retrieveSi(srcdoc, "StatAppQryWdbePrj1NVersion", "ndisp"));
-	var jnumFirstload = parseInt(retrieveSi(srcdoc, "StatShrQryWdbePrj1NVersion", "jnumFirstload"));
-	var nload = parseInt(retrieveSi(srcdoc, "StatShrQryWdbePrj1NVersion", "nload"));
-	var ntot = parseInt(retrieveSi(srcdoc, "StatShrQryWdbePrj1NVersion", "ntot"));
+	var jnumSel = parseInt(retrieveSi(srcdoc, "StgIacQryWdbePrjPrj1NVersion", "jnum"));
+	var jnumFirstdisp = parseInt(retrieveSi(srcdoc, "StatAppQryWdbePrjPrj1NVersion", "jnumFirstdisp"));
+	var ndisp = parseInt(retrieveSi(srcdoc, "StatAppQryWdbePrjPrj1NVersion", "ndisp"));
+	var jnumFirstload = parseInt(retrieveSi(srcdoc, "StatShrQryWdbePrjPrj1NVersion", "jnumFirstload"));
+	var nload = parseInt(retrieveSi(srcdoc, "StatShrQryWdbePrjPrj1NVersion", "nload"));
+	var ntot = parseInt(retrieveSi(srcdoc, "StatShrQryWdbePrjPrj1NVersion", "ntot"));
 
 	var mytbl, mytr, mytd, myimg, mycg, mycol;
 
@@ -93,10 +93,10 @@ function refreshBD(bNotD, chgcol) {
 	// update column characteristics
 	if (chgcol) {
 		// obtain column (header) characteristics
-		var firstcol = parseInt(retrieveSi(srcdoc, "StatAppQryWdbePrj1NVersion", "firstcol"));
-		var ncol = parseInt(retrieveSi(srcdoc, "StatAppQryWdbePrj1NVersion", "ncol"));
+		var firstcol = parseInt(retrieveSi(srcdoc, "StatAppQryWdbePrjPrj1NVersion", "firstcol"));
+		var ncol = parseInt(retrieveSi(srcdoc, "StatAppQryWdbePrjPrj1NVersion", "ncol"));
 
-		var TcoRefWidth = parseInt(retrieveSi(srcdoc, "StgIacWdbePrj1NVersion", "TcoRefWidth"));
+		var TcoRefWidth = parseInt(retrieveSi(srcdoc, "StgIacWdbePrjPrj1NVersion", "TcoRefWidth"));
 
 		// col data is stored in document variables
 		doc.cols = new Array();
@@ -186,7 +186,7 @@ function refreshBD(bNotD, chgcol) {
 			mytd = tbldoc.createElementNS("http://www.w3.org/1999/xhtml", "html:td");
 			mytd.setAttribute("id", doc.cols[j]);
 			mytd.setAttribute("class", "col");
-			setTextContent(tbldoc, mytd, retrieveTi(srcdoc, "TagWdbePrj1NVersion", doc.cols[j]));
+			setTextContent(tbldoc, mytd, retrieveTi(srcdoc, "TagWdbePrjPrj1NVersion", doc.cols[j]));
 
 			mytr.appendChild(mytd);
 		};
@@ -201,7 +201,7 @@ function refreshBD(bNotD, chgcol) {
 	// reset jnumFirstdisp if required
 	if ((jnumFirstdisp < jnumFirstload) || (jnumFirstdisp > (jnumFirstload+nload-1))) {
 		jnumFirstdisp = jnumFirstload;
-		setSi(srcdoc, "StatAppQryWdbePrj1NVersion", "jnumFirstdisp", jnumFirstdisp);
+		setSi(srcdoc, "StatAppQryWdbePrjPrj1NVersion", "jnumFirstdisp", jnumFirstdisp);
 	};
 
 	// scroll bar
@@ -228,8 +228,8 @@ function refreshBD(bNotD, chgcol) {
 
 		jnum = jnumFirstdisp+i-1;
 
-		// find element in ListWdbeQPrj1NVersion
-		rownode = getRownode(srcdoc, "ListWdbeQPrj1NVersion", jnum);
+		// find element in ListWdbeQPrjPrj1NVersion
+		rownode = getRownode(srcdoc, "ListWdbeQPrjPrj1NVersion", jnum);
 
 		if (rownode) {
 			// regular data row
@@ -299,7 +299,7 @@ function refreshBD(bNotD, chgcol) {
 	var jnumLastdisp = jnumFirstdisp + ndisp - 1;
 	if (jnumLastdisp > ntot) jnumLastdisp = ntot;
 
-	setTextContent(ftrdoc, ftrdoc.getElementById("TxtShowing"), strShowing(retrieveTi(srcdoc, "TagWdbePrj1NVersion", "TxtShowing1"), jnumFirstdisp, jnumLastdisp, ntot, retrieveTi(srcdoc, "TagWdbePrj1NVersion", "TxtShowing2")));
+	setTextContent(ftrdoc, ftrdoc.getElementById("TxtShowing"), strShowing(retrieveTi(srcdoc, "TagWdbePrjPrj1NVersion", "TxtShowing1"), jnumFirstdisp, jnumLastdisp, ntot, retrieveTi(srcdoc, "TagWdbePrjPrj1NVersion", "TxtShowing2")));
 
 	if (ntot == 0) {
 		ftrdoc.getElementById("TrsGoto").setAttribute("class", "ftr_butdis");
@@ -361,21 +361,21 @@ function refreshBD(bNotD, chgcol) {
 		ftrdoc.getElementById("TrsLast").setAttribute("onclick", "handleTrsLastClick()");
 	};
 
-	refreshCsi(ftrdoc, "CsiQst", srcdoc, "FeedFCsiQst", retrieveCi(srcdoc, "ContInfWdbePrj1NVersion", "numFCsiQst"));
+	refreshCsi(ftrdoc, "CsiQst", srcdoc, "FeedFCsiQst", retrieveCi(srcdoc, "ContInfWdbePrjPrj1NVersion", "numFCsiQst"));
 
 	height = 20 + 18*ndisp;
 
-	getRecwnd().changeHeight("1NVersion", height+55, true);
+	getRecwnd().changeHeight("Prj1NVersion", height+55, true);
 	doc.getElementById("tdSide").setAttribute("height", "" + (height+55));
-	doc.getElementById("1NVersion_side").setAttribute("height", "" + (height+55));
-	doc.getElementById("1NVersion_cont").setAttribute("height", "" + (height+55));
+	doc.getElementById("Prj1NVersion_side").setAttribute("height", "" + (height+55));
+	doc.getElementById("Prj1NVersion_cont").setAttribute("height", "" + (height+55));
 	sidedoc.getElementById("tdFlex").setAttribute("height", "" + (height+55-30));
 	contdoc.getElementById("tdTbl").setAttribute("height", "" + height);
-	contdoc.getElementById("1NVersion_tbl").setAttribute("height", "" + height);
+	contdoc.getElementById("Prj1NVersion_tbl").setAttribute("height", "" + height);
 };
 
 function refresh() {
-	var srefIxWdbeVExpstate = retrieveSi(srcdoc, "StatAppWdbePrj1NVersion", "srefIxWdbeVExpstate");
+	var srefIxWdbeVExpstate = retrieveSi(srcdoc, "StatAppWdbePrjPrj1NVersion", "srefIxWdbeVExpstate");
 
 	if (srefIxWdbeVExpstate == "mind") refreshA();
 	else if (srefIxWdbeVExpstate == "regd") refreshBD(true, false);
@@ -387,7 +387,7 @@ function handleLoad() {
 	scrJref = location.search.substr(location.search.indexOf("scrJref=")+8);
 
 	doc = document;
-	srcdoc = doc.getElementById("1NVersion_src").contentDocument;
+	srcdoc = doc.getElementById("Prj1NVersion_src").contentDocument;
 
 	var str = serializeDpchApp("DpchAppWdbeInit", scrJref);
 	sendReq(str, doc, handleDpchAppInitReply, true);
@@ -404,7 +404,7 @@ function handleButRegularizeClick() {
 };
 
 function handleButClipboardClick() {
-	copyToClipboard(document, srcdoc, "WdbePrj1NVersion", "ListWdbeQPrj1NVersion", retrieveTi(srcdoc, "TagWdbePrj1NVersion", "TxtRecord1"), retrieveTi(srcdoc, "TagWdbePrj1NVersion", "TxtRecord2"),
+	copyToClipboard(document, srcdoc, "WdbePrjPrj1NVersion", "ListWdbeQPrjPrj1NVersion", retrieveTi(srcdoc, "TagWdbePrjPrj1NVersion", "TxtRecord1"), retrieveTi(srcdoc, "TagWdbePrjPrj1NVersion", "TxtRecord2"),
 				["Ref"],
 				["ref"]);
 };
@@ -414,13 +414,13 @@ function handleButClipboardClick() {
 function handleTblSelect(jnum) {
 	var jnumFirstdisp, jnumLastdisp, jnumFirstload;
 
-	var oldJnum = parseInt(retrieveSi(srcdoc, "StgIacQryWdbePrj1NVersion", "jnum"));
-	var oldJnumFirstdisp = parseInt(retrieveSi(srcdoc, "StatAppQryWdbePrj1NVersion", "jnumFirstdisp"));
-	var oldJnumFirstload = parseInt(retrieveSi(srcdoc, "StatShrQryWdbePrj1NVersion", "jnumFirstload"));
+	var oldJnum = parseInt(retrieveSi(srcdoc, "StgIacQryWdbePrjPrj1NVersion", "jnum"));
+	var oldJnumFirstdisp = parseInt(retrieveSi(srcdoc, "StatAppQryWdbePrjPrj1NVersion", "jnumFirstdisp"));
+	var oldJnumFirstload = parseInt(retrieveSi(srcdoc, "StatShrQryWdbePrjPrj1NVersion", "jnumFirstload"));
 
-	var ndisp = parseInt(retrieveSi(srcdoc, "StatAppQryWdbePrj1NVersion", "ndisp"));
-	var nload = parseInt(retrieveSi(srcdoc, "StatShrQryWdbePrj1NVersion", "nload"));
-	var ntot = parseInt(retrieveSi(srcdoc, "StatShrQryWdbePrj1NVersion", "ntot"));
+	var ndisp = parseInt(retrieveSi(srcdoc, "StatAppQryWdbePrjPrj1NVersion", "ndisp"));
+	var nload = parseInt(retrieveSi(srcdoc, "StatShrQryWdbePrjPrj1NVersion", "nload"));
+	var ntot = parseInt(retrieveSi(srcdoc, "StatShrQryWdbePrjPrj1NVersion", "ntot"));
 
 	if (ntot == 0) return;
 
@@ -428,7 +428,7 @@ function handleTblSelect(jnum) {
 	if (jnum > ntot) jnum = ntot;
 
 	if (oldJnum != jnum) {
-		setSi(srcdoc, "StgIacQryWdbePrj1NVersion", "jnum", jnum);
+		setSi(srcdoc, "StgIacQryWdbePrjPrj1NVersion", "jnum", jnum);
 
 		if (jnum != 0) {
 			if (!((jnum >= oldJnumFirstdisp) && (jnum <= (oldJnumFirstdisp+ndisp-1)))) {
@@ -436,7 +436,7 @@ function handleTblSelect(jnum) {
 				if ((jnumFirstdisp+ndisp-1) > ntot) jnumFirstdisp = ntot-ndisp+1;
 				if (jnumFirstdisp < 1) jnumFirstdisp = 1;
 
-				setSi(srcdoc, "StatAppQryWdbePrj1NVersion", "jnumFirstdisp", jnumFirstdisp);
+				setSi(srcdoc, "StatAppQryWdbePrjPrj1NVersion", "jnumFirstdisp", jnumFirstdisp);
 
 				jnumLastdisp = jnumFirstdisp + ndisp - 1;
 				if (jnumLastdisp > ntot) jnumLastdisp = ntot;
@@ -445,12 +445,12 @@ function handleTblSelect(jnum) {
 					jnumFirstload = jnum - Math.ceil(0.5*nload) + 1;
 					if (jnumFirstload < 1) jnumFirstload = 1;
 
-					setSi(srcdoc, "StgIacQryWdbePrj1NVersion", "jnumFirstload", jnumFirstload);
+					setSi(srcdoc, "StgIacQryWdbePrjPrj1NVersion", "jnumFirstload", jnumFirstload);
 				};
 			};
 		};
 
-		var str = serializeDpchAppData(srcdoc, "DpchAppWdbePrj1NVersionData", scrJref, "StgIacQryWdbePrj1NVersion");
+		var str = serializeDpchAppData(srcdoc, "DpchAppWdbePrjPrj1NVersionData", scrJref, "StgIacQryWdbePrjPrj1NVersion");
 		sendReq(str, doc, handleDpchAppDataDoReply);
 	};
 };
@@ -458,12 +458,12 @@ function handleTblSelect(jnum) {
 function changeTblJnumFirstdisp(jnumFirstdisp, dJnumFirstdisp, dpgJnumFirstdisp) {
 	var jnumLastdisp, jnumFirstload;
 
-	var oldJnumFirstdisp = parseInt(retrieveSi(srcdoc, "StatAppQryWdbePrj1NVersion", "jnumFirstdisp"));
-	var oldJnumFirstload = parseInt(retrieveSi(srcdoc, "StatShrQryWdbePrj1NVersion", "jnumFirstload"));
+	var oldJnumFirstdisp = parseInt(retrieveSi(srcdoc, "StatAppQryWdbePrjPrj1NVersion", "jnumFirstdisp"));
+	var oldJnumFirstload = parseInt(retrieveSi(srcdoc, "StatShrQryWdbePrjPrj1NVersion", "jnumFirstload"));
 
-	var ndisp = parseInt(retrieveSi(srcdoc, "StatAppQryWdbePrj1NVersion", "ndisp"));
-	var nload = parseInt(retrieveSi(srcdoc, "StatShrQryWdbePrj1NVersion", "nload"));
-	var ntot = parseInt(retrieveSi(srcdoc, "StatShrQryWdbePrj1NVersion", "ntot"));
+	var ndisp = parseInt(retrieveSi(srcdoc, "StatAppQryWdbePrjPrj1NVersion", "ndisp"));
+	var nload = parseInt(retrieveSi(srcdoc, "StatShrQryWdbePrjPrj1NVersion", "nload"));
+	var ntot = parseInt(retrieveSi(srcdoc, "StatShrQryWdbePrjPrj1NVersion", "ntot"));
 
 	if (ntot == 0) return;
 
@@ -475,40 +475,40 @@ function changeTblJnumFirstdisp(jnumFirstdisp, dJnumFirstdisp, dpgJnumFirstdisp)
 	if (jnumFirstdisp < 1) jnumFirstdisp = 1;
 
 	if (oldJnumFirstdisp != jnumFirstdisp) {
-		setSi(srcdoc, "StatAppQryWdbePrj1NVersion", "jnumFirstdisp", jnumFirstdisp);
+		setSi(srcdoc, "StatAppQryWdbePrjPrj1NVersion", "jnumFirstdisp", jnumFirstdisp);
 
 		jnumLastdisp = jnumFirstdisp + ndisp - 1;
 		if (jnumLastdisp > ntot) jnumLastdisp = ntot;
 
 		if ((jnumFirstdisp >= oldJnumFirstload) && (jnumLastdisp <= (oldJnumFirstload+nload-1))) {
-			refreshBD((retrieveSi(srcdoc, "StatAppWdbePrj1NVersion", "srefIxWdbeVExpstate") == "regd"), false);
+			refreshBD((retrieveSi(srcdoc, "StatAppWdbePrjPrj1NVersion", "srefIxWdbeVExpstate") == "regd"), false);
 
 		} else {
 			jnumFirstload = jnumFirstdisp - Math.ceil(0.5*(nload-ndisp));
 			if (jnumFirstload < 1) jnumFirstload = 1;
 
-			setSi(srcdoc, "StgIacQryWdbePrj1NVersion", "jnumFirstload", jnumFirstload);
+			setSi(srcdoc, "StgIacQryWdbePrjPrj1NVersion", "jnumFirstload", jnumFirstload);
 
-			var str = serializeDpchAppData(srcdoc, "DpchAppWdbePrj1NVersionData", scrJref, "StgIacQryWdbePrj1NVersion");
+			var str = serializeDpchAppData(srcdoc, "DpchAppWdbePrjPrj1NVersionData", scrJref, "StgIacQryWdbePrjPrj1NVersion");
 			sendReq(str, doc, handleDpchAppDataDoReply);
 		};
 	};
 };
 
 function handleTblCpreviousClick() {
-	var oldFirstcol = parseInt(retrieveSi(srcdoc, "StatAppQryWdbePrj1NVersion", "firstcol"));
+	var oldFirstcol = parseInt(retrieveSi(srcdoc, "StatAppQryWdbePrjPrj1NVersion", "firstcol"));
 
-	setSi(srcdoc, "StatAppQryWdbePrj1NVersion", "firstcol", "" + (oldFirstcol-1));
+	setSi(srcdoc, "StatAppQryWdbePrjPrj1NVersion", "firstcol", "" + (oldFirstcol-1));
 
-	refreshBD((retrieveSi(srcdoc, "StatAppWdbePrj1NVersion", "srefIxWdbeVExpstate") == "regd"), true);
+	refreshBD((retrieveSi(srcdoc, "StatAppWdbePrjPrj1NVersion", "srefIxWdbeVExpstate") == "regd"), true);
 };
 
 function handleTblCnextClick() {
-	var oldFirstcol = parseInt(retrieveSi(srcdoc, "StatAppQryWdbePrj1NVersion", "firstcol"));
+	var oldFirstcol = parseInt(retrieveSi(srcdoc, "StatAppQryWdbePrjPrj1NVersion", "firstcol"));
 
-	setSi(srcdoc, "StatAppQryWdbePrj1NVersion", "firstcol", "" + (oldFirstcol+1));
+	setSi(srcdoc, "StatAppQryWdbePrjPrj1NVersion", "firstcol", "" + (oldFirstcol+1));
 
-	refreshBD((retrieveSi(srcdoc, "StatAppWdbePrj1NVersion", "srefIxWdbeVExpstate") == "regd"), true);
+	refreshBD((retrieveSi(srcdoc, "StatAppWdbePrjPrj1NVersion", "srefIxWdbeVExpstate") == "regd"), true);
 };
 
 function handleTrsFirstClick() {
@@ -516,19 +516,19 @@ function handleTrsFirstClick() {
 };
 
 function handleTrsPreviousClick() {
-	var jnum = parseInt(retrieveSi(srcdoc, "StgIacQryWdbePrj1NVersion", "jnum"));
+	var jnum = parseInt(retrieveSi(srcdoc, "StgIacQryWdbePrjPrj1NVersion", "jnum"));
 
 	handleTblSelect(jnum-1);
 };
 
 function handleTrsNextClick() {
-	var jnum = parseInt(retrieveSi(srcdoc, "StgIacQryWdbePrj1NVersion", "jnum"));
+	var jnum = parseInt(retrieveSi(srcdoc, "StgIacQryWdbePrjPrj1NVersion", "jnum"));
 
 	handleTblSelect(jnum+1);
 };
 
 function handleTrsLastClick() {
-	var ntot = parseInt(retrieveSi(srcdoc, "StatShrQryWdbePrj1NVersion", "ntot"));
+	var ntot = parseInt(retrieveSi(srcdoc, "StatShrQryWdbePrjPrj1NVersion", "ntot"));
 
 	handleTblSelect(ntot);
 };
@@ -561,7 +561,7 @@ function handleTrsRowKey(evt) {
 };
 
 function setTsbPos(pos) {
-	var ndisp = parseInt(retrieveSi(srcdoc, "StatAppQryWdbePrj1NVersion", "ndisp"));
+	var ndisp = parseInt(retrieveSi(srcdoc, "StatAppQryWdbePrjPrj1NVersion", "ndisp"));
 	var vpos = (18 + Math.round(pos * (18*(ndisp-2))));
 
 	tbldoc.getElementById("TsbJpupr").setAttribute("height", "" + (vpos-10));
@@ -596,7 +596,7 @@ function handleTsbMdn() {
 };
 
 function handleTsbMove(evt) {
-	var ndisp = parseInt(retrieveSi(srcdoc, "StatAppQryWdbePrj1NVersion", "ndisp"));
+	var ndisp = parseInt(retrieveSi(srcdoc, "StatAppQryWdbePrjPrj1NVersion", "ndisp"));
 
 	if ((evt.clientY >= (18+20)) && (evt.clientY <= (18*(ndisp-1)+20))) {
 		pos = ((evt.clientY-20) - 18) / (18*(ndisp-2));
@@ -608,8 +608,8 @@ function handleTsbMup(evt) {
 	tbldoc.getElementById("tdTsb").removeAttribute("onmousemove");
 	tbldoc.getElementById("tdTsb").removeAttribute("onmouseup");
 
-	var ntot = parseInt(retrieveSi(srcdoc, "StatShrQryWdbePrj1NVersion", "ntot"));
-	var ndisp = parseInt(retrieveSi(srcdoc, "StatAppQryWdbePrj1NVersion", "ndisp"));
+	var ntot = parseInt(retrieveSi(srcdoc, "StatShrQryWdbePrjPrj1NVersion", "ntot"));
+	var ndisp = parseInt(retrieveSi(srcdoc, "StatAppQryWdbePrjPrj1NVersion", "ndisp"));
 
 	var pos = ((evt.clientY-20) - 18) / (18*(ndisp-2));
 
@@ -619,12 +619,12 @@ function handleTsbMup(evt) {
 // --- generalized event handlers for shared controls
 
 function handleButClick(ctlsref) {
-	var str = serializeDpchAppDo(srcdoc, "DpchAppWdbePrj1NVersionDo", scrJref, ctlsref + "Click");
+	var str = serializeDpchAppDo(srcdoc, "DpchAppWdbePrjPrj1NVersionDo", scrJref, ctlsref + "Click");
 	sendReq(str, doc, handleDpchAppDataDoReply);
 };
 
 function handleButCrdopenClick(ctlsref) {
-	var str = serializeDpchAppDo(srcdoc, "DpchAppWdbePrj1NVersionDo", scrJref, ctlsref + "Click");
+	var str = serializeDpchAppDo(srcdoc, "DpchAppWdbePrjPrj1NVersionDo", scrJref, ctlsref + "Click");
 	sendReq(str, doc, handleDpchAppDoCrdopenReply);
 };
 
@@ -632,22 +632,22 @@ function handleButCrdopenClick(ctlsref) {
 function mergeDpchEngData(dom) {
 	var mask = [];
 
-	if (updateSrcblock(dom, "DpchEngWdbePrj1NVersionData", "ContInfWdbePrj1NVersion", srcdoc)) mask.push("continf");
-	if (updateSrcblock(dom, "DpchEngWdbePrj1NVersionData", "FeedFCsiQst", srcdoc)) mask.push("feedFCsiQst");
-	if (updateSrcblock(dom, "DpchEngWdbePrj1NVersionData", "StatAppWdbePrj1NVersion", srcdoc)) mask.push("statapp");
-	if (updateSrcblock(dom, "DpchEngWdbePrj1NVersionData", "StatShrWdbePrj1NVersion", srcdoc)) mask.push("statshr");
-	if (updateSrcblock(dom, "DpchEngWdbePrj1NVersionData", "StgIacWdbePrj1NVersion", srcdoc)) mask.push("stgiac");
-	if (updateSrcblock(dom, "DpchEngWdbePrj1NVersionData", "TagWdbePrj1NVersion", srcdoc)) mask.push("tag");
-	if (updateSrcblock(dom, "DpchEngWdbePrj1NVersionData", "ListWdbeQPrj1NVersion", srcdoc)) mask.push("rst");
-	if (updateSrcblock(dom, "DpchEngWdbePrj1NVersionData", "StatAppQryWdbePrj1NVersion", srcdoc)) mask.push("statappqry");
-	if (updateSrcblock(dom, "DpchEngWdbePrj1NVersionData", "StatShrQryWdbePrj1NVersion", srcdoc)) mask.push("statshrqry");
-	if (updateSrcblock(dom, "DpchEngWdbePrj1NVersionData", "StgIacQryWdbePrj1NVersion", srcdoc)) mask.push("stgiacqry");
+	if (updateSrcblock(dom, "DpchEngWdbePrjPrj1NVersionData", "ContInfWdbePrjPrj1NVersion", srcdoc)) mask.push("continf");
+	if (updateSrcblock(dom, "DpchEngWdbePrjPrj1NVersionData", "FeedFCsiQst", srcdoc)) mask.push("feedFCsiQst");
+	if (updateSrcblock(dom, "DpchEngWdbePrjPrj1NVersionData", "StatAppWdbePrjPrj1NVersion", srcdoc)) mask.push("statapp");
+	if (updateSrcblock(dom, "DpchEngWdbePrjPrj1NVersionData", "StatShrWdbePrjPrj1NVersion", srcdoc)) mask.push("statshr");
+	if (updateSrcblock(dom, "DpchEngWdbePrjPrj1NVersionData", "StgIacWdbePrjPrj1NVersion", srcdoc)) mask.push("stgiac");
+	if (updateSrcblock(dom, "DpchEngWdbePrjPrj1NVersionData", "TagWdbePrjPrj1NVersion", srcdoc)) mask.push("tag");
+	if (updateSrcblock(dom, "DpchEngWdbePrjPrj1NVersionData", "ListWdbeQPrjPrj1NVersion", srcdoc)) mask.push("rst");
+	if (updateSrcblock(dom, "DpchEngWdbePrjPrj1NVersionData", "StatAppQryWdbePrjPrj1NVersion", srcdoc)) mask.push("statappqry");
+	if (updateSrcblock(dom, "DpchEngWdbePrjPrj1NVersionData", "StatShrQryWdbePrjPrj1NVersion", srcdoc)) mask.push("statshrqry");
+	if (updateSrcblock(dom, "DpchEngWdbePrjPrj1NVersionData", "StgIacQryWdbePrjPrj1NVersion", srcdoc)) mask.push("stgiacqry");
 
 	return mask;
 };
 
 function handleDpchEng(dom, dpch) {
-	if (dpch == "DpchEngWdbePrj1NVersionData") {
+	if (dpch == "DpchEngWdbePrjPrj1NVersionData") {
 		mergeDpchEngData(dom);
 		refresh();
 		// IP handleDpchEng --- INSERT
@@ -664,11 +664,11 @@ function handleDpchAppInitReply() {
 
 		blk = retrieveBlock(dom, "//wdbe:*");
 		if (blk) {
-			if (blk.nodeName == "DpchEngWdbePrj1NVersionData") {
+			if (blk.nodeName == "DpchEngWdbePrjPrj1NVersionData") {
 				mergeDpchEngData(dom);
 				init();
 
-				getRecwnd().setInitdone("1NVersion");
+				getRecwnd().setInitdone("Prj1NVersion");
 			};
 		};
 	};
@@ -687,7 +687,7 @@ function handleDpchAppDataDoReply() {
 			if (blk.nodeName == "DpchEngWdbeConfirm") {
 				// do nothing
 
-			} else if (blk.nodeName == "DpchEngWdbePrj1NVersionData") {
+			} else if (blk.nodeName == "DpchEngWdbePrjPrj1NVersionData") {
 				mergeDpchEngData(dom);
 				refresh();
 			};

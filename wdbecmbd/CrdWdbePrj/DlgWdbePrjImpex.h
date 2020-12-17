@@ -417,10 +417,10 @@ public:
 	};
 
 	bool evalButDneActive(DbsWdbe* dbswdbe);
+	bool evalLfiDldActive(DbsWdbe* dbswdbe);
 	bool evalImpButAutActive(DbsWdbe* dbswdbe);
 	bool evalImpButRunActive(DbsWdbe* dbswdbe);
 	bool evalImpButStoActive(DbsWdbe* dbswdbe);
-	bool evalLfiDldActive(DbsWdbe* dbswdbe);
 	bool evalIfiUldActive(DbsWdbe* dbswdbe);
 
 public:
@@ -486,9 +486,9 @@ private:
 
 	std::string handleDownloadInSgeDone(DbsWdbe* dbswdbe);
 
-	void handleTimerInSgePrsidle(DbsWdbe* dbswdbe, const std::string& sref);
-	void handleTimerInSgeImpidle(DbsWdbe* dbswdbe, const std::string& sref);
 	void handleTimerWithSrefMonInSgeImport(DbsWdbe* dbswdbe);
+	void handleTimerInSgeImpidle(DbsWdbe* dbswdbe, const std::string& sref);
+	void handleTimerInSgePrsidle(DbsWdbe* dbswdbe, const std::string& sref);
 
 private:
 	void changeStage(DbsWdbe* dbswdbe, Sbecore::uint _ixVSge, DpchEngWdbe** dpcheng = NULL);

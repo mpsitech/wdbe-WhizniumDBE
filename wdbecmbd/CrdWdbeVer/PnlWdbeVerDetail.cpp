@@ -134,7 +134,7 @@ void PnlWdbeVerDetail::refreshRecVer(
 	if (recVer.ref == 0) xchg->removeClstns(VecWdbeVCall::CALLWDBEVERJSTEMOD_VEREQ, jref);
 	else xchg->addRefClstn(VecWdbeVCall::CALLWDBEVERJSTEMOD_VEREQ, jref, Clstn::VecVJobmask::ALL, 0, true, recVer.ref);
 
-	continf.TxtPrj = StubWdbe::getStubPrjStd(dbswdbe, recVer.refWdbeMProject, ixWdbeVLocale, Stub::VecVNonetype::FULL);
+	continf.TxtPrj = StubWdbe::getStubPrjStd(dbswdbe, recVer.prjRefWdbeMProject, ixWdbeVLocale, Stub::VecVNonetype::FULL);
 	contiac.TxfMaj = to_string(recVer.Major);
 	contiac.TxfMin = to_string(recVer.Minor);
 	contiac.TxfSub = to_string(recVer.Sub);
@@ -326,7 +326,7 @@ void PnlWdbeVerDetail::handleDpchAppDoButPrjViewClick(
 	if (statshr.ButPrjViewAvail && statshr.ButPrjViewActive) {
 		if (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCPRJ, jref)) {
 			sref = "CrdWdbePrj";
-			xchg->triggerIxRefSrefIntvalToRefCall(dbswdbe, VecWdbeVCall::CALLWDBECRDOPEN, jref, 0, 0, sref, recVer.refWdbeMProject, jrefNew);
+			xchg->triggerIxRefSrefIntvalToRefCall(dbswdbe, VecWdbeVCall::CALLWDBECRDOPEN, jref, 0, 0, sref, recVer.prjRefWdbeMProject, jrefNew);
 		};
 
 		if (jrefNew == 0) *dpcheng = new DpchEngWdbeConfirm(false, 0, "");
@@ -425,7 +425,7 @@ bool PnlWdbeVerDetail::handleCallWdbeVer_prjEq(
 			, bool& boolvalRet
 		) {
 	bool retval = false;
-	boolvalRet = (recVer.refWdbeMProject == refInv); // IP handleCallWdbeVer_prjEq --- LINE
+	boolvalRet = (recVer.prjRefWdbeMProject == refInv); // IP handleCallWdbeVer_prjEq --- LINE
 	return retval;
 };
 

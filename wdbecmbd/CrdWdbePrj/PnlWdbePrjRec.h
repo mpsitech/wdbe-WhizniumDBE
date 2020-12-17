@@ -15,8 +15,8 @@
 // IP include.cust --- INSERT
 
 #include "PnlWdbePrjMNPerson.h"
+#include "PnlWdbePrjPrj1NVersion.h"
 #include "PnlWdbePrjDetail.h"
-#include "PnlWdbePrj1NVersion.h"
 
 #define VecVWdbePrjRecDo PnlWdbePrjRec::VecVDo
 
@@ -73,7 +73,7 @@ public:
 	class StatApp {
 
 	public:
-		static void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true, const bool initdoneDetail = false, const bool initdone1NVersion = false, const bool initdoneMNPerson = false);
+		static void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true, const bool initdoneDetail = false, const bool initdonePrj1NVersion = false, const bool initdoneMNPerson = false);
 	};
 
 	/**
@@ -84,17 +84,17 @@ public:
 	public:
 		static const Sbecore::uint IXWDBEVEXPSTATE = 1;
 		static const Sbecore::uint JREFDETAIL = 2;
-		static const Sbecore::uint JREF1NVERSION = 3;
+		static const Sbecore::uint JREFPRJ1NVERSION = 3;
 		static const Sbecore::uint JREFMNPERSON = 4;
 		static const Sbecore::uint BUTREGULARIZEACTIVE = 5;
 
 	public:
-		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const Sbecore::ubigint jrefDetail = 0, const Sbecore::ubigint jref1NVersion = 0, const Sbecore::ubigint jrefMNPerson = 0, const bool ButRegularizeActive = true);
+		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const Sbecore::ubigint jrefDetail = 0, const Sbecore::ubigint jrefPrj1NVersion = 0, const Sbecore::ubigint jrefMNPerson = 0, const bool ButRegularizeActive = true);
 
 	public:
 		Sbecore::uint ixWdbeVExpstate;
 		Sbecore::ubigint jrefDetail;
-		Sbecore::ubigint jref1NVersion;
+		Sbecore::ubigint jrefPrj1NVersion;
 		Sbecore::ubigint jrefMNPerson;
 		bool ButRegularizeActive;
 
@@ -172,8 +172,8 @@ public:
 	StatShr statshr;
 
 	PnlWdbePrjMNPerson* pnlmnperson;
+	PnlWdbePrjPrj1NVersion* pnlprj1nversion;
 	PnlWdbePrjDetail* pnldetail;
-	PnlWdbePrj1NVersion* pnl1nversion;
 
 	WdbeMProject recPrj;
 

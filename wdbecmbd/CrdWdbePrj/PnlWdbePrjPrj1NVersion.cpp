@@ -1,9 +1,9 @@
 /**
-	* \file PnlWdbePrj1NVersion.cpp
-	* job handler for job PnlWdbePrj1NVersion (implementation)
+	* \file PnlWdbePrjPrj1NVersion.cpp
+	* job handler for job PnlWdbePrjPrj1NVersion (implementation)
 	* \copyright (C) 2016-2020 MPSI Technologies GmbH
 	* \author Alexander Wirthmueller (auto-generation)
-	* \date created: 28 Nov 2020
+	* \date created: 16 Dec 2020
 	*/
 // IP header --- ABOVE
 
@@ -13,10 +13,10 @@
 	#include <Wdbed.h>
 #endif
 
-#include "PnlWdbePrj1NVersion.h"
+#include "PnlWdbePrjPrj1NVersion.h"
 
-#include "PnlWdbePrj1NVersion_blks.cpp"
-#include "PnlWdbePrj1NVersion_evals.cpp"
+#include "PnlWdbePrjPrj1NVersion_blks.cpp"
+#include "PnlWdbePrjPrj1NVersion_evals.cpp"
 
 using namespace std;
 using namespace Sbecore;
@@ -25,16 +25,16 @@ using namespace Xmlio;
 // IP ns.cust --- INSERT
 
 /******************************************************************************
- class PnlWdbePrj1NVersion
+ class PnlWdbePrjPrj1NVersion
  ******************************************************************************/
 
-PnlWdbePrj1NVersion::PnlWdbePrj1NVersion(
+PnlWdbePrjPrj1NVersion::PnlWdbePrjPrj1NVersion(
 			XchgWdbe* xchg
 			, DbsWdbe* dbswdbe
 			, const ubigint jrefSup
 			, const uint ixWdbeVLocale
 		) :
-			JobWdbe(xchg, VecWdbeVJob::PNLWDBEPRJ1NVERSION, jrefSup, ixWdbeVLocale)
+			JobWdbe(xchg, VecWdbeVJob::PNLWDBEPRJPRJ1NVERSION, jrefSup, ixWdbeVLocale)
 		{
 	jref = xchg->addJob(dbswdbe, this, jrefSup);
 
@@ -50,7 +50,7 @@ PnlWdbePrj1NVersion::PnlWdbePrj1NVersion(
 
 	xchg->addRefPreset(VecWdbeVPreset::PREWDBEREFSEL, jref, 0);
 
-	qry = new QryWdbePrj1NVersion(xchg, dbswdbe, jref, ixWdbeVLocale);
+	qry = new QryWdbePrjPrj1NVersion(xchg, dbswdbe, jref, ixWdbeVLocale);
 
 	// IP constructor.cust2 --- INSERT
 
@@ -63,7 +63,7 @@ PnlWdbePrj1NVersion::PnlWdbePrj1NVersion(
 
 };
 
-PnlWdbePrj1NVersion::~PnlWdbePrj1NVersion() {
+PnlWdbePrjPrj1NVersion::~PnlWdbePrjPrj1NVersion() {
 	// IP destructor.spec --- INSERT
 
 	// IP destructor.cust --- INSERT
@@ -73,7 +73,7 @@ PnlWdbePrj1NVersion::~PnlWdbePrj1NVersion() {
 
 // IP cust --- INSERT
 
-DpchEngWdbe* PnlWdbePrj1NVersion::getNewDpchEng(
+DpchEngWdbe* PnlWdbePrjPrj1NVersion::getNewDpchEng(
 			set<uint> items
 		) {
 	DpchEngWdbe* dpcheng = NULL;
@@ -88,7 +88,7 @@ DpchEngWdbe* PnlWdbePrj1NVersion::getNewDpchEng(
 	return dpcheng;
 };
 
-void PnlWdbePrj1NVersion::refresh(
+void PnlWdbePrjPrj1NVersion::refresh(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
 			, const bool unmute
@@ -104,6 +104,10 @@ void PnlWdbePrj1NVersion::refresh(
 	continf.numFCsiQst = feedFCsiQst.getNumByIx(qry->ixWdbeVQrystate);
 
 	// statshr
+	statshr.ButUpAvail = evalButUpAvail(dbswdbe);
+	statshr.ButUpActive = evalButUpActive(dbswdbe);
+	statshr.ButDownAvail = evalButDownAvail(dbswdbe);
+	statshr.ButDownActive = evalButDownActive(dbswdbe);
 	statshr.ButViewAvail = evalButViewAvail(dbswdbe);
 	statshr.ButViewActive = evalButViewActive(dbswdbe);
 	statshr.ButNewAvail = evalButNewAvail(dbswdbe);
@@ -117,7 +121,7 @@ void PnlWdbePrj1NVersion::refresh(
 	muteRefresh = false;
 };
 
-void PnlWdbePrj1NVersion::updatePreset(
+void PnlWdbePrjPrj1NVersion::updatePreset(
 			DbsWdbe* dbswdbe
 			, const uint ixWdbeVPreset
 			, const ubigint jrefTrig
@@ -144,7 +148,7 @@ void PnlWdbePrj1NVersion::updatePreset(
 	// IP updatePreset --- END
 };
 
-void PnlWdbePrj1NVersion::handleRequest(
+void PnlWdbePrjPrj1NVersion::handleRequest(
 			DbsWdbe* dbswdbe
 			, ReqWdbe* req
 		) {
@@ -163,7 +167,7 @@ void PnlWdbePrj1NVersion::handleRequest(
 		if (req->dpchapp->ixWdbeVDpch == VecWdbeVDpch::DPCHAPPWDBEINIT) {
 			handleDpchAppWdbeInit(dbswdbe, (DpchAppWdbeInit*) (req->dpchapp), &(req->dpcheng));
 
-		} else if (req->dpchapp->ixWdbeVDpch == VecWdbeVDpch::DPCHAPPWDBEPRJ1NVERSIONDATA) {
+		} else if (req->dpchapp->ixWdbeVDpch == VecWdbeVDpch::DPCHAPPWDBEPRJPRJ1NVERSIONDATA) {
 			DpchAppData* dpchappdata = (DpchAppData*) (req->dpchapp);
 
 			if (dpchappdata->has(DpchAppData::STGIAC)) {
@@ -172,11 +176,15 @@ void PnlWdbePrj1NVersion::handleRequest(
 				handleDpchAppDataStgiacqry(dbswdbe, &(dpchappdata->stgiacqry), &(req->dpcheng));
 			};
 
-		} else if (req->dpchapp->ixWdbeVDpch == VecWdbeVDpch::DPCHAPPWDBEPRJ1NVERSIONDO) {
+		} else if (req->dpchapp->ixWdbeVDpch == VecWdbeVDpch::DPCHAPPWDBEPRJPRJ1NVERSIONDO) {
 			DpchAppDo* dpchappdo = (DpchAppDo*) (req->dpchapp);
 
 			if (dpchappdo->ixVDo != 0) {
-				if (dpchappdo->ixVDo == VecVDo::BUTVIEWCLICK) {
+				if (dpchappdo->ixVDo == VecVDo::BUTUPCLICK) {
+					handleDpchAppDoButUpClick(dbswdbe, &(req->dpcheng));
+				} else if (dpchappdo->ixVDo == VecVDo::BUTDOWNCLICK) {
+					handleDpchAppDoButDownClick(dbswdbe, &(req->dpcheng));
+				} else if (dpchappdo->ixVDo == VecVDo::BUTVIEWCLICK) {
 					handleDpchAppDoButViewClick(dbswdbe, &(req->dpcheng));
 				} else if (dpchappdo->ixVDo == VecVDo::BUTNEWCLICK) {
 					handleDpchAppDoButNewClick(dbswdbe, &(req->dpcheng));
@@ -192,7 +200,7 @@ void PnlWdbePrj1NVersion::handleRequest(
 	};
 };
 
-void PnlWdbePrj1NVersion::handleDpchAppWdbeInit(
+void PnlWdbePrjPrj1NVersion::handleDpchAppWdbeInit(
 			DbsWdbe* dbswdbe
 			, DpchAppWdbeInit* dpchappwdbeinit
 			, DpchEngWdbe** dpcheng
@@ -200,7 +208,7 @@ void PnlWdbePrj1NVersion::handleDpchAppWdbeInit(
 	*dpcheng = getNewDpchEng({DpchEngData::ALL});
 };
 
-void PnlWdbePrj1NVersion::handleDpchAppDataStgiac(
+void PnlWdbePrjPrj1NVersion::handleDpchAppDataStgiac(
 			DbsWdbe* dbswdbe
 			, StgIac* _stgiac
 			, DpchEngWdbe** dpcheng
@@ -214,9 +222,9 @@ void PnlWdbePrj1NVersion::handleDpchAppDataStgiac(
 	*dpcheng = getNewDpchEng(moditems);
 };
 
-void PnlWdbePrj1NVersion::handleDpchAppDataStgiacqry(
+void PnlWdbePrjPrj1NVersion::handleDpchAppDataStgiacqry(
 			DbsWdbe* dbswdbe
-			, QryWdbePrj1NVersion::StgIac* _stgiacqry
+			, QryWdbePrjPrj1NVersion::StgIac* _stgiacqry
 			, DpchEngWdbe** dpcheng
 		) {
 	set<uint> diffitems;
@@ -224,7 +232,7 @@ void PnlWdbePrj1NVersion::handleDpchAppDataStgiacqry(
 
 	diffitems = _stgiacqry->diff(&(qry->stgiac));
 
-	WdbeQPrj1NVersion* recSelNew = NULL;
+	WdbeQPrjPrj1NVersion* recSelNew = NULL;
 
 	WdbeMVersion* _recVer = NULL;
 
@@ -233,14 +241,14 @@ void PnlWdbePrj1NVersion::handleDpchAppDataStgiacqry(
 
 		qry->stgiac = *_stgiacqry;
 
-		if (has(diffitems, QryWdbePrj1NVersion::StgIac::JNUM)) recSelNew = qry->getRecByJnum(_stgiacqry->jnum);
+		if (has(diffitems, QryWdbePrjPrj1NVersion::StgIac::JNUM)) recSelNew = qry->getRecByJnum(_stgiacqry->jnum);
 
-		if (!has(diffitems, QryWdbePrj1NVersion::StgIac::JNUM) || (diffitems.size() > 1)) {
+		if (!has(diffitems, QryWdbePrjPrj1NVersion::StgIac::JNUM) || (diffitems.size() > 1)) {
 			qry->rerun(dbswdbe);
 			insert(moditems, {DpchEngData::STATSHRQRY, DpchEngData::RST});
 		};
 
-		if (has(diffitems, QryWdbePrj1NVersion::StgIac::JNUM)) {
+		if (has(diffitems, QryWdbePrjPrj1NVersion::StgIac::JNUM)) {
 			if (!recSelNew) recSelNew = qry->getRecByJnum(_stgiacqry->jnum);
 
 			recVer = WdbeMVersion();
@@ -263,7 +271,21 @@ void PnlWdbePrj1NVersion::handleDpchAppDataStgiacqry(
 	*dpcheng = getNewDpchEng(moditems);
 };
 
-void PnlWdbePrj1NVersion::handleDpchAppDoButViewClick(
+void PnlWdbePrjPrj1NVersion::handleDpchAppDoButUpClick(
+			DbsWdbe* dbswdbe
+			, DpchEngWdbe** dpcheng
+		) {
+	// IP handleDpchAppDoButUpClick --- INSERT
+};
+
+void PnlWdbePrjPrj1NVersion::handleDpchAppDoButDownClick(
+			DbsWdbe* dbswdbe
+			, DpchEngWdbe** dpcheng
+		) {
+	// IP handleDpchAppDoButDownClick --- INSERT
+};
+
+void PnlWdbePrjPrj1NVersion::handleDpchAppDoButViewClick(
 			DbsWdbe* dbswdbe
 			, DpchEngWdbe** dpcheng
 		) {
@@ -283,7 +305,7 @@ void PnlWdbePrj1NVersion::handleDpchAppDoButViewClick(
 	};
 };
 
-void PnlWdbePrj1NVersion::handleDpchAppDoButNewClick(
+void PnlWdbePrjPrj1NVersion::handleDpchAppDoButNewClick(
 			DbsWdbe* dbswdbe
 			, DpchEngWdbe** dpcheng
 		) {
@@ -303,14 +325,14 @@ void PnlWdbePrj1NVersion::handleDpchAppDoButNewClick(
 	};
 };
 
-void PnlWdbePrj1NVersion::handleDpchAppDoButDeleteClick(
+void PnlWdbePrjPrj1NVersion::handleDpchAppDoButDeleteClick(
 			DbsWdbe* dbswdbe
 			, DpchEngWdbe** dpcheng
 		) {
 	// IP handleDpchAppDoButDeleteClick --- INSERT
 };
 
-void PnlWdbePrj1NVersion::handleDpchAppDoButRefreshClick(
+void PnlWdbePrjPrj1NVersion::handleDpchAppDoButRefreshClick(
 			DbsWdbe* dbswdbe
 			, DpchEngWdbe** dpcheng
 		) {
@@ -326,7 +348,7 @@ void PnlWdbePrj1NVersion::handleDpchAppDoButRefreshClick(
 	*dpcheng = getNewDpchEng(moditems);
 };
 
-void PnlWdbePrj1NVersion::handleCall(
+void PnlWdbePrjPrj1NVersion::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
@@ -335,7 +357,7 @@ void PnlWdbePrj1NVersion::handleCall(
 	};
 };
 
-bool PnlWdbePrj1NVersion::handleCallWdbeStatChg(
+bool PnlWdbePrjPrj1NVersion::handleCallWdbeStatChg(
 			DbsWdbe* dbswdbe
 			, const ubigint jrefTrig
 		) {

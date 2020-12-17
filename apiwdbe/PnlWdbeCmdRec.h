@@ -66,17 +66,17 @@ namespace PnlWdbeCmdRec {
 
 	public:
 		static const Sbecore::uint INITDONEDETAIL = 1;
-		static const Sbecore::uint INITDONEAINVPAR = 2;
-		static const Sbecore::uint INITDONEARETPAR = 3;
+		static const Sbecore::uint INITDONEARETPAR = 2;
+		static const Sbecore::uint INITDONEAINVPAR = 3;
 		static const Sbecore::uint INITDONEMNCONTROLLER = 4;
 
 	public:
-		StatApp(const bool initdoneDetail = false, const bool initdoneAInvpar = false, const bool initdoneARetpar = false, const bool initdoneMNController = false);
+		StatApp(const bool initdoneDetail = false, const bool initdoneARetpar = false, const bool initdoneAInvpar = false, const bool initdoneMNController = false);
 
 	public:
 		bool initdoneDetail;
-		bool initdoneAInvpar;
 		bool initdoneARetpar;
+		bool initdoneAInvpar;
 		bool initdoneMNController;
 
 	public:
@@ -93,19 +93,19 @@ namespace PnlWdbeCmdRec {
 	public:
 		static const Sbecore::uint IXWDBEVEXPSTATE = 1;
 		static const Sbecore::uint SCRJREFDETAIL = 2;
-		static const Sbecore::uint SCRJREFAINVPAR = 3;
-		static const Sbecore::uint SCRJREFARETPAR = 4;
+		static const Sbecore::uint SCRJREFARETPAR = 3;
+		static const Sbecore::uint SCRJREFAINVPAR = 4;
 		static const Sbecore::uint SCRJREFMNCONTROLLER = 5;
 		static const Sbecore::uint BUTREGULARIZEACTIVE = 6;
 
 	public:
-		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const std::string& scrJrefDetail = "", const std::string& scrJrefAInvpar = "", const std::string& scrJrefARetpar = "", const std::string& scrJrefMNController = "", const bool ButRegularizeActive = true);
+		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const std::string& scrJrefDetail = "", const std::string& scrJrefARetpar = "", const std::string& scrJrefAInvpar = "", const std::string& scrJrefMNController = "", const bool ButRegularizeActive = true);
 
 	public:
 		Sbecore::uint ixWdbeVExpstate;
 		std::string scrJrefDetail;
-		std::string scrJrefAInvpar;
 		std::string scrJrefARetpar;
+		std::string scrJrefAInvpar;
 		std::string scrJrefMNController;
 		bool ButRegularizeActive;
 

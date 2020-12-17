@@ -21,8 +21,8 @@ public class QryWdbeVecList {
 
 		public static final int HKU = 1;
 		public static final int HKT = 2;
-		public static final int TYP = 3;
-		public static final int SRF = 4;
+		public static final int SRF = 3;
+		public static final int TYP = 4;
 
 		public static int getIx(
 					String sref
@@ -31,8 +31,8 @@ public class QryWdbeVecList {
 
 			if (s.equals("hku")) return HKU;
 			if (s.equals("hkt")) return HKT;
-			if (s.equals("typ")) return TYP;
 			if (s.equals("srf")) return SRF;
+			if (s.equals("typ")) return TYP;
 
 			return 0;
 		};
@@ -42,8 +42,8 @@ public class QryWdbeVecList {
 				) {
 			if (ix == HKU) return("hku");
 			if (ix == HKT) return("hkt");
-			if (ix == TYP) return("typ");
 			if (ix == SRF) return("srf");
+			if (ix == TYP) return("typ");
 
 			return "";
 		};

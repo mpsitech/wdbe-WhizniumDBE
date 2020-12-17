@@ -25,7 +25,7 @@
 class WdbeQVerList {
 
 public:
-	WdbeQVerList(const Sbecore::ubigint qref = 0, const Sbecore::ubigint jref = 0, const Sbecore::uint jnum = 0, const Sbecore::ubigint ref = 0, const Sbecore::ubigint grp = 0, const std::string stubGrp = "", const Sbecore::ubigint own = 0, const std::string stubOwn = "", const Sbecore::ubigint refWdbeMProject = 0, const std::string stubRefWdbeMProject = "", const Sbecore::usmallint Major = 0, const Sbecore::usmallint Minor = 0, const Sbecore::usmallint Sub = 0, const Sbecore::ubigint bvrRefWdbeMVersion = 0, const std::string stubBvrRefWdbeMVersion = "", const Sbecore::uint ixVState = 0, const std::string srefIxVState = "", const std::string titIxVState = "");
+	WdbeQVerList(const Sbecore::ubigint qref = 0, const Sbecore::ubigint jref = 0, const Sbecore::uint jnum = 0, const Sbecore::ubigint ref = 0, const Sbecore::ubigint grp = 0, const std::string stubGrp = "", const Sbecore::ubigint own = 0, const std::string stubOwn = "", const Sbecore::ubigint prjRefWdbeMProject = 0, const std::string stubPrjRefWdbeMProject = "", const Sbecore::usmallint Major = 0, const Sbecore::usmallint Minor = 0, const Sbecore::usmallint Sub = 0, const Sbecore::ubigint bvrRefWdbeMVersion = 0, const std::string stubBvrRefWdbeMVersion = "", const Sbecore::uint ixVState = 0, const std::string srefIxVState = "", const std::string titIxVState = "");
 
 public:
 	Sbecore::ubigint qref;
@@ -36,8 +36,8 @@ public:
 	std::string stubGrp;
 	Sbecore::ubigint own;
 	std::string stubOwn;
-	Sbecore::ubigint refWdbeMProject;
-	std::string stubRefWdbeMProject;
+	Sbecore::ubigint prjRefWdbeMProject;
+	std::string stubPrjRefWdbeMProject;
 	Sbecore::usmallint Major;
 	Sbecore::usmallint Minor;
 	Sbecore::usmallint Sub;
@@ -88,8 +88,8 @@ public:
 	virtual Sbecore::ubigint loadRstBySQL(const std::string& sqlstr, const bool append, ListWdbeQVerList& rst);
 
 	virtual Sbecore::ubigint insertRec(WdbeQVerList* rec);
-	Sbecore::ubigint insertNewRec(WdbeQVerList** rec = NULL, const Sbecore::ubigint jref = 0, const Sbecore::uint jnum = 0, const Sbecore::ubigint ref = 0, const Sbecore::ubigint grp = 0, const std::string stubGrp = "", const Sbecore::ubigint own = 0, const std::string stubOwn = "", const Sbecore::ubigint refWdbeMProject = 0, const std::string stubRefWdbeMProject = "", const Sbecore::usmallint Major = 0, const Sbecore::usmallint Minor = 0, const Sbecore::usmallint Sub = 0, const Sbecore::ubigint bvrRefWdbeMVersion = 0, const std::string stubBvrRefWdbeMVersion = "", const Sbecore::uint ixVState = 0, const std::string srefIxVState = "", const std::string titIxVState = "");
-	Sbecore::ubigint appendNewRecToRst(ListWdbeQVerList& rst, WdbeQVerList** rec = NULL, const Sbecore::ubigint jref = 0, const Sbecore::uint jnum = 0, const Sbecore::ubigint ref = 0, const Sbecore::ubigint grp = 0, const std::string stubGrp = "", const Sbecore::ubigint own = 0, const std::string stubOwn = "", const Sbecore::ubigint refWdbeMProject = 0, const std::string stubRefWdbeMProject = "", const Sbecore::usmallint Major = 0, const Sbecore::usmallint Minor = 0, const Sbecore::usmallint Sub = 0, const Sbecore::ubigint bvrRefWdbeMVersion = 0, const std::string stubBvrRefWdbeMVersion = "", const Sbecore::uint ixVState = 0, const std::string srefIxVState = "", const std::string titIxVState = "");
+	Sbecore::ubigint insertNewRec(WdbeQVerList** rec = NULL, const Sbecore::ubigint jref = 0, const Sbecore::uint jnum = 0, const Sbecore::ubigint ref = 0, const Sbecore::ubigint grp = 0, const std::string stubGrp = "", const Sbecore::ubigint own = 0, const std::string stubOwn = "", const Sbecore::ubigint prjRefWdbeMProject = 0, const std::string stubPrjRefWdbeMProject = "", const Sbecore::usmallint Major = 0, const Sbecore::usmallint Minor = 0, const Sbecore::usmallint Sub = 0, const Sbecore::ubigint bvrRefWdbeMVersion = 0, const std::string stubBvrRefWdbeMVersion = "", const Sbecore::uint ixVState = 0, const std::string srefIxVState = "", const std::string titIxVState = "");
+	Sbecore::ubigint appendNewRecToRst(ListWdbeQVerList& rst, WdbeQVerList** rec = NULL, const Sbecore::ubigint jref = 0, const Sbecore::uint jnum = 0, const Sbecore::ubigint ref = 0, const Sbecore::ubigint grp = 0, const std::string stubGrp = "", const Sbecore::ubigint own = 0, const std::string stubOwn = "", const Sbecore::ubigint prjRefWdbeMProject = 0, const std::string stubPrjRefWdbeMProject = "", const Sbecore::usmallint Major = 0, const Sbecore::usmallint Minor = 0, const Sbecore::usmallint Sub = 0, const Sbecore::ubigint bvrRefWdbeMVersion = 0, const std::string stubBvrRefWdbeMVersion = "", const Sbecore::uint ixVState = 0, const std::string srefIxVState = "", const std::string titIxVState = "");
 	virtual void insertRst(ListWdbeQVerList& rst);
 	virtual void updateRec(WdbeQVerList* rec);
 	virtual void updateRst(ListWdbeQVerList& rst);

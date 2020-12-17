@@ -1,9 +1,9 @@
 /**
-	* \file ListWdbeQPrj1NVersion.java
-	* Java API code for record set of table TblWdbeQPrj1NVersion
+	* \file ListWdbeQPrjPrj1NVersion.java
+	* Java API code for record set of table TblWdbeQPrjPrj1NVersion
 	* \copyright (C) 2018-2020 MPSI Technologies GmbH
 	* \author Alexander Wirthmueller (auto-generation)
-	* \date created: 5 Dec 2020
+	* \date created: 16 Dec 2020
 	*/
 // IP header --- ABOVE
 
@@ -13,17 +13,17 @@ import java.util.*;
 import org.w3c.dom.*;
 import sbecore.*;
 
-public class ListWdbeQPrj1NVersion {
+public class ListWdbeQPrjPrj1NVersion {
 
-	public ListWdbeQPrj1NVersion() {
-		nodes = new ArrayList<WdbeQPrj1NVersion>();
+	public ListWdbeQPrjPrj1NVersion() {
+		nodes = new ArrayList<WdbeQPrjPrj1NVersion>();
 	};
 	
 	public void clear() {
 		nodes.clear();
 	};
 
-	public ArrayList<WdbeQPrj1NVersion> nodes;
+	public ArrayList<WdbeQPrjPrj1NVersion> nodes;
 
 	public boolean readXML(
 				Document doc
@@ -33,22 +33,22 @@ public class ListWdbeQPrj1NVersion {
 		Vector<Integer> ics = new Vector<Integer>();
 		Vector<Boolean> shorttags = new Vector<Boolean>();
 
-		WdbeQPrj1NVersion rec;
+		WdbeQPrjPrj1NVersion rec;
 
 		String s;
 
-		if (addbasetag) basexpath = Xmlio.checkUclcXPaths(doc, basexpath, "ListWdbeQPrj1NVersion");
+		if (addbasetag) basexpath = Xmlio.checkUclcXPaths(doc, basexpath, "ListWdbeQPrjPrj1NVersion");
 
 		if (Xmlio.checkXPath(doc, basexpath)) {
-			Xmlio.extractList(doc, basexpath, "WdbeQPrj1NVersion", "row", "jnum", ics, shorttags);
+			Xmlio.extractList(doc, basexpath, "WdbeQPrjPrj1NVersion", "row", "jnum", ics, shorttags);
 
 			clear();
 			
 			for (int i = 0; i < ics.size(); i++) {
-				rec = new WdbeQPrj1NVersion(i+1, "");
+				rec = new WdbeQPrjPrj1NVersion(i+1, "");
 
 				if (shorttags.get(i)) s = basexpath + "/row[@jnum='" + ics.get(i).toString() + "']";
-				else s = basexpath + "/WdbeQPrj1NVersion[@jnum='" + ics.get(i).toString() + "']";
+				else s = basexpath + "/WdbeQPrjPrj1NVersion[@jnum='" + ics.get(i).toString() + "']";
 				
 				if (rec.readXML(doc, s, false)) nodes.add(rec);
 			};

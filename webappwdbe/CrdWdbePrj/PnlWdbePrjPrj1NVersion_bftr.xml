@@ -2,7 +2,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 	<head>
-		<title>1NVersion_bftr</title>
+		<title>Prj1NVersion_bftr</title>
 		<script>
 			function handleTrsFirstClick() {parent.parent.window.handleTrsFirstClick();};
 			function handleTrsPreviousClick() {parent.parent.window.handleTrsPreviousClick();};

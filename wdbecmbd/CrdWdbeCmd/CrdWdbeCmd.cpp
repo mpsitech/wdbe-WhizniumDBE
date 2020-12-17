@@ -44,8 +44,8 @@ CrdWdbeCmd::CrdWdbeCmd(
 	feedFSge.tag = "FeedFSge";
 	VecVSge::fillFeed(feedFSge);
 
-	pnllist = NULL;
 	pnlheadbar = NULL;
+	pnllist = NULL;
 	pnlrec = NULL;
 
 	// IP constructor.cust1 --- INSERT
@@ -58,8 +58,8 @@ CrdWdbeCmd::CrdWdbeCmd(
 	// initialize according to ref
 	changeRef(dbswdbe, jref, ((ref + 1) == 0) ? 0 : ref, false);
 
-	pnllist = new PnlWdbeCmdList(xchg, dbswdbe, jref, ixWdbeVLocale);
 	pnlheadbar = new PnlWdbeCmdHeadbar(xchg, dbswdbe, jref, ixWdbeVLocale);
+	pnllist = new PnlWdbeCmdList(xchg, dbswdbe, jref, ixWdbeVLocale);
 	pnlrec = new PnlWdbeCmdRec(xchg, dbswdbe, jref, ixWdbeVLocale);
 
 	// IP constructor.cust2 --- INSERT

@@ -22,8 +22,8 @@ uint QryWdbeSysList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "unt") return UNT;
 	if (s == "ver") return VER;
+	if (s == "unt") return UNT;
 	if (s == "srf") return SRF;
 
 	return(0);
@@ -32,8 +32,8 @@ uint QryWdbeSysList::VecVOrd::getIx(
 string QryWdbeSysList::VecVOrd::getSref(
 			const uint ix
 		) {
-	if (ix == UNT) return("unt");
 	if (ix == VER) return("ver");
+	if (ix == UNT) return("unt");
 	if (ix == SRF) return("srf");
 
 	return("");

@@ -211,7 +211,7 @@ void WdbeWrfpgaCtrFwdctr::writeMdlVhd(
 				};
 			};
 
-			StrMod::stringToVector(invs, ss);
+			StrMod::srefsToVector(invs, ss);
 			for (unsigned int i = 0; i < ss.size();i++) {
 				if (i==0) outfile << "\t-- inv: ";
 				else outfile << ", ";
@@ -219,7 +219,7 @@ void WdbeWrfpgaCtrFwdctr::writeMdlVhd(
 			};
 			if (invs != "") outfile << endl;
 
-			StrMod::stringToVector(revs, ss);
+			StrMod::srefsToVector(revs, ss);
 			for (unsigned int i = 0; i < ss.size();i++) {
 				if (i==0) outfile << "\t-- rev: ";
 				else outfile << ", ";
@@ -227,7 +227,7 @@ void WdbeWrfpgaCtrFwdctr::writeMdlVhd(
 			};
 			if (revs != "") outfile << endl;
 
-			StrMod::stringToVector(rets, ss);
+			StrMod::srefsToVector(rets, ss);
 			for (unsigned int i = 0; i < ss.size();i++) {
 				if (i==0) outfile << "\t-- ret/newret: ";
 				else outfile << ", ";
@@ -271,7 +271,7 @@ void WdbeWrfpgaCtrFwdctr::writeMdlVhd(
 				};
 			};
 
-			StrMod::stringToVector(invs, ss);
+			StrMod::srefsToVector(invs, ss);
 			for (unsigned int i = 0; i < ss.size();i++) {
 				if (i==0) outfile << "\t-- external inv: ";
 				else outfile << ", ";
@@ -279,7 +279,7 @@ void WdbeWrfpgaCtrFwdctr::writeMdlVhd(
 			};
 			if (invs != "") outfile << endl;
 
-			StrMod::stringToVector(revs, ss);
+			StrMod::srefsToVector(revs, ss);
 			for (unsigned int i = 0; i < ss.size();i++) {
 				if (i==0) outfile << "\t-- external rev: ";
 				else outfile << ", ";
@@ -287,7 +287,7 @@ void WdbeWrfpgaCtrFwdctr::writeMdlVhd(
 			};
 			if (revs != "") outfile << endl;
 
-			StrMod::stringToVector(rets, ss);
+			StrMod::srefsToVector(rets, ss);
 			for (unsigned int i = 0; i < ss.size();i++) {
 				if (i==0) outfile << "\t-- external ret/newret: ";
 				else outfile << ", ";
@@ -372,19 +372,19 @@ void WdbeWrfpgaCtrFwdctr::writeMdlVhd(
 							// -- impl.cmd.recvD/F.req...
 							if ((fas->Ip3.find("req") == 0) || (fas->Ip3.find("ack") == 0)) {
 								outfile << "-- IP impl.cmd." << fst->sref << "." << fas->Ip3 << " --- IBEGIN" << endl;
-								StrMod::stringToVector(fas->Ip3, ss);
+								StrMod::stringToVector(fas->Ip3, ss, ';', true);
 								for (unsigned int k = 0; k < ss.size();k++) outfile << "\t\t\t\t\t\t\t" << ss[k] << " <= '1';" << endl;
 								outfile << "-- IP impl.cmd." << fst->sref << "." << fas->Ip3 << " --- IEND" << endl;
 
 							} else if ((fas->Ip2.find("req") == 0) || (fas->Ip2.find("ack") == 0)) {
 								outfile << "-- IP impl.cmd." << fst->sref << "." << fas->Ip2 << " --- IBEGIN" << endl;
-								StrMod::stringToVector(fas->Ip2, ss);
+								StrMod::stringToVector(fas->Ip2, ss, ';', true);
 								for (unsigned int k = 0; k < ss.size();k++) outfile << "\t\t\t\t\t\t" << ss[k] << " <= '1';" << endl;
 								outfile << "-- IP impl.cmd." << fst->sref << "." << fas->Ip2 << " --- IEND" << endl;
 
 							} else if ((fas->Ip1.find("req") == 0) || (fas->Ip1.find("ack") == 0)) {
 								outfile << "-- IP impl.cmd." << fst->sref << "." << fas->Ip1 << " --- IBEGIN" << endl;
-								StrMod::stringToVector(fas->Ip1, ss);
+								StrMod::stringToVector(fas->Ip1, ss, ';', true);
 								for (unsigned int k = 0; k < ss.size();k++) outfile << "\t\t\t\t\t" << ss[k] << " <= '1';" << endl;
 								outfile << "-- IP impl.cmd." << fst->sref << "." << fas->Ip1 << " --- IEND" << endl;
 							};

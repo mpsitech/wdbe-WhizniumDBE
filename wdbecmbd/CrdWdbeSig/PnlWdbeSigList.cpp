@@ -258,7 +258,7 @@ void PnlWdbeSigList::handleDpchAppDataContiac(
 	diffitems = _contiac->diff(&contiac);
 
 	if (has(diffitems, ContIac::NUMFTOS)) {
-		if ((_contiac->numFTos >= QryWdbeSigList::VecVOrd::CON) && (_contiac->numFTos <= QryWdbeSigList::VecVOrd::TYP)) {
+		if ((_contiac->numFTos >= QryWdbeSigList::VecVOrd::CON) && (_contiac->numFTos <= QryWdbeSigList::VecVOrd::SRF)) {
 			muteRefresh = true;
 
 			xchg->addIxPreset(VecWdbeVPreset::PREWDBEIXORD, jref, _contiac->numFTos);

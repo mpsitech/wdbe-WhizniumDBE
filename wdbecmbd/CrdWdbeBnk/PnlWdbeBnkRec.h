@@ -14,8 +14,8 @@
 
 // IP include.cust --- INSERT
 
-#include "PnlWdbeBnk1NPin.h"
 #include "PnlWdbeBnkDetail.h"
+#include "PnlWdbeBnk1NPin.h"
 
 #define VecVWdbeBnkRecDo PnlWdbeBnkRec::VecVDo
 
@@ -168,8 +168,8 @@ public:
 	ContInf continf;
 	StatShr statshr;
 
-	PnlWdbeBnk1NPin* pnl1npin;
 	PnlWdbeBnkDetail* pnldetail;
+	PnlWdbeBnk1NPin* pnl1npin;
 
 	WdbeMBank recBnk;
 

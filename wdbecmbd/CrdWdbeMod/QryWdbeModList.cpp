@@ -304,10 +304,10 @@ void QryWdbeModList::fetch(
 			rec->titIxVBasetype = VecWdbeVMModuleBasetype::getTitle(rec->ixVBasetype, ixWdbeVLocale);
 			rec->srefHkIxVTbl = VecWdbeVMModuleHkTbl::getSref(rec->hkIxVTbl);
 			rec->titHkIxVTbl = VecWdbeVMModuleHkTbl::getTitle(rec->hkIxVTbl, ixWdbeVLocale);
-			if (rec->hkIxVTbl == VecWdbeVMModuleHkTbl::CVR) {
-				rec->stubHkUref = StubWdbe::getStubCvrStd(dbswdbe, rec->hkUref, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
-			} else if (rec->hkIxVTbl == VecWdbeVMModuleHkTbl::UNT) {
+			if (rec->hkIxVTbl == VecWdbeVMModuleHkTbl::UNT) {
 				rec->stubHkUref = StubWdbe::getStubUntStd(dbswdbe, rec->hkUref, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
+			} else if (rec->hkIxVTbl == VecWdbeVMModuleHkTbl::CVR) {
+				rec->stubHkUref = StubWdbe::getStubCvrStd(dbswdbe, rec->hkUref, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
 			} else rec->stubHkUref = "-";
 			rec->stubSupRefWdbeMModule = StubWdbe::getStubMdlStd(dbswdbe, rec->supRefWdbeMModule, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
 			rec->stubTplRefWdbeMModule = StubWdbe::getStubMdlStd(dbswdbe, rec->tplRefWdbeMModule, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);

@@ -409,9 +409,9 @@ public:
 	};
 
 	bool evalButDneActive(DbsWdbe* dbswdbe);
+	bool evalFiaDldActive(DbsWdbe* dbswdbe);
 	bool evalWrcButRunActive(DbsWdbe* dbswdbe);
 	bool evalWrcButStoActive(DbsWdbe* dbswdbe);
-	bool evalFiaDldActive(DbsWdbe* dbswdbe);
 	bool evalCucUldActive(DbsWdbe* dbswdbe);
 
 public:
@@ -469,9 +469,9 @@ private:
 	void handleDpchRetWdbePrctreeMerge(DbsWdbe* dbswdbe, DpchRetWdbePrctreeMerge* dpchret);
 
 	void handleTimerWithSrefMonInSgeWrite(DbsWdbe* dbswdbe);
-	void handleTimerWithSrefMonInSgeCreate(DbsWdbe* dbswdbe);
 	void handleTimerInSgeCreidle(DbsWdbe* dbswdbe, const std::string& sref);
 	void handleTimerInSgeUpkidle(DbsWdbe* dbswdbe, const std::string& sref);
+	void handleTimerWithSrefMonInSgeCreate(DbsWdbe* dbswdbe);
 
 private:
 	void changeStage(DbsWdbe* dbswdbe, Sbecore::uint _ixVSge, DpchEngWdbe** dpcheng = NULL);

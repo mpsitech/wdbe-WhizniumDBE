@@ -15,10 +15,10 @@
 // IP include.cust --- INSERT
 
 #include "PnlWdbeFilList.h"
-#include "PnlWdbeFilHeadbar.h"
 #include "PnlWdbeFilRec.h"
-#include "DlgWdbeFilDownload.h"
+#include "PnlWdbeFilHeadbar.h"
 #include "DlgWdbeFilNew.h"
+#include "DlgWdbeFilDownload.h"
 
 #define VecVWdbeFilDo CrdWdbeFil::VecVDo
 #define VecVWdbeFilSge CrdWdbeFil::VecVSge
@@ -212,10 +212,10 @@ public:
 	Sbecore::Xmlio::Feed feedFSge;
 
 	PnlWdbeFilList* pnllist;
-	PnlWdbeFilHeadbar* pnlheadbar;
 	PnlWdbeFilRec* pnlrec;
-	DlgWdbeFilDownload* dlgdownload;
+	PnlWdbeFilHeadbar* pnlheadbar;
 	DlgWdbeFilNew* dlgnew;
+	DlgWdbeFilDownload* dlgdownload;
 
 	// IP vars.cust --- INSERT
 

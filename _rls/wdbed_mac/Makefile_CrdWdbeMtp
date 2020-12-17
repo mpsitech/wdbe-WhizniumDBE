@@ -2,7 +2,7 @@
 # make file for CrdWdbeMtp card job handler, release wdbed_mac
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 6 Dec 2020
+# date created: 16 Dec 2020
 # IP header --- ABOVE
 
 include ../Makefile.inc
@@ -16,7 +16,7 @@ STATLIBFLAGS = rcs
 INCPATH = -I$(BUILDROOT)/dbswdbe -I$(BUILDROOT)/wdbed/VecWdbe -I$(BUILDROOT)/wdbed/IexWdbe -I$(BUILDROOT)/wdbed
 INCPATH += -I${WHIZSDKROOT}/build -I${WHIZSDKROOT}/build/apiwzlm -I/usr/local/include -I/usr/local/include/curl -I/usr/local/include/libxml2 -I/usr/local/mysql/include -I/usr/local/opt/sqlite/include
 
-OBJS = CrdWdbeMtp.o PnlWdbeMtpList.o QryWdbeMtpList.o PnlWdbeMtpHeadbar.o PnlWdbeMtpRec.o PnlWdbeMtpRef1NFile.o QryWdbeMtpRef1NFile.o PnlWdbeMtpMge1NSignal.o QryWdbeMtpMge1NSignal.o PnlWdbeMtpSup1NModule.o QryWdbeMtpSup1NModule.o PnlWdbeMtpTpl1NModule.o QryWdbeMtpTpl1NModule.o PnlWdbeMtpMdl1NGeneric.o QryWdbeMtpMdl1NGeneric.o PnlWdbeMtpMdl1NPort.o QryWdbeMtpMdl1NPort.o PnlWdbeMtpAPar.o QryWdbeMtpAPar.o PnlWdbeMtpKHdltype.o QryWdbeMtpKHdltype.o PnlWdbeMtpDetail.o PnlWdbeMtpKParKey.o QryWdbeMtpKParKey.o
+OBJS = CrdWdbeMtp.o PnlWdbeMtpList.o QryWdbeMtpList.o PnlWdbeMtpHeadbar.o PnlWdbeMtpRec.o PnlWdbeMtpRef1NFile.o QryWdbeMtpRef1NFile.o PnlWdbeMtpMge1NSignal.o QryWdbeMtpMge1NSignal.o PnlWdbeMtpSup1NModule.o QryWdbeMtpSup1NModule.o PnlWdbeMtpTpl1NModule.o QryWdbeMtpTpl1NModule.o PnlWdbeMtpMdl1NGeneric.o QryWdbeMtpMdl1NGeneric.o PnlWdbeMtpMdl1NPort.o QryWdbeMtpMdl1NPort.o PnlWdbeMtpAPar.o QryWdbeMtpAPar.o PnlWdbeMtpKHdltype.o QryWdbeMtpKHdltype.o PnlWdbeMtpKParKey.o QryWdbeMtpKParKey.o PnlWdbeMtpDetail.o
 
 LIB = libcrdwdbemtp
 

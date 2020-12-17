@@ -68,12 +68,12 @@ namespace PnlWdbeModRec {
 		static const Sbecore::uint INITDONEDETAIL = 1;
 		static const Sbecore::uint INITDONEKHDLTYPE = 2;
 		static const Sbecore::uint INITDONEAPAR = 3;
-		static const Sbecore::uint INITDONEMDL1NPORT = 4;
-		static const Sbecore::uint INITDONE1NPROCESS = 5;
-		static const Sbecore::uint INITDONEMDL1NSIGNAL = 6;
-		static const Sbecore::uint INITDONEMDL1NGENERIC = 7;
+		static const Sbecore::uint INITDONE1NPERIPHERAL = 4;
+		static const Sbecore::uint INITDONEMDL1NSIGNAL = 5;
+		static const Sbecore::uint INITDONE1NPROCESS = 6;
+		static const Sbecore::uint INITDONEMDL1NPORT = 7;
 		static const Sbecore::uint INITDONECOR1NIMBUF = 8;
-		static const Sbecore::uint INITDONE1NPERIPHERAL = 9;
+		static const Sbecore::uint INITDONEMDL1NGENERIC = 9;
 		static const Sbecore::uint INITDONESUP1NMODULE = 10;
 		static const Sbecore::uint INITDONEMGE1NSIGNAL = 11;
 		static const Sbecore::uint INITDONECTRREF1NERROR = 12;
@@ -82,18 +82,18 @@ namespace PnlWdbeModRec {
 		static const Sbecore::uint INITDONECTRMNCOMMAND = 15;
 
 	public:
-		StatApp(const bool initdoneDetail = false, const bool initdoneKHdltype = false, const bool initdoneAPar = false, const bool initdoneMdl1NPort = false, const bool initdone1NProcess = false, const bool initdoneMdl1NSignal = false, const bool initdoneMdl1NGeneric = false, const bool initdoneCor1NImbuf = false, const bool initdone1NPeripheral = false, const bool initdoneSup1NModule = false, const bool initdoneMge1NSignal = false, const bool initdoneCtrRef1NError = false, const bool initdoneCtrHk1NVector = false, const bool initdoneCtrRef1NCommand = false, const bool initdoneCtrMNCommand = false);
+		StatApp(const bool initdoneDetail = false, const bool initdoneKHdltype = false, const bool initdoneAPar = false, const bool initdone1NPeripheral = false, const bool initdoneMdl1NSignal = false, const bool initdone1NProcess = false, const bool initdoneMdl1NPort = false, const bool initdoneCor1NImbuf = false, const bool initdoneMdl1NGeneric = false, const bool initdoneSup1NModule = false, const bool initdoneMge1NSignal = false, const bool initdoneCtrRef1NError = false, const bool initdoneCtrHk1NVector = false, const bool initdoneCtrRef1NCommand = false, const bool initdoneCtrMNCommand = false);
 
 	public:
 		bool initdoneDetail;
 		bool initdoneKHdltype;
 		bool initdoneAPar;
-		bool initdoneMdl1NPort;
-		bool initdone1NProcess;
-		bool initdoneMdl1NSignal;
-		bool initdoneMdl1NGeneric;
-		bool initdoneCor1NImbuf;
 		bool initdone1NPeripheral;
+		bool initdoneMdl1NSignal;
+		bool initdone1NProcess;
+		bool initdoneMdl1NPort;
+		bool initdoneCor1NImbuf;
+		bool initdoneMdl1NGeneric;
 		bool initdoneSup1NModule;
 		bool initdoneMge1NSignal;
 		bool initdoneCtrRef1NError;
@@ -117,12 +117,12 @@ namespace PnlWdbeModRec {
 		static const Sbecore::uint SCRJREFDETAIL = 2;
 		static const Sbecore::uint SCRJREFKHDLTYPE = 3;
 		static const Sbecore::uint SCRJREFAPAR = 4;
-		static const Sbecore::uint SCRJREFMDL1NPORT = 5;
-		static const Sbecore::uint SCRJREF1NPROCESS = 6;
-		static const Sbecore::uint SCRJREFMDL1NSIGNAL = 7;
-		static const Sbecore::uint SCRJREFMDL1NGENERIC = 8;
+		static const Sbecore::uint SCRJREF1NPERIPHERAL = 5;
+		static const Sbecore::uint SCRJREFMDL1NSIGNAL = 6;
+		static const Sbecore::uint SCRJREF1NPROCESS = 7;
+		static const Sbecore::uint SCRJREFMDL1NPORT = 8;
 		static const Sbecore::uint SCRJREFCOR1NIMBUF = 9;
-		static const Sbecore::uint SCRJREF1NPERIPHERAL = 10;
+		static const Sbecore::uint SCRJREFMDL1NGENERIC = 10;
 		static const Sbecore::uint SCRJREFSUP1NMODULE = 11;
 		static const Sbecore::uint SCRJREFMGE1NSIGNAL = 12;
 		static const Sbecore::uint SCRJREFCTRREF1NERROR = 13;
@@ -136,19 +136,19 @@ namespace PnlWdbeModRec {
 		static const Sbecore::uint BUTREGULARIZEACTIVE = 21;
 
 	public:
-		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const std::string& scrJrefDetail = "", const std::string& scrJrefKHdltype = "", const std::string& scrJrefAPar = "", const std::string& scrJrefMdl1NPort = "", const std::string& scrJref1NProcess = "", const std::string& scrJrefMdl1NSignal = "", const std::string& scrJrefMdl1NGeneric = "", const std::string& scrJrefCor1NImbuf = "", const std::string& scrJref1NPeripheral = "", const std::string& scrJrefSup1NModule = "", const std::string& scrJrefMge1NSignal = "", const std::string& scrJrefCtrRef1NError = "", const bool pnlctrref1nerrorAvail = false, const std::string& scrJrefCtrHk1NVector = "", const bool pnlctrhk1nvectorAvail = false, const std::string& scrJrefCtrRef1NCommand = "", const bool pnlctrref1ncommandAvail = false, const std::string& scrJrefCtrMNCommand = "", const bool pnlctrmncommandAvail = false, const bool ButRegularizeActive = true);
+		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const std::string& scrJrefDetail = "", const std::string& scrJrefKHdltype = "", const std::string& scrJrefAPar = "", const std::string& scrJref1NPeripheral = "", const std::string& scrJrefMdl1NSignal = "", const std::string& scrJref1NProcess = "", const std::string& scrJrefMdl1NPort = "", const std::string& scrJrefCor1NImbuf = "", const std::string& scrJrefMdl1NGeneric = "", const std::string& scrJrefSup1NModule = "", const std::string& scrJrefMge1NSignal = "", const std::string& scrJrefCtrRef1NError = "", const bool pnlctrref1nerrorAvail = false, const std::string& scrJrefCtrHk1NVector = "", const bool pnlctrhk1nvectorAvail = false, const std::string& scrJrefCtrRef1NCommand = "", const bool pnlctrref1ncommandAvail = false, const std::string& scrJrefCtrMNCommand = "", const bool pnlctrmncommandAvail = false, const bool ButRegularizeActive = true);
 
 	public:
 		Sbecore::uint ixWdbeVExpstate;
 		std::string scrJrefDetail;
 		std::string scrJrefKHdltype;
 		std::string scrJrefAPar;
-		std::string scrJrefMdl1NPort;
-		std::string scrJref1NProcess;
-		std::string scrJrefMdl1NSignal;
-		std::string scrJrefMdl1NGeneric;
-		std::string scrJrefCor1NImbuf;
 		std::string scrJref1NPeripheral;
+		std::string scrJrefMdl1NSignal;
+		std::string scrJref1NProcess;
+		std::string scrJrefMdl1NPort;
+		std::string scrJrefCor1NImbuf;
+		std::string scrJrefMdl1NGeneric;
 		std::string scrJrefSup1NModule;
 		std::string scrJrefMge1NSignal;
 		std::string scrJrefCtrRef1NError;

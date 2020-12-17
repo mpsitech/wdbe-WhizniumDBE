@@ -2,7 +2,7 @@
 # make file for CrdWdbeCvr card job handler, release wdbed_ubuntu
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 6 Dec 2020
+# date created: 16 Dec 2020
 # IP header --- ABOVE
 
 include ../Makefile.inc
@@ -16,7 +16,7 @@ STATLIBFLAGS = rcs
 INCPATH = -I$(BUILDROOT)/dbswdbe -I$(BUILDROOT)/wdbed/VecWdbe -I$(BUILDROOT)/wdbed/IexWdbe -I$(BUILDROOT)/wdbed
 INCPATH += -I${WHIZSDKROOT}/build -I${WHIZSDKROOT}/build/apiwzlm -I/usr/include -I/usr/include/jsoncpp -I/usr/include/libxml2 -I/usr/include/mariadb
 
-OBJS = CrdWdbeCvr.o PnlWdbeCvrList.o QryWdbeCvrList.o PnlWdbeCvrHeadbar.o PnlWdbeCvrRec.o PnlWdbeCvrHk1NModule.o QryWdbeCvrHk1NModule.o PnlWdbeCvrBcv1NCoreversion.o QryWdbeCvrBcv1NCoreversion.o PnlWdbeCvrAPlh.o QryWdbeCvrAPlh.o PnlWdbeCvrAIp.o QryWdbeCvrAIp.o PnlWdbeCvrDetail.o DlgWdbeCvrNew.o DlgWdbeCvrDetcd.o DlgWdbeCvrBsccd.o DlgWdbeCvrWrite.o
+OBJS = CrdWdbeCvr.o PnlWdbeCvrList.o QryWdbeCvrList.o PnlWdbeCvrHeadbar.o DlgWdbeCvrWrite.o PnlWdbeCvrRec.o PnlWdbeCvrHk1NModule.o QryWdbeCvrHk1NModule.o PnlWdbeCvrBcv1NCoreversion.o QryWdbeCvrBcv1NCoreversion.o PnlWdbeCvrAIp.o QryWdbeCvrAIp.o PnlWdbeCvrAPlh.o QryWdbeCvrAPlh.o PnlWdbeCvrDetail.o DlgWdbeCvrNew.o DlgWdbeCvrDetcd.o DlgWdbeCvrBsccd.o
 
 LIB = libcrdwdbecvr
 

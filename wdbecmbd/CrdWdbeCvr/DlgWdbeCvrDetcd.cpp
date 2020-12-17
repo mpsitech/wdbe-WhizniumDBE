@@ -124,19 +124,19 @@ void DlgWdbeCvrDetcd::refreshPpr(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
 		) {
-	ContInfPpr oldContinfppr(continfppr);
 	StatShrPpr oldStatshrppr(statshrppr);
+	ContInfPpr oldContinfppr(continfppr);
 
 	// IP refreshPpr --- BEGIN
-	// continfppr
-
 	// statshrppr
 	statshrppr.ButRunActive = evalPprButRunActive(dbswdbe);
 	statshrppr.ButStoActive = evalPprButStoActive(dbswdbe);
 
+	// continfppr
+
 	// IP refreshPpr --- END
-	if (continfppr.diff(&oldContinfppr).size() != 0) insert(moditems, DpchEngData::CONTINFPPR);
 	if (statshrppr.diff(&oldStatshrppr).size() != 0) insert(moditems, DpchEngData::STATSHRPPR);
+	if (continfppr.diff(&oldContinfppr).size() != 0) insert(moditems, DpchEngData::CONTINFPPR);
 };
 
 void DlgWdbeCvrDetcd::refreshLfi(
@@ -167,23 +167,23 @@ void DlgWdbeCvrDetcd::refresh(
 	muteRefresh = true;
 
 	StatShr oldStatshr(statshr);
-	ContInf oldContinf(continf);
 	ContIac oldContiac(contiac);
+	ContInf oldContinf(continf);
 
 	// IP refresh --- BEGIN
 	// statshr
 	statshr.ButDneActive = evalButDneActive(dbswdbe);
 
-	// continf
-	continf.numFSge = ixVSge;
-
 	// contiac
 	contiac.numFDse = ixVDit;
 
+	// continf
+	continf.numFSge = ixVSge;
+
 	// IP refresh --- END
 	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
-	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
 	if (contiac.diff(&oldContiac).size() != 0) insert(moditems, DpchEngData::CONTIAC);
+	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
 
 	refreshIfi(dbswdbe, moditems);
 	refreshImp(dbswdbe, moditems);

@@ -482,13 +482,13 @@ void PnlWdbeFilDetail::handleDpchAppDoButReuViewClick(
 	string sref;
 
 	if (statshr.ButReuViewAvail && statshr.ButReuViewActive) {
-		if (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCMTP, jref)) if (recFil.refIxVTbl == VecWdbeVMFileRefTbl::MTP) {
-			sref = "CrdWdbeMtp";
+		if (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCVER, jref)) if (recFil.refIxVTbl == VecWdbeVMFileRefTbl::VER) {
+			sref = "CrdWdbeVer";
 			xchg->triggerIxRefSrefIntvalToRefCall(dbswdbe, VecWdbeVCall::CALLWDBECRDOPEN, jref, 0, 0, sref, recFil.refUref, jrefNew);
 		};
 		if (jrefNew == 0) {
-			if (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCVER, jref)) if (recFil.refIxVTbl == VecWdbeVMFileRefTbl::VER) {
-				sref = "CrdWdbeVer";
+			if (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCMTP, jref)) if (recFil.refIxVTbl == VecWdbeVMFileRefTbl::MTP) {
+				sref = "CrdWdbeMtp";
 				xchg->triggerIxRefSrefIntvalToRefCall(dbswdbe, VecWdbeVCall::CALLWDBECRDOPEN, jref, 0, 0, sref, recFil.refUref, jrefNew);
 			};
 		};

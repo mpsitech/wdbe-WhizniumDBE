@@ -45,8 +45,8 @@ CrdWdbeCpr::CrdWdbeCpr(
 
 	pnllist = NULL;
 	pnlheadbar = NULL;
-	pnlrec = NULL;
 	dlgnew = NULL;
+	pnlrec = NULL;
 
 	// IP constructor.cust1 --- INSERT
 

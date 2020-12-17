@@ -42,7 +42,7 @@ DpchRetWdbe* WdbeMtpModbscbuXadc_v3_3::run(
 	vector<string> ss;
 
 	if (Wdbe::getMpa(dbswdbe, refWdbeMModule, "Naux", Naux) && Wdbe::getMpa(dbswdbe, refWdbeMModule, "aux", aux)) {
-		StrMod::stringToVector(aux, ss);
+		StrMod::stringToVector(aux, ss, ';', true);
 
 		if (ss.size() == atoi(Naux.c_str())) {
 			dbswdbe->loadUintBySQL("SELECT COUNT(ref) FROM TblWdbeMPort WHERE mdlRefWdbeMModule = " + to_string(refWdbeMModule), mdlNum);

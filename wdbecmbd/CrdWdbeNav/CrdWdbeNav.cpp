@@ -49,9 +49,9 @@ CrdWdbeNav::CrdWdbeNav(
 	pnlglobal = NULL;
 	pnladmin = NULL;
 	pnlpre = NULL;
+	dlgloaini = NULL;
 	pnlheadbar = NULL;
 	dlgmnglic = NULL;
-	dlgloaini = NULL;
 
 	// IP constructor.cust1 --- INSERT
 

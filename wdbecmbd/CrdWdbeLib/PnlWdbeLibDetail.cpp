@@ -104,7 +104,7 @@ void PnlWdbeLibDetail::refreshDep(
 	// feedFLstDep
 	feedFLstDep.clear();
 
-	StrMod::stringToVector(contiac.TxfDep, ss);
+	StrMod::srefsToVector(contiac.TxfDep, ss);
 
 	// IP refreshDep.validate --- INSERT
 

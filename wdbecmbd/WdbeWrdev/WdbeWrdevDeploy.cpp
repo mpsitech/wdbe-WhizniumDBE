@@ -253,7 +253,7 @@ void WdbeWrdevDeploy::addLibByRef(
 	if (dbswdbe->tblwdbemlibrary->loadRecByRef(refLib, &lib)) {
 		if (Wdbe::getLibmkf(dbswdbe, refLib, refMch, hrefsMch, "incpath", s)) incpaths.insert(s);
 
-		StrMod::stringToVector(lib->depSrefsWdbeMLibrary, ss);
+		StrMod::srefsToVector(lib->depSrefsWdbeMLibrary, ss);
 		for (unsigned int i = 0; i < ss.size();i++) addLibBySref(dbswdbe, ss[i], refMch, hrefsMch, incpaths);
 
 		delete lib;

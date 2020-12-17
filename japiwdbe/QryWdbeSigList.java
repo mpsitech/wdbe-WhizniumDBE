@@ -21,11 +21,11 @@ public class QryWdbeSigList {
 
 		public static final int CON = 1;
 		public static final int VEC = 2;
-		public static final int MGT = 3;
-		public static final int MGU = 4;
-		public static final int MDL = 5;
-		public static final int SRF = 6;
-		public static final int TYP = 7;
+		public static final int MGU = 3;
+		public static final int MGT = 4;
+		public static final int TYP = 5;
+		public static final int MDL = 6;
+		public static final int SRF = 7;
 
 		public static int getIx(
 					String sref
@@ -34,11 +34,11 @@ public class QryWdbeSigList {
 
 			if (s.equals("con")) return CON;
 			if (s.equals("vec")) return VEC;
-			if (s.equals("mgt")) return MGT;
 			if (s.equals("mgu")) return MGU;
+			if (s.equals("mgt")) return MGT;
+			if (s.equals("typ")) return TYP;
 			if (s.equals("mdl")) return MDL;
 			if (s.equals("srf")) return SRF;
-			if (s.equals("typ")) return TYP;
 
 			return 0;
 		};
@@ -48,11 +48,11 @@ public class QryWdbeSigList {
 				) {
 			if (ix == CON) return("con");
 			if (ix == VEC) return("vec");
-			if (ix == MGT) return("mgt");
 			if (ix == MGU) return("mgu");
+			if (ix == MGT) return("mgt");
+			if (ix == TYP) return("typ");
 			if (ix == MDL) return("mdl");
 			if (ix == SRF) return("srf");
-			if (ix == TYP) return("typ");
 
 			return "";
 		};

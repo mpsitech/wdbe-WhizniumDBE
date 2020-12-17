@@ -40,7 +40,7 @@ dbs	dbswdbe	WhizniumDBE database access library
 	ImeIMRelease.end
 webapp	webappwdbe	WhizniumDBE web app user interface files
 	ImeIMRelease.srefRefWznmMMachine	sref	srefsKOption	Comment
-	any	webappwznm_any
+	any	webappwdbe_any
 	ImeIMRelease.end
 api	apiwdbe	WhizniumDBE API library
 	ImeIMRelease.srefRefWznmMMachine	sref	srefsKOption	Comment

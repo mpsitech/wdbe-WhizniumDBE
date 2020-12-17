@@ -2,7 +2,7 @@
 # make file for CrdWdbeUsr card job handler, release wdbed_mac
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 6 Dec 2020
+# date created: 16 Dec 2020
 # IP header --- ABOVE
 
 include ../Makefile.inc
@@ -16,7 +16,7 @@ STATLIBFLAGS = rcs
 INCPATH = -I$(BUILDROOT)/dbswdbe -I$(BUILDROOT)/wdbed/VecWdbe -I$(BUILDROOT)/wdbed/IexWdbe -I$(BUILDROOT)/wdbed
 INCPATH += -I${WHIZSDKROOT}/build -I${WHIZSDKROOT}/build/apiwzlm -I/usr/local/include -I/usr/local/include/curl -I/usr/local/include/libxml2 -I/usr/local/mysql/include -I/usr/local/opt/sqlite/include
 
-OBJS = CrdWdbeUsr.o PnlWdbeUsrList.o QryWdbeUsrList.o PnlWdbeUsrHeadbar.o PnlWdbeUsrRec.o PnlWdbeUsrMNUsergroup.o QryWdbeUsrMNUsergroup.o PnlWdbeUsr1NSession.o QryWdbeUsr1NSession.o PnlWdbeUsrAAccess.o QryWdbeUsrAAccess.o PnlWdbeUsrDetail.o DlgWdbeUsrMngkeypair.o
+OBJS = CrdWdbeUsr.o PnlWdbeUsrList.o QryWdbeUsrList.o PnlWdbeUsrHeadbar.o PnlWdbeUsrRec.o PnlWdbeUsrAAccess.o QryWdbeUsrAAccess.o PnlWdbeUsr1NSession.o QryWdbeUsr1NSession.o PnlWdbeUsrMNUsergroup.o QryWdbeUsrMNUsergroup.o PnlWdbeUsrDetail.o DlgWdbeUsrMngkeypair.o
 
 LIB = libcrdwdbeusr
 

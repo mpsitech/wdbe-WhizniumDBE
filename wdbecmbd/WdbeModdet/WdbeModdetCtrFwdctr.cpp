@@ -690,8 +690,8 @@ DpchRetWdbe* WdbeModdetCtrFwdctr::run(
 
 				refsFstPrepErr[i] = mergeCreateFsts(dbswdbe, prc->refWdbeMFsm, 0, "prepErr" + StrMod::cap(err->sref), oldfsts, fsts, fsmNum, true, maxOneOldFstNoFass);
 
-				StrMod::stringToVector(srefsErrSigsTrrs[i], ss);
-				StrMod::stringToVector(srefsPrcSigrootCmdSrefsErrSigsTrrs[i], ss2);
+				StrMod::srefsToVector(srefsErrSigsTrrs[i], ss);
+				StrMod::srefsToVector(srefsPrcSigrootCmdSrefsErrSigsTrrs[i], ss2);
 
 				if (ss.size() < 2) {
 					if (maxOneOldFstNoFass) {
@@ -799,7 +799,7 @@ DpchRetWdbe* WdbeModdetCtrFwdctr::run(
 			};
 			for (unsigned int i = 0; i < errs.nodes.size(); i++) {
 				if (srefsErrSigsTrrs[i] != "") {
-					StrMod::stringToVector(srefsErrSigsTrrs[i], ss2);
+					StrMod::srefsToVector(srefsErrSigsTrrs[i], ss2);
 					for (unsigned int j = 0; j < ss2.size();j++) {
 						if (s != "") s += " or ";
 						s += ss2[j];
@@ -834,9 +834,9 @@ DpchRetWdbe* WdbeModdetCtrFwdctr::run(
 
 				for (unsigned int i = 0; i < errs.nodes.size(); i++) {
 					if (srefsErrSigsTrrs[i] != "") {
-						StrMod::stringToVector(srefsErrSigsTrrs[i], ss2);
+						StrMod::srefsToVector(srefsErrSigsTrrs[i], ss2);
 
-						for (unsigned int j = 0; j < ss2.size();j++)
+						for (unsigned int j = 0; j < ss2.size(); j++)
 									dbswdbe->tblwdbeamfsmstatestep->insertNewRec(NULL, refFstWaitLockC, fstNum++, refsSrefsErrSigsTrrsFstPrepErr[ss2[j]], "clk" + Cmdbussref, "", condNord, "", ss2[j], "", "", "");
 					};
 				};
@@ -981,7 +981,7 @@ DpchRetWdbe* WdbeModdetCtrFwdctr::run(
 					if (srefsCmdSigIvr[i] != "") if (unqss.find(srefsCmdSigIvr[i]) == unqss.end()) {
 						s2 = "req" + srefsCmdSigIvr[i];
 
-						StrMod::stringToVector(srefsCmdSigsIvas[i], ss);
+						StrMod::srefsToVector(srefsCmdSigsIvas[i], ss);
 						for (unsigned int j = 0; j < ss.size();j++) s2 += " and " + ss[j];
 
 						if (s != "") s += " or ";
@@ -993,7 +993,7 @@ DpchRetWdbe* WdbeModdetCtrFwdctr::run(
 					if (srefsCmdSigRvr[i] != "") if (unqss.find(srefsCmdSigRvr[i]) == unqss.end()) {
 						s2 = "req" + srefsCmdSigRvr[i];
 
-						StrMod::stringToVector(srefsCmdSigsRvas[i], ss);
+						StrMod::srefsToVector(srefsCmdSigsRvas[i], ss);
 						for (unsigned int j = 0; j < ss.size();j++) s2 += " and " + ss[j];
 
 						if (s != "") s += " or ";
@@ -1068,7 +1068,7 @@ DpchRetWdbe* WdbeModdetCtrFwdctr::run(
 						err = errs.nodes[i];
 
 						if (srefsErrSigTra[i] != "") {
-							StrMod::stringToVector(srefsErrSigsTrrs[i], ss);
+							StrMod::srefsToVector(srefsErrSigsTrrs[i], ss);
 
 							for (unsigned int j = 0; j < ss.size();j++) {
 								s = "(" + ss[j] + "='1'";
@@ -1129,7 +1129,7 @@ DpchRetWdbe* WdbeModdetCtrFwdctr::run(
 						if (srefsErrSigTra[i] != "") {
 							s2 = "";
 
-							StrMod::stringToVector(srefsErrSigsTrrs[i], ss);
+							StrMod::srefsToVector(srefsErrSigsTrrs[i], ss);
 							for (unsigned int j = 0; j < ss.size();j++) s2 += "!" + ss[j] + " and ";
 								
 							s2 += "ack" + srefsErrSigTra[i];

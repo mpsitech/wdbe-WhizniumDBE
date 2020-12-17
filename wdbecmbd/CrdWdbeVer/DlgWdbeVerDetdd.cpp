@@ -171,23 +171,23 @@ void DlgWdbeVerDetdd::refresh(
 	muteRefresh = true;
 
 	StatShr oldStatshr(statshr);
-	ContInf oldContinf(continf);
 	ContIac oldContiac(contiac);
+	ContInf oldContinf(continf);
 
 	// IP refresh --- BEGIN
 	// statshr
 	statshr.ButDneActive = evalButDneActive(dbswdbe);
 
-	// continf
-	continf.numFSge = ixVSge;
-
 	// contiac
 	contiac.numFDse = ixVDit;
 
+	// continf
+	continf.numFSge = ixVSge;
+
 	// IP refresh --- END
 	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
-	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
 	if (contiac.diff(&oldContiac).size() != 0) insert(moditems, DpchEngData::CONTIAC);
+	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
 
 	refreshIfi(dbswdbe, moditems);
 	refreshImp(dbswdbe, moditems);
@@ -287,11 +287,11 @@ void DlgWdbeVerDetdd::handleRequest(
 
 	} else if (req->ixVBasetype == ReqWdbe::VecVBasetype::TIMER) {
 		if (ixVSge == VecVSge::PRSIDLE) handleTimerInSgePrsidle(dbswdbe, req->sref);
+		else if (ixVSge == VecVSge::IMPIDLE) handleTimerInSgeImpidle(dbswdbe, req->sref);
 		else if ((req->sref == "mon") && (ixVSge == VecVSge::IMPORT)) handleTimerWithSrefMonInSgeImport(dbswdbe);
 		else if ((req->sref == "mon") && (ixVSge == VecVSge::POSTPRC1)) handleTimerWithSrefMonInSgePostprc1(dbswdbe);
 		else if ((req->sref == "mon") && (ixVSge == VecVSge::POSTPRC2)) handleTimerWithSrefMonInSgePostprc2(dbswdbe);
 		else if ((req->sref == "mon") && (ixVSge == VecVSge::POSTPRC3)) handleTimerWithSrefMonInSgePostprc3(dbswdbe);
-		else if (ixVSge == VecVSge::IMPIDLE) handleTimerInSgeImpidle(dbswdbe, req->sref);
 	};
 };
 
@@ -446,6 +446,13 @@ void DlgWdbeVerDetdd::handleTimerInSgePrsidle(
 	changeStage(dbswdbe, nextIxVSgeSuccess);
 };
 
+void DlgWdbeVerDetdd::handleTimerInSgeImpidle(
+			DbsWdbe* dbswdbe
+			, const string& sref
+		) {
+	changeStage(dbswdbe, nextIxVSgeSuccess);
+};
+
 void DlgWdbeVerDetdd::handleTimerWithSrefMonInSgeImport(
 			DbsWdbe* dbswdbe
 		) {
@@ -472,13 +479,6 @@ void DlgWdbeVerDetdd::handleTimerWithSrefMonInSgePostprc3(
 		) {
 	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
 	refreshWithDpchEng(dbswdbe); // IP handleTimerWithSrefMonInSgePostprc3 --- ILINE
-};
-
-void DlgWdbeVerDetdd::handleTimerInSgeImpidle(
-			DbsWdbe* dbswdbe
-			, const string& sref
-		) {
-	changeStage(dbswdbe, nextIxVSgeSuccess);
 };
 
 void DlgWdbeVerDetdd::changeStage(
@@ -1128,7 +1128,10 @@ void DlgWdbeVerDetdd::leaveSgePostprc3(
 		Wdbe::updateVerste(dbswdbe, ver->ref, VecWdbeVMVersionState::READY);
 
 		// make project's current version
-		dbswdbe->executeQuery("UPDATE TblWdbeMProject SET refWdbeMVersion = " + to_string(ver->ref) + " WHERE ref = " + to_string(ver->refWdbeMProject));
+		dbswdbe->executeQuery("UPDATE TblWdbeMProject SET refWdbeMVersion = " + to_string(ver->ref) + " WHERE ref = " + to_string(ver->prjRefWdbeMProject));
+
+		xchg->triggerCall(dbswdbe, VecWdbeVCall::CALLWDBEPRJMOD, jref);
+		xchg->triggerRefCall(dbswdbe, VecWdbeVCall::CALLWDBEVERMOD_PRJEQ, jref, ver->prjRefWdbeMProject);
 
 		delete ver;
 	};
@@ -1147,7 +1150,7 @@ uint DlgWdbeVerDetdd::enterSgeSync(
 	WdbeMVersion* ver = NULL;
 
 	if (dbswdbe->tblwdbemversion->loadRecByRef(xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFVER, jref), &ver)) {
-		license->syncVer(dbswdbe, ver->refWdbeMProject, ver->ref);
+		license->syncVer(dbswdbe, ver->prjRefWdbeMProject, ver->ref);
 		delete ver;
 	};
 	// IP enterSgeSync --- IEND

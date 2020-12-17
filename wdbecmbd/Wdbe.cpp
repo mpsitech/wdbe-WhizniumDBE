@@ -50,7 +50,7 @@ ubigint Acv::addfile(
 	stat(path.c_str(), &st);
 	Size = st.st_size / 1024;
 
-	dbswdbe->tblwdbemfile->insertNewRec(&fil, 0, grp, own, refIxVTbl, refUref, osrefKContent, Archived, Filename, "", srefKMimetype, Size, Comment);
+	dbswdbe->tblwdbemfile->insertNewRec(&fil, grp, own, 0, refIxVTbl, refUref, osrefKContent, Archived, Filename, "", srefKMimetype, Size, Comment);
 	
 	// adjust archive name in record
 	str.str(""); str.fill('0'); str.width(8); str << right << fil->ref; str.width(0);
@@ -493,7 +493,7 @@ string Wdbe::getPrjshort(
 		) {
 	string Prjshort;
 
-	dbswdbe->loadStringBySQL("SELECT TblWdbeMProject.Short FROM TblWdbeMProject, TblWdbeMVersion WHERE TblWdbeMProject.ref = TblWdbeMVersion.refWdbeMProject AND TblWdbeMVersion.ref = "
+	dbswdbe->loadStringBySQL("SELECT TblWdbeMProject.Short FROM TblWdbeMProject, TblWdbeMVersion WHERE TblWdbeMProject.ref = TblWdbeMVersion.prjRefWdbeMProject AND TblWdbeMVersion.ref = "
 				+ to_string(refWdbeMVersion), Prjshort);
 
 	return(StrMod::cap(Prjshort));
@@ -504,6 +504,7 @@ void Wdbe::updateVerste(
 			, const ubigint refWdbeMVersion
 			, const uint ixVState
 		) {
+	vector<ubigint> refs;
 	ubigint ref;
 
 	WdbeJMVersionState* verJste = NULL;
@@ -518,6 +519,14 @@ void Wdbe::updateVerste(
 	};
 
 	if (!skip) {
+		if (ixVState == VecWdbeVMVersionState::READY) {
+			// make sure other versions with the same number in state build-ready become abandonned
+			dbswdbe->loadRefsBySQL("SELECT TblWdbeMVersion2.ref FROM TblWdbeMVersion AS TblWdbeMVersion1, TblWdbeMVersion AS TblWdbeMVersion2 WHERE TblWdbeMVersion1.ref = " + to_string(refWdbeMVersion)
+						+ " AND TblWdbeMVersion1.ref <> TblWdbeMVersion2.ref AND TblWdbeMVersion2.prjRefWdbeMProject = TblWdbeMVersion1.prjRefWdbeMProject AND TblWdbeMVersion2.Major = TblWdbeMVersion1.Major"
+						+ " AND TblWdbeMVersion2.Minor = TblWdbeMVersion1.Minor AND TblWdbeMVersion2.Sub = TblWdbeMVersion1.Sub AND TblWdbeMVersion2.ixVState = " + to_string(VecWdbeVMVersionState::READY), false, refs);
+			for (unsigned int i = 0; i < refs.size(); i++) updateVerste(dbswdbe, refs[i], VecWdbeVMVersionState::ABANDON);
+		};
+
 		// commence new state
 		ref = dbswdbe->tblwdbejmversionstate->insertNewRec(NULL, refWdbeMVersion, rawtime, ixVState);
 		dbswdbe->executeQuery("UPDATE TblWdbeMVersion SET refJState = " + to_string(ref) + ", ixVState = " + to_string(ixVState) + " WHERE ref = " + to_string(refWdbeMVersion));
@@ -4177,7 +4186,7 @@ string StubWdbe::getStubVerShort(
 			, stcchitemref_t* strefSub
 			, const bool refresh
 		) {
-	// example: "idhw v0.1.0"
+	// example: "idhw v0.1.0 (23)"
 	string stub;
 
 	WdbeMVersion* rec = NULL;
@@ -4203,7 +4212,7 @@ string StubWdbe::getStubVerShort(
 	if (ref != 0) {
 		if (dbswdbe->tblwdbemversion->loadRecByRef(ref, &rec)) {
 			if (stcch && !stit) stit = stcch->addStit(stref);
-			stub = getStubPrjShort(dbswdbe, rec->refWdbeMProject, ixWdbeVLocale, ixVNonetype, stcch, &stref) + " v" + to_string((int) (rec->Major)) + "." + to_string((int) (rec->Minor)) + "." + to_string((int) (rec->Sub)); // IP getStubVerShort --- ILINE
+			stub = getStubPrjShort(dbswdbe, rec->prjRefWdbeMProject, ixWdbeVLocale, ixVNonetype, stcch, &stref) + " v" + to_string((int) (rec->Major)) + "." + to_string((int) (rec->Minor)) + "." + to_string((int) (rec->Sub)) + " (" + to_string(rec->prjNum) + ")"; // IP getStubVerShort --- ILINE
 			if (stit) stit->stub = stub;
 			delete rec;
 		};
@@ -4221,7 +4230,7 @@ string StubWdbe::getStubVerStd(
 			, stcchitemref_t* strefSub
 			, const bool refresh
 		) {
-	// example: "ICARUSDetectorHardwareControl v0.1.0"
+	// example: "ICARUSDetectorHardwareControl v0.1.0 (s/n 23, abandonned)"
 	string stub;
 
 	WdbeMVersion* rec = NULL;
@@ -4250,15 +4259,12 @@ string StubWdbe::getStubVerStd(
 			// IP getStubVerStd --- IBEGIN
 			WdbeJMVersionState* verJste = NULL;
 
-			stub = getStubPrjStd(dbswdbe, rec->refWdbeMProject, ixWdbeVLocale, ixVNonetype, stcch, &stref) + " v" + to_string((int) (rec->Major)) + "." + to_string((int) (rec->Minor)) + "." + to_string((int) (rec->Sub));
+			stub = getStubPrjStd(dbswdbe, rec->prjRefWdbeMProject, ixWdbeVLocale, ixVNonetype, stcch, &stref) + " v" + to_string((int) (rec->Major)) + "." + to_string((int) (rec->Minor)) + "." + to_string((int) (rec->Sub));
 
-			if ((rec->ixVState != VecWdbeVMVersionState::READY) && (rec->ixVState != VecWdbeVMVersionState::ABANDON)) {
-				stub += " " + VecWdbeVMVersionState::getTitle(rec->ixVState, ixWdbeVLocale);
-
-				if (dbswdbe->tblwdbejmversionstate->loadRecByRef(rec->refJState, &verJste)) {
-					stub += " as of " + Ftm::stamp(verJste->x1Start);
-					delete verJste;
-				};
+			if (rec->ixVState != VecWdbeVMVersionState::READY) {
+				stub += " (s/n " + to_string(rec->prjNum);
+				if ((rec->ixVState == VecWdbeVMVersionState::NEWCRE) || (rec->ixVState == VecWdbeVMVersionState::NEWIMP) || (rec->ixVState == VecWdbeVMVersionState::ABANDON)) stub += ", " + VecWdbeVMVersionState::getTitle(rec->ixVState, ixWdbeVLocale);
+				stub += ")"; 
 			};
 			// IP getStubVerStd --- IEND
 			if (stit) stit->stub = stub;

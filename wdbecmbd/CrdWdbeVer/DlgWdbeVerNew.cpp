@@ -98,7 +98,7 @@ void DlgWdbeVerNew::refreshDetBvr(
 	contiac.numFDetPupBvr = 0;
 
 	if (dbswdbe->tblwdbemproject->loadRecByRef(feedFDetPupPrj.getRefByNum(contiac.numFDetPupPrj), &prj)) {
-		dbswdbe->loadRefsBySQL("SELECT ref FROM TblWdbeMVersion WHERE refWdbeMProject = " + to_string(prj->ref) + " ORDER BY Major ASC, Minor ASC, Sub ASC", false, refs);
+		dbswdbe->loadRefsBySQL("SELECT ref FROM TblWdbeMVersion WHERE prjRefWdbeMProject = " + to_string(prj->ref) + " ORDER BY prjNum ASC", false, refs);
 
 		for (unsigned int i = 0; i < refs.size();i++) {
 			feedFDetPupBvr.appendRefTitles(refs[i], StubWdbe::getStubVerNo(dbswdbe, refs[i]));
@@ -140,22 +140,22 @@ void DlgWdbeVerNew::refresh(
 	muteRefresh = true;
 
 	StatShr oldStatshr(statshr);
-	ContInf oldContinf(continf);
 	ContIac oldContiac(contiac);
+	ContInf oldContinf(continf);
 
 	// IP refresh --- BEGIN
 	// statshr
 	statshr.ButCreActive = evalButCreActive(dbswdbe);
 
+	// contiac
+
 	// continf
 	continf.numFSge = ixVSge;
 
-	// contiac
-
 	// IP refresh --- END
 	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
-	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
 	if (contiac.diff(&oldContiac).size() != 0) insert(moditems, DpchEngData::CONTIAC);
+	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
 
 	muteRefresh = false;
 };
@@ -365,7 +365,10 @@ uint DlgWdbeVerNew::enterSgeCreate(
 
 	ver.grp = xchg->getRefPreset(VecWdbeVPreset::PREWDBEGROUP, jref);
 	ver.own = xchg->getRefPreset(VecWdbeVPreset::PREWDBEOWNER, jref);
-	ver.refWdbeMProject = feedFDetPupPrj.getRefByNum(contiac.numFDetPupPrj);
+	ver.prjRefWdbeMProject = feedFDetPupPrj.getRefByNum(contiac.numFDetPupPrj);
+
+	ver.prjNum = 1;
+	if (dbswdbe->loadUintBySQL("SELECT prjNum FROM TblWdbeMVersion WHERE prjRefWdbeMProject = " + to_string(ver.prjRefWdbeMProject) + " ORDER BY prjNum DESC LIMIT 1", ver.prjNum)) ver.prjNum++;
 
 	ver.bvrRefWdbeMVersion = feedFDetPupBvr.getRefByNum(contiac.numFDetPupBvr);
 
@@ -433,7 +436,7 @@ uint DlgWdbeVerNew::enterSgeCreate(
 	// generate and archive project model file as source for WhizniumDBEBootstrap
 	iexprj->reset(dbswdbe);
 
-	iexprj->imeimproject.nodes.push_back(new ImeitemIWdbePrjMProject(dbswdbe, ver.refWdbeMProject));
+	iexprj->imeimproject.nodes.push_back(new ImeitemIWdbePrjMProject(dbswdbe, ver.prjRefWdbeMProject));
 
 	iexprj->imeimproject.nodes[0]->imeimversion.nodes.push_back(new ImeitemIWdbePrjMVersion(dbswdbe, ver.ref));
 	iexprj->imeimproject.nodes[0]->imeimversion.nodes[0]->ixVState = VecWdbeVMVersionState::NEWIMP;

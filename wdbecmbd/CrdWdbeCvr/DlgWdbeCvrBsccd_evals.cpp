@@ -30,6 +30,20 @@ bool DlgWdbeCvrBsccd::evalButDneActive(
 	return(args.back());
 };
 
+bool DlgWdbeCvrBsccd::evalLfiDldActive(
+			DbsWdbe* dbswdbe
+		) {
+	// sge(done)
+
+	vector<bool> args;
+	bool a;
+
+	a = false; a = (ixVSge == VecVSge::DONE);
+	args.push_back(a);
+
+	return(args.back());
+};
+
 bool DlgWdbeCvrBsccd::evalPprButRunActive(
 			DbsWdbe* dbswdbe
 		) {
@@ -53,20 +67,6 @@ bool DlgWdbeCvrBsccd::evalPprButStoActive(
 	bool a;
 
 	a = false; a = (ixVSge == VecVSge::POSTPRC);
-	args.push_back(a);
-
-	return(args.back());
-};
-
-bool DlgWdbeCvrBsccd::evalLfiDldActive(
-			DbsWdbe* dbswdbe
-		) {
-	// sge(done)
-
-	vector<bool> args;
-	bool a;
-
-	a = false; a = (ixVSge == VecVSge::DONE);
 	args.push_back(a);
 
 	return(args.back());

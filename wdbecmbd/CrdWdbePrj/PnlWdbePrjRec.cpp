@@ -39,8 +39,8 @@ PnlWdbePrjRec::PnlWdbePrjRec(
 	jref = xchg->addJob(dbswdbe, this, jrefSup);
 
 	pnlmnperson = NULL;
+	pnlprj1nversion = NULL;
 	pnldetail = NULL;
-	pnl1nversion = NULL;
 
 	// IP constructor.cust1 --- INSERT
 
@@ -100,16 +100,16 @@ void PnlWdbePrjRec::refresh(
 
 	if (statshr.ixWdbeVExpstate == VecWdbeVExpstate::MIND) {
 		if (pnldetail) {delete pnldetail; pnldetail = NULL;};
-		if (pnl1nversion) {delete pnl1nversion; pnl1nversion = NULL;};
+		if (pnlprj1nversion) {delete pnlprj1nversion; pnlprj1nversion = NULL;};
 		if (pnlmnperson) {delete pnlmnperson; pnlmnperson = NULL;};
 	} else {
 		if (!pnldetail) pnldetail = new PnlWdbePrjDetail(xchg, dbswdbe, jref, ixWdbeVLocale);
-		if (!pnl1nversion) pnl1nversion = new PnlWdbePrj1NVersion(xchg, dbswdbe, jref, ixWdbeVLocale);
+		if (!pnlprj1nversion) pnlprj1nversion = new PnlWdbePrjPrj1NVersion(xchg, dbswdbe, jref, ixWdbeVLocale);
 		if (!pnlmnperson) pnlmnperson = new PnlWdbePrjMNPerson(xchg, dbswdbe, jref, ixWdbeVLocale);
 	};
 
 	statshr.jrefDetail = ((pnldetail) ? pnldetail->jref : 0);
-	statshr.jref1NVersion = ((pnl1nversion) ? pnl1nversion->jref : 0);
+	statshr.jrefPrj1NVersion = ((pnlprj1nversion) ? pnlprj1nversion->jref : 0);
 	statshr.jrefMNPerson = ((pnlmnperson) ? pnlmnperson->jref : 0);
 
 	// IP refresh --- END
@@ -138,7 +138,7 @@ void PnlWdbePrjRec::updatePreset(
 
 		if (recPrj.ref != 0) {
 			if (pnldetail) pnldetail->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
-			if (pnl1nversion) pnl1nversion->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
+			if (pnlprj1nversion) pnlprj1nversion->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
 			if (pnlmnperson) pnlmnperson->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
 		};
 

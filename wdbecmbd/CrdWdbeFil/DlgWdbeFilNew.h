@@ -360,8 +360,8 @@ public:
 	};
 
 	bool evalButDneActive(DbsWdbe* dbswdbe);
-	bool evalDetButCreActive(DbsWdbe* dbswdbe);
 	bool evalFilUldActive(DbsWdbe* dbswdbe);
+	bool evalDetButCreActive(DbsWdbe* dbswdbe);
 
 public:
 	DlgWdbeFilNew(XchgWdbe* xchg, DbsWdbe* dbswdbe, const Sbecore::ubigint jrefSup, const Sbecore::uint ixWdbeVLocale);

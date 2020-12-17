@@ -651,8 +651,8 @@ private:
 	void handleDpchRetWdbePrctreeMerge(DbsWdbe* dbswdbe, DpchRetWdbePrctreeMerge* dpchret);
 
 	void handleTimerInSgeUpkidle(DbsWdbe* dbswdbe, const std::string& sref);
-	void handleTimerWithSrefMonInSgeWrite(DbsWdbe* dbswdbe);
 	void handleTimerWithSrefMonInSgeCreate(DbsWdbe* dbswdbe);
+	void handleTimerWithSrefMonInSgeWrite(DbsWdbe* dbswdbe);
 
 private:
 	void changeStage(DbsWdbe* dbswdbe, Sbecore::uint _ixVSge, DpchEngWdbe** dpcheng = NULL);

@@ -231,8 +231,8 @@ void QryWdbePinList::rerun_orderSQL(
 			string& sqlstr
 			, const uint preIxOrd
 		) {
-	if (preIxOrd == VecVOrd::SRF) sqlstr += " ORDER BY TblWdbeMPin.sref ASC";
-	else if (preIxOrd == VecVOrd::BNK) sqlstr += " ORDER BY TblWdbeMPin.refWdbeMBank ASC";
+	if (preIxOrd == VecVOrd::BNK) sqlstr += " ORDER BY TblWdbeMPin.refWdbeMBank ASC";
+	else if (preIxOrd == VecVOrd::SRF) sqlstr += " ORDER BY TblWdbeMPin.sref ASC";
 };
 
 void QryWdbePinList::fetch(
@@ -393,27 +393,13 @@ void QryWdbePinList::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBEPINUPD_REFEQ) {
-		call->abort = handleCallWdbePinUpd_refEq(dbswdbe, call->jref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEPINMOD) {
+	if (call->ixVCall == VecWdbeVCall::CALLWDBEPINMOD) {
 		call->abort = handleCallWdbePinMod(dbswdbe, call->jref);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEPINUPD_REFEQ) {
+		call->abort = handleCallWdbePinUpd_refEq(dbswdbe, call->jref);
 	} else if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
 		call->abort = handleCallWdbeStubChgFromSelf(dbswdbe);
 	};
-};
-
-bool QryWdbePinList::handleCallWdbePinUpd_refEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-
-	if (ixWdbeVQrystate != VecWdbeVQrystate::OOD) {
-		ixWdbeVQrystate = VecWdbeVQrystate::OOD;
-		xchg->triggerCall(dbswdbe, VecWdbeVCall::CALLWDBESTATCHG, jref);
-	};
-
-	return retval;
 };
 
 bool QryWdbePinList::handleCallWdbePinMod(
@@ -424,6 +410,20 @@ bool QryWdbePinList::handleCallWdbePinMod(
 
 	if ((ixWdbeVQrystate == VecWdbeVQrystate::UTD) || (ixWdbeVQrystate == VecWdbeVQrystate::SLM)) {
 		ixWdbeVQrystate = VecWdbeVQrystate::MNR;
+		xchg->triggerCall(dbswdbe, VecWdbeVCall::CALLWDBESTATCHG, jref);
+	};
+
+	return retval;
+};
+
+bool QryWdbePinList::handleCallWdbePinUpd_refEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+
+	if (ixWdbeVQrystate != VecWdbeVQrystate::OOD) {
+		ixWdbeVQrystate = VecWdbeVQrystate::OOD;
 		xchg->triggerCall(dbswdbe, VecWdbeVCall::CALLWDBESTATCHG, jref);
 	};
 

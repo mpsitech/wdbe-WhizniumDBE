@@ -1,31 +1,31 @@
 /**
-	* \file QryWdbePrj1NVersion.h
-	* job handler for job QryWdbePrj1NVersion (declarations)
+	* \file QryWdbePrjPrj1NVersion.h
+	* job handler for job QryWdbePrjPrj1NVersion (declarations)
 	* \copyright (C) 2016-2020 MPSI Technologies GmbH
 	* \author Alexander Wirthmueller (auto-generation)
-	* \date created: 28 Nov 2020
+	* \date created: 16 Dec 2020
 	*/
 // IP header --- ABOVE
 
-#ifndef QRYWDBEPRJ1NVERSION_H
-#define QRYWDBEPRJ1NVERSION_H
+#ifndef QRYWDBEPRJPRJ1NVERSION_H
+#define QRYWDBEPRJPRJ1NVERSION_H
 
 // IP include.spec --- INSERT
 
 // IP include.cust --- INSERT
 
-#define StatAppQryWdbePrj1NVersion QryWdbePrj1NVersion::StatApp
-#define StatShrQryWdbePrj1NVersion QryWdbePrj1NVersion::StatShr
-#define StgIacQryWdbePrj1NVersion QryWdbePrj1NVersion::StgIac
+#define StatAppQryWdbePrjPrj1NVersion QryWdbePrjPrj1NVersion::StatApp
+#define StatShrQryWdbePrjPrj1NVersion QryWdbePrjPrj1NVersion::StatShr
+#define StgIacQryWdbePrjPrj1NVersion QryWdbePrjPrj1NVersion::StgIac
 
 /**
-	* QryWdbePrj1NVersion
+	* QryWdbePrjPrj1NVersion
 	*/
-class QryWdbePrj1NVersion : public JobWdbe {
+class QryWdbePrjPrj1NVersion : public JobWdbe {
 
 public:
 	/**
-		* StatApp (full: StatAppQryWdbePrj1NVersion)
+		* StatApp (full: StatAppQryWdbePrjPrj1NVersion)
 		*/
 	class StatApp {
 
@@ -34,7 +34,7 @@ public:
 	};
 
 	/**
-		* StatShr (full: StatShrQryWdbePrj1NVersion)
+		* StatShr (full: StatShrQryWdbePrjPrj1NVersion)
 		*/
 	class StatShr : public Sbecore::Xmlio::Block {
 
@@ -58,7 +58,7 @@ public:
 	};
 
 	/**
-		* StgIac (full: StgIacQryWdbePrj1NVersion)
+		* StgIac (full: StgIacQryWdbePrjPrj1NVersion)
 		*/
 	class StgIac : public Sbecore::Xmlio::Block {
 
@@ -83,14 +83,14 @@ public:
 	};
 
 public:
-	QryWdbePrj1NVersion(XchgWdbe* xchg, DbsWdbe* dbswdbe, const Sbecore::ubigint jrefSup, const Sbecore::uint ixWdbeVLocale);
-	~QryWdbePrj1NVersion();
+	QryWdbePrjPrj1NVersion(XchgWdbe* xchg, DbsWdbe* dbswdbe, const Sbecore::ubigint jrefSup, const Sbecore::uint ixWdbeVLocale);
+	~QryWdbePrjPrj1NVersion();
 
 public:
 	StatShr statshr;
 	StgIac stgiac;
 
-	ListWdbeQPrj1NVersion rst;
+	ListWdbeQPrjPrj1NVersion rst;
 
 	Sbecore::uint ixWdbeVQrystate;
 
@@ -108,7 +108,7 @@ public:
 
 	Sbecore::uint getJnumByRef(const Sbecore::ubigint ref);
 	Sbecore::ubigint getRefByJnum(const Sbecore::uint jnum);
-	WdbeQPrj1NVersion* getRecByJnum(const Sbecore::uint jnum);
+	WdbeQPrjPrj1NVersion* getRecByJnum(const Sbecore::uint jnum);
 
 public:
 

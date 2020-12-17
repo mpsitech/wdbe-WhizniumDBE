@@ -1680,7 +1680,8 @@ main	void	0	TblWdbeMVersion	ver
 	idref		0	void		ref	ref	void	void		false	false
 	grp		84	tbl	TblWdbeMUsergroup	grp	grp	void	void		false	false
 	own		85	tbl	TblWdbeMUser	own	own	void	void		false	false
-	tblref		69	tbl	TblWdbeMProject	refWdbeMProject	prj	trefspec	void		true	true
+	tblref		69	tbl	TblWdbeMProject	prjRefWdbeMProject	prj	trefspec	void		true	true
+	enum		69	void		prjNum	prn	enauto	void		true	false
 	tblref		86	tbl	TblWdbeMVersion	bvrRefWdbeMVersion	bvr	trefspec	void		true	false
 	intval			void		Major	maj	usmallint	void		true	true
 		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
@@ -2591,7 +2592,7 @@ ImeIMRelation.iref	srefIxVBasetype	irefRefWznmCRelation	irefSupRefWznmMRelation	
 	ImeIAMRelationTitle.end
 67	grp	0	0	void	TblWdbeMUsergroup		TblWdbeMProject
 68	own	0	0	void	TblWdbeMUser		TblWdbeMProject
-69	_1n	0	0	void	TblWdbeMProject		TblWdbeMVersion				pref;affil
+69	_1n	0	0	void	TblWdbeMProject		TblWdbeMVersion			prj	pref;enum;affil
 70	_1npref	0	69	pref	TblWdbeMVersion		TblWdbeMProject
 	ImeIAMRelationTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
 	fromsngfull	enus	current version
@@ -2865,8 +2866,8 @@ cust	TblWdbeMUser		StubWdbeUsrStd	false		false	fkuntz / Franz Kuntz
 tco	TblWdbeMVariable		StubWdbeVarStd	false	sref	false	bytecnt
 tco	TblWdbeMVector		StubWdbeVecStd	false	sref	false	VecIcm2VCmd
 cust	TblWdbeMVersion		StubWdbeVerNo	false		false	0.1.0
-cust	TblWdbeMVersion		StubWdbeVerShort	false		false	idhw v0.1.0
-cust	TblWdbeMVersion		StubWdbeVerStd	false		false	ICARUSDetectorHardwareControl v0.1.0
+cust	TblWdbeMVersion		StubWdbeVerShort	false		false	idhw v0.1.0 (23)
+cust	TblWdbeMVersion		StubWdbeVerStd	false		false	ICARUSDetectorHardwareControl v0.1.0 (s/n 23, abandonned)
 cust	TblWdbeMVectoritem		StubWdbeVitStd	false		false	VecIcm2VCmd.syncSetTon
 ImeIMStub.end
 ImeIRMStubMStub.srefSupRefWznmMStub	srefSubRefWznmMStub

@@ -23,10 +23,10 @@ import sbecore.*;
 
 public class ApiWdbe {
 
-	public static final String WDBE_VERSION = "1.1.1";
+	public static final String WDBE_VERSION = "1.1.3";
 	public static final int WDBE_VERSION_MAJOR = 1;
 	public static final int WDBE_VERSION_MINOR = 1;
-	public static final int WDBE_VERSION_SUB = 1;
+	public static final int WDBE_VERSION_SUB = 3;
 
 	public static DpchEngWdbe readDpchEng(
 				String s
@@ -204,12 +204,12 @@ public class ApiWdbe {
 			else if (ixWdbeVDpch == VecWdbeVDpch.DPCHENGWDBEPRCMGE1NSIGNALDATA) dpcheng = (new PnlWdbePrcMge1NSignal()).new DpchEngData();
 			else if (ixWdbeVDpch == VecWdbeVDpch.DPCHENGWDBEPRCPRC1NVARIABLEDATA) dpcheng = (new PnlWdbePrcPrc1NVariable()).new DpchEngData();
 			else if (ixWdbeVDpch == VecWdbeVDpch.DPCHENGWDBEPRCRECDATA) dpcheng = (new PnlWdbePrcRec()).new DpchEngData();
-			else if (ixWdbeVDpch == VecWdbeVDpch.DPCHENGWDBEPRJ1NVERSIONDATA) dpcheng = (new PnlWdbePrj1NVersion()).new DpchEngData();
 			else if (ixWdbeVDpch == VecWdbeVDpch.DPCHENGWDBEPRJDATA) dpcheng = (new CrdWdbePrj()).new DpchEngData();
 			else if (ixWdbeVDpch == VecWdbeVDpch.DPCHENGWDBEPRJDETAILDATA) dpcheng = (new PnlWdbePrjDetail()).new DpchEngData();
 			else if (ixWdbeVDpch == VecWdbeVDpch.DPCHENGWDBEPRJHEADBARDATA) dpcheng = (new PnlWdbePrjHeadbar()).new DpchEngData();
 			else if (ixWdbeVDpch == VecWdbeVDpch.DPCHENGWDBEPRJLISTDATA) dpcheng = (new PnlWdbePrjList()).new DpchEngData();
 			else if (ixWdbeVDpch == VecWdbeVDpch.DPCHENGWDBEPRJMNPERSONDATA) dpcheng = (new PnlWdbePrjMNPerson()).new DpchEngData();
+			else if (ixWdbeVDpch == VecWdbeVDpch.DPCHENGWDBEPRJPRJ1NVERSIONDATA) dpcheng = (new PnlWdbePrjPrj1NVersion()).new DpchEngData();
 			else if (ixWdbeVDpch == VecWdbeVDpch.DPCHENGWDBEPRJRECDATA) dpcheng = (new PnlWdbePrjRec()).new DpchEngData();
 			else if (ixWdbeVDpch == VecWdbeVDpch.DPCHENGWDBEPRSADETAILDATA) dpcheng = (new PnlWdbePrsADetail()).new DpchEngData();
 			else if (ixWdbeVDpch == VecWdbeVDpch.DPCHENGWDBEPRSDATA) dpcheng = (new CrdWdbePrs()).new DpchEngData();

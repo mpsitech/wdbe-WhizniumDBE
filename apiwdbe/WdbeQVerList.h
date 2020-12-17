@@ -18,13 +18,13 @@
 class WdbeQVerList {
 
 public:
-	WdbeQVerList(const Sbecore::uint jnum = 0, const std::string stubGrp = "", const std::string stubOwn = "", const std::string stubRefWdbeMProject = "", const Sbecore::usmallint Major = 0, const Sbecore::usmallint Minor = 0, const Sbecore::usmallint Sub = 0, const std::string stubBvrRefWdbeMVersion = "", const std::string srefIxVState = "", const std::string titIxVState = "");
+	WdbeQVerList(const Sbecore::uint jnum = 0, const std::string stubGrp = "", const std::string stubOwn = "", const std::string stubPrjRefWdbeMProject = "", const Sbecore::usmallint Major = 0, const Sbecore::usmallint Minor = 0, const Sbecore::usmallint Sub = 0, const std::string stubBvrRefWdbeMVersion = "", const std::string srefIxVState = "", const std::string titIxVState = "");
 
 public:
 	Sbecore::uint jnum;
 	std::string stubGrp;
 	std::string stubOwn;
-	std::string stubRefWdbeMProject;
+	std::string stubPrjRefWdbeMProject;
 	Sbecore::usmallint Major;
 	Sbecore::usmallint Minor;
 	Sbecore::usmallint Sub;

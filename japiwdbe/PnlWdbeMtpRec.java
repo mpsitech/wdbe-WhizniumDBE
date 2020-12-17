@@ -118,8 +118,8 @@ public class PnlWdbeMtpRec {
 		public static final int INITDONEKHDLTYPE = 3;
 		public static final int INITDONEAPAR = 4;
 		public static final int INITDONEMDL1NPORT = 5;
-		public static final int INITDONEMDL1NGENERIC = 6;
-		public static final int INITDONETPL1NMODULE = 7;
+		public static final int INITDONETPL1NMODULE = 6;
+		public static final int INITDONEMDL1NGENERIC = 7;
 		public static final int INITDONESUP1NMODULE = 8;
 		public static final int INITDONEMGE1NSIGNAL = 9;
 		public static final int INITDONEREF1NFILE = 10;
@@ -130,8 +130,8 @@ public class PnlWdbeMtpRec {
 					, boolean initdoneKHdltype
 					, boolean initdoneAPar
 					, boolean initdoneMdl1NPort
-					, boolean initdoneMdl1NGeneric
 					, boolean initdoneTpl1NModule
+					, boolean initdoneMdl1NGeneric
 					, boolean initdoneSup1NModule
 					, boolean initdoneMge1NSignal
 					, boolean initdoneRef1NFile
@@ -141,13 +141,13 @@ public class PnlWdbeMtpRec {
 			this.initdoneKHdltype = initdoneKHdltype;
 			this.initdoneAPar = initdoneAPar;
 			this.initdoneMdl1NPort = initdoneMdl1NPort;
-			this.initdoneMdl1NGeneric = initdoneMdl1NGeneric;
 			this.initdoneTpl1NModule = initdoneTpl1NModule;
+			this.initdoneMdl1NGeneric = initdoneMdl1NGeneric;
 			this.initdoneSup1NModule = initdoneSup1NModule;
 			this.initdoneMge1NSignal = initdoneMge1NSignal;
 			this.initdoneRef1NFile = initdoneRef1NFile;
 
-			mask = new HashSet<Integer>(Arrays.asList(INITDONEDETAIL, INITDONEKPARKEY, INITDONEKHDLTYPE, INITDONEAPAR, INITDONEMDL1NPORT, INITDONEMDL1NGENERIC, INITDONETPL1NMODULE, INITDONESUP1NMODULE, INITDONEMGE1NSIGNAL, INITDONEREF1NFILE));
+			mask = new HashSet<Integer>(Arrays.asList(INITDONEDETAIL, INITDONEKPARKEY, INITDONEKHDLTYPE, INITDONEAPAR, INITDONEMDL1NPORT, INITDONETPL1NMODULE, INITDONEMDL1NGENERIC, INITDONESUP1NMODULE, INITDONEMGE1NSIGNAL, INITDONEREF1NFILE));
 		};
 
 		public boolean initdoneDetail;
@@ -155,8 +155,8 @@ public class PnlWdbeMtpRec {
 		public boolean initdoneKHdltype;
 		public boolean initdoneAPar;
 		public boolean initdoneMdl1NPort;
-		public boolean initdoneMdl1NGeneric;
 		public boolean initdoneTpl1NModule;
+		public boolean initdoneMdl1NGeneric;
 		public boolean initdoneSup1NModule;
 		public boolean initdoneMge1NSignal;
 		public boolean initdoneRef1NFile;
@@ -179,8 +179,8 @@ public class PnlWdbeMtpRec {
 				initdoneKHdltype = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneKHdltype", mask, INITDONEKHDLTYPE);
 				initdoneAPar = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneAPar", mask, INITDONEAPAR);
 				initdoneMdl1NPort = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneMdl1NPort", mask, INITDONEMDL1NPORT);
-				initdoneMdl1NGeneric = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneMdl1NGeneric", mask, INITDONEMDL1NGENERIC);
 				initdoneTpl1NModule = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneTpl1NModule", mask, INITDONETPL1NMODULE);
+				initdoneMdl1NGeneric = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneMdl1NGeneric", mask, INITDONEMDL1NGENERIC);
 				initdoneSup1NModule = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneSup1NModule", mask, INITDONESUP1NMODULE);
 				initdoneMge1NSignal = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneMge1NSignal", mask, INITDONEMGE1NSIGNAL);
 				initdoneRef1NFile = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneRef1NFile", mask, INITDONEREF1NFILE);
@@ -201,8 +201,8 @@ public class PnlWdbeMtpRec {
 			if (initdoneKHdltype == comp.initdoneKHdltype) items.add(INITDONEKHDLTYPE);
 			if (initdoneAPar == comp.initdoneAPar) items.add(INITDONEAPAR);
 			if (initdoneMdl1NPort == comp.initdoneMdl1NPort) items.add(INITDONEMDL1NPORT);
-			if (initdoneMdl1NGeneric == comp.initdoneMdl1NGeneric) items.add(INITDONEMDL1NGENERIC);
 			if (initdoneTpl1NModule == comp.initdoneTpl1NModule) items.add(INITDONETPL1NMODULE);
+			if (initdoneMdl1NGeneric == comp.initdoneMdl1NGeneric) items.add(INITDONEMDL1NGENERIC);
 			if (initdoneSup1NModule == comp.initdoneSup1NModule) items.add(INITDONESUP1NMODULE);
 			if (initdoneMge1NSignal == comp.initdoneMge1NSignal) items.add(INITDONEMGE1NSIGNAL);
 			if (initdoneRef1NFile == comp.initdoneRef1NFile) items.add(INITDONEREF1NFILE);
@@ -218,7 +218,7 @@ public class PnlWdbeMtpRec {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(INITDONEDETAIL, INITDONEKPARKEY, INITDONEKHDLTYPE, INITDONEAPAR, INITDONEMDL1NPORT, INITDONEMDL1NGENERIC, INITDONETPL1NMODULE, INITDONESUP1NMODULE, INITDONEMGE1NSIGNAL, INITDONEREF1NFILE));
+			diffitems = new HashSet<Integer>(Arrays.asList(INITDONEDETAIL, INITDONEKPARKEY, INITDONEKHDLTYPE, INITDONEAPAR, INITDONEMDL1NPORT, INITDONETPL1NMODULE, INITDONEMDL1NGENERIC, INITDONESUP1NMODULE, INITDONEMGE1NSIGNAL, INITDONEREF1NFILE));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);
@@ -237,8 +237,8 @@ public class PnlWdbeMtpRec {
 		public static final int SCRJREFKHDLTYPE = 4;
 		public static final int SCRJREFAPAR = 5;
 		public static final int SCRJREFMDL1NPORT = 6;
-		public static final int SCRJREFMDL1NGENERIC = 7;
-		public static final int SCRJREFTPL1NMODULE = 8;
+		public static final int SCRJREFTPL1NMODULE = 7;
+		public static final int SCRJREFMDL1NGENERIC = 8;
 		public static final int SCRJREFSUP1NMODULE = 9;
 		public static final int SCRJREFMGE1NSIGNAL = 10;
 		public static final int SCRJREFREF1NFILE = 11;
@@ -251,8 +251,8 @@ public class PnlWdbeMtpRec {
 					, String scrJrefKHdltype
 					, String scrJrefAPar
 					, String scrJrefMdl1NPort
-					, String scrJrefMdl1NGeneric
 					, String scrJrefTpl1NModule
+					, String scrJrefMdl1NGeneric
 					, String scrJrefSup1NModule
 					, String scrJrefMge1NSignal
 					, String scrJrefRef1NFile
@@ -264,14 +264,14 @@ public class PnlWdbeMtpRec {
 			this.scrJrefKHdltype = scrJrefKHdltype;
 			this.scrJrefAPar = scrJrefAPar;
 			this.scrJrefMdl1NPort = scrJrefMdl1NPort;
-			this.scrJrefMdl1NGeneric = scrJrefMdl1NGeneric;
 			this.scrJrefTpl1NModule = scrJrefTpl1NModule;
+			this.scrJrefMdl1NGeneric = scrJrefMdl1NGeneric;
 			this.scrJrefSup1NModule = scrJrefSup1NModule;
 			this.scrJrefMge1NSignal = scrJrefMge1NSignal;
 			this.scrJrefRef1NFile = scrJrefRef1NFile;
 			this.ButRegularizeActive = ButRegularizeActive;
 
-			mask = new HashSet<Integer>(Arrays.asList(IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFKPARKEY, SCRJREFKHDLTYPE, SCRJREFAPAR, SCRJREFMDL1NPORT, SCRJREFMDL1NGENERIC, SCRJREFTPL1NMODULE, SCRJREFSUP1NMODULE, SCRJREFMGE1NSIGNAL, SCRJREFREF1NFILE, BUTREGULARIZEACTIVE));
+			mask = new HashSet<Integer>(Arrays.asList(IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFKPARKEY, SCRJREFKHDLTYPE, SCRJREFAPAR, SCRJREFMDL1NPORT, SCRJREFTPL1NMODULE, SCRJREFMDL1NGENERIC, SCRJREFSUP1NMODULE, SCRJREFMGE1NSIGNAL, SCRJREFREF1NFILE, BUTREGULARIZEACTIVE));
 		};
 
 		public int ixWdbeVExpstate;
@@ -280,8 +280,8 @@ public class PnlWdbeMtpRec {
 		public String scrJrefKHdltype;
 		public String scrJrefAPar;
 		public String scrJrefMdl1NPort;
-		public String scrJrefMdl1NGeneric;
 		public String scrJrefTpl1NModule;
+		public String scrJrefMdl1NGeneric;
 		public String scrJrefSup1NModule;
 		public String scrJrefMge1NSignal;
 		public String scrJrefRef1NFile;
@@ -308,8 +308,8 @@ public class PnlWdbeMtpRec {
 				scrJrefKHdltype = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefKHdltype", mask, SCRJREFKHDLTYPE);
 				scrJrefAPar = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefAPar", mask, SCRJREFAPAR);
 				scrJrefMdl1NPort = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefMdl1NPort", mask, SCRJREFMDL1NPORT);
-				scrJrefMdl1NGeneric = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefMdl1NGeneric", mask, SCRJREFMDL1NGENERIC);
 				scrJrefTpl1NModule = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefTpl1NModule", mask, SCRJREFTPL1NMODULE);
+				scrJrefMdl1NGeneric = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefMdl1NGeneric", mask, SCRJREFMDL1NGENERIC);
 				scrJrefSup1NModule = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefSup1NModule", mask, SCRJREFSUP1NMODULE);
 				scrJrefMge1NSignal = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefMge1NSignal", mask, SCRJREFMGE1NSIGNAL);
 				scrJrefRef1NFile = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefRef1NFile", mask, SCRJREFREF1NFILE);
@@ -332,8 +332,8 @@ public class PnlWdbeMtpRec {
 			if (scrJrefKHdltype.equals(comp.scrJrefKHdltype)) items.add(SCRJREFKHDLTYPE);
 			if (scrJrefAPar.equals(comp.scrJrefAPar)) items.add(SCRJREFAPAR);
 			if (scrJrefMdl1NPort.equals(comp.scrJrefMdl1NPort)) items.add(SCRJREFMDL1NPORT);
-			if (scrJrefMdl1NGeneric.equals(comp.scrJrefMdl1NGeneric)) items.add(SCRJREFMDL1NGENERIC);
 			if (scrJrefTpl1NModule.equals(comp.scrJrefTpl1NModule)) items.add(SCRJREFTPL1NMODULE);
+			if (scrJrefMdl1NGeneric.equals(comp.scrJrefMdl1NGeneric)) items.add(SCRJREFMDL1NGENERIC);
 			if (scrJrefSup1NModule.equals(comp.scrJrefSup1NModule)) items.add(SCRJREFSUP1NMODULE);
 			if (scrJrefMge1NSignal.equals(comp.scrJrefMge1NSignal)) items.add(SCRJREFMGE1NSIGNAL);
 			if (scrJrefRef1NFile.equals(comp.scrJrefRef1NFile)) items.add(SCRJREFREF1NFILE);
@@ -350,7 +350,7 @@ public class PnlWdbeMtpRec {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFKPARKEY, SCRJREFKHDLTYPE, SCRJREFAPAR, SCRJREFMDL1NPORT, SCRJREFMDL1NGENERIC, SCRJREFTPL1NMODULE, SCRJREFSUP1NMODULE, SCRJREFMGE1NSIGNAL, SCRJREFREF1NFILE, BUTREGULARIZEACTIVE));
+			diffitems = new HashSet<Integer>(Arrays.asList(IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFKPARKEY, SCRJREFKHDLTYPE, SCRJREFAPAR, SCRJREFMDL1NPORT, SCRJREFTPL1NMODULE, SCRJREFMDL1NGENERIC, SCRJREFSUP1NMODULE, SCRJREFMGE1NSIGNAL, SCRJREFREF1NFILE, BUTREGULARIZEACTIVE));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);

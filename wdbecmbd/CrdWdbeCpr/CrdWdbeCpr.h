@@ -16,8 +16,8 @@
 
 #include "PnlWdbeCprList.h"
 #include "PnlWdbeCprHeadbar.h"
-#include "PnlWdbeCprRec.h"
 #include "DlgWdbeCprNew.h"
+#include "PnlWdbeCprRec.h"
 
 #define VecVWdbeCprDo CrdWdbeCpr::VecVDo
 #define VecVWdbeCprSge CrdWdbeCpr::VecVSge
@@ -203,8 +203,8 @@ public:
 
 	PnlWdbeCprList* pnllist;
 	PnlWdbeCprHeadbar* pnlheadbar;
-	PnlWdbeCprRec* pnlrec;
 	DlgWdbeCprNew* dlgnew;
+	PnlWdbeCprRec* pnlrec;
 
 	// IP vars.cust --- INSERT
 

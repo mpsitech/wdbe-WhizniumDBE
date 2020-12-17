@@ -10,10 +10,10 @@
 #ifndef APIWDBE_H
 #define APIWDBE_H
 
-#define WDBE_VERSION "1.1.1"
+#define WDBE_VERSION "1.1.3"
 #define WDBE_VERSION_MAJOR 1
 #define WDBE_VERSION_MINOR 1
-#define WDBE_VERSION_SUB 1
+#define WDBE_VERSION_SUB 3
 
 #include "ApiWdbe_blks.h"
 
@@ -81,9 +81,9 @@
 #include "WdbeQPrcList.h"
 #include "WdbeQPrcMge1NSignal.h"
 #include "WdbeQPrcPrc1NVariable.h"
-#include "WdbeQPrj1NVersion.h"
 #include "WdbeQPrjList.h"
 #include "WdbeQPrjMNPerson.h"
+#include "WdbeQPrjPrj1NVersion.h"
 #include "WdbeQPrsADetail.h"
 #include "WdbeQPrsList.h"
 #include "WdbeQPrsMNCoreproject.h"
@@ -308,11 +308,11 @@
 #include "PnlWdbePrcMge1NSignal.h"
 #include "PnlWdbePrcPrc1NVariable.h"
 #include "PnlWdbePrcRec.h"
-#include "PnlWdbePrj1NVersion.h"
 #include "PnlWdbePrjDetail.h"
 #include "PnlWdbePrjHeadbar.h"
 #include "PnlWdbePrjList.h"
 #include "PnlWdbePrjMNPerson.h"
+#include "PnlWdbePrjPrj1NVersion.h"
 #include "PnlWdbePrjRec.h"
 #include "PnlWdbePrsADetail.h"
 #include "PnlWdbePrsDetail.h"
@@ -470,9 +470,9 @@
 #include "QryWdbePrcList.h"
 #include "QryWdbePrcMge1NSignal.h"
 #include "QryWdbePrcPrc1NVariable.h"
-#include "QryWdbePrj1NVersion.h"
 #include "QryWdbePrjList.h"
 #include "QryWdbePrjMNPerson.h"
+#include "QryWdbePrjPrj1NVersion.h"
 #include "QryWdbePrsADetail.h"
 #include "QryWdbePrsList.h"
 #include "QryWdbePrsMNCoreproject.h"

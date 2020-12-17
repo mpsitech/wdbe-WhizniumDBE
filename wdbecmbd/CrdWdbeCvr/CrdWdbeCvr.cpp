@@ -47,11 +47,11 @@ CrdWdbeCvr::CrdWdbeCvr(
 
 	pnllist = NULL;
 	pnlheadbar = NULL;
+	dlgwrite = NULL;
 	pnlrec = NULL;
 	dlgnew = NULL;
 	dlgdetcd = NULL;
 	dlgbsccd = NULL;
-	dlgwrite = NULL;
 
 	// IP constructor.cust1 --- INSERT
 

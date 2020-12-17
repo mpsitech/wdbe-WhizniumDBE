@@ -916,7 +916,7 @@ void WdbeWrdevSys::expandTrgRte(
 
 	bool found;
 
-	StrMod::stringToVector(trgs.nodes[ixTrg]->rteSrefsWdbeMModule, ss);
+	StrMod::srefsToVector(trgs.nodes[ixTrg]->rteSrefsWdbeMModule, ss);
 
 	srefsTrgs.clear();
 	srefsFwdctrs.clear();
@@ -994,7 +994,7 @@ void WdbeWrdevSys::getTrgSubtrgs(
 
 	bool found;
 
-	StrMod::stringToVector(trgs.nodes[ixTrg]->rteSrefsWdbeMModule, ss);
+	StrMod::srefsToVector(trgs.nodes[ixTrg]->rteSrefsWdbeMModule, ss);
 
 	icsSubtrgs.clear();
 
@@ -1002,7 +1002,7 @@ void WdbeWrdevSys::getTrgSubtrgs(
 		if (i != ixTrg) {
 			trg = trgs.nodes[i];
 
-			StrMod::stringToVector(trg->rteSrefsWdbeMModule, ss2);
+			StrMod::srefsToVector(trg->rteSrefsWdbeMModule, ss2);
 
 			if (ss2.size() > ss.size()) {
 				found = true;

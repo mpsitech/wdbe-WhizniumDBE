@@ -1,9 +1,9 @@
 /**
-	* \file QryWdbePrj1NVersion.cpp
-	* job handler for job QryWdbePrj1NVersion (implementation)
+	* \file QryWdbePrjPrj1NVersion.cpp
+	* job handler for job QryWdbePrjPrj1NVersion (implementation)
 	* \copyright (C) 2016-2020 MPSI Technologies GmbH
 	* \author Alexander Wirthmueller (auto-generation)
-	* \date created: 28 Nov 2020
+	* \date created: 16 Dec 2020
 	*/
 // IP header --- ABOVE
 
@@ -13,9 +13,9 @@
 	#include <Wdbed.h>
 #endif
 
-#include "QryWdbePrj1NVersion.h"
+#include "QryWdbePrjPrj1NVersion.h"
 
-#include "QryWdbePrj1NVersion_blks.cpp"
+#include "QryWdbePrjPrj1NVersion_blks.cpp"
 
 using namespace std;
 using namespace Sbecore;
@@ -24,16 +24,16 @@ using namespace Xmlio;
 // IP ns.cust --- INSERT
 
 /******************************************************************************
- class QryWdbePrj1NVersion
+ class QryWdbePrjPrj1NVersion
  ******************************************************************************/
 
-QryWdbePrj1NVersion::QryWdbePrj1NVersion(
+QryWdbePrjPrj1NVersion::QryWdbePrjPrj1NVersion(
 			XchgWdbe* xchg
 			, DbsWdbe* dbswdbe
 			, const ubigint jrefSup
 			, const uint ixWdbeVLocale
 		) :
-			JobWdbe(xchg, VecWdbeVJob::QRYWDBEPRJ1NVERSION, jrefSup, ixWdbeVLocale)
+			JobWdbe(xchg, VecWdbeVJob::QRYWDBEPRJPRJ1NVERSION, jrefSup, ixWdbeVLocale)
 		{
 	jref = xchg->addJob(dbswdbe, this, jrefSup);
 
@@ -53,7 +53,7 @@ QryWdbePrj1NVersion::QryWdbePrj1NVersion(
 	// IP constructor.spec3 --- INSERT
 };
 
-QryWdbePrj1NVersion::~QryWdbePrj1NVersion() {
+QryWdbePrjPrj1NVersion::~QryWdbePrjPrj1NVersion() {
 	// IP destructor.spec --- INSERT
 
 	// IP destructor.cust --- INSERT
@@ -63,13 +63,13 @@ QryWdbePrj1NVersion::~QryWdbePrj1NVersion() {
 
 // IP cust --- INSERT
 
-void QryWdbePrj1NVersion::refreshJnum() {
+void QryWdbePrjPrj1NVersion::refreshJnum() {
 	ubigint preRefSel = xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFSEL, jref);
 
 	stgiac.jnum = getJnumByRef(preRefSel);
 };
 
-void QryWdbePrj1NVersion::rerun(
+void QryWdbePrjPrj1NVersion::rerun(
 			DbsWdbe* dbswdbe
 			, const bool call
 		) {
@@ -82,11 +82,11 @@ void QryWdbePrj1NVersion::rerun(
 	xchg->removeClstns(VecWdbeVCall::CALLWDBEVERMOD_PRJEQ, jref);
 
 	dbswdbe->tblwdbeqselect->removeRstByJref(jref);
-	dbswdbe->tblwdbeqprj1nversion->removeRstByJref(jref);
+	dbswdbe->tblwdbeqprjprj1nversion->removeRstByJref(jref);
 
 	sqlstr = "SELECT COUNT(TblWdbeMVersion.ref)";
 	sqlstr += " FROM TblWdbeMVersion";
-	sqlstr += " WHERE TblWdbeMVersion.refWdbeMProject = " + to_string(preRefPrj) + "";
+	sqlstr += " WHERE TblWdbeMVersion.prjRefWdbeMProject = " + to_string(preRefPrj) + "";
 	dbswdbe->loadUintBySQL(sqlstr, cnt);
 
 	statshr.ntot = cnt;
@@ -97,14 +97,15 @@ void QryWdbePrj1NVersion::rerun(
 		else stgiac.jnumFirstload = 1;
 	};
 
-	sqlstr = "INSERT INTO TblWdbeQPrj1NVersion(jref, jnum, ref)";
-	sqlstr += " SELECT " + to_string(jref) + ", 0, TblWdbeMVersion.ref";
+	sqlstr = "INSERT INTO TblWdbeQPrjPrj1NVersion(jref, jnum, ref, prjNum)";
+	sqlstr += " SELECT " + to_string(jref) + ", 0, TblWdbeMVersion.ref, TblWdbeMVersion.prjNum";
 	sqlstr += " FROM TblWdbeMVersion";
-	sqlstr += " WHERE TblWdbeMVersion.refWdbeMProject = " + to_string(preRefPrj) + "";
+	sqlstr += " WHERE TblWdbeMVersion.prjRefWdbeMProject = " + to_string(preRefPrj) + "";
+	sqlstr += " ORDER BY prjNum ASC";
 	sqlstr += " LIMIT " + to_string(stgiac.nload) + " OFFSET " + to_string(stgiac.jnumFirstload-1);
 	dbswdbe->executeQuery(sqlstr);
 
-	sqlstr = "UPDATE TblWdbeQPrj1NVersion SET jnum = qref WHERE jref = " + to_string(jref);
+	sqlstr = "UPDATE TblWdbeQPrjPrj1NVersion SET jnum = qref WHERE jref = " + to_string(jref);
 	dbswdbe->executeQuery(sqlstr);
 
 	ixWdbeVQrystate = VecWdbeVQrystate::UTD;
@@ -117,7 +118,7 @@ void QryWdbePrj1NVersion::rerun(
 	xchg->addRefClstn(VecWdbeVCall::CALLWDBEVERMOD_PRJEQ, jref, Clstn::VecVJobmask::ALL, 0, false, preRefPrj);
 };
 
-void QryWdbePrj1NVersion::fetch(
+void QryWdbePrjPrj1NVersion::fetch(
 			DbsWdbe* dbswdbe
 		) {
 	string sqlstr;
@@ -125,9 +126,9 @@ void QryWdbePrj1NVersion::fetch(
 	StmgrWdbe* stmgr = NULL;
 	Stcch* stcch = NULL;
 
-	WdbeQPrj1NVersion* rec = NULL;
+	WdbeQPrjPrj1NVersion* rec = NULL;
 
-	dbswdbe->tblwdbeqprj1nversion->loadRstByJref(jref, false, rst);
+	dbswdbe->tblwdbeqprjprj1nversion->loadRstByJref(jref, false, rst);
 	statshr.nload = rst.nodes.size();
 
 	stmgr = xchg->getStmgrByJref(jref);
@@ -146,18 +147,18 @@ void QryWdbePrj1NVersion::fetch(
 		};
 
 		stmgr->commit();
-		stmgr->unlockAccess("QryWdbePrj1NVersion", "fetch");
+		stmgr->unlockAccess("QryWdbePrjPrj1NVersion", "fetch");
 	};
 
 	refreshJnum();
 };
 
-uint QryWdbePrj1NVersion::getJnumByRef(
+uint QryWdbePrjPrj1NVersion::getJnumByRef(
 			const ubigint ref
 		) {
 	uint retval = 0;
 
-	WdbeQPrj1NVersion* rec = NULL;
+	WdbeQPrjPrj1NVersion* rec = NULL;
 
 	for (unsigned int i = 0; i < rst.nodes.size(); i++) {
 		rec = rst.nodes[i];
@@ -171,20 +172,20 @@ uint QryWdbePrj1NVersion::getJnumByRef(
 	return retval;
 };
 
-ubigint QryWdbePrj1NVersion::getRefByJnum(
+ubigint QryWdbePrjPrj1NVersion::getRefByJnum(
 			const uint jnum
 		) {
 	uint ref = 0;
 
-	WdbeQPrj1NVersion* rec = getRecByJnum(jnum);
+	WdbeQPrjPrj1NVersion* rec = getRecByJnum(jnum);
 	if (rec) ref = rec->ref;
 	return ref;
 };
 
-WdbeQPrj1NVersion* QryWdbePrj1NVersion::getRecByJnum(
+WdbeQPrjPrj1NVersion* QryWdbePrjPrj1NVersion::getRecByJnum(
 			const uint jnum
 		) {
-	WdbeQPrj1NVersion* rec = NULL;
+	WdbeQPrjPrj1NVersion* rec = NULL;
 
 	for (unsigned int i = 0; i < rst.nodes.size(); i++) {
 		rec = rst.nodes[i];
@@ -195,7 +196,7 @@ WdbeQPrj1NVersion* QryWdbePrj1NVersion::getRecByJnum(
 	return rec;
 };
 
-void QryWdbePrj1NVersion::handleRequest(
+void QryWdbePrjPrj1NVersion::handleRequest(
 			DbsWdbe* dbswdbe
 			, ReqWdbe* req
 		) {
@@ -220,7 +221,7 @@ void QryWdbePrj1NVersion::handleRequest(
 	};
 };
 
-bool QryWdbePrj1NVersion::handleRerun(
+bool QryWdbePrjPrj1NVersion::handleRerun(
 			DbsWdbe* dbswdbe
 		) {
 	bool retval = false;
@@ -237,11 +238,11 @@ bool QryWdbePrj1NVersion::handleRerun(
 	return retval;
 };
 
-bool QryWdbePrj1NVersion::handleShow(
+bool QryWdbePrjPrj1NVersion::handleShow(
 			DbsWdbe* dbswdbe
 		) {
 	bool retval = false;
-	WdbeQPrj1NVersion* rec = NULL;
+	WdbeQPrjPrj1NVersion* rec = NULL;
 
 	// header row
 	cout << "\tqref";
@@ -249,6 +250,7 @@ bool QryWdbePrj1NVersion::handleShow(
 	cout << "\tjnum";
 	cout << "\tref";
 	cout << "\tstubRef";
+	cout << "\tprjNum";
 	cout << endl;
 
 	// record rows
@@ -260,12 +262,13 @@ bool QryWdbePrj1NVersion::handleShow(
 		cout << "\t" << rec->jnum;
 		cout << "\t" << rec->ref;
 		cout << "\t" << rec->stubRef;
+		cout << "\t" << rec->prjNum;
 		cout << endl;
 	};
 	return retval;
 };
 
-void QryWdbePrj1NVersion::handleCall(
+void QryWdbePrjPrj1NVersion::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
@@ -276,7 +279,7 @@ void QryWdbePrj1NVersion::handleCall(
 	};
 };
 
-bool QryWdbePrj1NVersion::handleCallWdbeVerMod_prjEq(
+bool QryWdbePrjPrj1NVersion::handleCallWdbeVerMod_prjEq(
 			DbsWdbe* dbswdbe
 			, const ubigint jrefTrig
 		) {
@@ -290,7 +293,7 @@ bool QryWdbePrj1NVersion::handleCallWdbeVerMod_prjEq(
 	return retval;
 };
 
-bool QryWdbePrj1NVersion::handleCallWdbeStubChgFromSelf(
+bool QryWdbePrjPrj1NVersion::handleCallWdbeStubChgFromSelf(
 			DbsWdbe* dbswdbe
 		) {
 	bool retval = false;

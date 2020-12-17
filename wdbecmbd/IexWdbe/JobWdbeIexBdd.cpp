@@ -325,7 +325,7 @@ uint JobWdbeIexBdd::enterSgeImport(
 	ImeitemIMUnit* unt2 = NULL;
 	ImeitemIMModule* mdl2 = NULL;
 
-	dbswdbe->loadStringBySQL("SELECT TblWdbeMProject.Short FROM TblWdbeMProject, TblWdbeMVersion WHERE TblWdbeMProject.ref = TblWdbeMVersion.refWdbeMProject AND TblWdbeMVersion.ref = " + to_string(refWdbeMVersion), Prjshort);
+	dbswdbe->loadStringBySQL("SELECT TblWdbeMProject.Short FROM TblWdbeMProject, TblWdbeMVersion WHERE TblWdbeMProject.ref = TblWdbeMVersion.prjRefWdbeMProject AND TblWdbeMVersion.ref = " + to_string(refWdbeMVersion), Prjshort);
 	Prjshort = StrMod::cap(Prjshort);
 	// IP enterSgeImport.prep --- IEND
 

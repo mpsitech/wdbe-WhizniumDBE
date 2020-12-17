@@ -16,11 +16,11 @@
 
 #include "PnlWdbeCvrList.h"
 #include "PnlWdbeCvrHeadbar.h"
+#include "DlgWdbeCvrWrite.h"
 #include "PnlWdbeCvrRec.h"
 #include "DlgWdbeCvrNew.h"
 #include "DlgWdbeCvrDetcd.h"
 #include "DlgWdbeCvrBsccd.h"
-#include "DlgWdbeCvrWrite.h"
 
 #define VecVWdbeCvrDo CrdWdbeCvr::VecVDo
 #define VecVWdbeCvrSge CrdWdbeCvr::VecVSge
@@ -236,11 +236,11 @@ public:
 
 	PnlWdbeCvrList* pnllist;
 	PnlWdbeCvrHeadbar* pnlheadbar;
+	DlgWdbeCvrWrite* dlgwrite;
 	PnlWdbeCvrRec* pnlrec;
 	DlgWdbeCvrNew* dlgnew;
 	DlgWdbeCvrDetcd* dlgdetcd;
 	DlgWdbeCvrBsccd* dlgbsccd;
-	DlgWdbeCvrWrite* dlgwrite;
 
 	// IP vars.cust --- INSERT
 

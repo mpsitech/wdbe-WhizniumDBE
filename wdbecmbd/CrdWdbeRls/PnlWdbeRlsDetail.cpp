@@ -100,7 +100,7 @@ void PnlWdbeRlsDetail::refreshLstOpt(
 	// contiac
 	contiac.numsFLstOpt.clear();
 
-	StrMod::stringToVector(contiac.TxfOpt, ss);
+	StrMod::srefsToVector(contiac.TxfOpt, ss);
 
 	for (unsigned int i = 0; i < ss.size(); i++) {
 		s = ss[i];

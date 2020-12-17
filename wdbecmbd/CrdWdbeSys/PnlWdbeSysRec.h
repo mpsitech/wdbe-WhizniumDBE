@@ -15,8 +15,8 @@
 // IP include.cust --- INSERT
 
 #include "PnlWdbeSysHk1NVector.h"
-#include "PnlWdbeSysDetail.h"
 #include "PnlWdbeSysSys1NTarget.h"
+#include "PnlWdbeSysDetail.h"
 
 #define VecVWdbeSysRecDo PnlWdbeSysRec::VecVDo
 
@@ -172,8 +172,8 @@ public:
 	StatShr statshr;
 
 	PnlWdbeSysHk1NVector* pnlhk1nvector;
-	PnlWdbeSysDetail* pnldetail;
 	PnlWdbeSysSys1NTarget* pnlsys1ntarget;
+	PnlWdbeSysDetail* pnldetail;
 
 	WdbeMSystem recSys;
 
@@ -208,9 +208,9 @@ public:
 
 private:
 	bool handleCallWdbeSysUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
-	bool handleCallWdbeSys_unt_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
-	bool handleCallWdbeSys_untEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
 	bool handleCallWdbeSys_verEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeSys_untEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeSys_unt_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
 
 };
 

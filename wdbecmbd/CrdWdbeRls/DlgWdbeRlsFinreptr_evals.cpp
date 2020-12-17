@@ -30,44 +30,6 @@ bool DlgWdbeRlsFinreptr::evalButDneActive(
 	return(args.back());
 };
 
-bool DlgWdbeRlsFinreptr::evalFinButRunActive(
-			DbsWdbe* dbswdbe
-		) {
-	// sge(idle)
-
-	vector<bool> args;
-	bool a;
-
-	a = false; a = (ixVSge == VecVSge::IDLE);
-	args.push_back(a);
-
-	return(args.back());
-};
-
-bool DlgWdbeRlsFinreptr::evalFinButStoActive(
-			DbsWdbe* dbswdbe
-		) {
-	// sge(finidle|pack|commit)
-
-	vector<bool> args;
-	bool a, b;
-
-	a = false; a = (ixVSge == VecVSge::FINIDLE);
-	args.push_back(a);
-	a = false; a = (ixVSge == VecVSge::PACK);
-	args.push_back(a);
-	a = false; a = (ixVSge == VecVSge::COMMIT);
-	args.push_back(a);
-	b = args.back(); args.pop_back();
-	a = args.back(); args.pop_back();
-	args.push_back(a || b);
-	b = args.back(); args.pop_back();
-	a = args.back(); args.pop_back();
-	args.push_back(a || b);
-
-	return(args.back());
-};
-
 bool DlgWdbeRlsFinreptr::evalResDldAvail(
 			DbsWdbe* dbswdbe
 		) {
@@ -170,6 +132,44 @@ bool DlgWdbeRlsFinreptr::evalResButPsgActive(
 
 	a = false; a = (ixVSge == VecVSge::FINDONE);
 	args.push_back(a);
+
+	return(args.back());
+};
+
+bool DlgWdbeRlsFinreptr::evalFinButRunActive(
+			DbsWdbe* dbswdbe
+		) {
+	// sge(idle)
+
+	vector<bool> args;
+	bool a;
+
+	a = false; a = (ixVSge == VecVSge::IDLE);
+	args.push_back(a);
+
+	return(args.back());
+};
+
+bool DlgWdbeRlsFinreptr::evalFinButStoActive(
+			DbsWdbe* dbswdbe
+		) {
+	// sge(finidle|pack|commit)
+
+	vector<bool> args;
+	bool a, b;
+
+	a = false; a = (ixVSge == VecVSge::FINIDLE);
+	args.push_back(a);
+	a = false; a = (ixVSge == VecVSge::PACK);
+	args.push_back(a);
+	a = false; a = (ixVSge == VecVSge::COMMIT);
+	args.push_back(a);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
 
 	return(args.back());
 };

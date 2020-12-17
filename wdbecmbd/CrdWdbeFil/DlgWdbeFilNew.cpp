@@ -116,7 +116,7 @@ ubigint DlgWdbeFilNew::getRefVer(
 				if (ss.size() >= 2) Minor = atoi(ss[1].c_str());
 				if (ss.size() >= 3) Sub = atoi(ss[2].c_str());
 
-				dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMVersion WHERE refWdbeMProject = " + to_string(refWdbeMProject) + " AND Major = " + to_string(Major) + " AND Minor = " + to_string(Minor) + " AND Sub = " + to_string(Sub), refVer);
+				dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMVersion WHERE prjRefWdbeMProject = " + to_string(refWdbeMProject) + " AND Major = " + to_string(Major) + " AND Minor = " + to_string(Minor) + " AND Sub = " + to_string(Sub), refVer);
 			};
 		};
 	};

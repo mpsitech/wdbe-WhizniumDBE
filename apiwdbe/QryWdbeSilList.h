@@ -29,12 +29,12 @@ namespace QryWdbeSilList {
 
 	public:
 		static const Sbecore::uint MDL = 1;
-		static const Sbecore::uint RET = 2;
-		static const Sbecore::uint REU = 3;
-		static const Sbecore::uint SYS = 4;
-		static const Sbecore::uint TIT = 5;
-		static const Sbecore::uint TYP = 6;
-		static const Sbecore::uint SRF = 7;
+		static const Sbecore::uint SRF = 2;
+		static const Sbecore::uint TIT = 3;
+		static const Sbecore::uint TYP = 4;
+		static const Sbecore::uint RET = 5;
+		static const Sbecore::uint REU = 6;
+		static const Sbecore::uint SYS = 7;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);

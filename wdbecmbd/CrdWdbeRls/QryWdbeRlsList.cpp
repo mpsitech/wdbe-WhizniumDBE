@@ -224,8 +224,8 @@ void QryWdbeRlsList::rerun_orderSQL(
 			string& sqlstr
 			, const uint preIxOrd
 		) {
-	if (preIxOrd == VecVOrd::MCH) sqlstr += " ORDER BY TblWdbeMRelease.refWdbeMMachine ASC";
-	else if (preIxOrd == VecVOrd::VER) sqlstr += " ORDER BY TblWdbeMRelease.refWdbeMVersion ASC";
+	if (preIxOrd == VecVOrd::VER) sqlstr += " ORDER BY TblWdbeMRelease.refWdbeMVersion ASC";
+	else if (preIxOrd == VecVOrd::MCH) sqlstr += " ORDER BY TblWdbeMRelease.refWdbeMMachine ASC";
 	else if (preIxOrd == VecVOrd::TYP) sqlstr += " ORDER BY TblWdbeMRelease.ixVBasetype ASC";
 	else if (preIxOrd == VecVOrd::SRF) sqlstr += " ORDER BY TblWdbeMRelease.sref ASC";
 };

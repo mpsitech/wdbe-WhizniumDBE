@@ -22,8 +22,8 @@ uint QryWdbeVecList::VecVOrd::getIx(
 
 	if (s == "hku") return HKU;
 	if (s == "hkt") return HKT;
-	if (s == "typ") return TYP;
 	if (s == "srf") return SRF;
+	if (s == "typ") return TYP;
 
 	return(0);
 };
@@ -33,8 +33,8 @@ string QryWdbeVecList::VecVOrd::getSref(
 		) {
 	if (ix == HKU) return("hku");
 	if (ix == HKT) return("hkt");
-	if (ix == TYP) return("typ");
 	if (ix == SRF) return("srf");
+	if (ix == TYP) return("typ");
 
 	return("");
 };

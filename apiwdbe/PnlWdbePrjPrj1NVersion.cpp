@@ -1,27 +1,29 @@
 /**
-	* \file PnlWdbePrj1NVersion.cpp
-	* API code for job PnlWdbePrj1NVersion (implementation)
+	* \file PnlWdbePrjPrj1NVersion.cpp
+	* API code for job PnlWdbePrjPrj1NVersion (implementation)
 	* \copyright (C) 2016-2020 MPSI Technologies GmbH
 	* \author Alexander Wirthmueller (auto-generation)
-	* \date created: 5 Dec 2020
+	* \date created: 16 Dec 2020
 	*/
 // IP header --- ABOVE
 
-#include "PnlWdbePrj1NVersion.h"
+#include "PnlWdbePrjPrj1NVersion.h"
 
 using namespace std;
 using namespace Sbecore;
 using namespace Xmlio;
 
 /******************************************************************************
- class PnlWdbePrj1NVersion::VecVDo
+ class PnlWdbePrjPrj1NVersion::VecVDo
  ******************************************************************************/
 
-uint PnlWdbePrj1NVersion::VecVDo::getIx(
+uint PnlWdbePrjPrj1NVersion::VecVDo::getIx(
 			const string& sref
 		) {
 	string s = StrMod::lc(sref);
 
+	if (s == "butupclick") return BUTUPCLICK;
+	if (s == "butdownclick") return BUTDOWNCLICK;
 	if (s == "butviewclick") return BUTVIEWCLICK;
 	if (s == "butnewclick") return BUTNEWCLICK;
 	if (s == "butdeleteclick") return BUTDELETECLICK;
@@ -30,9 +32,11 @@ uint PnlWdbePrj1NVersion::VecVDo::getIx(
 	return(0);
 };
 
-string PnlWdbePrj1NVersion::VecVDo::getSref(
+string PnlWdbePrjPrj1NVersion::VecVDo::getSref(
 			const uint ix
 		) {
+	if (ix == BUTUPCLICK) return("ButUpClick");
+	if (ix == BUTDOWNCLICK) return("ButDownClick");
 	if (ix == BUTVIEWCLICK) return("ButViewClick");
 	if (ix == BUTNEWCLICK) return("ButNewClick");
 	if (ix == BUTDELETECLICK) return("ButDeleteClick");
@@ -42,10 +46,10 @@ string PnlWdbePrj1NVersion::VecVDo::getSref(
 };
 
 /******************************************************************************
- class PnlWdbePrj1NVersion::ContInf
+ class PnlWdbePrjPrj1NVersion::ContInf
  ******************************************************************************/
 
-PnlWdbePrj1NVersion::ContInf::ContInf(
+PnlWdbePrjPrj1NVersion::ContInf::ContInf(
 			const uint numFCsiQst
 		) :
 			Block()
@@ -55,7 +59,7 @@ PnlWdbePrj1NVersion::ContInf::ContInf(
 	mask = {NUMFCSIQST};
 };
 
-bool PnlWdbePrj1NVersion::ContInf::readXML(
+bool PnlWdbePrjPrj1NVersion::ContInf::readXML(
 			xmlXPathContext* docctx
 			, string basexpath
 			, bool addbasetag
@@ -65,11 +69,11 @@ bool PnlWdbePrj1NVersion::ContInf::readXML(
 	bool basefound;
 
 	if (addbasetag)
-		basefound = checkUclcXPaths(docctx, basexpath, basexpath, "ContInfWdbePrj1NVersion");
+		basefound = checkUclcXPaths(docctx, basexpath, basexpath, "ContInfWdbePrjPrj1NVersion");
 	else
 		basefound = checkXPath(docctx, basexpath);
 
-	string itemtag = "ContitemInfWdbePrj1NVersion";
+	string itemtag = "ContitemInfWdbePrjPrj1NVersion";
 
 	if (basefound) {
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "numFCsiQst", numFCsiQst)) add(NUMFCSIQST);
@@ -78,7 +82,7 @@ bool PnlWdbePrj1NVersion::ContInf::readXML(
 	return basefound;
 };
 
-set<uint> PnlWdbePrj1NVersion::ContInf::comm(
+set<uint> PnlWdbePrjPrj1NVersion::ContInf::comm(
 			const ContInf* comp
 		) {
 	set<uint> items;
@@ -88,7 +92,7 @@ set<uint> PnlWdbePrj1NVersion::ContInf::comm(
 	return(items);
 };
 
-set<uint> PnlWdbePrj1NVersion::ContInf::diff(
+set<uint> PnlWdbePrjPrj1NVersion::ContInf::diff(
 			const ContInf* comp
 		) {
 	set<uint> commitems;
@@ -103,10 +107,10 @@ set<uint> PnlWdbePrj1NVersion::ContInf::diff(
 };
 
 /******************************************************************************
- class PnlWdbePrj1NVersion::StatApp
+ class PnlWdbePrjPrj1NVersion::StatApp
  ******************************************************************************/
 
-PnlWdbePrj1NVersion::StatApp::StatApp(
+PnlWdbePrjPrj1NVersion::StatApp::StatApp(
 			const uint ixWdbeVExpstate
 		) :
 			Block()
@@ -116,7 +120,7 @@ PnlWdbePrj1NVersion::StatApp::StatApp(
 	mask = {IXWDBEVEXPSTATE};
 };
 
-bool PnlWdbePrj1NVersion::StatApp::readXML(
+bool PnlWdbePrjPrj1NVersion::StatApp::readXML(
 			xmlXPathContext* docctx
 			, string basexpath
 			, bool addbasetag
@@ -128,11 +132,11 @@ bool PnlWdbePrj1NVersion::StatApp::readXML(
 	bool basefound;
 
 	if (addbasetag)
-		basefound = checkUclcXPaths(docctx, basexpath, basexpath, "StatAppWdbePrj1NVersion");
+		basefound = checkUclcXPaths(docctx, basexpath, basexpath, "StatAppWdbePrjPrj1NVersion");
 	else
 		basefound = checkXPath(docctx, basexpath);
 
-	string itemtag = "StatitemAppWdbePrj1NVersion";
+	string itemtag = "StatitemAppWdbePrjPrj1NVersion";
 
 	if (basefound) {
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "srefIxWdbeVExpstate", srefIxWdbeVExpstate)) {
@@ -144,7 +148,7 @@ bool PnlWdbePrj1NVersion::StatApp::readXML(
 	return basefound;
 };
 
-set<uint> PnlWdbePrj1NVersion::StatApp::comm(
+set<uint> PnlWdbePrjPrj1NVersion::StatApp::comm(
 			const StatApp* comp
 		) {
 	set<uint> items;
@@ -154,7 +158,7 @@ set<uint> PnlWdbePrj1NVersion::StatApp::comm(
 	return(items);
 };
 
-set<uint> PnlWdbePrj1NVersion::StatApp::diff(
+set<uint> PnlWdbePrjPrj1NVersion::StatApp::diff(
 			const StatApp* comp
 		) {
 	set<uint> commitems;
@@ -169,11 +173,15 @@ set<uint> PnlWdbePrj1NVersion::StatApp::diff(
 };
 
 /******************************************************************************
- class PnlWdbePrj1NVersion::StatShr
+ class PnlWdbePrjPrj1NVersion::StatShr
  ******************************************************************************/
 
-PnlWdbePrj1NVersion::StatShr::StatShr(
-			const bool ButViewAvail
+PnlWdbePrjPrj1NVersion::StatShr::StatShr(
+			const bool ButUpAvail
+			, const bool ButUpActive
+			, const bool ButDownAvail
+			, const bool ButDownActive
+			, const bool ButViewAvail
 			, const bool ButViewActive
 			, const bool ButNewAvail
 			, const bool ButDeleteAvail
@@ -181,16 +189,20 @@ PnlWdbePrj1NVersion::StatShr::StatShr(
 		) :
 			Block()
 		{
+	this->ButUpAvail = ButUpAvail;
+	this->ButUpActive = ButUpActive;
+	this->ButDownAvail = ButDownAvail;
+	this->ButDownActive = ButDownActive;
 	this->ButViewAvail = ButViewAvail;
 	this->ButViewActive = ButViewActive;
 	this->ButNewAvail = ButNewAvail;
 	this->ButDeleteAvail = ButDeleteAvail;
 	this->ButDeleteActive = ButDeleteActive;
 
-	mask = {BUTVIEWAVAIL, BUTVIEWACTIVE, BUTNEWAVAIL, BUTDELETEAVAIL, BUTDELETEACTIVE};
+	mask = {BUTUPAVAIL, BUTUPACTIVE, BUTDOWNAVAIL, BUTDOWNACTIVE, BUTVIEWAVAIL, BUTVIEWACTIVE, BUTNEWAVAIL, BUTDELETEAVAIL, BUTDELETEACTIVE};
 };
 
-bool PnlWdbePrj1NVersion::StatShr::readXML(
+bool PnlWdbePrjPrj1NVersion::StatShr::readXML(
 			xmlXPathContext* docctx
 			, string basexpath
 			, bool addbasetag
@@ -200,13 +212,17 @@ bool PnlWdbePrj1NVersion::StatShr::readXML(
 	bool basefound;
 
 	if (addbasetag)
-		basefound = checkUclcXPaths(docctx, basexpath, basexpath, "StatShrWdbePrj1NVersion");
+		basefound = checkUclcXPaths(docctx, basexpath, basexpath, "StatShrWdbePrjPrj1NVersion");
 	else
 		basefound = checkXPath(docctx, basexpath);
 
-	string itemtag = "StatitemShrWdbePrj1NVersion";
+	string itemtag = "StatitemShrWdbePrjPrj1NVersion";
 
 	if (basefound) {
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButUpAvail", ButUpAvail)) add(BUTUPAVAIL);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButUpActive", ButUpActive)) add(BUTUPACTIVE);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButDownAvail", ButDownAvail)) add(BUTDOWNAVAIL);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButDownActive", ButDownActive)) add(BUTDOWNACTIVE);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButViewAvail", ButViewAvail)) add(BUTVIEWAVAIL);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButViewActive", ButViewActive)) add(BUTVIEWACTIVE);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButNewAvail", ButNewAvail)) add(BUTNEWAVAIL);
@@ -217,11 +233,15 @@ bool PnlWdbePrj1NVersion::StatShr::readXML(
 	return basefound;
 };
 
-set<uint> PnlWdbePrj1NVersion::StatShr::comm(
+set<uint> PnlWdbePrjPrj1NVersion::StatShr::comm(
 			const StatShr* comp
 		) {
 	set<uint> items;
 
+	if (ButUpAvail == comp->ButUpAvail) insert(items, BUTUPAVAIL);
+	if (ButUpActive == comp->ButUpActive) insert(items, BUTUPACTIVE);
+	if (ButDownAvail == comp->ButDownAvail) insert(items, BUTDOWNAVAIL);
+	if (ButDownActive == comp->ButDownActive) insert(items, BUTDOWNACTIVE);
 	if (ButViewAvail == comp->ButViewAvail) insert(items, BUTVIEWAVAIL);
 	if (ButViewActive == comp->ButViewActive) insert(items, BUTVIEWACTIVE);
 	if (ButNewAvail == comp->ButNewAvail) insert(items, BUTNEWAVAIL);
@@ -231,7 +251,7 @@ set<uint> PnlWdbePrj1NVersion::StatShr::comm(
 	return(items);
 };
 
-set<uint> PnlWdbePrj1NVersion::StatShr::diff(
+set<uint> PnlWdbePrjPrj1NVersion::StatShr::diff(
 			const StatShr* comp
 		) {
 	set<uint> commitems;
@@ -239,17 +259,17 @@ set<uint> PnlWdbePrj1NVersion::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {BUTVIEWAVAIL, BUTVIEWACTIVE, BUTNEWAVAIL, BUTDELETEAVAIL, BUTDELETEACTIVE};
+	diffitems = {BUTUPAVAIL, BUTUPACTIVE, BUTDOWNAVAIL, BUTDOWNACTIVE, BUTVIEWAVAIL, BUTVIEWACTIVE, BUTNEWAVAIL, BUTDELETEAVAIL, BUTDELETEACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
 };
 
 /******************************************************************************
- class PnlWdbePrj1NVersion::StgIac
+ class PnlWdbePrjPrj1NVersion::StgIac
  ******************************************************************************/
 
-PnlWdbePrj1NVersion::StgIac::StgIac(
+PnlWdbePrjPrj1NVersion::StgIac::StgIac(
 			const uint TcoRefWidth
 		) :
 			Block()
@@ -259,7 +279,7 @@ PnlWdbePrj1NVersion::StgIac::StgIac(
 	mask = {TCOREFWIDTH};
 };
 
-bool PnlWdbePrj1NVersion::StgIac::readXML(
+bool PnlWdbePrjPrj1NVersion::StgIac::readXML(
 			xmlXPathContext* docctx
 			, string basexpath
 			, bool addbasetag
@@ -269,11 +289,11 @@ bool PnlWdbePrj1NVersion::StgIac::readXML(
 	bool basefound;
 
 	if (addbasetag)
-		basefound = checkUclcXPaths(docctx, basexpath, basexpath, "StgIacWdbePrj1NVersion");
+		basefound = checkUclcXPaths(docctx, basexpath, basexpath, "StgIacWdbePrjPrj1NVersion");
 	else
 		basefound = checkXPath(docctx, basexpath);
 
-	string itemtag = "StgitemIacWdbePrj1NVersion";
+	string itemtag = "StgitemIacWdbePrjPrj1NVersion";
 
 	if (basefound) {
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoRefWidth", TcoRefWidth)) add(TCOREFWIDTH);
@@ -282,23 +302,23 @@ bool PnlWdbePrj1NVersion::StgIac::readXML(
 	return basefound;
 };
 
-void PnlWdbePrj1NVersion::StgIac::writeXML(
+void PnlWdbePrjPrj1NVersion::StgIac::writeXML(
 			xmlTextWriter* wr
 			, string difftag
 			, bool shorttags
 		) {
-	if (difftag.length() == 0) difftag = "StgIacWdbePrj1NVersion";
+	if (difftag.length() == 0) difftag = "StgIacWdbePrjPrj1NVersion";
 
 	string itemtag;
 	if (shorttags) itemtag = "Si";
-	else itemtag = "StgitemIacWdbePrj1NVersion";
+	else itemtag = "StgitemIacWdbePrjPrj1NVersion";
 
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
 		writeUintAttr(wr, itemtag, "sref", "TcoRefWidth", TcoRefWidth);
 	xmlTextWriterEndElement(wr);
 };
 
-set<uint> PnlWdbePrj1NVersion::StgIac::comm(
+set<uint> PnlWdbePrjPrj1NVersion::StgIac::comm(
 			const StgIac* comp
 		) {
 	set<uint> items;
@@ -308,7 +328,7 @@ set<uint> PnlWdbePrj1NVersion::StgIac::comm(
 	return(items);
 };
 
-set<uint> PnlWdbePrj1NVersion::StgIac::diff(
+set<uint> PnlWdbePrjPrj1NVersion::StgIac::diff(
 			const StgIac* comp
 		) {
 	set<uint> commitems;
@@ -323,10 +343,10 @@ set<uint> PnlWdbePrj1NVersion::StgIac::diff(
 };
 
 /******************************************************************************
- class PnlWdbePrj1NVersion::Tag
+ class PnlWdbePrjPrj1NVersion::Tag
  ******************************************************************************/
 
-PnlWdbePrj1NVersion::Tag::Tag(
+PnlWdbePrjPrj1NVersion::Tag::Tag(
 			const string& Cpt
 			, const string& TxtRecord1
 			, const string& TxtRecord2
@@ -348,7 +368,7 @@ PnlWdbePrj1NVersion::Tag::Tag(
 	mask = {CPT, TXTRECORD1, TXTRECORD2, TRS, TXTSHOWING1, TXTSHOWING2, TCOREF};
 };
 
-bool PnlWdbePrj1NVersion::Tag::readXML(
+bool PnlWdbePrjPrj1NVersion::Tag::readXML(
 			xmlXPathContext* docctx
 			, string basexpath
 			, bool addbasetag
@@ -358,11 +378,11 @@ bool PnlWdbePrj1NVersion::Tag::readXML(
 	bool basefound;
 
 	if (addbasetag)
-		basefound = checkUclcXPaths(docctx, basexpath, basexpath, "TagWdbePrj1NVersion");
+		basefound = checkUclcXPaths(docctx, basexpath, basexpath, "TagWdbePrjPrj1NVersion");
 	else
 		basefound = checkXPath(docctx, basexpath);
 
-	string itemtag = "TagitemWdbePrj1NVersion";
+	string itemtag = "TagitemWdbePrjPrj1NVersion";
 
 	if (basefound) {
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "Cpt", Cpt)) add(CPT);
@@ -378,16 +398,16 @@ bool PnlWdbePrj1NVersion::Tag::readXML(
 };
 
 /******************************************************************************
- class PnlWdbePrj1NVersion::DpchAppData
+ class PnlWdbePrjPrj1NVersion::DpchAppData
  ******************************************************************************/
 
-PnlWdbePrj1NVersion::DpchAppData::DpchAppData(
+PnlWdbePrjPrj1NVersion::DpchAppData::DpchAppData(
 			const string& scrJref
 			, StgIac* stgiac
-			, QryWdbePrj1NVersion::StgIac* stgiacqry
+			, QryWdbePrjPrj1NVersion::StgIac* stgiacqry
 			, const set<uint>& mask
 		) :
-			DpchAppWdbe(VecWdbeVDpch::DPCHAPPWDBEPRJ1NVERSIONDATA, scrJref)
+			DpchAppWdbe(VecWdbeVDpch::DPCHAPPWDBEPRJPRJ1NVERSIONDATA, scrJref)
 		{
 	if (find(mask, ALL)) this->mask = {SCRJREF, STGIAC, STGIACQRY};
 	else this->mask = mask;
@@ -396,7 +416,7 @@ PnlWdbePrj1NVersion::DpchAppData::DpchAppData(
 		if (find(this->mask, STGIACQRY) && stgiacqry) this->stgiacqry = *stgiacqry;
 };
 
-string PnlWdbePrj1NVersion::DpchAppData::getSrefsMask() {
+string PnlWdbePrjPrj1NVersion::DpchAppData::getSrefsMask() {
 	vector<string> ss;
 	string srefs;
 
@@ -409,10 +429,10 @@ string PnlWdbePrj1NVersion::DpchAppData::getSrefsMask() {
 	return(srefs);
 };
 
-void PnlWdbePrj1NVersion::DpchAppData::writeXML(
+void PnlWdbePrjPrj1NVersion::DpchAppData::writeXML(
 			xmlTextWriter* wr
 		) {
-	xmlTextWriterStartElement(wr, BAD_CAST "DpchAppWdbePrj1NVersionData");
+	xmlTextWriterStartElement(wr, BAD_CAST "DpchAppWdbePrjPrj1NVersionData");
 	xmlTextWriterWriteAttribute(wr, BAD_CAST "xmlns", BAD_CAST "http://www.mpsitech.com/wdbe");
 		if (has(SCRJREF)) writeString(wr, "scrJref", scrJref);
 		if (has(STGIAC)) stgiac.writeXML(wr);
@@ -421,15 +441,15 @@ void PnlWdbePrj1NVersion::DpchAppData::writeXML(
 };
 
 /******************************************************************************
- class PnlWdbePrj1NVersion::DpchAppDo
+ class PnlWdbePrjPrj1NVersion::DpchAppDo
  ******************************************************************************/
 
-PnlWdbePrj1NVersion::DpchAppDo::DpchAppDo(
+PnlWdbePrjPrj1NVersion::DpchAppDo::DpchAppDo(
 			const string& scrJref
 			, const uint ixVDo
 			, const set<uint>& mask
 		) :
-			DpchAppWdbe(VecWdbeVDpch::DPCHAPPWDBEPRJ1NVERSIONDO, scrJref)
+			DpchAppWdbe(VecWdbeVDpch::DPCHAPPWDBEPRJPRJ1NVERSIONDO, scrJref)
 		{
 	if (find(mask, ALL)) this->mask = {SCRJREF, IXVDO};
 	else this->mask = mask;
@@ -437,7 +457,7 @@ PnlWdbePrj1NVersion::DpchAppDo::DpchAppDo(
 	this->ixVDo = ixVDo;
 };
 
-string PnlWdbePrj1NVersion::DpchAppDo::getSrefsMask() {
+string PnlWdbePrjPrj1NVersion::DpchAppDo::getSrefsMask() {
 	vector<string> ss;
 	string srefs;
 
@@ -449,10 +469,10 @@ string PnlWdbePrj1NVersion::DpchAppDo::getSrefsMask() {
 	return(srefs);
 };
 
-void PnlWdbePrj1NVersion::DpchAppDo::writeXML(
+void PnlWdbePrjPrj1NVersion::DpchAppDo::writeXML(
 			xmlTextWriter* wr
 		) {
-	xmlTextWriterStartElement(wr, BAD_CAST "DpchAppWdbePrj1NVersionDo");
+	xmlTextWriterStartElement(wr, BAD_CAST "DpchAppWdbePrjPrj1NVersionDo");
 	xmlTextWriterWriteAttribute(wr, BAD_CAST "xmlns", BAD_CAST "http://www.mpsitech.com/wdbe");
 		if (has(SCRJREF)) writeString(wr, "scrJref", scrJref);
 		if (has(IXVDO)) writeString(wr, "srefIxVDo", VecVDo::getSref(ixVDo));
@@ -460,16 +480,16 @@ void PnlWdbePrj1NVersion::DpchAppDo::writeXML(
 };
 
 /******************************************************************************
- class PnlWdbePrj1NVersion::DpchEngData
+ class PnlWdbePrjPrj1NVersion::DpchEngData
  ******************************************************************************/
 
-PnlWdbePrj1NVersion::DpchEngData::DpchEngData() :
-			DpchEngWdbe(VecWdbeVDpch::DPCHENGWDBEPRJ1NVERSIONDATA)
+PnlWdbePrjPrj1NVersion::DpchEngData::DpchEngData() :
+			DpchEngWdbe(VecWdbeVDpch::DPCHENGWDBEPRJPRJ1NVERSIONDATA)
 		{
 	feedFCsiQst.tag = "FeedFCsiQst";
 };
 
-string PnlWdbePrj1NVersion::DpchEngData::getSrefsMask() {
+string PnlWdbePrjPrj1NVersion::DpchEngData::getSrefsMask() {
 	vector<string> ss;
 	string srefs;
 
@@ -490,7 +510,7 @@ string PnlWdbePrj1NVersion::DpchEngData::getSrefsMask() {
 	return(srefs);
 };
 
-void PnlWdbePrj1NVersion::DpchEngData::readXML(
+void PnlWdbePrjPrj1NVersion::DpchEngData::readXML(
 			xmlXPathContext* docctx
 			, string basexpath
 			, bool addbasetag
@@ -500,7 +520,7 @@ void PnlWdbePrj1NVersion::DpchEngData::readXML(
 	bool basefound;
 
 	if (addbasetag)
-		basefound = checkUclcXPaths(docctx, basexpath, basexpath, "DpchEngWdbePrj1NVersionData");
+		basefound = checkUclcXPaths(docctx, basexpath, basexpath, "DpchEngWdbePrjPrj1NVersionData");
 	else
 		basefound = checkXPath(docctx, basexpath);
 
@@ -524,8 +544,8 @@ void PnlWdbePrj1NVersion::DpchEngData::readXML(
 		stgiac = StgIac();
 		tag = Tag();
 		rst.clear();
-		statappqry = QryWdbePrj1NVersion::StatApp();
-		statshrqry = QryWdbePrj1NVersion::StatShr();
-		stgiacqry = QryWdbePrj1NVersion::StgIac();
+		statappqry = QryWdbePrjPrj1NVersion::StatApp();
+		statshrqry = QryWdbePrjPrj1NVersion::StatShr();
+		stgiacqry = QryWdbePrjPrj1NVersion::StgIac();
 	};
 };

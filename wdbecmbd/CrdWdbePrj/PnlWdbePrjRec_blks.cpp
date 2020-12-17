@@ -98,7 +98,7 @@ void PnlWdbePrjRec::StatApp::writeXML(
 			, string difftag
 			, bool shorttags
 			, const bool initdoneDetail
-			, const bool initdone1NVersion
+			, const bool initdonePrj1NVersion
 			, const bool initdoneMNPerson
 		) {
 	if (difftag.length() == 0) difftag = "StatAppWdbePrjRec";
@@ -109,7 +109,7 @@ void PnlWdbePrjRec::StatApp::writeXML(
 
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
 		writeBoolAttr(wr, itemtag, "sref", "initdoneDetail", initdoneDetail);
-		writeBoolAttr(wr, itemtag, "sref", "initdone1NVersion", initdone1NVersion);
+		writeBoolAttr(wr, itemtag, "sref", "initdonePrj1NVersion", initdonePrj1NVersion);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneMNPerson", initdoneMNPerson);
 	xmlTextWriterEndElement(wr);
 };
@@ -121,7 +121,7 @@ void PnlWdbePrjRec::StatApp::writeXML(
 PnlWdbePrjRec::StatShr::StatShr(
 			const uint ixWdbeVExpstate
 			, const ubigint jrefDetail
-			, const ubigint jref1NVersion
+			, const ubigint jrefPrj1NVersion
 			, const ubigint jrefMNPerson
 			, const bool ButRegularizeActive
 		) :
@@ -129,11 +129,11 @@ PnlWdbePrjRec::StatShr::StatShr(
 		{
 	this->ixWdbeVExpstate = ixWdbeVExpstate;
 	this->jrefDetail = jrefDetail;
-	this->jref1NVersion = jref1NVersion;
+	this->jrefPrj1NVersion = jrefPrj1NVersion;
 	this->jrefMNPerson = jrefMNPerson;
 	this->ButRegularizeActive = ButRegularizeActive;
 
-	mask = {IXWDBEVEXPSTATE, JREFDETAIL, JREF1NVERSION, JREFMNPERSON, BUTREGULARIZEACTIVE};
+	mask = {IXWDBEVEXPSTATE, JREFDETAIL, JREFPRJ1NVERSION, JREFMNPERSON, BUTREGULARIZEACTIVE};
 };
 
 void PnlWdbePrjRec::StatShr::writeXML(
@@ -150,7 +150,7 @@ void PnlWdbePrjRec::StatShr::writeXML(
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
 		writeStringAttr(wr, itemtag, "sref", "srefIxWdbeVExpstate", VecWdbeVExpstate::getSref(ixWdbeVExpstate));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefDetail", Scr::scramble(jrefDetail));
-		writeStringAttr(wr, itemtag, "sref", "scrJref1NVersion", Scr::scramble(jref1NVersion));
+		writeStringAttr(wr, itemtag, "sref", "scrJrefPrj1NVersion", Scr::scramble(jrefPrj1NVersion));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefMNPerson", Scr::scramble(jrefMNPerson));
 		writeBoolAttr(wr, itemtag, "sref", "ButRegularizeActive", ButRegularizeActive);
 	xmlTextWriterEndElement(wr);
@@ -163,7 +163,7 @@ set<uint> PnlWdbePrjRec::StatShr::comm(
 
 	if (ixWdbeVExpstate == comp->ixWdbeVExpstate) insert(items, IXWDBEVEXPSTATE);
 	if (jrefDetail == comp->jrefDetail) insert(items, JREFDETAIL);
-	if (jref1NVersion == comp->jref1NVersion) insert(items, JREF1NVERSION);
+	if (jrefPrj1NVersion == comp->jrefPrj1NVersion) insert(items, JREFPRJ1NVERSION);
 	if (jrefMNPerson == comp->jrefMNPerson) insert(items, JREFMNPERSON);
 	if (ButRegularizeActive == comp->ButRegularizeActive) insert(items, BUTREGULARIZEACTIVE);
 
@@ -178,7 +178,7 @@ set<uint> PnlWdbePrjRec::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {IXWDBEVEXPSTATE, JREFDETAIL, JREF1NVERSION, JREFMNPERSON, BUTREGULARIZEACTIVE};
+	diffitems = {IXWDBEVEXPSTATE, JREFDETAIL, JREFPRJ1NVERSION, JREFMNPERSON, BUTREGULARIZEACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);

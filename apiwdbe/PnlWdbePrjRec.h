@@ -66,15 +66,15 @@ namespace PnlWdbePrjRec {
 
 	public:
 		static const Sbecore::uint INITDONEDETAIL = 1;
-		static const Sbecore::uint INITDONE1NVERSION = 2;
+		static const Sbecore::uint INITDONEPRJ1NVERSION = 2;
 		static const Sbecore::uint INITDONEMNPERSON = 3;
 
 	public:
-		StatApp(const bool initdoneDetail = false, const bool initdone1NVersion = false, const bool initdoneMNPerson = false);
+		StatApp(const bool initdoneDetail = false, const bool initdonePrj1NVersion = false, const bool initdoneMNPerson = false);
 
 	public:
 		bool initdoneDetail;
-		bool initdone1NVersion;
+		bool initdonePrj1NVersion;
 		bool initdoneMNPerson;
 
 	public:
@@ -91,17 +91,17 @@ namespace PnlWdbePrjRec {
 	public:
 		static const Sbecore::uint IXWDBEVEXPSTATE = 1;
 		static const Sbecore::uint SCRJREFDETAIL = 2;
-		static const Sbecore::uint SCRJREF1NVERSION = 3;
+		static const Sbecore::uint SCRJREFPRJ1NVERSION = 3;
 		static const Sbecore::uint SCRJREFMNPERSON = 4;
 		static const Sbecore::uint BUTREGULARIZEACTIVE = 5;
 
 	public:
-		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const std::string& scrJrefDetail = "", const std::string& scrJref1NVersion = "", const std::string& scrJrefMNPerson = "", const bool ButRegularizeActive = true);
+		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const std::string& scrJrefDetail = "", const std::string& scrJrefPrj1NVersion = "", const std::string& scrJrefMNPerson = "", const bool ButRegularizeActive = true);
 
 	public:
 		Sbecore::uint ixWdbeVExpstate;
 		std::string scrJrefDetail;
-		std::string scrJref1NVersion;
+		std::string scrJrefPrj1NVersion;
 		std::string scrJrefMNPerson;
 		bool ButRegularizeActive;
 

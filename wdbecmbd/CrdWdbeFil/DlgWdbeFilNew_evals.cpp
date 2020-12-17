@@ -30,6 +30,20 @@ bool DlgWdbeFilNew::evalButDneActive(
 	return(args.back());
 };
 
+bool DlgWdbeFilNew::evalFilUldActive(
+			DbsWdbe* dbswdbe
+		) {
+	// sge(credone)
+
+	vector<bool> args;
+	bool a;
+
+	a = false; a = (ixVSge == VecVSge::CREDONE);
+	args.push_back(a);
+
+	return(args.back());
+};
+
 bool DlgWdbeFilNew::evalDetButCreActive(
 			DbsWdbe* dbswdbe
 		) {
@@ -45,20 +59,6 @@ bool DlgWdbeFilNew::evalDetButCreActive(
 	b = args.back(); args.pop_back();
 	a = args.back(); args.pop_back();
 	args.push_back(a && b);
-
-	return(args.back());
-};
-
-bool DlgWdbeFilNew::evalFilUldActive(
-			DbsWdbe* dbswdbe
-		) {
-	// sge(credone)
-
-	vector<bool> args;
-	bool a;
-
-	a = false; a = (ixVSge == VecVSge::CREDONE);
-	args.push_back(a);
 
 	return(args.back());
 };

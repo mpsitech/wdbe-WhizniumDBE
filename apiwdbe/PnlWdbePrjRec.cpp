@@ -104,16 +104,16 @@ set<uint> PnlWdbePrjRec::ContInf::diff(
 
 PnlWdbePrjRec::StatApp::StatApp(
 			const bool initdoneDetail
-			, const bool initdone1NVersion
+			, const bool initdonePrj1NVersion
 			, const bool initdoneMNPerson
 		) :
 			Block()
 		{
 	this->initdoneDetail = initdoneDetail;
-	this->initdone1NVersion = initdone1NVersion;
+	this->initdonePrj1NVersion = initdonePrj1NVersion;
 	this->initdoneMNPerson = initdoneMNPerson;
 
-	mask = {INITDONEDETAIL, INITDONE1NVERSION, INITDONEMNPERSON};
+	mask = {INITDONEDETAIL, INITDONEPRJ1NVERSION, INITDONEMNPERSON};
 };
 
 bool PnlWdbePrjRec::StatApp::readXML(
@@ -134,7 +134,7 @@ bool PnlWdbePrjRec::StatApp::readXML(
 
 	if (basefound) {
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneDetail", initdoneDetail)) add(INITDONEDETAIL);
-		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdone1NVersion", initdone1NVersion)) add(INITDONE1NVERSION);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdonePrj1NVersion", initdonePrj1NVersion)) add(INITDONEPRJ1NVERSION);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneMNPerson", initdoneMNPerson)) add(INITDONEMNPERSON);
 	};
 
@@ -147,7 +147,7 @@ set<uint> PnlWdbePrjRec::StatApp::comm(
 	set<uint> items;
 
 	if (initdoneDetail == comp->initdoneDetail) insert(items, INITDONEDETAIL);
-	if (initdone1NVersion == comp->initdone1NVersion) insert(items, INITDONE1NVERSION);
+	if (initdonePrj1NVersion == comp->initdonePrj1NVersion) insert(items, INITDONEPRJ1NVERSION);
 	if (initdoneMNPerson == comp->initdoneMNPerson) insert(items, INITDONEMNPERSON);
 
 	return(items);
@@ -161,7 +161,7 @@ set<uint> PnlWdbePrjRec::StatApp::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {INITDONEDETAIL, INITDONE1NVERSION, INITDONEMNPERSON};
+	diffitems = {INITDONEDETAIL, INITDONEPRJ1NVERSION, INITDONEMNPERSON};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -174,7 +174,7 @@ set<uint> PnlWdbePrjRec::StatApp::diff(
 PnlWdbePrjRec::StatShr::StatShr(
 			const uint ixWdbeVExpstate
 			, const string& scrJrefDetail
-			, const string& scrJref1NVersion
+			, const string& scrJrefPrj1NVersion
 			, const string& scrJrefMNPerson
 			, const bool ButRegularizeActive
 		) :
@@ -182,11 +182,11 @@ PnlWdbePrjRec::StatShr::StatShr(
 		{
 	this->ixWdbeVExpstate = ixWdbeVExpstate;
 	this->scrJrefDetail = scrJrefDetail;
-	this->scrJref1NVersion = scrJref1NVersion;
+	this->scrJrefPrj1NVersion = scrJrefPrj1NVersion;
 	this->scrJrefMNPerson = scrJrefMNPerson;
 	this->ButRegularizeActive = ButRegularizeActive;
 
-	mask = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREF1NVERSION, SCRJREFMNPERSON, BUTREGULARIZEACTIVE};
+	mask = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFPRJ1NVERSION, SCRJREFMNPERSON, BUTREGULARIZEACTIVE};
 };
 
 bool PnlWdbePrjRec::StatShr::readXML(
@@ -213,7 +213,7 @@ bool PnlWdbePrjRec::StatShr::readXML(
 			add(IXWDBEVEXPSTATE);
 		};
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefDetail", scrJrefDetail)) add(SCRJREFDETAIL);
-		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJref1NVersion", scrJref1NVersion)) add(SCRJREF1NVERSION);
+		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefPrj1NVersion", scrJrefPrj1NVersion)) add(SCRJREFPRJ1NVERSION);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefMNPerson", scrJrefMNPerson)) add(SCRJREFMNPERSON);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButRegularizeActive", ButRegularizeActive)) add(BUTREGULARIZEACTIVE);
 	};
@@ -228,7 +228,7 @@ set<uint> PnlWdbePrjRec::StatShr::comm(
 
 	if (ixWdbeVExpstate == comp->ixWdbeVExpstate) insert(items, IXWDBEVEXPSTATE);
 	if (scrJrefDetail == comp->scrJrefDetail) insert(items, SCRJREFDETAIL);
-	if (scrJref1NVersion == comp->scrJref1NVersion) insert(items, SCRJREF1NVERSION);
+	if (scrJrefPrj1NVersion == comp->scrJrefPrj1NVersion) insert(items, SCRJREFPRJ1NVERSION);
 	if (scrJrefMNPerson == comp->scrJrefMNPerson) insert(items, SCRJREFMNPERSON);
 	if (ButRegularizeActive == comp->ButRegularizeActive) insert(items, BUTREGULARIZEACTIVE);
 
@@ -243,7 +243,7 @@ set<uint> PnlWdbePrjRec::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREF1NVERSION, SCRJREFMNPERSON, BUTREGULARIZEACTIVE};
+	diffitems = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFPRJ1NVERSION, SCRJREFMNPERSON, BUTREGULARIZEACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);

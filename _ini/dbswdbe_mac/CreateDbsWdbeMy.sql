@@ -2,7 +2,7 @@
 -- MySQL / MariaDB database create script
 -- copyright: (C) 2016-2020 MPSI Technologies GmbH
 -- author: Alexander Wirthmueller (auto-generation)
--- date created: 6 Dec 2020
+-- date created: 16 Dec 2020
 -- IP header --- ABOVE
 
 DROP DATABASE IF EXISTS DbsWdbe;
@@ -852,7 +852,8 @@ CREATE TABLE TblWdbeMVersion(
 	ref BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 	grp BIGINT UNSIGNED,
 	own BIGINT UNSIGNED,
-	refWdbeMProject BIGINT UNSIGNED,
+	prjRefWdbeMProject BIGINT UNSIGNED,
+	prjNum INT UNSIGNED,
 	bvrRefWdbeMVersion BIGINT UNSIGNED,
 	Major SMALLINT UNSIGNED,
 	Minor SMALLINT UNSIGNED,
@@ -863,7 +864,8 @@ CREATE TABLE TblWdbeMVersion(
 	Comment TEXT,
 	INDEX (grp),
 	INDEX (own),
-	INDEX (refWdbeMProject),
+	INDEX (prjRefWdbeMProject),
+	INDEX (prjNum),
 	INDEX (bvrRefWdbeMVersion),
 	INDEX (ixVState)
 ) ENGINE = MYISAM;
@@ -1693,15 +1695,6 @@ CREATE TABLE TblWdbeQPreselect(
 	INDEX (jref)
 ) ENGINE = MYISAM;
 
-CREATE TABLE TblWdbeQPrj1NVersion(
-	qref BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-	jref BIGINT UNSIGNED,
-	jnum INT UNSIGNED,
-	ref BIGINT UNSIGNED,
-	INDEX (jref),
-	INDEX (jnum)
-) ENGINE = MYISAM;
-
 CREATE TABLE TblWdbeQPrjList(
 	qref BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 	jref BIGINT UNSIGNED,
@@ -1727,6 +1720,16 @@ CREATE TABLE TblWdbeQPrjMNPerson(
 	x1Startd INT UNSIGNED,
 	x1Stopd INT UNSIGNED,
 	srefKFunction VARCHAR(50),
+	INDEX (jref),
+	INDEX (jnum)
+) ENGINE = MYISAM;
+
+CREATE TABLE TblWdbeQPrjPrj1NVersion(
+	qref BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+	jref BIGINT UNSIGNED,
+	jnum INT UNSIGNED,
+	ref BIGINT UNSIGNED,
+	prjNum INT UNSIGNED,
 	INDEX (jref),
 	INDEX (jnum)
 ) ENGINE = MYISAM;
@@ -2260,7 +2263,7 @@ CREATE TABLE TblWdbeQVerList(
 	ref BIGINT UNSIGNED,
 	grp BIGINT UNSIGNED,
 	own BIGINT UNSIGNED,
-	refWdbeMProject BIGINT UNSIGNED,
+	prjRefWdbeMProject BIGINT UNSIGNED,
 	Major SMALLINT UNSIGNED,
 	Minor SMALLINT UNSIGNED,
 	Sub SMALLINT UNSIGNED,

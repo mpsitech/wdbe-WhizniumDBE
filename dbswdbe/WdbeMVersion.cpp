@@ -22,7 +22,8 @@ WdbeMVersion::WdbeMVersion(
 			const ubigint ref
 			, const ubigint grp
 			, const ubigint own
-			, const ubigint refWdbeMProject
+			, const ubigint prjRefWdbeMProject
+			, const uint prjNum
 			, const ubigint bvrRefWdbeMVersion
 			, const usmallint Major
 			, const usmallint Minor
@@ -36,7 +37,8 @@ WdbeMVersion::WdbeMVersion(
 	this->ref = ref;
 	this->grp = grp;
 	this->own = own;
-	this->refWdbeMProject = refWdbeMProject;
+	this->prjRefWdbeMProject = prjRefWdbeMProject;
+	this->prjNum = prjNum;
 	this->bvrRefWdbeMVersion = bvrRefWdbeMVersion;
 	this->Major = Major;
 	this->Minor = Minor;
@@ -177,7 +179,8 @@ ubigint TblWdbeMVersion::insertNewRec(
 			WdbeMVersion** rec
 			, const ubigint grp
 			, const ubigint own
-			, const ubigint refWdbeMProject
+			, const ubigint prjRefWdbeMProject
+			, const uint prjNum
 			, const ubigint bvrRefWdbeMVersion
 			, const usmallint Major
 			, const usmallint Minor
@@ -190,7 +193,7 @@ ubigint TblWdbeMVersion::insertNewRec(
 	ubigint retval = 0;
 	WdbeMVersion* _rec = NULL;
 
-	_rec = new WdbeMVersion(0, grp, own, refWdbeMProject, bvrRefWdbeMVersion, Major, Minor, Sub, refJState, ixVState, About, Comment);
+	_rec = new WdbeMVersion(0, grp, own, prjRefWdbeMProject, prjNum, bvrRefWdbeMVersion, Major, Minor, Sub, refJState, ixVState, About, Comment);
 	insertRec(_rec);
 
 	retval = _rec->ref;
@@ -206,7 +209,8 @@ ubigint TblWdbeMVersion::appendNewRecToRst(
 			, WdbeMVersion** rec
 			, const ubigint grp
 			, const ubigint own
-			, const ubigint refWdbeMProject
+			, const ubigint prjRefWdbeMProject
+			, const uint prjNum
 			, const ubigint bvrRefWdbeMVersion
 			, const usmallint Major
 			, const usmallint Minor
@@ -219,7 +223,7 @@ ubigint TblWdbeMVersion::appendNewRecToRst(
 	ubigint retval = 0;
 	WdbeMVersion* _rec = NULL;
 
-	retval = insertNewRec(&_rec, grp, own, refWdbeMProject, bvrRefWdbeMVersion, Major, Minor, Sub, refJState, ixVState, About, Comment);
+	retval = insertNewRec(&_rec, grp, own, prjRefWdbeMProject, prjNum, bvrRefWdbeMVersion, Major, Minor, Sub, refJState, ixVState, About, Comment);
 	rst.nodes.push_back(_rec);
 
 	if (rec != NULL) *rec = _rec;
@@ -257,7 +261,7 @@ bool TblWdbeMVersion::loadRecByRef(
 };
 
 ubigint TblWdbeMVersion::loadRefsByPrj(
-			ubigint refWdbeMProject
+			ubigint prjRefWdbeMProject
 			, const bool append
 			, vector<ubigint>& refs
 		) {
@@ -265,7 +269,7 @@ ubigint TblWdbeMVersion::loadRefsByPrj(
 };
 
 ubigint TblWdbeMVersion::loadRstByPrj(
-			ubigint refWdbeMProject
+			ubigint prjRefWdbeMProject
 			, const bool append
 			, ListWdbeMVersion& rst
 		) {
@@ -311,8 +315,8 @@ MyTblWdbeMVersion::~MyTblWdbeMVersion() {
 };
 
 void MyTblWdbeMVersion::initStatements() {
-	stmtInsertRec = createStatement("INSERT INTO TblWdbeMVersion (grp, own, refWdbeMProject, bvrRefWdbeMVersion, Major, Minor, Sub, refJState, ixVState, About, Comment) VALUES (?,?,?,?,?,?,?,?,?,?,?)", false);
-	stmtUpdateRec = createStatement("UPDATE TblWdbeMVersion SET grp = ?, own = ?, refWdbeMProject = ?, bvrRefWdbeMVersion = ?, Major = ?, Minor = ?, Sub = ?, refJState = ?, ixVState = ?, About = ?, Comment = ? WHERE ref = ?", false);
+	stmtInsertRec = createStatement("INSERT INTO TblWdbeMVersion (grp, own, prjRefWdbeMProject, prjNum, bvrRefWdbeMVersion, Major, Minor, Sub, refJState, ixVState, About, Comment) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)", false);
+	stmtUpdateRec = createStatement("UPDATE TblWdbeMVersion SET grp = ?, own = ?, prjRefWdbeMProject = ?, prjNum = ?, bvrRefWdbeMVersion = ?, Major = ?, Minor = ?, Sub = ?, refJState = ?, ixVState = ?, About = ?, Comment = ? WHERE ref = ?", false);
 	stmtRemoveRecByRef = createStatement("DELETE FROM TblWdbeMVersion WHERE ref = ?", false);
 };
 
@@ -345,15 +349,16 @@ bool MyTblWdbeMVersion::loadRecBySQL(
 		if (dbrow[0]) _rec->ref = atoll((char*) dbrow[0]); else _rec->ref = 0;
 		if (dbrow[1]) _rec->grp = atoll((char*) dbrow[1]); else _rec->grp = 0;
 		if (dbrow[2]) _rec->own = atoll((char*) dbrow[2]); else _rec->own = 0;
-		if (dbrow[3]) _rec->refWdbeMProject = atoll((char*) dbrow[3]); else _rec->refWdbeMProject = 0;
-		if (dbrow[4]) _rec->bvrRefWdbeMVersion = atoll((char*) dbrow[4]); else _rec->bvrRefWdbeMVersion = 0;
-		if (dbrow[5]) _rec->Major = atoi((char*) dbrow[5]); else _rec->Major = 0;
-		if (dbrow[6]) _rec->Minor = atoi((char*) dbrow[6]); else _rec->Minor = 0;
-		if (dbrow[7]) _rec->Sub = atoi((char*) dbrow[7]); else _rec->Sub = 0;
-		if (dbrow[8]) _rec->refJState = atoll((char*) dbrow[8]); else _rec->refJState = 0;
-		if (dbrow[9]) _rec->ixVState = atol((char*) dbrow[9]); else _rec->ixVState = 0;
-		if (dbrow[10]) _rec->About.assign(dbrow[10], dblengths[10]); else _rec->About = "";
-		if (dbrow[11]) _rec->Comment.assign(dbrow[11], dblengths[11]); else _rec->Comment = "";
+		if (dbrow[3]) _rec->prjRefWdbeMProject = atoll((char*) dbrow[3]); else _rec->prjRefWdbeMProject = 0;
+		if (dbrow[4]) _rec->prjNum = atol((char*) dbrow[4]); else _rec->prjNum = 0;
+		if (dbrow[5]) _rec->bvrRefWdbeMVersion = atoll((char*) dbrow[5]); else _rec->bvrRefWdbeMVersion = 0;
+		if (dbrow[6]) _rec->Major = atoi((char*) dbrow[6]); else _rec->Major = 0;
+		if (dbrow[7]) _rec->Minor = atoi((char*) dbrow[7]); else _rec->Minor = 0;
+		if (dbrow[8]) _rec->Sub = atoi((char*) dbrow[8]); else _rec->Sub = 0;
+		if (dbrow[9]) _rec->refJState = atoll((char*) dbrow[9]); else _rec->refJState = 0;
+		if (dbrow[10]) _rec->ixVState = atol((char*) dbrow[10]); else _rec->ixVState = 0;
+		if (dbrow[11]) _rec->About.assign(dbrow[11], dblengths[11]); else _rec->About = "";
+		if (dbrow[12]) _rec->Comment.assign(dbrow[12], dblengths[12]); else _rec->Comment = "";
 
 		retval = true;
 	};
@@ -399,15 +404,16 @@ ubigint MyTblWdbeMVersion::loadRstBySQL(
 			if (dbrow[0]) rec->ref = atoll((char*) dbrow[0]); else rec->ref = 0;
 			if (dbrow[1]) rec->grp = atoll((char*) dbrow[1]); else rec->grp = 0;
 			if (dbrow[2]) rec->own = atoll((char*) dbrow[2]); else rec->own = 0;
-			if (dbrow[3]) rec->refWdbeMProject = atoll((char*) dbrow[3]); else rec->refWdbeMProject = 0;
-			if (dbrow[4]) rec->bvrRefWdbeMVersion = atoll((char*) dbrow[4]); else rec->bvrRefWdbeMVersion = 0;
-			if (dbrow[5]) rec->Major = atoi((char*) dbrow[5]); else rec->Major = 0;
-			if (dbrow[6]) rec->Minor = atoi((char*) dbrow[6]); else rec->Minor = 0;
-			if (dbrow[7]) rec->Sub = atoi((char*) dbrow[7]); else rec->Sub = 0;
-			if (dbrow[8]) rec->refJState = atoll((char*) dbrow[8]); else rec->refJState = 0;
-			if (dbrow[9]) rec->ixVState = atol((char*) dbrow[9]); else rec->ixVState = 0;
-			if (dbrow[10]) rec->About.assign(dbrow[10], dblengths[10]); else rec->About = "";
-			if (dbrow[11]) rec->Comment.assign(dbrow[11], dblengths[11]); else rec->Comment = "";
+			if (dbrow[3]) rec->prjRefWdbeMProject = atoll((char*) dbrow[3]); else rec->prjRefWdbeMProject = 0;
+			if (dbrow[4]) rec->prjNum = atol((char*) dbrow[4]); else rec->prjNum = 0;
+			if (dbrow[5]) rec->bvrRefWdbeMVersion = atoll((char*) dbrow[5]); else rec->bvrRefWdbeMVersion = 0;
+			if (dbrow[6]) rec->Major = atoi((char*) dbrow[6]); else rec->Major = 0;
+			if (dbrow[7]) rec->Minor = atoi((char*) dbrow[7]); else rec->Minor = 0;
+			if (dbrow[8]) rec->Sub = atoi((char*) dbrow[8]); else rec->Sub = 0;
+			if (dbrow[9]) rec->refJState = atoll((char*) dbrow[9]); else rec->refJState = 0;
+			if (dbrow[10]) rec->ixVState = atol((char*) dbrow[10]); else rec->ixVState = 0;
+			if (dbrow[11]) rec->About.assign(dbrow[11], dblengths[11]); else rec->About = "";
+			if (dbrow[12]) rec->Comment.assign(dbrow[12], dblengths[12]); else rec->Comment = "";
 			rst.nodes.push_back(rec);
 
 			numread++;
@@ -422,23 +428,24 @@ ubigint MyTblWdbeMVersion::loadRstBySQL(
 ubigint MyTblWdbeMVersion::insertRec(
 			WdbeMVersion* rec
 		) {
-	unsigned long l[11]; my_bool n[11]; my_bool e[11];
+	unsigned long l[12]; my_bool n[12]; my_bool e[12];
 
-	l[9] = rec->About.length();
-	l[10] = rec->Comment.length();
+	l[10] = rec->About.length();
+	l[11] = rec->Comment.length();
 
 	MYSQL_BIND bind[] = {
 		bindUbigint(&rec->grp,&(l[0]),&(n[0]),&(e[0])),
 		bindUbigint(&rec->own,&(l[1]),&(n[1]),&(e[1])),
-		bindUbigint(&rec->refWdbeMProject,&(l[2]),&(n[2]),&(e[2])),
-		bindUbigint(&rec->bvrRefWdbeMVersion,&(l[3]),&(n[3]),&(e[3])),
-		bindUsmallint(&rec->Major,&(l[4]),&(n[4]),&(e[4])),
-		bindUsmallint(&rec->Minor,&(l[5]),&(n[5]),&(e[5])),
-		bindUsmallint(&rec->Sub,&(l[6]),&(n[6]),&(e[6])),
-		bindUbigint(&rec->refJState,&(l[7]),&(n[7]),&(e[7])),
-		bindUint(&rec->ixVState,&(l[8]),&(n[8]),&(e[8])),
-		bindCstring((char*) (rec->About.c_str()),&(l[9]),&(n[9]),&(e[9])),
-		bindCstring((char*) (rec->Comment.c_str()),&(l[10]),&(n[10]),&(e[10]))
+		bindUbigint(&rec->prjRefWdbeMProject,&(l[2]),&(n[2]),&(e[2])),
+		bindUint(&rec->prjNum,&(l[3]),&(n[3]),&(e[3])),
+		bindUbigint(&rec->bvrRefWdbeMVersion,&(l[4]),&(n[4]),&(e[4])),
+		bindUsmallint(&rec->Major,&(l[5]),&(n[5]),&(e[5])),
+		bindUsmallint(&rec->Minor,&(l[6]),&(n[6]),&(e[6])),
+		bindUsmallint(&rec->Sub,&(l[7]),&(n[7]),&(e[7])),
+		bindUbigint(&rec->refJState,&(l[8]),&(n[8]),&(e[8])),
+		bindUint(&rec->ixVState,&(l[9]),&(n[9]),&(e[9])),
+		bindCstring((char*) (rec->About.c_str()),&(l[10]),&(n[10]),&(e[10])),
+		bindCstring((char*) (rec->Comment.c_str()),&(l[11]),&(n[11]),&(e[11]))
 	};
 
 	if (mysql_stmt_bind_param(stmtInsertRec, bind)) {
@@ -466,24 +473,25 @@ void MyTblWdbeMVersion::insertRst(
 void MyTblWdbeMVersion::updateRec(
 			WdbeMVersion* rec
 		) {
-	unsigned long l[12]; my_bool n[12]; my_bool e[12];
+	unsigned long l[13]; my_bool n[13]; my_bool e[13];
 
-	l[9] = rec->About.length();
-	l[10] = rec->Comment.length();
+	l[10] = rec->About.length();
+	l[11] = rec->Comment.length();
 
 	MYSQL_BIND bind[] = {
 		bindUbigint(&rec->grp,&(l[0]),&(n[0]),&(e[0])),
 		bindUbigint(&rec->own,&(l[1]),&(n[1]),&(e[1])),
-		bindUbigint(&rec->refWdbeMProject,&(l[2]),&(n[2]),&(e[2])),
-		bindUbigint(&rec->bvrRefWdbeMVersion,&(l[3]),&(n[3]),&(e[3])),
-		bindUsmallint(&rec->Major,&(l[4]),&(n[4]),&(e[4])),
-		bindUsmallint(&rec->Minor,&(l[5]),&(n[5]),&(e[5])),
-		bindUsmallint(&rec->Sub,&(l[6]),&(n[6]),&(e[6])),
-		bindUbigint(&rec->refJState,&(l[7]),&(n[7]),&(e[7])),
-		bindUint(&rec->ixVState,&(l[8]),&(n[8]),&(e[8])),
-		bindCstring((char*) (rec->About.c_str()),&(l[9]),&(n[9]),&(e[9])),
-		bindCstring((char*) (rec->Comment.c_str()),&(l[10]),&(n[10]),&(e[10])),
-		bindUbigint(&rec->ref,&(l[11]),&(n[11]),&(e[11]))
+		bindUbigint(&rec->prjRefWdbeMProject,&(l[2]),&(n[2]),&(e[2])),
+		bindUint(&rec->prjNum,&(l[3]),&(n[3]),&(e[3])),
+		bindUbigint(&rec->bvrRefWdbeMVersion,&(l[4]),&(n[4]),&(e[4])),
+		bindUsmallint(&rec->Major,&(l[5]),&(n[5]),&(e[5])),
+		bindUsmallint(&rec->Minor,&(l[6]),&(n[6]),&(e[6])),
+		bindUsmallint(&rec->Sub,&(l[7]),&(n[7]),&(e[7])),
+		bindUbigint(&rec->refJState,&(l[8]),&(n[8]),&(e[8])),
+		bindUint(&rec->ixVState,&(l[9]),&(n[9]),&(e[9])),
+		bindCstring((char*) (rec->About.c_str()),&(l[10]),&(n[10]),&(e[10])),
+		bindCstring((char*) (rec->Comment.c_str()),&(l[11]),&(n[11]),&(e[11])),
+		bindUbigint(&rec->ref,&(l[12]),&(n[12]),&(e[12]))
 	};
 
 	if (mysql_stmt_bind_param(stmtUpdateRec, bind)) {
@@ -535,19 +543,19 @@ bool MyTblWdbeMVersion::loadRecByRef(
 };
 
 ubigint MyTblWdbeMVersion::loadRefsByPrj(
-			ubigint refWdbeMProject
+			ubigint prjRefWdbeMProject
 			, const bool append
 			, vector<ubigint>& refs
 		) {
-	return loadRefsBySQL("SELECT ref FROM TblWdbeMVersion WHERE refWdbeMProject = " + to_string(refWdbeMProject) + "", append, refs);
+	return loadRefsBySQL("SELECT ref FROM TblWdbeMVersion WHERE prjRefWdbeMProject = " + to_string(prjRefWdbeMProject) + "", append, refs);
 };
 
 ubigint MyTblWdbeMVersion::loadRstByPrj(
-			ubigint refWdbeMProject
+			ubigint prjRefWdbeMProject
 			, const bool append
 			, ListWdbeMVersion& rst
 		) {
-	return loadRstBySQL("SELECT ref, grp, own, refWdbeMProject, bvrRefWdbeMVersion, Major, Minor, Sub, refJState, ixVState, About, Comment FROM TblWdbeMVersion WHERE refWdbeMProject = " + to_string(refWdbeMProject) + "", append, rst);
+	return loadRstBySQL("SELECT ref, grp, own, prjRefWdbeMProject, prjNum, bvrRefWdbeMVersion, Major, Minor, Sub, refJState, ixVState, About, Comment FROM TblWdbeMVersion WHERE prjRefWdbeMProject = " + to_string(prjRefWdbeMProject) + " ORDER BY prjNum ASC", append, rst);
 };
 
 #endif
@@ -568,13 +576,13 @@ PgTblWdbeMVersion::~PgTblWdbeMVersion() {
 };
 
 void PgTblWdbeMVersion::initStatements() {
-	createStatement("TblWdbeMVersion_insertRec", "INSERT INTO TblWdbeMVersion (grp, own, refWdbeMProject, bvrRefWdbeMVersion, Major, Minor, Sub, refJState, ixVState, About, Comment) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11) RETURNING ref", 11);
-	createStatement("TblWdbeMVersion_updateRec", "UPDATE TblWdbeMVersion SET grp = $1, own = $2, refWdbeMProject = $3, bvrRefWdbeMVersion = $4, Major = $5, Minor = $6, Sub = $7, refJState = $8, ixVState = $9, About = $10, Comment = $11 WHERE ref = $12", 12);
+	createStatement("TblWdbeMVersion_insertRec", "INSERT INTO TblWdbeMVersion (grp, own, prjRefWdbeMProject, prjNum, bvrRefWdbeMVersion, Major, Minor, Sub, refJState, ixVState, About, Comment) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12) RETURNING ref", 12);
+	createStatement("TblWdbeMVersion_updateRec", "UPDATE TblWdbeMVersion SET grp = $1, own = $2, prjRefWdbeMProject = $3, prjNum = $4, bvrRefWdbeMVersion = $5, Major = $6, Minor = $7, Sub = $8, refJState = $9, ixVState = $10, About = $11, Comment = $12 WHERE ref = $13", 13);
 	createStatement("TblWdbeMVersion_removeRecByRef", "DELETE FROM TblWdbeMVersion WHERE ref = $1", 1);
 
-	createStatement("TblWdbeMVersion_loadRecByRef", "SELECT ref, grp, own, refWdbeMProject, bvrRefWdbeMVersion, Major, Minor, Sub, refJState, ixVState, About, Comment FROM TblWdbeMVersion WHERE ref = $1", 1);
-	createStatement("TblWdbeMVersion_loadRefsByPrj", "SELECT ref FROM TblWdbeMVersion WHERE refWdbeMProject = $1", 1);
-	createStatement("TblWdbeMVersion_loadRstByPrj", "SELECT ref, grp, own, refWdbeMProject, bvrRefWdbeMVersion, Major, Minor, Sub, refJState, ixVState, About, Comment FROM TblWdbeMVersion WHERE refWdbeMProject = $1", 1);
+	createStatement("TblWdbeMVersion_loadRecByRef", "SELECT ref, grp, own, prjRefWdbeMProject, prjNum, bvrRefWdbeMVersion, Major, Minor, Sub, refJState, ixVState, About, Comment FROM TblWdbeMVersion WHERE ref = $1", 1);
+	createStatement("TblWdbeMVersion_loadRefsByPrj", "SELECT ref FROM TblWdbeMVersion WHERE prjRefWdbeMProject = $1", 1);
+	createStatement("TblWdbeMVersion_loadRstByPrj", "SELECT ref, grp, own, prjRefWdbeMProject, prjNum, bvrRefWdbeMVersion, Major, Minor, Sub, refJState, ixVState, About, Comment FROM TblWdbeMVersion WHERE prjRefWdbeMProject = $1 ORDER BY prjNum ASC", 1);
 };
 
 bool PgTblWdbeMVersion::loadRec(
@@ -593,7 +601,8 @@ bool PgTblWdbeMVersion::loadRec(
 			PQfnumber(res, "ref"),
 			PQfnumber(res, "grp"),
 			PQfnumber(res, "own"),
-			PQfnumber(res, "refwdbemproject"),
+			PQfnumber(res, "prjrefwdbemproject"),
+			PQfnumber(res, "prjnum"),
 			PQfnumber(res, "bvrrefwdbemversion"),
 			PQfnumber(res, "major"),
 			PQfnumber(res, "minor"),
@@ -607,15 +616,16 @@ bool PgTblWdbeMVersion::loadRec(
 		ptr = PQgetvalue(res, 0, fnum[0]); _rec->ref = atoll(ptr);
 		ptr = PQgetvalue(res, 0, fnum[1]); _rec->grp = atoll(ptr);
 		ptr = PQgetvalue(res, 0, fnum[2]); _rec->own = atoll(ptr);
-		ptr = PQgetvalue(res, 0, fnum[3]); _rec->refWdbeMProject = atoll(ptr);
-		ptr = PQgetvalue(res, 0, fnum[4]); _rec->bvrRefWdbeMVersion = atoll(ptr);
-		ptr = PQgetvalue(res, 0, fnum[5]); _rec->Major = atoi(ptr);
-		ptr = PQgetvalue(res, 0, fnum[6]); _rec->Minor = atoi(ptr);
-		ptr = PQgetvalue(res, 0, fnum[7]); _rec->Sub = atoi(ptr);
-		ptr = PQgetvalue(res, 0, fnum[8]); _rec->refJState = atoll(ptr);
-		ptr = PQgetvalue(res, 0, fnum[9]); _rec->ixVState = atol(ptr);
-		ptr = PQgetvalue(res, 0, fnum[10]); _rec->About.assign(ptr, PQgetlength(res, 0, fnum[10]));
-		ptr = PQgetvalue(res, 0, fnum[11]); _rec->Comment.assign(ptr, PQgetlength(res, 0, fnum[11]));
+		ptr = PQgetvalue(res, 0, fnum[3]); _rec->prjRefWdbeMProject = atoll(ptr);
+		ptr = PQgetvalue(res, 0, fnum[4]); _rec->prjNum = atol(ptr);
+		ptr = PQgetvalue(res, 0, fnum[5]); _rec->bvrRefWdbeMVersion = atoll(ptr);
+		ptr = PQgetvalue(res, 0, fnum[6]); _rec->Major = atoi(ptr);
+		ptr = PQgetvalue(res, 0, fnum[7]); _rec->Minor = atoi(ptr);
+		ptr = PQgetvalue(res, 0, fnum[8]); _rec->Sub = atoi(ptr);
+		ptr = PQgetvalue(res, 0, fnum[9]); _rec->refJState = atoll(ptr);
+		ptr = PQgetvalue(res, 0, fnum[10]); _rec->ixVState = atol(ptr);
+		ptr = PQgetvalue(res, 0, fnum[11]); _rec->About.assign(ptr, PQgetlength(res, 0, fnum[11]));
+		ptr = PQgetvalue(res, 0, fnum[12]); _rec->Comment.assign(ptr, PQgetlength(res, 0, fnum[12]));
 
 		retval = true;
 	};
@@ -645,7 +655,8 @@ ubigint PgTblWdbeMVersion::loadRst(
 			PQfnumber(res, "ref"),
 			PQfnumber(res, "grp"),
 			PQfnumber(res, "own"),
-			PQfnumber(res, "refwdbemproject"),
+			PQfnumber(res, "prjrefwdbemproject"),
+			PQfnumber(res, "prjnum"),
 			PQfnumber(res, "bvrrefwdbemversion"),
 			PQfnumber(res, "major"),
 			PQfnumber(res, "minor"),
@@ -662,15 +673,16 @@ ubigint PgTblWdbeMVersion::loadRst(
 			ptr = PQgetvalue(res, numread, fnum[0]); rec->ref = atoll(ptr);
 			ptr = PQgetvalue(res, numread, fnum[1]); rec->grp = atoll(ptr);
 			ptr = PQgetvalue(res, numread, fnum[2]); rec->own = atoll(ptr);
-			ptr = PQgetvalue(res, numread, fnum[3]); rec->refWdbeMProject = atoll(ptr);
-			ptr = PQgetvalue(res, numread, fnum[4]); rec->bvrRefWdbeMVersion = atoll(ptr);
-			ptr = PQgetvalue(res, numread, fnum[5]); rec->Major = atoi(ptr);
-			ptr = PQgetvalue(res, numread, fnum[6]); rec->Minor = atoi(ptr);
-			ptr = PQgetvalue(res, numread, fnum[7]); rec->Sub = atoi(ptr);
-			ptr = PQgetvalue(res, numread, fnum[8]); rec->refJState = atoll(ptr);
-			ptr = PQgetvalue(res, numread, fnum[9]); rec->ixVState = atol(ptr);
-			ptr = PQgetvalue(res, numread, fnum[10]); rec->About.assign(ptr, PQgetlength(res, numread, fnum[10]));
-			ptr = PQgetvalue(res, numread, fnum[11]); rec->Comment.assign(ptr, PQgetlength(res, numread, fnum[11]));
+			ptr = PQgetvalue(res, numread, fnum[3]); rec->prjRefWdbeMProject = atoll(ptr);
+			ptr = PQgetvalue(res, numread, fnum[4]); rec->prjNum = atol(ptr);
+			ptr = PQgetvalue(res, numread, fnum[5]); rec->bvrRefWdbeMVersion = atoll(ptr);
+			ptr = PQgetvalue(res, numread, fnum[6]); rec->Major = atoi(ptr);
+			ptr = PQgetvalue(res, numread, fnum[7]); rec->Minor = atoi(ptr);
+			ptr = PQgetvalue(res, numread, fnum[8]); rec->Sub = atoi(ptr);
+			ptr = PQgetvalue(res, numread, fnum[9]); rec->refJState = atoll(ptr);
+			ptr = PQgetvalue(res, numread, fnum[10]); rec->ixVState = atol(ptr);
+			ptr = PQgetvalue(res, numread, fnum[11]); rec->About.assign(ptr, PQgetlength(res, numread, fnum[11]));
+			ptr = PQgetvalue(res, numread, fnum[12]); rec->Comment.assign(ptr, PQgetlength(res, numread, fnum[12]));
 
 			rst.nodes.push_back(rec);
 
@@ -765,7 +777,8 @@ ubigint PgTblWdbeMVersion::insertRec(
 
 	ubigint _grp = htonl64(rec->grp);
 	ubigint _own = htonl64(rec->own);
-	ubigint _refWdbeMProject = htonl64(rec->refWdbeMProject);
+	ubigint _prjRefWdbeMProject = htonl64(rec->prjRefWdbeMProject);
+	uint _prjNum = htonl(rec->prjNum);
 	ubigint _bvrRefWdbeMVersion = htonl64(rec->bvrRefWdbeMVersion);
 	usmallint _Major = htons(rec->Major);
 	usmallint _Minor = htons(rec->Minor);
@@ -776,7 +789,8 @@ ubigint PgTblWdbeMVersion::insertRec(
 	const char* vals[] = {
 		(char*) &_grp,
 		(char*) &_own,
-		(char*) &_refWdbeMProject,
+		(char*) &_prjRefWdbeMProject,
+		(char*) &_prjNum,
 		(char*) &_bvrRefWdbeMVersion,
 		(char*) &_Major,
 		(char*) &_Minor,
@@ -790,6 +804,7 @@ ubigint PgTblWdbeMVersion::insertRec(
 		sizeof(ubigint),
 		sizeof(ubigint),
 		sizeof(ubigint),
+		sizeof(uint),
 		sizeof(ubigint),
 		sizeof(usmallint),
 		sizeof(usmallint),
@@ -799,9 +814,9 @@ ubigint PgTblWdbeMVersion::insertRec(
 		0,
 		0
 	};
-	const int f[] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0};
+	const int f[] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0};
 
-	res = PQexecPrepared(dbs, "TblWdbeMVersion_insertRec", 11, vals, l, f, 0);
+	res = PQexecPrepared(dbs, "TblWdbeMVersion_insertRec", 12, vals, l, f, 0);
 
 	if (PQresultStatus(res) != PGRES_TUPLES_OK) {
 		string dbms = "PgTblWdbeMVersion::insertRec() / " + string(PQerrorMessage(dbs));
@@ -831,7 +846,8 @@ void PgTblWdbeMVersion::updateRec(
 
 	ubigint _grp = htonl64(rec->grp);
 	ubigint _own = htonl64(rec->own);
-	ubigint _refWdbeMProject = htonl64(rec->refWdbeMProject);
+	ubigint _prjRefWdbeMProject = htonl64(rec->prjRefWdbeMProject);
+	uint _prjNum = htonl(rec->prjNum);
 	ubigint _bvrRefWdbeMVersion = htonl64(rec->bvrRefWdbeMVersion);
 	usmallint _Major = htons(rec->Major);
 	usmallint _Minor = htons(rec->Minor);
@@ -843,7 +859,8 @@ void PgTblWdbeMVersion::updateRec(
 	const char* vals[] = {
 		(char*) &_grp,
 		(char*) &_own,
-		(char*) &_refWdbeMProject,
+		(char*) &_prjRefWdbeMProject,
+		(char*) &_prjNum,
 		(char*) &_bvrRefWdbeMVersion,
 		(char*) &_Major,
 		(char*) &_Minor,
@@ -858,6 +875,7 @@ void PgTblWdbeMVersion::updateRec(
 		sizeof(ubigint),
 		sizeof(ubigint),
 		sizeof(ubigint),
+		sizeof(uint),
 		sizeof(ubigint),
 		sizeof(usmallint),
 		sizeof(usmallint),
@@ -868,9 +886,9 @@ void PgTblWdbeMVersion::updateRec(
 		0,
 		sizeof(ubigint)
 	};
-	const int f[] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1};
+	const int f[] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 1};
 
-	res = PQexecPrepared(dbs, "TblWdbeMVersion_updateRec", 12, vals, l, f, 0);
+	res = PQexecPrepared(dbs, "TblWdbeMVersion_updateRec", 13, vals, l, f, 0);
 
 	if (PQresultStatus(res) != PGRES_COMMAND_OK) {
 		string dbms = "PgTblWdbeMVersion::updateRec() / " + string(PQerrorMessage(dbs));
@@ -937,14 +955,14 @@ bool PgTblWdbeMVersion::loadRecByRef(
 };
 
 ubigint PgTblWdbeMVersion::loadRefsByPrj(
-			ubigint refWdbeMProject
+			ubigint prjRefWdbeMProject
 			, const bool append
 			, vector<ubigint>& refs
 		) {
-	ubigint _refWdbeMProject = htonl64(refWdbeMProject);
+	ubigint _prjRefWdbeMProject = htonl64(prjRefWdbeMProject);
 
 	const char* vals[] = {
-		(char*) &_refWdbeMProject
+		(char*) &_prjRefWdbeMProject
 	};
 	const int l[] = {
 		sizeof(ubigint)
@@ -955,14 +973,14 @@ ubigint PgTblWdbeMVersion::loadRefsByPrj(
 };
 
 ubigint PgTblWdbeMVersion::loadRstByPrj(
-			ubigint refWdbeMProject
+			ubigint prjRefWdbeMProject
 			, const bool append
 			, ListWdbeMVersion& rst
 		) {
-	ubigint _refWdbeMProject = htonl64(refWdbeMProject);
+	ubigint _prjRefWdbeMProject = htonl64(prjRefWdbeMProject);
 
 	const char* vals[] = {
-		(char*) &_refWdbeMProject
+		(char*) &_prjRefWdbeMProject
 	};
 	const int l[] = {
 		sizeof(ubigint)

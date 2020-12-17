@@ -1,56 +1,58 @@
 /**
-	* \file PnlWdbePrj1NVersion.h
-	* job handler for job PnlWdbePrj1NVersion (declarations)
+	* \file PnlWdbePrjPrj1NVersion.h
+	* job handler for job PnlWdbePrjPrj1NVersion (declarations)
 	* \copyright (C) 2016-2020 MPSI Technologies GmbH
 	* \author Alexander Wirthmueller (auto-generation)
-	* \date created: 28 Nov 2020
+	* \date created: 16 Dec 2020
 	*/
 // IP header --- ABOVE
 
-#ifndef PNLWDBEPRJ1NVERSION_H
-#define PNLWDBEPRJ1NVERSION_H
+#ifndef PNLWDBEPRJPRJ1NVERSION_H
+#define PNLWDBEPRJPRJ1NVERSION_H
 
 // IP include.spec --- INSERT
 
 // IP include.cust --- INSERT
 
-#include "QryWdbePrj1NVersion.h"
+#include "QryWdbePrjPrj1NVersion.h"
 
-#define VecVWdbePrj1NVersionDo PnlWdbePrj1NVersion::VecVDo
+#define VecVWdbePrjPrj1NVersionDo PnlWdbePrjPrj1NVersion::VecVDo
 
-#define ContInfWdbePrj1NVersion PnlWdbePrj1NVersion::ContInf
-#define StatAppWdbePrj1NVersion PnlWdbePrj1NVersion::StatApp
-#define StatShrWdbePrj1NVersion PnlWdbePrj1NVersion::StatShr
-#define StgIacWdbePrj1NVersion PnlWdbePrj1NVersion::StgIac
-#define TagWdbePrj1NVersion PnlWdbePrj1NVersion::Tag
+#define ContInfWdbePrjPrj1NVersion PnlWdbePrjPrj1NVersion::ContInf
+#define StatAppWdbePrjPrj1NVersion PnlWdbePrjPrj1NVersion::StatApp
+#define StatShrWdbePrjPrj1NVersion PnlWdbePrjPrj1NVersion::StatShr
+#define StgIacWdbePrjPrj1NVersion PnlWdbePrjPrj1NVersion::StgIac
+#define TagWdbePrjPrj1NVersion PnlWdbePrjPrj1NVersion::Tag
 
-#define DpchAppWdbePrj1NVersionData PnlWdbePrj1NVersion::DpchAppData
-#define DpchAppWdbePrj1NVersionDo PnlWdbePrj1NVersion::DpchAppDo
-#define DpchEngWdbePrj1NVersionData PnlWdbePrj1NVersion::DpchEngData
+#define DpchAppWdbePrjPrj1NVersionData PnlWdbePrjPrj1NVersion::DpchAppData
+#define DpchAppWdbePrjPrj1NVersionDo PnlWdbePrjPrj1NVersion::DpchAppDo
+#define DpchEngWdbePrjPrj1NVersionData PnlWdbePrjPrj1NVersion::DpchEngData
 
 /**
-	* PnlWdbePrj1NVersion
+	* PnlWdbePrjPrj1NVersion
 	*/
-class PnlWdbePrj1NVersion : public JobWdbe {
+class PnlWdbePrjPrj1NVersion : public JobWdbe {
 
 public:
 	/**
-		* VecVDo (full: VecVWdbePrj1NVersionDo)
+		* VecVDo (full: VecVWdbePrjPrj1NVersionDo)
 		*/
 	class VecVDo {
 
 	public:
-		static const Sbecore::uint BUTVIEWCLICK = 1;
-		static const Sbecore::uint BUTNEWCLICK = 2;
-		static const Sbecore::uint BUTDELETECLICK = 3;
-		static const Sbecore::uint BUTREFRESHCLICK = 4;
+		static const Sbecore::uint BUTUPCLICK = 1;
+		static const Sbecore::uint BUTDOWNCLICK = 2;
+		static const Sbecore::uint BUTVIEWCLICK = 3;
+		static const Sbecore::uint BUTNEWCLICK = 4;
+		static const Sbecore::uint BUTDELETECLICK = 5;
+		static const Sbecore::uint BUTREFRESHCLICK = 6;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);
 	};
 
 	/**
-	  * ContInf (full: ContInfWdbePrj1NVersion)
+	  * ContInf (full: ContInfWdbePrjPrj1NVersion)
 	  */
 	class ContInf : public Sbecore::Xmlio::Block {
 
@@ -70,7 +72,7 @@ public:
 	};
 
 	/**
-		* StatApp (full: StatAppWdbePrj1NVersion)
+		* StatApp (full: StatAppWdbePrjPrj1NVersion)
 		*/
 	class StatApp {
 
@@ -79,21 +81,29 @@ public:
 	};
 
 	/**
-		* StatShr (full: StatShrWdbePrj1NVersion)
+		* StatShr (full: StatShrWdbePrjPrj1NVersion)
 		*/
 	class StatShr : public Sbecore::Xmlio::Block {
 
 	public:
-		static const Sbecore::uint BUTVIEWAVAIL = 1;
-		static const Sbecore::uint BUTVIEWACTIVE = 2;
-		static const Sbecore::uint BUTNEWAVAIL = 3;
-		static const Sbecore::uint BUTDELETEAVAIL = 4;
-		static const Sbecore::uint BUTDELETEACTIVE = 5;
+		static const Sbecore::uint BUTUPAVAIL = 1;
+		static const Sbecore::uint BUTUPACTIVE = 2;
+		static const Sbecore::uint BUTDOWNAVAIL = 3;
+		static const Sbecore::uint BUTDOWNACTIVE = 4;
+		static const Sbecore::uint BUTVIEWAVAIL = 5;
+		static const Sbecore::uint BUTVIEWACTIVE = 6;
+		static const Sbecore::uint BUTNEWAVAIL = 7;
+		static const Sbecore::uint BUTDELETEAVAIL = 8;
+		static const Sbecore::uint BUTDELETEACTIVE = 9;
 
 	public:
-		StatShr(const bool ButViewAvail = true, const bool ButViewActive = true, const bool ButNewAvail = true, const bool ButDeleteAvail = true, const bool ButDeleteActive = true);
+		StatShr(const bool ButUpAvail = true, const bool ButUpActive = true, const bool ButDownAvail = true, const bool ButDownActive = true, const bool ButViewAvail = true, const bool ButViewActive = true, const bool ButNewAvail = true, const bool ButDeleteAvail = true, const bool ButDeleteActive = true);
 
 	public:
+		bool ButUpAvail;
+		bool ButUpActive;
+		bool ButDownAvail;
+		bool ButDownActive;
 		bool ButViewAvail;
 		bool ButViewActive;
 		bool ButNewAvail;
@@ -107,7 +117,7 @@ public:
 	};
 
 	/**
-		* StgIac (full: StgIacWdbePrj1NVersion)
+		* StgIac (full: StgIacWdbePrjPrj1NVersion)
 		*/
 	class StgIac : public Sbecore::Xmlio::Block {
 
@@ -128,7 +138,7 @@ public:
 	};
 
 	/**
-		* Tag (full: TagWdbePrj1NVersion)
+		* Tag (full: TagWdbePrjPrj1NVersion)
 		*/
 	class Tag {
 
@@ -137,7 +147,7 @@ public:
 	};
 
 	/**
-		* DpchAppData (full: DpchAppWdbePrj1NVersionData)
+		* DpchAppData (full: DpchAppWdbePrjPrj1NVersionData)
 		*/
 	class DpchAppData : public DpchAppWdbe {
 
@@ -151,7 +161,7 @@ public:
 
 	public:
 		StgIac stgiac;
-		QryWdbePrj1NVersion::StgIac stgiacqry;
+		QryWdbePrjPrj1NVersion::StgIac stgiacqry;
 
 	public:
 		std::string getSrefsMask();
@@ -160,7 +170,7 @@ public:
 	};
 
 	/**
-		* DpchAppDo (full: DpchAppWdbePrj1NVersionDo)
+		* DpchAppDo (full: DpchAppWdbePrjPrj1NVersionDo)
 		*/
 	class DpchAppDo : public DpchAppWdbe {
 
@@ -181,7 +191,7 @@ public:
 	};
 
 	/**
-		* DpchEngData (full: DpchEngWdbePrj1NVersionData)
+		* DpchEngData (full: DpchEngWdbePrjPrj1NVersionData)
 		*/
 	class DpchEngData : public DpchEngWdbe {
 
@@ -200,16 +210,16 @@ public:
 		static const Sbecore::uint ALL = 12;
 
 	public:
-		DpchEngData(const Sbecore::ubigint jref = 0, ContInf* continf = NULL, Sbecore::Xmlio::Feed* feedFCsiQst = NULL, StatShr* statshr = NULL, StgIac* stgiac = NULL, ListWdbeQPrj1NVersion* rst = NULL, QryWdbePrj1NVersion::StatShr* statshrqry = NULL, QryWdbePrj1NVersion::StgIac* stgiacqry = NULL, const std::set<Sbecore::uint>& mask = {NONE});
+		DpchEngData(const Sbecore::ubigint jref = 0, ContInf* continf = NULL, Sbecore::Xmlio::Feed* feedFCsiQst = NULL, StatShr* statshr = NULL, StgIac* stgiac = NULL, ListWdbeQPrjPrj1NVersion* rst = NULL, QryWdbePrjPrj1NVersion::StatShr* statshrqry = NULL, QryWdbePrjPrj1NVersion::StgIac* stgiacqry = NULL, const std::set<Sbecore::uint>& mask = {NONE});
 
 	public:
 		ContInf continf;
 		Sbecore::Xmlio::Feed feedFCsiQst;
 		StatShr statshr;
 		StgIac stgiac;
-		ListWdbeQPrj1NVersion rst;
-		QryWdbePrj1NVersion::StatShr statshrqry;
-		QryWdbePrj1NVersion::StgIac stgiacqry;
+		ListWdbeQPrjPrj1NVersion rst;
+		QryWdbePrjPrj1NVersion::StatShr statshrqry;
+		QryWdbePrjPrj1NVersion::StgIac stgiacqry;
 
 	public:
 		std::string getSrefsMask();
@@ -218,6 +228,10 @@ public:
 		void writeXML(const Sbecore::uint ixWdbeVLocale, xmlTextWriter* wr);
 	};
 
+	bool evalButUpAvail(DbsWdbe* dbswdbe);
+	bool evalButUpActive(DbsWdbe* dbswdbe);
+	bool evalButDownAvail(DbsWdbe* dbswdbe);
+	bool evalButDownActive(DbsWdbe* dbswdbe);
 	bool evalButViewAvail(DbsWdbe* dbswdbe);
 	bool evalButViewActive(DbsWdbe* dbswdbe);
 	bool evalButNewAvail(DbsWdbe* dbswdbe);
@@ -225,8 +239,8 @@ public:
 	bool evalButDeleteActive(DbsWdbe* dbswdbe);
 
 public:
-	PnlWdbePrj1NVersion(XchgWdbe* xchg, DbsWdbe* dbswdbe, const Sbecore::ubigint jrefSup, const Sbecore::uint ixWdbeVLocale);
-	~PnlWdbePrj1NVersion();
+	PnlWdbePrjPrj1NVersion(XchgWdbe* xchg, DbsWdbe* dbswdbe, const Sbecore::ubigint jrefSup, const Sbecore::uint ixWdbeVLocale);
+	~PnlWdbePrjPrj1NVersion();
 
 public:
 	ContInf continf;
@@ -235,7 +249,7 @@ public:
 
 	Sbecore::Xmlio::Feed feedFCsiQst;
 
-	QryWdbePrj1NVersion* qry;
+	QryWdbePrjPrj1NVersion* qry;
 
 	WdbeMVersion recVer;
 
@@ -260,8 +274,10 @@ private:
 
 	void handleDpchAppWdbeInit(DbsWdbe* dbswdbe, DpchAppWdbeInit* dpchappwdbeinit, DpchEngWdbe** dpcheng);
 	void handleDpchAppDataStgiac(DbsWdbe* dbswdbe, StgIac* _stgiac, DpchEngWdbe** dpcheng);
-	void handleDpchAppDataStgiacqry(DbsWdbe* dbswdbe, QryWdbePrj1NVersion::StgIac* _stgiacqry, DpchEngWdbe** dpcheng);
+	void handleDpchAppDataStgiacqry(DbsWdbe* dbswdbe, QryWdbePrjPrj1NVersion::StgIac* _stgiacqry, DpchEngWdbe** dpcheng);
 
+	void handleDpchAppDoButUpClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
+	void handleDpchAppDoButDownClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
 	void handleDpchAppDoButViewClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
 	void handleDpchAppDoButNewClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
 	void handleDpchAppDoButDeleteClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
