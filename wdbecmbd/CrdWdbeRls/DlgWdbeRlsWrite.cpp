@@ -346,6 +346,7 @@ void DlgWdbeRlsWrite::createFpga(
 		keys.push_back("author"); vals.push_back(author);
 		keys.push_back("created"); vals.push_back(created);
 
+		keys.push_back("Untsref"); vals.push_back("Untsref");
 		keys.push_back("Compsref"); vals.push_back("Compsref");
 		keys.push_back("mdltype"); vals.push_back("mdltype");
 
@@ -355,6 +356,7 @@ void DlgWdbeRlsWrite::createFpga(
 			unt = unts.nodes[i];
 
 			Untsref = StrMod::cap(unt->sref);
+			vals[vals.size()-3] = Untsref;
 
 			dbswdbe->tblwdbemmodule->loadRstBySQL("SELECT * FROM TblWdbeMModule WHERE hkIxVTbl = " + to_string(VecWdbeVMModuleHkTbl::UNT) + " AND hkUref = " + to_string(unt->ref), false, mdls);
 

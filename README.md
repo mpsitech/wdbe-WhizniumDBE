@@ -2,11 +2,24 @@
 
 The Whiznium Device Builder's Edition, finally as Open Source Software project.
 
-WhizniumDBE extends the concept of model-based source code generation to the world of FPGA's (and partially MCU's). On the Embedded Linux level, it generates access libraries which can be used independently of WhizniumSBE projects.
+WhizniumDBE extends the concept of model-based source code generation to the world of FPGA's (and partially MCU's). On the optional Embedded Linux (host) level, it generates access libraries which can be used independently of WhizniumSBE projects.
 
 ## How it works
 
 ![](_exp/dbe.png)
+
+## Setup instructions
+
+To prepare your system for use with Whiznium and to learn how to make your first steps, please visit the separate this [separate Git repository](https://github.com/mpsitech/The-Whiznium-Documentation).
+
+## The Whiznium Developer Experience YouTube format
+
+WhizniumDBE-related episodes so far include:
+
+- [S1E1](https://youtu.be/SIz8meoCUl4): Why Whiznium? Let a laser scanner do the talking. 
+- [S1E2](https://youtu.be/_J5aEs5J9tE): Whiznium modeling: Any aspect that's fit to code.
+- [S1E3](https://youtu.be/Zf6G5EiLEak): Hunting down bugs in Whiznium application code.
+- [S1E4](https://youtu.be/NqhiURBacEI): Boosting your development workflow: the Whiznium tooling.
 
 ## Source code
 
@@ -63,28 +76,26 @@ Xxxx.vhd|VHDL constant definitions, "header file" for RTL module tree|
 Xxxxx.vhd|base VHDL module file|
 Zynq_ip_AXI_v2_0.vhd|AXI4-lite bus slave VHDL code based on Xilinx example, enhanced by protocol using distinct host write patterns to commence/end 32-bit transfers|
 
-## Deployment
+## Further Reading
 
-## Resources for now
+### Reference
+
+- Documentation of model files (slightly outdated) as [Git repository](https://github.com/mpsitech/WhizniumDBE-docs)
+- [.pdf slides](https://mpsitech-public.s3.eu-central-1.amazonaws.com/wdbe_templates.pdf) outlining various levels of module templatification using WhizniumDBE
+
+### Upcoming book
+
+- The Whiznium book (draft available [here](https://mpsitech-public.s3.eu-central-1.amazonaws.com/book.pdf)), offering an introduction to WhizniumDBE/DBE by means of a handy use case
 
 ### Use cases
 
 - Whiznium StarterKit Device: Zynq (ARM and Xilinx FPGA) compatible VHDL code, with basic hardware control and 5 megapixel pipelined image processing. PolarFire SoC (RISC-V and Microchip FPGA) in the making. [Git repository](https://github.com/mpsitech/wskd-Whiznium-StarterKit-Device)
-
-### Reference / documentation
-
-- Documentation of model files (slightly outdated) as [Git repository](https://github.com/mpsitech/WhizniumDBE-docs)
-- [.pdf slides](https://mpsitech-public.s3.eu-central-1.amazonaws.com/wdbe_templates.pdf) outlining various levels of module templatification using WhizniumDBE
 
 ### Marketing material
 
 Most of these publications pre-date Whiznium's Open Source era.
 
 - WhizniumDBE technology overview [.pdf datasheet](https://mpsitech-public.s3.eu-central-1.amazonaws.com/whizniumdbe.pdf)
-
-## Upcoming documentation
-
-- The Whiznium book (draft available [here](https://mpsitech-public.s3.eu-central-1.amazonaws.com/book.pdf)), offering an introduction to WhizniumDBE/DBE by means of a handy use case in the first chapters, but also with a complete reference in the later chapters
 
 ## Related Repositories
 

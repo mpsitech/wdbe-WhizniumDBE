@@ -482,7 +482,59 @@ bool RootWdbe::handleExportIni(
 			DbsWdbe* dbswdbe
 		) {
 	bool retval = false;
-	// IP handleExportIni --- INSERT
+	// IP handleExportIni --- IBEGIN
+
+	// (re-)export initialization data
+	vector<ubigint> refs;
+
+	map<uint,uint> icsWdbeVIop;
+
+	JobWdbeIexIni* iexini = NULL;
+	iexini = new JobWdbeIexIni(xchg, dbswdbe, jref, ixWdbeVLocale);
+
+	iexini->reset(dbswdbe);
+
+	// ImeIMCoreproject
+	dbswdbe->loadRefsBySQL("SELECT ref FROM TblWdbeMCoreproject ORDER BY sref ASC", false, refs);
+	for (unsigned int i = 0; i < refs.size(); i++) iexini->imeimcoreproject.nodes.push_back(new ImeitemIWdbeIniMCoreproject(dbswdbe, refs[i]));
+
+	// ImeIMFamily
+	dbswdbe->loadRefsBySQL("SELECT ref FROM TblWdbeMFamily ORDER BY Title ASC", false, refs);
+	for (unsigned int i = 0; i < refs.size(); i++) iexini->imeimfamily.nodes.push_back(new ImeitemIWdbeIniMFamily(dbswdbe, refs[i]));
+
+	// ImeIMFile1
+	dbswdbe->loadRefsBySQL("SELECT ref FROM TblWdbeMFile WHERE refIxVTbl = " + to_string(VecWdbeVMFileRefTbl::VOID) + " ORDER BY Filename ASC", false, refs);
+	for (unsigned int i = 0; i < refs.size(); i++) iexini->imeimfile1.nodes.push_back(new ImeitemIWdbeIniMFile1(dbswdbe, refs[i]));
+
+	// ImeIMLibrary
+	dbswdbe->loadRefsBySQL("SELECT ref FROM TblWdbeMLibrary ORDER BY sref ASC", false, refs);
+	for (unsigned int i = 0; i < refs.size(); i++) iexini->imeimlibrary.nodes.push_back(new ImeitemIWdbeIniMLibrary(dbswdbe, refs[i]));
+
+	// ImeIMMachine
+	dbswdbe->loadRefsBySQL("SELECT ref FROM TblWdbeMMachine ORDER BY supRefWdbeMMachine ASC, sref ASC", false, refs);
+	for (unsigned int i = 0; i < refs.size(); i++) iexini->imeimmachine.nodes.push_back(new ImeitemIWdbeIniMMachine(dbswdbe, refs[i]));
+
+	// ImeIMModule
+	dbswdbe->loadRefsBySQL("SELECT ref FROM TblWdbeMModule WHERE hkIxVTbl = " + to_string(VecWdbeVMModuleHkTbl::VOID) +  " ORDER BY sref ASC", false, refs);
+	for (unsigned int i = 0; i < refs.size(); i++) iexini->imeimmodule.nodes.push_back(new ImeitemIWdbeIniMModule(dbswdbe, refs[i]));
+
+	// ImeIMUnit
+	dbswdbe->loadRefsBySQL("SELECT ref FROM TblWdbeMUnit WHERE refIxVTbl <> " + to_string(VecWdbeVMUnitRefTbl::VER) +  " ORDER BY sref ASC", false, refs);
+	for (unsigned int i = 0; i < refs.size(); i++) iexini->imeimunit.nodes.push_back(new ImeitemIWdbeIniMUnit(dbswdbe, refs[i]));
+
+	// ImeIMUsergroup
+	dbswdbe->loadRefsBySQL("SELECT ref FROM TblWdbeMUsergroup ORDER BY sref ASC", false, refs);
+	for (unsigned int i = 0; i < refs.size(); i++) iexini->imeimusergroup.nodes.push_back(new ImeitemIWdbeIniMUsergroup(dbswdbe, refs[i]));
+
+	icsWdbeVIop = IexWdbeIni::icsWdbeVIopInsAll();
+
+	iexini->collect(dbswdbe, icsWdbeVIop);
+
+	iexini->exportToFile(dbswdbe, "./IexWdbeIni_exported.txt", false);
+
+	delete iexini;
+
+	// IP handleExportIni --- IEND
 	return retval;
 };
 
