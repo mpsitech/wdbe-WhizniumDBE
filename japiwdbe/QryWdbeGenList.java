@@ -19,16 +19,16 @@ public class QryWdbeGenList {
 		*/
 	public static class VecVOrd {
 
-		public static final int MDL = 1;
-		public static final int SRF = 2;
+		public static final int SRF = 1;
+		public static final int MDL = 2;
 
 		public static int getIx(
 					String sref
 				) {
 			String s = sref.toLowerCase();
 
-			if (s.equals("mdl")) return MDL;
 			if (s.equals("srf")) return SRF;
+			if (s.equals("mdl")) return MDL;
 
 			return 0;
 		};
@@ -36,8 +36,8 @@ public class QryWdbeGenList {
 		public static String getSref(
 					int ix
 				) {
-			if (ix == MDL) return("mdl");
 			if (ix == SRF) return("srf");
+			if (ix == MDL) return("mdl");
 
 			return "";
 		};

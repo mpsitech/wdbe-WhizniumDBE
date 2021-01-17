@@ -10,10 +10,10 @@
 #ifndef APIWDBE_H
 #define APIWDBE_H
 
-#define WDBE_VERSION "1.1.3"
+#define WDBE_VERSION "1.1.4"
 #define WDBE_VERSION_MAJOR 1
 #define WDBE_VERSION_MINOR 1
-#define WDBE_VERSION_SUB 3
+#define WDBE_VERSION_SUB 4
 
 #include "ApiWdbe_blks.h"
 

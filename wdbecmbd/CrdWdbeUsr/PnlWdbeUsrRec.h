@@ -14,10 +14,10 @@
 
 // IP include.cust --- INSERT
 
+#include "PnlWdbeUsrDetail.h"
 #include "PnlWdbeUsrAAccess.h"
 #include "PnlWdbeUsr1NSession.h"
 #include "PnlWdbeUsrMNUsergroup.h"
-#include "PnlWdbeUsrDetail.h"
 
 #define VecVWdbeUsrRecDo PnlWdbeUsrRec::VecVDo
 
@@ -174,10 +174,10 @@ public:
 	ContInf continf;
 	StatShr statshr;
 
+	PnlWdbeUsrDetail* pnldetail;
 	PnlWdbeUsrAAccess* pnlaaccess;
 	PnlWdbeUsr1NSession* pnl1nsession;
 	PnlWdbeUsrMNUsergroup* pnlmnusergroup;
-	PnlWdbeUsrDetail* pnldetail;
 
 	WdbeMUser recUsr;
 
@@ -211,9 +211,9 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeUsrUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
-	bool handleCallWdbeUsr_usgEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
 	bool handleCallWdbeUsr_prsEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeUsr_usgEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeUsrUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 
 };
 

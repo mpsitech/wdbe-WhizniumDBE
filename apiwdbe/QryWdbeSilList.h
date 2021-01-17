@@ -28,13 +28,13 @@ namespace QryWdbeSilList {
 	class VecVOrd {
 
 	public:
-		static const Sbecore::uint MDL = 1;
-		static const Sbecore::uint SRF = 2;
-		static const Sbecore::uint TIT = 3;
-		static const Sbecore::uint TYP = 4;
-		static const Sbecore::uint RET = 5;
-		static const Sbecore::uint REU = 6;
-		static const Sbecore::uint SYS = 7;
+		static const Sbecore::uint SRF = 1;
+		static const Sbecore::uint TIT = 2;
+		static const Sbecore::uint TYP = 3;
+		static const Sbecore::uint RET = 4;
+		static const Sbecore::uint REU = 5;
+		static const Sbecore::uint SYS = 6;
+		static const Sbecore::uint MDL = 7;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);

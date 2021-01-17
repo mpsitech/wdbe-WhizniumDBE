@@ -123,8 +123,8 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeSysMod_verEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 	bool handleCallWdbeStubChgFromSelf(DbsWdbe* dbswdbe);
+	bool handleCallWdbeSysMod_verEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 
 };
 

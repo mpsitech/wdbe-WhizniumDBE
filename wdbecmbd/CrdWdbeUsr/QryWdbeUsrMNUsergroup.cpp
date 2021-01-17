@@ -85,7 +85,7 @@ void QryWdbeUsrMNUsergroup::rerun(
 	dbswdbe->tblwdbequsrmnusergroup->removeRstByJref(jref);
 
 	sqlstr = "SELECT COUNT(TblWdbeRMUserMUsergroup.ref)";
-	sqlstr += " FROM TblWdbeMUsergroup, TblWdbeRMUserMUsergroup";
+	sqlstr += " FROM TblWdbeRMUserMUsergroup, TblWdbeMUsergroup";
 	sqlstr += " WHERE TblWdbeRMUserMUsergroup.refWdbeMUsergroup = TblWdbeMUsergroup.ref";
 	sqlstr += " AND TblWdbeRMUserMUsergroup.refWdbeMUser = " + to_string(preRefUsr) + "";
 	dbswdbe->loadUintBySQL(sqlstr, cnt);
@@ -100,7 +100,7 @@ void QryWdbeUsrMNUsergroup::rerun(
 
 	sqlstr = "INSERT INTO TblWdbeQUsrMNUsergroup(jref, jnum, mref, ref, ixWdbeVUserlevel)";
 	sqlstr += " SELECT " + to_string(jref) + ", 0, TblWdbeMUsergroup.ref, TblWdbeRMUserMUsergroup.ref, TblWdbeRMUserMUsergroup.ixWdbeVUserlevel";
-	sqlstr += " FROM TblWdbeMUsergroup, TblWdbeRMUserMUsergroup";
+	sqlstr += " FROM TblWdbeRMUserMUsergroup, TblWdbeMUsergroup";
 	sqlstr += " WHERE TblWdbeRMUserMUsergroup.refWdbeMUsergroup = TblWdbeMUsergroup.ref";
 	sqlstr += " AND TblWdbeRMUserMUsergroup.refWdbeMUser = " + to_string(preRefUsr) + "";
 	sqlstr += " ORDER BY TblWdbeMUsergroup.sref ASC";
@@ -282,11 +282,19 @@ void QryWdbeUsrMNUsergroup::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBEUSRRUSGMOD_USREQ) {
-		call->abort = handleCallWdbeUsrRusgMod_usrEq(dbswdbe, call->jref);
-	} else if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
+	if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
 		call->abort = handleCallWdbeStubChgFromSelf(dbswdbe);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEUSRRUSGMOD_USREQ) {
+		call->abort = handleCallWdbeUsrRusgMod_usrEq(dbswdbe, call->jref);
 	};
+};
+
+bool QryWdbeUsrMNUsergroup::handleCallWdbeStubChgFromSelf(
+			DbsWdbe* dbswdbe
+		) {
+	bool retval = false;
+	// IP handleCallWdbeStubChgFromSelf --- INSERT
+	return retval;
 };
 
 bool QryWdbeUsrMNUsergroup::handleCallWdbeUsrRusgMod_usrEq(
@@ -300,13 +308,5 @@ bool QryWdbeUsrMNUsergroup::handleCallWdbeUsrRusgMod_usrEq(
 		xchg->triggerCall(dbswdbe, VecWdbeVCall::CALLWDBESTATCHG, jref);
 	};
 
-	return retval;
-};
-
-bool QryWdbeUsrMNUsergroup::handleCallWdbeStubChgFromSelf(
-			DbsWdbe* dbswdbe
-		) {
-	bool retval = false;
-	// IP handleCallWdbeStubChgFromSelf --- INSERT
 	return retval;
 };

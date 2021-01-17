@@ -2,7 +2,7 @@
 # make file for CrdWdbeVar card job handler, release wdbecmbd_mac
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 16 Dec 2020
+# date created: 13 Jan 2021
 # IP header --- ABOVE
 
 include ../Makefile.inc
@@ -16,7 +16,7 @@ STATLIBFLAGS = rcs
 INCPATH = -I$(BUILDROOT)/dbswdbe -I$(BUILDROOT)/wdbecmbd/VecWdbe -I$(BUILDROOT)/wdbecmbd/IexWdbe -I$(BUILDROOT)/wdbecmbd
 INCPATH += -I${WHIZSDKROOT}/build -I${WHIZSDKROOT}/build/apiwzlm -I/usr/local/include -I/usr/local/include/curl -I/usr/local/include/libxml2 -I/usr/local/mysql/include -I/usr/local/opt/sqlite/include
 
-OBJS = CrdWdbeVar.o PnlWdbeVarList.o QryWdbeVarList.o PnlWdbeVarRec.o PnlWdbeVarDetail.o PnlWdbeVarHeadbar.o
+OBJS = CrdWdbeVar.o PnlWdbeVarRec.o PnlWdbeVarDetail.o PnlWdbeVarHeadbar.o PnlWdbeVarList.o QryWdbeVarList.o
 
 LIB = libcrdwdbevar
 

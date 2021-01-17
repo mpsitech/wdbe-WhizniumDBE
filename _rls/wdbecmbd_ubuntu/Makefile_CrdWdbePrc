@@ -2,7 +2,7 @@
 # make file for CrdWdbePrc card job handler, release wdbecmbd_ubuntu
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 16 Dec 2020
+# date created: 13 Jan 2021
 # IP header --- ABOVE
 
 include ../Makefile.inc
@@ -16,7 +16,7 @@ STATLIBFLAGS = rcs
 INCPATH = -I$(BUILDROOT)/dbswdbe -I$(BUILDROOT)/wdbecmbd/VecWdbe -I$(BUILDROOT)/wdbecmbd/IexWdbe -I$(BUILDROOT)/wdbecmbd
 INCPATH += -I${WHIZSDKROOT}/build -I${WHIZSDKROOT}/build/apiwzlm -I/usr/include -I/usr/include/jsoncpp -I/usr/include/libxml2 -I/usr/include/mariadb
 
-OBJS = CrdWdbePrc.o PnlWdbePrcList.o QryWdbePrcList.o PnlWdbePrcHeadbar.o PnlWdbePrcRec.o PnlWdbePrcFsmFsm1NFsmstate.o QryWdbePrcFsmFsm1NFsmstate.o PnlWdbePrcMge1NSignal.o QryWdbePrcMge1NSignal.o PnlWdbePrcPrc1NVariable.o QryWdbePrcPrc1NVariable.o PnlWdbePrcKHdltype.o QryWdbePrcKHdltype.o PnlWdbePrcDetail.o
+OBJS = CrdWdbePrc.o PnlWdbePrcRec.o PnlWdbePrcDetail.o PnlWdbePrcKHdltype.o QryWdbePrcKHdltype.o PnlWdbePrcPrc1NVariable.o QryWdbePrcPrc1NVariable.o PnlWdbePrcMge1NSignal.o QryWdbePrcMge1NSignal.o PnlWdbePrcFsmFsm1NFsmstate.o QryWdbePrcFsmFsm1NFsmstate.o PnlWdbePrcHeadbar.o PnlWdbePrcList.o QryWdbePrcList.o
 
 LIB = libcrdwdbeprc
 

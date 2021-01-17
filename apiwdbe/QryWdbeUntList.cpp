@@ -22,13 +22,13 @@ uint QryWdbeUntList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "sys") return SYS;
-	if (s == "mdl") return MDL;
-	if (s == "reu") return REU;
-	if (s == "ret") return RET;
+	if (s == "srf") return SRF;
 	if (s == "tit") return TIT;
 	if (s == "typ") return TYP;
-	if (s == "srf") return SRF;
+	if (s == "ret") return RET;
+	if (s == "reu") return REU;
+	if (s == "sys") return SYS;
+	if (s == "mdl") return MDL;
 
 	return(0);
 };
@@ -36,13 +36,13 @@ uint QryWdbeUntList::VecVOrd::getIx(
 string QryWdbeUntList::VecVOrd::getSref(
 			const uint ix
 		) {
-	if (ix == SYS) return("sys");
-	if (ix == MDL) return("mdl");
-	if (ix == REU) return("reu");
-	if (ix == RET) return("ret");
+	if (ix == SRF) return("srf");
 	if (ix == TIT) return("tit");
 	if (ix == TYP) return("typ");
-	if (ix == SRF) return("srf");
+	if (ix == RET) return("ret");
+	if (ix == REU) return("reu");
+	if (ix == SYS) return("sys");
+	if (ix == MDL) return("mdl");
 
 	return("");
 };

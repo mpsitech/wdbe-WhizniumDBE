@@ -38,11 +38,11 @@ PnlWdbePrcRec::PnlWdbePrcRec(
 		{
 	jref = xchg->addJob(dbswdbe, this, jrefSup);
 
-	pnlfsmfsm1nfsmstate = NULL;
-	pnlmge1nsignal = NULL;
-	pnlprc1nvariable = NULL;
-	pnlkhdltype = NULL;
 	pnldetail = NULL;
+	pnlkhdltype = NULL;
+	pnlprc1nvariable = NULL;
+	pnlmge1nsignal = NULL;
+	pnlfsmfsm1nfsmstate = NULL;
 
 	// IP constructor.cust1 --- INSERT
 
@@ -267,33 +267,15 @@ void PnlWdbePrcRec::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBEPRCUPD_REFEQ) {
-		call->abort = handleCallWdbePrcUpd_refEq(dbswdbe, call->jref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEFSMUPD_REFEQ) {
-		call->abort = handleCallWdbeFsmUpd_refEq(dbswdbe, call->jref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEPRC_FSMEQ) {
+	if (call->ixVCall == VecWdbeVCall::CALLWDBEPRC_FSMEQ) {
 		call->abort = handleCallWdbePrc_fsmEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEPRC_MDLEQ) {
 		call->abort = handleCallWdbePrc_mdlEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEFSMUPD_REFEQ) {
+		call->abort = handleCallWdbeFsmUpd_refEq(dbswdbe, call->jref);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEPRCUPD_REFEQ) {
+		call->abort = handleCallWdbePrcUpd_refEq(dbswdbe, call->jref);
 	};
-};
-
-bool PnlWdbePrcRec::handleCallWdbePrcUpd_refEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-	// IP handleCallWdbePrcUpd_refEq --- INSERT
-	return retval;
-};
-
-bool PnlWdbePrcRec::handleCallWdbeFsmUpd_refEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-	// IP handleCallWdbeFsmUpd_refEq --- INSERT
-	return retval;
 };
 
 bool PnlWdbePrcRec::handleCallWdbePrc_fsmEq(
@@ -315,5 +297,23 @@ bool PnlWdbePrcRec::handleCallWdbePrc_mdlEq(
 		) {
 	bool retval = false;
 	boolvalRet = (recPrc.refWdbeMModule == refInv); // IP handleCallWdbePrc_mdlEq --- LINE
+	return retval;
+};
+
+bool PnlWdbePrcRec::handleCallWdbeFsmUpd_refEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+	// IP handleCallWdbeFsmUpd_refEq --- INSERT
+	return retval;
+};
+
+bool PnlWdbePrcRec::handleCallWdbePrcUpd_refEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+	// IP handleCallWdbePrcUpd_refEq --- INSERT
 	return retval;
 };

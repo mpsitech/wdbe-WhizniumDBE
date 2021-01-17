@@ -19,26 +19,26 @@ public class QryWdbeSigList {
 		*/
 	public static class VecVOrd {
 
-		public static final int CON = 1;
-		public static final int VEC = 2;
-		public static final int MGU = 3;
+		public static final int SRF = 1;
+		public static final int TYP = 2;
+		public static final int MDL = 3;
 		public static final int MGT = 4;
-		public static final int TYP = 5;
-		public static final int MDL = 6;
-		public static final int SRF = 7;
+		public static final int MGU = 5;
+		public static final int VEC = 6;
+		public static final int CON = 7;
 
 		public static int getIx(
 					String sref
 				) {
 			String s = sref.toLowerCase();
 
-			if (s.equals("con")) return CON;
-			if (s.equals("vec")) return VEC;
-			if (s.equals("mgu")) return MGU;
-			if (s.equals("mgt")) return MGT;
+			if (s.equals("srf")) return SRF;
 			if (s.equals("typ")) return TYP;
 			if (s.equals("mdl")) return MDL;
-			if (s.equals("srf")) return SRF;
+			if (s.equals("mgt")) return MGT;
+			if (s.equals("mgu")) return MGU;
+			if (s.equals("vec")) return VEC;
+			if (s.equals("con")) return CON;
 
 			return 0;
 		};
@@ -46,13 +46,13 @@ public class QryWdbeSigList {
 		public static String getSref(
 					int ix
 				) {
-			if (ix == CON) return("con");
-			if (ix == VEC) return("vec");
-			if (ix == MGU) return("mgu");
-			if (ix == MGT) return("mgt");
+			if (ix == SRF) return("srf");
 			if (ix == TYP) return("typ");
 			if (ix == MDL) return("mdl");
-			if (ix == SRF) return("srf");
+			if (ix == MGT) return("mgt");
+			if (ix == MGU) return("mgu");
+			if (ix == VEC) return("vec");
+			if (ix == CON) return("con");
 
 			return "";
 		};

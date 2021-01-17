@@ -14,8 +14,8 @@
 
 // IP include.cust --- INSERT
 
-#include "JobWdbeLicense.h"
 #include "JobWdbeIexDdd.h"
+#include "JobWdbeLicense.h"
 
 #define VecVDlgWdbeVerDetddDit DlgWdbeVerDetdd::VecVDit
 #define VecVDlgWdbeVerDetddDo DlgWdbeVerDetdd::VecVDo
@@ -493,13 +493,13 @@ public:
 		void writeXML(const Sbecore::uint ixWdbeVLocale, xmlTextWriter* wr);
 	};
 
-	bool evalButDneActive(DbsWdbe* dbswdbe);
-	bool evalLfiDldActive(DbsWdbe* dbswdbe);
-	bool evalPprButRunActive(DbsWdbe* dbswdbe);
-	bool evalPprButStoActive(DbsWdbe* dbswdbe);
+	bool evalIfiUldActive(DbsWdbe* dbswdbe);
 	bool evalImpButRunActive(DbsWdbe* dbswdbe);
 	bool evalImpButStoActive(DbsWdbe* dbswdbe);
-	bool evalIfiUldActive(DbsWdbe* dbswdbe);
+	bool evalPprButRunActive(DbsWdbe* dbswdbe);
+	bool evalPprButStoActive(DbsWdbe* dbswdbe);
+	bool evalLfiDldActive(DbsWdbe* dbswdbe);
+	bool evalButDneActive(DbsWdbe* dbswdbe);
 
 public:
 	DlgWdbeVerDetdd(XchgWdbe* xchg, DbsWdbe* dbswdbe, const Sbecore::ubigint jrefSup, const Sbecore::uint ixWdbeVLocale);
@@ -521,8 +521,8 @@ public:
 	Sbecore::Xmlio::Feed feedFDse;
 	Sbecore::Xmlio::Feed feedFSge;
 
-	JobWdbeLicense* license;
 	JobWdbeIexDdd* iex;
+	JobWdbeLicense* license;
 
 	Sbecore::uint ixVDit;
 
@@ -586,8 +586,8 @@ private:
 
 	void handleUploadInSgeIdle(DbsWdbe* dbswdbe, const std::string& filename);
 
-	std::string handleDownloadInSgeDone(DbsWdbe* dbswdbe);
 	std::string handleDownloadInSgeFail(DbsWdbe* dbswdbe);
+	std::string handleDownloadInSgeDone(DbsWdbe* dbswdbe);
 
 	void handleDpchRetWdbe(DbsWdbe* dbswdbe, DpchRetWdbe* dpchret);
 	void handleDpchRetWdbeModdetWiring(DbsWdbe* dbswdbe, DpchRetWdbeModdetWiring* dpchret);

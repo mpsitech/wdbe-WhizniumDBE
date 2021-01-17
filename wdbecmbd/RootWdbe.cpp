@@ -55,8 +55,8 @@ RootWdbe::RootWdbe(
 
 	// IP constructor.spec2 --- INSERT
 
-	xchg->addClstn(VecWdbeVCall::CALLWDBESUSPSESS, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBELOGOUT, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBESUSPSESS, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -762,23 +762,11 @@ void RootWdbe::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBESUSPSESS) {
-		call->abort = handleCallWdbeSuspsess(dbswdbe, call->jref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBELOGOUT) {
+	if (call->ixVCall == VecWdbeVCall::CALLWDBELOGOUT) {
 		call->abort = handleCallWdbeLogout(dbswdbe, call->jref, call->argInv.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBESUSPSESS) {
+		call->abort = handleCallWdbeSuspsess(dbswdbe, call->jref);
 	};
-};
-
-bool RootWdbe::handleCallWdbeSuspsess(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-
-	xchg->addBoolvalPreset(VecWdbeVPreset::PREWDBESUSPSESS, jrefTrig, true);
-	xchg->removeDcolsByJref(jrefTrig);
-
-	return retval;
 };
 
 bool RootWdbe::handleCallWdbeLogout(
@@ -802,6 +790,18 @@ bool RootWdbe::handleCallWdbeLogout(
 			} else it++;
 		};
 	};
+
+	return retval;
+};
+
+bool RootWdbe::handleCallWdbeSuspsess(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+
+	xchg->addBoolvalPreset(VecWdbeVPreset::PREWDBESUSPSESS, jrefTrig, true);
+	xchg->removeDcolsByJref(jrefTrig);
 
 	return retval;
 };

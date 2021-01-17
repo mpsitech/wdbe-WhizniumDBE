@@ -508,7 +508,6 @@ uint JobWdbeIexBdd::enterSgeImport(
 
 					if (unt->sref == sys->srefRefWdbeMUnit) {
 						sys->refWdbeMUnit = unt->ref;
-						dbswdbe->tblwdbemsystem->updateRec(sys);
 
 						unt->refWdbeMSystem = sys->ref;
 						dbswdbe->tblwdbemunit->updateRec(unt);
@@ -516,6 +515,9 @@ uint JobWdbeIexBdd::enterSgeImport(
 						break;
 					};
 				};
+
+				if (sys->refWdbeMUnit == 0) throw SbeException(SbeException::IEX_TSREF, {{"tsref",sys->srefRefWdbeMUnit}, {"iel","srefRefWdbeMUnit"}, {"lineno",to_string(sys->lineno)}});
+				else dbswdbe->tblwdbemsystem->updateRec(sys);
 			};
 
 			for (unsigned int ix1 = 0; ix1 < sys->imeimtarget.nodes.size(); ix1++) {
@@ -526,11 +528,12 @@ uint JobWdbeIexBdd::enterSgeImport(
 
 					if (unt->sref == trg->srefRefWdbeMUnit) {
 						trg->refWdbeMUnit = unt->ref;
-						dbswdbe->tblwdbemtarget->updateRec(trg);
-
 						break;
 					};
 				};
+
+				if (trg->refWdbeMUnit == 0) throw SbeException(SbeException::IEX_TSREF, {{"tsref",trg->srefRefWdbeMUnit}, {"iel","srefRefWdbeMUnit"}, {"lineno",to_string(trg->lineno)}});
+				else dbswdbe->tblwdbemtarget->updateRec(trg);
 			};
 		};
 
@@ -547,19 +550,18 @@ uint JobWdbeIexBdd::enterSgeImport(
 						if (mdl->hsrefSupRefWdbeMModule == "") {
 							if (mdl->sref == pph->hsrefRefWdbeMModule) {
 								pph->refWdbeMModule = mdl->ref;
-
-								dbswdbe->tblwdbemperipheral->updateRec(pph);
 								break;
 							};
 						} else {
 							if ((mdl->hsrefSupRefWdbeMModule + ";" + mdl->sref) == pph->hsrefRefWdbeMModule) {
 								pph->refWdbeMModule = mdl->ref;
-
-								dbswdbe->tblwdbemperipheral->updateRec(pph);
 								break;
 							};
 						};
 					};
+
+					if (pph->refWdbeMModule == 0) throw SbeException(SbeException::IEX_THSREF, {{"thsref",pph->hsrefRefWdbeMModule}, {"iel","hsrefRefWdbeMModule"}, {"lineno",to_string(pph->lineno)}});
+					else dbswdbe->tblwdbemperipheral->updateRec(pph);
 				};
 			};
 
@@ -573,11 +575,12 @@ uint JobWdbeIexBdd::enterSgeImport(
 						if ( ((mdl2->hsrefSupRefWdbeMModule == "") && (mdl2->sref == mdl->hsrefSupRefWdbeMModule))
 									|| ((mdl2->hsrefSupRefWdbeMModule != "") && ((mdl2->hsrefSupRefWdbeMModule + ";" + mdl2->sref) == mdl->hsrefSupRefWdbeMModule)) ) {
 							mdl->supRefWdbeMModule = mdl2->ref;
-							
-							dbswdbe->tblwdbemmodule->updateRec(mdl);
 							break;
 						};
 					};
+
+					if (mdl->supRefWdbeMModule == 0) throw SbeException(SbeException::IEX_THSREF, {{"thsref",mdl->hsrefSupRefWdbeMModule}, {"iel","hsrefSupRefWdbeMModule"}, {"lineno",to_string(mdl->lineno)}});
+					else dbswdbe->tblwdbemmodule->updateRec(mdl);
 				};
 
 				for (unsigned int ix2 = 0; ix2 < mdl->imeimimbuf.nodes.size(); ix2++) {
@@ -590,11 +593,12 @@ uint JobWdbeIexBdd::enterSgeImport(
 							if ( ((mdl2->hsrefSupRefWdbeMModule == "") && (mdl2->sref == imb->hsrefCorRefWdbeMModule))
 										|| ((mdl2->hsrefSupRefWdbeMModule != "") && ((mdl2->hsrefSupRefWdbeMModule + ";" + mdl2->sref) == imb->hsrefCorRefWdbeMModule)) ) {
 								imb->corRefWdbeMModule = mdl2->ref;
-								
-								dbswdbe->tblwdbemimbuf->updateRec(imb);
 								break;
 							};
 						};
+
+						if (imb->corRefWdbeMModule == 0) throw SbeException(SbeException::IEX_THSREF, {{"thsref",imb->hsrefCorRefWdbeMModule}, {"iel","hsrefCorRefWdbeMModule"}, {"lineno",to_string(imb->lineno)}});
+						else dbswdbe->tblwdbemimbuf->updateRec(imb);
 					};
 				};
 
@@ -607,11 +611,12 @@ uint JobWdbeIexBdd::enterSgeImport(
 
 							if (unt2->sref == ctr->srefFwdRefWdbeMUnit) {
 								ctr->fwdRefWdbeMUnit = unt2->ref;
-								
-								dbswdbe->tblwdbemcontroller->updateRec(ctr);
 								break;
 							};
 						};
+
+						if (ctr->fwdRefWdbeMUnit == 0) throw SbeException(SbeException::IEX_TSREF, {{"tsref",ctr->srefFwdRefWdbeMUnit}, {"iel","srefFwdRefWdbeMUnit"}, {"lineno",to_string(ctr->lineno)}});
+						else dbswdbe->tblwdbemcontroller->updateRec(ctr);
 					};
 				};
 			};

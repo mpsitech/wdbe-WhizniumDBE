@@ -14,13 +14,13 @@
 
 // IP include.cust --- INSERT
 
-#include "PnlWdbeRlsList.h"
-#include "PnlWdbeRlsHeadbar.h"
-#include "PnlWdbeRlsRec.h"
 #include "DlgWdbeRlsFinreptr.h"
 #include "DlgWdbeRlsNew.h"
-#include "DlgWdbeRlsWrite.h"
 #include "DlgWdbeRlsStareptr.h"
+#include "DlgWdbeRlsWrite.h"
+#include "PnlWdbeRlsRec.h"
+#include "PnlWdbeRlsHeadbar.h"
+#include "PnlWdbeRlsList.h"
 
 #define VecVWdbeRlsDo CrdWdbeRls::VecVDo
 #define VecVWdbeRlsSge CrdWdbeRls::VecVSge
@@ -238,13 +238,13 @@ public:
 	Sbecore::Xmlio::Feed feedFMcbAlert;
 	Sbecore::Xmlio::Feed feedFSge;
 
-	PnlWdbeRlsList* pnllist;
-	PnlWdbeRlsHeadbar* pnlheadbar;
-	PnlWdbeRlsRec* pnlrec;
 	DlgWdbeRlsFinreptr* dlgfinreptr;
 	DlgWdbeRlsNew* dlgnew;
-	DlgWdbeRlsWrite* dlgwrite;
 	DlgWdbeRlsStareptr* dlgstareptr;
+	DlgWdbeRlsWrite* dlgwrite;
+	PnlWdbeRlsRec* pnlrec;
+	PnlWdbeRlsHeadbar* pnlheadbar;
+	PnlWdbeRlsList* pnllist;
 
 	// IP vars.cust --- INSERT
 
@@ -279,11 +279,11 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeReptrStop(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
-	bool handleCallWdbeReptrStart(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, const std::string& txtvalInv);
-	bool handleCallWdbeRefPreSet(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, const Sbecore::ubigint refInv);
-	bool handleCallWdbeStatChg(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 	bool handleCallWdbeDlgClose(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbeStatChg(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbeRefPreSet(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, const Sbecore::ubigint refInv);
+	bool handleCallWdbeReptrStart(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, const std::string& txtvalInv);
+	bool handleCallWdbeReptrStop(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 
 private:
 	void changeStage(DbsWdbe* dbswdbe, Sbecore::uint _ixVSge, DpchEngWdbe** dpcheng = NULL);

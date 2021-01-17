@@ -2,7 +2,7 @@
 # make file for CrdWdbeCvr card job handler, release wdbed_mac
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 16 Dec 2020
+# date created: 13 Jan 2021
 # IP header --- ABOVE
 
 include ../Makefile.inc
@@ -16,7 +16,7 @@ STATLIBFLAGS = rcs
 INCPATH = -I$(BUILDROOT)/dbswdbe -I$(BUILDROOT)/wdbed/VecWdbe -I$(BUILDROOT)/wdbed/IexWdbe -I$(BUILDROOT)/wdbed
 INCPATH += -I${WHIZSDKROOT}/build -I${WHIZSDKROOT}/build/apiwzlm -I/usr/local/include -I/usr/local/include/curl -I/usr/local/include/libxml2 -I/usr/local/mysql/include -I/usr/local/opt/sqlite/include
 
-OBJS = CrdWdbeCvr.o PnlWdbeCvrList.o QryWdbeCvrList.o PnlWdbeCvrHeadbar.o DlgWdbeCvrWrite.o PnlWdbeCvrRec.o PnlWdbeCvrHk1NModule.o QryWdbeCvrHk1NModule.o PnlWdbeCvrBcv1NCoreversion.o QryWdbeCvrBcv1NCoreversion.o PnlWdbeCvrAIp.o QryWdbeCvrAIp.o PnlWdbeCvrAPlh.o QryWdbeCvrAPlh.o PnlWdbeCvrDetail.o DlgWdbeCvrNew.o DlgWdbeCvrDetcd.o DlgWdbeCvrBsccd.o
+OBJS = CrdWdbeCvr.o DlgWdbeCvrBsccd.o DlgWdbeCvrDetcd.o DlgWdbeCvrNew.o DlgWdbeCvrWrite.o PnlWdbeCvrRec.o PnlWdbeCvrDetail.o PnlWdbeCvrAIp.o QryWdbeCvrAIp.o PnlWdbeCvrAPlh.o QryWdbeCvrAPlh.o PnlWdbeCvrBcv1NCoreversion.o QryWdbeCvrBcv1NCoreversion.o PnlWdbeCvrHk1NModule.o QryWdbeCvrHk1NModule.o PnlWdbeCvrHeadbar.o PnlWdbeCvrList.o QryWdbeCvrList.o
 
 LIB = libcrdwdbecvr
 

@@ -1321,89 +1321,103 @@ uint JobWdbeIexDdd::enterSgeImport(
 
 							if (ctr->ref != 0) {
 								if ((ctr->ixWdbeVIop == VecWdbeVIop::RETRUPD) && (ctr->srefClrRefWdbeMSignal != "")) {
-									//ctr->clrRefWdbeMSignal: IMPPP
 									for (unsigned int i = 0; i < mdl->imeimsignal.nodes.size(); i++)
 										if (mdl->imeimsignal.nodes[i]->sref == ctr->srefClrRefWdbeMSignal) {
 											ctr->clrRefWdbeMSignal = mdl->imeimsignal.nodes[i]->ref;
 											break;
 										};
 
-									dbswdbe->tblwdbemcontroller->updateRec(ctr);
+									if (ctr->clrRefWdbeMSignal == 0) throw SbeException(SbeException::IEX_TSREF, {{"tsref",ctr->srefClrRefWdbeMSignal}, {"iel","srefClrRefWdbeMSignal"}, {"lineno",to_string(ctr->lineno)}});
+									else dbswdbe->tblwdbemcontroller->updateRec(ctr);
 								};
 
 								for (unsigned int ix3 = 0; ix3 < ctr->imeimcommand2.nodes.size(); ix3++) {
 									cmd2 = ctr->imeimcommand2.nodes[ix3];
 
 									if ((cmd2->srefIvrRefWdbeMSignal != "") || (cmd2->srefRvrRefWdbeMSignal != "") || (cmd2->srefRerRefWdbeMSignal != "")) {
-										if (cmd2->srefIvrRefWdbeMSignal != "")
-											//cmd2->ivrRefWdbeMSignal: IMPPP
+										if (cmd2->srefIvrRefWdbeMSignal != "") {
 											for (unsigned int i = 0; i < mdl->imeimsignal.nodes.size(); i++)
 												if (mdl->imeimsignal.nodes[i]->sref == cmd2->srefIvrRefWdbeMSignal) {
 													cmd2->ivrRefWdbeMSignal = mdl->imeimsignal.nodes[i]->ref;
 													break;
 												};
 
-										if (cmd2->srefRvrRefWdbeMSignal != "")
-											//cmd2->rvrRefWdbeMSignal: IMPPP
+											if (cmd2->ivrRefWdbeMSignal == 0) throw SbeException(SbeException::IEX_TSREF, {{"tsref",cmd2->srefIvrRefWdbeMSignal}, {"iel","srefIvrRefWdbeMSignal"}, {"lineno",to_string(cmd2->lineno)}});
+										};
+
+										if (cmd2->srefRvrRefWdbeMSignal != "") {
 											for (unsigned int i = 0; i < mdl->imeimsignal.nodes.size(); i++)
 												if (mdl->imeimsignal.nodes[i]->sref == cmd2->srefRvrRefWdbeMSignal) {
 													cmd2->rvrRefWdbeMSignal = mdl->imeimsignal.nodes[i]->ref;
 													break;
 												};
 
-										if (cmd2->srefRerRefWdbeMSignal != "")
-											//cmd2->rerRefWdbeMSignal: IMPPP
+											if (cmd2->rvrRefWdbeMSignal == 0) throw SbeException(SbeException::IEX_TSREF, {{"tsref",cmd2->srefRvrRefWdbeMSignal}, {"iel","srefRvrRefWdbeMSignal"}, {"lineno",to_string(cmd2->lineno)}});
+										};
+
+										if (cmd2->srefRerRefWdbeMSignal != "") {
 											for (unsigned int i = 0; i < mdl->imeimsignal.nodes.size(); i++)
 												if (mdl->imeimsignal.nodes[i]->sref == cmd2->srefRerRefWdbeMSignal) {
 													cmd2->rerRefWdbeMSignal = mdl->imeimsignal.nodes[i]->ref;
 													break;
 												};
 
-										dbswdbe->tblwdbemcommand->updateRec(cmd2);
+											if (cmd2->rerRefWdbeMSignal == 0) throw SbeException(SbeException::IEX_TSREF, {{"tsref",cmd2->srefRerRefWdbeMSignal}, {"iel","srefRerRefWdbeMSignal"}, {"lineno",to_string(cmd2->lineno)}});
+										};
+
+										if ((cmd2->ivrRefWdbeMSignal != 0) || (cmd2->rvrRefWdbeMSignal != 0) || (cmd2->rerRefWdbeMSignal != 0)) dbswdbe->tblwdbemcommand->updateRec(cmd2);
 									};
 								};
 
 								for (unsigned int ix3 = 0; ix3 < ctr->imeirmcommandmcontroller.nodes.size(); ix3++) {
 									cmdRctr = ctr->imeirmcommandmcontroller.nodes[ix3];
 
-									//cmdRctr->refWdbeMCommand: IMPPP -> CUSTSQLPP
-									ptr = cmdRctr->srefRefWdbeMCommand.find('.');
-									if (ptr != string::npos)
-										if (dbswdbe->loadRefBySQL("SELECT refWdbeMController FROM TblWdbeMModule WHERE hkIxVTbl = " + to_string(VecWdbeVMModuleHkTbl::UNT) + " AND hkUref = " + to_string(mdl->hkUref) + " AND refWdbeMController <> 0 AND sref = '"
-													+ cmdRctr->srefRefWdbeMCommand.substr(0, ptr) + "'", ref))
-											dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMCommand WHERE refIxVTbl = " + to_string(VecWdbeVMCommandRefTbl::CTR) + " AND refUref = " + to_string(ref) + " AND sref = '" + cmdRctr->srefRefWdbeMCommand.substr(ptr+1) + "'", cmdRctr->refWdbeMCommand);
+									if (cmdRctr->srefRefWdbeMCommand != "") {
+										ptr = cmdRctr->srefRefWdbeMCommand.find('.');
+										if (ptr != string::npos)
+											if (dbswdbe->loadRefBySQL("SELECT refWdbeMController FROM TblWdbeMModule WHERE hkIxVTbl = " + to_string(VecWdbeVMModuleHkTbl::UNT) + " AND hkUref = " + to_string(mdl->hkUref) + " AND refWdbeMController <> 0 AND sref = '"
+														+ cmdRctr->srefRefWdbeMCommand.substr(0, ptr) + "'", ref))
+												dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMCommand WHERE refIxVTbl = " + to_string(VecWdbeVMCommandRefTbl::CTR) + " AND refUref = " + to_string(ref) + " AND sref = '" + cmdRctr->srefRefWdbeMCommand.substr(ptr+1) + "'", cmdRctr->refWdbeMCommand);
 
-									if (cmdRctr->srefIvrRefWdbeMSignal != "")
-										//cmdRctr->ivrRefWdbeMSignal: IMPPP
+										if (cmdRctr->refWdbeMCommand == 0) throw SbeException(SbeException::IEX_TSREF, {{"tsref",cmdRctr->srefRefWdbeMCommand}, {"iel","srefRefWdbeMCommand"}, {"lineno",to_string(cmdRctr->lineno)}});
+									};
+
+									if (cmdRctr->srefIvrRefWdbeMSignal != "") {
 										for (unsigned int i = 0; i < mdl->imeimsignal.nodes.size(); i++)
 											if (mdl->imeimsignal.nodes[i]->sref == cmdRctr->srefIvrRefWdbeMSignal) {
 												cmdRctr->ivrRefWdbeMSignal = mdl->imeimsignal.nodes[i]->ref;
 												break;
 											};
 
-									if (cmdRctr->srefRvrRefWdbeMSignal != "")
-										//cmdRctr->rvrRefWdbeMSignal: IMPPP
+										if (cmdRctr->ivrRefWdbeMSignal == 0) throw SbeException(SbeException::IEX_TSREF, {{"tsref",cmdRctr->srefIvrRefWdbeMSignal}, {"iel","srefIvrRefWdbeMSignal"}, {"lineno",to_string(cmdRctr->lineno)}});
+									};
+
+									if (cmdRctr->srefRvrRefWdbeMSignal != "") {
 										for (unsigned int i = 0; i < mdl->imeimsignal.nodes.size(); i++)
 											if (mdl->imeimsignal.nodes[i]->sref == cmdRctr->srefRvrRefWdbeMSignal) {
 												cmdRctr->rvrRefWdbeMSignal = mdl->imeimsignal.nodes[i]->ref;
 												break;
 											};
 
-									dbswdbe->tblwdbermcommandmcontroller->updateRec(cmdRctr);
+										if (cmdRctr->rvrRefWdbeMSignal == 0) throw SbeException(SbeException::IEX_TSREF, {{"tsref",cmdRctr->srefRvrRefWdbeMSignal}, {"iel","srefRvrRefWdbeMSignal"}, {"lineno",to_string(cmdRctr->lineno)}});
+									};
+
+									if ((cmdRctr->refWdbeMCommand != 0) || (cmdRctr->ivrRefWdbeMSignal != 0) || (cmdRctr->rvrRefWdbeMSignal != 0)) dbswdbe->tblwdbermcommandmcontroller->updateRec(cmdRctr);
 								};
 
 								for (unsigned int ix3 = 0; ix3 < ctr->imeimerror2.nodes.size(); ix3++) {
 									err2 = ctr->imeimerror2.nodes[ix3];
 
-									if (err2->srefTraRefWdbeMSignal != "")
-										//err2->traRefWdbeMSignal: IMPPP
+									if (err2->srefTraRefWdbeMSignal != "") {
 										for (unsigned int i = 0; i < mdl->imeimsignal.nodes.size(); i++)
 											if (mdl->imeimsignal.nodes[i]->sref == err2->srefTraRefWdbeMSignal) {
 												err2->traRefWdbeMSignal = mdl->imeimsignal.nodes[i]->ref;
 												break;
 											};
 
-									dbswdbe->tblwdbemerror->updateRec(err2);
+										if (err2->traRefWdbeMSignal == 0) throw SbeException(SbeException::IEX_TSREF, {{"tsref",err2->srefTraRefWdbeMSignal}, {"iel","srefTraRefWdbeMSignal"}, {"lineno",to_string(err2->lineno)}});
+										else dbswdbe->tblwdbemerror->updateRec(err2);
+									};
 								};
 							};
 						};
@@ -1412,7 +1426,6 @@ uint JobWdbeIexDdd::enterSgeImport(
 							sig = mdl->imeimsignal.nodes[ix2];
 
 							if (sig->srefMgeUref != "") {
-								//sig->mgeUref: CUSTSQLPP
 								if (sig->mgeIxVTbl == VecWdbeVMSignalMgeTbl::MDL) {
 									dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMModule WHERE supRefWdbeMModule = " + to_string(mdl->ref) + " AND sref = '" + sig->srefMgeUref + "'", sig->mgeUref);
 								} else if (sig->mgeIxVTbl == VecWdbeVMSignalMgeTbl::PRC) {
@@ -1423,7 +1436,8 @@ uint JobWdbeIexDdd::enterSgeImport(
 										};
 								};
 
-								dbswdbe->tblwdbemsignal->updateRec(sig);
+								if (sig->mgeUref == 0) throw SbeException(SbeException::IEX_TSREF, {{"tsref",sig->srefMgeUref}, {"iel","srefMgeUref"}, {"lineno",to_string(sig->lineno)}});
+								else dbswdbe->tblwdbemsignal->updateRec(sig);
 							};
 						};
 
@@ -1440,14 +1454,14 @@ uint JobWdbeIexDdd::enterSgeImport(
 										fstAstp = fst->imeiamfsmstatestep.nodes[ix5];
 
 										if (fstAstp->srefFnxRefWdbeMFsmstate != "") {
-											//fstAstp->fnxRefWdbeMFsmstate: IMPPP
 											for (unsigned int i = 0; i < fsm->imeimfsmstate.nodes.size(); i++)
 												if (fsm->imeimfsmstate.nodes[i]->sref == fstAstp->srefFnxRefWdbeMFsmstate) {
 													fstAstp->fnxRefWdbeMFsmstate = fsm->imeimfsmstate.nodes[i]->ref;
 													break;
 												};
 
-											dbswdbe->tblwdbeamfsmstatestep->updateRec(fstAstp);
+											if (fstAstp->fnxRefWdbeMFsmstate == 0) throw SbeException(SbeException::IEX_TSREF, {{"tsref",fstAstp->srefFnxRefWdbeMFsmstate}, {"iel","srefFnxRefWdbeMFsmstate"}, {"lineno",to_string(fstAstp->lineno)}});
+											else dbswdbe->tblwdbeamfsmstatestep->updateRec(fstAstp);
 										};
 									};
 								};

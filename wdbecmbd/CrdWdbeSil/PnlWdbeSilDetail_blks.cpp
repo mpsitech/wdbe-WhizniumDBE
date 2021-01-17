@@ -423,9 +423,9 @@ void PnlWdbeSilDetail::Tag::writeXML(
 			writeStringAttr(wr, itemtag, "sref", "CptReu", "reference");
 			writeStringAttr(wr, itemtag, "sref", "CptSys", "root to system");
 			writeStringAttr(wr, itemtag, "sref", "CptMdl", "top module");
-			writeStringAttr(wr, itemtag, "sref", "CptPkg", "srefKPackage");
+			writeStringAttr(wr, itemtag, "sref", "CptPkg", "package");
 			writeStringAttr(wr, itemtag, "sref", "CptEsy", "easy model");
-			writeStringAttr(wr, itemtag, "sref", "CptTch", "srefKToolch");
+			writeStringAttr(wr, itemtag, "sref", "CptTch", "tool chain");
 			writeStringAttr(wr, itemtag, "sref", "CptCmt", "comment");
 		};
 		writeStringAttr(wr, itemtag, "sref", "Cpt", StrMod::cap(VecWdbeVTag::getTitle(VecWdbeVTag::DETAIL, ixWdbeVLocale)));

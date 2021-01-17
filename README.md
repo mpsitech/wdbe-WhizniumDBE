@@ -8,9 +8,11 @@ WhizniumDBE extends the concept of model-based source code generation to the wor
 
 ![](_exp/dbe.png)
 
-## Setup instructions
+## Setup instructions and reference
 
-To prepare your system for use with Whiznium and to learn how to make your first steps, please visit the separate this [separate Git repository](https://github.com/mpsitech/The-Whiznium-Documentation).
+To prepare your system for use with Whiznium and to learn how to make your first steps, please visit this [separate Git repository](https://github.com/mpsitech/The-Whiznium-Documentation).
+
+Also included is a full [WhizniumDBE model file reference](https://github.com/mpsitech/The-Whiznium-Documentation/blob/main/dbemdl.md).
 
 ## The Whiznium Developer Experience YouTube format
 
@@ -78,11 +80,6 @@ Zynq_ip_AXI_v2_0.vhd|AXI4-lite bus slave VHDL code based on Xilinx example, enha
 
 ## Further Reading
 
-### Reference
-
-- Documentation of model files (slightly outdated) as [Git repository](https://github.com/mpsitech/WhizniumDBE-docs)
-- [.pdf slides](https://mpsitech-public.s3.eu-central-1.amazonaws.com/wdbe_templates.pdf) outlining various levels of module templatification using WhizniumDBE
-
 ### Upcoming book
 
 - The Whiznium book (draft available [here](https://mpsitech-public.s3.eu-central-1.amazonaws.com/book.pdf)), offering an introduction to WhizniumDBE/DBE by means of a handy use case
@@ -96,6 +93,7 @@ Zynq_ip_AXI_v2_0.vhd|AXI4-lite bus slave VHDL code based on Xilinx example, enha
 Most of these publications pre-date Whiznium's Open Source era.
 
 - WhizniumDBE technology overview [.pdf datasheet](https://mpsitech-public.s3.eu-central-1.amazonaws.com/whizniumdbe.pdf)
+- [.pdf slides](https://mpsitech-public.s3.eu-central-1.amazonaws.com/wdbe_templates.pdf) outlining various levels of module templatification using WhizniumDBE
 
 ## Related Repositories
 

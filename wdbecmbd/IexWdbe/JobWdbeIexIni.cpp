@@ -1267,12 +1267,12 @@ uint JobWdbeIexIni::enterSgeImport(
 			if (mch->hsrefSupRefWdbeMMachine != "") {
 				auto it = refsMchs.find(mch->hsrefSupRefWdbeMMachine);
 				if (it != refsMchs.end()) mch->supRefWdbeMMachine = it->second;
-				else throw SbeException(SbeException::IEX_TSREF, {{"tsref",mch->hsrefSupRefWdbeMMachine}, {"iel","hsrefSupRefWdbeMMachine"}, {"lineno",to_string(mch->lineno)}});
+				else throw SbeException(SbeException::IEX_THSREF, {{"thsref",mch->hsrefSupRefWdbeMMachine}, {"iel","hsrefSupRefWdbeMMachine"}, {"lineno",to_string(mch->lineno)}});
 			};
 			if (mch->hsrefCchRefWdbeMMachine != "") {
 				auto it = refsMchs.find(mch->hsrefCchRefWdbeMMachine);
 				if (it != refsMchs.end()) mch->cchRefWdbeMMachine = it->second;
-				else throw SbeException(SbeException::IEX_TSREF, {{"tsref",mch->hsrefCchRefWdbeMMachine}, {"iel","hsrefCchRefWdbeMMachine"}, {"lineno",to_string(mch->lineno)}});
+				else throw SbeException(SbeException::IEX_THSREF, {{"thsref",mch->hsrefCchRefWdbeMMachine}, {"iel","hsrefCchRefWdbeMMachine"}, {"lineno",to_string(mch->lineno)}});
 			};
 
 			if ((mch->supRefWdbeMMachine != 0) || (mch->cchRefWdbeMMachine != 0)) dbswdbe->tblwdbemmachine->updateRec(mch);
@@ -1289,11 +1289,12 @@ uint JobWdbeIexIni::enterSgeImport(
 					if ( ((mdl2->hsrefSupRefWdbeMModule == "") && (mdl2->sref == mdl->hsrefSupRefWdbeMModule))
 								|| ((mdl2->hsrefSupRefWdbeMModule != "") && ((mdl2->hsrefSupRefWdbeMModule + ";" + mdl2->sref) == mdl->hsrefSupRefWdbeMModule)) ) {
 						mdl->supRefWdbeMModule = mdl2->ref;
-						
-						dbswdbe->tblwdbemmodule->updateRec(mdl);
 						break;
 					};
 				};
+
+				if (mdl->supRefWdbeMModule == 0) throw SbeException(SbeException::IEX_THSREF, {{"thsref",mdl->hsrefSupRefWdbeMModule}, {"iel","hsrefSupRefWdbeMModule"}, {"lineno",to_string(mdl->lineno)}});
+				else dbswdbe->tblwdbemmodule->updateRec(mdl);
 			};
 
 			if (mdl->srefTplRefWdbeMModule != "") {
@@ -1302,11 +1303,12 @@ uint JobWdbeIexIni::enterSgeImport(
 
 					if ((mdl2->hsrefSupRefWdbeMModule == "") && (mdl2->sref == mdl->srefTplRefWdbeMModule)) {
 						mdl->tplRefWdbeMModule = mdl2->ref;
-						
-						dbswdbe->tblwdbemmodule->updateRec(mdl);
 						break;
 					};
 				};
+
+				if (mdl->tplRefWdbeMModule == 0) throw SbeException(SbeException::IEX_TSREF, {{"tsref",mdl->srefTplRefWdbeMModule}, {"iel","srefTplRefWdbeMModule"}, {"lineno",to_string(mdl->lineno)}});
+				else dbswdbe->tblwdbemmodule->updateRec(mdl);
 			};
 		};
 		// IP enterSgeImport.ppr --- IEND

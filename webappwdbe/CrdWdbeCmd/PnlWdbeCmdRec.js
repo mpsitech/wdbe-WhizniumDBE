@@ -1,21 +1,21 @@
 function updateScrJrefs() {
 	scrJrefDetail = retrieveSi(srcdoc, "StatShrWdbeCmdRec", "scrJrefDetail");
-	scrJrefARetpar = retrieveSi(srcdoc, "StatShrWdbeCmdRec", "scrJrefARetpar");
 	scrJrefAInvpar = retrieveSi(srcdoc, "StatShrWdbeCmdRec", "scrJrefAInvpar");
+	scrJrefARetpar = retrieveSi(srcdoc, "StatShrWdbeCmdRec", "scrJrefARetpar");
 	scrJrefMNController = retrieveSi(srcdoc, "StatShrWdbeCmdRec", "scrJrefMNController");
 };
 
 function resetInitdones() {
 	setSi(srcdoc, "StatAppWdbeCmdRec", "initdoneDetail", "false");
-	setSi(srcdoc, "StatAppWdbeCmdRec", "initdoneARetpar", "false");
 	setSi(srcdoc, "StatAppWdbeCmdRec", "initdoneAInvpar", "false");
+	setSi(srcdoc, "StatAppWdbeCmdRec", "initdoneARetpar", "false");
 	setSi(srcdoc, "StatAppWdbeCmdRec", "initdoneMNController", "false");
 };
 
 function resetHeights() {
 	heightDetail = 30;
-	heightARetpar = 30;
 	heightAInvpar = 30;
+	heightARetpar = 30;
 	heightMNController = 30;
 };
 
@@ -35,16 +35,16 @@ function checkInitdone() {
 	var initdone1NRelease = (retrieveSi(srcdoc, "StatAppWdbeCmdRec", "initdone1NRelease") == "true");
 
 	var initdoneDetail = (retrieveSi(srcdoc, "StatAppWdbeCmdRec", "initdoneDetail") == "true");
-	var initdoneARetpar = (retrieveSi(srcdoc, "StatAppWdbeCmdRec", "initdoneARetpar") == "true");
 	var initdoneAInvpar = (retrieveSi(srcdoc, "StatAppWdbeCmdRec", "initdoneAInvpar") == "true");
+	var initdoneARetpar = (retrieveSi(srcdoc, "StatAppWdbeCmdRec", "initdoneARetpar") == "true");
 	var initdoneMNController = (retrieveSi(srcdoc, "StatAppWdbeCmdRec", "initdoneMNController") == "true");
 
 	if (!initdoneDetail) {
 		lhsdoc.getElementById("Detail").src = "./PnlWdbeCmdDetail.html?scrJref=" + scrJrefDetail;
-	} else if (!initdoneARetpar) {
-		lhsdoc.getElementById("ARetpar").src = "./PnlWdbeCmdARetpar.html?scrJref=" + scrJrefARetpar;
 	} else if (!initdoneAInvpar) {
 		lhsdoc.getElementById("AInvpar").src = "./PnlWdbeCmdAInvpar.html?scrJref=" + scrJrefAInvpar;
+	} else if (!initdoneARetpar) {
+		lhsdoc.getElementById("ARetpar").src = "./PnlWdbeCmdARetpar.html?scrJref=" + scrJrefARetpar;
 	} else if (!initdoneMNController) {
 		rhsdoc.getElementById("MNController").src = "./PnlWdbeCmdMNController.html?scrJref=" + scrJrefMNController;
 
@@ -59,7 +59,7 @@ function reinitPnl(scrJrefPnl) {
 function setPnlAvail(short, avail) {
 	var lhsrhsdoc;
 
-	if ((short == "Detail") || (short == "ARetpar") || (short == "AInvpar")) lhsrhsdoc = lhsdoc;
+	if ((short == "Detail") || (short == "AInvpar") || (short == "ARetpar")) lhsrhsdoc = lhsdoc;
 	else lhsrhsdoc = rhsdoc;
 
 	var oldAvail = (lhsrhsdoc.getElementById("tr" + short).getAttribute("class") == "show");
@@ -86,8 +86,8 @@ function setPnlAvail(short, avail) {
 		else if (short == "List") heightList = height;
 		else if (short == "Rec") heightRec = height;
 		else if (short == "Detail") heightDetail = height;
-		else if (short == "ARetpar") heightARetpar = height;
 		else if (short == "AInvpar") heightAInvpar = height;
+		else if (short == "ARetpar") heightARetpar = height;
 		else if (short == "MNController") heightMNController = height;
 	};
 
@@ -122,7 +122,7 @@ function regularize() {
 function changeHeight(pnlshort, height, update) {
 	var lhsrhsdoc;
 
-	if ((pnlshort == "Detail") || (pnlshort == "ARetpar") || (pnlshort == "AInvpar")) lhsrhsdoc = lhsdoc;
+	if ((pnlshort == "Detail") || (pnlshort == "AInvpar") || (pnlshort == "ARetpar")) lhsrhsdoc = lhsdoc;
 	else lhsrhsdoc = rhsdoc;
 
 	lhsrhsdoc.getElementById("td" + pnlshort).setAttribute("height", "" + height);
@@ -132,8 +132,8 @@ function changeHeight(pnlshort, height, update) {
 	else if (pnlshort == "List") heightList = height;
 	else if (pnlshort == "Rec") heightRec = height;
 	else if (pnlshort == "Detail") heightDetail = height;
-	else if (pnlshort == "ARetpar") heightARetpar = height;
 	else if (pnlshort == "AInvpar") heightAInvpar = height;
+	else if (pnlshort == "ARetpar") heightARetpar = height;
 	else if (pnlshort == "MNController") heightMNController = height;
 
 	if (update) updateHeight();
@@ -142,7 +142,7 @@ function changeHeight(pnlshort, height, update) {
 function updateHeight() {
 	var heightLhs, heightRhs, heightGt;
 
-	heightLhs = heightDetail+13 + heightARetpar+13 + heightAInvpar+13 + 5;
+	heightLhs = heightDetail+13 + heightAInvpar+13 + heightARetpar+13 + 5;
 	heightRhs = heightMNController+13 + 5;
 
 	if (heightLhs > heightRhs) {
@@ -334,10 +334,10 @@ function handleDpchEng(dom, dpch) {
 
 			if (_scrJref == scrJrefDetail) {
 				if (getInitdone("Detail")) lhsdoc.getElementById("Detail").contentWindow.handleDpchEng(dom, dpch);
-			} else if (_scrJref == scrJrefARetpar) {
-				if (getInitdone("ARetpar")) lhsdoc.getElementById("ARetpar").contentWindow.handleDpchEng(dom, dpch);
 			} else if (_scrJref == scrJrefAInvpar) {
 				if (getInitdone("AInvpar")) lhsdoc.getElementById("AInvpar").contentWindow.handleDpchEng(dom, dpch);
+			} else if (_scrJref == scrJrefARetpar) {
+				if (getInitdone("ARetpar")) lhsdoc.getElementById("ARetpar").contentWindow.handleDpchEng(dom, dpch);
 			} else if (_scrJref == scrJrefMNController) {
 				if (getInitdone("MNController")) rhsdoc.getElementById("MNController").contentWindow.handleDpchEng(dom, dpch);
 			} else {

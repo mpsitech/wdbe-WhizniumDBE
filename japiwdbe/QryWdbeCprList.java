@@ -19,24 +19,24 @@ public class QryWdbeCprList {
 		*/
 	public static class VecVOrd {
 
-		public static final int CVR = 1;
-		public static final int TYP = 2;
-		public static final int TIT = 3;
-		public static final int SRF = 4;
-		public static final int OWN = 5;
-		public static final int GRP = 6;
+		public static final int GRP = 1;
+		public static final int OWN = 2;
+		public static final int SRF = 3;
+		public static final int TIT = 4;
+		public static final int TYP = 5;
+		public static final int CVR = 6;
 
 		public static int getIx(
 					String sref
 				) {
 			String s = sref.toLowerCase();
 
-			if (s.equals("cvr")) return CVR;
-			if (s.equals("typ")) return TYP;
-			if (s.equals("tit")) return TIT;
-			if (s.equals("srf")) return SRF;
-			if (s.equals("own")) return OWN;
 			if (s.equals("grp")) return GRP;
+			if (s.equals("own")) return OWN;
+			if (s.equals("srf")) return SRF;
+			if (s.equals("tit")) return TIT;
+			if (s.equals("typ")) return TYP;
+			if (s.equals("cvr")) return CVR;
 
 			return 0;
 		};
@@ -44,12 +44,12 @@ public class QryWdbeCprList {
 		public static String getSref(
 					int ix
 				) {
-			if (ix == CVR) return("cvr");
-			if (ix == TYP) return("typ");
-			if (ix == TIT) return("tit");
-			if (ix == SRF) return("srf");
-			if (ix == OWN) return("own");
 			if (ix == GRP) return("grp");
+			if (ix == OWN) return("own");
+			if (ix == SRF) return("srf");
+			if (ix == TIT) return("tit");
+			if (ix == TYP) return("typ");
+			if (ix == CVR) return("cvr");
 
 			return "";
 		};

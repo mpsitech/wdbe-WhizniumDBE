@@ -389,9 +389,9 @@ void PnlWdbeSilList::Tag::writeXML(
 			writeStringAttr(wr, itemtag, "sref", "TcoReu", "Reference");
 			writeStringAttr(wr, itemtag, "sref", "TcoSys", "Root to system");
 			writeStringAttr(wr, itemtag, "sref", "TcoMdl", "Top module");
-			writeStringAttr(wr, itemtag, "sref", "TcoPkg", "SrefKPackage");
+			writeStringAttr(wr, itemtag, "sref", "TcoPkg", "Package");
 			writeStringAttr(wr, itemtag, "sref", "TcoEsy", "Easy");
-			writeStringAttr(wr, itemtag, "sref", "TcoTch", "SrefKToolch");
+			writeStringAttr(wr, itemtag, "sref", "TcoTch", "Tool chain");
 		};
 		writeStringAttr(wr, itemtag, "sref", "TxtRecord1", StrMod::cap(VecWdbeVTag::getTitle(VecWdbeVTag::REC, ixWdbeVLocale)));
 		writeStringAttr(wr, itemtag, "sref", "TxtRecord2", StrMod::cap(VecWdbeVTag::getTitle(VecWdbeVTag::EMPLONG, ixWdbeVLocale)));

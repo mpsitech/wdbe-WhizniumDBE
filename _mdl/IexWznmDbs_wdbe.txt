@@ -1314,7 +1314,7 @@ main	void	0	TblWdbeMUnit	unt
 		ImeIRMSubsetMSubset.end
 	ImeIMSubset.end
 	ImeIMVector2.srefIxVBasetype	sref	osrefWznmKTaggrp	srefsKOption
-	klst	KlstWdbeKAMUnitPackage
+	klst	KlstWdbeKMUnitPackage
 		ImeIAMVectorTitle2.srefX1IxVType	srefX2RefWznmMLocale	Title
 		full	enus	package
 		ImeIAMVectorTitle2.end
@@ -1327,7 +1327,7 @@ main	void	0	TblWdbeMUnit	unt
 		ssop20
 		ssop28
 		ImeIMVectoritem2.end
-	klst	KlstWdbeKAMUnitToolch
+	klst	KlstWdbeKMUnitToolch
 		ImeIAMVectorTitle2.srefX1IxVType	srefX2RefWznmMLocale	Title
 		full	enus	tool chain
 		ImeIAMVectorTitle2.end
@@ -2321,8 +2321,8 @@ rel	rel	41	TblWdbeHistRMUserUniversal	husrRunv
 	tblref		43	tbl		unvUref	unv	trefuniv	void		true	false
 	vecref		0	vec	VecWdbeVCard	ixWdbeVCard	crd	vreflin	void	idx	true	false
 	vecref		0	vec	VecWdbeVPreset	ixWdbeVPreset	pre	vreflin	void	idx	true	false
-	vecref		210	vec	VecWdbeVMaintable	preIxWdbeVMaintable	prm	vreflin	void	idx	true	false
-	tblref		210	tbl		preUref	pru	trefuniv	void		true	false
+	vecref		168	vec	VecWdbeVMaintable	preIxWdbeVMaintable	prm	vreflin	void	idx	true	false
+	tblref		168	tbl		preUref	pru	trefuniv	void		true	false
 	timeval		0	void		start	sta	tmstamp	void		true	false
 		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
 		full	enus	access time
@@ -2812,6 +2812,7 @@ ImeIMRelation.iref	srefIxVBasetype	irefRefWznmCRelation	irefSupRefWznmMRelation	
 	fromsngfull	enus	base machine
 	toplfull	enus	derived machines
 	ImeIAMRelationTitle.end
+168	um1n	0	0	void			TblWdbeHistRMUserUniversal			pre
 ImeIMRelation.end
 ImeIMStub.srefIxVBasetype	srefRefWznmMTable	srefRefWznmMSubset	sref	Hierarch	srefRefWznmMTablecol	Localized	Example
 tco	TblWdbeMBank		StubWdbeBnkSref	false	sref	false	bank3

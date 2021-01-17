@@ -38,15 +38,15 @@ PnlWdbeFstRec::PnlWdbeFstRec(
 		{
 	jref = xchg->addJob(dbswdbe, this, jrefSup);
 
-	pnlastep = NULL;
 	pnldetail = NULL;
+	pnlastep = NULL;
 
 	// IP constructor.cust1 --- INSERT
 
 	// IP constructor.cust2 --- INSERT
 
-	xchg->addClstn(VecWdbeVCall::CALLWDBEFST_FSMEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBEFST_CLUEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBEFST_FSMEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -245,21 +245,23 @@ void PnlWdbeFstRec::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBEFSTUPD_REFEQ) {
-		call->abort = handleCallWdbeFstUpd_refEq(dbswdbe, call->jref);
+	if (call->ixVCall == VecWdbeVCall::CALLWDBEFST_CLUEQ) {
+		call->abort = handleCallWdbeFst_cluEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEFST_FSMEQ) {
 		call->abort = handleCallWdbeFst_fsmEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEFST_CLUEQ) {
-		call->abort = handleCallWdbeFst_cluEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEFSTUPD_REFEQ) {
+		call->abort = handleCallWdbeFstUpd_refEq(dbswdbe, call->jref);
 	};
 };
 
-bool PnlWdbeFstRec::handleCallWdbeFstUpd_refEq(
+bool PnlWdbeFstRec::handleCallWdbeFst_cluEq(
 			DbsWdbe* dbswdbe
 			, const ubigint jrefTrig
+			, const ubigint refInv
+			, bool& boolvalRet
 		) {
 	bool retval = false;
-	// IP handleCallWdbeFstUpd_refEq --- INSERT
+	boolvalRet = (recFst.refWdbeCFsmstate == refInv); // IP handleCallWdbeFst_cluEq --- LINE
 	return retval;
 };
 
@@ -274,13 +276,11 @@ bool PnlWdbeFstRec::handleCallWdbeFst_fsmEq(
 	return retval;
 };
 
-bool PnlWdbeFstRec::handleCallWdbeFst_cluEq(
+bool PnlWdbeFstRec::handleCallWdbeFstUpd_refEq(
 			DbsWdbe* dbswdbe
 			, const ubigint jrefTrig
-			, const ubigint refInv
-			, bool& boolvalRet
 		) {
 	bool retval = false;
-	boolvalRet = (recFst.refWdbeCFsmstate == refInv); // IP handleCallWdbeFst_cluEq --- LINE
+	// IP handleCallWdbeFstUpd_refEq --- INSERT
 	return retval;
 };

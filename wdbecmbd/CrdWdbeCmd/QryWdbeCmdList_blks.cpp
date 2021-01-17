@@ -20,9 +20,9 @@ uint QryWdbeCmdList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "reu") return REU;
-	if (s == "ret") return RET;
 	if (s == "srf") return SRF;
+	if (s == "ret") return RET;
+	if (s == "reu") return REU;
 
 	return(0);
 };
@@ -30,9 +30,9 @@ uint QryWdbeCmdList::VecVOrd::getIx(
 string QryWdbeCmdList::VecVOrd::getSref(
 			const uint ix
 		) {
-	if (ix == REU) return("reu");
-	if (ix == RET) return("ret");
 	if (ix == SRF) return("srf");
+	if (ix == RET) return("ret");
+	if (ix == REU) return("reu");
 
 	return("");
 };

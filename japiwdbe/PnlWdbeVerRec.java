@@ -114,39 +114,39 @@ public class PnlWdbeVerRec {
 	public class StatApp extends Block {
 
 		public static final int INITDONEDETAIL = 1;
-		public static final int INITDONEBVR1NVERSION = 2;
+		public static final int INITDONE1NRELEASE = 2;
 		public static final int INITDONE1NSYSTEM = 3;
-		public static final int INITDONE1NRELEASE = 4;
-		public static final int INITDONE1NUNIT = 5;
-		public static final int INITDONEREF1NFILE = 6;
+		public static final int INITDONEBVR1NVERSION = 4;
+		public static final int INITDONEREF1NFILE = 5;
+		public static final int INITDONE1NUNIT = 6;
 		public static final int INITDONEMNLIBRARY = 7;
 
 		public StatApp(
 					boolean initdoneDetail
-					, boolean initdoneBvr1NVersion
-					, boolean initdone1NSystem
 					, boolean initdone1NRelease
-					, boolean initdone1NUnit
+					, boolean initdone1NSystem
+					, boolean initdoneBvr1NVersion
 					, boolean initdoneRef1NFile
+					, boolean initdone1NUnit
 					, boolean initdoneMNLibrary
 				) {
 			this.initdoneDetail = initdoneDetail;
-			this.initdoneBvr1NVersion = initdoneBvr1NVersion;
-			this.initdone1NSystem = initdone1NSystem;
 			this.initdone1NRelease = initdone1NRelease;
-			this.initdone1NUnit = initdone1NUnit;
+			this.initdone1NSystem = initdone1NSystem;
+			this.initdoneBvr1NVersion = initdoneBvr1NVersion;
 			this.initdoneRef1NFile = initdoneRef1NFile;
+			this.initdone1NUnit = initdone1NUnit;
 			this.initdoneMNLibrary = initdoneMNLibrary;
 
-			mask = new HashSet<Integer>(Arrays.asList(INITDONEDETAIL, INITDONEBVR1NVERSION, INITDONE1NSYSTEM, INITDONE1NRELEASE, INITDONE1NUNIT, INITDONEREF1NFILE, INITDONEMNLIBRARY));
+			mask = new HashSet<Integer>(Arrays.asList(INITDONEDETAIL, INITDONE1NRELEASE, INITDONE1NSYSTEM, INITDONEBVR1NVERSION, INITDONEREF1NFILE, INITDONE1NUNIT, INITDONEMNLIBRARY));
 		};
 
 		public boolean initdoneDetail;
-		public boolean initdoneBvr1NVersion;
-		public boolean initdone1NSystem;
 		public boolean initdone1NRelease;
-		public boolean initdone1NUnit;
+		public boolean initdone1NSystem;
+		public boolean initdoneBvr1NVersion;
 		public boolean initdoneRef1NFile;
+		public boolean initdone1NUnit;
 		public boolean initdoneMNLibrary;
 
 		public boolean readXML(
@@ -163,11 +163,11 @@ public class PnlWdbeVerRec {
 
 			if (Xmlio.checkXPath(doc, basexpath)) {
 				initdoneDetail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneDetail", mask, INITDONEDETAIL);
-				initdoneBvr1NVersion = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneBvr1NVersion", mask, INITDONEBVR1NVERSION);
-				initdone1NSystem = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdone1NSystem", mask, INITDONE1NSYSTEM);
 				initdone1NRelease = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdone1NRelease", mask, INITDONE1NRELEASE);
-				initdone1NUnit = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdone1NUnit", mask, INITDONE1NUNIT);
+				initdone1NSystem = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdone1NSystem", mask, INITDONE1NSYSTEM);
+				initdoneBvr1NVersion = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneBvr1NVersion", mask, INITDONEBVR1NVERSION);
 				initdoneRef1NFile = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneRef1NFile", mask, INITDONEREF1NFILE);
+				initdone1NUnit = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdone1NUnit", mask, INITDONE1NUNIT);
 				initdoneMNLibrary = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneMNLibrary", mask, INITDONEMNLIBRARY);
 
 				return true;
@@ -182,11 +182,11 @@ public class PnlWdbeVerRec {
 			HashSet<Integer> items = new HashSet<Integer>();
 
 			if (initdoneDetail == comp.initdoneDetail) items.add(INITDONEDETAIL);
-			if (initdoneBvr1NVersion == comp.initdoneBvr1NVersion) items.add(INITDONEBVR1NVERSION);
-			if (initdone1NSystem == comp.initdone1NSystem) items.add(INITDONE1NSYSTEM);
 			if (initdone1NRelease == comp.initdone1NRelease) items.add(INITDONE1NRELEASE);
-			if (initdone1NUnit == comp.initdone1NUnit) items.add(INITDONE1NUNIT);
+			if (initdone1NSystem == comp.initdone1NSystem) items.add(INITDONE1NSYSTEM);
+			if (initdoneBvr1NVersion == comp.initdoneBvr1NVersion) items.add(INITDONEBVR1NVERSION);
 			if (initdoneRef1NFile == comp.initdoneRef1NFile) items.add(INITDONEREF1NFILE);
+			if (initdone1NUnit == comp.initdone1NUnit) items.add(INITDONE1NUNIT);
 			if (initdoneMNLibrary == comp.initdoneMNLibrary) items.add(INITDONEMNLIBRARY);
 
 			return(items);
@@ -200,7 +200,7 @@ public class PnlWdbeVerRec {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(INITDONEDETAIL, INITDONEBVR1NVERSION, INITDONE1NSYSTEM, INITDONE1NRELEASE, INITDONE1NUNIT, INITDONEREF1NFILE, INITDONEMNLIBRARY));
+			diffitems = new HashSet<Integer>(Arrays.asList(INITDONEDETAIL, INITDONE1NRELEASE, INITDONE1NSYSTEM, INITDONEBVR1NVERSION, INITDONEREF1NFILE, INITDONE1NUNIT, INITDONEMNLIBRARY));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);
@@ -215,45 +215,45 @@ public class PnlWdbeVerRec {
 
 		public static final int IXWDBEVEXPSTATE = 1;
 		public static final int SCRJREFDETAIL = 2;
-		public static final int SCRJREFBVR1NVERSION = 3;
+		public static final int SCRJREF1NRELEASE = 3;
 		public static final int SCRJREF1NSYSTEM = 4;
-		public static final int SCRJREF1NRELEASE = 5;
-		public static final int SCRJREF1NUNIT = 6;
-		public static final int SCRJREFREF1NFILE = 7;
+		public static final int SCRJREFBVR1NVERSION = 5;
+		public static final int SCRJREFREF1NFILE = 6;
+		public static final int SCRJREF1NUNIT = 7;
 		public static final int SCRJREFMNLIBRARY = 8;
 		public static final int BUTREGULARIZEACTIVE = 9;
 
 		public StatShr(
 					int ixWdbeVExpstate
 					, String scrJrefDetail
-					, String scrJrefBvr1NVersion
-					, String scrJref1NSystem
 					, String scrJref1NRelease
-					, String scrJref1NUnit
+					, String scrJref1NSystem
+					, String scrJrefBvr1NVersion
 					, String scrJrefRef1NFile
+					, String scrJref1NUnit
 					, String scrJrefMNLibrary
 					, boolean ButRegularizeActive
 				) {
 			this.ixWdbeVExpstate = ixWdbeVExpstate;
 			this.scrJrefDetail = scrJrefDetail;
-			this.scrJrefBvr1NVersion = scrJrefBvr1NVersion;
-			this.scrJref1NSystem = scrJref1NSystem;
 			this.scrJref1NRelease = scrJref1NRelease;
-			this.scrJref1NUnit = scrJref1NUnit;
+			this.scrJref1NSystem = scrJref1NSystem;
+			this.scrJrefBvr1NVersion = scrJrefBvr1NVersion;
 			this.scrJrefRef1NFile = scrJrefRef1NFile;
+			this.scrJref1NUnit = scrJref1NUnit;
 			this.scrJrefMNLibrary = scrJrefMNLibrary;
 			this.ButRegularizeActive = ButRegularizeActive;
 
-			mask = new HashSet<Integer>(Arrays.asList(IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFBVR1NVERSION, SCRJREF1NSYSTEM, SCRJREF1NRELEASE, SCRJREF1NUNIT, SCRJREFREF1NFILE, SCRJREFMNLIBRARY, BUTREGULARIZEACTIVE));
+			mask = new HashSet<Integer>(Arrays.asList(IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREF1NRELEASE, SCRJREF1NSYSTEM, SCRJREFBVR1NVERSION, SCRJREFREF1NFILE, SCRJREF1NUNIT, SCRJREFMNLIBRARY, BUTREGULARIZEACTIVE));
 		};
 
 		public int ixWdbeVExpstate;
 		public String scrJrefDetail;
-		public String scrJrefBvr1NVersion;
-		public String scrJref1NSystem;
 		public String scrJref1NRelease;
-		public String scrJref1NUnit;
+		public String scrJref1NSystem;
+		public String scrJrefBvr1NVersion;
 		public String scrJrefRef1NFile;
+		public String scrJref1NUnit;
 		public String scrJrefMNLibrary;
 		public boolean ButRegularizeActive;
 
@@ -274,11 +274,11 @@ public class PnlWdbeVerRec {
 				srefIxWdbeVExpstate = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "srefIxWdbeVExpstate", mask, IXWDBEVEXPSTATE);
 				ixWdbeVExpstate = VecWdbeVExpstate.getIx(srefIxWdbeVExpstate);
 				scrJrefDetail = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefDetail", mask, SCRJREFDETAIL);
-				scrJrefBvr1NVersion = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefBvr1NVersion", mask, SCRJREFBVR1NVERSION);
-				scrJref1NSystem = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJref1NSystem", mask, SCRJREF1NSYSTEM);
 				scrJref1NRelease = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJref1NRelease", mask, SCRJREF1NRELEASE);
-				scrJref1NUnit = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJref1NUnit", mask, SCRJREF1NUNIT);
+				scrJref1NSystem = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJref1NSystem", mask, SCRJREF1NSYSTEM);
+				scrJrefBvr1NVersion = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefBvr1NVersion", mask, SCRJREFBVR1NVERSION);
 				scrJrefRef1NFile = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefRef1NFile", mask, SCRJREFREF1NFILE);
+				scrJref1NUnit = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJref1NUnit", mask, SCRJREF1NUNIT);
 				scrJrefMNLibrary = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefMNLibrary", mask, SCRJREFMNLIBRARY);
 				ButRegularizeActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButRegularizeActive", mask, BUTREGULARIZEACTIVE);
 
@@ -295,11 +295,11 @@ public class PnlWdbeVerRec {
 
 			if (ixWdbeVExpstate == comp.ixWdbeVExpstate) items.add(IXWDBEVEXPSTATE);
 			if (scrJrefDetail.equals(comp.scrJrefDetail)) items.add(SCRJREFDETAIL);
-			if (scrJrefBvr1NVersion.equals(comp.scrJrefBvr1NVersion)) items.add(SCRJREFBVR1NVERSION);
-			if (scrJref1NSystem.equals(comp.scrJref1NSystem)) items.add(SCRJREF1NSYSTEM);
 			if (scrJref1NRelease.equals(comp.scrJref1NRelease)) items.add(SCRJREF1NRELEASE);
-			if (scrJref1NUnit.equals(comp.scrJref1NUnit)) items.add(SCRJREF1NUNIT);
+			if (scrJref1NSystem.equals(comp.scrJref1NSystem)) items.add(SCRJREF1NSYSTEM);
+			if (scrJrefBvr1NVersion.equals(comp.scrJrefBvr1NVersion)) items.add(SCRJREFBVR1NVERSION);
 			if (scrJrefRef1NFile.equals(comp.scrJrefRef1NFile)) items.add(SCRJREFREF1NFILE);
+			if (scrJref1NUnit.equals(comp.scrJref1NUnit)) items.add(SCRJREF1NUNIT);
 			if (scrJrefMNLibrary.equals(comp.scrJrefMNLibrary)) items.add(SCRJREFMNLIBRARY);
 			if (ButRegularizeActive == comp.ButRegularizeActive) items.add(BUTREGULARIZEACTIVE);
 
@@ -314,7 +314,7 @@ public class PnlWdbeVerRec {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFBVR1NVERSION, SCRJREF1NSYSTEM, SCRJREF1NRELEASE, SCRJREF1NUNIT, SCRJREFREF1NFILE, SCRJREFMNLIBRARY, BUTREGULARIZEACTIVE));
+			diffitems = new HashSet<Integer>(Arrays.asList(IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREF1NRELEASE, SCRJREF1NSYSTEM, SCRJREFBVR1NVERSION, SCRJREFREF1NFILE, SCRJREF1NUNIT, SCRJREFMNLIBRARY, BUTREGULARIZEACTIVE));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);

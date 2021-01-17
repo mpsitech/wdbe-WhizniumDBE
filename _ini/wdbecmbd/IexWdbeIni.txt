@@ -1,4 +1,4 @@
-IexWdbeIni v1.1.3
+IexWdbeIni v1.1.4
 ImeIAVKeylistKey1.srefKlsIxWdbeVKeylist	sref	Avail	Implied	Title	Comment
 KlstKWdbeMtpModbscbuCustop	WdbeMtpModbscbuAdd_v12_0			adapt port widths	
 KlstKWdbeMtpModbscbuCustop	WdbeMtpModbscbuAxihostif_Easy_v1_0			connect AXI controllers, CRC and timeout	
@@ -73,18 +73,6 @@ KlstWdbeKAMPersonDetailType	tel			phone
 KlstWdbeKAMPinParKey	fclk			clock frequency [kHz]	
 KlstWdbeKAMPinParKey	lvds			low-voltage differential signal	
 KlstWdbeKAMPinParKey	noclkdr			no clock dedicated route	
-KlstWdbeKAMUnitPackage	bga132				
-KlstWdbeKAMUnitPackage	bga236				
-KlstWdbeKAMUnitPackage	bga320				
-KlstWdbeKAMUnitPackage	lqfp48				
-KlstWdbeKAMUnitPackage	qfp100				
-KlstWdbeKAMUnitPackage	ssop20				
-KlstWdbeKAMUnitPackage	ssop28				
-KlstWdbeKAMUnitToolch	ise			Xilinx ISE	
-KlstWdbeKAMUnitToolch	mplab			Microchip MPLAB X	
-KlstWdbeKAMUnitToolch	syswb			ST SystemWorkbench	
-KlstWdbeKAMUnitToolch	vivado			Xilinx Vivado	
-KlstWdbeKAMUnitToolch	vivzynq			Xilinx Vivado for Zynq	
 KlstWdbeKHdltype	char			character	
 KlstWdbeKHdltype	int			integer	
 KlstWdbeKHdltype	nat			natural	
@@ -133,6 +121,18 @@ KlstWdbeKMFileMimetype	xlsx			application/vnd.openxmlformats-officedocument.spre
 KlstWdbeKMFileMimetype	xml			text/xml	
 KlstWdbeKMFileMimetype	zip			application/zip	
 KlstWdbeKMReleaseOption	dynlib			generate dynamic link library	
+KlstWdbeKMUnitPackage	bga132				
+KlstWdbeKMUnitPackage	bga236				
+KlstWdbeKMUnitPackage	bga320				
+KlstWdbeKMUnitPackage	lqfp48				
+KlstWdbeKMUnitPackage	qfp100				
+KlstWdbeKMUnitPackage	ssop20				
+KlstWdbeKMUnitPackage	ssop28				
+KlstWdbeKMUnitToolch	ise			Xilinx ISE	
+KlstWdbeKMUnitToolch	mplab			Microchip MPLAB X	
+KlstWdbeKMUnitToolch	syswb			ST SystemWorkbench	
+KlstWdbeKMUnitToolch	vivado			Xilinx Vivado	
+KlstWdbeKMUnitToolch	vivzynq			Xilinx Vivado for Zynq	
 KlstWdbeKMVectorOption	notit			no titles	
 KlstWdbeKMVectorOption	cmt			comments	
 KlstWdbeKMVectorOption	apdfed			append to feed	

@@ -20,11 +20,11 @@ uint QryWdbeFilList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "reu") return REU;
-	if (s == "ret") return RET;
-	if (s == "fnm") return FNM;
-	if (s == "own") return OWN;
 	if (s == "grp") return GRP;
+	if (s == "own") return OWN;
+	if (s == "fnm") return FNM;
+	if (s == "ret") return RET;
+	if (s == "reu") return REU;
 
 	return(0);
 };
@@ -32,11 +32,11 @@ uint QryWdbeFilList::VecVOrd::getIx(
 string QryWdbeFilList::VecVOrd::getSref(
 			const uint ix
 		) {
-	if (ix == REU) return("reu");
-	if (ix == RET) return("ret");
-	if (ix == FNM) return("fnm");
-	if (ix == OWN) return("own");
 	if (ix == GRP) return("grp");
+	if (ix == OWN) return("own");
+	if (ix == FNM) return("fnm");
+	if (ix == RET) return("ret");
+	if (ix == REU) return("reu");
 
 	return("");
 };

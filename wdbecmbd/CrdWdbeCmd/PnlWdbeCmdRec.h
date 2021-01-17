@@ -14,10 +14,10 @@
 
 // IP include.cust --- INSERT
 
-#include "PnlWdbeCmdMNController.h"
-#include "PnlWdbeCmdARetpar.h"
-#include "PnlWdbeCmdAInvpar.h"
 #include "PnlWdbeCmdDetail.h"
+#include "PnlWdbeCmdAInvpar.h"
+#include "PnlWdbeCmdARetpar.h"
+#include "PnlWdbeCmdMNController.h"
 
 #define VecVWdbeCmdRecDo PnlWdbeCmdRec::VecVDo
 
@@ -74,7 +74,7 @@ public:
 	class StatApp {
 
 	public:
-		static void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true, const bool initdoneDetail = false, const bool initdoneARetpar = false, const bool initdoneAInvpar = false, const bool initdoneMNController = false);
+		static void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true, const bool initdoneDetail = false, const bool initdoneAInvpar = false, const bool initdoneARetpar = false, const bool initdoneMNController = false);
 	};
 
 	/**
@@ -85,19 +85,19 @@ public:
 	public:
 		static const Sbecore::uint IXWDBEVEXPSTATE = 1;
 		static const Sbecore::uint JREFDETAIL = 2;
-		static const Sbecore::uint JREFARETPAR = 3;
-		static const Sbecore::uint JREFAINVPAR = 4;
+		static const Sbecore::uint JREFAINVPAR = 3;
+		static const Sbecore::uint JREFARETPAR = 4;
 		static const Sbecore::uint JREFMNCONTROLLER = 5;
 		static const Sbecore::uint BUTREGULARIZEACTIVE = 6;
 
 	public:
-		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const Sbecore::ubigint jrefDetail = 0, const Sbecore::ubigint jrefARetpar = 0, const Sbecore::ubigint jrefAInvpar = 0, const Sbecore::ubigint jrefMNController = 0, const bool ButRegularizeActive = true);
+		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const Sbecore::ubigint jrefDetail = 0, const Sbecore::ubigint jrefAInvpar = 0, const Sbecore::ubigint jrefARetpar = 0, const Sbecore::ubigint jrefMNController = 0, const bool ButRegularizeActive = true);
 
 	public:
 		Sbecore::uint ixWdbeVExpstate;
 		Sbecore::ubigint jrefDetail;
-		Sbecore::ubigint jrefARetpar;
 		Sbecore::ubigint jrefAInvpar;
+		Sbecore::ubigint jrefARetpar;
 		Sbecore::ubigint jrefMNController;
 		bool ButRegularizeActive;
 
@@ -174,10 +174,10 @@ public:
 	ContInf continf;
 	StatShr statshr;
 
-	PnlWdbeCmdMNController* pnlmncontroller;
-	PnlWdbeCmdARetpar* pnlaretpar;
-	PnlWdbeCmdAInvpar* pnlainvpar;
 	PnlWdbeCmdDetail* pnldetail;
+	PnlWdbeCmdAInvpar* pnlainvpar;
+	PnlWdbeCmdARetpar* pnlaretpar;
+	PnlWdbeCmdMNController* pnlmncontroller;
 
 	WdbeMCommand recCmd;
 
@@ -211,11 +211,11 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeCmdUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
-	bool handleCallWdbeCmd_reuEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
-	bool handleCallWdbeCmd_reu_mdl_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
-	bool handleCallWdbeCmd_reu_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
 	bool handleCallWdbeCmd_retEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
+	bool handleCallWdbeCmd_reu_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
+	bool handleCallWdbeCmd_reu_mdl_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
+	bool handleCallWdbeCmd_reuEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeCmdUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 
 };
 

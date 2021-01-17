@@ -494,7 +494,7 @@ int main(
 
 	try {
 		// welcome message
-		cout << "Welcome to WhizniumDBE v1.1.3!" << endl;
+		cout << "Welcome to WhizniumDBE v1.1.4!" << endl;
 
 		// calls wdbed.init()
 		wdbed = new Wdbed(exedir, clearAll, startMon);
