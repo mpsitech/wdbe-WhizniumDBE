@@ -8,11 +8,13 @@ WhizniumDBE extends the concept of model-based source code generation to the wor
 
 ![](_exp/dbe.png)
 
-## Setup instructions and reference
+## Setup instructions, reference and cheat sheet
 
 To prepare your system for use with Whiznium and to learn how to make your first steps, please visit this [separate Git repository](https://github.com/mpsitech/The-Whiznium-Documentation).
 
 Also included is a full [WhizniumDBE model file reference](https://github.com/mpsitech/The-Whiznium-Documentation/blob/main/dbemdl.md).
+
+To streamline the everyday WhizniumDBE-enhanced development workflow, the [WhizniumDBE .pdf cheat sheet](https://content.mpsitech.cloud/cheatsheet_wdbe.pdf), packed with useful information, might come in handy. A paper copy (size A3) can be ordered free of charge [here](https://content.mpsitech.cloud/cheatsheet.html).
 
 ## The Whiznium Developer Experience YouTube format
 
@@ -62,7 +64,7 @@ wdbecmbd/WdbeWrmcu/WdbeWrmcuMdlfine.cpp|write C code equivalent of VHDL state ma
 
 ## Template files
 
-WhizniumDBE's automated source code generation relies on template files with inline placeholders and insertion points for multi-line code fragments. For each version of WhizniumDBE, the relevant template files can be found [online](https://mpsitech-public.s3.eu-central-1.amazonaws.com/WhizniumDBE/v1.0.2/files.tgz); they are part of the tool initialization routine.
+WhizniumDBE's automated source code generation relies on template files with inline placeholders and insertion points for multi-line code fragments. For each version of WhizniumDBE, the relevant template files can be found [online](https://content.mpsitech.cloud/WhizniumDBE/v1.0.2/files.tgz); they are part of the tool initialization routine.
 
 ### Some highlights
 
@@ -82,7 +84,7 @@ Zynq_ip_AXI_v2_0.vhd|AXI4-lite bus slave VHDL code based on Xilinx example, enha
 
 ### Upcoming book
 
-- The Whiznium book (draft available [here](https://mpsitech-public.s3.eu-central-1.amazonaws.com/book.pdf)), offering an introduction to WhizniumDBE/DBE by means of a handy use case
+- The Whiznium book (draft available [here](https://content.mpsitech.cloud/book.pdf)), offering an introduction to WhizniumDBE/DBE by means of a handy use case
 
 ### Use cases
 
@@ -92,8 +94,8 @@ Zynq_ip_AXI_v2_0.vhd|AXI4-lite bus slave VHDL code based on Xilinx example, enha
 
 Most of these publications pre-date Whiznium's Open Source era.
 
-- WhizniumDBE technology overview [.pdf datasheet](https://mpsitech-public.s3.eu-central-1.amazonaws.com/whizniumdbe.pdf)
-- [.pdf slides](https://mpsitech-public.s3.eu-central-1.amazonaws.com/wdbe_templates.pdf) outlining various levels of module templatification using WhizniumDBE
+- WhizniumDBE technology overview [.pdf datasheet](https://content.mpsitech.cloud/whizniumdbe.pdf)
+- [.pdf slides](https://content.mpsitech.cloud/wdbe_templates.pdf) outlining various levels of module templatification using WhizniumDBE
 
 ## Related Repositories
 
