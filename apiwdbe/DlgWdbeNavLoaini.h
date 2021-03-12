@@ -107,7 +107,7 @@ namespace DlgWdbeNavLoaini {
 	/**
 	  * ContIac (full: ContIacDlgWdbeNavLoaini)
 	  */
-	class ContIac : public Sbecore::Xmlio::Block {
+	class ContIac : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint NUMFDSE = 1;
@@ -128,7 +128,7 @@ namespace DlgWdbeNavLoaini {
 	/**
 	  * ContInf (full: ContInfDlgWdbeNavLoaini)
 	  */
-	class ContInf : public Sbecore::Xmlio::Block {
+	class ContInf : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint NUMFSGE = 1;
@@ -148,7 +148,7 @@ namespace DlgWdbeNavLoaini {
 	/**
 	  * ContInfImp (full: ContInfDlgWdbeNavLoainiImp)
 	  */
-	class ContInfImp : public Sbecore::Xmlio::Block {
+	class ContInfImp : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint TXTPRG = 1;
@@ -168,7 +168,7 @@ namespace DlgWdbeNavLoaini {
 	/**
 	  * ContInfLfi (full: ContInfDlgWdbeNavLoainiLfi)
 	  */
-	class ContInfLfi : public Sbecore::Xmlio::Block {
+	class ContInfLfi : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint DLD = 1;
@@ -188,7 +188,7 @@ namespace DlgWdbeNavLoaini {
 	/**
 	  * StatApp (full: StatAppDlgWdbeNavLoaini)
 	  */
-	class StatApp : public Sbecore::Xmlio::Block {
+	class StatApp : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint INITDONE = 1;
@@ -210,7 +210,7 @@ namespace DlgWdbeNavLoaini {
 	/**
 	  * StatShr (full: StatShrDlgWdbeNavLoaini)
 	  */
-	class StatShr : public Sbecore::Xmlio::Block {
+	class StatShr : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint BUTDNEACTIVE = 1;
@@ -230,7 +230,7 @@ namespace DlgWdbeNavLoaini {
 	/**
 	  * StatShrAcv (full: StatShrDlgWdbeNavLoainiAcv)
 	  */
-	class StatShrAcv : public Sbecore::Xmlio::Block {
+	class StatShrAcv : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint ULDACTIVE = 1;
@@ -250,7 +250,7 @@ namespace DlgWdbeNavLoaini {
 	/**
 	  * StatShrIfi (full: StatShrDlgWdbeNavLoainiIfi)
 	  */
-	class StatShrIfi : public Sbecore::Xmlio::Block {
+	class StatShrIfi : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint ULDACTIVE = 1;
@@ -270,7 +270,7 @@ namespace DlgWdbeNavLoaini {
 	/**
 	  * StatShrImp (full: StatShrDlgWdbeNavLoainiImp)
 	  */
-	class StatShrImp : public Sbecore::Xmlio::Block {
+	class StatShrImp : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint BUTRUNACTIVE = 1;
@@ -292,7 +292,7 @@ namespace DlgWdbeNavLoaini {
 	/**
 	  * StatShrLfi (full: StatShrDlgWdbeNavLoainiLfi)
 	  */
-	class StatShrLfi : public Sbecore::Xmlio::Block {
+	class StatShrLfi : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint DLDACTIVE = 1;
@@ -312,7 +312,7 @@ namespace DlgWdbeNavLoaini {
 	/**
 	  * Tag (full: TagDlgWdbeNavLoaini)
 	  */
-	class Tag : public Sbecore::Xmlio::Block {
+	class Tag : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint CPT = 1;
@@ -332,7 +332,7 @@ namespace DlgWdbeNavLoaini {
 	/**
 	  * TagAcv (full: TagDlgWdbeNavLoainiAcv)
 	  */
-	class TagAcv : public Sbecore::Xmlio::Block {
+	class TagAcv : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint ULD = 1;
@@ -352,7 +352,7 @@ namespace DlgWdbeNavLoaini {
 	/**
 	  * TagIfi (full: TagDlgWdbeNavLoainiIfi)
 	  */
-	class TagIfi : public Sbecore::Xmlio::Block {
+	class TagIfi : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint ULD = 1;
@@ -372,7 +372,7 @@ namespace DlgWdbeNavLoaini {
 	/**
 	  * TagImp (full: TagDlgWdbeNavLoainiImp)
 	  */
-	class TagImp : public Sbecore::Xmlio::Block {
+	class TagImp : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint CPTPRG = 1;
@@ -394,7 +394,7 @@ namespace DlgWdbeNavLoaini {
 	/**
 	  * TagLfi (full: TagDlgWdbeNavLoainiLfi)
 	  */
-	class TagLfi : public Sbecore::Xmlio::Block {
+	class TagLfi : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint DLD = 1;
@@ -488,8 +488,8 @@ namespace DlgWdbeNavLoaini {
 		ContInf continf;
 		ContInfImp continfimp;
 		ContInfLfi continflfi;
-		Sbecore::Xmlio::Feed feedFDse;
-		Sbecore::Xmlio::Feed feedFSge;
+		Sbecore::Feed feedFDse;
+		Sbecore::Feed feedFSge;
 		StatApp statapp;
 		StatShr statshr;
 		StatShrAcv statshracv;

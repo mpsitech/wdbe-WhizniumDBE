@@ -167,8 +167,8 @@ void DlgWdbeRlsFinreptr::refreshFin(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
 		) {
-	ContInfFin oldContinffin(continffin);
 	StatShrFin oldStatshrfin(statshrfin);
+	ContInfFin oldContinffin(continffin);
 
 	// IP refreshFin --- RBEGIN
 	// continffin
@@ -179,8 +179,8 @@ void DlgWdbeRlsFinreptr::refreshFin(
 	statshrfin.ButStoActive = evalFinButStoActive(dbswdbe);
 
 	// IP refreshFin --- REND
-	if (continffin.diff(&oldContinffin).size() != 0) insert(moditems, DpchEngData::CONTINFFIN);
 	if (statshrfin.diff(&oldStatshrfin).size() != 0) insert(moditems, DpchEngData::STATSHRFIN);
+	if (continffin.diff(&oldContinffin).size() != 0) insert(moditems, DpchEngData::CONTINFFIN);
 };
 
 void DlgWdbeRlsFinreptr::refreshRes(
@@ -216,24 +216,24 @@ void DlgWdbeRlsFinreptr::refresh(
 	if (muteRefresh && !unmute) return;
 	muteRefresh = true;
 
-	ContInf oldContinf(continf);
-	ContIac oldContiac(contiac);
 	StatShr oldStatshr(statshr);
+	ContIac oldContiac(contiac);
+	ContInf oldContinf(continf);
 
 	// IP refresh --- BEGIN
-	// continf
-	continf.numFSge = ixVSge;
+	// statshr
+	statshr.ButDneActive = evalButDneActive(dbswdbe);
 
 	// contiac
 	contiac.numFDse = ixVDit;
 
-	// statshr
-	statshr.ButDneActive = evalButDneActive(dbswdbe);
+	// continf
+	continf.numFSge = ixVSge;
 
 	// IP refresh --- END
-	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
-	if (contiac.diff(&oldContiac).size() != 0) insert(moditems, DpchEngData::CONTIAC);
 	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
+	if (contiac.diff(&oldContiac).size() != 0) insert(moditems, DpchEngData::CONTIAC);
+	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
 
 	refreshFin(dbswdbe, moditems);
 	refreshRes(dbswdbe, moditems);
@@ -505,11 +505,13 @@ uint DlgWdbeRlsFinreptr::enterSgeAlrgnf(
 
 	ContInfWdbeAlert continf;
 	// IP enterSgeAlrgnf --- BEGIN
+	string giturl = "";
+
 	continf.TxtCpt = VecWdbeVTag::getTitle(VecWdbeVTag::ERROR, ixWdbeVLocale);
 	continf.TxtCpt = StrMod::cap(continf.TxtCpt);
 
 	if (ixWdbeVLocale == VecWdbeVLocale::ENUS) {
-		continf.TxtMsg1 = "Unable to locate Git repository at &giturl;.";
+		continf.TxtMsg1 = "Unable to locate Git repository at " + giturl + ".";
 	};
 
 	feedFMcbAlert.clear();
@@ -537,11 +539,14 @@ uint DlgWdbeRlsFinreptr::enterSgeAlrgad(
 
 	ContInfWdbeAlert continf;
 	// IP enterSgeAlrgad --- BEGIN
+	string giturl = "";
+	string usr = "";
+
 	continf.TxtCpt = VecWdbeVTag::getTitle(VecWdbeVTag::ERROR, ixWdbeVLocale);
 	continf.TxtCpt = StrMod::cap(continf.TxtCpt);
 
 	if (ixWdbeVLocale == VecWdbeVLocale::ENUS) {
-		continf.TxtMsg1 = "Access to Git repository at &giturl; denied for user &usr;.";
+		continf.TxtMsg1 = "Access to Git repository at " + giturl + " denied for user " + usr + ".";
 	};
 
 	feedFMcbAlert.clear();

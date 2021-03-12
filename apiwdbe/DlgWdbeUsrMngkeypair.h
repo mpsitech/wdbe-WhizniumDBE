@@ -57,7 +57,7 @@ namespace DlgWdbeUsrMngkeypair {
 	/**
 	  * ContInf (full: ContInfDlgWdbeUsrMngkeypair)
 	  */
-	class ContInf : public Sbecore::Xmlio::Block {
+	class ContInf : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint NUMFSGE = 1;
@@ -81,7 +81,7 @@ namespace DlgWdbeUsrMngkeypair {
 	/**
 	  * StatApp (full: StatAppDlgWdbeUsrMngkeypair)
 	  */
-	class StatApp : public Sbecore::Xmlio::Block {
+	class StatApp : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint SHORTMENU = 1;
@@ -101,7 +101,7 @@ namespace DlgWdbeUsrMngkeypair {
 	/**
 	  * StatShr (full: StatShrDlgWdbeUsrMngkeypair)
 	  */
-	class StatShr : public Sbecore::Xmlio::Block {
+	class StatShr : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint DETBUTDELAVAIL = 1;
@@ -125,7 +125,7 @@ namespace DlgWdbeUsrMngkeypair {
 	/**
 	  * Tag (full: TagDlgWdbeUsrMngkeypair)
 	  */
-	class Tag : public Sbecore::Xmlio::Block {
+	class Tag : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint CPT = 1;
@@ -190,7 +190,7 @@ namespace DlgWdbeUsrMngkeypair {
 
 	public:
 		ContInf continf;
-		Sbecore::Xmlio::Feed feedFSge;
+		Sbecore::Feed feedFSge;
 		StatApp statapp;
 		StatShr statshr;
 		Tag tag;

@@ -31,6 +31,21 @@ WdbeQBnk1NPin::WdbeQBnk1NPin(
 	this->stubRef = stubRef;
 };
 
+void WdbeQBnk1NPin::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["ref"] = stubRef;
+	} else {
+		me["stubRef"] = stubRef;
+	};
+};
+
 void WdbeQBnk1NPin::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -96,6 +111,16 @@ ListWdbeQBnk1NPin& ListWdbeQBnk1NPin::operator=(
 	};
 
 	return(*this);
+};
+
+void ListWdbeQBnk1NPin::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListWdbeQBnk1NPin";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListWdbeQBnk1NPin::writeXML(

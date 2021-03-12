@@ -170,6 +170,26 @@ DlgWdbeCvrWrite::ContIac::ContIac(
 	mask = {NUMFDSE};
 };
 
+bool DlgWdbeCvrWrite::ContIac::readJSON(
+			Json::Value& sup
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	Json::Value& me = sup;
+	if (addbasetag) me = sup["ContIacDlgWdbeCvrWrite"];
+
+	basefound = (me != Json::nullValue);
+
+	if (basefound) {
+		if (me.isMember("numFDse")) {numFDse = me["numFDse"].asUInt(); add(NUMFDSE);};
+	};
+
+	return basefound;
+};
+
 bool DlgWdbeCvrWrite::ContIac::readXML(
 			xmlXPathContext* docctx
 			, string basexpath
@@ -191,6 +211,17 @@ bool DlgWdbeCvrWrite::ContIac::readXML(
 	};
 
 	return basefound;
+};
+
+void DlgWdbeCvrWrite::ContIac::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "ContIacDlgWdbeCvrWrite";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["numFDse"] = numFDse;
 };
 
 void DlgWdbeCvrWrite::ContIac::writeXML(
@@ -247,6 +278,17 @@ DlgWdbeCvrWrite::ContInf::ContInf(
 	mask = {NUMFSGE};
 };
 
+void DlgWdbeCvrWrite::ContInf::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "ContInfDlgWdbeCvrWrite";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["numFSge"] = numFSge;
+};
+
 void DlgWdbeCvrWrite::ContInf::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -299,6 +341,17 @@ DlgWdbeCvrWrite::ContInfFia::ContInfFia(
 	this->Dld = Dld;
 
 	mask = {DLD};
+};
+
+void DlgWdbeCvrWrite::ContInfFia::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "ContInfDlgWdbeCvrWriteFia";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["Dld"] = Dld;
 };
 
 void DlgWdbeCvrWrite::ContInfFia::writeXML(
@@ -355,6 +408,17 @@ DlgWdbeCvrWrite::ContInfWrc::ContInfWrc(
 	mask = {TXTPRG};
 };
 
+void DlgWdbeCvrWrite::ContInfWrc::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "ContInfDlgWdbeCvrWriteWrc";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["TxtPrg"] = TxtPrg;
+};
+
 void DlgWdbeCvrWrite::ContInfWrc::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -399,6 +463,20 @@ set<uint> DlgWdbeCvrWrite::ContInfWrc::diff(
  class DlgWdbeCvrWrite::StatApp
  ******************************************************************************/
 
+void DlgWdbeCvrWrite::StatApp::writeJSON(
+			Json::Value& sup
+			, string difftag
+			, const bool initdone
+			, const string& shortMenu
+		) {
+	if (difftag.length() == 0) difftag = "StatAppDlgWdbeCvrWrite";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["initdone"] = initdone;
+	me["shortMenu"] = shortMenu;
+};
+
 void DlgWdbeCvrWrite::StatApp::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -430,6 +508,17 @@ DlgWdbeCvrWrite::StatShr::StatShr(
 	this->ButDneActive = ButDneActive;
 
 	mask = {BUTDNEACTIVE};
+};
+
+void DlgWdbeCvrWrite::StatShr::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "StatShrDlgWdbeCvrWrite";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["ButDneActive"] = ButDneActive;
 };
 
 void DlgWdbeCvrWrite::StatShr::writeXML(
@@ -486,6 +575,17 @@ DlgWdbeCvrWrite::StatShrCuc::StatShrCuc(
 	mask = {ULDACTIVE};
 };
 
+void DlgWdbeCvrWrite::StatShrCuc::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "StatShrDlgWdbeCvrWriteCuc";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["UldActive"] = UldActive;
+};
+
 void DlgWdbeCvrWrite::StatShrCuc::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -538,6 +638,17 @@ DlgWdbeCvrWrite::StatShrFia::StatShrFia(
 	this->DldActive = DldActive;
 
 	mask = {DLDACTIVE};
+};
+
+void DlgWdbeCvrWrite::StatShrFia::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "StatShrDlgWdbeCvrWriteFia";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["DldActive"] = DldActive;
 };
 
 void DlgWdbeCvrWrite::StatShrFia::writeXML(
@@ -596,6 +707,18 @@ DlgWdbeCvrWrite::StatShrWrc::StatShrWrc(
 	mask = {BUTRUNACTIVE, BUTSTOACTIVE};
 };
 
+void DlgWdbeCvrWrite::StatShrWrc::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "StatShrDlgWdbeCvrWriteWrc";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["ButRunActive"] = ButRunActive;
+	me["ButStoActive"] = ButStoActive;
+};
+
 void DlgWdbeCvrWrite::StatShrWrc::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -642,6 +765,21 @@ set<uint> DlgWdbeCvrWrite::StatShrWrc::diff(
  class DlgWdbeCvrWrite::Tag
  ******************************************************************************/
 
+void DlgWdbeCvrWrite::Tag::writeJSON(
+			const uint ixWdbeVLocale
+			, Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "TagDlgWdbeCvrWrite";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	if (ixWdbeVLocale == VecWdbeVLocale::ENUS) {
+		me["Cpt"] = "Write code";
+	};
+	me["ButDne"] = StrMod::cap(VecWdbeVTag::getTitle(VecWdbeVTag::DONE, ixWdbeVLocale));
+};
+
 void DlgWdbeCvrWrite::Tag::writeXML(
 			const uint ixWdbeVLocale
 			, xmlTextWriter* wr
@@ -665,6 +803,21 @@ void DlgWdbeCvrWrite::Tag::writeXML(
 /******************************************************************************
  class DlgWdbeCvrWrite::TagCuc
  ******************************************************************************/
+
+void DlgWdbeCvrWrite::TagCuc::writeJSON(
+			const uint ixWdbeVLocale
+			, Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "TagDlgWdbeCvrWriteCuc";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	if (ixWdbeVLocale == VecWdbeVLocale::ENUS) {
+	};
+	me["Uld"] = StrMod::cap(VecWdbeVTag::getTitle(VecWdbeVTag::UPLOAD, ixWdbeVLocale));
+	me["Cpt"] = StrMod::cap(VecWdbeVTag::getTitle(VecWdbeVTag::FILENAME, ixWdbeVLocale));
+};
 
 void DlgWdbeCvrWrite::TagCuc::writeXML(
 			const uint ixWdbeVLocale
@@ -690,6 +843,20 @@ void DlgWdbeCvrWrite::TagCuc::writeXML(
  class DlgWdbeCvrWrite::TagFia
  ******************************************************************************/
 
+void DlgWdbeCvrWrite::TagFia::writeJSON(
+			const uint ixWdbeVLocale
+			, Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "TagDlgWdbeCvrWriteFia";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	if (ixWdbeVLocale == VecWdbeVLocale::ENUS) {
+	};
+	me["Dld"] = StrMod::cap(VecWdbeVTag::getTitle(VecWdbeVTag::DOWNLOAD, ixWdbeVLocale));
+};
+
 void DlgWdbeCvrWrite::TagFia::writeXML(
 			const uint ixWdbeVLocale
 			, xmlTextWriter* wr
@@ -712,6 +879,22 @@ void DlgWdbeCvrWrite::TagFia::writeXML(
 /******************************************************************************
  class DlgWdbeCvrWrite::TagWrc
  ******************************************************************************/
+
+void DlgWdbeCvrWrite::TagWrc::writeJSON(
+			const uint ixWdbeVLocale
+			, Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "TagDlgWdbeCvrWriteWrc";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	if (ixWdbeVLocale == VecWdbeVLocale::ENUS) {
+	};
+	me["CptPrg"] = StrMod::cap(VecWdbeVTag::getTitle(VecWdbeVTag::PROGRESS, ixWdbeVLocale));
+	me["ButRun"] = StrMod::cap(VecWdbeVTag::getTitle(VecWdbeVTag::RUN, ixWdbeVLocale));
+	me["ButSto"] = StrMod::cap(VecWdbeVTag::getTitle(VecWdbeVTag::STOP, ixWdbeVLocale));
+};
 
 void DlgWdbeCvrWrite::TagWrc::writeXML(
 			const uint ixWdbeVLocale
@@ -753,6 +936,27 @@ string DlgWdbeCvrWrite::DpchAppData::getSrefsMask() {
 	StrMod::vectorToString(ss, srefs);
 
 	return(srefs);
+};
+
+void DlgWdbeCvrWrite::DpchAppData::readJSON(
+			Json::Value& sup
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	Json::Value& me = sup;
+	if (addbasetag) me = sup["DpchAppDlgWdbeCvrWriteData"];
+
+	basefound = (me != Json::nullValue);
+
+	if (basefound) {
+		if (me.isMember("scrJref")) {jref = Scr::descramble(me["scrJref"].asString()); add(JREF);};
+		if (contiac.readJSON(me, true)) add(CONTIAC);
+	} else {
+		contiac = ContIac();
+	};
 };
 
 void DlgWdbeCvrWrite::DpchAppData::readXML(
@@ -804,6 +1008,27 @@ string DlgWdbeCvrWrite::DpchAppDo::getSrefsMask() {
 	StrMod::vectorToString(ss, srefs);
 
 	return(srefs);
+};
+
+void DlgWdbeCvrWrite::DpchAppDo::readJSON(
+			Json::Value& sup
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	Json::Value& me = sup;
+	if (addbasetag) me = sup["DpchAppDlgWdbeCvrWriteDo"];
+
+	basefound = (me != Json::nullValue);
+
+	if (basefound) {
+		if (me.isMember("scrJref")) {jref = Scr::descramble(me["scrJref"].asString()); add(JREF);};
+		if (me.isMember("srefIxVDo")) {ixVDo = VecVDo::getIx(me["srefIxVDo"].asString()); add(IXVDO);};
+		if (me.isMember("srefIxVDoWrc")) {ixVDoWrc = VecVDoWrc::getIx(me["srefIxVDoWrc"].asString()); add(IXVDOWRC);};
+	} else {
+	};
 };
 
 void DlgWdbeCvrWrite::DpchAppDo::readXML(
@@ -923,6 +1148,30 @@ void DlgWdbeCvrWrite::DpchEngData::merge(
 	if (src->has(TAGCUC)) add(TAGCUC);
 	if (src->has(TAGFIA)) add(TAGFIA);
 	if (src->has(TAGWRC)) add(TAGWRC);
+};
+
+void DlgWdbeCvrWrite::DpchEngData::writeJSON(
+			const uint ixWdbeVLocale
+			, Json::Value& sup
+		) {
+	Json::Value& me = sup["DpchEngDlgWdbeCvrWriteData"] = Json::Value(Json::objectValue);
+
+	if (has(JREF)) me["scrJref"] = Scr::scramble(jref);
+	if (has(CONTIAC)) contiac.writeJSON(me);
+	if (has(CONTINF)) continf.writeJSON(me);
+	if (has(CONTINFFIA)) continffia.writeJSON(me);
+	if (has(CONTINFWRC)) continfwrc.writeJSON(me);
+	if (has(FEEDFDSE)) feedFDse.writeJSON(me);
+	if (has(FEEDFSGE)) feedFSge.writeJSON(me);
+	if (has(STATAPP)) StatApp::writeJSON(me);
+	if (has(STATSHR)) statshr.writeJSON(me);
+	if (has(STATSHRCUC)) statshrcuc.writeJSON(me);
+	if (has(STATSHRFIA)) statshrfia.writeJSON(me);
+	if (has(STATSHRWRC)) statshrwrc.writeJSON(me);
+	if (has(TAG)) Tag::writeJSON(ixWdbeVLocale, me);
+	if (has(TAGCUC)) TagCuc::writeJSON(ixWdbeVLocale, me);
+	if (has(TAGFIA)) TagFia::writeJSON(ixWdbeVLocale, me);
+	if (has(TAGWRC)) TagWrc::writeJSON(ixWdbeVLocale, me);
 };
 
 void DlgWdbeCvrWrite::DpchEngData::writeXML(

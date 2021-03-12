@@ -33,6 +33,21 @@ WdbeQModMdl1NGeneric::WdbeQModMdl1NGeneric(
 	this->mdlNum = mdlNum;
 };
 
+void WdbeQModMdl1NGeneric::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["ref"] = stubRef;
+	} else {
+		me["stubRef"] = stubRef;
+	};
+};
+
 void WdbeQModMdl1NGeneric::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -98,6 +113,16 @@ ListWdbeQModMdl1NGeneric& ListWdbeQModMdl1NGeneric::operator=(
 	};
 
 	return(*this);
+};
+
+void ListWdbeQModMdl1NGeneric::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListWdbeQModMdl1NGeneric";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListWdbeQModMdl1NGeneric::writeXML(

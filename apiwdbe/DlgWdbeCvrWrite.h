@@ -103,7 +103,7 @@ namespace DlgWdbeCvrWrite {
 	/**
 	  * ContIac (full: ContIacDlgWdbeCvrWrite)
 	  */
-	class ContIac : public Sbecore::Xmlio::Block {
+	class ContIac : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint NUMFDSE = 1;
@@ -124,7 +124,7 @@ namespace DlgWdbeCvrWrite {
 	/**
 	  * ContInf (full: ContInfDlgWdbeCvrWrite)
 	  */
-	class ContInf : public Sbecore::Xmlio::Block {
+	class ContInf : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint NUMFSGE = 1;
@@ -144,7 +144,7 @@ namespace DlgWdbeCvrWrite {
 	/**
 	  * ContInfFia (full: ContInfDlgWdbeCvrWriteFia)
 	  */
-	class ContInfFia : public Sbecore::Xmlio::Block {
+	class ContInfFia : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint DLD = 1;
@@ -164,7 +164,7 @@ namespace DlgWdbeCvrWrite {
 	/**
 	  * ContInfWrc (full: ContInfDlgWdbeCvrWriteWrc)
 	  */
-	class ContInfWrc : public Sbecore::Xmlio::Block {
+	class ContInfWrc : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint TXTPRG = 1;
@@ -184,7 +184,7 @@ namespace DlgWdbeCvrWrite {
 	/**
 	  * StatApp (full: StatAppDlgWdbeCvrWrite)
 	  */
-	class StatApp : public Sbecore::Xmlio::Block {
+	class StatApp : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint INITDONE = 1;
@@ -206,7 +206,7 @@ namespace DlgWdbeCvrWrite {
 	/**
 	  * StatShr (full: StatShrDlgWdbeCvrWrite)
 	  */
-	class StatShr : public Sbecore::Xmlio::Block {
+	class StatShr : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint BUTDNEACTIVE = 1;
@@ -226,7 +226,7 @@ namespace DlgWdbeCvrWrite {
 	/**
 	  * StatShrCuc (full: StatShrDlgWdbeCvrWriteCuc)
 	  */
-	class StatShrCuc : public Sbecore::Xmlio::Block {
+	class StatShrCuc : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint ULDACTIVE = 1;
@@ -246,7 +246,7 @@ namespace DlgWdbeCvrWrite {
 	/**
 	  * StatShrFia (full: StatShrDlgWdbeCvrWriteFia)
 	  */
-	class StatShrFia : public Sbecore::Xmlio::Block {
+	class StatShrFia : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint DLDACTIVE = 1;
@@ -266,7 +266,7 @@ namespace DlgWdbeCvrWrite {
 	/**
 	  * StatShrWrc (full: StatShrDlgWdbeCvrWriteWrc)
 	  */
-	class StatShrWrc : public Sbecore::Xmlio::Block {
+	class StatShrWrc : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint BUTRUNACTIVE = 1;
@@ -288,7 +288,7 @@ namespace DlgWdbeCvrWrite {
 	/**
 	  * Tag (full: TagDlgWdbeCvrWrite)
 	  */
-	class Tag : public Sbecore::Xmlio::Block {
+	class Tag : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint CPT = 1;
@@ -308,7 +308,7 @@ namespace DlgWdbeCvrWrite {
 	/**
 	  * TagCuc (full: TagDlgWdbeCvrWriteCuc)
 	  */
-	class TagCuc : public Sbecore::Xmlio::Block {
+	class TagCuc : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint ULD = 1;
@@ -328,7 +328,7 @@ namespace DlgWdbeCvrWrite {
 	/**
 	  * TagFia (full: TagDlgWdbeCvrWriteFia)
 	  */
-	class TagFia : public Sbecore::Xmlio::Block {
+	class TagFia : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint DLD = 1;
@@ -346,7 +346,7 @@ namespace DlgWdbeCvrWrite {
 	/**
 	  * TagWrc (full: TagDlgWdbeCvrWriteWrc)
 	  */
-	class TagWrc : public Sbecore::Xmlio::Block {
+	class TagWrc : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint CPTPRG = 1;
@@ -442,8 +442,8 @@ namespace DlgWdbeCvrWrite {
 		ContInf continf;
 		ContInfFia continffia;
 		ContInfWrc continfwrc;
-		Sbecore::Xmlio::Feed feedFDse;
-		Sbecore::Xmlio::Feed feedFSge;
+		Sbecore::Feed feedFDse;
+		Sbecore::Feed feedFSge;
 		StatApp statapp;
 		StatShr statshr;
 		StatShrCuc statshrcuc;

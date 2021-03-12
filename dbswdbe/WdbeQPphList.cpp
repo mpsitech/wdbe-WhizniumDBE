@@ -39,6 +39,25 @@ WdbeQPphList::WdbeQPphList(
 	this->stubRefWdbeMModule = stubRefWdbeMModule;
 };
 
+void WdbeQPphList::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["srf"] = sref;
+		me["unt"] = stubRefWdbeMUnit;
+		me["mdl"] = stubRefWdbeMModule;
+	} else {
+		me["sref"] = sref;
+		me["stubRefWdbeMUnit"] = stubRefWdbeMUnit;
+		me["stubRefWdbeMModule"] = stubRefWdbeMModule;
+	};
+};
+
 void WdbeQPphList::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -108,6 +127,16 @@ ListWdbeQPphList& ListWdbeQPphList::operator=(
 	};
 
 	return(*this);
+};
+
+void ListWdbeQPphList::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListWdbeQPphList";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListWdbeQPphList::writeXML(

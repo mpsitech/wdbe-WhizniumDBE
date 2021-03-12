@@ -121,7 +121,7 @@ namespace DlgWdbeCvrBsccd {
 	/**
 	  * ContIac (full: ContIacDlgWdbeCvrBsccd)
 	  */
-	class ContIac : public Sbecore::Xmlio::Block {
+	class ContIac : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint NUMFDSE = 1;
@@ -142,7 +142,7 @@ namespace DlgWdbeCvrBsccd {
 	/**
 	  * ContInf (full: ContInfDlgWdbeCvrBsccd)
 	  */
-	class ContInf : public Sbecore::Xmlio::Block {
+	class ContInf : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint NUMFSGE = 1;
@@ -162,7 +162,7 @@ namespace DlgWdbeCvrBsccd {
 	/**
 	  * ContInfImp (full: ContInfDlgWdbeCvrBsccdImp)
 	  */
-	class ContInfImp : public Sbecore::Xmlio::Block {
+	class ContInfImp : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint TXTPRG = 1;
@@ -182,7 +182,7 @@ namespace DlgWdbeCvrBsccd {
 	/**
 	  * ContInfLfi (full: ContInfDlgWdbeCvrBsccdLfi)
 	  */
-	class ContInfLfi : public Sbecore::Xmlio::Block {
+	class ContInfLfi : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint DLD = 1;
@@ -202,7 +202,7 @@ namespace DlgWdbeCvrBsccd {
 	/**
 	  * ContInfPpr (full: ContInfDlgWdbeCvrBsccdPpr)
 	  */
-	class ContInfPpr : public Sbecore::Xmlio::Block {
+	class ContInfPpr : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint TXTPRG = 1;
@@ -222,7 +222,7 @@ namespace DlgWdbeCvrBsccd {
 	/**
 	  * StatApp (full: StatAppDlgWdbeCvrBsccd)
 	  */
-	class StatApp : public Sbecore::Xmlio::Block {
+	class StatApp : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint INITDONE = 1;
@@ -244,7 +244,7 @@ namespace DlgWdbeCvrBsccd {
 	/**
 	  * StatShr (full: StatShrDlgWdbeCvrBsccd)
 	  */
-	class StatShr : public Sbecore::Xmlio::Block {
+	class StatShr : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint BUTDNEACTIVE = 1;
@@ -264,7 +264,7 @@ namespace DlgWdbeCvrBsccd {
 	/**
 	  * StatShrIfi (full: StatShrDlgWdbeCvrBsccdIfi)
 	  */
-	class StatShrIfi : public Sbecore::Xmlio::Block {
+	class StatShrIfi : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint ULDACTIVE = 1;
@@ -284,7 +284,7 @@ namespace DlgWdbeCvrBsccd {
 	/**
 	  * StatShrImp (full: StatShrDlgWdbeCvrBsccdImp)
 	  */
-	class StatShrImp : public Sbecore::Xmlio::Block {
+	class StatShrImp : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint BUTRUNACTIVE = 1;
@@ -306,7 +306,7 @@ namespace DlgWdbeCvrBsccd {
 	/**
 	  * StatShrLfi (full: StatShrDlgWdbeCvrBsccdLfi)
 	  */
-	class StatShrLfi : public Sbecore::Xmlio::Block {
+	class StatShrLfi : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint DLDACTIVE = 1;
@@ -326,7 +326,7 @@ namespace DlgWdbeCvrBsccd {
 	/**
 	  * StatShrPpr (full: StatShrDlgWdbeCvrBsccdPpr)
 	  */
-	class StatShrPpr : public Sbecore::Xmlio::Block {
+	class StatShrPpr : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint BUTRUNACTIVE = 1;
@@ -348,7 +348,7 @@ namespace DlgWdbeCvrBsccd {
 	/**
 	  * Tag (full: TagDlgWdbeCvrBsccd)
 	  */
-	class Tag : public Sbecore::Xmlio::Block {
+	class Tag : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint CPT = 1;
@@ -368,7 +368,7 @@ namespace DlgWdbeCvrBsccd {
 	/**
 	  * TagIfi (full: TagDlgWdbeCvrBsccdIfi)
 	  */
-	class TagIfi : public Sbecore::Xmlio::Block {
+	class TagIfi : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint ULD = 1;
@@ -388,7 +388,7 @@ namespace DlgWdbeCvrBsccd {
 	/**
 	  * TagImp (full: TagDlgWdbeCvrBsccdImp)
 	  */
-	class TagImp : public Sbecore::Xmlio::Block {
+	class TagImp : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint CPTPRG = 1;
@@ -410,7 +410,7 @@ namespace DlgWdbeCvrBsccd {
 	/**
 	  * TagLfi (full: TagDlgWdbeCvrBsccdLfi)
 	  */
-	class TagLfi : public Sbecore::Xmlio::Block {
+	class TagLfi : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint DLD = 1;
@@ -428,7 +428,7 @@ namespace DlgWdbeCvrBsccd {
 	/**
 	  * TagPpr (full: TagDlgWdbeCvrBsccdPpr)
 	  */
-	class TagPpr : public Sbecore::Xmlio::Block {
+	class TagPpr : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint CPTPRG = 1;
@@ -530,8 +530,8 @@ namespace DlgWdbeCvrBsccd {
 		ContInfImp continfimp;
 		ContInfLfi continflfi;
 		ContInfPpr continfppr;
-		Sbecore::Xmlio::Feed feedFDse;
-		Sbecore::Xmlio::Feed feedFSge;
+		Sbecore::Feed feedFDse;
+		Sbecore::Feed feedFSge;
 		StatApp statapp;
 		StatShr statshr;
 		StatShrIfi statshrifi;

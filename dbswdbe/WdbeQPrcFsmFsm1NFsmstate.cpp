@@ -33,6 +33,21 @@ WdbeQPrcFsmFsm1NFsmstate::WdbeQPrcFsmFsm1NFsmstate(
 	this->fsmNum = fsmNum;
 };
 
+void WdbeQPrcFsmFsm1NFsmstate::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["ref"] = stubRef;
+	} else {
+		me["stubRef"] = stubRef;
+	};
+};
+
 void WdbeQPrcFsmFsm1NFsmstate::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -98,6 +113,16 @@ ListWdbeQPrcFsmFsm1NFsmstate& ListWdbeQPrcFsmFsm1NFsmstate::operator=(
 	};
 
 	return(*this);
+};
+
+void ListWdbeQPrcFsmFsm1NFsmstate::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListWdbeQPrcFsmFsm1NFsmstate";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListWdbeQPrcFsmFsm1NFsmstate::writeXML(

@@ -2,7 +2,7 @@
 # make file for CrdWdbeUtl card job handler, release wdbecmbd_ubuntu
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 13 Jan 2021
+# date created: 12 Mar 2021
 # IP header --- ABOVE
 
 include ../Makefile.inc
@@ -16,7 +16,7 @@ STATLIBFLAGS = rcs
 INCPATH = -I$(BUILDROOT)/dbswdbe -I$(BUILDROOT)/wdbecmbd/VecWdbe -I$(BUILDROOT)/wdbecmbd/IexWdbe -I$(BUILDROOT)/wdbecmbd
 INCPATH += -I${WHIZSDKROOT}/build -I${WHIZSDKROOT}/build/apiwzlm -I/usr/include -I/usr/include/jsoncpp -I/usr/include/libxml2 -I/usr/include/mariadb
 
-OBJS = CrdWdbeUtl.o DlgWdbeUtlExtrip.o DlgWdbeUtlMrgip.o PnlWdbeUtlHeadbar.o
+OBJS = CrdWdbeUtl.o PnlWdbeUtlHeadbar.o DlgWdbeUtlExtrip.o DlgWdbeUtlMrgip.o
 
 LIB = libcrdwdbeutl
 

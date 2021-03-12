@@ -139,7 +139,7 @@ namespace DlgWdbeRlsStareptr {
 	/**
 	  * ContIac (full: ContIacDlgWdbeRlsStareptr)
 	  */
-	class ContIac : public Sbecore::Xmlio::Block {
+	class ContIac : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint NUMFDSE = 1;
@@ -160,7 +160,7 @@ namespace DlgWdbeRlsStareptr {
 	/**
 	  * ContIacDet (full: ContIacDlgWdbeRlsStareptrDet)
 	  */
-	class ContIacDet : public Sbecore::Xmlio::Block {
+	class ContIacDet : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint NUMFRBUBRT = 1;
@@ -183,7 +183,7 @@ namespace DlgWdbeRlsStareptr {
 	/**
 	  * ContInf (full: ContInfDlgWdbeRlsStareptr)
 	  */
-	class ContInf : public Sbecore::Xmlio::Block {
+	class ContInf : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint NUMFSGE = 1;
@@ -203,7 +203,7 @@ namespace DlgWdbeRlsStareptr {
 	/**
 	  * ContInfExt (full: ContInfDlgWdbeRlsStareptrExt)
 	  */
-	class ContInfExt : public Sbecore::Xmlio::Block {
+	class ContInfExt : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint TXTPRG = 1;
@@ -223,7 +223,7 @@ namespace DlgWdbeRlsStareptr {
 	/**
 	  * ContInfIni (full: ContInfDlgWdbeRlsStareptrIni)
 	  */
-	class ContInfIni : public Sbecore::Xmlio::Block {
+	class ContInfIni : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint TXTPRG = 1;
@@ -243,7 +243,7 @@ namespace DlgWdbeRlsStareptr {
 	/**
 	  * ContInfLfi (full: ContInfDlgWdbeRlsStareptrLfi)
 	  */
-	class ContInfLfi : public Sbecore::Xmlio::Block {
+	class ContInfLfi : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint DLD = 1;
@@ -263,7 +263,7 @@ namespace DlgWdbeRlsStareptr {
 	/**
 	  * StatApp (full: StatAppDlgWdbeRlsStareptr)
 	  */
-	class StatApp : public Sbecore::Xmlio::Block {
+	class StatApp : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint INITDONE = 1;
@@ -285,7 +285,7 @@ namespace DlgWdbeRlsStareptr {
 	/**
 	  * StatShr (full: StatShrDlgWdbeRlsStareptr)
 	  */
-	class StatShr : public Sbecore::Xmlio::Block {
+	class StatShr : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint BUTDNEACTIVE = 1;
@@ -305,7 +305,7 @@ namespace DlgWdbeRlsStareptr {
 	/**
 	  * StatShrDet (full: StatShrDlgWdbeRlsStareptrDet)
 	  */
-	class StatShrDet : public Sbecore::Xmlio::Block {
+	class StatShrDet : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint TXFGRLAVAIL = 1;
@@ -327,7 +327,7 @@ namespace DlgWdbeRlsStareptr {
 	/**
 	  * StatShrExt (full: StatShrDlgWdbeRlsStareptrExt)
 	  */
-	class StatShrExt : public Sbecore::Xmlio::Block {
+	class StatShrExt : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint BUTRUNACTIVE = 1;
@@ -349,7 +349,7 @@ namespace DlgWdbeRlsStareptr {
 	/**
 	  * StatShrIni (full: StatShrDlgWdbeRlsStareptrIni)
 	  */
-	class StatShrIni : public Sbecore::Xmlio::Block {
+	class StatShrIni : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint ULDAVAIL = 1;
@@ -379,7 +379,7 @@ namespace DlgWdbeRlsStareptr {
 	/**
 	  * StatShrLfi (full: StatShrDlgWdbeRlsStareptrLfi)
 	  */
-	class StatShrLfi : public Sbecore::Xmlio::Block {
+	class StatShrLfi : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint DLDACTIVE = 1;
@@ -399,7 +399,7 @@ namespace DlgWdbeRlsStareptr {
 	/**
 	  * Tag (full: TagDlgWdbeRlsStareptr)
 	  */
-	class Tag : public Sbecore::Xmlio::Block {
+	class Tag : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint CPT = 1;
@@ -419,7 +419,7 @@ namespace DlgWdbeRlsStareptr {
 	/**
 	  * TagDet (full: TagDlgWdbeRlsStareptrDet)
 	  */
-	class TagDet : public Sbecore::Xmlio::Block {
+	class TagDet : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint CPTBRT = 1;
@@ -441,7 +441,7 @@ namespace DlgWdbeRlsStareptr {
 	/**
 	  * TagExt (full: TagDlgWdbeRlsStareptrExt)
 	  */
-	class TagExt : public Sbecore::Xmlio::Block {
+	class TagExt : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint CPTPRG = 1;
@@ -463,7 +463,7 @@ namespace DlgWdbeRlsStareptr {
 	/**
 	  * TagIni (full: TagDlgWdbeRlsStareptrIni)
 	  */
-	class TagIni : public Sbecore::Xmlio::Block {
+	class TagIni : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint ULD = 1;
@@ -487,7 +487,7 @@ namespace DlgWdbeRlsStareptr {
 	/**
 	  * TagLfi (full: TagDlgWdbeRlsStareptrLfi)
 	  */
-	class TagLfi : public Sbecore::Xmlio::Block {
+	class TagLfi : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint DLD = 1;
@@ -592,9 +592,9 @@ namespace DlgWdbeRlsStareptr {
 		ContInfExt continfext;
 		ContInfIni continfini;
 		ContInfLfi continflfi;
-		Sbecore::Xmlio::Feed feedFDetRbuBrt;
-		Sbecore::Xmlio::Feed feedFDse;
-		Sbecore::Xmlio::Feed feedFSge;
+		Sbecore::Feed feedFDetRbuBrt;
+		Sbecore::Feed feedFDse;
+		Sbecore::Feed feedFSge;
 		StatApp statapp;
 		StatShr statshr;
 		StatShrDet statshrdet;

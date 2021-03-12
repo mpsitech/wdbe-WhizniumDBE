@@ -106,6 +106,7 @@ uint CrdWdbeNav::VecVSge::getIx(
 
 	if (s == "idle") return IDLE;
 	if (s == "alrwdbeabt") return ALRWDBEABT;
+	if (s == "alrwdbetrm") return ALRWDBETRM;
 
 	return(0);
 };
@@ -115,6 +116,7 @@ string CrdWdbeNav::VecVSge::getSref(
 		) {
 	if (ix == IDLE) return("idle");
 	if (ix == ALRWDBEABT) return("alrwdbeabt");
+	if (ix == ALRWDBETRM) return("alrwdbetrm");
 
 	return("");
 };

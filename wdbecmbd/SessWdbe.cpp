@@ -149,12 +149,12 @@ SessWdbe::SessWdbe(
 
 	statshr.jrefCrdnav = crdnav->jref;
 
-	xchg->addClstn(VecWdbeVCall::CALLWDBECRDACTIVE, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBEREFPRESET, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBERECACCESS, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBELOG, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBECRDCLOSE, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBECRDOPEN, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecWdbeVCall::CALLWDBELOG, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecWdbeVCall::CALLWDBERECACCESS, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecWdbeVCall::CALLWDBEREFPRESET, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBECRDACTIVE, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -170,6 +170,12 @@ SessWdbe::~SessWdbe() {
 };
 
 // IP cust --- INSERT
+
+void SessWdbe::warnTerm(
+			DbsWdbe* dbswdbe
+		) {
+	crdnav->warnTerm(dbswdbe);
+};
 
 void SessWdbe::term(
 			DbsWdbe* dbswdbe
@@ -2526,29 +2532,72 @@ void SessWdbe::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBECRDACTIVE) {
-		call->abort = handleCallWdbeCrdActive(dbswdbe, call->jref, call->argInv.ix, call->argRet.ix);
+	if (call->ixVCall == VecWdbeVCall::CALLWDBEREFPRESET) {
+		call->abort = handleCallWdbeRefPreSet(dbswdbe, call->jref, call->argInv.ix, call->argInv.ref);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBERECACCESS) {
+		call->abort = handleCallWdbeRecaccess(dbswdbe, call->jref, call->argInv.ix, call->argInv.ref, call->argRet.ix);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBELOG) {
+		call->abort = handleCallWdbeLog(dbswdbe, call->jref, call->argInv.ix, call->argInv.ref, call->argInv.sref, call->argInv.intval);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECRDCLOSE) {
 		call->abort = handleCallWdbeCrdClose(dbswdbe, call->jref, call->argInv.ix);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECRDOPEN) {
 		call->abort = handleCallWdbeCrdOpen(dbswdbe, call->jref, call->argInv.ix, call->argInv.ref, call->argInv.sref, call->argInv.intval, call->argRet.ref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBELOG) {
-		call->abort = handleCallWdbeLog(dbswdbe, call->jref, call->argInv.ix, call->argInv.ref, call->argInv.sref, call->argInv.intval);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBERECACCESS) {
-		call->abort = handleCallWdbeRecaccess(dbswdbe, call->jref, call->argInv.ix, call->argInv.ref, call->argRet.ix);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEREFPRESET) {
-		call->abort = handleCallWdbeRefPreSet(dbswdbe, call->jref, call->argInv.ix, call->argInv.ref);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECRDACTIVE) {
+		call->abort = handleCallWdbeCrdActive(dbswdbe, call->jref, call->argInv.ix, call->argRet.ix);
 	};
 };
 
-bool SessWdbe::handleCallWdbeCrdActive(
+bool SessWdbe::handleCallWdbeRefPreSet(
 			DbsWdbe* dbswdbe
 			, const ubigint jrefTrig
 			, const uint ixInv
+			, const ubigint refInv
+		) {
+	bool retval = false;
+	if (ixInv == VecWdbeVPreset::PREWDBEJREFNOTIFY) {
+		ubigint jrefNotify_old = xchg->getRefPreset(VecWdbeVPreset::PREWDBEJREFNOTIFY, jref);
+
+		if (refInv != jrefNotify_old) {
+			if (jrefNotify_old != 0) xchg->submitDpch(new DpchEngWdbeSuspend(jrefNotify_old));
+
+			if (refInv == 0) xchg->removePreset(ixInv, jref);
+			else xchg->addRefPreset(ixInv, jref, refInv);
+		};
+
+	} else if (ixInv == VecWdbeVPreset::PREWDBETLAST) {
+		if (xchg->stgwdbeappearance.sesstterm != 0) xchg->addRefPreset(ixInv, jref, refInv);
+
+	} else if ((ixInv == VecWdbeVPreset::PREWDBEREFCVR) || (ixInv == VecWdbeVPreset::PREWDBEREFUNT) || (ixInv == VecWdbeVPreset::PREWDBEREFVER)) {
+		if (refInv == 0) xchg->removePreset(ixInv, jref);
+		else xchg->addRefPreset(ixInv, jref, refInv);
+
+		if (crdnav) crdnav->updatePreset(dbswdbe, ixInv, jrefTrig, true);
+	};
+	return retval;
+};
+
+bool SessWdbe::handleCallWdbeRecaccess(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+			, const uint ixInv
+			, const ubigint refInv
 			, uint& ixRet
 		) {
 	bool retval = false;
-	ixRet = checkCrdActive(ixInv);
+	ixRet = checkRecaccess(dbswdbe, ixInv, refInv);
+	return retval;
+};
+
+bool SessWdbe::handleCallWdbeLog(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+			, const uint ixInv
+			, const ubigint refInv
+			, const string& srefInv
+			, const int intvalInv
+		) {
+	bool retval = false;
+	logRecaccess(dbswdbe, ixInv, refInv, VecWdbeVCard::getIx(srefInv), intvalInv);
 	return retval;
 };
 
@@ -2564,13 +2613,7 @@ bool SessWdbe::handleCallWdbeCrdClose(
 	ubigint jrefNotif = xchg->getRefPreset(VecWdbeVPreset::PREWDBEJREFNOTIFY, jref);
 	if (jrefNotif == jrefTrig) xchg->removePreset(VecWdbeVPreset::PREWDBEJREFNOTIFY, jref);
 
-	if (ixInv == VecWdbeVCard::CRDWDBENAV) {
-		if (crdnav) {
-			delete crdnav;
-			crdnav = NULL;
-		};
-
-	} else if (ixInv == VecWdbeVCard::CRDWDBEUSG) {
+	if (ixInv == VecWdbeVCard::CRDWDBEUSG) {
 		CrdWdbeUsg* crdusg = NULL;
 
 		for (auto it = crdusgs.begin(); it != crdusgs.end();) {
@@ -2614,6 +2657,12 @@ bool SessWdbe::handleCallWdbeCrdClose(
 				break;
 			} else it++;
 		};
+	} else if (ixInv == VecWdbeVCard::CRDWDBENAV) {
+		if (crdnav) {
+			delete crdnav;
+			crdnav = NULL;
+		};
+
 	} else if (ixInv == VecWdbeVCard::CRDWDBEMCH) {
 		CrdWdbeMch* crdmch = NULL;
 
@@ -2985,8 +3034,7 @@ bool SessWdbe::handleCallWdbeCrdOpen(
 		refRet = 0;
 
 	} else {
-		if (ixWdbeVCard == VecWdbeVCard::CRDWDBENAV) {
-		} else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEUSG) {
+		if (ixWdbeVCard == VecWdbeVCard::CRDWDBEUSG) {
 			CrdWdbeUsg* crdusg = NULL;
 
 			crdusg = new CrdWdbeUsg(xchg, dbswdbe, jref, ixWdbeVLocale, ref);
@@ -3018,6 +3066,7 @@ bool SessWdbe::handleCallWdbeCrdOpen(
 
 			refRet = crdfil->jref;
 
+		} else if (ixWdbeVCard == VecWdbeVCard::CRDWDBENAV) {
 		} else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEMCH) {
 			CrdWdbeMch* crdmch = NULL;
 
@@ -3248,53 +3297,13 @@ bool SessWdbe::handleCallWdbeCrdOpen(
 	return retval;
 };
 
-bool SessWdbe::handleCallWdbeLog(
+bool SessWdbe::handleCallWdbeCrdActive(
 			DbsWdbe* dbswdbe
 			, const ubigint jrefTrig
 			, const uint ixInv
-			, const ubigint refInv
-			, const string& srefInv
-			, const int intvalInv
-		) {
-	bool retval = false;
-	logRecaccess(dbswdbe, ixInv, refInv, VecWdbeVCard::getIx(srefInv), intvalInv);
-	return retval;
-};
-
-bool SessWdbe::handleCallWdbeRecaccess(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-			, const uint ixInv
-			, const ubigint refInv
 			, uint& ixRet
 		) {
 	bool retval = false;
-	ixRet = checkRecaccess(dbswdbe, ixInv, refInv);
-	return retval;
-};
-
-bool SessWdbe::handleCallWdbeRefPreSet(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-			, const uint ixInv
-			, const ubigint refInv
-		) {
-	bool retval = false;
-	if (ixInv == VecWdbeVPreset::PREWDBEJREFNOTIFY) {
-		ubigint jrefNotify_old = xchg->getRefPreset(VecWdbeVPreset::PREWDBEJREFNOTIFY, jref);
-
-		if (refInv != jrefNotify_old) {
-			if (jrefNotify_old != 0) xchg->submitDpch(new DpchEngWdbeSuspend(jrefNotify_old));
-
-			if (refInv == 0) xchg->removePreset(ixInv, jref);
-			else xchg->addRefPreset(ixInv, jref, refInv);
-		};
-
-	} else if ((ixInv == VecWdbeVPreset::PREWDBEREFCVR) || (ixInv == VecWdbeVPreset::PREWDBEREFUNT) || (ixInv == VecWdbeVPreset::PREWDBEREFVER)) {
-		if (refInv == 0) xchg->removePreset(ixInv, jref);
-		else xchg->addRefPreset(ixInv, jref, refInv);
-
-		if (crdnav) crdnav->updatePreset(dbswdbe, ixInv, jrefTrig, true);
-	};
+	ixRet = checkCrdActive(ixInv);
 	return retval;
 };

@@ -183,8 +183,17 @@ void WdbedJobprc::accessJob(
 			, DbsWdbe* dbswdbe
 			, ReqWdbe* req
 		) {
+	time_t rawtime;
+
 	JobWdbe* job = NULL;
-	
+
+	if ((req->ixVBasetype == ReqWdbe::VecVBasetype::CMD) || (req->ixVBasetype == ReqWdbe::VecVBasetype::DPCHAPP) || (req->ixVBasetype == ReqWdbe::VecVBasetype::UPLOAD) || (req->ixVBasetype == ReqWdbe::VecVBasetype::DOWNLOAD)) {
+		if ((xchg->stgwdbeappearance.roottterm != 0) || (xchg->stgwdbeappearance.sesstterm != 0)) {
+			time(&rawtime);
+			xchg->triggerIxRefCall(dbswdbe, VecWdbeVCall::CALLWDBEREFPRESET, req->jref, VecWdbeVPreset::PREWDBETLAST, rawtime);
+		};
+	};
+
 	job = xchg->getJobByJref(req->jref);
 	if (job) {
 		if (!req->weak) job->lockAccess("WdbedJobprc", "accessJob");

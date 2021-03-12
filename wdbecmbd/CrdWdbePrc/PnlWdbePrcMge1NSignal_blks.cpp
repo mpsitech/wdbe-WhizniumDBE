@@ -49,6 +49,17 @@ PnlWdbePrcMge1NSignal::ContInf::ContInf(
 	mask = {NUMFCSIQST};
 };
 
+void PnlWdbePrcMge1NSignal::ContInf::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "ContInfWdbePrcMge1NSignal";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["numFCsiQst"] = numFCsiQst;
+};
+
 void PnlWdbePrcMge1NSignal::ContInf::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -93,6 +104,18 @@ set<uint> PnlWdbePrcMge1NSignal::ContInf::diff(
  class PnlWdbePrcMge1NSignal::StatApp
  ******************************************************************************/
 
+void PnlWdbePrcMge1NSignal::StatApp::writeJSON(
+			Json::Value& sup
+			, string difftag
+			, const uint ixWdbeVExpstate
+		) {
+	if (difftag.length() == 0) difftag = "StatAppWdbePrcMge1NSignal";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["srefIxWdbeVExpstate"] = VecWdbeVExpstate::getSref(ixWdbeVExpstate);
+};
+
 void PnlWdbePrcMge1NSignal::StatApp::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -124,6 +147,18 @@ PnlWdbePrcMge1NSignal::StatShr::StatShr(
 	this->ButViewActive = ButViewActive;
 
 	mask = {BUTVIEWAVAIL, BUTVIEWACTIVE};
+};
+
+void PnlWdbePrcMge1NSignal::StatShr::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "StatShrWdbePrcMge1NSignal";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["ButViewAvail"] = ButViewAvail;
+	me["ButViewActive"] = ButViewActive;
 };
 
 void PnlWdbePrcMge1NSignal::StatShr::writeXML(
@@ -181,6 +216,26 @@ PnlWdbePrcMge1NSignal::StgIac::StgIac(
 	mask = {TCOREFWIDTH};
 };
 
+bool PnlWdbePrcMge1NSignal::StgIac::readJSON(
+			Json::Value& sup
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	Json::Value& me = sup;
+	if (addbasetag) me = sup["StgIacWdbePrcMge1NSignal"];
+
+	basefound = (me != Json::nullValue);
+
+	if (basefound) {
+		if (me.isMember("TcoRefWidth")) {TcoRefWidth = me["TcoRefWidth"].asUInt(); add(TCOREFWIDTH);};
+	};
+
+	return basefound;
+};
+
 bool PnlWdbePrcMge1NSignal::StgIac::readXML(
 			xmlXPathContext* docctx
 			, string basexpath
@@ -202,6 +257,17 @@ bool PnlWdbePrcMge1NSignal::StgIac::readXML(
 	};
 
 	return basefound;
+};
+
+void PnlWdbePrcMge1NSignal::StgIac::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "StgIacWdbePrcMge1NSignal";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["TcoRefWidth"] = TcoRefWidth;
 };
 
 void PnlWdbePrcMge1NSignal::StgIac::writeXML(
@@ -248,6 +314,26 @@ set<uint> PnlWdbePrcMge1NSignal::StgIac::diff(
  class PnlWdbePrcMge1NSignal::Tag
  ******************************************************************************/
 
+void PnlWdbePrcMge1NSignal::Tag::writeJSON(
+			const uint ixWdbeVLocale
+			, Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "TagWdbePrcMge1NSignal";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	if (ixWdbeVLocale == VecWdbeVLocale::ENUS) {
+		me["Cpt"] = "Managed signals";
+		me["TcoRef"] = "Signal";
+	};
+	me["TxtRecord1"] = StrMod::cap(VecWdbeVTag::getTitle(VecWdbeVTag::REC, ixWdbeVLocale));
+	me["TxtRecord2"] = StrMod::cap(VecWdbeVTag::getTitle(VecWdbeVTag::EMPLONG, ixWdbeVLocale));
+	me["Trs"] = StrMod::cap(VecWdbeVTag::getTitle(VecWdbeVTag::GOTO, ixWdbeVLocale)) + " ...";
+	me["TxtShowing1"] = VecWdbeVTag::getTitle(VecWdbeVTag::SHOWSHORT, ixWdbeVLocale);
+	me["TxtShowing2"] = VecWdbeVTag::getTitle(VecWdbeVTag::EMPSHORT, ixWdbeVLocale);
+};
+
 void PnlWdbePrcMge1NSignal::Tag::writeXML(
 			const uint ixWdbeVLocale
 			, xmlTextWriter* wr
@@ -293,6 +379,29 @@ string PnlWdbePrcMge1NSignal::DpchAppData::getSrefsMask() {
 	StrMod::vectorToString(ss, srefs);
 
 	return(srefs);
+};
+
+void PnlWdbePrcMge1NSignal::DpchAppData::readJSON(
+			Json::Value& sup
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	Json::Value& me = sup;
+	if (addbasetag) me = sup["DpchAppWdbePrcMge1NSignalData"];
+
+	basefound = (me != Json::nullValue);
+
+	if (basefound) {
+		if (me.isMember("scrJref")) {jref = Scr::descramble(me["scrJref"].asString()); add(JREF);};
+		if (stgiac.readJSON(me, true)) add(STGIAC);
+		if (stgiacqry.readJSON(me, true)) add(STGIACQRY);
+	} else {
+		stgiac = StgIac();
+		stgiacqry = QryWdbePrcMge1NSignal::StgIac();
+	};
 };
 
 void PnlWdbePrcMge1NSignal::DpchAppData::readXML(
@@ -344,6 +453,26 @@ string PnlWdbePrcMge1NSignal::DpchAppDo::getSrefsMask() {
 	StrMod::vectorToString(ss, srefs);
 
 	return(srefs);
+};
+
+void PnlWdbePrcMge1NSignal::DpchAppDo::readJSON(
+			Json::Value& sup
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	Json::Value& me = sup;
+	if (addbasetag) me = sup["DpchAppWdbePrcMge1NSignalDo"];
+
+	basefound = (me != Json::nullValue);
+
+	if (basefound) {
+		if (me.isMember("scrJref")) {jref = Scr::descramble(me["scrJref"].asString()); add(JREF);};
+		if (me.isMember("srefIxVDo")) {ixVDo = VecVDo::getIx(me["srefIxVDo"].asString()); add(IXVDO);};
+	} else {
+	};
 };
 
 void PnlWdbePrcMge1NSignal::DpchAppDo::readXML(
@@ -442,6 +571,25 @@ void PnlWdbePrcMge1NSignal::DpchEngData::merge(
 	if (src->has(STATAPPQRY)) add(STATAPPQRY);
 	if (src->has(STATSHRQRY)) {statshrqry = src->statshrqry; add(STATSHRQRY);};
 	if (src->has(STGIACQRY)) {stgiacqry = src->stgiacqry; add(STGIACQRY);};
+};
+
+void PnlWdbePrcMge1NSignal::DpchEngData::writeJSON(
+			const uint ixWdbeVLocale
+			, Json::Value& sup
+		) {
+	Json::Value& me = sup["DpchEngWdbePrcMge1NSignalData"] = Json::Value(Json::objectValue);
+
+	if (has(JREF)) me["scrJref"] = Scr::scramble(jref);
+	if (has(CONTINF)) continf.writeJSON(me);
+	if (has(FEEDFCSIQST)) feedFCsiQst.writeJSON(me);
+	if (has(STATAPP)) StatApp::writeJSON(me);
+	if (has(STATSHR)) statshr.writeJSON(me);
+	if (has(STGIAC)) stgiac.writeJSON(me);
+	if (has(TAG)) Tag::writeJSON(ixWdbeVLocale, me);
+	if (has(RST)) rst.writeJSON(me);
+	if (has(STATAPPQRY)) QryWdbePrcMge1NSignal::StatApp::writeJSON(me);
+	if (has(STATSHRQRY)) statshrqry.writeJSON(me);
+	if (has(STGIACQRY)) stgiacqry.writeJSON(me);
 };
 
 void PnlWdbePrcMge1NSignal::DpchEngData::writeXML(

@@ -54,11 +54,11 @@ public:
 	// PnlAuth
 	PnlWzlmSdbAuth::ContIac PnlAuth_contiac;
 	PnlWzlmSdbAuth::ContInf PnlAuth_continf;
-	Sbecore::Xmlio::Feed PnlAuth_feedflstwsf;
-	Sbecore::Xmlio::Feed PnlAuth_feedfpupwct;
-	Sbecore::Xmlio::Feed PnlAuth_feedfpupwpr;
-	Sbecore::Xmlio::Feed PnlAuth_feedfpupwve;
-	Sbecore::Xmlio::Feed PnlAuth_feedfsge;
+	Sbecore::Feed PnlAuth_feedflstwsf;
+	Sbecore::Feed PnlAuth_feedfpupwct;
+	Sbecore::Feed PnlAuth_feedfpupwpr;
+	Sbecore::Feed PnlAuth_feedfpupwve;
+	Sbecore::Feed PnlAuth_feedfsge;
 	PnlWzlmSdbAuth::StatShr PnlAuth_statshr;
 
 	// PnlPrjsnc
@@ -67,8 +67,8 @@ public:
 
 	// PnlVersnc
 	PnlWzlmSdbVersnc::ContIac PnlVersnc_contiac;
-	Sbecore::Xmlio::Feed PnlVersnc_feedfpupprj;
-	Sbecore::Xmlio::Feed PnlVersnc_feedfpupver;
+	Sbecore::Feed PnlVersnc_feedfpupprj;
+	Sbecore::Feed PnlVersnc_feedfpupver;
 	PnlWzlmSdbVersnc::StatShr PnlVersnc_statshr;
 
 };

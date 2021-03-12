@@ -2,7 +2,7 @@
 # make file for Wdbe operation daemon, release wdbeopd1_ubuntu
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 13 Jan 2021
+# date created: 12 Mar 2021
 # IP header --- ABOVE
 
 include Makefile.inc
@@ -14,8 +14,8 @@ LINK = g++
 LINKFLAGS =
 
 INCPATH = -I$(BUILDROOT)/dbswdbe -I$(BUILDROOT)/wdbeopd1/VecWdbe -I$(BUILDROOT)/wdbeopd1/IexWdbe -I$(BUILDROOT)/wdbeopd1
-INCPATH += -I$(BUILDROOT)/wdbeopd1/WdbeModbsc -I$(BUILDROOT)/wdbeopd1/WdbeModdet -I$(BUILDROOT)/wdbeopd1/WdbePlhfpga -I$(BUILDROOT)/wdbeopd1/WdbePlhmcu -I$(BUILDROOT)/wdbeopd1/WdbePrcfile -I$(BUILDROOT)/wdbeopd1/WdbePrctree -I$(BUILDROOT)/wdbeopd1/WdbeWrdev -I$(BUILDROOT)/wdbeopd1/WdbeWrfpga -I$(BUILDROOT)/wdbeopd1/WdbeWrmcu
-INCPATH += -I${WHIZSDKROOT}/build -I/usr/include -I/usr/include/libxml2 -I/usr/include/mariadb
+INCPATH += -I$(BUILDROOT)/wdbeopd1/WdbeWrmcu -I$(BUILDROOT)/wdbeopd1/WdbeWrfpga -I$(BUILDROOT)/wdbeopd1/WdbeWrdev -I$(BUILDROOT)/wdbeopd1/WdbePrctree -I$(BUILDROOT)/wdbeopd1/WdbePrcfile -I$(BUILDROOT)/wdbeopd1/WdbePlhmcu -I$(BUILDROOT)/wdbeopd1/WdbePlhfpga -I$(BUILDROOT)/wdbeopd1/WdbeModdet -I$(BUILDROOT)/wdbeopd1/WdbeModbsc
+INCPATH += -I${WHIZSDKROOT}/build -I/usr/include -I/usr/include/jsoncpp -I/usr/include/libxml2 -I/usr/include/mariadb
 
 PCHS = Wdbeopd.h.gch
 
@@ -27,12 +27,12 @@ LIBPATH += -L$(LIBROOT)/wdbeopd1
 LIBPATH += -L${WHIZSDKROOT}/lib -L/usr/lib/x86_64-linux-gnu
 LIBPATH += -L/lib/x86_64-linux-gnu
 
-LIBS = -lwdbemodbsc -lwdbemoddet -lwdbeplhfpga -lwdbeplhmcu -lwdbeprcfile -lwdbeprctree -lwdbewrdev -lwdbewrfpga -lwdbewrmcu
+LIBS = -lwdbewrmcu -lwdbewrfpga -lwdbewrdev -lwdbeprctree -lwdbeprcfile -lwdbeplhmcu -lwdbeplhfpga -lwdbemoddet -lwdbemodbsc
 LIBS += -liexwdbe -lvecwdbe -ldbswdbe
 LIBS += -lcurl -lmicrohttpd -lsbecore_mar
 LIBS += -lmariadbclient -lsbecore_plus
 LIBS += -lsbecore
-LIBS += -lxml2
+LIBS += -ljsoncpp -lxml2
 LIBS += -lpthread
 
 EXE = Wdbeopd1

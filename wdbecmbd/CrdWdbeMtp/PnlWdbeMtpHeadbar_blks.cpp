@@ -15,6 +15,23 @@ using namespace Xmlio;
  class PnlWdbeMtpHeadbar::StgInf
  ******************************************************************************/
 
+void PnlWdbeMtpHeadbar::StgInf::writeJSON(
+			const uint ixWdbeVLocale
+			, Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "StgInfWdbeMtpHeadbar";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	if (ixWdbeVLocale == VecWdbeVLocale::ENUS) {
+		me["MenAppCptwidth"] = "120";
+		me["MenAppWidth"] = "190";
+		me["MenCrdCptwidth"] = "145";
+		me["MenCrdWidth"] = "323";
+	};
+};
+
 void PnlWdbeMtpHeadbar::StgInf::writeXML(
 			const uint ixWdbeVLocale
 			, xmlTextWriter* wr
@@ -40,6 +57,21 @@ void PnlWdbeMtpHeadbar::StgInf::writeXML(
 /******************************************************************************
  class PnlWdbeMtpHeadbar::Tag
  ******************************************************************************/
+
+void PnlWdbeMtpHeadbar::Tag::writeJSON(
+			const uint ixWdbeVLocale
+			, Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "TagWdbeMtpHeadbar";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	if (ixWdbeVLocale == VecWdbeVLocale::ENUS) {
+		me["MenApp"] = "WhizniumDBE";
+		me["MenCrd"] = "Module template";
+	};
+};
 
 void PnlWdbeMtpHeadbar::Tag::writeXML(
 			const uint ixWdbeVLocale
@@ -97,6 +129,17 @@ void PnlWdbeMtpHeadbar::DpchEngData::merge(
 	if (src->has(JREF)) {jref = src->jref; add(JREF);};
 	if (src->has(STGINF)) add(STGINF);
 	if (src->has(TAG)) add(TAG);
+};
+
+void PnlWdbeMtpHeadbar::DpchEngData::writeJSON(
+			const uint ixWdbeVLocale
+			, Json::Value& sup
+		) {
+	Json::Value& me = sup["DpchEngWdbeMtpHeadbarData"] = Json::Value(Json::objectValue);
+
+	if (has(JREF)) me["scrJref"] = Scr::scramble(jref);
+	if (has(STGINF)) StgInf::writeJSON(ixWdbeVLocale, me);
+	if (has(TAG)) Tag::writeJSON(ixWdbeVLocale, me);
 };
 
 void PnlWdbeMtpHeadbar::DpchEngData::writeXML(

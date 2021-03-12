@@ -31,6 +31,19 @@ WdbeQSelect::WdbeQSelect(
 	this->ref = ref;
 };
 
+void WdbeQSelect::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+	} else {
+	};
+};
+
 void WdbeQSelect::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -94,6 +107,16 @@ ListWdbeQSelect& ListWdbeQSelect::operator=(
 	};
 
 	return(*this);
+};
+
+void ListWdbeQSelect::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListWdbeQSelect";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListWdbeQSelect::writeXML(

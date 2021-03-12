@@ -14,9 +14,9 @@
 
 // IP include.cust --- INSERT
 
-#include "PnlWdbeSysDetail.h"
-#include "PnlWdbeSysSys1NTarget.h"
 #include "PnlWdbeSysHk1NVector.h"
+#include "PnlWdbeSysSys1NTarget.h"
+#include "PnlWdbeSysDetail.h"
 
 #define VecVWdbeSysRecDo PnlWdbeSysRec::VecVDo
 
@@ -50,7 +50,7 @@ public:
 	/**
 	  * ContInf (full: ContInfWdbeSysRec)
 	  */
-	class ContInf : public Sbecore::Xmlio::Block {
+	class ContInf : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint TXTREF = 1;
@@ -62,6 +62,7 @@ public:
 		std::string TxtRef;
 
 	public:
+		void writeJSON(Json::Value& sup, std::string difftag = "");
 		void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
 		std::set<Sbecore::uint> comm(const ContInf* comp);
 		std::set<Sbecore::uint> diff(const ContInf* comp);
@@ -73,13 +74,14 @@ public:
 	class StatApp {
 
 	public:
+		static void writeJSON(Json::Value& sup, std::string difftag = "", const bool initdoneDetail = false, const bool initdoneSys1NTarget = false, const bool initdoneHk1NVector = false);
 		static void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true, const bool initdoneDetail = false, const bool initdoneSys1NTarget = false, const bool initdoneHk1NVector = false);
 	};
 
 	/**
 		* StatShr (full: StatShrWdbeSysRec)
 		*/
-	class StatShr : public Sbecore::Xmlio::Block {
+	class StatShr : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint IXWDBEVEXPSTATE = 1;
@@ -99,6 +101,7 @@ public:
 		bool ButRegularizeActive;
 
 	public:
+		void writeJSON(Json::Value& sup, std::string difftag = "");
 		void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
 		std::set<Sbecore::uint> comm(const StatShr* comp);
 		std::set<Sbecore::uint> diff(const StatShr* comp);
@@ -110,6 +113,7 @@ public:
 	class Tag {
 
 	public:
+		static void writeJSON(const Sbecore::uint ixWdbeVLocale, Json::Value& sup, std::string difftag = "");
 		static void writeXML(const Sbecore::uint ixWdbeVLocale, xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
 	};
 
@@ -131,6 +135,7 @@ public:
 	public:
 		std::string getSrefsMask();
 
+		void readJSON(Json::Value& sup, bool addbasetag = false);
 		void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 	};
 
@@ -158,6 +163,7 @@ public:
 		std::string getSrefsMask();
 		void merge(DpchEngWdbe* dpcheng);
 
+		void writeJSON(const Sbecore::uint ixWzskVLocale, Json::Value& sup);
 		void writeXML(const Sbecore::uint ixWdbeVLocale, xmlTextWriter* wr);
 	};
 
@@ -171,9 +177,9 @@ public:
 	ContInf continf;
 	StatShr statshr;
 
-	PnlWdbeSysDetail* pnldetail;
-	PnlWdbeSysSys1NTarget* pnlsys1ntarget;
 	PnlWdbeSysHk1NVector* pnlhk1nvector;
+	PnlWdbeSysSys1NTarget* pnlsys1ntarget;
+	PnlWdbeSysDetail* pnldetail;
 
 	WdbeMSystem recSys;
 
@@ -207,10 +213,10 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeSys_unt_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
-	bool handleCallWdbeSys_untEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
-	bool handleCallWdbeSys_verEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
 	bool handleCallWdbeSysUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbeSys_verEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeSys_untEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeSys_unt_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
 
 };
 

@@ -100,7 +100,7 @@ Most of these publications pre-date Whiznium's Open Source era.
 ## Related Repositories
 
 - The [WhizniumDBE core library](https://github.com/mpsitech/dbecore-WhizniumDBE-Core-Library)
-- [WhizniumDBE](https://github.com/mpsitech/wdbe-WhizniumDBE), Whiznium Service Builder's Edition, the big brother for developing feature-rich single board computer applications with C++ as main programming language
+- [WhizniumSBE](https://github.com/mpsitech/wznm-WhizniumSBE), Whiznium Service Builder's Edition, the big brother for developing feature-rich single board computer applications with C++ as main programming language
 
 ## Contact
 

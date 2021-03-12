@@ -49,6 +49,17 @@ PnlWdbeGenRec::ContInf::ContInf(
 	mask = {TXTREF};
 };
 
+void PnlWdbeGenRec::ContInf::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "ContInfWdbeGenRec";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["TxtRef"] = TxtRef;
+};
+
 void PnlWdbeGenRec::ContInf::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -93,6 +104,18 @@ set<uint> PnlWdbeGenRec::ContInf::diff(
  class PnlWdbeGenRec::StatApp
  ******************************************************************************/
 
+void PnlWdbeGenRec::StatApp::writeJSON(
+			Json::Value& sup
+			, string difftag
+			, const bool initdoneDetail
+		) {
+	if (difftag.length() == 0) difftag = "StatAppWdbeGenRec";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["initdoneDetail"] = initdoneDetail;
+};
+
 void PnlWdbeGenRec::StatApp::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -126,6 +149,19 @@ PnlWdbeGenRec::StatShr::StatShr(
 	this->ButRegularizeActive = ButRegularizeActive;
 
 	mask = {IXWDBEVEXPSTATE, JREFDETAIL, BUTREGULARIZEACTIVE};
+};
+
+void PnlWdbeGenRec::StatShr::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "StatShrWdbeGenRec";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["srefIxWdbeVExpstate"] = VecWdbeVExpstate::getSref(ixWdbeVExpstate);
+	me["scrJrefDetail"] = Scr::scramble(jrefDetail);
+	me["ButRegularizeActive"] = ButRegularizeActive;
 };
 
 void PnlWdbeGenRec::StatShr::writeXML(
@@ -176,6 +212,20 @@ set<uint> PnlWdbeGenRec::StatShr::diff(
  class PnlWdbeGenRec::Tag
  ******************************************************************************/
 
+void PnlWdbeGenRec::Tag::writeJSON(
+			const uint ixWdbeVLocale
+			, Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "TagWdbeGenRec";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	if (ixWdbeVLocale == VecWdbeVLocale::ENUS) {
+		me["Cpt"] = "Generic";
+	};
+};
+
 void PnlWdbeGenRec::Tag::writeXML(
 			const uint ixWdbeVLocale
 			, xmlTextWriter* wr
@@ -215,6 +265,26 @@ string PnlWdbeGenRec::DpchAppDo::getSrefsMask() {
 	StrMod::vectorToString(ss, srefs);
 
 	return(srefs);
+};
+
+void PnlWdbeGenRec::DpchAppDo::readJSON(
+			Json::Value& sup
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	Json::Value& me = sup;
+	if (addbasetag) me = sup["DpchAppWdbeGenRecDo"];
+
+	basefound = (me != Json::nullValue);
+
+	if (basefound) {
+		if (me.isMember("scrJref")) {jref = Scr::descramble(me["scrJref"].asString()); add(JREF);};
+		if (me.isMember("srefIxVDo")) {ixVDo = VecVDo::getIx(me["srefIxVDo"].asString()); add(IXVDO);};
+	} else {
+	};
 };
 
 void PnlWdbeGenRec::DpchAppDo::readXML(
@@ -291,6 +361,19 @@ void PnlWdbeGenRec::DpchEngData::merge(
 	if (src->has(STATAPP)) add(STATAPP);
 	if (src->has(STATSHR)) {statshr = src->statshr; add(STATSHR);};
 	if (src->has(TAG)) add(TAG);
+};
+
+void PnlWdbeGenRec::DpchEngData::writeJSON(
+			const uint ixWdbeVLocale
+			, Json::Value& sup
+		) {
+	Json::Value& me = sup["DpchEngWdbeGenRecData"] = Json::Value(Json::objectValue);
+
+	if (has(JREF)) me["scrJref"] = Scr::scramble(jref);
+	if (has(CONTINF)) continf.writeJSON(me);
+	if (has(STATAPP)) StatApp::writeJSON(me);
+	if (has(STATSHR)) statshr.writeJSON(me);
+	if (has(TAG)) Tag::writeJSON(ixWdbeVLocale, me);
 };
 
 void PnlWdbeGenRec::DpchEngData::writeXML(

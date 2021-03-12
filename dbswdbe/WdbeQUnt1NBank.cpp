@@ -31,6 +31,21 @@ WdbeQUnt1NBank::WdbeQUnt1NBank(
 	this->stubRef = stubRef;
 };
 
+void WdbeQUnt1NBank::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["ref"] = stubRef;
+	} else {
+		me["stubRef"] = stubRef;
+	};
+};
+
 void WdbeQUnt1NBank::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -96,6 +111,16 @@ ListWdbeQUnt1NBank& ListWdbeQUnt1NBank::operator=(
 	};
 
 	return(*this);
+};
+
+void ListWdbeQUnt1NBank::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListWdbeQUnt1NBank";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListWdbeQUnt1NBank::writeXML(

@@ -22,13 +22,13 @@ uint QryWdbeSigList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "srf") return SRF;
+	if (s == "con") return CON;
+	if (s == "vec") return VEC;
+	if (s == "mgu") return MGU;
+	if (s == "mgt") return MGT;
 	if (s == "typ") return TYP;
 	if (s == "mdl") return MDL;
-	if (s == "mgt") return MGT;
-	if (s == "mgu") return MGU;
-	if (s == "vec") return VEC;
-	if (s == "con") return CON;
+	if (s == "srf") return SRF;
 
 	return(0);
 };
@@ -36,13 +36,13 @@ uint QryWdbeSigList::VecVOrd::getIx(
 string QryWdbeSigList::VecVOrd::getSref(
 			const uint ix
 		) {
-	if (ix == SRF) return("srf");
+	if (ix == CON) return("con");
+	if (ix == VEC) return("vec");
+	if (ix == MGU) return("mgu");
+	if (ix == MGT) return("mgt");
 	if (ix == TYP) return("typ");
 	if (ix == MDL) return("mdl");
-	if (ix == MGT) return("mgt");
-	if (ix == MGU) return("mgu");
-	if (ix == VEC) return("vec");
-	if (ix == CON) return("con");
+	if (ix == SRF) return("srf");
 
 	return("");
 };

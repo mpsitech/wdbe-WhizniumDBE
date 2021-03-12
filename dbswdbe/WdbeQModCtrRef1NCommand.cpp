@@ -33,6 +33,21 @@ WdbeQModCtrRef1NCommand::WdbeQModCtrRef1NCommand(
 	this->refNum = refNum;
 };
 
+void WdbeQModCtrRef1NCommand::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["ref"] = stubRef;
+	} else {
+		me["stubRef"] = stubRef;
+	};
+};
+
 void WdbeQModCtrRef1NCommand::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -98,6 +113,16 @@ ListWdbeQModCtrRef1NCommand& ListWdbeQModCtrRef1NCommand::operator=(
 	};
 
 	return(*this);
+};
+
+void ListWdbeQModCtrRef1NCommand::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListWdbeQModCtrRef1NCommand";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListWdbeQModCtrRef1NCommand::writeXML(

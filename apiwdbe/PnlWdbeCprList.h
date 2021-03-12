@@ -52,7 +52,7 @@ namespace PnlWdbeCprList {
 	/**
 	  * ContIac (full: ContIacWdbeCprList)
 	  */
-	class ContIac : public Sbecore::Xmlio::Block {
+	class ContIac : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint NUMFTOS = 1;
@@ -73,7 +73,7 @@ namespace PnlWdbeCprList {
 	/**
 	  * ContInf (full: ContInfWdbeCprList)
 	  */
-	class ContInf : public Sbecore::Xmlio::Block {
+	class ContInf : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint BUTFILTERON = 1;
@@ -95,7 +95,7 @@ namespace PnlWdbeCprList {
 	/**
 	  * StatShr (full: StatShrWdbeCprList)
 	  */
-	class StatShr : public Sbecore::Xmlio::Block {
+	class StatShr : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint IXWDBEVEXPSTATE = 1;
@@ -117,7 +117,7 @@ namespace PnlWdbeCprList {
 	/**
 	  * StgIac (full: StgIacWdbeCprList)
 	  */
-	class StgIac : public Sbecore::Xmlio::Block {
+	class StgIac : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint TCOGRPWIDTH = 1;
@@ -150,7 +150,7 @@ namespace PnlWdbeCprList {
 	/**
 	  * Tag (full: TagWdbeCprList)
 	  */
-	class Tag : public Sbecore::Xmlio::Block {
+	class Tag : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint CPT = 1;
@@ -262,8 +262,8 @@ namespace PnlWdbeCprList {
 	public:
 		ContIac contiac;
 		ContInf continf;
-		Sbecore::Xmlio::Feed feedFCsiQst;
-		Sbecore::Xmlio::Feed feedFTos;
+		Sbecore::Feed feedFCsiQst;
+		Sbecore::Feed feedFTos;
 		StatShr statshr;
 		StgIac stgiac;
 		Tag tag;

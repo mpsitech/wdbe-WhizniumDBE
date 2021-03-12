@@ -31,6 +31,21 @@ WdbeQMch1NRelease::WdbeQMch1NRelease(
 	this->stubRef = stubRef;
 };
 
+void WdbeQMch1NRelease::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["ref"] = stubRef;
+	} else {
+		me["stubRef"] = stubRef;
+	};
+};
+
 void WdbeQMch1NRelease::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -96,6 +111,16 @@ ListWdbeQMch1NRelease& ListWdbeQMch1NRelease::operator=(
 	};
 
 	return(*this);
+};
+
+void ListWdbeQMch1NRelease::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListWdbeQMch1NRelease";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListWdbeQMch1NRelease::writeXML(

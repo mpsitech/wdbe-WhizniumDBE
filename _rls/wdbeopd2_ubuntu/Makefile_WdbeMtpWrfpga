@@ -2,7 +2,7 @@
 # make file for operation pack WdbeMtpWrfpga, release wdbeopd2_ubuntu
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 13 Jan 2021
+# date created: 12 Mar 2021
 # IP header --- ABOVE
 
 include ../Makefile.inc
@@ -14,7 +14,7 @@ STATLIB = ar
 STATLIBFLAGS = rcs
 
 INCPATH = -I$(BUILDROOT)/dbswdbe -I$(BUILDROOT)/wdbeopd2/VecWdbe -I$(BUILDROOT)/wdbeopd2/IexWdbe -I$(BUILDROOT)/wdbeopd2
-INCPATH += -I${WHIZSDKROOT}/build -I/usr/include -I/usr/include/libxml2 -I/usr/include/mariadb
+INCPATH += -I${WHIZSDKROOT}/build -I/usr/include -I/usr/include/jsoncpp -I/usr/include/libxml2 -I/usr/include/mariadb
 
 OBJS = WdbeMtpWrfpga_blks.o WdbeMtpWrfpga.o
 OBJS += WdbeMtpWrfpgaCmdbus_v1_0.o WdbeMtpWrfpgaCmdinv_v1_0.o WdbeMtpWrfpgaCmdret_v1_0.o WdbeMtpWrfpgaCrcspec_32_v1_0.o WdbeMtpWrfpgaCrcspec_v1_0.o WdbeMtpWrfpgaDpbram_v1_0.o WdbeMtpWrfpgaPmmu_v1_0.o WdbeMtpWrfpgaSpbram_v1_0.o WdbeMtpWrfpgaSpifwd_v1_0.o WdbeMtpWrfpgaTkclksrc_v1_0.o WdbeMtpWrfpgaTop_v1_0.o

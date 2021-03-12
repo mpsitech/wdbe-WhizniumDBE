@@ -39,8 +39,8 @@ namespace VecWdbeVOppack {
 	std::string getTitle(const Sbecore::uint ix);
 	std::string getComment(const Sbecore::uint ix);
 
-	void appendToFeed(const Sbecore::uint ix, Sbecore::Xmlio::Feed& feed);
-	void fillFeed(Sbecore::Xmlio::Feed& feed);
+	void appendToFeed(const Sbecore::uint ix, Sbecore::Feed& feed);
+	void fillFeed(Sbecore::Feed& feed);
 };
 
 #endif

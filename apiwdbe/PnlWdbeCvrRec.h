@@ -42,7 +42,7 @@ namespace PnlWdbeCvrRec {
 	/**
 	  * ContInf (full: ContInfWdbeCvrRec)
 	  */
-	class ContInf : public Sbecore::Xmlio::Block {
+	class ContInf : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint TXTREF = 1;
@@ -62,22 +62,22 @@ namespace PnlWdbeCvrRec {
 	/**
 	  * StatApp (full: StatAppWdbeCvrRec)
 	  */
-	class StatApp : public Sbecore::Xmlio::Block {
+	class StatApp : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint INITDONEDETAIL = 1;
-		static const Sbecore::uint INITDONEAIP = 2;
-		static const Sbecore::uint INITDONEAPLH = 3;
+		static const Sbecore::uint INITDONEAPLH = 2;
+		static const Sbecore::uint INITDONEAIP = 3;
 		static const Sbecore::uint INITDONEBCV1NCOREVERSION = 4;
 		static const Sbecore::uint INITDONEHK1NMODULE = 5;
 
 	public:
-		StatApp(const bool initdoneDetail = false, const bool initdoneAIp = false, const bool initdoneAPlh = false, const bool initdoneBcv1NCoreversion = false, const bool initdoneHk1NModule = false);
+		StatApp(const bool initdoneDetail = false, const bool initdoneAPlh = false, const bool initdoneAIp = false, const bool initdoneBcv1NCoreversion = false, const bool initdoneHk1NModule = false);
 
 	public:
 		bool initdoneDetail;
-		bool initdoneAIp;
 		bool initdoneAPlh;
+		bool initdoneAIp;
 		bool initdoneBcv1NCoreversion;
 		bool initdoneHk1NModule;
 
@@ -90,25 +90,25 @@ namespace PnlWdbeCvrRec {
 	/**
 	  * StatShr (full: StatShrWdbeCvrRec)
 	  */
-	class StatShr : public Sbecore::Xmlio::Block {
+	class StatShr : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint IXWDBEVEXPSTATE = 1;
 		static const Sbecore::uint SCRJREFDETAIL = 2;
-		static const Sbecore::uint SCRJREFAIP = 3;
-		static const Sbecore::uint SCRJREFAPLH = 4;
+		static const Sbecore::uint SCRJREFAPLH = 3;
+		static const Sbecore::uint SCRJREFAIP = 4;
 		static const Sbecore::uint SCRJREFBCV1NCOREVERSION = 5;
 		static const Sbecore::uint SCRJREFHK1NMODULE = 6;
 		static const Sbecore::uint BUTREGULARIZEACTIVE = 7;
 
 	public:
-		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const std::string& scrJrefDetail = "", const std::string& scrJrefAIp = "", const std::string& scrJrefAPlh = "", const std::string& scrJrefBcv1NCoreversion = "", const std::string& scrJrefHk1NModule = "", const bool ButRegularizeActive = true);
+		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const std::string& scrJrefDetail = "", const std::string& scrJrefAPlh = "", const std::string& scrJrefAIp = "", const std::string& scrJrefBcv1NCoreversion = "", const std::string& scrJrefHk1NModule = "", const bool ButRegularizeActive = true);
 
 	public:
 		Sbecore::uint ixWdbeVExpstate;
 		std::string scrJrefDetail;
-		std::string scrJrefAIp;
 		std::string scrJrefAPlh;
+		std::string scrJrefAIp;
 		std::string scrJrefBcv1NCoreversion;
 		std::string scrJrefHk1NModule;
 		bool ButRegularizeActive;
@@ -122,7 +122,7 @@ namespace PnlWdbeCvrRec {
 	/**
 	  * Tag (full: TagWdbeCvrRec)
 	  */
-	class Tag : public Sbecore::Xmlio::Block {
+	class Tag : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint CPT = 1;

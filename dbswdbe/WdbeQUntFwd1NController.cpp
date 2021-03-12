@@ -31,6 +31,21 @@ WdbeQUntFwd1NController::WdbeQUntFwd1NController(
 	this->stubRef = stubRef;
 };
 
+void WdbeQUntFwd1NController::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["ref"] = stubRef;
+	} else {
+		me["stubRef"] = stubRef;
+	};
+};
+
 void WdbeQUntFwd1NController::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -96,6 +111,16 @@ ListWdbeQUntFwd1NController& ListWdbeQUntFwd1NController::operator=(
 	};
 
 	return(*this);
+};
+
+void ListWdbeQUntFwd1NController::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListWdbeQUntFwd1NController";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListWdbeQUntFwd1NController::writeXML(

@@ -15,6 +15,24 @@ using namespace Xmlio;
  class QryWdbePrcFsmFsm1NFsmstate::StatApp
  ******************************************************************************/
 
+void QryWdbePrcFsmFsm1NFsmstate::StatApp::writeJSON(
+			Json::Value& sup
+			, string difftag
+			, const uint firstcol
+			, const uint jnumFirstdisp
+			, const uint ncol
+			, const uint ndisp
+		) {
+	if (difftag.length() == 0) difftag = "StatAppQryWdbePrcFsmFsm1NFsmstate";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["firstcol"] = firstcol;
+	me["jnumFirstdisp"] = jnumFirstdisp;
+	me["ncol"] = ncol;
+	me["ndisp"] = ndisp;
+};
+
 void QryWdbePrcFsmFsm1NFsmstate::StatApp::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -54,6 +72,19 @@ QryWdbePrcFsmFsm1NFsmstate::StatShr::StatShr(
 	this->nload = nload;
 
 	mask = {NTOT, JNUMFIRSTLOAD, NLOAD};
+};
+
+void QryWdbePrcFsmFsm1NFsmstate::StatShr::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "StatShrQryWdbePrcFsmFsm1NFsmstate";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["ntot"] = ntot;
+	me["jnumFirstload"] = jnumFirstload;
+	me["nload"] = nload;
 };
 
 void QryWdbePrcFsmFsm1NFsmstate::StatShr::writeXML(
@@ -117,6 +148,28 @@ QryWdbePrcFsmFsm1NFsmstate::StgIac::StgIac(
 	mask = {JNUM, JNUMFIRSTLOAD, NLOAD};
 };
 
+bool QryWdbePrcFsmFsm1NFsmstate::StgIac::readJSON(
+			Json::Value& sup
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	Json::Value& me = sup;
+	if (addbasetag) me = sup["StgIacQryWdbePrcFsmFsm1NFsmstate"];
+
+	basefound = (me != Json::nullValue);
+
+	if (basefound) {
+		if (me.isMember("jnum")) {jnum = me["jnum"].asUInt(); add(JNUM);};
+		if (me.isMember("jnumFirstload")) {jnumFirstload = me["jnumFirstload"].asUInt(); add(JNUMFIRSTLOAD);};
+		if (me.isMember("nload")) {nload = me["nload"].asUInt(); add(NLOAD);};
+	};
+
+	return basefound;
+};
+
 bool QryWdbePrcFsmFsm1NFsmstate::StgIac::readXML(
 			xmlXPathContext* docctx
 			, string basexpath
@@ -140,6 +193,19 @@ bool QryWdbePrcFsmFsm1NFsmstate::StgIac::readXML(
 	};
 
 	return basefound;
+};
+
+void QryWdbePrcFsmFsm1NFsmstate::StgIac::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "StgIacQryWdbePrcFsmFsm1NFsmstate";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["jnum"] = jnum;
+	me["jnumFirstload"] = jnumFirstload;
+	me["nload"] = nload;
 };
 
 void QryWdbePrcFsmFsm1NFsmstate::StgIac::writeXML(

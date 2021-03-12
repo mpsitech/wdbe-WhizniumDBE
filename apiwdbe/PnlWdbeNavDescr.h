@@ -62,7 +62,7 @@ namespace PnlWdbeNavDescr {
 	/**
 	  * ContIac (full: ContIacWdbeNavDescr)
 	  */
-	class ContIac : public Sbecore::Xmlio::Block {
+	class ContIac : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint NUMFLSTMOD = 1;
@@ -109,7 +109,7 @@ namespace PnlWdbeNavDescr {
 	/**
 	  * StatApp (full: StatAppWdbeNavDescr)
 	  */
-	class StatApp : public Sbecore::Xmlio::Block {
+	class StatApp : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint IXWDBEVEXPSTATE = 1;
@@ -185,7 +185,7 @@ namespace PnlWdbeNavDescr {
 	/**
 	  * StatShr (full: StatShrWdbeNavDescr)
 	  */
-	class StatShr : public Sbecore::Xmlio::Block {
+	class StatShr : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint LSTMODAVAIL = 1;
@@ -273,7 +273,7 @@ namespace PnlWdbeNavDescr {
 	/**
 	  * Tag (full: TagWdbeNavDescr)
 	  */
-	class Tag : public Sbecore::Xmlio::Block {
+	class Tag : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint CPT = 1;
@@ -391,20 +391,20 @@ namespace PnlWdbeNavDescr {
 
 	public:
 		ContIac contiac;
-		Sbecore::Xmlio::Feed feedFLstBnk;
-		Sbecore::Xmlio::Feed feedFLstCmd;
-		Sbecore::Xmlio::Feed feedFLstErr;
-		Sbecore::Xmlio::Feed feedFLstFst;
-		Sbecore::Xmlio::Feed feedFLstGen;
-		Sbecore::Xmlio::Feed feedFLstMod;
-		Sbecore::Xmlio::Feed feedFLstPin;
-		Sbecore::Xmlio::Feed feedFLstPph;
-		Sbecore::Xmlio::Feed feedFLstPrc;
-		Sbecore::Xmlio::Feed feedFLstPrt;
-		Sbecore::Xmlio::Feed feedFLstSig;
-		Sbecore::Xmlio::Feed feedFLstVar;
-		Sbecore::Xmlio::Feed feedFLstVec;
-		Sbecore::Xmlio::Feed feedFLstVit;
+		Sbecore::Feed feedFLstBnk;
+		Sbecore::Feed feedFLstCmd;
+		Sbecore::Feed feedFLstErr;
+		Sbecore::Feed feedFLstFst;
+		Sbecore::Feed feedFLstGen;
+		Sbecore::Feed feedFLstMod;
+		Sbecore::Feed feedFLstPin;
+		Sbecore::Feed feedFLstPph;
+		Sbecore::Feed feedFLstPrc;
+		Sbecore::Feed feedFLstPrt;
+		Sbecore::Feed feedFLstSig;
+		Sbecore::Feed feedFLstVar;
+		Sbecore::Feed feedFLstVec;
+		Sbecore::Feed feedFLstVit;
 		StatApp statapp;
 		StatShr statshr;
 		Tag tag;

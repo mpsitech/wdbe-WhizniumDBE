@@ -47,6 +47,31 @@ WdbeQModKHdltype::WdbeQModKHdltype(
 	this->Comment = Comment;
 };
 
+void WdbeQModKHdltype::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["fix"] = yesnoFixed;
+		me["srf"] = sref;
+		me["avl"] = Avail;
+		me["imp"] = Implied;
+		me["tit"] = Title;
+		me["cmt"] = Comment;
+	} else {
+		me["yesnoFixed"] = yesnoFixed;
+		me["sref"] = sref;
+		me["Avail"] = Avail;
+		me["Implied"] = Implied;
+		me["Title"] = Title;
+		me["Comment"] = Comment;
+	};
+};
+
 void WdbeQModKHdltype::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -122,6 +147,16 @@ ListWdbeQModKHdltype& ListWdbeQModKHdltype::operator=(
 	};
 
 	return(*this);
+};
+
+void ListWdbeQModKHdltype::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListWdbeQModKHdltype";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListWdbeQModKHdltype::writeXML(

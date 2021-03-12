@@ -71,6 +71,49 @@ WdbeQUntList::WdbeQUntList(
 	this->titSrefKToolch = titSrefKToolch;
 };
 
+void WdbeQUntList::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["srf"] = sref;
+		me["tit"] = Title;
+		me["fsr"] = Fullsref;
+		me["typ"] = srefIxVBasetype;
+		me["typ2"] = titIxVBasetype;
+		me["ret"] = srefRefIxVTbl;
+		me["ret2"] = titRefIxVTbl;
+		me["reu"] = stubRefUref;
+		me["sys"] = stubRefWdbeMSystem;
+		me["mdl"] = stubRefWdbeMModule;
+		me["pkg"] = srefKPackage;
+		me["pkg2"] = titSrefKPackage;
+		me["esy"] = yesnoEasy;
+		me["tch"] = srefKToolch;
+		me["tch2"] = titSrefKToolch;
+	} else {
+		me["sref"] = sref;
+		me["Title"] = Title;
+		me["Fullsref"] = Fullsref;
+		me["srefIxVBasetype"] = srefIxVBasetype;
+		me["titIxVBasetype"] = titIxVBasetype;
+		me["srefRefIxVTbl"] = srefRefIxVTbl;
+		me["titRefIxVTbl"] = titRefIxVTbl;
+		me["stubRefUref"] = stubRefUref;
+		me["stubRefWdbeMSystem"] = stubRefWdbeMSystem;
+		me["stubRefWdbeMModule"] = stubRefWdbeMModule;
+		me["srefKPackage"] = srefKPackage;
+		me["titSrefKPackage"] = titSrefKPackage;
+		me["yesnoEasy"] = yesnoEasy;
+		me["srefKToolch"] = srefKToolch;
+		me["titSrefKToolch"] = titSrefKToolch;
+	};
+};
+
 void WdbeQUntList::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -164,6 +207,16 @@ ListWdbeQUntList& ListWdbeQUntList::operator=(
 	};
 
 	return(*this);
+};
+
+void ListWdbeQUntList::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListWdbeQUntList";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListWdbeQUntList::writeXML(

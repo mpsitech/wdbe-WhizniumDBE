@@ -104,20 +104,20 @@ set<uint> PnlWdbeCvrRec::ContInf::diff(
 
 PnlWdbeCvrRec::StatApp::StatApp(
 			const bool initdoneDetail
-			, const bool initdoneAIp
 			, const bool initdoneAPlh
+			, const bool initdoneAIp
 			, const bool initdoneBcv1NCoreversion
 			, const bool initdoneHk1NModule
 		) :
 			Block()
 		{
 	this->initdoneDetail = initdoneDetail;
-	this->initdoneAIp = initdoneAIp;
 	this->initdoneAPlh = initdoneAPlh;
+	this->initdoneAIp = initdoneAIp;
 	this->initdoneBcv1NCoreversion = initdoneBcv1NCoreversion;
 	this->initdoneHk1NModule = initdoneHk1NModule;
 
-	mask = {INITDONEDETAIL, INITDONEAIP, INITDONEAPLH, INITDONEBCV1NCOREVERSION, INITDONEHK1NMODULE};
+	mask = {INITDONEDETAIL, INITDONEAPLH, INITDONEAIP, INITDONEBCV1NCOREVERSION, INITDONEHK1NMODULE};
 };
 
 bool PnlWdbeCvrRec::StatApp::readXML(
@@ -138,8 +138,8 @@ bool PnlWdbeCvrRec::StatApp::readXML(
 
 	if (basefound) {
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneDetail", initdoneDetail)) add(INITDONEDETAIL);
-		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneAIp", initdoneAIp)) add(INITDONEAIP);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneAPlh", initdoneAPlh)) add(INITDONEAPLH);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneAIp", initdoneAIp)) add(INITDONEAIP);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneBcv1NCoreversion", initdoneBcv1NCoreversion)) add(INITDONEBCV1NCOREVERSION);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneHk1NModule", initdoneHk1NModule)) add(INITDONEHK1NMODULE);
 	};
@@ -153,8 +153,8 @@ set<uint> PnlWdbeCvrRec::StatApp::comm(
 	set<uint> items;
 
 	if (initdoneDetail == comp->initdoneDetail) insert(items, INITDONEDETAIL);
-	if (initdoneAIp == comp->initdoneAIp) insert(items, INITDONEAIP);
 	if (initdoneAPlh == comp->initdoneAPlh) insert(items, INITDONEAPLH);
+	if (initdoneAIp == comp->initdoneAIp) insert(items, INITDONEAIP);
 	if (initdoneBcv1NCoreversion == comp->initdoneBcv1NCoreversion) insert(items, INITDONEBCV1NCOREVERSION);
 	if (initdoneHk1NModule == comp->initdoneHk1NModule) insert(items, INITDONEHK1NMODULE);
 
@@ -169,7 +169,7 @@ set<uint> PnlWdbeCvrRec::StatApp::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {INITDONEDETAIL, INITDONEAIP, INITDONEAPLH, INITDONEBCV1NCOREVERSION, INITDONEHK1NMODULE};
+	diffitems = {INITDONEDETAIL, INITDONEAPLH, INITDONEAIP, INITDONEBCV1NCOREVERSION, INITDONEHK1NMODULE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -182,8 +182,8 @@ set<uint> PnlWdbeCvrRec::StatApp::diff(
 PnlWdbeCvrRec::StatShr::StatShr(
 			const uint ixWdbeVExpstate
 			, const string& scrJrefDetail
-			, const string& scrJrefAIp
 			, const string& scrJrefAPlh
+			, const string& scrJrefAIp
 			, const string& scrJrefBcv1NCoreversion
 			, const string& scrJrefHk1NModule
 			, const bool ButRegularizeActive
@@ -192,13 +192,13 @@ PnlWdbeCvrRec::StatShr::StatShr(
 		{
 	this->ixWdbeVExpstate = ixWdbeVExpstate;
 	this->scrJrefDetail = scrJrefDetail;
-	this->scrJrefAIp = scrJrefAIp;
 	this->scrJrefAPlh = scrJrefAPlh;
+	this->scrJrefAIp = scrJrefAIp;
 	this->scrJrefBcv1NCoreversion = scrJrefBcv1NCoreversion;
 	this->scrJrefHk1NModule = scrJrefHk1NModule;
 	this->ButRegularizeActive = ButRegularizeActive;
 
-	mask = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFAIP, SCRJREFAPLH, SCRJREFBCV1NCOREVERSION, SCRJREFHK1NMODULE, BUTREGULARIZEACTIVE};
+	mask = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFAPLH, SCRJREFAIP, SCRJREFBCV1NCOREVERSION, SCRJREFHK1NMODULE, BUTREGULARIZEACTIVE};
 };
 
 bool PnlWdbeCvrRec::StatShr::readXML(
@@ -225,8 +225,8 @@ bool PnlWdbeCvrRec::StatShr::readXML(
 			add(IXWDBEVEXPSTATE);
 		};
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefDetail", scrJrefDetail)) add(SCRJREFDETAIL);
-		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefAIp", scrJrefAIp)) add(SCRJREFAIP);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefAPlh", scrJrefAPlh)) add(SCRJREFAPLH);
+		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefAIp", scrJrefAIp)) add(SCRJREFAIP);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefBcv1NCoreversion", scrJrefBcv1NCoreversion)) add(SCRJREFBCV1NCOREVERSION);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefHk1NModule", scrJrefHk1NModule)) add(SCRJREFHK1NMODULE);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButRegularizeActive", ButRegularizeActive)) add(BUTREGULARIZEACTIVE);
@@ -242,8 +242,8 @@ set<uint> PnlWdbeCvrRec::StatShr::comm(
 
 	if (ixWdbeVExpstate == comp->ixWdbeVExpstate) insert(items, IXWDBEVEXPSTATE);
 	if (scrJrefDetail == comp->scrJrefDetail) insert(items, SCRJREFDETAIL);
-	if (scrJrefAIp == comp->scrJrefAIp) insert(items, SCRJREFAIP);
 	if (scrJrefAPlh == comp->scrJrefAPlh) insert(items, SCRJREFAPLH);
+	if (scrJrefAIp == comp->scrJrefAIp) insert(items, SCRJREFAIP);
 	if (scrJrefBcv1NCoreversion == comp->scrJrefBcv1NCoreversion) insert(items, SCRJREFBCV1NCOREVERSION);
 	if (scrJrefHk1NModule == comp->scrJrefHk1NModule) insert(items, SCRJREFHK1NMODULE);
 	if (ButRegularizeActive == comp->ButRegularizeActive) insert(items, BUTREGULARIZEACTIVE);
@@ -259,7 +259,7 @@ set<uint> PnlWdbeCvrRec::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFAIP, SCRJREFAPLH, SCRJREFBCV1NCOREVERSION, SCRJREFHK1NMODULE, BUTREGULARIZEACTIVE};
+	diffitems = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFAPLH, SCRJREFAIP, SCRJREFBCV1NCOREVERSION, SCRJREFHK1NMODULE, BUTREGULARIZEACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);

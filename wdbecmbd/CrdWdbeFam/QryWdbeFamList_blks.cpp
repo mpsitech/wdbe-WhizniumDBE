@@ -20,8 +20,8 @@ uint QryWdbeFamList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "vnd") return VND;
 	if (s == "tit") return TIT;
+	if (s == "vnd") return VND;
 
 	return(0);
 };
@@ -29,8 +29,8 @@ uint QryWdbeFamList::VecVOrd::getIx(
 string QryWdbeFamList::VecVOrd::getSref(
 			const uint ix
 		) {
-	if (ix == VND) return("vnd");
 	if (ix == TIT) return("tit");
+	if (ix == VND) return("vnd");
 
 	return("");
 };
@@ -46,6 +46,24 @@ void QryWdbeFamList::VecVOrd::fillFeed(
 /******************************************************************************
  class QryWdbeFamList::StatApp
  ******************************************************************************/
+
+void QryWdbeFamList::StatApp::writeJSON(
+			Json::Value& sup
+			, string difftag
+			, const uint firstcol
+			, const uint jnumFirstdisp
+			, const uint ncol
+			, const uint ndisp
+		) {
+	if (difftag.length() == 0) difftag = "StatAppQryWdbeFamList";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["firstcol"] = firstcol;
+	me["jnumFirstdisp"] = jnumFirstdisp;
+	me["ncol"] = ncol;
+	me["ndisp"] = ndisp;
+};
 
 void QryWdbeFamList::StatApp::writeXML(
 			xmlTextWriter* wr
@@ -86,6 +104,19 @@ QryWdbeFamList::StatShr::StatShr(
 	this->nload = nload;
 
 	mask = {NTOT, JNUMFIRSTLOAD, NLOAD};
+};
+
+void QryWdbeFamList::StatShr::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "StatShrQryWdbeFamList";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["ntot"] = ntot;
+	me["jnumFirstload"] = jnumFirstload;
+	me["nload"] = nload;
 };
 
 void QryWdbeFamList::StatShr::writeXML(
@@ -149,6 +180,28 @@ QryWdbeFamList::StgIac::StgIac(
 	mask = {JNUM, JNUMFIRSTLOAD, NLOAD};
 };
 
+bool QryWdbeFamList::StgIac::readJSON(
+			Json::Value& sup
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	Json::Value& me = sup;
+	if (addbasetag) me = sup["StgIacQryWdbeFamList"];
+
+	basefound = (me != Json::nullValue);
+
+	if (basefound) {
+		if (me.isMember("jnum")) {jnum = me["jnum"].asUInt(); add(JNUM);};
+		if (me.isMember("jnumFirstload")) {jnumFirstload = me["jnumFirstload"].asUInt(); add(JNUMFIRSTLOAD);};
+		if (me.isMember("nload")) {nload = me["nload"].asUInt(); add(NLOAD);};
+	};
+
+	return basefound;
+};
+
 bool QryWdbeFamList::StgIac::readXML(
 			xmlXPathContext* docctx
 			, string basexpath
@@ -172,6 +225,19 @@ bool QryWdbeFamList::StgIac::readXML(
 	};
 
 	return basefound;
+};
+
+void QryWdbeFamList::StgIac::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "StgIacQryWdbeFamList";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["jnum"] = jnum;
+	me["jnumFirstload"] = jnumFirstload;
+	me["nload"] = nload;
 };
 
 void QryWdbeFamList::StgIac::writeXML(

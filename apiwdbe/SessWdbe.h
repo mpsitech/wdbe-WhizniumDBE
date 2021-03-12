@@ -23,7 +23,7 @@ namespace SessWdbe {
 	/**
 	  * StatShr (full: StatShrSessWdbe)
 	  */
-	class StatShr : public Sbecore::Xmlio::Block {
+	class StatShr : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint SCRJREFCRDNAV = 1;
@@ -54,7 +54,7 @@ namespace SessWdbe {
 		DpchEngData();
 
 	public:
-		Sbecore::Xmlio::Feed feedFEnsSec;
+		Sbecore::Feed feedFEnsSec;
 		StatShr statshr;
 
 	public:

@@ -43,6 +43,7 @@ public:
 	std::string stubHkUref;
 
 public:
+	void writeJSON(Json::Value& sup, bool jnumattr = false, bool shorttags = false);
 	void writeXML(xmlTextWriter* wr, std::string difftag = "", bool jnumattr = false, bool shorttags = false);
 };
 
@@ -66,6 +67,7 @@ public:
 	std::vector<WdbeQVecList*> nodes;
 
 public:
+	void writeJSON(Json::Value& sup, std::string difftag = "");
 	void writeXML(xmlTextWriter* wr, std::string difftag = "");
 };
 

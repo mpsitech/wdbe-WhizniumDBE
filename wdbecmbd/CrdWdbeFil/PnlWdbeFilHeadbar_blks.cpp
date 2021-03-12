@@ -15,6 +15,23 @@ using namespace Xmlio;
  class PnlWdbeFilHeadbar::StgInf
  ******************************************************************************/
 
+void PnlWdbeFilHeadbar::StgInf::writeJSON(
+			const uint ixWdbeVLocale
+			, Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "StgInfWdbeFilHeadbar";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	if (ixWdbeVLocale == VecWdbeVLocale::ENUS) {
+		me["MenAppCptwidth"] = "120";
+		me["MenAppWidth"] = "190";
+		me["MenCrdCptwidth"] = "46";
+		me["MenCrdWidth"] = "323";
+	};
+};
+
 void PnlWdbeFilHeadbar::StgInf::writeXML(
 			const uint ixWdbeVLocale
 			, xmlTextWriter* wr
@@ -40,6 +57,21 @@ void PnlWdbeFilHeadbar::StgInf::writeXML(
 /******************************************************************************
  class PnlWdbeFilHeadbar::Tag
  ******************************************************************************/
+
+void PnlWdbeFilHeadbar::Tag::writeJSON(
+			const uint ixWdbeVLocale
+			, Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "TagWdbeFilHeadbar";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	if (ixWdbeVLocale == VecWdbeVLocale::ENUS) {
+		me["MenApp"] = "WhizniumDBE";
+		me["MenCrd"] = "File";
+	};
+};
 
 void PnlWdbeFilHeadbar::Tag::writeXML(
 			const uint ixWdbeVLocale
@@ -97,6 +129,17 @@ void PnlWdbeFilHeadbar::DpchEngData::merge(
 	if (src->has(JREF)) {jref = src->jref; add(JREF);};
 	if (src->has(STGINF)) add(STGINF);
 	if (src->has(TAG)) add(TAG);
+};
+
+void PnlWdbeFilHeadbar::DpchEngData::writeJSON(
+			const uint ixWdbeVLocale
+			, Json::Value& sup
+		) {
+	Json::Value& me = sup["DpchEngWdbeFilHeadbarData"] = Json::Value(Json::objectValue);
+
+	if (has(JREF)) me["scrJref"] = Scr::scramble(jref);
+	if (has(STGINF)) StgInf::writeJSON(ixWdbeVLocale, me);
+	if (has(TAG)) Tag::writeJSON(ixWdbeVLocale, me);
 };
 
 void PnlWdbeFilHeadbar::DpchEngData::writeXML(

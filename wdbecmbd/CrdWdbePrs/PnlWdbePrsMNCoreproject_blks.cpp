@@ -53,6 +53,17 @@ PnlWdbePrsMNCoreproject::ContInf::ContInf(
 	mask = {NUMFCSIQST};
 };
 
+void PnlWdbePrsMNCoreproject::ContInf::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "ContInfWdbePrsMNCoreproject";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["numFCsiQst"] = numFCsiQst;
+};
+
 void PnlWdbePrsMNCoreproject::ContInf::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -97,6 +108,18 @@ set<uint> PnlWdbePrsMNCoreproject::ContInf::diff(
  class PnlWdbePrsMNCoreproject::StatApp
  ******************************************************************************/
 
+void PnlWdbePrsMNCoreproject::StatApp::writeJSON(
+			Json::Value& sup
+			, string difftag
+			, const uint ixWdbeVExpstate
+		) {
+	if (difftag.length() == 0) difftag = "StatAppWdbePrsMNCoreproject";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["srefIxWdbeVExpstate"] = VecWdbeVExpstate::getSref(ixWdbeVExpstate);
+};
+
 void PnlWdbePrsMNCoreproject::StatApp::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -134,6 +157,21 @@ PnlWdbePrsMNCoreproject::StatShr::StatShr(
 	this->ButSubActive = ButSubActive;
 
 	mask = {BUTVIEWAVAIL, BUTVIEWACTIVE, BUTADDAVAIL, BUTSUBAVAIL, BUTSUBACTIVE};
+};
+
+void PnlWdbePrsMNCoreproject::StatShr::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "StatShrWdbePrsMNCoreproject";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["ButViewAvail"] = ButViewAvail;
+	me["ButViewActive"] = ButViewActive;
+	me["ButAddAvail"] = ButAddAvail;
+	me["ButSubAvail"] = ButSubAvail;
+	me["ButSubActive"] = ButSubActive;
 };
 
 void PnlWdbePrsMNCoreproject::StatShr::writeXML(
@@ -203,6 +241,29 @@ PnlWdbePrsMNCoreproject::StgIac::StgIac(
 	mask = {TCOMREFWIDTH, TCOSTAWIDTH, TCOSTOWIDTH, TCOFCTWIDTH};
 };
 
+bool PnlWdbePrsMNCoreproject::StgIac::readJSON(
+			Json::Value& sup
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	Json::Value& me = sup;
+	if (addbasetag) me = sup["StgIacWdbePrsMNCoreproject"];
+
+	basefound = (me != Json::nullValue);
+
+	if (basefound) {
+		if (me.isMember("TcoMrefWidth")) {TcoMrefWidth = me["TcoMrefWidth"].asUInt(); add(TCOMREFWIDTH);};
+		if (me.isMember("TcoStaWidth")) {TcoStaWidth = me["TcoStaWidth"].asUInt(); add(TCOSTAWIDTH);};
+		if (me.isMember("TcoStoWidth")) {TcoStoWidth = me["TcoStoWidth"].asUInt(); add(TCOSTOWIDTH);};
+		if (me.isMember("TcoFctWidth")) {TcoFctWidth = me["TcoFctWidth"].asUInt(); add(TCOFCTWIDTH);};
+	};
+
+	return basefound;
+};
+
 bool PnlWdbePrsMNCoreproject::StgIac::readXML(
 			xmlXPathContext* docctx
 			, string basexpath
@@ -227,6 +288,20 @@ bool PnlWdbePrsMNCoreproject::StgIac::readXML(
 	};
 
 	return basefound;
+};
+
+void PnlWdbePrsMNCoreproject::StgIac::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "StgIacWdbePrsMNCoreproject";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["TcoMrefWidth"] = TcoMrefWidth;
+	me["TcoStaWidth"] = TcoStaWidth;
+	me["TcoStoWidth"] = TcoStoWidth;
+	me["TcoFctWidth"] = TcoFctWidth;
 };
 
 void PnlWdbePrsMNCoreproject::StgIac::writeXML(
@@ -279,6 +354,29 @@ set<uint> PnlWdbePrsMNCoreproject::StgIac::diff(
  class PnlWdbePrsMNCoreproject::Tag
  ******************************************************************************/
 
+void PnlWdbePrsMNCoreproject::Tag::writeJSON(
+			const uint ixWdbeVLocale
+			, Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "TagWdbePrsMNCoreproject";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	if (ixWdbeVLocale == VecWdbeVLocale::ENUS) {
+		me["Cpt"] = "Contributor to core projects";
+		me["TcoMref"] = "Core project";
+		me["TcoSta"] = "Starting";
+		me["TcoSto"] = "Ending";
+		me["TcoFct"] = "Function";
+	};
+	me["TxtRecord1"] = StrMod::cap(VecWdbeVTag::getTitle(VecWdbeVTag::REC, ixWdbeVLocale));
+	me["TxtRecord2"] = StrMod::cap(VecWdbeVTag::getTitle(VecWdbeVTag::EMPLONG, ixWdbeVLocale));
+	me["Trs"] = StrMod::cap(VecWdbeVTag::getTitle(VecWdbeVTag::GOTO, ixWdbeVLocale)) + " ...";
+	me["TxtShowing1"] = VecWdbeVTag::getTitle(VecWdbeVTag::SHOWSHORT, ixWdbeVLocale);
+	me["TxtShowing2"] = VecWdbeVTag::getTitle(VecWdbeVTag::EMPSHORT, ixWdbeVLocale);
+};
+
 void PnlWdbePrsMNCoreproject::Tag::writeXML(
 			const uint ixWdbeVLocale
 			, xmlTextWriter* wr
@@ -327,6 +425,29 @@ string PnlWdbePrsMNCoreproject::DpchAppData::getSrefsMask() {
 	StrMod::vectorToString(ss, srefs);
 
 	return(srefs);
+};
+
+void PnlWdbePrsMNCoreproject::DpchAppData::readJSON(
+			Json::Value& sup
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	Json::Value& me = sup;
+	if (addbasetag) me = sup["DpchAppWdbePrsMNCoreprojectData"];
+
+	basefound = (me != Json::nullValue);
+
+	if (basefound) {
+		if (me.isMember("scrJref")) {jref = Scr::descramble(me["scrJref"].asString()); add(JREF);};
+		if (stgiac.readJSON(me, true)) add(STGIAC);
+		if (stgiacqry.readJSON(me, true)) add(STGIACQRY);
+	} else {
+		stgiac = StgIac();
+		stgiacqry = QryWdbePrsMNCoreproject::StgIac();
+	};
 };
 
 void PnlWdbePrsMNCoreproject::DpchAppData::readXML(
@@ -378,6 +499,26 @@ string PnlWdbePrsMNCoreproject::DpchAppDo::getSrefsMask() {
 	StrMod::vectorToString(ss, srefs);
 
 	return(srefs);
+};
+
+void PnlWdbePrsMNCoreproject::DpchAppDo::readJSON(
+			Json::Value& sup
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	Json::Value& me = sup;
+	if (addbasetag) me = sup["DpchAppWdbePrsMNCoreprojectDo"];
+
+	basefound = (me != Json::nullValue);
+
+	if (basefound) {
+		if (me.isMember("scrJref")) {jref = Scr::descramble(me["scrJref"].asString()); add(JREF);};
+		if (me.isMember("srefIxVDo")) {ixVDo = VecVDo::getIx(me["srefIxVDo"].asString()); add(IXVDO);};
+	} else {
+	};
 };
 
 void PnlWdbePrsMNCoreproject::DpchAppDo::readXML(
@@ -476,6 +617,25 @@ void PnlWdbePrsMNCoreproject::DpchEngData::merge(
 	if (src->has(STATAPPQRY)) add(STATAPPQRY);
 	if (src->has(STATSHRQRY)) {statshrqry = src->statshrqry; add(STATSHRQRY);};
 	if (src->has(STGIACQRY)) {stgiacqry = src->stgiacqry; add(STGIACQRY);};
+};
+
+void PnlWdbePrsMNCoreproject::DpchEngData::writeJSON(
+			const uint ixWdbeVLocale
+			, Json::Value& sup
+		) {
+	Json::Value& me = sup["DpchEngWdbePrsMNCoreprojectData"] = Json::Value(Json::objectValue);
+
+	if (has(JREF)) me["scrJref"] = Scr::scramble(jref);
+	if (has(CONTINF)) continf.writeJSON(me);
+	if (has(FEEDFCSIQST)) feedFCsiQst.writeJSON(me);
+	if (has(STATAPP)) StatApp::writeJSON(me);
+	if (has(STATSHR)) statshr.writeJSON(me);
+	if (has(STGIAC)) stgiac.writeJSON(me);
+	if (has(TAG)) Tag::writeJSON(ixWdbeVLocale, me);
+	if (has(RST)) rst.writeJSON(me);
+	if (has(STATAPPQRY)) QryWdbePrsMNCoreproject::StatApp::writeJSON(me);
+	if (has(STATSHRQRY)) statshrqry.writeJSON(me);
+	if (has(STGIACQRY)) stgiacqry.writeJSON(me);
 };
 
 void PnlWdbePrsMNCoreproject::DpchEngData::writeXML(

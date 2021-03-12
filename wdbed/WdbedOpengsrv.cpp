@@ -31,7 +31,7 @@ void WdbedOpengsrv::stop(
 	MHD_stop_daemon(d);
 };
 
-int WdbedOpengsrv::MhdAccept(
+MHD_Result WdbedOpengsrv::MhdAccept(
 			void* cls
 			, const sockaddr* addr
 			, socklen_t addrlen
@@ -39,7 +39,7 @@ int WdbedOpengsrv::MhdAccept(
 	return MHD_YES;
 };
 
-int WdbedOpengsrv::MhdCallback(
+MHD_Result WdbedOpengsrv::MhdCallback(
 			void* cls
 			, MHD_Connection* connection
 			, const char* url
@@ -52,7 +52,7 @@ int WdbedOpengsrv::MhdCallback(
 	XchgWdbed* xchg = (XchgWdbed*) cls;
 
 	MHD_Response* response;
-	int retval = MHD_YES;
+	MHD_Result retval = MHD_YES;
 
 	ReqopengconWdbe* req = NULL;
 
@@ -164,7 +164,7 @@ int WdbedOpengsrv::MhdCallback(
 	return retval;
 };
 
-int WdbedOpengsrv::MhdPostrecv(
+MHD_Result WdbedOpengsrv::MhdPostrecv(
 			void* con_cls
 			, MHD_ValueKind kind
 			, const char* key

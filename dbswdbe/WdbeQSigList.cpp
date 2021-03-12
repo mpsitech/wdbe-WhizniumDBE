@@ -67,6 +67,45 @@ WdbeQSigList::WdbeQSigList(
 	this->Minmax = Minmax;
 };
 
+void WdbeQSigList::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["srf"] = sref;
+		me["typ"] = srefIxVBasetype;
+		me["typ2"] = titIxVBasetype;
+		me["mdl"] = stubMdlRefWdbeMModule;
+		me["mgt"] = srefMgeIxVTbl;
+		me["mgt2"] = titMgeIxVTbl;
+		me["mgu"] = stubMgeUref;
+		me["vec"] = stubRefWdbeMVector;
+		me["con"] = yesnoConst;
+		me["hty"] = srefWdbeKHdltype;
+		me["hty2"] = titSrefWdbeKHdltype;
+		me["wid"] = Width;
+		me["mmx"] = Minmax;
+	} else {
+		me["sref"] = sref;
+		me["srefIxVBasetype"] = srefIxVBasetype;
+		me["titIxVBasetype"] = titIxVBasetype;
+		me["stubMdlRefWdbeMModule"] = stubMdlRefWdbeMModule;
+		me["srefMgeIxVTbl"] = srefMgeIxVTbl;
+		me["titMgeIxVTbl"] = titMgeIxVTbl;
+		me["stubMgeUref"] = stubMgeUref;
+		me["stubRefWdbeMVector"] = stubRefWdbeMVector;
+		me["yesnoConst"] = yesnoConst;
+		me["srefWdbeKHdltype"] = srefWdbeKHdltype;
+		me["titSrefWdbeKHdltype"] = titSrefWdbeKHdltype;
+		me["Width"] = Width;
+		me["Minmax"] = Minmax;
+	};
+};
+
 void WdbeQSigList::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -156,6 +195,16 @@ ListWdbeQSigList& ListWdbeQSigList::operator=(
 	};
 
 	return(*this);
+};
+
+void ListWdbeQSigList::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListWdbeQSigList";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListWdbeQSigList::writeXML(

@@ -31,6 +31,21 @@ WdbeQSil1NTarget::WdbeQSil1NTarget(
 	this->stubRef = stubRef;
 };
 
+void WdbeQSil1NTarget::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["ref"] = stubRef;
+	} else {
+		me["stubRef"] = stubRef;
+	};
+};
+
 void WdbeQSil1NTarget::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -96,6 +111,16 @@ ListWdbeQSil1NTarget& ListWdbeQSil1NTarget::operator=(
 	};
 
 	return(*this);
+};
+
+void ListWdbeQSil1NTarget::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListWdbeQSil1NTarget";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListWdbeQSil1NTarget::writeXML(

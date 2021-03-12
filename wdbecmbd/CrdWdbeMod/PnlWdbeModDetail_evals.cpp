@@ -84,13 +84,20 @@ bool PnlWdbeModDetail::evalTxtHkuActive(
 bool PnlWdbeModDetail::evalButHkuViewAvail(
 			DbsWdbe* dbswdbe
 		) {
-	// mdl.hkuEq(0)|((pre.ixCrdaccUnt()&mdl.hktEq(unt)&pre.refVer())|(pre.ixCrdaccSil()&mdl.hktEq(unt)&mdl.hku.inSbs(sil))|(pre.ixCrdaccCvr()&mdl.hktEq(cvr)))
+	// mdl.hkuEq(0)|((pre.ixCrdaccCvr()&mdl.hktEq(cvr))|(pre.ixCrdaccUnt()&mdl.hktEq(unt)&pre.refVer())|(pre.ixCrdaccSil()&mdl.hktEq(unt)&mdl.hku.inSbs(sil)))
 
 	vector<bool> args;
 	bool a, b;
 
 	a = false; a = (recMdl.hkUref == 0);
 	args.push_back(a);
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCCVR, jref) != 0);
+	args.push_back(a);
+	a = false; a = (recMdl.hkIxVTbl == VecWdbeVMModuleHkTbl::CVR);
+	args.push_back(a);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a && b);
 	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCUNT, jref) != 0);
 	args.push_back(a);
 	a = false; a = (recMdl.hkIxVTbl == VecWdbeVMModuleHkTbl::UNT);
@@ -112,13 +119,6 @@ bool PnlWdbeModDetail::evalButHkuViewAvail(
 	b = args.back(); args.pop_back();
 	a = args.back(); args.pop_back();
 	args.push_back(a && b);
-	b = args.back(); args.pop_back();
-	a = args.back(); args.pop_back();
-	args.push_back(a && b);
-	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCCVR, jref) != 0);
-	args.push_back(a);
-	a = false; a = (recMdl.hkIxVTbl == VecWdbeVMModuleHkTbl::CVR);
-	args.push_back(a);
 	b = args.back(); args.pop_back();
 	a = args.back(); args.pop_back();
 	args.push_back(a && b);

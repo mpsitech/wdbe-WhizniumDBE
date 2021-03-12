@@ -22,9 +22,9 @@ uint QryWdbeTrgList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "srf") return SRF;
-	if (s == "sys") return SYS;
 	if (s == "unt") return UNT;
+	if (s == "sys") return SYS;
+	if (s == "srf") return SRF;
 
 	return(0);
 };
@@ -32,9 +32,9 @@ uint QryWdbeTrgList::VecVOrd::getIx(
 string QryWdbeTrgList::VecVOrd::getSref(
 			const uint ix
 		) {
-	if (ix == SRF) return("srf");
-	if (ix == SYS) return("sys");
 	if (ix == UNT) return("unt");
+	if (ix == SYS) return("sys");
+	if (ix == SRF) return("srf");
 
 	return("");
 };

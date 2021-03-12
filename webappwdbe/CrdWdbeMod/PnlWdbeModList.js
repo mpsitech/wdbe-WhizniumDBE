@@ -128,17 +128,17 @@ function refreshB(chgcol) {
 			ix++;
 
 			if (i == 1) {
-				doc.cols.push("TcoSrf"); doc.widths.push(TcoSrfWidth); doc.fs.push("srf"); doc.tos.push(1); wtot += TcoSrfWidth;
+				doc.cols.push("TcoSrf"); doc.widths.push(TcoSrfWidth); doc.fs.push("srf"); doc.tos.push(6); wtot += TcoSrfWidth;
 			} else if (i == 2) {
 				doc.cols.push("TcoTyp"); doc.widths.push(TcoTypWidth); doc.fs.push("typ2"); doc.tos.push(0); wtot += TcoTypWidth;
 			} else if (i == 3) {
 				doc.cols.push("TcoHkt"); doc.widths.push(TcoHktWidth); doc.fs.push("hkt2"); doc.tos.push(0); wtot += TcoHktWidth;
 			} else if (i == 4) {
-				doc.cols.push("TcoHku"); doc.widths.push(TcoHkuWidth); doc.fs.push("hku"); doc.tos.push(4); wtot += TcoHkuWidth;
+				doc.cols.push("TcoHku"); doc.widths.push(TcoHkuWidth); doc.fs.push("hku"); doc.tos.push(3); wtot += TcoHkuWidth;
 			} else if (i == 5) {
-				doc.cols.push("TcoSup"); doc.widths.push(TcoSupWidth); doc.fs.push("sup"); doc.tos.push(5); wtot += TcoSupWidth;
+				doc.cols.push("TcoSup"); doc.widths.push(TcoSupWidth); doc.fs.push("sup"); doc.tos.push(2); wtot += TcoSupWidth;
 			} else if (i == 6) {
-				doc.cols.push("TcoTpl"); doc.widths.push(TcoTplWidth); doc.fs.push("tpl"); doc.tos.push(6); wtot += TcoTplWidth;
+				doc.cols.push("TcoTpl"); doc.widths.push(TcoTplWidth); doc.fs.push("tpl"); doc.tos.push(1); wtot += TcoTplWidth;
 			} else {
 				ix--;
 			};

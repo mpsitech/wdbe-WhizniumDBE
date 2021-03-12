@@ -19,7 +19,7 @@
 /**
 	* ContInfWdbeAlert
 	*/
-class ContInfWdbeAlert : public Sbecore::Xmlio::Block {
+class ContInfWdbeAlert : public Sbecore::Block {
 
 public:
 	static const Sbecore::uint TXTCPT = 1;
@@ -63,7 +63,7 @@ public:
 /**
 	* DpchWdbe
 	*/
-class DpchWdbe : public Sbecore::Xmlio::Block {
+class DpchWdbe : public Sbecore::Block {
 
 public:
 	DpchWdbe(const Sbecore::uint ixWdbeVDpch = 0);
@@ -182,7 +182,7 @@ public:
 
 public:
 	ContInfWdbeAlert continf;
-	Sbecore::Xmlio::Feed feedFMcb;
+	Sbecore::Feed feedFMcb;
 
 public:
 	static bool all(const std::set<Sbecore::uint>& items);

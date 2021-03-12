@@ -42,7 +42,7 @@ namespace PnlWdbeMchRec {
 	/**
 	  * ContInf (full: ContInfWdbeMchRec)
 	  */
-	class ContInf : public Sbecore::Xmlio::Block {
+	class ContInf : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint TXTREF = 1;
@@ -62,22 +62,22 @@ namespace PnlWdbeMchRec {
 	/**
 	  * StatApp (full: StatAppWdbeMchRec)
 	  */
-	class StatApp : public Sbecore::Xmlio::Block {
+	class StatApp : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint INITDONEDETAIL = 1;
-		static const Sbecore::uint INITDONEAPAR = 2;
-		static const Sbecore::uint INITDONEAMAKEFILE = 3;
+		static const Sbecore::uint INITDONEAMAKEFILE = 2;
+		static const Sbecore::uint INITDONEAPAR = 3;
 		static const Sbecore::uint INITDONE1NRELEASE = 4;
 		static const Sbecore::uint INITDONESUP1NMACHINE = 5;
 
 	public:
-		StatApp(const bool initdoneDetail = false, const bool initdoneAPar = false, const bool initdoneAMakefile = false, const bool initdone1NRelease = false, const bool initdoneSup1NMachine = false);
+		StatApp(const bool initdoneDetail = false, const bool initdoneAMakefile = false, const bool initdoneAPar = false, const bool initdone1NRelease = false, const bool initdoneSup1NMachine = false);
 
 	public:
 		bool initdoneDetail;
-		bool initdoneAPar;
 		bool initdoneAMakefile;
+		bool initdoneAPar;
 		bool initdone1NRelease;
 		bool initdoneSup1NMachine;
 
@@ -90,25 +90,25 @@ namespace PnlWdbeMchRec {
 	/**
 	  * StatShr (full: StatShrWdbeMchRec)
 	  */
-	class StatShr : public Sbecore::Xmlio::Block {
+	class StatShr : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint IXWDBEVEXPSTATE = 1;
 		static const Sbecore::uint SCRJREFDETAIL = 2;
-		static const Sbecore::uint SCRJREFAPAR = 3;
-		static const Sbecore::uint SCRJREFAMAKEFILE = 4;
+		static const Sbecore::uint SCRJREFAMAKEFILE = 3;
+		static const Sbecore::uint SCRJREFAPAR = 4;
 		static const Sbecore::uint SCRJREF1NRELEASE = 5;
 		static const Sbecore::uint SCRJREFSUP1NMACHINE = 6;
 		static const Sbecore::uint BUTREGULARIZEACTIVE = 7;
 
 	public:
-		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const std::string& scrJrefDetail = "", const std::string& scrJrefAPar = "", const std::string& scrJrefAMakefile = "", const std::string& scrJref1NRelease = "", const std::string& scrJrefSup1NMachine = "", const bool ButRegularizeActive = true);
+		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const std::string& scrJrefDetail = "", const std::string& scrJrefAMakefile = "", const std::string& scrJrefAPar = "", const std::string& scrJref1NRelease = "", const std::string& scrJrefSup1NMachine = "", const bool ButRegularizeActive = true);
 
 	public:
 		Sbecore::uint ixWdbeVExpstate;
 		std::string scrJrefDetail;
-		std::string scrJrefAPar;
 		std::string scrJrefAMakefile;
+		std::string scrJrefAPar;
 		std::string scrJref1NRelease;
 		std::string scrJrefSup1NMachine;
 		bool ButRegularizeActive;
@@ -122,7 +122,7 @@ namespace PnlWdbeMchRec {
 	/**
 	  * Tag (full: TagWdbeMchRec)
 	  */
-	class Tag : public Sbecore::Xmlio::Block {
+	class Tag : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint CPT = 1;

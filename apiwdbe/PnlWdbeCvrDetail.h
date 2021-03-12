@@ -46,7 +46,7 @@ namespace PnlWdbeCvrDetail {
 	/**
 	  * ContIac (full: ContIacWdbeCvrDetail)
 	  */
-	class ContIac : public Sbecore::Xmlio::Block {
+	class ContIac : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint TXFMAJ = 1;
@@ -77,7 +77,7 @@ namespace PnlWdbeCvrDetail {
 	/**
 	  * ContInf (full: ContInfWdbeCvrDetail)
 	  */
-	class ContInf : public Sbecore::Xmlio::Block {
+	class ContInf : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint TXTCPR = 1;
@@ -101,7 +101,7 @@ namespace PnlWdbeCvrDetail {
 	/**
 	  * StatApp (full: StatAppWdbeCvrDetail)
 	  */
-	class StatApp : public Sbecore::Xmlio::Block {
+	class StatApp : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint IXWDBEVEXPSTATE = 1;
@@ -125,7 +125,7 @@ namespace PnlWdbeCvrDetail {
 	/**
 	  * StatShr (full: StatShrWdbeCvrDetail)
 	  */
-	class StatShr : public Sbecore::Xmlio::Block {
+	class StatShr : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint BUTSAVEAVAIL = 1;
@@ -173,7 +173,7 @@ namespace PnlWdbeCvrDetail {
 	/**
 	  * Tag (full: TagWdbeCvrDetail)
 	  */
-	class Tag : public Sbecore::Xmlio::Block {
+	class Tag : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint CPT = 1;
@@ -268,9 +268,9 @@ namespace PnlWdbeCvrDetail {
 	public:
 		ContIac contiac;
 		ContInf continf;
-		Sbecore::Xmlio::Feed feedFLstSty;
-		Sbecore::Xmlio::Feed feedFPupJst;
-		Sbecore::Xmlio::Feed feedFPupSte;
+		Sbecore::Feed feedFLstSty;
+		Sbecore::Feed feedFPupJst;
+		Sbecore::Feed feedFPupSte;
 		StatApp statapp;
 		StatShr statshr;
 		Tag tag;

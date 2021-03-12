@@ -14,16 +14,16 @@
 
 // IP include.cust --- INSERT
 
+#include "PnlWdbeNavAuxfct.h"
+#include "PnlWdbeNavDescr.h"
+#include "PnlWdbeNavCoredev.h"
+#include "PnlWdbeNavDevdev.h"
+#include "PnlWdbeNavGlobal.h"
+#include "PnlWdbeNavAdmin.h"
+#include "PnlWdbeNavPre.h"
+#include "PnlWdbeNavHeadbar.h"
 #include "DlgWdbeNavLoaini.h"
 #include "DlgWdbeNavMnglic.h"
-#include "PnlWdbeNavHeadbar.h"
-#include "PnlWdbeNavPre.h"
-#include "PnlWdbeNavAdmin.h"
-#include "PnlWdbeNavGlobal.h"
-#include "PnlWdbeNavDevdev.h"
-#include "PnlWdbeNavCoredev.h"
-#include "PnlWdbeNavDescr.h"
-#include "PnlWdbeNavAuxfct.h"
 
 #define VecVWdbeNavDo CrdWdbeNav::VecVDo
 #define VecVWdbeNavSge CrdWdbeNav::VecVSge
@@ -92,17 +92,18 @@ public:
 	public:
 		static const Sbecore::uint IDLE = 1;
 		static const Sbecore::uint ALRWDBEABT = 2;
+		static const Sbecore::uint ALRWDBETRM = 3;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);
 
-		static void fillFeed(Sbecore::Xmlio::Feed& feed);
+		static void fillFeed(Sbecore::Feed& feed);
 	};
 
 	/**
 	  * ContInf (full: ContInfWdbeNav)
 	  */
-	class ContInf : public Sbecore::Xmlio::Block {
+	class ContInf : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint NUMFSGE = 1;
@@ -122,6 +123,7 @@ public:
 		std::string MtxSesSes3;
 
 	public:
+		void writeJSON(Json::Value& sup, std::string difftag = "");
 		void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
 		std::set<Sbecore::uint> comm(const ContInf* comp);
 		std::set<Sbecore::uint> diff(const ContInf* comp);
@@ -133,13 +135,14 @@ public:
 	class StatApp {
 
 	public:
+		static void writeJSON(Json::Value& sup, std::string difftag = "", const Sbecore::uint ixWdbeVReqitmode = VecWdbeVReqitmode::IDLE, const Sbecore::usmallint latency = 5, const std::string& shortMenu = "", const Sbecore::uint widthMenu = 0, const bool initdoneHeadbar = false, const bool initdonePre = false, const bool initdoneAdmin = false, const bool initdoneGlobal = false, const bool initdoneDevdev = false, const bool initdoneCoredev = false, const bool initdoneDescr = false, const bool initdoneAuxfct = false);
 		static void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true, const Sbecore::uint ixWdbeVReqitmode = VecWdbeVReqitmode::IDLE, const Sbecore::usmallint latency = 5, const std::string& shortMenu = "", const Sbecore::uint widthMenu = 0, const bool initdoneHeadbar = false, const bool initdonePre = false, const bool initdoneAdmin = false, const bool initdoneGlobal = false, const bool initdoneDevdev = false, const bool initdoneCoredev = false, const bool initdoneDescr = false, const bool initdoneAuxfct = false);
 	};
 
 	/**
 		* StatShr (full: StatShrWdbeNav)
 		*/
-	class StatShr : public Sbecore::Xmlio::Block {
+	class StatShr : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint JREFDLGLOAINI = 1;
@@ -275,6 +278,7 @@ public:
 		bool MitAppLoiAvail;
 
 	public:
+		void writeJSON(Json::Value& sup, std::string difftag = "");
 		void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
 		std::set<Sbecore::uint> comm(const StatShr* comp);
 		std::set<Sbecore::uint> diff(const StatShr* comp);
@@ -286,6 +290,7 @@ public:
 	class Tag {
 
 	public:
+		static void writeJSON(const Sbecore::uint ixWdbeVLocale, Json::Value& sup, std::string difftag = "");
 		static void writeXML(const Sbecore::uint ixWdbeVLocale, xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
 	};
 
@@ -307,6 +312,7 @@ public:
 	public:
 		std::string getSrefsMask();
 
+		void readJSON(Json::Value& sup, bool addbasetag = false);
 		void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 	};
 
@@ -325,17 +331,18 @@ public:
 		static const Sbecore::uint ALL = 7;
 
 	public:
-		DpchEngData(const Sbecore::ubigint jref = 0, ContInf* continf = NULL, Sbecore::Xmlio::Feed* feedFSge = NULL, StatShr* statshr = NULL, const std::set<Sbecore::uint>& mask = {NONE});
+		DpchEngData(const Sbecore::ubigint jref = 0, ContInf* continf = NULL, Sbecore::Feed* feedFSge = NULL, StatShr* statshr = NULL, const std::set<Sbecore::uint>& mask = {NONE});
 
 	public:
 		ContInf continf;
-		Sbecore::Xmlio::Feed feedFSge;
+		Sbecore::Feed feedFSge;
 		StatShr statshr;
 
 	public:
 		std::string getSrefsMask();
 		void merge(DpchEngWdbe* dpcheng);
 
+		void writeJSON(const Sbecore::uint ixWzskVLocale, Json::Value& sup);
 		void writeXML(const Sbecore::uint ixWdbeVLocale, xmlTextWriter* wr);
 	};
 
@@ -401,19 +408,19 @@ public:
 	ContInf continf;
 	StatShr statshr;
 
-	Sbecore::Xmlio::Feed feedFMcbAlert;
-	Sbecore::Xmlio::Feed feedFSge;
+	Sbecore::Feed feedFMcbAlert;
+	Sbecore::Feed feedFSge;
 
+	PnlWdbeNavAuxfct* pnlauxfct;
+	PnlWdbeNavDescr* pnldescr;
+	PnlWdbeNavCoredev* pnlcoredev;
+	PnlWdbeNavDevdev* pnldevdev;
+	PnlWdbeNavGlobal* pnlglobal;
+	PnlWdbeNavAdmin* pnladmin;
+	PnlWdbeNavPre* pnlpre;
+	PnlWdbeNavHeadbar* pnlheadbar;
 	DlgWdbeNavLoaini* dlgloaini;
 	DlgWdbeNavMnglic* dlgmnglic;
-	PnlWdbeNavHeadbar* pnlheadbar;
-	PnlWdbeNavPre* pnlpre;
-	PnlWdbeNavAdmin* pnladmin;
-	PnlWdbeNavGlobal* pnlglobal;
-	PnlWdbeNavDevdev* pnldevdev;
-	PnlWdbeNavCoredev* pnlcoredev;
-	PnlWdbeNavDescr* pnldescr;
-	PnlWdbeNavAuxfct* pnlauxfct;
 
 	// IP vars.cust --- INSERT
 
@@ -424,6 +431,7 @@ public:
 	DpchEngWdbe* getNewDpchEng(std::set<Sbecore::uint> items);
 	void refresh(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems, const bool unmute = false);
 	void updatePreset(DbsWdbe* dbswdbe, const Sbecore::uint ixWdbeVPreset, const Sbecore::ubigint jrefTrig, const bool notif = false);
+	void warnTerm(DbsWdbe* dbswdbe);
 
 public:
 
@@ -484,6 +492,8 @@ private:
 	void leaveSgeIdle(DbsWdbe* dbswdbe);
 	Sbecore::uint enterSgeAlrwdbeabt(DbsWdbe* dbswdbe, const bool reenter);
 	void leaveSgeAlrwdbeabt(DbsWdbe* dbswdbe);
+	Sbecore::uint enterSgeAlrwdbetrm(DbsWdbe* dbswdbe, const bool reenter);
+	void leaveSgeAlrwdbetrm(DbsWdbe* dbswdbe);
 
 };
 

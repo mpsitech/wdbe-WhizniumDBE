@@ -104,6 +104,7 @@ uint CrdWdbeNav::VecVSge::getIx(
 
 	if (s == "idle") return IDLE;
 	if (s == "alrwdbeabt") return ALRWDBEABT;
+	if (s == "alrwdbetrm") return ALRWDBETRM;
 
 	return(0);
 };
@@ -113,6 +114,7 @@ string CrdWdbeNav::VecVSge::getSref(
 		) {
 	if (ix == IDLE) return("idle");
 	if (ix == ALRWDBEABT) return("alrwdbeabt");
+	if (ix == ALRWDBETRM) return("alrwdbetrm");
 
 	return("");
 };
@@ -122,7 +124,7 @@ void CrdWdbeNav::VecVSge::fillFeed(
 		) {
 	feed.clear();
 
-	for (unsigned int i = 1; i <= 2; i++) feed.appendIxSrefTitles(i, getSref(i), getSref(i));
+	for (unsigned int i = 1; i <= 3; i++) feed.appendIxSrefTitles(i, getSref(i), getSref(i));
 };
 
 /******************************************************************************
@@ -145,6 +147,21 @@ CrdWdbeNav::ContInf::ContInf(
 	this->MtxSesSes3 = MtxSesSes3;
 
 	mask = {NUMFSGE, MRLAPPHLP, MTXSESSES1, MTXSESSES2, MTXSESSES3};
+};
+
+void CrdWdbeNav::ContInf::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "ContInfWdbeNav";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["numFSge"] = numFSge;
+	me["MrlAppHlp"] = MrlAppHlp;
+	me["MtxSesSes1"] = MtxSesSes1;
+	me["MtxSesSes2"] = MtxSesSes2;
+	me["MtxSesSes3"] = MtxSesSes3;
 };
 
 void CrdWdbeNav::ContInf::writeXML(
@@ -198,6 +215,40 @@ set<uint> CrdWdbeNav::ContInf::diff(
 /******************************************************************************
  class CrdWdbeNav::StatApp
  ******************************************************************************/
+
+void CrdWdbeNav::StatApp::writeJSON(
+			Json::Value& sup
+			, string difftag
+			, const uint ixWdbeVReqitmode
+			, const usmallint latency
+			, const string& shortMenu
+			, const uint widthMenu
+			, const bool initdoneHeadbar
+			, const bool initdonePre
+			, const bool initdoneAdmin
+			, const bool initdoneGlobal
+			, const bool initdoneDevdev
+			, const bool initdoneCoredev
+			, const bool initdoneDescr
+			, const bool initdoneAuxfct
+		) {
+	if (difftag.length() == 0) difftag = "StatAppWdbeNav";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["srefIxWdbeVReqitmode"] = VecWdbeVReqitmode::getSref(ixWdbeVReqitmode);
+	me["latency"] = latency;
+	me["shortMenu"] = shortMenu;
+	me["widthMenu"] = widthMenu;
+	me["initdoneHeadbar"] = initdoneHeadbar;
+	me["initdonePre"] = initdonePre;
+	me["initdoneAdmin"] = initdoneAdmin;
+	me["initdoneGlobal"] = initdoneGlobal;
+	me["initdoneDevdev"] = initdoneDevdev;
+	me["initdoneCoredev"] = initdoneCoredev;
+	me["initdoneDescr"] = initdoneDescr;
+	me["initdoneAuxfct"] = initdoneAuxfct;
+};
 
 void CrdWdbeNav::StatApp::writeXML(
 			xmlTextWriter* wr
@@ -376,6 +427,79 @@ CrdWdbeNav::StatShr::StatShr(
 	mask = {JREFDLGLOAINI, JREFDLGMNGLIC, JREFHEADBAR, JREFPRE, PNLPREAVAIL, JREFADMIN, PNLADMINAVAIL, JREFGLOBAL, PNLGLOBALAVAIL, JREFDEVDEV, PNLDEVDEVAVAIL, JREFCOREDEV, PNLCOREDEVAVAIL, JREFDESCR, PNLDESCRAVAIL, JREFAUXFCT, PNLAUXFCTAVAIL, MITSESSPSAVAIL, MSPCRD1AVAIL, MITCRDUSGAVAIL, MITCRDUSRAVAIL, MITCRDPRSAVAIL, MITCRDFILAVAIL, MSPCRD2AVAIL, MITCRDMCHAVAIL, MITCRDLIBAVAIL, MITCRDFAMAVAIL, MITCRDSILAVAIL, MITCRDMTPAVAIL, MSPCRD3AVAIL, MITCRDPRJAVAIL, MITCRDVERAVAIL, MITCRDSYSAVAIL, MITCRDSYSACTIVE, MITCRDTRGAVAIL, MITCRDTRGACTIVE, MITCRDUNTAVAIL, MITCRDUNTACTIVE, MITCRDRLSAVAIL, MITCRDRLSACTIVE, MSPCRD4AVAIL, MITCRDCPRAVAIL, MITCRDCVRAVAIL, MSPCRD5AVAIL, MITCRDMODAVAIL, MITCRDMODACTIVE, MITCRDVECAVAIL, MITCRDVECACTIVE, MITCRDCMDAVAIL, MITCRDCMDACTIVE, MITCRDERRAVAIL, MITCRDERRACTIVE, MITCRDPPHAVAIL, MITCRDPPHACTIVE, MITCRDBNKAVAIL, MITCRDBNKACTIVE, MITCRDPINAVAIL, MITCRDPINACTIVE, MSPCRD6AVAIL, MITCRDUTLAVAIL, MSPAPP2AVAIL, MITAPPMLCAVAIL, MITAPPLOIAVAIL};
 };
 
+void CrdWdbeNav::StatShr::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "StatShrWdbeNav";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["scrJrefDlgloaini"] = Scr::scramble(jrefDlgloaini);
+	me["scrJrefDlgmnglic"] = Scr::scramble(jrefDlgmnglic);
+	me["scrJrefHeadbar"] = Scr::scramble(jrefHeadbar);
+	me["scrJrefPre"] = Scr::scramble(jrefPre);
+	me["pnlpreAvail"] = pnlpreAvail;
+	me["scrJrefAdmin"] = Scr::scramble(jrefAdmin);
+	me["pnladminAvail"] = pnladminAvail;
+	me["scrJrefGlobal"] = Scr::scramble(jrefGlobal);
+	me["pnlglobalAvail"] = pnlglobalAvail;
+	me["scrJrefDevdev"] = Scr::scramble(jrefDevdev);
+	me["pnldevdevAvail"] = pnldevdevAvail;
+	me["scrJrefCoredev"] = Scr::scramble(jrefCoredev);
+	me["pnlcoredevAvail"] = pnlcoredevAvail;
+	me["scrJrefDescr"] = Scr::scramble(jrefDescr);
+	me["pnldescrAvail"] = pnldescrAvail;
+	me["scrJrefAuxfct"] = Scr::scramble(jrefAuxfct);
+	me["pnlauxfctAvail"] = pnlauxfctAvail;
+	me["MitSesSpsAvail"] = MitSesSpsAvail;
+	me["MspCrd1Avail"] = MspCrd1Avail;
+	me["MitCrdUsgAvail"] = MitCrdUsgAvail;
+	me["MitCrdUsrAvail"] = MitCrdUsrAvail;
+	me["MitCrdPrsAvail"] = MitCrdPrsAvail;
+	me["MitCrdFilAvail"] = MitCrdFilAvail;
+	me["MspCrd2Avail"] = MspCrd2Avail;
+	me["MitCrdMchAvail"] = MitCrdMchAvail;
+	me["MitCrdLibAvail"] = MitCrdLibAvail;
+	me["MitCrdFamAvail"] = MitCrdFamAvail;
+	me["MitCrdSilAvail"] = MitCrdSilAvail;
+	me["MitCrdMtpAvail"] = MitCrdMtpAvail;
+	me["MspCrd3Avail"] = MspCrd3Avail;
+	me["MitCrdPrjAvail"] = MitCrdPrjAvail;
+	me["MitCrdVerAvail"] = MitCrdVerAvail;
+	me["MitCrdSysAvail"] = MitCrdSysAvail;
+	me["MitCrdSysActive"] = MitCrdSysActive;
+	me["MitCrdTrgAvail"] = MitCrdTrgAvail;
+	me["MitCrdTrgActive"] = MitCrdTrgActive;
+	me["MitCrdUntAvail"] = MitCrdUntAvail;
+	me["MitCrdUntActive"] = MitCrdUntActive;
+	me["MitCrdRlsAvail"] = MitCrdRlsAvail;
+	me["MitCrdRlsActive"] = MitCrdRlsActive;
+	me["MspCrd4Avail"] = MspCrd4Avail;
+	me["MitCrdCprAvail"] = MitCrdCprAvail;
+	me["MitCrdCvrAvail"] = MitCrdCvrAvail;
+	me["MspCrd5Avail"] = MspCrd5Avail;
+	me["MitCrdModAvail"] = MitCrdModAvail;
+	me["MitCrdModActive"] = MitCrdModActive;
+	me["MitCrdVecAvail"] = MitCrdVecAvail;
+	me["MitCrdVecActive"] = MitCrdVecActive;
+	me["MitCrdCmdAvail"] = MitCrdCmdAvail;
+	me["MitCrdCmdActive"] = MitCrdCmdActive;
+	me["MitCrdErrAvail"] = MitCrdErrAvail;
+	me["MitCrdErrActive"] = MitCrdErrActive;
+	me["MitCrdPphAvail"] = MitCrdPphAvail;
+	me["MitCrdPphActive"] = MitCrdPphActive;
+	me["MitCrdBnkAvail"] = MitCrdBnkAvail;
+	me["MitCrdBnkActive"] = MitCrdBnkActive;
+	me["MitCrdPinAvail"] = MitCrdPinAvail;
+	me["MitCrdPinActive"] = MitCrdPinActive;
+	me["MspCrd6Avail"] = MspCrd6Avail;
+	me["MitCrdUtlAvail"] = MitCrdUtlAvail;
+	me["MspApp2Avail"] = MspApp2Avail;
+	me["MitAppMlcAvail"] = MitAppMlcAvail;
+	me["MitAppLoiAvail"] = MitAppLoiAvail;
+};
+
 void CrdWdbeNav::StatShr::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -544,6 +668,50 @@ set<uint> CrdWdbeNav::StatShr::diff(
  class CrdWdbeNav::Tag
  ******************************************************************************/
 
+void CrdWdbeNav::Tag::writeJSON(
+			const uint ixWdbeVLocale
+			, Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "TagWdbeNav";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	if (ixWdbeVLocale == VecWdbeVLocale::ENUS) {
+		me["MitCrdUsg"] = "User groups ...";
+		me["MitCrdUsr"] = "Users ...";
+		me["MitCrdPrs"] = "Persons ...";
+		me["MitCrdFil"] = "Files ...";
+		me["MitCrdMch"] = "Machines ...";
+		me["MitCrdLib"] = "Libraries ...";
+		me["MitCrdFam"] = "Product families ...";
+		me["MitCrdSil"] = "Silicon devices ...";
+		me["MitCrdMtp"] = "Module templates ...";
+		me["MitCrdPrj"] = "Projects ...";
+		me["MitCrdVer"] = "Versions ...";
+		me["MitCrdSys"] = "Systems ...";
+		me["MitCrdTrg"] = "Targets ...";
+		me["MitCrdUnt"] = "Units ...";
+		me["MitCrdRls"] = "Releases ...";
+		me["MitCrdCpr"] = "Core projects ...";
+		me["MitCrdCvr"] = "Core versions ...";
+		me["MitCrdMod"] = "Modules ...";
+		me["MitCrdVec"] = "Vectors ...";
+		me["MitCrdCmd"] = "Commands ...";
+		me["MitCrdErr"] = "Errors ...";
+		me["MitCrdPph"] = "Peripherals ...";
+		me["MitCrdBnk"] = "I/O banks ...";
+		me["MitCrdPin"] = "Pins ...";
+		me["MitCrdUtl"] = "Utilities ...";
+		me["MitAppMlc"] = "Manage licenses ...";
+	};
+	me["MitAppAbt"] = StrMod::cap(VecWdbeVTag::getTitle(VecWdbeVTag::ABOUT, ixWdbeVLocale)) + " ...";
+	me["MrlAppHlp"] = StrMod::cap(VecWdbeVTag::getTitle(VecWdbeVTag::HELP, ixWdbeVLocale)) + " ...";
+	me["MitSesSps"] = StrMod::cap(VecWdbeVTag::getTitle(VecWdbeVTag::SUSPSESS, ixWdbeVLocale));
+	me["MitSesTrm"] = StrMod::cap(VecWdbeVTag::getTitle(VecWdbeVTag::CLSESS, ixWdbeVLocale));
+	me["MitAppLoi"] = StrMod::cap(VecWdbeVTag::getTitle(VecWdbeVTag::LOAINI, ixWdbeVLocale)) + " ...";
+};
+
 void CrdWdbeNav::Tag::writeXML(
 			const uint ixWdbeVLocale
 			, xmlTextWriter* wr
@@ -613,6 +781,26 @@ string CrdWdbeNav::DpchAppDo::getSrefsMask() {
 	StrMod::vectorToString(ss, srefs);
 
 	return(srefs);
+};
+
+void CrdWdbeNav::DpchAppDo::readJSON(
+			Json::Value& sup
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	Json::Value& me = sup;
+	if (addbasetag) me = sup["DpchAppWdbeNavDo"];
+
+	basefound = (me != Json::nullValue);
+
+	if (basefound) {
+		if (me.isMember("scrJref")) {jref = Scr::descramble(me["scrJref"].asString()); add(JREF);};
+		if (me.isMember("srefIxVDo")) {ixVDo = VecVDo::getIx(me["srefIxVDo"].asString()); add(IXVDO);};
+	} else {
+	};
 };
 
 void CrdWdbeNav::DpchAppDo::readXML(
@@ -693,6 +881,20 @@ void CrdWdbeNav::DpchEngData::merge(
 	if (src->has(STATAPP)) add(STATAPP);
 	if (src->has(STATSHR)) {statshr = src->statshr; add(STATSHR);};
 	if (src->has(TAG)) add(TAG);
+};
+
+void CrdWdbeNav::DpchEngData::writeJSON(
+			const uint ixWdbeVLocale
+			, Json::Value& sup
+		) {
+	Json::Value& me = sup["DpchEngWdbeNavData"] = Json::Value(Json::objectValue);
+
+	if (has(JREF)) me["scrJref"] = Scr::scramble(jref);
+	if (has(CONTINF)) continf.writeJSON(me);
+	if (has(FEEDFSGE)) feedFSge.writeJSON(me);
+	if (has(STATAPP)) StatApp::writeJSON(me);
+	if (has(STATSHR)) statshr.writeJSON(me);
+	if (has(TAG)) Tag::writeJSON(ixWdbeVLocale, me);
 };
 
 void CrdWdbeNav::DpchEngData::writeXML(

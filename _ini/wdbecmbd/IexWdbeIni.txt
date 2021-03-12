@@ -1,4 +1,4 @@
-IexWdbeIni v1.1.4
+IexWdbeIni v1.1.5
 ImeIAVKeylistKey1.srefKlsIxWdbeVKeylist	sref	Avail	Implied	Title	Comment
 KlstKWdbeMtpModbscbuCustop	WdbeMtpModbscbuAdd_v12_0			adapt port widths	
 KlstKWdbeMtpModbscbuCustop	WdbeMtpModbscbuAxihostif_Easy_v1_0			connect AXI controllers, CRC and timeout	

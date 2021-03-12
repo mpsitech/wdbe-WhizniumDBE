@@ -2,7 +2,7 @@
 # make file for CrdWdbeSil card job handler, release wdbed_mac
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 13 Jan 2021
+# date created: 12 Mar 2021
 # IP header --- ABOVE
 
 include ../Makefile.inc
@@ -16,7 +16,7 @@ STATLIBFLAGS = rcs
 INCPATH = -I$(BUILDROOT)/dbswdbe -I$(BUILDROOT)/wdbed/VecWdbe -I$(BUILDROOT)/wdbed/IexWdbe -I$(BUILDROOT)/wdbed
 INCPATH += -I${WHIZSDKROOT}/build -I${WHIZSDKROOT}/build/apiwzlm -I/usr/local/include -I/usr/local/include/curl -I/usr/local/include/libxml2 -I/usr/local/mysql/include -I/usr/local/opt/sqlite/include
 
-OBJS = CrdWdbeSil.o PnlWdbeSilRec.o PnlWdbeSilDetail.o PnlWdbeSil1NBank.o QryWdbeSil1NBank.o PnlWdbeSilFwd1NController.o QryWdbeSilFwd1NController.o PnlWdbeSil1NTarget.o QryWdbeSil1NTarget.o PnlWdbeSilSil1NUnit.o QryWdbeSilSil1NUnit.o PnlWdbeSil1NPeripheral.o QryWdbeSil1NPeripheral.o PnlWdbeSilRef1NCommand.o QryWdbeSilRef1NCommand.o PnlWdbeSilHk1NModule.o QryWdbeSilHk1NModule.o PnlWdbeSilHk1NVector.o QryWdbeSilHk1NVector.o PnlWdbeSilRef1NError.o QryWdbeSilRef1NError.o PnlWdbeSilHeadbar.o PnlWdbeSilList.o QryWdbeSilList.o
+OBJS = CrdWdbeSil.o PnlWdbeSilList.o QryWdbeSilList.o PnlWdbeSilHeadbar.o PnlWdbeSilRec.o PnlWdbeSilHk1NModule.o QryWdbeSilHk1NModule.o PnlWdbeSilHk1NVector.o QryWdbeSilHk1NVector.o PnlWdbeSilRef1NError.o QryWdbeSilRef1NError.o PnlWdbeSilRef1NCommand.o QryWdbeSilRef1NCommand.o PnlWdbeSil1NTarget.o QryWdbeSil1NTarget.o PnlWdbeSilFwd1NController.o QryWdbeSilFwd1NController.o PnlWdbeSil1NBank.o QryWdbeSil1NBank.o PnlWdbeSilSil1NUnit.o QryWdbeSilSil1NUnit.o PnlWdbeSil1NPeripheral.o QryWdbeSil1NPeripheral.o PnlWdbeSilDetail.o
 
 LIB = libcrdwdbesil
 

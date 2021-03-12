@@ -47,6 +47,17 @@ DlgWdbeFilDownload::ContInf::ContInf(
 	mask = {DLD};
 };
 
+void DlgWdbeFilDownload::ContInf::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "ContInfDlgWdbeFilDownload";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["Dld"] = Dld;
+};
+
 void DlgWdbeFilDownload::ContInf::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -91,6 +102,18 @@ set<uint> DlgWdbeFilDownload::ContInf::diff(
  class DlgWdbeFilDownload::StatApp
  ******************************************************************************/
 
+void DlgWdbeFilDownload::StatApp::writeJSON(
+			Json::Value& sup
+			, string difftag
+			, const string& shortMenu
+		) {
+	if (difftag.length() == 0) difftag = "StatAppDlgWdbeFilDownload";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["shortMenu"] = shortMenu;
+};
+
 void DlgWdbeFilDownload::StatApp::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -111,6 +134,22 @@ void DlgWdbeFilDownload::StatApp::writeXML(
 /******************************************************************************
  class DlgWdbeFilDownload::Tag
  ******************************************************************************/
+
+void DlgWdbeFilDownload::Tag::writeJSON(
+			const uint ixWdbeVLocale
+			, Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "TagDlgWdbeFilDownload";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	if (ixWdbeVLocale == VecWdbeVLocale::ENUS) {
+		me["Cpt"] = "Download file";
+	};
+	me["Dld"] = StrMod::cap(VecWdbeVTag::getTitle(VecWdbeVTag::DOWNLOAD, ixWdbeVLocale));
+	me["ButDne"] = StrMod::cap(VecWdbeVTag::getTitle(VecWdbeVTag::DONE, ixWdbeVLocale));
+};
 
 void DlgWdbeFilDownload::Tag::writeXML(
 			const uint ixWdbeVLocale
@@ -153,6 +192,26 @@ string DlgWdbeFilDownload::DpchAppDo::getSrefsMask() {
 	StrMod::vectorToString(ss, srefs);
 
 	return(srefs);
+};
+
+void DlgWdbeFilDownload::DpchAppDo::readJSON(
+			Json::Value& sup
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	Json::Value& me = sup;
+	if (addbasetag) me = sup["DpchAppDlgWdbeFilDownloadDo"];
+
+	basefound = (me != Json::nullValue);
+
+	if (basefound) {
+		if (me.isMember("scrJref")) {jref = Scr::descramble(me["scrJref"].asString()); add(JREF);};
+		if (me.isMember("srefIxVDo")) {ixVDo = VecVDo::getIx(me["srefIxVDo"].asString()); add(IXVDO);};
+	} else {
+	};
 };
 
 void DlgWdbeFilDownload::DpchAppDo::readXML(
@@ -225,6 +284,18 @@ void DlgWdbeFilDownload::DpchEngData::merge(
 	if (src->has(CONTINF)) {continf = src->continf; add(CONTINF);};
 	if (src->has(STATAPP)) add(STATAPP);
 	if (src->has(TAG)) add(TAG);
+};
+
+void DlgWdbeFilDownload::DpchEngData::writeJSON(
+			const uint ixWdbeVLocale
+			, Json::Value& sup
+		) {
+	Json::Value& me = sup["DpchEngDlgWdbeFilDownloadData"] = Json::Value(Json::objectValue);
+
+	if (has(JREF)) me["scrJref"] = Scr::scramble(jref);
+	if (has(CONTINF)) continf.writeJSON(me);
+	if (has(STATAPP)) StatApp::writeJSON(me);
+	if (has(TAG)) Tag::writeJSON(ixWdbeVLocale, me);
 };
 
 void DlgWdbeFilDownload::DpchEngData::writeXML(

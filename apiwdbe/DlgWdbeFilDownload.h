@@ -40,7 +40,7 @@ namespace DlgWdbeFilDownload {
 	/**
 	  * ContInf (full: ContInfDlgWdbeFilDownload)
 	  */
-	class ContInf : public Sbecore::Xmlio::Block {
+	class ContInf : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint DLD = 1;
@@ -60,7 +60,7 @@ namespace DlgWdbeFilDownload {
 	/**
 	  * StatApp (full: StatAppDlgWdbeFilDownload)
 	  */
-	class StatApp : public Sbecore::Xmlio::Block {
+	class StatApp : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint SHORTMENU = 1;
@@ -80,7 +80,7 @@ namespace DlgWdbeFilDownload {
 	/**
 	  * Tag (full: TagDlgWdbeFilDownload)
 	  */
-	class Tag : public Sbecore::Xmlio::Block {
+	class Tag : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint CPT = 1;

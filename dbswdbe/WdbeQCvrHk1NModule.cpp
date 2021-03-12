@@ -33,6 +33,21 @@ WdbeQCvrHk1NModule::WdbeQCvrHk1NModule(
 	this->hkNum = hkNum;
 };
 
+void WdbeQCvrHk1NModule::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["ref"] = stubRef;
+	} else {
+		me["stubRef"] = stubRef;
+	};
+};
+
 void WdbeQCvrHk1NModule::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -98,6 +113,16 @@ ListWdbeQCvrHk1NModule& ListWdbeQCvrHk1NModule::operator=(
 	};
 
 	return(*this);
+};
+
+void ListWdbeQCvrHk1NModule::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListWdbeQCvrHk1NModule";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListWdbeQCvrHk1NModule::writeXML(

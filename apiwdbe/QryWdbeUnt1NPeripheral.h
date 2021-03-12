@@ -23,7 +23,7 @@ namespace QryWdbeUnt1NPeripheral {
 	/**
 	  * StatApp (full: StatAppQryWdbeUnt1NPeripheral)
 	  */
-	class StatApp : public Sbecore::Xmlio::Block {
+	class StatApp : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint FIRSTCOL = 1;
@@ -49,7 +49,7 @@ namespace QryWdbeUnt1NPeripheral {
 	/**
 	  * StatShr (full: StatShrQryWdbeUnt1NPeripheral)
 	  */
-	class StatShr : public Sbecore::Xmlio::Block {
+	class StatShr : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint NTOT = 1;
@@ -73,7 +73,7 @@ namespace QryWdbeUnt1NPeripheral {
 	/**
 	  * StgIac (full: StgIacQryWdbeUnt1NPeripheral)
 	  */
-	class StgIac : public Sbecore::Xmlio::Block {
+	class StgIac : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint JNUM = 1;

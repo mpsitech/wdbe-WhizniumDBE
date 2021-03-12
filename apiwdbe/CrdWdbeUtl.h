@@ -58,7 +58,7 @@ namespace CrdWdbeUtl {
 	/**
 	  * ContInf (full: ContInfWdbeUtl)
 	  */
-	class ContInf : public Sbecore::Xmlio::Block {
+	class ContInf : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint NUMFSGE = 1;
@@ -80,7 +80,7 @@ namespace CrdWdbeUtl {
 	/**
 	  * StatApp (full: StatAppWdbeUtl)
 	  */
-	class StatApp : public Sbecore::Xmlio::Block {
+	class StatApp : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint IXWDBEVREQITMODE = 1;
@@ -108,7 +108,7 @@ namespace CrdWdbeUtl {
 	/**
 	  * StatShr (full: StatShrWdbeUtl)
 	  */
-	class StatShr : public Sbecore::Xmlio::Block {
+	class StatShr : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint SCRJREFDLGEXTRIP = 1;
@@ -132,7 +132,7 @@ namespace CrdWdbeUtl {
 	/**
 	  * Tag (full: TagWdbeUtl)
 	  */
-	class Tag : public Sbecore::Xmlio::Block {
+	class Tag : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint MITAPPABT = 1;
@@ -193,7 +193,7 @@ namespace CrdWdbeUtl {
 
 	public:
 		ContInf continf;
-		Sbecore::Xmlio::Feed feedFSge;
+		Sbecore::Feed feedFSge;
 		StatApp statapp;
 		StatShr statshr;
 		Tag tag;

@@ -104,18 +104,18 @@ set<uint> PnlWdbeCmdRec::ContInf::diff(
 
 PnlWdbeCmdRec::StatApp::StatApp(
 			const bool initdoneDetail
-			, const bool initdoneAInvpar
 			, const bool initdoneARetpar
+			, const bool initdoneAInvpar
 			, const bool initdoneMNController
 		) :
 			Block()
 		{
 	this->initdoneDetail = initdoneDetail;
-	this->initdoneAInvpar = initdoneAInvpar;
 	this->initdoneARetpar = initdoneARetpar;
+	this->initdoneAInvpar = initdoneAInvpar;
 	this->initdoneMNController = initdoneMNController;
 
-	mask = {INITDONEDETAIL, INITDONEAINVPAR, INITDONEARETPAR, INITDONEMNCONTROLLER};
+	mask = {INITDONEDETAIL, INITDONEARETPAR, INITDONEAINVPAR, INITDONEMNCONTROLLER};
 };
 
 bool PnlWdbeCmdRec::StatApp::readXML(
@@ -136,8 +136,8 @@ bool PnlWdbeCmdRec::StatApp::readXML(
 
 	if (basefound) {
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneDetail", initdoneDetail)) add(INITDONEDETAIL);
-		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneAInvpar", initdoneAInvpar)) add(INITDONEAINVPAR);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneARetpar", initdoneARetpar)) add(INITDONEARETPAR);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneAInvpar", initdoneAInvpar)) add(INITDONEAINVPAR);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneMNController", initdoneMNController)) add(INITDONEMNCONTROLLER);
 	};
 
@@ -150,8 +150,8 @@ set<uint> PnlWdbeCmdRec::StatApp::comm(
 	set<uint> items;
 
 	if (initdoneDetail == comp->initdoneDetail) insert(items, INITDONEDETAIL);
-	if (initdoneAInvpar == comp->initdoneAInvpar) insert(items, INITDONEAINVPAR);
 	if (initdoneARetpar == comp->initdoneARetpar) insert(items, INITDONEARETPAR);
+	if (initdoneAInvpar == comp->initdoneAInvpar) insert(items, INITDONEAINVPAR);
 	if (initdoneMNController == comp->initdoneMNController) insert(items, INITDONEMNCONTROLLER);
 
 	return(items);
@@ -165,7 +165,7 @@ set<uint> PnlWdbeCmdRec::StatApp::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {INITDONEDETAIL, INITDONEAINVPAR, INITDONEARETPAR, INITDONEMNCONTROLLER};
+	diffitems = {INITDONEDETAIL, INITDONEARETPAR, INITDONEAINVPAR, INITDONEMNCONTROLLER};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -178,8 +178,8 @@ set<uint> PnlWdbeCmdRec::StatApp::diff(
 PnlWdbeCmdRec::StatShr::StatShr(
 			const uint ixWdbeVExpstate
 			, const string& scrJrefDetail
-			, const string& scrJrefAInvpar
 			, const string& scrJrefARetpar
+			, const string& scrJrefAInvpar
 			, const string& scrJrefMNController
 			, const bool ButRegularizeActive
 		) :
@@ -187,12 +187,12 @@ PnlWdbeCmdRec::StatShr::StatShr(
 		{
 	this->ixWdbeVExpstate = ixWdbeVExpstate;
 	this->scrJrefDetail = scrJrefDetail;
-	this->scrJrefAInvpar = scrJrefAInvpar;
 	this->scrJrefARetpar = scrJrefARetpar;
+	this->scrJrefAInvpar = scrJrefAInvpar;
 	this->scrJrefMNController = scrJrefMNController;
 	this->ButRegularizeActive = ButRegularizeActive;
 
-	mask = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFAINVPAR, SCRJREFARETPAR, SCRJREFMNCONTROLLER, BUTREGULARIZEACTIVE};
+	mask = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFARETPAR, SCRJREFAINVPAR, SCRJREFMNCONTROLLER, BUTREGULARIZEACTIVE};
 };
 
 bool PnlWdbeCmdRec::StatShr::readXML(
@@ -219,8 +219,8 @@ bool PnlWdbeCmdRec::StatShr::readXML(
 			add(IXWDBEVEXPSTATE);
 		};
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefDetail", scrJrefDetail)) add(SCRJREFDETAIL);
-		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefAInvpar", scrJrefAInvpar)) add(SCRJREFAINVPAR);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefARetpar", scrJrefARetpar)) add(SCRJREFARETPAR);
+		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefAInvpar", scrJrefAInvpar)) add(SCRJREFAINVPAR);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefMNController", scrJrefMNController)) add(SCRJREFMNCONTROLLER);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButRegularizeActive", ButRegularizeActive)) add(BUTREGULARIZEACTIVE);
 	};
@@ -235,8 +235,8 @@ set<uint> PnlWdbeCmdRec::StatShr::comm(
 
 	if (ixWdbeVExpstate == comp->ixWdbeVExpstate) insert(items, IXWDBEVEXPSTATE);
 	if (scrJrefDetail == comp->scrJrefDetail) insert(items, SCRJREFDETAIL);
-	if (scrJrefAInvpar == comp->scrJrefAInvpar) insert(items, SCRJREFAINVPAR);
 	if (scrJrefARetpar == comp->scrJrefARetpar) insert(items, SCRJREFARETPAR);
+	if (scrJrefAInvpar == comp->scrJrefAInvpar) insert(items, SCRJREFAINVPAR);
 	if (scrJrefMNController == comp->scrJrefMNController) insert(items, SCRJREFMNCONTROLLER);
 	if (ButRegularizeActive == comp->ButRegularizeActive) insert(items, BUTREGULARIZEACTIVE);
 
@@ -251,7 +251,7 @@ set<uint> PnlWdbeCmdRec::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFAINVPAR, SCRJREFARETPAR, SCRJREFMNCONTROLLER, BUTREGULARIZEACTIVE};
+	diffitems = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFARETPAR, SCRJREFAINVPAR, SCRJREFMNCONTROLLER, BUTREGULARIZEACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);

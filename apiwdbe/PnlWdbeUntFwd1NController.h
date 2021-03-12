@@ -48,7 +48,7 @@ namespace PnlWdbeUntFwd1NController {
 	/**
 	  * ContInf (full: ContInfWdbeUntFwd1NController)
 	  */
-	class ContInf : public Sbecore::Xmlio::Block {
+	class ContInf : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint NUMFCSIQST = 1;
@@ -68,7 +68,7 @@ namespace PnlWdbeUntFwd1NController {
 	/**
 	  * StatApp (full: StatAppWdbeUntFwd1NController)
 	  */
-	class StatApp : public Sbecore::Xmlio::Block {
+	class StatApp : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint IXWDBEVEXPSTATE = 1;
@@ -88,7 +88,7 @@ namespace PnlWdbeUntFwd1NController {
 	/**
 	  * StatShr (full: StatShrWdbeUntFwd1NController)
 	  */
-	class StatShr : public Sbecore::Xmlio::Block {
+	class StatShr : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint BUTVIEWAVAIL = 1;
@@ -110,7 +110,7 @@ namespace PnlWdbeUntFwd1NController {
 	/**
 	  * StgIac (full: StgIacWdbeUntFwd1NController)
 	  */
-	class StgIac : public Sbecore::Xmlio::Block {
+	class StgIac : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint TCOREFWIDTH = 1;
@@ -131,7 +131,7 @@ namespace PnlWdbeUntFwd1NController {
 	/**
 	  * Tag (full: TagWdbeUntFwd1NController)
 	  */
-	class Tag : public Sbecore::Xmlio::Block {
+	class Tag : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint CPT = 1;
@@ -227,7 +227,7 @@ namespace PnlWdbeUntFwd1NController {
 
 	public:
 		ContInf continf;
-		Sbecore::Xmlio::Feed feedFCsiQst;
+		Sbecore::Feed feedFCsiQst;
 		StatApp statapp;
 		StatShr statshr;
 		StgIac stgiac;

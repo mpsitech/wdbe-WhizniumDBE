@@ -49,6 +49,17 @@ PnlWdbeMchRec::ContInf::ContInf(
 	mask = {TXTREF};
 };
 
+void PnlWdbeMchRec::ContInf::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "ContInfWdbeMchRec";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["TxtRef"] = TxtRef;
+};
+
 void PnlWdbeMchRec::ContInf::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -93,13 +104,33 @@ set<uint> PnlWdbeMchRec::ContInf::diff(
  class PnlWdbeMchRec::StatApp
  ******************************************************************************/
 
+void PnlWdbeMchRec::StatApp::writeJSON(
+			Json::Value& sup
+			, string difftag
+			, const bool initdoneDetail
+			, const bool initdoneAMakefile
+			, const bool initdoneAPar
+			, const bool initdone1NRelease
+			, const bool initdoneSup1NMachine
+		) {
+	if (difftag.length() == 0) difftag = "StatAppWdbeMchRec";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["initdoneDetail"] = initdoneDetail;
+	me["initdoneAMakefile"] = initdoneAMakefile;
+	me["initdoneAPar"] = initdoneAPar;
+	me["initdone1NRelease"] = initdone1NRelease;
+	me["initdoneSup1NMachine"] = initdoneSup1NMachine;
+};
+
 void PnlWdbeMchRec::StatApp::writeXML(
 			xmlTextWriter* wr
 			, string difftag
 			, bool shorttags
 			, const bool initdoneDetail
-			, const bool initdoneAPar
 			, const bool initdoneAMakefile
+			, const bool initdoneAPar
 			, const bool initdone1NRelease
 			, const bool initdoneSup1NMachine
 		) {
@@ -111,8 +142,8 @@ void PnlWdbeMchRec::StatApp::writeXML(
 
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
 		writeBoolAttr(wr, itemtag, "sref", "initdoneDetail", initdoneDetail);
-		writeBoolAttr(wr, itemtag, "sref", "initdoneAPar", initdoneAPar);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneAMakefile", initdoneAMakefile);
+		writeBoolAttr(wr, itemtag, "sref", "initdoneAPar", initdoneAPar);
 		writeBoolAttr(wr, itemtag, "sref", "initdone1NRelease", initdone1NRelease);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneSup1NMachine", initdoneSup1NMachine);
 	xmlTextWriterEndElement(wr);
@@ -125,8 +156,8 @@ void PnlWdbeMchRec::StatApp::writeXML(
 PnlWdbeMchRec::StatShr::StatShr(
 			const uint ixWdbeVExpstate
 			, const ubigint jrefDetail
-			, const ubigint jrefAPar
 			, const ubigint jrefAMakefile
+			, const ubigint jrefAPar
 			, const ubigint jref1NRelease
 			, const ubigint jrefSup1NMachine
 			, const bool ButRegularizeActive
@@ -135,13 +166,30 @@ PnlWdbeMchRec::StatShr::StatShr(
 		{
 	this->ixWdbeVExpstate = ixWdbeVExpstate;
 	this->jrefDetail = jrefDetail;
-	this->jrefAPar = jrefAPar;
 	this->jrefAMakefile = jrefAMakefile;
+	this->jrefAPar = jrefAPar;
 	this->jref1NRelease = jref1NRelease;
 	this->jrefSup1NMachine = jrefSup1NMachine;
 	this->ButRegularizeActive = ButRegularizeActive;
 
-	mask = {IXWDBEVEXPSTATE, JREFDETAIL, JREFAPAR, JREFAMAKEFILE, JREF1NRELEASE, JREFSUP1NMACHINE, BUTREGULARIZEACTIVE};
+	mask = {IXWDBEVEXPSTATE, JREFDETAIL, JREFAMAKEFILE, JREFAPAR, JREF1NRELEASE, JREFSUP1NMACHINE, BUTREGULARIZEACTIVE};
+};
+
+void PnlWdbeMchRec::StatShr::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "StatShrWdbeMchRec";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["srefIxWdbeVExpstate"] = VecWdbeVExpstate::getSref(ixWdbeVExpstate);
+	me["scrJrefDetail"] = Scr::scramble(jrefDetail);
+	me["scrJrefAMakefile"] = Scr::scramble(jrefAMakefile);
+	me["scrJrefAPar"] = Scr::scramble(jrefAPar);
+	me["scrJref1NRelease"] = Scr::scramble(jref1NRelease);
+	me["scrJrefSup1NMachine"] = Scr::scramble(jrefSup1NMachine);
+	me["ButRegularizeActive"] = ButRegularizeActive;
 };
 
 void PnlWdbeMchRec::StatShr::writeXML(
@@ -158,8 +206,8 @@ void PnlWdbeMchRec::StatShr::writeXML(
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
 		writeStringAttr(wr, itemtag, "sref", "srefIxWdbeVExpstate", VecWdbeVExpstate::getSref(ixWdbeVExpstate));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefDetail", Scr::scramble(jrefDetail));
-		writeStringAttr(wr, itemtag, "sref", "scrJrefAPar", Scr::scramble(jrefAPar));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefAMakefile", Scr::scramble(jrefAMakefile));
+		writeStringAttr(wr, itemtag, "sref", "scrJrefAPar", Scr::scramble(jrefAPar));
 		writeStringAttr(wr, itemtag, "sref", "scrJref1NRelease", Scr::scramble(jref1NRelease));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefSup1NMachine", Scr::scramble(jrefSup1NMachine));
 		writeBoolAttr(wr, itemtag, "sref", "ButRegularizeActive", ButRegularizeActive);
@@ -173,8 +221,8 @@ set<uint> PnlWdbeMchRec::StatShr::comm(
 
 	if (ixWdbeVExpstate == comp->ixWdbeVExpstate) insert(items, IXWDBEVEXPSTATE);
 	if (jrefDetail == comp->jrefDetail) insert(items, JREFDETAIL);
-	if (jrefAPar == comp->jrefAPar) insert(items, JREFAPAR);
 	if (jrefAMakefile == comp->jrefAMakefile) insert(items, JREFAMAKEFILE);
+	if (jrefAPar == comp->jrefAPar) insert(items, JREFAPAR);
 	if (jref1NRelease == comp->jref1NRelease) insert(items, JREF1NRELEASE);
 	if (jrefSup1NMachine == comp->jrefSup1NMachine) insert(items, JREFSUP1NMACHINE);
 	if (ButRegularizeActive == comp->ButRegularizeActive) insert(items, BUTREGULARIZEACTIVE);
@@ -190,7 +238,7 @@ set<uint> PnlWdbeMchRec::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {IXWDBEVEXPSTATE, JREFDETAIL, JREFAPAR, JREFAMAKEFILE, JREF1NRELEASE, JREFSUP1NMACHINE, BUTREGULARIZEACTIVE};
+	diffitems = {IXWDBEVEXPSTATE, JREFDETAIL, JREFAMAKEFILE, JREFAPAR, JREF1NRELEASE, JREFSUP1NMACHINE, BUTREGULARIZEACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -199,6 +247,20 @@ set<uint> PnlWdbeMchRec::StatShr::diff(
 /******************************************************************************
  class PnlWdbeMchRec::Tag
  ******************************************************************************/
+
+void PnlWdbeMchRec::Tag::writeJSON(
+			const uint ixWdbeVLocale
+			, Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "TagWdbeMchRec";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	if (ixWdbeVLocale == VecWdbeVLocale::ENUS) {
+		me["Cpt"] = "Machine";
+	};
+};
 
 void PnlWdbeMchRec::Tag::writeXML(
 			const uint ixWdbeVLocale
@@ -239,6 +301,26 @@ string PnlWdbeMchRec::DpchAppDo::getSrefsMask() {
 	StrMod::vectorToString(ss, srefs);
 
 	return(srefs);
+};
+
+void PnlWdbeMchRec::DpchAppDo::readJSON(
+			Json::Value& sup
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	Json::Value& me = sup;
+	if (addbasetag) me = sup["DpchAppWdbeMchRecDo"];
+
+	basefound = (me != Json::nullValue);
+
+	if (basefound) {
+		if (me.isMember("scrJref")) {jref = Scr::descramble(me["scrJref"].asString()); add(JREF);};
+		if (me.isMember("srefIxVDo")) {ixVDo = VecVDo::getIx(me["srefIxVDo"].asString()); add(IXVDO);};
+	} else {
+	};
 };
 
 void PnlWdbeMchRec::DpchAppDo::readXML(
@@ -315,6 +397,19 @@ void PnlWdbeMchRec::DpchEngData::merge(
 	if (src->has(STATAPP)) add(STATAPP);
 	if (src->has(STATSHR)) {statshr = src->statshr; add(STATSHR);};
 	if (src->has(TAG)) add(TAG);
+};
+
+void PnlWdbeMchRec::DpchEngData::writeJSON(
+			const uint ixWdbeVLocale
+			, Json::Value& sup
+		) {
+	Json::Value& me = sup["DpchEngWdbeMchRecData"] = Json::Value(Json::objectValue);
+
+	if (has(JREF)) me["scrJref"] = Scr::scramble(jref);
+	if (has(CONTINF)) continf.writeJSON(me);
+	if (has(STATAPP)) StatApp::writeJSON(me);
+	if (has(STATSHR)) statshr.writeJSON(me);
+	if (has(TAG)) Tag::writeJSON(ixWdbeVLocale, me);
 };
 
 void PnlWdbeMchRec::DpchEngData::writeXML(

@@ -31,6 +31,21 @@ WdbeQFam1NUnit::WdbeQFam1NUnit(
 	this->stubRef = stubRef;
 };
 
+void WdbeQFam1NUnit::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["ref"] = stubRef;
+	} else {
+		me["stubRef"] = stubRef;
+	};
+};
+
 void WdbeQFam1NUnit::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -96,6 +111,16 @@ ListWdbeQFam1NUnit& ListWdbeQFam1NUnit::operator=(
 	};
 
 	return(*this);
+};
+
+void ListWdbeQFam1NUnit::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListWdbeQFam1NUnit";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListWdbeQFam1NUnit::writeXML(

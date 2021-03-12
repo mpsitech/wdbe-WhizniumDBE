@@ -20,6 +20,8 @@ using namespace Sbecore;
 using namespace Xmlio;
 using namespace WdbeWrfpga;
 
+// IP ns.cust --- INSERT
+
 /******************************************************************************
  namespace WdbeWrfpgaIpclr
  ******************************************************************************/

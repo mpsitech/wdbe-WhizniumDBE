@@ -85,6 +85,19 @@ CrdWdbeUsg::ContInf::ContInf(
 	mask = {NUMFSGE, MRLAPPHLP, MTXCRDUSG};
 };
 
+void CrdWdbeUsg::ContInf::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "ContInfWdbeUsg";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["numFSge"] = numFSge;
+	me["MrlAppHlp"] = MrlAppHlp;
+	me["MtxCrdUsg"] = MtxCrdUsg;
+};
+
 void CrdWdbeUsg::ContInf::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -133,6 +146,30 @@ set<uint> CrdWdbeUsg::ContInf::diff(
  class CrdWdbeUsg::StatApp
  ******************************************************************************/
 
+void CrdWdbeUsg::StatApp::writeJSON(
+			Json::Value& sup
+			, string difftag
+			, const uint ixWdbeVReqitmode
+			, const usmallint latency
+			, const string& shortMenu
+			, const uint widthMenu
+			, const bool initdoneHeadbar
+			, const bool initdoneList
+			, const bool initdoneRec
+		) {
+	if (difftag.length() == 0) difftag = "StatAppWdbeUsg";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["srefIxWdbeVReqitmode"] = VecWdbeVReqitmode::getSref(ixWdbeVReqitmode);
+	me["latency"] = latency;
+	me["shortMenu"] = shortMenu;
+	me["widthMenu"] = widthMenu;
+	me["initdoneHeadbar"] = initdoneHeadbar;
+	me["initdoneList"] = initdoneList;
+	me["initdoneRec"] = initdoneRec;
+};
+
 void CrdWdbeUsg::StatApp::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -178,6 +215,19 @@ CrdWdbeUsg::StatShr::StatShr(
 	this->jrefRec = jrefRec;
 
 	mask = {JREFHEADBAR, JREFLIST, JREFREC};
+};
+
+void CrdWdbeUsg::StatShr::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "StatShrWdbeUsg";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["scrJrefHeadbar"] = Scr::scramble(jrefHeadbar);
+	me["scrJrefList"] = Scr::scramble(jrefList);
+	me["scrJrefRec"] = Scr::scramble(jrefRec);
 };
 
 void CrdWdbeUsg::StatShr::writeXML(
@@ -228,6 +278,21 @@ set<uint> CrdWdbeUsg::StatShr::diff(
  class CrdWdbeUsg::Tag
  ******************************************************************************/
 
+void CrdWdbeUsg::Tag::writeJSON(
+			const uint ixWdbeVLocale
+			, Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "TagWdbeUsg";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	if (ixWdbeVLocale == VecWdbeVLocale::ENUS) {
+	};
+	me["MitAppAbt"] = StrMod::cap(VecWdbeVTag::getTitle(VecWdbeVTag::ABOUT, ixWdbeVLocale)) + " ...";
+	me["MrlAppHlp"] = StrMod::cap(VecWdbeVTag::getTitle(VecWdbeVTag::HELP, ixWdbeVLocale)) + " ...";
+};
+
 void CrdWdbeUsg::Tag::writeXML(
 			const uint ixWdbeVLocale
 			, xmlTextWriter* wr
@@ -268,6 +333,26 @@ string CrdWdbeUsg::DpchAppDo::getSrefsMask() {
 	StrMod::vectorToString(ss, srefs);
 
 	return(srefs);
+};
+
+void CrdWdbeUsg::DpchAppDo::readJSON(
+			Json::Value& sup
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	Json::Value& me = sup;
+	if (addbasetag) me = sup["DpchAppWdbeUsgDo"];
+
+	basefound = (me != Json::nullValue);
+
+	if (basefound) {
+		if (me.isMember("scrJref")) {jref = Scr::descramble(me["scrJref"].asString()); add(JREF);};
+		if (me.isMember("srefIxVDo")) {ixVDo = VecVDo::getIx(me["srefIxVDo"].asString()); add(IXVDO);};
+	} else {
+	};
 };
 
 void CrdWdbeUsg::DpchAppDo::readXML(
@@ -348,6 +433,20 @@ void CrdWdbeUsg::DpchEngData::merge(
 	if (src->has(STATAPP)) add(STATAPP);
 	if (src->has(STATSHR)) {statshr = src->statshr; add(STATSHR);};
 	if (src->has(TAG)) add(TAG);
+};
+
+void CrdWdbeUsg::DpchEngData::writeJSON(
+			const uint ixWdbeVLocale
+			, Json::Value& sup
+		) {
+	Json::Value& me = sup["DpchEngWdbeUsgData"] = Json::Value(Json::objectValue);
+
+	if (has(JREF)) me["scrJref"] = Scr::scramble(jref);
+	if (has(CONTINF)) continf.writeJSON(me);
+	if (has(FEEDFSGE)) feedFSge.writeJSON(me);
+	if (has(STATAPP)) StatApp::writeJSON(me);
+	if (has(STATSHR)) statshr.writeJSON(me);
+	if (has(TAG)) Tag::writeJSON(ixWdbeVLocale, me);
 };
 
 void CrdWdbeUsg::DpchEngData::writeXML(

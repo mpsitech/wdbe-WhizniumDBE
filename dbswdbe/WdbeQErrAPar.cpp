@@ -47,6 +47,31 @@ WdbeQErrAPar::WdbeQErrAPar(
 	this->Comment = Comment;
 };
 
+void WdbeQErrAPar::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["srf"] = sref;
+		me["pty"] = srefIxWdbeVPartype;
+		me["pty2"] = titIxWdbeVPartype;
+		me["vec"] = stubRefWdbeMVector;
+		me["len"] = Length;
+		me["cmt"] = Comment;
+	} else {
+		me["sref"] = sref;
+		me["srefIxWdbeVPartype"] = srefIxWdbeVPartype;
+		me["titIxWdbeVPartype"] = titIxWdbeVPartype;
+		me["stubRefWdbeMVector"] = stubRefWdbeMVector;
+		me["Length"] = Length;
+		me["Comment"] = Comment;
+	};
+};
+
 void WdbeQErrAPar::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -122,6 +147,16 @@ ListWdbeQErrAPar& ListWdbeQErrAPar::operator=(
 	};
 
 	return(*this);
+};
+
+void ListWdbeQErrAPar::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListWdbeQErrAPar";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListWdbeQErrAPar::writeXML(

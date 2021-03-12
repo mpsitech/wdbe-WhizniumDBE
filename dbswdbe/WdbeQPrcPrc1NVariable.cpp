@@ -33,6 +33,21 @@ WdbeQPrcPrc1NVariable::WdbeQPrcPrc1NVariable(
 	this->prcNum = prcNum;
 };
 
+void WdbeQPrcPrc1NVariable::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["ref"] = stubRef;
+	} else {
+		me["stubRef"] = stubRef;
+	};
+};
+
 void WdbeQPrcPrc1NVariable::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -98,6 +113,16 @@ ListWdbeQPrcPrc1NVariable& ListWdbeQPrcPrc1NVariable::operator=(
 	};
 
 	return(*this);
+};
+
+void ListWdbeQPrcPrc1NVariable::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListWdbeQPrcPrc1NVariable";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListWdbeQPrcPrc1NVariable::writeXML(

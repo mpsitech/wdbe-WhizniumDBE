@@ -31,6 +31,21 @@ WdbeQMod1NProcess::WdbeQMod1NProcess(
 	this->stubRef = stubRef;
 };
 
+void WdbeQMod1NProcess::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["ref"] = stubRef;
+	} else {
+		me["stubRef"] = stubRef;
+	};
+};
+
 void WdbeQMod1NProcess::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -96,6 +111,16 @@ ListWdbeQMod1NProcess& ListWdbeQMod1NProcess::operator=(
 	};
 
 	return(*this);
+};
+
+void ListWdbeQMod1NProcess::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListWdbeQMod1NProcess";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListWdbeQMod1NProcess::writeXML(

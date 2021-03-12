@@ -31,6 +31,21 @@ WdbeQSil1NPeripheral::WdbeQSil1NPeripheral(
 	this->stubRef = stubRef;
 };
 
+void WdbeQSil1NPeripheral::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["ref"] = stubRef;
+	} else {
+		me["stubRef"] = stubRef;
+	};
+};
+
 void WdbeQSil1NPeripheral::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -96,6 +111,16 @@ ListWdbeQSil1NPeripheral& ListWdbeQSil1NPeripheral::operator=(
 	};
 
 	return(*this);
+};
+
+void ListWdbeQSil1NPeripheral::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListWdbeQSil1NPeripheral";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListWdbeQSil1NPeripheral::writeXML(

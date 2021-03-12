@@ -10,10 +10,10 @@
 #ifndef APIWDBE_H
 #define APIWDBE_H
 
-#define WDBE_VERSION "1.1.4"
+#define WDBE_VERSION "1.1.5"
 #define WDBE_VERSION_MAJOR 1
 #define WDBE_VERSION_MINOR 1
-#define WDBE_VERSION_SUB 4
+#define WDBE_VERSION_SUB 5
 
 #include "ApiWdbe_blks.h"
 
@@ -528,7 +528,7 @@
 /**
 	* StgWdbeapi
 	*/
-class StgWdbeapi : public Sbecore::Xmlio::Block {
+class StgWdbeapi : public Sbecore::Block {
 
 public:
 	static const Sbecore::uint ENGIP = 1;

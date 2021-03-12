@@ -17,3 +17,30 @@ JobWdbeLicense	true	true
 		ImeIAMBlockItem.end
 	ImeIMBlock.end
 ImeIMJob.end
+ImeIMCapability.sref
+DlgWdbeCvrBsccd
+	ImeIRMCapabilityUniversal.srefUnvUref	srefKKey
+	CrdWdbeCvr	car
+	IexWdbeBcd	iex
+	ImeIRMCapabilityUniversal.end
+DlgWdbeCvrDetcd
+	ImeIRMCapabilityUniversal.srefUnvUref	srefKKey
+	CrdWdbeCvr	car
+	IexWdbeDcd	iex
+	ImeIRMCapabilityUniversal.end
+DlgWdbePrjImpex
+	ImeIRMCapabilityUniversal.srefUnvUref	srefKKey
+	CrdWdbePrj	car
+	IexWdbePrj	iex
+	ImeIRMCapabilityUniversal.end
+DlgWdbeVerBscdd
+	ImeIRMCapabilityUniversal.srefUnvUref	srefKKey
+	CrdWdbeVer	car
+	IexWdbeBdd	iex
+	ImeIRMCapabilityUniversal.end
+DlgWdbeVerDetdd
+	ImeIRMCapabilityUniversal.srefUnvUref	srefKKey
+	CrdWdbeVer	car
+	IexWdbeDdd	iex
+	ImeIRMCapabilityUniversal.end
+ImeIMCapability.end

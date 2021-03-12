@@ -23,7 +23,7 @@ namespace QryWdbeSilRef1NCommand {
 	/**
 	  * StatApp (full: StatAppQryWdbeSilRef1NCommand)
 	  */
-	class StatApp : public Sbecore::Xmlio::Block {
+	class StatApp : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint FIRSTCOL = 1;
@@ -49,7 +49,7 @@ namespace QryWdbeSilRef1NCommand {
 	/**
 	  * StatShr (full: StatShrQryWdbeSilRef1NCommand)
 	  */
-	class StatShr : public Sbecore::Xmlio::Block {
+	class StatShr : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint NTOT = 1;
@@ -73,7 +73,7 @@ namespace QryWdbeSilRef1NCommand {
 	/**
 	  * StgIac (full: StgIacQryWdbeSilRef1NCommand)
 	  */
-	class StgIac : public Sbecore::Xmlio::Block {
+	class StgIac : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint JNUM = 1;

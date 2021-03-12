@@ -43,6 +43,29 @@ WdbeQErrList::WdbeQErrList(
 	this->stubRefUref = stubRefUref;
 };
 
+void WdbeQErrList::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["srf"] = sref;
+		me["fsr"] = Fullsref;
+		me["ret"] = srefRefIxVTbl;
+		me["ret2"] = titRefIxVTbl;
+		me["reu"] = stubRefUref;
+	} else {
+		me["sref"] = sref;
+		me["Fullsref"] = Fullsref;
+		me["srefRefIxVTbl"] = srefRefIxVTbl;
+		me["titRefIxVTbl"] = titRefIxVTbl;
+		me["stubRefUref"] = stubRefUref;
+	};
+};
+
 void WdbeQErrList::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -116,6 +139,16 @@ ListWdbeQErrList& ListWdbeQErrList::operator=(
 	};
 
 	return(*this);
+};
+
+void ListWdbeQErrList::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListWdbeQErrList";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListWdbeQErrList::writeXML(

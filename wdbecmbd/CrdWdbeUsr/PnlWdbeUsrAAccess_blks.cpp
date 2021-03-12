@@ -53,6 +53,17 @@ PnlWdbeUsrAAccess::ContInf::ContInf(
 	mask = {NUMFCSIQST};
 };
 
+void PnlWdbeUsrAAccess::ContInf::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "ContInfWdbeUsrAAccess";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["numFCsiQst"] = numFCsiQst;
+};
+
 void PnlWdbeUsrAAccess::ContInf::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -97,6 +108,18 @@ set<uint> PnlWdbeUsrAAccess::ContInf::diff(
  class PnlWdbeUsrAAccess::StatApp
  ******************************************************************************/
 
+void PnlWdbeUsrAAccess::StatApp::writeJSON(
+			Json::Value& sup
+			, string difftag
+			, const uint ixWdbeVExpstate
+		) {
+	if (difftag.length() == 0) difftag = "StatAppWdbeUsrAAccess";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["srefIxWdbeVExpstate"] = VecWdbeVExpstate::getSref(ixWdbeVExpstate);
+};
+
 void PnlWdbeUsrAAccess::StatApp::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -134,6 +157,21 @@ PnlWdbeUsrAAccess::StatShr::StatShr(
 	this->ButDeleteActive = ButDeleteActive;
 
 	mask = {BUTNEWAVAIL, BUTDUPLICATEAVAIL, BUTDUPLICATEACTIVE, BUTDELETEAVAIL, BUTDELETEACTIVE};
+};
+
+void PnlWdbeUsrAAccess::StatShr::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "StatShrWdbeUsrAAccess";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["ButNewAvail"] = ButNewAvail;
+	me["ButDuplicateAvail"] = ButDuplicateAvail;
+	me["ButDuplicateActive"] = ButDuplicateActive;
+	me["ButDeleteAvail"] = ButDeleteAvail;
+	me["ButDeleteActive"] = ButDeleteActive;
 };
 
 void PnlWdbeUsrAAccess::StatShr::writeXML(
@@ -201,6 +239,28 @@ PnlWdbeUsrAAccess::StgIac::StgIac(
 	mask = {TCOFEGWIDTH, TCOFEAWIDTH, TCOACCWIDTH};
 };
 
+bool PnlWdbeUsrAAccess::StgIac::readJSON(
+			Json::Value& sup
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	Json::Value& me = sup;
+	if (addbasetag) me = sup["StgIacWdbeUsrAAccess"];
+
+	basefound = (me != Json::nullValue);
+
+	if (basefound) {
+		if (me.isMember("TcoFegWidth")) {TcoFegWidth = me["TcoFegWidth"].asUInt(); add(TCOFEGWIDTH);};
+		if (me.isMember("TcoFeaWidth")) {TcoFeaWidth = me["TcoFeaWidth"].asUInt(); add(TCOFEAWIDTH);};
+		if (me.isMember("TcoAccWidth")) {TcoAccWidth = me["TcoAccWidth"].asUInt(); add(TCOACCWIDTH);};
+	};
+
+	return basefound;
+};
+
 bool PnlWdbeUsrAAccess::StgIac::readXML(
 			xmlXPathContext* docctx
 			, string basexpath
@@ -224,6 +284,19 @@ bool PnlWdbeUsrAAccess::StgIac::readXML(
 	};
 
 	return basefound;
+};
+
+void PnlWdbeUsrAAccess::StgIac::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "StgIacWdbeUsrAAccess";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["TcoFegWidth"] = TcoFegWidth;
+	me["TcoFeaWidth"] = TcoFeaWidth;
+	me["TcoAccWidth"] = TcoAccWidth;
 };
 
 void PnlWdbeUsrAAccess::StgIac::writeXML(
@@ -274,6 +347,28 @@ set<uint> PnlWdbeUsrAAccess::StgIac::diff(
  class PnlWdbeUsrAAccess::Tag
  ******************************************************************************/
 
+void PnlWdbeUsrAAccess::Tag::writeJSON(
+			const uint ixWdbeVLocale
+			, Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "TagWdbeUsrAAccess";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	if (ixWdbeVLocale == VecWdbeVLocale::ENUS) {
+		me["Cpt"] = "Feature access rights";
+		me["TcoFeg"] = "Feature group";
+		me["TcoFea"] = "Feature";
+		me["TcoAcc"] = "Feature access rights";
+	};
+	me["TxtRecord1"] = StrMod::cap(VecWdbeVTag::getTitle(VecWdbeVTag::REC, ixWdbeVLocale));
+	me["TxtRecord2"] = StrMod::cap(VecWdbeVTag::getTitle(VecWdbeVTag::EMPLONG, ixWdbeVLocale));
+	me["Trs"] = StrMod::cap(VecWdbeVTag::getTitle(VecWdbeVTag::GOTO, ixWdbeVLocale)) + " ...";
+	me["TxtShowing1"] = VecWdbeVTag::getTitle(VecWdbeVTag::SHOWSHORT, ixWdbeVLocale);
+	me["TxtShowing2"] = VecWdbeVTag::getTitle(VecWdbeVTag::EMPSHORT, ixWdbeVLocale);
+};
+
 void PnlWdbeUsrAAccess::Tag::writeXML(
 			const uint ixWdbeVLocale
 			, xmlTextWriter* wr
@@ -321,6 +416,29 @@ string PnlWdbeUsrAAccess::DpchAppData::getSrefsMask() {
 	StrMod::vectorToString(ss, srefs);
 
 	return(srefs);
+};
+
+void PnlWdbeUsrAAccess::DpchAppData::readJSON(
+			Json::Value& sup
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	Json::Value& me = sup;
+	if (addbasetag) me = sup["DpchAppWdbeUsrAAccessData"];
+
+	basefound = (me != Json::nullValue);
+
+	if (basefound) {
+		if (me.isMember("scrJref")) {jref = Scr::descramble(me["scrJref"].asString()); add(JREF);};
+		if (stgiac.readJSON(me, true)) add(STGIAC);
+		if (stgiacqry.readJSON(me, true)) add(STGIACQRY);
+	} else {
+		stgiac = StgIac();
+		stgiacqry = QryWdbeUsrAAccess::StgIac();
+	};
 };
 
 void PnlWdbeUsrAAccess::DpchAppData::readXML(
@@ -372,6 +490,26 @@ string PnlWdbeUsrAAccess::DpchAppDo::getSrefsMask() {
 	StrMod::vectorToString(ss, srefs);
 
 	return(srefs);
+};
+
+void PnlWdbeUsrAAccess::DpchAppDo::readJSON(
+			Json::Value& sup
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	Json::Value& me = sup;
+	if (addbasetag) me = sup["DpchAppWdbeUsrAAccessDo"];
+
+	basefound = (me != Json::nullValue);
+
+	if (basefound) {
+		if (me.isMember("scrJref")) {jref = Scr::descramble(me["scrJref"].asString()); add(JREF);};
+		if (me.isMember("srefIxVDo")) {ixVDo = VecVDo::getIx(me["srefIxVDo"].asString()); add(IXVDO);};
+	} else {
+	};
 };
 
 void PnlWdbeUsrAAccess::DpchAppDo::readXML(
@@ -470,6 +608,25 @@ void PnlWdbeUsrAAccess::DpchEngData::merge(
 	if (src->has(STATAPPQRY)) add(STATAPPQRY);
 	if (src->has(STATSHRQRY)) {statshrqry = src->statshrqry; add(STATSHRQRY);};
 	if (src->has(STGIACQRY)) {stgiacqry = src->stgiacqry; add(STGIACQRY);};
+};
+
+void PnlWdbeUsrAAccess::DpchEngData::writeJSON(
+			const uint ixWdbeVLocale
+			, Json::Value& sup
+		) {
+	Json::Value& me = sup["DpchEngWdbeUsrAAccessData"] = Json::Value(Json::objectValue);
+
+	if (has(JREF)) me["scrJref"] = Scr::scramble(jref);
+	if (has(CONTINF)) continf.writeJSON(me);
+	if (has(FEEDFCSIQST)) feedFCsiQst.writeJSON(me);
+	if (has(STATAPP)) StatApp::writeJSON(me);
+	if (has(STATSHR)) statshr.writeJSON(me);
+	if (has(STGIAC)) stgiac.writeJSON(me);
+	if (has(TAG)) Tag::writeJSON(ixWdbeVLocale, me);
+	if (has(RST)) rst.writeJSON(me);
+	if (has(STATAPPQRY)) QryWdbeUsrAAccess::StatApp::writeJSON(me);
+	if (has(STATSHRQRY)) statshrqry.writeJSON(me);
+	if (has(STGIACQRY)) stgiacqry.writeJSON(me);
 };
 
 void PnlWdbeUsrAAccess::DpchEngData::writeXML(

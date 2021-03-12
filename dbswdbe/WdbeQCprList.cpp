@@ -53,6 +53,35 @@ WdbeQCprList::WdbeQCprList(
 	this->Giturl = Giturl;
 };
 
+void WdbeQCprList::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["grp"] = stubGrp;
+		me["own"] = stubOwn;
+		me["srf"] = sref;
+		me["tit"] = Title;
+		me["typ"] = srefIxVBasetype;
+		me["typ2"] = titIxVBasetype;
+		me["cvr"] = stubRefWdbeMCoreversion;
+		me["grl"] = Giturl;
+	} else {
+		me["stubGrp"] = stubGrp;
+		me["stubOwn"] = stubOwn;
+		me["sref"] = sref;
+		me["Title"] = Title;
+		me["srefIxVBasetype"] = srefIxVBasetype;
+		me["titIxVBasetype"] = titIxVBasetype;
+		me["stubRefWdbeMCoreversion"] = stubRefWdbeMCoreversion;
+		me["Giturl"] = Giturl;
+	};
+};
+
 void WdbeQCprList::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -132,6 +161,16 @@ ListWdbeQCprList& ListWdbeQCprList::operator=(
 	};
 
 	return(*this);
+};
+
+void ListWdbeQCprList::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListWdbeQCprList";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListWdbeQCprList::writeXML(

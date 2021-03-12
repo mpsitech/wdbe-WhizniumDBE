@@ -60,7 +60,7 @@ namespace DlgWdbeNavMnglic {
 	/**
 	  * ContIac (full: ContIacDlgWdbeNavMnglic)
 	  */
-	class ContIac : public Sbecore::Xmlio::Block {
+	class ContIac : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint NUMFDETPUPFIS = 1;
@@ -85,7 +85,7 @@ namespace DlgWdbeNavMnglic {
 	/**
 	  * ContInf (full: ContInfDlgWdbeNavMnglic)
 	  */
-	class ContInf : public Sbecore::Xmlio::Block {
+	class ContInf : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint NUMFSGE = 1;
@@ -117,7 +117,7 @@ namespace DlgWdbeNavMnglic {
 	/**
 	  * StatApp (full: StatAppDlgWdbeNavMnglic)
 	  */
-	class StatApp : public Sbecore::Xmlio::Block {
+	class StatApp : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint SHORTMENU = 1;
@@ -139,7 +139,7 @@ namespace DlgWdbeNavMnglic {
 	/**
 	  * StatShr (full: StatShrDlgWdbeNavMnglic)
 	  */
-	class StatShr : public Sbecore::Xmlio::Block {
+	class StatShr : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint DETBUTACTACTIVE = 1;
@@ -159,7 +159,7 @@ namespace DlgWdbeNavMnglic {
 	/**
 	  * Tag (full: TagDlgWdbeNavMnglic)
 	  */
-	class Tag : public Sbecore::Xmlio::Block {
+	class Tag : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint CPT = 1;
@@ -268,9 +268,9 @@ namespace DlgWdbeNavMnglic {
 	public:
 		ContIac contiac;
 		ContInf continf;
-		Sbecore::Xmlio::Feed feedFDetLstLcs;
-		Sbecore::Xmlio::Feed feedFDetPupFis;
-		Sbecore::Xmlio::Feed feedFSge;
+		Sbecore::Feed feedFDetLstLcs;
+		Sbecore::Feed feedFDetPupFis;
+		Sbecore::Feed feedFSge;
 		StatApp statapp;
 		StatShr statshr;
 		Tag tag;

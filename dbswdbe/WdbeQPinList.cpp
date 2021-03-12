@@ -37,6 +37,25 @@ WdbeQPinList::WdbeQPinList(
 	this->Location = Location;
 };
 
+void WdbeQPinList::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["srf"] = sref;
+		me["bnk"] = stubRefWdbeMBank;
+		me["loc"] = Location;
+	} else {
+		me["sref"] = sref;
+		me["stubRefWdbeMBank"] = stubRefWdbeMBank;
+		me["Location"] = Location;
+	};
+};
+
 void WdbeQPinList::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -106,6 +125,16 @@ ListWdbeQPinList& ListWdbeQPinList::operator=(
 	};
 
 	return(*this);
+};
+
+void ListWdbeQPinList::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListWdbeQPinList";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListWdbeQPinList::writeXML(

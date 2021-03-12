@@ -14,10 +14,10 @@
 
 // IP include.cust --- INSERT
 
-#include "PnlWdbeCmdDetail.h"
+#include "PnlWdbeCmdMNController.h"
 #include "PnlWdbeCmdAInvpar.h"
 #include "PnlWdbeCmdARetpar.h"
-#include "PnlWdbeCmdMNController.h"
+#include "PnlWdbeCmdDetail.h"
 
 #define VecVWdbeCmdRecDo PnlWdbeCmdRec::VecVDo
 
@@ -51,7 +51,7 @@ public:
 	/**
 	  * ContInf (full: ContInfWdbeCmdRec)
 	  */
-	class ContInf : public Sbecore::Xmlio::Block {
+	class ContInf : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint TXTREF = 1;
@@ -63,6 +63,7 @@ public:
 		std::string TxtRef;
 
 	public:
+		void writeJSON(Json::Value& sup, std::string difftag = "");
 		void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
 		std::set<Sbecore::uint> comm(const ContInf* comp);
 		std::set<Sbecore::uint> diff(const ContInf* comp);
@@ -74,34 +75,36 @@ public:
 	class StatApp {
 
 	public:
-		static void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true, const bool initdoneDetail = false, const bool initdoneAInvpar = false, const bool initdoneARetpar = false, const bool initdoneMNController = false);
+		static void writeJSON(Json::Value& sup, std::string difftag = "", const bool initdoneDetail = false, const bool initdoneARetpar = false, const bool initdoneAInvpar = false, const bool initdoneMNController = false);
+		static void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true, const bool initdoneDetail = false, const bool initdoneARetpar = false, const bool initdoneAInvpar = false, const bool initdoneMNController = false);
 	};
 
 	/**
 		* StatShr (full: StatShrWdbeCmdRec)
 		*/
-	class StatShr : public Sbecore::Xmlio::Block {
+	class StatShr : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint IXWDBEVEXPSTATE = 1;
 		static const Sbecore::uint JREFDETAIL = 2;
-		static const Sbecore::uint JREFAINVPAR = 3;
-		static const Sbecore::uint JREFARETPAR = 4;
+		static const Sbecore::uint JREFARETPAR = 3;
+		static const Sbecore::uint JREFAINVPAR = 4;
 		static const Sbecore::uint JREFMNCONTROLLER = 5;
 		static const Sbecore::uint BUTREGULARIZEACTIVE = 6;
 
 	public:
-		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const Sbecore::ubigint jrefDetail = 0, const Sbecore::ubigint jrefAInvpar = 0, const Sbecore::ubigint jrefARetpar = 0, const Sbecore::ubigint jrefMNController = 0, const bool ButRegularizeActive = true);
+		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const Sbecore::ubigint jrefDetail = 0, const Sbecore::ubigint jrefARetpar = 0, const Sbecore::ubigint jrefAInvpar = 0, const Sbecore::ubigint jrefMNController = 0, const bool ButRegularizeActive = true);
 
 	public:
 		Sbecore::uint ixWdbeVExpstate;
 		Sbecore::ubigint jrefDetail;
-		Sbecore::ubigint jrefAInvpar;
 		Sbecore::ubigint jrefARetpar;
+		Sbecore::ubigint jrefAInvpar;
 		Sbecore::ubigint jrefMNController;
 		bool ButRegularizeActive;
 
 	public:
+		void writeJSON(Json::Value& sup, std::string difftag = "");
 		void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
 		std::set<Sbecore::uint> comm(const StatShr* comp);
 		std::set<Sbecore::uint> diff(const StatShr* comp);
@@ -113,6 +116,7 @@ public:
 	class Tag {
 
 	public:
+		static void writeJSON(const Sbecore::uint ixWdbeVLocale, Json::Value& sup, std::string difftag = "");
 		static void writeXML(const Sbecore::uint ixWdbeVLocale, xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
 	};
 
@@ -134,6 +138,7 @@ public:
 	public:
 		std::string getSrefsMask();
 
+		void readJSON(Json::Value& sup, bool addbasetag = false);
 		void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 	};
 
@@ -161,6 +166,7 @@ public:
 		std::string getSrefsMask();
 		void merge(DpchEngWdbe* dpcheng);
 
+		void writeJSON(const Sbecore::uint ixWzskVLocale, Json::Value& sup);
 		void writeXML(const Sbecore::uint ixWdbeVLocale, xmlTextWriter* wr);
 	};
 
@@ -174,10 +180,10 @@ public:
 	ContInf continf;
 	StatShr statshr;
 
-	PnlWdbeCmdDetail* pnldetail;
+	PnlWdbeCmdMNController* pnlmncontroller;
 	PnlWdbeCmdAInvpar* pnlainvpar;
 	PnlWdbeCmdARetpar* pnlaretpar;
-	PnlWdbeCmdMNController* pnlmncontroller;
+	PnlWdbeCmdDetail* pnldetail;
 
 	WdbeMCommand recCmd;
 
@@ -211,11 +217,11 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeCmd_retEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
-	bool handleCallWdbeCmd_reu_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
-	bool handleCallWdbeCmd_reu_mdl_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
-	bool handleCallWdbeCmd_reuEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
 	bool handleCallWdbeCmdUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbeCmd_reuEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeCmd_reu_mdl_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
+	bool handleCallWdbeCmd_reu_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
+	bool handleCallWdbeCmd_retEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
 
 };
 

@@ -51,6 +51,37 @@ WdbeQFstAStep::WdbeQFstAStep(
 	this->Ip4 = Ip4;
 };
 
+void WdbeQFstAStep::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["fnx"] = stubFnxRefWdbeMFsmstate;
+		me["cn1"] = Cond1;
+		me["ip1"] = Ip1;
+		me["cn2"] = Cond2;
+		me["ip2"] = Ip2;
+		me["cn3"] = Cond3;
+		me["ip3"] = Ip3;
+		me["cn4"] = Cond4;
+		me["ip4"] = Ip4;
+	} else {
+		me["stubFnxRefWdbeMFsmstate"] = stubFnxRefWdbeMFsmstate;
+		me["Cond1"] = Cond1;
+		me["Ip1"] = Ip1;
+		me["Cond2"] = Cond2;
+		me["Ip2"] = Ip2;
+		me["Cond3"] = Cond3;
+		me["Ip3"] = Ip3;
+		me["Cond4"] = Cond4;
+		me["Ip4"] = Ip4;
+	};
+};
+
 void WdbeQFstAStep::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -132,6 +163,16 @@ ListWdbeQFstAStep& ListWdbeQFstAStep::operator=(
 	};
 
 	return(*this);
+};
+
+void ListWdbeQFstAStep::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListWdbeQFstAStep";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListWdbeQFstAStep::writeXML(

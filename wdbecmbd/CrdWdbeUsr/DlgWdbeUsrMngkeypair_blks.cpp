@@ -87,6 +87,19 @@ DlgWdbeUsrMngkeypair::ContInf::ContInf(
 	mask = {NUMFSGE, DETTXTSTE, DETDLD};
 };
 
+void DlgWdbeUsrMngkeypair::ContInf::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "ContInfDlgWdbeUsrMngkeypair";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["numFSge"] = numFSge;
+	me["DetTxtSte"] = DetTxtSte;
+	me["DetDld"] = DetDld;
+};
+
 void DlgWdbeUsrMngkeypair::ContInf::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -135,6 +148,18 @@ set<uint> DlgWdbeUsrMngkeypair::ContInf::diff(
  class DlgWdbeUsrMngkeypair::StatApp
  ******************************************************************************/
 
+void DlgWdbeUsrMngkeypair::StatApp::writeJSON(
+			Json::Value& sup
+			, string difftag
+			, const string& shortMenu
+		) {
+	if (difftag.length() == 0) difftag = "StatAppDlgWdbeUsrMngkeypair";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["shortMenu"] = shortMenu;
+};
+
 void DlgWdbeUsrMngkeypair::StatApp::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -168,6 +193,19 @@ DlgWdbeUsrMngkeypair::StatShr::StatShr(
 	this->DetDldActive = DetDldActive;
 
 	mask = {DETBUTDELAVAIL, DETBUTGENAVAIL, DETDLDACTIVE};
+};
+
+void DlgWdbeUsrMngkeypair::StatShr::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "StatShrDlgWdbeUsrMngkeypair";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["DetButDelAvail"] = DetButDelAvail;
+	me["DetButGenAvail"] = DetButGenAvail;
+	me["DetDldActive"] = DetDldActive;
 };
 
 void DlgWdbeUsrMngkeypair::StatShr::writeXML(
@@ -218,6 +256,25 @@ set<uint> DlgWdbeUsrMngkeypair::StatShr::diff(
  class DlgWdbeUsrMngkeypair::Tag
  ******************************************************************************/
 
+void DlgWdbeUsrMngkeypair::Tag::writeJSON(
+			const uint ixWdbeVLocale
+			, Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "TagDlgWdbeUsrMngkeypair";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	if (ixWdbeVLocale == VecWdbeVLocale::ENUS) {
+		me["Cpt"] = "Manage SSH key pair";
+		me["DetCptSte"] = "State";
+		me["DetButDel"] = "Delete";
+		me["DetButGen"] = "Generate";
+		me["DetDld"] = "Download public key";
+	};
+	me["ButDne"] = StrMod::cap(VecWdbeVTag::getTitle(VecWdbeVTag::DONE, ixWdbeVLocale));
+};
+
 void DlgWdbeUsrMngkeypair::Tag::writeXML(
 			const uint ixWdbeVLocale
 			, xmlTextWriter* wr
@@ -262,6 +319,26 @@ string DlgWdbeUsrMngkeypair::DpchAppDo::getSrefsMask() {
 	StrMod::vectorToString(ss, srefs);
 
 	return(srefs);
+};
+
+void DlgWdbeUsrMngkeypair::DpchAppDo::readJSON(
+			Json::Value& sup
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	Json::Value& me = sup;
+	if (addbasetag) me = sup["DpchAppDlgWdbeUsrMngkeypairDo"];
+
+	basefound = (me != Json::nullValue);
+
+	if (basefound) {
+		if (me.isMember("scrJref")) {jref = Scr::descramble(me["scrJref"].asString()); add(JREF);};
+		if (me.isMember("srefIxVDo")) {ixVDo = VecVDo::getIx(me["srefIxVDo"].asString()); add(IXVDO);};
+	} else {
+	};
 };
 
 void DlgWdbeUsrMngkeypair::DpchAppDo::readXML(
@@ -342,6 +419,20 @@ void DlgWdbeUsrMngkeypair::DpchEngData::merge(
 	if (src->has(STATAPP)) add(STATAPP);
 	if (src->has(STATSHR)) {statshr = src->statshr; add(STATSHR);};
 	if (src->has(TAG)) add(TAG);
+};
+
+void DlgWdbeUsrMngkeypair::DpchEngData::writeJSON(
+			const uint ixWdbeVLocale
+			, Json::Value& sup
+		) {
+	Json::Value& me = sup["DpchEngDlgWdbeUsrMngkeypairData"] = Json::Value(Json::objectValue);
+
+	if (has(JREF)) me["scrJref"] = Scr::scramble(jref);
+	if (has(CONTINF)) continf.writeJSON(me);
+	if (has(FEEDFSGE)) feedFSge.writeJSON(me);
+	if (has(STATAPP)) StatApp::writeJSON(me);
+	if (has(STATSHR)) statshr.writeJSON(me);
+	if (has(TAG)) Tag::writeJSON(ixWdbeVLocale, me);
 };
 
 void DlgWdbeUsrMngkeypair::DpchEngData::writeXML(

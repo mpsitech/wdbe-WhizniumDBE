@@ -48,7 +48,7 @@ namespace PnlWdbeMod1NPeripheral {
 	/**
 	  * ContInf (full: ContInfWdbeMod1NPeripheral)
 	  */
-	class ContInf : public Sbecore::Xmlio::Block {
+	class ContInf : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint NUMFCSIQST = 1;
@@ -68,7 +68,7 @@ namespace PnlWdbeMod1NPeripheral {
 	/**
 	  * StatApp (full: StatAppWdbeMod1NPeripheral)
 	  */
-	class StatApp : public Sbecore::Xmlio::Block {
+	class StatApp : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint IXWDBEVEXPSTATE = 1;
@@ -88,7 +88,7 @@ namespace PnlWdbeMod1NPeripheral {
 	/**
 	  * StatShr (full: StatShrWdbeMod1NPeripheral)
 	  */
-	class StatShr : public Sbecore::Xmlio::Block {
+	class StatShr : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint BUTVIEWAVAIL = 1;
@@ -110,7 +110,7 @@ namespace PnlWdbeMod1NPeripheral {
 	/**
 	  * StgIac (full: StgIacWdbeMod1NPeripheral)
 	  */
-	class StgIac : public Sbecore::Xmlio::Block {
+	class StgIac : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint TCOREFWIDTH = 1;
@@ -131,7 +131,7 @@ namespace PnlWdbeMod1NPeripheral {
 	/**
 	  * Tag (full: TagWdbeMod1NPeripheral)
 	  */
-	class Tag : public Sbecore::Xmlio::Block {
+	class Tag : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint CPT = 1;
@@ -227,7 +227,7 @@ namespace PnlWdbeMod1NPeripheral {
 
 	public:
 		ContInf continf;
-		Sbecore::Xmlio::Feed feedFCsiQst;
+		Sbecore::Feed feedFCsiQst;
 		StatApp statapp;
 		StatShr statshr;
 		StgIac stgiac;

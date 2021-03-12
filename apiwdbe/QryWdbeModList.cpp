@@ -22,12 +22,12 @@ uint QryWdbeModList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "srf") return SRF;
-	if (s == "typ") return TYP;
-	if (s == "hkt") return HKT;
-	if (s == "hku") return HKU;
-	if (s == "sup") return SUP;
 	if (s == "tpl") return TPL;
+	if (s == "sup") return SUP;
+	if (s == "hku") return HKU;
+	if (s == "hkt") return HKT;
+	if (s == "typ") return TYP;
+	if (s == "srf") return SRF;
 
 	return(0);
 };
@@ -35,12 +35,12 @@ uint QryWdbeModList::VecVOrd::getIx(
 string QryWdbeModList::VecVOrd::getSref(
 			const uint ix
 		) {
-	if (ix == SRF) return("srf");
-	if (ix == TYP) return("typ");
-	if (ix == HKT) return("hkt");
-	if (ix == HKU) return("hku");
-	if (ix == SUP) return("sup");
 	if (ix == TPL) return("tpl");
+	if (ix == SUP) return("sup");
+	if (ix == HKU) return("hku");
+	if (ix == HKT) return("hkt");
+	if (ix == TYP) return("typ");
+	if (ix == SRF) return("srf");
 
 	return("");
 };

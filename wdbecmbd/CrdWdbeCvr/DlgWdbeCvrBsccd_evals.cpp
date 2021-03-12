@@ -11,45 +11,17 @@ using namespace std;
 using namespace Sbecore;
 using namespace Xmlio;
 
-bool DlgWdbeCvrBsccd::evalIfiUldActive(
+bool DlgWdbeCvrBsccd::evalButDneActive(
 			DbsWdbe* dbswdbe
 		) {
-	// sge(idle)
-
-	vector<bool> args;
-	bool a;
-
-	a = false; a = (ixVSge == VecVSge::IDLE);
-	args.push_back(a);
-
-	return(args.back());
-};
-
-bool DlgWdbeCvrBsccd::evalImpButRunActive(
-			DbsWdbe* dbswdbe
-		) {
-	// sge(prsdone)
-
-	vector<bool> args;
-	bool a;
-
-	a = false; a = (ixVSge == VecVSge::PRSDONE);
-	args.push_back(a);
-
-	return(args.back());
-};
-
-bool DlgWdbeCvrBsccd::evalImpButStoActive(
-			DbsWdbe* dbswdbe
-		) {
-	// sge(impidle|import)
+	// sge(idle|done)
 
 	vector<bool> args;
 	bool a, b;
 
-	a = false; a = (ixVSge == VecVSge::IMPIDLE);
+	a = false; a = (ixVSge == VecVSge::IDLE);
 	args.push_back(a);
-	a = false; a = (ixVSge == VecVSge::IMPORT);
+	a = false; a = (ixVSge == VecVSge::DONE);
 	args.push_back(a);
 	b = args.back(); args.pop_back();
 	a = args.back(); args.pop_back();
@@ -100,21 +72,49 @@ bool DlgWdbeCvrBsccd::evalLfiDldActive(
 	return(args.back());
 };
 
-bool DlgWdbeCvrBsccd::evalButDneActive(
+bool DlgWdbeCvrBsccd::evalImpButRunActive(
 			DbsWdbe* dbswdbe
 		) {
-	// sge(idle|done)
+	// sge(prsdone)
+
+	vector<bool> args;
+	bool a;
+
+	a = false; a = (ixVSge == VecVSge::PRSDONE);
+	args.push_back(a);
+
+	return(args.back());
+};
+
+bool DlgWdbeCvrBsccd::evalImpButStoActive(
+			DbsWdbe* dbswdbe
+		) {
+	// sge(impidle|import)
 
 	vector<bool> args;
 	bool a, b;
 
-	a = false; a = (ixVSge == VecVSge::IDLE);
+	a = false; a = (ixVSge == VecVSge::IMPIDLE);
 	args.push_back(a);
-	a = false; a = (ixVSge == VecVSge::DONE);
+	a = false; a = (ixVSge == VecVSge::IMPORT);
 	args.push_back(a);
 	b = args.back(); args.pop_back();
 	a = args.back(); args.pop_back();
 	args.push_back(a || b);
+
+	return(args.back());
+};
+
+bool DlgWdbeCvrBsccd::evalIfiUldActive(
+			DbsWdbe* dbswdbe
+		) {
+	// sge(idle)
+
+	vector<bool> args;
+	bool a;
+
+	a = false; a = (ixVSge == VecVSge::IDLE);
+	args.push_back(a);
 
 	return(args.back());
 };

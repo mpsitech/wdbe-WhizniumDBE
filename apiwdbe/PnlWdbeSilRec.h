@@ -42,7 +42,7 @@ namespace PnlWdbeSilRec {
 	/**
 	  * ContInf (full: ContInfWdbeSilRec)
 	  */
-	class ContInf : public Sbecore::Xmlio::Block {
+	class ContInf : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint TXTREF = 1;
@@ -62,34 +62,34 @@ namespace PnlWdbeSilRec {
 	/**
 	  * StatApp (full: StatAppWdbeSilRec)
 	  */
-	class StatApp : public Sbecore::Xmlio::Block {
+	class StatApp : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint INITDONEDETAIL = 1;
-		static const Sbecore::uint INITDONE1NBANK = 2;
-		static const Sbecore::uint INITDONEFWD1NCONTROLLER = 3;
-		static const Sbecore::uint INITDONE1NTARGET = 4;
-		static const Sbecore::uint INITDONESIL1NUNIT = 5;
-		static const Sbecore::uint INITDONE1NPERIPHERAL = 6;
+		static const Sbecore::uint INITDONE1NPERIPHERAL = 2;
+		static const Sbecore::uint INITDONESIL1NUNIT = 3;
+		static const Sbecore::uint INITDONE1NBANK = 4;
+		static const Sbecore::uint INITDONEFWD1NCONTROLLER = 5;
+		static const Sbecore::uint INITDONE1NTARGET = 6;
 		static const Sbecore::uint INITDONEREF1NCOMMAND = 7;
-		static const Sbecore::uint INITDONEHK1NMODULE = 8;
+		static const Sbecore::uint INITDONEREF1NERROR = 8;
 		static const Sbecore::uint INITDONEHK1NVECTOR = 9;
-		static const Sbecore::uint INITDONEREF1NERROR = 10;
+		static const Sbecore::uint INITDONEHK1NMODULE = 10;
 
 	public:
-		StatApp(const bool initdoneDetail = false, const bool initdone1NBank = false, const bool initdoneFwd1NController = false, const bool initdone1NTarget = false, const bool initdoneSil1NUnit = false, const bool initdone1NPeripheral = false, const bool initdoneRef1NCommand = false, const bool initdoneHk1NModule = false, const bool initdoneHk1NVector = false, const bool initdoneRef1NError = false);
+		StatApp(const bool initdoneDetail = false, const bool initdone1NPeripheral = false, const bool initdoneSil1NUnit = false, const bool initdone1NBank = false, const bool initdoneFwd1NController = false, const bool initdone1NTarget = false, const bool initdoneRef1NCommand = false, const bool initdoneRef1NError = false, const bool initdoneHk1NVector = false, const bool initdoneHk1NModule = false);
 
 	public:
 		bool initdoneDetail;
+		bool initdone1NPeripheral;
+		bool initdoneSil1NUnit;
 		bool initdone1NBank;
 		bool initdoneFwd1NController;
 		bool initdone1NTarget;
-		bool initdoneSil1NUnit;
-		bool initdone1NPeripheral;
 		bool initdoneRef1NCommand;
-		bool initdoneHk1NModule;
-		bool initdoneHk1NVector;
 		bool initdoneRef1NError;
+		bool initdoneHk1NVector;
+		bool initdoneHk1NModule;
 
 	public:
 		bool readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
@@ -100,37 +100,37 @@ namespace PnlWdbeSilRec {
 	/**
 	  * StatShr (full: StatShrWdbeSilRec)
 	  */
-	class StatShr : public Sbecore::Xmlio::Block {
+	class StatShr : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint IXWDBEVEXPSTATE = 1;
 		static const Sbecore::uint SCRJREFDETAIL = 2;
-		static const Sbecore::uint SCRJREF1NBANK = 3;
-		static const Sbecore::uint SCRJREFFWD1NCONTROLLER = 4;
-		static const Sbecore::uint SCRJREF1NTARGET = 5;
-		static const Sbecore::uint SCRJREFSIL1NUNIT = 6;
-		static const Sbecore::uint SCRJREF1NPERIPHERAL = 7;
+		static const Sbecore::uint SCRJREF1NPERIPHERAL = 3;
+		static const Sbecore::uint SCRJREFSIL1NUNIT = 4;
+		static const Sbecore::uint SCRJREF1NBANK = 5;
+		static const Sbecore::uint SCRJREFFWD1NCONTROLLER = 6;
+		static const Sbecore::uint SCRJREF1NTARGET = 7;
 		static const Sbecore::uint SCRJREFREF1NCOMMAND = 8;
-		static const Sbecore::uint SCRJREFHK1NMODULE = 9;
+		static const Sbecore::uint SCRJREFREF1NERROR = 9;
 		static const Sbecore::uint SCRJREFHK1NVECTOR = 10;
-		static const Sbecore::uint SCRJREFREF1NERROR = 11;
+		static const Sbecore::uint SCRJREFHK1NMODULE = 11;
 		static const Sbecore::uint BUTREGULARIZEACTIVE = 12;
 
 	public:
-		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const std::string& scrJrefDetail = "", const std::string& scrJref1NBank = "", const std::string& scrJrefFwd1NController = "", const std::string& scrJref1NTarget = "", const std::string& scrJrefSil1NUnit = "", const std::string& scrJref1NPeripheral = "", const std::string& scrJrefRef1NCommand = "", const std::string& scrJrefHk1NModule = "", const std::string& scrJrefHk1NVector = "", const std::string& scrJrefRef1NError = "", const bool ButRegularizeActive = true);
+		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const std::string& scrJrefDetail = "", const std::string& scrJref1NPeripheral = "", const std::string& scrJrefSil1NUnit = "", const std::string& scrJref1NBank = "", const std::string& scrJrefFwd1NController = "", const std::string& scrJref1NTarget = "", const std::string& scrJrefRef1NCommand = "", const std::string& scrJrefRef1NError = "", const std::string& scrJrefHk1NVector = "", const std::string& scrJrefHk1NModule = "", const bool ButRegularizeActive = true);
 
 	public:
 		Sbecore::uint ixWdbeVExpstate;
 		std::string scrJrefDetail;
+		std::string scrJref1NPeripheral;
+		std::string scrJrefSil1NUnit;
 		std::string scrJref1NBank;
 		std::string scrJrefFwd1NController;
 		std::string scrJref1NTarget;
-		std::string scrJrefSil1NUnit;
-		std::string scrJref1NPeripheral;
 		std::string scrJrefRef1NCommand;
-		std::string scrJrefHk1NModule;
-		std::string scrJrefHk1NVector;
 		std::string scrJrefRef1NError;
+		std::string scrJrefHk1NVector;
+		std::string scrJrefHk1NModule;
 		bool ButRegularizeActive;
 
 	public:
@@ -142,7 +142,7 @@ namespace PnlWdbeSilRec {
 	/**
 	  * Tag (full: TagWdbeSilRec)
 	  */
-	class Tag : public Sbecore::Xmlio::Block {
+	class Tag : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint CPT = 1;

@@ -40,7 +40,7 @@ namespace PnlWdbeNavAuxfct {
 	/**
 	  * StatApp (full: StatAppWdbeNavAuxfct)
 	  */
-	class StatApp : public Sbecore::Xmlio::Block {
+	class StatApp : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint IXWDBEVEXPSTATE = 1;
@@ -60,7 +60,7 @@ namespace PnlWdbeNavAuxfct {
 	/**
 	  * StatShr (full: StatShrWdbeNavAuxfct)
 	  */
-	class StatShr : public Sbecore::Xmlio::Block {
+	class StatShr : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint BUTUTLNEWCRDAVAIL = 1;
@@ -80,7 +80,7 @@ namespace PnlWdbeNavAuxfct {
 	/**
 	  * Tag (full: TagWdbeNavAuxfct)
 	  */
-	class Tag : public Sbecore::Xmlio::Block {
+	class Tag : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint CPT = 1;

@@ -46,8 +46,8 @@ QryWdbeFilList::QryWdbeFilList(
 
 	rerun(dbswdbe);
 
-	xchg->addClstn(VecWdbeVCall::CALLWDBESTUBCHG, jref, Clstn::VecVJobmask::SELF, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBEFILMOD, jref, Clstn::VecVJobmask::ALL, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBESTUBCHG, jref, Clstn::VecVJobmask::SELF, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -184,11 +184,11 @@ void QryWdbeFilList::rerun_orderSQL(
 			string& sqlstr
 			, const uint preIxOrd
 		) {
-	if (preIxOrd == VecVOrd::GRP) sqlstr += " ORDER BY TblWdbeMFile.grp ASC";
-	else if (preIxOrd == VecVOrd::OWN) sqlstr += " ORDER BY TblWdbeMFile.own ASC";
-	else if (preIxOrd == VecVOrd::FNM) sqlstr += " ORDER BY TblWdbeMFile.Filename ASC";
+	if (preIxOrd == VecVOrd::REU) sqlstr += " ORDER BY TblWdbeMFile.refUref ASC";
 	else if (preIxOrd == VecVOrd::RET) sqlstr += " ORDER BY TblWdbeMFile.refIxVTbl ASC";
-	else if (preIxOrd == VecVOrd::REU) sqlstr += " ORDER BY TblWdbeMFile.refUref ASC";
+	else if (preIxOrd == VecVOrd::FNM) sqlstr += " ORDER BY TblWdbeMFile.Filename ASC";
+	else if (preIxOrd == VecVOrd::GRP) sqlstr += " ORDER BY TblWdbeMFile.grp ASC";
+	else if (preIxOrd == VecVOrd::OWN) sqlstr += " ORDER BY TblWdbeMFile.own ASC";
 };
 
 void QryWdbeFilList::fetch(
@@ -220,10 +220,10 @@ void QryWdbeFilList::fetch(
 			rec->stubOwn = StubWdbe::getStubOwner(dbswdbe, rec->own, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
 			rec->srefRefIxVTbl = VecWdbeVMFileRefTbl::getSref(rec->refIxVTbl);
 			rec->titRefIxVTbl = VecWdbeVMFileRefTbl::getTitle(rec->refIxVTbl, ixWdbeVLocale);
-			if (rec->refIxVTbl == VecWdbeVMFileRefTbl::MTP) {
-				rec->stubRefUref = StubWdbe::getStubMtpStd(dbswdbe, rec->refUref, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
-			} else if (rec->refIxVTbl == VecWdbeVMFileRefTbl::VER) {
+			if (rec->refIxVTbl == VecWdbeVMFileRefTbl::VER) {
 				rec->stubRefUref = StubWdbe::getStubVerStd(dbswdbe, rec->refUref, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
+			} else if (rec->refIxVTbl == VecWdbeVMFileRefTbl::MTP) {
+				rec->stubRefUref = StubWdbe::getStubMtpStd(dbswdbe, rec->refUref, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
 			} else rec->stubRefUref = "-";
 			rec->titOsrefKContent = dbswdbe->getKlstTitleBySref(VecWdbeVKeylist::KLSTWDBEKMFILECONTENT, rec->osrefKContent, ixWdbeVLocale);
 			rec->titSrefKMimetype = dbswdbe->getKlstTitleBySref(VecWdbeVKeylist::KLSTWDBEKMFILEMIMETYPE, rec->srefKMimetype, ixWdbeVLocale);
@@ -381,20 +381,26 @@ void QryWdbeFilList::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
-		call->abort = handleCallWdbeStubChgFromSelf(dbswdbe);
+	if (call->ixVCall == VecWdbeVCall::CALLWDBEFILUPD_REFEQ) {
+		call->abort = handleCallWdbeFilUpd_refEq(dbswdbe, call->jref);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEFILMOD) {
 		call->abort = handleCallWdbeFilMod(dbswdbe, call->jref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEFILUPD_REFEQ) {
-		call->abort = handleCallWdbeFilUpd_refEq(dbswdbe, call->jref);
+	} else if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
+		call->abort = handleCallWdbeStubChgFromSelf(dbswdbe);
 	};
 };
 
-bool QryWdbeFilList::handleCallWdbeStubChgFromSelf(
+bool QryWdbeFilList::handleCallWdbeFilUpd_refEq(
 			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
 		) {
 	bool retval = false;
-	// IP handleCallWdbeStubChgFromSelf --- INSERT
+
+	if (ixWdbeVQrystate != VecWdbeVQrystate::OOD) {
+		ixWdbeVQrystate = VecWdbeVQrystate::OOD;
+		xchg->triggerCall(dbswdbe, VecWdbeVCall::CALLWDBESTATCHG, jref);
+	};
+
 	return retval;
 };
 
@@ -412,16 +418,10 @@ bool QryWdbeFilList::handleCallWdbeFilMod(
 	return retval;
 };
 
-bool QryWdbeFilList::handleCallWdbeFilUpd_refEq(
+bool QryWdbeFilList::handleCallWdbeStubChgFromSelf(
 			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
 		) {
 	bool retval = false;
-
-	if (ixWdbeVQrystate != VecWdbeVQrystate::OOD) {
-		ixWdbeVQrystate = VecWdbeVQrystate::OOD;
-		xchg->triggerCall(dbswdbe, VecWdbeVCall::CALLWDBESTATCHG, jref);
-	};
-
+	// IP handleCallWdbeStubChgFromSelf --- INSERT
 	return retval;
 };

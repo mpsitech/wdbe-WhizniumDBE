@@ -28,10 +28,10 @@ namespace QryWdbeMtpList {
 	class VecVOrd {
 
 	public:
-		static const Sbecore::uint SRF = 1;
-		static const Sbecore::uint TYP = 2;
-		static const Sbecore::uint HKT = 3;
-		static const Sbecore::uint HKU = 4;
+		static const Sbecore::uint TYP = 1;
+		static const Sbecore::uint HKT = 2;
+		static const Sbecore::uint HKU = 3;
+		static const Sbecore::uint SRF = 4;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);
@@ -40,7 +40,7 @@ namespace QryWdbeMtpList {
 	/**
 	  * StatApp (full: StatAppQryWdbeMtpList)
 	  */
-	class StatApp : public Sbecore::Xmlio::Block {
+	class StatApp : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint FIRSTCOL = 1;
@@ -66,7 +66,7 @@ namespace QryWdbeMtpList {
 	/**
 	  * StatShr (full: StatShrQryWdbeMtpList)
 	  */
-	class StatShr : public Sbecore::Xmlio::Block {
+	class StatShr : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint NTOT = 1;
@@ -90,7 +90,7 @@ namespace QryWdbeMtpList {
 	/**
 	  * StgIac (full: StgIacQryWdbeMtpList)
 	  */
-	class StgIac : public Sbecore::Xmlio::Block {
+	class StgIac : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint JNUM = 1;

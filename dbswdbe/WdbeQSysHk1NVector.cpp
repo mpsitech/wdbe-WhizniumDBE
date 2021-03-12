@@ -31,6 +31,21 @@ WdbeQSysHk1NVector::WdbeQSysHk1NVector(
 	this->stubRef = stubRef;
 };
 
+void WdbeQSysHk1NVector::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["ref"] = stubRef;
+	} else {
+		me["stubRef"] = stubRef;
+	};
+};
+
 void WdbeQSysHk1NVector::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -96,6 +111,16 @@ ListWdbeQSysHk1NVector& ListWdbeQSysHk1NVector::operator=(
 	};
 
 	return(*this);
+};
+
+void ListWdbeQSysHk1NVector::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListWdbeQSysHk1NVector";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListWdbeQSysHk1NVector::writeXML(

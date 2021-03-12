@@ -51,6 +51,35 @@ WdbeQVarList::WdbeQVarList(
 	this->Minmax = Minmax;
 };
 
+void WdbeQVarList::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["srf"] = sref;
+		me["prc"] = stubPrcRefWdbeMProcess;
+		me["con"] = yesnoConst;
+		me["fal"] = yesnoFalling;
+		me["hty"] = srefWdbeKHdltype;
+		me["hty2"] = titSrefWdbeKHdltype;
+		me["wid"] = Width;
+		me["mmx"] = Minmax;
+	} else {
+		me["sref"] = sref;
+		me["stubPrcRefWdbeMProcess"] = stubPrcRefWdbeMProcess;
+		me["yesnoConst"] = yesnoConst;
+		me["yesnoFalling"] = yesnoFalling;
+		me["srefWdbeKHdltype"] = srefWdbeKHdltype;
+		me["titSrefWdbeKHdltype"] = titSrefWdbeKHdltype;
+		me["Width"] = Width;
+		me["Minmax"] = Minmax;
+	};
+};
+
 void WdbeQVarList::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -130,6 +159,16 @@ ListWdbeQVarList& ListWdbeQVarList::operator=(
 	};
 
 	return(*this);
+};
+
+void ListWdbeQVarList::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListWdbeQVarList";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListWdbeQVarList::writeXML(

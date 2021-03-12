@@ -42,7 +42,7 @@ namespace PnlWdbeNavPre {
 	/**
 	  * ContInf (full: ContInfWdbeNavPre)
 	  */
-	class ContInf : public Sbecore::Xmlio::Block {
+	class ContInf : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint TXTCVR = 1;
@@ -66,7 +66,7 @@ namespace PnlWdbeNavPre {
 	/**
 	  * StatShr (full: StatShrWdbeNavPre)
 	  */
-	class StatShr : public Sbecore::Xmlio::Block {
+	class StatShr : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint TXTCVRAVAIL = 1;
@@ -90,7 +90,7 @@ namespace PnlWdbeNavPre {
 	/**
 	  * Tag (full: TagWdbeNavPre)
 	  */
-	class Tag : public Sbecore::Xmlio::Block {
+	class Tag : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint CPTCVR = 1;

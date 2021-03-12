@@ -35,6 +35,7 @@ public:
 	std::string stubRef;
 
 public:
+	void writeJSON(Json::Value& sup, bool jnumattr = false, bool shorttags = false);
 	void writeXML(xmlTextWriter* wr, std::string difftag = "", bool jnumattr = false, bool shorttags = false);
 };
 
@@ -58,6 +59,7 @@ public:
 	std::vector<WdbeQMod1NPeripheral*> nodes;
 
 public:
+	void writeJSON(Json::Value& sup, std::string difftag = "");
 	void writeXML(xmlTextWriter* wr, std::string difftag = "");
 };
 

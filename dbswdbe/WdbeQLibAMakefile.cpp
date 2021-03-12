@@ -39,6 +39,27 @@ WdbeQLibAMakefile::WdbeQLibAMakefile(
 	this->Val = Val;
 };
 
+void WdbeQLibAMakefile::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["mch"] = stubX1RefWdbeMMachine;
+		me["tag"] = x2SrefKTag;
+		me["tag2"] = titX2SrefKTag;
+		me["val"] = Val;
+	} else {
+		me["stubX1RefWdbeMMachine"] = stubX1RefWdbeMMachine;
+		me["x2SrefKTag"] = x2SrefKTag;
+		me["titX2SrefKTag"] = titX2SrefKTag;
+		me["Val"] = Val;
+	};
+};
+
 void WdbeQLibAMakefile::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -110,6 +131,16 @@ ListWdbeQLibAMakefile& ListWdbeQLibAMakefile::operator=(
 	};
 
 	return(*this);
+};
+
+void ListWdbeQLibAMakefile::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListWdbeQLibAMakefile";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListWdbeQLibAMakefile::writeXML(

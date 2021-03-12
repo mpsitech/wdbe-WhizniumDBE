@@ -57,6 +57,37 @@ WdbeQModList::WdbeQModList(
 	this->Srefrule = Srefrule;
 };
 
+void WdbeQModList::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["srf"] = sref;
+		me["typ"] = srefIxVBasetype;
+		me["typ2"] = titIxVBasetype;
+		me["hkt"] = srefHkIxVTbl;
+		me["hkt2"] = titHkIxVTbl;
+		me["hku"] = stubHkUref;
+		me["sup"] = stubSupRefWdbeMModule;
+		me["tpl"] = stubTplRefWdbeMModule;
+		me["srr"] = Srefrule;
+	} else {
+		me["sref"] = sref;
+		me["srefIxVBasetype"] = srefIxVBasetype;
+		me["titIxVBasetype"] = titIxVBasetype;
+		me["srefHkIxVTbl"] = srefHkIxVTbl;
+		me["titHkIxVTbl"] = titHkIxVTbl;
+		me["stubHkUref"] = stubHkUref;
+		me["stubSupRefWdbeMModule"] = stubSupRefWdbeMModule;
+		me["stubTplRefWdbeMModule"] = stubTplRefWdbeMModule;
+		me["Srefrule"] = Srefrule;
+	};
+};
+
 void WdbeQModList::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -138,6 +169,16 @@ ListWdbeQModList& ListWdbeQModList::operator=(
 	};
 
 	return(*this);
+};
+
+void ListWdbeQModList::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListWdbeQModList";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListWdbeQModList::writeXML(

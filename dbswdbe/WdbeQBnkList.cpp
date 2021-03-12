@@ -39,6 +39,27 @@ WdbeQBnkList::WdbeQBnkList(
 	this->titSrefKVoltstd = titSrefKVoltstd;
 };
 
+void WdbeQBnkList::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["srf"] = sref;
+		me["unt"] = stubRefWdbeMUnit;
+		me["vst"] = srefKVoltstd;
+		me["vst2"] = titSrefKVoltstd;
+	} else {
+		me["sref"] = sref;
+		me["stubRefWdbeMUnit"] = stubRefWdbeMUnit;
+		me["srefKVoltstd"] = srefKVoltstd;
+		me["titSrefKVoltstd"] = titSrefKVoltstd;
+	};
+};
+
 void WdbeQBnkList::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -110,6 +131,16 @@ ListWdbeQBnkList& ListWdbeQBnkList::operator=(
 	};
 
 	return(*this);
+};
+
+void ListWdbeQBnkList::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListWdbeQBnkList";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListWdbeQBnkList::writeXML(

@@ -31,6 +31,21 @@ WdbeQCpr1NCoreversion::WdbeQCpr1NCoreversion(
 	this->stubRef = stubRef;
 };
 
+void WdbeQCpr1NCoreversion::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["ref"] = stubRef;
+	} else {
+		me["stubRef"] = stubRef;
+	};
+};
+
 void WdbeQCpr1NCoreversion::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -96,6 +111,16 @@ ListWdbeQCpr1NCoreversion& ListWdbeQCpr1NCoreversion::operator=(
 	};
 
 	return(*this);
+};
+
+void ListWdbeQCpr1NCoreversion::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListWdbeQCpr1NCoreversion";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListWdbeQCpr1NCoreversion::writeXML(

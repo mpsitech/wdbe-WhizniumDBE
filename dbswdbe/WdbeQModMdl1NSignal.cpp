@@ -33,6 +33,21 @@ WdbeQModMdl1NSignal::WdbeQModMdl1NSignal(
 	this->mdlNum = mdlNum;
 };
 
+void WdbeQModMdl1NSignal::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["ref"] = stubRef;
+	} else {
+		me["stubRef"] = stubRef;
+	};
+};
+
 void WdbeQModMdl1NSignal::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -98,6 +113,16 @@ ListWdbeQModMdl1NSignal& ListWdbeQModMdl1NSignal::operator=(
 	};
 
 	return(*this);
+};
+
+void ListWdbeQModMdl1NSignal::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListWdbeQModMdl1NSignal";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListWdbeQModMdl1NSignal::writeXML(

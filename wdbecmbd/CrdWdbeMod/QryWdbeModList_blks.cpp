@@ -20,12 +20,12 @@ uint QryWdbeModList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "srf") return SRF;
-	if (s == "typ") return TYP;
-	if (s == "hkt") return HKT;
-	if (s == "hku") return HKU;
-	if (s == "sup") return SUP;
 	if (s == "tpl") return TPL;
+	if (s == "sup") return SUP;
+	if (s == "hku") return HKU;
+	if (s == "hkt") return HKT;
+	if (s == "typ") return TYP;
+	if (s == "srf") return SRF;
 
 	return(0);
 };
@@ -33,12 +33,12 @@ uint QryWdbeModList::VecVOrd::getIx(
 string QryWdbeModList::VecVOrd::getSref(
 			const uint ix
 		) {
-	if (ix == SRF) return("srf");
-	if (ix == TYP) return("typ");
-	if (ix == HKT) return("hkt");
-	if (ix == HKU) return("hku");
-	if (ix == SUP) return("sup");
 	if (ix == TPL) return("tpl");
+	if (ix == SUP) return("sup");
+	if (ix == HKU) return("hku");
+	if (ix == HKT) return("hkt");
+	if (ix == TYP) return("typ");
+	if (ix == SRF) return("srf");
 
 	return("");
 };
@@ -54,6 +54,24 @@ void QryWdbeModList::VecVOrd::fillFeed(
 /******************************************************************************
  class QryWdbeModList::StatApp
  ******************************************************************************/
+
+void QryWdbeModList::StatApp::writeJSON(
+			Json::Value& sup
+			, string difftag
+			, const uint firstcol
+			, const uint jnumFirstdisp
+			, const uint ncol
+			, const uint ndisp
+		) {
+	if (difftag.length() == 0) difftag = "StatAppQryWdbeModList";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["firstcol"] = firstcol;
+	me["jnumFirstdisp"] = jnumFirstdisp;
+	me["ncol"] = ncol;
+	me["ndisp"] = ndisp;
+};
 
 void QryWdbeModList::StatApp::writeXML(
 			xmlTextWriter* wr
@@ -94,6 +112,19 @@ QryWdbeModList::StatShr::StatShr(
 	this->nload = nload;
 
 	mask = {NTOT, JNUMFIRSTLOAD, NLOAD};
+};
+
+void QryWdbeModList::StatShr::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "StatShrQryWdbeModList";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["ntot"] = ntot;
+	me["jnumFirstload"] = jnumFirstload;
+	me["nload"] = nload;
 };
 
 void QryWdbeModList::StatShr::writeXML(
@@ -157,6 +188,28 @@ QryWdbeModList::StgIac::StgIac(
 	mask = {JNUM, JNUMFIRSTLOAD, NLOAD};
 };
 
+bool QryWdbeModList::StgIac::readJSON(
+			Json::Value& sup
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	Json::Value& me = sup;
+	if (addbasetag) me = sup["StgIacQryWdbeModList"];
+
+	basefound = (me != Json::nullValue);
+
+	if (basefound) {
+		if (me.isMember("jnum")) {jnum = me["jnum"].asUInt(); add(JNUM);};
+		if (me.isMember("jnumFirstload")) {jnumFirstload = me["jnumFirstload"].asUInt(); add(JNUMFIRSTLOAD);};
+		if (me.isMember("nload")) {nload = me["nload"].asUInt(); add(NLOAD);};
+	};
+
+	return basefound;
+};
+
 bool QryWdbeModList::StgIac::readXML(
 			xmlXPathContext* docctx
 			, string basexpath
@@ -180,6 +233,19 @@ bool QryWdbeModList::StgIac::readXML(
 	};
 
 	return basefound;
+};
+
+void QryWdbeModList::StgIac::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "StgIacQryWdbeModList";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["jnum"] = jnum;
+	me["jnumFirstload"] = jnumFirstload;
+	me["nload"] = nload;
 };
 
 void QryWdbeModList::StgIac::writeXML(

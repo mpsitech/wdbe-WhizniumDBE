@@ -2,7 +2,7 @@
 # make file for Wdbe API library, release apiwdbe_ubuntu
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 13 Jan 2021
+# date created: 12 Mar 2021
 # IP header --- ABOVE
 
 LIBROOT = ${WHIZSDKROOT}/lib
@@ -13,7 +13,7 @@ CPPFLAGS = -std=c++11 -g -Wall -Os -pthread
 STATLIB = ar
 STATLIBFLAGS = rcs
 
-INCPATH = -I${WHIZSDKROOT}/build -I/usr/include/libxml2
+INCPATH = -I${WHIZSDKROOT}/build -I/usr/include/jsoncpp -I/usr/include/libxml2
 
 PCHS = ApiWdbe.h.gch
 

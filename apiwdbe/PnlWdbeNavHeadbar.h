@@ -25,7 +25,7 @@ namespace PnlWdbeNavHeadbar {
 	/**
 	  * StatShr (full: StatShrWdbeNavHeadbar)
 	  */
-	class StatShr : public Sbecore::Xmlio::Block {
+	class StatShr : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint MENCRDAVAIL = 1;
@@ -45,7 +45,7 @@ namespace PnlWdbeNavHeadbar {
 	/**
 	  * StgInf (full: StgInfWdbeNavHeadbar)
 	  */
-	class StgInf : public Sbecore::Xmlio::Block {
+	class StgInf : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint MENAPPCPTWIDTH = 1;
@@ -75,7 +75,7 @@ namespace PnlWdbeNavHeadbar {
 	/**
 	  * Tag (full: TagWdbeNavHeadbar)
 	  */
-	class Tag : public Sbecore::Xmlio::Block {
+	class Tag : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint MENAPP = 1;

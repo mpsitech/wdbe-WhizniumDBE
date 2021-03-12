@@ -14,16 +14,16 @@
 
 // IP include.cust --- INSERT
 
-#include "PnlWdbeMtpDetail.h"
-#include "PnlWdbeMtpKParKey.h"
-#include "PnlWdbeMtpKHdltype.h"
-#include "PnlWdbeMtpAPar.h"
+#include "PnlWdbeMtpMge1NSignal.h"
+#include "PnlWdbeMtpRef1NFile.h"
+#include "PnlWdbeMtpSup1NModule.h"
 #include "PnlWdbeMtpMdl1NGeneric.h"
 #include "PnlWdbeMtpTpl1NModule.h"
 #include "PnlWdbeMtpMdl1NPort.h"
-#include "PnlWdbeMtpSup1NModule.h"
-#include "PnlWdbeMtpRef1NFile.h"
-#include "PnlWdbeMtpMge1NSignal.h"
+#include "PnlWdbeMtpAPar.h"
+#include "PnlWdbeMtpKHdltype.h"
+#include "PnlWdbeMtpKParKey.h"
+#include "PnlWdbeMtpDetail.h"
 
 #define VecVWdbeMtpRecDo PnlWdbeMtpRec::VecVDo
 
@@ -57,7 +57,7 @@ public:
 	/**
 	  * ContInf (full: ContInfWdbeMtpRec)
 	  */
-	class ContInf : public Sbecore::Xmlio::Block {
+	class ContInf : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint TXTREF = 1;
@@ -69,6 +69,7 @@ public:
 		std::string TxtRef;
 
 	public:
+		void writeJSON(Json::Value& sup, std::string difftag = "");
 		void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
 		std::set<Sbecore::uint> comm(const ContInf* comp);
 		std::set<Sbecore::uint> diff(const ContInf* comp);
@@ -80,13 +81,14 @@ public:
 	class StatApp {
 
 	public:
-		static void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true, const bool initdoneDetail = false, const bool initdoneKParKey = false, const bool initdoneKHdltype = false, const bool initdoneAPar = false, const bool initdoneMdl1NGeneric = false, const bool initdoneTpl1NModule = false, const bool initdoneMdl1NPort = false, const bool initdoneSup1NModule = false, const bool initdoneRef1NFile = false, const bool initdoneMge1NSignal = false);
+		static void writeJSON(Json::Value& sup, std::string difftag = "", const bool initdoneDetail = false, const bool initdoneKParKey = false, const bool initdoneKHdltype = false, const bool initdoneAPar = false, const bool initdoneMdl1NPort = false, const bool initdoneTpl1NModule = false, const bool initdoneMdl1NGeneric = false, const bool initdoneSup1NModule = false, const bool initdoneRef1NFile = false, const bool initdoneMge1NSignal = false);
+		static void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true, const bool initdoneDetail = false, const bool initdoneKParKey = false, const bool initdoneKHdltype = false, const bool initdoneAPar = false, const bool initdoneMdl1NPort = false, const bool initdoneTpl1NModule = false, const bool initdoneMdl1NGeneric = false, const bool initdoneSup1NModule = false, const bool initdoneRef1NFile = false, const bool initdoneMge1NSignal = false);
 	};
 
 	/**
 		* StatShr (full: StatShrWdbeMtpRec)
 		*/
-	class StatShr : public Sbecore::Xmlio::Block {
+	class StatShr : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint IXWDBEVEXPSTATE = 1;
@@ -94,16 +96,16 @@ public:
 		static const Sbecore::uint JREFKPARKEY = 3;
 		static const Sbecore::uint JREFKHDLTYPE = 4;
 		static const Sbecore::uint JREFAPAR = 5;
-		static const Sbecore::uint JREFMDL1NGENERIC = 6;
+		static const Sbecore::uint JREFMDL1NPORT = 6;
 		static const Sbecore::uint JREFTPL1NMODULE = 7;
-		static const Sbecore::uint JREFMDL1NPORT = 8;
+		static const Sbecore::uint JREFMDL1NGENERIC = 8;
 		static const Sbecore::uint JREFSUP1NMODULE = 9;
 		static const Sbecore::uint JREFREF1NFILE = 10;
 		static const Sbecore::uint JREFMGE1NSIGNAL = 11;
 		static const Sbecore::uint BUTREGULARIZEACTIVE = 12;
 
 	public:
-		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const Sbecore::ubigint jrefDetail = 0, const Sbecore::ubigint jrefKParKey = 0, const Sbecore::ubigint jrefKHdltype = 0, const Sbecore::ubigint jrefAPar = 0, const Sbecore::ubigint jrefMdl1NGeneric = 0, const Sbecore::ubigint jrefTpl1NModule = 0, const Sbecore::ubigint jrefMdl1NPort = 0, const Sbecore::ubigint jrefSup1NModule = 0, const Sbecore::ubigint jrefRef1NFile = 0, const Sbecore::ubigint jrefMge1NSignal = 0, const bool ButRegularizeActive = true);
+		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const Sbecore::ubigint jrefDetail = 0, const Sbecore::ubigint jrefKParKey = 0, const Sbecore::ubigint jrefKHdltype = 0, const Sbecore::ubigint jrefAPar = 0, const Sbecore::ubigint jrefMdl1NPort = 0, const Sbecore::ubigint jrefTpl1NModule = 0, const Sbecore::ubigint jrefMdl1NGeneric = 0, const Sbecore::ubigint jrefSup1NModule = 0, const Sbecore::ubigint jrefRef1NFile = 0, const Sbecore::ubigint jrefMge1NSignal = 0, const bool ButRegularizeActive = true);
 
 	public:
 		Sbecore::uint ixWdbeVExpstate;
@@ -111,15 +113,16 @@ public:
 		Sbecore::ubigint jrefKParKey;
 		Sbecore::ubigint jrefKHdltype;
 		Sbecore::ubigint jrefAPar;
-		Sbecore::ubigint jrefMdl1NGeneric;
-		Sbecore::ubigint jrefTpl1NModule;
 		Sbecore::ubigint jrefMdl1NPort;
+		Sbecore::ubigint jrefTpl1NModule;
+		Sbecore::ubigint jrefMdl1NGeneric;
 		Sbecore::ubigint jrefSup1NModule;
 		Sbecore::ubigint jrefRef1NFile;
 		Sbecore::ubigint jrefMge1NSignal;
 		bool ButRegularizeActive;
 
 	public:
+		void writeJSON(Json::Value& sup, std::string difftag = "");
 		void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
 		std::set<Sbecore::uint> comm(const StatShr* comp);
 		std::set<Sbecore::uint> diff(const StatShr* comp);
@@ -131,6 +134,7 @@ public:
 	class Tag {
 
 	public:
+		static void writeJSON(const Sbecore::uint ixWdbeVLocale, Json::Value& sup, std::string difftag = "");
 		static void writeXML(const Sbecore::uint ixWdbeVLocale, xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
 	};
 
@@ -152,6 +156,7 @@ public:
 	public:
 		std::string getSrefsMask();
 
+		void readJSON(Json::Value& sup, bool addbasetag = false);
 		void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 	};
 
@@ -179,6 +184,7 @@ public:
 		std::string getSrefsMask();
 		void merge(DpchEngWdbe* dpcheng);
 
+		void writeJSON(const Sbecore::uint ixWzskVLocale, Json::Value& sup);
 		void writeXML(const Sbecore::uint ixWdbeVLocale, xmlTextWriter* wr);
 	};
 
@@ -192,16 +198,16 @@ public:
 	ContInf continf;
 	StatShr statshr;
 
-	PnlWdbeMtpDetail* pnldetail;
-	PnlWdbeMtpKParKey* pnlkparkey;
-	PnlWdbeMtpKHdltype* pnlkhdltype;
-	PnlWdbeMtpAPar* pnlapar;
+	PnlWdbeMtpMge1NSignal* pnlmge1nsignal;
+	PnlWdbeMtpRef1NFile* pnlref1nfile;
+	PnlWdbeMtpSup1NModule* pnlsup1nmodule;
 	PnlWdbeMtpMdl1NGeneric* pnlmdl1ngeneric;
 	PnlWdbeMtpTpl1NModule* pnltpl1nmodule;
 	PnlWdbeMtpMdl1NPort* pnlmdl1nport;
-	PnlWdbeMtpSup1NModule* pnlsup1nmodule;
-	PnlWdbeMtpRef1NFile* pnlref1nfile;
-	PnlWdbeMtpMge1NSignal* pnlmge1nsignal;
+	PnlWdbeMtpAPar* pnlapar;
+	PnlWdbeMtpKHdltype* pnlkhdltype;
+	PnlWdbeMtpKParKey* pnlkparkey;
+	PnlWdbeMtpDetail* pnldetail;
 
 	WdbeMModule recMdl;
 	Sbecore::uint ixWSubsetMdl;
@@ -236,17 +242,17 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeMdl_ctrEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
-	bool handleCallWdbeMdl_hktEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
-	bool handleCallWdbeMdl_hku_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
-	bool handleCallWdbeMdl_hkuEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
-	bool handleCallWdbeMdl_imbEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
-	bool handleCallWdbeMdl_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
-	bool handleCallWdbeMdl_sup_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
-	bool handleCallWdbeMdl_supEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
-	bool handleCallWdbeMdl_tplEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
-	bool handleCallWdbeMdl_typEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
 	bool handleCallWdbeMdlUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbeMdl_typEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
+	bool handleCallWdbeMdl_tplEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeMdl_supEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeMdl_sup_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
+	bool handleCallWdbeMdl_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
+	bool handleCallWdbeMdl_imbEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeMdl_hkuEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeMdl_hku_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
+	bool handleCallWdbeMdl_hktEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
+	bool handleCallWdbeMdl_ctrEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
 
 };
 

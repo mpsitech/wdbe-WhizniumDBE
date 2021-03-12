@@ -28,6 +28,9 @@
 #include <sys/stat.h>
 
 #include <microhttpd.h>
+#if MHD_VERSION < 0x0097002
+	#define MHD_Result int
+#endif
 
 #include <curl/curl.h>
 
@@ -142,6 +145,7 @@ public:
 	static bool all(const std::set<Sbecore::uint>& items);
 	virtual std::string getSrefsMask();
 
+	virtual void readJSON(Json::Value& sup, bool addbasetag = false);
 	virtual void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 };
 
@@ -164,6 +168,7 @@ public:
 	static bool all(const std::set<Sbecore::uint>& items);
 	std::string getSrefsMask();
 
+	void readJSON(Json::Value& sup, bool addbasetag = false);
 	void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 };
 
@@ -205,6 +210,7 @@ public:
 	virtual std::string getSrefsMask();
 	virtual void merge(DpchEngWdbe* dpcheng);
 
+	virtual void writeJSON(const Sbecore::uint ixWdbeVLocale, Json::Value& sup);
 	virtual void writeXML(const Sbecore::uint ixWdbeVLocale, xmlTextWriter* wr);
 };
 
@@ -229,17 +235,18 @@ public:
 	static const Sbecore::uint ALL = 4;
 
 public:
-	DpchEngWdbeAlert(const Sbecore::ubigint jref = 0, ContInfWdbeAlert* continf = NULL, Sbecore::Xmlio::Feed* feedFMcb = NULL, const std::set<Sbecore::uint>& mask = {NONE});
+	DpchEngWdbeAlert(const Sbecore::ubigint jref = 0, ContInfWdbeAlert* continf = NULL, Sbecore::Feed* feedFMcb = NULL, const std::set<Sbecore::uint>& mask = {NONE});
 
 public:
 	ContInfWdbeAlert continf;
-	Sbecore::Xmlio::Feed feedFMcb;
+	Sbecore::Feed feedFMcb;
 
 public:
 	static bool all(const std::set<Sbecore::uint>& items);
 	std::string getSrefsMask();
 	void merge(DpchEngWdbe* dpcheng);
 
+	void writeJSON(const Sbecore::uint ixWdbeVLocale, Json::Value& sup);
 	void writeXML(const Sbecore::uint ixWdbeVLocale, xmlTextWriter* wr);
 };
 
@@ -266,6 +273,7 @@ public:
 	std::string getSrefsMask();
 	void merge(DpchEngWdbe* dpcheng);
 
+	void writeJSON(const Sbecore::uint ixWdbeVLocale, Json::Value& sup);
 	void writeXML(const Sbecore::uint ixWdbeVLocale, xmlTextWriter* wr);
 };
 
@@ -281,18 +289,24 @@ public:
 /**
 	* StgWdbeAppearance
 	*/
-class StgWdbeAppearance : public Sbecore::Xmlio::Block {
+class StgWdbeAppearance : public Sbecore::Block {
 
 public:
 	static const Sbecore::uint HISTLENGTH = 1;
 	static const Sbecore::uint SUSPSESS = 2;
+	static const Sbecore::uint SESSTTERM = 3;
+	static const Sbecore::uint SESSTWARN = 4;
+	static const Sbecore::uint ROOTTTERM = 5;
 
 public:
-	StgWdbeAppearance(const Sbecore::usmallint histlength = 20, const bool suspsess = true);
+	StgWdbeAppearance(const Sbecore::usmallint histlength = 20, const bool suspsess = true, const Sbecore::uint sesstterm = 0, const Sbecore::uint sesstwarn = 0, const Sbecore::uint roottterm = 0);
 
 public:
 	Sbecore::usmallint histlength;
 	bool suspsess;
+	Sbecore::uint sesstterm;
+	Sbecore::uint sesstwarn;
+	Sbecore::uint roottterm;
 
 public:
 	bool readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
@@ -304,7 +318,7 @@ public:
 /**
 	* StgWdbeAppsrv
 	*/
-class StgWdbeAppsrv : public Sbecore::Xmlio::Block {
+class StgWdbeAppsrv : public Sbecore::Block {
 
 public:
 	static const Sbecore::uint PORT = 1;
@@ -327,7 +341,7 @@ public:
 /**
 	* StgWdbed
 	*/
-class StgWdbed : public Sbecore::Xmlio::Block {
+class StgWdbed : public Sbecore::Block {
 
 public:
 	static const Sbecore::uint JOBPRCN = 1;
@@ -352,7 +366,7 @@ public:
 /**
 	* StgWdbeDatabase
 	*/
-class StgWdbeDatabase : public Sbecore::Xmlio::Block {
+class StgWdbeDatabase : public Sbecore::Block {
 
 public:
 	static const Sbecore::uint IXDBSVDBSTYPE = 1;
@@ -385,7 +399,7 @@ public:
 /**
 	* StgWdbeMonitor
 	*/
-class StgWdbeMonitor : public Sbecore::Xmlio::Block {
+class StgWdbeMonitor : public Sbecore::Block {
 
 public:
 	static const Sbecore::uint USERNAME = 1;
@@ -422,7 +436,7 @@ public:
 /**
 	* StgWdbePath
 	*/
-class StgWdbePath : public Sbecore::Xmlio::Block {
+class StgWdbePath : public Sbecore::Block {
 
 public:
 	static const Sbecore::uint ACVPATH = 1;
@@ -453,7 +467,7 @@ public:
 /**
 	* StgWdbeTenant
 	*/
-class StgWdbeTenant : public Sbecore::Xmlio::Block {
+class StgWdbeTenant : public Sbecore::Block {
 
 public:
 	static const Sbecore::uint ORGNAME = 1;
@@ -477,10 +491,12 @@ public:
 	* AlrWdbe
 	*/
 namespace AlrWdbe {
-	DpchEngWdbeAlert* prepareAlrAbt(const Sbecore::ubigint jref, const Sbecore::uint ixWdbeVLocale, Sbecore::Xmlio::Feed& feedFMcbAlert);
-	DpchEngWdbeAlert* prepareAlrIer(const Sbecore::ubigint jref, const Sbecore::uint ixWdbeVLocale, const std::string& iexsqk, Sbecore::Xmlio::Feed& feedFMcbAlert);
-	DpchEngWdbeAlert* prepareAlrPer(const Sbecore::ubigint jref, const Sbecore::uint ixWdbeVLocale, const std::string& iexsqk, Sbecore::Xmlio::Feed& feedFMcbAlert);
-	DpchEngWdbeAlert* prepareAlrSav(const Sbecore::ubigint jref, const Sbecore::uint ixWdbeVLocale, Sbecore::Xmlio::Feed& feedFMcbAlert);
+	DpchEngWdbeAlert* prepareAlrAbt(const Sbecore::ubigint jref, const Sbecore::uint ixWdbeVLocale, Sbecore::Feed& feedFMcbAlert);
+	DpchEngWdbeAlert* prepareAlrIer(const Sbecore::ubigint jref, const Sbecore::uint ixWdbeVLocale, const std::string& iexsqk, Sbecore::Feed& feedFMcbAlert);
+	DpchEngWdbeAlert* prepareAlrPer(const Sbecore::ubigint jref, const Sbecore::uint ixWdbeVLocale, const std::string& iexsqk, Sbecore::Feed& feedFMcbAlert);
+	DpchEngWdbeAlert* prepareAlrSav(const Sbecore::ubigint jref, const Sbecore::uint ixWdbeVLocale, Sbecore::Feed& feedFMcbAlert);
+	DpchEngWdbeAlert* prepareAlrTrm(const Sbecore::ubigint jref, const Sbecore::uint ixWdbeVLocale, const Sbecore::uint sesstterm, const Sbecore::uint sesstwarn, Sbecore::Feed& feedFMcbAlert);
+	std::string prepareAlrTrm_dtToString(const uint ixWdbeVLocale, const time_t dt);
 };
 
 /**
@@ -552,6 +568,9 @@ public:
 	// specific data for base types DPCHAPP, NOTIFY, POLL, DPCHRET
 	char* request;
 	size_t requestlen;
+
+	// specifc data for base types DPCHAPP, NOTIFY, POLL
+	bool jsonNotXml;
 
 	// specific data for base types CMD, DPCHAPP, NOTIFY, POLL, UPLOAD, DOWNLOAD, DPCHRET, TIMER
 	Sbecore::ubigint jref;
@@ -810,7 +829,7 @@ public:
 class WakeupWdbe {
 
 public:
-	WakeupWdbe(XchgWdbe* xchg, const Sbecore::ubigint wref, const Sbecore::ubigint jref, const std::string sref, const unsigned int deltat = 0, const bool weak = false);
+	WakeupWdbe(XchgWdbe* xchg, const Sbecore::ubigint wref, const Sbecore::ubigint jref, const std::string sref, const uint64_t deltat = 0, const bool weak = false);
 
 public:
 	XchgWdbe* xchg;
@@ -819,7 +838,7 @@ public:
 
 	Sbecore::ubigint jref;
 	std::string sref;
-	unsigned int deltat;
+	uint64_t deltat;
 	bool weak;
 };
 
@@ -1126,7 +1145,7 @@ public:
 	std::set<Sbecore::ubigint> getCsjobClisByJref(const Sbecore::ubigint jref);
 
 	// timer methods
-	Sbecore::ubigint addWakeup(const Sbecore::ubigint jref, const std::string sref, const unsigned int deltat = 0, const bool weak = false);
+	Sbecore::ubigint addWakeup(const Sbecore::ubigint jref, const std::string sref, const uint64_t deltat = 0, const bool weak = false);
 	static void* runWakeup(void* arg);
 
 	// external call methods

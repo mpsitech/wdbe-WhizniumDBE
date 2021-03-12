@@ -45,13 +45,13 @@ CrdWdbeCvr::CrdWdbeCvr(
 	feedFSge.tag = "FeedFSge";
 	VecVSge::fillFeed(feedFSge);
 
-	dlgbsccd = NULL;
-	dlgdetcd = NULL;
-	dlgnew = NULL;
-	dlgwrite = NULL;
-	pnlrec = NULL;
-	pnlheadbar = NULL;
 	pnllist = NULL;
+	pnlheadbar = NULL;
+	pnlrec = NULL;
+	dlgbsccd = NULL;
+	dlgnew = NULL;
+	dlgdetcd = NULL;
+	dlgwrite = NULL;
 
 	// IP constructor.cust1 --- INSERT
 
@@ -63,9 +63,9 @@ CrdWdbeCvr::CrdWdbeCvr(
 	// initialize according to ref
 	changeRef(dbswdbe, jref, ((ref + 1) == 0) ? 0 : ref, false);
 
-	pnlrec = new PnlWdbeCvrRec(xchg, dbswdbe, jref, ixWdbeVLocale);
-	pnlheadbar = new PnlWdbeCvrHeadbar(xchg, dbswdbe, jref, ixWdbeVLocale);
 	pnllist = new PnlWdbeCvrList(xchg, dbswdbe, jref, ixWdbeVLocale);
+	pnlheadbar = new PnlWdbeCvrHeadbar(xchg, dbswdbe, jref, ixWdbeVLocale);
+	pnlrec = new PnlWdbeCvrRec(xchg, dbswdbe, jref, ixWdbeVLocale);
 
 	// IP constructor.cust2 --- INSERT
 
@@ -83,9 +83,9 @@ CrdWdbeCvr::CrdWdbeCvr(
 
 	changeStage(dbswdbe, VecVSge::IDLE);
 
-	xchg->addClstn(VecWdbeVCall::CALLWDBEDLGCLOSE, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecWdbeVCall::CALLWDBESTATCHG, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBEREFPRESET, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBESTATCHG, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBEDLGCLOSE, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -326,13 +326,44 @@ void CrdWdbeCvr::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBEDLGCLOSE) {
-		call->abort = handleCallWdbeDlgClose(dbswdbe, call->jref);
+	if (call->ixVCall == VecWdbeVCall::CALLWDBEREFPRESET) {
+		call->abort = handleCallWdbeRefPreSet(dbswdbe, call->jref, call->argInv.ix, call->argInv.ref);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBESTATCHG) {
 		call->abort = handleCallWdbeStatChg(dbswdbe, call->jref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEREFPRESET) {
-		call->abort = handleCallWdbeRefPreSet(dbswdbe, call->jref, call->argInv.ix, call->argInv.ref);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEDLGCLOSE) {
+		call->abort = handleCallWdbeDlgClose(dbswdbe, call->jref);
 	};
+};
+
+bool CrdWdbeCvr::handleCallWdbeRefPreSet(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+			, const uint ixInv
+			, const ubigint refInv
+		) {
+	bool retval = false;
+
+	if (ixInv == VecWdbeVPreset::PREWDBEREFCVR) {
+		changeRef(dbswdbe, jrefTrig, refInv, true);
+
+		if (refInv == 0) pnlrec->minimize(dbswdbe, true);
+		else if ((jrefTrig == statshr.jrefDlgnew) && (refInv != 0)) {
+			pnllist->qry->rerun(dbswdbe, true);
+			pnllist->minimize(dbswdbe, true);
+			pnlrec->regularize(dbswdbe, true);
+		};
+	};
+
+	return retval;
+};
+
+bool CrdWdbeCvr::handleCallWdbeStatChg(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+	if (jrefTrig == pnlrec->jref) if ((pnllist->statshr.ixWdbeVExpstate == VecWdbeVExpstate::REGD) && (pnlrec->statshr.ixWdbeVExpstate == VecWdbeVExpstate::REGD)) pnllist->minimize(dbswdbe, true);
+	return retval;
 };
 
 bool CrdWdbeCvr::handleCallWdbeDlgClose(
@@ -365,37 +396,6 @@ bool CrdWdbeCvr::handleCallWdbeDlgClose(
 		statshr.jrefDlgwrite = 0;
 
 		xchg->submitDpch(getNewDpchEng({DpchEngData::STATSHR}));
-	};
-
-	return retval;
-};
-
-bool CrdWdbeCvr::handleCallWdbeStatChg(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-	if (jrefTrig == pnlrec->jref) if ((pnllist->statshr.ixWdbeVExpstate == VecWdbeVExpstate::REGD) && (pnlrec->statshr.ixWdbeVExpstate == VecWdbeVExpstate::REGD)) pnllist->minimize(dbswdbe, true);
-	return retval;
-};
-
-bool CrdWdbeCvr::handleCallWdbeRefPreSet(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-			, const uint ixInv
-			, const ubigint refInv
-		) {
-	bool retval = false;
-
-	if (ixInv == VecWdbeVPreset::PREWDBEREFCVR) {
-		changeRef(dbswdbe, jrefTrig, refInv, true);
-
-		if (refInv == 0) pnlrec->minimize(dbswdbe, true);
-		else if ((jrefTrig == statshr.jrefDlgnew) && (refInv != 0)) {
-			pnllist->qry->rerun(dbswdbe, true);
-			pnllist->minimize(dbswdbe, true);
-			pnlrec->regularize(dbswdbe, true);
-		};
 	};
 
 	return retval;

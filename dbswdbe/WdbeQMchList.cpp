@@ -35,6 +35,23 @@ WdbeQMchList::WdbeQMchList(
 	this->stubSupRefWdbeMMachine = stubSupRefWdbeMMachine;
 };
 
+void WdbeQMchList::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["srf"] = sref;
+		me["sup"] = stubSupRefWdbeMMachine;
+	} else {
+		me["sref"] = sref;
+		me["stubSupRefWdbeMMachine"] = stubSupRefWdbeMMachine;
+	};
+};
+
 void WdbeQMchList::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -102,6 +119,16 @@ ListWdbeQMchList& ListWdbeQMchList::operator=(
 	};
 
 	return(*this);
+};
+
+void ListWdbeQMchList::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListWdbeQMchList";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListWdbeQMchList::writeXML(

@@ -42,30 +42,30 @@ CrdWdbeNav::CrdWdbeNav(
 	feedFSge.tag = "FeedFSge";
 	VecVSge::fillFeed(feedFSge);
 
+	pnlauxfct = NULL;
+	pnldescr = NULL;
+	pnlcoredev = NULL;
+	pnldevdev = NULL;
+	pnlglobal = NULL;
+	pnladmin = NULL;
+	pnlpre = NULL;
+	pnlheadbar = NULL;
 	dlgloaini = NULL;
 	dlgmnglic = NULL;
-	pnlheadbar = NULL;
-	pnlpre = NULL;
-	pnladmin = NULL;
-	pnlglobal = NULL;
-	pnldevdev = NULL;
-	pnlcoredev = NULL;
-	pnldescr = NULL;
-	pnlauxfct = NULL;
 
 	// IP constructor.cust1 --- INSERT
 
 	set<uint> moditems;
 	refresh(dbswdbe, moditems);
 
-	pnlheadbar = new PnlWdbeNavHeadbar(xchg, dbswdbe, jref, ixWdbeVLocale);
-	pnlpre = new PnlWdbeNavPre(xchg, dbswdbe, jref, ixWdbeVLocale);
-	pnladmin = new PnlWdbeNavAdmin(xchg, dbswdbe, jref, ixWdbeVLocale);
-	pnlglobal = new PnlWdbeNavGlobal(xchg, dbswdbe, jref, ixWdbeVLocale);
-	pnldevdev = new PnlWdbeNavDevdev(xchg, dbswdbe, jref, ixWdbeVLocale);
-	pnlcoredev = new PnlWdbeNavCoredev(xchg, dbswdbe, jref, ixWdbeVLocale);
-	pnldescr = new PnlWdbeNavDescr(xchg, dbswdbe, jref, ixWdbeVLocale);
 	pnlauxfct = new PnlWdbeNavAuxfct(xchg, dbswdbe, jref, ixWdbeVLocale);
+	pnldescr = new PnlWdbeNavDescr(xchg, dbswdbe, jref, ixWdbeVLocale);
+	pnlcoredev = new PnlWdbeNavCoredev(xchg, dbswdbe, jref, ixWdbeVLocale);
+	pnldevdev = new PnlWdbeNavDevdev(xchg, dbswdbe, jref, ixWdbeVLocale);
+	pnlglobal = new PnlWdbeNavGlobal(xchg, dbswdbe, jref, ixWdbeVLocale);
+	pnladmin = new PnlWdbeNavAdmin(xchg, dbswdbe, jref, ixWdbeVLocale);
+	pnlpre = new PnlWdbeNavPre(xchg, dbswdbe, jref, ixWdbeVLocale);
+	pnlheadbar = new PnlWdbeNavHeadbar(xchg, dbswdbe, jref, ixWdbeVLocale);
 
 	// IP constructor.cust2 --- INSERT
 
@@ -221,6 +221,12 @@ void CrdWdbeNav::updatePreset(
 	if (pnldescr) pnldescr->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
 	if (pnlauxfct) pnlauxfct->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
 	// IP updatePreset --- END
+};
+
+void CrdWdbeNav::warnTerm(
+			DbsWdbe* dbswdbe
+		) {
+	if (ixVSge == VecVSge::IDLE) changeStage(dbswdbe, VecVSge::ALRWDBETRM);
 };
 
 void CrdWdbeNav::handleRequest(
@@ -697,6 +703,8 @@ void CrdWdbeNav::handleDpchAppWdbeAlert(
 	// IP handleDpchAppWdbeAlert --- BEGIN
 	if (ixVSge == VecVSge::ALRWDBEABT) {
 		changeStage(dbswdbe, nextIxVSgeSuccess);
+	} else if (ixVSge == VecVSge::ALRWDBETRM) {
+		changeStage(dbswdbe, nextIxVSgeSuccess);
 	};
 
 	*dpcheng = new DpchEngWdbeConfirm(true, jref, "");
@@ -747,6 +755,7 @@ void CrdWdbeNav::changeStage(
 			switch (ixVSge) {
 				case VecVSge::IDLE: leaveSgeIdle(dbswdbe); break;
 				case VecVSge::ALRWDBEABT: leaveSgeAlrwdbeabt(dbswdbe); break;
+				case VecVSge::ALRWDBETRM: leaveSgeAlrwdbetrm(dbswdbe); break;
 			};
 
 			setStage(dbswdbe, _ixVSge);
@@ -757,6 +766,7 @@ void CrdWdbeNav::changeStage(
 		switch (_ixVSge) {
 			case VecVSge::IDLE: _ixVSge = enterSgeIdle(dbswdbe, reenter); break;
 			case VecVSge::ALRWDBEABT: _ixVSge = enterSgeAlrwdbeabt(dbswdbe, reenter); break;
+			case VecVSge::ALRWDBETRM: _ixVSge = enterSgeAlrwdbetrm(dbswdbe, reenter); break;
 		};
 
 		// IP changeStage.refresh2 --- INSERT
@@ -806,4 +816,22 @@ void CrdWdbeNav::leaveSgeAlrwdbeabt(
 			DbsWdbe* dbswdbe
 		) {
 	// IP leaveSgeAlrwdbeabt --- INSERT
+};
+
+uint CrdWdbeNav::enterSgeAlrwdbetrm(
+			DbsWdbe* dbswdbe
+			, const bool reenter
+		) {
+	uint retval = VecVSge::ALRWDBETRM;
+	nextIxVSgeSuccess = VecVSge::IDLE;
+
+	xchg->submitDpch(AlrWdbe::prepareAlrTrm(jref, ixWdbeVLocale, xchg->stgwdbeappearance.sesstterm, xchg->stgwdbeappearance.sesstwarn, feedFMcbAlert)); // IP enterSgeAlrwdbetrm --- LINE
+
+	return retval;
+};
+
+void CrdWdbeNav::leaveSgeAlrwdbetrm(
+			DbsWdbe* dbswdbe
+		) {
+	// IP leaveSgeAlrwdbetrm --- INSERT
 };

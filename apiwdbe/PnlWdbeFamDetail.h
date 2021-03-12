@@ -43,7 +43,7 @@ namespace PnlWdbeFamDetail {
 	/**
 	  * ContIac (full: ContIacWdbeFamDetail)
 	  */
-	class ContIac : public Sbecore::Xmlio::Block {
+	class ContIac : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint NUMFPUPVND = 1;
@@ -70,7 +70,7 @@ namespace PnlWdbeFamDetail {
 	/**
 	  * StatApp (full: StatAppWdbeFamDetail)
 	  */
-	class StatApp : public Sbecore::Xmlio::Block {
+	class StatApp : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint IXWDBEVEXPSTATE = 1;
@@ -92,7 +92,7 @@ namespace PnlWdbeFamDetail {
 	/**
 	  * StatShr (full: StatShrWdbeFamDetail)
 	  */
-	class StatShr : public Sbecore::Xmlio::Block {
+	class StatShr : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint TXFVNDVALID = 1;
@@ -124,7 +124,7 @@ namespace PnlWdbeFamDetail {
 	/**
 	  * Tag (full: TagWdbeFamDetail)
 	  */
-	class Tag : public Sbecore::Xmlio::Block {
+	class Tag : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint CPT = 1;
@@ -207,7 +207,7 @@ namespace PnlWdbeFamDetail {
 
 	public:
 		ContIac contiac;
-		Sbecore::Xmlio::Feed feedFPupVnd;
+		Sbecore::Feed feedFPupVnd;
 		StatApp statapp;
 		StatShr statshr;
 		Tag tag;

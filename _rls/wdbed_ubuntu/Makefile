@@ -2,7 +2,7 @@
 # make file for Wdbe daemon, release wdbed_ubuntu
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 13 Jan 2021
+# date created: 12 Mar 2021
 # IP header --- ABOVE
 
 include Makefile.inc
@@ -14,14 +14,14 @@ LINK = g++
 LINKFLAGS =
 
 INCPATH = -I$(BUILDROOT)/dbswdbe -I$(BUILDROOT)/wdbed/VecWdbe -I$(BUILDROOT)/wdbed/IexWdbe -I$(BUILDROOT)/wdbed
-INCPATH += -I$(BUILDROOT)/wdbed/CrdWdbeNav -I$(BUILDROOT)/wdbed/CrdWdbeUsg -I$(BUILDROOT)/wdbed/CrdWdbeUsr -I$(BUILDROOT)/wdbed/CrdWdbePrs -I$(BUILDROOT)/wdbed/CrdWdbeFil -I$(BUILDROOT)/wdbed/CrdWdbeMch -I$(BUILDROOT)/wdbed/CrdWdbeLib -I$(BUILDROOT)/wdbed/CrdWdbeFam -I$(BUILDROOT)/wdbed/CrdWdbeSil -I$(BUILDROOT)/wdbed/CrdWdbeMtp -I$(BUILDROOT)/wdbed/CrdWdbePrj -I$(BUILDROOT)/wdbed/CrdWdbeVer -I$(BUILDROOT)/wdbed/CrdWdbeSys -I$(BUILDROOT)/wdbed/CrdWdbeTrg -I$(BUILDROOT)/wdbed/CrdWdbeUnt -I$(BUILDROOT)/wdbed/CrdWdbeRls -I$(BUILDROOT)/wdbed/CrdWdbeCpr -I$(BUILDROOT)/wdbed/CrdWdbeCvr -I$(BUILDROOT)/wdbed/CrdWdbeMod -I$(BUILDROOT)/wdbed/CrdWdbeVec -I$(BUILDROOT)/wdbed/CrdWdbeVit -I$(BUILDROOT)/wdbed/CrdWdbeCmd -I$(BUILDROOT)/wdbed/CrdWdbeErr -I$(BUILDROOT)/wdbed/CrdWdbePph -I$(BUILDROOT)/wdbed/CrdWdbeBnk -I$(BUILDROOT)/wdbed/CrdWdbePin -I$(BUILDROOT)/wdbed/CrdWdbeGen -I$(BUILDROOT)/wdbed/CrdWdbePrt -I$(BUILDROOT)/wdbed/CrdWdbeSig -I$(BUILDROOT)/wdbed/CrdWdbePrc -I$(BUILDROOT)/wdbed/CrdWdbeFst -I$(BUILDROOT)/wdbed/CrdWdbeVar -I$(BUILDROOT)/wdbed/CrdWdbeUtl
+INCPATH += -I$(BUILDROOT)/wdbed/CrdWdbeUsg -I$(BUILDROOT)/wdbed/CrdWdbeUsr -I$(BUILDROOT)/wdbed/CrdWdbePrs -I$(BUILDROOT)/wdbed/CrdWdbeFil -I$(BUILDROOT)/wdbed/CrdWdbeNav -I$(BUILDROOT)/wdbed/CrdWdbeMch -I$(BUILDROOT)/wdbed/CrdWdbeLib -I$(BUILDROOT)/wdbed/CrdWdbeFam -I$(BUILDROOT)/wdbed/CrdWdbeSil -I$(BUILDROOT)/wdbed/CrdWdbeMtp -I$(BUILDROOT)/wdbed/CrdWdbePrj -I$(BUILDROOT)/wdbed/CrdWdbeVer -I$(BUILDROOT)/wdbed/CrdWdbeSys -I$(BUILDROOT)/wdbed/CrdWdbeTrg -I$(BUILDROOT)/wdbed/CrdWdbeUnt -I$(BUILDROOT)/wdbed/CrdWdbeRls -I$(BUILDROOT)/wdbed/CrdWdbeCpr -I$(BUILDROOT)/wdbed/CrdWdbeCvr -I$(BUILDROOT)/wdbed/CrdWdbeMod -I$(BUILDROOT)/wdbed/CrdWdbeVec -I$(BUILDROOT)/wdbed/CrdWdbeVit -I$(BUILDROOT)/wdbed/CrdWdbeCmd -I$(BUILDROOT)/wdbed/CrdWdbeErr -I$(BUILDROOT)/wdbed/CrdWdbePph -I$(BUILDROOT)/wdbed/CrdWdbeBnk -I$(BUILDROOT)/wdbed/CrdWdbePin -I$(BUILDROOT)/wdbed/CrdWdbeGen -I$(BUILDROOT)/wdbed/CrdWdbePrt -I$(BUILDROOT)/wdbed/CrdWdbeSig -I$(BUILDROOT)/wdbed/CrdWdbePrc -I$(BUILDROOT)/wdbed/CrdWdbeFst -I$(BUILDROOT)/wdbed/CrdWdbeVar -I$(BUILDROOT)/wdbed/CrdWdbeUtl
 INCPATH += -I${WHIZSDKROOT}/build -I${WHIZSDKROOT}/build/apiwzlm -I/usr/include -I/usr/include/jsoncpp -I/usr/include/libxml2 -I/usr/include/mariadb
 
 PCHS = Wdbed.h.gch
 
 OBJS = Wdbe.o WdbedAppsrv.o WdbedJobprc.o WdbedOpprc.o WdbedOpengcli.o WdbedOpengsrv.o Wdbed.o
 OBJS += RootWdbe.o SessWdbe.o JobWdbeLicense.o
-OBJS += WdbeModbsc_blks.o SqkWdbeModbsc.o WdbeModdet_blks.o SqkWdbeModdet.o WdbeMtpPlhfpga_blks.o SqkWdbeMtpPlhfpga.o WdbeMtpPlhmcu_blks.o SqkWdbeMtpPlhmcu.o WdbeMtpModbscbu_blks.o SqkWdbeMtpModbscbu.o WdbeMtpModbsctd_blks.o SqkWdbeMtpModbsctd.o WdbeMtpModdet_blks.o SqkWdbeMtpModdet.o WdbeMtpWrfpga_blks.o SqkWdbeMtpWrfpga.o WdbeMtpWrmcu_blks.o SqkWdbeMtpWrmcu.o WdbePlhfpga_blks.o SqkWdbePlhfpga.o WdbePlhmcu_blks.o SqkWdbePlhmcu.o WdbePrcfile_blks.o SqkWdbePrcfile.o WdbePrctree_blks.o SqkWdbePrctree.o WdbeWrdev_blks.o SqkWdbeWrdev.o WdbeWrfpga_blks.o SqkWdbeWrfpga.o WdbeWrmcu_blks.o SqkWdbeWrmcu.o
+OBJS += WdbeWrmcu_blks.o SqkWdbeWrmcu.o WdbePlhmcu_blks.o SqkWdbePlhmcu.o WdbeWrfpga_blks.o SqkWdbeWrfpga.o WdbeWrdev_blks.o SqkWdbeWrdev.o WdbePrctree_blks.o SqkWdbePrctree.o WdbePrcfile_blks.o SqkWdbePrcfile.o WdbePlhfpga_blks.o SqkWdbePlhfpga.o WdbeMtpWrmcu_blks.o SqkWdbeMtpWrmcu.o WdbeMtpModdet_blks.o SqkWdbeMtpModdet.o WdbeMtpWrfpga_blks.o SqkWdbeMtpWrfpga.o WdbeMtpModbsctd_blks.o SqkWdbeMtpModbsctd.o WdbeMtpModbscbu_blks.o SqkWdbeMtpModbscbu.o WdbeMtpPlhfpga_blks.o SqkWdbeMtpPlhfpga.o WdbeMtpPlhmcu_blks.o SqkWdbeMtpPlhmcu.o WdbeModdet_blks.o SqkWdbeModdet.o WdbeModbsc_blks.o SqkWdbeModbsc.o
 OBJS += Wdbed_exe.o
 
 LIBPATH = -L$(LIBROOT)
@@ -29,14 +29,14 @@ LIBPATH += -L$(LIBROOT)/wdbed
 LIBPATH += -L${WHIZSDKROOT}/lib -L/usr/lib/x86_64-linux-gnu
 LIBPATH += -L/lib/x86_64-linux-gnu
 
-LIBS = -lcrdwdbenav -lcrdwdbeusg -lcrdwdbeusr -lcrdwdbeprs -lcrdwdbefil -lcrdwdbemch -lcrdwdbelib -lcrdwdbefam -lcrdwdbesil -lcrdwdbemtp -lcrdwdbeprj -lcrdwdbever -lcrdwdbesys -lcrdwdbetrg -lcrdwdbeunt -lcrdwdberls -lcrdwdbecpr -lcrdwdbecvr -lcrdwdbemod -lcrdwdbevec -lcrdwdbevit -lcrdwdbecmd -lcrdwdbeerr -lcrdwdbepph -lcrdwdbebnk -lcrdwdbepin -lcrdwdbegen -lcrdwdbeprt -lcrdwdbesig -lcrdwdbeprc -lcrdwdbefst -lcrdwdbevar -lcrdwdbeutl
+LIBS = -lcrdwdbeusg -lcrdwdbeusr -lcrdwdbeprs -lcrdwdbefil -lcrdwdbenav -lcrdwdbemch -lcrdwdbelib -lcrdwdbefam -lcrdwdbesil -lcrdwdbemtp -lcrdwdbeprj -lcrdwdbever -lcrdwdbesys -lcrdwdbetrg -lcrdwdbeunt -lcrdwdberls -lcrdwdbecpr -lcrdwdbecvr -lcrdwdbemod -lcrdwdbevec -lcrdwdbevit -lcrdwdbecmd -lcrdwdbeerr -lcrdwdbepph -lcrdwdbebnk -lcrdwdbepin -lcrdwdbegen -lcrdwdbeprt -lcrdwdbesig -lcrdwdbeprc -lcrdwdbefst -lcrdwdbevar -lcrdwdbeutl
 LIBS += -liexwdbe -lvecwdbe -ldbswdbe
-LIBS += -lapiwzlm -lcurl -lgit2 -ljsoncpp -lmicrohttpd -lsbecore_dbsmon -lsbecore_mon
+LIBS += -lapiwzlm -lcurl -lgit2 -lmicrohttpd -lsbecore_dbsmon -lsbecore_mon
 LIBS += -ldbswzem
 LIBS += -lsbecore_lite -lsbecore_mar
 LIBS += -lmariadbclient -lsbecore_plus -lsqlite3 -lssl
 LIBS += -lcrypto -lsbecore
-LIBS += -lxml2
+LIBS += -ljsoncpp -lxml2
 LIBS += -lpthread
 
 EXE = Wdbed

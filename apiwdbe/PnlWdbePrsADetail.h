@@ -50,7 +50,7 @@ namespace PnlWdbePrsADetail {
 	/**
 	  * ContInf (full: ContInfWdbePrsADetail)
 	  */
-	class ContInf : public Sbecore::Xmlio::Block {
+	class ContInf : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint NUMFCSIQST = 1;
@@ -70,7 +70,7 @@ namespace PnlWdbePrsADetail {
 	/**
 	  * StatApp (full: StatAppWdbePrsADetail)
 	  */
-	class StatApp : public Sbecore::Xmlio::Block {
+	class StatApp : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint IXWDBEVEXPSTATE = 1;
@@ -90,7 +90,7 @@ namespace PnlWdbePrsADetail {
 	/**
 	  * StatShr (full: StatShrWdbePrsADetail)
 	  */
-	class StatShr : public Sbecore::Xmlio::Block {
+	class StatShr : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint BUTNEWAVAIL = 1;
@@ -118,7 +118,7 @@ namespace PnlWdbePrsADetail {
 	/**
 	  * StgIac (full: StgIacWdbePrsADetail)
 	  */
-	class StgIac : public Sbecore::Xmlio::Block {
+	class StgIac : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint TCOTYPWIDTH = 1;
@@ -141,7 +141,7 @@ namespace PnlWdbePrsADetail {
 	/**
 	  * Tag (full: TagWdbePrsADetail)
 	  */
-	class Tag : public Sbecore::Xmlio::Block {
+	class Tag : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint CPT = 1;
@@ -239,7 +239,7 @@ namespace PnlWdbePrsADetail {
 
 	public:
 		ContInf continf;
-		Sbecore::Xmlio::Feed feedFCsiQst;
+		Sbecore::Feed feedFCsiQst;
 		StatApp statapp;
 		StatShr statshr;
 		StgIac stgiac;

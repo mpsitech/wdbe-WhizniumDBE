@@ -48,7 +48,7 @@ namespace PnlWdbeUsr1NSession {
 	/**
 	  * ContInf (full: ContInfWdbeUsr1NSession)
 	  */
-	class ContInf : public Sbecore::Xmlio::Block {
+	class ContInf : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint NUMFCSIQST = 1;
@@ -68,7 +68,7 @@ namespace PnlWdbeUsr1NSession {
 	/**
 	  * StatApp (full: StatAppWdbeUsr1NSession)
 	  */
-	class StatApp : public Sbecore::Xmlio::Block {
+	class StatApp : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint IXWDBEVEXPSTATE = 1;
@@ -88,7 +88,7 @@ namespace PnlWdbeUsr1NSession {
 	/**
 	  * StatShr (full: StatShrWdbeUsr1NSession)
 	  */
-	class StatShr : public Sbecore::Xmlio::Block {
+	class StatShr : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint BUTDELETEAVAIL = 1;
@@ -110,7 +110,7 @@ namespace PnlWdbeUsr1NSession {
 	/**
 	  * StgIac (full: StgIacWdbeUsr1NSession)
 	  */
-	class StgIac : public Sbecore::Xmlio::Block {
+	class StgIac : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint TCOREFWIDTH = 1;
@@ -131,7 +131,7 @@ namespace PnlWdbeUsr1NSession {
 	/**
 	  * Tag (full: TagWdbeUsr1NSession)
 	  */
-	class Tag : public Sbecore::Xmlio::Block {
+	class Tag : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint CPT = 1;
@@ -227,7 +227,7 @@ namespace PnlWdbeUsr1NSession {
 
 	public:
 		ContInf continf;
-		Sbecore::Xmlio::Feed feedFCsiQst;
+		Sbecore::Feed feedFCsiQst;
 		StatApp statapp;
 		StatShr statshr;
 		StgIac stgiac;

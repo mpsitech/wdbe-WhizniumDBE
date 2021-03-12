@@ -138,6 +138,7 @@ public class CrdWdbeNav {
 
 		public static final int IDLE = 1;
 		public static final int ALRWDBEABT = 2;
+		public static final int ALRWDBETRM = 3;
 
 		public static int getIx(
 					String sref
@@ -146,6 +147,7 @@ public class CrdWdbeNav {
 
 			if (s.equals("idle")) return IDLE;
 			if (s.equals("alrwdbeabt")) return ALRWDBEABT;
+			if (s.equals("alrwdbetrm")) return ALRWDBETRM;
 
 			return 0;
 		};
@@ -155,6 +157,7 @@ public class CrdWdbeNav {
 				) {
 			if (ix == IDLE) return("idle");
 			if (ix == ALRWDBEABT) return("alrwdbeabt");
+			if (ix == ALRWDBETRM) return("alrwdbetrm");
 
 			return "";
 		};

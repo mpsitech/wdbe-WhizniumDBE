@@ -45,7 +45,7 @@ namespace PnlWdbeNavCoredev {
 	/**
 	  * ContIac (full: ContIacWdbeNavCoredev)
 	  */
-	class ContIac : public Sbecore::Xmlio::Block {
+	class ContIac : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint NUMFLSTCPR = 1;
@@ -68,7 +68,7 @@ namespace PnlWdbeNavCoredev {
 	/**
 	  * StatApp (full: StatAppWdbeNavCoredev)
 	  */
-	class StatApp : public Sbecore::Xmlio::Block {
+	class StatApp : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint IXWDBEVEXPSTATE = 1;
@@ -96,7 +96,7 @@ namespace PnlWdbeNavCoredev {
 	/**
 	  * StatShr (full: StatShrWdbeNavCoredev)
 	  */
-	class StatShr : public Sbecore::Xmlio::Block {
+	class StatShr : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint LSTCPRAVAIL = 1;
@@ -122,7 +122,7 @@ namespace PnlWdbeNavCoredev {
 	/**
 	  * Tag (full: TagWdbeNavCoredev)
 	  */
-	class Tag : public Sbecore::Xmlio::Block {
+	class Tag : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint CPT = 1;
@@ -204,8 +204,8 @@ namespace PnlWdbeNavCoredev {
 
 	public:
 		ContIac contiac;
-		Sbecore::Xmlio::Feed feedFLstCpr;
-		Sbecore::Xmlio::Feed feedFLstCvr;
+		Sbecore::Feed feedFLstCpr;
+		Sbecore::Feed feedFLstCvr;
 		StatApp statapp;
 		StatShr statshr;
 		Tag tag;

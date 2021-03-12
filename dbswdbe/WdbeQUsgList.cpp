@@ -39,6 +39,25 @@ WdbeQUsgList::WdbeQUsgList(
 	this->sref = sref;
 };
 
+void WdbeQUsgList::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["grp"] = stubGrp;
+		me["own"] = stubOwn;
+		me["srf"] = sref;
+	} else {
+		me["stubGrp"] = stubGrp;
+		me["stubOwn"] = stubOwn;
+		me["sref"] = sref;
+	};
+};
+
 void WdbeQUsgList::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -108,6 +127,16 @@ ListWdbeQUsgList& ListWdbeQUsgList::operator=(
 	};
 
 	return(*this);
+};
+
+void ListWdbeQUsgList::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListWdbeQUsgList";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListWdbeQUsgList::writeXML(

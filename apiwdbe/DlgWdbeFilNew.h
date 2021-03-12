@@ -91,7 +91,7 @@ namespace DlgWdbeFilNew {
 	/**
 	  * ContIac (full: ContIacDlgWdbeFilNew)
 	  */
-	class ContIac : public Sbecore::Xmlio::Block {
+	class ContIac : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint NUMFDSE = 1;
@@ -112,7 +112,7 @@ namespace DlgWdbeFilNew {
 	/**
 	  * ContIacDet (full: ContIacDlgWdbeFilNewDet)
 	  */
-	class ContIacDet : public Sbecore::Xmlio::Block {
+	class ContIacDet : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint TXFFNM = 1;
@@ -143,7 +143,7 @@ namespace DlgWdbeFilNew {
 	/**
 	  * ContInf (full: ContInfDlgWdbeFilNew)
 	  */
-	class ContInf : public Sbecore::Xmlio::Block {
+	class ContInf : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint NUMFSGE = 1;
@@ -163,7 +163,7 @@ namespace DlgWdbeFilNew {
 	/**
 	  * StatApp (full: StatAppDlgWdbeFilNew)
 	  */
-	class StatApp : public Sbecore::Xmlio::Block {
+	class StatApp : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint INITDONE = 1;
@@ -185,7 +185,7 @@ namespace DlgWdbeFilNew {
 	/**
 	  * StatShr (full: StatShrDlgWdbeFilNew)
 	  */
-	class StatShr : public Sbecore::Xmlio::Block {
+	class StatShr : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint BUTDNEACTIVE = 1;
@@ -205,7 +205,7 @@ namespace DlgWdbeFilNew {
 	/**
 	  * StatShrDet (full: StatShrDlgWdbeFilNewDet)
 	  */
-	class StatShrDet : public Sbecore::Xmlio::Block {
+	class StatShrDet : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint BUTCREACTIVE = 1;
@@ -225,7 +225,7 @@ namespace DlgWdbeFilNew {
 	/**
 	  * StatShrFil (full: StatShrDlgWdbeFilNewFil)
 	  */
-	class StatShrFil : public Sbecore::Xmlio::Block {
+	class StatShrFil : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint ULDACTIVE = 1;
@@ -245,7 +245,7 @@ namespace DlgWdbeFilNew {
 	/**
 	  * Tag (full: TagDlgWdbeFilNew)
 	  */
-	class Tag : public Sbecore::Xmlio::Block {
+	class Tag : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint CPT = 1;
@@ -265,7 +265,7 @@ namespace DlgWdbeFilNew {
 	/**
 	  * TagDet (full: TagDlgWdbeFilNewDet)
 	  */
-	class TagDet : public Sbecore::Xmlio::Block {
+	class TagDet : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint CPTFNM = 1;
@@ -295,7 +295,7 @@ namespace DlgWdbeFilNew {
 	/**
 	  * TagFil (full: TagDlgWdbeFilNewFil)
 	  */
-	class TagFil : public Sbecore::Xmlio::Block {
+	class TagFil : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint ULD = 1;
@@ -390,11 +390,11 @@ namespace DlgWdbeFilNew {
 		ContIac contiac;
 		ContIacDet contiacdet;
 		ContInf continf;
-		Sbecore::Xmlio::Feed feedFDetPupCnt;
-		Sbecore::Xmlio::Feed feedFDetPupMim;
-		Sbecore::Xmlio::Feed feedFDetPupRet;
-		Sbecore::Xmlio::Feed feedFDse;
-		Sbecore::Xmlio::Feed feedFSge;
+		Sbecore::Feed feedFDetPupCnt;
+		Sbecore::Feed feedFDetPupMim;
+		Sbecore::Feed feedFDetPupRet;
+		Sbecore::Feed feedFDse;
+		Sbecore::Feed feedFSge;
 		StatApp statapp;
 		StatShr statshr;
 		StatShrDet statshrdet;

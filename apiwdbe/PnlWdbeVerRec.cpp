@@ -104,24 +104,24 @@ set<uint> PnlWdbeVerRec::ContInf::diff(
 
 PnlWdbeVerRec::StatApp::StatApp(
 			const bool initdoneDetail
-			, const bool initdone1NRelease
-			, const bool initdone1NSystem
 			, const bool initdoneBvr1NVersion
-			, const bool initdoneRef1NFile
+			, const bool initdone1NSystem
+			, const bool initdone1NRelease
 			, const bool initdone1NUnit
+			, const bool initdoneRef1NFile
 			, const bool initdoneMNLibrary
 		) :
 			Block()
 		{
 	this->initdoneDetail = initdoneDetail;
-	this->initdone1NRelease = initdone1NRelease;
-	this->initdone1NSystem = initdone1NSystem;
 	this->initdoneBvr1NVersion = initdoneBvr1NVersion;
-	this->initdoneRef1NFile = initdoneRef1NFile;
+	this->initdone1NSystem = initdone1NSystem;
+	this->initdone1NRelease = initdone1NRelease;
 	this->initdone1NUnit = initdone1NUnit;
+	this->initdoneRef1NFile = initdoneRef1NFile;
 	this->initdoneMNLibrary = initdoneMNLibrary;
 
-	mask = {INITDONEDETAIL, INITDONE1NRELEASE, INITDONE1NSYSTEM, INITDONEBVR1NVERSION, INITDONEREF1NFILE, INITDONE1NUNIT, INITDONEMNLIBRARY};
+	mask = {INITDONEDETAIL, INITDONEBVR1NVERSION, INITDONE1NSYSTEM, INITDONE1NRELEASE, INITDONE1NUNIT, INITDONEREF1NFILE, INITDONEMNLIBRARY};
 };
 
 bool PnlWdbeVerRec::StatApp::readXML(
@@ -142,11 +142,11 @@ bool PnlWdbeVerRec::StatApp::readXML(
 
 	if (basefound) {
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneDetail", initdoneDetail)) add(INITDONEDETAIL);
-		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdone1NRelease", initdone1NRelease)) add(INITDONE1NRELEASE);
-		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdone1NSystem", initdone1NSystem)) add(INITDONE1NSYSTEM);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneBvr1NVersion", initdoneBvr1NVersion)) add(INITDONEBVR1NVERSION);
-		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneRef1NFile", initdoneRef1NFile)) add(INITDONEREF1NFILE);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdone1NSystem", initdone1NSystem)) add(INITDONE1NSYSTEM);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdone1NRelease", initdone1NRelease)) add(INITDONE1NRELEASE);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdone1NUnit", initdone1NUnit)) add(INITDONE1NUNIT);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneRef1NFile", initdoneRef1NFile)) add(INITDONEREF1NFILE);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneMNLibrary", initdoneMNLibrary)) add(INITDONEMNLIBRARY);
 	};
 
@@ -159,11 +159,11 @@ set<uint> PnlWdbeVerRec::StatApp::comm(
 	set<uint> items;
 
 	if (initdoneDetail == comp->initdoneDetail) insert(items, INITDONEDETAIL);
-	if (initdone1NRelease == comp->initdone1NRelease) insert(items, INITDONE1NRELEASE);
-	if (initdone1NSystem == comp->initdone1NSystem) insert(items, INITDONE1NSYSTEM);
 	if (initdoneBvr1NVersion == comp->initdoneBvr1NVersion) insert(items, INITDONEBVR1NVERSION);
-	if (initdoneRef1NFile == comp->initdoneRef1NFile) insert(items, INITDONEREF1NFILE);
+	if (initdone1NSystem == comp->initdone1NSystem) insert(items, INITDONE1NSYSTEM);
+	if (initdone1NRelease == comp->initdone1NRelease) insert(items, INITDONE1NRELEASE);
 	if (initdone1NUnit == comp->initdone1NUnit) insert(items, INITDONE1NUNIT);
+	if (initdoneRef1NFile == comp->initdoneRef1NFile) insert(items, INITDONEREF1NFILE);
 	if (initdoneMNLibrary == comp->initdoneMNLibrary) insert(items, INITDONEMNLIBRARY);
 
 	return(items);
@@ -177,7 +177,7 @@ set<uint> PnlWdbeVerRec::StatApp::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {INITDONEDETAIL, INITDONE1NRELEASE, INITDONE1NSYSTEM, INITDONEBVR1NVERSION, INITDONEREF1NFILE, INITDONE1NUNIT, INITDONEMNLIBRARY};
+	diffitems = {INITDONEDETAIL, INITDONEBVR1NVERSION, INITDONE1NSYSTEM, INITDONE1NRELEASE, INITDONE1NUNIT, INITDONEREF1NFILE, INITDONEMNLIBRARY};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -190,11 +190,11 @@ set<uint> PnlWdbeVerRec::StatApp::diff(
 PnlWdbeVerRec::StatShr::StatShr(
 			const uint ixWdbeVExpstate
 			, const string& scrJrefDetail
-			, const string& scrJref1NRelease
-			, const string& scrJref1NSystem
 			, const string& scrJrefBvr1NVersion
-			, const string& scrJrefRef1NFile
+			, const string& scrJref1NSystem
+			, const string& scrJref1NRelease
 			, const string& scrJref1NUnit
+			, const string& scrJrefRef1NFile
 			, const string& scrJrefMNLibrary
 			, const bool ButRegularizeActive
 		) :
@@ -202,15 +202,15 @@ PnlWdbeVerRec::StatShr::StatShr(
 		{
 	this->ixWdbeVExpstate = ixWdbeVExpstate;
 	this->scrJrefDetail = scrJrefDetail;
-	this->scrJref1NRelease = scrJref1NRelease;
-	this->scrJref1NSystem = scrJref1NSystem;
 	this->scrJrefBvr1NVersion = scrJrefBvr1NVersion;
-	this->scrJrefRef1NFile = scrJrefRef1NFile;
+	this->scrJref1NSystem = scrJref1NSystem;
+	this->scrJref1NRelease = scrJref1NRelease;
 	this->scrJref1NUnit = scrJref1NUnit;
+	this->scrJrefRef1NFile = scrJrefRef1NFile;
 	this->scrJrefMNLibrary = scrJrefMNLibrary;
 	this->ButRegularizeActive = ButRegularizeActive;
 
-	mask = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREF1NRELEASE, SCRJREF1NSYSTEM, SCRJREFBVR1NVERSION, SCRJREFREF1NFILE, SCRJREF1NUNIT, SCRJREFMNLIBRARY, BUTREGULARIZEACTIVE};
+	mask = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFBVR1NVERSION, SCRJREF1NSYSTEM, SCRJREF1NRELEASE, SCRJREF1NUNIT, SCRJREFREF1NFILE, SCRJREFMNLIBRARY, BUTREGULARIZEACTIVE};
 };
 
 bool PnlWdbeVerRec::StatShr::readXML(
@@ -237,11 +237,11 @@ bool PnlWdbeVerRec::StatShr::readXML(
 			add(IXWDBEVEXPSTATE);
 		};
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefDetail", scrJrefDetail)) add(SCRJREFDETAIL);
-		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJref1NRelease", scrJref1NRelease)) add(SCRJREF1NRELEASE);
-		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJref1NSystem", scrJref1NSystem)) add(SCRJREF1NSYSTEM);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefBvr1NVersion", scrJrefBvr1NVersion)) add(SCRJREFBVR1NVERSION);
-		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefRef1NFile", scrJrefRef1NFile)) add(SCRJREFREF1NFILE);
+		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJref1NSystem", scrJref1NSystem)) add(SCRJREF1NSYSTEM);
+		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJref1NRelease", scrJref1NRelease)) add(SCRJREF1NRELEASE);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJref1NUnit", scrJref1NUnit)) add(SCRJREF1NUNIT);
+		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefRef1NFile", scrJrefRef1NFile)) add(SCRJREFREF1NFILE);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefMNLibrary", scrJrefMNLibrary)) add(SCRJREFMNLIBRARY);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButRegularizeActive", ButRegularizeActive)) add(BUTREGULARIZEACTIVE);
 	};
@@ -256,11 +256,11 @@ set<uint> PnlWdbeVerRec::StatShr::comm(
 
 	if (ixWdbeVExpstate == comp->ixWdbeVExpstate) insert(items, IXWDBEVEXPSTATE);
 	if (scrJrefDetail == comp->scrJrefDetail) insert(items, SCRJREFDETAIL);
-	if (scrJref1NRelease == comp->scrJref1NRelease) insert(items, SCRJREF1NRELEASE);
-	if (scrJref1NSystem == comp->scrJref1NSystem) insert(items, SCRJREF1NSYSTEM);
 	if (scrJrefBvr1NVersion == comp->scrJrefBvr1NVersion) insert(items, SCRJREFBVR1NVERSION);
-	if (scrJrefRef1NFile == comp->scrJrefRef1NFile) insert(items, SCRJREFREF1NFILE);
+	if (scrJref1NSystem == comp->scrJref1NSystem) insert(items, SCRJREF1NSYSTEM);
+	if (scrJref1NRelease == comp->scrJref1NRelease) insert(items, SCRJREF1NRELEASE);
 	if (scrJref1NUnit == comp->scrJref1NUnit) insert(items, SCRJREF1NUNIT);
+	if (scrJrefRef1NFile == comp->scrJrefRef1NFile) insert(items, SCRJREFREF1NFILE);
 	if (scrJrefMNLibrary == comp->scrJrefMNLibrary) insert(items, SCRJREFMNLIBRARY);
 	if (ButRegularizeActive == comp->ButRegularizeActive) insert(items, BUTREGULARIZEACTIVE);
 
@@ -275,7 +275,7 @@ set<uint> PnlWdbeVerRec::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREF1NRELEASE, SCRJREF1NSYSTEM, SCRJREFBVR1NVERSION, SCRJREFREF1NFILE, SCRJREF1NUNIT, SCRJREFMNLIBRARY, BUTREGULARIZEACTIVE};
+	diffitems = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFBVR1NVERSION, SCRJREF1NSYSTEM, SCRJREF1NRELEASE, SCRJREF1NUNIT, SCRJREFREF1NFILE, SCRJREFMNLIBRARY, BUTREGULARIZEACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);

@@ -2,7 +2,7 @@
 # make file for CrdWdbePrs card job handler, release wdbecmbd_mac
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 13 Jan 2021
+# date created: 12 Mar 2021
 # IP header --- ABOVE
 
 include ../Makefile.inc
@@ -16,7 +16,7 @@ STATLIBFLAGS = rcs
 INCPATH = -I$(BUILDROOT)/dbswdbe -I$(BUILDROOT)/wdbecmbd/VecWdbe -I$(BUILDROOT)/wdbecmbd/IexWdbe -I$(BUILDROOT)/wdbecmbd
 INCPATH += -I${WHIZSDKROOT}/build -I${WHIZSDKROOT}/build/apiwzlm -I/usr/local/include -I/usr/local/include/curl -I/usr/local/include/libxml2 -I/usr/local/mysql/include -I/usr/local/opt/sqlite/include
 
-OBJS = CrdWdbePrs.o PnlWdbePrsRec.o PnlWdbePrsDetail.o PnlWdbePrsADetail.o QryWdbePrsADetail.o PnlWdbePrsMNProject.o QryWdbePrsMNProject.o PnlWdbePrsMNCoreproject.o QryWdbePrsMNCoreproject.o PnlWdbePrsHeadbar.o PnlWdbePrsList.o QryWdbePrsList.o
+OBJS = CrdWdbePrs.o PnlWdbePrsList.o QryWdbePrsList.o PnlWdbePrsHeadbar.o PnlWdbePrsRec.o PnlWdbePrsMNCoreproject.o QryWdbePrsMNCoreproject.o PnlWdbePrsMNProject.o QryWdbePrsMNProject.o PnlWdbePrsADetail.o QryWdbePrsADetail.o PnlWdbePrsDetail.o
 
 LIB = libcrdwdbeprs
 

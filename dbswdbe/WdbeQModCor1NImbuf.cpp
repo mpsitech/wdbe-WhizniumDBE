@@ -31,6 +31,21 @@ WdbeQModCor1NImbuf::WdbeQModCor1NImbuf(
 	this->stubRef = stubRef;
 };
 
+void WdbeQModCor1NImbuf::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["ref"] = stubRef;
+	} else {
+		me["stubRef"] = stubRef;
+	};
+};
+
 void WdbeQModCor1NImbuf::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -96,6 +111,16 @@ ListWdbeQModCor1NImbuf& ListWdbeQModCor1NImbuf::operator=(
 	};
 
 	return(*this);
+};
+
+void ListWdbeQModCor1NImbuf::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListWdbeQModCor1NImbuf";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListWdbeQModCor1NImbuf::writeXML(

@@ -86,7 +86,7 @@ void QryWdbePrsMNProject::rerun(
 	dbswdbe->tblwdbeqprsmnproject->removeRstByJref(jref);
 
 	sqlstr = "SELECT COUNT(TblWdbeRMPersonMProject.ref)";
-	sqlstr += " FROM TblWdbeRMPersonMProject, TblWdbeMProject";
+	sqlstr += " FROM TblWdbeMProject, TblWdbeRMPersonMProject";
 	sqlstr += " WHERE TblWdbeRMPersonMProject.refWdbeMProject = TblWdbeMProject.ref";
 	sqlstr += " AND TblWdbeRMPersonMProject.refWdbeMPerson = " + to_string(preRefPrs) + "";
 	rerun_filtSQL(sqlstr, preX1, false);
@@ -102,7 +102,7 @@ void QryWdbePrsMNProject::rerun(
 
 	sqlstr = "INSERT INTO TblWdbeQPrsMNProject(jref, jnum, mref, ref, x1Startd, x1Stopd, srefKFunction)";
 	sqlstr += " SELECT " + to_string(jref) + ", 0, TblWdbeMProject.ref, TblWdbeRMPersonMProject.ref, TblWdbeRMPersonMProject.x1Startd, TblWdbeRMPersonMProject.x1Stopd, TblWdbeRMPersonMProject.srefKFunction";
-	sqlstr += " FROM TblWdbeRMPersonMProject, TblWdbeMProject";
+	sqlstr += " FROM TblWdbeMProject, TblWdbeRMPersonMProject";
 	sqlstr += " WHERE TblWdbeRMPersonMProject.refWdbeMProject = TblWdbeMProject.ref";
 	sqlstr += " AND TblWdbeRMPersonMProject.refWdbeMPerson = " + to_string(preRefPrs) + "";
 	rerun_filtSQL(sqlstr, preX1, false);
@@ -320,19 +320,11 @@ void QryWdbePrsMNProject::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
-		call->abort = handleCallWdbeStubChgFromSelf(dbswdbe);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEPRSRPRJMOD_PRSEQ) {
+	if (call->ixVCall == VecWdbeVCall::CALLWDBEPRSRPRJMOD_PRSEQ) {
 		call->abort = handleCallWdbePrsRprjMod_prsEq(dbswdbe, call->jref);
+	} else if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
+		call->abort = handleCallWdbeStubChgFromSelf(dbswdbe);
 	};
-};
-
-bool QryWdbePrsMNProject::handleCallWdbeStubChgFromSelf(
-			DbsWdbe* dbswdbe
-		) {
-	bool retval = false;
-	// IP handleCallWdbeStubChgFromSelf --- INSERT
-	return retval;
 };
 
 bool QryWdbePrsMNProject::handleCallWdbePrsRprjMod_prsEq(
@@ -346,5 +338,13 @@ bool QryWdbePrsMNProject::handleCallWdbePrsRprjMod_prsEq(
 		xchg->triggerCall(dbswdbe, VecWdbeVCall::CALLWDBESTATCHG, jref);
 	};
 
+	return retval;
+};
+
+bool QryWdbePrsMNProject::handleCallWdbeStubChgFromSelf(
+			DbsWdbe* dbswdbe
+		) {
+	bool retval = false;
+	// IP handleCallWdbeStubChgFromSelf --- INSERT
 	return retval;
 };

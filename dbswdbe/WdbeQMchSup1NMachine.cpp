@@ -31,6 +31,21 @@ WdbeQMchSup1NMachine::WdbeQMchSup1NMachine(
 	this->stubRef = stubRef;
 };
 
+void WdbeQMchSup1NMachine::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["ref"] = stubRef;
+	} else {
+		me["stubRef"] = stubRef;
+	};
+};
+
 void WdbeQMchSup1NMachine::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -96,6 +111,16 @@ ListWdbeQMchSup1NMachine& ListWdbeQMchSup1NMachine::operator=(
 	};
 
 	return(*this);
+};
+
+void ListWdbeQMchSup1NMachine::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListWdbeQMchSup1NMachine";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListWdbeQMchSup1NMachine::writeXML(

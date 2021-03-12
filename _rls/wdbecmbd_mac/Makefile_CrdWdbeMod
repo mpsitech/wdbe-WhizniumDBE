@@ -2,7 +2,7 @@
 # make file for CrdWdbeMod card job handler, release wdbecmbd_mac
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 13 Jan 2021
+# date created: 12 Mar 2021
 # IP header --- ABOVE
 
 include ../Makefile.inc
@@ -16,7 +16,7 @@ STATLIBFLAGS = rcs
 INCPATH = -I$(BUILDROOT)/dbswdbe -I$(BUILDROOT)/wdbecmbd/VecWdbe -I$(BUILDROOT)/wdbecmbd/IexWdbe -I$(BUILDROOT)/wdbecmbd
 INCPATH += -I${WHIZSDKROOT}/build -I${WHIZSDKROOT}/build/apiwzlm -I/usr/local/include -I/usr/local/include/curl -I/usr/local/include/libxml2 -I/usr/local/mysql/include -I/usr/local/opt/sqlite/include
 
-OBJS = CrdWdbeMod.o PnlWdbeModRec.o PnlWdbeModDetail.o PnlWdbeModKHdltype.o QryWdbeModKHdltype.o PnlWdbeModAPar.o QryWdbeModAPar.o PnlWdbeModMdl1NGeneric.o QryWdbeModMdl1NGeneric.o PnlWdbeModCor1NImbuf.o QryWdbeModCor1NImbuf.o PnlWdbeModMdl1NPort.o QryWdbeModMdl1NPort.o PnlWdbeMod1NProcess.o QryWdbeMod1NProcess.o PnlWdbeModMdl1NSignal.o QryWdbeModMdl1NSignal.o PnlWdbeMod1NPeripheral.o QryWdbeMod1NPeripheral.o PnlWdbeModSup1NModule.o QryWdbeModSup1NModule.o PnlWdbeModMge1NSignal.o QryWdbeModMge1NSignal.o PnlWdbeModCtrRef1NCommand.o QryWdbeModCtrRef1NCommand.o PnlWdbeModCtrHk1NVector.o QryWdbeModCtrHk1NVector.o PnlWdbeModCtrRef1NError.o QryWdbeModCtrRef1NError.o PnlWdbeModCtrMNCommand.o QryWdbeModCtrMNCommand.o PnlWdbeModHeadbar.o PnlWdbeModList.o QryWdbeModList.o
+OBJS = CrdWdbeMod.o PnlWdbeModList.o QryWdbeModList.o PnlWdbeModHeadbar.o PnlWdbeModRec.o PnlWdbeModCtrMNCommand.o QryWdbeModCtrMNCommand.o PnlWdbeModCtrRef1NError.o QryWdbeModCtrRef1NError.o PnlWdbeModCtrHk1NVector.o QryWdbeModCtrHk1NVector.o PnlWdbeModCtrRef1NCommand.o QryWdbeModCtrRef1NCommand.o PnlWdbeModMge1NSignal.o QryWdbeModMge1NSignal.o PnlWdbeModSup1NModule.o QryWdbeModSup1NModule.o PnlWdbeModMdl1NGeneric.o QryWdbeModMdl1NGeneric.o PnlWdbeModCor1NImbuf.o QryWdbeModCor1NImbuf.o PnlWdbeMod1NProcess.o QryWdbeMod1NProcess.o PnlWdbeModMdl1NPort.o QryWdbeModMdl1NPort.o PnlWdbeModMdl1NSignal.o QryWdbeModMdl1NSignal.o PnlWdbeMod1NPeripheral.o QryWdbeMod1NPeripheral.o PnlWdbeModAPar.o QryWdbeModAPar.o PnlWdbeModKHdltype.o QryWdbeModKHdltype.o PnlWdbeModDetail.o
 
 LIB = libcrdwdbemod
 

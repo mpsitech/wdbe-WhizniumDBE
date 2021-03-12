@@ -168,24 +168,24 @@ void DlgWdbeVerBscdd::refresh(
 	if (muteRefresh && !unmute) return;
 	muteRefresh = true;
 
+	StatShr oldStatshr(statshr);
 	ContInf oldContinf(continf);
 	ContIac oldContiac(contiac);
-	StatShr oldStatshr(statshr);
 
 	// IP refresh --- BEGIN
+	// statshr
+	statshr.ButDneActive = evalButDneActive(dbswdbe);
+
 	// continf
 	continf.numFSge = ixVSge;
 
 	// contiac
 	contiac.numFDse = ixVDit;
 
-	// statshr
-	statshr.ButDneActive = evalButDneActive(dbswdbe);
-
 	// IP refresh --- END
+	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
 	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
 	if (contiac.diff(&oldContiac).size() != 0) insert(moditems, DpchEngData::CONTIAC);
-	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
 
 	refreshIfi(dbswdbe, moditems);
 	refreshImp(dbswdbe, moditems);
@@ -277,12 +277,12 @@ void DlgWdbeVerBscdd::handleRequest(
 		};
 
 	} else if (req->ixVBasetype == ReqWdbe::VecVBasetype::TIMER) {
-		if (ixVSge == VecVSge::PRSIDLE) handleTimerInSgePrsidle(dbswdbe, req->sref);
-		else if (ixVSge == VecVSge::IMPIDLE) handleTimerInSgeImpidle(dbswdbe, req->sref);
-		else if ((req->sref == "mon") && (ixVSge == VecVSge::IMPORT)) handleTimerWithSrefMonInSgeImport(dbswdbe);
-		else if ((req->sref == "mon") && (ixVSge == VecVSge::POSTPRC1)) handleTimerWithSrefMonInSgePostprc1(dbswdbe);
+		if ((req->sref == "mon") && (ixVSge == VecVSge::POSTPRC3)) handleTimerWithSrefMonInSgePostprc3(dbswdbe);
 		else if ((req->sref == "mon") && (ixVSge == VecVSge::POSTPRC2)) handleTimerWithSrefMonInSgePostprc2(dbswdbe);
-		else if ((req->sref == "mon") && (ixVSge == VecVSge::POSTPRC3)) handleTimerWithSrefMonInSgePostprc3(dbswdbe);
+		else if ((req->sref == "mon") && (ixVSge == VecVSge::POSTPRC1)) handleTimerWithSrefMonInSgePostprc1(dbswdbe);
+		else if ((req->sref == "mon") && (ixVSge == VecVSge::IMPORT)) handleTimerWithSrefMonInSgeImport(dbswdbe);
+		else if (ixVSge == VecVSge::IMPIDLE) handleTimerInSgeImpidle(dbswdbe, req->sref);
+		else if (ixVSge == VecVSge::PRSIDLE) handleTimerInSgePrsidle(dbswdbe, req->sref);
 	};
 };
 
@@ -390,32 +390,11 @@ string DlgWdbeVerBscdd::handleDownloadInSgeDone(
 	return(""); // IP handleDownloadInSgeDone --- LINE
 };
 
-void DlgWdbeVerBscdd::handleTimerInSgePrsidle(
-			DbsWdbe* dbswdbe
-			, const string& sref
-		) {
-	changeStage(dbswdbe, nextIxVSgeSuccess);
-};
-
-void DlgWdbeVerBscdd::handleTimerInSgeImpidle(
-			DbsWdbe* dbswdbe
-			, const string& sref
-		) {
-	changeStage(dbswdbe, nextIxVSgeSuccess);
-};
-
-void DlgWdbeVerBscdd::handleTimerWithSrefMonInSgeImport(
+void DlgWdbeVerBscdd::handleTimerWithSrefMonInSgePostprc3(
 			DbsWdbe* dbswdbe
 		) {
 	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
-	refreshWithDpchEng(dbswdbe); // IP handleTimerWithSrefMonInSgeImport --- ILINE
-};
-
-void DlgWdbeVerBscdd::handleTimerWithSrefMonInSgePostprc1(
-			DbsWdbe* dbswdbe
-		) {
-	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
-	refreshWithDpchEng(dbswdbe); // IP handleTimerWithSrefMonInSgePostprc1 --- ILINE
+	refreshWithDpchEng(dbswdbe); // IP handleTimerWithSrefMonInSgePostprc3 --- ILINE
 };
 
 void DlgWdbeVerBscdd::handleTimerWithSrefMonInSgePostprc2(
@@ -425,11 +404,32 @@ void DlgWdbeVerBscdd::handleTimerWithSrefMonInSgePostprc2(
 	refreshWithDpchEng(dbswdbe); // IP handleTimerWithSrefMonInSgePostprc2 --- ILINE
 };
 
-void DlgWdbeVerBscdd::handleTimerWithSrefMonInSgePostprc3(
+void DlgWdbeVerBscdd::handleTimerWithSrefMonInSgePostprc1(
 			DbsWdbe* dbswdbe
 		) {
 	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
-	refreshWithDpchEng(dbswdbe); // IP handleTimerWithSrefMonInSgePostprc3 --- ILINE
+	refreshWithDpchEng(dbswdbe); // IP handleTimerWithSrefMonInSgePostprc1 --- ILINE
+};
+
+void DlgWdbeVerBscdd::handleTimerWithSrefMonInSgeImport(
+			DbsWdbe* dbswdbe
+		) {
+	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
+	refreshWithDpchEng(dbswdbe); // IP handleTimerWithSrefMonInSgeImport --- ILINE
+};
+
+void DlgWdbeVerBscdd::handleTimerInSgeImpidle(
+			DbsWdbe* dbswdbe
+			, const string& sref
+		) {
+	changeStage(dbswdbe, nextIxVSgeSuccess);
+};
+
+void DlgWdbeVerBscdd::handleTimerInSgePrsidle(
+			DbsWdbe* dbswdbe
+			, const string& sref
+		) {
+	changeStage(dbswdbe, nextIxVSgeSuccess);
 };
 
 void DlgWdbeVerBscdd::changeStage(

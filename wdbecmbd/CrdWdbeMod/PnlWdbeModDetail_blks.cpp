@@ -79,6 +79,32 @@ PnlWdbeModDetail::ContIac::ContIac(
 	mask = {NUMFPUPTYP, NUMFPUPHKT, TXFSRR, TXFCMT, TXFCTRFSR, NUMFPUPIMBDIR, TXFIMBPRI};
 };
 
+bool PnlWdbeModDetail::ContIac::readJSON(
+			Json::Value& sup
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	Json::Value& me = sup;
+	if (addbasetag) me = sup["ContIacWdbeModDetail"];
+
+	basefound = (me != Json::nullValue);
+
+	if (basefound) {
+		if (me.isMember("numFPupTyp")) {numFPupTyp = me["numFPupTyp"].asUInt(); add(NUMFPUPTYP);};
+		if (me.isMember("numFPupHkt")) {numFPupHkt = me["numFPupHkt"].asUInt(); add(NUMFPUPHKT);};
+		if (me.isMember("TxfSrr")) {TxfSrr = me["TxfSrr"].asString(); add(TXFSRR);};
+		if (me.isMember("TxfCmt")) {TxfCmt = me["TxfCmt"].asString(); add(TXFCMT);};
+		if (me.isMember("TxfCtrFsr")) {TxfCtrFsr = me["TxfCtrFsr"].asString(); add(TXFCTRFSR);};
+		if (me.isMember("numFPupImbDir")) {numFPupImbDir = me["numFPupImbDir"].asUInt(); add(NUMFPUPIMBDIR);};
+		if (me.isMember("TxfImbPri")) {TxfImbPri = me["TxfImbPri"].asString(); add(TXFIMBPRI);};
+	};
+
+	return basefound;
+};
+
 bool PnlWdbeModDetail::ContIac::readXML(
 			xmlXPathContext* docctx
 			, string basexpath
@@ -106,6 +132,23 @@ bool PnlWdbeModDetail::ContIac::readXML(
 	};
 
 	return basefound;
+};
+
+void PnlWdbeModDetail::ContIac::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "ContIacWdbeModDetail";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["numFPupTyp"] = numFPupTyp;
+	me["numFPupHkt"] = numFPupHkt;
+	me["TxfSrr"] = TxfSrr;
+	me["TxfCmt"] = TxfCmt;
+	me["TxfCtrFsr"] = TxfCtrFsr;
+	me["numFPupImbDir"] = numFPupImbDir;
+	me["TxfImbPri"] = TxfImbPri;
 };
 
 void PnlWdbeModDetail::ContIac::writeXML(
@@ -188,6 +231,24 @@ PnlWdbeModDetail::ContInf::ContInf(
 	mask = {TXTSRF, TXTHKU, TXTSUP, TXTTPL, TXTCTRFWD, TXTCTRCLR, TXTIMBSRF, TXTIMBCOR};
 };
 
+void PnlWdbeModDetail::ContInf::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "ContInfWdbeModDetail";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["TxtSrf"] = TxtSrf;
+	me["TxtHku"] = TxtHku;
+	me["TxtSup"] = TxtSup;
+	me["TxtTpl"] = TxtTpl;
+	me["TxtCtrFwd"] = TxtCtrFwd;
+	me["TxtCtrClr"] = TxtCtrClr;
+	me["TxtImbSrf"] = TxtImbSrf;
+	me["TxtImbCor"] = TxtImbCor;
+};
+
 void PnlWdbeModDetail::ContInf::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -245,6 +306,18 @@ set<uint> PnlWdbeModDetail::ContInf::diff(
 /******************************************************************************
  class PnlWdbeModDetail::StatApp
  ******************************************************************************/
+
+void PnlWdbeModDetail::StatApp::writeJSON(
+			Json::Value& sup
+			, string difftag
+			, const uint ixWdbeVExpstate
+		) {
+	if (difftag.length() == 0) difftag = "StatAppWdbeModDetail";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["srefIxWdbeVExpstate"] = VecWdbeVExpstate::getSref(ixWdbeVExpstate);
+};
 
 void PnlWdbeModDetail::StatApp::writeXML(
 			xmlTextWriter* wr
@@ -359,6 +432,59 @@ PnlWdbeModDetail::StatShr::StatShr(
 	this->TxfImbPriActive = TxfImbPriActive;
 
 	mask = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, PUPTYPACTIVE, TXTHKUACTIVE, BUTHKUVIEWAVAIL, BUTHKUVIEWACTIVE, TXTSUPACTIVE, BUTSUPVIEWAVAIL, BUTSUPVIEWACTIVE, TXTTPLACTIVE, BUTTPLVIEWAVAIL, BUTTPLVIEWACTIVE, TXFSRRACTIVE, TXFCMTACTIVE, SEPCTRAVAIL, HDGCTRAVAIL, BUTCTRNEWAVAIL, BUTCTRDELETEAVAIL, TXFCTRFSRAVAIL, TXFCTRFSRACTIVE, TXTCTRFWDAVAIL, TXTCTRFWDACTIVE, BUTCTRFWDVIEWAVAIL, BUTCTRFWDVIEWACTIVE, TXTCTRCLRAVAIL, TXTCTRCLRACTIVE, BUTCTRCLRVIEWAVAIL, BUTCTRCLRVIEWACTIVE, SEPIMBAVAIL, HDGIMBAVAIL, BUTIMBNEWAVAIL, BUTIMBDELETEAVAIL, TXTIMBSRFAVAIL, TXTIMBSRFACTIVE, TXTIMBCORAVAIL, TXTIMBCORACTIVE, BUTIMBCORVIEWAVAIL, BUTIMBCORVIEWACTIVE, PUPIMBDIRAVAIL, PUPIMBDIRACTIVE, TXFIMBPRIAVAIL, TXFIMBPRIACTIVE};
+};
+
+void PnlWdbeModDetail::StatShr::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "StatShrWdbeModDetail";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["ButSaveAvail"] = ButSaveAvail;
+	me["ButSaveActive"] = ButSaveActive;
+	me["TxtSrfActive"] = TxtSrfActive;
+	me["PupTypActive"] = PupTypActive;
+	me["TxtHkuActive"] = TxtHkuActive;
+	me["ButHkuViewAvail"] = ButHkuViewAvail;
+	me["ButHkuViewActive"] = ButHkuViewActive;
+	me["TxtSupActive"] = TxtSupActive;
+	me["ButSupViewAvail"] = ButSupViewAvail;
+	me["ButSupViewActive"] = ButSupViewActive;
+	me["TxtTplActive"] = TxtTplActive;
+	me["ButTplViewAvail"] = ButTplViewAvail;
+	me["ButTplViewActive"] = ButTplViewActive;
+	me["TxfSrrActive"] = TxfSrrActive;
+	me["TxfCmtActive"] = TxfCmtActive;
+	me["SepCtrAvail"] = SepCtrAvail;
+	me["HdgCtrAvail"] = HdgCtrAvail;
+	me["ButCtrNewAvail"] = ButCtrNewAvail;
+	me["ButCtrDeleteAvail"] = ButCtrDeleteAvail;
+	me["TxfCtrFsrAvail"] = TxfCtrFsrAvail;
+	me["TxfCtrFsrActive"] = TxfCtrFsrActive;
+	me["TxtCtrFwdAvail"] = TxtCtrFwdAvail;
+	me["TxtCtrFwdActive"] = TxtCtrFwdActive;
+	me["ButCtrFwdViewAvail"] = ButCtrFwdViewAvail;
+	me["ButCtrFwdViewActive"] = ButCtrFwdViewActive;
+	me["TxtCtrClrAvail"] = TxtCtrClrAvail;
+	me["TxtCtrClrActive"] = TxtCtrClrActive;
+	me["ButCtrClrViewAvail"] = ButCtrClrViewAvail;
+	me["ButCtrClrViewActive"] = ButCtrClrViewActive;
+	me["SepImbAvail"] = SepImbAvail;
+	me["HdgImbAvail"] = HdgImbAvail;
+	me["ButImbNewAvail"] = ButImbNewAvail;
+	me["ButImbDeleteAvail"] = ButImbDeleteAvail;
+	me["TxtImbSrfAvail"] = TxtImbSrfAvail;
+	me["TxtImbSrfActive"] = TxtImbSrfActive;
+	me["TxtImbCorAvail"] = TxtImbCorAvail;
+	me["TxtImbCorActive"] = TxtImbCorActive;
+	me["ButImbCorViewAvail"] = ButImbCorViewAvail;
+	me["ButImbCorViewActive"] = ButImbCorViewActive;
+	me["PupImbDirAvail"] = PupImbDirAvail;
+	me["PupImbDirActive"] = PupImbDirActive;
+	me["TxfImbPriAvail"] = TxfImbPriAvail;
+	me["TxfImbPriActive"] = TxfImbPriActive;
 };
 
 void PnlWdbeModDetail::StatShr::writeXML(
@@ -489,6 +615,36 @@ set<uint> PnlWdbeModDetail::StatShr::diff(
  class PnlWdbeModDetail::Tag
  ******************************************************************************/
 
+void PnlWdbeModDetail::Tag::writeJSON(
+			const uint ixWdbeVLocale
+			, Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "TagWdbeModDetail";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	if (ixWdbeVLocale == VecWdbeVLocale::ENUS) {
+		me["CptSrf"] = "identifier";
+		me["CptTyp"] = "type";
+		me["CptHku"] = "hook";
+		me["CptSup"] = "super module";
+		me["CptTpl"] = "template";
+		me["CptSrr"] = "identifier rule";
+		me["CptCmt"] = "comment";
+		me["HdgCtr"] = "Controller";
+		me["CptCtrFsr"] = "full identifier";
+		me["CptCtrFwd"] = "unit forwarded to";
+		me["CptCtrClr"] = "command lock request signal";
+		me["HdgImb"] = "Inter-module buffer";
+		me["CptImbSrf"] = "identifier";
+		me["CptImbCor"] = "corresponding module";
+		me["CptImbDir"] = "direction";
+		me["CptImbPri"] = "priority";
+	};
+	me["Cpt"] = StrMod::cap(VecWdbeVTag::getTitle(VecWdbeVTag::DETAIL, ixWdbeVLocale));
+};
+
 void PnlWdbeModDetail::Tag::writeXML(
 			const uint ixWdbeVLocale
 			, xmlTextWriter* wr
@@ -545,6 +701,27 @@ string PnlWdbeModDetail::DpchAppData::getSrefsMask() {
 	return(srefs);
 };
 
+void PnlWdbeModDetail::DpchAppData::readJSON(
+			Json::Value& sup
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	Json::Value& me = sup;
+	if (addbasetag) me = sup["DpchAppWdbeModDetailData"];
+
+	basefound = (me != Json::nullValue);
+
+	if (basefound) {
+		if (me.isMember("scrJref")) {jref = Scr::descramble(me["scrJref"].asString()); add(JREF);};
+		if (contiac.readJSON(me, true)) add(CONTIAC);
+	} else {
+		contiac = ContIac();
+	};
+};
+
 void PnlWdbeModDetail::DpchAppData::readXML(
 			xmlXPathContext* docctx
 			, string basexpath
@@ -592,6 +769,26 @@ string PnlWdbeModDetail::DpchAppDo::getSrefsMask() {
 	StrMod::vectorToString(ss, srefs);
 
 	return(srefs);
+};
+
+void PnlWdbeModDetail::DpchAppDo::readJSON(
+			Json::Value& sup
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	Json::Value& me = sup;
+	if (addbasetag) me = sup["DpchAppWdbeModDetailDo"];
+
+	basefound = (me != Json::nullValue);
+
+	if (basefound) {
+		if (me.isMember("scrJref")) {jref = Scr::descramble(me["scrJref"].asString()); add(JREF);};
+		if (me.isMember("srefIxVDo")) {ixVDo = VecVDo::getIx(me["srefIxVDo"].asString()); add(IXVDO);};
+	} else {
+	};
 };
 
 void PnlWdbeModDetail::DpchAppDo::readXML(
@@ -684,6 +881,23 @@ void PnlWdbeModDetail::DpchEngData::merge(
 	if (src->has(STATAPP)) add(STATAPP);
 	if (src->has(STATSHR)) {statshr = src->statshr; add(STATSHR);};
 	if (src->has(TAG)) add(TAG);
+};
+
+void PnlWdbeModDetail::DpchEngData::writeJSON(
+			const uint ixWdbeVLocale
+			, Json::Value& sup
+		) {
+	Json::Value& me = sup["DpchEngWdbeModDetailData"] = Json::Value(Json::objectValue);
+
+	if (has(JREF)) me["scrJref"] = Scr::scramble(jref);
+	if (has(CONTIAC)) contiac.writeJSON(me);
+	if (has(CONTINF)) continf.writeJSON(me);
+	if (has(FEEDFPUPHKT)) feedFPupHkt.writeJSON(me);
+	if (has(FEEDFPUPIMBDIR)) feedFPupImbDir.writeJSON(me);
+	if (has(FEEDFPUPTYP)) feedFPupTyp.writeJSON(me);
+	if (has(STATAPP)) StatApp::writeJSON(me);
+	if (has(STATSHR)) statshr.writeJSON(me);
+	if (has(TAG)) Tag::writeJSON(ixWdbeVLocale, me);
 };
 
 void PnlWdbeModDetail::DpchEngData::writeXML(

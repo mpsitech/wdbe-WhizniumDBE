@@ -41,6 +41,25 @@ WdbeQCmdMNController::WdbeQCmdMNController(
 	this->stubRvrRefWdbeMSignal = stubRvrRefWdbeMSignal;
 };
 
+void WdbeQCmdMNController::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["mref"] = stubMref;
+		me["ivr"] = stubIvrRefWdbeMSignal;
+		me["rvr"] = stubRvrRefWdbeMSignal;
+	} else {
+		me["stubMref"] = stubMref;
+		me["stubIvrRefWdbeMSignal"] = stubIvrRefWdbeMSignal;
+		me["stubRvrRefWdbeMSignal"] = stubRvrRefWdbeMSignal;
+	};
+};
+
 void WdbeQCmdMNController::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -110,6 +129,16 @@ ListWdbeQCmdMNController& ListWdbeQCmdMNController::operator=(
 	};
 
 	return(*this);
+};
+
+void ListWdbeQCmdMNController::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListWdbeQCmdMNController";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListWdbeQCmdMNController::writeXML(

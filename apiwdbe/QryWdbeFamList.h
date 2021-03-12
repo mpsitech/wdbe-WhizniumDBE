@@ -28,8 +28,8 @@ namespace QryWdbeFamList {
 	class VecVOrd {
 
 	public:
-		static const Sbecore::uint VND = 1;
-		static const Sbecore::uint TIT = 2;
+		static const Sbecore::uint TIT = 1;
+		static const Sbecore::uint VND = 2;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);
@@ -38,7 +38,7 @@ namespace QryWdbeFamList {
 	/**
 	  * StatApp (full: StatAppQryWdbeFamList)
 	  */
-	class StatApp : public Sbecore::Xmlio::Block {
+	class StatApp : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint FIRSTCOL = 1;
@@ -64,7 +64,7 @@ namespace QryWdbeFamList {
 	/**
 	  * StatShr (full: StatShrQryWdbeFamList)
 	  */
-	class StatShr : public Sbecore::Xmlio::Block {
+	class StatShr : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint NTOT = 1;
@@ -88,7 +88,7 @@ namespace QryWdbeFamList {
 	/**
 	  * StgIac (full: StgIacQryWdbeFamList)
 	  */
-	class StgIac : public Sbecore::Xmlio::Block {
+	class StgIac : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint JNUM = 1;

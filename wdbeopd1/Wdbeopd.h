@@ -32,6 +32,9 @@
 #endif
 
 #include <microhttpd.h>
+#if MHD_VERSION < 0x0097002
+	#define MHD_Result int
+#endif
 
 #include <curl/curl.h>
 
@@ -84,7 +87,7 @@ namespace DpchWdbeopdUnreg {
 /**
 	* StgWdbeDatabase
 	*/
-class StgWdbeDatabase : public Sbecore::Xmlio::Block {
+class StgWdbeDatabase : public Sbecore::Block {
 
 public:
 	static const Sbecore::uint IXDBSVDBSTYPE = 1;
@@ -117,7 +120,7 @@ public:
 /**
 	* StgWdbeMonitor
 	*/
-class StgWdbeMonitor : public Sbecore::Xmlio::Block {
+class StgWdbeMonitor : public Sbecore::Block {
 
 public:
 	static const Sbecore::uint USERNAME = 1;
@@ -154,7 +157,7 @@ public:
 /**
 	* StgWdbeopd
 	*/
-class StgWdbeopd : public Sbecore::Xmlio::Block {
+class StgWdbeopd : public Sbecore::Block {
 
 public:
 	static const Sbecore::uint ENGIP = 1;
@@ -183,7 +186,7 @@ public:
 /**
 	* StgWdbePath
 	*/
-class StgWdbePath : public Sbecore::Xmlio::Block {
+class StgWdbePath : public Sbecore::Block {
 
 public:
 	static const Sbecore::uint ACVPATH = 1;

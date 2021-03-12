@@ -26,7 +26,7 @@ namespace VecWdbeVBasereptype {
 
 	std::string getTitle(const Sbecore::uint ix, const Sbecore::uint ixWdbeVLocale);
 
-	void fillFeed(const Sbecore::uint ixWdbeVLocale, Sbecore::Xmlio::Feed& feed);
+	void fillFeed(const Sbecore::uint ixWdbeVLocale, Sbecore::Feed& feed);
 };
 
 #endif

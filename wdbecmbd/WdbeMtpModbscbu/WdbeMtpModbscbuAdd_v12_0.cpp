@@ -20,6 +20,8 @@ using namespace Sbecore;
 using namespace Xmlio;
 using namespace WdbeMtpModbscbu;
 
+// IP ns.cust --- INSERT
+
 /******************************************************************************
  namespace WdbeMtpModbscbuAdd_v12_0
  ******************************************************************************/

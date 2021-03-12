@@ -10,10 +10,10 @@
 #ifndef WDBE_H
 #define WDBE_H
 
-#define WDBE_VERSION "1.1.4"
+#define WDBE_VERSION "1.1.5"
 #define WDBE_VERSION_MAJOR 1
 #define WDBE_VERSION_MINOR 1
-#define WDBE_VERSION_SUB 4
+#define WDBE_VERSION_SUB 5
 
 #include <sys/wait.h> // IP include.cust --- ILINE
 
@@ -250,7 +250,7 @@ public:
 /**
 	* ContInfWdbeAlert
 	*/
-class ContInfWdbeAlert : public Sbecore::Xmlio::Block {
+class ContInfWdbeAlert : public Sbecore::Block {
 
 public:
 	static const Sbecore::uint TXTCPT = 1;
@@ -287,6 +287,7 @@ public:
 
 public:
 	static bool all(const std::set<Sbecore::uint>& items);
+	void writeJSON(Json::Value& sup, std::string difftag = "");
 	void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
 	std::set<Sbecore::uint> compare(const ContInfWdbeAlert* comp);
 };
@@ -294,7 +295,7 @@ public:
 /**
 	* DpchWdbe
 	*/
-class DpchWdbe : public Sbecore::Xmlio::Block {
+class DpchWdbe : public Sbecore::Block {
 
 public:
 	DpchWdbe(const Sbecore::uint ixWdbeVDpch = 0);

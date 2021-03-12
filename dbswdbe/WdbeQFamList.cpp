@@ -35,6 +35,25 @@ WdbeQFamList::WdbeQFamList(
 	this->Title = Title;
 };
 
+void WdbeQFamList::writeJSON(
+			Json::Value& sup
+			, bool jnumattr
+			, bool shorttags
+		) {
+	Json::Value& me = sup.append(Json::Value(Json::objectValue));
+
+	if (jnumattr) me["jnum"] = jnum;
+	if (shorttags) {
+		me["vnd"] = srefKVendor;
+		me["vnd2"] = titSrefKVendor;
+		me["tit"] = Title;
+	} else {
+		me["srefKVendor"] = srefKVendor;
+		me["titSrefKVendor"] = titSrefKVendor;
+		me["Title"] = Title;
+	};
+};
+
 void WdbeQFamList::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -104,6 +123,16 @@ ListWdbeQFamList& ListWdbeQFamList::operator=(
 	};
 
 	return(*this);
+};
+
+void ListWdbeQFamList::writeJSON(
+			Json::Value& sup
+			, std::string difftag
+		) {
+	if (difftag == "") difftag = "ListWdbeQFamList";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::arrayValue);
+	for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeJSON(me, true, true);
 };
 
 void ListWdbeQFamList::writeXML(

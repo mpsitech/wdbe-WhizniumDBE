@@ -14,11 +14,11 @@
 
 // IP include.cust --- INSERT
 
-#include "PnlWdbePrcDetail.h"
-#include "PnlWdbePrcKHdltype.h"
-#include "PnlWdbePrcPrc1NVariable.h"
-#include "PnlWdbePrcMge1NSignal.h"
 #include "PnlWdbePrcFsmFsm1NFsmstate.h"
+#include "PnlWdbePrcMge1NSignal.h"
+#include "PnlWdbePrcPrc1NVariable.h"
+#include "PnlWdbePrcKHdltype.h"
+#include "PnlWdbePrcDetail.h"
 
 #define VecVWdbePrcRecDo PnlWdbePrcRec::VecVDo
 
@@ -52,7 +52,7 @@ public:
 	/**
 	  * ContInf (full: ContInfWdbePrcRec)
 	  */
-	class ContInf : public Sbecore::Xmlio::Block {
+	class ContInf : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint TXTREF = 1;
@@ -64,6 +64,7 @@ public:
 		std::string TxtRef;
 
 	public:
+		void writeJSON(Json::Value& sup, std::string difftag = "");
 		void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
 		std::set<Sbecore::uint> comm(const ContInf* comp);
 		std::set<Sbecore::uint> diff(const ContInf* comp);
@@ -75,13 +76,14 @@ public:
 	class StatApp {
 
 	public:
+		static void writeJSON(Json::Value& sup, std::string difftag = "", const bool initdoneDetail = false, const bool initdoneKHdltype = false, const bool initdonePrc1NVariable = false, const bool initdoneMge1NSignal = false, const bool initdoneFsmFsm1NFsmstate = false);
 		static void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true, const bool initdoneDetail = false, const bool initdoneKHdltype = false, const bool initdonePrc1NVariable = false, const bool initdoneMge1NSignal = false, const bool initdoneFsmFsm1NFsmstate = false);
 	};
 
 	/**
 		* StatShr (full: StatShrWdbePrcRec)
 		*/
-	class StatShr : public Sbecore::Xmlio::Block {
+	class StatShr : public Sbecore::Block {
 
 	public:
 		static const Sbecore::uint IXWDBEVEXPSTATE = 1;
@@ -107,6 +109,7 @@ public:
 		bool ButRegularizeActive;
 
 	public:
+		void writeJSON(Json::Value& sup, std::string difftag = "");
 		void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
 		std::set<Sbecore::uint> comm(const StatShr* comp);
 		std::set<Sbecore::uint> diff(const StatShr* comp);
@@ -118,6 +121,7 @@ public:
 	class Tag {
 
 	public:
+		static void writeJSON(const Sbecore::uint ixWdbeVLocale, Json::Value& sup, std::string difftag = "");
 		static void writeXML(const Sbecore::uint ixWdbeVLocale, xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
 	};
 
@@ -139,6 +143,7 @@ public:
 	public:
 		std::string getSrefsMask();
 
+		void readJSON(Json::Value& sup, bool addbasetag = false);
 		void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 	};
 
@@ -166,6 +171,7 @@ public:
 		std::string getSrefsMask();
 		void merge(DpchEngWdbe* dpcheng);
 
+		void writeJSON(const Sbecore::uint ixWzskVLocale, Json::Value& sup);
 		void writeXML(const Sbecore::uint ixWdbeVLocale, xmlTextWriter* wr);
 	};
 
@@ -180,11 +186,11 @@ public:
 	ContInf continf;
 	StatShr statshr;
 
-	PnlWdbePrcDetail* pnldetail;
-	PnlWdbePrcKHdltype* pnlkhdltype;
-	PnlWdbePrcPrc1NVariable* pnlprc1nvariable;
-	PnlWdbePrcMge1NSignal* pnlmge1nsignal;
 	PnlWdbePrcFsmFsm1NFsmstate* pnlfsmfsm1nfsmstate;
+	PnlWdbePrcMge1NSignal* pnlmge1nsignal;
+	PnlWdbePrcPrc1NVariable* pnlprc1nvariable;
+	PnlWdbePrcKHdltype* pnlkhdltype;
+	PnlWdbePrcDetail* pnldetail;
 
 	WdbeMProcess recPrc;
 
@@ -220,10 +226,10 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbePrc_fsmEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
-	bool handleCallWdbePrc_mdlEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
-	bool handleCallWdbeFsmUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 	bool handleCallWdbePrcUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbeFsmUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbePrc_mdlEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbePrc_fsmEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
 
 };
 

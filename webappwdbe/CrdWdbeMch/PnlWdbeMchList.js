@@ -106,9 +106,9 @@ function refreshB(chgcol) {
 			ix++;
 
 			if (i == 1) {
-				doc.cols.push("TcoSrf"); doc.widths.push(TcoSrfWidth); doc.fs.push("srf"); doc.tos.push(1); wtot += TcoSrfWidth;
+				doc.cols.push("TcoSrf"); doc.widths.push(TcoSrfWidth); doc.fs.push("srf"); doc.tos.push(2); wtot += TcoSrfWidth;
 			} else if (i == 2) {
-				doc.cols.push("TcoSup"); doc.widths.push(TcoSupWidth); doc.fs.push("sup"); doc.tos.push(2); wtot += TcoSupWidth;
+				doc.cols.push("TcoSup"); doc.widths.push(TcoSupWidth); doc.fs.push("sup"); doc.tos.push(1); wtot += TcoSupWidth;
 			} else {
 				ix--;
 			};

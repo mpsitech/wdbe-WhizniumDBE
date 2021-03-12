@@ -25,6 +25,17 @@ SessWdbe::StatShr::StatShr(
 	mask = {JREFCRDNAV};
 };
 
+void SessWdbe::StatShr::writeJSON(
+			Json::Value& sup
+			, string difftag
+		) {
+	if (difftag.length() == 0) difftag = "StatShrSessWdbe";
+
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
+
+	me["scrJrefCrdnav"] = Scr::scramble(jrefCrdnav);
+};
+
 void SessWdbe::StatShr::writeXML(
 			xmlTextWriter* wr
 			, string difftag
@@ -105,6 +116,17 @@ void SessWdbe::DpchEngData::merge(
 	if (src->has(JREF)) {jref = src->jref; add(JREF);};
 	if (src->has(FEEDFENSSEC)) {feedFEnsSec = src->feedFEnsSec; add(FEEDFENSSEC);};
 	if (src->has(STATSHR)) {statshr = src->statshr; add(STATSHR);};
+};
+
+void SessWdbe::DpchEngData::writeJSON(
+			const uint ixWdbeVLocale
+			, Json::Value& sup
+		) {
+	Json::Value& me = sup["DpchEngSessWdbeData"] = Json::Value(Json::objectValue);
+
+	if (has(JREF)) me["scrJref"] = Scr::scramble(jref);
+	if (has(FEEDFENSSEC)) feedFEnsSec.writeJSON(me);
+	if (has(STATSHR)) statshr.writeJSON(me);
 };
 
 void SessWdbe::DpchEngData::writeXML(
