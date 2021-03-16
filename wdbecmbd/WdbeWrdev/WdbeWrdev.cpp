@@ -100,10 +100,10 @@ void WdbeWrdev::writeVecH(
 		outfile << endl;
 
 		// appendToFeed
-		if (appfed) outfile << pre << "void appendToFeed(const " << ixtype << " " << ixvar << ", Sbecore::Xmlio::Feed& feed);" << endl;
+		if (appfed) outfile << pre << "void appendToFeed(const " << ixtype << " " << ixvar << ", Sbecore::Feed& feed);" << endl;
 
 		// fillFeed
-		if (filfed) outfile << pre << "void fillFeed(Sbecore::Xmlio::Feed& feed);" << endl;
+		if (filfed) outfile << pre << "void fillFeed(Sbecore::Feed& feed);" << endl;
 	};
 
 	if (subclass) outfile << indent;
