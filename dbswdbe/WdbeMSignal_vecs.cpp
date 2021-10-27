@@ -120,3 +120,49 @@ void TblWdbeMSignal::VecVMgeTbl::fillFeed(
 
 	for (unsigned int i = 1; i <= 3; i++) feed.appendIxSrefTitles(i, getSref(i), getTitle(i, ixWdbeVLocale));
 };
+
+/******************************************************************************
+ class TblWdbeMSignal::VecVRefTbl
+ ******************************************************************************/
+
+uint TblWdbeMSignal::VecVRefTbl::getIx(
+			const string& sref
+		) {
+	string s = StrMod::lc(sref);
+
+	if (s == "mdl") return MDL;
+	if (s == "unt") return UNT;
+
+	return(0);
+};
+
+string TblWdbeMSignal::VecVRefTbl::getSref(
+			const uint ix
+		) {
+	if (ix == MDL) return("mdl");
+	if (ix == UNT) return("unt");
+
+	return("");
+};
+
+string TblWdbeMSignal::VecVRefTbl::getTitle(
+			const uint ix
+			, const uint ixWdbeVLocale
+		) {
+	if (ixWdbeVLocale == 1) {
+		if (ix == MDL) return("module");
+		if (ix == UNT) return("unit");
+		return(getSref(ix));
+	};
+
+	return("");
+};
+
+void TblWdbeMSignal::VecVRefTbl::fillFeed(
+			const uint ixWdbeVLocale
+			, Feed& feed
+		) {
+	feed.clear();
+
+	for (unsigned int i = 1; i <= 2; i++) feed.appendIxSrefTitles(i, getSref(i), getTitle(i, ixWdbeVLocale));
+};

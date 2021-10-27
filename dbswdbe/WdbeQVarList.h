@@ -25,7 +25,7 @@
 class WdbeQVarList {
 
 public:
-	WdbeQVarList(const Sbecore::ubigint qref = 0, const Sbecore::ubigint jref = 0, const Sbecore::uint jnum = 0, const Sbecore::ubigint ref = 0, const std::string sref = "", const Sbecore::ubigint prcRefWdbeMProcess = 0, const std::string stubPrcRefWdbeMProcess = "", const bool Const = false, const std::string yesnoConst = "", const bool Falling = false, const std::string yesnoFalling = "", const std::string srefWdbeKHdltype = "", const std::string titSrefWdbeKHdltype = "", const Sbecore::usmallint Width = 0, const std::string Minmax = "");
+	WdbeQVarList(const Sbecore::ubigint qref = 0, const Sbecore::ubigint jref = 0, const Sbecore::uint jnum = 0, const Sbecore::ubigint ref = 0, const std::string sref = "", const Sbecore::uint refIxVTbl = 0, const std::string srefRefIxVTbl = "", const std::string titRefIxVTbl = "", const Sbecore::ubigint refUref = 0, const std::string stubRefUref = "", const bool Const = false, const std::string yesnoConst = "", const bool Falling = false, const std::string yesnoFalling = "", const std::string srefWdbeKHdltype = "", const std::string titSrefWdbeKHdltype = "", const Sbecore::usmallint Width = 0, const std::string Minmax = "");
 
 public:
 	Sbecore::ubigint qref;
@@ -33,8 +33,11 @@ public:
 	Sbecore::uint jnum;
 	Sbecore::ubigint ref;
 	std::string sref;
-	Sbecore::ubigint prcRefWdbeMProcess;
-	std::string stubPrcRefWdbeMProcess;
+	Sbecore::uint refIxVTbl;
+	std::string srefRefIxVTbl;
+	std::string titRefIxVTbl;
+	Sbecore::ubigint refUref;
+	std::string stubRefUref;
 	bool Const;
 	std::string yesnoConst;
 	bool Falling;
@@ -87,8 +90,8 @@ public:
 	virtual Sbecore::ubigint loadRstBySQL(const std::string& sqlstr, const bool append, ListWdbeQVarList& rst);
 
 	virtual Sbecore::ubigint insertRec(WdbeQVarList* rec);
-	Sbecore::ubigint insertNewRec(WdbeQVarList** rec = NULL, const Sbecore::ubigint jref = 0, const Sbecore::uint jnum = 0, const Sbecore::ubigint ref = 0, const std::string sref = "", const Sbecore::ubigint prcRefWdbeMProcess = 0, const std::string stubPrcRefWdbeMProcess = "", const bool Const = false, const std::string yesnoConst = "", const bool Falling = false, const std::string yesnoFalling = "", const std::string srefWdbeKHdltype = "", const std::string titSrefWdbeKHdltype = "", const Sbecore::usmallint Width = 0, const std::string Minmax = "");
-	Sbecore::ubigint appendNewRecToRst(ListWdbeQVarList& rst, WdbeQVarList** rec = NULL, const Sbecore::ubigint jref = 0, const Sbecore::uint jnum = 0, const Sbecore::ubigint ref = 0, const std::string sref = "", const Sbecore::ubigint prcRefWdbeMProcess = 0, const std::string stubPrcRefWdbeMProcess = "", const bool Const = false, const std::string yesnoConst = "", const bool Falling = false, const std::string yesnoFalling = "", const std::string srefWdbeKHdltype = "", const std::string titSrefWdbeKHdltype = "", const Sbecore::usmallint Width = 0, const std::string Minmax = "");
+	Sbecore::ubigint insertNewRec(WdbeQVarList** rec = NULL, const Sbecore::ubigint jref = 0, const Sbecore::uint jnum = 0, const Sbecore::ubigint ref = 0, const std::string sref = "", const Sbecore::uint refIxVTbl = 0, const std::string srefRefIxVTbl = "", const std::string titRefIxVTbl = "", const Sbecore::ubigint refUref = 0, const std::string stubRefUref = "", const bool Const = false, const std::string yesnoConst = "", const bool Falling = false, const std::string yesnoFalling = "", const std::string srefWdbeKHdltype = "", const std::string titSrefWdbeKHdltype = "", const Sbecore::usmallint Width = 0, const std::string Minmax = "");
+	Sbecore::ubigint appendNewRecToRst(ListWdbeQVarList& rst, WdbeQVarList** rec = NULL, const Sbecore::ubigint jref = 0, const Sbecore::uint jnum = 0, const Sbecore::ubigint ref = 0, const std::string sref = "", const Sbecore::uint refIxVTbl = 0, const std::string srefRefIxVTbl = "", const std::string titRefIxVTbl = "", const Sbecore::ubigint refUref = 0, const std::string stubRefUref = "", const bool Const = false, const std::string yesnoConst = "", const bool Falling = false, const std::string yesnoFalling = "", const std::string srefWdbeKHdltype = "", const std::string titSrefWdbeKHdltype = "", const Sbecore::usmallint Width = 0, const std::string Minmax = "");
 	virtual void insertRst(ListWdbeQVarList& rst);
 	virtual void updateRec(WdbeQVarList* rec);
 	virtual void updateRst(ListWdbeQVarList& rst);

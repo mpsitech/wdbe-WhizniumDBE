@@ -1,0 +1,39 @@
+# file Makefile
+# make file for operation pack WdbeMtpCplmstbu, release wdbeopd2_mac
+# copyright: (C) 2016-2020 MPSI Technologies GmbH
+# author: Alexander Wirthmueller (auto-generation)
+# date created: 23 Oct 2021
+# IP header --- ABOVE
+
+include ../Makefile.inc
+
+CPP = g++
+CPPFLAGS = -std=c++11 -g -Wall -Os -pthread
+
+STATLIB = ar
+STATLIBFLAGS = rcs
+
+INCPATH = -I$(BUILDROOT)/dbswdbe -I$(BUILDROOT)/wdbeopd2/VecWdbe -I$(BUILDROOT)/wdbeopd2/IexWdbe -I$(BUILDROOT)/wdbeopd2
+INCPATH += -I${WHIZSDKROOT}/build -I/usr/local/include -I/usr/local/include/curl -I/usr/local/include/libxml2 -I/usr/local/mysql/include
+
+OBJS = WdbeMtpCplmstbu_blks.o WdbeMtpCplmstbu.o
+OBJS += WdbeMtpCplmstbuAdd_xlnx_v12_0.o WdbeMtpCplmstbuAxihostif_Easy_v1_0.o WdbeMtpCplmstbuAxihostif_Easy_v2_0.o WdbeMtpCplmstbuAxihostif_v1_0.o WdbeMtpCplmstbuCmdinv_v1_0.o WdbeMtpCplmstbuCmdret_v1_0.o WdbeMtpCplmstbuDft_xlnx_v4_0.o WdbeMtpCplmstbuDiv_xlnx_v3_0.o WdbeMtpCplmstbuDiv_xlnx_v5_1.o WdbeMtpCplmstbuDotmx2x16_v1_0.o WdbeMtpCplmstbuDpbram_v1_0.o WdbeMtpCplmstbuDpbram_xlnx_v8_4.o WdbeMtpCplmstbuDpsram_mchp_v1_0.o WdbeMtpCplmstbuDsp48_xlnx_v3_0_aMultB.o WdbeMtpCplmstbuDsp48_xlnx_v3_0_aPlusDPlusC.o WdbeMtpCplmstbuMpfs_ip_AXI_v1_0.o WdbeMtpCplmstbuMult_xlnx_v12_0.o WdbeMtpCplmstbuOled128x32_v1_0.o WdbeMtpCplmstbuPmmu_v1_0.o WdbeMtpCplmstbuSpbram_v1_0.o WdbeMtpCplmstbuSpifwd_v1_0.o WdbeMtpCplmstbuSpihostif_Easy_v1_0.o WdbeMtpCplmstbuSpihostif_v1_0.o WdbeMtpCplmstbuSub_xlnx_v12_0.o WdbeMtpCplmstbuTop_mchp_v1_0.o WdbeMtpCplmstbuTop_xlnx_v1_0.o WdbeMtpCplmstbuTpsram_mchp_v1_0.o WdbeMtpCplmstbuUarthostif_Easy_v1_0.o WdbeMtpCplmstbuUarthostif_v1_0.o WdbeMtpCplmstbuUartrx_v1_0_Mcu.o WdbeMtpCplmstbuUarttx_v1_0_Mcu.o WdbeMtpCplmstbuUsbrxtx_slbs_v1_0_Mcu.o WdbeMtpCplmstbuXadc_xlnx_v3_3.o WdbeMtpCplmstbuZynq_ip_AXI_v1_0.o WdbeMtpCplmstbuZynq_ip_AXI_v2_0.o
+
+LIB = libwdbemtpcplmstbu
+
+.SUFFIXES:	.cpp
+
+.cpp.o :
+	$(CPP) $(CPPFLAGS) $(INCPATH) -o $@ -c $<
+
+all:	$(LIB)
+
+$(LIB):	$(OBJS)
+	$(STATLIB) $(STATLIBFLAGS) $(LIB).a $(OBJS)
+	rm -f *.o
+
+install:
+	mv $(LIB).a $(LIBROOT)/wdbeopd2/
+
+clean:
+	rm -f *.o

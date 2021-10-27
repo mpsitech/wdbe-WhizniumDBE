@@ -1,0 +1,39 @@
+# file Makefile
+# make file for operation pack WdbeCplmst, release wdbecmbd_ubuntu
+# copyright: (C) 2016-2020 MPSI Technologies GmbH
+# author: Alexander Wirthmueller (auto-generation)
+# date created: 23 Oct 2021
+# IP header --- ABOVE
+
+include ../Makefile.inc
+
+CPP = g++
+CPPFLAGS = -std=c++11 -g -Wall -Os -pthread -DWDBECMBD
+
+STATLIB = ar
+STATLIBFLAGS = rcs
+
+INCPATH = -I$(BUILDROOT)/dbswdbe -I$(BUILDROOT)/wdbecmbd/VecWdbe -I$(BUILDROOT)/wdbecmbd/IexWdbe -I$(BUILDROOT)/wdbecmbd
+INCPATH += -I${WHIZSDKROOT}/build -I${WHIZSDKROOT}/build/apiwzlm -I/usr/include -I/usr/include/jsoncpp -I/usr/include/libxml2 -I/usr/include/mariadb
+
+OBJS = WdbeCplmst_blks.o WdbeCplmst.o
+OBJS += WdbeCplmstCtrEctr.o WdbeCplmstFwdctr.o WdbeCplmstImbuf.o WdbeCplmstSys.o WdbeCplmstTplcpy.o WdbeCplmstUnt.o SqkWdbeCplmst.o
+
+LIB = libwdbecplmst
+
+.SUFFIXES:	.cpp
+
+.cpp.o :
+	$(CPP) $(CPPFLAGS) $(INCPATH) -o $@ -c $<
+
+all:	$(LIB)
+
+$(LIB):	$(OBJS)
+	$(STATLIB) $(STATLIBFLAGS) $(LIB).a $(OBJS)
+	rm -f *.o
+
+install:
+	mv $(LIB).a $(LIBROOT)/wdbecmbd/
+
+clean:
+	rm -f *.o

@@ -46,8 +46,8 @@ QryWdbeVitList::QryWdbeVitList(
 
 	rerun(dbswdbe);
 
-	xchg->addClstn(VecWdbeVCall::CALLWDBEVITMOD, jref, Clstn::VecVJobmask::ALL, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBESTUBCHG, jref, Clstn::VecVJobmask::SELF, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBEVITMOD, jref, Clstn::VecVJobmask::ALL, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -210,8 +210,8 @@ void QryWdbeVitList::rerun_orderSQL(
 			string& sqlstr
 			, const uint preIxOrd
 		) {
-	if (preIxOrd == VecVOrd::VEC) sqlstr += " ORDER BY TblWdbeMVectoritem.vecRefWdbeMVector ASC";
-	else if (preIxOrd == VecVOrd::SRF) sqlstr += " ORDER BY TblWdbeMVectoritem.sref ASC";
+	if (preIxOrd == VecVOrd::SRF) sqlstr += " ORDER BY TblWdbeMVectoritem.sref ASC";
+	else if (preIxOrd == VecVOrd::VEC) sqlstr += " ORDER BY TblWdbeMVectoritem.vecRefWdbeMVector ASC";
 };
 
 void QryWdbeVitList::fetch(
@@ -372,26 +372,20 @@ void QryWdbeVitList::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBEVITUPD_REFEQ) {
-		call->abort = handleCallWdbeVitUpd_refEq(dbswdbe, call->jref);
+	if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
+		call->abort = handleCallWdbeStubChgFromSelf(dbswdbe);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEVITMOD) {
 		call->abort = handleCallWdbeVitMod(dbswdbe, call->jref);
-	} else if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
-		call->abort = handleCallWdbeStubChgFromSelf(dbswdbe);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEVITUPD_REFEQ) {
+		call->abort = handleCallWdbeVitUpd_refEq(dbswdbe, call->jref);
 	};
 };
 
-bool QryWdbeVitList::handleCallWdbeVitUpd_refEq(
+bool QryWdbeVitList::handleCallWdbeStubChgFromSelf(
 			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
 		) {
 	bool retval = false;
-
-	if (ixWdbeVQrystate != VecWdbeVQrystate::OOD) {
-		ixWdbeVQrystate = VecWdbeVQrystate::OOD;
-		xchg->triggerCall(dbswdbe, VecWdbeVCall::CALLWDBESTATCHG, jref);
-	};
-
+	// IP handleCallWdbeStubChgFromSelf --- INSERT
 	return retval;
 };
 
@@ -409,10 +403,16 @@ bool QryWdbeVitList::handleCallWdbeVitMod(
 	return retval;
 };
 
-bool QryWdbeVitList::handleCallWdbeStubChgFromSelf(
+bool QryWdbeVitList::handleCallWdbeVitUpd_refEq(
 			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
 		) {
 	bool retval = false;
-	// IP handleCallWdbeStubChgFromSelf --- INSERT
+
+	if (ixWdbeVQrystate != VecWdbeVQrystate::OOD) {
+		ixWdbeVQrystate = VecWdbeVQrystate::OOD;
+		xchg->triggerCall(dbswdbe, VecWdbeVCall::CALLWDBESTATCHG, jref);
+	};
+
 	return retval;
 };

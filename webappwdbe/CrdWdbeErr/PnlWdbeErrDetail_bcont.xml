@@ -8,6 +8,7 @@
 			function handleTxfFsrChange() {parent.parent.window.handleTxfChange(document,"TxfFsr","");};
 			function handlePupRetChange() {parent.parent.window.handlePupChange(document,"PupRet","xs");};
 			function handleButReuViewClick() {parent.parent.window.handleButCrdopenClick("ButReuView");};
+			function handleButTraViewClick() {parent.parent.window.handleButCrdopenClick("ButTraView");};
 			function handleTxfCmtKey(evt) {return parent.parent.window.handleTxftKey(document,"TxfCmt",evt);};
 			function handleTxfCmtChange() {parent.parent.window.handleTxftChange(document,"TxfCmt");};
 			<!-- IP custScript - INSERT -->
@@ -88,7 +89,8 @@
 						<input id="TxtTra" class="txfnoed" type="text" readonly="readonly" value="TxtTra"/>
 					</td>
 					<td></td>
-					<td colspan="2"></td>
+					<td id="rdynTra" colspan="2" align="left">
+					</td>
 				</tr>
 				<tr id="trCmt" class="show">
 					<td height="75"></td>

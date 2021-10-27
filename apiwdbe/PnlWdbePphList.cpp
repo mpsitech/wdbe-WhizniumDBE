@@ -272,15 +272,13 @@ set<uint> PnlWdbePphList::StatShr::diff(
 PnlWdbePphList::StgIac::StgIac(
 			const uint TcoSrfWidth
 			, const uint TcoUntWidth
-			, const uint TcoMdlWidth
 		) :
 			Block()
 		{
 	this->TcoSrfWidth = TcoSrfWidth;
 	this->TcoUntWidth = TcoUntWidth;
-	this->TcoMdlWidth = TcoMdlWidth;
 
-	mask = {TCOSRFWIDTH, TCOUNTWIDTH, TCOMDLWIDTH};
+	mask = {TCOSRFWIDTH, TCOUNTWIDTH};
 };
 
 bool PnlWdbePphList::StgIac::readXML(
@@ -302,7 +300,6 @@ bool PnlWdbePphList::StgIac::readXML(
 	if (basefound) {
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoSrfWidth", TcoSrfWidth)) add(TCOSRFWIDTH);
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoUntWidth", TcoUntWidth)) add(TCOUNTWIDTH);
-		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoMdlWidth", TcoMdlWidth)) add(TCOMDLWIDTH);
 	};
 
 	return basefound;
@@ -322,7 +319,6 @@ void PnlWdbePphList::StgIac::writeXML(
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
 		writeUintAttr(wr, itemtag, "sref", "TcoSrfWidth", TcoSrfWidth);
 		writeUintAttr(wr, itemtag, "sref", "TcoUntWidth", TcoUntWidth);
-		writeUintAttr(wr, itemtag, "sref", "TcoMdlWidth", TcoMdlWidth);
 	xmlTextWriterEndElement(wr);
 };
 
@@ -333,7 +329,6 @@ set<uint> PnlWdbePphList::StgIac::comm(
 
 	if (TcoSrfWidth == comp->TcoSrfWidth) insert(items, TCOSRFWIDTH);
 	if (TcoUntWidth == comp->TcoUntWidth) insert(items, TCOUNTWIDTH);
-	if (TcoMdlWidth == comp->TcoMdlWidth) insert(items, TCOMDLWIDTH);
 
 	return(items);
 };
@@ -346,7 +341,7 @@ set<uint> PnlWdbePphList::StgIac::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {TCOSRFWIDTH, TCOUNTWIDTH, TCOMDLWIDTH};
+	diffitems = {TCOSRFWIDTH, TCOUNTWIDTH};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -366,7 +361,6 @@ PnlWdbePphList::Tag::Tag(
 			, const string& TxtShowing2
 			, const string& TcoSrf
 			, const string& TcoUnt
-			, const string& TcoMdl
 		) :
 			Block()
 		{
@@ -379,9 +373,8 @@ PnlWdbePphList::Tag::Tag(
 	this->TxtShowing2 = TxtShowing2;
 	this->TcoSrf = TcoSrf;
 	this->TcoUnt = TcoUnt;
-	this->TcoMdl = TcoMdl;
 
-	mask = {CPT, TXTFOR, TXTRECORD1, TXTRECORD2, TRS, TXTSHOWING1, TXTSHOWING2, TCOSRF, TCOUNT, TCOMDL};
+	mask = {CPT, TXTFOR, TXTRECORD1, TXTRECORD2, TRS, TXTSHOWING1, TXTSHOWING2, TCOSRF, TCOUNT};
 };
 
 bool PnlWdbePphList::Tag::readXML(
@@ -410,7 +403,6 @@ bool PnlWdbePphList::Tag::readXML(
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "TxtShowing2", TxtShowing2)) add(TXTSHOWING2);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "TcoSrf", TcoSrf)) add(TCOSRF);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "TcoUnt", TcoUnt)) add(TCOUNT);
-		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "TcoMdl", TcoMdl)) add(TCOMDL);
 	};
 
 	return basefound;

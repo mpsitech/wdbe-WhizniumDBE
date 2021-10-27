@@ -21,6 +21,9 @@ public class PnlWdbeCmdDetail {
 
 		public static final int BUTSAVECLICK = 1;
 		public static final int BUTREUVIEWCLICK = 2;
+		public static final int BUTIVRVIEWCLICK = 3;
+		public static final int BUTRVRVIEWCLICK = 4;
+		public static final int BUTRERVIEWCLICK = 5;
 
 		public static int getIx(
 					String sref
@@ -29,6 +32,9 @@ public class PnlWdbeCmdDetail {
 
 			if (s.equals("butsaveclick")) return BUTSAVECLICK;
 			if (s.equals("butreuviewclick")) return BUTREUVIEWCLICK;
+			if (s.equals("butivrviewclick")) return BUTIVRVIEWCLICK;
+			if (s.equals("butrvrviewclick")) return BUTRVRVIEWCLICK;
+			if (s.equals("butrerviewclick")) return BUTRERVIEWCLICK;
 
 			return 0;
 		};
@@ -38,6 +44,9 @@ public class PnlWdbeCmdDetail {
 				) {
 			if (ix == BUTSAVECLICK) return("ButSaveClick");
 			if (ix == BUTREUVIEWCLICK) return("ButReuViewClick");
+			if (ix == BUTIVRVIEWCLICK) return("ButIvrViewClick");
+			if (ix == BUTRVRVIEWCLICK) return("ButRvrViewClick");
+			if (ix == BUTRERVIEWCLICK) return("ButRerViewClick");
 
 			return "";
 		};
@@ -318,9 +327,15 @@ public class PnlWdbeCmdDetail {
 		public static final int BUTREUVIEWACTIVE = 7;
 		public static final int PUPRTYACTIVE = 8;
 		public static final int TXTIVRACTIVE = 9;
-		public static final int TXTRVRACTIVE = 10;
-		public static final int TXTRERACTIVE = 11;
-		public static final int TXFCMTACTIVE = 12;
+		public static final int BUTIVRVIEWAVAIL = 10;
+		public static final int BUTIVRVIEWACTIVE = 11;
+		public static final int TXTRVRACTIVE = 12;
+		public static final int BUTRVRVIEWAVAIL = 13;
+		public static final int BUTRVRVIEWACTIVE = 14;
+		public static final int TXTRERACTIVE = 15;
+		public static final int BUTRERVIEWAVAIL = 16;
+		public static final int BUTRERVIEWACTIVE = 17;
+		public static final int TXFCMTACTIVE = 18;
 
 		public StatShr(
 					boolean ButSaveAvail
@@ -332,8 +347,14 @@ public class PnlWdbeCmdDetail {
 					, boolean ButReuViewActive
 					, boolean PupRtyActive
 					, boolean TxtIvrActive
+					, boolean ButIvrViewAvail
+					, boolean ButIvrViewActive
 					, boolean TxtRvrActive
+					, boolean ButRvrViewAvail
+					, boolean ButRvrViewActive
 					, boolean TxtRerActive
+					, boolean ButRerViewAvail
+					, boolean ButRerViewActive
 					, boolean TxfCmtActive
 				) {
 			this.ButSaveAvail = ButSaveAvail;
@@ -345,11 +366,17 @@ public class PnlWdbeCmdDetail {
 			this.ButReuViewActive = ButReuViewActive;
 			this.PupRtyActive = PupRtyActive;
 			this.TxtIvrActive = TxtIvrActive;
+			this.ButIvrViewAvail = ButIvrViewAvail;
+			this.ButIvrViewActive = ButIvrViewActive;
 			this.TxtRvrActive = TxtRvrActive;
+			this.ButRvrViewAvail = ButRvrViewAvail;
+			this.ButRvrViewActive = ButRvrViewActive;
 			this.TxtRerActive = TxtRerActive;
+			this.ButRerViewAvail = ButRerViewAvail;
+			this.ButRerViewActive = ButRerViewActive;
 			this.TxfCmtActive = TxfCmtActive;
 
-			mask = new HashSet<Integer>(Arrays.asList(BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXFFSRACTIVE, TXTREUACTIVE, BUTREUVIEWAVAIL, BUTREUVIEWACTIVE, PUPRTYACTIVE, TXTIVRACTIVE, TXTRVRACTIVE, TXTRERACTIVE, TXFCMTACTIVE));
+			mask = new HashSet<Integer>(Arrays.asList(BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXFFSRACTIVE, TXTREUACTIVE, BUTREUVIEWAVAIL, BUTREUVIEWACTIVE, PUPRTYACTIVE, TXTIVRACTIVE, BUTIVRVIEWAVAIL, BUTIVRVIEWACTIVE, TXTRVRACTIVE, BUTRVRVIEWAVAIL, BUTRVRVIEWACTIVE, TXTRERACTIVE, BUTRERVIEWAVAIL, BUTRERVIEWACTIVE, TXFCMTACTIVE));
 		};
 
 		public boolean ButSaveAvail;
@@ -361,8 +388,14 @@ public class PnlWdbeCmdDetail {
 		public boolean ButReuViewActive;
 		public boolean PupRtyActive;
 		public boolean TxtIvrActive;
+		public boolean ButIvrViewAvail;
+		public boolean ButIvrViewActive;
 		public boolean TxtRvrActive;
+		public boolean ButRvrViewAvail;
+		public boolean ButRvrViewActive;
 		public boolean TxtRerActive;
+		public boolean ButRerViewAvail;
+		public boolean ButRerViewActive;
 		public boolean TxfCmtActive;
 
 		public boolean readXML(
@@ -387,8 +420,14 @@ public class PnlWdbeCmdDetail {
 				ButReuViewActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButReuViewActive", mask, BUTREUVIEWACTIVE);
 				PupRtyActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "PupRtyActive", mask, PUPRTYACTIVE);
 				TxtIvrActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxtIvrActive", mask, TXTIVRACTIVE);
+				ButIvrViewAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButIvrViewAvail", mask, BUTIVRVIEWAVAIL);
+				ButIvrViewActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButIvrViewActive", mask, BUTIVRVIEWACTIVE);
 				TxtRvrActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxtRvrActive", mask, TXTRVRACTIVE);
+				ButRvrViewAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButRvrViewAvail", mask, BUTRVRVIEWAVAIL);
+				ButRvrViewActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButRvrViewActive", mask, BUTRVRVIEWACTIVE);
 				TxtRerActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxtRerActive", mask, TXTRERACTIVE);
+				ButRerViewAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButRerViewAvail", mask, BUTRERVIEWAVAIL);
+				ButRerViewActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButRerViewActive", mask, BUTRERVIEWACTIVE);
 				TxfCmtActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxfCmtActive", mask, TXFCMTACTIVE);
 
 				return true;
@@ -411,8 +450,14 @@ public class PnlWdbeCmdDetail {
 			if (ButReuViewActive == comp.ButReuViewActive) items.add(BUTREUVIEWACTIVE);
 			if (PupRtyActive == comp.PupRtyActive) items.add(PUPRTYACTIVE);
 			if (TxtIvrActive == comp.TxtIvrActive) items.add(TXTIVRACTIVE);
+			if (ButIvrViewAvail == comp.ButIvrViewAvail) items.add(BUTIVRVIEWAVAIL);
+			if (ButIvrViewActive == comp.ButIvrViewActive) items.add(BUTIVRVIEWACTIVE);
 			if (TxtRvrActive == comp.TxtRvrActive) items.add(TXTRVRACTIVE);
+			if (ButRvrViewAvail == comp.ButRvrViewAvail) items.add(BUTRVRVIEWAVAIL);
+			if (ButRvrViewActive == comp.ButRvrViewActive) items.add(BUTRVRVIEWACTIVE);
 			if (TxtRerActive == comp.TxtRerActive) items.add(TXTRERACTIVE);
+			if (ButRerViewAvail == comp.ButRerViewAvail) items.add(BUTRERVIEWAVAIL);
+			if (ButRerViewActive == comp.ButRerViewActive) items.add(BUTRERVIEWACTIVE);
 			if (TxfCmtActive == comp.TxfCmtActive) items.add(TXFCMTACTIVE);
 
 			return(items);
@@ -426,7 +471,7 @@ public class PnlWdbeCmdDetail {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXFFSRACTIVE, TXTREUACTIVE, BUTREUVIEWAVAIL, BUTREUVIEWACTIVE, PUPRTYACTIVE, TXTIVRACTIVE, TXTRVRACTIVE, TXTRERACTIVE, TXFCMTACTIVE));
+			diffitems = new HashSet<Integer>(Arrays.asList(BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXFFSRACTIVE, TXTREUACTIVE, BUTREUVIEWAVAIL, BUTREUVIEWACTIVE, PUPRTYACTIVE, TXTIVRACTIVE, BUTIVRVIEWAVAIL, BUTIVRVIEWACTIVE, TXTRVRACTIVE, BUTRVRVIEWAVAIL, BUTRVRVIEWACTIVE, TXTRERACTIVE, BUTRERVIEWAVAIL, BUTRERVIEWACTIVE, TXFCMTACTIVE));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);
@@ -678,7 +723,7 @@ public class PnlWdbeCmdDetail {
 			feedFPupRet = new Feed("FeedFPupRet");
 			feedFPupRty = new Feed("FeedFPupRty");
 			statapp = new StatApp(0);
-			statshr = new StatShr(false, false, false, false, false, false, false, false, false, false, false, false);
+			statshr = new StatShr(false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false);
 			tag = new Tag("", "", "", "", "", "", "", "", "");
 		};
 
@@ -731,7 +776,7 @@ public class PnlWdbeCmdDetail {
 				feedFPupRet = new Feed("FeedFPupRet");
 				feedFPupRty = new Feed("FeedFPupRty");
 				statapp = new StatApp(0);
-				statshr = new StatShr(false, false, false, false, false, false, false, false, false, false, false, false);
+				statshr = new StatShr(false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false);
 				tag = new Tag("", "", "", "", "", "", "", "", "");
 			};
 		};

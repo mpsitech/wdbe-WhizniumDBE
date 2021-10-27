@@ -32,13 +32,14 @@ public:
 	class VecVOrd {
 
 	public:
-		static const Sbecore::uint CON = 1;
-		static const Sbecore::uint VEC = 2;
-		static const Sbecore::uint MGU = 3;
-		static const Sbecore::uint MGT = 4;
-		static const Sbecore::uint TYP = 5;
-		static const Sbecore::uint MDL = 6;
-		static const Sbecore::uint SRF = 7;
+		static const Sbecore::uint SRF = 1;
+		static const Sbecore::uint TYP = 2;
+		static const Sbecore::uint RET = 3;
+		static const Sbecore::uint REU = 4;
+		static const Sbecore::uint MGT = 5;
+		static const Sbecore::uint MGU = 6;
+		static const Sbecore::uint VEC = 7;
+		static const Sbecore::uint CON = 8;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);
@@ -52,8 +53,8 @@ public:
 	class StatApp {
 
 	public:
-		static void writeJSON(Json::Value& sup, std::string difftag = "", const Sbecore::uint firstcol = 1, const Sbecore::uint jnumFirstdisp = 1, const Sbecore::uint ncol = 13, const Sbecore::uint ndisp = 25);
-		static void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true, const Sbecore::uint firstcol = 1, const Sbecore::uint jnumFirstdisp = 1, const Sbecore::uint ncol = 13, const Sbecore::uint ndisp = 25);
+		static void writeJSON(Json::Value& sup, std::string difftag = "", const Sbecore::uint firstcol = 1, const Sbecore::uint jnumFirstdisp = 1, const Sbecore::uint ncol = 15, const Sbecore::uint ndisp = 25);
+		static void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true, const Sbecore::uint firstcol = 1, const Sbecore::uint jnumFirstdisp = 1, const Sbecore::uint ncol = 15, const Sbecore::uint ndisp = 25);
 	};
 
 	/**
@@ -130,7 +131,7 @@ public:
 
 	void rerun(DbsWdbe* dbswdbe, const bool call = false);
 	void rerun_baseSQL(std::string& sqlstr);
-	void rerun_filtSQL(std::string& sqlstr, const std::string& preSrf, const Sbecore::uint preTyp, const Sbecore::ubigint preMdl, const Sbecore::uint preMgt, const Sbecore::ubigint preMgu, const Sbecore::ubigint preVec, const bool preCon, const bool addwhere);
+	void rerun_filtSQL(std::string& sqlstr, const std::string& preSrf, const Sbecore::uint preTyp, const Sbecore::uint preRet, const Sbecore::ubigint preReu, const Sbecore::uint preMgt, const Sbecore::ubigint preMgu, const Sbecore::ubigint preVec, const bool preCon, const bool addwhere);
 	void rerun_filtSQL_append(std::string& sqlstr, bool& first);
 	void rerun_orderSQL(std::string& sqlstr, const Sbecore::uint preIxOrd);
 
@@ -153,9 +154,9 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeSigUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
-	bool handleCallWdbeSigMod(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 	bool handleCallWdbeStubChgFromSelf(DbsWdbe* dbswdbe);
+	bool handleCallWdbeSigMod(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbeSigUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 
 };
 

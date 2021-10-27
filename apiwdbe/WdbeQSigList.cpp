@@ -22,7 +22,9 @@ WdbeQSigList::WdbeQSigList(
 			, const string sref
 			, const string srefIxVBasetype
 			, const string titIxVBasetype
-			, const string stubMdlRefWdbeMModule
+			, const string srefRefIxVTbl
+			, const string titRefIxVTbl
+			, const string stubRefUref
 			, const string srefMgeIxVTbl
 			, const string titMgeIxVTbl
 			, const string stubMgeUref
@@ -37,7 +39,9 @@ WdbeQSigList::WdbeQSigList(
 	this->sref = sref;
 	this->srefIxVBasetype = srefIxVBasetype;
 	this->titIxVBasetype = titIxVBasetype;
-	this->stubMdlRefWdbeMModule = stubMdlRefWdbeMModule;
+	this->srefRefIxVTbl = srefRefIxVTbl;
+	this->titRefIxVTbl = titRefIxVTbl;
+	this->stubRefUref = stubRefUref;
 	this->srefMgeIxVTbl = srefMgeIxVTbl;
 	this->titMgeIxVTbl = titMgeIxVTbl;
 	this->stubMgeUref = stubMgeUref;
@@ -65,7 +69,9 @@ bool WdbeQSigList::readXML(
 		extractStringUclc(docctx, basexpath, "sref", "srf", sref);
 		extractStringUclc(docctx, basexpath, "srefIxVBasetype", "typ", srefIxVBasetype);
 		extractStringUclc(docctx, basexpath, "titIxVBasetype", "typ2", titIxVBasetype);
-		extractStringUclc(docctx, basexpath, "stubMdlRefWdbeMModule", "mdl", stubMdlRefWdbeMModule);
+		extractStringUclc(docctx, basexpath, "srefRefIxVTbl", "ret", srefRefIxVTbl);
+		extractStringUclc(docctx, basexpath, "titRefIxVTbl", "ret2", titRefIxVTbl);
+		extractStringUclc(docctx, basexpath, "stubRefUref", "reu", stubRefUref);
 		extractStringUclc(docctx, basexpath, "srefMgeIxVTbl", "mgt", srefMgeIxVTbl);
 		extractStringUclc(docctx, basexpath, "titMgeIxVTbl", "mgt2", titMgeIxVTbl);
 		extractStringUclc(docctx, basexpath, "stubMgeUref", "mgu", stubMgeUref);

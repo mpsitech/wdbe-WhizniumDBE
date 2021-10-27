@@ -271,6 +271,7 @@ set<uint> PnlWdbeModList::StatShr::diff(
 
 PnlWdbeModList::StgIac::StgIac(
 			const uint TcoSrfWidth
+			, const uint TcoVndWidth
 			, const uint TcoTypWidth
 			, const uint TcoHktWidth
 			, const uint TcoHkuWidth
@@ -280,13 +281,14 @@ PnlWdbeModList::StgIac::StgIac(
 			Block()
 		{
 	this->TcoSrfWidth = TcoSrfWidth;
+	this->TcoVndWidth = TcoVndWidth;
 	this->TcoTypWidth = TcoTypWidth;
 	this->TcoHktWidth = TcoHktWidth;
 	this->TcoHkuWidth = TcoHkuWidth;
 	this->TcoSupWidth = TcoSupWidth;
 	this->TcoTplWidth = TcoTplWidth;
 
-	mask = {TCOSRFWIDTH, TCOTYPWIDTH, TCOHKTWIDTH, TCOHKUWIDTH, TCOSUPWIDTH, TCOTPLWIDTH};
+	mask = {TCOSRFWIDTH, TCOVNDWIDTH, TCOTYPWIDTH, TCOHKTWIDTH, TCOHKUWIDTH, TCOSUPWIDTH, TCOTPLWIDTH};
 };
 
 bool PnlWdbeModList::StgIac::readXML(
@@ -307,6 +309,7 @@ bool PnlWdbeModList::StgIac::readXML(
 
 	if (basefound) {
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoSrfWidth", TcoSrfWidth)) add(TCOSRFWIDTH);
+		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoVndWidth", TcoVndWidth)) add(TCOVNDWIDTH);
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoTypWidth", TcoTypWidth)) add(TCOTYPWIDTH);
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoHktWidth", TcoHktWidth)) add(TCOHKTWIDTH);
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoHkuWidth", TcoHkuWidth)) add(TCOHKUWIDTH);
@@ -330,6 +333,7 @@ void PnlWdbeModList::StgIac::writeXML(
 
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
 		writeUintAttr(wr, itemtag, "sref", "TcoSrfWidth", TcoSrfWidth);
+		writeUintAttr(wr, itemtag, "sref", "TcoVndWidth", TcoVndWidth);
 		writeUintAttr(wr, itemtag, "sref", "TcoTypWidth", TcoTypWidth);
 		writeUintAttr(wr, itemtag, "sref", "TcoHktWidth", TcoHktWidth);
 		writeUintAttr(wr, itemtag, "sref", "TcoHkuWidth", TcoHkuWidth);
@@ -344,6 +348,7 @@ set<uint> PnlWdbeModList::StgIac::comm(
 	set<uint> items;
 
 	if (TcoSrfWidth == comp->TcoSrfWidth) insert(items, TCOSRFWIDTH);
+	if (TcoVndWidth == comp->TcoVndWidth) insert(items, TCOVNDWIDTH);
 	if (TcoTypWidth == comp->TcoTypWidth) insert(items, TCOTYPWIDTH);
 	if (TcoHktWidth == comp->TcoHktWidth) insert(items, TCOHKTWIDTH);
 	if (TcoHkuWidth == comp->TcoHkuWidth) insert(items, TCOHKUWIDTH);
@@ -361,7 +366,7 @@ set<uint> PnlWdbeModList::StgIac::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {TCOSRFWIDTH, TCOTYPWIDTH, TCOHKTWIDTH, TCOHKUWIDTH, TCOSUPWIDTH, TCOTPLWIDTH};
+	diffitems = {TCOSRFWIDTH, TCOVNDWIDTH, TCOTYPWIDTH, TCOHKTWIDTH, TCOHKUWIDTH, TCOSUPWIDTH, TCOTPLWIDTH};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -380,6 +385,7 @@ PnlWdbeModList::Tag::Tag(
 			, const string& TxtShowing1
 			, const string& TxtShowing2
 			, const string& TcoSrf
+			, const string& TcoVnd
 			, const string& TcoTyp
 			, const string& TcoHkt
 			, const string& TcoHku
@@ -396,13 +402,14 @@ PnlWdbeModList::Tag::Tag(
 	this->TxtShowing1 = TxtShowing1;
 	this->TxtShowing2 = TxtShowing2;
 	this->TcoSrf = TcoSrf;
+	this->TcoVnd = TcoVnd;
 	this->TcoTyp = TcoTyp;
 	this->TcoHkt = TcoHkt;
 	this->TcoHku = TcoHku;
 	this->TcoSup = TcoSup;
 	this->TcoTpl = TcoTpl;
 
-	mask = {CPT, TXTFOR, TXTRECORD1, TXTRECORD2, TRS, TXTSHOWING1, TXTSHOWING2, TCOSRF, TCOTYP, TCOHKT, TCOHKU, TCOSUP, TCOTPL};
+	mask = {CPT, TXTFOR, TXTRECORD1, TXTRECORD2, TRS, TXTSHOWING1, TXTSHOWING2, TCOSRF, TCOVND, TCOTYP, TCOHKT, TCOHKU, TCOSUP, TCOTPL};
 };
 
 bool PnlWdbeModList::Tag::readXML(
@@ -430,6 +437,7 @@ bool PnlWdbeModList::Tag::readXML(
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "TxtShowing1", TxtShowing1)) add(TXTSHOWING1);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "TxtShowing2", TxtShowing2)) add(TXTSHOWING2);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "TcoSrf", TcoSrf)) add(TCOSRF);
+		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "TcoVnd", TcoVnd)) add(TCOVND);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "TcoTyp", TcoTyp)) add(TCOTYP);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "TcoHkt", TcoHkt)) add(TCOHKT);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "TcoHku", TcoHku)) add(TCOHKU);

@@ -14,11 +14,11 @@
 
 // IP include.cust --- INSERT
 
-#include "PnlWdbeMchSup1NMachine.h"
-#include "PnlWdbeMch1NRelease.h"
-#include "PnlWdbeMchAPar.h"
-#include "PnlWdbeMchAMakefile.h"
 #include "PnlWdbeMchDetail.h"
+#include "PnlWdbeMchAMakefile.h"
+#include "PnlWdbeMchAPar.h"
+#include "PnlWdbeMch1NRelease.h"
+#include "PnlWdbeMchSup1NMachine.h"
 
 #define VecVWdbeMchRecDo PnlWdbeMchRec::VecVDo
 
@@ -183,11 +183,11 @@ public:
 	ContInf continf;
 	StatShr statshr;
 
-	PnlWdbeMchSup1NMachine* pnlsup1nmachine;
-	PnlWdbeMch1NRelease* pnl1nrelease;
-	PnlWdbeMchAPar* pnlapar;
-	PnlWdbeMchAMakefile* pnlamakefile;
 	PnlWdbeMchDetail* pnldetail;
+	PnlWdbeMchAMakefile* pnlamakefile;
+	PnlWdbeMchAPar* pnlapar;
+	PnlWdbeMch1NRelease* pnl1nrelease;
+	PnlWdbeMchSup1NMachine* pnlsup1nmachine;
 
 	WdbeMMachine recMch;
 
@@ -221,9 +221,9 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeMchUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
-	bool handleCallWdbeMch_supEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
 	bool handleCallWdbeMch_cchEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeMch_supEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeMchUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 
 };
 

@@ -180,64 +180,6 @@ void DpchInvWdbeWrmcuDeploy::writeXML(
 };
 
 /******************************************************************************
- class DpchInvWdbeWrmcuEhostif
- ******************************************************************************/
-
-DpchInvWdbeWrmcuEhostif::DpchInvWdbeWrmcuEhostif(
-			const ubigint oref
-			, const ubigint jref
-			, const ubigint refWdbeMModule
-			, const string& folder
-			, const string& Prjshort
-			, const string& Untsref
-		) :
-			DpchInvWdbe(VecWdbeVDpch::DPCHINVWDBEWRMCUEHOSTIF, oref, jref)
-		{
-	this->refWdbeMModule = refWdbeMModule;
-	this->folder = folder;
-	this->Prjshort = Prjshort;
-	this->Untsref = Untsref;
-};
-
-void DpchInvWdbeWrmcuEhostif::readXML(
-			xmlXPathContext* docctx
-			, string basexpath
-			, bool addbasetag
-		) {
-	clear();
-
-	bool basefound;
-
-	if (addbasetag)
-		basefound = checkUclcXPaths(docctx, basexpath, basexpath, "DpchInvWdbeWrmcuEhostif");
-	else
-		basefound = checkXPath(docctx, basexpath);
-
-	if (basefound) {
-		if (extractStringUclc(docctx, basexpath, "scrOref", "", scrOref)) add(SCROREF);
-		if (extractStringUclc(docctx, basexpath, "scrJref", "", scrJref)) add(SCRJREF);
-		if (extractUbigintUclc(docctx, basexpath, "refWdbeMModule", "", refWdbeMModule)) add(REFWDBEMMODULE);
-		if (extractStringUclc(docctx, basexpath, "folder", "", folder)) add(FOLDER);
-		if (extractStringUclc(docctx, basexpath, "Prjshort", "", Prjshort)) add(PRJSHORT);
-		if (extractStringUclc(docctx, basexpath, "Untsref", "", Untsref)) add(UNTSREF);
-	};
-};
-
-void DpchInvWdbeWrmcuEhostif::writeXML(
-			xmlTextWriter* wr
-		) {
-	xmlTextWriterStartElement(wr, BAD_CAST "DpchInvWdbeWrmcuEhostif");
-	xmlTextWriterWriteAttribute(wr, BAD_CAST "xmlns", BAD_CAST "http://www.mpsitech.com/wdbe");
-		writeString(wr, "scrOref", Scr::scramble(oref));
-		writeString(wr, "scrJref", Scr::scramble(jref));
-		writeUbigint(wr, "refWdbeMModule", refWdbeMModule);
-		writeString(wr, "folder", folder);
-		writeString(wr, "Prjshort", Prjshort);
-		writeString(wr, "Untsref", Untsref);
-	xmlTextWriterEndElement(wr);
-};
-
-/******************************************************************************
  class DpchInvWdbeWrmcuMdlfine
  ******************************************************************************/
 

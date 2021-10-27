@@ -40,10 +40,12 @@ PnlWdbeModDetail::PnlWdbeModDetail(
 
 	feedFPupHkt.tag = "FeedFPupHkt";
 	VecWdbeVMModuleHkTbl::fillFeed(ixWdbeVLocale, feedFPupHkt);
-	feedFPupImbDir.tag = "FeedFPupImbDir";
-	VecWdbeVMImbufDir::fillFeed(ixWdbeVLocale, feedFPupImbDir);
+	feedFPupImbRty.tag = "FeedFPupImbRty";
+	VecWdbeVMImbufRotype::fillFeed(ixWdbeVLocale, feedFPupImbRty);
 	feedFPupTyp.tag = "FeedFPupTyp";
 	VecWdbeVMModuleBasetype::fillFeed(ixWdbeVLocale, feedFPupTyp);
+	feedFPupVnd.tag = "FeedFPupVnd";
+	dbswdbe->fillFeedFromKlst(VecWdbeVKeylist::KLSTWDBEKVENDOR, ixWdbeVLocale, feedFPupVnd);
 
 	// IP constructor.cust1 --- INSERT
 
@@ -51,24 +53,25 @@ PnlWdbeModDetail::PnlWdbeModDetail(
 
 	// IP constructor.cust2 --- INSERT
 
-	xchg->addClstn(VecWdbeVCall::CALLWDBEMDL_TYPEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecWdbeVCall::CALLWDBEMDL_TPLEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecWdbeVCall::CALLWDBEMDL_SUPEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecWdbeVCall::CALLWDBEMDL_SUP_INSBS, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecWdbeVCall::CALLWDBEMDL_INSBS, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecWdbeVCall::CALLWDBEMDL_IMBEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecWdbeVCall::CALLWDBEMDL_HKUEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecWdbeVCall::CALLWDBEMDL_HKU_INSBS, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecWdbeVCall::CALLWDBEMDL_HKTEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecWdbeVCall::CALLWDBEMDL_CTREQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecWdbeVCall::CALLWDBEIMB_MDL_INSBS, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecWdbeVCall::CALLWDBEIMB_COREQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecWdbeVCall::CALLWDBECTR_MDL_INSBS, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecWdbeVCall::CALLWDBECTR_FWDEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecWdbeVCall::CALLWDBECTR_FWD_INSBS, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBECTR_CLREQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBECTR_FWD_INSBS, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBECTR_FWDEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBECTR_MDL_INSBS, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBEMDL_CTREQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBEMDL_HKTEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBEMDL_HKU_INSBS, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBEMDL_HKUEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBEMDL_IMBEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBEMDL_INSBS, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBEMDL_SUP_INSBS, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBEMDL_SUPEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBEMDL_TPLEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBEMDL_TYPEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBEKLSAKEYMOD_KLSEQ, jref, Clstn::VecVJobmask::ALL, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
+
+	xchg->addIxClstn(VecWdbeVCall::CALLWDBEKLSAKEYMOD_KLSEQ, jref, Clstn::VecVJobmask::ALL, 0, false, VecWdbeVKeylist::KLSTWDBEKVENDOR);
 
 	updatePreset(dbswdbe, VecWdbeVPreset::PREWDBEREFMOD, jref);
 };
@@ -92,10 +95,65 @@ DpchEngWdbe* PnlWdbeModDetail::getNewDpchEng(
 		dpcheng = new DpchEngWdbeConfirm(true, jref, "");
 	} else {
 		insert(items, DpchEngData::JREF);
-		dpcheng = new DpchEngData(jref, &contiac, &continf, &feedFPupHkt, &feedFPupImbDir, &feedFPupTyp, &statshr, items);
+		dpcheng = new DpchEngData(jref, &contiac, &continf, &feedFPupHkt, &feedFPupImbRty, &feedFPupTyp, &feedFPupVnd, &statshr, items);
 	};
 
 	return dpcheng;
+};
+
+void PnlWdbeModDetail::refreshPupVnd(
+			DbsWdbe* dbswdbe
+			, set<uint>& moditems
+		) {
+	ContIac oldContiac(contiac);
+	StatShr oldStatshr(statshr);
+
+	// contiac
+	contiac.numFPupVnd = 0;
+
+	for (unsigned int i = 0; i < feedFPupVnd.size(); i++) {
+		if (feedFPupVnd.getSrefByNum(i+1) == contiac.TxfVnd) {
+			contiac.numFPupVnd = i+1;
+			break;
+		};
+	};
+
+	// statshr
+	statshr.TxfVndValid = (contiac.numFPupVnd != 0);
+	statshr.PupVndActive = evalPupVndActive(dbswdbe);
+	statshr.ButVndEditAvail = evalButVndEditAvail(dbswdbe);
+
+	if (contiac.diff(&oldContiac).size() != 0) insert(moditems, DpchEngData::CONTIAC);
+	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
+};
+
+void PnlWdbeModDetail::refreshTxfVnd(
+			DbsWdbe* dbswdbe
+			, set<uint>& moditems
+		) {
+	ContIac oldContiac(contiac);
+	StatShr oldStatshr(statshr);
+
+	// contiac
+	contiac.TxfVnd = feedFPupVnd.getSrefByNum(contiac.numFPupVnd);
+
+	// statshr
+	statshr.TxfVndValid = true;
+
+	if (contiac.diff(&oldContiac).size() != 0) insert(moditems, DpchEngData::CONTIAC);
+	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
+};
+
+void PnlWdbeModDetail::refreshVnd(
+			DbsWdbe* dbswdbe
+			, set<uint>& moditems
+		) {
+	// feedFPupVnd
+	dbswdbe->fillFeedFromKlst(VecWdbeVKeylist::KLSTWDBEKVENDOR, ixWdbeVLocale, feedFPupVnd);
+
+	insert(moditems, DpchEngData::FEEDFPUPVND);
+
+	refreshPupVnd(dbswdbe, moditems);
 };
 
 void PnlWdbeModDetail::refreshRecMdl(
@@ -124,6 +182,7 @@ void PnlWdbeModDetail::refreshRecMdl(
 	recImb.ref = recMdl.refWdbeMImbuf;
 
 	continf.TxtSrf = recMdl.sref;
+	contiac.TxfVnd = recMdl.srefWdbeKVendor;
 	contiac.numFPupTyp = feedFPupTyp.getNumByIx(recMdl.ixVBasetype);
 	contiac.numFPupHkt = feedFPupHkt.getNumByIx(recMdl.hkIxVTbl);
 	if (recMdl.hkIxVTbl == VecWdbeVMModuleHkTbl::CVR) continf.TxtHku = StubWdbe::getStubCvrStd(dbswdbe, recMdl.hkUref, ixWdbeVLocale, Stub::VecVNonetype::FULL);
@@ -153,6 +212,8 @@ void PnlWdbeModDetail::refreshRecMdl(
 
 	refreshRecCtr(dbswdbe, moditems);
 	refreshRecImb(dbswdbe, moditems);
+
+	refreshPupVnd(dbswdbe, moditems);
 
 };
 
@@ -210,23 +271,24 @@ void PnlWdbeModDetail::refreshRecImb(
 		delete _recImb;
 	} else recImb = WdbeMImbuf();
 
-	continf.TxtImbSrf = recImb.sref;
-	continf.TxtImbCor = StubWdbe::getStubMdlStd(dbswdbe, recImb.corRefWdbeMModule, ixWdbeVLocale, Stub::VecVNonetype::FULL);
-	contiac.numFPupImbDir = feedFPupImbDir.getNumByIx(recImb.ixVDir);
+	contiac.TxfImbFsr = recImb.Fullsref;
+	contiac.numFPupImbRty = feedFPupImbRty.getNumByIx(recImb.ixVRotype);
+	contiac.TxfImbWid = to_string(recImb.Width);
+	contiac.TxfImbMmx = recImb.Minmax;
 	contiac.TxfImbPri = to_string(recImb.Prio);
 
 	statshr.SepImbAvail = evalSepImbAvail(dbswdbe);
 	statshr.HdgImbAvail = evalHdgImbAvail(dbswdbe);
 	statshr.ButImbNewAvail = evalButImbNewAvail(dbswdbe);
 	statshr.ButImbDeleteAvail = evalButImbDeleteAvail(dbswdbe);
-	statshr.TxtImbSrfAvail = evalTxtImbSrfAvail(dbswdbe);
-	statshr.TxtImbSrfActive = evalTxtImbSrfActive(dbswdbe);
-	statshr.TxtImbCorAvail = evalTxtImbCorAvail(dbswdbe);
-	statshr.TxtImbCorActive = evalTxtImbCorActive(dbswdbe);
-	statshr.ButImbCorViewAvail = evalButImbCorViewAvail(dbswdbe);
-	statshr.ButImbCorViewActive = evalButImbCorViewActive(dbswdbe);
-	statshr.PupImbDirAvail = evalPupImbDirAvail(dbswdbe);
-	statshr.PupImbDirActive = evalPupImbDirActive(dbswdbe);
+	statshr.TxfImbFsrAvail = evalTxfImbFsrAvail(dbswdbe);
+	statshr.TxfImbFsrActive = evalTxfImbFsrActive(dbswdbe);
+	statshr.PupImbRtyAvail = evalPupImbRtyAvail(dbswdbe);
+	statshr.PupImbRtyActive = evalPupImbRtyActive(dbswdbe);
+	statshr.TxfImbWidAvail = evalTxfImbWidAvail(dbswdbe);
+	statshr.TxfImbWidActive = evalTxfImbWidActive(dbswdbe);
+	statshr.TxfImbMmxAvail = evalTxfImbMmxAvail(dbswdbe);
+	statshr.TxfImbMmxActive = evalTxfImbMmxActive(dbswdbe);
 	statshr.TxfImbPriAvail = evalTxfImbPriAvail(dbswdbe);
 	statshr.TxfImbPriActive = evalTxfImbPriActive(dbswdbe);
 	if (contiac.diff(&oldContiac).size() != 0) insert(moditems, DpchEngData::CONTIAC);
@@ -306,6 +368,8 @@ void PnlWdbeModDetail::handleRequest(
 			if (dpchappdo->ixVDo != 0) {
 				if (dpchappdo->ixVDo == VecVDo::BUTSAVECLICK) {
 					handleDpchAppDoButSaveClick(dbswdbe, &(req->dpcheng));
+				} else if (dpchappdo->ixVDo == VecVDo::BUTVNDEDITCLICK) {
+					handleDpchAppDoButVndEditClick(dbswdbe, &(req->dpcheng));
 				} else if (dpchappdo->ixVDo == VecVDo::BUTHKUVIEWCLICK) {
 					handleDpchAppDoButHkuViewClick(dbswdbe, &(req->dpcheng));
 				} else if (dpchappdo->ixVDo == VecVDo::BUTSUPVIEWCLICK) {
@@ -324,8 +388,6 @@ void PnlWdbeModDetail::handleRequest(
 					handleDpchAppDoButImbNewClick(dbswdbe, &(req->dpcheng));
 				} else if (dpchappdo->ixVDo == VecVDo::BUTIMBDELETECLICK) {
 					handleDpchAppDoButImbDeleteClick(dbswdbe, &(req->dpcheng));
-				} else if (dpchappdo->ixVDo == VecVDo::BUTIMBCORVIEWCLICK) {
-					handleDpchAppDoButImbCorViewClick(dbswdbe, &(req->dpcheng));
 				};
 
 			};
@@ -352,13 +414,24 @@ void PnlWdbeModDetail::handleDpchAppDataContiac(
 
 	diffitems = _contiac->diff(&contiac);
 
-	if (hasAny(diffitems, {ContIac::NUMFPUPTYP, ContIac::TXFSRR, ContIac::TXFCMT, ContIac::TXFCTRFSR, ContIac::NUMFPUPIMBDIR, ContIac::TXFIMBPRI})) {
+	if (hasAny(diffitems, {ContIac::NUMFPUPTYP, ContIac::TXFSRR, ContIac::TXFCMT, ContIac::TXFCTRFSR, ContIac::TXFIMBFSR, ContIac::NUMFPUPIMBRTY, ContIac::TXFIMBWID, ContIac::TXFIMBMMX, ContIac::TXFIMBPRI})) {
 		if (has(diffitems, ContIac::NUMFPUPTYP)) contiac.numFPupTyp = _contiac->numFPupTyp;
 		if (has(diffitems, ContIac::TXFSRR)) contiac.TxfSrr = _contiac->TxfSrr;
 		if (has(diffitems, ContIac::TXFCMT)) contiac.TxfCmt = _contiac->TxfCmt;
 		if (has(diffitems, ContIac::TXFCTRFSR)) contiac.TxfCtrFsr = _contiac->TxfCtrFsr;
-		if (has(diffitems, ContIac::NUMFPUPIMBDIR)) contiac.numFPupImbDir = _contiac->numFPupImbDir;
+		if (has(diffitems, ContIac::TXFIMBFSR)) contiac.TxfImbFsr = _contiac->TxfImbFsr;
+		if (has(diffitems, ContIac::NUMFPUPIMBRTY)) contiac.numFPupImbRty = _contiac->numFPupImbRty;
+		if (has(diffitems, ContIac::TXFIMBWID)) contiac.TxfImbWid = _contiac->TxfImbWid;
+		if (has(diffitems, ContIac::TXFIMBMMX)) contiac.TxfImbMmx = _contiac->TxfImbMmx;
 		if (has(diffitems, ContIac::TXFIMBPRI)) contiac.TxfImbPri = _contiac->TxfImbPri;
+	};
+
+	if (has(diffitems, ContIac::TXFVND)) {
+		contiac.TxfVnd = _contiac->TxfVnd;
+		refreshPupVnd(dbswdbe, moditems);
+	} else if (has(diffitems, ContIac::NUMFPUPVND)) {
+		contiac.numFPupVnd = _contiac->numFPupVnd;
+		refreshTxfVnd(dbswdbe, moditems);
 	};
 
 	insert(moditems, DpchEngData::CONTIAC);
@@ -370,6 +443,13 @@ void PnlWdbeModDetail::handleDpchAppDoButSaveClick(
 			, DpchEngWdbe** dpcheng
 		) {
 	// IP handleDpchAppDoButSaveClick --- INSERT
+};
+
+void PnlWdbeModDetail::handleDpchAppDoButVndEditClick(
+			DbsWdbe* dbswdbe
+			, DpchEngWdbe** dpcheng
+		) {
+	// IP handleDpchAppDoButVndEditClick --- INSERT
 };
 
 void PnlWdbeModDetail::handleDpchAppDoButHkuViewClick(
@@ -529,256 +609,57 @@ void PnlWdbeModDetail::handleDpchAppDoButImbDeleteClick(
 	// IP handleDpchAppDoButImbDeleteClick --- INSERT
 };
 
-void PnlWdbeModDetail::handleDpchAppDoButImbCorViewClick(
-			DbsWdbe* dbswdbe
-			, DpchEngWdbe** dpcheng
-		) {
-	ubigint jrefNew = 0;
-	string sref;
-
-	uint ixPre = xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXPRE, jref);
-	ubigint refPre = ((ixPre) ? xchg->getRefPreset(ixPre, jref) : 0);
-
-	if (statshr.ButImbCorViewAvail && statshr.ButImbCorViewActive) {
-		if (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCMOD, jref)) if (ixPre == VecWdbeVPreset::PREWDBEREFUNT) {
-			sref = "CrdWdbeMod";
-			xchg->triggerIxRefSrefIntvalToRefCall(dbswdbe, VecWdbeVCall::CALLWDBECRDOPEN, jref, ixPre, refPre, sref, recImb.corRefWdbeMModule, jrefNew);
-		};
-		if (jrefNew == 0) {
-			if (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCMOD, jref)) if (ixPre == VecWdbeVPreset::PREWDBEREFCVR) {
-				sref = "CrdWdbeMod";
-				xchg->triggerIxRefSrefIntvalToRefCall(dbswdbe, VecWdbeVCall::CALLWDBECRDOPEN, jref, ixPre, refPre, sref, recImb.corRefWdbeMModule, jrefNew);
-			};
-		};
-
-		if (jrefNew == 0) *dpcheng = new DpchEngWdbeConfirm(false, 0, "");
-		else *dpcheng = new DpchEngWdbeConfirm(true, jrefNew, sref);
-	};
-};
-
 void PnlWdbeModDetail::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBEMDLUPD_REFEQ) {
-		call->abort = handleCallWdbeMdlUpd_refEq(dbswdbe, call->jref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEIMBUPD_REFEQ) {
-		call->abort = handleCallWdbeImbUpd_refEq(dbswdbe, call->jref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECTRUPD_REFEQ) {
-		call->abort = handleCallWdbeCtrUpd_refEq(dbswdbe, call->jref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEMDL_TYPEQ) {
-		call->abort = handleCallWdbeMdl_typEq(dbswdbe, call->jref, call->argInv.ix, call->argRet.boolval);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEMDL_TPLEQ) {
-		call->abort = handleCallWdbeMdl_tplEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEMDL_SUPEQ) {
-		call->abort = handleCallWdbeMdl_supEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEMDL_SUP_INSBS) {
-		call->abort = handleCallWdbeMdl_sup_inSbs(dbswdbe, call->jref, call->argInv.ix, call->argRet.boolval);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEMDL_INSBS) {
-		call->abort = handleCallWdbeMdl_inSbs(dbswdbe, call->jref, call->argInv.ix, call->argRet.boolval);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEMDL_IMBEQ) {
-		call->abort = handleCallWdbeMdl_imbEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEMDL_HKUEQ) {
-		call->abort = handleCallWdbeMdl_hkuEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEMDL_HKU_INSBS) {
-		call->abort = handleCallWdbeMdl_hku_inSbs(dbswdbe, call->jref, call->argInv.ix, call->argRet.boolval);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEMDL_HKTEQ) {
-		call->abort = handleCallWdbeMdl_hktEq(dbswdbe, call->jref, call->argInv.ix, call->argRet.boolval);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEMDL_CTREQ) {
-		call->abort = handleCallWdbeMdl_ctrEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEIMB_MDL_INSBS) {
-		call->abort = handleCallWdbeImb_mdl_inSbs(dbswdbe, call->jref, call->argInv.ix, call->argRet.boolval);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEIMB_COREQ) {
-		call->abort = handleCallWdbeImb_corEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECTR_MDL_INSBS) {
-		call->abort = handleCallWdbeCtr_mdl_inSbs(dbswdbe, call->jref, call->argInv.ix, call->argRet.boolval);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECTR_FWDEQ) {
-		call->abort = handleCallWdbeCtr_fwdEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
+	if (call->ixVCall == VecWdbeVCall::CALLWDBECTR_CLREQ) {
+		call->abort = handleCallWdbeCtr_clrEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECTR_FWD_INSBS) {
 		call->abort = handleCallWdbeCtr_fwd_inSbs(dbswdbe, call->jref, call->argInv.ix, call->argRet.boolval);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECTR_CLREQ) {
-		call->abort = handleCallWdbeCtr_clrEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECTR_FWDEQ) {
+		call->abort = handleCallWdbeCtr_fwdEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECTR_MDL_INSBS) {
+		call->abort = handleCallWdbeCtr_mdl_inSbs(dbswdbe, call->jref, call->argInv.ix, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEMDL_CTREQ) {
+		call->abort = handleCallWdbeMdl_ctrEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEMDL_HKTEQ) {
+		call->abort = handleCallWdbeMdl_hktEq(dbswdbe, call->jref, call->argInv.ix, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEMDL_HKU_INSBS) {
+		call->abort = handleCallWdbeMdl_hku_inSbs(dbswdbe, call->jref, call->argInv.ix, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEMDL_HKUEQ) {
+		call->abort = handleCallWdbeMdl_hkuEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEMDL_IMBEQ) {
+		call->abort = handleCallWdbeMdl_imbEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEMDL_INSBS) {
+		call->abort = handleCallWdbeMdl_inSbs(dbswdbe, call->jref, call->argInv.ix, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEMDL_SUP_INSBS) {
+		call->abort = handleCallWdbeMdl_sup_inSbs(dbswdbe, call->jref, call->argInv.ix, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEMDL_SUPEQ) {
+		call->abort = handleCallWdbeMdl_supEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEMDL_TPLEQ) {
+		call->abort = handleCallWdbeMdl_tplEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEMDL_TYPEQ) {
+		call->abort = handleCallWdbeMdl_typEq(dbswdbe, call->jref, call->argInv.ix, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECTRUPD_REFEQ) {
+		call->abort = handleCallWdbeCtrUpd_refEq(dbswdbe, call->jref);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEIMBUPD_REFEQ) {
+		call->abort = handleCallWdbeImbUpd_refEq(dbswdbe, call->jref);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEMDLUPD_REFEQ) {
+		call->abort = handleCallWdbeMdlUpd_refEq(dbswdbe, call->jref);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEKLSAKEYMOD_KLSEQ) {
+		call->abort = handleCallWdbeKlsAkeyMod_klsEq(dbswdbe, call->jref, call->argInv.ix);
 	};
 };
 
-bool PnlWdbeModDetail::handleCallWdbeMdlUpd_refEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-	// IP handleCallWdbeMdlUpd_refEq --- INSERT
-	return retval;
-};
-
-bool PnlWdbeModDetail::handleCallWdbeImbUpd_refEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-	// IP handleCallWdbeImbUpd_refEq --- INSERT
-	return retval;
-};
-
-bool PnlWdbeModDetail::handleCallWdbeCtrUpd_refEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-	// IP handleCallWdbeCtrUpd_refEq --- INSERT
-	return retval;
-};
-
-bool PnlWdbeModDetail::handleCallWdbeMdl_typEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-			, const uint ixInv
-			, bool& boolvalRet
-		) {
-	bool retval = false;
-	boolvalRet = (recMdl.ixVBasetype == ixInv); // IP handleCallWdbeMdl_typEq --- LINE
-	return retval;
-};
-
-bool PnlWdbeModDetail::handleCallWdbeMdl_tplEq(
+bool PnlWdbeModDetail::handleCallWdbeCtr_clrEq(
 			DbsWdbe* dbswdbe
 			, const ubigint jrefTrig
 			, const ubigint refInv
 			, bool& boolvalRet
 		) {
 	bool retval = false;
-	boolvalRet = (recMdl.tplRefWdbeMModule == refInv); // IP handleCallWdbeMdl_tplEq --- LINE
-	return retval;
-};
-
-bool PnlWdbeModDetail::handleCallWdbeMdl_supEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-			, const ubigint refInv
-			, bool& boolvalRet
-		) {
-	bool retval = false;
-	boolvalRet = (recMdl.supRefWdbeMModule == refInv); // IP handleCallWdbeMdl_supEq --- LINE
-	return retval;
-};
-
-bool PnlWdbeModDetail::handleCallWdbeMdl_sup_inSbs(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-			, const uint ixInv
-			, bool& boolvalRet
-		) {
-	bool retval = false;
-	boolvalRet = ((dbswdbe->getIxWSubsetByRefWdbeMModule(recMdl.supRefWdbeMModule) & ixInv) != 0); // IP handleCallWdbeMdl_sup_inSbs --- LINE
-	return retval;
-};
-
-bool PnlWdbeModDetail::handleCallWdbeMdl_inSbs(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-			, const uint ixInv
-			, bool& boolvalRet
-		) {
-	bool retval = false;
-	boolvalRet = ((ixWSubsetMdl & ixInv) != 0); // IP handleCallWdbeMdl_inSbs --- LINE
-	return retval;
-};
-
-bool PnlWdbeModDetail::handleCallWdbeMdl_imbEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-			, const ubigint refInv
-			, bool& boolvalRet
-		) {
-	bool retval = false;
-	boolvalRet = (recMdl.refWdbeMImbuf == refInv); // IP handleCallWdbeMdl_imbEq --- LINE
-	return retval;
-};
-
-bool PnlWdbeModDetail::handleCallWdbeMdl_hkuEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-			, const ubigint refInv
-			, bool& boolvalRet
-		) {
-	bool retval = false;
-	boolvalRet = (recMdl.hkUref == refInv); // IP handleCallWdbeMdl_hkuEq --- LINE
-	return retval;
-};
-
-bool PnlWdbeModDetail::handleCallWdbeMdl_hku_inSbs(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-			, const uint ixInv
-			, bool& boolvalRet
-		) {
-	bool retval = false;
-	boolvalRet = ((dbswdbe->getIxWSubsetByRefWdbeMUnit(recMdl.hkUref) & ixInv) != 0); // IP handleCallWdbeMdl_hku_inSbs --- LINE
-	return retval;
-};
-
-bool PnlWdbeModDetail::handleCallWdbeMdl_hktEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-			, const uint ixInv
-			, bool& boolvalRet
-		) {
-	bool retval = false;
-	boolvalRet = (recMdl.hkIxVTbl == ixInv); // IP handleCallWdbeMdl_hktEq --- LINE
-	return retval;
-};
-
-bool PnlWdbeModDetail::handleCallWdbeMdl_ctrEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-			, const ubigint refInv
-			, bool& boolvalRet
-		) {
-	bool retval = false;
-	boolvalRet = (recMdl.refWdbeMController == refInv); // IP handleCallWdbeMdl_ctrEq --- LINE
-	return retval;
-};
-
-bool PnlWdbeModDetail::handleCallWdbeImb_mdl_inSbs(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-			, const uint ixInv
-			, bool& boolvalRet
-		) {
-	bool retval = false;
-	boolvalRet = ((dbswdbe->getIxWSubsetByRefWdbeMModule(recImb.refWdbeMModule) & ixInv) != 0); // IP handleCallWdbeImb_mdl_inSbs --- LINE
-	return retval;
-};
-
-bool PnlWdbeModDetail::handleCallWdbeImb_corEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-			, const ubigint refInv
-			, bool& boolvalRet
-		) {
-	bool retval = false;
-	boolvalRet = (recImb.corRefWdbeMModule == refInv); // IP handleCallWdbeImb_corEq --- LINE
-	return retval;
-};
-
-bool PnlWdbeModDetail::handleCallWdbeCtr_mdl_inSbs(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-			, const uint ixInv
-			, bool& boolvalRet
-		) {
-	bool retval = false;
-	boolvalRet = ((dbswdbe->getIxWSubsetByRefWdbeMModule(recCtr.refWdbeMModule) & ixInv) != 0); // IP handleCallWdbeCtr_mdl_inSbs --- LINE
-	return retval;
-};
-
-bool PnlWdbeModDetail::handleCallWdbeCtr_fwdEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-			, const ubigint refInv
-			, bool& boolvalRet
-		) {
-	bool retval = false;
-	boolvalRet = (recCtr.fwdRefWdbeMUnit == refInv); // IP handleCallWdbeCtr_fwdEq --- LINE
+	boolvalRet = (recCtr.clrRefWdbeMSignal == refInv); // IP handleCallWdbeCtr_clrEq --- LINE
 	return retval;
 };
 
@@ -793,13 +674,177 @@ bool PnlWdbeModDetail::handleCallWdbeCtr_fwd_inSbs(
 	return retval;
 };
 
-bool PnlWdbeModDetail::handleCallWdbeCtr_clrEq(
+bool PnlWdbeModDetail::handleCallWdbeCtr_fwdEq(
 			DbsWdbe* dbswdbe
 			, const ubigint jrefTrig
 			, const ubigint refInv
 			, bool& boolvalRet
 		) {
 	bool retval = false;
-	boolvalRet = (recCtr.clrRefWdbeMSignal == refInv); // IP handleCallWdbeCtr_clrEq --- LINE
+	boolvalRet = (recCtr.fwdRefWdbeMUnit == refInv); // IP handleCallWdbeCtr_fwdEq --- LINE
+	return retval;
+};
+
+bool PnlWdbeModDetail::handleCallWdbeCtr_mdl_inSbs(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+			, const uint ixInv
+			, bool& boolvalRet
+		) {
+	bool retval = false;
+	boolvalRet = ((dbswdbe->getIxWSubsetByRefWdbeMModule(recCtr.refWdbeMModule) & ixInv) != 0); // IP handleCallWdbeCtr_mdl_inSbs --- LINE
+	return retval;
+};
+
+bool PnlWdbeModDetail::handleCallWdbeMdl_ctrEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+			, const ubigint refInv
+			, bool& boolvalRet
+		) {
+	bool retval = false;
+	boolvalRet = (recMdl.refWdbeMController == refInv); // IP handleCallWdbeMdl_ctrEq --- LINE
+	return retval;
+};
+
+bool PnlWdbeModDetail::handleCallWdbeMdl_hktEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+			, const uint ixInv
+			, bool& boolvalRet
+		) {
+	bool retval = false;
+	boolvalRet = (recMdl.hkIxVTbl == ixInv); // IP handleCallWdbeMdl_hktEq --- LINE
+	return retval;
+};
+
+bool PnlWdbeModDetail::handleCallWdbeMdl_hku_inSbs(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+			, const uint ixInv
+			, bool& boolvalRet
+		) {
+	bool retval = false;
+	boolvalRet = ((dbswdbe->getIxWSubsetByRefWdbeMUnit(recMdl.hkUref) & ixInv) != 0); // IP handleCallWdbeMdl_hku_inSbs --- LINE
+	return retval;
+};
+
+bool PnlWdbeModDetail::handleCallWdbeMdl_hkuEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+			, const ubigint refInv
+			, bool& boolvalRet
+		) {
+	bool retval = false;
+	boolvalRet = (recMdl.hkUref == refInv); // IP handleCallWdbeMdl_hkuEq --- LINE
+	return retval;
+};
+
+bool PnlWdbeModDetail::handleCallWdbeMdl_imbEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+			, const ubigint refInv
+			, bool& boolvalRet
+		) {
+	bool retval = false;
+	boolvalRet = (recMdl.refWdbeMImbuf == refInv); // IP handleCallWdbeMdl_imbEq --- LINE
+	return retval;
+};
+
+bool PnlWdbeModDetail::handleCallWdbeMdl_inSbs(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+			, const uint ixInv
+			, bool& boolvalRet
+		) {
+	bool retval = false;
+	boolvalRet = ((ixWSubsetMdl & ixInv) != 0); // IP handleCallWdbeMdl_inSbs --- LINE
+	return retval;
+};
+
+bool PnlWdbeModDetail::handleCallWdbeMdl_sup_inSbs(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+			, const uint ixInv
+			, bool& boolvalRet
+		) {
+	bool retval = false;
+	boolvalRet = ((dbswdbe->getIxWSubsetByRefWdbeMModule(recMdl.supRefWdbeMModule) & ixInv) != 0); // IP handleCallWdbeMdl_sup_inSbs --- LINE
+	return retval;
+};
+
+bool PnlWdbeModDetail::handleCallWdbeMdl_supEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+			, const ubigint refInv
+			, bool& boolvalRet
+		) {
+	bool retval = false;
+	boolvalRet = (recMdl.supRefWdbeMModule == refInv); // IP handleCallWdbeMdl_supEq --- LINE
+	return retval;
+};
+
+bool PnlWdbeModDetail::handleCallWdbeMdl_tplEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+			, const ubigint refInv
+			, bool& boolvalRet
+		) {
+	bool retval = false;
+	boolvalRet = (recMdl.tplRefWdbeMModule == refInv); // IP handleCallWdbeMdl_tplEq --- LINE
+	return retval;
+};
+
+bool PnlWdbeModDetail::handleCallWdbeMdl_typEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+			, const uint ixInv
+			, bool& boolvalRet
+		) {
+	bool retval = false;
+	boolvalRet = (recMdl.ixVBasetype == ixInv); // IP handleCallWdbeMdl_typEq --- LINE
+	return retval;
+};
+
+bool PnlWdbeModDetail::handleCallWdbeCtrUpd_refEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+	// IP handleCallWdbeCtrUpd_refEq --- INSERT
+	return retval;
+};
+
+bool PnlWdbeModDetail::handleCallWdbeImbUpd_refEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+	// IP handleCallWdbeImbUpd_refEq --- INSERT
+	return retval;
+};
+
+bool PnlWdbeModDetail::handleCallWdbeMdlUpd_refEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+	// IP handleCallWdbeMdlUpd_refEq --- INSERT
+	return retval;
+};
+
+bool PnlWdbeModDetail::handleCallWdbeKlsAkeyMod_klsEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+			, const uint ixInv
+		) {
+	bool retval = false;
+	set<uint> moditems;
+
+	if (ixInv == VecWdbeVKeylist::KLSTWDBEKVENDOR) {
+		refreshVnd(dbswdbe, moditems);
+	};
+
+	xchg->submitDpch(getNewDpchEng(moditems));
 	return retval;
 };

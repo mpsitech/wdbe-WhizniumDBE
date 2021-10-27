@@ -22,16 +22,16 @@ WdbeQFamList::WdbeQFamList(
 			, const ubigint jref
 			, const uint jnum
 			, const ubigint ref
-			, const string srefKVendor
-			, const string titSrefKVendor
+			, const string srefWdbeKVendor
+			, const string titSrefWdbeKVendor
 			, const string Title
 		) {
 	this->qref = qref;
 	this->jref = jref;
 	this->jnum = jnum;
 	this->ref = ref;
-	this->srefKVendor = srefKVendor;
-	this->titSrefKVendor = titSrefKVendor;
+	this->srefWdbeKVendor = srefWdbeKVendor;
+	this->titSrefWdbeKVendor = titSrefWdbeKVendor;
 	this->Title = Title;
 };
 
@@ -44,12 +44,12 @@ void WdbeQFamList::writeJSON(
 
 	if (jnumattr) me["jnum"] = jnum;
 	if (shorttags) {
-		me["vnd"] = srefKVendor;
-		me["vnd2"] = titSrefKVendor;
+		me["vnd"] = srefWdbeKVendor;
+		me["vnd2"] = titSrefWdbeKVendor;
 		me["tit"] = Title;
 	} else {
-		me["srefKVendor"] = srefKVendor;
-		me["titSrefKVendor"] = titSrefKVendor;
+		me["srefWdbeKVendor"] = srefWdbeKVendor;
+		me["titSrefWdbeKVendor"] = titSrefWdbeKVendor;
 		me["Title"] = Title;
 	};
 };
@@ -65,12 +65,12 @@ void WdbeQFamList::writeXML(
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
 	if (jnumattr) xmlTextWriterWriteAttribute(wr, BAD_CAST "jnum", BAD_CAST to_string(jnum).c_str());
 	if (shorttags) {
-		writeString(wr, "vnd", srefKVendor);
-		writeString(wr, "vnd2", titSrefKVendor);
+		writeString(wr, "vnd", srefWdbeKVendor);
+		writeString(wr, "vnd2", titSrefWdbeKVendor);
 		writeString(wr, "tit", Title);
 	} else {
-		writeString(wr, "srefKVendor", srefKVendor);
-		writeString(wr, "titSrefKVendor", titSrefKVendor);
+		writeString(wr, "srefWdbeKVendor", srefWdbeKVendor);
+		writeString(wr, "titSrefWdbeKVendor", titSrefWdbeKVendor);
 		writeString(wr, "Title", Title);
 	};
 	xmlTextWriterEndElement(wr);
@@ -184,14 +184,14 @@ ubigint TblWdbeQFamList::insertNewRec(
 			, const ubigint jref
 			, const uint jnum
 			, const ubigint ref
-			, const string srefKVendor
-			, const string titSrefKVendor
+			, const string srefWdbeKVendor
+			, const string titSrefWdbeKVendor
 			, const string Title
 		) {
 	ubigint retval = 0;
 	WdbeQFamList* _rec = NULL;
 
-	_rec = new WdbeQFamList(0, jref, jnum, ref, srefKVendor, titSrefKVendor, Title);
+	_rec = new WdbeQFamList(0, jref, jnum, ref, srefWdbeKVendor, titSrefWdbeKVendor, Title);
 	insertRec(_rec);
 
 	retval = _rec->qref;
@@ -208,14 +208,14 @@ ubigint TblWdbeQFamList::appendNewRecToRst(
 			, const ubigint jref
 			, const uint jnum
 			, const ubigint ref
-			, const string srefKVendor
-			, const string titSrefKVendor
+			, const string srefWdbeKVendor
+			, const string titSrefWdbeKVendor
 			, const string Title
 		) {
 	ubigint retval = 0;
 	WdbeQFamList* _rec = NULL;
 
-	retval = insertNewRec(&_rec, jref, jnum, ref, srefKVendor, titSrefKVendor, Title);
+	retval = insertNewRec(&_rec, jref, jnum, ref, srefWdbeKVendor, titSrefWdbeKVendor, Title);
 	rst.nodes.push_back(_rec);
 
 	if (rec != NULL) *rec = _rec;
@@ -286,8 +286,8 @@ MyTblWdbeQFamList::~MyTblWdbeQFamList() {
 };
 
 void MyTblWdbeQFamList::initStatements() {
-	stmtInsertRec = createStatement("INSERT INTO TblWdbeQFamList (jref, jnum, ref, srefKVendor, Title) VALUES (?,?,?,?,?)", false);
-	stmtUpdateRec = createStatement("UPDATE TblWdbeQFamList SET jref = ?, jnum = ?, ref = ?, srefKVendor = ?, Title = ? WHERE qref = ?", false);
+	stmtInsertRec = createStatement("INSERT INTO TblWdbeQFamList (jref, jnum, ref, srefWdbeKVendor, Title) VALUES (?,?,?,?,?)", false);
+	stmtUpdateRec = createStatement("UPDATE TblWdbeQFamList SET jref = ?, jnum = ?, ref = ?, srefWdbeKVendor = ?, Title = ? WHERE qref = ?", false);
 	stmtRemoveRecByQref = createStatement("DELETE FROM TblWdbeQFamList WHERE qref = ?", false);
 	stmtRemoveRstByJref = createStatement("DELETE FROM TblWdbeQFamList WHERE jref = ?", false);
 };
@@ -322,7 +322,7 @@ bool MyTblWdbeQFamList::loadRecBySQL(
 		if (dbrow[1]) _rec->jref = atoll((char*) dbrow[1]); else _rec->jref = 0;
 		if (dbrow[2]) _rec->jnum = atol((char*) dbrow[2]); else _rec->jnum = 0;
 		if (dbrow[3]) _rec->ref = atoll((char*) dbrow[3]); else _rec->ref = 0;
-		if (dbrow[4]) _rec->srefKVendor.assign(dbrow[4], dblengths[4]); else _rec->srefKVendor = "";
+		if (dbrow[4]) _rec->srefWdbeKVendor.assign(dbrow[4], dblengths[4]); else _rec->srefWdbeKVendor = "";
 		if (dbrow[5]) _rec->Title.assign(dbrow[5], dblengths[5]); else _rec->Title = "";
 
 		retval = true;
@@ -370,7 +370,7 @@ ubigint MyTblWdbeQFamList::loadRstBySQL(
 			if (dbrow[1]) rec->jref = atoll((char*) dbrow[1]); else rec->jref = 0;
 			if (dbrow[2]) rec->jnum = atol((char*) dbrow[2]); else rec->jnum = 0;
 			if (dbrow[3]) rec->ref = atoll((char*) dbrow[3]); else rec->ref = 0;
-			if (dbrow[4]) rec->srefKVendor.assign(dbrow[4], dblengths[4]); else rec->srefKVendor = "";
+			if (dbrow[4]) rec->srefWdbeKVendor.assign(dbrow[4], dblengths[4]); else rec->srefWdbeKVendor = "";
 			if (dbrow[5]) rec->Title.assign(dbrow[5], dblengths[5]); else rec->Title = "";
 			rst.nodes.push_back(rec);
 
@@ -388,14 +388,14 @@ ubigint MyTblWdbeQFamList::insertRec(
 		) {
 	unsigned long l[5]; my_bool n[5]; my_bool e[5];
 
-	l[3] = rec->srefKVendor.length();
+	l[3] = rec->srefWdbeKVendor.length();
 	l[4] = rec->Title.length();
 
 	MYSQL_BIND bind[] = {
 		bindUbigint(&rec->jref,&(l[0]),&(n[0]),&(e[0])),
 		bindUint(&rec->jnum,&(l[1]),&(n[1]),&(e[1])),
 		bindUbigint(&rec->ref,&(l[2]),&(n[2]),&(e[2])),
-		bindCstring((char*) (rec->srefKVendor.c_str()),&(l[3]),&(n[3]),&(e[3])),
+		bindCstring((char*) (rec->srefWdbeKVendor.c_str()),&(l[3]),&(n[3]),&(e[3])),
 		bindCstring((char*) (rec->Title.c_str()),&(l[4]),&(n[4]),&(e[4]))
 	};
 
@@ -423,14 +423,14 @@ void MyTblWdbeQFamList::updateRec(
 		) {
 	unsigned long l[6]; my_bool n[6]; my_bool e[6];
 
-	l[3] = rec->srefKVendor.length();
+	l[3] = rec->srefWdbeKVendor.length();
 	l[4] = rec->Title.length();
 
 	MYSQL_BIND bind[] = {
 		bindUbigint(&rec->jref,&(l[0]),&(n[0]),&(e[0])),
 		bindUint(&rec->jnum,&(l[1]),&(n[1]),&(e[1])),
 		bindUbigint(&rec->ref,&(l[2]),&(n[2]),&(e[2])),
-		bindCstring((char*) (rec->srefKVendor.c_str()),&(l[3]),&(n[3]),&(e[3])),
+		bindCstring((char*) (rec->srefWdbeKVendor.c_str()),&(l[3]),&(n[3]),&(e[3])),
 		bindCstring((char*) (rec->Title.c_str()),&(l[4]),&(n[4]),&(e[4])),
 		bindUbigint(&rec->qref,&(l[5]),&(n[5]),&(e[5]))
 	};
@@ -521,13 +521,13 @@ PgTblWdbeQFamList::~PgTblWdbeQFamList() {
 };
 
 void PgTblWdbeQFamList::initStatements() {
-	createStatement("TblWdbeQFamList_insertRec", "INSERT INTO TblWdbeQFamList (jref, jnum, ref, srefKVendor, Title) VALUES ($1,$2,$3,$4,$5) RETURNING qref", 5);
-	createStatement("TblWdbeQFamList_updateRec", "UPDATE TblWdbeQFamList SET jref = $1, jnum = $2, ref = $3, srefKVendor = $4, Title = $5 WHERE qref = $6", 6);
+	createStatement("TblWdbeQFamList_insertRec", "INSERT INTO TblWdbeQFamList (jref, jnum, ref, srefWdbeKVendor, Title) VALUES ($1,$2,$3,$4,$5) RETURNING qref", 5);
+	createStatement("TblWdbeQFamList_updateRec", "UPDATE TblWdbeQFamList SET jref = $1, jnum = $2, ref = $3, srefWdbeKVendor = $4, Title = $5 WHERE qref = $6", 6);
 	createStatement("TblWdbeQFamList_removeRecByQref", "DELETE FROM TblWdbeQFamList WHERE qref = $1", 1);
 	createStatement("TblWdbeQFamList_removeRstByJref", "DELETE FROM TblWdbeQFamList WHERE jref = $1", 1);
 
-	createStatement("TblWdbeQFamList_loadRecByQref", "SELECT qref, jref, jnum, ref, srefKVendor, Title FROM TblWdbeQFamList WHERE qref = $1", 1);
-	createStatement("TblWdbeQFamList_loadRstByJref", "SELECT qref, jref, jnum, ref, srefKVendor, Title FROM TblWdbeQFamList WHERE jref = $1 ORDER BY jnum ASC", 1);
+	createStatement("TblWdbeQFamList_loadRecByQref", "SELECT qref, jref, jnum, ref, srefWdbeKVendor, Title FROM TblWdbeQFamList WHERE qref = $1", 1);
+	createStatement("TblWdbeQFamList_loadRstByJref", "SELECT qref, jref, jnum, ref, srefWdbeKVendor, Title FROM TblWdbeQFamList WHERE jref = $1 ORDER BY jnum ASC", 1);
 };
 
 bool PgTblWdbeQFamList::loadRec(
@@ -547,7 +547,7 @@ bool PgTblWdbeQFamList::loadRec(
 			PQfnumber(res, "jref"),
 			PQfnumber(res, "jnum"),
 			PQfnumber(res, "ref"),
-			PQfnumber(res, "srefkvendor"),
+			PQfnumber(res, "srefwdbekvendor"),
 			PQfnumber(res, "title")
 		};
 
@@ -555,7 +555,7 @@ bool PgTblWdbeQFamList::loadRec(
 		ptr = PQgetvalue(res, 0, fnum[1]); _rec->jref = atoll(ptr);
 		ptr = PQgetvalue(res, 0, fnum[2]); _rec->jnum = atol(ptr);
 		ptr = PQgetvalue(res, 0, fnum[3]); _rec->ref = atoll(ptr);
-		ptr = PQgetvalue(res, 0, fnum[4]); _rec->srefKVendor.assign(ptr, PQgetlength(res, 0, fnum[4]));
+		ptr = PQgetvalue(res, 0, fnum[4]); _rec->srefWdbeKVendor.assign(ptr, PQgetlength(res, 0, fnum[4]));
 		ptr = PQgetvalue(res, 0, fnum[5]); _rec->Title.assign(ptr, PQgetlength(res, 0, fnum[5]));
 
 		retval = true;
@@ -587,7 +587,7 @@ ubigint PgTblWdbeQFamList::loadRst(
 			PQfnumber(res, "jref"),
 			PQfnumber(res, "jnum"),
 			PQfnumber(res, "ref"),
-			PQfnumber(res, "srefkvendor"),
+			PQfnumber(res, "srefwdbekvendor"),
 			PQfnumber(res, "title")
 		};
 
@@ -598,7 +598,7 @@ ubigint PgTblWdbeQFamList::loadRst(
 			ptr = PQgetvalue(res, numread, fnum[1]); rec->jref = atoll(ptr);
 			ptr = PQgetvalue(res, numread, fnum[2]); rec->jnum = atol(ptr);
 			ptr = PQgetvalue(res, numread, fnum[3]); rec->ref = atoll(ptr);
-			ptr = PQgetvalue(res, numread, fnum[4]); rec->srefKVendor.assign(ptr, PQgetlength(res, numread, fnum[4]));
+			ptr = PQgetvalue(res, numread, fnum[4]); rec->srefWdbeKVendor.assign(ptr, PQgetlength(res, numread, fnum[4]));
 			ptr = PQgetvalue(res, numread, fnum[5]); rec->Title.assign(ptr, PQgetlength(res, numread, fnum[5]));
 
 			rst.nodes.push_back(rec);
@@ -700,7 +700,7 @@ ubigint PgTblWdbeQFamList::insertRec(
 		(char*) &_jref,
 		(char*) &_jnum,
 		(char*) &_ref,
-		rec->srefKVendor.c_str(),
+		rec->srefWdbeKVendor.c_str(),
 		rec->Title.c_str()
 	};
 	const int l[] = {
@@ -746,7 +746,7 @@ void PgTblWdbeQFamList::updateRec(
 		(char*) &_jref,
 		(char*) &_jnum,
 		(char*) &_ref,
-		rec->srefKVendor.c_str(),
+		rec->srefWdbeKVendor.c_str(),
 		rec->Title.c_str(),
 		(char*) &_qref
 	};

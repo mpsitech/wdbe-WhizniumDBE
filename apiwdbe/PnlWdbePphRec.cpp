@@ -105,13 +105,15 @@ set<uint> PnlWdbePphRec::ContInf::diff(
 PnlWdbePphRec::StatApp::StatApp(
 			const bool initdoneDetail
 			, const bool initdoneAPar
+			, const bool initdoneMNModule
 		) :
 			Block()
 		{
 	this->initdoneDetail = initdoneDetail;
 	this->initdoneAPar = initdoneAPar;
+	this->initdoneMNModule = initdoneMNModule;
 
-	mask = {INITDONEDETAIL, INITDONEAPAR};
+	mask = {INITDONEDETAIL, INITDONEAPAR, INITDONEMNMODULE};
 };
 
 bool PnlWdbePphRec::StatApp::readXML(
@@ -133,6 +135,7 @@ bool PnlWdbePphRec::StatApp::readXML(
 	if (basefound) {
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneDetail", initdoneDetail)) add(INITDONEDETAIL);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneAPar", initdoneAPar)) add(INITDONEAPAR);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneMNModule", initdoneMNModule)) add(INITDONEMNMODULE);
 	};
 
 	return basefound;
@@ -145,6 +148,7 @@ set<uint> PnlWdbePphRec::StatApp::comm(
 
 	if (initdoneDetail == comp->initdoneDetail) insert(items, INITDONEDETAIL);
 	if (initdoneAPar == comp->initdoneAPar) insert(items, INITDONEAPAR);
+	if (initdoneMNModule == comp->initdoneMNModule) insert(items, INITDONEMNMODULE);
 
 	return(items);
 };
@@ -157,7 +161,7 @@ set<uint> PnlWdbePphRec::StatApp::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {INITDONEDETAIL, INITDONEAPAR};
+	diffitems = {INITDONEDETAIL, INITDONEAPAR, INITDONEMNMODULE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -171,6 +175,7 @@ PnlWdbePphRec::StatShr::StatShr(
 			const uint ixWdbeVExpstate
 			, const string& scrJrefDetail
 			, const string& scrJrefAPar
+			, const string& scrJrefMNModule
 			, const bool ButRegularizeActive
 		) :
 			Block()
@@ -178,9 +183,10 @@ PnlWdbePphRec::StatShr::StatShr(
 	this->ixWdbeVExpstate = ixWdbeVExpstate;
 	this->scrJrefDetail = scrJrefDetail;
 	this->scrJrefAPar = scrJrefAPar;
+	this->scrJrefMNModule = scrJrefMNModule;
 	this->ButRegularizeActive = ButRegularizeActive;
 
-	mask = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFAPAR, BUTREGULARIZEACTIVE};
+	mask = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFAPAR, SCRJREFMNMODULE, BUTREGULARIZEACTIVE};
 };
 
 bool PnlWdbePphRec::StatShr::readXML(
@@ -208,6 +214,7 @@ bool PnlWdbePphRec::StatShr::readXML(
 		};
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefDetail", scrJrefDetail)) add(SCRJREFDETAIL);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefAPar", scrJrefAPar)) add(SCRJREFAPAR);
+		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefMNModule", scrJrefMNModule)) add(SCRJREFMNMODULE);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButRegularizeActive", ButRegularizeActive)) add(BUTREGULARIZEACTIVE);
 	};
 
@@ -222,6 +229,7 @@ set<uint> PnlWdbePphRec::StatShr::comm(
 	if (ixWdbeVExpstate == comp->ixWdbeVExpstate) insert(items, IXWDBEVEXPSTATE);
 	if (scrJrefDetail == comp->scrJrefDetail) insert(items, SCRJREFDETAIL);
 	if (scrJrefAPar == comp->scrJrefAPar) insert(items, SCRJREFAPAR);
+	if (scrJrefMNModule == comp->scrJrefMNModule) insert(items, SCRJREFMNMODULE);
 	if (ButRegularizeActive == comp->ButRegularizeActive) insert(items, BUTREGULARIZEACTIVE);
 
 	return(items);
@@ -235,7 +243,7 @@ set<uint> PnlWdbePphRec::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFAPAR, BUTREGULARIZEACTIVE};
+	diffitems = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFAPAR, SCRJREFMNMODULE, BUTREGULARIZEACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);

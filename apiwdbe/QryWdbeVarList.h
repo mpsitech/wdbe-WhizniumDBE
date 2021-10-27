@@ -28,8 +28,9 @@ namespace QryWdbeVarList {
 	class VecVOrd {
 
 	public:
-		static const Sbecore::uint PRC = 1;
-		static const Sbecore::uint SRF = 2;
+		static const Sbecore::uint SRF = 1;
+		static const Sbecore::uint RET = 2;
+		static const Sbecore::uint REU = 3;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);
@@ -47,7 +48,7 @@ namespace QryWdbeVarList {
 		static const Sbecore::uint NDISP = 4;
 
 	public:
-		StatApp(const Sbecore::uint firstcol = 1, const Sbecore::uint jnumFirstdisp = 1, const Sbecore::uint ncol = 8, const Sbecore::uint ndisp = 25);
+		StatApp(const Sbecore::uint firstcol = 1, const Sbecore::uint jnumFirstdisp = 1, const Sbecore::uint ncol = 10, const Sbecore::uint ndisp = 25);
 
 	public:
 		Sbecore::uint firstcol;

@@ -58,14 +58,15 @@ DpchRetWdbeMtpPlhfpga* WdbeMtpPlhfpgaPmmu_v1_0::run(
 	unsigned int size;
 	usmallint wA, wAp1, wPg;
 
-	if (dbswdbe->loadStringBySQL("SELECT TblWdbeMModule2.sref FROM TblWdbeMModule AS TblWdbeMModule1, TblWdbeMImbuf, TblWdbeMModule AS TblWdbeMModule2  WHERE TblWdbeMModule1.supRefWdbeMModule = " + to_string(refWdbeMModule)
-				+ " AND TblWdbeMImbuf.refWdbeMModule = TblWdbeMModule1.ref AND TblWdbeMModule1.sref = 'inbuf0' AND TblWdbeMModule2.ref = TblWdbeMImbuf.corRefWdbeMModule", sref)) {
+	if (dbswdbe->loadStringBySQL("SELECT mdl2.sref FROM TblWdbeMModule AS mdl1, TblWdbeRMModuleMModule, TblWdbeMModule AS mdl2  WHERE mdl1.supRefWdbeMModule = " + to_string(refWdbeMModule)
+				+ " AND TblWdbeRMModuleMModule.ctdRefWdbeMModule = mdl1.ref AND mdl1.sref = 'inbuf0' AND mdl2.ref = TblWdbeRMModuleMModule.corRefWdbeMModule", sref)) {
 		keys.push_back("CorsrefInbuf0");
 		vals.push_back(StrMod::cap(sref));
 	};
-	if (dbswdbe->loadStringBySQL("SELECT TblWdbeMModule2.sref FROM TblWdbeMModule AS TblWdbeMModule1, TblWdbeMImbuf, TblWdbeMModule AS TblWdbeMModule2  WHERE TblWdbeMModule1.supRefWdbeMModule = " + to_string(refWdbeMModule)
-				+ " AND TblWdbeMImbuf.refWdbeMModule = TblWdbeMModule1.ref AND TblWdbeMModule1.sref = 'outbuf0' AND TblWdbeMModule2.ref = TblWdbeMImbuf.corRefWdbeMModule", sref)) {
-		keys.push_back("CorsrefOutbuf0");
+
+	if (dbswdbe->loadStringBySQL("SELECT mdl2.sref FROM TblWdbeMModule AS mdl1, TblWdbeRMModuleMModule, TblWdbeMModule AS mdl2  WHERE mdl1.supRefWdbeMModule = " + to_string(refWdbeMModule)
+				+ " AND TblWdbeRMModuleMModule.ctdRefWdbeMModule = mdl1.ref AND mdl1.sref = 'outbuf0' AND mdl2.ref = TblWdbeRMModuleMModule.corRefWdbeMModule", sref)) {
+		keys.push_back("CorsrefInbuf0");
 		vals.push_back(StrMod::cap(sref));
 	};
 

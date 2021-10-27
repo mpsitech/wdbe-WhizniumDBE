@@ -10,7 +10,8 @@
 			function handleButCluViewClick() {parent.parent.window.handleButCrdopenClick("ButCluView");};
 			function handleButCluClusterClick() {parent.parent.window.handleButClick("ButCluCluster");};
 			function handleButCluUnclusterClick() {parent.parent.window.handleButClick("ButCluUncluster");};
-			function handleButMdlViewClick() {parent.parent.window.handleButCrdopenClick("ButMdlView");};
+			function handlePupRetChange() {parent.parent.window.handlePupChange(document,"PupRet","xs");};
+			function handleButReuViewClick() {parent.parent.window.handleButCrdopenClick("ButReuView");};
 			function handlePupMgtChange() {parent.parent.window.handlePupChange(document,"PupMgt","xs");};
 			function handleButMguViewClick() {parent.parent.window.handleButCrdopenClick("ButMguView");};
 			function handleButVecViewClick() {parent.parent.window.handleButCrdopenClick("ButVecView");};
@@ -101,17 +102,20 @@
 					<td colspan="3" height="67"></td>
 					<td colspan="3"></td>
 				</tr>
-				<tr id="trMdl" class="show">
+				<tr id="trReu" class="show">
 					<td height="25"></td>
 					<td align="right">
-						<span id="CptMdl" class="cpt">CptMdl</span>
+						<span id="CptReu" class="cpt">CptReu</span>
 					</td>
 					<td></td>
-					<td colspan="5" align="left">
-						<input id="TxtMdl" class="txfnoed" type="text" readonly="readonly" value="TxtMdl"/>
+					<td colspan="2" align="left">
+						<select id="PupRet" class="pupxs" size="1" onchange="handlePupRetChange()"/>
+					</td>
+					<td colspan="3" align="left">
+						<input id="TxtReu" class="txfsnoed" type="text" readonly="readonly" value="TxtReu"/>
 					</td>
 					<td></td>
-					<td id="rdynMdl" colspan="2" align="left">
+					<td id="rdynReu" colspan="2" align="left">
 					</td>
 				</tr>
 				<tr id="trMgu" class="show">

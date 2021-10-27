@@ -52,6 +52,7 @@ function initBD(bNotD) {
 
 	// IP initBD --- BEGIN
 	initCpt(contcontdoc, "CptSrf", retrieveTi(srcdoc, "TagWdbeModDetail", "CptSrf"));
+	initCpt(contcontdoc, "CptVnd", retrieveTi(srcdoc, "TagWdbeModDetail", "CptVnd"));
 	initCpt(contcontdoc, "CptTyp", retrieveTi(srcdoc, "TagWdbeModDetail", "CptTyp"));
 	refreshPup(contcontdoc, srcdoc, "PupTyp", "", "FeedFPupTyp", retrieveCi(srcdoc, "ContIacWdbeModDetail", "numFPupTyp"), retrieveSi(srcdoc, "StatShrWdbeModDetail", "PupTypActive"), false);
 	initCpt(contcontdoc, "CptHku", retrieveTi(srcdoc, "TagWdbeModDetail", "CptHku"));
@@ -63,10 +64,11 @@ function initBD(bNotD) {
 	initCpt(contcontdoc, "CptCtrFsr", retrieveTi(srcdoc, "TagWdbeModDetail", "CptCtrFsr"));
 	initCpt(contcontdoc, "CptCtrFwd", retrieveTi(srcdoc, "TagWdbeModDetail", "CptCtrFwd"));
 	initCpt(contcontdoc, "CptCtrClr", retrieveTi(srcdoc, "TagWdbeModDetail", "CptCtrClr"));
-	initCpt(contcontdoc, "CptImbSrf", retrieveTi(srcdoc, "TagWdbeModDetail", "CptImbSrf"));
-	initCpt(contcontdoc, "CptImbCor", retrieveTi(srcdoc, "TagWdbeModDetail", "CptImbCor"));
-	initCpt(contcontdoc, "CptImbDir", retrieveTi(srcdoc, "TagWdbeModDetail", "CptImbDir"));
-	refreshPup(contcontdoc, srcdoc, "PupImbDir", "", "FeedFPupImbDir", retrieveCi(srcdoc, "ContIacWdbeModDetail", "numFPupImbDir"), retrieveSi(srcdoc, "StatShrWdbeModDetail", "PupImbDirActive"), false);
+	initCpt(contcontdoc, "CptImbFsr", retrieveTi(srcdoc, "TagWdbeModDetail", "CptImbFsr"));
+	initCpt(contcontdoc, "CptImbRty", retrieveTi(srcdoc, "TagWdbeModDetail", "CptImbRty"));
+	refreshPup(contcontdoc, srcdoc, "PupImbRty", "", "FeedFPupImbRty", retrieveCi(srcdoc, "ContIacWdbeModDetail", "numFPupImbRty"), retrieveSi(srcdoc, "StatShrWdbeModDetail", "PupImbRtyActive"), false);
+	initCpt(contcontdoc, "CptImbWid", retrieveTi(srcdoc, "TagWdbeModDetail", "CptImbWid"));
+	initCpt(contcontdoc, "CptImbMmx", retrieveTi(srcdoc, "TagWdbeModDetail", "CptImbMmx"));
 	initCpt(contcontdoc, "CptImbPri", retrieveTi(srcdoc, "TagWdbeModDetail", "CptImbPri"));
 	// IP initBD --- END
 
@@ -91,10 +93,15 @@ function refreshA() {
 function refreshBD(bNotD) {
 	if (!contcontdoc) return;
 
-	var height = 481; // full cont height
+	var height = 531; // full cont height
 
 	// IP refreshBD.vars --- BEGIN
 	var TxtSrfActive = (retrieveSi(srcdoc, "StatShrWdbeModDetail", "TxtSrfActive") == "true");
+
+	var PupVndAlt = (retrieveSi(srcdoc, "StatAppWdbeModDetail", "PupVndAlt") == "true");
+	var TxfVndValid = (retrieveSi(srcdoc, "StatShrWdbeModDetail", "TxfVndValid") == "true");
+	var PupVndActive = (retrieveSi(srcdoc, "StatShrWdbeModDetail", "PupVndActive") == "true");
+	var ButVndEditAvail = (retrieveSi(srcdoc, "StatShrWdbeModDetail", "ButVndEditAvail") == "true");
 
 	var PupTypActive = (retrieveSi(srcdoc, "StatShrWdbeModDetail", "PupTypActive") == "true");
 
@@ -139,16 +146,17 @@ function refreshBD(bNotD) {
 	var ButImbNewAvail = (retrieveSi(srcdoc, "StatShrWdbeModDetail", "ButImbNewAvail") == "true");
 	var ButImbDeleteAvail = (retrieveSi(srcdoc, "StatShrWdbeModDetail", "ButImbDeleteAvail") == "true");
 
-	var TxtImbSrfAvail = (retrieveSi(srcdoc, "StatShrWdbeModDetail", "TxtImbSrfAvail") == "true");
-	var TxtImbSrfActive = (retrieveSi(srcdoc, "StatShrWdbeModDetail", "TxtImbSrfActive") == "true");
+	var TxfImbFsrAvail = (retrieveSi(srcdoc, "StatShrWdbeModDetail", "TxfImbFsrAvail") == "true");
+	var TxfImbFsrActive = (retrieveSi(srcdoc, "StatShrWdbeModDetail", "TxfImbFsrActive") == "true");
 
-	var TxtImbCorAvail = (retrieveSi(srcdoc, "StatShrWdbeModDetail", "TxtImbCorAvail") == "true");
-	var TxtImbCorActive = (retrieveSi(srcdoc, "StatShrWdbeModDetail", "TxtImbCorActive") == "true");
-	var ButImbCorViewAvail = (retrieveSi(srcdoc, "StatShrWdbeModDetail", "ButImbCorViewAvail") == "true");
-	var ButImbCorViewActive = (retrieveSi(srcdoc, "StatShrWdbeModDetail", "ButImbCorViewActive") == "true");
+	var PupImbRtyAvail = (retrieveSi(srcdoc, "StatShrWdbeModDetail", "PupImbRtyAvail") == "true");
+	var PupImbRtyActive = (retrieveSi(srcdoc, "StatShrWdbeModDetail", "PupImbRtyActive") == "true");
 
-	var PupImbDirAvail = (retrieveSi(srcdoc, "StatShrWdbeModDetail", "PupImbDirAvail") == "true");
-	var PupImbDirActive = (retrieveSi(srcdoc, "StatShrWdbeModDetail", "PupImbDirActive") == "true");
+	var TxfImbWidAvail = (retrieveSi(srcdoc, "StatShrWdbeModDetail", "TxfImbWidAvail") == "true");
+	var TxfImbWidActive = (retrieveSi(srcdoc, "StatShrWdbeModDetail", "TxfImbWidActive") == "true");
+
+	var TxfImbMmxAvail = (retrieveSi(srcdoc, "StatShrWdbeModDetail", "TxfImbMmxAvail") == "true");
+	var TxfImbMmxActive = (retrieveSi(srcdoc, "StatShrWdbeModDetail", "TxfImbMmxActive") == "true");
 
 	var TxfImbPriAvail = (retrieveSi(srcdoc, "StatShrWdbeModDetail", "TxfImbPriAvail") == "true");
 	var TxfImbPriActive = (retrieveSi(srcdoc, "StatShrWdbeModDetail", "TxfImbPriActive") == "true");
@@ -159,6 +167,30 @@ function refreshBD(bNotD) {
 
 	// IP refreshBD --- BEGIN
 	refreshTxt(contcontdoc, "TxtSrf", retrieveCi(srcdoc, "ContInfWdbeModDetail", "TxtSrf"));
+
+	if ( (PupVndAlt == !contcontdoc.getElementById("TxfVnd")) || (!PupVndAlt == !contcontdoc.getElementById("PupVnd")) ) {
+		mytd = contcontdoc.getElementById("dynVnd");
+		clearElem(mytd);
+
+		if (PupVndAlt) mytd.appendChild(makeInputTxf(contcontdoc, "TxfVnd", ""));
+		else mytd.appendChild(makeSelectPup(contcontdoc, "PupVnd", ""));
+	};
+
+	if (PupVndAlt) refreshTxf(contcontdoc, "TxfVnd", "", retrieveCi(srcdoc, "ContIacWdbeModDetail", "TxfVnd"), PupVndActive, false, TxfVndValid);
+	else refreshPup(contcontdoc, srcdoc, "PupVnd", "", "FeedFPupVnd", retrieveCi(srcdoc, "ContIacWdbeModDetail", "numFPupVnd"), true, false);
+
+	if ((ButVndEditAvail == !contcontdoc.getElementById("ButVndEdit"))) {
+		mytd = contcontdoc.getElementById("rdynVnd");
+		clearElem(mytd);
+
+		first = true;
+
+		if (ButVndEditAvail) {
+			if (first) first = false;
+			else mytd.appendChild(contcontdoc.createTextNode("\u00a0"));
+			mytd.appendChild(makeImgBut(contcontdoc, "ButVndEdit", "icon/edit"));
+		};
+	};
 
 	contcontdoc.getElementById("PupTyp").value = retrieveCi(srcdoc, "ContIacWdbeModDetail", "numFPupTyp");
 
@@ -332,36 +364,27 @@ function refreshBD(bNotD) {
 
 	};
 
-	height -= setCtlAvail(contcontdoc, "ImbSrf", TxtImbSrfAvail, 25);
-	if (TxtImbSrfAvail) {
-		refreshTxt(contcontdoc, "TxtImbSrf", retrieveCi(srcdoc, "ContInfWdbeModDetail", "TxtImbSrf"));
+	height -= setCtlAvail(contcontdoc, "ImbFsr", TxfImbFsrAvail, 25);
+	if (TxfImbFsrAvail) {
+		refreshTxf(contcontdoc, "TxfImbFsr", "", retrieveCi(srcdoc, "ContIacWdbeModDetail", "TxfImbFsr"), TxfImbFsrActive, false, true);
 
 	};
 
-	height -= setCtlAvail(contcontdoc, "ImbCor", TxtImbCorAvail, 25);
-	if (TxtImbCorAvail) {
-		if ((ButImbCorViewAvail == !contcontdoc.getElementById("ButImbCorView"))) {
-			mytd = contcontdoc.getElementById("rdynImbCor");
-			clearElem(mytd);
-
-			first = true;
-
-			if (ButImbCorViewAvail) {
-				if (first) first = false;
-				else mytd.appendChild(contcontdoc.createTextNode("\u00a0"));
-				mytd.appendChild(makeImgBut(contcontdoc, "ButImbCorView", "icon/view"));
-			};
-		};
-
-		refreshTxt(contcontdoc, "TxtImbCor", retrieveCi(srcdoc, "ContInfWdbeModDetail", "TxtImbCor"));
-
-		if (ButImbCorViewAvail) refreshButicon(contcontdoc, "ButImbCorView", "icon/view", ButImbCorViewActive, false);
+	height -= setCtlAvail(contcontdoc, "ImbRty", PupImbRtyAvail, 25);
+	if (PupImbRtyAvail) {
+		contcontdoc.getElementById("PupImbRty").value = retrieveCi(srcdoc, "ContIacWdbeModDetail", "numFPupImbRty");
 
 	};
 
-	height -= setCtlAvail(contcontdoc, "ImbDir", PupImbDirAvail, 25);
-	if (PupImbDirAvail) {
-		contcontdoc.getElementById("PupImbDir").value = retrieveCi(srcdoc, "ContIacWdbeModDetail", "numFPupImbDir");
+	height -= setCtlAvail(contcontdoc, "ImbWid", TxfImbWidAvail, 25);
+	if (TxfImbWidAvail) {
+		refreshTxf(contcontdoc, "TxfImbWid", "s", retrieveCi(srcdoc, "ContIacWdbeModDetail", "TxfImbWid"), TxfImbWidActive, false, true);
+
+	};
+
+	height -= setCtlAvail(contcontdoc, "ImbMmx", TxfImbMmxAvail, 25);
+	if (TxfImbMmxAvail) {
+		refreshTxf(contcontdoc, "TxfImbMmx", "s", retrieveCi(srcdoc, "ContIacWdbeModDetail", "TxfImbMmx"), TxfImbMmxActive, false, true);
 
 	};
 
@@ -418,6 +441,15 @@ function handleButRegularizeClick() {
 
 // --- generalized event handlers for app controls
 
+function handleButToggleClick(basectlsref) {
+	var alt;
+
+	if (retrieveSi(srcdoc, "StatAppWdbeModDetail", basectlsref + "Alt") == "true") alt = "false"; else alt = "true";
+	setSi(srcdoc, "StatAppWdbeModDetail", basectlsref + "Alt", alt);
+
+	refresh();
+};
+
 // --- generalized event handlers for shared controls
 
 function handleButClick(ctlsref) {
@@ -428,6 +460,11 @@ function handleButClick(ctlsref) {
 function handleButCrdopenClick(ctlsref) {
 	var str = serializeDpchAppDo(srcdoc, "DpchAppWdbeModDetailDo", scrJref, ctlsref + "Click");
 	sendReq(str, doc, handleDpchAppDoCrdopenReply);
+};
+
+function handleButDlgopenClick(ctlsref) {
+	var str = serializeDpchAppDo(srcdoc, "DpchAppWdbeModDetailDo", scrJref, ctlsref + "Click");
+	sendReq(str, doc, handleDpchAppDoDlgopenReply);
 };
 
 function handlePupChange(_doc, ctlsref, size) {
@@ -494,8 +531,9 @@ function mergeDpchEngData(dom) {
 	if (updateSrcblock(dom, "DpchEngWdbeModDetailData", "ContIacWdbeModDetail", srcdoc)) mask.push("contiac");
 	if (updateSrcblock(dom, "DpchEngWdbeModDetailData", "ContInfWdbeModDetail", srcdoc)) mask.push("continf");
 	if (updateSrcblock(dom, "DpchEngWdbeModDetailData", "FeedFPupHkt", srcdoc)) mask.push("feedFPupHkt");
-	if (updateSrcblock(dom, "DpchEngWdbeModDetailData", "FeedFPupImbDir", srcdoc)) mask.push("feedFPupImbDir");
+	if (updateSrcblock(dom, "DpchEngWdbeModDetailData", "FeedFPupImbRty", srcdoc)) mask.push("feedFPupImbRty");
 	if (updateSrcblock(dom, "DpchEngWdbeModDetailData", "FeedFPupTyp", srcdoc)) mask.push("feedFPupTyp");
+	if (updateSrcblock(dom, "DpchEngWdbeModDetailData", "FeedFPupVnd", srcdoc)) mask.push("feedFPupVnd");
 	if (updateSrcblock(dom, "DpchEngWdbeModDetailData", "StatAppWdbeModDetail", srcdoc)) mask.push("statapp");
 	if (updateSrcblock(dom, "DpchEngWdbeModDetailData", "StatShrWdbeModDetail", srcdoc)) mask.push("statshr");
 	if (updateSrcblock(dom, "DpchEngWdbeModDetailData", "TagWdbeModDetail", srcdoc)) mask.push("tag");
@@ -571,6 +609,28 @@ function handleDpchAppDoCrdopenReply() {
 				getCrdwnd().showAlr(retrieveValue(dom, "//wdbe:DpchEngWdbeAlert/wdbe:scrJref"),
 						retrieveBlock(dom, "//wdbe:DpchEngWdbeAlert/wdbe:ContInfWdbeAlert"),
 						retrieveBlock(dom, "//wdbe:DpchEngWdbeAlert/wdbe:FeedFMcbAlert"));
+			};
+		};
+	};
+};
+
+function handleDpchAppDoDlgopenReply() {
+	var dom, blk;
+
+	var accepted, _scrJref, sref;
+
+	if (doc.req.readyState == 4) {
+		dom = doc.req.responseXML;
+
+		blk = retrieveBlock(dom, "//wdbe:*");
+
+		if (blk) {
+			if (blk.nodeName == "DpchEngWdbeConfirm") {
+				accepted = retrieveValue(dom, "//wdbe:DpchEngWdbeConfirm/wdbe:accepted");
+				_scrJref = retrieveValue(dom, "//wdbe:DpchEngWdbeConfirm/wdbe:scrJref");
+				sref = retrieveValue(dom, "//wdbe:DpchEngWdbeConfirm/wdbe:sref");
+
+				if ((accepted == "true") && (sref != "")) getCrdwnd().showDlg(sref, _scrJref);
 			};
 		};
 	};

@@ -5542,8 +5542,9 @@ IexWdbeDcd::ImeitemIMVariable::ImeitemIMVariable(
 
 	if (dbswdbe->tblwdbemvariable->loadRecByRef(ref, &rec)) {
 		refWdbeCVariable = rec->refWdbeCVariable;
-		prcRefWdbeMProcess = rec->prcRefWdbeMProcess;
-		prcNum = rec->prcNum;
+		refIxVTbl = rec->refIxVTbl;
+		refUref = rec->refUref;
+		refNum = rec->refNum;
 		sref = rec->sref;
 		Const = rec->Const;
 		Falling = rec->Falling;
@@ -6178,8 +6179,9 @@ IexWdbeDcd::ImeitemIMSignal::ImeitemIMSignal(
 	if (dbswdbe->tblwdbemsignal->loadRecByRef(ref, &rec)) {
 		ixVBasetype = rec->ixVBasetype;
 		refWdbeCSignal = rec->refWdbeCSignal;
-		mdlRefWdbeMModule = rec->mdlRefWdbeMModule;
-		mdlNum = rec->mdlNum;
+		refIxVTbl = rec->refIxVTbl;
+		refUref = rec->refUref;
+		refNum = rec->refNum;
 		mgeIxVTbl = rec->mgeIxVTbl;
 		mgeUref = rec->mgeUref;
 		sref = rec->sref;
@@ -6795,7 +6797,7 @@ void IexWdbeDcd::parseFromFile(
 		};
 
 	} else {
-			Txtrd rd(fullpath, rectpath, "IexWdbeDcd", Version(""), VecVIme::getIx);
+			Txtrd rd(fullpath, rectpath, "IexWdbeDcd", Version("1.1.8"), VecVIme::getIx);
 			readTxt(rd, imeiamcoreversionip, imeiamcoreversionplh, imeimmodule);
 	};
 };
@@ -6860,6 +6862,11 @@ void IexWdbeDcd::readXML(
 	string version;
 
 	if (checkUclcXPaths(docctx, basexpath, basexpath, "IexWdbeDcd")) {
+		// validate version
+		if (checkUclcXPaths(docctx, goodxpath, basexpath, "@Version")) {
+			extractString(docctx, goodxpath, version);
+			if (Version(version) < Version("1.1.8")) throw SbeException(SbeException::IEX_VERSION, {{"version",version},{"minversion","1.1.8"}});
+		};
 
 		// look for XML sub-blocks
 		imeiamcoreversionip.readXML(docctx, basexpath);

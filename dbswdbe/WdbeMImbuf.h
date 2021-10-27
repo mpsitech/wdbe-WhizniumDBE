@@ -21,7 +21,7 @@
 
 #include <sbecore/Xmlio.h>
 
-#define VecWdbeVMImbufDir TblWdbeMImbuf::VecVDir
+#define VecWdbeVMImbufRotype TblWdbeMImbuf::VecVRotype
 
 /**
 	* WdbeMImbuf: record of TblWdbeMImbuf
@@ -29,14 +29,15 @@
 class WdbeMImbuf {
 
 public:
-	WdbeMImbuf(const Sbecore::ubigint ref = 0, const Sbecore::ubigint refWdbeMModule = 0, const Sbecore::ubigint corRefWdbeMModule = 0, const std::string sref = "", const Sbecore::uint ixVDir = 0, const Sbecore::utinyint Prio = 0);
+	WdbeMImbuf(const Sbecore::ubigint ref = 0, const Sbecore::uint ixVRotype = 0, const Sbecore::ubigint refWdbeMModule = 0, const std::string Fullsref = "", const Sbecore::usmallint Width = 0, const std::string Minmax = "", const Sbecore::utinyint Prio = 0);
 
 public:
 	Sbecore::ubigint ref;
+	Sbecore::uint ixVRotype;
 	Sbecore::ubigint refWdbeMModule;
-	Sbecore::ubigint corRefWdbeMModule;
-	std::string sref;
-	Sbecore::uint ixVDir;
+	std::string Fullsref;
+	Sbecore::usmallint Width;
+	std::string Minmax;
 	Sbecore::utinyint Prio;
 
 public:
@@ -74,13 +75,14 @@ class TblWdbeMImbuf {
 
 public:
 	/**
-		* VecVDir (full: VecWdbeVMImbufDir)
+		* VecVRotype (full: VecWdbeVMImbufRotype)
 		*/
-	class VecVDir {
+	class VecVRotype {
 
 	public:
-		static const Sbecore::uint IN = 1;
-		static const Sbecore::uint OUT = 2;
+		static const Sbecore::uint SNGATMT = 1;
+		static const Sbecore::uint MULTATMT = 2;
+		static const Sbecore::uint STRM = 3;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);
@@ -99,14 +101,15 @@ public:
 	virtual Sbecore::ubigint loadRstBySQL(const std::string& sqlstr, const bool append, ListWdbeMImbuf& rst);
 
 	virtual Sbecore::ubigint insertRec(WdbeMImbuf* rec);
-	Sbecore::ubigint insertNewRec(WdbeMImbuf** rec = NULL, const Sbecore::ubigint refWdbeMModule = 0, const Sbecore::ubigint corRefWdbeMModule = 0, const std::string sref = "", const Sbecore::uint ixVDir = 0, const Sbecore::utinyint Prio = 0);
-	Sbecore::ubigint appendNewRecToRst(ListWdbeMImbuf& rst, WdbeMImbuf** rec = NULL, const Sbecore::ubigint refWdbeMModule = 0, const Sbecore::ubigint corRefWdbeMModule = 0, const std::string sref = "", const Sbecore::uint ixVDir = 0, const Sbecore::utinyint Prio = 0);
+	Sbecore::ubigint insertNewRec(WdbeMImbuf** rec = NULL, const Sbecore::uint ixVRotype = 0, const Sbecore::ubigint refWdbeMModule = 0, const std::string Fullsref = "", const Sbecore::usmallint Width = 0, const std::string Minmax = "", const Sbecore::utinyint Prio = 0);
+	Sbecore::ubigint appendNewRecToRst(ListWdbeMImbuf& rst, WdbeMImbuf** rec = NULL, const Sbecore::uint ixVRotype = 0, const Sbecore::ubigint refWdbeMModule = 0, const std::string Fullsref = "", const Sbecore::usmallint Width = 0, const std::string Minmax = "", const Sbecore::utinyint Prio = 0);
 	virtual void insertRst(ListWdbeMImbuf& rst, bool transact = false);
 	virtual void updateRec(WdbeMImbuf* rec);
 	virtual void updateRst(ListWdbeMImbuf& rst, bool transact = false);
 	virtual void removeRecByRef(Sbecore::ubigint ref);
 
 	virtual bool loadRecByRef(Sbecore::ubigint ref, WdbeMImbuf** rec);
+	virtual bool loadFsrByRef(Sbecore::ubigint ref, std::string& Fullsref);
 	virtual bool loadRecByMdl(Sbecore::ubigint refWdbeMModule, WdbeMImbuf** rec);
 	virtual Sbecore::ubigint loadRefsByMdl(Sbecore::ubigint refWdbeMModule, const bool append, std::vector<Sbecore::ubigint>& refs);
 	Sbecore::ubigint loadRstByRefs(std::vector<Sbecore::ubigint>& refs, const bool append, ListWdbeMImbuf& rst);
@@ -141,6 +144,7 @@ public:
 	void removeRecByRef(Sbecore::ubigint ref);
 
 	bool loadRecByRef(Sbecore::ubigint ref, WdbeMImbuf** rec);
+	bool loadFsrByRef(Sbecore::ubigint ref, std::string& Fullsref);
 	bool loadRecByMdl(Sbecore::ubigint refWdbeMModule, WdbeMImbuf** rec);
 	Sbecore::ubigint loadRefsByMdl(Sbecore::ubigint refWdbeMModule, const bool append, std::vector<Sbecore::ubigint>& refs);
 };
@@ -175,6 +179,7 @@ public:
 	void removeRecByRef(Sbecore::ubigint ref);
 
 	bool loadRecByRef(Sbecore::ubigint ref, WdbeMImbuf** rec);
+	bool loadFsrByRef(Sbecore::ubigint ref, std::string& Fullsref);
 	bool loadRecByMdl(Sbecore::ubigint refWdbeMModule, WdbeMImbuf** rec);
 	Sbecore::ubigint loadRefsByMdl(Sbecore::ubigint refWdbeMModule, const bool append, std::vector<Sbecore::ubigint>& refs);
 };

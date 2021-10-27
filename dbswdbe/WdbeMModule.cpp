@@ -29,6 +29,7 @@ WdbeMModule::WdbeMModule(
 			, const ubigint refWdbeMController
 			, const ubigint refWdbeMImbuf
 			, const string sref
+			, const string srefWdbeKVendor
 			, const string Srefrule
 			, const string Comment
 		) {
@@ -43,6 +44,7 @@ WdbeMModule::WdbeMModule(
 	this->refWdbeMController = refWdbeMController;
 	this->refWdbeMImbuf = refWdbeMImbuf;
 	this->sref = sref;
+	this->srefWdbeKVendor = srefWdbeKVendor;
 	this->Srefrule = Srefrule;
 	this->Comment = Comment;
 };
@@ -184,13 +186,14 @@ ubigint TblWdbeMModule::insertNewRec(
 			, const ubigint refWdbeMController
 			, const ubigint refWdbeMImbuf
 			, const string sref
+			, const string srefWdbeKVendor
 			, const string Srefrule
 			, const string Comment
 		) {
 	ubigint retval = 0;
 	WdbeMModule* _rec = NULL;
 
-	_rec = new WdbeMModule(0, ixVBasetype, hkIxVTbl, hkUref, hkNum, supRefWdbeMModule, tplRefWdbeMModule, refWdbeMController, refWdbeMImbuf, sref, Srefrule, Comment);
+	_rec = new WdbeMModule(0, ixVBasetype, hkIxVTbl, hkUref, hkNum, supRefWdbeMModule, tplRefWdbeMModule, refWdbeMController, refWdbeMImbuf, sref, srefWdbeKVendor, Srefrule, Comment);
 	insertRec(_rec);
 
 	retval = _rec->ref;
@@ -213,13 +216,14 @@ ubigint TblWdbeMModule::appendNewRecToRst(
 			, const ubigint refWdbeMController
 			, const ubigint refWdbeMImbuf
 			, const string sref
+			, const string srefWdbeKVendor
 			, const string Srefrule
 			, const string Comment
 		) {
 	ubigint retval = 0;
 	WdbeMModule* _rec = NULL;
 
-	retval = insertNewRec(&_rec, ixVBasetype, hkIxVTbl, hkUref, hkNum, supRefWdbeMModule, tplRefWdbeMModule, refWdbeMController, refWdbeMImbuf, sref, Srefrule, Comment);
+	retval = insertNewRec(&_rec, ixVBasetype, hkIxVTbl, hkUref, hkNum, supRefWdbeMModule, tplRefWdbeMModule, refWdbeMController, refWdbeMImbuf, sref, srefWdbeKVendor, Srefrule, Comment);
 	rst.nodes.push_back(_rec);
 
 	if (rec != NULL) *rec = _rec;
@@ -487,8 +491,8 @@ MyTblWdbeMModule::~MyTblWdbeMModule() {
 };
 
 void MyTblWdbeMModule::initStatements() {
-	stmtInsertRec = createStatement("INSERT INTO TblWdbeMModule (ixVBasetype, hkIxVTbl, hkUref, hkNum, supRefWdbeMModule, tplRefWdbeMModule, refWdbeMController, refWdbeMImbuf, sref, Srefrule, Comment) VALUES (?,?,?,?,?,?,?,?,?,?,?)", false);
-	stmtUpdateRec = createStatement("UPDATE TblWdbeMModule SET ixVBasetype = ?, hkIxVTbl = ?, hkUref = ?, hkNum = ?, supRefWdbeMModule = ?, tplRefWdbeMModule = ?, refWdbeMController = ?, refWdbeMImbuf = ?, sref = ?, Srefrule = ?, Comment = ? WHERE ref = ?", false);
+	stmtInsertRec = createStatement("INSERT INTO TblWdbeMModule (ixVBasetype, hkIxVTbl, hkUref, hkNum, supRefWdbeMModule, tplRefWdbeMModule, refWdbeMController, refWdbeMImbuf, sref, srefWdbeKVendor, Srefrule, Comment) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)", false);
+	stmtUpdateRec = createStatement("UPDATE TblWdbeMModule SET ixVBasetype = ?, hkIxVTbl = ?, hkUref = ?, hkNum = ?, supRefWdbeMModule = ?, tplRefWdbeMModule = ?, refWdbeMController = ?, refWdbeMImbuf = ?, sref = ?, srefWdbeKVendor = ?, Srefrule = ?, Comment = ? WHERE ref = ?", false);
 	stmtRemoveRecByRef = createStatement("DELETE FROM TblWdbeMModule WHERE ref = ?", false);
 };
 
@@ -528,8 +532,9 @@ bool MyTblWdbeMModule::loadRecBySQL(
 		if (dbrow[7]) _rec->refWdbeMController = atoll((char*) dbrow[7]); else _rec->refWdbeMController = 0;
 		if (dbrow[8]) _rec->refWdbeMImbuf = atoll((char*) dbrow[8]); else _rec->refWdbeMImbuf = 0;
 		if (dbrow[9]) _rec->sref.assign(dbrow[9], dblengths[9]); else _rec->sref = "";
-		if (dbrow[10]) _rec->Srefrule.assign(dbrow[10], dblengths[10]); else _rec->Srefrule = "";
-		if (dbrow[11]) _rec->Comment.assign(dbrow[11], dblengths[11]); else _rec->Comment = "";
+		if (dbrow[10]) _rec->srefWdbeKVendor.assign(dbrow[10], dblengths[10]); else _rec->srefWdbeKVendor = "";
+		if (dbrow[11]) _rec->Srefrule.assign(dbrow[11], dblengths[11]); else _rec->Srefrule = "";
+		if (dbrow[12]) _rec->Comment.assign(dbrow[12], dblengths[12]); else _rec->Comment = "";
 
 		retval = true;
 	};
@@ -582,8 +587,9 @@ ubigint MyTblWdbeMModule::loadRstBySQL(
 			if (dbrow[7]) rec->refWdbeMController = atoll((char*) dbrow[7]); else rec->refWdbeMController = 0;
 			if (dbrow[8]) rec->refWdbeMImbuf = atoll((char*) dbrow[8]); else rec->refWdbeMImbuf = 0;
 			if (dbrow[9]) rec->sref.assign(dbrow[9], dblengths[9]); else rec->sref = "";
-			if (dbrow[10]) rec->Srefrule.assign(dbrow[10], dblengths[10]); else rec->Srefrule = "";
-			if (dbrow[11]) rec->Comment.assign(dbrow[11], dblengths[11]); else rec->Comment = "";
+			if (dbrow[10]) rec->srefWdbeKVendor.assign(dbrow[10], dblengths[10]); else rec->srefWdbeKVendor = "";
+			if (dbrow[11]) rec->Srefrule.assign(dbrow[11], dblengths[11]); else rec->Srefrule = "";
+			if (dbrow[12]) rec->Comment.assign(dbrow[12], dblengths[12]); else rec->Comment = "";
 			rst.nodes.push_back(rec);
 
 			numread++;
@@ -598,11 +604,12 @@ ubigint MyTblWdbeMModule::loadRstBySQL(
 ubigint MyTblWdbeMModule::insertRec(
 			WdbeMModule* rec
 		) {
-	unsigned long l[11]; my_bool n[11]; my_bool e[11];
+	unsigned long l[12]; my_bool n[12]; my_bool e[12];
 
 	l[8] = rec->sref.length();
-	l[9] = rec->Srefrule.length();
-	l[10] = rec->Comment.length();
+	l[9] = rec->srefWdbeKVendor.length();
+	l[10] = rec->Srefrule.length();
+	l[11] = rec->Comment.length();
 
 	MYSQL_BIND bind[] = {
 		bindUint(&rec->ixVBasetype,&(l[0]),&(n[0]),&(e[0])),
@@ -614,8 +621,9 @@ ubigint MyTblWdbeMModule::insertRec(
 		bindUbigint(&rec->refWdbeMController,&(l[6]),&(n[6]),&(e[6])),
 		bindUbigint(&rec->refWdbeMImbuf,&(l[7]),&(n[7]),&(e[7])),
 		bindCstring((char*) (rec->sref.c_str()),&(l[8]),&(n[8]),&(e[8])),
-		bindCstring((char*) (rec->Srefrule.c_str()),&(l[9]),&(n[9]),&(e[9])),
-		bindCstring((char*) (rec->Comment.c_str()),&(l[10]),&(n[10]),&(e[10]))
+		bindCstring((char*) (rec->srefWdbeKVendor.c_str()),&(l[9]),&(n[9]),&(e[9])),
+		bindCstring((char*) (rec->Srefrule.c_str()),&(l[10]),&(n[10]),&(e[10])),
+		bindCstring((char*) (rec->Comment.c_str()),&(l[11]),&(n[11]),&(e[11]))
 	};
 
 	if (mysql_stmt_bind_param(stmtInsertRec, bind)) {
@@ -643,11 +651,12 @@ void MyTblWdbeMModule::insertRst(
 void MyTblWdbeMModule::updateRec(
 			WdbeMModule* rec
 		) {
-	unsigned long l[12]; my_bool n[12]; my_bool e[12];
+	unsigned long l[13]; my_bool n[13]; my_bool e[13];
 
 	l[8] = rec->sref.length();
-	l[9] = rec->Srefrule.length();
-	l[10] = rec->Comment.length();
+	l[9] = rec->srefWdbeKVendor.length();
+	l[10] = rec->Srefrule.length();
+	l[11] = rec->Comment.length();
 
 	MYSQL_BIND bind[] = {
 		bindUint(&rec->ixVBasetype,&(l[0]),&(n[0]),&(e[0])),
@@ -659,9 +668,10 @@ void MyTblWdbeMModule::updateRec(
 		bindUbigint(&rec->refWdbeMController,&(l[6]),&(n[6]),&(e[6])),
 		bindUbigint(&rec->refWdbeMImbuf,&(l[7]),&(n[7]),&(e[7])),
 		bindCstring((char*) (rec->sref.c_str()),&(l[8]),&(n[8]),&(e[8])),
-		bindCstring((char*) (rec->Srefrule.c_str()),&(l[9]),&(n[9]),&(e[9])),
-		bindCstring((char*) (rec->Comment.c_str()),&(l[10]),&(n[10]),&(e[10])),
-		bindUbigint(&rec->ref,&(l[11]),&(n[11]),&(e[11]))
+		bindCstring((char*) (rec->srefWdbeKVendor.c_str()),&(l[9]),&(n[9]),&(e[9])),
+		bindCstring((char*) (rec->Srefrule.c_str()),&(l[10]),&(n[10]),&(e[10])),
+		bindCstring((char*) (rec->Comment.c_str()),&(l[11]),&(n[11]),&(e[11])),
+		bindUbigint(&rec->ref,&(l[12]),&(n[12]),&(e[12]))
 	};
 
 	if (mysql_stmt_bind_param(stmtUpdateRec, bind)) {
@@ -723,14 +733,14 @@ bool MyTblWdbeMModule::loadRecByCtr(
 			ubigint refWdbeMController
 			, WdbeMModule** rec
 		) {
-	return loadRecBySQL("SELECT ref, ixVBasetype, hkIxVTbl, hkUref, hkNum, supRefWdbeMModule, tplRefWdbeMModule, refWdbeMController, refWdbeMImbuf, sref, Srefrule, Comment FROM TblWdbeMModule WHERE refWdbeMController = " + to_string(refWdbeMController) + "", rec);
+	return loadRecBySQL("SELECT ref, ixVBasetype, hkIxVTbl, hkUref, hkNum, supRefWdbeMModule, tplRefWdbeMModule, refWdbeMController, refWdbeMImbuf, sref, srefWdbeKVendor, Srefrule, Comment FROM TblWdbeMModule WHERE refWdbeMController = " + to_string(refWdbeMController) + "", rec);
 };
 
 bool MyTblWdbeMModule::loadRecByImb(
 			ubigint refWdbeMImbuf
 			, WdbeMModule** rec
 		) {
-	return loadRecBySQL("SELECT ref, ixVBasetype, hkIxVTbl, hkUref, hkNum, supRefWdbeMModule, tplRefWdbeMModule, refWdbeMController, refWdbeMImbuf, sref, Srefrule, Comment FROM TblWdbeMModule WHERE refWdbeMImbuf = " + to_string(refWdbeMImbuf) + "", rec);
+	return loadRecBySQL("SELECT ref, ixVBasetype, hkIxVTbl, hkUref, hkNum, supRefWdbeMModule, tplRefWdbeMModule, refWdbeMController, refWdbeMImbuf, sref, srefWdbeKVendor, Srefrule, Comment FROM TblWdbeMModule WHERE refWdbeMImbuf = " + to_string(refWdbeMImbuf) + "", rec);
 };
 
 bool MyTblWdbeMModule::loadRefBySupSrf(
@@ -764,7 +774,7 @@ ubigint MyTblWdbeMModule::loadRstByHktHku(
 			, const bool append
 			, ListWdbeMModule& rst
 		) {
-	return loadRstBySQL("SELECT ref, ixVBasetype, hkIxVTbl, hkUref, hkNum, supRefWdbeMModule, tplRefWdbeMModule, refWdbeMController, refWdbeMImbuf, sref, Srefrule, Comment FROM TblWdbeMModule WHERE hkIxVTbl = " + to_string(hkIxVTbl) + " AND hkUref = " + to_string(hkUref) + " ORDER BY hkNum ASC", append, rst);
+	return loadRstBySQL("SELECT ref, ixVBasetype, hkIxVTbl, hkUref, hkNum, supRefWdbeMModule, tplRefWdbeMModule, refWdbeMController, refWdbeMImbuf, sref, srefWdbeKVendor, Srefrule, Comment FROM TblWdbeMModule WHERE hkIxVTbl = " + to_string(hkIxVTbl) + " AND hkUref = " + to_string(hkUref) + " ORDER BY hkNum ASC", append, rst);
 };
 
 ubigint MyTblWdbeMModule::loadRstBySup(
@@ -772,7 +782,7 @@ ubigint MyTblWdbeMModule::loadRstBySup(
 			, const bool append
 			, ListWdbeMModule& rst
 		) {
-	return loadRstBySQL("SELECT ref, ixVBasetype, hkIxVTbl, hkUref, hkNum, supRefWdbeMModule, tplRefWdbeMModule, refWdbeMController, refWdbeMImbuf, sref, Srefrule, Comment FROM TblWdbeMModule WHERE supRefWdbeMModule = " + to_string(supRefWdbeMModule) + " ORDER BY sref ASC", append, rst);
+	return loadRstBySQL("SELECT ref, ixVBasetype, hkIxVTbl, hkUref, hkNum, supRefWdbeMModule, tplRefWdbeMModule, refWdbeMController, refWdbeMImbuf, sref, srefWdbeKVendor, Srefrule, Comment FROM TblWdbeMModule WHERE supRefWdbeMModule = " + to_string(supRefWdbeMModule) + " ORDER BY sref ASC", append, rst);
 };
 
 bool MyTblWdbeMModule::loadSrfByRef(
@@ -807,19 +817,19 @@ PgTblWdbeMModule::~PgTblWdbeMModule() {
 };
 
 void PgTblWdbeMModule::initStatements() {
-	createStatement("TblWdbeMModule_insertRec", "INSERT INTO TblWdbeMModule (ixVBasetype, hkIxVTbl, hkUref, hkNum, supRefWdbeMModule, tplRefWdbeMModule, refWdbeMController, refWdbeMImbuf, sref, Srefrule, Comment) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11) RETURNING ref", 11);
-	createStatement("TblWdbeMModule_updateRec", "UPDATE TblWdbeMModule SET ixVBasetype = $1, hkIxVTbl = $2, hkUref = $3, hkNum = $4, supRefWdbeMModule = $5, tplRefWdbeMModule = $6, refWdbeMController = $7, refWdbeMImbuf = $8, sref = $9, Srefrule = $10, Comment = $11 WHERE ref = $12", 12);
+	createStatement("TblWdbeMModule_insertRec", "INSERT INTO TblWdbeMModule (ixVBasetype, hkIxVTbl, hkUref, hkNum, supRefWdbeMModule, tplRefWdbeMModule, refWdbeMController, refWdbeMImbuf, sref, srefWdbeKVendor, Srefrule, Comment) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12) RETURNING ref", 12);
+	createStatement("TblWdbeMModule_updateRec", "UPDATE TblWdbeMModule SET ixVBasetype = $1, hkIxVTbl = $2, hkUref = $3, hkNum = $4, supRefWdbeMModule = $5, tplRefWdbeMModule = $6, refWdbeMController = $7, refWdbeMImbuf = $8, sref = $9, srefWdbeKVendor = $10, Srefrule = $11, Comment = $12 WHERE ref = $13", 13);
 	createStatement("TblWdbeMModule_removeRecByRef", "DELETE FROM TblWdbeMModule WHERE ref = $1", 1);
 
-	createStatement("TblWdbeMModule_loadRecByRef", "SELECT ref, ixVBasetype, hkIxVTbl, hkUref, hkNum, supRefWdbeMModule, tplRefWdbeMModule, refWdbeMController, refWdbeMImbuf, sref, Srefrule, Comment FROM TblWdbeMModule WHERE ref = $1", 1);
+	createStatement("TblWdbeMModule_loadRecByRef", "SELECT ref, ixVBasetype, hkIxVTbl, hkUref, hkNum, supRefWdbeMModule, tplRefWdbeMModule, refWdbeMController, refWdbeMImbuf, sref, srefWdbeKVendor, Srefrule, Comment FROM TblWdbeMModule WHERE ref = $1", 1);
 	createStatement("TblWdbeMModule_confirmByRef", "SELECT ref FROM TblWdbeMModule WHERE ref = $1", 1);
-	createStatement("TblWdbeMModule_loadRecByCtr", "SELECT ref, ixVBasetype, hkIxVTbl, hkUref, hkNum, supRefWdbeMModule, tplRefWdbeMModule, refWdbeMController, refWdbeMImbuf, sref, Srefrule, Comment FROM TblWdbeMModule WHERE refWdbeMController = $1", 1);
-	createStatement("TblWdbeMModule_loadRecByImb", "SELECT ref, ixVBasetype, hkIxVTbl, hkUref, hkNum, supRefWdbeMModule, tplRefWdbeMModule, refWdbeMController, refWdbeMImbuf, sref, Srefrule, Comment FROM TblWdbeMModule WHERE refWdbeMImbuf = $1", 1);
+	createStatement("TblWdbeMModule_loadRecByCtr", "SELECT ref, ixVBasetype, hkIxVTbl, hkUref, hkNum, supRefWdbeMModule, tplRefWdbeMModule, refWdbeMController, refWdbeMImbuf, sref, srefWdbeKVendor, Srefrule, Comment FROM TblWdbeMModule WHERE refWdbeMController = $1", 1);
+	createStatement("TblWdbeMModule_loadRecByImb", "SELECT ref, ixVBasetype, hkIxVTbl, hkUref, hkNum, supRefWdbeMModule, tplRefWdbeMModule, refWdbeMController, refWdbeMImbuf, sref, srefWdbeKVendor, Srefrule, Comment FROM TblWdbeMModule WHERE refWdbeMImbuf = $1", 1);
 	createStatement("TblWdbeMModule_loadRefBySupSrf", "SELECT ref FROM TblWdbeMModule WHERE supRefWdbeMModule = $1 AND sref = $2", 2);
 	createStatement("TblWdbeMModule_loadRefsByHktHku", "SELECT ref FROM TblWdbeMModule WHERE hkIxVTbl = $1 AND hkUref = $2", 2);
 	createStatement("TblWdbeMModule_loadRefsBySup", "SELECT ref FROM TblWdbeMModule WHERE supRefWdbeMModule = $1 ORDER BY sref ASC", 1);
-	createStatement("TblWdbeMModule_loadRstByHktHku", "SELECT ref, ixVBasetype, hkIxVTbl, hkUref, hkNum, supRefWdbeMModule, tplRefWdbeMModule, refWdbeMController, refWdbeMImbuf, sref, Srefrule, Comment FROM TblWdbeMModule WHERE hkIxVTbl = $1 AND hkUref = $2 ORDER BY hkNum ASC", 2);
-	createStatement("TblWdbeMModule_loadRstBySup", "SELECT ref, ixVBasetype, hkIxVTbl, hkUref, hkNum, supRefWdbeMModule, tplRefWdbeMModule, refWdbeMController, refWdbeMImbuf, sref, Srefrule, Comment FROM TblWdbeMModule WHERE supRefWdbeMModule = $1 ORDER BY sref ASC", 1);
+	createStatement("TblWdbeMModule_loadRstByHktHku", "SELECT ref, ixVBasetype, hkIxVTbl, hkUref, hkNum, supRefWdbeMModule, tplRefWdbeMModule, refWdbeMController, refWdbeMImbuf, sref, srefWdbeKVendor, Srefrule, Comment FROM TblWdbeMModule WHERE hkIxVTbl = $1 AND hkUref = $2 ORDER BY hkNum ASC", 2);
+	createStatement("TblWdbeMModule_loadRstBySup", "SELECT ref, ixVBasetype, hkIxVTbl, hkUref, hkNum, supRefWdbeMModule, tplRefWdbeMModule, refWdbeMController, refWdbeMImbuf, sref, srefWdbeKVendor, Srefrule, Comment FROM TblWdbeMModule WHERE supRefWdbeMModule = $1 ORDER BY sref ASC", 1);
 	createStatement("TblWdbeMModule_loadSrfByRef", "SELECT sref FROM TblWdbeMModule WHERE ref = $1", 1);
 	createStatement("TblWdbeMModule_loadSupByRef", "SELECT supRefWdbeMModule FROM TblWdbeMModule WHERE ref = $1", 1);
 };
@@ -847,6 +857,7 @@ bool PgTblWdbeMModule::loadRec(
 			PQfnumber(res, "refwdbemcontroller"),
 			PQfnumber(res, "refwdbemimbuf"),
 			PQfnumber(res, "sref"),
+			PQfnumber(res, "srefwdbekvendor"),
 			PQfnumber(res, "srefrule"),
 			PQfnumber(res, "comment")
 		};
@@ -861,8 +872,9 @@ bool PgTblWdbeMModule::loadRec(
 		ptr = PQgetvalue(res, 0, fnum[7]); _rec->refWdbeMController = atoll(ptr);
 		ptr = PQgetvalue(res, 0, fnum[8]); _rec->refWdbeMImbuf = atoll(ptr);
 		ptr = PQgetvalue(res, 0, fnum[9]); _rec->sref.assign(ptr, PQgetlength(res, 0, fnum[9]));
-		ptr = PQgetvalue(res, 0, fnum[10]); _rec->Srefrule.assign(ptr, PQgetlength(res, 0, fnum[10]));
-		ptr = PQgetvalue(res, 0, fnum[11]); _rec->Comment.assign(ptr, PQgetlength(res, 0, fnum[11]));
+		ptr = PQgetvalue(res, 0, fnum[10]); _rec->srefWdbeKVendor.assign(ptr, PQgetlength(res, 0, fnum[10]));
+		ptr = PQgetvalue(res, 0, fnum[11]); _rec->Srefrule.assign(ptr, PQgetlength(res, 0, fnum[11]));
+		ptr = PQgetvalue(res, 0, fnum[12]); _rec->Comment.assign(ptr, PQgetlength(res, 0, fnum[12]));
 
 		retval = true;
 	};
@@ -899,6 +911,7 @@ ubigint PgTblWdbeMModule::loadRst(
 			PQfnumber(res, "refwdbemcontroller"),
 			PQfnumber(res, "refwdbemimbuf"),
 			PQfnumber(res, "sref"),
+			PQfnumber(res, "srefwdbekvendor"),
 			PQfnumber(res, "srefrule"),
 			PQfnumber(res, "comment")
 		};
@@ -916,8 +929,9 @@ ubigint PgTblWdbeMModule::loadRst(
 			ptr = PQgetvalue(res, numread, fnum[7]); rec->refWdbeMController = atoll(ptr);
 			ptr = PQgetvalue(res, numread, fnum[8]); rec->refWdbeMImbuf = atoll(ptr);
 			ptr = PQgetvalue(res, numread, fnum[9]); rec->sref.assign(ptr, PQgetlength(res, numread, fnum[9]));
-			ptr = PQgetvalue(res, numread, fnum[10]); rec->Srefrule.assign(ptr, PQgetlength(res, numread, fnum[10]));
-			ptr = PQgetvalue(res, numread, fnum[11]); rec->Comment.assign(ptr, PQgetlength(res, numread, fnum[11]));
+			ptr = PQgetvalue(res, numread, fnum[10]); rec->srefWdbeKVendor.assign(ptr, PQgetlength(res, numread, fnum[10]));
+			ptr = PQgetvalue(res, numread, fnum[11]); rec->Srefrule.assign(ptr, PQgetlength(res, numread, fnum[11]));
+			ptr = PQgetvalue(res, numread, fnum[12]); rec->Comment.assign(ptr, PQgetlength(res, numread, fnum[12]));
 
 			rst.nodes.push_back(rec);
 
@@ -1029,6 +1043,7 @@ ubigint PgTblWdbeMModule::insertRec(
 		(char*) &_refWdbeMController,
 		(char*) &_refWdbeMImbuf,
 		rec->sref.c_str(),
+		rec->srefWdbeKVendor.c_str(),
 		rec->Srefrule.c_str(),
 		rec->Comment.c_str()
 	};
@@ -1043,11 +1058,12 @@ ubigint PgTblWdbeMModule::insertRec(
 		sizeof(ubigint),
 		0,
 		0,
+		0,
 		0
 	};
-	const int f[] = {1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0};
+	const int f[] = {1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0};
 
-	res = PQexecPrepared(dbs, "TblWdbeMModule_insertRec", 11, vals, l, f, 0);
+	res = PQexecPrepared(dbs, "TblWdbeMModule_insertRec", 12, vals, l, f, 0);
 
 	if (PQresultStatus(res) != PGRES_TUPLES_OK) {
 		string dbms = "PgTblWdbeMModule::insertRec() / " + string(PQerrorMessage(dbs));
@@ -1095,6 +1111,7 @@ void PgTblWdbeMModule::updateRec(
 		(char*) &_refWdbeMController,
 		(char*) &_refWdbeMImbuf,
 		rec->sref.c_str(),
+		rec->srefWdbeKVendor.c_str(),
 		rec->Srefrule.c_str(),
 		rec->Comment.c_str(),
 		(char*) &_ref
@@ -1111,11 +1128,12 @@ void PgTblWdbeMModule::updateRec(
 		0,
 		0,
 		0,
+		0,
 		sizeof(ubigint)
 	};
-	const int f[] = {1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 1};
+	const int f[] = {1, 1, 1, 1, 1, 1, 1, 1, 0, 0, 0, 0, 1};
 
-	res = PQexecPrepared(dbs, "TblWdbeMModule_updateRec", 12, vals, l, f, 0);
+	res = PQexecPrepared(dbs, "TblWdbeMModule_updateRec", 13, vals, l, f, 0);
 
 	if (PQresultStatus(res) != PGRES_COMMAND_OK) {
 		string dbms = "PgTblWdbeMModule::updateRec() / " + string(PQerrorMessage(dbs));

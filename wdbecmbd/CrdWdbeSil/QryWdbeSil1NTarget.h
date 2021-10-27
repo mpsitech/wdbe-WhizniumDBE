@@ -127,8 +127,8 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeTrgMod_untEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 	bool handleCallWdbeStubChgFromSelf(DbsWdbe* dbswdbe);
+	bool handleCallWdbeTrgMod_untEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 
 };
 

@@ -740,8 +740,9 @@ uint JobWdbeIexDcd::enterSgeImport(
 
 					//var->refWdbeCVariable: PREVIMP
 					//if (var->refWdbeCVariable == 0) throw SbeException(SbeException::IEX_IREF, {{"iref",to_string(var->irefRefWdbeCVariable)}, {"iel","irefRefWdbeCVariable"}, {"lineno",to_string(var->lineno)}});
-					var->prcRefWdbeMProcess = prc->ref;
-					var->prcNum = num2++;
+					var->refIxVTbl = VecWdbeVMVariableRefTbl::PRC;
+					var->refUref = prc->ref;
+					var->refNum = num2++;
 					//var->sref: TBL
 					//var->Const: TBL
 					//var->Falling: TBL
@@ -767,8 +768,9 @@ uint JobWdbeIexDcd::enterSgeImport(
 				if (sig->ixVBasetype == 0) throw SbeException(SbeException::IEX_VSREF, {{"vsref",sig->srefIxVBasetype}, {"iel","srefIxVBasetype"}, {"lineno",to_string(sig->lineno)}});
 				//sig->refWdbeCSignal: PREVIMP
 				//if (sig->refWdbeCSignal == 0) throw SbeException(SbeException::IEX_IREF, {{"iref",to_string(sig->irefRefWdbeCSignal)}, {"iel","irefRefWdbeCSignal"}, {"lineno",to_string(sig->lineno)}});
-				sig->mdlRefWdbeMModule = mdl->ref;
-				sig->mdlNum = num1++;
+				sig->refIxVTbl = VecWdbeVMSignalRefTbl::MDL;
+				sig->refUref = mdl->ref;
+				sig->refNum = num1++;
 				sig->mgeIxVTbl = VecWdbeVMSignalMgeTbl::getIx(sig->srefMgeIxVTbl);
 				if (sig->mgeIxVTbl == 0) throw SbeException(SbeException::IEX_VSREF, {{"vsref",sig->srefMgeIxVTbl}, {"iel","srefMgeIxVTbl"}, {"lineno",to_string(sig->lineno)}});
 				//sig->mgeUref: CUSTSQLPP
@@ -1266,7 +1268,7 @@ uint JobWdbeIexDcd::enterSgeCollect(
 			};
 
 			if (getIxWdbeVIop(icsWdbeVIop, VecVIme::IMEIMVARIABLE, ixWdbeVIop)) {
-				dbswdbe->tblwdbemvariable->loadRefsByPrc(prc->ref, false, refs);
+				dbswdbe->tblwdbemvariable->loadRefsByRetReu(VecWdbeVMVariableRefTbl::PRC, prc->ref, false, refs);
 				for (unsigned int i = 0; i < refs.size(); i++) prc->imeimvariable.nodes.push_back(new ImeitemIMVariable(dbswdbe, refs[i]));
 			};
 
@@ -1280,7 +1282,7 @@ uint JobWdbeIexDcd::enterSgeCollect(
 		};
 
 		if (getIxWdbeVIop(icsWdbeVIop, VecVIme::IMEIMSIGNAL, ixWdbeVIop)) {
-			dbswdbe->tblwdbemsignal->loadRefsByMdl(mdl->ref, false, refs);
+			dbswdbe->tblwdbemsignal->loadRefsByRetReu(VecWdbeVMSignalRefTbl::MDL, mdl->ref, false, refs);
 			for (unsigned int i = 0; i < refs.size(); i++) mdl->imeimsignal.nodes.push_back(new ImeitemIMSignal(dbswdbe, refs[i]));
 		};
 

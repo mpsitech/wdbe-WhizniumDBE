@@ -19,16 +19,18 @@ public class QryWdbeVarList {
 		*/
 	public static class VecVOrd {
 
-		public static final int PRC = 1;
-		public static final int SRF = 2;
+		public static final int SRF = 1;
+		public static final int RET = 2;
+		public static final int REU = 3;
 
 		public static int getIx(
 					String sref
 				) {
 			String s = sref.toLowerCase();
 
-			if (s.equals("prc")) return PRC;
 			if (s.equals("srf")) return SRF;
+			if (s.equals("ret")) return RET;
+			if (s.equals("reu")) return REU;
 
 			return 0;
 		};
@@ -36,8 +38,9 @@ public class QryWdbeVarList {
 		public static String getSref(
 					int ix
 				) {
-			if (ix == PRC) return("prc");
 			if (ix == SRF) return("srf");
+			if (ix == RET) return("ret");
+			if (ix == REU) return("reu");
 
 			return "";
 		};

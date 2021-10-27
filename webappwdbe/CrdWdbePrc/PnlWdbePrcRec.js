@@ -1,7 +1,8 @@
 function updateScrJrefs() {
 	scrJrefDetail = retrieveSi(srcdoc, "StatShrWdbePrcRec", "scrJrefDetail");
 	scrJrefKHdltype = retrieveSi(srcdoc, "StatShrWdbePrcRec", "scrJrefKHdltype");
-	scrJrefPrc1NVariable = retrieveSi(srcdoc, "StatShrWdbePrcRec", "scrJrefPrc1NVariable");
+	scrJrefRef1NSensitivity = retrieveSi(srcdoc, "StatShrWdbePrcRec", "scrJrefRef1NSensitivity");
+	scrJrefRef1NVariable = retrieveSi(srcdoc, "StatShrWdbePrcRec", "scrJrefRef1NVariable");
 	scrJrefMge1NSignal = retrieveSi(srcdoc, "StatShrWdbePrcRec", "scrJrefMge1NSignal");
 	scrJrefFsmFsm1NFsmstate = retrieveSi(srcdoc, "StatShrWdbePrcRec", "scrJrefFsmFsm1NFsmstate");
 };
@@ -9,7 +10,8 @@ function updateScrJrefs() {
 function resetInitdones() {
 	setSi(srcdoc, "StatAppWdbePrcRec", "initdoneDetail", "false");
 	setSi(srcdoc, "StatAppWdbePrcRec", "initdoneKHdltype", "false");
-	setSi(srcdoc, "StatAppWdbePrcRec", "initdonePrc1NVariable", "false");
+	setSi(srcdoc, "StatAppWdbePrcRec", "initdoneRef1NSensitivity", "false");
+	setSi(srcdoc, "StatAppWdbePrcRec", "initdoneRef1NVariable", "false");
 	setSi(srcdoc, "StatAppWdbePrcRec", "initdoneMge1NSignal", "false");
 	setSi(srcdoc, "StatAppWdbePrcRec", "initdoneFsmFsm1NFsmstate", "false");
 };
@@ -17,7 +19,8 @@ function resetInitdones() {
 function resetHeights() {
 	heightDetail = 30;
 	heightKHdltype = 30;
-	heightPrc1NVariable = 30;
+	heightRef1NSensitivity = 30;
+	heightRef1NVariable = 30;
 	heightMge1NSignal = 30;
 	heightFsmFsm1NFsmstate = 30;
 };
@@ -39,7 +42,8 @@ function checkInitdone() {
 
 	var initdoneDetail = (retrieveSi(srcdoc, "StatAppWdbePrcRec", "initdoneDetail") == "true");
 	var initdoneKHdltype = (retrieveSi(srcdoc, "StatAppWdbePrcRec", "initdoneKHdltype") == "true");
-	var initdonePrc1NVariable = (retrieveSi(srcdoc, "StatAppWdbePrcRec", "initdonePrc1NVariable") == "true");
+	var initdoneRef1NSensitivity = (retrieveSi(srcdoc, "StatAppWdbePrcRec", "initdoneRef1NSensitivity") == "true");
+	var initdoneRef1NVariable = (retrieveSi(srcdoc, "StatAppWdbePrcRec", "initdoneRef1NVariable") == "true");
 	var initdoneMge1NSignal = (retrieveSi(srcdoc, "StatAppWdbePrcRec", "initdoneMge1NSignal") == "true");
 	var initdoneFsmFsm1NFsmstate = (retrieveSi(srcdoc, "StatAppWdbePrcRec", "initdoneFsmFsm1NFsmstate") == "true");
 
@@ -47,8 +51,10 @@ function checkInitdone() {
 		lhsdoc.getElementById("Detail").src = "./PnlWdbePrcDetail.html?scrJref=" + scrJrefDetail;
 	} else if (!initdoneKHdltype) {
 		lhsdoc.getElementById("KHdltype").src = "./PnlWdbePrcKHdltype.html?scrJref=" + scrJrefKHdltype;
-	} else if (!initdonePrc1NVariable) {
-		rhsdoc.getElementById("Prc1NVariable").src = "./PnlWdbePrcPrc1NVariable.html?scrJref=" + scrJrefPrc1NVariable;
+	} else if (!initdoneRef1NSensitivity) {
+		rhsdoc.getElementById("Ref1NSensitivity").src = "./PnlWdbePrcRef1NSensitivity.html?scrJref=" + scrJrefRef1NSensitivity;
+	} else if (!initdoneRef1NVariable) {
+		rhsdoc.getElementById("Ref1NVariable").src = "./PnlWdbePrcRef1NVariable.html?scrJref=" + scrJrefRef1NVariable;
 	} else if (!initdoneMge1NSignal) {
 		rhsdoc.getElementById("Mge1NSignal").src = "./PnlWdbePrcMge1NSignal.html?scrJref=" + scrJrefMge1NSignal;
 	} else if (!initdoneFsmFsm1NFsmstate) {
@@ -93,7 +99,8 @@ function setPnlAvail(short, avail) {
 		else if (short == "Rec") heightRec = height;
 		else if (short == "Detail") heightDetail = height;
 		else if (short == "KHdltype") heightKHdltype = height;
-		else if (short == "Prc1NVariable") heightPrc1NVariable = height;
+		else if (short == "Ref1NSensitivity") heightRef1NSensitivity = height;
+		else if (short == "Ref1NVariable") heightRef1NVariable = height;
 		else if (short == "Mge1NSignal") heightMge1NSignal = height;
 		else if (short == "FsmFsm1NFsmstate") heightFsmFsm1NFsmstate = height;
 	};
@@ -117,10 +124,10 @@ function minimize() {
 function regularize() {
 	resetHeights();
 
-	getCrdwnd().changeHeight("Rec", 180);
-	doc.getElementById("tdSide").setAttribute("height", "180");
-	doc.getElementById("Rec_side").setAttribute("height", "180");
-	doc.getElementById("Rec_cont").setAttribute("height", "180");
+	getCrdwnd().changeHeight("Rec", 223);
+	doc.getElementById("tdSide").setAttribute("height", "223");
+	doc.getElementById("Rec_side").setAttribute("height", "223");
+	doc.getElementById("Rec_cont").setAttribute("height", "223");
 
 	doc.getElementById("Rec_side").src = "./PnlWdbePrcRec_bside.html";
 	doc.getElementById("Rec_cont").src = "./PnlWdbePrcRec_b.html";
@@ -140,7 +147,8 @@ function changeHeight(pnlshort, height, update) {
 	else if (pnlshort == "Rec") heightRec = height;
 	else if (pnlshort == "Detail") heightDetail = height;
 	else if (pnlshort == "KHdltype") heightKHdltype = height;
-	else if (pnlshort == "Prc1NVariable") heightPrc1NVariable = height;
+	else if (pnlshort == "Ref1NSensitivity") heightRef1NSensitivity = height;
+	else if (pnlshort == "Ref1NVariable") heightRef1NVariable = height;
 	else if (pnlshort == "Mge1NSignal") heightMge1NSignal = height;
 	else if (pnlshort == "FsmFsm1NFsmstate") heightFsmFsm1NFsmstate = height;
 
@@ -151,7 +159,7 @@ function updateHeight() {
 	var heightLhs, heightRhs, heightGt;
 
 	heightLhs = heightDetail+13 + heightKHdltype+13 + 5;
-	heightRhs = heightPrc1NVariable+13 + heightMge1NSignal+13 + heightFsmFsm1NFsmstate+13 + 5;
+	heightRhs = heightRef1NSensitivity+13 + heightRef1NVariable+13 + heightMge1NSignal+13 + heightFsmFsm1NFsmstate+13 + 5;
 
 	if (heightLhs > heightRhs) {
 		lhsdoc.getElementById("tdFill").setAttribute("height", "5");
@@ -350,8 +358,10 @@ function handleDpchEng(dom, dpch) {
 				if (getInitdone("Detail")) lhsdoc.getElementById("Detail").contentWindow.handleDpchEng(dom, dpch);
 			} else if (_scrJref == scrJrefKHdltype) {
 				if (getInitdone("KHdltype")) lhsdoc.getElementById("KHdltype").contentWindow.handleDpchEng(dom, dpch);
-			} else if (_scrJref == scrJrefPrc1NVariable) {
-				if (getInitdone("Prc1NVariable")) rhsdoc.getElementById("Prc1NVariable").contentWindow.handleDpchEng(dom, dpch);
+			} else if (_scrJref == scrJrefRef1NSensitivity) {
+				if (getInitdone("Ref1NSensitivity")) rhsdoc.getElementById("Ref1NSensitivity").contentWindow.handleDpchEng(dom, dpch);
+			} else if (_scrJref == scrJrefRef1NVariable) {
+				if (getInitdone("Ref1NVariable")) rhsdoc.getElementById("Ref1NVariable").contentWindow.handleDpchEng(dom, dpch);
 			} else if (_scrJref == scrJrefMge1NSignal) {
 				if (getInitdone("Mge1NSignal")) rhsdoc.getElementById("Mge1NSignal").contentWindow.handleDpchEng(dom, dpch);
 			} else if (_scrJref == scrJrefFsmFsm1NFsmstate) {

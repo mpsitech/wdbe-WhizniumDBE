@@ -54,7 +54,8 @@ function initBD(bNotD) {
 	initCpt(contcontdoc, "CptSrf", retrieveTi(srcdoc, "TagWdbeSigDetail", "CptSrf"));
 	initCpt(contcontdoc, "CptTyp", retrieveTi(srcdoc, "TagWdbeSigDetail", "CptTyp"));
 	refreshPup(contcontdoc, srcdoc, "PupTyp", "", "FeedFPupTyp", retrieveCi(srcdoc, "ContIacWdbeSigDetail", "numFPupTyp"), retrieveSi(srcdoc, "StatShrWdbeSigDetail", "PupTypActive"), false);
-	initCpt(contcontdoc, "CptMdl", retrieveTi(srcdoc, "TagWdbeSigDetail", "CptMdl"));
+	initCpt(contcontdoc, "CptReu", retrieveTi(srcdoc, "TagWdbeSigDetail", "CptReu"));
+	refreshPup(contcontdoc, srcdoc, "PupRet", "xs", "FeedFPupRet", retrieveCi(srcdoc, "ContIacWdbeSigDetail", "numFPupRet"), true, false);
 	initCpt(contcontdoc, "CptMgu", retrieveTi(srcdoc, "TagWdbeSigDetail", "CptMgu"));
 	refreshPup(contcontdoc, srcdoc, "PupMgt", "xs", "FeedFPupMgt", retrieveCi(srcdoc, "ContIacWdbeSigDetail", "numFPupMgt"), true, false);
 	initCpt(contcontdoc, "CptVec", retrieveTi(srcdoc, "TagWdbeSigDetail", "CptVec"));
@@ -105,9 +106,9 @@ function refreshBD(bNotD) {
 	var ButCluClusterAvail = (retrieveSi(srcdoc, "StatShrWdbeSigDetail", "ButCluClusterAvail") == "true");
 	var ButCluUnclusterAvail = (retrieveSi(srcdoc, "StatShrWdbeSigDetail", "ButCluUnclusterAvail") == "true");
 
-	var TxtMdlActive = (retrieveSi(srcdoc, "StatShrWdbeSigDetail", "TxtMdlActive") == "true");
-	var ButMdlViewAvail = (retrieveSi(srcdoc, "StatShrWdbeSigDetail", "ButMdlViewAvail") == "true");
-	var ButMdlViewActive = (retrieveSi(srcdoc, "StatShrWdbeSigDetail", "ButMdlViewActive") == "true");
+	var TxtReuActive = (retrieveSi(srcdoc, "StatShrWdbeSigDetail", "TxtReuActive") == "true");
+	var ButReuViewAvail = (retrieveSi(srcdoc, "StatShrWdbeSigDetail", "ButReuViewAvail") == "true");
+	var ButReuViewActive = (retrieveSi(srcdoc, "StatShrWdbeSigDetail", "ButReuViewActive") == "true");
 
 	var TxtMguActive = (retrieveSi(srcdoc, "StatShrWdbeSigDetail", "TxtMguActive") == "true");
 	var ButMguViewAvail = (retrieveSi(srcdoc, "StatShrWdbeSigDetail", "ButMguViewAvail") == "true");
@@ -209,22 +210,23 @@ function refreshBD(bNotD) {
 
 	if (ButCluViewAvail) refreshButicon(contcontdoc, "ButCluView", "icon/view", ButCluViewActive, false);
 
-	if ((ButMdlViewAvail == !contcontdoc.getElementById("ButMdlView"))) {
-		mytd = contcontdoc.getElementById("rdynMdl");
+	if ((ButReuViewAvail == !contcontdoc.getElementById("ButReuView"))) {
+		mytd = contcontdoc.getElementById("rdynReu");
 		clearElem(mytd);
 
 		first = true;
 
-		if (ButMdlViewAvail) {
+		if (ButReuViewAvail) {
 			if (first) first = false;
 			else mytd.appendChild(contcontdoc.createTextNode("\u00a0"));
-			mytd.appendChild(makeImgBut(contcontdoc, "ButMdlView", "icon/view"));
+			mytd.appendChild(makeImgBut(contcontdoc, "ButReuView", "icon/view"));
 		};
 	};
 
-	refreshTxt(contcontdoc, "TxtMdl", retrieveCi(srcdoc, "ContInfWdbeSigDetail", "TxtMdl"));
+	refreshTxt(contcontdoc, "TxtReu", retrieveCi(srcdoc, "ContInfWdbeSigDetail", "TxtReu"));
+	contcontdoc.getElementById("PupRet").value = retrieveCi(srcdoc, "ContIacWdbeSigDetail", "numFPupRet");
 
-	if (ButMdlViewAvail) refreshButicon(contcontdoc, "ButMdlView", "icon/view", ButMdlViewActive, false);
+	if (ButReuViewAvail) refreshButicon(contcontdoc, "ButReuView", "icon/view", ButReuViewActive, false);
 
 	if ((ButMguViewAvail == !contcontdoc.getElementById("ButMguView"))) {
 		mytd = contcontdoc.getElementById("rdynMgu");
@@ -601,6 +603,7 @@ function mergeDpchEngData(dom) {
 	if (updateSrcblock(dom, "DpchEngWdbeSigDetailData", "FeedFLstClu", srcdoc)) mask.push("feedFLstClu");
 	if (updateSrcblock(dom, "DpchEngWdbeSigDetailData", "FeedFPupHty", srcdoc)) mask.push("feedFPupHty");
 	if (updateSrcblock(dom, "DpchEngWdbeSigDetailData", "FeedFPupMgt", srcdoc)) mask.push("feedFPupMgt");
+	if (updateSrcblock(dom, "DpchEngWdbeSigDetailData", "FeedFPupRet", srcdoc)) mask.push("feedFPupRet");
 	if (updateSrcblock(dom, "DpchEngWdbeSigDetailData", "FeedFPupTyp", srcdoc)) mask.push("feedFPupTyp");
 	if (updateSrcblock(dom, "DpchEngWdbeSigDetailData", "StatAppWdbeSigDetail", srcdoc)) mask.push("statapp");
 	if (updateSrcblock(dom, "DpchEngWdbeSigDetailData", "StatShrWdbeSigDetail", srcdoc)) mask.push("statshr");

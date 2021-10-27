@@ -20,8 +20,8 @@ uint QryWdbeMchList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "sup") return SUP;
 	if (s == "srf") return SRF;
+	if (s == "sup") return SUP;
 
 	return(0);
 };
@@ -29,8 +29,8 @@ uint QryWdbeMchList::VecVOrd::getIx(
 string QryWdbeMchList::VecVOrd::getSref(
 			const uint ix
 		) {
-	if (ix == SUP) return("sup");
 	if (ix == SRF) return("srf");
+	if (ix == SUP) return("sup");
 
 	return("");
 };

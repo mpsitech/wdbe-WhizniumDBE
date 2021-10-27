@@ -36,7 +36,6 @@ namespace PnlWdbePphDetail {
 	public:
 		static const Sbecore::uint BUTSAVECLICK = 1;
 		static const Sbecore::uint BUTUNTVIEWCLICK = 2;
-		static const Sbecore::uint BUTMDLVIEWCLICK = 3;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);
@@ -71,15 +70,13 @@ namespace PnlWdbePphDetail {
 	public:
 		static const Sbecore::uint TXTSRF = 1;
 		static const Sbecore::uint TXTUNT = 2;
-		static const Sbecore::uint TXTMDL = 3;
 
 	public:
-		ContInf(const std::string& TxtSrf = "", const std::string& TxtUnt = "", const std::string& TxtMdl = "");
+		ContInf(const std::string& TxtSrf = "", const std::string& TxtUnt = "");
 
 	public:
 		std::string TxtSrf;
 		std::string TxtUnt;
-		std::string TxtMdl;
 
 	public:
 		bool readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
@@ -119,13 +116,10 @@ namespace PnlWdbePphDetail {
 		static const Sbecore::uint TXTUNTACTIVE = 4;
 		static const Sbecore::uint BUTUNTVIEWAVAIL = 5;
 		static const Sbecore::uint BUTUNTVIEWACTIVE = 6;
-		static const Sbecore::uint TXTMDLACTIVE = 7;
-		static const Sbecore::uint BUTMDLVIEWAVAIL = 8;
-		static const Sbecore::uint BUTMDLVIEWACTIVE = 9;
-		static const Sbecore::uint TXFCMTACTIVE = 10;
+		static const Sbecore::uint TXFCMTACTIVE = 7;
 
 	public:
-		StatShr(const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxtSrfActive = true, const bool TxtUntActive = true, const bool ButUntViewAvail = true, const bool ButUntViewActive = true, const bool TxtMdlActive = true, const bool ButMdlViewAvail = true, const bool ButMdlViewActive = true, const bool TxfCmtActive = true);
+		StatShr(const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxtSrfActive = true, const bool TxtUntActive = true, const bool ButUntViewAvail = true, const bool ButUntViewActive = true, const bool TxfCmtActive = true);
 
 	public:
 		bool ButSaveAvail;
@@ -134,9 +128,6 @@ namespace PnlWdbePphDetail {
 		bool TxtUntActive;
 		bool ButUntViewAvail;
 		bool ButUntViewActive;
-		bool TxtMdlActive;
-		bool ButMdlViewAvail;
-		bool ButMdlViewActive;
 		bool TxfCmtActive;
 
 	public:
@@ -154,17 +145,15 @@ namespace PnlWdbePphDetail {
 		static const Sbecore::uint CPT = 1;
 		static const Sbecore::uint CPTSRF = 2;
 		static const Sbecore::uint CPTUNT = 3;
-		static const Sbecore::uint CPTMDL = 4;
-		static const Sbecore::uint CPTCMT = 5;
+		static const Sbecore::uint CPTCMT = 4;
 
 	public:
-		Tag(const std::string& Cpt = "", const std::string& CptSrf = "", const std::string& CptUnt = "", const std::string& CptMdl = "", const std::string& CptCmt = "");
+		Tag(const std::string& Cpt = "", const std::string& CptSrf = "", const std::string& CptUnt = "", const std::string& CptCmt = "");
 
 	public:
 		std::string Cpt;
 		std::string CptSrf;
 		std::string CptUnt;
-		std::string CptMdl;
 		std::string CptCmt;
 
 	public:

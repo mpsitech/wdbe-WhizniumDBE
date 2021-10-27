@@ -25,8 +25,6 @@ WdbeQPphList::WdbeQPphList(
 			, const string sref
 			, const ubigint refWdbeMUnit
 			, const string stubRefWdbeMUnit
-			, const ubigint refWdbeMModule
-			, const string stubRefWdbeMModule
 		) {
 	this->qref = qref;
 	this->jref = jref;
@@ -35,8 +33,6 @@ WdbeQPphList::WdbeQPphList(
 	this->sref = sref;
 	this->refWdbeMUnit = refWdbeMUnit;
 	this->stubRefWdbeMUnit = stubRefWdbeMUnit;
-	this->refWdbeMModule = refWdbeMModule;
-	this->stubRefWdbeMModule = stubRefWdbeMModule;
 };
 
 void WdbeQPphList::writeJSON(
@@ -50,11 +46,9 @@ void WdbeQPphList::writeJSON(
 	if (shorttags) {
 		me["srf"] = sref;
 		me["unt"] = stubRefWdbeMUnit;
-		me["mdl"] = stubRefWdbeMModule;
 	} else {
 		me["sref"] = sref;
 		me["stubRefWdbeMUnit"] = stubRefWdbeMUnit;
-		me["stubRefWdbeMModule"] = stubRefWdbeMModule;
 	};
 };
 
@@ -71,11 +65,9 @@ void WdbeQPphList::writeXML(
 	if (shorttags) {
 		writeString(wr, "srf", sref);
 		writeString(wr, "unt", stubRefWdbeMUnit);
-		writeString(wr, "mdl", stubRefWdbeMModule);
 	} else {
 		writeString(wr, "sref", sref);
 		writeString(wr, "stubRefWdbeMUnit", stubRefWdbeMUnit);
-		writeString(wr, "stubRefWdbeMModule", stubRefWdbeMModule);
 	};
 	xmlTextWriterEndElement(wr);
 };
@@ -191,13 +183,11 @@ ubigint TblWdbeQPphList::insertNewRec(
 			, const string sref
 			, const ubigint refWdbeMUnit
 			, const string stubRefWdbeMUnit
-			, const ubigint refWdbeMModule
-			, const string stubRefWdbeMModule
 		) {
 	ubigint retval = 0;
 	WdbeQPphList* _rec = NULL;
 
-	_rec = new WdbeQPphList(0, jref, jnum, ref, sref, refWdbeMUnit, stubRefWdbeMUnit, refWdbeMModule, stubRefWdbeMModule);
+	_rec = new WdbeQPphList(0, jref, jnum, ref, sref, refWdbeMUnit, stubRefWdbeMUnit);
 	insertRec(_rec);
 
 	retval = _rec->qref;
@@ -217,13 +207,11 @@ ubigint TblWdbeQPphList::appendNewRecToRst(
 			, const string sref
 			, const ubigint refWdbeMUnit
 			, const string stubRefWdbeMUnit
-			, const ubigint refWdbeMModule
-			, const string stubRefWdbeMModule
 		) {
 	ubigint retval = 0;
 	WdbeQPphList* _rec = NULL;
 
-	retval = insertNewRec(&_rec, jref, jnum, ref, sref, refWdbeMUnit, stubRefWdbeMUnit, refWdbeMModule, stubRefWdbeMModule);
+	retval = insertNewRec(&_rec, jref, jnum, ref, sref, refWdbeMUnit, stubRefWdbeMUnit);
 	rst.nodes.push_back(_rec);
 
 	if (rec != NULL) *rec = _rec;
@@ -294,8 +282,8 @@ MyTblWdbeQPphList::~MyTblWdbeQPphList() {
 };
 
 void MyTblWdbeQPphList::initStatements() {
-	stmtInsertRec = createStatement("INSERT INTO TblWdbeQPphList (jref, jnum, ref, sref, refWdbeMUnit, refWdbeMModule) VALUES (?,?,?,?,?,?)", false);
-	stmtUpdateRec = createStatement("UPDATE TblWdbeQPphList SET jref = ?, jnum = ?, ref = ?, sref = ?, refWdbeMUnit = ?, refWdbeMModule = ? WHERE qref = ?", false);
+	stmtInsertRec = createStatement("INSERT INTO TblWdbeQPphList (jref, jnum, ref, sref, refWdbeMUnit) VALUES (?,?,?,?,?)", false);
+	stmtUpdateRec = createStatement("UPDATE TblWdbeQPphList SET jref = ?, jnum = ?, ref = ?, sref = ?, refWdbeMUnit = ? WHERE qref = ?", false);
 	stmtRemoveRecByQref = createStatement("DELETE FROM TblWdbeQPphList WHERE qref = ?", false);
 	stmtRemoveRstByJref = createStatement("DELETE FROM TblWdbeQPphList WHERE jref = ?", false);
 };
@@ -332,7 +320,6 @@ bool MyTblWdbeQPphList::loadRecBySQL(
 		if (dbrow[3]) _rec->ref = atoll((char*) dbrow[3]); else _rec->ref = 0;
 		if (dbrow[4]) _rec->sref.assign(dbrow[4], dblengths[4]); else _rec->sref = "";
 		if (dbrow[5]) _rec->refWdbeMUnit = atoll((char*) dbrow[5]); else _rec->refWdbeMUnit = 0;
-		if (dbrow[6]) _rec->refWdbeMModule = atoll((char*) dbrow[6]); else _rec->refWdbeMModule = 0;
 
 		retval = true;
 	};
@@ -381,7 +368,6 @@ ubigint MyTblWdbeQPphList::loadRstBySQL(
 			if (dbrow[3]) rec->ref = atoll((char*) dbrow[3]); else rec->ref = 0;
 			if (dbrow[4]) rec->sref.assign(dbrow[4], dblengths[4]); else rec->sref = "";
 			if (dbrow[5]) rec->refWdbeMUnit = atoll((char*) dbrow[5]); else rec->refWdbeMUnit = 0;
-			if (dbrow[6]) rec->refWdbeMModule = atoll((char*) dbrow[6]); else rec->refWdbeMModule = 0;
 			rst.nodes.push_back(rec);
 
 			numread++;
@@ -396,7 +382,7 @@ ubigint MyTblWdbeQPphList::loadRstBySQL(
 ubigint MyTblWdbeQPphList::insertRec(
 			WdbeQPphList* rec
 		) {
-	unsigned long l[6]; my_bool n[6]; my_bool e[6];
+	unsigned long l[5]; my_bool n[5]; my_bool e[5];
 
 	l[3] = rec->sref.length();
 
@@ -405,8 +391,7 @@ ubigint MyTblWdbeQPphList::insertRec(
 		bindUint(&rec->jnum,&(l[1]),&(n[1]),&(e[1])),
 		bindUbigint(&rec->ref,&(l[2]),&(n[2]),&(e[2])),
 		bindCstring((char*) (rec->sref.c_str()),&(l[3]),&(n[3]),&(e[3])),
-		bindUbigint(&rec->refWdbeMUnit,&(l[4]),&(n[4]),&(e[4])),
-		bindUbigint(&rec->refWdbeMModule,&(l[5]),&(n[5]),&(e[5]))
+		bindUbigint(&rec->refWdbeMUnit,&(l[4]),&(n[4]),&(e[4]))
 	};
 
 	if (mysql_stmt_bind_param(stmtInsertRec, bind)) {
@@ -431,7 +416,7 @@ void MyTblWdbeQPphList::insertRst(
 void MyTblWdbeQPphList::updateRec(
 			WdbeQPphList* rec
 		) {
-	unsigned long l[7]; my_bool n[7]; my_bool e[7];
+	unsigned long l[6]; my_bool n[6]; my_bool e[6];
 
 	l[3] = rec->sref.length();
 
@@ -441,8 +426,7 @@ void MyTblWdbeQPphList::updateRec(
 		bindUbigint(&rec->ref,&(l[2]),&(n[2]),&(e[2])),
 		bindCstring((char*) (rec->sref.c_str()),&(l[3]),&(n[3]),&(e[3])),
 		bindUbigint(&rec->refWdbeMUnit,&(l[4]),&(n[4]),&(e[4])),
-		bindUbigint(&rec->refWdbeMModule,&(l[5]),&(n[5]),&(e[5])),
-		bindUbigint(&rec->qref,&(l[6]),&(n[6]),&(e[6]))
+		bindUbigint(&rec->qref,&(l[5]),&(n[5]),&(e[5]))
 	};
 
 	if (mysql_stmt_bind_param(stmtUpdateRec, bind)) {
@@ -531,13 +515,13 @@ PgTblWdbeQPphList::~PgTblWdbeQPphList() {
 };
 
 void PgTblWdbeQPphList::initStatements() {
-	createStatement("TblWdbeQPphList_insertRec", "INSERT INTO TblWdbeQPphList (jref, jnum, ref, sref, refWdbeMUnit, refWdbeMModule) VALUES ($1,$2,$3,$4,$5,$6) RETURNING qref", 6);
-	createStatement("TblWdbeQPphList_updateRec", "UPDATE TblWdbeQPphList SET jref = $1, jnum = $2, ref = $3, sref = $4, refWdbeMUnit = $5, refWdbeMModule = $6 WHERE qref = $7", 7);
+	createStatement("TblWdbeQPphList_insertRec", "INSERT INTO TblWdbeQPphList (jref, jnum, ref, sref, refWdbeMUnit) VALUES ($1,$2,$3,$4,$5) RETURNING qref", 5);
+	createStatement("TblWdbeQPphList_updateRec", "UPDATE TblWdbeQPphList SET jref = $1, jnum = $2, ref = $3, sref = $4, refWdbeMUnit = $5 WHERE qref = $6", 6);
 	createStatement("TblWdbeQPphList_removeRecByQref", "DELETE FROM TblWdbeQPphList WHERE qref = $1", 1);
 	createStatement("TblWdbeQPphList_removeRstByJref", "DELETE FROM TblWdbeQPphList WHERE jref = $1", 1);
 
-	createStatement("TblWdbeQPphList_loadRecByQref", "SELECT qref, jref, jnum, ref, sref, refWdbeMUnit, refWdbeMModule FROM TblWdbeQPphList WHERE qref = $1", 1);
-	createStatement("TblWdbeQPphList_loadRstByJref", "SELECT qref, jref, jnum, ref, sref, refWdbeMUnit, refWdbeMModule FROM TblWdbeQPphList WHERE jref = $1 ORDER BY jnum ASC", 1);
+	createStatement("TblWdbeQPphList_loadRecByQref", "SELECT qref, jref, jnum, ref, sref, refWdbeMUnit FROM TblWdbeQPphList WHERE qref = $1", 1);
+	createStatement("TblWdbeQPphList_loadRstByJref", "SELECT qref, jref, jnum, ref, sref, refWdbeMUnit FROM TblWdbeQPphList WHERE jref = $1 ORDER BY jnum ASC", 1);
 };
 
 bool PgTblWdbeQPphList::loadRec(
@@ -558,8 +542,7 @@ bool PgTblWdbeQPphList::loadRec(
 			PQfnumber(res, "jnum"),
 			PQfnumber(res, "ref"),
 			PQfnumber(res, "sref"),
-			PQfnumber(res, "refwdbemunit"),
-			PQfnumber(res, "refwdbemmodule")
+			PQfnumber(res, "refwdbemunit")
 		};
 
 		ptr = PQgetvalue(res, 0, fnum[0]); _rec->qref = atoll(ptr);
@@ -568,7 +551,6 @@ bool PgTblWdbeQPphList::loadRec(
 		ptr = PQgetvalue(res, 0, fnum[3]); _rec->ref = atoll(ptr);
 		ptr = PQgetvalue(res, 0, fnum[4]); _rec->sref.assign(ptr, PQgetlength(res, 0, fnum[4]));
 		ptr = PQgetvalue(res, 0, fnum[5]); _rec->refWdbeMUnit = atoll(ptr);
-		ptr = PQgetvalue(res, 0, fnum[6]); _rec->refWdbeMModule = atoll(ptr);
 
 		retval = true;
 	};
@@ -600,8 +582,7 @@ ubigint PgTblWdbeQPphList::loadRst(
 			PQfnumber(res, "jnum"),
 			PQfnumber(res, "ref"),
 			PQfnumber(res, "sref"),
-			PQfnumber(res, "refwdbemunit"),
-			PQfnumber(res, "refwdbemmodule")
+			PQfnumber(res, "refwdbemunit")
 		};
 
 		while (numread < numrow) {
@@ -613,7 +594,6 @@ ubigint PgTblWdbeQPphList::loadRst(
 			ptr = PQgetvalue(res, numread, fnum[3]); rec->ref = atoll(ptr);
 			ptr = PQgetvalue(res, numread, fnum[4]); rec->sref.assign(ptr, PQgetlength(res, numread, fnum[4]));
 			ptr = PQgetvalue(res, numread, fnum[5]); rec->refWdbeMUnit = atoll(ptr);
-			ptr = PQgetvalue(res, numread, fnum[6]); rec->refWdbeMModule = atoll(ptr);
 
 			rst.nodes.push_back(rec);
 
@@ -710,27 +690,24 @@ ubigint PgTblWdbeQPphList::insertRec(
 	uint _jnum = htonl(rec->jnum);
 	ubigint _ref = htonl64(rec->ref);
 	ubigint _refWdbeMUnit = htonl64(rec->refWdbeMUnit);
-	ubigint _refWdbeMModule = htonl64(rec->refWdbeMModule);
 
 	const char* vals[] = {
 		(char*) &_jref,
 		(char*) &_jnum,
 		(char*) &_ref,
 		rec->sref.c_str(),
-		(char*) &_refWdbeMUnit,
-		(char*) &_refWdbeMModule
+		(char*) &_refWdbeMUnit
 	};
 	const int l[] = {
 		sizeof(ubigint),
 		sizeof(uint),
 		sizeof(ubigint),
 		0,
-		sizeof(ubigint),
 		sizeof(ubigint)
 	};
-	const int f[] = {1, 1, 1, 0, 1, 1};
+	const int f[] = {1, 1, 1, 0, 1};
 
-	res = PQexecPrepared(dbs, "TblWdbeQPphList_insertRec", 6, vals, l, f, 0);
+	res = PQexecPrepared(dbs, "TblWdbeQPphList_insertRec", 5, vals, l, f, 0);
 
 	if (PQresultStatus(res) != PGRES_TUPLES_OK)	{
 		string dbms = "PgTblWdbeQPphList::insertRec() / " + string(PQerrorMessage(dbs));
@@ -759,7 +736,6 @@ void PgTblWdbeQPphList::updateRec(
 	uint _jnum = htonl(rec->jnum);
 	ubigint _ref = htonl64(rec->ref);
 	ubigint _refWdbeMUnit = htonl64(rec->refWdbeMUnit);
-	ubigint _refWdbeMModule = htonl64(rec->refWdbeMModule);
 	ubigint _qref = htonl64(rec->qref);
 
 	const char* vals[] = {
@@ -768,7 +744,6 @@ void PgTblWdbeQPphList::updateRec(
 		(char*) &_ref,
 		rec->sref.c_str(),
 		(char*) &_refWdbeMUnit,
-		(char*) &_refWdbeMModule,
 		(char*) &_qref
 	};
 	const int l[] = {
@@ -777,12 +752,11 @@ void PgTblWdbeQPphList::updateRec(
 		sizeof(ubigint),
 		0,
 		sizeof(ubigint),
-		sizeof(ubigint),
 		sizeof(ubigint)
 	};
-	const int f[] = {1, 1, 1, 0, 1, 1, 1};
+	const int f[] = {1, 1, 1, 0, 1, 1};
 
-	res = PQexecPrepared(dbs, "TblWdbeQPphList_updateRec", 7, vals, l, f, 0);
+	res = PQexecPrepared(dbs, "TblWdbeQPphList_updateRec", 6, vals, l, f, 0);
 
 	if (PQresultStatus(res) != PGRES_COMMAND_OK) {
 		string dbms = "PgTblWdbeQPphList::updateRec() / " + string(PQerrorMessage(dbs));

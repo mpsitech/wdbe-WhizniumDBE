@@ -25,12 +25,11 @@
 class WdbeMPeripheral {
 
 public:
-	WdbeMPeripheral(const Sbecore::ubigint ref = 0, const Sbecore::ubigint refWdbeMUnit = 0, const Sbecore::ubigint refWdbeMModule = 0, const std::string sref = "", const std::string Comment = "");
+	WdbeMPeripheral(const Sbecore::ubigint ref = 0, const Sbecore::ubigint refWdbeMUnit = 0, const std::string sref = "", const std::string Comment = "");
 
 public:
 	Sbecore::ubigint ref;
 	Sbecore::ubigint refWdbeMUnit;
-	Sbecore::ubigint refWdbeMModule;
 	std::string sref;
 	std::string Comment;
 
@@ -78,8 +77,8 @@ public:
 	virtual Sbecore::ubigint loadRstBySQL(const std::string& sqlstr, const bool append, ListWdbeMPeripheral& rst);
 
 	virtual Sbecore::ubigint insertRec(WdbeMPeripheral* rec);
-	Sbecore::ubigint insertNewRec(WdbeMPeripheral** rec = NULL, const Sbecore::ubigint refWdbeMUnit = 0, const Sbecore::ubigint refWdbeMModule = 0, const std::string sref = "", const std::string Comment = "");
-	Sbecore::ubigint appendNewRecToRst(ListWdbeMPeripheral& rst, WdbeMPeripheral** rec = NULL, const Sbecore::ubigint refWdbeMUnit = 0, const Sbecore::ubigint refWdbeMModule = 0, const std::string sref = "", const std::string Comment = "");
+	Sbecore::ubigint insertNewRec(WdbeMPeripheral** rec = NULL, const Sbecore::ubigint refWdbeMUnit = 0, const std::string sref = "", const std::string Comment = "");
+	Sbecore::ubigint appendNewRecToRst(ListWdbeMPeripheral& rst, WdbeMPeripheral** rec = NULL, const Sbecore::ubigint refWdbeMUnit = 0, const std::string sref = "", const std::string Comment = "");
 	virtual void insertRst(ListWdbeMPeripheral& rst, bool transact = false);
 	virtual void updateRec(WdbeMPeripheral* rec);
 	virtual void updateRst(ListWdbeMPeripheral& rst, bool transact = false);

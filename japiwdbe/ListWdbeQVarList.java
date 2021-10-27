@@ -45,7 +45,7 @@ public class ListWdbeQVarList {
 			clear();
 			
 			for (int i = 0; i < ics.size(); i++) {
-				rec = new WdbeQVarList(i+1, "", "", "", "", "", "", 0, "");
+				rec = new WdbeQVarList(i+1, "", "", "", "", "", "", "", "", 0, "");
 
 				if (shorttags.get(i)) s = basexpath + "/row[@jnum='" + ics.get(i).toString() + "']";
 				else s = basexpath + "/WdbeQVarList[@jnum='" + ics.get(i).toString() + "']";

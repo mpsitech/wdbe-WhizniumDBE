@@ -14,8 +14,8 @@
 
 // IP include.cust --- INSERT
 
-#include "JobWdbeLicense.h"
 #include "JobWdbeIexPrj.h"
+#include "JobWdbeLicense.h"
 
 #define VecVDlgWdbePrjImpexDit DlgWdbePrjImpex::VecVDit
 #define VecVDlgWdbePrjImpexDo DlgWdbePrjImpex::VecVDo
@@ -433,12 +433,12 @@ public:
 		void writeXML(const Sbecore::uint ixWdbeVLocale, xmlTextWriter* wr);
 	};
 
-	bool evalButDneActive(DbsWdbe* dbswdbe);
-	bool evalLfiDldActive(DbsWdbe* dbswdbe);
+	bool evalIfiUldActive(DbsWdbe* dbswdbe);
 	bool evalImpButAutActive(DbsWdbe* dbswdbe);
 	bool evalImpButRunActive(DbsWdbe* dbswdbe);
 	bool evalImpButStoActive(DbsWdbe* dbswdbe);
-	bool evalIfiUldActive(DbsWdbe* dbswdbe);
+	bool evalLfiDldActive(DbsWdbe* dbswdbe);
+	bool evalButDneActive(DbsWdbe* dbswdbe);
 
 public:
 	DlgWdbePrjImpex(XchgWdbe* xchg, DbsWdbe* dbswdbe, const Sbecore::ubigint jrefSup, const Sbecore::uint ixWdbeVLocale);
@@ -458,8 +458,8 @@ public:
 	Sbecore::Feed feedFDse;
 	Sbecore::Feed feedFSge;
 
-	JobWdbeLicense* license;
 	JobWdbeIexPrj* iex;
+	JobWdbeLicense* license;
 
 	Sbecore::uint ixVDit;
 

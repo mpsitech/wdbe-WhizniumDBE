@@ -45,12 +45,16 @@ CrdWdbeVer::CrdWdbeVer(
 	feedFSge.tag = "FeedFSge";
 	VecVSge::fillFeed(feedFSge);
 
-	pnllist = NULL;
-	pnlheadbar = NULL;
-	pnlrec = NULL;
-	dlgbscdd = NULL;
-	dlgdetdd = NULL;
+	dlgcmdset = NULL;
+	dlgcustfst = NULL;
+	dlgdflalg = NULL;
+	dlgfinmod = NULL;
+	dlggenfst = NULL;
+	dlgmdlstr = NULL;
 	dlgnew = NULL;
+	pnlrec = NULL;
+	pnlheadbar = NULL;
+	pnllist = NULL;
 
 	// IP constructor.cust1 --- INSERT
 
@@ -62,9 +66,9 @@ CrdWdbeVer::CrdWdbeVer(
 	// initialize according to ref
 	changeRef(dbswdbe, jref, ((ref + 1) == 0) ? 0 : ref, false);
 
-	pnllist = new PnlWdbeVerList(xchg, dbswdbe, jref, ixWdbeVLocale);
-	pnlheadbar = new PnlWdbeVerHeadbar(xchg, dbswdbe, jref, ixWdbeVLocale);
 	pnlrec = new PnlWdbeVerRec(xchg, dbswdbe, jref, ixWdbeVLocale);
+	pnlheadbar = new PnlWdbeVerHeadbar(xchg, dbswdbe, jref, ixWdbeVLocale);
+	pnllist = new PnlWdbeVerList(xchg, dbswdbe, jref, ixWdbeVLocale);
 
 	// IP constructor.cust2 --- INSERT
 
@@ -82,9 +86,9 @@ CrdWdbeVer::CrdWdbeVer(
 
 	changeStage(dbswdbe, VecVSge::IDLE);
 
-	xchg->addClstn(VecWdbeVCall::CALLWDBEREFPRESET, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecWdbeVCall::CALLWDBESTATCHG, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBEDLGCLOSE, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBESTATCHG, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBEREFPRESET, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -139,10 +143,22 @@ void CrdWdbeVer::refresh(
 	statshr.MitCrdPcvActive = evalMitCrdPcvActive(dbswdbe);
 	statshr.MspCrd3Avail = evalMspCrd3Avail(dbswdbe);
 	statshr.MspCrd3Active = evalMspCrd3Active(dbswdbe);
-	statshr.MitCrdIbsAvail = evalMitCrdIbsAvail(dbswdbe);
-	statshr.MitCrdIbsActive = evalMitCrdIbsActive(dbswdbe);
-	statshr.MitCrdIdsAvail = evalMitCrdIdsAvail(dbswdbe);
-	statshr.MitCrdIdsActive = evalMitCrdIdsActive(dbswdbe);
+	statshr.MitCrdImdAvail = evalMitCrdImdAvail(dbswdbe);
+	statshr.MitCrdImdActive = evalMitCrdImdActive(dbswdbe);
+	statshr.MitCrdIcsAvail = evalMitCrdIcsAvail(dbswdbe);
+	statshr.MitCrdIcsActive = evalMitCrdIcsActive(dbswdbe);
+	statshr.MitCrdIdaAvail = evalMitCrdIdaAvail(dbswdbe);
+	statshr.MitCrdIdaActive = evalMitCrdIdaActive(dbswdbe);
+	statshr.MspCrd4Avail = evalMspCrd4Avail(dbswdbe);
+	statshr.MspCrd4Active = evalMspCrd4Active(dbswdbe);
+	statshr.MitCrdGfsAvail = evalMitCrdGfsAvail(dbswdbe);
+	statshr.MitCrdGfsActive = evalMitCrdGfsActive(dbswdbe);
+	statshr.MitCrdIfsAvail = evalMitCrdIfsAvail(dbswdbe);
+	statshr.MitCrdIfsActive = evalMitCrdIfsActive(dbswdbe);
+	statshr.MspCrd5Avail = evalMspCrd5Avail(dbswdbe);
+	statshr.MspCrd5Active = evalMspCrd5Active(dbswdbe);
+	statshr.MitCrdFnmAvail = evalMitCrdFnmAvail(dbswdbe);
+	statshr.MitCrdFnmActive = evalMitCrdFnmActive(dbswdbe);
 
 	// IP refresh --- END
 	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
@@ -218,10 +234,18 @@ void CrdWdbeVer::handleRequest(
 					handleDpchAppDoMitCrdNewClick(dbswdbe, &(req->dpcheng));
 				} else if (dpchappdo->ixVDo == VecVDo::MITCRDPCVCLICK) {
 					handleDpchAppDoMitCrdPcvClick(dbswdbe, &(req->dpcheng));
-				} else if (dpchappdo->ixVDo == VecVDo::MITCRDIBSCLICK) {
-					handleDpchAppDoMitCrdIbsClick(dbswdbe, &(req->dpcheng));
-				} else if (dpchappdo->ixVDo == VecVDo::MITCRDIDSCLICK) {
-					handleDpchAppDoMitCrdIdsClick(dbswdbe, &(req->dpcheng));
+				} else if (dpchappdo->ixVDo == VecVDo::MITCRDIMDCLICK) {
+					handleDpchAppDoMitCrdImdClick(dbswdbe, &(req->dpcheng));
+				} else if (dpchappdo->ixVDo == VecVDo::MITCRDICSCLICK) {
+					handleDpchAppDoMitCrdIcsClick(dbswdbe, &(req->dpcheng));
+				} else if (dpchappdo->ixVDo == VecVDo::MITCRDIDACLICK) {
+					handleDpchAppDoMitCrdIdaClick(dbswdbe, &(req->dpcheng));
+				} else if (dpchappdo->ixVDo == VecVDo::MITCRDGFSCLICK) {
+					handleDpchAppDoMitCrdGfsClick(dbswdbe, &(req->dpcheng));
+				} else if (dpchappdo->ixVDo == VecVDo::MITCRDIFSCLICK) {
+					handleDpchAppDoMitCrdIfsClick(dbswdbe, &(req->dpcheng));
+				} else if (dpchappdo->ixVDo == VecVDo::MITCRDFNMCLICK) {
+					handleDpchAppDoMitCrdFnmClick(dbswdbe, &(req->dpcheng));
 				};
 
 			};
@@ -281,25 +305,73 @@ void CrdWdbeVer::handleDpchAppDoMitCrdPcvClick(
 	// IP handleDpchAppDoMitCrdPcvClick --- IEND
 };
 
-void CrdWdbeVer::handleDpchAppDoMitCrdIbsClick(
+void CrdWdbeVer::handleDpchAppDoMitCrdImdClick(
 			DbsWdbe* dbswdbe
 			, DpchEngWdbe** dpcheng
 		) {
-	if (!dlgbscdd) {
-		dlgbscdd = new DlgWdbeVerBscdd(xchg, dbswdbe, jref, ixWdbeVLocale);
-		statshr.jrefDlgbscdd = dlgbscdd->jref;
+	if (!dlgmdlstr) {
+		dlgmdlstr = new DlgWdbeVerMdlstr(xchg, dbswdbe, jref, ixWdbeVLocale);
+		statshr.jrefDlgmdlstr = dlgmdlstr->jref;
 
 		*dpcheng = getNewDpchEng({DpchEngData::STATSHR});
 	};
 };
 
-void CrdWdbeVer::handleDpchAppDoMitCrdIdsClick(
+void CrdWdbeVer::handleDpchAppDoMitCrdIcsClick(
 			DbsWdbe* dbswdbe
 			, DpchEngWdbe** dpcheng
 		) {
-	if (!dlgdetdd) {
-		dlgdetdd = new DlgWdbeVerDetdd(xchg, dbswdbe, jref, ixWdbeVLocale);
-		statshr.jrefDlgdetdd = dlgdetdd->jref;
+	if (!dlgcmdset) {
+		dlgcmdset = new DlgWdbeVerCmdset(xchg, dbswdbe, jref, ixWdbeVLocale);
+		statshr.jrefDlgcmdset = dlgcmdset->jref;
+
+		*dpcheng = getNewDpchEng({DpchEngData::STATSHR});
+	};
+};
+
+void CrdWdbeVer::handleDpchAppDoMitCrdIdaClick(
+			DbsWdbe* dbswdbe
+			, DpchEngWdbe** dpcheng
+		) {
+	if (!dlgdflalg) {
+		dlgdflalg = new DlgWdbeVerDflalg(xchg, dbswdbe, jref, ixWdbeVLocale);
+		statshr.jrefDlgdflalg = dlgdflalg->jref;
+
+		*dpcheng = getNewDpchEng({DpchEngData::STATSHR});
+	};
+};
+
+void CrdWdbeVer::handleDpchAppDoMitCrdGfsClick(
+			DbsWdbe* dbswdbe
+			, DpchEngWdbe** dpcheng
+		) {
+	if (!dlggenfst) {
+		dlggenfst = new DlgWdbeVerGenfst(xchg, dbswdbe, jref, ixWdbeVLocale);
+		statshr.jrefDlggenfst = dlggenfst->jref;
+
+		*dpcheng = getNewDpchEng({DpchEngData::STATSHR});
+	};
+};
+
+void CrdWdbeVer::handleDpchAppDoMitCrdIfsClick(
+			DbsWdbe* dbswdbe
+			, DpchEngWdbe** dpcheng
+		) {
+	if (!dlgcustfst) {
+		dlgcustfst = new DlgWdbeVerCustfst(xchg, dbswdbe, jref, ixWdbeVLocale);
+		statshr.jrefDlgcustfst = dlgcustfst->jref;
+
+		*dpcheng = getNewDpchEng({DpchEngData::STATSHR});
+	};
+};
+
+void CrdWdbeVer::handleDpchAppDoMitCrdFnmClick(
+			DbsWdbe* dbswdbe
+			, DpchEngWdbe** dpcheng
+		) {
+	if (!dlgfinmod) {
+		dlgfinmod = new DlgWdbeVerFinmod(xchg, dbswdbe, jref, ixWdbeVLocale);
+		statshr.jrefDlgfinmod = dlgfinmod->jref;
 
 		*dpcheng = getNewDpchEng({DpchEngData::STATSHR});
 	};
@@ -329,13 +401,75 @@ void CrdWdbeVer::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBEREFPRESET) {
-		call->abort = handleCallWdbeRefPreSet(dbswdbe, call->jref, call->argInv.ix, call->argInv.ref);
+	if (call->ixVCall == VecWdbeVCall::CALLWDBEDLGCLOSE) {
+		call->abort = handleCallWdbeDlgClose(dbswdbe, call->jref);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBESTATCHG) {
 		call->abort = handleCallWdbeStatChg(dbswdbe, call->jref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEDLGCLOSE) {
-		call->abort = handleCallWdbeDlgClose(dbswdbe, call->jref);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEREFPRESET) {
+		call->abort = handleCallWdbeRefPreSet(dbswdbe, call->jref, call->argInv.ix, call->argInv.ref);
 	};
+};
+
+bool CrdWdbeVer::handleCallWdbeDlgClose(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+
+	if (dlgcmdset) {
+		delete dlgcmdset;
+		dlgcmdset = NULL;
+		statshr.jrefDlgcmdset = 0;
+
+		xchg->submitDpch(getNewDpchEng({DpchEngData::STATSHR}));
+	} else if (dlgcustfst) {
+		delete dlgcustfst;
+		dlgcustfst = NULL;
+		statshr.jrefDlgcustfst = 0;
+
+		xchg->submitDpch(getNewDpchEng({DpchEngData::STATSHR}));
+	} else if (dlgdflalg) {
+		delete dlgdflalg;
+		dlgdflalg = NULL;
+		statshr.jrefDlgdflalg = 0;
+
+		xchg->submitDpch(getNewDpchEng({DpchEngData::STATSHR}));
+	} else if (dlgfinmod) {
+		delete dlgfinmod;
+		dlgfinmod = NULL;
+		statshr.jrefDlgfinmod = 0;
+
+		xchg->submitDpch(getNewDpchEng({DpchEngData::STATSHR}));
+	} else if (dlggenfst) {
+		delete dlggenfst;
+		dlggenfst = NULL;
+		statshr.jrefDlggenfst = 0;
+
+		xchg->submitDpch(getNewDpchEng({DpchEngData::STATSHR}));
+	} else if (dlgmdlstr) {
+		delete dlgmdlstr;
+		dlgmdlstr = NULL;
+		statshr.jrefDlgmdlstr = 0;
+
+		xchg->submitDpch(getNewDpchEng({DpchEngData::STATSHR}));
+	} else if (dlgnew) {
+		delete dlgnew;
+		dlgnew = NULL;
+		statshr.jrefDlgnew = 0;
+
+		xchg->submitDpch(getNewDpchEng({DpchEngData::STATSHR}));
+	};
+
+	return retval;
+};
+
+bool CrdWdbeVer::handleCallWdbeStatChg(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+	if (jrefTrig == pnlrec->jref) if ((pnllist->statshr.ixWdbeVExpstate == VecWdbeVExpstate::REGD) && (pnlrec->statshr.ixWdbeVExpstate == VecWdbeVExpstate::REGD)) pnllist->minimize(dbswdbe, true);
+	return retval;
 };
 
 bool CrdWdbeVer::handleCallWdbeRefPreSet(
@@ -355,44 +489,6 @@ bool CrdWdbeVer::handleCallWdbeRefPreSet(
 			pnllist->minimize(dbswdbe, true);
 			pnlrec->regularize(dbswdbe, true);
 		};
-	};
-
-	return retval;
-};
-
-bool CrdWdbeVer::handleCallWdbeStatChg(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-	if (jrefTrig == pnlrec->jref) if ((pnllist->statshr.ixWdbeVExpstate == VecWdbeVExpstate::REGD) && (pnlrec->statshr.ixWdbeVExpstate == VecWdbeVExpstate::REGD)) pnllist->minimize(dbswdbe, true);
-	return retval;
-};
-
-bool CrdWdbeVer::handleCallWdbeDlgClose(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-
-	if (dlgbscdd) {
-		delete dlgbscdd;
-		dlgbscdd = NULL;
-		statshr.jrefDlgbscdd = 0;
-
-		xchg->submitDpch(getNewDpchEng({DpchEngData::STATSHR}));
-	} else if (dlgdetdd) {
-		delete dlgdetdd;
-		dlgdetdd = NULL;
-		statshr.jrefDlgdetdd = 0;
-
-		xchg->submitDpch(getNewDpchEng({DpchEngData::STATSHR}));
-	} else if (dlgnew) {
-		delete dlgnew;
-		dlgnew = NULL;
-		statshr.jrefDlgnew = 0;
-
-		xchg->submitDpch(getNewDpchEng({DpchEngData::STATSHR}));
 	};
 
 	return retval;

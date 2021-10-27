@@ -14,8 +14,9 @@
 
 // IP include.cust --- INSERT
 
-#include "PnlWdbePphAPar.h"
 #include "PnlWdbePphDetail.h"
+#include "PnlWdbePphAPar.h"
+#include "PnlWdbePphMNModule.h"
 
 #define VecVWdbePphRecDo PnlWdbePphRec::VecVDo
 
@@ -73,8 +74,8 @@ public:
 	class StatApp {
 
 	public:
-		static void writeJSON(Json::Value& sup, std::string difftag = "", const bool initdoneDetail = false, const bool initdoneAPar = false);
-		static void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true, const bool initdoneDetail = false, const bool initdoneAPar = false);
+		static void writeJSON(Json::Value& sup, std::string difftag = "", const bool initdoneDetail = false, const bool initdoneAPar = false, const bool initdoneMNModule = false);
+		static void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true, const bool initdoneDetail = false, const bool initdoneAPar = false, const bool initdoneMNModule = false);
 	};
 
 	/**
@@ -86,15 +87,17 @@ public:
 		static const Sbecore::uint IXWDBEVEXPSTATE = 1;
 		static const Sbecore::uint JREFDETAIL = 2;
 		static const Sbecore::uint JREFAPAR = 3;
-		static const Sbecore::uint BUTREGULARIZEACTIVE = 4;
+		static const Sbecore::uint JREFMNMODULE = 4;
+		static const Sbecore::uint BUTREGULARIZEACTIVE = 5;
 
 	public:
-		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const Sbecore::ubigint jrefDetail = 0, const Sbecore::ubigint jrefAPar = 0, const bool ButRegularizeActive = true);
+		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const Sbecore::ubigint jrefDetail = 0, const Sbecore::ubigint jrefAPar = 0, const Sbecore::ubigint jrefMNModule = 0, const bool ButRegularizeActive = true);
 
 	public:
 		Sbecore::uint ixWdbeVExpstate;
 		Sbecore::ubigint jrefDetail;
 		Sbecore::ubigint jrefAPar;
+		Sbecore::ubigint jrefMNModule;
 		bool ButRegularizeActive;
 
 	public:
@@ -174,8 +177,9 @@ public:
 	ContInf continf;
 	StatShr statshr;
 
-	PnlWdbePphAPar* pnlapar;
 	PnlWdbePphDetail* pnldetail;
+	PnlWdbePphAPar* pnlapar;
+	PnlWdbePphMNModule* pnlmnmodule;
 
 	WdbeMPeripheral recPph;
 
@@ -209,10 +213,9 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbePphUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
-	bool handleCallWdbePph_untEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
 	bool handleCallWdbePph_unt_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
-	bool handleCallWdbePph_mdlEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbePph_untEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbePphUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 
 };
 

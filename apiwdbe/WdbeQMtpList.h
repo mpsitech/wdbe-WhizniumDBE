@@ -18,11 +18,13 @@
 class WdbeQMtpList {
 
 public:
-	WdbeQMtpList(const Sbecore::uint jnum = 0, const std::string sref = "", const std::string srefIxVBasetype = "", const std::string titIxVBasetype = "", const std::string srefHkIxVTbl = "", const std::string titHkIxVTbl = "", const std::string stubHkUref = "", const std::string Srefrule = "");
+	WdbeQMtpList(const Sbecore::uint jnum = 0, const std::string sref = "", const std::string srefWdbeKVendor = "", const std::string titSrefWdbeKVendor = "", const std::string srefIxVBasetype = "", const std::string titIxVBasetype = "", const std::string srefHkIxVTbl = "", const std::string titHkIxVTbl = "", const std::string stubHkUref = "", const std::string Srefrule = "");
 
 public:
 	Sbecore::uint jnum;
 	std::string sref;
+	std::string srefWdbeKVendor;
+	std::string titSrefWdbeKVendor;
 	std::string srefIxVBasetype;
 	std::string titIxVBasetype;
 	std::string srefHkIxVTbl;

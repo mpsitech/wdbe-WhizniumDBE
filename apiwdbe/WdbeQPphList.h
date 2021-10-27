@@ -18,13 +18,12 @@
 class WdbeQPphList {
 
 public:
-	WdbeQPphList(const Sbecore::uint jnum = 0, const std::string sref = "", const std::string stubRefWdbeMUnit = "", const std::string stubRefWdbeMModule = "");
+	WdbeQPphList(const Sbecore::uint jnum = 0, const std::string sref = "", const std::string stubRefWdbeMUnit = "");
 
 public:
 	Sbecore::uint jnum;
 	std::string sref;
 	std::string stubRefWdbeMUnit;
-	std::string stubRefWdbeMModule;
 
 public:
 	bool readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);

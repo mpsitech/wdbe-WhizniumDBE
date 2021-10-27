@@ -22,7 +22,11 @@ uint TblWdbeMVersion::VecVState::getIx(
 
 	if (s == "newcre") return NEWCRE;
 	if (s == "newimp") return NEWIMP;
-	if (s == "dsnbscdd") return DSNBSCDD;
+	if (s == "dsnmdlstr") return DSNMDLSTR;
+	if (s == "dsncmdset") return DSNCMDSET;
+	if (s == "dsndflalg") return DSNDFLALG;
+	if (s == "dsngenfst") return DSNGENFST;
+	if (s == "dsncustfst") return DSNCUSTFST;
 	if (s == "ready") return READY;
 	if (s == "abandon") return ABANDON;
 
@@ -34,7 +38,11 @@ string TblWdbeMVersion::VecVState::getSref(
 		) {
 	if (ix == NEWCRE) return("newcre");
 	if (ix == NEWIMP) return("newimp");
-	if (ix == DSNBSCDD) return("dsnbscdd");
+	if (ix == DSNMDLSTR) return("dsnmdlstr");
+	if (ix == DSNCMDSET) return("dsncmdset");
+	if (ix == DSNDFLALG) return("dsndflalg");
+	if (ix == DSNGENFST) return("dsngenfst");
+	if (ix == DSNCUSTFST) return("dsncustfst");
 	if (ix == READY) return("ready");
 	if (ix == ABANDON) return("abandon");
 
@@ -48,7 +56,11 @@ string TblWdbeMVersion::VecVState::getTitle(
 	if (ixWdbeVLocale == 1) {
 		if (ix == NEWCRE) return("newly created");
 		if (ix == NEWIMP) return("newly imported");
-		if (ix == DSNBSCDD) return("design phase, basic device description imported");
+		if (ix == DSNMDLSTR) return("design phase, modular structure imported");
+		if (ix == DSNCMDSET) return("design phase, command set imported");
+		if (ix == DSNDFLALG) return("design phase, data flows and algorithms imported");
+		if (ix == DSNGENFST) return("design phase, fine structure generated");
+		if (ix == DSNCUSTFST) return("design phase, custom fine structure applied");
 		if (ix == READY) return("build-ready");
 		if (ix == ABANDON) return("abandonned");
 		return(getSref(ix));
@@ -63,5 +75,5 @@ void TblWdbeMVersion::VecVState::fillFeed(
 		) {
 	feed.clear();
 
-	for (unsigned int i = 1; i <= 5; i++) feed.appendIxSrefTitles(i, getSref(i), getTitle(i, ixWdbeVLocale));
+	for (unsigned int i = 1; i <= 9; i++) feed.appendIxSrefTitles(i, getSref(i), getTitle(i, ixWdbeVLocale));
 };

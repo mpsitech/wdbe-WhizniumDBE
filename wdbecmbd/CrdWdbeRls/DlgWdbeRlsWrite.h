@@ -545,15 +545,15 @@ public:
 		void writeXML(const Sbecore::uint ixWdbeVLocale, xmlTextWriter* wr);
 	};
 
-	bool evalButDneActive(DbsWdbe* dbswdbe);
-	bool evalFiaDldAvail(DbsWdbe* dbswdbe);
-	bool evalFiaDldActive(DbsWdbe* dbswdbe);
-	bool evalLfiDldActive(DbsWdbe* dbswdbe);
+	bool evalCucUldAvail(DbsWdbe* dbswdbe);
+	bool evalCucUldActive(DbsWdbe* dbswdbe);
 	bool evalWrcButAutActive(DbsWdbe* dbswdbe);
 	bool evalWrcButRunActive(DbsWdbe* dbswdbe);
 	bool evalWrcButStoActive(DbsWdbe* dbswdbe);
-	bool evalCucUldAvail(DbsWdbe* dbswdbe);
-	bool evalCucUldActive(DbsWdbe* dbswdbe);
+	bool evalLfiDldActive(DbsWdbe* dbswdbe);
+	bool evalFiaDldAvail(DbsWdbe* dbswdbe);
+	bool evalFiaDldActive(DbsWdbe* dbswdbe);
+	bool evalButDneActive(DbsWdbe* dbswdbe);
 
 public:
 	DlgWdbeRlsWrite(XchgWdbe* xchg, DbsWdbe* dbswdbe, const Sbecore::ubigint jrefSup, const Sbecore::uint ixWdbeVLocale);
@@ -607,11 +607,11 @@ public:
 
 	std::map<Sbecore::ubigint,Sbecore::ubigint> orefsToRefs;
 
-	std::vector<std::string> speckeys;
-	std::vector<std::string> specvals;
+	std::vector<std::string> typkeys, typvals;
+	std::map<Sbecore::ubigint, unsigned int> ics0Typkeys, ics1Typkeys; // by refMdl
 
-	std::map<Sbecore::ubigint,unsigned int> ics0Speckeys; // by refMdl
-	std::map<Sbecore::ubigint,unsigned int> ics1Speckeys; // by refMdl
+	std::vector<std::string> tplkeys, tplvals;
+	std::map<Sbecore::ubigint, unsigned int> ics0Tplkeys, ics1Tplkeys; // by refMdl
 
 	std::string logaspect;
 	std::string logfile;
@@ -627,7 +627,7 @@ public:
 	void createDev(DbsWdbe* dbswdbe, const bool dplonly);
 	void createEzdev(DbsWdbe* dbswdbe, const bool dplonly);
 
-	void mergeKeysVals(const Sbecore::ubigint oref, std::vector<std::string>& keys, std::vector<std::string>& vals);
+	void mergeKeysVals(const Sbecore::ubigint oref, std::vector<std::string>& keys, std::vector<std::string>& vals, const bool tplNotTyp);
 	// IP cust --- IEND
 
 public:
@@ -661,8 +661,8 @@ private:
 
 	void handleUploadInSgeIdle(DbsWdbe* dbswdbe, const std::string& filename);
 
-	std::string handleDownloadInSgeDone(DbsWdbe* dbswdbe);
 	std::string handleDownloadInSgeFail(DbsWdbe* dbswdbe);
+	std::string handleDownloadInSgeDone(DbsWdbe* dbswdbe);
 
 	void handleDpchRetWdbeMtpPlhfpga(DbsWdbe* dbswdbe, DpchRetWdbeMtpPlhfpga* dpchret);
 	void handleDpchRetWdbeMtpPlhmcu(DbsWdbe* dbswdbe, DpchRetWdbeMtpPlhmcu* dpchret);
@@ -670,6 +670,7 @@ private:
 	void handleDpchRetWdbePlhfpgaCmdret(DbsWdbe* dbswdbe, DpchRetWdbePlhfpgaCmdret* dpchret);
 	void handleDpchRetWdbePlhfpgaEhostif(DbsWdbe* dbswdbe, DpchRetWdbePlhfpgaEhostif* dpchret);
 	void handleDpchRetWdbePlhfpgaFwdctr(DbsWdbe* dbswdbe, DpchRetWdbePlhfpgaFwdctr* dpchret);
+	void handleDpchRetWdbePlhmcuEctr(DbsWdbe* dbswdbe, DpchRetWdbePlhmcuEctr* dpchret);
 	void handleDpchRetWdbePlhmcuEhostif(DbsWdbe* dbswdbe, DpchRetWdbePlhmcuEhostif* dpchret);
 	void handleDpchRetWdbePrctreeMerge(DbsWdbe* dbswdbe, DpchRetWdbePrctreeMerge* dpchret);
 

@@ -25,11 +25,11 @@
 class WdbeMFamily {
 
 public:
-	WdbeMFamily(const Sbecore::ubigint ref = 0, const std::string srefKVendor = "", const std::string Title = "", const std::string Comment = "");
+	WdbeMFamily(const Sbecore::ubigint ref = 0, const std::string srefWdbeKVendor = "", const std::string Title = "", const std::string Comment = "");
 
 public:
 	Sbecore::ubigint ref;
-	std::string srefKVendor;
+	std::string srefWdbeKVendor;
 	std::string Title;
 	std::string Comment;
 
@@ -77,8 +77,8 @@ public:
 	virtual Sbecore::ubigint loadRstBySQL(const std::string& sqlstr, const bool append, ListWdbeMFamily& rst);
 
 	virtual Sbecore::ubigint insertRec(WdbeMFamily* rec);
-	Sbecore::ubigint insertNewRec(WdbeMFamily** rec = NULL, const std::string srefKVendor = "", const std::string Title = "", const std::string Comment = "");
-	Sbecore::ubigint appendNewRecToRst(ListWdbeMFamily& rst, WdbeMFamily** rec = NULL, const std::string srefKVendor = "", const std::string Title = "", const std::string Comment = "");
+	Sbecore::ubigint insertNewRec(WdbeMFamily** rec = NULL, const std::string srefWdbeKVendor = "", const std::string Title = "", const std::string Comment = "");
+	Sbecore::ubigint appendNewRecToRst(ListWdbeMFamily& rst, WdbeMFamily** rec = NULL, const std::string srefWdbeKVendor = "", const std::string Title = "", const std::string Comment = "");
 	virtual void insertRst(ListWdbeMFamily& rst, bool transact = false);
 	virtual void updateRec(WdbeMFamily* rec);
 	virtual void updateRst(ListWdbeMFamily& rst, bool transact = false);

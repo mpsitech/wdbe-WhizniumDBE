@@ -39,7 +39,7 @@ DpchRetWdbePlhfpgaCmdinv* WdbePlhfpgaCmdinv::run(
 	std::vector<std::string> vals;
 
 	// IP run --- IBEGIN
-	// Hostifsref, Cmdbussref
+	// Hostif, Cmdbus
 	// sizeBuf, wLenBuf, msbLenBuf, wABuf, msbABuf
 	// sizeTocBuf
 	// maxlenInv
@@ -59,12 +59,12 @@ DpchRetWdbePlhfpgaCmdinv* WdbePlhfpgaCmdinv::run(
 
 	if (dbswdbe->tblwdbemmodule->loadRecByRef(refWdbeMModule, &mdl)) {
 		if (dbswdbe->loadStringBySQL("SELECT sref FROM TblWdbeMModule WHERE hkIxVTbl = " + to_string(mdl->hkIxVTbl) + " AND hkUref = " + to_string(mdl->hkUref) + " AND ixVBasetype = " + to_string(VecWdbeVMModuleBasetype::HOSTIF), sref)) {
-			keys.push_back("Hostifsref");
+			keys.push_back("Hostif");
 			vals.push_back(StrMod::cap(sref));
 		};
 
 		if (dbswdbe->loadStringBySQL("SELECT sref FROM TblWdbeMModule WHERE hkIxVTbl = " + to_string(mdl->hkIxVTbl) + " AND hkUref = " + to_string(mdl->hkUref) + " AND ixVBasetype = " + to_string(VecWdbeVMModuleBasetype::CMDBUS), sref)) {
-			keys.push_back("Cmdbussref");
+			keys.push_back("Cmdbus");
 			vals.push_back(StrMod::cap(sref));
 		};
 
@@ -81,15 +81,13 @@ DpchRetWdbePlhfpgaCmdinv* WdbePlhfpgaCmdinv::run(
 			keys.push_back("msbABuf"); vals.push_back(to_string(w-1));
 		};
 
-		if (dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMModule WHERE supRefWdbeMModule = " + to_string(refWdbeMModule) + " AND ixVBasetype = " + to_string(VecWdbeVMModuleBasetype::IMBUF), ref)) {
-			if (Wdbe::getMpa(dbswdbe, ref, "maxlen", maxlen)) {
-				keys.push_back("maxlenInv"); vals.push_back(maxlen);
+		if (Wdbe::getMpa(dbswdbe, refWdbeMModule, "maxlenRecv", maxlen)) {
+			keys.push_back("maxlenRecv"); vals.push_back(maxlen);
 
-				w = Wdbe::valToWidth(atoi(maxlen.c_str()));
+			w = Wdbe::valToWidth(atoi(maxlen.c_str()));
 
-				keys.push_back("wLenBuf"); vals.push_back(to_string(w));
-				keys.push_back("msbLenBuf"); vals.push_back(to_string(w-1));
-			};
+			keys.push_back("wLenBuf"); vals.push_back(to_string(w));
+			keys.push_back("msbLenBuf"); vals.push_back(to_string(w-1));
 		};
 
 		delete mdl;

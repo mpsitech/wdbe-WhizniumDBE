@@ -66,12 +66,14 @@ namespace PnlWdbePrtRec {
 
 	public:
 		static const Sbecore::uint INITDONEDETAIL = 1;
+		static const Sbecore::uint INITDONESRC1NSENSITIVITY = 2;
 
 	public:
-		StatApp(const bool initdoneDetail = false);
+		StatApp(const bool initdoneDetail = false, const bool initdoneSrc1NSensitivity = false);
 
 	public:
 		bool initdoneDetail;
+		bool initdoneSrc1NSensitivity;
 
 	public:
 		bool readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
@@ -87,14 +89,16 @@ namespace PnlWdbePrtRec {
 	public:
 		static const Sbecore::uint IXWDBEVEXPSTATE = 1;
 		static const Sbecore::uint SCRJREFDETAIL = 2;
-		static const Sbecore::uint BUTREGULARIZEACTIVE = 3;
+		static const Sbecore::uint SCRJREFSRC1NSENSITIVITY = 3;
+		static const Sbecore::uint BUTREGULARIZEACTIVE = 4;
 
 	public:
-		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const std::string& scrJrefDetail = "", const bool ButRegularizeActive = true);
+		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const std::string& scrJrefDetail = "", const std::string& scrJrefSrc1NSensitivity = "", const bool ButRegularizeActive = true);
 
 	public:
 		Sbecore::uint ixWdbeVExpstate;
 		std::string scrJrefDetail;
+		std::string scrJrefSrc1NSensitivity;
 		bool ButRegularizeActive;
 
 	public:

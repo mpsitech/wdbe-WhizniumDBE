@@ -29,22 +29,29 @@ MdlWdbeCoredev	core development module
 	tbl	TblWdbeMCoreproject	CrdWdbeCpr
 	tbl	TblWdbeMCoreversion	CrdWdbeCvr			pre.refCpr() > pre.void()
 	ImeIMCard.end
-MdlWdbeDescr	device/core description module
+MdlWdbeHigh	high-level description module
 	ImeIMCard.srefRefIxVTbl	srefRefUref	sref	Title	Avail	Active
+	tbl	TblWdbeMPeripheral	CrdWdbePph			pre.refUnt()
 	sbs	SbsWdbeBMModuleMod	CrdWdbeMod			pre.refUnt() > pre.refCvr()
 	tbl	TblWdbeMVector	CrdWdbeVec			pre.refUnt() > pre.refCvr() > pre.refVer()
 	tbl	TblWdbeMVectoritem	CrdWdbeVit			pre.refVec()
 	tbl	TblWdbeMCommand	CrdWdbeCmd			pre.refUnt() > pre.refCtr()
 	tbl	TblWdbeMError	CrdWdbeErr			pre.refUnt() > pre.refCtr()
-	tbl	TblWdbeMPeripheral	CrdWdbePph			pre.refUnt()
+	tbl	TblWdbeMPipeline	CrdWdbePpl			pre.refUnt()
+	tbl	TblWdbeMSegment	CrdWdbeSeg			pre.refPpl() > pre.refUnt()
+	ImeIMCard.end
+MdlWdbeLow	low-level description module
+	ImeIMCard.srefRefIxVTbl	srefRefUref	sref	Title	Avail	Active
 	tbl	TblWdbeMBank	CrdWdbeBnk			pre.refUnt()
 	tbl	TblWdbeMPin	CrdWdbePin			pre.refBnk() > pre.refUnt()
+	tbl	TblWdbeMInterrupt	CrdWdbeInt			pre.refUnt()
+	tbl	TblWdbeMSensitivity	CrdWdbeSns			pre.refMod() > pre.refPrc()
+	tbl	TblWdbeMVariable	CrdWdbeVar			pre.refMod() > pre.refPrc()
 	tbl	TblWdbeMGeneric	CrdWdbeGen			pre.refMtp() > pre.refMod()
 	tbl	TblWdbeMPort	CrdWdbePrt			pre.refMtp() > pre.refMod()
-	tbl	TblWdbeMSignal	CrdWdbeSig			pre.refMtp() > pre.refMod()
+	tbl	TblWdbeMSignal	CrdWdbeSig			pre.refUnt() > pre.refMtp() > pre.refMod()
 	tbl	TblWdbeMProcess	CrdWdbePrc			pre.refMtp() > pre.refMod()
 	tbl	TblWdbeMFsmstate	CrdWdbeFst			pre.refFsm() > pre.refMtp() > pre.refMod()
-	tbl	TblWdbeMVariable	CrdWdbeVar			pre.refPrc()
 	ImeIMCard.end
 MdlWdbeAuxfct	auxiliary functionality
 	ImeIMCard.srefRefIxVTbl	srefRefUref	sref	Title	Avail	Active

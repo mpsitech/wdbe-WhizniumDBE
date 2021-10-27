@@ -2,7 +2,7 @@
 # make file for operation pack WdbeMtpPlhmcu, release wdbecmbd_mac
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 12 Mar 2021
+# date created: 23 Oct 2021
 # IP header --- ABOVE
 
 include ../Makefile.inc
@@ -17,7 +17,7 @@ INCPATH = -I$(BUILDROOT)/dbswdbe -I$(BUILDROOT)/wdbecmbd/VecWdbe -I$(BUILDROOT)/
 INCPATH += -I${WHIZSDKROOT}/build -I${WHIZSDKROOT}/build/apiwzlm -I/usr/local/include -I/usr/local/include/curl -I/usr/local/include/libxml2 -I/usr/local/mysql/include -I/usr/local/opt/sqlite/include
 
 OBJS = WdbeMtpPlhmcu_blks.o WdbeMtpPlhmcu.o
-OBJS += SqkWdbeMtpPlhmcu.o
+OBJS += WdbeMtpPlhmcuUsbhostif_Easy_v1_0_Mcu.o SqkWdbeMtpPlhmcu.o
 
 LIB = libwdbemtpplhmcu
 

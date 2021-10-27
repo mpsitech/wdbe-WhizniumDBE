@@ -210,6 +210,14 @@ void WdbeWrdevSys::writeSysCpp(
 	uint ixImbCmdinv, ixImbCmdret;
 	bool hasvecbuf, hasvecctr, hasveccmd, hasvecerr, hasspeccmd;
 
+	string sref, srefrootMgmt, srefrootCor;
+
+	vector<string> srefsImbRd, srefsImbWr;
+	vector<string> srefrootsImbRd, srefrootsImbWr;
+
+	unsigned int ixSrefrootsImbWrCmdinv = 0;
+	unsigned int ixSrefrootsImbRdCmdret = 0;
+
 	string s;
 
 	unsigned int ix;
@@ -218,6 +226,24 @@ void WdbeWrdevSys::writeSysCpp(
 
 	if (dbswdbe->tblwdbemunit->loadRecByRef(sys->refWdbeMUnit, &sysunt)) {
 		Wdbe::analyzeUnt(dbswdbe, sysunt, srefroot, untvecs, ctrs, imbs, cmds, errs, refHostif, ixImbCmdinv, ixImbCmdret, hasvecbuf, hasvecctr, hasveccmd, hasvecerr, hasspeccmd);
+
+		ixSrefrootsImbRdCmdret = imbs.nodes.size();
+		ixSrefrootsImbRdCmdret = imbs.nodes.size();
+
+		for (unsigned int i = 0; i < imbs.nodes.size(); i++) {
+			imb = imbs.nodes[i];
+
+			if (!Wdbe::getImbsrefs(dbswdbe, imb->refWdbeMModule, sref, srefrootMgmt, srefrootCor)) {
+				srefsImbRd.push_back(sref);
+				srefrootsImbRd.push_back(srefrootCor);
+				if (i == ixImbCmdret) ixSrefrootsImbRdCmdret = srefrootsImbRd.size() - 1;
+
+			} else {
+				srefsImbWr.push_back(sref);
+				srefrootsImbWr.push_back(srefrootCor);
+				if (i == ixImbCmdinv) ixSrefrootsImbWrCmdinv = srefrootsImbWr.size() - 1;
+			};
+		};
 
 		// --- runPrepprc.rst
 		outfile << "// IP runPrepprc.rst --- IBEGIN" << endl;
@@ -324,20 +350,24 @@ void WdbeWrdevSys::writeSysCpp(
 
 		// --- runReqprc.tkns
 		outfile << "// IP runReqprc.tkns --- IBEGIN" << endl;
-		for (unsigned int i = 0; i < imbs.nodes.size(); i++) {
-			imb = imbs.nodes[i];
-			if (imb->corRefWdbeMModule == refHostif) outfile << "\tutinyint tkn" << Wdbe::getImbshort(imb) << " = VecW" << srefroot << "Buffer::" << StrMod::uc(imb->sref) << ";" << endl;
-		};
+		for (unsigned int i = 0; i < srefsImbRd.size(); i++) outfile << "\tutinyint tkn" << srefrootsImbRd[i] << " = VecW" << srefroot << "Buffer::" << StrMod::uc(srefsImbRd[i]) << ";" << endl;
+		for (unsigned int i = 0; i < srefsImbWr.size(); i++) outfile << "\tutinyint tkn" << srefrootsImbWr[i] << " = VecW" << srefroot << "Buffer::" << StrMod::uc(srefsImbWr[i]) << ";" << endl;
 		outfile << "// IP runReqprc.tkns --- IEND" << endl;
 
 		// --- runReqprc.reqbx
 		outfile << "// IP runReqprc.reqbx --- IBEGIN" << endl;
-		for (unsigned int i = 0; i < imbs.nodes.size(); i++) {
-			imb = imbs.nodes[i];
+		for (unsigned int i = 0; i < srefsImbRd.size(); i++) {
+			if (i != ixSrefrootsImbRdCmdret) {
+				outfile << "\t\t\trngBufxfs = xchg->bufxfs.equal_range(bufxfref_t(Bufxf::VecVState::WAITXFER, VecW" << srefroot << "Buffer::" << StrMod::uc(srefsImbRd[i]) << ", 0));" << endl;
+				outfile << "\t\t\tif (rngBufxfs.first != rngBufxfs.second) reqbx |= VecW" << srefroot << "Buffer::" << StrMod::uc(srefsImbRd[i]) << ";" << endl;
+				outfile << endl;
+			};
+		};
 
-			if ((imb->corRefWdbeMModule == refHostif) && (i != ixImbCmdinv) && (i != ixImbCmdret)) {
-				outfile << "\t\t\trngBufxfs = xchg->bufxfs.equal_range(bufxfref_t(Bufxf::VecVState::WAITXFER, VecW" << srefroot << "Buffer::" << StrMod::uc(imb->sref) << ", 0));" << endl;
-				outfile << "\t\t\tif (rngBufxfs.first != rngBufxfs.second) reqbx |= VecW" << srefroot << "Buffer::" << StrMod::uc(imb->sref) << ";" << endl;
+		for (unsigned int i = 0; i < srefsImbWr.size(); i++) {
+			if (i != ixSrefrootsImbWrCmdinv) {
+				outfile << "\t\t\trngBufxfs = xchg->bufxfs.equal_range(bufxfref_t(Bufxf::VecVState::WAITXFER, VecW" << srefroot << "Buffer::" << StrMod::uc(srefsImbWr[i]) << ", 0));" << endl;
+				outfile << "\t\t\tif (rngBufxfs.first != rngBufxfs.second) reqbx |= VecW" << srefroot << "Buffer::" << StrMod::uc(srefsImbWr[i]) << ";" << endl;
 				outfile << endl;
 			};
 		};
@@ -345,19 +375,25 @@ void WdbeWrdevSys::writeSysCpp(
 
 		// --- runReqprc.xferTknste
 		outfile << "// IP runReqprc.xferTknste --- IBEGIN" << endl;
-		for (unsigned int i = 0; i < imbs.nodes.size(); i++) {
-			imb = imbs.nodes[i];
-
-			if ((imb->corRefWdbeMModule == refHostif) && (i != ixImbCmdinv) && (i != ixImbCmdret)) {
-				s = Wdbe::getImbshort(imb);
-				outfile << "\t\t\t\t\tif ( ! (((_rxbuf[2] & VecW" << srefroot << "Buffer::" << StrMod::uc(imb->sref) << ") ^ tkn" << s << ") & VecW" << srefroot << "Buffer::" << StrMod::uc(imb->sref) << ") ) {" << endl;
-				outfile << "\t\t\t\t\t\tif (_rxbuf[2] & VecW" << srefroot << "Buffer::" << StrMod::uc(imb->sref) << ") tkn" << s << " = ~VecW" << srefroot << "Buffer::" << StrMod::uc(imb->sref) << "; else tkn" << s << " = VecW" << srefroot << "Buffer::" << StrMod::uc(imb->sref) << ";" << endl;
+		for (unsigned int i = 0; i < srefsImbRd.size(); i++) {
+			if (i != ixSrefrootsImbRdCmdret) {
+				outfile << "\t\t\t\t\tif ( ! (((_rxbuf[2] & VecW" << srefroot << "Buffer::" << StrMod::uc(srefsImbRd[i]) << ") ^ tkn" << srefrootsImbRd[i] << ") & VecW" << srefroot << "Buffer::" << StrMod::uc(srefsImbRd[i]) << ") ) {" << endl;
+				outfile << "\t\t\t\t\t\tif (_rxbuf[2] & VecW" << srefroot << "Buffer::" << StrMod::uc(srefsImbRd[i]) << ") tkn" << srefrootsImbRd[i] << " = ~VecW" << srefroot << "Buffer::" << StrMod::uc(srefsImbRd[i]) << "; else tkn" << srefrootsImbRd[i] << " = VecW" << srefroot << "Buffer::" << StrMod::uc(srefsImbRd[i]) << ";" << endl;
 				outfile << "\t\t\t\t\t\tif (!first) {" << endl;
-				outfile << "\t\t\t\t\t\t\t//cout << \"tkn" << s << " corrected\" << endl;" << endl;
-				outfile << "\t\t\t\t\t\t\tif (arbbx";
-				if (imb->ixVDir == VecWdbeVMImbufDir::OUT) outfile << "Rd";
-				else outfile << "Wr";
-				outfile << "_last == VecW" << srefroot << "Buffer::" << StrMod::uc(imb->sref) << ") skiprd = true;" << endl;
+				outfile << "\t\t\t\t\t\t\t//cout << \"tkn" << srefrootsImbRd[i] << " corrected\" << endl;" << endl;
+				outfile << "\t\t\t\t\t\t\tif (arbbxRd_last == VecW" << srefroot << "Buffer::" << StrMod::uc(srefsImbRd[i]) << ") skiprd = true;" << endl;
+				outfile << "\t\t\t\t\t\t};" << endl;
+				outfile << "\t\t\t\t\t};" << endl;
+			};
+		};
+
+		for (unsigned int i = 0; i < srefsImbWr.size(); i++) {
+			if (i != ixSrefrootsImbWrCmdinv) {
+				outfile << "\t\t\t\t\tif ( ! (((_rxbuf[2] & VecW" << srefroot << "Buffer::" << StrMod::uc(srefsImbWr[i]) << ") ^ tkn" << srefrootsImbWr[i] << ") & VecW" << srefroot << "Buffer::" << StrMod::uc(srefsImbWr[i]) << ") ) {" << endl;
+				outfile << "\t\t\t\t\t\tif (_rxbuf[2] & VecW" << srefroot << "Buffer::" << StrMod::uc(srefsImbWr[i]) << ") tkn" << srefrootsImbWr[i] << " = ~VecW" << srefroot << "Buffer::" << StrMod::uc(srefsImbWr[i]) << "; else tkn" << srefrootsImbWr[i] << " = VecW" << srefroot << "Buffer::" << StrMod::uc(srefsImbWr[i]) << ";" << endl;
+				outfile << "\t\t\t\t\t\tif (!first) {" << endl;
+				outfile << "\t\t\t\t\t\t\t//cout << \"tkn" << srefrootsImbWr[i] << " corrected\" << endl;" << endl;
+				outfile << "\t\t\t\t\t\t\tif (arbbxRd_last == VecW" << srefroot << "Buffer::" << StrMod::uc(srefsImbWr[i]) << ") skiprd = true;" << endl;
 				outfile << "\t\t\t\t\t\t};" << endl;
 				outfile << "\t\t\t\t\t};" << endl;
 			};
@@ -367,30 +403,16 @@ void WdbeWrdevSys::writeSysCpp(
 		// --- runReqprc.xferArbbx
 		outfile << "// IP runReqprc.xferArbbx --- IBEGIN" << endl;
 		outfile << "\t\t\t\t\tif (";
-		first = true;
-		for (unsigned int i = 0; i < imbs.nodes.size(); i++) {
-			imb = imbs.nodes[i];
-
-			if ((imb->corRefWdbeMModule == refHostif) && (imb->ixVDir == VecWdbeVMImbufDir::OUT)) {
-				if (first) first = false;
-				else outfile << " || ";
-
-				outfile << "(arbbx == VecW" << srefroot << "Buffer::" << StrMod::uc(imb->sref) << ")";
-			};
+		for (unsigned int i = 0; i < srefsImbRd.size(); i++) {
+			if (i != 0) outfile << " || ";
+			outfile << "(arbbx == VecW" << srefroot << "Buffer::" << StrMod::uc(srefsImbRd[i]) << ")";
 		};
 		outfile << ") arbbxRd_last = arbbx;" << endl;
 
 		outfile << "\t\t\t\t\tif (";
-		first = true;
-		for (unsigned int i = 0; i < imbs.nodes.size(); i++) {
-			imb = imbs.nodes[i];
-
-			if ((imb->corRefWdbeMModule == refHostif) && (imb->ixVDir == VecWdbeVMImbufDir::IN)) {
-				if (first) first = false;
-				else outfile << " || ";
-
-				outfile << "(arbbx == VecW" << srefroot << "Buffer::" << StrMod::uc(imb->sref) << ")";
-			};
+		for (unsigned int i = 0; i < srefsImbWr.size(); i++) {
+			if (i != 0) outfile << " || ";
+			outfile << "(arbbx == VecW" << srefroot << "Buffer::" << StrMod::uc(srefsImbWr[i]) << ")";
 		};
 		outfile << ") arbbxWr_last = arbbx;" << endl;
 		outfile << "// IP runReqprc.xferArbbx --- IEND" << endl;
@@ -399,14 +421,12 @@ void WdbeWrdevSys::writeSysCpp(
 		outfile << "// IP runReqprc.lockWrite --- IBEGIN" << endl;
 		outfile << "\t\t\t\t\t\t\tif (";
 		first = true;
-		for (unsigned int i = 0; i < imbs.nodes.size(); i++) {
-			imb = imbs.nodes[i];
-
-			if ((imb->corRefWdbeMModule == refHostif) && (i != ixImbCmdret) && (imb->ixVDir == VecWdbeVMImbufDir::OUT)) {
+		for (unsigned int i = 0; i < srefsImbRd.size(); i++) {
+			if (i != ixSrefrootsImbRdCmdret) {
 				if (first) first = false;
 				else outfile << " || ";
 
-				outfile << "(arbbx == VecW" << srefroot << "Buffer::" << StrMod::uc(imb->sref) << ")";
+				outfile << "(arbbx == VecW" << srefroot << "Buffer::" << StrMod::uc(srefsImbRd[i]) << ")";
 			};
 		};
 		outfile << ") {" << endl;
@@ -415,16 +435,9 @@ void WdbeWrdevSys::writeSysCpp(
 		// --- runReqprc.rw
 		outfile << "// IP runReqprc.rw --- IBEGIN" << endl;
 		outfile << "\t\t\t\t\t\tif (!(skipwr && (";
-		first = true;
-		for (unsigned int i = 0; i < imbs.nodes.size(); i++) {
-			imb = imbs.nodes[i];
-
-			if ((imb->corRefWdbeMModule == refHostif) && (imb->ixVDir == VecWdbeVMImbufDir::IN)) {
-				if (first) first = false;
-				else outfile << " || ";
-
-				outfile << "(arbbx == VecW" << srefroot << "Buffer::" << StrMod::uc(imb->sref) << ")";
-			};
+		for (unsigned int i = 0; i < srefsImbWr.size(); i++) {
+			if (i != 0) outfile << " || ";
+			outfile << "(arbbx == VecW" << srefroot << "Buffer::" << StrMod::uc(srefsImbWr[i]) << ")";
 		};
 		outfile << "))) {" << endl;
 		outfile << "// IP runReqprc.rw --- IEND" << endl;
@@ -432,33 +445,28 @@ void WdbeWrdevSys::writeSysCpp(
 		// --- runReqprc.setTkn
 		outfile << "// IP runReqprc.setTkn --- IBEGIN" << endl;
 		first = true;
-		for (unsigned int i = 0; i < imbs.nodes.size(); i++) {
-			imb = imbs.nodes[i];
 
-			if (imb->corRefWdbeMModule == refHostif) {
-				s = Wdbe::getImbshort(imb);
+		for (unsigned int i = 0; i < srefsImbRd.size(); i++) {
+			outfile << "\t\t\t\t\t\t\t";
+			if (first) first = false;
+			else outfile << "else ";
+			outfile << "if (arbbx == VecW" << srefroot << "Buffer::" << StrMod::uc(srefsImbRd[i]) << ") tkn = tkn" << srefrootsImbRd[i] << ";" << endl;
+		};
 
-				outfile << "\t\t\t\t\t\t\t";
-				if (first) first = false;
-				else outfile << "else ";
-				outfile << "if (arbbx == VecW" << srefroot << "Buffer::" << StrMod::uc(imb->sref) << ") tkn = tkn" << s << ";" << endl;
-			};
+		for (unsigned int i = 0; i < srefsImbWr.size(); i++) {
+			outfile << "\t\t\t\t\t\t\t";
+			if (first) first = false;
+			else outfile << "else ";
+			outfile << "if (arbbx == VecW" << srefroot << "Buffer::" << StrMod::uc(srefsImbWr[i]) << ") tkn = tkn" << srefrootsImbWr[i] << ";" << endl;
 		};
 		outfile << "// IP runReqprc.setTkn --- IEND" << endl;
 
 		// --- runReqprc.read
 		outfile << "// IP runReqprc.read --- IBEGIN" << endl;
 		outfile << "\t\t\t\t\t\t\t\tif (";
-		first = true;
-		for (unsigned int i = 0; i < imbs.nodes.size(); i++) {
-			imb = imbs.nodes[i];
-
-			if ((imb->corRefWdbeMModule == refHostif) && (imb->ixVDir == VecWdbeVMImbufDir::OUT)) {
-				if (first) first = false;
-				else outfile << " || ";
-
-				outfile << "(arbbx == VecW" << srefroot << "Buffer::" << StrMod::uc(imb->sref) << ")";
-			};
+		for (unsigned int i = 0; i < srefsImbRd.size(); i++) {
+			if (i != 0) outfile << " || ";
+			outfile << "(arbbx == VecW" << srefroot << "Buffer::" << StrMod::uc(srefsImbRd[i]) << ")";
 		};
 		outfile << ") {" << endl;
 		outfile << "// IP runReqprc.read --- IEND" << endl;
@@ -466,16 +474,9 @@ void WdbeWrdevSys::writeSysCpp(
 		// --- runReqprc.write
 		outfile << "// IP runReqprc.write --- IBEGIN" << endl;
 		outfile << "\t\t\t\t\t\t\t\t} else if (";
-		first = true;
-		for (unsigned int i = 0; i < imbs.nodes.size(); i++) {
-			imb = imbs.nodes[i];
-
-			if ((imb->corRefWdbeMModule == refHostif) && (imb->ixVDir == VecWdbeVMImbufDir::IN)) {
-				if (first) first = false;
-				else outfile << " || ";
-
-				outfile << "(arbbx == VecW" << srefroot << "Buffer::" << StrMod::uc(imb->sref) << ")";
-			};
+		for (unsigned int i = 0; i < srefsImbWr.size(); i++) {
+			if (i != 0) outfile << " || ";
+			outfile << "(arbbx == VecW" << srefroot << "Buffer::" << StrMod::uc(srefsImbWr[i]) << ")";
 		};
 		outfile << ") {" << endl;
 		outfile << "// IP runReqprc.write --- IEND" << endl;
@@ -483,17 +484,19 @@ void WdbeWrdevSys::writeSysCpp(
 		// --- runReqprc.invtkn
 		outfile << "// IP runReqprc.invtkn --- IBEGIN" << endl;
 		first = true;
-		for (unsigned int i = 0; i < imbs.nodes.size(); i++) {
-			imb = imbs.nodes[i];
 
-			if (imb->corRefWdbeMModule == refHostif) {
-				s = Wdbe::getImbshort(imb);
+		for (unsigned int i = 0; i < srefsImbRd.size(); i++) {
+			outfile << "\t\t\t\t\t\t\t\t";
+			if (first) first = false;
+			else outfile << "else ";
+			outfile << "if (arbbx == VecW" << srefroot << "Buffer::" << StrMod::uc(srefsImbRd[i]) << ") tkn" << srefrootsImbRd[i] << " = invtkn;" << endl;
+		};
 
-				outfile << "\t\t\t\t\t\t\t\t";
-				if (first) first = false;
-				else outfile << "else ";
-				outfile << "if (arbbx == VecW" << srefroot << "Buffer::" << StrMod::uc(imb->sref) << ") tkn" << s << " = invtkn;" << endl;
-			};
+		for (unsigned int i = 0; i < srefsImbWr.size(); i++) {
+			outfile << "\t\t\t\t\t\t\t\t";
+			if (first) first = false;
+			else outfile << "else ";
+			outfile << "if (arbbx == VecW" << srefroot << "Buffer::" << StrMod::uc(srefsImbWr[i]) << ") tkn" << srefrootsImbWr[i] << " = invtkn;" << endl;
 		};
 		outfile << "// IP runReqprc.invtkn --- IEND" << endl;
 
@@ -501,16 +504,16 @@ void WdbeWrdevSys::writeSysCpp(
 		outfile << "// IP runReqprc.updRead --- IBEGIN" << endl;
 		outfile << "\t\t\t\t\t\tif (";
 		first = true;
-		for (unsigned int i = 0; i < imbs.nodes.size(); i++) {
-			imb = imbs.nodes[i];
 
-			if ((imb->corRefWdbeMModule == refHostif) && (i != ixImbCmdret) && (imb->ixVDir == VecWdbeVMImbufDir::OUT)) {
+		for (unsigned int i = 0; i < srefsImbRd.size(); i++) {
+			if (i != ixSrefrootsImbRdCmdret) {
 				if (first) first = false;
 				else outfile << " || ";
 
-				outfile << "(arbbx == VecW" << srefroot << "Buffer::" << StrMod::uc(imb->sref) << ")";
+				outfile << "(arbbx == VecW" << srefroot << "Buffer::" << StrMod::uc(srefsImbRd[i]) << ")";
 			};
 		};
+
 		if (first) outfile << "false";
 		outfile << ") {" << endl;
 		outfile << "// IP runReqprc.updRead --- IEND" << endl;
@@ -519,16 +522,16 @@ void WdbeWrdevSys::writeSysCpp(
 		outfile << "// IP runReqprc.updWrite --- IBEGIN" << endl;
 		outfile << "\t\t\t\t\t\t} else if (";
 		first = true;
-		for (unsigned int i = 0; i < imbs.nodes.size(); i++) {
-			imb = imbs.nodes[i];
 
-			if ((imb->corRefWdbeMModule == refHostif) && (i != ixImbCmdinv) && (imb->ixVDir == VecWdbeVMImbufDir::IN)) {
+		for (unsigned int i = 0; i < srefsImbWr.size(); i++) {
+			if (i != ixSrefrootsImbWrCmdinv) {
 				if (first) first = false;
 				else outfile << " || ";
 
-				outfile << "(arbbx == VecW" << srefroot << "Buffer::" << StrMod::uc(imb->sref) << ")";
+				outfile << "(arbbx == VecW" << srefroot << "Buffer::" << StrMod::uc(srefsImbWr[i]) << ")";
 			};
 		};
+
 		if (first) outfile << "false";
 		outfile << ") {" << endl;
 		outfile << "// IP runReqprc.updWrite --- IEND" << endl;
@@ -901,10 +904,14 @@ void WdbeWrdevSys::expandTrgRte(
 	// {BSS3, dcxif, CtrIdhwBss3Dcxif, rdbufDcxifToHostif, wrbufHostifToDcxif}
 	// {DCX3, qcdif, CrrIdhwDcx3Qcdif, rdbufQcdifToHostif, wrbufHostifToQcdif}
 
+	ubigint ref;
+
 	WdbeMTarget* trg = NULL;
 	WdbeMUnit* unt = NULL;
 
 	WdbeMController* ctr = NULL;
+
+	string sref, srefrootMgmt, srefrootCor;
 
 	string srefUnt;
 	string srefMdl;
@@ -963,15 +970,15 @@ void WdbeWrdevSys::expandTrgRte(
 					srefsFwdctrs.push_back(srefMdl);
 					fullsrefsFwdctrs.push_back(ctr->Fullsref);
 
-					s = "";
-					dbswdbe->loadStringBySQL("SELECT TblWdbeMImbuf.sref FROM TblWdbeMModule, TblWdbeMImbuf WHERE TblWdbeMModule.supRefWdbeMModule = " + to_string(ctr->refWdbeMModule)
-								+ " AND TblWdbeMImbuf.refWdbeMModule = TblWdbeMModule.ref AND TblWdbeMImbuf.ixVDir = " + to_string(VecWdbeVMImbufDir::OUT), s);
-					srefsRdbufs.push_back(s);
+					sref = "";
+					if (dbswdbe->loadRefBySQL("SELECT TblWdbeRMModuleMModule.ctdRefWdbeMModule FROM TblWdbeRMModuleMModule, TblWdbeMModule WHERE TblWdbeRMModuleMModule.srefKFunction = 'snk' AND TblWdbeMModule.ref = TblWdbeRMModuleMModule.ctdRefWdbeMModule AND TblWdbeMModule.supRefWdbeMModule = "
+								+ to_string(ctr->refWdbeMModule), ref)) Wdbe::getImbsrefs(dbswdbe, ref, sref, srefrootMgmt, srefrootCor);
+					srefsRdbufs.push_back(sref);
 
-					s = "";
-					dbswdbe->loadStringBySQL("SELECT TblWdbeMImbuf.sref FROM TblWdbeMModule, TblWdbeMImbuf WHERE TblWdbeMModule.supRefWdbeMModule = " + to_string(ctr->refWdbeMModule)
-								+ " AND TblWdbeMImbuf.refWdbeMModule = TblWdbeMModule.ref AND TblWdbeMImbuf.ixVDir = " + to_string(VecWdbeVMImbufDir::IN), s);
-					srefsWrbufs.push_back(s);
+					sref = "";
+					if (dbswdbe->loadRefBySQL("SELECT TblWdbeRMModuleMModule.ctdRefWdbeMModule FROM TblWdbeRMModuleMModule, TblWdbeMModule WHERE TblWdbeRMModuleMModule.srefKFunction = 'src' AND TblWdbeMModule.ref = TblWdbeRMModuleMModule.ctdRefWdbeMModule AND TblWdbeMModule.supRefWdbeMModule = "
+								+ to_string(ctr->refWdbeMModule), ref)) Wdbe::getImbsrefs(dbswdbe, ref, sref, srefrootMgmt, srefrootCor);
+					srefsWrbufs.push_back(sref);
 
 					delete ctr;
 				};

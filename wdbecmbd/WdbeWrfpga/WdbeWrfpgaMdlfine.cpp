@@ -152,7 +152,7 @@ void WdbeWrfpgaMdlfine::writeMdlVhd(
 		if (prt->srefWdbeKHdltype == "sl") srefsSlprtsigs.insert(prt->sref);
 	};
 
-	dbswdbe->tblwdbemsignal->loadRstByMdl(mdl->ref, false, sigs);
+	dbswdbe->tblwdbemsignal->loadRstByRetReu(VecWdbeVMSignalRefTbl::MDL, mdl->ref, false, sigs);
 	for (unsigned int i = 0; i < sigs.nodes.size(); i++) {
 		sig = sigs.nodes[i];
 
@@ -462,7 +462,7 @@ void WdbeWrfpgaMdlfine::writeMdlVhd(
 
 		srefsSlvars.clear();
 
-		dbswdbe->tblwdbemvariable->loadRstByPrc(prc->ref, false, vars);
+		dbswdbe->tblwdbemvariable->loadRstByRetReu(VecWdbeVMVariableRefTbl::PRC, prc->ref, false, vars);
 		for (unsigned int j = 0; j < vars.nodes.size(); j++) {
 			var = vars.nodes[j];
 			if (var->srefWdbeKHdltype == "sl") srefsSlvars.insert(var->sref);
@@ -610,7 +610,9 @@ void WdbeWrfpgaMdlfine::writeMdlVhd(
 			outfile << "\t\t";
 
 			if (prc->asrSrefWdbeMSignal != "") {
-				outfile << "if " << prc->asrSrefWdbeMSignal << "='1' then" << endl;
+				outfile << "if " << prc->asrSrefWdbeMSignal;
+				if (tolower(prc->asrSrefWdbeMSignal[prc->asrSrefWdbeMSignal.length() - 1]) == 'n') outfile << "='0' then" << endl;
+				else outfile << "='1' then" << endl;
 
 				outfile << "\t\t\t-- IP impl." << prc->sref << ".asyncrst --- BEGIN" << endl;
 				if (fsts.nodes.size() > 0) outfile << "\t\t\tstate" << Prcsref << " <= state" << Prcsref << StrMod::cap(fsts.nodes[0]->sref) << ";" << endl;

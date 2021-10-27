@@ -25,7 +25,7 @@
 class WdbeQSigList {
 
 public:
-	WdbeQSigList(const Sbecore::ubigint qref = 0, const Sbecore::ubigint jref = 0, const Sbecore::uint jnum = 0, const Sbecore::ubigint ref = 0, const std::string sref = "", const Sbecore::uint ixVBasetype = 0, const std::string srefIxVBasetype = "", const std::string titIxVBasetype = "", const Sbecore::ubigint mdlRefWdbeMModule = 0, const std::string stubMdlRefWdbeMModule = "", const Sbecore::uint mgeIxVTbl = 0, const std::string srefMgeIxVTbl = "", const std::string titMgeIxVTbl = "", const Sbecore::ubigint mgeUref = 0, const std::string stubMgeUref = "", const Sbecore::ubigint refWdbeMVector = 0, const std::string stubRefWdbeMVector = "", const bool Const = false, const std::string yesnoConst = "", const std::string srefWdbeKHdltype = "", const std::string titSrefWdbeKHdltype = "", const Sbecore::usmallint Width = 0, const std::string Minmax = "");
+	WdbeQSigList(const Sbecore::ubigint qref = 0, const Sbecore::ubigint jref = 0, const Sbecore::uint jnum = 0, const Sbecore::ubigint ref = 0, const std::string sref = "", const Sbecore::uint ixVBasetype = 0, const std::string srefIxVBasetype = "", const std::string titIxVBasetype = "", const Sbecore::uint refIxVTbl = 0, const std::string srefRefIxVTbl = "", const std::string titRefIxVTbl = "", const Sbecore::ubigint refUref = 0, const std::string stubRefUref = "", const Sbecore::uint mgeIxVTbl = 0, const std::string srefMgeIxVTbl = "", const std::string titMgeIxVTbl = "", const Sbecore::ubigint mgeUref = 0, const std::string stubMgeUref = "", const Sbecore::ubigint refWdbeMVector = 0, const std::string stubRefWdbeMVector = "", const bool Const = false, const std::string yesnoConst = "", const std::string srefWdbeKHdltype = "", const std::string titSrefWdbeKHdltype = "", const Sbecore::usmallint Width = 0, const std::string Minmax = "");
 
 public:
 	Sbecore::ubigint qref;
@@ -36,8 +36,11 @@ public:
 	Sbecore::uint ixVBasetype;
 	std::string srefIxVBasetype;
 	std::string titIxVBasetype;
-	Sbecore::ubigint mdlRefWdbeMModule;
-	std::string stubMdlRefWdbeMModule;
+	Sbecore::uint refIxVTbl;
+	std::string srefRefIxVTbl;
+	std::string titRefIxVTbl;
+	Sbecore::ubigint refUref;
+	std::string stubRefUref;
 	Sbecore::uint mgeIxVTbl;
 	std::string srefMgeIxVTbl;
 	std::string titMgeIxVTbl;
@@ -95,8 +98,8 @@ public:
 	virtual Sbecore::ubigint loadRstBySQL(const std::string& sqlstr, const bool append, ListWdbeQSigList& rst);
 
 	virtual Sbecore::ubigint insertRec(WdbeQSigList* rec);
-	Sbecore::ubigint insertNewRec(WdbeQSigList** rec = NULL, const Sbecore::ubigint jref = 0, const Sbecore::uint jnum = 0, const Sbecore::ubigint ref = 0, const std::string sref = "", const Sbecore::uint ixVBasetype = 0, const std::string srefIxVBasetype = "", const std::string titIxVBasetype = "", const Sbecore::ubigint mdlRefWdbeMModule = 0, const std::string stubMdlRefWdbeMModule = "", const Sbecore::uint mgeIxVTbl = 0, const std::string srefMgeIxVTbl = "", const std::string titMgeIxVTbl = "", const Sbecore::ubigint mgeUref = 0, const std::string stubMgeUref = "", const Sbecore::ubigint refWdbeMVector = 0, const std::string stubRefWdbeMVector = "", const bool Const = false, const std::string yesnoConst = "", const std::string srefWdbeKHdltype = "", const std::string titSrefWdbeKHdltype = "", const Sbecore::usmallint Width = 0, const std::string Minmax = "");
-	Sbecore::ubigint appendNewRecToRst(ListWdbeQSigList& rst, WdbeQSigList** rec = NULL, const Sbecore::ubigint jref = 0, const Sbecore::uint jnum = 0, const Sbecore::ubigint ref = 0, const std::string sref = "", const Sbecore::uint ixVBasetype = 0, const std::string srefIxVBasetype = "", const std::string titIxVBasetype = "", const Sbecore::ubigint mdlRefWdbeMModule = 0, const std::string stubMdlRefWdbeMModule = "", const Sbecore::uint mgeIxVTbl = 0, const std::string srefMgeIxVTbl = "", const std::string titMgeIxVTbl = "", const Sbecore::ubigint mgeUref = 0, const std::string stubMgeUref = "", const Sbecore::ubigint refWdbeMVector = 0, const std::string stubRefWdbeMVector = "", const bool Const = false, const std::string yesnoConst = "", const std::string srefWdbeKHdltype = "", const std::string titSrefWdbeKHdltype = "", const Sbecore::usmallint Width = 0, const std::string Minmax = "");
+	Sbecore::ubigint insertNewRec(WdbeQSigList** rec = NULL, const Sbecore::ubigint jref = 0, const Sbecore::uint jnum = 0, const Sbecore::ubigint ref = 0, const std::string sref = "", const Sbecore::uint ixVBasetype = 0, const std::string srefIxVBasetype = "", const std::string titIxVBasetype = "", const Sbecore::uint refIxVTbl = 0, const std::string srefRefIxVTbl = "", const std::string titRefIxVTbl = "", const Sbecore::ubigint refUref = 0, const std::string stubRefUref = "", const Sbecore::uint mgeIxVTbl = 0, const std::string srefMgeIxVTbl = "", const std::string titMgeIxVTbl = "", const Sbecore::ubigint mgeUref = 0, const std::string stubMgeUref = "", const Sbecore::ubigint refWdbeMVector = 0, const std::string stubRefWdbeMVector = "", const bool Const = false, const std::string yesnoConst = "", const std::string srefWdbeKHdltype = "", const std::string titSrefWdbeKHdltype = "", const Sbecore::usmallint Width = 0, const std::string Minmax = "");
+	Sbecore::ubigint appendNewRecToRst(ListWdbeQSigList& rst, WdbeQSigList** rec = NULL, const Sbecore::ubigint jref = 0, const Sbecore::uint jnum = 0, const Sbecore::ubigint ref = 0, const std::string sref = "", const Sbecore::uint ixVBasetype = 0, const std::string srefIxVBasetype = "", const std::string titIxVBasetype = "", const Sbecore::uint refIxVTbl = 0, const std::string srefRefIxVTbl = "", const std::string titRefIxVTbl = "", const Sbecore::ubigint refUref = 0, const std::string stubRefUref = "", const Sbecore::uint mgeIxVTbl = 0, const std::string srefMgeIxVTbl = "", const std::string titMgeIxVTbl = "", const Sbecore::ubigint mgeUref = 0, const std::string stubMgeUref = "", const Sbecore::ubigint refWdbeMVector = 0, const std::string stubRefWdbeMVector = "", const bool Const = false, const std::string yesnoConst = "", const std::string srefWdbeKHdltype = "", const std::string titSrefWdbeKHdltype = "", const Sbecore::usmallint Width = 0, const std::string Minmax = "");
 	virtual void insertRst(ListWdbeQSigList& rst);
 	virtual void updateRec(WdbeQSigList* rec);
 	virtual void updateRst(ListWdbeQSigList& rst);

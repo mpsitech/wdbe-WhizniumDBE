@@ -109,6 +109,7 @@ void PnlWdbePphRec::StatApp::writeJSON(
 			, string difftag
 			, const bool initdoneDetail
 			, const bool initdoneAPar
+			, const bool initdoneMNModule
 		) {
 	if (difftag.length() == 0) difftag = "StatAppWdbePphRec";
 
@@ -116,6 +117,7 @@ void PnlWdbePphRec::StatApp::writeJSON(
 
 	me["initdoneDetail"] = initdoneDetail;
 	me["initdoneAPar"] = initdoneAPar;
+	me["initdoneMNModule"] = initdoneMNModule;
 };
 
 void PnlWdbePphRec::StatApp::writeXML(
@@ -124,6 +126,7 @@ void PnlWdbePphRec::StatApp::writeXML(
 			, bool shorttags
 			, const bool initdoneDetail
 			, const bool initdoneAPar
+			, const bool initdoneMNModule
 		) {
 	if (difftag.length() == 0) difftag = "StatAppWdbePphRec";
 
@@ -134,6 +137,7 @@ void PnlWdbePphRec::StatApp::writeXML(
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
 		writeBoolAttr(wr, itemtag, "sref", "initdoneDetail", initdoneDetail);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneAPar", initdoneAPar);
+		writeBoolAttr(wr, itemtag, "sref", "initdoneMNModule", initdoneMNModule);
 	xmlTextWriterEndElement(wr);
 };
 
@@ -145,6 +149,7 @@ PnlWdbePphRec::StatShr::StatShr(
 			const uint ixWdbeVExpstate
 			, const ubigint jrefDetail
 			, const ubigint jrefAPar
+			, const ubigint jrefMNModule
 			, const bool ButRegularizeActive
 		) :
 			Block()
@@ -152,9 +157,10 @@ PnlWdbePphRec::StatShr::StatShr(
 	this->ixWdbeVExpstate = ixWdbeVExpstate;
 	this->jrefDetail = jrefDetail;
 	this->jrefAPar = jrefAPar;
+	this->jrefMNModule = jrefMNModule;
 	this->ButRegularizeActive = ButRegularizeActive;
 
-	mask = {IXWDBEVEXPSTATE, JREFDETAIL, JREFAPAR, BUTREGULARIZEACTIVE};
+	mask = {IXWDBEVEXPSTATE, JREFDETAIL, JREFAPAR, JREFMNMODULE, BUTREGULARIZEACTIVE};
 };
 
 void PnlWdbePphRec::StatShr::writeJSON(
@@ -168,6 +174,7 @@ void PnlWdbePphRec::StatShr::writeJSON(
 	me["srefIxWdbeVExpstate"] = VecWdbeVExpstate::getSref(ixWdbeVExpstate);
 	me["scrJrefDetail"] = Scr::scramble(jrefDetail);
 	me["scrJrefAPar"] = Scr::scramble(jrefAPar);
+	me["scrJrefMNModule"] = Scr::scramble(jrefMNModule);
 	me["ButRegularizeActive"] = ButRegularizeActive;
 };
 
@@ -186,6 +193,7 @@ void PnlWdbePphRec::StatShr::writeXML(
 		writeStringAttr(wr, itemtag, "sref", "srefIxWdbeVExpstate", VecWdbeVExpstate::getSref(ixWdbeVExpstate));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefDetail", Scr::scramble(jrefDetail));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefAPar", Scr::scramble(jrefAPar));
+		writeStringAttr(wr, itemtag, "sref", "scrJrefMNModule", Scr::scramble(jrefMNModule));
 		writeBoolAttr(wr, itemtag, "sref", "ButRegularizeActive", ButRegularizeActive);
 	xmlTextWriterEndElement(wr);
 };
@@ -198,6 +206,7 @@ set<uint> PnlWdbePphRec::StatShr::comm(
 	if (ixWdbeVExpstate == comp->ixWdbeVExpstate) insert(items, IXWDBEVEXPSTATE);
 	if (jrefDetail == comp->jrefDetail) insert(items, JREFDETAIL);
 	if (jrefAPar == comp->jrefAPar) insert(items, JREFAPAR);
+	if (jrefMNModule == comp->jrefMNModule) insert(items, JREFMNMODULE);
 	if (ButRegularizeActive == comp->ButRegularizeActive) insert(items, BUTREGULARIZEACTIVE);
 
 	return(items);
@@ -211,7 +220,7 @@ set<uint> PnlWdbePphRec::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {IXWDBEVEXPSTATE, JREFDETAIL, JREFAPAR, BUTREGULARIZEACTIVE};
+	diffitems = {IXWDBEVEXPSTATE, JREFDETAIL, JREFAPAR, JREFMNMODULE, BUTREGULARIZEACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);

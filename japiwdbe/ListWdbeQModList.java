@@ -45,7 +45,7 @@ public class ListWdbeQModList {
 			clear();
 			
 			for (int i = 0; i < ics.size(); i++) {
-				rec = new WdbeQModList(i+1, "", "", "", "", "", "", "", "", "");
+				rec = new WdbeQModList(i+1, "", "", "", "", "", "", "", "", "", "", "");
 
 				if (shorttags.get(i)) s = basexpath + "/row[@jnum='" + ics.get(i).toString() + "']";
 				else s = basexpath + "/WdbeQModList[@jnum='" + ics.get(i).toString() + "']";

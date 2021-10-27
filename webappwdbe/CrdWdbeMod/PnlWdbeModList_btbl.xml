@@ -23,11 +23,12 @@
 		<table cellspacing="0" border="0" cellpadding="0"><form action="">
 			<colgroup id="cols">
 				<col width="20"></col>
-				<col width="150"></col>
-				<col width="150"></col>
-				<col width="150"></col>
-				<col width="150"></col>
-				<col width="150"></col>
+				<col width="125"></col>
+				<col width="125"></col>
+				<col width="125"></col>
+				<col width="125"></col>
+				<col width="125"></col>
+				<col width="125"></col>
 				<col width="151"></col>
 				<col width="25"></col>
 			</colgroup>
@@ -35,6 +36,7 @@
 				<tr id="hdr">
 					<td height="20" class="col" id="rhcl"><img width="10" height="10" alt="rhcl" src="../icon/void.png"></img></td>
 				<td class="col" id="TcoSrf">TcoSrf</td>
+				<td class="col" id="TcoVnd">TcoVnd</td>
 				<td class="col" id="TcoTyp">TcoTyp</td>
 				<td class="col" id="TcoHkt">TcoHkt</td>
 				<td class="col" id="TcoHku">TcoHku</td>

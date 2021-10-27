@@ -88,6 +88,7 @@ function refreshB(chgcol) {
 		var ncol = parseInt(retrieveSi(srcdoc, "StatAppQryWdbeMtpList", "ncol"));
 
 		var TcoSrfWidth = parseInt(retrieveSi(srcdoc, "StgIacWdbeMtpList", "TcoSrfWidth"));
+		var TcoVndWidth = parseInt(retrieveSi(srcdoc, "StgIacWdbeMtpList", "TcoVndWidth"));
 		var TcoTypWidth = parseInt(retrieveSi(srcdoc, "StgIacWdbeMtpList", "TcoTypWidth"));
 		var TcoSrrWidth = parseInt(retrieveSi(srcdoc, "StgIacWdbeMtpList", "TcoSrrWidth"));
 
@@ -107,10 +108,12 @@ function refreshB(chgcol) {
 			ix++;
 
 			if (i == 1) {
-				doc.cols.push("TcoSrf"); doc.widths.push(TcoSrfWidth); doc.fs.push("srf"); doc.tos.push(4); wtot += TcoSrfWidth;
+				doc.cols.push("TcoSrf"); doc.widths.push(TcoSrfWidth); doc.fs.push("srf"); doc.tos.push(1); wtot += TcoSrfWidth;
 			} else if (i == 2) {
-				doc.cols.push("TcoTyp"); doc.widths.push(TcoTypWidth); doc.fs.push("typ2"); doc.tos.push(0); wtot += TcoTypWidth;
+				doc.cols.push("TcoVnd"); doc.widths.push(TcoVndWidth); doc.fs.push("vnd2"); doc.tos.push(0); wtot += TcoVndWidth;
 			} else if (i == 3) {
+				doc.cols.push("TcoTyp"); doc.widths.push(TcoTypWidth); doc.fs.push("typ2"); doc.tos.push(0); wtot += TcoTypWidth;
+			} else if (i == 4) {
 				doc.cols.push("TcoSrr"); doc.widths.push(TcoSrrWidth); doc.fs.push("srr"); doc.tos.push(0); wtot += TcoSrrWidth;
 			} else {
 				ix--;
@@ -421,8 +424,8 @@ function handleLoad() {
 
 function handleButClipboardClick() {
 	copyToClipboard(document, srcdoc, "WdbeMtpList", "ListWdbeQMtpList", retrieveTi(srcdoc, "TagWdbeMtpList", "TxtRecord1"), retrieveTi(srcdoc, "TagWdbeMtpList", "TxtRecord2"),
-				["Srf","","Typ","","","","Srr"],
-				["srf","typ","typ2","hkt","hkt2","hku","srr"]);
+				["Srf","","Vnd","","Typ","","","","Srr"],
+				["srf","vnd","vnd2","typ","typ2","hkt","hkt2","hku","srr"]);
 };
 
 // --- generalized event handlers for app controls

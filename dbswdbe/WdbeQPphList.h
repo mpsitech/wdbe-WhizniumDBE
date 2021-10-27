@@ -25,7 +25,7 @@
 class WdbeQPphList {
 
 public:
-	WdbeQPphList(const Sbecore::ubigint qref = 0, const Sbecore::ubigint jref = 0, const Sbecore::uint jnum = 0, const Sbecore::ubigint ref = 0, const std::string sref = "", const Sbecore::ubigint refWdbeMUnit = 0, const std::string stubRefWdbeMUnit = "", const Sbecore::ubigint refWdbeMModule = 0, const std::string stubRefWdbeMModule = "");
+	WdbeQPphList(const Sbecore::ubigint qref = 0, const Sbecore::ubigint jref = 0, const Sbecore::uint jnum = 0, const Sbecore::ubigint ref = 0, const std::string sref = "", const Sbecore::ubigint refWdbeMUnit = 0, const std::string stubRefWdbeMUnit = "");
 
 public:
 	Sbecore::ubigint qref;
@@ -35,8 +35,6 @@ public:
 	std::string sref;
 	Sbecore::ubigint refWdbeMUnit;
 	std::string stubRefWdbeMUnit;
-	Sbecore::ubigint refWdbeMModule;
-	std::string stubRefWdbeMModule;
 
 public:
 	void writeJSON(Json::Value& sup, bool jnumattr = false, bool shorttags = false);
@@ -81,8 +79,8 @@ public:
 	virtual Sbecore::ubigint loadRstBySQL(const std::string& sqlstr, const bool append, ListWdbeQPphList& rst);
 
 	virtual Sbecore::ubigint insertRec(WdbeQPphList* rec);
-	Sbecore::ubigint insertNewRec(WdbeQPphList** rec = NULL, const Sbecore::ubigint jref = 0, const Sbecore::uint jnum = 0, const Sbecore::ubigint ref = 0, const std::string sref = "", const Sbecore::ubigint refWdbeMUnit = 0, const std::string stubRefWdbeMUnit = "", const Sbecore::ubigint refWdbeMModule = 0, const std::string stubRefWdbeMModule = "");
-	Sbecore::ubigint appendNewRecToRst(ListWdbeQPphList& rst, WdbeQPphList** rec = NULL, const Sbecore::ubigint jref = 0, const Sbecore::uint jnum = 0, const Sbecore::ubigint ref = 0, const std::string sref = "", const Sbecore::ubigint refWdbeMUnit = 0, const std::string stubRefWdbeMUnit = "", const Sbecore::ubigint refWdbeMModule = 0, const std::string stubRefWdbeMModule = "");
+	Sbecore::ubigint insertNewRec(WdbeQPphList** rec = NULL, const Sbecore::ubigint jref = 0, const Sbecore::uint jnum = 0, const Sbecore::ubigint ref = 0, const std::string sref = "", const Sbecore::ubigint refWdbeMUnit = 0, const std::string stubRefWdbeMUnit = "");
+	Sbecore::ubigint appendNewRecToRst(ListWdbeQPphList& rst, WdbeQPphList** rec = NULL, const Sbecore::ubigint jref = 0, const Sbecore::uint jnum = 0, const Sbecore::ubigint ref = 0, const std::string sref = "", const Sbecore::ubigint refWdbeMUnit = 0, const std::string stubRefWdbeMUnit = "");
 	virtual void insertRst(ListWdbeQPphList& rst);
 	virtual void updateRec(WdbeQPphList* rec);
 	virtual void updateRst(ListWdbeQPphList& rst);

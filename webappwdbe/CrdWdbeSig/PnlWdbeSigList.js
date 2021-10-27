@@ -107,7 +107,8 @@ function refreshB(chgcol) {
 
 		var TcoSrfWidth = parseInt(retrieveSi(srcdoc, "StgIacWdbeSigList", "TcoSrfWidth"));
 		var TcoTypWidth = parseInt(retrieveSi(srcdoc, "StgIacWdbeSigList", "TcoTypWidth"));
-		var TcoMdlWidth = parseInt(retrieveSi(srcdoc, "StgIacWdbeSigList", "TcoMdlWidth"));
+		var TcoRetWidth = parseInt(retrieveSi(srcdoc, "StgIacWdbeSigList", "TcoRetWidth"));
+		var TcoReuWidth = parseInt(retrieveSi(srcdoc, "StgIacWdbeSigList", "TcoReuWidth"));
 		var TcoMgtWidth = parseInt(retrieveSi(srcdoc, "StgIacWdbeSigList", "TcoMgtWidth"));
 		var TcoMguWidth = parseInt(retrieveSi(srcdoc, "StgIacWdbeSigList", "TcoMguWidth"));
 		var TcoVecWidth = parseInt(retrieveSi(srcdoc, "StgIacWdbeSigList", "TcoVecWidth"));
@@ -132,24 +133,26 @@ function refreshB(chgcol) {
 			ix++;
 
 			if (i == 1) {
-				doc.cols.push("TcoSrf"); doc.widths.push(TcoSrfWidth); doc.fs.push("srf"); doc.tos.push(7); wtot += TcoSrfWidth;
+				doc.cols.push("TcoSrf"); doc.widths.push(TcoSrfWidth); doc.fs.push("srf"); doc.tos.push(1); wtot += TcoSrfWidth;
 			} else if (i == 2) {
 				doc.cols.push("TcoTyp"); doc.widths.push(TcoTypWidth); doc.fs.push("typ2"); doc.tos.push(0); wtot += TcoTypWidth;
 			} else if (i == 3) {
-				doc.cols.push("TcoMdl"); doc.widths.push(TcoMdlWidth); doc.fs.push("mdl"); doc.tos.push(6); wtot += TcoMdlWidth;
+				doc.cols.push("TcoRet"); doc.widths.push(TcoRetWidth); doc.fs.push("ret2"); doc.tos.push(0); wtot += TcoRetWidth;
 			} else if (i == 4) {
-				doc.cols.push("TcoMgt"); doc.widths.push(TcoMgtWidth); doc.fs.push("mgt2"); doc.tos.push(0); wtot += TcoMgtWidth;
+				doc.cols.push("TcoReu"); doc.widths.push(TcoReuWidth); doc.fs.push("reu"); doc.tos.push(4); wtot += TcoReuWidth;
 			} else if (i == 5) {
-				doc.cols.push("TcoMgu"); doc.widths.push(TcoMguWidth); doc.fs.push("mgu"); doc.tos.push(3); wtot += TcoMguWidth;
+				doc.cols.push("TcoMgt"); doc.widths.push(TcoMgtWidth); doc.fs.push("mgt2"); doc.tos.push(0); wtot += TcoMgtWidth;
 			} else if (i == 6) {
-				doc.cols.push("TcoVec"); doc.widths.push(TcoVecWidth); doc.fs.push("vec"); doc.tos.push(2); wtot += TcoVecWidth;
+				doc.cols.push("TcoMgu"); doc.widths.push(TcoMguWidth); doc.fs.push("mgu"); doc.tos.push(6); wtot += TcoMguWidth;
 			} else if (i == 7) {
-				doc.cols.push("TcoCon"); doc.widths.push(TcoConWidth); doc.fs.push("con"); doc.tos.push(1); wtot += TcoConWidth;
+				doc.cols.push("TcoVec"); doc.widths.push(TcoVecWidth); doc.fs.push("vec"); doc.tos.push(7); wtot += TcoVecWidth;
 			} else if (i == 8) {
-				doc.cols.push("TcoHty"); doc.widths.push(TcoHtyWidth); doc.fs.push("hty2"); doc.tos.push(0); wtot += TcoHtyWidth;
+				doc.cols.push("TcoCon"); doc.widths.push(TcoConWidth); doc.fs.push("con"); doc.tos.push(8); wtot += TcoConWidth;
 			} else if (i == 9) {
-				doc.cols.push("TcoWid"); doc.widths.push(TcoWidWidth); doc.fs.push("wid"); doc.tos.push(0); wtot += TcoWidWidth;
+				doc.cols.push("TcoHty"); doc.widths.push(TcoHtyWidth); doc.fs.push("hty2"); doc.tos.push(0); wtot += TcoHtyWidth;
 			} else if (i == 10) {
+				doc.cols.push("TcoWid"); doc.widths.push(TcoWidWidth); doc.fs.push("wid"); doc.tos.push(0); wtot += TcoWidWidth;
+			} else if (i == 11) {
 				doc.cols.push("TcoMmx"); doc.widths.push(TcoMmxWidth); doc.fs.push("mmx"); doc.tos.push(0); wtot += TcoMmxWidth;
 			} else {
 				ix--;
@@ -460,8 +463,8 @@ function handleLoad() {
 
 function handleButClipboardClick() {
 	copyToClipboard(document, srcdoc, "WdbeSigList", "ListWdbeQSigList", retrieveTi(srcdoc, "TagWdbeSigList", "TxtRecord1"), retrieveTi(srcdoc, "TagWdbeSigList", "TxtRecord2"),
-				["Srf","","Typ","Mdl","","Mgt","Mgu","Vec","Con","","Hty","Wid","Mmx"],
-				["srf","typ","typ2","mdl","mgt","mgt2","mgu","vec","con","hty","hty2","wid","mmx"]);
+				["Srf","","Typ","","Ret","Reu","","Mgt","Mgu","Vec","Con","","Hty","Wid","Mmx"],
+				["srf","typ","typ2","ret","ret2","reu","mgt","mgt2","mgu","vec","con","hty","hty2","wid","mmx"]);
 };
 
 // --- generalized event handlers for app controls

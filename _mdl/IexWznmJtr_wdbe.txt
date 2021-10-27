@@ -724,6 +724,7 @@ DlgWdbeRlsWrite
 	WdbePlhfpgaCmdret
 	WdbePlhfpgaEhostif
 	WdbePlhfpgaFwdctr
+	WdbePlhmcuEctr
 	WdbePlhmcuEhostif
 	WdbePrctreeMerge
 	ImeIRMJobMOp.end
@@ -899,7 +900,201 @@ DlgWdbeUtlMrgip
 	ImeIRMJobMOp.srefRefWznmMOp
 	WdbePrctreeMerge
 	ImeIRMJobMOp.end
-DlgWdbeVerBscdd
+DlgWdbeVerCmdset
+	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment
+	other	idle
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		uld		lock	void					chgsge	prsidle
+		ImeIMSensitivity2.end
+	immcb	prsidle		parse
+	other	parse		prsdone	alrwdbeper
+		ImeIMSquawk.Title	Example
+		parsing command set
+		ImeIMSquawk.end
+	alr	alrwdbeper		idle
+		ImeIMSquawk.Title	Example
+		parse error
+		ImeIMSquawk.end
+	other	prsdone
+		ImeIMSquawk.Title	Example
+		command set parsed
+		ImeIMSquawk.end
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		con		lock	void			ImpButRun		chgsge	impidle
+		ImeIMSensitivity2.end
+	immcb	impidle		import
+	other	import	250000	done	alrwdbeier
+		ImeIMSquawk.Title	Example
+		importing command set (&impcnt; records added)	importing command set (1234 records added)
+		ImeIMSquawk.end
+	alr	alrwdbeier		idle
+		ImeIMSquawk.Title	Example
+		import error
+		ImeIMSquawk.end
+	other	done
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		dld		lock	void					cust
+		ImeIMSensitivity2.end
+	ImeIMStage.end
+DlgWdbeVerCustfst
+	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment
+	other	idle
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		uld		lock	void					chgsge	prsidle
+		ImeIMSensitivity2.end
+	immcb	prsidle		parse
+	other	parse		prsdone	alrwdbeper
+		ImeIMSquawk.Title	Example
+		parsing custom fine structure
+		ImeIMSquawk.end
+	alr	alrwdbeper		idle
+		ImeIMSquawk.Title	Example
+		parse error
+		ImeIMSquawk.end
+	other	prsdone
+		ImeIMSquawk.Title	Example
+		custom fine structure parsed
+		ImeIMSquawk.end
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		con		lock	void			ImpButRun		chgsge	impidle
+		ImeIMSensitivity2.end
+	immcb	impidle		import
+	other	import	250000	done	alrwdbeier
+		ImeIMSquawk.Title	Example
+		applying custom fine structure (&impcnt; records added)	applying custom fine structure (1234 records added)
+		ImeIMSquawk.end
+	alr	alrwdbeier		idle
+		ImeIMSquawk.Title	Example
+		import error
+		ImeIMSquawk.end
+	other	done
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		dld		lock	void					cust
+		ImeIMSensitivity2.end
+	ImeIMStage.end
+DlgWdbeVerDflalg
+	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment
+	other	idle
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		uld		lock	void					chgsge	prsidle
+		ImeIMSensitivity2.end
+	immcb	prsidle		parse
+	other	parse		prsdone	alrwdbeper
+		ImeIMSquawk.Title	Example
+		parsing data flows and algorithms
+		ImeIMSquawk.end
+	alr	alrwdbeper		idle
+		ImeIMSquawk.Title	Example
+		parse error
+		ImeIMSquawk.end
+	other	prsdone
+		ImeIMSquawk.Title	Example
+		data flows and algorithms parsed
+		ImeIMSquawk.end
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		con		lock	void			ImpButRun		chgsge	impidle
+		ImeIMSensitivity2.end
+	immcb	impidle		import
+	other	import	250000	done	alrwdbeier
+		ImeIMSquawk.Title	Example
+		importing data flows and algorithms (&impcnt; records added)	importing data flows and algorithms (1234 records added)
+		ImeIMSquawk.end
+	alr	alrwdbeier		idle
+		ImeIMSquawk.Title	Example
+		import error
+		ImeIMSquawk.end
+	other	done
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		dld		lock	void					cust
+		ImeIMSensitivity2.end
+	ImeIMStage.end
+DlgWdbeVerFinmod
+	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment
+	other	idle
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		con		lock	void			FnmButRun		chgsge	genwri
+		ImeIMSensitivity2.end
+	oppiw	gentst	250000	genwri		genwri
+		ImeIMSquawk.Title	Example
+			generating test infrastructure (123/1234 operations completed, last: generate test infrastructure for module 'laser (easy model controller)')
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	generating test infrastructure (&Ndone;/&N; operations completed, last: &sqklast;)
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	oppiw	genwri	250000	genwri	asmlfi	gensv
+		ImeIMSquawk.Title	Example
+			generating inter-module wiring bottom-up (123/1234 operations completed, last: generate wiring for module 'icm2 (top_v1_0 top module)')
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	generating inter-module wiring bottom-up (&Ndone;/&N; operations completed, last: &sqklast;)
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	oppiw	asmlfi		alrwer
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	assembling log file
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	oppiw	gensv	250000	sync
+		ImeIMSquawk.Title	Example
+			filling standard vectors (123/1234 operations completed, last: fill standard vectors for unit 'icacam2')
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	filling standard vectors (&Ndone;/&N; operations completed, last: &sqklast;)
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	other	sync		done
+		ImeIMSquawk.Title	Example
+		
+			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
+			enus	synchronizing build-ready version with licensing server
+			ImeIJMSquawkTitle.end
+		ImeIMSquawk.end
+	other	fail
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		dld		lock	void					cust
+		ImeIMSensitivity2.end
+	other	done
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		dld		lock	void					cust
+		ImeIMSensitivity2.end
+	ImeIMStage.end
+	ImeIRMJobMJob.srefSubRefWznmMJob	Short	Multi	srefIxVConstract
+	JobWdbeLicense	license	false	cre
+	ImeIRMJobMJob.end
+	ImeIRMJobMOp.srefRefWznmMOp
+	WdbeGenStdvec
+	WdbeGenTest
+	WdbeGenWiring
+	WdbePrcfileConcat
+	ImeIRMJobMOp.end
+DlgWdbeVerGenfst
+	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment
+	other	idle
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		con		lock	void			GfsButRun		chgsge	genfst
+		ImeIMSensitivity2.end
+	oppiw	genfst	250000	genfst		genmtp
+		ImeIMSquawk.Title	Example
+		generating fine structure top-down (&Ndone;/&N; operations completed; last: &sqklast;)	generating fine structure top-down (123/1234 operations completed; last: add command wiring for module 'icm2-hostif (easy model host interface)')
+		ImeIMSquawk.end
+	oppiw	genmtp	250000	genmtp		done
+		ImeIMSquawk.Title	Example
+		generating module template-specific fine structure top-down (&Ndone;/&N; operations completed; last: &sqklast;)	generating module template-specific fine structure top-down (123/1234 operations completed; last: add command process handshake for module 'icm2-tkclksrc (tkclksrc_v1_0 controller)')
+		ImeIMSquawk.end
+	other	done
+	ImeIMStage.end
+	ImeIRMJobMOp.srefRefWznmMOp
+	WdbeGenfstCmdbus
+	WdbeGenfstCtrFwdctr
+	WdbeGenfstEctr
+	WdbeGenfstEhostif
+	WdbeGenfstImbuf
+	WdbeGenfstPpl
+	ImeIRMJobMOp.end
+	ImeIRMJobMOppack.srefRefWznmMOppack
+	WdbeMtpGenfst
+	ImeIRMJobMOppack.end
+DlgWdbeVerMdlstr
 	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment
 	other	idle
 		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
@@ -910,7 +1105,7 @@ DlgWdbeVerBscdd
 		ImeIMSquawk.Title	Example
 		
 			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
-			enus	parsing basic device description
+			enus	parsing modular structure
 			ImeIJMSquawkTitle.end
 		ImeIMSquawk.end
 	alr	alrwdbeper		idle
@@ -924,7 +1119,7 @@ DlgWdbeVerBscdd
 		ImeIMSquawk.Title	Example
 		
 			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
-			enus	basic device description parsed
+			enus	modular structure parsed
 			ImeIJMSquawkTitle.end
 		ImeIMSquawk.end
 		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
@@ -933,9 +1128,9 @@ DlgWdbeVerBscdd
 	immcb	impidle		import
 	other	import	250000	impdone	alrwdbeier
 		ImeIMSquawk.Title	Example
-			importing basic device description (1234 records added)
+			importing modular structure (1234 records added)
 			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
-			enus	importing basic device description (&impcnt; records added)
+			enus	importing modular structure (&impcnt; records added)
 			ImeIJMSquawkTitle.end
 		ImeIMSquawk.end
 	alr	alrwdbeier		idle
@@ -962,7 +1157,7 @@ DlgWdbeVerBscdd
 			enus	complementing basic features (&Ndone;/&N; operations completed, last: &sqklast;)
 			ImeIJMSquawkTitle.end
 		ImeIMSquawk.end
-	oppiw	postprc2	250000	postprc2		postprc3
+	oppiw	postprc2	250000	postprc2	asmlfi	postprc3
 		ImeIMSquawk.Title	Example
 			applying module modifications top-down (123/1234 operations completed, last: adapt buffer size for module 'icm2-cmdinv (cmdinv_v1_0 command invocation buffer)')
 			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
@@ -976,100 +1171,11 @@ DlgWdbeVerBscdd
 			enus	applying module modifications bottom-up (&Ndone;/&N; operations completed, last: &sqklast;)
 			ImeIJMSquawkTitle.end
 		ImeIMSquawk.end
-	other	done	other
-		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		dld		lock	void					cust
-		ImeIMSensitivity2.end
-	ImeIMStage.end
-DlgWdbeVerDetdd
-	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment
-	other	idle
-		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		uld		lock	void					chgsge	prsidle
-		ImeIMSensitivity2.end
-	immcb	prsidle		parse
-	other	parse		prsdone	alrwdbeper
-		ImeIMSquawk.Title	Example
-		
-			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
-			enus	parsing detailed device description
-			ImeIJMSquawkTitle.end
-		ImeIMSquawk.end
-	alr	alrwdbeper		idle
-		ImeIMSquawk.Title	Example
-		
-			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
-			enus	parse error
-			ImeIJMSquawkTitle.end
-		ImeIMSquawk.end
-	other	prsdone
-		ImeIMSquawk.Title	Example
-		
-			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
-			enus	detailed device description parsed
-			ImeIJMSquawkTitle.end
-		ImeIMSquawk.end
-		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		con		lock	void			ImpButRun		chgsge	impidle
-		ImeIMSensitivity2.end
-	immcb	impidle		import
-	other	import	250000	impdone	alrwdbeier
-		ImeIMSquawk.Title	Example
-			importing detailed device description (1234 records added)
-			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
-			enus	importing detailed device description (&impcnt; records added)
-			ImeIJMSquawkTitle.end
-		ImeIMSquawk.end
-	alr	alrwdbeier		idle
-		ImeIMSquawk.Title	Example
-		
-			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
-			enus	import error
-			ImeIJMSquawkTitle.end
-		ImeIMSquawk.end
-	other	impdone
-		ImeIMSquawk.Title	Example
-		
-			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
-			enus	import done
-			ImeIJMSquawkTitle.end
-		ImeIMSquawk.end
-		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		con		lock	void			PprButRun		chgsge	postprc1
-		ImeIMSensitivity2.end
-	oppiw	postprc1	250000	postprc1		postprc2
-		ImeIMSquawk.Title	Example
-			applying module modifications top-down (123/1234 operations completed, last: add command bus wiring for module 'icm2-cmdbus (cmdbus_v1_0 command bus controller)')
-			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
-			enus	applying module modifications top-down (&Ndone;/&N; operations completed, last: &sqklast;)
-			ImeIJMSquawkTitle.end
-		ImeIMSquawk.end
-	oppiw	postprc2	250000	postprc2	asmlfi	postprc3
-		ImeIMSquawk.Title	Example
-			complementing inter-module wiring bottom-up (123/1234 operations completed, last: add intermediate generics and ports for unit 'icacam2')
-			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
-			enus	complementing inter-module wiring bottom-up (&Ndone;/&N; operations completed, last: &sqklast;)
-			ImeIJMSquawkTitle.end
-		ImeIMSquawk.end
-	oppiw	asmlfi		alrwer
+	oppiw	asmlfi		alrfer
 		ImeIMSquawk.Title	Example
 		
 			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
 			enus	assembling log file
-			ImeIJMSquawkTitle.end
-		ImeIMSquawk.end
-	oppiw	postprc3	250000	sync
-		ImeIMSquawk.Title	Example
-			deriving detailed features (123/1234 operations completed, last: fill standard vectors for unit 'icacam2')
-			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
-			enus	deriving detailed features (&Ndone;/&N; operations completed, last: &sqklast;)
-			ImeIJMSquawkTitle.end
-		ImeIMSquawk.end
-	other	sync		done
-		ImeIMSquawk.Title	Example
-		
-			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
-			enus	synchronizing build-ready version with licensing server
 			ImeIJMSquawkTitle.end
 		ImeIMSquawk.end
 	other	fail
@@ -1081,13 +1187,18 @@ DlgWdbeVerDetdd
 		dld		lock	void					cust
 		ImeIMSensitivity2.end
 	ImeIMStage.end
-	ImeIRMJobMJob.srefSubRefWznmMJob	Short	Multi	srefIxVConstract
-	JobWdbeLicense	license	false	cre
-	ImeIRMJobMJob.end
 	ImeIRMJobMOp.srefRefWznmMOp
-	WdbeModdetWiring
-	WdbePrcfileConcat
+	WdbeCplmstCtrEctr
+	WdbeCplmstFwdctr
+	WdbeCplmstImbuf
+	WdbeCplmstSys
+	WdbeCplmstTplcpy
+	WdbeCplmstUnt
 	ImeIRMJobMOp.end
+	ImeIRMJobMOppack.srefRefWznmMOppack
+	WdbeMtpCplmstbu
+	WdbeMtpCplmsttd
+	ImeIRMJobMOppack.end
 DlgWdbeVerNew
 	ImeIMVector.srefIxVOp	srefIxVBasetype	sref	osrefWznmKTaggrp	srefsKOption
 	retrupd		VecVDlgWdbeVerNewVni

@@ -243,6 +243,7 @@ void DlgWdbeRlsWrite::createFpga(
 	ubigint refChkoutfile; dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMFile WHERE osrefKContent = 'cftpl' AND Filename = 'checkout_Fpga.sh'", refChkoutfile);
 
 	ubigint refUntUcffile; dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMFile WHERE osrefKContent = 'cftpl' AND Filename = 'Xxxx.ucf'", refUntUcffile);
+	ubigint refUntPdcfile; dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMFile WHERE osrefKContent = 'cftpl' AND Filename = 'Xxxx.pdc'", refUntPdcfile);
 	ubigint refUntXdcfile; dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMFile WHERE osrefKContent = 'cftpl' AND Filename = 'Xxxx.xdc'", refUntXdcfile);
 	ubigint refUntVhdfile; dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMFile WHERE osrefKContent = 'cftpl' AND Filename = 'Xxxx.vhd'", refUntVhdfile);
 	ubigint refEzuntVhdfile; dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMFile WHERE osrefKContent = 'cftpl' AND Filename = 'Xxxx_Easy.vhd'", refEzuntVhdfile);
@@ -311,7 +312,7 @@ void DlgWdbeRlsWrite::createFpga(
 		vals[vals.size()-1] = unt->Title;
 
 		if (unt->srefKToolch == "ise") addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refChkinisefile, "", outfolder + "/_rls/" + rls->sref + "/checkin_" + unt->sref + ".sh", keys, vals));
-		else if ((unt->srefKToolch == "vivado") || (unt->srefKToolch == "vivzynq")) addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refChkinvivfile, "", outfolder + "/_rls/" + rls->sref + "/checkin_" + unt->sref + ".sh", keys, vals));
+		else if (unt->srefKToolch == "vivado") addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refChkinvivfile, "", outfolder + "/_rls/" + rls->sref + "/checkin_" + unt->sref + ".sh", keys, vals));
 	};
 
 	if (!dplonly) {
@@ -333,7 +334,8 @@ void DlgWdbeRlsWrite::createFpga(
 			vals[vals.size()-1] = unt->Title;
 
 			if (unt->srefKToolch == "ise") addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refUntUcffile, "", outfolder + "/" + rtysref + "/" + unt->sref + "/" + Untsref + ".ucf", keys, vals));
-			else if ((unt->srefKToolch == "vivado") || (unt->srefKToolch == "vivzynq")) addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refUntXdcfile, "", outfolder + "/" + rtysref + "/" + unt->sref + "/" + Untsref + ".xdc", keys, vals));
+			else if (unt->srefKToolch == "libero") addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refUntPdcfile, "", outfolder + "/" + rtysref + "/" + unt->sref + "/" + Untsref + ".pdc", keys, vals));
+			else if (unt->srefKToolch == "vivado") addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refUntXdcfile, "", outfolder + "/" + rtysref + "/" + unt->sref + "/" + Untsref + ".xdc", keys, vals));
 
 			if (unt->Easy) addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refEzuntVhdfile, "", outfolder + "/" + rtysref + "/" + unt->sref + "/" + Untsref + ".vhd", keys, vals));
 			else addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refUntVhdfile, "", outfolder + "/" + rtysref + "/" + unt->sref + "/" + Untsref + ".vhd", keys, vals));
@@ -394,13 +396,23 @@ void DlgWdbeRlsWrite::createFpga(
 					};
 
 					// add specific placeholders
-					auto it2 = ics0Speckeys.find(mdl->ref);
-					auto it3 = ics1Speckeys.find(mdl->ref);
+					auto it2 = ics0Typkeys.find(mdl->ref);
+					auto it3 = ics1Typkeys.find(mdl->ref);
 					
-					if (it2 != ics0Speckeys.end()) {
-						for (unsigned int k=it2->second;k<it3->second;k++) {
-							keys.push_back(speckeys[k]);
-							vals.push_back(specvals[k]);
+					if (it2 != ics0Typkeys.end()) {
+						for (unsigned int k = it2->second; k < it3->second; k++) {
+							keys.push_back(typkeys[k]);
+							vals.push_back(typvals[k]);
+						};
+					};
+
+					it2 = ics0Tplkeys.find(mdl->ref);
+					it3 = ics1Tplkeys.find(mdl->ref);
+					
+					if (it2 != ics0Tplkeys.end()) {
+						for (unsigned int k = it2->second; k < it3->second; k++) {
+							keys.push_back(tplkeys[k]);
+							vals.push_back(tplvals[k]);
 						};
 					};
 
@@ -441,17 +453,19 @@ void DlgWdbeRlsWrite::createFpga(
 						} else if (mtp->ixVBasetype == VecWdbeVMModuleBasetype::MNFCORE) {
 
 						} else {
-							addInv(new DpchInvWdbeWrfpgaMdlraw(0, 0, mdl->ref, ipfolder + "/" + rtysref + "/" + unt->sref, Prjshort, Untsref));
+							addInv(new DpchInvWdbeWrfpgaMdlraw(0, 0, mdl->ref, ipfolder + "/" + rtysref + "/" + unt->sref, Prjshort, Untsref, unt->srefKToolch));
 							addInv(new DpchInvWdbeWrfpgaMdlfine(0, 0, mdl->ref, finefolder + "/" + rtysref + "/" + unt->sref));
 						};
 
 					} else {
-						addInv(new DpchInvWdbeWrfpgaMdlraw(0, 0, mdl->ref, ipfolder + "/" + rtysref + "/" + unt->sref, Prjshort, Untsref));
+						addInv(new DpchInvWdbeWrfpgaMdlraw(0, 0, mdl->ref, ipfolder + "/" + rtysref + "/" + unt->sref, Prjshort, Untsref, unt->srefKToolch));
 						addInv(new DpchInvWdbeWrfpgaMdlfine(0, 0, mdl->ref, finefolder + "/" + rtysref + "/" + unt->sref));
 					};
 
 					// - type-specific IP's (WdbeWrfpga<type>)
-					if (mdl->ixVBasetype == VecWdbeVMModuleBasetype::HOSTIF) {
+					if (mdl->ixVBasetype == VecWdbeVMModuleBasetype::TOP) {
+						addInv(new DpchInvWdbeWrfpgaTop(0, 0, mdl->ref, typspecfolder + "/" + rtysref + "/" + unt->sref, Prjshort, Untsref));
+					} else if (mdl->ixVBasetype == VecWdbeVMModuleBasetype::HOSTIF) {
 						addInv(new DpchInvWdbeWrfpgaHostif(0, 0, mdl->ref, typspecfolder + "/" + rtysref + "/" + unt->sref, Prjshort, Untsref));
 					} else if (mdl->ixVBasetype == VecWdbeVMModuleBasetype::EHOSTIF) {
 						addInv(new DpchInvWdbeWrfpgaEhostif(0, 0, mdl->ref, typspecfolder + "/" + rtysref + "/" + unt->sref, Prjshort, Untsref));
@@ -514,7 +528,14 @@ void DlgWdbeRlsWrite::createMcu(
 	map<ubigint,string> srefsMtpWrmcuCustops;
 
 	ListWdbeMModule mdls;
+	map<ubigint,string> srefsMdls;
 	WdbeMModule* mdl = NULL;
+
+	ListWdbeRMModuleMModule mdlRmdls;
+	WdbeRMModuleMModule* mdlRmdl = NULL;
+
+	ListWdbeAMModulePar mdlApars;
+	WdbeAMModulePar* mdlApar = NULL;
 
 	string Compsref;
 
@@ -640,7 +661,7 @@ void DlgWdbeRlsWrite::createMcu(
 			addInv(new DpchInvWdbeWrmcuBase(0, 0, unt->ref, ipfolder + "/" + rtysref + "/" + unt->sref, Prjshort, Untsref));
 		};
 
-		// --- modules (WdbeWrmcu...) ; adapted copy (no MNFPRIM/MNFCORE) from createFpga()
+		// --- modules (WdbeWrmcu...) ; adapted copy (no IMBUF/MNFPRIM/MNFCORE) from createFpga()
 		keys.resize(0); vals.resize(0);
 		keys.push_back("author"); vals.push_back(author);
 		keys.push_back("created"); vals.push_back(created);
@@ -661,11 +682,15 @@ void DlgWdbeRlsWrite::createMcu(
 			vals[vals.size()-5] = Untsref;
 
 			dbswdbe->tblwdbemmodule->loadRstBySQL("SELECT * FROM TblWdbeMModule WHERE hkIxVTbl = " + to_string(VecWdbeVMModuleHkTbl::UNT) + " AND hkUref = " + to_string(unt->ref), false, mdls);
+			srefsMdls.clear();
+			for (unsigned int j = 0; j < mdls.nodes.size(); j++) srefsMdls[mdls.nodes[j]->ref] = mdls.nodes[j]->sref;
 
 			for (unsigned int j = 0; j < mdls.nodes.size(); j++) {
 				mdl = mdls.nodes[j];
 
-				Compsref = StrMod::cap(Wdbe::getCompsref(dbswdbe, mdl));
+				if (mdl->ixVBasetype == VecWdbeVMModuleBasetype::IMBUF) continue;
+
+				Compsref = StrMod::cap(mdl->sref);
 
 				mtp = NULL;
 				mthf = NULL;
@@ -700,14 +725,53 @@ void DlgWdbeRlsWrite::createMcu(
 					if ((mdl->ixVBasetype == VecWdbeVMModuleBasetype::TOP) || (mdl->ixVBasetype == VecWdbeVMModuleBasetype::OTH)) vals[vals.size()-1] += " module";
 				};
 
+				// add identifiers of all corresponding modules as placeholders
+				dbswdbe->tblwdbermmodulemmodule->loadRstByCtd(mdl->ref, false, mdlRmdls);
+
+				for (unsigned int k = 0; k < mdlRmdls.nodes.size(); k++) {
+					mdlRmdl = mdlRmdls.nodes[k];
+
+					auto it = srefsMdls.find(mdlRmdl->corRefWdbeMModule);
+					if (it != srefsMdls.end()) {
+						keys.push_back(StrMod::lc(mdlRmdl->srefKFunction));
+						vals.push_back(StrMod::lc(it->second));
+
+						keys.push_back(StrMod::cap(mdlRmdl->srefKFunction));
+						vals.push_back(StrMod::cap(it->second));
+
+						keys.push_back(StrMod::uc(mdlRmdl->srefKFunction));
+						vals.push_back(StrMod::uc(it->second));
+					};
+				};
+
+				// add module parameters as placeholders
+				dbswdbe->tblwdbeammodulepar->loadRstByMdl(mdl->ref, false, mdlApars);
+
+				for (unsigned int k = 0; k < mdlApars.nodes.size(); k++) {
+					mdlApar = mdlApars.nodes[k];
+
+					keys.push_back(mdlApar->x1SrefKKey);
+					vals.push_back(mdlApar->Val);
+				};
+
 				// add specific placeholders
-				auto it2 = ics0Speckeys.find(mdl->ref);
-				auto it3 = ics1Speckeys.find(mdl->ref);
+				auto it2 = ics0Typkeys.find(mdl->ref);
+				auto it3 = ics1Typkeys.find(mdl->ref);
 				
-				if (it2 != ics0Speckeys.end()) {
-					for (unsigned int k=it2->second;k<it3->second;k++) {
-						keys.push_back(speckeys[k]);
-						vals.push_back(specvals[k]);
+				if (it2 != ics0Typkeys.end()) {
+					for (unsigned int k = it2->second; k < it3->second; k++) {
+						keys.push_back(typkeys[k]);
+						vals.push_back(typvals[k]);
+					};
+				};
+
+				it2 = ics0Tplkeys.find(mdl->ref);
+				it3 = ics1Tplkeys.find(mdl->ref);
+				
+				if (it2 != ics0Tplkeys.end()) {
+					for (unsigned int k = it2->second; k < it3->second; k++) {
+						keys.push_back(tplkeys[k]);
+						vals.push_back(tplvals[k]);
 					};
 				};
 
@@ -743,11 +807,7 @@ void DlgWdbeRlsWrite::createMcu(
 				};
 
 				// - type-specific IP's (WdbeWrmcu<type>)
-				if (mdl->ixVBasetype == VecWdbeVMModuleBasetype::HOSTIF) {
-					//addInv(new DpchInvWdbeWrmcuHostif(0, 0, mdl->ref, typspecfolder + "/" + rtysref + "/" + unt->sref, Prjshort, Untsref));
-				} else if (mdl->ixVBasetype == VecWdbeVMModuleBasetype::EHOSTIF) {
-					addInv(new DpchInvWdbeWrmcuEhostif(0, 0, mdl->ref, typspecfolder + "/" + rtysref + "/" + unt->sref, Prjshort, Untsref));
-				} else if ((mdl->ixVBasetype == VecWdbeVMModuleBasetype::CTR) || (mdl->ixVBasetype == VecWdbeVMModuleBasetype::FWDCTR)) {
+				if ((mdl->ixVBasetype == VecWdbeVMModuleBasetype::CTR) || (mdl->ixVBasetype == VecWdbeVMModuleBasetype::FWDCTR)) {
 					addInv(new DpchInvWdbeWrmcuCtrFwdctr(0, 0, mdl->ref, typspecfolder + "/" + rtysref + "/" + unt->sref, Prjshort, Untsref));
 				};
 
@@ -805,7 +865,7 @@ void DlgWdbeRlsWrite::createDev(
 	uint ixImbCmdinv, ixImbCmdret;
 	bool hasvecbuf, hasvecctr, hasveccmd, hasvecerr, hasspeccmd;
 
-	unsigned int sizeRxbuf, sizeTxbuf, len;
+	string sref, srefrootMgmt, srefrootCor;
 
 	uint num;
 
@@ -948,8 +1008,14 @@ void DlgWdbeRlsWrite::createDev(
 
 				Wdbe::analyzeUnt(dbswdbe, unt, srefroot, vecs, ctrs, imbs, cmds, errs, refHostif, ixImbCmdinv, ixImbCmdret, hasvecbuf, hasvecctr, hasveccmd, hasvecerr, hasspeccmd);
 
-				if ((ixImbCmdinv+1) != 0) vals[vals.size()-2] = StrMod::uc(imbs.nodes[ixImbCmdinv]->sref);
-				if ((ixImbCmdinv+1) != 0) vals[vals.size()-1] = StrMod::uc(imbs.nodes[ixImbCmdret]->sref);
+				if ((ixImbCmdinv + 1) != 0) {
+					Wdbe::getImbsrefs(dbswdbe, imbs.nodes[ixImbCmdinv]->refWdbeMModule, sref, srefrootMgmt, srefrootCor);
+					vals[vals.size()-2] = StrMod::uc(srefrootCor);
+				};
+				if ((ixImbCmdret + 1) != 0) {
+					Wdbe::getImbsrefs(dbswdbe, imbs.nodes[ixImbCmdret]->refWdbeMModule, sref, srefrootMgmt, srefrootCor);
+					vals[vals.size()-1] = StrMod::uc(srefrootCor);
+				};
 
 				delete unt;
 			};
@@ -1036,7 +1102,7 @@ void DlgWdbeRlsWrite::createEzdev(
 			DbsWdbe* dbswdbe
 			, const bool dplonly
 		) {
-	vector<ubigint> refs, refs2;
+	vector<ubigint> refs;
 	ubigint ref;
 
 	WdbeMRelease* rls = NULL;
@@ -1061,15 +1127,7 @@ void DlgWdbeRlsWrite::createEzdev(
 	ListWdbeMController ctrs;
 	WdbeMController* ctr = NULL;
 
-	ListWdbeMImbuf imbs;
-	ListWdbeMCommand cmds;
-	ListWdbeMError errs;
-
-	ubigint refHostif;
-	uint ixImbCmdinv, ixImbCmdret;
-	bool hasvecbuf, hasvecctr, hasveccmd, hasvecerr, hasspeccmd;
-
-	unsigned int sizeRxbuf, sizeTxbuf, len;
+	unsigned int sizeRxbuf, sizeTxbuf;
 
 	uint num;
 
@@ -1208,25 +1266,7 @@ void DlgWdbeRlsWrite::createEzdev(
 			keys.push_back("sizeRxbuf"); vals.push_back("sizeRxbuf");
 			keys.push_back("sizeTxbuf"); vals.push_back("sizeTxbuf");
 
-			sizeRxbuf = 2;
-			sizeTxbuf = 7;
-
-			refs2.clear();
-
-			if (unt->ixVBasetype == VecWdbeVMUnitBasetype::FPGA) {
-				dbswdbe->loadRefsBySQL("SELECT refWdbeMController FROM TblWdbeMModule WHERE hkIxVTbl = " + to_string(VecWdbeVMModuleHkTbl::UNT) + " AND hkUref = " + to_string(unt->ref) + " AND ixVBasetype = " + to_string(VecWdbeVMModuleBasetype::ECTR), false, refs);
-				for (unsigned int j = 0; j < refs.size();j++) dbswdbe->loadRefsBySQL("SELECT ref FROM TblWdbeMCommand WHERE refIxVTbl = " + to_string(VecWdbeVMCommandRefTbl::CTR) + " AND refUref = " + to_string(refs[j]), true, refs2);
-			} else {
-				dbswdbe->loadRefsBySQL("SELECT ref FROM TblWdbeMCommand WHERE refIxVTbl = " + to_string(VecWdbeVMCommandRefTbl::UNT) + " AND refUref = " + to_string(unt->ref), false, refs2);
-			};
-
-			for (unsigned int j = 0; j < refs2.size();j++) {
-				len = Wdbe::getLenInv(dbswdbe, refs2[j]) + 2;
-				if (len > sizeRxbuf) sizeRxbuf = len;
-
-				len = Wdbe::getLenRet(dbswdbe, refs2[j]) + 2;
-				if (len > sizeTxbuf) sizeTxbuf = len;
-			};
+			Wdbe::getHostifSizeRxtxbuf(dbswdbe, unt->ref, sizeTxbuf, sizeRxbuf); // inverted from device point of view
 
 			vals[vals.size()-2] = to_string(sizeRxbuf);
 			vals[vals.size()-1] = to_string(sizeTxbuf);
@@ -1290,20 +1330,34 @@ void DlgWdbeRlsWrite::mergeKeysVals(
 			const ubigint oref
 			, vector<string>& keys
 			, vector<string>& vals
+			, const bool tplNotTyp
 		) {
 	if (keys.size() > 0) {
 		auto it = orefsToRefs.find(oref);
 
 		if (it != orefsToRefs.end()) {
-			ics0Speckeys[it->second] = speckeys.size();
+			if (!tplNotTyp) {
+				ics0Typkeys[it->second] = typkeys.size();
 
-			speckeys.reserve(speckeys.size() + keys.size());
-			speckeys.insert(speckeys.end(), keys.begin(), keys.end());
+				typkeys.reserve(typkeys.size() + keys.size());
+				typkeys.insert(typkeys.end(), keys.begin(), keys.end());
 
-			specvals.reserve(speckeys.size() + keys.size());
-			specvals.insert(specvals.end(), vals.begin(), vals.end());
+				typvals.reserve(typkeys.size() + keys.size());
+				typvals.insert(typvals.end(), vals.begin(), vals.end());
 
-			ics1Speckeys[it->second] = speckeys.size();
+				ics1Typkeys[it->second] = typkeys.size();
+
+			} else {
+				ics0Tplkeys[it->second] = tplkeys.size();
+
+				tplkeys.reserve(tplkeys.size() + keys.size());
+				tplkeys.insert(tplkeys.end(), keys.begin(), keys.end());
+
+				tplvals.reserve(tplkeys.size() + keys.size());
+				tplvals.insert(tplvals.end(), vals.begin(), vals.end());
+
+				ics1Tplkeys[it->second] = tplkeys.size();
+			};
 		};
 	};
 };
@@ -1357,8 +1411,8 @@ void DlgWdbeRlsWrite::refreshWrc(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
 		) {
-	StatShrWrc oldStatshrwrc(statshrwrc);
 	ContInfWrc oldContinfwrc(continfwrc);
+	StatShrWrc oldStatshrwrc(statshrwrc);
 
 	// IP refreshWrc --- RBEGIN
 	// continfwrc
@@ -1370,16 +1424,16 @@ void DlgWdbeRlsWrite::refreshWrc(
 	statshrwrc.ButStoActive = evalWrcButStoActive(dbswdbe);
 
 	// IP refreshWrc --- REND
-	if (statshrwrc.diff(&oldStatshrwrc).size() != 0) insert(moditems, DpchEngData::STATSHRWRC);
 	if (continfwrc.diff(&oldContinfwrc).size() != 0) insert(moditems, DpchEngData::CONTINFWRC);
+	if (statshrwrc.diff(&oldStatshrwrc).size() != 0) insert(moditems, DpchEngData::STATSHRWRC);
 };
 
 void DlgWdbeRlsWrite::refreshLfi(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
 		) {
-	ContInfLfi oldContinflfi(continflfi);
 	StatShrLfi oldStatshrlfi(statshrlfi);
+	ContInfLfi oldContinflfi(continflfi);
 
 	// IP refreshLfi --- RBEGIN
 	// statshrlfi
@@ -1389,16 +1443,16 @@ void DlgWdbeRlsWrite::refreshLfi(
 	continflfi.Dld = "log.txt";
 
 	// IP refreshLfi --- REND
-	if (continflfi.diff(&oldContinflfi).size() != 0) insert(moditems, DpchEngData::CONTINFLFI);
 	if (statshrlfi.diff(&oldStatshrlfi).size() != 0) insert(moditems, DpchEngData::STATSHRLFI);
+	if (continflfi.diff(&oldContinflfi).size() != 0) insert(moditems, DpchEngData::CONTINFLFI);
 };
 
 void DlgWdbeRlsWrite::refreshFia(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
 		) {
-	ContInfFia oldContinffia(continffia);
 	StatShrFia oldStatshrfia(statshrfia);
+	ContInfFia oldContinffia(continffia);
 
 	// IP refreshFia --- RBEGIN
 	// statshrfia
@@ -1408,8 +1462,8 @@ void DlgWdbeRlsWrite::refreshFia(
 	continffia.Dld = StubWdbe::getStubRlsStd(dbswdbe, xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFRLS, jref)) + ".tgz";
 
 	// IP refreshFia --- REND
-	if (continffia.diff(&oldContinffia).size() != 0) insert(moditems, DpchEngData::CONTINFFIA);
 	if (statshrfia.diff(&oldStatshrfia).size() != 0) insert(moditems, DpchEngData::STATSHRFIA);
+	if (continffia.diff(&oldContinffia).size() != 0) insert(moditems, DpchEngData::CONTINFFIA);
 };
 
 void DlgWdbeRlsWrite::refresh(
@@ -1420,24 +1474,24 @@ void DlgWdbeRlsWrite::refresh(
 	if (muteRefresh && !unmute) return;
 	muteRefresh = true;
 
-	StatShr oldStatshr(statshr);
 	ContInf oldContinf(continf);
 	ContIac oldContiac(contiac);
+	StatShr oldStatshr(statshr);
 
 	// IP refresh --- BEGIN
-	// statshr
-	statshr.ButDneActive = evalButDneActive(dbswdbe);
-
 	// continf
 	continf.numFSge = ixVSge;
 
 	// contiac
 	contiac.numFDse = ixVDit;
 
+	// statshr
+	statshr.ButDneActive = evalButDneActive(dbswdbe);
+
 	// IP refresh --- END
-	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
 	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
 	if (contiac.diff(&oldContiac).size() != 0) insert(moditems, DpchEngData::CONTIAC);
+	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
 
 	refreshDet(dbswdbe, moditems);
 	refreshCuc(dbswdbe, moditems);
@@ -1504,8 +1558,8 @@ void DlgWdbeRlsWrite::handleRequest(
 		if (ixVSge == VecVSge::IDLE) handleUploadInSgeIdle(dbswdbe, req->filename);
 
 	} else if (req->ixVBasetype == ReqWdbe::VecVBasetype::DOWNLOAD) {
-		if (ixVSge == VecVSge::DONE) req->filename = handleDownloadInSgeDone(dbswdbe);
-		else if (ixVSge == VecVSge::FAIL) req->filename = handleDownloadInSgeFail(dbswdbe);
+		if (ixVSge == VecVSge::FAIL) req->filename = handleDownloadInSgeFail(dbswdbe);
+		else if (ixVSge == VecVSge::DONE) req->filename = handleDownloadInSgeDone(dbswdbe);
 
 	} else if (req->ixVBasetype == ReqWdbe::VecVBasetype::DPCHRET) {
 		if (req->dpchret->ixOpVOpres == VecOpVOpres::PROGRESS) {
@@ -1523,6 +1577,8 @@ void DlgWdbeRlsWrite::handleRequest(
 				handleDpchRetWdbePlhfpgaEhostif(dbswdbe, (DpchRetWdbePlhfpgaEhostif*) (req->dpchret));
 			} else if (req->dpchret->ixWdbeVDpch == VecWdbeVDpch::DPCHRETWDBEPLHFPGAFWDCTR) {
 				handleDpchRetWdbePlhfpgaFwdctr(dbswdbe, (DpchRetWdbePlhfpgaFwdctr*) (req->dpchret));
+			} else if (req->dpchret->ixWdbeVDpch == VecWdbeVDpch::DPCHRETWDBEPLHMCUECTR) {
+				handleDpchRetWdbePlhmcuEctr(dbswdbe, (DpchRetWdbePlhmcuEctr*) (req->dpchret));
 			} else if (req->dpchret->ixWdbeVDpch == VecWdbeVDpch::DPCHRETWDBEPLHMCUEHOSTIF) {
 				handleDpchRetWdbePlhmcuEhostif(dbswdbe, (DpchRetWdbePlhmcuEhostif*) (req->dpchret));
 			} else if (req->dpchret->ixWdbeVDpch == VecWdbeVDpch::DPCHRETWDBEPRCTREEMERGE) {
@@ -1654,49 +1710,56 @@ void DlgWdbeRlsWrite::handleDpchRetWdbeMtpPlhfpga(
 			DbsWdbe* dbswdbe
 			, DpchRetWdbeMtpPlhfpga* dpchret
 		) {
-	if (ixVSge == VecVSge::FILLPLH) mergeKeysVals(dpchret->oref, dpchret->keys, dpchret->vals); // IP handleDpchRetWdbeMtpPlhfpga --- ILINE
+	if (ixVSge == VecVSge::FILLPLH) mergeKeysVals(dpchret->oref, dpchret->keys, dpchret->vals, true); // IP handleDpchRetWdbeMtpPlhfpga --- ILINE
 };
 
 void DlgWdbeRlsWrite::handleDpchRetWdbeMtpPlhmcu(
 			DbsWdbe* dbswdbe
 			, DpchRetWdbeMtpPlhmcu* dpchret
 		) {
-	if (ixVSge == VecVSge::FILLPLH) mergeKeysVals(dpchret->oref, dpchret->keys, dpchret->vals); // IP handleDpchRetWdbeMtpPlhmcu --- ILINE
+	if (ixVSge == VecVSge::FILLPLH) mergeKeysVals(dpchret->oref, dpchret->keys, dpchret->vals, true); // IP handleDpchRetWdbeMtpPlhmcu --- ILINE
 };
 
 void DlgWdbeRlsWrite::handleDpchRetWdbePlhfpgaCmdinv(
 			DbsWdbe* dbswdbe
 			, DpchRetWdbePlhfpgaCmdinv* dpchret
 		) {
-	if (ixVSge == VecVSge::FILLPLH) mergeKeysVals(dpchret->oref, dpchret->keys, dpchret->vals); // IP handleDpchRetWdbePlhfpgaCmdinv --- ILINE
+	if (ixVSge == VecVSge::FILLPLH) mergeKeysVals(dpchret->oref, dpchret->keys, dpchret->vals, false); // IP handleDpchRetWdbePlhfpgaCmdinv --- ILINE
 };
 
 void DlgWdbeRlsWrite::handleDpchRetWdbePlhfpgaCmdret(
 			DbsWdbe* dbswdbe
 			, DpchRetWdbePlhfpgaCmdret* dpchret
 		) {
-	if (ixVSge == VecVSge::FILLPLH) mergeKeysVals(dpchret->oref, dpchret->keys, dpchret->vals); // IP handleDpchRetWdbePlhfpgaCmdret --- ILINE
+	if (ixVSge == VecVSge::FILLPLH) mergeKeysVals(dpchret->oref, dpchret->keys, dpchret->vals, false); // IP handleDpchRetWdbePlhfpgaCmdret --- ILINE
 };
 
 void DlgWdbeRlsWrite::handleDpchRetWdbePlhfpgaEhostif(
 			DbsWdbe* dbswdbe
 			, DpchRetWdbePlhfpgaEhostif* dpchret
 		) {
-	if (ixVSge == VecVSge::FILLPLH) mergeKeysVals(dpchret->oref, dpchret->keys, dpchret->vals); // IP handleDpchRetWdbePlhfpgaEhostif --- ILINE
+	if (ixVSge == VecVSge::FILLPLH) mergeKeysVals(dpchret->oref, dpchret->keys, dpchret->vals, false); // IP handleDpchRetWdbePlhfpgaEhostif --- ILINE
 };
 
 void DlgWdbeRlsWrite::handleDpchRetWdbePlhfpgaFwdctr(
 			DbsWdbe* dbswdbe
 			, DpchRetWdbePlhfpgaFwdctr* dpchret
 		) {
-	if (ixVSge == VecVSge::FILLPLH) mergeKeysVals(dpchret->oref, dpchret->keys, dpchret->vals); // IP handleDpchRetWdbePlhfpgaFwdctr --- ILINE
+	if (ixVSge == VecVSge::FILLPLH) mergeKeysVals(dpchret->oref, dpchret->keys, dpchret->vals, false); // IP handleDpchRetWdbePlhfpgaFwdctr --- ILINE
+};
+
+void DlgWdbeRlsWrite::handleDpchRetWdbePlhmcuEctr(
+			DbsWdbe* dbswdbe
+			, DpchRetWdbePlhmcuEctr* dpchret
+		) {
+	if (ixVSge == VecVSge::FILLPLH) mergeKeysVals(dpchret->oref, dpchret->keys, dpchret->vals, false); // IP handleDpchRetWdbePlhmcuEctr --- ILINE
 };
 
 void DlgWdbeRlsWrite::handleDpchRetWdbePlhmcuEhostif(
 			DbsWdbe* dbswdbe
 			, DpchRetWdbePlhmcuEhostif* dpchret
 		) {
-	if (ixVSge == VecVSge::FILLPLH) mergeKeysVals(dpchret->oref, dpchret->keys, dpchret->vals); // IP handleDpchRetWdbePlhmcuEhostif --- ILINE
+	if (ixVSge == VecVSge::FILLPLH) mergeKeysVals(dpchret->oref, dpchret->keys, dpchret->vals, false); // IP handleDpchRetWdbePlhmcuEhostif --- ILINE
 };
 
 void DlgWdbeRlsWrite::handleDpchRetWdbePrctreeMerge(
@@ -1717,16 +1780,16 @@ void DlgWdbeRlsWrite::handleUploadInSgeIdle(
 	changeStage(dbswdbe, VecVSge::UPKIDLE);
 };
 
-string DlgWdbeRlsWrite::handleDownloadInSgeDone(
-			DbsWdbe* dbswdbe
-		) {
-	return(xchg->tmppath + "/" + outfolder + ".tgz"); // IP handleDownloadInSgeDone --- RLINE
-};
-
 string DlgWdbeRlsWrite::handleDownloadInSgeFail(
 			DbsWdbe* dbswdbe
 		) {
 	return(xchg->tmppath + "/" + logfile); // IP handleDownloadInSgeFail --- RLINE
+};
+
+string DlgWdbeRlsWrite::handleDownloadInSgeDone(
+			DbsWdbe* dbswdbe
+		) {
+	return(xchg->tmppath + "/" + outfolder + ".tgz"); // IP handleDownloadInSgeDone --- RLINE
 };
 
 void DlgWdbeRlsWrite::handleTimerInSgeUpkidle(
@@ -2079,8 +2142,9 @@ uint DlgWdbeRlsWrite::enterSgeFillplh(
 				dpchinv = new DpchInvWdbePlhfpgaFwdctr(0, 0, mdl->ref);
 				addInv(dpchinv);
 				orefsToRefs[dpchinv->oref] = mdl->ref;
-
-			} else if (mdl->tplRefWdbeMModule != 0) {
+			};
+			
+			if (mdl->tplRefWdbeMModule != 0) {
 				auto it = srefsMtpCustops.find(mdl->tplRefWdbeMModule);
 
 				if (it != srefsMtpCustops.end()) {
@@ -2108,7 +2172,13 @@ uint DlgWdbeRlsWrite::enterSgeFillplh(
 				addInv(dpchinv);
 				orefsToRefs[dpchinv->oref] = mdl->ref;
 
-			} else if (mdl->tplRefWdbeMModule != 0) {
+			} else if (mdl->ixVBasetype == VecWdbeVMModuleBasetype::ECTR) {
+				dpchinv = new DpchInvWdbePlhmcuEctr(0, 0, mdl->ref);
+				addInv(dpchinv);
+				orefsToRefs[dpchinv->oref] = mdl->ref;
+			};
+			
+			if (mdl->tplRefWdbeMModule != 0) {
 				auto it = srefsMtpCustops.find(mdl->tplRefWdbeMModule);
 
 				if (it != srefsMtpCustops.end()) {
@@ -2119,7 +2189,6 @@ uint DlgWdbeRlsWrite::enterSgeFillplh(
 			};
 		};
 	};
-
 	// IP enterSgeFillplh --- IEND
 
 	submitInvs(dbswdbe, VecVSge::CREATE, retval);

@@ -116,14 +116,19 @@ public:
 	bool evalMitCrdCprAvail(DbsWdbe* dbswdbe);
 	bool evalMitCrdCvrAvail(DbsWdbe* dbswdbe);
 	bool evalMspCrd5Avail(DbsWdbe* dbswdbe);
+	bool evalMitCrdPphAvail(DbsWdbe* dbswdbe);
 	bool evalMitCrdModAvail(DbsWdbe* dbswdbe);
 	bool evalMitCrdVecAvail(DbsWdbe* dbswdbe);
 	bool evalMitCrdCmdAvail(DbsWdbe* dbswdbe);
 	bool evalMitCrdErrAvail(DbsWdbe* dbswdbe);
-	bool evalMitCrdPphAvail(DbsWdbe* dbswdbe);
+	bool evalMitCrdPplAvail(DbsWdbe* dbswdbe);
+	bool evalMitCrdSegAvail(DbsWdbe* dbswdbe);
+	bool evalMspCrd6Avail(DbsWdbe* dbswdbe);
 	bool evalMitCrdBnkAvail(DbsWdbe* dbswdbe);
 	bool evalMitCrdPinAvail(DbsWdbe* dbswdbe);
-	bool evalMspCrd6Avail(DbsWdbe* dbswdbe);
+	bool evalMitCrdIntAvail(DbsWdbe* dbswdbe);
+	bool evalMitCrdSigAvail(DbsWdbe* dbswdbe);
+	bool evalMspCrd7Avail(DbsWdbe* dbswdbe);
 	bool evalMitCrdUtlAvail(DbsWdbe* dbswdbe);
 
 public:

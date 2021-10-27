@@ -135,7 +135,7 @@ bool PnlWdbeSigDetail::evalButCluUnclusterAvail(
 	return(args.back());
 };
 
-bool PnlWdbeSigDetail::evalTxtMdlActive(
+bool PnlWdbeSigDetail::evalTxtReuActive(
 			DbsWdbe* dbswdbe
 		) {
 	// pre.ixCrdaccSigIncl(edit)
@@ -149,30 +149,70 @@ bool PnlWdbeSigDetail::evalTxtMdlActive(
 	return(args.back());
 };
 
-bool PnlWdbeSigDetail::evalButMdlViewAvail(
+bool PnlWdbeSigDetail::evalButReuViewAvail(
 			DbsWdbe* dbswdbe
 		) {
-	// sig.mdlEq(0)|((pre.ixCrdaccMod()&pre.refUnt())|(pre.ixCrdaccMod()&pre.refCvr()))
+	// sig.reuEq(0)|((pre.ixCrdaccUnt()&sig.retEq(unt)&pre.refVer())|(pre.ixCrdaccSil()&sig.retEq(unt)&sig.reu.inSbs(sil))|(pre.ixCrdaccMod()&sig.retEq(mdl)&pre.refUnt())|(pre.ixCrdaccMod()&sig.retEq(mdl)&pre.refCvr()))
 
 	vector<bool> args;
 	bool a, b;
 
-	a = false; a = (recSig.mdlRefWdbeMModule == 0);
+	a = false; a = (recSig.refUref == 0);
 	args.push_back(a);
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCUNT, jref) != 0);
+	args.push_back(a);
+	a = false; a = (recSig.refIxVTbl == VecWdbeVMSignalRefTbl::UNT);
+	args.push_back(a);
+	a = false; a = (xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFVER, jref) != 0);
+	args.push_back(a);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a && b);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a && b);
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCSIL, jref) != 0);
+	args.push_back(a);
+	a = false; a = (recSig.refIxVTbl == VecWdbeVMSignalRefTbl::UNT);
+	args.push_back(a);
+	a = false; a = ((dbswdbe->getIxWSubsetByRefWdbeMUnit(recSig.refUref) & VecWdbeWMUnitSubset::SBSWDBEBMUNITSIL) != 0);
+	args.push_back(a);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a && b);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a && b);
 	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCMOD, jref) != 0);
+	args.push_back(a);
+	a = false; a = (recSig.refIxVTbl == VecWdbeVMSignalRefTbl::MDL);
 	args.push_back(a);
 	a = false; a = (xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFUNT, jref) != 0);
 	args.push_back(a);
 	b = args.back(); args.pop_back();
 	a = args.back(); args.pop_back();
 	args.push_back(a && b);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a && b);
 	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCMOD, jref) != 0);
+	args.push_back(a);
+	a = false; a = (recSig.refIxVTbl == VecWdbeVMSignalRefTbl::MDL);
 	args.push_back(a);
 	a = false; a = (xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFCVR, jref) != 0);
 	args.push_back(a);
 	b = args.back(); args.pop_back();
 	a = args.back(); args.pop_back();
 	args.push_back(a && b);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a && b);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
 	b = args.back(); args.pop_back();
 	a = args.back(); args.pop_back();
 	args.push_back(a || b);
@@ -183,15 +223,15 @@ bool PnlWdbeSigDetail::evalButMdlViewAvail(
 	return(args.back());
 };
 
-bool PnlWdbeSigDetail::evalButMdlViewActive(
+bool PnlWdbeSigDetail::evalButReuViewActive(
 			DbsWdbe* dbswdbe
 		) {
-	// !sig.mdlEq(0)
+	// !sig.reuEq(0)
 
 	vector<bool> args;
 	bool a;
 
-	a = false; a = (recSig.mdlRefWdbeMModule == 0);
+	a = false; a = (recSig.refUref == 0);
 	args.push_back(a);
 	a = args.back(); args.pop_back();
 	args.push_back(!a);
@@ -216,37 +256,13 @@ bool PnlWdbeSigDetail::evalTxtMguActive(
 bool PnlWdbeSigDetail::evalButMguViewAvail(
 			DbsWdbe* dbswdbe
 		) {
-	// sig.mguEq(0)|((pre.ixCrdaccPrc()&sig.mgtEq(prc)&pre.refMtp())|(pre.ixCrdaccPrc()&sig.mgtEq(prc)&pre.refMod())|(pre.ixCrdaccMod()&sig.mgtEq(mdl)&sig.mgu.inSbs(mod)&pre.refUnt())|(pre.ixCrdaccMod()&sig.mgtEq(mdl)&sig.mgu.inSbs(mod)&pre.refCvr())|(pre.ixCrdaccMtp()&sig.mgtEq(mdl)&sig.mgu.inSbs(mtp)))
+	// sig.mguEq(0)|((pre.ixCrdaccMod()&sig.mgtEq(mdl)&sig.mgu.inSbs(mod)&pre.refUnt())|(pre.ixCrdaccMod()&sig.mgtEq(mdl)&sig.mgu.inSbs(mod)&pre.refCvr())|(pre.ixCrdaccMtp()&sig.mgtEq(mdl)&sig.mgu.inSbs(mtp))|(pre.ixCrdaccPrc()&sig.mgtEq(prc)&pre.refMtp())|(pre.ixCrdaccPrc()&sig.mgtEq(prc)&pre.refMod()))
 
 	vector<bool> args;
 	bool a, b;
 
 	a = false; a = (recSig.mgeUref == 0);
 	args.push_back(a);
-	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCPRC, jref) != 0);
-	args.push_back(a);
-	a = false; a = (recSig.mgeIxVTbl == VecWdbeVMSignalMgeTbl::PRC);
-	args.push_back(a);
-	a = false; a = (xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFMTP, jref) != 0);
-	args.push_back(a);
-	b = args.back(); args.pop_back();
-	a = args.back(); args.pop_back();
-	args.push_back(a && b);
-	b = args.back(); args.pop_back();
-	a = args.back(); args.pop_back();
-	args.push_back(a && b);
-	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCPRC, jref) != 0);
-	args.push_back(a);
-	a = false; a = (recSig.mgeIxVTbl == VecWdbeVMSignalMgeTbl::PRC);
-	args.push_back(a);
-	a = false; a = (xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFMOD, jref) != 0);
-	args.push_back(a);
-	b = args.back(); args.pop_back();
-	a = args.back(); args.pop_back();
-	args.push_back(a && b);
-	b = args.back(); args.pop_back();
-	a = args.back(); args.pop_back();
-	args.push_back(a && b);
 	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCMOD, jref) != 0);
 	args.push_back(a);
 	a = false; a = (recSig.mgeIxVTbl == VecWdbeVMSignalMgeTbl::MDL);
@@ -286,6 +302,30 @@ bool PnlWdbeSigDetail::evalButMguViewAvail(
 	a = false; a = (recSig.mgeIxVTbl == VecWdbeVMSignalMgeTbl::MDL);
 	args.push_back(a);
 	a = false; a = ((dbswdbe->getIxWSubsetByRefWdbeMModule(recSig.mgeUref) & VecWdbeWMModuleSubset::SBSWDBEBMMODULEMTP) != 0);
+	args.push_back(a);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a && b);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a && b);
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCPRC, jref) != 0);
+	args.push_back(a);
+	a = false; a = (recSig.mgeIxVTbl == VecWdbeVMSignalMgeTbl::PRC);
+	args.push_back(a);
+	a = false; a = (xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFMTP, jref) != 0);
+	args.push_back(a);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a && b);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a && b);
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCPRC, jref) != 0);
+	args.push_back(a);
+	a = false; a = (recSig.mgeIxVTbl == VecWdbeVMSignalMgeTbl::PRC);
+	args.push_back(a);
+	a = false; a = (xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFMOD, jref) != 0);
 	args.push_back(a);
 	b = args.back(); args.pop_back();
 	a = args.back(); args.pop_back();

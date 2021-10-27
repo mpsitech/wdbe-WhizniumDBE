@@ -41,14 +41,6 @@ string SqkWdbeWrmcu::getSquawkDeploy(
 	return(""); // IP getSquawkDeploy --- LINE
 };
 
-string SqkWdbeWrmcu::getSquawkEhostif(
-			DbsWdbe* dbswdbe
-			, DpchInvWdbeWrmcuEhostif* dpchinv
-		) {
-	// example: "write template-specific C code for module 'zedb-ehostif (easy host interface)'"
-	return(""); // IP getSquawkEhostif --- LINE
-};
-
 string SqkWdbeWrmcu::getSquawkMdlfine(
 			DbsWdbe* dbswdbe
 			, DpchInvWdbeWrmcuMdlfine* dpchinv

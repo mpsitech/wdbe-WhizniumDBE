@@ -2,7 +2,7 @@
 # make file for operation pack WdbeWrmcu, release wdbeopd1_mac
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 12 Mar 2021
+# date created: 23 Oct 2021
 # IP header --- ABOVE
 
 include ../Makefile.inc
@@ -17,7 +17,7 @@ INCPATH = -I$(BUILDROOT)/dbswdbe -I$(BUILDROOT)/wdbeopd1/VecWdbe -I$(BUILDROOT)/
 INCPATH += -I${WHIZSDKROOT}/build -I/usr/local/include -I/usr/local/include/curl -I/usr/local/include/libxml2 -I/usr/local/mysql/include
 
 OBJS = WdbeWrmcu_blks.o WdbeWrmcu.o
-OBJS += WdbeWrmcuBase.o WdbeWrmcuCtrFwdctr.o WdbeWrmcuDeploy.o WdbeWrmcuEhostif.o WdbeWrmcuMdlfine.o WdbeWrmcuMdlraw.o
+OBJS += WdbeWrmcuBase.o WdbeWrmcuCtrFwdctr.o WdbeWrmcuDeploy.o WdbeWrmcuMdlfine.o WdbeWrmcuMdlraw.o
 
 LIB = libwdbewrmcu
 

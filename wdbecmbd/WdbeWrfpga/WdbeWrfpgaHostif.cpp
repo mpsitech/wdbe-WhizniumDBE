@@ -71,37 +71,50 @@ void WdbeWrfpgaHostif::writeMdlVhd(
 			, const string& Untsref
 			, WdbeMModule* mdl
 		) {
-	// ex.: imb->sref = "qcdifToHostif", mdl->sref = "rdbuf", Imbshort = "FromQcdif", Imbsigsref = "RdbufFromQcdif"
-
 	WdbeMUnit* unt = NULL;
 
 	ListWdbeMImbuf imbs;
 	WdbeMImbuf* imb = NULL;
-	WdbeMImbuf* imb2 = NULL;
 
-	set<ubigint> refsImbsRd, refsImbsWr;
+	string sref, srefrootMgmt, srefrootCor;
 
-	string Imbshort, Imbsigsref;
-
-	usmallint wAvllen;
+	vector<string> srefsImb, srefsImbRd, srefsImbWr;
+	vector<string> srefrootsImb, srefrootsImbRd, srefrootsImbWr;
+	vector<int> PriosImb, PriosImbRd, PriosImbWr;
+	vector<int> wAvllensImb;
 
 	ListWdbeMVectoritem vits;
 	WdbeMVectoritem* vit = NULL;
 
-	utinyint Prio;
+	int Prio;
 
 	unsigned int ix;
 
 	bool first, found;
 
+	// --- analyze buffer transfers
 	if (dbswdbe->tblwdbemunit->loadRecByRef(mdl->hkUref, &unt)) {
-		dbswdbe->tblwdbemimbuf->loadRstBySQL("SELECT * FROM TblWdbeMImbuf WHERE corRefWdbeMModule = " + to_string(mdl->ref) + " ORDER BY Prio ASC, sref ASC", false, imbs);
+		dbswdbe->tblwdbemimbuf->loadRstBySQL("SELECT TblWdbeMImbuf.* FROM TblWdbeMImbuf, TblWdbeRMModuleMModule WHERE TblWdbeMImbuf.refWdbeMModule = TblWdbeRMModuleMModule.ctdRefWdbeMModule AND TblWdbeRMModuleMModule.corRefWdbeMModule = "
+					+ to_string(mdl->ref) + " ORDER BY TblWdbeMImbuf.Prio ASC, TblWdbeMModule.sref ASC", false, imbs);
 
 		for (unsigned int i = 0; i < imbs.nodes.size(); i++) {
 			imb = imbs.nodes[i];
 
-			if (imb->ixVDir == VecWdbeVMImbufDir::IN) refsImbsWr.insert(imb->ref);
-			else if (imb->ixVDir == VecWdbeVMImbufDir::OUT) refsImbsRd.insert(imb->ref);
+			if (!Wdbe::getImbsrefs(dbswdbe, imb->refWdbeMModule, sref, srefrootMgmt, srefrootCor)) {
+				srefsImbRd.push_back(sref);
+				srefrootsImbRd.push_back(srefrootCor);
+				PriosImbRd.push_back(imb->Prio);
+
+			} else {
+				srefsImbWr.push_back(sref);
+				srefrootsImbWr.push_back(srefrootCor);
+				PriosImbWr.push_back(imb->Prio);
+			};
+
+			srefsImb.push_back(sref);
+			srefrootsImb.push_back(srefrootCor);
+			PriosImb.push_back(imb->Prio);
+			wAvllensImb.push_back(getImbwavllen(dbswdbe, mdl, srefrootCor));
 		};
 
 		dbswdbe->tblwdbemvectoritem->loadRstBySQL("SELECT TblWdbeMVectoritem.* FROM TblWdbeMVector, TblWdbeMVectoritem WHERE TblWdbeMVector.hkIxVTbl = " + to_string(VecWdbeVMVectorHkTbl::UNT) + " AND TblWdbeMVector.hkUref = "
@@ -110,23 +123,17 @@ void WdbeWrfpgaHostif::writeMdlVhd(
 		delete unt;
 	};
 
-	if (!refsImbsRd.empty() && !refsImbsWr.empty()) {
+	if (!srefrootsImb.empty()) {
 		// --- sigs.tkns
 		outfile << "-- IP sigs.tkns --- IBEGIN" << endl;
-		for (unsigned int i = 0; i < imbs.nodes.size(); i++) {
-			imb = imbs.nodes[i];
-
-			Imbshort = Wdbe::getImbshort(imb);
-
-			if ( (refsImbsRd.find(imb->ref) != refsImbsRd.end()) || (refsImbsWr.find(imb->ref) != refsImbsWr.end()) )
-						outfile << "\tsignal tkn" << Imbshort << ": std_logic_vector(7 downto 0) := tixW" << Prjshort << Untsref << "Buffer" << StrMod::cap(imb->sref) << ";" << endl;
-		};
+		for (unsigned int i = 0; i < srefrootsImb.size(); i++)
+					outfile << "\tsignal tkn" << srefrootsImb[i] << ": std_logic_vector(7 downto 0) := tixW" << Prjshort << Untsref << "Buffer" << StrMod::cap(srefsImb[i]) << ";" << endl;
 		outfile << "-- IP sigs.tkns --- IEND" << endl;
 
 		// --- impl.op.tknste
 		outfile << "-- IP impl.op.tknste --- IBEGIN" << endl;
 		ix = 1;
-		for (unsigned int i = 0; i < 8;i++,ix*=2) {
+		for (unsigned int i = 0; i < 8; i++, ix *= 2) {
 			outfile << "\ttknste(" << i << ") <= '0'";
 
 			found = false;
@@ -134,13 +141,10 @@ void WdbeWrfpgaHostif::writeMdlVhd(
 				vit = vits.nodes[j];
 
 				if (vit->vecNum == ix) {
-					for (unsigned int k = 0; k < imbs.nodes.size(); k++) {
-						imb = imbs.nodes[k];
+					for (unsigned int k = 0; k < srefsImb.size(); k++) {
+						if (srefsImb[k] == vit->sref) {
+							outfile << " when tkn" << srefrootsImb[k] << "=tixW" << Prjshort << Untsref << "Buffer" << StrMod::cap(srefsImb[k]) << " else '1'";
 
-						if (imb->sref == vit->sref) {
-							Imbshort = Wdbe::getImbshort(imb);
-
-							outfile << " when tkn" << Imbshort << "=tixW" << Prjshort << Untsref << "Buffer" << StrMod::cap(vit->sref) << " else '1'";
 							found = true;
 							break;
 						};
@@ -157,7 +161,7 @@ void WdbeWrfpgaHostif::writeMdlVhd(
 		// --- impl.op.avlbx
 		outfile << "-- IP impl.op.avlbx --- IBEGIN" << endl;
 		ix = 1;
-		for (unsigned int i = 0; i < 8;i++,ix*=2) {
+		for (unsigned int i = 0; i < 8; i++, ix *= 2) {
 			outfile << "\tavlbx(" << i << ") <=";
 
 			found = false;
@@ -165,14 +169,9 @@ void WdbeWrfpgaHostif::writeMdlVhd(
 				vit = vits.nodes[j];
 
 				if (vit->vecNum == ix) {
-					for (unsigned int k = 0; k < imbs.nodes.size(); k++) {
-						imb = imbs.nodes[k];
-
-						if (imb->sref == vit->sref) {
-							Imbsigsref = getImbsigsref(dbswdbe, imb);
-							wAvllen = getImbwavllen(dbswdbe, mdl, Imbsigsref);
-
-							if (wAvllen > 0) outfile << " '1' when avllen" << Imbsigsref << "/=" << valToSlv("0", wAvllen) << " else";
+					for (unsigned int k = 0; k < srefsImb.size(); k++) {
+						if (srefsImb[k] == vit->sref) {
+							if (wAvllensImb[k] > 0) outfile << " '1' when avllen" << srefrootsImb[k] << "/=" << valToSlv("0", wAvllensImb[k]) << " else";
 
 							found = true;
 							break;
@@ -191,21 +190,12 @@ void WdbeWrfpgaHostif::writeMdlVhd(
 		outfile << "-- IP impl.op.avllen --- IBEGIN" << endl;
 		outfile << "\tavllen <=";
 		
-		first = true;
-		for (unsigned int i = 0; i < imbs.nodes.size(); i++) {
-			imb = imbs.nodes[i];
-
-			Imbsigsref = getImbsigsref(dbswdbe, imb);
-
-			if ( (refsImbsRd.find(imb->ref) != refsImbsRd.end()) || (refsImbsWr.find(imb->ref) != refsImbsWr.end()) ) {
-				if (first) first = false;
-				else outfile << "\t\t\t\telse";
-				
-				wAvllen = getImbwavllen(dbswdbe, mdl, Imbsigsref);
-				if (wAvllen < 32) outfile << " " << valToSlv("0", 32-wAvllen) << " &";
-				
-				outfile << " avllen" << Imbsigsref << " when (tkn=tixW" << Prjshort << Untsref << "Buffer" << StrMod::cap(imb->sref) << " or tkn=(not tixW" << Prjshort << Untsref << "Buffer" << StrMod::cap(imb->sref) << "))" << endl;
-			};
+		for (unsigned int i = 0; i < srefrootsImb.size(); i++) {
+			if (i > 0) outfile << "\t\t\t\telse";
+			
+			if (wAvllensImb[i] < 32) outfile << " " << valToSlv("0", 32 - wAvllensImb[i]) << " &";
+			
+			outfile << " avllen" << srefrootsImb[i] << " when (tkn=tixW" << Prjshort << Untsref << "Buffer" << StrMod::cap(srefsImb[i]) << " or tkn=(not tixW" << Prjshort << Untsref << "Buffer" << StrMod::cap(srefsImb[i]) << "))" << endl;
 		};
 
 		outfile << "\t\t\t\telse (others => '0');" << endl;
@@ -215,18 +205,10 @@ void WdbeWrfpgaHostif::writeMdlVhd(
 		outfile << "-- IP impl.op.ackTxbuf --- IBEGIN" << endl;
 		outfile << "\tackTxbuf <=";
 		
-		first = true;
-		for (unsigned int i = 0; i < imbs.nodes.size(); i++) {
-			imb = imbs.nodes[i];
-
-			Imbsigsref = getImbsigsref(dbswdbe, imb);
-
-			if (refsImbsRd.find(imb->ref) != refsImbsRd.end()) {
-				if (first) first = false;
-				else outfile << "\t\t\t\telse";
+		for (unsigned int i = 0; i < srefrootsImbRd.size(); i++) {
+			if (i > 0) outfile << "\t\t\t\telse";
 				
-				outfile << " ack" << Imbsigsref << " when (tkn=tixW" << Prjshort << Untsref << "Buffer" << StrMod::cap(imb->sref) << " or tkn=(not tixW" << Prjshort << Untsref << "Buffer" << StrMod::cap(imb->sref) << "))" << endl;
-			};
+			outfile << " ack" << srefrootsImbRd[i] << " when (tkn=tixW" << Prjshort << Untsref << "Buffer" << StrMod::cap(srefsImbRd[i]) << " or tkn=(not tixW" << Prjshort << Untsref << "Buffer" << StrMod::cap(srefsImbRd[i]) << "))" << endl;
 		};
 
 		outfile << "\t\t\t\telse '0';" << endl;
@@ -236,18 +218,10 @@ void WdbeWrfpgaHostif::writeMdlVhd(
 		outfile << "-- IP impl.op.dTxbuf --- IBEGIN" << endl;
 		outfile << "\tdTxbuf <=";
 		
-		first = true;
-		for (unsigned int i = 0; i < imbs.nodes.size(); i++) {
-			imb = imbs.nodes[i];
-
-			Imbsigsref = getImbsigsref(dbswdbe, imb);
-
-			if (refsImbsRd.find(imb->ref) != refsImbsRd.end()) {
-				if (first) first = false;
-				else outfile << "\t\t\t\telse";
+		for (unsigned int i = 0; i < srefrootsImbRd.size(); i++) {
+			if (i > 0) outfile << "\t\t\t\telse";
 				
-				outfile << " d" << Imbsigsref << " when (tkn=tixW" << Prjshort << Untsref << "Buffer" << StrMod::cap(imb->sref) << " or tkn=(not tixW" << Prjshort << Untsref << "Buffer" << StrMod::cap(imb->sref) << "))" << endl;
-			};
+			outfile << " d" << srefrootsImbRd[i] << " when (tkn=tixW" << Prjshort << Untsref << "Buffer" << StrMod::cap(srefsImbRd[i]) << " or tkn=(not tixW" << Prjshort << Untsref << "Buffer" << StrMod::cap(srefsImbRd[i]) << "))" << endl;
 		};
 
 		outfile << "\t\t\t\telse (others => '0');" << endl;
@@ -257,18 +231,10 @@ void WdbeWrfpgaHostif::writeMdlVhd(
 		outfile << "-- IP impl.op.ackRxbuf --- IBEGIN" << endl;
 		outfile << "\tackRxbuf <=";
 		
-		first = true;
-		for (unsigned int i = 0; i < imbs.nodes.size(); i++) {
-			imb = imbs.nodes[i];
-
-			Imbsigsref = getImbsigsref(dbswdbe, imb);
-
-			if (refsImbsWr.find(imb->ref) != refsImbsWr.end()) {
-				if (first) first = false;
-				else outfile << "\t\t\t\telse";
+		for (unsigned int i = 0; i < srefrootsImbWr.size(); i++) {
+			if (i > 0) outfile << "\t\t\t\telse";
 				
-				outfile << " ack" << Imbsigsref << " when (tkn=tixW" << Prjshort << Untsref << "Buffer" << StrMod::cap(imb->sref) << " or tkn=(not tixW" << Prjshort << Untsref << "Buffer" << StrMod::cap(imb->sref) << "))" << endl;
-			};
+			outfile << " ack" << srefrootsImbWr[i] << " when (tkn=tixW" << Prjshort << Untsref << "Buffer" << StrMod::cap(srefsImbWr[i]) << " or tkn=(not tixW" << Prjshort << Untsref << "Buffer" << StrMod::cap(srefsImbWr[i]) << "))" << endl;
 		};
 
 		outfile << "\t\t\t\telse '0';" << endl;
@@ -276,83 +242,56 @@ void WdbeWrfpgaHostif::writeMdlVhd(
 
 		// --- impl.op.bufs
 		outfile << "-- IP impl.op.bufs --- IBEGIN" << endl;
-		for (unsigned int i = 0; i < imbs.nodes.size(); i++) {
-			imb = imbs.nodes[i];
+		for (unsigned int i = 0; i < srefrootsImbRd.size(); i++) {
+			outfile << "\t-- " << srefsImbRd[i] << endl;
+			outfile << "\treq" << srefrootsImbRd[i] << " <= reqTxbuf when tkn=tkn" << srefrootsImbRd[i] << " else '0';" << endl;
+			outfile << "\tdne" << srefrootsImbRd[i] << " <= dneTxbuf when tkn=tkn" << srefrootsImbRd[i] << " else '0';" << endl;
+			outfile << endl;
 
-			Imbshort = Wdbe::getImbshort(imb);
-			Imbsigsref = getImbsigsref(dbswdbe, imb);
+			outfile << "\tstrbD" << srefrootsImbRd[i] << " <= strbDTxbuf;" << endl;
+			outfile << endl;
+		};
 
-			if (refsImbsRd.find(imb->ref) != refsImbsRd.end()) {
-				outfile << "\t-- " << StrMod::uncap(Imbshort) << endl;
-				outfile << "\treq" << Imbsigsref << " <= reqTxbuf when tkn=tkn" << Imbshort << " else '0';" << endl;
-				outfile << "\tdne" << Imbsigsref << " <= dneTxbuf when tkn=tkn" << Imbshort << " else '0';" << endl;
-				outfile << endl;
+		for (unsigned int i = 0; i < srefrootsImbWr.size(); i++) {
+			outfile << "\t-- " << srefsImbWr[i] << endl;
+			outfile << "\treq" << srefrootsImbWr[i] << " <= reqRxbuf when tkn=tkn" << srefrootsImbWr[i] << " else '0';" << endl;
+			outfile << "\tdne" << srefrootsImbWr[i] << " <= dneRxbuf when tkn=tkn" << srefrootsImbWr[i] << " else '0';" << endl;
+			outfile << endl;
 
-				outfile << "\tstrbD" << Imbsigsref << " <= strbDTxbuf;" << endl;
-				outfile << endl;
-
-			} else if (refsImbsWr.find(imb->ref) != refsImbsWr.end()) {
-				outfile << "\t-- " << StrMod::uncap(Imbshort) << endl;
-				outfile << "\treq" << Imbsigsref << " <= reqRxbuf when tkn=tkn" << Imbshort << " else '0';" << endl;
-				outfile << "\tdne" << Imbsigsref << " <= dneRxbuf when tkn=tkn" << Imbshort << " else '0';" << endl;
-				outfile << endl;
-
-				outfile << "\td" << Imbsigsref << " <= dRxbuf;" << endl;
-				outfile << "\tstrbD" << Imbsigsref << " <= strbDRxbuf;" << endl;
-				outfile << endl;
-			};
+			outfile << "\td" << srefrootsImbWr[i] << " <= dRxbuf;" << endl;
+			outfile << "\tstrbD" << srefrootsImbWr[i] << " <= strbDRxbuf;" << endl;
+			outfile << endl;
 		};
 		outfile << "-- IP impl.op.bufs --- IEND" << endl;
 
 		// --- impl.op.vars
 		outfile << "-- IP impl.op.vars --- IBEGIN" << endl;
-
 		first = true;
 		Prio = 0;
 
-		for (unsigned int i = 0; i < imbs.nodes.size(); i++) {
-			imb = imbs.nodes[i];
-
-			if ( (refsImbsRd.find(imb->ref) != refsImbsRd.end()) || (refsImbsWr.find(imb->ref) != refsImbsWr.end()) ) {
-				if (first || (imb->Prio != Prio)) {
-					first = false;
-					Prio = imb->Prio;
-					
-					outfile << "\t\tvariable lastBxPr" << ((int) Prio) << ": std_logic_vector(7 downto 0) := (others => '0');" << endl;
-				};
+		for (unsigned int i = 0; i < srefrootsImb.size(); i++) {
+			if (first || (PriosImb[i] != Prio)) {
+				first = false;
+				Prio = PriosImb[i];
+				
+				outfile << "\t\tvariable lastBxPr" << Prio << ": std_logic_vector(7 downto 0) := (others => '0');" << endl;
 			};
 		};
 		outfile << "-- IP impl.op.vars --- IEND" << endl;
 
 		// --- impl.op.asyncrst
 		outfile << "-- IP impl.op.asyncrst --- IBEGIN" << endl;
-		for (unsigned int i = 0; i < imbs.nodes.size(); i++) {
-			imb = imbs.nodes[i];
-
-			Imbshort = Wdbe::getImbshort(imb);
-
-			if ( (refsImbsRd.find(imb->ref) != refsImbsRd.end()) || (refsImbsWr.find(imb->ref) != refsImbsWr.end()) )
-						outfile << "\t\t\ttkn" << Imbshort << " <= tixW" << Prjshort << Untsref << "Buffer" << StrMod::cap(imb->sref) << ";" << endl;
-		};
+		for (unsigned int i = 0; i < srefrootsImb.size(); i++)
+					outfile << "\t\t\ttkn" << srefrootsImb[i] << " <= tixW" << Prjshort << Untsref << "Buffer" << StrMod::cap(srefsImb[i]) << ";" << endl;
 		outfile << "-- IP impl.op.asyncrst --- IEND" << endl;
-
 
 		// --- impl.op.xferTkn
 		outfile << "-- IP impl.op.xferTkn --- IBEGIN" << endl;
 		outfile << "\t\t\t\t\t\telsif (";
 
-		first = true;
-		for (unsigned int i = 0; i < imbs.nodes.size(); i++) {
-			imb = imbs.nodes[i];
-
-			if ( (refsImbsRd.find(imb->ref) != refsImbsRd.end()) || (refsImbsWr.find(imb->ref) != refsImbsWr.end()) ) {
-				Imbshort = Wdbe::getImbshort(imb);
-
-				if (first) first = false;
-				else outfile << " or ";
-
-				outfile << "auxbuf(ixAuxbufTkn)=tkn" << Imbshort;
-			};
+		for (unsigned int i = 0; i < srefrootsImb.size(); i++) {
+			if (i != 0) outfile << " or ";
+			outfile << "auxbuf(ixAuxbufTkn)=tkn" << srefrootsImb[i];
 		};
 
 		outfile << ") then" << endl;
@@ -360,47 +299,36 @@ void WdbeWrfpgaHostif::writeMdlVhd(
 
 		// --- impl.op.xferReqbx
 		outfile << "-- IP impl.op.xferReqbx --- IBEGIN" << endl;
-		first = true;
-		for (unsigned int i = 0; i < imbs.nodes.size(); i++) {
-			imb = imbs.nodes[i];
+		for (unsigned int i = 0; i < srefrootsImb.size(); i++) {
+			outfile << "\t\t\t\t\t\t";
+			if (i != 0) outfile << "els";
 
-			if ( (refsImbsRd.find(imb->ref) != refsImbsRd.end()) || (refsImbsWr.find(imb->ref) != refsImbsWr.end()) ) {
-				outfile << "\t\t\t\t\t\t";
-				if (!first) outfile << "els";
+			outfile << "if ";
+			
+			found = false;
+			if ((i == 0) && ((i + 1) != srefrootsImb.size())) if (PriosImb[i + 1] == PriosImb[i]) found = true;
+			if (i != 0) if (PriosImb[i - 1] == PriosImb[i]) found = true;
 
-				outfile << "if ";
-				
-				found = false;
-				if ((i == 0) && ((i+1) != imbs.nodes.size())) if (imbs.nodes[i+1]->Prio == imb->Prio) found = true;
-				if (i != 0) if (imbs.nodes[i-1]->Prio == imb->Prio) found = true;
+			if (found) outfile << "( ";
 
-				if (found) outfile << "( ";
+			outfile << "((y and tixW" << Prjshort << Untsref << "Buffer" << StrMod::cap(srefsImb[i]) << ") /= (others => '0'))";
 
-				outfile << "((y and tixW" << Prjshort << Untsref << "Buffer" << StrMod::cap(imb->sref) << ") /= (others => '0'))";
+			if (found) {
+				outfile << " and ( (lastBxPr" << PriosImb[i] << " /= tixW" << Prjshort << Untsref << "Buffer" << StrMod::cap(srefsImb[i]) << ") or ((y and (";
 
-				if (found) {
-					outfile << " and ( (lastBxPr" << ((int) imb->Prio) << " /= tixW" << Prjshort << Untsref << "Buffer" << StrMod::cap(imb->sref) << ") or ((y and (";
+				for (unsigned int j = 0; j < srefsImb.size(); j++) {
+					if (PriosImb[j] == PriosImb[i]) {
+						if (j != 0) outfile << " or ";
 
-					first = true;
-					for (unsigned int j = 0; j < imbs.nodes.size(); j++) {
-						imb2 = imbs.nodes[j];
-
-						if ( ((refsImbsRd.find(imb2->ref) != refsImbsRd.end()) || (refsImbsWr.find(imb2->ref) != refsImbsWr.end())) && (imb2->Prio == imb->Prio) ) {
-							if (first) first = false;
-							else outfile << " or ";
-							
-							outfile << "tixW" << Prjshort << Untsref << "Buffer" << StrMod::cap(imb2->sref);
-						};
+						outfile << "tixW" << Prjshort << Untsref << "Buffer" << StrMod::cap(srefsImb[j]);
 					};
-
-					outfile << ")) = tixW" << Prjshort << Untsref << "Buffer" << StrMod::cap(imb->sref) << ") ) )";
 				};
-				outfile << " then" << endl;
 
-				outfile << "\t\t\t\t\t\t\tarbbx <= tixW" << Prjshort << Untsref << "Buffer" << StrMod::cap(imb->sref) << ";" << endl;
-
-				first = false;
+				outfile << ")) = tixW" << Prjshort << Untsref << "Buffer" << StrMod::cap(srefsImb[i]) << ") ) )";
 			};
+			outfile << " then" << endl;
+
+			outfile << "\t\t\t\t\t\t\tarbbx <= tixW" << Prjshort << Untsref << "Buffer" << StrMod::cap(srefsImb[i]) << ";" << endl;
 		};
 		outfile << "-- IP impl.op.xferReqbx --- IEND" << endl;
 
@@ -408,18 +336,9 @@ void WdbeWrfpgaHostif::writeMdlVhd(
 		outfile << "-- IP impl.op.xferArblenTx --- IBEGIN" << endl;
 		outfile << "\t\t\t\t\t\telsif (";
 
-		first = true;
-		for (unsigned int i = 0; i < imbs.nodes.size(); i++) {
-			imb = imbs.nodes[i];
-
-			if (refsImbsRd.find(imb->ref) != refsImbsRd.end()) {
-				Imbshort = Wdbe::getImbshort(imb);
-
-				if (first) first = false;
-				else outfile << " or ";
-
-				outfile << "auxbuf(ixAuxbufTkn)=tkn" << Imbshort;
-			};
+		for (unsigned int i = 0; i < srefrootsImbRd.size(); i++) {
+			if (i != 0) outfile << " or ";
+			outfile << "auxbuf(ixAuxbufTkn)=tkn" << srefrootsImbRd[i];
 		};
 
 		outfile << ") then" << endl;
@@ -429,18 +348,9 @@ void WdbeWrfpgaHostif::writeMdlVhd(
 		outfile << "-- IP impl.op.xferArblenRx --- IBEGIN" << endl;
 		outfile << "\t\t\t\t\t\telsif (";
 
-		first = true;
-		for (unsigned int i = 0; i < imbs.nodes.size(); i++) {
-			imb = imbs.nodes[i];
-
-			if (refsImbsWr.find(imb->ref) != refsImbsWr.end()) {
-				Imbshort = Wdbe::getImbshort(imb);
-
-				if (first) first = false;
-				else outfile << " or ";
-
-				outfile << "auxbuf(ixAuxbufTkn)=tkn" << Imbshort;
-			};
+		for (unsigned int i = 0; i < srefrootsImbWr.size(); i++) {
+			if (i != 0) outfile << " or ";
+			outfile << "auxbuf(ixAuxbufTkn)=tkn" << srefrootsImbWr[i];
 		};
 
 		outfile << ") then" << endl;
@@ -448,43 +358,31 @@ void WdbeWrfpgaHostif::writeMdlVhd(
 
 		// --- impl.op.cnfRd
 		outfile << "-- IP impl.op.cnfRd --- IBEGIN" << endl;
-		first = true;
-		for (unsigned int i = 0; i < imbs.nodes.size(); i++) {
-			imb = imbs.nodes[i];
 
-			if (refsImbsRd.find(imb->ref) != refsImbsRd.end()) {
-				Imbshort = Wdbe::getImbshort(imb);
+		for (unsigned int i = 0; i < srefrootsImbRd.size(); i++) {
+			outfile << "\t\t\t\t\t";
+			if (i != 0) outfile << "els";
+			outfile << "if tkn=tkn" << srefrootsImbRd[i] << " then" << endl;
 
-				outfile << "\t\t\t\t\t";
-				if (first) first = false;
-				else outfile << "els";
-				outfile << "if tkn=tkn" << Imbshort << " then" << endl;
-
-				outfile << "\t\t\t\t\t\tlastBxPr" << ((int) imb->Prio) << " := tixW" << Prjshort << Untsref << "Buffer" << StrMod::cap(imb->sref) << ";" << endl;
-				outfile << "\t\t\t\t\t\ttkn" << Imbshort << " <= not tkn" << Imbshort << ";" << endl;
-			};
+			outfile << "\t\t\t\t\t\tlastBxPr" << PriosImbRd[i] << " := tixW" << Prjshort << Untsref << "Buffer" << StrMod::cap(srefsImbRd[i]) << ";" << endl;
+			outfile << "\t\t\t\t\t\ttkn" << srefrootsImbRd[i] << " <= not tkn" << srefrootsImbRd[i] << ";" << endl;
 		};
+
 		outfile << "\t\t\t\t\tend if;" << endl;
 		outfile << "-- IP impl.op.cnfRd --- IEND" << endl;
 
 		// --- impl.op.cnfWr
 		outfile << "-- IP impl.op.cnfWr --- IBEGIN" << endl;
-		first = true;
-		for (unsigned int i = 0; i < imbs.nodes.size(); i++) {
-			imb = imbs.nodes[i];
 
-			if (refsImbsWr.find(imb->ref) != refsImbsWr.end()) {
-				Imbshort = Wdbe::getImbshort(imb);
+		for (unsigned int i = 0; i < srefrootsImbWr.size(); i++) {
+			outfile << "\t\t\t\t\t";
+			if (i != 0) outfile << "els";
+			outfile << "if tkn=tkn" << srefrootsImbWr[i] << " then" << endl;
 
-				outfile << "\t\t\t\t\t";
-				if (first) first = false;
-				else outfile << "els";
-				outfile << "if tkn=tkn" << Imbshort << " then" << endl;
-
-				outfile << "\t\t\t\t\t\tlastBxPr" << ((int) imb->Prio) << " := tixW" << Prjshort << Untsref << "Buffer" << StrMod::cap(imb->sref) << ";" << endl;
-				outfile << "\t\t\t\t\t\ttkn" << Imbshort << " <= not tkn" << Imbshort << ";" << endl;
-			};
+			outfile << "\t\t\t\t\t\tlastBxPr" << PriosImbWr[i] << " := tixW" << Prjshort << Untsref << "Buffer" << StrMod::cap(srefsImbWr[i]) << ";" << endl;
+			outfile << "\t\t\t\t\t\ttkn" << srefrootsImbWr[i] << " <= not tkn" << srefrootsImbWr[i] << ";" << endl;
 		};
+
 		outfile << "\t\t\t\t\tend if;" << endl;
 		outfile << "-- IP impl.op.cnfWr --- IEND" << endl;
 	};

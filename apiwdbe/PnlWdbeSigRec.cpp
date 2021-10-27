@@ -104,12 +104,14 @@ set<uint> PnlWdbeSigRec::ContInf::diff(
 
 PnlWdbeSigRec::StatApp::StatApp(
 			const bool initdoneDetail
+			, const bool initdoneSrc1NSensitivity
 		) :
 			Block()
 		{
 	this->initdoneDetail = initdoneDetail;
+	this->initdoneSrc1NSensitivity = initdoneSrc1NSensitivity;
 
-	mask = {INITDONEDETAIL};
+	mask = {INITDONEDETAIL, INITDONESRC1NSENSITIVITY};
 };
 
 bool PnlWdbeSigRec::StatApp::readXML(
@@ -130,6 +132,7 @@ bool PnlWdbeSigRec::StatApp::readXML(
 
 	if (basefound) {
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneDetail", initdoneDetail)) add(INITDONEDETAIL);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneSrc1NSensitivity", initdoneSrc1NSensitivity)) add(INITDONESRC1NSENSITIVITY);
 	};
 
 	return basefound;
@@ -141,6 +144,7 @@ set<uint> PnlWdbeSigRec::StatApp::comm(
 	set<uint> items;
 
 	if (initdoneDetail == comp->initdoneDetail) insert(items, INITDONEDETAIL);
+	if (initdoneSrc1NSensitivity == comp->initdoneSrc1NSensitivity) insert(items, INITDONESRC1NSENSITIVITY);
 
 	return(items);
 };
@@ -153,7 +157,7 @@ set<uint> PnlWdbeSigRec::StatApp::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {INITDONEDETAIL};
+	diffitems = {INITDONEDETAIL, INITDONESRC1NSENSITIVITY};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -166,15 +170,17 @@ set<uint> PnlWdbeSigRec::StatApp::diff(
 PnlWdbeSigRec::StatShr::StatShr(
 			const uint ixWdbeVExpstate
 			, const string& scrJrefDetail
+			, const string& scrJrefSrc1NSensitivity
 			, const bool ButRegularizeActive
 		) :
 			Block()
 		{
 	this->ixWdbeVExpstate = ixWdbeVExpstate;
 	this->scrJrefDetail = scrJrefDetail;
+	this->scrJrefSrc1NSensitivity = scrJrefSrc1NSensitivity;
 	this->ButRegularizeActive = ButRegularizeActive;
 
-	mask = {IXWDBEVEXPSTATE, SCRJREFDETAIL, BUTREGULARIZEACTIVE};
+	mask = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFSRC1NSENSITIVITY, BUTREGULARIZEACTIVE};
 };
 
 bool PnlWdbeSigRec::StatShr::readXML(
@@ -201,6 +207,7 @@ bool PnlWdbeSigRec::StatShr::readXML(
 			add(IXWDBEVEXPSTATE);
 		};
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefDetail", scrJrefDetail)) add(SCRJREFDETAIL);
+		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefSrc1NSensitivity", scrJrefSrc1NSensitivity)) add(SCRJREFSRC1NSENSITIVITY);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButRegularizeActive", ButRegularizeActive)) add(BUTREGULARIZEACTIVE);
 	};
 
@@ -214,6 +221,7 @@ set<uint> PnlWdbeSigRec::StatShr::comm(
 
 	if (ixWdbeVExpstate == comp->ixWdbeVExpstate) insert(items, IXWDBEVEXPSTATE);
 	if (scrJrefDetail == comp->scrJrefDetail) insert(items, SCRJREFDETAIL);
+	if (scrJrefSrc1NSensitivity == comp->scrJrefSrc1NSensitivity) insert(items, SCRJREFSRC1NSENSITIVITY);
 	if (ButRegularizeActive == comp->ButRegularizeActive) insert(items, BUTREGULARIZEACTIVE);
 
 	return(items);
@@ -227,7 +235,7 @@ set<uint> PnlWdbeSigRec::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {IXWDBEVEXPSTATE, SCRJREFDETAIL, BUTREGULARIZEACTIVE};
+	diffitems = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFSRC1NSENSITIVITY, BUTREGULARIZEACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);

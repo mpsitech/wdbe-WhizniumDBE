@@ -67,17 +67,19 @@ namespace PnlWdbePrcRec {
 	public:
 		static const Sbecore::uint INITDONEDETAIL = 1;
 		static const Sbecore::uint INITDONEKHDLTYPE = 2;
-		static const Sbecore::uint INITDONEPRC1NVARIABLE = 3;
-		static const Sbecore::uint INITDONEMGE1NSIGNAL = 4;
-		static const Sbecore::uint INITDONEFSMFSM1NFSMSTATE = 5;
+		static const Sbecore::uint INITDONEREF1NSENSITIVITY = 3;
+		static const Sbecore::uint INITDONEREF1NVARIABLE = 4;
+		static const Sbecore::uint INITDONEMGE1NSIGNAL = 5;
+		static const Sbecore::uint INITDONEFSMFSM1NFSMSTATE = 6;
 
 	public:
-		StatApp(const bool initdoneDetail = false, const bool initdoneKHdltype = false, const bool initdonePrc1NVariable = false, const bool initdoneMge1NSignal = false, const bool initdoneFsmFsm1NFsmstate = false);
+		StatApp(const bool initdoneDetail = false, const bool initdoneKHdltype = false, const bool initdoneRef1NSensitivity = false, const bool initdoneRef1NVariable = false, const bool initdoneMge1NSignal = false, const bool initdoneFsmFsm1NFsmstate = false);
 
 	public:
 		bool initdoneDetail;
 		bool initdoneKHdltype;
-		bool initdonePrc1NVariable;
+		bool initdoneRef1NSensitivity;
+		bool initdoneRef1NVariable;
 		bool initdoneMge1NSignal;
 		bool initdoneFsmFsm1NFsmstate;
 
@@ -96,20 +98,22 @@ namespace PnlWdbePrcRec {
 		static const Sbecore::uint IXWDBEVEXPSTATE = 1;
 		static const Sbecore::uint SCRJREFDETAIL = 2;
 		static const Sbecore::uint SCRJREFKHDLTYPE = 3;
-		static const Sbecore::uint SCRJREFPRC1NVARIABLE = 4;
-		static const Sbecore::uint SCRJREFMGE1NSIGNAL = 5;
-		static const Sbecore::uint SCRJREFFSMFSM1NFSMSTATE = 6;
-		static const Sbecore::uint PNLFSMFSM1NFSMSTATEAVAIL = 7;
-		static const Sbecore::uint BUTREGULARIZEACTIVE = 8;
+		static const Sbecore::uint SCRJREFREF1NSENSITIVITY = 4;
+		static const Sbecore::uint SCRJREFREF1NVARIABLE = 5;
+		static const Sbecore::uint SCRJREFMGE1NSIGNAL = 6;
+		static const Sbecore::uint SCRJREFFSMFSM1NFSMSTATE = 7;
+		static const Sbecore::uint PNLFSMFSM1NFSMSTATEAVAIL = 8;
+		static const Sbecore::uint BUTREGULARIZEACTIVE = 9;
 
 	public:
-		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const std::string& scrJrefDetail = "", const std::string& scrJrefKHdltype = "", const std::string& scrJrefPrc1NVariable = "", const std::string& scrJrefMge1NSignal = "", const std::string& scrJrefFsmFsm1NFsmstate = "", const bool pnlfsmfsm1nfsmstateAvail = false, const bool ButRegularizeActive = true);
+		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const std::string& scrJrefDetail = "", const std::string& scrJrefKHdltype = "", const std::string& scrJrefRef1NSensitivity = "", const std::string& scrJrefRef1NVariable = "", const std::string& scrJrefMge1NSignal = "", const std::string& scrJrefFsmFsm1NFsmstate = "", const bool pnlfsmfsm1nfsmstateAvail = false, const bool ButRegularizeActive = true);
 
 	public:
 		Sbecore::uint ixWdbeVExpstate;
 		std::string scrJrefDetail;
 		std::string scrJrefKHdltype;
-		std::string scrJrefPrc1NVariable;
+		std::string scrJrefRef1NSensitivity;
+		std::string scrJrefRef1NVariable;
 		std::string scrJrefMge1NSignal;
 		std::string scrJrefFsmFsm1NFsmstate;
 		bool pnlfsmfsm1nfsmstateAvail;

@@ -45,7 +45,7 @@ public class ListWdbeQPphList {
 			clear();
 			
 			for (int i = 0; i < ics.size(); i++) {
-				rec = new WdbeQPphList(i+1, "", "", "");
+				rec = new WdbeQPphList(i+1, "", "");
 
 				if (shorttags.get(i)) s = basexpath + "/row[@jnum='" + ics.get(i).toString() + "']";
 				else s = basexpath + "/WdbeQPphList[@jnum='" + ics.get(i).toString() + "']";

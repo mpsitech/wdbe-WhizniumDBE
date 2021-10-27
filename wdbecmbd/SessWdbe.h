@@ -14,39 +14,43 @@
 
 // IP include.cust --- INSERT
 
-#include "CrdWdbeUtl.h"
-#include "CrdWdbeVar.h"
-#include "CrdWdbeFst.h"
-#include "CrdWdbePrc.h"
-#include "CrdWdbeSig.h"
-#include "CrdWdbePrt.h"
-#include "CrdWdbeGen.h"
-#include "CrdWdbePin.h"
-#include "CrdWdbeBnk.h"
-#include "CrdWdbePph.h"
-#include "CrdWdbeErr.h"
-#include "CrdWdbeCmd.h"
-#include "CrdWdbeVit.h"
-#include "CrdWdbeVec.h"
-#include "CrdWdbeMod.h"
-#include "CrdWdbeCvr.h"
-#include "CrdWdbeCpr.h"
-#include "CrdWdbeRls.h"
-#include "CrdWdbeUnt.h"
-#include "CrdWdbeTrg.h"
-#include "CrdWdbeSys.h"
-#include "CrdWdbeVer.h"
-#include "CrdWdbePrj.h"
-#include "CrdWdbeMtp.h"
-#include "CrdWdbeSil.h"
-#include "CrdWdbeFam.h"
-#include "CrdWdbeLib.h"
-#include "CrdWdbeMch.h"
-#include "CrdWdbeNav.h"
-#include "CrdWdbeFil.h"
-#include "CrdWdbePrs.h"
-#include "CrdWdbeUsr.h"
 #include "CrdWdbeUsg.h"
+#include "CrdWdbeUsr.h"
+#include "CrdWdbePrs.h"
+#include "CrdWdbeFil.h"
+#include "CrdWdbeNav.h"
+#include "CrdWdbeMch.h"
+#include "CrdWdbeLib.h"
+#include "CrdWdbeFam.h"
+#include "CrdWdbeSil.h"
+#include "CrdWdbeMtp.h"
+#include "CrdWdbePrj.h"
+#include "CrdWdbeVer.h"
+#include "CrdWdbeSys.h"
+#include "CrdWdbeTrg.h"
+#include "CrdWdbeUnt.h"
+#include "CrdWdbeRls.h"
+#include "CrdWdbeCpr.h"
+#include "CrdWdbeCvr.h"
+#include "CrdWdbePph.h"
+#include "CrdWdbeMod.h"
+#include "CrdWdbeVec.h"
+#include "CrdWdbeVit.h"
+#include "CrdWdbeCmd.h"
+#include "CrdWdbeErr.h"
+#include "CrdWdbePpl.h"
+#include "CrdWdbeSeg.h"
+#include "CrdWdbeBnk.h"
+#include "CrdWdbePin.h"
+#include "CrdWdbeInt.h"
+#include "CrdWdbeSns.h"
+#include "CrdWdbeVar.h"
+#include "CrdWdbeGen.h"
+#include "CrdWdbePrt.h"
+#include "CrdWdbeSig.h"
+#include "CrdWdbePrc.h"
+#include "CrdWdbeFst.h"
+#include "CrdWdbeUtl.h"
 
 #define StatShrSessWdbe SessWdbe::StatShr
 
@@ -112,39 +116,43 @@ public:
 public:
 	StatShr statshr;
 
-	std::list<CrdWdbeUtl*> crdutls;
-	std::list<CrdWdbeVar*> crdvars;
-	std::list<CrdWdbeFst*> crdfsts;
-	std::list<CrdWdbePrc*> crdprcs;
-	std::list<CrdWdbeSig*> crdsigs;
-	std::list<CrdWdbePrt*> crdprts;
-	std::list<CrdWdbeGen*> crdgens;
-	std::list<CrdWdbePin*> crdpins;
-	std::list<CrdWdbeBnk*> crdbnks;
-	std::list<CrdWdbePph*> crdpphs;
-	std::list<CrdWdbeErr*> crderrs;
-	std::list<CrdWdbeCmd*> crdcmds;
-	std::list<CrdWdbeVit*> crdvits;
-	std::list<CrdWdbeVec*> crdvecs;
-	std::list<CrdWdbeMod*> crdmods;
-	std::list<CrdWdbeCvr*> crdcvrs;
-	std::list<CrdWdbeCpr*> crdcprs;
-	std::list<CrdWdbeRls*> crdrlss;
-	std::list<CrdWdbeUnt*> crdunts;
-	std::list<CrdWdbeTrg*> crdtrgs;
-	std::list<CrdWdbeSys*> crdsyss;
-	std::list<CrdWdbeVer*> crdvers;
-	std::list<CrdWdbePrj*> crdprjs;
-	std::list<CrdWdbeMtp*> crdmtps;
-	std::list<CrdWdbeSil*> crdsils;
-	std::list<CrdWdbeFam*> crdfams;
-	std::list<CrdWdbeLib*> crdlibs;
-	std::list<CrdWdbeMch*> crdmchs;
+	std::map<Sbecore::ubigint, JobWdbe*> crdusgs;
+	std::map<Sbecore::ubigint, JobWdbe*> crdusrs;
+	std::map<Sbecore::ubigint, JobWdbe*> crdprss;
+	std::map<Sbecore::ubigint, JobWdbe*> crdfils;
 	CrdWdbeNav* crdnav;
-	std::list<CrdWdbeFil*> crdfils;
-	std::list<CrdWdbePrs*> crdprss;
-	std::list<CrdWdbeUsr*> crdusrs;
-	std::list<CrdWdbeUsg*> crdusgs;
+	std::map<Sbecore::ubigint, JobWdbe*> crdmchs;
+	std::map<Sbecore::ubigint, JobWdbe*> crdlibs;
+	std::map<Sbecore::ubigint, JobWdbe*> crdfams;
+	std::map<Sbecore::ubigint, JobWdbe*> crdsils;
+	std::map<Sbecore::ubigint, JobWdbe*> crdmtps;
+	std::map<Sbecore::ubigint, JobWdbe*> crdprjs;
+	std::map<Sbecore::ubigint, JobWdbe*> crdvers;
+	std::map<Sbecore::ubigint, JobWdbe*> crdsyss;
+	std::map<Sbecore::ubigint, JobWdbe*> crdtrgs;
+	std::map<Sbecore::ubigint, JobWdbe*> crdunts;
+	std::map<Sbecore::ubigint, JobWdbe*> crdrlss;
+	std::map<Sbecore::ubigint, JobWdbe*> crdcprs;
+	std::map<Sbecore::ubigint, JobWdbe*> crdcvrs;
+	std::map<Sbecore::ubigint, JobWdbe*> crdpphs;
+	std::map<Sbecore::ubigint, JobWdbe*> crdmods;
+	std::map<Sbecore::ubigint, JobWdbe*> crdvecs;
+	std::map<Sbecore::ubigint, JobWdbe*> crdvits;
+	std::map<Sbecore::ubigint, JobWdbe*> crdcmds;
+	std::map<Sbecore::ubigint, JobWdbe*> crderrs;
+	std::map<Sbecore::ubigint, JobWdbe*> crdppls;
+	std::map<Sbecore::ubigint, JobWdbe*> crdsegs;
+	std::map<Sbecore::ubigint, JobWdbe*> crdbnks;
+	std::map<Sbecore::ubigint, JobWdbe*> crdpins;
+	std::map<Sbecore::ubigint, JobWdbe*> crdints;
+	std::map<Sbecore::ubigint, JobWdbe*> crdsnss;
+	std::map<Sbecore::ubigint, JobWdbe*> crdvars;
+	std::map<Sbecore::ubigint, JobWdbe*> crdgens;
+	std::map<Sbecore::ubigint, JobWdbe*> crdprts;
+	std::map<Sbecore::ubigint, JobWdbe*> crdsigs;
+	std::map<Sbecore::ubigint, JobWdbe*> crdprcs;
+	std::map<Sbecore::ubigint, JobWdbe*> crdfsts;
+	std::map<Sbecore::ubigint, JobWdbe*> crdutls;
 
 	std::map<Sbecore::ubigint,Sbecore::uint> usgaccs;
 
@@ -160,6 +168,8 @@ public:
 	void warnTerm(DbsWdbe* dbswdbe);
 	void term(DbsWdbe* dbswdbe);
 
+	void eraseCrd(std::map<Sbecore::ubigint, JobWdbe*>& subjobs);
+
 	Sbecore::uint checkCrdActive(const Sbecore::uint ixWdbeVCard);
 	Sbecore::uint evalCrdverActive();
 	Sbecore::uint evalCrdsysActive();
@@ -167,20 +177,24 @@ public:
 	Sbecore::uint evalCrduntActive();
 	Sbecore::uint evalCrdrlsActive();
 	Sbecore::uint evalCrdcvrActive();
+	Sbecore::uint evalCrdpphActive();
 	Sbecore::uint evalCrdmodActive();
 	Sbecore::uint evalCrdvecActive();
 	Sbecore::uint evalCrdvitActive();
 	Sbecore::uint evalCrdcmdActive();
 	Sbecore::uint evalCrderrActive();
-	Sbecore::uint evalCrdpphActive();
+	Sbecore::uint evalCrdpplActive();
+	Sbecore::uint evalCrdsegActive();
 	Sbecore::uint evalCrdbnkActive();
 	Sbecore::uint evalCrdpinActive();
+	Sbecore::uint evalCrdintActive();
+	Sbecore::uint evalCrdsnsActive();
+	Sbecore::uint evalCrdvarActive();
 	Sbecore::uint evalCrdgenActive();
 	Sbecore::uint evalCrdprtActive();
 	Sbecore::uint evalCrdsigActive();
 	Sbecore::uint evalCrdprcActive();
 	Sbecore::uint evalCrdfstActive();
-	Sbecore::uint evalCrdvarActive();
 
 	Sbecore::uint checkCrdaccess(const Sbecore::uint ixWdbeVCard);
 	void getIxCrdacc(DbsWdbe* dbswdbe, const Sbecore::uint ixWdbeVCard, const bool adm, ListWdbeRMUserMUsergroup& urus, const Sbecore::ubigint refWdbeMUser, Sbecore::uint& ixWdbeWAccess);
@@ -208,19 +222,23 @@ private:
 	bool handleCreateCrdfil(DbsWdbe* dbswdbe);
 	bool handleCreateCrdfst(DbsWdbe* dbswdbe);
 	bool handleCreateCrdgen(DbsWdbe* dbswdbe);
+	bool handleCreateCrdint(DbsWdbe* dbswdbe);
 	bool handleCreateCrdlib(DbsWdbe* dbswdbe);
 	bool handleCreateCrdmch(DbsWdbe* dbswdbe);
 	bool handleCreateCrdmod(DbsWdbe* dbswdbe);
 	bool handleCreateCrdmtp(DbsWdbe* dbswdbe);
 	bool handleCreateCrdpin(DbsWdbe* dbswdbe);
 	bool handleCreateCrdpph(DbsWdbe* dbswdbe);
+	bool handleCreateCrdppl(DbsWdbe* dbswdbe);
 	bool handleCreateCrdprc(DbsWdbe* dbswdbe);
 	bool handleCreateCrdprj(DbsWdbe* dbswdbe);
 	bool handleCreateCrdprs(DbsWdbe* dbswdbe);
 	bool handleCreateCrdprt(DbsWdbe* dbswdbe);
 	bool handleCreateCrdrls(DbsWdbe* dbswdbe);
+	bool handleCreateCrdseg(DbsWdbe* dbswdbe);
 	bool handleCreateCrdsig(DbsWdbe* dbswdbe);
 	bool handleCreateCrdsil(DbsWdbe* dbswdbe);
+	bool handleCreateCrdsns(DbsWdbe* dbswdbe);
 	bool handleCreateCrdsys(DbsWdbe* dbswdbe);
 	bool handleCreateCrdtrg(DbsWdbe* dbswdbe);
 	bool handleCreateCrdunt(DbsWdbe* dbswdbe);
@@ -240,19 +258,23 @@ private:
 	bool handleEraseCrdfil(DbsWdbe* dbswdbe);
 	bool handleEraseCrdfst(DbsWdbe* dbswdbe);
 	bool handleEraseCrdgen(DbsWdbe* dbswdbe);
+	bool handleEraseCrdint(DbsWdbe* dbswdbe);
 	bool handleEraseCrdlib(DbsWdbe* dbswdbe);
 	bool handleEraseCrdmch(DbsWdbe* dbswdbe);
 	bool handleEraseCrdmod(DbsWdbe* dbswdbe);
 	bool handleEraseCrdmtp(DbsWdbe* dbswdbe);
 	bool handleEraseCrdpin(DbsWdbe* dbswdbe);
 	bool handleEraseCrdpph(DbsWdbe* dbswdbe);
+	bool handleEraseCrdppl(DbsWdbe* dbswdbe);
 	bool handleEraseCrdprc(DbsWdbe* dbswdbe);
 	bool handleEraseCrdprj(DbsWdbe* dbswdbe);
 	bool handleEraseCrdprs(DbsWdbe* dbswdbe);
 	bool handleEraseCrdprt(DbsWdbe* dbswdbe);
 	bool handleEraseCrdrls(DbsWdbe* dbswdbe);
+	bool handleEraseCrdseg(DbsWdbe* dbswdbe);
 	bool handleEraseCrdsig(DbsWdbe* dbswdbe);
 	bool handleEraseCrdsil(DbsWdbe* dbswdbe);
+	bool handleEraseCrdsns(DbsWdbe* dbswdbe);
 	bool handleEraseCrdsys(DbsWdbe* dbswdbe);
 	bool handleEraseCrdtrg(DbsWdbe* dbswdbe);
 	bool handleEraseCrdunt(DbsWdbe* dbswdbe);
@@ -270,12 +292,12 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeRefPreSet(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, const Sbecore::ubigint refInv);
-	bool handleCallWdbeRecaccess(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, const Sbecore::ubigint refInv, Sbecore::uint& ixRet);
-	bool handleCallWdbeLog(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, const Sbecore::ubigint refInv, const std::string& srefInv, const int intvalInv);
+	bool handleCallWdbeCrdActive(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, Sbecore::uint& ixRet);
 	bool handleCallWdbeCrdClose(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv);
 	bool handleCallWdbeCrdOpen(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, const Sbecore::ubigint refInv, const std::string& srefInv, const int intvalInv, Sbecore::ubigint& refRet);
-	bool handleCallWdbeCrdActive(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, Sbecore::uint& ixRet);
+	bool handleCallWdbeLog(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, const Sbecore::ubigint refInv, const std::string& srefInv, const int intvalInv);
+	bool handleCallWdbeRecaccess(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, const Sbecore::ubigint refInv, Sbecore::uint& ixRet);
+	bool handleCallWdbeRefPreSet(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, const Sbecore::ubigint refInv);
 
 };
 

@@ -20,7 +20,9 @@ using namespace Xmlio;
 WdbeQVarList::WdbeQVarList(
 			const uint jnum
 			, const string sref
-			, const string stubPrcRefWdbeMProcess
+			, const string srefRefIxVTbl
+			, const string titRefIxVTbl
+			, const string stubRefUref
 			, const string yesnoConst
 			, const string yesnoFalling
 			, const string srefWdbeKHdltype
@@ -30,7 +32,9 @@ WdbeQVarList::WdbeQVarList(
 		) {
 	this->jnum = jnum;
 	this->sref = sref;
-	this->stubPrcRefWdbeMProcess = stubPrcRefWdbeMProcess;
+	this->srefRefIxVTbl = srefRefIxVTbl;
+	this->titRefIxVTbl = titRefIxVTbl;
+	this->stubRefUref = stubRefUref;
 	this->yesnoConst = yesnoConst;
 	this->yesnoFalling = yesnoFalling;
 	this->srefWdbeKHdltype = srefWdbeKHdltype;
@@ -53,7 +57,9 @@ bool WdbeQVarList::readXML(
 
 	if (basefound) {
 		extractStringUclc(docctx, basexpath, "sref", "srf", sref);
-		extractStringUclc(docctx, basexpath, "stubPrcRefWdbeMProcess", "prc", stubPrcRefWdbeMProcess);
+		extractStringUclc(docctx, basexpath, "srefRefIxVTbl", "ret", srefRefIxVTbl);
+		extractStringUclc(docctx, basexpath, "titRefIxVTbl", "ret2", titRefIxVTbl);
+		extractStringUclc(docctx, basexpath, "stubRefUref", "reu", stubRefUref);
 		extractStringUclc(docctx, basexpath, "yesnoConst", "con", yesnoConst);
 		extractStringUclc(docctx, basexpath, "yesnoFalling", "fal", yesnoFalling);
 		extractStringUclc(docctx, basexpath, "srefWdbeKHdltype", "hty", srefWdbeKHdltype);

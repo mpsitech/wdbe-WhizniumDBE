@@ -127,14 +127,16 @@ public:
 
 	public:
 		static const Sbecore::uint TCOSRFWIDTH = 1;
-		static const Sbecore::uint TCOTYPWIDTH = 2;
-		static const Sbecore::uint TCOSRRWIDTH = 3;
+		static const Sbecore::uint TCOVNDWIDTH = 2;
+		static const Sbecore::uint TCOTYPWIDTH = 3;
+		static const Sbecore::uint TCOSRRWIDTH = 4;
 
 	public:
-		StgIac(const Sbecore::uint TcoSrfWidth = 200, const Sbecore::uint TcoTypWidth = 100, const Sbecore::uint TcoSrrWidth = 100);
+		StgIac(const Sbecore::uint TcoSrfWidth = 200, const Sbecore::uint TcoVndWidth = 100, const Sbecore::uint TcoTypWidth = 100, const Sbecore::uint TcoSrrWidth = 100);
 
 	public:
 		Sbecore::uint TcoSrfWidth;
+		Sbecore::uint TcoVndWidth;
 		Sbecore::uint TcoTypWidth;
 		Sbecore::uint TcoSrrWidth;
 

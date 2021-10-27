@@ -108,12 +108,14 @@ void PnlWdbePrtRec::StatApp::writeJSON(
 			Json::Value& sup
 			, string difftag
 			, const bool initdoneDetail
+			, const bool initdoneSrc1NSensitivity
 		) {
 	if (difftag.length() == 0) difftag = "StatAppWdbePrtRec";
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
 	me["initdoneDetail"] = initdoneDetail;
+	me["initdoneSrc1NSensitivity"] = initdoneSrc1NSensitivity;
 };
 
 void PnlWdbePrtRec::StatApp::writeXML(
@@ -121,6 +123,7 @@ void PnlWdbePrtRec::StatApp::writeXML(
 			, string difftag
 			, bool shorttags
 			, const bool initdoneDetail
+			, const bool initdoneSrc1NSensitivity
 		) {
 	if (difftag.length() == 0) difftag = "StatAppWdbePrtRec";
 
@@ -130,6 +133,7 @@ void PnlWdbePrtRec::StatApp::writeXML(
 
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
 		writeBoolAttr(wr, itemtag, "sref", "initdoneDetail", initdoneDetail);
+		writeBoolAttr(wr, itemtag, "sref", "initdoneSrc1NSensitivity", initdoneSrc1NSensitivity);
 	xmlTextWriterEndElement(wr);
 };
 
@@ -140,15 +144,17 @@ void PnlWdbePrtRec::StatApp::writeXML(
 PnlWdbePrtRec::StatShr::StatShr(
 			const uint ixWdbeVExpstate
 			, const ubigint jrefDetail
+			, const ubigint jrefSrc1NSensitivity
 			, const bool ButRegularizeActive
 		) :
 			Block()
 		{
 	this->ixWdbeVExpstate = ixWdbeVExpstate;
 	this->jrefDetail = jrefDetail;
+	this->jrefSrc1NSensitivity = jrefSrc1NSensitivity;
 	this->ButRegularizeActive = ButRegularizeActive;
 
-	mask = {IXWDBEVEXPSTATE, JREFDETAIL, BUTREGULARIZEACTIVE};
+	mask = {IXWDBEVEXPSTATE, JREFDETAIL, JREFSRC1NSENSITIVITY, BUTREGULARIZEACTIVE};
 };
 
 void PnlWdbePrtRec::StatShr::writeJSON(
@@ -161,6 +167,7 @@ void PnlWdbePrtRec::StatShr::writeJSON(
 
 	me["srefIxWdbeVExpstate"] = VecWdbeVExpstate::getSref(ixWdbeVExpstate);
 	me["scrJrefDetail"] = Scr::scramble(jrefDetail);
+	me["scrJrefSrc1NSensitivity"] = Scr::scramble(jrefSrc1NSensitivity);
 	me["ButRegularizeActive"] = ButRegularizeActive;
 };
 
@@ -178,6 +185,7 @@ void PnlWdbePrtRec::StatShr::writeXML(
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
 		writeStringAttr(wr, itemtag, "sref", "srefIxWdbeVExpstate", VecWdbeVExpstate::getSref(ixWdbeVExpstate));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefDetail", Scr::scramble(jrefDetail));
+		writeStringAttr(wr, itemtag, "sref", "scrJrefSrc1NSensitivity", Scr::scramble(jrefSrc1NSensitivity));
 		writeBoolAttr(wr, itemtag, "sref", "ButRegularizeActive", ButRegularizeActive);
 	xmlTextWriterEndElement(wr);
 };
@@ -189,6 +197,7 @@ set<uint> PnlWdbePrtRec::StatShr::comm(
 
 	if (ixWdbeVExpstate == comp->ixWdbeVExpstate) insert(items, IXWDBEVEXPSTATE);
 	if (jrefDetail == comp->jrefDetail) insert(items, JREFDETAIL);
+	if (jrefSrc1NSensitivity == comp->jrefSrc1NSensitivity) insert(items, JREFSRC1NSENSITIVITY);
 	if (ButRegularizeActive == comp->ButRegularizeActive) insert(items, BUTREGULARIZEACTIVE);
 
 	return(items);
@@ -202,7 +211,7 @@ set<uint> PnlWdbePrtRec::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {IXWDBEVEXPSTATE, JREFDETAIL, BUTREGULARIZEACTIVE};
+	diffitems = {IXWDBEVEXPSTATE, JREFDETAIL, JREFSRC1NSENSITIVITY, BUTREGULARIZEACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);

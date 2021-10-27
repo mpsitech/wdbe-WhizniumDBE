@@ -18,14 +18,16 @@
 class WdbeQSigList {
 
 public:
-	WdbeQSigList(const Sbecore::uint jnum = 0, const std::string sref = "", const std::string srefIxVBasetype = "", const std::string titIxVBasetype = "", const std::string stubMdlRefWdbeMModule = "", const std::string srefMgeIxVTbl = "", const std::string titMgeIxVTbl = "", const std::string stubMgeUref = "", const std::string stubRefWdbeMVector = "", const std::string yesnoConst = "", const std::string srefWdbeKHdltype = "", const std::string titSrefWdbeKHdltype = "", const Sbecore::usmallint Width = 0, const std::string Minmax = "");
+	WdbeQSigList(const Sbecore::uint jnum = 0, const std::string sref = "", const std::string srefIxVBasetype = "", const std::string titIxVBasetype = "", const std::string srefRefIxVTbl = "", const std::string titRefIxVTbl = "", const std::string stubRefUref = "", const std::string srefMgeIxVTbl = "", const std::string titMgeIxVTbl = "", const std::string stubMgeUref = "", const std::string stubRefWdbeMVector = "", const std::string yesnoConst = "", const std::string srefWdbeKHdltype = "", const std::string titSrefWdbeKHdltype = "", const Sbecore::usmallint Width = 0, const std::string Minmax = "");
 
 public:
 	Sbecore::uint jnum;
 	std::string sref;
 	std::string srefIxVBasetype;
 	std::string titIxVBasetype;
-	std::string stubMdlRefWdbeMModule;
+	std::string srefRefIxVTbl;
+	std::string titRefIxVTbl;
+	std::string stubRefUref;
 	std::string srefMgeIxVTbl;
 	std::string titMgeIxVTbl;
 	std::string stubMgeUref;

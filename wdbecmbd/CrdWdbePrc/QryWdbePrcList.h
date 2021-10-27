@@ -148,9 +148,9 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbePrcUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
-	bool handleCallWdbePrcMod(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 	bool handleCallWdbeStubChgFromSelf(DbsWdbe* dbswdbe);
+	bool handleCallWdbePrcMod(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbePrcUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 
 };
 

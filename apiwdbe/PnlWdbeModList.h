@@ -125,17 +125,19 @@ namespace PnlWdbeModList {
 
 	public:
 		static const Sbecore::uint TCOSRFWIDTH = 1;
-		static const Sbecore::uint TCOTYPWIDTH = 2;
-		static const Sbecore::uint TCOHKTWIDTH = 3;
-		static const Sbecore::uint TCOHKUWIDTH = 4;
-		static const Sbecore::uint TCOSUPWIDTH = 5;
-		static const Sbecore::uint TCOTPLWIDTH = 6;
+		static const Sbecore::uint TCOVNDWIDTH = 2;
+		static const Sbecore::uint TCOTYPWIDTH = 3;
+		static const Sbecore::uint TCOHKTWIDTH = 4;
+		static const Sbecore::uint TCOHKUWIDTH = 5;
+		static const Sbecore::uint TCOSUPWIDTH = 6;
+		static const Sbecore::uint TCOTPLWIDTH = 7;
 
 	public:
-		StgIac(const Sbecore::uint TcoSrfWidth = 250, const Sbecore::uint TcoTypWidth = 100, const Sbecore::uint TcoHktWidth = 100, const Sbecore::uint TcoHkuWidth = 100, const Sbecore::uint TcoSupWidth = 100, const Sbecore::uint TcoTplWidth = 100);
+		StgIac(const Sbecore::uint TcoSrfWidth = 250, const Sbecore::uint TcoVndWidth = 100, const Sbecore::uint TcoTypWidth = 100, const Sbecore::uint TcoHktWidth = 100, const Sbecore::uint TcoHkuWidth = 100, const Sbecore::uint TcoSupWidth = 100, const Sbecore::uint TcoTplWidth = 100);
 
 	public:
 		Sbecore::uint TcoSrfWidth;
+		Sbecore::uint TcoVndWidth;
 		Sbecore::uint TcoTypWidth;
 		Sbecore::uint TcoHktWidth;
 		Sbecore::uint TcoHkuWidth;
@@ -163,14 +165,15 @@ namespace PnlWdbeModList {
 		static const Sbecore::uint TXTSHOWING1 = 6;
 		static const Sbecore::uint TXTSHOWING2 = 7;
 		static const Sbecore::uint TCOSRF = 8;
-		static const Sbecore::uint TCOTYP = 9;
-		static const Sbecore::uint TCOHKT = 10;
-		static const Sbecore::uint TCOHKU = 11;
-		static const Sbecore::uint TCOSUP = 12;
-		static const Sbecore::uint TCOTPL = 13;
+		static const Sbecore::uint TCOVND = 9;
+		static const Sbecore::uint TCOTYP = 10;
+		static const Sbecore::uint TCOHKT = 11;
+		static const Sbecore::uint TCOHKU = 12;
+		static const Sbecore::uint TCOSUP = 13;
+		static const Sbecore::uint TCOTPL = 14;
 
 	public:
-		Tag(const std::string& Cpt = "", const std::string& TxtFor = "", const std::string& TxtRecord1 = "", const std::string& TxtRecord2 = "", const std::string& Trs = "", const std::string& TxtShowing1 = "", const std::string& TxtShowing2 = "", const std::string& TcoSrf = "", const std::string& TcoTyp = "", const std::string& TcoHkt = "", const std::string& TcoHku = "", const std::string& TcoSup = "", const std::string& TcoTpl = "");
+		Tag(const std::string& Cpt = "", const std::string& TxtFor = "", const std::string& TxtRecord1 = "", const std::string& TxtRecord2 = "", const std::string& Trs = "", const std::string& TxtShowing1 = "", const std::string& TxtShowing2 = "", const std::string& TcoSrf = "", const std::string& TcoVnd = "", const std::string& TcoTyp = "", const std::string& TcoHkt = "", const std::string& TcoHku = "", const std::string& TcoSup = "", const std::string& TcoTpl = "");
 
 	public:
 		std::string Cpt;
@@ -181,6 +184,7 @@ namespace PnlWdbeModList {
 		std::string TxtShowing1;
 		std::string TxtShowing2;
 		std::string TcoSrf;
+		std::string TcoVnd;
 		std::string TcoTyp;
 		std::string TcoHkt;
 		std::string TcoHku;

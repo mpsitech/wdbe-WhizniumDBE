@@ -41,6 +41,8 @@ PnlWdbeVarDetail::PnlWdbeVarDetail(
 	feedFLstClu.tag = "FeedFLstClu";
 	feedFPupHty.tag = "FeedFPupHty";
 	dbswdbe->fillFeedFromKlst(VecWdbeVKeylist::KLSTWDBEKHDLTYPE, ixWdbeVLocale, feedFPupHty);
+	feedFPupRet.tag = "FeedFPupRet";
+	VecWdbeVMVariableRefTbl::fillFeed(ixWdbeVLocale, feedFPupRet);
 
 	// IP constructor.cust1 --- INSERT
 
@@ -48,8 +50,11 @@ PnlWdbeVarDetail::PnlWdbeVarDetail(
 
 	// IP constructor.cust2 --- INSERT
 
-	xchg->addClstn(VecWdbeVCall::CALLWDBEKLSAKEYMOD_KLSMTBURFEQ, jref, Clstn::VecVJobmask::ALL, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBEVAR_CLUEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBEVAR_RETEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBEVAR_REU_INSBS, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBEVAR_REUEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBEKLSAKEYMOD_KLSMTBURFEQ, jref, Clstn::VecVJobmask::ALL, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -77,7 +82,7 @@ DpchEngWdbe* PnlWdbeVarDetail::getNewDpchEng(
 		dpcheng = new DpchEngWdbeConfirm(true, jref, "");
 	} else {
 		insert(items, DpchEngData::JREF);
-		dpcheng = new DpchEngData(jref, &contiac, &continf, &feedFLstClu, &feedFPupHty, &statshr, items);
+		dpcheng = new DpchEngData(jref, &contiac, &continf, &feedFLstClu, &feedFPupHty, &feedFPupRet, &statshr, items);
 	};
 
 	return dpcheng;
@@ -213,7 +218,10 @@ void PnlWdbeVarDetail::refreshRecVar(
 	else xchg->addRefClstn(VecWdbeVCall::CALLWDBEVARMOD_CLUEQ, jref, Clstn::VecVJobmask::ALL, 0, true, recVar.refWdbeCVariable);
 
 	continf.TxtSrf = recVar.sref;
-	continf.TxtPrc = StubWdbe::getStubPrcStd(dbswdbe, recVar.prcRefWdbeMProcess, ixWdbeVLocale, Stub::VecVNonetype::FULL);
+	contiac.numFPupRet = feedFPupRet.getNumByIx(recVar.refIxVTbl);
+	if (recVar.refIxVTbl == VecWdbeVMVariableRefTbl::MDL) continf.TxtReu = StubWdbe::getStubMdlStd(dbswdbe, recVar.refUref, ixWdbeVLocale, Stub::VecVNonetype::FULL);
+	else if (recVar.refIxVTbl == VecWdbeVMVariableRefTbl::PRC) continf.TxtReu = StubWdbe::getStubPrcStd(dbswdbe, recVar.refUref, ixWdbeVLocale, Stub::VecVNonetype::FULL);
+	else continf.TxtReu = "-";
 	contiac.ChkCon = recVar.Const;
 	contiac.ChkFal = recVar.Falling;
 	contiac.TxfHty = recVar.srefWdbeKHdltype;
@@ -225,7 +233,9 @@ void PnlWdbeVarDetail::refreshRecVar(
 	contiac.TxfCmt = recVar.Comment;
 
 	statshr.TxtSrfActive = evalTxtSrfActive(dbswdbe);
-	statshr.TxtPrcActive = evalTxtPrcActive(dbswdbe);
+	statshr.TxtReuActive = evalTxtReuActive(dbswdbe);
+	statshr.ButReuViewAvail = evalButReuViewAvail(dbswdbe);
+	statshr.ButReuViewActive = evalButReuViewActive(dbswdbe);
 	statshr.ChkConActive = evalChkConActive(dbswdbe);
 	statshr.ChkFalActive = evalChkFalActive(dbswdbe);
 	statshr.TxfWidActive = evalTxfWidActive(dbswdbe);
@@ -320,6 +330,8 @@ void PnlWdbeVarDetail::handleRequest(
 					handleDpchAppDoButCluClusterClick(dbswdbe, &(req->dpcheng));
 				} else if (dpchappdo->ixVDo == VecVDo::BUTCLUUNCLUSTERCLICK) {
 					handleDpchAppDoButCluUnclusterClick(dbswdbe, &(req->dpcheng));
+				} else if (dpchappdo->ixVDo == VecVDo::BUTREUVIEWCLICK) {
+					handleDpchAppDoButReuViewClick(dbswdbe, &(req->dpcheng));
 				} else if (dpchappdo->ixVDo == VecVDo::BUTHTYEDITCLICK) {
 					handleDpchAppDoButHtyEditClick(dbswdbe, &(req->dpcheng));
 				};
@@ -404,6 +416,48 @@ void PnlWdbeVarDetail::handleDpchAppDoButCluUnclusterClick(
 	// IP handleDpchAppDoButCluUnclusterClick --- INSERT
 };
 
+void PnlWdbeVarDetail::handleDpchAppDoButReuViewClick(
+			DbsWdbe* dbswdbe
+			, DpchEngWdbe** dpcheng
+		) {
+	ubigint jrefNew = 0;
+	string sref;
+
+	uint ixPre = xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXPRE, jref);
+	ubigint refPre = ((ixPre) ? xchg->getRefPreset(ixPre, jref) : 0);
+
+	ubigint refCvr = xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFCVR, jref);
+	ubigint refUnt = xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFUNT, jref);
+
+	if (statshr.ButReuViewAvail && statshr.ButReuViewActive) {
+		if (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCPRC, jref)) if (recVar.refIxVTbl == VecWdbeVMVariableRefTbl::PRC) if (ixPre == VecWdbeVPreset::PREWDBEREFMOD) {
+			sref = "CrdWdbePrc";
+			xchg->triggerIxRefSrefIntvalToRefCall(dbswdbe, VecWdbeVCall::CALLWDBECRDOPEN, jref, ixPre, refPre, sref, recVar.refUref, jrefNew);
+		};
+		if (jrefNew == 0) {
+			if (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCMOD, jref)) if (recVar.refIxVTbl == VecWdbeVMVariableRefTbl::MDL) if ((dbswdbe->getIxWSubsetByRefWdbeMModule(recVar.refUref) & VecWdbeWMModuleSubset::SBSWDBEBMMODULEMOD) != 0) if (refUnt != 0) {
+				sref = "CrdWdbeMod";
+				xchg->triggerIxRefSrefIntvalToRefCall(dbswdbe, VecWdbeVCall::CALLWDBECRDOPEN, jref, VecWdbeVPreset::PREWDBEREFUNT, refUnt, sref, recVar.refUref, jrefNew);
+			};
+		};
+		if (jrefNew == 0) {
+			if (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCMOD, jref)) if (recVar.refIxVTbl == VecWdbeVMVariableRefTbl::MDL) if ((dbswdbe->getIxWSubsetByRefWdbeMModule(recVar.refUref) & VecWdbeWMModuleSubset::SBSWDBEBMMODULEMOD) != 0) if (refCvr != 0) {
+				sref = "CrdWdbeMod";
+				xchg->triggerIxRefSrefIntvalToRefCall(dbswdbe, VecWdbeVCall::CALLWDBECRDOPEN, jref, VecWdbeVPreset::PREWDBEREFCVR, refCvr, sref, recVar.refUref, jrefNew);
+			};
+		};
+		if (jrefNew == 0) {
+			if (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCMTP, jref)) if (recVar.refIxVTbl == VecWdbeVMVariableRefTbl::MDL) if ((dbswdbe->getIxWSubsetByRefWdbeMModule(recVar.refUref) & VecWdbeWMModuleSubset::SBSWDBEBMMODULEMTP) != 0) {
+				sref = "CrdWdbeMtp";
+				xchg->triggerIxRefSrefIntvalToRefCall(dbswdbe, VecWdbeVCall::CALLWDBECRDOPEN, jref, 0, 0, sref, recVar.refUref, jrefNew);
+			};
+		};
+
+		if (jrefNew == 0) *dpcheng = new DpchEngWdbeConfirm(false, 0, "");
+		else *dpcheng = new DpchEngWdbeConfirm(true, jrefNew, sref);
+	};
+};
+
 void PnlWdbeVarDetail::handleDpchAppDoButHtyEditClick(
 			DbsWdbe* dbswdbe
 			, DpchEngWdbe** dpcheng
@@ -415,27 +469,73 @@ void PnlWdbeVarDetail::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBEVARMOD_CLUEQ) {
-		call->abort = handleCallWdbeVarMod_cluEq(dbswdbe, call->jref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEKLSAKEYMOD_KLSMTBURFEQ) {
-		call->abort = handleCallWdbeKlsAkeyMod_klsMtbUrfEq(dbswdbe, call->jref, call->argInv.ix, call->argInv.ref, call->argInv.sref);
+	if (call->ixVCall == VecWdbeVCall::CALLWDBEVAR_CLUEQ) {
+		call->abort = handleCallWdbeVar_cluEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEVAR_RETEQ) {
+		call->abort = handleCallWdbeVar_retEq(dbswdbe, call->jref, call->argInv.ix, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEVAR_REU_INSBS) {
+		call->abort = handleCallWdbeVar_reu_inSbs(dbswdbe, call->jref, call->argInv.ix, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEVAR_REUEQ) {
+		call->abort = handleCallWdbeVar_reuEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEVARUPD_REFEQ) {
 		call->abort = handleCallWdbeVarUpd_refEq(dbswdbe, call->jref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEVAR_CLUEQ) {
-		call->abort = handleCallWdbeVar_cluEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEKLSAKEYMOD_KLSMTBURFEQ) {
+		call->abort = handleCallWdbeKlsAkeyMod_klsMtbUrfEq(dbswdbe, call->jref, call->argInv.ix, call->argInv.ref, call->argInv.sref);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEVARMOD_CLUEQ) {
+		call->abort = handleCallWdbeVarMod_cluEq(dbswdbe, call->jref);
 	};
 };
 
-bool PnlWdbeVarDetail::handleCallWdbeVarMod_cluEq(
+bool PnlWdbeVarDetail::handleCallWdbeVar_cluEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+			, const ubigint refInv
+			, bool& boolvalRet
+		) {
+	bool retval = false;
+	boolvalRet = (recVar.refWdbeCVariable == refInv); // IP handleCallWdbeVar_cluEq --- LINE
+	return retval;
+};
+
+bool PnlWdbeVarDetail::handleCallWdbeVar_retEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+			, const uint ixInv
+			, bool& boolvalRet
+		) {
+	bool retval = false;
+	boolvalRet = (recVar.refIxVTbl == ixInv); // IP handleCallWdbeVar_retEq --- LINE
+	return retval;
+};
+
+bool PnlWdbeVarDetail::handleCallWdbeVar_reu_inSbs(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+			, const uint ixInv
+			, bool& boolvalRet
+		) {
+	bool retval = false;
+	boolvalRet = ((dbswdbe->getIxWSubsetByRefWdbeMModule(recVar.refUref) & ixInv) != 0); // IP handleCallWdbeVar_reu_inSbs --- LINE
+	return retval;
+};
+
+bool PnlWdbeVarDetail::handleCallWdbeVar_reuEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+			, const ubigint refInv
+			, bool& boolvalRet
+		) {
+	bool retval = false;
+	boolvalRet = (recVar.refUref == refInv); // IP handleCallWdbeVar_reuEq --- LINE
+	return retval;
+};
+
+bool PnlWdbeVarDetail::handleCallWdbeVarUpd_refEq(
 			DbsWdbe* dbswdbe
 			, const ubigint jrefTrig
 		) {
 	bool retval = false;
-	set<uint> moditems;
-
-	refreshClu(dbswdbe, moditems);
-
-	xchg->submitDpch(getNewDpchEng(moditems));
+	// IP handleCallWdbeVarUpd_refEq --- INSERT
 	return retval;
 };
 
@@ -451,22 +551,15 @@ bool PnlWdbeVarDetail::handleCallWdbeKlsAkeyMod_klsMtbUrfEq(
 	return retval;
 };
 
-bool PnlWdbeVarDetail::handleCallWdbeVarUpd_refEq(
+bool PnlWdbeVarDetail::handleCallWdbeVarMod_cluEq(
 			DbsWdbe* dbswdbe
 			, const ubigint jrefTrig
 		) {
 	bool retval = false;
-	// IP handleCallWdbeVarUpd_refEq --- INSERT
-	return retval;
-};
+	set<uint> moditems;
 
-bool PnlWdbeVarDetail::handleCallWdbeVar_cluEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-			, const ubigint refInv
-			, bool& boolvalRet
-		) {
-	bool retval = false;
-	boolvalRet = (recVar.refWdbeCVariable == refInv); // IP handleCallWdbeVar_cluEq --- LINE
+	refreshClu(dbswdbe, moditems);
+
+	xchg->submitDpch(getNewDpchEng(moditems));
 	return retval;
 };

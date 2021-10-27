@@ -92,6 +92,8 @@ function refreshBD(bNotD) {
 	var ButReuViewActive = (retrieveSi(srcdoc, "StatShrWdbeErrDetail", "ButReuViewActive") == "true");
 
 	var TxtTraActive = (retrieveSi(srcdoc, "StatShrWdbeErrDetail", "TxtTraActive") == "true");
+	var ButTraViewAvail = (retrieveSi(srcdoc, "StatShrWdbeErrDetail", "ButTraViewAvail") == "true");
+	var ButTraViewActive = (retrieveSi(srcdoc, "StatShrWdbeErrDetail", "ButTraViewActive") == "true");
 
 	var TxfCmtActive = (retrieveSi(srcdoc, "StatShrWdbeErrDetail", "TxfCmtActive") == "true");
 
@@ -122,7 +124,22 @@ function refreshBD(bNotD) {
 
 	if (ButReuViewAvail) refreshButicon(contcontdoc, "ButReuView", "icon/view", ButReuViewActive, false);
 
+	if ((ButTraViewAvail == !contcontdoc.getElementById("ButTraView"))) {
+		mytd = contcontdoc.getElementById("rdynTra");
+		clearElem(mytd);
+
+		first = true;
+
+		if (ButTraViewAvail) {
+			if (first) first = false;
+			else mytd.appendChild(contcontdoc.createTextNode("\u00a0"));
+			mytd.appendChild(makeImgBut(contcontdoc, "ButTraView", "icon/view"));
+		};
+	};
+
 	refreshTxt(contcontdoc, "TxtTra", retrieveCi(srcdoc, "ContInfWdbeErrDetail", "TxtTra"));
+
+	if (ButTraViewAvail) refreshButicon(contcontdoc, "ButTraView", "icon/view", ButTraViewActive, false);
 
 	refreshTxft(contcontdoc, "TxfCmt", retrieveCi(srcdoc, "ContIacWdbeErrDetail", "TxfCmt"), TxfCmtActive, false, true);
 

@@ -3,7 +3,7 @@
 # make script for Wdbe operation daemon, release wdbeopd2_mac
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 12 Mar 2021
+# date created: 23 Oct 2021
 # IP header --- ABOVE
 
 if [ -z ${WHIZROOT+x} ]; then
@@ -17,7 +17,7 @@ if [ $? -ne 0 ]; then
 fi
 
 if [ "$1" = "all" ]; then
-	subs=("IexWdbe" "VecWdbe" "WdbeMtpWrmcu" "WdbeMtpWrfpga" "WdbeMtpModdet" "WdbeMtpModbsctd" "WdbeMtpModbscbu" "WdbeMtpPlhmcu" "WdbeMtpPlhfpga")
+	subs=("IexWdbe" "VecWdbe" "WdbeMtpPlhfpga" "WdbeMtpPlhmcu" "WdbeMtpCplmstbu" "WdbeMtpCplmsttd" "WdbeMtpGenfst" "WdbeMtpWrfpga" "WdbeMtpWrmcu")
 else
 	subs=("$@")
 fi

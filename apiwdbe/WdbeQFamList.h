@@ -18,12 +18,12 @@
 class WdbeQFamList {
 
 public:
-	WdbeQFamList(const Sbecore::uint jnum = 0, const std::string srefKVendor = "", const std::string titSrefKVendor = "", const std::string Title = "");
+	WdbeQFamList(const Sbecore::uint jnum = 0, const std::string srefWdbeKVendor = "", const std::string titSrefWdbeKVendor = "", const std::string Title = "");
 
 public:
 	Sbecore::uint jnum;
-	std::string srefKVendor;
-	std::string titSrefKVendor;
+	std::string srefWdbeKVendor;
+	std::string titSrefWdbeKVendor;
 	std::string Title;
 
 public:

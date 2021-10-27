@@ -3,7 +3,7 @@
 # checkout script for Wdbe combined daemon, release wdbecmbd_mac
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 12 Mar 2021
+# date created: 23 Oct 2021
 # IP header --- ABOVE
 
 if [ -z ${WHIZROOT+x} ]; then
@@ -36,37 +36,42 @@ mkdir $BUILDROOT/wdbecmbd/CrdWdbeUnt
 mkdir $BUILDROOT/wdbecmbd/CrdWdbeRls
 mkdir $BUILDROOT/wdbecmbd/CrdWdbeCpr
 mkdir $BUILDROOT/wdbecmbd/CrdWdbeCvr
+mkdir $BUILDROOT/wdbecmbd/CrdWdbePph
 mkdir $BUILDROOT/wdbecmbd/CrdWdbeMod
 mkdir $BUILDROOT/wdbecmbd/CrdWdbeVec
 mkdir $BUILDROOT/wdbecmbd/CrdWdbeVit
 mkdir $BUILDROOT/wdbecmbd/CrdWdbeCmd
 mkdir $BUILDROOT/wdbecmbd/CrdWdbeErr
-mkdir $BUILDROOT/wdbecmbd/CrdWdbePph
+mkdir $BUILDROOT/wdbecmbd/CrdWdbePpl
+mkdir $BUILDROOT/wdbecmbd/CrdWdbeSeg
 mkdir $BUILDROOT/wdbecmbd/CrdWdbeBnk
 mkdir $BUILDROOT/wdbecmbd/CrdWdbePin
+mkdir $BUILDROOT/wdbecmbd/CrdWdbeInt
+mkdir $BUILDROOT/wdbecmbd/CrdWdbeSns
+mkdir $BUILDROOT/wdbecmbd/CrdWdbeVar
 mkdir $BUILDROOT/wdbecmbd/CrdWdbeGen
 mkdir $BUILDROOT/wdbecmbd/CrdWdbePrt
 mkdir $BUILDROOT/wdbecmbd/CrdWdbeSig
 mkdir $BUILDROOT/wdbecmbd/CrdWdbePrc
 mkdir $BUILDROOT/wdbecmbd/CrdWdbeFst
-mkdir $BUILDROOT/wdbecmbd/CrdWdbeVar
 mkdir $BUILDROOT/wdbecmbd/CrdWdbeUtl
-mkdir $BUILDROOT/wdbecmbd/WdbeWrmcu
-mkdir $BUILDROOT/wdbecmbd/WdbePlhmcu
-mkdir $BUILDROOT/wdbecmbd/WdbeWrfpga
-mkdir $BUILDROOT/wdbecmbd/WdbeWrdev
-mkdir $BUILDROOT/wdbecmbd/WdbePrctree
-mkdir $BUILDROOT/wdbecmbd/WdbePrcfile
-mkdir $BUILDROOT/wdbecmbd/WdbePlhfpga
-mkdir $BUILDROOT/wdbecmbd/WdbeMtpWrmcu
-mkdir $BUILDROOT/wdbecmbd/WdbeMtpModdet
-mkdir $BUILDROOT/wdbecmbd/WdbeMtpWrfpga
-mkdir $BUILDROOT/wdbecmbd/WdbeMtpModbsctd
-mkdir $BUILDROOT/wdbecmbd/WdbeMtpModbscbu
+mkdir $BUILDROOT/wdbecmbd/WdbeCplmst
+mkdir $BUILDROOT/wdbecmbd/WdbeGen
+mkdir $BUILDROOT/wdbecmbd/WdbeGenfst
 mkdir $BUILDROOT/wdbecmbd/WdbeMtpPlhfpga
 mkdir $BUILDROOT/wdbecmbd/WdbeMtpPlhmcu
-mkdir $BUILDROOT/wdbecmbd/WdbeModdet
-mkdir $BUILDROOT/wdbecmbd/WdbeModbsc
+mkdir $BUILDROOT/wdbecmbd/WdbeMtpCplmstbu
+mkdir $BUILDROOT/wdbecmbd/WdbeMtpCplmsttd
+mkdir $BUILDROOT/wdbecmbd/WdbeMtpGenfst
+mkdir $BUILDROOT/wdbecmbd/WdbeMtpWrfpga
+mkdir $BUILDROOT/wdbecmbd/WdbeMtpWrmcu
+mkdir $BUILDROOT/wdbecmbd/WdbePlhfpga
+mkdir $BUILDROOT/wdbecmbd/WdbePlhmcu
+mkdir $BUILDROOT/wdbecmbd/WdbePrcfile
+mkdir $BUILDROOT/wdbecmbd/WdbePrctree
+mkdir $BUILDROOT/wdbecmbd/WdbeWrdev
+mkdir $BUILDROOT/wdbecmbd/WdbeWrfpga
+mkdir $BUILDROOT/wdbecmbd/WdbeWrmcu
 
 mkdir $LIBROOT/wdbecmbd
 
@@ -208,6 +213,11 @@ cp Makefile_CrdWdbeCvr $BUILDROOT/wdbecmbd/CrdWdbeCvr/Makefile
 cp ../../wdbecmbd/CrdWdbeCvr/*.h $BUILDROOT/wdbecmbd/CrdWdbeCvr/
 cp ../../wdbecmbd/CrdWdbeCvr/*.cpp $BUILDROOT/wdbecmbd/CrdWdbeCvr/
 
+cp Makefile_CrdWdbePph $BUILDROOT/wdbecmbd/CrdWdbePph/Makefile
+
+cp ../../wdbecmbd/CrdWdbePph/*.h $BUILDROOT/wdbecmbd/CrdWdbePph/
+cp ../../wdbecmbd/CrdWdbePph/*.cpp $BUILDROOT/wdbecmbd/CrdWdbePph/
+
 cp Makefile_CrdWdbeMod $BUILDROOT/wdbecmbd/CrdWdbeMod/Makefile
 
 cp ../../wdbecmbd/CrdWdbeMod/*.h $BUILDROOT/wdbecmbd/CrdWdbeMod/
@@ -233,10 +243,15 @@ cp Makefile_CrdWdbeErr $BUILDROOT/wdbecmbd/CrdWdbeErr/Makefile
 cp ../../wdbecmbd/CrdWdbeErr/*.h $BUILDROOT/wdbecmbd/CrdWdbeErr/
 cp ../../wdbecmbd/CrdWdbeErr/*.cpp $BUILDROOT/wdbecmbd/CrdWdbeErr/
 
-cp Makefile_CrdWdbePph $BUILDROOT/wdbecmbd/CrdWdbePph/Makefile
+cp Makefile_CrdWdbePpl $BUILDROOT/wdbecmbd/CrdWdbePpl/Makefile
 
-cp ../../wdbecmbd/CrdWdbePph/*.h $BUILDROOT/wdbecmbd/CrdWdbePph/
-cp ../../wdbecmbd/CrdWdbePph/*.cpp $BUILDROOT/wdbecmbd/CrdWdbePph/
+cp ../../wdbecmbd/CrdWdbePpl/*.h $BUILDROOT/wdbecmbd/CrdWdbePpl/
+cp ../../wdbecmbd/CrdWdbePpl/*.cpp $BUILDROOT/wdbecmbd/CrdWdbePpl/
+
+cp Makefile_CrdWdbeSeg $BUILDROOT/wdbecmbd/CrdWdbeSeg/Makefile
+
+cp ../../wdbecmbd/CrdWdbeSeg/*.h $BUILDROOT/wdbecmbd/CrdWdbeSeg/
+cp ../../wdbecmbd/CrdWdbeSeg/*.cpp $BUILDROOT/wdbecmbd/CrdWdbeSeg/
 
 cp Makefile_CrdWdbeBnk $BUILDROOT/wdbecmbd/CrdWdbeBnk/Makefile
 
@@ -247,6 +262,21 @@ cp Makefile_CrdWdbePin $BUILDROOT/wdbecmbd/CrdWdbePin/Makefile
 
 cp ../../wdbecmbd/CrdWdbePin/*.h $BUILDROOT/wdbecmbd/CrdWdbePin/
 cp ../../wdbecmbd/CrdWdbePin/*.cpp $BUILDROOT/wdbecmbd/CrdWdbePin/
+
+cp Makefile_CrdWdbeInt $BUILDROOT/wdbecmbd/CrdWdbeInt/Makefile
+
+cp ../../wdbecmbd/CrdWdbeInt/*.h $BUILDROOT/wdbecmbd/CrdWdbeInt/
+cp ../../wdbecmbd/CrdWdbeInt/*.cpp $BUILDROOT/wdbecmbd/CrdWdbeInt/
+
+cp Makefile_CrdWdbeSns $BUILDROOT/wdbecmbd/CrdWdbeSns/Makefile
+
+cp ../../wdbecmbd/CrdWdbeSns/*.h $BUILDROOT/wdbecmbd/CrdWdbeSns/
+cp ../../wdbecmbd/CrdWdbeSns/*.cpp $BUILDROOT/wdbecmbd/CrdWdbeSns/
+
+cp Makefile_CrdWdbeVar $BUILDROOT/wdbecmbd/CrdWdbeVar/Makefile
+
+cp ../../wdbecmbd/CrdWdbeVar/*.h $BUILDROOT/wdbecmbd/CrdWdbeVar/
+cp ../../wdbecmbd/CrdWdbeVar/*.cpp $BUILDROOT/wdbecmbd/CrdWdbeVar/
 
 cp Makefile_CrdWdbeGen $BUILDROOT/wdbecmbd/CrdWdbeGen/Makefile
 
@@ -273,75 +303,25 @@ cp Makefile_CrdWdbeFst $BUILDROOT/wdbecmbd/CrdWdbeFst/Makefile
 cp ../../wdbecmbd/CrdWdbeFst/*.h $BUILDROOT/wdbecmbd/CrdWdbeFst/
 cp ../../wdbecmbd/CrdWdbeFst/*.cpp $BUILDROOT/wdbecmbd/CrdWdbeFst/
 
-cp Makefile_CrdWdbeVar $BUILDROOT/wdbecmbd/CrdWdbeVar/Makefile
-
-cp ../../wdbecmbd/CrdWdbeVar/*.h $BUILDROOT/wdbecmbd/CrdWdbeVar/
-cp ../../wdbecmbd/CrdWdbeVar/*.cpp $BUILDROOT/wdbecmbd/CrdWdbeVar/
-
 cp Makefile_CrdWdbeUtl $BUILDROOT/wdbecmbd/CrdWdbeUtl/Makefile
 
 cp ../../wdbecmbd/CrdWdbeUtl/*.h $BUILDROOT/wdbecmbd/CrdWdbeUtl/
 cp ../../wdbecmbd/CrdWdbeUtl/*.cpp $BUILDROOT/wdbecmbd/CrdWdbeUtl/
 
-cp Makefile_WdbeWrmcu $BUILDROOT/wdbecmbd/WdbeWrmcu/Makefile
+cp Makefile_WdbeCplmst $BUILDROOT/wdbecmbd/WdbeCplmst/Makefile
 
-cp ../../wdbecmbd/WdbeWrmcu/*.h $BUILDROOT/wdbecmbd/WdbeWrmcu/
-cp ../../wdbecmbd/WdbeWrmcu/*.cpp $BUILDROOT/wdbecmbd/WdbeWrmcu/
+cp ../../wdbecmbd/WdbeCplmst/*.h $BUILDROOT/wdbecmbd/WdbeCplmst/
+cp ../../wdbecmbd/WdbeCplmst/*.cpp $BUILDROOT/wdbecmbd/WdbeCplmst/
 
-cp Makefile_WdbePlhmcu $BUILDROOT/wdbecmbd/WdbePlhmcu/Makefile
+cp Makefile_WdbeGen $BUILDROOT/wdbecmbd/WdbeGen/Makefile
 
-cp ../../wdbecmbd/WdbePlhmcu/*.h $BUILDROOT/wdbecmbd/WdbePlhmcu/
-cp ../../wdbecmbd/WdbePlhmcu/*.cpp $BUILDROOT/wdbecmbd/WdbePlhmcu/
+cp ../../wdbecmbd/WdbeGen/*.h $BUILDROOT/wdbecmbd/WdbeGen/
+cp ../../wdbecmbd/WdbeGen/*.cpp $BUILDROOT/wdbecmbd/WdbeGen/
 
-cp Makefile_WdbeWrfpga $BUILDROOT/wdbecmbd/WdbeWrfpga/Makefile
+cp Makefile_WdbeGenfst $BUILDROOT/wdbecmbd/WdbeGenfst/Makefile
 
-cp ../../wdbecmbd/WdbeWrfpga/*.h $BUILDROOT/wdbecmbd/WdbeWrfpga/
-cp ../../wdbecmbd/WdbeWrfpga/*.cpp $BUILDROOT/wdbecmbd/WdbeWrfpga/
-
-cp Makefile_WdbeWrdev $BUILDROOT/wdbecmbd/WdbeWrdev/Makefile
-
-cp ../../wdbecmbd/WdbeWrdev/*.h $BUILDROOT/wdbecmbd/WdbeWrdev/
-cp ../../wdbecmbd/WdbeWrdev/*.cpp $BUILDROOT/wdbecmbd/WdbeWrdev/
-
-cp Makefile_WdbePrctree $BUILDROOT/wdbecmbd/WdbePrctree/Makefile
-
-cp ../../wdbecmbd/WdbePrctree/*.h $BUILDROOT/wdbecmbd/WdbePrctree/
-cp ../../wdbecmbd/WdbePrctree/*.cpp $BUILDROOT/wdbecmbd/WdbePrctree/
-
-cp Makefile_WdbePrcfile $BUILDROOT/wdbecmbd/WdbePrcfile/Makefile
-
-cp ../../wdbecmbd/WdbePrcfile/*.h $BUILDROOT/wdbecmbd/WdbePrcfile/
-cp ../../wdbecmbd/WdbePrcfile/*.cpp $BUILDROOT/wdbecmbd/WdbePrcfile/
-
-cp Makefile_WdbePlhfpga $BUILDROOT/wdbecmbd/WdbePlhfpga/Makefile
-
-cp ../../wdbecmbd/WdbePlhfpga/*.h $BUILDROOT/wdbecmbd/WdbePlhfpga/
-cp ../../wdbecmbd/WdbePlhfpga/*.cpp $BUILDROOT/wdbecmbd/WdbePlhfpga/
-
-cp Makefile_WdbeMtpWrmcu $BUILDROOT/wdbecmbd/WdbeMtpWrmcu/Makefile
-
-cp ../../wdbecmbd/WdbeMtpWrmcu/*.h $BUILDROOT/wdbecmbd/WdbeMtpWrmcu/
-cp ../../wdbecmbd/WdbeMtpWrmcu/*.cpp $BUILDROOT/wdbecmbd/WdbeMtpWrmcu/
-
-cp Makefile_WdbeMtpModdet $BUILDROOT/wdbecmbd/WdbeMtpModdet/Makefile
-
-cp ../../wdbecmbd/WdbeMtpModdet/*.h $BUILDROOT/wdbecmbd/WdbeMtpModdet/
-cp ../../wdbecmbd/WdbeMtpModdet/*.cpp $BUILDROOT/wdbecmbd/WdbeMtpModdet/
-
-cp Makefile_WdbeMtpWrfpga $BUILDROOT/wdbecmbd/WdbeMtpWrfpga/Makefile
-
-cp ../../wdbecmbd/WdbeMtpWrfpga/*.h $BUILDROOT/wdbecmbd/WdbeMtpWrfpga/
-cp ../../wdbecmbd/WdbeMtpWrfpga/*.cpp $BUILDROOT/wdbecmbd/WdbeMtpWrfpga/
-
-cp Makefile_WdbeMtpModbsctd $BUILDROOT/wdbecmbd/WdbeMtpModbsctd/Makefile
-
-cp ../../wdbecmbd/WdbeMtpModbsctd/*.h $BUILDROOT/wdbecmbd/WdbeMtpModbsctd/
-cp ../../wdbecmbd/WdbeMtpModbsctd/*.cpp $BUILDROOT/wdbecmbd/WdbeMtpModbsctd/
-
-cp Makefile_WdbeMtpModbscbu $BUILDROOT/wdbecmbd/WdbeMtpModbscbu/Makefile
-
-cp ../../wdbecmbd/WdbeMtpModbscbu/*.h $BUILDROOT/wdbecmbd/WdbeMtpModbscbu/
-cp ../../wdbecmbd/WdbeMtpModbscbu/*.cpp $BUILDROOT/wdbecmbd/WdbeMtpModbscbu/
+cp ../../wdbecmbd/WdbeGenfst/*.h $BUILDROOT/wdbecmbd/WdbeGenfst/
+cp ../../wdbecmbd/WdbeGenfst/*.cpp $BUILDROOT/wdbecmbd/WdbeGenfst/
 
 cp Makefile_WdbeMtpPlhfpga $BUILDROOT/wdbecmbd/WdbeMtpPlhfpga/Makefile
 
@@ -353,12 +333,62 @@ cp Makefile_WdbeMtpPlhmcu $BUILDROOT/wdbecmbd/WdbeMtpPlhmcu/Makefile
 cp ../../wdbecmbd/WdbeMtpPlhmcu/*.h $BUILDROOT/wdbecmbd/WdbeMtpPlhmcu/
 cp ../../wdbecmbd/WdbeMtpPlhmcu/*.cpp $BUILDROOT/wdbecmbd/WdbeMtpPlhmcu/
 
-cp Makefile_WdbeModdet $BUILDROOT/wdbecmbd/WdbeModdet/Makefile
+cp Makefile_WdbeMtpCplmstbu $BUILDROOT/wdbecmbd/WdbeMtpCplmstbu/Makefile
 
-cp ../../wdbecmbd/WdbeModdet/*.h $BUILDROOT/wdbecmbd/WdbeModdet/
-cp ../../wdbecmbd/WdbeModdet/*.cpp $BUILDROOT/wdbecmbd/WdbeModdet/
+cp ../../wdbecmbd/WdbeMtpCplmstbu/*.h $BUILDROOT/wdbecmbd/WdbeMtpCplmstbu/
+cp ../../wdbecmbd/WdbeMtpCplmstbu/*.cpp $BUILDROOT/wdbecmbd/WdbeMtpCplmstbu/
 
-cp Makefile_WdbeModbsc $BUILDROOT/wdbecmbd/WdbeModbsc/Makefile
+cp Makefile_WdbeMtpCplmsttd $BUILDROOT/wdbecmbd/WdbeMtpCplmsttd/Makefile
 
-cp ../../wdbecmbd/WdbeModbsc/*.h $BUILDROOT/wdbecmbd/WdbeModbsc/
-cp ../../wdbecmbd/WdbeModbsc/*.cpp $BUILDROOT/wdbecmbd/WdbeModbsc/
+cp ../../wdbecmbd/WdbeMtpCplmsttd/*.h $BUILDROOT/wdbecmbd/WdbeMtpCplmsttd/
+cp ../../wdbecmbd/WdbeMtpCplmsttd/*.cpp $BUILDROOT/wdbecmbd/WdbeMtpCplmsttd/
+
+cp Makefile_WdbeMtpGenfst $BUILDROOT/wdbecmbd/WdbeMtpGenfst/Makefile
+
+cp ../../wdbecmbd/WdbeMtpGenfst/*.h $BUILDROOT/wdbecmbd/WdbeMtpGenfst/
+cp ../../wdbecmbd/WdbeMtpGenfst/*.cpp $BUILDROOT/wdbecmbd/WdbeMtpGenfst/
+
+cp Makefile_WdbeMtpWrfpga $BUILDROOT/wdbecmbd/WdbeMtpWrfpga/Makefile
+
+cp ../../wdbecmbd/WdbeMtpWrfpga/*.h $BUILDROOT/wdbecmbd/WdbeMtpWrfpga/
+cp ../../wdbecmbd/WdbeMtpWrfpga/*.cpp $BUILDROOT/wdbecmbd/WdbeMtpWrfpga/
+
+cp Makefile_WdbeMtpWrmcu $BUILDROOT/wdbecmbd/WdbeMtpWrmcu/Makefile
+
+cp ../../wdbecmbd/WdbeMtpWrmcu/*.h $BUILDROOT/wdbecmbd/WdbeMtpWrmcu/
+cp ../../wdbecmbd/WdbeMtpWrmcu/*.cpp $BUILDROOT/wdbecmbd/WdbeMtpWrmcu/
+
+cp Makefile_WdbePlhfpga $BUILDROOT/wdbecmbd/WdbePlhfpga/Makefile
+
+cp ../../wdbecmbd/WdbePlhfpga/*.h $BUILDROOT/wdbecmbd/WdbePlhfpga/
+cp ../../wdbecmbd/WdbePlhfpga/*.cpp $BUILDROOT/wdbecmbd/WdbePlhfpga/
+
+cp Makefile_WdbePlhmcu $BUILDROOT/wdbecmbd/WdbePlhmcu/Makefile
+
+cp ../../wdbecmbd/WdbePlhmcu/*.h $BUILDROOT/wdbecmbd/WdbePlhmcu/
+cp ../../wdbecmbd/WdbePlhmcu/*.cpp $BUILDROOT/wdbecmbd/WdbePlhmcu/
+
+cp Makefile_WdbePrcfile $BUILDROOT/wdbecmbd/WdbePrcfile/Makefile
+
+cp ../../wdbecmbd/WdbePrcfile/*.h $BUILDROOT/wdbecmbd/WdbePrcfile/
+cp ../../wdbecmbd/WdbePrcfile/*.cpp $BUILDROOT/wdbecmbd/WdbePrcfile/
+
+cp Makefile_WdbePrctree $BUILDROOT/wdbecmbd/WdbePrctree/Makefile
+
+cp ../../wdbecmbd/WdbePrctree/*.h $BUILDROOT/wdbecmbd/WdbePrctree/
+cp ../../wdbecmbd/WdbePrctree/*.cpp $BUILDROOT/wdbecmbd/WdbePrctree/
+
+cp Makefile_WdbeWrdev $BUILDROOT/wdbecmbd/WdbeWrdev/Makefile
+
+cp ../../wdbecmbd/WdbeWrdev/*.h $BUILDROOT/wdbecmbd/WdbeWrdev/
+cp ../../wdbecmbd/WdbeWrdev/*.cpp $BUILDROOT/wdbecmbd/WdbeWrdev/
+
+cp Makefile_WdbeWrfpga $BUILDROOT/wdbecmbd/WdbeWrfpga/Makefile
+
+cp ../../wdbecmbd/WdbeWrfpga/*.h $BUILDROOT/wdbecmbd/WdbeWrfpga/
+cp ../../wdbecmbd/WdbeWrfpga/*.cpp $BUILDROOT/wdbecmbd/WdbeWrfpga/
+
+cp Makefile_WdbeWrmcu $BUILDROOT/wdbecmbd/WdbeWrmcu/Makefile
+
+cp ../../wdbecmbd/WdbeWrmcu/*.h $BUILDROOT/wdbecmbd/WdbeWrmcu/
+cp ../../wdbecmbd/WdbeWrmcu/*.cpp $BUILDROOT/wdbecmbd/WdbeWrmcu/

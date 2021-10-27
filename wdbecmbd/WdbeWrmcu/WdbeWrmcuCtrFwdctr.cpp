@@ -38,7 +38,11 @@ DpchRetWdbe* WdbeWrmcuCtrFwdctr::run(
 
 	utinyint ixOpVOpres = VecOpVOpres::SUCCESS;
 
-	// IP run --- INSERT
+	// IP run --- IBEGIN
+
+	// probably should become ectr
+
+	// IP run --- IEND
 
 	return(new DpchRetWdbe(VecWdbeVDpch::DPCHRETWDBE, "", "", ixOpVOpres, 100));
 };

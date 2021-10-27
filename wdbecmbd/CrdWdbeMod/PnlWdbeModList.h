@@ -131,17 +131,19 @@ public:
 
 	public:
 		static const Sbecore::uint TCOSRFWIDTH = 1;
-		static const Sbecore::uint TCOTYPWIDTH = 2;
-		static const Sbecore::uint TCOHKTWIDTH = 3;
-		static const Sbecore::uint TCOHKUWIDTH = 4;
-		static const Sbecore::uint TCOSUPWIDTH = 5;
-		static const Sbecore::uint TCOTPLWIDTH = 6;
+		static const Sbecore::uint TCOVNDWIDTH = 2;
+		static const Sbecore::uint TCOTYPWIDTH = 3;
+		static const Sbecore::uint TCOHKTWIDTH = 4;
+		static const Sbecore::uint TCOHKUWIDTH = 5;
+		static const Sbecore::uint TCOSUPWIDTH = 6;
+		static const Sbecore::uint TCOTPLWIDTH = 7;
 
 	public:
-		StgIac(const Sbecore::uint TcoSrfWidth = 250, const Sbecore::uint TcoTypWidth = 100, const Sbecore::uint TcoHktWidth = 100, const Sbecore::uint TcoHkuWidth = 100, const Sbecore::uint TcoSupWidth = 100, const Sbecore::uint TcoTplWidth = 100);
+		StgIac(const Sbecore::uint TcoSrfWidth = 250, const Sbecore::uint TcoVndWidth = 100, const Sbecore::uint TcoTypWidth = 100, const Sbecore::uint TcoHktWidth = 100, const Sbecore::uint TcoHkuWidth = 100, const Sbecore::uint TcoSupWidth = 100, const Sbecore::uint TcoTplWidth = 100);
 
 	public:
 		Sbecore::uint TcoSrfWidth;
+		Sbecore::uint TcoVndWidth;
 		Sbecore::uint TcoTypWidth;
 		Sbecore::uint TcoHktWidth;
 		Sbecore::uint TcoHkuWidth;

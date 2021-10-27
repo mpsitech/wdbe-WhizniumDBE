@@ -45,7 +45,7 @@ public class ListWdbeQSigList {
 			clear();
 			
 			for (int i = 0; i < ics.size(); i++) {
-				rec = new WdbeQSigList(i+1, "", "", "", "", "", "", "", "", "", "", "", 0, "");
+				rec = new WdbeQSigList(i+1, "", "", "", "", "", "", "", "", "", "", "", "", "", 0, "");
 
 				if (shorttags.get(i)) s = basexpath + "/row[@jnum='" + ics.get(i).toString() + "']";
 				else s = basexpath + "/WdbeQSigList[@jnum='" + ics.get(i).toString() + "']";

@@ -16,22 +16,23 @@
 	* VecWdbeVOppack
 	*/
 namespace VecWdbeVOppack {
-	const Sbecore::uint WDBEMODBSC = 1;
-	const Sbecore::uint WDBEMODDET = 2;
-	const Sbecore::uint WDBEMTPMODBSCBU = 3;
-	const Sbecore::uint WDBEMTPMODBSCTD = 4;
-	const Sbecore::uint WDBEMTPMODDET = 5;
-	const Sbecore::uint WDBEMTPPLHFPGA = 6;
-	const Sbecore::uint WDBEMTPPLHMCU = 7;
-	const Sbecore::uint WDBEMTPWRFPGA = 8;
-	const Sbecore::uint WDBEMTPWRMCU = 9;
-	const Sbecore::uint WDBEPLHFPGA = 10;
-	const Sbecore::uint WDBEPLHMCU = 11;
-	const Sbecore::uint WDBEPRCFILE = 12;
-	const Sbecore::uint WDBEPRCTREE = 13;
-	const Sbecore::uint WDBEWRDEV = 14;
-	const Sbecore::uint WDBEWRFPGA = 15;
-	const Sbecore::uint WDBEWRMCU = 16;
+	const Sbecore::uint WDBECPLMST = 1;
+	const Sbecore::uint WDBEGEN = 2;
+	const Sbecore::uint WDBEGENFST = 3;
+	const Sbecore::uint WDBEMTPCPLMSTBU = 4;
+	const Sbecore::uint WDBEMTPCPLMSTTD = 5;
+	const Sbecore::uint WDBEMTPGENFST = 6;
+	const Sbecore::uint WDBEMTPPLHFPGA = 7;
+	const Sbecore::uint WDBEMTPPLHMCU = 8;
+	const Sbecore::uint WDBEMTPWRFPGA = 9;
+	const Sbecore::uint WDBEMTPWRMCU = 10;
+	const Sbecore::uint WDBEPLHFPGA = 11;
+	const Sbecore::uint WDBEPLHMCU = 12;
+	const Sbecore::uint WDBEPRCFILE = 13;
+	const Sbecore::uint WDBEPRCTREE = 14;
+	const Sbecore::uint WDBEWRDEV = 15;
+	const Sbecore::uint WDBEWRFPGA = 16;
+	const Sbecore::uint WDBEWRMCU = 17;
 
 	Sbecore::uint getIx(const std::string& sref);
 	std::string getSref(const Sbecore::uint ix);

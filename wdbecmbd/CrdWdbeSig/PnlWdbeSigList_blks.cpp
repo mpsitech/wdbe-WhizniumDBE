@@ -308,7 +308,8 @@ set<uint> PnlWdbeSigList::StatShr::diff(
 PnlWdbeSigList::StgIac::StgIac(
 			const uint TcoSrfWidth
 			, const uint TcoTypWidth
-			, const uint TcoMdlWidth
+			, const uint TcoRetWidth
+			, const uint TcoReuWidth
 			, const uint TcoMgtWidth
 			, const uint TcoMguWidth
 			, const uint TcoVecWidth
@@ -321,7 +322,8 @@ PnlWdbeSigList::StgIac::StgIac(
 		{
 	this->TcoSrfWidth = TcoSrfWidth;
 	this->TcoTypWidth = TcoTypWidth;
-	this->TcoMdlWidth = TcoMdlWidth;
+	this->TcoRetWidth = TcoRetWidth;
+	this->TcoReuWidth = TcoReuWidth;
 	this->TcoMgtWidth = TcoMgtWidth;
 	this->TcoMguWidth = TcoMguWidth;
 	this->TcoVecWidth = TcoVecWidth;
@@ -329,7 +331,7 @@ PnlWdbeSigList::StgIac::StgIac(
 	this->TcoHtyWidth = TcoHtyWidth;
 	this->TcoWidWidth = TcoWidWidth;
 	this->TcoMmxWidth = TcoMmxWidth;
-	mask = {TCOSRFWIDTH, TCOTYPWIDTH, TCOMDLWIDTH, TCOMGTWIDTH, TCOMGUWIDTH, TCOVECWIDTH, TCOCONWIDTH, TCOHTYWIDTH, TCOWIDWIDTH, TCOMMXWIDTH};
+	mask = {TCOSRFWIDTH, TCOTYPWIDTH, TCORETWIDTH, TCOREUWIDTH, TCOMGTWIDTH, TCOMGUWIDTH, TCOVECWIDTH, TCOCONWIDTH, TCOHTYWIDTH, TCOWIDWIDTH, TCOMMXWIDTH};
 };
 
 bool PnlWdbeSigList::StgIac::readJSON(
@@ -348,7 +350,8 @@ bool PnlWdbeSigList::StgIac::readJSON(
 	if (basefound) {
 		if (me.isMember("TcoSrfWidth")) {TcoSrfWidth = me["TcoSrfWidth"].asUInt(); add(TCOSRFWIDTH);};
 		if (me.isMember("TcoTypWidth")) {TcoTypWidth = me["TcoTypWidth"].asUInt(); add(TCOTYPWIDTH);};
-		if (me.isMember("TcoMdlWidth")) {TcoMdlWidth = me["TcoMdlWidth"].asUInt(); add(TCOMDLWIDTH);};
+		if (me.isMember("TcoRetWidth")) {TcoRetWidth = me["TcoRetWidth"].asUInt(); add(TCORETWIDTH);};
+		if (me.isMember("TcoReuWidth")) {TcoReuWidth = me["TcoReuWidth"].asUInt(); add(TCOREUWIDTH);};
 		if (me.isMember("TcoMgtWidth")) {TcoMgtWidth = me["TcoMgtWidth"].asUInt(); add(TCOMGTWIDTH);};
 		if (me.isMember("TcoMguWidth")) {TcoMguWidth = me["TcoMguWidth"].asUInt(); add(TCOMGUWIDTH);};
 		if (me.isMember("TcoVecWidth")) {TcoVecWidth = me["TcoVecWidth"].asUInt(); add(TCOVECWIDTH);};
@@ -380,7 +383,8 @@ bool PnlWdbeSigList::StgIac::readXML(
 	if (basefound) {
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoSrfWidth", TcoSrfWidth)) add(TCOSRFWIDTH);
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoTypWidth", TcoTypWidth)) add(TCOTYPWIDTH);
-		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoMdlWidth", TcoMdlWidth)) add(TCOMDLWIDTH);
+		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoRetWidth", TcoRetWidth)) add(TCORETWIDTH);
+		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoReuWidth", TcoReuWidth)) add(TCOREUWIDTH);
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoMgtWidth", TcoMgtWidth)) add(TCOMGTWIDTH);
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoMguWidth", TcoMguWidth)) add(TCOMGUWIDTH);
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoVecWidth", TcoVecWidth)) add(TCOVECWIDTH);
@@ -403,7 +407,8 @@ void PnlWdbeSigList::StgIac::writeJSON(
 
 	me["TcoSrfWidth"] = TcoSrfWidth;
 	me["TcoTypWidth"] = TcoTypWidth;
-	me["TcoMdlWidth"] = TcoMdlWidth;
+	me["TcoRetWidth"] = TcoRetWidth;
+	me["TcoReuWidth"] = TcoReuWidth;
 	me["TcoMgtWidth"] = TcoMgtWidth;
 	me["TcoMguWidth"] = TcoMguWidth;
 	me["TcoVecWidth"] = TcoVecWidth;
@@ -427,7 +432,8 @@ void PnlWdbeSigList::StgIac::writeXML(
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
 		writeUintAttr(wr, itemtag, "sref", "TcoSrfWidth", TcoSrfWidth);
 		writeUintAttr(wr, itemtag, "sref", "TcoTypWidth", TcoTypWidth);
-		writeUintAttr(wr, itemtag, "sref", "TcoMdlWidth", TcoMdlWidth);
+		writeUintAttr(wr, itemtag, "sref", "TcoRetWidth", TcoRetWidth);
+		writeUintAttr(wr, itemtag, "sref", "TcoReuWidth", TcoReuWidth);
 		writeUintAttr(wr, itemtag, "sref", "TcoMgtWidth", TcoMgtWidth);
 		writeUintAttr(wr, itemtag, "sref", "TcoMguWidth", TcoMguWidth);
 		writeUintAttr(wr, itemtag, "sref", "TcoVecWidth", TcoVecWidth);
@@ -445,7 +451,8 @@ set<uint> PnlWdbeSigList::StgIac::comm(
 
 	if (TcoSrfWidth == comp->TcoSrfWidth) insert(items, TCOSRFWIDTH);
 	if (TcoTypWidth == comp->TcoTypWidth) insert(items, TCOTYPWIDTH);
-	if (TcoMdlWidth == comp->TcoMdlWidth) insert(items, TCOMDLWIDTH);
+	if (TcoRetWidth == comp->TcoRetWidth) insert(items, TCORETWIDTH);
+	if (TcoReuWidth == comp->TcoReuWidth) insert(items, TCOREUWIDTH);
 	if (TcoMgtWidth == comp->TcoMgtWidth) insert(items, TCOMGTWIDTH);
 	if (TcoMguWidth == comp->TcoMguWidth) insert(items, TCOMGUWIDTH);
 	if (TcoVecWidth == comp->TcoVecWidth) insert(items, TCOVECWIDTH);
@@ -465,7 +472,7 @@ set<uint> PnlWdbeSigList::StgIac::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {TCOSRFWIDTH, TCOTYPWIDTH, TCOMDLWIDTH, TCOMGTWIDTH, TCOMGUWIDTH, TCOVECWIDTH, TCOCONWIDTH, TCOHTYWIDTH, TCOWIDWIDTH, TCOMMXWIDTH};
+	diffitems = {TCOSRFWIDTH, TCOTYPWIDTH, TCORETWIDTH, TCOREUWIDTH, TCOMGTWIDTH, TCOMGUWIDTH, TCOVECWIDTH, TCOCONWIDTH, TCOHTYWIDTH, TCOWIDWIDTH, TCOMMXWIDTH};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -488,7 +495,8 @@ void PnlWdbeSigList::Tag::writeJSON(
 		me["Cpt"] = "Signals";
 		me["TcoSrf"] = "Identifier";
 		me["TcoTyp"] = "Type";
-		me["TcoMdl"] = "Module";
+		me["TcoRet"] = "Ref. table";
+		me["TcoReu"] = "Reference";
 		me["TcoMgt"] = "Manag. ent. table";
 		me["TcoMgu"] = "Managing entity";
 		me["TcoVec"] = "Vector";
@@ -522,7 +530,8 @@ void PnlWdbeSigList::Tag::writeXML(
 			writeStringAttr(wr, itemtag, "sref", "Cpt", "Signals");
 			writeStringAttr(wr, itemtag, "sref", "TcoSrf", "Identifier");
 			writeStringAttr(wr, itemtag, "sref", "TcoTyp", "Type");
-			writeStringAttr(wr, itemtag, "sref", "TcoMdl", "Module");
+			writeStringAttr(wr, itemtag, "sref", "TcoRet", "Ref. table");
+			writeStringAttr(wr, itemtag, "sref", "TcoReu", "Reference");
 			writeStringAttr(wr, itemtag, "sref", "TcoMgt", "Manag. ent. table");
 			writeStringAttr(wr, itemtag, "sref", "TcoMgu", "Managing entity");
 			writeStringAttr(wr, itemtag, "sref", "TcoVec", "Vector");

@@ -19,19 +19,24 @@
 	#include <sbecore/PgDbs.h>
 #endif
 
+#include <sbecore/Xmlio.h>
+
+#define VecWdbeVMVariableRefTbl TblWdbeMVariable::VecVRefTbl
+
 /**
 	* WdbeMVariable: record of TblWdbeMVariable
 	*/
 class WdbeMVariable {
 
 public:
-	WdbeMVariable(const Sbecore::ubigint ref = 0, const Sbecore::ubigint refWdbeCVariable = 0, const Sbecore::ubigint prcRefWdbeMProcess = 0, const Sbecore::uint prcNum = 0, const std::string sref = "", const bool Const = false, const bool Falling = false, const std::string srefWdbeKHdltype = "", const Sbecore::usmallint Width = 0, const std::string Minmax = "", const std::string Onval = "", const std::string Offval = "", const bool Defon = false, const std::string Comment = "");
+	WdbeMVariable(const Sbecore::ubigint ref = 0, const Sbecore::ubigint refWdbeCVariable = 0, const Sbecore::uint refIxVTbl = 0, const Sbecore::ubigint refUref = 0, const Sbecore::uint refNum = 0, const std::string sref = "", const bool Const = false, const bool Falling = false, const std::string srefWdbeKHdltype = "", const Sbecore::usmallint Width = 0, const std::string Minmax = "", const std::string Onval = "", const std::string Offval = "", const bool Defon = false, const std::string Comment = "");
 
 public:
 	Sbecore::ubigint ref;
 	Sbecore::ubigint refWdbeCVariable;
-	Sbecore::ubigint prcRefWdbeMProcess;
-	Sbecore::uint prcNum;
+	Sbecore::uint refIxVTbl;
+	Sbecore::ubigint refUref;
+	Sbecore::uint refNum;
 	std::string sref;
 	bool Const;
 	bool Falling;
@@ -77,6 +82,22 @@ public:
 class TblWdbeMVariable {
 
 public:
+	/**
+		* VecVRefTbl (full: VecWdbeVMVariableRefTbl)
+		*/
+	class VecVRefTbl {
+
+	public:
+		static const Sbecore::uint MDL = 1;
+		static const Sbecore::uint PRC = 2;
+
+		static Sbecore::uint getIx(const std::string& sref);
+		static std::string getSref(const Sbecore::uint ix);
+
+		static std::string getTitle(const Sbecore::uint ix, const Sbecore::uint ixWdbeVLocale);
+
+		static void fillFeed(const Sbecore::uint ixWdbeVLocale, Sbecore::Feed& feed);
+	};
 
 public:
 	TblWdbeMVariable();
@@ -87,8 +108,8 @@ public:
 	virtual Sbecore::ubigint loadRstBySQL(const std::string& sqlstr, const bool append, ListWdbeMVariable& rst);
 
 	virtual Sbecore::ubigint insertRec(WdbeMVariable* rec);
-	Sbecore::ubigint insertNewRec(WdbeMVariable** rec = NULL, const Sbecore::ubigint refWdbeCVariable = 0, const Sbecore::ubigint prcRefWdbeMProcess = 0, const Sbecore::uint prcNum = 0, const std::string sref = "", const bool Const = false, const bool Falling = false, const std::string srefWdbeKHdltype = "", const Sbecore::usmallint Width = 0, const std::string Minmax = "", const std::string Onval = "", const std::string Offval = "", const bool Defon = false, const std::string Comment = "");
-	Sbecore::ubigint appendNewRecToRst(ListWdbeMVariable& rst, WdbeMVariable** rec = NULL, const Sbecore::ubigint refWdbeCVariable = 0, const Sbecore::ubigint prcRefWdbeMProcess = 0, const Sbecore::uint prcNum = 0, const std::string sref = "", const bool Const = false, const bool Falling = false, const std::string srefWdbeKHdltype = "", const Sbecore::usmallint Width = 0, const std::string Minmax = "", const std::string Onval = "", const std::string Offval = "", const bool Defon = false, const std::string Comment = "");
+	Sbecore::ubigint insertNewRec(WdbeMVariable** rec = NULL, const Sbecore::ubigint refWdbeCVariable = 0, const Sbecore::uint refIxVTbl = 0, const Sbecore::ubigint refUref = 0, const Sbecore::uint refNum = 0, const std::string sref = "", const bool Const = false, const bool Falling = false, const std::string srefWdbeKHdltype = "", const Sbecore::usmallint Width = 0, const std::string Minmax = "", const std::string Onval = "", const std::string Offval = "", const bool Defon = false, const std::string Comment = "");
+	Sbecore::ubigint appendNewRecToRst(ListWdbeMVariable& rst, WdbeMVariable** rec = NULL, const Sbecore::ubigint refWdbeCVariable = 0, const Sbecore::uint refIxVTbl = 0, const Sbecore::ubigint refUref = 0, const Sbecore::uint refNum = 0, const std::string sref = "", const bool Const = false, const bool Falling = false, const std::string srefWdbeKHdltype = "", const Sbecore::usmallint Width = 0, const std::string Minmax = "", const std::string Onval = "", const std::string Offval = "", const bool Defon = false, const std::string Comment = "");
 	virtual void insertRst(ListWdbeMVariable& rst, bool transact = false);
 	virtual void updateRec(WdbeMVariable* rec);
 	virtual void updateRst(ListWdbeMVariable& rst, bool transact = false);
@@ -96,9 +117,9 @@ public:
 
 	virtual bool loadRecByRef(Sbecore::ubigint ref, WdbeMVariable** rec);
 	virtual Sbecore::ubigint loadRefsByClu(Sbecore::ubigint refWdbeCVariable, const bool append, std::vector<Sbecore::ubigint>& refs);
-	virtual Sbecore::ubigint loadRefsByPrc(Sbecore::ubigint prcRefWdbeMProcess, const bool append, std::vector<Sbecore::ubigint>& refs);
+	virtual Sbecore::ubigint loadRefsByRetReu(Sbecore::uint refIxVTbl, Sbecore::ubigint refUref, const bool append, std::vector<Sbecore::ubigint>& refs);
 	virtual Sbecore::ubigint loadRstByClu(Sbecore::ubigint refWdbeCVariable, const bool append, ListWdbeMVariable& rst);
-	virtual Sbecore::ubigint loadRstByPrc(Sbecore::ubigint prcRefWdbeMProcess, const bool append, ListWdbeMVariable& rst);
+	virtual Sbecore::ubigint loadRstByRetReu(Sbecore::uint refIxVTbl, Sbecore::ubigint refUref, const bool append, ListWdbeMVariable& rst);
 	virtual bool loadSrfByRef(Sbecore::ubigint ref, std::string& sref);
 	Sbecore::ubigint loadRstByRefs(std::vector<Sbecore::ubigint>& refs, const bool append, ListWdbeMVariable& rst);
 };
@@ -133,9 +154,9 @@ public:
 
 	bool loadRecByRef(Sbecore::ubigint ref, WdbeMVariable** rec);
 	Sbecore::ubigint loadRefsByClu(Sbecore::ubigint refWdbeCVariable, const bool append, std::vector<Sbecore::ubigint>& refs);
-	Sbecore::ubigint loadRefsByPrc(Sbecore::ubigint prcRefWdbeMProcess, const bool append, std::vector<Sbecore::ubigint>& refs);
+	Sbecore::ubigint loadRefsByRetReu(Sbecore::uint refIxVTbl, Sbecore::ubigint refUref, const bool append, std::vector<Sbecore::ubigint>& refs);
 	Sbecore::ubigint loadRstByClu(Sbecore::ubigint refWdbeCVariable, const bool append, ListWdbeMVariable& rst);
-	Sbecore::ubigint loadRstByPrc(Sbecore::ubigint prcRefWdbeMProcess, const bool append, ListWdbeMVariable& rst);
+	Sbecore::ubigint loadRstByRetReu(Sbecore::uint refIxVTbl, Sbecore::ubigint refUref, const bool append, ListWdbeMVariable& rst);
 	bool loadSrfByRef(Sbecore::ubigint ref, std::string& sref);
 };
 #endif
@@ -171,9 +192,9 @@ public:
 
 	bool loadRecByRef(Sbecore::ubigint ref, WdbeMVariable** rec);
 	Sbecore::ubigint loadRefsByClu(Sbecore::ubigint refWdbeCVariable, const bool append, std::vector<Sbecore::ubigint>& refs);
-	Sbecore::ubigint loadRefsByPrc(Sbecore::ubigint prcRefWdbeMProcess, const bool append, std::vector<Sbecore::ubigint>& refs);
+	Sbecore::ubigint loadRefsByRetReu(Sbecore::uint refIxVTbl, Sbecore::ubigint refUref, const bool append, std::vector<Sbecore::ubigint>& refs);
 	Sbecore::ubigint loadRstByClu(Sbecore::ubigint refWdbeCVariable, const bool append, ListWdbeMVariable& rst);
-	Sbecore::ubigint loadRstByPrc(Sbecore::ubigint prcRefWdbeMProcess, const bool append, ListWdbeMVariable& rst);
+	Sbecore::ubigint loadRstByRetReu(Sbecore::uint refIxVTbl, Sbecore::ubigint refUref, const bool append, ListWdbeMVariable& rst);
 	bool loadSrfByRef(Sbecore::ubigint ref, std::string& sref);
 };
 #endif

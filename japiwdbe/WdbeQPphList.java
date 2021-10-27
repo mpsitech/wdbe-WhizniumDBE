@@ -18,18 +18,15 @@ public class WdbeQPphList {
 				int jnum
 				, String sref
 				, String stubRefWdbeMUnit
-				, String stubRefWdbeMModule
 			) {
 		this.jnum = jnum;
 		this.sref = sref;
 		this.stubRefWdbeMUnit = stubRefWdbeMUnit;
-		this.stubRefWdbeMModule = stubRefWdbeMModule;
 	};
 
 	public int jnum;
 	public String sref;
 	public String stubRefWdbeMUnit;
-	public String stubRefWdbeMModule;
 	
 	public boolean readXML(
 				Document doc
@@ -41,7 +38,6 @@ public class WdbeQPphList {
 		if (Xmlio.checkXPath(doc, basexpath)) {
 			sref = Xmlio.extractStringUclc(doc, basexpath, "sref", "srf", null, 0);
 			stubRefWdbeMUnit = Xmlio.extractStringUclc(doc, basexpath, "stubRefWdbeMUnit", "unt", null, 0);
-			stubRefWdbeMModule = Xmlio.extractStringUclc(doc, basexpath, "stubRefWdbeMModule", "mdl", null, 0);
 			
 			return true;
 		};

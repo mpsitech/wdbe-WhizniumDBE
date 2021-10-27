@@ -224,6 +224,46 @@ bool PnlWdbeCmdDetail::evalTxtIvrActive(
 	return(args.back());
 };
 
+bool PnlWdbeCmdDetail::evalButIvrViewAvail(
+			DbsWdbe* dbswdbe
+		) {
+	// cmd.ivrEq(0)|(pre.ixCrdaccSig()&pre.refUnt())
+
+	vector<bool> args;
+	bool a, b;
+
+	a = false; a = (recCmd.ivrRefWdbeMSignal == 0);
+	args.push_back(a);
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCSIG, jref) != 0);
+	args.push_back(a);
+	a = false; a = (xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFUNT, jref) != 0);
+	args.push_back(a);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a && b);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
+
+	return(args.back());
+};
+
+bool PnlWdbeCmdDetail::evalButIvrViewActive(
+			DbsWdbe* dbswdbe
+		) {
+	// !cmd.ivrEq(0)
+
+	vector<bool> args;
+	bool a;
+
+	a = false; a = (recCmd.ivrRefWdbeMSignal == 0);
+	args.push_back(a);
+	a = args.back(); args.pop_back();
+	args.push_back(!a);
+
+	return(args.back());
+};
+
 bool PnlWdbeCmdDetail::evalTxtRvrActive(
 			DbsWdbe* dbswdbe
 		) {
@@ -238,6 +278,46 @@ bool PnlWdbeCmdDetail::evalTxtRvrActive(
 	return(args.back());
 };
 
+bool PnlWdbeCmdDetail::evalButRvrViewAvail(
+			DbsWdbe* dbswdbe
+		) {
+	// cmd.rvrEq(0)|(pre.ixCrdaccSig()&pre.refUnt())
+
+	vector<bool> args;
+	bool a, b;
+
+	a = false; a = (recCmd.rvrRefWdbeMSignal == 0);
+	args.push_back(a);
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCSIG, jref) != 0);
+	args.push_back(a);
+	a = false; a = (xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFUNT, jref) != 0);
+	args.push_back(a);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a && b);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
+
+	return(args.back());
+};
+
+bool PnlWdbeCmdDetail::evalButRvrViewActive(
+			DbsWdbe* dbswdbe
+		) {
+	// !cmd.rvrEq(0)
+
+	vector<bool> args;
+	bool a;
+
+	a = false; a = (recCmd.rvrRefWdbeMSignal == 0);
+	args.push_back(a);
+	a = args.back(); args.pop_back();
+	args.push_back(!a);
+
+	return(args.back());
+};
+
 bool PnlWdbeCmdDetail::evalTxtRerActive(
 			DbsWdbe* dbswdbe
 		) {
@@ -248,6 +328,46 @@ bool PnlWdbeCmdDetail::evalTxtRerActive(
 
 	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCCMD, jref) & VecWdbeWAccess::EDIT);
 	args.push_back(a);
+
+	return(args.back());
+};
+
+bool PnlWdbeCmdDetail::evalButRerViewAvail(
+			DbsWdbe* dbswdbe
+		) {
+	// cmd.rerEq(0)|(pre.ixCrdaccSig()&pre.refUnt())
+
+	vector<bool> args;
+	bool a, b;
+
+	a = false; a = (recCmd.rerRefWdbeMSignal == 0);
+	args.push_back(a);
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCSIG, jref) != 0);
+	args.push_back(a);
+	a = false; a = (xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFUNT, jref) != 0);
+	args.push_back(a);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a && b);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
+
+	return(args.back());
+};
+
+bool PnlWdbeCmdDetail::evalButRerViewActive(
+			DbsWdbe* dbswdbe
+		) {
+	// !cmd.rerEq(0)
+
+	vector<bool> args;
+	bool a;
+
+	a = false; a = (recCmd.rerRefWdbeMSignal == 0);
+	args.push_back(a);
+	a = args.back(); args.pop_back();
+	args.push_back(!a);
 
 	return(args.back());
 };

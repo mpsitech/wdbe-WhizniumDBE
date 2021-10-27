@@ -19,16 +19,16 @@ public class QryWdbePinList {
 		*/
 	public static class VecVOrd {
 
-		public static final int BNK = 1;
-		public static final int SRF = 2;
+		public static final int SRF = 1;
+		public static final int BNK = 2;
 
 		public static int getIx(
 					String sref
 				) {
 			String s = sref.toLowerCase();
 
-			if (s.equals("bnk")) return BNK;
 			if (s.equals("srf")) return SRF;
+			if (s.equals("bnk")) return BNK;
 
 			return 0;
 		};
@@ -36,8 +36,8 @@ public class QryWdbePinList {
 		public static String getSref(
 					int ix
 				) {
-			if (ix == BNK) return("bnk");
 			if (ix == SRF) return("srf");
+			if (ix == BNK) return("bnk");
 
 			return "";
 		};

@@ -332,6 +332,7 @@ uint JobWdbeIexIni::enterSgeImport(
 	ImeitemIAVKeylistKey3* klsAkey3 = NULL;
 	ImeitemICGeneric* genC = NULL;
 	ImeitemICPort* prtC = NULL;
+	ImeitemICVariable* varC = NULL;
 	ImeitemIJAVKeylistKey1* kakJkey1 = NULL;
 	ImeitemIMBank* bnk = NULL;
 	ImeitemIMController* ctr = NULL;
@@ -341,7 +342,9 @@ uint JobWdbeIexIni::enterSgeImport(
 	ImeitemIMPeripheral* pph = NULL;
 	ImeitemIMPort* prt = NULL;
 	ImeitemIMUser* usr = NULL;
+	ImeitemIMVariable* var = NULL;
 	ImeitemIRMCoreprojectMPerson* cprRprs = NULL;
+	ImeitemIRMModuleMModule* mdlRmdl = NULL;
 	ImeitemIAMUserAccess* usrAacc = NULL;
 	ImeitemIAVKeylistKey2* klsAkey2 = NULL;
 	ImeitemIJAVKeylistKey3* kakJkey3 = NULL;
@@ -695,7 +698,7 @@ uint JobWdbeIexIni::enterSgeImport(
 
 			if (irefs0.find(fam->iref) != irefs0.end()) throw SbeException(SbeException::IEX_IDIREF, {{"idiref",to_string(fam->iref)}, {"ime","ImeIMFamily"}, {"lineno",to_string(fam->lineno)}});
 			irefs0.insert(fam->iref);
-			//fam->srefKVendor: TBL
+			//fam->srefWdbeKVendor: TBL
 			//fam->Title: TBL
 			//fam->Comment: TBL
 
@@ -853,6 +856,7 @@ uint JobWdbeIexIni::enterSgeImport(
 			//mdl->tplRefWdbeMModule: IMPPP
 			//mdl->refWdbeMController: SUB
 			//mdl->sref: TBL
+			//mdl->srefWdbeKVendor: TBL
 			//mdl->Srefrule: TBL
 			//mdl->Comment: TBL
 
@@ -1073,6 +1077,16 @@ uint JobWdbeIexIni::enterSgeImport(
 				};
 			};
 
+			for (unsigned int ix1 = 0; ix1 < mdl->imeirmmodulemmodule.nodes.size(); ix1++) {
+				mdlRmdl = mdl->imeirmmodulemmodule.nodes[ix1];
+
+				mdlRmdl->ctdRefWdbeMModule = mdl->ref;
+				//mdlRmdl->srefKFunction: TBL
+
+				dbswdbe->tblwdbermmodulemmodule->insertRec(mdlRmdl);
+				impcnt++;
+			};
+
 			num1 = 1;
 
 			for (unsigned int ix1 = 0; ix1 < mdl->imeiammodulepar.nodes.size(); ix1++) {
@@ -1176,6 +1190,45 @@ uint JobWdbeIexIni::enterSgeImport(
 				//prt->Comment: TBL
 
 				dbswdbe->tblwdbemport->insertRec(prt);
+				impcnt++;
+			};
+
+			irefs1.clear();
+
+			for (unsigned int ix1 = 0; ix1 < mdl->imeicvariable.nodes.size(); ix1++) {
+				varC = mdl->imeicvariable.nodes[ix1];
+
+				if (irefs1.find(varC->iref) != irefs1.end()) throw SbeException(SbeException::IEX_IDIREF, {{"idiref",to_string(varC->iref)}, {"ime","ImeICVariable"}, {"lineno",to_string(varC->lineno)}});
+				varC->ref = dbswdbe->tblwdbecvariable->getNewRef();
+				irefs1.insert(varC->iref);
+
+				impcnt++;
+			};
+
+			num1 = 1;
+
+			for (unsigned int ix1 = 0; ix1 < mdl->imeimvariable.nodes.size(); ix1++) {
+				var = mdl->imeimvariable.nodes[ix1];
+
+				//var->refWdbeCVariable: PREVIMP
+				if (var->irefRefWdbeCVariable != 0) {
+					for (unsigned int i = 0; i < mdl->imeicvariable.nodes.size(); i++)
+						if (mdl->imeicvariable.nodes[i]->iref == var->irefRefWdbeCVariable) {
+							var->refWdbeCVariable = mdl->imeicvariable.nodes[i]->ref;
+							break;
+						};
+					if (var->refWdbeCVariable == 0) throw SbeException(SbeException::IEX_IREF, {{"iref",to_string(var->irefRefWdbeCVariable)}, {"iel","irefRefWdbeCVariable"}, {"lineno",to_string(var->lineno)}});
+				};
+				var->refIxVTbl = VecWdbeVMVariableRefTbl::MDL;
+				var->refUref = mdl->ref;
+				var->refNum = num1++;
+				//var->sref: TBL
+				//var->srefWdbeKHdltype: TBL
+				//var->Width: TBL
+				//var->Minmax: TBL
+				//var->Comment: TBL
+
+				dbswdbe->tblwdbemvariable->insertRec(var);
 				impcnt++;
 			};
 		};
@@ -1377,7 +1430,9 @@ uint JobWdbeIexIni::enterSgeReverse(
 	ImeitemIMPeripheral* pph = NULL;
 	ImeitemIMPort* prt = NULL;
 	ImeitemIMUser* usr = NULL;
+	ImeitemIMVariable* var = NULL;
 	ImeitemIRMCoreprojectMPerson* cprRprs = NULL;
+	ImeitemIRMModuleMModule* mdlRmdl = NULL;
 	ImeitemIAMUserAccess* usrAacc = NULL;
 	ImeitemIAVKeylistKey2* klsAkey2 = NULL;
 	ImeitemIJAVKeylistKey3* kakJkey3 = NULL;
@@ -1553,6 +1608,16 @@ uint JobWdbeIexIni::enterSgeReverse(
 			prt = mdl->imeimport.nodes[ix1];
 			if (prt->ref != 0) dbswdbe->tblwdbemport->removeRecByRef(prt->ref);
 		};
+
+		for (unsigned int ix1 = 0; ix1 < mdl->imeimvariable.nodes.size(); ix1++) {
+			var = mdl->imeimvariable.nodes[ix1];
+			if (var->ref != 0) dbswdbe->tblwdbemvariable->removeRecByRef(var->ref);
+		};
+
+		for (unsigned int ix1 = 0; ix1 < mdl->imeirmmodulemmodule.nodes.size(); ix1++) {
+			mdlRmdl = mdl->imeirmmodulemmodule.nodes[ix1];
+			if (mdlRmdl->ref != 0) dbswdbe->tblwdbermmodulemmodule->removeRecByRef(mdlRmdl->ref);
+		};
 	};
 
 	// -- ImeIMUnit
@@ -1663,6 +1728,7 @@ uint JobWdbeIexIni::enterSgeCollect(
 	ImeitemIAVKeylistKey3* klsAkey3 = NULL;
 	ImeitemICGeneric* genC = NULL;
 	ImeitemICPort* prtC = NULL;
+	ImeitemICVariable* varC = NULL;
 	ImeitemIJAVKeylistKey1* kakJkey1 = NULL;
 	ImeitemIMBank* bnk = NULL;
 	ImeitemIMController* ctr = NULL;
@@ -1672,7 +1738,9 @@ uint JobWdbeIexIni::enterSgeCollect(
 	ImeitemIMPeripheral* pph = NULL;
 	ImeitemIMPort* prt = NULL;
 	ImeitemIMUser* usr = NULL;
+	ImeitemIMVariable* var = NULL;
 	ImeitemIRMCoreprojectMPerson* cprRprs = NULL;
+	ImeitemIRMModuleMModule* mdlRmdl = NULL;
 	ImeitemIAMUserAccess* usrAacc = NULL;
 	ImeitemIAVKeylistKey2* klsAkey2 = NULL;
 	ImeitemIJAVKeylistKey3* kakJkey3 = NULL;
@@ -1916,6 +1984,14 @@ uint JobWdbeIexIni::enterSgeCollect(
 			};
 		};
 
+		for (unsigned int ix1 = 0; ix1 < mdl->imeicvariable.nodes.size(); ix1++) {
+			varC = mdl->imeicvariable.nodes[ix1];
+
+			if (varC->ref != 0) {
+				varC->iref = ix1+1;
+			};
+		};
+
 		if (getIxWdbeVIop(icsWdbeVIop, VecVIme::IMEIMCONTROLLER, ixWdbeVIop)) {
 			dbswdbe->tblwdbemcontroller->loadRefsByMdl(mdl->ref, false, refs);
 			for (unsigned int i = 0; i < refs.size(); i++) mdl->imeimcontroller.nodes.push_back(new ImeitemIMController(dbswdbe, refs[i]));
@@ -2051,6 +2127,31 @@ uint JobWdbeIexIni::enterSgeCollect(
 
 			if (prt->ref != 0) {
 				//prt->irefRefWdbeCPort: IREF
+			};
+		};
+
+		if (getIxWdbeVIop(icsWdbeVIop, VecVIme::IMEIMVARIABLE, ixWdbeVIop)) {
+			dbswdbe->tblwdbemvariable->loadRefsByRetReu(VecWdbeVMVariableRefTbl::MDL, mdl->ref, false, refs);
+			for (unsigned int i = 0; i < refs.size(); i++) mdl->imeimvariable.nodes.push_back(new ImeitemIMVariable(dbswdbe, refs[i]));
+		};
+
+		for (unsigned int ix1 = 0; ix1 < mdl->imeimvariable.nodes.size(); ix1++) {
+			var = mdl->imeimvariable.nodes[ix1];
+
+			if (var->ref != 0) {
+				//var->irefRefWdbeCVariable: IREF
+			};
+		};
+
+		if (getIxWdbeVIop(icsWdbeVIop, VecVIme::IMEIRMMODULEMMODULE, ixWdbeVIop)) {
+			dbswdbe->tblwdbermmodulemmodule->loadRefsByCtd(mdl->ref, false, refs);
+			for (unsigned int i = 0; i < refs.size(); i++) mdl->imeirmmodulemmodule.nodes.push_back(new ImeitemIRMModuleMModule(dbswdbe, refs[i]));
+		};
+
+		for (unsigned int ix1 = 0; ix1 < mdl->imeirmmodulemmodule.nodes.size(); ix1++) {
+			mdlRmdl = mdl->imeirmmodulemmodule.nodes[ix1];
+
+			if (mdlRmdl->ref != 0) {
 			};
 		};
 	};

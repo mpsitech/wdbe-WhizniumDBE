@@ -89,9 +89,9 @@ public:
 	class VecVBasetype {
 
 	public:
-		static const Sbecore::uint FPGA = 1;
-		static const Sbecore::uint MCU = 2;
-		static const Sbecore::uint OTH = 3;
+		static const Sbecore::uint EXTDEF = 1;
+		static const Sbecore::uint FPGA = 2;
+		static const Sbecore::uint MCU = 3;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);

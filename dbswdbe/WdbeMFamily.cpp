@@ -18,13 +18,13 @@ using namespace Sbecore;
 
 WdbeMFamily::WdbeMFamily(
 			const ubigint ref
-			, const string srefKVendor
+			, const string srefWdbeKVendor
 			, const string Title
 			, const string Comment
 		) {
 
 	this->ref = ref;
-	this->srefKVendor = srefKVendor;
+	this->srefWdbeKVendor = srefWdbeKVendor;
 	this->Title = Title;
 	this->Comment = Comment;
 };
@@ -157,14 +157,14 @@ ubigint TblWdbeMFamily::insertRec(
 
 ubigint TblWdbeMFamily::insertNewRec(
 			WdbeMFamily** rec
-			, const string srefKVendor
+			, const string srefWdbeKVendor
 			, const string Title
 			, const string Comment
 		) {
 	ubigint retval = 0;
 	WdbeMFamily* _rec = NULL;
 
-	_rec = new WdbeMFamily(0, srefKVendor, Title, Comment);
+	_rec = new WdbeMFamily(0, srefWdbeKVendor, Title, Comment);
 	insertRec(_rec);
 
 	retval = _rec->ref;
@@ -178,14 +178,14 @@ ubigint TblWdbeMFamily::insertNewRec(
 ubigint TblWdbeMFamily::appendNewRecToRst(
 			ListWdbeMFamily& rst
 			, WdbeMFamily** rec
-			, const string srefKVendor
+			, const string srefWdbeKVendor
 			, const string Title
 			, const string Comment
 		) {
 	ubigint retval = 0;
 	WdbeMFamily* _rec = NULL;
 
-	retval = insertNewRec(&_rec, srefKVendor, Title, Comment);
+	retval = insertNewRec(&_rec, srefWdbeKVendor, Title, Comment);
 	rst.nodes.push_back(_rec);
 
 	if (rec != NULL) *rec = _rec;
@@ -261,8 +261,8 @@ MyTblWdbeMFamily::~MyTblWdbeMFamily() {
 };
 
 void MyTblWdbeMFamily::initStatements() {
-	stmtInsertRec = createStatement("INSERT INTO TblWdbeMFamily (srefKVendor, Title, Comment) VALUES (?,?,?)", false);
-	stmtUpdateRec = createStatement("UPDATE TblWdbeMFamily SET srefKVendor = ?, Title = ?, Comment = ? WHERE ref = ?", false);
+	stmtInsertRec = createStatement("INSERT INTO TblWdbeMFamily (srefWdbeKVendor, Title, Comment) VALUES (?,?,?)", false);
+	stmtUpdateRec = createStatement("UPDATE TblWdbeMFamily SET srefWdbeKVendor = ?, Title = ?, Comment = ? WHERE ref = ?", false);
 	stmtRemoveRecByRef = createStatement("DELETE FROM TblWdbeMFamily WHERE ref = ?", false);
 };
 
@@ -293,7 +293,7 @@ bool MyTblWdbeMFamily::loadRecBySQL(
 		_rec = new WdbeMFamily();
 
 		if (dbrow[0]) _rec->ref = atoll((char*) dbrow[0]); else _rec->ref = 0;
-		if (dbrow[1]) _rec->srefKVendor.assign(dbrow[1], dblengths[1]); else _rec->srefKVendor = "";
+		if (dbrow[1]) _rec->srefWdbeKVendor.assign(dbrow[1], dblengths[1]); else _rec->srefWdbeKVendor = "";
 		if (dbrow[2]) _rec->Title.assign(dbrow[2], dblengths[2]); else _rec->Title = "";
 		if (dbrow[3]) _rec->Comment.assign(dbrow[3], dblengths[3]); else _rec->Comment = "";
 
@@ -339,7 +339,7 @@ ubigint MyTblWdbeMFamily::loadRstBySQL(
 			rec = new WdbeMFamily();
 
 			if (dbrow[0]) rec->ref = atoll((char*) dbrow[0]); else rec->ref = 0;
-			if (dbrow[1]) rec->srefKVendor.assign(dbrow[1], dblengths[1]); else rec->srefKVendor = "";
+			if (dbrow[1]) rec->srefWdbeKVendor.assign(dbrow[1], dblengths[1]); else rec->srefWdbeKVendor = "";
 			if (dbrow[2]) rec->Title.assign(dbrow[2], dblengths[2]); else rec->Title = "";
 			if (dbrow[3]) rec->Comment.assign(dbrow[3], dblengths[3]); else rec->Comment = "";
 			rst.nodes.push_back(rec);
@@ -358,12 +358,12 @@ ubigint MyTblWdbeMFamily::insertRec(
 		) {
 	unsigned long l[3]; my_bool n[3]; my_bool e[3];
 
-	l[0] = rec->srefKVendor.length();
+	l[0] = rec->srefWdbeKVendor.length();
 	l[1] = rec->Title.length();
 	l[2] = rec->Comment.length();
 
 	MYSQL_BIND bind[] = {
-		bindCstring((char*) (rec->srefKVendor.c_str()),&(l[0]),&(n[0]),&(e[0])),
+		bindCstring((char*) (rec->srefWdbeKVendor.c_str()),&(l[0]),&(n[0]),&(e[0])),
 		bindCstring((char*) (rec->Title.c_str()),&(l[1]),&(n[1]),&(e[1])),
 		bindCstring((char*) (rec->Comment.c_str()),&(l[2]),&(n[2]),&(e[2]))
 	};
@@ -395,12 +395,12 @@ void MyTblWdbeMFamily::updateRec(
 		) {
 	unsigned long l[4]; my_bool n[4]; my_bool e[4];
 
-	l[0] = rec->srefKVendor.length();
+	l[0] = rec->srefWdbeKVendor.length();
 	l[1] = rec->Title.length();
 	l[2] = rec->Comment.length();
 
 	MYSQL_BIND bind[] = {
-		bindCstring((char*) (rec->srefKVendor.c_str()),&(l[0]),&(n[0]),&(e[0])),
+		bindCstring((char*) (rec->srefWdbeKVendor.c_str()),&(l[0]),&(n[0]),&(e[0])),
 		bindCstring((char*) (rec->Title.c_str()),&(l[1]),&(n[1]),&(e[1])),
 		bindCstring((char*) (rec->Comment.c_str()),&(l[2]),&(n[2]),&(e[2])),
 		bindUbigint(&rec->ref,&(l[3]),&(n[3]),&(e[3]))
@@ -472,11 +472,11 @@ PgTblWdbeMFamily::~PgTblWdbeMFamily() {
 };
 
 void PgTblWdbeMFamily::initStatements() {
-	createStatement("TblWdbeMFamily_insertRec", "INSERT INTO TblWdbeMFamily (srefKVendor, Title, Comment) VALUES ($1,$2,$3) RETURNING ref", 3);
-	createStatement("TblWdbeMFamily_updateRec", "UPDATE TblWdbeMFamily SET srefKVendor = $1, Title = $2, Comment = $3 WHERE ref = $4", 4);
+	createStatement("TblWdbeMFamily_insertRec", "INSERT INTO TblWdbeMFamily (srefWdbeKVendor, Title, Comment) VALUES ($1,$2,$3) RETURNING ref", 3);
+	createStatement("TblWdbeMFamily_updateRec", "UPDATE TblWdbeMFamily SET srefWdbeKVendor = $1, Title = $2, Comment = $3 WHERE ref = $4", 4);
 	createStatement("TblWdbeMFamily_removeRecByRef", "DELETE FROM TblWdbeMFamily WHERE ref = $1", 1);
 
-	createStatement("TblWdbeMFamily_loadRecByRef", "SELECT ref, srefKVendor, Title, Comment FROM TblWdbeMFamily WHERE ref = $1", 1);
+	createStatement("TblWdbeMFamily_loadRecByRef", "SELECT ref, srefWdbeKVendor, Title, Comment FROM TblWdbeMFamily WHERE ref = $1", 1);
 };
 
 bool PgTblWdbeMFamily::loadRec(
@@ -493,13 +493,13 @@ bool PgTblWdbeMFamily::loadRec(
 
 		int fnum[] = {
 			PQfnumber(res, "ref"),
-			PQfnumber(res, "srefkvendor"),
+			PQfnumber(res, "srefwdbekvendor"),
 			PQfnumber(res, "title"),
 			PQfnumber(res, "comment")
 		};
 
 		ptr = PQgetvalue(res, 0, fnum[0]); _rec->ref = atoll(ptr);
-		ptr = PQgetvalue(res, 0, fnum[1]); _rec->srefKVendor.assign(ptr, PQgetlength(res, 0, fnum[1]));
+		ptr = PQgetvalue(res, 0, fnum[1]); _rec->srefWdbeKVendor.assign(ptr, PQgetlength(res, 0, fnum[1]));
 		ptr = PQgetvalue(res, 0, fnum[2]); _rec->Title.assign(ptr, PQgetlength(res, 0, fnum[2]));
 		ptr = PQgetvalue(res, 0, fnum[3]); _rec->Comment.assign(ptr, PQgetlength(res, 0, fnum[3]));
 
@@ -529,7 +529,7 @@ ubigint PgTblWdbeMFamily::loadRst(
 
 		int fnum[] = {
 			PQfnumber(res, "ref"),
-			PQfnumber(res, "srefkvendor"),
+			PQfnumber(res, "srefwdbekvendor"),
 			PQfnumber(res, "title"),
 			PQfnumber(res, "comment")
 		};
@@ -538,7 +538,7 @@ ubigint PgTblWdbeMFamily::loadRst(
 			rec = new WdbeMFamily();
 
 			ptr = PQgetvalue(res, numread, fnum[0]); rec->ref = atoll(ptr);
-			ptr = PQgetvalue(res, numread, fnum[1]); rec->srefKVendor.assign(ptr, PQgetlength(res, numread, fnum[1]));
+			ptr = PQgetvalue(res, numread, fnum[1]); rec->srefWdbeKVendor.assign(ptr, PQgetlength(res, numread, fnum[1]));
 			ptr = PQgetvalue(res, numread, fnum[2]); rec->Title.assign(ptr, PQgetlength(res, numread, fnum[2]));
 			ptr = PQgetvalue(res, numread, fnum[3]); rec->Comment.assign(ptr, PQgetlength(res, numread, fnum[3]));
 
@@ -613,7 +613,7 @@ ubigint PgTblWdbeMFamily::insertRec(
 	char* ptr;
 
 	const char* vals[] = {
-		rec->srefKVendor.c_str(),
+		rec->srefWdbeKVendor.c_str(),
 		rec->Title.c_str(),
 		rec->Comment.c_str()
 	};
@@ -655,7 +655,7 @@ void PgTblWdbeMFamily::updateRec(
 	ubigint _ref = htonl64(rec->ref);
 
 	const char* vals[] = {
-		rec->srefKVendor.c_str(),
+		rec->srefWdbeKVendor.c_str(),
 		rec->Title.c_str(),
 		rec->Comment.c_str(),
 		(char*) &_ref

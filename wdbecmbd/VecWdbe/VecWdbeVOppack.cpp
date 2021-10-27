@@ -22,11 +22,12 @@ uint VecWdbeVOppack::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "wdbemodbsc") return WDBEMODBSC;
-	if (s == "wdbemoddet") return WDBEMODDET;
-	if (s == "wdbemtpmodbscbu") return WDBEMTPMODBSCBU;
-	if (s == "wdbemtpmodbsctd") return WDBEMTPMODBSCTD;
-	if (s == "wdbemtpmoddet") return WDBEMTPMODDET;
+	if (s == "wdbecplmst") return WDBECPLMST;
+	if (s == "wdbegen") return WDBEGEN;
+	if (s == "wdbegenfst") return WDBEGENFST;
+	if (s == "wdbemtpcplmstbu") return WDBEMTPCPLMSTBU;
+	if (s == "wdbemtpcplmsttd") return WDBEMTPCPLMSTTD;
+	if (s == "wdbemtpgenfst") return WDBEMTPGENFST;
 	if (s == "wdbemtpplhfpga") return WDBEMTPPLHFPGA;
 	if (s == "wdbemtpplhmcu") return WDBEMTPPLHMCU;
 	if (s == "wdbemtpwrfpga") return WDBEMTPWRFPGA;
@@ -45,11 +46,12 @@ uint VecWdbeVOppack::getIx(
 string VecWdbeVOppack::getSref(
 			const uint ix
 		) {
-	if (ix == WDBEMODBSC) return("WdbeModbsc");
-	if (ix == WDBEMODDET) return("WdbeModdet");
-	if (ix == WDBEMTPMODBSCBU) return("WdbeMtpModbscbu");
-	if (ix == WDBEMTPMODBSCTD) return("WdbeMtpModbsctd");
-	if (ix == WDBEMTPMODDET) return("WdbeMtpModdet");
+	if (ix == WDBECPLMST) return("WdbeCplmst");
+	if (ix == WDBEGEN) return("WdbeGen");
+	if (ix == WDBEGENFST) return("WdbeGenfst");
+	if (ix == WDBEMTPCPLMSTBU) return("WdbeMtpCplmstbu");
+	if (ix == WDBEMTPCPLMSTTD) return("WdbeMtpCplmsttd");
+	if (ix == WDBEMTPGENFST) return("WdbeMtpGenfst");
 	if (ix == WDBEMTPPLHFPGA) return("WdbeMtpPlhfpga");
 	if (ix == WDBEMTPPLHMCU) return("WdbeMtpPlhmcu");
 	if (ix == WDBEMTPWRFPGA) return("WdbeMtpWrfpga");
@@ -68,11 +70,12 @@ string VecWdbeVOppack::getSref(
 string VecWdbeVOppack::getTitle(
 			const uint ix
 		) {
-	if (ix == WDBEMODBSC) return("modify basic device/core description");
-	if (ix == WDBEMODDET) return("modify detailed device/core description");
-	if (ix == WDBEMTPMODBSCBU) return("modify module template-specific basic device description bottom-up");
-	if (ix == WDBEMTPMODBSCTD) return("modify module template-specific basic device description top-down");
-	if (ix == WDBEMTPMODDET) return("modify module template-specific detailed device description");
+	if (ix == WDBECPLMST) return("complement modular structure");
+	if (ix == WDBEGEN) return("generate");
+	if (ix == WDBEGENFST) return("generate fine structure");
+	if (ix == WDBEMTPCPLMSTBU) return("complement module template-specific modular structure bottom-up");
+	if (ix == WDBEMTPCPLMSTTD) return("complement module template-specific modular structure top-down");
+	if (ix == WDBEMTPGENFST) return("generate module template-specific fine structure");
 	if (ix == WDBEMTPPLHFPGA) return("fill module template-specific FPGA code placeholders");
 	if (ix == WDBEMTPPLHMCU) return("fill module template-specific MCU code placeholders");
 	if (ix == WDBEMTPWRFPGA) return("write module template-specific FPGA code");
@@ -108,5 +111,5 @@ void VecWdbeVOppack::fillFeed(
 		) {
 	feed.clear();
 
-	for (unsigned int i = 1; i <= 16; i++) feed.appendIxSrefTitles(i, getSref(i), getTitle(i));
+	for (unsigned int i = 1; i <= 17; i++) feed.appendIxSrefTitles(i, getSref(i), getTitle(i));
 };

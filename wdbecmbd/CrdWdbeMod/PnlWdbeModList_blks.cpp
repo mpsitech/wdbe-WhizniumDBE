@@ -307,6 +307,7 @@ set<uint> PnlWdbeModList::StatShr::diff(
 
 PnlWdbeModList::StgIac::StgIac(
 			const uint TcoSrfWidth
+			, const uint TcoVndWidth
 			, const uint TcoTypWidth
 			, const uint TcoHktWidth
 			, const uint TcoHkuWidth
@@ -316,12 +317,13 @@ PnlWdbeModList::StgIac::StgIac(
 			Block()
 		{
 	this->TcoSrfWidth = TcoSrfWidth;
+	this->TcoVndWidth = TcoVndWidth;
 	this->TcoTypWidth = TcoTypWidth;
 	this->TcoHktWidth = TcoHktWidth;
 	this->TcoHkuWidth = TcoHkuWidth;
 	this->TcoSupWidth = TcoSupWidth;
 	this->TcoTplWidth = TcoTplWidth;
-	mask = {TCOSRFWIDTH, TCOTYPWIDTH, TCOHKTWIDTH, TCOHKUWIDTH, TCOSUPWIDTH, TCOTPLWIDTH};
+	mask = {TCOSRFWIDTH, TCOVNDWIDTH, TCOTYPWIDTH, TCOHKTWIDTH, TCOHKUWIDTH, TCOSUPWIDTH, TCOTPLWIDTH};
 };
 
 bool PnlWdbeModList::StgIac::readJSON(
@@ -339,6 +341,7 @@ bool PnlWdbeModList::StgIac::readJSON(
 
 	if (basefound) {
 		if (me.isMember("TcoSrfWidth")) {TcoSrfWidth = me["TcoSrfWidth"].asUInt(); add(TCOSRFWIDTH);};
+		if (me.isMember("TcoVndWidth")) {TcoVndWidth = me["TcoVndWidth"].asUInt(); add(TCOVNDWIDTH);};
 		if (me.isMember("TcoTypWidth")) {TcoTypWidth = me["TcoTypWidth"].asUInt(); add(TCOTYPWIDTH);};
 		if (me.isMember("TcoHktWidth")) {TcoHktWidth = me["TcoHktWidth"].asUInt(); add(TCOHKTWIDTH);};
 		if (me.isMember("TcoHkuWidth")) {TcoHkuWidth = me["TcoHkuWidth"].asUInt(); add(TCOHKUWIDTH);};
@@ -367,6 +370,7 @@ bool PnlWdbeModList::StgIac::readXML(
 
 	if (basefound) {
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoSrfWidth", TcoSrfWidth)) add(TCOSRFWIDTH);
+		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoVndWidth", TcoVndWidth)) add(TCOVNDWIDTH);
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoTypWidth", TcoTypWidth)) add(TCOTYPWIDTH);
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoHktWidth", TcoHktWidth)) add(TCOHKTWIDTH);
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoHkuWidth", TcoHkuWidth)) add(TCOHKUWIDTH);
@@ -386,6 +390,7 @@ void PnlWdbeModList::StgIac::writeJSON(
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
 	me["TcoSrfWidth"] = TcoSrfWidth;
+	me["TcoVndWidth"] = TcoVndWidth;
 	me["TcoTypWidth"] = TcoTypWidth;
 	me["TcoHktWidth"] = TcoHktWidth;
 	me["TcoHkuWidth"] = TcoHkuWidth;
@@ -406,6 +411,7 @@ void PnlWdbeModList::StgIac::writeXML(
 
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
 		writeUintAttr(wr, itemtag, "sref", "TcoSrfWidth", TcoSrfWidth);
+		writeUintAttr(wr, itemtag, "sref", "TcoVndWidth", TcoVndWidth);
 		writeUintAttr(wr, itemtag, "sref", "TcoTypWidth", TcoTypWidth);
 		writeUintAttr(wr, itemtag, "sref", "TcoHktWidth", TcoHktWidth);
 		writeUintAttr(wr, itemtag, "sref", "TcoHkuWidth", TcoHkuWidth);
@@ -420,6 +426,7 @@ set<uint> PnlWdbeModList::StgIac::comm(
 	set<uint> items;
 
 	if (TcoSrfWidth == comp->TcoSrfWidth) insert(items, TCOSRFWIDTH);
+	if (TcoVndWidth == comp->TcoVndWidth) insert(items, TCOVNDWIDTH);
 	if (TcoTypWidth == comp->TcoTypWidth) insert(items, TCOTYPWIDTH);
 	if (TcoHktWidth == comp->TcoHktWidth) insert(items, TCOHKTWIDTH);
 	if (TcoHkuWidth == comp->TcoHkuWidth) insert(items, TCOHKUWIDTH);
@@ -437,7 +444,7 @@ set<uint> PnlWdbeModList::StgIac::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {TCOSRFWIDTH, TCOTYPWIDTH, TCOHKTWIDTH, TCOHKUWIDTH, TCOSUPWIDTH, TCOTPLWIDTH};
+	diffitems = {TCOSRFWIDTH, TCOVNDWIDTH, TCOTYPWIDTH, TCOHKTWIDTH, TCOHKUWIDTH, TCOSUPWIDTH, TCOTPLWIDTH};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -459,6 +466,7 @@ void PnlWdbeModList::Tag::writeJSON(
 	if (ixWdbeVLocale == VecWdbeVLocale::ENUS) {
 		me["Cpt"] = "Modules";
 		me["TcoSrf"] = "Identifier";
+		me["TcoVnd"] = "Vendor";
 		me["TcoTyp"] = "Type";
 		me["TcoHkt"] = "Hook ref. table";
 		me["TcoHku"] = "Hook";
@@ -489,6 +497,7 @@ void PnlWdbeModList::Tag::writeXML(
 		if (ixWdbeVLocale == VecWdbeVLocale::ENUS) {
 			writeStringAttr(wr, itemtag, "sref", "Cpt", "Modules");
 			writeStringAttr(wr, itemtag, "sref", "TcoSrf", "Identifier");
+			writeStringAttr(wr, itemtag, "sref", "TcoVnd", "Vendor");
 			writeStringAttr(wr, itemtag, "sref", "TcoTyp", "Type");
 			writeStringAttr(wr, itemtag, "sref", "TcoHkt", "Hook ref. table");
 			writeStringAttr(wr, itemtag, "sref", "TcoHku", "Hook");

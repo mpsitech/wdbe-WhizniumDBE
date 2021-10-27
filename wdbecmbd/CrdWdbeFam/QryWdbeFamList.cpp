@@ -46,8 +46,8 @@ QryWdbeFamList::QryWdbeFamList(
 
 	rerun(dbswdbe);
 
-	xchg->addClstn(VecWdbeVCall::CALLWDBEFAMMOD, jref, Clstn::VecVJobmask::ALL, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBESTUBCHG, jref, Clstn::VecVJobmask::SELF, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBEFAMMOD, jref, Clstn::VecVJobmask::ALL, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -101,8 +101,8 @@ void QryWdbeFamList::rerun(
 		else stgiac.jnumFirstload = 1;
 	};
 
-	sqlstr = "INSERT INTO TblWdbeQFamList(jref, jnum, ref, srefKVendor, Title)";
-	sqlstr += " SELECT " + to_string(jref) + ", 0, TblWdbeMFamily.ref, TblWdbeMFamily.srefKVendor, TblWdbeMFamily.Title";
+	sqlstr = "INSERT INTO TblWdbeQFamList(jref, jnum, ref, srefWdbeKVendor, Title)";
+	sqlstr += " SELECT " + to_string(jref) + ", 0, TblWdbeMFamily.ref, TblWdbeMFamily.srefWdbeKVendor, TblWdbeMFamily.Title";
 	sqlstr += " FROM TblWdbeMFamily";
 	rerun_filtSQL(sqlstr, preVnd, preTit, true);
 	rerun_orderSQL(sqlstr, preIxOrd);
@@ -131,7 +131,7 @@ void QryWdbeFamList::rerun_filtSQL(
 
 	if (preVnd.length() > 0) {
 		rerun_filtSQL_append(sqlstr, first);
-		sqlstr += "TblWdbeMFamily.srefKVendor = '" + preVnd + "'";
+		sqlstr += "TblWdbeMFamily.srefWdbeKVendor = '" + preVnd + "'";
 	};
 
 	if (preTit.length() > 0) {
@@ -154,8 +154,8 @@ void QryWdbeFamList::rerun_orderSQL(
 			string& sqlstr
 			, const uint preIxOrd
 		) {
-	if (preIxOrd == VecVOrd::TIT) sqlstr += " ORDER BY TblWdbeMFamily.Title ASC";
-	else if (preIxOrd == VecVOrd::VND) sqlstr += " ORDER BY TblWdbeMFamily.srefKVendor ASC";
+	if (preIxOrd == VecVOrd::VND) sqlstr += " ORDER BY TblWdbeMFamily.srefWdbeKVendor ASC";
+	else if (preIxOrd == VecVOrd::TIT) sqlstr += " ORDER BY TblWdbeMFamily.Title ASC";
 };
 
 void QryWdbeFamList::fetch(
@@ -183,7 +183,7 @@ void QryWdbeFamList::fetch(
 			rec = rst.nodes[i];
 
 			rec->jnum = statshr.jnumFirstload + i;
-			rec->titSrefKVendor = dbswdbe->getKlstTitleBySref(VecWdbeVKeylist::KLSTWDBEKMFAMILYVENDOR, rec->srefKVendor, ixWdbeVLocale);
+			rec->titSrefWdbeKVendor = dbswdbe->getKlstTitleBySref(VecWdbeVKeylist::KLSTWDBEKVENDOR, rec->srefWdbeKVendor, ixWdbeVLocale);
 		};
 
 		stmgr->commit();
@@ -289,8 +289,8 @@ bool QryWdbeFamList::handleShow(
 	cout << "\tjref";
 	cout << "\tjnum";
 	cout << "\tref";
-	cout << "\tsrefKVendor";
-	cout << "\ttitSrefKVendor";
+	cout << "\tsrefWdbeKVendor";
+	cout << "\ttitSrefWdbeKVendor";
 	cout << "\tTitle";
 	cout << endl;
 
@@ -302,8 +302,8 @@ bool QryWdbeFamList::handleShow(
 		cout << "\t" << rec->jref;
 		cout << "\t" << rec->jnum;
 		cout << "\t" << rec->ref;
-		cout << "\t" << rec->srefKVendor;
-		cout << "\t" << rec->titSrefKVendor;
+		cout << "\t" << rec->srefWdbeKVendor;
+		cout << "\t" << rec->titSrefWdbeKVendor;
 		cout << "\t" << rec->Title;
 		cout << endl;
 	};
@@ -314,26 +314,20 @@ void QryWdbeFamList::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBEFAMUPD_REFEQ) {
-		call->abort = handleCallWdbeFamUpd_refEq(dbswdbe, call->jref);
+	if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
+		call->abort = handleCallWdbeStubChgFromSelf(dbswdbe);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEFAMMOD) {
 		call->abort = handleCallWdbeFamMod(dbswdbe, call->jref);
-	} else if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
-		call->abort = handleCallWdbeStubChgFromSelf(dbswdbe);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEFAMUPD_REFEQ) {
+		call->abort = handleCallWdbeFamUpd_refEq(dbswdbe, call->jref);
 	};
 };
 
-bool QryWdbeFamList::handleCallWdbeFamUpd_refEq(
+bool QryWdbeFamList::handleCallWdbeStubChgFromSelf(
 			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
 		) {
 	bool retval = false;
-
-	if (ixWdbeVQrystate != VecWdbeVQrystate::OOD) {
-		ixWdbeVQrystate = VecWdbeVQrystate::OOD;
-		xchg->triggerCall(dbswdbe, VecWdbeVCall::CALLWDBESTATCHG, jref);
-	};
-
+	// IP handleCallWdbeStubChgFromSelf --- INSERT
 	return retval;
 };
 
@@ -351,10 +345,16 @@ bool QryWdbeFamList::handleCallWdbeFamMod(
 	return retval;
 };
 
-bool QryWdbeFamList::handleCallWdbeStubChgFromSelf(
+bool QryWdbeFamList::handleCallWdbeFamUpd_refEq(
 			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
 		) {
 	bool retval = false;
-	// IP handleCallWdbeStubChgFromSelf --- INSERT
+
+	if (ixWdbeVQrystate != VecWdbeVQrystate::OOD) {
+		ixWdbeVQrystate = VecWdbeVQrystate::OOD;
+		xchg->triggerCall(dbswdbe, VecWdbeVCall::CALLWDBESTATCHG, jref);
+	};
+
 	return retval;
 };

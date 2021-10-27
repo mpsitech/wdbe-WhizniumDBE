@@ -20,9 +20,9 @@ uint TblWdbeMUnit::VecVBasetype::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
+	if (s == "extdef") return EXTDEF;
 	if (s == "fpga") return FPGA;
 	if (s == "mcu") return MCU;
-	if (s == "oth") return OTH;
 
 	return(0);
 };
@@ -30,9 +30,9 @@ uint TblWdbeMUnit::VecVBasetype::getIx(
 string TblWdbeMUnit::VecVBasetype::getSref(
 			const uint ix
 		) {
+	if (ix == EXTDEF) return("extdef");
 	if (ix == FPGA) return("fpga");
 	if (ix == MCU) return("mcu");
-	if (ix == OTH) return("oth");
 
 	return("");
 };
@@ -42,9 +42,9 @@ string TblWdbeMUnit::VecVBasetype::getTitle(
 			, const uint ixWdbeVLocale
 		) {
 	if (ixWdbeVLocale == 1) {
+		if (ix == EXTDEF) return("externally defined");
 		if (ix == FPGA) return("FPGA-based");
 		if (ix == MCU) return("microcontroller-based");
-		if (ix == OTH) return("other");
 		return(getSref(ix));
 	};
 

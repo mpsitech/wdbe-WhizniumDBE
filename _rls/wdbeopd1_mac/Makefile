@@ -2,7 +2,7 @@
 # make file for Wdbe operation daemon, release wdbeopd1_mac
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 12 Mar 2021
+# date created: 23 Oct 2021
 # IP header --- ABOVE
 
 include Makefile.inc
@@ -14,7 +14,7 @@ LINK = g++
 LINKFLAGS =
 
 INCPATH = -I$(BUILDROOT)/dbswdbe -I$(BUILDROOT)/wdbeopd1/VecWdbe -I$(BUILDROOT)/wdbeopd1/IexWdbe -I$(BUILDROOT)/wdbeopd1
-INCPATH += -I$(BUILDROOT)/wdbeopd1/WdbeWrmcu -I$(BUILDROOT)/wdbeopd1/WdbeWrfpga -I$(BUILDROOT)/wdbeopd1/WdbeWrdev -I$(BUILDROOT)/wdbeopd1/WdbePrctree -I$(BUILDROOT)/wdbeopd1/WdbePrcfile -I$(BUILDROOT)/wdbeopd1/WdbePlhmcu -I$(BUILDROOT)/wdbeopd1/WdbePlhfpga -I$(BUILDROOT)/wdbeopd1/WdbeModdet -I$(BUILDROOT)/wdbeopd1/WdbeModbsc
+INCPATH += -I$(BUILDROOT)/wdbeopd1/WdbeCplmst -I$(BUILDROOT)/wdbeopd1/WdbeGen -I$(BUILDROOT)/wdbeopd1/WdbeGenfst -I$(BUILDROOT)/wdbeopd1/WdbePlhfpga -I$(BUILDROOT)/wdbeopd1/WdbePlhmcu -I$(BUILDROOT)/wdbeopd1/WdbePrcfile -I$(BUILDROOT)/wdbeopd1/WdbePrctree -I$(BUILDROOT)/wdbeopd1/WdbeWrdev -I$(BUILDROOT)/wdbeopd1/WdbeWrfpga -I$(BUILDROOT)/wdbeopd1/WdbeWrmcu
 INCPATH += -I${WHIZSDKROOT}/build -I/usr/local/include -I/usr/local/include/curl -I/usr/local/include/libxml2 -I/usr/local/mysql/include
 
 PCHS = Wdbeopd.h.gch
@@ -26,7 +26,7 @@ LIBPATH = -L$(LIBROOT)
 LIBPATH += -L$(LIBROOT)/wdbeopd1
 LIBPATH += -L${WHIZSDKROOT}/lib -L/usr/local/lib -L/usr/local/mysql/lib
 
-LIBS = -lwdbewrmcu -lwdbewrfpga -lwdbewrdev -lwdbeprctree -lwdbeprcfile -lwdbeplhmcu -lwdbeplhfpga -lwdbemoddet -lwdbemodbsc
+LIBS = -lwdbecplmst -lwdbegen -lwdbegenfst -lwdbeplhfpga -lwdbeplhmcu -lwdbeprcfile -lwdbeprctree -lwdbewrdev -lwdbewrfpga -lwdbewrmcu
 LIBS += -liexwdbe -lvecwdbe -ldbswdbe
 LIBS += -lcurl -lmicrohttpd -lsbecore_my
 LIBS += -lmysqlclient -lsbecore_plus

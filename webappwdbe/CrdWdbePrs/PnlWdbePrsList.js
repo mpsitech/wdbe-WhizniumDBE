@@ -112,7 +112,7 @@ function refreshB(chgcol) {
 			ix++;
 
 			if (i == 1) {
-				doc.cols.push("TcoGrp"); doc.widths.push(TcoGrpWidth); doc.fs.push("grp"); doc.tos.push(3); wtot += TcoGrpWidth;
+				doc.cols.push("TcoGrp"); doc.widths.push(TcoGrpWidth); doc.fs.push("grp"); doc.tos.push(1); wtot += TcoGrpWidth;
 			} else if (i == 2) {
 				doc.cols.push("TcoOwn"); doc.widths.push(TcoOwnWidth); doc.fs.push("own"); doc.tos.push(2); wtot += TcoOwnWidth;
 			} else if (i == 3) {
@@ -120,7 +120,7 @@ function refreshB(chgcol) {
 			} else if (i == 4) {
 				doc.cols.push("TcoFnm"); doc.widths.push(TcoFnmWidth); doc.fs.push("fnm"); doc.tos.push(0); wtot += TcoFnmWidth;
 			} else if (i == 5) {
-				doc.cols.push("TcoLnm"); doc.widths.push(TcoLnmWidth); doc.fs.push("lnm"); doc.tos.push(1); wtot += TcoLnmWidth;
+				doc.cols.push("TcoLnm"); doc.widths.push(TcoLnmWidth); doc.fs.push("lnm"); doc.tos.push(3); wtot += TcoLnmWidth;
 			} else if (i == 6) {
 				doc.cols.push("TcoSex"); doc.widths.push(TcoSexWidth); doc.fs.push("sex2"); doc.tos.push(0); wtot += TcoSexWidth;
 			} else if (i == 7) {

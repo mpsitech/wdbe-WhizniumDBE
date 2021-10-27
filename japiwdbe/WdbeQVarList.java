@@ -17,7 +17,9 @@ public class WdbeQVarList {
 	public WdbeQVarList(
 				int jnum
 				, String sref
-				, String stubPrcRefWdbeMProcess
+				, String srefRefIxVTbl
+				, String titRefIxVTbl
+				, String stubRefUref
 				, String yesnoConst
 				, String yesnoFalling
 				, String srefWdbeKHdltype
@@ -27,7 +29,9 @@ public class WdbeQVarList {
 			) {
 		this.jnum = jnum;
 		this.sref = sref;
-		this.stubPrcRefWdbeMProcess = stubPrcRefWdbeMProcess;
+		this.srefRefIxVTbl = srefRefIxVTbl;
+		this.titRefIxVTbl = titRefIxVTbl;
+		this.stubRefUref = stubRefUref;
 		this.yesnoConst = yesnoConst;
 		this.yesnoFalling = yesnoFalling;
 		this.srefWdbeKHdltype = srefWdbeKHdltype;
@@ -38,7 +42,9 @@ public class WdbeQVarList {
 
 	public int jnum;
 	public String sref;
-	public String stubPrcRefWdbeMProcess;
+	public String srefRefIxVTbl;
+	public String titRefIxVTbl;
+	public String stubRefUref;
 	public String yesnoConst;
 	public String yesnoFalling;
 	public String srefWdbeKHdltype;
@@ -55,7 +61,9 @@ public class WdbeQVarList {
 
 		if (Xmlio.checkXPath(doc, basexpath)) {
 			sref = Xmlio.extractStringUclc(doc, basexpath, "sref", "srf", null, 0);
-			stubPrcRefWdbeMProcess = Xmlio.extractStringUclc(doc, basexpath, "stubPrcRefWdbeMProcess", "prc", null, 0);
+			srefRefIxVTbl = Xmlio.extractStringUclc(doc, basexpath, "srefRefIxVTbl", "ret", null, 0);
+			titRefIxVTbl = Xmlio.extractStringUclc(doc, basexpath, "titRefIxVTbl", "ret2", null, 0);
+			stubRefUref = Xmlio.extractStringUclc(doc, basexpath, "stubRefUref", "reu", null, 0);
 			yesnoConst = Xmlio.extractStringUclc(doc, basexpath, "yesnoConst", "con", null, 0);
 			yesnoFalling = Xmlio.extractStringUclc(doc, basexpath, "yesnoFalling", "fal", null, 0);
 			srefWdbeKHdltype = Xmlio.extractStringUclc(doc, basexpath, "srefWdbeKHdltype", "hty", null, 0);

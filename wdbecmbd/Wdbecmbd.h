@@ -37,11 +37,12 @@
 
 #include "Wdbe.h"
 
-#include "SqkWdbeModbsc.h"
-#include "SqkWdbeModdet.h"
-#include "SqkWdbeMtpModbscbu.h"
-#include "SqkWdbeMtpModbsctd.h"
-#include "SqkWdbeMtpModdet.h"
+#include "SqkWdbeCplmst.h"
+#include "SqkWdbeGen.h"
+#include "SqkWdbeGenfst.h"
+#include "SqkWdbeMtpCplmstbu.h"
+#include "SqkWdbeMtpCplmsttd.h"
+#include "SqkWdbeMtpGenfst.h"
 #include "SqkWdbeMtpPlhfpga.h"
 #include "SqkWdbeMtpPlhmcu.h"
 #include "SqkWdbeMtpWrfpga.h"
@@ -611,6 +612,9 @@ public:
 	ReqWdbe* reqCmd;
 
 public:
+	Sbecore::ubigint insertSubjob(std::map<Sbecore::ubigint, JobWdbe*>& subjobs, JobWdbe* subjob);
+	bool eraseSubjobByJref(std::map<Sbecore::ubigint, JobWdbe*>& subjobs, const Sbecore::ubigint _jref);
+
 	virtual DpchEngWdbe* getNewDpchEng(std::set<Sbecore::uint> items);
 
 	virtual void refresh(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems, const bool unmute = false);

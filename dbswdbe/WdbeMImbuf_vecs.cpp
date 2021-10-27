@@ -12,47 +12,50 @@ using namespace Sbecore;
 using namespace Xmlio;
 
 /******************************************************************************
- class TblWdbeMImbuf::VecVDir
+ class TblWdbeMImbuf::VecVRotype
  ******************************************************************************/
 
-uint TblWdbeMImbuf::VecVDir::getIx(
+uint TblWdbeMImbuf::VecVRotype::getIx(
 			const string& sref
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "in") return IN;
-	if (s == "out") return OUT;
+	if (s == "sngatmt") return SNGATMT;
+	if (s == "multatmt") return MULTATMT;
+	if (s == "strm") return STRM;
 
 	return(0);
 };
 
-string TblWdbeMImbuf::VecVDir::getSref(
+string TblWdbeMImbuf::VecVRotype::getSref(
 			const uint ix
 		) {
-	if (ix == IN) return("in");
-	if (ix == OUT) return("out");
+	if (ix == SNGATMT) return("sngatmt");
+	if (ix == MULTATMT) return("multatmt");
+	if (ix == STRM) return("strm");
 
 	return("");
 };
 
-string TblWdbeMImbuf::VecVDir::getTitle(
+string TblWdbeMImbuf::VecVRotype::getTitle(
 			const uint ix
 			, const uint ixWdbeVLocale
 		) {
 	if (ixWdbeVLocale == 1) {
-		if (ix == IN) return("input");
-		if (ix == OUT) return("output");
+		if (ix == SNGATMT) return("single attempt");
+		if (ix == MULTATMT) return("multiple attempt");
+		if (ix == STRM) return("stream");
 		return(getSref(ix));
 	};
 
 	return("");
 };
 
-void TblWdbeMImbuf::VecVDir::fillFeed(
+void TblWdbeMImbuf::VecVRotype::fillFeed(
 			const uint ixWdbeVLocale
 			, Feed& feed
 		) {
 	feed.clear();
 
-	for (unsigned int i = 1; i <= 2; i++) feed.appendIxSrefTitles(i, getSref(i), getTitle(i, ixWdbeVLocale));
+	for (unsigned int i = 1; i <= 3; i++) feed.appendIxSrefTitles(i, getSref(i), getTitle(i, ixWdbeVLocale));
 };

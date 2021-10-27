@@ -1,13 +1,16 @@
 function updateScrJrefs() {
 	scrJrefDetail = retrieveSi(srcdoc, "StatShrWdbePrtRec", "scrJrefDetail");
+	scrJrefSrc1NSensitivity = retrieveSi(srcdoc, "StatShrWdbePrtRec", "scrJrefSrc1NSensitivity");
 };
 
 function resetInitdones() {
 	setSi(srcdoc, "StatAppWdbePrtRec", "initdoneDetail", "false");
+	setSi(srcdoc, "StatAppWdbePrtRec", "initdoneSrc1NSensitivity", "false");
 };
 
 function resetHeights() {
 	heightDetail = 30;
+	heightSrc1NSensitivity = 30;
 };
 
 function getInitdone(pnlshort) {
@@ -26,9 +29,12 @@ function checkInitdone() {
 	var initdone1NRelease = (retrieveSi(srcdoc, "StatAppWdbePrtRec", "initdone1NRelease") == "true");
 
 	var initdoneDetail = (retrieveSi(srcdoc, "StatAppWdbePrtRec", "initdoneDetail") == "true");
+	var initdoneSrc1NSensitivity = (retrieveSi(srcdoc, "StatAppWdbePrtRec", "initdoneSrc1NSensitivity") == "true");
 
 	if (!initdoneDetail) {
 		lhsdoc.getElementById("Detail").src = "./PnlWdbePrtDetail.html?scrJref=" + scrJrefDetail;
+	} else if (!initdoneSrc1NSensitivity) {
+		rhsdoc.getElementById("Src1NSensitivity").src = "./PnlWdbePrtSrc1NSensitivity.html?scrJref=" + scrJrefSrc1NSensitivity;
 
 	} else {
 		refreshB();
@@ -68,6 +74,7 @@ function setPnlAvail(short, avail) {
 		else if (short == "List") heightList = height;
 		else if (short == "Rec") heightRec = height;
 		else if (short == "Detail") heightDetail = height;
+		else if (short == "Src1NSensitivity") heightSrc1NSensitivity = height;
 	};
 
 	return(avail != oldAvail);
@@ -111,6 +118,7 @@ function changeHeight(pnlshort, height, update) {
 	else if (pnlshort == "List") heightList = height;
 	else if (pnlshort == "Rec") heightRec = height;
 	else if (pnlshort == "Detail") heightDetail = height;
+	else if (pnlshort == "Src1NSensitivity") heightSrc1NSensitivity = height;
 
 	if (update) updateHeight();
 };
@@ -119,7 +127,7 @@ function updateHeight() {
 	var heightLhs, heightRhs, heightGt;
 
 	heightLhs = heightDetail+13 + 5;
-	heightRhs = 5;
+	heightRhs = heightSrc1NSensitivity+13 + 5;
 
 	if (heightLhs > heightRhs) {
 		lhsdoc.getElementById("tdFill").setAttribute("height", "5");
@@ -310,6 +318,8 @@ function handleDpchEng(dom, dpch) {
 
 			if (_scrJref == scrJrefDetail) {
 				if (getInitdone("Detail")) lhsdoc.getElementById("Detail").contentWindow.handleDpchEng(dom, dpch);
+			} else if (_scrJref == scrJrefSrc1NSensitivity) {
+				if (getInitdone("Src1NSensitivity")) rhsdoc.getElementById("Src1NSensitivity").contentWindow.handleDpchEng(dom, dpch);
 			} else {
 				// alert("got a '" + dpch + "' from job with scrJref " + _scrJref);
 			};

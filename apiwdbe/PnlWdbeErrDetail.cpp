@@ -24,6 +24,7 @@ uint PnlWdbeErrDetail::VecVDo::getIx(
 
 	if (s == "butsaveclick") return BUTSAVECLICK;
 	if (s == "butreuviewclick") return BUTREUVIEWCLICK;
+	if (s == "buttraviewclick") return BUTTRAVIEWCLICK;
 
 	return(0);
 };
@@ -33,6 +34,7 @@ string PnlWdbeErrDetail::VecVDo::getSref(
 		) {
 	if (ix == BUTSAVECLICK) return("ButSaveClick");
 	if (ix == BUTREUVIEWCLICK) return("ButReuViewClick");
+	if (ix == BUTTRAVIEWCLICK) return("ButTraViewClick");
 
 	return("");
 };
@@ -272,6 +274,8 @@ PnlWdbeErrDetail::StatShr::StatShr(
 			, const bool ButReuViewAvail
 			, const bool ButReuViewActive
 			, const bool TxtTraActive
+			, const bool ButTraViewAvail
+			, const bool ButTraViewActive
 			, const bool TxfCmtActive
 		) :
 			Block()
@@ -284,9 +288,11 @@ PnlWdbeErrDetail::StatShr::StatShr(
 	this->ButReuViewAvail = ButReuViewAvail;
 	this->ButReuViewActive = ButReuViewActive;
 	this->TxtTraActive = TxtTraActive;
+	this->ButTraViewAvail = ButTraViewAvail;
+	this->ButTraViewActive = ButTraViewActive;
 	this->TxfCmtActive = TxfCmtActive;
 
-	mask = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXFFSRACTIVE, TXTREUACTIVE, BUTREUVIEWAVAIL, BUTREUVIEWACTIVE, TXTTRAACTIVE, TXFCMTACTIVE};
+	mask = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXFFSRACTIVE, TXTREUACTIVE, BUTREUVIEWAVAIL, BUTREUVIEWACTIVE, TXTTRAACTIVE, BUTTRAVIEWAVAIL, BUTTRAVIEWACTIVE, TXFCMTACTIVE};
 };
 
 bool PnlWdbeErrDetail::StatShr::readXML(
@@ -314,6 +320,8 @@ bool PnlWdbeErrDetail::StatShr::readXML(
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButReuViewAvail", ButReuViewAvail)) add(BUTREUVIEWAVAIL);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButReuViewActive", ButReuViewActive)) add(BUTREUVIEWACTIVE);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TxtTraActive", TxtTraActive)) add(TXTTRAACTIVE);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButTraViewAvail", ButTraViewAvail)) add(BUTTRAVIEWAVAIL);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButTraViewActive", ButTraViewActive)) add(BUTTRAVIEWACTIVE);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TxfCmtActive", TxfCmtActive)) add(TXFCMTACTIVE);
 	};
 
@@ -333,6 +341,8 @@ set<uint> PnlWdbeErrDetail::StatShr::comm(
 	if (ButReuViewAvail == comp->ButReuViewAvail) insert(items, BUTREUVIEWAVAIL);
 	if (ButReuViewActive == comp->ButReuViewActive) insert(items, BUTREUVIEWACTIVE);
 	if (TxtTraActive == comp->TxtTraActive) insert(items, TXTTRAACTIVE);
+	if (ButTraViewAvail == comp->ButTraViewAvail) insert(items, BUTTRAVIEWAVAIL);
+	if (ButTraViewActive == comp->ButTraViewActive) insert(items, BUTTRAVIEWACTIVE);
 	if (TxfCmtActive == comp->TxfCmtActive) insert(items, TXFCMTACTIVE);
 
 	return(items);
@@ -346,7 +356,7 @@ set<uint> PnlWdbeErrDetail::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXFFSRACTIVE, TXTREUACTIVE, BUTREUVIEWAVAIL, BUTREUVIEWACTIVE, TXTTRAACTIVE, TXFCMTACTIVE};
+	diffitems = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXFFSRACTIVE, TXTREUACTIVE, BUTREUVIEWAVAIL, BUTREUVIEWACTIVE, TXTTRAACTIVE, BUTTRAVIEWAVAIL, BUTTRAVIEWACTIVE, TXFCMTACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);

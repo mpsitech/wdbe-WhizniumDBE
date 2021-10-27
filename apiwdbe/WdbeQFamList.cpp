@@ -19,13 +19,13 @@ using namespace Xmlio;
 
 WdbeQFamList::WdbeQFamList(
 			const uint jnum
-			, const string srefKVendor
-			, const string titSrefKVendor
+			, const string srefWdbeKVendor
+			, const string titSrefWdbeKVendor
 			, const string Title
 		) {
 	this->jnum = jnum;
-	this->srefKVendor = srefKVendor;
-	this->titSrefKVendor = titSrefKVendor;
+	this->srefWdbeKVendor = srefWdbeKVendor;
+	this->titSrefWdbeKVendor = titSrefWdbeKVendor;
 	this->Title = Title;
 };
 
@@ -42,8 +42,8 @@ bool WdbeQFamList::readXML(
 		basefound = checkXPath(docctx, basexpath);
 
 	if (basefound) {
-		extractStringUclc(docctx, basexpath, "srefKVendor", "vnd", srefKVendor);
-		extractStringUclc(docctx, basexpath, "titSrefKVendor", "vnd2", titSrefKVendor);
+		extractStringUclc(docctx, basexpath, "srefWdbeKVendor", "vnd", srefWdbeKVendor);
+		extractStringUclc(docctx, basexpath, "titSrefWdbeKVendor", "vnd2", titSrefWdbeKVendor);
 		extractStringUclc(docctx, basexpath, "Title", "tit", Title);
 	};
 

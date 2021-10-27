@@ -110,7 +110,7 @@ string WdbeWrfpga::getValStr(
 			WdbeMGeneric* gen
 			, const bool othNotFull
 		) {
-	WdbeMSignal sig(0, 0, 0, 0, 0, 0, 0, 0, "", false, gen->srefWdbeKHdltype, gen->Width, gen->Minmax, "", "", gen->Defval, false, 0, "");
+	WdbeMSignal sig(0, 0, 0, 0, 0, 0, 0, 0, 0, "", false, gen->srefWdbeKHdltype, gen->Width, gen->Minmax, "", "", gen->Defval, false, 0, "");
 	return(getValStr(&sig, othNotFull));
 };
 
@@ -118,7 +118,7 @@ string WdbeWrfpga::getValStr(
 			WdbeMPort* prt
 			, const bool othNotFull
 		) {
-	WdbeMSignal sig(0, 0, 0, 0, 0, 0, 0, 0, "", false, prt->srefWdbeKHdltype, prt->Width, prt->Minmax, "", "", prt->Defval, false, 0, "");
+	WdbeMSignal sig(0, 0, 0, 0, 0, 0, 0, 0, 0, "", false, prt->srefWdbeKHdltype, prt->Width, prt->Minmax, "", "", prt->Defval, false, 0, "");
 	return(getValStr(&sig, othNotFull));
 };
 
@@ -163,21 +163,21 @@ string WdbeWrfpga::getValStr(
 			, const bool othNotFull
 			, const string& altval
 		) {
-	WdbeMSignal sig(0, 0, 0, 0, 0, 0, 0, 0, "", false, var->srefWdbeKHdltype, var->Width, var->Minmax, "", var->Onval, var->Offval, var->Defon, 0, "");
+	WdbeMSignal sig(0, 0, 0, 0, 0, 0, 0, 0, 0, "", false, var->srefWdbeKHdltype, var->Width, var->Minmax, "", var->Onval, var->Offval, var->Defon, 0, "");
 	return(getValStr(&sig, othNotFull, altval));
 };
 
 string WdbeWrfpga::getVarStr(
 			WdbeMGeneric* gen
 		) {
-	WdbeMSignal sig(0, 0, 0, 0, 0, VecWdbeVMSignalMgeTbl::VOID, 0, 0, "", false, gen->srefWdbeKHdltype, gen->Width, gen->Minmax, "", "", gen->Defval, false, 0, "");
+	WdbeMSignal sig(0, 0, 0, 0, 0, 0, VecWdbeVMSignalMgeTbl::VOID, 0, 0, "", false, gen->srefWdbeKHdltype, gen->Width, gen->Minmax, "", "", gen->Defval, false, 0, "");
 	return(getVarStr(&sig));
 };
 
 string WdbeWrfpga::getVarStr(
 			WdbeMPort* prt
 		) {
-	WdbeMSignal sig(0, 0, 0, 0, 0, VecWdbeVMSignalMgeTbl::VOID, 0, 0, "", false, prt->srefWdbeKHdltype, prt->Width, prt->Minmax, "", "", "", false, 0, "");
+	WdbeMSignal sig(0, 0, 0, 0, 0, 0, VecWdbeVMSignalMgeTbl::VOID, 0, 0, "", false, prt->srefWdbeKHdltype, prt->Width, prt->Minmax, "", "", "", false, 0, "");
 	return(getVarStr(&sig));
 };
 
@@ -191,9 +191,13 @@ string WdbeWrfpga::getVarStr(
 	if (sig->srefWdbeKHdltype == "int") s = "integer";
 	else if (sig->srefWdbeKHdltype == "nat") s = "natural";
 	else if (sig->srefWdbeKHdltype == "sl") s = "std_logic";
-	else if (sig->srefWdbeKHdltype == "slvup") s = "std_logic_vector(0 to " + to_string((int) (sig->Width-1)) + ")";
-	else if (sig->srefWdbeKHdltype == "slvdn") s = "std_logic_vector(" + to_string((int) (sig->Width-1)) + " downto 0)";
-	else if (sig->srefWdbeKHdltype == "str") s = "string";
+	else if (sig->srefWdbeKHdltype == "slvup") {
+		if ((sig->Width == 0) && (sig->Minmax != "")) s = "std_logic_vector(0 to " + sig->Minmax + "-1)";
+		else s = "std_logic_vector(0 to " + to_string((int) (sig->Width-1)) + ")";
+	} else if (sig->srefWdbeKHdltype == "slvdn") {
+		if ((sig->Width == 0) && (sig->Minmax != "")) s = "std_logic_vector(" + sig->Minmax + "-1 downto 0)";
+		else s = "std_logic_vector(" + to_string((int) (sig->Width-1)) + " downto 0)";
+	} else if (sig->srefWdbeKHdltype == "str") s = "string";
 	else s = sig->srefWdbeKHdltype;
 
 	ptr = sig->Minmax.find("..");
@@ -207,7 +211,7 @@ string WdbeWrfpga::getVarStr(
 string WdbeWrfpga::getVarStr(
 			WdbeMVariable* var
 		) {
-	WdbeMSignal sig(0, 0, 0, 0, 0, VecWdbeVMSignalMgeTbl::VOID, 0, 0, "", false, var->srefWdbeKHdltype, var->Width, var->Minmax, "", var->Onval, var->Offval, var->Defon, 0, "");
+	WdbeMSignal sig(0, 0, 0, 0, 0, 0, VecWdbeVMSignalMgeTbl::VOID, 0, 0, "", false, var->srefWdbeKHdltype, var->Width, var->Minmax, "", var->Onval, var->Offval, var->Defon, 0, "");
 	return(getVarStr(&sig));
 };
 
@@ -238,24 +242,5 @@ void WdbeWrfpga::srefsFstsToVector(
 			};
 		};
 	};
-};
-
-string WdbeWrfpga::getImbsigsref(
-			DbsWdbe* dbswdbe
-			, WdbeMImbuf* imb
-		) {
-	string sref;
-	
-	string s;
-
-	sref = Wdbe::getImbshort(imb); // ex. 'ToWavegen' or 'SpecrebufFromXadcacq'
-
-	if (dbswdbe->loadStringBySQL("SELECT sref FROM TblWdbeMModule WHERE ref = " + to_string(imb->refWdbeMModule), s)) {
-		// 'BufToWavegen' or 'SpecrebufFromXadcacq'
-		s = StrMod::cap(s);
-		if (sref.find(s) != 0) sref = s + sref;
-	};
-
-	return sref;
 };
 // IP cust --- IEND

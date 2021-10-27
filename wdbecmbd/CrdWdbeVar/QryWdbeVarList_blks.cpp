@@ -20,8 +20,9 @@ uint QryWdbeVarList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "prc") return PRC;
 	if (s == "srf") return SRF;
+	if (s == "ret") return RET;
+	if (s == "reu") return REU;
 
 	return(0);
 };
@@ -29,8 +30,9 @@ uint QryWdbeVarList::VecVOrd::getIx(
 string QryWdbeVarList::VecVOrd::getSref(
 			const uint ix
 		) {
-	if (ix == PRC) return("prc");
 	if (ix == SRF) return("srf");
+	if (ix == RET) return("ret");
+	if (ix == REU) return("reu");
 
 	return("");
 };
@@ -40,7 +42,7 @@ void QryWdbeVarList::VecVOrd::fillFeed(
 		) {
 	feed.clear();
 
-	for (unsigned int i = 1; i <= 2; i++) feed.appendIxSrefTitles(i, getSref(i), getSref(i));
+	for (unsigned int i = 1; i <= 3; i++) feed.appendIxSrefTitles(i, getSref(i), getSref(i));
 };
 
 /******************************************************************************

@@ -21,13 +21,17 @@
 			function handleMitCrdRlsClick() {parent.window.handleMitCrdopenClick("Crd","MitCrdRls");};
 			function handleMitCrdCprClick() {parent.window.handleMitCrdopenClick("Crd","MitCrdCpr");};
 			function handleMitCrdCvrClick() {parent.window.handleMitCrdopenClick("Crd","MitCrdCvr");};
+			function handleMitCrdPphClick() {parent.window.handleMitCrdopenClick("Crd","MitCrdPph");};
 			function handleMitCrdModClick() {parent.window.handleMitCrdopenClick("Crd","MitCrdMod");};
 			function handleMitCrdVecClick() {parent.window.handleMitCrdopenClick("Crd","MitCrdVec");};
 			function handleMitCrdCmdClick() {parent.window.handleMitCrdopenClick("Crd","MitCrdCmd");};
 			function handleMitCrdErrClick() {parent.window.handleMitCrdopenClick("Crd","MitCrdErr");};
-			function handleMitCrdPphClick() {parent.window.handleMitCrdopenClick("Crd","MitCrdPph");};
+			function handleMitCrdPplClick() {parent.window.handleMitCrdopenClick("Crd","MitCrdPpl");};
+			function handleMitCrdSegClick() {parent.window.handleMitCrdopenClick("Crd","MitCrdSeg");};
 			function handleMitCrdBnkClick() {parent.window.handleMitCrdopenClick("Crd","MitCrdBnk");};
 			function handleMitCrdPinClick() {parent.window.handleMitCrdopenClick("Crd","MitCrdPin");};
+			function handleMitCrdIntClick() {parent.window.handleMitCrdopenClick("Crd","MitCrdInt");};
+			function handleMitCrdSigClick() {parent.window.handleMitCrdopenClick("Crd","MitCrdSig");};
 			function handleMitCrdUtlClick() {parent.window.handleMitCrdopenClick("Crd","MitCrdUtl");};
 		</script>
 		<link href="../style/menu.css" rel="styleSheet" type="text/css">
@@ -122,6 +126,10 @@
 			<tr id="trMspCrd5" class="show">
 				<td height="1" colspan="3" class="frame"></td>
 			</tr>
+			<tr id="trMitCrdPph" class="show">
+				<td height="20" class="frame"></td><td class="iframe"></td>
+				<td class="iframe"><span id="MitCrdPph" class="item" onclick="handleMitCrdPphClick()">MitCrdPph</span></td>
+			</tr>
 			<tr id="trMitCrdMod" class="show">
 				<td height="20" class="frame"></td><td class="iframe"></td>
 				<td class="iframe"><span id="MitCrdMod" class="item" onclick="handleMitCrdModClick()">MitCrdMod</span></td>
@@ -138,9 +146,16 @@
 				<td height="20" class="frame"></td><td class="iframe"></td>
 				<td class="iframe"><span id="MitCrdErr" class="item" onclick="handleMitCrdErrClick()">MitCrdErr</span></td>
 			</tr>
-			<tr id="trMitCrdPph" class="show">
+			<tr id="trMitCrdPpl" class="show">
 				<td height="20" class="frame"></td><td class="iframe"></td>
-				<td class="iframe"><span id="MitCrdPph" class="item" onclick="handleMitCrdPphClick()">MitCrdPph</span></td>
+				<td class="iframe"><span id="MitCrdPpl" class="item" onclick="handleMitCrdPplClick()">MitCrdPpl</span></td>
+			</tr>
+			<tr id="trMitCrdSeg" class="show">
+				<td height="20" class="frame"></td><td class="iframe"></td>
+				<td class="iframe"><span id="MitCrdSeg" class="item" onclick="handleMitCrdSegClick()">MitCrdSeg</span></td>
+			</tr>
+			<tr id="trMspCrd6" class="show">
+				<td height="1" colspan="3" class="frame"></td>
 			</tr>
 			<tr id="trMitCrdBnk" class="show">
 				<td height="20" class="frame"></td><td class="iframe"></td>
@@ -150,14 +165,22 @@
 				<td height="20" class="frame"></td><td class="iframe"></td>
 				<td class="iframe"><span id="MitCrdPin" class="item" onclick="handleMitCrdPinClick()">MitCrdPin</span></td>
 			</tr>
-			<tr id="trMspCrd6" class="show">
+			<tr id="trMitCrdInt" class="show">
+				<td height="20" class="frame"></td><td class="iframe"></td>
+				<td class="iframe"><span id="MitCrdInt" class="item" onclick="handleMitCrdIntClick()">MitCrdInt</span></td>
+			</tr>
+			<tr id="trMitCrdSig" class="show">
+				<td height="20" class="frame"></td><td class="iframe"></td>
+				<td class="iframe"><span id="MitCrdSig" class="item" onclick="handleMitCrdSigClick()">MitCrdSig</span></td>
+			</tr>
+			<tr id="trMspCrd7" class="show">
 				<td height="1" colspan="3" class="frame"></td>
 			</tr>
 			<tr id="trMitCrdUtl" class="show">
 				<td height="20" class="frame"></td><td class="iframe"></td>
 				<td class="iframe"><span id="MitCrdUtl" class="item" onclick="handleMitCrdUtlClick()">MitCrdUtl</span></td>
 			</tr>
-			<tr id="trMspCrd7" class="show">
+			<tr id="trMspCrd8" class="show">
 				<td height="1" colspan="3" class="frame"></td>
 			</tr>
 		</table>

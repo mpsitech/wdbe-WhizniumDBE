@@ -115,19 +115,23 @@ public class PnlWdbePphRec {
 
 		public static final int INITDONEDETAIL = 1;
 		public static final int INITDONEAPAR = 2;
+		public static final int INITDONEMNMODULE = 3;
 
 		public StatApp(
 					boolean initdoneDetail
 					, boolean initdoneAPar
+					, boolean initdoneMNModule
 				) {
 			this.initdoneDetail = initdoneDetail;
 			this.initdoneAPar = initdoneAPar;
+			this.initdoneMNModule = initdoneMNModule;
 
-			mask = new HashSet<Integer>(Arrays.asList(INITDONEDETAIL, INITDONEAPAR));
+			mask = new HashSet<Integer>(Arrays.asList(INITDONEDETAIL, INITDONEAPAR, INITDONEMNMODULE));
 		};
 
 		public boolean initdoneDetail;
 		public boolean initdoneAPar;
+		public boolean initdoneMNModule;
 
 		public boolean readXML(
 					Document doc
@@ -144,6 +148,7 @@ public class PnlWdbePphRec {
 			if (Xmlio.checkXPath(doc, basexpath)) {
 				initdoneDetail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneDetail", mask, INITDONEDETAIL);
 				initdoneAPar = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneAPar", mask, INITDONEAPAR);
+				initdoneMNModule = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneMNModule", mask, INITDONEMNMODULE);
 
 				return true;
 			};
@@ -158,6 +163,7 @@ public class PnlWdbePphRec {
 
 			if (initdoneDetail == comp.initdoneDetail) items.add(INITDONEDETAIL);
 			if (initdoneAPar == comp.initdoneAPar) items.add(INITDONEAPAR);
+			if (initdoneMNModule == comp.initdoneMNModule) items.add(INITDONEMNMODULE);
 
 			return(items);
 		};
@@ -170,7 +176,7 @@ public class PnlWdbePphRec {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(INITDONEDETAIL, INITDONEAPAR));
+			diffitems = new HashSet<Integer>(Arrays.asList(INITDONEDETAIL, INITDONEAPAR, INITDONEMNMODULE));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);
@@ -186,25 +192,29 @@ public class PnlWdbePphRec {
 		public static final int IXWDBEVEXPSTATE = 1;
 		public static final int SCRJREFDETAIL = 2;
 		public static final int SCRJREFAPAR = 3;
-		public static final int BUTREGULARIZEACTIVE = 4;
+		public static final int SCRJREFMNMODULE = 4;
+		public static final int BUTREGULARIZEACTIVE = 5;
 
 		public StatShr(
 					int ixWdbeVExpstate
 					, String scrJrefDetail
 					, String scrJrefAPar
+					, String scrJrefMNModule
 					, boolean ButRegularizeActive
 				) {
 			this.ixWdbeVExpstate = ixWdbeVExpstate;
 			this.scrJrefDetail = scrJrefDetail;
 			this.scrJrefAPar = scrJrefAPar;
+			this.scrJrefMNModule = scrJrefMNModule;
 			this.ButRegularizeActive = ButRegularizeActive;
 
-			mask = new HashSet<Integer>(Arrays.asList(IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFAPAR, BUTREGULARIZEACTIVE));
+			mask = new HashSet<Integer>(Arrays.asList(IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFAPAR, SCRJREFMNMODULE, BUTREGULARIZEACTIVE));
 		};
 
 		public int ixWdbeVExpstate;
 		public String scrJrefDetail;
 		public String scrJrefAPar;
+		public String scrJrefMNModule;
 		public boolean ButRegularizeActive;
 
 		public boolean readXML(
@@ -225,6 +235,7 @@ public class PnlWdbePphRec {
 				ixWdbeVExpstate = VecWdbeVExpstate.getIx(srefIxWdbeVExpstate);
 				scrJrefDetail = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefDetail", mask, SCRJREFDETAIL);
 				scrJrefAPar = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefAPar", mask, SCRJREFAPAR);
+				scrJrefMNModule = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefMNModule", mask, SCRJREFMNMODULE);
 				ButRegularizeActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButRegularizeActive", mask, BUTREGULARIZEACTIVE);
 
 				return true;
@@ -241,6 +252,7 @@ public class PnlWdbePphRec {
 			if (ixWdbeVExpstate == comp.ixWdbeVExpstate) items.add(IXWDBEVEXPSTATE);
 			if (scrJrefDetail.equals(comp.scrJrefDetail)) items.add(SCRJREFDETAIL);
 			if (scrJrefAPar.equals(comp.scrJrefAPar)) items.add(SCRJREFAPAR);
+			if (scrJrefMNModule.equals(comp.scrJrefMNModule)) items.add(SCRJREFMNMODULE);
 			if (ButRegularizeActive == comp.ButRegularizeActive) items.add(BUTREGULARIZEACTIVE);
 
 			return(items);
@@ -254,7 +266,7 @@ public class PnlWdbePphRec {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFAPAR, BUTREGULARIZEACTIVE));
+			diffitems = new HashSet<Integer>(Arrays.asList(IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFAPAR, SCRJREFMNMODULE, BUTREGULARIZEACTIVE));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);
@@ -396,8 +408,8 @@ public class PnlWdbePphRec {
 			super(VecWdbeVDpch.DPCHENGWDBEPPHRECDATA);
 
 			continf = new ContInf("");
-			statapp = new StatApp(false, false);
-			statshr = new StatShr(0, "", "", false);
+			statapp = new StatApp(false, false, false);
+			statshr = new StatShr(0, "", "", "", false);
 			tag = new Tag("");
 		};
 
@@ -437,8 +449,8 @@ public class PnlWdbePphRec {
 			} else {
 				scrJref = "";
 				continf = new ContInf("");
-				statapp = new StatApp(false, false);
-				statshr = new StatShr(0, "", "", false);
+				statapp = new StatApp(false, false, false);
+				statshr = new StatShr(0, "", "", "", false);
 				tag = new Tag("");
 			};
 		};

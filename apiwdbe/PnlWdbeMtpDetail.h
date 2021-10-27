@@ -35,6 +35,7 @@ namespace PnlWdbeMtpDetail {
 
 	public:
 		static const Sbecore::uint BUTSAVECLICK = 1;
+		static const Sbecore::uint BUTVNDEDITCLICK = 2;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);
@@ -46,14 +47,18 @@ namespace PnlWdbeMtpDetail {
 	class ContIac : public Sbecore::Block {
 
 	public:
-		static const Sbecore::uint NUMFPUPTYP = 1;
-		static const Sbecore::uint TXFSRR = 2;
-		static const Sbecore::uint TXFCMT = 3;
+		static const Sbecore::uint NUMFPUPVND = 1;
+		static const Sbecore::uint TXFVND = 2;
+		static const Sbecore::uint NUMFPUPTYP = 3;
+		static const Sbecore::uint TXFSRR = 4;
+		static const Sbecore::uint TXFCMT = 5;
 
 	public:
-		ContIac(const Sbecore::uint numFPupTyp = 1, const std::string& TxfSrr = "", const std::string& TxfCmt = "");
+		ContIac(const Sbecore::uint numFPupVnd = 1, const std::string& TxfVnd = "", const Sbecore::uint numFPupTyp = 1, const std::string& TxfSrr = "", const std::string& TxfCmt = "");
 
 	public:
+		Sbecore::uint numFPupVnd;
+		std::string TxfVnd;
 		Sbecore::uint numFPupTyp;
 		std::string TxfSrr;
 		std::string TxfCmt;
@@ -92,12 +97,14 @@ namespace PnlWdbeMtpDetail {
 
 	public:
 		static const Sbecore::uint IXWDBEVEXPSTATE = 1;
+		static const Sbecore::uint PUPVNDALT = 2;
 
 	public:
-		StatApp(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::MIND);
+		StatApp(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::MIND, const bool PupVndAlt = false);
 
 	public:
 		Sbecore::uint ixWdbeVExpstate;
+		bool PupVndAlt;
 
 	public:
 		bool readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
@@ -111,20 +118,26 @@ namespace PnlWdbeMtpDetail {
 	class StatShr : public Sbecore::Block {
 
 	public:
-		static const Sbecore::uint BUTSAVEAVAIL = 1;
-		static const Sbecore::uint BUTSAVEACTIVE = 2;
-		static const Sbecore::uint TXTSRFACTIVE = 3;
-		static const Sbecore::uint PUPTYPACTIVE = 4;
-		static const Sbecore::uint TXFSRRACTIVE = 5;
-		static const Sbecore::uint TXFCMTACTIVE = 6;
+		static const Sbecore::uint TXFVNDVALID = 1;
+		static const Sbecore::uint BUTSAVEAVAIL = 2;
+		static const Sbecore::uint BUTSAVEACTIVE = 3;
+		static const Sbecore::uint TXTSRFACTIVE = 4;
+		static const Sbecore::uint PUPVNDACTIVE = 5;
+		static const Sbecore::uint BUTVNDEDITAVAIL = 6;
+		static const Sbecore::uint PUPTYPACTIVE = 7;
+		static const Sbecore::uint TXFSRRACTIVE = 8;
+		static const Sbecore::uint TXFCMTACTIVE = 9;
 
 	public:
-		StatShr(const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxtSrfActive = true, const bool PupTypActive = true, const bool TxfSrrActive = true, const bool TxfCmtActive = true);
+		StatShr(const bool TxfVndValid = false, const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxtSrfActive = true, const bool PupVndActive = true, const bool ButVndEditAvail = true, const bool PupTypActive = true, const bool TxfSrrActive = true, const bool TxfCmtActive = true);
 
 	public:
+		bool TxfVndValid;
 		bool ButSaveAvail;
 		bool ButSaveActive;
 		bool TxtSrfActive;
+		bool PupVndActive;
+		bool ButVndEditAvail;
 		bool PupTypActive;
 		bool TxfSrrActive;
 		bool TxfCmtActive;
@@ -143,16 +156,18 @@ namespace PnlWdbeMtpDetail {
 	public:
 		static const Sbecore::uint CPT = 1;
 		static const Sbecore::uint CPTSRF = 2;
-		static const Sbecore::uint CPTTYP = 3;
-		static const Sbecore::uint CPTSRR = 4;
-		static const Sbecore::uint CPTCMT = 5;
+		static const Sbecore::uint CPTVND = 3;
+		static const Sbecore::uint CPTTYP = 4;
+		static const Sbecore::uint CPTSRR = 5;
+		static const Sbecore::uint CPTCMT = 6;
 
 	public:
-		Tag(const std::string& Cpt = "", const std::string& CptSrf = "", const std::string& CptTyp = "", const std::string& CptSrr = "", const std::string& CptCmt = "");
+		Tag(const std::string& Cpt = "", const std::string& CptSrf = "", const std::string& CptVnd = "", const std::string& CptTyp = "", const std::string& CptSrr = "", const std::string& CptCmt = "");
 
 	public:
 		std::string Cpt;
 		std::string CptSrf;
+		std::string CptVnd;
 		std::string CptTyp;
 		std::string CptSrr;
 		std::string CptCmt;
@@ -215,9 +230,10 @@ namespace PnlWdbeMtpDetail {
 		static const Sbecore::uint CONTIAC = 2;
 		static const Sbecore::uint CONTINF = 3;
 		static const Sbecore::uint FEEDFPUPTYP = 4;
-		static const Sbecore::uint STATAPP = 5;
-		static const Sbecore::uint STATSHR = 6;
-		static const Sbecore::uint TAG = 7;
+		static const Sbecore::uint FEEDFPUPVND = 5;
+		static const Sbecore::uint STATAPP = 6;
+		static const Sbecore::uint STATSHR = 7;
+		static const Sbecore::uint TAG = 8;
 
 	public:
 		DpchEngData();
@@ -226,6 +242,7 @@ namespace PnlWdbeMtpDetail {
 		ContIac contiac;
 		ContInf continf;
 		Sbecore::Feed feedFPupTyp;
+		Sbecore::Feed feedFPupVnd;
 		StatApp statapp;
 		StatShr statshr;
 		Tag tag;

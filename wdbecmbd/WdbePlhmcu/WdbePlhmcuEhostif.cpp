@@ -40,42 +40,15 @@ DpchRetWdbePlhmcuEhostif* WdbePlhmcuEhostif::run(
 
 	// IP run --- IBEGIN
 
-	// exact copy from WdbePlhfpgaEhostif
-
-	// Hostifsref
-	// sizeRxbuf, sizeTxbuf
-
-	vector<ubigint> refs, refs2;
+	// sizeTxbuf
 
 	WdbeMModule* mdl = NULL;
 
 	unsigned int sizeRxbuf, sizeTxbuf;
 
-	unsigned int len;
-
 	if (dbswdbe->tblwdbemmodule->loadRecByRef(refWdbeMModule, &mdl)) {
-		keys.push_back("Hostifsref");
-		vals.push_back(StrMod::cap(mdl->sref));
+		Wdbe::getHostifSizeRxtxbuf(dbswdbe, mdl->hkUref, sizeRxbuf, sizeTxbuf);
 
-		sizeRxbuf = 2;
-		sizeTxbuf = 2;
-
-		dbswdbe->loadRefsBySQL("SELECT refWdbeMController FROM TblWdbeMModule WHERE hkIxVTbl = " + to_string(mdl->hkIxVTbl) + " AND hkUref = " + to_string(mdl->hkUref) + " AND ixVBasetype = " + to_string(VecWdbeVMModuleBasetype::ECTR), false, refs);
-
-		for (unsigned int i = 0; i < refs.size();i++) {
-			dbswdbe->loadRefsBySQL("SELECT ref FROM TblWdbeMCommand WHERE refIxVTbl = " + to_string(VecWdbeVMCommandRefTbl::CTR) + " AND refUref = " + to_string(refs[i]), false, refs2);
-
-			for (unsigned int j = 0; j < refs2.size();j++) {
-				len = Wdbe::getLenInv(dbswdbe, refs2[j]) + 2;
-				if (len > sizeRxbuf) sizeRxbuf = len;
-
-				len = Wdbe::getLenRet(dbswdbe, refs2[j]) + 2;
-				if (len > sizeTxbuf) sizeTxbuf = len;
-			};
-		};
-
-		keys.push_back("sizeRxbuf");
-		vals.push_back(to_string(sizeRxbuf));
 		keys.push_back("sizeTxbuf");
 		vals.push_back(to_string(sizeTxbuf));
 

@@ -25,15 +25,15 @@
 class WdbeQFamList {
 
 public:
-	WdbeQFamList(const Sbecore::ubigint qref = 0, const Sbecore::ubigint jref = 0, const Sbecore::uint jnum = 0, const Sbecore::ubigint ref = 0, const std::string srefKVendor = "", const std::string titSrefKVendor = "", const std::string Title = "");
+	WdbeQFamList(const Sbecore::ubigint qref = 0, const Sbecore::ubigint jref = 0, const Sbecore::uint jnum = 0, const Sbecore::ubigint ref = 0, const std::string srefWdbeKVendor = "", const std::string titSrefWdbeKVendor = "", const std::string Title = "");
 
 public:
 	Sbecore::ubigint qref;
 	Sbecore::ubigint jref;
 	Sbecore::uint jnum;
 	Sbecore::ubigint ref;
-	std::string srefKVendor;
-	std::string titSrefKVendor;
+	std::string srefWdbeKVendor;
+	std::string titSrefWdbeKVendor;
 	std::string Title;
 
 public:
@@ -79,8 +79,8 @@ public:
 	virtual Sbecore::ubigint loadRstBySQL(const std::string& sqlstr, const bool append, ListWdbeQFamList& rst);
 
 	virtual Sbecore::ubigint insertRec(WdbeQFamList* rec);
-	Sbecore::ubigint insertNewRec(WdbeQFamList** rec = NULL, const Sbecore::ubigint jref = 0, const Sbecore::uint jnum = 0, const Sbecore::ubigint ref = 0, const std::string srefKVendor = "", const std::string titSrefKVendor = "", const std::string Title = "");
-	Sbecore::ubigint appendNewRecToRst(ListWdbeQFamList& rst, WdbeQFamList** rec = NULL, const Sbecore::ubigint jref = 0, const Sbecore::uint jnum = 0, const Sbecore::ubigint ref = 0, const std::string srefKVendor = "", const std::string titSrefKVendor = "", const std::string Title = "");
+	Sbecore::ubigint insertNewRec(WdbeQFamList** rec = NULL, const Sbecore::ubigint jref = 0, const Sbecore::uint jnum = 0, const Sbecore::ubigint ref = 0, const std::string srefWdbeKVendor = "", const std::string titSrefWdbeKVendor = "", const std::string Title = "");
+	Sbecore::ubigint appendNewRecToRst(ListWdbeQFamList& rst, WdbeQFamList** rec = NULL, const Sbecore::ubigint jref = 0, const Sbecore::uint jnum = 0, const Sbecore::ubigint ref = 0, const std::string srefWdbeKVendor = "", const std::string titSrefWdbeKVendor = "", const std::string Title = "");
 	virtual void insertRst(ListWdbeQFamList& rst);
 	virtual void updateRec(WdbeQFamList* rec);
 	virtual void updateRst(ListWdbeQFamList& rst);

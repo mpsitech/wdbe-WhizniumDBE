@@ -107,7 +107,6 @@ function refreshB(chgcol) {
 
 		var TcoSrfWidth = parseInt(retrieveSi(srcdoc, "StgIacWdbePphList", "TcoSrfWidth"));
 		var TcoUntWidth = parseInt(retrieveSi(srcdoc, "StgIacWdbePphList", "TcoUntWidth"));
-		var TcoMdlWidth = parseInt(retrieveSi(srcdoc, "StgIacWdbePphList", "TcoMdlWidth"));
 
 		var numFTos = parseInt(retrieveCi(srcdoc, "ContIacWdbePphList", "numFTos"));
 
@@ -125,11 +124,9 @@ function refreshB(chgcol) {
 			ix++;
 
 			if (i == 1) {
-				doc.cols.push("TcoSrf"); doc.widths.push(TcoSrfWidth); doc.fs.push("srf"); doc.tos.push(3); wtot += TcoSrfWidth;
+				doc.cols.push("TcoSrf"); doc.widths.push(TcoSrfWidth); doc.fs.push("srf"); doc.tos.push(1); wtot += TcoSrfWidth;
 			} else if (i == 2) {
 				doc.cols.push("TcoUnt"); doc.widths.push(TcoUntWidth); doc.fs.push("unt"); doc.tos.push(2); wtot += TcoUntWidth;
-			} else if (i == 3) {
-				doc.cols.push("TcoMdl"); doc.widths.push(TcoMdlWidth); doc.fs.push("mdl"); doc.tos.push(1); wtot += TcoMdlWidth;
 			} else {
 				ix--;
 			};
@@ -439,8 +436,8 @@ function handleLoad() {
 
 function handleButClipboardClick() {
 	copyToClipboard(document, srcdoc, "WdbePphList", "ListWdbeQPphList", retrieveTi(srcdoc, "TagWdbePphList", "TxtRecord1"), retrieveTi(srcdoc, "TagWdbePphList", "TxtRecord2"),
-				["Srf","Unt","Mdl"],
-				["srf","unt","mdl"]);
+				["Srf","Unt"],
+				["srf","unt"]);
 };
 
 // --- generalized event handlers for app controls

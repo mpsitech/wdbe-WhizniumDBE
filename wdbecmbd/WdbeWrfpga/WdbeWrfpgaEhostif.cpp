@@ -71,15 +71,15 @@ void WdbeWrfpgaEhostif::writeMdlVhd(
 			, const string& Untsref
 			, WdbeMModule* mdl
 		) {
+	vector<ubigint> refs;
+
 	ListWdbeMModule untmdls;
 	WdbeMModule* untmdl = NULL;
 
-	ListWdbeMImbuf imbs;
-	WdbeMImbuf* imb = NULL;
+	string sref, srefrootMgmt, srefrootCor;
 
-	set<ubigint> refsImbsRd, refsImbsWr;
-
-	string Imbsigsref;
+	vector<string> srefsImbRd, srefrootsImbRd;
+	vector<string> srefsImbWr, srefrootsImbWr;
 
 	ListWdbeMCommand cmds;
 	WdbeMCommand* cmd = NULL;
@@ -111,16 +111,20 @@ void WdbeWrfpgaEhostif::writeMdlVhd(
 
 	dbswdbe->tblwdbemmodule->loadRstByHktHku(mdl->hkIxVTbl, mdl->hkUref, false, untmdls);
 
-	dbswdbe->tblwdbemimbuf->loadRstBySQL("SELECT * FROM TblWdbeMImbuf WHERE corRefWdbeMModule = " + to_string(mdl->ref) + " ORDER BY Prio ASC, sref ASC", false, imbs);
+	dbswdbe->loadRefsBySQL("SELECT TblWdbeMImbuf.refWdbeMModule FROM TblWdbeMImbuf, TblWdbeMModule, TblWdbeRMModuleMModule WHERE TblWdbeMImbuf.refWdbeMModule = TblWdbeMModule.ref AND TblWdbeMModule.ref = TblWdbeRMModuleMModule.ctdRefWdbeMModule AND TblWdbeRMModuleMModule.corRefWdbeMModule = "
+				+ to_string(mdl->ref) + " ORDER BY TblWdbeMImbuf.Prio ASC, TblWdbeMModule.sref ASC", false, refs);
 
-	for (unsigned int i = 0; i < imbs.nodes.size(); i++) {
-		imb = imbs.nodes[i];
-
-		if (imb->ixVDir == VecWdbeVMImbufDir::IN) refsImbsWr.insert(imb->ref);
-		else if (imb->ixVDir == VecWdbeVMImbufDir::OUT) refsImbsRd.insert(imb->ref);
+	for (unsigned int i = 0; i < refs.size(); i++) {
+		if (!Wdbe::getImbsrefs(dbswdbe, refs[i], sref, srefrootMgmt, srefrootCor)) {
+			srefsImbRd.push_back(StrMod::cap(sref));
+			srefrootsImbRd.push_back(srefrootCor);
+		} else {
+			srefsImbWr.push_back(StrMod::cap(sref));
+			srefrootsImbWr.push_back(srefrootCor);
+		};
 	};
 
-	dbswdbe->tblwdbemsignal->loadRstByMdl(mdl->ref, false, sigs);
+	dbswdbe->tblwdbemsignal->loadRstByRetReu(VecWdbeVMSignalRefTbl::MDL, mdl->ref, false, sigs);
 
 	dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMProcess WHERE refWdbeMModule = " + to_string(mdl->ref) + " AND sref = 'op'", refPrcOp);
 
@@ -240,180 +244,98 @@ void WdbeWrfpgaEhostif::writeMdlVhd(
 
 	// --- impl.op.wiring.txbuf
 	outfile << "-- IP impl.op.wiring.txbuf --- IBEGIN" << endl;
-	for (unsigned int i = 0; i < imbs.nodes.size(); i++) {
-		imb = imbs.nodes[i];
 
-		if (refsImbsRd.find(imb->ref) != refsImbsRd.end()) {
-			Imbsigsref = getImbsigsref(dbswdbe, imb);
-
-			outfile << "\treq" << Imbsigsref << " <= reqTxbuf when opbuf(ixOpbufBuffer)=tixW" << Untsref << "Buffer" << StrMod::cap(imb->sref) << " else '0';" << endl;
-		};
-	};
+	for (unsigned int i = 0; i < srefsImbRd.size(); i++)
+				outfile << "\treq" << srefrootsImbRd[i] << " <= reqTxbuf when opbuf(ixOpbufBuffer)=tixW" << Untsref << "Buffer" << srefsImbRd[i] << " else '0';" << endl;
 	outfile << endl;
 
-	first = true;
 	outfile << "\tackTxbuf <=";
-	for (unsigned int i = 0; i < imbs.nodes.size(); i++) {
-		imb = imbs.nodes[i];
 
-		if (refsImbsRd.find(imb->ref) != refsImbsRd.end()) {
-			Imbsigsref = getImbsigsref(dbswdbe, imb);
+	for (unsigned int i = 0; i < srefsImbRd.size(); i++) {
+		if (i != 0) outfile << "\t\t\t\telse";
 			
-			if (first) first = false;
-			else outfile << "\t\t\t\telse";
-			
-			outfile << " ack" << Imbsigsref << " when opbuf(ixOpbufBuffer)=tixW" << Untsref << "Buffer" << StrMod::cap(imb->sref) << endl;
-		};
+		outfile << " ack" << srefrootsImbRd[i] << " when opbuf(ixOpbufBuffer)=tixW" << Untsref << "Buffer" << srefsImbRd[i] << endl;
 	};
 
-	if (!first) outfile << "\t\t\t\telse";
+	if (srefsImbRd.size() > 0) outfile << "\t\t\t\telse";
 	outfile << " '0';" << endl;
 	outfile << endl;
 
-	for (unsigned int i = 0; i < imbs.nodes.size(); i++) {
-		imb = imbs.nodes[i];
-
-		if (refsImbsRd.find(imb->ref) != refsImbsRd.end()) {
-			Imbsigsref = getImbsigsref(dbswdbe, imb);
-
-			outfile << "\tdne" << Imbsigsref << " <= dneTxbuf when opbuf(ixOpbufBuffer)=tixW" << Untsref << "Buffer" << StrMod::cap(imb->sref) << " else '0';" << endl;
-		};
-	};
+	for (unsigned int i = 0; i < srefsImbRd.size(); i++)
+				outfile << "\tdne" << srefrootsImbRd[i] << " <= dneTxbuf when opbuf(ixOpbufBuffer)=tixW" << Untsref << "Buffer" << srefsImbRd[i] << " else '0';" << endl;
 	outfile << endl;
 
-	first = true;
 	outfile << "\tavllenTxbuf <=";
-	for (unsigned int i = 0; i < imbs.nodes.size(); i++) {
-		imb = imbs.nodes[i];
 
-		if (refsImbsRd.find(imb->ref) != refsImbsRd.end()) {
-			Imbsigsref = getImbsigsref(dbswdbe, imb);
-			
-			if (first) first = false;
-			else outfile << "\t\t\t\telse";
-			
-			outfile << " to_integer(unsigned(avllen" << Imbsigsref << ")) when opbuf(ixOpbufBuffer)=tixW" << Untsref << "Buffer" << StrMod::cap(imb->sref) << endl;
-		};
+	for (unsigned int i = 0; i < srefsImbRd.size(); i++) {
+		if (i != 0) outfile << "\t\t\t\telse";
+		
+		outfile << " to_integer(unsigned(avllen" << srefrootsImbRd[i] << ")) when opbuf(ixOpbufBuffer)=tixW" << Untsref << "Buffer" << srefsImbRd[i] << endl;
 	};
 
-	if (!first) outfile << "\t\t\t\telse";
+	if (srefsImbRd.size() > 0) outfile << "\t\t\t\telse";
 	outfile << " 0;" << endl;
 	outfile << endl;
 
-	first = true;
 	outfile << "\tdTxbuf <=";
-	for (unsigned int i = 0; i < imbs.nodes.size(); i++) {
-		imb = imbs.nodes[i];
 
-		if (refsImbsRd.find(imb->ref) != refsImbsRd.end()) {
-			Imbsigsref = getImbsigsref(dbswdbe, imb);
+	for (unsigned int i = 0; i < srefsImbRd.size(); i++) {
+		if (i != 0) outfile << "\t\t\t\telse";
 			
-			if (first) first = false;
-			else outfile << "\t\t\t\telse";
-			
-			if (!w32Not8) outfile << " d" << Imbsigsref << " when opbuf(ixOpbufBuffer)=tixW" << Untsref << "Buffer" << StrMod::cap(imb->sref) << endl;
-			else outfile << " d" << Imbsigsref << "(7 downto 0) & d" << Imbsigsref << "(15 downto 8) & d" << Imbsigsref << "(23 downto 16) & d" << Imbsigsref << "(31 downto 24) when opbuf(ixOpbufBuffer)=tixW" << Untsref << "Buffer" << StrMod::cap(imb->sref) << endl;
-		};
+		if (!w32Not8) outfile << " d" << srefrootsImbRd[i] << " when opbuf(ixOpbufBuffer)=tixW" << Untsref << "Buffer" << srefsImbRd[i] << endl;
+		else outfile << " d" << srefrootsImbRd[i] << "(7 downto 0) & d" << srefrootsImbRd[i] << "(15 downto 8) & d" << srefrootsImbRd[i] << "(23 downto 16) & d" << srefrootsImbRd[i] << "(31 downto 24) when opbuf(ixOpbufBuffer)=tixW" << Untsref << "Buffer" << srefsImbRd[i] << endl;
 	};
 
-	if (!first) outfile << "\t\t\t\telse";
+	if (srefsImbRd.size() > 0)  outfile << "\t\t\t\telse";
 	outfile << " (others => '0');" << endl;
 	outfile << endl;
 
-	for (unsigned int i = 0; i < imbs.nodes.size(); i++) {
-		imb = imbs.nodes[i];
-
-		if (refsImbsRd.find(imb->ref) != refsImbsRd.end()) {
-			Imbsigsref = getImbsigsref(dbswdbe, imb);
-
-			outfile << "\tstrbD" << Imbsigsref << " <= strbDTxbuf when opbuf(ixOpbufBuffer)=tixW" << Untsref << "Buffer" << StrMod::cap(imb->sref) << " else '0';" << endl;
-		};
-	};
+	for (unsigned int i = 0; i < srefsImbRd.size(); i++)
+				outfile << "\tstrbD" << srefrootsImbRd[i] << " <= strbDTxbuf when opbuf(ixOpbufBuffer)=tixW" << Untsref << "Buffer" << srefsImbRd[i] << " else '0';" << endl;
 	outfile << "-- IP impl.op.wiring.txbuf --- IEND" << endl;
 
 	// --- impl.op.wiring.rxbuf
 	outfile << "-- IP impl.op.wiring.rxbuf --- IBEGIN" << endl;
-	for (unsigned int i = 0; i < imbs.nodes.size(); i++) {
-		imb = imbs.nodes[i];
 
-		if (refsImbsWr.find(imb->ref) != refsImbsWr.end()) {
-			Imbsigsref = getImbsigsref(dbswdbe, imb);
-
-			outfile << "\treq" << Imbsigsref << " <= reqRxbuf when opbuf(ixOpbufBuffer)=tixW" << Untsref << "Buffer" << StrMod::cap(imb->sref) << " else '0';" << endl;
-		};
-	};
+	for (unsigned int i = 0; i < srefsImbWr.size(); i++)
+				outfile << "\treq" << srefrootsImbWr[i] << " <= reqRxbuf when opbuf(ixOpbufBuffer)=tixW" << Untsref << "Buffer" << srefsImbWr[i] << " else '0';" << endl;
 	outfile << endl;
 
-	first = true;
 	outfile << "\tackRxbuf <=";
-	for (unsigned int i = 0; i < imbs.nodes.size(); i++) {
-		imb = imbs.nodes[i];
-
-		if (refsImbsWr.find(imb->ref) != refsImbsWr.end()) {
-			Imbsigsref = getImbsigsref(dbswdbe, imb);
-			
-			if (first) first = false;
-			else outfile << "\t\t\t\telse";
-			
-			outfile << " ack" << Imbsigsref << " when opbuf(ixOpbufBuffer)=tixW" << Untsref << "Buffer" << StrMod::cap(imb->sref) << endl;
-		};
+	for (unsigned int i = 0; i < srefsImbWr.size(); i++) {
+		if (i != 0) outfile << "\t\t\t\telse";
+		
+		outfile << " ack" << srefrootsImbWr[i] << " when opbuf(ixOpbufBuffer)=tixW" << Untsref << "Buffer" << srefsImbWr[i] << endl;
 	};
 
-	if (!first) outfile << "\t\t\t\telse";
+	if (srefsImbWr.size() > 0) outfile << "\t\t\t\telse";
 	outfile << " '0';" << endl;
 	outfile << endl;
 
-	for (unsigned int i = 0; i < imbs.nodes.size(); i++) {
-		imb = imbs.nodes[i];
-
-		if (refsImbsWr.find(imb->ref) != refsImbsWr.end()) {
-			Imbsigsref = getImbsigsref(dbswdbe, imb);
-
-			outfile << "\tdne" << Imbsigsref << " <= dneRxbuf when opbuf(ixOpbufBuffer)=tixW" << Untsref << "Buffer" << StrMod::cap(imb->sref) << " else '0';" << endl;
-		};
-	};
+	for (unsigned int i = 0; i < srefsImbWr.size(); i++)
+				outfile << "\tdne" << srefrootsImbWr[i] << " <= dneRxbuf when opbuf(ixOpbufBuffer)=tixW" << Untsref << "Buffer" << srefsImbWr[i] << " else '0';" << endl;
 	outfile << endl;
 
-	first = true;
 	outfile << "\tavllenRxbuf <=";
-	for (unsigned int i = 0; i < imbs.nodes.size(); i++) {
-		imb = imbs.nodes[i];
+	for (unsigned int i = 0; i < srefsImbWr.size(); i++) {
+		if (i != 0) outfile << "\t\t\t\telse";
 
-		if (refsImbsWr.find(imb->ref) != refsImbsWr.end()) {
-			Imbsigsref = getImbsigsref(dbswdbe, imb);
-			
-			if (first) first = false;
-			else outfile << "\t\t\t\telse";
-			
-			outfile << " to_integer(unsigned(avllen" << Imbsigsref << ")) when opbuf(ixOpbufBuffer)=tixW" << Untsref << "Buffer" << StrMod::cap(imb->sref) << endl;
-		};
+		outfile << " to_integer(unsigned(avllen" << srefrootsImbWr[i] << ")) when opbuf(ixOpbufBuffer)=tixW" << Untsref << "Buffer" << srefsImbWr[i] << endl;
 	};
 
-	if (!first) outfile << "\t\t\t\telse";
+	if (srefsImbWr.size() > 0) outfile << "\t\t\t\telse";
 	outfile << " 0;" << endl;
 	outfile << endl;
 
-	for (unsigned int i = 0; i < imbs.nodes.size(); i++) {
-		imb = imbs.nodes[i];
-
-		if (refsImbsWr.find(imb->ref) != refsImbsWr.end()) {
-			Imbsigsref = getImbsigsref(dbswdbe, imb);
-
-			if (!w32Not8) outfile << "\td" << Imbsigsref << " <= dRxbuf;" << endl;
-			else outfile << "\td" << Imbsigsref << " <= dRxbuf(7 downto 0) & dRxbuf(15 downto 8) & dRxbuf(23 downto 16) & dRxbuf(31 downto 24);" << endl;
-		};
+	for (unsigned int i = 0; i < srefsImbWr.size(); i++) {
+		if (!w32Not8) outfile << "\td" << srefrootsImbWr[i] << " <= dRxbuf;" << endl;
+		else outfile << "\td" << srefrootsImbWr[i] << " <= dRxbuf(7 downto 0) & dRxbuf(15 downto 8) & dRxbuf(23 downto 16) & dRxbuf(31 downto 24);" << endl;
 	};
 	outfile << endl;
 
-	for (unsigned int i = 0; i < imbs.nodes.size(); i++) {
-		imb = imbs.nodes[i];
+	for (unsigned int i = 0; i < srefsImbWr.size(); i++)
+				outfile << "\tstrbD" << srefrootsImbWr[i] << " <= strbDRxbuf when opbuf(ixOpbufBuffer)=tixW" << Untsref << "Buffer" << srefsImbWr[i] << " else '0';" << endl;
 
-		if (refsImbsWr.find(imb->ref) != refsImbsWr.end()) {
-			Imbsigsref = getImbsigsref(dbswdbe, imb);
-
-			outfile << "\tstrbD" << Imbsigsref << " <= strbDRxbuf when opbuf(ixOpbufBuffer)=tixW" << Untsref << "Buffer" << StrMod::cap(imb->sref) << " else '0';" << endl;
-		};
-	};
 	outfile << "-- IP impl.op.wiring.rxbuf --- IEND" << endl;
 
 	// --- impl.op.reset

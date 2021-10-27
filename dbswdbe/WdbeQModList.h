@@ -25,7 +25,7 @@
 class WdbeQModList {
 
 public:
-	WdbeQModList(const Sbecore::ubigint qref = 0, const Sbecore::ubigint jref = 0, const Sbecore::uint jnum = 0, const Sbecore::ubigint ref = 0, const std::string sref = "", const Sbecore::uint ixVBasetype = 0, const std::string srefIxVBasetype = "", const std::string titIxVBasetype = "", const Sbecore::uint hkIxVTbl = 0, const std::string srefHkIxVTbl = "", const std::string titHkIxVTbl = "", const Sbecore::ubigint hkUref = 0, const std::string stubHkUref = "", const Sbecore::ubigint supRefWdbeMModule = 0, const std::string stubSupRefWdbeMModule = "", const Sbecore::ubigint tplRefWdbeMModule = 0, const std::string stubTplRefWdbeMModule = "", const std::string Srefrule = "");
+	WdbeQModList(const Sbecore::ubigint qref = 0, const Sbecore::ubigint jref = 0, const Sbecore::uint jnum = 0, const Sbecore::ubigint ref = 0, const std::string sref = "", const std::string srefWdbeKVendor = "", const std::string titSrefWdbeKVendor = "", const Sbecore::uint ixVBasetype = 0, const std::string srefIxVBasetype = "", const std::string titIxVBasetype = "", const Sbecore::uint hkIxVTbl = 0, const std::string srefHkIxVTbl = "", const std::string titHkIxVTbl = "", const Sbecore::ubigint hkUref = 0, const std::string stubHkUref = "", const Sbecore::ubigint supRefWdbeMModule = 0, const std::string stubSupRefWdbeMModule = "", const Sbecore::ubigint tplRefWdbeMModule = 0, const std::string stubTplRefWdbeMModule = "", const std::string Srefrule = "");
 
 public:
 	Sbecore::ubigint qref;
@@ -33,6 +33,8 @@ public:
 	Sbecore::uint jnum;
 	Sbecore::ubigint ref;
 	std::string sref;
+	std::string srefWdbeKVendor;
+	std::string titSrefWdbeKVendor;
 	Sbecore::uint ixVBasetype;
 	std::string srefIxVBasetype;
 	std::string titIxVBasetype;
@@ -90,8 +92,8 @@ public:
 	virtual Sbecore::ubigint loadRstBySQL(const std::string& sqlstr, const bool append, ListWdbeQModList& rst);
 
 	virtual Sbecore::ubigint insertRec(WdbeQModList* rec);
-	Sbecore::ubigint insertNewRec(WdbeQModList** rec = NULL, const Sbecore::ubigint jref = 0, const Sbecore::uint jnum = 0, const Sbecore::ubigint ref = 0, const std::string sref = "", const Sbecore::uint ixVBasetype = 0, const std::string srefIxVBasetype = "", const std::string titIxVBasetype = "", const Sbecore::uint hkIxVTbl = 0, const std::string srefHkIxVTbl = "", const std::string titHkIxVTbl = "", const Sbecore::ubigint hkUref = 0, const std::string stubHkUref = "", const Sbecore::ubigint supRefWdbeMModule = 0, const std::string stubSupRefWdbeMModule = "", const Sbecore::ubigint tplRefWdbeMModule = 0, const std::string stubTplRefWdbeMModule = "", const std::string Srefrule = "");
-	Sbecore::ubigint appendNewRecToRst(ListWdbeQModList& rst, WdbeQModList** rec = NULL, const Sbecore::ubigint jref = 0, const Sbecore::uint jnum = 0, const Sbecore::ubigint ref = 0, const std::string sref = "", const Sbecore::uint ixVBasetype = 0, const std::string srefIxVBasetype = "", const std::string titIxVBasetype = "", const Sbecore::uint hkIxVTbl = 0, const std::string srefHkIxVTbl = "", const std::string titHkIxVTbl = "", const Sbecore::ubigint hkUref = 0, const std::string stubHkUref = "", const Sbecore::ubigint supRefWdbeMModule = 0, const std::string stubSupRefWdbeMModule = "", const Sbecore::ubigint tplRefWdbeMModule = 0, const std::string stubTplRefWdbeMModule = "", const std::string Srefrule = "");
+	Sbecore::ubigint insertNewRec(WdbeQModList** rec = NULL, const Sbecore::ubigint jref = 0, const Sbecore::uint jnum = 0, const Sbecore::ubigint ref = 0, const std::string sref = "", const std::string srefWdbeKVendor = "", const std::string titSrefWdbeKVendor = "", const Sbecore::uint ixVBasetype = 0, const std::string srefIxVBasetype = "", const std::string titIxVBasetype = "", const Sbecore::uint hkIxVTbl = 0, const std::string srefHkIxVTbl = "", const std::string titHkIxVTbl = "", const Sbecore::ubigint hkUref = 0, const std::string stubHkUref = "", const Sbecore::ubigint supRefWdbeMModule = 0, const std::string stubSupRefWdbeMModule = "", const Sbecore::ubigint tplRefWdbeMModule = 0, const std::string stubTplRefWdbeMModule = "", const std::string Srefrule = "");
+	Sbecore::ubigint appendNewRecToRst(ListWdbeQModList& rst, WdbeQModList** rec = NULL, const Sbecore::ubigint jref = 0, const Sbecore::uint jnum = 0, const Sbecore::ubigint ref = 0, const std::string sref = "", const std::string srefWdbeKVendor = "", const std::string titSrefWdbeKVendor = "", const Sbecore::uint ixVBasetype = 0, const std::string srefIxVBasetype = "", const std::string titIxVBasetype = "", const Sbecore::uint hkIxVTbl = 0, const std::string srefHkIxVTbl = "", const std::string titHkIxVTbl = "", const Sbecore::ubigint hkUref = 0, const std::string stubHkUref = "", const Sbecore::ubigint supRefWdbeMModule = 0, const std::string stubSupRefWdbeMModule = "", const Sbecore::ubigint tplRefWdbeMModule = 0, const std::string stubTplRefWdbeMModule = "", const std::string Srefrule = "");
 	virtual void insertRst(ListWdbeQModList& rst);
 	virtual void updateRec(WdbeQModList* rec);
 	virtual void updateRst(ListWdbeQModList& rst);

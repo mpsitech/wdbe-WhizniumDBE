@@ -38,7 +38,8 @@ namespace PnlWdbeVarDetail {
 		static const Sbecore::uint BUTCLUVIEWCLICK = 2;
 		static const Sbecore::uint BUTCLUCLUSTERCLICK = 3;
 		static const Sbecore::uint BUTCLUUNCLUSTERCLICK = 4;
-		static const Sbecore::uint BUTHTYEDITCLICK = 5;
+		static const Sbecore::uint BUTREUVIEWCLICK = 5;
+		static const Sbecore::uint BUTHTYEDITCLICK = 6;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);
@@ -51,22 +52,24 @@ namespace PnlWdbeVarDetail {
 
 	public:
 		static const Sbecore::uint NUMFLSTCLU = 1;
-		static const Sbecore::uint CHKCON = 2;
-		static const Sbecore::uint CHKFAL = 3;
-		static const Sbecore::uint NUMFPUPHTY = 4;
-		static const Sbecore::uint TXFHTY = 5;
-		static const Sbecore::uint TXFWID = 6;
-		static const Sbecore::uint TXFMMX = 7;
-		static const Sbecore::uint TXFONV = 8;
-		static const Sbecore::uint TXFOFV = 9;
-		static const Sbecore::uint CHKDFO = 10;
-		static const Sbecore::uint TXFCMT = 11;
+		static const Sbecore::uint NUMFPUPRET = 2;
+		static const Sbecore::uint CHKCON = 3;
+		static const Sbecore::uint CHKFAL = 4;
+		static const Sbecore::uint NUMFPUPHTY = 5;
+		static const Sbecore::uint TXFHTY = 6;
+		static const Sbecore::uint TXFWID = 7;
+		static const Sbecore::uint TXFMMX = 8;
+		static const Sbecore::uint TXFONV = 9;
+		static const Sbecore::uint TXFOFV = 10;
+		static const Sbecore::uint CHKDFO = 11;
+		static const Sbecore::uint TXFCMT = 12;
 
 	public:
-		ContIac(const Sbecore::uint numFLstClu = 1, const bool ChkCon = false, const bool ChkFal = false, const Sbecore::uint numFPupHty = 1, const std::string& TxfHty = "", const std::string& TxfWid = "", const std::string& TxfMmx = "", const std::string& TxfOnv = "", const std::string& TxfOfv = "", const bool ChkDfo = false, const std::string& TxfCmt = "");
+		ContIac(const Sbecore::uint numFLstClu = 1, const Sbecore::uint numFPupRet = 1, const bool ChkCon = false, const bool ChkFal = false, const Sbecore::uint numFPupHty = 1, const std::string& TxfHty = "", const std::string& TxfWid = "", const std::string& TxfMmx = "", const std::string& TxfOnv = "", const std::string& TxfOfv = "", const bool ChkDfo = false, const std::string& TxfCmt = "");
 
 	public:
 		Sbecore::uint numFLstClu;
+		Sbecore::uint numFPupRet;
 		bool ChkCon;
 		bool ChkFal;
 		Sbecore::uint numFPupHty;
@@ -93,15 +96,15 @@ namespace PnlWdbeVarDetail {
 	public:
 		static const Sbecore::uint TXTSRF = 1;
 		static const Sbecore::uint TXTCLU = 2;
-		static const Sbecore::uint TXTPRC = 3;
+		static const Sbecore::uint TXTREU = 3;
 
 	public:
-		ContInf(const std::string& TxtSrf = "", const std::string& TxtClu = "", const std::string& TxtPrc = "");
+		ContInf(const std::string& TxtSrf = "", const std::string& TxtClu = "", const std::string& TxtReu = "");
 
 	public:
 		std::string TxtSrf;
 		std::string TxtClu;
-		std::string TxtPrc;
+		std::string TxtReu;
 
 	public:
 		bool readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
@@ -149,20 +152,22 @@ namespace PnlWdbeVarDetail {
 		static const Sbecore::uint BUTCLUVIEWACTIVE = 6;
 		static const Sbecore::uint BUTCLUCLUSTERAVAIL = 7;
 		static const Sbecore::uint BUTCLUUNCLUSTERAVAIL = 8;
-		static const Sbecore::uint TXTPRCACTIVE = 9;
-		static const Sbecore::uint CHKCONACTIVE = 10;
-		static const Sbecore::uint CHKFALACTIVE = 11;
-		static const Sbecore::uint PUPHTYACTIVE = 12;
-		static const Sbecore::uint BUTHTYEDITAVAIL = 13;
-		static const Sbecore::uint TXFWIDACTIVE = 14;
-		static const Sbecore::uint TXFMMXACTIVE = 15;
-		static const Sbecore::uint TXFONVACTIVE = 16;
-		static const Sbecore::uint TXFOFVACTIVE = 17;
-		static const Sbecore::uint CHKDFOACTIVE = 18;
-		static const Sbecore::uint TXFCMTACTIVE = 19;
+		static const Sbecore::uint TXTREUACTIVE = 9;
+		static const Sbecore::uint BUTREUVIEWAVAIL = 10;
+		static const Sbecore::uint BUTREUVIEWACTIVE = 11;
+		static const Sbecore::uint CHKCONACTIVE = 12;
+		static const Sbecore::uint CHKFALACTIVE = 13;
+		static const Sbecore::uint PUPHTYACTIVE = 14;
+		static const Sbecore::uint BUTHTYEDITAVAIL = 15;
+		static const Sbecore::uint TXFWIDACTIVE = 16;
+		static const Sbecore::uint TXFMMXACTIVE = 17;
+		static const Sbecore::uint TXFONVACTIVE = 18;
+		static const Sbecore::uint TXFOFVACTIVE = 19;
+		static const Sbecore::uint CHKDFOACTIVE = 20;
+		static const Sbecore::uint TXFCMTACTIVE = 21;
 
 	public:
-		StatShr(const bool TxfHtyValid = false, const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxtSrfActive = true, const bool LstCluActive = true, const bool ButCluViewActive = true, const bool ButCluClusterAvail = true, const bool ButCluUnclusterAvail = true, const bool TxtPrcActive = true, const bool ChkConActive = true, const bool ChkFalActive = true, const bool PupHtyActive = true, const bool ButHtyEditAvail = true, const bool TxfWidActive = true, const bool TxfMmxActive = true, const bool TxfOnvActive = true, const bool TxfOfvActive = true, const bool ChkDfoActive = true, const bool TxfCmtActive = true);
+		StatShr(const bool TxfHtyValid = false, const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxtSrfActive = true, const bool LstCluActive = true, const bool ButCluViewActive = true, const bool ButCluClusterAvail = true, const bool ButCluUnclusterAvail = true, const bool TxtReuActive = true, const bool ButReuViewAvail = true, const bool ButReuViewActive = true, const bool ChkConActive = true, const bool ChkFalActive = true, const bool PupHtyActive = true, const bool ButHtyEditAvail = true, const bool TxfWidActive = true, const bool TxfMmxActive = true, const bool TxfOnvActive = true, const bool TxfOfvActive = true, const bool ChkDfoActive = true, const bool TxfCmtActive = true);
 
 	public:
 		bool TxfHtyValid;
@@ -173,7 +178,9 @@ namespace PnlWdbeVarDetail {
 		bool ButCluViewActive;
 		bool ButCluClusterAvail;
 		bool ButCluUnclusterAvail;
-		bool TxtPrcActive;
+		bool TxtReuActive;
+		bool ButReuViewAvail;
+		bool ButReuViewActive;
 		bool ChkConActive;
 		bool ChkFalActive;
 		bool PupHtyActive;
@@ -200,7 +207,7 @@ namespace PnlWdbeVarDetail {
 		static const Sbecore::uint CPT = 1;
 		static const Sbecore::uint CPTSRF = 2;
 		static const Sbecore::uint CPTCLU = 3;
-		static const Sbecore::uint CPTPRC = 4;
+		static const Sbecore::uint CPTREU = 4;
 		static const Sbecore::uint CPTCON = 5;
 		static const Sbecore::uint CPTFAL = 6;
 		static const Sbecore::uint CPTHTY = 7;
@@ -212,13 +219,13 @@ namespace PnlWdbeVarDetail {
 		static const Sbecore::uint CPTCMT = 13;
 
 	public:
-		Tag(const std::string& Cpt = "", const std::string& CptSrf = "", const std::string& CptClu = "", const std::string& CptPrc = "", const std::string& CptCon = "", const std::string& CptFal = "", const std::string& CptHty = "", const std::string& CptWid = "", const std::string& CptMmx = "", const std::string& CptOnv = "", const std::string& CptOfv = "", const std::string& CptDfo = "", const std::string& CptCmt = "");
+		Tag(const std::string& Cpt = "", const std::string& CptSrf = "", const std::string& CptClu = "", const std::string& CptReu = "", const std::string& CptCon = "", const std::string& CptFal = "", const std::string& CptHty = "", const std::string& CptWid = "", const std::string& CptMmx = "", const std::string& CptOnv = "", const std::string& CptOfv = "", const std::string& CptDfo = "", const std::string& CptCmt = "");
 
 	public:
 		std::string Cpt;
 		std::string CptSrf;
 		std::string CptClu;
-		std::string CptPrc;
+		std::string CptReu;
 		std::string CptCon;
 		std::string CptFal;
 		std::string CptHty;
@@ -288,9 +295,10 @@ namespace PnlWdbeVarDetail {
 		static const Sbecore::uint CONTINF = 3;
 		static const Sbecore::uint FEEDFLSTCLU = 4;
 		static const Sbecore::uint FEEDFPUPHTY = 5;
-		static const Sbecore::uint STATAPP = 6;
-		static const Sbecore::uint STATSHR = 7;
-		static const Sbecore::uint TAG = 8;
+		static const Sbecore::uint FEEDFPUPRET = 6;
+		static const Sbecore::uint STATAPP = 7;
+		static const Sbecore::uint STATSHR = 8;
+		static const Sbecore::uint TAG = 9;
 
 	public:
 		DpchEngData();
@@ -300,6 +308,7 @@ namespace PnlWdbeVarDetail {
 		ContInf continf;
 		Sbecore::Feed feedFLstClu;
 		Sbecore::Feed feedFPupHty;
+		Sbecore::Feed feedFPupRet;
 		StatApp statapp;
 		StatShr statshr;
 		Tag tag;

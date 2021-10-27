@@ -308,14 +308,12 @@ set<uint> PnlWdbePphList::StatShr::diff(
 PnlWdbePphList::StgIac::StgIac(
 			const uint TcoSrfWidth
 			, const uint TcoUntWidth
-			, const uint TcoMdlWidth
 		) :
 			Block()
 		{
 	this->TcoSrfWidth = TcoSrfWidth;
 	this->TcoUntWidth = TcoUntWidth;
-	this->TcoMdlWidth = TcoMdlWidth;
-	mask = {TCOSRFWIDTH, TCOUNTWIDTH, TCOMDLWIDTH};
+	mask = {TCOSRFWIDTH, TCOUNTWIDTH};
 };
 
 bool PnlWdbePphList::StgIac::readJSON(
@@ -334,7 +332,6 @@ bool PnlWdbePphList::StgIac::readJSON(
 	if (basefound) {
 		if (me.isMember("TcoSrfWidth")) {TcoSrfWidth = me["TcoSrfWidth"].asUInt(); add(TCOSRFWIDTH);};
 		if (me.isMember("TcoUntWidth")) {TcoUntWidth = me["TcoUntWidth"].asUInt(); add(TCOUNTWIDTH);};
-		if (me.isMember("TcoMdlWidth")) {TcoMdlWidth = me["TcoMdlWidth"].asUInt(); add(TCOMDLWIDTH);};
 	};
 
 	return basefound;
@@ -359,7 +356,6 @@ bool PnlWdbePphList::StgIac::readXML(
 	if (basefound) {
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoSrfWidth", TcoSrfWidth)) add(TCOSRFWIDTH);
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoUntWidth", TcoUntWidth)) add(TCOUNTWIDTH);
-		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoMdlWidth", TcoMdlWidth)) add(TCOMDLWIDTH);
 	};
 
 	return basefound;
@@ -375,7 +371,6 @@ void PnlWdbePphList::StgIac::writeJSON(
 
 	me["TcoSrfWidth"] = TcoSrfWidth;
 	me["TcoUntWidth"] = TcoUntWidth;
-	me["TcoMdlWidth"] = TcoMdlWidth;
 };
 
 void PnlWdbePphList::StgIac::writeXML(
@@ -392,7 +387,6 @@ void PnlWdbePphList::StgIac::writeXML(
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
 		writeUintAttr(wr, itemtag, "sref", "TcoSrfWidth", TcoSrfWidth);
 		writeUintAttr(wr, itemtag, "sref", "TcoUntWidth", TcoUntWidth);
-		writeUintAttr(wr, itemtag, "sref", "TcoMdlWidth", TcoMdlWidth);
 	xmlTextWriterEndElement(wr);
 };
 
@@ -403,7 +397,6 @@ set<uint> PnlWdbePphList::StgIac::comm(
 
 	if (TcoSrfWidth == comp->TcoSrfWidth) insert(items, TCOSRFWIDTH);
 	if (TcoUntWidth == comp->TcoUntWidth) insert(items, TCOUNTWIDTH);
-	if (TcoMdlWidth == comp->TcoMdlWidth) insert(items, TCOMDLWIDTH);
 
 	return(items);
 };
@@ -416,7 +409,7 @@ set<uint> PnlWdbePphList::StgIac::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {TCOSRFWIDTH, TCOUNTWIDTH, TCOMDLWIDTH};
+	diffitems = {TCOSRFWIDTH, TCOUNTWIDTH};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -439,7 +432,6 @@ void PnlWdbePphList::Tag::writeJSON(
 		me["Cpt"] = "Peripherals";
 		me["TcoSrf"] = "Identifier";
 		me["TcoUnt"] = "Unit";
-		me["TcoMdl"] = "Controlling module";
 	};
 	me["TxtFor"] = VecWdbeVTag::getTitle(VecWdbeVTag::FOR, ixWdbeVLocale);
 	me["TxtRecord1"] = StrMod::cap(VecWdbeVTag::getTitle(VecWdbeVTag::REC, ixWdbeVLocale));
@@ -466,7 +458,6 @@ void PnlWdbePphList::Tag::writeXML(
 			writeStringAttr(wr, itemtag, "sref", "Cpt", "Peripherals");
 			writeStringAttr(wr, itemtag, "sref", "TcoSrf", "Identifier");
 			writeStringAttr(wr, itemtag, "sref", "TcoUnt", "Unit");
-			writeStringAttr(wr, itemtag, "sref", "TcoMdl", "Controlling module");
 		};
 		writeStringAttr(wr, itemtag, "sref", "TxtFor", VecWdbeVTag::getTitle(VecWdbeVTag::FOR, ixWdbeVLocale));
 		writeStringAttr(wr, itemtag, "sref", "TxtRecord1", StrMod::cap(VecWdbeVTag::getTitle(VecWdbeVTag::REC, ixWdbeVLocale)));

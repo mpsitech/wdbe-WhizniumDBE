@@ -20,13 +20,14 @@ uint QryWdbeSigList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "con") return CON;
-	if (s == "vec") return VEC;
-	if (s == "mgu") return MGU;
-	if (s == "mgt") return MGT;
-	if (s == "typ") return TYP;
-	if (s == "mdl") return MDL;
 	if (s == "srf") return SRF;
+	if (s == "typ") return TYP;
+	if (s == "ret") return RET;
+	if (s == "reu") return REU;
+	if (s == "mgt") return MGT;
+	if (s == "mgu") return MGU;
+	if (s == "vec") return VEC;
+	if (s == "con") return CON;
 
 	return(0);
 };
@@ -34,13 +35,14 @@ uint QryWdbeSigList::VecVOrd::getIx(
 string QryWdbeSigList::VecVOrd::getSref(
 			const uint ix
 		) {
-	if (ix == CON) return("con");
-	if (ix == VEC) return("vec");
-	if (ix == MGU) return("mgu");
-	if (ix == MGT) return("mgt");
-	if (ix == TYP) return("typ");
-	if (ix == MDL) return("mdl");
 	if (ix == SRF) return("srf");
+	if (ix == TYP) return("typ");
+	if (ix == RET) return("ret");
+	if (ix == REU) return("reu");
+	if (ix == MGT) return("mgt");
+	if (ix == MGU) return("mgu");
+	if (ix == VEC) return("vec");
+	if (ix == CON) return("con");
 
 	return("");
 };
@@ -50,7 +52,7 @@ void QryWdbeSigList::VecVOrd::fillFeed(
 		) {
 	feed.clear();
 
-	for (unsigned int i = 1; i <= 7; i++) feed.appendIxSrefTitles(i, getSref(i), getSref(i));
+	for (unsigned int i = 1; i <= 8; i++) feed.appendIxSrefTitles(i, getSref(i), getSref(i));
 };
 
 /******************************************************************************

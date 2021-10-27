@@ -125,7 +125,8 @@ void WdbeWrdevUnt::writeUntH(
 
 	string supsref, subsref;
 
-	string s;
+	bool mgmtToNotFrom;
+	string sref, srefrootMgmt, srefrootCor;
 
 	// --- include.ctrs
 	outfile << "// IP include.ctrs --- IBEGIN" << endl;
@@ -216,21 +217,21 @@ void WdbeWrdevUnt::writeUntH(
 	for (unsigned int i = 0; i < imbs.nodes.size(); i++) {
 		imb = imbs.nodes[i];
 
-		if ((imb->corRefWdbeMModule == refHostif) && (i != ixImbCmdinv) && (i != ixImbCmdret)) {
-			s = Wdbe::getImbshort(imb);
+		if ((i != ixImbCmdinv) && (i != ixImbCmdret)) {
+			mgmtToNotFrom = Wdbe::getImbsrefs(dbswdbe, imb->refWdbeMModule, sref, srefrootMgmt, srefrootCor);
 
 			outfile << "\t";
 			if (!Easy) outfile << "static ";
-			outfile << "Dbecore::Bufxf* getNewBufxf" << s << "(const size_t reqlen";
+			outfile << "Dbecore::Bufxf* getNewBufxf" << srefrootCor << "(const size_t reqlen";
 			if (Easy) outfile << ", unsigned char* buf";
 			outfile << ");" << endl;
 
-			if (imb->ixVDir == VecWdbeVMImbufDir::IN) {
-				outfile << "\tvoid write" << s << "(const unsigned char* data, const size_t datalen";
+			if (mgmtToNotFrom) {
+				outfile << "\tvoid write" << srefrootCor << "(const unsigned char* data, const size_t datalen";
 				if (Easy) outfile << ", const bool copy";
 				outfile << ");" << endl;
 			} else {
-				outfile << "\tvoid read" << s << "(const size_t reqlen, unsigned char*& data, size_t& datalen);" << endl;
+				outfile << "\tvoid read" << srefrootCor << "(const size_t reqlen, unsigned char*& data, size_t& datalen);" << endl;
 			};
 			outfile << endl;
 		};
@@ -292,6 +293,9 @@ void WdbeWrdevUnt::writeUntCpp(
 	ListWdbeAMErrorPar epas;
 
 	string supsref, subsref;
+
+	bool mgmtToNotFrom;
+	string sref, srefrootMgmt, srefrootCor;
 
 	string s, s2;
 
@@ -451,13 +455,13 @@ void WdbeWrdevUnt::writeUntCpp(
 		for (unsigned int i = 0; i < imbs.nodes.size(); i++) {
 			imb = imbs.nodes[i];
 
-			if ((imb->corRefWdbeMModule == refHostif) && (i != ixImbCmdinv) && (i != ixImbCmdret)) {
-				s = Wdbe::getImbshort(imb);
+			if ((i != ixImbCmdinv) && (i != ixImbCmdret)) {
+				Wdbe::getImbsrefs(dbswdbe, imb->refWdbeMModule, sref, srefrootMgmt, srefrootCor);
 
 				outfile << "\t";
 				if (first) first = false;
 				else outfile << "else ";
-				outfile << "if (tixWBuffer == VecW" << srefroot << "Buffer::" << StrMod::uc(imb->sref) << ") bufxf = getNewBufxf" << s << "(reqlen" << s2 << ");" << endl;
+				outfile << "if (tixWBuffer == VecW" << srefroot << "Buffer::" << StrMod::uc(sref) << ") bufxf = getNewBufxf" << srefrootCor << "(reqlen" << s2 << ");" << endl;
 			};
 		};
 		outfile << "// IP getNewBufxf.get --- IEND" << endl;
@@ -547,21 +551,21 @@ void WdbeWrdevUnt::writeUntCpp(
 	for (unsigned int i = 0; i < imbs.nodes.size(); i++) {
 		imb = imbs.nodes[i];
 
-		if ((imb->corRefWdbeMModule == refHostif) && (i != ixImbCmdinv) && (i != ixImbCmdret)) {
-			s = Wdbe::getImbshort(imb);
+		if ((i != ixImbCmdinv) && (i != ixImbCmdret)) {
+			mgmtToNotFrom = Wdbe::getImbsrefs(dbswdbe, imb->refWdbeMModule, sref, srefrootMgmt, srefrootCor);
 
 			// -- getNewBufxf
-			outfile << "Bufxf* " << unt->Fullsref << "::getNewBufxf" << s << "(" << endl;
+			outfile << "Bufxf* " << unt->Fullsref << "::getNewBufxf" << srefrootCor << "(" << endl;
 			outfile << "\t\t\tconst size_t reqlen" << endl;
 			if (Easy) outfile << "\t\t\t, unsigned char* buf" << endl;
 			outfile << "\t\t) {" << endl;
 
-			outfile << "\treturn(new Bufxf(VecW" << srefroot << "Buffer::" << StrMod::uc(imb->sref);
-			if (imb->ixVDir == VecWdbeVMImbufDir::IN) outfile << ", true";
+			outfile << "\treturn(new Bufxf(VecW" << srefroot << "Buffer::" << StrMod::uc(sref);
+			if (mgmtToNotFrom) outfile << ", true";
 			else outfile << ", false";
 			outfile << ", reqlen";
 			if (Easy) {
-				if (imb->ixVDir == VecWdbeVMImbufDir::IN) outfile << ", (txburst) ? 7 : 0, 2";
+				if (mgmtToNotFrom) outfile << ", (txburst) ? 7 : 0, 2";
 				else outfile << ", 0, 2";
 				outfile << ", buf";
 			};
@@ -570,9 +574,9 @@ void WdbeWrdevUnt::writeUntCpp(
 			outfile << "};" << endl;
 			outfile << endl;
 
-			if (imb->ixVDir == VecWdbeVMImbufDir::IN) {
+			if (mgmtToNotFrom) {
 				// -- writeTo...
-				outfile << "void " << unt->Fullsref << "::write" << s << "(" << endl;
+				outfile << "void " << unt->Fullsref << "::write" << srefrootCor << "(" << endl;
 				outfile << "\t\t\tconst unsigned char* data" << endl;
 				outfile << "\t\t\t, const size_t datalen" << endl;
 				if (Easy) outfile << "\t\t\t, const bool copy" << endl;
@@ -583,14 +587,14 @@ void WdbeWrdevUnt::writeUntCpp(
 					outfile << endl;
 
 					outfile << "\tif (copy) {" << endl;
-					outfile << "\t\tbufxf = getNewBufxf" << s << "(datalen);" << endl;
+					outfile << "\t\tbufxf = getNewBufxf" << srefrootCor << "(datalen);" << endl;
 					outfile << "\t\tbufxf->setWriteData(data, datalen);" << endl;
-					outfile << "\t} else bufxf = getNewBufxf" << s << "(datalen, (unsigned char*) data);" << endl;
+					outfile << "\t} else bufxf = getNewBufxf" << srefrootCor << "(datalen, (unsigned char*) data);" << endl;
 					outfile << endl;
 
 					outfile << "\tif (!runBufxf(bufxf)) {" << endl;
 					outfile << "\t\tdelete bufxf;" << endl;
-					outfile << "\t\tthrow DbeException(\"error running write" << s << "\");" << endl;
+					outfile << "\t\tthrow DbeException(\"error running write" << srefrootCor << "\");" << endl;
 					outfile << "\t};" << endl;
 					outfile << endl;
 
@@ -600,7 +604,7 @@ void WdbeWrdevUnt::writeUntCpp(
 					outfile << "\tstring msg;" << endl;
 					outfile << endl;
 
-					outfile << "\tBufxf* bufxf = getNewBufxf" << s << "(datalen);" << endl;
+					outfile << "\tBufxf* bufxf = getNewBufxf" << srefrootCor << "(datalen);" << endl;
 					outfile << endl;
 
 					outfile << "\tbufxf->ixVTarget = ixVTarget;" << endl;
@@ -613,7 +617,7 @@ void WdbeWrdevUnt::writeUntCpp(
 					outfile << "\txchg->runBufxf(bufxf);" << endl;
 					outfile << endl;
 
-					outfile << "\tif (!bufxf->success) msg = \"error writing data to buffer " << imb->sref << "\";" << endl;
+					outfile << "\tif (!bufxf->success) msg = \"error writing data to buffer " << sref << "\";" << endl;
 					outfile << endl;
 
 					outfile << "\tdelete bufxf;" << endl;
@@ -627,14 +631,14 @@ void WdbeWrdevUnt::writeUntCpp(
 
 			} else {
 				// -- readFrom...
-				outfile << "void " << unt->Fullsref << "::read" << s << "(" << endl;
+				outfile << "void " << unt->Fullsref << "::read" << srefrootCor << "(" << endl;
 				outfile << "\t\t\tconst size_t reqlen" << endl;
 				outfile << "\t\t\t, unsigned char*& data" << endl;
 				outfile << "\t\t\t, size_t& datalen" << endl;
 				outfile << "\t\t) {" << endl;
 
 				if (Easy) {
-					outfile << "\tBufxf* bufxf = getNewBufxf" << s << "(reqlen, data);" << endl;
+					outfile << "\tBufxf* bufxf = getNewBufxf" << srefrootCor << "(reqlen, data);" << endl;
 					outfile << endl;
 
 					outfile << "\tif (runBufxf(bufxf)) {" << endl;
@@ -647,7 +651,7 @@ void WdbeWrdevUnt::writeUntCpp(
 					outfile << endl;
 	
 					outfile << "\t\tdelete bufxf;" << endl;
-					outfile << "\t\tthrow DbeException(\"error running read" << s << "\");" << endl;
+					outfile << "\t\tthrow DbeException(\"error running read" << srefrootCor << "\");" << endl;
 					outfile << "\t};" << endl;
 					outfile << endl;
 
@@ -657,7 +661,7 @@ void WdbeWrdevUnt::writeUntCpp(
 					outfile << "\tstring msg;" << endl;
 					outfile << endl;
 
-					outfile << "\tBufxf* bufxf = getNewBufxf" << s << "(reqlen);" << endl;
+					outfile << "\tBufxf* bufxf = getNewBufxf" << srefrootCor << "(reqlen);" << endl;
 					outfile << endl;
 
 					outfile << "\tbufxf->ixVTarget = ixVTarget;" << endl;
@@ -671,7 +675,7 @@ void WdbeWrdevUnt::writeUntCpp(
 					outfile << "\t\tdata = bufxf->getReadData();" << endl;
 					outfile << "\t\tdatalen = bufxf->getReadDatalen();" << endl;
 					outfile << "\t} else {" << endl;
-					outfile << "\t\tmsg = \"error reading data from buffer " << imb->sref << "\";" << endl;
+					outfile << "\t\tmsg = \"error reading data from buffer " << sref << "\";" << endl;
 					outfile << "\t};" << endl;
 					outfile << endl;
 

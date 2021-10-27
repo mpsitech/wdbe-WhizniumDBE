@@ -1,7 +1,7 @@
-WDBE_VERSION = "1.1.5";
+WDBE_VERSION = "1.1.17";
 WDBE_VERSION_MAJOR = 1;
 WDBE_VERSION_MINOR = 1;
-WDBE_VERSION_SUB = 5;
+WDBE_VERSION_SUB = 17;
 
 function getCrdwnd() {
 	if (window.name == "Crd") return window;
@@ -140,16 +140,12 @@ function serializeDpchAppDoDlg(srcdoc, sref, scrJref, shortDit, srefIxVDo) {
 };
 
 function sendReq(str, doc, callback, async) {
-	str = "xml=" + str;
-
 	if (!doc.req) doc.req = new XMLHttpRequest();
 	doc.req.open("POST", "/dpch", (async == true));
 	doc.req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-//	doc.req.setRequestHeader("Content-length", str.length);
-//	doc.req.setRequestHeader("Connection", "close");
 
 	doc.req.onreadystatechange = callback;
-	doc.req.send(str);
+	doc.req.send("xml=" + encodeURIComponent(str));
 };
 
 function getNode(srcdoc, xp) {

@@ -1,16 +1,19 @@
 function updateScrJrefs() {
 	scrJrefDetail = retrieveSi(srcdoc, "StatShrWdbePphRec", "scrJrefDetail");
 	scrJrefAPar = retrieveSi(srcdoc, "StatShrWdbePphRec", "scrJrefAPar");
+	scrJrefMNModule = retrieveSi(srcdoc, "StatShrWdbePphRec", "scrJrefMNModule");
 };
 
 function resetInitdones() {
 	setSi(srcdoc, "StatAppWdbePphRec", "initdoneDetail", "false");
 	setSi(srcdoc, "StatAppWdbePphRec", "initdoneAPar", "false");
+	setSi(srcdoc, "StatAppWdbePphRec", "initdoneMNModule", "false");
 };
 
 function resetHeights() {
 	heightDetail = 30;
 	heightAPar = 30;
+	heightMNModule = 30;
 };
 
 function getInitdone(pnlshort) {
@@ -30,11 +33,14 @@ function checkInitdone() {
 
 	var initdoneDetail = (retrieveSi(srcdoc, "StatAppWdbePphRec", "initdoneDetail") == "true");
 	var initdoneAPar = (retrieveSi(srcdoc, "StatAppWdbePphRec", "initdoneAPar") == "true");
+	var initdoneMNModule = (retrieveSi(srcdoc, "StatAppWdbePphRec", "initdoneMNModule") == "true");
 
 	if (!initdoneDetail) {
 		lhsdoc.getElementById("Detail").src = "./PnlWdbePphDetail.html?scrJref=" + scrJrefDetail;
 	} else if (!initdoneAPar) {
 		lhsdoc.getElementById("APar").src = "./PnlWdbePphAPar.html?scrJref=" + scrJrefAPar;
+	} else if (!initdoneMNModule) {
+		rhsdoc.getElementById("MNModule").src = "./PnlWdbePphMNModule.html?scrJref=" + scrJrefMNModule;
 
 	} else {
 		refreshB();
@@ -75,6 +81,7 @@ function setPnlAvail(short, avail) {
 		else if (short == "Rec") heightRec = height;
 		else if (short == "Detail") heightDetail = height;
 		else if (short == "APar") heightAPar = height;
+		else if (short == "MNModule") heightMNModule = height;
 	};
 
 	return(avail != oldAvail);
@@ -119,6 +126,7 @@ function changeHeight(pnlshort, height, update) {
 	else if (pnlshort == "Rec") heightRec = height;
 	else if (pnlshort == "Detail") heightDetail = height;
 	else if (pnlshort == "APar") heightAPar = height;
+	else if (pnlshort == "MNModule") heightMNModule = height;
 
 	if (update) updateHeight();
 };
@@ -127,7 +135,7 @@ function updateHeight() {
 	var heightLhs, heightRhs, heightGt;
 
 	heightLhs = heightDetail+13 + heightAPar+13 + 5;
-	heightRhs = 5;
+	heightRhs = heightMNModule+13 + 5;
 
 	if (heightLhs > heightRhs) {
 		lhsdoc.getElementById("tdFill").setAttribute("height", "5");
@@ -320,6 +328,8 @@ function handleDpchEng(dom, dpch) {
 				if (getInitdone("Detail")) lhsdoc.getElementById("Detail").contentWindow.handleDpchEng(dom, dpch);
 			} else if (_scrJref == scrJrefAPar) {
 				if (getInitdone("APar")) lhsdoc.getElementById("APar").contentWindow.handleDpchEng(dom, dpch);
+			} else if (_scrJref == scrJrefMNModule) {
+				if (getInitdone("MNModule")) rhsdoc.getElementById("MNModule").contentWindow.handleDpchEng(dom, dpch);
 			} else {
 				// alert("got a '" + dpch + "' from job with scrJref " + _scrJref);
 			};

@@ -48,9 +48,8 @@ void WdbeWrdev::writeVecH(
 	string indent, pre;
 
 	analyzeVec(dbswdbe, vec, sys, unt, ctr, subclass, vits, supsref, subsref, tix, ns, notit, cmt, appfed, filfed, ixtype, ixvar, clsnstype);
-	ixtype = "Sbecore::" + ixtype;
 
-	if (subclass) for (unsigned int i = 0; i < subil;i++) indent += "\t";
+	if (subclass) for (unsigned int i = 0; i < subil; i++) indent += "\t";
 
 	pre = indent + "\t";
 	if (!ns) pre += "static ";
@@ -74,7 +73,7 @@ void WdbeWrdev::writeVecH(
 	for (unsigned int i = 0; i < vits.nodes.size(); i++) {
 		vit = vits.nodes[i];
 
-		outfile << pre << "const " << ixtype <<  " " << getVitConst(vit, tix) << " = ";
+		outfile << pre << "constexpr " << ixtype <<  " " << getVitConst(vit, tix) << " = ";
 		if (tix) outfile << "0x" << Wdbe::binToHex(vit->vecNum) << ";" << endl;
 		else outfile << vit->vecNum << ";" << endl;
 	};
@@ -334,10 +333,10 @@ void WdbeWrdev::analyzeVec(
 	filfed = StrMod::srefInSrefs(vec->srefsKOption, "filfed");
 
 	if (tix) {
-		ixtype = "utinyint";
+		ixtype = "uint8_t";
 		ixvar = "tix";
 	} else {
-		ixtype = "uint";
+		ixtype = "uint32_t";
 		ixvar = "ix";
 	};
 
@@ -491,7 +490,7 @@ void WdbeWrdev::writeSpeccmdCpp_getrpa(
 	outfile << ", parsRet[\"" << rpa->sref << "\"].get";
 	if (rpa->ixWdbeVPartype == VecWdbeVPartype::_BOOL) outfile << "Bool";
 	else {
-		// TIX, TINYINT, UTINYINT, SMALLINT, USMALLINT, INT, UINT, BLOB, VBLOB
+		// TIX, [U]INT{8/16/32}, [V]BLOB
 		outfile << StrMod::cap(VecWdbeVPartype::getSref(rpa->ixWdbeVPartype));
 	};
 	outfile << "()";
@@ -752,7 +751,6 @@ void WdbeWrdev::writeCmdCpp(
 	};
 };
 
-
 void WdbeWrdev::writeCmdCpp_setipa(
 			fstream& outfile
 			, WdbeAMCommandInvpar* ipa
@@ -772,7 +770,7 @@ void WdbeWrdev::writeCmdCpp_getrpa(
 	outfile << "\t\t" << rpa->sref << " = cmd->parsRet[\"" << rpa->sref << "\"].get";
 	if (rpa->ixWdbeVPartype == VecWdbeVPartype::_BOOL) outfile << "Bool";
 	else {
-		// TIX, TINYINT, UTINYINT, SMALLINT, USMALLINT, INT, UINT, BLOB, VBLOB
+		// TIX, [U]INT{8/16/32}, [V]BLOB
 		outfile << StrMod::cap(VecWdbeVPartype::getSref(rpa->ixWdbeVPartype));
 	};
 	outfile << "();" << endl;
@@ -878,17 +876,14 @@ void WdbeWrdev::wrIparpa(
 	if (!first) outfile << ", ";
 	if (!refNotConst) outfile << "const ";
 
-	if (ns) if ( (ixWdbeVPartype == VecWdbeVPartype::TIX) || (ixWdbeVPartype == VecWdbeVPartype::TINYINT) || (ixWdbeVPartype == VecWdbeVPartype::UTINYINT)
-				|| (ixWdbeVPartype == VecWdbeVPartype::SMALLINT) || (ixWdbeVPartype == VecWdbeVPartype::USMALLINT) || (ixWdbeVPartype == VecWdbeVPartype::UINT) ) outfile << "Sbecore::";
-
-	if (ixWdbeVPartype == VecWdbeVPartype::TIX) outfile << "utinyint";
+	if (ixWdbeVPartype == VecWdbeVPartype::TIX) outfile << "uint8_t";
 	else if (ixWdbeVPartype == VecWdbeVPartype::_BOOL) outfile << "bool";
 	else if ((ixWdbeVPartype == VecWdbeVPartype::BLOB) || (ixWdbeVPartype == VecWdbeVPartype::VBLOB)) {
 		if (len) outfile << "size_t";
 		else outfile << "unsigned char*";
 	} else {
-		// TINYINT, UTINYINT, SMALLINT, USMALLINT, INT, UINT
-		outfile << VecWdbeVPartype::getSref(ixWdbeVPartype);
+		// [U]INT{8/16/32}
+		outfile << VecWdbeVPartype::getSref(ixWdbeVPartype) << "_t";
 	};
 
 	if (refNotConst) outfile << "&";
@@ -902,7 +897,7 @@ void WdbeWrdev::wrIparpa(
 			if (len) outfile << " = 0";
 			else outfile << " = NULL";
 		} else {
-			// TIX, TINYINT, UTINYINT, SMALLINT, USMALLINT, INT, UINT
+			// [U]INT{8/16/32}
 			outfile << " = 0";
 		};
 	};

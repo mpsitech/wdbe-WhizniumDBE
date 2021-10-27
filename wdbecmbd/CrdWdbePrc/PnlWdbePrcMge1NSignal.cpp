@@ -266,6 +266,8 @@ void PnlWdbePrcMge1NSignal::handleDpchAppDoButViewClick(
 	uint ixPre = xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXPRE, jref);
 	ubigint refPre = ((ixPre) ? xchg->getRefPreset(ixPre, jref) : 0);
 
+	ubigint refUnt = xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFUNT, jref);
+
 	if (statshr.ButViewAvail && statshr.ButViewActive) {
 		if (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCSIG, jref)) if (ixPre == VecWdbeVPreset::PREWDBEREFMTP) {
 			sref = "CrdWdbeSig";
@@ -275,6 +277,12 @@ void PnlWdbePrcMge1NSignal::handleDpchAppDoButViewClick(
 			if (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCSIG, jref)) if (ixPre == VecWdbeVPreset::PREWDBEREFMOD) {
 				sref = "CrdWdbeSig";
 				xchg->triggerIxRefSrefIntvalToRefCall(dbswdbe, VecWdbeVCall::CALLWDBECRDOPEN, jref, ixPre, refPre, sref, recSig.ref, jrefNew);
+			};
+		};
+		if (jrefNew == 0) {
+			if (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCSIG, jref)) if (refUnt != 0) {
+				sref = "CrdWdbeSig";
+				xchg->triggerIxRefSrefIntvalToRefCall(dbswdbe, VecWdbeVCall::CALLWDBECRDOPEN, jref, VecWdbeVPreset::PREWDBEREFUNT, refUnt, sref, recSig.ref, jrefNew);
 			};
 		};
 

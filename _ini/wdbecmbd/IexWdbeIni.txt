@@ -1,43 +1,54 @@
-IexWdbeIni v1.1.5
+IexWdbeIni v1.1.17
 ImeIAVKeylistKey1.srefKlsIxWdbeVKeylist	sref	Avail	Implied	Title	Comment
-KlstKWdbeMtpModbscbuCustop	WdbeMtpModbscbuAdd_v12_0			adapt port widths	
-KlstKWdbeMtpModbscbuCustop	WdbeMtpModbscbuAxihostif_Easy_v1_0			connect AXI controllers, CRC and timeout	
-KlstKWdbeMtpModbscbuCustop	WdbeMtpModbscbuAxihostif_Easy_v2_0			connect AXI controllers, CRC and timeout	
-KlstKWdbeMtpModbscbuCustop	WdbeMtpModbscbuAxihostif_v1_0			connect AXI controllers, CRC and timeout	
-KlstKWdbeMtpModbscbuCustop	WdbeMtpModbscbuCmdinv_v1_0			connect buffer	
-KlstKWdbeMtpModbscbuCustop	WdbeMtpModbscbuCmdret_v1_0			connect buffer	
-KlstKWdbeMtpModbscbuCustop	WdbeMtpModbscbuDft_v4_0			adapt port widths	
-KlstKWdbeMtpModbscbuCustop	WdbeMtpModbscbuDiv_v3_0			adapt port widths	
-KlstKWdbeMtpModbscbuCustop	WdbeMtpModbscbuDiv_v5_1			adapt port widths	
-KlstKWdbeMtpModbscbuCustop	WdbeMtpModbscbuDotmx2x16_v1_0			connect SPI interface	
-KlstKWdbeMtpModbscbuCustop	WdbeMtpModbscbuDpbram_v1_0			adapt internal wiring	
-KlstKWdbeMtpModbscbuCustop	WdbeMtpModbscbuDpbram_v8_4			adapt port widths	
-KlstKWdbeMtpModbscbuCustop	WdbeMtpModbscbuDsp48_v3_0_aMultB			adapt port widths	
-KlstKWdbeMtpModbscbuCustop	WdbeMtpModbscbuDsp48_v3_0_aPlusDPlusC			adapt port widths	
-KlstKWdbeMtpModbscbuCustop	WdbeMtpModbscbuMult_v12_0			adapt port widths	
-KlstKWdbeMtpModbscbuCustop	WdbeMtpModbscbuOled128x32_v1_0			connect SPI interface	
-KlstKWdbeMtpModbscbuCustop	WdbeMtpModbscbuPmmu_v1_0			connect buffers, fill slot vector	
-KlstKWdbeMtpModbscbuCustop	WdbeMtpModbscbuSpbram_v1_0			adapt internal wiring	
-KlstKWdbeMtpModbscbuCustop	WdbeMtpModbscbuSpifwd_v1_0			connect buffers, SPI interface, CRC and timeout	
-KlstKWdbeMtpModbscbuCustop	WdbeMtpModbscbuSpihostif_Easy_v1_0			connect SPI interface, CRC and timeout	
-KlstKWdbeMtpModbscbuCustop	WdbeMtpModbscbuSpihostif_v1_0			connect SPI interface, CRC and timeout	
-KlstKWdbeMtpModbscbuCustop	WdbeMtpModbscbuSub_v12_0			adapt port widths	
-KlstKWdbeMtpModbscbuCustop	WdbeMtpModbscbuUarthostif_Easy_v1_0			connect UART controllers, CRC and timeout	
-KlstKWdbeMtpModbscbuCustop	WdbeMtpModbscbuUarthostif_v1_0			connect UART controllers, CRC and timeout	
-KlstKWdbeMtpModbscbuCustop	WdbeMtpModbscbuXadc_v3_3			add analog input ports	
-KlstKWdbeMtpModbscbuCustop	WdbeMtpModbscbuZynq_ip_AXI_v1_0			add pin substitute signals	
-KlstKWdbeMtpModbscbuCustop	WdbeMtpModbscbuZynq_ip_AXI_v2_0			add pin substitute signals	
-KlstKWdbeMtpModbscbuCustop	WdbeMtpModbscbuZynq_ip_v1_0			connect AXI bus functionality	
-KlstKWdbeMtpModbsctdCustop	WdbeMtpModbsctdCmdinv_v1_0			adapt buffer size	
-KlstKWdbeMtpModbsctdCustop	WdbeMtpModbsctdCmdret_v1_0			adapt buffer size	
-KlstKWdbeMtpModbsctdCustop	WdbeMtpModbsctdDpbram_v1_0			infer BRAM primitives and adapt port widths	
-KlstKWdbeMtpModbsctdCustop	WdbeMtpModbsctdPmmu_v1_0			adapt buffer sizes	
-KlstKWdbeMtpModbsctdCustop	WdbeMtpModbsctdSpbram_v1_0			infer BRAM primitives and adapt port widths	
-KlstKWdbeMtpModdetCustop	WdbeMtpModdetPmmu_v1_0			add command process handshake	
-KlstKWdbeMtpModdetCustop	WdbeMtpModdetSpifwd_v1_0			add command process handshake	
-KlstKWdbeMtpModdetCustop	WdbeMtpModdetTkclksrc_v1_0			add command process handshake	
-KlstKWdbeMtpModdetCustop	WdbeMtpModdetTop_v1_0			add reset and master clock	
+KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuAdd_xlnx_v12_0			adapt port widths	
+KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuAxihostif_Easy_v1_0			connect AXI controllers, CRC and timeout	
+KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuAxihostif_Easy_v2_0			connect AXI controllers, CRC and timeout	
+KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuAxihostif_v1_0			connect AXI controllers, CRC and timeout	
+KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuCmdinv_v1_0			connect buffer	
+KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuCmdret_v1_0			connect buffer	
+KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuDft_xlnx_v4_0			adapt port widths	
+KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuDiv_xlnx_v3_0			adapt port widths	
+KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuDiv_xlnx_v5_1			adapt port widths	
+KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuDotmx2x16_v1_0			connect SPI interface	
+KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuDpbram_v1_0			adapt internal wiring	
+KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuDpbram_xlnx_v8_4			adapt port widths	
+KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuDpsram_mchp_v1_0			adapt port identifiers and widths	
+KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuDsp48_xlnx_v3_0_aMultB			adapt port widths	
+KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuDsp48_xlnx_v3_0_aPlusDPlusC			adapt port widths	
+KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuMpfs_ip_AXI_v1_0			add pin substitute signals	
+KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuMult_xlnx_v12_0			adapt port widths	
+KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuOled128x32_v1_0			connect SPI interface	
+KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuPmmu_v1_0			connect buffers, fill slot vector	
+KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuSpbram_v1_0			adapt internal wiring	
+KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuSpifwd_v1_0			connect buffers, SPI interface, CRC and timeout	
+KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuSpihostif_Easy_v1_0			connect SPI interface, CRC and timeout	
+KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuSpihostif_v1_0			connect SPI interface, CRC and timeout	
+KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuSub_xlnx_v12_0			adapt port widths	
+KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuTop_mchp_v1_0			connect clock primitives	
+KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuTop_xlnx_v1_0			connect clock primitives	
+KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuTpsram_mchp_v1_0			adapt port identifiers and widths	
+KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuUarthostif_Easy_v1_0			connect UART controllers, CRC and timeout	
+KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuUarthostif_v1_0			connect UART controllers, CRC and timeout	
+KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuUartrx_v1_0_Mcu			add handshake with managing module	
+KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuUarttx_v1_0_Mcu			add handshake with managing module	
+KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuUsbrxtx_slbs_v1_0_Mcu			add handshake with managing module	
+KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuXadc_xlnx_v3_3			add analog input ports	
+KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuZynq_ip_AXI_v1_0			add pin substitute signals	
+KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuZynq_ip_AXI_v2_0			add pin substitute signals	
+KlstKWdbeMtpCplmsttdCustop	WdbeMtpCplmsttdCmdinv_v1_0			adapt buffer size	
+KlstKWdbeMtpCplmsttdCustop	WdbeMtpCplmsttdCmdret_v1_0			adapt buffer size	
+KlstKWdbeMtpCplmsttdCustop	WdbeMtpCplmsttdDpbram_v1_0			infer BRAM primitives and adapt port widths	
+KlstKWdbeMtpCplmsttdCustop	WdbeMtpCplmsttdPmmu_v1_0			adapt buffer sizes	
+KlstKWdbeMtpCplmsttdCustop	WdbeMtpCplmsttdSpbram_v1_0			infer BRAM primitives and adapt port widths	
+KlstKWdbeMtpCplmsttdCustop	WdbeMtpCplmsttdTop_mchp_v1_0			infer clock primitives and adapt ports	
+KlstKWdbeMtpCplmsttdCustop	WdbeMtpCplmsttdTop_xlnx_v1_0			infer clock primitives and adapt ports	
+KlstKWdbeMtpGenfstCustop	WdbeMtpGenfstPmmu_v1_0			add command process handshake	
+KlstKWdbeMtpGenfstCustop	WdbeMtpGenfstSpifwd_v1_0			add command process handshake	
+KlstKWdbeMtpGenfstCustop	WdbeMtpGenfstTkclksrc_v1_0			add command process handshake	
+KlstKWdbeMtpGenfstCustop	WdbeMtpGenfstUarthostif_Easy_v1_1_Mcu			add process and sensitivities	
+KlstKWdbeMtpGenfstCustop	WdbeMtpGenfstUsbhostif_Easy_v1_0_Mcu			add process and sensitivity	
 KlstKWdbeMtpPlhfpgaCustop	WdbeMtpPlhfpgaPmmu_v1_0				
+KlstKWdbeMtpPlhmcuCustop	WdbeMtpPlhmcuUsbhostif_Easy_v1_0_Mcu				
 KlstKWdbeMtpWrfpgaCustop	WdbeMtpWrfpgaCmdbus_v1_0				
 KlstKWdbeMtpWrfpgaCustop	WdbeMtpWrfpgaCmdinv_v1_0				
 KlstKWdbeMtpWrfpgaCustop	WdbeMtpWrfpgaCmdret_v1_0				
@@ -48,7 +59,8 @@ KlstKWdbeMtpWrfpgaCustop	WdbeMtpWrfpgaPmmu_v1_0
 KlstKWdbeMtpWrfpgaCustop	WdbeMtpWrfpgaSpbram_v1_0				
 KlstKWdbeMtpWrfpgaCustop	WdbeMtpWrfpgaSpifwd_v1_0				
 KlstKWdbeMtpWrfpgaCustop	WdbeMtpWrfpgaTkclksrc_v1_0				
-KlstKWdbeMtpWrfpgaCustop	WdbeMtpWrfpgaTop_v1_0				
+KlstKWdbeMtpWrmcuCustop	WdbeMtpWrmcuUarthostif_Easy_v1_1_Mcu				
+KlstKWdbeMtpWrmcuCustop	WdbeMtpWrmcuUsbhostif_Easy_v1_0_Mcu				
 KlstWdbeKAMLibraryMakefileTag	incpath			include path	
 KlstWdbeKAMMachineMakefileTag	cpp			C++ compiler	
 KlstWdbeKAMMachineMakefileTag	cppflags			C++ compiler flags	
@@ -73,20 +85,23 @@ KlstWdbeKAMPersonDetailType	tel			phone
 KlstWdbeKAMPinParKey	fclk			clock frequency [kHz]	
 KlstWdbeKAMPinParKey	lvds			low-voltage differential signal	
 KlstWdbeKAMPinParKey	noclkdr			no clock dedicated route	
+KlstWdbeKHdltype	bit			bit	
+KlstWdbeKHdltype	_bool			boolean	
+KlstWdbeKHdltype	btarr			byte array	
 KlstWdbeKHdltype	char			character	
 KlstWdbeKHdltype	int			integer	
 KlstWdbeKHdltype	nat			natural	
+KlstWdbeKHdltype	ptr			pointer	
+KlstWdbeKHdltype	sgn			signed	
 KlstWdbeKHdltype	sl			standard logic	
 KlstWdbeKHdltype	slvup			standard logic vector up	
 KlstWdbeKHdltype	slvdn			standard logic vector down	
 KlstWdbeKHdltype	str			string	
+KlstWdbeKHdltype	usgn			unsigned	
 KlstWdbeKMBankVoltstd	_1v2			1.2V	
 KlstWdbeKMBankVoltstd	_1v8			1.8V	
 KlstWdbeKMBankVoltstd	_2v5			2.5V	
 KlstWdbeKMBankVoltstd	_3v3			3.3V	
-KlstWdbeKMFamilyVendor	mchp			Microchip	
-KlstWdbeKMFamilyVendor	st			STMicroelectronics	
-KlstWdbeKMFamilyVendor	xlnx			Xilinx	
 KlstWdbeKMFileContent	cftpl			code file template	
 KlstWdbeKMFileContent	custip			custom insertion points	
 KlstWdbeKMFileContent	mod			model data	
@@ -124,15 +139,21 @@ KlstWdbeKMReleaseOption	dynlib			generate dynamic link library
 KlstWdbeKMUnitPackage	bga132				
 KlstWdbeKMUnitPackage	bga236				
 KlstWdbeKMUnitPackage	bga320				
+KlstWdbeKMUnitPackage	bga484				
+KlstWdbeKMUnitPackage	bga672				
 KlstWdbeKMUnitPackage	lqfp48				
+KlstWdbeKMUnitPackage	qfn20				
+KlstWdbeKMUnitPackage	qfn28				
 KlstWdbeKMUnitPackage	qfp100				
 KlstWdbeKMUnitPackage	ssop20				
 KlstWdbeKMUnitPackage	ssop28				
 KlstWdbeKMUnitToolch	ise			Xilinx ISE	
+KlstWdbeKMUnitToolch	libero			Microchip Libero	
 KlstWdbeKMUnitToolch	mplab			Microchip MPLAB X	
+KlstWdbeKMUnitToolch	quartus			Intel Quartus	
+KlstWdbeKMUnitToolch	splcty			SiLabs Simplicity Studio	
 KlstWdbeKMUnitToolch	syswb			ST SystemWorkbench	
 KlstWdbeKMUnitToolch	vivado			Xilinx Vivado	
-KlstWdbeKMUnitToolch	vivzynq			Xilinx Vivado for Zynq	
 KlstWdbeKMVectorOption	notit			no titles	
 KlstWdbeKMVectorOption	cmt			comments	
 KlstWdbeKMVectorOption	apdfed			append to feed	
@@ -141,9 +162,17 @@ KlstWdbeKRMCoreprojectMPersonFunction	mgr			manager
 KlstWdbeKRMCoreprojectMPersonFunction	cur			curator	
 KlstWdbeKRMCoreprojectMPersonFunction	heng			hardware engineer	
 KlstWdbeKRMCoreprojectMPersonFunction	seng			software engineer	
+KlstWdbeKRMModuleMModuleFunction	mgmt			management	
+KlstWdbeKRMModuleMModuleFunction	snk			sink	
+KlstWdbeKRMModuleMModuleFunction	src			source	
 KlstWdbeKRMPersonMProjectFunction	mgr			manager	
 KlstWdbeKRMPersonMProjectFunction	heng			hardware engineer	
 KlstWdbeKRMPersonMProjectFunction	seng			software engineer	
+KlstWdbeKVendor	ipsg			Intel	
+KlstWdbeKVendor	mchp			Microchip	
+KlstWdbeKVendor	slbs			Silicon Laboratories	
+KlstWdbeKVendor	st			ST Microelectronics	
+KlstWdbeKVendor	xlnx			Xilinx	
 ImeIAVKeylistKey1.end
 ImeIMUsergroup.sref	Comment
 wdbeusers
@@ -165,20 +194,24 @@ wdbeusers
 	VecWdbeVCard	CrdWdbeRls	edit;exec;view
 	VecWdbeVCard	CrdWdbeCpr	edit;exec;view
 	VecWdbeVCard	CrdWdbeCvr	edit;exec;view
+	VecWdbeVCard	CrdWdbePph	edit;exec;view
 	VecWdbeVCard	CrdWdbeMod	edit;exec;view
 	VecWdbeVCard	CrdWdbeVec	edit;exec;view
 	VecWdbeVCard	CrdWdbeVit	edit;exec;view
 	VecWdbeVCard	CrdWdbeCmd	edit;exec;view
 	VecWdbeVCard	CrdWdbeErr	edit;exec;view
-	VecWdbeVCard	CrdWdbePph	edit;exec;view
+	VecWdbeVCard	CrdWdbePpl	edit;exec;view
+	VecWdbeVCard	CrdWdbeSeg	edit;exec;view
 	VecWdbeVCard	CrdWdbeBnk	edit;exec;view
 	VecWdbeVCard	CrdWdbePin	edit;exec;view
+	VecWdbeVCard	CrdWdbeInt	edit;exec;view
+	VecWdbeVCard	CrdWdbeSns	edit;exec;view
+	VecWdbeVCard	CrdWdbeVar	edit;exec;view
 	VecWdbeVCard	CrdWdbeGen	edit;exec;view
 	VecWdbeVCard	CrdWdbePrt	edit;exec;view
 	VecWdbeVCard	CrdWdbeSig	edit;exec;view
 	VecWdbeVCard	CrdWdbePrc	edit;exec;view
 	VecWdbeVCard	CrdWdbeFst	edit;exec;view
-	VecWdbeVCard	CrdWdbeVar	edit;exec;view
 	VecWdbeVCard	CrdWdbeUtl	edit;exec;view
 	ImeIAMUsergroupAccess.end
 	ImeIMUser.sref	srefIxVState	srefIxWdbeVLocale	srefIxWdbeVUserlevel	Password	Comment

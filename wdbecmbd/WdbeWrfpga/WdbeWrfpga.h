@@ -30,8 +30,6 @@ namespace WdbeWrfpga {
 	std::string getVarStr(WdbeMVariable* var);
 	
 	void srefsFstsToVector(const std::string& s, std::vector<std::string>& ss);
-
-	std::string getImbsigsref(DbsWdbe* dbswdbe, WdbeMImbuf* imb);
 	// IP cust --- IEND
 };
 

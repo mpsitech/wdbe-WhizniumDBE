@@ -217,9 +217,40 @@ public:
 	static const Sbecore::uint FOLDER = 4;
 	static const Sbecore::uint PRJSHORT = 5;
 	static const Sbecore::uint UNTSREF = 6;
+	static const Sbecore::uint SREFKTOOLCH = 7;
 
 public:
-	DpchInvWdbeWrfpgaMdlraw(const Sbecore::ubigint oref = 0, const Sbecore::ubigint jref = 0, const Sbecore::ubigint refWdbeMModule = 0, const std::string& folder = "", const std::string& Prjshort = "", const std::string& Untsref = "");
+	DpchInvWdbeWrfpgaMdlraw(const Sbecore::ubigint oref = 0, const Sbecore::ubigint jref = 0, const Sbecore::ubigint refWdbeMModule = 0, const std::string& folder = "", const std::string& Prjshort = "", const std::string& Untsref = "", const std::string& srefKToolch = "");
+
+public:
+	Sbecore::ubigint refWdbeMModule;
+	std::string folder;
+	std::string Prjshort;
+	std::string Untsref;
+	std::string srefKToolch;
+
+public:
+	void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
+	void writeXML(xmlTextWriter* wr);
+};
+
+/**
+	* DpchInvWdbeWrfpgaTop
+	*/
+class DpchInvWdbeWrfpgaTop : public DpchInvWdbe {
+
+public:
+	static const Sbecore::uint SCROREF = 1;
+	static const Sbecore::uint OREF = 1;
+	static const Sbecore::uint SCRJREF = 2;
+	static const Sbecore::uint JREF = 2;
+	static const Sbecore::uint REFWDBEMMODULE = 3;
+	static const Sbecore::uint FOLDER = 4;
+	static const Sbecore::uint PRJSHORT = 5;
+	static const Sbecore::uint UNTSREF = 6;
+
+public:
+	DpchInvWdbeWrfpgaTop(const Sbecore::ubigint oref = 0, const Sbecore::ubigint jref = 0, const Sbecore::ubigint refWdbeMModule = 0, const std::string& folder = "", const std::string& Prjshort = "", const std::string& Untsref = "");
 
 public:
 	Sbecore::ubigint refWdbeMModule;

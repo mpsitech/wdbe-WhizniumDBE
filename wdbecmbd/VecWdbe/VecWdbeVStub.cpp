@@ -22,22 +22,13 @@ uint VecWdbeVStub::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "stubwdbebnksref") return STUBWDBEBNKSREF;
-	if (s == "stubwdbebnkstd") return STUBWDBEBNKSTD;
-	if (s == "stubwdbecmdstd") return STUBWDBECMDSTD;
-	if (s == "stubwdbectrlong") return STUBWDBECTRLONG;
-	if (s == "stubwdbectrsref") return STUBWDBECTRSREF;
-	if (s == "stubwdbectrstd") return STUBWDBECTRSTD;
-	if (s == "stubwdbecprstd") return STUBWDBECPRSTD;
-	if (s == "stubwdbecvrno") return STUBWDBECVRNO;
-	if (s == "stubwdbecvrstd") return STUBWDBECVRSTD;
-	if (s == "stubwdbeerrstd") return STUBWDBEERRSTD;
 	if (s == "stubwdbefamstd") return STUBWDBEFAMSTD;
 	if (s == "stubwdbefilstd") return STUBWDBEFILSTD;
 	if (s == "stubwdbefsmstd") return STUBWDBEFSMSTD;
 	if (s == "stubwdbefststd") return STUBWDBEFSTSTD;
 	if (s == "stubwdbegenstd") return STUBWDBEGENSTD;
 	if (s == "stubwdbeimbstd") return STUBWDBEIMBSTD;
+	if (s == "stubwdbeintstd") return STUBWDBEINTSTD;
 	if (s == "stubwdbelibsref") return STUBWDBELIBSREF;
 	if (s == "stubwdbelibstd") return STUBWDBELIBSTD;
 	if (s == "stubwdbemchsref") return STUBWDBEMCHSREF;
@@ -50,6 +41,7 @@ uint VecWdbeVStub::getIx(
 	if (s == "stubwdbepphstd") return STUBWDBEPPHSTD;
 	if (s == "stubwdbeprsstd") return STUBWDBEPRSSTD;
 	if (s == "stubwdbepinstd") return STUBWDBEPINSTD;
+	if (s == "stubwdbepplstd") return STUBWDBEPPLSTD;
 	if (s == "stubwdbeprtsref") return STUBWDBEPRTSREF;
 	if (s == "stubwdbeprtstd") return STUBWDBEPRTSTD;
 	if (s == "stubwdbeprcstd") return STUBWDBEPRCSTD;
@@ -57,6 +49,10 @@ uint VecWdbeVStub::getIx(
 	if (s == "stubwdbeprjstd") return STUBWDBEPRJSTD;
 	if (s == "stubwdberlslong") return STUBWDBERLSLONG;
 	if (s == "stubwdberlsstd") return STUBWDBERLSSTD;
+	if (s == "stubwdbeseghsref") return STUBWDBESEGHSREF;
+	if (s == "stubwdbesegsref") return STUBWDBESEGSREF;
+	if (s == "stubwdbesegstd") return STUBWDBESEGSTD;
+	if (s == "stubwdbesnsstd") return STUBWDBESNSSTD;
 	if (s == "stubwdbesesmenu") return STUBWDBESESMENU;
 	if (s == "stubwdbesesstd") return STUBWDBESESSTD;
 	if (s == "stubwdbesigsref") return STUBWDBESIGSREF;
@@ -79,6 +75,16 @@ uint VecWdbeVStub::getIx(
 	if (s == "stubwdbeverno") return STUBWDBEVERNO;
 	if (s == "stubwdbevershort") return STUBWDBEVERSHORT;
 	if (s == "stubwdbeverstd") return STUBWDBEVERSTD;
+	if (s == "stubwdbeerrstd") return STUBWDBEERRSTD;
+	if (s == "stubwdbecvrno") return STUBWDBECVRNO;
+	if (s == "stubwdbecvrstd") return STUBWDBECVRSTD;
+	if (s == "stubwdbecprstd") return STUBWDBECPRSTD;
+	if (s == "stubwdbectrlong") return STUBWDBECTRLONG;
+	if (s == "stubwdbectrsref") return STUBWDBECTRSREF;
+	if (s == "stubwdbectrstd") return STUBWDBECTRSTD;
+	if (s == "stubwdbecmdstd") return STUBWDBECMDSTD;
+	if (s == "stubwdbebnksref") return STUBWDBEBNKSREF;
+	if (s == "stubwdbebnkstd") return STUBWDBEBNKSTD;
 
 	return(0);
 };
@@ -86,22 +92,13 @@ uint VecWdbeVStub::getIx(
 string VecWdbeVStub::getSref(
 			const uint ix
 		) {
-	if (ix == STUBWDBEBNKSREF) return("StubWdbeBnkSref");
-	if (ix == STUBWDBEBNKSTD) return("StubWdbeBnkStd");
-	if (ix == STUBWDBECMDSTD) return("StubWdbeCmdStd");
-	if (ix == STUBWDBECTRLONG) return("StubWdbeCtrLong");
-	if (ix == STUBWDBECTRSREF) return("StubWdbeCtrSref");
-	if (ix == STUBWDBECTRSTD) return("StubWdbeCtrStd");
-	if (ix == STUBWDBECPRSTD) return("StubWdbeCprStd");
-	if (ix == STUBWDBECVRNO) return("StubWdbeCvrNo");
-	if (ix == STUBWDBECVRSTD) return("StubWdbeCvrStd");
-	if (ix == STUBWDBEERRSTD) return("StubWdbeErrStd");
 	if (ix == STUBWDBEFAMSTD) return("StubWdbeFamStd");
 	if (ix == STUBWDBEFILSTD) return("StubWdbeFilStd");
 	if (ix == STUBWDBEFSMSTD) return("StubWdbeFsmStd");
 	if (ix == STUBWDBEFSTSTD) return("StubWdbeFstStd");
 	if (ix == STUBWDBEGENSTD) return("StubWdbeGenStd");
 	if (ix == STUBWDBEIMBSTD) return("StubWdbeImbStd");
+	if (ix == STUBWDBEINTSTD) return("StubWdbeIntStd");
 	if (ix == STUBWDBELIBSREF) return("StubWdbeLibSref");
 	if (ix == STUBWDBELIBSTD) return("StubWdbeLibStd");
 	if (ix == STUBWDBEMCHSREF) return("StubWdbeMchSref");
@@ -114,6 +111,7 @@ string VecWdbeVStub::getSref(
 	if (ix == STUBWDBEPPHSTD) return("StubWdbePphStd");
 	if (ix == STUBWDBEPRSSTD) return("StubWdbePrsStd");
 	if (ix == STUBWDBEPINSTD) return("StubWdbePinStd");
+	if (ix == STUBWDBEPPLSTD) return("StubWdbePplStd");
 	if (ix == STUBWDBEPRTSREF) return("StubWdbePrtSref");
 	if (ix == STUBWDBEPRTSTD) return("StubWdbePrtStd");
 	if (ix == STUBWDBEPRCSTD) return("StubWdbePrcStd");
@@ -121,6 +119,10 @@ string VecWdbeVStub::getSref(
 	if (ix == STUBWDBEPRJSTD) return("StubWdbePrjStd");
 	if (ix == STUBWDBERLSLONG) return("StubWdbeRlsLong");
 	if (ix == STUBWDBERLSSTD) return("StubWdbeRlsStd");
+	if (ix == STUBWDBESEGHSREF) return("StubWdbeSegHsref");
+	if (ix == STUBWDBESEGSREF) return("StubWdbeSegSref");
+	if (ix == STUBWDBESEGSTD) return("StubWdbeSegStd");
+	if (ix == STUBWDBESNSSTD) return("StubWdbeSnsStd");
 	if (ix == STUBWDBESESMENU) return("StubWdbeSesMenu");
 	if (ix == STUBWDBESESSTD) return("StubWdbeSesStd");
 	if (ix == STUBWDBESIGSREF) return("StubWdbeSigSref");
@@ -143,6 +145,16 @@ string VecWdbeVStub::getSref(
 	if (ix == STUBWDBEVERNO) return("StubWdbeVerNo");
 	if (ix == STUBWDBEVERSHORT) return("StubWdbeVerShort");
 	if (ix == STUBWDBEVERSTD) return("StubWdbeVerStd");
+	if (ix == STUBWDBEERRSTD) return("StubWdbeErrStd");
+	if (ix == STUBWDBECVRNO) return("StubWdbeCvrNo");
+	if (ix == STUBWDBECVRSTD) return("StubWdbeCvrStd");
+	if (ix == STUBWDBECPRSTD) return("StubWdbeCprStd");
+	if (ix == STUBWDBECTRLONG) return("StubWdbeCtrLong");
+	if (ix == STUBWDBECTRSREF) return("StubWdbeCtrSref");
+	if (ix == STUBWDBECTRSTD) return("StubWdbeCtrStd");
+	if (ix == STUBWDBECMDSTD) return("StubWdbeCmdStd");
+	if (ix == STUBWDBEBNKSREF) return("StubWdbeBnkSref");
+	if (ix == STUBWDBEBNKSTD) return("StubWdbeBnkStd");
 
 	return("");
 };

@@ -38,19 +38,22 @@ PnlWdbeCmdRec::PnlWdbeCmdRec(
 		{
 	jref = xchg->addJob(dbswdbe, this, jrefSup);
 
-	pnlmncontroller = NULL;
-	pnlainvpar = NULL;
-	pnlaretpar = NULL;
 	pnldetail = NULL;
+	pnlaretpar = NULL;
+	pnlainvpar = NULL;
+	pnlmncontroller = NULL;
 
 	// IP constructor.cust1 --- INSERT
 
 	// IP constructor.cust2 --- INSERT
 
-	xchg->addClstn(VecWdbeVCall::CALLWDBECMD_REUEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecWdbeVCall::CALLWDBECMD_REU_MDL_INSBS, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecWdbeVCall::CALLWDBECMD_REU_INSBS, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBECMD_IVREQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBECMD_REREQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBECMD_RETEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBECMD_REU_INSBS, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBECMD_REU_MDL_INSBS, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBECMD_REUEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBECMD_RVREQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -257,47 +260,55 @@ void PnlWdbeCmdRec::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBECMDUPD_REFEQ) {
-		call->abort = handleCallWdbeCmdUpd_refEq(dbswdbe, call->jref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECMD_REUEQ) {
-		call->abort = handleCallWdbeCmd_reuEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECMD_REU_MDL_INSBS) {
-		call->abort = handleCallWdbeCmd_reu_mdl_inSbs(dbswdbe, call->jref, call->argInv.ix, call->argRet.boolval);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECMD_REU_INSBS) {
-		call->abort = handleCallWdbeCmd_reu_inSbs(dbswdbe, call->jref, call->argInv.ix, call->argRet.boolval);
+	if (call->ixVCall == VecWdbeVCall::CALLWDBECMD_IVREQ) {
+		call->abort = handleCallWdbeCmd_ivrEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECMD_REREQ) {
+		call->abort = handleCallWdbeCmd_rerEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECMD_RETEQ) {
 		call->abort = handleCallWdbeCmd_retEq(dbswdbe, call->jref, call->argInv.ix, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECMD_REU_INSBS) {
+		call->abort = handleCallWdbeCmd_reu_inSbs(dbswdbe, call->jref, call->argInv.ix, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECMD_REU_MDL_INSBS) {
+		call->abort = handleCallWdbeCmd_reu_mdl_inSbs(dbswdbe, call->jref, call->argInv.ix, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECMD_REUEQ) {
+		call->abort = handleCallWdbeCmd_reuEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECMD_RVREQ) {
+		call->abort = handleCallWdbeCmd_rvrEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECMDUPD_REFEQ) {
+		call->abort = handleCallWdbeCmdUpd_refEq(dbswdbe, call->jref);
 	};
 };
 
-bool PnlWdbeCmdRec::handleCallWdbeCmdUpd_refEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-	// IP handleCallWdbeCmdUpd_refEq --- INSERT
-	return retval;
-};
-
-bool PnlWdbeCmdRec::handleCallWdbeCmd_reuEq(
+bool PnlWdbeCmdRec::handleCallWdbeCmd_ivrEq(
 			DbsWdbe* dbswdbe
 			, const ubigint jrefTrig
 			, const ubigint refInv
 			, bool& boolvalRet
 		) {
 	bool retval = false;
-	boolvalRet = (recCmd.refUref == refInv); // IP handleCallWdbeCmd_reuEq --- LINE
+	boolvalRet = (recCmd.ivrRefWdbeMSignal == refInv); // IP handleCallWdbeCmd_ivrEq --- LINE
 	return retval;
 };
 
-bool PnlWdbeCmdRec::handleCallWdbeCmd_reu_mdl_inSbs(
+bool PnlWdbeCmdRec::handleCallWdbeCmd_rerEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+			, const ubigint refInv
+			, bool& boolvalRet
+		) {
+	bool retval = false;
+	boolvalRet = (recCmd.rerRefWdbeMSignal == refInv); // IP handleCallWdbeCmd_rerEq --- LINE
+	return retval;
+};
+
+bool PnlWdbeCmdRec::handleCallWdbeCmd_retEq(
 			DbsWdbe* dbswdbe
 			, const ubigint jrefTrig
 			, const uint ixInv
 			, bool& boolvalRet
 		) {
 	bool retval = false;
-	boolvalRet = ((dbswdbe->getIxWSubsetByRefWdbeMModule([&](){ubigint ref; dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMModule WHERE refWdbeMController = " + to_string(recCmd.refUref), ref); return ref;}()) & ixInv) != 0); // IP handleCallWdbeCmd_reu_mdl_inSbs --- LINE
+	boolvalRet = (recCmd.refIxVTbl == ixInv); // IP handleCallWdbeCmd_retEq --- LINE
 	return retval;
 };
 
@@ -312,13 +323,44 @@ bool PnlWdbeCmdRec::handleCallWdbeCmd_reu_inSbs(
 	return retval;
 };
 
-bool PnlWdbeCmdRec::handleCallWdbeCmd_retEq(
+bool PnlWdbeCmdRec::handleCallWdbeCmd_reu_mdl_inSbs(
 			DbsWdbe* dbswdbe
 			, const ubigint jrefTrig
 			, const uint ixInv
 			, bool& boolvalRet
 		) {
 	bool retval = false;
-	boolvalRet = (recCmd.refIxVTbl == ixInv); // IP handleCallWdbeCmd_retEq --- LINE
+	boolvalRet = ((dbswdbe->getIxWSubsetByRefWdbeMModule([&](){ubigint ref; dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMModule WHERE refWdbeMController = " + to_string(recCmd.refUref), ref); return ref;}()) & ixInv) != 0); // IP handleCallWdbeCmd_reu_mdl_inSbs --- LINE
+	return retval;
+};
+
+bool PnlWdbeCmdRec::handleCallWdbeCmd_reuEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+			, const ubigint refInv
+			, bool& boolvalRet
+		) {
+	bool retval = false;
+	boolvalRet = (recCmd.refUref == refInv); // IP handleCallWdbeCmd_reuEq --- LINE
+	return retval;
+};
+
+bool PnlWdbeCmdRec::handleCallWdbeCmd_rvrEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+			, const ubigint refInv
+			, bool& boolvalRet
+		) {
+	bool retval = false;
+	boolvalRet = (recCmd.rvrRefWdbeMSignal == refInv); // IP handleCallWdbeCmd_rvrEq --- LINE
+	return retval;
+};
+
+bool PnlWdbeCmdRec::handleCallWdbeCmdUpd_refEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+	// IP handleCallWdbeCmdUpd_refEq --- INSERT
 	return retval;
 };

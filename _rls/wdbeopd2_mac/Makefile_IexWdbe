@@ -2,7 +2,7 @@
 # make file for Wdbe import complexes, release wdbeopd2_mac
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 12 Mar 2021
+# date created: 23 Oct 2021
 # IP header --- ABOVE
 
 include ../Makefile.inc
@@ -16,7 +16,7 @@ STATLIBFLAGS = rcs
 INCPATH = -I$(BUILDROOT)/dbswdbe -I$(BUILDROOT)/wdbeopd2/VecWdbe -I$(BUILDROOT)/wdbeopd2
 INCPATH += -I${WHIZSDKROOT}/build -I/usr/local/include -I/usr/local/include/curl -I/usr/local/include/libxml2 -I/usr/local/mysql/include
 
-OBJS = IexWdbeBcd.o IexWdbeBdd.o IexWdbeDcd.o IexWdbeDdd.o IexWdbeIni.o IexWdbePrj.o
+OBJS = IexWdbeBcd.o IexWdbeCsx.o IexWdbeDal.o IexWdbeDcd.o IexWdbeFin.o IexWdbeIni.o IexWdbeMdl.o IexWdbePrj.o
 
 LIB = libiexwdbe
 

@@ -19,7 +19,9 @@ public class WdbeQSigList {
 				, String sref
 				, String srefIxVBasetype
 				, String titIxVBasetype
-				, String stubMdlRefWdbeMModule
+				, String srefRefIxVTbl
+				, String titRefIxVTbl
+				, String stubRefUref
 				, String srefMgeIxVTbl
 				, String titMgeIxVTbl
 				, String stubMgeUref
@@ -34,7 +36,9 @@ public class WdbeQSigList {
 		this.sref = sref;
 		this.srefIxVBasetype = srefIxVBasetype;
 		this.titIxVBasetype = titIxVBasetype;
-		this.stubMdlRefWdbeMModule = stubMdlRefWdbeMModule;
+		this.srefRefIxVTbl = srefRefIxVTbl;
+		this.titRefIxVTbl = titRefIxVTbl;
+		this.stubRefUref = stubRefUref;
 		this.srefMgeIxVTbl = srefMgeIxVTbl;
 		this.titMgeIxVTbl = titMgeIxVTbl;
 		this.stubMgeUref = stubMgeUref;
@@ -50,7 +54,9 @@ public class WdbeQSigList {
 	public String sref;
 	public String srefIxVBasetype;
 	public String titIxVBasetype;
-	public String stubMdlRefWdbeMModule;
+	public String srefRefIxVTbl;
+	public String titRefIxVTbl;
+	public String stubRefUref;
 	public String srefMgeIxVTbl;
 	public String titMgeIxVTbl;
 	public String stubMgeUref;
@@ -72,7 +78,9 @@ public class WdbeQSigList {
 			sref = Xmlio.extractStringUclc(doc, basexpath, "sref", "srf", null, 0);
 			srefIxVBasetype = Xmlio.extractStringUclc(doc, basexpath, "srefIxVBasetype", "typ", null, 0);
 			titIxVBasetype = Xmlio.extractStringUclc(doc, basexpath, "titIxVBasetype", "typ2", null, 0);
-			stubMdlRefWdbeMModule = Xmlio.extractStringUclc(doc, basexpath, "stubMdlRefWdbeMModule", "mdl", null, 0);
+			srefRefIxVTbl = Xmlio.extractStringUclc(doc, basexpath, "srefRefIxVTbl", "ret", null, 0);
+			titRefIxVTbl = Xmlio.extractStringUclc(doc, basexpath, "titRefIxVTbl", "ret2", null, 0);
+			stubRefUref = Xmlio.extractStringUclc(doc, basexpath, "stubRefUref", "reu", null, 0);
 			srefMgeIxVTbl = Xmlio.extractStringUclc(doc, basexpath, "srefMgeIxVTbl", "mgt", null, 0);
 			titMgeIxVTbl = Xmlio.extractStringUclc(doc, basexpath, "titMgeIxVTbl", "mgt2", null, 0);
 			stubMgeUref = Xmlio.extractStringUclc(doc, basexpath, "stubMgeUref", "mgu", null, 0);

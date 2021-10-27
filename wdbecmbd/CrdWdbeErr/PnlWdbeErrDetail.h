@@ -40,6 +40,7 @@ public:
 	public:
 		static const Sbecore::uint BUTSAVECLICK = 1;
 		static const Sbecore::uint BUTREUVIEWCLICK = 2;
+		static const Sbecore::uint BUTTRAVIEWCLICK = 3;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);
@@ -121,10 +122,12 @@ public:
 		static const Sbecore::uint BUTREUVIEWAVAIL = 6;
 		static const Sbecore::uint BUTREUVIEWACTIVE = 7;
 		static const Sbecore::uint TXTTRAACTIVE = 8;
-		static const Sbecore::uint TXFCMTACTIVE = 9;
+		static const Sbecore::uint BUTTRAVIEWAVAIL = 9;
+		static const Sbecore::uint BUTTRAVIEWACTIVE = 10;
+		static const Sbecore::uint TXFCMTACTIVE = 11;
 
 	public:
-		StatShr(const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxtSrfActive = true, const bool TxfFsrActive = true, const bool TxtReuActive = true, const bool ButReuViewAvail = true, const bool ButReuViewActive = true, const bool TxtTraActive = true, const bool TxfCmtActive = true);
+		StatShr(const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxtSrfActive = true, const bool TxfFsrActive = true, const bool TxtReuActive = true, const bool ButReuViewAvail = true, const bool ButReuViewActive = true, const bool TxtTraActive = true, const bool ButTraViewAvail = true, const bool ButTraViewActive = true, const bool TxfCmtActive = true);
 
 	public:
 		bool ButSaveAvail;
@@ -135,6 +138,8 @@ public:
 		bool ButReuViewAvail;
 		bool ButReuViewActive;
 		bool TxtTraActive;
+		bool ButTraViewAvail;
+		bool ButTraViewActive;
 		bool TxfCmtActive;
 
 	public:
@@ -238,6 +243,8 @@ public:
 	bool evalButReuViewAvail(DbsWdbe* dbswdbe);
 	bool evalButReuViewActive(DbsWdbe* dbswdbe);
 	bool evalTxtTraActive(DbsWdbe* dbswdbe);
+	bool evalButTraViewAvail(DbsWdbe* dbswdbe);
+	bool evalButTraViewActive(DbsWdbe* dbswdbe);
 	bool evalTxfCmtActive(DbsWdbe* dbswdbe);
 
 public:
@@ -281,16 +288,18 @@ private:
 
 	void handleDpchAppDoButSaveClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
 	void handleDpchAppDoButReuViewClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
+	void handleDpchAppDoButTraViewClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
 
 public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeErrUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
-	bool handleCallWdbeErr_reuEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
-	bool handleCallWdbeErr_reu_mdl_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
-	bool handleCallWdbeErr_reu_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
 	bool handleCallWdbeErr_retEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
+	bool handleCallWdbeErr_reu_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
+	bool handleCallWdbeErr_reu_mdl_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
+	bool handleCallWdbeErr_reuEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeErr_traEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeErrUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 
 };
 

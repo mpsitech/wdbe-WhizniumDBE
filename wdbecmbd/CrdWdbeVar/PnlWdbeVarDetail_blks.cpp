@@ -24,6 +24,7 @@ uint PnlWdbeVarDetail::VecVDo::getIx(
 	if (s == "butcluviewclick") return BUTCLUVIEWCLICK;
 	if (s == "butcluclusterclick") return BUTCLUCLUSTERCLICK;
 	if (s == "butcluunclusterclick") return BUTCLUUNCLUSTERCLICK;
+	if (s == "butreuviewclick") return BUTREUVIEWCLICK;
 	if (s == "buthtyeditclick") return BUTHTYEDITCLICK;
 
 	return(0);
@@ -36,6 +37,7 @@ string PnlWdbeVarDetail::VecVDo::getSref(
 	if (ix == BUTCLUVIEWCLICK) return("ButCluViewClick");
 	if (ix == BUTCLUCLUSTERCLICK) return("ButCluClusterClick");
 	if (ix == BUTCLUUNCLUSTERCLICK) return("ButCluUnclusterClick");
+	if (ix == BUTREUVIEWCLICK) return("ButReuViewClick");
 	if (ix == BUTHTYEDITCLICK) return("ButHtyEditClick");
 
 	return("");
@@ -47,6 +49,7 @@ string PnlWdbeVarDetail::VecVDo::getSref(
 
 PnlWdbeVarDetail::ContIac::ContIac(
 			const uint numFLstClu
+			, const uint numFPupRet
 			, const bool ChkCon
 			, const bool ChkFal
 			, const uint numFPupHty
@@ -61,6 +64,7 @@ PnlWdbeVarDetail::ContIac::ContIac(
 			Block()
 		{
 	this->numFLstClu = numFLstClu;
+	this->numFPupRet = numFPupRet;
 	this->ChkCon = ChkCon;
 	this->ChkFal = ChkFal;
 	this->numFPupHty = numFPupHty;
@@ -72,7 +76,7 @@ PnlWdbeVarDetail::ContIac::ContIac(
 	this->ChkDfo = ChkDfo;
 	this->TxfCmt = TxfCmt;
 
-	mask = {NUMFLSTCLU, CHKCON, CHKFAL, NUMFPUPHTY, TXFHTY, TXFWID, TXFMMX, TXFONV, TXFOFV, CHKDFO, TXFCMT};
+	mask = {NUMFLSTCLU, NUMFPUPRET, CHKCON, CHKFAL, NUMFPUPHTY, TXFHTY, TXFWID, TXFMMX, TXFONV, TXFOFV, CHKDFO, TXFCMT};
 };
 
 bool PnlWdbeVarDetail::ContIac::readJSON(
@@ -90,6 +94,7 @@ bool PnlWdbeVarDetail::ContIac::readJSON(
 
 	if (basefound) {
 		if (me.isMember("numFLstClu")) {numFLstClu = me["numFLstClu"].asUInt(); add(NUMFLSTCLU);};
+		if (me.isMember("numFPupRet")) {numFPupRet = me["numFPupRet"].asUInt(); add(NUMFPUPRET);};
 		if (me.isMember("ChkCon")) {ChkCon = me["ChkCon"].asBool(); add(CHKCON);};
 		if (me.isMember("ChkFal")) {ChkFal = me["ChkFal"].asBool(); add(CHKFAL);};
 		if (me.isMember("numFPupHty")) {numFPupHty = me["numFPupHty"].asUInt(); add(NUMFPUPHTY);};
@@ -123,6 +128,7 @@ bool PnlWdbeVarDetail::ContIac::readXML(
 
 	if (basefound) {
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "numFLstClu", numFLstClu)) add(NUMFLSTCLU);
+		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "numFPupRet", numFPupRet)) add(NUMFPUPRET);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "ChkCon", ChkCon)) add(CHKCON);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "ChkFal", ChkFal)) add(CHKFAL);
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "numFPupHty", numFPupHty)) add(NUMFPUPHTY);
@@ -147,6 +153,7 @@ void PnlWdbeVarDetail::ContIac::writeJSON(
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
 	me["numFLstClu"] = numFLstClu;
+	me["numFPupRet"] = numFPupRet;
 	me["ChkCon"] = ChkCon;
 	me["ChkFal"] = ChkFal;
 	me["numFPupHty"] = numFPupHty;
@@ -172,6 +179,7 @@ void PnlWdbeVarDetail::ContIac::writeXML(
 
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
 		writeUintAttr(wr, itemtag, "sref", "numFLstClu", numFLstClu);
+		writeUintAttr(wr, itemtag, "sref", "numFPupRet", numFPupRet);
 		writeBoolAttr(wr, itemtag, "sref", "ChkCon", ChkCon);
 		writeBoolAttr(wr, itemtag, "sref", "ChkFal", ChkFal);
 		writeUintAttr(wr, itemtag, "sref", "numFPupHty", numFPupHty);
@@ -191,6 +199,7 @@ set<uint> PnlWdbeVarDetail::ContIac::comm(
 	set<uint> items;
 
 	if (numFLstClu == comp->numFLstClu) insert(items, NUMFLSTCLU);
+	if (numFPupRet == comp->numFPupRet) insert(items, NUMFPUPRET);
 	if (ChkCon == comp->ChkCon) insert(items, CHKCON);
 	if (ChkFal == comp->ChkFal) insert(items, CHKFAL);
 	if (numFPupHty == comp->numFPupHty) insert(items, NUMFPUPHTY);
@@ -213,7 +222,7 @@ set<uint> PnlWdbeVarDetail::ContIac::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {NUMFLSTCLU, CHKCON, CHKFAL, NUMFPUPHTY, TXFHTY, TXFWID, TXFMMX, TXFONV, TXFOFV, CHKDFO, TXFCMT};
+	diffitems = {NUMFLSTCLU, NUMFPUPRET, CHKCON, CHKFAL, NUMFPUPHTY, TXFHTY, TXFWID, TXFMMX, TXFONV, TXFOFV, CHKDFO, TXFCMT};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -226,15 +235,15 @@ set<uint> PnlWdbeVarDetail::ContIac::diff(
 PnlWdbeVarDetail::ContInf::ContInf(
 			const string& TxtSrf
 			, const string& TxtClu
-			, const string& TxtPrc
+			, const string& TxtReu
 		) :
 			Block()
 		{
 	this->TxtSrf = TxtSrf;
 	this->TxtClu = TxtClu;
-	this->TxtPrc = TxtPrc;
+	this->TxtReu = TxtReu;
 
-	mask = {TXTSRF, TXTCLU, TXTPRC};
+	mask = {TXTSRF, TXTCLU, TXTREU};
 };
 
 void PnlWdbeVarDetail::ContInf::writeJSON(
@@ -247,7 +256,7 @@ void PnlWdbeVarDetail::ContInf::writeJSON(
 
 	me["TxtSrf"] = TxtSrf;
 	me["TxtClu"] = TxtClu;
-	me["TxtPrc"] = TxtPrc;
+	me["TxtReu"] = TxtReu;
 };
 
 void PnlWdbeVarDetail::ContInf::writeXML(
@@ -264,7 +273,7 @@ void PnlWdbeVarDetail::ContInf::writeXML(
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
 		writeStringAttr(wr, itemtag, "sref", "TxtSrf", TxtSrf);
 		writeStringAttr(wr, itemtag, "sref", "TxtClu", TxtClu);
-		writeStringAttr(wr, itemtag, "sref", "TxtPrc", TxtPrc);
+		writeStringAttr(wr, itemtag, "sref", "TxtReu", TxtReu);
 	xmlTextWriterEndElement(wr);
 };
 
@@ -275,7 +284,7 @@ set<uint> PnlWdbeVarDetail::ContInf::comm(
 
 	if (TxtSrf == comp->TxtSrf) insert(items, TXTSRF);
 	if (TxtClu == comp->TxtClu) insert(items, TXTCLU);
-	if (TxtPrc == comp->TxtPrc) insert(items, TXTPRC);
+	if (TxtReu == comp->TxtReu) insert(items, TXTREU);
 
 	return(items);
 };
@@ -288,7 +297,7 @@ set<uint> PnlWdbeVarDetail::ContInf::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {TXTSRF, TXTCLU, TXTPRC};
+	diffitems = {TXTSRF, TXTCLU, TXTREU};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -352,7 +361,9 @@ PnlWdbeVarDetail::StatShr::StatShr(
 			, const bool ButCluViewActive
 			, const bool ButCluClusterAvail
 			, const bool ButCluUnclusterAvail
-			, const bool TxtPrcActive
+			, const bool TxtReuActive
+			, const bool ButReuViewAvail
+			, const bool ButReuViewActive
 			, const bool ChkConActive
 			, const bool ChkFalActive
 			, const bool PupHtyActive
@@ -374,7 +385,9 @@ PnlWdbeVarDetail::StatShr::StatShr(
 	this->ButCluViewActive = ButCluViewActive;
 	this->ButCluClusterAvail = ButCluClusterAvail;
 	this->ButCluUnclusterAvail = ButCluUnclusterAvail;
-	this->TxtPrcActive = TxtPrcActive;
+	this->TxtReuActive = TxtReuActive;
+	this->ButReuViewAvail = ButReuViewAvail;
+	this->ButReuViewActive = ButReuViewActive;
 	this->ChkConActive = ChkConActive;
 	this->ChkFalActive = ChkFalActive;
 	this->PupHtyActive = PupHtyActive;
@@ -386,7 +399,7 @@ PnlWdbeVarDetail::StatShr::StatShr(
 	this->ChkDfoActive = ChkDfoActive;
 	this->TxfCmtActive = TxfCmtActive;
 
-	mask = {TXFHTYVALID, BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, LSTCLUACTIVE, BUTCLUVIEWACTIVE, BUTCLUCLUSTERAVAIL, BUTCLUUNCLUSTERAVAIL, TXTPRCACTIVE, CHKCONACTIVE, CHKFALACTIVE, PUPHTYACTIVE, BUTHTYEDITAVAIL, TXFWIDACTIVE, TXFMMXACTIVE, TXFONVACTIVE, TXFOFVACTIVE, CHKDFOACTIVE, TXFCMTACTIVE};
+	mask = {TXFHTYVALID, BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, LSTCLUACTIVE, BUTCLUVIEWACTIVE, BUTCLUCLUSTERAVAIL, BUTCLUUNCLUSTERAVAIL, TXTREUACTIVE, BUTREUVIEWAVAIL, BUTREUVIEWACTIVE, CHKCONACTIVE, CHKFALACTIVE, PUPHTYACTIVE, BUTHTYEDITAVAIL, TXFWIDACTIVE, TXFMMXACTIVE, TXFONVACTIVE, TXFOFVACTIVE, CHKDFOACTIVE, TXFCMTACTIVE};
 };
 
 void PnlWdbeVarDetail::StatShr::writeJSON(
@@ -405,7 +418,9 @@ void PnlWdbeVarDetail::StatShr::writeJSON(
 	me["ButCluViewActive"] = ButCluViewActive;
 	me["ButCluClusterAvail"] = ButCluClusterAvail;
 	me["ButCluUnclusterAvail"] = ButCluUnclusterAvail;
-	me["TxtPrcActive"] = TxtPrcActive;
+	me["TxtReuActive"] = TxtReuActive;
+	me["ButReuViewAvail"] = ButReuViewAvail;
+	me["ButReuViewActive"] = ButReuViewActive;
 	me["ChkConActive"] = ChkConActive;
 	me["ChkFalActive"] = ChkFalActive;
 	me["PupHtyActive"] = PupHtyActive;
@@ -438,7 +453,9 @@ void PnlWdbeVarDetail::StatShr::writeXML(
 		writeBoolAttr(wr, itemtag, "sref", "ButCluViewActive", ButCluViewActive);
 		writeBoolAttr(wr, itemtag, "sref", "ButCluClusterAvail", ButCluClusterAvail);
 		writeBoolAttr(wr, itemtag, "sref", "ButCluUnclusterAvail", ButCluUnclusterAvail);
-		writeBoolAttr(wr, itemtag, "sref", "TxtPrcActive", TxtPrcActive);
+		writeBoolAttr(wr, itemtag, "sref", "TxtReuActive", TxtReuActive);
+		writeBoolAttr(wr, itemtag, "sref", "ButReuViewAvail", ButReuViewAvail);
+		writeBoolAttr(wr, itemtag, "sref", "ButReuViewActive", ButReuViewActive);
 		writeBoolAttr(wr, itemtag, "sref", "ChkConActive", ChkConActive);
 		writeBoolAttr(wr, itemtag, "sref", "ChkFalActive", ChkFalActive);
 		writeBoolAttr(wr, itemtag, "sref", "PupHtyActive", PupHtyActive);
@@ -465,7 +482,9 @@ set<uint> PnlWdbeVarDetail::StatShr::comm(
 	if (ButCluViewActive == comp->ButCluViewActive) insert(items, BUTCLUVIEWACTIVE);
 	if (ButCluClusterAvail == comp->ButCluClusterAvail) insert(items, BUTCLUCLUSTERAVAIL);
 	if (ButCluUnclusterAvail == comp->ButCluUnclusterAvail) insert(items, BUTCLUUNCLUSTERAVAIL);
-	if (TxtPrcActive == comp->TxtPrcActive) insert(items, TXTPRCACTIVE);
+	if (TxtReuActive == comp->TxtReuActive) insert(items, TXTREUACTIVE);
+	if (ButReuViewAvail == comp->ButReuViewAvail) insert(items, BUTREUVIEWAVAIL);
+	if (ButReuViewActive == comp->ButReuViewActive) insert(items, BUTREUVIEWACTIVE);
 	if (ChkConActive == comp->ChkConActive) insert(items, CHKCONACTIVE);
 	if (ChkFalActive == comp->ChkFalActive) insert(items, CHKFALACTIVE);
 	if (PupHtyActive == comp->PupHtyActive) insert(items, PUPHTYACTIVE);
@@ -488,7 +507,7 @@ set<uint> PnlWdbeVarDetail::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {TXFHTYVALID, BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, LSTCLUACTIVE, BUTCLUVIEWACTIVE, BUTCLUCLUSTERAVAIL, BUTCLUUNCLUSTERAVAIL, TXTPRCACTIVE, CHKCONACTIVE, CHKFALACTIVE, PUPHTYACTIVE, BUTHTYEDITAVAIL, TXFWIDACTIVE, TXFMMXACTIVE, TXFONVACTIVE, TXFOFVACTIVE, CHKDFOACTIVE, TXFCMTACTIVE};
+	diffitems = {TXFHTYVALID, BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, LSTCLUACTIVE, BUTCLUVIEWACTIVE, BUTCLUCLUSTERAVAIL, BUTCLUUNCLUSTERAVAIL, TXTREUACTIVE, BUTREUVIEWAVAIL, BUTREUVIEWACTIVE, CHKCONACTIVE, CHKFALACTIVE, PUPHTYACTIVE, BUTHTYEDITAVAIL, TXFWIDACTIVE, TXFMMXACTIVE, TXFONVACTIVE, TXFOFVACTIVE, CHKDFOACTIVE, TXFCMTACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -509,7 +528,7 @@ void PnlWdbeVarDetail::Tag::writeJSON(
 
 	if (ixWdbeVLocale == VecWdbeVLocale::ENUS) {
 		me["CptSrf"] = "identifier";
-		me["CptPrc"] = "process";
+		me["CptReu"] = "reference";
 		me["CptCon"] = "constant";
 		me["CptFal"] = "falling edge sub-process";
 		me["CptHty"] = "HDL data type";
@@ -539,7 +558,7 @@ void PnlWdbeVarDetail::Tag::writeXML(
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
 		if (ixWdbeVLocale == VecWdbeVLocale::ENUS) {
 			writeStringAttr(wr, itemtag, "sref", "CptSrf", "identifier");
-			writeStringAttr(wr, itemtag, "sref", "CptPrc", "process");
+			writeStringAttr(wr, itemtag, "sref", "CptReu", "reference");
 			writeStringAttr(wr, itemtag, "sref", "CptCon", "constant");
 			writeStringAttr(wr, itemtag, "sref", "CptFal", "falling edge sub-process");
 			writeStringAttr(wr, itemtag, "sref", "CptHty", "HDL data type");
@@ -706,18 +725,20 @@ PnlWdbeVarDetail::DpchEngData::DpchEngData(
 			, ContInf* continf
 			, Feed* feedFLstClu
 			, Feed* feedFPupHty
+			, Feed* feedFPupRet
 			, StatShr* statshr
 			, const set<uint>& mask
 		) :
 			DpchEngWdbe(VecWdbeVDpch::DPCHENGWDBEVARDETAILDATA, jref)
 		{
-	if (find(mask, ALL)) this->mask = {JREF, CONTIAC, CONTINF, FEEDFLSTCLU, FEEDFPUPHTY, STATAPP, STATSHR, TAG};
+	if (find(mask, ALL)) this->mask = {JREF, CONTIAC, CONTINF, FEEDFLSTCLU, FEEDFPUPHTY, FEEDFPUPRET, STATAPP, STATSHR, TAG};
 	else this->mask = mask;
 
 	if (find(this->mask, CONTIAC) && contiac) this->contiac = *contiac;
 	if (find(this->mask, CONTINF) && continf) this->continf = *continf;
 	if (find(this->mask, FEEDFLSTCLU) && feedFLstClu) this->feedFLstClu = *feedFLstClu;
 	if (find(this->mask, FEEDFPUPHTY) && feedFPupHty) this->feedFPupHty = *feedFPupHty;
+	if (find(this->mask, FEEDFPUPRET) && feedFPupRet) this->feedFPupRet = *feedFPupRet;
 	if (find(this->mask, STATSHR) && statshr) this->statshr = *statshr;
 };
 
@@ -730,6 +751,7 @@ string PnlWdbeVarDetail::DpchEngData::getSrefsMask() {
 	if (has(CONTINF)) ss.push_back("continf");
 	if (has(FEEDFLSTCLU)) ss.push_back("feedFLstClu");
 	if (has(FEEDFPUPHTY)) ss.push_back("feedFPupHty");
+	if (has(FEEDFPUPRET)) ss.push_back("feedFPupRet");
 	if (has(STATAPP)) ss.push_back("statapp");
 	if (has(STATSHR)) ss.push_back("statshr");
 	if (has(TAG)) ss.push_back("tag");
@@ -749,6 +771,7 @@ void PnlWdbeVarDetail::DpchEngData::merge(
 	if (src->has(CONTINF)) {continf = src->continf; add(CONTINF);};
 	if (src->has(FEEDFLSTCLU)) {feedFLstClu = src->feedFLstClu; add(FEEDFLSTCLU);};
 	if (src->has(FEEDFPUPHTY)) {feedFPupHty = src->feedFPupHty; add(FEEDFPUPHTY);};
+	if (src->has(FEEDFPUPRET)) {feedFPupRet = src->feedFPupRet; add(FEEDFPUPRET);};
 	if (src->has(STATAPP)) add(STATAPP);
 	if (src->has(STATSHR)) {statshr = src->statshr; add(STATSHR);};
 	if (src->has(TAG)) add(TAG);
@@ -765,6 +788,7 @@ void PnlWdbeVarDetail::DpchEngData::writeJSON(
 	if (has(CONTINF)) continf.writeJSON(me);
 	if (has(FEEDFLSTCLU)) feedFLstClu.writeJSON(me);
 	if (has(FEEDFPUPHTY)) feedFPupHty.writeJSON(me);
+	if (has(FEEDFPUPRET)) feedFPupRet.writeJSON(me);
 	if (has(STATAPP)) StatApp::writeJSON(me);
 	if (has(STATSHR)) statshr.writeJSON(me);
 	if (has(TAG)) Tag::writeJSON(ixWdbeVLocale, me);
@@ -781,6 +805,7 @@ void PnlWdbeVarDetail::DpchEngData::writeXML(
 		if (has(CONTINF)) continf.writeXML(wr);
 		if (has(FEEDFLSTCLU)) feedFLstClu.writeXML(wr);
 		if (has(FEEDFPUPHTY)) feedFPupHty.writeXML(wr);
+		if (has(FEEDFPUPRET)) feedFPupRet.writeXML(wr);
 		if (has(STATAPP)) StatApp::writeXML(wr);
 		if (has(STATSHR)) statshr.writeXML(wr);
 		if (has(TAG)) Tag::writeXML(ixWdbeVLocale, wr);

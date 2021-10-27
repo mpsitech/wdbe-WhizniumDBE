@@ -28,13 +28,14 @@ namespace QryWdbeSigList {
 	class VecVOrd {
 
 	public:
-		static const Sbecore::uint CON = 1;
-		static const Sbecore::uint VEC = 2;
-		static const Sbecore::uint MGU = 3;
-		static const Sbecore::uint MGT = 4;
-		static const Sbecore::uint TYP = 5;
-		static const Sbecore::uint MDL = 6;
-		static const Sbecore::uint SRF = 7;
+		static const Sbecore::uint SRF = 1;
+		static const Sbecore::uint TYP = 2;
+		static const Sbecore::uint RET = 3;
+		static const Sbecore::uint REU = 4;
+		static const Sbecore::uint MGT = 5;
+		static const Sbecore::uint MGU = 6;
+		static const Sbecore::uint VEC = 7;
+		static const Sbecore::uint CON = 8;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);
@@ -52,7 +53,7 @@ namespace QryWdbeSigList {
 		static const Sbecore::uint NDISP = 4;
 
 	public:
-		StatApp(const Sbecore::uint firstcol = 1, const Sbecore::uint jnumFirstdisp = 1, const Sbecore::uint ncol = 13, const Sbecore::uint ndisp = 25);
+		StatApp(const Sbecore::uint firstcol = 1, const Sbecore::uint jnumFirstdisp = 1, const Sbecore::uint ncol = 15, const Sbecore::uint ndisp = 25);
 
 	public:
 		Sbecore::uint firstcol;

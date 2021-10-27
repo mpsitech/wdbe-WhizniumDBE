@@ -21,12 +21,10 @@ WdbeQPphList::WdbeQPphList(
 			const uint jnum
 			, const string sref
 			, const string stubRefWdbeMUnit
-			, const string stubRefWdbeMModule
 		) {
 	this->jnum = jnum;
 	this->sref = sref;
 	this->stubRefWdbeMUnit = stubRefWdbeMUnit;
-	this->stubRefWdbeMModule = stubRefWdbeMModule;
 };
 
 bool WdbeQPphList::readXML(
@@ -44,7 +42,6 @@ bool WdbeQPphList::readXML(
 	if (basefound) {
 		extractStringUclc(docctx, basexpath, "sref", "srf", sref);
 		extractStringUclc(docctx, basexpath, "stubRefWdbeMUnit", "unt", stubRefWdbeMUnit);
-		extractStringUclc(docctx, basexpath, "stubRefWdbeMModule", "mdl", stubRefWdbeMModule);
 	};
 
 	return basefound;

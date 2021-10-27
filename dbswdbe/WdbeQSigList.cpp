@@ -26,8 +26,11 @@ WdbeQSigList::WdbeQSigList(
 			, const uint ixVBasetype
 			, const string srefIxVBasetype
 			, const string titIxVBasetype
-			, const ubigint mdlRefWdbeMModule
-			, const string stubMdlRefWdbeMModule
+			, const uint refIxVTbl
+			, const string srefRefIxVTbl
+			, const string titRefIxVTbl
+			, const ubigint refUref
+			, const string stubRefUref
 			, const uint mgeIxVTbl
 			, const string srefMgeIxVTbl
 			, const string titMgeIxVTbl
@@ -50,8 +53,11 @@ WdbeQSigList::WdbeQSigList(
 	this->ixVBasetype = ixVBasetype;
 	this->srefIxVBasetype = srefIxVBasetype;
 	this->titIxVBasetype = titIxVBasetype;
-	this->mdlRefWdbeMModule = mdlRefWdbeMModule;
-	this->stubMdlRefWdbeMModule = stubMdlRefWdbeMModule;
+	this->refIxVTbl = refIxVTbl;
+	this->srefRefIxVTbl = srefRefIxVTbl;
+	this->titRefIxVTbl = titRefIxVTbl;
+	this->refUref = refUref;
+	this->stubRefUref = stubRefUref;
 	this->mgeIxVTbl = mgeIxVTbl;
 	this->srefMgeIxVTbl = srefMgeIxVTbl;
 	this->titMgeIxVTbl = titMgeIxVTbl;
@@ -79,7 +85,9 @@ void WdbeQSigList::writeJSON(
 		me["srf"] = sref;
 		me["typ"] = srefIxVBasetype;
 		me["typ2"] = titIxVBasetype;
-		me["mdl"] = stubMdlRefWdbeMModule;
+		me["ret"] = srefRefIxVTbl;
+		me["ret2"] = titRefIxVTbl;
+		me["reu"] = stubRefUref;
 		me["mgt"] = srefMgeIxVTbl;
 		me["mgt2"] = titMgeIxVTbl;
 		me["mgu"] = stubMgeUref;
@@ -93,7 +101,9 @@ void WdbeQSigList::writeJSON(
 		me["sref"] = sref;
 		me["srefIxVBasetype"] = srefIxVBasetype;
 		me["titIxVBasetype"] = titIxVBasetype;
-		me["stubMdlRefWdbeMModule"] = stubMdlRefWdbeMModule;
+		me["srefRefIxVTbl"] = srefRefIxVTbl;
+		me["titRefIxVTbl"] = titRefIxVTbl;
+		me["stubRefUref"] = stubRefUref;
 		me["srefMgeIxVTbl"] = srefMgeIxVTbl;
 		me["titMgeIxVTbl"] = titMgeIxVTbl;
 		me["stubMgeUref"] = stubMgeUref;
@@ -120,7 +130,9 @@ void WdbeQSigList::writeXML(
 		writeString(wr, "srf", sref);
 		writeString(wr, "typ", srefIxVBasetype);
 		writeString(wr, "typ2", titIxVBasetype);
-		writeString(wr, "mdl", stubMdlRefWdbeMModule);
+		writeString(wr, "ret", srefRefIxVTbl);
+		writeString(wr, "ret2", titRefIxVTbl);
+		writeString(wr, "reu", stubRefUref);
 		writeString(wr, "mgt", srefMgeIxVTbl);
 		writeString(wr, "mgt2", titMgeIxVTbl);
 		writeString(wr, "mgu", stubMgeUref);
@@ -134,7 +146,9 @@ void WdbeQSigList::writeXML(
 		writeString(wr, "sref", sref);
 		writeString(wr, "srefIxVBasetype", srefIxVBasetype);
 		writeString(wr, "titIxVBasetype", titIxVBasetype);
-		writeString(wr, "stubMdlRefWdbeMModule", stubMdlRefWdbeMModule);
+		writeString(wr, "srefRefIxVTbl", srefRefIxVTbl);
+		writeString(wr, "titRefIxVTbl", titRefIxVTbl);
+		writeString(wr, "stubRefUref", stubRefUref);
 		writeString(wr, "srefMgeIxVTbl", srefMgeIxVTbl);
 		writeString(wr, "titMgeIxVTbl", titMgeIxVTbl);
 		writeString(wr, "stubMgeUref", stubMgeUref);
@@ -260,8 +274,11 @@ ubigint TblWdbeQSigList::insertNewRec(
 			, const uint ixVBasetype
 			, const string srefIxVBasetype
 			, const string titIxVBasetype
-			, const ubigint mdlRefWdbeMModule
-			, const string stubMdlRefWdbeMModule
+			, const uint refIxVTbl
+			, const string srefRefIxVTbl
+			, const string titRefIxVTbl
+			, const ubigint refUref
+			, const string stubRefUref
 			, const uint mgeIxVTbl
 			, const string srefMgeIxVTbl
 			, const string titMgeIxVTbl
@@ -279,7 +296,7 @@ ubigint TblWdbeQSigList::insertNewRec(
 	ubigint retval = 0;
 	WdbeQSigList* _rec = NULL;
 
-	_rec = new WdbeQSigList(0, jref, jnum, ref, sref, ixVBasetype, srefIxVBasetype, titIxVBasetype, mdlRefWdbeMModule, stubMdlRefWdbeMModule, mgeIxVTbl, srefMgeIxVTbl, titMgeIxVTbl, mgeUref, stubMgeUref, refWdbeMVector, stubRefWdbeMVector, Const, yesnoConst, srefWdbeKHdltype, titSrefWdbeKHdltype, Width, Minmax);
+	_rec = new WdbeQSigList(0, jref, jnum, ref, sref, ixVBasetype, srefIxVBasetype, titIxVBasetype, refIxVTbl, srefRefIxVTbl, titRefIxVTbl, refUref, stubRefUref, mgeIxVTbl, srefMgeIxVTbl, titMgeIxVTbl, mgeUref, stubMgeUref, refWdbeMVector, stubRefWdbeMVector, Const, yesnoConst, srefWdbeKHdltype, titSrefWdbeKHdltype, Width, Minmax);
 	insertRec(_rec);
 
 	retval = _rec->qref;
@@ -300,8 +317,11 @@ ubigint TblWdbeQSigList::appendNewRecToRst(
 			, const uint ixVBasetype
 			, const string srefIxVBasetype
 			, const string titIxVBasetype
-			, const ubigint mdlRefWdbeMModule
-			, const string stubMdlRefWdbeMModule
+			, const uint refIxVTbl
+			, const string srefRefIxVTbl
+			, const string titRefIxVTbl
+			, const ubigint refUref
+			, const string stubRefUref
 			, const uint mgeIxVTbl
 			, const string srefMgeIxVTbl
 			, const string titMgeIxVTbl
@@ -319,7 +339,7 @@ ubigint TblWdbeQSigList::appendNewRecToRst(
 	ubigint retval = 0;
 	WdbeQSigList* _rec = NULL;
 
-	retval = insertNewRec(&_rec, jref, jnum, ref, sref, ixVBasetype, srefIxVBasetype, titIxVBasetype, mdlRefWdbeMModule, stubMdlRefWdbeMModule, mgeIxVTbl, srefMgeIxVTbl, titMgeIxVTbl, mgeUref, stubMgeUref, refWdbeMVector, stubRefWdbeMVector, Const, yesnoConst, srefWdbeKHdltype, titSrefWdbeKHdltype, Width, Minmax);
+	retval = insertNewRec(&_rec, jref, jnum, ref, sref, ixVBasetype, srefIxVBasetype, titIxVBasetype, refIxVTbl, srefRefIxVTbl, titRefIxVTbl, refUref, stubRefUref, mgeIxVTbl, srefMgeIxVTbl, titMgeIxVTbl, mgeUref, stubMgeUref, refWdbeMVector, stubRefWdbeMVector, Const, yesnoConst, srefWdbeKHdltype, titSrefWdbeKHdltype, Width, Minmax);
 	rst.nodes.push_back(_rec);
 
 	if (rec != NULL) *rec = _rec;
@@ -390,8 +410,8 @@ MyTblWdbeQSigList::~MyTblWdbeQSigList() {
 };
 
 void MyTblWdbeQSigList::initStatements() {
-	stmtInsertRec = createStatement("INSERT INTO TblWdbeQSigList (jref, jnum, ref, sref, ixVBasetype, mdlRefWdbeMModule, mgeIxVTbl, mgeUref, refWdbeMVector, Const, srefWdbeKHdltype, Width, Minmax) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)", false);
-	stmtUpdateRec = createStatement("UPDATE TblWdbeQSigList SET jref = ?, jnum = ?, ref = ?, sref = ?, ixVBasetype = ?, mdlRefWdbeMModule = ?, mgeIxVTbl = ?, mgeUref = ?, refWdbeMVector = ?, Const = ?, srefWdbeKHdltype = ?, Width = ?, Minmax = ? WHERE qref = ?", false);
+	stmtInsertRec = createStatement("INSERT INTO TblWdbeQSigList (jref, jnum, ref, sref, ixVBasetype, refIxVTbl, refUref, mgeIxVTbl, mgeUref, refWdbeMVector, Const, srefWdbeKHdltype, Width, Minmax) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)", false);
+	stmtUpdateRec = createStatement("UPDATE TblWdbeQSigList SET jref = ?, jnum = ?, ref = ?, sref = ?, ixVBasetype = ?, refIxVTbl = ?, refUref = ?, mgeIxVTbl = ?, mgeUref = ?, refWdbeMVector = ?, Const = ?, srefWdbeKHdltype = ?, Width = ?, Minmax = ? WHERE qref = ?", false);
 	stmtRemoveRecByQref = createStatement("DELETE FROM TblWdbeQSigList WHERE qref = ?", false);
 	stmtRemoveRstByJref = createStatement("DELETE FROM TblWdbeQSigList WHERE jref = ?", false);
 };
@@ -428,14 +448,15 @@ bool MyTblWdbeQSigList::loadRecBySQL(
 		if (dbrow[3]) _rec->ref = atoll((char*) dbrow[3]); else _rec->ref = 0;
 		if (dbrow[4]) _rec->sref.assign(dbrow[4], dblengths[4]); else _rec->sref = "";
 		if (dbrow[5]) _rec->ixVBasetype = atol((char*) dbrow[5]); else _rec->ixVBasetype = 0;
-		if (dbrow[6]) _rec->mdlRefWdbeMModule = atoll((char*) dbrow[6]); else _rec->mdlRefWdbeMModule = 0;
-		if (dbrow[7]) _rec->mgeIxVTbl = atol((char*) dbrow[7]); else _rec->mgeIxVTbl = 0;
-		if (dbrow[8]) _rec->mgeUref = atoll((char*) dbrow[8]); else _rec->mgeUref = 0;
-		if (dbrow[9]) _rec->refWdbeMVector = atoll((char*) dbrow[9]); else _rec->refWdbeMVector = 0;
-		if (dbrow[10]) _rec->Const = (atoi((char*) dbrow[10]) != 0); else _rec->Const = false;
-		if (dbrow[11]) _rec->srefWdbeKHdltype.assign(dbrow[11], dblengths[11]); else _rec->srefWdbeKHdltype = "";
-		if (dbrow[12]) _rec->Width = atoi((char*) dbrow[12]); else _rec->Width = 0;
-		if (dbrow[13]) _rec->Minmax.assign(dbrow[13], dblengths[13]); else _rec->Minmax = "";
+		if (dbrow[6]) _rec->refIxVTbl = atol((char*) dbrow[6]); else _rec->refIxVTbl = 0;
+		if (dbrow[7]) _rec->refUref = atoll((char*) dbrow[7]); else _rec->refUref = 0;
+		if (dbrow[8]) _rec->mgeIxVTbl = atol((char*) dbrow[8]); else _rec->mgeIxVTbl = 0;
+		if (dbrow[9]) _rec->mgeUref = atoll((char*) dbrow[9]); else _rec->mgeUref = 0;
+		if (dbrow[10]) _rec->refWdbeMVector = atoll((char*) dbrow[10]); else _rec->refWdbeMVector = 0;
+		if (dbrow[11]) _rec->Const = (atoi((char*) dbrow[11]) != 0); else _rec->Const = false;
+		if (dbrow[12]) _rec->srefWdbeKHdltype.assign(dbrow[12], dblengths[12]); else _rec->srefWdbeKHdltype = "";
+		if (dbrow[13]) _rec->Width = atoi((char*) dbrow[13]); else _rec->Width = 0;
+		if (dbrow[14]) _rec->Minmax.assign(dbrow[14], dblengths[14]); else _rec->Minmax = "";
 
 		retval = true;
 	};
@@ -484,14 +505,15 @@ ubigint MyTblWdbeQSigList::loadRstBySQL(
 			if (dbrow[3]) rec->ref = atoll((char*) dbrow[3]); else rec->ref = 0;
 			if (dbrow[4]) rec->sref.assign(dbrow[4], dblengths[4]); else rec->sref = "";
 			if (dbrow[5]) rec->ixVBasetype = atol((char*) dbrow[5]); else rec->ixVBasetype = 0;
-			if (dbrow[6]) rec->mdlRefWdbeMModule = atoll((char*) dbrow[6]); else rec->mdlRefWdbeMModule = 0;
-			if (dbrow[7]) rec->mgeIxVTbl = atol((char*) dbrow[7]); else rec->mgeIxVTbl = 0;
-			if (dbrow[8]) rec->mgeUref = atoll((char*) dbrow[8]); else rec->mgeUref = 0;
-			if (dbrow[9]) rec->refWdbeMVector = atoll((char*) dbrow[9]); else rec->refWdbeMVector = 0;
-			if (dbrow[10]) rec->Const = (atoi((char*) dbrow[10]) != 0); else rec->Const = false;
-			if (dbrow[11]) rec->srefWdbeKHdltype.assign(dbrow[11], dblengths[11]); else rec->srefWdbeKHdltype = "";
-			if (dbrow[12]) rec->Width = atoi((char*) dbrow[12]); else rec->Width = 0;
-			if (dbrow[13]) rec->Minmax.assign(dbrow[13], dblengths[13]); else rec->Minmax = "";
+			if (dbrow[6]) rec->refIxVTbl = atol((char*) dbrow[6]); else rec->refIxVTbl = 0;
+			if (dbrow[7]) rec->refUref = atoll((char*) dbrow[7]); else rec->refUref = 0;
+			if (dbrow[8]) rec->mgeIxVTbl = atol((char*) dbrow[8]); else rec->mgeIxVTbl = 0;
+			if (dbrow[9]) rec->mgeUref = atoll((char*) dbrow[9]); else rec->mgeUref = 0;
+			if (dbrow[10]) rec->refWdbeMVector = atoll((char*) dbrow[10]); else rec->refWdbeMVector = 0;
+			if (dbrow[11]) rec->Const = (atoi((char*) dbrow[11]) != 0); else rec->Const = false;
+			if (dbrow[12]) rec->srefWdbeKHdltype.assign(dbrow[12], dblengths[12]); else rec->srefWdbeKHdltype = "";
+			if (dbrow[13]) rec->Width = atoi((char*) dbrow[13]); else rec->Width = 0;
+			if (dbrow[14]) rec->Minmax.assign(dbrow[14], dblengths[14]); else rec->Minmax = "";
 			rst.nodes.push_back(rec);
 
 			numread++;
@@ -506,12 +528,12 @@ ubigint MyTblWdbeQSigList::loadRstBySQL(
 ubigint MyTblWdbeQSigList::insertRec(
 			WdbeQSigList* rec
 		) {
-	unsigned long l[13]; my_bool n[13]; my_bool e[13];
+	unsigned long l[14]; my_bool n[14]; my_bool e[14];
 
 	l[3] = rec->sref.length();
 	tinyint Const = rec->Const;
-	l[10] = rec->srefWdbeKHdltype.length();
-	l[12] = rec->Minmax.length();
+	l[11] = rec->srefWdbeKHdltype.length();
+	l[13] = rec->Minmax.length();
 
 	MYSQL_BIND bind[] = {
 		bindUbigint(&rec->jref,&(l[0]),&(n[0]),&(e[0])),
@@ -519,14 +541,15 @@ ubigint MyTblWdbeQSigList::insertRec(
 		bindUbigint(&rec->ref,&(l[2]),&(n[2]),&(e[2])),
 		bindCstring((char*) (rec->sref.c_str()),&(l[3]),&(n[3]),&(e[3])),
 		bindUint(&rec->ixVBasetype,&(l[4]),&(n[4]),&(e[4])),
-		bindUbigint(&rec->mdlRefWdbeMModule,&(l[5]),&(n[5]),&(e[5])),
-		bindUint(&rec->mgeIxVTbl,&(l[6]),&(n[6]),&(e[6])),
-		bindUbigint(&rec->mgeUref,&(l[7]),&(n[7]),&(e[7])),
-		bindUbigint(&rec->refWdbeMVector,&(l[8]),&(n[8]),&(e[8])),
-		bindTinyint(&Const,&(l[9]),&(n[9]),&(e[9])),
-		bindCstring((char*) (rec->srefWdbeKHdltype.c_str()),&(l[10]),&(n[10]),&(e[10])),
-		bindUsmallint(&rec->Width,&(l[11]),&(n[11]),&(e[11])),
-		bindCstring((char*) (rec->Minmax.c_str()),&(l[12]),&(n[12]),&(e[12]))
+		bindUint(&rec->refIxVTbl,&(l[5]),&(n[5]),&(e[5])),
+		bindUbigint(&rec->refUref,&(l[6]),&(n[6]),&(e[6])),
+		bindUint(&rec->mgeIxVTbl,&(l[7]),&(n[7]),&(e[7])),
+		bindUbigint(&rec->mgeUref,&(l[8]),&(n[8]),&(e[8])),
+		bindUbigint(&rec->refWdbeMVector,&(l[9]),&(n[9]),&(e[9])),
+		bindTinyint(&Const,&(l[10]),&(n[10]),&(e[10])),
+		bindCstring((char*) (rec->srefWdbeKHdltype.c_str()),&(l[11]),&(n[11]),&(e[11])),
+		bindUsmallint(&rec->Width,&(l[12]),&(n[12]),&(e[12])),
+		bindCstring((char*) (rec->Minmax.c_str()),&(l[13]),&(n[13]),&(e[13]))
 	};
 
 	if (mysql_stmt_bind_param(stmtInsertRec, bind)) {
@@ -551,12 +574,12 @@ void MyTblWdbeQSigList::insertRst(
 void MyTblWdbeQSigList::updateRec(
 			WdbeQSigList* rec
 		) {
-	unsigned long l[14]; my_bool n[14]; my_bool e[14];
+	unsigned long l[15]; my_bool n[15]; my_bool e[15];
 
 	l[3] = rec->sref.length();
 	tinyint Const = rec->Const;
-	l[10] = rec->srefWdbeKHdltype.length();
-	l[12] = rec->Minmax.length();
+	l[11] = rec->srefWdbeKHdltype.length();
+	l[13] = rec->Minmax.length();
 
 	MYSQL_BIND bind[] = {
 		bindUbigint(&rec->jref,&(l[0]),&(n[0]),&(e[0])),
@@ -564,15 +587,16 @@ void MyTblWdbeQSigList::updateRec(
 		bindUbigint(&rec->ref,&(l[2]),&(n[2]),&(e[2])),
 		bindCstring((char*) (rec->sref.c_str()),&(l[3]),&(n[3]),&(e[3])),
 		bindUint(&rec->ixVBasetype,&(l[4]),&(n[4]),&(e[4])),
-		bindUbigint(&rec->mdlRefWdbeMModule,&(l[5]),&(n[5]),&(e[5])),
-		bindUint(&rec->mgeIxVTbl,&(l[6]),&(n[6]),&(e[6])),
-		bindUbigint(&rec->mgeUref,&(l[7]),&(n[7]),&(e[7])),
-		bindUbigint(&rec->refWdbeMVector,&(l[8]),&(n[8]),&(e[8])),
-		bindTinyint(&Const,&(l[9]),&(n[9]),&(e[9])),
-		bindCstring((char*) (rec->srefWdbeKHdltype.c_str()),&(l[10]),&(n[10]),&(e[10])),
-		bindUsmallint(&rec->Width,&(l[11]),&(n[11]),&(e[11])),
-		bindCstring((char*) (rec->Minmax.c_str()),&(l[12]),&(n[12]),&(e[12])),
-		bindUbigint(&rec->qref,&(l[13]),&(n[13]),&(e[13]))
+		bindUint(&rec->refIxVTbl,&(l[5]),&(n[5]),&(e[5])),
+		bindUbigint(&rec->refUref,&(l[6]),&(n[6]),&(e[6])),
+		bindUint(&rec->mgeIxVTbl,&(l[7]),&(n[7]),&(e[7])),
+		bindUbigint(&rec->mgeUref,&(l[8]),&(n[8]),&(e[8])),
+		bindUbigint(&rec->refWdbeMVector,&(l[9]),&(n[9]),&(e[9])),
+		bindTinyint(&Const,&(l[10]),&(n[10]),&(e[10])),
+		bindCstring((char*) (rec->srefWdbeKHdltype.c_str()),&(l[11]),&(n[11]),&(e[11])),
+		bindUsmallint(&rec->Width,&(l[12]),&(n[12]),&(e[12])),
+		bindCstring((char*) (rec->Minmax.c_str()),&(l[13]),&(n[13]),&(e[13])),
+		bindUbigint(&rec->qref,&(l[14]),&(n[14]),&(e[14]))
 	};
 
 	if (mysql_stmt_bind_param(stmtUpdateRec, bind)) {
@@ -661,13 +685,13 @@ PgTblWdbeQSigList::~PgTblWdbeQSigList() {
 };
 
 void PgTblWdbeQSigList::initStatements() {
-	createStatement("TblWdbeQSigList_insertRec", "INSERT INTO TblWdbeQSigList (jref, jnum, ref, sref, ixVBasetype, mdlRefWdbeMModule, mgeIxVTbl, mgeUref, refWdbeMVector, Const, srefWdbeKHdltype, Width, Minmax) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13) RETURNING qref", 13);
-	createStatement("TblWdbeQSigList_updateRec", "UPDATE TblWdbeQSigList SET jref = $1, jnum = $2, ref = $3, sref = $4, ixVBasetype = $5, mdlRefWdbeMModule = $6, mgeIxVTbl = $7, mgeUref = $8, refWdbeMVector = $9, Const = $10, srefWdbeKHdltype = $11, Width = $12, Minmax = $13 WHERE qref = $14", 14);
+	createStatement("TblWdbeQSigList_insertRec", "INSERT INTO TblWdbeQSigList (jref, jnum, ref, sref, ixVBasetype, refIxVTbl, refUref, mgeIxVTbl, mgeUref, refWdbeMVector, Const, srefWdbeKHdltype, Width, Minmax) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14) RETURNING qref", 14);
+	createStatement("TblWdbeQSigList_updateRec", "UPDATE TblWdbeQSigList SET jref = $1, jnum = $2, ref = $3, sref = $4, ixVBasetype = $5, refIxVTbl = $6, refUref = $7, mgeIxVTbl = $8, mgeUref = $9, refWdbeMVector = $10, Const = $11, srefWdbeKHdltype = $12, Width = $13, Minmax = $14 WHERE qref = $15", 15);
 	createStatement("TblWdbeQSigList_removeRecByQref", "DELETE FROM TblWdbeQSigList WHERE qref = $1", 1);
 	createStatement("TblWdbeQSigList_removeRstByJref", "DELETE FROM TblWdbeQSigList WHERE jref = $1", 1);
 
-	createStatement("TblWdbeQSigList_loadRecByQref", "SELECT qref, jref, jnum, ref, sref, ixVBasetype, mdlRefWdbeMModule, mgeIxVTbl, mgeUref, refWdbeMVector, Const, srefWdbeKHdltype, Width, Minmax FROM TblWdbeQSigList WHERE qref = $1", 1);
-	createStatement("TblWdbeQSigList_loadRstByJref", "SELECT qref, jref, jnum, ref, sref, ixVBasetype, mdlRefWdbeMModule, mgeIxVTbl, mgeUref, refWdbeMVector, Const, srefWdbeKHdltype, Width, Minmax FROM TblWdbeQSigList WHERE jref = $1 ORDER BY jnum ASC", 1);
+	createStatement("TblWdbeQSigList_loadRecByQref", "SELECT qref, jref, jnum, ref, sref, ixVBasetype, refIxVTbl, refUref, mgeIxVTbl, mgeUref, refWdbeMVector, Const, srefWdbeKHdltype, Width, Minmax FROM TblWdbeQSigList WHERE qref = $1", 1);
+	createStatement("TblWdbeQSigList_loadRstByJref", "SELECT qref, jref, jnum, ref, sref, ixVBasetype, refIxVTbl, refUref, mgeIxVTbl, mgeUref, refWdbeMVector, Const, srefWdbeKHdltype, Width, Minmax FROM TblWdbeQSigList WHERE jref = $1 ORDER BY jnum ASC", 1);
 };
 
 bool PgTblWdbeQSigList::loadRec(
@@ -689,7 +713,8 @@ bool PgTblWdbeQSigList::loadRec(
 			PQfnumber(res, "ref"),
 			PQfnumber(res, "sref"),
 			PQfnumber(res, "ixvbasetype"),
-			PQfnumber(res, "mdlrefwdbemmodule"),
+			PQfnumber(res, "refixvtbl"),
+			PQfnumber(res, "refuref"),
 			PQfnumber(res, "mgeixvtbl"),
 			PQfnumber(res, "mgeuref"),
 			PQfnumber(res, "refwdbemvector"),
@@ -705,14 +730,15 @@ bool PgTblWdbeQSigList::loadRec(
 		ptr = PQgetvalue(res, 0, fnum[3]); _rec->ref = atoll(ptr);
 		ptr = PQgetvalue(res, 0, fnum[4]); _rec->sref.assign(ptr, PQgetlength(res, 0, fnum[4]));
 		ptr = PQgetvalue(res, 0, fnum[5]); _rec->ixVBasetype = atol(ptr);
-		ptr = PQgetvalue(res, 0, fnum[6]); _rec->mdlRefWdbeMModule = atoll(ptr);
-		ptr = PQgetvalue(res, 0, fnum[7]); _rec->mgeIxVTbl = atol(ptr);
-		ptr = PQgetvalue(res, 0, fnum[8]); _rec->mgeUref = atoll(ptr);
-		ptr = PQgetvalue(res, 0, fnum[9]); _rec->refWdbeMVector = atoll(ptr);
-		ptr = PQgetvalue(res, 0, fnum[10]); _rec->Const = (atoi(ptr) != 0);
-		ptr = PQgetvalue(res, 0, fnum[11]); _rec->srefWdbeKHdltype.assign(ptr, PQgetlength(res, 0, fnum[11]));
-		ptr = PQgetvalue(res, 0, fnum[12]); _rec->Width = atoi(ptr);
-		ptr = PQgetvalue(res, 0, fnum[13]); _rec->Minmax.assign(ptr, PQgetlength(res, 0, fnum[13]));
+		ptr = PQgetvalue(res, 0, fnum[6]); _rec->refIxVTbl = atol(ptr);
+		ptr = PQgetvalue(res, 0, fnum[7]); _rec->refUref = atoll(ptr);
+		ptr = PQgetvalue(res, 0, fnum[8]); _rec->mgeIxVTbl = atol(ptr);
+		ptr = PQgetvalue(res, 0, fnum[9]); _rec->mgeUref = atoll(ptr);
+		ptr = PQgetvalue(res, 0, fnum[10]); _rec->refWdbeMVector = atoll(ptr);
+		ptr = PQgetvalue(res, 0, fnum[11]); _rec->Const = (atoi(ptr) != 0);
+		ptr = PQgetvalue(res, 0, fnum[12]); _rec->srefWdbeKHdltype.assign(ptr, PQgetlength(res, 0, fnum[12]));
+		ptr = PQgetvalue(res, 0, fnum[13]); _rec->Width = atoi(ptr);
+		ptr = PQgetvalue(res, 0, fnum[14]); _rec->Minmax.assign(ptr, PQgetlength(res, 0, fnum[14]));
 
 		retval = true;
 	};
@@ -745,7 +771,8 @@ ubigint PgTblWdbeQSigList::loadRst(
 			PQfnumber(res, "ref"),
 			PQfnumber(res, "sref"),
 			PQfnumber(res, "ixvbasetype"),
-			PQfnumber(res, "mdlrefwdbemmodule"),
+			PQfnumber(res, "refixvtbl"),
+			PQfnumber(res, "refuref"),
 			PQfnumber(res, "mgeixvtbl"),
 			PQfnumber(res, "mgeuref"),
 			PQfnumber(res, "refwdbemvector"),
@@ -764,14 +791,15 @@ ubigint PgTblWdbeQSigList::loadRst(
 			ptr = PQgetvalue(res, numread, fnum[3]); rec->ref = atoll(ptr);
 			ptr = PQgetvalue(res, numread, fnum[4]); rec->sref.assign(ptr, PQgetlength(res, numread, fnum[4]));
 			ptr = PQgetvalue(res, numread, fnum[5]); rec->ixVBasetype = atol(ptr);
-			ptr = PQgetvalue(res, numread, fnum[6]); rec->mdlRefWdbeMModule = atoll(ptr);
-			ptr = PQgetvalue(res, numread, fnum[7]); rec->mgeIxVTbl = atol(ptr);
-			ptr = PQgetvalue(res, numread, fnum[8]); rec->mgeUref = atoll(ptr);
-			ptr = PQgetvalue(res, numread, fnum[9]); rec->refWdbeMVector = atoll(ptr);
-			ptr = PQgetvalue(res, numread, fnum[10]); rec->Const = (atoi(ptr) != 0);
-			ptr = PQgetvalue(res, numread, fnum[11]); rec->srefWdbeKHdltype.assign(ptr, PQgetlength(res, numread, fnum[11]));
-			ptr = PQgetvalue(res, numread, fnum[12]); rec->Width = atoi(ptr);
-			ptr = PQgetvalue(res, numread, fnum[13]); rec->Minmax.assign(ptr, PQgetlength(res, numread, fnum[13]));
+			ptr = PQgetvalue(res, numread, fnum[6]); rec->refIxVTbl = atol(ptr);
+			ptr = PQgetvalue(res, numread, fnum[7]); rec->refUref = atoll(ptr);
+			ptr = PQgetvalue(res, numread, fnum[8]); rec->mgeIxVTbl = atol(ptr);
+			ptr = PQgetvalue(res, numread, fnum[9]); rec->mgeUref = atoll(ptr);
+			ptr = PQgetvalue(res, numread, fnum[10]); rec->refWdbeMVector = atoll(ptr);
+			ptr = PQgetvalue(res, numread, fnum[11]); rec->Const = (atoi(ptr) != 0);
+			ptr = PQgetvalue(res, numread, fnum[12]); rec->srefWdbeKHdltype.assign(ptr, PQgetlength(res, numread, fnum[12]));
+			ptr = PQgetvalue(res, numread, fnum[13]); rec->Width = atoi(ptr);
+			ptr = PQgetvalue(res, numread, fnum[14]); rec->Minmax.assign(ptr, PQgetlength(res, numread, fnum[14]));
 
 			rst.nodes.push_back(rec);
 
@@ -868,7 +896,8 @@ ubigint PgTblWdbeQSigList::insertRec(
 	uint _jnum = htonl(rec->jnum);
 	ubigint _ref = htonl64(rec->ref);
 	uint _ixVBasetype = htonl(rec->ixVBasetype);
-	ubigint _mdlRefWdbeMModule = htonl64(rec->mdlRefWdbeMModule);
+	uint _refIxVTbl = htonl(rec->refIxVTbl);
+	ubigint _refUref = htonl64(rec->refUref);
 	uint _mgeIxVTbl = htonl(rec->mgeIxVTbl);
 	ubigint _mgeUref = htonl64(rec->mgeUref);
 	ubigint _refWdbeMVector = htonl64(rec->refWdbeMVector);
@@ -881,7 +910,8 @@ ubigint PgTblWdbeQSigList::insertRec(
 		(char*) &_ref,
 		rec->sref.c_str(),
 		(char*) &_ixVBasetype,
-		(char*) &_mdlRefWdbeMModule,
+		(char*) &_refIxVTbl,
+		(char*) &_refUref,
 		(char*) &_mgeIxVTbl,
 		(char*) &_mgeUref,
 		(char*) &_refWdbeMVector,
@@ -896,6 +926,7 @@ ubigint PgTblWdbeQSigList::insertRec(
 		sizeof(ubigint),
 		0,
 		sizeof(uint),
+		sizeof(uint),
 		sizeof(ubigint),
 		sizeof(uint),
 		sizeof(ubigint),
@@ -905,9 +936,9 @@ ubigint PgTblWdbeQSigList::insertRec(
 		sizeof(usmallint),
 		0
 	};
-	const int f[] = {1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0};
+	const int f[] = {1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0};
 
-	res = PQexecPrepared(dbs, "TblWdbeQSigList_insertRec", 13, vals, l, f, 0);
+	res = PQexecPrepared(dbs, "TblWdbeQSigList_insertRec", 14, vals, l, f, 0);
 
 	if (PQresultStatus(res) != PGRES_TUPLES_OK)	{
 		string dbms = "PgTblWdbeQSigList::insertRec() / " + string(PQerrorMessage(dbs));
@@ -936,7 +967,8 @@ void PgTblWdbeQSigList::updateRec(
 	uint _jnum = htonl(rec->jnum);
 	ubigint _ref = htonl64(rec->ref);
 	uint _ixVBasetype = htonl(rec->ixVBasetype);
-	ubigint _mdlRefWdbeMModule = htonl64(rec->mdlRefWdbeMModule);
+	uint _refIxVTbl = htonl(rec->refIxVTbl);
+	ubigint _refUref = htonl64(rec->refUref);
 	uint _mgeIxVTbl = htonl(rec->mgeIxVTbl);
 	ubigint _mgeUref = htonl64(rec->mgeUref);
 	ubigint _refWdbeMVector = htonl64(rec->refWdbeMVector);
@@ -950,7 +982,8 @@ void PgTblWdbeQSigList::updateRec(
 		(char*) &_ref,
 		rec->sref.c_str(),
 		(char*) &_ixVBasetype,
-		(char*) &_mdlRefWdbeMModule,
+		(char*) &_refIxVTbl,
+		(char*) &_refUref,
 		(char*) &_mgeIxVTbl,
 		(char*) &_mgeUref,
 		(char*) &_refWdbeMVector,
@@ -966,6 +999,7 @@ void PgTblWdbeQSigList::updateRec(
 		sizeof(ubigint),
 		0,
 		sizeof(uint),
+		sizeof(uint),
 		sizeof(ubigint),
 		sizeof(uint),
 		sizeof(ubigint),
@@ -976,9 +1010,9 @@ void PgTblWdbeQSigList::updateRec(
 		0,
 		sizeof(ubigint)
 	};
-	const int f[] = {1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1};
+	const int f[] = {1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1};
 
-	res = PQexecPrepared(dbs, "TblWdbeQSigList_updateRec", 14, vals, l, f, 0);
+	res = PQexecPrepared(dbs, "TblWdbeQSigList_updateRec", 15, vals, l, f, 0);
 
 	if (PQresultStatus(res) != PGRES_COMMAND_OK) {
 		string dbms = "PgTblWdbeQSigList::updateRec() / " + string(PQerrorMessage(dbs));

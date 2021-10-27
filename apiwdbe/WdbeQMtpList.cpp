@@ -20,6 +20,8 @@ using namespace Xmlio;
 WdbeQMtpList::WdbeQMtpList(
 			const uint jnum
 			, const string sref
+			, const string srefWdbeKVendor
+			, const string titSrefWdbeKVendor
 			, const string srefIxVBasetype
 			, const string titIxVBasetype
 			, const string srefHkIxVTbl
@@ -29,6 +31,8 @@ WdbeQMtpList::WdbeQMtpList(
 		) {
 	this->jnum = jnum;
 	this->sref = sref;
+	this->srefWdbeKVendor = srefWdbeKVendor;
+	this->titSrefWdbeKVendor = titSrefWdbeKVendor;
 	this->srefIxVBasetype = srefIxVBasetype;
 	this->titIxVBasetype = titIxVBasetype;
 	this->srefHkIxVTbl = srefHkIxVTbl;
@@ -51,6 +55,8 @@ bool WdbeQMtpList::readXML(
 
 	if (basefound) {
 		extractStringUclc(docctx, basexpath, "sref", "srf", sref);
+		extractStringUclc(docctx, basexpath, "srefWdbeKVendor", "vnd", srefWdbeKVendor);
+		extractStringUclc(docctx, basexpath, "titSrefWdbeKVendor", "vnd2", titSrefWdbeKVendor);
 		extractStringUclc(docctx, basexpath, "srefIxVBasetype", "typ", srefIxVBasetype);
 		extractStringUclc(docctx, basexpath, "titIxVBasetype", "typ2", titIxVBasetype);
 		extractStringUclc(docctx, basexpath, "srefHkIxVTbl", "hkt", srefHkIxVTbl);

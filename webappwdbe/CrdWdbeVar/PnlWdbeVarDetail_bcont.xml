@@ -9,6 +9,8 @@
 			function handleButCluViewClick() {parent.parent.window.handleButCrdopenClick("ButCluView");};
 			function handleButCluClusterClick() {parent.parent.window.handleButClick("ButCluCluster");};
 			function handleButCluUnclusterClick() {parent.parent.window.handleButClick("ButCluUncluster");};
+			function handlePupRetChange() {parent.parent.window.handlePupChange(document,"PupRet","xs");};
+			function handleButReuViewClick() {parent.parent.window.handleButCrdopenClick("ButReuView");};
 			function handleChkConChange() {parent.parent.window.handleChkChange(document,"ChkCon");};
 			function handleChkFalChange() {parent.parent.window.handleChkChange(document,"ChkFal");};
 			function handlePupHtyChange() {parent.parent.window.handlePupChange(document,"PupHty","");};
@@ -82,17 +84,21 @@
 					<td colspan="3" height="67"></td>
 					<td colspan="3"></td>
 				</tr>
-				<tr id="trPrc" class="show">
+				<tr id="trReu" class="show">
 					<td height="25"></td>
 					<td align="right">
-						<span id="CptPrc" class="cpt">CptPrc</span>
+						<span id="CptReu" class="cpt">CptReu</span>
 					</td>
 					<td></td>
-					<td colspan="5" align="left">
-						<input id="TxtPrc" class="txfnoed" type="text" readonly="readonly" value="TxtPrc"/>
+					<td colspan="2" align="left">
+						<select id="PupRet" class="pupxs" size="1" onchange="handlePupRetChange()"/>
+					</td>
+					<td colspan="3" align="left">
+						<input id="TxtReu" class="txfsnoed" type="text" readonly="readonly" value="TxtReu"/>
 					</td>
 					<td></td>
-					<td colspan="2"></td>
+					<td id="rdynReu" colspan="2" align="left">
+					</td>
 				</tr>
 				<tr id="trCon" class="show">
 					<td height="25"></td>

@@ -100,27 +100,27 @@ void DlgWdbeCvrWrite::refreshWrc(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
 		) {
-	StatShrWrc oldStatshrwrc(statshrwrc);
 	ContInfWrc oldContinfwrc(continfwrc);
+	StatShrWrc oldStatshrwrc(statshrwrc);
 
 	// IP refreshWrc --- BEGIN
+	// continfwrc
+
 	// statshrwrc
 	statshrwrc.ButRunActive = evalWrcButRunActive(dbswdbe);
 	statshrwrc.ButStoActive = evalWrcButStoActive(dbswdbe);
 
-	// continfwrc
-
 	// IP refreshWrc --- END
-	if (statshrwrc.diff(&oldStatshrwrc).size() != 0) insert(moditems, DpchEngData::STATSHRWRC);
 	if (continfwrc.diff(&oldContinfwrc).size() != 0) insert(moditems, DpchEngData::CONTINFWRC);
+	if (statshrwrc.diff(&oldStatshrwrc).size() != 0) insert(moditems, DpchEngData::STATSHRWRC);
 };
 
 void DlgWdbeCvrWrite::refreshFia(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
 		) {
-	ContInfFia oldContinffia(continffia);
 	StatShrFia oldStatshrfia(statshrfia);
+	ContInfFia oldContinffia(continffia);
 
 	// IP refreshFia --- RBEGIN
 	// statshrfia
@@ -130,8 +130,8 @@ void DlgWdbeCvrWrite::refreshFia(
 	continffia.Dld = "code.tgz";
 
 	// IP refreshFia --- REND
-	if (continffia.diff(&oldContinffia).size() != 0) insert(moditems, DpchEngData::CONTINFFIA);
 	if (statshrfia.diff(&oldStatshrfia).size() != 0) insert(moditems, DpchEngData::STATSHRFIA);
+	if (continffia.diff(&oldContinffia).size() != 0) insert(moditems, DpchEngData::CONTINFFIA);
 };
 
 void DlgWdbeCvrWrite::refresh(
@@ -142,24 +142,24 @@ void DlgWdbeCvrWrite::refresh(
 	if (muteRefresh && !unmute) return;
 	muteRefresh = true;
 
-	StatShr oldStatshr(statshr);
-	ContIac oldContiac(contiac);
 	ContInf oldContinf(continf);
+	ContIac oldContiac(contiac);
+	StatShr oldStatshr(statshr);
 
 	// IP refresh --- BEGIN
-	// statshr
-	statshr.ButDneActive = evalButDneActive(dbswdbe);
+	// continf
+	continf.numFSge = ixVSge;
 
 	// contiac
 	contiac.numFDse = ixVDit;
 
-	// continf
-	continf.numFSge = ixVSge;
+	// statshr
+	statshr.ButDneActive = evalButDneActive(dbswdbe);
 
 	// IP refresh --- END
-	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
-	if (contiac.diff(&oldContiac).size() != 0) insert(moditems, DpchEngData::CONTIAC);
 	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
+	if (contiac.diff(&oldContiac).size() != 0) insert(moditems, DpchEngData::CONTIAC);
+	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
 
 	refreshCuc(dbswdbe, moditems);
 	refreshWrc(dbswdbe, moditems);
@@ -245,9 +245,9 @@ void DlgWdbeCvrWrite::handleRequest(
 
 	} else if (req->ixVBasetype == ReqWdbe::VecVBasetype::TIMER) {
 		if (ixVSge == VecVSge::UPKIDLE) handleTimerInSgeUpkidle(dbswdbe, req->sref);
-		else if ((req->sref == "mon") && (ixVSge == VecVSge::WRITE)) handleTimerWithSrefMonInSgeWrite(dbswdbe);
-		else if ((req->sref == "mon") && (ixVSge == VecVSge::CREATE)) handleTimerWithSrefMonInSgeCreate(dbswdbe);
 		else if (ixVSge == VecVSge::CREIDLE) handleTimerInSgeCreidle(dbswdbe, req->sref);
+		else if ((req->sref == "mon") && (ixVSge == VecVSge::CREATE)) handleTimerWithSrefMonInSgeCreate(dbswdbe);
+		else if ((req->sref == "mon") && (ixVSge == VecVSge::WRITE)) handleTimerWithSrefMonInSgeWrite(dbswdbe);
 	};
 };
 
@@ -331,11 +331,11 @@ void DlgWdbeCvrWrite::handleTimerInSgeUpkidle(
 	changeStage(dbswdbe, nextIxVSgeSuccess);
 };
 
-void DlgWdbeCvrWrite::handleTimerWithSrefMonInSgeWrite(
+void DlgWdbeCvrWrite::handleTimerInSgeCreidle(
 			DbsWdbe* dbswdbe
+			, const string& sref
 		) {
-	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
-	// IP handleTimerWithSrefMonInSgeWrite --- INSERT
+	changeStage(dbswdbe, nextIxVSgeSuccess);
 };
 
 void DlgWdbeCvrWrite::handleTimerWithSrefMonInSgeCreate(
@@ -345,11 +345,11 @@ void DlgWdbeCvrWrite::handleTimerWithSrefMonInSgeCreate(
 	// IP handleTimerWithSrefMonInSgeCreate --- INSERT
 };
 
-void DlgWdbeCvrWrite::handleTimerInSgeCreidle(
+void DlgWdbeCvrWrite::handleTimerWithSrefMonInSgeWrite(
 			DbsWdbe* dbswdbe
-			, const string& sref
 		) {
-	changeStage(dbswdbe, nextIxVSgeSuccess);
+	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
+	// IP handleTimerWithSrefMonInSgeWrite --- INSERT
 };
 
 void DlgWdbeCvrWrite::changeStage(

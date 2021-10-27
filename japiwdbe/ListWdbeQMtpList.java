@@ -45,7 +45,7 @@ public class ListWdbeQMtpList {
 			clear();
 			
 			for (int i = 0; i < ics.size(); i++) {
-				rec = new WdbeQMtpList(i+1, "", "", "", "", "", "", "");
+				rec = new WdbeQMtpList(i+1, "", "", "", "", "", "", "", "", "");
 
 				if (shorttags.get(i)) s = basexpath + "/row[@jnum='" + ics.get(i).toString() + "']";
 				else s = basexpath + "/WdbeQMtpList[@jnum='" + ics.get(i).toString() + "']";

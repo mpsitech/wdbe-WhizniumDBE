@@ -74,8 +74,8 @@ void WdbeMtpWrfpgaCmdbus_v1_0::writeMdlVhd(
 	ListWdbeMVectoritem vits;
 	WdbeMVectoritem* vit = NULL;
 
-	if (dbswdbe->tblwdbemvector->loadRecBySQL("SELECT TblWdbeMVector.* FROM TblWdbeMSignal, TblWdbeMVector WHERE TblWdbeMSignal.mdlRefWdbeMModule = " + to_string(mdl->supRefWdbeMModule)
-				+ " AND TblWdbeMSignal.sref = 'req" + StrMod::cap(mdl->sref) + "' AND TblWdbeMVector.ref = TblWdbeMSignal.refWdbeMVector", &vec)) {
+	if (dbswdbe->tblwdbemvector->loadRecBySQL("SELECT TblWdbeMVector.* FROM TblWdbeMSignal, TblWdbeMVector WHERE TblWdbeMSignal.refIxVTbl = " + to_string(VecWdbeVMSignalRefTbl::MDL)
+				+ " AND TblWdbeMSignal.refUref = " + to_string(mdl->supRefWdbeMModule) + " AND TblWdbeMSignal.sref = 'req" + StrMod::cap(mdl->sref) + "' AND TblWdbeMVector.ref = TblWdbeMSignal.refWdbeMVector", &vec)) {
 
 		dbswdbe->tblwdbemvectoritem->loadRstByVec(vec->ref, false, vits);
 

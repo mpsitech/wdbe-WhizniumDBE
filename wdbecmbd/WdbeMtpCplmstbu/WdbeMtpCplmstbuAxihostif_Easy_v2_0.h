@@ -1,0 +1,23 @@
+/**
+	* \file WdbeMtpCplmstbuAxihostif_Easy_v2_0.h
+	* Wdbe operation processor - connect AXI controllers, CRC and timeout (declarations)
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 26 Aug 2021
+  */
+// IP header --- ABOVE
+
+#ifndef WDBEMTPCPLMSTBUAXIHOSTIF_EASY_V2_0_H
+#define WDBEMTPCPLMSTBUAXIHOSTIF_EASY_V2_0_H
+
+#include "WdbeMtpCplmstbu.h"
+
+// IP include.cust --- INSERT
+
+namespace WdbeMtpCplmstbuAxihostif_Easy_v2_0 {
+
+	DpchRetWdbe* run(XchgWdbe* xchg, DbsWdbe* dbswdbe, DpchInvWdbeMtpCplmstbu* dpchinv);
+	// IP cust --- INSERT
+};
+
+#endif

@@ -23,8 +23,12 @@ public class CrdWdbeVer {
 		public static final int MITAPPABTCLICK = 2;
 		public static final int MITCRDNEWCLICK = 3;
 		public static final int MITCRDPCVCLICK = 4;
-		public static final int MITCRDIBSCLICK = 5;
-		public static final int MITCRDIDSCLICK = 6;
+		public static final int MITCRDIMDCLICK = 5;
+		public static final int MITCRDICSCLICK = 6;
+		public static final int MITCRDIDACLICK = 7;
+		public static final int MITCRDGFSCLICK = 8;
+		public static final int MITCRDIFSCLICK = 9;
+		public static final int MITCRDFNMCLICK = 10;
 
 		public static int getIx(
 					String sref
@@ -35,8 +39,12 @@ public class CrdWdbeVer {
 			if (s.equals("mitappabtclick")) return MITAPPABTCLICK;
 			if (s.equals("mitcrdnewclick")) return MITCRDNEWCLICK;
 			if (s.equals("mitcrdpcvclick")) return MITCRDPCVCLICK;
-			if (s.equals("mitcrdibsclick")) return MITCRDIBSCLICK;
-			if (s.equals("mitcrdidsclick")) return MITCRDIDSCLICK;
+			if (s.equals("mitcrdimdclick")) return MITCRDIMDCLICK;
+			if (s.equals("mitcrdicsclick")) return MITCRDICSCLICK;
+			if (s.equals("mitcrdidaclick")) return MITCRDIDACLICK;
+			if (s.equals("mitcrdgfsclick")) return MITCRDGFSCLICK;
+			if (s.equals("mitcrdifsclick")) return MITCRDIFSCLICK;
+			if (s.equals("mitcrdfnmclick")) return MITCRDFNMCLICK;
 
 			return 0;
 		};
@@ -48,8 +56,12 @@ public class CrdWdbeVer {
 			if (ix == MITAPPABTCLICK) return("MitAppAbtClick");
 			if (ix == MITCRDNEWCLICK) return("MitCrdNewClick");
 			if (ix == MITCRDPCVCLICK) return("MitCrdPcvClick");
-			if (ix == MITCRDIBSCLICK) return("MitCrdIbsClick");
-			if (ix == MITCRDIDSCLICK) return("MitCrdIdsClick");
+			if (ix == MITCRDIMDCLICK) return("MitCrdImdClick");
+			if (ix == MITCRDICSCLICK) return("MitCrdIcsClick");
+			if (ix == MITCRDIDACLICK) return("MitCrdIdaClick");
+			if (ix == MITCRDGFSCLICK) return("MitCrdGfsClick");
+			if (ix == MITCRDIFSCLICK) return("MitCrdIfsClick");
+			if (ix == MITCRDFNMCLICK) return("MitCrdFnmClick");
 
 			return "";
 		};
@@ -275,26 +287,46 @@ public class CrdWdbeVer {
 	  */
 	public class StatShr extends Block {
 
-		public static final int SCRJREFDLGBSCDD = 1;
-		public static final int SCRJREFDLGDETDD = 2;
-		public static final int SCRJREFDLGNEW = 3;
-		public static final int SCRJREFHEADBAR = 4;
-		public static final int SCRJREFLIST = 5;
-		public static final int SCRJREFREC = 6;
-		public static final int MSPCRD1AVAIL = 7;
-		public static final int MITCRDNEWAVAIL = 8;
-		public static final int MITCRDPCVAVAIL = 9;
-		public static final int MITCRDPCVACTIVE = 10;
-		public static final int MSPCRD3AVAIL = 11;
-		public static final int MSPCRD3ACTIVE = 12;
-		public static final int MITCRDIBSAVAIL = 13;
-		public static final int MITCRDIBSACTIVE = 14;
-		public static final int MITCRDIDSAVAIL = 15;
-		public static final int MITCRDIDSACTIVE = 16;
+		public static final int SCRJREFDLGCMDSET = 1;
+		public static final int SCRJREFDLGCUSTFST = 2;
+		public static final int SCRJREFDLGDFLALG = 3;
+		public static final int SCRJREFDLGFINMOD = 4;
+		public static final int SCRJREFDLGGENFST = 5;
+		public static final int SCRJREFDLGMDLSTR = 6;
+		public static final int SCRJREFDLGNEW = 7;
+		public static final int SCRJREFHEADBAR = 8;
+		public static final int SCRJREFLIST = 9;
+		public static final int SCRJREFREC = 10;
+		public static final int MSPCRD1AVAIL = 11;
+		public static final int MITCRDNEWAVAIL = 12;
+		public static final int MITCRDPCVAVAIL = 13;
+		public static final int MITCRDPCVACTIVE = 14;
+		public static final int MSPCRD3AVAIL = 15;
+		public static final int MSPCRD3ACTIVE = 16;
+		public static final int MITCRDIMDAVAIL = 17;
+		public static final int MITCRDIMDACTIVE = 18;
+		public static final int MITCRDICSAVAIL = 19;
+		public static final int MITCRDICSACTIVE = 20;
+		public static final int MITCRDIDAAVAIL = 21;
+		public static final int MITCRDIDAACTIVE = 22;
+		public static final int MSPCRD4AVAIL = 23;
+		public static final int MSPCRD4ACTIVE = 24;
+		public static final int MITCRDGFSAVAIL = 25;
+		public static final int MITCRDGFSACTIVE = 26;
+		public static final int MITCRDIFSAVAIL = 27;
+		public static final int MITCRDIFSACTIVE = 28;
+		public static final int MSPCRD5AVAIL = 29;
+		public static final int MSPCRD5ACTIVE = 30;
+		public static final int MITCRDFNMAVAIL = 31;
+		public static final int MITCRDFNMACTIVE = 32;
 
 		public StatShr(
-					String scrJrefDlgbscdd
-					, String scrJrefDlgdetdd
+					String scrJrefDlgcmdset
+					, String scrJrefDlgcustfst
+					, String scrJrefDlgdflalg
+					, String scrJrefDlgfinmod
+					, String scrJrefDlggenfst
+					, String scrJrefDlgmdlstr
 					, String scrJrefDlgnew
 					, String scrJrefHeadbar
 					, String scrJrefList
@@ -305,13 +337,29 @@ public class CrdWdbeVer {
 					, boolean MitCrdPcvActive
 					, boolean MspCrd3Avail
 					, boolean MspCrd3Active
-					, boolean MitCrdIbsAvail
-					, boolean MitCrdIbsActive
-					, boolean MitCrdIdsAvail
-					, boolean MitCrdIdsActive
+					, boolean MitCrdImdAvail
+					, boolean MitCrdImdActive
+					, boolean MitCrdIcsAvail
+					, boolean MitCrdIcsActive
+					, boolean MitCrdIdaAvail
+					, boolean MitCrdIdaActive
+					, boolean MspCrd4Avail
+					, boolean MspCrd4Active
+					, boolean MitCrdGfsAvail
+					, boolean MitCrdGfsActive
+					, boolean MitCrdIfsAvail
+					, boolean MitCrdIfsActive
+					, boolean MspCrd5Avail
+					, boolean MspCrd5Active
+					, boolean MitCrdFnmAvail
+					, boolean MitCrdFnmActive
 				) {
-			this.scrJrefDlgbscdd = scrJrefDlgbscdd;
-			this.scrJrefDlgdetdd = scrJrefDlgdetdd;
+			this.scrJrefDlgcmdset = scrJrefDlgcmdset;
+			this.scrJrefDlgcustfst = scrJrefDlgcustfst;
+			this.scrJrefDlgdflalg = scrJrefDlgdflalg;
+			this.scrJrefDlgfinmod = scrJrefDlgfinmod;
+			this.scrJrefDlggenfst = scrJrefDlggenfst;
+			this.scrJrefDlgmdlstr = scrJrefDlgmdlstr;
 			this.scrJrefDlgnew = scrJrefDlgnew;
 			this.scrJrefHeadbar = scrJrefHeadbar;
 			this.scrJrefList = scrJrefList;
@@ -322,16 +370,32 @@ public class CrdWdbeVer {
 			this.MitCrdPcvActive = MitCrdPcvActive;
 			this.MspCrd3Avail = MspCrd3Avail;
 			this.MspCrd3Active = MspCrd3Active;
-			this.MitCrdIbsAvail = MitCrdIbsAvail;
-			this.MitCrdIbsActive = MitCrdIbsActive;
-			this.MitCrdIdsAvail = MitCrdIdsAvail;
-			this.MitCrdIdsActive = MitCrdIdsActive;
+			this.MitCrdImdAvail = MitCrdImdAvail;
+			this.MitCrdImdActive = MitCrdImdActive;
+			this.MitCrdIcsAvail = MitCrdIcsAvail;
+			this.MitCrdIcsActive = MitCrdIcsActive;
+			this.MitCrdIdaAvail = MitCrdIdaAvail;
+			this.MitCrdIdaActive = MitCrdIdaActive;
+			this.MspCrd4Avail = MspCrd4Avail;
+			this.MspCrd4Active = MspCrd4Active;
+			this.MitCrdGfsAvail = MitCrdGfsAvail;
+			this.MitCrdGfsActive = MitCrdGfsActive;
+			this.MitCrdIfsAvail = MitCrdIfsAvail;
+			this.MitCrdIfsActive = MitCrdIfsActive;
+			this.MspCrd5Avail = MspCrd5Avail;
+			this.MspCrd5Active = MspCrd5Active;
+			this.MitCrdFnmAvail = MitCrdFnmAvail;
+			this.MitCrdFnmActive = MitCrdFnmActive;
 
-			mask = new HashSet<Integer>(Arrays.asList(SCRJREFDLGBSCDD, SCRJREFDLGDETDD, SCRJREFDLGNEW, SCRJREFHEADBAR, SCRJREFLIST, SCRJREFREC, MSPCRD1AVAIL, MITCRDNEWAVAIL, MITCRDPCVAVAIL, MITCRDPCVACTIVE, MSPCRD3AVAIL, MSPCRD3ACTIVE, MITCRDIBSAVAIL, MITCRDIBSACTIVE, MITCRDIDSAVAIL, MITCRDIDSACTIVE));
+			mask = new HashSet<Integer>(Arrays.asList(SCRJREFDLGCMDSET, SCRJREFDLGCUSTFST, SCRJREFDLGDFLALG, SCRJREFDLGFINMOD, SCRJREFDLGGENFST, SCRJREFDLGMDLSTR, SCRJREFDLGNEW, SCRJREFHEADBAR, SCRJREFLIST, SCRJREFREC, MSPCRD1AVAIL, MITCRDNEWAVAIL, MITCRDPCVAVAIL, MITCRDPCVACTIVE, MSPCRD3AVAIL, MSPCRD3ACTIVE, MITCRDIMDAVAIL, MITCRDIMDACTIVE, MITCRDICSAVAIL, MITCRDICSACTIVE, MITCRDIDAAVAIL, MITCRDIDAACTIVE, MSPCRD4AVAIL, MSPCRD4ACTIVE, MITCRDGFSAVAIL, MITCRDGFSACTIVE, MITCRDIFSAVAIL, MITCRDIFSACTIVE, MSPCRD5AVAIL, MSPCRD5ACTIVE, MITCRDFNMAVAIL, MITCRDFNMACTIVE));
 		};
 
-		public String scrJrefDlgbscdd;
-		public String scrJrefDlgdetdd;
+		public String scrJrefDlgcmdset;
+		public String scrJrefDlgcustfst;
+		public String scrJrefDlgdflalg;
+		public String scrJrefDlgfinmod;
+		public String scrJrefDlggenfst;
+		public String scrJrefDlgmdlstr;
 		public String scrJrefDlgnew;
 		public String scrJrefHeadbar;
 		public String scrJrefList;
@@ -342,10 +406,22 @@ public class CrdWdbeVer {
 		public boolean MitCrdPcvActive;
 		public boolean MspCrd3Avail;
 		public boolean MspCrd3Active;
-		public boolean MitCrdIbsAvail;
-		public boolean MitCrdIbsActive;
-		public boolean MitCrdIdsAvail;
-		public boolean MitCrdIdsActive;
+		public boolean MitCrdImdAvail;
+		public boolean MitCrdImdActive;
+		public boolean MitCrdIcsAvail;
+		public boolean MitCrdIcsActive;
+		public boolean MitCrdIdaAvail;
+		public boolean MitCrdIdaActive;
+		public boolean MspCrd4Avail;
+		public boolean MspCrd4Active;
+		public boolean MitCrdGfsAvail;
+		public boolean MitCrdGfsActive;
+		public boolean MitCrdIfsAvail;
+		public boolean MitCrdIfsActive;
+		public boolean MspCrd5Avail;
+		public boolean MspCrd5Active;
+		public boolean MitCrdFnmAvail;
+		public boolean MitCrdFnmActive;
 
 		public boolean readXML(
 					Document doc
@@ -360,8 +436,12 @@ public class CrdWdbeVer {
 			String itemtag = "StatitemShrWdbeVer";
 
 			if (Xmlio.checkXPath(doc, basexpath)) {
-				scrJrefDlgbscdd = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefDlgbscdd", mask, SCRJREFDLGBSCDD);
-				scrJrefDlgdetdd = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefDlgdetdd", mask, SCRJREFDLGDETDD);
+				scrJrefDlgcmdset = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefDlgcmdset", mask, SCRJREFDLGCMDSET);
+				scrJrefDlgcustfst = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefDlgcustfst", mask, SCRJREFDLGCUSTFST);
+				scrJrefDlgdflalg = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefDlgdflalg", mask, SCRJREFDLGDFLALG);
+				scrJrefDlgfinmod = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefDlgfinmod", mask, SCRJREFDLGFINMOD);
+				scrJrefDlggenfst = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefDlggenfst", mask, SCRJREFDLGGENFST);
+				scrJrefDlgmdlstr = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefDlgmdlstr", mask, SCRJREFDLGMDLSTR);
 				scrJrefDlgnew = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefDlgnew", mask, SCRJREFDLGNEW);
 				scrJrefHeadbar = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefHeadbar", mask, SCRJREFHEADBAR);
 				scrJrefList = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefList", mask, SCRJREFLIST);
@@ -372,10 +452,22 @@ public class CrdWdbeVer {
 				MitCrdPcvActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "MitCrdPcvActive", mask, MITCRDPCVACTIVE);
 				MspCrd3Avail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "MspCrd3Avail", mask, MSPCRD3AVAIL);
 				MspCrd3Active = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "MspCrd3Active", mask, MSPCRD3ACTIVE);
-				MitCrdIbsAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "MitCrdIbsAvail", mask, MITCRDIBSAVAIL);
-				MitCrdIbsActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "MitCrdIbsActive", mask, MITCRDIBSACTIVE);
-				MitCrdIdsAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "MitCrdIdsAvail", mask, MITCRDIDSAVAIL);
-				MitCrdIdsActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "MitCrdIdsActive", mask, MITCRDIDSACTIVE);
+				MitCrdImdAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "MitCrdImdAvail", mask, MITCRDIMDAVAIL);
+				MitCrdImdActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "MitCrdImdActive", mask, MITCRDIMDACTIVE);
+				MitCrdIcsAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "MitCrdIcsAvail", mask, MITCRDICSAVAIL);
+				MitCrdIcsActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "MitCrdIcsActive", mask, MITCRDICSACTIVE);
+				MitCrdIdaAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "MitCrdIdaAvail", mask, MITCRDIDAAVAIL);
+				MitCrdIdaActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "MitCrdIdaActive", mask, MITCRDIDAACTIVE);
+				MspCrd4Avail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "MspCrd4Avail", mask, MSPCRD4AVAIL);
+				MspCrd4Active = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "MspCrd4Active", mask, MSPCRD4ACTIVE);
+				MitCrdGfsAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "MitCrdGfsAvail", mask, MITCRDGFSAVAIL);
+				MitCrdGfsActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "MitCrdGfsActive", mask, MITCRDGFSACTIVE);
+				MitCrdIfsAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "MitCrdIfsAvail", mask, MITCRDIFSAVAIL);
+				MitCrdIfsActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "MitCrdIfsActive", mask, MITCRDIFSACTIVE);
+				MspCrd5Avail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "MspCrd5Avail", mask, MSPCRD5AVAIL);
+				MspCrd5Active = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "MspCrd5Active", mask, MSPCRD5ACTIVE);
+				MitCrdFnmAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "MitCrdFnmAvail", mask, MITCRDFNMAVAIL);
+				MitCrdFnmActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "MitCrdFnmActive", mask, MITCRDFNMACTIVE);
 
 				return true;
 			};
@@ -388,8 +480,12 @@ public class CrdWdbeVer {
 				) {
 			HashSet<Integer> items = new HashSet<Integer>();
 
-			if (scrJrefDlgbscdd.equals(comp.scrJrefDlgbscdd)) items.add(SCRJREFDLGBSCDD);
-			if (scrJrefDlgdetdd.equals(comp.scrJrefDlgdetdd)) items.add(SCRJREFDLGDETDD);
+			if (scrJrefDlgcmdset.equals(comp.scrJrefDlgcmdset)) items.add(SCRJREFDLGCMDSET);
+			if (scrJrefDlgcustfst.equals(comp.scrJrefDlgcustfst)) items.add(SCRJREFDLGCUSTFST);
+			if (scrJrefDlgdflalg.equals(comp.scrJrefDlgdflalg)) items.add(SCRJREFDLGDFLALG);
+			if (scrJrefDlgfinmod.equals(comp.scrJrefDlgfinmod)) items.add(SCRJREFDLGFINMOD);
+			if (scrJrefDlggenfst.equals(comp.scrJrefDlggenfst)) items.add(SCRJREFDLGGENFST);
+			if (scrJrefDlgmdlstr.equals(comp.scrJrefDlgmdlstr)) items.add(SCRJREFDLGMDLSTR);
 			if (scrJrefDlgnew.equals(comp.scrJrefDlgnew)) items.add(SCRJREFDLGNEW);
 			if (scrJrefHeadbar.equals(comp.scrJrefHeadbar)) items.add(SCRJREFHEADBAR);
 			if (scrJrefList.equals(comp.scrJrefList)) items.add(SCRJREFLIST);
@@ -400,10 +496,22 @@ public class CrdWdbeVer {
 			if (MitCrdPcvActive == comp.MitCrdPcvActive) items.add(MITCRDPCVACTIVE);
 			if (MspCrd3Avail == comp.MspCrd3Avail) items.add(MSPCRD3AVAIL);
 			if (MspCrd3Active == comp.MspCrd3Active) items.add(MSPCRD3ACTIVE);
-			if (MitCrdIbsAvail == comp.MitCrdIbsAvail) items.add(MITCRDIBSAVAIL);
-			if (MitCrdIbsActive == comp.MitCrdIbsActive) items.add(MITCRDIBSACTIVE);
-			if (MitCrdIdsAvail == comp.MitCrdIdsAvail) items.add(MITCRDIDSAVAIL);
-			if (MitCrdIdsActive == comp.MitCrdIdsActive) items.add(MITCRDIDSACTIVE);
+			if (MitCrdImdAvail == comp.MitCrdImdAvail) items.add(MITCRDIMDAVAIL);
+			if (MitCrdImdActive == comp.MitCrdImdActive) items.add(MITCRDIMDACTIVE);
+			if (MitCrdIcsAvail == comp.MitCrdIcsAvail) items.add(MITCRDICSAVAIL);
+			if (MitCrdIcsActive == comp.MitCrdIcsActive) items.add(MITCRDICSACTIVE);
+			if (MitCrdIdaAvail == comp.MitCrdIdaAvail) items.add(MITCRDIDAAVAIL);
+			if (MitCrdIdaActive == comp.MitCrdIdaActive) items.add(MITCRDIDAACTIVE);
+			if (MspCrd4Avail == comp.MspCrd4Avail) items.add(MSPCRD4AVAIL);
+			if (MspCrd4Active == comp.MspCrd4Active) items.add(MSPCRD4ACTIVE);
+			if (MitCrdGfsAvail == comp.MitCrdGfsAvail) items.add(MITCRDGFSAVAIL);
+			if (MitCrdGfsActive == comp.MitCrdGfsActive) items.add(MITCRDGFSACTIVE);
+			if (MitCrdIfsAvail == comp.MitCrdIfsAvail) items.add(MITCRDIFSAVAIL);
+			if (MitCrdIfsActive == comp.MitCrdIfsActive) items.add(MITCRDIFSACTIVE);
+			if (MspCrd5Avail == comp.MspCrd5Avail) items.add(MSPCRD5AVAIL);
+			if (MspCrd5Active == comp.MspCrd5Active) items.add(MSPCRD5ACTIVE);
+			if (MitCrdFnmAvail == comp.MitCrdFnmAvail) items.add(MITCRDFNMAVAIL);
+			if (MitCrdFnmActive == comp.MitCrdFnmActive) items.add(MITCRDFNMACTIVE);
 
 			return(items);
 		};
@@ -416,7 +524,7 @@ public class CrdWdbeVer {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(SCRJREFDLGBSCDD, SCRJREFDLGDETDD, SCRJREFDLGNEW, SCRJREFHEADBAR, SCRJREFLIST, SCRJREFREC, MSPCRD1AVAIL, MITCRDNEWAVAIL, MITCRDPCVAVAIL, MITCRDPCVACTIVE, MSPCRD3AVAIL, MSPCRD3ACTIVE, MITCRDIBSAVAIL, MITCRDIBSACTIVE, MITCRDIDSAVAIL, MITCRDIDSACTIVE));
+			diffitems = new HashSet<Integer>(Arrays.asList(SCRJREFDLGCMDSET, SCRJREFDLGCUSTFST, SCRJREFDLGDFLALG, SCRJREFDLGFINMOD, SCRJREFDLGGENFST, SCRJREFDLGMDLSTR, SCRJREFDLGNEW, SCRJREFHEADBAR, SCRJREFLIST, SCRJREFREC, MSPCRD1AVAIL, MITCRDNEWAVAIL, MITCRDPCVAVAIL, MITCRDPCVACTIVE, MSPCRD3AVAIL, MSPCRD3ACTIVE, MITCRDIMDAVAIL, MITCRDIMDACTIVE, MITCRDICSAVAIL, MITCRDICSACTIVE, MITCRDIDAAVAIL, MITCRDIDAACTIVE, MSPCRD4AVAIL, MSPCRD4ACTIVE, MITCRDGFSAVAIL, MITCRDGFSACTIVE, MITCRDIFSAVAIL, MITCRDIFSACTIVE, MSPCRD5AVAIL, MSPCRD5ACTIVE, MITCRDFNMAVAIL, MITCRDFNMACTIVE));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);
@@ -433,33 +541,49 @@ public class CrdWdbeVer {
 		public static final int MRLAPPHLP = 2;
 		public static final int MITCRDNEW = 3;
 		public static final int MITCRDPCV = 4;
-		public static final int MITCRDIBS = 5;
-		public static final int MITCRDIDS = 6;
+		public static final int MITCRDIMD = 5;
+		public static final int MITCRDICS = 6;
+		public static final int MITCRDIDA = 7;
+		public static final int MITCRDGFS = 8;
+		public static final int MITCRDIFS = 9;
+		public static final int MITCRDFNM = 10;
 
 		public Tag(
 					String MitAppAbt
 					, String MrlAppHlp
 					, String MitCrdNew
 					, String MitCrdPcv
-					, String MitCrdIbs
-					, String MitCrdIds
+					, String MitCrdImd
+					, String MitCrdIcs
+					, String MitCrdIda
+					, String MitCrdGfs
+					, String MitCrdIfs
+					, String MitCrdFnm
 				) {
 			this.MitAppAbt = MitAppAbt;
 			this.MrlAppHlp = MrlAppHlp;
 			this.MitCrdNew = MitCrdNew;
 			this.MitCrdPcv = MitCrdPcv;
-			this.MitCrdIbs = MitCrdIbs;
-			this.MitCrdIds = MitCrdIds;
+			this.MitCrdImd = MitCrdImd;
+			this.MitCrdIcs = MitCrdIcs;
+			this.MitCrdIda = MitCrdIda;
+			this.MitCrdGfs = MitCrdGfs;
+			this.MitCrdIfs = MitCrdIfs;
+			this.MitCrdFnm = MitCrdFnm;
 
-			mask = new HashSet<Integer>(Arrays.asList(MITAPPABT, MRLAPPHLP, MITCRDNEW, MITCRDPCV, MITCRDIBS, MITCRDIDS));
+			mask = new HashSet<Integer>(Arrays.asList(MITAPPABT, MRLAPPHLP, MITCRDNEW, MITCRDPCV, MITCRDIMD, MITCRDICS, MITCRDIDA, MITCRDGFS, MITCRDIFS, MITCRDFNM));
 		};
 
 		public String MitAppAbt;
 		public String MrlAppHlp;
 		public String MitCrdNew;
 		public String MitCrdPcv;
-		public String MitCrdIbs;
-		public String MitCrdIds;
+		public String MitCrdImd;
+		public String MitCrdIcs;
+		public String MitCrdIda;
+		public String MitCrdGfs;
+		public String MitCrdIfs;
+		public String MitCrdFnm;
 
 		public boolean readXML(
 					Document doc
@@ -478,8 +602,12 @@ public class CrdWdbeVer {
 				MrlAppHlp = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "MrlAppHlp", mask, MRLAPPHLP);
 				MitCrdNew = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "MitCrdNew", mask, MITCRDNEW);
 				MitCrdPcv = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "MitCrdPcv", mask, MITCRDPCV);
-				MitCrdIbs = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "MitCrdIbs", mask, MITCRDIBS);
-				MitCrdIds = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "MitCrdIds", mask, MITCRDIDS);
+				MitCrdImd = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "MitCrdImd", mask, MITCRDIMD);
+				MitCrdIcs = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "MitCrdIcs", mask, MITCRDICS);
+				MitCrdIda = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "MitCrdIda", mask, MITCRDIDA);
+				MitCrdGfs = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "MitCrdGfs", mask, MITCRDGFS);
+				MitCrdIfs = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "MitCrdIfs", mask, MITCRDIFS);
+				MitCrdFnm = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "MitCrdFnm", mask, MITCRDFNM);
 
 				return true;
 			};
@@ -496,8 +624,12 @@ public class CrdWdbeVer {
 			if (MrlAppHlp.equals(comp.MrlAppHlp)) items.add(MRLAPPHLP);
 			if (MitCrdNew.equals(comp.MitCrdNew)) items.add(MITCRDNEW);
 			if (MitCrdPcv.equals(comp.MitCrdPcv)) items.add(MITCRDPCV);
-			if (MitCrdIbs.equals(comp.MitCrdIbs)) items.add(MITCRDIBS);
-			if (MitCrdIds.equals(comp.MitCrdIds)) items.add(MITCRDIDS);
+			if (MitCrdImd.equals(comp.MitCrdImd)) items.add(MITCRDIMD);
+			if (MitCrdIcs.equals(comp.MitCrdIcs)) items.add(MITCRDICS);
+			if (MitCrdIda.equals(comp.MitCrdIda)) items.add(MITCRDIDA);
+			if (MitCrdGfs.equals(comp.MitCrdGfs)) items.add(MITCRDGFS);
+			if (MitCrdIfs.equals(comp.MitCrdIfs)) items.add(MITCRDIFS);
+			if (MitCrdFnm.equals(comp.MitCrdFnm)) items.add(MITCRDFNM);
 
 			return(items);
 		};
@@ -510,7 +642,7 @@ public class CrdWdbeVer {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(MITAPPABT, MRLAPPHLP, MITCRDNEW, MITCRDPCV, MITCRDIBS, MITCRDIDS));
+			diffitems = new HashSet<Integer>(Arrays.asList(MITAPPABT, MRLAPPHLP, MITCRDNEW, MITCRDPCV, MITCRDIMD, MITCRDICS, MITCRDIDA, MITCRDGFS, MITCRDIFS, MITCRDFNM));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);
@@ -591,8 +723,8 @@ public class CrdWdbeVer {
 			continf = new ContInf(0, "", "");
 			feedFSge = new Feed("FeedFSge");
 			statapp = new StatApp(0, 0, "", 0, false, false, false);
-			statshr = new StatShr("", "", "", "", "", "", false, false, false, false, false, false, false, false, false, false);
-			tag = new Tag("", "", "", "", "", "");
+			statshr = new StatShr("", "", "", "", "", "", "", "", "", "", false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false);
+			tag = new Tag("", "", "", "", "", "", "", "", "", "");
 		};
 
 		public ContInf continf;
@@ -636,8 +768,8 @@ public class CrdWdbeVer {
 				continf = new ContInf(0, "", "");
 				feedFSge = new Feed("FeedFSge");
 				statapp = new StatApp(0, 0, "", 0, false, false, false);
-				statshr = new StatShr("", "", "", "", "", "", false, false, false, false, false, false, false, false, false, false);
-				tag = new Tag("", "", "", "", "", "");
+				statshr = new StatShr("", "", "", "", "", "", "", "", "", "", false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false);
+				tag = new Tag("", "", "", "", "", "", "", "", "", "");
 			};
 		};
 

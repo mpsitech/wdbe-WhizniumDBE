@@ -39,17 +39,13 @@ DpchRetWdbe* WdbeWrmcuMdlfine::run(
 	// IP run --- IBEGIN
 	WdbeMModule* mdl = NULL;
 
-	string Compsref;
-
 	fstream outfile;
 
 	string s;
 
 	if (dbswdbe->tblwdbemmodule->loadRecByRef(refWdbeMModule, &mdl)) {
-		Compsref = StrMod::cap(Wdbe::getCompsref(dbswdbe, mdl));
-
 		// xxxx/Xxxxx.c
-		s = xchg->tmppath + "/" + folder + "/" + Compsref + ".c.ip";
+		s = xchg->tmppath + "/" + folder + "/" + StrMod::cap(mdl->sref) + ".c.ip";
 		outfile.open(s.c_str(), ios::out);
 		writeMdlC(dbswdbe, outfile, mdl);
 		outfile.close();
@@ -76,6 +72,8 @@ void WdbeWrmcuMdlfine::writeMdlC(
 
 	uint fstCnum;
 
+	bool found;
+
 	dbswdbe->tblwdbemprocess->loadRstByMdl(mdl->ref, false, prcs);
 
 	for (unsigned int i = 0; i < prcs.nodes.size(); i++) {
@@ -85,7 +83,8 @@ void WdbeWrmcuMdlfine::writeMdlC(
 		if (prc->refWdbeMFsm != 0) {
 			dbswdbe->tblwdbemfsmstate->loadRstByFsm(prc->refWdbeMFsm, false, fsts);
 
-			outfile << "// IP vars." << prc->sref << ".fsm --- IBEGIN" << endl;
+			// --- vars.xxxx
+			outfile << "// IP vars." << prc->sref << " --- IBEGIN" << endl;
 
 			if (fsts.nodes.size() > 0) {
 				outfile << "enum State" << StrMod::cap(prc->sref) << " {";
@@ -108,13 +107,15 @@ void WdbeWrmcuMdlfine::writeMdlC(
 				outfile << "};" << endl;
 				outfile << endl;
 
-				outfile << "static enum State" << Prcsref << " state" << Prcsref << ";" << endl;
+				outfile << "static enum State" << Prcsref << " state" << Prcsref << " = state" << Prcsref << StrMod::cap(fsts.nodes[0]->sref) << ";" << endl;
 				outfile << endl;
 			};
 
-			outfile << "// IP vars." << prc->sref << ".fsm --- IEND" << endl;
+			outfile << "// IP vars." << prc->sref << " --- IEND" << endl;
 		};
 	};
+
+	found = false;
 
 	for (unsigned int i = 0; i < prcs.nodes.size(); i++) {
 		prc = prcs.nodes[i];
@@ -123,18 +124,9 @@ void WdbeWrmcuMdlfine::writeMdlC(
 		if (prc->refWdbeMFsm != 0) {
 			dbswdbe->tblwdbemfsmstate->loadRstByFsm(prc->refWdbeMFsm, false, fsts);
 
-			outfile << "// IP " << mdl->sref << StrMod::cap(prc->sref) << "Init --- IBEGIN" << endl;
-			if (fsts.nodes.size() > 0) {
-				fst = fsts.nodes[0];
-
-				outfile << "\tstate" << Prcsref << " = state" << Prcsref << StrMod::cap(fst->sref) << ";" << endl;
-				outfile << endl;
-			};
-			outfile << "// IP " << mdl->sref << StrMod::cap(prc->sref) << "Init --- IEND" << endl;
-
-
-			outfile << "// IP " << mdl->sref << Prcsref << "Run --- IBEGIN" << endl;
-			outfile << "\t// IP " << mdl->sref << Prcsref << "Run --- BEGIN" << endl;
+			// --- run.xxxx
+			outfile << "// IP run." << prc->sref << " --- IBEGIN" << endl;
+			outfile << "\t// IP run." << prc->sref << " --- BEGIN" << endl;
 
 			outfile << "\tswitch (state" << Prcsref << ") {" << endl;
 
@@ -142,20 +134,54 @@ void WdbeWrmcuMdlfine::writeMdlC(
 				fst = fsts.nodes[j];
 
 				outfile << "\t\tcase state" << Prcsref << StrMod::cap(fst->sref) << ":" << endl;
-				outfile << "\t\t\t// IP " << prc->sref << "." << fst->sref << " --- INSERT" << endl;
+
+				if (prc->Syncrst.compare("state(" + fst->sref + ")") == 0) {
+					wrSyncrst(dbswdbe, outfile, mdl);
+					found = true;
+
+				} else outfile << "\t\t\t// IP " << prc->sref << "." << fst->sref << " --- INSERT" << endl;
+
 				outfile << "\t\t\tbreak;" << endl;
 				outfile << endl;
 			};
 
 			outfile << "\t};" << endl;
-			outfile << "\t// IP " << mdl->sref << Prcsref << "Run --- END" << endl;
-			outfile << "// IP " << mdl->sref << Prcsref << "Run --- IEND" << endl;
+			outfile << endl;
+
+			outfile << "\t// IP run." << prc->sref << " --- END" << endl;
+			outfile << "// IP run." << prc->sref << " --- IEND" << endl;
 			outfile << endl;
 		};
-
-		outfile << "\treturn mod;" << endl;
-		outfile << "};" << endl;
-		outfile << endl;
 	};
+
+	if (!found) {
+		// --- syncrst
+		outfile << "// IP syncrst --- IBEGIN" << endl;
+		wrSyncrst(dbswdbe, outfile, mdl);
+		outfile << "// IP syncrst --- IEND" << endl;
+	};
+};
+
+void WdbeWrmcuMdlfine::wrSyncrst(
+			DbsWdbe* dbswdbe
+			, fstream& outfile
+			, WdbeMModule* mdl
+		) {
+	ListWdbeMSignal sigs;
+	WdbeMSignal* sig = NULL;
+
+	outfile << "\t\t\t// IP syncrst --- BEGIN" << endl;
+
+	dbswdbe->tblwdbemsignal->loadRstBySQL("SELECT * FROM TblWdbeMSignal WHERE ixVBasetype = " + to_string(VecWdbeVMSignalBasetype::HSHK) + " AND mgeIxVTbl = " + to_string(VecWdbeVMSignalMgeTbl::MDL)
+				+ " AND mgeUref = " + to_string(mdl->ref) + " ORDER BY sref ASC", false, sigs);
+
+	for (unsigned int i = 0; i < sigs.nodes.size(); i++) {
+		sig = sigs.nodes[i];
+
+		outfile << "\t\t\tflags." << sig->sref << " = 0;" << endl;
+		outfile << "\t\t\tSET_EVT_" << sig->sref << "();" << endl;
+	};
+
+	outfile << "\t\t\t// IP syncrst --- END" << endl;
 };
 // IP cust --- IEND

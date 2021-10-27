@@ -36,6 +36,9 @@ namespace PnlWdbeCmdDetail {
 	public:
 		static const Sbecore::uint BUTSAVECLICK = 1;
 		static const Sbecore::uint BUTREUVIEWCLICK = 2;
+		static const Sbecore::uint BUTIVRVIEWCLICK = 3;
+		static const Sbecore::uint BUTRVRVIEWCLICK = 4;
+		static const Sbecore::uint BUTRERVIEWCLICK = 5;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);
@@ -131,12 +134,18 @@ namespace PnlWdbeCmdDetail {
 		static const Sbecore::uint BUTREUVIEWACTIVE = 7;
 		static const Sbecore::uint PUPRTYACTIVE = 8;
 		static const Sbecore::uint TXTIVRACTIVE = 9;
-		static const Sbecore::uint TXTRVRACTIVE = 10;
-		static const Sbecore::uint TXTRERACTIVE = 11;
-		static const Sbecore::uint TXFCMTACTIVE = 12;
+		static const Sbecore::uint BUTIVRVIEWAVAIL = 10;
+		static const Sbecore::uint BUTIVRVIEWACTIVE = 11;
+		static const Sbecore::uint TXTRVRACTIVE = 12;
+		static const Sbecore::uint BUTRVRVIEWAVAIL = 13;
+		static const Sbecore::uint BUTRVRVIEWACTIVE = 14;
+		static const Sbecore::uint TXTRERACTIVE = 15;
+		static const Sbecore::uint BUTRERVIEWAVAIL = 16;
+		static const Sbecore::uint BUTRERVIEWACTIVE = 17;
+		static const Sbecore::uint TXFCMTACTIVE = 18;
 
 	public:
-		StatShr(const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxtSrfActive = true, const bool TxfFsrActive = true, const bool TxtReuActive = true, const bool ButReuViewAvail = true, const bool ButReuViewActive = true, const bool PupRtyActive = true, const bool TxtIvrActive = true, const bool TxtRvrActive = true, const bool TxtRerActive = true, const bool TxfCmtActive = true);
+		StatShr(const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxtSrfActive = true, const bool TxfFsrActive = true, const bool TxtReuActive = true, const bool ButReuViewAvail = true, const bool ButReuViewActive = true, const bool PupRtyActive = true, const bool TxtIvrActive = true, const bool ButIvrViewAvail = true, const bool ButIvrViewActive = true, const bool TxtRvrActive = true, const bool ButRvrViewAvail = true, const bool ButRvrViewActive = true, const bool TxtRerActive = true, const bool ButRerViewAvail = true, const bool ButRerViewActive = true, const bool TxfCmtActive = true);
 
 	public:
 		bool ButSaveAvail;
@@ -148,8 +157,14 @@ namespace PnlWdbeCmdDetail {
 		bool ButReuViewActive;
 		bool PupRtyActive;
 		bool TxtIvrActive;
+		bool ButIvrViewAvail;
+		bool ButIvrViewActive;
 		bool TxtRvrActive;
+		bool ButRvrViewAvail;
+		bool ButRvrViewActive;
 		bool TxtRerActive;
+		bool ButRerViewAvail;
+		bool ButRerViewActive;
 		bool TxfCmtActive;
 
 	public:

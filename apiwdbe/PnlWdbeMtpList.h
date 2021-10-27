@@ -121,14 +121,16 @@ namespace PnlWdbeMtpList {
 
 	public:
 		static const Sbecore::uint TCOSRFWIDTH = 1;
-		static const Sbecore::uint TCOTYPWIDTH = 2;
-		static const Sbecore::uint TCOSRRWIDTH = 3;
+		static const Sbecore::uint TCOVNDWIDTH = 2;
+		static const Sbecore::uint TCOTYPWIDTH = 3;
+		static const Sbecore::uint TCOSRRWIDTH = 4;
 
 	public:
-		StgIac(const Sbecore::uint TcoSrfWidth = 200, const Sbecore::uint TcoTypWidth = 100, const Sbecore::uint TcoSrrWidth = 100);
+		StgIac(const Sbecore::uint TcoSrfWidth = 200, const Sbecore::uint TcoVndWidth = 100, const Sbecore::uint TcoTypWidth = 100, const Sbecore::uint TcoSrrWidth = 100);
 
 	public:
 		Sbecore::uint TcoSrfWidth;
+		Sbecore::uint TcoVndWidth;
 		Sbecore::uint TcoTypWidth;
 		Sbecore::uint TcoSrrWidth;
 
@@ -152,11 +154,12 @@ namespace PnlWdbeMtpList {
 		static const Sbecore::uint TXTSHOWING1 = 5;
 		static const Sbecore::uint TXTSHOWING2 = 6;
 		static const Sbecore::uint TCOSRF = 7;
-		static const Sbecore::uint TCOTYP = 8;
-		static const Sbecore::uint TCOSRR = 9;
+		static const Sbecore::uint TCOVND = 8;
+		static const Sbecore::uint TCOTYP = 9;
+		static const Sbecore::uint TCOSRR = 10;
 
 	public:
-		Tag(const std::string& Cpt = "", const std::string& TxtRecord1 = "", const std::string& TxtRecord2 = "", const std::string& Trs = "", const std::string& TxtShowing1 = "", const std::string& TxtShowing2 = "", const std::string& TcoSrf = "", const std::string& TcoTyp = "", const std::string& TcoSrr = "");
+		Tag(const std::string& Cpt = "", const std::string& TxtRecord1 = "", const std::string& TxtRecord2 = "", const std::string& Trs = "", const std::string& TxtShowing1 = "", const std::string& TxtShowing2 = "", const std::string& TcoSrf = "", const std::string& TcoVnd = "", const std::string& TcoTyp = "", const std::string& TcoSrr = "");
 
 	public:
 		std::string Cpt;
@@ -166,6 +169,7 @@ namespace PnlWdbeMtpList {
 		std::string TxtShowing1;
 		std::string TxtShowing2;
 		std::string TcoSrf;
+		std::string TcoVnd;
 		std::string TcoTyp;
 		std::string TcoSrr;
 

@@ -15,6 +15,7 @@
 // IP include.cust --- INSERT
 
 #include "PnlWdbeSigDetail.h"
+#include "PnlWdbeSigSrc1NSensitivity.h"
 
 #define VecVWdbeSigRecDo PnlWdbeSigRec::VecVDo
 
@@ -72,8 +73,8 @@ public:
 	class StatApp {
 
 	public:
-		static void writeJSON(Json::Value& sup, std::string difftag = "", const bool initdoneDetail = false);
-		static void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true, const bool initdoneDetail = false);
+		static void writeJSON(Json::Value& sup, std::string difftag = "", const bool initdoneDetail = false, const bool initdoneSrc1NSensitivity = false);
+		static void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true, const bool initdoneDetail = false, const bool initdoneSrc1NSensitivity = false);
 	};
 
 	/**
@@ -84,14 +85,16 @@ public:
 	public:
 		static const Sbecore::uint IXWDBEVEXPSTATE = 1;
 		static const Sbecore::uint JREFDETAIL = 2;
-		static const Sbecore::uint BUTREGULARIZEACTIVE = 3;
+		static const Sbecore::uint JREFSRC1NSENSITIVITY = 3;
+		static const Sbecore::uint BUTREGULARIZEACTIVE = 4;
 
 	public:
-		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const Sbecore::ubigint jrefDetail = 0, const bool ButRegularizeActive = true);
+		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const Sbecore::ubigint jrefDetail = 0, const Sbecore::ubigint jrefSrc1NSensitivity = 0, const bool ButRegularizeActive = true);
 
 	public:
 		Sbecore::uint ixWdbeVExpstate;
 		Sbecore::ubigint jrefDetail;
+		Sbecore::ubigint jrefSrc1NSensitivity;
 		bool ButRegularizeActive;
 
 	public:
@@ -172,6 +175,7 @@ public:
 	StatShr statshr;
 
 	PnlWdbeSigDetail* pnldetail;
+	PnlWdbeSigSrc1NSensitivity* pnlsrc1nsensitivity;
 
 	WdbeMSignal recSig;
 
@@ -205,14 +209,16 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeSigUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
-	bool handleCallWdbeSig_vecEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
-	bool handleCallWdbeSig_mguEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
-	bool handleCallWdbeSig_mgu_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
-	bool handleCallWdbeSig_mgtEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
-	bool handleCallWdbeSig_mdlEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
-	bool handleCallWdbeSig_drvEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
 	bool handleCallWdbeSig_cluEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeSig_drvEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeSig_mgtEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
+	bool handleCallWdbeSig_mgu_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
+	bool handleCallWdbeSig_mguEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeSig_retEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
+	bool handleCallWdbeSig_reu_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
+	bool handleCallWdbeSig_reuEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeSig_vecEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeSigUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 
 };
 

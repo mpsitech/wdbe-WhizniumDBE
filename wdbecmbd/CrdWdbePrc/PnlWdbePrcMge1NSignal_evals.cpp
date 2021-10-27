@@ -14,7 +14,7 @@ using namespace Xmlio;
 bool PnlWdbePrcMge1NSignal::evalButViewAvail(
 			DbsWdbe* dbswdbe
 		) {
-	// !sel()|((pre.ixCrdaccSig()&pre.refMtp())|(pre.ixCrdaccSig()&pre.refMod()))
+	// !sel()|((pre.ixCrdaccSig()&pre.refMtp())|(pre.ixCrdaccSig()&pre.refMod())|(pre.ixCrdaccSig()&pre.refUnt()))
 
 	vector<bool> args;
 	bool a, b;
@@ -37,6 +37,16 @@ bool PnlWdbePrcMge1NSignal::evalButViewAvail(
 	b = args.back(); args.pop_back();
 	a = args.back(); args.pop_back();
 	args.push_back(a && b);
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCSIG, jref) != 0);
+	args.push_back(a);
+	a = false; a = (xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFUNT, jref) != 0);
+	args.push_back(a);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a && b);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
 	b = args.back(); args.pop_back();
 	a = args.back(); args.pop_back();
 	args.push_back(a || b);

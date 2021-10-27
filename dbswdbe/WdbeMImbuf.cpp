@@ -20,18 +20,20 @@ using namespace Sbecore;
 
 WdbeMImbuf::WdbeMImbuf(
 			const ubigint ref
+			, const uint ixVRotype
 			, const ubigint refWdbeMModule
-			, const ubigint corRefWdbeMModule
-			, const string sref
-			, const uint ixVDir
+			, const string Fullsref
+			, const usmallint Width
+			, const string Minmax
 			, const utinyint Prio
 		) {
 
 	this->ref = ref;
+	this->ixVRotype = ixVRotype;
 	this->refWdbeMModule = refWdbeMModule;
-	this->corRefWdbeMModule = corRefWdbeMModule;
-	this->sref = sref;
-	this->ixVDir = ixVDir;
+	this->Fullsref = Fullsref;
+	this->Width = Width;
+	this->Minmax = Minmax;
 	this->Prio = Prio;
 };
 
@@ -163,16 +165,17 @@ ubigint TblWdbeMImbuf::insertRec(
 
 ubigint TblWdbeMImbuf::insertNewRec(
 			WdbeMImbuf** rec
+			, const uint ixVRotype
 			, const ubigint refWdbeMModule
-			, const ubigint corRefWdbeMModule
-			, const string sref
-			, const uint ixVDir
+			, const string Fullsref
+			, const usmallint Width
+			, const string Minmax
 			, const utinyint Prio
 		) {
 	ubigint retval = 0;
 	WdbeMImbuf* _rec = NULL;
 
-	_rec = new WdbeMImbuf(0, refWdbeMModule, corRefWdbeMModule, sref, ixVDir, Prio);
+	_rec = new WdbeMImbuf(0, ixVRotype, refWdbeMModule, Fullsref, Width, Minmax, Prio);
 	insertRec(_rec);
 
 	retval = _rec->ref;
@@ -186,16 +189,17 @@ ubigint TblWdbeMImbuf::insertNewRec(
 ubigint TblWdbeMImbuf::appendNewRecToRst(
 			ListWdbeMImbuf& rst
 			, WdbeMImbuf** rec
+			, const uint ixVRotype
 			, const ubigint refWdbeMModule
-			, const ubigint corRefWdbeMModule
-			, const string sref
-			, const uint ixVDir
+			, const string Fullsref
+			, const usmallint Width
+			, const string Minmax
 			, const utinyint Prio
 		) {
 	ubigint retval = 0;
 	WdbeMImbuf* _rec = NULL;
 
-	retval = insertNewRec(&_rec, refWdbeMModule, corRefWdbeMModule, sref, ixVDir, Prio);
+	retval = insertNewRec(&_rec, ixVRotype, refWdbeMModule, Fullsref, Width, Minmax, Prio);
 	rst.nodes.push_back(_rec);
 
 	if (rec != NULL) *rec = _rec;
@@ -228,6 +232,13 @@ void TblWdbeMImbuf::removeRecByRef(
 bool TblWdbeMImbuf::loadRecByRef(
 			ubigint ref
 			, WdbeMImbuf** rec
+		) {
+	return false;
+};
+
+bool TblWdbeMImbuf::loadFsrByRef(
+			ubigint ref
+			, string& Fullsref
 		) {
 	return false;
 };
@@ -286,8 +297,8 @@ MyTblWdbeMImbuf::~MyTblWdbeMImbuf() {
 };
 
 void MyTblWdbeMImbuf::initStatements() {
-	stmtInsertRec = createStatement("INSERT INTO TblWdbeMImbuf (refWdbeMModule, corRefWdbeMModule, sref, ixVDir, Prio) VALUES (?,?,?,?,?)", false);
-	stmtUpdateRec = createStatement("UPDATE TblWdbeMImbuf SET refWdbeMModule = ?, corRefWdbeMModule = ?, sref = ?, ixVDir = ?, Prio = ? WHERE ref = ?", false);
+	stmtInsertRec = createStatement("INSERT INTO TblWdbeMImbuf (ixVRotype, refWdbeMModule, Fullsref, Width, Minmax, Prio) VALUES (?,?,?,?,?,?)", false);
+	stmtUpdateRec = createStatement("UPDATE TblWdbeMImbuf SET ixVRotype = ?, refWdbeMModule = ?, Fullsref = ?, Width = ?, Minmax = ?, Prio = ? WHERE ref = ?", false);
 	stmtRemoveRecByRef = createStatement("DELETE FROM TblWdbeMImbuf WHERE ref = ?", false);
 };
 
@@ -318,11 +329,12 @@ bool MyTblWdbeMImbuf::loadRecBySQL(
 		_rec = new WdbeMImbuf();
 
 		if (dbrow[0]) _rec->ref = atoll((char*) dbrow[0]); else _rec->ref = 0;
-		if (dbrow[1]) _rec->refWdbeMModule = atoll((char*) dbrow[1]); else _rec->refWdbeMModule = 0;
-		if (dbrow[2]) _rec->corRefWdbeMModule = atoll((char*) dbrow[2]); else _rec->corRefWdbeMModule = 0;
-		if (dbrow[3]) _rec->sref.assign(dbrow[3], dblengths[3]); else _rec->sref = "";
-		if (dbrow[4]) _rec->ixVDir = atol((char*) dbrow[4]); else _rec->ixVDir = 0;
-		if (dbrow[5]) _rec->Prio = atoi((char*) dbrow[5]); else _rec->Prio = 0;
+		if (dbrow[1]) _rec->ixVRotype = atol((char*) dbrow[1]); else _rec->ixVRotype = 0;
+		if (dbrow[2]) _rec->refWdbeMModule = atoll((char*) dbrow[2]); else _rec->refWdbeMModule = 0;
+		if (dbrow[3]) _rec->Fullsref.assign(dbrow[3], dblengths[3]); else _rec->Fullsref = "";
+		if (dbrow[4]) _rec->Width = atoi((char*) dbrow[4]); else _rec->Width = 0;
+		if (dbrow[5]) _rec->Minmax.assign(dbrow[5], dblengths[5]); else _rec->Minmax = "";
+		if (dbrow[6]) _rec->Prio = atoi((char*) dbrow[6]); else _rec->Prio = 0;
 
 		retval = true;
 	};
@@ -366,11 +378,12 @@ ubigint MyTblWdbeMImbuf::loadRstBySQL(
 			rec = new WdbeMImbuf();
 
 			if (dbrow[0]) rec->ref = atoll((char*) dbrow[0]); else rec->ref = 0;
-			if (dbrow[1]) rec->refWdbeMModule = atoll((char*) dbrow[1]); else rec->refWdbeMModule = 0;
-			if (dbrow[2]) rec->corRefWdbeMModule = atoll((char*) dbrow[2]); else rec->corRefWdbeMModule = 0;
-			if (dbrow[3]) rec->sref.assign(dbrow[3], dblengths[3]); else rec->sref = "";
-			if (dbrow[4]) rec->ixVDir = atol((char*) dbrow[4]); else rec->ixVDir = 0;
-			if (dbrow[5]) rec->Prio = atoi((char*) dbrow[5]); else rec->Prio = 0;
+			if (dbrow[1]) rec->ixVRotype = atol((char*) dbrow[1]); else rec->ixVRotype = 0;
+			if (dbrow[2]) rec->refWdbeMModule = atoll((char*) dbrow[2]); else rec->refWdbeMModule = 0;
+			if (dbrow[3]) rec->Fullsref.assign(dbrow[3], dblengths[3]); else rec->Fullsref = "";
+			if (dbrow[4]) rec->Width = atoi((char*) dbrow[4]); else rec->Width = 0;
+			if (dbrow[5]) rec->Minmax.assign(dbrow[5], dblengths[5]); else rec->Minmax = "";
+			if (dbrow[6]) rec->Prio = atoi((char*) dbrow[6]); else rec->Prio = 0;
 			rst.nodes.push_back(rec);
 
 			numread++;
@@ -385,16 +398,18 @@ ubigint MyTblWdbeMImbuf::loadRstBySQL(
 ubigint MyTblWdbeMImbuf::insertRec(
 			WdbeMImbuf* rec
 		) {
-	unsigned long l[5]; my_bool n[5]; my_bool e[5];
+	unsigned long l[6]; my_bool n[6]; my_bool e[6];
 
-	l[2] = rec->sref.length();
+	l[2] = rec->Fullsref.length();
+	l[4] = rec->Minmax.length();
 
 	MYSQL_BIND bind[] = {
-		bindUbigint(&rec->refWdbeMModule,&(l[0]),&(n[0]),&(e[0])),
-		bindUbigint(&rec->corRefWdbeMModule,&(l[1]),&(n[1]),&(e[1])),
-		bindCstring((char*) (rec->sref.c_str()),&(l[2]),&(n[2]),&(e[2])),
-		bindUint(&rec->ixVDir,&(l[3]),&(n[3]),&(e[3])),
-		bindUtinyint(&rec->Prio,&(l[4]),&(n[4]),&(e[4]))
+		bindUint(&rec->ixVRotype,&(l[0]),&(n[0]),&(e[0])),
+		bindUbigint(&rec->refWdbeMModule,&(l[1]),&(n[1]),&(e[1])),
+		bindCstring((char*) (rec->Fullsref.c_str()),&(l[2]),&(n[2]),&(e[2])),
+		bindUsmallint(&rec->Width,&(l[3]),&(n[3]),&(e[3])),
+		bindCstring((char*) (rec->Minmax.c_str()),&(l[4]),&(n[4]),&(e[4])),
+		bindUtinyint(&rec->Prio,&(l[5]),&(n[5]),&(e[5]))
 	};
 
 	if (mysql_stmt_bind_param(stmtInsertRec, bind)) {
@@ -422,17 +437,19 @@ void MyTblWdbeMImbuf::insertRst(
 void MyTblWdbeMImbuf::updateRec(
 			WdbeMImbuf* rec
 		) {
-	unsigned long l[6]; my_bool n[6]; my_bool e[6];
+	unsigned long l[7]; my_bool n[7]; my_bool e[7];
 
-	l[2] = rec->sref.length();
+	l[2] = rec->Fullsref.length();
+	l[4] = rec->Minmax.length();
 
 	MYSQL_BIND bind[] = {
-		bindUbigint(&rec->refWdbeMModule,&(l[0]),&(n[0]),&(e[0])),
-		bindUbigint(&rec->corRefWdbeMModule,&(l[1]),&(n[1]),&(e[1])),
-		bindCstring((char*) (rec->sref.c_str()),&(l[2]),&(n[2]),&(e[2])),
-		bindUint(&rec->ixVDir,&(l[3]),&(n[3]),&(e[3])),
-		bindUtinyint(&rec->Prio,&(l[4]),&(n[4]),&(e[4])),
-		bindUbigint(&rec->ref,&(l[5]),&(n[5]),&(e[5]))
+		bindUint(&rec->ixVRotype,&(l[0]),&(n[0]),&(e[0])),
+		bindUbigint(&rec->refWdbeMModule,&(l[1]),&(n[1]),&(e[1])),
+		bindCstring((char*) (rec->Fullsref.c_str()),&(l[2]),&(n[2]),&(e[2])),
+		bindUsmallint(&rec->Width,&(l[3]),&(n[3]),&(e[3])),
+		bindCstring((char*) (rec->Minmax.c_str()),&(l[4]),&(n[4]),&(e[4])),
+		bindUtinyint(&rec->Prio,&(l[5]),&(n[5]),&(e[5])),
+		bindUbigint(&rec->ref,&(l[6]),&(n[6]),&(e[6]))
 	};
 
 	if (mysql_stmt_bind_param(stmtUpdateRec, bind)) {
@@ -483,11 +500,18 @@ bool MyTblWdbeMImbuf::loadRecByRef(
 	return loadRecBySQL("SELECT * FROM TblWdbeMImbuf WHERE ref = " + to_string(ref), rec);
 };
 
+bool MyTblWdbeMImbuf::loadFsrByRef(
+			ubigint ref
+			, string& Fullsref
+		) {
+	return loadStringBySQL("SELECT Fullsref FROM TblWdbeMImbuf WHERE ref = " + to_string(ref) + "", Fullsref);
+};
+
 bool MyTblWdbeMImbuf::loadRecByMdl(
 			ubigint refWdbeMModule
 			, WdbeMImbuf** rec
 		) {
-	return loadRecBySQL("SELECT ref, refWdbeMModule, corRefWdbeMModule, sref, ixVDir, Prio FROM TblWdbeMImbuf WHERE refWdbeMModule = " + to_string(refWdbeMModule) + "", rec);
+	return loadRecBySQL("SELECT ref, ixVRotype, refWdbeMModule, Fullsref, Width, Minmax, Prio FROM TblWdbeMImbuf WHERE refWdbeMModule = " + to_string(refWdbeMModule) + "", rec);
 };
 
 ubigint MyTblWdbeMImbuf::loadRefsByMdl(
@@ -516,12 +540,13 @@ PgTblWdbeMImbuf::~PgTblWdbeMImbuf() {
 };
 
 void PgTblWdbeMImbuf::initStatements() {
-	createStatement("TblWdbeMImbuf_insertRec", "INSERT INTO TblWdbeMImbuf (refWdbeMModule, corRefWdbeMModule, sref, ixVDir, Prio) VALUES ($1,$2,$3,$4,$5) RETURNING ref", 5);
-	createStatement("TblWdbeMImbuf_updateRec", "UPDATE TblWdbeMImbuf SET refWdbeMModule = $1, corRefWdbeMModule = $2, sref = $3, ixVDir = $4, Prio = $5 WHERE ref = $6", 6);
+	createStatement("TblWdbeMImbuf_insertRec", "INSERT INTO TblWdbeMImbuf (ixVRotype, refWdbeMModule, Fullsref, Width, Minmax, Prio) VALUES ($1,$2,$3,$4,$5,$6) RETURNING ref", 6);
+	createStatement("TblWdbeMImbuf_updateRec", "UPDATE TblWdbeMImbuf SET ixVRotype = $1, refWdbeMModule = $2, Fullsref = $3, Width = $4, Minmax = $5, Prio = $6 WHERE ref = $7", 7);
 	createStatement("TblWdbeMImbuf_removeRecByRef", "DELETE FROM TblWdbeMImbuf WHERE ref = $1", 1);
 
-	createStatement("TblWdbeMImbuf_loadRecByRef", "SELECT ref, refWdbeMModule, corRefWdbeMModule, sref, ixVDir, Prio FROM TblWdbeMImbuf WHERE ref = $1", 1);
-	createStatement("TblWdbeMImbuf_loadRecByMdl", "SELECT ref, refWdbeMModule, corRefWdbeMModule, sref, ixVDir, Prio FROM TblWdbeMImbuf WHERE refWdbeMModule = $1", 1);
+	createStatement("TblWdbeMImbuf_loadRecByRef", "SELECT ref, ixVRotype, refWdbeMModule, Fullsref, Width, Minmax, Prio FROM TblWdbeMImbuf WHERE ref = $1", 1);
+	createStatement("TblWdbeMImbuf_loadFsrByRef", "SELECT Fullsref FROM TblWdbeMImbuf WHERE ref = $1", 1);
+	createStatement("TblWdbeMImbuf_loadRecByMdl", "SELECT ref, ixVRotype, refWdbeMModule, Fullsref, Width, Minmax, Prio FROM TblWdbeMImbuf WHERE refWdbeMModule = $1", 1);
 	createStatement("TblWdbeMImbuf_loadRefsByMdl", "SELECT ref FROM TblWdbeMImbuf WHERE refWdbeMModule = $1", 1);
 };
 
@@ -539,19 +564,21 @@ bool PgTblWdbeMImbuf::loadRec(
 
 		int fnum[] = {
 			PQfnumber(res, "ref"),
+			PQfnumber(res, "ixvrotype"),
 			PQfnumber(res, "refwdbemmodule"),
-			PQfnumber(res, "correfwdbemmodule"),
-			PQfnumber(res, "sref"),
-			PQfnumber(res, "ixvdir"),
+			PQfnumber(res, "fullsref"),
+			PQfnumber(res, "width"),
+			PQfnumber(res, "minmax"),
 			PQfnumber(res, "prio")
 		};
 
 		ptr = PQgetvalue(res, 0, fnum[0]); _rec->ref = atoll(ptr);
-		ptr = PQgetvalue(res, 0, fnum[1]); _rec->refWdbeMModule = atoll(ptr);
-		ptr = PQgetvalue(res, 0, fnum[2]); _rec->corRefWdbeMModule = atoll(ptr);
-		ptr = PQgetvalue(res, 0, fnum[3]); _rec->sref.assign(ptr, PQgetlength(res, 0, fnum[3]));
-		ptr = PQgetvalue(res, 0, fnum[4]); _rec->ixVDir = atol(ptr);
-		ptr = PQgetvalue(res, 0, fnum[5]); _rec->Prio = atoi(ptr);
+		ptr = PQgetvalue(res, 0, fnum[1]); _rec->ixVRotype = atol(ptr);
+		ptr = PQgetvalue(res, 0, fnum[2]); _rec->refWdbeMModule = atoll(ptr);
+		ptr = PQgetvalue(res, 0, fnum[3]); _rec->Fullsref.assign(ptr, PQgetlength(res, 0, fnum[3]));
+		ptr = PQgetvalue(res, 0, fnum[4]); _rec->Width = atoi(ptr);
+		ptr = PQgetvalue(res, 0, fnum[5]); _rec->Minmax.assign(ptr, PQgetlength(res, 0, fnum[5]));
+		ptr = PQgetvalue(res, 0, fnum[6]); _rec->Prio = atoi(ptr);
 
 		retval = true;
 	};
@@ -579,10 +606,11 @@ ubigint PgTblWdbeMImbuf::loadRst(
 
 		int fnum[] = {
 			PQfnumber(res, "ref"),
+			PQfnumber(res, "ixvrotype"),
 			PQfnumber(res, "refwdbemmodule"),
-			PQfnumber(res, "correfwdbemmodule"),
-			PQfnumber(res, "sref"),
-			PQfnumber(res, "ixvdir"),
+			PQfnumber(res, "fullsref"),
+			PQfnumber(res, "width"),
+			PQfnumber(res, "minmax"),
 			PQfnumber(res, "prio")
 		};
 
@@ -590,11 +618,12 @@ ubigint PgTblWdbeMImbuf::loadRst(
 			rec = new WdbeMImbuf();
 
 			ptr = PQgetvalue(res, numread, fnum[0]); rec->ref = atoll(ptr);
-			ptr = PQgetvalue(res, numread, fnum[1]); rec->refWdbeMModule = atoll(ptr);
-			ptr = PQgetvalue(res, numread, fnum[2]); rec->corRefWdbeMModule = atoll(ptr);
-			ptr = PQgetvalue(res, numread, fnum[3]); rec->sref.assign(ptr, PQgetlength(res, numread, fnum[3]));
-			ptr = PQgetvalue(res, numread, fnum[4]); rec->ixVDir = atol(ptr);
-			ptr = PQgetvalue(res, numread, fnum[5]); rec->Prio = atoi(ptr);
+			ptr = PQgetvalue(res, numread, fnum[1]); rec->ixVRotype = atol(ptr);
+			ptr = PQgetvalue(res, numread, fnum[2]); rec->refWdbeMModule = atoll(ptr);
+			ptr = PQgetvalue(res, numread, fnum[3]); rec->Fullsref.assign(ptr, PQgetlength(res, numread, fnum[3]));
+			ptr = PQgetvalue(res, numread, fnum[4]); rec->Width = atoi(ptr);
+			ptr = PQgetvalue(res, numread, fnum[5]); rec->Minmax.assign(ptr, PQgetlength(res, numread, fnum[5]));
+			ptr = PQgetvalue(res, numread, fnum[6]); rec->Prio = atoi(ptr);
 
 			rst.nodes.push_back(rec);
 
@@ -666,28 +695,30 @@ ubigint PgTblWdbeMImbuf::insertRec(
 	PGresult* res;
 	char* ptr;
 
+	uint _ixVRotype = htonl(rec->ixVRotype);
 	ubigint _refWdbeMModule = htonl64(rec->refWdbeMModule);
-	ubigint _corRefWdbeMModule = htonl64(rec->corRefWdbeMModule);
-	uint _ixVDir = htonl(rec->ixVDir);
+	usmallint _Width = htons(rec->Width);
 	usmallint _Prio = htons(rec->Prio);
 
 	const char* vals[] = {
+		(char*) &_ixVRotype,
 		(char*) &_refWdbeMModule,
-		(char*) &_corRefWdbeMModule,
-		rec->sref.c_str(),
-		(char*) &_ixVDir,
+		rec->Fullsref.c_str(),
+		(char*) &_Width,
+		rec->Minmax.c_str(),
 		(char*) &_Prio
 	};
 	const int l[] = {
-		sizeof(ubigint),
+		sizeof(uint),
 		sizeof(ubigint),
 		0,
-		sizeof(uint),
+		sizeof(usmallint),
+		0,
 		sizeof(usmallint)
 	};
-	const int f[] = {1, 1, 0, 1, 1};
+	const int f[] = {1, 1, 0, 1, 0, 1};
 
-	res = PQexecPrepared(dbs, "TblWdbeMImbuf_insertRec", 5, vals, l, f, 0);
+	res = PQexecPrepared(dbs, "TblWdbeMImbuf_insertRec", 6, vals, l, f, 0);
 
 	if (PQresultStatus(res) != PGRES_TUPLES_OK) {
 		string dbms = "PgTblWdbeMImbuf::insertRec() / " + string(PQerrorMessage(dbs));
@@ -715,31 +746,33 @@ void PgTblWdbeMImbuf::updateRec(
 		) {
 	PGresult* res;
 
+	uint _ixVRotype = htonl(rec->ixVRotype);
 	ubigint _refWdbeMModule = htonl64(rec->refWdbeMModule);
-	ubigint _corRefWdbeMModule = htonl64(rec->corRefWdbeMModule);
-	uint _ixVDir = htonl(rec->ixVDir);
+	usmallint _Width = htons(rec->Width);
 	usmallint _Prio = htons(rec->Prio);
 	ubigint _ref = htonl64(rec->ref);
 
 	const char* vals[] = {
+		(char*) &_ixVRotype,
 		(char*) &_refWdbeMModule,
-		(char*) &_corRefWdbeMModule,
-		rec->sref.c_str(),
-		(char*) &_ixVDir,
+		rec->Fullsref.c_str(),
+		(char*) &_Width,
+		rec->Minmax.c_str(),
 		(char*) &_Prio,
 		(char*) &_ref
 	};
 	const int l[] = {
-		sizeof(ubigint),
+		sizeof(uint),
 		sizeof(ubigint),
 		0,
-		sizeof(uint),
+		sizeof(usmallint),
+		0,
 		sizeof(usmallint),
 		sizeof(ubigint)
 	};
-	const int f[] = {1, 1, 0, 1, 1, 1};
+	const int f[] = {1, 1, 0, 1, 0, 1, 1};
 
-	res = PQexecPrepared(dbs, "TblWdbeMImbuf_updateRec", 6, vals, l, f, 0);
+	res = PQexecPrepared(dbs, "TblWdbeMImbuf_updateRec", 7, vals, l, f, 0);
 
 	if (PQresultStatus(res) != PGRES_COMMAND_OK) {
 		string dbms = "PgTblWdbeMImbuf::updateRec() / " + string(PQerrorMessage(dbs));
@@ -803,6 +836,23 @@ bool PgTblWdbeMImbuf::loadRecByRef(
 	const int f[] = {1};
 
 	return loadRecByStmt("TblWdbeMImbuf_loadRecByRef", 1, vals, l, f, rec);
+};
+
+bool PgTblWdbeMImbuf::loadFsrByRef(
+			ubigint ref
+			, string& Fullsref
+		) {
+	ubigint _ref = htonl64(ref);
+
+	const char* vals[] = {
+		(char*) &_ref
+	};
+	const int l[] = {
+		sizeof(ubigint)
+	};
+	const int f[] = {1};
+
+	return loadStringByStmt("TblWdbeMImbuf_loadFsrByRef", 1, vals, l, f, Fullsref);
 };
 
 bool PgTblWdbeMImbuf::loadRecByMdl(

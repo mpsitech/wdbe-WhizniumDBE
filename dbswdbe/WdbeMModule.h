@@ -31,7 +31,7 @@
 class WdbeMModule {
 
 public:
-	WdbeMModule(const Sbecore::ubigint ref = 0, const Sbecore::uint ixVBasetype = 0, const Sbecore::uint hkIxVTbl = 0, const Sbecore::ubigint hkUref = 0, const Sbecore::uint hkNum = 0, const Sbecore::ubigint supRefWdbeMModule = 0, const Sbecore::ubigint tplRefWdbeMModule = 0, const Sbecore::ubigint refWdbeMController = 0, const Sbecore::ubigint refWdbeMImbuf = 0, const std::string sref = "", const std::string Srefrule = "", const std::string Comment = "");
+	WdbeMModule(const Sbecore::ubigint ref = 0, const Sbecore::uint ixVBasetype = 0, const Sbecore::uint hkIxVTbl = 0, const Sbecore::ubigint hkUref = 0, const Sbecore::uint hkNum = 0, const Sbecore::ubigint supRefWdbeMModule = 0, const Sbecore::ubigint tplRefWdbeMModule = 0, const Sbecore::ubigint refWdbeMController = 0, const Sbecore::ubigint refWdbeMImbuf = 0, const std::string sref = "", const std::string srefWdbeKVendor = "", const std::string Srefrule = "", const std::string Comment = "");
 
 public:
 	Sbecore::ubigint ref;
@@ -44,6 +44,7 @@ public:
 	Sbecore::ubigint refWdbeMController;
 	Sbecore::ubigint refWdbeMImbuf;
 	std::string sref;
+	std::string srefWdbeKVendor;
 	std::string Srefrule;
 	std::string Comment;
 
@@ -155,8 +156,8 @@ public:
 	virtual Sbecore::ubigint loadRstBySQL(const std::string& sqlstr, const bool append, ListWdbeMModule& rst);
 
 	virtual Sbecore::ubigint insertRec(WdbeMModule* rec);
-	Sbecore::ubigint insertNewRec(WdbeMModule** rec = NULL, const Sbecore::uint ixVBasetype = 0, const Sbecore::uint hkIxVTbl = 0, const Sbecore::ubigint hkUref = 0, const Sbecore::uint hkNum = 0, const Sbecore::ubigint supRefWdbeMModule = 0, const Sbecore::ubigint tplRefWdbeMModule = 0, const Sbecore::ubigint refWdbeMController = 0, const Sbecore::ubigint refWdbeMImbuf = 0, const std::string sref = "", const std::string Srefrule = "", const std::string Comment = "");
-	Sbecore::ubigint appendNewRecToRst(ListWdbeMModule& rst, WdbeMModule** rec = NULL, const Sbecore::uint ixVBasetype = 0, const Sbecore::uint hkIxVTbl = 0, const Sbecore::ubigint hkUref = 0, const Sbecore::uint hkNum = 0, const Sbecore::ubigint supRefWdbeMModule = 0, const Sbecore::ubigint tplRefWdbeMModule = 0, const Sbecore::ubigint refWdbeMController = 0, const Sbecore::ubigint refWdbeMImbuf = 0, const std::string sref = "", const std::string Srefrule = "", const std::string Comment = "");
+	Sbecore::ubigint insertNewRec(WdbeMModule** rec = NULL, const Sbecore::uint ixVBasetype = 0, const Sbecore::uint hkIxVTbl = 0, const Sbecore::ubigint hkUref = 0, const Sbecore::uint hkNum = 0, const Sbecore::ubigint supRefWdbeMModule = 0, const Sbecore::ubigint tplRefWdbeMModule = 0, const Sbecore::ubigint refWdbeMController = 0, const Sbecore::ubigint refWdbeMImbuf = 0, const std::string sref = "", const std::string srefWdbeKVendor = "", const std::string Srefrule = "", const std::string Comment = "");
+	Sbecore::ubigint appendNewRecToRst(ListWdbeMModule& rst, WdbeMModule** rec = NULL, const Sbecore::uint ixVBasetype = 0, const Sbecore::uint hkIxVTbl = 0, const Sbecore::ubigint hkUref = 0, const Sbecore::uint hkNum = 0, const Sbecore::ubigint supRefWdbeMModule = 0, const Sbecore::ubigint tplRefWdbeMModule = 0, const Sbecore::ubigint refWdbeMController = 0, const Sbecore::ubigint refWdbeMImbuf = 0, const std::string sref = "", const std::string srefWdbeKVendor = "", const std::string Srefrule = "", const std::string Comment = "");
 	virtual void insertRst(ListWdbeMModule& rst, bool transact = false);
 	virtual void updateRec(WdbeMModule* rec);
 	virtual void updateRst(ListWdbeMModule& rst, bool transact = false);

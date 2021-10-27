@@ -156,14 +156,16 @@ bool CrdWdbeNav::evalPnlcoredevAvail(
 	return(args.back());
 };
 
-bool CrdWdbeNav::evalPnldescrAvail(
+bool CrdWdbeNav::evalPnlhighAvail(
 			DbsWdbe* dbswdbe
 		) {
-	// pre.ixCrdaccMod()|pre.ixCrdaccVec()|pre.ixCrdaccVit()|pre.ixCrdaccCmd()|pre.ixCrdaccErr()|pre.ixCrdaccPph()|pre.ixCrdaccBnk()|pre.ixCrdaccPin()|pre.ixCrdaccGen()|pre.ixCrdaccPrt()|pre.ixCrdaccSig()|pre.ixCrdaccPrc()|pre.ixCrdaccFst()|pre.ixCrdaccVar()
+	// pre.ixCrdaccPph()|pre.ixCrdaccMod()|pre.ixCrdaccVec()|pre.ixCrdaccVit()|pre.ixCrdaccCmd()|pre.ixCrdaccErr()|pre.ixCrdaccPpl()|pre.ixCrdaccSeg()
 
 	vector<bool> args;
 	bool a, b;
 
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCPPH, jref) != 0);
+	args.push_back(a);
 	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCMOD, jref) != 0);
 	args.push_back(a);
 	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCVEC, jref) != 0);
@@ -174,11 +176,52 @@ bool CrdWdbeNav::evalPnldescrAvail(
 	args.push_back(a);
 	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCERR, jref) != 0);
 	args.push_back(a);
-	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCPPH, jref) != 0);
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCPPL, jref) != 0);
 	args.push_back(a);
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCSEG, jref) != 0);
+	args.push_back(a);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
+
+	return(args.back());
+};
+
+bool CrdWdbeNav::evalPnllowAvail(
+			DbsWdbe* dbswdbe
+		) {
+	// pre.ixCrdaccBnk()|pre.ixCrdaccPin()|pre.ixCrdaccInt()|pre.ixCrdaccSns()|pre.ixCrdaccVar()|pre.ixCrdaccGen()|pre.ixCrdaccPrt()|pre.ixCrdaccSig()|pre.ixCrdaccPrc()|pre.ixCrdaccFst()
+
+	vector<bool> args;
+	bool a, b;
+
 	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCBNK, jref) != 0);
 	args.push_back(a);
 	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCPIN, jref) != 0);
+	args.push_back(a);
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCINT, jref) != 0);
+	args.push_back(a);
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCSNS, jref) != 0);
+	args.push_back(a);
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCVAR, jref) != 0);
 	args.push_back(a);
 	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCGEN, jref) != 0);
 	args.push_back(a);
@@ -190,20 +233,6 @@ bool CrdWdbeNav::evalPnldescrAvail(
 	args.push_back(a);
 	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCFST, jref) != 0);
 	args.push_back(a);
-	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCVAR, jref) != 0);
-	args.push_back(a);
-	b = args.back(); args.pop_back();
-	a = args.back(); args.pop_back();
-	args.push_back(a || b);
-	b = args.back(); args.pop_back();
-	a = args.back(); args.pop_back();
-	args.push_back(a || b);
-	b = args.back(); args.pop_back();
-	a = args.back(); args.pop_back();
-	args.push_back(a || b);
-	b = args.back(); args.pop_back();
-	a = args.back(); args.pop_back();
-	args.push_back(a || b);
 	b = args.back(); args.pop_back();
 	a = args.back(); args.pop_back();
 	args.push_back(a || b);
@@ -681,11 +710,13 @@ bool CrdWdbeNav::evalMitCrdCvrAvail(
 bool CrdWdbeNav::evalMspCrd5Avail(
 			DbsWdbe* dbswdbe
 		) {
-	// MitCrdModAvail()|MitCrdVecAvail()|MitCrdCmdAvail()|MitCrdErrAvail()|MitCrdPphAvail()|MitCrdBnkAvail()|MitCrdPinAvail()
+	// MitCrdPphAvail()|MitCrdModAvail()|MitCrdVecAvail()|MitCrdCmdAvail()|MitCrdErrAvail()|MitCrdPplAvail()|MitCrdSegAvail()
 
 	vector<bool> args;
 	bool a, b;
 
+	a = false; a = evalMitCrdPphAvail(dbswdbe);
+	args.push_back(a);
 	a = false; a = evalMitCrdModAvail(dbswdbe);
 	args.push_back(a);
 	a = false; a = evalMitCrdVecAvail(dbswdbe);
@@ -694,11 +725,9 @@ bool CrdWdbeNav::evalMspCrd5Avail(
 	args.push_back(a);
 	a = false; a = evalMitCrdErrAvail(dbswdbe);
 	args.push_back(a);
-	a = false; a = evalMitCrdPphAvail(dbswdbe);
+	a = false; a = evalMitCrdPplAvail(dbswdbe);
 	args.push_back(a);
-	a = false; a = evalMitCrdBnkAvail(dbswdbe);
-	args.push_back(a);
-	a = false; a = evalMitCrdPinAvail(dbswdbe);
+	a = false; a = evalMitCrdSegAvail(dbswdbe);
 	args.push_back(a);
 	b = args.back(); args.pop_back();
 	a = args.back(); args.pop_back();
@@ -718,6 +747,34 @@ bool CrdWdbeNav::evalMspCrd5Avail(
 	b = args.back(); args.pop_back();
 	a = args.back(); args.pop_back();
 	args.push_back(a || b);
+
+	return(args.back());
+};
+
+bool CrdWdbeNav::evalMitCrdPphAvail(
+			DbsWdbe* dbswdbe
+		) {
+	// pre.ixCrdaccPph()
+
+	vector<bool> args;
+	bool a;
+
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCPPH, jref) != 0);
+	args.push_back(a);
+
+	return(args.back());
+};
+
+bool CrdWdbeNav::evalMitCrdPphActive(
+			DbsWdbe* dbswdbe
+		) {
+	// pre.refUnt()
+
+	vector<bool> args;
+	bool a;
+
+	a = false; a = (xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFUNT, jref) != 0);
+	args.push_back(a);
 
 	return(args.back());
 };
@@ -849,21 +906,21 @@ bool CrdWdbeNav::evalMitCrdErrActive(
 	return(args.back());
 };
 
-bool CrdWdbeNav::evalMitCrdPphAvail(
+bool CrdWdbeNav::evalMitCrdPplAvail(
 			DbsWdbe* dbswdbe
 		) {
-	// pre.ixCrdaccPph()
+	// pre.ixCrdaccPpl()
 
 	vector<bool> args;
 	bool a;
 
-	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCPPH, jref) != 0);
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCPPL, jref) != 0);
 	args.push_back(a);
 
 	return(args.back());
 };
 
-bool CrdWdbeNav::evalMitCrdPphActive(
+bool CrdWdbeNav::evalMitCrdPplActive(
 			DbsWdbe* dbswdbe
 		) {
 	// pre.refUnt()
@@ -873,6 +930,63 @@ bool CrdWdbeNav::evalMitCrdPphActive(
 
 	a = false; a = (xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFUNT, jref) != 0);
 	args.push_back(a);
+
+	return(args.back());
+};
+
+bool CrdWdbeNav::evalMitCrdSegAvail(
+			DbsWdbe* dbswdbe
+		) {
+	// pre.ixCrdaccSeg()
+
+	vector<bool> args;
+	bool a;
+
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCSEG, jref) != 0);
+	args.push_back(a);
+
+	return(args.back());
+};
+
+bool CrdWdbeNav::evalMitCrdSegActive(
+			DbsWdbe* dbswdbe
+		) {
+	// pre.refUnt()
+
+	vector<bool> args;
+	bool a;
+
+	a = false; a = (xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFUNT, jref) != 0);
+	args.push_back(a);
+
+	return(args.back());
+};
+
+bool CrdWdbeNav::evalMspCrd6Avail(
+			DbsWdbe* dbswdbe
+		) {
+	// MitCrdBnkAvail()|MitCrdPinAvail()|MitCrdIntAvail()|MitCrdSigAvail()
+
+	vector<bool> args;
+	bool a, b;
+
+	a = false; a = evalMitCrdBnkAvail(dbswdbe);
+	args.push_back(a);
+	a = false; a = evalMitCrdPinAvail(dbswdbe);
+	args.push_back(a);
+	a = false; a = evalMitCrdIntAvail(dbswdbe);
+	args.push_back(a);
+	a = false; a = evalMitCrdSigAvail(dbswdbe);
+	args.push_back(a);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
 
 	return(args.back());
 };
@@ -933,7 +1047,63 @@ bool CrdWdbeNav::evalMitCrdPinActive(
 	return(args.back());
 };
 
-bool CrdWdbeNav::evalMspCrd6Avail(
+bool CrdWdbeNav::evalMitCrdIntAvail(
+			DbsWdbe* dbswdbe
+		) {
+	// pre.ixCrdaccInt()
+
+	vector<bool> args;
+	bool a;
+
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCINT, jref) != 0);
+	args.push_back(a);
+
+	return(args.back());
+};
+
+bool CrdWdbeNav::evalMitCrdIntActive(
+			DbsWdbe* dbswdbe
+		) {
+	// pre.refUnt()
+
+	vector<bool> args;
+	bool a;
+
+	a = false; a = (xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFUNT, jref) != 0);
+	args.push_back(a);
+
+	return(args.back());
+};
+
+bool CrdWdbeNav::evalMitCrdSigAvail(
+			DbsWdbe* dbswdbe
+		) {
+	// pre.ixCrdaccSig()
+
+	vector<bool> args;
+	bool a;
+
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCSIG, jref) != 0);
+	args.push_back(a);
+
+	return(args.back());
+};
+
+bool CrdWdbeNav::evalMitCrdSigActive(
+			DbsWdbe* dbswdbe
+		) {
+	// pre.refUnt()
+
+	vector<bool> args;
+	bool a;
+
+	a = false; a = (xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFUNT, jref) != 0);
+	args.push_back(a);
+
+	return(args.back());
+};
+
+bool CrdWdbeNav::evalMspCrd7Avail(
 			DbsWdbe* dbswdbe
 		) {
 	// MitCrdUtlAvail()

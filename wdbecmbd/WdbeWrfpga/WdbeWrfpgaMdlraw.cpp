@@ -35,6 +35,7 @@ DpchRetWdbe* WdbeWrfpgaMdlraw::run(
 	string folder = dpchinv->folder;
 	string Prjshort = dpchinv->Prjshort;
 	string Untsref = dpchinv->Untsref;
+	string srefKToolch = dpchinv->srefKToolch;
 
 	utinyint ixOpVOpres = VecOpVOpres::SUCCESS;
 
@@ -53,7 +54,7 @@ DpchRetWdbe* WdbeWrfpgaMdlraw::run(
 		// xxxx/Xxxxx.vhd
 		s = xchg->tmppath + "/" + folder + "/" + Compsref + ".vhd.ip";
 		outfile.open(s.c_str(), ios::out);
-		writeMdlVhd(dbswdbe, outfile, Prjshort, Untsref, mdl);
+		writeMdlVhd(dbswdbe, outfile, Prjshort, Untsref, srefKToolch, mdl);
 		outfile.close();
 
 		delete mdl;
@@ -69,6 +70,7 @@ void WdbeWrfpgaMdlraw::writeMdlVhd(
 			, fstream& outfile
 			, const string& Prjshort
 			, const string& Untsref
+			, const string& srefKToolch
 			, WdbeMModule* mdl
 		) {
 	ubigint ref;
@@ -128,7 +130,7 @@ void WdbeWrfpgaMdlraw::writeMdlVhd(
 	dbswdbe->tblwdbemport->loadRstByMdl(mdl->ref, false, prts);
 	for (unsigned int i = 0; i < prts.nodes.size(); i++) srefsPrts[prts.nodes[i]->ref] = prts.nodes[i]->sref;
 
-	dbswdbe->tblwdbemsignal->loadRstByMdl(mdl->ref, false, sigs);
+	dbswdbe->tblwdbemsignal->loadRstByRetReu(VecWdbeVMSignalRefTbl::MDL, mdl->ref, false, sigs);
 	for (unsigned int i = 0; i < sigs.nodes.size(); i++) {
 		sig = sigs.nodes[i];
 
@@ -161,14 +163,17 @@ void WdbeWrfpgaMdlraw::writeMdlVhd(
 
 	// --- libs
 	outfile << "-- IP libs --- IBEGIN" << endl;
-	for (unsigned int i = 0; i < submdls.nodes.size(); i++) {
-		submdl = submdls.nodes[i];
 
-		if (submdl->ixVBasetype == VecWdbeVMModuleBasetype::MNFPRIM) {
-			outfile << "library unisim;" << endl;
-			outfile << "use unisim.vcomponents.all;" << endl;
-			outfile << endl;
-			break;
+	if ((srefKToolch == "ise") || (srefKToolch == "vivado")) {
+		for (unsigned int i = 0; i < submdls.nodes.size(); i++) {
+			submdl = submdls.nodes[i];
+
+			if (submdl->ixVBasetype == VecWdbeVMModuleBasetype::MNFPRIM) {
+				outfile << "library unisim;" << endl;
+				outfile << "use unisim.vcomponents.all;" << endl;
+				outfile << endl;
+				break;
+			};
 		};
 	};
 
@@ -278,9 +283,9 @@ void WdbeWrfpgaMdlraw::writeMdlVhd(
 	for (unsigned int i = 0; i < submdls.nodes.size(); i++) {
 		submdl = submdls.nodes[i];
 
-		if (submdl->ixVBasetype != VecWdbeVMModuleBasetype::MNFPRIM) {
+		if ( !(((srefKToolch == "ise") || (srefKToolch == "vivado")) && (submdl->ixVBasetype == VecWdbeVMModuleBasetype::MNFPRIM)) ) {
 			compsref = Wdbe::getCompsref(dbswdbe, submdl);
-			
+
 			if (compsrefs.find(compsref) == compsrefs.end()) {
 				if (submdl->tplRefWdbeMModule == 0) ref = submdl->ref;
 				else ref = submdl->tplRefWdbeMModule;

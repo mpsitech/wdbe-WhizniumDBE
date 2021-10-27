@@ -55,9 +55,9 @@ RootWdbe::RootWdbe(
 
 	// IP constructor.spec2 --- INSERT
 
+	xchg->addClstn(VecWdbeVCall::CALLWDBELOGOUT, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBESUSPSESS, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBEREFPRESET, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecWdbeVCall::CALLWDBELOGOUT, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -117,6 +117,8 @@ void RootWdbe::clearAll(
 	else if (dbswdbe->ixDbsVDbstype == VecDbsVDbstype::PG) dbswdbe->executeQuery("ALTER SEQUENCE TblWdbeCPin RESTART WITH 1");
 	if (dbswdbe->ixDbsVDbstype == VecDbsVDbstype::MY) dbswdbe->executeQuery("DELETE FROM TblWdbeCPort");
 	else if (dbswdbe->ixDbsVDbstype == VecDbsVDbstype::PG) dbswdbe->executeQuery("ALTER SEQUENCE TblWdbeCPort RESTART WITH 1");
+	if (dbswdbe->ixDbsVDbstype == VecDbsVDbstype::MY) dbswdbe->executeQuery("DELETE FROM TblWdbeCSegment");
+	else if (dbswdbe->ixDbsVDbstype == VecDbsVDbstype::PG) dbswdbe->executeQuery("ALTER SEQUENCE TblWdbeCSegment RESTART WITH 1");
 	if (dbswdbe->ixDbsVDbstype == VecDbsVDbstype::MY) dbswdbe->executeQuery("DELETE FROM TblWdbeCSignal");
 	else if (dbswdbe->ixDbsVDbstype == VecDbsVDbstype::PG) dbswdbe->executeQuery("ALTER SEQUENCE TblWdbeCSignal RESTART WITH 1");
 	if (dbswdbe->ixDbsVDbstype == VecDbsVDbstype::MY) dbswdbe->executeQuery("DELETE FROM TblWdbeCVariable");
@@ -140,16 +142,20 @@ void RootWdbe::clearAll(
 	dbswdbe->executeQuery("DELETE FROM TblWdbeMFsmstate");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeMGeneric");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeMImbuf");
+	dbswdbe->executeQuery("DELETE FROM TblWdbeMInterrupt");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeMLibrary");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeMMachine");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeMModule");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeMPeripheral");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeMPerson");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeMPin");
+	dbswdbe->executeQuery("DELETE FROM TblWdbeMPipeline");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeMPort");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeMProcess");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeMProject");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeMRelease");
+	dbswdbe->executeQuery("DELETE FROM TblWdbeMSegment");
+	dbswdbe->executeQuery("DELETE FROM TblWdbeMSensitivity");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeMSession");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeMSignal");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeMSystem");
@@ -164,6 +170,8 @@ void RootWdbe::clearAll(
 	dbswdbe->executeQuery("DELETE FROM TblWdbeRMCommandMController");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeRMCoreprojectMPerson");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeRMLibraryMVersion");
+	dbswdbe->executeQuery("DELETE FROM TblWdbeRMModuleMModule");
+	dbswdbe->executeQuery("DELETE FROM TblWdbeRMModuleMPeripheral");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeRMPersonMProject");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeRMUsergroupUniversal");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeRMUserMUsergroup");
@@ -229,6 +237,8 @@ void RootWdbe::clearQtb(
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQFstAStep");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQFstList");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQGenList");
+	dbswdbe->executeQuery("DELETE FROM TblWdbeQIntList");
+	dbswdbe->executeQuery("DELETE FROM TblWdbeQIntSrc1NSensitivity");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQLibAMakefile");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQLibList");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQLibMNVersion");
@@ -237,22 +247,27 @@ void RootWdbe::clearQtb(
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQMchAPar");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQMchList");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQMchSup1NMachine");
-	dbswdbe->executeQuery("DELETE FROM TblWdbeQMod1NPeripheral");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQMod1NProcess");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQModAPar");
-	dbswdbe->executeQuery("DELETE FROM TblWdbeQModCor1NImbuf");
+	dbswdbe->executeQuery("DELETE FROM TblWdbeQModCorMNModule");
+	dbswdbe->executeQuery("DELETE FROM TblWdbeQModCtdMNModule");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQModCtrHk1NVector");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQModCtrMNCommand");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQModCtrRef1NCommand");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQModCtrRef1NError");
+	dbswdbe->executeQuery("DELETE FROM TblWdbeQModHsm1NPipeline");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQModKHdltype");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQModList");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQModMdl1NGeneric");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQModMdl1NPort");
-	dbswdbe->executeQuery("DELETE FROM TblWdbeQModMdl1NSignal");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQModMge1NSignal");
+	dbswdbe->executeQuery("DELETE FROM TblWdbeQModMNPeripheral");
+	dbswdbe->executeQuery("DELETE FROM TblWdbeQModRef1NSensitivity");
+	dbswdbe->executeQuery("DELETE FROM TblWdbeQModRef1NSignal");
+	dbswdbe->executeQuery("DELETE FROM TblWdbeQModRef1NVariable");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQModSup1NModule");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQMtpAPar");
+	dbswdbe->executeQuery("DELETE FROM TblWdbeQMtpHsm1NPipeline");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQMtpKHdltype");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQMtpKParKey");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQMtpList");
@@ -260,17 +275,23 @@ void RootWdbe::clearQtb(
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQMtpMdl1NPort");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQMtpMge1NSignal");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQMtpRef1NFile");
+	dbswdbe->executeQuery("DELETE FROM TblWdbeQMtpRef1NSensitivity");
+	dbswdbe->executeQuery("DELETE FROM TblWdbeQMtpRef1NVariable");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQMtpSup1NModule");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQMtpTpl1NModule");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQPinAPar");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQPinList");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQPphAPar");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQPphList");
+	dbswdbe->executeQuery("DELETE FROM TblWdbeQPphMNModule");
+	dbswdbe->executeQuery("DELETE FROM TblWdbeQPplList");
+	dbswdbe->executeQuery("DELETE FROM TblWdbeQPplPpl1NSegment");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQPrcFsmFsm1NFsmstate");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQPrcKHdltype");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQPrcList");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQPrcMge1NSignal");
-	dbswdbe->executeQuery("DELETE FROM TblWdbeQPrcPrc1NVariable");
+	dbswdbe->executeQuery("DELETE FROM TblWdbeQPrcRef1NSensitivity");
+	dbswdbe->executeQuery("DELETE FROM TblWdbeQPrcRef1NVariable");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQPreselect");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQPrjList");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQPrjMNPerson");
@@ -280,10 +301,15 @@ void RootWdbe::clearQtb(
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQPrsMNCoreproject");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQPrsMNProject");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQPrtList");
+	dbswdbe->executeQuery("DELETE FROM TblWdbeQPrtSrc1NSensitivity");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQRlsList");
+	dbswdbe->executeQuery("DELETE FROM TblWdbeQSegList");
+	dbswdbe->executeQuery("DELETE FROM TblWdbeQSegSup1NSegment");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQSelect");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQSigList");
+	dbswdbe->executeQuery("DELETE FROM TblWdbeQSigSrc1NSensitivity");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQSil1NBank");
+	dbswdbe->executeQuery("DELETE FROM TblWdbeQSil1NInterrupt");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQSil1NPeripheral");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQSil1NTarget");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQSilFwd1NController");
@@ -292,12 +318,15 @@ void RootWdbe::clearQtb(
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQSilList");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQSilRef1NCommand");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQSilRef1NError");
+	dbswdbe->executeQuery("DELETE FROM TblWdbeQSilRef1NSignal");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQSilSil1NUnit");
+	dbswdbe->executeQuery("DELETE FROM TblWdbeQSnsList");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQSysHk1NVector");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQSysList");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQSysSys1NTarget");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQTrgList");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQUnt1NBank");
+	dbswdbe->executeQuery("DELETE FROM TblWdbeQUnt1NInterrupt");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQUnt1NPeripheral");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQUnt1NTarget");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQUntFwd1NController");
@@ -306,6 +335,7 @@ void RootWdbe::clearQtb(
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQUntList");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQUntRef1NCommand");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQUntRef1NError");
+	dbswdbe->executeQuery("DELETE FROM TblWdbeQUntRef1NSignal");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQUntSil1NUnit");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQUsgAAccess");
 	dbswdbe->executeQuery("DELETE FROM TblWdbeQUsgList");
@@ -406,8 +436,8 @@ void RootWdbe::handleRequest(
 		};
 
 	} else if (req->ixVBasetype == ReqWdbe::VecVBasetype::TIMER) {
-		if ((req->sref == "mon") && (ixVSge == VecVSge::IDLE)) handleTimerWithSrefMonInSgeIdle(dbswdbe);
-		else if (req->sref == "warnterm") handleTimerWithSrefWarnterm(dbswdbe);
+		if (req->sref == "warnterm") handleTimerWithSrefWarnterm(dbswdbe);
+		else if ((req->sref == "mon") && (ixVSge == VecVSge::IDLE)) handleTimerWithSrefMonInSgeIdle(dbswdbe);
 	};
 };
 
@@ -428,8 +458,6 @@ bool RootWdbe::handleCreateSess(
 
 	ubigint refUsr;
 
-	SessWdbe* sess = NULL;
-
 	cout << "\tuser name: ";
 	cin >> input;
 	cout << "\tpassword: ";
@@ -437,11 +465,8 @@ bool RootWdbe::handleCreateSess(
 
 	// verify password and create a session
 	if (authenticate(dbswdbe, input, input2, refUsr)) {
-		sess = new SessWdbe(xchg, dbswdbe, jref, refUsr, "127.0.0.1");
-		sesss.push_back(sess);
-
-		cout << "\tjob reference: " << sess->jref << endl;
-		xchg->jrefCmd = sess->jref;
+		xchg->jrefCmd = insertSubjob(sesss, new SessWdbe(xchg, dbswdbe, jref, refUsr, "127.0.0.1"));
+		cout << "\tjob reference: " << xchg->jrefCmd << endl;
 
 		if ((xchg->stgwdbeappearance.sesstterm != 0) && (sesss.size() == 1)) wrefLast = xchg->addWakeup(jref, "warnterm", 1e6 * (xchg->stgwdbeappearance.sesstterm - xchg->stgwdbeappearance.sesstwarn));
 
@@ -460,25 +485,17 @@ bool RootWdbe::handleEraseSess(
 			DbsWdbe* dbswdbe
 		) {
 	bool retval = false;
-	string input;
-	uint iinput;
 
-	SessWdbe* sess = NULL;
+	string input;
+	ubigint iinput;
 
 	cout << "\tjob reference: ";
 	cin >> input;
 	iinput = atoi(input.c_str());
 
-	for (auto it = sesss.begin(); it != sesss.end();) {
-		sess = *it;
-		if (sess->jref == iinput) {
-			it = sesss.erase(it);
-			delete sess;
-			break;
-		} else it++;
-	};
+	if (!eraseSubjobByJref(sesss, iinput)) cout << "\tjob reference doesn't exist!" << endl;
+	else cout << "\tsession erased." << endl;
 
-	return false;
 	return retval;
 };
 
@@ -711,7 +728,7 @@ void RootWdbe::handleDpchAppLogin(
 		) {
 	ubigint refUsr;
 
-	SessWdbe* sess = NULL;
+	ubigint jrefSess;
 
 	Feed feedFEnsSps("FeedFEnsSps");
 
@@ -721,12 +738,12 @@ void RootWdbe::handleDpchAppLogin(
 			if (xchg->stgwdbeappearance.suspsess && dpchapplogin->chksuspsess) {
 				// look for suspended sessions
 				for (auto it = sesss.begin(); it != sesss.end(); it++) {
-					sess = *it;
+					jrefSess = it->second->jref;
 
-					if (xchg->getRefPreset(VecWdbeVPreset::PREWDBEOWNER, sess->jref) == refUsr) {
-						if (xchg->getBoolvalPreset(VecWdbeVPreset::PREWDBESUSPSESS, sess->jref)) {
-							xchg->addTxtvalPreset(VecWdbeVPreset::PREWDBEIP, sess->jref, ip);
-							feedFEnsSps.appendIxSrefTitles(0, Scr::scramble(sess->jref), StubWdbe::getStubSesStd(dbswdbe, xchg->getRefPreset(VecWdbeVPreset::PREWDBESESS, sess->jref)));
+					if (xchg->getRefPreset(VecWdbeVPreset::PREWDBEOWNER, jrefSess) == refUsr) {
+						if (xchg->getBoolvalPreset(VecWdbeVPreset::PREWDBESUSPSESS, jrefSess)) {
+							xchg->addTxtvalPreset(VecWdbeVPreset::PREWDBEIP, jrefSess, ip);
+							feedFEnsSps.appendIxSrefTitles(0, Scr::scramble(jrefSess), StubWdbe::getStubSesStd(dbswdbe, xchg->getRefPreset(VecWdbeVPreset::PREWDBESESS, jrefSess)));
 						};
 					};
 				};
@@ -734,14 +751,13 @@ void RootWdbe::handleDpchAppLogin(
 
 			if (feedFEnsSps.size() == 0) {
 				// start new session
-				sess = new SessWdbe(xchg, dbswdbe, jref, refUsr, ip);
-				sesss.push_back(sess);
+				jrefSess = insertSubjob(sesss, new SessWdbe(xchg, dbswdbe, jref, refUsr, ip));
 
 				if ((xchg->stgwdbeappearance.sesstterm != 0) && (sesss.size() == 1)) wrefLast = xchg->addWakeup(jref, "warnterm", 1e6 * (xchg->stgwdbeappearance.sesstterm - xchg->stgwdbeappearance.sesstwarn));
 
 				xchg->appendToLogfile("session created for user '" + dpchapplogin->username + "' from IP " + ip);
 
-				*dpcheng = new DpchEngWdbeConfirm(true, sess->jref, "");
+				*dpcheng = new DpchEngWdbeConfirm(true, jrefSess, "");
 
 			} else {
 				// return suspended sessions
@@ -755,13 +771,6 @@ void RootWdbe::handleDpchAppLogin(
 
 		*dpcheng = new DpchEngWdbeConfirm(false, 0, "");
 	};
-};
-
-void RootWdbe::handleTimerWithSrefMonInSgeIdle(
-			DbsWdbe* dbswdbe
-		) {
-	wrefLast = xchg->addWakeup(jref, "mon", 240000000, true);
-	changeStage(dbswdbe, VecVSge::IDLE); // IP handleTimerWithSrefMonInSgeIdle --- ILINE
 };
 
 void RootWdbe::handleTimerWithSrefWarnterm(
@@ -779,7 +788,7 @@ void RootWdbe::handleTimerWithSrefWarnterm(
 
 	if (xchg->stgwdbeappearance.sesstterm != 0) {
 		for (auto it = sesss.begin(); it != sesss.end();) {
-			sess = *it;
+			sess = (SessWdbe*) it->second;
 
 			term = false;
 
@@ -816,17 +825,45 @@ void RootWdbe::handleTimerWithSrefWarnterm(
 	} else if (tnext != 0) wrefLast = xchg->addWakeup(jref, "warnterm", 1e6 * (tnext - rawtime));
 };
 
+void RootWdbe::handleTimerWithSrefMonInSgeIdle(
+			DbsWdbe* dbswdbe
+		) {
+	wrefLast = xchg->addWakeup(jref, "mon", 240000000, true);
+	changeStage(dbswdbe, VecVSge::IDLE); // IP handleTimerWithSrefMonInSgeIdle --- ILINE
+};
+
 void RootWdbe::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBESUSPSESS) {
+	if (call->ixVCall == VecWdbeVCall::CALLWDBELOGOUT) {
+		call->abort = handleCallWdbeLogout(dbswdbe, call->jref, call->argInv.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBESUSPSESS) {
 		call->abort = handleCallWdbeSuspsess(dbswdbe, call->jref);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEREFPRESET) {
 		call->abort = handleCallWdbeRefPreSet(dbswdbe, call->jref, call->argInv.ix, call->argInv.ref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBELOGOUT) {
-		call->abort = handleCallWdbeLogout(dbswdbe, call->jref, call->argInv.boolval);
 	};
+};
+
+bool RootWdbe::handleCallWdbeLogout(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+			, const bool boolvalInv
+		) {
+	bool retval = false;
+
+	time_t rawtime;
+
+	if (!boolvalInv) {
+		eraseSubjobByJref(sesss, jrefTrig);
+
+		if (xchg->stgwdbeappearance.roottterm) {
+			time(&rawtime);
+			xchg->addRefPreset(VecWdbeVPreset::PREWDBETLAST, jref, rawtime);
+		};
+	};
+
+	return retval;
 };
 
 bool RootWdbe::handleCallWdbeSuspsess(
@@ -851,38 +888,6 @@ bool RootWdbe::handleCallWdbeRefPreSet(
 
 	if (ixInv == VecWdbeVPreset::PREWDBETLAST) {
 		xchg->addRefPreset(ixInv, jref, refInv);
-	};
-
-	return retval;
-};
-
-bool RootWdbe::handleCallWdbeLogout(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-			, const bool boolvalInv
-		) {
-	bool retval = false;
-
-	SessWdbe* sess = NULL;
-
-	time_t rawtime;
-
-	if (!boolvalInv) {
-		for (auto it = sesss.begin(); it != sesss.end();) {
-			sess = *it;
-			if (sess->jref == jrefTrig) {
-				sess->term(dbswdbe);
-				it = sesss.erase(it);
-
-				delete sess;
-				break;
-			} else it++;
-		};
-
-		if (xchg->stgwdbeappearance.roottterm) {
-			time(&rawtime);
-			xchg->addRefPreset(VecWdbeVPreset::PREWDBETLAST, jref, rawtime);
-		};
 	};
 
 	return retval;

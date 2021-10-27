@@ -315,8 +315,8 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbePrsJlnmMod_prsEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 	bool handleCallWdbePrsUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbePrsJlnmMod_prsEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 
 };
 

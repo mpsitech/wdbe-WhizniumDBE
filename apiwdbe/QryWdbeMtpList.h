@@ -28,10 +28,10 @@ namespace QryWdbeMtpList {
 	class VecVOrd {
 
 	public:
-		static const Sbecore::uint TYP = 1;
-		static const Sbecore::uint HKT = 2;
-		static const Sbecore::uint HKU = 3;
-		static const Sbecore::uint SRF = 4;
+		static const Sbecore::uint SRF = 1;
+		static const Sbecore::uint TYP = 2;
+		static const Sbecore::uint HKT = 3;
+		static const Sbecore::uint HKU = 4;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);
@@ -49,7 +49,7 @@ namespace QryWdbeMtpList {
 		static const Sbecore::uint NDISP = 4;
 
 	public:
-		StatApp(const Sbecore::uint firstcol = 1, const Sbecore::uint jnumFirstdisp = 1, const Sbecore::uint ncol = 7, const Sbecore::uint ndisp = 25);
+		StatApp(const Sbecore::uint firstcol = 1, const Sbecore::uint jnumFirstdisp = 1, const Sbecore::uint ncol = 9, const Sbecore::uint ndisp = 25);
 
 	public:
 		Sbecore::uint firstcol;

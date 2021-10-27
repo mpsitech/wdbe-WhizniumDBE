@@ -39,7 +39,7 @@ PnlWdbeFamDetail::PnlWdbeFamDetail(
 	jref = xchg->addJob(dbswdbe, this, jrefSup);
 
 	feedFPupVnd.tag = "FeedFPupVnd";
-	dbswdbe->fillFeedFromKlst(VecWdbeVKeylist::KLSTWDBEKMFAMILYVENDOR, ixWdbeVLocale, feedFPupVnd);
+	dbswdbe->fillFeedFromKlst(VecWdbeVKeylist::KLSTWDBEKVENDOR, ixWdbeVLocale, feedFPupVnd);
 
 	// IP constructor.cust1 --- INSERT
 
@@ -51,7 +51,7 @@ PnlWdbeFamDetail::PnlWdbeFamDetail(
 
 	// IP constructor.cust3 --- INSERT
 
-	xchg->addIxClstn(VecWdbeVCall::CALLWDBEKLSAKEYMOD_KLSEQ, jref, Clstn::VecVJobmask::ALL, 0, false, VecWdbeVKeylist::KLSTWDBEKMFAMILYVENDOR);
+	xchg->addIxClstn(VecWdbeVCall::CALLWDBEKLSAKEYMOD_KLSEQ, jref, Clstn::VecVJobmask::ALL, 0, false, VecWdbeVKeylist::KLSTWDBEKVENDOR);
 
 	updatePreset(dbswdbe, VecWdbeVPreset::PREWDBEREFFAM, jref);
 };
@@ -129,7 +129,7 @@ void PnlWdbeFamDetail::refreshVnd(
 			, set<uint>& moditems
 		) {
 	// feedFPupVnd
-	dbswdbe->fillFeedFromKlst(VecWdbeVKeylist::KLSTWDBEKMFAMILYVENDOR, ixWdbeVLocale, feedFPupVnd);
+	dbswdbe->fillFeedFromKlst(VecWdbeVKeylist::KLSTWDBEKVENDOR, ixWdbeVLocale, feedFPupVnd);
 
 	insert(moditems, DpchEngData::FEEDFPUPVND);
 
@@ -152,7 +152,7 @@ void PnlWdbeFamDetail::refreshRecFam(
 
 	dirty = false;
 
-	contiac.TxfVnd = recFam.srefKVendor;
+	contiac.TxfVnd = recFam.srefWdbeKVendor;
 	contiac.TxfTit = recFam.Title;
 	contiac.TxfCmt = recFam.Comment;
 
@@ -299,11 +299,20 @@ void PnlWdbeFamDetail::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBEKLSAKEYMOD_KLSEQ) {
-		call->abort = handleCallWdbeKlsAkeyMod_klsEq(dbswdbe, call->jref, call->argInv.ix);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEFAMUPD_REFEQ) {
+	if (call->ixVCall == VecWdbeVCall::CALLWDBEFAMUPD_REFEQ) {
 		call->abort = handleCallWdbeFamUpd_refEq(dbswdbe, call->jref);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEKLSAKEYMOD_KLSEQ) {
+		call->abort = handleCallWdbeKlsAkeyMod_klsEq(dbswdbe, call->jref, call->argInv.ix);
 	};
+};
+
+bool PnlWdbeFamDetail::handleCallWdbeFamUpd_refEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+	// IP handleCallWdbeFamUpd_refEq --- INSERT
+	return retval;
 };
 
 bool PnlWdbeFamDetail::handleCallWdbeKlsAkeyMod_klsEq(
@@ -314,19 +323,10 @@ bool PnlWdbeFamDetail::handleCallWdbeKlsAkeyMod_klsEq(
 	bool retval = false;
 	set<uint> moditems;
 
-	if (ixInv == VecWdbeVKeylist::KLSTWDBEKMFAMILYVENDOR) {
+	if (ixInv == VecWdbeVKeylist::KLSTWDBEKVENDOR) {
 		refreshVnd(dbswdbe, moditems);
 	};
 
 	xchg->submitDpch(getNewDpchEng(moditems));
-	return retval;
-};
-
-bool PnlWdbeFamDetail::handleCallWdbeFamUpd_refEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-	// IP handleCallWdbeFamUpd_refEq --- INSERT
 	return retval;
 };

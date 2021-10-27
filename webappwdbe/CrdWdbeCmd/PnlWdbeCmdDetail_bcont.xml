@@ -9,6 +9,9 @@
 			function handlePupRetChange() {parent.parent.window.handlePupChange(document,"PupRet","xs");};
 			function handleButReuViewClick() {parent.parent.window.handleButCrdopenClick("ButReuView");};
 			function handlePupRtyChange() {parent.parent.window.handlePupChange(document,"PupRty","");};
+			function handleButIvrViewClick() {parent.parent.window.handleButCrdopenClick("ButIvrView");};
+			function handleButRvrViewClick() {parent.parent.window.handleButCrdopenClick("ButRvrView");};
+			function handleButRerViewClick() {parent.parent.window.handleButCrdopenClick("ButRerView");};
 			function handleTxfCmtKey(evt) {return parent.parent.window.handleTxftKey(document,"TxfCmt",evt);};
 			function handleTxfCmtChange() {parent.parent.window.handleTxftChange(document,"TxfCmt");};
 			<!-- IP custScript - INSERT -->
@@ -101,7 +104,8 @@
 						<input id="TxtIvr" class="txfnoed" type="text" readonly="readonly" value="TxtIvr"/>
 					</td>
 					<td></td>
-					<td colspan="2"></td>
+					<td id="rdynIvr" colspan="2" align="left">
+					</td>
 				</tr>
 				<tr id="trRvr" class="show">
 					<td height="25"></td>
@@ -113,7 +117,8 @@
 						<input id="TxtRvr" class="txfnoed" type="text" readonly="readonly" value="TxtRvr"/>
 					</td>
 					<td></td>
-					<td colspan="2"></td>
+					<td id="rdynRvr" colspan="2" align="left">
+					</td>
 				</tr>
 				<tr id="trRer" class="show">
 					<td height="25"></td>
@@ -125,7 +130,8 @@
 						<input id="TxtRer" class="txfnoed" type="text" readonly="readonly" value="TxtRer"/>
 					</td>
 					<td></td>
-					<td colspan="2"></td>
+					<td id="rdynRer" colspan="2" align="left">
+					</td>
 				</tr>
 				<tr id="trCmt" class="show">
 					<td height="75"></td>

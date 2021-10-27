@@ -53,7 +53,6 @@ function initBD(bNotD) {
 	// IP initBD --- BEGIN
 	initCpt(contcontdoc, "CptSrf", retrieveTi(srcdoc, "TagWdbePphDetail", "CptSrf"));
 	initCpt(contcontdoc, "CptUnt", retrieveTi(srcdoc, "TagWdbePphDetail", "CptUnt"));
-	initCpt(contcontdoc, "CptMdl", retrieveTi(srcdoc, "TagWdbePphDetail", "CptMdl"));
 	initCpt(contcontdoc, "CptCmt", retrieveTi(srcdoc, "TagWdbePphDetail", "CptCmt"));
 	// IP initBD --- END
 
@@ -78,7 +77,7 @@ function refreshA() {
 function refreshBD(bNotD) {
 	if (!contcontdoc) return;
 
-	var height = 167; // full cont height
+	var height = 142; // full cont height
 
 	// IP refreshBD.vars --- BEGIN
 	var TxtSrfActive = (retrieveSi(srcdoc, "StatShrWdbePphDetail", "TxtSrfActive") == "true");
@@ -86,10 +85,6 @@ function refreshBD(bNotD) {
 	var TxtUntActive = (retrieveSi(srcdoc, "StatShrWdbePphDetail", "TxtUntActive") == "true");
 	var ButUntViewAvail = (retrieveSi(srcdoc, "StatShrWdbePphDetail", "ButUntViewAvail") == "true");
 	var ButUntViewActive = (retrieveSi(srcdoc, "StatShrWdbePphDetail", "ButUntViewActive") == "true");
-
-	var TxtMdlActive = (retrieveSi(srcdoc, "StatShrWdbePphDetail", "TxtMdlActive") == "true");
-	var ButMdlViewAvail = (retrieveSi(srcdoc, "StatShrWdbePphDetail", "ButMdlViewAvail") == "true");
-	var ButMdlViewActive = (retrieveSi(srcdoc, "StatShrWdbePphDetail", "ButMdlViewActive") == "true");
 
 	var TxfCmtActive = (retrieveSi(srcdoc, "StatShrWdbePphDetail", "TxfCmtActive") == "true");
 
@@ -116,23 +111,6 @@ function refreshBD(bNotD) {
 	refreshTxt(contcontdoc, "TxtUnt", retrieveCi(srcdoc, "ContInfWdbePphDetail", "TxtUnt"));
 
 	if (ButUntViewAvail) refreshButicon(contcontdoc, "ButUntView", "icon/view", ButUntViewActive, false);
-
-	if ((ButMdlViewAvail == !contcontdoc.getElementById("ButMdlView"))) {
-		mytd = contcontdoc.getElementById("rdynMdl");
-		clearElem(mytd);
-
-		first = true;
-
-		if (ButMdlViewAvail) {
-			if (first) first = false;
-			else mytd.appendChild(contcontdoc.createTextNode("\u00a0"));
-			mytd.appendChild(makeImgBut(contcontdoc, "ButMdlView", "icon/view"));
-		};
-	};
-
-	refreshTxt(contcontdoc, "TxtMdl", retrieveCi(srcdoc, "ContInfWdbePphDetail", "TxtMdl"));
-
-	if (ButMdlViewAvail) refreshButicon(contcontdoc, "ButMdlView", "icon/view", ButMdlViewActive, false);
 
 	refreshTxft(contcontdoc, "TxfCmt", retrieveCi(srcdoc, "ContIacWdbePphDetail", "TxfCmt"), TxfCmtActive, false, true);
 

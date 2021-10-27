@@ -20,7 +20,8 @@ namespace WdbeWrfpgaBase {
 	// IP cust --- IBEGIN
 
 	void writeUntUcf(DbsWdbe* dbswdbe, std::fstream& outfile, std::set<std::string>& srefsTopprts, ListWdbeMBank& bnks);
-	void writeUntXdc(DbsWdbe* dbswdbe, std::fstream& outfile, const Sbecore::ubigint refWdbeMUnit, std::set<std::string>& srefsTopprts, ListWdbeMBank& bnks, const bool zynqNotFpga);
+	void writeUntPdc(DbsWdbe* dbswdbe, std::fstream& outfile, ListWdbeMPort& topprts, ListWdbeMBank& bnks);
+	void writeUntXdc(DbsWdbe* dbswdbe, std::fstream& outfile, const Sbecore::ubigint refWdbeMUnit, std::set<std::string>& srefsTopprts, ListWdbeMBank& bnks);
 	void writeUntVhd(DbsWdbe* dbswdbe, std::fstream& outfile, const std::string& Prjshort, const std::string& Untsref, WdbeMUnit* unt);
 	// IP cust --- IEND
 };

@@ -36,6 +36,7 @@ namespace PnlWdbeErrDetail {
 	public:
 		static const Sbecore::uint BUTSAVECLICK = 1;
 		static const Sbecore::uint BUTREUVIEWCLICK = 2;
+		static const Sbecore::uint BUTTRAVIEWCLICK = 3;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);
@@ -124,10 +125,12 @@ namespace PnlWdbeErrDetail {
 		static const Sbecore::uint BUTREUVIEWAVAIL = 6;
 		static const Sbecore::uint BUTREUVIEWACTIVE = 7;
 		static const Sbecore::uint TXTTRAACTIVE = 8;
-		static const Sbecore::uint TXFCMTACTIVE = 9;
+		static const Sbecore::uint BUTTRAVIEWAVAIL = 9;
+		static const Sbecore::uint BUTTRAVIEWACTIVE = 10;
+		static const Sbecore::uint TXFCMTACTIVE = 11;
 
 	public:
-		StatShr(const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxtSrfActive = true, const bool TxfFsrActive = true, const bool TxtReuActive = true, const bool ButReuViewAvail = true, const bool ButReuViewActive = true, const bool TxtTraActive = true, const bool TxfCmtActive = true);
+		StatShr(const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxtSrfActive = true, const bool TxfFsrActive = true, const bool TxtReuActive = true, const bool ButReuViewAvail = true, const bool ButReuViewActive = true, const bool TxtTraActive = true, const bool ButTraViewAvail = true, const bool ButTraViewActive = true, const bool TxfCmtActive = true);
 
 	public:
 		bool ButSaveAvail;
@@ -138,6 +141,8 @@ namespace PnlWdbeErrDetail {
 		bool ButReuViewAvail;
 		bool ButReuViewActive;
 		bool TxtTraActive;
+		bool ButTraViewAvail;
+		bool ButTraViewActive;
 		bool TxfCmtActive;
 
 	public:

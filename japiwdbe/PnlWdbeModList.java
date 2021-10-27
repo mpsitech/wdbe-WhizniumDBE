@@ -301,14 +301,16 @@ public class PnlWdbeModList {
 	public class StgIac extends Block {
 
 		public static final int TCOSRFWIDTH = 1;
-		public static final int TCOTYPWIDTH = 2;
-		public static final int TCOHKTWIDTH = 3;
-		public static final int TCOHKUWIDTH = 4;
-		public static final int TCOSUPWIDTH = 5;
-		public static final int TCOTPLWIDTH = 6;
+		public static final int TCOVNDWIDTH = 2;
+		public static final int TCOTYPWIDTH = 3;
+		public static final int TCOHKTWIDTH = 4;
+		public static final int TCOHKUWIDTH = 5;
+		public static final int TCOSUPWIDTH = 6;
+		public static final int TCOTPLWIDTH = 7;
 
 		public StgIac(
 					int TcoSrfWidth
+					, int TcoVndWidth
 					, int TcoTypWidth
 					, int TcoHktWidth
 					, int TcoHkuWidth
@@ -316,16 +318,18 @@ public class PnlWdbeModList {
 					, int TcoTplWidth
 				) {
 			this.TcoSrfWidth = TcoSrfWidth;
+			this.TcoVndWidth = TcoVndWidth;
 			this.TcoTypWidth = TcoTypWidth;
 			this.TcoHktWidth = TcoHktWidth;
 			this.TcoHkuWidth = TcoHkuWidth;
 			this.TcoSupWidth = TcoSupWidth;
 			this.TcoTplWidth = TcoTplWidth;
 
-			mask = new HashSet<Integer>(Arrays.asList(TCOSRFWIDTH, TCOTYPWIDTH, TCOHKTWIDTH, TCOHKUWIDTH, TCOSUPWIDTH, TCOTPLWIDTH));
+			mask = new HashSet<Integer>(Arrays.asList(TCOSRFWIDTH, TCOVNDWIDTH, TCOTYPWIDTH, TCOHKTWIDTH, TCOHKUWIDTH, TCOSUPWIDTH, TCOTPLWIDTH));
 		};
 
 		public int TcoSrfWidth;
+		public int TcoVndWidth;
 		public int TcoTypWidth;
 		public int TcoHktWidth;
 		public int TcoHkuWidth;
@@ -346,6 +350,7 @@ public class PnlWdbeModList {
 
 			if (Xmlio.checkXPath(doc, basexpath)) {
 				TcoSrfWidth = Xmlio.extractIntegerAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TcoSrfWidth", mask, TCOSRFWIDTH);
+				TcoVndWidth = Xmlio.extractIntegerAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TcoVndWidth", mask, TCOVNDWIDTH);
 				TcoTypWidth = Xmlio.extractIntegerAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TcoTypWidth", mask, TCOTYPWIDTH);
 				TcoHktWidth = Xmlio.extractIntegerAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TcoHktWidth", mask, TCOHKTWIDTH);
 				TcoHkuWidth = Xmlio.extractIntegerAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TcoHkuWidth", mask, TCOHKUWIDTH);
@@ -377,6 +382,7 @@ public class PnlWdbeModList {
 			else sup.appendChild(el);
 
 			Xmlio.writeIntegerAttr(doc, el, itemtag, "sref", "TcoSrfWidth", TcoSrfWidth);
+			Xmlio.writeIntegerAttr(doc, el, itemtag, "sref", "TcoVndWidth", TcoVndWidth);
 			Xmlio.writeIntegerAttr(doc, el, itemtag, "sref", "TcoTypWidth", TcoTypWidth);
 			Xmlio.writeIntegerAttr(doc, el, itemtag, "sref", "TcoHktWidth", TcoHktWidth);
 			Xmlio.writeIntegerAttr(doc, el, itemtag, "sref", "TcoHkuWidth", TcoHkuWidth);
@@ -390,6 +396,7 @@ public class PnlWdbeModList {
 			HashSet<Integer> items = new HashSet<Integer>();
 
 			if (TcoSrfWidth == comp.TcoSrfWidth) items.add(TCOSRFWIDTH);
+			if (TcoVndWidth == comp.TcoVndWidth) items.add(TCOVNDWIDTH);
 			if (TcoTypWidth == comp.TcoTypWidth) items.add(TCOTYPWIDTH);
 			if (TcoHktWidth == comp.TcoHktWidth) items.add(TCOHKTWIDTH);
 			if (TcoHkuWidth == comp.TcoHkuWidth) items.add(TCOHKUWIDTH);
@@ -407,7 +414,7 @@ public class PnlWdbeModList {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(TCOSRFWIDTH, TCOTYPWIDTH, TCOHKTWIDTH, TCOHKUWIDTH, TCOSUPWIDTH, TCOTPLWIDTH));
+			diffitems = new HashSet<Integer>(Arrays.asList(TCOSRFWIDTH, TCOVNDWIDTH, TCOTYPWIDTH, TCOHKTWIDTH, TCOHKUWIDTH, TCOSUPWIDTH, TCOTPLWIDTH));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);
@@ -428,11 +435,12 @@ public class PnlWdbeModList {
 		public static final int TXTSHOWING1 = 6;
 		public static final int TXTSHOWING2 = 7;
 		public static final int TCOSRF = 8;
-		public static final int TCOTYP = 9;
-		public static final int TCOHKT = 10;
-		public static final int TCOHKU = 11;
-		public static final int TCOSUP = 12;
-		public static final int TCOTPL = 13;
+		public static final int TCOVND = 9;
+		public static final int TCOTYP = 10;
+		public static final int TCOHKT = 11;
+		public static final int TCOHKU = 12;
+		public static final int TCOSUP = 13;
+		public static final int TCOTPL = 14;
 
 		public Tag(
 					String Cpt
@@ -443,6 +451,7 @@ public class PnlWdbeModList {
 					, String TxtShowing1
 					, String TxtShowing2
 					, String TcoSrf
+					, String TcoVnd
 					, String TcoTyp
 					, String TcoHkt
 					, String TcoHku
@@ -457,13 +466,14 @@ public class PnlWdbeModList {
 			this.TxtShowing1 = TxtShowing1;
 			this.TxtShowing2 = TxtShowing2;
 			this.TcoSrf = TcoSrf;
+			this.TcoVnd = TcoVnd;
 			this.TcoTyp = TcoTyp;
 			this.TcoHkt = TcoHkt;
 			this.TcoHku = TcoHku;
 			this.TcoSup = TcoSup;
 			this.TcoTpl = TcoTpl;
 
-			mask = new HashSet<Integer>(Arrays.asList(CPT, TXTFOR, TXTRECORD1, TXTRECORD2, TRS, TXTSHOWING1, TXTSHOWING2, TCOSRF, TCOTYP, TCOHKT, TCOHKU, TCOSUP, TCOTPL));
+			mask = new HashSet<Integer>(Arrays.asList(CPT, TXTFOR, TXTRECORD1, TXTRECORD2, TRS, TXTSHOWING1, TXTSHOWING2, TCOSRF, TCOVND, TCOTYP, TCOHKT, TCOHKU, TCOSUP, TCOTPL));
 		};
 
 		public String Cpt;
@@ -474,6 +484,7 @@ public class PnlWdbeModList {
 		public String TxtShowing1;
 		public String TxtShowing2;
 		public String TcoSrf;
+		public String TcoVnd;
 		public String TcoTyp;
 		public String TcoHkt;
 		public String TcoHku;
@@ -501,6 +512,7 @@ public class PnlWdbeModList {
 				TxtShowing1 = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "TxtShowing1", mask, TXTSHOWING1);
 				TxtShowing2 = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "TxtShowing2", mask, TXTSHOWING2);
 				TcoSrf = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "TcoSrf", mask, TCOSRF);
+				TcoVnd = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "TcoVnd", mask, TCOVND);
 				TcoTyp = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "TcoTyp", mask, TCOTYP);
 				TcoHkt = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "TcoHkt", mask, TCOHKT);
 				TcoHku = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "TcoHku", mask, TCOHKU);
@@ -526,6 +538,7 @@ public class PnlWdbeModList {
 			if (TxtShowing1.equals(comp.TxtShowing1)) items.add(TXTSHOWING1);
 			if (TxtShowing2.equals(comp.TxtShowing2)) items.add(TXTSHOWING2);
 			if (TcoSrf.equals(comp.TcoSrf)) items.add(TCOSRF);
+			if (TcoVnd.equals(comp.TcoVnd)) items.add(TCOVND);
 			if (TcoTyp.equals(comp.TcoTyp)) items.add(TCOTYP);
 			if (TcoHkt.equals(comp.TcoHkt)) items.add(TCOHKT);
 			if (TcoHku.equals(comp.TcoHku)) items.add(TCOHKU);
@@ -543,7 +556,7 @@ public class PnlWdbeModList {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(CPT, TXTFOR, TXTRECORD1, TXTRECORD2, TRS, TXTSHOWING1, TXTSHOWING2, TCOSRF, TCOTYP, TCOHKT, TCOHKU, TCOSUP, TCOTPL));
+			diffitems = new HashSet<Integer>(Arrays.asList(CPT, TXTFOR, TXTRECORD1, TXTRECORD2, TRS, TXTSHOWING1, TXTSHOWING2, TCOSRF, TCOVND, TCOTYP, TCOHKT, TCOHKU, TCOSUP, TCOTPL));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);
@@ -699,8 +712,8 @@ public class PnlWdbeModList {
 			feedFCsiQst = new Feed("FeedFCsiQst");
 			feedFTos = new Feed("FeedFTos");
 			statshr = new StatShr(0, false);
-			stgiac = new StgIac(0, 0, 0, 0, 0, 0);
-			tag = new Tag("", "", "", "", "", "", "", "", "", "", "", "", "");
+			stgiac = new StgIac(0, 0, 0, 0, 0, 0, 0);
+			tag = new Tag("", "", "", "", "", "", "", "", "", "", "", "", "", "");
 			rst = new ListWdbeQModList();
 			statappqry = (new QryWdbeModList()).new StatApp(0, 0, 0, 0);
 			statshrqry = (new QryWdbeModList()).new StatShr(0, 0, 0);
@@ -768,8 +781,8 @@ public class PnlWdbeModList {
 				feedFCsiQst = new Feed("FeedFCsiQst");
 				feedFTos = new Feed("FeedFTos");
 				statshr = new StatShr(0, false);
-				stgiac = new StgIac(0, 0, 0, 0, 0, 0);
-				tag = new Tag("", "", "", "", "", "", "", "", "", "", "", "", "");
+				stgiac = new StgIac(0, 0, 0, 0, 0, 0, 0);
+				tag = new Tag("", "", "", "", "", "", "", "", "", "", "", "", "", "");
 				statappqry = (new QryWdbeModList()).new StatApp(0, 0, 0, 0);
 				statshrqry = (new QryWdbeModList()).new StatShr(0, 0, 0);
 				stgiacqry = (new QryWdbeModList()).new StgIac(0, 0, 0);

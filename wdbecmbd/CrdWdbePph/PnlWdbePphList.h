@@ -132,15 +132,13 @@ public:
 	public:
 		static const Sbecore::uint TCOSRFWIDTH = 1;
 		static const Sbecore::uint TCOUNTWIDTH = 2;
-		static const Sbecore::uint TCOMDLWIDTH = 3;
 
 	public:
-		StgIac(const Sbecore::uint TcoSrfWidth = 100, const Sbecore::uint TcoUntWidth = 100, const Sbecore::uint TcoMdlWidth = 100);
+		StgIac(const Sbecore::uint TcoSrfWidth = 100, const Sbecore::uint TcoUntWidth = 100);
 
 	public:
 		Sbecore::uint TcoSrfWidth;
 		Sbecore::uint TcoUntWidth;
-		Sbecore::uint TcoMdlWidth;
 
 	public:
 		bool readJSON(Json::Value& sup, bool addbasetag = false);

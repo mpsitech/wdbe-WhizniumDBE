@@ -19,7 +19,7 @@ namespace WdbeWrfpgaMdlraw {
 	DpchRetWdbe* run(XchgWdbe* xchg, DbsWdbe* dbswdbe, DpchInvWdbeWrfpgaMdlraw* dpchinv);
 	// IP cust --- IBEGIN
 
-	void writeMdlVhd(DbsWdbe* dbswdbe, std::fstream& outfile, const std::string& Prjshort, const std::string& Untsref, WdbeMModule* mdl);
+	void writeMdlVhd(DbsWdbe* dbswdbe, std::fstream& outfile, const std::string& Prjshort, const std::string& Untsref, const std::string& srefKToolch, WdbeMModule* mdl);
 
 	void getHdltypeLibs(DbsWdbe* dbswdbe, const Sbecore::ubigint refUnt, std::set<std::string>& srefsLibmdls, std::map<std::string,std::string>& srefsLibs);
 	void fillIcsMdc(std::vector<Sbecore::uint>& icsMdc);

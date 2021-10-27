@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<head>
+		<title>Low_bcont</title>
+		<script>
+			function handleButBnkExpandClick() {parent.parent.window.handleButExpandClick("LstBnk");};
+			function handleButBnkCollapseClick() {parent.parent.window.handleButCollapseClick("LstBnk");};
+			function handleButBnkViewClick() {parent.parent.window.handleButCrdopenClick("ButBnkView");};
+			function handleButBnkNewcrdClick() {parent.parent.window.handleButCrdopenClick("ButBnkNewcrd");};
+			function handleButPinExpandClick() {parent.parent.window.handleButExpandClick("LstPin");};
+			function handleButPinCollapseClick() {parent.parent.window.handleButCollapseClick("LstPin");};
+			function handleButPinViewClick() {parent.parent.window.handleButCrdopenClick("ButPinView");};
+			function handleButPinNewcrdClick() {parent.parent.window.handleButCrdopenClick("ButPinNewcrd");};
+			function handleButIntExpandClick() {parent.parent.window.handleButExpandClick("LstInt");};
+			function handleButIntCollapseClick() {parent.parent.window.handleButCollapseClick("LstInt");};
+			function handleButIntViewClick() {parent.parent.window.handleButCrdopenClick("ButIntView");};
+			function handleButIntNewcrdClick() {parent.parent.window.handleButCrdopenClick("ButIntNewcrd");};
+			function handleButSnsExpandClick() {parent.parent.window.handleButExpandClick("LstSns");};
+			function handleButSnsCollapseClick() {parent.parent.window.handleButCollapseClick("LstSns");};
+			function handleButSnsViewClick() {parent.parent.window.handleButCrdopenClick("ButSnsView");};
+			function handleButVarExpandClick() {parent.parent.window.handleButExpandClick("LstVar");};
+			function handleButVarCollapseClick() {parent.parent.window.handleButCollapseClick("LstVar");};
+			function handleButVarViewClick() {parent.parent.window.handleButCrdopenClick("ButVarView");};
+			function handleButGenExpandClick() {parent.parent.window.handleButExpandClick("LstGen");};
+			function handleButGenCollapseClick() {parent.parent.window.handleButCollapseClick("LstGen");};
+			function handleButGenViewClick() {parent.parent.window.handleButCrdopenClick("ButGenView");};
+			function handleButPrtExpandClick() {parent.parent.window.handleButExpandClick("LstPrt");};
+			function handleButPrtCollapseClick() {parent.parent.window.handleButCollapseClick("LstPrt");};
+			function handleButPrtViewClick() {parent.parent.window.handleButCrdopenClick("ButPrtView");};
+			function handleButSigExpandClick() {parent.parent.window.handleButExpandClick("LstSig");};
+			function handleButSigCollapseClick() {parent.parent.window.handleButCollapseClick("LstSig");};
+			function handleButSigViewClick() {parent.parent.window.handleButCrdopenClick("ButSigView");};
+			function handleButSigNewcrdClick() {parent.parent.window.handleButCrdopenClick("ButSigNewcrd");};
+			function handleButPrcExpandClick() {parent.parent.window.handleButExpandClick("LstPrc");};
+			function handleButPrcCollapseClick() {parent.parent.window.handleButCollapseClick("LstPrc");};
+			function handleButPrcViewClick() {parent.parent.window.handleButCrdopenClick("ButPrcView");};
+			function handleButFstExpandClick() {parent.parent.window.handleButExpandClick("LstFst");};
+			function handleButFstCollapseClick() {parent.parent.window.handleButCollapseClick("LstFst");};
+			function handleButFstViewClick() {parent.parent.window.handleButCrdopenClick("ButFstView");};
+			<!-- IP custScript - INSERT -->
+		</script>
+		<link href="../style/pnlDetail3_2.css" rel="styleSheet" type="text/css"/>
+		<!-- IP custStyle - INSERT -->
+	</head>
+	<body marginwidth="0" marginheight="0">
+		<table cellspacing="0" border="0" cellpadding="0"><form action="">
+			<colgroup>
+				<col width="5"/>
+				<col width="215"/>
+				<col width="5"/>
+				<col width="138"/>
+				<col width="2"/>
+				<col width="68"/>
+				<col width="2"/>
+				<col width="138"/>
+				<col width="2"/>
+				<col width="1"/>
+				<col width="114"/>
+			</colgroup>
+			<tbody id="tbl">
+				<tr><td colspan="11" height="5"></td></tr>
+				<tr id="trBnk" class="show">
+					<td height="25"></td>
+					<td id="ldynBnk" align="right">
+					</td>
+					<td></td>
+					<td id="dynBnk" rowspan="1" colspan="5">
+					</td>
+					<td></td>
+					<td id="rdynBnk" colspan="2" align="left">
+					</td>
+				</tr>
+				<tr id="trBnk2" class="hide">
+					<td colspan="3" height="67"></td>
+					<td colspan="3"></td>
+				</tr>
+				<tr id="trPin" class="show">
+					<td height="25"></td>
+					<td id="ldynPin" align="right">
+					</td>
+					<td></td>
+					<td id="dynPin" rowspan="1" colspan="5">
+					</td>
+					<td></td>
+					<td id="rdynPin" colspan="2" align="left">
+					</td>
+				</tr>
+				<tr id="trPin2" class="hide">
+					<td colspan="3" height="67"></td>
+					<td colspan="3"></td>
+				</tr>
+				<tr id="trInt" class="show">
+					<td height="25"></td>
+					<td id="ldynInt" align="right">
+					</td>
+					<td></td>
+					<td id="dynInt" rowspan="1" colspan="5">
+					</td>
+					<td></td>
+					<td id="rdynInt" colspan="2" align="left">
+					</td>
+				</tr>
+				<tr id="trInt2" class="hide">
+					<td colspan="3" height="67"></td>
+					<td colspan="3"></td>
+				</tr>
+				<tr id="trSns" class="show">
+					<td height="25"></td>
+					<td id="ldynSns" align="right">
+					</td>
+					<td></td>
+					<td id="dynSns" rowspan="1" colspan="5">
+					</td>
+					<td></td>
+					<td id="rdynSns" colspan="2" align="left">
+					</td>
+				</tr>
+				<tr id="trSns2" class="hide">
+					<td colspan="3" height="67"></td>
+					<td colspan="3"></td>
+				</tr>
+				<tr id="trVar" class="show">
+					<td height="25"></td>
+					<td id="ldynVar" align="right">
+					</td>
+					<td></td>
+					<td id="dynVar" rowspan="1" colspan="5">
+					</td>
+					<td></td>
+					<td id="rdynVar" colspan="2" align="left">
+					</td>
+				</tr>
+				<tr id="trVar2" class="hide">
+					<td colspan="3" height="67"></td>
+					<td colspan="3"></td>
+				</tr>
+				<tr id="trGen" class="show">
+					<td height="25"></td>
+					<td id="ldynGen" align="right">
+					</td>
+					<td></td>
+					<td id="dynGen" rowspan="1" colspan="5">
+					</td>
+					<td></td>
+					<td id="rdynGen" colspan="2" align="left">
+					</td>
+				</tr>
+				<tr id="trGen2" class="hide">
+					<td colspan="3" height="67"></td>
+					<td colspan="3"></td>
+				</tr>
+				<tr id="trPrt" class="show">
+					<td height="25"></td>
+					<td id="ldynPrt" align="right">
+					</td>
+					<td></td>
+					<td id="dynPrt" rowspan="1" colspan="5">
+					</td>
+					<td></td>
+					<td id="rdynPrt" colspan="2" align="left">
+					</td>
+				</tr>
+				<tr id="trPrt2" class="hide">
+					<td colspan="3" height="67"></td>
+					<td colspan="3"></td>
+				</tr>
+				<tr id="trSig" class="show">
+					<td height="25"></td>
+					<td id="ldynSig" align="right">
+					</td>
+					<td></td>
+					<td id="dynSig" rowspan="1" colspan="5">
+					</td>
+					<td></td>
+					<td id="rdynSig" colspan="2" align="left">
+					</td>
+				</tr>
+				<tr id="trSig2" class="hide">
+					<td colspan="3" height="67"></td>
+					<td colspan="3"></td>
+				</tr>
+				<tr id="trPrc" class="show">
+					<td height="25"></td>
+					<td id="ldynPrc" align="right">
+					</td>
+					<td></td>
+					<td id="dynPrc" rowspan="1" colspan="5">
+					</td>
+					<td></td>
+					<td id="rdynPrc" colspan="2" align="left">
+					</td>
+				</tr>
+				<tr id="trPrc2" class="hide">
+					<td colspan="3" height="67"></td>
+					<td colspan="3"></td>
+				</tr>
+				<tr id="trFst" class="show">
+					<td height="25"></td>
+					<td id="ldynFst" align="right">
+					</td>
+					<td></td>
+					<td id="dynFst" rowspan="1" colspan="5">
+					</td>
+					<td></td>
+					<td id="rdynFst" colspan="2" align="left">
+					</td>
+				</tr>
+				<tr id="trFst2" class="hide">
+					<td colspan="3" height="67"></td>
+					<td colspan="3"></td>
+				</tr>
+				<tr><td colspan="11" height="4"></td></tr>
+			</tbody>
+		</form></table>
+	</body>
+</html>

@@ -3,7 +3,7 @@
 # checkout script for Wdbe daemon, release wdbed_mac
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 12 Mar 2021
+# date created: 23 Oct 2021
 # IP header --- ABOVE
 
 if [ -z ${WHIZROOT+x} ]; then
@@ -38,20 +38,24 @@ mkdir $BUILDROOT/wdbed/CrdWdbeUnt
 mkdir $BUILDROOT/wdbed/CrdWdbeRls
 mkdir $BUILDROOT/wdbed/CrdWdbeCpr
 mkdir $BUILDROOT/wdbed/CrdWdbeCvr
+mkdir $BUILDROOT/wdbed/CrdWdbePph
 mkdir $BUILDROOT/wdbed/CrdWdbeMod
 mkdir $BUILDROOT/wdbed/CrdWdbeVec
 mkdir $BUILDROOT/wdbed/CrdWdbeVit
 mkdir $BUILDROOT/wdbed/CrdWdbeCmd
 mkdir $BUILDROOT/wdbed/CrdWdbeErr
-mkdir $BUILDROOT/wdbed/CrdWdbePph
+mkdir $BUILDROOT/wdbed/CrdWdbePpl
+mkdir $BUILDROOT/wdbed/CrdWdbeSeg
 mkdir $BUILDROOT/wdbed/CrdWdbeBnk
 mkdir $BUILDROOT/wdbed/CrdWdbePin
+mkdir $BUILDROOT/wdbed/CrdWdbeInt
+mkdir $BUILDROOT/wdbed/CrdWdbeSns
+mkdir $BUILDROOT/wdbed/CrdWdbeVar
 mkdir $BUILDROOT/wdbed/CrdWdbeGen
 mkdir $BUILDROOT/wdbed/CrdWdbePrt
 mkdir $BUILDROOT/wdbed/CrdWdbeSig
 mkdir $BUILDROOT/wdbed/CrdWdbePrc
 mkdir $BUILDROOT/wdbed/CrdWdbeFst
-mkdir $BUILDROOT/wdbed/CrdWdbeVar
 mkdir $BUILDROOT/wdbed/CrdWdbeUtl
 
 mkdir $LIBROOT/wdbed
@@ -200,6 +204,11 @@ cp Makefile_CrdWdbeCvr $BUILDROOT/wdbed/CrdWdbeCvr/Makefile
 cp $CMBDBUILDROOT/CrdWdbeCvr/*.h $BUILDROOT/wdbed/CrdWdbeCvr/
 cp $CMBDBUILDROOT/CrdWdbeCvr/*.cpp $BUILDROOT/wdbed/CrdWdbeCvr/
 
+cp Makefile_CrdWdbePph $BUILDROOT/wdbed/CrdWdbePph/Makefile
+
+cp $CMBDBUILDROOT/CrdWdbePph/*.h $BUILDROOT/wdbed/CrdWdbePph/
+cp $CMBDBUILDROOT/CrdWdbePph/*.cpp $BUILDROOT/wdbed/CrdWdbePph/
+
 cp Makefile_CrdWdbeMod $BUILDROOT/wdbed/CrdWdbeMod/Makefile
 
 cp $CMBDBUILDROOT/CrdWdbeMod/*.h $BUILDROOT/wdbed/CrdWdbeMod/
@@ -225,10 +234,15 @@ cp Makefile_CrdWdbeErr $BUILDROOT/wdbed/CrdWdbeErr/Makefile
 cp $CMBDBUILDROOT/CrdWdbeErr/*.h $BUILDROOT/wdbed/CrdWdbeErr/
 cp $CMBDBUILDROOT/CrdWdbeErr/*.cpp $BUILDROOT/wdbed/CrdWdbeErr/
 
-cp Makefile_CrdWdbePph $BUILDROOT/wdbed/CrdWdbePph/Makefile
+cp Makefile_CrdWdbePpl $BUILDROOT/wdbed/CrdWdbePpl/Makefile
 
-cp $CMBDBUILDROOT/CrdWdbePph/*.h $BUILDROOT/wdbed/CrdWdbePph/
-cp $CMBDBUILDROOT/CrdWdbePph/*.cpp $BUILDROOT/wdbed/CrdWdbePph/
+cp $CMBDBUILDROOT/CrdWdbePpl/*.h $BUILDROOT/wdbed/CrdWdbePpl/
+cp $CMBDBUILDROOT/CrdWdbePpl/*.cpp $BUILDROOT/wdbed/CrdWdbePpl/
+
+cp Makefile_CrdWdbeSeg $BUILDROOT/wdbed/CrdWdbeSeg/Makefile
+
+cp $CMBDBUILDROOT/CrdWdbeSeg/*.h $BUILDROOT/wdbed/CrdWdbeSeg/
+cp $CMBDBUILDROOT/CrdWdbeSeg/*.cpp $BUILDROOT/wdbed/CrdWdbeSeg/
 
 cp Makefile_CrdWdbeBnk $BUILDROOT/wdbed/CrdWdbeBnk/Makefile
 
@@ -239,6 +253,21 @@ cp Makefile_CrdWdbePin $BUILDROOT/wdbed/CrdWdbePin/Makefile
 
 cp $CMBDBUILDROOT/CrdWdbePin/*.h $BUILDROOT/wdbed/CrdWdbePin/
 cp $CMBDBUILDROOT/CrdWdbePin/*.cpp $BUILDROOT/wdbed/CrdWdbePin/
+
+cp Makefile_CrdWdbeInt $BUILDROOT/wdbed/CrdWdbeInt/Makefile
+
+cp $CMBDBUILDROOT/CrdWdbeInt/*.h $BUILDROOT/wdbed/CrdWdbeInt/
+cp $CMBDBUILDROOT/CrdWdbeInt/*.cpp $BUILDROOT/wdbed/CrdWdbeInt/
+
+cp Makefile_CrdWdbeSns $BUILDROOT/wdbed/CrdWdbeSns/Makefile
+
+cp $CMBDBUILDROOT/CrdWdbeSns/*.h $BUILDROOT/wdbed/CrdWdbeSns/
+cp $CMBDBUILDROOT/CrdWdbeSns/*.cpp $BUILDROOT/wdbed/CrdWdbeSns/
+
+cp Makefile_CrdWdbeVar $BUILDROOT/wdbed/CrdWdbeVar/Makefile
+
+cp $CMBDBUILDROOT/CrdWdbeVar/*.h $BUILDROOT/wdbed/CrdWdbeVar/
+cp $CMBDBUILDROOT/CrdWdbeVar/*.cpp $BUILDROOT/wdbed/CrdWdbeVar/
 
 cp Makefile_CrdWdbeGen $BUILDROOT/wdbed/CrdWdbeGen/Makefile
 
@@ -265,75 +294,25 @@ cp Makefile_CrdWdbeFst $BUILDROOT/wdbed/CrdWdbeFst/Makefile
 cp $CMBDBUILDROOT/CrdWdbeFst/*.h $BUILDROOT/wdbed/CrdWdbeFst/
 cp $CMBDBUILDROOT/CrdWdbeFst/*.cpp $BUILDROOT/wdbed/CrdWdbeFst/
 
-cp Makefile_CrdWdbeVar $BUILDROOT/wdbed/CrdWdbeVar/Makefile
-
-cp $CMBDBUILDROOT/CrdWdbeVar/*.h $BUILDROOT/wdbed/CrdWdbeVar/
-cp $CMBDBUILDROOT/CrdWdbeVar/*.cpp $BUILDROOT/wdbed/CrdWdbeVar/
-
 cp Makefile_CrdWdbeUtl $BUILDROOT/wdbed/CrdWdbeUtl/Makefile
 
 cp $CMBDBUILDROOT/CrdWdbeUtl/*.h $BUILDROOT/wdbed/CrdWdbeUtl/
 cp $CMBDBUILDROOT/CrdWdbeUtl/*.cpp $BUILDROOT/wdbed/CrdWdbeUtl/
 
-cp $CMBDBUILDROOT/WdbeWrmcu/WdbeWrmcu_blks.h $BUILDROOT/wdbed/
-cp $CMBDBUILDROOT/WdbeWrmcu/WdbeWrmcu_blks.cpp $BUILDROOT/wdbed/
-cp $CMBDBUILDROOT/WdbeWrmcu/SqkWdbeWrmcu.h $BUILDROOT/wdbed/
-cp $CMBDBUILDROOT/WdbeWrmcu/SqkWdbeWrmcu.cpp $BUILDROOT/wdbed/
+cp $CMBDBUILDROOT/WdbeCplmst/WdbeCplmst_blks.h $BUILDROOT/wdbed/
+cp $CMBDBUILDROOT/WdbeCplmst/WdbeCplmst_blks.cpp $BUILDROOT/wdbed/
+cp $CMBDBUILDROOT/WdbeCplmst/SqkWdbeCplmst.h $BUILDROOT/wdbed/
+cp $CMBDBUILDROOT/WdbeCplmst/SqkWdbeCplmst.cpp $BUILDROOT/wdbed/
 
-cp $CMBDBUILDROOT/WdbePlhmcu/WdbePlhmcu_blks.h $BUILDROOT/wdbed/
-cp $CMBDBUILDROOT/WdbePlhmcu/WdbePlhmcu_blks.cpp $BUILDROOT/wdbed/
-cp $CMBDBUILDROOT/WdbePlhmcu/SqkWdbePlhmcu.h $BUILDROOT/wdbed/
-cp $CMBDBUILDROOT/WdbePlhmcu/SqkWdbePlhmcu.cpp $BUILDROOT/wdbed/
+cp $CMBDBUILDROOT/WdbeGen/WdbeGen_blks.h $BUILDROOT/wdbed/
+cp $CMBDBUILDROOT/WdbeGen/WdbeGen_blks.cpp $BUILDROOT/wdbed/
+cp $CMBDBUILDROOT/WdbeGen/SqkWdbeGen.h $BUILDROOT/wdbed/
+cp $CMBDBUILDROOT/WdbeGen/SqkWdbeGen.cpp $BUILDROOT/wdbed/
 
-cp $CMBDBUILDROOT/WdbeWrfpga/WdbeWrfpga_blks.h $BUILDROOT/wdbed/
-cp $CMBDBUILDROOT/WdbeWrfpga/WdbeWrfpga_blks.cpp $BUILDROOT/wdbed/
-cp $CMBDBUILDROOT/WdbeWrfpga/SqkWdbeWrfpga.h $BUILDROOT/wdbed/
-cp $CMBDBUILDROOT/WdbeWrfpga/SqkWdbeWrfpga.cpp $BUILDROOT/wdbed/
-
-cp $CMBDBUILDROOT/WdbeWrdev/WdbeWrdev_blks.h $BUILDROOT/wdbed/
-cp $CMBDBUILDROOT/WdbeWrdev/WdbeWrdev_blks.cpp $BUILDROOT/wdbed/
-cp $CMBDBUILDROOT/WdbeWrdev/SqkWdbeWrdev.h $BUILDROOT/wdbed/
-cp $CMBDBUILDROOT/WdbeWrdev/SqkWdbeWrdev.cpp $BUILDROOT/wdbed/
-
-cp $CMBDBUILDROOT/WdbePrctree/WdbePrctree_blks.h $BUILDROOT/wdbed/
-cp $CMBDBUILDROOT/WdbePrctree/WdbePrctree_blks.cpp $BUILDROOT/wdbed/
-cp $CMBDBUILDROOT/WdbePrctree/SqkWdbePrctree.h $BUILDROOT/wdbed/
-cp $CMBDBUILDROOT/WdbePrctree/SqkWdbePrctree.cpp $BUILDROOT/wdbed/
-
-cp $CMBDBUILDROOT/WdbePrcfile/WdbePrcfile_blks.h $BUILDROOT/wdbed/
-cp $CMBDBUILDROOT/WdbePrcfile/WdbePrcfile_blks.cpp $BUILDROOT/wdbed/
-cp $CMBDBUILDROOT/WdbePrcfile/SqkWdbePrcfile.h $BUILDROOT/wdbed/
-cp $CMBDBUILDROOT/WdbePrcfile/SqkWdbePrcfile.cpp $BUILDROOT/wdbed/
-
-cp $CMBDBUILDROOT/WdbePlhfpga/WdbePlhfpga_blks.h $BUILDROOT/wdbed/
-cp $CMBDBUILDROOT/WdbePlhfpga/WdbePlhfpga_blks.cpp $BUILDROOT/wdbed/
-cp $CMBDBUILDROOT/WdbePlhfpga/SqkWdbePlhfpga.h $BUILDROOT/wdbed/
-cp $CMBDBUILDROOT/WdbePlhfpga/SqkWdbePlhfpga.cpp $BUILDROOT/wdbed/
-
-cp $CMBDBUILDROOT/WdbeMtpWrmcu/WdbeMtpWrmcu_blks.h $BUILDROOT/wdbed/
-cp $CMBDBUILDROOT/WdbeMtpWrmcu/WdbeMtpWrmcu_blks.cpp $BUILDROOT/wdbed/
-cp $CMBDBUILDROOT/WdbeMtpWrmcu/SqkWdbeMtpWrmcu.h $BUILDROOT/wdbed/
-cp $CMBDBUILDROOT/WdbeMtpWrmcu/SqkWdbeMtpWrmcu.cpp $BUILDROOT/wdbed/
-
-cp $CMBDBUILDROOT/WdbeMtpModdet/WdbeMtpModdet_blks.h $BUILDROOT/wdbed/
-cp $CMBDBUILDROOT/WdbeMtpModdet/WdbeMtpModdet_blks.cpp $BUILDROOT/wdbed/
-cp $CMBDBUILDROOT/WdbeMtpModdet/SqkWdbeMtpModdet.h $BUILDROOT/wdbed/
-cp $CMBDBUILDROOT/WdbeMtpModdet/SqkWdbeMtpModdet.cpp $BUILDROOT/wdbed/
-
-cp $CMBDBUILDROOT/WdbeMtpWrfpga/WdbeMtpWrfpga_blks.h $BUILDROOT/wdbed/
-cp $CMBDBUILDROOT/WdbeMtpWrfpga/WdbeMtpWrfpga_blks.cpp $BUILDROOT/wdbed/
-cp $CMBDBUILDROOT/WdbeMtpWrfpga/SqkWdbeMtpWrfpga.h $BUILDROOT/wdbed/
-cp $CMBDBUILDROOT/WdbeMtpWrfpga/SqkWdbeMtpWrfpga.cpp $BUILDROOT/wdbed/
-
-cp $CMBDBUILDROOT/WdbeMtpModbsctd/WdbeMtpModbsctd_blks.h $BUILDROOT/wdbed/
-cp $CMBDBUILDROOT/WdbeMtpModbsctd/WdbeMtpModbsctd_blks.cpp $BUILDROOT/wdbed/
-cp $CMBDBUILDROOT/WdbeMtpModbsctd/SqkWdbeMtpModbsctd.h $BUILDROOT/wdbed/
-cp $CMBDBUILDROOT/WdbeMtpModbsctd/SqkWdbeMtpModbsctd.cpp $BUILDROOT/wdbed/
-
-cp $CMBDBUILDROOT/WdbeMtpModbscbu/WdbeMtpModbscbu_blks.h $BUILDROOT/wdbed/
-cp $CMBDBUILDROOT/WdbeMtpModbscbu/WdbeMtpModbscbu_blks.cpp $BUILDROOT/wdbed/
-cp $CMBDBUILDROOT/WdbeMtpModbscbu/SqkWdbeMtpModbscbu.h $BUILDROOT/wdbed/
-cp $CMBDBUILDROOT/WdbeMtpModbscbu/SqkWdbeMtpModbscbu.cpp $BUILDROOT/wdbed/
+cp $CMBDBUILDROOT/WdbeGenfst/WdbeGenfst_blks.h $BUILDROOT/wdbed/
+cp $CMBDBUILDROOT/WdbeGenfst/WdbeGenfst_blks.cpp $BUILDROOT/wdbed/
+cp $CMBDBUILDROOT/WdbeGenfst/SqkWdbeGenfst.h $BUILDROOT/wdbed/
+cp $CMBDBUILDROOT/WdbeGenfst/SqkWdbeGenfst.cpp $BUILDROOT/wdbed/
 
 cp $CMBDBUILDROOT/WdbeMtpPlhfpga/WdbeMtpPlhfpga_blks.h $BUILDROOT/wdbed/
 cp $CMBDBUILDROOT/WdbeMtpPlhfpga/WdbeMtpPlhfpga_blks.cpp $BUILDROOT/wdbed/
@@ -345,12 +324,62 @@ cp $CMBDBUILDROOT/WdbeMtpPlhmcu/WdbeMtpPlhmcu_blks.cpp $BUILDROOT/wdbed/
 cp $CMBDBUILDROOT/WdbeMtpPlhmcu/SqkWdbeMtpPlhmcu.h $BUILDROOT/wdbed/
 cp $CMBDBUILDROOT/WdbeMtpPlhmcu/SqkWdbeMtpPlhmcu.cpp $BUILDROOT/wdbed/
 
-cp $CMBDBUILDROOT/WdbeModdet/WdbeModdet_blks.h $BUILDROOT/wdbed/
-cp $CMBDBUILDROOT/WdbeModdet/WdbeModdet_blks.cpp $BUILDROOT/wdbed/
-cp $CMBDBUILDROOT/WdbeModdet/SqkWdbeModdet.h $BUILDROOT/wdbed/
-cp $CMBDBUILDROOT/WdbeModdet/SqkWdbeModdet.cpp $BUILDROOT/wdbed/
+cp $CMBDBUILDROOT/WdbeMtpCplmstbu/WdbeMtpCplmstbu_blks.h $BUILDROOT/wdbed/
+cp $CMBDBUILDROOT/WdbeMtpCplmstbu/WdbeMtpCplmstbu_blks.cpp $BUILDROOT/wdbed/
+cp $CMBDBUILDROOT/WdbeMtpCplmstbu/SqkWdbeMtpCplmstbu.h $BUILDROOT/wdbed/
+cp $CMBDBUILDROOT/WdbeMtpCplmstbu/SqkWdbeMtpCplmstbu.cpp $BUILDROOT/wdbed/
 
-cp $CMBDBUILDROOT/WdbeModbsc/WdbeModbsc_blks.h $BUILDROOT/wdbed/
-cp $CMBDBUILDROOT/WdbeModbsc/WdbeModbsc_blks.cpp $BUILDROOT/wdbed/
-cp $CMBDBUILDROOT/WdbeModbsc/SqkWdbeModbsc.h $BUILDROOT/wdbed/
-cp $CMBDBUILDROOT/WdbeModbsc/SqkWdbeModbsc.cpp $BUILDROOT/wdbed/
+cp $CMBDBUILDROOT/WdbeMtpCplmsttd/WdbeMtpCplmsttd_blks.h $BUILDROOT/wdbed/
+cp $CMBDBUILDROOT/WdbeMtpCplmsttd/WdbeMtpCplmsttd_blks.cpp $BUILDROOT/wdbed/
+cp $CMBDBUILDROOT/WdbeMtpCplmsttd/SqkWdbeMtpCplmsttd.h $BUILDROOT/wdbed/
+cp $CMBDBUILDROOT/WdbeMtpCplmsttd/SqkWdbeMtpCplmsttd.cpp $BUILDROOT/wdbed/
+
+cp $CMBDBUILDROOT/WdbeMtpGenfst/WdbeMtpGenfst_blks.h $BUILDROOT/wdbed/
+cp $CMBDBUILDROOT/WdbeMtpGenfst/WdbeMtpGenfst_blks.cpp $BUILDROOT/wdbed/
+cp $CMBDBUILDROOT/WdbeMtpGenfst/SqkWdbeMtpGenfst.h $BUILDROOT/wdbed/
+cp $CMBDBUILDROOT/WdbeMtpGenfst/SqkWdbeMtpGenfst.cpp $BUILDROOT/wdbed/
+
+cp $CMBDBUILDROOT/WdbeMtpWrfpga/WdbeMtpWrfpga_blks.h $BUILDROOT/wdbed/
+cp $CMBDBUILDROOT/WdbeMtpWrfpga/WdbeMtpWrfpga_blks.cpp $BUILDROOT/wdbed/
+cp $CMBDBUILDROOT/WdbeMtpWrfpga/SqkWdbeMtpWrfpga.h $BUILDROOT/wdbed/
+cp $CMBDBUILDROOT/WdbeMtpWrfpga/SqkWdbeMtpWrfpga.cpp $BUILDROOT/wdbed/
+
+cp $CMBDBUILDROOT/WdbeMtpWrmcu/WdbeMtpWrmcu_blks.h $BUILDROOT/wdbed/
+cp $CMBDBUILDROOT/WdbeMtpWrmcu/WdbeMtpWrmcu_blks.cpp $BUILDROOT/wdbed/
+cp $CMBDBUILDROOT/WdbeMtpWrmcu/SqkWdbeMtpWrmcu.h $BUILDROOT/wdbed/
+cp $CMBDBUILDROOT/WdbeMtpWrmcu/SqkWdbeMtpWrmcu.cpp $BUILDROOT/wdbed/
+
+cp $CMBDBUILDROOT/WdbePlhfpga/WdbePlhfpga_blks.h $BUILDROOT/wdbed/
+cp $CMBDBUILDROOT/WdbePlhfpga/WdbePlhfpga_blks.cpp $BUILDROOT/wdbed/
+cp $CMBDBUILDROOT/WdbePlhfpga/SqkWdbePlhfpga.h $BUILDROOT/wdbed/
+cp $CMBDBUILDROOT/WdbePlhfpga/SqkWdbePlhfpga.cpp $BUILDROOT/wdbed/
+
+cp $CMBDBUILDROOT/WdbePlhmcu/WdbePlhmcu_blks.h $BUILDROOT/wdbed/
+cp $CMBDBUILDROOT/WdbePlhmcu/WdbePlhmcu_blks.cpp $BUILDROOT/wdbed/
+cp $CMBDBUILDROOT/WdbePlhmcu/SqkWdbePlhmcu.h $BUILDROOT/wdbed/
+cp $CMBDBUILDROOT/WdbePlhmcu/SqkWdbePlhmcu.cpp $BUILDROOT/wdbed/
+
+cp $CMBDBUILDROOT/WdbePrcfile/WdbePrcfile_blks.h $BUILDROOT/wdbed/
+cp $CMBDBUILDROOT/WdbePrcfile/WdbePrcfile_blks.cpp $BUILDROOT/wdbed/
+cp $CMBDBUILDROOT/WdbePrcfile/SqkWdbePrcfile.h $BUILDROOT/wdbed/
+cp $CMBDBUILDROOT/WdbePrcfile/SqkWdbePrcfile.cpp $BUILDROOT/wdbed/
+
+cp $CMBDBUILDROOT/WdbePrctree/WdbePrctree_blks.h $BUILDROOT/wdbed/
+cp $CMBDBUILDROOT/WdbePrctree/WdbePrctree_blks.cpp $BUILDROOT/wdbed/
+cp $CMBDBUILDROOT/WdbePrctree/SqkWdbePrctree.h $BUILDROOT/wdbed/
+cp $CMBDBUILDROOT/WdbePrctree/SqkWdbePrctree.cpp $BUILDROOT/wdbed/
+
+cp $CMBDBUILDROOT/WdbeWrdev/WdbeWrdev_blks.h $BUILDROOT/wdbed/
+cp $CMBDBUILDROOT/WdbeWrdev/WdbeWrdev_blks.cpp $BUILDROOT/wdbed/
+cp $CMBDBUILDROOT/WdbeWrdev/SqkWdbeWrdev.h $BUILDROOT/wdbed/
+cp $CMBDBUILDROOT/WdbeWrdev/SqkWdbeWrdev.cpp $BUILDROOT/wdbed/
+
+cp $CMBDBUILDROOT/WdbeWrfpga/WdbeWrfpga_blks.h $BUILDROOT/wdbed/
+cp $CMBDBUILDROOT/WdbeWrfpga/WdbeWrfpga_blks.cpp $BUILDROOT/wdbed/
+cp $CMBDBUILDROOT/WdbeWrfpga/SqkWdbeWrfpga.h $BUILDROOT/wdbed/
+cp $CMBDBUILDROOT/WdbeWrfpga/SqkWdbeWrfpga.cpp $BUILDROOT/wdbed/
+
+cp $CMBDBUILDROOT/WdbeWrmcu/WdbeWrmcu_blks.h $BUILDROOT/wdbed/
+cp $CMBDBUILDROOT/WdbeWrmcu/WdbeWrmcu_blks.cpp $BUILDROOT/wdbed/
+cp $CMBDBUILDROOT/WdbeWrmcu/SqkWdbeWrmcu.h $BUILDROOT/wdbed/
+cp $CMBDBUILDROOT/WdbeWrmcu/SqkWdbeWrmcu.cpp $BUILDROOT/wdbed/

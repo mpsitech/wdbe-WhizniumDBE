@@ -17,6 +17,14 @@ using namespace Xmlio;
  namespace SqkWdbePlhmcu
  ******************************************************************************/
 
+string SqkWdbePlhmcu::getSquawkEctr(
+			DbsWdbe* dbswdbe
+			, DpchInvWdbePlhmcuEctr* dpchinv
+		) {
+	// example: "fill type-specific placeholders for module 'bbdk-vmon (easy model controller)'"
+	return(""); // IP getSquawkEctr --- LINE
+};
+
 string SqkWdbePlhmcu::getSquawkEhostif(
 			DbsWdbe* dbswdbe
 			, DpchInvWdbePlhmcuEhostif* dpchinv

@@ -11,72 +11,15 @@ using namespace std;
 using namespace Sbecore;
 using namespace Xmlio;
 
-bool DlgWdbeRlsStareptr::evalButDneActive(
+bool DlgWdbeRlsStareptr::evalDetButStaActive(
 			DbsWdbe* dbswdbe
 		) {
-	// sge(idle|fail|done)
+	// sge(idle)
 
 	vector<bool> args;
-	bool a, b;
+	bool a;
 
 	a = false; a = (ixVSge == VecVSge::IDLE);
-	args.push_back(a);
-	a = false; a = (ixVSge == VecVSge::FAIL);
-	args.push_back(a);
-	a = false; a = (ixVSge == VecVSge::DONE);
-	args.push_back(a);
-	b = args.back(); args.pop_back();
-	a = args.back(); args.pop_back();
-	args.push_back(a || b);
-	b = args.back(); args.pop_back();
-	a = args.back(); args.pop_back();
-	args.push_back(a || b);
-
-	return(args.back());
-};
-
-bool DlgWdbeRlsStareptr::evalLfiDldActive(
-			DbsWdbe* dbswdbe
-		) {
-	// sge(fail)
-
-	vector<bool> args;
-	bool a;
-
-	a = false; a = (ixVSge == VecVSge::FAIL);
-	args.push_back(a);
-
-	return(args.back());
-};
-
-bool DlgWdbeRlsStareptr::evalExtButRunActive(
-			DbsWdbe* dbswdbe
-		) {
-	// sge(upkdone|clgdone)
-
-	vector<bool> args;
-	bool a, b;
-
-	a = false; a = (ixVSge == VecVSge::UPKDONE);
-	args.push_back(a);
-	a = false; a = (ixVSge == VecVSge::CLGDONE);
-	args.push_back(a);
-	b = args.back(); args.pop_back();
-	a = args.back(); args.pop_back();
-	args.push_back(a || b);
-
-	return(args.back());
-};
-
-bool DlgWdbeRlsStareptr::evalExtButStoActive(
-			DbsWdbe* dbswdbe
-		) {
-	// sge(extract)
-
-	vector<bool> args;
-	bool a;
-
-	a = false; a = (ixVSge == VecVSge::EXTRACT);
 	args.push_back(a);
 
 	return(args.back());
@@ -181,16 +124,73 @@ bool DlgWdbeRlsStareptr::evalIniButClgActive(
 	return(args.back());
 };
 
-bool DlgWdbeRlsStareptr::evalDetButStaActive(
+bool DlgWdbeRlsStareptr::evalExtButRunActive(
 			DbsWdbe* dbswdbe
 		) {
-	// sge(idle)
+	// sge(upkdone|clgdone)
+
+	vector<bool> args;
+	bool a, b;
+
+	a = false; a = (ixVSge == VecVSge::UPKDONE);
+	args.push_back(a);
+	a = false; a = (ixVSge == VecVSge::CLGDONE);
+	args.push_back(a);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
+
+	return(args.back());
+};
+
+bool DlgWdbeRlsStareptr::evalExtButStoActive(
+			DbsWdbe* dbswdbe
+		) {
+	// sge(extract)
 
 	vector<bool> args;
 	bool a;
 
+	a = false; a = (ixVSge == VecVSge::EXTRACT);
+	args.push_back(a);
+
+	return(args.back());
+};
+
+bool DlgWdbeRlsStareptr::evalLfiDldActive(
+			DbsWdbe* dbswdbe
+		) {
+	// sge(fail)
+
+	vector<bool> args;
+	bool a;
+
+	a = false; a = (ixVSge == VecVSge::FAIL);
+	args.push_back(a);
+
+	return(args.back());
+};
+
+bool DlgWdbeRlsStareptr::evalButDneActive(
+			DbsWdbe* dbswdbe
+		) {
+	// sge(idle|fail|done)
+
+	vector<bool> args;
+	bool a, b;
+
 	a = false; a = (ixVSge == VecVSge::IDLE);
 	args.push_back(a);
+	a = false; a = (ixVSge == VecVSge::FAIL);
+	args.push_back(a);
+	a = false; a = (ixVSge == VecVSge::DONE);
+	args.push_back(a);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
 
 	return(args.back());
 };

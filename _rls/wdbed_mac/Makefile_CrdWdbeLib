@@ -2,7 +2,7 @@
 # make file for CrdWdbeLib card job handler, release wdbed_mac
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 12 Mar 2021
+# date created: 23 Oct 2021
 # IP header --- ABOVE
 
 include ../Makefile.inc
@@ -16,7 +16,7 @@ STATLIBFLAGS = rcs
 INCPATH = -I$(BUILDROOT)/dbswdbe -I$(BUILDROOT)/wdbed/VecWdbe -I$(BUILDROOT)/wdbed/IexWdbe -I$(BUILDROOT)/wdbed
 INCPATH += -I${WHIZSDKROOT}/build -I${WHIZSDKROOT}/build/apiwzlm -I/usr/local/include -I/usr/local/include/curl -I/usr/local/include/libxml2 -I/usr/local/mysql/include -I/usr/local/opt/sqlite/include
 
-OBJS = CrdWdbeLib.o PnlWdbeLibList.o QryWdbeLibList.o PnlWdbeLibHeadbar.o PnlWdbeLibRec.o PnlWdbeLibMNVersion.o QryWdbeLibMNVersion.o PnlWdbeLibAMakefile.o QryWdbeLibAMakefile.o PnlWdbeLibDetail.o
+OBJS = CrdWdbeLib.o PnlWdbeLibRec.o PnlWdbeLibDetail.o PnlWdbeLibAMakefile.o QryWdbeLibAMakefile.o PnlWdbeLibMNVersion.o QryWdbeLibMNVersion.o PnlWdbeLibHeadbar.o PnlWdbeLibList.o QryWdbeLibList.o
 
 LIB = libcrdwdbelib
 

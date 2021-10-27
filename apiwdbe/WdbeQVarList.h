@@ -18,12 +18,14 @@
 class WdbeQVarList {
 
 public:
-	WdbeQVarList(const Sbecore::uint jnum = 0, const std::string sref = "", const std::string stubPrcRefWdbeMProcess = "", const std::string yesnoConst = "", const std::string yesnoFalling = "", const std::string srefWdbeKHdltype = "", const std::string titSrefWdbeKHdltype = "", const Sbecore::usmallint Width = 0, const std::string Minmax = "");
+	WdbeQVarList(const Sbecore::uint jnum = 0, const std::string sref = "", const std::string srefRefIxVTbl = "", const std::string titRefIxVTbl = "", const std::string stubRefUref = "", const std::string yesnoConst = "", const std::string yesnoFalling = "", const std::string srefWdbeKHdltype = "", const std::string titSrefWdbeKHdltype = "", const Sbecore::usmallint Width = 0, const std::string Minmax = "");
 
 public:
 	Sbecore::uint jnum;
 	std::string sref;
-	std::string stubPrcRefWdbeMProcess;
+	std::string srefRefIxVTbl;
+	std::string titRefIxVTbl;
+	std::string stubRefUref;
 	std::string yesnoConst;
 	std::string yesnoFalling;
 	std::string srefWdbeKHdltype;

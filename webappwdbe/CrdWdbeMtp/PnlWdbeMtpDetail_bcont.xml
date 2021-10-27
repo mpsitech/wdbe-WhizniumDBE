@@ -4,6 +4,11 @@
 	<head>
 		<title>Detail_bcont</title>
 		<script>
+			function handlePupVndChange() {parent.parent.window.handlePupChange(document,"PupVnd","");};
+			function handleButVndToggleClick() {parent.parent.window.handleButToggleClick("PupVnd");};
+			function handleTxfVndKey(evt) {return parent.parent.window.handleTxfKey(document,"TxfVnd","",evt);};
+			function handleTxfVndChange() {parent.parent.window.handleTxfChange(document,"TxfVnd","");};
+			function handleButVndEditClick() {parent.parent.window.handleButDlgopenClick("ButVndEdit");};
 			function handlePupTypChange() {parent.parent.window.handlePupChange(document,"PupTyp","");};
 			function handleTxfSrrKey(evt) {return parent.parent.window.handleTxfKey(document,"TxfSrr","",evt);};
 			function handleTxfSrrChange() {parent.parent.window.handleTxfChange(document,"TxfSrr","");};
@@ -42,6 +47,19 @@
 					</td>
 					<td></td>
 					<td colspan="4"></td>
+				</tr>
+				<tr id="trVnd" class="show">
+					<td height="25"></td>
+					<td align="right">
+						<span id="CptVnd" class="cpt">CptVnd</span>
+						&#160;<img id="ButVndToggle" class="but" src="../icon/toggle.png" width="16" height="16" valign="bottom" alt="ButVndToggle" onmouseover="src='../icon/toggle_hlt.png'" onmouseout="src='../icon/toggle.png'" onclick="handleButVndToggleClick()"/>
+					</td>
+					<td></td>
+					<td id="dynVnd" colspan="5" align="left">
+					</td>
+					<td></td>
+					<td id="rdynVnd" colspan="2" align="left">
+					</td>
 				</tr>
 				<tr id="trA1" class="show"><td colspan="11" height="3"></td></tr>
 				<tr id="trA2" class="show">

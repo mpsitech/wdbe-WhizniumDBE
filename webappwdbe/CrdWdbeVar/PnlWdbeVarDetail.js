@@ -52,7 +52,8 @@ function initBD(bNotD) {
 
 	// IP initBD --- BEGIN
 	initCpt(contcontdoc, "CptSrf", retrieveTi(srcdoc, "TagWdbeVarDetail", "CptSrf"));
-	initCpt(contcontdoc, "CptPrc", retrieveTi(srcdoc, "TagWdbeVarDetail", "CptPrc"));
+	initCpt(contcontdoc, "CptReu", retrieveTi(srcdoc, "TagWdbeVarDetail", "CptReu"));
+	refreshPup(contcontdoc, srcdoc, "PupRet", "xs", "FeedFPupRet", retrieveCi(srcdoc, "ContIacWdbeVarDetail", "numFPupRet"), true, false);
 	initCpt(contcontdoc, "CptCon", retrieveTi(srcdoc, "TagWdbeVarDetail", "CptCon"));
 	initCpt(contcontdoc, "CptFal", retrieveTi(srcdoc, "TagWdbeVarDetail", "CptFal"));
 	initCpt(contcontdoc, "CptHty", retrieveTi(srcdoc, "TagWdbeVarDetail", "CptHty"));
@@ -97,7 +98,9 @@ function refreshBD(bNotD) {
 	var ButCluClusterAvail = (retrieveSi(srcdoc, "StatShrWdbeVarDetail", "ButCluClusterAvail") == "true");
 	var ButCluUnclusterAvail = (retrieveSi(srcdoc, "StatShrWdbeVarDetail", "ButCluUnclusterAvail") == "true");
 
-	var TxtPrcActive = (retrieveSi(srcdoc, "StatShrWdbeVarDetail", "TxtPrcActive") == "true");
+	var TxtReuActive = (retrieveSi(srcdoc, "StatShrWdbeVarDetail", "TxtReuActive") == "true");
+	var ButReuViewAvail = (retrieveSi(srcdoc, "StatShrWdbeVarDetail", "ButReuViewAvail") == "true");
+	var ButReuViewActive = (retrieveSi(srcdoc, "StatShrWdbeVarDetail", "ButReuViewActive") == "true");
 
 	var ChkConActive = (retrieveSi(srcdoc, "StatShrWdbeVarDetail", "ChkConActive") == "true");
 
@@ -185,7 +188,23 @@ function refreshBD(bNotD) {
 
 	if (ButCluViewAvail) refreshButicon(contcontdoc, "ButCluView", "icon/view", ButCluViewActive, false);
 
-	refreshTxt(contcontdoc, "TxtPrc", retrieveCi(srcdoc, "ContInfWdbeVarDetail", "TxtPrc"));
+	if ((ButReuViewAvail == !contcontdoc.getElementById("ButReuView"))) {
+		mytd = contcontdoc.getElementById("rdynReu");
+		clearElem(mytd);
+
+		first = true;
+
+		if (ButReuViewAvail) {
+			if (first) first = false;
+			else mytd.appendChild(contcontdoc.createTextNode("\u00a0"));
+			mytd.appendChild(makeImgBut(contcontdoc, "ButReuView", "icon/view"));
+		};
+	};
+
+	refreshTxt(contcontdoc, "TxtReu", retrieveCi(srcdoc, "ContInfWdbeVarDetail", "TxtReu"));
+	contcontdoc.getElementById("PupRet").value = retrieveCi(srcdoc, "ContIacWdbeVarDetail", "numFPupRet");
+
+	if (ButReuViewAvail) refreshButicon(contcontdoc, "ButReuView", "icon/view", ButReuViewActive, false);
 
 	refreshChk(contcontdoc, "ChkCon", (retrieveCi(srcdoc, "ContIacWdbeVarDetail", "ChkCon") == "true"), ChkConActive);
 
@@ -509,6 +528,7 @@ function mergeDpchEngData(dom) {
 	if (updateSrcblock(dom, "DpchEngWdbeVarDetailData", "ContInfWdbeVarDetail", srcdoc)) mask.push("continf");
 	if (updateSrcblock(dom, "DpchEngWdbeVarDetailData", "FeedFLstClu", srcdoc)) mask.push("feedFLstClu");
 	if (updateSrcblock(dom, "DpchEngWdbeVarDetailData", "FeedFPupHty", srcdoc)) mask.push("feedFPupHty");
+	if (updateSrcblock(dom, "DpchEngWdbeVarDetailData", "FeedFPupRet", srcdoc)) mask.push("feedFPupRet");
 	if (updateSrcblock(dom, "DpchEngWdbeVarDetailData", "StatAppWdbeVarDetail", srcdoc)) mask.push("statapp");
 	if (updateSrcblock(dom, "DpchEngWdbeVarDetailData", "StatShrWdbeVarDetail", srcdoc)) mask.push("statshr");
 	if (updateSrcblock(dom, "DpchEngWdbeVarDetailData", "TagWdbeVarDetail", srcdoc)) mask.push("tag");

@@ -39,6 +39,7 @@ public:
 
 	public:
 		static const Sbecore::uint BUTSAVECLICK = 1;
+		static const Sbecore::uint BUTVNDEDITCLICK = 2;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);
@@ -50,14 +51,18 @@ public:
 	class ContIac : public Sbecore::Block {
 
 	public:
-		static const Sbecore::uint NUMFPUPTYP = 1;
-		static const Sbecore::uint TXFSRR = 2;
-		static const Sbecore::uint TXFCMT = 3;
+		static const Sbecore::uint NUMFPUPVND = 1;
+		static const Sbecore::uint TXFVND = 2;
+		static const Sbecore::uint NUMFPUPTYP = 3;
+		static const Sbecore::uint TXFSRR = 4;
+		static const Sbecore::uint TXFCMT = 5;
 
 	public:
-		ContIac(const Sbecore::uint numFPupTyp = 1, const std::string& TxfSrr = "", const std::string& TxfCmt = "");
+		ContIac(const Sbecore::uint numFPupVnd = 1, const std::string& TxfVnd = "", const Sbecore::uint numFPupTyp = 1, const std::string& TxfSrr = "", const std::string& TxfCmt = "");
 
 	public:
+		Sbecore::uint numFPupVnd;
+		std::string TxfVnd;
 		Sbecore::uint numFPupTyp;
 		std::string TxfSrr;
 		std::string TxfCmt;
@@ -98,8 +103,8 @@ public:
 	class StatApp {
 
 	public:
-		static void writeJSON(Json::Value& sup, std::string difftag = "", const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::MIND);
-		static void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true, const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::MIND);
+		static void writeJSON(Json::Value& sup, std::string difftag = "", const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::MIND, const bool PupVndAlt = false);
+		static void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true, const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::MIND, const bool PupVndAlt = false);
 	};
 
 	/**
@@ -108,20 +113,26 @@ public:
 	class StatShr : public Sbecore::Block {
 
 	public:
-		static const Sbecore::uint BUTSAVEAVAIL = 1;
-		static const Sbecore::uint BUTSAVEACTIVE = 2;
-		static const Sbecore::uint TXTSRFACTIVE = 3;
-		static const Sbecore::uint PUPTYPACTIVE = 4;
-		static const Sbecore::uint TXFSRRACTIVE = 5;
-		static const Sbecore::uint TXFCMTACTIVE = 6;
+		static const Sbecore::uint TXFVNDVALID = 1;
+		static const Sbecore::uint BUTSAVEAVAIL = 2;
+		static const Sbecore::uint BUTSAVEACTIVE = 3;
+		static const Sbecore::uint TXTSRFACTIVE = 4;
+		static const Sbecore::uint PUPVNDACTIVE = 5;
+		static const Sbecore::uint BUTVNDEDITAVAIL = 6;
+		static const Sbecore::uint PUPTYPACTIVE = 7;
+		static const Sbecore::uint TXFSRRACTIVE = 8;
+		static const Sbecore::uint TXFCMTACTIVE = 9;
 
 	public:
-		StatShr(const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxtSrfActive = true, const bool PupTypActive = true, const bool TxfSrrActive = true, const bool TxfCmtActive = true);
+		StatShr(const bool TxfVndValid = false, const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxtSrfActive = true, const bool PupVndActive = true, const bool ButVndEditAvail = true, const bool PupTypActive = true, const bool TxfSrrActive = true, const bool TxfCmtActive = true);
 
 	public:
+		bool TxfVndValid;
 		bool ButSaveAvail;
 		bool ButSaveActive;
 		bool TxtSrfActive;
+		bool PupVndActive;
+		bool ButVndEditAvail;
 		bool PupTypActive;
 		bool TxfSrrActive;
 		bool TxfCmtActive;
@@ -197,18 +208,20 @@ public:
 		static const Sbecore::uint CONTIAC = 2;
 		static const Sbecore::uint CONTINF = 3;
 		static const Sbecore::uint FEEDFPUPTYP = 4;
-		static const Sbecore::uint STATAPP = 5;
-		static const Sbecore::uint STATSHR = 6;
-		static const Sbecore::uint TAG = 7;
-		static const Sbecore::uint ALL = 8;
+		static const Sbecore::uint FEEDFPUPVND = 5;
+		static const Sbecore::uint STATAPP = 6;
+		static const Sbecore::uint STATSHR = 7;
+		static const Sbecore::uint TAG = 8;
+		static const Sbecore::uint ALL = 9;
 
 	public:
-		DpchEngData(const Sbecore::ubigint jref = 0, ContIac* contiac = NULL, ContInf* continf = NULL, Sbecore::Feed* feedFPupTyp = NULL, StatShr* statshr = NULL, const std::set<Sbecore::uint>& mask = {NONE});
+		DpchEngData(const Sbecore::ubigint jref = 0, ContIac* contiac = NULL, ContInf* continf = NULL, Sbecore::Feed* feedFPupTyp = NULL, Sbecore::Feed* feedFPupVnd = NULL, StatShr* statshr = NULL, const std::set<Sbecore::uint>& mask = {NONE});
 
 	public:
 		ContIac contiac;
 		ContInf continf;
 		Sbecore::Feed feedFPupTyp;
+		Sbecore::Feed feedFPupVnd;
 		StatShr statshr;
 
 	public:
@@ -222,6 +235,8 @@ public:
 	bool evalButSaveAvail(DbsWdbe* dbswdbe);
 	bool evalButSaveActive(DbsWdbe* dbswdbe);
 	bool evalTxtSrfActive(DbsWdbe* dbswdbe);
+	bool evalPupVndActive(DbsWdbe* dbswdbe);
+	bool evalButVndEditAvail(DbsWdbe* dbswdbe);
 	bool evalPupTypActive(DbsWdbe* dbswdbe);
 	bool evalTxfSrrActive(DbsWdbe* dbswdbe);
 	bool evalTxfCmtActive(DbsWdbe* dbswdbe);
@@ -236,6 +251,7 @@ public:
 	StatShr statshr;
 
 	Sbecore::Feed feedFPupTyp;
+	Sbecore::Feed feedFPupVnd;
 
 	WdbeMModule recMdl;
 	Sbecore::uint ixWSubsetMdl;
@@ -249,6 +265,10 @@ public:
 
 public:
 	DpchEngWdbe* getNewDpchEng(std::set<Sbecore::uint> items);
+
+	void refreshPupVnd(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems);
+	void refreshTxfVnd(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems);
+	void refreshVnd(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems);
 
 	void refreshRecMdl(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems);
 
@@ -267,22 +287,24 @@ private:
 	void handleDpchAppDataContiac(DbsWdbe* dbswdbe, ContIac* _contiac, DpchEngWdbe** dpcheng);
 
 	void handleDpchAppDoButSaveClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
+	void handleDpchAppDoButVndEditClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
 
 public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeMdlUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
-	bool handleCallWdbeMdl_typEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
-	bool handleCallWdbeMdl_tplEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
-	bool handleCallWdbeMdl_supEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
-	bool handleCallWdbeMdl_sup_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
-	bool handleCallWdbeMdl_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
-	bool handleCallWdbeMdl_imbEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
-	bool handleCallWdbeMdl_hkuEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
-	bool handleCallWdbeMdl_hku_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
-	bool handleCallWdbeMdl_hktEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
 	bool handleCallWdbeMdl_ctrEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeMdl_hktEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
+	bool handleCallWdbeMdl_hku_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
+	bool handleCallWdbeMdl_hkuEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeMdl_imbEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeMdl_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
+	bool handleCallWdbeMdl_sup_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
+	bool handleCallWdbeMdl_supEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeMdl_tplEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeMdl_typEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
+	bool handleCallWdbeMdlUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbeKlsAkeyMod_klsEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv);
 
 };
 

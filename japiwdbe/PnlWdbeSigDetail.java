@@ -23,7 +23,7 @@ public class PnlWdbeSigDetail {
 		public static final int BUTCLUVIEWCLICK = 2;
 		public static final int BUTCLUCLUSTERCLICK = 3;
 		public static final int BUTCLUUNCLUSTERCLICK = 4;
-		public static final int BUTMDLVIEWCLICK = 5;
+		public static final int BUTREUVIEWCLICK = 5;
 		public static final int BUTMGUVIEWCLICK = 6;
 		public static final int BUTVECVIEWCLICK = 7;
 		public static final int BUTHTYEDITCLICK = 8;
@@ -38,7 +38,7 @@ public class PnlWdbeSigDetail {
 			if (s.equals("butcluviewclick")) return BUTCLUVIEWCLICK;
 			if (s.equals("butcluclusterclick")) return BUTCLUCLUSTERCLICK;
 			if (s.equals("butcluunclusterclick")) return BUTCLUUNCLUSTERCLICK;
-			if (s.equals("butmdlviewclick")) return BUTMDLVIEWCLICK;
+			if (s.equals("butreuviewclick")) return BUTREUVIEWCLICK;
 			if (s.equals("butmguviewclick")) return BUTMGUVIEWCLICK;
 			if (s.equals("butvecviewclick")) return BUTVECVIEWCLICK;
 			if (s.equals("buthtyeditclick")) return BUTHTYEDITCLICK;
@@ -54,7 +54,7 @@ public class PnlWdbeSigDetail {
 			if (ix == BUTCLUVIEWCLICK) return("ButCluViewClick");
 			if (ix == BUTCLUCLUSTERCLICK) return("ButCluClusterClick");
 			if (ix == BUTCLUUNCLUSTERCLICK) return("ButCluUnclusterClick");
-			if (ix == BUTMDLVIEWCLICK) return("ButMdlViewClick");
+			if (ix == BUTREUVIEWCLICK) return("ButReuViewClick");
 			if (ix == BUTMGUVIEWCLICK) return("ButMguViewClick");
 			if (ix == BUTVECVIEWCLICK) return("ButVecViewClick");
 			if (ix == BUTHTYEDITCLICK) return("ButHtyEditClick");
@@ -72,21 +72,23 @@ public class PnlWdbeSigDetail {
 
 		public static final int NUMFPUPTYP = 1;
 		public static final int NUMFLSTCLU = 2;
-		public static final int NUMFPUPMGT = 3;
-		public static final int CHKCON = 4;
-		public static final int NUMFPUPHTY = 5;
-		public static final int TXFHTY = 6;
-		public static final int TXFWID = 7;
-		public static final int TXFMMX = 8;
-		public static final int TXFCMB = 9;
-		public static final int TXFONV = 10;
-		public static final int TXFOFV = 11;
-		public static final int CHKDFO = 12;
-		public static final int TXFCMT = 13;
+		public static final int NUMFPUPRET = 3;
+		public static final int NUMFPUPMGT = 4;
+		public static final int CHKCON = 5;
+		public static final int NUMFPUPHTY = 6;
+		public static final int TXFHTY = 7;
+		public static final int TXFWID = 8;
+		public static final int TXFMMX = 9;
+		public static final int TXFCMB = 10;
+		public static final int TXFONV = 11;
+		public static final int TXFOFV = 12;
+		public static final int CHKDFO = 13;
+		public static final int TXFCMT = 14;
 
 		public ContIac(
 					int numFPupTyp
 					, int numFLstClu
+					, int numFPupRet
 					, int numFPupMgt
 					, boolean ChkCon
 					, int numFPupHty
@@ -101,6 +103,7 @@ public class PnlWdbeSigDetail {
 				) {
 			this.numFPupTyp = numFPupTyp;
 			this.numFLstClu = numFLstClu;
+			this.numFPupRet = numFPupRet;
 			this.numFPupMgt = numFPupMgt;
 			this.ChkCon = ChkCon;
 			this.numFPupHty = numFPupHty;
@@ -113,11 +116,12 @@ public class PnlWdbeSigDetail {
 			this.ChkDfo = ChkDfo;
 			this.TxfCmt = TxfCmt;
 
-			mask = new HashSet<Integer>(Arrays.asList(NUMFPUPTYP, NUMFLSTCLU, NUMFPUPMGT, CHKCON, NUMFPUPHTY, TXFHTY, TXFWID, TXFMMX, TXFCMB, TXFONV, TXFOFV, CHKDFO, TXFCMT));
+			mask = new HashSet<Integer>(Arrays.asList(NUMFPUPTYP, NUMFLSTCLU, NUMFPUPRET, NUMFPUPMGT, CHKCON, NUMFPUPHTY, TXFHTY, TXFWID, TXFMMX, TXFCMB, TXFONV, TXFOFV, CHKDFO, TXFCMT));
 		};
 
 		public int numFPupTyp;
 		public int numFLstClu;
+		public int numFPupRet;
 		public int numFPupMgt;
 		public boolean ChkCon;
 		public int numFPupHty;
@@ -145,6 +149,7 @@ public class PnlWdbeSigDetail {
 			if (Xmlio.checkXPath(doc, basexpath)) {
 				numFPupTyp = Xmlio.extractIntegerAttrUclc(doc, basexpath, itemtag, "Ci", "sref", "numFPupTyp", mask, NUMFPUPTYP);
 				numFLstClu = Xmlio.extractIntegerAttrUclc(doc, basexpath, itemtag, "Ci", "sref", "numFLstClu", mask, NUMFLSTCLU);
+				numFPupRet = Xmlio.extractIntegerAttrUclc(doc, basexpath, itemtag, "Ci", "sref", "numFPupRet", mask, NUMFPUPRET);
 				numFPupMgt = Xmlio.extractIntegerAttrUclc(doc, basexpath, itemtag, "Ci", "sref", "numFPupMgt", mask, NUMFPUPMGT);
 				ChkCon = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Ci", "sref", "ChkCon", mask, CHKCON);
 				numFPupHty = Xmlio.extractIntegerAttrUclc(doc, basexpath, itemtag, "Ci", "sref", "numFPupHty", mask, NUMFPUPHTY);
@@ -183,6 +188,7 @@ public class PnlWdbeSigDetail {
 
 			Xmlio.writeIntegerAttr(doc, el, itemtag, "sref", "numFPupTyp", numFPupTyp);
 			Xmlio.writeIntegerAttr(doc, el, itemtag, "sref", "numFLstClu", numFLstClu);
+			Xmlio.writeIntegerAttr(doc, el, itemtag, "sref", "numFPupRet", numFPupRet);
 			Xmlio.writeIntegerAttr(doc, el, itemtag, "sref", "numFPupMgt", numFPupMgt);
 			Xmlio.writeBooleanAttr(doc, el, itemtag, "sref", "ChkCon", ChkCon);
 			Xmlio.writeIntegerAttr(doc, el, itemtag, "sref", "numFPupHty", numFPupHty);
@@ -203,6 +209,7 @@ public class PnlWdbeSigDetail {
 
 			if (numFPupTyp == comp.numFPupTyp) items.add(NUMFPUPTYP);
 			if (numFLstClu == comp.numFLstClu) items.add(NUMFLSTCLU);
+			if (numFPupRet == comp.numFPupRet) items.add(NUMFPUPRET);
 			if (numFPupMgt == comp.numFPupMgt) items.add(NUMFPUPMGT);
 			if (ChkCon == comp.ChkCon) items.add(CHKCON);
 			if (numFPupHty == comp.numFPupHty) items.add(NUMFPUPHTY);
@@ -226,7 +233,7 @@ public class PnlWdbeSigDetail {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(NUMFPUPTYP, NUMFLSTCLU, NUMFPUPMGT, CHKCON, NUMFPUPHTY, TXFHTY, TXFWID, TXFMMX, TXFCMB, TXFONV, TXFOFV, CHKDFO, TXFCMT));
+			diffitems = new HashSet<Integer>(Arrays.asList(NUMFPUPTYP, NUMFLSTCLU, NUMFPUPRET, NUMFPUPMGT, CHKCON, NUMFPUPHTY, TXFHTY, TXFWID, TXFMMX, TXFCMB, TXFONV, TXFOFV, CHKDFO, TXFCMT));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);
@@ -241,7 +248,7 @@ public class PnlWdbeSigDetail {
 
 		public static final int TXTSRF = 1;
 		public static final int TXTCLU = 2;
-		public static final int TXTMDL = 3;
+		public static final int TXTREU = 3;
 		public static final int TXTMGU = 4;
 		public static final int TXTVEC = 5;
 		public static final int TXTDRV = 6;
@@ -249,24 +256,24 @@ public class PnlWdbeSigDetail {
 		public ContInf(
 					String TxtSrf
 					, String TxtClu
-					, String TxtMdl
+					, String TxtReu
 					, String TxtMgu
 					, String TxtVec
 					, String TxtDrv
 				) {
 			this.TxtSrf = TxtSrf;
 			this.TxtClu = TxtClu;
-			this.TxtMdl = TxtMdl;
+			this.TxtReu = TxtReu;
 			this.TxtMgu = TxtMgu;
 			this.TxtVec = TxtVec;
 			this.TxtDrv = TxtDrv;
 
-			mask = new HashSet<Integer>(Arrays.asList(TXTSRF, TXTCLU, TXTMDL, TXTMGU, TXTVEC, TXTDRV));
+			mask = new HashSet<Integer>(Arrays.asList(TXTSRF, TXTCLU, TXTREU, TXTMGU, TXTVEC, TXTDRV));
 		};
 
 		public String TxtSrf;
 		public String TxtClu;
-		public String TxtMdl;
+		public String TxtReu;
 		public String TxtMgu;
 		public String TxtVec;
 		public String TxtDrv;
@@ -286,7 +293,7 @@ public class PnlWdbeSigDetail {
 			if (Xmlio.checkXPath(doc, basexpath)) {
 				TxtSrf = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ci", "sref", "TxtSrf", mask, TXTSRF);
 				TxtClu = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ci", "sref", "TxtClu", mask, TXTCLU);
-				TxtMdl = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ci", "sref", "TxtMdl", mask, TXTMDL);
+				TxtReu = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ci", "sref", "TxtReu", mask, TXTREU);
 				TxtMgu = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ci", "sref", "TxtMgu", mask, TXTMGU);
 				TxtVec = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ci", "sref", "TxtVec", mask, TXTVEC);
 				TxtDrv = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ci", "sref", "TxtDrv", mask, TXTDRV);
@@ -304,7 +311,7 @@ public class PnlWdbeSigDetail {
 
 			if (TxtSrf.equals(comp.TxtSrf)) items.add(TXTSRF);
 			if (TxtClu.equals(comp.TxtClu)) items.add(TXTCLU);
-			if (TxtMdl.equals(comp.TxtMdl)) items.add(TXTMDL);
+			if (TxtReu.equals(comp.TxtReu)) items.add(TXTREU);
 			if (TxtMgu.equals(comp.TxtMgu)) items.add(TXTMGU);
 			if (TxtVec.equals(comp.TxtVec)) items.add(TXTVEC);
 			if (TxtDrv.equals(comp.TxtDrv)) items.add(TXTDRV);
@@ -320,7 +327,7 @@ public class PnlWdbeSigDetail {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(TXTSRF, TXTCLU, TXTMDL, TXTMGU, TXTVEC, TXTDRV));
+			diffitems = new HashSet<Integer>(Arrays.asList(TXTSRF, TXTCLU, TXTREU, TXTMGU, TXTVEC, TXTDRV));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);
@@ -426,9 +433,9 @@ public class PnlWdbeSigDetail {
 		public static final int BUTCLUVIEWACTIVE = 7;
 		public static final int BUTCLUCLUSTERAVAIL = 8;
 		public static final int BUTCLUUNCLUSTERAVAIL = 9;
-		public static final int TXTMDLACTIVE = 10;
-		public static final int BUTMDLVIEWAVAIL = 11;
-		public static final int BUTMDLVIEWACTIVE = 12;
+		public static final int TXTREUACTIVE = 10;
+		public static final int BUTREUVIEWAVAIL = 11;
+		public static final int BUTREUVIEWACTIVE = 12;
 		public static final int TXTMGUACTIVE = 13;
 		public static final int BUTMGUVIEWAVAIL = 14;
 		public static final int BUTMGUVIEWACTIVE = 15;
@@ -459,9 +466,9 @@ public class PnlWdbeSigDetail {
 					, boolean ButCluViewActive
 					, boolean ButCluClusterAvail
 					, boolean ButCluUnclusterAvail
-					, boolean TxtMdlActive
-					, boolean ButMdlViewAvail
-					, boolean ButMdlViewActive
+					, boolean TxtReuActive
+					, boolean ButReuViewAvail
+					, boolean ButReuViewActive
 					, boolean TxtMguActive
 					, boolean ButMguViewAvail
 					, boolean ButMguViewActive
@@ -491,9 +498,9 @@ public class PnlWdbeSigDetail {
 			this.ButCluViewActive = ButCluViewActive;
 			this.ButCluClusterAvail = ButCluClusterAvail;
 			this.ButCluUnclusterAvail = ButCluUnclusterAvail;
-			this.TxtMdlActive = TxtMdlActive;
-			this.ButMdlViewAvail = ButMdlViewAvail;
-			this.ButMdlViewActive = ButMdlViewActive;
+			this.TxtReuActive = TxtReuActive;
+			this.ButReuViewAvail = ButReuViewAvail;
+			this.ButReuViewActive = ButReuViewActive;
 			this.TxtMguActive = TxtMguActive;
 			this.ButMguViewAvail = ButMguViewAvail;
 			this.ButMguViewActive = ButMguViewActive;
@@ -514,7 +521,7 @@ public class PnlWdbeSigDetail {
 			this.ButDrvViewActive = ButDrvViewActive;
 			this.TxfCmtActive = TxfCmtActive;
 
-			mask = new HashSet<Integer>(Arrays.asList(TXFHTYVALID, BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, PUPTYPACTIVE, LSTCLUACTIVE, BUTCLUVIEWACTIVE, BUTCLUCLUSTERAVAIL, BUTCLUUNCLUSTERAVAIL, TXTMDLACTIVE, BUTMDLVIEWAVAIL, BUTMDLVIEWACTIVE, TXTMGUACTIVE, BUTMGUVIEWAVAIL, BUTMGUVIEWACTIVE, TXTVECACTIVE, BUTVECVIEWAVAIL, BUTVECVIEWACTIVE, CHKCONACTIVE, PUPHTYACTIVE, BUTHTYEDITAVAIL, TXFWIDACTIVE, TXFMMXACTIVE, TXFCMBACTIVE, TXFONVACTIVE, TXFOFVACTIVE, CHKDFOACTIVE, TXTDRVACTIVE, BUTDRVVIEWAVAIL, BUTDRVVIEWACTIVE, TXFCMTACTIVE));
+			mask = new HashSet<Integer>(Arrays.asList(TXFHTYVALID, BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, PUPTYPACTIVE, LSTCLUACTIVE, BUTCLUVIEWACTIVE, BUTCLUCLUSTERAVAIL, BUTCLUUNCLUSTERAVAIL, TXTREUACTIVE, BUTREUVIEWAVAIL, BUTREUVIEWACTIVE, TXTMGUACTIVE, BUTMGUVIEWAVAIL, BUTMGUVIEWACTIVE, TXTVECACTIVE, BUTVECVIEWAVAIL, BUTVECVIEWACTIVE, CHKCONACTIVE, PUPHTYACTIVE, BUTHTYEDITAVAIL, TXFWIDACTIVE, TXFMMXACTIVE, TXFCMBACTIVE, TXFONVACTIVE, TXFOFVACTIVE, CHKDFOACTIVE, TXTDRVACTIVE, BUTDRVVIEWAVAIL, BUTDRVVIEWACTIVE, TXFCMTACTIVE));
 		};
 
 		public boolean TxfHtyValid;
@@ -526,9 +533,9 @@ public class PnlWdbeSigDetail {
 		public boolean ButCluViewActive;
 		public boolean ButCluClusterAvail;
 		public boolean ButCluUnclusterAvail;
-		public boolean TxtMdlActive;
-		public boolean ButMdlViewAvail;
-		public boolean ButMdlViewActive;
+		public boolean TxtReuActive;
+		public boolean ButReuViewAvail;
+		public boolean ButReuViewActive;
 		public boolean TxtMguActive;
 		public boolean ButMguViewAvail;
 		public boolean ButMguViewActive;
@@ -571,9 +578,9 @@ public class PnlWdbeSigDetail {
 				ButCluViewActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButCluViewActive", mask, BUTCLUVIEWACTIVE);
 				ButCluClusterAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButCluClusterAvail", mask, BUTCLUCLUSTERAVAIL);
 				ButCluUnclusterAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButCluUnclusterAvail", mask, BUTCLUUNCLUSTERAVAIL);
-				TxtMdlActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxtMdlActive", mask, TXTMDLACTIVE);
-				ButMdlViewAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButMdlViewAvail", mask, BUTMDLVIEWAVAIL);
-				ButMdlViewActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButMdlViewActive", mask, BUTMDLVIEWACTIVE);
+				TxtReuActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxtReuActive", mask, TXTREUACTIVE);
+				ButReuViewAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButReuViewAvail", mask, BUTREUVIEWAVAIL);
+				ButReuViewActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButReuViewActive", mask, BUTREUVIEWACTIVE);
 				TxtMguActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxtMguActive", mask, TXTMGUACTIVE);
 				ButMguViewAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButMguViewAvail", mask, BUTMGUVIEWAVAIL);
 				ButMguViewActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButMguViewActive", mask, BUTMGUVIEWACTIVE);
@@ -614,9 +621,9 @@ public class PnlWdbeSigDetail {
 			if (ButCluViewActive == comp.ButCluViewActive) items.add(BUTCLUVIEWACTIVE);
 			if (ButCluClusterAvail == comp.ButCluClusterAvail) items.add(BUTCLUCLUSTERAVAIL);
 			if (ButCluUnclusterAvail == comp.ButCluUnclusterAvail) items.add(BUTCLUUNCLUSTERAVAIL);
-			if (TxtMdlActive == comp.TxtMdlActive) items.add(TXTMDLACTIVE);
-			if (ButMdlViewAvail == comp.ButMdlViewAvail) items.add(BUTMDLVIEWAVAIL);
-			if (ButMdlViewActive == comp.ButMdlViewActive) items.add(BUTMDLVIEWACTIVE);
+			if (TxtReuActive == comp.TxtReuActive) items.add(TXTREUACTIVE);
+			if (ButReuViewAvail == comp.ButReuViewAvail) items.add(BUTREUVIEWAVAIL);
+			if (ButReuViewActive == comp.ButReuViewActive) items.add(BUTREUVIEWACTIVE);
 			if (TxtMguActive == comp.TxtMguActive) items.add(TXTMGUACTIVE);
 			if (ButMguViewAvail == comp.ButMguViewAvail) items.add(BUTMGUVIEWAVAIL);
 			if (ButMguViewActive == comp.ButMguViewActive) items.add(BUTMGUVIEWACTIVE);
@@ -648,7 +655,7 @@ public class PnlWdbeSigDetail {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(TXFHTYVALID, BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, PUPTYPACTIVE, LSTCLUACTIVE, BUTCLUVIEWACTIVE, BUTCLUCLUSTERAVAIL, BUTCLUUNCLUSTERAVAIL, TXTMDLACTIVE, BUTMDLVIEWAVAIL, BUTMDLVIEWACTIVE, TXTMGUACTIVE, BUTMGUVIEWAVAIL, BUTMGUVIEWACTIVE, TXTVECACTIVE, BUTVECVIEWAVAIL, BUTVECVIEWACTIVE, CHKCONACTIVE, PUPHTYACTIVE, BUTHTYEDITAVAIL, TXFWIDACTIVE, TXFMMXACTIVE, TXFCMBACTIVE, TXFONVACTIVE, TXFOFVACTIVE, CHKDFOACTIVE, TXTDRVACTIVE, BUTDRVVIEWAVAIL, BUTDRVVIEWACTIVE, TXFCMTACTIVE));
+			diffitems = new HashSet<Integer>(Arrays.asList(TXFHTYVALID, BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, PUPTYPACTIVE, LSTCLUACTIVE, BUTCLUVIEWACTIVE, BUTCLUCLUSTERAVAIL, BUTCLUUNCLUSTERAVAIL, TXTREUACTIVE, BUTREUVIEWAVAIL, BUTREUVIEWACTIVE, TXTMGUACTIVE, BUTMGUVIEWAVAIL, BUTMGUVIEWACTIVE, TXTVECACTIVE, BUTVECVIEWAVAIL, BUTVECVIEWACTIVE, CHKCONACTIVE, PUPHTYACTIVE, BUTHTYEDITAVAIL, TXFWIDACTIVE, TXFMMXACTIVE, TXFCMBACTIVE, TXFONVACTIVE, TXFOFVACTIVE, CHKDFOACTIVE, TXTDRVACTIVE, BUTDRVVIEWAVAIL, BUTDRVVIEWACTIVE, TXFCMTACTIVE));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);
@@ -665,7 +672,7 @@ public class PnlWdbeSigDetail {
 		public static final int CPTSRF = 2;
 		public static final int CPTTYP = 3;
 		public static final int CPTCLU = 4;
-		public static final int CPTMDL = 5;
+		public static final int CPTREU = 5;
 		public static final int CPTMGU = 6;
 		public static final int CPTVEC = 7;
 		public static final int CPTCON = 8;
@@ -684,7 +691,7 @@ public class PnlWdbeSigDetail {
 					, String CptSrf
 					, String CptTyp
 					, String CptClu
-					, String CptMdl
+					, String CptReu
 					, String CptMgu
 					, String CptVec
 					, String CptCon
@@ -702,7 +709,7 @@ public class PnlWdbeSigDetail {
 			this.CptSrf = CptSrf;
 			this.CptTyp = CptTyp;
 			this.CptClu = CptClu;
-			this.CptMdl = CptMdl;
+			this.CptReu = CptReu;
 			this.CptMgu = CptMgu;
 			this.CptVec = CptVec;
 			this.CptCon = CptCon;
@@ -716,14 +723,14 @@ public class PnlWdbeSigDetail {
 			this.CptDrv = CptDrv;
 			this.CptCmt = CptCmt;
 
-			mask = new HashSet<Integer>(Arrays.asList(CPT, CPTSRF, CPTTYP, CPTCLU, CPTMDL, CPTMGU, CPTVEC, CPTCON, CPTHTY, CPTWID, CPTMMX, CPTCMB, CPTONV, CPTOFV, CPTDFO, CPTDRV, CPTCMT));
+			mask = new HashSet<Integer>(Arrays.asList(CPT, CPTSRF, CPTTYP, CPTCLU, CPTREU, CPTMGU, CPTVEC, CPTCON, CPTHTY, CPTWID, CPTMMX, CPTCMB, CPTONV, CPTOFV, CPTDFO, CPTDRV, CPTCMT));
 		};
 
 		public String Cpt;
 		public String CptSrf;
 		public String CptTyp;
 		public String CptClu;
-		public String CptMdl;
+		public String CptReu;
 		public String CptMgu;
 		public String CptVec;
 		public String CptCon;
@@ -754,7 +761,7 @@ public class PnlWdbeSigDetail {
 				CptSrf = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "CptSrf", mask, CPTSRF);
 				CptTyp = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "CptTyp", mask, CPTTYP);
 				CptClu = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "CptClu", mask, CPTCLU);
-				CptMdl = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "CptMdl", mask, CPTMDL);
+				CptReu = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "CptReu", mask, CPTREU);
 				CptMgu = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "CptMgu", mask, CPTMGU);
 				CptVec = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "CptVec", mask, CPTVEC);
 				CptCon = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "CptCon", mask, CPTCON);
@@ -783,7 +790,7 @@ public class PnlWdbeSigDetail {
 			if (CptSrf.equals(comp.CptSrf)) items.add(CPTSRF);
 			if (CptTyp.equals(comp.CptTyp)) items.add(CPTTYP);
 			if (CptClu.equals(comp.CptClu)) items.add(CPTCLU);
-			if (CptMdl.equals(comp.CptMdl)) items.add(CPTMDL);
+			if (CptReu.equals(comp.CptReu)) items.add(CPTREU);
 			if (CptMgu.equals(comp.CptMgu)) items.add(CPTMGU);
 			if (CptVec.equals(comp.CptVec)) items.add(CPTVEC);
 			if (CptCon.equals(comp.CptCon)) items.add(CPTCON);
@@ -808,7 +815,7 @@ public class PnlWdbeSigDetail {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(CPT, CPTSRF, CPTTYP, CPTCLU, CPTMDL, CPTMGU, CPTVEC, CPTCON, CPTHTY, CPTWID, CPTMMX, CPTCMB, CPTONV, CPTOFV, CPTDFO, CPTDRV, CPTCMT));
+			diffitems = new HashSet<Integer>(Arrays.asList(CPT, CPTSRF, CPTTYP, CPTCLU, CPTREU, CPTMGU, CPTVEC, CPTCON, CPTHTY, CPTWID, CPTMMX, CPTCMB, CPTONV, CPTOFV, CPTDFO, CPTDRV, CPTCMT));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);
@@ -937,19 +944,21 @@ public class PnlWdbeSigDetail {
 		public static final int FEEDFLSTCLU = 4;
 		public static final int FEEDFPUPHTY = 5;
 		public static final int FEEDFPUPMGT = 6;
-		public static final int FEEDFPUPTYP = 7;
-		public static final int STATAPP = 8;
-		public static final int STATSHR = 9;
-		public static final int TAG = 10;
+		public static final int FEEDFPUPRET = 7;
+		public static final int FEEDFPUPTYP = 8;
+		public static final int STATAPP = 9;
+		public static final int STATSHR = 10;
+		public static final int TAG = 11;
 
 		public DpchEngData() {
 			super(VecWdbeVDpch.DPCHENGWDBESIGDETAILDATA);
 
-			contiac = new ContIac(0, 0, 0, false, 0, "", "", "", "", "", "", false, "");
+			contiac = new ContIac(0, 0, 0, 0, false, 0, "", "", "", "", "", "", false, "");
 			continf = new ContInf("", "", "", "", "", "");
 			feedFLstClu = new Feed("FeedFLstClu");
 			feedFPupHty = new Feed("FeedFPupHty");
 			feedFPupMgt = new Feed("FeedFPupMgt");
+			feedFPupRet = new Feed("FeedFPupRet");
 			feedFPupTyp = new Feed("FeedFPupTyp");
 			statapp = new StatApp(0, false, false, 0);
 			statshr = new StatShr(false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false);
@@ -961,6 +970,7 @@ public class PnlWdbeSigDetail {
 		public Feed feedFLstClu;
 		public Feed feedFPupHty;
 		public Feed feedFPupMgt;
+		public Feed feedFPupRet;
 		public Feed feedFPupTyp;
 		public StatApp statapp;
 		public StatShr statshr;
@@ -975,6 +985,7 @@ public class PnlWdbeSigDetail {
 			if (has(FEEDFLSTCLU)) ss.add("feedFLstClu");
 			if (has(FEEDFPUPHTY)) ss.add("feedFPupHty");
 			if (has(FEEDFPUPMGT)) ss.add("feedFPupMgt");
+			if (has(FEEDFPUPRET)) ss.add("feedFPupRet");
 			if (has(FEEDFPUPTYP)) ss.add("feedFPupTyp");
 			if (has(STATAPP)) ss.add("statapp");
 			if (has(STATSHR)) ss.add("statshr");
@@ -1000,17 +1011,19 @@ public class PnlWdbeSigDetail {
 				if (feedFLstClu.readXML(doc, basexpath, true)) add(FEEDFLSTCLU);
 				if (feedFPupHty.readXML(doc, basexpath, true)) add(FEEDFPUPHTY);
 				if (feedFPupMgt.readXML(doc, basexpath, true)) add(FEEDFPUPMGT);
+				if (feedFPupRet.readXML(doc, basexpath, true)) add(FEEDFPUPRET);
 				if (feedFPupTyp.readXML(doc, basexpath, true)) add(FEEDFPUPTYP);
 				if (statapp.readXML(doc, basexpath, true)) add(STATAPP);
 				if (statshr.readXML(doc, basexpath, true)) add(STATSHR);
 				if (tag.readXML(doc, basexpath, true)) add(TAG);
 			} else {
 				scrJref = "";
-				contiac = new ContIac(0, 0, 0, false, 0, "", "", "", "", "", "", false, "");
+				contiac = new ContIac(0, 0, 0, 0, false, 0, "", "", "", "", "", "", false, "");
 				continf = new ContInf("", "", "", "", "", "");
 				feedFLstClu = new Feed("FeedFLstClu");
 				feedFPupHty = new Feed("FeedFPupHty");
 				feedFPupMgt = new Feed("FeedFPupMgt");
+				feedFPupRet = new Feed("FeedFPupRet");
 				feedFPupTyp = new Feed("FeedFPupTyp");
 				statapp = new StatApp(0, false, false, 0);
 				statshr = new StatShr(false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false);

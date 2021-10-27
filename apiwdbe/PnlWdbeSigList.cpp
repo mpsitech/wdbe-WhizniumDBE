@@ -272,7 +272,8 @@ set<uint> PnlWdbeSigList::StatShr::diff(
 PnlWdbeSigList::StgIac::StgIac(
 			const uint TcoSrfWidth
 			, const uint TcoTypWidth
-			, const uint TcoMdlWidth
+			, const uint TcoRetWidth
+			, const uint TcoReuWidth
 			, const uint TcoMgtWidth
 			, const uint TcoMguWidth
 			, const uint TcoVecWidth
@@ -285,7 +286,8 @@ PnlWdbeSigList::StgIac::StgIac(
 		{
 	this->TcoSrfWidth = TcoSrfWidth;
 	this->TcoTypWidth = TcoTypWidth;
-	this->TcoMdlWidth = TcoMdlWidth;
+	this->TcoRetWidth = TcoRetWidth;
+	this->TcoReuWidth = TcoReuWidth;
 	this->TcoMgtWidth = TcoMgtWidth;
 	this->TcoMguWidth = TcoMguWidth;
 	this->TcoVecWidth = TcoVecWidth;
@@ -294,7 +296,7 @@ PnlWdbeSigList::StgIac::StgIac(
 	this->TcoWidWidth = TcoWidWidth;
 	this->TcoMmxWidth = TcoMmxWidth;
 
-	mask = {TCOSRFWIDTH, TCOTYPWIDTH, TCOMDLWIDTH, TCOMGTWIDTH, TCOMGUWIDTH, TCOVECWIDTH, TCOCONWIDTH, TCOHTYWIDTH, TCOWIDWIDTH, TCOMMXWIDTH};
+	mask = {TCOSRFWIDTH, TCOTYPWIDTH, TCORETWIDTH, TCOREUWIDTH, TCOMGTWIDTH, TCOMGUWIDTH, TCOVECWIDTH, TCOCONWIDTH, TCOHTYWIDTH, TCOWIDWIDTH, TCOMMXWIDTH};
 };
 
 bool PnlWdbeSigList::StgIac::readXML(
@@ -316,7 +318,8 @@ bool PnlWdbeSigList::StgIac::readXML(
 	if (basefound) {
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoSrfWidth", TcoSrfWidth)) add(TCOSRFWIDTH);
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoTypWidth", TcoTypWidth)) add(TCOTYPWIDTH);
-		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoMdlWidth", TcoMdlWidth)) add(TCOMDLWIDTH);
+		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoRetWidth", TcoRetWidth)) add(TCORETWIDTH);
+		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoReuWidth", TcoReuWidth)) add(TCOREUWIDTH);
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoMgtWidth", TcoMgtWidth)) add(TCOMGTWIDTH);
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoMguWidth", TcoMguWidth)) add(TCOMGUWIDTH);
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoVecWidth", TcoVecWidth)) add(TCOVECWIDTH);
@@ -343,7 +346,8 @@ void PnlWdbeSigList::StgIac::writeXML(
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
 		writeUintAttr(wr, itemtag, "sref", "TcoSrfWidth", TcoSrfWidth);
 		writeUintAttr(wr, itemtag, "sref", "TcoTypWidth", TcoTypWidth);
-		writeUintAttr(wr, itemtag, "sref", "TcoMdlWidth", TcoMdlWidth);
+		writeUintAttr(wr, itemtag, "sref", "TcoRetWidth", TcoRetWidth);
+		writeUintAttr(wr, itemtag, "sref", "TcoReuWidth", TcoReuWidth);
 		writeUintAttr(wr, itemtag, "sref", "TcoMgtWidth", TcoMgtWidth);
 		writeUintAttr(wr, itemtag, "sref", "TcoMguWidth", TcoMguWidth);
 		writeUintAttr(wr, itemtag, "sref", "TcoVecWidth", TcoVecWidth);
@@ -361,7 +365,8 @@ set<uint> PnlWdbeSigList::StgIac::comm(
 
 	if (TcoSrfWidth == comp->TcoSrfWidth) insert(items, TCOSRFWIDTH);
 	if (TcoTypWidth == comp->TcoTypWidth) insert(items, TCOTYPWIDTH);
-	if (TcoMdlWidth == comp->TcoMdlWidth) insert(items, TCOMDLWIDTH);
+	if (TcoRetWidth == comp->TcoRetWidth) insert(items, TCORETWIDTH);
+	if (TcoReuWidth == comp->TcoReuWidth) insert(items, TCOREUWIDTH);
 	if (TcoMgtWidth == comp->TcoMgtWidth) insert(items, TCOMGTWIDTH);
 	if (TcoMguWidth == comp->TcoMguWidth) insert(items, TCOMGUWIDTH);
 	if (TcoVecWidth == comp->TcoVecWidth) insert(items, TCOVECWIDTH);
@@ -381,7 +386,7 @@ set<uint> PnlWdbeSigList::StgIac::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {TCOSRFWIDTH, TCOTYPWIDTH, TCOMDLWIDTH, TCOMGTWIDTH, TCOMGUWIDTH, TCOVECWIDTH, TCOCONWIDTH, TCOHTYWIDTH, TCOWIDWIDTH, TCOMMXWIDTH};
+	diffitems = {TCOSRFWIDTH, TCOTYPWIDTH, TCORETWIDTH, TCOREUWIDTH, TCOMGTWIDTH, TCOMGUWIDTH, TCOVECWIDTH, TCOCONWIDTH, TCOHTYWIDTH, TCOWIDWIDTH, TCOMMXWIDTH};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -401,7 +406,8 @@ PnlWdbeSigList::Tag::Tag(
 			, const string& TxtShowing2
 			, const string& TcoSrf
 			, const string& TcoTyp
-			, const string& TcoMdl
+			, const string& TcoRet
+			, const string& TcoReu
 			, const string& TcoMgt
 			, const string& TcoMgu
 			, const string& TcoVec
@@ -421,7 +427,8 @@ PnlWdbeSigList::Tag::Tag(
 	this->TxtShowing2 = TxtShowing2;
 	this->TcoSrf = TcoSrf;
 	this->TcoTyp = TcoTyp;
-	this->TcoMdl = TcoMdl;
+	this->TcoRet = TcoRet;
+	this->TcoReu = TcoReu;
 	this->TcoMgt = TcoMgt;
 	this->TcoMgu = TcoMgu;
 	this->TcoVec = TcoVec;
@@ -430,7 +437,7 @@ PnlWdbeSigList::Tag::Tag(
 	this->TcoWid = TcoWid;
 	this->TcoMmx = TcoMmx;
 
-	mask = {CPT, TXTFOR, TXTRECORD1, TXTRECORD2, TRS, TXTSHOWING1, TXTSHOWING2, TCOSRF, TCOTYP, TCOMDL, TCOMGT, TCOMGU, TCOVEC, TCOCON, TCOHTY, TCOWID, TCOMMX};
+	mask = {CPT, TXTFOR, TXTRECORD1, TXTRECORD2, TRS, TXTSHOWING1, TXTSHOWING2, TCOSRF, TCOTYP, TCORET, TCOREU, TCOMGT, TCOMGU, TCOVEC, TCOCON, TCOHTY, TCOWID, TCOMMX};
 };
 
 bool PnlWdbeSigList::Tag::readXML(
@@ -459,7 +466,8 @@ bool PnlWdbeSigList::Tag::readXML(
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "TxtShowing2", TxtShowing2)) add(TXTSHOWING2);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "TcoSrf", TcoSrf)) add(TCOSRF);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "TcoTyp", TcoTyp)) add(TCOTYP);
-		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "TcoMdl", TcoMdl)) add(TCOMDL);
+		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "TcoRet", TcoRet)) add(TCORET);
+		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "TcoReu", TcoReu)) add(TCOREU);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "TcoMgt", TcoMgt)) add(TCOMGT);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "TcoMgu", TcoMgu)) add(TCOMGU);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "TcoVec", TcoVec)) add(TCOVEC);

@@ -23,6 +23,8 @@ WdbeQMtpList::WdbeQMtpList(
 			, const uint jnum
 			, const ubigint ref
 			, const string sref
+			, const string srefWdbeKVendor
+			, const string titSrefWdbeKVendor
 			, const uint ixVBasetype
 			, const string srefIxVBasetype
 			, const string titIxVBasetype
@@ -38,6 +40,8 @@ WdbeQMtpList::WdbeQMtpList(
 	this->jnum = jnum;
 	this->ref = ref;
 	this->sref = sref;
+	this->srefWdbeKVendor = srefWdbeKVendor;
+	this->titSrefWdbeKVendor = titSrefWdbeKVendor;
 	this->ixVBasetype = ixVBasetype;
 	this->srefIxVBasetype = srefIxVBasetype;
 	this->titIxVBasetype = titIxVBasetype;
@@ -59,6 +63,8 @@ void WdbeQMtpList::writeJSON(
 	if (jnumattr) me["jnum"] = jnum;
 	if (shorttags) {
 		me["srf"] = sref;
+		me["vnd"] = srefWdbeKVendor;
+		me["vnd2"] = titSrefWdbeKVendor;
 		me["typ"] = srefIxVBasetype;
 		me["typ2"] = titIxVBasetype;
 		me["hkt"] = srefHkIxVTbl;
@@ -67,6 +73,8 @@ void WdbeQMtpList::writeJSON(
 		me["srr"] = Srefrule;
 	} else {
 		me["sref"] = sref;
+		me["srefWdbeKVendor"] = srefWdbeKVendor;
+		me["titSrefWdbeKVendor"] = titSrefWdbeKVendor;
 		me["srefIxVBasetype"] = srefIxVBasetype;
 		me["titIxVBasetype"] = titIxVBasetype;
 		me["srefHkIxVTbl"] = srefHkIxVTbl;
@@ -88,6 +96,8 @@ void WdbeQMtpList::writeXML(
 	if (jnumattr) xmlTextWriterWriteAttribute(wr, BAD_CAST "jnum", BAD_CAST to_string(jnum).c_str());
 	if (shorttags) {
 		writeString(wr, "srf", sref);
+		writeString(wr, "vnd", srefWdbeKVendor);
+		writeString(wr, "vnd2", titSrefWdbeKVendor);
 		writeString(wr, "typ", srefIxVBasetype);
 		writeString(wr, "typ2", titIxVBasetype);
 		writeString(wr, "hkt", srefHkIxVTbl);
@@ -96,6 +106,8 @@ void WdbeQMtpList::writeXML(
 		writeString(wr, "srr", Srefrule);
 	} else {
 		writeString(wr, "sref", sref);
+		writeString(wr, "srefWdbeKVendor", srefWdbeKVendor);
+		writeString(wr, "titSrefWdbeKVendor", titSrefWdbeKVendor);
 		writeString(wr, "srefIxVBasetype", srefIxVBasetype);
 		writeString(wr, "titIxVBasetype", titIxVBasetype);
 		writeString(wr, "srefHkIxVTbl", srefHkIxVTbl);
@@ -215,6 +227,8 @@ ubigint TblWdbeQMtpList::insertNewRec(
 			, const uint jnum
 			, const ubigint ref
 			, const string sref
+			, const string srefWdbeKVendor
+			, const string titSrefWdbeKVendor
 			, const uint ixVBasetype
 			, const string srefIxVBasetype
 			, const string titIxVBasetype
@@ -228,7 +242,7 @@ ubigint TblWdbeQMtpList::insertNewRec(
 	ubigint retval = 0;
 	WdbeQMtpList* _rec = NULL;
 
-	_rec = new WdbeQMtpList(0, jref, jnum, ref, sref, ixVBasetype, srefIxVBasetype, titIxVBasetype, hkIxVTbl, srefHkIxVTbl, titHkIxVTbl, hkUref, stubHkUref, Srefrule);
+	_rec = new WdbeQMtpList(0, jref, jnum, ref, sref, srefWdbeKVendor, titSrefWdbeKVendor, ixVBasetype, srefIxVBasetype, titIxVBasetype, hkIxVTbl, srefHkIxVTbl, titHkIxVTbl, hkUref, stubHkUref, Srefrule);
 	insertRec(_rec);
 
 	retval = _rec->qref;
@@ -246,6 +260,8 @@ ubigint TblWdbeQMtpList::appendNewRecToRst(
 			, const uint jnum
 			, const ubigint ref
 			, const string sref
+			, const string srefWdbeKVendor
+			, const string titSrefWdbeKVendor
 			, const uint ixVBasetype
 			, const string srefIxVBasetype
 			, const string titIxVBasetype
@@ -259,7 +275,7 @@ ubigint TblWdbeQMtpList::appendNewRecToRst(
 	ubigint retval = 0;
 	WdbeQMtpList* _rec = NULL;
 
-	retval = insertNewRec(&_rec, jref, jnum, ref, sref, ixVBasetype, srefIxVBasetype, titIxVBasetype, hkIxVTbl, srefHkIxVTbl, titHkIxVTbl, hkUref, stubHkUref, Srefrule);
+	retval = insertNewRec(&_rec, jref, jnum, ref, sref, srefWdbeKVendor, titSrefWdbeKVendor, ixVBasetype, srefIxVBasetype, titIxVBasetype, hkIxVTbl, srefHkIxVTbl, titHkIxVTbl, hkUref, stubHkUref, Srefrule);
 	rst.nodes.push_back(_rec);
 
 	if (rec != NULL) *rec = _rec;
@@ -330,8 +346,8 @@ MyTblWdbeQMtpList::~MyTblWdbeQMtpList() {
 };
 
 void MyTblWdbeQMtpList::initStatements() {
-	stmtInsertRec = createStatement("INSERT INTO TblWdbeQMtpList (jref, jnum, ref, sref, ixVBasetype, hkIxVTbl, hkUref, Srefrule) VALUES (?,?,?,?,?,?,?,?)", false);
-	stmtUpdateRec = createStatement("UPDATE TblWdbeQMtpList SET jref = ?, jnum = ?, ref = ?, sref = ?, ixVBasetype = ?, hkIxVTbl = ?, hkUref = ?, Srefrule = ? WHERE qref = ?", false);
+	stmtInsertRec = createStatement("INSERT INTO TblWdbeQMtpList (jref, jnum, ref, sref, srefWdbeKVendor, ixVBasetype, hkIxVTbl, hkUref, Srefrule) VALUES (?,?,?,?,?,?,?,?,?)", false);
+	stmtUpdateRec = createStatement("UPDATE TblWdbeQMtpList SET jref = ?, jnum = ?, ref = ?, sref = ?, srefWdbeKVendor = ?, ixVBasetype = ?, hkIxVTbl = ?, hkUref = ?, Srefrule = ? WHERE qref = ?", false);
 	stmtRemoveRecByQref = createStatement("DELETE FROM TblWdbeQMtpList WHERE qref = ?", false);
 	stmtRemoveRstByJref = createStatement("DELETE FROM TblWdbeQMtpList WHERE jref = ?", false);
 };
@@ -367,10 +383,11 @@ bool MyTblWdbeQMtpList::loadRecBySQL(
 		if (dbrow[2]) _rec->jnum = atol((char*) dbrow[2]); else _rec->jnum = 0;
 		if (dbrow[3]) _rec->ref = atoll((char*) dbrow[3]); else _rec->ref = 0;
 		if (dbrow[4]) _rec->sref.assign(dbrow[4], dblengths[4]); else _rec->sref = "";
-		if (dbrow[5]) _rec->ixVBasetype = atol((char*) dbrow[5]); else _rec->ixVBasetype = 0;
-		if (dbrow[6]) _rec->hkIxVTbl = atol((char*) dbrow[6]); else _rec->hkIxVTbl = 0;
-		if (dbrow[7]) _rec->hkUref = atoll((char*) dbrow[7]); else _rec->hkUref = 0;
-		if (dbrow[8]) _rec->Srefrule.assign(dbrow[8], dblengths[8]); else _rec->Srefrule = "";
+		if (dbrow[5]) _rec->srefWdbeKVendor.assign(dbrow[5], dblengths[5]); else _rec->srefWdbeKVendor = "";
+		if (dbrow[6]) _rec->ixVBasetype = atol((char*) dbrow[6]); else _rec->ixVBasetype = 0;
+		if (dbrow[7]) _rec->hkIxVTbl = atol((char*) dbrow[7]); else _rec->hkIxVTbl = 0;
+		if (dbrow[8]) _rec->hkUref = atoll((char*) dbrow[8]); else _rec->hkUref = 0;
+		if (dbrow[9]) _rec->Srefrule.assign(dbrow[9], dblengths[9]); else _rec->Srefrule = "";
 
 		retval = true;
 	};
@@ -418,10 +435,11 @@ ubigint MyTblWdbeQMtpList::loadRstBySQL(
 			if (dbrow[2]) rec->jnum = atol((char*) dbrow[2]); else rec->jnum = 0;
 			if (dbrow[3]) rec->ref = atoll((char*) dbrow[3]); else rec->ref = 0;
 			if (dbrow[4]) rec->sref.assign(dbrow[4], dblengths[4]); else rec->sref = "";
-			if (dbrow[5]) rec->ixVBasetype = atol((char*) dbrow[5]); else rec->ixVBasetype = 0;
-			if (dbrow[6]) rec->hkIxVTbl = atol((char*) dbrow[6]); else rec->hkIxVTbl = 0;
-			if (dbrow[7]) rec->hkUref = atoll((char*) dbrow[7]); else rec->hkUref = 0;
-			if (dbrow[8]) rec->Srefrule.assign(dbrow[8], dblengths[8]); else rec->Srefrule = "";
+			if (dbrow[5]) rec->srefWdbeKVendor.assign(dbrow[5], dblengths[5]); else rec->srefWdbeKVendor = "";
+			if (dbrow[6]) rec->ixVBasetype = atol((char*) dbrow[6]); else rec->ixVBasetype = 0;
+			if (dbrow[7]) rec->hkIxVTbl = atol((char*) dbrow[7]); else rec->hkIxVTbl = 0;
+			if (dbrow[8]) rec->hkUref = atoll((char*) dbrow[8]); else rec->hkUref = 0;
+			if (dbrow[9]) rec->Srefrule.assign(dbrow[9], dblengths[9]); else rec->Srefrule = "";
 			rst.nodes.push_back(rec);
 
 			numread++;
@@ -436,20 +454,22 @@ ubigint MyTblWdbeQMtpList::loadRstBySQL(
 ubigint MyTblWdbeQMtpList::insertRec(
 			WdbeQMtpList* rec
 		) {
-	unsigned long l[8]; my_bool n[8]; my_bool e[8];
+	unsigned long l[9]; my_bool n[9]; my_bool e[9];
 
 	l[3] = rec->sref.length();
-	l[7] = rec->Srefrule.length();
+	l[4] = rec->srefWdbeKVendor.length();
+	l[8] = rec->Srefrule.length();
 
 	MYSQL_BIND bind[] = {
 		bindUbigint(&rec->jref,&(l[0]),&(n[0]),&(e[0])),
 		bindUint(&rec->jnum,&(l[1]),&(n[1]),&(e[1])),
 		bindUbigint(&rec->ref,&(l[2]),&(n[2]),&(e[2])),
 		bindCstring((char*) (rec->sref.c_str()),&(l[3]),&(n[3]),&(e[3])),
-		bindUint(&rec->ixVBasetype,&(l[4]),&(n[4]),&(e[4])),
-		bindUint(&rec->hkIxVTbl,&(l[5]),&(n[5]),&(e[5])),
-		bindUbigint(&rec->hkUref,&(l[6]),&(n[6]),&(e[6])),
-		bindCstring((char*) (rec->Srefrule.c_str()),&(l[7]),&(n[7]),&(e[7]))
+		bindCstring((char*) (rec->srefWdbeKVendor.c_str()),&(l[4]),&(n[4]),&(e[4])),
+		bindUint(&rec->ixVBasetype,&(l[5]),&(n[5]),&(e[5])),
+		bindUint(&rec->hkIxVTbl,&(l[6]),&(n[6]),&(e[6])),
+		bindUbigint(&rec->hkUref,&(l[7]),&(n[7]),&(e[7])),
+		bindCstring((char*) (rec->Srefrule.c_str()),&(l[8]),&(n[8]),&(e[8]))
 	};
 
 	if (mysql_stmt_bind_param(stmtInsertRec, bind)) {
@@ -474,21 +494,23 @@ void MyTblWdbeQMtpList::insertRst(
 void MyTblWdbeQMtpList::updateRec(
 			WdbeQMtpList* rec
 		) {
-	unsigned long l[9]; my_bool n[9]; my_bool e[9];
+	unsigned long l[10]; my_bool n[10]; my_bool e[10];
 
 	l[3] = rec->sref.length();
-	l[7] = rec->Srefrule.length();
+	l[4] = rec->srefWdbeKVendor.length();
+	l[8] = rec->Srefrule.length();
 
 	MYSQL_BIND bind[] = {
 		bindUbigint(&rec->jref,&(l[0]),&(n[0]),&(e[0])),
 		bindUint(&rec->jnum,&(l[1]),&(n[1]),&(e[1])),
 		bindUbigint(&rec->ref,&(l[2]),&(n[2]),&(e[2])),
 		bindCstring((char*) (rec->sref.c_str()),&(l[3]),&(n[3]),&(e[3])),
-		bindUint(&rec->ixVBasetype,&(l[4]),&(n[4]),&(e[4])),
-		bindUint(&rec->hkIxVTbl,&(l[5]),&(n[5]),&(e[5])),
-		bindUbigint(&rec->hkUref,&(l[6]),&(n[6]),&(e[6])),
-		bindCstring((char*) (rec->Srefrule.c_str()),&(l[7]),&(n[7]),&(e[7])),
-		bindUbigint(&rec->qref,&(l[8]),&(n[8]),&(e[8]))
+		bindCstring((char*) (rec->srefWdbeKVendor.c_str()),&(l[4]),&(n[4]),&(e[4])),
+		bindUint(&rec->ixVBasetype,&(l[5]),&(n[5]),&(e[5])),
+		bindUint(&rec->hkIxVTbl,&(l[6]),&(n[6]),&(e[6])),
+		bindUbigint(&rec->hkUref,&(l[7]),&(n[7]),&(e[7])),
+		bindCstring((char*) (rec->Srefrule.c_str()),&(l[8]),&(n[8]),&(e[8])),
+		bindUbigint(&rec->qref,&(l[9]),&(n[9]),&(e[9]))
 	};
 
 	if (mysql_stmt_bind_param(stmtUpdateRec, bind)) {
@@ -577,13 +599,13 @@ PgTblWdbeQMtpList::~PgTblWdbeQMtpList() {
 };
 
 void PgTblWdbeQMtpList::initStatements() {
-	createStatement("TblWdbeQMtpList_insertRec", "INSERT INTO TblWdbeQMtpList (jref, jnum, ref, sref, ixVBasetype, hkIxVTbl, hkUref, Srefrule) VALUES ($1,$2,$3,$4,$5,$6,$7,$8) RETURNING qref", 8);
-	createStatement("TblWdbeQMtpList_updateRec", "UPDATE TblWdbeQMtpList SET jref = $1, jnum = $2, ref = $3, sref = $4, ixVBasetype = $5, hkIxVTbl = $6, hkUref = $7, Srefrule = $8 WHERE qref = $9", 9);
+	createStatement("TblWdbeQMtpList_insertRec", "INSERT INTO TblWdbeQMtpList (jref, jnum, ref, sref, srefWdbeKVendor, ixVBasetype, hkIxVTbl, hkUref, Srefrule) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9) RETURNING qref", 9);
+	createStatement("TblWdbeQMtpList_updateRec", "UPDATE TblWdbeQMtpList SET jref = $1, jnum = $2, ref = $3, sref = $4, srefWdbeKVendor = $5, ixVBasetype = $6, hkIxVTbl = $7, hkUref = $8, Srefrule = $9 WHERE qref = $10", 10);
 	createStatement("TblWdbeQMtpList_removeRecByQref", "DELETE FROM TblWdbeQMtpList WHERE qref = $1", 1);
 	createStatement("TblWdbeQMtpList_removeRstByJref", "DELETE FROM TblWdbeQMtpList WHERE jref = $1", 1);
 
-	createStatement("TblWdbeQMtpList_loadRecByQref", "SELECT qref, jref, jnum, ref, sref, ixVBasetype, hkIxVTbl, hkUref, Srefrule FROM TblWdbeQMtpList WHERE qref = $1", 1);
-	createStatement("TblWdbeQMtpList_loadRstByJref", "SELECT qref, jref, jnum, ref, sref, ixVBasetype, hkIxVTbl, hkUref, Srefrule FROM TblWdbeQMtpList WHERE jref = $1 ORDER BY jnum ASC", 1);
+	createStatement("TblWdbeQMtpList_loadRecByQref", "SELECT qref, jref, jnum, ref, sref, srefWdbeKVendor, ixVBasetype, hkIxVTbl, hkUref, Srefrule FROM TblWdbeQMtpList WHERE qref = $1", 1);
+	createStatement("TblWdbeQMtpList_loadRstByJref", "SELECT qref, jref, jnum, ref, sref, srefWdbeKVendor, ixVBasetype, hkIxVTbl, hkUref, Srefrule FROM TblWdbeQMtpList WHERE jref = $1 ORDER BY jnum ASC", 1);
 };
 
 bool PgTblWdbeQMtpList::loadRec(
@@ -604,6 +626,7 @@ bool PgTblWdbeQMtpList::loadRec(
 			PQfnumber(res, "jnum"),
 			PQfnumber(res, "ref"),
 			PQfnumber(res, "sref"),
+			PQfnumber(res, "srefwdbekvendor"),
 			PQfnumber(res, "ixvbasetype"),
 			PQfnumber(res, "hkixvtbl"),
 			PQfnumber(res, "hkuref"),
@@ -615,10 +638,11 @@ bool PgTblWdbeQMtpList::loadRec(
 		ptr = PQgetvalue(res, 0, fnum[2]); _rec->jnum = atol(ptr);
 		ptr = PQgetvalue(res, 0, fnum[3]); _rec->ref = atoll(ptr);
 		ptr = PQgetvalue(res, 0, fnum[4]); _rec->sref.assign(ptr, PQgetlength(res, 0, fnum[4]));
-		ptr = PQgetvalue(res, 0, fnum[5]); _rec->ixVBasetype = atol(ptr);
-		ptr = PQgetvalue(res, 0, fnum[6]); _rec->hkIxVTbl = atol(ptr);
-		ptr = PQgetvalue(res, 0, fnum[7]); _rec->hkUref = atoll(ptr);
-		ptr = PQgetvalue(res, 0, fnum[8]); _rec->Srefrule.assign(ptr, PQgetlength(res, 0, fnum[8]));
+		ptr = PQgetvalue(res, 0, fnum[5]); _rec->srefWdbeKVendor.assign(ptr, PQgetlength(res, 0, fnum[5]));
+		ptr = PQgetvalue(res, 0, fnum[6]); _rec->ixVBasetype = atol(ptr);
+		ptr = PQgetvalue(res, 0, fnum[7]); _rec->hkIxVTbl = atol(ptr);
+		ptr = PQgetvalue(res, 0, fnum[8]); _rec->hkUref = atoll(ptr);
+		ptr = PQgetvalue(res, 0, fnum[9]); _rec->Srefrule.assign(ptr, PQgetlength(res, 0, fnum[9]));
 
 		retval = true;
 	};
@@ -650,6 +674,7 @@ ubigint PgTblWdbeQMtpList::loadRst(
 			PQfnumber(res, "jnum"),
 			PQfnumber(res, "ref"),
 			PQfnumber(res, "sref"),
+			PQfnumber(res, "srefwdbekvendor"),
 			PQfnumber(res, "ixvbasetype"),
 			PQfnumber(res, "hkixvtbl"),
 			PQfnumber(res, "hkuref"),
@@ -664,10 +689,11 @@ ubigint PgTblWdbeQMtpList::loadRst(
 			ptr = PQgetvalue(res, numread, fnum[2]); rec->jnum = atol(ptr);
 			ptr = PQgetvalue(res, numread, fnum[3]); rec->ref = atoll(ptr);
 			ptr = PQgetvalue(res, numread, fnum[4]); rec->sref.assign(ptr, PQgetlength(res, numread, fnum[4]));
-			ptr = PQgetvalue(res, numread, fnum[5]); rec->ixVBasetype = atol(ptr);
-			ptr = PQgetvalue(res, numread, fnum[6]); rec->hkIxVTbl = atol(ptr);
-			ptr = PQgetvalue(res, numread, fnum[7]); rec->hkUref = atoll(ptr);
-			ptr = PQgetvalue(res, numread, fnum[8]); rec->Srefrule.assign(ptr, PQgetlength(res, numread, fnum[8]));
+			ptr = PQgetvalue(res, numread, fnum[5]); rec->srefWdbeKVendor.assign(ptr, PQgetlength(res, numread, fnum[5]));
+			ptr = PQgetvalue(res, numread, fnum[6]); rec->ixVBasetype = atol(ptr);
+			ptr = PQgetvalue(res, numread, fnum[7]); rec->hkIxVTbl = atol(ptr);
+			ptr = PQgetvalue(res, numread, fnum[8]); rec->hkUref = atoll(ptr);
+			ptr = PQgetvalue(res, numread, fnum[9]); rec->Srefrule.assign(ptr, PQgetlength(res, numread, fnum[9]));
 
 			rst.nodes.push_back(rec);
 
@@ -772,6 +798,7 @@ ubigint PgTblWdbeQMtpList::insertRec(
 		(char*) &_jnum,
 		(char*) &_ref,
 		rec->sref.c_str(),
+		rec->srefWdbeKVendor.c_str(),
 		(char*) &_ixVBasetype,
 		(char*) &_hkIxVTbl,
 		(char*) &_hkUref,
@@ -782,14 +809,15 @@ ubigint PgTblWdbeQMtpList::insertRec(
 		sizeof(uint),
 		sizeof(ubigint),
 		0,
+		0,
 		sizeof(uint),
 		sizeof(uint),
 		sizeof(ubigint),
 		0
 	};
-	const int f[] = {1, 1, 1, 0, 1, 1, 1, 0};
+	const int f[] = {1, 1, 1, 0, 0, 1, 1, 1, 0};
 
-	res = PQexecPrepared(dbs, "TblWdbeQMtpList_insertRec", 8, vals, l, f, 0);
+	res = PQexecPrepared(dbs, "TblWdbeQMtpList_insertRec", 9, vals, l, f, 0);
 
 	if (PQresultStatus(res) != PGRES_TUPLES_OK)	{
 		string dbms = "PgTblWdbeQMtpList::insertRec() / " + string(PQerrorMessage(dbs));
@@ -827,6 +855,7 @@ void PgTblWdbeQMtpList::updateRec(
 		(char*) &_jnum,
 		(char*) &_ref,
 		rec->sref.c_str(),
+		rec->srefWdbeKVendor.c_str(),
 		(char*) &_ixVBasetype,
 		(char*) &_hkIxVTbl,
 		(char*) &_hkUref,
@@ -838,15 +867,16 @@ void PgTblWdbeQMtpList::updateRec(
 		sizeof(uint),
 		sizeof(ubigint),
 		0,
+		0,
 		sizeof(uint),
 		sizeof(uint),
 		sizeof(ubigint),
 		0,
 		sizeof(ubigint)
 	};
-	const int f[] = {1, 1, 1, 0, 1, 1, 1, 0, 1};
+	const int f[] = {1, 1, 1, 0, 0, 1, 1, 1, 0, 1};
 
-	res = PQexecPrepared(dbs, "TblWdbeQMtpList_updateRec", 9, vals, l, f, 0);
+	res = PQexecPrepared(dbs, "TblWdbeQMtpList_updateRec", 10, vals, l, f, 0);
 
 	if (PQresultStatus(res) != PGRES_COMMAND_OK) {
 		string dbms = "PgTblWdbeQMtpList::updateRec() / " + string(PQerrorMessage(dbs));

@@ -146,7 +146,7 @@ void WdbeWrfpgaCtrFwdctr::writeMdlVhd(
 			dbswdbe->tblwdbemport->loadRstByMdl(mdl->ref, false, prts);
 			for (unsigned int i = 0; i < prts.nodes.size(); i++) srefsPrts[prts.nodes[i]->ref] = prts.nodes[i]->sref;
 
-			dbswdbe->tblwdbemsignal->loadRstByMdl(mdl->ref, false, sigs);
+			dbswdbe->tblwdbemsignal->loadRstByRetReu(VecWdbeVMSignalRefTbl::MDL, mdl->ref, false, sigs);
 			for (unsigned int i = 0; i < sigs.nodes.size(); i++) {
 				sig = sigs.nodes[i];
 

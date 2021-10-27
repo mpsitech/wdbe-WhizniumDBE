@@ -16,6 +16,7 @@
 	* SqkWdbePlhmcu
 	*/
 namespace SqkWdbePlhmcu {
+	std::string getSquawkEctr(DbsWdbe* dbswdbe, DpchInvWdbePlhmcuEctr* dpchinv);
 	std::string getSquawkEhostif(DbsWdbe* dbswdbe, DpchInvWdbePlhmcuEhostif* dpchinv);
 };
 

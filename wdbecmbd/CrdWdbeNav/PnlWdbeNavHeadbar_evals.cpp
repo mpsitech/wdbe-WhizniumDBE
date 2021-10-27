@@ -14,7 +14,7 @@ using namespace Xmlio;
 bool PnlWdbeNavHeadbar::evalMenCrdAvail(
 			DbsWdbe* dbswdbe
 		) {
-	// MspCrd1Avail()|MspCrd2Avail()|MspCrd3Avail()|MspCrd4Avail()|MspCrd5Avail()|MspCrd6Avail()
+	// MspCrd1Avail()|MspCrd2Avail()|MspCrd3Avail()|MspCrd4Avail()|MspCrd5Avail()|MspCrd6Avail()|MspCrd7Avail()
 
 	vector<bool> args;
 	bool a, b;
@@ -31,6 +31,11 @@ bool PnlWdbeNavHeadbar::evalMenCrdAvail(
 	args.push_back(a);
 	a = false; a = evalMspCrd6Avail(dbswdbe);
 	args.push_back(a);
+	a = false; a = evalMspCrd7Avail(dbswdbe);
+	args.push_back(a);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
 	b = args.back(); args.pop_back();
 	a = args.back(); args.pop_back();
 	args.push_back(a || b);
@@ -412,11 +417,13 @@ bool PnlWdbeNavHeadbar::evalMitCrdCvrAvail(
 bool PnlWdbeNavHeadbar::evalMspCrd5Avail(
 			DbsWdbe* dbswdbe
 		) {
-	// MitCrdModAvail()|MitCrdVecAvail()|MitCrdCmdAvail()|MitCrdErrAvail()|MitCrdPphAvail()|MitCrdBnkAvail()|MitCrdPinAvail()
+	// MitCrdPphAvail()|MitCrdModAvail()|MitCrdVecAvail()|MitCrdCmdAvail()|MitCrdErrAvail()|MitCrdPplAvail()|MitCrdSegAvail()
 
 	vector<bool> args;
 	bool a, b;
 
+	a = false; a = evalMitCrdPphAvail(dbswdbe);
+	args.push_back(a);
 	a = false; a = evalMitCrdModAvail(dbswdbe);
 	args.push_back(a);
 	a = false; a = evalMitCrdVecAvail(dbswdbe);
@@ -425,11 +432,9 @@ bool PnlWdbeNavHeadbar::evalMspCrd5Avail(
 	args.push_back(a);
 	a = false; a = evalMitCrdErrAvail(dbswdbe);
 	args.push_back(a);
-	a = false; a = evalMitCrdPphAvail(dbswdbe);
+	a = false; a = evalMitCrdPplAvail(dbswdbe);
 	args.push_back(a);
-	a = false; a = evalMitCrdBnkAvail(dbswdbe);
-	args.push_back(a);
-	a = false; a = evalMitCrdPinAvail(dbswdbe);
+	a = false; a = evalMitCrdSegAvail(dbswdbe);
 	args.push_back(a);
 	b = args.back(); args.pop_back();
 	a = args.back(); args.pop_back();
@@ -449,6 +454,20 @@ bool PnlWdbeNavHeadbar::evalMspCrd5Avail(
 	b = args.back(); args.pop_back();
 	a = args.back(); args.pop_back();
 	args.push_back(a || b);
+
+	return(args.back());
+};
+
+bool PnlWdbeNavHeadbar::evalMitCrdPphAvail(
+			DbsWdbe* dbswdbe
+		) {
+	// pre.ixCrdaccPph()
+
+	vector<bool> args;
+	bool a;
+
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCPPH, jref) != 0);
+	args.push_back(a);
 
 	return(args.back());
 };
@@ -509,16 +528,59 @@ bool PnlWdbeNavHeadbar::evalMitCrdErrAvail(
 	return(args.back());
 };
 
-bool PnlWdbeNavHeadbar::evalMitCrdPphAvail(
+bool PnlWdbeNavHeadbar::evalMitCrdPplAvail(
 			DbsWdbe* dbswdbe
 		) {
-	// pre.ixCrdaccPph()
+	// pre.ixCrdaccPpl()
 
 	vector<bool> args;
 	bool a;
 
-	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCPPH, jref) != 0);
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCPPL, jref) != 0);
 	args.push_back(a);
+
+	return(args.back());
+};
+
+bool PnlWdbeNavHeadbar::evalMitCrdSegAvail(
+			DbsWdbe* dbswdbe
+		) {
+	// pre.ixCrdaccSeg()
+
+	vector<bool> args;
+	bool a;
+
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCSEG, jref) != 0);
+	args.push_back(a);
+
+	return(args.back());
+};
+
+bool PnlWdbeNavHeadbar::evalMspCrd6Avail(
+			DbsWdbe* dbswdbe
+		) {
+	// MitCrdBnkAvail()|MitCrdPinAvail()|MitCrdIntAvail()|MitCrdSigAvail()
+
+	vector<bool> args;
+	bool a, b;
+
+	a = false; a = evalMitCrdBnkAvail(dbswdbe);
+	args.push_back(a);
+	a = false; a = evalMitCrdPinAvail(dbswdbe);
+	args.push_back(a);
+	a = false; a = evalMitCrdIntAvail(dbswdbe);
+	args.push_back(a);
+	a = false; a = evalMitCrdSigAvail(dbswdbe);
+	args.push_back(a);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
 
 	return(args.back());
 };
@@ -551,7 +613,35 @@ bool PnlWdbeNavHeadbar::evalMitCrdPinAvail(
 	return(args.back());
 };
 
-bool PnlWdbeNavHeadbar::evalMspCrd6Avail(
+bool PnlWdbeNavHeadbar::evalMitCrdIntAvail(
+			DbsWdbe* dbswdbe
+		) {
+	// pre.ixCrdaccInt()
+
+	vector<bool> args;
+	bool a;
+
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCINT, jref) != 0);
+	args.push_back(a);
+
+	return(args.back());
+};
+
+bool PnlWdbeNavHeadbar::evalMitCrdSigAvail(
+			DbsWdbe* dbswdbe
+		) {
+	// pre.ixCrdaccSig()
+
+	vector<bool> args;
+	bool a;
+
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCSIG, jref) != 0);
+	args.push_back(a);
+
+	return(args.back());
+};
+
+bool PnlWdbeNavHeadbar::evalMspCrd7Avail(
 			DbsWdbe* dbswdbe
 		) {
 	// MitCrdUtlAvail()

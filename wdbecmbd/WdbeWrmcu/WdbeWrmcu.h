@@ -17,13 +17,7 @@
 namespace WdbeWrmcu {
 
 	// IP cust --- IBEGIN
-	std::string valToSlv(const std::string& val, unsigned char w, const bool upNotDn);
-
-	std::string getValStr(WdbeMPort* prt, const std::string& altval = "");
-	std::string getValStr(WdbeMSignal* sig, const std::string& altval = "");
-
-	std::string getVarCtype(WdbeMPort* prt);
-	std::string getVarCtype(WdbeMSignal* sig);
+	std::string getVarStr(WdbeMVariable* var);
 	// IP cust --- IEND
 };
 

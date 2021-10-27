@@ -32,9 +32,8 @@ public:
 	class VecVOrd {
 
 	public:
-		static const Sbecore::uint MDL = 1;
+		static const Sbecore::uint SRF = 1;
 		static const Sbecore::uint UNT = 2;
-		static const Sbecore::uint SRF = 3;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);
@@ -48,8 +47,8 @@ public:
 	class StatApp {
 
 	public:
-		static void writeJSON(Json::Value& sup, std::string difftag = "", const Sbecore::uint firstcol = 1, const Sbecore::uint jnumFirstdisp = 1, const Sbecore::uint ncol = 3, const Sbecore::uint ndisp = 25);
-		static void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true, const Sbecore::uint firstcol = 1, const Sbecore::uint jnumFirstdisp = 1, const Sbecore::uint ncol = 3, const Sbecore::uint ndisp = 25);
+		static void writeJSON(Json::Value& sup, std::string difftag = "", const Sbecore::uint firstcol = 1, const Sbecore::uint jnumFirstdisp = 1, const Sbecore::uint ncol = 2, const Sbecore::uint ndisp = 25);
+		static void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true, const Sbecore::uint firstcol = 1, const Sbecore::uint jnumFirstdisp = 1, const Sbecore::uint ncol = 2, const Sbecore::uint ndisp = 25);
 	};
 
 	/**
@@ -126,7 +125,7 @@ public:
 
 	void rerun(DbsWdbe* dbswdbe, const bool call = false);
 	void rerun_baseSQL(std::string& sqlstr);
-	void rerun_filtSQL(std::string& sqlstr, const std::string& preSrf, const Sbecore::ubigint preUnt, const Sbecore::ubigint preMdl, const bool addwhere);
+	void rerun_filtSQL(std::string& sqlstr, const std::string& preSrf, const Sbecore::ubigint preUnt, const bool addwhere);
 	void rerun_filtSQL_append(std::string& sqlstr, bool& first);
 	void rerun_orderSQL(std::string& sqlstr, const Sbecore::uint preIxOrd);
 
@@ -149,9 +148,9 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbePphUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
-	bool handleCallWdbePphMod(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 	bool handleCallWdbeStubChgFromSelf(DbsWdbe* dbswdbe);
+	bool handleCallWdbePphMod(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbePphUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 
 };
 

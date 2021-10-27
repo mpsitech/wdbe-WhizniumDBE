@@ -91,8 +91,9 @@ void WdbeMtpWrfpgaCmdinv_v1_0::writeMdlVhd(
 
 			if (dbswdbe->tblwdbemmodule->loadRecBySQL("SELECT * FROM TblWdbeMModule WHERE hkIxVTbl = " + to_string(mdl->hkIxVTbl) + " AND hkUref = " + to_string(mdl->hkUref) + " AND ixVBasetype = " + to_string(VecWdbeVMModuleBasetype::CMDINV), &cmdinv)) {
 
-				dbswdbe->tblwdbemvectoritem->loadRstBySQL("SELECT TblWdbeMVectoritem.* FROM TblWdbeMSignal, TblWdbeMVectoritem WHERE TblWdbeMSignal.mdlRefWdbeMModule = " + to_string(top->ref) + " AND TblWdbeMSignal.sref = 'req"
-							+ Cmdbussref + "' AND TblWdbeMVectoritem.vecRefWdbeMVector = TblWdbeMSignal.refWdbeMVector AND TblWdbeMVectoritem.sref LIKE '" + cmdinv->sref + "To%' ORDER BY TblWdbeMVectoritem.vecNum ASC", false, vits);
+				dbswdbe->tblwdbemvectoritem->loadRstBySQL("SELECT TblWdbeMVectoritem.* FROM TblWdbeMSignal, TblWdbeMVectoritem WHERE TblWdbeMSignal.refIxVTbl = " + to_string(VecWdbeVMSignalRefTbl::MDL) + " AND TblWdbeMSignal.refUref = "
+							+ to_string(top->ref) + " AND TblWdbeMSignal.sref = 'req" + Cmdbussref + "' AND TblWdbeMVectoritem.vecRefWdbeMVector = TblWdbeMSignal.refWdbeMVector AND TblWdbeMVectoritem.sref LIKE '"
+							+ cmdinv->sref + "To%' ORDER BY TblWdbeMVectoritem.vecNum ASC", false, vits);
 
 				for (unsigned int i = 0; i < vits.nodes.size(); i++) {
 					vit = vits.nodes[i];

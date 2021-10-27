@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1 plus MathML 2.0 plus SVG 1.1//EN" "http://www.w3.org/2002/04/xhtml-math-svg/xhtml-math-svg.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<head>
+		<title>Detail_bcont</title>
+		<script>
+			function handlePupRetChange() {parent.parent.window.handlePupChange(document,"PupRet","xs");};
+			function handleButReuViewClick() {parent.parent.window.handleButCrdopenClick("ButReuView");};
+			function handlePupSrtChange() {parent.parent.window.handlePupChange(document,"PupSrt","xs");};
+			function handleButSruViewClick() {parent.parent.window.handleButCrdopenClick("ButSruView");};
+			<!-- IP custScript - INSERT -->
+		</script>
+		<link href="../style/pnlDetail.css" rel="styleSheet" type="text/css"/>
+		<!-- IP custStyle - INSERT -->
+	</head>
+	<body marginwidth="0" marginheight="0">
+		<table cellspacing="0" border="0" cellpadding="0"><form action="">
+			<colgroup>
+				<col width="5"/>
+				<col width="155"/>
+				<col width="5"/>
+				<col width="78"/>
+				<col width="2"/>
+				<col width="38"/>
+				<col width="2"/>
+				<col width="78"/>
+				<col width="2"/>
+				<col width="1"/>
+				<col width="74"/>
+			</colgroup>
+			<tbody id="tbl">
+				<tr><td colspan="11" height="5"></td></tr>
+				<tr id="trReu" class="show">
+					<td height="25"></td>
+					<td align="right">
+						<span id="CptReu" class="cpt">CptReu</span>
+					</td>
+					<td></td>
+					<td colspan="2" align="left">
+						<select id="PupRet" class="pupxs" size="1" onchange="handlePupRetChange()"/>
+					</td>
+					<td colspan="3" align="left">
+						<input id="TxtReu" class="txfsnoed" type="text" readonly="readonly" value="TxtReu"/>
+					</td>
+					<td></td>
+					<td id="rdynReu" colspan="2" align="left">
+					</td>
+				</tr>
+				<tr id="trSru" class="show">
+					<td height="25"></td>
+					<td align="right">
+						<span id="CptSru" class="cpt">CptSru</span>
+					</td>
+					<td></td>
+					<td colspan="2" align="left">
+						<select id="PupSrt" class="pupxs" size="1" onchange="handlePupSrtChange()"/>
+					</td>
+					<td colspan="3" align="left">
+						<input id="TxtSru" class="txfsnoed" type="text" readonly="readonly" value="TxtSru"/>
+					</td>
+					<td></td>
+					<td id="rdynSru" colspan="2" align="left">
+					</td>
+				</tr>
+				<tr><td colspan="11" height="4"></td></tr>
+			</tbody>
+		</form></table>
+	</body>
+</html>

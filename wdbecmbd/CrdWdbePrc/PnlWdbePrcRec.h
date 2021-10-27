@@ -14,11 +14,12 @@
 
 // IP include.cust --- INSERT
 
-#include "PnlWdbePrcFsmFsm1NFsmstate.h"
-#include "PnlWdbePrcMge1NSignal.h"
-#include "PnlWdbePrcPrc1NVariable.h"
-#include "PnlWdbePrcKHdltype.h"
 #include "PnlWdbePrcDetail.h"
+#include "PnlWdbePrcKHdltype.h"
+#include "PnlWdbePrcRef1NSensitivity.h"
+#include "PnlWdbePrcRef1NVariable.h"
+#include "PnlWdbePrcMge1NSignal.h"
+#include "PnlWdbePrcFsmFsm1NFsmstate.h"
 
 #define VecVWdbePrcRecDo PnlWdbePrcRec::VecVDo
 
@@ -76,8 +77,8 @@ public:
 	class StatApp {
 
 	public:
-		static void writeJSON(Json::Value& sup, std::string difftag = "", const bool initdoneDetail = false, const bool initdoneKHdltype = false, const bool initdonePrc1NVariable = false, const bool initdoneMge1NSignal = false, const bool initdoneFsmFsm1NFsmstate = false);
-		static void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true, const bool initdoneDetail = false, const bool initdoneKHdltype = false, const bool initdonePrc1NVariable = false, const bool initdoneMge1NSignal = false, const bool initdoneFsmFsm1NFsmstate = false);
+		static void writeJSON(Json::Value& sup, std::string difftag = "", const bool initdoneDetail = false, const bool initdoneKHdltype = false, const bool initdoneRef1NSensitivity = false, const bool initdoneRef1NVariable = false, const bool initdoneMge1NSignal = false, const bool initdoneFsmFsm1NFsmstate = false);
+		static void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true, const bool initdoneDetail = false, const bool initdoneKHdltype = false, const bool initdoneRef1NSensitivity = false, const bool initdoneRef1NVariable = false, const bool initdoneMge1NSignal = false, const bool initdoneFsmFsm1NFsmstate = false);
 	};
 
 	/**
@@ -89,20 +90,22 @@ public:
 		static const Sbecore::uint IXWDBEVEXPSTATE = 1;
 		static const Sbecore::uint JREFDETAIL = 2;
 		static const Sbecore::uint JREFKHDLTYPE = 3;
-		static const Sbecore::uint JREFPRC1NVARIABLE = 4;
-		static const Sbecore::uint JREFMGE1NSIGNAL = 5;
-		static const Sbecore::uint JREFFSMFSM1NFSMSTATE = 6;
-		static const Sbecore::uint PNLFSMFSM1NFSMSTATEAVAIL = 7;
-		static const Sbecore::uint BUTREGULARIZEACTIVE = 8;
+		static const Sbecore::uint JREFREF1NSENSITIVITY = 4;
+		static const Sbecore::uint JREFREF1NVARIABLE = 5;
+		static const Sbecore::uint JREFMGE1NSIGNAL = 6;
+		static const Sbecore::uint JREFFSMFSM1NFSMSTATE = 7;
+		static const Sbecore::uint PNLFSMFSM1NFSMSTATEAVAIL = 8;
+		static const Sbecore::uint BUTREGULARIZEACTIVE = 9;
 
 	public:
-		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const Sbecore::ubigint jrefDetail = 0, const Sbecore::ubigint jrefKHdltype = 0, const Sbecore::ubigint jrefPrc1NVariable = 0, const Sbecore::ubigint jrefMge1NSignal = 0, const Sbecore::ubigint jrefFsmFsm1NFsmstate = 0, const bool pnlfsmfsm1nfsmstateAvail = false, const bool ButRegularizeActive = true);
+		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const Sbecore::ubigint jrefDetail = 0, const Sbecore::ubigint jrefKHdltype = 0, const Sbecore::ubigint jrefRef1NSensitivity = 0, const Sbecore::ubigint jrefRef1NVariable = 0, const Sbecore::ubigint jrefMge1NSignal = 0, const Sbecore::ubigint jrefFsmFsm1NFsmstate = 0, const bool pnlfsmfsm1nfsmstateAvail = false, const bool ButRegularizeActive = true);
 
 	public:
 		Sbecore::uint ixWdbeVExpstate;
 		Sbecore::ubigint jrefDetail;
 		Sbecore::ubigint jrefKHdltype;
-		Sbecore::ubigint jrefPrc1NVariable;
+		Sbecore::ubigint jrefRef1NSensitivity;
+		Sbecore::ubigint jrefRef1NVariable;
 		Sbecore::ubigint jrefMge1NSignal;
 		Sbecore::ubigint jrefFsmFsm1NFsmstate;
 		bool pnlfsmfsm1nfsmstateAvail;
@@ -186,11 +189,12 @@ public:
 	ContInf continf;
 	StatShr statshr;
 
-	PnlWdbePrcFsmFsm1NFsmstate* pnlfsmfsm1nfsmstate;
-	PnlWdbePrcMge1NSignal* pnlmge1nsignal;
-	PnlWdbePrcPrc1NVariable* pnlprc1nvariable;
-	PnlWdbePrcKHdltype* pnlkhdltype;
 	PnlWdbePrcDetail* pnldetail;
+	PnlWdbePrcKHdltype* pnlkhdltype;
+	PnlWdbePrcRef1NSensitivity* pnlref1nsensitivity;
+	PnlWdbePrcRef1NVariable* pnlref1nvariable;
+	PnlWdbePrcMge1NSignal* pnlmge1nsignal;
+	PnlWdbePrcFsmFsm1NFsmstate* pnlfsmfsm1nfsmstate;
 
 	WdbeMProcess recPrc;
 
@@ -226,10 +230,10 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbePrcUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
-	bool handleCallWdbeFsmUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
-	bool handleCallWdbePrc_mdlEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
 	bool handleCallWdbePrc_fsmEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbePrc_mdlEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeFsmUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbePrcUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 
 };
 

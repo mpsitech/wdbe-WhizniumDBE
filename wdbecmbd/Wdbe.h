@@ -10,10 +10,10 @@
 #ifndef WDBE_H
 #define WDBE_H
 
-#define WDBE_VERSION "1.1.5"
+#define WDBE_VERSION "1.1.17"
 #define WDBE_VERSION_MAJOR 1
 #define WDBE_VERSION_MINOR 1
-#define WDBE_VERSION_SUB 5
+#define WDBE_VERSION_SUB 17
 
 #include <sys/wait.h> // IP include.cust --- ILINE
 
@@ -110,7 +110,7 @@ namespace Wdbe {
 
 	void getPairsCmdbus(DbsWdbe* dbswdbe, ListWdbeMModule& mdls, std::set<std::pair<std::string,std::string> >& pairsCmdbus);
 
-	std::string getImbshort(WdbeMImbuf* imb);
+	bool getImbsrefs(DbsWdbe* dbswdbe, const Sbecore::ubigint refWdbeMModule, std::string& sref, std::string& srefrootMgmt, std::string& srefrootCor);
 
 	void analyzeCmd(DbsWdbe* dbswdbe, WdbeMCommand* cmd, WdbeMUnit* unt, WdbeMController* ctr, ListWdbeAMCommandInvpar& ipas, ListWdbeAMCommandRetpar& rpas, std::string& supsref, std::string& subsref);
 	void getCmdSupsubsref(WdbeMCommand* cmd, WdbeMUnit* unt, WdbeMController* ctr, std::string& supsref, std::string& subsref);
@@ -133,10 +133,12 @@ namespace Wdbe {
 
 	void setPrtWdt(DbsWdbe* dbswdbe, const Sbecore::ubigint refWdbeMModule, const std::string& sref, const Sbecore::usmallint Width);
 	void setPrtDfv(DbsWdbe* dbswdbe, const Sbecore::ubigint refWdbeMModule, const std::string& sref, const std::string& Defval);
+	void setPrtCpi(DbsWdbe* dbswdbe, const Sbecore::ubigint refWdbeMModule, const std::string& sref, const std::string& cpiSrefWdbeMPin);
 	void setPrtCpr(DbsWdbe* dbswdbe, const Sbecore::ubigint refWdbeMModule, const std::string& sref, const std::string& cprSrefWdbeMPort);
 	void setPrtCsi(DbsWdbe* dbswdbe, const Sbecore::ubigint refWdbeMModule, const std::string& sref, const std::string& csiSrefWdbeMSignal);
 
 	unsigned int getParlen(const Sbecore::uint ixWdbeVPartype, const Sbecore::utinyint Length);
+	unsigned int getMinmaxMax(const std::string& Minmax);
 	void getRange(const std::string& s, std::string& sref, bool& hasrng, Sbecore::utinyint& from, Sbecore::utinyint& to, std::string& ix);
 
 	void levelUnts(DbsWdbe* dbswdbe, const Sbecore::ubigint refWdbeMVersion, ListWdbeMUnit& unts, std::vector<unsigned int>& lvlsUnts);
@@ -146,10 +148,18 @@ namespace Wdbe {
 	void levelMdls(DbsWdbe* dbswdbe, const Sbecore::ubigint refWdbeMVersion, ListWdbeMModule& mdls, std::vector<unsigned int>& lvlsMdls, bool buNotTd = false, bool lvlunts = false, bool lvluntsBuNotTd = false);
 	void showLvlsMdls(DbsWdbe* dbswdbe, ListWdbeMModule& mdls, std::vector<unsigned int>& lvlsMdls);
 
+	Sbecore::uint getNextPrtMdlNum(DbsWdbe* dbswdbe, const Sbecore::ubigint refWdbeMModule);
+	Sbecore::uint getNextSigRefNum(DbsWdbe* dbswdbe, const Sbecore::uint refIxVTbl, const Sbecore::ubigint refUref);
+	Sbecore::uint getNextVarRefNum(DbsWdbe* dbswdbe, const Sbecore::uint refIxVTbl, const Sbecore::ubigint refUref);
+
+	void getHostifSizeRxtxbuf(DbsWdbe* dbswdbe, const Sbecore::ubigint refWdbeMUnit, unsigned int& sizeRxbuf, unsigned int& sizeTxbuf);
+
 	unsigned int valToWidth(unsigned long long val);
 
 	std::string binToHex(unsigned char bin);
 	unsigned char hexToBin(std::string hex);
+
+	void appendToTmpfile(const std::string& tmppath, std::string& logfile, std::fstream& logfi, const std::string& err);
 
 	int run(const std::string& cmd);
 	bool tgz(const std::string& infolder, const std::string& tgzfile, const bool verbose = false);
@@ -188,6 +198,7 @@ namespace StubWdbe {
 	std::string getStubGenStd(DbsWdbe* dbswdbe, const Sbecore::ubigint ref, const Sbecore::uint ixWdbeVLocale = VecWdbeVLocale::ENUS, const Sbecore::uint ixVNonetype = Sbecore::Stub::VecVNonetype::DASH, Sbecore::Stcch* stcch = NULL, Sbecore::stcchitemref_t* strefSub = NULL, const bool refresh = false);
 	std::string getStubGroup(DbsWdbe* dbswdbe, const Sbecore::ubigint ref, const Sbecore::uint ixWdbeVLocale = VecWdbeVLocale::ENUS, const Sbecore::uint ixVNonetype = Sbecore::Stub::VecVNonetype::DASH, Sbecore::Stcch* stcch = NULL, Sbecore::stcchitemref_t* strefSub = NULL, const bool refresh = false);
 	std::string getStubImbStd(DbsWdbe* dbswdbe, const Sbecore::ubigint ref, const Sbecore::uint ixWdbeVLocale = VecWdbeVLocale::ENUS, const Sbecore::uint ixVNonetype = Sbecore::Stub::VecVNonetype::DASH, Sbecore::Stcch* stcch = NULL, Sbecore::stcchitemref_t* strefSub = NULL, const bool refresh = false);
+	std::string getStubIntStd(DbsWdbe* dbswdbe, const Sbecore::ubigint ref, const Sbecore::uint ixWdbeVLocale = VecWdbeVLocale::ENUS, const Sbecore::uint ixVNonetype = Sbecore::Stub::VecVNonetype::DASH, Sbecore::Stcch* stcch = NULL, Sbecore::stcchitemref_t* strefSub = NULL, const bool refresh = false);
 	std::string getStubLibSref(DbsWdbe* dbswdbe, const Sbecore::ubigint ref, const Sbecore::uint ixWdbeVLocale = VecWdbeVLocale::ENUS, const Sbecore::uint ixVNonetype = Sbecore::Stub::VecVNonetype::DASH, Sbecore::Stcch* stcch = NULL, Sbecore::stcchitemref_t* strefSub = NULL, const bool refresh = false);
 	std::string getStubLibStd(DbsWdbe* dbswdbe, const Sbecore::ubigint ref, const Sbecore::uint ixWdbeVLocale = VecWdbeVLocale::ENUS, const Sbecore::uint ixVNonetype = Sbecore::Stub::VecVNonetype::DASH, Sbecore::Stcch* stcch = NULL, Sbecore::stcchitemref_t* strefSub = NULL, const bool refresh = false);
 	std::string getStubMchSref(DbsWdbe* dbswdbe, const Sbecore::ubigint ref, const Sbecore::uint ixWdbeVLocale = VecWdbeVLocale::ENUS, const Sbecore::uint ixVNonetype = Sbecore::Stub::VecVNonetype::DASH, Sbecore::Stcch* stcch = NULL, Sbecore::stcchitemref_t* strefSub = NULL, const bool refresh = false);
@@ -200,6 +211,7 @@ namespace StubWdbe {
 	std::string getStubOwner(DbsWdbe* dbswdbe, const Sbecore::ubigint ref, const Sbecore::uint ixWdbeVLocale = VecWdbeVLocale::ENUS, const Sbecore::uint ixVNonetype = Sbecore::Stub::VecVNonetype::DASH, Sbecore::Stcch* stcch = NULL, Sbecore::stcchitemref_t* strefSub = NULL, const bool refresh = false);
 	std::string getStubPinStd(DbsWdbe* dbswdbe, const Sbecore::ubigint ref, const Sbecore::uint ixWdbeVLocale = VecWdbeVLocale::ENUS, const Sbecore::uint ixVNonetype = Sbecore::Stub::VecVNonetype::DASH, Sbecore::Stcch* stcch = NULL, Sbecore::stcchitemref_t* strefSub = NULL, const bool refresh = false);
 	std::string getStubPphStd(DbsWdbe* dbswdbe, const Sbecore::ubigint ref, const Sbecore::uint ixWdbeVLocale = VecWdbeVLocale::ENUS, const Sbecore::uint ixVNonetype = Sbecore::Stub::VecVNonetype::DASH, Sbecore::Stcch* stcch = NULL, Sbecore::stcchitemref_t* strefSub = NULL, const bool refresh = false);
+	std::string getStubPplStd(DbsWdbe* dbswdbe, const Sbecore::ubigint ref, const Sbecore::uint ixWdbeVLocale = VecWdbeVLocale::ENUS, const Sbecore::uint ixVNonetype = Sbecore::Stub::VecVNonetype::DASH, Sbecore::Stcch* stcch = NULL, Sbecore::stcchitemref_t* strefSub = NULL, const bool refresh = false);
 	std::string getStubPrcStd(DbsWdbe* dbswdbe, const Sbecore::ubigint ref, const Sbecore::uint ixWdbeVLocale = VecWdbeVLocale::ENUS, const Sbecore::uint ixVNonetype = Sbecore::Stub::VecVNonetype::DASH, Sbecore::Stcch* stcch = NULL, Sbecore::stcchitemref_t* strefSub = NULL, const bool refresh = false);
 	std::string getStubPrjShort(DbsWdbe* dbswdbe, const Sbecore::ubigint ref, const Sbecore::uint ixWdbeVLocale = VecWdbeVLocale::ENUS, const Sbecore::uint ixVNonetype = Sbecore::Stub::VecVNonetype::DASH, Sbecore::Stcch* stcch = NULL, Sbecore::stcchitemref_t* strefSub = NULL, const bool refresh = false);
 	std::string getStubPrjStd(DbsWdbe* dbswdbe, const Sbecore::ubigint ref, const Sbecore::uint ixWdbeVLocale = VecWdbeVLocale::ENUS, const Sbecore::uint ixVNonetype = Sbecore::Stub::VecVNonetype::DASH, Sbecore::Stcch* stcch = NULL, Sbecore::stcchitemref_t* strefSub = NULL, const bool refresh = false);
@@ -208,11 +220,15 @@ namespace StubWdbe {
 	std::string getStubPrtStd(DbsWdbe* dbswdbe, const Sbecore::ubigint ref, const Sbecore::uint ixWdbeVLocale = VecWdbeVLocale::ENUS, const Sbecore::uint ixVNonetype = Sbecore::Stub::VecVNonetype::DASH, Sbecore::Stcch* stcch = NULL, Sbecore::stcchitemref_t* strefSub = NULL, const bool refresh = false);
 	std::string getStubRlsLong(DbsWdbe* dbswdbe, const Sbecore::ubigint ref, const Sbecore::uint ixWdbeVLocale = VecWdbeVLocale::ENUS, const Sbecore::uint ixVNonetype = Sbecore::Stub::VecVNonetype::DASH, Sbecore::Stcch* stcch = NULL, Sbecore::stcchitemref_t* strefSub = NULL, const bool refresh = false);
 	std::string getStubRlsStd(DbsWdbe* dbswdbe, const Sbecore::ubigint ref, const Sbecore::uint ixWdbeVLocale = VecWdbeVLocale::ENUS, const Sbecore::uint ixVNonetype = Sbecore::Stub::VecVNonetype::DASH, Sbecore::Stcch* stcch = NULL, Sbecore::stcchitemref_t* strefSub = NULL, const bool refresh = false);
+	std::string getStubSegHsref(DbsWdbe* dbswdbe, const Sbecore::ubigint ref, const Sbecore::uint ixWdbeVLocale = VecWdbeVLocale::ENUS, const Sbecore::uint ixVNonetype = Sbecore::Stub::VecVNonetype::DASH, Sbecore::Stcch* stcch = NULL, Sbecore::stcchitemref_t* strefSub = NULL, const bool refresh = false);
+	std::string getStubSegSref(DbsWdbe* dbswdbe, const Sbecore::ubigint ref, const Sbecore::uint ixWdbeVLocale = VecWdbeVLocale::ENUS, const Sbecore::uint ixVNonetype = Sbecore::Stub::VecVNonetype::DASH, Sbecore::Stcch* stcch = NULL, Sbecore::stcchitemref_t* strefSub = NULL, const bool refresh = false);
+	std::string getStubSegStd(DbsWdbe* dbswdbe, const Sbecore::ubigint ref, const Sbecore::uint ixWdbeVLocale = VecWdbeVLocale::ENUS, const Sbecore::uint ixVNonetype = Sbecore::Stub::VecVNonetype::DASH, Sbecore::Stcch* stcch = NULL, Sbecore::stcchitemref_t* strefSub = NULL, const bool refresh = false);
 	std::string getStubSesMenu(DbsWdbe* dbswdbe, const Sbecore::ubigint ref, const Sbecore::uint ixWdbeVLocale = VecWdbeVLocale::ENUS, const Sbecore::uint ixVNonetype = Sbecore::Stub::VecVNonetype::DASH, Sbecore::Stcch* stcch = NULL, Sbecore::stcchitemref_t* strefSub = NULL, const bool refresh = false);
 	std::string getStubSesStd(DbsWdbe* dbswdbe, const Sbecore::ubigint ref, const Sbecore::uint ixWdbeVLocale = VecWdbeVLocale::ENUS, const Sbecore::uint ixVNonetype = Sbecore::Stub::VecVNonetype::DASH, Sbecore::Stcch* stcch = NULL, Sbecore::stcchitemref_t* strefSub = NULL, const bool refresh = false);
 	std::string getStubSigSref(DbsWdbe* dbswdbe, const Sbecore::ubigint ref, const Sbecore::uint ixWdbeVLocale = VecWdbeVLocale::ENUS, const Sbecore::uint ixVNonetype = Sbecore::Stub::VecVNonetype::DASH, Sbecore::Stcch* stcch = NULL, Sbecore::stcchitemref_t* strefSub = NULL, const bool refresh = false);
 	std::string getStubSigStd(DbsWdbe* dbswdbe, const Sbecore::ubigint ref, const Sbecore::uint ixWdbeVLocale = VecWdbeVLocale::ENUS, const Sbecore::uint ixVNonetype = Sbecore::Stub::VecVNonetype::DASH, Sbecore::Stcch* stcch = NULL, Sbecore::stcchitemref_t* strefSub = NULL, const bool refresh = false);
 	std::string getStubSilStd(DbsWdbe* dbswdbe, const Sbecore::ubigint ref, const Sbecore::uint ixWdbeVLocale = VecWdbeVLocale::ENUS, const Sbecore::uint ixVNonetype = Sbecore::Stub::VecVNonetype::DASH, Sbecore::Stcch* stcch = NULL, Sbecore::stcchitemref_t* strefSub = NULL, const bool refresh = false);
+	std::string getStubSnsStd(DbsWdbe* dbswdbe, const Sbecore::ubigint ref, const Sbecore::uint ixWdbeVLocale = VecWdbeVLocale::ENUS, const Sbecore::uint ixVNonetype = Sbecore::Stub::VecVNonetype::DASH, Sbecore::Stcch* stcch = NULL, Sbecore::stcchitemref_t* strefSub = NULL, const bool refresh = false);
 	std::string getStubSysStd(DbsWdbe* dbswdbe, const Sbecore::ubigint ref, const Sbecore::uint ixWdbeVLocale = VecWdbeVLocale::ENUS, const Sbecore::uint ixVNonetype = Sbecore::Stub::VecVNonetype::DASH, Sbecore::Stcch* stcch = NULL, Sbecore::stcchitemref_t* strefSub = NULL, const bool refresh = false);
 	std::string getStubTrgSref(DbsWdbe* dbswdbe, const Sbecore::ubigint ref, const Sbecore::uint ixWdbeVLocale = VecWdbeVLocale::ENUS, const Sbecore::uint ixVNonetype = Sbecore::Stub::VecVNonetype::DASH, Sbecore::Stcch* stcch = NULL, Sbecore::stcchitemref_t* strefSub = NULL, const bool refresh = false);
 	std::string getStubTrgStd(DbsWdbe* dbswdbe, const Sbecore::ubigint ref, const Sbecore::uint ixWdbeVLocale = VecWdbeVLocale::ENUS, const Sbecore::uint ixVNonetype = Sbecore::Stub::VecVNonetype::DASH, Sbecore::Stcch* stcch = NULL, Sbecore::stcchitemref_t* strefSub = NULL, const bool refresh = false);

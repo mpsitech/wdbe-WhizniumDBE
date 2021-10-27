@@ -526,13 +526,13 @@ public:
 		void writeXML(const Sbecore::uint ixWdbeVLocale, xmlTextWriter* wr);
 	};
 
-	bool evalButDneActive(DbsWdbe* dbswdbe);
-	bool evalResDldActive(DbsWdbe* dbswdbe);
-	bool evalLfiDldActive(DbsWdbe* dbswdbe);
-	bool evalMrgButRunActive(DbsWdbe* dbswdbe);
-	bool evalMrgButStoActive(DbsWdbe* dbswdbe);
 	bool evalSrcUldActive(DbsWdbe* dbswdbe);
 	bool evalTrgUldActive(DbsWdbe* dbswdbe);
+	bool evalMrgButRunActive(DbsWdbe* dbswdbe);
+	bool evalMrgButStoActive(DbsWdbe* dbswdbe);
+	bool evalLfiDldActive(DbsWdbe* dbswdbe);
+	bool evalResDldActive(DbsWdbe* dbswdbe);
+	bool evalButDneActive(DbsWdbe* dbswdbe);
 
 public:
 	DlgWdbeUtlMrgip(XchgWdbe* xchg, DbsWdbe* dbswdbe, const Sbecore::ubigint jrefSup, const Sbecore::uint ixWdbeVLocale);
@@ -599,12 +599,12 @@ private:
 	void handleDpchAppDoMrgButStoClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
 	void handleDpchAppWdbeAlert(DbsWdbe* dbswdbe, DpchAppWdbeAlert* dpchappwdbealert, DpchEngWdbe** dpcheng);
 
-	void handleUploadInSgeSuldone(DbsWdbe* dbswdbe, const std::string& filename);
-	void handleUploadInSgeSupdone(DbsWdbe* dbswdbe, const std::string& filename);
 	void handleUploadInSgeIdle(DbsWdbe* dbswdbe, const std::string& filename);
+	void handleUploadInSgeSupdone(DbsWdbe* dbswdbe, const std::string& filename);
+	void handleUploadInSgeSuldone(DbsWdbe* dbswdbe, const std::string& filename);
 
-	std::string handleDownloadInSgeDone(DbsWdbe* dbswdbe);
 	std::string handleDownloadInSgeFail(DbsWdbe* dbswdbe);
+	std::string handleDownloadInSgeDone(DbsWdbe* dbswdbe);
 
 	void handleDpchRetWdbePrctreeMerge(DbsWdbe* dbswdbe, DpchRetWdbePrctreeMerge* dpchret);
 

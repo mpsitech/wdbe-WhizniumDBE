@@ -20,6 +20,8 @@ namespace WdbeWrmcuMdlfine {
 	// IP cust --- IBEGIN
 
   void writeMdlC(DbsWdbe* dbswdbe, std::fstream& outfile, WdbeMModule* mdl);
+
+	void wrSyncrst(DbsWdbe* dbswdbe, std::fstream& outfile, WdbeMModule* mdl);
 	// IP cust --- IEND
 };
 

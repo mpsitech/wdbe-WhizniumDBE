@@ -129,8 +129,8 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbePinAparMod_pinEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 	bool handleCallWdbeStubChgFromSelf(DbsWdbe* dbswdbe);
+	bool handleCallWdbePinAparMod_pinEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 
 };
 

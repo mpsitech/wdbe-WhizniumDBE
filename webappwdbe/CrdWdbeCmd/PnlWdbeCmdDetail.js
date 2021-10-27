@@ -98,10 +98,16 @@ function refreshBD(bNotD) {
 	var PupRtyActive = (retrieveSi(srcdoc, "StatShrWdbeCmdDetail", "PupRtyActive") == "true");
 
 	var TxtIvrActive = (retrieveSi(srcdoc, "StatShrWdbeCmdDetail", "TxtIvrActive") == "true");
+	var ButIvrViewAvail = (retrieveSi(srcdoc, "StatShrWdbeCmdDetail", "ButIvrViewAvail") == "true");
+	var ButIvrViewActive = (retrieveSi(srcdoc, "StatShrWdbeCmdDetail", "ButIvrViewActive") == "true");
 
 	var TxtRvrActive = (retrieveSi(srcdoc, "StatShrWdbeCmdDetail", "TxtRvrActive") == "true");
+	var ButRvrViewAvail = (retrieveSi(srcdoc, "StatShrWdbeCmdDetail", "ButRvrViewAvail") == "true");
+	var ButRvrViewActive = (retrieveSi(srcdoc, "StatShrWdbeCmdDetail", "ButRvrViewActive") == "true");
 
 	var TxtRerActive = (retrieveSi(srcdoc, "StatShrWdbeCmdDetail", "TxtRerActive") == "true");
+	var ButRerViewAvail = (retrieveSi(srcdoc, "StatShrWdbeCmdDetail", "ButRerViewAvail") == "true");
+	var ButRerViewActive = (retrieveSi(srcdoc, "StatShrWdbeCmdDetail", "ButRerViewActive") == "true");
 
 	var TxfCmtActive = (retrieveSi(srcdoc, "StatShrWdbeCmdDetail", "TxfCmtActive") == "true");
 
@@ -134,11 +140,56 @@ function refreshBD(bNotD) {
 
 	contcontdoc.getElementById("PupRty").value = retrieveCi(srcdoc, "ContIacWdbeCmdDetail", "numFPupRty");
 
+	if ((ButIvrViewAvail == !contcontdoc.getElementById("ButIvrView"))) {
+		mytd = contcontdoc.getElementById("rdynIvr");
+		clearElem(mytd);
+
+		first = true;
+
+		if (ButIvrViewAvail) {
+			if (first) first = false;
+			else mytd.appendChild(contcontdoc.createTextNode("\u00a0"));
+			mytd.appendChild(makeImgBut(contcontdoc, "ButIvrView", "icon/view"));
+		};
+	};
+
 	refreshTxt(contcontdoc, "TxtIvr", retrieveCi(srcdoc, "ContInfWdbeCmdDetail", "TxtIvr"));
+
+	if (ButIvrViewAvail) refreshButicon(contcontdoc, "ButIvrView", "icon/view", ButIvrViewActive, false);
+
+	if ((ButRvrViewAvail == !contcontdoc.getElementById("ButRvrView"))) {
+		mytd = contcontdoc.getElementById("rdynRvr");
+		clearElem(mytd);
+
+		first = true;
+
+		if (ButRvrViewAvail) {
+			if (first) first = false;
+			else mytd.appendChild(contcontdoc.createTextNode("\u00a0"));
+			mytd.appendChild(makeImgBut(contcontdoc, "ButRvrView", "icon/view"));
+		};
+	};
 
 	refreshTxt(contcontdoc, "TxtRvr", retrieveCi(srcdoc, "ContInfWdbeCmdDetail", "TxtRvr"));
 
+	if (ButRvrViewAvail) refreshButicon(contcontdoc, "ButRvrView", "icon/view", ButRvrViewActive, false);
+
+	if ((ButRerViewAvail == !contcontdoc.getElementById("ButRerView"))) {
+		mytd = contcontdoc.getElementById("rdynRer");
+		clearElem(mytd);
+
+		first = true;
+
+		if (ButRerViewAvail) {
+			if (first) first = false;
+			else mytd.appendChild(contcontdoc.createTextNode("\u00a0"));
+			mytd.appendChild(makeImgBut(contcontdoc, "ButRerView", "icon/view"));
+		};
+	};
+
 	refreshTxt(contcontdoc, "TxtRer", retrieveCi(srcdoc, "ContInfWdbeCmdDetail", "TxtRer"));
+
+	if (ButRerViewAvail) refreshButicon(contcontdoc, "ButRerView", "icon/view", ButRerViewActive, false);
 
 	refreshTxft(contcontdoc, "TxfCmt", retrieveCi(srcdoc, "ContIacWdbeCmdDetail", "TxfCmt"), TxfCmtActive, false, true);
 

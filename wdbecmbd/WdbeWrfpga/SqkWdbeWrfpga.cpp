@@ -45,7 +45,7 @@ string SqkWdbeWrfpga::getSquawkEhostif(
 			DbsWdbe* dbswdbe
 			, DpchInvWdbeWrfpgaEhostif* dpchinv
 		) {
-	// example: "write template-specific VHDL code for module 'zedb-ehostif (easy host interface)'"
+	// example: "write type-specific VHDL code for module 'zedb-ehostif (easy host interface)'"
 	return(""); // IP getSquawkEhostif --- LINE
 };
 
@@ -53,7 +53,7 @@ string SqkWdbeWrfpga::getSquawkHostif(
 			DbsWdbe* dbswdbe
 			, DpchInvWdbeWrfpgaHostif* dpchinv
 		) {
-	// example: "write template-specific VHDL code for module 'zedb-hostif (host interface)'"
+	// example: "write type-specific VHDL code for module 'zedb-hostif (host interface)'"
 	return(""); // IP getSquawkHostif --- LINE
 };
 
@@ -79,4 +79,12 @@ string SqkWdbeWrfpga::getSquawkMdlraw(
 		) {
 	// example: "write raw VHDL code for module 'icm2 (top_v1_0 top)'"
 	return(""); // IP getSquawkMdlraw --- LINE
+};
+
+string SqkWdbeWrfpga::getSquawkTop(
+			DbsWdbe* dbswdbe
+			, DpchInvWdbeWrfpgaTop* dpchinv
+		) {
+	// example: "write type-specific VHDL code for module 'zedb (top)'"
+	return(""); // IP getSquawkTop --- LINE
 };

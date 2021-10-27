@@ -16,19 +16,19 @@ public class WdbeQFamList {
 	
 	public WdbeQFamList(
 				int jnum
-				, String srefKVendor
-				, String titSrefKVendor
+				, String srefWdbeKVendor
+				, String titSrefWdbeKVendor
 				, String Title
 			) {
 		this.jnum = jnum;
-		this.srefKVendor = srefKVendor;
-		this.titSrefKVendor = titSrefKVendor;
+		this.srefWdbeKVendor = srefWdbeKVendor;
+		this.titSrefWdbeKVendor = titSrefWdbeKVendor;
 		this.Title = Title;
 	};
 
 	public int jnum;
-	public String srefKVendor;
-	public String titSrefKVendor;
+	public String srefWdbeKVendor;
+	public String titSrefWdbeKVendor;
 	public String Title;
 	
 	public boolean readXML(
@@ -39,8 +39,8 @@ public class WdbeQFamList {
 		if (addbasetag) basexpath = Xmlio.checkUclcXPaths(doc, basexpath, "WdbeQFamList");
 
 		if (Xmlio.checkXPath(doc, basexpath)) {
-			srefKVendor = Xmlio.extractStringUclc(doc, basexpath, "srefKVendor", "vnd", null, 0);
-			titSrefKVendor = Xmlio.extractStringUclc(doc, basexpath, "titSrefKVendor", "vnd2", null, 0);
+			srefWdbeKVendor = Xmlio.extractStringUclc(doc, basexpath, "srefWdbeKVendor", "vnd", null, 0);
+			titSrefWdbeKVendor = Xmlio.extractStringUclc(doc, basexpath, "titSrefWdbeKVendor", "vnd2", null, 0);
 			Title = Xmlio.extractStringUclc(doc, basexpath, "Title", "tit", null, 0);
 			
 			return true;

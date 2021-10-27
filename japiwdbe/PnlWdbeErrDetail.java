@@ -21,6 +21,7 @@ public class PnlWdbeErrDetail {
 
 		public static final int BUTSAVECLICK = 1;
 		public static final int BUTREUVIEWCLICK = 2;
+		public static final int BUTTRAVIEWCLICK = 3;
 
 		public static int getIx(
 					String sref
@@ -29,6 +30,7 @@ public class PnlWdbeErrDetail {
 
 			if (s.equals("butsaveclick")) return BUTSAVECLICK;
 			if (s.equals("butreuviewclick")) return BUTREUVIEWCLICK;
+			if (s.equals("buttraviewclick")) return BUTTRAVIEWCLICK;
 
 			return 0;
 		};
@@ -38,6 +40,7 @@ public class PnlWdbeErrDetail {
 				) {
 			if (ix == BUTSAVECLICK) return("ButSaveClick");
 			if (ix == BUTREUVIEWCLICK) return("ButReuViewClick");
+			if (ix == BUTTRAVIEWCLICK) return("ButTraViewClick");
 
 			return "";
 		};
@@ -298,7 +301,9 @@ public class PnlWdbeErrDetail {
 		public static final int BUTREUVIEWAVAIL = 6;
 		public static final int BUTREUVIEWACTIVE = 7;
 		public static final int TXTTRAACTIVE = 8;
-		public static final int TXFCMTACTIVE = 9;
+		public static final int BUTTRAVIEWAVAIL = 9;
+		public static final int BUTTRAVIEWACTIVE = 10;
+		public static final int TXFCMTACTIVE = 11;
 
 		public StatShr(
 					boolean ButSaveAvail
@@ -309,6 +314,8 @@ public class PnlWdbeErrDetail {
 					, boolean ButReuViewAvail
 					, boolean ButReuViewActive
 					, boolean TxtTraActive
+					, boolean ButTraViewAvail
+					, boolean ButTraViewActive
 					, boolean TxfCmtActive
 				) {
 			this.ButSaveAvail = ButSaveAvail;
@@ -319,9 +326,11 @@ public class PnlWdbeErrDetail {
 			this.ButReuViewAvail = ButReuViewAvail;
 			this.ButReuViewActive = ButReuViewActive;
 			this.TxtTraActive = TxtTraActive;
+			this.ButTraViewAvail = ButTraViewAvail;
+			this.ButTraViewActive = ButTraViewActive;
 			this.TxfCmtActive = TxfCmtActive;
 
-			mask = new HashSet<Integer>(Arrays.asList(BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXFFSRACTIVE, TXTREUACTIVE, BUTREUVIEWAVAIL, BUTREUVIEWACTIVE, TXTTRAACTIVE, TXFCMTACTIVE));
+			mask = new HashSet<Integer>(Arrays.asList(BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXFFSRACTIVE, TXTREUACTIVE, BUTREUVIEWAVAIL, BUTREUVIEWACTIVE, TXTTRAACTIVE, BUTTRAVIEWAVAIL, BUTTRAVIEWACTIVE, TXFCMTACTIVE));
 		};
 
 		public boolean ButSaveAvail;
@@ -332,6 +341,8 @@ public class PnlWdbeErrDetail {
 		public boolean ButReuViewAvail;
 		public boolean ButReuViewActive;
 		public boolean TxtTraActive;
+		public boolean ButTraViewAvail;
+		public boolean ButTraViewActive;
 		public boolean TxfCmtActive;
 
 		public boolean readXML(
@@ -355,6 +366,8 @@ public class PnlWdbeErrDetail {
 				ButReuViewAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButReuViewAvail", mask, BUTREUVIEWAVAIL);
 				ButReuViewActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButReuViewActive", mask, BUTREUVIEWACTIVE);
 				TxtTraActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxtTraActive", mask, TXTTRAACTIVE);
+				ButTraViewAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButTraViewAvail", mask, BUTTRAVIEWAVAIL);
+				ButTraViewActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButTraViewActive", mask, BUTTRAVIEWACTIVE);
 				TxfCmtActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxfCmtActive", mask, TXFCMTACTIVE);
 
 				return true;
@@ -376,6 +389,8 @@ public class PnlWdbeErrDetail {
 			if (ButReuViewAvail == comp.ButReuViewAvail) items.add(BUTREUVIEWAVAIL);
 			if (ButReuViewActive == comp.ButReuViewActive) items.add(BUTREUVIEWACTIVE);
 			if (TxtTraActive == comp.TxtTraActive) items.add(TXTTRAACTIVE);
+			if (ButTraViewAvail == comp.ButTraViewAvail) items.add(BUTTRAVIEWAVAIL);
+			if (ButTraViewActive == comp.ButTraViewActive) items.add(BUTTRAVIEWACTIVE);
 			if (TxfCmtActive == comp.TxfCmtActive) items.add(TXFCMTACTIVE);
 
 			return(items);
@@ -389,7 +404,7 @@ public class PnlWdbeErrDetail {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXFFSRACTIVE, TXTREUACTIVE, BUTREUVIEWAVAIL, BUTREUVIEWACTIVE, TXTTRAACTIVE, TXFCMTACTIVE));
+			diffitems = new HashSet<Integer>(Arrays.asList(BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXFFSRACTIVE, TXTREUACTIVE, BUTREUVIEWAVAIL, BUTREUVIEWACTIVE, TXTTRAACTIVE, BUTTRAVIEWAVAIL, BUTTRAVIEWACTIVE, TXFCMTACTIVE));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);
@@ -621,7 +636,7 @@ public class PnlWdbeErrDetail {
 			continf = new ContInf("", "", "");
 			feedFPupRet = new Feed("FeedFPupRet");
 			statapp = new StatApp(0);
-			statshr = new StatShr(false, false, false, false, false, false, false, false, false);
+			statshr = new StatShr(false, false, false, false, false, false, false, false, false, false, false);
 			tag = new Tag("", "", "", "", "", "");
 		};
 
@@ -670,7 +685,7 @@ public class PnlWdbeErrDetail {
 				continf = new ContInf("", "", "");
 				feedFPupRet = new Feed("FeedFPupRet");
 				statapp = new StatApp(0);
-				statshr = new StatShr(false, false, false, false, false, false, false, false, false);
+				statshr = new StatShr(false, false, false, false, false, false, false, false, false, false, false);
 				tag = new Tag("", "", "", "", "", "");
 			};
 		};

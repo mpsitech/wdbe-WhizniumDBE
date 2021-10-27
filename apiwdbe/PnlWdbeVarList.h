@@ -125,19 +125,21 @@ namespace PnlWdbeVarList {
 
 	public:
 		static const Sbecore::uint TCOSRFWIDTH = 1;
-		static const Sbecore::uint TCOPRCWIDTH = 2;
-		static const Sbecore::uint TCOCONWIDTH = 3;
-		static const Sbecore::uint TCOFALWIDTH = 4;
-		static const Sbecore::uint TCOHTYWIDTH = 5;
-		static const Sbecore::uint TCOWIDWIDTH = 6;
-		static const Sbecore::uint TCOMMXWIDTH = 7;
+		static const Sbecore::uint TCORETWIDTH = 2;
+		static const Sbecore::uint TCOREUWIDTH = 3;
+		static const Sbecore::uint TCOCONWIDTH = 4;
+		static const Sbecore::uint TCOFALWIDTH = 5;
+		static const Sbecore::uint TCOHTYWIDTH = 6;
+		static const Sbecore::uint TCOWIDWIDTH = 7;
+		static const Sbecore::uint TCOMMXWIDTH = 8;
 
 	public:
-		StgIac(const Sbecore::uint TcoSrfWidth = 100, const Sbecore::uint TcoPrcWidth = 100, const Sbecore::uint TcoConWidth = 100, const Sbecore::uint TcoFalWidth = 100, const Sbecore::uint TcoHtyWidth = 100, const Sbecore::uint TcoWidWidth = 100, const Sbecore::uint TcoMmxWidth = 100);
+		StgIac(const Sbecore::uint TcoSrfWidth = 100, const Sbecore::uint TcoRetWidth = 100, const Sbecore::uint TcoReuWidth = 100, const Sbecore::uint TcoConWidth = 100, const Sbecore::uint TcoFalWidth = 100, const Sbecore::uint TcoHtyWidth = 100, const Sbecore::uint TcoWidWidth = 100, const Sbecore::uint TcoMmxWidth = 100);
 
 	public:
 		Sbecore::uint TcoSrfWidth;
-		Sbecore::uint TcoPrcWidth;
+		Sbecore::uint TcoRetWidth;
+		Sbecore::uint TcoReuWidth;
 		Sbecore::uint TcoConWidth;
 		Sbecore::uint TcoFalWidth;
 		Sbecore::uint TcoHtyWidth;
@@ -165,15 +167,16 @@ namespace PnlWdbeVarList {
 		static const Sbecore::uint TXTSHOWING1 = 6;
 		static const Sbecore::uint TXTSHOWING2 = 7;
 		static const Sbecore::uint TCOSRF = 8;
-		static const Sbecore::uint TCOPRC = 9;
-		static const Sbecore::uint TCOCON = 10;
-		static const Sbecore::uint TCOFAL = 11;
-		static const Sbecore::uint TCOHTY = 12;
-		static const Sbecore::uint TCOWID = 13;
-		static const Sbecore::uint TCOMMX = 14;
+		static const Sbecore::uint TCORET = 9;
+		static const Sbecore::uint TCOREU = 10;
+		static const Sbecore::uint TCOCON = 11;
+		static const Sbecore::uint TCOFAL = 12;
+		static const Sbecore::uint TCOHTY = 13;
+		static const Sbecore::uint TCOWID = 14;
+		static const Sbecore::uint TCOMMX = 15;
 
 	public:
-		Tag(const std::string& Cpt = "", const std::string& TxtFor = "", const std::string& TxtRecord1 = "", const std::string& TxtRecord2 = "", const std::string& Trs = "", const std::string& TxtShowing1 = "", const std::string& TxtShowing2 = "", const std::string& TcoSrf = "", const std::string& TcoPrc = "", const std::string& TcoCon = "", const std::string& TcoFal = "", const std::string& TcoHty = "", const std::string& TcoWid = "", const std::string& TcoMmx = "");
+		Tag(const std::string& Cpt = "", const std::string& TxtFor = "", const std::string& TxtRecord1 = "", const std::string& TxtRecord2 = "", const std::string& Trs = "", const std::string& TxtShowing1 = "", const std::string& TxtShowing2 = "", const std::string& TcoSrf = "", const std::string& TcoRet = "", const std::string& TcoReu = "", const std::string& TcoCon = "", const std::string& TcoFal = "", const std::string& TcoHty = "", const std::string& TcoWid = "", const std::string& TcoMmx = "");
 
 	public:
 		std::string Cpt;
@@ -184,7 +187,8 @@ namespace PnlWdbeVarList {
 		std::string TxtShowing1;
 		std::string TxtShowing2;
 		std::string TcoSrf;
-		std::string TcoPrc;
+		std::string TcoRet;
+		std::string TcoReu;
 		std::string TcoCon;
 		std::string TcoFal;
 		std::string TcoHty;

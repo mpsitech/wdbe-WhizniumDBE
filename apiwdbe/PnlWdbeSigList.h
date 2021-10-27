@@ -126,22 +126,24 @@ namespace PnlWdbeSigList {
 	public:
 		static const Sbecore::uint TCOSRFWIDTH = 1;
 		static const Sbecore::uint TCOTYPWIDTH = 2;
-		static const Sbecore::uint TCOMDLWIDTH = 3;
-		static const Sbecore::uint TCOMGTWIDTH = 4;
-		static const Sbecore::uint TCOMGUWIDTH = 5;
-		static const Sbecore::uint TCOVECWIDTH = 6;
-		static const Sbecore::uint TCOCONWIDTH = 7;
-		static const Sbecore::uint TCOHTYWIDTH = 8;
-		static const Sbecore::uint TCOWIDWIDTH = 9;
-		static const Sbecore::uint TCOMMXWIDTH = 10;
+		static const Sbecore::uint TCORETWIDTH = 3;
+		static const Sbecore::uint TCOREUWIDTH = 4;
+		static const Sbecore::uint TCOMGTWIDTH = 5;
+		static const Sbecore::uint TCOMGUWIDTH = 6;
+		static const Sbecore::uint TCOVECWIDTH = 7;
+		static const Sbecore::uint TCOCONWIDTH = 8;
+		static const Sbecore::uint TCOHTYWIDTH = 9;
+		static const Sbecore::uint TCOWIDWIDTH = 10;
+		static const Sbecore::uint TCOMMXWIDTH = 11;
 
 	public:
-		StgIac(const Sbecore::uint TcoSrfWidth = 100, const Sbecore::uint TcoTypWidth = 100, const Sbecore::uint TcoMdlWidth = 100, const Sbecore::uint TcoMgtWidth = 100, const Sbecore::uint TcoMguWidth = 100, const Sbecore::uint TcoVecWidth = 100, const Sbecore::uint TcoConWidth = 100, const Sbecore::uint TcoHtyWidth = 100, const Sbecore::uint TcoWidWidth = 100, const Sbecore::uint TcoMmxWidth = 100);
+		StgIac(const Sbecore::uint TcoSrfWidth = 100, const Sbecore::uint TcoTypWidth = 100, const Sbecore::uint TcoRetWidth = 100, const Sbecore::uint TcoReuWidth = 100, const Sbecore::uint TcoMgtWidth = 100, const Sbecore::uint TcoMguWidth = 100, const Sbecore::uint TcoVecWidth = 100, const Sbecore::uint TcoConWidth = 100, const Sbecore::uint TcoHtyWidth = 100, const Sbecore::uint TcoWidWidth = 100, const Sbecore::uint TcoMmxWidth = 100);
 
 	public:
 		Sbecore::uint TcoSrfWidth;
 		Sbecore::uint TcoTypWidth;
-		Sbecore::uint TcoMdlWidth;
+		Sbecore::uint TcoRetWidth;
+		Sbecore::uint TcoReuWidth;
 		Sbecore::uint TcoMgtWidth;
 		Sbecore::uint TcoMguWidth;
 		Sbecore::uint TcoVecWidth;
@@ -172,17 +174,18 @@ namespace PnlWdbeSigList {
 		static const Sbecore::uint TXTSHOWING2 = 7;
 		static const Sbecore::uint TCOSRF = 8;
 		static const Sbecore::uint TCOTYP = 9;
-		static const Sbecore::uint TCOMDL = 10;
-		static const Sbecore::uint TCOMGT = 11;
-		static const Sbecore::uint TCOMGU = 12;
-		static const Sbecore::uint TCOVEC = 13;
-		static const Sbecore::uint TCOCON = 14;
-		static const Sbecore::uint TCOHTY = 15;
-		static const Sbecore::uint TCOWID = 16;
-		static const Sbecore::uint TCOMMX = 17;
+		static const Sbecore::uint TCORET = 10;
+		static const Sbecore::uint TCOREU = 11;
+		static const Sbecore::uint TCOMGT = 12;
+		static const Sbecore::uint TCOMGU = 13;
+		static const Sbecore::uint TCOVEC = 14;
+		static const Sbecore::uint TCOCON = 15;
+		static const Sbecore::uint TCOHTY = 16;
+		static const Sbecore::uint TCOWID = 17;
+		static const Sbecore::uint TCOMMX = 18;
 
 	public:
-		Tag(const std::string& Cpt = "", const std::string& TxtFor = "", const std::string& TxtRecord1 = "", const std::string& TxtRecord2 = "", const std::string& Trs = "", const std::string& TxtShowing1 = "", const std::string& TxtShowing2 = "", const std::string& TcoSrf = "", const std::string& TcoTyp = "", const std::string& TcoMdl = "", const std::string& TcoMgt = "", const std::string& TcoMgu = "", const std::string& TcoVec = "", const std::string& TcoCon = "", const std::string& TcoHty = "", const std::string& TcoWid = "", const std::string& TcoMmx = "");
+		Tag(const std::string& Cpt = "", const std::string& TxtFor = "", const std::string& TxtRecord1 = "", const std::string& TxtRecord2 = "", const std::string& Trs = "", const std::string& TxtShowing1 = "", const std::string& TxtShowing2 = "", const std::string& TcoSrf = "", const std::string& TcoTyp = "", const std::string& TcoRet = "", const std::string& TcoReu = "", const std::string& TcoMgt = "", const std::string& TcoMgu = "", const std::string& TcoVec = "", const std::string& TcoCon = "", const std::string& TcoHty = "", const std::string& TcoWid = "", const std::string& TcoMmx = "");
 
 	public:
 		std::string Cpt;
@@ -194,7 +197,8 @@ namespace PnlWdbeSigList {
 		std::string TxtShowing2;
 		std::string TcoSrf;
 		std::string TcoTyp;
-		std::string TcoMdl;
+		std::string TcoRet;
+		std::string TcoReu;
 		std::string TcoMgt;
 		std::string TcoMgu;
 		std::string TcoVec;

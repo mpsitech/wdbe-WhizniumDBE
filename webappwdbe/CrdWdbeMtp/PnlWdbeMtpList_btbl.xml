@@ -23,15 +23,17 @@
 		<table cellspacing="0" border="0" cellpadding="0"><form action="">
 			<colgroup id="cols">
 				<col width="20"></col>
-				<col width="300"></col>
-				<col width="300"></col>
-				<col width="301"></col>
+				<col width="225"></col>
+				<col width="225"></col>
+				<col width="225"></col>
+				<col width="226"></col>
 				<col width="25"></col>
 			</colgroup>
 			<tbody id="tbl">
 				<tr id="hdr">
 					<td height="20" class="col" id="rhcl"><img width="10" height="10" alt="rhcl" src="../icon/void.png"></img></td>
 				<td class="col" id="TcoSrf">TcoSrf</td>
+				<td class="col" id="TcoVnd">TcoVnd</td>
 				<td class="col" id="TcoTyp">TcoTyp</td>
 				<td class="col" id="TcoSrr">TcoSrr</td>
 					<td class="nonsel" rowspan="11" id="tdTsb">sb</td>

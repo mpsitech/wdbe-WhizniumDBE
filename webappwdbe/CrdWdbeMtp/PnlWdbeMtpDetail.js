@@ -52,6 +52,7 @@ function initBD(bNotD) {
 
 	// IP initBD --- BEGIN
 	initCpt(contcontdoc, "CptSrf", retrieveTi(srcdoc, "TagWdbeMtpDetail", "CptSrf"));
+	initCpt(contcontdoc, "CptVnd", retrieveTi(srcdoc, "TagWdbeMtpDetail", "CptVnd"));
 	initCpt(contcontdoc, "CptTyp", retrieveTi(srcdoc, "TagWdbeMtpDetail", "CptTyp"));
 	refreshPup(contcontdoc, srcdoc, "PupTyp", "", "FeedFPupTyp", retrieveCi(srcdoc, "ContIacWdbeMtpDetail", "numFPupTyp"), retrieveSi(srcdoc, "StatShrWdbeMtpDetail", "PupTypActive"), false);
 	initCpt(contcontdoc, "CptSrr", retrieveTi(srcdoc, "TagWdbeMtpDetail", "CptSrr"));
@@ -79,10 +80,15 @@ function refreshA() {
 function refreshBD(bNotD) {
 	if (!contcontdoc) return;
 
-	var height = 167; // full cont height
+	var height = 192; // full cont height
 
 	// IP refreshBD.vars --- BEGIN
 	var TxtSrfActive = (retrieveSi(srcdoc, "StatShrWdbeMtpDetail", "TxtSrfActive") == "true");
+
+	var PupVndAlt = (retrieveSi(srcdoc, "StatAppWdbeMtpDetail", "PupVndAlt") == "true");
+	var TxfVndValid = (retrieveSi(srcdoc, "StatShrWdbeMtpDetail", "TxfVndValid") == "true");
+	var PupVndActive = (retrieveSi(srcdoc, "StatShrWdbeMtpDetail", "PupVndActive") == "true");
+	var ButVndEditAvail = (retrieveSi(srcdoc, "StatShrWdbeMtpDetail", "ButVndEditAvail") == "true");
 
 	var PupTypActive = (retrieveSi(srcdoc, "StatShrWdbeMtpDetail", "PupTypActive") == "true");
 
@@ -91,10 +97,35 @@ function refreshBD(bNotD) {
 	var TxfCmtActive = (retrieveSi(srcdoc, "StatShrWdbeMtpDetail", "TxfCmtActive") == "true");
 
 	var ButSaveActive = (retrieveSi(srcdoc, "StatShrWdbeMtpDetail", "ButSaveActive") == "true");
+	var mytd, first;
 	// IP refreshBD.vars --- END
 
 	// IP refreshBD --- BEGIN
 	refreshTxt(contcontdoc, "TxtSrf", retrieveCi(srcdoc, "ContInfWdbeMtpDetail", "TxtSrf"));
+
+	if ( (PupVndAlt == !contcontdoc.getElementById("TxfVnd")) || (!PupVndAlt == !contcontdoc.getElementById("PupVnd")) ) {
+		mytd = contcontdoc.getElementById("dynVnd");
+		clearElem(mytd);
+
+		if (PupVndAlt) mytd.appendChild(makeInputTxf(contcontdoc, "TxfVnd", ""));
+		else mytd.appendChild(makeSelectPup(contcontdoc, "PupVnd", ""));
+	};
+
+	if (PupVndAlt) refreshTxf(contcontdoc, "TxfVnd", "", retrieveCi(srcdoc, "ContIacWdbeMtpDetail", "TxfVnd"), PupVndActive, false, TxfVndValid);
+	else refreshPup(contcontdoc, srcdoc, "PupVnd", "", "FeedFPupVnd", retrieveCi(srcdoc, "ContIacWdbeMtpDetail", "numFPupVnd"), true, false);
+
+	if ((ButVndEditAvail == !contcontdoc.getElementById("ButVndEdit"))) {
+		mytd = contcontdoc.getElementById("rdynVnd");
+		clearElem(mytd);
+
+		first = true;
+
+		if (ButVndEditAvail) {
+			if (first) first = false;
+			else mytd.appendChild(contcontdoc.createTextNode("\u00a0"));
+			mytd.appendChild(makeImgBut(contcontdoc, "ButVndEdit", "icon/edit"));
+		};
+	};
 
 	contcontdoc.getElementById("PupTyp").value = retrieveCi(srcdoc, "ContIacWdbeMtpDetail", "numFPupTyp");
 
@@ -149,11 +180,25 @@ function handleButRegularizeClick() {
 
 // --- generalized event handlers for app controls
 
+function handleButToggleClick(basectlsref) {
+	var alt;
+
+	if (retrieveSi(srcdoc, "StatAppWdbeMtpDetail", basectlsref + "Alt") == "true") alt = "false"; else alt = "true";
+	setSi(srcdoc, "StatAppWdbeMtpDetail", basectlsref + "Alt", alt);
+
+	refresh();
+};
+
 // --- generalized event handlers for shared controls
 
 function handleButClick(ctlsref) {
 	var str = serializeDpchAppDo(srcdoc, "DpchAppWdbeMtpDetailDo", scrJref, ctlsref + "Click");
 	sendReq(str, doc, handleDpchAppDataDoReply);
+};
+
+function handleButDlgopenClick(ctlsref) {
+	var str = serializeDpchAppDo(srcdoc, "DpchAppWdbeMtpDetailDo", scrJref, ctlsref + "Click");
+	sendReq(str, doc, handleDpchAppDoDlgopenReply);
 };
 
 function handlePupChange(_doc, ctlsref, size) {
@@ -220,6 +265,7 @@ function mergeDpchEngData(dom) {
 	if (updateSrcblock(dom, "DpchEngWdbeMtpDetailData", "ContIacWdbeMtpDetail", srcdoc)) mask.push("contiac");
 	if (updateSrcblock(dom, "DpchEngWdbeMtpDetailData", "ContInfWdbeMtpDetail", srcdoc)) mask.push("continf");
 	if (updateSrcblock(dom, "DpchEngWdbeMtpDetailData", "FeedFPupTyp", srcdoc)) mask.push("feedFPupTyp");
+	if (updateSrcblock(dom, "DpchEngWdbeMtpDetailData", "FeedFPupVnd", srcdoc)) mask.push("feedFPupVnd");
 	if (updateSrcblock(dom, "DpchEngWdbeMtpDetailData", "StatAppWdbeMtpDetail", srcdoc)) mask.push("statapp");
 	if (updateSrcblock(dom, "DpchEngWdbeMtpDetailData", "StatShrWdbeMtpDetail", srcdoc)) mask.push("statshr");
 	if (updateSrcblock(dom, "DpchEngWdbeMtpDetailData", "TagWdbeMtpDetail", srcdoc)) mask.push("tag");
@@ -268,6 +314,28 @@ function handleDpchAppDataDoReply() {
 			} else if (blk.nodeName == "DpchEngWdbeMtpDetailData") {
 				mergeDpchEngData(dom);
 				refresh();
+			};
+		};
+	};
+};
+
+function handleDpchAppDoDlgopenReply() {
+	var dom, blk;
+
+	var accepted, _scrJref, sref;
+
+	if (doc.req.readyState == 4) {
+		dom = doc.req.responseXML;
+
+		blk = retrieveBlock(dom, "//wdbe:*");
+
+		if (blk) {
+			if (blk.nodeName == "DpchEngWdbeConfirm") {
+				accepted = retrieveValue(dom, "//wdbe:DpchEngWdbeConfirm/wdbe:accepted");
+				_scrJref = retrieveValue(dom, "//wdbe:DpchEngWdbeConfirm/wdbe:scrJref");
+				sref = retrieveValue(dom, "//wdbe:DpchEngWdbeConfirm/wdbe:sref");
+
+				if ((accepted == "true") && (sref != "")) getCrdwnd().showDlg(sref, _scrJref);
 			};
 		};
 	};

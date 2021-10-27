@@ -14,10 +14,10 @@
 
 // IP include.cust --- INSERT
 
-#include "PnlWdbeCmdMNController.h"
-#include "PnlWdbeCmdAInvpar.h"
-#include "PnlWdbeCmdARetpar.h"
 #include "PnlWdbeCmdDetail.h"
+#include "PnlWdbeCmdARetpar.h"
+#include "PnlWdbeCmdAInvpar.h"
+#include "PnlWdbeCmdMNController.h"
 
 #define VecVWdbeCmdRecDo PnlWdbeCmdRec::VecVDo
 
@@ -180,10 +180,10 @@ public:
 	ContInf continf;
 	StatShr statshr;
 
-	PnlWdbeCmdMNController* pnlmncontroller;
-	PnlWdbeCmdAInvpar* pnlainvpar;
-	PnlWdbeCmdARetpar* pnlaretpar;
 	PnlWdbeCmdDetail* pnldetail;
+	PnlWdbeCmdARetpar* pnlaretpar;
+	PnlWdbeCmdAInvpar* pnlainvpar;
+	PnlWdbeCmdMNController* pnlmncontroller;
 
 	WdbeMCommand recCmd;
 
@@ -217,11 +217,14 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeCmdUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
-	bool handleCallWdbeCmd_reuEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
-	bool handleCallWdbeCmd_reu_mdl_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
-	bool handleCallWdbeCmd_reu_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
+	bool handleCallWdbeCmd_ivrEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeCmd_rerEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
 	bool handleCallWdbeCmd_retEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
+	bool handleCallWdbeCmd_reu_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
+	bool handleCallWdbeCmd_reu_mdl_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
+	bool handleCallWdbeCmd_reuEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeCmd_rvrEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeCmdUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 
 };
 

@@ -23,6 +23,7 @@
 
 #define VecWdbeVMSignalBasetype TblWdbeMSignal::VecVBasetype
 #define VecWdbeVMSignalMgeTbl TblWdbeMSignal::VecVMgeTbl
+#define VecWdbeVMSignalRefTbl TblWdbeMSignal::VecVRefTbl
 
 /**
 	* WdbeMSignal: record of TblWdbeMSignal
@@ -30,14 +31,15 @@
 class WdbeMSignal {
 
 public:
-	WdbeMSignal(const Sbecore::ubigint ref = 0, const Sbecore::uint ixVBasetype = 0, const Sbecore::ubigint refWdbeCSignal = 0, const Sbecore::ubigint mdlRefWdbeMModule = 0, const Sbecore::uint mdlNum = 0, const Sbecore::uint mgeIxVTbl = 0, const Sbecore::ubigint mgeUref = 0, const Sbecore::ubigint refWdbeMVector = 0, const std::string sref = "", const bool Const = false, const std::string srefWdbeKHdltype = "", const Sbecore::usmallint Width = 0, const std::string Minmax = "", const std::string Comb = "", const std::string Onval = "", const std::string Offval = "", const bool Defon = false, const Sbecore::ubigint drvRefWdbeMPort = 0, const std::string Comment = "");
+	WdbeMSignal(const Sbecore::ubigint ref = 0, const Sbecore::uint ixVBasetype = 0, const Sbecore::ubigint refWdbeCSignal = 0, const Sbecore::uint refIxVTbl = 0, const Sbecore::ubigint refUref = 0, const Sbecore::uint refNum = 0, const Sbecore::uint mgeIxVTbl = 0, const Sbecore::ubigint mgeUref = 0, const Sbecore::ubigint refWdbeMVector = 0, const std::string sref = "", const bool Const = false, const std::string srefWdbeKHdltype = "", const Sbecore::usmallint Width = 0, const std::string Minmax = "", const std::string Comb = "", const std::string Onval = "", const std::string Offval = "", const bool Defon = false, const Sbecore::ubigint drvRefWdbeMPort = 0, const std::string Comment = "");
 
 public:
 	Sbecore::ubigint ref;
 	Sbecore::uint ixVBasetype;
 	Sbecore::ubigint refWdbeCSignal;
-	Sbecore::ubigint mdlRefWdbeMModule;
-	Sbecore::uint mdlNum;
+	Sbecore::uint refIxVTbl;
+	Sbecore::ubigint refUref;
+	Sbecore::uint refNum;
 	Sbecore::uint mgeIxVTbl;
 	Sbecore::ubigint mgeUref;
 	Sbecore::ubigint refWdbeMVector;
@@ -127,6 +129,23 @@ public:
 		static void fillFeed(const Sbecore::uint ixWdbeVLocale, Sbecore::Feed& feed);
 	};
 
+	/**
+		* VecVRefTbl (full: VecWdbeVMSignalRefTbl)
+		*/
+	class VecVRefTbl {
+
+	public:
+		static const Sbecore::uint MDL = 1;
+		static const Sbecore::uint UNT = 2;
+
+		static Sbecore::uint getIx(const std::string& sref);
+		static std::string getSref(const Sbecore::uint ix);
+
+		static std::string getTitle(const Sbecore::uint ix, const Sbecore::uint ixWdbeVLocale);
+
+		static void fillFeed(const Sbecore::uint ixWdbeVLocale, Sbecore::Feed& feed);
+	};
+
 public:
 	TblWdbeMSignal();
 	virtual ~TblWdbeMSignal();
@@ -136,8 +155,8 @@ public:
 	virtual Sbecore::ubigint loadRstBySQL(const std::string& sqlstr, const bool append, ListWdbeMSignal& rst);
 
 	virtual Sbecore::ubigint insertRec(WdbeMSignal* rec);
-	Sbecore::ubigint insertNewRec(WdbeMSignal** rec = NULL, const Sbecore::uint ixVBasetype = 0, const Sbecore::ubigint refWdbeCSignal = 0, const Sbecore::ubigint mdlRefWdbeMModule = 0, const Sbecore::uint mdlNum = 0, const Sbecore::uint mgeIxVTbl = 0, const Sbecore::ubigint mgeUref = 0, const Sbecore::ubigint refWdbeMVector = 0, const std::string sref = "", const bool Const = false, const std::string srefWdbeKHdltype = "", const Sbecore::usmallint Width = 0, const std::string Minmax = "", const std::string Comb = "", const std::string Onval = "", const std::string Offval = "", const bool Defon = false, const Sbecore::ubigint drvRefWdbeMPort = 0, const std::string Comment = "");
-	Sbecore::ubigint appendNewRecToRst(ListWdbeMSignal& rst, WdbeMSignal** rec = NULL, const Sbecore::uint ixVBasetype = 0, const Sbecore::ubigint refWdbeCSignal = 0, const Sbecore::ubigint mdlRefWdbeMModule = 0, const Sbecore::uint mdlNum = 0, const Sbecore::uint mgeIxVTbl = 0, const Sbecore::ubigint mgeUref = 0, const Sbecore::ubigint refWdbeMVector = 0, const std::string sref = "", const bool Const = false, const std::string srefWdbeKHdltype = "", const Sbecore::usmallint Width = 0, const std::string Minmax = "", const std::string Comb = "", const std::string Onval = "", const std::string Offval = "", const bool Defon = false, const Sbecore::ubigint drvRefWdbeMPort = 0, const std::string Comment = "");
+	Sbecore::ubigint insertNewRec(WdbeMSignal** rec = NULL, const Sbecore::uint ixVBasetype = 0, const Sbecore::ubigint refWdbeCSignal = 0, const Sbecore::uint refIxVTbl = 0, const Sbecore::ubigint refUref = 0, const Sbecore::uint refNum = 0, const Sbecore::uint mgeIxVTbl = 0, const Sbecore::ubigint mgeUref = 0, const Sbecore::ubigint refWdbeMVector = 0, const std::string sref = "", const bool Const = false, const std::string srefWdbeKHdltype = "", const Sbecore::usmallint Width = 0, const std::string Minmax = "", const std::string Comb = "", const std::string Onval = "", const std::string Offval = "", const bool Defon = false, const Sbecore::ubigint drvRefWdbeMPort = 0, const std::string Comment = "");
+	Sbecore::ubigint appendNewRecToRst(ListWdbeMSignal& rst, WdbeMSignal** rec = NULL, const Sbecore::uint ixVBasetype = 0, const Sbecore::ubigint refWdbeCSignal = 0, const Sbecore::uint refIxVTbl = 0, const Sbecore::ubigint refUref = 0, const Sbecore::uint refNum = 0, const Sbecore::uint mgeIxVTbl = 0, const Sbecore::ubigint mgeUref = 0, const Sbecore::ubigint refWdbeMVector = 0, const std::string sref = "", const bool Const = false, const std::string srefWdbeKHdltype = "", const Sbecore::usmallint Width = 0, const std::string Minmax = "", const std::string Comb = "", const std::string Onval = "", const std::string Offval = "", const bool Defon = false, const Sbecore::ubigint drvRefWdbeMPort = 0, const std::string Comment = "");
 	virtual void insertRst(ListWdbeMSignal& rst, bool transact = false);
 	virtual void updateRec(WdbeMSignal* rec);
 	virtual void updateRst(ListWdbeMSignal& rst, bool transact = false);
@@ -146,9 +165,9 @@ public:
 	virtual bool loadRecByRef(Sbecore::ubigint ref, WdbeMSignal** rec);
 	virtual bool loadRecByVec(Sbecore::ubigint refWdbeMVector, WdbeMSignal** rec);
 	virtual Sbecore::ubigint loadRefsByClu(Sbecore::ubigint refWdbeCSignal, const bool append, std::vector<Sbecore::ubigint>& refs);
-	virtual Sbecore::ubigint loadRefsByMdl(Sbecore::ubigint mdlRefWdbeMModule, const bool append, std::vector<Sbecore::ubigint>& refs);
+	virtual Sbecore::ubigint loadRefsByRetReu(Sbecore::uint refIxVTbl, Sbecore::ubigint refUref, const bool append, std::vector<Sbecore::ubigint>& refs);
 	virtual Sbecore::ubigint loadRstByClu(Sbecore::ubigint refWdbeCSignal, const bool append, ListWdbeMSignal& rst);
-	virtual Sbecore::ubigint loadRstByMdl(Sbecore::ubigint mdlRefWdbeMModule, const bool append, ListWdbeMSignal& rst);
+	virtual Sbecore::ubigint loadRstByRetReu(Sbecore::uint refIxVTbl, Sbecore::ubigint refUref, const bool append, ListWdbeMSignal& rst);
 	virtual bool loadSrfByRef(Sbecore::ubigint ref, std::string& sref);
 	Sbecore::ubigint loadRstByRefs(std::vector<Sbecore::ubigint>& refs, const bool append, ListWdbeMSignal& rst);
 };
@@ -184,9 +203,9 @@ public:
 	bool loadRecByRef(Sbecore::ubigint ref, WdbeMSignal** rec);
 	bool loadRecByVec(Sbecore::ubigint refWdbeMVector, WdbeMSignal** rec);
 	Sbecore::ubigint loadRefsByClu(Sbecore::ubigint refWdbeCSignal, const bool append, std::vector<Sbecore::ubigint>& refs);
-	Sbecore::ubigint loadRefsByMdl(Sbecore::ubigint mdlRefWdbeMModule, const bool append, std::vector<Sbecore::ubigint>& refs);
+	Sbecore::ubigint loadRefsByRetReu(Sbecore::uint refIxVTbl, Sbecore::ubigint refUref, const bool append, std::vector<Sbecore::ubigint>& refs);
 	Sbecore::ubigint loadRstByClu(Sbecore::ubigint refWdbeCSignal, const bool append, ListWdbeMSignal& rst);
-	Sbecore::ubigint loadRstByMdl(Sbecore::ubigint mdlRefWdbeMModule, const bool append, ListWdbeMSignal& rst);
+	Sbecore::ubigint loadRstByRetReu(Sbecore::uint refIxVTbl, Sbecore::ubigint refUref, const bool append, ListWdbeMSignal& rst);
 	bool loadSrfByRef(Sbecore::ubigint ref, std::string& sref);
 };
 #endif
@@ -223,9 +242,9 @@ public:
 	bool loadRecByRef(Sbecore::ubigint ref, WdbeMSignal** rec);
 	bool loadRecByVec(Sbecore::ubigint refWdbeMVector, WdbeMSignal** rec);
 	Sbecore::ubigint loadRefsByClu(Sbecore::ubigint refWdbeCSignal, const bool append, std::vector<Sbecore::ubigint>& refs);
-	Sbecore::ubigint loadRefsByMdl(Sbecore::ubigint mdlRefWdbeMModule, const bool append, std::vector<Sbecore::ubigint>& refs);
+	Sbecore::ubigint loadRefsByRetReu(Sbecore::uint refIxVTbl, Sbecore::ubigint refUref, const bool append, std::vector<Sbecore::ubigint>& refs);
 	Sbecore::ubigint loadRstByClu(Sbecore::ubigint refWdbeCSignal, const bool append, ListWdbeMSignal& rst);
-	Sbecore::ubigint loadRstByMdl(Sbecore::ubigint mdlRefWdbeMModule, const bool append, ListWdbeMSignal& rst);
+	Sbecore::ubigint loadRstByRetReu(Sbecore::uint refIxVTbl, Sbecore::ubigint refUref, const bool append, ListWdbeMSignal& rst);
 	bool loadSrfByRef(Sbecore::ubigint ref, std::string& sref);
 };
 #endif

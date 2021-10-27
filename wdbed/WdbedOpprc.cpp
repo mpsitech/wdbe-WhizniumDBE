@@ -166,7 +166,7 @@ void* WdbedOpprc::run(
 	// notify opengcli of troubled state of node ; arrive here only if communication error was detected by this thread
 	xchg->setNodeState(node, NodeWdbe::VecVState::ERROR);
 
-	pthread_cleanup_pop(0);
+	pthread_cleanup_pop(1);
 
 	return(NULL);
 };
@@ -240,7 +240,7 @@ void WdbedOpprc::writeDpchInv(
 		req->dpchinv->writeXML(wr);
 	closewriteBuffer(wr);
 
-	// string to be sent is "xml=<xbuf>"
+	// string to be sent is "xml=<xbuf (URI encoded)>"
 	buflen = xbuf->use + 4;
 	buf = new char[buflen];
 
@@ -273,9 +273,18 @@ uint WdbedOpprc::readDpchRet(
 	if (ixWdbeVDpch == VecWdbeVDpch::DPCHRETWDBE) {
 		req->dpchret = new DpchRetWdbe();
 		((DpchRetWdbe*) (req->dpchret))->readXML(docctx, "/", true);
-	} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHRETWDBEMODDETWIRING) {
-		req->dpchret = new DpchRetWdbeModdetWiring();
-		((DpchRetWdbeModdetWiring*) (req->dpchret))->readXML(docctx, "/", true);
+	} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHRETWDBECPLMSTIMBUF) {
+		req->dpchret = new DpchRetWdbeCplmstImbuf();
+		((DpchRetWdbeCplmstImbuf*) (req->dpchret))->readXML(docctx, "/", true);
+	} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHRETWDBECPLMSTTPLCPY) {
+		req->dpchret = new DpchRetWdbeCplmstTplcpy();
+		((DpchRetWdbeCplmstTplcpy*) (req->dpchret))->readXML(docctx, "/", true);
+	} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHRETWDBEGENTEST) {
+		req->dpchret = new DpchRetWdbeGenTest();
+		((DpchRetWdbeGenTest*) (req->dpchret))->readXML(docctx, "/", true);
+	} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHRETWDBEGENWIRING) {
+		req->dpchret = new DpchRetWdbeGenWiring();
+		((DpchRetWdbeGenWiring*) (req->dpchret))->readXML(docctx, "/", true);
 	} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHRETWDBEMTPPLHFPGA) {
 		req->dpchret = new DpchRetWdbeMtpPlhfpga();
 		((DpchRetWdbeMtpPlhfpga*) (req->dpchret))->readXML(docctx, "/", true);
@@ -294,6 +303,9 @@ uint WdbedOpprc::readDpchRet(
 	} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHRETWDBEPLHFPGAFWDCTR) {
 		req->dpchret = new DpchRetWdbePlhfpgaFwdctr();
 		((DpchRetWdbePlhfpgaFwdctr*) (req->dpchret))->readXML(docctx, "/", true);
+	} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHRETWDBEPLHMCUECTR) {
+		req->dpchret = new DpchRetWdbePlhmcuEctr();
+		((DpchRetWdbePlhmcuEctr*) (req->dpchret))->readXML(docctx, "/", true);
 	} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHRETWDBEPLHMCUEHOSTIF) {
 		req->dpchret = new DpchRetWdbePlhmcuEhostif();
 		((DpchRetWdbePlhmcuEhostif*) (req->dpchret))->readXML(docctx, "/", true);

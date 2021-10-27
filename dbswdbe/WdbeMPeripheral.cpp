@@ -19,14 +19,12 @@ using namespace Sbecore;
 WdbeMPeripheral::WdbeMPeripheral(
 			const ubigint ref
 			, const ubigint refWdbeMUnit
-			, const ubigint refWdbeMModule
 			, const string sref
 			, const string Comment
 		) {
 
 	this->ref = ref;
 	this->refWdbeMUnit = refWdbeMUnit;
-	this->refWdbeMModule = refWdbeMModule;
 	this->sref = sref;
 	this->Comment = Comment;
 };
@@ -160,14 +158,13 @@ ubigint TblWdbeMPeripheral::insertRec(
 ubigint TblWdbeMPeripheral::insertNewRec(
 			WdbeMPeripheral** rec
 			, const ubigint refWdbeMUnit
-			, const ubigint refWdbeMModule
 			, const string sref
 			, const string Comment
 		) {
 	ubigint retval = 0;
 	WdbeMPeripheral* _rec = NULL;
 
-	_rec = new WdbeMPeripheral(0, refWdbeMUnit, refWdbeMModule, sref, Comment);
+	_rec = new WdbeMPeripheral(0, refWdbeMUnit, sref, Comment);
 	insertRec(_rec);
 
 	retval = _rec->ref;
@@ -182,14 +179,13 @@ ubigint TblWdbeMPeripheral::appendNewRecToRst(
 			ListWdbeMPeripheral& rst
 			, WdbeMPeripheral** rec
 			, const ubigint refWdbeMUnit
-			, const ubigint refWdbeMModule
 			, const string sref
 			, const string Comment
 		) {
 	ubigint retval = 0;
 	WdbeMPeripheral* _rec = NULL;
 
-	retval = insertNewRec(&_rec, refWdbeMUnit, refWdbeMModule, sref, Comment);
+	retval = insertNewRec(&_rec, refWdbeMUnit, sref, Comment);
 	rst.nodes.push_back(_rec);
 
 	if (rec != NULL) *rec = _rec;
@@ -288,8 +284,8 @@ MyTblWdbeMPeripheral::~MyTblWdbeMPeripheral() {
 };
 
 void MyTblWdbeMPeripheral::initStatements() {
-	stmtInsertRec = createStatement("INSERT INTO TblWdbeMPeripheral (refWdbeMUnit, refWdbeMModule, sref, Comment) VALUES (?,?,?,?)", false);
-	stmtUpdateRec = createStatement("UPDATE TblWdbeMPeripheral SET refWdbeMUnit = ?, refWdbeMModule = ?, sref = ?, Comment = ? WHERE ref = ?", false);
+	stmtInsertRec = createStatement("INSERT INTO TblWdbeMPeripheral (refWdbeMUnit, sref, Comment) VALUES (?,?,?)", false);
+	stmtUpdateRec = createStatement("UPDATE TblWdbeMPeripheral SET refWdbeMUnit = ?, sref = ?, Comment = ? WHERE ref = ?", false);
 	stmtRemoveRecByRef = createStatement("DELETE FROM TblWdbeMPeripheral WHERE ref = ?", false);
 };
 
@@ -321,9 +317,8 @@ bool MyTblWdbeMPeripheral::loadRecBySQL(
 
 		if (dbrow[0]) _rec->ref = atoll((char*) dbrow[0]); else _rec->ref = 0;
 		if (dbrow[1]) _rec->refWdbeMUnit = atoll((char*) dbrow[1]); else _rec->refWdbeMUnit = 0;
-		if (dbrow[2]) _rec->refWdbeMModule = atoll((char*) dbrow[2]); else _rec->refWdbeMModule = 0;
-		if (dbrow[3]) _rec->sref.assign(dbrow[3], dblengths[3]); else _rec->sref = "";
-		if (dbrow[4]) _rec->Comment.assign(dbrow[4], dblengths[4]); else _rec->Comment = "";
+		if (dbrow[2]) _rec->sref.assign(dbrow[2], dblengths[2]); else _rec->sref = "";
+		if (dbrow[3]) _rec->Comment.assign(dbrow[3], dblengths[3]); else _rec->Comment = "";
 
 		retval = true;
 	};
@@ -368,9 +363,8 @@ ubigint MyTblWdbeMPeripheral::loadRstBySQL(
 
 			if (dbrow[0]) rec->ref = atoll((char*) dbrow[0]); else rec->ref = 0;
 			if (dbrow[1]) rec->refWdbeMUnit = atoll((char*) dbrow[1]); else rec->refWdbeMUnit = 0;
-			if (dbrow[2]) rec->refWdbeMModule = atoll((char*) dbrow[2]); else rec->refWdbeMModule = 0;
-			if (dbrow[3]) rec->sref.assign(dbrow[3], dblengths[3]); else rec->sref = "";
-			if (dbrow[4]) rec->Comment.assign(dbrow[4], dblengths[4]); else rec->Comment = "";
+			if (dbrow[2]) rec->sref.assign(dbrow[2], dblengths[2]); else rec->sref = "";
+			if (dbrow[3]) rec->Comment.assign(dbrow[3], dblengths[3]); else rec->Comment = "";
 			rst.nodes.push_back(rec);
 
 			numread++;
@@ -385,16 +379,15 @@ ubigint MyTblWdbeMPeripheral::loadRstBySQL(
 ubigint MyTblWdbeMPeripheral::insertRec(
 			WdbeMPeripheral* rec
 		) {
-	unsigned long l[4]; my_bool n[4]; my_bool e[4];
+	unsigned long l[3]; my_bool n[3]; my_bool e[3];
 
-	l[2] = rec->sref.length();
-	l[3] = rec->Comment.length();
+	l[1] = rec->sref.length();
+	l[2] = rec->Comment.length();
 
 	MYSQL_BIND bind[] = {
 		bindUbigint(&rec->refWdbeMUnit,&(l[0]),&(n[0]),&(e[0])),
-		bindUbigint(&rec->refWdbeMModule,&(l[1]),&(n[1]),&(e[1])),
-		bindCstring((char*) (rec->sref.c_str()),&(l[2]),&(n[2]),&(e[2])),
-		bindCstring((char*) (rec->Comment.c_str()),&(l[3]),&(n[3]),&(e[3]))
+		bindCstring((char*) (rec->sref.c_str()),&(l[1]),&(n[1]),&(e[1])),
+		bindCstring((char*) (rec->Comment.c_str()),&(l[2]),&(n[2]),&(e[2]))
 	};
 
 	if (mysql_stmt_bind_param(stmtInsertRec, bind)) {
@@ -422,17 +415,16 @@ void MyTblWdbeMPeripheral::insertRst(
 void MyTblWdbeMPeripheral::updateRec(
 			WdbeMPeripheral* rec
 		) {
-	unsigned long l[5]; my_bool n[5]; my_bool e[5];
+	unsigned long l[4]; my_bool n[4]; my_bool e[4];
 
-	l[2] = rec->sref.length();
-	l[3] = rec->Comment.length();
+	l[1] = rec->sref.length();
+	l[2] = rec->Comment.length();
 
 	MYSQL_BIND bind[] = {
 		bindUbigint(&rec->refWdbeMUnit,&(l[0]),&(n[0]),&(e[0])),
-		bindUbigint(&rec->refWdbeMModule,&(l[1]),&(n[1]),&(e[1])),
-		bindCstring((char*) (rec->sref.c_str()),&(l[2]),&(n[2]),&(e[2])),
-		bindCstring((char*) (rec->Comment.c_str()),&(l[3]),&(n[3]),&(e[3])),
-		bindUbigint(&rec->ref,&(l[4]),&(n[4]),&(e[4]))
+		bindCstring((char*) (rec->sref.c_str()),&(l[1]),&(n[1]),&(e[1])),
+		bindCstring((char*) (rec->Comment.c_str()),&(l[2]),&(n[2]),&(e[2])),
+		bindUbigint(&rec->ref,&(l[3]),&(n[3]),&(e[3]))
 	};
 
 	if (mysql_stmt_bind_param(stmtUpdateRec, bind)) {
@@ -496,7 +488,7 @@ ubigint MyTblWdbeMPeripheral::loadRstByUnt(
 			, const bool append
 			, ListWdbeMPeripheral& rst
 		) {
-	return loadRstBySQL("SELECT ref, refWdbeMUnit, refWdbeMModule, sref, Comment FROM TblWdbeMPeripheral WHERE refWdbeMUnit = " + to_string(refWdbeMUnit) + " ORDER BY sref ASC", append, rst);
+	return loadRstBySQL("SELECT ref, refWdbeMUnit, sref, Comment FROM TblWdbeMPeripheral WHERE refWdbeMUnit = " + to_string(refWdbeMUnit) + " ORDER BY sref ASC", append, rst);
 };
 
 bool MyTblWdbeMPeripheral::loadSrfByRef(
@@ -524,13 +516,13 @@ PgTblWdbeMPeripheral::~PgTblWdbeMPeripheral() {
 };
 
 void PgTblWdbeMPeripheral::initStatements() {
-	createStatement("TblWdbeMPeripheral_insertRec", "INSERT INTO TblWdbeMPeripheral (refWdbeMUnit, refWdbeMModule, sref, Comment) VALUES ($1,$2,$3,$4) RETURNING ref", 4);
-	createStatement("TblWdbeMPeripheral_updateRec", "UPDATE TblWdbeMPeripheral SET refWdbeMUnit = $1, refWdbeMModule = $2, sref = $3, Comment = $4 WHERE ref = $5", 5);
+	createStatement("TblWdbeMPeripheral_insertRec", "INSERT INTO TblWdbeMPeripheral (refWdbeMUnit, sref, Comment) VALUES ($1,$2,$3) RETURNING ref", 3);
+	createStatement("TblWdbeMPeripheral_updateRec", "UPDATE TblWdbeMPeripheral SET refWdbeMUnit = $1, sref = $2, Comment = $3 WHERE ref = $4", 4);
 	createStatement("TblWdbeMPeripheral_removeRecByRef", "DELETE FROM TblWdbeMPeripheral WHERE ref = $1", 1);
 
-	createStatement("TblWdbeMPeripheral_loadRecByRef", "SELECT ref, refWdbeMUnit, refWdbeMModule, sref, Comment FROM TblWdbeMPeripheral WHERE ref = $1", 1);
+	createStatement("TblWdbeMPeripheral_loadRecByRef", "SELECT ref, refWdbeMUnit, sref, Comment FROM TblWdbeMPeripheral WHERE ref = $1", 1);
 	createStatement("TblWdbeMPeripheral_loadRefsByUnt", "SELECT ref FROM TblWdbeMPeripheral WHERE refWdbeMUnit = $1", 1);
-	createStatement("TblWdbeMPeripheral_loadRstByUnt", "SELECT ref, refWdbeMUnit, refWdbeMModule, sref, Comment FROM TblWdbeMPeripheral WHERE refWdbeMUnit = $1 ORDER BY sref ASC", 1);
+	createStatement("TblWdbeMPeripheral_loadRstByUnt", "SELECT ref, refWdbeMUnit, sref, Comment FROM TblWdbeMPeripheral WHERE refWdbeMUnit = $1 ORDER BY sref ASC", 1);
 	createStatement("TblWdbeMPeripheral_loadSrfByRef", "SELECT sref FROM TblWdbeMPeripheral WHERE ref = $1", 1);
 };
 
@@ -549,16 +541,14 @@ bool PgTblWdbeMPeripheral::loadRec(
 		int fnum[] = {
 			PQfnumber(res, "ref"),
 			PQfnumber(res, "refwdbemunit"),
-			PQfnumber(res, "refwdbemmodule"),
 			PQfnumber(res, "sref"),
 			PQfnumber(res, "comment")
 		};
 
 		ptr = PQgetvalue(res, 0, fnum[0]); _rec->ref = atoll(ptr);
 		ptr = PQgetvalue(res, 0, fnum[1]); _rec->refWdbeMUnit = atoll(ptr);
-		ptr = PQgetvalue(res, 0, fnum[2]); _rec->refWdbeMModule = atoll(ptr);
-		ptr = PQgetvalue(res, 0, fnum[3]); _rec->sref.assign(ptr, PQgetlength(res, 0, fnum[3]));
-		ptr = PQgetvalue(res, 0, fnum[4]); _rec->Comment.assign(ptr, PQgetlength(res, 0, fnum[4]));
+		ptr = PQgetvalue(res, 0, fnum[2]); _rec->sref.assign(ptr, PQgetlength(res, 0, fnum[2]));
+		ptr = PQgetvalue(res, 0, fnum[3]); _rec->Comment.assign(ptr, PQgetlength(res, 0, fnum[3]));
 
 		retval = true;
 	};
@@ -587,7 +577,6 @@ ubigint PgTblWdbeMPeripheral::loadRst(
 		int fnum[] = {
 			PQfnumber(res, "ref"),
 			PQfnumber(res, "refwdbemunit"),
-			PQfnumber(res, "refwdbemmodule"),
 			PQfnumber(res, "sref"),
 			PQfnumber(res, "comment")
 		};
@@ -597,9 +586,8 @@ ubigint PgTblWdbeMPeripheral::loadRst(
 
 			ptr = PQgetvalue(res, numread, fnum[0]); rec->ref = atoll(ptr);
 			ptr = PQgetvalue(res, numread, fnum[1]); rec->refWdbeMUnit = atoll(ptr);
-			ptr = PQgetvalue(res, numread, fnum[2]); rec->refWdbeMModule = atoll(ptr);
-			ptr = PQgetvalue(res, numread, fnum[3]); rec->sref.assign(ptr, PQgetlength(res, numread, fnum[3]));
-			ptr = PQgetvalue(res, numread, fnum[4]); rec->Comment.assign(ptr, PQgetlength(res, numread, fnum[4]));
+			ptr = PQgetvalue(res, numread, fnum[2]); rec->sref.assign(ptr, PQgetlength(res, numread, fnum[2]));
+			ptr = PQgetvalue(res, numread, fnum[3]); rec->Comment.assign(ptr, PQgetlength(res, numread, fnum[3]));
 
 			rst.nodes.push_back(rec);
 
@@ -693,23 +681,20 @@ ubigint PgTblWdbeMPeripheral::insertRec(
 	char* ptr;
 
 	ubigint _refWdbeMUnit = htonl64(rec->refWdbeMUnit);
-	ubigint _refWdbeMModule = htonl64(rec->refWdbeMModule);
 
 	const char* vals[] = {
 		(char*) &_refWdbeMUnit,
-		(char*) &_refWdbeMModule,
 		rec->sref.c_str(),
 		rec->Comment.c_str()
 	};
 	const int l[] = {
 		sizeof(ubigint),
-		sizeof(ubigint),
 		0,
 		0
 	};
-	const int f[] = {1, 1, 0, 0};
+	const int f[] = {1, 0, 0};
 
-	res = PQexecPrepared(dbs, "TblWdbeMPeripheral_insertRec", 4, vals, l, f, 0);
+	res = PQexecPrepared(dbs, "TblWdbeMPeripheral_insertRec", 3, vals, l, f, 0);
 
 	if (PQresultStatus(res) != PGRES_TUPLES_OK) {
 		string dbms = "PgTblWdbeMPeripheral::insertRec() / " + string(PQerrorMessage(dbs));
@@ -738,26 +723,23 @@ void PgTblWdbeMPeripheral::updateRec(
 	PGresult* res;
 
 	ubigint _refWdbeMUnit = htonl64(rec->refWdbeMUnit);
-	ubigint _refWdbeMModule = htonl64(rec->refWdbeMModule);
 	ubigint _ref = htonl64(rec->ref);
 
 	const char* vals[] = {
 		(char*) &_refWdbeMUnit,
-		(char*) &_refWdbeMModule,
 		rec->sref.c_str(),
 		rec->Comment.c_str(),
 		(char*) &_ref
 	};
 	const int l[] = {
 		sizeof(ubigint),
-		sizeof(ubigint),
 		0,
 		0,
 		sizeof(ubigint)
 	};
-	const int f[] = {1, 1, 0, 0, 1};
+	const int f[] = {1, 0, 0, 1};
 
-	res = PQexecPrepared(dbs, "TblWdbeMPeripheral_updateRec", 5, vals, l, f, 0);
+	res = PQexecPrepared(dbs, "TblWdbeMPeripheral_updateRec", 4, vals, l, f, 0);
 
 	if (PQresultStatus(res) != PGRES_COMMAND_OK) {
 		string dbms = "PgTblWdbeMPeripheral::updateRec() / " + string(PQerrorMessage(dbs));

@@ -24,6 +24,7 @@ namespace SqkWdbeWrfpga {
 	std::string getSquawkIpclr(DbsWdbe* dbswdbe, DpchInvWdbeWrfpgaIpclr* dpchinv);
 	std::string getSquawkMdlfine(DbsWdbe* dbswdbe, DpchInvWdbeWrfpgaMdlfine* dpchinv);
 	std::string getSquawkMdlraw(DbsWdbe* dbswdbe, DpchInvWdbeWrfpgaMdlraw* dpchinv);
+	std::string getSquawkTop(DbsWdbe* dbswdbe, DpchInvWdbeWrfpgaTop* dpchinv);
 };
 
 #endif

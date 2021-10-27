@@ -320,11 +320,19 @@ void QryWdbePrsMNProject::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBEPRSRPRJMOD_PRSEQ) {
-		call->abort = handleCallWdbePrsRprjMod_prsEq(dbswdbe, call->jref);
-	} else if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
+	if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
 		call->abort = handleCallWdbeStubChgFromSelf(dbswdbe);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEPRSRPRJMOD_PRSEQ) {
+		call->abort = handleCallWdbePrsRprjMod_prsEq(dbswdbe, call->jref);
 	};
+};
+
+bool QryWdbePrsMNProject::handleCallWdbeStubChgFromSelf(
+			DbsWdbe* dbswdbe
+		) {
+	bool retval = false;
+	// IP handleCallWdbeStubChgFromSelf --- INSERT
+	return retval;
 };
 
 bool QryWdbePrsMNProject::handleCallWdbePrsRprjMod_prsEq(
@@ -338,13 +346,5 @@ bool QryWdbePrsMNProject::handleCallWdbePrsRprjMod_prsEq(
 		xchg->triggerCall(dbswdbe, VecWdbeVCall::CALLWDBESTATCHG, jref);
 	};
 
-	return retval;
-};
-
-bool QryWdbePrsMNProject::handleCallWdbeStubChgFromSelf(
-			DbsWdbe* dbswdbe
-		) {
-	bool retval = false;
-	// IP handleCallWdbeStubChgFromSelf --- INSERT
 	return retval;
 };

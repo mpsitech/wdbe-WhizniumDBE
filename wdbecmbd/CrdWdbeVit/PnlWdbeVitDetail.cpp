@@ -263,20 +263,11 @@ void PnlWdbeVitDetail::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBEVITUPD_REFEQ) {
-		call->abort = handleCallWdbeVitUpd_refEq(dbswdbe, call->jref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEVIT_VECEQ) {
+	if (call->ixVCall == VecWdbeVCall::CALLWDBEVIT_VECEQ) {
 		call->abort = handleCallWdbeVit_vecEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEVITUPD_REFEQ) {
+		call->abort = handleCallWdbeVitUpd_refEq(dbswdbe, call->jref);
 	};
-};
-
-bool PnlWdbeVitDetail::handleCallWdbeVitUpd_refEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-	// IP handleCallWdbeVitUpd_refEq --- INSERT
-	return retval;
 };
 
 bool PnlWdbeVitDetail::handleCallWdbeVit_vecEq(
@@ -287,5 +278,14 @@ bool PnlWdbeVitDetail::handleCallWdbeVit_vecEq(
 		) {
 	bool retval = false;
 	boolvalRet = (recVit.vecRefWdbeMVector == refInv); // IP handleCallWdbeVit_vecEq --- LINE
+	return retval;
+};
+
+bool PnlWdbeVitDetail::handleCallWdbeVitUpd_refEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+	// IP handleCallWdbeVitUpd_refEq --- INSERT
 	return retval;
 };

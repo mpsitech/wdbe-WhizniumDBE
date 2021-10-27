@@ -22,6 +22,7 @@ uint PnlWdbeErrDetail::VecVDo::getIx(
 
 	if (s == "butsaveclick") return BUTSAVECLICK;
 	if (s == "butreuviewclick") return BUTREUVIEWCLICK;
+	if (s == "buttraviewclick") return BUTTRAVIEWCLICK;
 
 	return(0);
 };
@@ -31,6 +32,7 @@ string PnlWdbeErrDetail::VecVDo::getSref(
 		) {
 	if (ix == BUTSAVECLICK) return("ButSaveClick");
 	if (ix == BUTREUVIEWCLICK) return("ButReuViewClick");
+	if (ix == BUTTRAVIEWCLICK) return("ButTraViewClick");
 
 	return("");
 };
@@ -278,6 +280,8 @@ PnlWdbeErrDetail::StatShr::StatShr(
 			, const bool ButReuViewAvail
 			, const bool ButReuViewActive
 			, const bool TxtTraActive
+			, const bool ButTraViewAvail
+			, const bool ButTraViewActive
 			, const bool TxfCmtActive
 		) :
 			Block()
@@ -290,9 +294,11 @@ PnlWdbeErrDetail::StatShr::StatShr(
 	this->ButReuViewAvail = ButReuViewAvail;
 	this->ButReuViewActive = ButReuViewActive;
 	this->TxtTraActive = TxtTraActive;
+	this->ButTraViewAvail = ButTraViewAvail;
+	this->ButTraViewActive = ButTraViewActive;
 	this->TxfCmtActive = TxfCmtActive;
 
-	mask = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXFFSRACTIVE, TXTREUACTIVE, BUTREUVIEWAVAIL, BUTREUVIEWACTIVE, TXTTRAACTIVE, TXFCMTACTIVE};
+	mask = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXFFSRACTIVE, TXTREUACTIVE, BUTREUVIEWAVAIL, BUTREUVIEWACTIVE, TXTTRAACTIVE, BUTTRAVIEWAVAIL, BUTTRAVIEWACTIVE, TXFCMTACTIVE};
 };
 
 void PnlWdbeErrDetail::StatShr::writeJSON(
@@ -311,6 +317,8 @@ void PnlWdbeErrDetail::StatShr::writeJSON(
 	me["ButReuViewAvail"] = ButReuViewAvail;
 	me["ButReuViewActive"] = ButReuViewActive;
 	me["TxtTraActive"] = TxtTraActive;
+	me["ButTraViewAvail"] = ButTraViewAvail;
+	me["ButTraViewActive"] = ButTraViewActive;
 	me["TxfCmtActive"] = TxfCmtActive;
 };
 
@@ -334,6 +342,8 @@ void PnlWdbeErrDetail::StatShr::writeXML(
 		writeBoolAttr(wr, itemtag, "sref", "ButReuViewAvail", ButReuViewAvail);
 		writeBoolAttr(wr, itemtag, "sref", "ButReuViewActive", ButReuViewActive);
 		writeBoolAttr(wr, itemtag, "sref", "TxtTraActive", TxtTraActive);
+		writeBoolAttr(wr, itemtag, "sref", "ButTraViewAvail", ButTraViewAvail);
+		writeBoolAttr(wr, itemtag, "sref", "ButTraViewActive", ButTraViewActive);
 		writeBoolAttr(wr, itemtag, "sref", "TxfCmtActive", TxfCmtActive);
 	xmlTextWriterEndElement(wr);
 };
@@ -351,6 +361,8 @@ set<uint> PnlWdbeErrDetail::StatShr::comm(
 	if (ButReuViewAvail == comp->ButReuViewAvail) insert(items, BUTREUVIEWAVAIL);
 	if (ButReuViewActive == comp->ButReuViewActive) insert(items, BUTREUVIEWACTIVE);
 	if (TxtTraActive == comp->TxtTraActive) insert(items, TXTTRAACTIVE);
+	if (ButTraViewAvail == comp->ButTraViewAvail) insert(items, BUTTRAVIEWAVAIL);
+	if (ButTraViewActive == comp->ButTraViewActive) insert(items, BUTTRAVIEWACTIVE);
 	if (TxfCmtActive == comp->TxfCmtActive) insert(items, TXFCMTACTIVE);
 
 	return(items);
@@ -364,7 +376,7 @@ set<uint> PnlWdbeErrDetail::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXFFSRACTIVE, TXTREUACTIVE, BUTREUVIEWAVAIL, BUTREUVIEWACTIVE, TXTTRAACTIVE, TXFCMTACTIVE};
+	diffitems = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXFFSRACTIVE, TXTREUACTIVE, BUTREUVIEWAVAIL, BUTREUVIEWACTIVE, TXTTRAACTIVE, BUTTRAVIEWAVAIL, BUTTRAVIEWACTIVE, TXFCMTACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);

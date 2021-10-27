@@ -53,6 +53,34 @@ bool PnlWdbeMtpDetail::evalTxtSrfActive(
 	return(args.back());
 };
 
+bool PnlWdbeMtpDetail::evalPupVndActive(
+			DbsWdbe* dbswdbe
+		) {
+	// pre.ixCrdaccMtpIncl(edit)
+
+	vector<bool> args;
+	bool a;
+
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCMTP, jref) & VecWdbeWAccess::EDIT);
+	args.push_back(a);
+
+	return(args.back());
+};
+
+bool PnlWdbeMtpDetail::evalButVndEditAvail(
+			DbsWdbe* dbswdbe
+		) {
+	// pre.adm()
+
+	vector<bool> args;
+	bool a;
+
+	a = false;
+	args.push_back(a);
+
+	return(args.back());
+};
+
 bool PnlWdbeMtpDetail::evalPupTypActive(
 			DbsWdbe* dbswdbe
 		) {

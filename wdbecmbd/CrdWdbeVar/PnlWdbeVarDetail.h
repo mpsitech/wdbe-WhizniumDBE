@@ -42,7 +42,8 @@ public:
 		static const Sbecore::uint BUTCLUVIEWCLICK = 2;
 		static const Sbecore::uint BUTCLUCLUSTERCLICK = 3;
 		static const Sbecore::uint BUTCLUUNCLUSTERCLICK = 4;
-		static const Sbecore::uint BUTHTYEDITCLICK = 5;
+		static const Sbecore::uint BUTREUVIEWCLICK = 5;
+		static const Sbecore::uint BUTHTYEDITCLICK = 6;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);
@@ -55,22 +56,24 @@ public:
 
 	public:
 		static const Sbecore::uint NUMFLSTCLU = 1;
-		static const Sbecore::uint CHKCON = 2;
-		static const Sbecore::uint CHKFAL = 3;
-		static const Sbecore::uint NUMFPUPHTY = 4;
-		static const Sbecore::uint TXFHTY = 5;
-		static const Sbecore::uint TXFWID = 6;
-		static const Sbecore::uint TXFMMX = 7;
-		static const Sbecore::uint TXFONV = 8;
-		static const Sbecore::uint TXFOFV = 9;
-		static const Sbecore::uint CHKDFO = 10;
-		static const Sbecore::uint TXFCMT = 11;
+		static const Sbecore::uint NUMFPUPRET = 2;
+		static const Sbecore::uint CHKCON = 3;
+		static const Sbecore::uint CHKFAL = 4;
+		static const Sbecore::uint NUMFPUPHTY = 5;
+		static const Sbecore::uint TXFHTY = 6;
+		static const Sbecore::uint TXFWID = 7;
+		static const Sbecore::uint TXFMMX = 8;
+		static const Sbecore::uint TXFONV = 9;
+		static const Sbecore::uint TXFOFV = 10;
+		static const Sbecore::uint CHKDFO = 11;
+		static const Sbecore::uint TXFCMT = 12;
 
 	public:
-		ContIac(const Sbecore::uint numFLstClu = 1, const bool ChkCon = false, const bool ChkFal = false, const Sbecore::uint numFPupHty = 1, const std::string& TxfHty = "", const std::string& TxfWid = "", const std::string& TxfMmx = "", const std::string& TxfOnv = "", const std::string& TxfOfv = "", const bool ChkDfo = false, const std::string& TxfCmt = "");
+		ContIac(const Sbecore::uint numFLstClu = 1, const Sbecore::uint numFPupRet = 1, const bool ChkCon = false, const bool ChkFal = false, const Sbecore::uint numFPupHty = 1, const std::string& TxfHty = "", const std::string& TxfWid = "", const std::string& TxfMmx = "", const std::string& TxfOnv = "", const std::string& TxfOfv = "", const bool ChkDfo = false, const std::string& TxfCmt = "");
 
 	public:
 		Sbecore::uint numFLstClu;
+		Sbecore::uint numFPupRet;
 		bool ChkCon;
 		bool ChkFal;
 		Sbecore::uint numFPupHty;
@@ -99,15 +102,15 @@ public:
 	public:
 		static const Sbecore::uint TXTSRF = 1;
 		static const Sbecore::uint TXTCLU = 2;
-		static const Sbecore::uint TXTPRC = 3;
+		static const Sbecore::uint TXTREU = 3;
 
 	public:
-		ContInf(const std::string& TxtSrf = "", const std::string& TxtClu = "", const std::string& TxtPrc = "");
+		ContInf(const std::string& TxtSrf = "", const std::string& TxtClu = "", const std::string& TxtReu = "");
 
 	public:
 		std::string TxtSrf;
 		std::string TxtClu;
-		std::string TxtPrc;
+		std::string TxtReu;
 
 	public:
 		void writeJSON(Json::Value& sup, std::string difftag = "");
@@ -140,20 +143,22 @@ public:
 		static const Sbecore::uint BUTCLUVIEWACTIVE = 6;
 		static const Sbecore::uint BUTCLUCLUSTERAVAIL = 7;
 		static const Sbecore::uint BUTCLUUNCLUSTERAVAIL = 8;
-		static const Sbecore::uint TXTPRCACTIVE = 9;
-		static const Sbecore::uint CHKCONACTIVE = 10;
-		static const Sbecore::uint CHKFALACTIVE = 11;
-		static const Sbecore::uint PUPHTYACTIVE = 12;
-		static const Sbecore::uint BUTHTYEDITAVAIL = 13;
-		static const Sbecore::uint TXFWIDACTIVE = 14;
-		static const Sbecore::uint TXFMMXACTIVE = 15;
-		static const Sbecore::uint TXFONVACTIVE = 16;
-		static const Sbecore::uint TXFOFVACTIVE = 17;
-		static const Sbecore::uint CHKDFOACTIVE = 18;
-		static const Sbecore::uint TXFCMTACTIVE = 19;
+		static const Sbecore::uint TXTREUACTIVE = 9;
+		static const Sbecore::uint BUTREUVIEWAVAIL = 10;
+		static const Sbecore::uint BUTREUVIEWACTIVE = 11;
+		static const Sbecore::uint CHKCONACTIVE = 12;
+		static const Sbecore::uint CHKFALACTIVE = 13;
+		static const Sbecore::uint PUPHTYACTIVE = 14;
+		static const Sbecore::uint BUTHTYEDITAVAIL = 15;
+		static const Sbecore::uint TXFWIDACTIVE = 16;
+		static const Sbecore::uint TXFMMXACTIVE = 17;
+		static const Sbecore::uint TXFONVACTIVE = 18;
+		static const Sbecore::uint TXFOFVACTIVE = 19;
+		static const Sbecore::uint CHKDFOACTIVE = 20;
+		static const Sbecore::uint TXFCMTACTIVE = 21;
 
 	public:
-		StatShr(const bool TxfHtyValid = false, const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxtSrfActive = true, const bool LstCluActive = true, const bool ButCluViewActive = true, const bool ButCluClusterAvail = true, const bool ButCluUnclusterAvail = true, const bool TxtPrcActive = true, const bool ChkConActive = true, const bool ChkFalActive = true, const bool PupHtyActive = true, const bool ButHtyEditAvail = true, const bool TxfWidActive = true, const bool TxfMmxActive = true, const bool TxfOnvActive = true, const bool TxfOfvActive = true, const bool ChkDfoActive = true, const bool TxfCmtActive = true);
+		StatShr(const bool TxfHtyValid = false, const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxtSrfActive = true, const bool LstCluActive = true, const bool ButCluViewActive = true, const bool ButCluClusterAvail = true, const bool ButCluUnclusterAvail = true, const bool TxtReuActive = true, const bool ButReuViewAvail = true, const bool ButReuViewActive = true, const bool ChkConActive = true, const bool ChkFalActive = true, const bool PupHtyActive = true, const bool ButHtyEditAvail = true, const bool TxfWidActive = true, const bool TxfMmxActive = true, const bool TxfOnvActive = true, const bool TxfOfvActive = true, const bool ChkDfoActive = true, const bool TxfCmtActive = true);
 
 	public:
 		bool TxfHtyValid;
@@ -164,7 +169,9 @@ public:
 		bool ButCluViewActive;
 		bool ButCluClusterAvail;
 		bool ButCluUnclusterAvail;
-		bool TxtPrcActive;
+		bool TxtReuActive;
+		bool ButReuViewAvail;
+		bool ButReuViewActive;
 		bool ChkConActive;
 		bool ChkFalActive;
 		bool PupHtyActive;
@@ -248,19 +255,21 @@ public:
 		static const Sbecore::uint CONTINF = 3;
 		static const Sbecore::uint FEEDFLSTCLU = 4;
 		static const Sbecore::uint FEEDFPUPHTY = 5;
-		static const Sbecore::uint STATAPP = 6;
-		static const Sbecore::uint STATSHR = 7;
-		static const Sbecore::uint TAG = 8;
-		static const Sbecore::uint ALL = 9;
+		static const Sbecore::uint FEEDFPUPRET = 6;
+		static const Sbecore::uint STATAPP = 7;
+		static const Sbecore::uint STATSHR = 8;
+		static const Sbecore::uint TAG = 9;
+		static const Sbecore::uint ALL = 10;
 
 	public:
-		DpchEngData(const Sbecore::ubigint jref = 0, ContIac* contiac = NULL, ContInf* continf = NULL, Sbecore::Feed* feedFLstClu = NULL, Sbecore::Feed* feedFPupHty = NULL, StatShr* statshr = NULL, const std::set<Sbecore::uint>& mask = {NONE});
+		DpchEngData(const Sbecore::ubigint jref = 0, ContIac* contiac = NULL, ContInf* continf = NULL, Sbecore::Feed* feedFLstClu = NULL, Sbecore::Feed* feedFPupHty = NULL, Sbecore::Feed* feedFPupRet = NULL, StatShr* statshr = NULL, const std::set<Sbecore::uint>& mask = {NONE});
 
 	public:
 		ContIac contiac;
 		ContInf continf;
 		Sbecore::Feed feedFLstClu;
 		Sbecore::Feed feedFPupHty;
+		Sbecore::Feed feedFPupRet;
 		StatShr statshr;
 
 	public:
@@ -278,7 +287,9 @@ public:
 	bool evalButCluViewActive(DbsWdbe* dbswdbe);
 	bool evalButCluClusterAvail(DbsWdbe* dbswdbe);
 	bool evalButCluUnclusterAvail(DbsWdbe* dbswdbe);
-	bool evalTxtPrcActive(DbsWdbe* dbswdbe);
+	bool evalTxtReuActive(DbsWdbe* dbswdbe);
+	bool evalButReuViewAvail(DbsWdbe* dbswdbe);
+	bool evalButReuViewActive(DbsWdbe* dbswdbe);
 	bool evalChkConActive(DbsWdbe* dbswdbe);
 	bool evalChkFalActive(DbsWdbe* dbswdbe);
 	bool evalPupHtyActive(DbsWdbe* dbswdbe);
@@ -301,6 +312,7 @@ public:
 
 	Sbecore::Feed feedFLstClu;
 	Sbecore::Feed feedFPupHty;
+	Sbecore::Feed feedFPupRet;
 
 	WdbeMVariable recVar;
 
@@ -340,16 +352,20 @@ private:
 	void handleDpchAppDoButCluViewClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
 	void handleDpchAppDoButCluClusterClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
 	void handleDpchAppDoButCluUnclusterClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
+	void handleDpchAppDoButReuViewClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
 	void handleDpchAppDoButHtyEditClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
 
 public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeVarMod_cluEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
-	bool handleCallWdbeKlsAkeyMod_klsMtbUrfEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, const Sbecore::ubigint refInv, const std::string& srefInv);
-	bool handleCallWdbeVarUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 	bool handleCallWdbeVar_cluEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeVar_retEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
+	bool handleCallWdbeVar_reu_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
+	bool handleCallWdbeVar_reuEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeVarUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbeKlsAkeyMod_klsMtbUrfEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, const Sbecore::ubigint refInv, const std::string& srefInv);
+	bool handleCallWdbeVarMod_cluEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 
 };
 

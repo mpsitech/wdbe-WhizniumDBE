@@ -14,12 +14,16 @@
 
 // IP include.cust --- INSERT
 
-#include "PnlWdbeVerList.h"
-#include "PnlWdbeVerHeadbar.h"
-#include "PnlWdbeVerRec.h"
-#include "DlgWdbeVerBscdd.h"
-#include "DlgWdbeVerDetdd.h"
+#include "DlgWdbeVerCmdset.h"
+#include "DlgWdbeVerCustfst.h"
+#include "DlgWdbeVerDflalg.h"
+#include "DlgWdbeVerFinmod.h"
+#include "DlgWdbeVerGenfst.h"
+#include "DlgWdbeVerMdlstr.h"
 #include "DlgWdbeVerNew.h"
+#include "PnlWdbeVerRec.h"
+#include "PnlWdbeVerHeadbar.h"
+#include "PnlWdbeVerList.h"
 
 #define VecVWdbeVerDo CrdWdbeVer::VecVDo
 #define VecVWdbeVerSge CrdWdbeVer::VecVSge
@@ -48,8 +52,12 @@ public:
 		static const Sbecore::uint MITAPPABTCLICK = 2;
 		static const Sbecore::uint MITCRDNEWCLICK = 3;
 		static const Sbecore::uint MITCRDPCVCLICK = 4;
-		static const Sbecore::uint MITCRDIBSCLICK = 5;
-		static const Sbecore::uint MITCRDIDSCLICK = 6;
+		static const Sbecore::uint MITCRDIMDCLICK = 5;
+		static const Sbecore::uint MITCRDICSCLICK = 6;
+		static const Sbecore::uint MITCRDIDACLICK = 7;
+		static const Sbecore::uint MITCRDGFSCLICK = 8;
+		static const Sbecore::uint MITCRDIFSCLICK = 9;
+		static const Sbecore::uint MITCRDFNMCLICK = 10;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);
@@ -113,29 +121,49 @@ public:
 	class StatShr : public Sbecore::Block {
 
 	public:
-		static const Sbecore::uint JREFDLGBSCDD = 1;
-		static const Sbecore::uint JREFDLGDETDD = 2;
-		static const Sbecore::uint JREFDLGNEW = 3;
-		static const Sbecore::uint JREFHEADBAR = 4;
-		static const Sbecore::uint JREFLIST = 5;
-		static const Sbecore::uint JREFREC = 6;
-		static const Sbecore::uint MSPCRD1AVAIL = 7;
-		static const Sbecore::uint MITCRDNEWAVAIL = 8;
-		static const Sbecore::uint MITCRDPCVAVAIL = 9;
-		static const Sbecore::uint MITCRDPCVACTIVE = 10;
-		static const Sbecore::uint MSPCRD3AVAIL = 11;
-		static const Sbecore::uint MSPCRD3ACTIVE = 12;
-		static const Sbecore::uint MITCRDIBSAVAIL = 13;
-		static const Sbecore::uint MITCRDIBSACTIVE = 14;
-		static const Sbecore::uint MITCRDIDSAVAIL = 15;
-		static const Sbecore::uint MITCRDIDSACTIVE = 16;
+		static const Sbecore::uint JREFDLGCMDSET = 1;
+		static const Sbecore::uint JREFDLGCUSTFST = 2;
+		static const Sbecore::uint JREFDLGDFLALG = 3;
+		static const Sbecore::uint JREFDLGFINMOD = 4;
+		static const Sbecore::uint JREFDLGGENFST = 5;
+		static const Sbecore::uint JREFDLGMDLSTR = 6;
+		static const Sbecore::uint JREFDLGNEW = 7;
+		static const Sbecore::uint JREFHEADBAR = 8;
+		static const Sbecore::uint JREFLIST = 9;
+		static const Sbecore::uint JREFREC = 10;
+		static const Sbecore::uint MSPCRD1AVAIL = 11;
+		static const Sbecore::uint MITCRDNEWAVAIL = 12;
+		static const Sbecore::uint MITCRDPCVAVAIL = 13;
+		static const Sbecore::uint MITCRDPCVACTIVE = 14;
+		static const Sbecore::uint MSPCRD3AVAIL = 15;
+		static const Sbecore::uint MSPCRD3ACTIVE = 16;
+		static const Sbecore::uint MITCRDIMDAVAIL = 17;
+		static const Sbecore::uint MITCRDIMDACTIVE = 18;
+		static const Sbecore::uint MITCRDICSAVAIL = 19;
+		static const Sbecore::uint MITCRDICSACTIVE = 20;
+		static const Sbecore::uint MITCRDIDAAVAIL = 21;
+		static const Sbecore::uint MITCRDIDAACTIVE = 22;
+		static const Sbecore::uint MSPCRD4AVAIL = 23;
+		static const Sbecore::uint MSPCRD4ACTIVE = 24;
+		static const Sbecore::uint MITCRDGFSAVAIL = 25;
+		static const Sbecore::uint MITCRDGFSACTIVE = 26;
+		static const Sbecore::uint MITCRDIFSAVAIL = 27;
+		static const Sbecore::uint MITCRDIFSACTIVE = 28;
+		static const Sbecore::uint MSPCRD5AVAIL = 29;
+		static const Sbecore::uint MSPCRD5ACTIVE = 30;
+		static const Sbecore::uint MITCRDFNMAVAIL = 31;
+		static const Sbecore::uint MITCRDFNMACTIVE = 32;
 
 	public:
-		StatShr(const Sbecore::ubigint jrefDlgbscdd = 0, const Sbecore::ubigint jrefDlgdetdd = 0, const Sbecore::ubigint jrefDlgnew = 0, const Sbecore::ubigint jrefHeadbar = 0, const Sbecore::ubigint jrefList = 0, const Sbecore::ubigint jrefRec = 0, const bool MspCrd1Avail = true, const bool MitCrdNewAvail = true, const bool MitCrdPcvAvail = true, const bool MitCrdPcvActive = true, const bool MspCrd3Avail = true, const bool MspCrd3Active = true, const bool MitCrdIbsAvail = true, const bool MitCrdIbsActive = true, const bool MitCrdIdsAvail = true, const bool MitCrdIdsActive = true);
+		StatShr(const Sbecore::ubigint jrefDlgcmdset = 0, const Sbecore::ubigint jrefDlgcustfst = 0, const Sbecore::ubigint jrefDlgdflalg = 0, const Sbecore::ubigint jrefDlgfinmod = 0, const Sbecore::ubigint jrefDlggenfst = 0, const Sbecore::ubigint jrefDlgmdlstr = 0, const Sbecore::ubigint jrefDlgnew = 0, const Sbecore::ubigint jrefHeadbar = 0, const Sbecore::ubigint jrefList = 0, const Sbecore::ubigint jrefRec = 0, const bool MspCrd1Avail = true, const bool MitCrdNewAvail = true, const bool MitCrdPcvAvail = true, const bool MitCrdPcvActive = true, const bool MspCrd3Avail = true, const bool MspCrd3Active = true, const bool MitCrdImdAvail = true, const bool MitCrdImdActive = true, const bool MitCrdIcsAvail = true, const bool MitCrdIcsActive = true, const bool MitCrdIdaAvail = true, const bool MitCrdIdaActive = true, const bool MspCrd4Avail = true, const bool MspCrd4Active = true, const bool MitCrdGfsAvail = true, const bool MitCrdGfsActive = true, const bool MitCrdIfsAvail = true, const bool MitCrdIfsActive = true, const bool MspCrd5Avail = true, const bool MspCrd5Active = true, const bool MitCrdFnmAvail = true, const bool MitCrdFnmActive = true);
 
 	public:
-		Sbecore::ubigint jrefDlgbscdd;
-		Sbecore::ubigint jrefDlgdetdd;
+		Sbecore::ubigint jrefDlgcmdset;
+		Sbecore::ubigint jrefDlgcustfst;
+		Sbecore::ubigint jrefDlgdflalg;
+		Sbecore::ubigint jrefDlgfinmod;
+		Sbecore::ubigint jrefDlggenfst;
+		Sbecore::ubigint jrefDlgmdlstr;
 		Sbecore::ubigint jrefDlgnew;
 		Sbecore::ubigint jrefHeadbar;
 		Sbecore::ubigint jrefList;
@@ -146,10 +174,22 @@ public:
 		bool MitCrdPcvActive;
 		bool MspCrd3Avail;
 		bool MspCrd3Active;
-		bool MitCrdIbsAvail;
-		bool MitCrdIbsActive;
-		bool MitCrdIdsAvail;
-		bool MitCrdIdsActive;
+		bool MitCrdImdAvail;
+		bool MitCrdImdActive;
+		bool MitCrdIcsAvail;
+		bool MitCrdIcsActive;
+		bool MitCrdIdaAvail;
+		bool MitCrdIdaActive;
+		bool MspCrd4Avail;
+		bool MspCrd4Active;
+		bool MitCrdGfsAvail;
+		bool MitCrdGfsActive;
+		bool MitCrdIfsAvail;
+		bool MitCrdIfsActive;
+		bool MspCrd5Avail;
+		bool MspCrd5Active;
+		bool MitCrdFnmAvail;
+		bool MitCrdFnmActive;
 
 	public:
 		void writeJSON(Json::Value& sup, std::string difftag = "");
@@ -226,10 +266,22 @@ public:
 	bool evalMitCrdPcvActive(DbsWdbe* dbswdbe);
 	bool evalMspCrd3Avail(DbsWdbe* dbswdbe);
 	bool evalMspCrd3Active(DbsWdbe* dbswdbe);
-	bool evalMitCrdIbsAvail(DbsWdbe* dbswdbe);
-	bool evalMitCrdIbsActive(DbsWdbe* dbswdbe);
-	bool evalMitCrdIdsAvail(DbsWdbe* dbswdbe);
-	bool evalMitCrdIdsActive(DbsWdbe* dbswdbe);
+	bool evalMitCrdImdAvail(DbsWdbe* dbswdbe);
+	bool evalMitCrdImdActive(DbsWdbe* dbswdbe);
+	bool evalMitCrdIcsAvail(DbsWdbe* dbswdbe);
+	bool evalMitCrdIcsActive(DbsWdbe* dbswdbe);
+	bool evalMitCrdIdaAvail(DbsWdbe* dbswdbe);
+	bool evalMitCrdIdaActive(DbsWdbe* dbswdbe);
+	bool evalMspCrd4Avail(DbsWdbe* dbswdbe);
+	bool evalMspCrd4Active(DbsWdbe* dbswdbe);
+	bool evalMitCrdGfsAvail(DbsWdbe* dbswdbe);
+	bool evalMitCrdGfsActive(DbsWdbe* dbswdbe);
+	bool evalMitCrdIfsAvail(DbsWdbe* dbswdbe);
+	bool evalMitCrdIfsActive(DbsWdbe* dbswdbe);
+	bool evalMspCrd5Avail(DbsWdbe* dbswdbe);
+	bool evalMspCrd5Active(DbsWdbe* dbswdbe);
+	bool evalMitCrdFnmAvail(DbsWdbe* dbswdbe);
+	bool evalMitCrdFnmActive(DbsWdbe* dbswdbe);
 
 public:
 	CrdWdbeVer(XchgWdbe* xchg, DbsWdbe* dbswdbe, const Sbecore::ubigint jrefSup, const Sbecore::uint ixWdbeVLocale, const Sbecore::ubigint ref = 0, const Sbecore::uint ixWdbeVPreset = VecWdbeVPreset::VOID, const Sbecore::ubigint preUref = 0);
@@ -242,12 +294,16 @@ public:
 	Sbecore::Feed feedFMcbAlert;
 	Sbecore::Feed feedFSge;
 
-	PnlWdbeVerList* pnllist;
-	PnlWdbeVerHeadbar* pnlheadbar;
-	PnlWdbeVerRec* pnlrec;
-	DlgWdbeVerBscdd* dlgbscdd;
-	DlgWdbeVerDetdd* dlgdetdd;
+	DlgWdbeVerCmdset* dlgcmdset;
+	DlgWdbeVerCustfst* dlgcustfst;
+	DlgWdbeVerDflalg* dlgdflalg;
+	DlgWdbeVerFinmod* dlgfinmod;
+	DlgWdbeVerGenfst* dlggenfst;
+	DlgWdbeVerMdlstr* dlgmdlstr;
 	DlgWdbeVerNew* dlgnew;
+	PnlWdbeVerRec* pnlrec;
+	PnlWdbeVerHeadbar* pnlheadbar;
+	PnlWdbeVerList* pnllist;
 
 	// IP vars.cust --- INSERT
 
@@ -273,17 +329,21 @@ private:
 	void handleDpchAppDoMitAppAbtClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
 	void handleDpchAppDoMitCrdNewClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
 	void handleDpchAppDoMitCrdPcvClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
-	void handleDpchAppDoMitCrdIbsClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
-	void handleDpchAppDoMitCrdIdsClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
+	void handleDpchAppDoMitCrdImdClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
+	void handleDpchAppDoMitCrdIcsClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
+	void handleDpchAppDoMitCrdIdaClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
+	void handleDpchAppDoMitCrdGfsClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
+	void handleDpchAppDoMitCrdIfsClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
+	void handleDpchAppDoMitCrdFnmClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
 	void handleDpchAppWdbeAlert(DbsWdbe* dbswdbe, DpchAppWdbeAlert* dpchappwdbealert, DpchEngWdbe** dpcheng);
 
 public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeRefPreSet(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, const Sbecore::ubigint refInv);
-	bool handleCallWdbeStatChg(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 	bool handleCallWdbeDlgClose(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbeStatChg(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbeRefPreSet(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, const Sbecore::ubigint refInv);
 
 private:
 	void changeStage(DbsWdbe* dbswdbe, Sbecore::uint _ixVSge, DpchEngWdbe** dpcheng = NULL);

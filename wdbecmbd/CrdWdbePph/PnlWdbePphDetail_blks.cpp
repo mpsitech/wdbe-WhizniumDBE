@@ -22,7 +22,6 @@ uint PnlWdbePphDetail::VecVDo::getIx(
 
 	if (s == "butsaveclick") return BUTSAVECLICK;
 	if (s == "butuntviewclick") return BUTUNTVIEWCLICK;
-	if (s == "butmdlviewclick") return BUTMDLVIEWCLICK;
 
 	return(0);
 };
@@ -32,7 +31,6 @@ string PnlWdbePphDetail::VecVDo::getSref(
 		) {
 	if (ix == BUTSAVECLICK) return("ButSaveClick");
 	if (ix == BUTUNTVIEWCLICK) return("ButUntViewClick");
-	if (ix == BUTMDLVIEWCLICK) return("ButMdlViewClick");
 
 	return("");
 };
@@ -152,15 +150,13 @@ set<uint> PnlWdbePphDetail::ContIac::diff(
 PnlWdbePphDetail::ContInf::ContInf(
 			const string& TxtSrf
 			, const string& TxtUnt
-			, const string& TxtMdl
 		) :
 			Block()
 		{
 	this->TxtSrf = TxtSrf;
 	this->TxtUnt = TxtUnt;
-	this->TxtMdl = TxtMdl;
 
-	mask = {TXTSRF, TXTUNT, TXTMDL};
+	mask = {TXTSRF, TXTUNT};
 };
 
 void PnlWdbePphDetail::ContInf::writeJSON(
@@ -173,7 +169,6 @@ void PnlWdbePphDetail::ContInf::writeJSON(
 
 	me["TxtSrf"] = TxtSrf;
 	me["TxtUnt"] = TxtUnt;
-	me["TxtMdl"] = TxtMdl;
 };
 
 void PnlWdbePphDetail::ContInf::writeXML(
@@ -190,7 +185,6 @@ void PnlWdbePphDetail::ContInf::writeXML(
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
 		writeStringAttr(wr, itemtag, "sref", "TxtSrf", TxtSrf);
 		writeStringAttr(wr, itemtag, "sref", "TxtUnt", TxtUnt);
-		writeStringAttr(wr, itemtag, "sref", "TxtMdl", TxtMdl);
 	xmlTextWriterEndElement(wr);
 };
 
@@ -201,7 +195,6 @@ set<uint> PnlWdbePphDetail::ContInf::comm(
 
 	if (TxtSrf == comp->TxtSrf) insert(items, TXTSRF);
 	if (TxtUnt == comp->TxtUnt) insert(items, TXTUNT);
-	if (TxtMdl == comp->TxtMdl) insert(items, TXTMDL);
 
 	return(items);
 };
@@ -214,7 +207,7 @@ set<uint> PnlWdbePphDetail::ContInf::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {TXTSRF, TXTUNT, TXTMDL};
+	diffitems = {TXTSRF, TXTUNT};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -264,9 +257,6 @@ PnlWdbePphDetail::StatShr::StatShr(
 			, const bool TxtUntActive
 			, const bool ButUntViewAvail
 			, const bool ButUntViewActive
-			, const bool TxtMdlActive
-			, const bool ButMdlViewAvail
-			, const bool ButMdlViewActive
 			, const bool TxfCmtActive
 		) :
 			Block()
@@ -277,12 +267,9 @@ PnlWdbePphDetail::StatShr::StatShr(
 	this->TxtUntActive = TxtUntActive;
 	this->ButUntViewAvail = ButUntViewAvail;
 	this->ButUntViewActive = ButUntViewActive;
-	this->TxtMdlActive = TxtMdlActive;
-	this->ButMdlViewAvail = ButMdlViewAvail;
-	this->ButMdlViewActive = ButMdlViewActive;
 	this->TxfCmtActive = TxfCmtActive;
 
-	mask = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXTUNTACTIVE, BUTUNTVIEWAVAIL, BUTUNTVIEWACTIVE, TXTMDLACTIVE, BUTMDLVIEWAVAIL, BUTMDLVIEWACTIVE, TXFCMTACTIVE};
+	mask = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXTUNTACTIVE, BUTUNTVIEWAVAIL, BUTUNTVIEWACTIVE, TXFCMTACTIVE};
 };
 
 void PnlWdbePphDetail::StatShr::writeJSON(
@@ -299,9 +286,6 @@ void PnlWdbePphDetail::StatShr::writeJSON(
 	me["TxtUntActive"] = TxtUntActive;
 	me["ButUntViewAvail"] = ButUntViewAvail;
 	me["ButUntViewActive"] = ButUntViewActive;
-	me["TxtMdlActive"] = TxtMdlActive;
-	me["ButMdlViewAvail"] = ButMdlViewAvail;
-	me["ButMdlViewActive"] = ButMdlViewActive;
 	me["TxfCmtActive"] = TxfCmtActive;
 };
 
@@ -323,9 +307,6 @@ void PnlWdbePphDetail::StatShr::writeXML(
 		writeBoolAttr(wr, itemtag, "sref", "TxtUntActive", TxtUntActive);
 		writeBoolAttr(wr, itemtag, "sref", "ButUntViewAvail", ButUntViewAvail);
 		writeBoolAttr(wr, itemtag, "sref", "ButUntViewActive", ButUntViewActive);
-		writeBoolAttr(wr, itemtag, "sref", "TxtMdlActive", TxtMdlActive);
-		writeBoolAttr(wr, itemtag, "sref", "ButMdlViewAvail", ButMdlViewAvail);
-		writeBoolAttr(wr, itemtag, "sref", "ButMdlViewActive", ButMdlViewActive);
 		writeBoolAttr(wr, itemtag, "sref", "TxfCmtActive", TxfCmtActive);
 	xmlTextWriterEndElement(wr);
 };
@@ -341,9 +322,6 @@ set<uint> PnlWdbePphDetail::StatShr::comm(
 	if (TxtUntActive == comp->TxtUntActive) insert(items, TXTUNTACTIVE);
 	if (ButUntViewAvail == comp->ButUntViewAvail) insert(items, BUTUNTVIEWAVAIL);
 	if (ButUntViewActive == comp->ButUntViewActive) insert(items, BUTUNTVIEWACTIVE);
-	if (TxtMdlActive == comp->TxtMdlActive) insert(items, TXTMDLACTIVE);
-	if (ButMdlViewAvail == comp->ButMdlViewAvail) insert(items, BUTMDLVIEWAVAIL);
-	if (ButMdlViewActive == comp->ButMdlViewActive) insert(items, BUTMDLVIEWACTIVE);
 	if (TxfCmtActive == comp->TxfCmtActive) insert(items, TXFCMTACTIVE);
 
 	return(items);
@@ -357,7 +335,7 @@ set<uint> PnlWdbePphDetail::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXTUNTACTIVE, BUTUNTVIEWAVAIL, BUTUNTVIEWACTIVE, TXTMDLACTIVE, BUTMDLVIEWAVAIL, BUTMDLVIEWACTIVE, TXFCMTACTIVE};
+	diffitems = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXTUNTACTIVE, BUTUNTVIEWAVAIL, BUTUNTVIEWACTIVE, TXFCMTACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -379,7 +357,6 @@ void PnlWdbePphDetail::Tag::writeJSON(
 	if (ixWdbeVLocale == VecWdbeVLocale::ENUS) {
 		me["CptSrf"] = "identifier";
 		me["CptUnt"] = "unit";
-		me["CptMdl"] = "controlling module";
 		me["CptCmt"] = "comment";
 	};
 	me["Cpt"] = StrMod::cap(VecWdbeVTag::getTitle(VecWdbeVTag::DETAIL, ixWdbeVLocale));
@@ -401,7 +378,6 @@ void PnlWdbePphDetail::Tag::writeXML(
 		if (ixWdbeVLocale == VecWdbeVLocale::ENUS) {
 			writeStringAttr(wr, itemtag, "sref", "CptSrf", "identifier");
 			writeStringAttr(wr, itemtag, "sref", "CptUnt", "unit");
-			writeStringAttr(wr, itemtag, "sref", "CptMdl", "controlling module");
 			writeStringAttr(wr, itemtag, "sref", "CptCmt", "comment");
 		};
 		writeStringAttr(wr, itemtag, "sref", "Cpt", StrMod::cap(VecWdbeVTag::getTitle(VecWdbeVTag::DETAIL, ixWdbeVLocale)));
