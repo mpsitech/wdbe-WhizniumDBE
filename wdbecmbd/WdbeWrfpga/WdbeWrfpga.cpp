@@ -188,7 +188,8 @@ string WdbeWrfpga::getVarStr(
 
 	size_t ptr;
 
-	if (sig->srefWdbeKHdltype == "int") s = "integer";
+	if (sig->srefWdbeKHdltype == "_bool") s = "boolean";
+	else if (sig->srefWdbeKHdltype == "int") s = "integer";
 	else if (sig->srefWdbeKHdltype == "nat") s = "natural";
 	else if (sig->srefWdbeKHdltype == "sl") s = "std_logic";
 	else if (sig->srefWdbeKHdltype == "slvup") {

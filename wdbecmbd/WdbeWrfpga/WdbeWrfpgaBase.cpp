@@ -223,11 +223,12 @@ void WdbeWrfpgaBase::writeUntPdc(
 					first = false;
 				};
 
-				outfile << "set_io -port_name " << pin->sref << " -pin_name " << StrMod::uc(pin->Location) << " -fixed true -direction";
+				outfile << "set_io -port_name " << pin->sref << " -pin_name " << StrMod::uc(pin->Location) << " -fixed true -DIRECTION";
 				if (prt->ixVDir == VecWdbeVMPortDir::IN) outfile << " INPUT";
 				else if (prt->ixVDir == VecWdbeVMPortDir::INOUT) outfile << " BI-DIRECTIONAL";
 				else if (prt->ixVDir == VecWdbeVMPortDir::OUT) outfile << " OUTPUT";
-				outfile << " -io_std " << iostd << endl;
+				//outfile << " -io_std " << iostd << endl;
+				outfile << endl;
 			};
 		};
 	};

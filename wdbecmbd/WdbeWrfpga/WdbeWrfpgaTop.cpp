@@ -103,7 +103,7 @@ void WdbeWrfpgaTop::writeMdlVhd(
 		outfile << " then" << endl;
 
 		outfile << "\t\t\t\t\ti := 0;" << endl;
-		outfile << "\t\t\t\t\tstateReset <= stateRstReset;" << endl;
+		outfile << "\t\t\t\t\tstateRst <= stateRstReset;" << endl;
 		outfile << "\t\t\t\tend if;" << endl;
 	};
 	outfile << "-- IP impl.rst.run --- IEND" << endl;

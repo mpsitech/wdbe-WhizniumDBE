@@ -317,11 +317,11 @@ void WdbeWrmcuBase::writeUntH(
 	// --- define.unts
 	outfile << "// IP define.unts --- IBEGIN" << endl;
 
-	// vectors associated with unit or controller command sets (adapted from WdbeWrfpgaBase)
+	// vectors associated with unit or controllers
 	dbswdbe->tblwdbemvector->loadRstBySQL("SELECT * FROM TblWdbeMVector WHERE hkIxVTbl = " + to_string(VecWdbeVMVectorHkTbl::UNT) + " AND hkUref = " + to_string(unt->ref) + " ORDER BY sref ASC", false, vecs);
 	dbswdbe->tblwdbemvector->loadRstBySQL("SELECT TblWdbeMVector.* FROM TblWdbeMModule, TblWdbeMVector WHERE TblWdbeMModule.hkIxVTbl = " + to_string(VecWdbeVMModuleHkTbl::UNT) + " AND TblWdbeMModule.hkUref = "
 				+ to_string(unt->ref) + " AND TblWdbeMModule.ixVBasetype = " + to_string(VecWdbeVMModuleBasetype::ECTR) + " AND TblWdbeMVector.hkIxVTbl = " + to_string(VecWdbeVMVectorHkTbl::CTR)
-				+ " AND TblWdbeMVector.hkUref = TblWdbeMModule.refWdbeMController AND TblWdbeMVector.sref LIKE 'VecV%Command' ORDER BY TblWdbeMVector.sref ASC", true, vecs);
+				+ " AND TblWdbeMVector.hkUref = TblWdbeMModule.refWdbeMController ORDER BY TblWdbeMVector.sref ASC", true, vecs);
 
 	for (unsigned int i = 0; i < vecs.nodes.size(); i++) {
 		vec = vecs.nodes[i];
@@ -730,7 +730,7 @@ void WdbeWrmcuBase::writeUntH(
 		outfile << "// IP " << mdl->sref << ".cust --- INSERT" << endl;
 		outfile << endl;
 
-		outfile << "extern struct Shrdat" << StrMod::cap(mdl->sref) << " { // Shrdat" << StrMod::cap(mdl->sref) << " --- LINE" << endl;
+		outfile << "extern struct Shrdat" << StrMod::cap(mdl->sref) << " { // IP Shrdat" << StrMod::cap(mdl->sref) << " --- LINE" << endl;
 
 		refC = 0;
 
