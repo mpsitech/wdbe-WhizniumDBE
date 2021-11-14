@@ -1,62 +1,64 @@
-IexWznmGbl v0.9.29
-ImeIMError.sref	Title
-lic.auth
-	ImeIJMErrorTitle.srefX1RefWznmMLocale	Title
-	enus	&srvmsg;
-	ImeIJMErrorTitle.end
-lic.ctwarn
-	ImeIJMErrorTitle.srefX1RefWznmMLocale	Title
-	enus	Last contact with licensing server was on &lastAttempt;. WhizniumDBE will cease to function unless contact is re-established by &finalAttempt;.
-	ImeIJMErrorTitle.end
-lic.ctlost
-	ImeIJMErrorTitle.srefX1RefWznmMLocale	Title
-	enus	Last contact with licensing server was on &lastAttempt;. Please contact support at support@mpsitech.com.
-	ImeIJMErrorTitle.end
-ImeIMError.end
-ImeIMVector.srefIxVBasetype	sref	osrefWznmKTaggrp	srefsKOption
-lin	VecWdbeVBasereptype		filfed
-	ImeIAMVectorTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
-	full	enus	base repository type
-	ImeIAMVectorTitle.end
-	ImeIMVectoritem.sref	Avail	Implied	Title	Comment
-	void
-		ImeIJMVectoritem.srefX1RefWznmMLocale	Title	Comment
-		enus	empty
-		ImeIJMVectoritem.end
-	prjgit
-		ImeIJMVectoritem.srefX1RefWznmMLocale	Title	Comment
-		enus	project Git
-		ImeIJMVectoritem.end
-	custgit
-		ImeIJMVectoritem.srefX1RefWznmMLocale	Title	Comment
-		enus	custom Git
-		ImeIJMVectoritem.end
-	uld
-		ImeIJMVectoritem.srefX1RefWznmMLocale	Title	Comment
-		enus	upload
-		ImeIJMVectoritem.end
-	ImeIMVectoritem.end
-ImeIMVector.end
-ImeIMBlock.srefsReaIxWznmWScope	srefsWriIxWznmWScope	sref	Comment
-cmbeng;eng	cmbeng;eng	StgWdbeTenant
-	ImeIAMBlockItem.irefRefWznmCAMBlockItem	srefIxVBasetype	sref	srefIxWznmVVartype	Defval	Comment
-	0	var	orgname	string
-	0	var	orgweb	string
-	ImeIAMBlockItem.end
-ImeIMBlock.end
-ImeIMCapability.srefTplRefWznmMCapability	sref	Title
-acv	Acv
-	ImeIAMCapabilityPar.x1SrefKKey	Val
-	uld	true
-	ImeIAMCapabilityPar.end
-arm	Arm
-dlgimp	DlgWdbeCvrBsccd
-dlgimp	DlgWdbeCvrDetcd
-dlgloaini	DlgWdbeNavLoaini
-	ImeIAMCapabilityPar.x1SrefKKey	Val
-	acv	true
-	ImeIAMCapabilityPar.end
-dlgimp	DlgWdbePrjImpex
-dlgimp	DlgWdbeVerBscdd
-dlgimp	DlgWdbeVerDetdd
-ImeIMCapability.end
+IexWznmGbl v1.1.7								
+ImeIMError.sref	Title							
+lic.auth								
+	ImeIJMErrorTitle.srefX1RefWznmMLocale	Title						
+	enus	"&srvmsg;"						
+	ImeIJMErrorTitle.end							
+lic.ctwarn								
+	ImeIJMErrorTitle.srefX1RefWznmMLocale	Title						
+	enus	"Last contact with licensing server was on &lastAttempt;. WhizniumDBE will cease to function unless contact is re-established by &finalAttempt;."						
+	ImeIJMErrorTitle.end							
+lic.ctlost								
+	ImeIJMErrorTitle.srefX1RefWznmMLocale	Title						
+	enus	"Last contact with licensing server was on &lastAttempt;. Please contact support at support@mpsitech.com."						
+	ImeIJMErrorTitle.end							
+ImeIMError.end								
+ImeIMVector.srefIxVBasetype	sref	osrefWznmKTaggrp	srefsKOption					
+lin	VecWdbeVBasereptype		filfed					
+	ImeIAMVectorTitle.srefX1IxVType	srefX2RefWznmMLocale	Title					
+	full	enus	base repository type					
+	ImeIAMVectorTitle.end							
+	ImeIMVectoritem.sref	Avail	Implied	Title	Comment			
+	void							
+		ImeIJMVectoritem.srefX1RefWznmMLocale	Title	Comment				
+		enus	empty					
+		ImeIJMVectoritem.end						
+	prjgit							
+		ImeIJMVectoritem.srefX1RefWznmMLocale	Title	Comment				
+		enus	project Git					
+		ImeIJMVectoritem.end						
+	custgit							
+		ImeIJMVectoritem.srefX1RefWznmMLocale	Title	Comment				
+		enus	custom Git					
+		ImeIJMVectoritem.end						
+	uld							
+		ImeIJMVectoritem.srefX1RefWznmMLocale	Title	Comment				
+		enus	upload					
+		ImeIJMVectoritem.end						
+	ImeIMVectoritem.end							
+ImeIMVector.end								
+ImeIMBlock.srefsReaIxWznmWScope	srefsWriIxWznmWScope	sref	Comment					
+"cmbeng;eng"	"cmbeng;eng"	StgWdbeTenant						
+	ImeIAMBlockItem.irefRefWznmCAMBlockItem	srefIxVBasetype	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
+	0	var	orgname	string				
+	0	var	orgweb	string				
+	ImeIAMBlockItem.end							
+ImeIMBlock.end								
+ImeIMCapability.srefTplRefWznmMCapability	sref	Title						
+acv	Acv							
+	ImeIAMCapabilityPar.x1SrefKKey	Val						
+	uld	true						
+	ImeIAMCapabilityPar.end							
+arm	Arm							
+dlgimp	DlgWdbeCvrBsccd							
+dlgimp	DlgWdbeCvrDetcd							
+dlgloaini	DlgWdbeNavLoaini							
+	ImeIAMCapabilityPar.x1SrefKKey	Val						
+	acv	true						
+	ImeIAMCapabilityPar.end							
+dlgimp	DlgWdbePrjImpex							
+dlgimp	DlgWdbeVerCmdset							
+dlgimp	DlgWdbeVerCustfst							
+dlgimp	DlgWdbeVerDflalg							
+dlgimp	DlgWdbeVerMdlstr							
+ImeIMCapability.end								
