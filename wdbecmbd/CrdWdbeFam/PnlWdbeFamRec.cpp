@@ -38,8 +38,8 @@ PnlWdbeFamRec::PnlWdbeFamRec(
 		{
 	jref = xchg->addJob(dbswdbe, this, jrefSup);
 
-	pnldetail = NULL;
 	pnl1nunit = NULL;
+	pnldetail = NULL;
 
 	// IP constructor.cust1 --- INSERT
 

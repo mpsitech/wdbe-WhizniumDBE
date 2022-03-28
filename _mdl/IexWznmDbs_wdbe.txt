@@ -119,6 +119,10 @@ klst	KlstWdbeKVendor		noloc
 		ImeIJMVectoritem1.srefX1RefWznmMLocale	Title	Comment
 		enus	Intel
 		ImeIJMVectoritem1.end
+	lttc
+		ImeIJMVectoritem1.srefX1RefWznmMLocale	Title	Comment
+		enus	Lattice
+		ImeIJMVectoritem1.end
 	mchp
 		ImeIJMVectoritem1.srefX1RefWznmMLocale	Title	Comment
 		enus	Microchip
@@ -1503,6 +1507,7 @@ main	void	0	TblWdbeMUnit	unt
 		bga132
 		bga236
 		bga320
+		bga400
 		bga484
 		bga672
 		lqfp48

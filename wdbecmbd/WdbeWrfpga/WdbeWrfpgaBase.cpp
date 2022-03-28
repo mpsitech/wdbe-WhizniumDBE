@@ -68,7 +68,13 @@ DpchRetWdbe* WdbeWrfpgaBase::run(
 			// xxxx/Xxxx.pcf
 			s = xchg->tmppath + "/" + folder + "/" + Untsref + ".pdc.ip";
 			outfile.open(s.c_str(), ios::out);
-			writeUntPdc(dbswdbe, outfile, topprts, bnks);
+			writeUntMchpPdc(dbswdbe, outfile, topprts, bnks);
+			outfile.close();
+		} else if (unt->srefKToolch == "radiant") {
+			// xxxx/Xxxx.pcf
+			s = xchg->tmppath + "/" + folder + "/" + Untsref + ".pdc.ip";
+			outfile.open(s.c_str(), ios::out);
+			writeUntLttcPdc(dbswdbe, outfile, topprts, bnks);
 			outfile.close();
 		} else if (unt->srefKToolch == "vivado") {
 			// xxxx/Xxxx.xdc
@@ -167,7 +173,64 @@ void WdbeWrfpgaBase::writeUntUcf(
 	outfile << "# IP pins --- IEND" << endl;
 };
 
-void WdbeWrfpgaBase::writeUntPdc(
+void WdbeWrfpgaBase::writeUntLttcPdc(
+			DbsWdbe* dbswdbe
+			, fstream& outfile
+			, ListWdbeMPort& topprts
+			, ListWdbeMBank& bnks
+		) {
+	WdbeMBank* bnk = NULL;
+
+	ListWdbeMPin pins;
+	WdbeMPin* pin = NULL;
+
+	map<string,WdbeMPort*> prts;
+	WdbeMPort* prt = NULL;
+
+	string s;
+
+	size_t ptr;
+
+	bool first;
+
+	for (unsigned int i = 0; i < topprts.nodes.size(); i++) prts[topprts.nodes[i]->sref] = topprts.nodes[i];
+
+	// --- pins
+	outfile << "# IP pins --- IBEGIN" << endl;
+
+	// list pins by I/O bank
+	for (unsigned int i = 0; i < bnks.nodes.size(); i++) {
+		bnk = bnks.nodes[i];
+
+		dbswdbe->tblwdbempin->loadRstByBnk(bnk->ref, false, pins);
+		first = true;
+
+		for (unsigned int j = 0; j < pins.nodes.size(); j++) {
+			pin = pins.nodes[j];
+
+			s = pin->sref;
+			ptr = s.find('[');
+			if (ptr != string::npos) s = s.substr(0, ptr);
+
+			auto it = prts.find(s);
+			if (it != prts.end()) {
+				prt = it->second;
+
+				if (first) {
+					outfile << endl;
+					outfile << "# " << StubWdbe::getStubBnkStd(dbswdbe, bnk->ref) << endl;
+					first = false;
+				};
+
+				outfile << "ldc_set_location -site {" << StrMod::uc(pin->Location) << "} [get_ports {" << pin->sref << "}]" << endl;
+			};
+		};
+	};
+
+	outfile << "# IP pins --- IEND" << endl;
+};
+
+void WdbeWrfpgaBase::writeUntMchpPdc(
 			DbsWdbe* dbswdbe
 			, fstream& outfile
 			, ListWdbeMPort& topprts

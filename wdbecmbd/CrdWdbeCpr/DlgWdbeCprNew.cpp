@@ -91,23 +91,23 @@ void DlgWdbeCprNew::refresh(
 	muteRefresh = true;
 
 	ContInf oldContinf(continf);
-	ContIac oldContiac(contiac);
 	StatShr oldStatshr(statshr);
+	ContIac oldContiac(contiac);
 
 	// IP refresh --- BEGIN
 	// continf
 	continf.numFSge = ixVSge;
 
-	// contiac
-
 	// statshr
 	statshr.ButCncActive = evalButCncActive(dbswdbe);
 	statshr.ButCreActive = evalButCreActive(dbswdbe);
 
+	// contiac
+
 	// IP refresh --- END
 	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
-	if (contiac.diff(&oldContiac).size() != 0) insert(moditems, DpchEngData::CONTIAC);
 	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
+	if (contiac.diff(&oldContiac).size() != 0) insert(moditems, DpchEngData::CONTIAC);
 
 	muteRefresh = false;
 };

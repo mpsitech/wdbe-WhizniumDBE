@@ -14,12 +14,12 @@
 
 // IP include.cust --- INSERT
 
-#include "PnlWdbePrcDetail.h"
-#include "PnlWdbePrcKHdltype.h"
-#include "PnlWdbePrcRef1NSensitivity.h"
-#include "PnlWdbePrcRef1NVariable.h"
-#include "PnlWdbePrcMge1NSignal.h"
 #include "PnlWdbePrcFsmFsm1NFsmstate.h"
+#include "PnlWdbePrcMge1NSignal.h"
+#include "PnlWdbePrcRef1NVariable.h"
+#include "PnlWdbePrcRef1NSensitivity.h"
+#include "PnlWdbePrcKHdltype.h"
+#include "PnlWdbePrcDetail.h"
 
 #define VecVWdbePrcRecDo PnlWdbePrcRec::VecVDo
 
@@ -189,12 +189,12 @@ public:
 	ContInf continf;
 	StatShr statshr;
 
-	PnlWdbePrcDetail* pnldetail;
-	PnlWdbePrcKHdltype* pnlkhdltype;
-	PnlWdbePrcRef1NSensitivity* pnlref1nsensitivity;
-	PnlWdbePrcRef1NVariable* pnlref1nvariable;
-	PnlWdbePrcMge1NSignal* pnlmge1nsignal;
 	PnlWdbePrcFsmFsm1NFsmstate* pnlfsmfsm1nfsmstate;
+	PnlWdbePrcMge1NSignal* pnlmge1nsignal;
+	PnlWdbePrcRef1NVariable* pnlref1nvariable;
+	PnlWdbePrcRef1NSensitivity* pnlref1nsensitivity;
+	PnlWdbePrcKHdltype* pnlkhdltype;
+	PnlWdbePrcDetail* pnldetail;
 
 	WdbeMProcess recPrc;
 
@@ -230,10 +230,10 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
+	bool handleCallWdbePrcUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbeFsmUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 	bool handleCallWdbePrc_fsmEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
 	bool handleCallWdbePrc_mdlEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
-	bool handleCallWdbeFsmUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
-	bool handleCallWdbePrcUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 
 };
 

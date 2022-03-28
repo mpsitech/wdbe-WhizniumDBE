@@ -134,15 +134,20 @@ void* WdbecmbdOpprc::run(
 				else if (((DpchInvWdbeMtpCplmstbu*) req->dpchinv)->srefKCustop == "WdbeMtpCplmstbuDpsram_mchp_v1_0") req->dpchret = WdbeMtpCplmstbuDpsram_mchp_v1_0::run(xchg, &dbswdbe, (DpchInvWdbeMtpCplmstbu*) req->dpchinv);
 				else if (((DpchInvWdbeMtpCplmstbu*) req->dpchinv)->srefKCustop == "WdbeMtpCplmstbuDsp48_xlnx_v3_0_aMultB") req->dpchret = WdbeMtpCplmstbuDsp48_xlnx_v3_0_aMultB::run(xchg, &dbswdbe, (DpchInvWdbeMtpCplmstbu*) req->dpchinv);
 				else if (((DpchInvWdbeMtpCplmstbu*) req->dpchinv)->srefKCustop == "WdbeMtpCplmstbuDsp48_xlnx_v3_0_aPlusDPlusC") req->dpchret = WdbeMtpCplmstbuDsp48_xlnx_v3_0_aPlusDPlusC::run(xchg, &dbswdbe, (DpchInvWdbeMtpCplmstbu*) req->dpchinv);
+				else if (((DpchInvWdbeMtpCplmstbu*) req->dpchinv)->srefKCustop == "WdbeMtpCplmstbuIod_mchp_v1_0_mipirx") req->dpchret = WdbeMtpCplmstbuIod_mchp_v1_0_mipirx::run(xchg, &dbswdbe, (DpchInvWdbeMtpCplmstbu*) req->dpchinv);
+				else if (((DpchInvWdbeMtpCplmstbu*) req->dpchinv)->srefKCustop == "WdbeMtpCplmstbuMipidec_mchp_v1_0") req->dpchret = WdbeMtpCplmstbuMipidec_mchp_v1_0::run(xchg, &dbswdbe, (DpchInvWdbeMtpCplmstbu*) req->dpchinv);
 				else if (((DpchInvWdbeMtpCplmstbu*) req->dpchinv)->srefKCustop == "WdbeMtpCplmstbuMpfs_ip_AXI_v1_0") req->dpchret = WdbeMtpCplmstbuMpfs_ip_AXI_v1_0::run(xchg, &dbswdbe, (DpchInvWdbeMtpCplmstbu*) req->dpchinv);
 				else if (((DpchInvWdbeMtpCplmstbu*) req->dpchinv)->srefKCustop == "WdbeMtpCplmstbuMult_xlnx_v12_0") req->dpchret = WdbeMtpCplmstbuMult_xlnx_v12_0::run(xchg, &dbswdbe, (DpchInvWdbeMtpCplmstbu*) req->dpchinv);
 				else if (((DpchInvWdbeMtpCplmstbu*) req->dpchinv)->srefKCustop == "WdbeMtpCplmstbuOled128x32_v1_0") req->dpchret = WdbeMtpCplmstbuOled128x32_v1_0::run(xchg, &dbswdbe, (DpchInvWdbeMtpCplmstbu*) req->dpchinv);
 				else if (((DpchInvWdbeMtpCplmstbu*) req->dpchinv)->srefKCustop == "WdbeMtpCplmstbuPmmu_v1_0") req->dpchret = WdbeMtpCplmstbuPmmu_v1_0::run(xchg, &dbswdbe, (DpchInvWdbeMtpCplmstbu*) req->dpchinv);
+				else if (((DpchInvWdbeMtpCplmstbu*) req->dpchinv)->srefKCustop == "WdbeMtpCplmstbuSelectio_xlnx_v5_1_mipicsi") req->dpchret = WdbeMtpCplmstbuSelectio_xlnx_v5_1_mipicsi::run(xchg, &dbswdbe, (DpchInvWdbeMtpCplmstbu*) req->dpchinv);
+				else if (((DpchInvWdbeMtpCplmstbu*) req->dpchinv)->srefKCustop == "WdbeMtpCplmstbuSelectio_xlnx_v5_1_mipirx") req->dpchret = WdbeMtpCplmstbuSelectio_xlnx_v5_1_mipirx::run(xchg, &dbswdbe, (DpchInvWdbeMtpCplmstbu*) req->dpchinv);
 				else if (((DpchInvWdbeMtpCplmstbu*) req->dpchinv)->srefKCustop == "WdbeMtpCplmstbuSpbram_v1_0") req->dpchret = WdbeMtpCplmstbuSpbram_v1_0::run(xchg, &dbswdbe, (DpchInvWdbeMtpCplmstbu*) req->dpchinv);
 				else if (((DpchInvWdbeMtpCplmstbu*) req->dpchinv)->srefKCustop == "WdbeMtpCplmstbuSpifwd_v1_0") req->dpchret = WdbeMtpCplmstbuSpifwd_v1_0::run(xchg, &dbswdbe, (DpchInvWdbeMtpCplmstbu*) req->dpchinv);
 				else if (((DpchInvWdbeMtpCplmstbu*) req->dpchinv)->srefKCustop == "WdbeMtpCplmstbuSpihostif_Easy_v1_0") req->dpchret = WdbeMtpCplmstbuSpihostif_Easy_v1_0::run(xchg, &dbswdbe, (DpchInvWdbeMtpCplmstbu*) req->dpchinv);
 				else if (((DpchInvWdbeMtpCplmstbu*) req->dpchinv)->srefKCustop == "WdbeMtpCplmstbuSpihostif_v1_0") req->dpchret = WdbeMtpCplmstbuSpihostif_v1_0::run(xchg, &dbswdbe, (DpchInvWdbeMtpCplmstbu*) req->dpchinv);
 				else if (((DpchInvWdbeMtpCplmstbu*) req->dpchinv)->srefKCustop == "WdbeMtpCplmstbuSub_xlnx_v12_0") req->dpchret = WdbeMtpCplmstbuSub_xlnx_v12_0::run(xchg, &dbswdbe, (DpchInvWdbeMtpCplmstbu*) req->dpchinv);
+				else if (((DpchInvWdbeMtpCplmstbu*) req->dpchinv)->srefKCustop == "WdbeMtpCplmstbuTop_lttc_v1_0") req->dpchret = WdbeMtpCplmstbuTop_lttc_v1_0::run(xchg, &dbswdbe, (DpchInvWdbeMtpCplmstbu*) req->dpchinv);
 				else if (((DpchInvWdbeMtpCplmstbu*) req->dpchinv)->srefKCustop == "WdbeMtpCplmstbuTop_mchp_v1_0") req->dpchret = WdbeMtpCplmstbuTop_mchp_v1_0::run(xchg, &dbswdbe, (DpchInvWdbeMtpCplmstbu*) req->dpchinv);
 				else if (((DpchInvWdbeMtpCplmstbu*) req->dpchinv)->srefKCustop == "WdbeMtpCplmstbuTop_xlnx_v1_0") req->dpchret = WdbeMtpCplmstbuTop_xlnx_v1_0::run(xchg, &dbswdbe, (DpchInvWdbeMtpCplmstbu*) req->dpchinv);
 				else if (((DpchInvWdbeMtpCplmstbu*) req->dpchinv)->srefKCustop == "WdbeMtpCplmstbuTpsram_mchp_v1_0") req->dpchret = WdbeMtpCplmstbuTpsram_mchp_v1_0::run(xchg, &dbswdbe, (DpchInvWdbeMtpCplmstbu*) req->dpchinv);
@@ -161,6 +166,7 @@ void* WdbecmbdOpprc::run(
 				else if (((DpchInvWdbeMtpCplmsttd*) req->dpchinv)->srefKCustop == "WdbeMtpCplmsttdDpbram_v1_0") req->dpchret = WdbeMtpCplmsttdDpbram_v1_0::run(xchg, &dbswdbe, (DpchInvWdbeMtpCplmsttd*) req->dpchinv);
 				else if (((DpchInvWdbeMtpCplmsttd*) req->dpchinv)->srefKCustop == "WdbeMtpCplmsttdPmmu_v1_0") req->dpchret = WdbeMtpCplmsttdPmmu_v1_0::run(xchg, &dbswdbe, (DpchInvWdbeMtpCplmsttd*) req->dpchinv);
 				else if (((DpchInvWdbeMtpCplmsttd*) req->dpchinv)->srefKCustop == "WdbeMtpCplmsttdSpbram_v1_0") req->dpchret = WdbeMtpCplmsttdSpbram_v1_0::run(xchg, &dbswdbe, (DpchInvWdbeMtpCplmsttd*) req->dpchinv);
+				else if (((DpchInvWdbeMtpCplmsttd*) req->dpchinv)->srefKCustop == "WdbeMtpCplmsttdTop_lttc_v1_0") req->dpchret = WdbeMtpCplmsttdTop_lttc_v1_0::run(xchg, &dbswdbe, (DpchInvWdbeMtpCplmsttd*) req->dpchinv);
 				else if (((DpchInvWdbeMtpCplmsttd*) req->dpchinv)->srefKCustop == "WdbeMtpCplmsttdTop_mchp_v1_0") req->dpchret = WdbeMtpCplmsttdTop_mchp_v1_0::run(xchg, &dbswdbe, (DpchInvWdbeMtpCplmsttd*) req->dpchinv);
 				else if (((DpchInvWdbeMtpCplmsttd*) req->dpchinv)->srefKCustop == "WdbeMtpCplmsttdTop_xlnx_v1_0") req->dpchret = WdbeMtpCplmsttdTop_xlnx_v1_0::run(xchg, &dbswdbe, (DpchInvWdbeMtpCplmsttd*) req->dpchinv);
 			};

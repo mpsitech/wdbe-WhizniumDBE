@@ -336,15 +336,20 @@ cust	WdbeMtpCplmstbu	complement module template-specific modular structure botto
 	WdbeMtpCplmstbuDpsram_mchp_v1_0	false	adapt port identifiers and widths
 	WdbeMtpCplmstbuDsp48_xlnx_v3_0_aMultB	false	adapt port widths
 	WdbeMtpCplmstbuDsp48_xlnx_v3_0_aPlusDPlusC	false	adapt port widths
+	WdbeMtpCplmstbuIod_mchp_v1_0_mipirx	false	adapt port widths
+	WdbeMtpCplmstbuMipidec_mchp_v1_0	false	adapt port widths
 	WdbeMtpCplmstbuMpfs_ip_AXI_v1_0	false	add pin substitute signals
 	WdbeMtpCplmstbuMult_xlnx_v12_0	false	adapt port widths
+	WdbeMtpCplmstbuSelectio_xlnx_v5_1_mipicsi	false	adapt port widths
 	WdbeMtpCplmstbuOled128x32_v1_0	false	connect SPI interface
 	WdbeMtpCplmstbuPmmu_v1_0	false	connect buffers, fill slot vector
+	WdbeMtpCplmstbuSelectio_xlnx_v5_1_mipirx	false	adapt port widths
 	WdbeMtpCplmstbuSpbram_v1_0	false	adapt internal wiring
 	WdbeMtpCplmstbuSpifwd_v1_0	false	connect buffers, SPI interface, CRC and timeout
 	WdbeMtpCplmstbuSpihostif_Easy_v1_0	false	connect SPI interface, CRC and timeout
 	WdbeMtpCplmstbuSpihostif_v1_0	false	connect SPI interface, CRC and timeout
 	WdbeMtpCplmstbuSub_xlnx_v12_0	false	adapt port widths
+	WdbeMtpCplmstbuTop_lttc_v1_0	false	connect clock primitives
 	WdbeMtpCplmstbuTop_mchp_v1_0	false	connect clock primitives
 	WdbeMtpCplmstbuTop_xlnx_v1_0	false	connect clock primitives
 	WdbeMtpCplmstbuTpsram_mchp_v1_0	false	adapt port identifiers and widths
@@ -379,6 +384,7 @@ cust	WdbeMtpCplmsttd	complement module template-specific modular structure top-d
 	WdbeMtpCplmsttdDpbram_v1_0	false	infer BRAM primitives and adapt port widths
 	WdbeMtpCplmsttdPmmu_v1_0	false	adapt buffer sizes
 	WdbeMtpCplmsttdSpbram_v1_0	false	infer BRAM primitives and adapt port widths
+	WdbeMtpCplmsttdTop_lttc_v1_0	false	infer clock primitives and adapt ports
 	WdbeMtpCplmsttdTop_mchp_v1_0	false	infer clock primitives and adapt ports
 	WdbeMtpCplmsttdTop_xlnx_v1_0	false	infer clock primitives and adapt ports
 	ImeIMOp.end

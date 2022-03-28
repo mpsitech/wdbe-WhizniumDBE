@@ -11,37 +11,18 @@ using namespace std;
 using namespace Sbecore;
 using namespace Xmlio;
 
-bool DlgWdbeRlsFinreptr::evalFinButRunActive(
+bool DlgWdbeRlsFinreptr::evalButDneActive(
 			DbsWdbe* dbswdbe
 		) {
-	// sge(idle)
-
-	vector<bool> args;
-	bool a;
-
-	a = false; a = (ixVSge == VecVSge::IDLE);
-	args.push_back(a);
-
-	return(args.back());
-};
-
-bool DlgWdbeRlsFinreptr::evalFinButStoActive(
-			DbsWdbe* dbswdbe
-		) {
-	// sge(finidle|pack|commit)
+	// sge(idle|done)
 
 	vector<bool> args;
 	bool a, b;
 
-	a = false; a = (ixVSge == VecVSge::FINIDLE);
+	a = false; a = (ixVSge == VecVSge::IDLE);
 	args.push_back(a);
-	a = false; a = (ixVSge == VecVSge::PACK);
+	a = false; a = (ixVSge == VecVSge::DONE);
 	args.push_back(a);
-	a = false; a = (ixVSge == VecVSge::COMMIT);
-	args.push_back(a);
-	b = args.back(); args.pop_back();
-	a = args.back(); args.pop_back();
-	args.push_back(a || b);
 	b = args.back(); args.pop_back();
 	a = args.back(); args.pop_back();
 	args.push_back(a || b);
@@ -155,18 +136,37 @@ bool DlgWdbeRlsFinreptr::evalResButPsgActive(
 	return(args.back());
 };
 
-bool DlgWdbeRlsFinreptr::evalButDneActive(
+bool DlgWdbeRlsFinreptr::evalFinButRunActive(
 			DbsWdbe* dbswdbe
 		) {
-	// sge(idle|done)
+	// sge(idle)
+
+	vector<bool> args;
+	bool a;
+
+	a = false; a = (ixVSge == VecVSge::IDLE);
+	args.push_back(a);
+
+	return(args.back());
+};
+
+bool DlgWdbeRlsFinreptr::evalFinButStoActive(
+			DbsWdbe* dbswdbe
+		) {
+	// sge(finidle|pack|commit)
 
 	vector<bool> args;
 	bool a, b;
 
-	a = false; a = (ixVSge == VecVSge::IDLE);
+	a = false; a = (ixVSge == VecVSge::FINIDLE);
 	args.push_back(a);
-	a = false; a = (ixVSge == VecVSge::DONE);
+	a = false; a = (ixVSge == VecVSge::PACK);
 	args.push_back(a);
+	a = false; a = (ixVSge == VecVSge::COMMIT);
+	args.push_back(a);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
 	b = args.back(); args.pop_back();
 	a = args.back(); args.pop_back();
 	args.push_back(a || b);

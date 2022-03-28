@@ -1,8 +1,8 @@
 # file Makefile
 # make file for CrdWdbeSys card job handler, release wdbed_mac
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
-# author: Alexander Wirthmueller (auto-generation)
-# date created: 23 Oct 2021
+# author: Emily Johnson (auto-generation)
+# date created: 28 Mar 2022
 # IP header --- ABOVE
 
 include ../Makefile.inc
@@ -14,9 +14,9 @@ STATLIB = ar
 STATLIBFLAGS = rcs
 
 INCPATH = -I$(BUILDROOT)/dbswdbe -I$(BUILDROOT)/wdbed/VecWdbe -I$(BUILDROOT)/wdbed/IexWdbe -I$(BUILDROOT)/wdbed
-INCPATH += -I${WHIZSDKROOT}/build -I${WHIZSDKROOT}/build/apiwzlm -I/usr/local/include -I/usr/local/include/curl -I/usr/local/include/libxml2 -I/usr/local/mysql/include -I/usr/local/opt/sqlite/include
+INCPATH += -I${WHIZSDKROOT}/build -I${WHIZSDKROOT}/build/apiwzlm -I/opt/homebrew/include -I/opt/homebrew/opt/curl/include -I/opt/homebrew/opt/libgit2/include -I/opt/homebrew/opt/libmicrohttpd/include -I/opt/homebrew/opt/libxml2/include -I/opt/homebrew/opt/openssl@3/include -I/opt/homebrew/opt/sqlite3/include -I/usr/local/mysql/include
 
-OBJS = CrdWdbeSys.o PnlWdbeSysRec.o PnlWdbeSysDetail.o PnlWdbeSysSys1NTarget.o QryWdbeSysSys1NTarget.o PnlWdbeSysHk1NVector.o QryWdbeSysHk1NVector.o PnlWdbeSysHeadbar.o PnlWdbeSysList.o QryWdbeSysList.o
+OBJS = CrdWdbeSys.o PnlWdbeSysList.o QryWdbeSysList.o PnlWdbeSysRec.o PnlWdbeSysHk1NVector.o QryWdbeSysHk1NVector.o PnlWdbeSysSys1NTarget.o QryWdbeSysSys1NTarget.o PnlWdbeSysDetail.o PnlWdbeSysHeadbar.o
 
 LIB = libcrdwdbesys
 

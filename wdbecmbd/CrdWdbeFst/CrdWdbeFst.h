@@ -14,9 +14,9 @@
 
 // IP include.cust --- INSERT
 
-#include "PnlWdbeFstRec.h"
-#include "PnlWdbeFstHeadbar.h"
 #include "PnlWdbeFstList.h"
+#include "PnlWdbeFstHeadbar.h"
+#include "PnlWdbeFstRec.h"
 
 #define VecVWdbeFstDo CrdWdbeFst::VecVDo
 #define VecVWdbeFstSge CrdWdbeFst::VecVSge
@@ -196,9 +196,9 @@ public:
 	Sbecore::Feed feedFMcbAlert;
 	Sbecore::Feed feedFSge;
 
-	PnlWdbeFstRec* pnlrec;
-	PnlWdbeFstHeadbar* pnlheadbar;
 	PnlWdbeFstList* pnllist;
+	PnlWdbeFstHeadbar* pnlheadbar;
+	PnlWdbeFstRec* pnlrec;
 
 	// IP vars.cust --- INSERT
 
@@ -228,9 +228,9 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
+	bool handleCallWdbeRefPreSet(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, const Sbecore::ubigint refInv);
 	bool handleCallWdbeDlgClose(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 	bool handleCallWdbeStatChg(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
-	bool handleCallWdbeRefPreSet(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, const Sbecore::ubigint refInv);
 
 private:
 	void changeStage(DbsWdbe* dbswdbe, Sbecore::uint _ixVSge, DpchEngWdbe** dpcheng = NULL);

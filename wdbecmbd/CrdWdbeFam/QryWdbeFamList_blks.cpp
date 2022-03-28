@@ -20,8 +20,8 @@ uint QryWdbeFamList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "vnd") return VND;
 	if (s == "tit") return TIT;
+	if (s == "vnd") return VND;
 
 	return(0);
 };
@@ -29,8 +29,8 @@ uint QryWdbeFamList::VecVOrd::getIx(
 string QryWdbeFamList::VecVOrd::getSref(
 			const uint ix
 		) {
-	if (ix == VND) return("vnd");
 	if (ix == TIT) return("tit");
+	if (ix == VND) return("vnd");
 
 	return("");
 };

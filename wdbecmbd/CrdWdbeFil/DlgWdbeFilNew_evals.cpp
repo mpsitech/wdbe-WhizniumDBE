@@ -11,21 +11,21 @@ using namespace std;
 using namespace Sbecore;
 using namespace Xmlio;
 
-bool DlgWdbeFilNew::evalDetButCreActive(
+bool DlgWdbeFilNew::evalButDneActive(
 			DbsWdbe* dbswdbe
 		) {
-	// sge(idle)&valid()
+	// sge(idle|done)
 
 	vector<bool> args;
 	bool a, b;
 
 	a = false; a = (ixVSge == VecVSge::IDLE);
 	args.push_back(a);
-	a = false; a = valid;
+	a = false; a = (ixVSge == VecVSge::DONE);
 	args.push_back(a);
 	b = args.back(); args.pop_back();
 	a = args.back(); args.pop_back();
-	args.push_back(a && b);
+	args.push_back(a || b);
 
 	return(args.back());
 };
@@ -44,21 +44,21 @@ bool DlgWdbeFilNew::evalFilUldActive(
 	return(args.back());
 };
 
-bool DlgWdbeFilNew::evalButDneActive(
+bool DlgWdbeFilNew::evalDetButCreActive(
 			DbsWdbe* dbswdbe
 		) {
-	// sge(idle|done)
+	// sge(idle)&valid()
 
 	vector<bool> args;
 	bool a, b;
 
 	a = false; a = (ixVSge == VecVSge::IDLE);
 	args.push_back(a);
-	a = false; a = (ixVSge == VecVSge::DONE);
+	a = false; a = valid;
 	args.push_back(a);
 	b = args.back(); args.pop_back();
 	a = args.back(); args.pop_back();
-	args.push_back(a || b);
+	args.push_back(a && b);
 
 	return(args.back());
 };

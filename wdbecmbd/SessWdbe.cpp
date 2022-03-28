@@ -153,12 +153,12 @@ SessWdbe::SessWdbe(
 
 	statshr.jrefCrdnav = crdnav->jref;
 
-	xchg->addClstn(VecWdbeVCall::CALLWDBECRDACTIVE, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecWdbeVCall::CALLWDBECRDCLOSE, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecWdbeVCall::CALLWDBECRDOPEN, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecWdbeVCall::CALLWDBELOG, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecWdbeVCall::CALLWDBERECACCESS, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBEREFPRESET, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBELOG, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBECRDACTIVE, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBERECACCESS, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBECRDOPEN, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBECRDCLOSE, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -2093,19 +2093,63 @@ void SessWdbe::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBECRDACTIVE) {
-		call->abort = handleCallWdbeCrdActive(dbswdbe, call->jref, call->argInv.ix, call->argRet.ix);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECRDCLOSE) {
-		call->abort = handleCallWdbeCrdClose(dbswdbe, call->jref, call->argInv.ix);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECRDOPEN) {
-		call->abort = handleCallWdbeCrdOpen(dbswdbe, call->jref, call->argInv.ix, call->argInv.ref, call->argInv.sref, call->argInv.intval, call->argRet.ref);
+	if (call->ixVCall == VecWdbeVCall::CALLWDBEREFPRESET) {
+		call->abort = handleCallWdbeRefPreSet(dbswdbe, call->jref, call->argInv.ix, call->argInv.ref);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBELOG) {
 		call->abort = handleCallWdbeLog(dbswdbe, call->jref, call->argInv.ix, call->argInv.ref, call->argInv.sref, call->argInv.intval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECRDACTIVE) {
+		call->abort = handleCallWdbeCrdActive(dbswdbe, call->jref, call->argInv.ix, call->argRet.ix);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBERECACCESS) {
 		call->abort = handleCallWdbeRecaccess(dbswdbe, call->jref, call->argInv.ix, call->argInv.ref, call->argRet.ix);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEREFPRESET) {
-		call->abort = handleCallWdbeRefPreSet(dbswdbe, call->jref, call->argInv.ix, call->argInv.ref);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECRDOPEN) {
+		call->abort = handleCallWdbeCrdOpen(dbswdbe, call->jref, call->argInv.ix, call->argInv.ref, call->argInv.sref, call->argInv.intval, call->argRet.ref);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECRDCLOSE) {
+		call->abort = handleCallWdbeCrdClose(dbswdbe, call->jref, call->argInv.ix);
 	};
+};
+
+bool SessWdbe::handleCallWdbeRefPreSet(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+			, const uint ixInv
+			, const ubigint refInv
+		) {
+	bool retval = false;
+// IP handleCallWdbeRefPreSet --- BEGIN
+	if (ixInv == VecWdbeVPreset::PREWDBEJREFNOTIFY) {
+		ubigint jrefNotify_old = xchg->getRefPreset(VecWdbeVPreset::PREWDBEJREFNOTIFY, jref);
+
+		if (refInv != jrefNotify_old) {
+			if (jrefNotify_old != 0) xchg->submitDpch(new DpchEngWdbeSuspend(jrefNotify_old));
+
+			if (refInv == 0) xchg->removePreset(ixInv, jref);
+			else xchg->addRefPreset(ixInv, jref, refInv);
+		};
+
+	} else if (ixInv == VecWdbeVPreset::PREWDBETLAST) {
+		if (xchg->stgwdbeappearance.sesstterm != 0) xchg->addRefPreset(ixInv, jref, refInv);
+
+	} else if ((ixInv == VecWdbeVPreset::PREWDBEREFCVR) || (ixInv == VecWdbeVPreset::PREWDBEREFUNT) || (ixInv == VecWdbeVPreset::PREWDBEREFVER)) {
+		if (refInv == 0) xchg->removePreset(ixInv, jref);
+		else xchg->addRefPreset(ixInv, jref, refInv);
+
+		if (crdnav) crdnav->updatePreset(dbswdbe, ixInv, jrefTrig, true);
+	};
+// IP handleCallWdbeRefPreSet --- END
+	return retval;
+};
+
+bool SessWdbe::handleCallWdbeLog(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+			, const uint ixInv
+			, const ubigint refInv
+			, const string& srefInv
+			, const int intvalInv
+		) {
+	bool retval = false;
+	logRecaccess(dbswdbe, ixInv, refInv, VecWdbeVCard::getIx(srefInv), intvalInv);
+	return retval;
 };
 
 bool SessWdbe::handleCallWdbeCrdActive(
@@ -2119,61 +2163,15 @@ bool SessWdbe::handleCallWdbeCrdActive(
 	return retval;
 };
 
-bool SessWdbe::handleCallWdbeCrdClose(
+bool SessWdbe::handleCallWdbeRecaccess(
 			DbsWdbe* dbswdbe
 			, const ubigint jrefTrig
 			, const uint ixInv
+			, const ubigint refInv
+			, uint& ixRet
 		) {
 	bool retval = false;
-	// delete only if card is not part of a suspended session
-	if (xchg->getBoolvalPreset(VecWdbeVPreset::PREWDBESUSPSESS, jrefTrig)) return retval;
-
-	ubigint jrefNotif = xchg->getRefPreset(VecWdbeVPreset::PREWDBEJREFNOTIFY, jref);
-	if (jrefNotif == jrefTrig) xchg->removePreset(VecWdbeVPreset::PREWDBEJREFNOTIFY, jref);
-
-	if (ixInv == VecWdbeVCard::CRDWDBEUSG) eraseSubjobByJref(crdusgs, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBEUSR) eraseSubjobByJref(crdusrs, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBEPRS) eraseSubjobByJref(crdprss, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBEFIL) eraseSubjobByJref(crdfils, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBENAV) {
-		if (crdnav) {
-			delete crdnav;
-			crdnav = NULL;
-		};
-
-	} 
-else if (ixInv == VecWdbeVCard::CRDWDBEMCH) eraseSubjobByJref(crdmchs, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBELIB) eraseSubjobByJref(crdlibs, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBEFAM) eraseSubjobByJref(crdfams, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBESIL) eraseSubjobByJref(crdsils, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBEMTP) eraseSubjobByJref(crdmtps, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBEPRJ) eraseSubjobByJref(crdprjs, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBEVER) eraseSubjobByJref(crdvers, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBESYS) eraseSubjobByJref(crdsyss, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBETRG) eraseSubjobByJref(crdtrgs, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBEUNT) eraseSubjobByJref(crdunts, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBERLS) eraseSubjobByJref(crdrlss, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBECPR) eraseSubjobByJref(crdcprs, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBECVR) eraseSubjobByJref(crdcvrs, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBEPPH) eraseSubjobByJref(crdpphs, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBEMOD) eraseSubjobByJref(crdmods, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBEVEC) eraseSubjobByJref(crdvecs, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBEVIT) eraseSubjobByJref(crdvits, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBECMD) eraseSubjobByJref(crdcmds, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBEERR) eraseSubjobByJref(crderrs, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBEPPL) eraseSubjobByJref(crdppls, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBESEG) eraseSubjobByJref(crdsegs, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBEBNK) eraseSubjobByJref(crdbnks, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBEPIN) eraseSubjobByJref(crdpins, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBEINT) eraseSubjobByJref(crdints, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBESNS) eraseSubjobByJref(crdsnss, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBEVAR) eraseSubjobByJref(crdvars, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBEGEN) eraseSubjobByJref(crdgens, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBEPRT) eraseSubjobByJref(crdprts, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBESIG) eraseSubjobByJref(crdsigs, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBEPRC) eraseSubjobByJref(crdprcs, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBEFST) eraseSubjobByJref(crdfsts, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBEUTL) eraseSubjobByJref(crdutls, jrefTrig);
+	ixRet = checkRecaccess(dbswdbe, ixInv, refInv);
 	return retval;
 };
 
@@ -2277,58 +2275,60 @@ bool SessWdbe::handleCallWdbeCrdOpen(
 	return retval;
 };
 
-bool SessWdbe::handleCallWdbeLog(
+bool SessWdbe::handleCallWdbeCrdClose(
 			DbsWdbe* dbswdbe
 			, const ubigint jrefTrig
 			, const uint ixInv
-			, const ubigint refInv
-			, const string& srefInv
-			, const int intvalInv
 		) {
 	bool retval = false;
-	logRecaccess(dbswdbe, ixInv, refInv, VecWdbeVCard::getIx(srefInv), intvalInv);
-	return retval;
-};
+	// delete only if card is not part of a suspended session
+	if (xchg->getBoolvalPreset(VecWdbeVPreset::PREWDBESUSPSESS, jrefTrig)) return retval;
 
-bool SessWdbe::handleCallWdbeRecaccess(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-			, const uint ixInv
-			, const ubigint refInv
-			, uint& ixRet
-		) {
-	bool retval = false;
-	ixRet = checkRecaccess(dbswdbe, ixInv, refInv);
-	return retval;
-};
+	ubigint jrefNotif = xchg->getRefPreset(VecWdbeVPreset::PREWDBEJREFNOTIFY, jref);
+	if (jrefNotif == jrefTrig) xchg->removePreset(VecWdbeVPreset::PREWDBEJREFNOTIFY, jref);
 
-bool SessWdbe::handleCallWdbeRefPreSet(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-			, const uint ixInv
-			, const ubigint refInv
-		) {
-	bool retval = false;
-// IP handleCallWdbeRefPreSet --- BEGIN
-	if (ixInv == VecWdbeVPreset::PREWDBEJREFNOTIFY) {
-		ubigint jrefNotify_old = xchg->getRefPreset(VecWdbeVPreset::PREWDBEJREFNOTIFY, jref);
-
-		if (refInv != jrefNotify_old) {
-			if (jrefNotify_old != 0) xchg->submitDpch(new DpchEngWdbeSuspend(jrefNotify_old));
-
-			if (refInv == 0) xchg->removePreset(ixInv, jref);
-			else xchg->addRefPreset(ixInv, jref, refInv);
+	if (ixInv == VecWdbeVCard::CRDWDBEUSG) eraseSubjobByJref(crdusgs, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBEUSR) eraseSubjobByJref(crdusrs, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBEPRS) eraseSubjobByJref(crdprss, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBEFIL) eraseSubjobByJref(crdfils, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBENAV) {
+		if (crdnav) {
+			delete crdnav;
+			crdnav = NULL;
 		};
 
-	} else if (ixInv == VecWdbeVPreset::PREWDBETLAST) {
-		if (xchg->stgwdbeappearance.sesstterm != 0) xchg->addRefPreset(ixInv, jref, refInv);
-
-	} else if ((ixInv == VecWdbeVPreset::PREWDBEREFCVR) || (ixInv == VecWdbeVPreset::PREWDBEREFUNT) || (ixInv == VecWdbeVPreset::PREWDBEREFVER)) {
-		if (refInv == 0) xchg->removePreset(ixInv, jref);
-		else xchg->addRefPreset(ixInv, jref, refInv);
-
-		if (crdnav) crdnav->updatePreset(dbswdbe, ixInv, jrefTrig, true);
-	};
-// IP handleCallWdbeRefPreSet --- END
+	} 
+else if (ixInv == VecWdbeVCard::CRDWDBEMCH) eraseSubjobByJref(crdmchs, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBELIB) eraseSubjobByJref(crdlibs, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBEFAM) eraseSubjobByJref(crdfams, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBESIL) eraseSubjobByJref(crdsils, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBEMTP) eraseSubjobByJref(crdmtps, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBEPRJ) eraseSubjobByJref(crdprjs, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBEVER) eraseSubjobByJref(crdvers, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBESYS) eraseSubjobByJref(crdsyss, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBETRG) eraseSubjobByJref(crdtrgs, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBEUNT) eraseSubjobByJref(crdunts, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBERLS) eraseSubjobByJref(crdrlss, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBECPR) eraseSubjobByJref(crdcprs, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBECVR) eraseSubjobByJref(crdcvrs, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBEPPH) eraseSubjobByJref(crdpphs, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBEMOD) eraseSubjobByJref(crdmods, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBEVEC) eraseSubjobByJref(crdvecs, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBEVIT) eraseSubjobByJref(crdvits, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBECMD) eraseSubjobByJref(crdcmds, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBEERR) eraseSubjobByJref(crderrs, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBEPPL) eraseSubjobByJref(crdppls, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBESEG) eraseSubjobByJref(crdsegs, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBEBNK) eraseSubjobByJref(crdbnks, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBEPIN) eraseSubjobByJref(crdpins, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBEINT) eraseSubjobByJref(crdints, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBESNS) eraseSubjobByJref(crdsnss, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBEVAR) eraseSubjobByJref(crdvars, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBEGEN) eraseSubjobByJref(crdgens, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBEPRT) eraseSubjobByJref(crdprts, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBESIG) eraseSubjobByJref(crdsigs, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBEPRC) eraseSubjobByJref(crdprcs, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBEFST) eraseSubjobByJref(crdfsts, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBEUTL) eraseSubjobByJref(crdutls, jrefTrig);
 	return retval;
 };

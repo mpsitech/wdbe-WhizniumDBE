@@ -299,20 +299,11 @@ void PnlWdbeFamDetail::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBEFAMUPD_REFEQ) {
-		call->abort = handleCallWdbeFamUpd_refEq(dbswdbe, call->jref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEKLSAKEYMOD_KLSEQ) {
+	if (call->ixVCall == VecWdbeVCall::CALLWDBEKLSAKEYMOD_KLSEQ) {
 		call->abort = handleCallWdbeKlsAkeyMod_klsEq(dbswdbe, call->jref, call->argInv.ix);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEFAMUPD_REFEQ) {
+		call->abort = handleCallWdbeFamUpd_refEq(dbswdbe, call->jref);
 	};
-};
-
-bool PnlWdbeFamDetail::handleCallWdbeFamUpd_refEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-	// IP handleCallWdbeFamUpd_refEq --- INSERT
-	return retval;
 };
 
 bool PnlWdbeFamDetail::handleCallWdbeKlsAkeyMod_klsEq(
@@ -328,5 +319,14 @@ bool PnlWdbeFamDetail::handleCallWdbeKlsAkeyMod_klsEq(
 	};
 
 	xchg->submitDpch(getNewDpchEng(moditems));
+	return retval;
+};
+
+bool PnlWdbeFamDetail::handleCallWdbeFamUpd_refEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+	// IP handleCallWdbeFamUpd_refEq --- INSERT
 	return retval;
 };

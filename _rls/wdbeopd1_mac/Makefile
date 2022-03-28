@@ -1,8 +1,8 @@
 # file Makefile
 # make file for Wdbe operation daemon, release wdbeopd1_mac
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
-# author: Alexander Wirthmueller (auto-generation)
-# date created: 23 Oct 2021
+# author: Emily Johnson (auto-generation)
+# date created: 28 Mar 2022
 # IP header --- ABOVE
 
 include Makefile.inc
@@ -14,8 +14,8 @@ LINK = g++
 LINKFLAGS =
 
 INCPATH = -I$(BUILDROOT)/dbswdbe -I$(BUILDROOT)/wdbeopd1/VecWdbe -I$(BUILDROOT)/wdbeopd1/IexWdbe -I$(BUILDROOT)/wdbeopd1
-INCPATH += -I$(BUILDROOT)/wdbeopd1/WdbeCplmst -I$(BUILDROOT)/wdbeopd1/WdbeGen -I$(BUILDROOT)/wdbeopd1/WdbeGenfst -I$(BUILDROOT)/wdbeopd1/WdbePlhfpga -I$(BUILDROOT)/wdbeopd1/WdbePlhmcu -I$(BUILDROOT)/wdbeopd1/WdbePrcfile -I$(BUILDROOT)/wdbeopd1/WdbePrctree -I$(BUILDROOT)/wdbeopd1/WdbeWrdev -I$(BUILDROOT)/wdbeopd1/WdbeWrfpga -I$(BUILDROOT)/wdbeopd1/WdbeWrmcu
-INCPATH += -I${WHIZSDKROOT}/build -I/usr/local/include -I/usr/local/include/curl -I/usr/local/include/libxml2 -I/usr/local/mysql/include
+INCPATH += -I$(BUILDROOT)/wdbeopd1/WdbeWrmcu -I$(BUILDROOT)/wdbeopd1/WdbeWrfpga -I$(BUILDROOT)/wdbeopd1/WdbeWrdev -I$(BUILDROOT)/wdbeopd1/WdbePrctree -I$(BUILDROOT)/wdbeopd1/WdbePrcfile -I$(BUILDROOT)/wdbeopd1/WdbePlhmcu -I$(BUILDROOT)/wdbeopd1/WdbePlhfpga -I$(BUILDROOT)/wdbeopd1/WdbeGenfst -I$(BUILDROOT)/wdbeopd1/WdbeGen -I$(BUILDROOT)/wdbeopd1/WdbeCplmst
+INCPATH += -I${WHIZSDKROOT}/build -I/opt/homebrew/include -I/opt/homebrew/opt/curl/include -I/opt/homebrew/opt/libmicrohttpd/include -I/opt/homebrew/opt/libxml2/include -I/usr/local/mysql/include
 
 PCHS = Wdbeopd.h.gch
 
@@ -24,9 +24,9 @@ OBJS += Wdbeopd_exe.o
 
 LIBPATH = -L$(LIBROOT)
 LIBPATH += -L$(LIBROOT)/wdbeopd1
-LIBPATH += -L${WHIZSDKROOT}/lib -L/usr/local/lib -L/usr/local/mysql/lib
+LIBPATH += -L${WHIZSDKROOT}/lib -L/opt/homebrew/lib -L/opt/homebrew/opt/curl/lib -L/opt/homebrew/opt/libmicrohttpd/lib -L/opt/homebrew/opt/libxml2/include -L/usr/local/mysql/lib
 
-LIBS = -lwdbecplmst -lwdbegen -lwdbegenfst -lwdbeplhfpga -lwdbeplhmcu -lwdbeprcfile -lwdbeprctree -lwdbewrdev -lwdbewrfpga -lwdbewrmcu
+LIBS = -lwdbewrmcu -lwdbewrfpga -lwdbewrdev -lwdbeprctree -lwdbeprcfile -lwdbeplhmcu -lwdbeplhfpga -lwdbegenfst -lwdbegen -lwdbecplmst
 LIBS += -liexwdbe -lvecwdbe -ldbswdbe
 LIBS += -lcurl -lmicrohttpd -lsbecore_my
 LIBS += -lmysqlclient -lsbecore_plus

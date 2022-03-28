@@ -166,8 +166,8 @@ void DlgWdbeVerGenfst::handleRequest(
 		};
 
 	} else if (req->ixVBasetype == ReqWdbe::VecVBasetype::TIMER) {
-		if ((req->sref == "mon") && (ixVSge == VecVSge::GENFST)) handleTimerWithSrefMonInSgeGenfst(dbswdbe);
-		else if ((req->sref == "mon") && (ixVSge == VecVSge::GENMTP)) handleTimerWithSrefMonInSgeGenmtp(dbswdbe);
+		if ((req->sref == "mon") && (ixVSge == VecVSge::GENMTP)) handleTimerWithSrefMonInSgeGenmtp(dbswdbe);
+		else if ((req->sref == "mon") && (ixVSge == VecVSge::GENFST)) handleTimerWithSrefMonInSgeGenfst(dbswdbe);
 	};
 };
 
@@ -216,18 +216,18 @@ void DlgWdbeVerGenfst::handleDpchRetWdbe(
 	// IP handleDpchRetWdbe --- INSERT
 };
 
-void DlgWdbeVerGenfst::handleTimerWithSrefMonInSgeGenfst(
-			DbsWdbe* dbswdbe
-		) {
-	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
-	// IP handleTimerWithSrefMonInSgeGenfst --- INSERT
-};
-
 void DlgWdbeVerGenfst::handleTimerWithSrefMonInSgeGenmtp(
 			DbsWdbe* dbswdbe
 		) {
 	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
 	// IP handleTimerWithSrefMonInSgeGenmtp --- INSERT
+};
+
+void DlgWdbeVerGenfst::handleTimerWithSrefMonInSgeGenfst(
+			DbsWdbe* dbswdbe
+		) {
+	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
+	// IP handleTimerWithSrefMonInSgeGenfst --- INSERT
 };
 
 void DlgWdbeVerGenfst::changeStage(

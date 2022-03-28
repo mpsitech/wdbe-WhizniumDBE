@@ -92,6 +92,7 @@ void WdbeWrfpgaMdlfine::writeMdlVhd(
 
 	map<string,WdbeAVKeylistKey*> srefsHtys;
 	set<ubigint> refsHtys;
+	set<ubigint> refsSightys;
 
 	ListWdbeMVariable vars;
 	WdbeMVariable* var = NULL;
@@ -268,6 +269,7 @@ void WdbeWrfpgaMdlfine::writeMdlVhd(
 					if (refsHtys.find(klsAkey->ref) == refsHtys.end()) {
 						outfile << "\ttype " << klsAkey->sref << " is " << klsAkey->Title << ";" << endl;
 						refsHtys.insert(klsAkey->ref);
+						refsSightys.insert(klsAkey->ref);
 					};
 				};
 
@@ -286,11 +288,6 @@ void WdbeWrfpgaMdlfine::writeMdlVhd(
 			};
 		};
 		outfile << endl;
-
-		for (unsigned int j = 0; j < klsAkeys.nodes.size(); j++) {
-			klsAkey = klsAkeys.nodes[j];
-			if (refsHtys.find(klsAkey->ref) == refsHtys.end()) outfile << "\ttype " << klsAkey->sref << " is " << klsAkey->Title << ";" << endl;
-		};
 
 		outfile << "-- IP sigs." << prc->sref << " --- IEND" << endl;
 	};
@@ -460,6 +457,13 @@ void WdbeWrfpgaMdlfine::writeMdlVhd(
 		prc = prcs.nodes[i];
 		Prcsref = StrMod::cap(prc->sref);
 
+		// select only process-specific HDL types not used for signals
+		srefsHtys.clear();
+		refsHtys.clear();
+
+		dbswdbe->tblwdbeavkeylistkey->loadRstByKlsMtbUrf(VecWdbeVKeylist::KLSTWDBEKHDLTYPE, VecWdbeVMaintable::TBLWDBEMPROCESS, prc->ref, false, klsAkeys);
+		for (unsigned int j = 0; j < klsAkeys.nodes.size(); j++) if (refsSightys.find(klsAkeys.nodes[j]->ref) == refsSightys.end()) srefsHtys[klsAkeys.nodes[j]->sref] = klsAkeys.nodes[j];
+
 		srefsSlvars.clear();
 
 		dbswdbe->tblwdbemvariable->loadRstByRetReu(VecWdbeVMVariableRefTbl::PRC, prc->ref, false, vars);
@@ -582,7 +586,9 @@ void WdbeWrfpgaMdlfine::writeMdlVhd(
 			if (prc->refWdbeMFsm != 0) outfile << ", state" << Prcsref;
 			outfile << ")" << endl;
 
+			// -- impl.xxxx.vars
 			outfile << "\t\t-- IP impl." << prc->sref << ".vars --- BEGIN" << endl;
+
 			refC = 0;
 			first = true;
 
@@ -592,6 +598,17 @@ void WdbeWrfpgaMdlfine::writeMdlVhd(
 				if (!var->Falling) {
 					if (first) first = false;
 					else if (var->refWdbeCVariable != refC) outfile << endl;
+
+					// process-specific types before first occurrence
+					auto it = srefsHtys.find(var->srefWdbeKHdltype);
+					if (it != srefsHtys.end()) {
+						klsAkey = it->second;
+
+						if (refsHtys.find(klsAkey->ref) == refsHtys.end()) {
+							outfile << "\t\ttype " << klsAkey->sref << " is " << klsAkey->Title << ";" << endl;
+							refsHtys.insert(klsAkey->ref);
+						};
+					};
 
 					if (var->Const) outfile << "\t\tconstant ";
 					else outfile << "\t\tvariable ";
@@ -807,12 +824,15 @@ void WdbeWrfpgaMdlfine::writeMdlVhd(
 		outfile << "-- IP impl." << prc->sref << ".rising --- IEND" << endl;
 
 		if (prc->Falling) {
+			refsHtys.clear();
+
 			// --- impl.xxxx.falling
 			outfile << "-- IP impl." << prc->sref << ".falling --- IBEGIN" << endl;
 			outfile << "-- IP impl." << prc->sref << ".falling --- BEGIN" << endl;
 			if (prc->clkSrefWdbeMSignal != "") {
 				outfile << "\tprocess (" << prc->clkSrefWdbeMSignal << ")" << endl;
 
+				// -- impl.xxxx.falling.vars
 				outfile << "\t\t-- IP impl." << prc->sref << ".falling.vars --- BEGIN" << endl;
 				refC = 0;
 				first = true;
@@ -823,6 +843,17 @@ void WdbeWrfpgaMdlfine::writeMdlVhd(
 					if (var->Falling) {
 						if (first) first = false;
 						else if (var->refWdbeCVariable != refC) outfile << endl;
+
+						// process-specific types before first occurrence
+						auto it = srefsHtys.find(var->srefWdbeKHdltype);
+						if (it != srefsHtys.end()) {
+							klsAkey = it->second;
+
+							if (refsHtys.find(klsAkey->ref) == refsHtys.end()) {
+								outfile << "\t\ttype " << klsAkey->sref << " is " << klsAkey->Title << ";" << endl;
+								refsHtys.insert(klsAkey->ref);
+							};
+						};
 
 						if (var->Const) outfile << "\t\tconstant ";
 						else outfile << "\t\tvariable ";

@@ -1,4 +1,5 @@
 .DS_Store
+.vscode
 /_ini/dbswdbe_ubuntu_mpsi
 /_ini/wdbed_ubuntu_mpsi
 /_ini/wdbeopd1_ubuntu_mpsi

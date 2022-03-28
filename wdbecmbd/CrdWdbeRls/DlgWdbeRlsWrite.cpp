@@ -243,7 +243,8 @@ void DlgWdbeRlsWrite::createFpga(
 	ubigint refChkoutfile; dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMFile WHERE osrefKContent = 'cftpl' AND Filename = 'checkout_Fpga.sh'", refChkoutfile);
 
 	ubigint refUntUcffile; dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMFile WHERE osrefKContent = 'cftpl' AND Filename = 'Xxxx.ucf'", refUntUcffile);
-	ubigint refUntPdcfile; dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMFile WHERE osrefKContent = 'cftpl' AND Filename = 'Xxxx.pdc'", refUntPdcfile);
+	ubigint refUntLttcPdcfile; dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMFile WHERE osrefKContent = 'cftpl' AND Filename = 'Xxxx_lttc.pdc'", refUntLttcPdcfile);
+	ubigint refUntMchpPdcfile; dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMFile WHERE osrefKContent = 'cftpl' AND Filename = 'Xxxx_mchp.pdc'", refUntMchpPdcfile);
 	ubigint refUntXdcfile; dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMFile WHERE osrefKContent = 'cftpl' AND Filename = 'Xxxx.xdc'", refUntXdcfile);
 	ubigint refUntVhdfile; dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMFile WHERE osrefKContent = 'cftpl' AND Filename = 'Xxxx.vhd'", refUntVhdfile);
 	ubigint refEzuntVhdfile; dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMFile WHERE osrefKContent = 'cftpl' AND Filename = 'Xxxx_Easy.vhd'", refEzuntVhdfile);
@@ -334,7 +335,8 @@ void DlgWdbeRlsWrite::createFpga(
 			vals[vals.size()-1] = unt->Title;
 
 			if (unt->srefKToolch == "ise") addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refUntUcffile, "", outfolder + "/" + rtysref + "/" + unt->sref + "/" + Untsref + ".ucf", keys, vals));
-			else if (unt->srefKToolch == "libero") addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refUntPdcfile, "", outfolder + "/" + rtysref + "/" + unt->sref + "/" + Untsref + ".pdc", keys, vals));
+			else if (unt->srefKToolch == "libero") addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refUntMchpPdcfile, "", outfolder + "/" + rtysref + "/" + unt->sref + "/" + Untsref + ".pdc", keys, vals));
+			else if (unt->srefKToolch == "radiant") addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refUntLttcPdcfile, "", outfolder + "/" + rtysref + "/" + unt->sref + "/" + Untsref + ".pdc", keys, vals));
 			else if (unt->srefKToolch == "vivado") addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refUntXdcfile, "", outfolder + "/" + rtysref + "/" + unt->sref + "/" + Untsref + ".xdc", keys, vals));
 
 			if (unt->Easy) addInv(new DpchInvWdbePrcfilePlhrpl(0, 0, refEzuntVhdfile, "", outfolder + "/" + rtysref + "/" + unt->sref + "/" + Untsref + ".vhd", keys, vals));
@@ -1411,8 +1413,8 @@ void DlgWdbeRlsWrite::refreshWrc(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
 		) {
-	ContInfWrc oldContinfwrc(continfwrc);
 	StatShrWrc oldStatshrwrc(statshrwrc);
+	ContInfWrc oldContinfwrc(continfwrc);
 
 	// IP refreshWrc --- RBEGIN
 	// continfwrc
@@ -1424,16 +1426,16 @@ void DlgWdbeRlsWrite::refreshWrc(
 	statshrwrc.ButStoActive = evalWrcButStoActive(dbswdbe);
 
 	// IP refreshWrc --- REND
-	if (continfwrc.diff(&oldContinfwrc).size() != 0) insert(moditems, DpchEngData::CONTINFWRC);
 	if (statshrwrc.diff(&oldStatshrwrc).size() != 0) insert(moditems, DpchEngData::STATSHRWRC);
+	if (continfwrc.diff(&oldContinfwrc).size() != 0) insert(moditems, DpchEngData::CONTINFWRC);
 };
 
 void DlgWdbeRlsWrite::refreshLfi(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
 		) {
-	StatShrLfi oldStatshrlfi(statshrlfi);
 	ContInfLfi oldContinflfi(continflfi);
+	StatShrLfi oldStatshrlfi(statshrlfi);
 
 	// IP refreshLfi --- RBEGIN
 	// statshrlfi
@@ -1443,16 +1445,16 @@ void DlgWdbeRlsWrite::refreshLfi(
 	continflfi.Dld = "log.txt";
 
 	// IP refreshLfi --- REND
-	if (statshrlfi.diff(&oldStatshrlfi).size() != 0) insert(moditems, DpchEngData::STATSHRLFI);
 	if (continflfi.diff(&oldContinflfi).size() != 0) insert(moditems, DpchEngData::CONTINFLFI);
+	if (statshrlfi.diff(&oldStatshrlfi).size() != 0) insert(moditems, DpchEngData::STATSHRLFI);
 };
 
 void DlgWdbeRlsWrite::refreshFia(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
 		) {
-	StatShrFia oldStatshrfia(statshrfia);
 	ContInfFia oldContinffia(continffia);
+	StatShrFia oldStatshrfia(statshrfia);
 
 	// IP refreshFia --- RBEGIN
 	// statshrfia
@@ -1462,8 +1464,8 @@ void DlgWdbeRlsWrite::refreshFia(
 	continffia.Dld = StubWdbe::getStubRlsStd(dbswdbe, xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFRLS, jref)) + ".tgz";
 
 	// IP refreshFia --- REND
-	if (statshrfia.diff(&oldStatshrfia).size() != 0) insert(moditems, DpchEngData::STATSHRFIA);
 	if (continffia.diff(&oldContinffia).size() != 0) insert(moditems, DpchEngData::CONTINFFIA);
+	if (statshrfia.diff(&oldStatshrfia).size() != 0) insert(moditems, DpchEngData::STATSHRFIA);
 };
 
 void DlgWdbeRlsWrite::refresh(
@@ -1474,24 +1476,24 @@ void DlgWdbeRlsWrite::refresh(
 	if (muteRefresh && !unmute) return;
 	muteRefresh = true;
 
-	ContInf oldContinf(continf);
-	ContIac oldContiac(contiac);
 	StatShr oldStatshr(statshr);
+	ContIac oldContiac(contiac);
+	ContInf oldContinf(continf);
 
 	// IP refresh --- BEGIN
-	// continf
-	continf.numFSge = ixVSge;
+	// statshr
+	statshr.ButDneActive = evalButDneActive(dbswdbe);
 
 	// contiac
 	contiac.numFDse = ixVDit;
 
-	// statshr
-	statshr.ButDneActive = evalButDneActive(dbswdbe);
+	// continf
+	continf.numFSge = ixVSge;
 
 	// IP refresh --- END
-	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
-	if (contiac.diff(&oldContiac).size() != 0) insert(moditems, DpchEngData::CONTIAC);
 	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
+	if (contiac.diff(&oldContiac).size() != 0) insert(moditems, DpchEngData::CONTIAC);
+	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
 
 	refreshDet(dbswdbe, moditems);
 	refreshCuc(dbswdbe, moditems);
@@ -1558,8 +1560,8 @@ void DlgWdbeRlsWrite::handleRequest(
 		if (ixVSge == VecVSge::IDLE) handleUploadInSgeIdle(dbswdbe, req->filename);
 
 	} else if (req->ixVBasetype == ReqWdbe::VecVBasetype::DOWNLOAD) {
-		if (ixVSge == VecVSge::FAIL) req->filename = handleDownloadInSgeFail(dbswdbe);
-		else if (ixVSge == VecVSge::DONE) req->filename = handleDownloadInSgeDone(dbswdbe);
+		if (ixVSge == VecVSge::DONE) req->filename = handleDownloadInSgeDone(dbswdbe);
+		else if (ixVSge == VecVSge::FAIL) req->filename = handleDownloadInSgeFail(dbswdbe);
 
 	} else if (req->ixVBasetype == ReqWdbe::VecVBasetype::DPCHRET) {
 		if (req->dpchret->ixOpVOpres == VecOpVOpres::PROGRESS) {
@@ -1602,9 +1604,9 @@ void DlgWdbeRlsWrite::handleRequest(
 		};
 
 	} else if (req->ixVBasetype == ReqWdbe::VecVBasetype::TIMER) {
-		if (ixVSge == VecVSge::UPKIDLE) handleTimerInSgeUpkidle(dbswdbe, req->sref);
+		if ((req->sref == "mon") && (ixVSge == VecVSge::WRITE)) handleTimerWithSrefMonInSgeWrite(dbswdbe);
+		else if (ixVSge == VecVSge::UPKIDLE) handleTimerInSgeUpkidle(dbswdbe, req->sref);
 		else if ((req->sref == "mon") && (ixVSge == VecVSge::CREATE)) handleTimerWithSrefMonInSgeCreate(dbswdbe);
-		else if ((req->sref == "mon") && (ixVSge == VecVSge::WRITE)) handleTimerWithSrefMonInSgeWrite(dbswdbe);
 	};
 };
 
@@ -1780,16 +1782,23 @@ void DlgWdbeRlsWrite::handleUploadInSgeIdle(
 	changeStage(dbswdbe, VecVSge::UPKIDLE);
 };
 
+string DlgWdbeRlsWrite::handleDownloadInSgeDone(
+			DbsWdbe* dbswdbe
+		) {
+	return(xchg->tmppath + "/" + outfolder + ".tgz"); // IP handleDownloadInSgeDone --- RLINE
+};
+
 string DlgWdbeRlsWrite::handleDownloadInSgeFail(
 			DbsWdbe* dbswdbe
 		) {
 	return(xchg->tmppath + "/" + logfile); // IP handleDownloadInSgeFail --- RLINE
 };
 
-string DlgWdbeRlsWrite::handleDownloadInSgeDone(
+void DlgWdbeRlsWrite::handleTimerWithSrefMonInSgeWrite(
 			DbsWdbe* dbswdbe
 		) {
-	return(xchg->tmppath + "/" + outfolder + ".tgz"); // IP handleDownloadInSgeDone --- RLINE
+	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
+	refreshWithDpchEng(dbswdbe); // IP handleTimerWithSrefMonInSgeWrite --- ILINE
 };
 
 void DlgWdbeRlsWrite::handleTimerInSgeUpkidle(
@@ -1804,13 +1813,6 @@ void DlgWdbeRlsWrite::handleTimerWithSrefMonInSgeCreate(
 		) {
 	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
 	refreshWithDpchEng(dbswdbe); // IP handleTimerWithSrefMonInSgeCreate --- ILINE
-};
-
-void DlgWdbeRlsWrite::handleTimerWithSrefMonInSgeWrite(
-			DbsWdbe* dbswdbe
-		) {
-	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
-	refreshWithDpchEng(dbswdbe); // IP handleTimerWithSrefMonInSgeWrite --- ILINE
 };
 
 void DlgWdbeRlsWrite::changeStage(

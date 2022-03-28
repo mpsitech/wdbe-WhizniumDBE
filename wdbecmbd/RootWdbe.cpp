@@ -55,9 +55,9 @@ RootWdbe::RootWdbe(
 
 	// IP constructor.spec2 --- INSERT
 
-	xchg->addClstn(VecWdbeVCall::CALLWDBELOGOUT, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecWdbeVCall::CALLWDBESUSPSESS, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBEREFPRESET, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBESUSPSESS, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBELOGOUT, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -436,8 +436,8 @@ void RootWdbe::handleRequest(
 		};
 
 	} else if (req->ixVBasetype == ReqWdbe::VecVBasetype::TIMER) {
-		if (req->sref == "warnterm") handleTimerWithSrefWarnterm(dbswdbe);
-		else if ((req->sref == "mon") && (ixVSge == VecVSge::IDLE)) handleTimerWithSrefMonInSgeIdle(dbswdbe);
+		if ((req->sref == "mon") && (ixVSge == VecVSge::IDLE)) handleTimerWithSrefMonInSgeIdle(dbswdbe);
+		else if (req->sref == "warnterm") handleTimerWithSrefWarnterm(dbswdbe);
 	};
 };
 
@@ -773,6 +773,13 @@ void RootWdbe::handleDpchAppLogin(
 	};
 };
 
+void RootWdbe::handleTimerWithSrefMonInSgeIdle(
+			DbsWdbe* dbswdbe
+		) {
+	wrefLast = xchg->addWakeup(jref, "mon", 240000000, true);
+	changeStage(dbswdbe, VecVSge::IDLE); // IP handleTimerWithSrefMonInSgeIdle --- ILINE
+};
+
 void RootWdbe::handleTimerWithSrefWarnterm(
 			DbsWdbe* dbswdbe
 		) {
@@ -825,24 +832,44 @@ void RootWdbe::handleTimerWithSrefWarnterm(
 	} else if (tnext != 0) wrefLast = xchg->addWakeup(jref, "warnterm", 1e6 * (tnext - rawtime));
 };
 
-void RootWdbe::handleTimerWithSrefMonInSgeIdle(
-			DbsWdbe* dbswdbe
-		) {
-	wrefLast = xchg->addWakeup(jref, "mon", 240000000, true);
-	changeStage(dbswdbe, VecVSge::IDLE); // IP handleTimerWithSrefMonInSgeIdle --- ILINE
-};
-
 void RootWdbe::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBELOGOUT) {
-		call->abort = handleCallWdbeLogout(dbswdbe, call->jref, call->argInv.boolval);
+	if (call->ixVCall == VecWdbeVCall::CALLWDBEREFPRESET) {
+		call->abort = handleCallWdbeRefPreSet(dbswdbe, call->jref, call->argInv.ix, call->argInv.ref);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBESUSPSESS) {
 		call->abort = handleCallWdbeSuspsess(dbswdbe, call->jref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEREFPRESET) {
-		call->abort = handleCallWdbeRefPreSet(dbswdbe, call->jref, call->argInv.ix, call->argInv.ref);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBELOGOUT) {
+		call->abort = handleCallWdbeLogout(dbswdbe, call->jref, call->argInv.boolval);
 	};
+};
+
+bool RootWdbe::handleCallWdbeRefPreSet(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+			, const uint ixInv
+			, const ubigint refInv
+		) {
+	bool retval = false;
+
+	if (ixInv == VecWdbeVPreset::PREWDBETLAST) {
+		xchg->addRefPreset(ixInv, jref, refInv);
+	};
+
+	return retval;
+};
+
+bool RootWdbe::handleCallWdbeSuspsess(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+
+	xchg->addBoolvalPreset(VecWdbeVPreset::PREWDBESUSPSESS, jrefTrig, true);
+	xchg->removeDcolsByJref(jrefTrig);
+
+	return retval;
 };
 
 bool RootWdbe::handleCallWdbeLogout(
@@ -861,33 +888,6 @@ bool RootWdbe::handleCallWdbeLogout(
 			time(&rawtime);
 			xchg->addRefPreset(VecWdbeVPreset::PREWDBETLAST, jref, rawtime);
 		};
-	};
-
-	return retval;
-};
-
-bool RootWdbe::handleCallWdbeSuspsess(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-
-	xchg->addBoolvalPreset(VecWdbeVPreset::PREWDBESUSPSESS, jrefTrig, true);
-	xchg->removeDcolsByJref(jrefTrig);
-
-	return retval;
-};
-
-bool RootWdbe::handleCallWdbeRefPreSet(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-			, const uint ixInv
-			, const ubigint refInv
-		) {
-	bool retval = false;
-
-	if (ixInv == VecWdbeVPreset::PREWDBETLAST) {
-		xchg->addRefPreset(ixInv, jref, refInv);
 	};
 
 	return retval;

@@ -20,9 +20,9 @@ uint QryWdbeSegList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "srf") return SRF;
-	if (s == "ppl") return PPL;
 	if (s == "sup") return SUP;
+	if (s == "ppl") return PPL;
+	if (s == "srf") return SRF;
 
 	return(0);
 };
@@ -30,9 +30,9 @@ uint QryWdbeSegList::VecVOrd::getIx(
 string QryWdbeSegList::VecVOrd::getSref(
 			const uint ix
 		) {
-	if (ix == SRF) return("srf");
-	if (ix == PPL) return("ppl");
 	if (ix == SUP) return("sup");
+	if (ix == PPL) return("ppl");
+	if (ix == SRF) return("srf");
 
 	return("");
 };

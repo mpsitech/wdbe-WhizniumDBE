@@ -11,46 +11,23 @@ using namespace std;
 using namespace Sbecore;
 using namespace Xmlio;
 
-bool DlgWdbeVerMdlstr::evalIfiUldActive(
+bool DlgWdbeVerMdlstr::evalButDneActive(
 			DbsWdbe* dbswdbe
 		) {
-	// sge(idle)
-
-	vector<bool> args;
-	bool a;
-
-	a = false; a = (ixVSge == VecVSge::IDLE);
-	args.push_back(a);
-
-	return(args.back());
-};
-
-bool DlgWdbeVerMdlstr::evalImpButRunActive(
-			DbsWdbe* dbswdbe
-		) {
-	// sge(prsdone)
-
-	vector<bool> args;
-	bool a;
-
-	a = false; a = (ixVSge == VecVSge::PRSDONE);
-	args.push_back(a);
-
-	return(args.back());
-};
-
-bool DlgWdbeVerMdlstr::evalImpButStoActive(
-			DbsWdbe* dbswdbe
-		) {
-	// sge(impidle|import)
+	// sge(idle|fail|done)
 
 	vector<bool> args;
 	bool a, b;
 
-	a = false; a = (ixVSge == VecVSge::IMPIDLE);
+	a = false; a = (ixVSge == VecVSge::IDLE);
 	args.push_back(a);
-	a = false; a = (ixVSge == VecVSge::IMPORT);
+	a = false; a = (ixVSge == VecVSge::FAIL);
 	args.push_back(a);
+	a = false; a = (ixVSge == VecVSge::DONE);
+	args.push_back(a);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
 	b = args.back(); args.pop_back();
 	a = args.back(); args.pop_back();
 	args.push_back(a || b);
@@ -110,26 +87,49 @@ bool DlgWdbeVerMdlstr::evalLfiDldActive(
 	return(args.back());
 };
 
-bool DlgWdbeVerMdlstr::evalButDneActive(
+bool DlgWdbeVerMdlstr::evalImpButRunActive(
 			DbsWdbe* dbswdbe
 		) {
-	// sge(idle|fail|done)
+	// sge(prsdone)
+
+	vector<bool> args;
+	bool a;
+
+	a = false; a = (ixVSge == VecVSge::PRSDONE);
+	args.push_back(a);
+
+	return(args.back());
+};
+
+bool DlgWdbeVerMdlstr::evalImpButStoActive(
+			DbsWdbe* dbswdbe
+		) {
+	// sge(impidle|import)
 
 	vector<bool> args;
 	bool a, b;
 
+	a = false; a = (ixVSge == VecVSge::IMPIDLE);
+	args.push_back(a);
+	a = false; a = (ixVSge == VecVSge::IMPORT);
+	args.push_back(a);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
+
+	return(args.back());
+};
+
+bool DlgWdbeVerMdlstr::evalIfiUldActive(
+			DbsWdbe* dbswdbe
+		) {
+	// sge(idle)
+
+	vector<bool> args;
+	bool a;
+
 	a = false; a = (ixVSge == VecVSge::IDLE);
 	args.push_back(a);
-	a = false; a = (ixVSge == VecVSge::FAIL);
-	args.push_back(a);
-	a = false; a = (ixVSge == VecVSge::DONE);
-	args.push_back(a);
-	b = args.back(); args.pop_back();
-	a = args.back(); args.pop_back();
-	args.push_back(a || b);
-	b = args.back(); args.pop_back();
-	a = args.back(); args.pop_back();
-	args.push_back(a || b);
 
 	return(args.back());
 };

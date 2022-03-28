@@ -11,16 +11,21 @@ using namespace std;
 using namespace Sbecore;
 using namespace Xmlio;
 
-bool DlgWdbePrjImpex::evalIfiUldActive(
+bool DlgWdbePrjImpex::evalButDneActive(
 			DbsWdbe* dbswdbe
 		) {
-	// sge(idle)
+	// sge(idle|done)
 
 	vector<bool> args;
-	bool a;
+	bool a, b;
 
 	a = false; a = (ixVSge == VecVSge::IDLE);
 	args.push_back(a);
+	a = false; a = (ixVSge == VecVSge::DONE);
+	args.push_back(a);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
 
 	return(args.back());
 };
@@ -86,21 +91,16 @@ bool DlgWdbePrjImpex::evalLfiDldActive(
 	return(args.back());
 };
 
-bool DlgWdbePrjImpex::evalButDneActive(
+bool DlgWdbePrjImpex::evalIfiUldActive(
 			DbsWdbe* dbswdbe
 		) {
-	// sge(idle|done)
+	// sge(idle)
 
 	vector<bool> args;
-	bool a, b;
+	bool a;
 
 	a = false; a = (ixVSge == VecVSge::IDLE);
 	args.push_back(a);
-	a = false; a = (ixVSge == VecVSge::DONE);
-	args.push_back(a);
-	b = args.back(); args.pop_back();
-	a = args.back(); args.pop_back();
-	args.push_back(a || b);
 
 	return(args.back());
 };

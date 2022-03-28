@@ -19,18 +19,18 @@ public class QryWdbeTrgList {
 		*/
 	public static class VecVOrd {
 
-		public static final int SRF = 1;
-		public static final int SYS = 2;
-		public static final int UNT = 3;
+		public static final int UNT = 1;
+		public static final int SRF = 2;
+		public static final int SYS = 3;
 
 		public static int getIx(
 					String sref
 				) {
 			String s = sref.toLowerCase();
 
+			if (s.equals("unt")) return UNT;
 			if (s.equals("srf")) return SRF;
 			if (s.equals("sys")) return SYS;
-			if (s.equals("unt")) return UNT;
 
 			return 0;
 		};
@@ -38,9 +38,9 @@ public class QryWdbeTrgList {
 		public static String getSref(
 					int ix
 				) {
+			if (ix == UNT) return("unt");
 			if (ix == SRF) return("srf");
 			if (ix == SYS) return("sys");
-			if (ix == UNT) return("unt");
 
 			return "";
 		};

@@ -38,10 +38,10 @@ PnlWdbeUsrRec::PnlWdbeUsrRec(
 		{
 	jref = xchg->addJob(dbswdbe, this, jrefSup);
 
-	pnldetail = NULL;
-	pnlaaccess = NULL;
-	pnl1nsession = NULL;
 	pnlmnusergroup = NULL;
+	pnl1nsession = NULL;
+	pnlaaccess = NULL;
+	pnldetail = NULL;
 
 	// IP constructor.cust1 --- INSERT
 
@@ -255,13 +255,22 @@ void PnlWdbeUsrRec::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBEUSR_PRSEQ) {
+	if (call->ixVCall == VecWdbeVCall::CALLWDBEUSRUPD_REFEQ) {
+		call->abort = handleCallWdbeUsrUpd_refEq(dbswdbe, call->jref);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEUSR_PRSEQ) {
 		call->abort = handleCallWdbeUsr_prsEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEUSR_USGEQ) {
 		call->abort = handleCallWdbeUsr_usgEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEUSRUPD_REFEQ) {
-		call->abort = handleCallWdbeUsrUpd_refEq(dbswdbe, call->jref);
 	};
+};
+
+bool PnlWdbeUsrRec::handleCallWdbeUsrUpd_refEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+	// IP handleCallWdbeUsrUpd_refEq --- INSERT
+	return retval;
 };
 
 bool PnlWdbeUsrRec::handleCallWdbeUsr_prsEq(
@@ -283,14 +292,5 @@ bool PnlWdbeUsrRec::handleCallWdbeUsr_usgEq(
 		) {
 	bool retval = false;
 	boolvalRet = (recUsr.refWdbeMUsergroup == refInv); // IP handleCallWdbeUsr_usgEq --- LINE
-	return retval;
-};
-
-bool PnlWdbeUsrRec::handleCallWdbeUsrUpd_refEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-	// IP handleCallWdbeUsrUpd_refEq --- INSERT
 	return retval;
 };

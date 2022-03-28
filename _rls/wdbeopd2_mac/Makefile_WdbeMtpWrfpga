@@ -1,8 +1,8 @@
 # file Makefile
 # make file for operation pack WdbeMtpWrfpga, release wdbeopd2_mac
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
-# author: Alexander Wirthmueller (auto-generation)
-# date created: 23 Oct 2021
+# author: Emily Johnson (auto-generation)
+# date created: 28 Mar 2022
 # IP header --- ABOVE
 
 include ../Makefile.inc
@@ -14,7 +14,7 @@ STATLIB = ar
 STATLIBFLAGS = rcs
 
 INCPATH = -I$(BUILDROOT)/dbswdbe -I$(BUILDROOT)/wdbeopd2/VecWdbe -I$(BUILDROOT)/wdbeopd2/IexWdbe -I$(BUILDROOT)/wdbeopd2
-INCPATH += -I${WHIZSDKROOT}/build -I/usr/local/include -I/usr/local/include/curl -I/usr/local/include/libxml2 -I/usr/local/mysql/include
+INCPATH += -I${WHIZSDKROOT}/build -I/opt/homebrew/include -I/opt/homebrew/opt/curl/include -I/opt/homebrew/opt/libmicrohttpd/include -I/opt/homebrew/opt/libxml2/include -I/usr/local/mysql/include
 
 OBJS = WdbeMtpWrfpga_blks.o WdbeMtpWrfpga.o
 OBJS += WdbeMtpWrfpgaCmdbus_v1_0.o WdbeMtpWrfpgaCmdinv_v1_0.o WdbeMtpWrfpgaCmdret_v1_0.o WdbeMtpWrfpgaCrcspec_32_v1_0.o WdbeMtpWrfpgaCrcspec_v1_0.o WdbeMtpWrfpgaDpbram_v1_0.o WdbeMtpWrfpgaPmmu_v1_0.o WdbeMtpWrfpgaSpbram_v1_0.o WdbeMtpWrfpgaSpifwd_v1_0.o WdbeMtpWrfpgaTkclksrc_v1_0.o

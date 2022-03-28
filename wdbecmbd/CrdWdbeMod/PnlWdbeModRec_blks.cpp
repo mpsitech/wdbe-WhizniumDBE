@@ -110,18 +110,18 @@ void PnlWdbeModRec::StatApp::writeJSON(
 			, const bool initdoneDetail
 			, const bool initdoneKHdltype
 			, const bool initdoneAPar
-			, const bool initdoneHsm1NPipeline
-			, const bool initdone1NProcess
-			, const bool initdoneMdl1NPort
 			, const bool initdoneMdl1NGeneric
+			, const bool initdoneHsm1NPipeline
+			, const bool initdoneMdl1NPort
+			, const bool initdone1NProcess
 			, const bool initdoneSup1NModule
 			, const bool initdoneRef1NSignal
 			, const bool initdoneRef1NSensitivity
 			, const bool initdoneRef1NVariable
 			, const bool initdoneMge1NSignal
 			, const bool initdoneCtrRef1NError
-			, const bool initdoneCtrHk1NVector
 			, const bool initdoneCtrRef1NCommand
+			, const bool initdoneCtrHk1NVector
 			, const bool initdoneMNPeripheral
 			, const bool initdoneCtdMNModule
 			, const bool initdoneCorMNModule
@@ -134,18 +134,18 @@ void PnlWdbeModRec::StatApp::writeJSON(
 	me["initdoneDetail"] = initdoneDetail;
 	me["initdoneKHdltype"] = initdoneKHdltype;
 	me["initdoneAPar"] = initdoneAPar;
-	me["initdoneHsm1NPipeline"] = initdoneHsm1NPipeline;
-	me["initdone1NProcess"] = initdone1NProcess;
-	me["initdoneMdl1NPort"] = initdoneMdl1NPort;
 	me["initdoneMdl1NGeneric"] = initdoneMdl1NGeneric;
+	me["initdoneHsm1NPipeline"] = initdoneHsm1NPipeline;
+	me["initdoneMdl1NPort"] = initdoneMdl1NPort;
+	me["initdone1NProcess"] = initdone1NProcess;
 	me["initdoneSup1NModule"] = initdoneSup1NModule;
 	me["initdoneRef1NSignal"] = initdoneRef1NSignal;
 	me["initdoneRef1NSensitivity"] = initdoneRef1NSensitivity;
 	me["initdoneRef1NVariable"] = initdoneRef1NVariable;
 	me["initdoneMge1NSignal"] = initdoneMge1NSignal;
 	me["initdoneCtrRef1NError"] = initdoneCtrRef1NError;
-	me["initdoneCtrHk1NVector"] = initdoneCtrHk1NVector;
 	me["initdoneCtrRef1NCommand"] = initdoneCtrRef1NCommand;
+	me["initdoneCtrHk1NVector"] = initdoneCtrHk1NVector;
 	me["initdoneMNPeripheral"] = initdoneMNPeripheral;
 	me["initdoneCtdMNModule"] = initdoneCtdMNModule;
 	me["initdoneCorMNModule"] = initdoneCorMNModule;
@@ -159,18 +159,18 @@ void PnlWdbeModRec::StatApp::writeXML(
 			, const bool initdoneDetail
 			, const bool initdoneKHdltype
 			, const bool initdoneAPar
-			, const bool initdoneHsm1NPipeline
-			, const bool initdone1NProcess
-			, const bool initdoneMdl1NPort
 			, const bool initdoneMdl1NGeneric
+			, const bool initdoneHsm1NPipeline
+			, const bool initdoneMdl1NPort
+			, const bool initdone1NProcess
 			, const bool initdoneSup1NModule
 			, const bool initdoneRef1NSignal
 			, const bool initdoneRef1NSensitivity
 			, const bool initdoneRef1NVariable
 			, const bool initdoneMge1NSignal
 			, const bool initdoneCtrRef1NError
-			, const bool initdoneCtrHk1NVector
 			, const bool initdoneCtrRef1NCommand
+			, const bool initdoneCtrHk1NVector
 			, const bool initdoneMNPeripheral
 			, const bool initdoneCtdMNModule
 			, const bool initdoneCorMNModule
@@ -186,18 +186,18 @@ void PnlWdbeModRec::StatApp::writeXML(
 		writeBoolAttr(wr, itemtag, "sref", "initdoneDetail", initdoneDetail);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneKHdltype", initdoneKHdltype);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneAPar", initdoneAPar);
-		writeBoolAttr(wr, itemtag, "sref", "initdoneHsm1NPipeline", initdoneHsm1NPipeline);
-		writeBoolAttr(wr, itemtag, "sref", "initdone1NProcess", initdone1NProcess);
-		writeBoolAttr(wr, itemtag, "sref", "initdoneMdl1NPort", initdoneMdl1NPort);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneMdl1NGeneric", initdoneMdl1NGeneric);
+		writeBoolAttr(wr, itemtag, "sref", "initdoneHsm1NPipeline", initdoneHsm1NPipeline);
+		writeBoolAttr(wr, itemtag, "sref", "initdoneMdl1NPort", initdoneMdl1NPort);
+		writeBoolAttr(wr, itemtag, "sref", "initdone1NProcess", initdone1NProcess);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneSup1NModule", initdoneSup1NModule);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneRef1NSignal", initdoneRef1NSignal);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneRef1NSensitivity", initdoneRef1NSensitivity);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneRef1NVariable", initdoneRef1NVariable);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneMge1NSignal", initdoneMge1NSignal);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneCtrRef1NError", initdoneCtrRef1NError);
-		writeBoolAttr(wr, itemtag, "sref", "initdoneCtrHk1NVector", initdoneCtrHk1NVector);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneCtrRef1NCommand", initdoneCtrRef1NCommand);
+		writeBoolAttr(wr, itemtag, "sref", "initdoneCtrHk1NVector", initdoneCtrHk1NVector);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneMNPeripheral", initdoneMNPeripheral);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneCtdMNModule", initdoneCtdMNModule);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneCorMNModule", initdoneCorMNModule);
@@ -214,10 +214,10 @@ PnlWdbeModRec::StatShr::StatShr(
 			, const ubigint jrefDetail
 			, const ubigint jrefKHdltype
 			, const ubigint jrefAPar
-			, const ubigint jrefHsm1NPipeline
-			, const ubigint jref1NProcess
-			, const ubigint jrefMdl1NPort
 			, const ubigint jrefMdl1NGeneric
+			, const ubigint jrefHsm1NPipeline
+			, const ubigint jrefMdl1NPort
+			, const ubigint jref1NProcess
 			, const ubigint jrefSup1NModule
 			, const ubigint jrefRef1NSignal
 			, const ubigint jrefRef1NSensitivity
@@ -225,10 +225,10 @@ PnlWdbeModRec::StatShr::StatShr(
 			, const ubigint jrefMge1NSignal
 			, const ubigint jrefCtrRef1NError
 			, const bool pnlctrref1nerrorAvail
-			, const ubigint jrefCtrHk1NVector
-			, const bool pnlctrhk1nvectorAvail
 			, const ubigint jrefCtrRef1NCommand
 			, const bool pnlctrref1ncommandAvail
+			, const ubigint jrefCtrHk1NVector
+			, const bool pnlctrhk1nvectorAvail
 			, const ubigint jrefMNPeripheral
 			, const ubigint jrefCtdMNModule
 			, const ubigint jrefCorMNModule
@@ -242,10 +242,10 @@ PnlWdbeModRec::StatShr::StatShr(
 	this->jrefDetail = jrefDetail;
 	this->jrefKHdltype = jrefKHdltype;
 	this->jrefAPar = jrefAPar;
-	this->jrefHsm1NPipeline = jrefHsm1NPipeline;
-	this->jref1NProcess = jref1NProcess;
-	this->jrefMdl1NPort = jrefMdl1NPort;
 	this->jrefMdl1NGeneric = jrefMdl1NGeneric;
+	this->jrefHsm1NPipeline = jrefHsm1NPipeline;
+	this->jrefMdl1NPort = jrefMdl1NPort;
+	this->jref1NProcess = jref1NProcess;
 	this->jrefSup1NModule = jrefSup1NModule;
 	this->jrefRef1NSignal = jrefRef1NSignal;
 	this->jrefRef1NSensitivity = jrefRef1NSensitivity;
@@ -253,10 +253,10 @@ PnlWdbeModRec::StatShr::StatShr(
 	this->jrefMge1NSignal = jrefMge1NSignal;
 	this->jrefCtrRef1NError = jrefCtrRef1NError;
 	this->pnlctrref1nerrorAvail = pnlctrref1nerrorAvail;
-	this->jrefCtrHk1NVector = jrefCtrHk1NVector;
-	this->pnlctrhk1nvectorAvail = pnlctrhk1nvectorAvail;
 	this->jrefCtrRef1NCommand = jrefCtrRef1NCommand;
 	this->pnlctrref1ncommandAvail = pnlctrref1ncommandAvail;
+	this->jrefCtrHk1NVector = jrefCtrHk1NVector;
+	this->pnlctrhk1nvectorAvail = pnlctrhk1nvectorAvail;
 	this->jrefMNPeripheral = jrefMNPeripheral;
 	this->jrefCtdMNModule = jrefCtdMNModule;
 	this->jrefCorMNModule = jrefCorMNModule;
@@ -264,7 +264,7 @@ PnlWdbeModRec::StatShr::StatShr(
 	this->pnlctrmncommandAvail = pnlctrmncommandAvail;
 	this->ButRegularizeActive = ButRegularizeActive;
 
-	mask = {IXWDBEVEXPSTATE, JREFDETAIL, JREFKHDLTYPE, JREFAPAR, JREFHSM1NPIPELINE, JREF1NPROCESS, JREFMDL1NPORT, JREFMDL1NGENERIC, JREFSUP1NMODULE, JREFREF1NSIGNAL, JREFREF1NSENSITIVITY, JREFREF1NVARIABLE, JREFMGE1NSIGNAL, JREFCTRREF1NERROR, PNLCTRREF1NERRORAVAIL, JREFCTRHK1NVECTOR, PNLCTRHK1NVECTORAVAIL, JREFCTRREF1NCOMMAND, PNLCTRREF1NCOMMANDAVAIL, JREFMNPERIPHERAL, JREFCTDMNMODULE, JREFCORMNMODULE, JREFCTRMNCOMMAND, PNLCTRMNCOMMANDAVAIL, BUTREGULARIZEACTIVE};
+	mask = {IXWDBEVEXPSTATE, JREFDETAIL, JREFKHDLTYPE, JREFAPAR, JREFMDL1NGENERIC, JREFHSM1NPIPELINE, JREFMDL1NPORT, JREF1NPROCESS, JREFSUP1NMODULE, JREFREF1NSIGNAL, JREFREF1NSENSITIVITY, JREFREF1NVARIABLE, JREFMGE1NSIGNAL, JREFCTRREF1NERROR, PNLCTRREF1NERRORAVAIL, JREFCTRREF1NCOMMAND, PNLCTRREF1NCOMMANDAVAIL, JREFCTRHK1NVECTOR, PNLCTRHK1NVECTORAVAIL, JREFMNPERIPHERAL, JREFCTDMNMODULE, JREFCORMNMODULE, JREFCTRMNCOMMAND, PNLCTRMNCOMMANDAVAIL, BUTREGULARIZEACTIVE};
 };
 
 void PnlWdbeModRec::StatShr::writeJSON(
@@ -279,10 +279,10 @@ void PnlWdbeModRec::StatShr::writeJSON(
 	me["scrJrefDetail"] = Scr::scramble(jrefDetail);
 	me["scrJrefKHdltype"] = Scr::scramble(jrefKHdltype);
 	me["scrJrefAPar"] = Scr::scramble(jrefAPar);
-	me["scrJrefHsm1NPipeline"] = Scr::scramble(jrefHsm1NPipeline);
-	me["scrJref1NProcess"] = Scr::scramble(jref1NProcess);
-	me["scrJrefMdl1NPort"] = Scr::scramble(jrefMdl1NPort);
 	me["scrJrefMdl1NGeneric"] = Scr::scramble(jrefMdl1NGeneric);
+	me["scrJrefHsm1NPipeline"] = Scr::scramble(jrefHsm1NPipeline);
+	me["scrJrefMdl1NPort"] = Scr::scramble(jrefMdl1NPort);
+	me["scrJref1NProcess"] = Scr::scramble(jref1NProcess);
 	me["scrJrefSup1NModule"] = Scr::scramble(jrefSup1NModule);
 	me["scrJrefRef1NSignal"] = Scr::scramble(jrefRef1NSignal);
 	me["scrJrefRef1NSensitivity"] = Scr::scramble(jrefRef1NSensitivity);
@@ -290,10 +290,10 @@ void PnlWdbeModRec::StatShr::writeJSON(
 	me["scrJrefMge1NSignal"] = Scr::scramble(jrefMge1NSignal);
 	me["scrJrefCtrRef1NError"] = Scr::scramble(jrefCtrRef1NError);
 	me["pnlctrref1nerrorAvail"] = pnlctrref1nerrorAvail;
-	me["scrJrefCtrHk1NVector"] = Scr::scramble(jrefCtrHk1NVector);
-	me["pnlctrhk1nvectorAvail"] = pnlctrhk1nvectorAvail;
 	me["scrJrefCtrRef1NCommand"] = Scr::scramble(jrefCtrRef1NCommand);
 	me["pnlctrref1ncommandAvail"] = pnlctrref1ncommandAvail;
+	me["scrJrefCtrHk1NVector"] = Scr::scramble(jrefCtrHk1NVector);
+	me["pnlctrhk1nvectorAvail"] = pnlctrhk1nvectorAvail;
 	me["scrJrefMNPeripheral"] = Scr::scramble(jrefMNPeripheral);
 	me["scrJrefCtdMNModule"] = Scr::scramble(jrefCtdMNModule);
 	me["scrJrefCorMNModule"] = Scr::scramble(jrefCorMNModule);
@@ -318,10 +318,10 @@ void PnlWdbeModRec::StatShr::writeXML(
 		writeStringAttr(wr, itemtag, "sref", "scrJrefDetail", Scr::scramble(jrefDetail));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefKHdltype", Scr::scramble(jrefKHdltype));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefAPar", Scr::scramble(jrefAPar));
-		writeStringAttr(wr, itemtag, "sref", "scrJrefHsm1NPipeline", Scr::scramble(jrefHsm1NPipeline));
-		writeStringAttr(wr, itemtag, "sref", "scrJref1NProcess", Scr::scramble(jref1NProcess));
-		writeStringAttr(wr, itemtag, "sref", "scrJrefMdl1NPort", Scr::scramble(jrefMdl1NPort));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefMdl1NGeneric", Scr::scramble(jrefMdl1NGeneric));
+		writeStringAttr(wr, itemtag, "sref", "scrJrefHsm1NPipeline", Scr::scramble(jrefHsm1NPipeline));
+		writeStringAttr(wr, itemtag, "sref", "scrJrefMdl1NPort", Scr::scramble(jrefMdl1NPort));
+		writeStringAttr(wr, itemtag, "sref", "scrJref1NProcess", Scr::scramble(jref1NProcess));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefSup1NModule", Scr::scramble(jrefSup1NModule));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefRef1NSignal", Scr::scramble(jrefRef1NSignal));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefRef1NSensitivity", Scr::scramble(jrefRef1NSensitivity));
@@ -329,10 +329,10 @@ void PnlWdbeModRec::StatShr::writeXML(
 		writeStringAttr(wr, itemtag, "sref", "scrJrefMge1NSignal", Scr::scramble(jrefMge1NSignal));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefCtrRef1NError", Scr::scramble(jrefCtrRef1NError));
 		writeBoolAttr(wr, itemtag, "sref", "pnlctrref1nerrorAvail", pnlctrref1nerrorAvail);
-		writeStringAttr(wr, itemtag, "sref", "scrJrefCtrHk1NVector", Scr::scramble(jrefCtrHk1NVector));
-		writeBoolAttr(wr, itemtag, "sref", "pnlctrhk1nvectorAvail", pnlctrhk1nvectorAvail);
 		writeStringAttr(wr, itemtag, "sref", "scrJrefCtrRef1NCommand", Scr::scramble(jrefCtrRef1NCommand));
 		writeBoolAttr(wr, itemtag, "sref", "pnlctrref1ncommandAvail", pnlctrref1ncommandAvail);
+		writeStringAttr(wr, itemtag, "sref", "scrJrefCtrHk1NVector", Scr::scramble(jrefCtrHk1NVector));
+		writeBoolAttr(wr, itemtag, "sref", "pnlctrhk1nvectorAvail", pnlctrhk1nvectorAvail);
 		writeStringAttr(wr, itemtag, "sref", "scrJrefMNPeripheral", Scr::scramble(jrefMNPeripheral));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefCtdMNModule", Scr::scramble(jrefCtdMNModule));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefCorMNModule", Scr::scramble(jrefCorMNModule));
@@ -351,10 +351,10 @@ set<uint> PnlWdbeModRec::StatShr::comm(
 	if (jrefDetail == comp->jrefDetail) insert(items, JREFDETAIL);
 	if (jrefKHdltype == comp->jrefKHdltype) insert(items, JREFKHDLTYPE);
 	if (jrefAPar == comp->jrefAPar) insert(items, JREFAPAR);
-	if (jrefHsm1NPipeline == comp->jrefHsm1NPipeline) insert(items, JREFHSM1NPIPELINE);
-	if (jref1NProcess == comp->jref1NProcess) insert(items, JREF1NPROCESS);
-	if (jrefMdl1NPort == comp->jrefMdl1NPort) insert(items, JREFMDL1NPORT);
 	if (jrefMdl1NGeneric == comp->jrefMdl1NGeneric) insert(items, JREFMDL1NGENERIC);
+	if (jrefHsm1NPipeline == comp->jrefHsm1NPipeline) insert(items, JREFHSM1NPIPELINE);
+	if (jrefMdl1NPort == comp->jrefMdl1NPort) insert(items, JREFMDL1NPORT);
+	if (jref1NProcess == comp->jref1NProcess) insert(items, JREF1NPROCESS);
 	if (jrefSup1NModule == comp->jrefSup1NModule) insert(items, JREFSUP1NMODULE);
 	if (jrefRef1NSignal == comp->jrefRef1NSignal) insert(items, JREFREF1NSIGNAL);
 	if (jrefRef1NSensitivity == comp->jrefRef1NSensitivity) insert(items, JREFREF1NSENSITIVITY);
@@ -362,10 +362,10 @@ set<uint> PnlWdbeModRec::StatShr::comm(
 	if (jrefMge1NSignal == comp->jrefMge1NSignal) insert(items, JREFMGE1NSIGNAL);
 	if (jrefCtrRef1NError == comp->jrefCtrRef1NError) insert(items, JREFCTRREF1NERROR);
 	if (pnlctrref1nerrorAvail == comp->pnlctrref1nerrorAvail) insert(items, PNLCTRREF1NERRORAVAIL);
-	if (jrefCtrHk1NVector == comp->jrefCtrHk1NVector) insert(items, JREFCTRHK1NVECTOR);
-	if (pnlctrhk1nvectorAvail == comp->pnlctrhk1nvectorAvail) insert(items, PNLCTRHK1NVECTORAVAIL);
 	if (jrefCtrRef1NCommand == comp->jrefCtrRef1NCommand) insert(items, JREFCTRREF1NCOMMAND);
 	if (pnlctrref1ncommandAvail == comp->pnlctrref1ncommandAvail) insert(items, PNLCTRREF1NCOMMANDAVAIL);
+	if (jrefCtrHk1NVector == comp->jrefCtrHk1NVector) insert(items, JREFCTRHK1NVECTOR);
+	if (pnlctrhk1nvectorAvail == comp->pnlctrhk1nvectorAvail) insert(items, PNLCTRHK1NVECTORAVAIL);
 	if (jrefMNPeripheral == comp->jrefMNPeripheral) insert(items, JREFMNPERIPHERAL);
 	if (jrefCtdMNModule == comp->jrefCtdMNModule) insert(items, JREFCTDMNMODULE);
 	if (jrefCorMNModule == comp->jrefCorMNModule) insert(items, JREFCORMNMODULE);
@@ -384,7 +384,7 @@ set<uint> PnlWdbeModRec::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {IXWDBEVEXPSTATE, JREFDETAIL, JREFKHDLTYPE, JREFAPAR, JREFHSM1NPIPELINE, JREF1NPROCESS, JREFMDL1NPORT, JREFMDL1NGENERIC, JREFSUP1NMODULE, JREFREF1NSIGNAL, JREFREF1NSENSITIVITY, JREFREF1NVARIABLE, JREFMGE1NSIGNAL, JREFCTRREF1NERROR, PNLCTRREF1NERRORAVAIL, JREFCTRHK1NVECTOR, PNLCTRHK1NVECTORAVAIL, JREFCTRREF1NCOMMAND, PNLCTRREF1NCOMMANDAVAIL, JREFMNPERIPHERAL, JREFCTDMNMODULE, JREFCORMNMODULE, JREFCTRMNCOMMAND, PNLCTRMNCOMMANDAVAIL, BUTREGULARIZEACTIVE};
+	diffitems = {IXWDBEVEXPSTATE, JREFDETAIL, JREFKHDLTYPE, JREFAPAR, JREFMDL1NGENERIC, JREFHSM1NPIPELINE, JREFMDL1NPORT, JREF1NPROCESS, JREFSUP1NMODULE, JREFREF1NSIGNAL, JREFREF1NSENSITIVITY, JREFREF1NVARIABLE, JREFMGE1NSIGNAL, JREFCTRREF1NERROR, PNLCTRREF1NERRORAVAIL, JREFCTRREF1NCOMMAND, PNLCTRREF1NCOMMANDAVAIL, JREFCTRHK1NVECTOR, PNLCTRHK1NVECTORAVAIL, JREFMNPERIPHERAL, JREFCTDMNMODULE, JREFCORMNMODULE, JREFCTRMNCOMMAND, PNLCTRMNCOMMANDAVAIL, BUTREGULARIZEACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);

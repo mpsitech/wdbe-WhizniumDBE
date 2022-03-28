@@ -3,7 +3,7 @@
 # checkout script for Wdbe Java API library, release japiwdbe_any
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 23 Oct 2021
+# date created: 21 Dec 2021
 # IP header --- ABOVE
 
 if [ -z ${JAVAROOT+x} ]; then

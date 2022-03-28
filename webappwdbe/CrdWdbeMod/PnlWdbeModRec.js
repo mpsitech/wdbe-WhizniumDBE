@@ -2,18 +2,18 @@ function updateScrJrefs() {
 	scrJrefDetail = retrieveSi(srcdoc, "StatShrWdbeModRec", "scrJrefDetail");
 	scrJrefKHdltype = retrieveSi(srcdoc, "StatShrWdbeModRec", "scrJrefKHdltype");
 	scrJrefAPar = retrieveSi(srcdoc, "StatShrWdbeModRec", "scrJrefAPar");
-	scrJrefHsm1NPipeline = retrieveSi(srcdoc, "StatShrWdbeModRec", "scrJrefHsm1NPipeline");
-	scrJref1NProcess = retrieveSi(srcdoc, "StatShrWdbeModRec", "scrJref1NProcess");
-	scrJrefMdl1NPort = retrieveSi(srcdoc, "StatShrWdbeModRec", "scrJrefMdl1NPort");
 	scrJrefMdl1NGeneric = retrieveSi(srcdoc, "StatShrWdbeModRec", "scrJrefMdl1NGeneric");
+	scrJrefHsm1NPipeline = retrieveSi(srcdoc, "StatShrWdbeModRec", "scrJrefHsm1NPipeline");
+	scrJrefMdl1NPort = retrieveSi(srcdoc, "StatShrWdbeModRec", "scrJrefMdl1NPort");
+	scrJref1NProcess = retrieveSi(srcdoc, "StatShrWdbeModRec", "scrJref1NProcess");
 	scrJrefSup1NModule = retrieveSi(srcdoc, "StatShrWdbeModRec", "scrJrefSup1NModule");
 	scrJrefRef1NSignal = retrieveSi(srcdoc, "StatShrWdbeModRec", "scrJrefRef1NSignal");
 	scrJrefRef1NSensitivity = retrieveSi(srcdoc, "StatShrWdbeModRec", "scrJrefRef1NSensitivity");
 	scrJrefRef1NVariable = retrieveSi(srcdoc, "StatShrWdbeModRec", "scrJrefRef1NVariable");
 	scrJrefMge1NSignal = retrieveSi(srcdoc, "StatShrWdbeModRec", "scrJrefMge1NSignal");
 	scrJrefCtrRef1NError = retrieveSi(srcdoc, "StatShrWdbeModRec", "scrJrefCtrRef1NError");
-	scrJrefCtrHk1NVector = retrieveSi(srcdoc, "StatShrWdbeModRec", "scrJrefCtrHk1NVector");
 	scrJrefCtrRef1NCommand = retrieveSi(srcdoc, "StatShrWdbeModRec", "scrJrefCtrRef1NCommand");
+	scrJrefCtrHk1NVector = retrieveSi(srcdoc, "StatShrWdbeModRec", "scrJrefCtrHk1NVector");
 	scrJrefMNPeripheral = retrieveSi(srcdoc, "StatShrWdbeModRec", "scrJrefMNPeripheral");
 	scrJrefCtdMNModule = retrieveSi(srcdoc, "StatShrWdbeModRec", "scrJrefCtdMNModule");
 	scrJrefCorMNModule = retrieveSi(srcdoc, "StatShrWdbeModRec", "scrJrefCorMNModule");
@@ -24,18 +24,18 @@ function resetInitdones() {
 	setSi(srcdoc, "StatAppWdbeModRec", "initdoneDetail", "false");
 	setSi(srcdoc, "StatAppWdbeModRec", "initdoneKHdltype", "false");
 	setSi(srcdoc, "StatAppWdbeModRec", "initdoneAPar", "false");
-	setSi(srcdoc, "StatAppWdbeModRec", "initdoneHsm1NPipeline", "false");
-	setSi(srcdoc, "StatAppWdbeModRec", "initdone1NProcess", "false");
-	setSi(srcdoc, "StatAppWdbeModRec", "initdoneMdl1NPort", "false");
 	setSi(srcdoc, "StatAppWdbeModRec", "initdoneMdl1NGeneric", "false");
+	setSi(srcdoc, "StatAppWdbeModRec", "initdoneHsm1NPipeline", "false");
+	setSi(srcdoc, "StatAppWdbeModRec", "initdoneMdl1NPort", "false");
+	setSi(srcdoc, "StatAppWdbeModRec", "initdone1NProcess", "false");
 	setSi(srcdoc, "StatAppWdbeModRec", "initdoneSup1NModule", "false");
 	setSi(srcdoc, "StatAppWdbeModRec", "initdoneRef1NSignal", "false");
 	setSi(srcdoc, "StatAppWdbeModRec", "initdoneRef1NSensitivity", "false");
 	setSi(srcdoc, "StatAppWdbeModRec", "initdoneRef1NVariable", "false");
 	setSi(srcdoc, "StatAppWdbeModRec", "initdoneMge1NSignal", "false");
 	setSi(srcdoc, "StatAppWdbeModRec", "initdoneCtrRef1NError", "false");
-	setSi(srcdoc, "StatAppWdbeModRec", "initdoneCtrHk1NVector", "false");
 	setSi(srcdoc, "StatAppWdbeModRec", "initdoneCtrRef1NCommand", "false");
+	setSi(srcdoc, "StatAppWdbeModRec", "initdoneCtrHk1NVector", "false");
 	setSi(srcdoc, "StatAppWdbeModRec", "initdoneMNPeripheral", "false");
 	setSi(srcdoc, "StatAppWdbeModRec", "initdoneCtdMNModule", "false");
 	setSi(srcdoc, "StatAppWdbeModRec", "initdoneCorMNModule", "false");
@@ -46,18 +46,18 @@ function resetHeights() {
 	heightDetail = 30;
 	heightKHdltype = 30;
 	heightAPar = 30;
-	heightHsm1NPipeline = 30;
-	height1NProcess = 30;
-	heightMdl1NPort = 30;
 	heightMdl1NGeneric = 30;
+	heightHsm1NPipeline = 30;
+	heightMdl1NPort = 30;
+	height1NProcess = 30;
 	heightSup1NModule = 30;
 	heightRef1NSignal = 30;
 	heightRef1NSensitivity = 30;
 	heightRef1NVariable = 30;
 	heightMge1NSignal = 30;
 	heightCtrRef1NError = 30;
-	heightCtrHk1NVector = 30;
 	heightCtrRef1NCommand = 30;
+	heightCtrHk1NVector = 30;
 	heightMNPeripheral = 30;
 	heightCtdMNModule = 30;
 	heightCorMNModule = 30;
@@ -82,18 +82,18 @@ function checkInitdone() {
 	var initdoneDetail = (retrieveSi(srcdoc, "StatAppWdbeModRec", "initdoneDetail") == "true");
 	var initdoneKHdltype = (retrieveSi(srcdoc, "StatAppWdbeModRec", "initdoneKHdltype") == "true");
 	var initdoneAPar = (retrieveSi(srcdoc, "StatAppWdbeModRec", "initdoneAPar") == "true");
-	var initdoneHsm1NPipeline = (retrieveSi(srcdoc, "StatAppWdbeModRec", "initdoneHsm1NPipeline") == "true");
-	var initdone1NProcess = (retrieveSi(srcdoc, "StatAppWdbeModRec", "initdone1NProcess") == "true");
-	var initdoneMdl1NPort = (retrieveSi(srcdoc, "StatAppWdbeModRec", "initdoneMdl1NPort") == "true");
 	var initdoneMdl1NGeneric = (retrieveSi(srcdoc, "StatAppWdbeModRec", "initdoneMdl1NGeneric") == "true");
+	var initdoneHsm1NPipeline = (retrieveSi(srcdoc, "StatAppWdbeModRec", "initdoneHsm1NPipeline") == "true");
+	var initdoneMdl1NPort = (retrieveSi(srcdoc, "StatAppWdbeModRec", "initdoneMdl1NPort") == "true");
+	var initdone1NProcess = (retrieveSi(srcdoc, "StatAppWdbeModRec", "initdone1NProcess") == "true");
 	var initdoneSup1NModule = (retrieveSi(srcdoc, "StatAppWdbeModRec", "initdoneSup1NModule") == "true");
 	var initdoneRef1NSignal = (retrieveSi(srcdoc, "StatAppWdbeModRec", "initdoneRef1NSignal") == "true");
 	var initdoneRef1NSensitivity = (retrieveSi(srcdoc, "StatAppWdbeModRec", "initdoneRef1NSensitivity") == "true");
 	var initdoneRef1NVariable = (retrieveSi(srcdoc, "StatAppWdbeModRec", "initdoneRef1NVariable") == "true");
 	var initdoneMge1NSignal = (retrieveSi(srcdoc, "StatAppWdbeModRec", "initdoneMge1NSignal") == "true");
 	var initdoneCtrRef1NError = (retrieveSi(srcdoc, "StatAppWdbeModRec", "initdoneCtrRef1NError") == "true");
-	var initdoneCtrHk1NVector = (retrieveSi(srcdoc, "StatAppWdbeModRec", "initdoneCtrHk1NVector") == "true");
 	var initdoneCtrRef1NCommand = (retrieveSi(srcdoc, "StatAppWdbeModRec", "initdoneCtrRef1NCommand") == "true");
+	var initdoneCtrHk1NVector = (retrieveSi(srcdoc, "StatAppWdbeModRec", "initdoneCtrHk1NVector") == "true");
 	var initdoneMNPeripheral = (retrieveSi(srcdoc, "StatAppWdbeModRec", "initdoneMNPeripheral") == "true");
 	var initdoneCtdMNModule = (retrieveSi(srcdoc, "StatAppWdbeModRec", "initdoneCtdMNModule") == "true");
 	var initdoneCorMNModule = (retrieveSi(srcdoc, "StatAppWdbeModRec", "initdoneCorMNModule") == "true");
@@ -105,14 +105,14 @@ function checkInitdone() {
 		lhsdoc.getElementById("KHdltype").src = "./PnlWdbeModKHdltype.html?scrJref=" + scrJrefKHdltype;
 	} else if (!initdoneAPar) {
 		lhsdoc.getElementById("APar").src = "./PnlWdbeModAPar.html?scrJref=" + scrJrefAPar;
-	} else if (!initdoneHsm1NPipeline) {
-		rhsdoc.getElementById("Hsm1NPipeline").src = "./PnlWdbeModHsm1NPipeline.html?scrJref=" + scrJrefHsm1NPipeline;
-	} else if (!initdone1NProcess) {
-		rhsdoc.getElementById("1NProcess").src = "./PnlWdbeMod1NProcess.html?scrJref=" + scrJref1NProcess;
-	} else if (!initdoneMdl1NPort) {
-		rhsdoc.getElementById("Mdl1NPort").src = "./PnlWdbeModMdl1NPort.html?scrJref=" + scrJrefMdl1NPort;
 	} else if (!initdoneMdl1NGeneric) {
 		rhsdoc.getElementById("Mdl1NGeneric").src = "./PnlWdbeModMdl1NGeneric.html?scrJref=" + scrJrefMdl1NGeneric;
+	} else if (!initdoneHsm1NPipeline) {
+		rhsdoc.getElementById("Hsm1NPipeline").src = "./PnlWdbeModHsm1NPipeline.html?scrJref=" + scrJrefHsm1NPipeline;
+	} else if (!initdoneMdl1NPort) {
+		rhsdoc.getElementById("Mdl1NPort").src = "./PnlWdbeModMdl1NPort.html?scrJref=" + scrJrefMdl1NPort;
+	} else if (!initdone1NProcess) {
+		rhsdoc.getElementById("1NProcess").src = "./PnlWdbeMod1NProcess.html?scrJref=" + scrJref1NProcess;
 	} else if (!initdoneSup1NModule) {
 		rhsdoc.getElementById("Sup1NModule").src = "./PnlWdbeModSup1NModule.html?scrJref=" + scrJrefSup1NModule;
 	} else if (!initdoneRef1NSignal) {
@@ -125,10 +125,10 @@ function checkInitdone() {
 		rhsdoc.getElementById("Mge1NSignal").src = "./PnlWdbeModMge1NSignal.html?scrJref=" + scrJrefMge1NSignal;
 	} else if (!initdoneCtrRef1NError) {
 		rhsdoc.getElementById("CtrRef1NError").src = "./PnlWdbeModCtrRef1NError.html?scrJref=" + scrJrefCtrRef1NError;
-	} else if (!initdoneCtrHk1NVector) {
-		rhsdoc.getElementById("CtrHk1NVector").src = "./PnlWdbeModCtrHk1NVector.html?scrJref=" + scrJrefCtrHk1NVector;
 	} else if (!initdoneCtrRef1NCommand) {
 		rhsdoc.getElementById("CtrRef1NCommand").src = "./PnlWdbeModCtrRef1NCommand.html?scrJref=" + scrJrefCtrRef1NCommand;
+	} else if (!initdoneCtrHk1NVector) {
+		rhsdoc.getElementById("CtrHk1NVector").src = "./PnlWdbeModCtrHk1NVector.html?scrJref=" + scrJrefCtrHk1NVector;
 	} else if (!initdoneMNPeripheral) {
 		rhsdoc.getElementById("MNPeripheral").src = "./PnlWdbeModMNPeripheral.html?scrJref=" + scrJrefMNPeripheral;
 	} else if (!initdoneCtdMNModule) {
@@ -178,18 +178,18 @@ function setPnlAvail(short, avail) {
 		else if (short == "Detail") heightDetail = height;
 		else if (short == "KHdltype") heightKHdltype = height;
 		else if (short == "APar") heightAPar = height;
-		else if (short == "Hsm1NPipeline") heightHsm1NPipeline = height;
-		else if (short == "1NProcess") height1NProcess = height;
-		else if (short == "Mdl1NPort") heightMdl1NPort = height;
 		else if (short == "Mdl1NGeneric") heightMdl1NGeneric = height;
+		else if (short == "Hsm1NPipeline") heightHsm1NPipeline = height;
+		else if (short == "Mdl1NPort") heightMdl1NPort = height;
+		else if (short == "1NProcess") height1NProcess = height;
 		else if (short == "Sup1NModule") heightSup1NModule = height;
 		else if (short == "Ref1NSignal") heightRef1NSignal = height;
 		else if (short == "Ref1NSensitivity") heightRef1NSensitivity = height;
 		else if (short == "Ref1NVariable") heightRef1NVariable = height;
 		else if (short == "Mge1NSignal") heightMge1NSignal = height;
 		else if (short == "CtrRef1NError") heightCtrRef1NError = height;
-		else if (short == "CtrHk1NVector") heightCtrHk1NVector = height;
 		else if (short == "CtrRef1NCommand") heightCtrRef1NCommand = height;
+		else if (short == "CtrHk1NVector") heightCtrHk1NVector = height;
 		else if (short == "MNPeripheral") heightMNPeripheral = height;
 		else if (short == "CtdMNModule") heightCtdMNModule = height;
 		else if (short == "CorMNModule") heightCorMNModule = height;
@@ -239,18 +239,18 @@ function changeHeight(pnlshort, height, update) {
 	else if (pnlshort == "Detail") heightDetail = height;
 	else if (pnlshort == "KHdltype") heightKHdltype = height;
 	else if (pnlshort == "APar") heightAPar = height;
-	else if (pnlshort == "Hsm1NPipeline") heightHsm1NPipeline = height;
-	else if (pnlshort == "1NProcess") height1NProcess = height;
-	else if (pnlshort == "Mdl1NPort") heightMdl1NPort = height;
 	else if (pnlshort == "Mdl1NGeneric") heightMdl1NGeneric = height;
+	else if (pnlshort == "Hsm1NPipeline") heightHsm1NPipeline = height;
+	else if (pnlshort == "Mdl1NPort") heightMdl1NPort = height;
+	else if (pnlshort == "1NProcess") height1NProcess = height;
 	else if (pnlshort == "Sup1NModule") heightSup1NModule = height;
 	else if (pnlshort == "Ref1NSignal") heightRef1NSignal = height;
 	else if (pnlshort == "Ref1NSensitivity") heightRef1NSensitivity = height;
 	else if (pnlshort == "Ref1NVariable") heightRef1NVariable = height;
 	else if (pnlshort == "Mge1NSignal") heightMge1NSignal = height;
 	else if (pnlshort == "CtrRef1NError") heightCtrRef1NError = height;
-	else if (pnlshort == "CtrHk1NVector") heightCtrHk1NVector = height;
 	else if (pnlshort == "CtrRef1NCommand") heightCtrRef1NCommand = height;
+	else if (pnlshort == "CtrHk1NVector") heightCtrHk1NVector = height;
 	else if (pnlshort == "MNPeripheral") heightMNPeripheral = height;
 	else if (pnlshort == "CtdMNModule") heightCtdMNModule = height;
 	else if (pnlshort == "CorMNModule") heightCorMNModule = height;
@@ -263,7 +263,7 @@ function updateHeight() {
 	var heightLhs, heightRhs, heightGt;
 
 	heightLhs = heightDetail+13 + heightKHdltype+13 + heightAPar+13 + 5;
-	heightRhs = heightHsm1NPipeline+13 + height1NProcess+13 + heightMdl1NPort+13 + heightMdl1NGeneric+13 + heightSup1NModule+13 + heightRef1NSignal+13 + heightRef1NSensitivity+13 + heightRef1NVariable+13 + heightMge1NSignal+13 + heightCtrRef1NError+13 + heightCtrHk1NVector+13 + heightCtrRef1NCommand+13 + heightMNPeripheral+13 + heightCtdMNModule+13 + heightCorMNModule+13 + heightCtrMNCommand+13 + 5;
+	heightRhs = heightMdl1NGeneric+13 + heightHsm1NPipeline+13 + heightMdl1NPort+13 + height1NProcess+13 + heightSup1NModule+13 + heightRef1NSignal+13 + heightRef1NSensitivity+13 + heightRef1NVariable+13 + heightMge1NSignal+13 + heightCtrRef1NError+13 + heightCtrRef1NCommand+13 + heightCtrHk1NVector+13 + heightMNPeripheral+13 + heightCtdMNModule+13 + heightCorMNModule+13 + heightCtrMNCommand+13 + 5;
 
 	if (heightLhs > heightRhs) {
 		lhsdoc.getElementById("tdFill").setAttribute("height", "5");
@@ -366,15 +366,15 @@ function refreshB() {
 	var updh = false;
 
 	var pnlctrref1nerrorAvail = (retrieveSi(srcdoc, "StatShrWdbeModRec", "pnlctrref1nerrorAvail") == "true");
-	var pnlctrhk1nvectorAvail = (retrieveSi(srcdoc, "StatShrWdbeModRec", "pnlctrhk1nvectorAvail") == "true");
 	var pnlctrref1ncommandAvail = (retrieveSi(srcdoc, "StatShrWdbeModRec", "pnlctrref1ncommandAvail") == "true");
+	var pnlctrhk1nvectorAvail = (retrieveSi(srcdoc, "StatShrWdbeModRec", "pnlctrhk1nvectorAvail") == "true");
 	var pnlctrmncommandAvail = (retrieveSi(srcdoc, "StatShrWdbeModRec", "pnlctrmncommandAvail") == "true");
 
 	setTextContent(hdrdoc, hdrdoc.getElementById("TxtRef"), retrieveCi(srcdoc, "ContInfWdbeModRec", "TxtRef"));
 
 	if (setPnlAvail("CtrRef1NError", pnlctrref1nerrorAvail)) updh = true;
-	if (setPnlAvail("CtrHk1NVector", pnlctrhk1nvectorAvail)) updh = true;
 	if (setPnlAvail("CtrRef1NCommand", pnlctrref1ncommandAvail)) updh = true;
+	if (setPnlAvail("CtrHk1NVector", pnlctrhk1nvectorAvail)) updh = true;
 	if (setPnlAvail("CtrMNCommand", pnlctrmncommandAvail)) updh = true;
 
 	if (updh) updateHeight();
@@ -470,14 +470,14 @@ function handleDpchEng(dom, dpch) {
 				if (getInitdone("KHdltype")) lhsdoc.getElementById("KHdltype").contentWindow.handleDpchEng(dom, dpch);
 			} else if (_scrJref == scrJrefAPar) {
 				if (getInitdone("APar")) lhsdoc.getElementById("APar").contentWindow.handleDpchEng(dom, dpch);
-			} else if (_scrJref == scrJrefHsm1NPipeline) {
-				if (getInitdone("Hsm1NPipeline")) rhsdoc.getElementById("Hsm1NPipeline").contentWindow.handleDpchEng(dom, dpch);
-			} else if (_scrJref == scrJref1NProcess) {
-				if (getInitdone("1NProcess")) rhsdoc.getElementById("1NProcess").contentWindow.handleDpchEng(dom, dpch);
-			} else if (_scrJref == scrJrefMdl1NPort) {
-				if (getInitdone("Mdl1NPort")) rhsdoc.getElementById("Mdl1NPort").contentWindow.handleDpchEng(dom, dpch);
 			} else if (_scrJref == scrJrefMdl1NGeneric) {
 				if (getInitdone("Mdl1NGeneric")) rhsdoc.getElementById("Mdl1NGeneric").contentWindow.handleDpchEng(dom, dpch);
+			} else if (_scrJref == scrJrefHsm1NPipeline) {
+				if (getInitdone("Hsm1NPipeline")) rhsdoc.getElementById("Hsm1NPipeline").contentWindow.handleDpchEng(dom, dpch);
+			} else if (_scrJref == scrJrefMdl1NPort) {
+				if (getInitdone("Mdl1NPort")) rhsdoc.getElementById("Mdl1NPort").contentWindow.handleDpchEng(dom, dpch);
+			} else if (_scrJref == scrJref1NProcess) {
+				if (getInitdone("1NProcess")) rhsdoc.getElementById("1NProcess").contentWindow.handleDpchEng(dom, dpch);
 			} else if (_scrJref == scrJrefSup1NModule) {
 				if (getInitdone("Sup1NModule")) rhsdoc.getElementById("Sup1NModule").contentWindow.handleDpchEng(dom, dpch);
 			} else if (_scrJref == scrJrefRef1NSignal) {
@@ -490,10 +490,10 @@ function handleDpchEng(dom, dpch) {
 				if (getInitdone("Mge1NSignal")) rhsdoc.getElementById("Mge1NSignal").contentWindow.handleDpchEng(dom, dpch);
 			} else if (_scrJref == scrJrefCtrRef1NError) {
 				if (getInitdone("CtrRef1NError")) rhsdoc.getElementById("CtrRef1NError").contentWindow.handleDpchEng(dom, dpch);
-			} else if (_scrJref == scrJrefCtrHk1NVector) {
-				if (getInitdone("CtrHk1NVector")) rhsdoc.getElementById("CtrHk1NVector").contentWindow.handleDpchEng(dom, dpch);
 			} else if (_scrJref == scrJrefCtrRef1NCommand) {
 				if (getInitdone("CtrRef1NCommand")) rhsdoc.getElementById("CtrRef1NCommand").contentWindow.handleDpchEng(dom, dpch);
+			} else if (_scrJref == scrJrefCtrHk1NVector) {
+				if (getInitdone("CtrHk1NVector")) rhsdoc.getElementById("CtrHk1NVector").contentWindow.handleDpchEng(dom, dpch);
 			} else if (_scrJref == scrJrefMNPeripheral) {
 				if (getInitdone("MNPeripheral")) rhsdoc.getElementById("MNPeripheral").contentWindow.handleDpchEng(dom, dpch);
 			} else if (_scrJref == scrJrefCtdMNModule) {

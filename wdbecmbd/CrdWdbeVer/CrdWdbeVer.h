@@ -14,16 +14,16 @@
 
 // IP include.cust --- INSERT
 
-#include "DlgWdbeVerCmdset.h"
-#include "DlgWdbeVerCustfst.h"
-#include "DlgWdbeVerDflalg.h"
-#include "DlgWdbeVerFinmod.h"
-#include "DlgWdbeVerGenfst.h"
-#include "DlgWdbeVerMdlstr.h"
-#include "DlgWdbeVerNew.h"
-#include "PnlWdbeVerRec.h"
-#include "PnlWdbeVerHeadbar.h"
 #include "PnlWdbeVerList.h"
+#include "PnlWdbeVerHeadbar.h"
+#include "PnlWdbeVerRec.h"
+#include "DlgWdbeVerFinmod.h"
+#include "DlgWdbeVerNew.h"
+#include "DlgWdbeVerMdlstr.h"
+#include "DlgWdbeVerDflalg.h"
+#include "DlgWdbeVerCustfst.h"
+#include "DlgWdbeVerCmdset.h"
+#include "DlgWdbeVerGenfst.h"
 
 #define VecVWdbeVerDo CrdWdbeVer::VecVDo
 #define VecVWdbeVerSge CrdWdbeVer::VecVSge
@@ -294,16 +294,16 @@ public:
 	Sbecore::Feed feedFMcbAlert;
 	Sbecore::Feed feedFSge;
 
-	DlgWdbeVerCmdset* dlgcmdset;
-	DlgWdbeVerCustfst* dlgcustfst;
-	DlgWdbeVerDflalg* dlgdflalg;
-	DlgWdbeVerFinmod* dlgfinmod;
-	DlgWdbeVerGenfst* dlggenfst;
-	DlgWdbeVerMdlstr* dlgmdlstr;
-	DlgWdbeVerNew* dlgnew;
-	PnlWdbeVerRec* pnlrec;
-	PnlWdbeVerHeadbar* pnlheadbar;
 	PnlWdbeVerList* pnllist;
+	PnlWdbeVerHeadbar* pnlheadbar;
+	PnlWdbeVerRec* pnlrec;
+	DlgWdbeVerFinmod* dlgfinmod;
+	DlgWdbeVerNew* dlgnew;
+	DlgWdbeVerMdlstr* dlgmdlstr;
+	DlgWdbeVerDflalg* dlgdflalg;
+	DlgWdbeVerCustfst* dlgcustfst;
+	DlgWdbeVerCmdset* dlgcmdset;
+	DlgWdbeVerGenfst* dlggenfst;
 
 	// IP vars.cust --- INSERT
 
@@ -341,9 +341,9 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeDlgClose(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
-	bool handleCallWdbeStatChg(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 	bool handleCallWdbeRefPreSet(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, const Sbecore::ubigint refInv);
+	bool handleCallWdbeStatChg(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbeDlgClose(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 
 private:
 	void changeStage(DbsWdbe* dbswdbe, Sbecore::uint _ixVSge, DpchEngWdbe** dpcheng = NULL);

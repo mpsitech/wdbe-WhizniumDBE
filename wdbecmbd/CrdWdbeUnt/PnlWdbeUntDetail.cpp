@@ -53,13 +53,13 @@ PnlWdbeUntDetail::PnlWdbeUntDetail(
 
 	// IP constructor.cust2 --- INSERT
 
+	xchg->addClstn(VecWdbeVCall::CALLWDBEKLSAKEYMOD_KLSEQ, jref, Clstn::VecVJobmask::ALL, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBEUNT_INSBS, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBEUNT_MDLEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBEUNT_RETEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBEUNT_REUEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBEUNT_SILEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBEUNT_SYSEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecWdbeVCall::CALLWDBEKLSAKEYMOD_KLSEQ, jref, Clstn::VecVJobmask::ALL, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -514,7 +514,11 @@ void PnlWdbeUntDetail::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBEUNT_INSBS) {
+	if (call->ixVCall == VecWdbeVCall::CALLWDBEKLSAKEYMOD_KLSEQ) {
+		call->abort = handleCallWdbeKlsAkeyMod_klsEq(dbswdbe, call->jref, call->argInv.ix);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEUNTUPD_REFEQ) {
+		call->abort = handleCallWdbeUntUpd_refEq(dbswdbe, call->jref);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEUNT_INSBS) {
 		call->abort = handleCallWdbeUnt_inSbs(dbswdbe, call->jref, call->argInv.ix, call->argRet.boolval);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEUNT_MDLEQ) {
 		call->abort = handleCallWdbeUnt_mdlEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
@@ -526,11 +530,34 @@ void PnlWdbeUntDetail::handleCall(
 		call->abort = handleCallWdbeUnt_silEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEUNT_SYSEQ) {
 		call->abort = handleCallWdbeUnt_sysEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEUNTUPD_REFEQ) {
-		call->abort = handleCallWdbeUntUpd_refEq(dbswdbe, call->jref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEKLSAKEYMOD_KLSEQ) {
-		call->abort = handleCallWdbeKlsAkeyMod_klsEq(dbswdbe, call->jref, call->argInv.ix);
 	};
+};
+
+bool PnlWdbeUntDetail::handleCallWdbeKlsAkeyMod_klsEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+			, const uint ixInv
+		) {
+	bool retval = false;
+	set<uint> moditems;
+
+	if (ixInv == VecWdbeVKeylist::KLSTWDBEKMUNITPACKAGE) {
+		refreshPkg(dbswdbe, moditems);
+	} else if (ixInv == VecWdbeVKeylist::KLSTWDBEKMUNITTOOLCH) {
+		refreshTch(dbswdbe, moditems);
+	};
+
+	xchg->submitDpch(getNewDpchEng(moditems));
+	return retval;
+};
+
+bool PnlWdbeUntDetail::handleCallWdbeUntUpd_refEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+	// IP handleCallWdbeUntUpd_refEq --- INSERT
+	return retval;
 };
 
 bool PnlWdbeUntDetail::handleCallWdbeUnt_inSbs(
@@ -596,32 +623,5 @@ bool PnlWdbeUntDetail::handleCallWdbeUnt_sysEq(
 		) {
 	bool retval = false;
 	boolvalRet = (recUnt.refWdbeMSystem == refInv); // IP handleCallWdbeUnt_sysEq --- LINE
-	return retval;
-};
-
-bool PnlWdbeUntDetail::handleCallWdbeUntUpd_refEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-	// IP handleCallWdbeUntUpd_refEq --- INSERT
-	return retval;
-};
-
-bool PnlWdbeUntDetail::handleCallWdbeKlsAkeyMod_klsEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-			, const uint ixInv
-		) {
-	bool retval = false;
-	set<uint> moditems;
-
-	if (ixInv == VecWdbeVKeylist::KLSTWDBEKMUNITPACKAGE) {
-		refreshPkg(dbswdbe, moditems);
-	} else if (ixInv == VecWdbeVKeylist::KLSTWDBEKMUNITTOOLCH) {
-		refreshTch(dbswdbe, moditems);
-	};
-
-	xchg->submitDpch(getNewDpchEng(moditems));
 	return retval;
 };

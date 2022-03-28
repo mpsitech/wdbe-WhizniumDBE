@@ -22,10 +22,10 @@ uint QryWdbeMtpList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
+	if (s == "hku") return HKU;
+	if (s == "hkt") return HKT;
 	if (s == "srf") return SRF;
 	if (s == "typ") return TYP;
-	if (s == "hkt") return HKT;
-	if (s == "hku") return HKU;
 
 	return(0);
 };
@@ -33,10 +33,10 @@ uint QryWdbeMtpList::VecVOrd::getIx(
 string QryWdbeMtpList::VecVOrd::getSref(
 			const uint ix
 		) {
+	if (ix == HKU) return("hku");
+	if (ix == HKT) return("hkt");
 	if (ix == SRF) return("srf");
 	if (ix == TYP) return("typ");
-	if (ix == HKT) return("hkt");
-	if (ix == HKU) return("hku");
 
 	return("");
 };

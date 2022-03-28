@@ -3,7 +3,7 @@
 # make script for Wdbe operation daemon, release wdbeopd1_ubuntu
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 23 Oct 2021
+# date created: 21 Dec 2021
 # IP header --- ABOVE
 
 if [ -z ${WHIZROOT+x} ]; then
@@ -17,7 +17,7 @@ if [ $? -ne 0 ]; then
 fi
 
 if [ "$1" = "all" ]; then
-	subs=("IexWdbe" "VecWdbe" "WdbeCplmst" "WdbeGen" "WdbeGenfst" "WdbePlhfpga" "WdbePlhmcu" "WdbePrcfile" "WdbePrctree" "WdbeWrdev" "WdbeWrfpga" "WdbeWrmcu")
+	subs=("IexWdbe" "VecWdbe" "WdbeWrmcu" "WdbeWrfpga" "WdbeWrdev" "WdbePrctree" "WdbePrcfile" "WdbePlhmcu" "WdbePlhfpga" "WdbeGenfst" "WdbeGen" "WdbeCplmst")
 else
 	subs=("$@")
 fi

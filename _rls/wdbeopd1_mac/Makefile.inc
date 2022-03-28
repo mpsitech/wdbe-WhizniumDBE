@@ -1,8 +1,8 @@
 # file Makefile.inc
 # make file paths for Wdbe operation daemon, release wdbeopd1_mac
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
-# author: Alexander Wirthmueller (auto-generation)
-# date created: 23 Oct 2021
+# author: Emily Johnson (auto-generation)
+# date created: 28 Mar 2022
 # IP header --- ABOVE
 
 BUILDROOT = ${WHIZSDKROOT}/build

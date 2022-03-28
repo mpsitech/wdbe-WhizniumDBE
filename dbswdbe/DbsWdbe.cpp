@@ -1502,10 +1502,10 @@ uint DbsWdbe::getIxWSubsetByWdbeMModule(
 		args.push_back(a && b);
 		if (args.back()) {
 			ixWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMCT;
-			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMIB;
+			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMTP;
 			ixWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMOD;
 			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMOD;
-			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMTP;
+			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMIB;
 		} else {
 		};
 
@@ -1535,10 +1535,10 @@ uint DbsWdbe::getIxWSubsetByWdbeMModule(
 		args.push_back(a && b);
 		if (args.back()) {
 			ixWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMIB;
-			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMCT;
+			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMTP;
 			ixWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMOD;
 			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMOD;
-			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMTP;
+			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMCT;
 		} else {
 		};
 
@@ -1564,9 +1564,9 @@ uint DbsWdbe::getIxWSubsetByWdbeMModule(
 		if (args.back()) {
 			ixWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMOD;
 		} else {
-			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMCT;
-			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMIB;
 			ixWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMTP;
+			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMIB;
+			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMCT;
 		};
 
 		dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMOD;
@@ -1589,8 +1589,8 @@ uint DbsWdbe::getIxWSubsetByWdbeMModule(
 		args.push_back(a && b);
 		if (args.back()) {
 			ixWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMTP;
-			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMCT;
 			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMIB;
+			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMCT;
 		} else {
 			ixWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMOD;
 		};

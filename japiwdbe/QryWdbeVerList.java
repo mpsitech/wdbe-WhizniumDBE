@@ -19,22 +19,22 @@ public class QryWdbeVerList {
 		*/
 	public static class VecVOrd {
 
-		public static final int GRP = 1;
-		public static final int OWN = 2;
+		public static final int BVR = 1;
+		public static final int STE = 2;
 		public static final int PRJ = 3;
-		public static final int BVR = 4;
-		public static final int STE = 5;
+		public static final int GRP = 4;
+		public static final int OWN = 5;
 
 		public static int getIx(
 					String sref
 				) {
 			String s = sref.toLowerCase();
 
-			if (s.equals("grp")) return GRP;
-			if (s.equals("own")) return OWN;
-			if (s.equals("prj")) return PRJ;
 			if (s.equals("bvr")) return BVR;
 			if (s.equals("ste")) return STE;
+			if (s.equals("prj")) return PRJ;
+			if (s.equals("grp")) return GRP;
+			if (s.equals("own")) return OWN;
 
 			return 0;
 		};
@@ -42,11 +42,11 @@ public class QryWdbeVerList {
 		public static String getSref(
 					int ix
 				) {
-			if (ix == GRP) return("grp");
-			if (ix == OWN) return("own");
-			if (ix == PRJ) return("prj");
 			if (ix == BVR) return("bvr");
 			if (ix == STE) return("ste");
+			if (ix == PRJ) return("prj");
+			if (ix == GRP) return("grp");
+			if (ix == OWN) return("own");
 
 			return "";
 		};

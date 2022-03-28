@@ -54,6 +54,7 @@ PnlWdbeSigDetail::PnlWdbeSigDetail(
 
 	// IP constructor.cust2 --- INSERT
 
+	xchg->addClstn(VecWdbeVCall::CALLWDBEKLSAKEYMOD_KLSMTBURFEQ, jref, Clstn::VecVJobmask::ALL, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBESIG_CLUEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBESIG_DRVEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBESIG_MGTEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
@@ -63,7 +64,6 @@ PnlWdbeSigDetail::PnlWdbeSigDetail(
 	xchg->addClstn(VecWdbeVCall::CALLWDBESIG_REU_INSBS, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBESIG_REUEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBESIG_VECEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecWdbeVCall::CALLWDBEKLSAKEYMOD_KLSMTBURFEQ, jref, Clstn::VecVJobmask::ALL, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -612,7 +612,13 @@ void PnlWdbeSigDetail::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBESIG_CLUEQ) {
+	if (call->ixVCall == VecWdbeVCall::CALLWDBESIGMOD_CLUEQ) {
+		call->abort = handleCallWdbeSigMod_cluEq(dbswdbe, call->jref);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEKLSAKEYMOD_KLSMTBURFEQ) {
+		call->abort = handleCallWdbeKlsAkeyMod_klsMtbUrfEq(dbswdbe, call->jref, call->argInv.ix, call->argInv.ref, call->argInv.sref);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBESIGUPD_REFEQ) {
+		call->abort = handleCallWdbeSigUpd_refEq(dbswdbe, call->jref);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBESIG_CLUEQ) {
 		call->abort = handleCallWdbeSig_cluEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBESIG_DRVEQ) {
 		call->abort = handleCallWdbeSig_drvEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
@@ -630,13 +636,41 @@ void PnlWdbeSigDetail::handleCall(
 		call->abort = handleCallWdbeSig_reuEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBESIG_VECEQ) {
 		call->abort = handleCallWdbeSig_vecEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBESIGUPD_REFEQ) {
-		call->abort = handleCallWdbeSigUpd_refEq(dbswdbe, call->jref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEKLSAKEYMOD_KLSMTBURFEQ) {
-		call->abort = handleCallWdbeKlsAkeyMod_klsMtbUrfEq(dbswdbe, call->jref, call->argInv.ix, call->argInv.ref, call->argInv.sref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBESIGMOD_CLUEQ) {
-		call->abort = handleCallWdbeSigMod_cluEq(dbswdbe, call->jref);
 	};
+};
+
+bool PnlWdbeSigDetail::handleCallWdbeSigMod_cluEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+	set<uint> moditems;
+
+	refreshClu(dbswdbe, moditems);
+
+	xchg->submitDpch(getNewDpchEng(moditems));
+	return retval;
+};
+
+bool PnlWdbeSigDetail::handleCallWdbeKlsAkeyMod_klsMtbUrfEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+			, const uint ixInv
+			, const ubigint refInv
+			, const string& srefInv
+		) {
+	bool retval = false;
+	// IP handleCallWdbeKlsAkeyMod_klsMtbUrfEq --- INSERT
+	return retval;
+};
+
+bool PnlWdbeSigDetail::handleCallWdbeSigUpd_refEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+	// IP handleCallWdbeSigUpd_refEq --- INSERT
+	return retval;
 };
 
 bool PnlWdbeSigDetail::handleCallWdbeSig_cluEq(
@@ -735,39 +769,5 @@ bool PnlWdbeSigDetail::handleCallWdbeSig_vecEq(
 		) {
 	bool retval = false;
 	boolvalRet = (recSig.refWdbeMVector == refInv); // IP handleCallWdbeSig_vecEq --- LINE
-	return retval;
-};
-
-bool PnlWdbeSigDetail::handleCallWdbeSigUpd_refEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-	// IP handleCallWdbeSigUpd_refEq --- INSERT
-	return retval;
-};
-
-bool PnlWdbeSigDetail::handleCallWdbeKlsAkeyMod_klsMtbUrfEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-			, const uint ixInv
-			, const ubigint refInv
-			, const string& srefInv
-		) {
-	bool retval = false;
-	// IP handleCallWdbeKlsAkeyMod_klsMtbUrfEq --- INSERT
-	return retval;
-};
-
-bool PnlWdbeSigDetail::handleCallWdbeSigMod_cluEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-	set<uint> moditems;
-
-	refreshClu(dbswdbe, moditems);
-
-	xchg->submitDpch(getNewDpchEng(moditems));
 	return retval;
 };

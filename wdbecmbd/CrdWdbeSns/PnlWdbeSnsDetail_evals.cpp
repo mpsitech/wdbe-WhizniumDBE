@@ -170,7 +170,7 @@ bool PnlWdbeSnsDetail::evalTxtSruActive(
 bool PnlWdbeSnsDetail::evalButSruViewAvail(
 			DbsWdbe* dbswdbe
 		) {
-	// sns.sruEq(0)|((pre.ixCrdaccSig()&sns.srtEq(sig)&pre.refMod())|(pre.ixCrdaccSig()&sns.srtEq(sig)&pre.refUnt())|(pre.ixCrdaccPrt()&sns.srtEq(prt)&pre.refMod())|(pre.ixCrdaccInt()&sns.srtEq(int)&pre.refUnt()))
+	// sns.sruEq(0)|((pre.ixCrdaccSig()&sns.srtEq(sig)&pre.refMod())|(pre.ixCrdaccSig()&sns.srtEq(sig)&pre.refUnt())|(pre.ixCrdaccInt()&sns.srtEq(int)&pre.refUnt())|(pre.ixCrdaccPrt()&sns.srtEq(prt)&pre.refMod()))
 
 	vector<bool> args;
 	bool a, b;
@@ -201,23 +201,23 @@ bool PnlWdbeSnsDetail::evalButSruViewAvail(
 	b = args.back(); args.pop_back();
 	a = args.back(); args.pop_back();
 	args.push_back(a && b);
-	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCPRT, jref) != 0);
-	args.push_back(a);
-	a = false; a = (recSns.srcIxVTbl == VecWdbeVMSensitivitySrcTbl::PRT);
-	args.push_back(a);
-	a = false; a = (xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFMOD, jref) != 0);
-	args.push_back(a);
-	b = args.back(); args.pop_back();
-	a = args.back(); args.pop_back();
-	args.push_back(a && b);
-	b = args.back(); args.pop_back();
-	a = args.back(); args.pop_back();
-	args.push_back(a && b);
 	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCINT, jref) != 0);
 	args.push_back(a);
 	a = false; a = (recSns.srcIxVTbl == VecWdbeVMSensitivitySrcTbl::INT);
 	args.push_back(a);
 	a = false; a = (xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFUNT, jref) != 0);
+	args.push_back(a);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a && b);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a && b);
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCPRT, jref) != 0);
+	args.push_back(a);
+	a = false; a = (recSns.srcIxVTbl == VecWdbeVMSensitivitySrcTbl::PRT);
+	args.push_back(a);
+	a = false; a = (xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFMOD, jref) != 0);
 	args.push_back(a);
 	b = args.back(); args.pop_back();
 	a = args.back(); args.pop_back();

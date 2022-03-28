@@ -128,11 +128,11 @@ function refreshB(chgcol) {
 			ix++;
 
 			if (i == 1) {
-				doc.cols.push("TcoSrf"); doc.widths.push(TcoSrfWidth); doc.fs.push("srf"); doc.tos.push(1); wtot += TcoSrfWidth;
+				doc.cols.push("TcoSrf"); doc.widths.push(TcoSrfWidth); doc.fs.push("srf"); doc.tos.push(3); wtot += TcoSrfWidth;
 			} else if (i == 2) {
 				doc.cols.push("TcoPpl"); doc.widths.push(TcoPplWidth); doc.fs.push("ppl"); doc.tos.push(2); wtot += TcoPplWidth;
 			} else if (i == 3) {
-				doc.cols.push("TcoSup"); doc.widths.push(TcoSupWidth); doc.fs.push("sup"); doc.tos.push(3); wtot += TcoSupWidth;
+				doc.cols.push("TcoSup"); doc.widths.push(TcoSupWidth); doc.fs.push("sup"); doc.tos.push(1); wtot += TcoSupWidth;
 			} else if (i == 4) {
 				doc.cols.push("TcoIfm"); doc.widths.push(TcoIfmWidth); doc.fs.push("ifm"); doc.tos.push(0); wtot += TcoIfmWidth;
 			} else if (i == 5) {

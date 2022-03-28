@@ -14,9 +14,9 @@
 
 // IP include.cust --- INSERT
 
-#include "PnlWdbeLibDetail.h"
-#include "PnlWdbeLibAMakefile.h"
 #include "PnlWdbeLibMNVersion.h"
+#include "PnlWdbeLibAMakefile.h"
+#include "PnlWdbeLibDetail.h"
 
 #define VecVWdbeLibRecDo PnlWdbeLibRec::VecVDo
 
@@ -177,9 +177,9 @@ public:
 	ContInf continf;
 	StatShr statshr;
 
-	PnlWdbeLibDetail* pnldetail;
-	PnlWdbeLibAMakefile* pnlamakefile;
 	PnlWdbeLibMNVersion* pnlmnversion;
+	PnlWdbeLibAMakefile* pnlamakefile;
+	PnlWdbeLibDetail* pnldetail;
 
 	WdbeMLibrary recLib;
 

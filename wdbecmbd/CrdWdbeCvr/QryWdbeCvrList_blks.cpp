@@ -20,11 +20,11 @@ uint QryWdbeCvrList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "grp") return GRP;
-	if (s == "own") return OWN;
-	if (s == "cpr") return CPR;
 	if (s == "bcv") return BCV;
 	if (s == "ste") return STE;
+	if (s == "cpr") return CPR;
+	if (s == "own") return OWN;
+	if (s == "grp") return GRP;
 
 	return(0);
 };
@@ -32,11 +32,11 @@ uint QryWdbeCvrList::VecVOrd::getIx(
 string QryWdbeCvrList::VecVOrd::getSref(
 			const uint ix
 		) {
-	if (ix == GRP) return("grp");
-	if (ix == OWN) return("own");
-	if (ix == CPR) return("cpr");
 	if (ix == BCV) return("bcv");
 	if (ix == STE) return("ste");
+	if (ix == CPR) return("cpr");
+	if (ix == OWN) return("own");
+	if (ix == GRP) return("grp");
 
 	return("");
 };

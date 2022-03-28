@@ -14,17 +14,17 @@
 
 // IP include.cust --- INSERT
 
-#include "DlgWdbeNavLoaini.h"
-#include "DlgWdbeNavMnglic.h"
-#include "PnlWdbeNavHeadbar.h"
-#include "PnlWdbeNavPre.h"
-#include "PnlWdbeNavAdmin.h"
-#include "PnlWdbeNavGlobal.h"
-#include "PnlWdbeNavDevdev.h"
-#include "PnlWdbeNavCoredev.h"
+#include "PnlWdbeNavAuxfct.h"
 #include "PnlWdbeNavHigh.h"
 #include "PnlWdbeNavLow.h"
-#include "PnlWdbeNavAuxfct.h"
+#include "PnlWdbeNavCoredev.h"
+#include "PnlWdbeNavDevdev.h"
+#include "PnlWdbeNavAdmin.h"
+#include "PnlWdbeNavGlobal.h"
+#include "PnlWdbeNavPre.h"
+#include "PnlWdbeNavHeadbar.h"
+#include "DlgWdbeNavLoaini.h"
+#include "DlgWdbeNavMnglic.h"
 
 #define VecVWdbeNavDo CrdWdbeNav::VecVDo
 #define VecVWdbeNavSge CrdWdbeNav::VecVSge
@@ -448,17 +448,17 @@ public:
 	Sbecore::Feed feedFMcbAlert;
 	Sbecore::Feed feedFSge;
 
-	DlgWdbeNavLoaini* dlgloaini;
-	DlgWdbeNavMnglic* dlgmnglic;
-	PnlWdbeNavHeadbar* pnlheadbar;
-	PnlWdbeNavPre* pnlpre;
-	PnlWdbeNavAdmin* pnladmin;
-	PnlWdbeNavGlobal* pnlglobal;
-	PnlWdbeNavDevdev* pnldevdev;
-	PnlWdbeNavCoredev* pnlcoredev;
+	PnlWdbeNavAuxfct* pnlauxfct;
 	PnlWdbeNavHigh* pnlhigh;
 	PnlWdbeNavLow* pnllow;
-	PnlWdbeNavAuxfct* pnlauxfct;
+	PnlWdbeNavCoredev* pnlcoredev;
+	PnlWdbeNavDevdev* pnldevdev;
+	PnlWdbeNavAdmin* pnladmin;
+	PnlWdbeNavGlobal* pnlglobal;
+	PnlWdbeNavPre* pnlpre;
+	PnlWdbeNavHeadbar* pnlheadbar;
+	DlgWdbeNavLoaini* dlgloaini;
+	DlgWdbeNavMnglic* dlgmnglic;
 
 	// IP vars.cust --- INSERT
 

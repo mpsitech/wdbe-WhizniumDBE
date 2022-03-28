@@ -232,8 +232,8 @@ private:
 
 	void handleDpchRetWdbe(DbsWdbe* dbswdbe, DpchRetWdbe* dpchret);
 
-	void handleTimerWithSrefMonInSgeGenfst(DbsWdbe* dbswdbe);
 	void handleTimerWithSrefMonInSgeGenmtp(DbsWdbe* dbswdbe);
+	void handleTimerWithSrefMonInSgeGenfst(DbsWdbe* dbswdbe);
 
 private:
 	void changeStage(DbsWdbe* dbswdbe, Sbecore::uint _ixVSge, DpchEngWdbe** dpcheng = NULL);

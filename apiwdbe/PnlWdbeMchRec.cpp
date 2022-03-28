@@ -104,20 +104,20 @@ set<uint> PnlWdbeMchRec::ContInf::diff(
 
 PnlWdbeMchRec::StatApp::StatApp(
 			const bool initdoneDetail
-			, const bool initdoneAMakefile
 			, const bool initdoneAPar
+			, const bool initdoneAMakefile
 			, const bool initdone1NRelease
 			, const bool initdoneSup1NMachine
 		) :
 			Block()
 		{
 	this->initdoneDetail = initdoneDetail;
-	this->initdoneAMakefile = initdoneAMakefile;
 	this->initdoneAPar = initdoneAPar;
+	this->initdoneAMakefile = initdoneAMakefile;
 	this->initdone1NRelease = initdone1NRelease;
 	this->initdoneSup1NMachine = initdoneSup1NMachine;
 
-	mask = {INITDONEDETAIL, INITDONEAMAKEFILE, INITDONEAPAR, INITDONE1NRELEASE, INITDONESUP1NMACHINE};
+	mask = {INITDONEDETAIL, INITDONEAPAR, INITDONEAMAKEFILE, INITDONE1NRELEASE, INITDONESUP1NMACHINE};
 };
 
 bool PnlWdbeMchRec::StatApp::readXML(
@@ -138,8 +138,8 @@ bool PnlWdbeMchRec::StatApp::readXML(
 
 	if (basefound) {
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneDetail", initdoneDetail)) add(INITDONEDETAIL);
-		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneAMakefile", initdoneAMakefile)) add(INITDONEAMAKEFILE);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneAPar", initdoneAPar)) add(INITDONEAPAR);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneAMakefile", initdoneAMakefile)) add(INITDONEAMAKEFILE);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdone1NRelease", initdone1NRelease)) add(INITDONE1NRELEASE);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneSup1NMachine", initdoneSup1NMachine)) add(INITDONESUP1NMACHINE);
 	};
@@ -153,8 +153,8 @@ set<uint> PnlWdbeMchRec::StatApp::comm(
 	set<uint> items;
 
 	if (initdoneDetail == comp->initdoneDetail) insert(items, INITDONEDETAIL);
-	if (initdoneAMakefile == comp->initdoneAMakefile) insert(items, INITDONEAMAKEFILE);
 	if (initdoneAPar == comp->initdoneAPar) insert(items, INITDONEAPAR);
+	if (initdoneAMakefile == comp->initdoneAMakefile) insert(items, INITDONEAMAKEFILE);
 	if (initdone1NRelease == comp->initdone1NRelease) insert(items, INITDONE1NRELEASE);
 	if (initdoneSup1NMachine == comp->initdoneSup1NMachine) insert(items, INITDONESUP1NMACHINE);
 
@@ -169,7 +169,7 @@ set<uint> PnlWdbeMchRec::StatApp::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {INITDONEDETAIL, INITDONEAMAKEFILE, INITDONEAPAR, INITDONE1NRELEASE, INITDONESUP1NMACHINE};
+	diffitems = {INITDONEDETAIL, INITDONEAPAR, INITDONEAMAKEFILE, INITDONE1NRELEASE, INITDONESUP1NMACHINE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -182,8 +182,8 @@ set<uint> PnlWdbeMchRec::StatApp::diff(
 PnlWdbeMchRec::StatShr::StatShr(
 			const uint ixWdbeVExpstate
 			, const string& scrJrefDetail
-			, const string& scrJrefAMakefile
 			, const string& scrJrefAPar
+			, const string& scrJrefAMakefile
 			, const string& scrJref1NRelease
 			, const string& scrJrefSup1NMachine
 			, const bool ButRegularizeActive
@@ -192,13 +192,13 @@ PnlWdbeMchRec::StatShr::StatShr(
 		{
 	this->ixWdbeVExpstate = ixWdbeVExpstate;
 	this->scrJrefDetail = scrJrefDetail;
-	this->scrJrefAMakefile = scrJrefAMakefile;
 	this->scrJrefAPar = scrJrefAPar;
+	this->scrJrefAMakefile = scrJrefAMakefile;
 	this->scrJref1NRelease = scrJref1NRelease;
 	this->scrJrefSup1NMachine = scrJrefSup1NMachine;
 	this->ButRegularizeActive = ButRegularizeActive;
 
-	mask = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFAMAKEFILE, SCRJREFAPAR, SCRJREF1NRELEASE, SCRJREFSUP1NMACHINE, BUTREGULARIZEACTIVE};
+	mask = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFAPAR, SCRJREFAMAKEFILE, SCRJREF1NRELEASE, SCRJREFSUP1NMACHINE, BUTREGULARIZEACTIVE};
 };
 
 bool PnlWdbeMchRec::StatShr::readXML(
@@ -225,8 +225,8 @@ bool PnlWdbeMchRec::StatShr::readXML(
 			add(IXWDBEVEXPSTATE);
 		};
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefDetail", scrJrefDetail)) add(SCRJREFDETAIL);
-		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefAMakefile", scrJrefAMakefile)) add(SCRJREFAMAKEFILE);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefAPar", scrJrefAPar)) add(SCRJREFAPAR);
+		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefAMakefile", scrJrefAMakefile)) add(SCRJREFAMAKEFILE);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJref1NRelease", scrJref1NRelease)) add(SCRJREF1NRELEASE);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefSup1NMachine", scrJrefSup1NMachine)) add(SCRJREFSUP1NMACHINE);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButRegularizeActive", ButRegularizeActive)) add(BUTREGULARIZEACTIVE);
@@ -242,8 +242,8 @@ set<uint> PnlWdbeMchRec::StatShr::comm(
 
 	if (ixWdbeVExpstate == comp->ixWdbeVExpstate) insert(items, IXWDBEVEXPSTATE);
 	if (scrJrefDetail == comp->scrJrefDetail) insert(items, SCRJREFDETAIL);
-	if (scrJrefAMakefile == comp->scrJrefAMakefile) insert(items, SCRJREFAMAKEFILE);
 	if (scrJrefAPar == comp->scrJrefAPar) insert(items, SCRJREFAPAR);
+	if (scrJrefAMakefile == comp->scrJrefAMakefile) insert(items, SCRJREFAMAKEFILE);
 	if (scrJref1NRelease == comp->scrJref1NRelease) insert(items, SCRJREF1NRELEASE);
 	if (scrJrefSup1NMachine == comp->scrJrefSup1NMachine) insert(items, SCRJREFSUP1NMACHINE);
 	if (ButRegularizeActive == comp->ButRegularizeActive) insert(items, BUTREGULARIZEACTIVE);
@@ -259,7 +259,7 @@ set<uint> PnlWdbeMchRec::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFAMAKEFILE, SCRJREFAPAR, SCRJREF1NRELEASE, SCRJREFSUP1NMACHINE, BUTREGULARIZEACTIVE};
+	diffitems = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFAPAR, SCRJREFAMAKEFILE, SCRJREF1NRELEASE, SCRJREFSUP1NMACHINE, BUTREGULARIZEACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);

@@ -27,7 +27,7 @@ bool PnlWdbeModRec::evalPnlctrref1nerrorAvail(
 	return(args.back());
 };
 
-bool PnlWdbeModRec::evalPnlctrhk1nvectorAvail(
+bool PnlWdbeModRec::evalPnlctrref1ncommandAvail(
 			DbsWdbe* dbswdbe
 		) {
 	// !mdl.ctrEq(0)
@@ -43,7 +43,7 @@ bool PnlWdbeModRec::evalPnlctrhk1nvectorAvail(
 	return(args.back());
 };
 
-bool PnlWdbeModRec::evalPnlctrref1ncommandAvail(
+bool PnlWdbeModRec::evalPnlctrhk1nvectorAvail(
 			DbsWdbe* dbswdbe
 		) {
 	// !mdl.ctrEq(0)
