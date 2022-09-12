@@ -26,8 +26,8 @@ uint QryWdbeModList::VecVOrd::getIx(
 	if (s == "sup") return SUP;
 	if (s == "hku") return HKU;
 	if (s == "hkt") return HKT;
-	if (s == "srf") return SRF;
 	if (s == "typ") return TYP;
+	if (s == "srf") return SRF;
 
 	return(0);
 };
@@ -39,8 +39,8 @@ string QryWdbeModList::VecVOrd::getSref(
 	if (ix == SUP) return("sup");
 	if (ix == HKU) return("hku");
 	if (ix == HKT) return("hkt");
-	if (ix == SRF) return("srf");
 	if (ix == TYP) return("typ");
+	if (ix == SRF) return("srf");
 
 	return("");
 };

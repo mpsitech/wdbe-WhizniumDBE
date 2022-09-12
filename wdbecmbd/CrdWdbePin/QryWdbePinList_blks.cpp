@@ -181,15 +181,14 @@ QryWdbePinList::StgIac::StgIac(
 };
 
 bool QryWdbePinList::StgIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["StgIacQryWdbePinList"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["StgIacQryWdbePinList"];}();
 
 	basefound = (me != Json::nullValue);
 

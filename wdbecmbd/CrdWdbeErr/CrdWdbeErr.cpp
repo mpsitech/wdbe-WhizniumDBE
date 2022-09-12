@@ -44,9 +44,9 @@ CrdWdbeErr::CrdWdbeErr(
 	feedFSge.tag = "FeedFSge";
 	VecVSge::fillFeed(feedFSge);
 
-	pnlrec = NULL;
-	pnlheadbar = NULL;
 	pnllist = NULL;
+	pnlheadbar = NULL;
+	pnlrec = NULL;
 
 	// IP constructor.cust1 --- INSERT
 
@@ -58,9 +58,9 @@ CrdWdbeErr::CrdWdbeErr(
 	// initialize according to ref
 	changeRef(dbswdbe, jref, ((ref + 1) == 0) ? 0 : ref, false);
 
-	pnlrec = new PnlWdbeErrRec(xchg, dbswdbe, jref, ixWdbeVLocale);
-	pnlheadbar = new PnlWdbeErrHeadbar(xchg, dbswdbe, jref, ixWdbeVLocale);
 	pnllist = new PnlWdbeErrList(xchg, dbswdbe, jref, ixWdbeVLocale);
+	pnlheadbar = new PnlWdbeErrHeadbar(xchg, dbswdbe, jref, ixWdbeVLocale);
+	pnlrec = new PnlWdbeErrRec(xchg, dbswdbe, jref, ixWdbeVLocale);
 
 	// IP constructor.cust2 --- INSERT
 

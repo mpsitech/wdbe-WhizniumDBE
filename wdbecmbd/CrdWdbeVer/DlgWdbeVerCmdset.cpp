@@ -227,9 +227,9 @@ void DlgWdbeVerCmdset::handleRequest(
 		if (ixVSge == VecVSge::DONE) req->filename = handleDownloadInSgeDone(dbswdbe);
 
 	} else if (req->ixVBasetype == ReqWdbe::VecVBasetype::TIMER) {
-		if (ixVSge == VecVSge::PRSIDLE) handleTimerInSgePrsidle(dbswdbe, req->sref);
+		if ((req->sref == "mon") && (ixVSge == VecVSge::IMPORT)) handleTimerWithSrefMonInSgeImport(dbswdbe);
 		else if (ixVSge == VecVSge::IMPIDLE) handleTimerInSgeImpidle(dbswdbe, req->sref);
-		else if ((req->sref == "mon") && (ixVSge == VecVSge::IMPORT)) handleTimerWithSrefMonInSgeImport(dbswdbe);
+		else if (ixVSge == VecVSge::PRSIDLE) handleTimerInSgePrsidle(dbswdbe, req->sref);
 	};
 };
 
@@ -319,11 +319,11 @@ string DlgWdbeVerCmdset::handleDownloadInSgeDone(
 	return(""); // IP handleDownloadInSgeDone --- LINE
 };
 
-void DlgWdbeVerCmdset::handleTimerInSgePrsidle(
+void DlgWdbeVerCmdset::handleTimerWithSrefMonInSgeImport(
 			DbsWdbe* dbswdbe
-			, const string& sref
 		) {
-	changeStage(dbswdbe, nextIxVSgeSuccess);
+	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
+	refreshWithDpchEng(dbswdbe); // IP handleTimerWithSrefMonInSgeImport --- ILINE
 };
 
 void DlgWdbeVerCmdset::handleTimerInSgeImpidle(
@@ -333,11 +333,11 @@ void DlgWdbeVerCmdset::handleTimerInSgeImpidle(
 	changeStage(dbswdbe, nextIxVSgeSuccess);
 };
 
-void DlgWdbeVerCmdset::handleTimerWithSrefMonInSgeImport(
+void DlgWdbeVerCmdset::handleTimerInSgePrsidle(
 			DbsWdbe* dbswdbe
+			, const string& sref
 		) {
-	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
-	refreshWithDpchEng(dbswdbe); // IP handleTimerWithSrefMonInSgeImport --- ILINE
+	changeStage(dbswdbe, nextIxVSgeSuccess);
 };
 
 void DlgWdbeVerCmdset::changeStage(

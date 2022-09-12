@@ -38,6 +38,10 @@ dbs	dbswdbe	WhizniumDBE database access library
 	any;mac	dbswdbe_mac
 	any;ubuntu	dbswdbe_ubuntu
 	ImeIMRelease.end
+vueapp	vueappwdbe	WhizniumDBE Vue.js app
+	ImeIMRelease.srefRefWznmMMachine	sref	srefsKOption	Comment
+	any	vueappwdbe_any
+	ImeIMRelease.end
 webapp	webappwdbe	WhizniumDBE web app user interface files
 	ImeIMRelease.srefRefWznmMMachine	sref	srefsKOption	Comment
 	any	webappwdbe_any

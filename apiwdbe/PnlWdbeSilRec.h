@@ -66,34 +66,34 @@ namespace PnlWdbeSilRec {
 
 	public:
 		static const Sbecore::uint INITDONEDETAIL = 1;
-		static const Sbecore::uint INITDONE1NINTERRUPT = 2;
-		static const Sbecore::uint INITDONESIL1NUNIT = 3;
+		static const Sbecore::uint INITDONE1NTARGET = 2;
+		static const Sbecore::uint INITDONE1NINTERRUPT = 3;
 		static const Sbecore::uint INITDONE1NPERIPHERAL = 4;
-		static const Sbecore::uint INITDONE1NBANK = 5;
+		static const Sbecore::uint INITDONESIL1NUNIT = 5;
 		static const Sbecore::uint INITDONEFWD1NCONTROLLER = 6;
-		static const Sbecore::uint INITDONE1NTARGET = 7;
-		static const Sbecore::uint INITDONEREF1NSIGNAL = 8;
-		static const Sbecore::uint INITDONEREF1NERROR = 9;
-		static const Sbecore::uint INITDONEREF1NCOMMAND = 10;
-		static const Sbecore::uint INITDONEHK1NMODULE = 11;
-		static const Sbecore::uint INITDONEHK1NVECTOR = 12;
+		static const Sbecore::uint INITDONE1NBANK = 7;
+		static const Sbecore::uint INITDONEHK1NMODULE = 8;
+		static const Sbecore::uint INITDONEHK1NVECTOR = 9;
+		static const Sbecore::uint INITDONEREF1NSIGNAL = 10;
+		static const Sbecore::uint INITDONEREF1NERROR = 11;
+		static const Sbecore::uint INITDONEREF1NCOMMAND = 12;
 
 	public:
-		StatApp(const bool initdoneDetail = false, const bool initdone1NInterrupt = false, const bool initdoneSil1NUnit = false, const bool initdone1NPeripheral = false, const bool initdone1NBank = false, const bool initdoneFwd1NController = false, const bool initdone1NTarget = false, const bool initdoneRef1NSignal = false, const bool initdoneRef1NError = false, const bool initdoneRef1NCommand = false, const bool initdoneHk1NModule = false, const bool initdoneHk1NVector = false);
+		StatApp(const bool initdoneDetail = false, const bool initdone1NTarget = false, const bool initdone1NInterrupt = false, const bool initdone1NPeripheral = false, const bool initdoneSil1NUnit = false, const bool initdoneFwd1NController = false, const bool initdone1NBank = false, const bool initdoneHk1NModule = false, const bool initdoneHk1NVector = false, const bool initdoneRef1NSignal = false, const bool initdoneRef1NError = false, const bool initdoneRef1NCommand = false);
 
 	public:
 		bool initdoneDetail;
-		bool initdone1NInterrupt;
-		bool initdoneSil1NUnit;
-		bool initdone1NPeripheral;
-		bool initdone1NBank;
-		bool initdoneFwd1NController;
 		bool initdone1NTarget;
+		bool initdone1NInterrupt;
+		bool initdone1NPeripheral;
+		bool initdoneSil1NUnit;
+		bool initdoneFwd1NController;
+		bool initdone1NBank;
+		bool initdoneHk1NModule;
+		bool initdoneHk1NVector;
 		bool initdoneRef1NSignal;
 		bool initdoneRef1NError;
 		bool initdoneRef1NCommand;
-		bool initdoneHk1NModule;
-		bool initdoneHk1NVector;
 
 	public:
 		bool readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
@@ -109,36 +109,36 @@ namespace PnlWdbeSilRec {
 	public:
 		static const Sbecore::uint IXWDBEVEXPSTATE = 1;
 		static const Sbecore::uint SCRJREFDETAIL = 2;
-		static const Sbecore::uint SCRJREF1NINTERRUPT = 3;
-		static const Sbecore::uint SCRJREFSIL1NUNIT = 4;
+		static const Sbecore::uint SCRJREF1NTARGET = 3;
+		static const Sbecore::uint SCRJREF1NINTERRUPT = 4;
 		static const Sbecore::uint SCRJREF1NPERIPHERAL = 5;
-		static const Sbecore::uint SCRJREF1NBANK = 6;
+		static const Sbecore::uint SCRJREFSIL1NUNIT = 6;
 		static const Sbecore::uint SCRJREFFWD1NCONTROLLER = 7;
-		static const Sbecore::uint SCRJREF1NTARGET = 8;
-		static const Sbecore::uint SCRJREFREF1NSIGNAL = 9;
-		static const Sbecore::uint SCRJREFREF1NERROR = 10;
-		static const Sbecore::uint SCRJREFREF1NCOMMAND = 11;
-		static const Sbecore::uint SCRJREFHK1NMODULE = 12;
-		static const Sbecore::uint SCRJREFHK1NVECTOR = 13;
+		static const Sbecore::uint SCRJREF1NBANK = 8;
+		static const Sbecore::uint SCRJREFHK1NMODULE = 9;
+		static const Sbecore::uint SCRJREFHK1NVECTOR = 10;
+		static const Sbecore::uint SCRJREFREF1NSIGNAL = 11;
+		static const Sbecore::uint SCRJREFREF1NERROR = 12;
+		static const Sbecore::uint SCRJREFREF1NCOMMAND = 13;
 		static const Sbecore::uint BUTREGULARIZEACTIVE = 14;
 
 	public:
-		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const std::string& scrJrefDetail = "", const std::string& scrJref1NInterrupt = "", const std::string& scrJrefSil1NUnit = "", const std::string& scrJref1NPeripheral = "", const std::string& scrJref1NBank = "", const std::string& scrJrefFwd1NController = "", const std::string& scrJref1NTarget = "", const std::string& scrJrefRef1NSignal = "", const std::string& scrJrefRef1NError = "", const std::string& scrJrefRef1NCommand = "", const std::string& scrJrefHk1NModule = "", const std::string& scrJrefHk1NVector = "", const bool ButRegularizeActive = true);
+		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const std::string& scrJrefDetail = "", const std::string& scrJref1NTarget = "", const std::string& scrJref1NInterrupt = "", const std::string& scrJref1NPeripheral = "", const std::string& scrJrefSil1NUnit = "", const std::string& scrJrefFwd1NController = "", const std::string& scrJref1NBank = "", const std::string& scrJrefHk1NModule = "", const std::string& scrJrefHk1NVector = "", const std::string& scrJrefRef1NSignal = "", const std::string& scrJrefRef1NError = "", const std::string& scrJrefRef1NCommand = "", const bool ButRegularizeActive = true);
 
 	public:
 		Sbecore::uint ixWdbeVExpstate;
 		std::string scrJrefDetail;
-		std::string scrJref1NInterrupt;
-		std::string scrJrefSil1NUnit;
-		std::string scrJref1NPeripheral;
-		std::string scrJref1NBank;
-		std::string scrJrefFwd1NController;
 		std::string scrJref1NTarget;
+		std::string scrJref1NInterrupt;
+		std::string scrJref1NPeripheral;
+		std::string scrJrefSil1NUnit;
+		std::string scrJrefFwd1NController;
+		std::string scrJref1NBank;
+		std::string scrJrefHk1NModule;
+		std::string scrJrefHk1NVector;
 		std::string scrJrefRef1NSignal;
 		std::string scrJrefRef1NError;
 		std::string scrJrefRef1NCommand;
-		std::string scrJrefHk1NModule;
-		std::string scrJrefHk1NVector;
 		bool ButRegularizeActive;
 
 	public:

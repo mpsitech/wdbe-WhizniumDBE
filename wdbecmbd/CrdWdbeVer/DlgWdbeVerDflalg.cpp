@@ -105,8 +105,8 @@ void DlgWdbeVerDflalg::refreshImp(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
 		) {
-	StatShrImp oldStatshrimp(statshrimp);
 	ContInfImp oldContinfimp(continfimp);
+	StatShrImp oldStatshrimp(statshrimp);
 
 	// IP refreshImp --- RBEGIN
 	// continfimp
@@ -117,8 +117,8 @@ void DlgWdbeVerDflalg::refreshImp(
 	statshrimp.ButStoActive = evalImpButStoActive(dbswdbe);
 
 	// IP refreshImp --- REND
-	if (statshrimp.diff(&oldStatshrimp).size() != 0) insert(moditems, DpchEngData::STATSHRIMP);
 	if (continfimp.diff(&oldContinfimp).size() != 0) insert(moditems, DpchEngData::CONTINFIMP);
+	if (statshrimp.diff(&oldStatshrimp).size() != 0) insert(moditems, DpchEngData::STATSHRIMP);
 };
 
 void DlgWdbeVerDflalg::refreshLfi(
@@ -148,23 +148,23 @@ void DlgWdbeVerDflalg::refresh(
 	muteRefresh = true;
 
 	StatShr oldStatshr(statshr);
-	ContIac oldContiac(contiac);
 	ContInf oldContinf(continf);
+	ContIac oldContiac(contiac);
 
 	// IP refresh --- BEGIN
 	// statshr
 	statshr.ButDneActive = evalButDneActive(dbswdbe);
 
-	// contiac
-	contiac.numFDse = ixVDit;
-
 	// continf
 	continf.numFSge = ixVSge;
 
+	// contiac
+	contiac.numFDse = ixVDit;
+
 	// IP refresh --- END
 	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
-	if (contiac.diff(&oldContiac).size() != 0) insert(moditems, DpchEngData::CONTIAC);
 	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
+	if (contiac.diff(&oldContiac).size() != 0) insert(moditems, DpchEngData::CONTIAC);
 
 	refreshIfi(dbswdbe, moditems);
 	refreshImp(dbswdbe, moditems);
@@ -228,9 +228,9 @@ void DlgWdbeVerDflalg::handleRequest(
 		if (ixVSge == VecVSge::DONE) req->filename = handleDownloadInSgeDone(dbswdbe);
 
 	} else if (req->ixVBasetype == ReqWdbe::VecVBasetype::TIMER) {
-		if (ixVSge == VecVSge::PRSIDLE) handleTimerInSgePrsidle(dbswdbe, req->sref);
-		else if ((req->sref == "mon") && (ixVSge == VecVSge::IMPORT)) handleTimerWithSrefMonInSgeImport(dbswdbe);
+		if ((req->sref == "mon") && (ixVSge == VecVSge::IMPORT)) handleTimerWithSrefMonInSgeImport(dbswdbe);
 		else if (ixVSge == VecVSge::IMPIDLE) handleTimerInSgeImpidle(dbswdbe, req->sref);
+		else if (ixVSge == VecVSge::PRSIDLE) handleTimerInSgePrsidle(dbswdbe, req->sref);
 	};
 };
 
@@ -320,13 +320,6 @@ string DlgWdbeVerDflalg::handleDownloadInSgeDone(
 	return(""); // IP handleDownloadInSgeDone --- LINE
 };
 
-void DlgWdbeVerDflalg::handleTimerInSgePrsidle(
-			DbsWdbe* dbswdbe
-			, const string& sref
-		) {
-	changeStage(dbswdbe, nextIxVSgeSuccess);
-};
-
 void DlgWdbeVerDflalg::handleTimerWithSrefMonInSgeImport(
 			DbsWdbe* dbswdbe
 		) {
@@ -335,6 +328,13 @@ void DlgWdbeVerDflalg::handleTimerWithSrefMonInSgeImport(
 };
 
 void DlgWdbeVerDflalg::handleTimerInSgeImpidle(
+			DbsWdbe* dbswdbe
+			, const string& sref
+		) {
+	changeStage(dbswdbe, nextIxVSgeSuccess);
+};
+
+void DlgWdbeVerDflalg::handleTimerInSgePrsidle(
 			DbsWdbe* dbswdbe
 			, const string& sref
 		) {

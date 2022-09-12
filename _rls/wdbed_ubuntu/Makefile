@@ -2,7 +2,7 @@
 # make file for Wdbe daemon, release wdbed_ubuntu
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 21 Dec 2021
+# date created: 11 Sep 2022
 # IP header --- ABOVE
 
 include Makefile.inc
@@ -21,7 +21,7 @@ PCHS = Wdbed.h.gch
 
 OBJS = Wdbe.o WdbedAppsrv.o WdbedJobprc.o WdbedOpprc.o WdbedOpengcli.o WdbedOpengsrv.o Wdbed.o
 OBJS += RootWdbe.o SessWdbe.o JobWdbeLicense.o
-OBJS += WdbeWrfpga_blks.o SqkWdbeWrfpga.o WdbeWrmcu_blks.o SqkWdbeWrmcu.o WdbeWrdev_blks.o SqkWdbeWrdev.o WdbePrcfile_blks.o SqkWdbePrcfile.o WdbePrctree_blks.o SqkWdbePrctree.o WdbePlhfpga_blks.o SqkWdbePlhfpga.o WdbePlhmcu_blks.o SqkWdbePlhmcu.o WdbeMtpWrmcu_blks.o SqkWdbeMtpWrmcu.o WdbeMtpGenfst_blks.o SqkWdbeMtpGenfst.o WdbeMtpWrfpga_blks.o SqkWdbeMtpWrfpga.o WdbeMtpCplmsttd_blks.o SqkWdbeMtpCplmsttd.o WdbeMtpCplmstbu_blks.o SqkWdbeMtpCplmstbu.o WdbeMtpPlhmcu_blks.o SqkWdbeMtpPlhmcu.o WdbeMtpPlhfpga_blks.o SqkWdbeMtpPlhfpga.o WdbeCplmst_blks.o SqkWdbeCplmst.o WdbeGen_blks.o SqkWdbeGen.o WdbeGenfst_blks.o SqkWdbeGenfst.o
+OBJS += WdbeWrmcu_blks.o SqkWdbeWrmcu.o WdbeWrfpga_blks.o SqkWdbeWrfpga.o WdbeWrdev_blks.o SqkWdbeWrdev.o WdbePrctree_blks.o SqkWdbePrctree.o WdbePrcfile_blks.o SqkWdbePrcfile.o WdbePlhmcu_blks.o SqkWdbePlhmcu.o WdbePlhfpga_blks.o SqkWdbePlhfpga.o WdbeMtpWrmcu_blks.o SqkWdbeMtpWrmcu.o WdbeMtpWrfpga_blks.o SqkWdbeMtpWrfpga.o WdbeMtpGenfst_blks.o SqkWdbeMtpGenfst.o WdbeMtpCplmsttd_blks.o SqkWdbeMtpCplmsttd.o WdbeGenfst_blks.o SqkWdbeGenfst.o WdbeMtpPlhfpga_blks.o SqkWdbeMtpPlhfpga.o WdbeMtpPlhmcu_blks.o SqkWdbeMtpPlhmcu.o WdbeMtpCplmstbu_blks.o SqkWdbeMtpCplmstbu.o WdbeGen_blks.o SqkWdbeGen.o WdbeCplmst_blks.o SqkWdbeCplmst.o
 OBJS += Wdbed_exe.o
 
 LIBPATH = -L$(LIBROOT)
@@ -53,7 +53,6 @@ all:	$(PCHS) $(EXE)
 
 $(EXE):	$(OBJS)
 	$(LINK) $(LINKFLAGS) $(OBJS) $(LIBPATH) $(LIBS) -o $(EXE)
-	rm -f *.o
 
 pch:	$(PCHS)
 

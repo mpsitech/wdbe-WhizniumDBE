@@ -35,6 +35,20 @@ bool DlgWdbeRlsStareptr::evalButDneActive(
 	return(args.back());
 };
 
+bool DlgWdbeRlsStareptr::evalLfiDldActive(
+			DbsWdbe* dbswdbe
+		) {
+	// sge(fail)
+
+	vector<bool> args;
+	bool a;
+
+	a = false; a = (ixVSge == VecVSge::FAIL);
+	args.push_back(a);
+
+	return(args.back());
+};
+
 bool DlgWdbeRlsStareptr::evalExtButRunActive(
 			DbsWdbe* dbswdbe
 		) {
@@ -63,20 +77,6 @@ bool DlgWdbeRlsStareptr::evalExtButStoActive(
 	bool a;
 
 	a = false; a = (ixVSge == VecVSge::EXTRACT);
-	args.push_back(a);
-
-	return(args.back());
-};
-
-bool DlgWdbeRlsStareptr::evalLfiDldActive(
-			DbsWdbe* dbswdbe
-		) {
-	// sge(fail)
-
-	vector<bool> args;
-	bool a;
-
-	a = false; a = (ixVSge == VecVSge::FAIL);
 	args.push_back(a);
 
 	return(args.back());

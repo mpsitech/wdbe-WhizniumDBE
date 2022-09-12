@@ -69,7 +69,7 @@ public:
 	public:
 		std::string getSrefsMask();
 
-		void readJSON(Json::Value& sup, bool addbasetag = false);
+		void readJSON(const Json::Value& sup, bool addbasetag = false);
 		void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 	};
 
@@ -118,6 +118,7 @@ public:
 	void clearQtb(DbsWdbe* dbswdbe);
 
 	bool authenticate(DbsWdbe* dbswdbe, const std::string& username, const std::string& password, Sbecore::ubigint& refWdbeMUser);
+	void termSess(DbsWdbe* dbswdbe, const Sbecore::ubigint jref);
 
 public:
 
@@ -140,8 +141,8 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeRefPreSet(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, const Sbecore::ubigint refInv);
 	bool handleCallWdbeSuspsess(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbeRefPreSet(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, const Sbecore::ubigint refInv);
 	bool handleCallWdbeLogout(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const bool boolvalInv);
 
 private:

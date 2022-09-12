@@ -1,8 +1,8 @@
 # file Makefile
 # make file for CrdWdbeUnt card job handler, release wdbed_mac
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
-# author: Emily Johnson (auto-generation)
-# date created: 28 Mar 2022
+# author: Alexander Wirthmueller (auto-generation)
+# date created: 11 Sep 2022
 # IP header --- ABOVE
 
 include ../Makefile.inc
@@ -16,7 +16,7 @@ STATLIBFLAGS = rcs
 INCPATH = -I$(BUILDROOT)/dbswdbe -I$(BUILDROOT)/wdbed/VecWdbe -I$(BUILDROOT)/wdbed/IexWdbe -I$(BUILDROOT)/wdbed
 INCPATH += -I${WHIZSDKROOT}/build -I${WHIZSDKROOT}/build/apiwzlm -I/opt/homebrew/include -I/opt/homebrew/opt/curl/include -I/opt/homebrew/opt/libgit2/include -I/opt/homebrew/opt/libmicrohttpd/include -I/opt/homebrew/opt/libxml2/include -I/opt/homebrew/opt/openssl@3/include -I/opt/homebrew/opt/sqlite3/include -I/usr/local/mysql/include
 
-OBJS = CrdWdbeUnt.o PnlWdbeUntList.o QryWdbeUntList.o PnlWdbeUntHeadbar.o PnlWdbeUntRec.o PnlWdbeUntRef1NCommand.o QryWdbeUntRef1NCommand.o PnlWdbeUntHk1NModule.o QryWdbeUntHk1NModule.o PnlWdbeUntHk1NVector.o QryWdbeUntHk1NVector.o PnlWdbeUntRef1NError.o QryWdbeUntRef1NError.o PnlWdbeUntRef1NSignal.o QryWdbeUntRef1NSignal.o PnlWdbeUnt1NBank.o QryWdbeUnt1NBank.o PnlWdbeUntFwd1NController.o QryWdbeUntFwd1NController.o PnlWdbeUnt1NTarget.o QryWdbeUnt1NTarget.o PnlWdbeUntSil1NUnit.o QryWdbeUntSil1NUnit.o PnlWdbeUnt1NPeripheral.o QryWdbeUnt1NPeripheral.o PnlWdbeUnt1NInterrupt.o QryWdbeUnt1NInterrupt.o PnlWdbeUntDetail.o
+OBJS = CrdWdbeUnt.o PnlWdbeUntHeadbar.o PnlWdbeUntList.o QryWdbeUntList.o PnlWdbeUntRec.o PnlWdbeUntRef1NCommand.o QryWdbeUntRef1NCommand.o PnlWdbeUntRef1NError.o QryWdbeUntRef1NError.o PnlWdbeUntRef1NSignal.o QryWdbeUntRef1NSignal.o PnlWdbeUntHk1NVector.o QryWdbeUntHk1NVector.o PnlWdbeUntHk1NModule.o QryWdbeUntHk1NModule.o PnlWdbeUnt1NBank.o QryWdbeUnt1NBank.o PnlWdbeUntFwd1NController.o QryWdbeUntFwd1NController.o PnlWdbeUntSil1NUnit.o QryWdbeUntSil1NUnit.o PnlWdbeUnt1NPeripheral.o QryWdbeUnt1NPeripheral.o PnlWdbeUnt1NInterrupt.o QryWdbeUnt1NInterrupt.o PnlWdbeUnt1NTarget.o QryWdbeUnt1NTarget.o PnlWdbeUntDetail.o
 
 LIB = libcrdwdbeunt
 
@@ -29,7 +29,6 @@ all:	$(LIB)
 
 $(LIB):	$(OBJS)
 	$(STATLIB) $(STATLIBFLAGS) $(LIB).a $(OBJS)
-	rm -f *.o
 
 install:
 	mv $(LIB).a $(LIBROOT)/wdbed/

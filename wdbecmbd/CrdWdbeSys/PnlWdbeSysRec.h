@@ -14,8 +14,8 @@
 
 // IP include.cust --- INSERT
 
-#include "PnlWdbeSysSys1NTarget.h"
 #include "PnlWdbeSysHk1NVector.h"
+#include "PnlWdbeSysSys1NTarget.h"
 #include "PnlWdbeSysDetail.h"
 
 #define VecVWdbeSysRecDo PnlWdbeSysRec::VecVDo
@@ -135,7 +135,7 @@ public:
 	public:
 		std::string getSrefsMask();
 
-		void readJSON(Json::Value& sup, bool addbasetag = false);
+		void readJSON(const Json::Value& sup, bool addbasetag = false);
 		void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 	};
 
@@ -177,8 +177,8 @@ public:
 	ContInf continf;
 	StatShr statshr;
 
-	PnlWdbeSysSys1NTarget* pnlsys1ntarget;
 	PnlWdbeSysHk1NVector* pnlhk1nvector;
+	PnlWdbeSysSys1NTarget* pnlsys1ntarget;
 	PnlWdbeSysDetail* pnldetail;
 
 	WdbeMSystem recSys;
@@ -214,8 +214,8 @@ public:
 
 private:
 	bool handleCallWdbeSysUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
-	bool handleCallWdbeSys_unt_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
 	bool handleCallWdbeSys_untEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeSys_unt_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
 	bool handleCallWdbeSys_verEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
 
 };

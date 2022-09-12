@@ -149,15 +149,14 @@ QryWdbeSil1NInterrupt::StgIac::StgIac(
 };
 
 bool QryWdbeSil1NInterrupt::StgIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["StgIacQryWdbeSil1NInterrupt"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["StgIacQryWdbeSil1NInterrupt"];}();
 
 	basefound = (me != Json::nullValue);
 

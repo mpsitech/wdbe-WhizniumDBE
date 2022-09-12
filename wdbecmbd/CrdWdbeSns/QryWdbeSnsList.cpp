@@ -268,9 +268,9 @@ void QryWdbeSnsList::rerun_orderSQL(
 			, const uint preIxOrd
 		) {
 	if (preIxOrd == VecVOrd::SRU) sqlstr += " ORDER BY TblWdbeMSensitivity.srcUref ASC";
+	else if (preIxOrd == VecVOrd::REU) sqlstr += " ORDER BY TblWdbeMSensitivity.refUref ASC";
 	else if (preIxOrd == VecVOrd::SRT) sqlstr += " ORDER BY TblWdbeMSensitivity.srcIxVTbl ASC";
 	else if (preIxOrd == VecVOrd::RET) sqlstr += " ORDER BY TblWdbeMSensitivity.refIxVTbl ASC";
-	else if (preIxOrd == VecVOrd::REU) sqlstr += " ORDER BY TblWdbeMSensitivity.refUref ASC";
 };
 
 void QryWdbeSnsList::fetch(
@@ -307,10 +307,10 @@ void QryWdbeSnsList::fetch(
 			} else rec->stubRefUref = "-";
 			rec->srefSrcIxVTbl = VecWdbeVMSensitivitySrcTbl::getSref(rec->srcIxVTbl);
 			rec->titSrcIxVTbl = VecWdbeVMSensitivitySrcTbl::getTitle(rec->srcIxVTbl, ixWdbeVLocale);
-			if (rec->srcIxVTbl == VecWdbeVMSensitivitySrcTbl::PRT) {
-				rec->stubSrcUref = StubWdbe::getStubPrtStd(dbswdbe, rec->srcUref, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
-			} else if (rec->srcIxVTbl == VecWdbeVMSensitivitySrcTbl::INT) {
+			if (rec->srcIxVTbl == VecWdbeVMSensitivitySrcTbl::INT) {
 				rec->stubSrcUref = StubWdbe::getStubIntStd(dbswdbe, rec->srcUref, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
+			} else if (rec->srcIxVTbl == VecWdbeVMSensitivitySrcTbl::PRT) {
+				rec->stubSrcUref = StubWdbe::getStubPrtStd(dbswdbe, rec->srcUref, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
 			} else if (rec->srcIxVTbl == VecWdbeVMSensitivitySrcTbl::SIG) {
 				rec->stubSrcUref = StubWdbe::getStubSigStd(dbswdbe, rec->srcUref, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
 			} else rec->stubSrcUref = "-";

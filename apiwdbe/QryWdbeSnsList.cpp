@@ -23,9 +23,9 @@ uint QryWdbeSnsList::VecVOrd::getIx(
 	string s = StrMod::lc(sref);
 
 	if (s == "sru") return SRU;
+	if (s == "reu") return REU;
 	if (s == "srt") return SRT;
 	if (s == "ret") return RET;
-	if (s == "reu") return REU;
 
 	return(0);
 };
@@ -34,9 +34,9 @@ string QryWdbeSnsList::VecVOrd::getSref(
 			const uint ix
 		) {
 	if (ix == SRU) return("sru");
+	if (ix == REU) return("reu");
 	if (ix == SRT) return("srt");
 	if (ix == RET) return("ret");
-	if (ix == REU) return("reu");
 
 	return("");
 };

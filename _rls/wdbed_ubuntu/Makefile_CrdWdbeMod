@@ -2,7 +2,7 @@
 # make file for CrdWdbeMod card job handler, release wdbed_ubuntu
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 21 Dec 2021
+# date created: 11 Sep 2022
 # IP header --- ABOVE
 
 include ../Makefile.inc
@@ -16,7 +16,7 @@ STATLIBFLAGS = rcs
 INCPATH = -I$(BUILDROOT)/dbswdbe -I$(BUILDROOT)/wdbed/VecWdbe -I$(BUILDROOT)/wdbed/IexWdbe -I$(BUILDROOT)/wdbed
 INCPATH += -I${WHIZSDKROOT}/build -I${WHIZSDKROOT}/build/apiwzlm -I/usr/include -I/usr/include/jsoncpp -I/usr/include/libxml2 -I/usr/include/mariadb
 
-OBJS = CrdWdbeMod.o PnlWdbeModList.o QryWdbeModList.o PnlWdbeModHeadbar.o PnlWdbeModRec.o PnlWdbeModCtrMNCommand.o QryWdbeModCtrMNCommand.o PnlWdbeModCorMNModule.o QryWdbeModCorMNModule.o PnlWdbeModCtdMNModule.o QryWdbeModCtdMNModule.o PnlWdbeModMNPeripheral.o QryWdbeModMNPeripheral.o PnlWdbeModCtrHk1NVector.o QryWdbeModCtrHk1NVector.o PnlWdbeModCtrRef1NCommand.o QryWdbeModCtrRef1NCommand.o PnlWdbeModCtrRef1NError.o QryWdbeModCtrRef1NError.o PnlWdbeModRef1NVariable.o QryWdbeModRef1NVariable.o PnlWdbeModMge1NSignal.o QryWdbeModMge1NSignal.o PnlWdbeModRef1NSensitivity.o QryWdbeModRef1NSensitivity.o PnlWdbeModRef1NSignal.o QryWdbeModRef1NSignal.o PnlWdbeModSup1NModule.o QryWdbeModSup1NModule.o PnlWdbeMod1NProcess.o QryWdbeMod1NProcess.o PnlWdbeModMdl1NPort.o QryWdbeModMdl1NPort.o PnlWdbeModMdl1NGeneric.o QryWdbeModMdl1NGeneric.o PnlWdbeModHsm1NPipeline.o QryWdbeModHsm1NPipeline.o PnlWdbeModAPar.o QryWdbeModAPar.o PnlWdbeModKHdltype.o QryWdbeModKHdltype.o PnlWdbeModDetail.o
+OBJS = CrdWdbeMod.o PnlWdbeModList.o QryWdbeModList.o PnlWdbeModHeadbar.o PnlWdbeModRec.o PnlWdbeModCtrMNCommand.o QryWdbeModCtrMNCommand.o PnlWdbeModCorMNModule.o QryWdbeModCorMNModule.o PnlWdbeModCtdMNModule.o QryWdbeModCtdMNModule.o PnlWdbeModCtrRef1NCommand.o QryWdbeModCtrRef1NCommand.o PnlWdbeModMNPeripheral.o QryWdbeModMNPeripheral.o PnlWdbeModCtrRef1NError.o QryWdbeModCtrRef1NError.o PnlWdbeModCtrHk1NVector.o QryWdbeModCtrHk1NVector.o PnlWdbeModMge1NSignal.o QryWdbeModMge1NSignal.o PnlWdbeModRef1NVariable.o QryWdbeModRef1NVariable.o PnlWdbeModRef1NSensitivity.o QryWdbeModRef1NSensitivity.o PnlWdbeModRef1NSignal.o QryWdbeModRef1NSignal.o PnlWdbeModSup1NModule.o QryWdbeModSup1NModule.o PnlWdbeModMdl1NPort.o QryWdbeModMdl1NPort.o PnlWdbeMod1NProcess.o QryWdbeMod1NProcess.o PnlWdbeModHsm1NPipeline.o QryWdbeModHsm1NPipeline.o PnlWdbeModMdl1NGeneric.o QryWdbeModMdl1NGeneric.o PnlWdbeModAPar.o QryWdbeModAPar.o PnlWdbeModKHdltype.o QryWdbeModKHdltype.o PnlWdbeModDetail.o
 
 LIB = libcrdwdbemod
 
@@ -29,7 +29,6 @@ all:	$(LIB)
 
 $(LIB):	$(OBJS)
 	$(STATLIB) $(STATLIBFLAGS) $(LIB).a $(OBJS)
-	rm -f *.o
 
 install:
 	mv $(LIB).a $(LIBROOT)/wdbed/

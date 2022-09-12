@@ -20,9 +20,9 @@ public class QryWdbeSnsList {
 	public static class VecVOrd {
 
 		public static final int SRU = 1;
-		public static final int SRT = 2;
-		public static final int RET = 3;
-		public static final int REU = 4;
+		public static final int REU = 2;
+		public static final int SRT = 3;
+		public static final int RET = 4;
 
 		public static int getIx(
 					String sref
@@ -30,9 +30,9 @@ public class QryWdbeSnsList {
 			String s = sref.toLowerCase();
 
 			if (s.equals("sru")) return SRU;
+			if (s.equals("reu")) return REU;
 			if (s.equals("srt")) return SRT;
 			if (s.equals("ret")) return RET;
-			if (s.equals("reu")) return REU;
 
 			return 0;
 		};
@@ -41,9 +41,9 @@ public class QryWdbeSnsList {
 					int ix
 				) {
 			if (ix == SRU) return("sru");
+			if (ix == REU) return("reu");
 			if (ix == SRT) return("srt");
 			if (ix == RET) return("ret");
-			if (ix == REU) return("reu");
 
 			return "";
 		};

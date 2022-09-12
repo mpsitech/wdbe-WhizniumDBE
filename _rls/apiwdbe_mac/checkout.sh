@@ -2,8 +2,8 @@
 # file checkout.sh
 # checkout script for Wdbe API library, release apiwdbe_mac
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
-# author: Emily Johnson (auto-generation)
-# date created: 28 Mar 2022
+# author: Alexander Wirthmueller (auto-generation)
+# date created: 11 Sep 2022
 # IP header --- ABOVE
 
 if [ -z ${WHIZROOT+x} ]; then

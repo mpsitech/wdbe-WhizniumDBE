@@ -271,8 +271,8 @@ void QryWdbeModList::rerun_orderSQL(
 	else if (preIxOrd == VecVOrd::SUP) sqlstr += " ORDER BY TblWdbeMModule.supRefWdbeMModule ASC";
 	else if (preIxOrd == VecVOrd::HKU) sqlstr += " ORDER BY TblWdbeMModule.hkUref ASC";
 	else if (preIxOrd == VecVOrd::HKT) sqlstr += " ORDER BY TblWdbeMModule.hkIxVTbl ASC";
-	else if (preIxOrd == VecVOrd::SRF) sqlstr += " ORDER BY TblWdbeMModule.sref ASC";
 	else if (preIxOrd == VecVOrd::TYP) sqlstr += " ORDER BY TblWdbeMModule.ixVBasetype ASC";
+	else if (preIxOrd == VecVOrd::SRF) sqlstr += " ORDER BY TblWdbeMModule.sref ASC";
 };
 
 void QryWdbeModList::fetch(

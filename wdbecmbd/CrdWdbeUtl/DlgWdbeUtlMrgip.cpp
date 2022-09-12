@@ -135,8 +135,8 @@ void DlgWdbeUtlMrgip::refreshLfi(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
 		) {
-	ContInfLfi oldContinflfi(continflfi);
 	StatShrLfi oldStatshrlfi(statshrlfi);
+	ContInfLfi oldContinflfi(continflfi);
 
 	// IP refreshLfi --- RBEGIN
 	// statshrlfi
@@ -146,8 +146,8 @@ void DlgWdbeUtlMrgip::refreshLfi(
 	continflfi.Dld = "log.txt";
 
 	// IP refreshLfi --- REND
-	if (continflfi.diff(&oldContinflfi).size() != 0) insert(moditems, DpchEngData::CONTINFLFI);
 	if (statshrlfi.diff(&oldStatshrlfi).size() != 0) insert(moditems, DpchEngData::STATSHRLFI);
+	if (continflfi.diff(&oldContinflfi).size() != 0) insert(moditems, DpchEngData::CONTINFLFI);
 };
 
 void DlgWdbeUtlMrgip::refreshRes(
@@ -256,12 +256,12 @@ void DlgWdbeUtlMrgip::handleRequest(
 
 	} else if (req->ixVBasetype == ReqWdbe::VecVBasetype::UPLOAD) {
 		if (ixVSge == VecVSge::SULDONE) handleUploadInSgeSuldone(dbswdbe, req->filename);
-		else if (ixVSge == VecVSge::IDLE) handleUploadInSgeIdle(dbswdbe, req->filename);
 		else if (ixVSge == VecVSge::SUPDONE) handleUploadInSgeSupdone(dbswdbe, req->filename);
+		else if (ixVSge == VecVSge::IDLE) handleUploadInSgeIdle(dbswdbe, req->filename);
 
 	} else if (req->ixVBasetype == ReqWdbe::VecVBasetype::DOWNLOAD) {
-		if (ixVSge == VecVSge::FAIL) req->filename = handleDownloadInSgeFail(dbswdbe);
-		else if (ixVSge == VecVSge::DONE) req->filename = handleDownloadInSgeDone(dbswdbe);
+		if (ixVSge == VecVSge::DONE) req->filename = handleDownloadInSgeDone(dbswdbe);
+		else if (ixVSge == VecVSge::FAIL) req->filename = handleDownloadInSgeFail(dbswdbe);
 
 	} else if (req->ixVBasetype == ReqWdbe::VecVBasetype::DPCHRET) {
 		if (req->dpchret->ixOpVOpres == VecOpVOpres::PROGRESS) {
@@ -377,14 +377,6 @@ void DlgWdbeUtlMrgip::handleUploadInSgeSuldone(
 	changeStage(dbswdbe, VecVSge::TUPIDLE);
 };
 
-void DlgWdbeUtlMrgip::handleUploadInSgeIdle(
-			DbsWdbe* dbswdbe
-			, const string& filename
-		) {
-	infilename = filename; // IP handleUploadInSgeIdle --- ILINE
-	changeStage(dbswdbe, VecVSge::SUPIDLE);
-};
-
 void DlgWdbeUtlMrgip::handleUploadInSgeSupdone(
 			DbsWdbe* dbswdbe
 			, const string& filename
@@ -393,16 +385,24 @@ void DlgWdbeUtlMrgip::handleUploadInSgeSupdone(
 	changeStage(dbswdbe, VecVSge::TUPIDLE);
 };
 
-string DlgWdbeUtlMrgip::handleDownloadInSgeFail(
+void DlgWdbeUtlMrgip::handleUploadInSgeIdle(
 			DbsWdbe* dbswdbe
+			, const string& filename
 		) {
-	return(xchg->tmppath + "/" + logfile); // IP handleDownloadInSgeFail --- RLINE
+	infilename = filename; // IP handleUploadInSgeIdle --- ILINE
+	changeStage(dbswdbe, VecVSge::SUPIDLE);
 };
 
 string DlgWdbeUtlMrgip::handleDownloadInSgeDone(
 			DbsWdbe* dbswdbe
 		) {
 	return(xchg->tmppath + "/" + outfile); // IP handleDownloadInSgeDone --- RLINE
+};
+
+string DlgWdbeUtlMrgip::handleDownloadInSgeFail(
+			DbsWdbe* dbswdbe
+		) {
+	return(xchg->tmppath + "/" + logfile); // IP handleDownloadInSgeFail --- RLINE
 };
 
 void DlgWdbeUtlMrgip::handleTimerInSgeTupidle(

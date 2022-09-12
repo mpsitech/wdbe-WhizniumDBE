@@ -319,15 +319,14 @@ string DlgWdbeVerGenfst::DpchAppDo::getSrefsMask() {
 };
 
 void DlgWdbeVerGenfst::DpchAppDo::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppDlgWdbeVerGenfstDo"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppDlgWdbeVerGenfstDo"];}();
 
 	basefound = (me != Json::nullValue);
 

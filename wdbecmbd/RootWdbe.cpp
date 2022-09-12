@@ -55,8 +55,8 @@ RootWdbe::RootWdbe(
 
 	// IP constructor.spec2 --- INSERT
 
-	xchg->addClstn(VecWdbeVCall::CALLWDBEREFPRESET, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBESUSPSESS, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBEREFPRESET, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBELOGOUT, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
@@ -395,6 +395,19 @@ bool RootWdbe::authenticate(
 	return valid;
 };
 
+void RootWdbe::termSess(
+			DbsWdbe* dbswdbe
+			, const ubigint jref
+		) {
+	JobWdbe* job = NULL;
+
+	job = xchg->getJobByJref(jref);
+
+	if (job) {
+		if (job->ixWdbeVJob == VecWdbeVJob::SESSWDBE) ((SessWdbe*) job)->term(dbswdbe);
+	};
+};
+
 void RootWdbe::handleRequest(
 			DbsWdbe* dbswdbe
 			, ReqWdbe* req
@@ -492,6 +505,8 @@ bool RootWdbe::handleEraseSess(
 	cout << "\tjob reference: ";
 	cin >> input;
 	iinput = atoi(input.c_str());
+
+	termSess(dbswdbe, iinput);
 
 	if (!eraseSubjobByJref(sesss, iinput)) cout << "\tjob reference doesn't exist!" << endl;
 	else cout << "\tsession erased." << endl;
@@ -836,13 +851,25 @@ void RootWdbe::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBEREFPRESET) {
-		call->abort = handleCallWdbeRefPreSet(dbswdbe, call->jref, call->argInv.ix, call->argInv.ref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBESUSPSESS) {
+	if (call->ixVCall == VecWdbeVCall::CALLWDBESUSPSESS) {
 		call->abort = handleCallWdbeSuspsess(dbswdbe, call->jref);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEREFPRESET) {
+		call->abort = handleCallWdbeRefPreSet(dbswdbe, call->jref, call->argInv.ix, call->argInv.ref);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBELOGOUT) {
 		call->abort = handleCallWdbeLogout(dbswdbe, call->jref, call->argInv.boolval);
 	};
+};
+
+bool RootWdbe::handleCallWdbeSuspsess(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+
+	xchg->addBoolvalPreset(VecWdbeVPreset::PREWDBESUSPSESS, jrefTrig, true);
+	xchg->removeDcolsByJref(jrefTrig);
+
+	return retval;
 };
 
 bool RootWdbe::handleCallWdbeRefPreSet(
@@ -860,18 +887,6 @@ bool RootWdbe::handleCallWdbeRefPreSet(
 	return retval;
 };
 
-bool RootWdbe::handleCallWdbeSuspsess(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-
-	xchg->addBoolvalPreset(VecWdbeVPreset::PREWDBESUSPSESS, jrefTrig, true);
-	xchg->removeDcolsByJref(jrefTrig);
-
-	return retval;
-};
-
 bool RootWdbe::handleCallWdbeLogout(
 			DbsWdbe* dbswdbe
 			, const ubigint jrefTrig
@@ -880,6 +895,8 @@ bool RootWdbe::handleCallWdbeLogout(
 	bool retval = false;
 
 	time_t rawtime;
+
+	termSess(dbswdbe, jrefTrig);
 
 	if (!boolvalInv) {
 		eraseSubjobByJref(sesss, jrefTrig);

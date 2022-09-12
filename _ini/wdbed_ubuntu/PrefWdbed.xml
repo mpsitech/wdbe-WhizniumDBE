@@ -10,6 +10,7 @@
 	<StgWdbeAppsrv>
 		<Si sref="port">13100</Si>
 		<Si sref="https">false</Si>
+		<Si sref="cors"></Si>
 	</StgWdbeAppsrv>
 	<StgWdbed>
 		<Si sref="jobprcn">4</Si>

@@ -22,8 +22,8 @@ uint QryWdbePrtList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "mdl") return MDL;
 	if (s == "srf") return SRF;
+	if (s == "mdl") return MDL;
 
 	return(0);
 };
@@ -31,8 +31,8 @@ uint QryWdbePrtList::VecVOrd::getIx(
 string QryWdbePrtList::VecVOrd::getSref(
 			const uint ix
 		) {
-	if (ix == MDL) return("mdl");
 	if (ix == SRF) return("srf");
+	if (ix == MDL) return("mdl");
 
 	return("");
 };

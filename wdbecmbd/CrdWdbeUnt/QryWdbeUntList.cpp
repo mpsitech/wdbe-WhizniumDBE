@@ -248,12 +248,12 @@ void QryWdbeUntList::rerun_orderSQL(
 			, const uint preIxOrd
 		) {
 	if (preIxOrd == VecVOrd::MDL) sqlstr += " ORDER BY TblWdbeMUnit.refWdbeMModule ASC";
-	else if (preIxOrd == VecVOrd::REU) sqlstr += " ORDER BY TblWdbeMUnit.refUref ASC";
+	else if (preIxOrd == VecVOrd::RET) sqlstr += " ORDER BY TblWdbeMUnit.refIxVTbl ASC";
 	else if (preIxOrd == VecVOrd::SYS) sqlstr += " ORDER BY TblWdbeMUnit.refWdbeMSystem ASC";
+	else if (preIxOrd == VecVOrd::REU) sqlstr += " ORDER BY TblWdbeMUnit.refUref ASC";
+	else if (preIxOrd == VecVOrd::SRF) sqlstr += " ORDER BY TblWdbeMUnit.sref ASC";
 	else if (preIxOrd == VecVOrd::TIT) sqlstr += " ORDER BY TblWdbeMUnit.Title ASC";
 	else if (preIxOrd == VecVOrd::TYP) sqlstr += " ORDER BY TblWdbeMUnit.ixVBasetype ASC";
-	else if (preIxOrd == VecVOrd::RET) sqlstr += " ORDER BY TblWdbeMUnit.refIxVTbl ASC";
-	else if (preIxOrd == VecVOrd::SRF) sqlstr += " ORDER BY TblWdbeMUnit.sref ASC";
 };
 
 void QryWdbeUntList::fetch(
@@ -285,10 +285,10 @@ void QryWdbeUntList::fetch(
 			rec->titIxVBasetype = VecWdbeVMUnitBasetype::getTitle(rec->ixVBasetype, ixWdbeVLocale);
 			rec->srefRefIxVTbl = VecWdbeVMUnitRefTbl::getSref(rec->refIxVTbl);
 			rec->titRefIxVTbl = VecWdbeVMUnitRefTbl::getTitle(rec->refIxVTbl, ixWdbeVLocale);
-			if (rec->refIxVTbl == VecWdbeVMUnitRefTbl::VER) {
-				rec->stubRefUref = StubWdbe::getStubVerStd(dbswdbe, rec->refUref, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
-			} else if (rec->refIxVTbl == VecWdbeVMUnitRefTbl::FAM) {
+			if (rec->refIxVTbl == VecWdbeVMUnitRefTbl::FAM) {
 				rec->stubRefUref = StubWdbe::getStubFamStd(dbswdbe, rec->refUref, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
+			} else if (rec->refIxVTbl == VecWdbeVMUnitRefTbl::VER) {
+				rec->stubRefUref = StubWdbe::getStubVerStd(dbswdbe, rec->refUref, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
 			} else rec->stubRefUref = "-";
 			rec->stubRefWdbeMSystem = StubWdbe::getStubSysStd(dbswdbe, rec->refWdbeMSystem, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
 			rec->stubRefWdbeMModule = StubWdbe::getStubMdlSref(dbswdbe, rec->refWdbeMModule, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
@@ -461,27 +461,13 @@ void QryWdbeUntList::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBEUNTMOD) {
-		call->abort = handleCallWdbeUntMod(dbswdbe, call->jref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEUNTUPD_REFEQ) {
+	if (call->ixVCall == VecWdbeVCall::CALLWDBEUNTUPD_REFEQ) {
 		call->abort = handleCallWdbeUntUpd_refEq(dbswdbe, call->jref);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEUNTMOD) {
+		call->abort = handleCallWdbeUntMod(dbswdbe, call->jref);
 	} else if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
 		call->abort = handleCallWdbeStubChgFromSelf(dbswdbe);
 	};
-};
-
-bool QryWdbeUntList::handleCallWdbeUntMod(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-
-	if ((ixWdbeVQrystate == VecWdbeVQrystate::UTD) || (ixWdbeVQrystate == VecWdbeVQrystate::SLM)) {
-		ixWdbeVQrystate = VecWdbeVQrystate::MNR;
-		xchg->triggerCall(dbswdbe, VecWdbeVCall::CALLWDBESTATCHG, jref);
-	};
-
-	return retval;
 };
 
 bool QryWdbeUntList::handleCallWdbeUntUpd_refEq(
@@ -492,6 +478,20 @@ bool QryWdbeUntList::handleCallWdbeUntUpd_refEq(
 
 	if (ixWdbeVQrystate != VecWdbeVQrystate::OOD) {
 		ixWdbeVQrystate = VecWdbeVQrystate::OOD;
+		xchg->triggerCall(dbswdbe, VecWdbeVCall::CALLWDBESTATCHG, jref);
+	};
+
+	return retval;
+};
+
+bool QryWdbeUntList::handleCallWdbeUntMod(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+
+	if ((ixWdbeVQrystate == VecWdbeVQrystate::UTD) || (ixWdbeVQrystate == VecWdbeVQrystate::SLM)) {
+		ixWdbeVQrystate = VecWdbeVQrystate::MNR;
 		xchg->triggerCall(dbswdbe, VecWdbeVCall::CALLWDBESTATCHG, jref);
 	};
 

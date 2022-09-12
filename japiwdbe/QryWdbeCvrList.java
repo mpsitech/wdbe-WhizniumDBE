@@ -19,8 +19,8 @@ public class QryWdbeCvrList {
 		*/
 	public static class VecVOrd {
 
-		public static final int BCV = 1;
-		public static final int STE = 2;
+		public static final int STE = 1;
+		public static final int BCV = 2;
 		public static final int CPR = 3;
 		public static final int OWN = 4;
 		public static final int GRP = 5;
@@ -30,8 +30,8 @@ public class QryWdbeCvrList {
 				) {
 			String s = sref.toLowerCase();
 
-			if (s.equals("bcv")) return BCV;
 			if (s.equals("ste")) return STE;
+			if (s.equals("bcv")) return BCV;
 			if (s.equals("cpr")) return CPR;
 			if (s.equals("own")) return OWN;
 			if (s.equals("grp")) return GRP;
@@ -42,8 +42,8 @@ public class QryWdbeCvrList {
 		public static String getSref(
 					int ix
 				) {
-			if (ix == BCV) return("bcv");
 			if (ix == STE) return("ste");
+			if (ix == BCV) return("bcv");
 			if (ix == CPR) return("cpr");
 			if (ix == OWN) return("own");
 			if (ix == GRP) return("grp");

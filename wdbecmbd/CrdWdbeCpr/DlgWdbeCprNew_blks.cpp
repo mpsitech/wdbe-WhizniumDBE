@@ -88,15 +88,14 @@ DlgWdbeCprNew::ContIac::ContIac(
 };
 
 bool DlgWdbeCprNew::ContIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["ContIacDlgWdbeCprNew"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["ContIacDlgWdbeCprNew"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -428,15 +427,14 @@ string DlgWdbeCprNew::DpchAppData::getSrefsMask() {
 };
 
 void DlgWdbeCprNew::DpchAppData::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppDlgWdbeCprNewData"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppDlgWdbeCprNewData"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -498,15 +496,14 @@ string DlgWdbeCprNew::DpchAppDo::getSrefsMask() {
 };
 
 void DlgWdbeCprNew::DpchAppDo::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppDlgWdbeCprNewDo"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppDlgWdbeCprNewDo"];}();
 
 	basefound = (me != Json::nullValue);
 

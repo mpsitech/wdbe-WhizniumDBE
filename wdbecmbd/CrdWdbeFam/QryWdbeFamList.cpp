@@ -154,8 +154,8 @@ void QryWdbeFamList::rerun_orderSQL(
 			string& sqlstr
 			, const uint preIxOrd
 		) {
-	if (preIxOrd == VecVOrd::TIT) sqlstr += " ORDER BY TblWdbeMFamily.Title ASC";
-	else if (preIxOrd == VecVOrd::VND) sqlstr += " ORDER BY TblWdbeMFamily.srefWdbeKVendor ASC";
+	if (preIxOrd == VecVOrd::VND) sqlstr += " ORDER BY TblWdbeMFamily.srefWdbeKVendor ASC";
+	else if (preIxOrd == VecVOrd::TIT) sqlstr += " ORDER BY TblWdbeMFamily.Title ASC";
 };
 
 void QryWdbeFamList::fetch(

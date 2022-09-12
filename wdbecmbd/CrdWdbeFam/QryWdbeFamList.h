@@ -32,8 +32,8 @@ public:
 	class VecVOrd {
 
 	public:
-		static const Sbecore::uint TIT = 1;
-		static const Sbecore::uint VND = 2;
+		static const Sbecore::uint VND = 1;
+		static const Sbecore::uint TIT = 2;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);
@@ -95,7 +95,7 @@ public:
 		Sbecore::uint nload;
 
 	public:
-		bool readJSON(Json::Value& sup, bool addbasetag = false);
+		bool readJSON(const Json::Value& sup, bool addbasetag = false);
 		bool readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 		void writeJSON(Json::Value& sup, std::string difftag = "");
 		void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);

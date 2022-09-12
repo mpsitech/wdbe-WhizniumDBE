@@ -24,8 +24,8 @@ uint QryWdbeModList::VecVOrd::getIx(
 	if (s == "sup") return SUP;
 	if (s == "hku") return HKU;
 	if (s == "hkt") return HKT;
-	if (s == "srf") return SRF;
 	if (s == "typ") return TYP;
+	if (s == "srf") return SRF;
 
 	return(0);
 };
@@ -37,8 +37,8 @@ string QryWdbeModList::VecVOrd::getSref(
 	if (ix == SUP) return("sup");
 	if (ix == HKU) return("hku");
 	if (ix == HKT) return("hkt");
-	if (ix == SRF) return("srf");
 	if (ix == TYP) return("typ");
+	if (ix == SRF) return("srf");
 
 	return("");
 };
@@ -189,15 +189,14 @@ QryWdbeModList::StgIac::StgIac(
 };
 
 bool QryWdbeModList::StgIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["StgIacQryWdbeModList"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["StgIacQryWdbeModList"];}();
 
 	basefound = (me != Json::nullValue);
 

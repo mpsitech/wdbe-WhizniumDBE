@@ -28,8 +28,8 @@ uint QryWdbeSigList::VecVOrd::getIx(
 	if (s == "reu") return REU;
 	if (s == "mgt") return MGT;
 	if (s == "ret") return RET;
-	if (s == "srf") return SRF;
 	if (s == "typ") return TYP;
+	if (s == "srf") return SRF;
 
 	return(0);
 };
@@ -43,8 +43,8 @@ string QryWdbeSigList::VecVOrd::getSref(
 	if (ix == REU) return("reu");
 	if (ix == MGT) return("mgt");
 	if (ix == RET) return("ret");
-	if (ix == SRF) return("srf");
 	if (ix == TYP) return("typ");
+	if (ix == SRF) return("srf");
 
 	return("");
 };

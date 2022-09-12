@@ -21,8 +21,8 @@ uint QryWdbeRlsList::VecVOrd::getIx(
 	string s = StrMod::lc(sref);
 
 	if (s == "mch") return MCH;
-	if (s == "typ") return TYP;
 	if (s == "ver") return VER;
+	if (s == "typ") return TYP;
 	if (s == "srf") return SRF;
 
 	return(0);
@@ -32,8 +32,8 @@ string QryWdbeRlsList::VecVOrd::getSref(
 			const uint ix
 		) {
 	if (ix == MCH) return("mch");
-	if (ix == TYP) return("typ");
 	if (ix == VER) return("ver");
+	if (ix == TYP) return("typ");
 	if (ix == SRF) return("srf");
 
 	return("");
@@ -185,15 +185,14 @@ QryWdbeRlsList::StgIac::StgIac(
 };
 
 bool QryWdbeRlsList::StgIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["StgIacQryWdbeRlsList"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["StgIacQryWdbeRlsList"];}();
 
 	basefound = (me != Json::nullValue);
 

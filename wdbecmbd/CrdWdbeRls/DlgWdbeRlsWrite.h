@@ -144,7 +144,7 @@ public:
 		Sbecore::uint numFDse;
 
 	public:
-		bool readJSON(Json::Value& sup, bool addbasetag = false);
+		bool readJSON(const Json::Value& sup, bool addbasetag = false);
 		bool readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 		void writeJSON(Json::Value& sup, std::string difftag = "");
 		void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
@@ -167,7 +167,7 @@ public:
 		bool ChkBso;
 
 	public:
-		bool readJSON(Json::Value& sup, bool addbasetag = false);
+		bool readJSON(const Json::Value& sup, bool addbasetag = false);
 		bool readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 		void writeJSON(Json::Value& sup, std::string difftag = "");
 		void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
@@ -462,7 +462,7 @@ public:
 	public:
 		std::string getSrefsMask();
 
-		void readJSON(Json::Value& sup, bool addbasetag = false);
+		void readJSON(const Json::Value& sup, bool addbasetag = false);
 		void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 	};
 
@@ -486,7 +486,7 @@ public:
 	public:
 		std::string getSrefsMask();
 
-		void readJSON(Json::Value& sup, bool addbasetag = false);
+		void readJSON(const Json::Value& sup, bool addbasetag = false);
 		void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 	};
 
@@ -661,8 +661,8 @@ private:
 
 	void handleUploadInSgeIdle(DbsWdbe* dbswdbe, const std::string& filename);
 
-	std::string handleDownloadInSgeDone(DbsWdbe* dbswdbe);
 	std::string handleDownloadInSgeFail(DbsWdbe* dbswdbe);
+	std::string handleDownloadInSgeDone(DbsWdbe* dbswdbe);
 
 	void handleDpchRetWdbeMtpPlhfpga(DbsWdbe* dbswdbe, DpchRetWdbeMtpPlhfpga* dpchret);
 	void handleDpchRetWdbeMtpPlhmcu(DbsWdbe* dbswdbe, DpchRetWdbeMtpPlhmcu* dpchret);
@@ -674,8 +674,8 @@ private:
 	void handleDpchRetWdbePlhmcuEhostif(DbsWdbe* dbswdbe, DpchRetWdbePlhmcuEhostif* dpchret);
 	void handleDpchRetWdbePrctreeMerge(DbsWdbe* dbswdbe, DpchRetWdbePrctreeMerge* dpchret);
 
-	void handleTimerWithSrefMonInSgeWrite(DbsWdbe* dbswdbe);
 	void handleTimerInSgeUpkidle(DbsWdbe* dbswdbe, const std::string& sref);
+	void handleTimerWithSrefMonInSgeWrite(DbsWdbe* dbswdbe);
 	void handleTimerWithSrefMonInSgeCreate(DbsWdbe* dbswdbe);
 
 private:

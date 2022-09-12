@@ -272,10 +272,10 @@ void QryWdbeErrList::fetch(
 			rec->jnum = statshr.jnumFirstload + i;
 			rec->srefRefIxVTbl = VecWdbeVMErrorRefTbl::getSref(rec->refIxVTbl);
 			rec->titRefIxVTbl = VecWdbeVMErrorRefTbl::getTitle(rec->refIxVTbl, ixWdbeVLocale);
-			if (rec->refIxVTbl == VecWdbeVMErrorRefTbl::UNT) {
-				rec->stubRefUref = StubWdbe::getStubUntStd(dbswdbe, rec->refUref, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
-			} else if (rec->refIxVTbl == VecWdbeVMErrorRefTbl::CTR) {
+			if (rec->refIxVTbl == VecWdbeVMErrorRefTbl::CTR) {
 				rec->stubRefUref = StubWdbe::getStubCtrStd(dbswdbe, rec->refUref, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
+			} else if (rec->refIxVTbl == VecWdbeVMErrorRefTbl::UNT) {
+				rec->stubRefUref = StubWdbe::getStubUntStd(dbswdbe, rec->refUref, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
 			} else rec->stubRefUref = "-";
 		};
 

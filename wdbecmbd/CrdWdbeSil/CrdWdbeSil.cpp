@@ -42,8 +42,8 @@ CrdWdbeSil::CrdWdbeSil(
 	feedFSge.tag = "FeedFSge";
 	VecVSge::fillFeed(feedFSge);
 
-	pnlheadbar = NULL;
 	pnllist = NULL;
+	pnlheadbar = NULL;
 	pnlrec = NULL;
 
 	// IP constructor.cust1 --- INSERT
@@ -53,8 +53,8 @@ CrdWdbeSil::CrdWdbeSil(
 	// initialize according to ref
 	changeRef(dbswdbe, jref, ((ref + 1) == 0) ? 0 : ref, false);
 
-	pnlheadbar = new PnlWdbeSilHeadbar(xchg, dbswdbe, jref, ixWdbeVLocale);
 	pnllist = new PnlWdbeSilList(xchg, dbswdbe, jref, ixWdbeVLocale);
+	pnlheadbar = new PnlWdbeSilHeadbar(xchg, dbswdbe, jref, ixWdbeVLocale);
 	pnlrec = new PnlWdbeSilRec(xchg, dbswdbe, jref, ixWdbeVLocale);
 
 	// IP constructor.cust2 --- INSERT
@@ -69,8 +69,8 @@ CrdWdbeSil::CrdWdbeSil(
 	changeStage(dbswdbe, VecVSge::IDLE);
 
 	xchg->addClstn(VecWdbeVCall::CALLWDBEREFPRESET, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecWdbeVCall::CALLWDBEDLGCLOSE, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBESTATCHG, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBEDLGCLOSE, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -236,10 +236,10 @@ void CrdWdbeSil::handleCall(
 		) {
 	if (call->ixVCall == VecWdbeVCall::CALLWDBEREFPRESET) {
 		call->abort = handleCallWdbeRefPreSet(dbswdbe, call->jref, call->argInv.ix, call->argInv.ref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEDLGCLOSE) {
-		call->abort = handleCallWdbeDlgClose(dbswdbe, call->jref);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBESTATCHG) {
 		call->abort = handleCallWdbeStatChg(dbswdbe, call->jref);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEDLGCLOSE) {
+		call->abort = handleCallWdbeDlgClose(dbswdbe, call->jref);
 	};
 };
 
@@ -260,21 +260,21 @@ bool CrdWdbeSil::handleCallWdbeRefPreSet(
 	return retval;
 };
 
-bool CrdWdbeSil::handleCallWdbeDlgClose(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-	// IP handleCallWdbeDlgClose --- INSERT
-	return retval;
-};
-
 bool CrdWdbeSil::handleCallWdbeStatChg(
 			DbsWdbe* dbswdbe
 			, const ubigint jrefTrig
 		) {
 	bool retval = false;
 	if (jrefTrig == pnlrec->jref) if ((pnllist->statshr.ixWdbeVExpstate == VecWdbeVExpstate::REGD) && (pnlrec->statshr.ixWdbeVExpstate == VecWdbeVExpstate::REGD)) pnllist->minimize(dbswdbe, true);
+	return retval;
+};
+
+bool CrdWdbeSil::handleCallWdbeDlgClose(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+	// IP handleCallWdbeDlgClose --- INSERT
 	return retval;
 };
 

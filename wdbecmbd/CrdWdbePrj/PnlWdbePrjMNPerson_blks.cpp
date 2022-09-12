@@ -242,15 +242,14 @@ PnlWdbePrjMNPerson::StgIac::StgIac(
 };
 
 bool PnlWdbePrjMNPerson::StgIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["StgIacWdbePrjMNPerson"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["StgIacWdbePrjMNPerson"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -428,15 +427,14 @@ string PnlWdbePrjMNPerson::DpchAppData::getSrefsMask() {
 };
 
 void PnlWdbePrjMNPerson::DpchAppData::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbePrjMNPersonData"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbePrjMNPersonData"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -502,15 +500,14 @@ string PnlWdbePrjMNPerson::DpchAppDo::getSrefsMask() {
 };
 
 void PnlWdbePrjMNPerson::DpchAppDo::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbePrjMNPersonDo"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbePrjMNPersonDo"];}();
 
 	basefound = (me != Json::nullValue);
 

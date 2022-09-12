@@ -42,8 +42,8 @@ PnlWdbeVerRec::PnlWdbeVerRec(
 	pnlref1nfile = NULL;
 	pnl1nunit = NULL;
 	pnlbvr1nversion = NULL;
-	pnl1nrelease = NULL;
 	pnl1nsystem = NULL;
+	pnl1nrelease = NULL;
 	pnldetail = NULL;
 
 	// IP constructor.cust1 --- INSERT

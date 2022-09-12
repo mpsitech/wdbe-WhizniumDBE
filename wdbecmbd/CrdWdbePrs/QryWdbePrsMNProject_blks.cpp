@@ -149,15 +149,14 @@ QryWdbePrsMNProject::StgIac::StgIac(
 };
 
 bool QryWdbePrsMNProject::StgIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["StgIacQryWdbePrsMNProject"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["StgIacQryWdbePrsMNProject"];}();
 
 	basefound = (me != Json::nullValue);
 

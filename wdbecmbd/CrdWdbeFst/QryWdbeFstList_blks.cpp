@@ -20,8 +20,8 @@ uint QryWdbeFstList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "srf") return SRF;
 	if (s == "fsm") return FSM;
+	if (s == "srf") return SRF;
 
 	return(0);
 };
@@ -29,8 +29,8 @@ uint QryWdbeFstList::VecVOrd::getIx(
 string QryWdbeFstList::VecVOrd::getSref(
 			const uint ix
 		) {
-	if (ix == SRF) return("srf");
 	if (ix == FSM) return("fsm");
+	if (ix == SRF) return("srf");
 
 	return("");
 };
@@ -181,15 +181,14 @@ QryWdbeFstList::StgIac::StgIac(
 };
 
 bool QryWdbeFstList::StgIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["StgIacQryWdbeFstList"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["StgIacQryWdbeFstList"];}();
 
 	basefound = (me != Json::nullValue);
 

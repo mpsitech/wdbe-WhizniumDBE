@@ -15,8 +15,8 @@
 // IP include.cust --- INSERT
 
 #include "PnlWdbeUtlHeadbar.h"
-#include "DlgWdbeUtlMrgip.h"
 #include "DlgWdbeUtlExtrip.h"
+#include "DlgWdbeUtlMrgip.h"
 
 #define VecVWdbeUtlDo CrdWdbeUtl::VecVDo
 #define VecVWdbeUtlSge CrdWdbeUtl::VecVSge
@@ -151,7 +151,7 @@ public:
 	public:
 		std::string getSrefsMask();
 
-		void readJSON(Json::Value& sup, bool addbasetag = false);
+		void readJSON(const Json::Value& sup, bool addbasetag = false);
 		void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 	};
 
@@ -197,8 +197,8 @@ public:
 	Sbecore::Feed feedFSge;
 
 	PnlWdbeUtlHeadbar* pnlheadbar;
-	DlgWdbeUtlMrgip* dlgmrgip;
 	DlgWdbeUtlExtrip* dlgextrip;
+	DlgWdbeUtlMrgip* dlgmrgip;
 
 	// IP vars.cust --- INSERT
 

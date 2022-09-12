@@ -15,16 +15,16 @@
 // IP include.cust --- INSERT
 
 #include "PnlWdbeNavAuxfct.h"
-#include "PnlWdbeNavHigh.h"
 #include "PnlWdbeNavLow.h"
+#include "PnlWdbeNavHigh.h"
 #include "PnlWdbeNavCoredev.h"
 #include "PnlWdbeNavDevdev.h"
-#include "PnlWdbeNavAdmin.h"
 #include "PnlWdbeNavGlobal.h"
+#include "PnlWdbeNavAdmin.h"
 #include "PnlWdbeNavPre.h"
 #include "PnlWdbeNavHeadbar.h"
-#include "DlgWdbeNavLoaini.h"
 #include "DlgWdbeNavMnglic.h"
+#include "DlgWdbeNavLoaini.h"
 
 #define VecVWdbeNavDo CrdWdbeNav::VecVDo
 #define VecVWdbeNavSge CrdWdbeNav::VecVSge
@@ -339,7 +339,7 @@ public:
 	public:
 		std::string getSrefsMask();
 
-		void readJSON(Json::Value& sup, bool addbasetag = false);
+		void readJSON(const Json::Value& sup, bool addbasetag = false);
 		void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 	};
 
@@ -449,16 +449,16 @@ public:
 	Sbecore::Feed feedFSge;
 
 	PnlWdbeNavAuxfct* pnlauxfct;
-	PnlWdbeNavHigh* pnlhigh;
 	PnlWdbeNavLow* pnllow;
+	PnlWdbeNavHigh* pnlhigh;
 	PnlWdbeNavCoredev* pnlcoredev;
 	PnlWdbeNavDevdev* pnldevdev;
-	PnlWdbeNavAdmin* pnladmin;
 	PnlWdbeNavGlobal* pnlglobal;
+	PnlWdbeNavAdmin* pnladmin;
 	PnlWdbeNavPre* pnlpre;
 	PnlWdbeNavHeadbar* pnlheadbar;
-	DlgWdbeNavLoaini* dlgloaini;
 	DlgWdbeNavMnglic* dlgmnglic;
+	DlgWdbeNavLoaini* dlgloaini;
 
 	// IP vars.cust --- INSERT
 

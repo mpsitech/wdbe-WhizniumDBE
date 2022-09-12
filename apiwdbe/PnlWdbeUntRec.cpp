@@ -104,34 +104,34 @@ set<uint> PnlWdbeUntRec::ContInf::diff(
 
 PnlWdbeUntRec::StatApp::StatApp(
 			const bool initdoneDetail
-			, const bool initdone1NInterrupt
-			, const bool initdoneSil1NUnit
-			, const bool initdone1NPeripheral
-			, const bool initdone1NBank
-			, const bool initdoneFwd1NController
 			, const bool initdone1NTarget
+			, const bool initdone1NInterrupt
+			, const bool initdone1NPeripheral
+			, const bool initdoneSil1NUnit
+			, const bool initdoneFwd1NController
+			, const bool initdone1NBank
+			, const bool initdoneHk1NModule
+			, const bool initdoneHk1NVector
 			, const bool initdoneRef1NSignal
 			, const bool initdoneRef1NError
 			, const bool initdoneRef1NCommand
-			, const bool initdoneHk1NModule
-			, const bool initdoneHk1NVector
 		) :
 			Block()
 		{
 	this->initdoneDetail = initdoneDetail;
-	this->initdone1NInterrupt = initdone1NInterrupt;
-	this->initdoneSil1NUnit = initdoneSil1NUnit;
-	this->initdone1NPeripheral = initdone1NPeripheral;
-	this->initdone1NBank = initdone1NBank;
-	this->initdoneFwd1NController = initdoneFwd1NController;
 	this->initdone1NTarget = initdone1NTarget;
+	this->initdone1NInterrupt = initdone1NInterrupt;
+	this->initdone1NPeripheral = initdone1NPeripheral;
+	this->initdoneSil1NUnit = initdoneSil1NUnit;
+	this->initdoneFwd1NController = initdoneFwd1NController;
+	this->initdone1NBank = initdone1NBank;
+	this->initdoneHk1NModule = initdoneHk1NModule;
+	this->initdoneHk1NVector = initdoneHk1NVector;
 	this->initdoneRef1NSignal = initdoneRef1NSignal;
 	this->initdoneRef1NError = initdoneRef1NError;
 	this->initdoneRef1NCommand = initdoneRef1NCommand;
-	this->initdoneHk1NModule = initdoneHk1NModule;
-	this->initdoneHk1NVector = initdoneHk1NVector;
 
-	mask = {INITDONEDETAIL, INITDONE1NINTERRUPT, INITDONESIL1NUNIT, INITDONE1NPERIPHERAL, INITDONE1NBANK, INITDONEFWD1NCONTROLLER, INITDONE1NTARGET, INITDONEREF1NSIGNAL, INITDONEREF1NERROR, INITDONEREF1NCOMMAND, INITDONEHK1NMODULE, INITDONEHK1NVECTOR};
+	mask = {INITDONEDETAIL, INITDONE1NTARGET, INITDONE1NINTERRUPT, INITDONE1NPERIPHERAL, INITDONESIL1NUNIT, INITDONEFWD1NCONTROLLER, INITDONE1NBANK, INITDONEHK1NMODULE, INITDONEHK1NVECTOR, INITDONEREF1NSIGNAL, INITDONEREF1NERROR, INITDONEREF1NCOMMAND};
 };
 
 bool PnlWdbeUntRec::StatApp::readXML(
@@ -152,17 +152,17 @@ bool PnlWdbeUntRec::StatApp::readXML(
 
 	if (basefound) {
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneDetail", initdoneDetail)) add(INITDONEDETAIL);
-		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdone1NInterrupt", initdone1NInterrupt)) add(INITDONE1NINTERRUPT);
-		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneSil1NUnit", initdoneSil1NUnit)) add(INITDONESIL1NUNIT);
-		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdone1NPeripheral", initdone1NPeripheral)) add(INITDONE1NPERIPHERAL);
-		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdone1NBank", initdone1NBank)) add(INITDONE1NBANK);
-		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneFwd1NController", initdoneFwd1NController)) add(INITDONEFWD1NCONTROLLER);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdone1NTarget", initdone1NTarget)) add(INITDONE1NTARGET);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdone1NInterrupt", initdone1NInterrupt)) add(INITDONE1NINTERRUPT);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdone1NPeripheral", initdone1NPeripheral)) add(INITDONE1NPERIPHERAL);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneSil1NUnit", initdoneSil1NUnit)) add(INITDONESIL1NUNIT);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneFwd1NController", initdoneFwd1NController)) add(INITDONEFWD1NCONTROLLER);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdone1NBank", initdone1NBank)) add(INITDONE1NBANK);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneHk1NModule", initdoneHk1NModule)) add(INITDONEHK1NMODULE);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneHk1NVector", initdoneHk1NVector)) add(INITDONEHK1NVECTOR);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneRef1NSignal", initdoneRef1NSignal)) add(INITDONEREF1NSIGNAL);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneRef1NError", initdoneRef1NError)) add(INITDONEREF1NERROR);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneRef1NCommand", initdoneRef1NCommand)) add(INITDONEREF1NCOMMAND);
-		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneHk1NModule", initdoneHk1NModule)) add(INITDONEHK1NMODULE);
-		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneHk1NVector", initdoneHk1NVector)) add(INITDONEHK1NVECTOR);
 	};
 
 	return basefound;
@@ -174,17 +174,17 @@ set<uint> PnlWdbeUntRec::StatApp::comm(
 	set<uint> items;
 
 	if (initdoneDetail == comp->initdoneDetail) insert(items, INITDONEDETAIL);
-	if (initdone1NInterrupt == comp->initdone1NInterrupt) insert(items, INITDONE1NINTERRUPT);
-	if (initdoneSil1NUnit == comp->initdoneSil1NUnit) insert(items, INITDONESIL1NUNIT);
-	if (initdone1NPeripheral == comp->initdone1NPeripheral) insert(items, INITDONE1NPERIPHERAL);
-	if (initdone1NBank == comp->initdone1NBank) insert(items, INITDONE1NBANK);
-	if (initdoneFwd1NController == comp->initdoneFwd1NController) insert(items, INITDONEFWD1NCONTROLLER);
 	if (initdone1NTarget == comp->initdone1NTarget) insert(items, INITDONE1NTARGET);
+	if (initdone1NInterrupt == comp->initdone1NInterrupt) insert(items, INITDONE1NINTERRUPT);
+	if (initdone1NPeripheral == comp->initdone1NPeripheral) insert(items, INITDONE1NPERIPHERAL);
+	if (initdoneSil1NUnit == comp->initdoneSil1NUnit) insert(items, INITDONESIL1NUNIT);
+	if (initdoneFwd1NController == comp->initdoneFwd1NController) insert(items, INITDONEFWD1NCONTROLLER);
+	if (initdone1NBank == comp->initdone1NBank) insert(items, INITDONE1NBANK);
+	if (initdoneHk1NModule == comp->initdoneHk1NModule) insert(items, INITDONEHK1NMODULE);
+	if (initdoneHk1NVector == comp->initdoneHk1NVector) insert(items, INITDONEHK1NVECTOR);
 	if (initdoneRef1NSignal == comp->initdoneRef1NSignal) insert(items, INITDONEREF1NSIGNAL);
 	if (initdoneRef1NError == comp->initdoneRef1NError) insert(items, INITDONEREF1NERROR);
 	if (initdoneRef1NCommand == comp->initdoneRef1NCommand) insert(items, INITDONEREF1NCOMMAND);
-	if (initdoneHk1NModule == comp->initdoneHk1NModule) insert(items, INITDONEHK1NMODULE);
-	if (initdoneHk1NVector == comp->initdoneHk1NVector) insert(items, INITDONEHK1NVECTOR);
 
 	return(items);
 };
@@ -197,7 +197,7 @@ set<uint> PnlWdbeUntRec::StatApp::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {INITDONEDETAIL, INITDONE1NINTERRUPT, INITDONESIL1NUNIT, INITDONE1NPERIPHERAL, INITDONE1NBANK, INITDONEFWD1NCONTROLLER, INITDONE1NTARGET, INITDONEREF1NSIGNAL, INITDONEREF1NERROR, INITDONEREF1NCOMMAND, INITDONEHK1NMODULE, INITDONEHK1NVECTOR};
+	diffitems = {INITDONEDETAIL, INITDONE1NTARGET, INITDONE1NINTERRUPT, INITDONE1NPERIPHERAL, INITDONESIL1NUNIT, INITDONEFWD1NCONTROLLER, INITDONE1NBANK, INITDONEHK1NMODULE, INITDONEHK1NVECTOR, INITDONEREF1NSIGNAL, INITDONEREF1NERROR, INITDONEREF1NCOMMAND};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -210,39 +210,39 @@ set<uint> PnlWdbeUntRec::StatApp::diff(
 PnlWdbeUntRec::StatShr::StatShr(
 			const uint ixWdbeVExpstate
 			, const string& scrJrefDetail
+			, const string& scrJref1NTarget
 			, const string& scrJref1NInterrupt
+			, const string& scrJref1NPeripheral
 			, const string& scrJrefSil1NUnit
 			, const bool pnlsil1nunitAvail
-			, const string& scrJref1NPeripheral
-			, const string& scrJref1NBank
 			, const string& scrJrefFwd1NController
-			, const string& scrJref1NTarget
+			, const string& scrJref1NBank
+			, const string& scrJrefHk1NModule
+			, const string& scrJrefHk1NVector
 			, const string& scrJrefRef1NSignal
 			, const string& scrJrefRef1NError
 			, const string& scrJrefRef1NCommand
-			, const string& scrJrefHk1NModule
-			, const string& scrJrefHk1NVector
 			, const bool ButRegularizeActive
 		) :
 			Block()
 		{
 	this->ixWdbeVExpstate = ixWdbeVExpstate;
 	this->scrJrefDetail = scrJrefDetail;
+	this->scrJref1NTarget = scrJref1NTarget;
 	this->scrJref1NInterrupt = scrJref1NInterrupt;
+	this->scrJref1NPeripheral = scrJref1NPeripheral;
 	this->scrJrefSil1NUnit = scrJrefSil1NUnit;
 	this->pnlsil1nunitAvail = pnlsil1nunitAvail;
-	this->scrJref1NPeripheral = scrJref1NPeripheral;
-	this->scrJref1NBank = scrJref1NBank;
 	this->scrJrefFwd1NController = scrJrefFwd1NController;
-	this->scrJref1NTarget = scrJref1NTarget;
+	this->scrJref1NBank = scrJref1NBank;
+	this->scrJrefHk1NModule = scrJrefHk1NModule;
+	this->scrJrefHk1NVector = scrJrefHk1NVector;
 	this->scrJrefRef1NSignal = scrJrefRef1NSignal;
 	this->scrJrefRef1NError = scrJrefRef1NError;
 	this->scrJrefRef1NCommand = scrJrefRef1NCommand;
-	this->scrJrefHk1NModule = scrJrefHk1NModule;
-	this->scrJrefHk1NVector = scrJrefHk1NVector;
 	this->ButRegularizeActive = ButRegularizeActive;
 
-	mask = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREF1NINTERRUPT, SCRJREFSIL1NUNIT, PNLSIL1NUNITAVAIL, SCRJREF1NPERIPHERAL, SCRJREF1NBANK, SCRJREFFWD1NCONTROLLER, SCRJREF1NTARGET, SCRJREFREF1NSIGNAL, SCRJREFREF1NERROR, SCRJREFREF1NCOMMAND, SCRJREFHK1NMODULE, SCRJREFHK1NVECTOR, BUTREGULARIZEACTIVE};
+	mask = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREF1NTARGET, SCRJREF1NINTERRUPT, SCRJREF1NPERIPHERAL, SCRJREFSIL1NUNIT, PNLSIL1NUNITAVAIL, SCRJREFFWD1NCONTROLLER, SCRJREF1NBANK, SCRJREFHK1NMODULE, SCRJREFHK1NVECTOR, SCRJREFREF1NSIGNAL, SCRJREFREF1NERROR, SCRJREFREF1NCOMMAND, BUTREGULARIZEACTIVE};
 };
 
 bool PnlWdbeUntRec::StatShr::readXML(
@@ -269,18 +269,18 @@ bool PnlWdbeUntRec::StatShr::readXML(
 			add(IXWDBEVEXPSTATE);
 		};
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefDetail", scrJrefDetail)) add(SCRJREFDETAIL);
+		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJref1NTarget", scrJref1NTarget)) add(SCRJREF1NTARGET);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJref1NInterrupt", scrJref1NInterrupt)) add(SCRJREF1NINTERRUPT);
+		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJref1NPeripheral", scrJref1NPeripheral)) add(SCRJREF1NPERIPHERAL);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefSil1NUnit", scrJrefSil1NUnit)) add(SCRJREFSIL1NUNIT);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "pnlsil1nunitAvail", pnlsil1nunitAvail)) add(PNLSIL1NUNITAVAIL);
-		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJref1NPeripheral", scrJref1NPeripheral)) add(SCRJREF1NPERIPHERAL);
-		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJref1NBank", scrJref1NBank)) add(SCRJREF1NBANK);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefFwd1NController", scrJrefFwd1NController)) add(SCRJREFFWD1NCONTROLLER);
-		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJref1NTarget", scrJref1NTarget)) add(SCRJREF1NTARGET);
+		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJref1NBank", scrJref1NBank)) add(SCRJREF1NBANK);
+		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefHk1NModule", scrJrefHk1NModule)) add(SCRJREFHK1NMODULE);
+		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefHk1NVector", scrJrefHk1NVector)) add(SCRJREFHK1NVECTOR);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefRef1NSignal", scrJrefRef1NSignal)) add(SCRJREFREF1NSIGNAL);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefRef1NError", scrJrefRef1NError)) add(SCRJREFREF1NERROR);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefRef1NCommand", scrJrefRef1NCommand)) add(SCRJREFREF1NCOMMAND);
-		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefHk1NModule", scrJrefHk1NModule)) add(SCRJREFHK1NMODULE);
-		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefHk1NVector", scrJrefHk1NVector)) add(SCRJREFHK1NVECTOR);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButRegularizeActive", ButRegularizeActive)) add(BUTREGULARIZEACTIVE);
 	};
 
@@ -294,18 +294,18 @@ set<uint> PnlWdbeUntRec::StatShr::comm(
 
 	if (ixWdbeVExpstate == comp->ixWdbeVExpstate) insert(items, IXWDBEVEXPSTATE);
 	if (scrJrefDetail == comp->scrJrefDetail) insert(items, SCRJREFDETAIL);
+	if (scrJref1NTarget == comp->scrJref1NTarget) insert(items, SCRJREF1NTARGET);
 	if (scrJref1NInterrupt == comp->scrJref1NInterrupt) insert(items, SCRJREF1NINTERRUPT);
+	if (scrJref1NPeripheral == comp->scrJref1NPeripheral) insert(items, SCRJREF1NPERIPHERAL);
 	if (scrJrefSil1NUnit == comp->scrJrefSil1NUnit) insert(items, SCRJREFSIL1NUNIT);
 	if (pnlsil1nunitAvail == comp->pnlsil1nunitAvail) insert(items, PNLSIL1NUNITAVAIL);
-	if (scrJref1NPeripheral == comp->scrJref1NPeripheral) insert(items, SCRJREF1NPERIPHERAL);
-	if (scrJref1NBank == comp->scrJref1NBank) insert(items, SCRJREF1NBANK);
 	if (scrJrefFwd1NController == comp->scrJrefFwd1NController) insert(items, SCRJREFFWD1NCONTROLLER);
-	if (scrJref1NTarget == comp->scrJref1NTarget) insert(items, SCRJREF1NTARGET);
+	if (scrJref1NBank == comp->scrJref1NBank) insert(items, SCRJREF1NBANK);
+	if (scrJrefHk1NModule == comp->scrJrefHk1NModule) insert(items, SCRJREFHK1NMODULE);
+	if (scrJrefHk1NVector == comp->scrJrefHk1NVector) insert(items, SCRJREFHK1NVECTOR);
 	if (scrJrefRef1NSignal == comp->scrJrefRef1NSignal) insert(items, SCRJREFREF1NSIGNAL);
 	if (scrJrefRef1NError == comp->scrJrefRef1NError) insert(items, SCRJREFREF1NERROR);
 	if (scrJrefRef1NCommand == comp->scrJrefRef1NCommand) insert(items, SCRJREFREF1NCOMMAND);
-	if (scrJrefHk1NModule == comp->scrJrefHk1NModule) insert(items, SCRJREFHK1NMODULE);
-	if (scrJrefHk1NVector == comp->scrJrefHk1NVector) insert(items, SCRJREFHK1NVECTOR);
 	if (ButRegularizeActive == comp->ButRegularizeActive) insert(items, BUTREGULARIZEACTIVE);
 
 	return(items);
@@ -319,7 +319,7 @@ set<uint> PnlWdbeUntRec::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREF1NINTERRUPT, SCRJREFSIL1NUNIT, PNLSIL1NUNITAVAIL, SCRJREF1NPERIPHERAL, SCRJREF1NBANK, SCRJREFFWD1NCONTROLLER, SCRJREF1NTARGET, SCRJREFREF1NSIGNAL, SCRJREFREF1NERROR, SCRJREFREF1NCOMMAND, SCRJREFHK1NMODULE, SCRJREFHK1NVECTOR, BUTREGULARIZEACTIVE};
+	diffitems = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREF1NTARGET, SCRJREF1NINTERRUPT, SCRJREF1NPERIPHERAL, SCRJREFSIL1NUNIT, PNLSIL1NUNITAVAIL, SCRJREFFWD1NCONTROLLER, SCRJREF1NBANK, SCRJREFHK1NMODULE, SCRJREFHK1NVECTOR, SCRJREFREF1NSIGNAL, SCRJREFREF1NERROR, SCRJREFREF1NCOMMAND, BUTREGULARIZEACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);

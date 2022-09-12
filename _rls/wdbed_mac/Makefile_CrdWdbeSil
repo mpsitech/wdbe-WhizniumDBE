@@ -1,8 +1,8 @@
 # file Makefile
 # make file for CrdWdbeSil card job handler, release wdbed_mac
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
-# author: Emily Johnson (auto-generation)
-# date created: 28 Mar 2022
+# author: Alexander Wirthmueller (auto-generation)
+# date created: 11 Sep 2022
 # IP header --- ABOVE
 
 include ../Makefile.inc
@@ -16,7 +16,7 @@ STATLIBFLAGS = rcs
 INCPATH = -I$(BUILDROOT)/dbswdbe -I$(BUILDROOT)/wdbed/VecWdbe -I$(BUILDROOT)/wdbed/IexWdbe -I$(BUILDROOT)/wdbed
 INCPATH += -I${WHIZSDKROOT}/build -I${WHIZSDKROOT}/build/apiwzlm -I/opt/homebrew/include -I/opt/homebrew/opt/curl/include -I/opt/homebrew/opt/libgit2/include -I/opt/homebrew/opt/libmicrohttpd/include -I/opt/homebrew/opt/libxml2/include -I/opt/homebrew/opt/openssl@3/include -I/opt/homebrew/opt/sqlite3/include -I/usr/local/mysql/include
 
-OBJS = CrdWdbeSil.o PnlWdbeSilList.o QryWdbeSilList.o PnlWdbeSilHeadbar.o PnlWdbeSilRec.o PnlWdbeSilHk1NModule.o QryWdbeSilHk1NModule.o PnlWdbeSilRef1NCommand.o QryWdbeSilRef1NCommand.o PnlWdbeSilRef1NError.o QryWdbeSilRef1NError.o PnlWdbeSilHk1NVector.o QryWdbeSilHk1NVector.o PnlWdbeSilRef1NSignal.o QryWdbeSilRef1NSignal.o PnlWdbeSil1NBank.o QryWdbeSil1NBank.o PnlWdbeSilFwd1NController.o QryWdbeSilFwd1NController.o PnlWdbeSil1NTarget.o QryWdbeSil1NTarget.o PnlWdbeSilSil1NUnit.o QryWdbeSilSil1NUnit.o PnlWdbeSil1NPeripheral.o QryWdbeSil1NPeripheral.o PnlWdbeSil1NInterrupt.o QryWdbeSil1NInterrupt.o PnlWdbeSilDetail.o
+OBJS = CrdWdbeSil.o PnlWdbeSilList.o QryWdbeSilList.o PnlWdbeSilHeadbar.o PnlWdbeSilRec.o PnlWdbeSilRef1NCommand.o QryWdbeSilRef1NCommand.o PnlWdbeSilRef1NError.o QryWdbeSilRef1NError.o PnlWdbeSilRef1NSignal.o QryWdbeSilRef1NSignal.o PnlWdbeSilHk1NVector.o QryWdbeSilHk1NVector.o PnlWdbeSilHk1NModule.o QryWdbeSilHk1NModule.o PnlWdbeSil1NBank.o QryWdbeSil1NBank.o PnlWdbeSilFwd1NController.o QryWdbeSilFwd1NController.o PnlWdbeSilSil1NUnit.o QryWdbeSilSil1NUnit.o PnlWdbeSil1NPeripheral.o QryWdbeSil1NPeripheral.o PnlWdbeSil1NInterrupt.o QryWdbeSil1NInterrupt.o PnlWdbeSil1NTarget.o QryWdbeSil1NTarget.o PnlWdbeSilDetail.o
 
 LIB = libcrdwdbesil
 
@@ -29,7 +29,6 @@ all:	$(LIB)
 
 $(LIB):	$(OBJS)
 	$(STATLIB) $(STATLIBFLAGS) $(LIB).a $(OBJS)
-	rm -f *.o
 
 install:
 	mv $(LIB).a $(LIBROOT)/wdbed/

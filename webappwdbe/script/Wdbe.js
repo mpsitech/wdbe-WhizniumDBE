@@ -1,7 +1,7 @@
-WDBE_VERSION = "1.1.18";
+WDBE_VERSION = "1.1.20";
 WDBE_VERSION_MAJOR = 1;
 WDBE_VERSION_MINOR = 1;
-WDBE_VERSION_SUB = 18;
+WDBE_VERSION_SUB = 20;
 
 function getCrdwnd() {
 	if (window.name == "Crd") return window;

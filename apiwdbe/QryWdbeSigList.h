@@ -34,8 +34,8 @@ namespace QryWdbeSigList {
 		static const Sbecore::uint REU = 4;
 		static const Sbecore::uint MGT = 5;
 		static const Sbecore::uint RET = 6;
-		static const Sbecore::uint SRF = 7;
-		static const Sbecore::uint TYP = 8;
+		static const Sbecore::uint TYP = 7;
+		static const Sbecore::uint SRF = 8;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);

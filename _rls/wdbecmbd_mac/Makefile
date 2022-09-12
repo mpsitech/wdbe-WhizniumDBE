@@ -1,8 +1,8 @@
 # file Makefile
 # make file for Wdbe combined daemon, release wdbecmbd_mac
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
-# author: Emily Johnson (auto-generation)
-# date created: 28 Mar 2022
+# author: Alexander Wirthmueller (auto-generation)
+# date created: 11 Sep 2022
 # IP header --- ABOVE
 
 include Makefile.inc
@@ -15,7 +15,7 @@ LINKFLAGS =
 
 INCPATH = -I$(BUILDROOT)/dbswdbe -I$(BUILDROOT)/wdbecmbd/VecWdbe -I$(BUILDROOT)/wdbecmbd/IexWdbe -I$(BUILDROOT)/wdbecmbd
 INCPATH += -I$(BUILDROOT)/wdbecmbd/CrdWdbeUsg -I$(BUILDROOT)/wdbecmbd/CrdWdbeUsr -I$(BUILDROOT)/wdbecmbd/CrdWdbePrs -I$(BUILDROOT)/wdbecmbd/CrdWdbeFil -I$(BUILDROOT)/wdbecmbd/CrdWdbeNav -I$(BUILDROOT)/wdbecmbd/CrdWdbeMch -I$(BUILDROOT)/wdbecmbd/CrdWdbeLib -I$(BUILDROOT)/wdbecmbd/CrdWdbeFam -I$(BUILDROOT)/wdbecmbd/CrdWdbeSil -I$(BUILDROOT)/wdbecmbd/CrdWdbeMtp -I$(BUILDROOT)/wdbecmbd/CrdWdbePrj -I$(BUILDROOT)/wdbecmbd/CrdWdbeVer -I$(BUILDROOT)/wdbecmbd/CrdWdbeSys -I$(BUILDROOT)/wdbecmbd/CrdWdbeTrg -I$(BUILDROOT)/wdbecmbd/CrdWdbeUnt -I$(BUILDROOT)/wdbecmbd/CrdWdbeRls -I$(BUILDROOT)/wdbecmbd/CrdWdbeCpr -I$(BUILDROOT)/wdbecmbd/CrdWdbeCvr -I$(BUILDROOT)/wdbecmbd/CrdWdbePph -I$(BUILDROOT)/wdbecmbd/CrdWdbeMod -I$(BUILDROOT)/wdbecmbd/CrdWdbeVec -I$(BUILDROOT)/wdbecmbd/CrdWdbeVit -I$(BUILDROOT)/wdbecmbd/CrdWdbeCmd -I$(BUILDROOT)/wdbecmbd/CrdWdbeErr -I$(BUILDROOT)/wdbecmbd/CrdWdbePpl -I$(BUILDROOT)/wdbecmbd/CrdWdbeSeg -I$(BUILDROOT)/wdbecmbd/CrdWdbeBnk -I$(BUILDROOT)/wdbecmbd/CrdWdbePin -I$(BUILDROOT)/wdbecmbd/CrdWdbeInt -I$(BUILDROOT)/wdbecmbd/CrdWdbeSns -I$(BUILDROOT)/wdbecmbd/CrdWdbeVar -I$(BUILDROOT)/wdbecmbd/CrdWdbeGen -I$(BUILDROOT)/wdbecmbd/CrdWdbePrt -I$(BUILDROOT)/wdbecmbd/CrdWdbeSig -I$(BUILDROOT)/wdbecmbd/CrdWdbePrc -I$(BUILDROOT)/wdbecmbd/CrdWdbeFst -I$(BUILDROOT)/wdbecmbd/CrdWdbeUtl
-INCPATH += -I$(BUILDROOT)/wdbecmbd/WdbeWrmcu -I$(BUILDROOT)/wdbecmbd/WdbeWrfpga -I$(BUILDROOT)/wdbecmbd/WdbeWrdev -I$(BUILDROOT)/wdbecmbd/WdbeMtpCplmsttd -I$(BUILDROOT)/wdbecmbd/WdbeMtpGenfst -I$(BUILDROOT)/wdbecmbd/WdbeMtpWrfpga -I$(BUILDROOT)/wdbecmbd/WdbeMtpWrmcu -I$(BUILDROOT)/wdbecmbd/WdbePlhfpga -I$(BUILDROOT)/wdbecmbd/WdbePlhmcu -I$(BUILDROOT)/wdbecmbd/WdbePrcfile -I$(BUILDROOT)/wdbecmbd/WdbePrctree -I$(BUILDROOT)/wdbecmbd/WdbeMtpCplmstbu -I$(BUILDROOT)/wdbecmbd/WdbeMtpPlhmcu -I$(BUILDROOT)/wdbecmbd/WdbeMtpPlhfpga -I$(BUILDROOT)/wdbecmbd/WdbeGenfst -I$(BUILDROOT)/wdbecmbd/WdbeGen -I$(BUILDROOT)/wdbecmbd/WdbeCplmst
+INCPATH += -I$(BUILDROOT)/wdbecmbd/WdbeWrmcu -I$(BUILDROOT)/wdbecmbd/WdbeWrfpga -I$(BUILDROOT)/wdbecmbd/WdbeWrdev -I$(BUILDROOT)/wdbecmbd/WdbePrctree -I$(BUILDROOT)/wdbecmbd/WdbePrcfile -I$(BUILDROOT)/wdbecmbd/WdbePlhmcu -I$(BUILDROOT)/wdbecmbd/WdbePlhfpga -I$(BUILDROOT)/wdbecmbd/WdbeMtpWrmcu -I$(BUILDROOT)/wdbecmbd/WdbeMtpWrfpga -I$(BUILDROOT)/wdbecmbd/WdbeMtpGenfst -I$(BUILDROOT)/wdbecmbd/WdbeMtpCplmsttd -I$(BUILDROOT)/wdbecmbd/WdbeGenfst -I$(BUILDROOT)/wdbecmbd/WdbeMtpPlhfpga -I$(BUILDROOT)/wdbecmbd/WdbeMtpPlhmcu -I$(BUILDROOT)/wdbecmbd/WdbeMtpCplmstbu -I$(BUILDROOT)/wdbecmbd/WdbeGen -I$(BUILDROOT)/wdbecmbd/WdbeCplmst
 INCPATH += -I${WHIZSDKROOT}/build -I${WHIZSDKROOT}/build/apiwzlm -I/opt/homebrew/include -I/opt/homebrew/opt/curl/include -I/opt/homebrew/opt/libgit2/include -I/opt/homebrew/opt/libmicrohttpd/include -I/opt/homebrew/opt/libxml2/include -I/opt/homebrew/opt/openssl@3/include -I/opt/homebrew/opt/sqlite3/include -I/usr/local/mysql/include
 
 PCHS = Wdbecmbd.h.gch
@@ -29,7 +29,7 @@ LIBPATH += -L$(LIBROOT)/wdbecmbd
 LIBPATH += -L${WHIZSDKROOT}/lib -L/opt/homebrew/lib -L/opt/homebrew/opt/curl/lib -L/opt/homebrew/opt/libgit2/lib -L/opt/homebrew/opt/libmicrohttpd/lib -L/opt/homebrew/opt/libxml2/include -L/opt/homebrew/opt/openssl@3/lib -L/opt/homebrew/opt/sqlite3/lib -L/usr/local/mysql/lib
 
 LIBS = -lcrdwdbeusg -lcrdwdbeusr -lcrdwdbeprs -lcrdwdbefil -lcrdwdbenav -lcrdwdbemch -lcrdwdbelib -lcrdwdbefam -lcrdwdbesil -lcrdwdbemtp -lcrdwdbeprj -lcrdwdbever -lcrdwdbesys -lcrdwdbetrg -lcrdwdbeunt -lcrdwdberls -lcrdwdbecpr -lcrdwdbecvr -lcrdwdbepph -lcrdwdbemod -lcrdwdbevec -lcrdwdbevit -lcrdwdbecmd -lcrdwdbeerr -lcrdwdbeppl -lcrdwdbeseg -lcrdwdbebnk -lcrdwdbepin -lcrdwdbeint -lcrdwdbesns -lcrdwdbevar -lcrdwdbegen -lcrdwdbeprt -lcrdwdbesig -lcrdwdbeprc -lcrdwdbefst -lcrdwdbeutl
-LIBS += -lwdbewrmcu -lwdbewrfpga -lwdbewrdev -lwdbemtpcplmsttd -lwdbemtpgenfst -lwdbemtpwrfpga -lwdbemtpwrmcu -lwdbeplhfpga -lwdbeplhmcu -lwdbeprcfile -lwdbeprctree -lwdbemtpcplmstbu -lwdbemtpplhmcu -lwdbemtpplhfpga -lwdbegenfst -lwdbegen -lwdbecplmst
+LIBS += -lwdbewrmcu -lwdbewrfpga -lwdbewrdev -lwdbeprctree -lwdbeprcfile -lwdbeplhmcu -lwdbeplhfpga -lwdbemtpwrmcu -lwdbemtpwrfpga -lwdbemtpgenfst -lwdbemtpcplmsttd -lwdbegenfst -lwdbemtpplhfpga -lwdbemtpplhmcu -lwdbemtpcplmstbu -lwdbegen -lwdbecplmst
 LIBS += -liexwdbe -lvecwdbe -ldbswdbe
 LIBS += -lapiwzlm -lcurl -lgit2 -lmicrohttpd -lsbecore_dbsmon -lsbecore_mon
 LIBS += -ldbswzem
@@ -52,7 +52,6 @@ all:	$(PCHS) $(EXE)
 
 $(EXE):	$(OBJS)
 	$(LINK) $(LINKFLAGS) $(OBJS) $(LIBPATH) $(LIBS) -o $(EXE)
-	rm -f *.o
 
 pch:	$(PCHS)
 

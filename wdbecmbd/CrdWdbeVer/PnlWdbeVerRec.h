@@ -18,8 +18,8 @@
 #include "PnlWdbeVerRef1NFile.h"
 #include "PnlWdbeVer1NUnit.h"
 #include "PnlWdbeVerBvr1NVersion.h"
-#include "PnlWdbeVer1NRelease.h"
 #include "PnlWdbeVer1NSystem.h"
+#include "PnlWdbeVer1NRelease.h"
 #include "PnlWdbeVerDetail.h"
 
 #define VecVWdbeVerRecDo PnlWdbeVerRec::VecVDo
@@ -147,7 +147,7 @@ public:
 	public:
 		std::string getSrefsMask();
 
-		void readJSON(Json::Value& sup, bool addbasetag = false);
+		void readJSON(const Json::Value& sup, bool addbasetag = false);
 		void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 	};
 
@@ -193,8 +193,8 @@ public:
 	PnlWdbeVerRef1NFile* pnlref1nfile;
 	PnlWdbeVer1NUnit* pnl1nunit;
 	PnlWdbeVerBvr1NVersion* pnlbvr1nversion;
-	PnlWdbeVer1NRelease* pnl1nrelease;
 	PnlWdbeVer1NSystem* pnl1nsystem;
+	PnlWdbeVer1NRelease* pnl1nrelease;
 	PnlWdbeVerDetail* pnldetail;
 
 	WdbeMVersion recVer;

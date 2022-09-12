@@ -1,4 +1,4 @@
-IexWdbeIni v1.1.18
+IexWdbeIni v1.1.20
 ImeIAVKeylistKey1.srefKlsIxWdbeVKeylist	sref	Avail	Implied	Title	Comment
 KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuAdd_xlnx_v12_0			adapt port widths	
 KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuAxihostif_Easy_v1_0			connect AXI controllers, CRC and timeout	
@@ -15,13 +15,13 @@ KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuDpbram_xlnx_v8_4			adapt port widths
 KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuDpsram_mchp_v1_0			adapt port identifiers and widths	
 KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuDsp48_xlnx_v3_0_aMultB			adapt port widths	
 KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuDsp48_xlnx_v3_0_aPlusDPlusC			adapt port widths	
+KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuGpio_Easy_v1_0			adapt port widths	
 KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuIod_mchp_v1_0_mipirx			adapt port widths	
 KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuMipidec_mchp_v1_0			adapt port widths	
 KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuMpfs_ip_AXI_v1_0			add pin substitute signals	
 KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuMult_xlnx_v12_0			adapt port widths	
 KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuOled128x32_v1_0			connect SPI interface	
 KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuPmmu_v1_0			connect buffers, fill slot vector	
-KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuSelectio_xlnx_v5_1_mipicsi			adapt port widths	
 KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuSelectio_xlnx_v5_1_mipirx			adapt port widths	
 KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuSpbram_v1_0			adapt internal wiring	
 KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuSpifwd_v1_0			connect buffers, SPI interface, CRC and timeout	
@@ -32,6 +32,7 @@ KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuTop_lttc_v1_0			connect clock primitiv
 KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuTop_mchp_v1_0			connect clock primitives	
 KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuTop_xlnx_v1_0			connect clock primitives	
 KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuTpsram_mchp_v1_0			adapt port identifiers and widths	
+KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuUart_Easy_v1_0			connect UART controllers and timeout	
 KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuUarthostif_Easy_v1_0			connect UART controllers, CRC and timeout	
 KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuUarthostif_v1_0			connect UART controllers, CRC and timeout	
 KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuUartrx_v1_0_Mcu			add handshake with managing module	
@@ -43,6 +44,8 @@ KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuZynq_ip_AXI_v2_0			add pin substitute 
 KlstKWdbeMtpCplmsttdCustop	WdbeMtpCplmsttdCmdinv_v1_0			adapt buffer size	
 KlstKWdbeMtpCplmsttdCustop	WdbeMtpCplmsttdCmdret_v1_0			adapt buffer size	
 KlstKWdbeMtpCplmsttdCustop	WdbeMtpCplmsttdDpbram_v1_0			infer BRAM primitives and adapt port widths	
+KlstKWdbeMtpCplmsttdCustop	WdbeMtpCplmsttdGpio_Easy_v1_0			infer tri-state buffer primitives	
+KlstKWdbeMtpCplmsttdCustop	WdbeMtpCplmsttdI2c_Easy_v1_0			infer tri-state buffer primitive	
 KlstKWdbeMtpCplmsttdCustop	WdbeMtpCplmsttdPmmu_v1_0			adapt buffer sizes	
 KlstKWdbeMtpCplmsttdCustop	WdbeMtpCplmsttdSpbram_v1_0			infer BRAM primitives and adapt port widths	
 KlstKWdbeMtpCplmsttdCustop	WdbeMtpCplmsttdTop_lttc_v1_0			infer clock primitives and adapt ports	

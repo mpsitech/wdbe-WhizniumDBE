@@ -154,11 +154,11 @@ SessWdbe::SessWdbe(
 	statshr.jrefCrdnav = crdnav->jref;
 
 	xchg->addClstn(VecWdbeVCall::CALLWDBEREFPRESET, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecWdbeVCall::CALLWDBELOG, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecWdbeVCall::CALLWDBECRDACTIVE, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBERECACCESS, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBELOG, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBECRDOPEN, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBECRDCLOSE, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBECRDACTIVE, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -2095,16 +2095,16 @@ void SessWdbe::handleCall(
 		) {
 	if (call->ixVCall == VecWdbeVCall::CALLWDBEREFPRESET) {
 		call->abort = handleCallWdbeRefPreSet(dbswdbe, call->jref, call->argInv.ix, call->argInv.ref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBELOG) {
-		call->abort = handleCallWdbeLog(dbswdbe, call->jref, call->argInv.ix, call->argInv.ref, call->argInv.sref, call->argInv.intval);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECRDACTIVE) {
-		call->abort = handleCallWdbeCrdActive(dbswdbe, call->jref, call->argInv.ix, call->argRet.ix);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBERECACCESS) {
 		call->abort = handleCallWdbeRecaccess(dbswdbe, call->jref, call->argInv.ix, call->argInv.ref, call->argRet.ix);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBELOG) {
+		call->abort = handleCallWdbeLog(dbswdbe, call->jref, call->argInv.ix, call->argInv.ref, call->argInv.sref, call->argInv.intval);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECRDOPEN) {
 		call->abort = handleCallWdbeCrdOpen(dbswdbe, call->jref, call->argInv.ix, call->argInv.ref, call->argInv.sref, call->argInv.intval, call->argRet.ref);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECRDCLOSE) {
 		call->abort = handleCallWdbeCrdClose(dbswdbe, call->jref, call->argInv.ix);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECRDACTIVE) {
+		call->abort = handleCallWdbeCrdActive(dbswdbe, call->jref, call->argInv.ix, call->argRet.ix);
 	};
 };
 
@@ -2139,6 +2139,18 @@ bool SessWdbe::handleCallWdbeRefPreSet(
 	return retval;
 };
 
+bool SessWdbe::handleCallWdbeRecaccess(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+			, const uint ixInv
+			, const ubigint refInv
+			, uint& ixRet
+		) {
+	bool retval = false;
+	ixRet = checkRecaccess(dbswdbe, ixInv, refInv);
+	return retval;
+};
+
 bool SessWdbe::handleCallWdbeLog(
 			DbsWdbe* dbswdbe
 			, const ubigint jrefTrig
@@ -2149,29 +2161,6 @@ bool SessWdbe::handleCallWdbeLog(
 		) {
 	bool retval = false;
 	logRecaccess(dbswdbe, ixInv, refInv, VecWdbeVCard::getIx(srefInv), intvalInv);
-	return retval;
-};
-
-bool SessWdbe::handleCallWdbeCrdActive(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-			, const uint ixInv
-			, uint& ixRet
-		) {
-	bool retval = false;
-	ixRet = checkCrdActive(ixInv);
-	return retval;
-};
-
-bool SessWdbe::handleCallWdbeRecaccess(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-			, const uint ixInv
-			, const ubigint refInv
-			, uint& ixRet
-		) {
-	bool retval = false;
-	ixRet = checkRecaccess(dbswdbe, ixInv, refInv);
 	return retval;
 };
 
@@ -2330,5 +2319,16 @@ else if (ixInv == VecWdbeVCard::CRDWDBEMCH) eraseSubjobByJref(crdmchs, jrefTrig)
 	else if (ixInv == VecWdbeVCard::CRDWDBEPRC) eraseSubjobByJref(crdprcs, jrefTrig);
 	else if (ixInv == VecWdbeVCard::CRDWDBEFST) eraseSubjobByJref(crdfsts, jrefTrig);
 	else if (ixInv == VecWdbeVCard::CRDWDBEUTL) eraseSubjobByJref(crdutls, jrefTrig);
+	return retval;
+};
+
+bool SessWdbe::handleCallWdbeCrdActive(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+			, const uint ixInv
+			, uint& ixRet
+		) {
+	bool retval = false;
+	ixRet = checkCrdActive(ixInv);
 	return retval;
 };

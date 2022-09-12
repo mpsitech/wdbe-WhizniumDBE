@@ -20,8 +20,8 @@ uint QryWdbeCvrList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "bcv") return BCV;
 	if (s == "ste") return STE;
+	if (s == "bcv") return BCV;
 	if (s == "cpr") return CPR;
 	if (s == "own") return OWN;
 	if (s == "grp") return GRP;
@@ -32,8 +32,8 @@ uint QryWdbeCvrList::VecVOrd::getIx(
 string QryWdbeCvrList::VecVOrd::getSref(
 			const uint ix
 		) {
-	if (ix == BCV) return("bcv");
 	if (ix == STE) return("ste");
+	if (ix == BCV) return("bcv");
 	if (ix == CPR) return("cpr");
 	if (ix == OWN) return("own");
 	if (ix == GRP) return("grp");
@@ -187,15 +187,14 @@ QryWdbeCvrList::StgIac::StgIac(
 };
 
 bool QryWdbeCvrList::StgIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["StgIacQryWdbeCvrList"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["StgIacQryWdbeCvrList"];}();
 
 	basefound = (me != Json::nullValue);
 

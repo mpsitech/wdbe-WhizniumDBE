@@ -25,8 +25,8 @@ uint QryWdbeVerList::VecVOrd::getIx(
 	if (s == "bvr") return BVR;
 	if (s == "ste") return STE;
 	if (s == "prj") return PRJ;
-	if (s == "grp") return GRP;
 	if (s == "own") return OWN;
+	if (s == "grp") return GRP;
 
 	return(0);
 };
@@ -37,8 +37,8 @@ string QryWdbeVerList::VecVOrd::getSref(
 	if (ix == BVR) return("bvr");
 	if (ix == STE) return("ste");
 	if (ix == PRJ) return("prj");
-	if (ix == GRP) return("grp");
 	if (ix == OWN) return("own");
+	if (ix == GRP) return("grp");
 
 	return("");
 };

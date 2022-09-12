@@ -11,6 +11,22 @@ using namespace std;
 using namespace Sbecore;
 using namespace Xmlio;
 
+bool PnlWdbeModRec::evalPnlctrhk1nvectorAvail(
+			DbsWdbe* dbswdbe
+		) {
+	// !mdl.ctrEq(0)
+
+	vector<bool> args;
+	bool a;
+
+	a = false; a = (recMdl.refWdbeMController == 0);
+	args.push_back(a);
+	a = args.back(); args.pop_back();
+	args.push_back(!a);
+
+	return(args.back());
+};
+
 bool PnlWdbeModRec::evalPnlctrref1nerrorAvail(
 			DbsWdbe* dbswdbe
 		) {
@@ -28,22 +44,6 @@ bool PnlWdbeModRec::evalPnlctrref1nerrorAvail(
 };
 
 bool PnlWdbeModRec::evalPnlctrref1ncommandAvail(
-			DbsWdbe* dbswdbe
-		) {
-	// !mdl.ctrEq(0)
-
-	vector<bool> args;
-	bool a;
-
-	a = false; a = (recMdl.refWdbeMController == 0);
-	args.push_back(a);
-	a = args.back(); args.pop_back();
-	args.push_back(!a);
-
-	return(args.back());
-};
-
-bool PnlWdbeModRec::evalPnlctrhk1nvectorAvail(
 			DbsWdbe* dbswdbe
 		) {
 	// !mdl.ctrEq(0)

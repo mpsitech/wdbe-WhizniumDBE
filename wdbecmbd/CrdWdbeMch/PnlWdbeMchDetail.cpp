@@ -44,8 +44,8 @@ PnlWdbeMchDetail::PnlWdbeMchDetail(
 
 	// IP constructor.cust2 --- INSERT
 
-	xchg->addClstn(VecWdbeVCall::CALLWDBEMCH_SUPEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBEMCH_CCHEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBEMCH_SUPEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -271,10 +271,10 @@ void PnlWdbeMchDetail::handleCall(
 		) {
 	if (call->ixVCall == VecWdbeVCall::CALLWDBEMCHUPD_REFEQ) {
 		call->abort = handleCallWdbeMchUpd_refEq(dbswdbe, call->jref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEMCH_SUPEQ) {
-		call->abort = handleCallWdbeMch_supEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEMCH_CCHEQ) {
 		call->abort = handleCallWdbeMch_cchEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEMCH_SUPEQ) {
+		call->abort = handleCallWdbeMch_supEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
 	};
 };
 
@@ -287,17 +287,6 @@ bool PnlWdbeMchDetail::handleCallWdbeMchUpd_refEq(
 	return retval;
 };
 
-bool PnlWdbeMchDetail::handleCallWdbeMch_supEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-			, const ubigint refInv
-			, bool& boolvalRet
-		) {
-	bool retval = false;
-	boolvalRet = (recMch.supRefWdbeMMachine == refInv); // IP handleCallWdbeMch_supEq --- LINE
-	return retval;
-};
-
 bool PnlWdbeMchDetail::handleCallWdbeMch_cchEq(
 			DbsWdbe* dbswdbe
 			, const ubigint jrefTrig
@@ -306,5 +295,16 @@ bool PnlWdbeMchDetail::handleCallWdbeMch_cchEq(
 		) {
 	bool retval = false;
 	boolvalRet = (recMch.cchRefWdbeMMachine == refInv); // IP handleCallWdbeMch_cchEq --- LINE
+	return retval;
+};
+
+bool PnlWdbeMchDetail::handleCallWdbeMch_supEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+			, const ubigint refInv
+			, bool& boolvalRet
+		) {
+	bool retval = false;
+	boolvalRet = (recMch.supRefWdbeMMachine == refInv); // IP handleCallWdbeMch_supEq --- LINE
 	return retval;
 };

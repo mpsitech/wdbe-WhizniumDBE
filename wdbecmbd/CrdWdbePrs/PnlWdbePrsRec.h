@@ -15,8 +15,8 @@
 // IP include.cust --- INSERT
 
 #include "PnlWdbePrsMNCoreproject.h"
-#include "PnlWdbePrsADetail.h"
 #include "PnlWdbePrsMNProject.h"
+#include "PnlWdbePrsADetail.h"
 #include "PnlWdbePrsDetail.h"
 
 #define VecVWdbePrsRecDo PnlWdbePrsRec::VecVDo
@@ -138,7 +138,7 @@ public:
 	public:
 		std::string getSrefsMask();
 
-		void readJSON(Json::Value& sup, bool addbasetag = false);
+		void readJSON(const Json::Value& sup, bool addbasetag = false);
 		void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 	};
 
@@ -181,8 +181,8 @@ public:
 	StatShr statshr;
 
 	PnlWdbePrsMNCoreproject* pnlmncoreproject;
-	PnlWdbePrsADetail* pnladetail;
 	PnlWdbePrsMNProject* pnlmnproject;
+	PnlWdbePrsADetail* pnladetail;
 	PnlWdbePrsDetail* pnldetail;
 
 	WdbeMPerson recPrs;

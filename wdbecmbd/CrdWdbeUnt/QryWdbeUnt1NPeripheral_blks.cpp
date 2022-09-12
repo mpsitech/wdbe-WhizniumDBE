@@ -149,15 +149,14 @@ QryWdbeUnt1NPeripheral::StgIac::StgIac(
 };
 
 bool QryWdbeUnt1NPeripheral::StgIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["StgIacQryWdbeUnt1NPeripheral"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["StgIacQryWdbeUnt1NPeripheral"];}();
 
 	basefound = (me != Json::nullValue);
 

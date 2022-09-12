@@ -22,9 +22,9 @@ uint QryWdbePrjList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "tit") return TIT;
 	if (s == "ver") return VER;
 	if (s == "sho") return SHO;
+	if (s == "tit") return TIT;
 	if (s == "own") return OWN;
 	if (s == "grp") return GRP;
 
@@ -34,9 +34,9 @@ uint QryWdbePrjList::VecVOrd::getIx(
 string QryWdbePrjList::VecVOrd::getSref(
 			const uint ix
 		) {
-	if (ix == TIT) return("tit");
 	if (ix == VER) return("ver");
 	if (ix == SHO) return("sho");
+	if (ix == TIT) return("tit");
 	if (ix == OWN) return("own");
 	if (ix == GRP) return("grp");
 

@@ -210,8 +210,8 @@ void QryWdbeBnkList::rerun_orderSQL(
 			string& sqlstr
 			, const uint preIxOrd
 		) {
-	if (preIxOrd == VecVOrd::UNT) sqlstr += " ORDER BY TblWdbeMBank.refWdbeMUnit ASC";
-	else if (preIxOrd == VecVOrd::SRF) sqlstr += " ORDER BY TblWdbeMBank.sref ASC";
+	if (preIxOrd == VecVOrd::SRF) sqlstr += " ORDER BY TblWdbeMBank.sref ASC";
+	else if (preIxOrd == VecVOrd::UNT) sqlstr += " ORDER BY TblWdbeMBank.refWdbeMUnit ASC";
 };
 
 void QryWdbeBnkList::fetch(

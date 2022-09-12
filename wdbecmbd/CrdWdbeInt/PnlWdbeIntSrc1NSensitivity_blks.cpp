@@ -145,15 +145,14 @@ PnlWdbeIntSrc1NSensitivity::StgIac::StgIac(
 };
 
 bool PnlWdbeIntSrc1NSensitivity::StgIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["StgIacWdbeIntSrc1NSensitivity"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["StgIacWdbeIntSrc1NSensitivity"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -310,15 +309,14 @@ string PnlWdbeIntSrc1NSensitivity::DpchAppData::getSrefsMask() {
 };
 
 void PnlWdbeIntSrc1NSensitivity::DpchAppData::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbeIntSrc1NSensitivityData"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbeIntSrc1NSensitivityData"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -384,15 +382,14 @@ string PnlWdbeIntSrc1NSensitivity::DpchAppDo::getSrefsMask() {
 };
 
 void PnlWdbeIntSrc1NSensitivity::DpchAppDo::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbeIntSrc1NSensitivityDo"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbeIntSrc1NSensitivityDo"];}();
 
 	basefound = (me != Json::nullValue);
 

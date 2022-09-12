@@ -15,8 +15,8 @@
 // IP include.cust --- INSERT
 
 #include "PnlWdbeCprList.h"
-#include "PnlWdbeCprHeadbar.h"
 #include "PnlWdbeCprRec.h"
+#include "PnlWdbeCprHeadbar.h"
 #include "DlgWdbeCprNew.h"
 
 #define VecVWdbeCprDo CrdWdbeCpr::VecVDo
@@ -159,7 +159,7 @@ public:
 	public:
 		std::string getSrefsMask();
 
-		void readJSON(Json::Value& sup, bool addbasetag = false);
+		void readJSON(const Json::Value& sup, bool addbasetag = false);
 		void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 	};
 
@@ -208,8 +208,8 @@ public:
 	Sbecore::Feed feedFSge;
 
 	PnlWdbeCprList* pnllist;
-	PnlWdbeCprHeadbar* pnlheadbar;
 	PnlWdbeCprRec* pnlrec;
+	PnlWdbeCprHeadbar* pnlheadbar;
 	DlgWdbeCprNew* dlgnew;
 
 	// IP vars.cust --- INSERT
@@ -242,8 +242,8 @@ public:
 
 private:
 	bool handleCallWdbeRefPreSet(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, const Sbecore::ubigint refInv);
-	bool handleCallWdbeDlgClose(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 	bool handleCallWdbeStatChg(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbeDlgClose(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 
 private:
 	void changeStage(DbsWdbe* dbswdbe, Sbecore::uint _ixVSge, DpchEngWdbe** dpcheng = NULL);

@@ -108,8 +108,8 @@ void PnlWdbeCvrRec::StatApp::writeJSON(
 			Json::Value& sup
 			, string difftag
 			, const bool initdoneDetail
-			, const bool initdoneAIp
 			, const bool initdoneAPlh
+			, const bool initdoneAIp
 			, const bool initdoneBcv1NCoreversion
 			, const bool initdoneHk1NModule
 		) {
@@ -118,8 +118,8 @@ void PnlWdbeCvrRec::StatApp::writeJSON(
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
 	me["initdoneDetail"] = initdoneDetail;
-	me["initdoneAIp"] = initdoneAIp;
 	me["initdoneAPlh"] = initdoneAPlh;
+	me["initdoneAIp"] = initdoneAIp;
 	me["initdoneBcv1NCoreversion"] = initdoneBcv1NCoreversion;
 	me["initdoneHk1NModule"] = initdoneHk1NModule;
 };
@@ -129,8 +129,8 @@ void PnlWdbeCvrRec::StatApp::writeXML(
 			, string difftag
 			, bool shorttags
 			, const bool initdoneDetail
-			, const bool initdoneAIp
 			, const bool initdoneAPlh
+			, const bool initdoneAIp
 			, const bool initdoneBcv1NCoreversion
 			, const bool initdoneHk1NModule
 		) {
@@ -142,8 +142,8 @@ void PnlWdbeCvrRec::StatApp::writeXML(
 
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
 		writeBoolAttr(wr, itemtag, "sref", "initdoneDetail", initdoneDetail);
-		writeBoolAttr(wr, itemtag, "sref", "initdoneAIp", initdoneAIp);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneAPlh", initdoneAPlh);
+		writeBoolAttr(wr, itemtag, "sref", "initdoneAIp", initdoneAIp);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneBcv1NCoreversion", initdoneBcv1NCoreversion);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneHk1NModule", initdoneHk1NModule);
 	xmlTextWriterEndElement(wr);
@@ -156,8 +156,8 @@ void PnlWdbeCvrRec::StatApp::writeXML(
 PnlWdbeCvrRec::StatShr::StatShr(
 			const uint ixWdbeVExpstate
 			, const ubigint jrefDetail
-			, const ubigint jrefAIp
 			, const ubigint jrefAPlh
+			, const ubigint jrefAIp
 			, const ubigint jrefBcv1NCoreversion
 			, const ubigint jrefHk1NModule
 			, const bool ButRegularizeActive
@@ -166,13 +166,13 @@ PnlWdbeCvrRec::StatShr::StatShr(
 		{
 	this->ixWdbeVExpstate = ixWdbeVExpstate;
 	this->jrefDetail = jrefDetail;
-	this->jrefAIp = jrefAIp;
 	this->jrefAPlh = jrefAPlh;
+	this->jrefAIp = jrefAIp;
 	this->jrefBcv1NCoreversion = jrefBcv1NCoreversion;
 	this->jrefHk1NModule = jrefHk1NModule;
 	this->ButRegularizeActive = ButRegularizeActive;
 
-	mask = {IXWDBEVEXPSTATE, JREFDETAIL, JREFAIP, JREFAPLH, JREFBCV1NCOREVERSION, JREFHK1NMODULE, BUTREGULARIZEACTIVE};
+	mask = {IXWDBEVEXPSTATE, JREFDETAIL, JREFAPLH, JREFAIP, JREFBCV1NCOREVERSION, JREFHK1NMODULE, BUTREGULARIZEACTIVE};
 };
 
 void PnlWdbeCvrRec::StatShr::writeJSON(
@@ -185,8 +185,8 @@ void PnlWdbeCvrRec::StatShr::writeJSON(
 
 	me["srefIxWdbeVExpstate"] = VecWdbeVExpstate::getSref(ixWdbeVExpstate);
 	me["scrJrefDetail"] = Scr::scramble(jrefDetail);
-	me["scrJrefAIp"] = Scr::scramble(jrefAIp);
 	me["scrJrefAPlh"] = Scr::scramble(jrefAPlh);
+	me["scrJrefAIp"] = Scr::scramble(jrefAIp);
 	me["scrJrefBcv1NCoreversion"] = Scr::scramble(jrefBcv1NCoreversion);
 	me["scrJrefHk1NModule"] = Scr::scramble(jrefHk1NModule);
 	me["ButRegularizeActive"] = ButRegularizeActive;
@@ -206,8 +206,8 @@ void PnlWdbeCvrRec::StatShr::writeXML(
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
 		writeStringAttr(wr, itemtag, "sref", "srefIxWdbeVExpstate", VecWdbeVExpstate::getSref(ixWdbeVExpstate));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefDetail", Scr::scramble(jrefDetail));
-		writeStringAttr(wr, itemtag, "sref", "scrJrefAIp", Scr::scramble(jrefAIp));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefAPlh", Scr::scramble(jrefAPlh));
+		writeStringAttr(wr, itemtag, "sref", "scrJrefAIp", Scr::scramble(jrefAIp));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefBcv1NCoreversion", Scr::scramble(jrefBcv1NCoreversion));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefHk1NModule", Scr::scramble(jrefHk1NModule));
 		writeBoolAttr(wr, itemtag, "sref", "ButRegularizeActive", ButRegularizeActive);
@@ -221,8 +221,8 @@ set<uint> PnlWdbeCvrRec::StatShr::comm(
 
 	if (ixWdbeVExpstate == comp->ixWdbeVExpstate) insert(items, IXWDBEVEXPSTATE);
 	if (jrefDetail == comp->jrefDetail) insert(items, JREFDETAIL);
-	if (jrefAIp == comp->jrefAIp) insert(items, JREFAIP);
 	if (jrefAPlh == comp->jrefAPlh) insert(items, JREFAPLH);
+	if (jrefAIp == comp->jrefAIp) insert(items, JREFAIP);
 	if (jrefBcv1NCoreversion == comp->jrefBcv1NCoreversion) insert(items, JREFBCV1NCOREVERSION);
 	if (jrefHk1NModule == comp->jrefHk1NModule) insert(items, JREFHK1NMODULE);
 	if (ButRegularizeActive == comp->ButRegularizeActive) insert(items, BUTREGULARIZEACTIVE);
@@ -238,7 +238,7 @@ set<uint> PnlWdbeCvrRec::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {IXWDBEVEXPSTATE, JREFDETAIL, JREFAIP, JREFAPLH, JREFBCV1NCOREVERSION, JREFHK1NMODULE, BUTREGULARIZEACTIVE};
+	diffitems = {IXWDBEVEXPSTATE, JREFDETAIL, JREFAPLH, JREFAIP, JREFBCV1NCOREVERSION, JREFHK1NMODULE, BUTREGULARIZEACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -304,15 +304,14 @@ string PnlWdbeCvrRec::DpchAppDo::getSrefsMask() {
 };
 
 void PnlWdbeCvrRec::DpchAppDo::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbeCvrRecDo"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbeCvrRecDo"];}();
 
 	basefound = (me != Json::nullValue);
 

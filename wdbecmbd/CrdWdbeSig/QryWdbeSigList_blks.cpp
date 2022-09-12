@@ -26,8 +26,8 @@ uint QryWdbeSigList::VecVOrd::getIx(
 	if (s == "reu") return REU;
 	if (s == "mgt") return MGT;
 	if (s == "ret") return RET;
-	if (s == "srf") return SRF;
 	if (s == "typ") return TYP;
+	if (s == "srf") return SRF;
 
 	return(0);
 };
@@ -41,8 +41,8 @@ string QryWdbeSigList::VecVOrd::getSref(
 	if (ix == REU) return("reu");
 	if (ix == MGT) return("mgt");
 	if (ix == RET) return("ret");
-	if (ix == SRF) return("srf");
 	if (ix == TYP) return("typ");
+	if (ix == SRF) return("srf");
 
 	return("");
 };
@@ -193,15 +193,14 @@ QryWdbeSigList::StgIac::StgIac(
 };
 
 bool QryWdbeSigList::StgIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["StgIacQryWdbeSigList"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["StgIacQryWdbeSigList"];}();
 
 	basefound = (me != Json::nullValue);
 

@@ -22,8 +22,8 @@ public class QryWdbeVerList {
 		public static final int BVR = 1;
 		public static final int STE = 2;
 		public static final int PRJ = 3;
-		public static final int GRP = 4;
-		public static final int OWN = 5;
+		public static final int OWN = 4;
+		public static final int GRP = 5;
 
 		public static int getIx(
 					String sref
@@ -33,8 +33,8 @@ public class QryWdbeVerList {
 			if (s.equals("bvr")) return BVR;
 			if (s.equals("ste")) return STE;
 			if (s.equals("prj")) return PRJ;
-			if (s.equals("grp")) return GRP;
 			if (s.equals("own")) return OWN;
+			if (s.equals("grp")) return GRP;
 
 			return 0;
 		};
@@ -45,8 +45,8 @@ public class QryWdbeVerList {
 			if (ix == BVR) return("bvr");
 			if (ix == STE) return("ste");
 			if (ix == PRJ) return("prj");
-			if (ix == GRP) return("grp");
 			if (ix == OWN) return("own");
+			if (ix == GRP) return("grp");
 
 			return "";
 		};

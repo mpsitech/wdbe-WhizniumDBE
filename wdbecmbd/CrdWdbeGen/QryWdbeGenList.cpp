@@ -229,8 +229,8 @@ void QryWdbeGenList::rerun_orderSQL(
 			string& sqlstr
 			, const uint preIxOrd
 		) {
-	if (preIxOrd == VecVOrd::SRF) sqlstr += " ORDER BY TblWdbeMGeneric.sref ASC";
-	else if (preIxOrd == VecVOrd::MDL) sqlstr += " ORDER BY TblWdbeMGeneric.mdlRefWdbeMModule ASC";
+	if (preIxOrd == VecVOrd::MDL) sqlstr += " ORDER BY TblWdbeMGeneric.mdlRefWdbeMModule ASC";
+	else if (preIxOrd == VecVOrd::SRF) sqlstr += " ORDER BY TblWdbeMGeneric.sref ASC";
 };
 
 void QryWdbeGenList::fetch(

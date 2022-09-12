@@ -21,8 +21,8 @@ uint QryWdbeTrgList::VecVOrd::getIx(
 	string s = StrMod::lc(sref);
 
 	if (s == "unt") return UNT;
-	if (s == "srf") return SRF;
 	if (s == "sys") return SYS;
+	if (s == "srf") return SRF;
 
 	return(0);
 };
@@ -31,8 +31,8 @@ string QryWdbeTrgList::VecVOrd::getSref(
 			const uint ix
 		) {
 	if (ix == UNT) return("unt");
-	if (ix == SRF) return("srf");
 	if (ix == SYS) return("sys");
+	if (ix == SRF) return("srf");
 
 	return("");
 };
@@ -183,15 +183,14 @@ QryWdbeTrgList::StgIac::StgIac(
 };
 
 bool QryWdbeTrgList::StgIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["StgIacQryWdbeTrgList"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["StgIacQryWdbeTrgList"];}();
 
 	basefound = (me != Json::nullValue);
 

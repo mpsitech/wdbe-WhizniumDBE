@@ -58,15 +58,14 @@ PnlWdbeSysList::ContIac::ContIac(
 };
 
 bool PnlWdbeSysList::ContIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["ContIacWdbeSysList"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["ContIacWdbeSysList"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -319,15 +318,14 @@ PnlWdbeSysList::StgIac::StgIac(
 };
 
 bool PnlWdbeSysList::StgIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["StgIacWdbeSysList"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["StgIacWdbeSysList"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -501,15 +499,14 @@ string PnlWdbeSysList::DpchAppData::getSrefsMask() {
 };
 
 void PnlWdbeSysList::DpchAppData::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbeSysListData"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbeSysListData"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -579,15 +576,14 @@ string PnlWdbeSysList::DpchAppDo::getSrefsMask() {
 };
 
 void PnlWdbeSysList::DpchAppDo::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbeSysListDo"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbeSysListDo"];}();
 
 	basefound = (me != Json::nullValue);
 

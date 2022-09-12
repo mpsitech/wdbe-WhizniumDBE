@@ -132,7 +132,7 @@ function refreshB(chgcol) {
 			} else if (i == 3) {
 				doc.cols.push("TcoHkt"); doc.widths.push(TcoHktWidth); doc.fs.push("hkt2"); doc.tos.push(0); wtot += TcoHktWidth;
 			} else if (i == 4) {
-				doc.cols.push("TcoHku"); doc.widths.push(TcoHkuWidth); doc.fs.push("hku"); doc.tos.push(1); wtot += TcoHkuWidth;
+				doc.cols.push("TcoHku"); doc.widths.push(TcoHkuWidth); doc.fs.push("hku"); doc.tos.push(2); wtot += TcoHkuWidth;
 			} else {
 				ix--;
 			};

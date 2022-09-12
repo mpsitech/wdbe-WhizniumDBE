@@ -45,8 +45,8 @@ PnlWdbePplRec::PnlWdbePplRec(
 
 	// IP constructor.cust2 --- INSERT
 
-	xchg->addClstn(VecWdbeVCall::CALLWDBEPPL_HSMEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBEPPL_HSM_INSBS, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBEPPL_HSMEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -247,10 +247,10 @@ void PnlWdbePplRec::handleCall(
 		) {
 	if (call->ixVCall == VecWdbeVCall::CALLWDBEPPLUPD_REFEQ) {
 		call->abort = handleCallWdbePplUpd_refEq(dbswdbe, call->jref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEPPL_HSMEQ) {
-		call->abort = handleCallWdbePpl_hsmEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEPPL_HSM_INSBS) {
 		call->abort = handleCallWdbePpl_hsm_inSbs(dbswdbe, call->jref, call->argInv.ix, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEPPL_HSMEQ) {
+		call->abort = handleCallWdbePpl_hsmEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
 	};
 };
 
@@ -263,17 +263,6 @@ bool PnlWdbePplRec::handleCallWdbePplUpd_refEq(
 	return retval;
 };
 
-bool PnlWdbePplRec::handleCallWdbePpl_hsmEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-			, const ubigint refInv
-			, bool& boolvalRet
-		) {
-	bool retval = false;
-	boolvalRet = (recPpl.hsmRefWdbeMModule == refInv); // IP handleCallWdbePpl_hsmEq --- LINE
-	return retval;
-};
-
 bool PnlWdbePplRec::handleCallWdbePpl_hsm_inSbs(
 			DbsWdbe* dbswdbe
 			, const ubigint jrefTrig
@@ -282,5 +271,16 @@ bool PnlWdbePplRec::handleCallWdbePpl_hsm_inSbs(
 		) {
 	bool retval = false;
 	boolvalRet = ((dbswdbe->getIxWSubsetByRefWdbeMModule(recPpl.hsmRefWdbeMModule) & ixInv) != 0); // IP handleCallWdbePpl_hsm_inSbs --- LINE
+	return retval;
+};
+
+bool PnlWdbePplRec::handleCallWdbePpl_hsmEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+			, const ubigint refInv
+			, bool& boolvalRet
+		) {
+	bool retval = false;
+	boolvalRet = (recPpl.hsmRefWdbeMModule == refInv); // IP handleCallWdbePpl_hsmEq --- LINE
 	return retval;
 };

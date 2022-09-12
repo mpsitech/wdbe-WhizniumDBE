@@ -149,15 +149,14 @@ QryWdbeCvrBcv1NCoreversion::StgIac::StgIac(
 };
 
 bool QryWdbeCvrBcv1NCoreversion::StgIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["StgIacQryWdbeCvrBcv1NCoreversion"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["StgIacQryWdbeCvrBcv1NCoreversion"];}();
 
 	basefound = (me != Json::nullValue);
 

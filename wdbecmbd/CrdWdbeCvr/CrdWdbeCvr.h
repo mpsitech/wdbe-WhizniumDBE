@@ -16,11 +16,11 @@
 
 #include "PnlWdbeCvrList.h"
 #include "PnlWdbeCvrHeadbar.h"
+#include "PnlWdbeCvrRec.h"
+#include "DlgWdbeCvrWrite.h"
+#include "DlgWdbeCvrNew.h"
 #include "DlgWdbeCvrDetcd.h"
 #include "DlgWdbeCvrBsccd.h"
-#include "PnlWdbeCvrRec.h"
-#include "DlgWdbeCvrNew.h"
-#include "DlgWdbeCvrWrite.h"
 
 #define VecVWdbeCvrDo CrdWdbeCvr::VecVDo
 #define VecVWdbeCvrSge CrdWdbeCvr::VecVSge
@@ -185,7 +185,7 @@ public:
 	public:
 		std::string getSrefsMask();
 
-		void readJSON(Json::Value& sup, bool addbasetag = false);
+		void readJSON(const Json::Value& sup, bool addbasetag = false);
 		void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 	};
 
@@ -242,11 +242,11 @@ public:
 
 	PnlWdbeCvrList* pnllist;
 	PnlWdbeCvrHeadbar* pnlheadbar;
+	PnlWdbeCvrRec* pnlrec;
+	DlgWdbeCvrWrite* dlgwrite;
+	DlgWdbeCvrNew* dlgnew;
 	DlgWdbeCvrDetcd* dlgdetcd;
 	DlgWdbeCvrBsccd* dlgbsccd;
-	PnlWdbeCvrRec* pnlrec;
-	DlgWdbeCvrNew* dlgnew;
-	DlgWdbeCvrWrite* dlgwrite;
 
 	// IP vars.cust --- INSERT
 

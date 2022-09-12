@@ -184,9 +184,9 @@ void QryWdbePrjList::rerun_orderSQL(
 			string& sqlstr
 			, const uint preIxOrd
 		) {
-	if (preIxOrd == VecVOrd::TIT) sqlstr += " ORDER BY TblWdbeMProject.Title ASC";
-	else if (preIxOrd == VecVOrd::VER) sqlstr += " ORDER BY TblWdbeMProject.refWdbeMVersion ASC";
+	if (preIxOrd == VecVOrd::VER) sqlstr += " ORDER BY TblWdbeMProject.refWdbeMVersion ASC";
 	else if (preIxOrd == VecVOrd::SHO) sqlstr += " ORDER BY TblWdbeMProject.Short ASC";
+	else if (preIxOrd == VecVOrd::TIT) sqlstr += " ORDER BY TblWdbeMProject.Title ASC";
 	else if (preIxOrd == VecVOrd::OWN) sqlstr += " ORDER BY TblWdbeMProject.own ASC";
 	else if (preIxOrd == VecVOrd::GRP) sqlstr += " ORDER BY TblWdbeMProject.grp ASC";
 };

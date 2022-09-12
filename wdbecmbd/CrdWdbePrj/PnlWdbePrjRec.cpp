@@ -39,8 +39,8 @@ PnlWdbePrjRec::PnlWdbePrjRec(
 	jref = xchg->addJob(dbswdbe, this, jrefSup);
 
 	pnlmnperson = NULL;
-	pnldetail = NULL;
 	pnlprj1nversion = NULL;
+	pnldetail = NULL;
 
 	// IP constructor.cust1 --- INSERT
 

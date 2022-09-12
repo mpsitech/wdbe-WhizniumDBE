@@ -149,15 +149,14 @@ QryWdbeUntRef1NError::StgIac::StgIac(
 };
 
 bool QryWdbeUntRef1NError::StgIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["StgIacQryWdbeUntRef1NError"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["StgIacQryWdbeUntRef1NError"];}();
 
 	basefound = (me != Json::nullValue);
 

@@ -1,8 +1,8 @@
 # file Makefile
 # make file for Wdbe operation daemon, release wdbeopd2_mac
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
-# author: Emily Johnson (auto-generation)
-# date created: 28 Mar 2022
+# author: Alexander Wirthmueller (auto-generation)
+# date created: 11 Sep 2022
 # IP header --- ABOVE
 
 include Makefile.inc
@@ -47,7 +47,6 @@ all:	$(PCHS) $(EXE)
 
 $(EXE):	$(OBJS)
 	$(LINK) $(LINKFLAGS) $(OBJS) $(LIBPATH) $(LIBS) -o $(EXE)
-	rm -f *.o
 
 pch:	$(PCHS)
 

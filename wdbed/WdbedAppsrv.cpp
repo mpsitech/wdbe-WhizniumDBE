@@ -89,7 +89,12 @@ MHD_Result WdbedAppsrv::MhdCallback(
 		// new request
 		StrMod::stringToVector(string(url), ss, '/');
 
-		if (strcmp(method, "GET") == 0) {
+		if (strcmp(method, "OPTIONS") == 0) {
+			if (ss.size() >= 1) if (ss[0] == "") {
+				if ((ss[1] == "dpch") || (ss[1] == "notify") || (ss[1] == "poll") || (ss[1] == "upload")) ixVBasetype = ReqWdbe::VecVBasetype::PREFLIGHT;
+			};
+
+		} else if (strcmp(method, "GET") == 0) {
 			// cout << "have GET request, url is '" << string(url) << "'" << endl;
 
 			if (ss.size() >= 1) if (ss[0] == "") {
@@ -159,14 +164,43 @@ MHD_Result WdbedAppsrv::MhdCallback(
 		if (ixVBasetype == ReqWdbe::VecVBasetype::NONE) {
 			// not a valid request
 			response = MHD_create_response_from_buffer(strlen(invalid), (void*) invalid, MHD_RESPMEM_PERSISTENT);
-			//MHD_add_response_header(response, MHD_HTTP_HEADER_CONNECTION, "close");
 			retval = MHD_queue_response(connection, MHD_HTTP_NOT_FOUND, response);
 			MHD_destroy_response(response);
 
 		} else if (ixVBasetype == ReqWdbe::VecVBasetype::REDIRECT) {
+			ss = {"index.html", "CrdWdbeStart/CrdWdbeStart.html"};
+
+			for (unsigned int i = 0; i < ss.size(); i++) {
+				filename = xchg->stgwdbepath.webpath + "/" + ss[i];
+				valid = (access(filename.c_str(), R_OK) == 0);
+
+				if (valid) {
+					filename = "/web/" + ss[i];
+					break;
+				};
+			};
+
+			if (valid) {
+				response = MHD_create_response_from_buffer(0, NULL, MHD_RESPMEM_PERSISTENT);
+				MHD_add_response_header(response, MHD_HTTP_HEADER_LOCATION, filename.c_str());
+				retval = MHD_queue_response(connection, MHD_HTTP_MOVED_PERMANENTLY, response);
+				MHD_destroy_response(response);
+			};
+
+			if (!valid) {
+				response = MHD_create_response_from_buffer(strlen(invalid), (void*) invalid, MHD_RESPMEM_PERSISTENT);
+				retval = MHD_queue_response(connection, MHD_HTTP_NOT_FOUND, response);
+				MHD_destroy_response(response);
+			};
+
+		} else if (ixVBasetype == ReqWdbe::VecVBasetype::PREFLIGHT) {
 			response = MHD_create_response_from_buffer(0, NULL, MHD_RESPMEM_PERSISTENT);
-			MHD_add_response_header(response, "Location", "/web/CrdWdbeStart/CrdWdbeStart.html");
-			retval = MHD_queue_response(connection, MHD_HTTP_MOVED_PERMANENTLY, response);
+			MHD_add_response_header(response, MHD_HTTP_HEADER_ALLOW, "OPTIONS, GET, POST");
+			MHD_add_response_header(response, MHD_HTTP_HEADER_ACCEPT, MHD_HTTP_POST_ENCODING_FORM_URLENCODED);
+			if (xchg->stgwdbeappsrv.cors != "") MHD_add_response_header(response, MHD_HTTP_HEADER_ACCESS_CONTROL_ALLOW_ORIGIN, xchg->stgwdbeappsrv.cors.c_str());
+			MHD_add_response_header(response, "Access-Control-Allow-Methods", "GET, POST");
+			MHD_add_response_header(response, "Access-Control-Allow-Headers", "*");
+			retval = MHD_queue_response(connection, MHD_HTTP_NO_CONTENT, response);
 			MHD_destroy_response(response);
 
 		} else {
@@ -199,7 +233,6 @@ MHD_Result WdbedAppsrv::MhdCallback(
 				if (req->filelen == 0) {
 					// empty files require special handling
 					response = MHD_create_response_from_buffer(strlen(empty), (void*) empty, MHD_RESPMEM_PERSISTENT);
-					//MHD_add_response_header(response, MHD_HTTP_HEADER_CONNECTION, "close");
 					retval = MHD_queue_response(connection, MHD_HTTP_OK, response);
 					MHD_destroy_response(response);
 
@@ -210,9 +243,8 @@ MHD_Result WdbedAppsrv::MhdCallback(
 					ptr = req->filename.rfind('.');
 					if (ptr != string::npos) mimetype = VecWdbeVMimetype::getTitle(VecWdbeVMimetype::getIx(req->filename.substr(ptr+1)));
 					if (mimetype.length() == 0) mimetype = VecWdbeVMimetype::getTitle(VecWdbeVMimetype::TXT);
-					MHD_add_response_header(response, "Content-Type", mimetype.c_str());					
+					MHD_add_response_header(response, MHD_HTTP_HEADER_CONTENT_TYPE, mimetype.c_str());					
 
-					//MHD_add_response_header(response, MHD_HTTP_HEADER_CONNECTION, "close");
 					retval = MHD_queue_response(connection, MHD_HTTP_OK, response);
 					MHD_destroy_response(response);
 				};
@@ -290,6 +322,7 @@ MHD_Result WdbedAppsrv::MhdCallback(
 
 						// send reply ; note that the result of timedwait() doesn't matter
 						response = MHD_create_response_from_buffer(req->replylen, req->reply, MHD_RESPMEM_PERSISTENT);
+						if (xchg->stgwdbeappsrv.cors != "") MHD_add_response_header(response, MHD_HTTP_HEADER_ACCESS_CONTROL_ALLOW_ORIGIN, xchg->stgwdbeappsrv.cors.c_str());
 						retval = MHD_queue_response(connection, MHD_HTTP_OK, response);
 						MHD_destroy_response(response);
 
@@ -305,6 +338,7 @@ MHD_Result WdbedAppsrv::MhdCallback(
 
 						// send first dispatch available in dispatch collector
 						response = MHD_create_response_from_buffer(req->replylen, req->reply, MHD_RESPMEM_PERSISTENT);
+						if (xchg->stgwdbeappsrv.cors != "") MHD_add_response_header(response, MHD_HTTP_HEADER_ACCESS_CONTROL_ALLOW_ORIGIN, xchg->stgwdbeappsrv.cors.c_str());
 						retval = MHD_queue_response(connection, MHD_HTTP_OK, response);
 						MHD_destroy_response(response);
 					};
@@ -403,13 +437,11 @@ MHD_Result WdbedAppsrv::MhdCallback(
 					if (req->filelen == 0) {
 						// empty files require special handling
 						response = MHD_create_response_from_buffer(strlen(empty), (void*) empty, MHD_RESPMEM_PERSISTENT);
-						//MHD_add_response_header(response, MHD_HTTP_HEADER_CONNECTION, "close");
 						retval = MHD_queue_response(connection, MHD_HTTP_OK, response);
 						MHD_destroy_response(response);
 
 					} else {
 						response = MHD_create_response_from_callback(req->filelen, 8*1024, &MhdFilesend, req, NULL);
-						//MHD_add_response_header(response, MHD_HTTP_HEADER_CONNECTION, "close");
 						retval = MHD_queue_response(connection, MHD_HTTP_OK, response);
 						MHD_destroy_response(response);
 					};
@@ -417,7 +449,6 @@ MHD_Result WdbedAppsrv::MhdCallback(
 
 				if (!valid) {
 					response = MHD_create_response_from_buffer(strlen(invalid), (void*) invalid, MHD_RESPMEM_PERSISTENT);
-					//MHD_add_response_header(response, MHD_HTTP_HEADER_CONNECTION, "close");
 					retval = MHD_queue_response(connection, MHD_HTTP_NOT_FOUND, response);
 					MHD_destroy_response(response);
 				};
@@ -466,6 +497,7 @@ MHD_Result WdbedAppsrv::MhdCallback(
 						if (req->dpcheng) {
 							writeDpchEng(xchg, req);
 							response = MHD_create_response_from_buffer(req->replylen, req->reply, MHD_RESPMEM_PERSISTENT);
+							if (xchg->stgwdbeappsrv.cors != "") MHD_add_response_header(response, MHD_HTTP_HEADER_ACCESS_CONTROL_ALLOW_ORIGIN, xchg->stgwdbeappsrv.cors.c_str());
 							retval = MHD_queue_response(connection, MHD_HTTP_OK, response);
 							MHD_destroy_response(response);
 						} else {
@@ -495,15 +527,11 @@ MHD_Result WdbedAppsrv::MhdCallback(
 						if (req->ixVState != ReqWdbe::VecVState::REPLY) req->cReady.wait("WdbedAppsrv", "MhdCallback[3]");
 						req->cReady.unlockMutex("WdbedAppsrv", "MhdCallback[4]");
 
-						if (req->reply) {
-							response = MHD_create_response_from_buffer(req->replylen, req->reply, MHD_RESPMEM_PERSISTENT);
-							retval = MHD_queue_response(connection, MHD_HTTP_OK, response);
-							MHD_destroy_response(response);
-						} else {
-							response = MHD_create_response_from_buffer(strlen(empty), (void*) empty, MHD_RESPMEM_PERSISTENT);
-							retval = MHD_queue_response(connection, MHD_HTTP_OK, response);
-							MHD_destroy_response(response);
-						};
+						if (req->reply) response = MHD_create_response_from_buffer(req->replylen, req->reply, MHD_RESPMEM_PERSISTENT);
+						else response = MHD_create_response_from_buffer(strlen(empty), (void*) empty, MHD_RESPMEM_PERSISTENT);
+						if (xchg->stgwdbeappsrv.cors != "") MHD_add_response_header(response, MHD_HTTP_HEADER_ACCESS_CONTROL_ALLOW_ORIGIN, xchg->stgwdbeappsrv.cors.c_str());
+						retval = MHD_queue_response(connection, MHD_HTTP_OK, response);
+						MHD_destroy_response(response);
 					};
 
 					if (!valid) {
@@ -697,7 +725,7 @@ uint WdbedAppsrv::readDpchApp(
 	xmlDoc* doc = NULL;
 	xmlXPathContext* docctx = NULL;
 
-	istringstream str;
+	Json::Reader reader;
 	Json::Value root;
 	Json::Value::Members members;
 
@@ -2165,8 +2193,7 @@ uint WdbedAppsrv::readDpchApp(
 
 	} else {
 		try {
-			str.rdbuf()->pubsetbuf(req->request, req->requestlen);
-			str >> root;
+			reader.parse(string(req->request), root);
 
 			members = root.getMemberNames();
 			if (members.size() == 1) ixWdbeVDpch = VecWdbeVDpch::getIx(members[0]);

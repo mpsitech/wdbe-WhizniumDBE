@@ -4812,7 +4812,7 @@ void ContInfWdbeAlert::writeJSON(
 		) {
 	if (difftag == "") difftag = "ContInfWdbeAlert";
 
-	Json::Value& me = sup["DpchEngWdbeConfirm"] = Json::Value(Json::objectValue);
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
 	me["TxtCpt"] = TxtCpt;
 	me["TxtMsg1"] = TxtMsg1;

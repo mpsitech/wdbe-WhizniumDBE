@@ -336,11 +336,12 @@ cust	WdbeMtpCplmstbu	complement module template-specific modular structure botto
 	WdbeMtpCplmstbuDpsram_mchp_v1_0	false	adapt port identifiers and widths
 	WdbeMtpCplmstbuDsp48_xlnx_v3_0_aMultB	false	adapt port widths
 	WdbeMtpCplmstbuDsp48_xlnx_v3_0_aPlusDPlusC	false	adapt port widths
+	WdbeMtpCplmstbuGpio_Easy_v1_0	false	adapt port widths
+	WdbeMtpCplmstbuUart_Easy_v1_0	false	connect UART controllers and timeout
 	WdbeMtpCplmstbuIod_mchp_v1_0_mipirx	false	adapt port widths
 	WdbeMtpCplmstbuMipidec_mchp_v1_0	false	adapt port widths
 	WdbeMtpCplmstbuMpfs_ip_AXI_v1_0	false	add pin substitute signals
 	WdbeMtpCplmstbuMult_xlnx_v12_0	false	adapt port widths
-	WdbeMtpCplmstbuSelectio_xlnx_v5_1_mipicsi	false	adapt port widths
 	WdbeMtpCplmstbuOled128x32_v1_0	false	connect SPI interface
 	WdbeMtpCplmstbuPmmu_v1_0	false	connect buffers, fill slot vector
 	WdbeMtpCplmstbuSelectio_xlnx_v5_1_mipirx	false	adapt port widths
@@ -382,6 +383,8 @@ cust	WdbeMtpCplmsttd	complement module template-specific modular structure top-d
 	WdbeMtpCplmsttdCmdinv_v1_0	false	adapt buffer size
 	WdbeMtpCplmsttdCmdret_v1_0	false	adapt buffer size
 	WdbeMtpCplmsttdDpbram_v1_0	false	infer BRAM primitives and adapt port widths
+	WdbeMtpCplmsttdGpio_Easy_v1_0	false	infer tri-state buffer primitives
+	WdbeMtpCplmsttdI2c_Easy_v1_0	false	infer tri-state buffer primitive
 	WdbeMtpCplmsttdPmmu_v1_0	false	adapt buffer sizes
 	WdbeMtpCplmsttdSpbram_v1_0	false	infer BRAM primitives and adapt port widths
 	WdbeMtpCplmsttdTop_lttc_v1_0	false	infer clock primitives and adapt ports

@@ -149,15 +149,14 @@ QryWdbeSilRef1NCommand::StgIac::StgIac(
 };
 
 bool QryWdbeSilRef1NCommand::StgIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["StgIacQryWdbeSilRef1NCommand"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["StgIacQryWdbeSilRef1NCommand"];}();
 
 	basefound = (me != Json::nullValue);
 

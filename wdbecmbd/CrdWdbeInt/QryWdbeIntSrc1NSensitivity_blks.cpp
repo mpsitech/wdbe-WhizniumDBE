@@ -149,15 +149,14 @@ QryWdbeIntSrc1NSensitivity::StgIac::StgIac(
 };
 
 bool QryWdbeIntSrc1NSensitivity::StgIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["StgIacQryWdbeIntSrc1NSensitivity"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["StgIacQryWdbeIntSrc1NSensitivity"];}();
 
 	basefound = (me != Json::nullValue);
 

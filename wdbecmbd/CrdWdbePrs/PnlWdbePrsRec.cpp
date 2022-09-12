@@ -39,8 +39,8 @@ PnlWdbePrsRec::PnlWdbePrsRec(
 	jref = xchg->addJob(dbswdbe, this, jrefSup);
 
 	pnlmncoreproject = NULL;
-	pnladetail = NULL;
 	pnlmnproject = NULL;
+	pnladetail = NULL;
 	pnldetail = NULL;
 
 	// IP constructor.cust1 --- INSERT

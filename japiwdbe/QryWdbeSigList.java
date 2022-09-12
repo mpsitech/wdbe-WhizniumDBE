@@ -25,8 +25,8 @@ public class QryWdbeSigList {
 		public static final int REU = 4;
 		public static final int MGT = 5;
 		public static final int RET = 6;
-		public static final int SRF = 7;
-		public static final int TYP = 8;
+		public static final int TYP = 7;
+		public static final int SRF = 8;
 
 		public static int getIx(
 					String sref
@@ -39,8 +39,8 @@ public class QryWdbeSigList {
 			if (s.equals("reu")) return REU;
 			if (s.equals("mgt")) return MGT;
 			if (s.equals("ret")) return RET;
-			if (s.equals("srf")) return SRF;
 			if (s.equals("typ")) return TYP;
+			if (s.equals("srf")) return SRF;
 
 			return 0;
 		};
@@ -54,8 +54,8 @@ public class QryWdbeSigList {
 			if (ix == REU) return("reu");
 			if (ix == MGT) return("mgt");
 			if (ix == RET) return("ret");
-			if (ix == SRF) return("srf");
 			if (ix == TYP) return("typ");
+			if (ix == SRF) return("srf");
 
 			return "";
 		};

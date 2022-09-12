@@ -217,15 +217,14 @@ PnlWdbeSilFwd1NController::StgIac::StgIac(
 };
 
 bool PnlWdbeSilFwd1NController::StgIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["StgIacWdbeSilFwd1NController"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["StgIacWdbeSilFwd1NController"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -382,15 +381,14 @@ string PnlWdbeSilFwd1NController::DpchAppData::getSrefsMask() {
 };
 
 void PnlWdbeSilFwd1NController::DpchAppData::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbeSilFwd1NControllerData"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbeSilFwd1NControllerData"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -456,15 +454,14 @@ string PnlWdbeSilFwd1NController::DpchAppDo::getSrefsMask() {
 };
 
 void PnlWdbeSilFwd1NController::DpchAppDo::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbeSilFwd1NControllerDo"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbeSilFwd1NControllerDo"];}();
 
 	basefound = (me != Json::nullValue);
 

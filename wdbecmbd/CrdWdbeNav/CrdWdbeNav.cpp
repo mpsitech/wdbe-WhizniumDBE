@@ -43,16 +43,16 @@ CrdWdbeNav::CrdWdbeNav(
 	VecVSge::fillFeed(feedFSge);
 
 	pnlauxfct = NULL;
-	pnlhigh = NULL;
 	pnllow = NULL;
+	pnlhigh = NULL;
 	pnlcoredev = NULL;
 	pnldevdev = NULL;
-	pnladmin = NULL;
 	pnlglobal = NULL;
+	pnladmin = NULL;
 	pnlpre = NULL;
 	pnlheadbar = NULL;
-	dlgloaini = NULL;
 	dlgmnglic = NULL;
+	dlgloaini = NULL;
 
 	// IP constructor.cust1 --- INSERT
 
@@ -60,12 +60,12 @@ CrdWdbeNav::CrdWdbeNav(
 	refresh(dbswdbe, moditems);
 
 	pnlauxfct = new PnlWdbeNavAuxfct(xchg, dbswdbe, jref, ixWdbeVLocale);
-	pnlhigh = new PnlWdbeNavHigh(xchg, dbswdbe, jref, ixWdbeVLocale);
 	pnllow = new PnlWdbeNavLow(xchg, dbswdbe, jref, ixWdbeVLocale);
+	pnlhigh = new PnlWdbeNavHigh(xchg, dbswdbe, jref, ixWdbeVLocale);
 	pnlcoredev = new PnlWdbeNavCoredev(xchg, dbswdbe, jref, ixWdbeVLocale);
 	pnldevdev = new PnlWdbeNavDevdev(xchg, dbswdbe, jref, ixWdbeVLocale);
-	pnladmin = new PnlWdbeNavAdmin(xchg, dbswdbe, jref, ixWdbeVLocale);
 	pnlglobal = new PnlWdbeNavGlobal(xchg, dbswdbe, jref, ixWdbeVLocale);
+	pnladmin = new PnlWdbeNavAdmin(xchg, dbswdbe, jref, ixWdbeVLocale);
 	pnlpre = new PnlWdbeNavPre(xchg, dbswdbe, jref, ixWdbeVLocale);
 	pnlheadbar = new PnlWdbeNavHeadbar(xchg, dbswdbe, jref, ixWdbeVLocale);
 

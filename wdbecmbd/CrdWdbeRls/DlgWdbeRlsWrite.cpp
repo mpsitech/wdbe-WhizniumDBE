@@ -1560,8 +1560,8 @@ void DlgWdbeRlsWrite::handleRequest(
 		if (ixVSge == VecVSge::IDLE) handleUploadInSgeIdle(dbswdbe, req->filename);
 
 	} else if (req->ixVBasetype == ReqWdbe::VecVBasetype::DOWNLOAD) {
-		if (ixVSge == VecVSge::DONE) req->filename = handleDownloadInSgeDone(dbswdbe);
-		else if (ixVSge == VecVSge::FAIL) req->filename = handleDownloadInSgeFail(dbswdbe);
+		if (ixVSge == VecVSge::FAIL) req->filename = handleDownloadInSgeFail(dbswdbe);
+		else if (ixVSge == VecVSge::DONE) req->filename = handleDownloadInSgeDone(dbswdbe);
 
 	} else if (req->ixVBasetype == ReqWdbe::VecVBasetype::DPCHRET) {
 		if (req->dpchret->ixOpVOpres == VecOpVOpres::PROGRESS) {
@@ -1604,8 +1604,8 @@ void DlgWdbeRlsWrite::handleRequest(
 		};
 
 	} else if (req->ixVBasetype == ReqWdbe::VecVBasetype::TIMER) {
-		if ((req->sref == "mon") && (ixVSge == VecVSge::WRITE)) handleTimerWithSrefMonInSgeWrite(dbswdbe);
-		else if (ixVSge == VecVSge::UPKIDLE) handleTimerInSgeUpkidle(dbswdbe, req->sref);
+		if (ixVSge == VecVSge::UPKIDLE) handleTimerInSgeUpkidle(dbswdbe, req->sref);
+		else if ((req->sref == "mon") && (ixVSge == VecVSge::WRITE)) handleTimerWithSrefMonInSgeWrite(dbswdbe);
 		else if ((req->sref == "mon") && (ixVSge == VecVSge::CREATE)) handleTimerWithSrefMonInSgeCreate(dbswdbe);
 	};
 };
@@ -1782,23 +1782,16 @@ void DlgWdbeRlsWrite::handleUploadInSgeIdle(
 	changeStage(dbswdbe, VecVSge::UPKIDLE);
 };
 
-string DlgWdbeRlsWrite::handleDownloadInSgeDone(
-			DbsWdbe* dbswdbe
-		) {
-	return(xchg->tmppath + "/" + outfolder + ".tgz"); // IP handleDownloadInSgeDone --- RLINE
-};
-
 string DlgWdbeRlsWrite::handleDownloadInSgeFail(
 			DbsWdbe* dbswdbe
 		) {
 	return(xchg->tmppath + "/" + logfile); // IP handleDownloadInSgeFail --- RLINE
 };
 
-void DlgWdbeRlsWrite::handleTimerWithSrefMonInSgeWrite(
+string DlgWdbeRlsWrite::handleDownloadInSgeDone(
 			DbsWdbe* dbswdbe
 		) {
-	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
-	refreshWithDpchEng(dbswdbe); // IP handleTimerWithSrefMonInSgeWrite --- ILINE
+	return(xchg->tmppath + "/" + outfolder + ".tgz"); // IP handleDownloadInSgeDone --- RLINE
 };
 
 void DlgWdbeRlsWrite::handleTimerInSgeUpkidle(
@@ -1806,6 +1799,13 @@ void DlgWdbeRlsWrite::handleTimerInSgeUpkidle(
 			, const string& sref
 		) {
 	changeStage(dbswdbe, nextIxVSgeSuccess);
+};
+
+void DlgWdbeRlsWrite::handleTimerWithSrefMonInSgeWrite(
+			DbsWdbe* dbswdbe
+		) {
+	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
+	refreshWithDpchEng(dbswdbe); // IP handleTimerWithSrefMonInSgeWrite --- ILINE
 };
 
 void DlgWdbeRlsWrite::handleTimerWithSrefMonInSgeCreate(

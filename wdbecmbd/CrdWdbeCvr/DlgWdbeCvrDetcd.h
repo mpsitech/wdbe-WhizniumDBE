@@ -145,7 +145,7 @@ public:
 		Sbecore::uint numFDse;
 
 	public:
-		bool readJSON(Json::Value& sup, bool addbasetag = false);
+		bool readJSON(const Json::Value& sup, bool addbasetag = false);
 		bool readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 		void writeJSON(Json::Value& sup, std::string difftag = "");
 		void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
@@ -424,7 +424,7 @@ public:
 	public:
 		std::string getSrefsMask();
 
-		void readJSON(Json::Value& sup, bool addbasetag = false);
+		void readJSON(const Json::Value& sup, bool addbasetag = false);
 		void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 	};
 
@@ -450,7 +450,7 @@ public:
 	public:
 		std::string getSrefsMask();
 
-		void readJSON(Json::Value& sup, bool addbasetag = false);
+		void readJSON(const Json::Value& sup, bool addbasetag = false);
 		void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 	};
 
@@ -576,10 +576,10 @@ private:
 
 	std::string handleDownload(DbsWdbe* dbswdbe);
 
-	void handleTimerWithSrefMonInSgePostprc(DbsWdbe* dbswdbe);
+	void handleTimerInSgePrsidle(DbsWdbe* dbswdbe, const std::string& sref);
 	void handleTimerInSgeImpidle(DbsWdbe* dbswdbe, const std::string& sref);
 	void handleTimerWithSrefMonInSgeImport(DbsWdbe* dbswdbe);
-	void handleTimerInSgePrsidle(DbsWdbe* dbswdbe, const std::string& sref);
+	void handleTimerWithSrefMonInSgePostprc(DbsWdbe* dbswdbe);
 
 private:
 	void changeStage(DbsWdbe* dbswdbe, Sbecore::uint _ixVSge, DpchEngWdbe** dpcheng = NULL);

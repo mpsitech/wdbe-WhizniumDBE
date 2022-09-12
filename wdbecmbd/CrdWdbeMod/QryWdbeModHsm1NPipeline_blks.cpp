@@ -149,15 +149,14 @@ QryWdbeModHsm1NPipeline::StgIac::StgIac(
 };
 
 bool QryWdbeModHsm1NPipeline::StgIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["StgIacQryWdbeModHsm1NPipeline"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["StgIacQryWdbeModHsm1NPipeline"];}();
 
 	basefound = (me != Json::nullValue);
 

@@ -16,10 +16,10 @@
 
 #include "PnlWdbeMtpRef1NFile.h"
 #include "PnlWdbeMtpMge1NSignal.h"
-#include "PnlWdbeMtpRef1NSensitivity.h"
 #include "PnlWdbeMtpRef1NVariable.h"
-#include "PnlWdbeMtpMdl1NPort.h"
+#include "PnlWdbeMtpRef1NSensitivity.h"
 #include "PnlWdbeMtpSup1NModule.h"
+#include "PnlWdbeMtpMdl1NPort.h"
 #include "PnlWdbeMtpHsm1NPipeline.h"
 #include "PnlWdbeMtpTpl1NModule.h"
 #include "PnlWdbeMtpMdl1NGeneric.h"
@@ -165,7 +165,7 @@ public:
 	public:
 		std::string getSrefsMask();
 
-		void readJSON(Json::Value& sup, bool addbasetag = false);
+		void readJSON(const Json::Value& sup, bool addbasetag = false);
 		void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 	};
 
@@ -209,10 +209,10 @@ public:
 
 	PnlWdbeMtpRef1NFile* pnlref1nfile;
 	PnlWdbeMtpMge1NSignal* pnlmge1nsignal;
-	PnlWdbeMtpRef1NSensitivity* pnlref1nsensitivity;
 	PnlWdbeMtpRef1NVariable* pnlref1nvariable;
-	PnlWdbeMtpMdl1NPort* pnlmdl1nport;
+	PnlWdbeMtpRef1NSensitivity* pnlref1nsensitivity;
 	PnlWdbeMtpSup1NModule* pnlsup1nmodule;
+	PnlWdbeMtpMdl1NPort* pnlmdl1nport;
 	PnlWdbeMtpHsm1NPipeline* pnlhsm1npipeline;
 	PnlWdbeMtpTpl1NModule* pnltpl1nmodule;
 	PnlWdbeMtpMdl1NGeneric* pnlmdl1ngeneric;
@@ -262,9 +262,9 @@ private:
 	bool handleCallWdbeMdl_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
 	bool handleCallWdbeMdl_imbEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
 	bool handleCallWdbeMdl_hkuEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
-	bool handleCallWdbeMdl_hku_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
 	bool handleCallWdbeMdl_ctrEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
 	bool handleCallWdbeMdl_hktEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
+	bool handleCallWdbeMdl_hku_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
 
 };
 

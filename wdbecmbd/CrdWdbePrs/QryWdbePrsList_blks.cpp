@@ -183,15 +183,14 @@ QryWdbePrsList::StgIac::StgIac(
 };
 
 bool QryWdbePrsList::StgIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["StgIacQryWdbePrsList"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["StgIacQryWdbePrsList"];}();
 
 	basefound = (me != Json::nullValue);
 

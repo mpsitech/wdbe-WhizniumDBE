@@ -130,9 +130,9 @@ function refreshB(chgcol) {
 			ix++;
 
 			if (i == 1) {
-				doc.cols.push("TcoGrp"); doc.widths.push(TcoGrpWidth); doc.fs.push("grp"); doc.tos.push(4); wtot += TcoGrpWidth;
+				doc.cols.push("TcoGrp"); doc.widths.push(TcoGrpWidth); doc.fs.push("grp"); doc.tos.push(5); wtot += TcoGrpWidth;
 			} else if (i == 2) {
-				doc.cols.push("TcoOwn"); doc.widths.push(TcoOwnWidth); doc.fs.push("own"); doc.tos.push(5); wtot += TcoOwnWidth;
+				doc.cols.push("TcoOwn"); doc.widths.push(TcoOwnWidth); doc.fs.push("own"); doc.tos.push(4); wtot += TcoOwnWidth;
 			} else if (i == 3) {
 				doc.cols.push("TcoPrj"); doc.widths.push(TcoPrjWidth); doc.fs.push("prj"); doc.tos.push(3); wtot += TcoPrjWidth;
 			} else if (i == 4) {

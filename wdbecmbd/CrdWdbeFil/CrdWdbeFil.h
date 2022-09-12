@@ -14,10 +14,10 @@
 
 // IP include.cust --- INSERT
 
-#include "PnlWdbeFilHeadbar.h"
 #include "PnlWdbeFilList.h"
-#include "DlgWdbeFilNew.h"
+#include "PnlWdbeFilHeadbar.h"
 #include "PnlWdbeFilRec.h"
+#include "DlgWdbeFilNew.h"
 #include "DlgWdbeFilDownload.h"
 
 #define VecVWdbeFilDo CrdWdbeFil::VecVDo
@@ -167,7 +167,7 @@ public:
 	public:
 		std::string getSrefsMask();
 
-		void readJSON(Json::Value& sup, bool addbasetag = false);
+		void readJSON(const Json::Value& sup, bool addbasetag = false);
 		void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 	};
 
@@ -217,10 +217,10 @@ public:
 	Sbecore::Feed feedFMcbAlert;
 	Sbecore::Feed feedFSge;
 
-	PnlWdbeFilHeadbar* pnlheadbar;
 	PnlWdbeFilList* pnllist;
-	DlgWdbeFilNew* dlgnew;
+	PnlWdbeFilHeadbar* pnlheadbar;
 	PnlWdbeFilRec* pnlrec;
+	DlgWdbeFilNew* dlgnew;
 	DlgWdbeFilDownload* dlgdownload;
 
 	// IP vars.cust --- INSERT

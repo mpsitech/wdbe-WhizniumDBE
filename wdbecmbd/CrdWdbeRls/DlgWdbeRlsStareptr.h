@@ -163,7 +163,7 @@ public:
 		Sbecore::uint numFDse;
 
 	public:
-		bool readJSON(Json::Value& sup, bool addbasetag = false);
+		bool readJSON(const Json::Value& sup, bool addbasetag = false);
 		bool readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 		void writeJSON(Json::Value& sup, std::string difftag = "");
 		void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
@@ -188,7 +188,7 @@ public:
 		std::string TxfGrl;
 
 	public:
-		bool readJSON(Json::Value& sup, bool addbasetag = false);
+		bool readJSON(const Json::Value& sup, bool addbasetag = false);
 		bool readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 		void writeJSON(Json::Value& sup, std::string difftag = "");
 		void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
@@ -479,7 +479,7 @@ public:
 	public:
 		std::string getSrefsMask();
 
-		void readJSON(Json::Value& sup, bool addbasetag = false);
+		void readJSON(const Json::Value& sup, bool addbasetag = false);
 		void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 	};
 
@@ -507,7 +507,7 @@ public:
 	public:
 		std::string getSrefsMask();
 
-		void readJSON(Json::Value& sup, bool addbasetag = false);
+		void readJSON(const Json::Value& sup, bool addbasetag = false);
 		void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 	};
 
@@ -568,9 +568,9 @@ public:
 	};
 
 	bool evalButDneActive(DbsWdbe* dbswdbe);
+	bool evalLfiDldActive(DbsWdbe* dbswdbe);
 	bool evalExtButRunActive(DbsWdbe* dbswdbe);
 	bool evalExtButStoActive(DbsWdbe* dbswdbe);
-	bool evalLfiDldActive(DbsWdbe* dbswdbe);
 	bool evalIniUldAvail(DbsWdbe* dbswdbe);
 	bool evalIniUldActive(DbsWdbe* dbswdbe);
 	bool evalIniTxtPrgAvail(DbsWdbe* dbswdbe);
@@ -663,9 +663,9 @@ private:
 
 	void handleDpchRetWdbePrctreeExtract(DbsWdbe* dbswdbe, DpchRetWdbePrctreeExtract* dpchret);
 
-	void handleTimerInSgeUpkidle(DbsWdbe* dbswdbe, const std::string& sref);
-	void handleTimerInSgeClgidle(DbsWdbe* dbswdbe, const std::string& sref);
 	void handleTimerWithSrefMonInSgeClonegit(DbsWdbe* dbswdbe);
+	void handleTimerInSgeClgidle(DbsWdbe* dbswdbe, const std::string& sref);
+	void handleTimerInSgeUpkidle(DbsWdbe* dbswdbe, const std::string& sref);
 
 private:
 	void changeStage(DbsWdbe* dbswdbe, Sbecore::uint _ixVSge, DpchEngWdbe** dpcheng = NULL);

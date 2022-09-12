@@ -20,9 +20,9 @@ uint QryWdbeVecList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
+	if (s == "hkt") return HKT;
 	if (s == "hku") return HKU;
 	if (s == "typ") return TYP;
-	if (s == "hkt") return HKT;
 	if (s == "srf") return SRF;
 
 	return(0);
@@ -31,9 +31,9 @@ uint QryWdbeVecList::VecVOrd::getIx(
 string QryWdbeVecList::VecVOrd::getSref(
 			const uint ix
 		) {
+	if (ix == HKT) return("hkt");
 	if (ix == HKU) return("hku");
 	if (ix == TYP) return("typ");
-	if (ix == HKT) return("hkt");
 	if (ix == SRF) return("srf");
 
 	return("");
@@ -185,15 +185,14 @@ QryWdbeVecList::StgIac::StgIac(
 };
 
 bool QryWdbeVecList::StgIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["StgIacQryWdbeVecList"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["StgIacQryWdbeVecList"];}();
 
 	basefound = (me != Json::nullValue);
 

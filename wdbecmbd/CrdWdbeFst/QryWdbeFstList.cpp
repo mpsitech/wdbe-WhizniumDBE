@@ -210,8 +210,8 @@ void QryWdbeFstList::rerun_orderSQL(
 			string& sqlstr
 			, const uint preIxOrd
 		) {
-	if (preIxOrd == VecVOrd::SRF) sqlstr += " ORDER BY TblWdbeMFsmstate.sref ASC";
-	else if (preIxOrd == VecVOrd::FSM) sqlstr += " ORDER BY TblWdbeMFsmstate.fsmRefWdbeMFsm ASC";
+	if (preIxOrd == VecVOrd::FSM) sqlstr += " ORDER BY TblWdbeMFsmstate.fsmRefWdbeMFsm ASC";
+	else if (preIxOrd == VecVOrd::SRF) sqlstr += " ORDER BY TblWdbeMFsmstate.sref ASC";
 };
 
 void QryWdbeFstList::fetch(

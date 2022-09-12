@@ -189,15 +189,14 @@ QryWdbeCprList::StgIac::StgIac(
 };
 
 bool QryWdbeCprList::StgIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["StgIacQryWdbeCprList"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["StgIacQryWdbeCprList"];}();
 
 	basefound = (me != Json::nullValue);
 

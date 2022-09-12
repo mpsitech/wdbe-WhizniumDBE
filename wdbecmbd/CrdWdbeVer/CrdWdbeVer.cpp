@@ -48,13 +48,13 @@ CrdWdbeVer::CrdWdbeVer(
 	pnllist = NULL;
 	pnlheadbar = NULL;
 	pnlrec = NULL;
-	dlgfinmod = NULL;
-	dlgnew = NULL;
-	dlgmdlstr = NULL;
-	dlgdflalg = NULL;
-	dlgcustfst = NULL;
 	dlgcmdset = NULL;
+	dlgcustfst = NULL;
+	dlgdflalg = NULL;
+	dlgfinmod = NULL;
 	dlggenfst = NULL;
+	dlgmdlstr = NULL;
+	dlgnew = NULL;
 
 	// IP constructor.cust1 --- INSERT
 

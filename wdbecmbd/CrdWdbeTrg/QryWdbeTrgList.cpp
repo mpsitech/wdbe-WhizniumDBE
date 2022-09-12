@@ -220,8 +220,8 @@ void QryWdbeTrgList::rerun_orderSQL(
 			, const uint preIxOrd
 		) {
 	if (preIxOrd == VecVOrd::UNT) sqlstr += " ORDER BY TblWdbeMTarget.refWdbeMUnit ASC";
-	else if (preIxOrd == VecVOrd::SRF) sqlstr += " ORDER BY TblWdbeMTarget.sref ASC";
 	else if (preIxOrd == VecVOrd::SYS) sqlstr += " ORDER BY TblWdbeMTarget.sysRefWdbeMSystem ASC";
+	else if (preIxOrd == VecVOrd::SRF) sqlstr += " ORDER BY TblWdbeMTarget.sref ASC";
 };
 
 void QryWdbeTrgList::fetch(

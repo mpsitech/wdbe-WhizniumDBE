@@ -23,8 +23,8 @@ uint QryWdbeVerList::VecVOrd::getIx(
 	if (s == "bvr") return BVR;
 	if (s == "ste") return STE;
 	if (s == "prj") return PRJ;
-	if (s == "grp") return GRP;
 	if (s == "own") return OWN;
+	if (s == "grp") return GRP;
 
 	return(0);
 };
@@ -35,8 +35,8 @@ string QryWdbeVerList::VecVOrd::getSref(
 	if (ix == BVR) return("bvr");
 	if (ix == STE) return("ste");
 	if (ix == PRJ) return("prj");
-	if (ix == GRP) return("grp");
 	if (ix == OWN) return("own");
+	if (ix == GRP) return("grp");
 
 	return("");
 };
@@ -187,15 +187,14 @@ QryWdbeVerList::StgIac::StgIac(
 };
 
 bool QryWdbeVerList::StgIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["StgIacQryWdbeVerList"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["StgIacQryWdbeVerList"];}();
 
 	basefound = (me != Json::nullValue);
 

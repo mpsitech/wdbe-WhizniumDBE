@@ -185,15 +185,14 @@ QryWdbeMtpList::StgIac::StgIac(
 };
 
 bool QryWdbeMtpList::StgIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["StgIacQryWdbeMtpList"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["StgIacQryWdbeMtpList"];}();
 
 	basefound = (me != Json::nullValue);
 

@@ -23,8 +23,8 @@ uint QryWdbeRlsList::VecVOrd::getIx(
 	string s = StrMod::lc(sref);
 
 	if (s == "mch") return MCH;
-	if (s == "typ") return TYP;
 	if (s == "ver") return VER;
+	if (s == "typ") return TYP;
 	if (s == "srf") return SRF;
 
 	return(0);
@@ -34,8 +34,8 @@ string QryWdbeRlsList::VecVOrd::getSref(
 			const uint ix
 		) {
 	if (ix == MCH) return("mch");
-	if (ix == TYP) return("typ");
 	if (ix == VER) return("ver");
+	if (ix == TYP) return("typ");
 	if (ix == SRF) return("srf");
 
 	return("");

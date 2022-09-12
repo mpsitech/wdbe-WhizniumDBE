@@ -128,8 +128,8 @@ void DlgWdbeVerMdlstr::refreshImp(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
 		) {
-	StatShrImp oldStatshrimp(statshrimp);
 	ContInfImp oldContinfimp(continfimp);
+	StatShrImp oldStatshrimp(statshrimp);
 
 	// IP refreshImp --- RBEGIN
 	// continfimp
@@ -140,8 +140,8 @@ void DlgWdbeVerMdlstr::refreshImp(
 	statshrimp.ButStoActive = evalImpButStoActive(dbswdbe);
 
 	// IP refreshImp --- REND
-	if (statshrimp.diff(&oldStatshrimp).size() != 0) insert(moditems, DpchEngData::STATSHRIMP);
 	if (continfimp.diff(&oldContinfimp).size() != 0) insert(moditems, DpchEngData::CONTINFIMP);
+	if (statshrimp.diff(&oldStatshrimp).size() != 0) insert(moditems, DpchEngData::STATSHRIMP);
 };
 
 void DlgWdbeVerMdlstr::refreshPpr(
@@ -191,23 +191,23 @@ void DlgWdbeVerMdlstr::refresh(
 	muteRefresh = true;
 
 	StatShr oldStatshr(statshr);
-	ContInf oldContinf(continf);
 	ContIac oldContiac(contiac);
+	ContInf oldContinf(continf);
 
 	// IP refresh --- BEGIN
 	// statshr
 	statshr.ButDneActive = evalButDneActive(dbswdbe);
 
-	// continf
-	continf.numFSge = ixVSge;
-
 	// contiac
 	contiac.numFDse = ixVDit;
 
+	// continf
+	continf.numFSge = ixVSge;
+
 	// IP refresh --- END
 	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
-	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
 	if (contiac.diff(&oldContiac).size() != 0) insert(moditems, DpchEngData::CONTIAC);
+	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
 
 	refreshIfi(dbswdbe, moditems);
 	refreshImp(dbswdbe, moditems);
@@ -276,8 +276,8 @@ void DlgWdbeVerMdlstr::handleRequest(
 		if (ixVSge == VecVSge::IDLE) handleUploadInSgeIdle(dbswdbe, req->filename);
 
 	} else if (req->ixVBasetype == ReqWdbe::VecVBasetype::DOWNLOAD) {
-		if (ixVSge == VecVSge::FAIL) req->filename = handleDownloadInSgeFail(dbswdbe);
-		else if (ixVSge == VecVSge::DONE) req->filename = handleDownloadInSgeDone(dbswdbe);
+		if (ixVSge == VecVSge::DONE) req->filename = handleDownloadInSgeDone(dbswdbe);
+		else if (ixVSge == VecVSge::FAIL) req->filename = handleDownloadInSgeFail(dbswdbe);
 
 	} else if (req->ixVBasetype == ReqWdbe::VecVBasetype::DPCHRET) {
 		if (req->dpchret->ixOpVOpres == VecOpVOpres::PROGRESS) {
@@ -438,16 +438,16 @@ void DlgWdbeVerMdlstr::handleUploadInSgeIdle(
 	changeStage(dbswdbe, VecVSge::PRSIDLE);
 };
 
-string DlgWdbeVerMdlstr::handleDownloadInSgeFail(
-			DbsWdbe* dbswdbe
-		) {
-	return(xchg->tmppath + "/" + logfile); // IP handleDownloadInSgeFail --- RLINE
-};
-
 string DlgWdbeVerMdlstr::handleDownloadInSgeDone(
 			DbsWdbe* dbswdbe
 		) {
 	return(""); // IP handleDownloadInSgeDone --- LINE
+};
+
+string DlgWdbeVerMdlstr::handleDownloadInSgeFail(
+			DbsWdbe* dbswdbe
+		) {
+	return(xchg->tmppath + "/" + logfile); // IP handleDownloadInSgeFail --- RLINE
 };
 
 void DlgWdbeVerMdlstr::handleTimerWithSrefMonInSgePostprc3(

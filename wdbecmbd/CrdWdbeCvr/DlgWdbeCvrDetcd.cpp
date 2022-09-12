@@ -167,23 +167,23 @@ void DlgWdbeCvrDetcd::refresh(
 	muteRefresh = true;
 
 	StatShr oldStatshr(statshr);
-	ContIac oldContiac(contiac);
 	ContInf oldContinf(continf);
+	ContIac oldContiac(contiac);
 
 	// IP refresh --- BEGIN
 	// statshr
 	statshr.ButDneActive = evalButDneActive(dbswdbe);
 
-	// contiac
-	contiac.numFDse = ixVDit;
-
 	// continf
 	continf.numFSge = ixVSge;
 
+	// contiac
+	contiac.numFDse = ixVDit;
+
 	// IP refresh --- END
 	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
-	if (contiac.diff(&oldContiac).size() != 0) insert(moditems, DpchEngData::CONTIAC);
 	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
+	if (contiac.diff(&oldContiac).size() != 0) insert(moditems, DpchEngData::CONTIAC);
 
 	refreshIfi(dbswdbe, moditems);
 	refreshImp(dbswdbe, moditems);
@@ -275,10 +275,10 @@ void DlgWdbeCvrDetcd::handleRequest(
 		};
 
 	} else if (req->ixVBasetype == ReqWdbe::VecVBasetype::TIMER) {
-		if ((req->sref == "mon") && (ixVSge == VecVSge::POSTPRC)) handleTimerWithSrefMonInSgePostprc(dbswdbe);
+		if (ixVSge == VecVSge::PRSIDLE) handleTimerInSgePrsidle(dbswdbe, req->sref);
 		else if (ixVSge == VecVSge::IMPIDLE) handleTimerInSgeImpidle(dbswdbe, req->sref);
 		else if ((req->sref == "mon") && (ixVSge == VecVSge::IMPORT)) handleTimerWithSrefMonInSgeImport(dbswdbe);
-		else if (ixVSge == VecVSge::PRSIDLE) handleTimerInSgePrsidle(dbswdbe, req->sref);
+		else if ((req->sref == "mon") && (ixVSge == VecVSge::POSTPRC)) handleTimerWithSrefMonInSgePostprc(dbswdbe);
 	};
 };
 
@@ -374,11 +374,11 @@ string DlgWdbeCvrDetcd::handleDownload(
 	return(""); // IP handleDownload --- LINE
 };
 
-void DlgWdbeCvrDetcd::handleTimerWithSrefMonInSgePostprc(
+void DlgWdbeCvrDetcd::handleTimerInSgePrsidle(
 			DbsWdbe* dbswdbe
+			, const string& sref
 		) {
-	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
-	// IP handleTimerWithSrefMonInSgePostprc --- INSERT
+	changeStage(dbswdbe, nextIxVSgeSuccess);
 };
 
 void DlgWdbeCvrDetcd::handleTimerInSgeImpidle(
@@ -395,11 +395,11 @@ void DlgWdbeCvrDetcd::handleTimerWithSrefMonInSgeImport(
 	// IP handleTimerWithSrefMonInSgeImport --- INSERT
 };
 
-void DlgWdbeCvrDetcd::handleTimerInSgePrsidle(
+void DlgWdbeCvrDetcd::handleTimerWithSrefMonInSgePostprc(
 			DbsWdbe* dbswdbe
-			, const string& sref
 		) {
-	changeStage(dbswdbe, nextIxVSgeSuccess);
+	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
+	// IP handleTimerWithSrefMonInSgePostprc --- INSERT
 };
 
 void DlgWdbeCvrDetcd::changeStage(

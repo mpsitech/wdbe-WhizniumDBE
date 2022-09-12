@@ -17,13 +17,13 @@
 #include "PnlWdbeVerList.h"
 #include "PnlWdbeVerHeadbar.h"
 #include "PnlWdbeVerRec.h"
-#include "DlgWdbeVerFinmod.h"
-#include "DlgWdbeVerNew.h"
-#include "DlgWdbeVerMdlstr.h"
-#include "DlgWdbeVerDflalg.h"
-#include "DlgWdbeVerCustfst.h"
 #include "DlgWdbeVerCmdset.h"
+#include "DlgWdbeVerCustfst.h"
+#include "DlgWdbeVerDflalg.h"
+#include "DlgWdbeVerFinmod.h"
 #include "DlgWdbeVerGenfst.h"
+#include "DlgWdbeVerMdlstr.h"
+#include "DlgWdbeVerNew.h"
 
 #define VecVWdbeVerDo CrdWdbeVer::VecVDo
 #define VecVWdbeVerSge CrdWdbeVer::VecVSge
@@ -226,7 +226,7 @@ public:
 	public:
 		std::string getSrefsMask();
 
-		void readJSON(Json::Value& sup, bool addbasetag = false);
+		void readJSON(const Json::Value& sup, bool addbasetag = false);
 		void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 	};
 
@@ -297,13 +297,13 @@ public:
 	PnlWdbeVerList* pnllist;
 	PnlWdbeVerHeadbar* pnlheadbar;
 	PnlWdbeVerRec* pnlrec;
-	DlgWdbeVerFinmod* dlgfinmod;
-	DlgWdbeVerNew* dlgnew;
-	DlgWdbeVerMdlstr* dlgmdlstr;
-	DlgWdbeVerDflalg* dlgdflalg;
-	DlgWdbeVerCustfst* dlgcustfst;
 	DlgWdbeVerCmdset* dlgcmdset;
+	DlgWdbeVerCustfst* dlgcustfst;
+	DlgWdbeVerDflalg* dlgdflalg;
+	DlgWdbeVerFinmod* dlgfinmod;
 	DlgWdbeVerGenfst* dlggenfst;
+	DlgWdbeVerMdlstr* dlgmdlstr;
+	DlgWdbeVerNew* dlgnew;
 
 	// IP vars.cust --- INSERT
 

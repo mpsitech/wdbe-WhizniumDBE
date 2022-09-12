@@ -41,19 +41,19 @@ PnlWdbeModRec::PnlWdbeModRec(
 	pnlctrmncommand = NULL;
 	pnlcormnmodule = NULL;
 	pnlctdmnmodule = NULL;
-	pnlmnperipheral = NULL;
-	pnlctrhk1nvector = NULL;
 	pnlctrref1ncommand = NULL;
+	pnlmnperipheral = NULL;
 	pnlctrref1nerror = NULL;
-	pnlref1nvariable = NULL;
+	pnlctrhk1nvector = NULL;
 	pnlmge1nsignal = NULL;
+	pnlref1nvariable = NULL;
 	pnlref1nsensitivity = NULL;
 	pnlref1nsignal = NULL;
 	pnlsup1nmodule = NULL;
-	pnl1nprocess = NULL;
 	pnlmdl1nport = NULL;
-	pnlmdl1ngeneric = NULL;
+	pnl1nprocess = NULL;
 	pnlhsm1npipeline = NULL;
+	pnlmdl1ngeneric = NULL;
 	pnlapar = NULL;
 	pnlkhdltype = NULL;
 	pnldetail = NULL;
@@ -70,11 +70,11 @@ PnlWdbeModRec::PnlWdbeModRec(
 	xchg->addClstn(VecWdbeVCall::CALLWDBEMDL_IMBEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBEMDL_HKUEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBEMDL_HKU_INSBS, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecWdbeVCall::CALLWDBECTR_FWDEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBEMDL_CTREQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBEMDL_HKTEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBECTR_CLREQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBECTR_FWD_INSBS, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecWdbeVCall::CALLWDBEMDL_HKTEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecWdbeVCall::CALLWDBEMDL_CTREQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBECTR_FWDEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBECTR_MDL_INSBS, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
@@ -125,9 +125,9 @@ void PnlWdbeModRec::refresh(
 	// statshr
 	if (recMdl.ref == 0) statshr.ixWdbeVExpstate = VecWdbeVExpstate::MIND;
 
+	statshr.pnlctrhk1nvectorAvail = evalPnlctrhk1nvectorAvail(dbswdbe);
 	statshr.pnlctrref1nerrorAvail = evalPnlctrref1nerrorAvail(dbswdbe);
 	statshr.pnlctrref1ncommandAvail = evalPnlctrref1ncommandAvail(dbswdbe);
-	statshr.pnlctrhk1nvectorAvail = evalPnlctrhk1nvectorAvail(dbswdbe);
 	statshr.pnlctrmncommandAvail = evalPnlctrmncommandAvail(dbswdbe);
 	statshr.ButRegularizeActive = evalButRegularizeActive(dbswdbe);
 
@@ -137,16 +137,16 @@ void PnlWdbeModRec::refresh(
 		if (pnlapar) {delete pnlapar; pnlapar = NULL;};
 		if (pnlmdl1ngeneric) {delete pnlmdl1ngeneric; pnlmdl1ngeneric = NULL;};
 		if (pnlhsm1npipeline) {delete pnlhsm1npipeline; pnlhsm1npipeline = NULL;};
-		if (pnlmdl1nport) {delete pnlmdl1nport; pnlmdl1nport = NULL;};
 		if (pnl1nprocess) {delete pnl1nprocess; pnl1nprocess = NULL;};
+		if (pnlmdl1nport) {delete pnlmdl1nport; pnlmdl1nport = NULL;};
 		if (pnlsup1nmodule) {delete pnlsup1nmodule; pnlsup1nmodule = NULL;};
 		if (pnlref1nsignal) {delete pnlref1nsignal; pnlref1nsignal = NULL;};
 		if (pnlref1nsensitivity) {delete pnlref1nsensitivity; pnlref1nsensitivity = NULL;};
 		if (pnlref1nvariable) {delete pnlref1nvariable; pnlref1nvariable = NULL;};
 		if (pnlmge1nsignal) {delete pnlmge1nsignal; pnlmge1nsignal = NULL;};
+		if (pnlctrhk1nvector) {delete pnlctrhk1nvector; pnlctrhk1nvector = NULL;};
 		if (pnlctrref1nerror) {delete pnlctrref1nerror; pnlctrref1nerror = NULL;};
 		if (pnlctrref1ncommand) {delete pnlctrref1ncommand; pnlctrref1ncommand = NULL;};
-		if (pnlctrhk1nvector) {delete pnlctrhk1nvector; pnlctrhk1nvector = NULL;};
 		if (pnlmnperipheral) {delete pnlmnperipheral; pnlmnperipheral = NULL;};
 		if (pnlctdmnmodule) {delete pnlctdmnmodule; pnlctdmnmodule = NULL;};
 		if (pnlcormnmodule) {delete pnlcormnmodule; pnlcormnmodule = NULL;};
@@ -157,16 +157,16 @@ void PnlWdbeModRec::refresh(
 		if (!pnlapar) pnlapar = new PnlWdbeModAPar(xchg, dbswdbe, jref, ixWdbeVLocale);
 		if (!pnlmdl1ngeneric) pnlmdl1ngeneric = new PnlWdbeModMdl1NGeneric(xchg, dbswdbe, jref, ixWdbeVLocale);
 		if (!pnlhsm1npipeline) pnlhsm1npipeline = new PnlWdbeModHsm1NPipeline(xchg, dbswdbe, jref, ixWdbeVLocale);
-		if (!pnlmdl1nport) pnlmdl1nport = new PnlWdbeModMdl1NPort(xchg, dbswdbe, jref, ixWdbeVLocale);
 		if (!pnl1nprocess) pnl1nprocess = new PnlWdbeMod1NProcess(xchg, dbswdbe, jref, ixWdbeVLocale);
+		if (!pnlmdl1nport) pnlmdl1nport = new PnlWdbeModMdl1NPort(xchg, dbswdbe, jref, ixWdbeVLocale);
 		if (!pnlsup1nmodule) pnlsup1nmodule = new PnlWdbeModSup1NModule(xchg, dbswdbe, jref, ixWdbeVLocale);
 		if (!pnlref1nsignal) pnlref1nsignal = new PnlWdbeModRef1NSignal(xchg, dbswdbe, jref, ixWdbeVLocale);
 		if (!pnlref1nsensitivity) pnlref1nsensitivity = new PnlWdbeModRef1NSensitivity(xchg, dbswdbe, jref, ixWdbeVLocale);
 		if (!pnlref1nvariable) pnlref1nvariable = new PnlWdbeModRef1NVariable(xchg, dbswdbe, jref, ixWdbeVLocale);
 		if (!pnlmge1nsignal) pnlmge1nsignal = new PnlWdbeModMge1NSignal(xchg, dbswdbe, jref, ixWdbeVLocale);
+		if (!pnlctrhk1nvector) pnlctrhk1nvector = new PnlWdbeModCtrHk1NVector(xchg, dbswdbe, jref, ixWdbeVLocale);
 		if (!pnlctrref1nerror) pnlctrref1nerror = new PnlWdbeModCtrRef1NError(xchg, dbswdbe, jref, ixWdbeVLocale);
 		if (!pnlctrref1ncommand) pnlctrref1ncommand = new PnlWdbeModCtrRef1NCommand(xchg, dbswdbe, jref, ixWdbeVLocale);
-		if (!pnlctrhk1nvector) pnlctrhk1nvector = new PnlWdbeModCtrHk1NVector(xchg, dbswdbe, jref, ixWdbeVLocale);
 		if (!pnlmnperipheral) pnlmnperipheral = new PnlWdbeModMNPeripheral(xchg, dbswdbe, jref, ixWdbeVLocale);
 		if (!pnlctdmnmodule) pnlctdmnmodule = new PnlWdbeModCtdMNModule(xchg, dbswdbe, jref, ixWdbeVLocale);
 		if (!pnlcormnmodule) pnlcormnmodule = new PnlWdbeModCorMNModule(xchg, dbswdbe, jref, ixWdbeVLocale);
@@ -178,16 +178,16 @@ void PnlWdbeModRec::refresh(
 	statshr.jrefAPar = ((pnlapar) ? pnlapar->jref : 0);
 	statshr.jrefMdl1NGeneric = ((pnlmdl1ngeneric) ? pnlmdl1ngeneric->jref : 0);
 	statshr.jrefHsm1NPipeline = ((pnlhsm1npipeline) ? pnlhsm1npipeline->jref : 0);
-	statshr.jrefMdl1NPort = ((pnlmdl1nport) ? pnlmdl1nport->jref : 0);
 	statshr.jref1NProcess = ((pnl1nprocess) ? pnl1nprocess->jref : 0);
+	statshr.jrefMdl1NPort = ((pnlmdl1nport) ? pnlmdl1nport->jref : 0);
 	statshr.jrefSup1NModule = ((pnlsup1nmodule) ? pnlsup1nmodule->jref : 0);
 	statshr.jrefRef1NSignal = ((pnlref1nsignal) ? pnlref1nsignal->jref : 0);
 	statshr.jrefRef1NSensitivity = ((pnlref1nsensitivity) ? pnlref1nsensitivity->jref : 0);
 	statshr.jrefRef1NVariable = ((pnlref1nvariable) ? pnlref1nvariable->jref : 0);
 	statshr.jrefMge1NSignal = ((pnlmge1nsignal) ? pnlmge1nsignal->jref : 0);
+	statshr.jrefCtrHk1NVector = ((pnlctrhk1nvector) ? pnlctrhk1nvector->jref : 0);
 	statshr.jrefCtrRef1NError = ((pnlctrref1nerror) ? pnlctrref1nerror->jref : 0);
 	statshr.jrefCtrRef1NCommand = ((pnlctrref1ncommand) ? pnlctrref1ncommand->jref : 0);
-	statshr.jrefCtrHk1NVector = ((pnlctrhk1nvector) ? pnlctrhk1nvector->jref : 0);
 	statshr.jrefMNPeripheral = ((pnlmnperipheral) ? pnlmnperipheral->jref : 0);
 	statshr.jrefCtdMNModule = ((pnlctdmnmodule) ? pnlctdmnmodule->jref : 0);
 	statshr.jrefCorMNModule = ((pnlcormnmodule) ? pnlcormnmodule->jref : 0);
@@ -239,16 +239,16 @@ void PnlWdbeModRec::updatePreset(
 			if (pnlapar) pnlapar->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
 			if (pnlmdl1ngeneric) pnlmdl1ngeneric->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
 			if (pnlhsm1npipeline) pnlhsm1npipeline->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
-			if (pnlmdl1nport) pnlmdl1nport->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
 			if (pnl1nprocess) pnl1nprocess->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
+			if (pnlmdl1nport) pnlmdl1nport->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
 			if (pnlsup1nmodule) pnlsup1nmodule->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
 			if (pnlref1nsignal) pnlref1nsignal->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
 			if (pnlref1nsensitivity) pnlref1nsensitivity->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
 			if (pnlref1nvariable) pnlref1nvariable->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
 			if (pnlmge1nsignal) pnlmge1nsignal->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
+			if (pnlctrhk1nvector) pnlctrhk1nvector->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
 			if (pnlctrref1nerror) pnlctrref1nerror->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
 			if (pnlctrref1ncommand) pnlctrref1ncommand->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
-			if (pnlctrhk1nvector) pnlctrhk1nvector->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
 			if (pnlmnperipheral) pnlmnperipheral->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
 			if (pnlctdmnmodule) pnlctdmnmodule->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
 			if (pnlcormnmodule) pnlcormnmodule->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
@@ -384,16 +384,16 @@ void PnlWdbeModRec::handleCall(
 		call->abort = handleCallWdbeMdl_hkuEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEMDL_HKU_INSBS) {
 		call->abort = handleCallWdbeMdl_hku_inSbs(dbswdbe, call->jref, call->argInv.ix, call->argRet.boolval);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECTR_FWDEQ) {
-		call->abort = handleCallWdbeCtr_fwdEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEMDL_CTREQ) {
+		call->abort = handleCallWdbeMdl_ctrEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEMDL_HKTEQ) {
+		call->abort = handleCallWdbeMdl_hktEq(dbswdbe, call->jref, call->argInv.ix, call->argRet.boolval);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECTR_CLREQ) {
 		call->abort = handleCallWdbeCtr_clrEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECTR_FWD_INSBS) {
 		call->abort = handleCallWdbeCtr_fwd_inSbs(dbswdbe, call->jref, call->argInv.ix, call->argRet.boolval);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEMDL_HKTEQ) {
-		call->abort = handleCallWdbeMdl_hktEq(dbswdbe, call->jref, call->argInv.ix, call->argRet.boolval);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEMDL_CTREQ) {
-		call->abort = handleCallWdbeMdl_ctrEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECTR_FWDEQ) {
+		call->abort = handleCallWdbeCtr_fwdEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECTR_MDL_INSBS) {
 		call->abort = handleCallWdbeCtr_mdl_inSbs(dbswdbe, call->jref, call->argInv.ix, call->argRet.boolval);
 	};
@@ -514,14 +514,25 @@ bool PnlWdbeModRec::handleCallWdbeMdl_hku_inSbs(
 	return retval;
 };
 
-bool PnlWdbeModRec::handleCallWdbeCtr_fwdEq(
+bool PnlWdbeModRec::handleCallWdbeMdl_ctrEq(
 			DbsWdbe* dbswdbe
 			, const ubigint jrefTrig
 			, const ubigint refInv
 			, bool& boolvalRet
 		) {
 	bool retval = false;
-	boolvalRet = (recCtr.fwdRefWdbeMUnit == refInv); // IP handleCallWdbeCtr_fwdEq --- LINE
+	boolvalRet = (recMdl.refWdbeMController == refInv); // IP handleCallWdbeMdl_ctrEq --- LINE
+	return retval;
+};
+
+bool PnlWdbeModRec::handleCallWdbeMdl_hktEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+			, const uint ixInv
+			, bool& boolvalRet
+		) {
+	bool retval = false;
+	boolvalRet = (recMdl.hkIxVTbl == ixInv); // IP handleCallWdbeMdl_hktEq --- LINE
 	return retval;
 };
 
@@ -547,25 +558,14 @@ bool PnlWdbeModRec::handleCallWdbeCtr_fwd_inSbs(
 	return retval;
 };
 
-bool PnlWdbeModRec::handleCallWdbeMdl_hktEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-			, const uint ixInv
-			, bool& boolvalRet
-		) {
-	bool retval = false;
-	boolvalRet = (recMdl.hkIxVTbl == ixInv); // IP handleCallWdbeMdl_hktEq --- LINE
-	return retval;
-};
-
-bool PnlWdbeModRec::handleCallWdbeMdl_ctrEq(
+bool PnlWdbeModRec::handleCallWdbeCtr_fwdEq(
 			DbsWdbe* dbswdbe
 			, const ubigint jrefTrig
 			, const ubigint refInv
 			, bool& boolvalRet
 		) {
 	bool retval = false;
-	boolvalRet = (recMdl.refWdbeMController == refInv); // IP handleCallWdbeMdl_ctrEq --- LINE
+	boolvalRet = (recCtr.fwdRefWdbeMUnit == refInv); // IP handleCallWdbeCtr_fwdEq --- LINE
 	return retval;
 };
 

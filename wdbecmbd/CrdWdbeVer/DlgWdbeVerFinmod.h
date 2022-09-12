@@ -122,7 +122,7 @@ public:
 		Sbecore::uint numFDse;
 
 	public:
-		bool readJSON(Json::Value& sup, bool addbasetag = false);
+		bool readJSON(const Json::Value& sup, bool addbasetag = false);
 		bool readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 		void writeJSON(Json::Value& sup, std::string difftag = "");
 		void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
@@ -316,7 +316,7 @@ public:
 	public:
 		std::string getSrefsMask();
 
-		void readJSON(Json::Value& sup, bool addbasetag = false);
+		void readJSON(const Json::Value& sup, bool addbasetag = false);
 		void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 	};
 
@@ -340,7 +340,7 @@ public:
 	public:
 		std::string getSrefsMask();
 
-		void readJSON(Json::Value& sup, bool addbasetag = false);
+		void readJSON(const Json::Value& sup, bool addbasetag = false);
 		void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 	};
 
@@ -457,16 +457,16 @@ private:
 	void handleDpchAppDoFnmButStoClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
 	void handleDpchAppWdbeAlert(DbsWdbe* dbswdbe, DpchAppWdbeAlert* dpchappwdbealert, DpchEngWdbe** dpcheng);
 
-	std::string handleDownloadInSgeFail(DbsWdbe* dbswdbe);
 	std::string handleDownloadInSgeDone(DbsWdbe* dbswdbe);
+	std::string handleDownloadInSgeFail(DbsWdbe* dbswdbe);
 
 	void handleDpchRetWdbe(DbsWdbe* dbswdbe, DpchRetWdbe* dpchret);
 	void handleDpchRetWdbeGenTest(DbsWdbe* dbswdbe, DpchRetWdbeGenTest* dpchret);
 	void handleDpchRetWdbeGenWiring(DbsWdbe* dbswdbe, DpchRetWdbeGenWiring* dpchret);
 
-	void handleTimerWithSrefMonInSgeGentst(DbsWdbe* dbswdbe);
-	void handleTimerWithSrefMonInSgeGenwri(DbsWdbe* dbswdbe);
 	void handleTimerWithSrefMonInSgeGensv(DbsWdbe* dbswdbe);
+	void handleTimerWithSrefMonInSgeGenwri(DbsWdbe* dbswdbe);
+	void handleTimerWithSrefMonInSgeGentst(DbsWdbe* dbswdbe);
 
 private:
 	void changeStage(DbsWdbe* dbswdbe, Sbecore::uint _ixVSge, DpchEngWdbe** dpcheng = NULL);

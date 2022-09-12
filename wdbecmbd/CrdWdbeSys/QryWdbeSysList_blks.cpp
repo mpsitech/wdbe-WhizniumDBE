@@ -21,8 +21,8 @@ uint QryWdbeSysList::VecVOrd::getIx(
 	string s = StrMod::lc(sref);
 
 	if (s == "unt") return UNT;
-	if (s == "srf") return SRF;
 	if (s == "ver") return VER;
+	if (s == "srf") return SRF;
 
 	return(0);
 };
@@ -31,8 +31,8 @@ string QryWdbeSysList::VecVOrd::getSref(
 			const uint ix
 		) {
 	if (ix == UNT) return("unt");
-	if (ix == SRF) return("srf");
 	if (ix == VER) return("ver");
+	if (ix == SRF) return("srf");
 
 	return("");
 };
@@ -183,15 +183,14 @@ QryWdbeSysList::StgIac::StgIac(
 };
 
 bool QryWdbeSysList::StgIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["StgIacQryWdbeSysList"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["StgIacQryWdbeSysList"];}();
 
 	basefound = (me != Json::nullValue);
 

@@ -1,9 +1,9 @@
 /**
-	* \file WdbeMtpCplmstbuSelectio_xlnx_v5_1_mipicsi.cpp
+	* \file WdbeMtpCplmstbuGpio_Easy_v1_0.cpp
 	* Wdbe operation processor - adapt port widths (implementation)
 	* \copyright (C) 2016-2020 MPSI Technologies GmbH
 	* \author Alexander Wirthmueller (auto-generation)
-	* \date created: 21 Dec 2021
+	* \date created: 7 Jun 2022
   */
 // IP header --- ABOVE
 
@@ -13,7 +13,7 @@
 	#include <Wdbeopd.h>
 #endif
 
-#include "WdbeMtpCplmstbuSelectio_xlnx_v5_1_mipicsi.h"
+#include "WdbeMtpCplmstbuGpio_Easy_v1_0.h"
 
 using namespace std;
 using namespace Sbecore;
@@ -23,10 +23,10 @@ using namespace WdbeMtpCplmstbu;
 // IP ns.cust --- INSERT
 
 /******************************************************************************
- namespace WdbeMtpCplmstbuSelectio_xlnx_v5_1_mipicsi
+ namespace WdbeMtpCplmstbuGpio_Easy_v1_0
  ******************************************************************************/
 
-DpchRetWdbe* WdbeMtpCplmstbuSelectio_xlnx_v5_1_mipicsi::run(
+DpchRetWdbe* WdbeMtpCplmstbuGpio_Easy_v1_0::run(
 			XchgWdbe* xchg
 			, DbsWdbe* dbswdbe
 			, DpchInvWdbeMtpCplmstbu* dpchinv
@@ -36,7 +36,11 @@ DpchRetWdbe* WdbeMtpCplmstbuSelectio_xlnx_v5_1_mipicsi::run(
 	utinyint ixOpVOpres = VecOpVOpres::SUCCESS;
 
 	// IP run --- IBEGIN
-	// obsolete
+	string w;
+
+	if (Wdbe::getGenDfv(dbswdbe, refWdbeMModule, "w", w)) {
+		Wdbe::setPrtWdt(dbswdbe, refWdbeMModule, "io", atoi(w.c_str()));
+	};
 	// IP run --- IEND
 
 	return(new DpchRetWdbe(VecWdbeVDpch::DPCHRETWDBE, "", "", ixOpVOpres, 100));

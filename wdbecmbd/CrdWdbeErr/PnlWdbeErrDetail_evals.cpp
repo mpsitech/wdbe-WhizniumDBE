@@ -84,13 +84,37 @@ bool PnlWdbeErrDetail::evalTxtReuActive(
 bool PnlWdbeErrDetail::evalButReuViewAvail(
 			DbsWdbe* dbswdbe
 		) {
-	// err.reuEq(0)|((pre.ixCrdaccMod()&err.retEq(ctr)&err.reu.mdl.inSbs(mod)&pre.refUnt())|(pre.ixCrdaccMod()&err.retEq(ctr)&err.reu.mdl.inSbs(mod)&pre.refCvr())|(pre.ixCrdaccMtp()&err.retEq(ctr)&err.reu.mdl.inSbs(mtp))|(pre.ixCrdaccUnt()&err.retEq(unt)&pre.refVer())|(pre.ixCrdaccSil()&err.retEq(unt)&err.reu.inSbs(sil)))
+	// err.reuEq(0)|((pre.ixCrdaccUnt()&err.retEq(unt)&pre.refVer())|(pre.ixCrdaccSil()&err.retEq(unt)&err.reu.inSbs(sil))|(pre.ixCrdaccMod()&err.retEq(ctr)&err.reu.mdl.inSbs(mod)&pre.refUnt())|(pre.ixCrdaccMod()&err.retEq(ctr)&err.reu.mdl.inSbs(mod)&pre.refCvr())|(pre.ixCrdaccMtp()&err.retEq(ctr)&err.reu.mdl.inSbs(mtp)))
 
 	vector<bool> args;
 	bool a, b;
 
 	a = false; a = (recErr.refUref == 0);
 	args.push_back(a);
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCUNT, jref) != 0);
+	args.push_back(a);
+	a = false; a = (recErr.refIxVTbl == VecWdbeVMErrorRefTbl::UNT);
+	args.push_back(a);
+	a = false; a = (xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFVER, jref) != 0);
+	args.push_back(a);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a && b);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a && b);
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCSIL, jref) != 0);
+	args.push_back(a);
+	a = false; a = (recErr.refIxVTbl == VecWdbeVMErrorRefTbl::UNT);
+	args.push_back(a);
+	a = false; a = ((dbswdbe->getIxWSubsetByRefWdbeMUnit(recErr.refUref) & VecWdbeWMUnitSubset::SBSWDBEBMUNITSIL) != 0);
+	args.push_back(a);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a && b);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a && b);
 	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCMOD, jref) != 0);
 	args.push_back(a);
 	a = false; a = (recErr.refIxVTbl == VecWdbeVMErrorRefTbl::CTR);
@@ -130,30 +154,6 @@ bool PnlWdbeErrDetail::evalButReuViewAvail(
 	a = false; a = (recErr.refIxVTbl == VecWdbeVMErrorRefTbl::CTR);
 	args.push_back(a);
 	a = false; a = ((dbswdbe->getIxWSubsetByRefWdbeMModule([&](){ubigint ref; dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMModule WHERE refWdbeMController = " + to_string(recErr.refUref), ref); return ref;}()) & VecWdbeWMModuleSubset::SBSWDBEBMMODULEMTP) != 0);
-	args.push_back(a);
-	b = args.back(); args.pop_back();
-	a = args.back(); args.pop_back();
-	args.push_back(a && b);
-	b = args.back(); args.pop_back();
-	a = args.back(); args.pop_back();
-	args.push_back(a && b);
-	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCUNT, jref) != 0);
-	args.push_back(a);
-	a = false; a = (recErr.refIxVTbl == VecWdbeVMErrorRefTbl::UNT);
-	args.push_back(a);
-	a = false; a = (xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFVER, jref) != 0);
-	args.push_back(a);
-	b = args.back(); args.pop_back();
-	a = args.back(); args.pop_back();
-	args.push_back(a && b);
-	b = args.back(); args.pop_back();
-	a = args.back(); args.pop_back();
-	args.push_back(a && b);
-	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCSIL, jref) != 0);
-	args.push_back(a);
-	a = false; a = (recErr.refIxVTbl == VecWdbeVMErrorRefTbl::UNT);
-	args.push_back(a);
-	a = false; a = ((dbswdbe->getIxWSubsetByRefWdbeMUnit(recErr.refUref) & VecWdbeWMUnitSubset::SBSWDBEBMUNITSIL) != 0);
 	args.push_back(a);
 	b = args.back(); args.pop_back();
 	a = args.back(); args.pop_back();

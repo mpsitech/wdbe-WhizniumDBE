@@ -58,15 +58,14 @@ PnlWdbeTrgList::ContIac::ContIac(
 };
 
 bool PnlWdbeTrgList::ContIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["ContIacWdbeTrgList"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["ContIacWdbeTrgList"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -319,15 +318,14 @@ PnlWdbeTrgList::StgIac::StgIac(
 };
 
 bool PnlWdbeTrgList::StgIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["StgIacWdbeTrgList"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["StgIacWdbeTrgList"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -501,15 +499,14 @@ string PnlWdbeTrgList::DpchAppData::getSrefsMask() {
 };
 
 void PnlWdbeTrgList::DpchAppData::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbeTrgListData"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbeTrgListData"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -579,15 +576,14 @@ string PnlWdbeTrgList::DpchAppDo::getSrefsMask() {
 };
 
 void PnlWdbeTrgList::DpchAppDo::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbeTrgListDo"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbeTrgListDo"];}();
 
 	basefound = (me != Json::nullValue);
 

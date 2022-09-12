@@ -38,8 +38,8 @@ PnlWdbeUsgRec::PnlWdbeUsgRec(
 		{
 	jref = xchg->addJob(dbswdbe, this, jrefSup);
 
-	pnlaaccess = NULL;
 	pnlmnuser = NULL;
+	pnlaaccess = NULL;
 	pnldetail = NULL;
 
 	// IP constructor.cust1 --- INSERT

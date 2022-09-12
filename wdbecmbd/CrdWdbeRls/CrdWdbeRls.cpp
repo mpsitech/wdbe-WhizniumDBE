@@ -46,12 +46,12 @@ CrdWdbeRls::CrdWdbeRls(
 	VecVSge::fillFeed(feedFSge);
 
 	pnllist = NULL;
-	pnlheadbar = NULL;
 	pnlrec = NULL;
+	pnlheadbar = NULL;
 	dlgwrite = NULL;
 	dlgnew = NULL;
-	dlgfinreptr = NULL;
 	dlgstareptr = NULL;
+	dlgfinreptr = NULL;
 
 	// IP constructor.cust1 --- INSERT
 
@@ -64,8 +64,8 @@ CrdWdbeRls::CrdWdbeRls(
 	changeRef(dbswdbe, jref, ((ref + 1) == 0) ? 0 : ref, false);
 
 	pnllist = new PnlWdbeRlsList(xchg, dbswdbe, jref, ixWdbeVLocale);
-	pnlheadbar = new PnlWdbeRlsHeadbar(xchg, dbswdbe, jref, ixWdbeVLocale);
 	pnlrec = new PnlWdbeRlsRec(xchg, dbswdbe, jref, ixWdbeVLocale);
+	pnlheadbar = new PnlWdbeRlsHeadbar(xchg, dbswdbe, jref, ixWdbeVLocale);
 
 	// IP constructor.cust2 --- INSERT
 
@@ -83,8 +83,8 @@ CrdWdbeRls::CrdWdbeRls(
 
 	changeStage(dbswdbe, VecVSge::IDLE);
 
-	xchg->addClstn(VecWdbeVCall::CALLWDBEREPTRSTART, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBEREPTRSTOP, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBEREPTRSTART, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBEREFPRESET, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBESTATCHG, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBEDLGCLOSE, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
@@ -341,10 +341,10 @@ void CrdWdbeRls::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBEREPTRSTART) {
-		call->abort = handleCallWdbeReptrStart(dbswdbe, call->jref, call->argInv.ix, call->argInv.txtval);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEREPTRSTOP) {
+	if (call->ixVCall == VecWdbeVCall::CALLWDBEREPTRSTOP) {
 		call->abort = handleCallWdbeReptrStop(dbswdbe, call->jref);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEREPTRSTART) {
+		call->abort = handleCallWdbeReptrStart(dbswdbe, call->jref, call->argInv.ix, call->argInv.txtval);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEREFPRESET) {
 		call->abort = handleCallWdbeRefPreSet(dbswdbe, call->jref, call->argInv.ix, call->argInv.ref);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBESTATCHG) {
@@ -352,6 +352,24 @@ void CrdWdbeRls::handleCall(
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEDLGCLOSE) {
 		call->abort = handleCallWdbeDlgClose(dbswdbe, call->jref);
 	};
+};
+
+bool CrdWdbeRls::handleCallWdbeReptrStop(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+	// IP handleCallWdbeReptrStop --- IBEGIN
+
+	xchg->removePreset(VecWdbeVPreset::PREWDBEIXBASEREPTYPE, jref);
+	xchg->removePreset(VecWdbeVPreset::PREWDBEGITURL, jref);
+	xchg->removePreset(VecWdbeVPreset::PREWDBEREPFOLDER, jref);
+	xchg->removePreset(VecWdbeVPreset::PREWDBEEXTFOLDER, jref);
+
+	if (!muteRefresh) refreshWithDpchEng(dbswdbe);
+
+	// IP handleCallWdbeReptrStop --- IEND
+	return retval;
 };
 
 bool CrdWdbeRls::handleCallWdbeReptrStart(
@@ -373,24 +391,6 @@ bool CrdWdbeRls::handleCallWdbeReptrStart(
 	if (!muteRefresh) refreshWithDpchEng(dbswdbe);
 
 	// IP handleCallWdbeReptrStart --- IEND
-	return retval;
-};
-
-bool CrdWdbeRls::handleCallWdbeReptrStop(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-	// IP handleCallWdbeReptrStop --- IBEGIN
-
-	xchg->removePreset(VecWdbeVPreset::PREWDBEIXBASEREPTYPE, jref);
-	xchg->removePreset(VecWdbeVPreset::PREWDBEGITURL, jref);
-	xchg->removePreset(VecWdbeVPreset::PREWDBEREPFOLDER, jref);
-	xchg->removePreset(VecWdbeVPreset::PREWDBEEXTFOLDER, jref);
-
-	if (!muteRefresh) refreshWithDpchEng(dbswdbe);
-
-	// IP handleCallWdbeReptrStop --- IEND
 	return retval;
 };
 

@@ -149,15 +149,14 @@ QryWdbeModCtdMNModule::StgIac::StgIac(
 };
 
 bool QryWdbeModCtdMNModule::StgIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["StgIacQryWdbeModCtdMNModule"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["StgIacQryWdbeModCtdMNModule"];}();
 
 	basefound = (me != Json::nullValue);
 

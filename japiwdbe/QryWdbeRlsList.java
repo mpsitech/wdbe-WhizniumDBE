@@ -20,8 +20,8 @@ public class QryWdbeRlsList {
 	public static class VecVOrd {
 
 		public static final int MCH = 1;
-		public static final int TYP = 2;
-		public static final int VER = 3;
+		public static final int VER = 2;
+		public static final int TYP = 3;
 		public static final int SRF = 4;
 
 		public static int getIx(
@@ -30,8 +30,8 @@ public class QryWdbeRlsList {
 			String s = sref.toLowerCase();
 
 			if (s.equals("mch")) return MCH;
-			if (s.equals("typ")) return TYP;
 			if (s.equals("ver")) return VER;
+			if (s.equals("typ")) return TYP;
 			if (s.equals("srf")) return SRF;
 
 			return 0;
@@ -41,8 +41,8 @@ public class QryWdbeRlsList {
 					int ix
 				) {
 			if (ix == MCH) return("mch");
-			if (ix == TYP) return("typ");
 			if (ix == VER) return("ver");
+			if (ix == TYP) return("typ");
 			if (ix == SRF) return("srf");
 
 			return "";

@@ -350,9 +350,9 @@ void DlgWdbeRlsStareptr::handleRequest(
 		};
 
 	} else if (req->ixVBasetype == ReqWdbe::VecVBasetype::TIMER) {
-		if (ixVSge == VecVSge::UPKIDLE) handleTimerInSgeUpkidle(dbswdbe, req->sref);
+		if ((req->sref == "mon") && (ixVSge == VecVSge::CLONEGIT)) handleTimerWithSrefMonInSgeClonegit(dbswdbe);
 		else if (ixVSge == VecVSge::CLGIDLE) handleTimerInSgeClgidle(dbswdbe, req->sref);
-		else if ((req->sref == "mon") && (ixVSge == VecVSge::CLONEGIT)) handleTimerWithSrefMonInSgeClonegit(dbswdbe);
+		else if (ixVSge == VecVSge::UPKIDLE) handleTimerInSgeUpkidle(dbswdbe, req->sref);
 	};
 };
 
@@ -509,11 +509,11 @@ string DlgWdbeRlsStareptr::handleDownloadInSgeFail(
 	return(xchg->tmppath + "/" + logfile); // IP handleDownloadInSgeFail --- RLINE
 };
 
-void DlgWdbeRlsStareptr::handleTimerInSgeUpkidle(
+void DlgWdbeRlsStareptr::handleTimerWithSrefMonInSgeClonegit(
 			DbsWdbe* dbswdbe
-			, const string& sref
 		) {
-	changeStage(dbswdbe, nextIxVSgeSuccess);
+	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
+	refreshWithDpchEng(dbswdbe); // IP handleTimerWithSrefMonInSgeClonegit --- ILINE
 };
 
 void DlgWdbeRlsStareptr::handleTimerInSgeClgidle(
@@ -523,11 +523,11 @@ void DlgWdbeRlsStareptr::handleTimerInSgeClgidle(
 	changeStage(dbswdbe, nextIxVSgeSuccess);
 };
 
-void DlgWdbeRlsStareptr::handleTimerWithSrefMonInSgeClonegit(
+void DlgWdbeRlsStareptr::handleTimerInSgeUpkidle(
 			DbsWdbe* dbswdbe
+			, const string& sref
 		) {
-	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
-	refreshWithDpchEng(dbswdbe); // IP handleTimerWithSrefMonInSgeClonegit --- ILINE
+	changeStage(dbswdbe, nextIxVSgeSuccess);
 };
 
 void DlgWdbeRlsStareptr::changeStage(

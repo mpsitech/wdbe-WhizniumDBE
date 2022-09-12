@@ -1,8 +1,8 @@
 # file Makefile
 # make file for CrdWdbePph card job handler, release wdbed_mac
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
-# author: Emily Johnson (auto-generation)
-# date created: 28 Mar 2022
+# author: Alexander Wirthmueller (auto-generation)
+# date created: 11 Sep 2022
 # IP header --- ABOVE
 
 include ../Makefile.inc
@@ -16,7 +16,7 @@ STATLIBFLAGS = rcs
 INCPATH = -I$(BUILDROOT)/dbswdbe -I$(BUILDROOT)/wdbed/VecWdbe -I$(BUILDROOT)/wdbed/IexWdbe -I$(BUILDROOT)/wdbed
 INCPATH += -I${WHIZSDKROOT}/build -I${WHIZSDKROOT}/build/apiwzlm -I/opt/homebrew/include -I/opt/homebrew/opt/curl/include -I/opt/homebrew/opt/libgit2/include -I/opt/homebrew/opt/libmicrohttpd/include -I/opt/homebrew/opt/libxml2/include -I/opt/homebrew/opt/openssl@3/include -I/opt/homebrew/opt/sqlite3/include -I/usr/local/mysql/include
 
-OBJS = CrdWdbePph.o PnlWdbePphList.o QryWdbePphList.o PnlWdbePphHeadbar.o PnlWdbePphRec.o PnlWdbePphAPar.o QryWdbePphAPar.o PnlWdbePphMNModule.o QryWdbePphMNModule.o PnlWdbePphDetail.o
+OBJS = CrdWdbePph.o PnlWdbePphList.o QryWdbePphList.o PnlWdbePphHeadbar.o PnlWdbePphRec.o PnlWdbePphMNModule.o QryWdbePphMNModule.o PnlWdbePphAPar.o QryWdbePphAPar.o PnlWdbePphDetail.o
 
 LIB = libcrdwdbepph
 
@@ -29,7 +29,6 @@ all:	$(LIB)
 
 $(LIB):	$(OBJS)
 	$(STATLIB) $(STATLIBFLAGS) $(LIB).a $(OBJS)
-	rm -f *.o
 
 install:
 	mv $(LIB).a $(LIBROOT)/wdbed/

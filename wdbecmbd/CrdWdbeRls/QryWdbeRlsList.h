@@ -33,8 +33,8 @@ public:
 
 	public:
 		static const Sbecore::uint MCH = 1;
-		static const Sbecore::uint TYP = 2;
-		static const Sbecore::uint VER = 3;
+		static const Sbecore::uint VER = 2;
+		static const Sbecore::uint TYP = 3;
 		static const Sbecore::uint SRF = 4;
 
 		static Sbecore::uint getIx(const std::string& sref);
@@ -97,7 +97,7 @@ public:
 		Sbecore::uint nload;
 
 	public:
-		bool readJSON(Json::Value& sup, bool addbasetag = false);
+		bool readJSON(const Json::Value& sup, bool addbasetag = false);
 		bool readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 		void writeJSON(Json::Value& sup, std::string difftag = "");
 		void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
@@ -150,8 +150,8 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeRlsMod(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 	bool handleCallWdbeRlsUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbeRlsMod(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 	bool handleCallWdbeStubChgFromSelf(DbsWdbe* dbswdbe);
 
 };

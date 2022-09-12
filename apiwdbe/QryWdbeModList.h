@@ -32,8 +32,8 @@ namespace QryWdbeModList {
 		static const Sbecore::uint SUP = 2;
 		static const Sbecore::uint HKU = 3;
 		static const Sbecore::uint HKT = 4;
-		static const Sbecore::uint SRF = 5;
-		static const Sbecore::uint TYP = 6;
+		static const Sbecore::uint TYP = 5;
+		static const Sbecore::uint SRF = 6;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);

@@ -271,9 +271,9 @@ void QryWdbeVecList::rerun_orderSQL(
 			string& sqlstr
 			, const uint preIxOrd
 		) {
-	if (preIxOrd == VecVOrd::HKU) sqlstr += " ORDER BY TblWdbeMVector.hkUref ASC";
+	if (preIxOrd == VecVOrd::HKT) sqlstr += " ORDER BY TblWdbeMVector.hkIxVTbl ASC";
+	else if (preIxOrd == VecVOrd::HKU) sqlstr += " ORDER BY TblWdbeMVector.hkUref ASC";
 	else if (preIxOrd == VecVOrd::TYP) sqlstr += " ORDER BY TblWdbeMVector.ixVBasetype ASC";
-	else if (preIxOrd == VecVOrd::HKT) sqlstr += " ORDER BY TblWdbeMVector.hkIxVTbl ASC";
 	else if (preIxOrd == VecVOrd::SRF) sqlstr += " ORDER BY TblWdbeMVector.sref ASC";
 };
 

@@ -108,34 +108,34 @@ void PnlWdbeUntRec::StatApp::writeJSON(
 			Json::Value& sup
 			, string difftag
 			, const bool initdoneDetail
-			, const bool initdone1NInterrupt
-			, const bool initdoneSil1NUnit
-			, const bool initdone1NPeripheral
-			, const bool initdone1NBank
-			, const bool initdoneFwd1NController
 			, const bool initdone1NTarget
+			, const bool initdone1NInterrupt
+			, const bool initdone1NPeripheral
+			, const bool initdoneSil1NUnit
+			, const bool initdoneFwd1NController
+			, const bool initdone1NBank
+			, const bool initdoneHk1NModule
+			, const bool initdoneHk1NVector
 			, const bool initdoneRef1NSignal
 			, const bool initdoneRef1NError
 			, const bool initdoneRef1NCommand
-			, const bool initdoneHk1NModule
-			, const bool initdoneHk1NVector
 		) {
 	if (difftag.length() == 0) difftag = "StatAppWdbeUntRec";
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
 	me["initdoneDetail"] = initdoneDetail;
-	me["initdone1NInterrupt"] = initdone1NInterrupt;
-	me["initdoneSil1NUnit"] = initdoneSil1NUnit;
-	me["initdone1NPeripheral"] = initdone1NPeripheral;
-	me["initdone1NBank"] = initdone1NBank;
-	me["initdoneFwd1NController"] = initdoneFwd1NController;
 	me["initdone1NTarget"] = initdone1NTarget;
+	me["initdone1NInterrupt"] = initdone1NInterrupt;
+	me["initdone1NPeripheral"] = initdone1NPeripheral;
+	me["initdoneSil1NUnit"] = initdoneSil1NUnit;
+	me["initdoneFwd1NController"] = initdoneFwd1NController;
+	me["initdone1NBank"] = initdone1NBank;
+	me["initdoneHk1NModule"] = initdoneHk1NModule;
+	me["initdoneHk1NVector"] = initdoneHk1NVector;
 	me["initdoneRef1NSignal"] = initdoneRef1NSignal;
 	me["initdoneRef1NError"] = initdoneRef1NError;
 	me["initdoneRef1NCommand"] = initdoneRef1NCommand;
-	me["initdoneHk1NModule"] = initdoneHk1NModule;
-	me["initdoneHk1NVector"] = initdoneHk1NVector;
 };
 
 void PnlWdbeUntRec::StatApp::writeXML(
@@ -143,17 +143,17 @@ void PnlWdbeUntRec::StatApp::writeXML(
 			, string difftag
 			, bool shorttags
 			, const bool initdoneDetail
-			, const bool initdone1NInterrupt
-			, const bool initdoneSil1NUnit
-			, const bool initdone1NPeripheral
-			, const bool initdone1NBank
-			, const bool initdoneFwd1NController
 			, const bool initdone1NTarget
+			, const bool initdone1NInterrupt
+			, const bool initdone1NPeripheral
+			, const bool initdoneSil1NUnit
+			, const bool initdoneFwd1NController
+			, const bool initdone1NBank
+			, const bool initdoneHk1NModule
+			, const bool initdoneHk1NVector
 			, const bool initdoneRef1NSignal
 			, const bool initdoneRef1NError
 			, const bool initdoneRef1NCommand
-			, const bool initdoneHk1NModule
-			, const bool initdoneHk1NVector
 		) {
 	if (difftag.length() == 0) difftag = "StatAppWdbeUntRec";
 
@@ -163,17 +163,17 @@ void PnlWdbeUntRec::StatApp::writeXML(
 
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
 		writeBoolAttr(wr, itemtag, "sref", "initdoneDetail", initdoneDetail);
-		writeBoolAttr(wr, itemtag, "sref", "initdone1NInterrupt", initdone1NInterrupt);
-		writeBoolAttr(wr, itemtag, "sref", "initdoneSil1NUnit", initdoneSil1NUnit);
-		writeBoolAttr(wr, itemtag, "sref", "initdone1NPeripheral", initdone1NPeripheral);
-		writeBoolAttr(wr, itemtag, "sref", "initdone1NBank", initdone1NBank);
-		writeBoolAttr(wr, itemtag, "sref", "initdoneFwd1NController", initdoneFwd1NController);
 		writeBoolAttr(wr, itemtag, "sref", "initdone1NTarget", initdone1NTarget);
+		writeBoolAttr(wr, itemtag, "sref", "initdone1NInterrupt", initdone1NInterrupt);
+		writeBoolAttr(wr, itemtag, "sref", "initdone1NPeripheral", initdone1NPeripheral);
+		writeBoolAttr(wr, itemtag, "sref", "initdoneSil1NUnit", initdoneSil1NUnit);
+		writeBoolAttr(wr, itemtag, "sref", "initdoneFwd1NController", initdoneFwd1NController);
+		writeBoolAttr(wr, itemtag, "sref", "initdone1NBank", initdone1NBank);
+		writeBoolAttr(wr, itemtag, "sref", "initdoneHk1NModule", initdoneHk1NModule);
+		writeBoolAttr(wr, itemtag, "sref", "initdoneHk1NVector", initdoneHk1NVector);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneRef1NSignal", initdoneRef1NSignal);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneRef1NError", initdoneRef1NError);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneRef1NCommand", initdoneRef1NCommand);
-		writeBoolAttr(wr, itemtag, "sref", "initdoneHk1NModule", initdoneHk1NModule);
-		writeBoolAttr(wr, itemtag, "sref", "initdoneHk1NVector", initdoneHk1NVector);
 	xmlTextWriterEndElement(wr);
 };
 
@@ -184,39 +184,39 @@ void PnlWdbeUntRec::StatApp::writeXML(
 PnlWdbeUntRec::StatShr::StatShr(
 			const uint ixWdbeVExpstate
 			, const ubigint jrefDetail
+			, const ubigint jref1NTarget
 			, const ubigint jref1NInterrupt
+			, const ubigint jref1NPeripheral
 			, const ubigint jrefSil1NUnit
 			, const bool pnlsil1nunitAvail
-			, const ubigint jref1NPeripheral
-			, const ubigint jref1NBank
 			, const ubigint jrefFwd1NController
-			, const ubigint jref1NTarget
+			, const ubigint jref1NBank
+			, const ubigint jrefHk1NModule
+			, const ubigint jrefHk1NVector
 			, const ubigint jrefRef1NSignal
 			, const ubigint jrefRef1NError
 			, const ubigint jrefRef1NCommand
-			, const ubigint jrefHk1NModule
-			, const ubigint jrefHk1NVector
 			, const bool ButRegularizeActive
 		) :
 			Block()
 		{
 	this->ixWdbeVExpstate = ixWdbeVExpstate;
 	this->jrefDetail = jrefDetail;
+	this->jref1NTarget = jref1NTarget;
 	this->jref1NInterrupt = jref1NInterrupt;
+	this->jref1NPeripheral = jref1NPeripheral;
 	this->jrefSil1NUnit = jrefSil1NUnit;
 	this->pnlsil1nunitAvail = pnlsil1nunitAvail;
-	this->jref1NPeripheral = jref1NPeripheral;
-	this->jref1NBank = jref1NBank;
 	this->jrefFwd1NController = jrefFwd1NController;
-	this->jref1NTarget = jref1NTarget;
+	this->jref1NBank = jref1NBank;
+	this->jrefHk1NModule = jrefHk1NModule;
+	this->jrefHk1NVector = jrefHk1NVector;
 	this->jrefRef1NSignal = jrefRef1NSignal;
 	this->jrefRef1NError = jrefRef1NError;
 	this->jrefRef1NCommand = jrefRef1NCommand;
-	this->jrefHk1NModule = jrefHk1NModule;
-	this->jrefHk1NVector = jrefHk1NVector;
 	this->ButRegularizeActive = ButRegularizeActive;
 
-	mask = {IXWDBEVEXPSTATE, JREFDETAIL, JREF1NINTERRUPT, JREFSIL1NUNIT, PNLSIL1NUNITAVAIL, JREF1NPERIPHERAL, JREF1NBANK, JREFFWD1NCONTROLLER, JREF1NTARGET, JREFREF1NSIGNAL, JREFREF1NERROR, JREFREF1NCOMMAND, JREFHK1NMODULE, JREFHK1NVECTOR, BUTREGULARIZEACTIVE};
+	mask = {IXWDBEVEXPSTATE, JREFDETAIL, JREF1NTARGET, JREF1NINTERRUPT, JREF1NPERIPHERAL, JREFSIL1NUNIT, PNLSIL1NUNITAVAIL, JREFFWD1NCONTROLLER, JREF1NBANK, JREFHK1NMODULE, JREFHK1NVECTOR, JREFREF1NSIGNAL, JREFREF1NERROR, JREFREF1NCOMMAND, BUTREGULARIZEACTIVE};
 };
 
 void PnlWdbeUntRec::StatShr::writeJSON(
@@ -229,18 +229,18 @@ void PnlWdbeUntRec::StatShr::writeJSON(
 
 	me["srefIxWdbeVExpstate"] = VecWdbeVExpstate::getSref(ixWdbeVExpstate);
 	me["scrJrefDetail"] = Scr::scramble(jrefDetail);
+	me["scrJref1NTarget"] = Scr::scramble(jref1NTarget);
 	me["scrJref1NInterrupt"] = Scr::scramble(jref1NInterrupt);
+	me["scrJref1NPeripheral"] = Scr::scramble(jref1NPeripheral);
 	me["scrJrefSil1NUnit"] = Scr::scramble(jrefSil1NUnit);
 	me["pnlsil1nunitAvail"] = pnlsil1nunitAvail;
-	me["scrJref1NPeripheral"] = Scr::scramble(jref1NPeripheral);
-	me["scrJref1NBank"] = Scr::scramble(jref1NBank);
 	me["scrJrefFwd1NController"] = Scr::scramble(jrefFwd1NController);
-	me["scrJref1NTarget"] = Scr::scramble(jref1NTarget);
+	me["scrJref1NBank"] = Scr::scramble(jref1NBank);
+	me["scrJrefHk1NModule"] = Scr::scramble(jrefHk1NModule);
+	me["scrJrefHk1NVector"] = Scr::scramble(jrefHk1NVector);
 	me["scrJrefRef1NSignal"] = Scr::scramble(jrefRef1NSignal);
 	me["scrJrefRef1NError"] = Scr::scramble(jrefRef1NError);
 	me["scrJrefRef1NCommand"] = Scr::scramble(jrefRef1NCommand);
-	me["scrJrefHk1NModule"] = Scr::scramble(jrefHk1NModule);
-	me["scrJrefHk1NVector"] = Scr::scramble(jrefHk1NVector);
 	me["ButRegularizeActive"] = ButRegularizeActive;
 };
 
@@ -258,18 +258,18 @@ void PnlWdbeUntRec::StatShr::writeXML(
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
 		writeStringAttr(wr, itemtag, "sref", "srefIxWdbeVExpstate", VecWdbeVExpstate::getSref(ixWdbeVExpstate));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefDetail", Scr::scramble(jrefDetail));
+		writeStringAttr(wr, itemtag, "sref", "scrJref1NTarget", Scr::scramble(jref1NTarget));
 		writeStringAttr(wr, itemtag, "sref", "scrJref1NInterrupt", Scr::scramble(jref1NInterrupt));
+		writeStringAttr(wr, itemtag, "sref", "scrJref1NPeripheral", Scr::scramble(jref1NPeripheral));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefSil1NUnit", Scr::scramble(jrefSil1NUnit));
 		writeBoolAttr(wr, itemtag, "sref", "pnlsil1nunitAvail", pnlsil1nunitAvail);
-		writeStringAttr(wr, itemtag, "sref", "scrJref1NPeripheral", Scr::scramble(jref1NPeripheral));
-		writeStringAttr(wr, itemtag, "sref", "scrJref1NBank", Scr::scramble(jref1NBank));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefFwd1NController", Scr::scramble(jrefFwd1NController));
-		writeStringAttr(wr, itemtag, "sref", "scrJref1NTarget", Scr::scramble(jref1NTarget));
+		writeStringAttr(wr, itemtag, "sref", "scrJref1NBank", Scr::scramble(jref1NBank));
+		writeStringAttr(wr, itemtag, "sref", "scrJrefHk1NModule", Scr::scramble(jrefHk1NModule));
+		writeStringAttr(wr, itemtag, "sref", "scrJrefHk1NVector", Scr::scramble(jrefHk1NVector));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefRef1NSignal", Scr::scramble(jrefRef1NSignal));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefRef1NError", Scr::scramble(jrefRef1NError));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefRef1NCommand", Scr::scramble(jrefRef1NCommand));
-		writeStringAttr(wr, itemtag, "sref", "scrJrefHk1NModule", Scr::scramble(jrefHk1NModule));
-		writeStringAttr(wr, itemtag, "sref", "scrJrefHk1NVector", Scr::scramble(jrefHk1NVector));
 		writeBoolAttr(wr, itemtag, "sref", "ButRegularizeActive", ButRegularizeActive);
 	xmlTextWriterEndElement(wr);
 };
@@ -281,18 +281,18 @@ set<uint> PnlWdbeUntRec::StatShr::comm(
 
 	if (ixWdbeVExpstate == comp->ixWdbeVExpstate) insert(items, IXWDBEVEXPSTATE);
 	if (jrefDetail == comp->jrefDetail) insert(items, JREFDETAIL);
+	if (jref1NTarget == comp->jref1NTarget) insert(items, JREF1NTARGET);
 	if (jref1NInterrupt == comp->jref1NInterrupt) insert(items, JREF1NINTERRUPT);
+	if (jref1NPeripheral == comp->jref1NPeripheral) insert(items, JREF1NPERIPHERAL);
 	if (jrefSil1NUnit == comp->jrefSil1NUnit) insert(items, JREFSIL1NUNIT);
 	if (pnlsil1nunitAvail == comp->pnlsil1nunitAvail) insert(items, PNLSIL1NUNITAVAIL);
-	if (jref1NPeripheral == comp->jref1NPeripheral) insert(items, JREF1NPERIPHERAL);
-	if (jref1NBank == comp->jref1NBank) insert(items, JREF1NBANK);
 	if (jrefFwd1NController == comp->jrefFwd1NController) insert(items, JREFFWD1NCONTROLLER);
-	if (jref1NTarget == comp->jref1NTarget) insert(items, JREF1NTARGET);
+	if (jref1NBank == comp->jref1NBank) insert(items, JREF1NBANK);
+	if (jrefHk1NModule == comp->jrefHk1NModule) insert(items, JREFHK1NMODULE);
+	if (jrefHk1NVector == comp->jrefHk1NVector) insert(items, JREFHK1NVECTOR);
 	if (jrefRef1NSignal == comp->jrefRef1NSignal) insert(items, JREFREF1NSIGNAL);
 	if (jrefRef1NError == comp->jrefRef1NError) insert(items, JREFREF1NERROR);
 	if (jrefRef1NCommand == comp->jrefRef1NCommand) insert(items, JREFREF1NCOMMAND);
-	if (jrefHk1NModule == comp->jrefHk1NModule) insert(items, JREFHK1NMODULE);
-	if (jrefHk1NVector == comp->jrefHk1NVector) insert(items, JREFHK1NVECTOR);
 	if (ButRegularizeActive == comp->ButRegularizeActive) insert(items, BUTREGULARIZEACTIVE);
 
 	return(items);
@@ -306,7 +306,7 @@ set<uint> PnlWdbeUntRec::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {IXWDBEVEXPSTATE, JREFDETAIL, JREF1NINTERRUPT, JREFSIL1NUNIT, PNLSIL1NUNITAVAIL, JREF1NPERIPHERAL, JREF1NBANK, JREFFWD1NCONTROLLER, JREF1NTARGET, JREFREF1NSIGNAL, JREFREF1NERROR, JREFREF1NCOMMAND, JREFHK1NMODULE, JREFHK1NVECTOR, BUTREGULARIZEACTIVE};
+	diffitems = {IXWDBEVEXPSTATE, JREFDETAIL, JREF1NTARGET, JREF1NINTERRUPT, JREF1NPERIPHERAL, JREFSIL1NUNIT, PNLSIL1NUNITAVAIL, JREFFWD1NCONTROLLER, JREF1NBANK, JREFHK1NMODULE, JREFHK1NVECTOR, JREFREF1NSIGNAL, JREFREF1NERROR, JREFREF1NCOMMAND, BUTREGULARIZEACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -372,15 +372,14 @@ string PnlWdbeUntRec::DpchAppDo::getSrefsMask() {
 };
 
 void PnlWdbeUntRec::DpchAppDo::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbeUntRecDo"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbeUntRecDo"];}();
 
 	basefound = (me != Json::nullValue);
 

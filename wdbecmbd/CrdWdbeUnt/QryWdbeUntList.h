@@ -33,12 +33,12 @@ public:
 
 	public:
 		static const Sbecore::uint MDL = 1;
-		static const Sbecore::uint REU = 2;
+		static const Sbecore::uint RET = 2;
 		static const Sbecore::uint SYS = 3;
-		static const Sbecore::uint TIT = 4;
-		static const Sbecore::uint TYP = 5;
-		static const Sbecore::uint RET = 6;
-		static const Sbecore::uint SRF = 7;
+		static const Sbecore::uint REU = 4;
+		static const Sbecore::uint SRF = 5;
+		static const Sbecore::uint TIT = 6;
+		static const Sbecore::uint TYP = 7;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);
@@ -100,7 +100,7 @@ public:
 		Sbecore::uint nload;
 
 	public:
-		bool readJSON(Json::Value& sup, bool addbasetag = false);
+		bool readJSON(const Json::Value& sup, bool addbasetag = false);
 		bool readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 		void writeJSON(Json::Value& sup, std::string difftag = "");
 		void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
@@ -153,8 +153,8 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeUntMod(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 	bool handleCallWdbeUntUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbeUntMod(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 	bool handleCallWdbeStubChgFromSelf(DbsWdbe* dbswdbe);
 
 };

@@ -108,7 +108,7 @@ function refreshB(chgcol) {
 			if (i == 1) {
 				doc.cols.push("TcoVnd"); doc.widths.push(TcoVndWidth); doc.fs.push("vnd2"); doc.tos.push(0); wtot += TcoVndWidth;
 			} else if (i == 2) {
-				doc.cols.push("TcoTit"); doc.widths.push(TcoTitWidth); doc.fs.push("tit"); doc.tos.push(1); wtot += TcoTitWidth;
+				doc.cols.push("TcoTit"); doc.widths.push(TcoTitWidth); doc.fs.push("tit"); doc.tos.push(2); wtot += TcoTitWidth;
 			} else {
 				ix--;
 			};

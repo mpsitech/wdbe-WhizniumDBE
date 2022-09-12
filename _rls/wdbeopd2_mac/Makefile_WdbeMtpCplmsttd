@@ -1,8 +1,8 @@
 # file Makefile
 # make file for operation pack WdbeMtpCplmsttd, release wdbeopd2_mac
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
-# author: Emily Johnson (auto-generation)
-# date created: 28 Mar 2022
+# author: Alexander Wirthmueller (auto-generation)
+# date created: 11 Sep 2022
 # IP header --- ABOVE
 
 include ../Makefile.inc
@@ -17,7 +17,7 @@ INCPATH = -I$(BUILDROOT)/dbswdbe -I$(BUILDROOT)/wdbeopd2/VecWdbe -I$(BUILDROOT)/
 INCPATH += -I${WHIZSDKROOT}/build -I/opt/homebrew/include -I/opt/homebrew/opt/curl/include -I/opt/homebrew/opt/libmicrohttpd/include -I/opt/homebrew/opt/libxml2/include -I/usr/local/mysql/include
 
 OBJS = WdbeMtpCplmsttd_blks.o WdbeMtpCplmsttd.o
-OBJS += WdbeMtpCplmsttdCmdinv_v1_0.o WdbeMtpCplmsttdCmdret_v1_0.o WdbeMtpCplmsttdDpbram_v1_0.o WdbeMtpCplmsttdPmmu_v1_0.o WdbeMtpCplmsttdSpbram_v1_0.o WdbeMtpCplmsttdTop_lttc_v1_0.o WdbeMtpCplmsttdTop_mchp_v1_0.o WdbeMtpCplmsttdTop_xlnx_v1_0.o
+OBJS += WdbeMtpCplmsttdCmdinv_v1_0.o WdbeMtpCplmsttdCmdret_v1_0.o WdbeMtpCplmsttdDpbram_v1_0.o WdbeMtpCplmsttdGpio_Easy_v1_0.o WdbeMtpCplmsttdI2c_Easy_v1_0.o WdbeMtpCplmsttdPmmu_v1_0.o WdbeMtpCplmsttdSpbram_v1_0.o WdbeMtpCplmsttdTop_lttc_v1_0.o WdbeMtpCplmsttdTop_mchp_v1_0.o WdbeMtpCplmsttdTop_xlnx_v1_0.o
 
 LIB = libwdbemtpcplmsttd
 
@@ -30,7 +30,6 @@ all:	$(LIB)
 
 $(LIB):	$(OBJS)
 	$(STATLIB) $(STATLIBFLAGS) $(LIB).a $(OBJS)
-	rm -f *.o
 
 install:
 	mv $(LIB).a $(LIBROOT)/wdbeopd2/
