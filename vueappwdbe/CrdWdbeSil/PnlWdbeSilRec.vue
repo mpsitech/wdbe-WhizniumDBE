@@ -48,34 +48,11 @@
 			<v-divider/>
 			<v-row>
 				<v-col cols="12" md="6">
-					<PnlWdbeSil1NTarget
+					<PnlWdbeSil1NBank
 						v-on:crdopen="handleCrdopen"
 						v-on:request="handleRequest"
-						ref="PnlWdbeSil1NTarget"
-						:scrJref=statshr.scrJref1NTarget
-					/>
-				</v-col>
-				<v-col cols="12" md="6">
-					<PnlWdbeSil1NInterrupt
-						v-on:crdopen="handleCrdopen"
-						v-on:request="handleRequest"
-						ref="PnlWdbeSil1NInterrupt"
-						:scrJref=statshr.scrJref1NInterrupt
-					/>
-				</v-col>
-				<v-col cols="12" md="6">
-					<PnlWdbeSil1NPeripheral
-						v-on:crdopen="handleCrdopen"
-						v-on:request="handleRequest"
-						ref="PnlWdbeSil1NPeripheral"
-						:scrJref=statshr.scrJref1NPeripheral
-					/>
-				</v-col>
-				<v-col cols="12" md="6">
-					<PnlWdbeSilSil1NUnit
-						v-on:request="handleRequest"
-						ref="PnlWdbeSilSil1NUnit"
-						:scrJref=statshr.scrJrefSil1NUnit
+						ref="PnlWdbeSil1NBank"
+						:scrJref=statshr.scrJref1NBank
 					/>
 				</v-col>
 				<v-col cols="12" md="6">
@@ -87,11 +64,42 @@
 					/>
 				</v-col>
 				<v-col cols="12" md="6">
-					<PnlWdbeSil1NBank
+					<PnlWdbeSil1NTarget
 						v-on:crdopen="handleCrdopen"
 						v-on:request="handleRequest"
-						ref="PnlWdbeSil1NBank"
-						:scrJref=statshr.scrJref1NBank
+						ref="PnlWdbeSil1NTarget"
+						:scrJref=statshr.scrJref1NTarget
+					/>
+				</v-col>
+				<v-col cols="12" md="6">
+					<PnlWdbeSilSil1NUnit
+						v-on:request="handleRequest"
+						ref="PnlWdbeSilSil1NUnit"
+						:scrJref=statshr.scrJrefSil1NUnit
+					/>
+				</v-col>
+				<v-col cols="12" md="6">
+					<PnlWdbeSil1NPeripheral
+						v-on:crdopen="handleCrdopen"
+						v-on:request="handleRequest"
+						ref="PnlWdbeSil1NPeripheral"
+						:scrJref=statshr.scrJref1NPeripheral
+					/>
+				</v-col>
+				<v-col cols="12" md="6">
+					<PnlWdbeSil1NInterrupt
+						v-on:crdopen="handleCrdopen"
+						v-on:request="handleRequest"
+						ref="PnlWdbeSil1NInterrupt"
+						:scrJref=statshr.scrJref1NInterrupt
+					/>
+				</v-col>
+				<v-col cols="12" md="6">
+					<PnlWdbeSilRef1NCommand
+						v-on:crdopen="handleCrdopen"
+						v-on:request="handleRequest"
+						ref="PnlWdbeSilRef1NCommand"
+						:scrJref=statshr.scrJrefRef1NCommand
 					/>
 				</v-col>
 				<v-col cols="12" md="6">
@@ -111,14 +119,6 @@
 					/>
 				</v-col>
 				<v-col cols="12" md="6">
-					<PnlWdbeSilRef1NSignal
-						v-on:crdopen="handleCrdopen"
-						v-on:request="handleRequest"
-						ref="PnlWdbeSilRef1NSignal"
-						:scrJref=statshr.scrJrefRef1NSignal
-					/>
-				</v-col>
-				<v-col cols="12" md="6">
 					<PnlWdbeSilRef1NError
 						v-on:crdopen="handleCrdopen"
 						v-on:request="handleRequest"
@@ -127,11 +127,11 @@
 					/>
 				</v-col>
 				<v-col cols="12" md="6">
-					<PnlWdbeSilRef1NCommand
+					<PnlWdbeSilRef1NSignal
 						v-on:crdopen="handleCrdopen"
 						v-on:request="handleRequest"
-						ref="PnlWdbeSilRef1NCommand"
-						:scrJref=statshr.scrJrefRef1NCommand
+						ref="PnlWdbeSilRef1NSignal"
+						:scrJref=statshr.scrJrefRef1NSignal
 					/>
 				</v-col>
 			</v-row>
@@ -145,17 +145,17 @@
 	/*
 	*/
 	import PnlWdbeSilDetail from './PnlWdbeSilDetail';
-	import PnlWdbeSil1NTarget from './PnlWdbeSil1NTarget';
-	import PnlWdbeSil1NInterrupt from './PnlWdbeSil1NInterrupt';
-	import PnlWdbeSil1NPeripheral from './PnlWdbeSil1NPeripheral';
-	import PnlWdbeSilSil1NUnit from './PnlWdbeSilSil1NUnit';
-	import PnlWdbeSilFwd1NController from './PnlWdbeSilFwd1NController';
 	import PnlWdbeSil1NBank from './PnlWdbeSil1NBank';
+	import PnlWdbeSilFwd1NController from './PnlWdbeSilFwd1NController';
+	import PnlWdbeSil1NTarget from './PnlWdbeSil1NTarget';
+	import PnlWdbeSilSil1NUnit from './PnlWdbeSilSil1NUnit';
+	import PnlWdbeSil1NPeripheral from './PnlWdbeSil1NPeripheral';
+	import PnlWdbeSil1NInterrupt from './PnlWdbeSil1NInterrupt';
+	import PnlWdbeSilRef1NCommand from './PnlWdbeSilRef1NCommand';
 	import PnlWdbeSilHk1NModule from './PnlWdbeSilHk1NModule';
 	import PnlWdbeSilHk1NVector from './PnlWdbeSilHk1NVector';
-	import PnlWdbeSilRef1NSignal from './PnlWdbeSilRef1NSignal';
 	import PnlWdbeSilRef1NError from './PnlWdbeSilRef1NError';
-	import PnlWdbeSilRef1NCommand from './PnlWdbeSilRef1NCommand';
+	import PnlWdbeSilRef1NSignal from './PnlWdbeSilRef1NSignal';
 	/*
 	*/
 
@@ -174,17 +174,17 @@
 			/*
 			*/
 			PnlWdbeSilDetail,
-			PnlWdbeSil1NTarget,
-			PnlWdbeSil1NInterrupt,
-			PnlWdbeSil1NPeripheral,
-			PnlWdbeSilSil1NUnit,
-			PnlWdbeSilFwd1NController,
 			PnlWdbeSil1NBank,
+			PnlWdbeSilFwd1NController,
+			PnlWdbeSil1NTarget,
+			PnlWdbeSilSil1NUnit,
+			PnlWdbeSil1NPeripheral,
+			PnlWdbeSil1NInterrupt,
+			PnlWdbeSilRef1NCommand,
 			PnlWdbeSilHk1NModule,
 			PnlWdbeSilHk1NVector,
-			PnlWdbeSilRef1NSignal,
 			PnlWdbeSilRef1NError,
-			PnlWdbeSilRef1NCommand
+			PnlWdbeSilRef1NSignal
 			/*
 			*/
 		},
@@ -246,17 +246,17 @@
 						/*
 						*/
 						if (obj.scrJref == this.statshr.scrJrefDetail) this.$refs.PnlWdbeSilDetail.handleReply(obj);
-						else if (obj.scrJref == this.statshr.scrJref1NTarget) this.$refs.PnlWdbeSil1NTarget.handleReply(obj);
-						else if (obj.scrJref == this.statshr.scrJref1NInterrupt) this.$refs.PnlWdbeSil1NInterrupt.handleReply(obj);
-						else if (obj.scrJref == this.statshr.scrJref1NPeripheral) this.$refs.PnlWdbeSil1NPeripheral.handleReply(obj);
-						else if (obj.scrJref == this.statshr.scrJrefSil1NUnit) this.$refs.PnlWdbeSilSil1NUnit.handleReply(obj);
-						else if (obj.scrJref == this.statshr.scrJrefFwd1NController) this.$refs.PnlWdbeSilFwd1NController.handleReply(obj);
 						else if (obj.scrJref == this.statshr.scrJref1NBank) this.$refs.PnlWdbeSil1NBank.handleReply(obj);
+						else if (obj.scrJref == this.statshr.scrJrefFwd1NController) this.$refs.PnlWdbeSilFwd1NController.handleReply(obj);
+						else if (obj.scrJref == this.statshr.scrJref1NTarget) this.$refs.PnlWdbeSil1NTarget.handleReply(obj);
+						else if (obj.scrJref == this.statshr.scrJrefSil1NUnit) this.$refs.PnlWdbeSilSil1NUnit.handleReply(obj);
+						else if (obj.scrJref == this.statshr.scrJref1NPeripheral) this.$refs.PnlWdbeSil1NPeripheral.handleReply(obj);
+						else if (obj.scrJref == this.statshr.scrJref1NInterrupt) this.$refs.PnlWdbeSil1NInterrupt.handleReply(obj);
+						else if (obj.scrJref == this.statshr.scrJrefRef1NCommand) this.$refs.PnlWdbeSilRef1NCommand.handleReply(obj);
 						else if (obj.scrJref == this.statshr.scrJrefHk1NModule) this.$refs.PnlWdbeSilHk1NModule.handleReply(obj);
 						else if (obj.scrJref == this.statshr.scrJrefHk1NVector) this.$refs.PnlWdbeSilHk1NVector.handleReply(obj);
-						else if (obj.scrJref == this.statshr.scrJrefRef1NSignal) this.$refs.PnlWdbeSilRef1NSignal.handleReply(obj);
 						else if (obj.scrJref == this.statshr.scrJrefRef1NError) this.$refs.PnlWdbeSilRef1NError.handleReply(obj);
-						else if (obj.scrJref == this.statshr.scrJrefRef1NCommand) this.$refs.PnlWdbeSilRef1NCommand.handleReply(obj);
+						else if (obj.scrJref == this.statshr.scrJrefRef1NSignal) this.$refs.PnlWdbeSilRef1NSignal.handleReply(obj);
 						/*
 						*/
 					}
@@ -287,17 +287,17 @@
 						/*
 						*/
 						if (obj.dpcheng.scrJref == this.statshr.scrJrefDetail) this.$refs.PnlWdbeSilDetail.handleUpdate(obj);
-						else if (obj.dpcheng.scrJref == this.statshr.scrJref1NTarget) this.$refs.PnlWdbeSil1NTarget.handleUpdate(obj);
-						else if (obj.dpcheng.scrJref == this.statshr.scrJref1NInterrupt) this.$refs.PnlWdbeSil1NInterrupt.handleUpdate(obj);
-						else if (obj.dpcheng.scrJref == this.statshr.scrJref1NPeripheral) this.$refs.PnlWdbeSil1NPeripheral.handleUpdate(obj);
-						else if (obj.dpcheng.scrJref == this.statshr.scrJrefSil1NUnit) this.$refs.PnlWdbeSilSil1NUnit.handleUpdate(obj);
-						else if (obj.dpcheng.scrJref == this.statshr.scrJrefFwd1NController) this.$refs.PnlWdbeSilFwd1NController.handleUpdate(obj);
 						else if (obj.dpcheng.scrJref == this.statshr.scrJref1NBank) this.$refs.PnlWdbeSil1NBank.handleUpdate(obj);
+						else if (obj.dpcheng.scrJref == this.statshr.scrJrefFwd1NController) this.$refs.PnlWdbeSilFwd1NController.handleUpdate(obj);
+						else if (obj.dpcheng.scrJref == this.statshr.scrJref1NTarget) this.$refs.PnlWdbeSil1NTarget.handleUpdate(obj);
+						else if (obj.dpcheng.scrJref == this.statshr.scrJrefSil1NUnit) this.$refs.PnlWdbeSilSil1NUnit.handleUpdate(obj);
+						else if (obj.dpcheng.scrJref == this.statshr.scrJref1NPeripheral) this.$refs.PnlWdbeSil1NPeripheral.handleUpdate(obj);
+						else if (obj.dpcheng.scrJref == this.statshr.scrJref1NInterrupt) this.$refs.PnlWdbeSil1NInterrupt.handleUpdate(obj);
+						else if (obj.dpcheng.scrJref == this.statshr.scrJrefRef1NCommand) this.$refs.PnlWdbeSilRef1NCommand.handleUpdate(obj);
 						else if (obj.dpcheng.scrJref == this.statshr.scrJrefHk1NModule) this.$refs.PnlWdbeSilHk1NModule.handleUpdate(obj);
 						else if (obj.dpcheng.scrJref == this.statshr.scrJrefHk1NVector) this.$refs.PnlWdbeSilHk1NVector.handleUpdate(obj);
-						else if (obj.dpcheng.scrJref == this.statshr.scrJrefRef1NSignal) this.$refs.PnlWdbeSilRef1NSignal.handleUpdate(obj);
 						else if (obj.dpcheng.scrJref == this.statshr.scrJrefRef1NError) this.$refs.PnlWdbeSilRef1NError.handleUpdate(obj);
-						else if (obj.dpcheng.scrJref == this.statshr.scrJrefRef1NCommand) this.$refs.PnlWdbeSilRef1NCommand.handleUpdate(obj);
+						else if (obj.dpcheng.scrJref == this.statshr.scrJrefRef1NSignal) this.$refs.PnlWdbeSilRef1NSignal.handleUpdate(obj);
 						/*
 						*/
 						else processed = false;

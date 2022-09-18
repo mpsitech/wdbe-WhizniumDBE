@@ -47,17 +47,17 @@
 			</v-row>
 			<v-row>
 				<v-col cols="12" md="6">
-					<PnlWdbeCvrAPlh
-						v-on:request="handleRequest"
-						ref="PnlWdbeCvrAPlh"
-						:scrJref=statshr.scrJrefAPlh
-					/>
-				</v-col>
-				<v-col cols="12" md="6">
 					<PnlWdbeCvrAIp
 						v-on:request="handleRequest"
 						ref="PnlWdbeCvrAIp"
 						:scrJref=statshr.scrJrefAIp
+					/>
+				</v-col>
+				<v-col cols="12" md="6">
+					<PnlWdbeCvrAPlh
+						v-on:request="handleRequest"
+						ref="PnlWdbeCvrAPlh"
+						:scrJref=statshr.scrJrefAPlh
 					/>
 				</v-col>
 			</v-row>
@@ -90,8 +90,8 @@
 	/*
 	*/
 	import PnlWdbeCvrDetail from './PnlWdbeCvrDetail';
-	import PnlWdbeCvrAPlh from './PnlWdbeCvrAPlh';
 	import PnlWdbeCvrAIp from './PnlWdbeCvrAIp';
+	import PnlWdbeCvrAPlh from './PnlWdbeCvrAPlh';
 	import PnlWdbeCvrBcv1NCoreversion from './PnlWdbeCvrBcv1NCoreversion';
 	import PnlWdbeCvrHk1NModule from './PnlWdbeCvrHk1NModule';
 	/*
@@ -112,8 +112,8 @@
 			/*
 			*/
 			PnlWdbeCvrDetail,
-			PnlWdbeCvrAPlh,
 			PnlWdbeCvrAIp,
+			PnlWdbeCvrAPlh,
 			PnlWdbeCvrBcv1NCoreversion,
 			PnlWdbeCvrHk1NModule
 			/*
@@ -177,8 +177,8 @@
 						/*
 						*/
 						if (obj.scrJref == this.statshr.scrJrefDetail) this.$refs.PnlWdbeCvrDetail.handleReply(obj);
-						else if (obj.scrJref == this.statshr.scrJrefAPlh) this.$refs.PnlWdbeCvrAPlh.handleReply(obj);
 						else if (obj.scrJref == this.statshr.scrJrefAIp) this.$refs.PnlWdbeCvrAIp.handleReply(obj);
+						else if (obj.scrJref == this.statshr.scrJrefAPlh) this.$refs.PnlWdbeCvrAPlh.handleReply(obj);
 						else if (obj.scrJref == this.statshr.scrJrefBcv1NCoreversion) this.$refs.PnlWdbeCvrBcv1NCoreversion.handleReply(obj);
 						else if (obj.scrJref == this.statshr.scrJrefHk1NModule) this.$refs.PnlWdbeCvrHk1NModule.handleReply(obj);
 						/*
@@ -211,8 +211,8 @@
 						/*
 						*/
 						if (obj.dpcheng.scrJref == this.statshr.scrJrefDetail) this.$refs.PnlWdbeCvrDetail.handleUpdate(obj);
-						else if (obj.dpcheng.scrJref == this.statshr.scrJrefAPlh) this.$refs.PnlWdbeCvrAPlh.handleUpdate(obj);
 						else if (obj.dpcheng.scrJref == this.statshr.scrJrefAIp) this.$refs.PnlWdbeCvrAIp.handleUpdate(obj);
+						else if (obj.dpcheng.scrJref == this.statshr.scrJrefAPlh) this.$refs.PnlWdbeCvrAPlh.handleUpdate(obj);
 						else if (obj.dpcheng.scrJref == this.statshr.scrJrefBcv1NCoreversion) this.$refs.PnlWdbeCvrBcv1NCoreversion.handleUpdate(obj);
 						else if (obj.dpcheng.scrJref == this.statshr.scrJrefHk1NModule) this.$refs.PnlWdbeCvrHk1NModule.handleUpdate(obj);
 						/*

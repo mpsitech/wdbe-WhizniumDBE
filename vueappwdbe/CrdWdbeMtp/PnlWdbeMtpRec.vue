@@ -86,19 +86,19 @@
 					/>
 				</v-col>
 				<v-col cols="12" md="6">
-					<PnlWdbeMtpHsm1NPipeline
-						v-on:crdopen="handleCrdopen"
-						v-on:request="handleRequest"
-						ref="PnlWdbeMtpHsm1NPipeline"
-						:scrJref=statshr.scrJrefHsm1NPipeline
-					/>
-				</v-col>
-				<v-col cols="12" md="6">
 					<PnlWdbeMtpMdl1NPort
 						v-on:crdopen="handleCrdopen"
 						v-on:request="handleRequest"
 						ref="PnlWdbeMtpMdl1NPort"
 						:scrJref=statshr.scrJrefMdl1NPort
+					/>
+				</v-col>
+				<v-col cols="12" md="6">
+					<PnlWdbeMtpHsm1NPipeline
+						v-on:crdopen="handleCrdopen"
+						v-on:request="handleRequest"
+						ref="PnlWdbeMtpHsm1NPipeline"
+						:scrJref=statshr.scrJrefHsm1NPipeline
 					/>
 				</v-col>
 				<v-col cols="12" md="6">
@@ -110,17 +110,11 @@
 					/>
 				</v-col>
 				<v-col cols="12" md="6">
-					<PnlWdbeMtpRef1NSensitivity
+					<PnlWdbeMtpRef1NFile
+						v-on:crdopen="handleCrdopen"
 						v-on:request="handleRequest"
-						ref="PnlWdbeMtpRef1NSensitivity"
-						:scrJref=statshr.scrJrefRef1NSensitivity
-					/>
-				</v-col>
-				<v-col cols="12" md="6">
-					<PnlWdbeMtpRef1NVariable
-						v-on:request="handleRequest"
-						ref="PnlWdbeMtpRef1NVariable"
-						:scrJref=statshr.scrJrefRef1NVariable
+						ref="PnlWdbeMtpRef1NFile"
+						:scrJref=statshr.scrJrefRef1NFile
 					/>
 				</v-col>
 				<v-col cols="12" md="6">
@@ -132,11 +126,17 @@
 					/>
 				</v-col>
 				<v-col cols="12" md="6">
-					<PnlWdbeMtpRef1NFile
-						v-on:crdopen="handleCrdopen"
+					<PnlWdbeMtpRef1NVariable
 						v-on:request="handleRequest"
-						ref="PnlWdbeMtpRef1NFile"
-						:scrJref=statshr.scrJrefRef1NFile
+						ref="PnlWdbeMtpRef1NVariable"
+						:scrJref=statshr.scrJrefRef1NVariable
+					/>
+				</v-col>
+				<v-col cols="12" md="6">
+					<PnlWdbeMtpRef1NSensitivity
+						v-on:request="handleRequest"
+						ref="PnlWdbeMtpRef1NSensitivity"
+						:scrJref=statshr.scrJrefRef1NSensitivity
 					/>
 				</v-col>
 			</v-row>
@@ -155,13 +155,13 @@
 	import PnlWdbeMtpAPar from './PnlWdbeMtpAPar';
 	import PnlWdbeMtpMdl1NGeneric from './PnlWdbeMtpMdl1NGeneric';
 	import PnlWdbeMtpTpl1NModule from './PnlWdbeMtpTpl1NModule';
-	import PnlWdbeMtpHsm1NPipeline from './PnlWdbeMtpHsm1NPipeline';
 	import PnlWdbeMtpMdl1NPort from './PnlWdbeMtpMdl1NPort';
+	import PnlWdbeMtpHsm1NPipeline from './PnlWdbeMtpHsm1NPipeline';
 	import PnlWdbeMtpSup1NModule from './PnlWdbeMtpSup1NModule';
-	import PnlWdbeMtpRef1NSensitivity from './PnlWdbeMtpRef1NSensitivity';
-	import PnlWdbeMtpRef1NVariable from './PnlWdbeMtpRef1NVariable';
-	import PnlWdbeMtpMge1NSignal from './PnlWdbeMtpMge1NSignal';
 	import PnlWdbeMtpRef1NFile from './PnlWdbeMtpRef1NFile';
+	import PnlWdbeMtpMge1NSignal from './PnlWdbeMtpMge1NSignal';
+	import PnlWdbeMtpRef1NVariable from './PnlWdbeMtpRef1NVariable';
+	import PnlWdbeMtpRef1NSensitivity from './PnlWdbeMtpRef1NSensitivity';
 	/*
 	*/
 
@@ -185,13 +185,13 @@
 			PnlWdbeMtpAPar,
 			PnlWdbeMtpMdl1NGeneric,
 			PnlWdbeMtpTpl1NModule,
-			PnlWdbeMtpHsm1NPipeline,
 			PnlWdbeMtpMdl1NPort,
+			PnlWdbeMtpHsm1NPipeline,
 			PnlWdbeMtpSup1NModule,
-			PnlWdbeMtpRef1NSensitivity,
-			PnlWdbeMtpRef1NVariable,
+			PnlWdbeMtpRef1NFile,
 			PnlWdbeMtpMge1NSignal,
-			PnlWdbeMtpRef1NFile
+			PnlWdbeMtpRef1NVariable,
+			PnlWdbeMtpRef1NSensitivity
 			/*
 			*/
 		},
@@ -258,13 +258,13 @@
 						else if (obj.scrJref == this.statshr.scrJrefAPar) this.$refs.PnlWdbeMtpAPar.handleReply(obj);
 						else if (obj.scrJref == this.statshr.scrJrefMdl1NGeneric) this.$refs.PnlWdbeMtpMdl1NGeneric.handleReply(obj);
 						else if (obj.scrJref == this.statshr.scrJrefTpl1NModule) this.$refs.PnlWdbeMtpTpl1NModule.handleReply(obj);
-						else if (obj.scrJref == this.statshr.scrJrefHsm1NPipeline) this.$refs.PnlWdbeMtpHsm1NPipeline.handleReply(obj);
 						else if (obj.scrJref == this.statshr.scrJrefMdl1NPort) this.$refs.PnlWdbeMtpMdl1NPort.handleReply(obj);
+						else if (obj.scrJref == this.statshr.scrJrefHsm1NPipeline) this.$refs.PnlWdbeMtpHsm1NPipeline.handleReply(obj);
 						else if (obj.scrJref == this.statshr.scrJrefSup1NModule) this.$refs.PnlWdbeMtpSup1NModule.handleReply(obj);
-						else if (obj.scrJref == this.statshr.scrJrefRef1NSensitivity) this.$refs.PnlWdbeMtpRef1NSensitivity.handleReply(obj);
-						else if (obj.scrJref == this.statshr.scrJrefRef1NVariable) this.$refs.PnlWdbeMtpRef1NVariable.handleReply(obj);
-						else if (obj.scrJref == this.statshr.scrJrefMge1NSignal) this.$refs.PnlWdbeMtpMge1NSignal.handleReply(obj);
 						else if (obj.scrJref == this.statshr.scrJrefRef1NFile) this.$refs.PnlWdbeMtpRef1NFile.handleReply(obj);
+						else if (obj.scrJref == this.statshr.scrJrefMge1NSignal) this.$refs.PnlWdbeMtpMge1NSignal.handleReply(obj);
+						else if (obj.scrJref == this.statshr.scrJrefRef1NVariable) this.$refs.PnlWdbeMtpRef1NVariable.handleReply(obj);
+						else if (obj.scrJref == this.statshr.scrJrefRef1NSensitivity) this.$refs.PnlWdbeMtpRef1NSensitivity.handleReply(obj);
 						/*
 						*/
 					}
@@ -300,13 +300,13 @@
 						else if (obj.dpcheng.scrJref == this.statshr.scrJrefAPar) this.$refs.PnlWdbeMtpAPar.handleUpdate(obj);
 						else if (obj.dpcheng.scrJref == this.statshr.scrJrefMdl1NGeneric) this.$refs.PnlWdbeMtpMdl1NGeneric.handleUpdate(obj);
 						else if (obj.dpcheng.scrJref == this.statshr.scrJrefTpl1NModule) this.$refs.PnlWdbeMtpTpl1NModule.handleUpdate(obj);
-						else if (obj.dpcheng.scrJref == this.statshr.scrJrefHsm1NPipeline) this.$refs.PnlWdbeMtpHsm1NPipeline.handleUpdate(obj);
 						else if (obj.dpcheng.scrJref == this.statshr.scrJrefMdl1NPort) this.$refs.PnlWdbeMtpMdl1NPort.handleUpdate(obj);
+						else if (obj.dpcheng.scrJref == this.statshr.scrJrefHsm1NPipeline) this.$refs.PnlWdbeMtpHsm1NPipeline.handleUpdate(obj);
 						else if (obj.dpcheng.scrJref == this.statshr.scrJrefSup1NModule) this.$refs.PnlWdbeMtpSup1NModule.handleUpdate(obj);
-						else if (obj.dpcheng.scrJref == this.statshr.scrJrefRef1NSensitivity) this.$refs.PnlWdbeMtpRef1NSensitivity.handleUpdate(obj);
-						else if (obj.dpcheng.scrJref == this.statshr.scrJrefRef1NVariable) this.$refs.PnlWdbeMtpRef1NVariable.handleUpdate(obj);
-						else if (obj.dpcheng.scrJref == this.statshr.scrJrefMge1NSignal) this.$refs.PnlWdbeMtpMge1NSignal.handleUpdate(obj);
 						else if (obj.dpcheng.scrJref == this.statshr.scrJrefRef1NFile) this.$refs.PnlWdbeMtpRef1NFile.handleUpdate(obj);
+						else if (obj.dpcheng.scrJref == this.statshr.scrJrefMge1NSignal) this.$refs.PnlWdbeMtpMge1NSignal.handleUpdate(obj);
+						else if (obj.dpcheng.scrJref == this.statshr.scrJrefRef1NVariable) this.$refs.PnlWdbeMtpRef1NVariable.handleUpdate(obj);
+						else if (obj.dpcheng.scrJref == this.statshr.scrJrefRef1NSensitivity) this.$refs.PnlWdbeMtpRef1NSensitivity.handleUpdate(obj);
 						/*
 						*/
 						else processed = false;

@@ -19,11 +19,17 @@
 				:label="tag.CptUnt"
 			/>
 
-			<div
+			<v-select
 				class="my-1"
-			>
-				<!-- IP divVst - INSERT -->
-			</div>
+				v-model="contapp.fiFPupVst"
+				return-object
+				:items="feedFPupVst"
+				item-value="num"
+				item-text="tit1"
+				:label="tag.CptVst"
+				v-on:change="handleFiChange('numFPupVst', contapp.fiFPupVst)"
+				:disabled="!statshr.PupVstActive"
+			/>
 
 		</v-card-text>
 	</v-card>
@@ -71,7 +77,7 @@
 				this.$emit("request", {scrJref: this.scrJref, dpchapp: dpchapp, then: "handleDpchAppDataDoReply"});
 			},
 
-			handlePupChange: function(cisref, fi) {
+			handleFiChange: function(cisref, fi) {
 				this.contiac[cisref] = fi.num;
 
 				this.updateEng(["contiac"]);

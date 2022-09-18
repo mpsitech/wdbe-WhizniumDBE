@@ -72,19 +72,19 @@
 					/>
 				</v-col>
 				<v-col cols="12" md="6">
-					<PnlWdbeVer1NUnit
-						v-on:crdopen="handleCrdopen"
-						v-on:request="handleRequest"
-						ref="PnlWdbeVer1NUnit"
-						:scrJref=statshr.scrJref1NUnit
-					/>
-				</v-col>
-				<v-col cols="12" md="6">
 					<PnlWdbeVerRef1NFile
 						v-on:crdopen="handleCrdopen"
 						v-on:request="handleRequest"
 						ref="PnlWdbeVerRef1NFile"
 						:scrJref=statshr.scrJrefRef1NFile
+					/>
+				</v-col>
+				<v-col cols="12" md="6">
+					<PnlWdbeVer1NUnit
+						v-on:crdopen="handleCrdopen"
+						v-on:request="handleRequest"
+						ref="PnlWdbeVer1NUnit"
+						:scrJref=statshr.scrJref1NUnit
 					/>
 				</v-col>
 				<v-col cols="12" md="6">
@@ -109,8 +109,8 @@
 	import PnlWdbeVer1NRelease from './PnlWdbeVer1NRelease';
 	import PnlWdbeVer1NSystem from './PnlWdbeVer1NSystem';
 	import PnlWdbeVerBvr1NVersion from './PnlWdbeVerBvr1NVersion';
-	import PnlWdbeVer1NUnit from './PnlWdbeVer1NUnit';
 	import PnlWdbeVerRef1NFile from './PnlWdbeVerRef1NFile';
+	import PnlWdbeVer1NUnit from './PnlWdbeVer1NUnit';
 	import PnlWdbeVerMNLibrary from './PnlWdbeVerMNLibrary';
 	/*
 	*/
@@ -133,8 +133,8 @@
 			PnlWdbeVer1NRelease,
 			PnlWdbeVer1NSystem,
 			PnlWdbeVerBvr1NVersion,
-			PnlWdbeVer1NUnit,
 			PnlWdbeVerRef1NFile,
+			PnlWdbeVer1NUnit,
 			PnlWdbeVerMNLibrary
 			/*
 			*/
@@ -200,8 +200,8 @@
 						else if (obj.scrJref == this.statshr.scrJref1NRelease) this.$refs.PnlWdbeVer1NRelease.handleReply(obj);
 						else if (obj.scrJref == this.statshr.scrJref1NSystem) this.$refs.PnlWdbeVer1NSystem.handleReply(obj);
 						else if (obj.scrJref == this.statshr.scrJrefBvr1NVersion) this.$refs.PnlWdbeVerBvr1NVersion.handleReply(obj);
-						else if (obj.scrJref == this.statshr.scrJref1NUnit) this.$refs.PnlWdbeVer1NUnit.handleReply(obj);
 						else if (obj.scrJref == this.statshr.scrJrefRef1NFile) this.$refs.PnlWdbeVerRef1NFile.handleReply(obj);
+						else if (obj.scrJref == this.statshr.scrJref1NUnit) this.$refs.PnlWdbeVer1NUnit.handleReply(obj);
 						else if (obj.scrJref == this.statshr.scrJrefMNLibrary) this.$refs.PnlWdbeVerMNLibrary.handleReply(obj);
 						/*
 						*/
@@ -236,8 +236,8 @@
 						else if (obj.dpcheng.scrJref == this.statshr.scrJref1NRelease) this.$refs.PnlWdbeVer1NRelease.handleUpdate(obj);
 						else if (obj.dpcheng.scrJref == this.statshr.scrJref1NSystem) this.$refs.PnlWdbeVer1NSystem.handleUpdate(obj);
 						else if (obj.dpcheng.scrJref == this.statshr.scrJrefBvr1NVersion) this.$refs.PnlWdbeVerBvr1NVersion.handleUpdate(obj);
-						else if (obj.dpcheng.scrJref == this.statshr.scrJref1NUnit) this.$refs.PnlWdbeVer1NUnit.handleUpdate(obj);
 						else if (obj.dpcheng.scrJref == this.statshr.scrJrefRef1NFile) this.$refs.PnlWdbeVerRef1NFile.handleUpdate(obj);
+						else if (obj.dpcheng.scrJref == this.statshr.scrJref1NUnit) this.$refs.PnlWdbeVer1NUnit.handleUpdate(obj);
 						else if (obj.dpcheng.scrJref == this.statshr.scrJrefMNLibrary) this.$refs.PnlWdbeVerMNLibrary.handleUpdate(obj);
 						/*
 						*/

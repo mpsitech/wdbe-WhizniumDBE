@@ -1,17 +1,21 @@
 <template>
 	<v-card v-if="initdone" class="pa-3 my-3 mx-auto" elevation="1">
 		<v-card-text>
-			<div
+			<v-text-field
 				class="my-1"
-			>
-				<!-- IP divReu - INSERT -->
-			</div>
+				readonly
+				outlined
+				v-model="continf.TxtReu"
+				:label="tag.CptReu"
+			/>
 
-			<div
+			<v-text-field
 				class="my-1"
-			>
-				<!-- IP divSru - INSERT -->
-			</div>
+				readonly
+				outlined
+				v-model="continf.TxtSru"
+				:label="tag.CptSru"
+			/>
 
 		</v-card-text>
 	</v-card>
@@ -59,7 +63,7 @@
 				this.$emit("request", {scrJref: this.scrJref, dpchapp: dpchapp, then: "handleDpchAppDataDoReply"});
 			},
 
-			handlePupChange: function(cisref, fi) {
+			handleFiChange: function(cisref, fi) {
 				this.contiac[cisref] = fi.num;
 
 				this.updateEng(["contiac"]);

@@ -72,11 +72,11 @@
 					/>
 				</v-col>
 				<v-col cols="12" md="6">
-					<PnlWdbeModHsm1NPipeline
+					<PnlWdbeModMdl1NPort
 						v-on:crdopen="handleCrdopen"
 						v-on:request="handleRequest"
-						ref="PnlWdbeModHsm1NPipeline"
-						:scrJref=statshr.scrJrefHsm1NPipeline
+						ref="PnlWdbeModMdl1NPort"
+						:scrJref=statshr.scrJrefMdl1NPort
 					/>
 				</v-col>
 				<v-col cols="12" md="6">
@@ -88,11 +88,11 @@
 					/>
 				</v-col>
 				<v-col cols="12" md="6">
-					<PnlWdbeModMdl1NPort
+					<PnlWdbeModHsm1NPipeline
 						v-on:crdopen="handleCrdopen"
 						v-on:request="handleRequest"
-						ref="PnlWdbeModMdl1NPort"
-						:scrJref=statshr.scrJrefMdl1NPort
+						ref="PnlWdbeModHsm1NPipeline"
+						:scrJref=statshr.scrJrefHsm1NPipeline
 					/>
 				</v-col>
 				<v-col cols="12" md="6">
@@ -104,19 +104,11 @@
 					/>
 				</v-col>
 				<v-col cols="12" md="6">
-					<PnlWdbeModRef1NSignal
+					<PnlWdbeModMge1NSignal
 						v-on:crdopen="handleCrdopen"
 						v-on:request="handleRequest"
-						ref="PnlWdbeModRef1NSignal"
-						:scrJref=statshr.scrJrefRef1NSignal
-					/>
-				</v-col>
-				<v-col cols="12" md="6">
-					<PnlWdbeModRef1NSensitivity
-						v-on:crdopen="handleCrdopen"
-						v-on:request="handleRequest"
-						ref="PnlWdbeModRef1NSensitivity"
-						:scrJref=statshr.scrJrefRef1NSensitivity
+						ref="PnlWdbeModMge1NSignal"
+						:scrJref=statshr.scrJrefMge1NSignal
 					/>
 				</v-col>
 				<v-col cols="12" md="6">
@@ -128,11 +120,27 @@
 					/>
 				</v-col>
 				<v-col cols="12" md="6">
-					<PnlWdbeModMge1NSignal
+					<PnlWdbeModRef1NSensitivity
 						v-on:crdopen="handleCrdopen"
 						v-on:request="handleRequest"
-						ref="PnlWdbeModMge1NSignal"
-						:scrJref=statshr.scrJrefMge1NSignal
+						ref="PnlWdbeModRef1NSensitivity"
+						:scrJref=statshr.scrJrefRef1NSensitivity
+					/>
+				</v-col>
+				<v-col cols="12" md="6">
+					<PnlWdbeModRef1NSignal
+						v-on:crdopen="handleCrdopen"
+						v-on:request="handleRequest"
+						ref="PnlWdbeModRef1NSignal"
+						:scrJref=statshr.scrJrefRef1NSignal
+					/>
+				</v-col>
+				<v-col cols="12" md="6">
+					<PnlWdbeModCtrRef1NCommand
+						v-on:crdopen="handleCrdopen"
+						v-on:request="handleRequest"
+						ref="PnlWdbeModCtrRef1NCommand"
+						:scrJref=statshr.scrJrefCtrRef1NCommand
 					/>
 				</v-col>
 				<v-col cols="12" md="6">
@@ -152,11 +160,11 @@
 					/>
 				</v-col>
 				<v-col cols="12" md="6">
-					<PnlWdbeModCtrRef1NCommand
+					<PnlWdbeModCtdMNModule
 						v-on:crdopen="handleCrdopen"
 						v-on:request="handleRequest"
-						ref="PnlWdbeModCtrRef1NCommand"
-						:scrJref=statshr.scrJrefCtrRef1NCommand
+						ref="PnlWdbeModCtdMNModule"
+						:scrJref=statshr.scrJrefCtdMNModule
 					/>
 				</v-col>
 				<v-col cols="12" md="6">
@@ -165,14 +173,6 @@
 						v-on:request="handleRequest"
 						ref="PnlWdbeModMNPeripheral"
 						:scrJref=statshr.scrJrefMNPeripheral
-					/>
-				</v-col>
-				<v-col cols="12" md="6">
-					<PnlWdbeModCtdMNModule
-						v-on:crdopen="handleCrdopen"
-						v-on:request="handleRequest"
-						ref="PnlWdbeModCtdMNModule"
-						:scrJref=statshr.scrJrefCtdMNModule
 					/>
 				</v-col>
 				<v-col cols="12" md="6">
@@ -205,19 +205,19 @@
 	import PnlWdbeModKHdltype from './PnlWdbeModKHdltype';
 	import PnlWdbeModAPar from './PnlWdbeModAPar';
 	import PnlWdbeModMdl1NGeneric from './PnlWdbeModMdl1NGeneric';
-	import PnlWdbeModHsm1NPipeline from './PnlWdbeModHsm1NPipeline';
-	import PnlWdbeMod1NProcess from './PnlWdbeMod1NProcess';
 	import PnlWdbeModMdl1NPort from './PnlWdbeModMdl1NPort';
+	import PnlWdbeMod1NProcess from './PnlWdbeMod1NProcess';
+	import PnlWdbeModHsm1NPipeline from './PnlWdbeModHsm1NPipeline';
 	import PnlWdbeModSup1NModule from './PnlWdbeModSup1NModule';
-	import PnlWdbeModRef1NSignal from './PnlWdbeModRef1NSignal';
-	import PnlWdbeModRef1NSensitivity from './PnlWdbeModRef1NSensitivity';
-	import PnlWdbeModRef1NVariable from './PnlWdbeModRef1NVariable';
 	import PnlWdbeModMge1NSignal from './PnlWdbeModMge1NSignal';
+	import PnlWdbeModRef1NVariable from './PnlWdbeModRef1NVariable';
+	import PnlWdbeModRef1NSensitivity from './PnlWdbeModRef1NSensitivity';
+	import PnlWdbeModRef1NSignal from './PnlWdbeModRef1NSignal';
+	import PnlWdbeModCtrRef1NCommand from './PnlWdbeModCtrRef1NCommand';
 	import PnlWdbeModCtrHk1NVector from './PnlWdbeModCtrHk1NVector';
 	import PnlWdbeModCtrRef1NError from './PnlWdbeModCtrRef1NError';
-	import PnlWdbeModCtrRef1NCommand from './PnlWdbeModCtrRef1NCommand';
-	import PnlWdbeModMNPeripheral from './PnlWdbeModMNPeripheral';
 	import PnlWdbeModCtdMNModule from './PnlWdbeModCtdMNModule';
+	import PnlWdbeModMNPeripheral from './PnlWdbeModMNPeripheral';
 	import PnlWdbeModCorMNModule from './PnlWdbeModCorMNModule';
 	import PnlWdbeModCtrMNCommand from './PnlWdbeModCtrMNCommand';
 	/*
@@ -241,19 +241,19 @@
 			PnlWdbeModKHdltype,
 			PnlWdbeModAPar,
 			PnlWdbeModMdl1NGeneric,
-			PnlWdbeModHsm1NPipeline,
-			PnlWdbeMod1NProcess,
 			PnlWdbeModMdl1NPort,
+			PnlWdbeMod1NProcess,
+			PnlWdbeModHsm1NPipeline,
 			PnlWdbeModSup1NModule,
-			PnlWdbeModRef1NSignal,
-			PnlWdbeModRef1NSensitivity,
-			PnlWdbeModRef1NVariable,
 			PnlWdbeModMge1NSignal,
+			PnlWdbeModRef1NVariable,
+			PnlWdbeModRef1NSensitivity,
+			PnlWdbeModRef1NSignal,
+			PnlWdbeModCtrRef1NCommand,
 			PnlWdbeModCtrHk1NVector,
 			PnlWdbeModCtrRef1NError,
-			PnlWdbeModCtrRef1NCommand,
-			PnlWdbeModMNPeripheral,
 			PnlWdbeModCtdMNModule,
+			PnlWdbeModMNPeripheral,
 			PnlWdbeModCorMNModule,
 			PnlWdbeModCtrMNCommand
 			/*
@@ -320,19 +320,19 @@
 						else if (obj.scrJref == this.statshr.scrJrefKHdltype) this.$refs.PnlWdbeModKHdltype.handleReply(obj);
 						else if (obj.scrJref == this.statshr.scrJrefAPar) this.$refs.PnlWdbeModAPar.handleReply(obj);
 						else if (obj.scrJref == this.statshr.scrJrefMdl1NGeneric) this.$refs.PnlWdbeModMdl1NGeneric.handleReply(obj);
-						else if (obj.scrJref == this.statshr.scrJrefHsm1NPipeline) this.$refs.PnlWdbeModHsm1NPipeline.handleReply(obj);
-						else if (obj.scrJref == this.statshr.scrJref1NProcess) this.$refs.PnlWdbeMod1NProcess.handleReply(obj);
 						else if (obj.scrJref == this.statshr.scrJrefMdl1NPort) this.$refs.PnlWdbeModMdl1NPort.handleReply(obj);
+						else if (obj.scrJref == this.statshr.scrJref1NProcess) this.$refs.PnlWdbeMod1NProcess.handleReply(obj);
+						else if (obj.scrJref == this.statshr.scrJrefHsm1NPipeline) this.$refs.PnlWdbeModHsm1NPipeline.handleReply(obj);
 						else if (obj.scrJref == this.statshr.scrJrefSup1NModule) this.$refs.PnlWdbeModSup1NModule.handleReply(obj);
-						else if (obj.scrJref == this.statshr.scrJrefRef1NSignal) this.$refs.PnlWdbeModRef1NSignal.handleReply(obj);
-						else if (obj.scrJref == this.statshr.scrJrefRef1NSensitivity) this.$refs.PnlWdbeModRef1NSensitivity.handleReply(obj);
-						else if (obj.scrJref == this.statshr.scrJrefRef1NVariable) this.$refs.PnlWdbeModRef1NVariable.handleReply(obj);
 						else if (obj.scrJref == this.statshr.scrJrefMge1NSignal) this.$refs.PnlWdbeModMge1NSignal.handleReply(obj);
+						else if (obj.scrJref == this.statshr.scrJrefRef1NVariable) this.$refs.PnlWdbeModRef1NVariable.handleReply(obj);
+						else if (obj.scrJref == this.statshr.scrJrefRef1NSensitivity) this.$refs.PnlWdbeModRef1NSensitivity.handleReply(obj);
+						else if (obj.scrJref == this.statshr.scrJrefRef1NSignal) this.$refs.PnlWdbeModRef1NSignal.handleReply(obj);
+						else if (obj.scrJref == this.statshr.scrJrefCtrRef1NCommand) this.$refs.PnlWdbeModCtrRef1NCommand.handleReply(obj);
 						else if (obj.scrJref == this.statshr.scrJrefCtrHk1NVector) this.$refs.PnlWdbeModCtrHk1NVector.handleReply(obj);
 						else if (obj.scrJref == this.statshr.scrJrefCtrRef1NError) this.$refs.PnlWdbeModCtrRef1NError.handleReply(obj);
-						else if (obj.scrJref == this.statshr.scrJrefCtrRef1NCommand) this.$refs.PnlWdbeModCtrRef1NCommand.handleReply(obj);
-						else if (obj.scrJref == this.statshr.scrJrefMNPeripheral) this.$refs.PnlWdbeModMNPeripheral.handleReply(obj);
 						else if (obj.scrJref == this.statshr.scrJrefCtdMNModule) this.$refs.PnlWdbeModCtdMNModule.handleReply(obj);
+						else if (obj.scrJref == this.statshr.scrJrefMNPeripheral) this.$refs.PnlWdbeModMNPeripheral.handleReply(obj);
 						else if (obj.scrJref == this.statshr.scrJrefCorMNModule) this.$refs.PnlWdbeModCorMNModule.handleReply(obj);
 						else if (obj.scrJref == this.statshr.scrJrefCtrMNCommand) this.$refs.PnlWdbeModCtrMNCommand.handleReply(obj);
 						/*
@@ -368,19 +368,19 @@
 						else if (obj.dpcheng.scrJref == this.statshr.scrJrefKHdltype) this.$refs.PnlWdbeModKHdltype.handleUpdate(obj);
 						else if (obj.dpcheng.scrJref == this.statshr.scrJrefAPar) this.$refs.PnlWdbeModAPar.handleUpdate(obj);
 						else if (obj.dpcheng.scrJref == this.statshr.scrJrefMdl1NGeneric) this.$refs.PnlWdbeModMdl1NGeneric.handleUpdate(obj);
-						else if (obj.dpcheng.scrJref == this.statshr.scrJrefHsm1NPipeline) this.$refs.PnlWdbeModHsm1NPipeline.handleUpdate(obj);
-						else if (obj.dpcheng.scrJref == this.statshr.scrJref1NProcess) this.$refs.PnlWdbeMod1NProcess.handleUpdate(obj);
 						else if (obj.dpcheng.scrJref == this.statshr.scrJrefMdl1NPort) this.$refs.PnlWdbeModMdl1NPort.handleUpdate(obj);
+						else if (obj.dpcheng.scrJref == this.statshr.scrJref1NProcess) this.$refs.PnlWdbeMod1NProcess.handleUpdate(obj);
+						else if (obj.dpcheng.scrJref == this.statshr.scrJrefHsm1NPipeline) this.$refs.PnlWdbeModHsm1NPipeline.handleUpdate(obj);
 						else if (obj.dpcheng.scrJref == this.statshr.scrJrefSup1NModule) this.$refs.PnlWdbeModSup1NModule.handleUpdate(obj);
-						else if (obj.dpcheng.scrJref == this.statshr.scrJrefRef1NSignal) this.$refs.PnlWdbeModRef1NSignal.handleUpdate(obj);
-						else if (obj.dpcheng.scrJref == this.statshr.scrJrefRef1NSensitivity) this.$refs.PnlWdbeModRef1NSensitivity.handleUpdate(obj);
-						else if (obj.dpcheng.scrJref == this.statshr.scrJrefRef1NVariable) this.$refs.PnlWdbeModRef1NVariable.handleUpdate(obj);
 						else if (obj.dpcheng.scrJref == this.statshr.scrJrefMge1NSignal) this.$refs.PnlWdbeModMge1NSignal.handleUpdate(obj);
+						else if (obj.dpcheng.scrJref == this.statshr.scrJrefRef1NVariable) this.$refs.PnlWdbeModRef1NVariable.handleUpdate(obj);
+						else if (obj.dpcheng.scrJref == this.statshr.scrJrefRef1NSensitivity) this.$refs.PnlWdbeModRef1NSensitivity.handleUpdate(obj);
+						else if (obj.dpcheng.scrJref == this.statshr.scrJrefRef1NSignal) this.$refs.PnlWdbeModRef1NSignal.handleUpdate(obj);
+						else if (obj.dpcheng.scrJref == this.statshr.scrJrefCtrRef1NCommand) this.$refs.PnlWdbeModCtrRef1NCommand.handleUpdate(obj);
 						else if (obj.dpcheng.scrJref == this.statshr.scrJrefCtrHk1NVector) this.$refs.PnlWdbeModCtrHk1NVector.handleUpdate(obj);
 						else if (obj.dpcheng.scrJref == this.statshr.scrJrefCtrRef1NError) this.$refs.PnlWdbeModCtrRef1NError.handleUpdate(obj);
-						else if (obj.dpcheng.scrJref == this.statshr.scrJrefCtrRef1NCommand) this.$refs.PnlWdbeModCtrRef1NCommand.handleUpdate(obj);
-						else if (obj.dpcheng.scrJref == this.statshr.scrJrefMNPeripheral) this.$refs.PnlWdbeModMNPeripheral.handleUpdate(obj);
 						else if (obj.dpcheng.scrJref == this.statshr.scrJrefCtdMNModule) this.$refs.PnlWdbeModCtdMNModule.handleUpdate(obj);
+						else if (obj.dpcheng.scrJref == this.statshr.scrJrefMNPeripheral) this.$refs.PnlWdbeModMNPeripheral.handleUpdate(obj);
 						else if (obj.dpcheng.scrJref == this.statshr.scrJrefCorMNModule) this.$refs.PnlWdbeModCorMNModule.handleUpdate(obj);
 						else if (obj.dpcheng.scrJref == this.statshr.scrJrefCtrMNCommand) this.$refs.PnlWdbeModCtrMNCommand.handleUpdate(obj);
 						/*

@@ -18,23 +18,25 @@
 
 			<v-divider/>
 
-			<div
+			<v-text-field
 				class="my-1"
-			>
-				<!-- IP divReu - INSERT -->
-			</div>
+				readonly
+				outlined
+				v-model="continf.TxtReu"
+				:label="tag.CptReu"
+			/>
 
 			<v-select
 				class="my-1"
 				v-model="contapp.fiFPupRty"
+				return-object
 				:items="feedFPupRty"
-				:label='tag.CptRty'
-				v-on:change="handlePupChange('numFPupRty', contapp.fiFPupRty)"
+				item-value="num"
+				item-text="tit1"
+				:label="tag.CptRty"
+				v-on:change="handleFiChange('numFPupRty', contapp.fiFPupRty)"
 				:disabled="!statshr.PupRtyActive"
-			>
-				<template v-slot:selection="{item}">{{item.tit1}}</template>
-				<template v-slot:item="{item}">{{item.tit1}}</template>
-			</v-select>
+			/>
 
 			<v-text-field
 				class="my-1"
@@ -113,7 +115,7 @@
 				this.$emit("request", {scrJref: this.scrJref, dpchapp: dpchapp, then: "handleDpchAppDataDoReply"});
 			},
 
-			handlePupChange: function(cisref, fi) {
+			handleFiChange: function(cisref, fi) {
 				this.contiac[cisref] = fi.num;
 
 				this.updateEng(["contiac"]);

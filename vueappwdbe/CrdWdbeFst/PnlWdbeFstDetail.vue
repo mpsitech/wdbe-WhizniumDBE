@@ -11,11 +11,17 @@
 
 			<v-divider/>
 
-			<div
+			<v-select
 				class="my-1"
-			>
-				<!-- IP divClu - INSERT -->
-			</div>
+				v-model="contapp.fiFLstClu"
+				return-object
+				:items="feedFLstClu"
+				item-value="num"
+				item-text="tit1"
+				:label="tag.CptClu"
+				v-on:change="handleFiChange('numFLstClu', contapp.fiFLstClu)"
+				:disabled="!statshr.LstCluActive"
+			/>
 
 			<v-text-field
 				class="my-1"
@@ -84,6 +90,12 @@
 				};
 
 				this.$emit("request", {scrJref: this.scrJref, dpchapp: dpchapp, then: "handleDpchAppDataDoReply"});
+			},
+
+			handleFiChange: function(cisref, fi) {
+				this.contiac[cisref] = fi.num;
+
+				this.updateEng(["contiac"]);
 			},
 
 			updateEng: function(mask) {

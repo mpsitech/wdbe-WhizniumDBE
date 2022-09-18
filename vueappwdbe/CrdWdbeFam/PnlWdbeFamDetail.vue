@@ -1,11 +1,17 @@
 <template>
 	<v-card v-if="initdone" class="pa-3 my-3 mx-auto" elevation="1">
 		<v-card-text>
-			<div
+			<v-select
 				class="my-1"
-			>
-				<!-- IP divVnd - INSERT -->
-			</div>
+				v-model="contapp.fiFPupVnd"
+				return-object
+				:items="feedFPupVnd"
+				item-value="num"
+				item-text="tit1"
+				:label="tag.CptVnd"
+				v-on:change="handleFiChange('numFPupVnd', contapp.fiFPupVnd)"
+				:disabled="!statshr.PupVndActive"
+			/>
 
 			<v-text-field
 				class="my-1"
@@ -69,7 +75,7 @@
 				this.$emit("request", {scrJref: this.scrJref, dpchapp: dpchapp, then: "handleDpchAppDataDoReply"});
 			},
 
-			handlePupChange: function(cisref, fi) {
+			handleFiChange: function(cisref, fi) {
 				this.contiac[cisref] = fi.num;
 
 				this.updateEng(["contiac"]);

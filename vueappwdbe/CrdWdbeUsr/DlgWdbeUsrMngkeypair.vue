@@ -22,7 +22,7 @@
 			<v-row class="my-1">
 				<v-col>
 					<v-btn
-						v-on:click="handleButClick('DetButDelClick')"
+						v-on:click="handleButClick('', 'DetButDelClick')"
 						class="my-1"
 						color="primary"
 					>
@@ -30,7 +30,7 @@
 					</v-btn>
 					&#160;
 					<v-btn
-						v-on:click="handleButClick('DetButGenClick')"
+						v-on:click="handleButClick('', 'DetButGenClick')"
 						class="my-1"
 						color="primary"
 					>
@@ -44,11 +44,12 @@
 			<v-btn
 				download
 				:href="hrefDld"
-				:disabled="!statshr.DldActive"
+				target="_blank"
+				:disabled="!statshr.DetDldActive"
 				class="my-1"
 				color="primary"
 			>
-				{{tag.Dld}}
+				{{tag.DetDld}}
 			</v-btn>
 		</v-card-text>
 		<v-divider/>
@@ -95,14 +96,15 @@
 			*/
 
 			handleButClick: function(ditshort, ctlsref) {
-				var dpchapp = {
+				var srefIxVDo = "srefIxVDo";
+				if (ditshort != "") srefIxVDo += ditshort.charAt(0).toUpperCase() + ditshort.slice(1);
+
+				const dpchapp = {
 					"DpchAppDlgWdbeUsrMngkeypairDo": {
-						"scrJref": this.scrJref
+						"scrJref": this.scrJref,
+						[srefIxVDo]: ctlsref
 					}
 				};
-
-				if (ditshort != "") ditshort = ditshort.charAt(0).toUpperCase() + ditshort.slice(1);
-				dpchapp["DpchAppDlgWdbeUsrMngkeypairDo"]["srefIxVDo" + ditshort] = ctlsref;
 
 				this.$emit("request", {scrJref: this.scrJref, dpchapp: dpchapp, then: "handleDpchAppDataDoReply"});
 			},

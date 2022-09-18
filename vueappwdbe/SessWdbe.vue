@@ -437,10 +437,11 @@
 
 					} else if (srefIxWdbeVDpch == "DpchEngWdbeAlert") vm.showAlert(dpcheng);
 					else {
-						var processed = false;
 						const target = (dpcheng.scrJref == vm.scrJrefDlg) ? vm.$refs.dialog : (dpcheng.scrJref != vm.scrJrefCrdnav) ? vm.$refs.content : vm.$refs.CrdWdbeNav;
-						processed = target.handleUpdate({srefIxWdbeVDpch: srefIxWdbeVDpch, dpcheng: dpcheng});
-						if (!processed || (dpcheng.scrJref == vm.scrJrefCrd)) vm.$refs.CrdWdbeNav.handleUpdate({srefIxWdbeVDpch: srefIxWdbeVDpch, dpcheng: dpcheng});
+						if (target) {
+							var processed = target.handleUpdate({srefIxWdbeVDpch: srefIxWdbeVDpch, dpcheng: dpcheng});
+							if (!processed || (dpcheng.scrJref == vm.scrJrefCrd)) vm.$refs.CrdWdbeNav.handleUpdate({srefIxWdbeVDpch: srefIxWdbeVDpch, dpcheng: dpcheng});
+						}
 					}
 
 					if (iterate) vm.iterateNotify();

@@ -15,11 +15,17 @@
 				:disabled="!statshr.TxfFnmActive"
 			/>
 
-			<div
+			<v-select
 				class="my-1"
-			>
-				<!-- IP divJ - INSERT -->
-			</div>
+				v-model="contapp.fiFPupJ"
+				return-object
+				:items="feedFPupJ"
+				item-value="num"
+				item-text="tit1"
+				:label="tag.CptJ"
+				v-on:change="handleFiChange('numFPupJ', contapp.fiFPupJ)"
+				:disabled="!statshr.PupJActive"
+			/>
 
 			<v-text-field
 				class="my-1"
@@ -31,23 +37,30 @@
 
 			<v-divider/>
 
-			<div
+			<v-select
 				class="my-1"
-			>
-				<!-- IP divDrv - INSERT -->
-			</div>
+				v-model="contapp.fisFLstDrv"
+				multiple
+				return-object
+				:items="feedFLstDrv"
+				item-value="num"
+				item-text="tit1"
+				:label="tag.CptDrv"
+				v-on:change="handleFisChange('numsFLstDrv', contapp.fisFLstDrv)"
+				:disabled="!statshr.LstDrvActive"
+			/>
 
 			<v-select
 				class="my-1"
 				v-model="contapp.fiFPupSex"
+				return-object
 				:items="feedFPupSex"
-				:label='tag.CptSex'
-				v-on:change="handlePupChange('numFPupSex', contapp.fiFPupSex)"
+				item-value="num"
+				item-text="tit1"
+				:label="tag.CptSex"
+				v-on:change="handleFiChange('numFPupSex', contapp.fiFPupSex)"
 				:disabled="!statshr.PupSexActive"
-			>
-				<template v-slot:selection="{item}">{{item.tit1}}</template>
-				<template v-slot:item="{item}">{{item.tit1}}</template>
-			</v-select>
+			/>
 
 			<v-text-field
 				class="my-1"
@@ -76,6 +89,7 @@
 
 <script>
 	import Wdbe from '../../scripts/Wdbe';
+	import vecio from '../../scripts/vecio';
 
 	/*
 	<!-- IP import.cust - INSERT -->
@@ -116,8 +130,17 @@
 				this.$emit("request", {scrJref: this.scrJref, dpchapp: dpchapp, then: "handleDpchAppDataDoReply"});
 			},
 
-			handlePupChange: function(cisref, fi) {
+			handleFiChange: function(cisref, fi) {
 				this.contiac[cisref] = fi.num;
+
+				this.updateEng(["contiac"]);
+			},
+
+			handleFisChange: function(cisref, fis) {
+				var nums = new Uint32Array(fis.length);
+
+				for (let i = 0; i < fis.length; i++) nums[i] = fis[i].num;
+				this.contiac[cisref] = vecio.toBase64(nums);
 
 				this.updateEng(["contiac"]);
 			},
@@ -155,6 +178,14 @@
 							this.contapp.fiFPupJ = this.feedFPupJ[i];
 							break;
 						}
+					var fisFLstDrv = [];
+					var numsFLstDrv = vecio.parseUintvec(this.contiac.numsFLstDrv);
+
+					for (let i = 0; i < this.feedFLstDrv.length; i++)
+						if (numsFLstDrv.includes(this.feedFLstDrv[i].num))
+							fisFLstDrv.push(this.feedFLstDrv[i]);
+
+					this.contapp.fisFLstDrv = fisFLstDrv;
 					for (let i = 0; i < this.feedFPupSex.length; i++)
 						if (this.feedFPupSex[i].num == this.contiac.numFPupSex) {
 							this.contapp.fiFPupSex = this.feedFPupSex[i];

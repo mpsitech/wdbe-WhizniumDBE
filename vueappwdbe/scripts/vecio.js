@@ -1,20 +1,22 @@
 export default {
+	toBase64: function(arr) {
+		return(btoa(String.fromCharCode.apply(null, new Uint8Array(arr.buffer))));
+	},
+	
 	fromBase64: function(str) {
 		var strlen, cnt, ix, outbuf, dv, outbuflen, quad, trip;
-		var i, j;
-
+	
 		strlen = str.length;
 	
 		outbuflen = 0;
-		for (i = strlen; i > 0; i--) {
-			if ((str[i-1] == '\n') || (str[i-1] == '\r') || (str[i-1] == '\t') || (str[i-1] == ' ')) {
-				// do nothing
-			} else if (str[i-1] == '=') outbuflen--;
+		for (let i = strlen; i > 0; i--) {
+			if ((str[i-1] == '\n') || (str[i-1] == '\r') || (str[i-1] == '\t') || (str[i-1] == ' ')) continue;
+			else if (str[i-1] == '=') outbuflen--;
 			else break;
 		}
 	
 		ix = 0;
-		for (i = 0; i < strlen; i++) if ((str[i] == '\n') || (str[i] == '\r') || (str[i] == '\t') || (str[i] == ' ')) ix++;
+		for (let i = 0; i < strlen; i++) if ((str[i] == '\n') || (str[i] == '\r') || (str[i] == '\t') || (str[i] == ' ')) ix++;
 		strlen -= ix;
 	
 		cnt = strlen/4;
@@ -30,17 +32,17 @@ export default {
 	
 			ix = 0;
 	
-			for (i = 0; i < cnt; i++) {
-				while ((str[ix] == '\n') || (str[ix] == '\r') || (str[j] == '\t') || (str[j] == ' ')) ix++;
+			for (let i = 0; i < cnt; i++) {
+				while ((str[ix] == '\n') || (str[ix] == '\r') || (str[ix] == '\t') || (str[ix] == ' ')) ix++;
 				quad[0] = str.charCodeAt(ix++);
-				while ((str[ix] == '\n') || (str[ix] == '\r') || (str[j] == '\t') || (str[j] == ' ')) ix++;
+				while ((str[ix] == '\n') || (str[ix] == '\r') || (str[ix] == '\t') || (str[ix] == ' ')) ix++;
 				quad[1] = str.charCodeAt(ix++);
-				while ((str[ix] == '\n') || (str[ix] == '\r') || (str[j] == '\t') || (str[j] == ' ')) ix++;
+				while ((str[ix] == '\n') || (str[ix] == '\r') || (str[ix] == '\t') || (str[ix] == ' ')) ix++;
 				quad[2] = str.charCodeAt(ix++);
-				while ((str[ix] == '\n') || (str[ix] == '\r') || (str[j] == '\t') || (str[j] == ' ')) ix++;
+				while ((str[ix] == '\n') || (str[ix] == '\r') || (str[ix] == '\t') || (str[ix] == ' ')) ix++;
 				quad[3] = str.charCodeAt(ix++);
 	
-				for (j = 0; j < 4; j++) {
+				for (let j = 0; j < 4; j++) {
 					if ((quad[j] >= 0x41) && (quad[j] <= 0x5a)) quad[j] = quad[j] - 0x41;
 					else if ((quad[j] >= 0x61) && (quad[j] <= 0x7a)) quad[j] = quad[j] - 0x61 + 26;
 					else if ((quad[j] >= 0x30) && (quad[j] <= 0x39)) quad[j] = quad[j] - 0x30 + 52;
@@ -73,7 +75,27 @@ export default {
 	
 		return null;
 	},
-
+	
+	bigendian: function() {
+		return((new Uint8Array(new Uint32Array([0x12345678]).buffer)[0]) == 0x12);
+	},
+	
+	invertBuffer: function(_buf, varlen) {
+		var len = _buf.byteLength/varlen;
+		var buf = new Uint8Array(_buf);
+	
+		var c;
+	
+		for (var i = 0; i < len; i++) {
+			for (var j = 0; j < varlen/2; j++) {
+				c = buf[i*varlen+j];
+	
+				buf[i*varlen+j] = buf[i*varlen+(varlen-j-1)];
+				buf[i*varlen+(varlen-j-1)] = c;
+			}
+		}
+	},
+	
 	parseUtinyintvec: function(str) {
 		var buf;
 		
@@ -82,5 +104,24 @@ export default {
 		if (buf) return new Uint8Array(buf);
 	
 		return new Uint8Array(0);
+	},
+
+	parseUintvec: function(str) {
+		var varlen = 4;
+	
+		var buf, buflen;
+		
+		buf = this.fromBase64(str);
+	
+		if (buf) {
+			buflen = buf.byteLength;
+			if ((buflen%varlen) == 0) {
+				if (!this.bigendian()) this.invertBuffer(buf, varlen);
+	
+				return new Uint32Array(buf);
+			}
+		}
+	
+		return new Uint32Array(0);
 	}
 }

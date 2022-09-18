@@ -14,24 +14,24 @@
 			<v-select
 				class="my-1"
 				v-model="contapp.fiFDetPupPrj"
+				return-object
 				:items="feedFDetPupPrj"
-				:label='tag.CptDetPrj'
-				v-on:change="handlePupChange('numFDetPupPrj', contapp.fiFDetPupPrj)"
-			>
-				<template v-slot:selection="{item}">{{item.tit1}}</template>
-				<template v-slot:item="{item}">{{item.tit1}}</template>
-			</v-select>
+				item-value="num"
+				item-text="tit1"
+				:label="tag.CptDetPrj"
+				v-on:change="handleFiChange('', 'numFDetPupPrj', contapp.fiFDetPupPrj)"
+			/>
 
 			<v-select
 				class="my-1"
 				v-model="contapp.fiFDetPupBvr"
+				return-object
 				:items="feedFDetPupBvr"
-				:label='tag.CptDetBvr'
-				v-on:change="handlePupChange('numFDetPupBvr', contapp.fiFDetPupBvr)"
-			>
-				<template v-slot:selection="{item}">{{item.tit1}}</template>
-				<template v-slot:item="{item}">{{item.tit1}}</template>
-			</v-select>
+				item-value="num"
+				item-text="tit1"
+				:label="tag.CptDetBvr"
+				v-on:change="handleFiChange('', 'numFDetPupBvr', contapp.fiFDetPupBvr)"
+			/>
 
 			<v-text-field
 				class="my-1"
@@ -90,19 +90,20 @@
 			*/
 
 			handleButClick: function(ditshort, ctlsref) {
-				var dpchapp = {
+				var srefIxVDo = "srefIxVDo";
+				if (ditshort != "") srefIxVDo += ditshort.charAt(0).toUpperCase() + ditshort.slice(1);
+
+				const dpchapp = {
 					"DpchAppDlgWdbeVerNewDo": {
-						"scrJref": this.scrJref
+						"scrJref": this.scrJref,
+						[srefIxVDo]: ctlsref
 					}
 				};
-
-				if (ditshort != "") ditshort = ditshort.charAt(0).toUpperCase() + ditshort.slice(1);
-				dpchapp["DpchAppDlgWdbeVerNewDo"]["srefIxVDo" + ditshort] = ctlsref;
 
 				this.$emit("request", {scrJref: this.scrJref, dpchapp: dpchapp, then: "handleDpchAppDataDoReply"});
 			},
 
-			handlePupChange: function(ditshort, cisref, fi) {
+			handleFiChange: function(ditshort, cisref, fi) {
 				this["contiac" + ditshort][cisref] = fi.num;
 
 				this.updateEng(["contiac" + ditshort]);

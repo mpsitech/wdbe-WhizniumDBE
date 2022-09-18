@@ -10,23 +10,37 @@
 
 			<v-divider/>
 
-			<div
+			<v-select
 				class="my-1"
-			>
-				<!-- IP divClu - INSERT -->
-			</div>
+				v-model="contapp.fiFLstClu"
+				return-object
+				:items="feedFLstClu"
+				item-value="num"
+				item-text="tit1"
+				:label="tag.CptClu"
+				v-on:change="handleFiChange('numFLstClu', contapp.fiFLstClu)"
+				:disabled="!statshr.LstCluActive"
+			/>
 
-			<div
+			<v-text-field
 				class="my-1"
-			>
-				<!-- IP divReu - INSERT -->
-			</div>
+				readonly
+				outlined
+				v-model="continf.TxtReu"
+				:label="tag.CptReu"
+			/>
 
-			<div
+			<v-select
 				class="my-1"
-			>
-				<!-- IP divCnt - INSERT -->
-			</div>
+				v-model="contapp.fiFPupCnt"
+				return-object
+				:items="feedFPupCnt"
+				item-value="num"
+				item-text="tit1"
+				:label="tag.CptCnt"
+				v-on:change="handleFiChange('numFPupCnt', contapp.fiFPupCnt)"
+				:disabled="!statshr.PupCntActive"
+			/>
 
 			<v-text-field
 				class="my-1"
@@ -42,11 +56,17 @@
 				:disabled="!statshr.TxfAnmActive"
 			/>
 
-			<div
+			<v-select
 				class="my-1"
-			>
-				<!-- IP divMim - INSERT -->
-			</div>
+				v-model="contapp.fiFPupMim"
+				return-object
+				:items="feedFPupMim"
+				item-value="num"
+				item-text="tit1"
+				:label="tag.CptMim"
+				v-on:change="handleFiChange('numFPupMim', contapp.fiFPupMim)"
+				:disabled="!statshr.PupMimActive"
+			/>
 
 			<v-text-field
 				class="my-1"
@@ -108,7 +128,7 @@
 				this.$emit("request", {scrJref: this.scrJref, dpchapp: dpchapp, then: "handleDpchAppDataDoReply"});
 			},
 
-			handlePupChange: function(cisref, fi) {
+			handleFiChange: function(cisref, fi) {
 				this.contiac[cisref] = fi.num;
 
 				this.updateEng(["contiac"]);

@@ -9,31 +9,39 @@
 				:label="tag.CptSrf"
 			/>
 
-			<div
+			<v-select
 				class="my-1"
-			>
-				<!-- IP divVnd - INSERT -->
-			</div>
+				v-model="contapp.fiFPupVnd"
+				return-object
+				:items="feedFPupVnd"
+				item-value="num"
+				item-text="tit1"
+				:label="tag.CptVnd"
+				v-on:change="handleFiChange('numFPupVnd', contapp.fiFPupVnd)"
+				:disabled="!statshr.PupVndActive"
+			/>
 
 			<v-divider/>
 
 			<v-select
 				class="my-1"
 				v-model="contapp.fiFPupTyp"
+				return-object
 				:items="feedFPupTyp"
-				:label='tag.CptTyp'
-				v-on:change="handlePupChange('numFPupTyp', contapp.fiFPupTyp)"
+				item-value="num"
+				item-text="tit1"
+				:label="tag.CptTyp"
+				v-on:change="handleFiChange('numFPupTyp', contapp.fiFPupTyp)"
 				:disabled="!statshr.PupTypActive"
-			>
-				<template v-slot:selection="{item}">{{item.tit1}}</template>
-				<template v-slot:item="{item}">{{item.tit1}}</template>
-			</v-select>
+			/>
 
-			<div
+			<v-text-field
 				class="my-1"
-			>
-				<!-- IP divHku - INSERT -->
-			</div>
+				readonly
+				outlined
+				v-model="continf.TxtHku"
+				:label="tag.CptHku"
+			/>
 
 			<v-text-field
 				class="my-1"
@@ -121,14 +129,14 @@
 				v-if="statshr.PupImbRtyAvail"
 				class="my-1"
 				v-model="contapp.fiFPupImbRty"
+				return-object
 				:items="feedFPupImbRty"
-				:label='tag.CptImbRty'
-				v-on:change="handlePupChange('numFPupImbRty', contapp.fiFPupImbRty)"
+				item-value="num"
+				item-text="tit1"
+				:label="tag.CptImbRty"
+				v-on:change="handleFiChange('numFPupImbRty', contapp.fiFPupImbRty)"
 				:disabled="!statshr.PupImbRtyActive"
-			>
-				<template v-slot:selection="{item}">{{item.tit1}}</template>
-				<template v-slot:item="{item}">{{item.tit1}}</template>
-			</v-select>
+			/>
 
 			<v-text-field
 				v-if="statshr.TxfImbWidAvail"
@@ -200,7 +208,7 @@
 				this.$emit("request", {scrJref: this.scrJref, dpchapp: dpchapp, then: "handleDpchAppDataDoReply"});
 			},
 
-			handlePupChange: function(cisref, fi) {
+			handleFiChange: function(cisref, fi) {
 				this.contiac[cisref] = fi.num;
 
 				this.updateEng(["contiac"]);

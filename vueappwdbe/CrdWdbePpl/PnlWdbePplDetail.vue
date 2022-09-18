@@ -19,23 +19,29 @@
 				:label="tag.CptHsm"
 			/>
 
-			<div
+			<v-text-field
 				class="my-1"
-			>
-				<!-- IP divClk - INSERT -->
-			</div>
+				readonly
+				outlined
+				v-model="continf.TxtClk"
+				:label="tag.CptClk"
+			/>
 
-			<div
+			<v-text-field
 				class="my-1"
-			>
-				<!-- IP divClg - INSERT -->
-			</div>
+				readonly
+				outlined
+				v-model="continf.TxtClg"
+				:label="tag.CptClg"
+			/>
 
-			<div
+			<v-text-field
 				class="my-1"
-			>
-				<!-- IP divAsr - INSERT -->
-			</div>
+				readonly
+				outlined
+				v-model="continf.TxtAsr"
+				:label="tag.CptAsr"
+			/>
 
 			<v-text-field
 				class="my-1"

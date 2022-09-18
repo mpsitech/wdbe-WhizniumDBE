@@ -36,7 +36,7 @@
 			<v-row class="my-1">
 				<v-col>
 					<v-btn
-						v-on:click="handleButClick('DetButScnClick')"
+						v-on:click="handleButClick('', 'DetButScnClick')"
 						class="my-1"
 						color="primary"
 					>
@@ -44,7 +44,7 @@
 					</v-btn>
 					&#160;
 					<v-btn
-						v-on:click="handleButClick('DetButSdcClick')"
+						v-on:click="handleButClick('', 'DetButSdcClick')"
 						class="my-1"
 						color="primary"
 					>
@@ -58,24 +58,29 @@
 			<v-select
 				class="my-1"
 				v-model="contapp.fiFDetPupFis"
+				return-object
 				:items="feedFDetPupFis"
-				:label='tag.CptDetFis'
-				v-on:change="handlePupChange('numFDetPupFis', contapp.fiFDetPupFis)"
-			>
-				<template v-slot:selection="{item}">{{item.tit1}}</template>
-				<template v-slot:item="{item}">{{item.tit1}}</template>
-			</v-select>
+				item-value="num"
+				item-text="tit1"
+				:label="tag.CptDetFis"
+				v-on:change="handleFiChange('', 'numFDetPupFis', contapp.fiFDetPupFis)"
+			/>
 
-			<div
+			<v-select
 				class="my-1"
-			>
-				<!-- IP divDetLcs - INSERT -->
-			</div>
+				v-model="contapp.fiFDetLstLcs"
+				return-object
+				:items="feedFDetLstLcs"
+				item-value="num"
+				item-text="tit1"
+				:label="tag.CptDetLcs"
+				v-on:change="handleFiChange('', 'numFDetLstLcs', contapp.fiFDetLstLcs)"
+			/>
 
 			<v-row class="my-1">
 				<v-col>
 					<v-btn
-						v-on:click="handleButClick('DetButActClick')"
+						v-on:click="handleButClick('', 'DetButActClick')"
 						:disabled="!statshr.DetButActActive"
 						class="my-1"
 						color="primary"
@@ -170,19 +175,20 @@
 			*/
 
 			handleButClick: function(ditshort, ctlsref) {
-				var dpchapp = {
+				var srefIxVDo = "srefIxVDo";
+				if (ditshort != "") srefIxVDo += ditshort.charAt(0).toUpperCase() + ditshort.slice(1);
+
+				const dpchapp = {
 					"DpchAppDlgWdbeNavMnglicDo": {
-						"scrJref": this.scrJref
+						"scrJref": this.scrJref,
+						[srefIxVDo]: ctlsref
 					}
 				};
-
-				if (ditshort != "") ditshort = ditshort.charAt(0).toUpperCase() + ditshort.slice(1);
-				dpchapp["DpchAppDlgWdbeNavMnglicDo"]["srefIxVDo" + ditshort] = ctlsref;
 
 				this.$emit("request", {scrJref: this.scrJref, dpchapp: dpchapp, then: "handleDpchAppDataDoReply"});
 			},
 
-			handlePupChange: function(ditshort, cisref, fi) {
+			handleFiChange: function(ditshort, cisref, fi) {
 				this["contiac" + ditshort][cisref] = fi.num;
 
 				this.updateEng(["contiac" + ditshort]);

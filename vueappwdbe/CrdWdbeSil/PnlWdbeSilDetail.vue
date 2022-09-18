@@ -28,20 +28,22 @@
 			<v-select
 				class="my-1"
 				v-model="contapp.fiFPupTyp"
+				return-object
 				:items="feedFPupTyp"
-				:label='tag.CptTyp'
-				v-on:change="handlePupChange('numFPupTyp', contapp.fiFPupTyp)"
+				item-value="num"
+				item-text="tit1"
+				:label="tag.CptTyp"
+				v-on:change="handleFiChange('numFPupTyp', contapp.fiFPupTyp)"
 				:disabled="!statshr.PupTypActive"
-			>
-				<template v-slot:selection="{item}">{{item.tit1}}</template>
-				<template v-slot:item="{item}">{{item.tit1}}</template>
-			</v-select>
+			/>
 
-			<div
+			<v-text-field
 				class="my-1"
-			>
-				<!-- IP divReu - INSERT -->
-			</div>
+				readonly
+				outlined
+				v-model="continf.TxtReu"
+				:label="tag.CptReu"
+			/>
 
 			<v-text-field
 				class="my-1"
@@ -59,11 +61,17 @@
 				:label="tag.CptMdl"
 			/>
 
-			<div
+			<v-select
 				class="my-1"
-			>
-				<!-- IP divPkg - INSERT -->
-			</div>
+				v-model="contapp.fiFPupPkg"
+				return-object
+				:items="feedFPupPkg"
+				item-value="num"
+				item-text="tit1"
+				:label="tag.CptPkg"
+				v-on:change="handleFiChange('numFPupPkg', contapp.fiFPupPkg)"
+				:disabled="!statshr.PupPkgActive"
+			/>
 
 			<v-checkbox
 				class="my-1"
@@ -73,11 +81,17 @@
 				:disabled="!statshr.ChkEsyActive"
 			/>
 
-			<div
+			<v-select
 				class="my-1"
-			>
-				<!-- IP divTch - INSERT -->
-			</div>
+				v-model="contapp.fiFPupTch"
+				return-object
+				:items="feedFPupTch"
+				item-value="num"
+				item-text="tit1"
+				:label="tag.CptTch"
+				v-on:change="handleFiChange('numFPupTch', contapp.fiFPupTch)"
+				:disabled="!statshr.PupTchActive"
+			/>
 
 			<v-text-field
 				class="my-1"
@@ -132,7 +146,7 @@
 				this.$emit("request", {scrJref: this.scrJref, dpchapp: dpchapp, then: "handleDpchAppDataDoReply"});
 			},
 
-			handlePupChange: function(cisref, fi) {
+			handleFiChange: function(cisref, fi) {
 				this.contiac[cisref] = fi.num;
 
 				this.updateEng(["contiac"]);

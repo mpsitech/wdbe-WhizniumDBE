@@ -213,20 +213,22 @@
 			},
 
 			handleButClick_other: function(sref, scrJref, ctlsref) {
-				var dpchapp = {};
-				dpchapp["DpchAppWdbeNav" + sref + "Do"] = {
-					"scrJref": scrJref,
-					"srefIxVDo": ctlsref
+				const dpchapp = {
+					["DpchAppWdbeNav" + sref + "Do"]: {
+						"scrJref": scrJref,
+						"srefIxVDo": ctlsref
+					}
 				};
 
 				this.$emit("request", {scrJref: this.scrJref, dpchapp: dpchapp, then: "handleDpchAppDoReply"});
 			},
 
 			handleMitContentClick: function(ctlsref) {
-				var dpchapp = {};
-				dpchapp["DpchApp" + this.content.sref.substring(3) + "Do"] = {
-					"scrJref": this.content.scrJref,
-					"srefIxVDo": ctlsref
+				const dpchapp = {
+					["DpchApp" + this.content.sref.substring(3) + "Do"]: {
+						"scrJref": this.content.scrJref,
+						"srefIxVDo": ctlsref
+					}
 				};
 
 				this.$emit("request", {scrJref: this.content.scrJref, dpchapp: dpchapp, then: "handleDpchAppDoReply"}); // reply ends up in content card

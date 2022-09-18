@@ -40,29 +40,42 @@
 				:label="tag.CptBcv"
 			/>
 
-			<div
+			<v-select
 				class="my-1"
-			>
-				<!-- IP divJst - INSERT -->
-			</div>
+				v-model="contapp.fiFPupJst"
+				return-object
+				:items="feedFPupJst"
+				item-value="num"
+				item-text="tit1"
+				:label="tag.CptJst"
+				v-on:change="handleFiChange('numFPupJst', contapp.fiFPupJst)"
+				:disabled="!statshr.PupJstActive"
+			/>
 
 			<v-select
 				class="my-1"
 				v-model="contapp.fiFPupSte"
+				return-object
 				:items="feedFPupSte"
-				:label='tag.CptSte'
-				v-on:change="handlePupChange('numFPupSte', contapp.fiFPupSte)"
+				item-value="num"
+				item-text="tit1"
+				:label="tag.CptSte"
+				v-on:change="handleFiChange('numFPupSte', contapp.fiFPupSte)"
 				:disabled="!statshr.PupSteActive"
-			>
-				<template v-slot:selection="{item}">{{item.tit1}}</template>
-				<template v-slot:item="{item}">{{item.tit1}}</template>
-			</v-select>
+			/>
 
-			<div
+			<v-select
 				class="my-1"
-			>
-				<!-- IP divSty - INSERT -->
-			</div>
+				v-model="contapp.fisFLstSty"
+				multiple
+				return-object
+				:items="feedFLstSty"
+				item-value="num"
+				item-text="tit1"
+				:label="tag.CptSty"
+				v-on:change="handleFisChange('numsFLstSty', contapp.fisFLstSty)"
+				:disabled="!statshr.LstStyActive"
+			/>
 
 		</v-card-text>
 	</v-card>
@@ -70,6 +83,7 @@
 
 <script>
 	import Wdbe from '../../scripts/Wdbe';
+	import vecio from '../../scripts/vecio';
 
 	/*
 	<!-- IP import.cust - INSERT -->
@@ -110,8 +124,17 @@
 				this.$emit("request", {scrJref: this.scrJref, dpchapp: dpchapp, then: "handleDpchAppDataDoReply"});
 			},
 
-			handlePupChange: function(cisref, fi) {
+			handleFiChange: function(cisref, fi) {
 				this.contiac[cisref] = fi.num;
+
+				this.updateEng(["contiac"]);
+			},
+
+			handleFisChange: function(cisref, fis) {
+				var nums = new Uint32Array(fis.length);
+
+				for (let i = 0; i < fis.length; i++) nums[i] = fis[i].num;
+				this.contiac[cisref] = vecio.toBase64(nums);
 
 				this.updateEng(["contiac"]);
 			},
@@ -154,6 +177,14 @@
 							this.contapp.fiFPupSte = this.feedFPupSte[i];
 							break;
 						}
+					var fisFLstSty = [];
+					var numsFLstSty = vecio.parseUintvec(this.contiac.numsFLstSty);
+
+					for (let i = 0; i < this.feedFLstSty.length; i++)
+						if (numsFLstSty.includes(this.feedFLstSty[i].num))
+							fisFLstSty.push(this.feedFLstSty[i]);
+
+					this.contapp.fisFLstSty = fisFLstSty;
 				}
 				/*
 				<!-- IP mergeDpchEngData - END -->

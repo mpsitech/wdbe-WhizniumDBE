@@ -14,26 +14,35 @@
 			<v-select
 				class="my-1"
 				v-model="contapp.fiFPupTyp"
+				return-object
 				:items="feedFPupTyp"
-				:label='tag.CptTyp'
-				v-on:change="handlePupChange('numFPupTyp', contapp.fiFPupTyp)"
+				item-value="num"
+				item-text="tit1"
+				:label="tag.CptTyp"
+				v-on:change="handleFiChange('numFPupTyp', contapp.fiFPupTyp)"
 				:disabled="!statshr.PupTypActive"
-			>
-				<template v-slot:selection="{item}">{{item.tit1}}</template>
-				<template v-slot:item="{item}">{{item.tit1}}</template>
-			</v-select>
+			/>
 
-			<div
+			<v-text-field
 				class="my-1"
-			>
-				<!-- IP divHku - INSERT -->
-			</div>
+				readonly
+				outlined
+				v-model="continf.TxtHku"
+				:label="tag.CptHku"
+			/>
 
-			<div
+			<v-select
 				class="my-1"
-			>
-				<!-- IP divOpt - INSERT -->
-			</div>
+				v-model="contapp.fisFLstOpt"
+				multiple
+				return-object
+				:items="feedFLstOpt"
+				item-value="num"
+				item-text="tit1"
+				:label="tag.CptOpt"
+				v-on:change="handleFisChange('numsFLstOpt', contapp.fisFLstOpt)"
+				:disabled="!statshr.LstOptActive"
+			/>
 
 		</v-card-text>
 	</v-card>
@@ -41,6 +50,7 @@
 
 <script>
 	import Wdbe from '../../scripts/Wdbe';
+	import vecio from '../../scripts/vecio';
 
 	/*
 	<!-- IP import.cust - INSERT -->
@@ -81,8 +91,17 @@
 				this.$emit("request", {scrJref: this.scrJref, dpchapp: dpchapp, then: "handleDpchAppDataDoReply"});
 			},
 
-			handlePupChange: function(cisref, fi) {
+			handleFiChange: function(cisref, fi) {
 				this.contiac[cisref] = fi.num;
+
+				this.updateEng(["contiac"]);
+			},
+
+			handleFisChange: function(cisref, fis) {
+				var nums = new Uint32Array(fis.length);
+
+				for (let i = 0; i < fis.length; i++) nums[i] = fis[i].num;
+				this.contiac[cisref] = vecio.toBase64(nums);
 
 				this.updateEng(["contiac"]);
 			},
@@ -125,6 +144,14 @@
 							this.contapp.fiFPupHkt = this.feedFPupHkt[i];
 							break;
 						}
+					var fisFLstOpt = [];
+					var numsFLstOpt = vecio.parseUintvec(this.contiac.numsFLstOpt);
+
+					for (let i = 0; i < this.feedFLstOpt.length; i++)
+						if (numsFLstOpt.includes(this.feedFLstOpt[i].num))
+							fisFLstOpt.push(this.feedFLstOpt[i]);
+
+					this.contapp.fisFLstOpt = fisFLstOpt;
 				}
 				/*
 				<!-- IP mergeDpchEngData - END -->
