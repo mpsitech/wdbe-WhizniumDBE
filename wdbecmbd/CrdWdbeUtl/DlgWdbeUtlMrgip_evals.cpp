@@ -11,35 +11,54 @@ using namespace std;
 using namespace Sbecore;
 using namespace Xmlio;
 
-bool DlgWdbeUtlMrgip::evalSrcUldActive(
+bool DlgWdbeUtlMrgip::evalButDneActive(
 			DbsWdbe* dbswdbe
 		) {
-	// sge(idle)
+	// sge(idle|fail|done)
+
+	vector<bool> args;
+	bool a, b;
+
+	a = false; a = (ixVSge == VecVSge::IDLE);
+	args.push_back(a);
+	a = false; a = (ixVSge == VecVSge::FAIL);
+	args.push_back(a);
+	a = false; a = (ixVSge == VecVSge::DONE);
+	args.push_back(a);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
+
+	return(args.back());
+};
+
+bool DlgWdbeUtlMrgip::evalResDldActive(
+			DbsWdbe* dbswdbe
+		) {
+	// sge(done)
 
 	vector<bool> args;
 	bool a;
 
-	a = false; a = (ixVSge == VecVSge::IDLE);
+	a = false; a = (ixVSge == VecVSge::DONE);
 	args.push_back(a);
 
 	return(args.back());
 };
 
-bool DlgWdbeUtlMrgip::evalTrgUldActive(
+bool DlgWdbeUtlMrgip::evalLfiDldActive(
 			DbsWdbe* dbswdbe
 		) {
-	// sge(supdone|suldone)
+	// sge(fail)
 
 	vector<bool> args;
-	bool a, b;
+	bool a;
 
-	a = false; a = (ixVSge == VecVSge::SUPDONE);
+	a = false; a = (ixVSge == VecVSge::FAIL);
 	args.push_back(a);
-	a = false; a = (ixVSge == VecVSge::SULDONE);
-	args.push_back(a);
-	b = args.back(); args.pop_back();
-	a = args.back(); args.pop_back();
-	args.push_back(a || b);
 
 	return(args.back());
 };
@@ -82,54 +101,35 @@ bool DlgWdbeUtlMrgip::evalMrgButStoActive(
 	return(args.back());
 };
 
-bool DlgWdbeUtlMrgip::evalLfiDldActive(
+bool DlgWdbeUtlMrgip::evalTrgUldActive(
 			DbsWdbe* dbswdbe
 		) {
-	// sge(fail)
-
-	vector<bool> args;
-	bool a;
-
-	a = false; a = (ixVSge == VecVSge::FAIL);
-	args.push_back(a);
-
-	return(args.back());
-};
-
-bool DlgWdbeUtlMrgip::evalResDldActive(
-			DbsWdbe* dbswdbe
-		) {
-	// sge(done)
-
-	vector<bool> args;
-	bool a;
-
-	a = false; a = (ixVSge == VecVSge::DONE);
-	args.push_back(a);
-
-	return(args.back());
-};
-
-bool DlgWdbeUtlMrgip::evalButDneActive(
-			DbsWdbe* dbswdbe
-		) {
-	// sge(idle|fail|done)
+	// sge(supdone|suldone)
 
 	vector<bool> args;
 	bool a, b;
 
+	a = false; a = (ixVSge == VecVSge::SUPDONE);
+	args.push_back(a);
+	a = false; a = (ixVSge == VecVSge::SULDONE);
+	args.push_back(a);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
+
+	return(args.back());
+};
+
+bool DlgWdbeUtlMrgip::evalSrcUldActive(
+			DbsWdbe* dbswdbe
+		) {
+	// sge(idle)
+
+	vector<bool> args;
+	bool a;
+
 	a = false; a = (ixVSge == VecVSge::IDLE);
 	args.push_back(a);
-	a = false; a = (ixVSge == VecVSge::FAIL);
-	args.push_back(a);
-	a = false; a = (ixVSge == VecVSge::DONE);
-	args.push_back(a);
-	b = args.back(); args.pop_back();
-	a = args.back(); args.pop_back();
-	args.push_back(a || b);
-	b = args.back(); args.pop_back();
-	a = args.back(); args.pop_back();
-	args.push_back(a || b);
 
 	return(args.back());
 };

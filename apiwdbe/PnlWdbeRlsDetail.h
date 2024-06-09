@@ -35,7 +35,7 @@ namespace PnlWdbeRlsDetail {
 
 	public:
 		static const Sbecore::uint BUTSAVECLICK = 1;
-		static const Sbecore::uint BUTVERVIEWCLICK = 2;
+		static const Sbecore::uint BUTCMPVIEWCLICK = 2;
 		static const Sbecore::uint BUTMCHVIEWCLICK = 3;
 		static const Sbecore::uint BUTOPTEDITCLICK = 4;
 
@@ -49,16 +49,14 @@ namespace PnlWdbeRlsDetail {
 	class ContIac : public Sbecore::Block {
 
 	public:
-		static const Sbecore::uint NUMFPUPTYP = 1;
-		static const Sbecore::uint NUMSFLSTOPT = 2;
-		static const Sbecore::uint TXFOPT = 3;
-		static const Sbecore::uint TXFCMT = 4;
+		static const Sbecore::uint NUMSFLSTOPT = 1;
+		static const Sbecore::uint TXFOPT = 2;
+		static const Sbecore::uint TXFCMT = 3;
 
 	public:
-		ContIac(const Sbecore::uint numFPupTyp = 1, const std::vector<Sbecore::uint>& numsFLstOpt = {}, const std::string& TxfOpt = "", const std::string& TxfCmt = "");
+		ContIac(const std::vector<Sbecore::uint>& numsFLstOpt = {}, const std::string& TxfOpt = "", const std::string& TxfCmt = "");
 
 	public:
-		Sbecore::uint numFPupTyp;
 		std::vector<Sbecore::uint> numsFLstOpt;
 		std::string TxfOpt;
 		std::string TxfCmt;
@@ -77,15 +75,15 @@ namespace PnlWdbeRlsDetail {
 
 	public:
 		static const Sbecore::uint TXTSRF = 1;
-		static const Sbecore::uint TXTVER = 2;
+		static const Sbecore::uint TXTCMP = 2;
 		static const Sbecore::uint TXTMCH = 3;
 
 	public:
-		ContInf(const std::string& TxtSrf = "", const std::string& TxtVer = "", const std::string& TxtMch = "");
+		ContInf(const std::string& TxtSrf = "", const std::string& TxtCmp = "", const std::string& TxtMch = "");
 
 	public:
 		std::string TxtSrf;
-		std::string TxtVer;
+		std::string TxtCmp;
 		std::string TxtMch;
 
 	public:
@@ -128,29 +126,27 @@ namespace PnlWdbeRlsDetail {
 		static const Sbecore::uint BUTSAVEAVAIL = 2;
 		static const Sbecore::uint BUTSAVEACTIVE = 3;
 		static const Sbecore::uint TXTSRFACTIVE = 4;
-		static const Sbecore::uint PUPTYPACTIVE = 5;
-		static const Sbecore::uint TXTVERACTIVE = 6;
-		static const Sbecore::uint BUTVERVIEWAVAIL = 7;
-		static const Sbecore::uint BUTVERVIEWACTIVE = 8;
-		static const Sbecore::uint TXTMCHACTIVE = 9;
-		static const Sbecore::uint BUTMCHVIEWAVAIL = 10;
-		static const Sbecore::uint BUTMCHVIEWACTIVE = 11;
-		static const Sbecore::uint LSTOPTACTIVE = 12;
-		static const Sbecore::uint BUTOPTEDITAVAIL = 13;
-		static const Sbecore::uint TXFCMTACTIVE = 14;
+		static const Sbecore::uint TXTCMPACTIVE = 5;
+		static const Sbecore::uint BUTCMPVIEWAVAIL = 6;
+		static const Sbecore::uint BUTCMPVIEWACTIVE = 7;
+		static const Sbecore::uint TXTMCHACTIVE = 8;
+		static const Sbecore::uint BUTMCHVIEWAVAIL = 9;
+		static const Sbecore::uint BUTMCHVIEWACTIVE = 10;
+		static const Sbecore::uint LSTOPTACTIVE = 11;
+		static const Sbecore::uint BUTOPTEDITAVAIL = 12;
+		static const Sbecore::uint TXFCMTACTIVE = 13;
 
 	public:
-		StatShr(const bool TxfOptValid = false, const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxtSrfActive = true, const bool PupTypActive = true, const bool TxtVerActive = true, const bool ButVerViewAvail = true, const bool ButVerViewActive = true, const bool TxtMchActive = true, const bool ButMchViewAvail = true, const bool ButMchViewActive = true, const bool LstOptActive = true, const bool ButOptEditAvail = true, const bool TxfCmtActive = true);
+		StatShr(const bool TxfOptValid = false, const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxtSrfActive = true, const bool TxtCmpActive = true, const bool ButCmpViewAvail = true, const bool ButCmpViewActive = true, const bool TxtMchActive = true, const bool ButMchViewAvail = true, const bool ButMchViewActive = true, const bool LstOptActive = true, const bool ButOptEditAvail = true, const bool TxfCmtActive = true);
 
 	public:
 		bool TxfOptValid;
 		bool ButSaveAvail;
 		bool ButSaveActive;
 		bool TxtSrfActive;
-		bool PupTypActive;
-		bool TxtVerActive;
-		bool ButVerViewAvail;
-		bool ButVerViewActive;
+		bool TxtCmpActive;
+		bool ButCmpViewAvail;
+		bool ButCmpViewActive;
 		bool TxtMchActive;
 		bool ButMchViewAvail;
 		bool ButMchViewActive;
@@ -172,20 +168,18 @@ namespace PnlWdbeRlsDetail {
 	public:
 		static const Sbecore::uint CPT = 1;
 		static const Sbecore::uint CPTSRF = 2;
-		static const Sbecore::uint CPTTYP = 3;
-		static const Sbecore::uint CPTVER = 4;
-		static const Sbecore::uint CPTMCH = 5;
-		static const Sbecore::uint CPTOPT = 6;
-		static const Sbecore::uint CPTCMT = 7;
+		static const Sbecore::uint CPTCMP = 3;
+		static const Sbecore::uint CPTMCH = 4;
+		static const Sbecore::uint CPTOPT = 5;
+		static const Sbecore::uint CPTCMT = 6;
 
 	public:
-		Tag(const std::string& Cpt = "", const std::string& CptSrf = "", const std::string& CptTyp = "", const std::string& CptVer = "", const std::string& CptMch = "", const std::string& CptOpt = "", const std::string& CptCmt = "");
+		Tag(const std::string& Cpt = "", const std::string& CptSrf = "", const std::string& CptCmp = "", const std::string& CptMch = "", const std::string& CptOpt = "", const std::string& CptCmt = "");
 
 	public:
 		std::string Cpt;
 		std::string CptSrf;
-		std::string CptTyp;
-		std::string CptVer;
+		std::string CptCmp;
 		std::string CptMch;
 		std::string CptOpt;
 		std::string CptCmt;
@@ -248,10 +242,9 @@ namespace PnlWdbeRlsDetail {
 		static const Sbecore::uint CONTIAC = 2;
 		static const Sbecore::uint CONTINF = 3;
 		static const Sbecore::uint FEEDFLSTOPT = 4;
-		static const Sbecore::uint FEEDFPUPTYP = 5;
-		static const Sbecore::uint STATAPP = 6;
-		static const Sbecore::uint STATSHR = 7;
-		static const Sbecore::uint TAG = 8;
+		static const Sbecore::uint STATAPP = 5;
+		static const Sbecore::uint STATSHR = 6;
+		static const Sbecore::uint TAG = 7;
 
 	public:
 		DpchEngData();
@@ -260,7 +253,6 @@ namespace PnlWdbeRlsDetail {
 		ContIac contiac;
 		ContInf continf;
 		Sbecore::Feed feedFLstOpt;
-		Sbecore::Feed feedFPupTyp;
 		StatApp statapp;
 		StatShr statshr;
 		Tag tag;

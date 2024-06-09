@@ -46,7 +46,8 @@ DpchRetWdbe* WdbeWrfpgaDeploy::run(
 	string s;
 
 	if (dbswdbe->tblwdbemrelease->loadRecByRef(refWdbeMRelease, &rls)) {
-		dbswdbe->tblwdbemunit->loadRstBySQL("SELECT * FROM TblWdbeMUnit WHERE refIxVTbl = " + to_string(VecWdbeVMUnitRefTbl::VER) + " AND refUref = " + to_string(rls->refWdbeMVersion) + " ORDER BY sref ASC", false, unts);
+		dbswdbe->tblwdbemunit->loadRstBySQL("SELECT TblWdbeMUnit.* FROM TblWdbeMComponent, TblWdbeMUnit WHERE TblWdbeMUnit.refIxVTbl = " + to_string(VecWdbeVMUnitRefTbl::VER)
+					+ " AND TblWdbeMUnit.refUref = TblWdbeMComponent.refWdbeMVersion AND TblWdbeMComponent.ref = " + to_string(rls->refWdbeMComponent) + " ORDER BY sref ASC", false, unts);
 
 		// checkout.sh
 		s = xchg->tmppath + "/" + folder + "/checkout.sh.ip";

@@ -9,8 +9,6 @@
 
 #include "WdbeMRelease.h"
 
-#include "WdbeMRelease_vecs.cpp"
-
 using namespace std;
 using namespace Sbecore;
 
@@ -20,8 +18,7 @@ using namespace Sbecore;
 
 WdbeMRelease::WdbeMRelease(
 			const ubigint ref
-			, const uint ixVBasetype
-			, const ubigint refWdbeMVersion
+			, const ubigint refWdbeMComponent
 			, const ubigint refWdbeMMachine
 			, const string sref
 			, const string srefsKOption
@@ -29,8 +26,7 @@ WdbeMRelease::WdbeMRelease(
 		) {
 
 	this->ref = ref;
-	this->ixVBasetype = ixVBasetype;
-	this->refWdbeMVersion = refWdbeMVersion;
+	this->refWdbeMComponent = refWdbeMComponent;
 	this->refWdbeMMachine = refWdbeMMachine;
 	this->sref = sref;
 	this->srefsKOption = srefsKOption;
@@ -165,8 +161,7 @@ ubigint TblWdbeMRelease::insertRec(
 
 ubigint TblWdbeMRelease::insertNewRec(
 			WdbeMRelease** rec
-			, const uint ixVBasetype
-			, const ubigint refWdbeMVersion
+			, const ubigint refWdbeMComponent
 			, const ubigint refWdbeMMachine
 			, const string sref
 			, const string srefsKOption
@@ -175,7 +170,7 @@ ubigint TblWdbeMRelease::insertNewRec(
 	ubigint retval = 0;
 	WdbeMRelease* _rec = NULL;
 
-	_rec = new WdbeMRelease(0, ixVBasetype, refWdbeMVersion, refWdbeMMachine, sref, srefsKOption, Comment);
+	_rec = new WdbeMRelease(0, refWdbeMComponent, refWdbeMMachine, sref, srefsKOption, Comment);
 	insertRec(_rec);
 
 	retval = _rec->ref;
@@ -189,8 +184,7 @@ ubigint TblWdbeMRelease::insertNewRec(
 ubigint TblWdbeMRelease::appendNewRecToRst(
 			ListWdbeMRelease& rst
 			, WdbeMRelease** rec
-			, const uint ixVBasetype
-			, const ubigint refWdbeMVersion
+			, const ubigint refWdbeMComponent
 			, const ubigint refWdbeMMachine
 			, const string sref
 			, const string srefsKOption
@@ -199,7 +193,7 @@ ubigint TblWdbeMRelease::appendNewRecToRst(
 	ubigint retval = 0;
 	WdbeMRelease* _rec = NULL;
 
-	retval = insertNewRec(&_rec, ixVBasetype, refWdbeMVersion, refWdbeMMachine, sref, srefsKOption, Comment);
+	retval = insertNewRec(&_rec, refWdbeMComponent, refWdbeMMachine, sref, srefsKOption, Comment);
 	rst.nodes.push_back(_rec);
 
 	if (rec != NULL) *rec = _rec;
@@ -236,16 +230,16 @@ bool TblWdbeMRelease::loadRecByRef(
 	return false;
 };
 
-ubigint TblWdbeMRelease::loadRefsByVer(
-			ubigint refWdbeMVersion
+ubigint TblWdbeMRelease::loadRefsByCmp(
+			ubigint refWdbeMComponent
 			, const bool append
 			, vector<ubigint>& refs
 		) {
 	return 0;
 };
 
-ubigint TblWdbeMRelease::loadRstByVer(
-			ubigint refWdbeMVersion
+ubigint TblWdbeMRelease::loadRstByCmp(
+			ubigint refWdbeMComponent
 			, const bool append
 			, ListWdbeMRelease& rst
 		) {
@@ -298,8 +292,8 @@ MyTblWdbeMRelease::~MyTblWdbeMRelease() {
 };
 
 void MyTblWdbeMRelease::initStatements() {
-	stmtInsertRec = createStatement("INSERT INTO TblWdbeMRelease (ixVBasetype, refWdbeMVersion, refWdbeMMachine, sref, srefsKOption, Comment) VALUES (?,?,?,?,?,?)", false);
-	stmtUpdateRec = createStatement("UPDATE TblWdbeMRelease SET ixVBasetype = ?, refWdbeMVersion = ?, refWdbeMMachine = ?, sref = ?, srefsKOption = ?, Comment = ? WHERE ref = ?", false);
+	stmtInsertRec = createStatement("INSERT INTO TblWdbeMRelease (refWdbeMComponent, refWdbeMMachine, sref, srefsKOption, Comment) VALUES (?,?,?,?,?)", false);
+	stmtUpdateRec = createStatement("UPDATE TblWdbeMRelease SET refWdbeMComponent = ?, refWdbeMMachine = ?, sref = ?, srefsKOption = ?, Comment = ? WHERE ref = ?", false);
 	stmtRemoveRecByRef = createStatement("DELETE FROM TblWdbeMRelease WHERE ref = ?", false);
 };
 
@@ -330,12 +324,11 @@ bool MyTblWdbeMRelease::loadRecBySQL(
 		_rec = new WdbeMRelease();
 
 		if (dbrow[0]) _rec->ref = atoll((char*) dbrow[0]); else _rec->ref = 0;
-		if (dbrow[1]) _rec->ixVBasetype = atol((char*) dbrow[1]); else _rec->ixVBasetype = 0;
-		if (dbrow[2]) _rec->refWdbeMVersion = atoll((char*) dbrow[2]); else _rec->refWdbeMVersion = 0;
-		if (dbrow[3]) _rec->refWdbeMMachine = atoll((char*) dbrow[3]); else _rec->refWdbeMMachine = 0;
-		if (dbrow[4]) _rec->sref.assign(dbrow[4], dblengths[4]); else _rec->sref = "";
-		if (dbrow[5]) _rec->srefsKOption.assign(dbrow[5], dblengths[5]); else _rec->srefsKOption = "";
-		if (dbrow[6]) _rec->Comment.assign(dbrow[6], dblengths[6]); else _rec->Comment = "";
+		if (dbrow[1]) _rec->refWdbeMComponent = atoll((char*) dbrow[1]); else _rec->refWdbeMComponent = 0;
+		if (dbrow[2]) _rec->refWdbeMMachine = atoll((char*) dbrow[2]); else _rec->refWdbeMMachine = 0;
+		if (dbrow[3]) _rec->sref.assign(dbrow[3], dblengths[3]); else _rec->sref = "";
+		if (dbrow[4]) _rec->srefsKOption.assign(dbrow[4], dblengths[4]); else _rec->srefsKOption = "";
+		if (dbrow[5]) _rec->Comment.assign(dbrow[5], dblengths[5]); else _rec->Comment = "";
 
 		retval = true;
 	};
@@ -379,12 +372,11 @@ ubigint MyTblWdbeMRelease::loadRstBySQL(
 			rec = new WdbeMRelease();
 
 			if (dbrow[0]) rec->ref = atoll((char*) dbrow[0]); else rec->ref = 0;
-			if (dbrow[1]) rec->ixVBasetype = atol((char*) dbrow[1]); else rec->ixVBasetype = 0;
-			if (dbrow[2]) rec->refWdbeMVersion = atoll((char*) dbrow[2]); else rec->refWdbeMVersion = 0;
-			if (dbrow[3]) rec->refWdbeMMachine = atoll((char*) dbrow[3]); else rec->refWdbeMMachine = 0;
-			if (dbrow[4]) rec->sref.assign(dbrow[4], dblengths[4]); else rec->sref = "";
-			if (dbrow[5]) rec->srefsKOption.assign(dbrow[5], dblengths[5]); else rec->srefsKOption = "";
-			if (dbrow[6]) rec->Comment.assign(dbrow[6], dblengths[6]); else rec->Comment = "";
+			if (dbrow[1]) rec->refWdbeMComponent = atoll((char*) dbrow[1]); else rec->refWdbeMComponent = 0;
+			if (dbrow[2]) rec->refWdbeMMachine = atoll((char*) dbrow[2]); else rec->refWdbeMMachine = 0;
+			if (dbrow[3]) rec->sref.assign(dbrow[3], dblengths[3]); else rec->sref = "";
+			if (dbrow[4]) rec->srefsKOption.assign(dbrow[4], dblengths[4]); else rec->srefsKOption = "";
+			if (dbrow[5]) rec->Comment.assign(dbrow[5], dblengths[5]); else rec->Comment = "";
 			rst.nodes.push_back(rec);
 
 			numread++;
@@ -399,19 +391,18 @@ ubigint MyTblWdbeMRelease::loadRstBySQL(
 ubigint MyTblWdbeMRelease::insertRec(
 			WdbeMRelease* rec
 		) {
-	unsigned long l[6]; my_bool n[6]; my_bool e[6];
+	unsigned long l[5]; my_bool n[5]; my_bool e[5];
 
-	l[3] = rec->sref.length();
-	l[4] = rec->srefsKOption.length();
-	l[5] = rec->Comment.length();
+	l[2] = rec->sref.length();
+	l[3] = rec->srefsKOption.length();
+	l[4] = rec->Comment.length();
 
 	MYSQL_BIND bind[] = {
-		bindUint(&rec->ixVBasetype,&(l[0]),&(n[0]),&(e[0])),
-		bindUbigint(&rec->refWdbeMVersion,&(l[1]),&(n[1]),&(e[1])),
-		bindUbigint(&rec->refWdbeMMachine,&(l[2]),&(n[2]),&(e[2])),
-		bindCstring((char*) (rec->sref.c_str()),&(l[3]),&(n[3]),&(e[3])),
-		bindCstring((char*) (rec->srefsKOption.c_str()),&(l[4]),&(n[4]),&(e[4])),
-		bindCstring((char*) (rec->Comment.c_str()),&(l[5]),&(n[5]),&(e[5]))
+		bindUbigint(&rec->refWdbeMComponent,&(l[0]),&(n[0]),&(e[0])),
+		bindUbigint(&rec->refWdbeMMachine,&(l[1]),&(n[1]),&(e[1])),
+		bindCstring((char*) (rec->sref.c_str()),&(l[2]),&(n[2]),&(e[2])),
+		bindCstring((char*) (rec->srefsKOption.c_str()),&(l[3]),&(n[3]),&(e[3])),
+		bindCstring((char*) (rec->Comment.c_str()),&(l[4]),&(n[4]),&(e[4]))
 	};
 
 	if (mysql_stmt_bind_param(stmtInsertRec, bind)) {
@@ -439,20 +430,19 @@ void MyTblWdbeMRelease::insertRst(
 void MyTblWdbeMRelease::updateRec(
 			WdbeMRelease* rec
 		) {
-	unsigned long l[7]; my_bool n[7]; my_bool e[7];
+	unsigned long l[6]; my_bool n[6]; my_bool e[6];
 
-	l[3] = rec->sref.length();
-	l[4] = rec->srefsKOption.length();
-	l[5] = rec->Comment.length();
+	l[2] = rec->sref.length();
+	l[3] = rec->srefsKOption.length();
+	l[4] = rec->Comment.length();
 
 	MYSQL_BIND bind[] = {
-		bindUint(&rec->ixVBasetype,&(l[0]),&(n[0]),&(e[0])),
-		bindUbigint(&rec->refWdbeMVersion,&(l[1]),&(n[1]),&(e[1])),
-		bindUbigint(&rec->refWdbeMMachine,&(l[2]),&(n[2]),&(e[2])),
-		bindCstring((char*) (rec->sref.c_str()),&(l[3]),&(n[3]),&(e[3])),
-		bindCstring((char*) (rec->srefsKOption.c_str()),&(l[4]),&(n[4]),&(e[4])),
-		bindCstring((char*) (rec->Comment.c_str()),&(l[5]),&(n[5]),&(e[5])),
-		bindUbigint(&rec->ref,&(l[6]),&(n[6]),&(e[6]))
+		bindUbigint(&rec->refWdbeMComponent,&(l[0]),&(n[0]),&(e[0])),
+		bindUbigint(&rec->refWdbeMMachine,&(l[1]),&(n[1]),&(e[1])),
+		bindCstring((char*) (rec->sref.c_str()),&(l[2]),&(n[2]),&(e[2])),
+		bindCstring((char*) (rec->srefsKOption.c_str()),&(l[3]),&(n[3]),&(e[3])),
+		bindCstring((char*) (rec->Comment.c_str()),&(l[4]),&(n[4]),&(e[4])),
+		bindUbigint(&rec->ref,&(l[5]),&(n[5]),&(e[5]))
 	};
 
 	if (mysql_stmt_bind_param(stmtUpdateRec, bind)) {
@@ -503,20 +493,20 @@ bool MyTblWdbeMRelease::loadRecByRef(
 	return loadRecBySQL("SELECT * FROM TblWdbeMRelease WHERE ref = " + to_string(ref), rec);
 };
 
-ubigint MyTblWdbeMRelease::loadRefsByVer(
-			ubigint refWdbeMVersion
+ubigint MyTblWdbeMRelease::loadRefsByCmp(
+			ubigint refWdbeMComponent
 			, const bool append
 			, vector<ubigint>& refs
 		) {
-	return loadRefsBySQL("SELECT ref FROM TblWdbeMRelease WHERE refWdbeMVersion = " + to_string(refWdbeMVersion) + "", append, refs);
+	return loadRefsBySQL("SELECT ref FROM TblWdbeMRelease WHERE refWdbeMComponent = " + to_string(refWdbeMComponent) + "", append, refs);
 };
 
-ubigint MyTblWdbeMRelease::loadRstByVer(
-			ubigint refWdbeMVersion
+ubigint MyTblWdbeMRelease::loadRstByCmp(
+			ubigint refWdbeMComponent
 			, const bool append
 			, ListWdbeMRelease& rst
 		) {
-	return loadRstBySQL("SELECT ref, ixVBasetype, refWdbeMVersion, refWdbeMMachine, sref, srefsKOption, Comment FROM TblWdbeMRelease WHERE refWdbeMVersion = " + to_string(refWdbeMVersion) + " ORDER BY sref ASC", append, rst);
+	return loadRstBySQL("SELECT ref, refWdbeMComponent, refWdbeMMachine, sref, srefsKOption, Comment FROM TblWdbeMRelease WHERE refWdbeMComponent = " + to_string(refWdbeMComponent) + " ORDER BY sref ASC", append, rst);
 };
 
 bool MyTblWdbeMRelease::loadSrfByRef(
@@ -544,13 +534,13 @@ PgTblWdbeMRelease::~PgTblWdbeMRelease() {
 };
 
 void PgTblWdbeMRelease::initStatements() {
-	createStatement("TblWdbeMRelease_insertRec", "INSERT INTO TblWdbeMRelease (ixVBasetype, refWdbeMVersion, refWdbeMMachine, sref, srefsKOption, Comment) VALUES ($1,$2,$3,$4,$5,$6) RETURNING ref", 6);
-	createStatement("TblWdbeMRelease_updateRec", "UPDATE TblWdbeMRelease SET ixVBasetype = $1, refWdbeMVersion = $2, refWdbeMMachine = $3, sref = $4, srefsKOption = $5, Comment = $6 WHERE ref = $7", 7);
+	createStatement("TblWdbeMRelease_insertRec", "INSERT INTO TblWdbeMRelease (refWdbeMComponent, refWdbeMMachine, sref, srefsKOption, Comment) VALUES ($1,$2,$3,$4,$5) RETURNING ref", 5);
+	createStatement("TblWdbeMRelease_updateRec", "UPDATE TblWdbeMRelease SET refWdbeMComponent = $1, refWdbeMMachine = $2, sref = $3, srefsKOption = $4, Comment = $5 WHERE ref = $6", 6);
 	createStatement("TblWdbeMRelease_removeRecByRef", "DELETE FROM TblWdbeMRelease WHERE ref = $1", 1);
 
-	createStatement("TblWdbeMRelease_loadRecByRef", "SELECT ref, ixVBasetype, refWdbeMVersion, refWdbeMMachine, sref, srefsKOption, Comment FROM TblWdbeMRelease WHERE ref = $1", 1);
-	createStatement("TblWdbeMRelease_loadRefsByVer", "SELECT ref FROM TblWdbeMRelease WHERE refWdbeMVersion = $1", 1);
-	createStatement("TblWdbeMRelease_loadRstByVer", "SELECT ref, ixVBasetype, refWdbeMVersion, refWdbeMMachine, sref, srefsKOption, Comment FROM TblWdbeMRelease WHERE refWdbeMVersion = $1 ORDER BY sref ASC", 1);
+	createStatement("TblWdbeMRelease_loadRecByRef", "SELECT ref, refWdbeMComponent, refWdbeMMachine, sref, srefsKOption, Comment FROM TblWdbeMRelease WHERE ref = $1", 1);
+	createStatement("TblWdbeMRelease_loadRefsByCmp", "SELECT ref FROM TblWdbeMRelease WHERE refWdbeMComponent = $1", 1);
+	createStatement("TblWdbeMRelease_loadRstByCmp", "SELECT ref, refWdbeMComponent, refWdbeMMachine, sref, srefsKOption, Comment FROM TblWdbeMRelease WHERE refWdbeMComponent = $1 ORDER BY sref ASC", 1);
 	createStatement("TblWdbeMRelease_loadSrfByRef", "SELECT sref FROM TblWdbeMRelease WHERE ref = $1", 1);
 };
 
@@ -568,8 +558,7 @@ bool PgTblWdbeMRelease::loadRec(
 
 		int fnum[] = {
 			PQfnumber(res, "ref"),
-			PQfnumber(res, "ixvbasetype"),
-			PQfnumber(res, "refwdbemversion"),
+			PQfnumber(res, "refwdbemcomponent"),
 			PQfnumber(res, "refwdbemmachine"),
 			PQfnumber(res, "sref"),
 			PQfnumber(res, "srefskoption"),
@@ -577,12 +566,11 @@ bool PgTblWdbeMRelease::loadRec(
 		};
 
 		ptr = PQgetvalue(res, 0, fnum[0]); _rec->ref = atoll(ptr);
-		ptr = PQgetvalue(res, 0, fnum[1]); _rec->ixVBasetype = atol(ptr);
-		ptr = PQgetvalue(res, 0, fnum[2]); _rec->refWdbeMVersion = atoll(ptr);
-		ptr = PQgetvalue(res, 0, fnum[3]); _rec->refWdbeMMachine = atoll(ptr);
-		ptr = PQgetvalue(res, 0, fnum[4]); _rec->sref.assign(ptr, PQgetlength(res, 0, fnum[4]));
-		ptr = PQgetvalue(res, 0, fnum[5]); _rec->srefsKOption.assign(ptr, PQgetlength(res, 0, fnum[5]));
-		ptr = PQgetvalue(res, 0, fnum[6]); _rec->Comment.assign(ptr, PQgetlength(res, 0, fnum[6]));
+		ptr = PQgetvalue(res, 0, fnum[1]); _rec->refWdbeMComponent = atoll(ptr);
+		ptr = PQgetvalue(res, 0, fnum[2]); _rec->refWdbeMMachine = atoll(ptr);
+		ptr = PQgetvalue(res, 0, fnum[3]); _rec->sref.assign(ptr, PQgetlength(res, 0, fnum[3]));
+		ptr = PQgetvalue(res, 0, fnum[4]); _rec->srefsKOption.assign(ptr, PQgetlength(res, 0, fnum[4]));
+		ptr = PQgetvalue(res, 0, fnum[5]); _rec->Comment.assign(ptr, PQgetlength(res, 0, fnum[5]));
 
 		retval = true;
 	};
@@ -610,8 +598,7 @@ ubigint PgTblWdbeMRelease::loadRst(
 
 		int fnum[] = {
 			PQfnumber(res, "ref"),
-			PQfnumber(res, "ixvbasetype"),
-			PQfnumber(res, "refwdbemversion"),
+			PQfnumber(res, "refwdbemcomponent"),
 			PQfnumber(res, "refwdbemmachine"),
 			PQfnumber(res, "sref"),
 			PQfnumber(res, "srefskoption"),
@@ -622,12 +609,11 @@ ubigint PgTblWdbeMRelease::loadRst(
 			rec = new WdbeMRelease();
 
 			ptr = PQgetvalue(res, numread, fnum[0]); rec->ref = atoll(ptr);
-			ptr = PQgetvalue(res, numread, fnum[1]); rec->ixVBasetype = atol(ptr);
-			ptr = PQgetvalue(res, numread, fnum[2]); rec->refWdbeMVersion = atoll(ptr);
-			ptr = PQgetvalue(res, numread, fnum[3]); rec->refWdbeMMachine = atoll(ptr);
-			ptr = PQgetvalue(res, numread, fnum[4]); rec->sref.assign(ptr, PQgetlength(res, numread, fnum[4]));
-			ptr = PQgetvalue(res, numread, fnum[5]); rec->srefsKOption.assign(ptr, PQgetlength(res, numread, fnum[5]));
-			ptr = PQgetvalue(res, numread, fnum[6]); rec->Comment.assign(ptr, PQgetlength(res, numread, fnum[6]));
+			ptr = PQgetvalue(res, numread, fnum[1]); rec->refWdbeMComponent = atoll(ptr);
+			ptr = PQgetvalue(res, numread, fnum[2]); rec->refWdbeMMachine = atoll(ptr);
+			ptr = PQgetvalue(res, numread, fnum[3]); rec->sref.assign(ptr, PQgetlength(res, numread, fnum[3]));
+			ptr = PQgetvalue(res, numread, fnum[4]); rec->srefsKOption.assign(ptr, PQgetlength(res, numread, fnum[4]));
+			ptr = PQgetvalue(res, numread, fnum[5]); rec->Comment.assign(ptr, PQgetlength(res, numread, fnum[5]));
 
 			rst.nodes.push_back(rec);
 
@@ -720,29 +706,26 @@ ubigint PgTblWdbeMRelease::insertRec(
 	PGresult* res;
 	char* ptr;
 
-	uint _ixVBasetype = htonl(rec->ixVBasetype);
-	ubigint _refWdbeMVersion = htonl64(rec->refWdbeMVersion);
+	ubigint _refWdbeMComponent = htonl64(rec->refWdbeMComponent);
 	ubigint _refWdbeMMachine = htonl64(rec->refWdbeMMachine);
 
 	const char* vals[] = {
-		(char*) &_ixVBasetype,
-		(char*) &_refWdbeMVersion,
+		(char*) &_refWdbeMComponent,
 		(char*) &_refWdbeMMachine,
 		rec->sref.c_str(),
 		rec->srefsKOption.c_str(),
 		rec->Comment.c_str()
 	};
 	const int l[] = {
-		sizeof(uint),
 		sizeof(ubigint),
 		sizeof(ubigint),
 		0,
 		0,
 		0
 	};
-	const int f[] = {1, 1, 1, 0, 0, 0};
+	const int f[] = {1, 1, 0, 0, 0};
 
-	res = PQexecPrepared(dbs, "TblWdbeMRelease_insertRec", 6, vals, l, f, 0);
+	res = PQexecPrepared(dbs, "TblWdbeMRelease_insertRec", 5, vals, l, f, 0);
 
 	if (PQresultStatus(res) != PGRES_TUPLES_OK) {
 		string dbms = "PgTblWdbeMRelease::insertRec() / " + string(PQerrorMessage(dbs));
@@ -770,14 +753,12 @@ void PgTblWdbeMRelease::updateRec(
 		) {
 	PGresult* res;
 
-	uint _ixVBasetype = htonl(rec->ixVBasetype);
-	ubigint _refWdbeMVersion = htonl64(rec->refWdbeMVersion);
+	ubigint _refWdbeMComponent = htonl64(rec->refWdbeMComponent);
 	ubigint _refWdbeMMachine = htonl64(rec->refWdbeMMachine);
 	ubigint _ref = htonl64(rec->ref);
 
 	const char* vals[] = {
-		(char*) &_ixVBasetype,
-		(char*) &_refWdbeMVersion,
+		(char*) &_refWdbeMComponent,
 		(char*) &_refWdbeMMachine,
 		rec->sref.c_str(),
 		rec->srefsKOption.c_str(),
@@ -785,7 +766,6 @@ void PgTblWdbeMRelease::updateRec(
 		(char*) &_ref
 	};
 	const int l[] = {
-		sizeof(uint),
 		sizeof(ubigint),
 		sizeof(ubigint),
 		0,
@@ -793,9 +773,9 @@ void PgTblWdbeMRelease::updateRec(
 		0,
 		sizeof(ubigint)
 	};
-	const int f[] = {1, 1, 1, 0, 0, 0, 1};
+	const int f[] = {1, 1, 0, 0, 0, 1};
 
-	res = PQexecPrepared(dbs, "TblWdbeMRelease_updateRec", 7, vals, l, f, 0);
+	res = PQexecPrepared(dbs, "TblWdbeMRelease_updateRec", 6, vals, l, f, 0);
 
 	if (PQresultStatus(res) != PGRES_COMMAND_OK) {
 		string dbms = "PgTblWdbeMRelease::updateRec() / " + string(PQerrorMessage(dbs));
@@ -861,40 +841,40 @@ bool PgTblWdbeMRelease::loadRecByRef(
 	return loadRecByStmt("TblWdbeMRelease_loadRecByRef", 1, vals, l, f, rec);
 };
 
-ubigint PgTblWdbeMRelease::loadRefsByVer(
-			ubigint refWdbeMVersion
+ubigint PgTblWdbeMRelease::loadRefsByCmp(
+			ubigint refWdbeMComponent
 			, const bool append
 			, vector<ubigint>& refs
 		) {
-	ubigint _refWdbeMVersion = htonl64(refWdbeMVersion);
+	ubigint _refWdbeMComponent = htonl64(refWdbeMComponent);
 
 	const char* vals[] = {
-		(char*) &_refWdbeMVersion
+		(char*) &_refWdbeMComponent
 	};
 	const int l[] = {
 		sizeof(ubigint)
 	};
 	const int f[] = {1};
 
-	return loadRefsByStmt("TblWdbeMRelease_loadRefsByVer", 1, vals, l, f, append, refs);
+	return loadRefsByStmt("TblWdbeMRelease_loadRefsByCmp", 1, vals, l, f, append, refs);
 };
 
-ubigint PgTblWdbeMRelease::loadRstByVer(
-			ubigint refWdbeMVersion
+ubigint PgTblWdbeMRelease::loadRstByCmp(
+			ubigint refWdbeMComponent
 			, const bool append
 			, ListWdbeMRelease& rst
 		) {
-	ubigint _refWdbeMVersion = htonl64(refWdbeMVersion);
+	ubigint _refWdbeMComponent = htonl64(refWdbeMComponent);
 
 	const char* vals[] = {
-		(char*) &_refWdbeMVersion
+		(char*) &_refWdbeMComponent
 	};
 	const int l[] = {
 		sizeof(ubigint)
 	};
 	const int f[] = {1};
 
-	return loadRstByStmt("TblWdbeMRelease_loadRstByVer", 1, vals, l, f, append, rst);
+	return loadRstByStmt("TblWdbeMRelease_loadRstByCmp", 1, vals, l, f, append, rst);
 };
 
 bool PgTblWdbeMRelease::loadSrfByRef(

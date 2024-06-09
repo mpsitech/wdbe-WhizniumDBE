@@ -24,7 +24,6 @@ uint TblWdbeMSignal::VecVBasetype::getIx(
 	if (s == "hshk") return HSHK;
 	if (s == "oprt") return OPRT;
 	if (s == "ioprt") return IOPRT;
-	if (s == "psb") return PSB;
 	if (s == "strb") return STRB;
 	if (s == "oth") return OTH;
 
@@ -38,7 +37,6 @@ string TblWdbeMSignal::VecVBasetype::getSref(
 	if (ix == HSHK) return("hshk");
 	if (ix == OPRT) return("oprt");
 	if (ix == IOPRT) return("ioprt");
-	if (ix == PSB) return("psb");
 	if (ix == STRB) return("strb");
 	if (ix == OTH) return("oth");
 
@@ -54,7 +52,6 @@ string TblWdbeMSignal::VecVBasetype::getTitle(
 		if (ix == HSHK) return("handshake");
 		if (ix == OPRT) return("output port driver");
 		if (ix == IOPRT) return("input/output port driver");
-		if (ix == PSB) return("pin substitute");
 		if (ix == STRB) return("strobe");
 		if (ix == OTH) return("other");
 		return(getSref(ix));
@@ -69,7 +66,7 @@ void TblWdbeMSignal::VecVBasetype::fillFeed(
 		) {
 	feed.clear();
 
-	for (unsigned int i = 1; i <= 7; i++) feed.appendIxSrefTitles(i, getSref(i), getTitle(i, ixWdbeVLocale));
+	for (unsigned int i = 1; i <= 6; i++) feed.appendIxSrefTitles(i, getSref(i), getTitle(i, ixWdbeVLocale));
 };
 
 /******************************************************************************

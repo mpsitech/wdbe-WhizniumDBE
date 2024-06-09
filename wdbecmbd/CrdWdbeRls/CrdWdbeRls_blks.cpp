@@ -22,7 +22,6 @@ uint CrdWdbeRls::VecVDo::getIx(
 
 	if (s == "close") return CLOSE;
 	if (s == "mitappabtclick") return MITAPPABTCLICK;
-	if (s == "mitcrdnewclick") return MITCRDNEWCLICK;
 	if (s == "mitcrdsrtclick") return MITCRDSRTCLICK;
 	if (s == "mitcrdcrtclick") return MITCRDCRTCLICK;
 	if (s == "mitcrdfrtclick") return MITCRDFRTCLICK;
@@ -36,7 +35,6 @@ string CrdWdbeRls::VecVDo::getSref(
 		) {
 	if (ix == CLOSE) return("close");
 	if (ix == MITAPPABTCLICK) return("MitAppAbtClick");
-	if (ix == MITCRDNEWCLICK) return("MitCrdNewClick");
 	if (ix == MITCRDSRTCLICK) return("MitCrdSrtClick");
 	if (ix == MITCRDCRTCLICK) return("MitCrdCrtClick");
 	if (ix == MITCRDFRTCLICK) return("MitCrdFrtClick");
@@ -103,7 +101,7 @@ void CrdWdbeRls::ContInf::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["numFSge"] = numFSge;
+	me["numFSge"] = (Json::Value::UInt) numFSge;
 	me["MrlAppHlp"] = MrlAppHlp;
 	me["MtxCrdRls"] = MtxCrdRls;
 };
@@ -174,7 +172,7 @@ void CrdWdbeRls::StatApp::writeJSON(
 	me["srefIxWdbeVReqitmode"] = VecWdbeVReqitmode::getSref(ixWdbeVReqitmode);
 	me["latency"] = latency;
 	me["shortMenu"] = shortMenu;
-	me["widthMenu"] = widthMenu;
+	me["widthMenu"] = (Json::Value::UInt) widthMenu;
 	me["initdoneHeadbar"] = initdoneHeadbar;
 	me["initdoneList"] = initdoneList;
 	me["initdoneRec"] = initdoneRec;
@@ -215,14 +213,12 @@ void CrdWdbeRls::StatApp::writeXML(
 
 CrdWdbeRls::StatShr::StatShr(
 			const ubigint jrefDlgfinreptr
-			, const ubigint jrefDlgnew
 			, const ubigint jrefDlgstareptr
 			, const ubigint jrefDlgwrite
 			, const ubigint jrefHeadbar
 			, const ubigint jrefList
 			, const ubigint jrefRec
 			, const bool MspCrd1Avail
-			, const bool MitCrdNewAvail
 			, const bool MitCrdSrtAvail
 			, const bool MitCrdSrtActive
 			, const bool MitCrdCrtAvail
@@ -235,14 +231,12 @@ CrdWdbeRls::StatShr::StatShr(
 			Block()
 		{
 	this->jrefDlgfinreptr = jrefDlgfinreptr;
-	this->jrefDlgnew = jrefDlgnew;
 	this->jrefDlgstareptr = jrefDlgstareptr;
 	this->jrefDlgwrite = jrefDlgwrite;
 	this->jrefHeadbar = jrefHeadbar;
 	this->jrefList = jrefList;
 	this->jrefRec = jrefRec;
 	this->MspCrd1Avail = MspCrd1Avail;
-	this->MitCrdNewAvail = MitCrdNewAvail;
 	this->MitCrdSrtAvail = MitCrdSrtAvail;
 	this->MitCrdSrtActive = MitCrdSrtActive;
 	this->MitCrdCrtAvail = MitCrdCrtAvail;
@@ -252,7 +246,7 @@ CrdWdbeRls::StatShr::StatShr(
 	this->MitCrdWcoAvail = MitCrdWcoAvail;
 	this->MitCrdWcoActive = MitCrdWcoActive;
 
-	mask = {JREFDLGFINREPTR, JREFDLGNEW, JREFDLGSTAREPTR, JREFDLGWRITE, JREFHEADBAR, JREFLIST, JREFREC, MSPCRD1AVAIL, MITCRDNEWAVAIL, MITCRDSRTAVAIL, MITCRDSRTACTIVE, MITCRDCRTAVAIL, MITCRDCRTACTIVE, MITCRDFRTAVAIL, MITCRDFRTACTIVE, MITCRDWCOAVAIL, MITCRDWCOACTIVE};
+	mask = {JREFDLGFINREPTR, JREFDLGSTAREPTR, JREFDLGWRITE, JREFHEADBAR, JREFLIST, JREFREC, MSPCRD1AVAIL, MITCRDSRTAVAIL, MITCRDSRTACTIVE, MITCRDCRTAVAIL, MITCRDCRTACTIVE, MITCRDFRTAVAIL, MITCRDFRTACTIVE, MITCRDWCOAVAIL, MITCRDWCOACTIVE};
 };
 
 void CrdWdbeRls::StatShr::writeJSON(
@@ -264,14 +258,12 @@ void CrdWdbeRls::StatShr::writeJSON(
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
 	me["scrJrefDlgfinreptr"] = Scr::scramble(jrefDlgfinreptr);
-	me["scrJrefDlgnew"] = Scr::scramble(jrefDlgnew);
 	me["scrJrefDlgstareptr"] = Scr::scramble(jrefDlgstareptr);
 	me["scrJrefDlgwrite"] = Scr::scramble(jrefDlgwrite);
 	me["scrJrefHeadbar"] = Scr::scramble(jrefHeadbar);
 	me["scrJrefList"] = Scr::scramble(jrefList);
 	me["scrJrefRec"] = Scr::scramble(jrefRec);
 	me["MspCrd1Avail"] = MspCrd1Avail;
-	me["MitCrdNewAvail"] = MitCrdNewAvail;
 	me["MitCrdSrtAvail"] = MitCrdSrtAvail;
 	me["MitCrdSrtActive"] = MitCrdSrtActive;
 	me["MitCrdCrtAvail"] = MitCrdCrtAvail;
@@ -295,14 +287,12 @@ void CrdWdbeRls::StatShr::writeXML(
 
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
 		writeStringAttr(wr, itemtag, "sref", "scrJrefDlgfinreptr", Scr::scramble(jrefDlgfinreptr));
-		writeStringAttr(wr, itemtag, "sref", "scrJrefDlgnew", Scr::scramble(jrefDlgnew));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefDlgstareptr", Scr::scramble(jrefDlgstareptr));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefDlgwrite", Scr::scramble(jrefDlgwrite));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefHeadbar", Scr::scramble(jrefHeadbar));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefList", Scr::scramble(jrefList));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefRec", Scr::scramble(jrefRec));
 		writeBoolAttr(wr, itemtag, "sref", "MspCrd1Avail", MspCrd1Avail);
-		writeBoolAttr(wr, itemtag, "sref", "MitCrdNewAvail", MitCrdNewAvail);
 		writeBoolAttr(wr, itemtag, "sref", "MitCrdSrtAvail", MitCrdSrtAvail);
 		writeBoolAttr(wr, itemtag, "sref", "MitCrdSrtActive", MitCrdSrtActive);
 		writeBoolAttr(wr, itemtag, "sref", "MitCrdCrtAvail", MitCrdCrtAvail);
@@ -320,14 +310,12 @@ set<uint> CrdWdbeRls::StatShr::comm(
 	set<uint> items;
 
 	if (jrefDlgfinreptr == comp->jrefDlgfinreptr) insert(items, JREFDLGFINREPTR);
-	if (jrefDlgnew == comp->jrefDlgnew) insert(items, JREFDLGNEW);
 	if (jrefDlgstareptr == comp->jrefDlgstareptr) insert(items, JREFDLGSTAREPTR);
 	if (jrefDlgwrite == comp->jrefDlgwrite) insert(items, JREFDLGWRITE);
 	if (jrefHeadbar == comp->jrefHeadbar) insert(items, JREFHEADBAR);
 	if (jrefList == comp->jrefList) insert(items, JREFLIST);
 	if (jrefRec == comp->jrefRec) insert(items, JREFREC);
 	if (MspCrd1Avail == comp->MspCrd1Avail) insert(items, MSPCRD1AVAIL);
-	if (MitCrdNewAvail == comp->MitCrdNewAvail) insert(items, MITCRDNEWAVAIL);
 	if (MitCrdSrtAvail == comp->MitCrdSrtAvail) insert(items, MITCRDSRTAVAIL);
 	if (MitCrdSrtActive == comp->MitCrdSrtActive) insert(items, MITCRDSRTACTIVE);
 	if (MitCrdCrtAvail == comp->MitCrdCrtAvail) insert(items, MITCRDCRTAVAIL);
@@ -348,7 +336,7 @@ set<uint> CrdWdbeRls::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {JREFDLGFINREPTR, JREFDLGNEW, JREFDLGSTAREPTR, JREFDLGWRITE, JREFHEADBAR, JREFLIST, JREFREC, MSPCRD1AVAIL, MITCRDNEWAVAIL, MITCRDSRTAVAIL, MITCRDSRTACTIVE, MITCRDCRTAVAIL, MITCRDCRTACTIVE, MITCRDFRTAVAIL, MITCRDFRTACTIVE, MITCRDWCOAVAIL, MITCRDWCOACTIVE};
+	diffitems = {JREFDLGFINREPTR, JREFDLGSTAREPTR, JREFDLGWRITE, JREFHEADBAR, JREFLIST, JREFREC, MSPCRD1AVAIL, MITCRDSRTAVAIL, MITCRDSRTACTIVE, MITCRDCRTAVAIL, MITCRDCRTACTIVE, MITCRDFRTAVAIL, MITCRDFRTACTIVE, MITCRDWCOAVAIL, MITCRDWCOACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -375,7 +363,6 @@ void CrdWdbeRls::Tag::writeJSON(
 	};
 	me["MitAppAbt"] = StrMod::cap(VecWdbeVTag::getTitle(VecWdbeVTag::ABOUT, ixWdbeVLocale)) + " ...";
 	me["MrlAppHlp"] = StrMod::cap(VecWdbeVTag::getTitle(VecWdbeVTag::HELP, ixWdbeVLocale)) + " ...";
-	me["MitCrdNew"] = StrMod::cap(VecWdbeVTag::getTitle(VecWdbeVTag::NEW, ixWdbeVLocale)) + " ...";
 };
 
 void CrdWdbeRls::Tag::writeXML(
@@ -399,7 +386,6 @@ void CrdWdbeRls::Tag::writeXML(
 		};
 		writeStringAttr(wr, itemtag, "sref", "MitAppAbt", StrMod::cap(VecWdbeVTag::getTitle(VecWdbeVTag::ABOUT, ixWdbeVLocale)) + " ...");
 		writeStringAttr(wr, itemtag, "sref", "MrlAppHlp", StrMod::cap(VecWdbeVTag::getTitle(VecWdbeVTag::HELP, ixWdbeVLocale)) + " ...");
-		writeStringAttr(wr, itemtag, "sref", "MitCrdNew", StrMod::cap(VecWdbeVTag::getTitle(VecWdbeVTag::NEW, ixWdbeVLocale)) + " ...");
 	xmlTextWriterEndElement(wr);
 };
 
@@ -426,15 +412,14 @@ string CrdWdbeRls::DpchAppDo::getSrefsMask() {
 };
 
 void CrdWdbeRls::DpchAppDo::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbeRlsDo"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbeRlsDo"];}();
 
 	basefound = (me != Json::nullValue);
 

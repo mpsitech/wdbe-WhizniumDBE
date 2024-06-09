@@ -2,7 +2,7 @@
 # make file for Wdbe system vectors, release wdbecmbd_mac
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 23 Oct 2021
+# date created: 7 Feb 2024
 # IP header --- ABOVE
 
 include ../Makefile.inc
@@ -13,7 +13,7 @@ CPPFLAGS = -std=c++11 -g -Wall -Os -pthread
 STATLIB = ar
 STATLIBFLAGS = rcs
 
-INCPATH = -I${WHIZSDKROOT}/build -I${WHIZSDKROOT}/build/apiwzlm -I/usr/local/include -I/usr/local/include/curl -I/usr/local/include/libxml2 -I/usr/local/mysql/include -I/usr/local/opt/sqlite/include
+INCPATH = -I${WHIZSDKROOT}/build -I${WHIZSDKROOT}/build/apiwzlm -I/opt/homebrew/include -I/opt/homebrew/opt/curl/include -I/opt/homebrew/opt/libgit2/include -I/opt/homebrew/opt/libmicrohttpd/include -I/opt/homebrew/opt/libxml2/include -I/opt/homebrew/opt/openssl@3/include -I/opt/homebrew/opt/sqlite3/include -I/usr/local/mysql/include
 
 OBJS = VecWdbeVBasereptype.o VecWdbeVCall.o VecWdbeVDpch.o VecWdbeVError.o VecWdbeVExpstate.o VecWdbeVIop.o VecWdbeVJob.o VecWdbeVMimetype.o VecWdbeVOpengtype.o VecWdbeVOppack.o VecWdbeVQrystate.o VecWdbeVReqitmode.o VecWdbeVStub.o VecWdbeVTag.o
 
@@ -28,7 +28,6 @@ all:	$(LIB)
 
 $(LIB):	$(OBJS)
 	$(STATLIB) $(STATLIBFLAGS) $(LIB).a $(OBJS)
-	rm -f *.o
 
 install:
 	mv $(LIB).a $(LIBROOT)/

@@ -36,7 +36,7 @@ DpchRetWdbe* WdbeMtpCplmstbuMpfs_ip_AXI_v1_0::run(
 	utinyint ixOpVOpres = VecOpVOpres::SUCCESS;
 
 	// IP run --- IBEGIN
-
+/*
 	// exact copy from WdbeMtpCplmstbuZynq_ip_AXI_v2_0
 
 	ubigint ref, refC;
@@ -63,6 +63,7 @@ DpchRetWdbe* WdbeMtpCplmstbuMpfs_ip_AXI_v1_0::run(
 		dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::PSB, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::VOID, 0, 0, "rx", false, "slvdn", 32, "", "", "", "0", false, 0, "");
 		dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::PSB, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::VOID, 0, 0, "strbRx", false, "sl", 1, "", "", "", "0", false, 0, "");
 	};
+*/
 	// IP run --- IEND
 
 	return(new DpchRetWdbe(VecWdbeVDpch::DPCHRETWDBE, "", "", ixOpVOpres, 100));

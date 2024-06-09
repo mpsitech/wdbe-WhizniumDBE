@@ -307,8 +307,6 @@ uint JobWdbeIexPrj::enterSgeImport(
 	ImeitemIMVersion* ver = NULL;
 	ImeitemIRMPersonMProject* prsRprj = NULL;
 	ImeitemIJMVersionState* verJste = NULL;
-	ImeitemIMRelease* rls = NULL;
-	ImeitemIRMLibraryMVersion* libRver = NULL;
 
 	uint num1;
 
@@ -320,15 +318,6 @@ uint JobWdbeIexPrj::enterSgeImport(
 
 	ubigint own;
 	own = xchg->getRefPreset(VecWdbeVPreset::PREWDBEOWNER, jref);
-
-	vector<ubigint> refs;
-	map<string,ubigint> refsMchs; // by hsref
-
-	dbswdbe->loadRefsBySQL("SELECT ref FROM TblWdbeMMachine", false, refs);
-	for (unsigned int i = 0; i < refs.size(); i++) refsMchs[StubWdbe::getStubMchStd(dbswdbe, refs[i])] = refs[i];
-
-	time_t rawtime;
-	time(&rawtime);
 
 	vector<string> ss;
 	// IP enterSgeImport.prep --- IEND
@@ -420,37 +409,6 @@ uint JobWdbeIexPrj::enterSgeImport(
 						dbswdbe->tblwdbemversion->updateRec(ver);
 					};
 				};
-
-				for (unsigned int ix2 = 0; ix2 < ver->imeirmlibrarymversion.nodes.size(); ix2++) {
-					libRver = ver->imeirmlibrarymversion.nodes[ix2];
-
-					//libRver->refWdbeMLibrary: CUSTSQL
-					dbswdbe->tblwdbemlibrary->loadRefBySrf(libRver->srefRefWdbeMLibrary, libRver->refWdbeMLibrary);
-					if (libRver->refWdbeMLibrary == 0) throw SbeException(SbeException::IEX_TSREF, {{"tsref",libRver->srefRefWdbeMLibrary}, {"iel","srefRefWdbeMLibrary"}, {"lineno",to_string(libRver->lineno)}});
-					libRver->refWdbeMVersion = ver->ref;
-
-					dbswdbe->tblwdbermlibrarymversion->insertRec(libRver);
-					impcnt++;
-				};
-
-				for (unsigned int ix2 = 0; ix2 < ver->imeimrelease.nodes.size(); ix2++) {
-					rls = ver->imeimrelease.nodes[ix2];
-
-					rls->ixVBasetype = VecWdbeVMReleaseBasetype::getIx(rls->srefIxVBasetype);
-					if (rls->ixVBasetype == 0) throw SbeException(SbeException::IEX_VSREF, {{"vsref",rls->srefIxVBasetype}, {"iel","srefIxVBasetype"}, {"lineno",to_string(rls->lineno)}});
-					rls->refWdbeMVersion = ver->ref;
-					//rls->refWdbeMMachine: CUST
-					if (rls->hsrefRefWdbeMMachine != "") {
-						auto it = refsMchs.find(rls->hsrefRefWdbeMMachine);
-						if (it != refsMchs.end()) rls->refWdbeMMachine = it->second;
-						else throw SbeException(SbeException::IEX_TSREF, {{"tsref",rls->hsrefRefWdbeMMachine}, {"iel","hsrefRefWdbeMMachine"}, {"lineno",to_string(rls->lineno)}});
-					};
-					//rls->sref: TBL
-					//rls->srefsKOption: TBL
-					//rls->Comment: TBL
-					dbswdbe->tblwdbemrelease->insertRec(rls);
-					impcnt++;
-				};
 			};
 
 			for (unsigned int ix1 = 0; ix1 < prj->imeirmpersonmproject.nodes.size(); ix1++) {
@@ -512,8 +470,6 @@ uint JobWdbeIexPrj::enterSgeReverse(
 	ImeitemIMVersion* ver = NULL;
 	ImeitemIRMPersonMProject* prsRprj = NULL;
 	ImeitemIJMVersionState* verJste = NULL;
-	ImeitemIMRelease* rls = NULL;
-	ImeitemIRMLibraryMVersion* libRver = NULL;
 
 	// -- ImeIMProject
 	for (unsigned int ix0 = 0; ix0 < imeimproject.nodes.size(); ix0++) {
@@ -527,16 +483,6 @@ uint JobWdbeIexPrj::enterSgeReverse(
 			for (unsigned int ix2 = 0; ix2 < ver->imeijmversionstate.nodes.size(); ix2++) {
 				verJste = ver->imeijmversionstate.nodes[ix2];
 				if (verJste->ref != 0) dbswdbe->tblwdbejmversionstate->removeRecByRef(verJste->ref);
-			};
-
-			for (unsigned int ix2 = 0; ix2 < ver->imeimrelease.nodes.size(); ix2++) {
-				rls = ver->imeimrelease.nodes[ix2];
-				if (rls->ref != 0) dbswdbe->tblwdbemrelease->removeRecByRef(rls->ref);
-			};
-
-			for (unsigned int ix2 = 0; ix2 < ver->imeirmlibrarymversion.nodes.size(); ix2++) {
-				libRver = ver->imeirmlibrarymversion.nodes[ix2];
-				if (libRver->ref != 0) dbswdbe->tblwdbermlibrarymversion->removeRecByRef(libRver->ref);
 			};
 		};
 
@@ -567,8 +513,6 @@ uint JobWdbeIexPrj::enterSgeCollect(
 	ImeitemIMVersion* ver = NULL;
 	ImeitemIRMPersonMProject* prsRprj = NULL;
 	ImeitemIJMVersionState* verJste = NULL;
-	ImeitemIMRelease* rls = NULL;
-	ImeitemIRMLibraryMVersion* libRver = NULL;
 
 	uint ixWdbeVIop;
 
@@ -606,32 +550,6 @@ uint JobWdbeIexPrj::enterSgeCollect(
 				verJste = ver->imeijmversionstate.nodes[ix2];
 
 				if (verJste->ref != 0) {
-				};
-			};
-
-			if (getIxWdbeVIop(icsWdbeVIop, VecVIme::IMEIMRELEASE, ixWdbeVIop)) {
-				dbswdbe->tblwdbemrelease->loadRefsByVer(ver->ref, false, refs);
-				for (unsigned int i = 0; i < refs.size(); i++) ver->imeimrelease.nodes.push_back(new ImeitemIMRelease(dbswdbe, refs[i]));
-			};
-
-			for (unsigned int ix2 = 0; ix2 < ver->imeimrelease.nodes.size(); ix2++) {
-				rls = ver->imeimrelease.nodes[ix2];
-
-				if (rls->ref != 0) {
-					rls->hsrefRefWdbeMMachine = StubWdbe::getStubMchStd(dbswdbe, rls->refWdbeMMachine, ixWdbeVLocale, Stub::VecVNonetype::VOID, stcch);
-				};
-			};
-
-			if (getIxWdbeVIop(icsWdbeVIop, VecVIme::IMEIRMLIBRARYMVERSION, ixWdbeVIop)) {
-				dbswdbe->tblwdbermlibrarymversion->loadRefsByVer(ver->ref, false, refs);
-				for (unsigned int i = 0; i < refs.size(); i++) ver->imeirmlibrarymversion.nodes.push_back(new ImeitemIRMLibraryMVersion(dbswdbe, refs[i]));
-			};
-
-			for (unsigned int ix2 = 0; ix2 < ver->imeirmlibrarymversion.nodes.size(); ix2++) {
-				libRver = ver->imeirmlibrarymversion.nodes[ix2];
-
-				if (libRver->ref != 0) {
-					libRver->srefRefWdbeMLibrary = StubWdbe::getStubLibSref(dbswdbe, libRver->refWdbeMLibrary, ixWdbeVLocale, Stub::VecVNonetype::VOID, stcch);
 				};
 			};
 		};

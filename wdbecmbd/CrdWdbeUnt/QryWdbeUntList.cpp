@@ -46,8 +46,8 @@ QryWdbeUntList::QryWdbeUntList(
 
 	rerun(dbswdbe);
 
-	xchg->addClstn(VecWdbeVCall::CALLWDBESTUBCHG, jref, Clstn::VecVJobmask::SELF, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBEUNTMOD, jref, Clstn::VecVJobmask::ALL, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBESTUBCHG, jref, Clstn::VecVJobmask::SELF, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -93,7 +93,6 @@ void QryWdbeUntList::rerun(
 	uint preTyp = xchg->getIxPreset(VecWdbeVPreset::PREWDBEUNTLIST_TYP, jref);
 	uint preRet = xchg->getIxPreset(VecWdbeVPreset::PREWDBEUNTLIST_RET, jref);
 	ubigint preReu = xchg->getRefPreset(VecWdbeVPreset::PREWDBEUNTLIST_REU, jref);
-	ubigint preSys = xchg->getRefPreset(VecWdbeVPreset::PREWDBEUNTLIST_SYS, jref);
 	ubigint preMdl = xchg->getRefPreset(VecWdbeVPreset::PREWDBEUNTLIST_MDL, jref);
 
 	dbswdbe->tblwdbeqselect->removeRstByJref(jref);
@@ -106,7 +105,7 @@ void QryWdbeUntList::rerun(
 		sqlstr += " FROM TblWdbeMUnit";
 		sqlstr += " WHERE TblWdbeMUnit.refIxVTbl = " + to_string(VecWdbeVMUnitRefTbl::VER);
 		sqlstr += " AND TblWdbeMUnit.refUref = " + to_string(preRefVer) + "";
-		rerun_filtSQL(sqlstr, preSrf, preTit, preTyp, preRet, preReu, preSys, preMdl, false);
+		rerun_filtSQL(sqlstr, preSrf, preTit, preTyp, preRet, preReu, preMdl, false);
 		dbswdbe->loadUintBySQL(sqlstr, cnt);
 		cnts.push_back(cnt); lims.push_back(0); ofss.push_back(0);
 		cntsum += cnt;
@@ -114,7 +113,7 @@ void QryWdbeUntList::rerun(
 	} else {
 		sqlstr = "SELECT COUNT(TblWdbeMUnit.ref)";
 		sqlstr += " FROM TblWdbeMUnit";
-		rerun_filtSQL(sqlstr, preSrf, preTit, preTyp, preRet, preReu, preSys, preMdl, true);
+		rerun_filtSQL(sqlstr, preSrf, preTit, preTyp, preRet, preReu, preMdl, true);
 		dbswdbe->loadUintBySQL(sqlstr, cnt);
 		cnts.push_back(cnt); lims.push_back(0); ofss.push_back(0);
 		cntsum += cnt;
@@ -151,7 +150,7 @@ void QryWdbeUntList::rerun(
 		sqlstr += " FROM TblWdbeMUnit";
 		sqlstr += " WHERE TblWdbeMUnit.refIxVTbl = " + to_string(VecWdbeVMUnitRefTbl::VER);
 		sqlstr += " AND TblWdbeMUnit.refUref = " + to_string(preRefVer) + "";
-		rerun_filtSQL(sqlstr, preSrf, preTit, preTyp, preRet, preReu, preSys, preMdl, false);
+		rerun_filtSQL(sqlstr, preSrf, preTit, preTyp, preRet, preReu, preMdl, false);
 		rerun_orderSQL(sqlstr, preIxOrd);
 		sqlstr += " LIMIT " + to_string(lims[0]) + " OFFSET " + to_string(ofss[0]);
 		dbswdbe->executeQuery(sqlstr);
@@ -159,7 +158,7 @@ void QryWdbeUntList::rerun(
 	} else {
 		rerun_baseSQL(sqlstr);
 		sqlstr += " FROM TblWdbeMUnit";
-		rerun_filtSQL(sqlstr, preSrf, preTit, preTyp, preRet, preReu, preSys, preMdl, true);
+		rerun_filtSQL(sqlstr, preSrf, preTit, preTyp, preRet, preReu, preMdl, true);
 		rerun_orderSQL(sqlstr, preIxOrd);
 		sqlstr += " LIMIT " + to_string(lims[0]) + " OFFSET " + to_string(ofss[0]);
 		dbswdbe->executeQuery(sqlstr);
@@ -180,8 +179,8 @@ void QryWdbeUntList::rerun(
 void QryWdbeUntList::rerun_baseSQL(
 			string& sqlstr
 		) {
-	sqlstr = "INSERT INTO TblWdbeQUntList(jref, jnum, ref, sref, Title, Fullsref, ixVBasetype, refIxVTbl, refUref, refWdbeMSystem, refWdbeMModule, srefKPackage, Easy, srefKToolch)";
-	sqlstr += " SELECT " + to_string(jref) + ", 0, TblWdbeMUnit.ref, TblWdbeMUnit.sref, TblWdbeMUnit.Title, TblWdbeMUnit.Fullsref, TblWdbeMUnit.ixVBasetype, TblWdbeMUnit.refIxVTbl, TblWdbeMUnit.refUref, TblWdbeMUnit.refWdbeMSystem, TblWdbeMUnit.refWdbeMModule, TblWdbeMUnit.srefKPackage, TblWdbeMUnit.Easy, TblWdbeMUnit.srefKToolch";
+	sqlstr = "INSERT INTO TblWdbeQUntList(jref, jnum, ref, sref, Title, Fullsref, ixVBasetype, refIxVTbl, refUref, refWdbeMModule, srefKPackage, Easy, srefKToolch)";
+	sqlstr += " SELECT " + to_string(jref) + ", 0, TblWdbeMUnit.ref, TblWdbeMUnit.sref, TblWdbeMUnit.Title, TblWdbeMUnit.Fullsref, TblWdbeMUnit.ixVBasetype, TblWdbeMUnit.refIxVTbl, TblWdbeMUnit.refUref, TblWdbeMUnit.refWdbeMModule, TblWdbeMUnit.srefKPackage, TblWdbeMUnit.Easy, TblWdbeMUnit.srefKToolch";
 };
 
 void QryWdbeUntList::rerun_filtSQL(
@@ -191,7 +190,6 @@ void QryWdbeUntList::rerun_filtSQL(
 			, const uint preTyp
 			, const uint preRet
 			, const ubigint preReu
-			, const ubigint preSys
 			, const ubigint preMdl
 			, const bool addwhere
 		) {
@@ -222,11 +220,6 @@ void QryWdbeUntList::rerun_filtSQL(
 		sqlstr += "TblWdbeMUnit.refUref = " + to_string(preReu) + "";
 	};
 
-	if (preSys != 0) {
-		rerun_filtSQL_append(sqlstr, first);
-		sqlstr += "TblWdbeMUnit.refWdbeMSystem = " + to_string(preSys) + "";
-	};
-
 	if (preMdl != 0) {
 		rerun_filtSQL_append(sqlstr, first);
 		sqlstr += "TblWdbeMUnit.refWdbeMModule = " + to_string(preMdl) + "";
@@ -247,13 +240,12 @@ void QryWdbeUntList::rerun_orderSQL(
 			string& sqlstr
 			, const uint preIxOrd
 		) {
-	if (preIxOrd == VecVOrd::SRF) sqlstr += " ORDER BY TblWdbeMUnit.sref ASC";
-	else if (preIxOrd == VecVOrd::TIT) sqlstr += " ORDER BY TblWdbeMUnit.Title ASC";
-	else if (preIxOrd == VecVOrd::TYP) sqlstr += " ORDER BY TblWdbeMUnit.ixVBasetype ASC";
-	else if (preIxOrd == VecVOrd::RET) sqlstr += " ORDER BY TblWdbeMUnit.refIxVTbl ASC";
+	if (preIxOrd == VecVOrd::MDL) sqlstr += " ORDER BY TblWdbeMUnit.refWdbeMModule ASC";
 	else if (preIxOrd == VecVOrd::REU) sqlstr += " ORDER BY TblWdbeMUnit.refUref ASC";
-	else if (preIxOrd == VecVOrd::SYS) sqlstr += " ORDER BY TblWdbeMUnit.refWdbeMSystem ASC";
-	else if (preIxOrd == VecVOrd::MDL) sqlstr += " ORDER BY TblWdbeMUnit.refWdbeMModule ASC";
+	else if (preIxOrd == VecVOrd::RET) sqlstr += " ORDER BY TblWdbeMUnit.refIxVTbl ASC";
+	else if (preIxOrd == VecVOrd::TYP) sqlstr += " ORDER BY TblWdbeMUnit.ixVBasetype ASC";
+	else if (preIxOrd == VecVOrd::SRF) sqlstr += " ORDER BY TblWdbeMUnit.sref ASC";
+	else if (preIxOrd == VecVOrd::TIT) sqlstr += " ORDER BY TblWdbeMUnit.Title ASC";
 };
 
 void QryWdbeUntList::fetch(
@@ -290,7 +282,6 @@ void QryWdbeUntList::fetch(
 			} else if (rec->refIxVTbl == VecWdbeVMUnitRefTbl::VER) {
 				rec->stubRefUref = StubWdbe::getStubVerStd(dbswdbe, rec->refUref, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
 			} else rec->stubRefUref = "-";
-			rec->stubRefWdbeMSystem = StubWdbe::getStubSysStd(dbswdbe, rec->refWdbeMSystem, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
 			rec->stubRefWdbeMModule = StubWdbe::getStubMdlSref(dbswdbe, rec->refWdbeMModule, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
 			rec->titSrefKPackage = dbswdbe->getKlstTitleBySref(VecWdbeVKeylist::KLSTWDBEKMUNITPACKAGE, rec->srefKPackage, ixWdbeVLocale);
 			if (rec->Easy) rec->yesnoEasy = VecWdbeVTag::getTitle(VecWdbeVTag::YES, ixWdbeVLocale); else rec->yesnoEasy = VecWdbeVTag::getTitle(VecWdbeVTag::NO, ixWdbeVLocale);
@@ -411,8 +402,6 @@ bool QryWdbeUntList::handleShow(
 	cout << "\ttitRefIxVTbl";
 	cout << "\trefUref";
 	cout << "\tstubRefUref";
-	cout << "\trefWdbeMSystem";
-	cout << "\tstubRefWdbeMSystem";
 	cout << "\trefWdbeMModule";
 	cout << "\tstubRefWdbeMModule";
 	cout << "\tsrefKPackage";
@@ -442,8 +431,6 @@ bool QryWdbeUntList::handleShow(
 		cout << "\t" << rec->titRefIxVTbl;
 		cout << "\t" << rec->refUref;
 		cout << "\t" << rec->stubRefUref;
-		cout << "\t" << rec->refWdbeMSystem;
-		cout << "\t" << rec->stubRefWdbeMSystem;
 		cout << "\t" << rec->refWdbeMModule;
 		cout << "\t" << rec->stubRefWdbeMModule;
 		cout << "\t" << rec->srefKPackage;
@@ -461,21 +448,13 @@ void QryWdbeUntList::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
-		call->abort = handleCallWdbeStubChgFromSelf(dbswdbe);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEUNTMOD) {
+	if (call->ixVCall == VecWdbeVCall::CALLWDBEUNTMOD) {
 		call->abort = handleCallWdbeUntMod(dbswdbe, call->jref);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEUNTUPD_REFEQ) {
 		call->abort = handleCallWdbeUntUpd_refEq(dbswdbe, call->jref);
+	} else if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
+		call->abort = handleCallWdbeStubChgFromSelf(dbswdbe);
 	};
-};
-
-bool QryWdbeUntList::handleCallWdbeStubChgFromSelf(
-			DbsWdbe* dbswdbe
-		) {
-	bool retval = false;
-	// IP handleCallWdbeStubChgFromSelf --- INSERT
-	return retval;
 };
 
 bool QryWdbeUntList::handleCallWdbeUntMod(
@@ -503,5 +482,13 @@ bool QryWdbeUntList::handleCallWdbeUntUpd_refEq(
 		xchg->triggerCall(dbswdbe, VecWdbeVCall::CALLWDBESTATCHG, jref);
 	};
 
+	return retval;
+};
+
+bool QryWdbeUntList::handleCallWdbeStubChgFromSelf(
+			DbsWdbe* dbswdbe
+		) {
+	bool retval = false;
+	// IP handleCallWdbeStubChgFromSelf --- INSERT
 	return retval;
 };

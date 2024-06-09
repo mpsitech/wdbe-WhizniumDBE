@@ -27,7 +27,6 @@ WdbeQUntList::WdbeQUntList(
 			, const string srefRefIxVTbl
 			, const string titRefIxVTbl
 			, const string stubRefUref
-			, const string stubRefWdbeMSystem
 			, const string stubRefWdbeMModule
 			, const string srefKPackage
 			, const string titSrefKPackage
@@ -44,7 +43,6 @@ WdbeQUntList::WdbeQUntList(
 	this->srefRefIxVTbl = srefRefIxVTbl;
 	this->titRefIxVTbl = titRefIxVTbl;
 	this->stubRefUref = stubRefUref;
-	this->stubRefWdbeMSystem = stubRefWdbeMSystem;
 	this->stubRefWdbeMModule = stubRefWdbeMModule;
 	this->srefKPackage = srefKPackage;
 	this->titSrefKPackage = titSrefKPackage;
@@ -74,7 +72,6 @@ bool WdbeQUntList::readXML(
 		extractStringUclc(docctx, basexpath, "srefRefIxVTbl", "ret", srefRefIxVTbl);
 		extractStringUclc(docctx, basexpath, "titRefIxVTbl", "ret2", titRefIxVTbl);
 		extractStringUclc(docctx, basexpath, "stubRefUref", "reu", stubRefUref);
-		extractStringUclc(docctx, basexpath, "stubRefWdbeMSystem", "sys", stubRefWdbeMSystem);
 		extractStringUclc(docctx, basexpath, "stubRefWdbeMModule", "mdl", stubRefWdbeMModule);
 		extractStringUclc(docctx, basexpath, "srefKPackage", "pkg", srefKPackage);
 		extractStringUclc(docctx, basexpath, "titSrefKPackage", "pkg2", titSrefKPackage);

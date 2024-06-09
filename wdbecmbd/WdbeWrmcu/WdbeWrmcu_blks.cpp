@@ -72,10 +72,10 @@ void DpchInvWdbeWrmcuBase::writeXML(
 };
 
 /******************************************************************************
- class DpchInvWdbeWrmcuCtrFwdctr
+ class DpchInvWdbeWrmcuCtr
  ******************************************************************************/
 
-DpchInvWdbeWrmcuCtrFwdctr::DpchInvWdbeWrmcuCtrFwdctr(
+DpchInvWdbeWrmcuCtr::DpchInvWdbeWrmcuCtr(
 			const ubigint oref
 			, const ubigint jref
 			, const ubigint refWdbeMModule
@@ -83,7 +83,7 @@ DpchInvWdbeWrmcuCtrFwdctr::DpchInvWdbeWrmcuCtrFwdctr(
 			, const string& Prjshort
 			, const string& Untsref
 		) :
-			DpchInvWdbe(VecWdbeVDpch::DPCHINVWDBEWRMCUCTRFWDCTR, oref, jref)
+			DpchInvWdbe(VecWdbeVDpch::DPCHINVWDBEWRMCUCTR, oref, jref)
 		{
 	this->refWdbeMModule = refWdbeMModule;
 	this->folder = folder;
@@ -91,7 +91,7 @@ DpchInvWdbeWrmcuCtrFwdctr::DpchInvWdbeWrmcuCtrFwdctr(
 	this->Untsref = Untsref;
 };
 
-void DpchInvWdbeWrmcuCtrFwdctr::readXML(
+void DpchInvWdbeWrmcuCtr::readXML(
 			xmlXPathContext* docctx
 			, string basexpath
 			, bool addbasetag
@@ -101,7 +101,7 @@ void DpchInvWdbeWrmcuCtrFwdctr::readXML(
 	bool basefound;
 
 	if (addbasetag)
-		basefound = checkUclcXPaths(docctx, basexpath, basexpath, "DpchInvWdbeWrmcuCtrFwdctr");
+		basefound = checkUclcXPaths(docctx, basexpath, basexpath, "DpchInvWdbeWrmcuCtr");
 	else
 		basefound = checkXPath(docctx, basexpath);
 
@@ -115,10 +115,10 @@ void DpchInvWdbeWrmcuCtrFwdctr::readXML(
 	};
 };
 
-void DpchInvWdbeWrmcuCtrFwdctr::writeXML(
+void DpchInvWdbeWrmcuCtr::writeXML(
 			xmlTextWriter* wr
 		) {
-	xmlTextWriterStartElement(wr, BAD_CAST "DpchInvWdbeWrmcuCtrFwdctr");
+	xmlTextWriterStartElement(wr, BAD_CAST "DpchInvWdbeWrmcuCtr");
 	xmlTextWriterWriteAttribute(wr, BAD_CAST "xmlns", BAD_CAST "http://www.mpsitech.com/wdbe");
 		writeString(wr, "scrOref", Scr::scramble(oref));
 		writeString(wr, "scrJref", Scr::scramble(jref));

@@ -61,7 +61,7 @@ void PnlWdbePrsMNProject::ContInf::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["numFCsiQst"] = numFCsiQst;
+	me["numFCsiQst"] = (Json::Value::UInt) numFCsiQst;
 };
 
 void PnlWdbePrsMNProject::ContInf::writeXML(
@@ -242,15 +242,14 @@ PnlWdbePrsMNProject::StgIac::StgIac(
 };
 
 bool PnlWdbePrsMNProject::StgIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["StgIacWdbePrsMNProject"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["StgIacWdbePrsMNProject"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -298,10 +297,10 @@ void PnlWdbePrsMNProject::StgIac::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["TcoMrefWidth"] = TcoMrefWidth;
-	me["TcoStaWidth"] = TcoStaWidth;
-	me["TcoStoWidth"] = TcoStoWidth;
-	me["TcoFctWidth"] = TcoFctWidth;
+	me["TcoMrefWidth"] = (Json::Value::UInt) TcoMrefWidth;
+	me["TcoStaWidth"] = (Json::Value::UInt) TcoStaWidth;
+	me["TcoStoWidth"] = (Json::Value::UInt) TcoStoWidth;
+	me["TcoFctWidth"] = (Json::Value::UInt) TcoFctWidth;
 };
 
 void PnlWdbePrsMNProject::StgIac::writeXML(
@@ -428,15 +427,14 @@ string PnlWdbePrsMNProject::DpchAppData::getSrefsMask() {
 };
 
 void PnlWdbePrsMNProject::DpchAppData::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbePrsMNProjectData"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbePrsMNProjectData"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -502,15 +500,14 @@ string PnlWdbePrsMNProject::DpchAppDo::getSrefsMask() {
 };
 
 void PnlWdbePrsMNProject::DpchAppDo::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbePrsMNProjectDo"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbePrsMNProjectDo"];}();
 
 	basefound = (me != Json::nullValue);
 

@@ -19,10 +19,7 @@ MdlWdbeDevdev	device development module
 	ImeIMCard.srefRefIxVTbl	srefRefUref	sref	Title	Avail	Active
 	tbl	TblWdbeMProject	CrdWdbePrj
 	tbl	TblWdbeMVersion	CrdWdbeVer			pre.refPrj() > pre.void()
-	tbl	TblWdbeMSystem	CrdWdbeSys			pre.refVer()
-	tbl	TblWdbeMTarget	CrdWdbeTrg			pre.refVer()
 	tbl	TblWdbeMUnit	CrdWdbeUnt			pre.refVer()
-	tbl	TblWdbeMRelease	CrdWdbeRls			pre.refVer()
 	ImeIMCard.end
 MdlWdbeCoredev	core development module
 	ImeIMCard.srefRefIxVTbl	srefRefUref	sref	Title	Avail	Active
@@ -50,8 +47,14 @@ MdlWdbeLow	low-level description module
 	tbl	TblWdbeMGeneric	CrdWdbeGen			pre.refMtp() > pre.refMod()
 	tbl	TblWdbeMPort	CrdWdbePrt			pre.refMtp() > pre.refMod()
 	tbl	TblWdbeMSignal	CrdWdbeSig			pre.refUnt() > pre.refMtp() > pre.refMod()
+	tbl	TblWdbeMCdc	CrdWdbeCdc			pre.refMod()
 	tbl	TblWdbeMProcess	CrdWdbePrc			pre.refMtp() > pre.refMod()
 	tbl	TblWdbeMFsmstate	CrdWdbeFst			pre.refFsm() > pre.refMtp() > pre.refMod()
+	ImeIMCard.end
+MdlWdbeDeploy	deployment module
+	ImeIMCard.srefRefIxVTbl	srefRefUref	sref	Title	Avail	Active
+	tbl	TblWdbeMComponent	CrdWdbeCmp			pre.refVer() > pre.void()
+	tbl	TblWdbeMRelease	CrdWdbeRls			pre.refVer()
 	ImeIMCard.end
 MdlWdbeAuxfct	auxiliary functionality
 	ImeIMCard.srefRefIxVTbl	srefRefUref	sref	Title	Avail	Active

@@ -14,27 +14,23 @@ using namespace Xmlio;
 bool CrdWdbeRls::evalMspCrd1Avail(
 			DbsWdbe* dbswdbe
 		) {
-	// MitCrdNewAvail()
+	// MitCrdSrtAvail()|MitCrdCrtAvail()|MitCrdFrtAvail()
 
 	vector<bool> args;
-	bool a;
+	bool a, b;
 
-	a = false; a = evalMitCrdNewAvail(dbswdbe);
+	a = false; a = evalMitCrdSrtAvail(dbswdbe);
 	args.push_back(a);
-
-	return(args.back());
-};
-
-bool CrdWdbeRls::evalMitCrdNewAvail(
-			DbsWdbe* dbswdbe
-		) {
-	// pre.ixCrdaccRlsIncl(edit)
-
-	vector<bool> args;
-	bool a;
-
-	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCRLS, jref) & VecWdbeWAccess::EDIT);
+	a = false; a = evalMitCrdCrtAvail(dbswdbe);
 	args.push_back(a);
+	a = false; a = evalMitCrdFrtAvail(dbswdbe);
+	args.push_back(a);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
 
 	return(args.back());
 };

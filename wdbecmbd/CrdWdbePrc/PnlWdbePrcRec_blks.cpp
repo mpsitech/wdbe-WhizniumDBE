@@ -113,6 +113,7 @@ void PnlWdbePrcRec::StatApp::writeJSON(
 			, const bool initdoneRef1NVariable
 			, const bool initdoneMge1NSignal
 			, const bool initdoneFsmFsm1NFsmstate
+			, const bool initdoneFsmHk1NVector
 		) {
 	if (difftag.length() == 0) difftag = "StatAppWdbePrcRec";
 
@@ -124,6 +125,7 @@ void PnlWdbePrcRec::StatApp::writeJSON(
 	me["initdoneRef1NVariable"] = initdoneRef1NVariable;
 	me["initdoneMge1NSignal"] = initdoneMge1NSignal;
 	me["initdoneFsmFsm1NFsmstate"] = initdoneFsmFsm1NFsmstate;
+	me["initdoneFsmHk1NVector"] = initdoneFsmHk1NVector;
 };
 
 void PnlWdbePrcRec::StatApp::writeXML(
@@ -136,6 +138,7 @@ void PnlWdbePrcRec::StatApp::writeXML(
 			, const bool initdoneRef1NVariable
 			, const bool initdoneMge1NSignal
 			, const bool initdoneFsmFsm1NFsmstate
+			, const bool initdoneFsmHk1NVector
 		) {
 	if (difftag.length() == 0) difftag = "StatAppWdbePrcRec";
 
@@ -150,6 +153,7 @@ void PnlWdbePrcRec::StatApp::writeXML(
 		writeBoolAttr(wr, itemtag, "sref", "initdoneRef1NVariable", initdoneRef1NVariable);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneMge1NSignal", initdoneMge1NSignal);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneFsmFsm1NFsmstate", initdoneFsmFsm1NFsmstate);
+		writeBoolAttr(wr, itemtag, "sref", "initdoneFsmHk1NVector", initdoneFsmHk1NVector);
 	xmlTextWriterEndElement(wr);
 };
 
@@ -166,6 +170,8 @@ PnlWdbePrcRec::StatShr::StatShr(
 			, const ubigint jrefMge1NSignal
 			, const ubigint jrefFsmFsm1NFsmstate
 			, const bool pnlfsmfsm1nfsmstateAvail
+			, const ubigint jrefFsmHk1NVector
+			, const bool pnlfsmhk1nvectorAvail
 			, const bool ButRegularizeActive
 		) :
 			Block()
@@ -178,9 +184,11 @@ PnlWdbePrcRec::StatShr::StatShr(
 	this->jrefMge1NSignal = jrefMge1NSignal;
 	this->jrefFsmFsm1NFsmstate = jrefFsmFsm1NFsmstate;
 	this->pnlfsmfsm1nfsmstateAvail = pnlfsmfsm1nfsmstateAvail;
+	this->jrefFsmHk1NVector = jrefFsmHk1NVector;
+	this->pnlfsmhk1nvectorAvail = pnlfsmhk1nvectorAvail;
 	this->ButRegularizeActive = ButRegularizeActive;
 
-	mask = {IXWDBEVEXPSTATE, JREFDETAIL, JREFKHDLTYPE, JREFREF1NSENSITIVITY, JREFREF1NVARIABLE, JREFMGE1NSIGNAL, JREFFSMFSM1NFSMSTATE, PNLFSMFSM1NFSMSTATEAVAIL, BUTREGULARIZEACTIVE};
+	mask = {IXWDBEVEXPSTATE, JREFDETAIL, JREFKHDLTYPE, JREFREF1NSENSITIVITY, JREFREF1NVARIABLE, JREFMGE1NSIGNAL, JREFFSMFSM1NFSMSTATE, PNLFSMFSM1NFSMSTATEAVAIL, JREFFSMHK1NVECTOR, PNLFSMHK1NVECTORAVAIL, BUTREGULARIZEACTIVE};
 };
 
 void PnlWdbePrcRec::StatShr::writeJSON(
@@ -199,6 +207,8 @@ void PnlWdbePrcRec::StatShr::writeJSON(
 	me["scrJrefMge1NSignal"] = Scr::scramble(jrefMge1NSignal);
 	me["scrJrefFsmFsm1NFsmstate"] = Scr::scramble(jrefFsmFsm1NFsmstate);
 	me["pnlfsmfsm1nfsmstateAvail"] = pnlfsmfsm1nfsmstateAvail;
+	me["scrJrefFsmHk1NVector"] = Scr::scramble(jrefFsmHk1NVector);
+	me["pnlfsmhk1nvectorAvail"] = pnlfsmhk1nvectorAvail;
 	me["ButRegularizeActive"] = ButRegularizeActive;
 };
 
@@ -222,6 +232,8 @@ void PnlWdbePrcRec::StatShr::writeXML(
 		writeStringAttr(wr, itemtag, "sref", "scrJrefMge1NSignal", Scr::scramble(jrefMge1NSignal));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefFsmFsm1NFsmstate", Scr::scramble(jrefFsmFsm1NFsmstate));
 		writeBoolAttr(wr, itemtag, "sref", "pnlfsmfsm1nfsmstateAvail", pnlfsmfsm1nfsmstateAvail);
+		writeStringAttr(wr, itemtag, "sref", "scrJrefFsmHk1NVector", Scr::scramble(jrefFsmHk1NVector));
+		writeBoolAttr(wr, itemtag, "sref", "pnlfsmhk1nvectorAvail", pnlfsmhk1nvectorAvail);
 		writeBoolAttr(wr, itemtag, "sref", "ButRegularizeActive", ButRegularizeActive);
 	xmlTextWriterEndElement(wr);
 };
@@ -239,6 +251,8 @@ set<uint> PnlWdbePrcRec::StatShr::comm(
 	if (jrefMge1NSignal == comp->jrefMge1NSignal) insert(items, JREFMGE1NSIGNAL);
 	if (jrefFsmFsm1NFsmstate == comp->jrefFsmFsm1NFsmstate) insert(items, JREFFSMFSM1NFSMSTATE);
 	if (pnlfsmfsm1nfsmstateAvail == comp->pnlfsmfsm1nfsmstateAvail) insert(items, PNLFSMFSM1NFSMSTATEAVAIL);
+	if (jrefFsmHk1NVector == comp->jrefFsmHk1NVector) insert(items, JREFFSMHK1NVECTOR);
+	if (pnlfsmhk1nvectorAvail == comp->pnlfsmhk1nvectorAvail) insert(items, PNLFSMHK1NVECTORAVAIL);
 	if (ButRegularizeActive == comp->ButRegularizeActive) insert(items, BUTREGULARIZEACTIVE);
 
 	return(items);
@@ -252,7 +266,7 @@ set<uint> PnlWdbePrcRec::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {IXWDBEVEXPSTATE, JREFDETAIL, JREFKHDLTYPE, JREFREF1NSENSITIVITY, JREFREF1NVARIABLE, JREFMGE1NSIGNAL, JREFFSMFSM1NFSMSTATE, PNLFSMFSM1NFSMSTATEAVAIL, BUTREGULARIZEACTIVE};
+	diffitems = {IXWDBEVEXPSTATE, JREFDETAIL, JREFKHDLTYPE, JREFREF1NSENSITIVITY, JREFREF1NVARIABLE, JREFMGE1NSIGNAL, JREFFSMFSM1NFSMSTATE, PNLFSMFSM1NFSMSTATEAVAIL, JREFFSMHK1NVECTOR, PNLFSMHK1NVECTORAVAIL, BUTREGULARIZEACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -318,15 +332,14 @@ string PnlWdbePrcRec::DpchAppDo::getSrefsMask() {
 };
 
 void PnlWdbePrcRec::DpchAppDo::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbePrcRecDo"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbePrcRecDo"];}();
 
 	basefound = (me != Json::nullValue);
 

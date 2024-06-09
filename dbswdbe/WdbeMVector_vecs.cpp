@@ -70,8 +70,8 @@ uint TblWdbeMVector::VecVHkTbl::getIx(
 	string s = StrMod::lc(sref);
 
 	if (s == "ctr") return CTR;
+	if (s == "fsm") return FSM;
 	if (s == "sig") return SIG;
-	if (s == "sys") return SYS;
 	if (s == "unt") return UNT;
 
 	return(0);
@@ -81,8 +81,8 @@ string TblWdbeMVector::VecVHkTbl::getSref(
 			const uint ix
 		) {
 	if (ix == CTR) return("ctr");
+	if (ix == FSM) return("fsm");
 	if (ix == SIG) return("sig");
-	if (ix == SYS) return("sys");
 	if (ix == UNT) return("unt");
 
 	return("");
@@ -94,8 +94,8 @@ string TblWdbeMVector::VecVHkTbl::getTitle(
 		) {
 	if (ixWdbeVLocale == 1) {
 		if (ix == CTR) return("controller");
+		if (ix == FSM) return("finite state machine");
 		if (ix == SIG) return("signal");
-		if (ix == SYS) return("system");
 		if (ix == UNT) return("unit");
 		return(getSref(ix));
 	};

@@ -37,7 +37,6 @@ string WdbeWrfpga::valToSlv(
 	string s;
 
 	unsigned long long l;
-	unsigned char u;
 	unsigned long long mask;
 
 	bool found;
@@ -138,7 +137,7 @@ string WdbeWrfpga::getValStr(
 	if (sig->srefWdbeKHdltype == "sl") {
 		if (s.length() == 1) if ((s[0] == '0') || (s[0] == '1') || (s[0] == 'Z') || (s[0] == 'z')) s = "'" + s + "'";
 
-	} else if ((sig->srefWdbeKHdltype == "slvup") || (sig->srefWdbeKHdltype == "slvdn")) {
+	} else if ((sig->srefWdbeKHdltype == "slvup") || (sig->srefWdbeKHdltype == "slvdn") || (sig->srefWdbeKHdltype == "sgn") || (sig->srefWdbeKHdltype == "usgn")) {
 		val = true;
 
 		for (unsigned int i = 0; i < s.length(); i++) {
@@ -198,6 +197,12 @@ string WdbeWrfpga::getVarStr(
 	} else if (sig->srefWdbeKHdltype == "slvdn") {
 		if ((sig->Width == 0) && (sig->Minmax != "")) s = "std_logic_vector(" + sig->Minmax + "-1 downto 0)";
 		else s = "std_logic_vector(" + to_string((int) (sig->Width-1)) + " downto 0)";
+	} else if (sig->srefWdbeKHdltype == "sgn") {
+		if ((sig->Width == 0) && (sig->Minmax != "")) s = "signed(" + sig->Minmax + "-1 downto 0)";
+		else s = "signed(" + to_string((int) (sig->Width-1)) + " downto 0)";
+	} else if (sig->srefWdbeKHdltype == "usgn") {
+		if ((sig->Width == 0) && (sig->Minmax != "")) s = "unsigned(" + sig->Minmax + "-1 downto 0)";
+		else s = "unsigned(" + to_string((int) (sig->Width-1)) + " downto 0)";
 	} else if (sig->srefWdbeKHdltype == "str") s = "string";
 	else s = sig->srefWdbeKHdltype;
 
@@ -212,7 +217,7 @@ string WdbeWrfpga::getVarStr(
 string WdbeWrfpga::getVarStr(
 			WdbeMVariable* var
 		) {
-	WdbeMSignal sig(0, 0, 0, 0, 0, 0, VecWdbeVMSignalMgeTbl::VOID, 0, 0, "", false, var->srefWdbeKHdltype, var->Width, var->Minmax, "", var->Onval, var->Offval, var->Defon, 0, "");
+	WdbeMSignal sig(0, 0, 0, 0, 0, 0, VecWdbeVMSignalMgeTbl::PRC, 0, 0, "", var->Const, var->srefWdbeKHdltype, var->Width, var->Minmax, "", var->Onval, var->Offval, var->Defon, 0, "");
 	return(getVarStr(&sig));
 };
 

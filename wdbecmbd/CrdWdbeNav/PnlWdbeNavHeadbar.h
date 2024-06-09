@@ -108,10 +108,7 @@ public:
 	bool evalMspCrd3Avail(DbsWdbe* dbswdbe);
 	bool evalMitCrdPrjAvail(DbsWdbe* dbswdbe);
 	bool evalMitCrdVerAvail(DbsWdbe* dbswdbe);
-	bool evalMitCrdSysAvail(DbsWdbe* dbswdbe);
-	bool evalMitCrdTrgAvail(DbsWdbe* dbswdbe);
 	bool evalMitCrdUntAvail(DbsWdbe* dbswdbe);
-	bool evalMitCrdRlsAvail(DbsWdbe* dbswdbe);
 	bool evalMspCrd4Avail(DbsWdbe* dbswdbe);
 	bool evalMitCrdCprAvail(DbsWdbe* dbswdbe);
 	bool evalMitCrdCvrAvail(DbsWdbe* dbswdbe);
@@ -129,6 +126,9 @@ public:
 	bool evalMitCrdIntAvail(DbsWdbe* dbswdbe);
 	bool evalMitCrdSigAvail(DbsWdbe* dbswdbe);
 	bool evalMspCrd7Avail(DbsWdbe* dbswdbe);
+	bool evalMitCrdCmpAvail(DbsWdbe* dbswdbe);
+	bool evalMitCrdRlsAvail(DbsWdbe* dbswdbe);
+	bool evalMspCrd8Avail(DbsWdbe* dbswdbe);
 	bool evalMitCrdUtlAvail(DbsWdbe* dbswdbe);
 
 public:

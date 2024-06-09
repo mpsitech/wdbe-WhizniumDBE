@@ -61,7 +61,7 @@ void PnlWdbeLibAMakefile::ContInf::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["numFCsiQst"] = numFCsiQst;
+	me["numFCsiQst"] = (Json::Value::UInt) numFCsiQst;
 };
 
 void PnlWdbeLibAMakefile::ContInf::writeXML(
@@ -240,15 +240,14 @@ PnlWdbeLibAMakefile::StgIac::StgIac(
 };
 
 bool PnlWdbeLibAMakefile::StgIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["StgIacWdbeLibAMakefile"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["StgIacWdbeLibAMakefile"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -294,9 +293,9 @@ void PnlWdbeLibAMakefile::StgIac::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["TcoMchWidth"] = TcoMchWidth;
-	me["TcoTagWidth"] = TcoTagWidth;
-	me["TcoValWidth"] = TcoValWidth;
+	me["TcoMchWidth"] = (Json::Value::UInt) TcoMchWidth;
+	me["TcoTagWidth"] = (Json::Value::UInt) TcoTagWidth;
+	me["TcoValWidth"] = (Json::Value::UInt) TcoValWidth;
 };
 
 void PnlWdbeLibAMakefile::StgIac::writeXML(
@@ -419,15 +418,14 @@ string PnlWdbeLibAMakefile::DpchAppData::getSrefsMask() {
 };
 
 void PnlWdbeLibAMakefile::DpchAppData::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbeLibAMakefileData"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbeLibAMakefileData"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -493,15 +491,14 @@ string PnlWdbeLibAMakefile::DpchAppDo::getSrefsMask() {
 };
 
 void PnlWdbeLibAMakefile::DpchAppDo::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbeLibAMakefileDo"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbeLibAMakefileDo"];}();
 
 	basefound = (me != Json::nullValue);
 

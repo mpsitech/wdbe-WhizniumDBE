@@ -83,7 +83,7 @@ DpchRetWdbe* WdbeGenfstEhostif::run(
 	ubigint refCsigtop = 0;
 	ubigint refCvarctr = 0;
 
-	unsigned int sizeRxbuf, sizeTxbuf;
+	unsigned int sizeInvbuf, sizeRetbuf;
 
 	string From, To;
 
@@ -144,7 +144,8 @@ DpchRetWdbe* WdbeGenfstEhostif::run(
 
 		// --- prepare controllers and their relevant features
 		mdl = mdls.nodes[0];
-		dbswdbe->tblwdbemmodule->loadRstBySQL("SELECT * FROM TblWdbeMModule WHERE ixVBasetype = " + to_string(VecWdbeVMModuleBasetype::ECTR) + " AND hkIxVTbl = " + to_string(mdl->hkIxVTbl) + " AND hkUref = " + to_string(mdl->hkUref), false, mdls);
+		dbswdbe->tblwdbemmodule->loadRstBySQL("SELECT * FROM TblWdbeMModule WHERE (ixVBasetype = " + to_string(VecWdbeVMModuleBasetype::ECTR) + " OR ixVBasetype = " + to_string(VecWdbeVMModuleBasetype::EDBGCTR)
+					+ ") AND hkIxVTbl = " + to_string(mdl->hkIxVTbl) + " AND hkUref = " + to_string(mdl->hkUref), false, mdls);
 
 		mdlNumPrts.resize(mdls.nodes.size());
 		mdlNumVars.resize(mdls.nodes.size());
@@ -160,9 +161,9 @@ DpchRetWdbe* WdbeGenfstEhostif::run(
 
 		if (mcuNotFpga) {
 			// -- receive buffer in host interface shared data
-			Wdbe::getHostifSizeRxtxbuf(dbswdbe, refUnt, sizeRxbuf, sizeTxbuf);
+			Wdbe::getHostifSizeInvretbuf(dbswdbe, refUnt, sizeInvbuf, sizeRetbuf);
 
-			dbswdbe->tblwdbemvariable->insertNewRec(NULL, 0, VecWdbeVMVariableRefTbl::MDL, refEhostif, 1, "rxbuf", false, false, "btarr", sizeRxbuf, "", "", "", false, "");
+			dbswdbe->tblwdbemvariable->insertNewRec(NULL, 0, VecWdbeVMVariableRefTbl::MDL, refEhostif, 1, "invbuf", false, false, "btarr", sizeInvbuf, "", "", "", false, "");
 		};
 
 		// --- top/ehostif/ectr ports and signals
@@ -316,7 +317,10 @@ DpchRetWdbe* WdbeGenfstEhostif::run(
 
 								if (k == 0) {
 									// ports in controller
-									if (rpa->ixWdbeVPartype == VecWdbeVPartype::VBLOB) dbswdbe->tblwdbemport->insertNewRec(NULL, refCprtctr, mdl->ref, mdlNumPrts[i]++, VecWdbeVMPortMdlCat::CMDBUS, cmd->sref + "Len" + StrMod::cap(rpa->sref), VecWdbeVMPortDir::OUT, "slvdn", 8, "", "", "", "", mdl->sref + StrMod::cap(cmd->sref) + "Len" + StrMod::cap(rpa->sref), "");
+									if (rpa->ixWdbeVPartype == VecWdbeVPartype::VBLOB) {
+										dbswdbe->tblwdbemport->insertNewRec(NULL, refCprtctr, mdl->ref, mdlNumPrts[i]++, VecWdbeVMPortMdlCat::CMDBUS, cmd->sref + "Len" + StrMod::cap(rpa->sref), VecWdbeVMPortDir::OUT, "slvdn", 8, "", "", "", "", mdl->sref + StrMod::cap(cmd->sref) + "Len" + StrMod::cap(rpa->sref), "");
+										w -= 8;
+									};
 									dbswdbe->tblwdbemport->insertNewRec(NULL, refCprtctr, mdl->ref, mdlNumPrts[i]++, VecWdbeVMPortMdlCat::CMDBUS, cmd->sref + StrMod::cap(rpa->sref), VecWdbeVMPortDir::OUT, "slvdn", w, "", "", "", "", mdl->sref + StrMod::cap(cmd->sref) + StrMod::cap(rpa->sref), "");
 								};
 

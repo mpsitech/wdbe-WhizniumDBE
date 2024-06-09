@@ -53,7 +53,7 @@ bool PnlWdbeRlsDetail::evalTxtSrfActive(
 	return(args.back());
 };
 
-bool PnlWdbeRlsDetail::evalPupTypActive(
+bool PnlWdbeRlsDetail::evalTxtCmpActive(
 			DbsWdbe* dbswdbe
 		) {
 	// pre.ixCrdaccRlsIncl(edit)
@@ -67,32 +67,28 @@ bool PnlWdbeRlsDetail::evalPupTypActive(
 	return(args.back());
 };
 
-bool PnlWdbeRlsDetail::evalTxtVerActive(
+bool PnlWdbeRlsDetail::evalButCmpViewAvail(
 			DbsWdbe* dbswdbe
 		) {
-	// pre.ixCrdaccRlsIncl(edit)
-
-	vector<bool> args;
-	bool a;
-
-	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCRLS, jref) & VecWdbeWAccess::EDIT);
-	args.push_back(a);
-
-	return(args.back());
-};
-
-bool PnlWdbeRlsDetail::evalButVerViewAvail(
-			DbsWdbe* dbswdbe
-		) {
-	// rls.verEq(0)|(pre.ixCrdaccVer())
+	// rls.cmpEq(0)|((pre.ixCrdaccCmp()&pre.refVer())|(pre.ixCrdaccCmp()))
 
 	vector<bool> args;
 	bool a, b;
 
-	a = false; a = (recRls.refWdbeMVersion == 0);
+	a = false; a = (recRls.refWdbeMComponent == 0);
 	args.push_back(a);
-	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCVER, jref) != 0);
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCCMP, jref) != 0);
 	args.push_back(a);
+	a = false; a = (xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFVER, jref) != 0);
+	args.push_back(a);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a && b);
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCCMP, jref) != 0);
+	args.push_back(a);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
 	b = args.back(); args.pop_back();
 	a = args.back(); args.pop_back();
 	args.push_back(a || b);
@@ -100,15 +96,15 @@ bool PnlWdbeRlsDetail::evalButVerViewAvail(
 	return(args.back());
 };
 
-bool PnlWdbeRlsDetail::evalButVerViewActive(
+bool PnlWdbeRlsDetail::evalButCmpViewActive(
 			DbsWdbe* dbswdbe
 		) {
-	// !rls.verEq(0)
+	// !rls.cmpEq(0)
 
 	vector<bool> args;
 	bool a;
 
-	a = false; a = (recRls.refWdbeMVersion == 0);
+	a = false; a = (recRls.refWdbeMComponent == 0);
 	args.push_back(a);
 	a = args.back(); args.pop_back();
 	args.push_back(!a);

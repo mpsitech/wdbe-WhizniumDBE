@@ -65,7 +65,7 @@ void PnlWdbeFstAStep::ContInf::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["numFCsiQst"] = numFCsiQst;
+	me["numFCsiQst"] = (Json::Value::UInt) numFCsiQst;
 };
 
 void PnlWdbeFstAStep::ContInf::writeXML(
@@ -260,6 +260,10 @@ PnlWdbeFstAStep::StgIac::StgIac(
 			, const uint TcoIp3Width
 			, const uint TcoCn4Width
 			, const uint TcoIp4Width
+			, const uint TcoCn5Width
+			, const uint TcoIp5Width
+			, const uint TcoCn6Width
+			, const uint TcoIp6Width
 		) :
 			Block()
 		{
@@ -272,19 +276,22 @@ PnlWdbeFstAStep::StgIac::StgIac(
 	this->TcoIp3Width = TcoIp3Width;
 	this->TcoCn4Width = TcoCn4Width;
 	this->TcoIp4Width = TcoIp4Width;
-	mask = {TCOFNXWIDTH, TCOCN1WIDTH, TCOIP1WIDTH, TCOCN2WIDTH, TCOIP2WIDTH, TCOCN3WIDTH, TCOIP3WIDTH, TCOCN4WIDTH, TCOIP4WIDTH};
+	this->TcoCn5Width = TcoCn5Width;
+	this->TcoIp5Width = TcoIp5Width;
+	this->TcoCn6Width = TcoCn6Width;
+	this->TcoIp6Width = TcoIp6Width;
+	mask = {TCOFNXWIDTH, TCOCN1WIDTH, TCOIP1WIDTH, TCOCN2WIDTH, TCOIP2WIDTH, TCOCN3WIDTH, TCOIP3WIDTH, TCOCN4WIDTH, TCOIP4WIDTH, TCOCN5WIDTH, TCOIP5WIDTH, TCOCN6WIDTH, TCOIP6WIDTH};
 };
 
 bool PnlWdbeFstAStep::StgIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["StgIacWdbeFstAStep"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["StgIacWdbeFstAStep"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -298,6 +305,10 @@ bool PnlWdbeFstAStep::StgIac::readJSON(
 		if (me.isMember("TcoIp3Width")) {TcoIp3Width = me["TcoIp3Width"].asUInt(); add(TCOIP3WIDTH);};
 		if (me.isMember("TcoCn4Width")) {TcoCn4Width = me["TcoCn4Width"].asUInt(); add(TCOCN4WIDTH);};
 		if (me.isMember("TcoIp4Width")) {TcoIp4Width = me["TcoIp4Width"].asUInt(); add(TCOIP4WIDTH);};
+		if (me.isMember("TcoCn5Width")) {TcoCn5Width = me["TcoCn5Width"].asUInt(); add(TCOCN5WIDTH);};
+		if (me.isMember("TcoIp5Width")) {TcoIp5Width = me["TcoIp5Width"].asUInt(); add(TCOIP5WIDTH);};
+		if (me.isMember("TcoCn6Width")) {TcoCn6Width = me["TcoCn6Width"].asUInt(); add(TCOCN6WIDTH);};
+		if (me.isMember("TcoIp6Width")) {TcoIp6Width = me["TcoIp6Width"].asUInt(); add(TCOIP6WIDTH);};
 	};
 
 	return basefound;
@@ -329,6 +340,10 @@ bool PnlWdbeFstAStep::StgIac::readXML(
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoIp3Width", TcoIp3Width)) add(TCOIP3WIDTH);
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoCn4Width", TcoCn4Width)) add(TCOCN4WIDTH);
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoIp4Width", TcoIp4Width)) add(TCOIP4WIDTH);
+		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoCn5Width", TcoCn5Width)) add(TCOCN5WIDTH);
+		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoIp5Width", TcoIp5Width)) add(TCOIP5WIDTH);
+		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoCn6Width", TcoCn6Width)) add(TCOCN6WIDTH);
+		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoIp6Width", TcoIp6Width)) add(TCOIP6WIDTH);
 	};
 
 	return basefound;
@@ -342,15 +357,19 @@ void PnlWdbeFstAStep::StgIac::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["TcoFnxWidth"] = TcoFnxWidth;
-	me["TcoCn1Width"] = TcoCn1Width;
-	me["TcoIp1Width"] = TcoIp1Width;
-	me["TcoCn2Width"] = TcoCn2Width;
-	me["TcoIp2Width"] = TcoIp2Width;
-	me["TcoCn3Width"] = TcoCn3Width;
-	me["TcoIp3Width"] = TcoIp3Width;
-	me["TcoCn4Width"] = TcoCn4Width;
-	me["TcoIp4Width"] = TcoIp4Width;
+	me["TcoFnxWidth"] = (Json::Value::UInt) TcoFnxWidth;
+	me["TcoCn1Width"] = (Json::Value::UInt) TcoCn1Width;
+	me["TcoIp1Width"] = (Json::Value::UInt) TcoIp1Width;
+	me["TcoCn2Width"] = (Json::Value::UInt) TcoCn2Width;
+	me["TcoIp2Width"] = (Json::Value::UInt) TcoIp2Width;
+	me["TcoCn3Width"] = (Json::Value::UInt) TcoCn3Width;
+	me["TcoIp3Width"] = (Json::Value::UInt) TcoIp3Width;
+	me["TcoCn4Width"] = (Json::Value::UInt) TcoCn4Width;
+	me["TcoIp4Width"] = (Json::Value::UInt) TcoIp4Width;
+	me["TcoCn5Width"] = (Json::Value::UInt) TcoCn5Width;
+	me["TcoIp5Width"] = (Json::Value::UInt) TcoIp5Width;
+	me["TcoCn6Width"] = (Json::Value::UInt) TcoCn6Width;
+	me["TcoIp6Width"] = (Json::Value::UInt) TcoIp6Width;
 };
 
 void PnlWdbeFstAStep::StgIac::writeXML(
@@ -374,6 +393,10 @@ void PnlWdbeFstAStep::StgIac::writeXML(
 		writeUintAttr(wr, itemtag, "sref", "TcoIp3Width", TcoIp3Width);
 		writeUintAttr(wr, itemtag, "sref", "TcoCn4Width", TcoCn4Width);
 		writeUintAttr(wr, itemtag, "sref", "TcoIp4Width", TcoIp4Width);
+		writeUintAttr(wr, itemtag, "sref", "TcoCn5Width", TcoCn5Width);
+		writeUintAttr(wr, itemtag, "sref", "TcoIp5Width", TcoIp5Width);
+		writeUintAttr(wr, itemtag, "sref", "TcoCn6Width", TcoCn6Width);
+		writeUintAttr(wr, itemtag, "sref", "TcoIp6Width", TcoIp6Width);
 	xmlTextWriterEndElement(wr);
 };
 
@@ -391,6 +414,10 @@ set<uint> PnlWdbeFstAStep::StgIac::comm(
 	if (TcoIp3Width == comp->TcoIp3Width) insert(items, TCOIP3WIDTH);
 	if (TcoCn4Width == comp->TcoCn4Width) insert(items, TCOCN4WIDTH);
 	if (TcoIp4Width == comp->TcoIp4Width) insert(items, TCOIP4WIDTH);
+	if (TcoCn5Width == comp->TcoCn5Width) insert(items, TCOCN5WIDTH);
+	if (TcoIp5Width == comp->TcoIp5Width) insert(items, TCOIP5WIDTH);
+	if (TcoCn6Width == comp->TcoCn6Width) insert(items, TCOCN6WIDTH);
+	if (TcoIp6Width == comp->TcoIp6Width) insert(items, TCOIP6WIDTH);
 
 	return(items);
 };
@@ -403,7 +430,7 @@ set<uint> PnlWdbeFstAStep::StgIac::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {TCOFNXWIDTH, TCOCN1WIDTH, TCOIP1WIDTH, TCOCN2WIDTH, TCOIP2WIDTH, TCOCN3WIDTH, TCOIP3WIDTH, TCOCN4WIDTH, TCOIP4WIDTH};
+	diffitems = {TCOFNXWIDTH, TCOCN1WIDTH, TCOIP1WIDTH, TCOCN2WIDTH, TCOIP2WIDTH, TCOCN3WIDTH, TCOIP3WIDTH, TCOCN4WIDTH, TCOIP4WIDTH, TCOCN5WIDTH, TCOIP5WIDTH, TCOCN6WIDTH, TCOIP6WIDTH};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -433,6 +460,10 @@ void PnlWdbeFstAStep::Tag::writeJSON(
 		me["TcoIp3"] = "Insertion point 3";
 		me["TcoCn4"] = "Condition 4";
 		me["TcoIp4"] = "Insertion point 4";
+		me["TcoCn5"] = "Condition 5";
+		me["TcoIp5"] = "Insertion point 5";
+		me["TcoCn6"] = "Condition 6";
+		me["TcoIp6"] = "Insertion point 6";
 	};
 	me["TxtRecord1"] = StrMod::cap(VecWdbeVTag::getTitle(VecWdbeVTag::REC, ixWdbeVLocale));
 	me["TxtRecord2"] = StrMod::cap(VecWdbeVTag::getTitle(VecWdbeVTag::EMPLONG, ixWdbeVLocale));
@@ -465,6 +496,10 @@ void PnlWdbeFstAStep::Tag::writeXML(
 			writeStringAttr(wr, itemtag, "sref", "TcoIp3", "Insertion point 3");
 			writeStringAttr(wr, itemtag, "sref", "TcoCn4", "Condition 4");
 			writeStringAttr(wr, itemtag, "sref", "TcoIp4", "Insertion point 4");
+			writeStringAttr(wr, itemtag, "sref", "TcoCn5", "Condition 5");
+			writeStringAttr(wr, itemtag, "sref", "TcoIp5", "Insertion point 5");
+			writeStringAttr(wr, itemtag, "sref", "TcoCn6", "Condition 6");
+			writeStringAttr(wr, itemtag, "sref", "TcoIp6", "Insertion point 6");
 		};
 		writeStringAttr(wr, itemtag, "sref", "TxtRecord1", StrMod::cap(VecWdbeVTag::getTitle(VecWdbeVTag::REC, ixWdbeVLocale)));
 		writeStringAttr(wr, itemtag, "sref", "TxtRecord2", StrMod::cap(VecWdbeVTag::getTitle(VecWdbeVTag::EMPLONG, ixWdbeVLocale)));
@@ -497,15 +532,14 @@ string PnlWdbeFstAStep::DpchAppData::getSrefsMask() {
 };
 
 void PnlWdbeFstAStep::DpchAppData::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbeFstAStepData"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbeFstAStepData"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -571,15 +605,14 @@ string PnlWdbeFstAStep::DpchAppDo::getSrefsMask() {
 };
 
 void PnlWdbeFstAStep::DpchAppDo::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbeFstAStepDo"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbeFstAStepDo"];}();
 
 	basefound = (me != Json::nullValue);
 

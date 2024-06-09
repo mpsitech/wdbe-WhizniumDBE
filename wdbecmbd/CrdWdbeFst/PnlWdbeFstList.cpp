@@ -111,9 +111,9 @@ void PnlWdbeFstList::refresh(
 	if ((ixPre != 0) && (ixPre != VecWdbeVPreset::VOID)) {
 		continf.TxtFor = VecWdbeVPreset::getTitle(ixPre, ixWdbeVLocale);
 
-		if (ixPre == VecWdbeVPreset::PREWDBEREFFSM) continf.TxtPre = StubWdbe::getStubFsmStd(dbswdbe, xchg->getRefPreset(ixPre, jref), ixWdbeVLocale, Stub::VecVNonetype::FULL);
+		if (ixPre == VecWdbeVPreset::PREWDBEREFMOD) continf.TxtPre = StubWdbe::getStubMdlStd(dbswdbe, xchg->getRefPreset(ixPre, jref), ixWdbeVLocale, Stub::VecVNonetype::FULL);
 		else if (ixPre == VecWdbeVPreset::PREWDBEREFMTP) continf.TxtPre = StubWdbe::getStubMdlStd(dbswdbe, xchg->getRefPreset(ixPre, jref), ixWdbeVLocale, Stub::VecVNonetype::FULL);
-		else if (ixPre == VecWdbeVPreset::PREWDBEREFMOD) continf.TxtPre = StubWdbe::getStubMdlStd(dbswdbe, xchg->getRefPreset(ixPre, jref), ixWdbeVLocale, Stub::VecVNonetype::FULL);
+		else if (ixPre == VecWdbeVPreset::PREWDBEREFFSM) continf.TxtPre = StubWdbe::getStubFsmStd(dbswdbe, xchg->getRefPreset(ixPre, jref), ixWdbeVLocale, Stub::VecVNonetype::FULL);
 
 	} else {
 		continf.TxtFor = "";
@@ -259,7 +259,7 @@ void PnlWdbeFstList::handleDpchAppDataContiac(
 	diffitems = _contiac->diff(&contiac);
 
 	if (has(diffitems, ContIac::NUMFTOS)) {
-		if ((_contiac->numFTos >= QryWdbeFstList::VecVOrd::SRF) && (_contiac->numFTos <= QryWdbeFstList::VecVOrd::FSM)) {
+		if ((_contiac->numFTos >= QryWdbeFstList::VecVOrd::FSM) && (_contiac->numFTos <= QryWdbeFstList::VecVOrd::SRF)) {
 			muteRefresh = true;
 
 			xchg->addIxPreset(VecWdbeVPreset::PREWDBEIXORD, jref, _contiac->numFTos);

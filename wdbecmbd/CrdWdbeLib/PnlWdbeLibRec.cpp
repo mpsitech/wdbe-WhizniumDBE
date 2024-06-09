@@ -38,9 +38,9 @@ PnlWdbeLibRec::PnlWdbeLibRec(
 		{
 	jref = xchg->addJob(dbswdbe, this, jrefSup);
 
-	pnldetail = NULL;
+	pnlmncomponent = NULL;
 	pnlamakefile = NULL;
-	pnlmnversion = NULL;
+	pnldetail = NULL;
 
 	// IP constructor.cust1 --- INSERT
 
@@ -99,16 +99,16 @@ void PnlWdbeLibRec::refresh(
 	if (statshr.ixWdbeVExpstate == VecWdbeVExpstate::MIND) {
 		if (pnldetail) {delete pnldetail; pnldetail = NULL;};
 		if (pnlamakefile) {delete pnlamakefile; pnlamakefile = NULL;};
-		if (pnlmnversion) {delete pnlmnversion; pnlmnversion = NULL;};
+		if (pnlmncomponent) {delete pnlmncomponent; pnlmncomponent = NULL;};
 	} else {
 		if (!pnldetail) pnldetail = new PnlWdbeLibDetail(xchg, dbswdbe, jref, ixWdbeVLocale);
 		if (!pnlamakefile) pnlamakefile = new PnlWdbeLibAMakefile(xchg, dbswdbe, jref, ixWdbeVLocale);
-		if (!pnlmnversion) pnlmnversion = new PnlWdbeLibMNVersion(xchg, dbswdbe, jref, ixWdbeVLocale);
+		if (!pnlmncomponent) pnlmncomponent = new PnlWdbeLibMNComponent(xchg, dbswdbe, jref, ixWdbeVLocale);
 	};
 
 	statshr.jrefDetail = ((pnldetail) ? pnldetail->jref : 0);
 	statshr.jrefAMakefile = ((pnlamakefile) ? pnlamakefile->jref : 0);
-	statshr.jrefMNVersion = ((pnlmnversion) ? pnlmnversion->jref : 0);
+	statshr.jrefMNComponent = ((pnlmncomponent) ? pnlmncomponent->jref : 0);
 
 	// IP refresh --- END
 	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
@@ -137,7 +137,7 @@ void PnlWdbeLibRec::updatePreset(
 		if (recLib.ref != 0) {
 			if (pnldetail) pnldetail->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
 			if (pnlamakefile) pnlamakefile->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
-			if (pnlmnversion) pnlmnversion->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
+			if (pnlmncomponent) pnlmncomponent->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
 		};
 
 		refresh(dbswdbe, moditems);

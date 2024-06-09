@@ -17,6 +17,14 @@ using namespace Xmlio;
  namespace SqkWdbeWrfpga
  ******************************************************************************/
 
+string SqkWdbeWrfpga::getSquawkAux(
+			DbsWdbe* dbswdbe
+			, DpchInvWdbeWrfpgaAux* dpchinv
+		) {
+	// example: "write auxiliary VHDL code for module 'icm2 (top_v1_0 top)'"
+	return(""); // IP getSquawkAux --- LINE
+};
+
 string SqkWdbeWrfpga::getSquawkBase(
 			DbsWdbe* dbswdbe
 			, DpchInvWdbeWrfpgaBase* dpchinv
@@ -25,12 +33,12 @@ string SqkWdbeWrfpga::getSquawkBase(
 	return(""); // IP getSquawkBase --- LINE
 };
 
-string SqkWdbeWrfpga::getSquawkCtrFwdctr(
+string SqkWdbeWrfpga::getSquawkCtr(
 			DbsWdbe* dbswdbe
-			, DpchInvWdbeWrfpgaCtrFwdctr* dpchinv
+			, DpchInvWdbeWrfpgaCtr* dpchinv
 		) {
 	// example: "write type-specific VHDL code for module 'icm2-acq (controller)'"
-	return(""); // IP getSquawkCtrFwdctr --- LINE
+	return(""); // IP getSquawkCtr --- LINE
 };
 
 string SqkWdbeWrfpga::getSquawkDeploy(
@@ -39,30 +47,6 @@ string SqkWdbeWrfpga::getSquawkDeploy(
 		) {
 	// example: "write FPGA code deployment scripts for release 'Idhw_genio'"
 	return(""); // IP getSquawkDeploy --- LINE
-};
-
-string SqkWdbeWrfpga::getSquawkEhostif(
-			DbsWdbe* dbswdbe
-			, DpchInvWdbeWrfpgaEhostif* dpchinv
-		) {
-	// example: "write type-specific VHDL code for module 'zedb-ehostif (easy host interface)'"
-	return(""); // IP getSquawkEhostif --- LINE
-};
-
-string SqkWdbeWrfpga::getSquawkHostif(
-			DbsWdbe* dbswdbe
-			, DpchInvWdbeWrfpgaHostif* dpchinv
-		) {
-	// example: "write type-specific VHDL code for module 'zedb-hostif (host interface)'"
-	return(""); // IP getSquawkHostif --- LINE
-};
-
-string SqkWdbeWrfpga::getSquawkIpclr(
-			DbsWdbe* dbswdbe
-			, DpchInvWdbeWrfpgaIpclr* dpchinv
-		) {
-	// example: "write VHDL code to clear unused specific insertion points for module 'icm2 (top_v1_0 top)'"
-	return(""); // IP getSquawkIpclr --- LINE
 };
 
 string SqkWdbeWrfpga::getSquawkMdlfine(

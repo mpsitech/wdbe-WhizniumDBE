@@ -18,14 +18,12 @@
 class WdbeQRlsList {
 
 public:
-	WdbeQRlsList(const Sbecore::uint jnum = 0, const std::string sref = "", const std::string srefIxVBasetype = "", const std::string titIxVBasetype = "", const std::string stubRefWdbeMVersion = "", const std::string stubRefWdbeMMachine = "");
+	WdbeQRlsList(const Sbecore::uint jnum = 0, const std::string sref = "", const std::string stubRefWdbeMComponent = "", const std::string stubRefWdbeMMachine = "");
 
 public:
 	Sbecore::uint jnum;
 	std::string sref;
-	std::string srefIxVBasetype;
-	std::string titIxVBasetype;
-	std::string stubRefWdbeMVersion;
+	std::string stubRefWdbeMComponent;
 	std::string stubRefWdbeMMachine;
 
 public:

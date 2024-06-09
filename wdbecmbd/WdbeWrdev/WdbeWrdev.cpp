@@ -30,7 +30,6 @@ void WdbeWrdev::writeVecH(
 			DbsWdbe* dbswdbe
 			, fstream& outfile
 			, WdbeMVector* vec
-			, WdbeMSystem* sys
 			, WdbeMUnit* unt
 			, WdbeMController* ctr
 			, const bool subclass
@@ -38,16 +37,16 @@ void WdbeWrdev::writeVecH(
 		) {
 	ListWdbeMVectoritem vits;
 	string supsref, subsref;
-	bool tix, ns;
+	bool lin, tix, ns;
 	bool notit, cmt, appfed, filfed;
-	string ixtype, ixvar;
+	string ixtype, ixvar, icsvar;
 	string clsnstype;
 
 	WdbeMVectoritem* vit = NULL;
 
 	string indent, pre;
 
-	analyzeVec(dbswdbe, vec, sys, unt, ctr, subclass, vits, supsref, subsref, tix, ns, notit, cmt, appfed, filfed, ixtype, ixvar, clsnstype);
+	analyzeVec(dbswdbe, vec, unt, ctr, subclass, vits, supsref, subsref, lin, tix, ns, notit, cmt, appfed, filfed, ixtype, ixvar, icsvar, clsnstype);
 
 	if (subclass) for (unsigned int i = 0; i < subil; i++) indent += "\t";
 
@@ -73,17 +72,22 @@ void WdbeWrdev::writeVecH(
 	for (unsigned int i = 0; i < vits.nodes.size(); i++) {
 		vit = vits.nodes[i];
 
-		outfile << pre << "constexpr " << ixtype <<  " " << getVitConst(vit, tix) << " = ";
+		outfile << pre << "constexpr " << ixtype <<  " " << getVitConst(vit->sref, tix) << " = ";
 		if (tix) outfile << "0x" << Wdbe::binToHex(vit->vecNum) << ";" << endl;
 		else outfile << vit->vecNum << ";" << endl;
 	};
 	outfile << endl;
 
 	// getIx/getTix
-	outfile << pre << ixtype << " get" << StrMod::cap(ixvar) << "(const std::string& sref);" << endl;
+	if (lin) outfile << pre << ixtype << " get" << StrMod::cap(ixvar) << "(const std::string& sref);" << endl;
+	else {
+		outfile << pre << ixtype << " get" << StrMod::cap(ixvar) << "(const std::string& srefs);" << endl;
+		outfile << pre << "void get" << StrMod::cap(icsvar) << "(const " << ixtype << " " << ixvar << ", std::set<" << ixtype << ">& " << icsvar << ");" << endl;
+	};
 
 	// getSref
-	outfile << pre << "std::string getSref(const " << ixtype << " " << ixvar << ");" << endl;
+	if (lin) outfile << pre << "std::string getSref(const " << ixtype << " " << ixvar << ");" << endl;
+	else outfile << pre << "std::string getSrefs(const " << ixtype << " " << ixvar << ");" << endl;
 
 	if (!notit || cmt) {
 		outfile << endl;
@@ -115,23 +119,20 @@ void WdbeWrdev::writeVecCpp(
 			DbsWdbe* dbswdbe
 			, fstream& outfile
 			, WdbeMVector* vec
-			, WdbeMSystem* sys
 			, WdbeMUnit* unt
 			, WdbeMController* ctr
 			, const bool subclass
 		) {
 	ListWdbeMVectoritem vits;
 	string supsref, subsref;
-	bool tix, ns;
+	bool lin, tix, ns;
 	bool notit, cmt, appfed, filfed;
-	string ixtype, ixvar;
+	string ixtype, ixvar, icsvar;
 	string clsnstype;
 
 	WdbeMVectoritem* vit = NULL;
 
-	unsigned int cnt;
-
-	analyzeVec(dbswdbe, vec, sys, unt, ctr, subclass, vits, supsref, subsref, tix, ns, notit, cmt, appfed, filfed, ixtype, ixvar, clsnstype);
+	analyzeVec(dbswdbe, vec, unt, ctr, subclass, vits, supsref, subsref, lin, tix, ns, notit, cmt, appfed, filfed, ixtype, ixvar, icsvar, clsnstype);
 
 	outfile << "/******************************************************************************" << endl;
 	outfile << " " << clsnstype << " ";
@@ -140,49 +141,127 @@ void WdbeWrdev::writeVecCpp(
 	outfile << " ******************************************************************************/" << endl;
 	outfile << endl;
 
-	// getIx/getTix
-	outfile << ixtype << " ";
-	if (subclass) outfile << supsref << "::" << subsref;
-	else outfile << vec->sref;
-	outfile << "::get" << StrMod::cap(ixvar) << "(" << endl;
-	outfile << "\t\t\tconst string& sref" << endl;
-	outfile << "\t\t) {" << endl;
-	outfile << "\tstring s = StrMod::lc(sref);" << endl;
-	outfile << endl;
+	if (lin) {
+		// getIx/getTix
+		outfile << ixtype << " ";
+		if (subclass) outfile << supsref << "::" << subsref;
+		else outfile << vec->sref;
+		outfile << "::get" << StrMod::cap(ixvar) << "(" << endl;
+		outfile << "\t\t\tconst string& sref" << endl;
+		outfile << "\t\t) {" << endl;
+		outfile << "\tstring s = StrMod::lc(sref);" << endl;
+		outfile << endl;
 
-	for (unsigned int i = 0; i < vits.nodes.size(); i++) {
-		vit = vits.nodes[i];
+		for (unsigned int i = 0; i < vits.nodes.size(); i++) {
+			vit = vits.nodes[i];
 
-		outfile << "\t";
-		if (i != 0) outfile << "else ";
-		outfile << "if (s == \"" << StrMod::lc(vit->sref) << "\") return " << getVitConst(vit, tix) << ";" << endl;
+			outfile << "\t";
+			if (i != 0) outfile << "else ";
+			outfile << "if (s == \"" << StrMod::lc(vit->sref) << "\") return " << getVitConst(vit->sref, tix) << ";" << endl;
+		};
+		outfile << endl;
+
+		outfile << "\treturn(0xFF);" << endl;
+		outfile << "};" << endl;
+		outfile << endl;
+
+	} else {
+		// getIx/getTix
+		outfile << ixtype << " ";
+		if (subclass) outfile << supsref << "::" << subsref;
+		else outfile << vec->sref;
+		outfile << "::get" << StrMod::cap(ixvar) << "(" << endl;
+		outfile << "\t\t\tconst string& srefs" << endl;
+		outfile << "\t\t) {" << endl;
+		outfile << "\t" << ixtype << " " << ixvar << " = 0;" << endl;
+		outfile << endl;
+
+		outfile << "\tvector<string> ss;" << endl;
+		outfile << "\tStrMod::srefsToVector(StrMod::lc(srefs), ss);" << endl;
+		outfile << endl;
+
+		outfile << "\tfor (unsigned int i = 0; i < ss.size(); i++) {" << endl;
+		for (unsigned int i = 0; i < vits.nodes.size(); i++) {
+			vit = vits.nodes[i];
+
+			outfile << "\t\t";
+			if (i != 0) outfile << "else ";
+			outfile << "if (ss[i] == \"" << StrMod::lc(vit->sref) << "\") " << ixvar << " |= " << getVitConst(vit->sref, tix) << ";" << endl;
+		};
+		outfile << "\t};" << endl;
+		outfile << endl;
+
+		outfile << "\treturn(" << ixvar << ");" << endl;
+		outfile << "};" << endl;
+		outfile << endl;
+
+		// getIcs/getTics
+		if (subclass) outfile << "void " << supsref << "::" << subsref;
+		else outfile << "void " << vec->sref;
+		outfile << "::get" << StrMod::cap(icsvar) << "(" << endl;
+		outfile << "\t\t\tconst " << ixtype << " " << ixvar << endl;
+		outfile << "\t\t\t, set<" << ixtype << ">& " << icsvar << endl;
+		outfile << "\t\t) {" << endl;
+
+		outfile << "\t" << icsvar << ".clear();" << endl;
+		if (vits.nodes.size() == 0) {
+			outfile << "\tfor (" << ixtype << " i = 1; false;) if (" << ixvar << " & i) " << icsvar << ".insert(i);" << endl;
+		} else {
+			outfile << "\tfor (" << ixtype << " i = 1; i < (2*" << getVitConst(vits.nodes[vits.nodes.size()-1]->sref, tix) << "); i *= 2) if (" << ixvar << " & i) " << icsvar << ".insert(i);" << endl;
+		};
+		outfile << "};" << endl;
+		outfile << endl;
 	};
-	outfile << endl;
 
-	outfile << "\treturn(0);" << endl;
-	outfile << "};" << endl;
-	outfile << endl;
+	if (lin) {
+		// getSref
+		outfile << "string ";
+		if (subclass) outfile << supsref << "::" << subsref;
+		else outfile << vec->sref;
+		outfile << "::getSref(" << endl;
+		outfile << "\t\t\tconst " << ixtype << " " << ixvar << endl;
+		outfile << "\t\t) {" << endl;
 
-	// getSref
-	outfile << "string ";
-	if (subclass) outfile << supsref << "::" << subsref;
-	else outfile << vec->sref;
-	outfile << "::getSref(" << endl;
-	outfile << "\t\t\tconst " << ixtype << " " << ixvar << endl;
-	outfile << "\t\t) {" << endl;
+		for (unsigned int i = 0; i < vits.nodes.size(); i++) {
+			vit = vits.nodes[i];
 
-	for (unsigned int i = 0; i < vits.nodes.size(); i++) {
-		vit = vits.nodes[i];
+			outfile << "\t";
+			if (i != 0) outfile << "else ";
+			outfile << "if (" << ixvar << " == " << getVitConst(vit->sref, tix) << ") return(\"" << vit->sref << "\");" << endl;
+		};
+		outfile << endl;
 
-		outfile << "\t";
-		if (i != 0) outfile << "else ";
-		outfile << "if (" << ixvar << " == " << getVitConst(vit, tix) << ") return(\"" << vit->sref << "\");" << endl;
+		outfile << "\treturn(\"\");" << endl;
+		outfile << "};" << endl;
+		outfile << endl;
+
+	} else {
+		// getSrefs
+		outfile << "string ";
+		if (subclass) outfile << supsref << "::" << subsref;
+		else outfile << vec->sref;
+		outfile << "::getSrefs(" << endl;
+		outfile << "\t\t\tconst " << ixtype << " " << ixvar << endl;
+		outfile << "\t\t) {" << endl;
+
+		outfile << "\tvector<string> ss;" << endl;
+		outfile << "\tstring srefs;" << endl;
+		outfile << endl;
+
+		for (unsigned int i = 0; i < vits.nodes.size(); i++) {
+			vit = vits.nodes[i];
+
+			outfile << "\tif (" << ixvar << " & " << getVitConst(vit->sref, tix) << ") ss.push_back(\"" << vit->sref << "\");" << endl;
+		};
+		outfile << endl;
+
+		outfile << "\tStrMod::vectorToString(ss, srefs);" << endl;
+		outfile << endl;
+
+		outfile << "\treturn(srefs);" << endl;
+		outfile << "};" << endl;
+		outfile << endl;
 	};
-	outfile << endl;
-
-	outfile << "\treturn(\"\");" << endl;
-	outfile << "};" << endl;
-	outfile << endl;
 
 	if (!notit) {
 		// getTitle
@@ -193,25 +272,16 @@ void WdbeWrdev::writeVecCpp(
 		outfile << "\t\t\tconst " << ixtype << " " << ixvar << endl;
 		outfile << "\t\t) {" << endl;
 
-		cnt = 0;
-
 		for (unsigned int i = 0; i < vits.nodes.size(); i++) {
 			vit = vits.nodes[i];
-
-			if (vit->Title.length() != 0) {
-				outfile << "\t";
-				if (cnt > 0) outfile << "else ";
-				outfile << "if (" << ixvar << " == " << getVitConst(vit, tix) << ") return(\"" << StrMod::esc(vit->Title) << "\");" << endl;
-
-				cnt++;
-			};
+			if (vit->Title != "") outfile << "\tif (" << ixvar << " == " << getVitConst(vit->sref, tix) << ") return(\"" << StrMod::esc(vit->Title) << "\");" << endl;
 		};
 
-		if (cnt == 0) outfile << "\treturn(getSref(" << ixvar << "));" << endl;
-		else if (vits.nodes.size() != cnt) outfile << "\telse return(getSref(" << ixvar << "));" << endl;
-
 		outfile << endl;
-		outfile << "\treturn(\"\");" << endl;
+		outfile << "\treturn(get";
+		if (lin) outfile << "Sref";
+		else outfile << "Srefs";
+		outfile << "(" << ixvar << "));" << endl;
 		outfile << "};" << endl;
 		outfile << endl;
 	};
@@ -225,18 +295,9 @@ void WdbeWrdev::writeVecCpp(
 		outfile << "\t\t\tconst " << ixtype << " " << ixvar << endl;
 		outfile << "\t\t) {" << endl;
 
-		cnt = 0;
-
 		for (unsigned int i = 0; i < vits.nodes.size(); i++) {
 			vit = vits.nodes[i];
-
-			if (vit->Comment.length() != 0) {
-				outfile << "\t";
-				if (cnt > 0) outfile << "else ";
-				outfile << "if (" << ixvar << " == " << getVitConst(vit, tix) << ") return(\"" << StrMod::esc(vit->Comment) << "\");" << endl;
-
-				cnt++;
-			};
+			if (vit->Comment != "") outfile << "\tif (" << ixvar << " == " << getVitConst(vit->sref, tix) << ") return(\"" << StrMod::esc(vit->Comment) << "\");" << endl;
 		};
 
 		outfile << endl;
@@ -255,9 +316,15 @@ void WdbeWrdev::writeVecCpp(
 		outfile << "\t\t\t, Feed& feed" << endl;
 		outfile << "\t\t) {" << endl;
 
-		outfile << "\tfeed.appendIxSrefTitles(ix, getSref(" << ixvar << ")";
+		outfile << "\tfeed.appendIxSrefTitles(ix, getSref";
+		if (!lin) outfile << "s";
+		outfile << "(" << ixvar << ")";
 		if (!notit) outfile << ", getTitle(" << ixvar << ")";
-		else outfile << ", getSref(" << ixvar << ")";
+		else {
+			outfile << ", getSref";
+			if (!lin) outfile << "s";
+			outfile << "(" << ixvar << ")";
+		};
 		outfile << ");" << endl;
 
 		outfile << "};" << endl;
@@ -282,7 +349,7 @@ void WdbeWrdev::writeVecCpp(
 				vit = vits.nodes[i];
 
 				if (i != 0) outfile << ",";
-				outfile << getVitConst(vit, tix);
+				outfile << getVitConst(vit->sref, tix);
 			};
 			outfile << "};" << endl;
 			outfile << endl;
@@ -290,9 +357,15 @@ void WdbeWrdev::writeVecCpp(
 			outfile << "\tfor (auto it = items.begin(); it != items.end(); it++) ";
 
 			outfile << "feed.appendIxSrefTitles(*it";
-			outfile << ", getSref(*it)";
+			outfile << ", getSref";
+			if (!lin) outfile << "s";
+			outfile << "(*it)";
 			if (!notit) outfile << ", getTitle(*it)";
-			else outfile << ", getSref(*it)";
+			else {
+				outfile << ", getSref";
+				if (!lin) outfile << "s";
+				outfile << "(*it)";
+			};
 			outfile << ");" << endl;
 		};
 		outfile << "};" << endl;
@@ -303,13 +376,13 @@ void WdbeWrdev::writeVecCpp(
 void WdbeWrdev::analyzeVec(
 			DbsWdbe* dbswdbe
 			, WdbeMVector* vec
-			, WdbeMSystem* sys
 			, WdbeMUnit* unt
 			, WdbeMController* ctr
 			, const bool subclass
 			, ListWdbeMVectoritem& vits
 			, string& supsref
 			, string& subsref
+			, bool& lin //
 			, bool& tix
 			, bool& ns
 			, bool& notit
@@ -318,12 +391,14 @@ void WdbeWrdev::analyzeVec(
 			, bool& filfed
 			, string& ixtype
 			, string& ixvar
+			, string& icsvar //
 			, string& clsnstype
 		) {
 	dbswdbe->tblwdbemvectoritem->loadRstByVec(vec->ref, false, vits);
 
-	if (subclass) getVecSupsubsref(vec, sys, unt, ctr, supsref, subsref);
+	if (subclass) getVecSupsubsref(vec, unt, ctr, supsref, subsref);
 
+	lin = ((vec->ixVBasetype == VecWdbeVMVectorBasetype::IXLIN) || (vec->ixVBasetype == VecWdbeVMVectorBasetype::TIXLIN));
 	tix = ((vec->ixVBasetype == VecWdbeVMVectorBasetype::TIXLIN) || (vec->ixVBasetype == VecWdbeVMVectorBasetype::TIXOR));
 	ns = !subclass;
 
@@ -335,9 +410,11 @@ void WdbeWrdev::analyzeVec(
 	if (tix) {
 		ixtype = "uint8_t";
 		ixvar = "tix";
+		icsvar = "tics";
 	} else {
 		ixtype = "uint32_t";
 		ixvar = "ix";
+		icsvar = "ics";
 	};
 
 	if (ns) clsnstype = "namespace";
@@ -346,7 +423,6 @@ void WdbeWrdev::analyzeVec(
 
 void WdbeWrdev::getVecSupsubsref(
 			WdbeMVector* vec
-			, WdbeMSystem* sys
 			, WdbeMUnit* unt
 			, WdbeMController* ctr
 			, string& supsref
@@ -368,23 +444,15 @@ void WdbeWrdev::getVecSupsubsref(
 	} else if (unt) {
 		// ex. VecWIdhwIcm2Buffer -> UntIdhwIcm2::VecWBuffer
 		// however, generally subclass not used
-
-	} else if (sys) {
-		// ex. VecVSysIdhwBasys2fwdTarget -> SysIdhwBasys2fwd::VecVTarget
-		supsref = sys->sref;
-
-		ptr = subsref.find(supsref);
-		if (ptr != string::npos) subsref = subsref.substr(0, ptr) + subsref.substr(ptr + supsref.length());
-
 	};
 };
 
 string WdbeWrdev::getVitConst(
-			WdbeMVectoritem* vit
+			const string& vitsref
 			, const bool tix
 		) {
-	if (tix) return StrMod::uc(StrMod::uscToCap(StrMod::dotToUsc(vit->sref)));
-	else return StrMod::uc(StrMod::dotToUsc(vit->sref));
+	if (tix) return StrMod::uc(StrMod::uscToCap(StrMod::dotToUsc(vitsref)));
+	else return StrMod::uc(StrMod::dotToUsc(vitsref));
 };
 
 void WdbeWrdev::writeSpeccmdH(
@@ -447,9 +515,9 @@ void WdbeWrdev::writeSpeccmdCpp(
 
 	outfile << supsref << "::" << subsref << "::" << subsref << "() :" << endl;
 	outfile << "\t\t\tCmd(";
-	if (cmd->refIxVTbl == VecWdbeVMCommandRefTbl::CTR) outfile << "0x" << Wdbe::binToHex(tixCtr) << ", VecVCommand";
+	if (cmd->refIxVTbl == VecWdbeVMCommandRefTbl::CTR) outfile << "tixVController, VecVCommand";
 	else outfile << "VecV" << supsref.substr(3) << "Command";
-	outfile << "::" << StrMod::uc(cmd->sref) << ", Cmd::VecVRettype::" << StrMod::uc(VecWdbeVMCommandRettype::getSref(cmd->ixVRettype)) << ")" << endl;
+	outfile << "::" << getVitConst(cmd->sref, true) << ", Cmd::VecVRettype::" << StrMod::uc(VecWdbeVMCommandRettype::getSref(cmd->ixVRettype)) << ")" << endl;
 	outfile << "\t\t{" << endl;
 	outfile << "\treturnSpeccallback = NULL;" << endl;
 	outfile << "\targReturnSpeccallback = NULL;" << endl;
@@ -577,9 +645,9 @@ void WdbeWrdev::writeCmdCpp(
 		outfile << "Cmd* " << supsref << "::getNewCmd" << StrMod::cap(cmd->sref) << "() {" << endl;
 
 		outfile << "\tCmd* cmd = new Cmd(";
-		if (cmd->refIxVTbl == VecWdbeVMCommandRefTbl::CTR) outfile << "0x" << Wdbe::binToHex(tixCtr) << ", VecVCommand";
+		if (cmd->refIxVTbl == VecWdbeVMCommandRefTbl::CTR) outfile << "tixVController, VecVCommand";
 		else outfile << "VecV" << supsref.substr(3) << "Command";
-		outfile << "::" << StrMod::uc(cmd->sref) << ", Cmd::VecVRettype::" << StrMod::uc(VecWdbeVMCommandRettype::getSref(cmd->ixVRettype)) << ");" << endl;
+		outfile << "::" << getVitConst(cmd->sref, true) << ", Cmd::VecVRettype::" << StrMod::uc(VecWdbeVMCommandRettype::getSref(cmd->ixVRettype)) << ");" << endl;
 		outfile << endl;
 
 		if (ipas.nodes.size() > 0) {
@@ -612,7 +680,13 @@ void WdbeWrdev::writeCmdCpp(
 			wrIparpa(outfile, rpa->sref, rpa->ixWdbeVPartype, ((ipas.nodes.size() == 0) && (i == 0)), true, true, false, false, false);
 		};
 		outfile << "\t\t) {" << endl;
-		outfile << "\tCmd* cmd = getNewCmd" << StrMod::cap(cmd->sref) << "();" << endl;
+
+		outfile << "\t";
+		if (cmd->refIxVTbl == VecWdbeVMCommandRefTbl::CTR) outfile << "unt->";
+		outfile << "lockAccess(\"" << supsref << "::" << cmd->sref << "\");" << endl;
+		outfile << endl;
+
+		outfile << "\tCmd* cmd = cmd" << StrMod::cap(cmd->sref) << ";" << endl;
 		outfile << endl;
 
 		if (ipas.nodes.size() > 0) {
@@ -623,19 +697,19 @@ void WdbeWrdev::writeCmdCpp(
 			outfile << endl;
 		};
 
-		if (cmd->refIxVTbl == VecWdbeVMCommandRefTbl::UNT) outfile << "\tif (unt->runCmd(cmd)) {" << endl;
+		if (cmd->refIxVTbl == VecWdbeVMCommandRefTbl::UNT) outfile << "\tif (runCmd(cmd)) {" << endl;
 		else outfile << "\tif (unt->runCmd(cmd)) {" << endl;
 		for (unsigned int i = 0; i < rpas.nodes.size(); i++) {
 			rpa = rpas.nodes[i];
 			writeCmdCpp_getrpa(outfile, rpa);
 		};
-		outfile << "\t} else {" << endl;
-		outfile << "\t\tdelete cmd;" << endl;
-		outfile << "\t\tthrow DbeException(\"error running " << cmd->sref << "\");" << endl;
-		outfile << "\t};" << endl;
+		outfile << "\t} else throw DbeException(\"error running " << cmd->sref << "\");" << endl;
 		outfile << endl;
 
-		outfile << "\tdelete cmd;" << endl;
+		outfile << "\t";
+		if (cmd->refIxVTbl == VecWdbeVMCommandRefTbl::CTR) outfile << "unt->";
+		outfile << "unlockAccess(\"" << supsref << "::" << cmd->sref << "\");" << endl;
+
 		outfile << "};" << endl;
 		outfile << endl;
 
@@ -660,9 +734,9 @@ void WdbeWrdev::writeCmdCpp(
 		if (rpas.nodes.size() > 0) outfile << subsref << "();" << endl;
 		else {
 			outfile << "Cmd(";
-			if (cmd->refIxVTbl == VecWdbeVMCommandRefTbl::CTR) outfile << "0x" << Wdbe::binToHex(tixCtr) << ", VecVCommand";
+			if (cmd->refIxVTbl == VecWdbeVMCommandRefTbl::CTR) outfile << "tixVController, VecVCommand";
 			else outfile << "VecV" << supsref.substr(3) << "Command";
-			outfile << "::" << StrMod::uc(cmd->sref) << ", Cmd::VecVRettype::" << StrMod::uc(VecWdbeVMCommandRettype::getSref(cmd->ixVRettype)) << ");" << endl;
+			outfile << "::" << getVitConst(cmd->sref, true) << ", Cmd::VecVRettype::" << StrMod::uc(VecWdbeVMCommandRettype::getSref(cmd->ixVRettype)) << ");" << endl;
 		};
 		outfile << endl;
 
@@ -838,16 +912,18 @@ void WdbeWrdev::wrAddpar(
 	if (ixWdbeVPartype == VecWdbeVPartype::TIX) {
 		if (dbswdbe->tblwdbemvector->loadRecByRef(refWdbeMVector, &vec)) {
 			if (vec->hkIxVTbl == VecWdbeVMVectorHkTbl::CTR) dbswdbe->tblwdbemcontroller->loadRecByRef(vec->hkUref, &ctr);
-			getVecSupsubsref(vec, NULL, NULL, ctr, supsref, subsref);
+			getVecSupsubsref(vec, NULL, ctr, supsref, subsref);
 			if (ctr) delete ctr;
 
 			if (supsref != "") {
 				outfile << ", " << supsref << "::" << subsref << "::getTix";
 				outfile << ", " << supsref << "::" << subsref << "::getSref";
+				if (vec->ixVBasetype == VecWdbeVMVectorBasetype::TIXOR) outfile << "s";
 				outfile << ", " << supsref << "::" << subsref << "::fillFeed";
 			} else {
 				outfile << ", " << subsref << "::getTix";
 				outfile << ", " << subsref << "::getSref";
+				if (vec->ixVBasetype == VecWdbeVMVectorBasetype::TIXOR) outfile << "s";
 				outfile << ", " << subsref << "::fillFeed";
 			};
 

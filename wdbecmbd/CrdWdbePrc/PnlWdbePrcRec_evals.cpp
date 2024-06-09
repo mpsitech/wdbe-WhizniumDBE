@@ -27,6 +27,22 @@ bool PnlWdbePrcRec::evalPnlfsmfsm1nfsmstateAvail(
 	return(args.back());
 };
 
+bool PnlWdbePrcRec::evalPnlfsmhk1nvectorAvail(
+			DbsWdbe* dbswdbe
+		) {
+	// !prc.fsmEq(0)
+
+	vector<bool> args;
+	bool a;
+
+	a = false; a = (recPrc.refWdbeMFsm == 0);
+	args.push_back(a);
+	a = args.back(); args.pop_back();
+	args.push_back(!a);
+
+	return(args.back());
+};
+
 bool PnlWdbePrcRec::evalButRegularizeActive(
 			DbsWdbe* dbswdbe
 		) {

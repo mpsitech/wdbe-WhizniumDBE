@@ -27,10 +27,10 @@ void QryWdbePrcFsmFsm1NFsmstate::StatApp::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["firstcol"] = firstcol;
-	me["jnumFirstdisp"] = jnumFirstdisp;
-	me["ncol"] = ncol;
-	me["ndisp"] = ndisp;
+	me["firstcol"] = (Json::Value::UInt) firstcol;
+	me["jnumFirstdisp"] = (Json::Value::UInt) jnumFirstdisp;
+	me["ncol"] = (Json::Value::UInt) ncol;
+	me["ndisp"] = (Json::Value::UInt) ndisp;
 };
 
 void QryWdbePrcFsmFsm1NFsmstate::StatApp::writeXML(
@@ -82,9 +82,9 @@ void QryWdbePrcFsmFsm1NFsmstate::StatShr::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["ntot"] = ntot;
-	me["jnumFirstload"] = jnumFirstload;
-	me["nload"] = nload;
+	me["ntot"] = (Json::Value::UInt) ntot;
+	me["jnumFirstload"] = (Json::Value::UInt) jnumFirstload;
+	me["nload"] = (Json::Value::UInt) nload;
 };
 
 void QryWdbePrcFsmFsm1NFsmstate::StatShr::writeXML(
@@ -149,15 +149,14 @@ QryWdbePrcFsmFsm1NFsmstate::StgIac::StgIac(
 };
 
 bool QryWdbePrcFsmFsm1NFsmstate::StgIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["StgIacQryWdbePrcFsmFsm1NFsmstate"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["StgIacQryWdbePrcFsmFsm1NFsmstate"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -203,9 +202,9 @@ void QryWdbePrcFsmFsm1NFsmstate::StgIac::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["jnum"] = jnum;
-	me["jnumFirstload"] = jnumFirstload;
-	me["nload"] = nload;
+	me["jnum"] = (Json::Value::UInt) jnum;
+	me["jnumFirstload"] = (Json::Value::UInt) jnumFirstload;
+	me["nload"] = (Json::Value::UInt) nload;
 };
 
 void QryWdbePrcFsmFsm1NFsmstate::StgIac::writeXML(

@@ -37,10 +37,9 @@ namespace PnlWdbeUntDetail {
 		static const Sbecore::uint BUTSAVECLICK = 1;
 		static const Sbecore::uint BUTREUVIEWCLICK = 2;
 		static const Sbecore::uint BUTSILVIEWCLICK = 3;
-		static const Sbecore::uint BUTSYSVIEWCLICK = 4;
-		static const Sbecore::uint BUTMDLVIEWCLICK = 5;
-		static const Sbecore::uint BUTPKGEDITCLICK = 6;
-		static const Sbecore::uint BUTTCHEDITCLICK = 7;
+		static const Sbecore::uint BUTMDLVIEWCLICK = 4;
+		static const Sbecore::uint BUTPKGEDITCLICK = 5;
+		static const Sbecore::uint BUTTCHEDITCLICK = 6;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);
@@ -94,17 +93,15 @@ namespace PnlWdbeUntDetail {
 		static const Sbecore::uint TXTSRF = 1;
 		static const Sbecore::uint TXTREU = 2;
 		static const Sbecore::uint TXTSIL = 3;
-		static const Sbecore::uint TXTSYS = 4;
-		static const Sbecore::uint TXTMDL = 5;
+		static const Sbecore::uint TXTMDL = 4;
 
 	public:
-		ContInf(const std::string& TxtSrf = "", const std::string& TxtReu = "", const std::string& TxtSil = "", const std::string& TxtSys = "", const std::string& TxtMdl = "");
+		ContInf(const std::string& TxtSrf = "", const std::string& TxtReu = "", const std::string& TxtSil = "", const std::string& TxtMdl = "");
 
 	public:
 		std::string TxtSrf;
 		std::string TxtReu;
 		std::string TxtSil;
-		std::string TxtSys;
 		std::string TxtMdl;
 
 	public:
@@ -158,21 +155,18 @@ namespace PnlWdbeUntDetail {
 		static const Sbecore::uint TXTSILACTIVE = 13;
 		static const Sbecore::uint BUTSILVIEWAVAIL = 14;
 		static const Sbecore::uint BUTSILVIEWACTIVE = 15;
-		static const Sbecore::uint TXTSYSACTIVE = 16;
-		static const Sbecore::uint BUTSYSVIEWAVAIL = 17;
-		static const Sbecore::uint BUTSYSVIEWACTIVE = 18;
-		static const Sbecore::uint TXTMDLACTIVE = 19;
-		static const Sbecore::uint BUTMDLVIEWAVAIL = 20;
-		static const Sbecore::uint BUTMDLVIEWACTIVE = 21;
-		static const Sbecore::uint PUPPKGACTIVE = 22;
-		static const Sbecore::uint BUTPKGEDITAVAIL = 23;
-		static const Sbecore::uint CHKESYACTIVE = 24;
-		static const Sbecore::uint PUPTCHACTIVE = 25;
-		static const Sbecore::uint BUTTCHEDITAVAIL = 26;
-		static const Sbecore::uint TXFCMTACTIVE = 27;
+		static const Sbecore::uint TXTMDLACTIVE = 16;
+		static const Sbecore::uint BUTMDLVIEWAVAIL = 17;
+		static const Sbecore::uint BUTMDLVIEWACTIVE = 18;
+		static const Sbecore::uint PUPPKGACTIVE = 19;
+		static const Sbecore::uint BUTPKGEDITAVAIL = 20;
+		static const Sbecore::uint CHKESYACTIVE = 21;
+		static const Sbecore::uint PUPTCHACTIVE = 22;
+		static const Sbecore::uint BUTTCHEDITAVAIL = 23;
+		static const Sbecore::uint TXFCMTACTIVE = 24;
 
 	public:
-		StatShr(const bool TxfPkgValid = false, const bool TxfTchValid = false, const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxtSrfActive = true, const bool TxfTitActive = true, const bool TxfFsrActive = true, const bool PupTypActive = true, const bool TxtReuActive = true, const bool ButReuViewAvail = true, const bool ButReuViewActive = true, const bool TxtSilAvail = true, const bool TxtSilActive = true, const bool ButSilViewAvail = true, const bool ButSilViewActive = true, const bool TxtSysActive = true, const bool ButSysViewAvail = true, const bool ButSysViewActive = true, const bool TxtMdlActive = true, const bool ButMdlViewAvail = true, const bool ButMdlViewActive = true, const bool PupPkgActive = true, const bool ButPkgEditAvail = true, const bool ChkEsyActive = true, const bool PupTchActive = true, const bool ButTchEditAvail = true, const bool TxfCmtActive = true);
+		StatShr(const bool TxfPkgValid = false, const bool TxfTchValid = false, const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxtSrfActive = true, const bool TxfTitActive = true, const bool TxfFsrActive = true, const bool PupTypActive = true, const bool TxtReuActive = true, const bool ButReuViewAvail = true, const bool ButReuViewActive = true, const bool TxtSilAvail = true, const bool TxtSilActive = true, const bool ButSilViewAvail = true, const bool ButSilViewActive = true, const bool TxtMdlActive = true, const bool ButMdlViewAvail = true, const bool ButMdlViewActive = true, const bool PupPkgActive = true, const bool ButPkgEditAvail = true, const bool ChkEsyActive = true, const bool PupTchActive = true, const bool ButTchEditAvail = true, const bool TxfCmtActive = true);
 
 	public:
 		bool TxfPkgValid;
@@ -190,9 +184,6 @@ namespace PnlWdbeUntDetail {
 		bool TxtSilActive;
 		bool ButSilViewAvail;
 		bool ButSilViewActive;
-		bool TxtSysActive;
-		bool ButSysViewAvail;
-		bool ButSysViewActive;
 		bool TxtMdlActive;
 		bool ButMdlViewAvail;
 		bool ButMdlViewActive;
@@ -222,15 +213,14 @@ namespace PnlWdbeUntDetail {
 		static const Sbecore::uint CPTTYP = 5;
 		static const Sbecore::uint CPTREU = 6;
 		static const Sbecore::uint CPTSIL = 7;
-		static const Sbecore::uint CPTSYS = 8;
-		static const Sbecore::uint CPTMDL = 9;
-		static const Sbecore::uint CPTPKG = 10;
-		static const Sbecore::uint CPTESY = 11;
-		static const Sbecore::uint CPTTCH = 12;
-		static const Sbecore::uint CPTCMT = 13;
+		static const Sbecore::uint CPTMDL = 8;
+		static const Sbecore::uint CPTPKG = 9;
+		static const Sbecore::uint CPTESY = 10;
+		static const Sbecore::uint CPTTCH = 11;
+		static const Sbecore::uint CPTCMT = 12;
 
 	public:
-		Tag(const std::string& Cpt = "", const std::string& CptSrf = "", const std::string& CptTit = "", const std::string& CptFsr = "", const std::string& CptTyp = "", const std::string& CptReu = "", const std::string& CptSil = "", const std::string& CptSys = "", const std::string& CptMdl = "", const std::string& CptPkg = "", const std::string& CptEsy = "", const std::string& CptTch = "", const std::string& CptCmt = "");
+		Tag(const std::string& Cpt = "", const std::string& CptSrf = "", const std::string& CptTit = "", const std::string& CptFsr = "", const std::string& CptTyp = "", const std::string& CptReu = "", const std::string& CptSil = "", const std::string& CptMdl = "", const std::string& CptPkg = "", const std::string& CptEsy = "", const std::string& CptTch = "", const std::string& CptCmt = "");
 
 	public:
 		std::string Cpt;
@@ -240,7 +230,6 @@ namespace PnlWdbeUntDetail {
 		std::string CptTyp;
 		std::string CptReu;
 		std::string CptSil;
-		std::string CptSys;
 		std::string CptMdl;
 		std::string CptPkg;
 		std::string CptEsy;

@@ -4,8 +4,7 @@
 	<head>
 		<title>Detail_bcont</title>
 		<script>
-			function handlePupTypChange() {parent.parent.window.handlePupChange(document,"PupTyp","");};
-			function handleButVerViewClick() {parent.parent.window.handleButCrdopenClick("ButVerView");};
+			function handleButCmpViewClick() {parent.parent.window.handleButCrdopenClick("ButCmpView");};
 			function handleButMchViewClick() {parent.parent.window.handleButCrdopenClick("ButMchView");};
 			function handleButOptExpandClick() {parent.parent.window.handleButExpandClick("LstOpt");};
 			function handleButOptCollapseClick() {parent.parent.window.handleButCollapseClick("LstOpt");};
@@ -54,29 +53,17 @@
 					<td colspan="10" bgcolor="#7f7f7f"></td>
 				</tr>
 				<tr id="trA3" class="show"><td colspan="11" height="3"></td></tr>
-				<tr id="trTyp" class="show">
+				<tr id="trCmp" class="show">
 					<td height="25"></td>
 					<td align="right">
-						<span id="CptTyp" class="cpt">CptTyp</span>
+						<span id="CptCmp" class="cpt">CptCmp</span>
 					</td>
 					<td></td>
 					<td colspan="5" align="left">
-						<select id="PupTyp" class="pup" size="1" onchange="handlePupTypChange()"/>
+						<input id="TxtCmp" class="txfnoed" type="text" readonly="readonly" value="TxtCmp"/>
 					</td>
 					<td></td>
-					<td colspan="2"></td>
-				</tr>
-				<tr id="trVer" class="show">
-					<td height="25"></td>
-					<td align="right">
-						<span id="CptVer" class="cpt">CptVer</span>
-					</td>
-					<td></td>
-					<td colspan="5" align="left">
-						<input id="TxtVer" class="txfnoed" type="text" readonly="readonly" value="TxtVer"/>
-					</td>
-					<td></td>
-					<td id="rdynVer" colspan="2" align="left">
+					<td id="rdynCmp" colspan="2" align="left">
 					</td>
 				</tr>
 				<tr id="trMch" class="show">

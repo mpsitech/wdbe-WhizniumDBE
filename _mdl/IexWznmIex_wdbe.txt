@@ -250,7 +250,7 @@ IexWdbeDal	dal		1.1.6
 		tbl	fil;tbl	Comment	Comment	cmt	0	void
 		ImeIMImpexpcol.end
 	ImeIMImpexp.end
-IexWdbeDcd	dcd		1.1.8
+IexWdbeDcd	dcd		1.1.40
 	ImeIJMImpexpcplxTitle.srefX1RefWznmMLocale	Title
 	enus	detailed core description
 	ImeIJMImpexpcplxTitle.end
@@ -491,9 +491,39 @@ IexWdbeDcd	dcd		1.1.8
 		tbl	fil;tbl	Ip3	Ip3	ip3	0	void
 		tbl	fil;tbl	Cond4	Cond4	cn4	0	void
 		tbl	fil;tbl	Ip4	Ip4	ip4	0	void
+		tbl	fil;tbl	Cond5	Cond5	cn5	0	void
+		tbl	fil;tbl	Ip5	Ip5	ip5	0	void
+		tbl	fil;tbl	Cond6	Cond6	cn6	0	void
+		tbl	fil;tbl	Ip6	Ip6	ip6	0	void
 		ImeIMImpexpcol.end
 	ImeIMImpexp.end
-IexWdbeFin	fin		1.1.9
+IexWdbeDpl	dpl		1.1.35
+	ImeIJMImpexpcplxTitle.srefX1RefWznmMLocale	Title
+	enus	deployment information
+	ImeIJMImpexpcplxTitle.end
+	ImeIMImpexp.iref	irefSupRefWznmMImpexp	srefRefWznmMTable	sref	rtrSrefsWznmMImpexpcol	srefsIxWIop	Comment
+	161	0	TblWdbeMComponent	ImeIMComponent		ins
+		ImeIMImpexpcol.srefIxVBasetype	srefsIxWOccurrence	srefRefWznmMTablecol	sref	Short	irefRefWznmMImpexp	srefIxVConvtype	Defval	srefRefWznmMPreset	srefRefWznmMStub	srefRefWznmMVectoritem
+		vsref	fil	ixVBasetype	srefIxVBasetype	typ		ixsref
+		tbl	tbl	refWdbeMVersion	refWdbeMVersion			preset		PreWdbeRefVer
+		tbl	fil;tbl	sref	sref	srf		void
+		tbl	fil;tbl	Comment	Comment	cmt		void
+		ImeIMImpexpcol.end
+	22	161	TblWdbeMRelease	ImeIMRelease		ins
+		ImeIMImpexpcol.srefIxVBasetype	srefsIxWOccurrence	srefRefWznmMTablecol	sref	Short	irefRefWznmMImpexp	srefIxVConvtype	Defval	srefRefWznmMPreset	srefRefWznmMStub	srefRefWznmMVectoritem
+		tbl	tbl	refWdbeMComponent	refWdbeMComponent		161	sup
+		thsref	fil	refWdbeMMachine	hsrefRefWdbeMMachine	mch	0	cust			StubWdbeMchStd
+		tbl	fil;tbl	sref	sref	srf	0	void
+		tbl	fil;tbl	srefsKOption	srefsKOption	opt	0	void
+		tbl	fil;tbl	Comment	Comment	cmt	0	void
+		ImeIMImpexpcol.end
+	54	161	TblWdbeRMComponentMLibrary	ImeIRMComponentMLibrary		ins
+		ImeIMImpexpcol.srefIxVBasetype	srefsIxWOccurrence	srefRefWznmMTablecol	sref	Short	irefRefWznmMImpexp	srefIxVConvtype	Defval	srefRefWznmMPreset	srefRefWznmMStub	srefRefWznmMVectoritem
+		tbl	tbl	refWdbeMComponent	refWdbeMComponent		161	sup
+		tsref	fil	refWdbeMLibrary	srefRefWdbeMLibrary	lib	0	custsql			StubWdbeLibSref
+		ImeIMImpexpcol.end
+	ImeIMImpexp.end
+IexWdbeFin	fin		1.1.40
 	ImeIJMImpexpcplxTitle.srefX1RefWznmMLocale	Title
 	enus	fine structure
 	ImeIJMImpexpcplxTitle.end
@@ -655,6 +685,21 @@ IexWdbeFin	fin		1.1.9
 		tsref	fil	drvRefWdbeMPort	srefDrvRefWdbeMPort	drv	39	custsql			StubWdbePrtSref
 		tbl	fil;tbl	Comment	Comment	cmt	0	void
 		ImeIMImpexpcol.end
+	159	69	TblWdbeMCdc	ImeIMCdc		ins
+		ImeIMImpexpcol.srefIxVBasetype	srefsIxWOccurrence	srefRefWznmMTablecol	sref	Short	irefRefWznmMImpexp	srefIxVConvtype	Defval	srefRefWznmMPreset	srefRefWznmMStub	srefRefWznmMVectoritem
+		tbl	tbl	refWdbeMModule	refWdbeMModule		69	sup
+		tbl	fil;tbl	fckSrefWdbeMSignal	fckSrefWdbeMSignal	fck	0	void
+		tbl	fil;tbl	farSrefWdbeMSignal	farSrefWdbeMSignal	far	0	void
+		tbl	fil;tbl	sckSrefWdbeMSignal	sckSrefWdbeMSignal	sck	0	void
+		tbl	fil;tbl	sarSrefWdbeMSignal	sarSrefWdbeMSignal	sar	0	void
+		tbl	fil;tbl	Ratio	Ratio	rat	0	void
+		ImeIMImpexpcol.end
+	160	159	TblWdbeRMCdcMSignal	ImeIRMCdcMSignal		ins
+		ImeIMImpexpcol.srefIxVBasetype	srefsIxWOccurrence	srefRefWznmMTablecol	sref	Short	irefRefWznmMImpexp	srefIxVConvtype	Defval	srefRefWznmMPreset	srefRefWznmMStub	srefRefWznmMVectoritem
+		tbl	tbl	refWdbeMCdc	refWdbeMCdc		159	sup
+		tsref	fil	refWdbeMSignal	srefRefWdbeMSignal	sig	0	previmp			StubWdbeSigSref
+		vsref	fil	ixVDir	srefIxVDir	dir	0	ixsref
+		ImeIMImpexpcol.end
 	71	69	TblWdbeMProcess	ImeIMProcess		ins
 		ImeIMImpexpcol.srefIxVBasetype	srefsIxWOccurrence	srefRefWznmMTablecol	sref	Short	irefRefWznmMImpexp	srefIxVConvtype	Defval	srefRefWznmMPreset	srefRefWznmMStub	srefRefWznmMVectoritem
 		tbl	tbl	refWdbeMModule	refWdbeMModule		69	sup
@@ -717,6 +762,7 @@ IexWdbeFin	fin		1.1.9
 	72	71	TblWdbeMFsm	ImeIMFsm		ins
 		ImeIMImpexpcol.srefIxVBasetype	srefsIxWOccurrence	srefRefWznmMTablecol	sref	Short	irefRefWznmMImpexp	srefIxVConvtype	Defval	srefRefWznmMPreset	srefRefWznmMStub	srefRefWznmMVectoritem
 		tbl	tbl	refWdbeMProcess	refWdbeMProcess		71	sup
+		vsref	fil	ixVDbgtaptype	srefIxVDbgtaptype	dtt	0	ixsref				void
 		ImeIMImpexpcol.end
 	73	72	TblWdbeCFsmstate	ImeICFsmstate		ins
 		ImeIMImpexpcol.srefIxVBasetype	srefsIxWOccurrence	srefRefWznmMTablecol	sref	Short	irefRefWznmMImpexp	srefIxVConvtype	Defval	srefRefWznmMPreset	srefRefWznmMStub	srefRefWznmMVectoritem
@@ -744,6 +790,10 @@ IexWdbeFin	fin		1.1.9
 		tbl	fil;tbl	Ip3	Ip3	ip3	0	void
 		tbl	fil;tbl	Cond4	Cond4	cn4	0	void
 		tbl	fil;tbl	Ip4	Ip4	ip4	0	void
+		tbl	fil;tbl	Cond5	Cond5	cn5	0	void
+		tbl	fil;tbl	Ip5	Ip5	ip5	0	void
+		tbl	fil;tbl	Cond6	Cond6	cn6	0	void
+		tbl	fil;tbl	Ip6	Ip6	ip6	0	void
 		ImeIMImpexpcol.end
 	144	69	TblWdbeMController	ImeIMController		retr;retrupd
 		ImeIMImpexpcol.srefIxVBasetype	srefsIxWOccurrence	srefRefWznmMTablecol	sref	Short	irefRefWznmMImpexp	srefIxVConvtype	Defval	srefRefWznmMPreset	srefRefWznmMStub	srefRefWznmMVectoritem
@@ -1172,34 +1222,17 @@ IexWdbeIni	ini		1.1.9
 		tbl	fil;tbl	srefKFunction	srefKFunction	fct	0	void
 		ImeIMImpexpcol.end
 	ImeIMImpexp.end
-IexWdbeMdl	mdl		1.1.13
+IexWdbeMdl	mdl		1.1.28
 	ImeIJMImpexpcplxTitle.srefX1RefWznmMLocale	Title
 	enus	modular structure
 	ImeIJMImpexpcplxTitle.end
 	ImeIMImpexp.iref	irefSupRefWznmMImpexp	srefRefWznmMTable	sref	rtrSrefsWznmMImpexpcol	srefsIxWIop	Comment
-	47	0	TblWdbeMSystem	ImeIMSystem		ins
-		ImeIMImpexpcol.srefIxVBasetype	srefsIxWOccurrence	srefRefWznmMTablecol	sref	Short	irefRefWznmMImpexp	srefIxVConvtype	Defval	srefRefWznmMPreset	srefRefWznmMStub	srefRefWznmMVectoritem
-		tbl	tbl	refWdbeMVersion	refWdbeMVersion		0	preset		PreWdbeRefVer
-		tsref	fil	refWdbeMUnit	srefRefWdbeMUnit	unt	50	imppp			StubWdbeUntSref
-		tbl	fil;tbl	sref	sref	srf	0	void
-		tbl	fil;tbl	Comment	Comment	cmt	0	void
-		ImeIMImpexpcol.end
-	48	47	TblWdbeMTarget	ImeIMTarget		ins
-		ImeIMImpexpcol.srefIxVBasetype	srefsIxWOccurrence	srefRefWznmMTablecol	sref	Short	irefRefWznmMImpexp	srefIxVConvtype	Defval	srefRefWznmMPreset	srefRefWznmMStub	srefRefWznmMVectoritem
-		tbl	tbl	sysRefWdbeMSystem	sysRefWdbeMSystem		47	sup
-		tbl	tbl	sysNum	sysNum		0	incr
-		tsref	fil	refWdbeMUnit	srefRefWdbeMUnit	unt	50	imppp			StubWdbeUntSref
-		tbl	fil;tbl	sref	sref	srf	0	void
-		tbl	fil;tbl	rteSrefsWdbeMModule	rteSrefsWdbeMModule	rte	0	void
-		tbl	fil;tbl	Comment	Comment	cmt	0	void
-		ImeIMImpexpcol.end
 	50	0	TblWdbeMUnit	ImeIMUnit		ins
 		ImeIMImpexpcol.srefIxVBasetype	srefsIxWOccurrence	srefRefWznmMTablecol	sref	Short	irefRefWznmMImpexp	srefIxVConvtype	Defval	srefRefWznmMPreset	srefRefWznmMStub	srefRefWznmMVectoritem
 		vsref	fil	ixVBasetype	srefIxVBasetype	typ	0	ixsref
 		tbl	tbl	refIxVTbl	refIxVTbl		0	void				ver
 		tbl	tbl	refUref	refUref		0	preset		PreWdbeRefVer
 		tsref	fil	silRefWdbeMUnit	srefSilRefWdbeMUnit	sil	0	custsql			StubWdbeUntSref
-		tbl	tbl	refWdbeMSystem	refWdbeMSystem		0	previmp
 		tbl	tbl	refWdbeMModule	refWdbeMModule		64	sub
 		tbl	fil;tbl	sref	sref	srf	0	void
 		tbl	fil;tbl	Title	Title	tit	0	void
@@ -1251,7 +1284,6 @@ IexWdbeMdl	mdl		1.1.13
 	66	64	TblWdbeMController	ImeIMController		ins
 		ImeIMImpexpcol.srefIxVBasetype	srefsIxWOccurrence	srefRefWznmMTablecol	sref	Short	irefRefWznmMImpexp	srefIxVConvtype	Defval	srefRefWznmMPreset	srefRefWznmMStub	srefRefWznmMVectoritem
 		tbl	tbl	refWdbeMModule	refWdbeMModule		64	sup
-		tsref	fil	fwdRefWdbeMUnit	srefFwdRefWdbeMUnit	fwd	0	imppp			StubWdbeUntSref
 		tbl	tbl	Fullsref	Fullsref		0	cust
 		ImeIMImpexpcol.end
 	67	64	TblWdbeAMModulePar	ImeIAMModulePar		ins
@@ -1272,7 +1304,7 @@ IexWdbeMdl	mdl		1.1.13
 		tsref	fil	refWdbeMPeripheral	srefRefWdbeMPeripheral	pph	0	previmp			StubWdbePphStd
 		ImeIMImpexpcol.end
 	ImeIMImpexp.end
-IexWdbePrj	prj		1.0.6
+IexWdbePrj	prj		1.1.35
 	ImeIJMImpexpcplxTitle.srefX1RefWznmMLocale	Title
 	enus	projects and versions
 	ImeIJMImpexpcplxTitle.end
@@ -1307,20 +1339,6 @@ IexWdbePrj	prj		1.0.6
 		tbl	tbl	refWdbeMVersion	refWdbeMVersion		20	sup
 		tbl	tbl	x1Start	x1Start		0	void	&now;
 		vsref	fil	ixVState	srefIxVState	ste	0	ixsref
-		ImeIMImpexpcol.end
-	54	20	TblWdbeRMLibraryMVersion	ImeIRMLibraryMVersion		ins
-		ImeIMImpexpcol.srefIxVBasetype	srefsIxWOccurrence	srefRefWznmMTablecol	sref	Short	irefRefWznmMImpexp	srefIxVConvtype	Defval	srefRefWznmMPreset	srefRefWznmMStub	srefRefWznmMVectoritem
-		tsref	fil	refWdbeMLibrary	srefRefWdbeMLibrary	lib	0	custsql			StubWdbeLibSref
-		tbl	tbl	refWdbeMVersion	refWdbeMVersion		20	sup
-		ImeIMImpexpcol.end
-	22	20	TblWdbeMRelease	ImeIMRelease		ins
-		ImeIMImpexpcol.srefIxVBasetype	srefsIxWOccurrence	srefRefWznmMTablecol	sref	Short	irefRefWznmMImpexp	srefIxVConvtype	Defval	srefRefWznmMPreset	srefRefWznmMStub	srefRefWznmMVectoritem
-		vsref	fil	ixVBasetype	srefIxVBasetype	typ	0	ixsref
-		tbl	tbl	refWdbeMVersion	refWdbeMVersion		20	sup
-		thsref	fil	refWdbeMMachine	hsrefRefWdbeMMachine	mch	0	custsql			StubWdbeMchStd
-		tbl	fil;tbl	sref	sref	srf	0	void
-		tbl	fil;tbl	srefsKOption	srefsKOption	opt	0	void
-		tbl	fil;tbl	Comment	Comment	cmt	0	void
 		ImeIMImpexpcol.end
 	23	19	TblWdbeRMPersonMProject	ImeIRMPersonMProject		ins
 		ImeIMImpexpcol.srefIxVBasetype	srefsIxWOccurrence	srefRefWznmMTablecol	sref	Short	irefRefWznmMImpexp	srefIxVConvtype	Defval	srefRefWznmMPreset	srefRefWznmMStub	srefRefWznmMVectoritem

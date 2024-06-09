@@ -24,6 +24,7 @@ uint CrdWdbeVer::VecVDo::getIx(
 	if (s == "mitappabtclick") return MITAPPABTCLICK;
 	if (s == "mitcrdnewclick") return MITCRDNEWCLICK;
 	if (s == "mitcrdpcvclick") return MITCRDPCVCLICK;
+	if (s == "mitcrdidpclick") return MITCRDIDPCLICK;
 	if (s == "mitcrdimdclick") return MITCRDIMDCLICK;
 	if (s == "mitcrdicsclick") return MITCRDICSCLICK;
 	if (s == "mitcrdidaclick") return MITCRDIDACLICK;
@@ -41,6 +42,7 @@ string CrdWdbeVer::VecVDo::getSref(
 	if (ix == MITAPPABTCLICK) return("MitAppAbtClick");
 	if (ix == MITCRDNEWCLICK) return("MitCrdNewClick");
 	if (ix == MITCRDPCVCLICK) return("MitCrdPcvClick");
+	if (ix == MITCRDIDPCLICK) return("MitCrdIdpClick");
 	if (ix == MITCRDIMDCLICK) return("MitCrdImdClick");
 	if (ix == MITCRDICSCLICK) return("MitCrdIcsClick");
 	if (ix == MITCRDIDACLICK) return("MitCrdIdaClick");
@@ -113,7 +115,7 @@ void CrdWdbeVer::ContInf::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["numFSge"] = numFSge;
+	me["numFSge"] = (Json::Value::UInt) numFSge;
 	me["MrlAppHlp"] = MrlAppHlp;
 	me["MtxCrdVer"] = MtxCrdVer;
 };
@@ -184,7 +186,7 @@ void CrdWdbeVer::StatApp::writeJSON(
 	me["srefIxWdbeVReqitmode"] = VecWdbeVReqitmode::getSref(ixWdbeVReqitmode);
 	me["latency"] = latency;
 	me["shortMenu"] = shortMenu;
-	me["widthMenu"] = widthMenu;
+	me["widthMenu"] = (Json::Value::UInt) widthMenu;
 	me["initdoneHeadbar"] = initdoneHeadbar;
 	me["initdoneList"] = initdoneList;
 	me["initdoneRec"] = initdoneRec;
@@ -226,6 +228,7 @@ void CrdWdbeVer::StatApp::writeXML(
 CrdWdbeVer::StatShr::StatShr(
 			const ubigint jrefDlgcmdset
 			, const ubigint jrefDlgcustfst
+			, const ubigint jrefDlgdeploy
 			, const ubigint jrefDlgdflalg
 			, const ubigint jrefDlgfinmod
 			, const ubigint jrefDlggenfst
@@ -240,20 +243,24 @@ CrdWdbeVer::StatShr::StatShr(
 			, const bool MitCrdPcvActive
 			, const bool MspCrd3Avail
 			, const bool MspCrd3Active
+			, const bool MitCrdIdpAvail
+			, const bool MitCrdIdpActive
+			, const bool MspCrd4Avail
+			, const bool MspCrd4Active
 			, const bool MitCrdImdAvail
 			, const bool MitCrdImdActive
 			, const bool MitCrdIcsAvail
 			, const bool MitCrdIcsActive
 			, const bool MitCrdIdaAvail
 			, const bool MitCrdIdaActive
-			, const bool MspCrd4Avail
-			, const bool MspCrd4Active
+			, const bool MspCrd5Avail
+			, const bool MspCrd5Active
 			, const bool MitCrdGfsAvail
 			, const bool MitCrdGfsActive
 			, const bool MitCrdIfsAvail
 			, const bool MitCrdIfsActive
-			, const bool MspCrd5Avail
-			, const bool MspCrd5Active
+			, const bool MspCrd6Avail
+			, const bool MspCrd6Active
 			, const bool MitCrdFnmAvail
 			, const bool MitCrdFnmActive
 		) :
@@ -261,6 +268,7 @@ CrdWdbeVer::StatShr::StatShr(
 		{
 	this->jrefDlgcmdset = jrefDlgcmdset;
 	this->jrefDlgcustfst = jrefDlgcustfst;
+	this->jrefDlgdeploy = jrefDlgdeploy;
 	this->jrefDlgdflalg = jrefDlgdflalg;
 	this->jrefDlgfinmod = jrefDlgfinmod;
 	this->jrefDlggenfst = jrefDlggenfst;
@@ -275,24 +283,28 @@ CrdWdbeVer::StatShr::StatShr(
 	this->MitCrdPcvActive = MitCrdPcvActive;
 	this->MspCrd3Avail = MspCrd3Avail;
 	this->MspCrd3Active = MspCrd3Active;
+	this->MitCrdIdpAvail = MitCrdIdpAvail;
+	this->MitCrdIdpActive = MitCrdIdpActive;
+	this->MspCrd4Avail = MspCrd4Avail;
+	this->MspCrd4Active = MspCrd4Active;
 	this->MitCrdImdAvail = MitCrdImdAvail;
 	this->MitCrdImdActive = MitCrdImdActive;
 	this->MitCrdIcsAvail = MitCrdIcsAvail;
 	this->MitCrdIcsActive = MitCrdIcsActive;
 	this->MitCrdIdaAvail = MitCrdIdaAvail;
 	this->MitCrdIdaActive = MitCrdIdaActive;
-	this->MspCrd4Avail = MspCrd4Avail;
-	this->MspCrd4Active = MspCrd4Active;
+	this->MspCrd5Avail = MspCrd5Avail;
+	this->MspCrd5Active = MspCrd5Active;
 	this->MitCrdGfsAvail = MitCrdGfsAvail;
 	this->MitCrdGfsActive = MitCrdGfsActive;
 	this->MitCrdIfsAvail = MitCrdIfsAvail;
 	this->MitCrdIfsActive = MitCrdIfsActive;
-	this->MspCrd5Avail = MspCrd5Avail;
-	this->MspCrd5Active = MspCrd5Active;
+	this->MspCrd6Avail = MspCrd6Avail;
+	this->MspCrd6Active = MspCrd6Active;
 	this->MitCrdFnmAvail = MitCrdFnmAvail;
 	this->MitCrdFnmActive = MitCrdFnmActive;
 
-	mask = {JREFDLGCMDSET, JREFDLGCUSTFST, JREFDLGDFLALG, JREFDLGFINMOD, JREFDLGGENFST, JREFDLGMDLSTR, JREFDLGNEW, JREFHEADBAR, JREFLIST, JREFREC, MSPCRD1AVAIL, MITCRDNEWAVAIL, MITCRDPCVAVAIL, MITCRDPCVACTIVE, MSPCRD3AVAIL, MSPCRD3ACTIVE, MITCRDIMDAVAIL, MITCRDIMDACTIVE, MITCRDICSAVAIL, MITCRDICSACTIVE, MITCRDIDAAVAIL, MITCRDIDAACTIVE, MSPCRD4AVAIL, MSPCRD4ACTIVE, MITCRDGFSAVAIL, MITCRDGFSACTIVE, MITCRDIFSAVAIL, MITCRDIFSACTIVE, MSPCRD5AVAIL, MSPCRD5ACTIVE, MITCRDFNMAVAIL, MITCRDFNMACTIVE};
+	mask = {JREFDLGCMDSET, JREFDLGCUSTFST, JREFDLGDEPLOY, JREFDLGDFLALG, JREFDLGFINMOD, JREFDLGGENFST, JREFDLGMDLSTR, JREFDLGNEW, JREFHEADBAR, JREFLIST, JREFREC, MSPCRD1AVAIL, MITCRDNEWAVAIL, MITCRDPCVAVAIL, MITCRDPCVACTIVE, MSPCRD3AVAIL, MSPCRD3ACTIVE, MITCRDIDPAVAIL, MITCRDIDPACTIVE, MSPCRD4AVAIL, MSPCRD4ACTIVE, MITCRDIMDAVAIL, MITCRDIMDACTIVE, MITCRDICSAVAIL, MITCRDICSACTIVE, MITCRDIDAAVAIL, MITCRDIDAACTIVE, MSPCRD5AVAIL, MSPCRD5ACTIVE, MITCRDGFSAVAIL, MITCRDGFSACTIVE, MITCRDIFSAVAIL, MITCRDIFSACTIVE, MSPCRD6AVAIL, MSPCRD6ACTIVE, MITCRDFNMAVAIL, MITCRDFNMACTIVE};
 };
 
 void CrdWdbeVer::StatShr::writeJSON(
@@ -305,6 +317,7 @@ void CrdWdbeVer::StatShr::writeJSON(
 
 	me["scrJrefDlgcmdset"] = Scr::scramble(jrefDlgcmdset);
 	me["scrJrefDlgcustfst"] = Scr::scramble(jrefDlgcustfst);
+	me["scrJrefDlgdeploy"] = Scr::scramble(jrefDlgdeploy);
 	me["scrJrefDlgdflalg"] = Scr::scramble(jrefDlgdflalg);
 	me["scrJrefDlgfinmod"] = Scr::scramble(jrefDlgfinmod);
 	me["scrJrefDlggenfst"] = Scr::scramble(jrefDlggenfst);
@@ -319,20 +332,24 @@ void CrdWdbeVer::StatShr::writeJSON(
 	me["MitCrdPcvActive"] = MitCrdPcvActive;
 	me["MspCrd3Avail"] = MspCrd3Avail;
 	me["MspCrd3Active"] = MspCrd3Active;
+	me["MitCrdIdpAvail"] = MitCrdIdpAvail;
+	me["MitCrdIdpActive"] = MitCrdIdpActive;
+	me["MspCrd4Avail"] = MspCrd4Avail;
+	me["MspCrd4Active"] = MspCrd4Active;
 	me["MitCrdImdAvail"] = MitCrdImdAvail;
 	me["MitCrdImdActive"] = MitCrdImdActive;
 	me["MitCrdIcsAvail"] = MitCrdIcsAvail;
 	me["MitCrdIcsActive"] = MitCrdIcsActive;
 	me["MitCrdIdaAvail"] = MitCrdIdaAvail;
 	me["MitCrdIdaActive"] = MitCrdIdaActive;
-	me["MspCrd4Avail"] = MspCrd4Avail;
-	me["MspCrd4Active"] = MspCrd4Active;
+	me["MspCrd5Avail"] = MspCrd5Avail;
+	me["MspCrd5Active"] = MspCrd5Active;
 	me["MitCrdGfsAvail"] = MitCrdGfsAvail;
 	me["MitCrdGfsActive"] = MitCrdGfsActive;
 	me["MitCrdIfsAvail"] = MitCrdIfsAvail;
 	me["MitCrdIfsActive"] = MitCrdIfsActive;
-	me["MspCrd5Avail"] = MspCrd5Avail;
-	me["MspCrd5Active"] = MspCrd5Active;
+	me["MspCrd6Avail"] = MspCrd6Avail;
+	me["MspCrd6Active"] = MspCrd6Active;
 	me["MitCrdFnmAvail"] = MitCrdFnmAvail;
 	me["MitCrdFnmActive"] = MitCrdFnmActive;
 };
@@ -351,6 +368,7 @@ void CrdWdbeVer::StatShr::writeXML(
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
 		writeStringAttr(wr, itemtag, "sref", "scrJrefDlgcmdset", Scr::scramble(jrefDlgcmdset));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefDlgcustfst", Scr::scramble(jrefDlgcustfst));
+		writeStringAttr(wr, itemtag, "sref", "scrJrefDlgdeploy", Scr::scramble(jrefDlgdeploy));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefDlgdflalg", Scr::scramble(jrefDlgdflalg));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefDlgfinmod", Scr::scramble(jrefDlgfinmod));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefDlggenfst", Scr::scramble(jrefDlggenfst));
@@ -365,20 +383,24 @@ void CrdWdbeVer::StatShr::writeXML(
 		writeBoolAttr(wr, itemtag, "sref", "MitCrdPcvActive", MitCrdPcvActive);
 		writeBoolAttr(wr, itemtag, "sref", "MspCrd3Avail", MspCrd3Avail);
 		writeBoolAttr(wr, itemtag, "sref", "MspCrd3Active", MspCrd3Active);
+		writeBoolAttr(wr, itemtag, "sref", "MitCrdIdpAvail", MitCrdIdpAvail);
+		writeBoolAttr(wr, itemtag, "sref", "MitCrdIdpActive", MitCrdIdpActive);
+		writeBoolAttr(wr, itemtag, "sref", "MspCrd4Avail", MspCrd4Avail);
+		writeBoolAttr(wr, itemtag, "sref", "MspCrd4Active", MspCrd4Active);
 		writeBoolAttr(wr, itemtag, "sref", "MitCrdImdAvail", MitCrdImdAvail);
 		writeBoolAttr(wr, itemtag, "sref", "MitCrdImdActive", MitCrdImdActive);
 		writeBoolAttr(wr, itemtag, "sref", "MitCrdIcsAvail", MitCrdIcsAvail);
 		writeBoolAttr(wr, itemtag, "sref", "MitCrdIcsActive", MitCrdIcsActive);
 		writeBoolAttr(wr, itemtag, "sref", "MitCrdIdaAvail", MitCrdIdaAvail);
 		writeBoolAttr(wr, itemtag, "sref", "MitCrdIdaActive", MitCrdIdaActive);
-		writeBoolAttr(wr, itemtag, "sref", "MspCrd4Avail", MspCrd4Avail);
-		writeBoolAttr(wr, itemtag, "sref", "MspCrd4Active", MspCrd4Active);
+		writeBoolAttr(wr, itemtag, "sref", "MspCrd5Avail", MspCrd5Avail);
+		writeBoolAttr(wr, itemtag, "sref", "MspCrd5Active", MspCrd5Active);
 		writeBoolAttr(wr, itemtag, "sref", "MitCrdGfsAvail", MitCrdGfsAvail);
 		writeBoolAttr(wr, itemtag, "sref", "MitCrdGfsActive", MitCrdGfsActive);
 		writeBoolAttr(wr, itemtag, "sref", "MitCrdIfsAvail", MitCrdIfsAvail);
 		writeBoolAttr(wr, itemtag, "sref", "MitCrdIfsActive", MitCrdIfsActive);
-		writeBoolAttr(wr, itemtag, "sref", "MspCrd5Avail", MspCrd5Avail);
-		writeBoolAttr(wr, itemtag, "sref", "MspCrd5Active", MspCrd5Active);
+		writeBoolAttr(wr, itemtag, "sref", "MspCrd6Avail", MspCrd6Avail);
+		writeBoolAttr(wr, itemtag, "sref", "MspCrd6Active", MspCrd6Active);
 		writeBoolAttr(wr, itemtag, "sref", "MitCrdFnmAvail", MitCrdFnmAvail);
 		writeBoolAttr(wr, itemtag, "sref", "MitCrdFnmActive", MitCrdFnmActive);
 	xmlTextWriterEndElement(wr);
@@ -391,6 +413,7 @@ set<uint> CrdWdbeVer::StatShr::comm(
 
 	if (jrefDlgcmdset == comp->jrefDlgcmdset) insert(items, JREFDLGCMDSET);
 	if (jrefDlgcustfst == comp->jrefDlgcustfst) insert(items, JREFDLGCUSTFST);
+	if (jrefDlgdeploy == comp->jrefDlgdeploy) insert(items, JREFDLGDEPLOY);
 	if (jrefDlgdflalg == comp->jrefDlgdflalg) insert(items, JREFDLGDFLALG);
 	if (jrefDlgfinmod == comp->jrefDlgfinmod) insert(items, JREFDLGFINMOD);
 	if (jrefDlggenfst == comp->jrefDlggenfst) insert(items, JREFDLGGENFST);
@@ -405,20 +428,24 @@ set<uint> CrdWdbeVer::StatShr::comm(
 	if (MitCrdPcvActive == comp->MitCrdPcvActive) insert(items, MITCRDPCVACTIVE);
 	if (MspCrd3Avail == comp->MspCrd3Avail) insert(items, MSPCRD3AVAIL);
 	if (MspCrd3Active == comp->MspCrd3Active) insert(items, MSPCRD3ACTIVE);
+	if (MitCrdIdpAvail == comp->MitCrdIdpAvail) insert(items, MITCRDIDPAVAIL);
+	if (MitCrdIdpActive == comp->MitCrdIdpActive) insert(items, MITCRDIDPACTIVE);
+	if (MspCrd4Avail == comp->MspCrd4Avail) insert(items, MSPCRD4AVAIL);
+	if (MspCrd4Active == comp->MspCrd4Active) insert(items, MSPCRD4ACTIVE);
 	if (MitCrdImdAvail == comp->MitCrdImdAvail) insert(items, MITCRDIMDAVAIL);
 	if (MitCrdImdActive == comp->MitCrdImdActive) insert(items, MITCRDIMDACTIVE);
 	if (MitCrdIcsAvail == comp->MitCrdIcsAvail) insert(items, MITCRDICSAVAIL);
 	if (MitCrdIcsActive == comp->MitCrdIcsActive) insert(items, MITCRDICSACTIVE);
 	if (MitCrdIdaAvail == comp->MitCrdIdaAvail) insert(items, MITCRDIDAAVAIL);
 	if (MitCrdIdaActive == comp->MitCrdIdaActive) insert(items, MITCRDIDAACTIVE);
-	if (MspCrd4Avail == comp->MspCrd4Avail) insert(items, MSPCRD4AVAIL);
-	if (MspCrd4Active == comp->MspCrd4Active) insert(items, MSPCRD4ACTIVE);
+	if (MspCrd5Avail == comp->MspCrd5Avail) insert(items, MSPCRD5AVAIL);
+	if (MspCrd5Active == comp->MspCrd5Active) insert(items, MSPCRD5ACTIVE);
 	if (MitCrdGfsAvail == comp->MitCrdGfsAvail) insert(items, MITCRDGFSAVAIL);
 	if (MitCrdGfsActive == comp->MitCrdGfsActive) insert(items, MITCRDGFSACTIVE);
 	if (MitCrdIfsAvail == comp->MitCrdIfsAvail) insert(items, MITCRDIFSAVAIL);
 	if (MitCrdIfsActive == comp->MitCrdIfsActive) insert(items, MITCRDIFSACTIVE);
-	if (MspCrd5Avail == comp->MspCrd5Avail) insert(items, MSPCRD5AVAIL);
-	if (MspCrd5Active == comp->MspCrd5Active) insert(items, MSPCRD5ACTIVE);
+	if (MspCrd6Avail == comp->MspCrd6Avail) insert(items, MSPCRD6AVAIL);
+	if (MspCrd6Active == comp->MspCrd6Active) insert(items, MSPCRD6ACTIVE);
 	if (MitCrdFnmAvail == comp->MitCrdFnmAvail) insert(items, MITCRDFNMAVAIL);
 	if (MitCrdFnmActive == comp->MitCrdFnmActive) insert(items, MITCRDFNMACTIVE);
 
@@ -433,7 +460,7 @@ set<uint> CrdWdbeVer::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {JREFDLGCMDSET, JREFDLGCUSTFST, JREFDLGDFLALG, JREFDLGFINMOD, JREFDLGGENFST, JREFDLGMDLSTR, JREFDLGNEW, JREFHEADBAR, JREFLIST, JREFREC, MSPCRD1AVAIL, MITCRDNEWAVAIL, MITCRDPCVAVAIL, MITCRDPCVACTIVE, MSPCRD3AVAIL, MSPCRD3ACTIVE, MITCRDIMDAVAIL, MITCRDIMDACTIVE, MITCRDICSAVAIL, MITCRDICSACTIVE, MITCRDIDAAVAIL, MITCRDIDAACTIVE, MSPCRD4AVAIL, MSPCRD4ACTIVE, MITCRDGFSAVAIL, MITCRDGFSACTIVE, MITCRDIFSAVAIL, MITCRDIFSACTIVE, MSPCRD5AVAIL, MSPCRD5ACTIVE, MITCRDFNMAVAIL, MITCRDFNMACTIVE};
+	diffitems = {JREFDLGCMDSET, JREFDLGCUSTFST, JREFDLGDEPLOY, JREFDLGDFLALG, JREFDLGFINMOD, JREFDLGGENFST, JREFDLGMDLSTR, JREFDLGNEW, JREFHEADBAR, JREFLIST, JREFREC, MSPCRD1AVAIL, MITCRDNEWAVAIL, MITCRDPCVAVAIL, MITCRDPCVACTIVE, MSPCRD3AVAIL, MSPCRD3ACTIVE, MITCRDIDPAVAIL, MITCRDIDPACTIVE, MSPCRD4AVAIL, MSPCRD4ACTIVE, MITCRDIMDAVAIL, MITCRDIMDACTIVE, MITCRDICSAVAIL, MITCRDICSACTIVE, MITCRDIDAAVAIL, MITCRDIDAACTIVE, MSPCRD5AVAIL, MSPCRD5ACTIVE, MITCRDGFSAVAIL, MITCRDGFSACTIVE, MITCRDIFSAVAIL, MITCRDIFSACTIVE, MSPCRD6AVAIL, MSPCRD6ACTIVE, MITCRDFNMAVAIL, MITCRDFNMACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -454,6 +481,7 @@ void CrdWdbeVer::Tag::writeJSON(
 
 	if (ixWdbeVLocale == VecWdbeVLocale::ENUS) {
 		me["MitCrdPcv"] = "Make project's current version";
+		me["MitCrdIdp"] = "Import deployment information ...";
 		me["MitCrdImd"] = "Import modular structure ...";
 		me["MitCrdIcs"] = "Import command set ...";
 		me["MitCrdIda"] = "Import data flows and algorithms ...";
@@ -481,6 +509,7 @@ void CrdWdbeVer::Tag::writeXML(
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
 		if (ixWdbeVLocale == VecWdbeVLocale::ENUS) {
 			writeStringAttr(wr, itemtag, "sref", "MitCrdPcv", "Make project's current version");
+			writeStringAttr(wr, itemtag, "sref", "MitCrdIdp", "Import deployment information ...");
 			writeStringAttr(wr, itemtag, "sref", "MitCrdImd", "Import modular structure ...");
 			writeStringAttr(wr, itemtag, "sref", "MitCrdIcs", "Import command set ...");
 			writeStringAttr(wr, itemtag, "sref", "MitCrdIda", "Import data flows and algorithms ...");
@@ -517,15 +546,14 @@ string CrdWdbeVer::DpchAppDo::getSrefsMask() {
 };
 
 void CrdWdbeVer::DpchAppDo::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbeVerDo"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbeVerDo"];}();
 
 	basefound = (me != Json::nullValue);
 

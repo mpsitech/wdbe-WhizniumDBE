@@ -32,6 +32,7 @@ uint PnlWdbeNavLow::VecVDo::getIx(
 	if (s == "butprtviewclick") return BUTPRTVIEWCLICK;
 	if (s == "butsigviewclick") return BUTSIGVIEWCLICK;
 	if (s == "butsignewcrdclick") return BUTSIGNEWCRDCLICK;
+	if (s == "butcdcviewclick") return BUTCDCVIEWCLICK;
 	if (s == "butprcviewclick") return BUTPRCVIEWCLICK;
 	if (s == "butfstviewclick") return BUTFSTVIEWCLICK;
 
@@ -53,6 +54,7 @@ string PnlWdbeNavLow::VecVDo::getSref(
 	if (ix == BUTPRTVIEWCLICK) return("ButPrtViewClick");
 	if (ix == BUTSIGVIEWCLICK) return("ButSigViewClick");
 	if (ix == BUTSIGNEWCRDCLICK) return("ButSigNewcrdClick");
+	if (ix == BUTCDCVIEWCLICK) return("ButCdcViewClick");
 	if (ix == BUTPRCVIEWCLICK) return("ButPrcViewClick");
 	if (ix == BUTFSTVIEWCLICK) return("ButFstViewClick");
 
@@ -72,6 +74,7 @@ PnlWdbeNavLow::ContIac::ContIac(
 			, const uint numFLstGen
 			, const uint numFLstPrt
 			, const uint numFLstSig
+			, const uint numFLstCdc
 			, const uint numFLstPrc
 			, const uint numFLstFst
 		) :
@@ -85,22 +88,22 @@ PnlWdbeNavLow::ContIac::ContIac(
 	this->numFLstGen = numFLstGen;
 	this->numFLstPrt = numFLstPrt;
 	this->numFLstSig = numFLstSig;
+	this->numFLstCdc = numFLstCdc;
 	this->numFLstPrc = numFLstPrc;
 	this->numFLstFst = numFLstFst;
 
-	mask = {NUMFLSTBNK, NUMFLSTPIN, NUMFLSTINT, NUMFLSTSNS, NUMFLSTVAR, NUMFLSTGEN, NUMFLSTPRT, NUMFLSTSIG, NUMFLSTPRC, NUMFLSTFST};
+	mask = {NUMFLSTBNK, NUMFLSTPIN, NUMFLSTINT, NUMFLSTSNS, NUMFLSTVAR, NUMFLSTGEN, NUMFLSTPRT, NUMFLSTSIG, NUMFLSTCDC, NUMFLSTPRC, NUMFLSTFST};
 };
 
 bool PnlWdbeNavLow::ContIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["ContIacWdbeNavLow"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["ContIacWdbeNavLow"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -113,6 +116,7 @@ bool PnlWdbeNavLow::ContIac::readJSON(
 		if (me.isMember("numFLstGen")) {numFLstGen = me["numFLstGen"].asUInt(); add(NUMFLSTGEN);};
 		if (me.isMember("numFLstPrt")) {numFLstPrt = me["numFLstPrt"].asUInt(); add(NUMFLSTPRT);};
 		if (me.isMember("numFLstSig")) {numFLstSig = me["numFLstSig"].asUInt(); add(NUMFLSTSIG);};
+		if (me.isMember("numFLstCdc")) {numFLstCdc = me["numFLstCdc"].asUInt(); add(NUMFLSTCDC);};
 		if (me.isMember("numFLstPrc")) {numFLstPrc = me["numFLstPrc"].asUInt(); add(NUMFLSTPRC);};
 		if (me.isMember("numFLstFst")) {numFLstFst = me["numFLstFst"].asUInt(); add(NUMFLSTFST);};
 	};
@@ -145,6 +149,7 @@ bool PnlWdbeNavLow::ContIac::readXML(
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "numFLstGen", numFLstGen)) add(NUMFLSTGEN);
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "numFLstPrt", numFLstPrt)) add(NUMFLSTPRT);
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "numFLstSig", numFLstSig)) add(NUMFLSTSIG);
+		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "numFLstCdc", numFLstCdc)) add(NUMFLSTCDC);
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "numFLstPrc", numFLstPrc)) add(NUMFLSTPRC);
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "numFLstFst", numFLstFst)) add(NUMFLSTFST);
 	};
@@ -160,16 +165,17 @@ void PnlWdbeNavLow::ContIac::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["numFLstBnk"] = numFLstBnk;
-	me["numFLstPin"] = numFLstPin;
-	me["numFLstInt"] = numFLstInt;
-	me["numFLstSns"] = numFLstSns;
-	me["numFLstVar"] = numFLstVar;
-	me["numFLstGen"] = numFLstGen;
-	me["numFLstPrt"] = numFLstPrt;
-	me["numFLstSig"] = numFLstSig;
-	me["numFLstPrc"] = numFLstPrc;
-	me["numFLstFst"] = numFLstFst;
+	me["numFLstBnk"] = (Json::Value::UInt) numFLstBnk;
+	me["numFLstPin"] = (Json::Value::UInt) numFLstPin;
+	me["numFLstInt"] = (Json::Value::UInt) numFLstInt;
+	me["numFLstSns"] = (Json::Value::UInt) numFLstSns;
+	me["numFLstVar"] = (Json::Value::UInt) numFLstVar;
+	me["numFLstGen"] = (Json::Value::UInt) numFLstGen;
+	me["numFLstPrt"] = (Json::Value::UInt) numFLstPrt;
+	me["numFLstSig"] = (Json::Value::UInt) numFLstSig;
+	me["numFLstCdc"] = (Json::Value::UInt) numFLstCdc;
+	me["numFLstPrc"] = (Json::Value::UInt) numFLstPrc;
+	me["numFLstFst"] = (Json::Value::UInt) numFLstFst;
 };
 
 void PnlWdbeNavLow::ContIac::writeXML(
@@ -192,6 +198,7 @@ void PnlWdbeNavLow::ContIac::writeXML(
 		writeUintAttr(wr, itemtag, "sref", "numFLstGen", numFLstGen);
 		writeUintAttr(wr, itemtag, "sref", "numFLstPrt", numFLstPrt);
 		writeUintAttr(wr, itemtag, "sref", "numFLstSig", numFLstSig);
+		writeUintAttr(wr, itemtag, "sref", "numFLstCdc", numFLstCdc);
 		writeUintAttr(wr, itemtag, "sref", "numFLstPrc", numFLstPrc);
 		writeUintAttr(wr, itemtag, "sref", "numFLstFst", numFLstFst);
 	xmlTextWriterEndElement(wr);
@@ -210,6 +217,7 @@ set<uint> PnlWdbeNavLow::ContIac::comm(
 	if (numFLstGen == comp->numFLstGen) insert(items, NUMFLSTGEN);
 	if (numFLstPrt == comp->numFLstPrt) insert(items, NUMFLSTPRT);
 	if (numFLstSig == comp->numFLstSig) insert(items, NUMFLSTSIG);
+	if (numFLstCdc == comp->numFLstCdc) insert(items, NUMFLSTCDC);
 	if (numFLstPrc == comp->numFLstPrc) insert(items, NUMFLSTPRC);
 	if (numFLstFst == comp->numFLstFst) insert(items, NUMFLSTFST);
 
@@ -224,7 +232,7 @@ set<uint> PnlWdbeNavLow::ContIac::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {NUMFLSTBNK, NUMFLSTPIN, NUMFLSTINT, NUMFLSTSNS, NUMFLSTVAR, NUMFLSTGEN, NUMFLSTPRT, NUMFLSTSIG, NUMFLSTPRC, NUMFLSTFST};
+	diffitems = {NUMFLSTBNK, NUMFLSTPIN, NUMFLSTINT, NUMFLSTSNS, NUMFLSTVAR, NUMFLSTGEN, NUMFLSTPRT, NUMFLSTSIG, NUMFLSTCDC, NUMFLSTPRC, NUMFLSTFST};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -246,6 +254,7 @@ void PnlWdbeNavLow::StatApp::writeJSON(
 			, const bool LstGenAlt
 			, const bool LstPrtAlt
 			, const bool LstSigAlt
+			, const bool LstCdcAlt
 			, const bool LstPrcAlt
 			, const bool LstFstAlt
 			, const uint LstBnkNumFirstdisp
@@ -256,6 +265,7 @@ void PnlWdbeNavLow::StatApp::writeJSON(
 			, const uint LstGenNumFirstdisp
 			, const uint LstPrtNumFirstdisp
 			, const uint LstSigNumFirstdisp
+			, const uint LstCdcNumFirstdisp
 			, const uint LstPrcNumFirstdisp
 			, const uint LstFstNumFirstdisp
 		) {
@@ -272,18 +282,20 @@ void PnlWdbeNavLow::StatApp::writeJSON(
 	me["LstGenAlt"] = LstGenAlt;
 	me["LstPrtAlt"] = LstPrtAlt;
 	me["LstSigAlt"] = LstSigAlt;
+	me["LstCdcAlt"] = LstCdcAlt;
 	me["LstPrcAlt"] = LstPrcAlt;
 	me["LstFstAlt"] = LstFstAlt;
-	me["LstBnkNumFirstdisp"] = LstBnkNumFirstdisp;
-	me["LstPinNumFirstdisp"] = LstPinNumFirstdisp;
-	me["LstIntNumFirstdisp"] = LstIntNumFirstdisp;
-	me["LstSnsNumFirstdisp"] = LstSnsNumFirstdisp;
-	me["LstVarNumFirstdisp"] = LstVarNumFirstdisp;
-	me["LstGenNumFirstdisp"] = LstGenNumFirstdisp;
-	me["LstPrtNumFirstdisp"] = LstPrtNumFirstdisp;
-	me["LstSigNumFirstdisp"] = LstSigNumFirstdisp;
-	me["LstPrcNumFirstdisp"] = LstPrcNumFirstdisp;
-	me["LstFstNumFirstdisp"] = LstFstNumFirstdisp;
+	me["LstBnkNumFirstdisp"] = (Json::Value::UInt) LstBnkNumFirstdisp;
+	me["LstPinNumFirstdisp"] = (Json::Value::UInt) LstPinNumFirstdisp;
+	me["LstIntNumFirstdisp"] = (Json::Value::UInt) LstIntNumFirstdisp;
+	me["LstSnsNumFirstdisp"] = (Json::Value::UInt) LstSnsNumFirstdisp;
+	me["LstVarNumFirstdisp"] = (Json::Value::UInt) LstVarNumFirstdisp;
+	me["LstGenNumFirstdisp"] = (Json::Value::UInt) LstGenNumFirstdisp;
+	me["LstPrtNumFirstdisp"] = (Json::Value::UInt) LstPrtNumFirstdisp;
+	me["LstSigNumFirstdisp"] = (Json::Value::UInt) LstSigNumFirstdisp;
+	me["LstCdcNumFirstdisp"] = (Json::Value::UInt) LstCdcNumFirstdisp;
+	me["LstPrcNumFirstdisp"] = (Json::Value::UInt) LstPrcNumFirstdisp;
+	me["LstFstNumFirstdisp"] = (Json::Value::UInt) LstFstNumFirstdisp;
 };
 
 void PnlWdbeNavLow::StatApp::writeXML(
@@ -299,6 +311,7 @@ void PnlWdbeNavLow::StatApp::writeXML(
 			, const bool LstGenAlt
 			, const bool LstPrtAlt
 			, const bool LstSigAlt
+			, const bool LstCdcAlt
 			, const bool LstPrcAlt
 			, const bool LstFstAlt
 			, const uint LstBnkNumFirstdisp
@@ -309,6 +322,7 @@ void PnlWdbeNavLow::StatApp::writeXML(
 			, const uint LstGenNumFirstdisp
 			, const uint LstPrtNumFirstdisp
 			, const uint LstSigNumFirstdisp
+			, const uint LstCdcNumFirstdisp
 			, const uint LstPrcNumFirstdisp
 			, const uint LstFstNumFirstdisp
 		) {
@@ -328,6 +342,7 @@ void PnlWdbeNavLow::StatApp::writeXML(
 		writeBoolAttr(wr, itemtag, "sref", "LstGenAlt", LstGenAlt);
 		writeBoolAttr(wr, itemtag, "sref", "LstPrtAlt", LstPrtAlt);
 		writeBoolAttr(wr, itemtag, "sref", "LstSigAlt", LstSigAlt);
+		writeBoolAttr(wr, itemtag, "sref", "LstCdcAlt", LstCdcAlt);
 		writeBoolAttr(wr, itemtag, "sref", "LstPrcAlt", LstPrcAlt);
 		writeBoolAttr(wr, itemtag, "sref", "LstFstAlt", LstFstAlt);
 		writeUintAttr(wr, itemtag, "sref", "LstBnkNumFirstdisp", LstBnkNumFirstdisp);
@@ -338,6 +353,7 @@ void PnlWdbeNavLow::StatApp::writeXML(
 		writeUintAttr(wr, itemtag, "sref", "LstGenNumFirstdisp", LstGenNumFirstdisp);
 		writeUintAttr(wr, itemtag, "sref", "LstPrtNumFirstdisp", LstPrtNumFirstdisp);
 		writeUintAttr(wr, itemtag, "sref", "LstSigNumFirstdisp", LstSigNumFirstdisp);
+		writeUintAttr(wr, itemtag, "sref", "LstCdcNumFirstdisp", LstCdcNumFirstdisp);
 		writeUintAttr(wr, itemtag, "sref", "LstPrcNumFirstdisp", LstPrcNumFirstdisp);
 		writeUintAttr(wr, itemtag, "sref", "LstFstNumFirstdisp", LstFstNumFirstdisp);
 	xmlTextWriterEndElement(wr);
@@ -368,6 +384,8 @@ PnlWdbeNavLow::StatShr::StatShr(
 			, const bool LstSigAvail
 			, const bool ButSigViewActive
 			, const bool ButSigNewcrdActive
+			, const bool LstCdcAvail
+			, const bool ButCdcViewActive
 			, const bool LstPrcAvail
 			, const bool ButPrcViewActive
 			, const bool LstFstAvail
@@ -395,12 +413,14 @@ PnlWdbeNavLow::StatShr::StatShr(
 	this->LstSigAvail = LstSigAvail;
 	this->ButSigViewActive = ButSigViewActive;
 	this->ButSigNewcrdActive = ButSigNewcrdActive;
+	this->LstCdcAvail = LstCdcAvail;
+	this->ButCdcViewActive = ButCdcViewActive;
 	this->LstPrcAvail = LstPrcAvail;
 	this->ButPrcViewActive = ButPrcViewActive;
 	this->LstFstAvail = LstFstAvail;
 	this->ButFstViewActive = ButFstViewActive;
 
-	mask = {LSTBNKAVAIL, BUTBNKVIEWACTIVE, BUTBNKNEWCRDACTIVE, LSTPINAVAIL, BUTPINVIEWACTIVE, BUTPINNEWCRDACTIVE, LSTINTAVAIL, BUTINTVIEWACTIVE, BUTINTNEWCRDACTIVE, LSTSNSAVAIL, BUTSNSVIEWACTIVE, LSTVARAVAIL, BUTVARVIEWACTIVE, LSTGENAVAIL, BUTGENVIEWACTIVE, LSTPRTAVAIL, BUTPRTVIEWACTIVE, LSTSIGAVAIL, BUTSIGVIEWACTIVE, BUTSIGNEWCRDACTIVE, LSTPRCAVAIL, BUTPRCVIEWACTIVE, LSTFSTAVAIL, BUTFSTVIEWACTIVE};
+	mask = {LSTBNKAVAIL, BUTBNKVIEWACTIVE, BUTBNKNEWCRDACTIVE, LSTPINAVAIL, BUTPINVIEWACTIVE, BUTPINNEWCRDACTIVE, LSTINTAVAIL, BUTINTVIEWACTIVE, BUTINTNEWCRDACTIVE, LSTSNSAVAIL, BUTSNSVIEWACTIVE, LSTVARAVAIL, BUTVARVIEWACTIVE, LSTGENAVAIL, BUTGENVIEWACTIVE, LSTPRTAVAIL, BUTPRTVIEWACTIVE, LSTSIGAVAIL, BUTSIGVIEWACTIVE, BUTSIGNEWCRDACTIVE, LSTCDCAVAIL, BUTCDCVIEWACTIVE, LSTPRCAVAIL, BUTPRCVIEWACTIVE, LSTFSTAVAIL, BUTFSTVIEWACTIVE};
 };
 
 void PnlWdbeNavLow::StatShr::writeJSON(
@@ -431,6 +451,8 @@ void PnlWdbeNavLow::StatShr::writeJSON(
 	me["LstSigAvail"] = LstSigAvail;
 	me["ButSigViewActive"] = ButSigViewActive;
 	me["ButSigNewcrdActive"] = ButSigNewcrdActive;
+	me["LstCdcAvail"] = LstCdcAvail;
+	me["ButCdcViewActive"] = ButCdcViewActive;
 	me["LstPrcAvail"] = LstPrcAvail;
 	me["ButPrcViewActive"] = ButPrcViewActive;
 	me["LstFstAvail"] = LstFstAvail;
@@ -469,6 +491,8 @@ void PnlWdbeNavLow::StatShr::writeXML(
 		writeBoolAttr(wr, itemtag, "sref", "LstSigAvail", LstSigAvail);
 		writeBoolAttr(wr, itemtag, "sref", "ButSigViewActive", ButSigViewActive);
 		writeBoolAttr(wr, itemtag, "sref", "ButSigNewcrdActive", ButSigNewcrdActive);
+		writeBoolAttr(wr, itemtag, "sref", "LstCdcAvail", LstCdcAvail);
+		writeBoolAttr(wr, itemtag, "sref", "ButCdcViewActive", ButCdcViewActive);
 		writeBoolAttr(wr, itemtag, "sref", "LstPrcAvail", LstPrcAvail);
 		writeBoolAttr(wr, itemtag, "sref", "ButPrcViewActive", ButPrcViewActive);
 		writeBoolAttr(wr, itemtag, "sref", "LstFstAvail", LstFstAvail);
@@ -501,6 +525,8 @@ set<uint> PnlWdbeNavLow::StatShr::comm(
 	if (LstSigAvail == comp->LstSigAvail) insert(items, LSTSIGAVAIL);
 	if (ButSigViewActive == comp->ButSigViewActive) insert(items, BUTSIGVIEWACTIVE);
 	if (ButSigNewcrdActive == comp->ButSigNewcrdActive) insert(items, BUTSIGNEWCRDACTIVE);
+	if (LstCdcAvail == comp->LstCdcAvail) insert(items, LSTCDCAVAIL);
+	if (ButCdcViewActive == comp->ButCdcViewActive) insert(items, BUTCDCVIEWACTIVE);
 	if (LstPrcAvail == comp->LstPrcAvail) insert(items, LSTPRCAVAIL);
 	if (ButPrcViewActive == comp->ButPrcViewActive) insert(items, BUTPRCVIEWACTIVE);
 	if (LstFstAvail == comp->LstFstAvail) insert(items, LSTFSTAVAIL);
@@ -517,7 +543,7 @@ set<uint> PnlWdbeNavLow::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {LSTBNKAVAIL, BUTBNKVIEWACTIVE, BUTBNKNEWCRDACTIVE, LSTPINAVAIL, BUTPINVIEWACTIVE, BUTPINNEWCRDACTIVE, LSTINTAVAIL, BUTINTVIEWACTIVE, BUTINTNEWCRDACTIVE, LSTSNSAVAIL, BUTSNSVIEWACTIVE, LSTVARAVAIL, BUTVARVIEWACTIVE, LSTGENAVAIL, BUTGENVIEWACTIVE, LSTPRTAVAIL, BUTPRTVIEWACTIVE, LSTSIGAVAIL, BUTSIGVIEWACTIVE, BUTSIGNEWCRDACTIVE, LSTPRCAVAIL, BUTPRCVIEWACTIVE, LSTFSTAVAIL, BUTFSTVIEWACTIVE};
+	diffitems = {LSTBNKAVAIL, BUTBNKVIEWACTIVE, BUTBNKNEWCRDACTIVE, LSTPINAVAIL, BUTPINVIEWACTIVE, BUTPINNEWCRDACTIVE, LSTINTAVAIL, BUTINTVIEWACTIVE, BUTINTNEWCRDACTIVE, LSTSNSAVAIL, BUTSNSVIEWACTIVE, LSTVARAVAIL, BUTVARVIEWACTIVE, LSTGENAVAIL, BUTGENVIEWACTIVE, LSTPRTAVAIL, BUTPRTVIEWACTIVE, LSTSIGAVAIL, BUTSIGVIEWACTIVE, BUTSIGNEWCRDACTIVE, LSTCDCAVAIL, BUTCDCVIEWACTIVE, LSTPRCAVAIL, BUTPRCVIEWACTIVE, LSTFSTAVAIL, BUTFSTVIEWACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -546,6 +572,7 @@ void PnlWdbeNavLow::Tag::writeJSON(
 		me["CptGen"] = "generics";
 		me["CptPrt"] = "ports";
 		me["CptSig"] = "signals";
+		me["CptCdc"] = "clock domain crossings";
 		me["CptPrc"] = "processes";
 		me["CptFst"] = "FSM states";
 	};
@@ -574,6 +601,7 @@ void PnlWdbeNavLow::Tag::writeXML(
 			writeStringAttr(wr, itemtag, "sref", "CptGen", "generics");
 			writeStringAttr(wr, itemtag, "sref", "CptPrt", "ports");
 			writeStringAttr(wr, itemtag, "sref", "CptSig", "signals");
+			writeStringAttr(wr, itemtag, "sref", "CptCdc", "clock domain crossings");
 			writeStringAttr(wr, itemtag, "sref", "CptPrc", "processes");
 			writeStringAttr(wr, itemtag, "sref", "CptFst", "FSM states");
 		};
@@ -602,15 +630,14 @@ string PnlWdbeNavLow::DpchAppData::getSrefsMask() {
 };
 
 void PnlWdbeNavLow::DpchAppData::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbeNavLowData"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbeNavLowData"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -672,15 +699,14 @@ string PnlWdbeNavLow::DpchAppDo::getSrefsMask() {
 };
 
 void PnlWdbeNavLow::DpchAppDo::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbeNavLowDo"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbeNavLowDo"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -729,6 +755,7 @@ PnlWdbeNavLow::DpchEngData::DpchEngData(
 			const ubigint jref
 			, ContIac* contiac
 			, Feed* feedFLstBnk
+			, Feed* feedFLstCdc
 			, Feed* feedFLstFst
 			, Feed* feedFLstGen
 			, Feed* feedFLstInt
@@ -743,11 +770,12 @@ PnlWdbeNavLow::DpchEngData::DpchEngData(
 		) :
 			DpchEngWdbe(VecWdbeVDpch::DPCHENGWDBENAVLOWDATA, jref)
 		{
-	if (find(mask, ALL)) this->mask = {JREF, CONTIAC, FEEDFLSTBNK, FEEDFLSTFST, FEEDFLSTGEN, FEEDFLSTINT, FEEDFLSTPIN, FEEDFLSTPRC, FEEDFLSTPRT, FEEDFLSTSIG, FEEDFLSTSNS, FEEDFLSTVAR, STATAPP, STATSHR, TAG};
+	if (find(mask, ALL)) this->mask = {JREF, CONTIAC, FEEDFLSTBNK, FEEDFLSTCDC, FEEDFLSTFST, FEEDFLSTGEN, FEEDFLSTINT, FEEDFLSTPIN, FEEDFLSTPRC, FEEDFLSTPRT, FEEDFLSTSIG, FEEDFLSTSNS, FEEDFLSTVAR, STATAPP, STATSHR, TAG};
 	else this->mask = mask;
 
 	if (find(this->mask, CONTIAC) && contiac) this->contiac = *contiac;
 	if (find(this->mask, FEEDFLSTBNK) && feedFLstBnk) this->feedFLstBnk = *feedFLstBnk;
+	if (find(this->mask, FEEDFLSTCDC) && feedFLstCdc) this->feedFLstCdc = *feedFLstCdc;
 	if (find(this->mask, FEEDFLSTFST) && feedFLstFst) this->feedFLstFst = *feedFLstFst;
 	if (find(this->mask, FEEDFLSTGEN) && feedFLstGen) this->feedFLstGen = *feedFLstGen;
 	if (find(this->mask, FEEDFLSTINT) && feedFLstInt) this->feedFLstInt = *feedFLstInt;
@@ -767,6 +795,7 @@ string PnlWdbeNavLow::DpchEngData::getSrefsMask() {
 	if (has(JREF)) ss.push_back("jref");
 	if (has(CONTIAC)) ss.push_back("contiac");
 	if (has(FEEDFLSTBNK)) ss.push_back("feedFLstBnk");
+	if (has(FEEDFLSTCDC)) ss.push_back("feedFLstCdc");
 	if (has(FEEDFLSTFST)) ss.push_back("feedFLstFst");
 	if (has(FEEDFLSTGEN)) ss.push_back("feedFLstGen");
 	if (has(FEEDFLSTINT)) ss.push_back("feedFLstInt");
@@ -793,6 +822,7 @@ void PnlWdbeNavLow::DpchEngData::merge(
 	if (src->has(JREF)) {jref = src->jref; add(JREF);};
 	if (src->has(CONTIAC)) {contiac = src->contiac; add(CONTIAC);};
 	if (src->has(FEEDFLSTBNK)) {feedFLstBnk = src->feedFLstBnk; add(FEEDFLSTBNK);};
+	if (src->has(FEEDFLSTCDC)) {feedFLstCdc = src->feedFLstCdc; add(FEEDFLSTCDC);};
 	if (src->has(FEEDFLSTFST)) {feedFLstFst = src->feedFLstFst; add(FEEDFLSTFST);};
 	if (src->has(FEEDFLSTGEN)) {feedFLstGen = src->feedFLstGen; add(FEEDFLSTGEN);};
 	if (src->has(FEEDFLSTINT)) {feedFLstInt = src->feedFLstInt; add(FEEDFLSTINT);};
@@ -816,6 +846,7 @@ void PnlWdbeNavLow::DpchEngData::writeJSON(
 	if (has(JREF)) me["scrJref"] = Scr::scramble(jref);
 	if (has(CONTIAC)) contiac.writeJSON(me);
 	if (has(FEEDFLSTBNK)) feedFLstBnk.writeJSON(me);
+	if (has(FEEDFLSTCDC)) feedFLstCdc.writeJSON(me);
 	if (has(FEEDFLSTFST)) feedFLstFst.writeJSON(me);
 	if (has(FEEDFLSTGEN)) feedFLstGen.writeJSON(me);
 	if (has(FEEDFLSTINT)) feedFLstInt.writeJSON(me);
@@ -839,6 +870,7 @@ void PnlWdbeNavLow::DpchEngData::writeXML(
 		if (has(JREF)) writeString(wr, "scrJref", Scr::scramble(jref));
 		if (has(CONTIAC)) contiac.writeXML(wr);
 		if (has(FEEDFLSTBNK)) feedFLstBnk.writeXML(wr);
+		if (has(FEEDFLSTCDC)) feedFLstCdc.writeXML(wr);
 		if (has(FEEDFLSTFST)) feedFLstFst.writeXML(wr);
 		if (has(FEEDFLSTGEN)) feedFLstGen.writeXML(wr);
 		if (has(FEEDFLSTINT)) feedFLstInt.writeXML(wr);

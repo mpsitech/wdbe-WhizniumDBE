@@ -62,6 +62,14 @@
 #define ImeIWdbeFinCVariable1 IexWdbeFin::ImeICVariable1
 #define VecWImeIWdbeFinCVariable1Iel IexWdbeFin::ImeICVariable1::VecWIel
 
+#define ImeitemIWdbeFinRMCdcMSignal IexWdbeFin::ImeitemIRMCdcMSignal
+#define ImeIWdbeFinRMCdcMSignal IexWdbeFin::ImeIRMCdcMSignal
+#define VecWImeIWdbeFinRMCdcMSignalIel IexWdbeFin::ImeIRMCdcMSignal::VecWIel
+
+#define ImeitemIWdbeFinMCdc IexWdbeFin::ImeitemIMCdc
+#define ImeIWdbeFinMCdc IexWdbeFin::ImeIMCdc
+#define VecWImeIWdbeFinMCdcIel IexWdbeFin::ImeIMCdc::VecWIel
+
 #define ImeitemIWdbeFinMCommand IexWdbeFin::ImeitemIMCommand
 #define ImeIWdbeFinMCommand IexWdbeFin::ImeIMCommand
 #define VecWImeIWdbeFinMCommandIel IexWdbeFin::ImeIMCommand::VecWIel
@@ -174,25 +182,27 @@ namespace IexWdbeFin {
 		static const Sbecore::uint IMEIJAVKEYLISTKEY = 12;
 		static const Sbecore::uint IMEIJMPINSREF = 13;
 		static const Sbecore::uint IMEIMBANK = 14;
-		static const Sbecore::uint IMEIMCOMMAND = 15;
-		static const Sbecore::uint IMEIMCONTROLLER = 16;
-		static const Sbecore::uint IMEIMERROR = 17;
-		static const Sbecore::uint IMEIMFSM = 18;
-		static const Sbecore::uint IMEIMFSMSTATE = 19;
-		static const Sbecore::uint IMEIMGENERIC = 20;
-		static const Sbecore::uint IMEIMINTERRUPT1 = 21;
-		static const Sbecore::uint IMEIMMODULE = 22;
-		static const Sbecore::uint IMEIMPIN = 23;
-		static const Sbecore::uint IMEIMPORT = 24;
-		static const Sbecore::uint IMEIMPROCESS = 25;
-		static const Sbecore::uint IMEIMSENSITIVITY1 = 26;
-		static const Sbecore::uint IMEIMSENSITIVITY2 = 27;
-		static const Sbecore::uint IMEIMSIGNAL1 = 28;
-		static const Sbecore::uint IMEIMSIGNAL2 = 29;
-		static const Sbecore::uint IMEIMUNIT = 30;
-		static const Sbecore::uint IMEIMVARIABLE1 = 31;
-		static const Sbecore::uint IMEIMVARIABLE2 = 32;
-		static const Sbecore::uint IMEIRMCOMMANDMCONTROLLER = 33;
+		static const Sbecore::uint IMEIMCDC = 15;
+		static const Sbecore::uint IMEIMCOMMAND = 16;
+		static const Sbecore::uint IMEIMCONTROLLER = 17;
+		static const Sbecore::uint IMEIMERROR = 18;
+		static const Sbecore::uint IMEIMFSM = 19;
+		static const Sbecore::uint IMEIMFSMSTATE = 20;
+		static const Sbecore::uint IMEIMGENERIC = 21;
+		static const Sbecore::uint IMEIMINTERRUPT1 = 22;
+		static const Sbecore::uint IMEIMMODULE = 23;
+		static const Sbecore::uint IMEIMPIN = 24;
+		static const Sbecore::uint IMEIMPORT = 25;
+		static const Sbecore::uint IMEIMPROCESS = 26;
+		static const Sbecore::uint IMEIMSENSITIVITY1 = 27;
+		static const Sbecore::uint IMEIMSENSITIVITY2 = 28;
+		static const Sbecore::uint IMEIMSIGNAL1 = 29;
+		static const Sbecore::uint IMEIMSIGNAL2 = 30;
+		static const Sbecore::uint IMEIMUNIT = 31;
+		static const Sbecore::uint IMEIMVARIABLE1 = 32;
+		static const Sbecore::uint IMEIMVARIABLE2 = 33;
+		static const Sbecore::uint IMEIRMCDCMSIGNAL = 34;
+		static const Sbecore::uint IMEIRMCOMMANDMCONTROLLER = 35;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);
@@ -867,6 +877,130 @@ namespace IexWdbeFin {
 	};
 
 	/**
+		* ImeitemIRMCdcMSignal (full: ImeitemIWdbeFinRMCdcMSignal)
+		*/
+	class ImeitemIRMCdcMSignal : public WdbeRMCdcMSignal {
+
+	public:
+		ImeitemIRMCdcMSignal(const std::string& srefRefWdbeMSignal = "", const Sbecore::uint ixVDir = 0);
+		ImeitemIRMCdcMSignal(DbsWdbe* dbswdbe, const Sbecore::ubigint ref);
+
+	public:
+		Sbecore::uint lineno;
+		Sbecore::uint ixWIelValid;
+
+		std::string srefRefWdbeMSignal;
+		std::string srefIxVDir;
+
+	public:
+		void readTxt(Sbecore::Txtrd& txtrd);
+		void readXML(xmlXPathContext* docctx, const std::string& basexpath);
+
+		void writeTxt(std::fstream& outfile);
+		void writeXML(xmlTextWriter* wr, const Sbecore::uint num, const bool shorttags = true);
+	};
+
+	/**
+		* ImeIRMCdcMSignal (full: ImeIWdbeFinRMCdcMSignal)
+		*/
+	class ImeIRMCdcMSignal {
+
+	public:
+		/**
+			* VecWIel (full: VecWImeIWdbeFinRMCdcMSignalIel)
+			*/
+		class VecWIel {
+
+		public:
+			static const Sbecore::uint SREFREFWDBEMSIGNAL = 1;
+			static const Sbecore::uint SREFIXVDIR = 2;
+
+			static Sbecore::uint getIx(const std::string& srefs);
+			static void getIcs(const Sbecore::uint ix, std::set<Sbecore::uint>& ics);
+			static std::string getSrefs(const Sbecore::uint ix);
+		};
+
+	public:
+		ImeIRMCdcMSignal();
+		~ImeIRMCdcMSignal();
+
+	public:
+		std::vector<ImeitemIRMCdcMSignal*> nodes;
+
+	public:
+		void clear();
+
+		void readTxt(Sbecore::Txtrd& txtrd);
+		void readXML(xmlXPathContext* docctx, std::string basexpath);
+
+		void writeTxt(std::fstream& outfile);
+		void writeXML(xmlTextWriter* wr, const bool shorttags = true);
+	};
+
+	/**
+		* ImeitemIMCdc (full: ImeitemIWdbeFinMCdc)
+		*/
+	class ImeitemIMCdc : public WdbeMCdc {
+
+	public:
+		ImeitemIMCdc(const std::string& fckSrefWdbeMSignal = "", const std::string& farSrefWdbeMSignal = "", const std::string& sckSrefWdbeMSignal = "", const std::string& sarSrefWdbeMSignal = "", const double Ratio = 0.0);
+		ImeitemIMCdc(DbsWdbe* dbswdbe, const Sbecore::ubigint ref);
+
+	public:
+		Sbecore::uint lineno;
+		Sbecore::uint ixWIelValid;
+
+		ImeIRMCdcMSignal imeirmcdcmsignal;
+
+	public:
+		void readTxt(Sbecore::Txtrd& txtrd);
+		void readXML(xmlXPathContext* docctx, const std::string& basexpath);
+
+		void writeTxt(std::fstream& outfile);
+		void writeXML(xmlTextWriter* wr, const Sbecore::uint num, const bool shorttags = true);
+	};
+
+	/**
+		* ImeIMCdc (full: ImeIWdbeFinMCdc)
+		*/
+	class ImeIMCdc {
+
+	public:
+		/**
+			* VecWIel (full: VecWImeIWdbeFinMCdcIel)
+			*/
+		class VecWIel {
+
+		public:
+			static const Sbecore::uint FCKSREFWDBEMSIGNAL = 1;
+			static const Sbecore::uint FARSREFWDBEMSIGNAL = 2;
+			static const Sbecore::uint SCKSREFWDBEMSIGNAL = 4;
+			static const Sbecore::uint SARSREFWDBEMSIGNAL = 8;
+			static const Sbecore::uint RATIO = 16;
+
+			static Sbecore::uint getIx(const std::string& srefs);
+			static void getIcs(const Sbecore::uint ix, std::set<Sbecore::uint>& ics);
+			static std::string getSrefs(const Sbecore::uint ix);
+		};
+
+	public:
+		ImeIMCdc();
+		~ImeIMCdc();
+
+	public:
+		std::vector<ImeitemIMCdc*> nodes;
+
+	public:
+		void clear();
+
+		void readTxt(Sbecore::Txtrd& txtrd);
+		void readXML(xmlXPathContext* docctx, std::string basexpath);
+
+		void writeTxt(std::fstream& outfile);
+		void writeXML(xmlTextWriter* wr, const bool shorttags = true);
+	};
+
+	/**
 		* ImeitemIMCommand (full: ImeitemIWdbeFinMCommand)
 		*/
 	class ImeitemIMCommand : public WdbeMCommand {
@@ -1508,7 +1642,7 @@ namespace IexWdbeFin {
 	class ImeitemIAMFsmstateStep : public WdbeAMFsmstateStep {
 
 	public:
-		ImeitemIAMFsmstateStep(const std::string& srefFnxRefWdbeMFsmstate = "", const std::string& Cond1 = "", const std::string& Ip1 = "", const std::string& Cond2 = "", const std::string& Ip2 = "", const std::string& Cond3 = "", const std::string& Ip3 = "", const std::string& Cond4 = "", const std::string& Ip4 = "");
+		ImeitemIAMFsmstateStep(const std::string& srefFnxRefWdbeMFsmstate = "", const std::string& Cond1 = "", const std::string& Ip1 = "", const std::string& Cond2 = "", const std::string& Ip2 = "", const std::string& Cond3 = "", const std::string& Ip3 = "", const std::string& Cond4 = "", const std::string& Ip4 = "", const std::string& Cond5 = "", const std::string& Ip5 = "", const std::string& Cond6 = "", const std::string& Ip6 = "");
 		ImeitemIAMFsmstateStep(DbsWdbe* dbswdbe, const Sbecore::ubigint ref);
 
 	public:
@@ -1546,6 +1680,10 @@ namespace IexWdbeFin {
 			static const Sbecore::uint IP3 = 64;
 			static const Sbecore::uint COND4 = 128;
 			static const Sbecore::uint IP4 = 256;
+			static const Sbecore::uint COND5 = 512;
+			static const Sbecore::uint IP5 = 1024;
+			static const Sbecore::uint COND6 = 2048;
+			static const Sbecore::uint IP6 = 4096;
 
 			static Sbecore::uint getIx(const std::string& srefs);
 			static void getIcs(const Sbecore::uint ix, std::set<Sbecore::uint>& ics);
@@ -1639,12 +1777,14 @@ namespace IexWdbeFin {
 	class ImeitemIMFsm : public WdbeMFsm {
 
 	public:
-		ImeitemIMFsm();
+		ImeitemIMFsm(const Sbecore::uint ixVDbgtaptype = 0);
 		ImeitemIMFsm(DbsWdbe* dbswdbe, const Sbecore::ubigint ref);
 
 	public:
 		Sbecore::uint lineno;
 		Sbecore::uint ixWIelValid;
+
+		std::string srefIxVDbgtaptype;
 
 		ImeICFsmstate imeicfsmstate;
 		ImeIMFsmstate imeimfsmstate;
@@ -1669,6 +1809,7 @@ namespace IexWdbeFin {
 		class VecWIel {
 
 		public:
+			static const Sbecore::uint SREFIXVDBGTAPTYPE = 1;
 
 			static Sbecore::uint getIx(const std::string& srefs);
 			static void getIcs(const Sbecore::uint ix, std::set<Sbecore::uint>& ics);
@@ -2112,6 +2253,7 @@ namespace IexWdbeFin {
 		ImeICPort imeicport;
 		ImeICSignal2 imeicsignal2;
 		ImeICVariable1 imeicvariable1;
+		ImeIMCdc imeimcdc;
 		ImeIMController imeimcontroller;
 		ImeIMGeneric imeimgeneric;
 		ImeIMPort imeimport;

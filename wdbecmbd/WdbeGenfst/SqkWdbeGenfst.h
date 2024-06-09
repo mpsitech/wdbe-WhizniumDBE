@@ -17,7 +17,7 @@
 	*/
 namespace SqkWdbeGenfst {
 	std::string getSquawkCmdbus(DbsWdbe* dbswdbe, DpchInvWdbeGenfstCmdbus* dpchinv);
-	std::string getSquawkCtrFwdctr(DbsWdbe* dbswdbe, DpchInvWdbeGenfstCtrFwdctr* dpchinv);
+	std::string getSquawkCtr(DbsWdbe* dbswdbe, DpchInvWdbeGenfstCtr* dpchinv);
 	std::string getSquawkEctr(DbsWdbe* dbswdbe, DpchInvWdbeGenfstEctr* dpchinv);
 	std::string getSquawkEhostif(DbsWdbe* dbswdbe, DpchInvWdbeGenfstEhostif* dpchinv);
 	std::string getSquawkHostif(DbsWdbe* dbswdbe, DpchInvWdbeGenfstHostif* dpchinv);

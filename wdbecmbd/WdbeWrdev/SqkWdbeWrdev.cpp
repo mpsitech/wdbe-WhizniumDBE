@@ -41,14 +41,6 @@ string SqkWdbeWrdev::getSquawkDeploy(
 	return("write device access library deployment scripts for release '" + StubWdbe::getStubRlsStd(dbswdbe, dpchinv->refWdbeMRelease) + "'"); // IP getSquawkDeploy --- RLINE
 };
 
-string SqkWdbeWrdev::getSquawkSys(
-			DbsWdbe* dbswdbe
-			, DpchInvWdbeWrdevSys* dpchinv
-		) {
-	// example: "write C++ code for system 'Basys2fwd'"
-	return("write C++ code for system '" + StubWdbe::getStubSysStd(dbswdbe, dpchinv->refWdbeMSystem) + "'"); // IP getSquawkSys --- RLINE
-};
-
 string SqkWdbeWrdev::getSquawkUnt(
 			DbsWdbe* dbswdbe
 			, DpchInvWdbeWrdevUnt* dpchinv

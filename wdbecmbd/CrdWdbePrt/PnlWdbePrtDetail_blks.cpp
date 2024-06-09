@@ -84,15 +84,14 @@ PnlWdbePrtDetail::ContIac::ContIac(
 };
 
 bool PnlWdbePrtDetail::ContIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["ContIacWdbePrtDetail"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["ContIacWdbePrtDetail"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -154,9 +153,9 @@ void PnlWdbePrtDetail::ContIac::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["numFLstClu"] = numFLstClu;
-	me["numFPupDir"] = numFPupDir;
-	me["numFPupHty"] = numFPupHty;
+	me["numFLstClu"] = (Json::Value::UInt) numFLstClu;
+	me["numFPupDir"] = (Json::Value::UInt) numFPupDir;
+	me["numFPupHty"] = (Json::Value::UInt) numFPupHty;
 	me["TxfHty"] = TxfHty;
 	me["TxfWid"] = TxfWid;
 	me["TxfMmx"] = TxfMmx;
@@ -342,7 +341,7 @@ void PnlWdbePrtDetail::StatApp::writeJSON(
 	me["TxtCpiAlt"] = TxtCpiAlt;
 	me["TxtCprAlt"] = TxtCprAlt;
 	me["TxtCsiAlt"] = TxtCsiAlt;
-	me["LstCluNumFirstdisp"] = LstCluNumFirstdisp;
+	me["LstCluNumFirstdisp"] = (Json::Value::UInt) LstCluNumFirstdisp;
 };
 
 void PnlWdbePrtDetail::StatApp::writeXML(
@@ -652,15 +651,14 @@ string PnlWdbePrtDetail::DpchAppData::getSrefsMask() {
 };
 
 void PnlWdbePrtDetail::DpchAppData::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbePrtDetailData"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbePrtDetailData"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -722,15 +720,14 @@ string PnlWdbePrtDetail::DpchAppDo::getSrefsMask() {
 };
 
 void PnlWdbePrtDetail::DpchAppDo::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbePrtDetailDo"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbePrtDetailDo"];}();
 
 	basefound = (me != Json::nullValue);
 

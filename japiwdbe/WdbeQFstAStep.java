@@ -25,6 +25,10 @@ public class WdbeQFstAStep {
 				, String Ip3
 				, String Cond4
 				, String Ip4
+				, String Cond5
+				, String Ip5
+				, String Cond6
+				, String Ip6
 			) {
 		this.jnum = jnum;
 		this.stubFnxRefWdbeMFsmstate = stubFnxRefWdbeMFsmstate;
@@ -36,6 +40,10 @@ public class WdbeQFstAStep {
 		this.Ip3 = Ip3;
 		this.Cond4 = Cond4;
 		this.Ip4 = Ip4;
+		this.Cond5 = Cond5;
+		this.Ip5 = Ip5;
+		this.Cond6 = Cond6;
+		this.Ip6 = Ip6;
 	};
 
 	public int jnum;
@@ -48,6 +56,10 @@ public class WdbeQFstAStep {
 	public String Ip3;
 	public String Cond4;
 	public String Ip4;
+	public String Cond5;
+	public String Ip5;
+	public String Cond6;
+	public String Ip6;
 	
 	public boolean readXML(
 				Document doc
@@ -66,6 +78,10 @@ public class WdbeQFstAStep {
 			Ip3 = Xmlio.extractStringUclc(doc, basexpath, "Ip3", "ip3", null, 0);
 			Cond4 = Xmlio.extractStringUclc(doc, basexpath, "Cond4", "cn4", null, 0);
 			Ip4 = Xmlio.extractStringUclc(doc, basexpath, "Ip4", "ip4", null, 0);
+			Cond5 = Xmlio.extractStringUclc(doc, basexpath, "Cond5", "cn5", null, 0);
+			Ip5 = Xmlio.extractStringUclc(doc, basexpath, "Ip5", "ip5", null, 0);
+			Cond6 = Xmlio.extractStringUclc(doc, basexpath, "Cond6", "cn6", null, 0);
+			Ip6 = Xmlio.extractStringUclc(doc, basexpath, "Ip6", "ip6", null, 0);
 			
 			return true;
 		};

@@ -228,15 +228,14 @@ DlgWdbeRlsStareptr::ContIac::ContIac(
 };
 
 bool DlgWdbeRlsStareptr::ContIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["ContIacDlgWdbeRlsStareptr"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["ContIacDlgWdbeRlsStareptr"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -278,7 +277,7 @@ void DlgWdbeRlsStareptr::ContIac::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["numFDse"] = numFDse;
+	me["numFDse"] = (Json::Value::UInt) numFDse;
 };
 
 void DlgWdbeRlsStareptr::ContIac::writeXML(
@@ -338,15 +337,14 @@ DlgWdbeRlsStareptr::ContIacDet::ContIacDet(
 };
 
 bool DlgWdbeRlsStareptr::ContIacDet::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["ContIacDlgWdbeRlsStareptrDet"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["ContIacDlgWdbeRlsStareptrDet"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -390,7 +388,7 @@ void DlgWdbeRlsStareptr::ContIacDet::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["numFRbuBrt"] = numFRbuBrt;
+	me["numFRbuBrt"] = (Json::Value::UInt) numFRbuBrt;
 	me["TxfGrl"] = TxfGrl;
 };
 
@@ -458,7 +456,7 @@ void DlgWdbeRlsStareptr::ContInf::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["numFSge"] = numFSge;
+	me["numFSge"] = (Json::Value::UInt) numFSge;
 };
 
 void DlgWdbeRlsStareptr::ContInf::writeXML(
@@ -1317,15 +1315,14 @@ string DlgWdbeRlsStareptr::DpchAppData::getSrefsMask() {
 };
 
 void DlgWdbeRlsStareptr::DpchAppData::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppDlgWdbeRlsStareptrData"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppDlgWdbeRlsStareptrData"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -1397,15 +1394,14 @@ string DlgWdbeRlsStareptr::DpchAppDo::getSrefsMask() {
 };
 
 void DlgWdbeRlsStareptr::DpchAppDo::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppDlgWdbeRlsStareptrDo"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppDlgWdbeRlsStareptrDo"];}();
 
 	basefound = (me != Json::nullValue);
 

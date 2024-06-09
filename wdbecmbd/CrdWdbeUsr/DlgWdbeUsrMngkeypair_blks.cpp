@@ -95,7 +95,7 @@ void DlgWdbeUsrMngkeypair::ContInf::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["numFSge"] = numFSge;
+	me["numFSge"] = (Json::Value::UInt) numFSge;
 	me["DetTxtSte"] = DetTxtSte;
 	me["DetDld"] = DetDld;
 };
@@ -322,15 +322,14 @@ string DlgWdbeUsrMngkeypair::DpchAppDo::getSrefsMask() {
 };
 
 void DlgWdbeUsrMngkeypair::DpchAppDo::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppDlgWdbeUsrMngkeypairDo"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppDlgWdbeUsrMngkeypairDo"];}();
 
 	basefound = (me != Json::nullValue);
 

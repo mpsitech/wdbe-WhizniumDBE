@@ -93,7 +93,7 @@ void CrdWdbeSns::ContInf::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["numFSge"] = numFSge;
+	me["numFSge"] = (Json::Value::UInt) numFSge;
 	me["MrlAppHlp"] = MrlAppHlp;
 	me["MtxCrdSns"] = MtxCrdSns;
 };
@@ -164,7 +164,7 @@ void CrdWdbeSns::StatApp::writeJSON(
 	me["srefIxWdbeVReqitmode"] = VecWdbeVReqitmode::getSref(ixWdbeVReqitmode);
 	me["latency"] = latency;
 	me["shortMenu"] = shortMenu;
-	me["widthMenu"] = widthMenu;
+	me["widthMenu"] = (Json::Value::UInt) widthMenu;
 	me["initdoneHeadbar"] = initdoneHeadbar;
 	me["initdoneList"] = initdoneList;
 	me["initdoneRec"] = initdoneRec;
@@ -336,15 +336,14 @@ string CrdWdbeSns::DpchAppDo::getSrefsMask() {
 };
 
 void CrdWdbeSns::DpchAppDo::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbeSnsDo"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbeSnsDo"];}();
 
 	basefound = (me != Json::nullValue);
 

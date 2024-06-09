@@ -41,13 +41,23 @@ DpchRetWdbeCplmstImbuf* WdbeCplmstImbuf::run(
 	fstream logfi;
 
 	WdbeMModule* mdl = NULL;
+	WdbeMImbuf* imb = NULL;
 
-	string Minmax;
+	string s;
 
 	string sref, srefrootMgmt, srefrootCor;
 
 	if (dbswdbe->tblwdbemmodule->loadRecByRef(refWdbeMModule, &mdl)) {
-		if (mdl->refWdbeMImbuf == 0) Wdbe::appendToTmpfile(xchg->tmppath, logfile, logfi, "modular structure error: no inter-module buffer information specified!");
+		if (dbswdbe->tblwdbemimbuf->loadRecByRef(mdl->refWdbeMImbuf, &imb)) {
+			// inter-module buffer width becomes wB parameter if not speficied
+			if (!Wdbe::getMpa(dbswdbe, refWdbeMModule, "wB", s)) {
+				s = to_string((int) (imb->Width));
+				Wdbe::setMpa(dbswdbe, refWdbeMModule, "wB", s);
+			};
+
+			delete imb;
+
+		} else Wdbe::appendToTmpfile(xchg->tmppath, logfile, logfi, "modular structure error: no inter-module buffer information specified!");
 
 		delete mdl;
 	};

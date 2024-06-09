@@ -109,13 +109,12 @@ public:
 	public:
 		static const Sbecore::uint RESET = 1;
 		static const Sbecore::uint CLK = 2;
-		static const Sbecore::uint RTEWRP = 3;
-		static const Sbecore::uint RTETOP = 4;
-		static const Sbecore::uint CMDBUS = 5;
-		static const Sbecore::uint IMB = 6;
-		static const Sbecore::uint RTESUP = 7;
-		static const Sbecore::uint RTEPIN = 8;
-		static const Sbecore::uint DBG = 9;
+		static const Sbecore::uint RTETOP = 3;
+		static const Sbecore::uint CMDBUS = 4;
+		static const Sbecore::uint IMB = 5;
+		static const Sbecore::uint RTESUP = 6;
+		static const Sbecore::uint RTEPIN = 7;
+		static const Sbecore::uint DBG = 8;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);

@@ -301,27 +301,23 @@ public class PnlWdbeRlsList {
 	public class StgIac extends Block {
 
 		public static final int TCOSRFWIDTH = 1;
-		public static final int TCOTYPWIDTH = 2;
-		public static final int TCOVERWIDTH = 3;
-		public static final int TCOMCHWIDTH = 4;
+		public static final int TCOCMPWIDTH = 2;
+		public static final int TCOMCHWIDTH = 3;
 
 		public StgIac(
 					int TcoSrfWidth
-					, int TcoTypWidth
-					, int TcoVerWidth
+					, int TcoCmpWidth
 					, int TcoMchWidth
 				) {
 			this.TcoSrfWidth = TcoSrfWidth;
-			this.TcoTypWidth = TcoTypWidth;
-			this.TcoVerWidth = TcoVerWidth;
+			this.TcoCmpWidth = TcoCmpWidth;
 			this.TcoMchWidth = TcoMchWidth;
 
-			mask = new HashSet<Integer>(Arrays.asList(TCOSRFWIDTH, TCOTYPWIDTH, TCOVERWIDTH, TCOMCHWIDTH));
+			mask = new HashSet<Integer>(Arrays.asList(TCOSRFWIDTH, TCOCMPWIDTH, TCOMCHWIDTH));
 		};
 
 		public int TcoSrfWidth;
-		public int TcoTypWidth;
-		public int TcoVerWidth;
+		public int TcoCmpWidth;
 		public int TcoMchWidth;
 
 		public boolean readXML(
@@ -338,8 +334,7 @@ public class PnlWdbeRlsList {
 
 			if (Xmlio.checkXPath(doc, basexpath)) {
 				TcoSrfWidth = Xmlio.extractIntegerAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TcoSrfWidth", mask, TCOSRFWIDTH);
-				TcoTypWidth = Xmlio.extractIntegerAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TcoTypWidth", mask, TCOTYPWIDTH);
-				TcoVerWidth = Xmlio.extractIntegerAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TcoVerWidth", mask, TCOVERWIDTH);
+				TcoCmpWidth = Xmlio.extractIntegerAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TcoCmpWidth", mask, TCOCMPWIDTH);
 				TcoMchWidth = Xmlio.extractIntegerAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TcoMchWidth", mask, TCOMCHWIDTH);
 
 				return true;
@@ -367,8 +362,7 @@ public class PnlWdbeRlsList {
 			else sup.appendChild(el);
 
 			Xmlio.writeIntegerAttr(doc, el, itemtag, "sref", "TcoSrfWidth", TcoSrfWidth);
-			Xmlio.writeIntegerAttr(doc, el, itemtag, "sref", "TcoTypWidth", TcoTypWidth);
-			Xmlio.writeIntegerAttr(doc, el, itemtag, "sref", "TcoVerWidth", TcoVerWidth);
+			Xmlio.writeIntegerAttr(doc, el, itemtag, "sref", "TcoCmpWidth", TcoCmpWidth);
 			Xmlio.writeIntegerAttr(doc, el, itemtag, "sref", "TcoMchWidth", TcoMchWidth);
 		};
 
@@ -378,8 +372,7 @@ public class PnlWdbeRlsList {
 			HashSet<Integer> items = new HashSet<Integer>();
 
 			if (TcoSrfWidth == comp.TcoSrfWidth) items.add(TCOSRFWIDTH);
-			if (TcoTypWidth == comp.TcoTypWidth) items.add(TCOTYPWIDTH);
-			if (TcoVerWidth == comp.TcoVerWidth) items.add(TCOVERWIDTH);
+			if (TcoCmpWidth == comp.TcoCmpWidth) items.add(TCOCMPWIDTH);
 			if (TcoMchWidth == comp.TcoMchWidth) items.add(TCOMCHWIDTH);
 
 			return(items);
@@ -393,7 +386,7 @@ public class PnlWdbeRlsList {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(TCOSRFWIDTH, TCOTYPWIDTH, TCOVERWIDTH, TCOMCHWIDTH));
+			diffitems = new HashSet<Integer>(Arrays.asList(TCOSRFWIDTH, TCOCMPWIDTH, TCOMCHWIDTH));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);
@@ -414,9 +407,8 @@ public class PnlWdbeRlsList {
 		public static final int TXTSHOWING1 = 6;
 		public static final int TXTSHOWING2 = 7;
 		public static final int TCOSRF = 8;
-		public static final int TCOTYP = 9;
-		public static final int TCOVER = 10;
-		public static final int TCOMCH = 11;
+		public static final int TCOCMP = 9;
+		public static final int TCOMCH = 10;
 
 		public Tag(
 					String Cpt
@@ -427,8 +419,7 @@ public class PnlWdbeRlsList {
 					, String TxtShowing1
 					, String TxtShowing2
 					, String TcoSrf
-					, String TcoTyp
-					, String TcoVer
+					, String TcoCmp
 					, String TcoMch
 				) {
 			this.Cpt = Cpt;
@@ -439,11 +430,10 @@ public class PnlWdbeRlsList {
 			this.TxtShowing1 = TxtShowing1;
 			this.TxtShowing2 = TxtShowing2;
 			this.TcoSrf = TcoSrf;
-			this.TcoTyp = TcoTyp;
-			this.TcoVer = TcoVer;
+			this.TcoCmp = TcoCmp;
 			this.TcoMch = TcoMch;
 
-			mask = new HashSet<Integer>(Arrays.asList(CPT, TXTFOR, TXTRECORD1, TXTRECORD2, TRS, TXTSHOWING1, TXTSHOWING2, TCOSRF, TCOTYP, TCOVER, TCOMCH));
+			mask = new HashSet<Integer>(Arrays.asList(CPT, TXTFOR, TXTRECORD1, TXTRECORD2, TRS, TXTSHOWING1, TXTSHOWING2, TCOSRF, TCOCMP, TCOMCH));
 		};
 
 		public String Cpt;
@@ -454,8 +444,7 @@ public class PnlWdbeRlsList {
 		public String TxtShowing1;
 		public String TxtShowing2;
 		public String TcoSrf;
-		public String TcoTyp;
-		public String TcoVer;
+		public String TcoCmp;
 		public String TcoMch;
 
 		public boolean readXML(
@@ -479,8 +468,7 @@ public class PnlWdbeRlsList {
 				TxtShowing1 = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "TxtShowing1", mask, TXTSHOWING1);
 				TxtShowing2 = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "TxtShowing2", mask, TXTSHOWING2);
 				TcoSrf = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "TcoSrf", mask, TCOSRF);
-				TcoTyp = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "TcoTyp", mask, TCOTYP);
-				TcoVer = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "TcoVer", mask, TCOVER);
+				TcoCmp = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "TcoCmp", mask, TCOCMP);
 				TcoMch = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "TcoMch", mask, TCOMCH);
 
 				return true;
@@ -502,8 +490,7 @@ public class PnlWdbeRlsList {
 			if (TxtShowing1.equals(comp.TxtShowing1)) items.add(TXTSHOWING1);
 			if (TxtShowing2.equals(comp.TxtShowing2)) items.add(TXTSHOWING2);
 			if (TcoSrf.equals(comp.TcoSrf)) items.add(TCOSRF);
-			if (TcoTyp.equals(comp.TcoTyp)) items.add(TCOTYP);
-			if (TcoVer.equals(comp.TcoVer)) items.add(TCOVER);
+			if (TcoCmp.equals(comp.TcoCmp)) items.add(TCOCMP);
 			if (TcoMch.equals(comp.TcoMch)) items.add(TCOMCH);
 
 			return(items);
@@ -517,7 +504,7 @@ public class PnlWdbeRlsList {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(CPT, TXTFOR, TXTRECORD1, TXTRECORD2, TRS, TXTSHOWING1, TXTSHOWING2, TCOSRF, TCOTYP, TCOVER, TCOMCH));
+			diffitems = new HashSet<Integer>(Arrays.asList(CPT, TXTFOR, TXTRECORD1, TXTRECORD2, TRS, TXTSHOWING1, TXTSHOWING2, TCOSRF, TCOCMP, TCOMCH));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);
@@ -673,8 +660,8 @@ public class PnlWdbeRlsList {
 			feedFCsiQst = new Feed("FeedFCsiQst");
 			feedFTos = new Feed("FeedFTos");
 			statshr = new StatShr(0, false);
-			stgiac = new StgIac(0, 0, 0, 0);
-			tag = new Tag("", "", "", "", "", "", "", "", "", "", "");
+			stgiac = new StgIac(0, 0, 0);
+			tag = new Tag("", "", "", "", "", "", "", "", "", "");
 			rst = new ListWdbeQRlsList();
 			statappqry = (new QryWdbeRlsList()).new StatApp(0, 0, 0, 0);
 			statshrqry = (new QryWdbeRlsList()).new StatShr(0, 0, 0);
@@ -742,8 +729,8 @@ public class PnlWdbeRlsList {
 				feedFCsiQst = new Feed("FeedFCsiQst");
 				feedFTos = new Feed("FeedFTos");
 				statshr = new StatShr(0, false);
-				stgiac = new StgIac(0, 0, 0, 0);
-				tag = new Tag("", "", "", "", "", "", "", "", "", "", "");
+				stgiac = new StgIac(0, 0, 0);
+				tag = new Tag("", "", "", "", "", "", "", "", "", "");
 				statappqry = (new QryWdbeRlsList()).new StatApp(0, 0, 0, 0);
 				statshrqry = (new QryWdbeRlsList()).new StatShr(0, 0, 0);
 				stgiacqry = (new QryWdbeRlsList()).new StgIac(0, 0, 0);

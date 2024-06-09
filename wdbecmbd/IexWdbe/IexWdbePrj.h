@@ -22,14 +22,6 @@
 #define ImeIWdbePrjJMVersionState IexWdbePrj::ImeIJMVersionState
 #define VecWImeIWdbePrjJMVersionStateIel IexWdbePrj::ImeIJMVersionState::VecWIel
 
-#define ImeitemIWdbePrjMRelease IexWdbePrj::ImeitemIMRelease
-#define ImeIWdbePrjMRelease IexWdbePrj::ImeIMRelease
-#define VecWImeIWdbePrjMReleaseIel IexWdbePrj::ImeIMRelease::VecWIel
-
-#define ImeitemIWdbePrjRMLibraryMVersion IexWdbePrj::ImeitemIRMLibraryMVersion
-#define ImeIWdbePrjRMLibraryMVersion IexWdbePrj::ImeIRMLibraryMVersion
-#define VecWImeIWdbePrjRMLibraryMVersionIel IexWdbePrj::ImeIRMLibraryMVersion::VecWIel
-
 #define ImeitemIWdbePrjMVersion IexWdbePrj::ImeitemIMVersion
 #define ImeIWdbePrjMVersion IexWdbePrj::ImeIMVersion
 #define VecWImeIWdbePrjMVersionIel IexWdbePrj::ImeIMVersion::VecWIel
@@ -54,10 +46,8 @@ namespace IexWdbePrj {
 	public:
 		static const Sbecore::uint IMEIJMVERSIONSTATE = 1;
 		static const Sbecore::uint IMEIMPROJECT = 2;
-		static const Sbecore::uint IMEIMRELEASE = 3;
-		static const Sbecore::uint IMEIMVERSION = 4;
-		static const Sbecore::uint IMEIRMLIBRARYMVERSION = 5;
-		static const Sbecore::uint IMEIRMPERSONMPROJECT = 6;
+		static const Sbecore::uint IMEIMVERSION = 3;
+		static const Sbecore::uint IMEIRMPERSONMPROJECT = 4;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);
@@ -123,129 +113,6 @@ namespace IexWdbePrj {
 	};
 
 	/**
-		* ImeitemIMRelease (full: ImeitemIWdbePrjMRelease)
-		*/
-	class ImeitemIMRelease : public WdbeMRelease {
-
-	public:
-		ImeitemIMRelease(const Sbecore::uint ixVBasetype = 0, const std::string& hsrefRefWdbeMMachine = "", const std::string& sref = "", const std::string& srefsKOption = "", const std::string& Comment = "");
-		ImeitemIMRelease(DbsWdbe* dbswdbe, const Sbecore::ubigint ref);
-
-	public:
-		Sbecore::uint lineno;
-		Sbecore::uint ixWIelValid;
-
-		std::string srefIxVBasetype;
-		std::string hsrefRefWdbeMMachine;
-
-	public:
-		void readTxt(Sbecore::Txtrd& txtrd);
-		void readXML(xmlXPathContext* docctx, const std::string& basexpath);
-
-		void writeTxt(std::fstream& outfile);
-		void writeXML(xmlTextWriter* wr, const Sbecore::uint num, const bool shorttags = true);
-	};
-
-	/**
-		* ImeIMRelease (full: ImeIWdbePrjMRelease)
-		*/
-	class ImeIMRelease {
-
-	public:
-		/**
-			* VecWIel (full: VecWImeIWdbePrjMReleaseIel)
-			*/
-		class VecWIel {
-
-		public:
-			static const Sbecore::uint SREFIXVBASETYPE = 1;
-			static const Sbecore::uint HSREFREFWDBEMMACHINE = 2;
-			static const Sbecore::uint SREF = 4;
-			static const Sbecore::uint SREFSKOPTION = 8;
-			static const Sbecore::uint COMMENT = 16;
-
-			static Sbecore::uint getIx(const std::string& srefs);
-			static void getIcs(const Sbecore::uint ix, std::set<Sbecore::uint>& ics);
-			static std::string getSrefs(const Sbecore::uint ix);
-		};
-
-	public:
-		ImeIMRelease();
-		~ImeIMRelease();
-
-	public:
-		std::vector<ImeitemIMRelease*> nodes;
-
-	public:
-		void clear();
-
-		void readTxt(Sbecore::Txtrd& txtrd);
-		void readXML(xmlXPathContext* docctx, std::string basexpath);
-
-		void writeTxt(std::fstream& outfile);
-		void writeXML(xmlTextWriter* wr, const bool shorttags = true);
-	};
-
-	/**
-		* ImeitemIRMLibraryMVersion (full: ImeitemIWdbePrjRMLibraryMVersion)
-		*/
-	class ImeitemIRMLibraryMVersion : public WdbeRMLibraryMVersion {
-
-	public:
-		ImeitemIRMLibraryMVersion(const std::string& srefRefWdbeMLibrary = "");
-		ImeitemIRMLibraryMVersion(DbsWdbe* dbswdbe, const Sbecore::ubigint ref);
-
-	public:
-		Sbecore::uint lineno;
-		Sbecore::uint ixWIelValid;
-
-		std::string srefRefWdbeMLibrary;
-
-	public:
-		void readTxt(Sbecore::Txtrd& txtrd);
-		void readXML(xmlXPathContext* docctx, const std::string& basexpath);
-
-		void writeTxt(std::fstream& outfile);
-		void writeXML(xmlTextWriter* wr, const Sbecore::uint num, const bool shorttags = true);
-	};
-
-	/**
-		* ImeIRMLibraryMVersion (full: ImeIWdbePrjRMLibraryMVersion)
-		*/
-	class ImeIRMLibraryMVersion {
-
-	public:
-		/**
-			* VecWIel (full: VecWImeIWdbePrjRMLibraryMVersionIel)
-			*/
-		class VecWIel {
-
-		public:
-			static const Sbecore::uint SREFREFWDBEMLIBRARY = 1;
-
-			static Sbecore::uint getIx(const std::string& srefs);
-			static void getIcs(const Sbecore::uint ix, std::set<Sbecore::uint>& ics);
-			static std::string getSrefs(const Sbecore::uint ix);
-		};
-
-	public:
-		ImeIRMLibraryMVersion();
-		~ImeIRMLibraryMVersion();
-
-	public:
-		std::vector<ImeitemIRMLibraryMVersion*> nodes;
-
-	public:
-		void clear();
-
-		void readTxt(Sbecore::Txtrd& txtrd);
-		void readXML(xmlXPathContext* docctx, std::string basexpath);
-
-		void writeTxt(std::fstream& outfile);
-		void writeXML(xmlTextWriter* wr, const bool shorttags = true);
-	};
-
-	/**
 		* ImeitemIMVersion (full: ImeitemIWdbePrjMVersion)
 		*/
 	class ImeitemIMVersion : public WdbeMVersion {
@@ -261,8 +128,6 @@ namespace IexWdbePrj {
 		std::string srefIxVState;
 
 		ImeIJMVersionState imeijmversionstate;
-		ImeIMRelease imeimrelease;
-		ImeIRMLibraryMVersion imeirmlibrarymversion;
 
 	public:
 		void readTxt(Sbecore::Txtrd& txtrd);

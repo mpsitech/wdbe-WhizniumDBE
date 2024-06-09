@@ -16,12 +16,10 @@
 	* SqkWdbeWrfpga
 	*/
 namespace SqkWdbeWrfpga {
+	std::string getSquawkAux(DbsWdbe* dbswdbe, DpchInvWdbeWrfpgaAux* dpchinv);
 	std::string getSquawkBase(DbsWdbe* dbswdbe, DpchInvWdbeWrfpgaBase* dpchinv);
-	std::string getSquawkCtrFwdctr(DbsWdbe* dbswdbe, DpchInvWdbeWrfpgaCtrFwdctr* dpchinv);
+	std::string getSquawkCtr(DbsWdbe* dbswdbe, DpchInvWdbeWrfpgaCtr* dpchinv);
 	std::string getSquawkDeploy(DbsWdbe* dbswdbe, DpchInvWdbeWrfpgaDeploy* dpchinv);
-	std::string getSquawkEhostif(DbsWdbe* dbswdbe, DpchInvWdbeWrfpgaEhostif* dpchinv);
-	std::string getSquawkHostif(DbsWdbe* dbswdbe, DpchInvWdbeWrfpgaHostif* dpchinv);
-	std::string getSquawkIpclr(DbsWdbe* dbswdbe, DpchInvWdbeWrfpgaIpclr* dpchinv);
 	std::string getSquawkMdlfine(DbsWdbe* dbswdbe, DpchInvWdbeWrfpgaMdlfine* dpchinv);
 	std::string getSquawkMdlraw(DbsWdbe* dbswdbe, DpchInvWdbeWrfpgaMdlraw* dpchinv);
 	std::string getSquawkTop(DbsWdbe* dbswdbe, DpchInvWdbeWrfpgaTop* dpchinv);

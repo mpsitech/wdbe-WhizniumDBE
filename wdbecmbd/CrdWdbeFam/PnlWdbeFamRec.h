@@ -14,8 +14,8 @@
 
 // IP include.cust --- INSERT
 
-#include "PnlWdbeFamDetail.h"
 #include "PnlWdbeFam1NUnit.h"
+#include "PnlWdbeFamDetail.h"
 
 #define VecVWdbeFamRecDo PnlWdbeFamRec::VecVDo
 
@@ -132,7 +132,7 @@ public:
 	public:
 		std::string getSrefsMask();
 
-		void readJSON(Json::Value& sup, bool addbasetag = false);
+		void readJSON(const Json::Value& sup, bool addbasetag = false);
 		void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 	};
 
@@ -174,8 +174,8 @@ public:
 	ContInf continf;
 	StatShr statshr;
 
-	PnlWdbeFamDetail* pnldetail;
 	PnlWdbeFam1NUnit* pnl1nunit;
+	PnlWdbeFamDetail* pnldetail;
 
 	WdbeMFamily recFam;
 

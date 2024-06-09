@@ -17,7 +17,7 @@
 	*/
 namespace SqkWdbeWrmcu {
 	std::string getSquawkBase(DbsWdbe* dbswdbe, DpchInvWdbeWrmcuBase* dpchinv);
-	std::string getSquawkCtrFwdctr(DbsWdbe* dbswdbe, DpchInvWdbeWrmcuCtrFwdctr* dpchinv);
+	std::string getSquawkCtr(DbsWdbe* dbswdbe, DpchInvWdbeWrmcuCtr* dpchinv);
 	std::string getSquawkDeploy(DbsWdbe* dbswdbe, DpchInvWdbeWrmcuDeploy* dpchinv);
 	std::string getSquawkMdlfine(DbsWdbe* dbswdbe, DpchInvWdbeWrmcuMdlfine* dpchinv);
 	std::string getSquawkMdlraw(DbsWdbe* dbswdbe, DpchInvWdbeWrmcuMdlraw* dpchinv);

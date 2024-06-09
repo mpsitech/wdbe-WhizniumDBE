@@ -54,6 +54,7 @@
 #include "SqkWdbeWrdev.h"
 #include "SqkWdbeWrfpga.h"
 #include "SqkWdbeWrmcu.h"
+#include "SqkWdbeWrterm.h"
 
 // IP include.cust --- INSERT
 
@@ -79,7 +80,7 @@ public:
 	static bool all(const std::set<Sbecore::uint>& items);
 	virtual std::string getSrefsMask();
 
-	virtual void readJSON(Json::Value& sup, bool addbasetag = false);
+	virtual void readJSON(const Json::Value& sup, bool addbasetag = false);
 	virtual void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 };
 
@@ -102,7 +103,7 @@ public:
 	static bool all(const std::set<Sbecore::uint>& items);
 	std::string getSrefsMask();
 
-	void readJSON(Json::Value& sup, bool addbasetag = false);
+	void readJSON(const Json::Value& sup, bool addbasetag = false);
 	void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 };
 
@@ -257,13 +258,15 @@ class StgWdbeAppsrv : public Sbecore::Block {
 public:
 	static const Sbecore::uint PORT = 1;
 	static const Sbecore::uint HTTPS = 2;
+	static const Sbecore::uint CORS = 3;
 
 public:
-	StgWdbeAppsrv(const Sbecore::usmallint port = 13100, const bool https = false);
+	StgWdbeAppsrv(const Sbecore::usmallint port = 13100, const bool https = false, const std::string& cors = "");
 
 public:
 	Sbecore::usmallint port;
 	bool https;
+	std::string cors;
 
 public:
 	bool readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
@@ -447,17 +450,18 @@ public:
 	public:
 		static const Sbecore::uint NONE = 0; // invalid
 		static const Sbecore::uint REDIRECT = 1; // web client triggered root request (GET)
-		static const Sbecore::uint WEB = 2; // web client triggered ui file request (GET)
-		static const Sbecore::uint CMD = 3; // command line request
-		static const Sbecore::uint DPCHAPP = 4; // web client triggered Dpch request (POST+DpchApp)
-		static const Sbecore::uint NOTIFY = 5; // web client triggered notify-on-Dpch request (GET)
-		static const Sbecore::uint POLL = 6; // web client triggered Dpch poll request (GET)
-		static const Sbecore::uint UPLOAD = 7; // web client triggered file upload request (POST)
-		static const Sbecore::uint DOWNLOAD = 8; // web client triggered file download request (GET)
-		static const Sbecore::uint DPCHRET = 9; // op engine or opprc triggered op return (DpchRet)
-		static const Sbecore::uint METHOD = 10; // M2M interface triggered method request
-		static const Sbecore::uint TIMER = 11; // timer triggered request
-		static const Sbecore::uint EXTCALL = 12; // externally triggered call request
+		static const Sbecore::uint PREFLIGHT = 2; // web client triggered Dpch pre-flight request (OPTIONS)
+		static const Sbecore::uint WEB = 3; // web client triggered ui file request (GET)
+		static const Sbecore::uint CMD = 4; // command line request
+		static const Sbecore::uint DPCHAPP = 5; // web client triggered Dpch request (POST+DpchApp)
+		static const Sbecore::uint NOTIFY = 6; // web client triggered notify-on-Dpch request (GET)
+		static const Sbecore::uint POLL = 7; // web client triggered Dpch poll request (GET)
+		static const Sbecore::uint UPLOAD = 8; // web client triggered file upload request (POST)
+		static const Sbecore::uint DOWNLOAD = 9; // web client triggered file download request (GET)
+		static const Sbecore::uint DPCHRET = 10; // op engine or opprc triggered op return (DpchRet)
+		static const Sbecore::uint METHOD = 11; // M2M interface triggered method request
+		static const Sbecore::uint TIMER = 12; // timer triggered request
+		static const Sbecore::uint EXTCALL = 13; // externally triggered call request
 	};
 
 	/**

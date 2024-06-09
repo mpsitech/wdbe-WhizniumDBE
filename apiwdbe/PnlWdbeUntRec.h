@@ -70,16 +70,14 @@ namespace PnlWdbeUntRec {
 		static const Sbecore::uint INITDONE1NPERIPHERAL = 3;
 		static const Sbecore::uint INITDONESIL1NUNIT = 4;
 		static const Sbecore::uint INITDONE1NBANK = 5;
-		static const Sbecore::uint INITDONEFWD1NCONTROLLER = 6;
-		static const Sbecore::uint INITDONE1NTARGET = 7;
+		static const Sbecore::uint INITDONEHK1NMODULE = 6;
+		static const Sbecore::uint INITDONEREF1NERROR = 7;
 		static const Sbecore::uint INITDONEREF1NSIGNAL = 8;
-		static const Sbecore::uint INITDONEREF1NERROR = 9;
-		static const Sbecore::uint INITDONEHK1NVECTOR = 10;
-		static const Sbecore::uint INITDONEHK1NMODULE = 11;
-		static const Sbecore::uint INITDONEREF1NCOMMAND = 12;
+		static const Sbecore::uint INITDONEHK1NVECTOR = 9;
+		static const Sbecore::uint INITDONEREF1NCOMMAND = 10;
 
 	public:
-		StatApp(const bool initdoneDetail = false, const bool initdone1NInterrupt = false, const bool initdone1NPeripheral = false, const bool initdoneSil1NUnit = false, const bool initdone1NBank = false, const bool initdoneFwd1NController = false, const bool initdone1NTarget = false, const bool initdoneRef1NSignal = false, const bool initdoneRef1NError = false, const bool initdoneHk1NVector = false, const bool initdoneHk1NModule = false, const bool initdoneRef1NCommand = false);
+		StatApp(const bool initdoneDetail = false, const bool initdone1NInterrupt = false, const bool initdone1NPeripheral = false, const bool initdoneSil1NUnit = false, const bool initdone1NBank = false, const bool initdoneHk1NModule = false, const bool initdoneRef1NError = false, const bool initdoneRef1NSignal = false, const bool initdoneHk1NVector = false, const bool initdoneRef1NCommand = false);
 
 	public:
 		bool initdoneDetail;
@@ -87,12 +85,10 @@ namespace PnlWdbeUntRec {
 		bool initdone1NPeripheral;
 		bool initdoneSil1NUnit;
 		bool initdone1NBank;
-		bool initdoneFwd1NController;
-		bool initdone1NTarget;
-		bool initdoneRef1NSignal;
-		bool initdoneRef1NError;
-		bool initdoneHk1NVector;
 		bool initdoneHk1NModule;
+		bool initdoneRef1NError;
+		bool initdoneRef1NSignal;
+		bool initdoneHk1NVector;
 		bool initdoneRef1NCommand;
 
 	public:
@@ -114,17 +110,15 @@ namespace PnlWdbeUntRec {
 		static const Sbecore::uint SCRJREFSIL1NUNIT = 5;
 		static const Sbecore::uint PNLSIL1NUNITAVAIL = 6;
 		static const Sbecore::uint SCRJREF1NBANK = 7;
-		static const Sbecore::uint SCRJREFFWD1NCONTROLLER = 8;
-		static const Sbecore::uint SCRJREF1NTARGET = 9;
+		static const Sbecore::uint SCRJREFHK1NMODULE = 8;
+		static const Sbecore::uint SCRJREFREF1NERROR = 9;
 		static const Sbecore::uint SCRJREFREF1NSIGNAL = 10;
-		static const Sbecore::uint SCRJREFREF1NERROR = 11;
-		static const Sbecore::uint SCRJREFHK1NVECTOR = 12;
-		static const Sbecore::uint SCRJREFHK1NMODULE = 13;
-		static const Sbecore::uint SCRJREFREF1NCOMMAND = 14;
-		static const Sbecore::uint BUTREGULARIZEACTIVE = 15;
+		static const Sbecore::uint SCRJREFHK1NVECTOR = 11;
+		static const Sbecore::uint SCRJREFREF1NCOMMAND = 12;
+		static const Sbecore::uint BUTREGULARIZEACTIVE = 13;
 
 	public:
-		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const std::string& scrJrefDetail = "", const std::string& scrJref1NInterrupt = "", const std::string& scrJref1NPeripheral = "", const std::string& scrJrefSil1NUnit = "", const bool pnlsil1nunitAvail = false, const std::string& scrJref1NBank = "", const std::string& scrJrefFwd1NController = "", const std::string& scrJref1NTarget = "", const std::string& scrJrefRef1NSignal = "", const std::string& scrJrefRef1NError = "", const std::string& scrJrefHk1NVector = "", const std::string& scrJrefHk1NModule = "", const std::string& scrJrefRef1NCommand = "", const bool ButRegularizeActive = true);
+		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const std::string& scrJrefDetail = "", const std::string& scrJref1NInterrupt = "", const std::string& scrJref1NPeripheral = "", const std::string& scrJrefSil1NUnit = "", const bool pnlsil1nunitAvail = false, const std::string& scrJref1NBank = "", const std::string& scrJrefHk1NModule = "", const std::string& scrJrefRef1NError = "", const std::string& scrJrefRef1NSignal = "", const std::string& scrJrefHk1NVector = "", const std::string& scrJrefRef1NCommand = "", const bool ButRegularizeActive = true);
 
 	public:
 		Sbecore::uint ixWdbeVExpstate;
@@ -134,12 +128,10 @@ namespace PnlWdbeUntRec {
 		std::string scrJrefSil1NUnit;
 		bool pnlsil1nunitAvail;
 		std::string scrJref1NBank;
-		std::string scrJrefFwd1NController;
-		std::string scrJref1NTarget;
-		std::string scrJrefRef1NSignal;
-		std::string scrJrefRef1NError;
-		std::string scrJrefHk1NVector;
 		std::string scrJrefHk1NModule;
+		std::string scrJrefRef1NError;
+		std::string scrJrefRef1NSignal;
+		std::string scrJrefHk1NVector;
 		std::string scrJrefRef1NCommand;
 		bool ButRegularizeActive;
 

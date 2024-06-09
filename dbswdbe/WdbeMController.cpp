@@ -19,14 +19,12 @@ using namespace Sbecore;
 WdbeMController::WdbeMController(
 			const ubigint ref
 			, const ubigint refWdbeMModule
-			, const ubigint fwdRefWdbeMUnit
 			, const string Fullsref
 			, const ubigint clrRefWdbeMSignal
 		) {
 
 	this->ref = ref;
 	this->refWdbeMModule = refWdbeMModule;
-	this->fwdRefWdbeMUnit = fwdRefWdbeMUnit;
 	this->Fullsref = Fullsref;
 	this->clrRefWdbeMSignal = clrRefWdbeMSignal;
 };
@@ -160,14 +158,13 @@ ubigint TblWdbeMController::insertRec(
 ubigint TblWdbeMController::insertNewRec(
 			WdbeMController** rec
 			, const ubigint refWdbeMModule
-			, const ubigint fwdRefWdbeMUnit
 			, const string Fullsref
 			, const ubigint clrRefWdbeMSignal
 		) {
 	ubigint retval = 0;
 	WdbeMController* _rec = NULL;
 
-	_rec = new WdbeMController(0, refWdbeMModule, fwdRefWdbeMUnit, Fullsref, clrRefWdbeMSignal);
+	_rec = new WdbeMController(0, refWdbeMModule, Fullsref, clrRefWdbeMSignal);
 	insertRec(_rec);
 
 	retval = _rec->ref;
@@ -182,14 +179,13 @@ ubigint TblWdbeMController::appendNewRecToRst(
 			ListWdbeMController& rst
 			, WdbeMController** rec
 			, const ubigint refWdbeMModule
-			, const ubigint fwdRefWdbeMUnit
 			, const string Fullsref
 			, const ubigint clrRefWdbeMSignal
 		) {
 	ubigint retval = 0;
 	WdbeMController* _rec = NULL;
 
-	retval = insertNewRec(&_rec, refWdbeMModule, fwdRefWdbeMUnit, Fullsref, clrRefWdbeMSignal);
+	retval = insertNewRec(&_rec, refWdbeMModule, Fullsref, clrRefWdbeMSignal);
 	rst.nodes.push_back(_rec);
 
 	if (rec != NULL) *rec = _rec;
@@ -287,8 +283,8 @@ MyTblWdbeMController::~MyTblWdbeMController() {
 };
 
 void MyTblWdbeMController::initStatements() {
-	stmtInsertRec = createStatement("INSERT INTO TblWdbeMController (refWdbeMModule, fwdRefWdbeMUnit, Fullsref, clrRefWdbeMSignal) VALUES (?,?,?,?)", false);
-	stmtUpdateRec = createStatement("UPDATE TblWdbeMController SET refWdbeMModule = ?, fwdRefWdbeMUnit = ?, Fullsref = ?, clrRefWdbeMSignal = ? WHERE ref = ?", false);
+	stmtInsertRec = createStatement("INSERT INTO TblWdbeMController (refWdbeMModule, Fullsref, clrRefWdbeMSignal) VALUES (?,?,?)", false);
+	stmtUpdateRec = createStatement("UPDATE TblWdbeMController SET refWdbeMModule = ?, Fullsref = ?, clrRefWdbeMSignal = ? WHERE ref = ?", false);
 	stmtRemoveRecByRef = createStatement("DELETE FROM TblWdbeMController WHERE ref = ?", false);
 };
 
@@ -320,9 +316,8 @@ bool MyTblWdbeMController::loadRecBySQL(
 
 		if (dbrow[0]) _rec->ref = atoll((char*) dbrow[0]); else _rec->ref = 0;
 		if (dbrow[1]) _rec->refWdbeMModule = atoll((char*) dbrow[1]); else _rec->refWdbeMModule = 0;
-		if (dbrow[2]) _rec->fwdRefWdbeMUnit = atoll((char*) dbrow[2]); else _rec->fwdRefWdbeMUnit = 0;
-		if (dbrow[3]) _rec->Fullsref.assign(dbrow[3], dblengths[3]); else _rec->Fullsref = "";
-		if (dbrow[4]) _rec->clrRefWdbeMSignal = atoll((char*) dbrow[4]); else _rec->clrRefWdbeMSignal = 0;
+		if (dbrow[2]) _rec->Fullsref.assign(dbrow[2], dblengths[2]); else _rec->Fullsref = "";
+		if (dbrow[3]) _rec->clrRefWdbeMSignal = atoll((char*) dbrow[3]); else _rec->clrRefWdbeMSignal = 0;
 
 		retval = true;
 	};
@@ -367,9 +362,8 @@ ubigint MyTblWdbeMController::loadRstBySQL(
 
 			if (dbrow[0]) rec->ref = atoll((char*) dbrow[0]); else rec->ref = 0;
 			if (dbrow[1]) rec->refWdbeMModule = atoll((char*) dbrow[1]); else rec->refWdbeMModule = 0;
-			if (dbrow[2]) rec->fwdRefWdbeMUnit = atoll((char*) dbrow[2]); else rec->fwdRefWdbeMUnit = 0;
-			if (dbrow[3]) rec->Fullsref.assign(dbrow[3], dblengths[3]); else rec->Fullsref = "";
-			if (dbrow[4]) rec->clrRefWdbeMSignal = atoll((char*) dbrow[4]); else rec->clrRefWdbeMSignal = 0;
+			if (dbrow[2]) rec->Fullsref.assign(dbrow[2], dblengths[2]); else rec->Fullsref = "";
+			if (dbrow[3]) rec->clrRefWdbeMSignal = atoll((char*) dbrow[3]); else rec->clrRefWdbeMSignal = 0;
 			rst.nodes.push_back(rec);
 
 			numread++;
@@ -384,15 +378,14 @@ ubigint MyTblWdbeMController::loadRstBySQL(
 ubigint MyTblWdbeMController::insertRec(
 			WdbeMController* rec
 		) {
-	unsigned long l[4]; my_bool n[4]; my_bool e[4];
+	unsigned long l[3]; my_bool n[3]; my_bool e[3];
 
-	l[2] = rec->Fullsref.length();
+	l[1] = rec->Fullsref.length();
 
 	MYSQL_BIND bind[] = {
 		bindUbigint(&rec->refWdbeMModule,&(l[0]),&(n[0]),&(e[0])),
-		bindUbigint(&rec->fwdRefWdbeMUnit,&(l[1]),&(n[1]),&(e[1])),
-		bindCstring((char*) (rec->Fullsref.c_str()),&(l[2]),&(n[2]),&(e[2])),
-		bindUbigint(&rec->clrRefWdbeMSignal,&(l[3]),&(n[3]),&(e[3]))
+		bindCstring((char*) (rec->Fullsref.c_str()),&(l[1]),&(n[1]),&(e[1])),
+		bindUbigint(&rec->clrRefWdbeMSignal,&(l[2]),&(n[2]),&(e[2]))
 	};
 
 	if (mysql_stmt_bind_param(stmtInsertRec, bind)) {
@@ -420,16 +413,15 @@ void MyTblWdbeMController::insertRst(
 void MyTblWdbeMController::updateRec(
 			WdbeMController* rec
 		) {
-	unsigned long l[5]; my_bool n[5]; my_bool e[5];
+	unsigned long l[4]; my_bool n[4]; my_bool e[4];
 
-	l[2] = rec->Fullsref.length();
+	l[1] = rec->Fullsref.length();
 
 	MYSQL_BIND bind[] = {
 		bindUbigint(&rec->refWdbeMModule,&(l[0]),&(n[0]),&(e[0])),
-		bindUbigint(&rec->fwdRefWdbeMUnit,&(l[1]),&(n[1]),&(e[1])),
-		bindCstring((char*) (rec->Fullsref.c_str()),&(l[2]),&(n[2]),&(e[2])),
-		bindUbigint(&rec->clrRefWdbeMSignal,&(l[3]),&(n[3]),&(e[3])),
-		bindUbigint(&rec->ref,&(l[4]),&(n[4]),&(e[4]))
+		bindCstring((char*) (rec->Fullsref.c_str()),&(l[1]),&(n[1]),&(e[1])),
+		bindUbigint(&rec->clrRefWdbeMSignal,&(l[2]),&(n[2]),&(e[2])),
+		bindUbigint(&rec->ref,&(l[3]),&(n[3]),&(e[3]))
 	};
 
 	if (mysql_stmt_bind_param(stmtUpdateRec, bind)) {
@@ -491,7 +483,7 @@ bool MyTblWdbeMController::loadRecByMdl(
 			ubigint refWdbeMModule
 			, WdbeMController** rec
 		) {
-	return loadRecBySQL("SELECT ref, refWdbeMModule, fwdRefWdbeMUnit, Fullsref, clrRefWdbeMSignal FROM TblWdbeMController WHERE refWdbeMModule = " + to_string(refWdbeMModule) + "", rec);
+	return loadRecBySQL("SELECT ref, refWdbeMModule, Fullsref, clrRefWdbeMSignal FROM TblWdbeMController WHERE refWdbeMModule = " + to_string(refWdbeMModule) + "", rec);
 };
 
 ubigint MyTblWdbeMController::loadRefsByMdl(
@@ -520,13 +512,13 @@ PgTblWdbeMController::~PgTblWdbeMController() {
 };
 
 void PgTblWdbeMController::initStatements() {
-	createStatement("TblWdbeMController_insertRec", "INSERT INTO TblWdbeMController (refWdbeMModule, fwdRefWdbeMUnit, Fullsref, clrRefWdbeMSignal) VALUES ($1,$2,$3,$4) RETURNING ref", 4);
-	createStatement("TblWdbeMController_updateRec", "UPDATE TblWdbeMController SET refWdbeMModule = $1, fwdRefWdbeMUnit = $2, Fullsref = $3, clrRefWdbeMSignal = $4 WHERE ref = $5", 5);
+	createStatement("TblWdbeMController_insertRec", "INSERT INTO TblWdbeMController (refWdbeMModule, Fullsref, clrRefWdbeMSignal) VALUES ($1,$2,$3) RETURNING ref", 3);
+	createStatement("TblWdbeMController_updateRec", "UPDATE TblWdbeMController SET refWdbeMModule = $1, Fullsref = $2, clrRefWdbeMSignal = $3 WHERE ref = $4", 4);
 	createStatement("TblWdbeMController_removeRecByRef", "DELETE FROM TblWdbeMController WHERE ref = $1", 1);
 
-	createStatement("TblWdbeMController_loadRecByRef", "SELECT ref, refWdbeMModule, fwdRefWdbeMUnit, Fullsref, clrRefWdbeMSignal FROM TblWdbeMController WHERE ref = $1", 1);
+	createStatement("TblWdbeMController_loadRecByRef", "SELECT ref, refWdbeMModule, Fullsref, clrRefWdbeMSignal FROM TblWdbeMController WHERE ref = $1", 1);
 	createStatement("TblWdbeMController_loadFsrByRef", "SELECT Fullsref FROM TblWdbeMController WHERE ref = $1", 1);
-	createStatement("TblWdbeMController_loadRecByMdl", "SELECT ref, refWdbeMModule, fwdRefWdbeMUnit, Fullsref, clrRefWdbeMSignal FROM TblWdbeMController WHERE refWdbeMModule = $1", 1);
+	createStatement("TblWdbeMController_loadRecByMdl", "SELECT ref, refWdbeMModule, Fullsref, clrRefWdbeMSignal FROM TblWdbeMController WHERE refWdbeMModule = $1", 1);
 	createStatement("TblWdbeMController_loadRefsByMdl", "SELECT ref FROM TblWdbeMController WHERE refWdbeMModule = $1", 1);
 };
 
@@ -545,16 +537,14 @@ bool PgTblWdbeMController::loadRec(
 		int fnum[] = {
 			PQfnumber(res, "ref"),
 			PQfnumber(res, "refwdbemmodule"),
-			PQfnumber(res, "fwdrefwdbemunit"),
 			PQfnumber(res, "fullsref"),
 			PQfnumber(res, "clrrefwdbemsignal")
 		};
 
 		ptr = PQgetvalue(res, 0, fnum[0]); _rec->ref = atoll(ptr);
 		ptr = PQgetvalue(res, 0, fnum[1]); _rec->refWdbeMModule = atoll(ptr);
-		ptr = PQgetvalue(res, 0, fnum[2]); _rec->fwdRefWdbeMUnit = atoll(ptr);
-		ptr = PQgetvalue(res, 0, fnum[3]); _rec->Fullsref.assign(ptr, PQgetlength(res, 0, fnum[3]));
-		ptr = PQgetvalue(res, 0, fnum[4]); _rec->clrRefWdbeMSignal = atoll(ptr);
+		ptr = PQgetvalue(res, 0, fnum[2]); _rec->Fullsref.assign(ptr, PQgetlength(res, 0, fnum[2]));
+		ptr = PQgetvalue(res, 0, fnum[3]); _rec->clrRefWdbeMSignal = atoll(ptr);
 
 		retval = true;
 	};
@@ -583,7 +573,6 @@ ubigint PgTblWdbeMController::loadRst(
 		int fnum[] = {
 			PQfnumber(res, "ref"),
 			PQfnumber(res, "refwdbemmodule"),
-			PQfnumber(res, "fwdrefwdbemunit"),
 			PQfnumber(res, "fullsref"),
 			PQfnumber(res, "clrrefwdbemsignal")
 		};
@@ -593,9 +582,8 @@ ubigint PgTblWdbeMController::loadRst(
 
 			ptr = PQgetvalue(res, numread, fnum[0]); rec->ref = atoll(ptr);
 			ptr = PQgetvalue(res, numread, fnum[1]); rec->refWdbeMModule = atoll(ptr);
-			ptr = PQgetvalue(res, numread, fnum[2]); rec->fwdRefWdbeMUnit = atoll(ptr);
-			ptr = PQgetvalue(res, numread, fnum[3]); rec->Fullsref.assign(ptr, PQgetlength(res, numread, fnum[3]));
-			ptr = PQgetvalue(res, numread, fnum[4]); rec->clrRefWdbeMSignal = atoll(ptr);
+			ptr = PQgetvalue(res, numread, fnum[2]); rec->Fullsref.assign(ptr, PQgetlength(res, numread, fnum[2]));
+			ptr = PQgetvalue(res, numread, fnum[3]); rec->clrRefWdbeMSignal = atoll(ptr);
 
 			rst.nodes.push_back(rec);
 
@@ -668,24 +656,21 @@ ubigint PgTblWdbeMController::insertRec(
 	char* ptr;
 
 	ubigint _refWdbeMModule = htonl64(rec->refWdbeMModule);
-	ubigint _fwdRefWdbeMUnit = htonl64(rec->fwdRefWdbeMUnit);
 	ubigint _clrRefWdbeMSignal = htonl64(rec->clrRefWdbeMSignal);
 
 	const char* vals[] = {
 		(char*) &_refWdbeMModule,
-		(char*) &_fwdRefWdbeMUnit,
 		rec->Fullsref.c_str(),
 		(char*) &_clrRefWdbeMSignal
 	};
 	const int l[] = {
 		sizeof(ubigint),
-		sizeof(ubigint),
 		0,
 		sizeof(ubigint)
 	};
-	const int f[] = {1, 1, 0, 1};
+	const int f[] = {1, 0, 1};
 
-	res = PQexecPrepared(dbs, "TblWdbeMController_insertRec", 4, vals, l, f, 0);
+	res = PQexecPrepared(dbs, "TblWdbeMController_insertRec", 3, vals, l, f, 0);
 
 	if (PQresultStatus(res) != PGRES_TUPLES_OK) {
 		string dbms = "PgTblWdbeMController::insertRec() / " + string(PQerrorMessage(dbs));
@@ -714,27 +699,24 @@ void PgTblWdbeMController::updateRec(
 	PGresult* res;
 
 	ubigint _refWdbeMModule = htonl64(rec->refWdbeMModule);
-	ubigint _fwdRefWdbeMUnit = htonl64(rec->fwdRefWdbeMUnit);
 	ubigint _clrRefWdbeMSignal = htonl64(rec->clrRefWdbeMSignal);
 	ubigint _ref = htonl64(rec->ref);
 
 	const char* vals[] = {
 		(char*) &_refWdbeMModule,
-		(char*) &_fwdRefWdbeMUnit,
 		rec->Fullsref.c_str(),
 		(char*) &_clrRefWdbeMSignal,
 		(char*) &_ref
 	};
 	const int l[] = {
 		sizeof(ubigint),
-		sizeof(ubigint),
 		0,
 		sizeof(ubigint),
 		sizeof(ubigint)
 	};
-	const int f[] = {1, 1, 0, 1, 1};
+	const int f[] = {1, 0, 1, 1};
 
-	res = PQexecPrepared(dbs, "TblWdbeMController_updateRec", 5, vals, l, f, 0);
+	res = PQexecPrepared(dbs, "TblWdbeMController_updateRec", 4, vals, l, f, 0);
 
 	if (PQresultStatus(res) != PGRES_COMMAND_OK) {
 		string dbms = "PgTblWdbeMController::updateRec() / " + string(PQerrorMessage(dbs));

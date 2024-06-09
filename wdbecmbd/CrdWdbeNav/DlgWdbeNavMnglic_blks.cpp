@@ -90,15 +90,14 @@ DlgWdbeNavMnglic::ContIac::ContIac(
 };
 
 bool DlgWdbeNavMnglic::ContIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["ContIacDlgWdbeNavMnglic"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["ContIacDlgWdbeNavMnglic"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -144,9 +143,9 @@ void DlgWdbeNavMnglic::ContIac::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["numFDetPupFis"] = numFDetPupFis;
+	me["numFDetPupFis"] = (Json::Value::UInt) numFDetPupFis;
 	me["DetChkFis"] = DetChkFis;
-	me["numFDetLstLcs"] = numFDetLstLcs;
+	me["numFDetLstLcs"] = (Json::Value::UInt) numFDetLstLcs;
 };
 
 void DlgWdbeNavMnglic::ContIac::writeXML(
@@ -227,7 +226,7 @@ void DlgWdbeNavMnglic::ContInf::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["numFSge"] = numFSge;
+	me["numFSge"] = (Json::Value::UInt) numFSge;
 	me["DetTxtSip"] = DetTxtSip;
 	me["DetTxtScp"] = DetTxtScp;
 	me["DetTxtLsr"] = DetTxtLsr;
@@ -303,7 +302,7 @@ void DlgWdbeNavMnglic::StatApp::writeJSON(
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
 	me["shortMenu"] = shortMenu;
-	me["DetLstLcsNumFirstdisp"] = DetLstLcsNumFirstdisp;
+	me["DetLstLcsNumFirstdisp"] = (Json::Value::UInt) DetLstLcsNumFirstdisp;
 };
 
 void DlgWdbeNavMnglic::StatApp::writeXML(
@@ -477,15 +476,14 @@ string DlgWdbeNavMnglic::DpchAppData::getSrefsMask() {
 };
 
 void DlgWdbeNavMnglic::DpchAppData::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppDlgWdbeNavMnglicData"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppDlgWdbeNavMnglicData"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -547,15 +545,14 @@ string DlgWdbeNavMnglic::DpchAppDo::getSrefsMask() {
 };
 
 void DlgWdbeNavMnglic::DpchAppDo::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppDlgWdbeNavMnglicDo"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppDlgWdbeNavMnglicDo"];}();
 
 	basefound = (me != Json::nullValue);
 

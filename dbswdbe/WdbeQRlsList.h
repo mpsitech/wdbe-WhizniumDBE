@@ -25,7 +25,7 @@
 class WdbeQRlsList {
 
 public:
-	WdbeQRlsList(const Sbecore::ubigint qref = 0, const Sbecore::ubigint jref = 0, const Sbecore::uint jnum = 0, const Sbecore::ubigint ref = 0, const std::string sref = "", const Sbecore::uint ixVBasetype = 0, const std::string srefIxVBasetype = "", const std::string titIxVBasetype = "", const Sbecore::ubigint refWdbeMVersion = 0, const std::string stubRefWdbeMVersion = "", const Sbecore::ubigint refWdbeMMachine = 0, const std::string stubRefWdbeMMachine = "");
+	WdbeQRlsList(const Sbecore::ubigint qref = 0, const Sbecore::ubigint jref = 0, const Sbecore::uint jnum = 0, const Sbecore::ubigint ref = 0, const std::string sref = "", const Sbecore::ubigint refWdbeMComponent = 0, const std::string stubRefWdbeMComponent = "", const Sbecore::ubigint refWdbeMMachine = 0, const std::string stubRefWdbeMMachine = "");
 
 public:
 	Sbecore::ubigint qref;
@@ -33,11 +33,8 @@ public:
 	Sbecore::uint jnum;
 	Sbecore::ubigint ref;
 	std::string sref;
-	Sbecore::uint ixVBasetype;
-	std::string srefIxVBasetype;
-	std::string titIxVBasetype;
-	Sbecore::ubigint refWdbeMVersion;
-	std::string stubRefWdbeMVersion;
+	Sbecore::ubigint refWdbeMComponent;
+	std::string stubRefWdbeMComponent;
 	Sbecore::ubigint refWdbeMMachine;
 	std::string stubRefWdbeMMachine;
 
@@ -84,8 +81,8 @@ public:
 	virtual Sbecore::ubigint loadRstBySQL(const std::string& sqlstr, const bool append, ListWdbeQRlsList& rst);
 
 	virtual Sbecore::ubigint insertRec(WdbeQRlsList* rec);
-	Sbecore::ubigint insertNewRec(WdbeQRlsList** rec = NULL, const Sbecore::ubigint jref = 0, const Sbecore::uint jnum = 0, const Sbecore::ubigint ref = 0, const std::string sref = "", const Sbecore::uint ixVBasetype = 0, const std::string srefIxVBasetype = "", const std::string titIxVBasetype = "", const Sbecore::ubigint refWdbeMVersion = 0, const std::string stubRefWdbeMVersion = "", const Sbecore::ubigint refWdbeMMachine = 0, const std::string stubRefWdbeMMachine = "");
-	Sbecore::ubigint appendNewRecToRst(ListWdbeQRlsList& rst, WdbeQRlsList** rec = NULL, const Sbecore::ubigint jref = 0, const Sbecore::uint jnum = 0, const Sbecore::ubigint ref = 0, const std::string sref = "", const Sbecore::uint ixVBasetype = 0, const std::string srefIxVBasetype = "", const std::string titIxVBasetype = "", const Sbecore::ubigint refWdbeMVersion = 0, const std::string stubRefWdbeMVersion = "", const Sbecore::ubigint refWdbeMMachine = 0, const std::string stubRefWdbeMMachine = "");
+	Sbecore::ubigint insertNewRec(WdbeQRlsList** rec = NULL, const Sbecore::ubigint jref = 0, const Sbecore::uint jnum = 0, const Sbecore::ubigint ref = 0, const std::string sref = "", const Sbecore::ubigint refWdbeMComponent = 0, const std::string stubRefWdbeMComponent = "", const Sbecore::ubigint refWdbeMMachine = 0, const std::string stubRefWdbeMMachine = "");
+	Sbecore::ubigint appendNewRecToRst(ListWdbeQRlsList& rst, WdbeQRlsList** rec = NULL, const Sbecore::ubigint jref = 0, const Sbecore::uint jnum = 0, const Sbecore::ubigint ref = 0, const std::string sref = "", const Sbecore::ubigint refWdbeMComponent = 0, const std::string stubRefWdbeMComponent = "", const Sbecore::ubigint refWdbeMMachine = 0, const std::string stubRefWdbeMMachine = "");
 	virtual void insertRst(ListWdbeQRlsList& rst);
 	virtual void updateRec(WdbeQRlsList* rec);
 	virtual void updateRst(ListWdbeQRlsList& rst);

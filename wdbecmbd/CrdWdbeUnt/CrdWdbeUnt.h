@@ -14,9 +14,9 @@
 
 // IP include.cust --- INSERT
 
-#include "PnlWdbeUntRec.h"
-#include "PnlWdbeUntHeadbar.h"
 #include "PnlWdbeUntList.h"
+#include "PnlWdbeUntHeadbar.h"
+#include "PnlWdbeUntRec.h"
 
 #define VecVWdbeUntDo CrdWdbeUnt::VecVDo
 #define VecVWdbeUntSge CrdWdbeUnt::VecVSge
@@ -151,7 +151,7 @@ public:
 	public:
 		std::string getSrefsMask();
 
-		void readJSON(Json::Value& sup, bool addbasetag = false);
+		void readJSON(const Json::Value& sup, bool addbasetag = false);
 		void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 	};
 
@@ -196,15 +196,15 @@ public:
 	Sbecore::Feed feedFMcbAlert;
 	Sbecore::Feed feedFSge;
 
-	PnlWdbeUntRec* pnlrec;
-	PnlWdbeUntHeadbar* pnlheadbar;
 	PnlWdbeUntList* pnllist;
+	PnlWdbeUntHeadbar* pnlheadbar;
+	PnlWdbeUntRec* pnlrec;
 
 	// IP vars.cust --- INSERT
 
 public:
 	// IP cust --- IBEGIN
-	void showSubmdls(DbsWdbe* dbswdbe, const Sbecore::ubigint refWdbeMModule, bool _gens, bool _prts, bool _sigs, unsigned int indent);
+	void showSubmdls(DbsWdbe* dbswdbe, const Sbecore::ubigint refWdbeMModule, bool _gens, bool _prcs, bool _prts, bool _sigs, unsigned int indent);
 	// IP cust --- IEND
 
 public:
@@ -222,6 +222,7 @@ private:
 	bool handleShowCmds(DbsWdbe* dbswdbe);
 	bool handleShowGens(DbsWdbe* dbswdbe);
 	bool handleShowMdls(DbsWdbe* dbswdbe);
+	bool handleShowPrcs(DbsWdbe* dbswdbe);
 	bool handleShowPrts(DbsWdbe* dbswdbe);
 	bool handleShowSigs(DbsWdbe* dbswdbe);
 
@@ -235,9 +236,9 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeDlgClose(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
-	bool handleCallWdbeStatChg(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 	bool handleCallWdbeRefPreSet(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, const Sbecore::ubigint refInv);
+	bool handleCallWdbeStatChg(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbeDlgClose(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 
 private:
 	void changeStage(DbsWdbe* dbswdbe, Sbecore::uint _ixVSge, DpchEngWdbe** dpcheng = NULL);

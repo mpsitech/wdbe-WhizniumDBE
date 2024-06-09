@@ -20,8 +20,8 @@ uint QryWdbeFamList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "vnd") return VND;
 	if (s == "tit") return TIT;
+	if (s == "vnd") return VND;
 
 	return(0);
 };
@@ -29,8 +29,8 @@ uint QryWdbeFamList::VecVOrd::getIx(
 string QryWdbeFamList::VecVOrd::getSref(
 			const uint ix
 		) {
-	if (ix == VND) return("vnd");
 	if (ix == TIT) return("tit");
+	if (ix == VND) return("vnd");
 
 	return("");
 };
@@ -59,10 +59,10 @@ void QryWdbeFamList::StatApp::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["firstcol"] = firstcol;
-	me["jnumFirstdisp"] = jnumFirstdisp;
-	me["ncol"] = ncol;
-	me["ndisp"] = ndisp;
+	me["firstcol"] = (Json::Value::UInt) firstcol;
+	me["jnumFirstdisp"] = (Json::Value::UInt) jnumFirstdisp;
+	me["ncol"] = (Json::Value::UInt) ncol;
+	me["ndisp"] = (Json::Value::UInt) ndisp;
 };
 
 void QryWdbeFamList::StatApp::writeXML(
@@ -114,9 +114,9 @@ void QryWdbeFamList::StatShr::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["ntot"] = ntot;
-	me["jnumFirstload"] = jnumFirstload;
-	me["nload"] = nload;
+	me["ntot"] = (Json::Value::UInt) ntot;
+	me["jnumFirstload"] = (Json::Value::UInt) jnumFirstload;
+	me["nload"] = (Json::Value::UInt) nload;
 };
 
 void QryWdbeFamList::StatShr::writeXML(
@@ -181,15 +181,14 @@ QryWdbeFamList::StgIac::StgIac(
 };
 
 bool QryWdbeFamList::StgIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["StgIacQryWdbeFamList"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["StgIacQryWdbeFamList"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -235,9 +234,9 @@ void QryWdbeFamList::StgIac::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["jnum"] = jnum;
-	me["jnumFirstload"] = jnumFirstload;
-	me["nload"] = nload;
+	me["jnum"] = (Json::Value::UInt) jnum;
+	me["jnumFirstload"] = (Json::Value::UInt) jnumFirstload;
+	me["nload"] = (Json::Value::UInt) nload;
 };
 
 void QryWdbeFamList::StgIac::writeXML(

@@ -240,20 +240,20 @@ void DpchRetWdbePlhfpgaCmdret::writeXML(
 };
 
 /******************************************************************************
- class DpchInvWdbePlhfpgaEhostif
+ class DpchInvWdbePlhfpgaCtr
  ******************************************************************************/
 
-DpchInvWdbePlhfpgaEhostif::DpchInvWdbePlhfpgaEhostif(
+DpchInvWdbePlhfpgaCtr::DpchInvWdbePlhfpgaCtr(
 			const ubigint oref
 			, const ubigint jref
 			, const ubigint refWdbeMModule
 		) :
-			DpchInvWdbe(VecWdbeVDpch::DPCHINVWDBEPLHFPGAEHOSTIF, oref, jref)
+			DpchInvWdbe(VecWdbeVDpch::DPCHINVWDBEPLHFPGACTR, oref, jref)
 		{
 	this->refWdbeMModule = refWdbeMModule;
 };
 
-void DpchInvWdbePlhfpgaEhostif::readXML(
+void DpchInvWdbePlhfpgaCtr::readXML(
 			xmlXPathContext* docctx
 			, string basexpath
 			, bool addbasetag
@@ -263,7 +263,7 @@ void DpchInvWdbePlhfpgaEhostif::readXML(
 	bool basefound;
 
 	if (addbasetag)
-		basefound = checkUclcXPaths(docctx, basexpath, basexpath, "DpchInvWdbePlhfpgaEhostif");
+		basefound = checkUclcXPaths(docctx, basexpath, basexpath, "DpchInvWdbePlhfpgaCtr");
 	else
 		basefound = checkXPath(docctx, basexpath);
 
@@ -274,10 +274,10 @@ void DpchInvWdbePlhfpgaEhostif::readXML(
 	};
 };
 
-void DpchInvWdbePlhfpgaEhostif::writeXML(
+void DpchInvWdbePlhfpgaCtr::writeXML(
 			xmlTextWriter* wr
 		) {
-	xmlTextWriterStartElement(wr, BAD_CAST "DpchInvWdbePlhfpgaEhostif");
+	xmlTextWriterStartElement(wr, BAD_CAST "DpchInvWdbePlhfpgaCtr");
 	xmlTextWriterWriteAttribute(wr, BAD_CAST "xmlns", BAD_CAST "http://www.mpsitech.com/wdbe");
 		writeString(wr, "scrOref", Scr::scramble(oref));
 		writeString(wr, "scrJref", Scr::scramble(jref));
@@ -286,10 +286,10 @@ void DpchInvWdbePlhfpgaEhostif::writeXML(
 };
 
 /******************************************************************************
- class DpchRetWdbePlhfpgaEhostif
+ class DpchRetWdbePlhfpgaCtr
  ******************************************************************************/
 
-DpchRetWdbePlhfpgaEhostif::DpchRetWdbePlhfpgaEhostif(
+DpchRetWdbePlhfpgaCtr::DpchRetWdbePlhfpgaCtr(
 			const string& scrOref
 			, const string& scrJref
 			, const uint ixOpVOpres
@@ -297,13 +297,13 @@ DpchRetWdbePlhfpgaEhostif::DpchRetWdbePlhfpgaEhostif(
 			, const vector<string>& keys
 			, const vector<string>& vals
 		) :
-			DpchRetWdbe(VecWdbeVDpch::DPCHRETWDBEPLHFPGAEHOSTIF, scrOref, scrJref, ixOpVOpres, pdone)
+			DpchRetWdbe(VecWdbeVDpch::DPCHRETWDBEPLHFPGACTR, scrOref, scrJref, ixOpVOpres, pdone)
 		{
 	this->keys = keys;
 	this->vals = vals;
 };
 
-void DpchRetWdbePlhfpgaEhostif::readXML(
+void DpchRetWdbePlhfpgaCtr::readXML(
 			xmlXPathContext* docctx
 			, string basexpath
 			, bool addbasetag
@@ -315,7 +315,7 @@ void DpchRetWdbePlhfpgaEhostif::readXML(
 	bool basefound;
 
 	if (addbasetag)
-		basefound = checkUclcXPaths(docctx, basexpath, basexpath, "DpchRetWdbePlhfpgaEhostif");
+		basefound = checkUclcXPaths(docctx, basexpath, basexpath, "DpchRetWdbePlhfpgaCtr");
 	else
 		basefound = checkXPath(docctx, basexpath);
 
@@ -338,123 +338,10 @@ void DpchRetWdbePlhfpgaEhostif::readXML(
 	};
 };
 
-void DpchRetWdbePlhfpgaEhostif::writeXML(
+void DpchRetWdbePlhfpgaCtr::writeXML(
 			xmlTextWriter* wr
 		) {
-	xmlTextWriterStartElement(wr, BAD_CAST "DpchRetWdbePlhfpgaEhostif");
-	xmlTextWriterWriteAttribute(wr, BAD_CAST "xmlns", BAD_CAST "http://www.mpsitech.com/wdbe");
-		writeString(wr, "scrOref", scrOref);
-		writeString(wr, "scrJref", scrJref);
-		writeString(wr, "srefIxOpVOpres", VecOpVOpres::getSref(ixOpVOpres));
-		writeUtinyint(wr, "pdone", pdone);
-		writeStringvec(wr, "keys", keys);
-		writeStringvec(wr, "vals", vals);
-	xmlTextWriterEndElement(wr);
-};
-
-/******************************************************************************
- class DpchInvWdbePlhfpgaFwdctr
- ******************************************************************************/
-
-DpchInvWdbePlhfpgaFwdctr::DpchInvWdbePlhfpgaFwdctr(
-			const ubigint oref
-			, const ubigint jref
-			, const ubigint refWdbeMModule
-		) :
-			DpchInvWdbe(VecWdbeVDpch::DPCHINVWDBEPLHFPGAFWDCTR, oref, jref)
-		{
-	this->refWdbeMModule = refWdbeMModule;
-};
-
-void DpchInvWdbePlhfpgaFwdctr::readXML(
-			xmlXPathContext* docctx
-			, string basexpath
-			, bool addbasetag
-		) {
-	clear();
-
-	bool basefound;
-
-	if (addbasetag)
-		basefound = checkUclcXPaths(docctx, basexpath, basexpath, "DpchInvWdbePlhfpgaFwdctr");
-	else
-		basefound = checkXPath(docctx, basexpath);
-
-	if (basefound) {
-		if (extractStringUclc(docctx, basexpath, "scrOref", "", scrOref)) add(SCROREF);
-		if (extractStringUclc(docctx, basexpath, "scrJref", "", scrJref)) add(SCRJREF);
-		if (extractUbigintUclc(docctx, basexpath, "refWdbeMModule", "", refWdbeMModule)) add(REFWDBEMMODULE);
-	};
-};
-
-void DpchInvWdbePlhfpgaFwdctr::writeXML(
-			xmlTextWriter* wr
-		) {
-	xmlTextWriterStartElement(wr, BAD_CAST "DpchInvWdbePlhfpgaFwdctr");
-	xmlTextWriterWriteAttribute(wr, BAD_CAST "xmlns", BAD_CAST "http://www.mpsitech.com/wdbe");
-		writeString(wr, "scrOref", Scr::scramble(oref));
-		writeString(wr, "scrJref", Scr::scramble(jref));
-		writeUbigint(wr, "refWdbeMModule", refWdbeMModule);
-	xmlTextWriterEndElement(wr);
-};
-
-/******************************************************************************
- class DpchRetWdbePlhfpgaFwdctr
- ******************************************************************************/
-
-DpchRetWdbePlhfpgaFwdctr::DpchRetWdbePlhfpgaFwdctr(
-			const string& scrOref
-			, const string& scrJref
-			, const uint ixOpVOpres
-			, const utinyint pdone
-			, const vector<string>& keys
-			, const vector<string>& vals
-		) :
-			DpchRetWdbe(VecWdbeVDpch::DPCHRETWDBEPLHFPGAFWDCTR, scrOref, scrJref, ixOpVOpres, pdone)
-		{
-	this->keys = keys;
-	this->vals = vals;
-};
-
-void DpchRetWdbePlhfpgaFwdctr::readXML(
-			xmlXPathContext* docctx
-			, string basexpath
-			, bool addbasetag
-		) {
-	clear();
-
-	string srefIxOpVOpres;
-
-	bool basefound;
-
-	if (addbasetag)
-		basefound = checkUclcXPaths(docctx, basexpath, basexpath, "DpchRetWdbePlhfpgaFwdctr");
-	else
-		basefound = checkXPath(docctx, basexpath);
-
-	if (basefound) {
-		if (extractStringUclc(docctx, basexpath, "scrOref", "", scrOref)) {
-			oref = Scr::descramble(scrOref);
-			add(OREF);
-		};
-		if (extractStringUclc(docctx, basexpath, "scrJref", "", scrJref)) {
-			jref = Scr::descramble(scrJref);
-			add(JREF);
-		};
-		if (extractStringUclc(docctx, basexpath, "srefIxOpVOpres", "", srefIxOpVOpres)) {
-			ixOpVOpres = VecOpVOpres::getIx(srefIxOpVOpres);
-			add(IXOPVOPRES);
-		};
-		if (extractUtinyintUclc(docctx, basexpath, "pdone", "", pdone)) add(PDONE);
-		if (extractStringvecUclc(docctx, basexpath, "keys", "", keys)) add(KEYS);
-		if (extractStringvecUclc(docctx, basexpath, "vals", "", vals)) add(VALS);
-	};
-};
-
-void DpchRetWdbePlhfpgaFwdctr::writeXML(
-			xmlTextWriter* wr
-		) {
-	xmlTextWriterStartElement(wr, BAD_CAST "DpchRetWdbePlhfpgaFwdctr");
+	xmlTextWriterStartElement(wr, BAD_CAST "DpchRetWdbePlhfpgaCtr");
 	xmlTextWriterWriteAttribute(wr, BAD_CAST "xmlns", BAD_CAST "http://www.mpsitech.com/wdbe");
 		writeString(wr, "scrOref", scrOref);
 		writeString(wr, "scrJref", scrJref);

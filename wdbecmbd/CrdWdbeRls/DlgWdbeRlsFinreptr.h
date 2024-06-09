@@ -136,7 +136,7 @@ public:
 		Sbecore::uint numFDse;
 
 	public:
-		bool readJSON(Json::Value& sup, bool addbasetag = false);
+		bool readJSON(const Json::Value& sup, bool addbasetag = false);
 		bool readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 		void writeJSON(Json::Value& sup, std::string difftag = "");
 		void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
@@ -342,7 +342,7 @@ public:
 	public:
 		std::string getSrefsMask();
 
-		void readJSON(Json::Value& sup, bool addbasetag = false);
+		void readJSON(const Json::Value& sup, bool addbasetag = false);
 		void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 	};
 
@@ -368,7 +368,7 @@ public:
 	public:
 		std::string getSrefsMask();
 
-		void readJSON(Json::Value& sup, bool addbasetag = false);
+		void readJSON(const Json::Value& sup, bool addbasetag = false);
 		void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 	};
 
@@ -416,6 +416,7 @@ public:
 		void writeXML(const Sbecore::uint ixWdbeVLocale, xmlTextWriter* wr);
 	};
 
+	bool evalButDneActive(DbsWdbe* dbswdbe);
 	bool evalFinButRunActive(DbsWdbe* dbswdbe);
 	bool evalFinButStoActive(DbsWdbe* dbswdbe);
 	bool evalResDldAvail(DbsWdbe* dbswdbe);
@@ -424,7 +425,6 @@ public:
 	bool evalResSep1Avail(DbsWdbe* dbswdbe);
 	bool evalResButPsgAvail(DbsWdbe* dbswdbe);
 	bool evalResButPsgActive(DbsWdbe* dbswdbe);
-	bool evalButDneActive(DbsWdbe* dbswdbe);
 
 public:
 	DlgWdbeRlsFinreptr(XchgWdbe* xchg, DbsWdbe* dbswdbe, const Sbecore::ubigint jrefSup, const Sbecore::uint ixWdbeVLocale);
@@ -496,8 +496,8 @@ private:
 	std::string handleDownloadInSgeDone(DbsWdbe* dbswdbe);
 
 	void handleTimerInSgeFinidle(DbsWdbe* dbswdbe, const std::string& sref);
-	void handleTimerInSgePsgidle(DbsWdbe* dbswdbe, const std::string& sref);
 	void handleTimerWithSrefMonInSgePushgit(DbsWdbe* dbswdbe);
+	void handleTimerInSgePsgidle(DbsWdbe* dbswdbe, const std::string& sref);
 
 private:
 	void changeStage(DbsWdbe* dbswdbe, Sbecore::uint _ixVSge, DpchEngWdbe** dpcheng = NULL);

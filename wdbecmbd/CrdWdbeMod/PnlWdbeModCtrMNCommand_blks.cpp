@@ -61,7 +61,7 @@ void PnlWdbeModCtrMNCommand::ContInf::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["numFCsiQst"] = numFCsiQst;
+	me["numFCsiQst"] = (Json::Value::UInt) numFCsiQst;
 };
 
 void PnlWdbeModCtrMNCommand::ContInf::writeXML(
@@ -240,15 +240,14 @@ PnlWdbeModCtrMNCommand::StgIac::StgIac(
 };
 
 bool PnlWdbeModCtrMNCommand::StgIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["StgIacWdbeModCtrMNCommand"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["StgIacWdbeModCtrMNCommand"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -294,9 +293,9 @@ void PnlWdbeModCtrMNCommand::StgIac::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["TcoMrefWidth"] = TcoMrefWidth;
-	me["TcoIvrWidth"] = TcoIvrWidth;
-	me["TcoRvrWidth"] = TcoRvrWidth;
+	me["TcoMrefWidth"] = (Json::Value::UInt) TcoMrefWidth;
+	me["TcoIvrWidth"] = (Json::Value::UInt) TcoIvrWidth;
+	me["TcoRvrWidth"] = (Json::Value::UInt) TcoRvrWidth;
 };
 
 void PnlWdbeModCtrMNCommand::StgIac::writeXML(
@@ -419,15 +418,14 @@ string PnlWdbeModCtrMNCommand::DpchAppData::getSrefsMask() {
 };
 
 void PnlWdbeModCtrMNCommand::DpchAppData::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbeModCtrMNCommandData"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbeModCtrMNCommandData"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -493,15 +491,14 @@ string PnlWdbeModCtrMNCommand::DpchAppDo::getSrefsMask() {
 };
 
 void PnlWdbeModCtrMNCommand::DpchAppDo::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbeModCtrMNCommandDo"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbeModCtrMNCommandDo"];}();
 
 	basefound = (me != Json::nullValue);
 

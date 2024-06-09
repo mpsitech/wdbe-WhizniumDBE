@@ -75,7 +75,7 @@ function refreshA() {
 function refreshBD(bNotD) {
 	if (!contcontdoc) return;
 
-	var height = 970; // full cont height
+	var height = 1066; // full cont height
 
 	// IP refreshBD.vars --- BEGIN
 	var LstBnkAlt = (retrieveSi(srcdoc, "StatAppWdbeNavLow", "LstBnkAlt") == "true");
@@ -121,6 +121,11 @@ function refreshBD(bNotD) {
 	var ButSigViewAvail = !LstSigAlt;
 	var ButSigViewActive = (retrieveSi(srcdoc, "StatShrWdbeNavLow", "ButSigViewActive") == "true");
 	var ButSigNewcrdActive = (retrieveSi(srcdoc, "StatShrWdbeNavLow", "ButSigNewcrdActive") == "true");
+
+	var LstCdcAlt = (retrieveSi(srcdoc, "StatAppWdbeNavLow", "LstCdcAlt") == "true");
+	var LstCdcAvail = (retrieveSi(srcdoc, "StatShrWdbeNavLow", "LstCdcAvail") == "true");
+	var ButCdcViewAvail = !LstCdcAlt;
+	var ButCdcViewActive = (retrieveSi(srcdoc, "StatShrWdbeNavLow", "ButCdcViewActive") == "true");
 
 	var LstPrcAlt = (retrieveSi(srcdoc, "StatAppWdbeNavLow", "LstPrcAlt") == "true");
 	var LstPrcAvail = (retrieveSi(srcdoc, "StatShrWdbeNavLow", "LstPrcAvail") == "true");
@@ -556,6 +561,56 @@ function refreshBD(bNotD) {
 
 	} else setCtlAvail(contcontdoc, "Sig2", false, 0);
 
+	height -= setCtlAvail(contcontdoc, "Cdc", LstCdcAvail, 96);
+	height -= setCtlAvail(contcontdoc, "Cdc2", LstCdcAvail && !LstCdcAlt, (LstCdcAvail) ? 71 : 0);
+	if (LstCdcAvail) {
+		if ( (LstCdcAlt == !contcontdoc.getElementById("ButCdcExpand")) || (!LstCdcAlt == !contcontdoc.getElementById("ButCdcCollapse")) ) {
+			mytd = contcontdoc.getElementById("ldynCdc");
+			clearElem(mytd);
+
+			mytd.appendChild(makeSpanCpt(contcontdoc, "CptCdc", retrieveTi(srcdoc, "TagWdbeNavLow", "CptCdc")));
+
+			mytd.appendChild(contcontdoc.createTextNode("\u00a0"));
+			if (LstCdcAlt) mytd.appendChild(makeImgBut(contcontdoc, "ButCdcExpand", "icon/expand"));
+			else mytd.appendChild(makeImgBut(contcontdoc, "ButCdcCollapse", "icon/collapse"));
+		};
+
+		if (!LstCdcAlt == !contcontdoc.getElementById("LstCdc")) {
+			mytd = contcontdoc.getElementById("rdynCdc");
+			clearElem(mytd);
+			mytd = contcontdoc.getElementById("dynCdc");
+			clearElem(mytd);
+
+			if (LstCdcAlt) {
+				mytd.setAttribute("rowspan", "1");
+			} else {
+				mytd.setAttribute("rowspan", "2");
+				mytd.appendChild(makeIframeLst(contcontdoc, "LstCdc", "./PnlWdbeNavLow_LstCdc.xml", true));
+			};
+
+		} else {
+			if (!LstCdcAlt) refreshLst(contcontdoc.getElementById("LstCdc").contentWindow.document, srcdoc, 1, true, false, "FeedFLstCdc",
+						parseInt(retrieveSi(srcdoc, "StatAppWdbeNavLow", "LstCdcNumFirstdisp")), [parseInt(retrieveCi(srcdoc, "ContIacWdbeNavLow", "numFLstCdc"))]);
+		};
+
+		if ((ButCdcViewAvail == !contcontdoc.getElementById("ButCdcView"))) {
+			if (LstCdcAlt) mytd = contcontdoc.getElementById("dynCdc");
+			else mytd = contcontdoc.getElementById("rdynCdc");
+			clearElem(mytd);
+
+			first = true;
+
+			if (ButCdcViewAvail) {
+				if (first) first = false;
+				else mytd.appendChild(contcontdoc.createTextNode("\u00a0"));
+				mytd.appendChild(makeImgBut(contcontdoc, "ButCdcView", "icon/view"));
+			};
+		};
+
+		if (ButCdcViewAvail) refreshButicon(contcontdoc, "ButCdcView", "icon/view", ButCdcViewActive, false);
+
+	} else setCtlAvail(contcontdoc, "Cdc2", false, 0);
+
 	height -= setCtlAvail(contcontdoc, "Prc", LstPrcAvail, 96);
 	height -= setCtlAvail(contcontdoc, "Prc2", LstPrcAvail && !LstPrcAlt, (LstPrcAvail) ? 71 : 0);
 	if (LstPrcAvail) {
@@ -851,6 +906,7 @@ function mergeDpchEngData(dom) {
 
 	if (updateSrcblock(dom, "DpchEngWdbeNavLowData", "ContIacWdbeNavLow", srcdoc)) mask.push("contiac");
 	if (updateSrcblock(dom, "DpchEngWdbeNavLowData", "FeedFLstBnk", srcdoc)) mask.push("feedFLstBnk");
+	if (updateSrcblock(dom, "DpchEngWdbeNavLowData", "FeedFLstCdc", srcdoc)) mask.push("feedFLstCdc");
 	if (updateSrcblock(dom, "DpchEngWdbeNavLowData", "FeedFLstFst", srcdoc)) mask.push("feedFLstFst");
 	if (updateSrcblock(dom, "DpchEngWdbeNavLowData", "FeedFLstGen", srcdoc)) mask.push("feedFLstGen");
 	if (updateSrcblock(dom, "DpchEngWdbeNavLowData", "FeedFLstInt", srcdoc)) mask.push("feedFLstInt");

@@ -90,15 +90,14 @@ PnlWdbeSigDetail::ContIac::ContIac(
 };
 
 bool PnlWdbeSigDetail::ContIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["ContIacWdbeSigDetail"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["ContIacWdbeSigDetail"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -166,12 +165,12 @@ void PnlWdbeSigDetail::ContIac::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["numFPupTyp"] = numFPupTyp;
-	me["numFLstClu"] = numFLstClu;
-	me["numFPupRet"] = numFPupRet;
-	me["numFPupMgt"] = numFPupMgt;
+	me["numFPupTyp"] = (Json::Value::UInt) numFPupTyp;
+	me["numFLstClu"] = (Json::Value::UInt) numFLstClu;
+	me["numFPupRet"] = (Json::Value::UInt) numFPupRet;
+	me["numFPupMgt"] = (Json::Value::UInt) numFPupMgt;
 	me["ChkCon"] = ChkCon;
-	me["numFPupHty"] = numFPupHty;
+	me["numFPupHty"] = (Json::Value::UInt) numFPupHty;
 	me["TxfHty"] = TxfHty;
 	me["TxfWid"] = TxfWid;
 	me["TxfMmx"] = TxfMmx;
@@ -357,7 +356,7 @@ void PnlWdbeSigDetail::StatApp::writeJSON(
 	me["srefIxWdbeVExpstate"] = VecWdbeVExpstate::getSref(ixWdbeVExpstate);
 	me["LstCluAlt"] = LstCluAlt;
 	me["PupHtyAlt"] = PupHtyAlt;
-	me["LstCluNumFirstdisp"] = LstCluNumFirstdisp;
+	me["LstCluNumFirstdisp"] = (Json::Value::UInt) LstCluNumFirstdisp;
 };
 
 void PnlWdbeSigDetail::StatApp::writeXML(
@@ -689,15 +688,14 @@ string PnlWdbeSigDetail::DpchAppData::getSrefsMask() {
 };
 
 void PnlWdbeSigDetail::DpchAppData::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbeSigDetailData"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbeSigDetailData"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -759,15 +757,14 @@ string PnlWdbeSigDetail::DpchAppDo::getSrefsMask() {
 };
 
 void PnlWdbeSigDetail::DpchAppDo::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbeSigDetailDo"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbeSigDetailDo"];}();
 
 	basefound = (me != Json::nullValue);
 

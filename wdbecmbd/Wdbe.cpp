@@ -45,10 +45,10 @@ ubigint Acv::addfile(
 	// set archived time to current time
 	Archived = time(NULL);
 
-	// determine file size in kB
+	// determine file size in byte
 	struct stat st;
 	stat(path.c_str(), &st);
-	Size = st.st_size / 1024;
+	Size = st.st_size;
 
 	dbswdbe->tblwdbemfile->insertNewRec(&fil, grp, own, 0, refIxVTbl, refUref, osrefKContent, Archived, Filename, "", srefKMimetype, Size, Comment);
 	
@@ -579,6 +579,185 @@ bool Wdbe::getMchpar(
 	return false;
 };
 
+void Wdbe::addLibBySref(
+			DbsWdbe* dbswdbe
+			, const string& srefLib
+			, const ubigint refMch
+			, vector<ubigint>& hrefsMch
+			, set<string>& incpaths
+		) {
+	ubigint refLib;
+
+	if (dbswdbe->tblwdbemlibrary->loadRefBySrf(srefLib, refLib)) addLibByRef(dbswdbe, refLib, refMch, hrefsMch, incpaths);
+};
+
+void Wdbe::addLibByRef(
+			DbsWdbe* dbswdbe
+			, const ubigint refLib
+			, const ubigint refMch
+			, vector<ubigint>& hrefsMch
+			, set<string>& incpaths
+		) {
+	set<string> cppflags;
+	set<string> linkflags;
+	set<string> libpaths;
+	vector<string> libss;
+
+	addLibByRef(dbswdbe, refLib, refMch, hrefsMch, cppflags, linkflags, incpaths, libpaths, libss, 0, true);
+};
+
+void Wdbe::addLibBySref(
+			DbsWdbe* dbswdbe
+			, const string& srefLib
+			, const ubigint refMch
+			, vector<ubigint>& hrefsMch
+			, std::set<std::string>& cppflags
+			, std::set<std::string>& linkflags
+			, std::set<std::string>& incpaths
+			, std::set<std::string>& libpaths
+			, std::vector<std::string>& libss
+			, unsigned int ix0
+			, const bool inconly
+		) {
+	ubigint refLib;
+
+	if (dbswdbe->tblwdbemlibrary->loadRefBySrf(srefLib, refLib)) addLibByRef(dbswdbe, refLib, refMch, hrefsMch, cppflags, linkflags, incpaths, libpaths, libss, ix0, inconly);
+};
+
+void Wdbe::addLibByRef(
+			DbsWdbe* dbswdbe
+			, const ubigint refLib
+			, const ubigint refMch
+			, vector<ubigint>& hrefsMch
+			, std::set<std::string>& cppflags
+			, std::set<std::string>& linkflags
+			, std::set<std::string>& incpaths
+			, std::set<std::string>& libpaths
+			, std::vector<std::string>& libss
+			, unsigned int ix0
+			, const bool inconly
+		) {
+	WdbeMLibrary* lib = NULL;
+
+	vector<string> ss;
+	string s;
+
+	if (dbswdbe->tblwdbemlibrary->loadRecByRef(refLib, &lib)) {
+		if (getLibmkf(dbswdbe, refLib, refMch, hrefsMch, "incpath", s)) {
+			StrMod::stringToVector(s, ss, ' ');
+			for (unsigned int i = 0; i < ss.size(); i++) incpaths.insert(ss[i]);
+		};
+
+		if (!inconly) {
+			if (getLibmkf(dbswdbe, refLib, refMch, hrefsMch, "cppflags", s)) {
+				StrMod::stringToVector(s, ss, ' ');
+				for (unsigned int i = 0; i < ss.size(); i++) cppflags.insert(ss[i]);
+			};
+
+			if (getLibmkf(dbswdbe, refLib, refMch, hrefsMch, "linkflags", s)) {
+				StrMod::stringToVector(s, ss, ' ');
+				for (unsigned int i = 0; i < ss.size(); i++) linkflags.insert(ss[i]);
+			};
+
+
+			if (getLibmkf(dbswdbe, refLib, refMch, hrefsMch, "libpath", s)) {
+				StrMod::stringToVector(s, ss, ' ');
+				for (unsigned int i = 0; i < ss.size(); i++) libpaths.insert(ss[i]);
+			};
+
+			if (getLibmkf(dbswdbe, refLib, refMch, hrefsMch, "libs", s)) {
+				StrMod::stringToVector(s, ss, ' ');
+
+				if (libss.size() < (ix0 + ss.size())) libss.resize(ix0 + ss.size());
+
+				for (unsigned int i = 0; i < ss.size(); i++) {
+					if (libss[ix0+i] == "") libss[ix0+i] = ss[i];
+					else libss[ix0+i] += " " + ss[i];
+				};
+
+				ix0 += ss.size();
+			};
+		};
+
+		StrMod::srefsToVector(lib->depSrefsWdbeMLibrary, ss);
+		for (unsigned int i = 0; i < ss.size();i++) addLibBySref(dbswdbe, ss[i], refMch, hrefsMch, cppflags, linkflags, incpaths, libpaths, libss, ix0, inconly);
+
+		delete lib;
+	};
+};
+
+void Wdbe::trimLibss(
+			vector<string>& libss
+		) {
+	set<string> unqlibs;
+
+	vector<string> ss;
+	set<string> unqss;
+
+	string s;
+
+	for (unsigned int i = libss.size(); i > 0; i--) {
+		unqss.clear();
+
+		StrMod::stringToVector(libss[i - 1], ss, ' ');
+		for (unsigned int j = 0; j < ss.size(); j++) {
+			if (unqlibs.find(ss[j]) == unqlibs.end()) {
+				unqlibs.insert(ss[j]);
+				unqss.insert(ss[j]);
+			};
+		};
+
+		s = "";
+		for (auto it = unqss.begin(); it != unqss.end(); it++) {
+			if (it != unqss.begin()) s += " ";
+			s += *it;
+		};
+
+		libss[i-1] = s;
+	};
+};
+
+string Wdbe::pathToPathstr(
+			const string& path
+			, const bool libNotInc
+			, const string& inclibeq
+		) {
+	string pathstr;
+
+	vector<string> ss;
+
+	StrMod::stringToVector(path, ss, ' ');
+
+	for (unsigned int i = 0; i < ss.size(); i++) {
+		if (i != 0) pathstr += " ";
+
+		if (libNotInc) pathstr += "-L" + inclibeq + ss[i];
+		else pathstr += "-I" + inclibeq + ss[i];
+	};
+
+	return pathstr;
+};
+
+string Wdbe::libsToLibstr(
+			const string& libs
+			, const bool statNotDyn
+		) {
+	string libstr;
+
+	vector<string> ss;
+
+	StrMod::stringToVector(libs, ss, ' ');
+
+	for (unsigned int i = 0; i < ss.size(); i++) {
+		if (i != 0) libstr += " ";
+		
+		if (statNotDyn) libstr += "-l:" + ss[i] + ".a";
+		else libstr += "-l" + ss[i].substr(3);
+	};
+
+	return libstr;
+};
+
 void Wdbe::analyzeUnt(
 			DbsWdbe* dbswdbe
 			, WdbeMUnit* unt
@@ -623,6 +802,8 @@ void Wdbe::analyzeUnt(
 	srefroot = unt->Fullsref.substr(3);
 
 	dbswdbe->tblwdbemvector->loadRstByHktHku(VecWdbeVMVectorHkTbl::UNT, unt->ref, false, vecs);
+	dbswdbe->tblwdbemvector->loadRstBySQL("SELECT TblWdbeMVector.* FROM TblWdbeMModule, TblWdbeMProcess, TblWdbeMVector WHERE TblWdbeMModule.hkIxVTbl = " + to_string(VecWdbeVMModuleHkTbl::UNT) + " AND TblWdbeMModule.hkUref = " + to_string(unt->ref)
+				+ " AND TblWdbeMProcess.refWdbeMModule = TblWdbeMModule.ref AND TblWdbeMVector.hkIxVTbl = " + to_string(VecWdbeVMVectorHkTbl::FSM) + " AND TblWdbeMVector.hkUref = TblWdbeMProcess.refWdbeMFsm ORDER BY TblWdbeMVector.sref ASC", true, vecs);
 
 	dbswdbe->tblwdbemcontroller->loadRstBySQL("SELECT TblWdbeMController.* FROM TblWdbeMModule, TblWdbeMController WHERE TblWdbeMModule.hkIxVTbl = " + to_string(VecWdbeVMModuleHkTbl::UNT) + " AND TblWdbeMModule.hkUref = "
 				+ to_string(unt->ref) + " AND TblWdbeMController.refWdbeMModule = TblWdbeMModule.ref ORDER BY TblWdbeMController.Fullsref ASC", false, ctrs);
@@ -653,7 +834,7 @@ void Wdbe::analyzeUnt(
 	for (unsigned int i = 0; i < vecs.nodes.size(); i++) {
 		vec = vecs.nodes[i];
 
-		if (vec->sref == ("VecW" + srefroot + "Buffer")) hasvecbuf = true;
+		if (vec->sref == ("VecV" + srefroot + "Buffer")) hasvecbuf = true;
 		else if (vec->sref == ("VecV" + srefroot + "Controller")) hasvecctr = true;
 		else if (vec->sref == ("VecV" + srefroot + "Command")) hasveccmd = true;
 		else if (vec->sref == ("VecV" + srefroot + "Error")) hasvecerr = true;
@@ -671,6 +852,30 @@ void Wdbe::analyzeUnt(
 			break;
 		};
 	};
+};
+
+string Wdbe::getUntVendor(
+			DbsWdbe* dbswdbe
+			, const ubigint refWdbeMUnit
+		) {
+	string srefWdbeKVendor;
+
+	dbswdbe->loadStringBySQL("SELECT TblWdbeMFamily.srefWdbeKVendor FROM TblWdbeMFamily, TblWdbeMUnit AS unt1, TblWdbeMUnit AS unt2 WHERE TblWdbeMFamily.ref = unt2.refUref AND unt2.ref = unt1.silRefWdbeMUnit AND unt1.ref = "
+				+ to_string(refWdbeMUnit), srefWdbeKVendor);
+
+	return srefWdbeKVendor;
+};
+
+string Wdbe::getMdlVendor(
+			DbsWdbe* dbswdbe
+			, const ubigint refWdbeMModule
+		) {
+	string srefWdbeKVendor;
+
+	dbswdbe->loadStringBySQL("SELECT TblWdbeMFamily.srefWdbeKVendor FROM TblWdbeMFamily, TblWdbeMUnit AS unt1, TblWdbeMUnit AS unt2, TblWdbeMModule WHERE TblWdbeMModule.ref = " + to_string(refWdbeMModule)
+				+ " AND TblWdbeMFamily.ref = unt2.refUref AND unt2.ref = unt1.silRefWdbeMUnit AND unt1.ref = TblWdbeMModule.hkUref", srefWdbeKVendor);
+
+	return srefWdbeKVendor;
 };
 
 void Wdbe::getPairsCmdbus(
@@ -707,21 +912,15 @@ void Wdbe::getPairsCmdbus(
 	for (unsigned int i = 0; i < mdls.nodes.size(); i++) {
 		mdl = mdls.nodes[i];
 
-		if ((mdl->ixVBasetype == VecWdbeVMModuleBasetype::CTR) || (mdl->ixVBasetype == VecWdbeVMModuleBasetype::FWDCTR)) {
+		if ((mdl->ixVBasetype == VecWdbeVMModuleBasetype::CTR) || (mdl->ixVBasetype == VecWdbeVMModuleBasetype::DBGCTR)) {
 			if (dbswdbe->tblwdbemcontroller->loadRecByRef(mdl->refWdbeMController, &ctr)) {
-				if (mdl->ixVBasetype == VecWdbeVMModuleBasetype::FWDCTR) {
-					pairsCmdbus.insert(pair<string,string>(cmdinvsref, mdl->sref));
-					pairsCmdbus.insert(pair<string,string>(mdl->sref, cmdretsref));
+				// analyze controller commands
+				dbswdbe->tblwdbemcommand->loadRstBySQL("SELECT * FROM TblWdbeMCommand WHERE refIxVTbl = " + to_string(VecWdbeVMCommandRefTbl::CTR) + " AND refUref = " + to_string(ctr->ref) + " ORDER BY refNum ASC", false, cmds);
 
-				} else {
-					// analyze controller commands
-					dbswdbe->tblwdbemcommand->loadRstBySQL("SELECT * FROM TblWdbeMCommand WHERE refIxVTbl = " + to_string(VecWdbeVMCommandRefTbl::CTR) + " AND refUref = " + to_string(ctr->ref) + " ORDER BY refNum ASC", false, cmds);
-
-					if (cmds.nodes.size() > 0) pairsCmdbus.insert(pair<string,string>(cmdinvsref, mdl->sref));
-					for (unsigned int j = 0; j < cmds.nodes.size(); j++) {
-						cmd = cmds.nodes[j];
-						if (cmd->ixVRettype != VecWdbeVMCommandRettype::VOID) pairsCmdbus.insert(pair<string,string>(mdl->sref, cmdretsref));
-					};
+				if (cmds.nodes.size() > 0) pairsCmdbus.insert(pair<string,string>(cmdinvsref, mdl->sref));
+				for (unsigned int j = 0; j < cmds.nodes.size(); j++) {
+					cmd = cmds.nodes[j];
+					if (cmd->ixVRettype != VecWdbeVMCommandRettype::VOID) pairsCmdbus.insert(pair<string,string>(mdl->sref, cmdretsref));
 				};
 
 				// analyze invoked commands
@@ -802,8 +1001,8 @@ bool Wdbe::getImbsrefs(
 		srefrootMgmt = StrMod::cap(srefBuf) + "To" + srefTo;
 		srefrootCor = StrMod::cap(srefBuf) + "From" + srefFrom;
 	} else {
-		srefrootMgmt =  StrMod::cap(srefBuf) + "To" + srefTo;
-		srefrootCor =  StrMod::cap(srefBuf) + "From" + srefFrom;
+		srefrootMgmt =  StrMod::cap(srefBuf) + "From" + srefFrom;
+		srefrootCor =  StrMod::cap(srefBuf) + "To" + srefTo;
 	};
 
 	return mgmtToNotFrom;
@@ -968,21 +1167,33 @@ string Wdbe::getCompsref(
 	string s;
 
 	if (mdl->tplRefWdbeMModule != 0) if (dbswdbe->tblwdbemmodule->loadRecByRef(mdl->tplRefWdbeMModule, &mtp)) {
-		if (mtp->Srefrule != "") {
-			compsref = mtp->Srefrule;
+		dbswdbe->tblwdbeammodulepar->loadRstByMdl(mdl->ref, false, mpas);
 
-			dbswdbe->tblwdbeammodulepar->loadRstBySQL("SELECT * FROM TblWdbeAMModulePar WHERE mdlRefWdbeMModule = " + to_string(mdl->ref), false, mpas);
-			for (unsigned int i = 0; i < mpas.nodes.size(); i++) {
-				mpa = mpas.nodes[i];
-				compsref = StrMod::replacePlh(compsref, mpa->x1SrefKKey, mpa->Val);
+		if (mpas.nodes.size() == 0) {
+			// implies no mtp->Srefrule and no customization
+			compsref = mtp->sref;
+
+		} else {
+			if (mtp->Srefrule != "") {
+				compsref = mtp->Srefrule;
+
+				for (unsigned int i = 0; i < mpas.nodes.size(); i++) {
+					mpa = mpas.nodes[i];
+					compsref = StrMod::replacePlh(compsref, mpa->x1SrefKKey, StrMod::dotToUsc(mpa->Val));
+				};
+
+				if (compsref.find("&untsref;") != string::npos) {
+					dbswdbe->loadStringBySQL("SELECT sref FROM TblWdbeMUnit WHERE ref = " + to_string(mdl->hkUref), s);
+					compsref = StrMod::replacePlh(compsref, "untsref", s);
+				};
+
+			} else {
+				// internal customization without sref change
+				if ((mtp->ixVBasetype == VecWdbeVMModuleBasetype::MNFCORE) || (mtp->ixVBasetype == VecWdbeVMModuleBasetype::MNFPRIM)) compsref = mtp->sref;
+				//else compsref = mdl->sref;
 			};
 
-			if (compsref.find("&untsref;") != string::npos) {
-				dbswdbe->loadStringBySQL("SELECT sref FROM TblWdbeMUnit WHERE ref = " + to_string(mdl->hkUref), s);
-				compsref = StrMod::replacePlh(compsref, "untsref", s);
-			};
-
-		} else if ((mdl->ixVBasetype == VecWdbeVMModuleBasetype::IMBUF) || (mdl->ixVBasetype == VecWdbeVMModuleBasetype::MNFPRIM) || (mdl->ixVBasetype == VecWdbeVMModuleBasetype::WRP) || (mdl->ixVBasetype == VecWdbeVMModuleBasetype::OTH)) compsref = mtp->sref;
+		 };
 
 		delete mtp;
 	};
@@ -1180,98 +1391,6 @@ void Wdbe::getRange(
 	};
 };
 
-void Wdbe::levelUnts(
-			DbsWdbe* dbswdbe
-			, const ubigint refWdbeMVersion
-			, ListWdbeMUnit& unts
-			, vector<unsigned int>& lvlsUnts
-		) {
-	// lowest level (0): top, highest level: bottom
-	// units being forwarded to need a higher level than the unit forwarding to them
-
-	// ex. of levels for idhc:
-	// axs2: 2
-	// b3fw: 0
-	// dcx3: 1
-	// icm2: 2
-	// tau2: 2
-
-	vector<ubigint> refs;
-
-	WdbeMUnit* unt = NULL;
-
-	map<ubigint,unsigned int> icsUnts;
-
-	unsigned int lvl;
-
-	bool changed;
-
-	dbswdbe->tblwdbemunit->loadRstBySQL("SELECT * FROM TblWdbeMUnit WHERE refIxVTbl = " + to_string(VecWdbeVMUnitRefTbl::VER) + " AND refUref = " + to_string(refWdbeMVersion) + " ORDER BY sref ASC", false, unts);
-	for (unsigned int i = 0; i < unts.nodes.size(); i++) icsUnts[unts.nodes[i]->ref] = i;
-
-	// - establish levels starting from all-zero
-	lvlsUnts.clear();
-	lvlsUnts.resize(unts.nodes.size(), 0);
-
-	changed = true;
-	while (changed) {
-		changed = false;
-
-		for (unsigned int i = 0; i < unts.nodes.size(); i++) {
-			unt = unts.nodes[i];
-
-			// find forwarding controllers pointing to unt along with their respective host unit
-			dbswdbe->loadRefsBySQL("SELECT TblWdbeMModule.hkUref FROM TblWdbeMModule, TblWdbeMController WHERE TblWdbeMController.fwdRefWdbeMUnit = " + to_string(unt->ref) + " AND TblWdbeMModule.hkIxVTbl = " + to_string(VecWdbeVMModuleHkTbl::UNT)
-						+ " AND TblWdbeMModule.ref = TblWdbeMController.refWdbeMModule", false, refs);
-
-			for (unsigned int j = 0; j < refs.size();j++) {
-				auto it = icsUnts.find(refs[j]);
-
-				if (it != icsUnts.end()) {
-					// require level of forwarding unit to be inferior
-					lvl = lvlsUnts[it->second];
-
-					if (lvlsUnts[i] <= lvl) {
-						lvlsUnts[i] = lvl+1;
-						changed = true;
-					};
-				};
-			};
-		};
-	};
-};
-
-void Wdbe::sortUnts(
-			ListWdbeMUnit& unts
-			, vector<unsigned int>& lvlsUnts
-			, bool buNotTd
-		) {
-	WdbeMUnit* unt = NULL;
-
-	unsigned int lvl;
-
-	unsigned int ixpvt;
-
-	for (unsigned int i = 0; i < lvlsUnts.size();i++) {
-		ixpvt = i;
-
-		for (unsigned int j=(i+1);j<lvlsUnts.size();j++) {
-			if (!buNotTd && (lvlsUnts[j] < lvlsUnts[ixpvt])) ixpvt = j;
-			else if (buNotTd && (lvlsUnts[j] > lvlsUnts[ixpvt])) ixpvt = j;
-		};
-
-		if (ixpvt != i) {
-			unt = unts.nodes[i];
-			unts.nodes[i] = unts.nodes[ixpvt];
-			unts.nodes[ixpvt] = unt;
-
-			lvl = lvlsUnts[i];
-			lvlsUnts[i] = lvlsUnts[ixpvt];
-			lvlsUnts[ixpvt] = lvl;
-		};
-	};
-};
-
 void Wdbe::levelUntmdls(
 			DbsWdbe* dbswdbe
 			, const ubigint refWdbeMUnit
@@ -1280,8 +1399,9 @@ void Wdbe::levelUntmdls(
 		) {
 	// lowest level (0): top, highest level: bottom
 	// generally, follow hierarchy defined by supRefWdbeMModule
-	// exception 1: cmdinv needs to be above ctr/fwdctr
-	// exception 2: an imbuf's corresponding module needs to be above the imbuf's host module
+	// exception 1: cmdinv needs to be above ctr
+	// exception 2: dbg, dbgctr, edbgctr need to be above all but top
+	// exception 3: an imbuf's corresponding module needs to be above the imbuf's host module
 	//   covered by this: hostif needs to be above cmdinv/cmdret (once WdbeModbscCmdinvtd/WdbeModbscCmdrettd have added buf)
 
 	// ex. of levels for icm2
@@ -1316,6 +1436,7 @@ void Wdbe::levelUntmdls(
 
 	map<ubigint,unsigned int> icsMdls;
 	unsigned int ixMdlsCmdinv; // index of (single) cmdinv module
+	set<unsigned int> icsMdlsDbg; // indices of dbg, dbgctr and edbgctr modules
 	map<ubigint,unsigned int> icsMdlsCor; // index of corresponding module for each imbuf module
 
 	unsigned int lvl;
@@ -1332,6 +1453,9 @@ void Wdbe::levelUntmdls(
 
 		if (mdl->ixVBasetype == VecWdbeVMModuleBasetype::CMDINV) {
 			ixMdlsCmdinv = i;
+
+		} else if ((mdl->ixVBasetype == VecWdbeVMModuleBasetype::DBG) || (mdl->ixVBasetype == VecWdbeVMModuleBasetype::DBGCTR) || (mdl->ixVBasetype == VecWdbeVMModuleBasetype::EDBGCTR)) {
+			icsMdlsDbg.insert(i);
 
 		} else if (mdl->ixVBasetype == VecWdbeVMModuleBasetype::IMBUF) {
 			if (dbswdbe->loadRefBySQL("SELECT corRefWdbeMModule FROM TblWdbeRMModuleMModule WHERE ctdRefWdbeMModule = " + to_string(mdl->refWdbeMImbuf) + " AND (srefKFunction = 'src' OR srefKFunction = 'snk')", ref)) {
@@ -1365,9 +1489,21 @@ void Wdbe::levelUntmdls(
 			};
 
 			if (ixMdlsCmdinv != mdls.nodes.size()) {
-				if ((mdl->ixVBasetype == VecWdbeVMModuleBasetype::CTR) || (mdl->ixVBasetype == VecWdbeVMModuleBasetype::FWDCTR)) {
+				if (mdl->ixVBasetype == VecWdbeVMModuleBasetype::CTR) {
 					// require level of cmdinv to be inferior
 					lvl = lvlsMdls[ixMdlsCmdinv];
+
+					if (lvlsMdls[i] <= lvl) {
+						lvlsMdls[i] = lvl+1;
+						changed = true;
+					};
+				};
+			};
+
+			if ((mdl->ixVBasetype != VecWdbeVMModuleBasetype::TOP) && (mdl->ixVBasetype != VecWdbeVMModuleBasetype::DBG) && (mdl->ixVBasetype != VecWdbeVMModuleBasetype::DBGCTR) && (mdl->ixVBasetype != VecWdbeVMModuleBasetype::EDBGCTR)) {
+				// require level of any debug module to be inferior
+				for (auto it = icsMdlsDbg.begin(); it != icsMdlsDbg.end(); it++) {
+					lvl = lvlsMdls[*it];
 
 					if (lvlsMdls[i] <= lvl) {
 						lvlsMdls[i] = lvl+1;
@@ -1434,8 +1570,6 @@ void Wdbe::levelMdls(
 			, ListWdbeMModule& mdls
 			, vector<unsigned int>& lvlsMdls
 			, bool buNotTd
-			, bool lvlunts
-			, bool lvluntsBuNotTd
 		) {
 	ListWdbeMUnit unts;
 	WdbeMUnit* unt = NULL;
@@ -1444,34 +1578,19 @@ void Wdbe::levelMdls(
 	ListWdbeMModule untmdls;
 	vector<unsigned int> lvlsUntmdls;
 
-	unsigned int lvlofs, lvlmax;
-
-	if (lvlunts) {
-		levelUnts(dbswdbe, refWdbeMVersion, unts, lvlsUnts);
-		sortUnts(unts, lvlsUnts, lvluntsBuNotTd);
-	} else dbswdbe->tblwdbemunit->loadRstBySQL("SELECT * FROM TblWdbeMUnit WHERE refIxVTbl = " + to_string(VecWdbeVMUnitRefTbl::VER) + " AND refUref = " + to_string(refWdbeMVersion), false, unts);
+	dbswdbe->tblwdbemunit->loadRstBySQL("SELECT * FROM TblWdbeMUnit WHERE refIxVTbl = " + to_string(VecWdbeVMUnitRefTbl::VER) + " AND refUref = " + to_string(refWdbeMVersion), false, unts);
 
 	mdls.clear();
 	lvlsMdls.clear();
 
-	if (lvlunts) {
-		lvlofs = 0;
-		lvlmax = 0;
-	};
-
 	for (unsigned int i = 0; i < unts.nodes.size(); i++) {
 		unt = unts.nodes[i];
 
-		if (lvlunts) if (i != 0) if (lvlsUnts[i] != lvlsUnts[i-1]) lvlofs = lvlmax + 1;
-
 		levelUntmdls(dbswdbe, unt->ref, untmdls, lvlsUntmdls);
-		if (lvlunts) for (unsigned int j = 0; j < lvlsUntmdls.size();j++) lvlsUntmdls[j] += lvlofs;
 
 		for (unsigned int j = 0; j < untmdls.nodes.size(); j++) {
 			mdls.nodes.push_back(untmdls.nodes[j]);
 			lvlsMdls.push_back(lvlsUntmdls[j]);
-
-			if (lvlunts) if (lvlsUntmdls[j] > lvlmax) lvlmax = lvlsUntmdls[j];
 		};
 
 		untmdls.nodes.resize(0);
@@ -1531,31 +1650,128 @@ uint Wdbe::getNextVarRefNum(
 	return refNum;
 };
 
-void Wdbe::getHostifSizeRxtxbuf(
+void Wdbe::setFsmDbgtaptype(
+			DbsWdbe* dbswdbe
+			, const ubigint refWdbeMFsm
+		) {
+	WdbeMFsm* fsm = NULL;
+
+	ListWdbeMFsmstate fsts;
+	WdbeMFsmstate* fst = NULL;
+
+	uint cntNoclust = 0;
+	set<ubigint> refsClusts;
+	uint cnt;
+
+	if (dbswdbe->tblwdbemfsm->loadRecByRef(refWdbeMFsm, &fsm)) {
+		fsm->ixVDbgtaptype = VecWdbeVMFsmDbgtaptype::CLUST;
+
+		dbswdbe->tblwdbemfsmstate->loadRstByFsm(refWdbeMFsm, false, fsts);
+
+		for (unsigned int i = 0; i < fsts.nodes.size(); i++) {
+			fst = fsts.nodes[i];
+
+			if (fst->refWdbeCFsmstate == 0) cntNoclust++;
+			else refsClusts.insert(fst->refWdbeCFsmstate);
+		};
+
+		if ((cntNoclust + refsClusts.size()) > 15) fsm->ixVDbgtaptype = VecWdbeVMFsmDbgtaptype::LIN;
+		else {
+			for (auto it = refsClusts.begin(); it != refsClusts.end(); it++) {
+				cnt = 0;
+
+				for (unsigned int i = 0; i < fsts.nodes.size(); i++) {
+					fst = fsts.nodes[i];
+
+					if (fst->refWdbeCFsmstate == *it) {
+						cnt++;
+
+						if (cnt > 9) {
+							fsm->ixVDbgtaptype = VecWdbeVMFsmDbgtaptype::LIN;
+							break;
+						};
+					};
+				};
+
+				if (fsm->ixVDbgtaptype == VecWdbeVMFsmDbgtaptype::LIN) break;
+			};
+		};
+
+		dbswdbe->tblwdbemfsm->updateRec(fsm);
+
+		delete fsm;
+	};
+};
+
+ubigint Wdbe::getHostifRef(
+			DbsWdbe* dbswdbe
+			, const ubigint refWdbeMUnit
+		) {
+	ubigint ref = 0;
+
+	dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMModule WHERE hkIxVTbl = " + to_string(VecWdbeVMModuleHkTbl::UNT) + " AND hkUref = " + to_string(refWdbeMUnit)
+				+ " AND (ixVBasetype = " + to_string(VecWdbeVMModuleBasetype::HOSTIF) + " OR ixVBasetype = " + to_string(VecWdbeVMModuleBasetype::EHOSTIF) + ")", ref);
+
+	return ref;
+};
+
+string Wdbe::getHostifSref(
+			DbsWdbe* dbswdbe
+			, const ubigint refWdbeMUnit
+		) {
+	string s;
+
+	dbswdbe->loadStringBySQL("SELECT sref FROM TblWdbeMModule WHERE hkIxVTbl = " + to_string(VecWdbeVMModuleHkTbl::UNT) + " AND hkUref = " + to_string(refWdbeMUnit)
+				+ " AND (ixVBasetype = " + to_string(VecWdbeVMModuleBasetype::HOSTIF) + " OR ixVBasetype = " + to_string(VecWdbeVMModuleBasetype::EHOSTIF) + ")", s);
+
+	return s;
+};
+
+unsigned int Wdbe::getHostifWidth(
+			DbsWdbe* dbswdbe
+			, const ubigint refWdbeMUnit
+		) {
+	unsigned int w = 8;
+
+	ubigint ref;
+
+	string s;
+
+	if (dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMModule WHERE hkIxVTbl = " + to_string(VecWdbeVMModuleHkTbl::UNT) + " AND hkUref = "
+				+ to_string(refWdbeMUnit) + " AND (ixVBasetype = " + to_string(VecWdbeVMModuleBasetype::HOSTIF) + " OR ixVBasetype = "
+				+ to_string(VecWdbeVMModuleBasetype::EHOSTIF) + ")", ref)) {
+
+		if (Wdbe::getMpa(dbswdbe, ref, "wD", s)) w = atoi(s.c_str());
+	};
+
+	return w;
+};
+
+void Wdbe::getHostifSizeInvretbuf(
 			DbsWdbe* dbswdbe
 			, const Sbecore::ubigint refWdbeMUnit
-			, unsigned int& sizeRxbuf
-			, unsigned int& sizeTxbuf
+			, unsigned int& sizeInvbuf
+			, unsigned int& sizeRetbuf
 		) {
-	// device point of view
 	vector<ubigint> refs, refs2;
 
 	unsigned int len;
 
-	sizeRxbuf = 7; // min. 1+1+1+2+2 (cmd incl. CRC)
-	sizeTxbuf = 2; // min. 2 (CRC only)
+	sizeInvbuf = 2; // min. 2 (CRC only)
+	sizeRetbuf = 2; // min. 2 (CRC only)
 
 	dbswdbe->loadRefsBySQL("SELECT ref FROM TblWdbeMCommand WHERE refIxVTbl = " + to_string(VecWdbeVMCommandRefTbl::UNT) + " AND refUref = " + to_string(refWdbeMUnit), false, refs2);
 
-	dbswdbe->loadRefsBySQL("SELECT refWdbeMController FROM TblWdbeMModule WHERE hkIxVTbl = " + to_string(VecWdbeVMModuleHkTbl::UNT) + " AND hkUref = " + to_string(refWdbeMUnit) + " AND ixVBasetype = " + to_string(VecWdbeVMModuleBasetype::ECTR), false, refs);
+	dbswdbe->loadRefsBySQL("SELECT refWdbeMController FROM TblWdbeMModule WHERE hkIxVTbl = " + to_string(VecWdbeVMModuleHkTbl::UNT) + " AND hkUref = " + to_string(refWdbeMUnit) + " AND (ixVBasetype = " + to_string(VecWdbeVMModuleBasetype::ECTR) + " OR ixVBasetype = "
+				+ to_string(VecWdbeVMModuleBasetype::EDBGCTR) + ")", false, refs);
 	for (unsigned int i = 0; i < refs.size(); i++) dbswdbe->loadRefsBySQL("SELECT ref FROM TblWdbeMCommand WHERE refIxVTbl = " + to_string(VecWdbeVMCommandRefTbl::CTR) + " AND refUref = " + to_string(refs[i]), true, refs2);
 
 	for (unsigned int j = 0; j < refs2.size();j++) {
 		len = Wdbe::getLenInv(dbswdbe, refs2[j]) + 2;
-		if (len > sizeRxbuf) sizeRxbuf = len;
+		if (len > sizeInvbuf) sizeInvbuf = len;
 
 		len = Wdbe::getLenRet(dbswdbe, refs2[j]) + 2;
-		if (len > sizeTxbuf) sizeTxbuf = len;
+		if (len > sizeRetbuf) sizeRetbuf = len;
 	};
 };
 
@@ -1570,6 +1786,26 @@ unsigned int Wdbe::valToWidth(
 	};
 
 	return w;
+};
+
+string Wdbe::getVecSubsref(
+			const string& Skipsref
+			, const string& sref
+		) {
+	// ex. VecVSimdZudvkCoulcntCommand -> VCoulcntCommand
+	// ex. VecVSimdArtyBuffer -> VArtyBuffer
+	string s;
+
+	size_t ptr;
+
+	if (sref.length() > 4) {
+		s = sref.substr(3);
+
+		ptr = s.find(Skipsref);
+		if (ptr != string::npos) s = s.substr(0, 1) + s.substr(ptr + Skipsref.length());
+	};
+
+	return s;
 };
 
 string Wdbe::binToHex(
@@ -1732,6 +1968,7 @@ void OpengWdbe::getIcsWdbeVOppackByIxWdbeVOpengtype(
 		push_back(icsWdbeVOppack, VecWdbeVOppack::WDBEWRDEV);
 		push_back(icsWdbeVOppack, VecWdbeVOppack::WDBEWRFPGA);
 		push_back(icsWdbeVOppack, VecWdbeVOppack::WDBEWRMCU);
+		push_back(icsWdbeVOppack, VecWdbeVOppack::WDBEWRTERM);
 	} else if (ixWdbeVOpengtype == VecWdbeVOpengtype::WDBEOPD2) {
 		push_back(icsWdbeVOppack, VecWdbeVOppack::WDBEMTPCPLMSTBU);
 		push_back(icsWdbeVOppack, VecWdbeVOppack::WDBEMTPCPLMSTTD);
@@ -1748,19 +1985,17 @@ void OpengWdbe::getIcsWdbeVDpchByIxWdbeVOppack(
 			, set<uint>& icsWdbeVDpch
 		) {
 	if (ixWdbeVOppack == VecWdbeVOppack::WDBECPLMST) {
-		insert(icsWdbeVDpch, VecWdbeVDpch::DPCHINVWDBECPLMSTCTRECTR);
-		insert(icsWdbeVDpch, VecWdbeVDpch::DPCHINVWDBECPLMSTFWDCTR);
+		insert(icsWdbeVDpch, VecWdbeVDpch::DPCHINVWDBECPLMSTCTRECTRHOSTIFEHOSTIF);
 		insert(icsWdbeVDpch, VecWdbeVDpch::DPCHINVWDBECPLMSTIMBUF);
-		insert(icsWdbeVDpch, VecWdbeVDpch::DPCHINVWDBECPLMSTSYS);
 		insert(icsWdbeVDpch, VecWdbeVDpch::DPCHINVWDBECPLMSTTPLCPY);
 		insert(icsWdbeVDpch, VecWdbeVDpch::DPCHINVWDBECPLMSTUNT);
 	} else if (ixWdbeVOppack == VecWdbeVOppack::WDBEGEN) {
+		insert(icsWdbeVDpch, VecWdbeVDpch::DPCHINVWDBEGENAUX);
 		insert(icsWdbeVDpch, VecWdbeVDpch::DPCHINVWDBEGENSTDVEC);
-		insert(icsWdbeVDpch, VecWdbeVDpch::DPCHINVWDBEGENTEST);
 		insert(icsWdbeVDpch, VecWdbeVDpch::DPCHINVWDBEGENWIRING);
 	} else if (ixWdbeVOppack == VecWdbeVOppack::WDBEGENFST) {
 		insert(icsWdbeVDpch, VecWdbeVDpch::DPCHINVWDBEGENFSTCMDBUS);
-		insert(icsWdbeVDpch, VecWdbeVDpch::DPCHINVWDBEGENFSTCTRFWDCTR);
+		insert(icsWdbeVDpch, VecWdbeVDpch::DPCHINVWDBEGENFSTCTR);
 		insert(icsWdbeVDpch, VecWdbeVDpch::DPCHINVWDBEGENFSTECTR);
 		insert(icsWdbeVDpch, VecWdbeVDpch::DPCHINVWDBEGENFSTEHOSTIF);
 		insert(icsWdbeVDpch, VecWdbeVDpch::DPCHINVWDBEGENFSTHOSTIF);
@@ -1784,8 +2019,7 @@ void OpengWdbe::getIcsWdbeVDpchByIxWdbeVOppack(
 	} else if (ixWdbeVOppack == VecWdbeVOppack::WDBEPLHFPGA) {
 		insert(icsWdbeVDpch, VecWdbeVDpch::DPCHINVWDBEPLHFPGACMDINV);
 		insert(icsWdbeVDpch, VecWdbeVDpch::DPCHINVWDBEPLHFPGACMDRET);
-		insert(icsWdbeVDpch, VecWdbeVDpch::DPCHINVWDBEPLHFPGAEHOSTIF);
-		insert(icsWdbeVDpch, VecWdbeVDpch::DPCHINVWDBEPLHFPGAFWDCTR);
+		insert(icsWdbeVDpch, VecWdbeVDpch::DPCHINVWDBEPLHFPGACTR);
 	} else if (ixWdbeVOppack == VecWdbeVOppack::WDBEPLHMCU) {
 		insert(icsWdbeVDpch, VecWdbeVDpch::DPCHINVWDBEPLHMCUECTR);
 		insert(icsWdbeVDpch, VecWdbeVDpch::DPCHINVWDBEPLHMCUEHOSTIF);
@@ -1800,24 +2034,24 @@ void OpengWdbe::getIcsWdbeVDpchByIxWdbeVOppack(
 		insert(icsWdbeVDpch, VecWdbeVDpch::DPCHINVWDBEWRDEVBASE);
 		insert(icsWdbeVDpch, VecWdbeVDpch::DPCHINVWDBEWRDEVCTR);
 		insert(icsWdbeVDpch, VecWdbeVDpch::DPCHINVWDBEWRDEVDEPLOY);
-		insert(icsWdbeVDpch, VecWdbeVDpch::DPCHINVWDBEWRDEVSYS);
 		insert(icsWdbeVDpch, VecWdbeVDpch::DPCHINVWDBEWRDEVUNT);
 	} else if (ixWdbeVOppack == VecWdbeVOppack::WDBEWRFPGA) {
+		insert(icsWdbeVDpch, VecWdbeVDpch::DPCHINVWDBEWRFPGAAUX);
 		insert(icsWdbeVDpch, VecWdbeVDpch::DPCHINVWDBEWRFPGABASE);
-		insert(icsWdbeVDpch, VecWdbeVDpch::DPCHINVWDBEWRFPGACTRFWDCTR);
+		insert(icsWdbeVDpch, VecWdbeVDpch::DPCHINVWDBEWRFPGACTR);
 		insert(icsWdbeVDpch, VecWdbeVDpch::DPCHINVWDBEWRFPGADEPLOY);
-		insert(icsWdbeVDpch, VecWdbeVDpch::DPCHINVWDBEWRFPGAEHOSTIF);
-		insert(icsWdbeVDpch, VecWdbeVDpch::DPCHINVWDBEWRFPGAHOSTIF);
-		insert(icsWdbeVDpch, VecWdbeVDpch::DPCHINVWDBEWRFPGAIPCLR);
 		insert(icsWdbeVDpch, VecWdbeVDpch::DPCHINVWDBEWRFPGAMDLFINE);
 		insert(icsWdbeVDpch, VecWdbeVDpch::DPCHINVWDBEWRFPGAMDLRAW);
 		insert(icsWdbeVDpch, VecWdbeVDpch::DPCHINVWDBEWRFPGATOP);
 	} else if (ixWdbeVOppack == VecWdbeVOppack::WDBEWRMCU) {
 		insert(icsWdbeVDpch, VecWdbeVDpch::DPCHINVWDBEWRMCUBASE);
-		insert(icsWdbeVDpch, VecWdbeVDpch::DPCHINVWDBEWRMCUCTRFWDCTR);
+		insert(icsWdbeVDpch, VecWdbeVDpch::DPCHINVWDBEWRMCUCTR);
 		insert(icsWdbeVDpch, VecWdbeVDpch::DPCHINVWDBEWRMCUDEPLOY);
 		insert(icsWdbeVDpch, VecWdbeVDpch::DPCHINVWDBEWRMCUMDLFINE);
 		insert(icsWdbeVDpch, VecWdbeVDpch::DPCHINVWDBEWRMCUMDLRAW);
+	} else if (ixWdbeVOppack == VecWdbeVOppack::WDBEWRTERM) {
+		insert(icsWdbeVDpch, VecWdbeVDpch::DPCHINVWDBEWRTERMDEPLOY);
+		insert(icsWdbeVDpch, VecWdbeVDpch::DPCHINVWDBEWRTERMMAIN);
 	};
 };
 
@@ -1837,7 +2071,9 @@ string StubWdbe::getStub(
 		) {
 	if (ixWdbeVStub == VecWdbeVStub::STUBWDBEBNKSREF) return getStubBnkSref(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
 	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEBNKSTD) return getStubBnkStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBECDCDSTD) return getStubCdcdStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
 	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBECMDSTD) return getStubCmdStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBECMPSTD) return getStubCmpStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
 	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBECPRSTD) return getStubCprStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
 	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBECTRLONG) return getStubCtrLong(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
 	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBECTRSREF) return getStubCtrSref(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
@@ -1872,7 +2108,6 @@ string StubWdbe::getStub(
 	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEPRSSTD) return getStubPrsStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
 	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEPRTSREF) return getStubPrtSref(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
 	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEPRTSTD) return getStubPrtStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBERLSLONG) return getStubRlsLong(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
 	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBERLSSTD) return getStubRlsStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
 	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBESEGHSREF) return getStubSegHsref(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
 	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBESEGSREF) return getStubSegSref(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
@@ -1883,9 +2118,6 @@ string StubWdbe::getStub(
 	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBESIGSTD) return getStubSigStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
 	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBESILSTD) return getStubSilStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
 	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBESNSSTD) return getStubSnsStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBESYSSTD) return getStubSysStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBETRGSREF) return getStubTrgSref(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBETRGSTD) return getStubTrgStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
 	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEUNISTD) return getStubUniStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
 	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEUNTSREF) return getStubUntSref(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
 	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEUNTSTD) return getStubUntStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
@@ -1992,6 +2224,53 @@ string StubWdbe::getStubBnkStd(
 	return stub;
 };
 
+string StubWdbe::getStubCdcdStd(
+			DbsWdbe* dbswdbe
+			, const ubigint ref
+			, const uint ixWdbeVLocale
+			, const uint ixVNonetype
+			, Stcch* stcch
+			, stcchitemref_t* strefSub
+			, const bool refresh
+		) {
+	// example: "mclk to mipiclk"
+	string stub;
+
+	WdbeMCdc* rec = NULL;
+
+	stcchitemref_t stref(VecWdbeVStub::STUBWDBECDCDSTD, ref, ixWdbeVLocale);
+	Stcchitem* stit = NULL;
+
+	if (stcch) {
+		stit = stcch->getStitByStref(stref);
+		if (stit && !refresh) {
+			if (strefSub) stcch->link(stref, *strefSub);
+			return stit->stub;
+		};
+	};
+
+	if (ixVNonetype == Stub::VecVNonetype::DASH) stub = "-";
+	else if (ixVNonetype == Stub::VecVNonetype::SHORT) {
+		if (ixWdbeVLocale == VecWdbeVLocale::ENUS) stub = "(none)";
+	} else if (ixVNonetype == Stub::VecVNonetype::FULL) {
+		if (ixWdbeVLocale == VecWdbeVLocale::ENUS) stub = "(no clock domain crossing)";
+	};
+
+	if (ref != 0) {
+		if (dbswdbe->tblwdbemcdc->loadRecByRef(ref, &rec)) {
+			if (stcch && !stit) stit = stcch->addStit(stref);
+			// IP getStubCdcdStd --- IBEGIN
+			stub = rec->fckSrefWdbeMSignal + " <-> " + rec->sckSrefWdbeMSignal;
+
+			// IP getStubCdcdStd --- IEND
+			if (stit) stit->stub = stub;
+			delete rec;
+		};
+	};
+
+	return stub;
+};
+
 string StubWdbe::getStubCmdStd(
 			DbsWdbe* dbswdbe
 			, const ubigint ref
@@ -2036,6 +2315,48 @@ string StubWdbe::getStubCmdStd(
 			// IP getStubCmdStd --- IEND
 			if (stit) stit->stub = stub;
 			delete rec;
+		};
+	};
+
+	return stub;
+};
+
+string StubWdbe::getStubCmpStd(
+			DbsWdbe* dbswdbe
+			, const ubigint ref
+			, const uint ixWdbeVLocale
+			, const uint ixVNonetype
+			, Stcch* stcch
+			, stcchitemref_t* strefSub
+			, const bool refresh
+		) {
+	// example: "ezdevwskd"
+	string stub;
+
+	stcchitemref_t stref(VecWdbeVStub::STUBWDBECMPSTD, ref, ixWdbeVLocale);
+	Stcchitem* stit = NULL;
+
+	if (stcch) {
+		stit = stcch->getStitByStref(stref);
+		if (stit && !refresh) {
+			if (strefSub) stcch->link(stref, *strefSub);
+			return stit->stub;
+		};
+	};
+
+	if (ixVNonetype == Stub::VecVNonetype::DASH) stub = "-";
+	else if (ixVNonetype == Stub::VecVNonetype::SHORT) {
+		if (ixWdbeVLocale == VecWdbeVLocale::ENUS) stub = "(none)";
+	} else if (ixVNonetype == Stub::VecVNonetype::FULL) {
+		if (ixWdbeVLocale == VecWdbeVLocale::ENUS) stub = "(no component)";
+	};
+
+	if (ref != 0) {
+		if (dbswdbe->tblwdbemcomponent->loadSrfByRef(ref, stub)) {
+			if (stcch) {
+				if (!stit) stit = stcch->addStit(stref);
+				stit->stub = stub;
+			};
 		};
 	};
 
@@ -3562,52 +3883,6 @@ string StubWdbe::getStubPrtStd(
 	return stub;
 };
 
-string StubWdbe::getStubRlsLong(
-			DbsWdbe* dbswdbe
-			, const ubigint ref
-			, const uint ixWdbeVLocale
-			, const uint ixVNonetype
-			, Stcch* stcch
-			, stcchitemref_t* strefSub
-			, const bool refresh
-		) {
-	// example: "ICARUSDetectorHardwareControl 0.1.0: devidhw_genio"
-	string stub;
-
-	WdbeMRelease* rec = NULL;
-
-	stcchitemref_t stref(VecWdbeVStub::STUBWDBERLSLONG, ref, ixWdbeVLocale);
-	Stcchitem* stit = NULL;
-
-	if (stcch) {
-		stit = stcch->getStitByStref(stref);
-		if (stit && !refresh) {
-			if (strefSub) stcch->link(stref, *strefSub);
-			return stit->stub;
-		};
-	};
-
-	if (ixVNonetype == Stub::VecVNonetype::DASH) stub = "-";
-	else if (ixVNonetype == Stub::VecVNonetype::SHORT) {
-		if (ixWdbeVLocale == VecWdbeVLocale::ENUS) stub = "(none)";
-	} else if (ixVNonetype == Stub::VecVNonetype::FULL) {
-		if (ixWdbeVLocale == VecWdbeVLocale::ENUS) stub = "(no release)";
-	};
-
-	if (ref != 0) {
-		if (dbswdbe->tblwdbemrelease->loadRecByRef(ref, &rec)) {
-			if (stcch && !stit) stit = stcch->addStit(stref);
-			// IP getStubRlsLong --- IBEGIN
-			stub = getStubVerStd(dbswdbe, rec->refWdbeMVersion, ixWdbeVLocale, ixVNonetype, stcch, &stref) + ": " + rec->sref;
-			// IP getStubRlsLong --- IEND
-			if (stit) stit->stub = stub;
-			delete rec;
-		};
-	};
-
-	return stub;
-};
-
 string StubWdbe::getStubRlsStd(
 			DbsWdbe* dbswdbe
 			, const ubigint ref
@@ -4045,136 +4320,6 @@ string StubWdbe::getStubSnsStd(
 			else if (rec->srcIxVTbl == VecWdbeVMSensitivitySrcTbl::PRT) stub = getStubPrtSref(dbswdbe, rec->srcUref, ixWdbeVLocale, ixVNonetype, stcch, &stref);
 			else if (rec->srcIxVTbl == VecWdbeVMSensitivitySrcTbl::SIG) stub = getStubSigSref(dbswdbe, rec->srcUref, ixWdbeVLocale, ixVNonetype, stcch, &stref);
 			// IP getStubSnsStd --- IEND
-			if (stit) stit->stub = stub;
-			delete rec;
-		};
-	};
-
-	return stub;
-};
-
-string StubWdbe::getStubSysStd(
-			DbsWdbe* dbswdbe
-			, const ubigint ref
-			, const uint ixWdbeVLocale
-			, const uint ixVNonetype
-			, Stcch* stcch
-			, stcchitemref_t* strefSub
-			, const bool refresh
-		) {
-	// example: "SysIdhwSBasys3fwd"
-	string stub;
-
-	stcchitemref_t stref(VecWdbeVStub::STUBWDBESYSSTD, ref, ixWdbeVLocale);
-	Stcchitem* stit = NULL;
-
-	if (stcch) {
-		stit = stcch->getStitByStref(stref);
-		if (stit && !refresh) {
-			if (strefSub) stcch->link(stref, *strefSub);
-			return stit->stub;
-		};
-	};
-
-	if (ixVNonetype == Stub::VecVNonetype::DASH) stub = "-";
-	else if (ixVNonetype == Stub::VecVNonetype::SHORT) {
-		if (ixWdbeVLocale == VecWdbeVLocale::ENUS) stub = "(none)";
-	} else if (ixVNonetype == Stub::VecVNonetype::FULL) {
-		if (ixWdbeVLocale == VecWdbeVLocale::ENUS) stub = "(no system)";
-	};
-
-	if (ref != 0) {
-		if (dbswdbe->tblwdbemsystem->loadSrfByRef(ref, stub)) {
-			if (stcch) {
-				if (!stit) stit = stcch->addStit(stref);
-				stit->stub = stub;
-			};
-		};
-	};
-
-	return stub;
-};
-
-string StubWdbe::getStubTrgSref(
-			DbsWdbe* dbswdbe
-			, const ubigint ref
-			, const uint ixWdbeVLocale
-			, const uint ixVNonetype
-			, Stcch* stcch
-			, stcchitemref_t* strefSub
-			, const bool refresh
-		) {
-	// example: "axs2.theta"
-	string stub;
-
-	stcchitemref_t stref(VecWdbeVStub::STUBWDBETRGSREF, ref, ixWdbeVLocale);
-	Stcchitem* stit = NULL;
-
-	if (stcch) {
-		stit = stcch->getStitByStref(stref);
-		if (stit && !refresh) {
-			if (strefSub) stcch->link(stref, *strefSub);
-			return stit->stub;
-		};
-	};
-
-	if (ixVNonetype == Stub::VecVNonetype::DASH) stub = "-";
-	else if (ixVNonetype == Stub::VecVNonetype::SHORT) {
-		if (ixWdbeVLocale == VecWdbeVLocale::ENUS) stub = "(none)";
-	} else if (ixVNonetype == Stub::VecVNonetype::FULL) {
-		if (ixWdbeVLocale == VecWdbeVLocale::ENUS) stub = "(no target)";
-	};
-
-	if (ref != 0) {
-		if (dbswdbe->tblwdbemtarget->loadSrfByRef(ref, stub)) {
-			if (stcch) {
-				if (!stit) stit = stcch->addStit(stref);
-				stit->stub = stub;
-			};
-		};
-	};
-
-	return stub;
-};
-
-string StubWdbe::getStubTrgStd(
-			DbsWdbe* dbswdbe
-			, const ubigint ref
-			, const uint ixWdbeVLocale
-			, const uint ixVNonetype
-			, Stcch* stcch
-			, stcchitemref_t* strefSub
-			, const bool refresh
-		) {
-	// example: "SysIdhwSBasys3fwd axs2.theta"
-	string stub;
-
-	WdbeMTarget* rec = NULL;
-
-	stcchitemref_t stref(VecWdbeVStub::STUBWDBETRGSTD, ref, ixWdbeVLocale);
-	Stcchitem* stit = NULL;
-
-	if (stcch) {
-		stit = stcch->getStitByStref(stref);
-		if (stit && !refresh) {
-			if (strefSub) stcch->link(stref, *strefSub);
-			return stit->stub;
-		};
-	};
-
-	if (ixVNonetype == Stub::VecVNonetype::DASH) stub = "-";
-	else if (ixVNonetype == Stub::VecVNonetype::SHORT) {
-		if (ixWdbeVLocale == VecWdbeVLocale::ENUS) stub = "(none)";
-	} else if (ixVNonetype == Stub::VecVNonetype::FULL) {
-		if (ixWdbeVLocale == VecWdbeVLocale::ENUS) stub = "(no target)";
-	};
-
-	if (ref != 0) {
-		if (dbswdbe->tblwdbemtarget->loadRecByRef(ref, &rec)) {
-			if (stcch && !stit) stit = stcch->addStit(stref);
-			// IP getStubTrgStd --- IBEGIN
-			stub = getStubSysStd(dbswdbe, rec->sysRefWdbeMSystem, ixWdbeVLocale, ixVNonetype, stcch, &stref) + " " + rec->sref;
-			// IP getStubTrgStd --- IEND
 			if (stit) stit->stub = stub;
 			delete rec;
 		};
@@ -4661,8 +4806,6 @@ string StubWdbe::getStubVerStd(
 		if (dbswdbe->tblwdbemversion->loadRecByRef(ref, &rec)) {
 			if (stcch && !stit) stit = stcch->addStit(stref);
 			// IP getStubVerStd --- IBEGIN
-			WdbeJMVersionState* verJste = NULL;
-
 			stub = getStubPrjStd(dbswdbe, rec->prjRefWdbeMProject, ixWdbeVLocale, ixVNonetype, stcch, &stref) + " v" + to_string((int) (rec->Major)) + "." + to_string((int) (rec->Minor)) + "." + to_string((int) (rec->Sub));
 
 			if (rec->ixVState != VecWdbeVMVersionState::READY) {
@@ -4812,7 +4955,7 @@ void ContInfWdbeAlert::writeJSON(
 		) {
 	if (difftag == "") difftag = "ContInfWdbeAlert";
 
-	Json::Value& me = sup["DpchEngWdbeConfirm"] = Json::Value(Json::objectValue);
+	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
 	me["TxtCpt"] = TxtCpt;
 	me["TxtMsg1"] = TxtMsg1;

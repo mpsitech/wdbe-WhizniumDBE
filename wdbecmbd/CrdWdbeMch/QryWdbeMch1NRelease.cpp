@@ -143,7 +143,7 @@ void QryWdbeMch1NRelease::fetch(
 			rec = rst.nodes[i];
 
 			rec->jnum = statshr.jnumFirstload + i;
-			rec->stubRef = StubWdbe::getStubRlsLong(dbswdbe, rec->ref, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
+			rec->stubRef = StubWdbe::getStubRlsStd(dbswdbe, rec->ref, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
 		};
 
 		stmgr->commit();
@@ -270,19 +270,11 @@ void QryWdbeMch1NRelease::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
-		call->abort = handleCallWdbeStubChgFromSelf(dbswdbe);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBERLSMOD_MCHEQ) {
+	if (call->ixVCall == VecWdbeVCall::CALLWDBERLSMOD_MCHEQ) {
 		call->abort = handleCallWdbeRlsMod_mchEq(dbswdbe, call->jref);
+	} else if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
+		call->abort = handleCallWdbeStubChgFromSelf(dbswdbe);
 	};
-};
-
-bool QryWdbeMch1NRelease::handleCallWdbeStubChgFromSelf(
-			DbsWdbe* dbswdbe
-		) {
-	bool retval = false;
-	// IP handleCallWdbeStubChgFromSelf --- INSERT
-	return retval;
 };
 
 bool QryWdbeMch1NRelease::handleCallWdbeRlsMod_mchEq(
@@ -296,5 +288,13 @@ bool QryWdbeMch1NRelease::handleCallWdbeRlsMod_mchEq(
 		xchg->triggerCall(dbswdbe, VecWdbeVCall::CALLWDBESTATCHG, jref);
 	};
 
+	return retval;
+};
+
+bool QryWdbeMch1NRelease::handleCallWdbeStubChgFromSelf(
+			DbsWdbe* dbswdbe
+		) {
+	bool retval = false;
+	// IP handleCallWdbeStubChgFromSelf --- INSERT
 	return retval;
 };

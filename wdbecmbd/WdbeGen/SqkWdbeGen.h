@@ -16,8 +16,8 @@
 	* SqkWdbeGen
 	*/
 namespace SqkWdbeGen {
+	std::string getSquawkAux(DbsWdbe* dbswdbe, DpchInvWdbeGenAux* dpchinv);
 	std::string getSquawkStdvec(DbsWdbe* dbswdbe, DpchInvWdbeGenStdvec* dpchinv);
-	std::string getSquawkTest(DbsWdbe* dbswdbe, DpchInvWdbeGenTest* dpchinv);
 	std::string getSquawkWiring(DbsWdbe* dbswdbe, DpchInvWdbeGenWiring* dpchinv);
 };
 

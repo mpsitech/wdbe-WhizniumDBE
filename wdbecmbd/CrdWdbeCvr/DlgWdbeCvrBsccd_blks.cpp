@@ -198,15 +198,14 @@ DlgWdbeCvrBsccd::ContIac::ContIac(
 };
 
 bool DlgWdbeCvrBsccd::ContIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["ContIacDlgWdbeCvrBsccd"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["ContIacDlgWdbeCvrBsccd"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -248,7 +247,7 @@ void DlgWdbeCvrBsccd::ContIac::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["numFDse"] = numFDse;
+	me["numFDse"] = (Json::Value::UInt) numFDse;
 };
 
 void DlgWdbeCvrBsccd::ContIac::writeXML(
@@ -313,7 +312,7 @@ void DlgWdbeCvrBsccd::ContInf::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["numFSge"] = numFSge;
+	me["numFSge"] = (Json::Value::UInt) numFSge;
 };
 
 void DlgWdbeCvrBsccd::ContInf::writeXML(
@@ -1142,15 +1141,14 @@ string DlgWdbeCvrBsccd::DpchAppData::getSrefsMask() {
 };
 
 void DlgWdbeCvrBsccd::DpchAppData::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppDlgWdbeCvrBsccdData"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppDlgWdbeCvrBsccdData"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -1216,15 +1214,14 @@ string DlgWdbeCvrBsccd::DpchAppDo::getSrefsMask() {
 };
 
 void DlgWdbeCvrBsccd::DpchAppDo::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppDlgWdbeCvrBsccdDo"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppDlgWdbeCvrBsccdDo"];}();
 
 	basefound = (me != Json::nullValue);
 

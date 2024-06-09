@@ -23,11 +23,8 @@ WdbeQRlsList::WdbeQRlsList(
 			, const uint jnum
 			, const ubigint ref
 			, const string sref
-			, const uint ixVBasetype
-			, const string srefIxVBasetype
-			, const string titIxVBasetype
-			, const ubigint refWdbeMVersion
-			, const string stubRefWdbeMVersion
+			, const ubigint refWdbeMComponent
+			, const string stubRefWdbeMComponent
 			, const ubigint refWdbeMMachine
 			, const string stubRefWdbeMMachine
 		) {
@@ -36,11 +33,8 @@ WdbeQRlsList::WdbeQRlsList(
 	this->jnum = jnum;
 	this->ref = ref;
 	this->sref = sref;
-	this->ixVBasetype = ixVBasetype;
-	this->srefIxVBasetype = srefIxVBasetype;
-	this->titIxVBasetype = titIxVBasetype;
-	this->refWdbeMVersion = refWdbeMVersion;
-	this->stubRefWdbeMVersion = stubRefWdbeMVersion;
+	this->refWdbeMComponent = refWdbeMComponent;
+	this->stubRefWdbeMComponent = stubRefWdbeMComponent;
 	this->refWdbeMMachine = refWdbeMMachine;
 	this->stubRefWdbeMMachine = stubRefWdbeMMachine;
 };
@@ -55,15 +49,11 @@ void WdbeQRlsList::writeJSON(
 	if (jnumattr) me["jnum"] = jnum;
 	if (shorttags) {
 		me["srf"] = sref;
-		me["typ"] = srefIxVBasetype;
-		me["typ2"] = titIxVBasetype;
-		me["ver"] = stubRefWdbeMVersion;
+		me["cmp"] = stubRefWdbeMComponent;
 		me["mch"] = stubRefWdbeMMachine;
 	} else {
 		me["sref"] = sref;
-		me["srefIxVBasetype"] = srefIxVBasetype;
-		me["titIxVBasetype"] = titIxVBasetype;
-		me["stubRefWdbeMVersion"] = stubRefWdbeMVersion;
+		me["stubRefWdbeMComponent"] = stubRefWdbeMComponent;
 		me["stubRefWdbeMMachine"] = stubRefWdbeMMachine;
 	};
 };
@@ -80,15 +70,11 @@ void WdbeQRlsList::writeXML(
 	if (jnumattr) xmlTextWriterWriteAttribute(wr, BAD_CAST "jnum", BAD_CAST to_string(jnum).c_str());
 	if (shorttags) {
 		writeString(wr, "srf", sref);
-		writeString(wr, "typ", srefIxVBasetype);
-		writeString(wr, "typ2", titIxVBasetype);
-		writeString(wr, "ver", stubRefWdbeMVersion);
+		writeString(wr, "cmp", stubRefWdbeMComponent);
 		writeString(wr, "mch", stubRefWdbeMMachine);
 	} else {
 		writeString(wr, "sref", sref);
-		writeString(wr, "srefIxVBasetype", srefIxVBasetype);
-		writeString(wr, "titIxVBasetype", titIxVBasetype);
-		writeString(wr, "stubRefWdbeMVersion", stubRefWdbeMVersion);
+		writeString(wr, "stubRefWdbeMComponent", stubRefWdbeMComponent);
 		writeString(wr, "stubRefWdbeMMachine", stubRefWdbeMMachine);
 	};
 	xmlTextWriterEndElement(wr);
@@ -203,18 +189,15 @@ ubigint TblWdbeQRlsList::insertNewRec(
 			, const uint jnum
 			, const ubigint ref
 			, const string sref
-			, const uint ixVBasetype
-			, const string srefIxVBasetype
-			, const string titIxVBasetype
-			, const ubigint refWdbeMVersion
-			, const string stubRefWdbeMVersion
+			, const ubigint refWdbeMComponent
+			, const string stubRefWdbeMComponent
 			, const ubigint refWdbeMMachine
 			, const string stubRefWdbeMMachine
 		) {
 	ubigint retval = 0;
 	WdbeQRlsList* _rec = NULL;
 
-	_rec = new WdbeQRlsList(0, jref, jnum, ref, sref, ixVBasetype, srefIxVBasetype, titIxVBasetype, refWdbeMVersion, stubRefWdbeMVersion, refWdbeMMachine, stubRefWdbeMMachine);
+	_rec = new WdbeQRlsList(0, jref, jnum, ref, sref, refWdbeMComponent, stubRefWdbeMComponent, refWdbeMMachine, stubRefWdbeMMachine);
 	insertRec(_rec);
 
 	retval = _rec->qref;
@@ -232,18 +215,15 @@ ubigint TblWdbeQRlsList::appendNewRecToRst(
 			, const uint jnum
 			, const ubigint ref
 			, const string sref
-			, const uint ixVBasetype
-			, const string srefIxVBasetype
-			, const string titIxVBasetype
-			, const ubigint refWdbeMVersion
-			, const string stubRefWdbeMVersion
+			, const ubigint refWdbeMComponent
+			, const string stubRefWdbeMComponent
 			, const ubigint refWdbeMMachine
 			, const string stubRefWdbeMMachine
 		) {
 	ubigint retval = 0;
 	WdbeQRlsList* _rec = NULL;
 
-	retval = insertNewRec(&_rec, jref, jnum, ref, sref, ixVBasetype, srefIxVBasetype, titIxVBasetype, refWdbeMVersion, stubRefWdbeMVersion, refWdbeMMachine, stubRefWdbeMMachine);
+	retval = insertNewRec(&_rec, jref, jnum, ref, sref, refWdbeMComponent, stubRefWdbeMComponent, refWdbeMMachine, stubRefWdbeMMachine);
 	rst.nodes.push_back(_rec);
 
 	if (rec != NULL) *rec = _rec;
@@ -314,8 +294,8 @@ MyTblWdbeQRlsList::~MyTblWdbeQRlsList() {
 };
 
 void MyTblWdbeQRlsList::initStatements() {
-	stmtInsertRec = createStatement("INSERT INTO TblWdbeQRlsList (jref, jnum, ref, sref, ixVBasetype, refWdbeMVersion, refWdbeMMachine) VALUES (?,?,?,?,?,?,?)", false);
-	stmtUpdateRec = createStatement("UPDATE TblWdbeQRlsList SET jref = ?, jnum = ?, ref = ?, sref = ?, ixVBasetype = ?, refWdbeMVersion = ?, refWdbeMMachine = ? WHERE qref = ?", false);
+	stmtInsertRec = createStatement("INSERT INTO TblWdbeQRlsList (jref, jnum, ref, sref, refWdbeMComponent, refWdbeMMachine) VALUES (?,?,?,?,?,?)", false);
+	stmtUpdateRec = createStatement("UPDATE TblWdbeQRlsList SET jref = ?, jnum = ?, ref = ?, sref = ?, refWdbeMComponent = ?, refWdbeMMachine = ? WHERE qref = ?", false);
 	stmtRemoveRecByQref = createStatement("DELETE FROM TblWdbeQRlsList WHERE qref = ?", false);
 	stmtRemoveRstByJref = createStatement("DELETE FROM TblWdbeQRlsList WHERE jref = ?", false);
 };
@@ -351,9 +331,8 @@ bool MyTblWdbeQRlsList::loadRecBySQL(
 		if (dbrow[2]) _rec->jnum = atol((char*) dbrow[2]); else _rec->jnum = 0;
 		if (dbrow[3]) _rec->ref = atoll((char*) dbrow[3]); else _rec->ref = 0;
 		if (dbrow[4]) _rec->sref.assign(dbrow[4], dblengths[4]); else _rec->sref = "";
-		if (dbrow[5]) _rec->ixVBasetype = atol((char*) dbrow[5]); else _rec->ixVBasetype = 0;
-		if (dbrow[6]) _rec->refWdbeMVersion = atoll((char*) dbrow[6]); else _rec->refWdbeMVersion = 0;
-		if (dbrow[7]) _rec->refWdbeMMachine = atoll((char*) dbrow[7]); else _rec->refWdbeMMachine = 0;
+		if (dbrow[5]) _rec->refWdbeMComponent = atoll((char*) dbrow[5]); else _rec->refWdbeMComponent = 0;
+		if (dbrow[6]) _rec->refWdbeMMachine = atoll((char*) dbrow[6]); else _rec->refWdbeMMachine = 0;
 
 		retval = true;
 	};
@@ -401,9 +380,8 @@ ubigint MyTblWdbeQRlsList::loadRstBySQL(
 			if (dbrow[2]) rec->jnum = atol((char*) dbrow[2]); else rec->jnum = 0;
 			if (dbrow[3]) rec->ref = atoll((char*) dbrow[3]); else rec->ref = 0;
 			if (dbrow[4]) rec->sref.assign(dbrow[4], dblengths[4]); else rec->sref = "";
-			if (dbrow[5]) rec->ixVBasetype = atol((char*) dbrow[5]); else rec->ixVBasetype = 0;
-			if (dbrow[6]) rec->refWdbeMVersion = atoll((char*) dbrow[6]); else rec->refWdbeMVersion = 0;
-			if (dbrow[7]) rec->refWdbeMMachine = atoll((char*) dbrow[7]); else rec->refWdbeMMachine = 0;
+			if (dbrow[5]) rec->refWdbeMComponent = atoll((char*) dbrow[5]); else rec->refWdbeMComponent = 0;
+			if (dbrow[6]) rec->refWdbeMMachine = atoll((char*) dbrow[6]); else rec->refWdbeMMachine = 0;
 			rst.nodes.push_back(rec);
 
 			numread++;
@@ -418,7 +396,7 @@ ubigint MyTblWdbeQRlsList::loadRstBySQL(
 ubigint MyTblWdbeQRlsList::insertRec(
 			WdbeQRlsList* rec
 		) {
-	unsigned long l[7]; my_bool n[7]; my_bool e[7];
+	unsigned long l[6]; my_bool n[6]; my_bool e[6];
 
 	l[3] = rec->sref.length();
 
@@ -427,9 +405,8 @@ ubigint MyTblWdbeQRlsList::insertRec(
 		bindUint(&rec->jnum,&(l[1]),&(n[1]),&(e[1])),
 		bindUbigint(&rec->ref,&(l[2]),&(n[2]),&(e[2])),
 		bindCstring((char*) (rec->sref.c_str()),&(l[3]),&(n[3]),&(e[3])),
-		bindUint(&rec->ixVBasetype,&(l[4]),&(n[4]),&(e[4])),
-		bindUbigint(&rec->refWdbeMVersion,&(l[5]),&(n[5]),&(e[5])),
-		bindUbigint(&rec->refWdbeMMachine,&(l[6]),&(n[6]),&(e[6]))
+		bindUbigint(&rec->refWdbeMComponent,&(l[4]),&(n[4]),&(e[4])),
+		bindUbigint(&rec->refWdbeMMachine,&(l[5]),&(n[5]),&(e[5]))
 	};
 
 	if (mysql_stmt_bind_param(stmtInsertRec, bind)) {
@@ -454,7 +431,7 @@ void MyTblWdbeQRlsList::insertRst(
 void MyTblWdbeQRlsList::updateRec(
 			WdbeQRlsList* rec
 		) {
-	unsigned long l[8]; my_bool n[8]; my_bool e[8];
+	unsigned long l[7]; my_bool n[7]; my_bool e[7];
 
 	l[3] = rec->sref.length();
 
@@ -463,10 +440,9 @@ void MyTblWdbeQRlsList::updateRec(
 		bindUint(&rec->jnum,&(l[1]),&(n[1]),&(e[1])),
 		bindUbigint(&rec->ref,&(l[2]),&(n[2]),&(e[2])),
 		bindCstring((char*) (rec->sref.c_str()),&(l[3]),&(n[3]),&(e[3])),
-		bindUint(&rec->ixVBasetype,&(l[4]),&(n[4]),&(e[4])),
-		bindUbigint(&rec->refWdbeMVersion,&(l[5]),&(n[5]),&(e[5])),
-		bindUbigint(&rec->refWdbeMMachine,&(l[6]),&(n[6]),&(e[6])),
-		bindUbigint(&rec->qref,&(l[7]),&(n[7]),&(e[7]))
+		bindUbigint(&rec->refWdbeMComponent,&(l[4]),&(n[4]),&(e[4])),
+		bindUbigint(&rec->refWdbeMMachine,&(l[5]),&(n[5]),&(e[5])),
+		bindUbigint(&rec->qref,&(l[6]),&(n[6]),&(e[6]))
 	};
 
 	if (mysql_stmt_bind_param(stmtUpdateRec, bind)) {
@@ -555,13 +531,13 @@ PgTblWdbeQRlsList::~PgTblWdbeQRlsList() {
 };
 
 void PgTblWdbeQRlsList::initStatements() {
-	createStatement("TblWdbeQRlsList_insertRec", "INSERT INTO TblWdbeQRlsList (jref, jnum, ref, sref, ixVBasetype, refWdbeMVersion, refWdbeMMachine) VALUES ($1,$2,$3,$4,$5,$6,$7) RETURNING qref", 7);
-	createStatement("TblWdbeQRlsList_updateRec", "UPDATE TblWdbeQRlsList SET jref = $1, jnum = $2, ref = $3, sref = $4, ixVBasetype = $5, refWdbeMVersion = $6, refWdbeMMachine = $7 WHERE qref = $8", 8);
+	createStatement("TblWdbeQRlsList_insertRec", "INSERT INTO TblWdbeQRlsList (jref, jnum, ref, sref, refWdbeMComponent, refWdbeMMachine) VALUES ($1,$2,$3,$4,$5,$6) RETURNING qref", 6);
+	createStatement("TblWdbeQRlsList_updateRec", "UPDATE TblWdbeQRlsList SET jref = $1, jnum = $2, ref = $3, sref = $4, refWdbeMComponent = $5, refWdbeMMachine = $6 WHERE qref = $7", 7);
 	createStatement("TblWdbeQRlsList_removeRecByQref", "DELETE FROM TblWdbeQRlsList WHERE qref = $1", 1);
 	createStatement("TblWdbeQRlsList_removeRstByJref", "DELETE FROM TblWdbeQRlsList WHERE jref = $1", 1);
 
-	createStatement("TblWdbeQRlsList_loadRecByQref", "SELECT qref, jref, jnum, ref, sref, ixVBasetype, refWdbeMVersion, refWdbeMMachine FROM TblWdbeQRlsList WHERE qref = $1", 1);
-	createStatement("TblWdbeQRlsList_loadRstByJref", "SELECT qref, jref, jnum, ref, sref, ixVBasetype, refWdbeMVersion, refWdbeMMachine FROM TblWdbeQRlsList WHERE jref = $1 ORDER BY jnum ASC", 1);
+	createStatement("TblWdbeQRlsList_loadRecByQref", "SELECT qref, jref, jnum, ref, sref, refWdbeMComponent, refWdbeMMachine FROM TblWdbeQRlsList WHERE qref = $1", 1);
+	createStatement("TblWdbeQRlsList_loadRstByJref", "SELECT qref, jref, jnum, ref, sref, refWdbeMComponent, refWdbeMMachine FROM TblWdbeQRlsList WHERE jref = $1 ORDER BY jnum ASC", 1);
 };
 
 bool PgTblWdbeQRlsList::loadRec(
@@ -582,8 +558,7 @@ bool PgTblWdbeQRlsList::loadRec(
 			PQfnumber(res, "jnum"),
 			PQfnumber(res, "ref"),
 			PQfnumber(res, "sref"),
-			PQfnumber(res, "ixvbasetype"),
-			PQfnumber(res, "refwdbemversion"),
+			PQfnumber(res, "refwdbemcomponent"),
 			PQfnumber(res, "refwdbemmachine")
 		};
 
@@ -592,9 +567,8 @@ bool PgTblWdbeQRlsList::loadRec(
 		ptr = PQgetvalue(res, 0, fnum[2]); _rec->jnum = atol(ptr);
 		ptr = PQgetvalue(res, 0, fnum[3]); _rec->ref = atoll(ptr);
 		ptr = PQgetvalue(res, 0, fnum[4]); _rec->sref.assign(ptr, PQgetlength(res, 0, fnum[4]));
-		ptr = PQgetvalue(res, 0, fnum[5]); _rec->ixVBasetype = atol(ptr);
-		ptr = PQgetvalue(res, 0, fnum[6]); _rec->refWdbeMVersion = atoll(ptr);
-		ptr = PQgetvalue(res, 0, fnum[7]); _rec->refWdbeMMachine = atoll(ptr);
+		ptr = PQgetvalue(res, 0, fnum[5]); _rec->refWdbeMComponent = atoll(ptr);
+		ptr = PQgetvalue(res, 0, fnum[6]); _rec->refWdbeMMachine = atoll(ptr);
 
 		retval = true;
 	};
@@ -626,8 +600,7 @@ ubigint PgTblWdbeQRlsList::loadRst(
 			PQfnumber(res, "jnum"),
 			PQfnumber(res, "ref"),
 			PQfnumber(res, "sref"),
-			PQfnumber(res, "ixvbasetype"),
-			PQfnumber(res, "refwdbemversion"),
+			PQfnumber(res, "refwdbemcomponent"),
 			PQfnumber(res, "refwdbemmachine")
 		};
 
@@ -639,9 +612,8 @@ ubigint PgTblWdbeQRlsList::loadRst(
 			ptr = PQgetvalue(res, numread, fnum[2]); rec->jnum = atol(ptr);
 			ptr = PQgetvalue(res, numread, fnum[3]); rec->ref = atoll(ptr);
 			ptr = PQgetvalue(res, numread, fnum[4]); rec->sref.assign(ptr, PQgetlength(res, numread, fnum[4]));
-			ptr = PQgetvalue(res, numread, fnum[5]); rec->ixVBasetype = atol(ptr);
-			ptr = PQgetvalue(res, numread, fnum[6]); rec->refWdbeMVersion = atoll(ptr);
-			ptr = PQgetvalue(res, numread, fnum[7]); rec->refWdbeMMachine = atoll(ptr);
+			ptr = PQgetvalue(res, numread, fnum[5]); rec->refWdbeMComponent = atoll(ptr);
+			ptr = PQgetvalue(res, numread, fnum[6]); rec->refWdbeMMachine = atoll(ptr);
 
 			rst.nodes.push_back(rec);
 
@@ -737,8 +709,7 @@ ubigint PgTblWdbeQRlsList::insertRec(
 	ubigint _jref = htonl64(rec->jref);
 	uint _jnum = htonl(rec->jnum);
 	ubigint _ref = htonl64(rec->ref);
-	uint _ixVBasetype = htonl(rec->ixVBasetype);
-	ubigint _refWdbeMVersion = htonl64(rec->refWdbeMVersion);
+	ubigint _refWdbeMComponent = htonl64(rec->refWdbeMComponent);
 	ubigint _refWdbeMMachine = htonl64(rec->refWdbeMMachine);
 
 	const char* vals[] = {
@@ -746,8 +717,7 @@ ubigint PgTblWdbeQRlsList::insertRec(
 		(char*) &_jnum,
 		(char*) &_ref,
 		rec->sref.c_str(),
-		(char*) &_ixVBasetype,
-		(char*) &_refWdbeMVersion,
+		(char*) &_refWdbeMComponent,
 		(char*) &_refWdbeMMachine
 	};
 	const int l[] = {
@@ -755,13 +725,12 @@ ubigint PgTblWdbeQRlsList::insertRec(
 		sizeof(uint),
 		sizeof(ubigint),
 		0,
-		sizeof(uint),
 		sizeof(ubigint),
 		sizeof(ubigint)
 	};
-	const int f[] = {1, 1, 1, 0, 1, 1, 1};
+	const int f[] = {1, 1, 1, 0, 1, 1};
 
-	res = PQexecPrepared(dbs, "TblWdbeQRlsList_insertRec", 7, vals, l, f, 0);
+	res = PQexecPrepared(dbs, "TblWdbeQRlsList_insertRec", 6, vals, l, f, 0);
 
 	if (PQresultStatus(res) != PGRES_TUPLES_OK)	{
 		string dbms = "PgTblWdbeQRlsList::insertRec() / " + string(PQerrorMessage(dbs));
@@ -789,8 +758,7 @@ void PgTblWdbeQRlsList::updateRec(
 	ubigint _jref = htonl64(rec->jref);
 	uint _jnum = htonl(rec->jnum);
 	ubigint _ref = htonl64(rec->ref);
-	uint _ixVBasetype = htonl(rec->ixVBasetype);
-	ubigint _refWdbeMVersion = htonl64(rec->refWdbeMVersion);
+	ubigint _refWdbeMComponent = htonl64(rec->refWdbeMComponent);
 	ubigint _refWdbeMMachine = htonl64(rec->refWdbeMMachine);
 	ubigint _qref = htonl64(rec->qref);
 
@@ -799,8 +767,7 @@ void PgTblWdbeQRlsList::updateRec(
 		(char*) &_jnum,
 		(char*) &_ref,
 		rec->sref.c_str(),
-		(char*) &_ixVBasetype,
-		(char*) &_refWdbeMVersion,
+		(char*) &_refWdbeMComponent,
 		(char*) &_refWdbeMMachine,
 		(char*) &_qref
 	};
@@ -809,14 +776,13 @@ void PgTblWdbeQRlsList::updateRec(
 		sizeof(uint),
 		sizeof(ubigint),
 		0,
-		sizeof(uint),
 		sizeof(ubigint),
 		sizeof(ubigint),
 		sizeof(ubigint)
 	};
-	const int f[] = {1, 1, 1, 0, 1, 1, 1, 1};
+	const int f[] = {1, 1, 1, 0, 1, 1, 1};
 
-	res = PQexecPrepared(dbs, "TblWdbeQRlsList_updateRec", 8, vals, l, f, 0);
+	res = PQexecPrepared(dbs, "TblWdbeQRlsList_updateRec", 7, vals, l, f, 0);
 
 	if (PQresultStatus(res) != PGRES_COMMAND_OK) {
 		string dbms = "PgTblWdbeQRlsList::updateRec() / " + string(PQerrorMessage(dbs));

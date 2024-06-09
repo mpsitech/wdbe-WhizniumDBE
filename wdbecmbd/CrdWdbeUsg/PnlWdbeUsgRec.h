@@ -14,9 +14,9 @@
 
 // IP include.cust --- INSERT
 
-#include "PnlWdbeUsgDetail.h"
-#include "PnlWdbeUsgAAccess.h"
 #include "PnlWdbeUsgMNUser.h"
+#include "PnlWdbeUsgAAccess.h"
+#include "PnlWdbeUsgDetail.h"
 
 #define VecVWdbeUsgRecDo PnlWdbeUsgRec::VecVDo
 
@@ -135,7 +135,7 @@ public:
 	public:
 		std::string getSrefsMask();
 
-		void readJSON(Json::Value& sup, bool addbasetag = false);
+		void readJSON(const Json::Value& sup, bool addbasetag = false);
 		void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 	};
 
@@ -177,9 +177,9 @@ public:
 	ContInf continf;
 	StatShr statshr;
 
-	PnlWdbeUsgDetail* pnldetail;
-	PnlWdbeUsgAAccess* pnlaaccess;
 	PnlWdbeUsgMNUser* pnlmnuser;
+	PnlWdbeUsgAAccess* pnlaaccess;
+	PnlWdbeUsgDetail* pnldetail;
 
 	WdbeMUsergroup recUsg;
 

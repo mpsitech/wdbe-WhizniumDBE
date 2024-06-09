@@ -30,9 +30,10 @@ uint TblWdbeMModule::VecVBasetype::getIx(
 	if (s == "mnfcore") return MNFCORE;
 	if (s == "mnfprim") return MNFPRIM;
 	if (s == "ctr") return CTR;
-	if (s == "fwdctr") return FWDCTR;
 	if (s == "ectr") return ECTR;
-	if (s == "wrp") return WRP;
+	if (s == "dbg") return DBG;
+	if (s == "dbgctr") return DBGCTR;
+	if (s == "edbgctr") return EDBGCTR;
 	if (s == "oth") return OTH;
 
 	return(0);
@@ -51,9 +52,10 @@ string TblWdbeMModule::VecVBasetype::getSref(
 	if (ix == MNFCORE) return("mnfcore");
 	if (ix == MNFPRIM) return("mnfprim");
 	if (ix == CTR) return("ctr");
-	if (ix == FWDCTR) return("fwdctr");
 	if (ix == ECTR) return("ectr");
-	if (ix == WRP) return("wrp");
+	if (ix == DBG) return("dbg");
+	if (ix == DBGCTR) return("dbgctr");
+	if (ix == EDBGCTR) return("edbgctr");
 	if (ix == OTH) return("oth");
 
 	return("");
@@ -74,9 +76,10 @@ string TblWdbeMModule::VecVBasetype::getTitle(
 		if (ix == MNFCORE) return("manufacturer core");
 		if (ix == MNFPRIM) return("manufacturer primitive");
 		if (ix == CTR) return("controller");
-		if (ix == FWDCTR) return("forwarding controller");
 		if (ix == ECTR) return("easy model controller");
-		if (ix == WRP) return("wrapper");
+		if (ix == DBG) return("debug");
+		if (ix == DBGCTR) return("debug controller");
+		if (ix == EDBGCTR) return("easy model debug controller");
 		if (ix == OTH) return("other");
 		return(getSref(ix));
 	};
@@ -90,7 +93,7 @@ void TblWdbeMModule::VecVBasetype::fillFeed(
 		) {
 	feed.clear();
 
-	for (unsigned int i = 1; i <= 14; i++) feed.appendIxSrefTitles(i, getSref(i), getTitle(i, ixWdbeVLocale));
+	for (unsigned int i = 1; i <= 15; i++) feed.appendIxSrefTitles(i, getSref(i), getTitle(i, ixWdbeVLocale));
 };
 
 /******************************************************************************

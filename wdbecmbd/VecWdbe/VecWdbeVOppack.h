@@ -33,6 +33,7 @@ namespace VecWdbeVOppack {
 	const Sbecore::uint WDBEWRDEV = 15;
 	const Sbecore::uint WDBEWRFPGA = 16;
 	const Sbecore::uint WDBEWRMCU = 17;
+	const Sbecore::uint WDBEWRTERM = 18;
 
 	Sbecore::uint getIx(const std::string& sref);
 	std::string getSref(const Sbecore::uint ix);

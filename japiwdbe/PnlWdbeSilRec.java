@@ -118,13 +118,11 @@ public class PnlWdbeSilRec {
 		public static final int INITDONE1NPERIPHERAL = 3;
 		public static final int INITDONESIL1NUNIT = 4;
 		public static final int INITDONE1NBANK = 5;
-		public static final int INITDONEFWD1NCONTROLLER = 6;
-		public static final int INITDONE1NTARGET = 7;
+		public static final int INITDONEHK1NMODULE = 6;
+		public static final int INITDONEREF1NERROR = 7;
 		public static final int INITDONEREF1NSIGNAL = 8;
-		public static final int INITDONEREF1NERROR = 9;
-		public static final int INITDONEHK1NVECTOR = 10;
-		public static final int INITDONEHK1NMODULE = 11;
-		public static final int INITDONEREF1NCOMMAND = 12;
+		public static final int INITDONEHK1NVECTOR = 9;
+		public static final int INITDONEREF1NCOMMAND = 10;
 
 		public StatApp(
 					boolean initdoneDetail
@@ -132,12 +130,10 @@ public class PnlWdbeSilRec {
 					, boolean initdone1NPeripheral
 					, boolean initdoneSil1NUnit
 					, boolean initdone1NBank
-					, boolean initdoneFwd1NController
-					, boolean initdone1NTarget
-					, boolean initdoneRef1NSignal
-					, boolean initdoneRef1NError
-					, boolean initdoneHk1NVector
 					, boolean initdoneHk1NModule
+					, boolean initdoneRef1NError
+					, boolean initdoneRef1NSignal
+					, boolean initdoneHk1NVector
 					, boolean initdoneRef1NCommand
 				) {
 			this.initdoneDetail = initdoneDetail;
@@ -145,15 +141,13 @@ public class PnlWdbeSilRec {
 			this.initdone1NPeripheral = initdone1NPeripheral;
 			this.initdoneSil1NUnit = initdoneSil1NUnit;
 			this.initdone1NBank = initdone1NBank;
-			this.initdoneFwd1NController = initdoneFwd1NController;
-			this.initdone1NTarget = initdone1NTarget;
-			this.initdoneRef1NSignal = initdoneRef1NSignal;
-			this.initdoneRef1NError = initdoneRef1NError;
-			this.initdoneHk1NVector = initdoneHk1NVector;
 			this.initdoneHk1NModule = initdoneHk1NModule;
+			this.initdoneRef1NError = initdoneRef1NError;
+			this.initdoneRef1NSignal = initdoneRef1NSignal;
+			this.initdoneHk1NVector = initdoneHk1NVector;
 			this.initdoneRef1NCommand = initdoneRef1NCommand;
 
-			mask = new HashSet<Integer>(Arrays.asList(INITDONEDETAIL, INITDONE1NINTERRUPT, INITDONE1NPERIPHERAL, INITDONESIL1NUNIT, INITDONE1NBANK, INITDONEFWD1NCONTROLLER, INITDONE1NTARGET, INITDONEREF1NSIGNAL, INITDONEREF1NERROR, INITDONEHK1NVECTOR, INITDONEHK1NMODULE, INITDONEREF1NCOMMAND));
+			mask = new HashSet<Integer>(Arrays.asList(INITDONEDETAIL, INITDONE1NINTERRUPT, INITDONE1NPERIPHERAL, INITDONESIL1NUNIT, INITDONE1NBANK, INITDONEHK1NMODULE, INITDONEREF1NERROR, INITDONEREF1NSIGNAL, INITDONEHK1NVECTOR, INITDONEREF1NCOMMAND));
 		};
 
 		public boolean initdoneDetail;
@@ -161,12 +155,10 @@ public class PnlWdbeSilRec {
 		public boolean initdone1NPeripheral;
 		public boolean initdoneSil1NUnit;
 		public boolean initdone1NBank;
-		public boolean initdoneFwd1NController;
-		public boolean initdone1NTarget;
-		public boolean initdoneRef1NSignal;
-		public boolean initdoneRef1NError;
-		public boolean initdoneHk1NVector;
 		public boolean initdoneHk1NModule;
+		public boolean initdoneRef1NError;
+		public boolean initdoneRef1NSignal;
+		public boolean initdoneHk1NVector;
 		public boolean initdoneRef1NCommand;
 
 		public boolean readXML(
@@ -187,12 +179,10 @@ public class PnlWdbeSilRec {
 				initdone1NPeripheral = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdone1NPeripheral", mask, INITDONE1NPERIPHERAL);
 				initdoneSil1NUnit = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneSil1NUnit", mask, INITDONESIL1NUNIT);
 				initdone1NBank = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdone1NBank", mask, INITDONE1NBANK);
-				initdoneFwd1NController = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneFwd1NController", mask, INITDONEFWD1NCONTROLLER);
-				initdone1NTarget = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdone1NTarget", mask, INITDONE1NTARGET);
-				initdoneRef1NSignal = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneRef1NSignal", mask, INITDONEREF1NSIGNAL);
-				initdoneRef1NError = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneRef1NError", mask, INITDONEREF1NERROR);
-				initdoneHk1NVector = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneHk1NVector", mask, INITDONEHK1NVECTOR);
 				initdoneHk1NModule = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneHk1NModule", mask, INITDONEHK1NMODULE);
+				initdoneRef1NError = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneRef1NError", mask, INITDONEREF1NERROR);
+				initdoneRef1NSignal = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneRef1NSignal", mask, INITDONEREF1NSIGNAL);
+				initdoneHk1NVector = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneHk1NVector", mask, INITDONEHK1NVECTOR);
 				initdoneRef1NCommand = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneRef1NCommand", mask, INITDONEREF1NCOMMAND);
 
 				return true;
@@ -211,12 +201,10 @@ public class PnlWdbeSilRec {
 			if (initdone1NPeripheral == comp.initdone1NPeripheral) items.add(INITDONE1NPERIPHERAL);
 			if (initdoneSil1NUnit == comp.initdoneSil1NUnit) items.add(INITDONESIL1NUNIT);
 			if (initdone1NBank == comp.initdone1NBank) items.add(INITDONE1NBANK);
-			if (initdoneFwd1NController == comp.initdoneFwd1NController) items.add(INITDONEFWD1NCONTROLLER);
-			if (initdone1NTarget == comp.initdone1NTarget) items.add(INITDONE1NTARGET);
-			if (initdoneRef1NSignal == comp.initdoneRef1NSignal) items.add(INITDONEREF1NSIGNAL);
-			if (initdoneRef1NError == comp.initdoneRef1NError) items.add(INITDONEREF1NERROR);
-			if (initdoneHk1NVector == comp.initdoneHk1NVector) items.add(INITDONEHK1NVECTOR);
 			if (initdoneHk1NModule == comp.initdoneHk1NModule) items.add(INITDONEHK1NMODULE);
+			if (initdoneRef1NError == comp.initdoneRef1NError) items.add(INITDONEREF1NERROR);
+			if (initdoneRef1NSignal == comp.initdoneRef1NSignal) items.add(INITDONEREF1NSIGNAL);
+			if (initdoneHk1NVector == comp.initdoneHk1NVector) items.add(INITDONEHK1NVECTOR);
 			if (initdoneRef1NCommand == comp.initdoneRef1NCommand) items.add(INITDONEREF1NCOMMAND);
 
 			return(items);
@@ -230,7 +218,7 @@ public class PnlWdbeSilRec {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(INITDONEDETAIL, INITDONE1NINTERRUPT, INITDONE1NPERIPHERAL, INITDONESIL1NUNIT, INITDONE1NBANK, INITDONEFWD1NCONTROLLER, INITDONE1NTARGET, INITDONEREF1NSIGNAL, INITDONEREF1NERROR, INITDONEHK1NVECTOR, INITDONEHK1NMODULE, INITDONEREF1NCOMMAND));
+			diffitems = new HashSet<Integer>(Arrays.asList(INITDONEDETAIL, INITDONE1NINTERRUPT, INITDONE1NPERIPHERAL, INITDONESIL1NUNIT, INITDONE1NBANK, INITDONEHK1NMODULE, INITDONEREF1NERROR, INITDONEREF1NSIGNAL, INITDONEHK1NVECTOR, INITDONEREF1NCOMMAND));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);
@@ -249,14 +237,12 @@ public class PnlWdbeSilRec {
 		public static final int SCRJREF1NPERIPHERAL = 4;
 		public static final int SCRJREFSIL1NUNIT = 5;
 		public static final int SCRJREF1NBANK = 6;
-		public static final int SCRJREFFWD1NCONTROLLER = 7;
-		public static final int SCRJREF1NTARGET = 8;
+		public static final int SCRJREFHK1NMODULE = 7;
+		public static final int SCRJREFREF1NERROR = 8;
 		public static final int SCRJREFREF1NSIGNAL = 9;
-		public static final int SCRJREFREF1NERROR = 10;
-		public static final int SCRJREFHK1NVECTOR = 11;
-		public static final int SCRJREFHK1NMODULE = 12;
-		public static final int SCRJREFREF1NCOMMAND = 13;
-		public static final int BUTREGULARIZEACTIVE = 14;
+		public static final int SCRJREFHK1NVECTOR = 10;
+		public static final int SCRJREFREF1NCOMMAND = 11;
+		public static final int BUTREGULARIZEACTIVE = 12;
 
 		public StatShr(
 					int ixWdbeVExpstate
@@ -265,12 +251,10 @@ public class PnlWdbeSilRec {
 					, String scrJref1NPeripheral
 					, String scrJrefSil1NUnit
 					, String scrJref1NBank
-					, String scrJrefFwd1NController
-					, String scrJref1NTarget
-					, String scrJrefRef1NSignal
-					, String scrJrefRef1NError
-					, String scrJrefHk1NVector
 					, String scrJrefHk1NModule
+					, String scrJrefRef1NError
+					, String scrJrefRef1NSignal
+					, String scrJrefHk1NVector
 					, String scrJrefRef1NCommand
 					, boolean ButRegularizeActive
 				) {
@@ -280,16 +264,14 @@ public class PnlWdbeSilRec {
 			this.scrJref1NPeripheral = scrJref1NPeripheral;
 			this.scrJrefSil1NUnit = scrJrefSil1NUnit;
 			this.scrJref1NBank = scrJref1NBank;
-			this.scrJrefFwd1NController = scrJrefFwd1NController;
-			this.scrJref1NTarget = scrJref1NTarget;
-			this.scrJrefRef1NSignal = scrJrefRef1NSignal;
-			this.scrJrefRef1NError = scrJrefRef1NError;
-			this.scrJrefHk1NVector = scrJrefHk1NVector;
 			this.scrJrefHk1NModule = scrJrefHk1NModule;
+			this.scrJrefRef1NError = scrJrefRef1NError;
+			this.scrJrefRef1NSignal = scrJrefRef1NSignal;
+			this.scrJrefHk1NVector = scrJrefHk1NVector;
 			this.scrJrefRef1NCommand = scrJrefRef1NCommand;
 			this.ButRegularizeActive = ButRegularizeActive;
 
-			mask = new HashSet<Integer>(Arrays.asList(IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREF1NINTERRUPT, SCRJREF1NPERIPHERAL, SCRJREFSIL1NUNIT, SCRJREF1NBANK, SCRJREFFWD1NCONTROLLER, SCRJREF1NTARGET, SCRJREFREF1NSIGNAL, SCRJREFREF1NERROR, SCRJREFHK1NVECTOR, SCRJREFHK1NMODULE, SCRJREFREF1NCOMMAND, BUTREGULARIZEACTIVE));
+			mask = new HashSet<Integer>(Arrays.asList(IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREF1NINTERRUPT, SCRJREF1NPERIPHERAL, SCRJREFSIL1NUNIT, SCRJREF1NBANK, SCRJREFHK1NMODULE, SCRJREFREF1NERROR, SCRJREFREF1NSIGNAL, SCRJREFHK1NVECTOR, SCRJREFREF1NCOMMAND, BUTREGULARIZEACTIVE));
 		};
 
 		public int ixWdbeVExpstate;
@@ -298,12 +280,10 @@ public class PnlWdbeSilRec {
 		public String scrJref1NPeripheral;
 		public String scrJrefSil1NUnit;
 		public String scrJref1NBank;
-		public String scrJrefFwd1NController;
-		public String scrJref1NTarget;
-		public String scrJrefRef1NSignal;
-		public String scrJrefRef1NError;
-		public String scrJrefHk1NVector;
 		public String scrJrefHk1NModule;
+		public String scrJrefRef1NError;
+		public String scrJrefRef1NSignal;
+		public String scrJrefHk1NVector;
 		public String scrJrefRef1NCommand;
 		public boolean ButRegularizeActive;
 
@@ -328,12 +308,10 @@ public class PnlWdbeSilRec {
 				scrJref1NPeripheral = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJref1NPeripheral", mask, SCRJREF1NPERIPHERAL);
 				scrJrefSil1NUnit = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefSil1NUnit", mask, SCRJREFSIL1NUNIT);
 				scrJref1NBank = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJref1NBank", mask, SCRJREF1NBANK);
-				scrJrefFwd1NController = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefFwd1NController", mask, SCRJREFFWD1NCONTROLLER);
-				scrJref1NTarget = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJref1NTarget", mask, SCRJREF1NTARGET);
-				scrJrefRef1NSignal = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefRef1NSignal", mask, SCRJREFREF1NSIGNAL);
-				scrJrefRef1NError = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefRef1NError", mask, SCRJREFREF1NERROR);
-				scrJrefHk1NVector = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefHk1NVector", mask, SCRJREFHK1NVECTOR);
 				scrJrefHk1NModule = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefHk1NModule", mask, SCRJREFHK1NMODULE);
+				scrJrefRef1NError = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefRef1NError", mask, SCRJREFREF1NERROR);
+				scrJrefRef1NSignal = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefRef1NSignal", mask, SCRJREFREF1NSIGNAL);
+				scrJrefHk1NVector = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefHk1NVector", mask, SCRJREFHK1NVECTOR);
 				scrJrefRef1NCommand = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefRef1NCommand", mask, SCRJREFREF1NCOMMAND);
 				ButRegularizeActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButRegularizeActive", mask, BUTREGULARIZEACTIVE);
 
@@ -354,12 +332,10 @@ public class PnlWdbeSilRec {
 			if (scrJref1NPeripheral.equals(comp.scrJref1NPeripheral)) items.add(SCRJREF1NPERIPHERAL);
 			if (scrJrefSil1NUnit.equals(comp.scrJrefSil1NUnit)) items.add(SCRJREFSIL1NUNIT);
 			if (scrJref1NBank.equals(comp.scrJref1NBank)) items.add(SCRJREF1NBANK);
-			if (scrJrefFwd1NController.equals(comp.scrJrefFwd1NController)) items.add(SCRJREFFWD1NCONTROLLER);
-			if (scrJref1NTarget.equals(comp.scrJref1NTarget)) items.add(SCRJREF1NTARGET);
-			if (scrJrefRef1NSignal.equals(comp.scrJrefRef1NSignal)) items.add(SCRJREFREF1NSIGNAL);
-			if (scrJrefRef1NError.equals(comp.scrJrefRef1NError)) items.add(SCRJREFREF1NERROR);
-			if (scrJrefHk1NVector.equals(comp.scrJrefHk1NVector)) items.add(SCRJREFHK1NVECTOR);
 			if (scrJrefHk1NModule.equals(comp.scrJrefHk1NModule)) items.add(SCRJREFHK1NMODULE);
+			if (scrJrefRef1NError.equals(comp.scrJrefRef1NError)) items.add(SCRJREFREF1NERROR);
+			if (scrJrefRef1NSignal.equals(comp.scrJrefRef1NSignal)) items.add(SCRJREFREF1NSIGNAL);
+			if (scrJrefHk1NVector.equals(comp.scrJrefHk1NVector)) items.add(SCRJREFHK1NVECTOR);
 			if (scrJrefRef1NCommand.equals(comp.scrJrefRef1NCommand)) items.add(SCRJREFREF1NCOMMAND);
 			if (ButRegularizeActive == comp.ButRegularizeActive) items.add(BUTREGULARIZEACTIVE);
 
@@ -374,7 +350,7 @@ public class PnlWdbeSilRec {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREF1NINTERRUPT, SCRJREF1NPERIPHERAL, SCRJREFSIL1NUNIT, SCRJREF1NBANK, SCRJREFFWD1NCONTROLLER, SCRJREF1NTARGET, SCRJREFREF1NSIGNAL, SCRJREFREF1NERROR, SCRJREFHK1NVECTOR, SCRJREFHK1NMODULE, SCRJREFREF1NCOMMAND, BUTREGULARIZEACTIVE));
+			diffitems = new HashSet<Integer>(Arrays.asList(IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREF1NINTERRUPT, SCRJREF1NPERIPHERAL, SCRJREFSIL1NUNIT, SCRJREF1NBANK, SCRJREFHK1NMODULE, SCRJREFREF1NERROR, SCRJREFREF1NSIGNAL, SCRJREFHK1NVECTOR, SCRJREFREF1NCOMMAND, BUTREGULARIZEACTIVE));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);
@@ -516,8 +492,8 @@ public class PnlWdbeSilRec {
 			super(VecWdbeVDpch.DPCHENGWDBESILRECDATA);
 
 			continf = new ContInf("");
-			statapp = new StatApp(false, false, false, false, false, false, false, false, false, false, false, false);
-			statshr = new StatShr(0, "", "", "", "", "", "", "", "", "", "", "", "", false);
+			statapp = new StatApp(false, false, false, false, false, false, false, false, false, false);
+			statshr = new StatShr(0, "", "", "", "", "", "", "", "", "", "", false);
 			tag = new Tag("");
 		};
 
@@ -557,8 +533,8 @@ public class PnlWdbeSilRec {
 			} else {
 				scrJref = "";
 				continf = new ContInf("");
-				statapp = new StatApp(false, false, false, false, false, false, false, false, false, false, false, false);
-				statshr = new StatShr(0, "", "", "", "", "", "", "", "", "", "", "", "", false);
+				statapp = new StatApp(false, false, false, false, false, false, false, false, false, false);
+				statshr = new StatShr(0, "", "", "", "", "", "", "", "", "", "", false);
 				tag = new Tag("");
 			};
 		};

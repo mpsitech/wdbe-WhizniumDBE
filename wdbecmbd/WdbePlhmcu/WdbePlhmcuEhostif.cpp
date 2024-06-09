@@ -40,17 +40,17 @@ DpchRetWdbePlhmcuEhostif* WdbePlhmcuEhostif::run(
 
 	// IP run --- IBEGIN
 
-	// sizeTxbuf
+	// sizeRetbuf
 
 	WdbeMModule* mdl = NULL;
 
-	unsigned int sizeRxbuf, sizeTxbuf;
+	unsigned int sizeInvbuf, sizeRetbuf;
 
 	if (dbswdbe->tblwdbemmodule->loadRecByRef(refWdbeMModule, &mdl)) {
-		Wdbe::getHostifSizeRxtxbuf(dbswdbe, mdl->hkUref, sizeRxbuf, sizeTxbuf);
+		Wdbe::getHostifSizeInvretbuf(dbswdbe, mdl->hkUref, sizeInvbuf, sizeRetbuf);
 
-		keys.push_back("sizeTxbuf");
-		vals.push_back(to_string(sizeTxbuf));
+		keys.push_back("sizeRetbuf");
+		vals.push_back(to_string(sizeRetbuf));
 
 		delete mdl;
 	};

@@ -88,9 +88,16 @@ void WdbeWrfpgaMdlraw::writeMdlVhd(
 	ListWdbeMSignal sigs;
 	map<string,WdbeMSignal*> srefsSigs;
 	WdbeMSignal* sig = NULL;
+	bool hashshk;
+
+	ListWdbeMCdc cdcs;
+	set<string> srefsCdcprcs;
+	WdbeMCdc* cdc = NULL;
 
 	ListWdbeMProcess prcs;
 	WdbeMProcess* prc = NULL;
+
+	WdbeMFsm* fsm = NULL;
 
 	ListWdbeMPort subprts;
 
@@ -128,27 +135,134 @@ void WdbeWrfpgaMdlraw::writeMdlVhd(
 	dbswdbe->tblwdbemgeneric->loadRstByMdl(mdl->ref, false, gens);
 
 	dbswdbe->tblwdbemport->loadRstByMdl(mdl->ref, false, prts);
+
+	// - port num conflict resolution
+
+	//if (mdl->sref == "hostif") {
+	//	cout << "hostif port order before:" << endl;
+	//	cout << "ref\trefC\tmdlNum\tsref" << endl;
+
+	//	for (unsigned int i = 0; i < prts.nodes.size(); i++) {
+	//		prt = prts.nodes[i];
+	//		cout << prt->ref << "\t" << prt->refWdbeCPort << "\t" << prt->mdlNum << "\t" << prt->sref << endl;
+	//	};
+
+	//	cout << endl;
+	//};
+
+	WdbeMPort* prt2 = NULL;
+
+	vector<unsigned int> icsPrts; // new order of prts
+	set<unsigned int> unqicsPrts; // ports already incorporated in icsPrts
+
+	uint dnum;
+
+	refC = 0;
+
+	// detemine new order
+	for (unsigned int i = 0; i < prts.nodes.size(); ) {
+		prt = prts.nodes[i];
+
+		if (unqicsPrts.find(i) == unqicsPrts.end()) {
+			unsigned int j1 = i; // determine range with same num
+			unsigned int j0 = i; // within, determine new first with prt num
+
+			for (unsigned int j = i + 1; j < prts.nodes.size(); j++) {
+				prt2 = prts.nodes[j];
+
+				if (unqicsPrts.find(j) == unqicsPrts.end()) {
+					if (prt2->mdlNum == prt->mdlNum) {
+						j1 = j;
+
+						if (prt2->sref < prts.nodes[j0]->sref) j0 = j;
+
+					} else break;
+				};
+			};
+
+			if (j1 == i) {
+				// no re-ordering required
+				icsPrts.push_back(i);
+				unqicsPrts.insert(i);
+
+			} else {
+				// entire cluster of new first with prt num comes next
+				icsPrts.push_back(j0);
+				unqicsPrts.insert(j0);
+				dnum = 1;
+
+				prt = prts.nodes[j0];
+
+				for (unsigned int j = j0 + 1; j < prts.nodes.size(); j++) {
+					prt2 = prts.nodes[j];
+
+					if (unqicsPrts.find(j) == unqicsPrts.end()) {
+						if (prt2->refWdbeCPort == prt->refWdbeCPort) {
+							prt2->mdlNum = prt->mdlNum + dnum++;
+
+							icsPrts.push_back(j);
+							unqicsPrts.insert(j);
+
+						};
+					};
+				};
+
+				for (unsigned int j = i; j < prts.nodes.size(); j++) {
+					prt2 = prts.nodes[j];
+
+					if (unqicsPrts.find(j) == unqicsPrts.end()) prt2->mdlNum += dnum;
+				};
+			};
+
+		} else i++;
+	};
+
+	// apply new order and reload
+	dbswdbe->tblwdbemport->updateRst(prts);
+
+	dbswdbe->tblwdbemport->loadRstByMdl(mdl->ref, false, prts);
+
+	//if (mdl->sref == "hostif") {
+	//	cout << "hostif port order after:" << endl;
+	//	cout << "ref\trefC\tmdlNum\tsref" << endl;
+
+	//	for (unsigned int i = 0; i < prts.nodes.size(); i++) {
+	//		prt = prts.nodes[i];
+	//		cout << prt->ref << "\t" << prt->refWdbeCPort << "\t" << prt->mdlNum << "\t" << prt->sref << endl;
+	//	};
+
+	//	cout << endl;
+	//};
+
 	for (unsigned int i = 0; i < prts.nodes.size(); i++) srefsPrts[prts.nodes[i]->ref] = prts.nodes[i]->sref;
+
+	hashshk = false;
 
 	dbswdbe->tblwdbemsignal->loadRstByRetReu(VecWdbeVMSignalRefTbl::MDL, mdl->ref, false, sigs);
 	for (unsigned int i = 0; i < sigs.nodes.size(); i++) {
 		sig = sigs.nodes[i];
 
+		if (sig->ixVBasetype == VecWdbeVMSignalBasetype::HSHK) hashshk = true;
+
 		srefsSigs[sig->sref] = sig;
 
-		if (sig->ixVBasetype == VecWdbeVMSignalBasetype::PSB) {
-			for (auto it = srefsPrts.begin(); it != srefsPrts.end(); it++) {
-				if (it->second == sig->sref) {
-					sig->sref += "_psb";
-					break;
-				};
-			};
-
-		} else if (sig->drvRefWdbeMPort != 0) {
+		if (sig->drvRefWdbeMPort != 0) {
 			auto it = srefsPrts.find(sig->drvRefWdbeMPort);
 			if (it != srefsPrts.end()) if (it->second == sig->sref) sig->sref += "_sig";
 		};
 	};
+
+	dbswdbe->tblwdbemcdc->loadRstByMdl(mdl->ref, false, cdcs);
+	for (unsigned int i = 0; i < cdcs.nodes.size(); i++) {
+		cdc = cdcs.nodes[i];
+
+		srefsCdcprcs.insert(cdc->fckSrefWdbeMSignal + "To" + StrMod::cap(cdc->sckSrefWdbeMSignal) + "Stretch");
+		srefsCdcprcs.insert(cdc->fckSrefWdbeMSignal + "To" + StrMod::cap(cdc->sckSrefWdbeMSignal) + "Sample");
+
+		srefsCdcprcs.insert(cdc->sckSrefWdbeMSignal + "To" + StrMod::cap(cdc->fckSrefWdbeMSignal) + "Stretch");
+		srefsCdcprcs.insert(cdc->sckSrefWdbeMSignal + "To" + StrMod::cap(cdc->fckSrefWdbeMSignal) + "Sample");
+	};
+
 
 	dbswdbe->tblwdbemprocess->loadRstByMdl(mdl->ref, false, prcs);
 	for (unsigned int i = 0; i < prcs.nodes.size(); i++) {
@@ -164,13 +278,20 @@ void WdbeWrfpgaMdlraw::writeMdlVhd(
 	// --- libs
 	outfile << "-- IP libs --- IBEGIN" << endl;
 
-	if ((srefKToolch == "ise") || (srefKToolch == "vivado")) {
+	if ((srefKToolch == "efinity") || (srefKToolch == "ise") || (srefKToolch == "vivado")) {
 		for (unsigned int i = 0; i < submdls.nodes.size(); i++) {
 			submdl = submdls.nodes[i];
 
 			if (submdl->ixVBasetype == VecWdbeVMModuleBasetype::MNFPRIM) {
-				outfile << "library unisim;" << endl;
-				outfile << "use unisim.vcomponents.all;" << endl;
+				if (srefKToolch == "efinity") {
+					outfile << "library efxphysicallib;" << endl;
+					outfile << "use efxphysicallib.efxcomponents.all;" << endl;
+
+				} else if ((srefKToolch == "ise") || (srefKToolch == "vivado")) {
+					outfile << "library unisim;" << endl;
+					outfile << "use unisim.vcomponents.all;" << endl;
+				};
+
 				outfile << endl;
 				break;
 			};
@@ -178,7 +299,7 @@ void WdbeWrfpgaMdlraw::writeMdlVhd(
 	};
 
 	outfile << "use work.Dbecore.all;" << endl;
-	if ((mdl->ixVBasetype == VecWdbeVMModuleBasetype::HOSTIF) || (mdl->ixVBasetype == VecWdbeVMModuleBasetype::FWDCTR)) outfile << "use work." << Prjshort << ".all;" << endl;
+	if (mdl->ixVBasetype == VecWdbeVMModuleBasetype::HOSTIF) outfile << "use work." << Prjshort << ".all;" << endl;
 	outfile << "use work." << Untsref << ".all;" << endl;
 
 	// additional libraries due to specific HDL types of module template / module, ports of sub-modules or signals
@@ -246,13 +367,13 @@ void WdbeWrfpgaMdlraw::writeMdlVhd(
 	Comment = "";
 	first = true;
 
-	for (unsigned int i = 0; i < icsMdc.size();i++) {
+	for (unsigned int i = 0; i < icsMdc.size(); i++) {
 		ixMdc = icsMdc[i];
 
 		for (unsigned int j = 0; j < prts.nodes.size(); j++) {
 			prt = prts.nodes[j];
 
-			if (prt->mdlIxVCat == ixMdc) {
+			if ( (prt->mdlIxVCat == ixMdc) || ((ixMdc == VecWdbeVMPortMdlCat::RESET) && (prt->mdlIxVCat == VecWdbeVMPortMdlCat::CLK)) ) {
 				if (first) {
 					outfile << endl;
 					first = false;
@@ -271,6 +392,8 @@ void WdbeWrfpgaMdlraw::writeMdlVhd(
 				Comment = prt->Comment;
 			};
 		};
+
+		if (ixMdc == VecWdbeVMPortMdlCat::RESET) i++;
 	};
 
 	if (Comment != "") outfile << " -- " << Comment;
@@ -283,7 +406,7 @@ void WdbeWrfpgaMdlraw::writeMdlVhd(
 	for (unsigned int i = 0; i < submdls.nodes.size(); i++) {
 		submdl = submdls.nodes[i];
 
-		if ( !(((srefKToolch == "ise") || (srefKToolch == "vivado")) && (submdl->ixVBasetype == VecWdbeVMModuleBasetype::MNFPRIM)) ) {
+		if ( !(((srefKToolch == "efinity") || (srefKToolch == "ise") || (srefKToolch == "vivado")) && (submdl->ixVBasetype == VecWdbeVMModuleBasetype::MNFPRIM)) ) {
 			compsref = Wdbe::getCompsref(dbswdbe, submdl);
 
 			if (compsrefs.find(compsref) == compsrefs.end()) {
@@ -292,7 +415,7 @@ void WdbeWrfpgaMdlraw::writeMdlVhd(
 
 				outfile << "\tcomponent " << StrMod::cap(compsref) << " is" << endl;
 				
-				dbswdbe->tblwdbemgeneric->loadRstByMdl(ref, false, gens);
+				dbswdbe->tblwdbemgeneric->loadRstByMdl(submdl->ref, false, gens);
 
 				if (gens.nodes.size() > 0) {
 					outfile << "\t\tgeneric (";
@@ -325,13 +448,13 @@ void WdbeWrfpgaMdlraw::writeMdlVhd(
 				refC = 0;
 				first = true;
 
-				for (unsigned int j = 0; j < icsMdc.size();j++) {
+				for (unsigned int j = 0; j < icsMdc.size(); j++) {
 					ixMdc = icsMdc[j];
 
 					for (unsigned int k = 0; k < prts.nodes.size(); k++) {
 						prt = prts.nodes[k];
 
-						if (prt->mdlIxVCat == ixMdc) {
+						if ( (prt->mdlIxVCat == ixMdc) || ((ixMdc == VecWdbeVMPortMdlCat::RESET) && (prt->mdlIxVCat == VecWdbeVMPortMdlCat::CLK)) ) {
 							if (first) {
 								outfile << endl;
 								first = false;
@@ -344,6 +467,8 @@ void WdbeWrfpgaMdlraw::writeMdlVhd(
 							refC = prt->refWdbeCPort;
 						};
 					};
+
+					if (ixMdc == VecWdbeVMPortMdlCat::RESET) j++;
 				};
 
 				outfile << endl << "\t\t);" << endl;
@@ -361,27 +486,32 @@ void WdbeWrfpgaMdlraw::writeMdlVhd(
 	outfile << "-- IP sigs --- IBEGIN" << endl;
 
 	// -- by processes
-	for (unsigned int i = 0; i < prcs.nodes.size(); i++) {
-		prc = prcs.nodes[i];
+	for (unsigned int j = 0; j < 2; j++) {
+		for (unsigned int i = 0; i < prcs.nodes.size(); i++) {
+			prc = prcs.nodes[i];
 
-		outfile << "\t---- " << prc->Comment << " (" << prc->sref << ")" << endl;
+			auto it = srefsCdcprcs.find(prc->sref);
+			if ( ((j == 0) && (it == srefsCdcprcs.end())) || ((j == 1) && (it != srefsCdcprcs.end())) ) {
+				outfile << "\t---- " << prc->Comment << " (" << prc->sref << ")" << endl;
 
-		if (prc->refWdbeMFsm != 0) {
-			outfile << "\t-- IP sigs." << prc->sref << ".fsm --- INSERT" << endl;
-			outfile << endl;
+				if (prc->refWdbeMFsm != 0) {
+					outfile << "\t-- IP sigs." << prc->sref << ".fsm --- INSERT" << endl;
+					outfile << endl;
+				};
+
+				outfile << "\t-- IP sigs." << prc->sref << ".typspec --- INSERT" << endl;
+				outfile << endl;
+
+				outfile << "\t-- IP sigs." << prc->sref << ".tplspec --- INSERT" << endl;
+				outfile << endl;
+
+				outfile << "\t-- IP sigs." << prc->sref << " --- INSERT" << endl;
+				outfile << endl;
+
+				outfile << "\t-- IP sigs." << prc->sref << ".cust --- INSERT" << endl;
+				outfile << endl;
+			};
 		};
-
-		outfile << "\t-- IP sigs." << prc->sref << ".typspec --- INSERT" << endl;
-		outfile << endl;
-
-		outfile << "\t-- IP sigs." << prc->sref << ".tplspec --- INSERT" << endl;
-		outfile << endl;
-
-		outfile << "\t-- IP sigs." << prc->sref << " --- INSERT" << endl;
-		outfile << endl;
-
-		outfile << "\t-- IP sigs." << prc->sref << ".cust --- INSERT" << endl;
-		outfile << endl;
 	};
 
 	// -- by sub-modules
@@ -407,16 +537,10 @@ void WdbeWrfpgaMdlraw::writeMdlVhd(
 	};
 
 	// -- handshake
-	for (unsigned int i = 0; i < sigs.nodes.size(); i++) {
-		sig = sigs.nodes[i];
-
-		if (sig->ixVBasetype == VecWdbeVMSignalBasetype::HSHK) {
-			outfile << "\t---- handshake" << endl;
-			outfile << "\t-- IP sigs.hshk --- INSERT" << endl;
-			outfile << endl;
-			
-			break;
-		};
+	if (hashshk) {
+		outfile << "\t---- handshake" << endl;
+		outfile << "\t-- IP sigs.hshk --- INSERT" << endl;
+		outfile << endl;
 	};
 	outfile << "-- IP sigs --- IEND" << endl;
 
@@ -489,13 +613,13 @@ void WdbeWrfpgaMdlraw::writeMdlVhd(
 		Comment = "";
 		first = true;
 
-		for (unsigned int j = 0; j < icsMdc.size();j++) {
+		for (unsigned int j = 0; j < icsMdc.size(); j++) {
 			ixMdc = icsMdc[j];
 
 			for (unsigned int k = 0; k < prts.nodes.size(); k++) {
 				prt = prts.nodes[k];
 
-				if (prt->mdlIxVCat == ixMdc) {
+				if ( (prt->mdlIxVCat == ixMdc) || ((ixMdc == VecWdbeVMPortMdlCat::RESET) && (prt->mdlIxVCat == VecWdbeVMPortMdlCat::CLK)) ) {
 					if (first) {
 						outfile << endl;
 						first = false;
@@ -518,7 +642,7 @@ void WdbeWrfpgaMdlraw::writeMdlVhd(
 							outfile << "(";
 							if (prt->srefWdbeKHdltype == "sl") outfile << to_string((int) from);
 							else if (prt->srefWdbeKHdltype == "slvup") outfile << to_string((int) from) << " to " << to_string((int) to);
-							else if (prt->srefWdbeKHdltype == "slvdn") outfile << to_string((int) to) << " downto " << to_string((int) from);
+							else if ((prt->srefWdbeKHdltype == "slvdn") || (prt->srefWdbeKHdltype == "sgn") || (prt->srefWdbeKHdltype == "usgn")) outfile << to_string((int) to) << " downto " << to_string((int) from);
 							outfile << ")";
 						};
 
@@ -542,7 +666,7 @@ void WdbeWrfpgaMdlraw::writeMdlVhd(
 								} else {
 									if (prt->srefWdbeKHdltype == "sl") outfile << to_string((int) from); // connect a sl port to a slv signal element
 									else if (sig->srefWdbeKHdltype == "slvup") outfile << to_string((int) from) << " to " << to_string((int) to);
-									else if (sig->srefWdbeKHdltype == "slvdn") outfile << to_string((int) to) << " downto " << to_string((int) from);
+									else if ((sig->srefWdbeKHdltype == "slvdn") || (prt->srefWdbeKHdltype == "sgn") || (prt->srefWdbeKHdltype == "usgn")) outfile << to_string((int) to) << " downto " << to_string((int) from);
 								};
 								outfile << ")";
 							};
@@ -557,8 +681,11 @@ void WdbeWrfpgaMdlraw::writeMdlVhd(
 
 					refC = prt->refWdbeCPort;
 					Comment = prt->Comment;
+
 				};
 			};
+
+			if (ixMdc == VecWdbeVMPortMdlCat::RESET) j++;
 		};
 
 		if (Comment != "") outfile << " -- " << Comment;
@@ -571,23 +698,40 @@ void WdbeWrfpgaMdlraw::writeMdlVhd(
 	// --- impl
 	outfile << "-- IP impl --- IBEGIN" << endl;
 
-	for (unsigned int i = 0; i < prcs.nodes.size(); i++) {
-		prc = prcs.nodes[i];
+	for (unsigned int j = 0; j < 2; j++) {
+		for (unsigned int i = 0; i < prcs.nodes.size(); i++) {
+			prc = prcs.nodes[i];
+
+			auto it = srefsCdcprcs.find(prc->sref);
+			if ( ((j == 0) && (it == srefsCdcprcs.end())) || ((j == 1) && (it != srefsCdcprcs.end())) ) {
 	
-		outfile << "\t------------------------------------------------------------------------" << endl;
-		outfile << "\t-- implementation: " << prc->Comment << " (" << prc->sref << ")" << endl;
-		outfile << "\t------------------------------------------------------------------------" << endl;
-		outfile << endl;
+				outfile << "\t------------------------------------------------------------------------" << endl;
+				outfile << "\t-- implementation: " << prc->Comment << " (" << prc->sref << ")" << endl;
+				outfile << "\t------------------------------------------------------------------------" << endl;
+				outfile << endl;
 
-		outfile << "\t-- IP impl." << prc->sref << ".wiring --- INSERT" << endl;
-		outfile << endl;
+				outfile << "\t-- IP impl." << prc->sref << ".wiring --- INSERT" << endl;
+				outfile << endl;
 
-		outfile << "\t-- IP impl." << prc->sref << ".rising --- INSERT" << endl;
-		outfile << endl;
+				if (prc->refWdbeMFsm != 0) {
+					if (dbswdbe->tblwdbemfsm->loadRecByRef(prc->refWdbeMFsm, &fsm)) {
+						if (fsm->ixVDbgtaptype != VecWdbeVMFsmDbgtaptype::VOID) {
+							outfile << "\t-- IP impl." << prc->sref << ".debug --- INSERT" << endl;
+							outfile << endl;
+						};
 
-		if (prc->Falling) {
-			outfile << "\t-- IP impl." << prc->sref << ".falling --- INSERT" << endl;
-			outfile << endl;
+						delete fsm;
+					};
+				};
+
+				outfile << "\t-- IP impl." << prc->sref << ".rising --- INSERT" << endl;
+				outfile << endl;
+
+				if (prc->Falling) {
+					outfile << "\t-- IP impl." << prc->sref << ".falling --- INSERT" << endl;
+					outfile << endl;
+				};
+			};
 		};
 	};
 
@@ -640,7 +784,6 @@ void WdbeWrfpgaMdlraw::fillIcsMdc(
 
 	push_back(icsMdc, VecWdbeVMPortMdlCat::RESET);
 	push_back(icsMdc, VecWdbeVMPortMdlCat::CLK);
-	push_back(icsMdc, VecWdbeVMPortMdlCat::RTEWRP);
 	push_back(icsMdc, VecWdbeVMPortMdlCat::RTETOP);
 	push_back(icsMdc, VecWdbeVMPortMdlCat::CMDBUS);
 	push_back(icsMdc, VecWdbeVMPortMdlCat::IMB);

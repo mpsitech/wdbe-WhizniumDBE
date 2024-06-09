@@ -52,9 +52,7 @@ function initBD(bNotD) {
 
 	// IP initBD --- BEGIN
 	initCpt(contcontdoc, "CptSrf", retrieveTi(srcdoc, "TagWdbeRlsDetail", "CptSrf"));
-	initCpt(contcontdoc, "CptTyp", retrieveTi(srcdoc, "TagWdbeRlsDetail", "CptTyp"));
-	refreshPup(contcontdoc, srcdoc, "PupTyp", "", "FeedFPupTyp", retrieveCi(srcdoc, "ContIacWdbeRlsDetail", "numFPupTyp"), retrieveSi(srcdoc, "StatShrWdbeRlsDetail", "PupTypActive"), false);
-	initCpt(contcontdoc, "CptVer", retrieveTi(srcdoc, "TagWdbeRlsDetail", "CptVer"));
+	initCpt(contcontdoc, "CptCmp", retrieveTi(srcdoc, "TagWdbeRlsDetail", "CptCmp"));
 	initCpt(contcontdoc, "CptMch", retrieveTi(srcdoc, "TagWdbeRlsDetail", "CptMch"));
 	initCpt(contcontdoc, "CptCmt", retrieveTi(srcdoc, "TagWdbeRlsDetail", "CptCmt"));
 	// IP initBD --- END
@@ -80,16 +78,14 @@ function refreshA() {
 function refreshBD(bNotD) {
 	if (!contcontdoc) return;
 
-	var height = 288; // full cont height
+	var height = 263; // full cont height
 
 	// IP refreshBD.vars --- BEGIN
 	var TxtSrfActive = (retrieveSi(srcdoc, "StatShrWdbeRlsDetail", "TxtSrfActive") == "true");
 
-	var PupTypActive = (retrieveSi(srcdoc, "StatShrWdbeRlsDetail", "PupTypActive") == "true");
-
-	var TxtVerActive = (retrieveSi(srcdoc, "StatShrWdbeRlsDetail", "TxtVerActive") == "true");
-	var ButVerViewAvail = (retrieveSi(srcdoc, "StatShrWdbeRlsDetail", "ButVerViewAvail") == "true");
-	var ButVerViewActive = (retrieveSi(srcdoc, "StatShrWdbeRlsDetail", "ButVerViewActive") == "true");
+	var TxtCmpActive = (retrieveSi(srcdoc, "StatShrWdbeRlsDetail", "TxtCmpActive") == "true");
+	var ButCmpViewAvail = (retrieveSi(srcdoc, "StatShrWdbeRlsDetail", "ButCmpViewAvail") == "true");
+	var ButCmpViewActive = (retrieveSi(srcdoc, "StatShrWdbeRlsDetail", "ButCmpViewActive") == "true");
 
 	var TxtMchActive = (retrieveSi(srcdoc, "StatShrWdbeRlsDetail", "TxtMchActive") == "true");
 	var ButMchViewAvail = (retrieveSi(srcdoc, "StatShrWdbeRlsDetail", "ButMchViewAvail") == "true");
@@ -109,24 +105,22 @@ function refreshBD(bNotD) {
 	// IP refreshBD --- BEGIN
 	refreshTxt(contcontdoc, "TxtSrf", retrieveCi(srcdoc, "ContInfWdbeRlsDetail", "TxtSrf"));
 
-	contcontdoc.getElementById("PupTyp").value = retrieveCi(srcdoc, "ContIacWdbeRlsDetail", "numFPupTyp");
-
-	if ((ButVerViewAvail == !contcontdoc.getElementById("ButVerView"))) {
-		mytd = contcontdoc.getElementById("rdynVer");
+	if ((ButCmpViewAvail == !contcontdoc.getElementById("ButCmpView"))) {
+		mytd = contcontdoc.getElementById("rdynCmp");
 		clearElem(mytd);
 
 		first = true;
 
-		if (ButVerViewAvail) {
+		if (ButCmpViewAvail) {
 			if (first) first = false;
 			else mytd.appendChild(contcontdoc.createTextNode("\u00a0"));
-			mytd.appendChild(makeImgBut(contcontdoc, "ButVerView", "icon/view"));
+			mytd.appendChild(makeImgBut(contcontdoc, "ButCmpView", "icon/view"));
 		};
 	};
 
-	refreshTxt(contcontdoc, "TxtVer", retrieveCi(srcdoc, "ContInfWdbeRlsDetail", "TxtVer"));
+	refreshTxt(contcontdoc, "TxtCmp", retrieveCi(srcdoc, "ContInfWdbeRlsDetail", "TxtCmp"));
 
-	if (ButVerViewAvail) refreshButicon(contcontdoc, "ButVerView", "icon/view", ButVerViewActive, false);
+	if (ButCmpViewAvail) refreshButicon(contcontdoc, "ButCmpView", "icon/view", ButCmpViewActive, false);
 
 	if ((ButMchViewAvail == !contcontdoc.getElementById("ButMchView"))) {
 		mytd = contcontdoc.getElementById("rdynMch");
@@ -386,16 +380,6 @@ function changeLstNumFirstdisp(lstdoc, ctlsref, ncol, multsel, numFirstdisp, dNu
 	};
 };
 
-function handlePupChange(_doc, ctlsref, size) {
-	var elem = _doc.getElementById(ctlsref);
-
-	elem.setAttribute("class", "pup" + size + "mod");
-	setCi(srcdoc, "ContIacWdbeRlsDetail", "numF" + ctlsref, elem.value);
-
-	var str = serializeDpchAppData(srcdoc, "DpchAppWdbeRlsDetailData", scrJref, "ContIacWdbeRlsDetail");
-	sendReq(str, doc, handleDpchAppDataDoReply);
-};
-
 function handleTxfKey(_doc, ctlsref, size, evt) {
 	var elem = _doc.getElementById(ctlsref);
 
@@ -450,7 +434,6 @@ function mergeDpchEngData(dom) {
 	if (updateSrcblock(dom, "DpchEngWdbeRlsDetailData", "ContIacWdbeRlsDetail", srcdoc)) mask.push("contiac");
 	if (updateSrcblock(dom, "DpchEngWdbeRlsDetailData", "ContInfWdbeRlsDetail", srcdoc)) mask.push("continf");
 	if (updateSrcblock(dom, "DpchEngWdbeRlsDetailData", "FeedFLstOpt", srcdoc)) mask.push("feedFLstOpt");
-	if (updateSrcblock(dom, "DpchEngWdbeRlsDetailData", "FeedFPupTyp", srcdoc)) mask.push("feedFPupTyp");
 	if (updateSrcblock(dom, "DpchEngWdbeRlsDetailData", "StatAppWdbeRlsDetail", srcdoc)) mask.push("statapp");
 	if (updateSrcblock(dom, "DpchEngWdbeRlsDetailData", "StatShrWdbeRlsDetail", srcdoc)) mask.push("statshr");
 	if (updateSrcblock(dom, "DpchEngWdbeRlsDetailData", "TagWdbeRlsDetail", srcdoc)) mask.push("tag");

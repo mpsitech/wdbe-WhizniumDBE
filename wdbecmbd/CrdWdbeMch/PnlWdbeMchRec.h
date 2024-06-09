@@ -14,11 +14,11 @@
 
 // IP include.cust --- INSERT
 
-#include "PnlWdbeMchDetail.h"
-#include "PnlWdbeMchAMakefile.h"
-#include "PnlWdbeMchAPar.h"
-#include "PnlWdbeMch1NRelease.h"
 #include "PnlWdbeMchSup1NMachine.h"
+#include "PnlWdbeMch1NRelease.h"
+#include "PnlWdbeMchAPar.h"
+#include "PnlWdbeMchAMakefile.h"
+#include "PnlWdbeMchDetail.h"
 
 #define VecVWdbeMchRecDo PnlWdbeMchRec::VecVDo
 
@@ -141,7 +141,7 @@ public:
 	public:
 		std::string getSrefsMask();
 
-		void readJSON(Json::Value& sup, bool addbasetag = false);
+		void readJSON(const Json::Value& sup, bool addbasetag = false);
 		void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 	};
 
@@ -183,11 +183,11 @@ public:
 	ContInf continf;
 	StatShr statshr;
 
-	PnlWdbeMchDetail* pnldetail;
-	PnlWdbeMchAMakefile* pnlamakefile;
-	PnlWdbeMchAPar* pnlapar;
-	PnlWdbeMch1NRelease* pnl1nrelease;
 	PnlWdbeMchSup1NMachine* pnlsup1nmachine;
+	PnlWdbeMch1NRelease* pnl1nrelease;
+	PnlWdbeMchAPar* pnlapar;
+	PnlWdbeMchAMakefile* pnlamakefile;
+	PnlWdbeMchDetail* pnldetail;
 
 	WdbeMMachine recMch;
 
@@ -221,9 +221,9 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeMch_cchEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
-	bool handleCallWdbeMch_supEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
 	bool handleCallWdbeMchUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbeMch_supEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeMch_cchEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
 
 };
 

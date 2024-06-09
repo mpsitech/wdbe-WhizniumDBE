@@ -63,7 +63,6 @@ public:
 
 	bool shorttags;
 
-	IexWdbeMdl::ImeIMSystem imeimsystem;
 	IexWdbeMdl::ImeIMUnit imeimunit;
 
 	// IP vars.cust --- INSERT

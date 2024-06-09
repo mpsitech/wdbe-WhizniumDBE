@@ -21,6 +21,7 @@
 			function handleTxfCmtChange() {parent.parent.window.handleTxftChange(document,"TxfCmt");};
 			function handleButFsmNewClick() {parent.parent.window.handleButClick("ButFsmNew");};
 			function handleButFsmDeleteClick() {parent.parent.window.handleButClick("ButFsmDelete");};
+			function handlePupFsmDttChange() {parent.parent.window.handlePupChange(document,"PupFsmDtt","");};
 			<!-- IP custScript - INSERT -->
 		</script>
 		<link href="../style/pnlDetail.css" rel="styleSheet" type="text/css"/>
@@ -157,6 +158,18 @@
 					<td colspan="2"></td>
 					<td id="dynFsm" colspan="8" align="left">
 					</td>
+				</tr>
+				<tr id="trFsmDtt" class="show">
+					<td height="25"></td>
+					<td align="right">
+						<span id="CptFsmDtt" class="cpt">CptFsmDtt</span>
+					</td>
+					<td></td>
+					<td colspan="5" align="left">
+						<select id="PupFsmDtt" class="pup" size="1" onchange="handlePupFsmDttChange()"/>
+					</td>
+					<td></td>
+					<td colspan="2"></td>
 				</tr>
 				<tr><td colspan="11" height="4"></td></tr>
 			</tbody>

@@ -66,24 +66,20 @@ namespace PnlWdbeVerRec {
 
 	public:
 		static const Sbecore::uint INITDONEDETAIL = 1;
-		static const Sbecore::uint INITDONE1NRELEASE = 2;
-		static const Sbecore::uint INITDONEBVR1NVERSION = 3;
-		static const Sbecore::uint INITDONE1NSYSTEM = 4;
-		static const Sbecore::uint INITDONE1NUNIT = 5;
-		static const Sbecore::uint INITDONEREF1NFILE = 6;
-		static const Sbecore::uint INITDONEMNLIBRARY = 7;
+		static const Sbecore::uint INITDONEBVR1NVERSION = 2;
+		static const Sbecore::uint INITDONE1NCOMPONENT = 3;
+		static const Sbecore::uint INITDONE1NUNIT = 4;
+		static const Sbecore::uint INITDONEREF1NFILE = 5;
 
 	public:
-		StatApp(const bool initdoneDetail = false, const bool initdone1NRelease = false, const bool initdoneBvr1NVersion = false, const bool initdone1NSystem = false, const bool initdone1NUnit = false, const bool initdoneRef1NFile = false, const bool initdoneMNLibrary = false);
+		StatApp(const bool initdoneDetail = false, const bool initdoneBvr1NVersion = false, const bool initdone1NComponent = false, const bool initdone1NUnit = false, const bool initdoneRef1NFile = false);
 
 	public:
 		bool initdoneDetail;
-		bool initdone1NRelease;
 		bool initdoneBvr1NVersion;
-		bool initdone1NSystem;
+		bool initdone1NComponent;
 		bool initdone1NUnit;
 		bool initdoneRef1NFile;
-		bool initdoneMNLibrary;
 
 	public:
 		bool readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
@@ -99,26 +95,22 @@ namespace PnlWdbeVerRec {
 	public:
 		static const Sbecore::uint IXWDBEVEXPSTATE = 1;
 		static const Sbecore::uint SCRJREFDETAIL = 2;
-		static const Sbecore::uint SCRJREF1NRELEASE = 3;
-		static const Sbecore::uint SCRJREFBVR1NVERSION = 4;
-		static const Sbecore::uint SCRJREF1NSYSTEM = 5;
-		static const Sbecore::uint SCRJREF1NUNIT = 6;
-		static const Sbecore::uint SCRJREFREF1NFILE = 7;
-		static const Sbecore::uint SCRJREFMNLIBRARY = 8;
-		static const Sbecore::uint BUTREGULARIZEACTIVE = 9;
+		static const Sbecore::uint SCRJREFBVR1NVERSION = 3;
+		static const Sbecore::uint SCRJREF1NCOMPONENT = 4;
+		static const Sbecore::uint SCRJREF1NUNIT = 5;
+		static const Sbecore::uint SCRJREFREF1NFILE = 6;
+		static const Sbecore::uint BUTREGULARIZEACTIVE = 7;
 
 	public:
-		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const std::string& scrJrefDetail = "", const std::string& scrJref1NRelease = "", const std::string& scrJrefBvr1NVersion = "", const std::string& scrJref1NSystem = "", const std::string& scrJref1NUnit = "", const std::string& scrJrefRef1NFile = "", const std::string& scrJrefMNLibrary = "", const bool ButRegularizeActive = true);
+		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const std::string& scrJrefDetail = "", const std::string& scrJrefBvr1NVersion = "", const std::string& scrJref1NComponent = "", const std::string& scrJref1NUnit = "", const std::string& scrJrefRef1NFile = "", const bool ButRegularizeActive = true);
 
 	public:
 		Sbecore::uint ixWdbeVExpstate;
 		std::string scrJrefDetail;
-		std::string scrJref1NRelease;
 		std::string scrJrefBvr1NVersion;
-		std::string scrJref1NSystem;
+		std::string scrJref1NComponent;
 		std::string scrJref1NUnit;
 		std::string scrJrefRef1NFile;
-		std::string scrJrefMNLibrary;
 		bool ButRegularizeActive;
 
 	public:

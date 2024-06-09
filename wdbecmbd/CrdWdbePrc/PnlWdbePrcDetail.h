@@ -61,9 +61,10 @@ public:
 		static const Sbecore::uint TXFSNR = 4;
 		static const Sbecore::uint CHKEIP = 5;
 		static const Sbecore::uint TXFCMT = 6;
+		static const Sbecore::uint NUMFPUPFSMDTT = 7;
 
 	public:
-		ContIac(const std::string& TxfClk = "", const std::string& TxfAsr = "", const bool ChkFal = false, const std::string& TxfSnr = "", const bool ChkEip = false, const std::string& TxfCmt = "");
+		ContIac(const std::string& TxfClk = "", const std::string& TxfAsr = "", const bool ChkFal = false, const std::string& TxfSnr = "", const bool ChkEip = false, const std::string& TxfCmt = "", const Sbecore::uint numFPupFsmDtt = 1);
 
 	public:
 		std::string TxfClk;
@@ -72,9 +73,10 @@ public:
 		std::string TxfSnr;
 		bool ChkEip;
 		std::string TxfCmt;
+		Sbecore::uint numFPupFsmDtt;
 
 	public:
-		bool readJSON(Json::Value& sup, bool addbasetag = false);
+		bool readJSON(const Json::Value& sup, bool addbasetag = false);
 		bool readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 		void writeJSON(Json::Value& sup, std::string difftag = "");
 		void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
@@ -143,9 +145,11 @@ public:
 		static const Sbecore::uint TXFCMTACTIVE = 16;
 		static const Sbecore::uint BUTFSMNEWAVAIL = 17;
 		static const Sbecore::uint BUTFSMDELETEAVAIL = 18;
+		static const Sbecore::uint PUPFSMDTTAVAIL = 19;
+		static const Sbecore::uint PUPFSMDTTACTIVE = 20;
 
 	public:
-		StatShr(const bool TxfClkValid = false, const bool TxfAsrValid = false, const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxtSrfActive = true, const bool TxtMdlActive = true, const bool ButMdlViewAvail = true, const bool ButMdlViewActive = true, const bool TxtClkActive = true, const bool ButClkViewAvail = true, const bool TxtAsrActive = true, const bool ButAsrViewAvail = true, const bool ChkFalActive = true, const bool TxfSnrActive = true, const bool ChkEipActive = true, const bool TxfCmtActive = true, const bool ButFsmNewAvail = true, const bool ButFsmDeleteAvail = true);
+		StatShr(const bool TxfClkValid = false, const bool TxfAsrValid = false, const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxtSrfActive = true, const bool TxtMdlActive = true, const bool ButMdlViewAvail = true, const bool ButMdlViewActive = true, const bool TxtClkActive = true, const bool ButClkViewAvail = true, const bool TxtAsrActive = true, const bool ButAsrViewAvail = true, const bool ChkFalActive = true, const bool TxfSnrActive = true, const bool ChkEipActive = true, const bool TxfCmtActive = true, const bool ButFsmNewAvail = true, const bool ButFsmDeleteAvail = true, const bool PupFsmDttAvail = true, const bool PupFsmDttActive = true);
 
 	public:
 		bool TxfClkValid;
@@ -166,6 +170,8 @@ public:
 		bool TxfCmtActive;
 		bool ButFsmNewAvail;
 		bool ButFsmDeleteAvail;
+		bool PupFsmDttAvail;
+		bool PupFsmDttActive;
 
 	public:
 		void writeJSON(Json::Value& sup, std::string difftag = "");
@@ -202,7 +208,7 @@ public:
 	public:
 		std::string getSrefsMask();
 
-		void readJSON(Json::Value& sup, bool addbasetag = false);
+		void readJSON(const Json::Value& sup, bool addbasetag = false);
 		void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 	};
 
@@ -224,7 +230,7 @@ public:
 	public:
 		std::string getSrefsMask();
 
-		void readJSON(Json::Value& sup, bool addbasetag = false);
+		void readJSON(const Json::Value& sup, bool addbasetag = false);
 		void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 	};
 
@@ -237,17 +243,19 @@ public:
 		static const Sbecore::uint JREF = 1;
 		static const Sbecore::uint CONTIAC = 2;
 		static const Sbecore::uint CONTINF = 3;
-		static const Sbecore::uint STATAPP = 4;
-		static const Sbecore::uint STATSHR = 5;
-		static const Sbecore::uint TAG = 6;
-		static const Sbecore::uint ALL = 7;
+		static const Sbecore::uint FEEDFPUPFSMDTT = 4;
+		static const Sbecore::uint STATAPP = 5;
+		static const Sbecore::uint STATSHR = 6;
+		static const Sbecore::uint TAG = 7;
+		static const Sbecore::uint ALL = 8;
 
 	public:
-		DpchEngData(const Sbecore::ubigint jref = 0, ContIac* contiac = NULL, ContInf* continf = NULL, StatShr* statshr = NULL, const std::set<Sbecore::uint>& mask = {NONE});
+		DpchEngData(const Sbecore::ubigint jref = 0, ContIac* contiac = NULL, ContInf* continf = NULL, Sbecore::Feed* feedFPupFsmDtt = NULL, StatShr* statshr = NULL, const std::set<Sbecore::uint>& mask = {NONE});
 
 	public:
 		ContIac contiac;
 		ContInf continf;
+		Sbecore::Feed feedFPupFsmDtt;
 		StatShr statshr;
 
 	public:
@@ -274,6 +282,8 @@ public:
 	bool evalTxfCmtActive(DbsWdbe* dbswdbe);
 	bool evalButFsmNewAvail(DbsWdbe* dbswdbe);
 	bool evalButFsmDeleteAvail(DbsWdbe* dbswdbe);
+	bool evalPupFsmDttAvail(DbsWdbe* dbswdbe);
+	bool evalPupFsmDttActive(DbsWdbe* dbswdbe);
 
 public:
 	PnlWdbePrcDetail(XchgWdbe* xchg, DbsWdbe* dbswdbe, const Sbecore::ubigint jrefSup, const Sbecore::uint ixWdbeVLocale);
@@ -283,6 +293,8 @@ public:
 	ContIac contiac;
 	ContInf continf;
 	StatShr statshr;
+
+	Sbecore::Feed feedFPupFsmDtt;
 
 	WdbeMProcess recPrc;
 
@@ -329,10 +341,10 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbePrc_fsmEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
-	bool handleCallWdbePrc_mdlEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
-	bool handleCallWdbeFsmUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 	bool handleCallWdbePrcUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbeFsmUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbePrc_mdlEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbePrc_fsmEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
 
 };
 

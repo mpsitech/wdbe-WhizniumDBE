@@ -110,6 +110,77 @@ bool CrdWdbeVer::evalMspCrd3Active(
 	return(args.back());
 };
 
+bool CrdWdbeVer::evalMitCrdIdpAvail(
+			DbsWdbe* dbswdbe
+		) {
+	// pre.ixCrdaccVerIncl(edit)
+
+	vector<bool> args;
+	bool a;
+
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCVER, jref) & VecWdbeWAccess::EDIT);
+	args.push_back(a);
+
+	return(args.back());
+};
+
+bool CrdWdbeVer::evalMitCrdIdpActive(
+			DbsWdbe* dbswdbe
+		) {
+	// pre.refVer()&ver.steEq(newcre|newimp)
+
+	vector<bool> args;
+	bool a, b;
+
+	a = false; a = (xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFVER, jref) != 0);
+	args.push_back(a);
+	a = false; xchg->triggerIxToBoolvalCall(dbswdbe, VecWdbeVCall::CALLWDBEVER_STEEQ, statshr.jrefRec, VecWdbeVMVersionState::NEWCRE, a);
+	args.push_back(a);
+	a = false; xchg->triggerIxToBoolvalCall(dbswdbe, VecWdbeVCall::CALLWDBEVER_STEEQ, statshr.jrefRec, VecWdbeVMVersionState::NEWIMP, a);
+	args.push_back(a);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a && b);
+
+	return(args.back());
+};
+
+bool CrdWdbeVer::evalMspCrd4Avail(
+			DbsWdbe* dbswdbe
+		) {
+	// pre.ixCrdaccVerIncl(edit|exec)
+
+	vector<bool> args;
+	bool a, b;
+
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCVER, jref) & VecWdbeWAccess::EDIT);
+	args.push_back(a);
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCVER, jref) & VecWdbeWAccess::EXEC);
+	args.push_back(a);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
+
+	return(args.back());
+};
+
+bool CrdWdbeVer::evalMspCrd4Active(
+			DbsWdbe* dbswdbe
+		) {
+	// pre.refVer()
+
+	vector<bool> args;
+	bool a;
+
+	a = false; a = (xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFVER, jref) != 0);
+	args.push_back(a);
+
+	return(args.back());
+};
+
 bool CrdWdbeVer::evalMitCrdImdAvail(
 			DbsWdbe* dbswdbe
 		) {
@@ -132,20 +203,15 @@ bool CrdWdbeVer::evalMitCrdImdAvail(
 bool CrdWdbeVer::evalMitCrdImdActive(
 			DbsWdbe* dbswdbe
 		) {
-	// pre.refVer()&ver.steEq(newcre|newimp)
+	// pre.refVer()&ver.steEq(dsndeploy)
 
 	vector<bool> args;
 	bool a, b;
 
 	a = false; a = (xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFVER, jref) != 0);
 	args.push_back(a);
-	a = false; xchg->triggerIxToBoolvalCall(dbswdbe, VecWdbeVCall::CALLWDBEVER_STEEQ, statshr.jrefRec, VecWdbeVMVersionState::NEWCRE, a);
+	a = false; xchg->triggerIxToBoolvalCall(dbswdbe, VecWdbeVCall::CALLWDBEVER_STEEQ, statshr.jrefRec, VecWdbeVMVersionState::DSNDEPLOY, a);
 	args.push_back(a);
-	a = false; xchg->triggerIxToBoolvalCall(dbswdbe, VecWdbeVCall::CALLWDBEVER_STEEQ, statshr.jrefRec, VecWdbeVMVersionState::NEWIMP, a);
-	args.push_back(a);
-	b = args.back(); args.pop_back();
-	a = args.back(); args.pop_back();
-	args.push_back(a || b);
 	b = args.back(); args.pop_back();
 	a = args.back(); args.pop_back();
 	args.push_back(a && b);
@@ -234,7 +300,7 @@ bool CrdWdbeVer::evalMitCrdIdaActive(
 	return(args.back());
 };
 
-bool CrdWdbeVer::evalMspCrd4Avail(
+bool CrdWdbeVer::evalMspCrd5Avail(
 			DbsWdbe* dbswdbe
 		) {
 	// pre.ixCrdaccVerIncl(edit|exec)
@@ -253,7 +319,7 @@ bool CrdWdbeVer::evalMspCrd4Avail(
 	return(args.back());
 };
 
-bool CrdWdbeVer::evalMspCrd4Active(
+bool CrdWdbeVer::evalMspCrd5Active(
 			DbsWdbe* dbswdbe
 		) {
 	// pre.refVer()
@@ -348,7 +414,7 @@ bool CrdWdbeVer::evalMitCrdIfsActive(
 	return(args.back());
 };
 
-bool CrdWdbeVer::evalMspCrd5Avail(
+bool CrdWdbeVer::evalMspCrd6Avail(
 			DbsWdbe* dbswdbe
 		) {
 	// pre.ixCrdaccVerIncl(edit|exec)
@@ -367,7 +433,7 @@ bool CrdWdbeVer::evalMspCrd5Avail(
 	return(args.back());
 };
 
-bool CrdWdbeVer::evalMspCrd5Active(
+bool CrdWdbeVer::evalMspCrd6Active(
 			DbsWdbe* dbswdbe
 		) {
 	// pre.refVer()

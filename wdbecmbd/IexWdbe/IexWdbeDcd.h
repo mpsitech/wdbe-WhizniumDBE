@@ -1299,7 +1299,7 @@ namespace IexWdbeDcd {
 	class ImeitemIAMFsmstateStep : public WdbeAMFsmstateStep {
 
 	public:
-		ImeitemIAMFsmstateStep(const std::string& srefFnxRefWdbeMFsmstate = "", const std::string& Cond1 = "", const std::string& Ip1 = "", const std::string& Cond2 = "", const std::string& Ip2 = "", const std::string& Cond3 = "", const std::string& Ip3 = "", const std::string& Cond4 = "", const std::string& Ip4 = "");
+		ImeitemIAMFsmstateStep(const std::string& srefFnxRefWdbeMFsmstate = "", const std::string& Cond1 = "", const std::string& Ip1 = "", const std::string& Cond2 = "", const std::string& Ip2 = "", const std::string& Cond3 = "", const std::string& Ip3 = "", const std::string& Cond4 = "", const std::string& Ip4 = "", const std::string& Cond5 = "", const std::string& Ip5 = "", const std::string& Cond6 = "", const std::string& Ip6 = "");
 		ImeitemIAMFsmstateStep(DbsWdbe* dbswdbe, const Sbecore::ubigint ref);
 
 	public:
@@ -1337,6 +1337,10 @@ namespace IexWdbeDcd {
 			static const Sbecore::uint IP3 = 64;
 			static const Sbecore::uint COND4 = 128;
 			static const Sbecore::uint IP4 = 256;
+			static const Sbecore::uint COND5 = 512;
+			static const Sbecore::uint IP5 = 1024;
+			static const Sbecore::uint COND6 = 2048;
+			static const Sbecore::uint IP6 = 4096;
 
 			static Sbecore::uint getIx(const std::string& srefs);
 			static void getIcs(const Sbecore::uint ix, std::set<Sbecore::uint>& ics);

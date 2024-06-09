@@ -98,10 +98,11 @@ public:
 		static const Sbecore::uint MNFCORE = 8;
 		static const Sbecore::uint MNFPRIM = 9;
 		static const Sbecore::uint CTR = 10;
-		static const Sbecore::uint FWDCTR = 11;
-		static const Sbecore::uint ECTR = 12;
-		static const Sbecore::uint WRP = 13;
-		static const Sbecore::uint OTH = 14;
+		static const Sbecore::uint ECTR = 11;
+		static const Sbecore::uint DBG = 12;
+		static const Sbecore::uint DBGCTR = 13;
+		static const Sbecore::uint EDBGCTR = 14;
+		static const Sbecore::uint OTH = 15;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);

@@ -58,15 +58,14 @@ PnlWdbeCmdList::ContIac::ContIac(
 };
 
 bool PnlWdbeCmdList::ContIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["ContIacWdbeCmdList"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["ContIacWdbeCmdList"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -108,7 +107,7 @@ void PnlWdbeCmdList::ContIac::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["numFTos"] = numFTos;
+	me["numFTos"] = (Json::Value::UInt) numFTos;
 };
 
 void PnlWdbeCmdList::ContIac::writeXML(
@@ -182,7 +181,7 @@ void PnlWdbeCmdList::ContInf::writeJSON(
 	me["TxtFor"] = TxtFor;
 	me["TxtPre"] = TxtPre;
 	me["ButFilterOn"] = ButFilterOn;
-	me["numFCsiQst"] = numFCsiQst;
+	me["numFCsiQst"] = (Json::Value::UInt) numFCsiQst;
 };
 
 void PnlWdbeCmdList::ContInf::writeXML(
@@ -323,15 +322,14 @@ PnlWdbeCmdList::StgIac::StgIac(
 };
 
 bool PnlWdbeCmdList::StgIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["StgIacWdbeCmdList"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["StgIacWdbeCmdList"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -381,11 +379,11 @@ void PnlWdbeCmdList::StgIac::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["TcoSrfWidth"] = TcoSrfWidth;
-	me["TcoFsrWidth"] = TcoFsrWidth;
-	me["TcoRetWidth"] = TcoRetWidth;
-	me["TcoReuWidth"] = TcoReuWidth;
-	me["TcoRtyWidth"] = TcoRtyWidth;
+	me["TcoSrfWidth"] = (Json::Value::UInt) TcoSrfWidth;
+	me["TcoFsrWidth"] = (Json::Value::UInt) TcoFsrWidth;
+	me["TcoRetWidth"] = (Json::Value::UInt) TcoRetWidth;
+	me["TcoReuWidth"] = (Json::Value::UInt) TcoReuWidth;
+	me["TcoRtyWidth"] = (Json::Value::UInt) TcoRtyWidth;
 };
 
 void PnlWdbeCmdList::StgIac::writeXML(
@@ -519,15 +517,14 @@ string PnlWdbeCmdList::DpchAppData::getSrefsMask() {
 };
 
 void PnlWdbeCmdList::DpchAppData::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbeCmdListData"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbeCmdListData"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -597,15 +594,14 @@ string PnlWdbeCmdList::DpchAppDo::getSrefsMask() {
 };
 
 void PnlWdbeCmdList::DpchAppDo::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbeCmdListDo"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbeCmdListDo"];}();
 
 	basefound = (me != Json::nullValue);
 

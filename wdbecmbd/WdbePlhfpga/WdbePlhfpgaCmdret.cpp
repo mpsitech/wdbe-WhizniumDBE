@@ -58,10 +58,8 @@ DpchRetWdbePlhfpgaCmdret* WdbePlhfpgaCmdret::run(
 	string maxlen;
 
 	if (dbswdbe->tblwdbemmodule->loadRecByRef(refWdbeMModule, &mdl)) {
-		if (dbswdbe->loadStringBySQL("SELECT sref FROM TblWdbeMModule WHERE hkIxVTbl = " + to_string(mdl->hkIxVTbl) + " AND hkUref = " + to_string(mdl->hkUref) + " AND ixVBasetype = " + to_string(VecWdbeVMModuleBasetype::HOSTIF), sref)) {
-			keys.push_back("Hostif");
-			vals.push_back(StrMod::cap(sref));
-		};
+		keys.push_back("Hostif");
+		vals.push_back(StrMod::cap(Wdbe::getHostifSref(dbswdbe, mdl->hkUref)));
 
 		if (dbswdbe->loadStringBySQL("SELECT sref FROM TblWdbeMModule WHERE hkIxVTbl = " + to_string(mdl->hkIxVTbl) + " AND hkUref = " + to_string(mdl->hkUref) + " AND ixVBasetype = " + to_string(VecWdbeVMModuleBasetype::CMDBUS), sref)) {
 			keys.push_back("Cmdbus");

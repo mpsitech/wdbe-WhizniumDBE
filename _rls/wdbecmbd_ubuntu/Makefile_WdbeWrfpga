@@ -2,7 +2,7 @@
 # make file for operation pack WdbeWrfpga, release wdbecmbd_ubuntu
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 23 Oct 2021
+# date created: 7 Feb 2024
 # IP header --- ABOVE
 
 include ../Makefile.inc
@@ -17,7 +17,7 @@ INCPATH = -I$(BUILDROOT)/dbswdbe -I$(BUILDROOT)/wdbecmbd/VecWdbe -I$(BUILDROOT)/
 INCPATH += -I${WHIZSDKROOT}/build -I${WHIZSDKROOT}/build/apiwzlm -I/usr/include -I/usr/include/jsoncpp -I/usr/include/libxml2 -I/usr/include/mariadb
 
 OBJS = WdbeWrfpga_blks.o WdbeWrfpga.o
-OBJS += WdbeWrfpgaBase.o WdbeWrfpgaCtrFwdctr.o WdbeWrfpgaDeploy.o WdbeWrfpgaEhostif.o WdbeWrfpgaHostif.o WdbeWrfpgaIpclr.o WdbeWrfpgaMdlfine.o WdbeWrfpgaMdlraw.o WdbeWrfpgaTop.o SqkWdbeWrfpga.o
+OBJS += WdbeWrfpgaAux.o WdbeWrfpgaBase.o WdbeWrfpgaCtr.o WdbeWrfpgaDeploy.o WdbeWrfpgaMdlfine.o WdbeWrfpgaMdlraw.o WdbeWrfpgaTop.o SqkWdbeWrfpga.o
 
 LIB = libwdbewrfpga
 
@@ -30,7 +30,6 @@ all:	$(LIB)
 
 $(LIB):	$(OBJS)
 	$(STATLIB) $(STATLIBFLAGS) $(LIB).a $(OBJS)
-	rm -f *.o
 
 install:
 	mv $(LIB).a $(LIBROOT)/wdbecmbd/

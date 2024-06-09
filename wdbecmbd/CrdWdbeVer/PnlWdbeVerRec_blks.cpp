@@ -108,24 +108,20 @@ void PnlWdbeVerRec::StatApp::writeJSON(
 			Json::Value& sup
 			, string difftag
 			, const bool initdoneDetail
-			, const bool initdone1NRelease
 			, const bool initdoneBvr1NVersion
-			, const bool initdone1NSystem
+			, const bool initdone1NComponent
 			, const bool initdone1NUnit
 			, const bool initdoneRef1NFile
-			, const bool initdoneMNLibrary
 		) {
 	if (difftag.length() == 0) difftag = "StatAppWdbeVerRec";
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
 	me["initdoneDetail"] = initdoneDetail;
-	me["initdone1NRelease"] = initdone1NRelease;
 	me["initdoneBvr1NVersion"] = initdoneBvr1NVersion;
-	me["initdone1NSystem"] = initdone1NSystem;
+	me["initdone1NComponent"] = initdone1NComponent;
 	me["initdone1NUnit"] = initdone1NUnit;
 	me["initdoneRef1NFile"] = initdoneRef1NFile;
-	me["initdoneMNLibrary"] = initdoneMNLibrary;
 };
 
 void PnlWdbeVerRec::StatApp::writeXML(
@@ -133,12 +129,10 @@ void PnlWdbeVerRec::StatApp::writeXML(
 			, string difftag
 			, bool shorttags
 			, const bool initdoneDetail
-			, const bool initdone1NRelease
 			, const bool initdoneBvr1NVersion
-			, const bool initdone1NSystem
+			, const bool initdone1NComponent
 			, const bool initdone1NUnit
 			, const bool initdoneRef1NFile
-			, const bool initdoneMNLibrary
 		) {
 	if (difftag.length() == 0) difftag = "StatAppWdbeVerRec";
 
@@ -148,12 +142,10 @@ void PnlWdbeVerRec::StatApp::writeXML(
 
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
 		writeBoolAttr(wr, itemtag, "sref", "initdoneDetail", initdoneDetail);
-		writeBoolAttr(wr, itemtag, "sref", "initdone1NRelease", initdone1NRelease);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneBvr1NVersion", initdoneBvr1NVersion);
-		writeBoolAttr(wr, itemtag, "sref", "initdone1NSystem", initdone1NSystem);
+		writeBoolAttr(wr, itemtag, "sref", "initdone1NComponent", initdone1NComponent);
 		writeBoolAttr(wr, itemtag, "sref", "initdone1NUnit", initdone1NUnit);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneRef1NFile", initdoneRef1NFile);
-		writeBoolAttr(wr, itemtag, "sref", "initdoneMNLibrary", initdoneMNLibrary);
 	xmlTextWriterEndElement(wr);
 };
 
@@ -164,27 +156,23 @@ void PnlWdbeVerRec::StatApp::writeXML(
 PnlWdbeVerRec::StatShr::StatShr(
 			const uint ixWdbeVExpstate
 			, const ubigint jrefDetail
-			, const ubigint jref1NRelease
 			, const ubigint jrefBvr1NVersion
-			, const ubigint jref1NSystem
+			, const ubigint jref1NComponent
 			, const ubigint jref1NUnit
 			, const ubigint jrefRef1NFile
-			, const ubigint jrefMNLibrary
 			, const bool ButRegularizeActive
 		) :
 			Block()
 		{
 	this->ixWdbeVExpstate = ixWdbeVExpstate;
 	this->jrefDetail = jrefDetail;
-	this->jref1NRelease = jref1NRelease;
 	this->jrefBvr1NVersion = jrefBvr1NVersion;
-	this->jref1NSystem = jref1NSystem;
+	this->jref1NComponent = jref1NComponent;
 	this->jref1NUnit = jref1NUnit;
 	this->jrefRef1NFile = jrefRef1NFile;
-	this->jrefMNLibrary = jrefMNLibrary;
 	this->ButRegularizeActive = ButRegularizeActive;
 
-	mask = {IXWDBEVEXPSTATE, JREFDETAIL, JREF1NRELEASE, JREFBVR1NVERSION, JREF1NSYSTEM, JREF1NUNIT, JREFREF1NFILE, JREFMNLIBRARY, BUTREGULARIZEACTIVE};
+	mask = {IXWDBEVEXPSTATE, JREFDETAIL, JREFBVR1NVERSION, JREF1NCOMPONENT, JREF1NUNIT, JREFREF1NFILE, BUTREGULARIZEACTIVE};
 };
 
 void PnlWdbeVerRec::StatShr::writeJSON(
@@ -197,12 +185,10 @@ void PnlWdbeVerRec::StatShr::writeJSON(
 
 	me["srefIxWdbeVExpstate"] = VecWdbeVExpstate::getSref(ixWdbeVExpstate);
 	me["scrJrefDetail"] = Scr::scramble(jrefDetail);
-	me["scrJref1NRelease"] = Scr::scramble(jref1NRelease);
 	me["scrJrefBvr1NVersion"] = Scr::scramble(jrefBvr1NVersion);
-	me["scrJref1NSystem"] = Scr::scramble(jref1NSystem);
+	me["scrJref1NComponent"] = Scr::scramble(jref1NComponent);
 	me["scrJref1NUnit"] = Scr::scramble(jref1NUnit);
 	me["scrJrefRef1NFile"] = Scr::scramble(jrefRef1NFile);
-	me["scrJrefMNLibrary"] = Scr::scramble(jrefMNLibrary);
 	me["ButRegularizeActive"] = ButRegularizeActive;
 };
 
@@ -220,12 +206,10 @@ void PnlWdbeVerRec::StatShr::writeXML(
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
 		writeStringAttr(wr, itemtag, "sref", "srefIxWdbeVExpstate", VecWdbeVExpstate::getSref(ixWdbeVExpstate));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefDetail", Scr::scramble(jrefDetail));
-		writeStringAttr(wr, itemtag, "sref", "scrJref1NRelease", Scr::scramble(jref1NRelease));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefBvr1NVersion", Scr::scramble(jrefBvr1NVersion));
-		writeStringAttr(wr, itemtag, "sref", "scrJref1NSystem", Scr::scramble(jref1NSystem));
+		writeStringAttr(wr, itemtag, "sref", "scrJref1NComponent", Scr::scramble(jref1NComponent));
 		writeStringAttr(wr, itemtag, "sref", "scrJref1NUnit", Scr::scramble(jref1NUnit));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefRef1NFile", Scr::scramble(jrefRef1NFile));
-		writeStringAttr(wr, itemtag, "sref", "scrJrefMNLibrary", Scr::scramble(jrefMNLibrary));
 		writeBoolAttr(wr, itemtag, "sref", "ButRegularizeActive", ButRegularizeActive);
 	xmlTextWriterEndElement(wr);
 };
@@ -237,12 +221,10 @@ set<uint> PnlWdbeVerRec::StatShr::comm(
 
 	if (ixWdbeVExpstate == comp->ixWdbeVExpstate) insert(items, IXWDBEVEXPSTATE);
 	if (jrefDetail == comp->jrefDetail) insert(items, JREFDETAIL);
-	if (jref1NRelease == comp->jref1NRelease) insert(items, JREF1NRELEASE);
 	if (jrefBvr1NVersion == comp->jrefBvr1NVersion) insert(items, JREFBVR1NVERSION);
-	if (jref1NSystem == comp->jref1NSystem) insert(items, JREF1NSYSTEM);
+	if (jref1NComponent == comp->jref1NComponent) insert(items, JREF1NCOMPONENT);
 	if (jref1NUnit == comp->jref1NUnit) insert(items, JREF1NUNIT);
 	if (jrefRef1NFile == comp->jrefRef1NFile) insert(items, JREFREF1NFILE);
-	if (jrefMNLibrary == comp->jrefMNLibrary) insert(items, JREFMNLIBRARY);
 	if (ButRegularizeActive == comp->ButRegularizeActive) insert(items, BUTREGULARIZEACTIVE);
 
 	return(items);
@@ -256,7 +238,7 @@ set<uint> PnlWdbeVerRec::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {IXWDBEVEXPSTATE, JREFDETAIL, JREF1NRELEASE, JREFBVR1NVERSION, JREF1NSYSTEM, JREF1NUNIT, JREFREF1NFILE, JREFMNLIBRARY, BUTREGULARIZEACTIVE};
+	diffitems = {IXWDBEVEXPSTATE, JREFDETAIL, JREFBVR1NVERSION, JREF1NCOMPONENT, JREF1NUNIT, JREFREF1NFILE, BUTREGULARIZEACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -322,15 +304,14 @@ string PnlWdbeVerRec::DpchAppDo::getSrefsMask() {
 };
 
 void PnlWdbeVerRec::DpchAppDo::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbeVerRecDo"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbeVerRecDo"];}();
 
 	basefound = (me != Json::nullValue);
 

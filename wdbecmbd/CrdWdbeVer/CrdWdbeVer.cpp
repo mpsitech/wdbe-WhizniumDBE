@@ -45,16 +45,17 @@ CrdWdbeVer::CrdWdbeVer(
 	feedFSge.tag = "FeedFSge";
 	VecVSge::fillFeed(feedFSge);
 
+	pnllist = NULL;
+	pnlheadbar = NULL;
+	pnlrec = NULL;
 	dlgcmdset = NULL;
 	dlgcustfst = NULL;
+	dlgdeploy = NULL;
 	dlgdflalg = NULL;
 	dlgfinmod = NULL;
-	dlggenfst = NULL;
-	dlgmdlstr = NULL;
 	dlgnew = NULL;
-	pnlrec = NULL;
-	pnlheadbar = NULL;
-	pnllist = NULL;
+	dlgmdlstr = NULL;
+	dlggenfst = NULL;
 
 	// IP constructor.cust1 --- INSERT
 
@@ -66,9 +67,9 @@ CrdWdbeVer::CrdWdbeVer(
 	// initialize according to ref
 	changeRef(dbswdbe, jref, ((ref + 1) == 0) ? 0 : ref, false);
 
-	pnlrec = new PnlWdbeVerRec(xchg, dbswdbe, jref, ixWdbeVLocale);
-	pnlheadbar = new PnlWdbeVerHeadbar(xchg, dbswdbe, jref, ixWdbeVLocale);
 	pnllist = new PnlWdbeVerList(xchg, dbswdbe, jref, ixWdbeVLocale);
+	pnlheadbar = new PnlWdbeVerHeadbar(xchg, dbswdbe, jref, ixWdbeVLocale);
+	pnlrec = new PnlWdbeVerRec(xchg, dbswdbe, jref, ixWdbeVLocale);
 
 	// IP constructor.cust2 --- INSERT
 
@@ -86,9 +87,9 @@ CrdWdbeVer::CrdWdbeVer(
 
 	changeStage(dbswdbe, VecVSge::IDLE);
 
-	xchg->addClstn(VecWdbeVCall::CALLWDBEDLGCLOSE, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecWdbeVCall::CALLWDBESTATCHG, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBEREFPRESET, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBESTATCHG, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBEDLGCLOSE, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -143,20 +144,24 @@ void CrdWdbeVer::refresh(
 	statshr.MitCrdPcvActive = evalMitCrdPcvActive(dbswdbe);
 	statshr.MspCrd3Avail = evalMspCrd3Avail(dbswdbe);
 	statshr.MspCrd3Active = evalMspCrd3Active(dbswdbe);
+	statshr.MitCrdIdpAvail = evalMitCrdIdpAvail(dbswdbe);
+	statshr.MitCrdIdpActive = evalMitCrdIdpActive(dbswdbe);
+	statshr.MspCrd4Avail = evalMspCrd4Avail(dbswdbe);
+	statshr.MspCrd4Active = evalMspCrd4Active(dbswdbe);
 	statshr.MitCrdImdAvail = evalMitCrdImdAvail(dbswdbe);
 	statshr.MitCrdImdActive = evalMitCrdImdActive(dbswdbe);
 	statshr.MitCrdIcsAvail = evalMitCrdIcsAvail(dbswdbe);
 	statshr.MitCrdIcsActive = evalMitCrdIcsActive(dbswdbe);
 	statshr.MitCrdIdaAvail = evalMitCrdIdaAvail(dbswdbe);
 	statshr.MitCrdIdaActive = evalMitCrdIdaActive(dbswdbe);
-	statshr.MspCrd4Avail = evalMspCrd4Avail(dbswdbe);
-	statshr.MspCrd4Active = evalMspCrd4Active(dbswdbe);
+	statshr.MspCrd5Avail = evalMspCrd5Avail(dbswdbe);
+	statshr.MspCrd5Active = evalMspCrd5Active(dbswdbe);
 	statshr.MitCrdGfsAvail = evalMitCrdGfsAvail(dbswdbe);
 	statshr.MitCrdGfsActive = evalMitCrdGfsActive(dbswdbe);
 	statshr.MitCrdIfsAvail = evalMitCrdIfsAvail(dbswdbe);
 	statshr.MitCrdIfsActive = evalMitCrdIfsActive(dbswdbe);
-	statshr.MspCrd5Avail = evalMspCrd5Avail(dbswdbe);
-	statshr.MspCrd5Active = evalMspCrd5Active(dbswdbe);
+	statshr.MspCrd6Avail = evalMspCrd6Avail(dbswdbe);
+	statshr.MspCrd6Active = evalMspCrd6Active(dbswdbe);
 	statshr.MitCrdFnmAvail = evalMitCrdFnmAvail(dbswdbe);
 	statshr.MitCrdFnmActive = evalMitCrdFnmActive(dbswdbe);
 
@@ -234,6 +239,8 @@ void CrdWdbeVer::handleRequest(
 					handleDpchAppDoMitCrdNewClick(dbswdbe, &(req->dpcheng));
 				} else if (dpchappdo->ixVDo == VecVDo::MITCRDPCVCLICK) {
 					handleDpchAppDoMitCrdPcvClick(dbswdbe, &(req->dpcheng));
+				} else if (dpchappdo->ixVDo == VecVDo::MITCRDIDPCLICK) {
+					handleDpchAppDoMitCrdIdpClick(dbswdbe, &(req->dpcheng));
 				} else if (dpchappdo->ixVDo == VecVDo::MITCRDIMDCLICK) {
 					handleDpchAppDoMitCrdImdClick(dbswdbe, &(req->dpcheng));
 				} else if (dpchappdo->ixVDo == VecVDo::MITCRDICSCLICK) {
@@ -303,6 +310,18 @@ void CrdWdbeVer::handleDpchAppDoMitCrdPcvClick(
 	// IP handleDpchAppDoMitCrdPcvClick --- IBEGIN
 	changeStage(dbswdbe, VecVSge::ALRCVW, dpcheng);
 	// IP handleDpchAppDoMitCrdPcvClick --- IEND
+};
+
+void CrdWdbeVer::handleDpchAppDoMitCrdIdpClick(
+			DbsWdbe* dbswdbe
+			, DpchEngWdbe** dpcheng
+		) {
+	if (!dlgdeploy) {
+		dlgdeploy = new DlgWdbeVerDeploy(xchg, dbswdbe, jref, ixWdbeVLocale);
+		statshr.jrefDlgdeploy = dlgdeploy->jref;
+
+		*dpcheng = getNewDpchEng({DpchEngData::STATSHR});
+	};
 };
 
 void CrdWdbeVer::handleDpchAppDoMitCrdImdClick(
@@ -401,13 +420,44 @@ void CrdWdbeVer::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBEDLGCLOSE) {
-		call->abort = handleCallWdbeDlgClose(dbswdbe, call->jref);
+	if (call->ixVCall == VecWdbeVCall::CALLWDBEREFPRESET) {
+		call->abort = handleCallWdbeRefPreSet(dbswdbe, call->jref, call->argInv.ix, call->argInv.ref);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBESTATCHG) {
 		call->abort = handleCallWdbeStatChg(dbswdbe, call->jref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEREFPRESET) {
-		call->abort = handleCallWdbeRefPreSet(dbswdbe, call->jref, call->argInv.ix, call->argInv.ref);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEDLGCLOSE) {
+		call->abort = handleCallWdbeDlgClose(dbswdbe, call->jref);
 	};
+};
+
+bool CrdWdbeVer::handleCallWdbeRefPreSet(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+			, const uint ixInv
+			, const ubigint refInv
+		) {
+	bool retval = false;
+
+	if (ixInv == VecWdbeVPreset::PREWDBEREFVER) {
+		changeRef(dbswdbe, jrefTrig, refInv, true);
+
+		if (refInv == 0) pnlrec->minimize(dbswdbe, true);
+		else if ((jrefTrig == statshr.jrefDlgnew) && (refInv != 0)) {
+			pnllist->qry->rerun(dbswdbe, true);
+			pnllist->minimize(dbswdbe, true);
+			pnlrec->regularize(dbswdbe, true);
+		};
+	};
+
+	return retval;
+};
+
+bool CrdWdbeVer::handleCallWdbeStatChg(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+	if (jrefTrig == pnlrec->jref) if ((pnllist->statshr.ixWdbeVExpstate == VecWdbeVExpstate::REGD) && (pnlrec->statshr.ixWdbeVExpstate == VecWdbeVExpstate::REGD)) pnllist->minimize(dbswdbe, true);
+	return retval;
 };
 
 bool CrdWdbeVer::handleCallWdbeDlgClose(
@@ -426,6 +476,12 @@ bool CrdWdbeVer::handleCallWdbeDlgClose(
 		delete dlgcustfst;
 		dlgcustfst = NULL;
 		statshr.jrefDlgcustfst = 0;
+
+		xchg->submitDpch(getNewDpchEng({DpchEngData::STATSHR}));
+	} else if (dlgdeploy) {
+		delete dlgdeploy;
+		dlgdeploy = NULL;
+		statshr.jrefDlgdeploy = 0;
 
 		xchg->submitDpch(getNewDpchEng({DpchEngData::STATSHR}));
 	} else if (dlgdflalg) {
@@ -458,37 +514,6 @@ bool CrdWdbeVer::handleCallWdbeDlgClose(
 		statshr.jrefDlgnew = 0;
 
 		xchg->submitDpch(getNewDpchEng({DpchEngData::STATSHR}));
-	};
-
-	return retval;
-};
-
-bool CrdWdbeVer::handleCallWdbeStatChg(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-	if (jrefTrig == pnlrec->jref) if ((pnllist->statshr.ixWdbeVExpstate == VecWdbeVExpstate::REGD) && (pnlrec->statshr.ixWdbeVExpstate == VecWdbeVExpstate::REGD)) pnllist->minimize(dbswdbe, true);
-	return retval;
-};
-
-bool CrdWdbeVer::handleCallWdbeRefPreSet(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-			, const uint ixInv
-			, const ubigint refInv
-		) {
-	bool retval = false;
-
-	if (ixInv == VecWdbeVPreset::PREWDBEREFVER) {
-		changeRef(dbswdbe, jrefTrig, refInv, true);
-
-		if (refInv == 0) pnlrec->minimize(dbswdbe, true);
-		else if ((jrefTrig == statshr.jrefDlgnew) && (refInv != 0)) {
-			pnllist->qry->rerun(dbswdbe, true);
-			pnllist->minimize(dbswdbe, true);
-			pnlrec->regularize(dbswdbe, true);
-		};
 	};
 
 	return retval;

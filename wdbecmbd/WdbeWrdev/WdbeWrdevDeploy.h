@@ -20,11 +20,7 @@ namespace WdbeWrdevDeploy {
 	// IP cust --- IBEGIN
 
 	void writeChkoutSh(std::fstream& outfile, const std::string& Prjshort, const bool Easy, ListWdbeMUnit& unts);
-	void writeMakefile(DbsWdbe* dbswdbe, std::fstream& outfile, WdbeMRelease* rls, std::vector<Sbecore::ubigint>& hrefsMch, ListWdbeMSystem& syss, ListWdbeMUnit& unts, std::set<std::string>& incpaths);
-
-	void addLibBySref(DbsWdbe* dbswdbe, const std::string& srefLib, const Sbecore::ubigint refMch, std::vector<Sbecore::ubigint>& hrefsMch, std::set<std::string>& incpaths);
-	void addLibByRef(DbsWdbe* dbswdbe, const Sbecore::ubigint refLib, const Sbecore::ubigint refMch, std::vector<Sbecore::ubigint>& hrefsMch, std::set<std::string>& incpaths);
-	std::string pathToPathstr(const std::string& path, const std::string& inceq);
+	void writeMakefile(DbsWdbe* dbswdbe, std::fstream& outfile, WdbeMRelease* rls, std::vector<Sbecore::ubigint>& hrefsMch, ListWdbeMUnit& unts, std::set<std::string>& incpaths);
 	// IP cust --- IEND
 };
 

@@ -35,10 +35,7 @@ uint CrdWdbeNav::VecVDo::getIx(
 	if (s == "mitcrdmtpclick") return MITCRDMTPCLICK;
 	if (s == "mitcrdprjclick") return MITCRDPRJCLICK;
 	if (s == "mitcrdverclick") return MITCRDVERCLICK;
-	if (s == "mitcrdsysclick") return MITCRDSYSCLICK;
-	if (s == "mitcrdtrgclick") return MITCRDTRGCLICK;
 	if (s == "mitcrduntclick") return MITCRDUNTCLICK;
-	if (s == "mitcrdrlsclick") return MITCRDRLSCLICK;
 	if (s == "mitcrdcprclick") return MITCRDCPRCLICK;
 	if (s == "mitcrdcvrclick") return MITCRDCVRCLICK;
 	if (s == "mitcrdpphclick") return MITCRDPPHCLICK;
@@ -52,6 +49,8 @@ uint CrdWdbeNav::VecVDo::getIx(
 	if (s == "mitcrdpinclick") return MITCRDPINCLICK;
 	if (s == "mitcrdintclick") return MITCRDINTCLICK;
 	if (s == "mitcrdsigclick") return MITCRDSIGCLICK;
+	if (s == "mitcrdcmpclick") return MITCRDCMPCLICK;
+	if (s == "mitcrdrlsclick") return MITCRDRLSCLICK;
 	if (s == "mitcrdutlclick") return MITCRDUTLCLICK;
 	if (s == "mitappmlcclick") return MITAPPMLCCLICK;
 	if (s == "mitapploiclick") return MITAPPLOICLICK;
@@ -77,10 +76,7 @@ string CrdWdbeNav::VecVDo::getSref(
 	if (ix == MITCRDMTPCLICK) return("MitCrdMtpClick");
 	if (ix == MITCRDPRJCLICK) return("MitCrdPrjClick");
 	if (ix == MITCRDVERCLICK) return("MitCrdVerClick");
-	if (ix == MITCRDSYSCLICK) return("MitCrdSysClick");
-	if (ix == MITCRDTRGCLICK) return("MitCrdTrgClick");
 	if (ix == MITCRDUNTCLICK) return("MitCrdUntClick");
-	if (ix == MITCRDRLSCLICK) return("MitCrdRlsClick");
 	if (ix == MITCRDCPRCLICK) return("MitCrdCprClick");
 	if (ix == MITCRDCVRCLICK) return("MitCrdCvrClick");
 	if (ix == MITCRDPPHCLICK) return("MitCrdPphClick");
@@ -94,6 +90,8 @@ string CrdWdbeNav::VecVDo::getSref(
 	if (ix == MITCRDPINCLICK) return("MitCrdPinClick");
 	if (ix == MITCRDINTCLICK) return("MitCrdIntClick");
 	if (ix == MITCRDSIGCLICK) return("MitCrdSigClick");
+	if (ix == MITCRDCMPCLICK) return("MitCrdCmpClick");
+	if (ix == MITCRDRLSCLICK) return("MitCrdRlsClick");
 	if (ix == MITCRDUTLCLICK) return("MitCrdUtlClick");
 	if (ix == MITAPPMLCCLICK) return("MitAppMlcClick");
 	if (ix == MITAPPLOICLICK) return("MitAppLoiClick");
@@ -165,7 +163,7 @@ void CrdWdbeNav::ContInf::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["numFSge"] = numFSge;
+	me["numFSge"] = (Json::Value::UInt) numFSge;
 	me["MrlAppHlp"] = MrlAppHlp;
 	me["MtxSesSes1"] = MtxSesSes1;
 	me["MtxSesSes2"] = MtxSesSes2;
@@ -239,6 +237,7 @@ void CrdWdbeNav::StatApp::writeJSON(
 			, const bool initdoneCoredev
 			, const bool initdoneHigh
 			, const bool initdoneLow
+			, const bool initdoneDeploy
 			, const bool initdoneAuxfct
 		) {
 	if (difftag.length() == 0) difftag = "StatAppWdbeNav";
@@ -248,7 +247,7 @@ void CrdWdbeNav::StatApp::writeJSON(
 	me["srefIxWdbeVReqitmode"] = VecWdbeVReqitmode::getSref(ixWdbeVReqitmode);
 	me["latency"] = latency;
 	me["shortMenu"] = shortMenu;
-	me["widthMenu"] = widthMenu;
+	me["widthMenu"] = (Json::Value::UInt) widthMenu;
 	me["initdoneHeadbar"] = initdoneHeadbar;
 	me["initdonePre"] = initdonePre;
 	me["initdoneAdmin"] = initdoneAdmin;
@@ -257,6 +256,7 @@ void CrdWdbeNav::StatApp::writeJSON(
 	me["initdoneCoredev"] = initdoneCoredev;
 	me["initdoneHigh"] = initdoneHigh;
 	me["initdoneLow"] = initdoneLow;
+	me["initdoneDeploy"] = initdoneDeploy;
 	me["initdoneAuxfct"] = initdoneAuxfct;
 };
 
@@ -276,6 +276,7 @@ void CrdWdbeNav::StatApp::writeXML(
 			, const bool initdoneCoredev
 			, const bool initdoneHigh
 			, const bool initdoneLow
+			, const bool initdoneDeploy
 			, const bool initdoneAuxfct
 		) {
 	if (difftag.length() == 0) difftag = "StatAppWdbeNav";
@@ -297,6 +298,7 @@ void CrdWdbeNav::StatApp::writeXML(
 		writeBoolAttr(wr, itemtag, "sref", "initdoneCoredev", initdoneCoredev);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneHigh", initdoneHigh);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneLow", initdoneLow);
+		writeBoolAttr(wr, itemtag, "sref", "initdoneDeploy", initdoneDeploy);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneAuxfct", initdoneAuxfct);
 	xmlTextWriterEndElement(wr);
 };
@@ -323,6 +325,8 @@ CrdWdbeNav::StatShr::StatShr(
 			, const bool pnlhighAvail
 			, const ubigint jrefLow
 			, const bool pnllowAvail
+			, const ubigint jrefDeploy
+			, const bool pnldeployAvail
 			, const ubigint jrefAuxfct
 			, const bool pnlauxfctAvail
 			, const bool MitSesSpsAvail
@@ -340,14 +344,8 @@ CrdWdbeNav::StatShr::StatShr(
 			, const bool MspCrd3Avail
 			, const bool MitCrdPrjAvail
 			, const bool MitCrdVerAvail
-			, const bool MitCrdSysAvail
-			, const bool MitCrdSysActive
-			, const bool MitCrdTrgAvail
-			, const bool MitCrdTrgActive
 			, const bool MitCrdUntAvail
 			, const bool MitCrdUntActive
-			, const bool MitCrdRlsAvail
-			, const bool MitCrdRlsActive
 			, const bool MspCrd4Avail
 			, const bool MitCrdCprAvail
 			, const bool MitCrdCvrAvail
@@ -376,6 +374,10 @@ CrdWdbeNav::StatShr::StatShr(
 			, const bool MitCrdSigAvail
 			, const bool MitCrdSigActive
 			, const bool MspCrd7Avail
+			, const bool MitCrdCmpAvail
+			, const bool MitCrdRlsAvail
+			, const bool MitCrdRlsActive
+			, const bool MspCrd8Avail
 			, const bool MitCrdUtlAvail
 			, const bool MspApp2Avail
 			, const bool MitAppMlcAvail
@@ -400,6 +402,8 @@ CrdWdbeNav::StatShr::StatShr(
 	this->pnlhighAvail = pnlhighAvail;
 	this->jrefLow = jrefLow;
 	this->pnllowAvail = pnllowAvail;
+	this->jrefDeploy = jrefDeploy;
+	this->pnldeployAvail = pnldeployAvail;
 	this->jrefAuxfct = jrefAuxfct;
 	this->pnlauxfctAvail = pnlauxfctAvail;
 	this->MitSesSpsAvail = MitSesSpsAvail;
@@ -417,14 +421,8 @@ CrdWdbeNav::StatShr::StatShr(
 	this->MspCrd3Avail = MspCrd3Avail;
 	this->MitCrdPrjAvail = MitCrdPrjAvail;
 	this->MitCrdVerAvail = MitCrdVerAvail;
-	this->MitCrdSysAvail = MitCrdSysAvail;
-	this->MitCrdSysActive = MitCrdSysActive;
-	this->MitCrdTrgAvail = MitCrdTrgAvail;
-	this->MitCrdTrgActive = MitCrdTrgActive;
 	this->MitCrdUntAvail = MitCrdUntAvail;
 	this->MitCrdUntActive = MitCrdUntActive;
-	this->MitCrdRlsAvail = MitCrdRlsAvail;
-	this->MitCrdRlsActive = MitCrdRlsActive;
 	this->MspCrd4Avail = MspCrd4Avail;
 	this->MitCrdCprAvail = MitCrdCprAvail;
 	this->MitCrdCvrAvail = MitCrdCvrAvail;
@@ -453,12 +451,16 @@ CrdWdbeNav::StatShr::StatShr(
 	this->MitCrdSigAvail = MitCrdSigAvail;
 	this->MitCrdSigActive = MitCrdSigActive;
 	this->MspCrd7Avail = MspCrd7Avail;
+	this->MitCrdCmpAvail = MitCrdCmpAvail;
+	this->MitCrdRlsAvail = MitCrdRlsAvail;
+	this->MitCrdRlsActive = MitCrdRlsActive;
+	this->MspCrd8Avail = MspCrd8Avail;
 	this->MitCrdUtlAvail = MitCrdUtlAvail;
 	this->MspApp2Avail = MspApp2Avail;
 	this->MitAppMlcAvail = MitAppMlcAvail;
 	this->MitAppLoiAvail = MitAppLoiAvail;
 
-	mask = {JREFDLGLOAINI, JREFDLGMNGLIC, JREFHEADBAR, JREFPRE, PNLPREAVAIL, JREFADMIN, PNLADMINAVAIL, JREFGLOBAL, PNLGLOBALAVAIL, JREFDEVDEV, PNLDEVDEVAVAIL, JREFCOREDEV, PNLCOREDEVAVAIL, JREFHIGH, PNLHIGHAVAIL, JREFLOW, PNLLOWAVAIL, JREFAUXFCT, PNLAUXFCTAVAIL, MITSESSPSAVAIL, MSPCRD1AVAIL, MITCRDUSGAVAIL, MITCRDUSRAVAIL, MITCRDPRSAVAIL, MITCRDFILAVAIL, MSPCRD2AVAIL, MITCRDMCHAVAIL, MITCRDLIBAVAIL, MITCRDFAMAVAIL, MITCRDSILAVAIL, MITCRDMTPAVAIL, MSPCRD3AVAIL, MITCRDPRJAVAIL, MITCRDVERAVAIL, MITCRDSYSAVAIL, MITCRDSYSACTIVE, MITCRDTRGAVAIL, MITCRDTRGACTIVE, MITCRDUNTAVAIL, MITCRDUNTACTIVE, MITCRDRLSAVAIL, MITCRDRLSACTIVE, MSPCRD4AVAIL, MITCRDCPRAVAIL, MITCRDCVRAVAIL, MSPCRD5AVAIL, MITCRDPPHAVAIL, MITCRDPPHACTIVE, MITCRDMODAVAIL, MITCRDMODACTIVE, MITCRDVECAVAIL, MITCRDVECACTIVE, MITCRDCMDAVAIL, MITCRDCMDACTIVE, MITCRDERRAVAIL, MITCRDERRACTIVE, MITCRDPPLAVAIL, MITCRDPPLACTIVE, MITCRDSEGAVAIL, MITCRDSEGACTIVE, MSPCRD6AVAIL, MITCRDBNKAVAIL, MITCRDBNKACTIVE, MITCRDPINAVAIL, MITCRDPINACTIVE, MITCRDINTAVAIL, MITCRDINTACTIVE, MITCRDSIGAVAIL, MITCRDSIGACTIVE, MSPCRD7AVAIL, MITCRDUTLAVAIL, MSPAPP2AVAIL, MITAPPMLCAVAIL, MITAPPLOIAVAIL};
+	mask = {JREFDLGLOAINI, JREFDLGMNGLIC, JREFHEADBAR, JREFPRE, PNLPREAVAIL, JREFADMIN, PNLADMINAVAIL, JREFGLOBAL, PNLGLOBALAVAIL, JREFDEVDEV, PNLDEVDEVAVAIL, JREFCOREDEV, PNLCOREDEVAVAIL, JREFHIGH, PNLHIGHAVAIL, JREFLOW, PNLLOWAVAIL, JREFDEPLOY, PNLDEPLOYAVAIL, JREFAUXFCT, PNLAUXFCTAVAIL, MITSESSPSAVAIL, MSPCRD1AVAIL, MITCRDUSGAVAIL, MITCRDUSRAVAIL, MITCRDPRSAVAIL, MITCRDFILAVAIL, MSPCRD2AVAIL, MITCRDMCHAVAIL, MITCRDLIBAVAIL, MITCRDFAMAVAIL, MITCRDSILAVAIL, MITCRDMTPAVAIL, MSPCRD3AVAIL, MITCRDPRJAVAIL, MITCRDVERAVAIL, MITCRDUNTAVAIL, MITCRDUNTACTIVE, MSPCRD4AVAIL, MITCRDCPRAVAIL, MITCRDCVRAVAIL, MSPCRD5AVAIL, MITCRDPPHAVAIL, MITCRDPPHACTIVE, MITCRDMODAVAIL, MITCRDMODACTIVE, MITCRDVECAVAIL, MITCRDVECACTIVE, MITCRDCMDAVAIL, MITCRDCMDACTIVE, MITCRDERRAVAIL, MITCRDERRACTIVE, MITCRDPPLAVAIL, MITCRDPPLACTIVE, MITCRDSEGAVAIL, MITCRDSEGACTIVE, MSPCRD6AVAIL, MITCRDBNKAVAIL, MITCRDBNKACTIVE, MITCRDPINAVAIL, MITCRDPINACTIVE, MITCRDINTAVAIL, MITCRDINTACTIVE, MITCRDSIGAVAIL, MITCRDSIGACTIVE, MSPCRD7AVAIL, MITCRDCMPAVAIL, MITCRDRLSAVAIL, MITCRDRLSACTIVE, MSPCRD8AVAIL, MITCRDUTLAVAIL, MSPAPP2AVAIL, MITAPPMLCAVAIL, MITAPPLOIAVAIL};
 };
 
 void CrdWdbeNav::StatShr::writeJSON(
@@ -486,6 +488,8 @@ void CrdWdbeNav::StatShr::writeJSON(
 	me["pnlhighAvail"] = pnlhighAvail;
 	me["scrJrefLow"] = Scr::scramble(jrefLow);
 	me["pnllowAvail"] = pnllowAvail;
+	me["scrJrefDeploy"] = Scr::scramble(jrefDeploy);
+	me["pnldeployAvail"] = pnldeployAvail;
 	me["scrJrefAuxfct"] = Scr::scramble(jrefAuxfct);
 	me["pnlauxfctAvail"] = pnlauxfctAvail;
 	me["MitSesSpsAvail"] = MitSesSpsAvail;
@@ -503,14 +507,8 @@ void CrdWdbeNav::StatShr::writeJSON(
 	me["MspCrd3Avail"] = MspCrd3Avail;
 	me["MitCrdPrjAvail"] = MitCrdPrjAvail;
 	me["MitCrdVerAvail"] = MitCrdVerAvail;
-	me["MitCrdSysAvail"] = MitCrdSysAvail;
-	me["MitCrdSysActive"] = MitCrdSysActive;
-	me["MitCrdTrgAvail"] = MitCrdTrgAvail;
-	me["MitCrdTrgActive"] = MitCrdTrgActive;
 	me["MitCrdUntAvail"] = MitCrdUntAvail;
 	me["MitCrdUntActive"] = MitCrdUntActive;
-	me["MitCrdRlsAvail"] = MitCrdRlsAvail;
-	me["MitCrdRlsActive"] = MitCrdRlsActive;
 	me["MspCrd4Avail"] = MspCrd4Avail;
 	me["MitCrdCprAvail"] = MitCrdCprAvail;
 	me["MitCrdCvrAvail"] = MitCrdCvrAvail;
@@ -539,6 +537,10 @@ void CrdWdbeNav::StatShr::writeJSON(
 	me["MitCrdSigAvail"] = MitCrdSigAvail;
 	me["MitCrdSigActive"] = MitCrdSigActive;
 	me["MspCrd7Avail"] = MspCrd7Avail;
+	me["MitCrdCmpAvail"] = MitCrdCmpAvail;
+	me["MitCrdRlsAvail"] = MitCrdRlsAvail;
+	me["MitCrdRlsActive"] = MitCrdRlsActive;
+	me["MspCrd8Avail"] = MspCrd8Avail;
 	me["MitCrdUtlAvail"] = MitCrdUtlAvail;
 	me["MspApp2Avail"] = MspApp2Avail;
 	me["MitAppMlcAvail"] = MitAppMlcAvail;
@@ -574,6 +576,8 @@ void CrdWdbeNav::StatShr::writeXML(
 		writeBoolAttr(wr, itemtag, "sref", "pnlhighAvail", pnlhighAvail);
 		writeStringAttr(wr, itemtag, "sref", "scrJrefLow", Scr::scramble(jrefLow));
 		writeBoolAttr(wr, itemtag, "sref", "pnllowAvail", pnllowAvail);
+		writeStringAttr(wr, itemtag, "sref", "scrJrefDeploy", Scr::scramble(jrefDeploy));
+		writeBoolAttr(wr, itemtag, "sref", "pnldeployAvail", pnldeployAvail);
 		writeStringAttr(wr, itemtag, "sref", "scrJrefAuxfct", Scr::scramble(jrefAuxfct));
 		writeBoolAttr(wr, itemtag, "sref", "pnlauxfctAvail", pnlauxfctAvail);
 		writeBoolAttr(wr, itemtag, "sref", "MitSesSpsAvail", MitSesSpsAvail);
@@ -591,14 +595,8 @@ void CrdWdbeNav::StatShr::writeXML(
 		writeBoolAttr(wr, itemtag, "sref", "MspCrd3Avail", MspCrd3Avail);
 		writeBoolAttr(wr, itemtag, "sref", "MitCrdPrjAvail", MitCrdPrjAvail);
 		writeBoolAttr(wr, itemtag, "sref", "MitCrdVerAvail", MitCrdVerAvail);
-		writeBoolAttr(wr, itemtag, "sref", "MitCrdSysAvail", MitCrdSysAvail);
-		writeBoolAttr(wr, itemtag, "sref", "MitCrdSysActive", MitCrdSysActive);
-		writeBoolAttr(wr, itemtag, "sref", "MitCrdTrgAvail", MitCrdTrgAvail);
-		writeBoolAttr(wr, itemtag, "sref", "MitCrdTrgActive", MitCrdTrgActive);
 		writeBoolAttr(wr, itemtag, "sref", "MitCrdUntAvail", MitCrdUntAvail);
 		writeBoolAttr(wr, itemtag, "sref", "MitCrdUntActive", MitCrdUntActive);
-		writeBoolAttr(wr, itemtag, "sref", "MitCrdRlsAvail", MitCrdRlsAvail);
-		writeBoolAttr(wr, itemtag, "sref", "MitCrdRlsActive", MitCrdRlsActive);
 		writeBoolAttr(wr, itemtag, "sref", "MspCrd4Avail", MspCrd4Avail);
 		writeBoolAttr(wr, itemtag, "sref", "MitCrdCprAvail", MitCrdCprAvail);
 		writeBoolAttr(wr, itemtag, "sref", "MitCrdCvrAvail", MitCrdCvrAvail);
@@ -627,6 +625,10 @@ void CrdWdbeNav::StatShr::writeXML(
 		writeBoolAttr(wr, itemtag, "sref", "MitCrdSigAvail", MitCrdSigAvail);
 		writeBoolAttr(wr, itemtag, "sref", "MitCrdSigActive", MitCrdSigActive);
 		writeBoolAttr(wr, itemtag, "sref", "MspCrd7Avail", MspCrd7Avail);
+		writeBoolAttr(wr, itemtag, "sref", "MitCrdCmpAvail", MitCrdCmpAvail);
+		writeBoolAttr(wr, itemtag, "sref", "MitCrdRlsAvail", MitCrdRlsAvail);
+		writeBoolAttr(wr, itemtag, "sref", "MitCrdRlsActive", MitCrdRlsActive);
+		writeBoolAttr(wr, itemtag, "sref", "MspCrd8Avail", MspCrd8Avail);
 		writeBoolAttr(wr, itemtag, "sref", "MitCrdUtlAvail", MitCrdUtlAvail);
 		writeBoolAttr(wr, itemtag, "sref", "MspApp2Avail", MspApp2Avail);
 		writeBoolAttr(wr, itemtag, "sref", "MitAppMlcAvail", MitAppMlcAvail);
@@ -656,6 +658,8 @@ set<uint> CrdWdbeNav::StatShr::comm(
 	if (pnlhighAvail == comp->pnlhighAvail) insert(items, PNLHIGHAVAIL);
 	if (jrefLow == comp->jrefLow) insert(items, JREFLOW);
 	if (pnllowAvail == comp->pnllowAvail) insert(items, PNLLOWAVAIL);
+	if (jrefDeploy == comp->jrefDeploy) insert(items, JREFDEPLOY);
+	if (pnldeployAvail == comp->pnldeployAvail) insert(items, PNLDEPLOYAVAIL);
 	if (jrefAuxfct == comp->jrefAuxfct) insert(items, JREFAUXFCT);
 	if (pnlauxfctAvail == comp->pnlauxfctAvail) insert(items, PNLAUXFCTAVAIL);
 	if (MitSesSpsAvail == comp->MitSesSpsAvail) insert(items, MITSESSPSAVAIL);
@@ -673,14 +677,8 @@ set<uint> CrdWdbeNav::StatShr::comm(
 	if (MspCrd3Avail == comp->MspCrd3Avail) insert(items, MSPCRD3AVAIL);
 	if (MitCrdPrjAvail == comp->MitCrdPrjAvail) insert(items, MITCRDPRJAVAIL);
 	if (MitCrdVerAvail == comp->MitCrdVerAvail) insert(items, MITCRDVERAVAIL);
-	if (MitCrdSysAvail == comp->MitCrdSysAvail) insert(items, MITCRDSYSAVAIL);
-	if (MitCrdSysActive == comp->MitCrdSysActive) insert(items, MITCRDSYSACTIVE);
-	if (MitCrdTrgAvail == comp->MitCrdTrgAvail) insert(items, MITCRDTRGAVAIL);
-	if (MitCrdTrgActive == comp->MitCrdTrgActive) insert(items, MITCRDTRGACTIVE);
 	if (MitCrdUntAvail == comp->MitCrdUntAvail) insert(items, MITCRDUNTAVAIL);
 	if (MitCrdUntActive == comp->MitCrdUntActive) insert(items, MITCRDUNTACTIVE);
-	if (MitCrdRlsAvail == comp->MitCrdRlsAvail) insert(items, MITCRDRLSAVAIL);
-	if (MitCrdRlsActive == comp->MitCrdRlsActive) insert(items, MITCRDRLSACTIVE);
 	if (MspCrd4Avail == comp->MspCrd4Avail) insert(items, MSPCRD4AVAIL);
 	if (MitCrdCprAvail == comp->MitCrdCprAvail) insert(items, MITCRDCPRAVAIL);
 	if (MitCrdCvrAvail == comp->MitCrdCvrAvail) insert(items, MITCRDCVRAVAIL);
@@ -709,6 +707,10 @@ set<uint> CrdWdbeNav::StatShr::comm(
 	if (MitCrdSigAvail == comp->MitCrdSigAvail) insert(items, MITCRDSIGAVAIL);
 	if (MitCrdSigActive == comp->MitCrdSigActive) insert(items, MITCRDSIGACTIVE);
 	if (MspCrd7Avail == comp->MspCrd7Avail) insert(items, MSPCRD7AVAIL);
+	if (MitCrdCmpAvail == comp->MitCrdCmpAvail) insert(items, MITCRDCMPAVAIL);
+	if (MitCrdRlsAvail == comp->MitCrdRlsAvail) insert(items, MITCRDRLSAVAIL);
+	if (MitCrdRlsActive == comp->MitCrdRlsActive) insert(items, MITCRDRLSACTIVE);
+	if (MspCrd8Avail == comp->MspCrd8Avail) insert(items, MSPCRD8AVAIL);
 	if (MitCrdUtlAvail == comp->MitCrdUtlAvail) insert(items, MITCRDUTLAVAIL);
 	if (MspApp2Avail == comp->MspApp2Avail) insert(items, MSPAPP2AVAIL);
 	if (MitAppMlcAvail == comp->MitAppMlcAvail) insert(items, MITAPPMLCAVAIL);
@@ -725,7 +727,7 @@ set<uint> CrdWdbeNav::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {JREFDLGLOAINI, JREFDLGMNGLIC, JREFHEADBAR, JREFPRE, PNLPREAVAIL, JREFADMIN, PNLADMINAVAIL, JREFGLOBAL, PNLGLOBALAVAIL, JREFDEVDEV, PNLDEVDEVAVAIL, JREFCOREDEV, PNLCOREDEVAVAIL, JREFHIGH, PNLHIGHAVAIL, JREFLOW, PNLLOWAVAIL, JREFAUXFCT, PNLAUXFCTAVAIL, MITSESSPSAVAIL, MSPCRD1AVAIL, MITCRDUSGAVAIL, MITCRDUSRAVAIL, MITCRDPRSAVAIL, MITCRDFILAVAIL, MSPCRD2AVAIL, MITCRDMCHAVAIL, MITCRDLIBAVAIL, MITCRDFAMAVAIL, MITCRDSILAVAIL, MITCRDMTPAVAIL, MSPCRD3AVAIL, MITCRDPRJAVAIL, MITCRDVERAVAIL, MITCRDSYSAVAIL, MITCRDSYSACTIVE, MITCRDTRGAVAIL, MITCRDTRGACTIVE, MITCRDUNTAVAIL, MITCRDUNTACTIVE, MITCRDRLSAVAIL, MITCRDRLSACTIVE, MSPCRD4AVAIL, MITCRDCPRAVAIL, MITCRDCVRAVAIL, MSPCRD5AVAIL, MITCRDPPHAVAIL, MITCRDPPHACTIVE, MITCRDMODAVAIL, MITCRDMODACTIVE, MITCRDVECAVAIL, MITCRDVECACTIVE, MITCRDCMDAVAIL, MITCRDCMDACTIVE, MITCRDERRAVAIL, MITCRDERRACTIVE, MITCRDPPLAVAIL, MITCRDPPLACTIVE, MITCRDSEGAVAIL, MITCRDSEGACTIVE, MSPCRD6AVAIL, MITCRDBNKAVAIL, MITCRDBNKACTIVE, MITCRDPINAVAIL, MITCRDPINACTIVE, MITCRDINTAVAIL, MITCRDINTACTIVE, MITCRDSIGAVAIL, MITCRDSIGACTIVE, MSPCRD7AVAIL, MITCRDUTLAVAIL, MSPAPP2AVAIL, MITAPPMLCAVAIL, MITAPPLOIAVAIL};
+	diffitems = {JREFDLGLOAINI, JREFDLGMNGLIC, JREFHEADBAR, JREFPRE, PNLPREAVAIL, JREFADMIN, PNLADMINAVAIL, JREFGLOBAL, PNLGLOBALAVAIL, JREFDEVDEV, PNLDEVDEVAVAIL, JREFCOREDEV, PNLCOREDEVAVAIL, JREFHIGH, PNLHIGHAVAIL, JREFLOW, PNLLOWAVAIL, JREFDEPLOY, PNLDEPLOYAVAIL, JREFAUXFCT, PNLAUXFCTAVAIL, MITSESSPSAVAIL, MSPCRD1AVAIL, MITCRDUSGAVAIL, MITCRDUSRAVAIL, MITCRDPRSAVAIL, MITCRDFILAVAIL, MSPCRD2AVAIL, MITCRDMCHAVAIL, MITCRDLIBAVAIL, MITCRDFAMAVAIL, MITCRDSILAVAIL, MITCRDMTPAVAIL, MSPCRD3AVAIL, MITCRDPRJAVAIL, MITCRDVERAVAIL, MITCRDUNTAVAIL, MITCRDUNTACTIVE, MSPCRD4AVAIL, MITCRDCPRAVAIL, MITCRDCVRAVAIL, MSPCRD5AVAIL, MITCRDPPHAVAIL, MITCRDPPHACTIVE, MITCRDMODAVAIL, MITCRDMODACTIVE, MITCRDVECAVAIL, MITCRDVECACTIVE, MITCRDCMDAVAIL, MITCRDCMDACTIVE, MITCRDERRAVAIL, MITCRDERRACTIVE, MITCRDPPLAVAIL, MITCRDPPLACTIVE, MITCRDSEGAVAIL, MITCRDSEGACTIVE, MSPCRD6AVAIL, MITCRDBNKAVAIL, MITCRDBNKACTIVE, MITCRDPINAVAIL, MITCRDPINACTIVE, MITCRDINTAVAIL, MITCRDINTACTIVE, MITCRDSIGAVAIL, MITCRDSIGACTIVE, MSPCRD7AVAIL, MITCRDCMPAVAIL, MITCRDRLSAVAIL, MITCRDRLSACTIVE, MSPCRD8AVAIL, MITCRDUTLAVAIL, MSPAPP2AVAIL, MITAPPMLCAVAIL, MITAPPLOIAVAIL};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -756,10 +758,7 @@ void CrdWdbeNav::Tag::writeJSON(
 		me["MitCrdMtp"] = "Module templates ...";
 		me["MitCrdPrj"] = "Projects ...";
 		me["MitCrdVer"] = "Versions ...";
-		me["MitCrdSys"] = "Systems ...";
-		me["MitCrdTrg"] = "Targets ...";
 		me["MitCrdUnt"] = "Units ...";
-		me["MitCrdRls"] = "Releases ...";
 		me["MitCrdCpr"] = "Core projects ...";
 		me["MitCrdCvr"] = "Core versions ...";
 		me["MitCrdPph"] = "Peripherals ...";
@@ -773,6 +772,8 @@ void CrdWdbeNav::Tag::writeJSON(
 		me["MitCrdPin"] = "Pins ...";
 		me["MitCrdInt"] = "Interrupts ...";
 		me["MitCrdSig"] = "Signals ...";
+		me["MitCrdCmp"] = "Components ...";
+		me["MitCrdRls"] = "Releases ...";
 		me["MitCrdUtl"] = "Utilities ...";
 		me["MitAppMlc"] = "Manage licenses ...";
 	};
@@ -808,10 +809,7 @@ void CrdWdbeNav::Tag::writeXML(
 			writeStringAttr(wr, itemtag, "sref", "MitCrdMtp", "Module templates ...");
 			writeStringAttr(wr, itemtag, "sref", "MitCrdPrj", "Projects ...");
 			writeStringAttr(wr, itemtag, "sref", "MitCrdVer", "Versions ...");
-			writeStringAttr(wr, itemtag, "sref", "MitCrdSys", "Systems ...");
-			writeStringAttr(wr, itemtag, "sref", "MitCrdTrg", "Targets ...");
 			writeStringAttr(wr, itemtag, "sref", "MitCrdUnt", "Units ...");
-			writeStringAttr(wr, itemtag, "sref", "MitCrdRls", "Releases ...");
 			writeStringAttr(wr, itemtag, "sref", "MitCrdCpr", "Core projects ...");
 			writeStringAttr(wr, itemtag, "sref", "MitCrdCvr", "Core versions ...");
 			writeStringAttr(wr, itemtag, "sref", "MitCrdPph", "Peripherals ...");
@@ -825,6 +823,8 @@ void CrdWdbeNav::Tag::writeXML(
 			writeStringAttr(wr, itemtag, "sref", "MitCrdPin", "Pins ...");
 			writeStringAttr(wr, itemtag, "sref", "MitCrdInt", "Interrupts ...");
 			writeStringAttr(wr, itemtag, "sref", "MitCrdSig", "Signals ...");
+			writeStringAttr(wr, itemtag, "sref", "MitCrdCmp", "Components ...");
+			writeStringAttr(wr, itemtag, "sref", "MitCrdRls", "Releases ...");
 			writeStringAttr(wr, itemtag, "sref", "MitCrdUtl", "Utilities ...");
 			writeStringAttr(wr, itemtag, "sref", "MitAppMlc", "Manage licenses ...");
 		};
@@ -859,15 +859,14 @@ string CrdWdbeNav::DpchAppDo::getSrefsMask() {
 };
 
 void CrdWdbeNav::DpchAppDo::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbeNavDo"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbeNavDo"];}();
 
 	basefound = (me != Json::nullValue);
 

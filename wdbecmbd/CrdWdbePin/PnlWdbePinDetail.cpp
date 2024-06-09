@@ -415,17 +415,52 @@ void PnlWdbePinDetail::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBEPIN_BNKEQ) {
+	if (call->ixVCall == VecWdbeVCall::CALLWDBEPINMOD_CLUEQ) {
+		call->abort = handleCallWdbePinMod_cluEq(dbswdbe, call->jref);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEPINJSRFMOD_PINEQ) {
+		call->abort = handleCallWdbePinJsrfMod_pinEq(dbswdbe, call->jref);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEPINUPD_REFEQ) {
+		call->abort = handleCallWdbePinUpd_refEq(dbswdbe, call->jref);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEPIN_BNKEQ) {
 		call->abort = handleCallWdbePin_bnkEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEPIN_CLUEQ) {
 		call->abort = handleCallWdbePin_cluEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEPINUPD_REFEQ) {
-		call->abort = handleCallWdbePinUpd_refEq(dbswdbe, call->jref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEPINJSRFMOD_PINEQ) {
-		call->abort = handleCallWdbePinJsrfMod_pinEq(dbswdbe, call->jref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEPINMOD_CLUEQ) {
-		call->abort = handleCallWdbePinMod_cluEq(dbswdbe, call->jref);
 	};
+};
+
+bool PnlWdbePinDetail::handleCallWdbePinMod_cluEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+	set<uint> moditems;
+
+	refreshClu(dbswdbe, moditems);
+
+	xchg->submitDpch(getNewDpchEng(moditems));
+	return retval;
+};
+
+bool PnlWdbePinDetail::handleCallWdbePinJsrfMod_pinEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+	set<uint> moditems;
+
+	refreshJsr(dbswdbe, moditems);
+
+	xchg->submitDpch(getNewDpchEng(moditems));
+	return retval;
+};
+
+bool PnlWdbePinDetail::handleCallWdbePinUpd_refEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+	// IP handleCallWdbePinUpd_refEq --- INSERT
+	return retval;
 };
 
 bool PnlWdbePinDetail::handleCallWdbePin_bnkEq(
@@ -447,40 +482,5 @@ bool PnlWdbePinDetail::handleCallWdbePin_cluEq(
 		) {
 	bool retval = false;
 	boolvalRet = (recPin.refWdbeCPin == refInv); // IP handleCallWdbePin_cluEq --- LINE
-	return retval;
-};
-
-bool PnlWdbePinDetail::handleCallWdbePinUpd_refEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-	// IP handleCallWdbePinUpd_refEq --- INSERT
-	return retval;
-};
-
-bool PnlWdbePinDetail::handleCallWdbePinJsrfMod_pinEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-	set<uint> moditems;
-
-	refreshJsr(dbswdbe, moditems);
-
-	xchg->submitDpch(getNewDpchEng(moditems));
-	return retval;
-};
-
-bool PnlWdbePinDetail::handleCallWdbePinMod_cluEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-	set<uint> moditems;
-
-	refreshClu(dbswdbe, moditems);
-
-	xchg->submitDpch(getNewDpchEng(moditems));
 	return retval;
 };

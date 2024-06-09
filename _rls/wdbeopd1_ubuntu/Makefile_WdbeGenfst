@@ -2,7 +2,7 @@
 # make file for operation pack WdbeGenfst, release wdbeopd1_ubuntu
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 23 Oct 2021
+# date created: 7 Feb 2024
 # IP header --- ABOVE
 
 include ../Makefile.inc
@@ -17,7 +17,7 @@ INCPATH = -I$(BUILDROOT)/dbswdbe -I$(BUILDROOT)/wdbeopd1/VecWdbe -I$(BUILDROOT)/
 INCPATH += -I${WHIZSDKROOT}/build -I/usr/include -I/usr/include/jsoncpp -I/usr/include/libxml2 -I/usr/include/mariadb
 
 OBJS = WdbeGenfst_blks.o WdbeGenfst.o
-OBJS += WdbeGenfstCmdbus.o WdbeGenfstCtrFwdctr.o WdbeGenfstEctr.o WdbeGenfstEhostif.o WdbeGenfstHostif.o WdbeGenfstImbuf.o WdbeGenfstPpl.o WdbeGenfstTop.o
+OBJS += WdbeGenfstCmdbus.o WdbeGenfstCtr.o WdbeGenfstEctr.o WdbeGenfstEhostif.o WdbeGenfstHostif.o WdbeGenfstImbuf.o WdbeGenfstPpl.o WdbeGenfstTop.o
 
 LIB = libwdbegenfst
 
@@ -30,7 +30,6 @@ all:	$(LIB)
 
 $(LIB):	$(OBJS)
 	$(STATLIB) $(STATLIBFLAGS) $(LIB).a $(OBJS)
-	rm -f *.o
 
 install:
 	mv $(LIB).a $(LIBROOT)/wdbeopd1/

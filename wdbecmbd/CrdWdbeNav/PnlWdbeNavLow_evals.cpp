@@ -291,6 +291,34 @@ bool PnlWdbeNavLow::evalButSigNewcrdActive(
 	return(args.back());
 };
 
+bool PnlWdbeNavLow::evalLstCdcAvail(
+			DbsWdbe* dbswdbe
+		) {
+	// pre.ixCrdaccCdc()
+
+	vector<bool> args;
+	bool a;
+
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCCDC, jref) != 0);
+	args.push_back(a);
+
+	return(args.back());
+};
+
+bool PnlWdbeNavLow::evalButCdcViewActive(
+			DbsWdbe* dbswdbe
+		) {
+	// LstCdc.sel()
+
+	vector<bool> args;
+	bool a;
+
+	a = false; a = (contiac.numFLstCdc != 0);
+	args.push_back(a);
+
+	return(args.back());
+};
+
 bool PnlWdbeNavLow::evalLstPrcAvail(
 			DbsWdbe* dbswdbe
 		) {

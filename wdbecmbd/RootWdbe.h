@@ -16,8 +16,8 @@
 #include <openssl/sha.h>
 // IP include.cust --- IEND
 
-#include "SessWdbe.h"
 #include "JobWdbeLicense.h"
+#include "SessWdbe.h"
 
 #define VecVRootWdbeSge RootWdbe::VecVSge
 
@@ -69,7 +69,7 @@ public:
 	public:
 		std::string getSrefsMask();
 
-		void readJSON(Json::Value& sup, bool addbasetag = false);
+		void readJSON(const Json::Value& sup, bool addbasetag = false);
 		void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 	};
 
@@ -103,8 +103,8 @@ public:
 
 public:
 
-	std::map<Sbecore::ubigint, JobWdbe*> sesss;
 	JobWdbeLicense* license;
+	std::map<Sbecore::ubigint, JobWdbe*> sesss;
 
 	// IP vars.spec --- INSERT
 
@@ -118,6 +118,7 @@ public:
 	void clearQtb(DbsWdbe* dbswdbe);
 
 	bool authenticate(DbsWdbe* dbswdbe, const std::string& username, const std::string& password, Sbecore::ubigint& refWdbeMUser);
+	void termSess(DbsWdbe* dbswdbe, const Sbecore::ubigint jref);
 
 public:
 
@@ -133,16 +134,16 @@ private:
 
 	void handleDpchAppLogin(DbsWdbe* dbswdbe, DpchAppLogin* dpchapplogin, const std::string ip, DpchEngWdbe** dpcheng);
 
-	void handleTimerWithSrefWarnterm(DbsWdbe* dbswdbe);
 	void handleTimerWithSrefMonInSgeIdle(DbsWdbe* dbswdbe);
+	void handleTimerWithSrefWarnterm(DbsWdbe* dbswdbe);
 
 public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeLogout(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const bool boolvalInv);
 	bool handleCallWdbeSuspsess(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 	bool handleCallWdbeRefPreSet(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, const Sbecore::ubigint refInv);
+	bool handleCallWdbeLogout(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const bool boolvalInv);
 
 private:
 	void changeStage(DbsWdbe* dbswdbe, Sbecore::uint _ixVSge, DpchEngWdbe** dpcheng = NULL);

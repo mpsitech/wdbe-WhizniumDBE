@@ -20,10 +20,9 @@ uint QryWdbeRlsList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "srf") return SRF;
-	if (s == "typ") return TYP;
-	if (s == "ver") return VER;
+	if (s == "cmp") return CMP;
 	if (s == "mch") return MCH;
+	if (s == "srf") return SRF;
 
 	return(0);
 };
@@ -31,10 +30,9 @@ uint QryWdbeRlsList::VecVOrd::getIx(
 string QryWdbeRlsList::VecVOrd::getSref(
 			const uint ix
 		) {
-	if (ix == SRF) return("srf");
-	if (ix == TYP) return("typ");
-	if (ix == VER) return("ver");
+	if (ix == CMP) return("cmp");
 	if (ix == MCH) return("mch");
+	if (ix == SRF) return("srf");
 
 	return("");
 };
@@ -44,7 +42,7 @@ void QryWdbeRlsList::VecVOrd::fillFeed(
 		) {
 	feed.clear();
 
-	for (unsigned int i = 1; i <= 4; i++) feed.appendIxSrefTitles(i, getSref(i), getSref(i));
+	for (unsigned int i = 1; i <= 3; i++) feed.appendIxSrefTitles(i, getSref(i), getSref(i));
 };
 
 /******************************************************************************
@@ -63,10 +61,10 @@ void QryWdbeRlsList::StatApp::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["firstcol"] = firstcol;
-	me["jnumFirstdisp"] = jnumFirstdisp;
-	me["ncol"] = ncol;
-	me["ndisp"] = ndisp;
+	me["firstcol"] = (Json::Value::UInt) firstcol;
+	me["jnumFirstdisp"] = (Json::Value::UInt) jnumFirstdisp;
+	me["ncol"] = (Json::Value::UInt) ncol;
+	me["ndisp"] = (Json::Value::UInt) ndisp;
 };
 
 void QryWdbeRlsList::StatApp::writeXML(
@@ -118,9 +116,9 @@ void QryWdbeRlsList::StatShr::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["ntot"] = ntot;
-	me["jnumFirstload"] = jnumFirstload;
-	me["nload"] = nload;
+	me["ntot"] = (Json::Value::UInt) ntot;
+	me["jnumFirstload"] = (Json::Value::UInt) jnumFirstload;
+	me["nload"] = (Json::Value::UInt) nload;
 };
 
 void QryWdbeRlsList::StatShr::writeXML(
@@ -185,15 +183,14 @@ QryWdbeRlsList::StgIac::StgIac(
 };
 
 bool QryWdbeRlsList::StgIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["StgIacQryWdbeRlsList"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["StgIacQryWdbeRlsList"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -239,9 +236,9 @@ void QryWdbeRlsList::StgIac::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["jnum"] = jnum;
-	me["jnumFirstload"] = jnumFirstload;
-	me["nload"] = nload;
+	me["jnum"] = (Json::Value::UInt) jnum;
+	me["jnumFirstload"] = (Json::Value::UInt) jnumFirstload;
+	me["nload"] = (Json::Value::UInt) nload;
 };
 
 void QryWdbeRlsList::StgIac::writeXML(

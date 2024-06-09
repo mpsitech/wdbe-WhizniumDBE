@@ -109,7 +109,7 @@ void PnlWdbeLibRec::StatApp::writeJSON(
 			, string difftag
 			, const bool initdoneDetail
 			, const bool initdoneAMakefile
-			, const bool initdoneMNVersion
+			, const bool initdoneMNComponent
 		) {
 	if (difftag.length() == 0) difftag = "StatAppWdbeLibRec";
 
@@ -117,7 +117,7 @@ void PnlWdbeLibRec::StatApp::writeJSON(
 
 	me["initdoneDetail"] = initdoneDetail;
 	me["initdoneAMakefile"] = initdoneAMakefile;
-	me["initdoneMNVersion"] = initdoneMNVersion;
+	me["initdoneMNComponent"] = initdoneMNComponent;
 };
 
 void PnlWdbeLibRec::StatApp::writeXML(
@@ -126,7 +126,7 @@ void PnlWdbeLibRec::StatApp::writeXML(
 			, bool shorttags
 			, const bool initdoneDetail
 			, const bool initdoneAMakefile
-			, const bool initdoneMNVersion
+			, const bool initdoneMNComponent
 		) {
 	if (difftag.length() == 0) difftag = "StatAppWdbeLibRec";
 
@@ -137,7 +137,7 @@ void PnlWdbeLibRec::StatApp::writeXML(
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
 		writeBoolAttr(wr, itemtag, "sref", "initdoneDetail", initdoneDetail);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneAMakefile", initdoneAMakefile);
-		writeBoolAttr(wr, itemtag, "sref", "initdoneMNVersion", initdoneMNVersion);
+		writeBoolAttr(wr, itemtag, "sref", "initdoneMNComponent", initdoneMNComponent);
 	xmlTextWriterEndElement(wr);
 };
 
@@ -149,7 +149,7 @@ PnlWdbeLibRec::StatShr::StatShr(
 			const uint ixWdbeVExpstate
 			, const ubigint jrefDetail
 			, const ubigint jrefAMakefile
-			, const ubigint jrefMNVersion
+			, const ubigint jrefMNComponent
 			, const bool ButRegularizeActive
 		) :
 			Block()
@@ -157,10 +157,10 @@ PnlWdbeLibRec::StatShr::StatShr(
 	this->ixWdbeVExpstate = ixWdbeVExpstate;
 	this->jrefDetail = jrefDetail;
 	this->jrefAMakefile = jrefAMakefile;
-	this->jrefMNVersion = jrefMNVersion;
+	this->jrefMNComponent = jrefMNComponent;
 	this->ButRegularizeActive = ButRegularizeActive;
 
-	mask = {IXWDBEVEXPSTATE, JREFDETAIL, JREFAMAKEFILE, JREFMNVERSION, BUTREGULARIZEACTIVE};
+	mask = {IXWDBEVEXPSTATE, JREFDETAIL, JREFAMAKEFILE, JREFMNCOMPONENT, BUTREGULARIZEACTIVE};
 };
 
 void PnlWdbeLibRec::StatShr::writeJSON(
@@ -174,7 +174,7 @@ void PnlWdbeLibRec::StatShr::writeJSON(
 	me["srefIxWdbeVExpstate"] = VecWdbeVExpstate::getSref(ixWdbeVExpstate);
 	me["scrJrefDetail"] = Scr::scramble(jrefDetail);
 	me["scrJrefAMakefile"] = Scr::scramble(jrefAMakefile);
-	me["scrJrefMNVersion"] = Scr::scramble(jrefMNVersion);
+	me["scrJrefMNComponent"] = Scr::scramble(jrefMNComponent);
 	me["ButRegularizeActive"] = ButRegularizeActive;
 };
 
@@ -193,7 +193,7 @@ void PnlWdbeLibRec::StatShr::writeXML(
 		writeStringAttr(wr, itemtag, "sref", "srefIxWdbeVExpstate", VecWdbeVExpstate::getSref(ixWdbeVExpstate));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefDetail", Scr::scramble(jrefDetail));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefAMakefile", Scr::scramble(jrefAMakefile));
-		writeStringAttr(wr, itemtag, "sref", "scrJrefMNVersion", Scr::scramble(jrefMNVersion));
+		writeStringAttr(wr, itemtag, "sref", "scrJrefMNComponent", Scr::scramble(jrefMNComponent));
 		writeBoolAttr(wr, itemtag, "sref", "ButRegularizeActive", ButRegularizeActive);
 	xmlTextWriterEndElement(wr);
 };
@@ -206,7 +206,7 @@ set<uint> PnlWdbeLibRec::StatShr::comm(
 	if (ixWdbeVExpstate == comp->ixWdbeVExpstate) insert(items, IXWDBEVEXPSTATE);
 	if (jrefDetail == comp->jrefDetail) insert(items, JREFDETAIL);
 	if (jrefAMakefile == comp->jrefAMakefile) insert(items, JREFAMAKEFILE);
-	if (jrefMNVersion == comp->jrefMNVersion) insert(items, JREFMNVERSION);
+	if (jrefMNComponent == comp->jrefMNComponent) insert(items, JREFMNCOMPONENT);
 	if (ButRegularizeActive == comp->ButRegularizeActive) insert(items, BUTREGULARIZEACTIVE);
 
 	return(items);
@@ -220,7 +220,7 @@ set<uint> PnlWdbeLibRec::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {IXWDBEVEXPSTATE, JREFDETAIL, JREFAMAKEFILE, JREFMNVERSION, BUTREGULARIZEACTIVE};
+	diffitems = {IXWDBEVEXPSTATE, JREFDETAIL, JREFAMAKEFILE, JREFMNCOMPONENT, BUTREGULARIZEACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -286,15 +286,14 @@ string PnlWdbeLibRec::DpchAppDo::getSrefsMask() {
 };
 
 void PnlWdbeLibRec::DpchAppDo::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbeLibRecDo"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbeLibRecDo"];}();
 
 	basefound = (me != Json::nullValue);
 

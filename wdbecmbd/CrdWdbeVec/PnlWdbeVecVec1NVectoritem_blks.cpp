@@ -65,7 +65,7 @@ void PnlWdbeVecVec1NVectoritem::ContInf::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["numFCsiQst"] = numFCsiQst;
+	me["numFCsiQst"] = (Json::Value::UInt) numFCsiQst;
 };
 
 void PnlWdbeVecVec1NVectoritem::ContInf::writeXML(
@@ -260,15 +260,14 @@ PnlWdbeVecVec1NVectoritem::StgIac::StgIac(
 };
 
 bool PnlWdbeVecVec1NVectoritem::StgIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["StgIacWdbeVecVec1NVectoritem"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["StgIacWdbeVecVec1NVectoritem"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -310,7 +309,7 @@ void PnlWdbeVecVec1NVectoritem::StgIac::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["TcoRefWidth"] = TcoRefWidth;
+	me["TcoRefWidth"] = (Json::Value::UInt) TcoRefWidth;
 };
 
 void PnlWdbeVecVec1NVectoritem::StgIac::writeXML(
@@ -425,15 +424,14 @@ string PnlWdbeVecVec1NVectoritem::DpchAppData::getSrefsMask() {
 };
 
 void PnlWdbeVecVec1NVectoritem::DpchAppData::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbeVecVec1NVectoritemData"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbeVecVec1NVectoritemData"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -499,15 +497,14 @@ string PnlWdbeVecVec1NVectoritem::DpchAppDo::getSrefsMask() {
 };
 
 void PnlWdbeVecVec1NVectoritem::DpchAppDo::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbeVecVec1NVectoritemDo"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbeVecVec1NVectoritemDo"];}();
 
 	basefound = (me != Json::nullValue);
 

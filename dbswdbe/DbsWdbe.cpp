@@ -162,8 +162,12 @@ void DbsWdbe::initMy() {
 	((MyTblWdbeJMVersionState*) tblwdbejmversionstate)->init(dbsMy);
 	tblwdbembank = new MyTblWdbeMBank();
 	((MyTblWdbeMBank*) tblwdbembank)->init(dbsMy);
+	tblwdbemcdc = new MyTblWdbeMCdc();
+	((MyTblWdbeMCdc*) tblwdbemcdc)->init(dbsMy);
 	tblwdbemcommand = new MyTblWdbeMCommand();
 	((MyTblWdbeMCommand*) tblwdbemcommand)->init(dbsMy);
+	tblwdbemcomponent = new MyTblWdbeMComponent();
+	((MyTblWdbeMComponent*) tblwdbemcomponent)->init(dbsMy);
 	tblwdbemcontroller = new MyTblWdbeMController();
 	((MyTblWdbeMController*) tblwdbemcontroller)->init(dbsMy);
 	tblwdbemcoreproject = new MyTblWdbeMCoreproject();
@@ -216,10 +220,6 @@ void DbsWdbe::initMy() {
 	((MyTblWdbeMSession*) tblwdbemsession)->init(dbsMy);
 	tblwdbemsignal = new MyTblWdbeMSignal();
 	((MyTblWdbeMSignal*) tblwdbemsignal)->init(dbsMy);
-	tblwdbemsystem = new MyTblWdbeMSystem();
-	((MyTblWdbeMSystem*) tblwdbemsystem)->init(dbsMy);
-	tblwdbemtarget = new MyTblWdbeMTarget();
-	((MyTblWdbeMTarget*) tblwdbemtarget)->init(dbsMy);
 	tblwdbemunit = new MyTblWdbeMUnit();
 	((MyTblWdbeMUnit*) tblwdbemunit)->init(dbsMy);
 	tblwdbemuser = new MyTblWdbeMUser();
@@ -234,12 +234,14 @@ void DbsWdbe::initMy() {
 	((MyTblWdbeMVectoritem*) tblwdbemvectoritem)->init(dbsMy);
 	tblwdbemversion = new MyTblWdbeMVersion();
 	((MyTblWdbeMVersion*) tblwdbemversion)->init(dbsMy);
+	tblwdbermcdcmsignal = new MyTblWdbeRMCdcMSignal();
+	((MyTblWdbeRMCdcMSignal*) tblwdbermcdcmsignal)->init(dbsMy);
 	tblwdbermcommandmcontroller = new MyTblWdbeRMCommandMController();
 	((MyTblWdbeRMCommandMController*) tblwdbermcommandmcontroller)->init(dbsMy);
+	tblwdbermcomponentmlibrary = new MyTblWdbeRMComponentMLibrary();
+	((MyTblWdbeRMComponentMLibrary*) tblwdbermcomponentmlibrary)->init(dbsMy);
 	tblwdbermcoreprojectmperson = new MyTblWdbeRMCoreprojectMPerson();
 	((MyTblWdbeRMCoreprojectMPerson*) tblwdbermcoreprojectmperson)->init(dbsMy);
-	tblwdbermlibrarymversion = new MyTblWdbeRMLibraryMVersion();
-	((MyTblWdbeRMLibraryMVersion*) tblwdbermlibrarymversion)->init(dbsMy);
 	tblwdbermmodulemmodule = new MyTblWdbeRMModuleMModule();
 	((MyTblWdbeRMModuleMModule*) tblwdbermmodulemmodule)->init(dbsMy);
 	tblwdbermmodulemperipheral = new MyTblWdbeRMModuleMPeripheral();
@@ -255,6 +257,10 @@ void DbsWdbe::initMy() {
 	((MyTblWdbeQBnk1NPin*) tblwdbeqbnk1npin)->init(dbsMy);
 	tblwdbeqbnklist = new MyTblWdbeQBnkList();
 	((MyTblWdbeQBnkList*) tblwdbeqbnklist)->init(dbsMy);
+	tblwdbeqcdclist = new MyTblWdbeQCdcList();
+	((MyTblWdbeQCdcList*) tblwdbeqcdclist)->init(dbsMy);
+	tblwdbeqcdcmnsignal = new MyTblWdbeQCdcMNSignal();
+	((MyTblWdbeQCdcMNSignal*) tblwdbeqcdcmnsignal)->init(dbsMy);
 	tblwdbeqcmdainvpar = new MyTblWdbeQCmdAInvpar();
 	((MyTblWdbeQCmdAInvpar*) tblwdbeqcmdainvpar)->init(dbsMy);
 	tblwdbeqcmdaretpar = new MyTblWdbeQCmdARetpar();
@@ -263,6 +269,12 @@ void DbsWdbe::initMy() {
 	((MyTblWdbeQCmdList*) tblwdbeqcmdlist)->init(dbsMy);
 	tblwdbeqcmdmncontroller = new MyTblWdbeQCmdMNController();
 	((MyTblWdbeQCmdMNController*) tblwdbeqcmdmncontroller)->init(dbsMy);
+	tblwdbeqcmp1nrelease = new MyTblWdbeQCmp1NRelease();
+	((MyTblWdbeQCmp1NRelease*) tblwdbeqcmp1nrelease)->init(dbsMy);
+	tblwdbeqcmplist = new MyTblWdbeQCmpList();
+	((MyTblWdbeQCmpList*) tblwdbeqcmplist)->init(dbsMy);
+	tblwdbeqcmpmnlibrary = new MyTblWdbeQCmpMNLibrary();
+	((MyTblWdbeQCmpMNLibrary*) tblwdbeqcmpmnlibrary)->init(dbsMy);
 	tblwdbeqcpr1ncoreversion = new MyTblWdbeQCpr1NCoreversion();
 	((MyTblWdbeQCpr1NCoreversion*) tblwdbeqcpr1ncoreversion)->init(dbsMy);
 	tblwdbeqcprlist = new MyTblWdbeQCprList();
@@ -303,8 +315,8 @@ void DbsWdbe::initMy() {
 	((MyTblWdbeQLibAMakefile*) tblwdbeqlibamakefile)->init(dbsMy);
 	tblwdbeqliblist = new MyTblWdbeQLibList();
 	((MyTblWdbeQLibList*) tblwdbeqliblist)->init(dbsMy);
-	tblwdbeqlibmnversion = new MyTblWdbeQLibMNVersion();
-	((MyTblWdbeQLibMNVersion*) tblwdbeqlibmnversion)->init(dbsMy);
+	tblwdbeqlibmncomponent = new MyTblWdbeQLibMNComponent();
+	((MyTblWdbeQLibMNComponent*) tblwdbeqlibmncomponent)->init(dbsMy);
 	tblwdbeqmch1nrelease = new MyTblWdbeQMch1NRelease();
 	((MyTblWdbeQMch1NRelease*) tblwdbeqmch1nrelease)->init(dbsMy);
 	tblwdbeqmchamakefile = new MyTblWdbeQMchAMakefile();
@@ -315,6 +327,8 @@ void DbsWdbe::initMy() {
 	((MyTblWdbeQMchList*) tblwdbeqmchlist)->init(dbsMy);
 	tblwdbeqmchsup1nmachine = new MyTblWdbeQMchSup1NMachine();
 	((MyTblWdbeQMchSup1NMachine*) tblwdbeqmchsup1nmachine)->init(dbsMy);
+	tblwdbeqmod1ncdc = new MyTblWdbeQMod1NCdc();
+	((MyTblWdbeQMod1NCdc*) tblwdbeqmod1ncdc)->init(dbsMy);
 	tblwdbeqmod1nprocess = new MyTblWdbeQMod1NProcess();
 	((MyTblWdbeQMod1NProcess*) tblwdbeqmod1nprocess)->init(dbsMy);
 	tblwdbeqmodapar = new MyTblWdbeQModAPar();
@@ -395,6 +409,8 @@ void DbsWdbe::initMy() {
 	((MyTblWdbeQPplPpl1NSegment*) tblwdbeqpplppl1nsegment)->init(dbsMy);
 	tblwdbeqprcfsmfsm1nfsmstate = new MyTblWdbeQPrcFsmFsm1NFsmstate();
 	((MyTblWdbeQPrcFsmFsm1NFsmstate*) tblwdbeqprcfsmfsm1nfsmstate)->init(dbsMy);
+	tblwdbeqprcfsmhk1nvector = new MyTblWdbeQPrcFsmHk1NVector();
+	((MyTblWdbeQPrcFsmHk1NVector*) tblwdbeqprcfsmhk1nvector)->init(dbsMy);
 	tblwdbeqprckhdltype = new MyTblWdbeQPrcKHdltype();
 	((MyTblWdbeQPrcKHdltype*) tblwdbeqprckhdltype)->init(dbsMy);
 	tblwdbeqprclist = new MyTblWdbeQPrcList();
@@ -435,6 +451,8 @@ void DbsWdbe::initMy() {
 	((MyTblWdbeQSelect*) tblwdbeqselect)->init(dbsMy);
 	tblwdbeqsiglist = new MyTblWdbeQSigList();
 	((MyTblWdbeQSigList*) tblwdbeqsiglist)->init(dbsMy);
+	tblwdbeqsigmncdc = new MyTblWdbeQSigMNCdc();
+	((MyTblWdbeQSigMNCdc*) tblwdbeqsigmncdc)->init(dbsMy);
 	tblwdbeqsigsrc1nsensitivity = new MyTblWdbeQSigSrc1NSensitivity();
 	((MyTblWdbeQSigSrc1NSensitivity*) tblwdbeqsigsrc1nsensitivity)->init(dbsMy);
 	tblwdbeqsil1nbank = new MyTblWdbeQSil1NBank();
@@ -443,10 +461,6 @@ void DbsWdbe::initMy() {
 	((MyTblWdbeQSil1NInterrupt*) tblwdbeqsil1ninterrupt)->init(dbsMy);
 	tblwdbeqsil1nperipheral = new MyTblWdbeQSil1NPeripheral();
 	((MyTblWdbeQSil1NPeripheral*) tblwdbeqsil1nperipheral)->init(dbsMy);
-	tblwdbeqsil1ntarget = new MyTblWdbeQSil1NTarget();
-	((MyTblWdbeQSil1NTarget*) tblwdbeqsil1ntarget)->init(dbsMy);
-	tblwdbeqsilfwd1ncontroller = new MyTblWdbeQSilFwd1NController();
-	((MyTblWdbeQSilFwd1NController*) tblwdbeqsilfwd1ncontroller)->init(dbsMy);
 	tblwdbeqsilhk1nmodule = new MyTblWdbeQSilHk1NModule();
 	((MyTblWdbeQSilHk1NModule*) tblwdbeqsilhk1nmodule)->init(dbsMy);
 	tblwdbeqsilhk1nvector = new MyTblWdbeQSilHk1NVector();
@@ -463,24 +477,12 @@ void DbsWdbe::initMy() {
 	((MyTblWdbeQSilSil1NUnit*) tblwdbeqsilsil1nunit)->init(dbsMy);
 	tblwdbeqsnslist = new MyTblWdbeQSnsList();
 	((MyTblWdbeQSnsList*) tblwdbeqsnslist)->init(dbsMy);
-	tblwdbeqsyshk1nvector = new MyTblWdbeQSysHk1NVector();
-	((MyTblWdbeQSysHk1NVector*) tblwdbeqsyshk1nvector)->init(dbsMy);
-	tblwdbeqsyslist = new MyTblWdbeQSysList();
-	((MyTblWdbeQSysList*) tblwdbeqsyslist)->init(dbsMy);
-	tblwdbeqsyssys1ntarget = new MyTblWdbeQSysSys1NTarget();
-	((MyTblWdbeQSysSys1NTarget*) tblwdbeqsyssys1ntarget)->init(dbsMy);
-	tblwdbeqtrglist = new MyTblWdbeQTrgList();
-	((MyTblWdbeQTrgList*) tblwdbeqtrglist)->init(dbsMy);
 	tblwdbequnt1nbank = new MyTblWdbeQUnt1NBank();
 	((MyTblWdbeQUnt1NBank*) tblwdbequnt1nbank)->init(dbsMy);
 	tblwdbequnt1ninterrupt = new MyTblWdbeQUnt1NInterrupt();
 	((MyTblWdbeQUnt1NInterrupt*) tblwdbequnt1ninterrupt)->init(dbsMy);
 	tblwdbequnt1nperipheral = new MyTblWdbeQUnt1NPeripheral();
 	((MyTblWdbeQUnt1NPeripheral*) tblwdbequnt1nperipheral)->init(dbsMy);
-	tblwdbequnt1ntarget = new MyTblWdbeQUnt1NTarget();
-	((MyTblWdbeQUnt1NTarget*) tblwdbequnt1ntarget)->init(dbsMy);
-	tblwdbequntfwd1ncontroller = new MyTblWdbeQUntFwd1NController();
-	((MyTblWdbeQUntFwd1NController*) tblwdbequntfwd1ncontroller)->init(dbsMy);
 	tblwdbequnthk1nmodule = new MyTblWdbeQUntHk1NModule();
 	((MyTblWdbeQUntHk1NModule*) tblwdbequnthk1nmodule)->init(dbsMy);
 	tblwdbequnthk1nvector = new MyTblWdbeQUntHk1NVector();
@@ -515,18 +517,14 @@ void DbsWdbe::initMy() {
 	((MyTblWdbeQVecList*) tblwdbeqveclist)->init(dbsMy);
 	tblwdbeqvecvec1nvectoritem = new MyTblWdbeQVecVec1NVectoritem();
 	((MyTblWdbeQVecVec1NVectoritem*) tblwdbeqvecvec1nvectoritem)->init(dbsMy);
-	tblwdbeqver1nrelease = new MyTblWdbeQVer1NRelease();
-	((MyTblWdbeQVer1NRelease*) tblwdbeqver1nrelease)->init(dbsMy);
-	tblwdbeqver1nsystem = new MyTblWdbeQVer1NSystem();
-	((MyTblWdbeQVer1NSystem*) tblwdbeqver1nsystem)->init(dbsMy);
+	tblwdbeqver1ncomponent = new MyTblWdbeQVer1NComponent();
+	((MyTblWdbeQVer1NComponent*) tblwdbeqver1ncomponent)->init(dbsMy);
 	tblwdbeqver1nunit = new MyTblWdbeQVer1NUnit();
 	((MyTblWdbeQVer1NUnit*) tblwdbeqver1nunit)->init(dbsMy);
 	tblwdbeqverbvr1nversion = new MyTblWdbeQVerBvr1NVersion();
 	((MyTblWdbeQVerBvr1NVersion*) tblwdbeqverbvr1nversion)->init(dbsMy);
 	tblwdbeqverlist = new MyTblWdbeQVerList();
 	((MyTblWdbeQVerList*) tblwdbeqverlist)->init(dbsMy);
-	tblwdbeqvermnlibrary = new MyTblWdbeQVerMNLibrary();
-	((MyTblWdbeQVerMNLibrary*) tblwdbeqvermnlibrary)->init(dbsMy);
 	tblwdbeqverref1nfile = new MyTblWdbeQVerRef1NFile();
 	((MyTblWdbeQVerRef1NFile*) tblwdbeqverref1nfile)->init(dbsMy);
 	tblwdbeqvitlist = new MyTblWdbeQVitList();
@@ -619,8 +617,12 @@ void DbsWdbe::initPg() {
 	((PgTblWdbeJMVersionState*) tblwdbejmversionstate)->init(dbsPg);
 	tblwdbembank = new PgTblWdbeMBank();
 	((PgTblWdbeMBank*) tblwdbembank)->init(dbsPg);
+	tblwdbemcdc = new PgTblWdbeMCdc();
+	((PgTblWdbeMCdc*) tblwdbemcdc)->init(dbsPg);
 	tblwdbemcommand = new PgTblWdbeMCommand();
 	((PgTblWdbeMCommand*) tblwdbemcommand)->init(dbsPg);
+	tblwdbemcomponent = new PgTblWdbeMComponent();
+	((PgTblWdbeMComponent*) tblwdbemcomponent)->init(dbsPg);
 	tblwdbemcontroller = new PgTblWdbeMController();
 	((PgTblWdbeMController*) tblwdbemcontroller)->init(dbsPg);
 	tblwdbemcoreproject = new PgTblWdbeMCoreproject();
@@ -673,10 +675,6 @@ void DbsWdbe::initPg() {
 	((PgTblWdbeMSession*) tblwdbemsession)->init(dbsPg);
 	tblwdbemsignal = new PgTblWdbeMSignal();
 	((PgTblWdbeMSignal*) tblwdbemsignal)->init(dbsPg);
-	tblwdbemsystem = new PgTblWdbeMSystem();
-	((PgTblWdbeMSystem*) tblwdbemsystem)->init(dbsPg);
-	tblwdbemtarget = new PgTblWdbeMTarget();
-	((PgTblWdbeMTarget*) tblwdbemtarget)->init(dbsPg);
 	tblwdbemunit = new PgTblWdbeMUnit();
 	((PgTblWdbeMUnit*) tblwdbemunit)->init(dbsPg);
 	tblwdbemuser = new PgTblWdbeMUser();
@@ -691,12 +689,14 @@ void DbsWdbe::initPg() {
 	((PgTblWdbeMVectoritem*) tblwdbemvectoritem)->init(dbsPg);
 	tblwdbemversion = new PgTblWdbeMVersion();
 	((PgTblWdbeMVersion*) tblwdbemversion)->init(dbsPg);
+	tblwdbermcdcmsignal = new PgTblWdbeRMCdcMSignal();
+	((PgTblWdbeRMCdcMSignal*) tblwdbermcdcmsignal)->init(dbsPg);
 	tblwdbermcommandmcontroller = new PgTblWdbeRMCommandMController();
 	((PgTblWdbeRMCommandMController*) tblwdbermcommandmcontroller)->init(dbsPg);
+	tblwdbermcomponentmlibrary = new PgTblWdbeRMComponentMLibrary();
+	((PgTblWdbeRMComponentMLibrary*) tblwdbermcomponentmlibrary)->init(dbsPg);
 	tblwdbermcoreprojectmperson = new PgTblWdbeRMCoreprojectMPerson();
 	((PgTblWdbeRMCoreprojectMPerson*) tblwdbermcoreprojectmperson)->init(dbsPg);
-	tblwdbermlibrarymversion = new PgTblWdbeRMLibraryMVersion();
-	((PgTblWdbeRMLibraryMVersion*) tblwdbermlibrarymversion)->init(dbsPg);
 	tblwdbermmodulemmodule = new PgTblWdbeRMModuleMModule();
 	((PgTblWdbeRMModuleMModule*) tblwdbermmodulemmodule)->init(dbsPg);
 	tblwdbermmodulemperipheral = new PgTblWdbeRMModuleMPeripheral();
@@ -712,6 +712,10 @@ void DbsWdbe::initPg() {
 	((PgTblWdbeQBnk1NPin*) tblwdbeqbnk1npin)->init(dbsPg);
 	tblwdbeqbnklist = new PgTblWdbeQBnkList();
 	((PgTblWdbeQBnkList*) tblwdbeqbnklist)->init(dbsPg);
+	tblwdbeqcdclist = new PgTblWdbeQCdcList();
+	((PgTblWdbeQCdcList*) tblwdbeqcdclist)->init(dbsPg);
+	tblwdbeqcdcmnsignal = new PgTblWdbeQCdcMNSignal();
+	((PgTblWdbeQCdcMNSignal*) tblwdbeqcdcmnsignal)->init(dbsPg);
 	tblwdbeqcmdainvpar = new PgTblWdbeQCmdAInvpar();
 	((PgTblWdbeQCmdAInvpar*) tblwdbeqcmdainvpar)->init(dbsPg);
 	tblwdbeqcmdaretpar = new PgTblWdbeQCmdARetpar();
@@ -720,6 +724,12 @@ void DbsWdbe::initPg() {
 	((PgTblWdbeQCmdList*) tblwdbeqcmdlist)->init(dbsPg);
 	tblwdbeqcmdmncontroller = new PgTblWdbeQCmdMNController();
 	((PgTblWdbeQCmdMNController*) tblwdbeqcmdmncontroller)->init(dbsPg);
+	tblwdbeqcmp1nrelease = new PgTblWdbeQCmp1NRelease();
+	((PgTblWdbeQCmp1NRelease*) tblwdbeqcmp1nrelease)->init(dbsPg);
+	tblwdbeqcmplist = new PgTblWdbeQCmpList();
+	((PgTblWdbeQCmpList*) tblwdbeqcmplist)->init(dbsPg);
+	tblwdbeqcmpmnlibrary = new PgTblWdbeQCmpMNLibrary();
+	((PgTblWdbeQCmpMNLibrary*) tblwdbeqcmpmnlibrary)->init(dbsPg);
 	tblwdbeqcpr1ncoreversion = new PgTblWdbeQCpr1NCoreversion();
 	((PgTblWdbeQCpr1NCoreversion*) tblwdbeqcpr1ncoreversion)->init(dbsPg);
 	tblwdbeqcprlist = new PgTblWdbeQCprList();
@@ -760,8 +770,8 @@ void DbsWdbe::initPg() {
 	((PgTblWdbeQLibAMakefile*) tblwdbeqlibamakefile)->init(dbsPg);
 	tblwdbeqliblist = new PgTblWdbeQLibList();
 	((PgTblWdbeQLibList*) tblwdbeqliblist)->init(dbsPg);
-	tblwdbeqlibmnversion = new PgTblWdbeQLibMNVersion();
-	((PgTblWdbeQLibMNVersion*) tblwdbeqlibmnversion)->init(dbsPg);
+	tblwdbeqlibmncomponent = new PgTblWdbeQLibMNComponent();
+	((PgTblWdbeQLibMNComponent*) tblwdbeqlibmncomponent)->init(dbsPg);
 	tblwdbeqmch1nrelease = new PgTblWdbeQMch1NRelease();
 	((PgTblWdbeQMch1NRelease*) tblwdbeqmch1nrelease)->init(dbsPg);
 	tblwdbeqmchamakefile = new PgTblWdbeQMchAMakefile();
@@ -772,6 +782,8 @@ void DbsWdbe::initPg() {
 	((PgTblWdbeQMchList*) tblwdbeqmchlist)->init(dbsPg);
 	tblwdbeqmchsup1nmachine = new PgTblWdbeQMchSup1NMachine();
 	((PgTblWdbeQMchSup1NMachine*) tblwdbeqmchsup1nmachine)->init(dbsPg);
+	tblwdbeqmod1ncdc = new PgTblWdbeQMod1NCdc();
+	((PgTblWdbeQMod1NCdc*) tblwdbeqmod1ncdc)->init(dbsPg);
 	tblwdbeqmod1nprocess = new PgTblWdbeQMod1NProcess();
 	((PgTblWdbeQMod1NProcess*) tblwdbeqmod1nprocess)->init(dbsPg);
 	tblwdbeqmodapar = new PgTblWdbeQModAPar();
@@ -852,6 +864,8 @@ void DbsWdbe::initPg() {
 	((PgTblWdbeQPplPpl1NSegment*) tblwdbeqpplppl1nsegment)->init(dbsPg);
 	tblwdbeqprcfsmfsm1nfsmstate = new PgTblWdbeQPrcFsmFsm1NFsmstate();
 	((PgTblWdbeQPrcFsmFsm1NFsmstate*) tblwdbeqprcfsmfsm1nfsmstate)->init(dbsPg);
+	tblwdbeqprcfsmhk1nvector = new PgTblWdbeQPrcFsmHk1NVector();
+	((PgTblWdbeQPrcFsmHk1NVector*) tblwdbeqprcfsmhk1nvector)->init(dbsPg);
 	tblwdbeqprckhdltype = new PgTblWdbeQPrcKHdltype();
 	((PgTblWdbeQPrcKHdltype*) tblwdbeqprckhdltype)->init(dbsPg);
 	tblwdbeqprclist = new PgTblWdbeQPrcList();
@@ -892,6 +906,8 @@ void DbsWdbe::initPg() {
 	((PgTblWdbeQSelect*) tblwdbeqselect)->init(dbsPg);
 	tblwdbeqsiglist = new PgTblWdbeQSigList();
 	((PgTblWdbeQSigList*) tblwdbeqsiglist)->init(dbsPg);
+	tblwdbeqsigmncdc = new PgTblWdbeQSigMNCdc();
+	((PgTblWdbeQSigMNCdc*) tblwdbeqsigmncdc)->init(dbsPg);
 	tblwdbeqsigsrc1nsensitivity = new PgTblWdbeQSigSrc1NSensitivity();
 	((PgTblWdbeQSigSrc1NSensitivity*) tblwdbeqsigsrc1nsensitivity)->init(dbsPg);
 	tblwdbeqsil1nbank = new PgTblWdbeQSil1NBank();
@@ -900,10 +916,6 @@ void DbsWdbe::initPg() {
 	((PgTblWdbeQSil1NInterrupt*) tblwdbeqsil1ninterrupt)->init(dbsPg);
 	tblwdbeqsil1nperipheral = new PgTblWdbeQSil1NPeripheral();
 	((PgTblWdbeQSil1NPeripheral*) tblwdbeqsil1nperipheral)->init(dbsPg);
-	tblwdbeqsil1ntarget = new PgTblWdbeQSil1NTarget();
-	((PgTblWdbeQSil1NTarget*) tblwdbeqsil1ntarget)->init(dbsPg);
-	tblwdbeqsilfwd1ncontroller = new PgTblWdbeQSilFwd1NController();
-	((PgTblWdbeQSilFwd1NController*) tblwdbeqsilfwd1ncontroller)->init(dbsPg);
 	tblwdbeqsilhk1nmodule = new PgTblWdbeQSilHk1NModule();
 	((PgTblWdbeQSilHk1NModule*) tblwdbeqsilhk1nmodule)->init(dbsPg);
 	tblwdbeqsilhk1nvector = new PgTblWdbeQSilHk1NVector();
@@ -920,24 +932,12 @@ void DbsWdbe::initPg() {
 	((PgTblWdbeQSilSil1NUnit*) tblwdbeqsilsil1nunit)->init(dbsPg);
 	tblwdbeqsnslist = new PgTblWdbeQSnsList();
 	((PgTblWdbeQSnsList*) tblwdbeqsnslist)->init(dbsPg);
-	tblwdbeqsyshk1nvector = new PgTblWdbeQSysHk1NVector();
-	((PgTblWdbeQSysHk1NVector*) tblwdbeqsyshk1nvector)->init(dbsPg);
-	tblwdbeqsyslist = new PgTblWdbeQSysList();
-	((PgTblWdbeQSysList*) tblwdbeqsyslist)->init(dbsPg);
-	tblwdbeqsyssys1ntarget = new PgTblWdbeQSysSys1NTarget();
-	((PgTblWdbeQSysSys1NTarget*) tblwdbeqsyssys1ntarget)->init(dbsPg);
-	tblwdbeqtrglist = new PgTblWdbeQTrgList();
-	((PgTblWdbeQTrgList*) tblwdbeqtrglist)->init(dbsPg);
 	tblwdbequnt1nbank = new PgTblWdbeQUnt1NBank();
 	((PgTblWdbeQUnt1NBank*) tblwdbequnt1nbank)->init(dbsPg);
 	tblwdbequnt1ninterrupt = new PgTblWdbeQUnt1NInterrupt();
 	((PgTblWdbeQUnt1NInterrupt*) tblwdbequnt1ninterrupt)->init(dbsPg);
 	tblwdbequnt1nperipheral = new PgTblWdbeQUnt1NPeripheral();
 	((PgTblWdbeQUnt1NPeripheral*) tblwdbequnt1nperipheral)->init(dbsPg);
-	tblwdbequnt1ntarget = new PgTblWdbeQUnt1NTarget();
-	((PgTblWdbeQUnt1NTarget*) tblwdbequnt1ntarget)->init(dbsPg);
-	tblwdbequntfwd1ncontroller = new PgTblWdbeQUntFwd1NController();
-	((PgTblWdbeQUntFwd1NController*) tblwdbequntfwd1ncontroller)->init(dbsPg);
 	tblwdbequnthk1nmodule = new PgTblWdbeQUntHk1NModule();
 	((PgTblWdbeQUntHk1NModule*) tblwdbequnthk1nmodule)->init(dbsPg);
 	tblwdbequnthk1nvector = new PgTblWdbeQUntHk1NVector();
@@ -972,18 +972,14 @@ void DbsWdbe::initPg() {
 	((PgTblWdbeQVecList*) tblwdbeqveclist)->init(dbsPg);
 	tblwdbeqvecvec1nvectoritem = new PgTblWdbeQVecVec1NVectoritem();
 	((PgTblWdbeQVecVec1NVectoritem*) tblwdbeqvecvec1nvectoritem)->init(dbsPg);
-	tblwdbeqver1nrelease = new PgTblWdbeQVer1NRelease();
-	((PgTblWdbeQVer1NRelease*) tblwdbeqver1nrelease)->init(dbsPg);
-	tblwdbeqver1nsystem = new PgTblWdbeQVer1NSystem();
-	((PgTblWdbeQVer1NSystem*) tblwdbeqver1nsystem)->init(dbsPg);
+	tblwdbeqver1ncomponent = new PgTblWdbeQVer1NComponent();
+	((PgTblWdbeQVer1NComponent*) tblwdbeqver1ncomponent)->init(dbsPg);
 	tblwdbeqver1nunit = new PgTblWdbeQVer1NUnit();
 	((PgTblWdbeQVer1NUnit*) tblwdbeqver1nunit)->init(dbsPg);
 	tblwdbeqverbvr1nversion = new PgTblWdbeQVerBvr1NVersion();
 	((PgTblWdbeQVerBvr1NVersion*) tblwdbeqverbvr1nversion)->init(dbsPg);
 	tblwdbeqverlist = new PgTblWdbeQVerList();
 	((PgTblWdbeQVerList*) tblwdbeqverlist)->init(dbsPg);
-	tblwdbeqvermnlibrary = new PgTblWdbeQVerMNLibrary();
-	((PgTblWdbeQVerMNLibrary*) tblwdbeqvermnlibrary)->init(dbsPg);
 	tblwdbeqverref1nfile = new PgTblWdbeQVerRef1NFile();
 	((PgTblWdbeQVerRef1NFile*) tblwdbeqverref1nfile)->init(dbsPg);
 	tblwdbeqvitlist = new PgTblWdbeQVitList();
@@ -1492,20 +1488,15 @@ uint DbsWdbe::getIxWSubsetByWdbeMModule(
 		args.push_back(!a);
 		a = false; a = (rec->ixVBasetype == VecWdbeVMModuleBasetype::CTR);
 		args.push_back(a);
-		a = false; a = (rec->ixVBasetype == VecWdbeVMModuleBasetype::FWDCTR);
-		args.push_back(a);
-		b = args.back(); args.pop_back();
-		a = args.back(); args.pop_back();
-		args.push_back(a || b);
 		b = args.back(); args.pop_back();
 		a = args.back(); args.pop_back();
 		args.push_back(a && b);
 		if (args.back()) {
 			ixWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMCT;
-			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMIB;
+			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMTP;
 			ixWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMOD;
 			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMOD;
-			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMTP;
+			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMIB;
 		} else {
 		};
 
@@ -1535,10 +1526,10 @@ uint DbsWdbe::getIxWSubsetByWdbeMModule(
 		args.push_back(a && b);
 		if (args.back()) {
 			ixWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMIB;
-			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMCT;
+			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMTP;
 			ixWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMOD;
 			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMOD;
-			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMTP;
+			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMCT;
 		} else {
 		};
 
@@ -1564,9 +1555,9 @@ uint DbsWdbe::getIxWSubsetByWdbeMModule(
 		if (args.back()) {
 			ixWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMOD;
 		} else {
-			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMCT;
-			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMIB;
 			ixWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMTP;
+			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMIB;
+			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMCT;
 		};
 
 		dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMOD;
@@ -1589,8 +1580,8 @@ uint DbsWdbe::getIxWSubsetByWdbeMModule(
 		args.push_back(a && b);
 		if (args.back()) {
 			ixWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMTP;
-			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMCT;
 			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMIB;
+			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMCT;
 		} else {
 			ixWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMOD;
 		};

@@ -28,6 +28,10 @@ WdbeQFstAStep::WdbeQFstAStep(
 			, const string Ip3
 			, const string Cond4
 			, const string Ip4
+			, const string Cond5
+			, const string Ip5
+			, const string Cond6
+			, const string Ip6
 		) {
 	this->jnum = jnum;
 	this->stubFnxRefWdbeMFsmstate = stubFnxRefWdbeMFsmstate;
@@ -39,6 +43,10 @@ WdbeQFstAStep::WdbeQFstAStep(
 	this->Ip3 = Ip3;
 	this->Cond4 = Cond4;
 	this->Ip4 = Ip4;
+	this->Cond5 = Cond5;
+	this->Ip5 = Ip5;
+	this->Cond6 = Cond6;
+	this->Ip6 = Ip6;
 };
 
 bool WdbeQFstAStep::readXML(
@@ -63,6 +71,10 @@ bool WdbeQFstAStep::readXML(
 		extractStringUclc(docctx, basexpath, "Ip3", "ip3", Ip3);
 		extractStringUclc(docctx, basexpath, "Cond4", "cn4", Cond4);
 		extractStringUclc(docctx, basexpath, "Ip4", "ip4", Ip4);
+		extractStringUclc(docctx, basexpath, "Cond5", "cn5", Cond5);
+		extractStringUclc(docctx, basexpath, "Ip5", "ip5", Ip5);
+		extractStringUclc(docctx, basexpath, "Cond6", "cn6", Cond6);
+		extractStringUclc(docctx, basexpath, "Ip6", "ip6", Ip6);
 	};
 
 	return basefound;

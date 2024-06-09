@@ -22,6 +22,7 @@ uint TblWdbeMVersion::VecVState::getIx(
 
 	if (s == "newcre") return NEWCRE;
 	if (s == "newimp") return NEWIMP;
+	if (s == "dsndeploy") return DSNDEPLOY;
 	if (s == "dsnmdlstr") return DSNMDLSTR;
 	if (s == "dsncmdset") return DSNCMDSET;
 	if (s == "dsndflalg") return DSNDFLALG;
@@ -38,6 +39,7 @@ string TblWdbeMVersion::VecVState::getSref(
 		) {
 	if (ix == NEWCRE) return("newcre");
 	if (ix == NEWIMP) return("newimp");
+	if (ix == DSNDEPLOY) return("dsndeploy");
 	if (ix == DSNMDLSTR) return("dsnmdlstr");
 	if (ix == DSNCMDSET) return("dsncmdset");
 	if (ix == DSNDFLALG) return("dsndflalg");
@@ -56,6 +58,7 @@ string TblWdbeMVersion::VecVState::getTitle(
 	if (ixWdbeVLocale == 1) {
 		if (ix == NEWCRE) return("newly created");
 		if (ix == NEWIMP) return("newly imported");
+		if (ix == DSNDEPLOY) return("design phase, deployment information imported");
 		if (ix == DSNMDLSTR) return("design phase, modular structure imported");
 		if (ix == DSNCMDSET) return("design phase, command set imported");
 		if (ix == DSNDFLALG) return("design phase, data flows and algorithms imported");
@@ -75,5 +78,5 @@ void TblWdbeMVersion::VecVState::fillFeed(
 		) {
 	feed.clear();
 
-	for (unsigned int i = 1; i <= 9; i++) feed.appendIxSrefTitles(i, getSref(i), getTitle(i, ixWdbeVLocale));
+	for (unsigned int i = 1; i <= 10; i++) feed.appendIxSrefTitles(i, getSref(i), getTitle(i, ixWdbeVLocale));
 };

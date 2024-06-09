@@ -5,19 +5,6 @@ stat	WdbeCplmst	complement modular structure	false
 	wdbeopd1
 	ImeIRMComponentMOppack.end
 	ImeIMOp.sref	Shrdat	Comment
-	WdbeCplmstSys	false	add standard vectors
-		ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
-		0	refWdbeMVersion	ubigint
-		ImeIAMOpInvarg.end
-		ImeIMSquawk2.Title	Example
-			add standard vectors for version 'ICARUSDetectorHardwareControl 0.1.0'
-			ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title
-			enus	add standard vectors for version '&StubWdbeVerStd'
-			ImeIJMSquawkTitle2.end
-			ImeIRMSquawkMStub2.srefRefWznmMStub
-			StubWdbeVerStd
-			ImeIRMSquawkMStub2.end
-		ImeIMSquawk2.end
 	WdbeCplmstUnt	false	add standard vectors
 		ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
 		0	refWdbeMUnit	ubigint
@@ -47,7 +34,7 @@ stat	WdbeCplmst	complement modular structure	false
 			StubWdbeMdlStd
 			ImeIRMSquawkMStub2.end
 		ImeIMSquawk2.end
-	WdbeCplmstCtrEctr	false	add controller
+	WdbeCplmstCtrEctrHostifEhostif	false	add controller
 		ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
 		0	refWdbeMModule	ubigint
 		ImeIAMOpInvarg.end
@@ -55,19 +42,6 @@ stat	WdbeCplmst	complement modular structure	false
 			add controller for module 'dcx3-pmmu (controller)'
 			ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title
 			enus	add controller for module '&StubWdbeMdlStd'
-			ImeIJMSquawkTitle2.end
-			ImeIRMSquawkMStub2.srefRefWznmMStub
-			StubWdbeMdlStd
-			ImeIRMSquawkMStub2.end
-		ImeIMSquawk2.end
-	WdbeCplmstFwdctr	false	add read and write buffers and commands
-		ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
-		0	refWdbeMModule	ubigint
-		ImeIAMOpInvarg.end
-		ImeIMSquawk2.Title	Example
-			add read and write buffers and commands for module 'dcx3-qcdif (spifwd_v1_0 forwarding controller)'
-			ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title
-			enus	add read and write buffers and commands for module '&StubWdbeMdlStd'
 			ImeIJMSquawkTitle2.end
 			ImeIRMSquawkMStub2.srefRefWznmMStub
 			StubWdbeMdlStd
@@ -95,6 +69,24 @@ stat	WdbeGen	generate	false
 	wdbeopd1
 	ImeIRMComponentMOppack.end
 	ImeIMOp.sref	Shrdat	Comment
+	WdbeGenAux	false	generate auxiliary infrastructure
+		ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
+		0	refWdbeMModule	ubigint
+		0	Prjshort	string
+		0	Untsref	string
+		ImeIAMOpInvarg.end
+		ImeIAMOpRetval.irefRefWznmCAMOpRetval	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
+		0	logfile	string
+		ImeIAMOpRetval.end
+		ImeIMSquawk2.Title	Example
+			generate auxiliary infrastructure for module 'laser (easy model controller)'
+			ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title
+			enus	generate auxiliary infrastructure for module '&StubWdbeMdlStd'
+			ImeIJMSquawkTitle2.end
+			ImeIRMSquawkMStub2.srefRefWznmMStub
+			StubWdbeMdlStd
+			ImeIRMSquawkMStub2.end
+		ImeIMSquawk2.end
 	WdbeGenStdvec	false	fill standard vectors
 		ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
 		0	refWdbeMUnit	ubigint
@@ -106,22 +98,6 @@ stat	WdbeGen	generate	false
 			ImeIJMSquawkTitle2.end
 			ImeIRMSquawkMStub2.srefRefWznmMStub
 			StubWdbeUntStd
-			ImeIRMSquawkMStub2.end
-		ImeIMSquawk2.end
-	WdbeGenTest	false	generate test infrastructure
-		ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
-		0	refWdbeMModule	ubigint
-		ImeIAMOpInvarg.end
-		ImeIAMOpRetval.irefRefWznmCAMOpRetval	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
-		0	logfile	string
-		ImeIAMOpRetval.end
-		ImeIMSquawk2.Title	Example
-			generate test infrastructure for module 'laser (easy model controller)'
-			ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title
-			enus	generate test infrastructure for module '&StubWdbeMdlStd'
-			ImeIJMSquawkTitle2.end
-			ImeIRMSquawkMStub2.srefRefWznmMStub
-			StubWdbeMdlStd
 			ImeIRMSquawkMStub2.end
 		ImeIMSquawk2.end
 	WdbeGenWiring	false	generate wiring
@@ -161,7 +137,7 @@ stat	WdbeGenfst	generate fine structure	false
 			StubWdbeMdlStd
 			ImeIRMSquawkMStub2.end
 		ImeIMSquawk2.end
-	WdbeGenfstCtrFwdctr	false	add command process and FSM debug ports
+	WdbeGenfstCtr	false	add command process and FSM debug ports
 		ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
 		0	refWdbeMModule	ubigint
 		0	Prjshort	string
@@ -279,7 +255,15 @@ cust	WdbeMtpPlhfpga	fill module template-specific FPGA code placeholders	false
 	wdbeopd2
 	ImeIRMComponentMOppack.end
 	ImeIMOp.sref	Shrdat	Comment
-	WdbeMtpPlhfpgaPmmu_v1_0	false
+	WdbeMtpPlhfpgaCrcspec_v2_0	false
+	WdbeMtpPlhfpgaIdent_Easy_v1_0	false
+	WdbeMtpPlhfpgaCrcspec_v3_0	false
+	WdbeMtpPlhfpgaFsmtrack_Easy_v1_0	false
+	WdbeMtpPlhfpgaGptrack_Easy_v1_0	false
+	WdbeMtpPlhfpgaHostif_v1_0	false
+	WdbeMtpPlhfpgaCohostif_v1_0	false
+	WdbeMtpPlhfpgaHostif_Easy_v1_0	false
+	WdbeMtpPlhfpgaCohostif_Easy_v1_0	false
 	ImeIMOp.end
 cust	WdbeMtpPlhmcu	fill module template-specific MCU code placeholders	false
 	ImeIAMOppackInvarg.irefRefWznmCAMOppackInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
@@ -302,7 +286,6 @@ cust	WdbeMtpPlhmcu	fill module template-specific MCU code placeholders	false
 	wdbeopd2
 	ImeIRMComponentMOppack.end
 	ImeIMOp.sref	Shrdat	Comment
-	WdbeMtpPlhmcuUsbhostif_Easy_v1_0_Mcu	false
 	ImeIMOp.end
 cust	WdbeMtpCplmstbu	complement module template-specific modular structure bottom-up	false
 	ImeIAMOppackInvarg.irefRefWznmCAMOppackInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
@@ -322,40 +305,63 @@ cust	WdbeMtpCplmstbu	complement module template-specific modular structure botto
 	ImeIRMComponentMOppack.end
 	ImeIMOp.sref	Shrdat	Comment
 	WdbeMtpCplmstbuAdd_xlnx_v12_0	false	adapt port widths
-	WdbeMtpCplmstbuAxihostif_Easy_v1_0	false	connect AXI controllers, CRC and timeout
-	WdbeMtpCplmstbuAxihostif_Easy_v2_0	false	connect AXI controllers, CRC and timeout
-	WdbeMtpCplmstbuAxihostif_v1_0	false	connect AXI controllers, CRC and timeout
-	WdbeMtpCplmstbuCmdinv_v1_0	false	connect buffer
-	WdbeMtpCplmstbuCmdret_v1_0	false	connect buffer
+	WdbeMtpCplmstbuAxislave_v1_0	false	adapt port widths
+	WdbeMtpCplmstbuCmdinv_v2_0	false	connect buffer
+	WdbeMtpCplmstbuCmdret_v2_0	false	connect buffer
+	WdbeMtpCplmstbuCmult_xlnx_v6_0	false	adapt port widths
+	WdbeMtpCplmstbuCohostif_Easy_v1_0	false	connect PHY, CRC and timeout
+	WdbeMtpCplmstbuCohostif_v1_0	false	connect PHY, CRC and timeout
+	WdbeMtpCplmstbuCrcspec_v2_0	false	adapt port widths
+	WdbeMtpCplmstbuCrcspec_v3_0	false	adapt port widths
+	WdbeMtpCplmstbuCsi2_hard_mipi_rx_efnx_v1_3	false	adapt port widths
+	WdbeMtpCplmstbuDdrmux_Easy_v1_0	false	adapt port widths, connect PHY
 	WdbeMtpCplmstbuDft_xlnx_v4_0	false	adapt port widths
 	WdbeMtpCplmstbuDiv_xlnx_v3_0	false	adapt port widths
 	WdbeMtpCplmstbuDiv_xlnx_v5_1	false	adapt port widths
-	WdbeMtpCplmstbuDotmx2x16_v1_0	false	connect SPI interface
-	WdbeMtpCplmstbuDpbram_v1_0	false	adapt internal wiring
+	WdbeMtpCplmstbuDotmx2x16_v1_0	false	connect SPI master
 	WdbeMtpCplmstbuDpbram_xlnx_v8_4	false	adapt port widths
+	WdbeMtpCplmstbuDpebram_lttc_v1_2	false	adapt port widths
+	WdbeMtpCplmstbuDphy_rx_lttc_v1_4_csi	false	adapt port widths
+	WdbeMtpCplmstbuDpram_efnx_v1_0	false	adapt internal wiring
 	WdbeMtpCplmstbuDpsram_mchp_v1_0	false	adapt port identifiers and widths
 	WdbeMtpCplmstbuDsp48_xlnx_v3_0_aMultB	false	adapt port widths
 	WdbeMtpCplmstbuDsp48_xlnx_v3_0_aPlusDPlusC	false	adapt port widths
+	WdbeMtpCplmstbuEbrom_lttc_v1_3	false	adapt port widths
+	WdbeMtpCplmstbuEFX_DPRAM10	false	adapt port widths
+	WdbeMtpCplmstbuEFX_RAM10	false	adapt port widths
+	WdbeMtpCplmstbuFifo_lttc_v1_3	false	adapt port widths
+	WdbeMtpCplmstbuFsmprobe_Easy_v1_0	false	add capture ports and fill vector
+	WdbeMtpCplmstbuFsmtrack_Easy_v1_0	false	add capture/trigger ports, fill vectors and connect buffers
+	WdbeMtpCplmstbuGpio_Easy_v1_0	false	adapt port widths
+	WdbeMtpCplmstbuGptrack_Easy_v1_0	false	add capture/trigger ports, fill vectors and connect buffer
+	WdbeMtpCplmstbuHostif_Easy_v1_0	false	connect PHY, CRC and timeout
+	WdbeMtpCplmstbuHostif_v1_0	false	connect PHY, CRC and timeout
+	WdbeMtpCplmstbuI2c_Easy_v1_0	false	connect I2C master
+	WdbeMtpCplmstbuI2cmaster_v1_0	false	connect tri-state buffer primitive
+	WdbeMtpCplmstbuIdent_Easy_v1_0	false	add configuration ports and signals
+	WdbeMtpCplmstbuIod_mchp_v1_0_mipirx	false	adapt port widths
+	WdbeMtpCplmstbuIrq_Easy_v1_0	false	add capture port
+	WdbeMtpCplmstbuMipidec_mchp_v1_0	false	adapt port widths
+	WdbeMtpCplmstbuMipirx_xlnx_v5_1	false	adapt port configuration and widths
 	WdbeMtpCplmstbuMpfs_ip_AXI_v1_0	false	add pin substitute signals
 	WdbeMtpCplmstbuMult_xlnx_v12_0	false	adapt port widths
-	WdbeMtpCplmstbuOled128x32_v1_0	false	connect SPI interface
-	WdbeMtpCplmstbuPmmu_v1_0	false	connect buffers, fill slot vector
-	WdbeMtpCplmstbuSpbram_v1_0	false	adapt internal wiring
-	WdbeMtpCplmstbuSpifwd_v1_0	false	connect buffers, SPI interface, CRC and timeout
-	WdbeMtpCplmstbuSpihostif_Easy_v1_0	false	connect SPI interface, CRC and timeout
-	WdbeMtpCplmstbuSpihostif_v1_0	false	connect SPI interface, CRC and timeout
+	WdbeMtpCplmstbuOled128x32_v1_0	false	connect SPI master
+	WdbeMtpCplmstbuSelectio_xlnx_v5_1_mipirx	false	adapt port widths
+	WdbeMtpCplmstbuSmartreg_v1_0	false	connect memory
+	WdbeMtpCplmstbuSmartreg_Easy_v1_0	false	connect memory
+	WdbeMtpCplmstbuSpbram_xlnx_v8_4	false	adapt port widths
+	WdbeMtpCplmstbuSpebram_lttc_v1_4	false	adapt port widths
+	WdbeMtpCplmstbuSpram_efnx_v1_0	false	adapt internal wiring
 	WdbeMtpCplmstbuSub_xlnx_v12_0	false	adapt port widths
-	WdbeMtpCplmstbuTop_mchp_v1_0	false	connect clock primitives
-	WdbeMtpCplmstbuTop_xlnx_v1_0	false	connect clock primitives
+	WdbeMtpCplmstbuToc_v1_0	false	connect memory
+	WdbeMtpCplmstbuTop_v1_0	false	connect clock primitives
 	WdbeMtpCplmstbuTpsram_mchp_v1_0	false	adapt port identifiers and widths
-	WdbeMtpCplmstbuUarthostif_Easy_v1_0	false	connect UART controllers, CRC and timeout
-	WdbeMtpCplmstbuUarthostif_v1_0	false	connect UART controllers, CRC and timeout
+	WdbeMtpCplmstbuUart_Easy_v1_0	false	connect UART controllers and timeout
 	WdbeMtpCplmstbuUartrx_v1_0_Mcu	false	add handshake with managing module
 	WdbeMtpCplmstbuUarttx_v1_0_Mcu	false	add handshake with managing module
-	WdbeMtpCplmstbuUsbrxtx_slbs_v1_0_Mcu	false	add handshake with managing module
+	WdbeMtpCplmstbuUsbslave_slbs_v1_0_Mcu	false	add handshake with managing module
 	WdbeMtpCplmstbuXadc_xlnx_v3_3	false	add analog input ports
-	WdbeMtpCplmstbuZynq_ip_AXI_v1_0	false	add pin substitute signals
-	WdbeMtpCplmstbuZynq_ip_AXI_v2_0	false	add pin substitute signals
+	WdbeMtpCplmstbuXfft_xlnx_v9_1	false	adapt port widths
 	ImeIMOp.end
 cust	WdbeMtpCplmsttd	complement module template-specific modular structure top-down	false
 	ImeIAMOppackInvarg.irefRefWznmCAMOppackInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
@@ -374,13 +380,20 @@ cust	WdbeMtpCplmsttd	complement module template-specific modular structure top-d
 	wdbeopd2
 	ImeIRMComponentMOppack.end
 	ImeIMOp.sref	Shrdat	Comment
-	WdbeMtpCplmsttdCmdinv_v1_0	false	adapt buffer size
-	WdbeMtpCplmsttdCmdret_v1_0	false	adapt buffer size
-	WdbeMtpCplmsttdDpbram_v1_0	false	infer BRAM primitives and adapt port widths
-	WdbeMtpCplmsttdPmmu_v1_0	false	adapt buffer sizes
-	WdbeMtpCplmsttdSpbram_v1_0	false	infer BRAM primitives and adapt port widths
-	WdbeMtpCplmsttdTop_mchp_v1_0	false	infer clock primitives and adapt ports
-	WdbeMtpCplmsttdTop_xlnx_v1_0	false	infer clock primitives and adapt ports
+	WdbeMtpCplmsttdDdrmux_Easy_v1_0	false	infer PHY
+	WdbeMtpCplmsttdDpram_efnx_v1_0	false	infer EFX_DPRAM10  primitives
+	WdbeMtpCplmsttdFsmtrack_Easy_v1_0	false	infer buffers
+	WdbeMtpCplmsttdGpio_Easy_v1_0	false	infer tri-state buffer primitives
+	WdbeMtpCplmsttdGptrack_Easy_v1_0	false	infer buffer
+	WdbeMtpCplmsttdI2cmaster_v1_0	false	infer tri-state buffer primitive
+	WdbeMtpCplmsttdSpram_efnx_v1_0	false	infer EFX_RAM10 primitives
+	WdbeMtpCplmsttdTop_v1_0	false	infer clock primitives and adapt ports
+	WdbeMtpCplmsttdCmdinv_v2_0	false	infer buffer
+	WdbeMtpCplmsttdCmdret_v2_0	false	infer buffer
+	WdbeMtpCplmsttdHostif_v1_0	false	infer PHY
+	WdbeMtpCplmsttdCohostif_v1_0	false	infer PHY
+	WdbeMtpCplmsttdHostif_Easy_v1_0	false	infer PHY
+	WdbeMtpCplmsttdCohostif_Easy_v1_0	false	infer PHY
 	ImeIMOp.end
 cust	WdbeMtpGenfst	generate module template-specific fine structure	false
 	ImeIAMOppackInvarg.irefRefWznmCAMOppackInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
@@ -399,11 +412,13 @@ cust	WdbeMtpGenfst	generate module template-specific fine structure	false
 	wdbeopd2
 	ImeIRMComponentMOppack.end
 	ImeIMOp.sref	Shrdat	Comment
-	WdbeMtpGenfstPmmu_v1_0	false	add command process handshake
-	WdbeMtpGenfstSpifwd_v1_0	false	add command process handshake
+	WdbeMtpGenfstDdrmux_Easy_v1_0	false	add A/B buffers, processes and clock domain crossing
+	WdbeMtpGenfstFsmtrack_Easy_v1_0	false	add clock domain crossing
+	WdbeMtpGenfstGpio_Easy_v1_0	false	add process, signals and command handshake
+	WdbeMtpGenfstGptrack_Easy_v1_0	false	add clock domain crossing
 	WdbeMtpGenfstTkclksrc_v1_0	false	add command process handshake
-	WdbeMtpGenfstUarthostif_Easy_v1_1_Mcu	false	add process and sensitivities
-	WdbeMtpGenfstUsbhostif_Easy_v1_0_Mcu	false	add process and sensitivity
+	WdbeMtpGenfstUarthostif_Easy_v2_0_Mcu	false	add process and sensitivities
+	WdbeMtpGenfstUsbhostif_Easy_v2_0_Mcu	false	add process and sensitivity
 	ImeIMOp.end
 cust	WdbeMtpWrfpga	write module template-specific FPGA code	false
 	ImeIAMOppackInvarg.irefRefWznmCAMOppackInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
@@ -425,16 +440,27 @@ cust	WdbeMtpWrfpga	write module template-specific FPGA code	false
 	wdbeopd2
 	ImeIRMComponentMOppack.end
 	ImeIMOp.sref	Shrdat	Comment
-	WdbeMtpWrfpgaCmdbus_v1_0	false
-	WdbeMtpWrfpgaCmdinv_v1_0	false
-	WdbeMtpWrfpgaCmdret_v1_0	false
-	WdbeMtpWrfpgaCrcspec_v1_0	false
+	WdbeMtpWrfpgaCmdinv_v2_0	false
+	WdbeMtpWrfpgaCmdret_v2_0	false
+	WdbeMtpWrfpgaCohostif_Easy_v1_0	false
+	WdbeMtpWrfpgaCohostif_v1_0	false
 	WdbeMtpWrfpgaCrcspec_32_v1_0	false
-	WdbeMtpWrfpgaDpbram_v1_0	false
-	WdbeMtpWrfpgaSpbram_v1_0	false
-	WdbeMtpWrfpgaPmmu_v1_0	false
+	WdbeMtpWrfpgaCrcspec_v1_0	false
+	WdbeMtpWrfpgaCrcspec_v2_0	false
+	WdbeMtpWrfpgaCrcspec_v3_0	false
+	WdbeMtpWrfpgaDdrmux_Easy_v1_0	false
+	WdbeMtpWrfpgaDpram_efnx_v1_0	false
+	WdbeMtpWrfpgaFsmprobe_Easy_v1_0	false
+	WdbeMtpWrfpgaFsmtrack_Easy_v1_0	false
+	WdbeMtpWrfpgaGpio_Easy_v1_0	false
+	WdbeMtpWrfpgaGptrack_Easy_v1_0	false
+	WdbeMtpWrfpgaHostif_Easy_v1_0	false
+	WdbeMtpWrfpgaHostif_v1_0	false
+	WdbeMtpWrfpgaI2cmaster_v1_0	false
+	WdbeMtpWrfpgaIdent_Easy_v1_0	false
+	WdbeMtpWrfpgaIrq_Easy_v1_0	false
+	WdbeMtpWrfpgaSpram_efnx_v1_0	false
 	WdbeMtpWrfpgaTkclksrc_v1_0	false
-	WdbeMtpWrfpgaSpifwd_v1_0	false
 	ImeIMOp.end
 cust	WdbeMtpWrmcu	write module template-specific MCU code	false
 	ImeIAMOppackInvarg.irefRefWznmCAMOppackInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
@@ -456,8 +482,8 @@ cust	WdbeMtpWrmcu	write module template-specific MCU code	false
 	wdbeopd2
 	ImeIRMComponentMOppack.end
 	ImeIMOp.sref	Shrdat	Comment
-	WdbeMtpWrmcuUarthostif_Easy_v1_1_Mcu	false
-	WdbeMtpWrmcuUsbhostif_Easy_v1_0_Mcu	false
+	WdbeMtpWrmcuUarthostif_Easy_v2_0_Mcu	false
+	WdbeMtpWrmcuUsbhostif_Easy_v2_0_Mcu	false
 	ImeIMOp.end
 stat	WdbePlhfpga	fill FPGA code placeholders	false
 	ImeIRMComponentMOppack.srefRefWznmMComponent
@@ -498,7 +524,7 @@ stat	WdbePlhfpga	fill FPGA code placeholders	false
 			StubWdbeModStd
 			ImeIRMSquawkMStub2.end
 		ImeIMSquawk2.end
-	WdbePlhfpgaEhostif	false	fill type-specific placeholders
+	WdbePlhfpgaCtr	false	fill type-specific placeholders
 		ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
 		0	refWdbeMModule	ubigint
 		ImeIAMOpInvarg.end
@@ -507,24 +533,7 @@ stat	WdbePlhfpga	fill FPGA code placeholders	false
 		0	vals	stringvec
 		ImeIAMOpRetval.end
 		ImeIMSquawk2.Title	Example
-			fill type-specific placeholders for module 'icm2-hostif (uarthostif_Easy_v1_0 easy model host interface)'
-			ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title
-			enus	fill type-specific placeholders for module '&StubWdbeModStd;'
-			ImeIJMSquawkTitle2.end
-			ImeIRMSquawkMStub2.srefRefWznmMStub
-			StubWdbeModStd
-			ImeIRMSquawkMStub2.end
-		ImeIMSquawk2.end
-	WdbePlhfpgaFwdctr	false	fill type-specific placeholders
-		ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
-		0	refWdbeMModule	ubigint
-		ImeIAMOpInvarg.end
-		ImeIAMOpRetval.irefRefWznmCAMOpRetval	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
-		0	keys	stringvec
-		0	vals	stringvec
-		ImeIAMOpRetval.end
-		ImeIMSquawk2.Title	Example
-			fill type-specific placeholders for module 'dcx3-qcdif (fwdctr_v1_0 forwarding controller)'
+			fill type-specific placeholders for module 'dcx3-qcdif (ctr_v1_0 controller)'
 			ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title
 			enus	fill type-specific placeholders for module '&StubWdbeModStd;'
 			ImeIJMSquawkTitle2.end
@@ -703,20 +712,6 @@ stat	WdbeWrdev	write device access library code	false
 			StubWdbeRlsStd
 			ImeIRMSquawkMStub2.end
 		ImeIMSquawk2.end
-	WdbeWrdevSys	false	write C++ code for system
-		ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
-		0	refWdbeMSystem	ubigint
-		0	folder	string
-		ImeIAMOpInvarg.end
-		ImeIMSquawk2.Title	Example
-			write C++ code for system 'Basys2fwd'
-			ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title
-			enus	write C++ code for system '&StubWdbeSysStd;'
-			ImeIJMSquawkTitle2.end
-			ImeIRMSquawkMStub2.srefRefWznmMStub
-			StubWdbeSysStd
-			ImeIRMSquawkMStub2.end
-		ImeIMSquawk2.end
 	WdbeWrdevUnt	false	write C++ code for unit
 		ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
 		0	refWdbeMUnit	ubigint
@@ -738,6 +733,20 @@ stat	WdbeWrfpga	write FPGA code	false
 	wdbeopd1
 	ImeIRMComponentMOppack.end
 	ImeIMOp.sref	Shrdat	Comment
+	WdbeWrfpgaAux	false	write auxiliary VHDL code
+		ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
+		0	refWdbeMModule	ubigint
+		0	folder	string
+		ImeIAMOpInvarg.end
+		ImeIMSquawk2.Title	Example
+			write auxiliary VHDL code for module 'icm2 (top_v1_0 top)'
+			ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title
+			enus	write auxiliary VHDL code for module '&StubWdbeModStd;'
+			ImeIJMSquawkTitle2.end
+			ImeIRMSquawkMStub2.srefRefWznmMStub
+			StubWdbeModStd
+			ImeIRMSquawkMStub2.end
+		ImeIMSquawk2.end
 	WdbeWrfpgaBase	false	write VHDL/UCF/XDC code basics
 		ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
 		0	refWdbeMUnit	ubigint
@@ -752,6 +761,22 @@ stat	WdbeWrfpga	write FPGA code	false
 			ImeIJMSquawkTitle2.end
 			ImeIRMSquawkMStub2.srefRefWznmMStub
 			StubWdbeUntStd
+			ImeIRMSquawkMStub2.end
+		ImeIMSquawk2.end
+	WdbeWrfpgaCtr	false	write type-specific VHDL code
+		ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
+		0	refWdbeMModule	ubigint
+		0	folder	string
+		0	Prjshort	string
+		0	Untsref	string
+		ImeIAMOpInvarg.end
+		ImeIMSquawk2.Title	Example
+			write type-specific VHDL code for module 'icm2-acq (controller)'
+			ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title
+			enus	write type-specific VHDL code for module '&StubWdbeModStd;'
+			ImeIJMSquawkTitle2.end
+			ImeIRMSquawkMStub2.srefRefWznmMStub
+			StubWdbeModStd
 			ImeIRMSquawkMStub2.end
 		ImeIMSquawk2.end
 	WdbeWrfpgaDeploy	false	write FPGA code deployment scripts
@@ -794,68 +819,6 @@ stat	WdbeWrfpga	write FPGA code	false
 			write in-detail VHDL code for module 'icm2 (top_v1_0 top)'
 			ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title
 			enus	write in-detail VHDL code for module '&StubWdbeModStd;'
-			ImeIJMSquawkTitle2.end
-			ImeIRMSquawkMStub2.srefRefWznmMStub
-			StubWdbeModStd
-			ImeIRMSquawkMStub2.end
-		ImeIMSquawk2.end
-	WdbeWrfpgaCtrFwdctr	false	write type-specific VHDL code
-		ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
-		0	refWdbeMModule	ubigint
-		0	folder	string
-		0	Prjshort	string
-		0	Untsref	string
-		ImeIAMOpInvarg.end
-		ImeIMSquawk2.Title	Example
-			write type-specific VHDL code for module 'icm2-acq (controller)'
-			ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title
-			enus	write type-specific VHDL code for module '&StubWdbeModStd;'
-			ImeIJMSquawkTitle2.end
-			ImeIRMSquawkMStub2.srefRefWznmMStub
-			StubWdbeModStd
-			ImeIRMSquawkMStub2.end
-		ImeIMSquawk2.end
-	WdbeWrfpgaHostif	false	write type-specific VHDL code
-		ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
-		0	refWdbeMModule	ubigint
-		0	folder	string
-		0	Prjshort	string
-		0	Untsref	string
-		ImeIAMOpInvarg.end
-		ImeIMSquawk2.Title	Example
-			write type-specific VHDL code for module 'zedb-hostif (host interface)'
-			ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title
-			enus	write type-specific VHDL code for module '&StubWdbeModStd;'
-			ImeIJMSquawkTitle2.end
-			ImeIRMSquawkMStub2.srefRefWznmMStub
-			StubWdbeModStd
-			ImeIRMSquawkMStub2.end
-		ImeIMSquawk2.end
-	WdbeWrfpgaEhostif	false	write type-specific VHDL code
-		ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
-		0	refWdbeMModule	ubigint
-		0	folder	string
-		0	Prjshort	string
-		0	Untsref	string
-		ImeIAMOpInvarg.end
-		ImeIMSquawk2.Title	Example
-			write type-specific VHDL code for module 'zedb-ehostif (easy host interface)'
-			ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title
-			enus	write type-specific VHDL code for module '&StubWdbeModStd;'
-			ImeIJMSquawkTitle2.end
-			ImeIRMSquawkMStub2.srefRefWznmMStub
-			StubWdbeModStd
-			ImeIRMSquawkMStub2.end
-		ImeIMSquawk2.end
-	WdbeWrfpgaIpclr	false	write VHDL code to clear unused specific insertion points
-		ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
-		0	refWdbeMModule	ubigint
-		0	folder	string
-		ImeIAMOpInvarg.end
-		ImeIMSquawk2.Title	Example
-			write VHDL code to clear unused specific insertion points for module 'icm2 (top_v1_0 top)'
-			ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title
-			enus	write VHDL code to clear unused specific insertion points for module '&StubWdbeModStd;'
 			ImeIJMSquawkTitle2.end
 			ImeIRMSquawkMStub2.srefRefWznmMStub
 			StubWdbeModStd
@@ -943,7 +906,7 @@ stat	WdbeWrmcu	write MCU code	false
 			StubWdbeModStd
 			ImeIRMSquawkMStub2.end
 		ImeIMSquawk2.end
-	WdbeWrmcuCtrFwdctr	false	write type-specific C code
+	WdbeWrmcuCtr	false	write type-specific C code
 		ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
 		0	refWdbeMModule	ubigint
 		0	folder	string
@@ -957,6 +920,40 @@ stat	WdbeWrmcu	write MCU code	false
 			ImeIJMSquawkTitle2.end
 			ImeIRMSquawkMStub2.srefRefWznmMStub
 			StubWdbeModStd
+			ImeIRMSquawkMStub2.end
+		ImeIMSquawk2.end
+	ImeIMOp.end
+stat	WdbeWrterm	write interactive terminal code	false
+	ImeIRMComponentMOppack.srefRefWznmMComponent
+	wdbeopd1
+	ImeIRMComponentMOppack.end
+	ImeIMOp.sref	Shrdat	Comment
+	WdbeWrtermDeploy	false	write interactive terminal deployment scripts
+		ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
+		0	refWdbeMRelease	ubigint
+		0	folder	string
+		0	Easy	boolean
+		ImeIAMOpInvarg.end
+		ImeIMSquawk2.Title	Example
+			write interactive terminal deployment scripts for release 'wskdterm_ubuntu'
+			ImeIJMSquawkTitle2.srefX1RefWznmMLocale	Title
+			enus	write interactive terminal deployment scripts for release '&StubWdbeRlsStd;'
+			ImeIJMSquawkTitle2.end
+			ImeIRMSquawkMStub2.srefRefWznmMStub
+			StubWdbeRlsStd
+			ImeIRMSquawkMStub2.end
+		ImeIMSquawk2.end
+	WdbeWrtermMain	false	write interactive terminal executable code
+		ImeIAMOpInvarg.irefRefWznmCAMOpInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
+		0	refWdbeMRelease	ubigint
+		0	folder	string
+		0	Prjshort	string
+		0	Easy	boolean
+		ImeIAMOpInvarg.end
+		ImeIMSquawk2.Title	Example
+		write interactive terminal executable code for release '&StubWdbeRlsStd;'	write interactive terminal executable code for release 'wskdterm_ubuntu'
+			ImeIRMSquawkMStub2.srefRefWznmMStub
+			StubWdbeRlsStd
 			ImeIRMSquawkMStub2.end
 		ImeIMSquawk2.end
 	ImeIMOp.end

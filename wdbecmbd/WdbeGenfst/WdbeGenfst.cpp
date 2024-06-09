@@ -166,11 +166,6 @@ void WdbeGenfst::getMaxlenRecvSend(
 	dbswdbe->loadRefsBySQL("SELECT ref FROM TblWdbeMCommand WHERE refIxVTbl = " + to_string(refIxVTbl) + " AND refUref = " + to_string(refUref) + " AND ixVRettype = " + to_string(VecWdbeVMCommandRettype::MULT), true, refs);
 	if (refs.size() > 0) if (maxlenSend < 13) maxlenSend = 13;
 
-	// fwderr, length 10
-	if (refIxVTbl == VecWdbeVMCommandRefTbl::CTR)
-				if (dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMModule WHERE refWdbeMController = " + to_string(refUref) + " AND ixVBasetype = " + to_string(VecWdbeVMModuleBasetype::FWDCTR), ref))
-							if (maxlenSend < 9) maxlenSend = 9;
-
 	if (refIxVTbl == VecWdbeVMCommandRefTbl::CTR) {
 		// invoked commands
 		// TBD: potential errors
@@ -183,34 +178,6 @@ void WdbeGenfst::getMaxlenRecvSend(
 
 			len = 9 + Wdbe::getLenRet(dbswdbe, refs[i]);
 			if (len > maxlenRecv) maxlenRecv = len;
-		};
-	};
-
-	// forwarding controller: analyze unit forwarded to
-	if (refIxVTbl == VecWdbeVMCommandRefTbl::CTR) {
-		if (dbswdbe->tblwdbemunit->loadRecBySQL("SELECT TblWdbeMUnit.* FROM TblWdbeMController, TblWdbeMUnit WHERE TblWdbeMController.ref = " + to_string(refUref) + " AND TblWdbeMUnit.ref = TblWdbeMController.fwdRefWdbeMUnit", &unt)) {
-			if (unt->ixVBasetype == VecWdbeVMUnitBasetype::FPGA) {
-				if (dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMModule WHERE TblWdbeMModule.hkIxVTbl = " + to_string(VecWdbeVMModuleHkTbl::UNT) + " AND TblWdbeMModule.hkUref = " + to_string(unt->ref)
-							+ " AND TblWdbeMModule.ixVBasetype = " + to_string(VecWdbeVMModuleBasetype::CMDINV), ref)) {
-					if (Wdbe::getMpa(dbswdbe, ref, "maxlen", s)) {
-						len = atoi(s.c_str());
-						if (len > maxlenRecv) maxlenRecv = len;
-					};
-				};
-
-				if (dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMModule WHERE TblWdbeMModule.hkIxVTbl = " + to_string(VecWdbeVMModuleHkTbl::UNT) + " AND TblWdbeMModule.hkUref = " + to_string(unt->ref)
-							+ " AND TblWdbeMModule.ixVBasetype = " + to_string(VecWdbeVMModuleBasetype::CMDRET), ref)) {
-					if (Wdbe::getMpa(dbswdbe, ref, "maxlen", s)) {
-						len = atoi(s.c_str());
-						if (len > maxlenSend) maxlenSend = len;
-					};
-				};
-
-			} else {
-				getMaxlenRecvSend(dbswdbe, VecWdbeVMCommandRefTbl::UNT, unt->ref, maxlenRecv, maxlenSend);
-			};
-
-			delete unt;
 		};
 	};
 };

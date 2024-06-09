@@ -49,7 +49,7 @@ function handleMenAppClick() {
 };
 
 function handleMenCrdClick() {
-	getCrdwnd().toggleMenu("Crd", getMenLeft("Crd"), parseInt(retrieveSi(srcdoc, "StgInfWdbeVerHeadbar", "MenCrdWidth")), 186);
+	getCrdwnd().toggleMenu("Crd", getMenLeft("Crd"), parseInt(retrieveSi(srcdoc, "StgInfWdbeVerHeadbar", "MenCrdWidth")), 207);
 };
 
 // --- server interaction

@@ -58,7 +58,6 @@ function initBD(bNotD) {
 	refreshPup(contcontdoc, srcdoc, "PupTyp", "", "FeedFPupTyp", retrieveCi(srcdoc, "ContIacWdbeSilDetail", "numFPupTyp"), retrieveSi(srcdoc, "StatShrWdbeSilDetail", "PupTypActive"), false);
 	initCpt(contcontdoc, "CptReu", retrieveTi(srcdoc, "TagWdbeSilDetail", "CptReu"));
 	refreshPup(contcontdoc, srcdoc, "PupRet", "xs", "FeedFPupRet", retrieveCi(srcdoc, "ContIacWdbeSilDetail", "numFPupRet"), true, false);
-	initCpt(contcontdoc, "CptSys", retrieveTi(srcdoc, "TagWdbeSilDetail", "CptSys"));
 	initCpt(contcontdoc, "CptMdl", retrieveTi(srcdoc, "TagWdbeSilDetail", "CptMdl"));
 	initCpt(contcontdoc, "CptPkg", retrieveTi(srcdoc, "TagWdbeSilDetail", "CptPkg"));
 	initCpt(contcontdoc, "CptEsy", retrieveTi(srcdoc, "TagWdbeSilDetail", "CptEsy"));
@@ -87,7 +86,7 @@ function refreshA() {
 function refreshBD(bNotD) {
 	if (!contcontdoc) return;
 
-	var height = 342; // full cont height
+	var height = 317; // full cont height
 
 	// IP refreshBD.vars --- BEGIN
 	var TxtSrfActive = (retrieveSi(srcdoc, "StatShrWdbeSilDetail", "TxtSrfActive") == "true");
@@ -101,10 +100,6 @@ function refreshBD(bNotD) {
 	var TxtReuActive = (retrieveSi(srcdoc, "StatShrWdbeSilDetail", "TxtReuActive") == "true");
 	var ButReuViewAvail = (retrieveSi(srcdoc, "StatShrWdbeSilDetail", "ButReuViewAvail") == "true");
 	var ButReuViewActive = (retrieveSi(srcdoc, "StatShrWdbeSilDetail", "ButReuViewActive") == "true");
-
-	var TxtSysActive = (retrieveSi(srcdoc, "StatShrWdbeSilDetail", "TxtSysActive") == "true");
-	var ButSysViewAvail = (retrieveSi(srcdoc, "StatShrWdbeSilDetail", "ButSysViewAvail") == "true");
-	var ButSysViewActive = (retrieveSi(srcdoc, "StatShrWdbeSilDetail", "ButSysViewActive") == "true");
 
 	var TxtMdlActive = (retrieveSi(srcdoc, "StatShrWdbeSilDetail", "TxtMdlActive") == "true");
 	var ButMdlViewAvail = (retrieveSi(srcdoc, "StatShrWdbeSilDetail", "ButMdlViewAvail") == "true");
@@ -154,23 +149,6 @@ function refreshBD(bNotD) {
 	contcontdoc.getElementById("PupRet").value = retrieveCi(srcdoc, "ContIacWdbeSilDetail", "numFPupRet");
 
 	if (ButReuViewAvail) refreshButicon(contcontdoc, "ButReuView", "icon/view", ButReuViewActive, false);
-
-	if ((ButSysViewAvail == !contcontdoc.getElementById("ButSysView"))) {
-		mytd = contcontdoc.getElementById("rdynSys");
-		clearElem(mytd);
-
-		first = true;
-
-		if (ButSysViewAvail) {
-			if (first) first = false;
-			else mytd.appendChild(contcontdoc.createTextNode("\u00a0"));
-			mytd.appendChild(makeImgBut(contcontdoc, "ButSysView", "icon/view"));
-		};
-	};
-
-	refreshTxt(contcontdoc, "TxtSys", retrieveCi(srcdoc, "ContInfWdbeSilDetail", "TxtSys"));
-
-	if (ButSysViewAvail) refreshButicon(contcontdoc, "ButSysView", "icon/view", ButSysViewActive, false);
 
 	if ((ButMdlViewAvail == !contcontdoc.getElementById("ButMdlView"))) {
 		mytd = contcontdoc.getElementById("rdynMdl");

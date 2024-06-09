@@ -35,11 +35,10 @@ namespace CrdWdbeRls {
 	public:
 		static const Sbecore::uint CLOSE = 1;
 		static const Sbecore::uint MITAPPABTCLICK = 2;
-		static const Sbecore::uint MITCRDNEWCLICK = 3;
-		static const Sbecore::uint MITCRDSRTCLICK = 4;
-		static const Sbecore::uint MITCRDCRTCLICK = 5;
-		static const Sbecore::uint MITCRDFRTCLICK = 6;
-		static const Sbecore::uint MITCRDWCOCLICK = 7;
+		static const Sbecore::uint MITCRDSRTCLICK = 3;
+		static const Sbecore::uint MITCRDCRTCLICK = 4;
+		static const Sbecore::uint MITCRDFRTCLICK = 5;
+		static const Sbecore::uint MITCRDWCOCLICK = 6;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);
@@ -121,36 +120,32 @@ namespace CrdWdbeRls {
 
 	public:
 		static const Sbecore::uint SCRJREFDLGFINREPTR = 1;
-		static const Sbecore::uint SCRJREFDLGNEW = 2;
-		static const Sbecore::uint SCRJREFDLGSTAREPTR = 3;
-		static const Sbecore::uint SCRJREFDLGWRITE = 4;
-		static const Sbecore::uint SCRJREFHEADBAR = 5;
-		static const Sbecore::uint SCRJREFLIST = 6;
-		static const Sbecore::uint SCRJREFREC = 7;
-		static const Sbecore::uint MSPCRD1AVAIL = 8;
-		static const Sbecore::uint MITCRDNEWAVAIL = 9;
-		static const Sbecore::uint MITCRDSRTAVAIL = 10;
-		static const Sbecore::uint MITCRDSRTACTIVE = 11;
-		static const Sbecore::uint MITCRDCRTAVAIL = 12;
-		static const Sbecore::uint MITCRDCRTACTIVE = 13;
-		static const Sbecore::uint MITCRDFRTAVAIL = 14;
-		static const Sbecore::uint MITCRDFRTACTIVE = 15;
-		static const Sbecore::uint MITCRDWCOAVAIL = 16;
-		static const Sbecore::uint MITCRDWCOACTIVE = 17;
+		static const Sbecore::uint SCRJREFDLGSTAREPTR = 2;
+		static const Sbecore::uint SCRJREFDLGWRITE = 3;
+		static const Sbecore::uint SCRJREFHEADBAR = 4;
+		static const Sbecore::uint SCRJREFLIST = 5;
+		static const Sbecore::uint SCRJREFREC = 6;
+		static const Sbecore::uint MSPCRD1AVAIL = 7;
+		static const Sbecore::uint MITCRDSRTAVAIL = 8;
+		static const Sbecore::uint MITCRDSRTACTIVE = 9;
+		static const Sbecore::uint MITCRDCRTAVAIL = 10;
+		static const Sbecore::uint MITCRDCRTACTIVE = 11;
+		static const Sbecore::uint MITCRDFRTAVAIL = 12;
+		static const Sbecore::uint MITCRDFRTACTIVE = 13;
+		static const Sbecore::uint MITCRDWCOAVAIL = 14;
+		static const Sbecore::uint MITCRDWCOACTIVE = 15;
 
 	public:
-		StatShr(const std::string& scrJrefDlgfinreptr = "", const std::string& scrJrefDlgnew = "", const std::string& scrJrefDlgstareptr = "", const std::string& scrJrefDlgwrite = "", const std::string& scrJrefHeadbar = "", const std::string& scrJrefList = "", const std::string& scrJrefRec = "", const bool MspCrd1Avail = true, const bool MitCrdNewAvail = true, const bool MitCrdSrtAvail = true, const bool MitCrdSrtActive = true, const bool MitCrdCrtAvail = true, const bool MitCrdCrtActive = true, const bool MitCrdFrtAvail = true, const bool MitCrdFrtActive = true, const bool MitCrdWcoAvail = true, const bool MitCrdWcoActive = true);
+		StatShr(const std::string& scrJrefDlgfinreptr = "", const std::string& scrJrefDlgstareptr = "", const std::string& scrJrefDlgwrite = "", const std::string& scrJrefHeadbar = "", const std::string& scrJrefList = "", const std::string& scrJrefRec = "", const bool MspCrd1Avail = true, const bool MitCrdSrtAvail = true, const bool MitCrdSrtActive = true, const bool MitCrdCrtAvail = true, const bool MitCrdCrtActive = true, const bool MitCrdFrtAvail = true, const bool MitCrdFrtActive = true, const bool MitCrdWcoAvail = true, const bool MitCrdWcoActive = true);
 
 	public:
 		std::string scrJrefDlgfinreptr;
-		std::string scrJrefDlgnew;
 		std::string scrJrefDlgstareptr;
 		std::string scrJrefDlgwrite;
 		std::string scrJrefHeadbar;
 		std::string scrJrefList;
 		std::string scrJrefRec;
 		bool MspCrd1Avail;
-		bool MitCrdNewAvail;
 		bool MitCrdSrtAvail;
 		bool MitCrdSrtActive;
 		bool MitCrdCrtAvail;
@@ -174,19 +169,17 @@ namespace CrdWdbeRls {
 	public:
 		static const Sbecore::uint MITAPPABT = 1;
 		static const Sbecore::uint MRLAPPHLP = 2;
-		static const Sbecore::uint MITCRDNEW = 3;
-		static const Sbecore::uint MITCRDSRT = 4;
-		static const Sbecore::uint MITCRDCRT = 5;
-		static const Sbecore::uint MITCRDFRT = 6;
-		static const Sbecore::uint MITCRDWCO = 7;
+		static const Sbecore::uint MITCRDSRT = 3;
+		static const Sbecore::uint MITCRDCRT = 4;
+		static const Sbecore::uint MITCRDFRT = 5;
+		static const Sbecore::uint MITCRDWCO = 6;
 
 	public:
-		Tag(const std::string& MitAppAbt = "", const std::string& MrlAppHlp = "", const std::string& MitCrdNew = "", const std::string& MitCrdSrt = "", const std::string& MitCrdCrt = "", const std::string& MitCrdFrt = "", const std::string& MitCrdWco = "");
+		Tag(const std::string& MitAppAbt = "", const std::string& MrlAppHlp = "", const std::string& MitCrdSrt = "", const std::string& MitCrdCrt = "", const std::string& MitCrdFrt = "", const std::string& MitCrdWco = "");
 
 	public:
 		std::string MitAppAbt;
 		std::string MrlAppHlp;
-		std::string MitCrdNew;
 		std::string MitCrdSrt;
 		std::string MitCrdCrt;
 		std::string MitCrdFrt;

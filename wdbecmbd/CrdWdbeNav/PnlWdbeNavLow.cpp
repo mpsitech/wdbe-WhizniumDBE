@@ -39,6 +39,7 @@ PnlWdbeNavLow::PnlWdbeNavLow(
 	jref = xchg->addJob(dbswdbe, this, jrefSup);
 
 	feedFLstBnk.tag = "FeedFLstBnk";
+	feedFLstCdc.tag = "FeedFLstCdc";
 	feedFLstFst.tag = "FeedFLstFst";
 	feedFLstGen.tag = "FeedFLstGen";
 	feedFLstInt.tag = "FeedFLstInt";
@@ -62,6 +63,7 @@ PnlWdbeNavLow::PnlWdbeNavLow(
 	refreshGen(dbswdbe, moditems);
 	refreshPrt(dbswdbe, moditems);
 	refreshSig(dbswdbe, moditems);
+	refreshCdc(dbswdbe, moditems);
 	refreshPrc(dbswdbe, moditems);
 	refreshFst(dbswdbe, moditems);
 	refresh(dbswdbe, moditems);
@@ -78,6 +80,7 @@ PnlWdbeNavLow::PnlWdbeNavLow(
 	xchg->addIxRefClstn(VecWdbeVCall::CALLWDBEHUSRRUNVMOD_CRDUSREQ, jref, Clstn::VecVJobmask::ALL, 0, false, VecWdbeVCard::CRDWDBEGEN, xchg->getRefPreset(VecWdbeVPreset::PREWDBEOWNER, jref));
 	xchg->addIxRefClstn(VecWdbeVCall::CALLWDBEHUSRRUNVMOD_CRDUSREQ, jref, Clstn::VecVJobmask::ALL, 0, false, VecWdbeVCard::CRDWDBEPRT, xchg->getRefPreset(VecWdbeVPreset::PREWDBEOWNER, jref));
 	xchg->addIxRefClstn(VecWdbeVCall::CALLWDBEHUSRRUNVMOD_CRDUSREQ, jref, Clstn::VecVJobmask::ALL, 0, false, VecWdbeVCard::CRDWDBESIG, xchg->getRefPreset(VecWdbeVPreset::PREWDBEOWNER, jref));
+	xchg->addIxRefClstn(VecWdbeVCall::CALLWDBEHUSRRUNVMOD_CRDUSREQ, jref, Clstn::VecVJobmask::ALL, 0, false, VecWdbeVCard::CRDWDBECDC, xchg->getRefPreset(VecWdbeVPreset::PREWDBEOWNER, jref));
 	xchg->addIxRefClstn(VecWdbeVCall::CALLWDBEHUSRRUNVMOD_CRDUSREQ, jref, Clstn::VecVJobmask::ALL, 0, false, VecWdbeVCard::CRDWDBEPRC, xchg->getRefPreset(VecWdbeVPreset::PREWDBEOWNER, jref));
 	xchg->addIxRefClstn(VecWdbeVCall::CALLWDBEHUSRRUNVMOD_CRDUSREQ, jref, Clstn::VecVJobmask::ALL, 0, false, VecWdbeVCard::CRDWDBEFST, xchg->getRefPreset(VecWdbeVPreset::PREWDBEOWNER, jref));
 };
@@ -101,7 +104,7 @@ DpchEngWdbe* PnlWdbeNavLow::getNewDpchEng(
 		dpcheng = new DpchEngWdbeConfirm(true, jref, "");
 	} else {
 		insert(items, DpchEngData::JREF);
-		dpcheng = new DpchEngData(jref, &contiac, &feedFLstBnk, &feedFLstFst, &feedFLstGen, &feedFLstInt, &feedFLstPin, &feedFLstPrc, &feedFLstPrt, &feedFLstSig, &feedFLstSns, &feedFLstVar, &statshr, items);
+		dpcheng = new DpchEngData(jref, &contiac, &feedFLstBnk, &feedFLstCdc, &feedFLstFst, &feedFLstGen, &feedFLstInt, &feedFLstPin, &feedFLstPrc, &feedFLstPrt, &feedFLstSig, &feedFLstSns, &feedFLstVar, &statshr, items);
 	};
 
 	return dpcheng;
@@ -431,6 +434,46 @@ void PnlWdbeNavLow::refreshSig(
 	refreshLstSig(dbswdbe, moditems);
 };
 
+void PnlWdbeNavLow::refreshLstCdc(
+			DbsWdbe* dbswdbe
+			, set<uint>& moditems
+		) {
+	StatShr oldStatshr(statshr);
+
+	statshr.LstCdcAvail = evalLstCdcAvail(dbswdbe);
+	statshr.ButCdcViewActive = evalButCdcViewActive(dbswdbe);
+
+	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
+};
+
+void PnlWdbeNavLow::refreshCdc(
+			DbsWdbe* dbswdbe
+			, set<uint>& moditems
+		) {
+	ContIac oldContiac(contiac);
+
+	ListWdbeHistRMUserUniversal rst;
+	WdbeHistRMUserUniversal* rec = NULL;
+
+	// contiac
+	contiac.numFLstCdc = 0;
+
+	// feedFLstCdc
+	feedFLstCdc.clear();
+
+	dbswdbe->tblwdbehistrmuseruniversal->loadRstByUsrCrd(xchg->getRefPreset(VecWdbeVPreset::PREWDBEOWNER, jref), VecWdbeVCard::CRDWDBECDC, false, rst);
+
+	for (unsigned int i = 0; i < rst.nodes.size(); i++) {
+		rec = rst.nodes[i];
+		feedFLstCdc.appendRefTitles(rec->ref, StubWdbe::getStubCdcdStd(dbswdbe, rec->unvUref, ixWdbeVLocale));
+	};
+
+	insert(moditems, DpchEngData::FEEDFLSTCDC);
+	if (contiac.diff(&oldContiac).size() != 0) insert(moditems, DpchEngData::CONTIAC);
+
+	refreshLstCdc(dbswdbe, moditems);
+};
+
 void PnlWdbeNavLow::refreshLstPrc(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
@@ -543,6 +586,7 @@ void PnlWdbeNavLow::updatePreset(
 	refreshLstGen(dbswdbe, moditems);
 	refreshLstPrt(dbswdbe, moditems);
 	refreshLstSig(dbswdbe, moditems);
+	refreshLstCdc(dbswdbe, moditems);
 	refreshLstPrc(dbswdbe, moditems);
 	refreshLstFst(dbswdbe, moditems);
 	if (notif && !moditems.empty()) xchg->submitDpch(getNewDpchEng(moditems));
@@ -603,6 +647,8 @@ void PnlWdbeNavLow::handleRequest(
 					handleDpchAppDoButSigViewClick(dbswdbe, &(req->dpcheng));
 				} else if (dpchappdo->ixVDo == VecVDo::BUTSIGNEWCRDCLICK) {
 					handleDpchAppDoButSigNewcrdClick(dbswdbe, &(req->dpcheng));
+				} else if (dpchappdo->ixVDo == VecVDo::BUTCDCVIEWCLICK) {
+					handleDpchAppDoButCdcViewClick(dbswdbe, &(req->dpcheng));
 				} else if (dpchappdo->ixVDo == VecVDo::BUTPRCVIEWCLICK) {
 					handleDpchAppDoButPrcViewClick(dbswdbe, &(req->dpcheng));
 				} else if (dpchappdo->ixVDo == VecVDo::BUTFSTVIEWCLICK) {
@@ -671,6 +717,11 @@ void PnlWdbeNavLow::handleDpchAppDataContiac(
 	if (has(diffitems, ContIac::NUMFLSTSIG)) {
 		contiac.numFLstSig = _contiac->numFLstSig;
 		refreshLstSig(dbswdbe, moditems);
+	};
+
+	if (has(diffitems, ContIac::NUMFLSTCDC)) {
+		contiac.numFLstCdc = _contiac->numFLstCdc;
+		refreshLstCdc(dbswdbe, moditems);
 	};
 
 	if (has(diffitems, ContIac::NUMFLSTPRC)) {
@@ -887,6 +938,24 @@ void PnlWdbeNavLow::handleDpchAppDoButSigNewcrdClick(
 	};
 };
 
+void PnlWdbeNavLow::handleDpchAppDoButCdcViewClick(
+			DbsWdbe* dbswdbe
+			, DpchEngWdbe** dpcheng
+		) {
+	WdbeHistRMUserUniversal* husrRunv = NULL;
+	ubigint jrefNew = 0;
+
+	if (statshr.LstCdcAvail && statshr.ButCdcViewActive) {
+		if (dbswdbe->tblwdbehistrmuseruniversal->loadRecByRef(feedFLstCdc.getRefByNum(contiac.numFLstCdc), &husrRunv)) {
+			xchg->triggerIxRefSrefIntvalToRefCall(dbswdbe, VecWdbeVCall::CALLWDBECRDOPEN, jref, husrRunv->ixWdbeVPreset, husrRunv->preUref, "CrdWdbeCdc", husrRunv->unvUref, jrefNew);
+			delete husrRunv;
+		};
+
+		if (jrefNew == 0) *dpcheng = new DpchEngWdbeConfirm(false, 0, "");
+		else *dpcheng = new DpchEngWdbeConfirm(true, jrefNew, "CrdWdbeCdc");
+	};
+};
+
 void PnlWdbeNavLow::handleDpchAppDoButPrcViewClick(
 			DbsWdbe* dbswdbe
 			, DpchEngWdbe** dpcheng
@@ -957,6 +1026,8 @@ bool PnlWdbeNavLow::handleCallWdbeHusrRunvMod_crdUsrEq(
 		refreshPrt(dbswdbe, moditems);
 	} else if (ixInv == VecWdbeVCard::CRDWDBESIG) {
 		refreshSig(dbswdbe, moditems);
+	} else if (ixInv == VecWdbeVCard::CRDWDBECDC) {
+		refreshCdc(dbswdbe, moditems);
 	} else if (ixInv == VecWdbeVCard::CRDWDBEPRC) {
 		refreshPrc(dbswdbe, moditems);
 	} else if (ixInv == VecWdbeVCard::CRDWDBEFST) {

@@ -13,6 +13,58 @@
 #include "Wdbe.h"
 
 /**
+	* DpchInvWdbeGenAux
+	*/
+class DpchInvWdbeGenAux : public DpchInvWdbe {
+
+public:
+	static const Sbecore::uint SCROREF = 1;
+	static const Sbecore::uint OREF = 1;
+	static const Sbecore::uint SCRJREF = 2;
+	static const Sbecore::uint JREF = 2;
+	static const Sbecore::uint REFWDBEMMODULE = 3;
+	static const Sbecore::uint PRJSHORT = 4;
+	static const Sbecore::uint UNTSREF = 5;
+
+public:
+	DpchInvWdbeGenAux(const Sbecore::ubigint oref = 0, const Sbecore::ubigint jref = 0, const Sbecore::ubigint refWdbeMModule = 0, const std::string& Prjshort = "", const std::string& Untsref = "");
+
+public:
+	Sbecore::ubigint refWdbeMModule;
+	std::string Prjshort;
+	std::string Untsref;
+
+public:
+	void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
+	void writeXML(xmlTextWriter* wr);
+};
+
+/**
+	* DpchRetWdbeGenAux
+	*/
+class DpchRetWdbeGenAux : public DpchRetWdbe {
+
+public:
+	static const Sbecore::uint SCROREF = 1;
+	static const Sbecore::uint OREF = 1;
+	static const Sbecore::uint SCRJREF = 2;
+	static const Sbecore::uint JREF = 2;
+	static const Sbecore::uint IXOPVOPRES = 3;
+	static const Sbecore::uint PDONE = 4;
+	static const Sbecore::uint LOGFILE = 5;
+
+public:
+	DpchRetWdbeGenAux(const std::string& scrOref = "", const std::string& scrJref = "", const Sbecore::uint ixOpVOpres = 0, const Sbecore::utinyint pdone = 0, const std::string& logfile = "");
+
+public:
+	std::string logfile;
+
+public:
+	void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
+	void writeXML(xmlTextWriter* wr);
+};
+
+/**
 	* DpchInvWdbeGenStdvec
 	*/
 class DpchInvWdbeGenStdvec : public DpchInvWdbe {
@@ -29,54 +81,6 @@ public:
 
 public:
 	Sbecore::ubigint refWdbeMUnit;
-
-public:
-	void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
-	void writeXML(xmlTextWriter* wr);
-};
-
-/**
-	* DpchInvWdbeGenTest
-	*/
-class DpchInvWdbeGenTest : public DpchInvWdbe {
-
-public:
-	static const Sbecore::uint SCROREF = 1;
-	static const Sbecore::uint OREF = 1;
-	static const Sbecore::uint SCRJREF = 2;
-	static const Sbecore::uint JREF = 2;
-	static const Sbecore::uint REFWDBEMMODULE = 3;
-
-public:
-	DpchInvWdbeGenTest(const Sbecore::ubigint oref = 0, const Sbecore::ubigint jref = 0, const Sbecore::ubigint refWdbeMModule = 0);
-
-public:
-	Sbecore::ubigint refWdbeMModule;
-
-public:
-	void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
-	void writeXML(xmlTextWriter* wr);
-};
-
-/**
-	* DpchRetWdbeGenTest
-	*/
-class DpchRetWdbeGenTest : public DpchRetWdbe {
-
-public:
-	static const Sbecore::uint SCROREF = 1;
-	static const Sbecore::uint OREF = 1;
-	static const Sbecore::uint SCRJREF = 2;
-	static const Sbecore::uint JREF = 2;
-	static const Sbecore::uint IXOPVOPRES = 3;
-	static const Sbecore::uint PDONE = 4;
-	static const Sbecore::uint LOGFILE = 5;
-
-public:
-	DpchRetWdbeGenTest(const std::string& scrOref = "", const std::string& scrJref = "", const Sbecore::uint ixOpVOpres = 0, const Sbecore::utinyint pdone = 0, const std::string& logfile = "");
-
-public:
-	std::string logfile;
 
 public:
 	void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);

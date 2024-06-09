@@ -31,7 +31,7 @@
 class WdbeMUnit {
 
 public:
-	WdbeMUnit(const Sbecore::ubigint ref = 0, const Sbecore::uint ixVBasetype = 0, const Sbecore::uint refIxVTbl = 0, const Sbecore::ubigint refUref = 0, const Sbecore::ubigint silRefWdbeMUnit = 0, const Sbecore::ubigint refWdbeMSystem = 0, const Sbecore::ubigint refWdbeMModule = 0, const std::string sref = "", const std::string Title = "", const std::string Fullsref = "", const std::string srefKPackage = "", const bool Easy = false, const std::string srefKToolch = "", const std::string Comment = "");
+	WdbeMUnit(const Sbecore::ubigint ref = 0, const Sbecore::uint ixVBasetype = 0, const Sbecore::uint refIxVTbl = 0, const Sbecore::ubigint refUref = 0, const Sbecore::ubigint silRefWdbeMUnit = 0, const Sbecore::ubigint refWdbeMModule = 0, const std::string sref = "", const std::string Title = "", const std::string Fullsref = "", const std::string srefKPackage = "", const bool Easy = false, const std::string srefKToolch = "", const std::string Comment = "");
 
 public:
 	Sbecore::ubigint ref;
@@ -39,7 +39,6 @@ public:
 	Sbecore::uint refIxVTbl;
 	Sbecore::ubigint refUref;
 	Sbecore::ubigint silRefWdbeMUnit;
-	Sbecore::ubigint refWdbeMSystem;
 	Sbecore::ubigint refWdbeMModule;
 	std::string sref;
 	std::string Title;
@@ -144,8 +143,8 @@ public:
 	virtual Sbecore::ubigint loadRstBySQL(const std::string& sqlstr, const bool append, ListWdbeMUnit& rst);
 
 	virtual Sbecore::ubigint insertRec(WdbeMUnit* rec);
-	Sbecore::ubigint insertNewRec(WdbeMUnit** rec = NULL, const Sbecore::uint ixVBasetype = 0, const Sbecore::uint refIxVTbl = 0, const Sbecore::ubigint refUref = 0, const Sbecore::ubigint silRefWdbeMUnit = 0, const Sbecore::ubigint refWdbeMSystem = 0, const Sbecore::ubigint refWdbeMModule = 0, const std::string sref = "", const std::string Title = "", const std::string Fullsref = "", const std::string srefKPackage = "", const bool Easy = false, const std::string srefKToolch = "", const std::string Comment = "");
-	Sbecore::ubigint appendNewRecToRst(ListWdbeMUnit& rst, WdbeMUnit** rec = NULL, const Sbecore::uint ixVBasetype = 0, const Sbecore::uint refIxVTbl = 0, const Sbecore::ubigint refUref = 0, const Sbecore::ubigint silRefWdbeMUnit = 0, const Sbecore::ubigint refWdbeMSystem = 0, const Sbecore::ubigint refWdbeMModule = 0, const std::string sref = "", const std::string Title = "", const std::string Fullsref = "", const std::string srefKPackage = "", const bool Easy = false, const std::string srefKToolch = "", const std::string Comment = "");
+	Sbecore::ubigint insertNewRec(WdbeMUnit** rec = NULL, const Sbecore::uint ixVBasetype = 0, const Sbecore::uint refIxVTbl = 0, const Sbecore::ubigint refUref = 0, const Sbecore::ubigint silRefWdbeMUnit = 0, const Sbecore::ubigint refWdbeMModule = 0, const std::string sref = "", const std::string Title = "", const std::string Fullsref = "", const std::string srefKPackage = "", const bool Easy = false, const std::string srefKToolch = "", const std::string Comment = "");
+	Sbecore::ubigint appendNewRecToRst(ListWdbeMUnit& rst, WdbeMUnit** rec = NULL, const Sbecore::uint ixVBasetype = 0, const Sbecore::uint refIxVTbl = 0, const Sbecore::ubigint refUref = 0, const Sbecore::ubigint silRefWdbeMUnit = 0, const Sbecore::ubigint refWdbeMModule = 0, const std::string sref = "", const std::string Title = "", const std::string Fullsref = "", const std::string srefKPackage = "", const bool Easy = false, const std::string srefKToolch = "", const std::string Comment = "");
 	virtual void insertRst(ListWdbeMUnit& rst, bool transact = false);
 	virtual void updateRec(WdbeMUnit* rec);
 	virtual void updateRst(ListWdbeMUnit& rst, bool transact = false);
@@ -153,7 +152,6 @@ public:
 
 	virtual bool loadRecByRef(Sbecore::ubigint ref, WdbeMUnit** rec);
 	virtual bool loadFsrByRef(Sbecore::ubigint ref, std::string& Fullsref);
-	virtual bool loadRecBySys(Sbecore::ubigint refWdbeMSystem, WdbeMUnit** rec);
 	virtual Sbecore::ubigint loadRstByRetReu(Sbecore::uint refIxVTbl, Sbecore::ubigint refUref, const bool append, ListWdbeMUnit& rst);
 	virtual bool loadSrfByRef(Sbecore::ubigint ref, std::string& sref);
 	virtual bool loadTitByRef(Sbecore::ubigint ref, std::string& Title);
@@ -190,7 +188,6 @@ public:
 
 	bool loadRecByRef(Sbecore::ubigint ref, WdbeMUnit** rec);
 	bool loadFsrByRef(Sbecore::ubigint ref, std::string& Fullsref);
-	bool loadRecBySys(Sbecore::ubigint refWdbeMSystem, WdbeMUnit** rec);
 	Sbecore::ubigint loadRstByRetReu(Sbecore::uint refIxVTbl, Sbecore::ubigint refUref, const bool append, ListWdbeMUnit& rst);
 	bool loadSrfByRef(Sbecore::ubigint ref, std::string& sref);
 	bool loadTitByRef(Sbecore::ubigint ref, std::string& Title);
@@ -228,7 +225,6 @@ public:
 
 	bool loadRecByRef(Sbecore::ubigint ref, WdbeMUnit** rec);
 	bool loadFsrByRef(Sbecore::ubigint ref, std::string& Fullsref);
-	bool loadRecBySys(Sbecore::ubigint refWdbeMSystem, WdbeMUnit** rec);
 	Sbecore::ubigint loadRstByRetReu(Sbecore::uint refIxVTbl, Sbecore::ubigint refUref, const bool append, ListWdbeMUnit& rst);
 	bool loadSrfByRef(Sbecore::ubigint ref, std::string& sref);
 	bool loadTitByRef(Sbecore::ubigint ref, std::string& Title);

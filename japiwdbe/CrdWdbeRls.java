@@ -21,11 +21,10 @@ public class CrdWdbeRls {
 
 		public static final int CLOSE = 1;
 		public static final int MITAPPABTCLICK = 2;
-		public static final int MITCRDNEWCLICK = 3;
-		public static final int MITCRDSRTCLICK = 4;
-		public static final int MITCRDCRTCLICK = 5;
-		public static final int MITCRDFRTCLICK = 6;
-		public static final int MITCRDWCOCLICK = 7;
+		public static final int MITCRDSRTCLICK = 3;
+		public static final int MITCRDCRTCLICK = 4;
+		public static final int MITCRDFRTCLICK = 5;
+		public static final int MITCRDWCOCLICK = 6;
 
 		public static int getIx(
 					String sref
@@ -34,7 +33,6 @@ public class CrdWdbeRls {
 
 			if (s.equals("close")) return CLOSE;
 			if (s.equals("mitappabtclick")) return MITAPPABTCLICK;
-			if (s.equals("mitcrdnewclick")) return MITCRDNEWCLICK;
 			if (s.equals("mitcrdsrtclick")) return MITCRDSRTCLICK;
 			if (s.equals("mitcrdcrtclick")) return MITCRDCRTCLICK;
 			if (s.equals("mitcrdfrtclick")) return MITCRDFRTCLICK;
@@ -48,7 +46,6 @@ public class CrdWdbeRls {
 				) {
 			if (ix == CLOSE) return("close");
 			if (ix == MITAPPABTCLICK) return("MitAppAbtClick");
-			if (ix == MITCRDNEWCLICK) return("MitCrdNewClick");
 			if (ix == MITCRDSRTCLICK) return("MitCrdSrtClick");
 			if (ix == MITCRDCRTCLICK) return("MitCrdCrtClick");
 			if (ix == MITCRDFRTCLICK) return("MitCrdFrtClick");
@@ -273,33 +270,29 @@ public class CrdWdbeRls {
 	public class StatShr extends Block {
 
 		public static final int SCRJREFDLGFINREPTR = 1;
-		public static final int SCRJREFDLGNEW = 2;
-		public static final int SCRJREFDLGSTAREPTR = 3;
-		public static final int SCRJREFDLGWRITE = 4;
-		public static final int SCRJREFHEADBAR = 5;
-		public static final int SCRJREFLIST = 6;
-		public static final int SCRJREFREC = 7;
-		public static final int MSPCRD1AVAIL = 8;
-		public static final int MITCRDNEWAVAIL = 9;
-		public static final int MITCRDSRTAVAIL = 10;
-		public static final int MITCRDSRTACTIVE = 11;
-		public static final int MITCRDCRTAVAIL = 12;
-		public static final int MITCRDCRTACTIVE = 13;
-		public static final int MITCRDFRTAVAIL = 14;
-		public static final int MITCRDFRTACTIVE = 15;
-		public static final int MITCRDWCOAVAIL = 16;
-		public static final int MITCRDWCOACTIVE = 17;
+		public static final int SCRJREFDLGSTAREPTR = 2;
+		public static final int SCRJREFDLGWRITE = 3;
+		public static final int SCRJREFHEADBAR = 4;
+		public static final int SCRJREFLIST = 5;
+		public static final int SCRJREFREC = 6;
+		public static final int MSPCRD1AVAIL = 7;
+		public static final int MITCRDSRTAVAIL = 8;
+		public static final int MITCRDSRTACTIVE = 9;
+		public static final int MITCRDCRTAVAIL = 10;
+		public static final int MITCRDCRTACTIVE = 11;
+		public static final int MITCRDFRTAVAIL = 12;
+		public static final int MITCRDFRTACTIVE = 13;
+		public static final int MITCRDWCOAVAIL = 14;
+		public static final int MITCRDWCOACTIVE = 15;
 
 		public StatShr(
 					String scrJrefDlgfinreptr
-					, String scrJrefDlgnew
 					, String scrJrefDlgstareptr
 					, String scrJrefDlgwrite
 					, String scrJrefHeadbar
 					, String scrJrefList
 					, String scrJrefRec
 					, boolean MspCrd1Avail
-					, boolean MitCrdNewAvail
 					, boolean MitCrdSrtAvail
 					, boolean MitCrdSrtActive
 					, boolean MitCrdCrtAvail
@@ -310,14 +303,12 @@ public class CrdWdbeRls {
 					, boolean MitCrdWcoActive
 				) {
 			this.scrJrefDlgfinreptr = scrJrefDlgfinreptr;
-			this.scrJrefDlgnew = scrJrefDlgnew;
 			this.scrJrefDlgstareptr = scrJrefDlgstareptr;
 			this.scrJrefDlgwrite = scrJrefDlgwrite;
 			this.scrJrefHeadbar = scrJrefHeadbar;
 			this.scrJrefList = scrJrefList;
 			this.scrJrefRec = scrJrefRec;
 			this.MspCrd1Avail = MspCrd1Avail;
-			this.MitCrdNewAvail = MitCrdNewAvail;
 			this.MitCrdSrtAvail = MitCrdSrtAvail;
 			this.MitCrdSrtActive = MitCrdSrtActive;
 			this.MitCrdCrtAvail = MitCrdCrtAvail;
@@ -327,18 +318,16 @@ public class CrdWdbeRls {
 			this.MitCrdWcoAvail = MitCrdWcoAvail;
 			this.MitCrdWcoActive = MitCrdWcoActive;
 
-			mask = new HashSet<Integer>(Arrays.asList(SCRJREFDLGFINREPTR, SCRJREFDLGNEW, SCRJREFDLGSTAREPTR, SCRJREFDLGWRITE, SCRJREFHEADBAR, SCRJREFLIST, SCRJREFREC, MSPCRD1AVAIL, MITCRDNEWAVAIL, MITCRDSRTAVAIL, MITCRDSRTACTIVE, MITCRDCRTAVAIL, MITCRDCRTACTIVE, MITCRDFRTAVAIL, MITCRDFRTACTIVE, MITCRDWCOAVAIL, MITCRDWCOACTIVE));
+			mask = new HashSet<Integer>(Arrays.asList(SCRJREFDLGFINREPTR, SCRJREFDLGSTAREPTR, SCRJREFDLGWRITE, SCRJREFHEADBAR, SCRJREFLIST, SCRJREFREC, MSPCRD1AVAIL, MITCRDSRTAVAIL, MITCRDSRTACTIVE, MITCRDCRTAVAIL, MITCRDCRTACTIVE, MITCRDFRTAVAIL, MITCRDFRTACTIVE, MITCRDWCOAVAIL, MITCRDWCOACTIVE));
 		};
 
 		public String scrJrefDlgfinreptr;
-		public String scrJrefDlgnew;
 		public String scrJrefDlgstareptr;
 		public String scrJrefDlgwrite;
 		public String scrJrefHeadbar;
 		public String scrJrefList;
 		public String scrJrefRec;
 		public boolean MspCrd1Avail;
-		public boolean MitCrdNewAvail;
 		public boolean MitCrdSrtAvail;
 		public boolean MitCrdSrtActive;
 		public boolean MitCrdCrtAvail;
@@ -362,14 +351,12 @@ public class CrdWdbeRls {
 
 			if (Xmlio.checkXPath(doc, basexpath)) {
 				scrJrefDlgfinreptr = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefDlgfinreptr", mask, SCRJREFDLGFINREPTR);
-				scrJrefDlgnew = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefDlgnew", mask, SCRJREFDLGNEW);
 				scrJrefDlgstareptr = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefDlgstareptr", mask, SCRJREFDLGSTAREPTR);
 				scrJrefDlgwrite = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefDlgwrite", mask, SCRJREFDLGWRITE);
 				scrJrefHeadbar = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefHeadbar", mask, SCRJREFHEADBAR);
 				scrJrefList = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefList", mask, SCRJREFLIST);
 				scrJrefRec = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefRec", mask, SCRJREFREC);
 				MspCrd1Avail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "MspCrd1Avail", mask, MSPCRD1AVAIL);
-				MitCrdNewAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "MitCrdNewAvail", mask, MITCRDNEWAVAIL);
 				MitCrdSrtAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "MitCrdSrtAvail", mask, MITCRDSRTAVAIL);
 				MitCrdSrtActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "MitCrdSrtActive", mask, MITCRDSRTACTIVE);
 				MitCrdCrtAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "MitCrdCrtAvail", mask, MITCRDCRTAVAIL);
@@ -391,14 +378,12 @@ public class CrdWdbeRls {
 			HashSet<Integer> items = new HashSet<Integer>();
 
 			if (scrJrefDlgfinreptr.equals(comp.scrJrefDlgfinreptr)) items.add(SCRJREFDLGFINREPTR);
-			if (scrJrefDlgnew.equals(comp.scrJrefDlgnew)) items.add(SCRJREFDLGNEW);
 			if (scrJrefDlgstareptr.equals(comp.scrJrefDlgstareptr)) items.add(SCRJREFDLGSTAREPTR);
 			if (scrJrefDlgwrite.equals(comp.scrJrefDlgwrite)) items.add(SCRJREFDLGWRITE);
 			if (scrJrefHeadbar.equals(comp.scrJrefHeadbar)) items.add(SCRJREFHEADBAR);
 			if (scrJrefList.equals(comp.scrJrefList)) items.add(SCRJREFLIST);
 			if (scrJrefRec.equals(comp.scrJrefRec)) items.add(SCRJREFREC);
 			if (MspCrd1Avail == comp.MspCrd1Avail) items.add(MSPCRD1AVAIL);
-			if (MitCrdNewAvail == comp.MitCrdNewAvail) items.add(MITCRDNEWAVAIL);
 			if (MitCrdSrtAvail == comp.MitCrdSrtAvail) items.add(MITCRDSRTAVAIL);
 			if (MitCrdSrtActive == comp.MitCrdSrtActive) items.add(MITCRDSRTACTIVE);
 			if (MitCrdCrtAvail == comp.MitCrdCrtAvail) items.add(MITCRDCRTAVAIL);
@@ -419,7 +404,7 @@ public class CrdWdbeRls {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(SCRJREFDLGFINREPTR, SCRJREFDLGNEW, SCRJREFDLGSTAREPTR, SCRJREFDLGWRITE, SCRJREFHEADBAR, SCRJREFLIST, SCRJREFREC, MSPCRD1AVAIL, MITCRDNEWAVAIL, MITCRDSRTAVAIL, MITCRDSRTACTIVE, MITCRDCRTAVAIL, MITCRDCRTACTIVE, MITCRDFRTAVAIL, MITCRDFRTACTIVE, MITCRDWCOAVAIL, MITCRDWCOACTIVE));
+			diffitems = new HashSet<Integer>(Arrays.asList(SCRJREFDLGFINREPTR, SCRJREFDLGSTAREPTR, SCRJREFDLGWRITE, SCRJREFHEADBAR, SCRJREFLIST, SCRJREFREC, MSPCRD1AVAIL, MITCRDSRTAVAIL, MITCRDSRTACTIVE, MITCRDCRTAVAIL, MITCRDCRTACTIVE, MITCRDFRTAVAIL, MITCRDFRTACTIVE, MITCRDWCOAVAIL, MITCRDWCOACTIVE));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);
@@ -434,16 +419,14 @@ public class CrdWdbeRls {
 
 		public static final int MITAPPABT = 1;
 		public static final int MRLAPPHLP = 2;
-		public static final int MITCRDNEW = 3;
-		public static final int MITCRDSRT = 4;
-		public static final int MITCRDCRT = 5;
-		public static final int MITCRDFRT = 6;
-		public static final int MITCRDWCO = 7;
+		public static final int MITCRDSRT = 3;
+		public static final int MITCRDCRT = 4;
+		public static final int MITCRDFRT = 5;
+		public static final int MITCRDWCO = 6;
 
 		public Tag(
 					String MitAppAbt
 					, String MrlAppHlp
-					, String MitCrdNew
 					, String MitCrdSrt
 					, String MitCrdCrt
 					, String MitCrdFrt
@@ -451,18 +434,16 @@ public class CrdWdbeRls {
 				) {
 			this.MitAppAbt = MitAppAbt;
 			this.MrlAppHlp = MrlAppHlp;
-			this.MitCrdNew = MitCrdNew;
 			this.MitCrdSrt = MitCrdSrt;
 			this.MitCrdCrt = MitCrdCrt;
 			this.MitCrdFrt = MitCrdFrt;
 			this.MitCrdWco = MitCrdWco;
 
-			mask = new HashSet<Integer>(Arrays.asList(MITAPPABT, MRLAPPHLP, MITCRDNEW, MITCRDSRT, MITCRDCRT, MITCRDFRT, MITCRDWCO));
+			mask = new HashSet<Integer>(Arrays.asList(MITAPPABT, MRLAPPHLP, MITCRDSRT, MITCRDCRT, MITCRDFRT, MITCRDWCO));
 		};
 
 		public String MitAppAbt;
 		public String MrlAppHlp;
-		public String MitCrdNew;
 		public String MitCrdSrt;
 		public String MitCrdCrt;
 		public String MitCrdFrt;
@@ -483,7 +464,6 @@ public class CrdWdbeRls {
 			if (Xmlio.checkXPath(doc, basexpath)) {
 				MitAppAbt = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "MitAppAbt", mask, MITAPPABT);
 				MrlAppHlp = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "MrlAppHlp", mask, MRLAPPHLP);
-				MitCrdNew = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "MitCrdNew", mask, MITCRDNEW);
 				MitCrdSrt = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "MitCrdSrt", mask, MITCRDSRT);
 				MitCrdCrt = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "MitCrdCrt", mask, MITCRDCRT);
 				MitCrdFrt = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "MitCrdFrt", mask, MITCRDFRT);
@@ -502,7 +482,6 @@ public class CrdWdbeRls {
 
 			if (MitAppAbt.equals(comp.MitAppAbt)) items.add(MITAPPABT);
 			if (MrlAppHlp.equals(comp.MrlAppHlp)) items.add(MRLAPPHLP);
-			if (MitCrdNew.equals(comp.MitCrdNew)) items.add(MITCRDNEW);
 			if (MitCrdSrt.equals(comp.MitCrdSrt)) items.add(MITCRDSRT);
 			if (MitCrdCrt.equals(comp.MitCrdCrt)) items.add(MITCRDCRT);
 			if (MitCrdFrt.equals(comp.MitCrdFrt)) items.add(MITCRDFRT);
@@ -519,7 +498,7 @@ public class CrdWdbeRls {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(MITAPPABT, MRLAPPHLP, MITCRDNEW, MITCRDSRT, MITCRDCRT, MITCRDFRT, MITCRDWCO));
+			diffitems = new HashSet<Integer>(Arrays.asList(MITAPPABT, MRLAPPHLP, MITCRDSRT, MITCRDCRT, MITCRDFRT, MITCRDWCO));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);
@@ -600,8 +579,8 @@ public class CrdWdbeRls {
 			continf = new ContInf(0, "", "");
 			feedFSge = new Feed("FeedFSge");
 			statapp = new StatApp(0, 0, "", 0, false, false, false);
-			statshr = new StatShr("", "", "", "", "", "", "", false, false, false, false, false, false, false, false, false, false);
-			tag = new Tag("", "", "", "", "", "", "");
+			statshr = new StatShr("", "", "", "", "", "", false, false, false, false, false, false, false, false, false);
+			tag = new Tag("", "", "", "", "", "");
 		};
 
 		public ContInf continf;
@@ -645,8 +624,8 @@ public class CrdWdbeRls {
 				continf = new ContInf(0, "", "");
 				feedFSge = new Feed("FeedFSge");
 				statapp = new StatApp(0, 0, "", 0, false, false, false);
-				statshr = new StatShr("", "", "", "", "", "", "", false, false, false, false, false, false, false, false, false, false);
-				tag = new Tag("", "", "", "", "", "", "");
+				statshr = new StatShr("", "", "", "", "", "", false, false, false, false, false, false, false, false, false);
+				tag = new Tag("", "", "", "", "", "");
 			};
 		};
 

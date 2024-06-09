@@ -112,23 +112,23 @@ bool PnlWdbeUntDetail::evalTxtReuActive(
 bool PnlWdbeUntDetail::evalButReuViewAvail(
 			DbsWdbe* dbswdbe
 		) {
-	// unt.reuEq(0)|((pre.ixCrdaccFam()&unt.retEq(fam))|(pre.ixCrdaccVer()&unt.retEq(ver)))
+	// unt.reuEq(0)|((pre.ixCrdaccVer()&unt.retEq(ver))|(pre.ixCrdaccFam()&unt.retEq(fam)))
 
 	vector<bool> args;
 	bool a, b;
 
 	a = false; a = (recUnt.refUref == 0);
 	args.push_back(a);
-	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCFAM, jref) != 0);
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCVER, jref) != 0);
 	args.push_back(a);
-	a = false; a = (recUnt.refIxVTbl == VecWdbeVMUnitRefTbl::FAM);
+	a = false; a = (recUnt.refIxVTbl == VecWdbeVMUnitRefTbl::VER);
 	args.push_back(a);
 	b = args.back(); args.pop_back();
 	a = args.back(); args.pop_back();
 	args.push_back(a && b);
-	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCVER, jref) != 0);
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCFAM, jref) != 0);
 	args.push_back(a);
-	a = false; a = (recUnt.refIxVTbl == VecWdbeVMUnitRefTbl::VER);
+	a = false; a = (recUnt.refIxVTbl == VecWdbeVMUnitRefTbl::FAM);
 	args.push_back(a);
 	b = args.back(); args.pop_back();
 	a = args.back(); args.pop_back();
@@ -215,60 +215,6 @@ bool PnlWdbeUntDetail::evalButSilViewActive(
 	bool a;
 
 	a = false; a = (recUnt.silRefWdbeMUnit == 0);
-	args.push_back(a);
-	a = args.back(); args.pop_back();
-	args.push_back(!a);
-
-	return(args.back());
-};
-
-bool PnlWdbeUntDetail::evalTxtSysActive(
-			DbsWdbe* dbswdbe
-		) {
-	// pre.ixCrdaccUntIncl(edit)
-
-	vector<bool> args;
-	bool a;
-
-	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCUNT, jref) & VecWdbeWAccess::EDIT);
-	args.push_back(a);
-
-	return(args.back());
-};
-
-bool PnlWdbeUntDetail::evalButSysViewAvail(
-			DbsWdbe* dbswdbe
-		) {
-	// unt.sysEq(0)|(pre.ixCrdaccSys()&pre.refVer())
-
-	vector<bool> args;
-	bool a, b;
-
-	a = false; a = (recUnt.refWdbeMSystem == 0);
-	args.push_back(a);
-	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCSYS, jref) != 0);
-	args.push_back(a);
-	a = false; a = (xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFVER, jref) != 0);
-	args.push_back(a);
-	b = args.back(); args.pop_back();
-	a = args.back(); args.pop_back();
-	args.push_back(a && b);
-	b = args.back(); args.pop_back();
-	a = args.back(); args.pop_back();
-	args.push_back(a || b);
-
-	return(args.back());
-};
-
-bool PnlWdbeUntDetail::evalButSysViewActive(
-			DbsWdbe* dbswdbe
-		) {
-	// !unt.sysEq(0)
-
-	vector<bool> args;
-	bool a;
-
-	a = false; a = (recUnt.refWdbeMSystem == 0);
 	args.push_back(a);
 	a = args.back(); args.pop_back();
 	args.push_back(!a);

@@ -176,15 +176,14 @@ DlgWdbeNavLoaini::ContIac::ContIac(
 };
 
 bool DlgWdbeNavLoaini::ContIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["ContIacDlgWdbeNavLoaini"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["ContIacDlgWdbeNavLoaini"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -226,7 +225,7 @@ void DlgWdbeNavLoaini::ContIac::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["numFDse"] = numFDse;
+	me["numFDse"] = (Json::Value::UInt) numFDse;
 };
 
 void DlgWdbeNavLoaini::ContIac::writeXML(
@@ -291,7 +290,7 @@ void DlgWdbeNavLoaini::ContInf::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["numFSge"] = numFSge;
+	me["numFSge"] = (Json::Value::UInt) numFSge;
 };
 
 void DlgWdbeNavLoaini::ContInf::writeXML(
@@ -1048,15 +1047,14 @@ string DlgWdbeNavLoaini::DpchAppData::getSrefsMask() {
 };
 
 void DlgWdbeNavLoaini::DpchAppData::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppDlgWdbeNavLoainiData"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppDlgWdbeNavLoainiData"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -1120,15 +1118,14 @@ string DlgWdbeNavLoaini::DpchAppDo::getSrefsMask() {
 };
 
 void DlgWdbeNavLoaini::DpchAppDo::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppDlgWdbeNavLoainiDo"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppDlgWdbeNavLoainiDo"];}();
 
 	basefound = (me != Json::nullValue);
 

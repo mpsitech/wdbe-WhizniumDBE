@@ -86,8 +86,8 @@ void DlgWdbeVerGenfst::refresh(
 	if (muteRefresh && !unmute) return;
 	muteRefresh = true;
 
-	ContInf oldContinf(continf);
 	StatShr oldStatshr(statshr);
+	ContInf oldContinf(continf);
 
 	// IP refresh --- RBEGIN
 	// continf
@@ -100,8 +100,8 @@ void DlgWdbeVerGenfst::refresh(
 	statshr.ButDneActive = evalButDneActive(dbswdbe);
 
 	// IP refresh --- REND
-	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
 	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
+	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
 
 	muteRefresh = false;
 };
@@ -310,7 +310,7 @@ uint DlgWdbeVerGenfst::enterSgeGenfst(
 
 	// IP enterSgeGenfst --- IBEGIN
 
-	// modules top-down order, respecting unit hierarchy bottom-up
+	// modules bottom-up order
 
 	ubigint refWdbeMVersion;
 	string Prjshort;
@@ -339,7 +339,7 @@ uint DlgWdbeVerGenfst::enterSgeGenfst(
 			mcuNotFpgasUnts[unt->ref] = (unt->ixVBasetype == VecWdbeVMUnitBasetype::MCU);
 		};
 
-		Wdbe::levelMdls(dbswdbe, refWdbeMVersion, mdls, lvlsMdls, false, true, true);
+		Wdbe::levelMdls(dbswdbe, refWdbeMVersion, mdls, lvlsMdls, true);
 		
 		//cout << "DlgWdbeVerGenfst::enterSgeGenfst() order is:" << endl;
 		//Wdbe::showLvlsMdls(dbswdbe, mdls, lvlsMdls);
@@ -385,15 +385,15 @@ uint DlgWdbeVerGenfst::enterSgeGenfst(
 				addInv(new DpchInvWdbeGenfstImbuf(0, 0, mdl->ref));
 				typmod = true;
 
-			} else if ((mdl->ixVBasetype == VecWdbeVMModuleBasetype::CTR) || (mdl->ixVBasetype == VecWdbeVMModuleBasetype::FWDCTR)) {
+			} else if ((mdl->ixVBasetype == VecWdbeVMModuleBasetype::CTR) || (mdl->ixVBasetype == VecWdbeVMModuleBasetype::DBGCTR)) {
 				auto it = UntsrefsUnts.find(mdl->hkUref);
 				if (it != UntsrefsUnts.end()) Untsref = it->second;
 				else Untsref = "";
 
-				addInv(new DpchInvWdbeGenfstCtrFwdctr(0, 0, mdl->ref, Prjshort, Untsref));
+				addInv(new DpchInvWdbeGenfstCtr(0, 0, mdl->ref, Prjshort, Untsref));
 				typmod = true;
 
-			} else if (mdl->ixVBasetype == VecWdbeVMModuleBasetype::ECTR) {
+			} else if ((mdl->ixVBasetype == VecWdbeVMModuleBasetype::ECTR) || (mdl->ixVBasetype == VecWdbeVMModuleBasetype::EDBGCTR)) {
 				addInv(new DpchInvWdbeGenfstEctr(0, 0, mdl->ref, Prjshort, Untsref));
 				typmod = true;
 			};

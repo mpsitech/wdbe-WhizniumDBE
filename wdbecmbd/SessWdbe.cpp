@@ -121,10 +121,7 @@ SessWdbe::SessWdbe(
 	ixWdbeWAccess = ixWdbeWAccessBase; if (!adm) getIxCrdacc(dbswdbe, VecWdbeVCard::CRDWDBEMTP, adm, urus, refWdbeMUser, ixWdbeWAccess); xchg->addIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCMTP, jref, ixWdbeWAccess);
 	ixWdbeWAccess = ixWdbeWAccessBase; if (!adm) getIxCrdacc(dbswdbe, VecWdbeVCard::CRDWDBEPRJ, adm, urus, refWdbeMUser, ixWdbeWAccess); xchg->addIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCPRJ, jref, ixWdbeWAccess);
 	ixWdbeWAccess = ixWdbeWAccessBase; if (!adm) getIxCrdacc(dbswdbe, VecWdbeVCard::CRDWDBEVER, adm, urus, refWdbeMUser, ixWdbeWAccess); xchg->addIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCVER, jref, ixWdbeWAccess);
-	ixWdbeWAccess = ixWdbeWAccessBase; if (!adm) getIxCrdacc(dbswdbe, VecWdbeVCard::CRDWDBESYS, adm, urus, refWdbeMUser, ixWdbeWAccess); xchg->addIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCSYS, jref, ixWdbeWAccess);
-	ixWdbeWAccess = ixWdbeWAccessBase; if (!adm) getIxCrdacc(dbswdbe, VecWdbeVCard::CRDWDBETRG, adm, urus, refWdbeMUser, ixWdbeWAccess); xchg->addIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCTRG, jref, ixWdbeWAccess);
 	ixWdbeWAccess = ixWdbeWAccessBase; if (!adm) getIxCrdacc(dbswdbe, VecWdbeVCard::CRDWDBEUNT, adm, urus, refWdbeMUser, ixWdbeWAccess); xchg->addIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCUNT, jref, ixWdbeWAccess);
-	ixWdbeWAccess = ixWdbeWAccessBase; if (!adm) getIxCrdacc(dbswdbe, VecWdbeVCard::CRDWDBERLS, adm, urus, refWdbeMUser, ixWdbeWAccess); xchg->addIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCRLS, jref, ixWdbeWAccess);
 	ixWdbeWAccess = ixWdbeWAccessBase; if (!adm) getIxCrdacc(dbswdbe, VecWdbeVCard::CRDWDBECPR, adm, urus, refWdbeMUser, ixWdbeWAccess); xchg->addIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCCPR, jref, ixWdbeWAccess);
 	ixWdbeWAccess = ixWdbeWAccessBase; if (!adm) getIxCrdacc(dbswdbe, VecWdbeVCard::CRDWDBECVR, adm, urus, refWdbeMUser, ixWdbeWAccess); xchg->addIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCCVR, jref, ixWdbeWAccess);
 	ixWdbeWAccess = ixWdbeWAccessBase; if (!adm) getIxCrdacc(dbswdbe, VecWdbeVCard::CRDWDBEPPH, adm, urus, refWdbeMUser, ixWdbeWAccess); xchg->addIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCPPH, jref, ixWdbeWAccess);
@@ -143,8 +140,11 @@ SessWdbe::SessWdbe(
 	ixWdbeWAccess = ixWdbeWAccessBase; if (!adm) getIxCrdacc(dbswdbe, VecWdbeVCard::CRDWDBEGEN, adm, urus, refWdbeMUser, ixWdbeWAccess); xchg->addIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCGEN, jref, ixWdbeWAccess);
 	ixWdbeWAccess = ixWdbeWAccessBase; if (!adm) getIxCrdacc(dbswdbe, VecWdbeVCard::CRDWDBEPRT, adm, urus, refWdbeMUser, ixWdbeWAccess); xchg->addIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCPRT, jref, ixWdbeWAccess);
 	ixWdbeWAccess = ixWdbeWAccessBase; if (!adm) getIxCrdacc(dbswdbe, VecWdbeVCard::CRDWDBESIG, adm, urus, refWdbeMUser, ixWdbeWAccess); xchg->addIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCSIG, jref, ixWdbeWAccess);
+	ixWdbeWAccess = ixWdbeWAccessBase; if (!adm) getIxCrdacc(dbswdbe, VecWdbeVCard::CRDWDBECDC, adm, urus, refWdbeMUser, ixWdbeWAccess); xchg->addIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCCDC, jref, ixWdbeWAccess);
 	ixWdbeWAccess = ixWdbeWAccessBase; if (!adm) getIxCrdacc(dbswdbe, VecWdbeVCard::CRDWDBEPRC, adm, urus, refWdbeMUser, ixWdbeWAccess); xchg->addIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCPRC, jref, ixWdbeWAccess);
 	ixWdbeWAccess = ixWdbeWAccessBase; if (!adm) getIxCrdacc(dbswdbe, VecWdbeVCard::CRDWDBEFST, adm, urus, refWdbeMUser, ixWdbeWAccess); xchg->addIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCFST, jref, ixWdbeWAccess);
+	ixWdbeWAccess = ixWdbeWAccessBase; if (!adm) getIxCrdacc(dbswdbe, VecWdbeVCard::CRDWDBECMP, adm, urus, refWdbeMUser, ixWdbeWAccess); xchg->addIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCCMP, jref, ixWdbeWAccess);
+	ixWdbeWAccess = ixWdbeWAccessBase; if (!adm) getIxCrdacc(dbswdbe, VecWdbeVCard::CRDWDBERLS, adm, urus, refWdbeMUser, ixWdbeWAccess); xchg->addIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCRLS, jref, ixWdbeWAccess);
 	ixWdbeWAccess = ixWdbeWAccessBase; if (!adm) getIxCrdacc(dbswdbe, VecWdbeVCard::CRDWDBEUTL, adm, urus, refWdbeMUser, ixWdbeWAccess); xchg->addIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCUTL, jref, ixWdbeWAccess);
 
 	crdnav = new CrdWdbeNav(xchg, dbswdbe, jref, ixWdbeVLocale);
@@ -153,12 +153,12 @@ SessWdbe::SessWdbe(
 
 	statshr.jrefCrdnav = crdnav->jref;
 
-	xchg->addClstn(VecWdbeVCall::CALLWDBECRDACTIVE, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecWdbeVCall::CALLWDBECRDCLOSE, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecWdbeVCall::CALLWDBECRDOPEN, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecWdbeVCall::CALLWDBELOG, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecWdbeVCall::CALLWDBERECACCESS, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBEREFPRESET, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBERECACCESS, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBELOG, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBECRDOPEN, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBECRDCLOSE, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBECRDACTIVE, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -217,10 +217,7 @@ uint SessWdbe::checkCrdActive(
 			const uint ixWdbeVCard
 		) {
 	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEVER) return evalCrdverActive();
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBESYS) return evalCrdsysActive();
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBETRG) return evalCrdtrgActive();
 	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEUNT) return evalCrduntActive();
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBERLS) return evalCrdrlsActive();
 	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBECVR) return evalCrdcvrActive();
 	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEPPH) return evalCrdpphActive();
 	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEMOD) return evalCrdmodActive();
@@ -238,8 +235,11 @@ uint SessWdbe::checkCrdActive(
 	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEGEN) return evalCrdgenActive();
 	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEPRT) return evalCrdprtActive();
 	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBESIG) return evalCrdsigActive();
+	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBECDC) return evalCrdcdcActive();
 	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEPRC) return evalCrdprcActive();
 	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEFST) return evalCrdfstActive();
+	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBECMP) return evalCrdcmpActive();
+	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBERLS) return evalCrdrlsActive();
 
 	return 0;
 };
@@ -260,37 +260,7 @@ uint SessWdbe::evalCrdverActive() {
 	return(args.back());
 };
 
-uint SessWdbe::evalCrdsysActive() {
-	// pre.refVer()
-
-	vector<uint> args;
-
-	args.push_back((xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFVER, jref)) ? VecWdbeVPreset::PREWDBEREFVER : 0);
-
-	return(args.back());
-};
-
-uint SessWdbe::evalCrdtrgActive() {
-	// pre.refVer()
-
-	vector<uint> args;
-
-	args.push_back((xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFVER, jref)) ? VecWdbeVPreset::PREWDBEREFVER : 0);
-
-	return(args.back());
-};
-
 uint SessWdbe::evalCrduntActive() {
-	// pre.refVer()
-
-	vector<uint> args;
-
-	args.push_back((xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFVER, jref)) ? VecWdbeVPreset::PREWDBEREFVER : 0);
-
-	return(args.back());
-};
-
-uint SessWdbe::evalCrdrlsActive() {
 	// pre.refVer()
 
 	vector<uint> args;
@@ -552,6 +522,16 @@ uint SessWdbe::evalCrdsigActive() {
 	return(args.back());
 };
 
+uint SessWdbe::evalCrdcdcActive() {
+	// pre.refMod()
+
+	vector<uint> args;
+
+	args.push_back((xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFMOD, jref)) ? VecWdbeVPreset::PREWDBEREFMOD : 0);
+
+	return(args.back());
+};
+
 uint SessWdbe::evalCrdprcActive() {
 	// pre.refMtp() > pre.refMod()
 
@@ -589,6 +569,32 @@ uint SessWdbe::evalCrdfstActive() {
 	return(args.back());
 };
 
+uint SessWdbe::evalCrdcmpActive() {
+	// pre.refVer() > pre.void()
+
+	vector<uint> args;
+	uint a, b;
+
+	args.push_back((xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFVER, jref)) ? VecWdbeVPreset::PREWDBEREFVER : 0);
+	args.push_back([](){uint preVoid = VecWdbeVPreset::VOID; return preVoid;}());
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	if (a != 0) args.push_back(a);
+	else args.push_back(b);
+
+	return(args.back());
+};
+
+uint SessWdbe::evalCrdrlsActive() {
+	// pre.refVer()
+
+	vector<uint> args;
+
+	args.push_back((xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFVER, jref)) ? VecWdbeVPreset::PREWDBEREFVER : 0);
+
+	return(args.back());
+};
+
 uint SessWdbe::checkCrdaccess(
 			const uint ixWdbeVCard
 		) {
@@ -603,10 +609,7 @@ uint SessWdbe::checkCrdaccess(
 	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEMTP) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCMTP, jref);
 	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEPRJ) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCPRJ, jref);
 	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEVER) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCVER, jref);
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBESYS) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCSYS, jref);
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBETRG) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCTRG, jref);
 	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEUNT) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCUNT, jref);
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBERLS) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCRLS, jref);
 	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBECPR) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCCPR, jref);
 	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBECVR) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCCVR, jref);
 	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEPPH) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCPPH, jref);
@@ -625,8 +628,11 @@ uint SessWdbe::checkCrdaccess(
 	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEGEN) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCGEN, jref);
 	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEPRT) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCPRT, jref);
 	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBESIG) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCSIG, jref);
+	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBECDC) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCCDC, jref);
 	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEPRC) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCPRC, jref);
 	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEFST) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCFST, jref);
+	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBECMP) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCCMP, jref);
+	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBERLS) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCRLS, jref);
 	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEUTL) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCUTL, jref);
 
 	return 0;
@@ -811,10 +817,7 @@ uint SessWdbe::crdToMtb(
 	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEMTP) return VecWdbeVMaintable::TBLWDBEMMODULE;
 	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEPRJ) return VecWdbeVMaintable::TBLWDBEMPROJECT;
 	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEVER) return VecWdbeVMaintable::TBLWDBEMVERSION;
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBESYS) return VecWdbeVMaintable::TBLWDBEMSYSTEM;
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBETRG) return VecWdbeVMaintable::TBLWDBEMTARGET;
 	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEUNT) return VecWdbeVMaintable::TBLWDBEMUNIT;
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBERLS) return VecWdbeVMaintable::TBLWDBEMRELEASE;
 	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBECPR) return VecWdbeVMaintable::TBLWDBEMCOREPROJECT;
 	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBECVR) return VecWdbeVMaintable::TBLWDBEMCOREVERSION;
 	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEPPH) return VecWdbeVMaintable::TBLWDBEMPERIPHERAL;
@@ -833,8 +836,11 @@ uint SessWdbe::crdToMtb(
 	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEGEN) return VecWdbeVMaintable::TBLWDBEMGENERIC;
 	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEPRT) return VecWdbeVMaintable::TBLWDBEMPORT;
 	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBESIG) return VecWdbeVMaintable::TBLWDBEMSIGNAL;
+	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBECDC) return VecWdbeVMaintable::TBLWDBEMCDC;
 	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEPRC) return VecWdbeVMaintable::TBLWDBEMPROCESS;
 	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEFST) return VecWdbeVMaintable::TBLWDBEMFSMSTATE;
+	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBECMP) return VecWdbeVMaintable::TBLWDBEMCOMPONENT;
+	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBERLS) return VecWdbeVMaintable::TBLWDBEMRELEASE;
 
 	return VecWdbeVMaintable::VOID;
 };
@@ -843,7 +849,9 @@ uint SessWdbe::preToMtb(
 			const uint ixWdbeVPreset
 		) {
 	if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFBNK) return VecWdbeVMaintable::TBLWDBEMBANK;
+	else if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFCDC) return VecWdbeVMaintable::TBLWDBEMCDC;
 	else if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFCMD) return VecWdbeVMaintable::TBLWDBEMCOMMAND;
+	else if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFCMP) return VecWdbeVMaintable::TBLWDBEMCOMPONENT;
 	else if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFCPR) return VecWdbeVMaintable::TBLWDBEMCOREPROJECT;
 	else if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFCTR) return VecWdbeVMaintable::TBLWDBEMCONTROLLER;
 	else if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFCVR) return VecWdbeVMaintable::TBLWDBEMCOREVERSION;
@@ -875,8 +883,6 @@ uint SessWdbe::preToMtb(
 	else if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFSIG) return VecWdbeVMaintable::TBLWDBEMSIGNAL;
 	else if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFSIL) return VecWdbeVMaintable::TBLWDBEMUNIT;
 	else if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFSNS) return VecWdbeVMaintable::TBLWDBEMSENSITIVITY;
-	else if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFSYS) return VecWdbeVMaintable::TBLWDBEMSYSTEM;
-	else if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFTRG) return VecWdbeVMaintable::TBLWDBEMTARGET;
 	else if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFUNI) return VecWdbeVMaintable::TBLWDBEMUNIT;
 	else if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFUNT) return VecWdbeVMaintable::TBLWDBEMUNIT;
 	else if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFUSG) return VecWdbeVMaintable::TBLWDBEMUSERGROUP;
@@ -892,7 +898,7 @@ uint SessWdbe::preToMtb(
 bool SessWdbe::hasActive(
 			const uint ixWdbeVCard
 		) {
-	return((ixWdbeVCard == VecWdbeVCard::CRDWDBEVER) || (ixWdbeVCard == VecWdbeVCard::CRDWDBESYS) || (ixWdbeVCard == VecWdbeVCard::CRDWDBETRG) || (ixWdbeVCard == VecWdbeVCard::CRDWDBEUNT) || (ixWdbeVCard == VecWdbeVCard::CRDWDBERLS) || (ixWdbeVCard == VecWdbeVCard::CRDWDBECVR) || (ixWdbeVCard == VecWdbeVCard::CRDWDBEPPH) || (ixWdbeVCard == VecWdbeVCard::CRDWDBEMOD) || (ixWdbeVCard == VecWdbeVCard::CRDWDBEVEC) || (ixWdbeVCard == VecWdbeVCard::CRDWDBEVIT) || (ixWdbeVCard == VecWdbeVCard::CRDWDBECMD) || (ixWdbeVCard == VecWdbeVCard::CRDWDBEERR) || (ixWdbeVCard == VecWdbeVCard::CRDWDBEPPL) || (ixWdbeVCard == VecWdbeVCard::CRDWDBESEG) || (ixWdbeVCard == VecWdbeVCard::CRDWDBEBNK) || (ixWdbeVCard == VecWdbeVCard::CRDWDBEPIN) || (ixWdbeVCard == VecWdbeVCard::CRDWDBEINT) || (ixWdbeVCard == VecWdbeVCard::CRDWDBESNS) || (ixWdbeVCard == VecWdbeVCard::CRDWDBEVAR) || (ixWdbeVCard == VecWdbeVCard::CRDWDBEGEN) || (ixWdbeVCard == VecWdbeVCard::CRDWDBEPRT) || (ixWdbeVCard == VecWdbeVCard::CRDWDBESIG) || (ixWdbeVCard == VecWdbeVCard::CRDWDBEPRC) || (ixWdbeVCard == VecWdbeVCard::CRDWDBEFST));
+	return((ixWdbeVCard == VecWdbeVCard::CRDWDBEVER) || (ixWdbeVCard == VecWdbeVCard::CRDWDBEUNT) || (ixWdbeVCard == VecWdbeVCard::CRDWDBECVR) || (ixWdbeVCard == VecWdbeVCard::CRDWDBEPPH) || (ixWdbeVCard == VecWdbeVCard::CRDWDBEMOD) || (ixWdbeVCard == VecWdbeVCard::CRDWDBEVEC) || (ixWdbeVCard == VecWdbeVCard::CRDWDBEVIT) || (ixWdbeVCard == VecWdbeVCard::CRDWDBECMD) || (ixWdbeVCard == VecWdbeVCard::CRDWDBEERR) || (ixWdbeVCard == VecWdbeVCard::CRDWDBEPPL) || (ixWdbeVCard == VecWdbeVCard::CRDWDBESEG) || (ixWdbeVCard == VecWdbeVCard::CRDWDBEBNK) || (ixWdbeVCard == VecWdbeVCard::CRDWDBEPIN) || (ixWdbeVCard == VecWdbeVCard::CRDWDBEINT) || (ixWdbeVCard == VecWdbeVCard::CRDWDBESNS) || (ixWdbeVCard == VecWdbeVCard::CRDWDBEVAR) || (ixWdbeVCard == VecWdbeVCard::CRDWDBEGEN) || (ixWdbeVCard == VecWdbeVCard::CRDWDBEPRT) || (ixWdbeVCard == VecWdbeVCard::CRDWDBESIG) || (ixWdbeVCard == VecWdbeVCard::CRDWDBECDC) || (ixWdbeVCard == VecWdbeVCard::CRDWDBEPRC) || (ixWdbeVCard == VecWdbeVCard::CRDWDBEFST) || (ixWdbeVCard == VecWdbeVCard::CRDWDBECMP) || (ixWdbeVCard == VecWdbeVCard::CRDWDBERLS));
 };
 
 bool SessWdbe::hasGrpown(
@@ -910,7 +916,9 @@ void SessWdbe::handleRequest(
 
 		if (req->cmd == "cmdset") {
 			cout << "\tcreateCrdbnk" << endl;
+			cout << "\tcreateCrdcdc" << endl;
 			cout << "\tcreateCrdcmd" << endl;
+			cout << "\tcreateCrdcmp" << endl;
 			cout << "\tcreateCrdcpr" << endl;
 			cout << "\tcreateCrdcvr" << endl;
 			cout << "\tcreateCrderr" << endl;
@@ -935,8 +943,6 @@ void SessWdbe::handleRequest(
 			cout << "\tcreateCrdsig" << endl;
 			cout << "\tcreateCrdsil" << endl;
 			cout << "\tcreateCrdsns" << endl;
-			cout << "\tcreateCrdsys" << endl;
-			cout << "\tcreateCrdtrg" << endl;
 			cout << "\tcreateCrdunt" << endl;
 			cout << "\tcreateCrdusg" << endl;
 			cout << "\tcreateCrdusr" << endl;
@@ -946,7 +952,9 @@ void SessWdbe::handleRequest(
 			cout << "\tcreateCrdver" << endl;
 			cout << "\tcreateCrdvit" << endl;
 			cout << "\teraseCrdbnk" << endl;
+			cout << "\teraseCrdcdc" << endl;
 			cout << "\teraseCrdcmd" << endl;
+			cout << "\teraseCrdcmp" << endl;
 			cout << "\teraseCrdcpr" << endl;
 			cout << "\teraseCrdcvr" << endl;
 			cout << "\teraseCrderr" << endl;
@@ -971,8 +979,6 @@ void SessWdbe::handleRequest(
 			cout << "\teraseCrdsig" << endl;
 			cout << "\teraseCrdsil" << endl;
 			cout << "\teraseCrdsns" << endl;
-			cout << "\teraseCrdsys" << endl;
-			cout << "\teraseCrdtrg" << endl;
 			cout << "\teraseCrdunt" << endl;
 			cout << "\teraseCrdusg" << endl;
 			cout << "\teraseCrdusr" << endl;
@@ -984,8 +990,14 @@ void SessWdbe::handleRequest(
 		} else if (req->cmd == "createCrdbnk") {
 			req->retain = handleCreateCrdbnk(dbswdbe);
 
+		} else if (req->cmd == "createCrdcdc") {
+			req->retain = handleCreateCrdcdc(dbswdbe);
+
 		} else if (req->cmd == "createCrdcmd") {
 			req->retain = handleCreateCrdcmd(dbswdbe);
+
+		} else if (req->cmd == "createCrdcmp") {
+			req->retain = handleCreateCrdcmp(dbswdbe);
 
 		} else if (req->cmd == "createCrdcpr") {
 			req->retain = handleCreateCrdcpr(dbswdbe);
@@ -1059,12 +1071,6 @@ void SessWdbe::handleRequest(
 		} else if (req->cmd == "createCrdsns") {
 			req->retain = handleCreateCrdsns(dbswdbe);
 
-		} else if (req->cmd == "createCrdsys") {
-			req->retain = handleCreateCrdsys(dbswdbe);
-
-		} else if (req->cmd == "createCrdtrg") {
-			req->retain = handleCreateCrdtrg(dbswdbe);
-
 		} else if (req->cmd == "createCrdunt") {
 			req->retain = handleCreateCrdunt(dbswdbe);
 
@@ -1092,8 +1098,14 @@ void SessWdbe::handleRequest(
 		} else if (req->cmd == "eraseCrdbnk") {
 			req->retain = handleEraseCrdbnk(dbswdbe);
 
+		} else if (req->cmd == "eraseCrdcdc") {
+			req->retain = handleEraseCrdcdc(dbswdbe);
+
 		} else if (req->cmd == "eraseCrdcmd") {
 			req->retain = handleEraseCrdcmd(dbswdbe);
+
+		} else if (req->cmd == "eraseCrdcmp") {
+			req->retain = handleEraseCrdcmp(dbswdbe);
 
 		} else if (req->cmd == "eraseCrdcpr") {
 			req->retain = handleEraseCrdcpr(dbswdbe);
@@ -1167,12 +1179,6 @@ void SessWdbe::handleRequest(
 		} else if (req->cmd == "eraseCrdsns") {
 			req->retain = handleEraseCrdsns(dbswdbe);
 
-		} else if (req->cmd == "eraseCrdsys") {
-			req->retain = handleEraseCrdsys(dbswdbe);
-
-		} else if (req->cmd == "eraseCrdtrg") {
-			req->retain = handleEraseCrdtrg(dbswdbe);
-
 		} else if (req->cmd == "eraseCrdunt") {
 			req->retain = handleEraseCrdunt(dbswdbe);
 
@@ -1228,6 +1234,23 @@ bool SessWdbe::handleCreateCrdbnk(
 	return retval;
 };
 
+bool SessWdbe::handleCreateCrdcdc(
+			DbsWdbe* dbswdbe
+		) {
+	bool retval = false;
+
+	uint ixWdbeVPreset = evalCrdcdcActive();
+
+	if (ixWdbeVPreset == 0) {
+		cout << "\tcard is not activated!" << endl;
+	} else {
+		xchg->jrefCmd = insertSubjob(crdcdcs, new CrdWdbeCdc(xchg, dbswdbe, jref, ixWdbeVLocale, 0, ixWdbeVPreset, xchg->getRefPreset(ixWdbeVPreset, jref)));
+		cout << "\tjob reference: " << xchg->jrefCmd << endl;
+	};
+
+	return retval;
+};
+
 bool SessWdbe::handleCreateCrdcmd(
 			DbsWdbe* dbswdbe
 		) {
@@ -1239,6 +1262,23 @@ bool SessWdbe::handleCreateCrdcmd(
 		cout << "\tcard is not activated!" << endl;
 	} else {
 		xchg->jrefCmd = insertSubjob(crdcmds, new CrdWdbeCmd(xchg, dbswdbe, jref, ixWdbeVLocale, 0, ixWdbeVPreset, xchg->getRefPreset(ixWdbeVPreset, jref)));
+		cout << "\tjob reference: " << xchg->jrefCmd << endl;
+	};
+
+	return retval;
+};
+
+bool SessWdbe::handleCreateCrdcmp(
+			DbsWdbe* dbswdbe
+		) {
+	bool retval = false;
+
+	uint ixWdbeVPreset = evalCrdcmpActive();
+
+	if (ixWdbeVPreset == 0) {
+		cout << "\tcard is not activated!" << endl;
+	} else {
+		xchg->jrefCmd = insertSubjob(crdcmps, new CrdWdbeCmp(xchg, dbswdbe, jref, ixWdbeVLocale, 0, ixWdbeVPreset, xchg->getRefPreset(ixWdbeVPreset, jref)));
 		cout << "\tjob reference: " << xchg->jrefCmd << endl;
 	};
 
@@ -1599,40 +1639,6 @@ bool SessWdbe::handleCreateCrdsns(
 	return retval;
 };
 
-bool SessWdbe::handleCreateCrdsys(
-			DbsWdbe* dbswdbe
-		) {
-	bool retval = false;
-
-	uint ixWdbeVPreset = evalCrdsysActive();
-
-	if (ixWdbeVPreset == 0) {
-		cout << "\tcard is not activated!" << endl;
-	} else {
-		xchg->jrefCmd = insertSubjob(crdsyss, new CrdWdbeSys(xchg, dbswdbe, jref, ixWdbeVLocale, 0, ixWdbeVPreset, xchg->getRefPreset(ixWdbeVPreset, jref)));
-		cout << "\tjob reference: " << xchg->jrefCmd << endl;
-	};
-
-	return retval;
-};
-
-bool SessWdbe::handleCreateCrdtrg(
-			DbsWdbe* dbswdbe
-		) {
-	bool retval = false;
-
-	uint ixWdbeVPreset = evalCrdtrgActive();
-
-	if (ixWdbeVPreset == 0) {
-		cout << "\tcard is not activated!" << endl;
-	} else {
-		xchg->jrefCmd = insertSubjob(crdtrgs, new CrdWdbeTrg(xchg, dbswdbe, jref, ixWdbeVLocale, 0, ixWdbeVPreset, xchg->getRefPreset(ixWdbeVPreset, jref)));
-		cout << "\tjob reference: " << xchg->jrefCmd << endl;
-	};
-
-	return retval;
-};
-
 bool SessWdbe::handleCreateCrdunt(
 			DbsWdbe* dbswdbe
 		) {
@@ -1759,11 +1765,27 @@ bool SessWdbe::handleEraseCrdbnk(
 	return retval;
 };
 
+bool SessWdbe::handleEraseCrdcdc(
+			DbsWdbe* dbswdbe
+		) {
+	bool retval = false;
+	eraseCrd(crdcdcs);
+	return retval;
+};
+
 bool SessWdbe::handleEraseCrdcmd(
 			DbsWdbe* dbswdbe
 		) {
 	bool retval = false;
 	eraseCrd(crdcmds);
+	return retval;
+};
+
+bool SessWdbe::handleEraseCrdcmp(
+			DbsWdbe* dbswdbe
+		) {
+	bool retval = false;
+	eraseCrd(crdcmps);
 	return retval;
 };
 
@@ -1959,22 +1981,6 @@ bool SessWdbe::handleEraseCrdsns(
 	return retval;
 };
 
-bool SessWdbe::handleEraseCrdsys(
-			DbsWdbe* dbswdbe
-		) {
-	bool retval = false;
-	eraseCrd(crdsyss);
-	return retval;
-};
-
-bool SessWdbe::handleEraseCrdtrg(
-			DbsWdbe* dbswdbe
-		) {
-	bool retval = false;
-	eraseCrd(crdtrgs);
-	return retval;
-};
-
 bool SessWdbe::handleEraseCrdunt(
 			DbsWdbe* dbswdbe
 		) {
@@ -2060,10 +2066,7 @@ void SessWdbe::handleDpchAppWdbeInit(
 	for (auto it = crdmtps.begin(); it != crdmtps.end(); it++) feedFEnsSec.appendIxSrefTitles(0, Scr::scramble(it->second->jref), "CrdWdbeMtp");
 	for (auto it = crdprjs.begin(); it != crdprjs.end(); it++) feedFEnsSec.appendIxSrefTitles(0, Scr::scramble(it->second->jref), "CrdWdbePrj");
 	for (auto it = crdvers.begin(); it != crdvers.end(); it++) feedFEnsSec.appendIxSrefTitles(0, Scr::scramble(it->second->jref), "CrdWdbeVer");
-	for (auto it = crdsyss.begin(); it != crdsyss.end(); it++) feedFEnsSec.appendIxSrefTitles(0, Scr::scramble(it->second->jref), "CrdWdbeSys");
-	for (auto it = crdtrgs.begin(); it != crdtrgs.end(); it++) feedFEnsSec.appendIxSrefTitles(0, Scr::scramble(it->second->jref), "CrdWdbeTrg");
 	for (auto it = crdunts.begin(); it != crdunts.end(); it++) feedFEnsSec.appendIxSrefTitles(0, Scr::scramble(it->second->jref), "CrdWdbeUnt");
-	for (auto it = crdrlss.begin(); it != crdrlss.end(); it++) feedFEnsSec.appendIxSrefTitles(0, Scr::scramble(it->second->jref), "CrdWdbeRls");
 	for (auto it = crdcprs.begin(); it != crdcprs.end(); it++) feedFEnsSec.appendIxSrefTitles(0, Scr::scramble(it->second->jref), "CrdWdbeCpr");
 	for (auto it = crdcvrs.begin(); it != crdcvrs.end(); it++) feedFEnsSec.appendIxSrefTitles(0, Scr::scramble(it->second->jref), "CrdWdbeCvr");
 	for (auto it = crdpphs.begin(); it != crdpphs.end(); it++) feedFEnsSec.appendIxSrefTitles(0, Scr::scramble(it->second->jref), "CrdWdbePph");
@@ -2082,8 +2085,11 @@ void SessWdbe::handleDpchAppWdbeInit(
 	for (auto it = crdgens.begin(); it != crdgens.end(); it++) feedFEnsSec.appendIxSrefTitles(0, Scr::scramble(it->second->jref), "CrdWdbeGen");
 	for (auto it = crdprts.begin(); it != crdprts.end(); it++) feedFEnsSec.appendIxSrefTitles(0, Scr::scramble(it->second->jref), "CrdWdbePrt");
 	for (auto it = crdsigs.begin(); it != crdsigs.end(); it++) feedFEnsSec.appendIxSrefTitles(0, Scr::scramble(it->second->jref), "CrdWdbeSig");
+	for (auto it = crdcdcs.begin(); it != crdcdcs.end(); it++) feedFEnsSec.appendIxSrefTitles(0, Scr::scramble(it->second->jref), "CrdWdbeCdc");
 	for (auto it = crdprcs.begin(); it != crdprcs.end(); it++) feedFEnsSec.appendIxSrefTitles(0, Scr::scramble(it->second->jref), "CrdWdbePrc");
 	for (auto it = crdfsts.begin(); it != crdfsts.end(); it++) feedFEnsSec.appendIxSrefTitles(0, Scr::scramble(it->second->jref), "CrdWdbeFst");
+	for (auto it = crdcmps.begin(); it != crdcmps.end(); it++) feedFEnsSec.appendIxSrefTitles(0, Scr::scramble(it->second->jref), "CrdWdbeCmp");
+	for (auto it = crdrlss.begin(); it != crdrlss.end(); it++) feedFEnsSec.appendIxSrefTitles(0, Scr::scramble(it->second->jref), "CrdWdbeRls");
 	for (auto it = crdutls.begin(); it != crdutls.end(); it++) feedFEnsSec.appendIxSrefTitles(0, Scr::scramble(it->second->jref), "CrdWdbeUtl");
 
 	*dpcheng = new DpchEngData(jref, &feedFEnsSec, &statshr, {DpchEngData::ALL});
@@ -2093,87 +2099,74 @@ void SessWdbe::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBECRDACTIVE) {
-		call->abort = handleCallWdbeCrdActive(dbswdbe, call->jref, call->argInv.ix, call->argRet.ix);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECRDCLOSE) {
-		call->abort = handleCallWdbeCrdClose(dbswdbe, call->jref, call->argInv.ix);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECRDOPEN) {
-		call->abort = handleCallWdbeCrdOpen(dbswdbe, call->jref, call->argInv.ix, call->argInv.ref, call->argInv.sref, call->argInv.intval, call->argRet.ref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBELOG) {
-		call->abort = handleCallWdbeLog(dbswdbe, call->jref, call->argInv.ix, call->argInv.ref, call->argInv.sref, call->argInv.intval);
+	if (call->ixVCall == VecWdbeVCall::CALLWDBEREFPRESET) {
+		call->abort = handleCallWdbeRefPreSet(dbswdbe, call->jref, call->argInv.ix, call->argInv.ref);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBERECACCESS) {
 		call->abort = handleCallWdbeRecaccess(dbswdbe, call->jref, call->argInv.ix, call->argInv.ref, call->argRet.ix);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEREFPRESET) {
-		call->abort = handleCallWdbeRefPreSet(dbswdbe, call->jref, call->argInv.ix, call->argInv.ref);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBELOG) {
+		call->abort = handleCallWdbeLog(dbswdbe, call->jref, call->argInv.ix, call->argInv.ref, call->argInv.sref, call->argInv.intval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECRDOPEN) {
+		call->abort = handleCallWdbeCrdOpen(dbswdbe, call->jref, call->argInv.ix, call->argInv.ref, call->argInv.sref, call->argInv.intval, call->argRet.ref);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECRDCLOSE) {
+		call->abort = handleCallWdbeCrdClose(dbswdbe, call->jref, call->argInv.ix);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECRDACTIVE) {
+		call->abort = handleCallWdbeCrdActive(dbswdbe, call->jref, call->argInv.ix, call->argRet.ix);
 	};
 };
 
-bool SessWdbe::handleCallWdbeCrdActive(
+bool SessWdbe::handleCallWdbeRefPreSet(
 			DbsWdbe* dbswdbe
 			, const ubigint jrefTrig
 			, const uint ixInv
-			, uint& ixRet
+			, const ubigint refInv
 		) {
 	bool retval = false;
-	ixRet = checkCrdActive(ixInv);
+// IP handleCallWdbeRefPreSet --- BEGIN
+	if (ixInv == VecWdbeVPreset::PREWDBEJREFNOTIFY) {
+		ubigint jrefNotify_old = xchg->getRefPreset(VecWdbeVPreset::PREWDBEJREFNOTIFY, jref);
+
+		if (refInv != jrefNotify_old) {
+			if (jrefNotify_old != 0) xchg->submitDpch(new DpchEngWdbeSuspend(jrefNotify_old));
+
+			if (refInv == 0) xchg->removePreset(ixInv, jref);
+			else xchg->addRefPreset(ixInv, jref, refInv);
+		};
+
+	} else if (ixInv == VecWdbeVPreset::PREWDBETLAST) {
+		if (xchg->stgwdbeappearance.sesstterm != 0) xchg->addRefPreset(ixInv, jref, refInv);
+
+	} else if ((ixInv == VecWdbeVPreset::PREWDBEREFCVR) || (ixInv == VecWdbeVPreset::PREWDBEREFUNT) || (ixInv == VecWdbeVPreset::PREWDBEREFVER)) {
+		if (refInv == 0) xchg->removePreset(ixInv, jref);
+		else xchg->addRefPreset(ixInv, jref, refInv);
+
+		if (crdnav) crdnav->updatePreset(dbswdbe, ixInv, jrefTrig, true);
+	};
+// IP handleCallWdbeRefPreSet --- END
 	return retval;
 };
 
-bool SessWdbe::handleCallWdbeCrdClose(
+bool SessWdbe::handleCallWdbeRecaccess(
 			DbsWdbe* dbswdbe
 			, const ubigint jrefTrig
 			, const uint ixInv
+			, const ubigint refInv
+			, uint& ixRet
 		) {
 	bool retval = false;
-	// delete only if card is not part of a suspended session
-	if (xchg->getBoolvalPreset(VecWdbeVPreset::PREWDBESUSPSESS, jrefTrig)) return retval;
+	ixRet = checkRecaccess(dbswdbe, ixInv, refInv);
+	return retval;
+};
 
-	ubigint jrefNotif = xchg->getRefPreset(VecWdbeVPreset::PREWDBEJREFNOTIFY, jref);
-	if (jrefNotif == jrefTrig) xchg->removePreset(VecWdbeVPreset::PREWDBEJREFNOTIFY, jref);
-
-	if (ixInv == VecWdbeVCard::CRDWDBEUSG) eraseSubjobByJref(crdusgs, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBEUSR) eraseSubjobByJref(crdusrs, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBEPRS) eraseSubjobByJref(crdprss, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBEFIL) eraseSubjobByJref(crdfils, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBENAV) {
-		if (crdnav) {
-			delete crdnav;
-			crdnav = NULL;
-		};
-
-	} 
-else if (ixInv == VecWdbeVCard::CRDWDBEMCH) eraseSubjobByJref(crdmchs, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBELIB) eraseSubjobByJref(crdlibs, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBEFAM) eraseSubjobByJref(crdfams, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBESIL) eraseSubjobByJref(crdsils, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBEMTP) eraseSubjobByJref(crdmtps, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBEPRJ) eraseSubjobByJref(crdprjs, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBEVER) eraseSubjobByJref(crdvers, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBESYS) eraseSubjobByJref(crdsyss, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBETRG) eraseSubjobByJref(crdtrgs, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBEUNT) eraseSubjobByJref(crdunts, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBERLS) eraseSubjobByJref(crdrlss, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBECPR) eraseSubjobByJref(crdcprs, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBECVR) eraseSubjobByJref(crdcvrs, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBEPPH) eraseSubjobByJref(crdpphs, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBEMOD) eraseSubjobByJref(crdmods, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBEVEC) eraseSubjobByJref(crdvecs, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBEVIT) eraseSubjobByJref(crdvits, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBECMD) eraseSubjobByJref(crdcmds, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBEERR) eraseSubjobByJref(crderrs, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBEPPL) eraseSubjobByJref(crdppls, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBESEG) eraseSubjobByJref(crdsegs, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBEBNK) eraseSubjobByJref(crdbnks, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBEPIN) eraseSubjobByJref(crdpins, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBEINT) eraseSubjobByJref(crdints, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBESNS) eraseSubjobByJref(crdsnss, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBEVAR) eraseSubjobByJref(crdvars, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBEGEN) eraseSubjobByJref(crdgens, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBEPRT) eraseSubjobByJref(crdprts, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBESIG) eraseSubjobByJref(crdsigs, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBEPRC) eraseSubjobByJref(crdprcs, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBEFST) eraseSubjobByJref(crdfsts, jrefTrig);
-	else if (ixInv == VecWdbeVCard::CRDWDBEUTL) eraseSubjobByJref(crdutls, jrefTrig);
+bool SessWdbe::handleCallWdbeLog(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+			, const uint ixInv
+			, const ubigint refInv
+			, const string& srefInv
+			, const int intvalInv
+		) {
+	bool retval = false;
+	logRecaccess(dbswdbe, ixInv, refInv, VecWdbeVCard::getIx(srefInv), intvalInv);
 	return retval;
 };
 
@@ -2247,10 +2240,7 @@ bool SessWdbe::handleCallWdbeCrdOpen(
 		else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEMTP) refRet = insertSubjob(crdmtps, new CrdWdbeMtp(xchg, dbswdbe, jref, ixWdbeVLocale, ref));
 		else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEPRJ) refRet = insertSubjob(crdprjs, new CrdWdbePrj(xchg, dbswdbe, jref, ixWdbeVLocale, ref));
 		else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEVER) refRet = insertSubjob(crdvers, new CrdWdbeVer(xchg, dbswdbe, jref, ixWdbeVLocale, ref, ixWdbeVPreset, preUref));
-		else if (ixWdbeVCard == VecWdbeVCard::CRDWDBESYS) refRet = insertSubjob(crdsyss, new CrdWdbeSys(xchg, dbswdbe, jref, ixWdbeVLocale, ref, ixWdbeVPreset, preUref));
-		else if (ixWdbeVCard == VecWdbeVCard::CRDWDBETRG) refRet = insertSubjob(crdtrgs, new CrdWdbeTrg(xchg, dbswdbe, jref, ixWdbeVLocale, ref, ixWdbeVPreset, preUref));
 		else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEUNT) refRet = insertSubjob(crdunts, new CrdWdbeUnt(xchg, dbswdbe, jref, ixWdbeVLocale, ref, ixWdbeVPreset, preUref));
-		else if (ixWdbeVCard == VecWdbeVCard::CRDWDBERLS) refRet = insertSubjob(crdrlss, new CrdWdbeRls(xchg, dbswdbe, jref, ixWdbeVLocale, ref, ixWdbeVPreset, preUref));
 		else if (ixWdbeVCard == VecWdbeVCard::CRDWDBECPR) refRet = insertSubjob(crdcprs, new CrdWdbeCpr(xchg, dbswdbe, jref, ixWdbeVLocale, ref));
 		else if (ixWdbeVCard == VecWdbeVCard::CRDWDBECVR) refRet = insertSubjob(crdcvrs, new CrdWdbeCvr(xchg, dbswdbe, jref, ixWdbeVLocale, ref, ixWdbeVPreset, preUref));
 		else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEPPH) refRet = insertSubjob(crdpphs, new CrdWdbePph(xchg, dbswdbe, jref, ixWdbeVLocale, ref, ixWdbeVPreset, preUref));
@@ -2269,66 +2259,82 @@ bool SessWdbe::handleCallWdbeCrdOpen(
 		else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEGEN) refRet = insertSubjob(crdgens, new CrdWdbeGen(xchg, dbswdbe, jref, ixWdbeVLocale, ref, ixWdbeVPreset, preUref));
 		else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEPRT) refRet = insertSubjob(crdprts, new CrdWdbePrt(xchg, dbswdbe, jref, ixWdbeVLocale, ref, ixWdbeVPreset, preUref));
 		else if (ixWdbeVCard == VecWdbeVCard::CRDWDBESIG) refRet = insertSubjob(crdsigs, new CrdWdbeSig(xchg, dbswdbe, jref, ixWdbeVLocale, ref, ixWdbeVPreset, preUref));
+		else if (ixWdbeVCard == VecWdbeVCard::CRDWDBECDC) refRet = insertSubjob(crdcdcs, new CrdWdbeCdc(xchg, dbswdbe, jref, ixWdbeVLocale, ref, ixWdbeVPreset, preUref));
 		else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEPRC) refRet = insertSubjob(crdprcs, new CrdWdbePrc(xchg, dbswdbe, jref, ixWdbeVLocale, ref, ixWdbeVPreset, preUref));
 		else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEFST) refRet = insertSubjob(crdfsts, new CrdWdbeFst(xchg, dbswdbe, jref, ixWdbeVLocale, ref, ixWdbeVPreset, preUref));
+		else if (ixWdbeVCard == VecWdbeVCard::CRDWDBECMP) refRet = insertSubjob(crdcmps, new CrdWdbeCmp(xchg, dbswdbe, jref, ixWdbeVLocale, ref, ixWdbeVPreset, preUref));
+		else if (ixWdbeVCard == VecWdbeVCard::CRDWDBERLS) refRet = insertSubjob(crdrlss, new CrdWdbeRls(xchg, dbswdbe, jref, ixWdbeVLocale, ref, ixWdbeVPreset, preUref));
 		else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEUTL) refRet = insertSubjob(crdutls, new CrdWdbeUtl(xchg, dbswdbe, jref, ixWdbeVLocale));
 	};
 
 	return retval;
 };
 
-bool SessWdbe::handleCallWdbeLog(
+bool SessWdbe::handleCallWdbeCrdClose(
 			DbsWdbe* dbswdbe
 			, const ubigint jrefTrig
 			, const uint ixInv
-			, const ubigint refInv
-			, const string& srefInv
-			, const int intvalInv
 		) {
 	bool retval = false;
-	logRecaccess(dbswdbe, ixInv, refInv, VecWdbeVCard::getIx(srefInv), intvalInv);
+	// delete only if card is not part of a suspended session
+	if (xchg->getBoolvalPreset(VecWdbeVPreset::PREWDBESUSPSESS, jrefTrig)) return retval;
+
+	ubigint jrefNotif = xchg->getRefPreset(VecWdbeVPreset::PREWDBEJREFNOTIFY, jref);
+	if (jrefNotif == jrefTrig) xchg->removePreset(VecWdbeVPreset::PREWDBEJREFNOTIFY, jref);
+
+	if (ixInv == VecWdbeVCard::CRDWDBEUSG) eraseSubjobByJref(crdusgs, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBEUSR) eraseSubjobByJref(crdusrs, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBEPRS) eraseSubjobByJref(crdprss, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBEFIL) eraseSubjobByJref(crdfils, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBENAV) {
+		if (crdnav) {
+			delete crdnav;
+			crdnav = NULL;
+		};
+
+	} 
+else if (ixInv == VecWdbeVCard::CRDWDBEMCH) eraseSubjobByJref(crdmchs, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBELIB) eraseSubjobByJref(crdlibs, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBEFAM) eraseSubjobByJref(crdfams, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBESIL) eraseSubjobByJref(crdsils, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBEMTP) eraseSubjobByJref(crdmtps, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBEPRJ) eraseSubjobByJref(crdprjs, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBEVER) eraseSubjobByJref(crdvers, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBEUNT) eraseSubjobByJref(crdunts, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBECPR) eraseSubjobByJref(crdcprs, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBECVR) eraseSubjobByJref(crdcvrs, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBEPPH) eraseSubjobByJref(crdpphs, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBEMOD) eraseSubjobByJref(crdmods, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBEVEC) eraseSubjobByJref(crdvecs, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBEVIT) eraseSubjobByJref(crdvits, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBECMD) eraseSubjobByJref(crdcmds, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBEERR) eraseSubjobByJref(crderrs, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBEPPL) eraseSubjobByJref(crdppls, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBESEG) eraseSubjobByJref(crdsegs, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBEBNK) eraseSubjobByJref(crdbnks, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBEPIN) eraseSubjobByJref(crdpins, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBEINT) eraseSubjobByJref(crdints, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBESNS) eraseSubjobByJref(crdsnss, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBEVAR) eraseSubjobByJref(crdvars, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBEGEN) eraseSubjobByJref(crdgens, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBEPRT) eraseSubjobByJref(crdprts, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBESIG) eraseSubjobByJref(crdsigs, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBECDC) eraseSubjobByJref(crdcdcs, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBEPRC) eraseSubjobByJref(crdprcs, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBEFST) eraseSubjobByJref(crdfsts, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBECMP) eraseSubjobByJref(crdcmps, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBERLS) eraseSubjobByJref(crdrlss, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBEUTL) eraseSubjobByJref(crdutls, jrefTrig);
 	return retval;
 };
 
-bool SessWdbe::handleCallWdbeRecaccess(
+bool SessWdbe::handleCallWdbeCrdActive(
 			DbsWdbe* dbswdbe
 			, const ubigint jrefTrig
 			, const uint ixInv
-			, const ubigint refInv
 			, uint& ixRet
 		) {
 	bool retval = false;
-	ixRet = checkRecaccess(dbswdbe, ixInv, refInv);
-	return retval;
-};
-
-bool SessWdbe::handleCallWdbeRefPreSet(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-			, const uint ixInv
-			, const ubigint refInv
-		) {
-	bool retval = false;
-// IP handleCallWdbeRefPreSet --- BEGIN
-	if (ixInv == VecWdbeVPreset::PREWDBEJREFNOTIFY) {
-		ubigint jrefNotify_old = xchg->getRefPreset(VecWdbeVPreset::PREWDBEJREFNOTIFY, jref);
-
-		if (refInv != jrefNotify_old) {
-			if (jrefNotify_old != 0) xchg->submitDpch(new DpchEngWdbeSuspend(jrefNotify_old));
-
-			if (refInv == 0) xchg->removePreset(ixInv, jref);
-			else xchg->addRefPreset(ixInv, jref, refInv);
-		};
-
-	} else if (ixInv == VecWdbeVPreset::PREWDBETLAST) {
-		if (xchg->stgwdbeappearance.sesstterm != 0) xchg->addRefPreset(ixInv, jref, refInv);
-
-	} else if ((ixInv == VecWdbeVPreset::PREWDBEREFCVR) || (ixInv == VecWdbeVPreset::PREWDBEREFUNT) || (ixInv == VecWdbeVPreset::PREWDBEREFVER)) {
-		if (refInv == 0) xchg->removePreset(ixInv, jref);
-		else xchg->addRefPreset(ixInv, jref, refInv);
-
-		if (crdnav) crdnav->updatePreset(dbswdbe, ixInv, jrefTrig, true);
-	};
-// IP handleCallWdbeRefPreSet --- END
+	ixRet = checkCrdActive(ixInv);
 	return retval;
 };

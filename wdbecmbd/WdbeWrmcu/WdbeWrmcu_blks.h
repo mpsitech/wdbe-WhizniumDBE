@@ -42,9 +42,9 @@ public:
 };
 
 /**
-	* DpchInvWdbeWrmcuCtrFwdctr
+	* DpchInvWdbeWrmcuCtr
 	*/
-class DpchInvWdbeWrmcuCtrFwdctr : public DpchInvWdbe {
+class DpchInvWdbeWrmcuCtr : public DpchInvWdbe {
 
 public:
 	static const Sbecore::uint SCROREF = 1;
@@ -57,7 +57,7 @@ public:
 	static const Sbecore::uint UNTSREF = 6;
 
 public:
-	DpchInvWdbeWrmcuCtrFwdctr(const Sbecore::ubigint oref = 0, const Sbecore::ubigint jref = 0, const Sbecore::ubigint refWdbeMModule = 0, const std::string& folder = "", const std::string& Prjshort = "", const std::string& Untsref = "");
+	DpchInvWdbeWrmcuCtr(const Sbecore::ubigint oref = 0, const Sbecore::ubigint jref = 0, const Sbecore::ubigint refWdbeMModule = 0, const std::string& folder = "", const std::string& Prjshort = "", const std::string& Untsref = "");
 
 public:
 	Sbecore::ubigint refWdbeMModule;

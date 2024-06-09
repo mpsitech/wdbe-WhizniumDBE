@@ -2,7 +2,7 @@
 # make file for CrdWdbePrt card job handler, release wdbecmbd_mac
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 23 Oct 2021
+# date created: 7 Feb 2024
 # IP header --- ABOVE
 
 include ../Makefile.inc
@@ -14,9 +14,9 @@ STATLIB = ar
 STATLIBFLAGS = rcs
 
 INCPATH = -I$(BUILDROOT)/dbswdbe -I$(BUILDROOT)/wdbecmbd/VecWdbe -I$(BUILDROOT)/wdbecmbd/IexWdbe -I$(BUILDROOT)/wdbecmbd
-INCPATH += -I${WHIZSDKROOT}/build -I${WHIZSDKROOT}/build/apiwzlm -I/usr/local/include -I/usr/local/include/curl -I/usr/local/include/libxml2 -I/usr/local/mysql/include -I/usr/local/opt/sqlite/include
+INCPATH += -I${WHIZSDKROOT}/build -I${WHIZSDKROOT}/build/apiwzlm -I/opt/homebrew/include -I/opt/homebrew/opt/curl/include -I/opt/homebrew/opt/libgit2/include -I/opt/homebrew/opt/libmicrohttpd/include -I/opt/homebrew/opt/libxml2/include -I/opt/homebrew/opt/openssl@3/include -I/opt/homebrew/opt/sqlite3/include -I/usr/local/mysql/include
 
-OBJS = CrdWdbePrt.o PnlWdbePrtRec.o PnlWdbePrtDetail.o PnlWdbePrtSrc1NSensitivity.o QryWdbePrtSrc1NSensitivity.o PnlWdbePrtHeadbar.o PnlWdbePrtList.o QryWdbePrtList.o
+OBJS = CrdWdbePrt.o PnlWdbePrtList.o QryWdbePrtList.o PnlWdbePrtHeadbar.o PnlWdbePrtRec.o PnlWdbePrtSrc1NSensitivity.o QryWdbePrtSrc1NSensitivity.o PnlWdbePrtDetail.o
 
 LIB = libcrdwdbeprt
 
@@ -29,7 +29,6 @@ all:	$(LIB)
 
 $(LIB):	$(OBJS)
 	$(STATLIB) $(STATLIBFLAGS) $(LIB).a $(OBJS)
-	rm -f *.o
 
 install:
 	mv $(LIB).a $(LIBROOT)/wdbecmbd/

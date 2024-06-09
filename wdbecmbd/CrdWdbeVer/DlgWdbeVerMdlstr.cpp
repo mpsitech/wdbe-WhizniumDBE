@@ -128,8 +128,8 @@ void DlgWdbeVerMdlstr::refreshImp(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
 		) {
-	ContInfImp oldContinfimp(continfimp);
 	StatShrImp oldStatshrimp(statshrimp);
+	ContInfImp oldContinfimp(continfimp);
 
 	// IP refreshImp --- RBEGIN
 	// continfimp
@@ -140,16 +140,16 @@ void DlgWdbeVerMdlstr::refreshImp(
 	statshrimp.ButStoActive = evalImpButStoActive(dbswdbe);
 
 	// IP refreshImp --- REND
-	if (continfimp.diff(&oldContinfimp).size() != 0) insert(moditems, DpchEngData::CONTINFIMP);
 	if (statshrimp.diff(&oldStatshrimp).size() != 0) insert(moditems, DpchEngData::STATSHRIMP);
+	if (continfimp.diff(&oldContinfimp).size() != 0) insert(moditems, DpchEngData::CONTINFIMP);
 };
 
 void DlgWdbeVerMdlstr::refreshPpr(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
 		) {
-	ContInfPpr oldContinfppr(continfppr);
 	StatShrPpr oldStatshrppr(statshrppr);
+	ContInfPpr oldContinfppr(continfppr);
 
 	// IP refreshPpr --- RBEGIN
 	// continfppr
@@ -160,26 +160,26 @@ void DlgWdbeVerMdlstr::refreshPpr(
 	statshrppr.ButStoActive = evalPprButStoActive(dbswdbe);
 
 	// IP refreshPpr --- REND
-	if (continfppr.diff(&oldContinfppr).size() != 0) insert(moditems, DpchEngData::CONTINFPPR);
 	if (statshrppr.diff(&oldStatshrppr).size() != 0) insert(moditems, DpchEngData::STATSHRPPR);
+	if (continfppr.diff(&oldContinfppr).size() != 0) insert(moditems, DpchEngData::CONTINFPPR);
 };
 
 void DlgWdbeVerMdlstr::refreshLfi(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
 		) {
-	StatShrLfi oldStatshrlfi(statshrlfi);
 	ContInfLfi oldContinflfi(continflfi);
+	StatShrLfi oldStatshrlfi(statshrlfi);
 
 	// IP refreshLfi --- BEGIN
+	// continflfi
+
 	// statshrlfi
 	statshrlfi.DldActive = evalLfiDldActive(dbswdbe);
 
-	// continflfi
-
 	// IP refreshLfi --- END
-	if (statshrlfi.diff(&oldStatshrlfi).size() != 0) insert(moditems, DpchEngData::STATSHRLFI);
 	if (continflfi.diff(&oldContinflfi).size() != 0) insert(moditems, DpchEngData::CONTINFLFI);
+	if (statshrlfi.diff(&oldStatshrlfi).size() != 0) insert(moditems, DpchEngData::STATSHRLFI);
 };
 
 void DlgWdbeVerMdlstr::refresh(
@@ -190,24 +190,24 @@ void DlgWdbeVerMdlstr::refresh(
 	if (muteRefresh && !unmute) return;
 	muteRefresh = true;
 
+	StatShr oldStatshr(statshr);
 	ContInf oldContinf(continf);
 	ContIac oldContiac(contiac);
-	StatShr oldStatshr(statshr);
 
 	// IP refresh --- BEGIN
+	// statshr
+	statshr.ButDneActive = evalButDneActive(dbswdbe);
+
 	// continf
 	continf.numFSge = ixVSge;
 
 	// contiac
 	contiac.numFDse = ixVDit;
 
-	// statshr
-	statshr.ButDneActive = evalButDneActive(dbswdbe);
-
 	// IP refresh --- END
+	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
 	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
 	if (contiac.diff(&oldContiac).size() != 0) insert(moditems, DpchEngData::CONTIAC);
-	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
 
 	refreshIfi(dbswdbe, moditems);
 	refreshImp(dbswdbe, moditems);
@@ -276,8 +276,8 @@ void DlgWdbeVerMdlstr::handleRequest(
 		if (ixVSge == VecVSge::IDLE) handleUploadInSgeIdle(dbswdbe, req->filename);
 
 	} else if (req->ixVBasetype == ReqWdbe::VecVBasetype::DOWNLOAD) {
-		if (ixVSge == VecVSge::FAIL) req->filename = handleDownloadInSgeFail(dbswdbe);
-		else if (ixVSge == VecVSge::DONE) req->filename = handleDownloadInSgeDone(dbswdbe);
+		if (ixVSge == VecVSge::DONE) req->filename = handleDownloadInSgeDone(dbswdbe);
+		else if (ixVSge == VecVSge::FAIL) req->filename = handleDownloadInSgeFail(dbswdbe);
 
 	} else if (req->ixVBasetype == ReqWdbe::VecVBasetype::DPCHRET) {
 		if (req->dpchret->ixOpVOpres == VecOpVOpres::PROGRESS) {
@@ -308,11 +308,11 @@ void DlgWdbeVerMdlstr::handleRequest(
 		};
 
 	} else if (req->ixVBasetype == ReqWdbe::VecVBasetype::TIMER) {
-		if (ixVSge == VecVSge::PRSIDLE) handleTimerInSgePrsidle(dbswdbe, req->sref);
+		if ((req->sref == "mon") && (ixVSge == VecVSge::IMPORT)) handleTimerWithSrefMonInSgeImport(dbswdbe);
 		else if (ixVSge == VecVSge::IMPIDLE) handleTimerInSgeImpidle(dbswdbe, req->sref);
-		else if ((req->sref == "mon") && (ixVSge == VecVSge::IMPORT)) handleTimerWithSrefMonInSgeImport(dbswdbe);
 		else if ((req->sref == "mon") && (ixVSge == VecVSge::POSTPRC1)) handleTimerWithSrefMonInSgePostprc1(dbswdbe);
 		else if ((req->sref == "mon") && (ixVSge == VecVSge::POSTPRC2)) handleTimerWithSrefMonInSgePostprc2(dbswdbe);
+		else if (ixVSge == VecVSge::PRSIDLE) handleTimerInSgePrsidle(dbswdbe, req->sref);
 		else if ((req->sref == "mon") && (ixVSge == VecVSge::POSTPRC3)) handleTimerWithSrefMonInSgePostprc3(dbswdbe);
 	};
 };
@@ -438,30 +438,16 @@ void DlgWdbeVerMdlstr::handleUploadInSgeIdle(
 	changeStage(dbswdbe, VecVSge::PRSIDLE);
 };
 
-string DlgWdbeVerMdlstr::handleDownloadInSgeFail(
-			DbsWdbe* dbswdbe
-		) {
-	return(xchg->tmppath + "/" + logfile); // IP handleDownloadInSgeFail --- RLINE
-};
-
 string DlgWdbeVerMdlstr::handleDownloadInSgeDone(
 			DbsWdbe* dbswdbe
 		) {
 	return(""); // IP handleDownloadInSgeDone --- LINE
 };
 
-void DlgWdbeVerMdlstr::handleTimerInSgePrsidle(
+string DlgWdbeVerMdlstr::handleDownloadInSgeFail(
 			DbsWdbe* dbswdbe
-			, const string& sref
 		) {
-	changeStage(dbswdbe, nextIxVSgeSuccess);
-};
-
-void DlgWdbeVerMdlstr::handleTimerInSgeImpidle(
-			DbsWdbe* dbswdbe
-			, const string& sref
-		) {
-	changeStage(dbswdbe, nextIxVSgeSuccess);
+	return(xchg->tmppath + "/" + logfile); // IP handleDownloadInSgeFail --- RLINE
 };
 
 void DlgWdbeVerMdlstr::handleTimerWithSrefMonInSgeImport(
@@ -469,6 +455,13 @@ void DlgWdbeVerMdlstr::handleTimerWithSrefMonInSgeImport(
 		) {
 	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
 	refreshWithDpchEng(dbswdbe); // IP handleTimerWithSrefMonInSgeImport --- ILINE
+};
+
+void DlgWdbeVerMdlstr::handleTimerInSgeImpidle(
+			DbsWdbe* dbswdbe
+			, const string& sref
+		) {
+	changeStage(dbswdbe, nextIxVSgeSuccess);
 };
 
 void DlgWdbeVerMdlstr::handleTimerWithSrefMonInSgePostprc1(
@@ -483,6 +476,13 @@ void DlgWdbeVerMdlstr::handleTimerWithSrefMonInSgePostprc2(
 		) {
 	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
 	refreshWithDpchEng(dbswdbe); // IP handleTimerWithSrefMonInSgePostprc2 --- ILINE
+};
+
+void DlgWdbeVerMdlstr::handleTimerInSgePrsidle(
+			DbsWdbe* dbswdbe
+			, const string& sref
+		) {
+	changeStage(dbswdbe, nextIxVSgeSuccess);
 };
 
 void DlgWdbeVerMdlstr::handleTimerWithSrefMonInSgePostprc3(
@@ -882,8 +882,6 @@ uint DlgWdbeVerMdlstr::enterSgePostprc1(
 
 	ubigint refWdbeMVersion = xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFVER, jref);
 
-	addInv(new DpchInvWdbeCplmstSys(0, 0, refWdbeMVersion));
-
 	dbswdbe->loadRefsBySQL("SELECT ref FROM TblWdbeMUnit WHERE refIxVTbl = " + to_string(VecWdbeVMUnitRefTbl::VER) + " AND refUref = " + to_string(refWdbeMVersion), false, refs);
 	for (unsigned int i = 0; i < refs.size();i++) addInv(new DpchInvWdbeCplmstUnt(0, 0, refs[i]));
 
@@ -914,7 +912,7 @@ uint DlgWdbeVerMdlstr::enterSgePostprc2(
 
 	// IP enterSgePostprc2 --- IBEGIN
 
-	// modules top-down order, respecting unit hierarchy bottom-up ; modules may be added in the process
+	// modules top-down order; modules may be added in the process
 
 	ubigint refWdbeMVersion = xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFVER, jref);
 
@@ -933,7 +931,7 @@ uint DlgWdbeVerMdlstr::enterSgePostprc2(
 	logfiles.clear();
 	logheaders.clear();
 
-	Wdbe::levelMdls(dbswdbe, refWdbeMVersion, mdls, lvlsMdls, false, true, true);
+	Wdbe::levelMdls(dbswdbe, refWdbeMVersion, mdls, lvlsMdls, false);
 
 	// determine modules due for op invocation
 	Wdbe::getSrefsMtpCustops(dbswdbe, srefsMtpCustops, VecWdbeVKeylist::KLSTKWDBEMTPCPLMSTTDCUSTOP);
@@ -945,35 +943,33 @@ uint DlgWdbeVerMdlstr::enterSgePostprc2(
 		// invs complete if at least one added on superior level
 		if (opN > 0) if (i != 0) if (lvl != lvlsMdls[i-1]) break;
 
-		// check for template copy
-		tplcpy = false;
-		
-		if ((refsTplcpy.find(mdl->ref) == refsTplcpy.end()) && (mdl->tplRefWdbeMModule != 0)) {
-			dpchinv = new DpchInvWdbeCplmstTplcpy(0, 0, mdl->ref);
-			addInv(dpchinv);
-			orefsToRefs[dpchinv->oref] = mdl->ref;
-
-			tplcpy = true;
-		};
-
 		// check for type-based modification
 		typmod = false;
 
-		if (!tplcpy) {
-			if (refsTypmod.find(mdl->ref) == refsTypmod.end()) {
-				if ((mdl->ixVBasetype == VecWdbeVMModuleBasetype::CTR) || (mdl->ixVBasetype == VecWdbeVMModuleBasetype::ECTR)) {
-					addInv(new DpchInvWdbeCplmstCtrEctr(0, 0, mdl->ref));
-					typmod = true;
-				} else if (mdl->ixVBasetype == VecWdbeVMModuleBasetype::FWDCTR) {
-					addInv(new DpchInvWdbeCplmstFwdctr(0, 0, mdl->ref));
-					typmod = true;
-				} else if (mdl->ixVBasetype == VecWdbeVMModuleBasetype::IMBUF) {
-					dpchinv = new DpchInvWdbeCplmstImbuf(0, 0, mdl->ref);
-					addInv(dpchinv);
-					orefsToRefs[dpchinv->oref] = mdl->ref;
+		if (refsTypmod.find(mdl->ref) == refsTypmod.end()) {
+			if ( (mdl->ixVBasetype == VecWdbeVMModuleBasetype::HOSTIF) || (mdl->ixVBasetype == VecWdbeVMModuleBasetype::EHOSTIF) || (mdl->ixVBasetype == VecWdbeVMModuleBasetype::CTR)
+						|| (mdl->ixVBasetype == VecWdbeVMModuleBasetype::ECTR) || (mdl->ixVBasetype == VecWdbeVMModuleBasetype::DBGCTR)|| (mdl->ixVBasetype == VecWdbeVMModuleBasetype::EDBGCTR) ) {
+				addInv(new DpchInvWdbeCplmstCtrEctrHostifEhostif(0, 0, mdl->ref));
+				typmod = true;
+			} else if (mdl->ixVBasetype == VecWdbeVMModuleBasetype::IMBUF) {
+				dpchinv = new DpchInvWdbeCplmstImbuf(0, 0, mdl->ref);
+				addInv(dpchinv);
+				orefsToRefs[dpchinv->oref] = mdl->ref;
 
-					typmod = true;
-				};
+				typmod = true;
+			};
+		};
+
+		// check for template copy
+		tplcpy = false;
+		
+		if (!typmod) {
+			if ((refsTplcpy.find(mdl->ref) == refsTplcpy.end()) && (mdl->tplRefWdbeMModule != 0)) {
+				dpchinv = new DpchInvWdbeCplmstTplcpy(0, 0, mdl->ref);
+				addInv(dpchinv);
+				orefsToRefs[dpchinv->oref] = mdl->ref;
+
+				tplcpy = true;
 			};
 		};
 
@@ -1029,7 +1025,7 @@ uint DlgWdbeVerMdlstr::enterSgePostprc3(
 
 	// IP enterSgePostprc3 --- IBEGIN
 
-	// modules bottom-up order, not respecting unit hierarchy
+	// modules bottom-up order
 
 	ubigint refWdbeMVersion = xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFVER, jref);
 

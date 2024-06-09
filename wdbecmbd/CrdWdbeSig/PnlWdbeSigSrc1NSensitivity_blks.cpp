@@ -57,7 +57,7 @@ void PnlWdbeSigSrc1NSensitivity::ContInf::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["numFCsiQst"] = numFCsiQst;
+	me["numFCsiQst"] = (Json::Value::UInt) numFCsiQst;
 };
 
 void PnlWdbeSigSrc1NSensitivity::ContInf::writeXML(
@@ -217,15 +217,14 @@ PnlWdbeSigSrc1NSensitivity::StgIac::StgIac(
 };
 
 bool PnlWdbeSigSrc1NSensitivity::StgIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["StgIacWdbeSigSrc1NSensitivity"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["StgIacWdbeSigSrc1NSensitivity"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -267,7 +266,7 @@ void PnlWdbeSigSrc1NSensitivity::StgIac::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["TcoRefWidth"] = TcoRefWidth;
+	me["TcoRefWidth"] = (Json::Value::UInt) TcoRefWidth;
 };
 
 void PnlWdbeSigSrc1NSensitivity::StgIac::writeXML(
@@ -382,15 +381,14 @@ string PnlWdbeSigSrc1NSensitivity::DpchAppData::getSrefsMask() {
 };
 
 void PnlWdbeSigSrc1NSensitivity::DpchAppData::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbeSigSrc1NSensitivityData"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbeSigSrc1NSensitivityData"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -456,15 +454,14 @@ string PnlWdbeSigSrc1NSensitivity::DpchAppDo::getSrefsMask() {
 };
 
 void PnlWdbeSigSrc1NSensitivity::DpchAppDo::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbeSigSrc1NSensitivityDo"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbeSigSrc1NSensitivityDo"];}();
 
 	basefound = (me != Json::nullValue);
 

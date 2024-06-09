@@ -42,7 +42,7 @@ string VecWdbeVOpengtype::getTitle(
 			, const uint ixWdbeVLocale
 		) {
 	if (ixWdbeVLocale == 1) {
-		if (ix == WDBEOPD1) return("wdbeopd1 with WdbeCplmst/WdbeGen/WdbeGenfst/WdbePlhfpga/WdbePlhmcu/WdbePrcfile/WdbePrctree/WdbeWrdev/WdbeWrfpga/WdbeWrmcu");
+		if (ix == WDBEOPD1) return("wdbeopd1 with WdbeCplmst/WdbeGen/WdbeGenfst/WdbePlhfpga/WdbePlhmcu/WdbePrcfile/WdbePrctree/WdbeWrdev/WdbeWrfpga/WdbeWrmcu/WdbeWrterm");
 		if (ix == WDBEOPD2) return("wdbeopd2 with WdbeMtpCplmstbu/WdbeMtpCplmsttd/WdbeMtpGenfst/WdbeMtpPlhfpga/WdbeMtpPlhmcu/WdbeMtpWrfpga/WdbeMtpWrmcu");
 		return(getSref(ix));
 	};

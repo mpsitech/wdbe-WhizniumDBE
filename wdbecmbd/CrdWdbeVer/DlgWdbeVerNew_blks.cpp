@@ -142,15 +142,14 @@ DlgWdbeVerNew::ContIac::ContIac(
 };
 
 bool DlgWdbeVerNew::ContIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["ContIacDlgWdbeVerNew"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["ContIacDlgWdbeVerNew"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -198,9 +197,9 @@ void DlgWdbeVerNew::ContIac::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["numFDetPupPrj"] = numFDetPupPrj;
-	me["numFDetPupBvr"] = numFDetPupBvr;
-	me["numFDetRbuVni"] = numFDetRbuVni;
+	me["numFDetPupPrj"] = (Json::Value::UInt) numFDetPupPrj;
+	me["numFDetPupBvr"] = (Json::Value::UInt) numFDetPupBvr;
+	me["numFDetRbuVni"] = (Json::Value::UInt) numFDetRbuVni;
 	me["DetTxfCmt"] = DetTxfCmt;
 };
 
@@ -272,7 +271,7 @@ void DlgWdbeVerNew::ContInf::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["numFSge"] = numFSge;
+	me["numFSge"] = (Json::Value::UInt) numFSge;
 };
 
 void DlgWdbeVerNew::ContInf::writeXML(
@@ -484,15 +483,14 @@ string DlgWdbeVerNew::DpchAppData::getSrefsMask() {
 };
 
 void DlgWdbeVerNew::DpchAppData::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppDlgWdbeVerNewData"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppDlgWdbeVerNewData"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -554,15 +552,14 @@ string DlgWdbeVerNew::DpchAppDo::getSrefsMask() {
 };
 
 void DlgWdbeVerNew::DpchAppDo::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppDlgWdbeVerNewDo"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppDlgWdbeVerNewDo"];}();
 
 	basefound = (me != Json::nullValue);
 

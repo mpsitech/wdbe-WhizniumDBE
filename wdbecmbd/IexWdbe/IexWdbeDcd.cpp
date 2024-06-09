@@ -4704,6 +4704,10 @@ IexWdbeDcd::ImeitemIAMFsmstateStep::ImeitemIAMFsmstateStep(
 			, const string& Ip3
 			, const string& Cond4
 			, const string& Ip4
+			, const string& Cond5
+			, const string& Ip5
+			, const string& Cond6
+			, const string& Ip6
 		) : WdbeAMFsmstateStep() {
 	lineno = 0;
 	ixWIelValid = 0;
@@ -4717,6 +4721,10 @@ IexWdbeDcd::ImeitemIAMFsmstateStep::ImeitemIAMFsmstateStep(
 	this->Ip3 = Ip3;
 	this->Cond4 = Cond4;
 	this->Ip4 = Ip4;
+	this->Cond5 = Cond5;
+	this->Ip5 = Ip5;
+	this->Cond6 = Cond6;
+	this->Ip6 = Ip6;
 };
 
 IexWdbeDcd::ImeitemIAMFsmstateStep::ImeitemIAMFsmstateStep(
@@ -4741,6 +4749,10 @@ IexWdbeDcd::ImeitemIAMFsmstateStep::ImeitemIAMFsmstateStep(
 		Ip3 = rec->Ip3;
 		Cond4 = rec->Cond4;
 		Ip4 = rec->Ip4;
+		Cond5 = rec->Cond5;
+		Ip5 = rec->Ip5;
+		Cond6 = rec->Cond6;
+		Ip6 = rec->Ip6;
 
 		delete rec;
 	};
@@ -4760,6 +4772,10 @@ void IexWdbeDcd::ImeitemIAMFsmstateStep::readTxt(
 	if (txtrd.fields.size() > 6) {Ip3 = txtrd.fields[6]; ixWIelValid += ImeIAMFsmstateStep::VecWIel::IP3;};
 	if (txtrd.fields.size() > 7) {Cond4 = txtrd.fields[7]; ixWIelValid += ImeIAMFsmstateStep::VecWIel::COND4;};
 	if (txtrd.fields.size() > 8) {Ip4 = txtrd.fields[8]; ixWIelValid += ImeIAMFsmstateStep::VecWIel::IP4;};
+	if (txtrd.fields.size() > 9) {Cond5 = txtrd.fields[9]; ixWIelValid += ImeIAMFsmstateStep::VecWIel::COND5;};
+	if (txtrd.fields.size() > 10) {Ip5 = txtrd.fields[10]; ixWIelValid += ImeIAMFsmstateStep::VecWIel::IP5;};
+	if (txtrd.fields.size() > 11) {Cond6 = txtrd.fields[11]; ixWIelValid += ImeIAMFsmstateStep::VecWIel::COND6;};
+	if (txtrd.fields.size() > 12) {Ip6 = txtrd.fields[12]; ixWIelValid += ImeIAMFsmstateStep::VecWIel::IP6;};
 
 	while (txtrd.readLine()) {
 		switch (txtrd.ixVLinetype) {
@@ -4792,13 +4808,17 @@ void IexWdbeDcd::ImeitemIAMFsmstateStep::readXML(
 		if (extractStringUclc(docctx, basexpath, "Ip3", "ip3", Ip3)) ixWIelValid += ImeIAMFsmstateStep::VecWIel::IP3;
 		if (extractStringUclc(docctx, basexpath, "Cond4", "cn4", Cond4)) ixWIelValid += ImeIAMFsmstateStep::VecWIel::COND4;
 		if (extractStringUclc(docctx, basexpath, "Ip4", "ip4", Ip4)) ixWIelValid += ImeIAMFsmstateStep::VecWIel::IP4;
+		if (extractStringUclc(docctx, basexpath, "Cond5", "cn5", Cond5)) ixWIelValid += ImeIAMFsmstateStep::VecWIel::COND5;
+		if (extractStringUclc(docctx, basexpath, "Ip5", "ip5", Ip5)) ixWIelValid += ImeIAMFsmstateStep::VecWIel::IP5;
+		if (extractStringUclc(docctx, basexpath, "Cond6", "cn6", Cond6)) ixWIelValid += ImeIAMFsmstateStep::VecWIel::COND6;
+		if (extractStringUclc(docctx, basexpath, "Ip6", "ip6", Ip6)) ixWIelValid += ImeIAMFsmstateStep::VecWIel::IP6;
 	};
 };
 
 void IexWdbeDcd::ImeitemIAMFsmstateStep::writeTxt(
 			fstream& outfile
 		) {
-	outfile << "\t\t\t\t" << srefFnxRefWdbeMFsmstate << "\t" << Cond1 << "\t" << Ip1 << "\t" << Cond2 << "\t" << Ip2 << "\t" << Cond3 << "\t" << Ip3 << "\t" << Cond4 << "\t" << Ip4 << endl;
+	outfile << "\t\t\t\t" << srefFnxRefWdbeMFsmstate << "\t" << Cond1 << "\t" << Ip1 << "\t" << Cond2 << "\t" << Ip2 << "\t" << Cond3 << "\t" << Ip3 << "\t" << Cond4 << "\t" << Ip4 << "\t" << Cond5 << "\t" << Ip5 << "\t" << Cond6 << "\t" << Ip6 << endl;
 };
 
 void IexWdbeDcd::ImeitemIAMFsmstateStep::writeXML(
@@ -4807,8 +4827,8 @@ void IexWdbeDcd::ImeitemIAMFsmstateStep::writeXML(
 			, const bool shorttags
 		) {
 	vector<string> tags;
-	if (shorttags) tags = {"Ii","fnx","cn1","ip1","cn2","ip2","cn3","ip3","cn4","ip4"};
-	else tags = {"ImeitemIAMFsmstateStep","srefFnxRefWdbeMFsmstate","Cond1","Ip1","Cond2","Ip2","Cond3","Ip3","Cond4","Ip4"};
+	if (shorttags) tags = {"Ii","fnx","cn1","ip1","cn2","ip2","cn3","ip3","cn4","ip4","cn5","ip5","cn6","ip6"};
+	else tags = {"ImeitemIAMFsmstateStep","srefFnxRefWdbeMFsmstate","Cond1","Ip1","Cond2","Ip2","Cond3","Ip3","Cond4","Ip4","Cond5","Ip5","Cond6","Ip6"};
 
 	xmlTextWriterStartElement(wr, BAD_CAST tags[0].c_str());
 		xmlTextWriterWriteAttribute(wr, BAD_CAST "num", BAD_CAST to_string(num).c_str());
@@ -4821,6 +4841,10 @@ void IexWdbeDcd::ImeitemIAMFsmstateStep::writeXML(
 		writeString(wr, tags[7], Ip3);
 		writeString(wr, tags[8], Cond4);
 		writeString(wr, tags[9], Ip4);
+		writeString(wr, tags[10], Cond5);
+		writeString(wr, tags[11], Ip5);
+		writeString(wr, tags[12], Cond6);
+		writeString(wr, tags[13], Ip6);
 	xmlTextWriterEndElement(wr);
 };
 
@@ -4846,6 +4870,10 @@ uint IexWdbeDcd::ImeIAMFsmstateStep::VecWIel::getIx(
 		else if (ss[i] == "ip3") ix |= IP3;
 		else if (ss[i] == "cond4") ix |= COND4;
 		else if (ss[i] == "ip4") ix |= IP4;
+		else if (ss[i] == "cond5") ix |= COND5;
+		else if (ss[i] == "ip5") ix |= IP5;
+		else if (ss[i] == "cond6") ix |= COND6;
+		else if (ss[i] == "ip6") ix |= IP6;
 	};
 
 	return(ix);
@@ -4856,7 +4884,7 @@ void IexWdbeDcd::ImeIAMFsmstateStep::VecWIel::getIcs(
 			, set<uint>& ics
 		) {
 	ics.clear();
-	for (unsigned int i = 1; i < (2*IP4); i *= 2) if (ix & i) ics.insert(i);
+	for (unsigned int i = 1; i < (2*IP6); i *= 2) if (ix & i) ics.insert(i);
 };
 
 string IexWdbeDcd::ImeIAMFsmstateStep::VecWIel::getSrefs(
@@ -4874,6 +4902,10 @@ string IexWdbeDcd::ImeIAMFsmstateStep::VecWIel::getSrefs(
 	if (ix & IP3) ss.push_back("Ip3");
 	if (ix & COND4) ss.push_back("Cond4");
 	if (ix & IP4) ss.push_back("Ip4");
+	if (ix & COND5) ss.push_back("Cond5");
+	if (ix & IP5) ss.push_back("Ip5");
+	if (ix & COND6) ss.push_back("Cond6");
+	if (ix & IP6) ss.push_back("Ip6");
 
 	StrMod::vectorToString(ss, srefs);
 
@@ -4970,7 +5002,7 @@ void IexWdbeDcd::ImeIAMFsmstateStep::writeTxt(
 			fstream& outfile
 		) {
 	if (nodes.size() > 0) {
-		outfile << "\t\t\t\tImeIAMFsmstateStep." << StrMod::replaceChar(ImeIAMFsmstateStep::VecWIel::getSrefs(511), ';', '\t') << endl;
+		outfile << "\t\t\t\tImeIAMFsmstateStep." << StrMod::replaceChar(ImeIAMFsmstateStep::VecWIel::getSrefs(8191), ';', '\t') << endl;
 		for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeTxt(outfile);
 		outfile << "\t\t\t\tImeIAMFsmstateStep.end" << endl;
 	};
@@ -6797,7 +6829,7 @@ void IexWdbeDcd::parseFromFile(
 		};
 
 	} else {
-			Txtrd rd(fullpath, rectpath, "IexWdbeDcd", Version("1.1.8"), VecVIme::getIx);
+			Txtrd rd(fullpath, rectpath, "IexWdbeDcd", Version("1.1.40"), VecVIme::getIx);
 			readTxt(rd, imeiamcoreversionip, imeiamcoreversionplh, imeimmodule);
 	};
 };
@@ -6865,7 +6897,7 @@ void IexWdbeDcd::readXML(
 		// validate version
 		if (checkUclcXPaths(docctx, goodxpath, basexpath, "@Version")) {
 			extractString(docctx, goodxpath, version);
-			if (Version(version) < Version("1.1.8")) throw SbeException(SbeException::IEX_VERSION, {{"version",version},{"minversion","1.1.8"}});
+			if (Version(version) < Version("1.1.40")) throw SbeException(SbeException::IEX_VERSION, {{"version",version},{"minversion","1.1.40"}});
 		};
 
 		// look for XML sub-blocks

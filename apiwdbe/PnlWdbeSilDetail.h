@@ -36,10 +36,9 @@ namespace PnlWdbeSilDetail {
 	public:
 		static const Sbecore::uint BUTSAVECLICK = 1;
 		static const Sbecore::uint BUTREUVIEWCLICK = 2;
-		static const Sbecore::uint BUTSYSVIEWCLICK = 3;
-		static const Sbecore::uint BUTMDLVIEWCLICK = 4;
-		static const Sbecore::uint BUTPKGEDITCLICK = 5;
-		static const Sbecore::uint BUTTCHEDITCLICK = 6;
+		static const Sbecore::uint BUTMDLVIEWCLICK = 3;
+		static const Sbecore::uint BUTPKGEDITCLICK = 4;
+		static const Sbecore::uint BUTTCHEDITCLICK = 5;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);
@@ -92,16 +91,14 @@ namespace PnlWdbeSilDetail {
 	public:
 		static const Sbecore::uint TXTSRF = 1;
 		static const Sbecore::uint TXTREU = 2;
-		static const Sbecore::uint TXTSYS = 3;
-		static const Sbecore::uint TXTMDL = 4;
+		static const Sbecore::uint TXTMDL = 3;
 
 	public:
-		ContInf(const std::string& TxtSrf = "", const std::string& TxtReu = "", const std::string& TxtSys = "", const std::string& TxtMdl = "");
+		ContInf(const std::string& TxtSrf = "", const std::string& TxtReu = "", const std::string& TxtMdl = "");
 
 	public:
 		std::string TxtSrf;
 		std::string TxtReu;
-		std::string TxtSys;
 		std::string TxtMdl;
 
 	public:
@@ -151,21 +148,18 @@ namespace PnlWdbeSilDetail {
 		static const Sbecore::uint TXTREUACTIVE = 9;
 		static const Sbecore::uint BUTREUVIEWAVAIL = 10;
 		static const Sbecore::uint BUTREUVIEWACTIVE = 11;
-		static const Sbecore::uint TXTSYSACTIVE = 12;
-		static const Sbecore::uint BUTSYSVIEWAVAIL = 13;
-		static const Sbecore::uint BUTSYSVIEWACTIVE = 14;
-		static const Sbecore::uint TXTMDLACTIVE = 15;
-		static const Sbecore::uint BUTMDLVIEWAVAIL = 16;
-		static const Sbecore::uint BUTMDLVIEWACTIVE = 17;
-		static const Sbecore::uint PUPPKGACTIVE = 18;
-		static const Sbecore::uint BUTPKGEDITAVAIL = 19;
-		static const Sbecore::uint CHKESYACTIVE = 20;
-		static const Sbecore::uint PUPTCHACTIVE = 21;
-		static const Sbecore::uint BUTTCHEDITAVAIL = 22;
-		static const Sbecore::uint TXFCMTACTIVE = 23;
+		static const Sbecore::uint TXTMDLACTIVE = 12;
+		static const Sbecore::uint BUTMDLVIEWAVAIL = 13;
+		static const Sbecore::uint BUTMDLVIEWACTIVE = 14;
+		static const Sbecore::uint PUPPKGACTIVE = 15;
+		static const Sbecore::uint BUTPKGEDITAVAIL = 16;
+		static const Sbecore::uint CHKESYACTIVE = 17;
+		static const Sbecore::uint PUPTCHACTIVE = 18;
+		static const Sbecore::uint BUTTCHEDITAVAIL = 19;
+		static const Sbecore::uint TXFCMTACTIVE = 20;
 
 	public:
-		StatShr(const bool TxfPkgValid = false, const bool TxfTchValid = false, const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxtSrfActive = true, const bool TxfTitActive = true, const bool TxfFsrActive = true, const bool PupTypActive = true, const bool TxtReuActive = true, const bool ButReuViewAvail = true, const bool ButReuViewActive = true, const bool TxtSysActive = true, const bool ButSysViewAvail = true, const bool ButSysViewActive = true, const bool TxtMdlActive = true, const bool ButMdlViewAvail = true, const bool ButMdlViewActive = true, const bool PupPkgActive = true, const bool ButPkgEditAvail = true, const bool ChkEsyActive = true, const bool PupTchActive = true, const bool ButTchEditAvail = true, const bool TxfCmtActive = true);
+		StatShr(const bool TxfPkgValid = false, const bool TxfTchValid = false, const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxtSrfActive = true, const bool TxfTitActive = true, const bool TxfFsrActive = true, const bool PupTypActive = true, const bool TxtReuActive = true, const bool ButReuViewAvail = true, const bool ButReuViewActive = true, const bool TxtMdlActive = true, const bool ButMdlViewAvail = true, const bool ButMdlViewActive = true, const bool PupPkgActive = true, const bool ButPkgEditAvail = true, const bool ChkEsyActive = true, const bool PupTchActive = true, const bool ButTchEditAvail = true, const bool TxfCmtActive = true);
 
 	public:
 		bool TxfPkgValid;
@@ -179,9 +173,6 @@ namespace PnlWdbeSilDetail {
 		bool TxtReuActive;
 		bool ButReuViewAvail;
 		bool ButReuViewActive;
-		bool TxtSysActive;
-		bool ButSysViewAvail;
-		bool ButSysViewActive;
 		bool TxtMdlActive;
 		bool ButMdlViewAvail;
 		bool ButMdlViewActive;
@@ -210,15 +201,14 @@ namespace PnlWdbeSilDetail {
 		static const Sbecore::uint CPTFSR = 4;
 		static const Sbecore::uint CPTTYP = 5;
 		static const Sbecore::uint CPTREU = 6;
-		static const Sbecore::uint CPTSYS = 7;
-		static const Sbecore::uint CPTMDL = 8;
-		static const Sbecore::uint CPTPKG = 9;
-		static const Sbecore::uint CPTESY = 10;
-		static const Sbecore::uint CPTTCH = 11;
-		static const Sbecore::uint CPTCMT = 12;
+		static const Sbecore::uint CPTMDL = 7;
+		static const Sbecore::uint CPTPKG = 8;
+		static const Sbecore::uint CPTESY = 9;
+		static const Sbecore::uint CPTTCH = 10;
+		static const Sbecore::uint CPTCMT = 11;
 
 	public:
-		Tag(const std::string& Cpt = "", const std::string& CptSrf = "", const std::string& CptTit = "", const std::string& CptFsr = "", const std::string& CptTyp = "", const std::string& CptReu = "", const std::string& CptSys = "", const std::string& CptMdl = "", const std::string& CptPkg = "", const std::string& CptEsy = "", const std::string& CptTch = "", const std::string& CptCmt = "");
+		Tag(const std::string& Cpt = "", const std::string& CptSrf = "", const std::string& CptTit = "", const std::string& CptFsr = "", const std::string& CptTyp = "", const std::string& CptReu = "", const std::string& CptMdl = "", const std::string& CptPkg = "", const std::string& CptEsy = "", const std::string& CptTch = "", const std::string& CptCmt = "");
 
 	public:
 		std::string Cpt;
@@ -227,7 +217,6 @@ namespace PnlWdbeSilDetail {
 		std::string CptFsr;
 		std::string CptTyp;
 		std::string CptReu;
-		std::string CptSys;
 		std::string CptMdl;
 		std::string CptPkg;
 		std::string CptEsy;

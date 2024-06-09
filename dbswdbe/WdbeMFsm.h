@@ -19,17 +19,22 @@
 	#include <sbecore/PgDbs.h>
 #endif
 
+#include <sbecore/Xmlio.h>
+
+#define VecWdbeVMFsmDbgtaptype TblWdbeMFsm::VecVDbgtaptype
+
 /**
 	* WdbeMFsm: record of TblWdbeMFsm
 	*/
 class WdbeMFsm {
 
 public:
-	WdbeMFsm(const Sbecore::ubigint ref = 0, const Sbecore::ubigint refWdbeMProcess = 0);
+	WdbeMFsm(const Sbecore::ubigint ref = 0, const Sbecore::ubigint refWdbeMProcess = 0, const Sbecore::uint ixVDbgtaptype = 0);
 
 public:
 	Sbecore::ubigint ref;
 	Sbecore::ubigint refWdbeMProcess;
+	Sbecore::uint ixVDbgtaptype;
 
 public:
 	bool operator==(const WdbeMFsm& comp);
@@ -65,6 +70,23 @@ public:
 class TblWdbeMFsm {
 
 public:
+	/**
+		* VecVDbgtaptype (full: VecWdbeVMFsmDbgtaptype)
+		*/
+	class VecVDbgtaptype {
+
+	public:
+		static const Sbecore::uint VOID = 1;
+		static const Sbecore::uint LIN = 2;
+		static const Sbecore::uint CLUST = 3;
+
+		static Sbecore::uint getIx(const std::string& sref);
+		static std::string getSref(const Sbecore::uint ix);
+
+		static std::string getTitle(const Sbecore::uint ix, const Sbecore::uint ixWdbeVLocale);
+
+		static void fillFeed(const Sbecore::uint ixWdbeVLocale, Sbecore::Feed& feed);
+	};
 
 public:
 	TblWdbeMFsm();
@@ -75,8 +97,8 @@ public:
 	virtual Sbecore::ubigint loadRstBySQL(const std::string& sqlstr, const bool append, ListWdbeMFsm& rst);
 
 	virtual Sbecore::ubigint insertRec(WdbeMFsm* rec);
-	Sbecore::ubigint insertNewRec(WdbeMFsm** rec = NULL, const Sbecore::ubigint refWdbeMProcess = 0);
-	Sbecore::ubigint appendNewRecToRst(ListWdbeMFsm& rst, WdbeMFsm** rec = NULL, const Sbecore::ubigint refWdbeMProcess = 0);
+	Sbecore::ubigint insertNewRec(WdbeMFsm** rec = NULL, const Sbecore::ubigint refWdbeMProcess = 0, const Sbecore::uint ixVDbgtaptype = 0);
+	Sbecore::ubigint appendNewRecToRst(ListWdbeMFsm& rst, WdbeMFsm** rec = NULL, const Sbecore::ubigint refWdbeMProcess = 0, const Sbecore::uint ixVDbgtaptype = 0);
 	virtual void insertRst(ListWdbeMFsm& rst, bool transact = false);
 	virtual void updateRec(WdbeMFsm* rec);
 	virtual void updateRst(ListWdbeMFsm& rst, bool transact = false);

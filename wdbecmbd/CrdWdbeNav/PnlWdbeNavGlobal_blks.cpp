@@ -74,15 +74,14 @@ PnlWdbeNavGlobal::ContIac::ContIac(
 };
 
 bool PnlWdbeNavGlobal::ContIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["ContIacWdbeNavGlobal"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["ContIacWdbeNavGlobal"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -132,11 +131,11 @@ void PnlWdbeNavGlobal::ContIac::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["numFLstMch"] = numFLstMch;
-	me["numFLstLib"] = numFLstLib;
-	me["numFLstFam"] = numFLstFam;
-	me["numFLstSil"] = numFLstSil;
-	me["numFLstMtp"] = numFLstMtp;
+	me["numFLstMch"] = (Json::Value::UInt) numFLstMch;
+	me["numFLstLib"] = (Json::Value::UInt) numFLstLib;
+	me["numFLstFam"] = (Json::Value::UInt) numFLstFam;
+	me["numFLstSil"] = (Json::Value::UInt) numFLstSil;
+	me["numFLstMtp"] = (Json::Value::UInt) numFLstMtp;
 };
 
 void PnlWdbeNavGlobal::ContIac::writeXML(
@@ -216,11 +215,11 @@ void PnlWdbeNavGlobal::StatApp::writeJSON(
 	me["LstFamAlt"] = LstFamAlt;
 	me["LstSilAlt"] = LstSilAlt;
 	me["LstMtpAlt"] = LstMtpAlt;
-	me["LstMchNumFirstdisp"] = LstMchNumFirstdisp;
-	me["LstLibNumFirstdisp"] = LstLibNumFirstdisp;
-	me["LstFamNumFirstdisp"] = LstFamNumFirstdisp;
-	me["LstSilNumFirstdisp"] = LstSilNumFirstdisp;
-	me["LstMtpNumFirstdisp"] = LstMtpNumFirstdisp;
+	me["LstMchNumFirstdisp"] = (Json::Value::UInt) LstMchNumFirstdisp;
+	me["LstLibNumFirstdisp"] = (Json::Value::UInt) LstLibNumFirstdisp;
+	me["LstFamNumFirstdisp"] = (Json::Value::UInt) LstFamNumFirstdisp;
+	me["LstSilNumFirstdisp"] = (Json::Value::UInt) LstSilNumFirstdisp;
+	me["LstMtpNumFirstdisp"] = (Json::Value::UInt) LstMtpNumFirstdisp;
 };
 
 void PnlWdbeNavGlobal::StatApp::writeXML(
@@ -439,15 +438,14 @@ string PnlWdbeNavGlobal::DpchAppData::getSrefsMask() {
 };
 
 void PnlWdbeNavGlobal::DpchAppData::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbeNavGlobalData"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbeNavGlobalData"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -509,15 +507,14 @@ string PnlWdbeNavGlobal::DpchAppDo::getSrefsMask() {
 };
 
 void PnlWdbeNavGlobal::DpchAppDo::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbeNavGlobalDo"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbeNavGlobalDo"];}();
 
 	basefound = (me != Json::nullValue);
 

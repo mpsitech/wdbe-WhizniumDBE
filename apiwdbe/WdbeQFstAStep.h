@@ -18,7 +18,7 @@
 class WdbeQFstAStep {
 
 public:
-	WdbeQFstAStep(const Sbecore::uint jnum = 0, const std::string stubFnxRefWdbeMFsmstate = "", const std::string Cond1 = "", const std::string Ip1 = "", const std::string Cond2 = "", const std::string Ip2 = "", const std::string Cond3 = "", const std::string Ip3 = "", const std::string Cond4 = "", const std::string Ip4 = "");
+	WdbeQFstAStep(const Sbecore::uint jnum = 0, const std::string stubFnxRefWdbeMFsmstate = "", const std::string Cond1 = "", const std::string Ip1 = "", const std::string Cond2 = "", const std::string Ip2 = "", const std::string Cond3 = "", const std::string Ip3 = "", const std::string Cond4 = "", const std::string Ip4 = "", const std::string Cond5 = "", const std::string Ip5 = "", const std::string Cond6 = "", const std::string Ip6 = "");
 
 public:
 	Sbecore::uint jnum;
@@ -31,6 +31,10 @@ public:
 	std::string Ip3;
 	std::string Cond4;
 	std::string Ip4;
+	std::string Cond5;
+	std::string Ip5;
+	std::string Cond6;
+	std::string Ip6;
 
 public:
 	bool readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);

@@ -12,22 +12,10 @@
 			function handleButVerCollapseClick() {parent.parent.window.handleButCollapseClick("LstVer");};
 			function handleButVerViewClick() {parent.parent.window.handleButCrdopenClick("ButVerView");};
 			function handleButVerNewcrdClick() {parent.parent.window.handleButCrdopenClick("ButVerNewcrd");};
-			function handleButSysExpandClick() {parent.parent.window.handleButExpandClick("LstSys");};
-			function handleButSysCollapseClick() {parent.parent.window.handleButCollapseClick("LstSys");};
-			function handleButSysViewClick() {parent.parent.window.handleButCrdopenClick("ButSysView");};
-			function handleButSysNewcrdClick() {parent.parent.window.handleButCrdopenClick("ButSysNewcrd");};
-			function handleButTrgExpandClick() {parent.parent.window.handleButExpandClick("LstTrg");};
-			function handleButTrgCollapseClick() {parent.parent.window.handleButCollapseClick("LstTrg");};
-			function handleButTrgViewClick() {parent.parent.window.handleButCrdopenClick("ButTrgView");};
-			function handleButTrgNewcrdClick() {parent.parent.window.handleButCrdopenClick("ButTrgNewcrd");};
 			function handleButUntExpandClick() {parent.parent.window.handleButExpandClick("LstUnt");};
 			function handleButUntCollapseClick() {parent.parent.window.handleButCollapseClick("LstUnt");};
 			function handleButUntViewClick() {parent.parent.window.handleButCrdopenClick("ButUntView");};
 			function handleButUntNewcrdClick() {parent.parent.window.handleButCrdopenClick("ButUntNewcrd");};
-			function handleButRlsExpandClick() {parent.parent.window.handleButExpandClick("LstRls");};
-			function handleButRlsCollapseClick() {parent.parent.window.handleButCollapseClick("LstRls");};
-			function handleButRlsViewClick() {parent.parent.window.handleButCrdopenClick("ButRlsView");};
-			function handleButRlsNewcrdClick() {parent.parent.window.handleButCrdopenClick("ButRlsNewcrd");};
 			<!-- IP custScript - INSERT -->
 		</script>
 		<link href="../style/pnlDetail3_2.css" rel="styleSheet" type="text/css"/>
@@ -80,36 +68,6 @@
 					<td colspan="3" height="67"></td>
 					<td colspan="3"></td>
 				</tr>
-				<tr id="trSys" class="show">
-					<td height="25"></td>
-					<td id="ldynSys" align="right">
-					</td>
-					<td></td>
-					<td id="dynSys" rowspan="1" colspan="5">
-					</td>
-					<td></td>
-					<td id="rdynSys" colspan="2" align="left">
-					</td>
-				</tr>
-				<tr id="trSys2" class="hide">
-					<td colspan="3" height="67"></td>
-					<td colspan="3"></td>
-				</tr>
-				<tr id="trTrg" class="show">
-					<td height="25"></td>
-					<td id="ldynTrg" align="right">
-					</td>
-					<td></td>
-					<td id="dynTrg" rowspan="1" colspan="5">
-					</td>
-					<td></td>
-					<td id="rdynTrg" colspan="2" align="left">
-					</td>
-				</tr>
-				<tr id="trTrg2" class="hide">
-					<td colspan="3" height="67"></td>
-					<td colspan="3"></td>
-				</tr>
 				<tr id="trUnt" class="show">
 					<td height="25"></td>
 					<td id="ldynUnt" align="right">
@@ -122,21 +80,6 @@
 					</td>
 				</tr>
 				<tr id="trUnt2" class="hide">
-					<td colspan="3" height="67"></td>
-					<td colspan="3"></td>
-				</tr>
-				<tr id="trRls" class="show">
-					<td height="25"></td>
-					<td id="ldynRls" align="right">
-					</td>
-					<td></td>
-					<td id="dynRls" rowspan="1" colspan="5">
-					</td>
-					<td></td>
-					<td id="rdynRls" colspan="2" align="left">
-					</td>
-				</tr>
-				<tr id="trRls2" class="hide">
 					<td colspan="3" height="67"></td>
 					<td colspan="3"></td>
 				</tr>

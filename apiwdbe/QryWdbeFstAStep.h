@@ -32,7 +32,7 @@ namespace QryWdbeFstAStep {
 		static const Sbecore::uint NDISP = 4;
 
 	public:
-		StatApp(const Sbecore::uint firstcol = 1, const Sbecore::uint jnumFirstdisp = 1, const Sbecore::uint ncol = 9, const Sbecore::uint ndisp = 10);
+		StatApp(const Sbecore::uint firstcol = 1, const Sbecore::uint jnumFirstdisp = 1, const Sbecore::uint ncol = 13, const Sbecore::uint ndisp = 10);
 
 	public:
 		Sbecore::uint firstcol;

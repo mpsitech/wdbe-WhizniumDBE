@@ -15,10 +15,7 @@
 			function handleMitCrdMtpClick() {parent.window.handleMitCrdopenClick("Crd","MitCrdMtp");};
 			function handleMitCrdPrjClick() {parent.window.handleMitCrdopenClick("Crd","MitCrdPrj");};
 			function handleMitCrdVerClick() {parent.window.handleMitCrdopenClick("Crd","MitCrdVer");};
-			function handleMitCrdSysClick() {parent.window.handleMitCrdopenClick("Crd","MitCrdSys");};
-			function handleMitCrdTrgClick() {parent.window.handleMitCrdopenClick("Crd","MitCrdTrg");};
 			function handleMitCrdUntClick() {parent.window.handleMitCrdopenClick("Crd","MitCrdUnt");};
-			function handleMitCrdRlsClick() {parent.window.handleMitCrdopenClick("Crd","MitCrdRls");};
 			function handleMitCrdCprClick() {parent.window.handleMitCrdopenClick("Crd","MitCrdCpr");};
 			function handleMitCrdCvrClick() {parent.window.handleMitCrdopenClick("Crd","MitCrdCvr");};
 			function handleMitCrdPphClick() {parent.window.handleMitCrdopenClick("Crd","MitCrdPph");};
@@ -32,6 +29,8 @@
 			function handleMitCrdPinClick() {parent.window.handleMitCrdopenClick("Crd","MitCrdPin");};
 			function handleMitCrdIntClick() {parent.window.handleMitCrdopenClick("Crd","MitCrdInt");};
 			function handleMitCrdSigClick() {parent.window.handleMitCrdopenClick("Crd","MitCrdSig");};
+			function handleMitCrdCmpClick() {parent.window.handleMitCrdopenClick("Crd","MitCrdCmp");};
+			function handleMitCrdRlsClick() {parent.window.handleMitCrdopenClick("Crd","MitCrdRls");};
 			function handleMitCrdUtlClick() {parent.window.handleMitCrdopenClick("Crd","MitCrdUtl");};
 		</script>
 		<link href="../style/menu.css" rel="styleSheet" type="text/css">
@@ -96,21 +95,9 @@
 				<td height="20" class="frame"></td><td class="iframe"></td>
 				<td class="iframe"><span id="MitCrdVer" class="item" onclick="handleMitCrdVerClick()">MitCrdVer</span></td>
 			</tr>
-			<tr id="trMitCrdSys" class="show">
-				<td height="20" class="frame"></td><td class="iframe"></td>
-				<td class="iframe"><span id="MitCrdSys" class="item" onclick="handleMitCrdSysClick()">MitCrdSys</span></td>
-			</tr>
-			<tr id="trMitCrdTrg" class="show">
-				<td height="20" class="frame"></td><td class="iframe"></td>
-				<td class="iframe"><span id="MitCrdTrg" class="item" onclick="handleMitCrdTrgClick()">MitCrdTrg</span></td>
-			</tr>
 			<tr id="trMitCrdUnt" class="show">
 				<td height="20" class="frame"></td><td class="iframe"></td>
 				<td class="iframe"><span id="MitCrdUnt" class="item" onclick="handleMitCrdUntClick()">MitCrdUnt</span></td>
-			</tr>
-			<tr id="trMitCrdRls" class="show">
-				<td height="20" class="frame"></td><td class="iframe"></td>
-				<td class="iframe"><span id="MitCrdRls" class="item" onclick="handleMitCrdRlsClick()">MitCrdRls</span></td>
 			</tr>
 			<tr id="trMspCrd4" class="show">
 				<td height="1" colspan="3" class="frame"></td>
@@ -176,11 +163,22 @@
 			<tr id="trMspCrd7" class="show">
 				<td height="1" colspan="3" class="frame"></td>
 			</tr>
+			<tr id="trMitCrdCmp" class="show">
+				<td height="20" class="frame"></td><td class="iframe"></td>
+				<td class="iframe"><span id="MitCrdCmp" class="item" onclick="handleMitCrdCmpClick()">MitCrdCmp</span></td>
+			</tr>
+			<tr id="trMitCrdRls" class="show">
+				<td height="20" class="frame"></td><td class="iframe"></td>
+				<td class="iframe"><span id="MitCrdRls" class="item" onclick="handleMitCrdRlsClick()">MitCrdRls</span></td>
+			</tr>
+			<tr id="trMspCrd8" class="show">
+				<td height="1" colspan="3" class="frame"></td>
+			</tr>
 			<tr id="trMitCrdUtl" class="show">
 				<td height="20" class="frame"></td><td class="iframe"></td>
 				<td class="iframe"><span id="MitCrdUtl" class="item" onclick="handleMitCrdUtlClick()">MitCrdUtl</span></td>
 			</tr>
-			<tr id="trMspCrd8" class="show">
+			<tr id="trMspCrd9" class="show">
 				<td height="1" colspan="3" class="frame"></td>
 			</tr>
 		</table>

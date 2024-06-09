@@ -59,6 +59,8 @@ function initBD(bNotD) {
 	initCpt(contcontdoc, "CptSnr", retrieveTi(srcdoc, "TagWdbePrcDetail", "CptSnr"));
 	initCpt(contcontdoc, "CptEip", retrieveTi(srcdoc, "TagWdbePrcDetail", "CptEip"));
 	initCpt(contcontdoc, "CptCmt", retrieveTi(srcdoc, "TagWdbePrcDetail", "CptCmt"));
+	initCpt(contcontdoc, "CptFsmDtt", retrieveTi(srcdoc, "TagWdbePrcDetail", "CptFsmDtt"));
+	refreshPup(contcontdoc, srcdoc, "PupFsmDtt", "", "FeedFPupFsmDtt", retrieveCi(srcdoc, "ContIacWdbePrcDetail", "numFPupFsmDtt"), retrieveSi(srcdoc, "StatShrWdbePrcDetail", "PupFsmDttActive"), false);
 	// IP initBD --- END
 
 	refreshBD(bNotD);
@@ -82,7 +84,7 @@ function refreshA() {
 function refreshBD(bNotD) {
 	if (!contcontdoc) return;
 
-	var height = 299; // full cont height
+	var height = 324; // full cont height
 
 	// IP refreshBD.vars --- BEGIN
 	var TxtSrfActive = (retrieveSi(srcdoc, "StatShrWdbePrcDetail", "TxtSrfActive") == "true");
@@ -111,6 +113,9 @@ function refreshBD(bNotD) {
 
 	var ButFsmNewAvail = (retrieveSi(srcdoc, "StatShrWdbePrcDetail", "ButFsmNewAvail") == "true");
 	var ButFsmDeleteAvail = (retrieveSi(srcdoc, "StatShrWdbePrcDetail", "ButFsmDeleteAvail") == "true");
+
+	var PupFsmDttAvail = (retrieveSi(srcdoc, "StatShrWdbePrcDetail", "PupFsmDttAvail") == "true");
+	var PupFsmDttActive = (retrieveSi(srcdoc, "StatShrWdbePrcDetail", "PupFsmDttActive") == "true");
 
 	var ButSaveActive = (retrieveSi(srcdoc, "StatShrWdbePrcDetail", "ButSaveActive") == "true");
 	var mytd, first;
@@ -214,6 +219,12 @@ function refreshBD(bNotD) {
 		};
 	};
 
+	height -= setCtlAvail(contcontdoc, "FsmDtt", PupFsmDttAvail, 25);
+	if (PupFsmDttAvail) {
+		contcontdoc.getElementById("PupFsmDtt").value = retrieveCi(srcdoc, "ContIacWdbePrcDetail", "numFPupFsmDtt");
+
+	};
+
 	refreshButicon(ftrdoc, "ButSave", "icon/save", ButSaveActive, false);
 	// IP refreshBD --- END
 
@@ -295,6 +306,16 @@ function handleChkChange(_doc, ctlsref) {
 	sendReq(str, doc, handleDpchAppDataDoReply);
 };
 
+function handlePupChange(_doc, ctlsref, size) {
+	var elem = _doc.getElementById(ctlsref);
+
+	elem.setAttribute("class", "pup" + size + "mod");
+	setCi(srcdoc, "ContIacWdbePrcDetail", "numF" + ctlsref, elem.value);
+
+	var str = serializeDpchAppData(srcdoc, "DpchAppWdbePrcDetailData", scrJref, "ContIacWdbePrcDetail");
+	sendReq(str, doc, handleDpchAppDataDoReply);
+};
+
 function handleTxfKey(_doc, ctlsref, size, evt) {
 	var elem = _doc.getElementById(ctlsref);
 
@@ -348,6 +369,7 @@ function mergeDpchEngData(dom) {
 
 	if (updateSrcblock(dom, "DpchEngWdbePrcDetailData", "ContIacWdbePrcDetail", srcdoc)) mask.push("contiac");
 	if (updateSrcblock(dom, "DpchEngWdbePrcDetailData", "ContInfWdbePrcDetail", srcdoc)) mask.push("continf");
+	if (updateSrcblock(dom, "DpchEngWdbePrcDetailData", "FeedFPupFsmDtt", srcdoc)) mask.push("feedFPupFsmDtt");
 	if (updateSrcblock(dom, "DpchEngWdbePrcDetailData", "StatAppWdbePrcDetail", srcdoc)) mask.push("statapp");
 	if (updateSrcblock(dom, "DpchEngWdbePrcDetailData", "StatShrWdbePrcDetail", srcdoc)) mask.push("statshr");
 	if (updateSrcblock(dom, "DpchEngWdbePrcDetailData", "TagWdbePrcDetail", srcdoc)) mask.push("tag");

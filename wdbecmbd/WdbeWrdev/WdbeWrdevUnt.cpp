@@ -156,6 +156,18 @@ void WdbeWrdevUnt::writeUntH(
 	if (hasvecctr) outfile << "// IP ufpctrs --- AFFIRM" << endl;
 	else outfile << "// IP ufpctrs --- REMOVE" << endl;
 
+	if (Easy) {
+		// --- umccmds*
+		if (hasvecctr) outfile << "// IP umccmds --- REMOVE" << endl;
+		else outfile << "// IP umccmds --- AFFIRM" << endl;
+
+		// --- cmdvars
+		for (unsigned int i = 0; i < cmds.nodes.size(); i++) {
+			cmd = cmds.nodes[i];
+			outfile << "\tDbecore::Cmd* cmd" << StrMod::cap(cmd->sref) << " ;" << endl;
+		};
+	};
+
 	// --- ctrs
 	outfile << "// IP ctrs --- IBEGIN" << endl;
 	for (unsigned int i = 0; i < ctrs.nodes.size(); i++) {
@@ -308,6 +320,10 @@ void WdbeWrdevUnt::writeUntCpp(
 			ctr = ctrs.nodes[i];
 			outfile << "\t" << StrMod::lc(ctr->Fullsref.substr(3+srefroot.length())) << " = new " << ctr->Fullsref << "(this);" << endl;
 		};
+		for (unsigned int i = 0; i < cmds.nodes.size(); i++) {
+			cmd = cmds.nodes[i];
+			outfile << "\tcmd" << StrMod::cap(cmd->sref) << " = getNewCmd" << StrMod::cap(cmd->sref) << "();" << endl;
+		};
 		outfile << "// IP init --- IEND" << endl;
 
 		// --- term
@@ -315,6 +331,10 @@ void WdbeWrdevUnt::writeUntCpp(
 		for (unsigned int i = 0; i < ctrs.nodes.size(); i++) {
 			ctr = ctrs.nodes[i];
 			outfile << "\tdelete " << StrMod::lc(ctr->Fullsref.substr(3+srefroot.length())) << ";" << endl;
+		};
+		for (unsigned int i = 0; i < cmds.nodes.size(); i++) {
+			cmd = cmds.nodes[i];
+			outfile << "\tdelete cmd" << StrMod::cap(cmd->sref) << ";" << endl;
 		};
 		outfile << "// IP term --- IEND" << endl;
 
@@ -461,7 +481,7 @@ void WdbeWrdevUnt::writeUntCpp(
 				outfile << "\t";
 				if (first) first = false;
 				else outfile << "else ";
-				outfile << "if (tixWBuffer == VecW" << srefroot << "Buffer::" << StrMod::uc(sref) << ") bufxf = getNewBufxf" << srefrootCor << "(reqlen" << s2 << ");" << endl;
+				outfile << "if (tixVBuffer == VecV" << srefroot << "Buffer::" << StrMod::uc(sref) << ") bufxf = getNewBufxf" << srefrootCor << "(reqlen" << s2 << ");" << endl;
 			};
 		};
 		outfile << "// IP getNewBufxf.get --- IEND" << endl;
@@ -560,7 +580,7 @@ void WdbeWrdevUnt::writeUntCpp(
 			if (Easy) outfile << "\t\t\t, unsigned char* buf" << endl;
 			outfile << "\t\t) {" << endl;
 
-			outfile << "\treturn(new Bufxf(VecW" << srefroot << "Buffer::" << StrMod::uc(sref);
+			outfile << "\treturn(new Bufxf(VecV" << srefroot << "Buffer::" << StrMod::uc(sref);
 			if (mgmtToNotFrom) outfile << ", true";
 			else outfile << ", false";
 			outfile << ", reqlen";
@@ -587,7 +607,7 @@ void WdbeWrdevUnt::writeUntCpp(
 					outfile << endl;
 
 					outfile << "\tif (copy) {" << endl;
-					outfile << "\t\tbufxf = getNewBufxf" << srefrootCor << "(datalen);" << endl;
+					outfile << "\t\tbufxf = getNewBufxf" << srefrootCor << "(datalen, (unsigned char*) data);" << endl;
 					outfile << "\t\tbufxf->setWriteData(data, datalen);" << endl;
 					outfile << "\t} else bufxf = getNewBufxf" << srefrootCor << "(datalen, (unsigned char*) data);" << endl;
 					outfile << endl;
@@ -727,7 +747,7 @@ void WdbeWrdevUnt::writeUntvecsH(
 	outfile << "// IP vecs --- IBEGIN" << endl;
 	for (unsigned int i = 0; i < vecs.nodes.size(); i++) {
 		vec = vecs.nodes[i];
-		writeVecH(dbswdbe, outfile, vec, NULL, unt, NULL, false);
+		writeVecH(dbswdbe, outfile, vec, unt, NULL, false);
 	};
 	outfile << "// IP vecs --- IEND" << endl;
 };
@@ -744,7 +764,7 @@ void WdbeWrdevUnt::writeUntvecsCpp(
 	outfile << "// IP vecs --- IBEGIN" << endl;
 	for (unsigned int i = 0; i < vecs.nodes.size(); i++) {
 		vec = vecs.nodes[i];
-		writeVecCpp(dbswdbe, outfile, vec, NULL, unt, NULL, false);
+		writeVecCpp(dbswdbe, outfile, vec, unt, NULL, false);
 	};
 	outfile << "// IP vecs --- IEND" << endl;
 };

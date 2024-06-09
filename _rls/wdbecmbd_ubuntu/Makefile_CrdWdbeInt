@@ -2,7 +2,7 @@
 # make file for CrdWdbeInt card job handler, release wdbecmbd_ubuntu
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 23 Oct 2021
+# date created: 7 Feb 2024
 # IP header --- ABOVE
 
 include ../Makefile.inc
@@ -16,7 +16,7 @@ STATLIBFLAGS = rcs
 INCPATH = -I$(BUILDROOT)/dbswdbe -I$(BUILDROOT)/wdbecmbd/VecWdbe -I$(BUILDROOT)/wdbecmbd/IexWdbe -I$(BUILDROOT)/wdbecmbd
 INCPATH += -I${WHIZSDKROOT}/build -I${WHIZSDKROOT}/build/apiwzlm -I/usr/include -I/usr/include/jsoncpp -I/usr/include/libxml2 -I/usr/include/mariadb
 
-OBJS = CrdWdbeInt.o PnlWdbeIntRec.o PnlWdbeIntDetail.o PnlWdbeIntSrc1NSensitivity.o QryWdbeIntSrc1NSensitivity.o PnlWdbeIntHeadbar.o PnlWdbeIntList.o QryWdbeIntList.o
+OBJS = CrdWdbeInt.o PnlWdbeIntList.o QryWdbeIntList.o PnlWdbeIntHeadbar.o PnlWdbeIntRec.o PnlWdbeIntSrc1NSensitivity.o QryWdbeIntSrc1NSensitivity.o PnlWdbeIntDetail.o
 
 LIB = libcrdwdbeint
 
@@ -29,7 +29,6 @@ all:	$(LIB)
 
 $(LIB):	$(OBJS)
 	$(STATLIB) $(STATLIBFLAGS) $(LIB).a $(OBJS)
-	rm -f *.o
 
 install:
 	mv $(LIB).a $(LIBROOT)/wdbecmbd/

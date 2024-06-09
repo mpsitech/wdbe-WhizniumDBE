@@ -23,17 +23,16 @@
 		<table cellspacing="0" border="0" cellpadding="0"><form action="">
 			<colgroup id="cols">
 				<col width="20"></col>
-				<col width="80"></col>
-				<col width="80"></col>
-				<col width="80"></col>
-				<col width="80"></col>
-				<col width="80"></col>
-				<col width="80"></col>
-				<col width="80"></col>
-				<col width="80"></col>
-				<col width="80"></col>
-				<col width="80"></col>
-				<col width="101"></col>
+				<col width="90"></col>
+				<col width="90"></col>
+				<col width="90"></col>
+				<col width="90"></col>
+				<col width="90"></col>
+				<col width="90"></col>
+				<col width="90"></col>
+				<col width="90"></col>
+				<col width="90"></col>
+				<col width="91"></col>
 				<col width="25"></col>
 			</colgroup>
 			<tbody id="tbl">
@@ -45,7 +44,6 @@
 				<td class="col" id="TcoTyp">TcoTyp</td>
 				<td class="col" id="TcoRet">TcoRet</td>
 				<td class="col" id="TcoReu">TcoReu</td>
-				<td class="col" id="TcoSys">TcoSys</td>
 				<td class="col" id="TcoMdl">TcoMdl</td>
 				<td class="col" id="TcoPkg">TcoPkg</td>
 				<td class="col" id="TcoEsy">TcoEsy</td>

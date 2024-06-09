@@ -46,8 +46,8 @@ QryWdbeSigList::QryWdbeSigList(
 
 	rerun(dbswdbe);
 
-	xchg->addClstn(VecWdbeVCall::CALLWDBESTUBCHG, jref, Clstn::VecVJobmask::SELF, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBESIGMOD, jref, Clstn::VecVJobmask::ALL, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBESTUBCHG, jref, Clstn::VecVJobmask::SELF, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -318,14 +318,14 @@ void QryWdbeSigList::rerun_orderSQL(
 			string& sqlstr
 			, const uint preIxOrd
 		) {
-	if (preIxOrd == VecVOrd::SRF) sqlstr += " ORDER BY TblWdbeMSignal.sref ASC";
-	else if (preIxOrd == VecVOrd::TYP) sqlstr += " ORDER BY TblWdbeMSignal.ixVBasetype ASC";
-	else if (preIxOrd == VecVOrd::RET) sqlstr += " ORDER BY TblWdbeMSignal.refIxVTbl ASC";
-	else if (preIxOrd == VecVOrd::REU) sqlstr += " ORDER BY TblWdbeMSignal.refUref ASC";
+	if (preIxOrd == VecVOrd::CON) sqlstr += " ORDER BY TblWdbeMSignal.Const ASC";
+	else if (preIxOrd == VecVOrd::VEC) sqlstr += " ORDER BY TblWdbeMSignal.refWdbeMVector ASC";
 	else if (preIxOrd == VecVOrd::MGT) sqlstr += " ORDER BY TblWdbeMSignal.mgeIxVTbl ASC";
 	else if (preIxOrd == VecVOrd::MGU) sqlstr += " ORDER BY TblWdbeMSignal.mgeUref ASC";
-	else if (preIxOrd == VecVOrd::VEC) sqlstr += " ORDER BY TblWdbeMSignal.refWdbeMVector ASC";
-	else if (preIxOrd == VecVOrd::CON) sqlstr += " ORDER BY TblWdbeMSignal.Const ASC";
+	else if (preIxOrd == VecVOrd::REU) sqlstr += " ORDER BY TblWdbeMSignal.refUref ASC";
+	else if (preIxOrd == VecVOrd::RET) sqlstr += " ORDER BY TblWdbeMSignal.refIxVTbl ASC";
+	else if (preIxOrd == VecVOrd::TYP) sqlstr += " ORDER BY TblWdbeMSignal.ixVBasetype ASC";
+	else if (preIxOrd == VecVOrd::SRF) sqlstr += " ORDER BY TblWdbeMSignal.sref ASC";
 };
 
 void QryWdbeSigList::fetch(
@@ -357,10 +357,10 @@ void QryWdbeSigList::fetch(
 			rec->titIxVBasetype = VecWdbeVMSignalBasetype::getTitle(rec->ixVBasetype, ixWdbeVLocale);
 			rec->srefRefIxVTbl = VecWdbeVMSignalRefTbl::getSref(rec->refIxVTbl);
 			rec->titRefIxVTbl = VecWdbeVMSignalRefTbl::getTitle(rec->refIxVTbl, ixWdbeVLocale);
-			if (rec->refIxVTbl == VecWdbeVMSignalRefTbl::UNT) {
-				rec->stubRefUref = StubWdbe::getStubUntStd(dbswdbe, rec->refUref, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
-			} else if (rec->refIxVTbl == VecWdbeVMSignalRefTbl::MDL) {
+			if (rec->refIxVTbl == VecWdbeVMSignalRefTbl::MDL) {
 				rec->stubRefUref = StubWdbe::getStubModStd(dbswdbe, rec->refUref, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
+			} else if (rec->refIxVTbl == VecWdbeVMSignalRefTbl::UNT) {
+				rec->stubRefUref = StubWdbe::getStubUntStd(dbswdbe, rec->refUref, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
 			} else rec->stubRefUref = "-";
 			rec->srefMgeIxVTbl = VecWdbeVMSignalMgeTbl::getSref(rec->mgeIxVTbl);
 			rec->titMgeIxVTbl = VecWdbeVMSignalMgeTbl::getTitle(rec->mgeIxVTbl, ixWdbeVLocale);
@@ -540,21 +540,13 @@ void QryWdbeSigList::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
-		call->abort = handleCallWdbeStubChgFromSelf(dbswdbe);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBESIGMOD) {
+	if (call->ixVCall == VecWdbeVCall::CALLWDBESIGMOD) {
 		call->abort = handleCallWdbeSigMod(dbswdbe, call->jref);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBESIGUPD_REFEQ) {
 		call->abort = handleCallWdbeSigUpd_refEq(dbswdbe, call->jref);
+	} else if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
+		call->abort = handleCallWdbeStubChgFromSelf(dbswdbe);
 	};
-};
-
-bool QryWdbeSigList::handleCallWdbeStubChgFromSelf(
-			DbsWdbe* dbswdbe
-		) {
-	bool retval = false;
-	// IP handleCallWdbeStubChgFromSelf --- INSERT
-	return retval;
 };
 
 bool QryWdbeSigList::handleCallWdbeSigMod(
@@ -582,5 +574,13 @@ bool QryWdbeSigList::handleCallWdbeSigUpd_refEq(
 		xchg->triggerCall(dbswdbe, VecWdbeVCall::CALLWDBESTATCHG, jref);
 	};
 
+	return retval;
+};
+
+bool QryWdbeSigList::handleCallWdbeStubChgFromSelf(
+			DbsWdbe* dbswdbe
+		) {
+	bool retval = false;
+	// IP handleCallWdbeStubChgFromSelf --- INSERT
 	return retval;
 };

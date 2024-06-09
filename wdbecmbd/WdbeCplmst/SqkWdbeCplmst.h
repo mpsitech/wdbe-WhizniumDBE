@@ -16,10 +16,8 @@
 	* SqkWdbeCplmst
 	*/
 namespace SqkWdbeCplmst {
-	std::string getSquawkCtrEctr(DbsWdbe* dbswdbe, DpchInvWdbeCplmstCtrEctr* dpchinv);
-	std::string getSquawkFwdctr(DbsWdbe* dbswdbe, DpchInvWdbeCplmstFwdctr* dpchinv);
+	std::string getSquawkCtrEctrHostifEhostif(DbsWdbe* dbswdbe, DpchInvWdbeCplmstCtrEctrHostifEhostif* dpchinv);
 	std::string getSquawkImbuf(DbsWdbe* dbswdbe, DpchInvWdbeCplmstImbuf* dpchinv);
-	std::string getSquawkSys(DbsWdbe* dbswdbe, DpchInvWdbeCplmstSys* dpchinv);
 	std::string getSquawkTplcpy(DbsWdbe* dbswdbe, DpchInvWdbeCplmstTplcpy* dpchinv);
 	std::string getSquawkUnt(DbsWdbe* dbswdbe, DpchInvWdbeCplmstUnt* dpchinv);
 };

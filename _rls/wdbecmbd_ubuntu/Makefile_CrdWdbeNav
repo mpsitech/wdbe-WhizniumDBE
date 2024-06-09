@@ -2,7 +2,7 @@
 # make file for CrdWdbeNav card job handler, release wdbecmbd_ubuntu
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 23 Oct 2021
+# date created: 7 Feb 2024
 # IP header --- ABOVE
 
 include ../Makefile.inc
@@ -16,7 +16,7 @@ STATLIBFLAGS = rcs
 INCPATH = -I$(BUILDROOT)/dbswdbe -I$(BUILDROOT)/wdbecmbd/VecWdbe -I$(BUILDROOT)/wdbecmbd/IexWdbe -I$(BUILDROOT)/wdbecmbd
 INCPATH += -I${WHIZSDKROOT}/build -I${WHIZSDKROOT}/build/apiwzlm -I/usr/include -I/usr/include/jsoncpp -I/usr/include/libxml2 -I/usr/include/mariadb
 
-OBJS = CrdWdbeNav.o DlgWdbeNavLoaini.o DlgWdbeNavMnglic.o PnlWdbeNavHeadbar.o PnlWdbeNavPre.o PnlWdbeNavAdmin.o PnlWdbeNavGlobal.o PnlWdbeNavDevdev.o PnlWdbeNavCoredev.o PnlWdbeNavHigh.o PnlWdbeNavLow.o PnlWdbeNavAuxfct.o
+OBJS = CrdWdbeNav.o PnlWdbeNavAuxfct.o PnlWdbeNavLow.o PnlWdbeNavDeploy.o PnlWdbeNavCoredev.o PnlWdbeNavHigh.o PnlWdbeNavGlobal.o PnlWdbeNavDevdev.o PnlWdbeNavPre.o PnlWdbeNavAdmin.o PnlWdbeNavHeadbar.o DlgWdbeNavLoaini.o DlgWdbeNavMnglic.o
 
 LIB = libcrdwdbenav
 
@@ -29,7 +29,6 @@ all:	$(LIB)
 
 $(LIB):	$(OBJS)
 	$(STATLIB) $(STATLIBFLAGS) $(LIB).a $(OBJS)
-	rm -f *.o
 
 install:
 	mv $(LIB).a $(LIBROOT)/wdbecmbd/

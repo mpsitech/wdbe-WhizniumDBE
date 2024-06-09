@@ -25,12 +25,12 @@ string SqkWdbeWrmcu::getSquawkBase(
 	return(""); // IP getSquawkBase --- LINE
 };
 
-string SqkWdbeWrmcu::getSquawkCtrFwdctr(
+string SqkWdbeWrmcu::getSquawkCtr(
 			DbsWdbe* dbswdbe
-			, DpchInvWdbeWrmcuCtrFwdctr* dpchinv
+			, DpchInvWdbeWrmcuCtr* dpchinv
 		) {
 	// example: "write type-specific C code for module 'icm2-acq (controller)'"
-	return(""); // IP getSquawkCtrFwdctr --- LINE
+	return(""); // IP getSquawkCtr --- LINE
 };
 
 string SqkWdbeWrmcu::getSquawkDeploy(

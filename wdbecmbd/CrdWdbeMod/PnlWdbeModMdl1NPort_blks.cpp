@@ -65,7 +65,7 @@ void PnlWdbeModMdl1NPort::ContInf::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["numFCsiQst"] = numFCsiQst;
+	me["numFCsiQst"] = (Json::Value::UInt) numFCsiQst;
 };
 
 void PnlWdbeModMdl1NPort::ContInf::writeXML(
@@ -260,15 +260,14 @@ PnlWdbeModMdl1NPort::StgIac::StgIac(
 };
 
 bool PnlWdbeModMdl1NPort::StgIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["StgIacWdbeModMdl1NPort"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["StgIacWdbeModMdl1NPort"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -310,7 +309,7 @@ void PnlWdbeModMdl1NPort::StgIac::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["TcoRefWidth"] = TcoRefWidth;
+	me["TcoRefWidth"] = (Json::Value::UInt) TcoRefWidth;
 };
 
 void PnlWdbeModMdl1NPort::StgIac::writeXML(
@@ -425,15 +424,14 @@ string PnlWdbeModMdl1NPort::DpchAppData::getSrefsMask() {
 };
 
 void PnlWdbeModMdl1NPort::DpchAppData::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbeModMdl1NPortData"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbeModMdl1NPortData"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -499,15 +497,14 @@ string PnlWdbeModMdl1NPort::DpchAppDo::getSrefsMask() {
 };
 
 void PnlWdbeModMdl1NPort::DpchAppDo::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbeModMdl1NPortDo"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbeModMdl1NPortDo"];}();
 
 	basefound = (me != Json::nullValue);
 

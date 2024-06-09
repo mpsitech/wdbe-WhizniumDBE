@@ -140,9 +140,13 @@ namespace PnlWdbeFstAStep {
 		static const Sbecore::uint TCOIP3WIDTH = 7;
 		static const Sbecore::uint TCOCN4WIDTH = 8;
 		static const Sbecore::uint TCOIP4WIDTH = 9;
+		static const Sbecore::uint TCOCN5WIDTH = 10;
+		static const Sbecore::uint TCOIP5WIDTH = 11;
+		static const Sbecore::uint TCOCN6WIDTH = 12;
+		static const Sbecore::uint TCOIP6WIDTH = 13;
 
 	public:
-		StgIac(const Sbecore::uint TcoFnxWidth = 100, const Sbecore::uint TcoCn1Width = 100, const Sbecore::uint TcoIp1Width = 100, const Sbecore::uint TcoCn2Width = 100, const Sbecore::uint TcoIp2Width = 100, const Sbecore::uint TcoCn3Width = 100, const Sbecore::uint TcoIp3Width = 100, const Sbecore::uint TcoCn4Width = 100, const Sbecore::uint TcoIp4Width = 100);
+		StgIac(const Sbecore::uint TcoFnxWidth = 100, const Sbecore::uint TcoCn1Width = 100, const Sbecore::uint TcoIp1Width = 100, const Sbecore::uint TcoCn2Width = 100, const Sbecore::uint TcoIp2Width = 100, const Sbecore::uint TcoCn3Width = 100, const Sbecore::uint TcoIp3Width = 100, const Sbecore::uint TcoCn4Width = 100, const Sbecore::uint TcoIp4Width = 100, const Sbecore::uint TcoCn5Width = 100, const Sbecore::uint TcoIp5Width = 100, const Sbecore::uint TcoCn6Width = 100, const Sbecore::uint TcoIp6Width = 100);
 
 	public:
 		Sbecore::uint TcoFnxWidth;
@@ -154,6 +158,10 @@ namespace PnlWdbeFstAStep {
 		Sbecore::uint TcoIp3Width;
 		Sbecore::uint TcoCn4Width;
 		Sbecore::uint TcoIp4Width;
+		Sbecore::uint TcoCn5Width;
+		Sbecore::uint TcoIp5Width;
+		Sbecore::uint TcoCn6Width;
+		Sbecore::uint TcoIp6Width;
 
 	public:
 		bool readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
@@ -183,9 +191,13 @@ namespace PnlWdbeFstAStep {
 		static const Sbecore::uint TCOIP3 = 13;
 		static const Sbecore::uint TCOCN4 = 14;
 		static const Sbecore::uint TCOIP4 = 15;
+		static const Sbecore::uint TCOCN5 = 16;
+		static const Sbecore::uint TCOIP5 = 17;
+		static const Sbecore::uint TCOCN6 = 18;
+		static const Sbecore::uint TCOIP6 = 19;
 
 	public:
-		Tag(const std::string& Cpt = "", const std::string& TxtRecord1 = "", const std::string& TxtRecord2 = "", const std::string& Trs = "", const std::string& TxtShowing1 = "", const std::string& TxtShowing2 = "", const std::string& TcoFnx = "", const std::string& TcoCn1 = "", const std::string& TcoIp1 = "", const std::string& TcoCn2 = "", const std::string& TcoIp2 = "", const std::string& TcoCn3 = "", const std::string& TcoIp3 = "", const std::string& TcoCn4 = "", const std::string& TcoIp4 = "");
+		Tag(const std::string& Cpt = "", const std::string& TxtRecord1 = "", const std::string& TxtRecord2 = "", const std::string& Trs = "", const std::string& TxtShowing1 = "", const std::string& TxtShowing2 = "", const std::string& TcoFnx = "", const std::string& TcoCn1 = "", const std::string& TcoIp1 = "", const std::string& TcoCn2 = "", const std::string& TcoIp2 = "", const std::string& TcoCn3 = "", const std::string& TcoIp3 = "", const std::string& TcoCn4 = "", const std::string& TcoIp4 = "", const std::string& TcoCn5 = "", const std::string& TcoIp5 = "", const std::string& TcoCn6 = "", const std::string& TcoIp6 = "");
 
 	public:
 		std::string Cpt;
@@ -203,6 +215,10 @@ namespace PnlWdbeFstAStep {
 		std::string TcoIp3;
 		std::string TcoCn4;
 		std::string TcoIp4;
+		std::string TcoCn5;
+		std::string TcoIp5;
+		std::string TcoCn6;
+		std::string TcoIp6;
 
 	public:
 		bool readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);

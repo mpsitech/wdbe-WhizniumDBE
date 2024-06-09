@@ -90,15 +90,14 @@ PnlWdbeNavHigh::ContIac::ContIac(
 };
 
 bool PnlWdbeNavHigh::ContIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["ContIacWdbeNavHigh"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["ContIacWdbeNavHigh"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -154,14 +153,14 @@ void PnlWdbeNavHigh::ContIac::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["numFLstPph"] = numFLstPph;
-	me["numFLstMod"] = numFLstMod;
-	me["numFLstVec"] = numFLstVec;
-	me["numFLstVit"] = numFLstVit;
-	me["numFLstCmd"] = numFLstCmd;
-	me["numFLstErr"] = numFLstErr;
-	me["numFLstPpl"] = numFLstPpl;
-	me["numFLstSeg"] = numFLstSeg;
+	me["numFLstPph"] = (Json::Value::UInt) numFLstPph;
+	me["numFLstMod"] = (Json::Value::UInt) numFLstMod;
+	me["numFLstVec"] = (Json::Value::UInt) numFLstVec;
+	me["numFLstVit"] = (Json::Value::UInt) numFLstVit;
+	me["numFLstCmd"] = (Json::Value::UInt) numFLstCmd;
+	me["numFLstErr"] = (Json::Value::UInt) numFLstErr;
+	me["numFLstPpl"] = (Json::Value::UInt) numFLstPpl;
+	me["numFLstSeg"] = (Json::Value::UInt) numFLstSeg;
 };
 
 void PnlWdbeNavHigh::ContIac::writeXML(
@@ -256,14 +255,14 @@ void PnlWdbeNavHigh::StatApp::writeJSON(
 	me["LstErrAlt"] = LstErrAlt;
 	me["LstPplAlt"] = LstPplAlt;
 	me["LstSegAlt"] = LstSegAlt;
-	me["LstPphNumFirstdisp"] = LstPphNumFirstdisp;
-	me["LstModNumFirstdisp"] = LstModNumFirstdisp;
-	me["LstVecNumFirstdisp"] = LstVecNumFirstdisp;
-	me["LstVitNumFirstdisp"] = LstVitNumFirstdisp;
-	me["LstCmdNumFirstdisp"] = LstCmdNumFirstdisp;
-	me["LstErrNumFirstdisp"] = LstErrNumFirstdisp;
-	me["LstPplNumFirstdisp"] = LstPplNumFirstdisp;
-	me["LstSegNumFirstdisp"] = LstSegNumFirstdisp;
+	me["LstPphNumFirstdisp"] = (Json::Value::UInt) LstPphNumFirstdisp;
+	me["LstModNumFirstdisp"] = (Json::Value::UInt) LstModNumFirstdisp;
+	me["LstVecNumFirstdisp"] = (Json::Value::UInt) LstVecNumFirstdisp;
+	me["LstVitNumFirstdisp"] = (Json::Value::UInt) LstVitNumFirstdisp;
+	me["LstCmdNumFirstdisp"] = (Json::Value::UInt) LstCmdNumFirstdisp;
+	me["LstErrNumFirstdisp"] = (Json::Value::UInt) LstErrNumFirstdisp;
+	me["LstPplNumFirstdisp"] = (Json::Value::UInt) LstPplNumFirstdisp;
+	me["LstSegNumFirstdisp"] = (Json::Value::UInt) LstSegNumFirstdisp;
 };
 
 void PnlWdbeNavHigh::StatApp::writeXML(
@@ -565,15 +564,14 @@ string PnlWdbeNavHigh::DpchAppData::getSrefsMask() {
 };
 
 void PnlWdbeNavHigh::DpchAppData::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbeNavHighData"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbeNavHighData"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -635,15 +633,14 @@ string PnlWdbeNavHigh::DpchAppDo::getSrefsMask() {
 };
 
 void PnlWdbeNavHigh::DpchAppDo::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbeNavHighDo"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbeNavHighDo"];}();
 
 	basefound = (me != Json::nullValue);
 

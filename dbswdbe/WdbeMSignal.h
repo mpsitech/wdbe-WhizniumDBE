@@ -99,9 +99,8 @@ public:
 		static const Sbecore::uint HSHK = 2;
 		static const Sbecore::uint OPRT = 3;
 		static const Sbecore::uint IOPRT = 4;
-		static const Sbecore::uint PSB = 5;
-		static const Sbecore::uint STRB = 6;
-		static const Sbecore::uint OTH = 7;
+		static const Sbecore::uint STRB = 5;
+		static const Sbecore::uint OTH = 6;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);

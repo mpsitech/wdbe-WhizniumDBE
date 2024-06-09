@@ -180,56 +180,6 @@ void DpchInvWdbeWrdevDeploy::writeXML(
 };
 
 /******************************************************************************
- class DpchInvWdbeWrdevSys
- ******************************************************************************/
-
-DpchInvWdbeWrdevSys::DpchInvWdbeWrdevSys(
-			const ubigint oref
-			, const ubigint jref
-			, const ubigint refWdbeMSystem
-			, const string& folder
-		) :
-			DpchInvWdbe(VecWdbeVDpch::DPCHINVWDBEWRDEVSYS, oref, jref)
-		{
-	this->refWdbeMSystem = refWdbeMSystem;
-	this->folder = folder;
-};
-
-void DpchInvWdbeWrdevSys::readXML(
-			xmlXPathContext* docctx
-			, string basexpath
-			, bool addbasetag
-		) {
-	clear();
-
-	bool basefound;
-
-	if (addbasetag)
-		basefound = checkUclcXPaths(docctx, basexpath, basexpath, "DpchInvWdbeWrdevSys");
-	else
-		basefound = checkXPath(docctx, basexpath);
-
-	if (basefound) {
-		if (extractStringUclc(docctx, basexpath, "scrOref", "", scrOref)) add(SCROREF);
-		if (extractStringUclc(docctx, basexpath, "scrJref", "", scrJref)) add(SCRJREF);
-		if (extractUbigintUclc(docctx, basexpath, "refWdbeMSystem", "", refWdbeMSystem)) add(REFWDBEMSYSTEM);
-		if (extractStringUclc(docctx, basexpath, "folder", "", folder)) add(FOLDER);
-	};
-};
-
-void DpchInvWdbeWrdevSys::writeXML(
-			xmlTextWriter* wr
-		) {
-	xmlTextWriterStartElement(wr, BAD_CAST "DpchInvWdbeWrdevSys");
-	xmlTextWriterWriteAttribute(wr, BAD_CAST "xmlns", BAD_CAST "http://www.mpsitech.com/wdbe");
-		writeString(wr, "scrOref", Scr::scramble(oref));
-		writeString(wr, "scrJref", Scr::scramble(jref));
-		writeUbigint(wr, "refWdbeMSystem", refWdbeMSystem);
-		writeString(wr, "folder", folder);
-	xmlTextWriterEndElement(wr);
-};
-
-/******************************************************************************
  class DpchInvWdbeWrdevUnt
  ******************************************************************************/
 

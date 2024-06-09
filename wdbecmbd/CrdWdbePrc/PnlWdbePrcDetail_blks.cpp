@@ -54,6 +54,7 @@ PnlWdbePrcDetail::ContIac::ContIac(
 			, const string& TxfSnr
 			, const bool ChkEip
 			, const string& TxfCmt
+			, const uint numFPupFsmDtt
 		) :
 			Block()
 		{
@@ -63,20 +64,20 @@ PnlWdbePrcDetail::ContIac::ContIac(
 	this->TxfSnr = TxfSnr;
 	this->ChkEip = ChkEip;
 	this->TxfCmt = TxfCmt;
+	this->numFPupFsmDtt = numFPupFsmDtt;
 
-	mask = {TXFCLK, TXFASR, CHKFAL, TXFSNR, CHKEIP, TXFCMT};
+	mask = {TXFCLK, TXFASR, CHKFAL, TXFSNR, CHKEIP, TXFCMT, NUMFPUPFSMDTT};
 };
 
 bool PnlWdbePrcDetail::ContIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["ContIacWdbePrcDetail"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["ContIacWdbePrcDetail"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -87,6 +88,7 @@ bool PnlWdbePrcDetail::ContIac::readJSON(
 		if (me.isMember("TxfSnr")) {TxfSnr = me["TxfSnr"].asString(); add(TXFSNR);};
 		if (me.isMember("ChkEip")) {ChkEip = me["ChkEip"].asBool(); add(CHKEIP);};
 		if (me.isMember("TxfCmt")) {TxfCmt = me["TxfCmt"].asString(); add(TXFCMT);};
+		if (me.isMember("numFPupFsmDtt")) {numFPupFsmDtt = me["numFPupFsmDtt"].asUInt(); add(NUMFPUPFSMDTT);};
 	};
 
 	return basefound;
@@ -115,6 +117,7 @@ bool PnlWdbePrcDetail::ContIac::readXML(
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "TxfSnr", TxfSnr)) add(TXFSNR);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "ChkEip", ChkEip)) add(CHKEIP);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "TxfCmt", TxfCmt)) add(TXFCMT);
+		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "numFPupFsmDtt", numFPupFsmDtt)) add(NUMFPUPFSMDTT);
 	};
 
 	return basefound;
@@ -134,6 +137,7 @@ void PnlWdbePrcDetail::ContIac::writeJSON(
 	me["TxfSnr"] = TxfSnr;
 	me["ChkEip"] = ChkEip;
 	me["TxfCmt"] = TxfCmt;
+	me["numFPupFsmDtt"] = (Json::Value::UInt) numFPupFsmDtt;
 };
 
 void PnlWdbePrcDetail::ContIac::writeXML(
@@ -154,6 +158,7 @@ void PnlWdbePrcDetail::ContIac::writeXML(
 		writeStringAttr(wr, itemtag, "sref", "TxfSnr", TxfSnr);
 		writeBoolAttr(wr, itemtag, "sref", "ChkEip", ChkEip);
 		writeStringAttr(wr, itemtag, "sref", "TxfCmt", TxfCmt);
+		writeUintAttr(wr, itemtag, "sref", "numFPupFsmDtt", numFPupFsmDtt);
 	xmlTextWriterEndElement(wr);
 };
 
@@ -168,6 +173,7 @@ set<uint> PnlWdbePrcDetail::ContIac::comm(
 	if (TxfSnr == comp->TxfSnr) insert(items, TXFSNR);
 	if (ChkEip == comp->ChkEip) insert(items, CHKEIP);
 	if (TxfCmt == comp->TxfCmt) insert(items, TXFCMT);
+	if (numFPupFsmDtt == comp->numFPupFsmDtt) insert(items, NUMFPUPFSMDTT);
 
 	return(items);
 };
@@ -180,7 +186,7 @@ set<uint> PnlWdbePrcDetail::ContIac::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {TXFCLK, TXFASR, CHKFAL, TXFSNR, CHKEIP, TXFCMT};
+	diffitems = {TXFCLK, TXFASR, CHKFAL, TXFSNR, CHKEIP, TXFCMT, NUMFPUPFSMDTT};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -330,6 +336,8 @@ PnlWdbePrcDetail::StatShr::StatShr(
 			, const bool TxfCmtActive
 			, const bool ButFsmNewAvail
 			, const bool ButFsmDeleteAvail
+			, const bool PupFsmDttAvail
+			, const bool PupFsmDttActive
 		) :
 			Block()
 		{
@@ -351,8 +359,10 @@ PnlWdbePrcDetail::StatShr::StatShr(
 	this->TxfCmtActive = TxfCmtActive;
 	this->ButFsmNewAvail = ButFsmNewAvail;
 	this->ButFsmDeleteAvail = ButFsmDeleteAvail;
+	this->PupFsmDttAvail = PupFsmDttAvail;
+	this->PupFsmDttActive = PupFsmDttActive;
 
-	mask = {TXFCLKVALID, TXFASRVALID, BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXTMDLACTIVE, BUTMDLVIEWAVAIL, BUTMDLVIEWACTIVE, TXTCLKACTIVE, BUTCLKVIEWAVAIL, TXTASRACTIVE, BUTASRVIEWAVAIL, CHKFALACTIVE, TXFSNRACTIVE, CHKEIPACTIVE, TXFCMTACTIVE, BUTFSMNEWAVAIL, BUTFSMDELETEAVAIL};
+	mask = {TXFCLKVALID, TXFASRVALID, BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXTMDLACTIVE, BUTMDLVIEWAVAIL, BUTMDLVIEWACTIVE, TXTCLKACTIVE, BUTCLKVIEWAVAIL, TXTASRACTIVE, BUTASRVIEWAVAIL, CHKFALACTIVE, TXFSNRACTIVE, CHKEIPACTIVE, TXFCMTACTIVE, BUTFSMNEWAVAIL, BUTFSMDELETEAVAIL, PUPFSMDTTAVAIL, PUPFSMDTTACTIVE};
 };
 
 void PnlWdbePrcDetail::StatShr::writeJSON(
@@ -381,6 +391,8 @@ void PnlWdbePrcDetail::StatShr::writeJSON(
 	me["TxfCmtActive"] = TxfCmtActive;
 	me["ButFsmNewAvail"] = ButFsmNewAvail;
 	me["ButFsmDeleteAvail"] = ButFsmDeleteAvail;
+	me["PupFsmDttAvail"] = PupFsmDttAvail;
+	me["PupFsmDttActive"] = PupFsmDttActive;
 };
 
 void PnlWdbePrcDetail::StatShr::writeXML(
@@ -413,6 +425,8 @@ void PnlWdbePrcDetail::StatShr::writeXML(
 		writeBoolAttr(wr, itemtag, "sref", "TxfCmtActive", TxfCmtActive);
 		writeBoolAttr(wr, itemtag, "sref", "ButFsmNewAvail", ButFsmNewAvail);
 		writeBoolAttr(wr, itemtag, "sref", "ButFsmDeleteAvail", ButFsmDeleteAvail);
+		writeBoolAttr(wr, itemtag, "sref", "PupFsmDttAvail", PupFsmDttAvail);
+		writeBoolAttr(wr, itemtag, "sref", "PupFsmDttActive", PupFsmDttActive);
 	xmlTextWriterEndElement(wr);
 };
 
@@ -439,6 +453,8 @@ set<uint> PnlWdbePrcDetail::StatShr::comm(
 	if (TxfCmtActive == comp->TxfCmtActive) insert(items, TXFCMTACTIVE);
 	if (ButFsmNewAvail == comp->ButFsmNewAvail) insert(items, BUTFSMNEWAVAIL);
 	if (ButFsmDeleteAvail == comp->ButFsmDeleteAvail) insert(items, BUTFSMDELETEAVAIL);
+	if (PupFsmDttAvail == comp->PupFsmDttAvail) insert(items, PUPFSMDTTAVAIL);
+	if (PupFsmDttActive == comp->PupFsmDttActive) insert(items, PUPFSMDTTACTIVE);
 
 	return(items);
 };
@@ -451,7 +467,7 @@ set<uint> PnlWdbePrcDetail::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {TXFCLKVALID, TXFASRVALID, BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXTMDLACTIVE, BUTMDLVIEWAVAIL, BUTMDLVIEWACTIVE, TXTCLKACTIVE, BUTCLKVIEWAVAIL, TXTASRACTIVE, BUTASRVIEWAVAIL, CHKFALACTIVE, TXFSNRACTIVE, CHKEIPACTIVE, TXFCMTACTIVE, BUTFSMNEWAVAIL, BUTFSMDELETEAVAIL};
+	diffitems = {TXFCLKVALID, TXFASRVALID, BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXTMDLACTIVE, BUTMDLVIEWAVAIL, BUTMDLVIEWACTIVE, TXTCLKACTIVE, BUTCLKVIEWAVAIL, TXTASRACTIVE, BUTASRVIEWAVAIL, CHKFALACTIVE, TXFSNRACTIVE, CHKEIPACTIVE, TXFCMTACTIVE, BUTFSMNEWAVAIL, BUTFSMDELETEAVAIL, PUPFSMDTTAVAIL, PUPFSMDTTACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -480,6 +496,7 @@ void PnlWdbePrcDetail::Tag::writeJSON(
 		me["CptEip"] = "external insertion point";
 		me["CptCmt"] = "comment";
 		me["HdgFsm"] = "Finite state machine";
+		me["CptFsmDtt"] = "debug tap type";
 	};
 	me["Cpt"] = StrMod::cap(VecWdbeVTag::getTitle(VecWdbeVTag::DETAIL, ixWdbeVLocale));
 };
@@ -507,6 +524,7 @@ void PnlWdbePrcDetail::Tag::writeXML(
 			writeStringAttr(wr, itemtag, "sref", "CptEip", "external insertion point");
 			writeStringAttr(wr, itemtag, "sref", "CptCmt", "comment");
 			writeStringAttr(wr, itemtag, "sref", "HdgFsm", "Finite state machine");
+			writeStringAttr(wr, itemtag, "sref", "CptFsmDtt", "debug tap type");
 		};
 		writeStringAttr(wr, itemtag, "sref", "Cpt", StrMod::cap(VecWdbeVTag::getTitle(VecWdbeVTag::DETAIL, ixWdbeVLocale)));
 	xmlTextWriterEndElement(wr);
@@ -534,15 +552,14 @@ string PnlWdbePrcDetail::DpchAppData::getSrefsMask() {
 };
 
 void PnlWdbePrcDetail::DpchAppData::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbePrcDetailData"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbePrcDetailData"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -604,15 +621,14 @@ string PnlWdbePrcDetail::DpchAppDo::getSrefsMask() {
 };
 
 void PnlWdbePrcDetail::DpchAppDo::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbePrcDetailDo"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbePrcDetailDo"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -661,16 +677,18 @@ PnlWdbePrcDetail::DpchEngData::DpchEngData(
 			const ubigint jref
 			, ContIac* contiac
 			, ContInf* continf
+			, Feed* feedFPupFsmDtt
 			, StatShr* statshr
 			, const set<uint>& mask
 		) :
 			DpchEngWdbe(VecWdbeVDpch::DPCHENGWDBEPRCDETAILDATA, jref)
 		{
-	if (find(mask, ALL)) this->mask = {JREF, CONTIAC, CONTINF, STATAPP, STATSHR, TAG};
+	if (find(mask, ALL)) this->mask = {JREF, CONTIAC, CONTINF, FEEDFPUPFSMDTT, STATAPP, STATSHR, TAG};
 	else this->mask = mask;
 
 	if (find(this->mask, CONTIAC) && contiac) this->contiac = *contiac;
 	if (find(this->mask, CONTINF) && continf) this->continf = *continf;
+	if (find(this->mask, FEEDFPUPFSMDTT) && feedFPupFsmDtt) this->feedFPupFsmDtt = *feedFPupFsmDtt;
 	if (find(this->mask, STATSHR) && statshr) this->statshr = *statshr;
 };
 
@@ -681,6 +699,7 @@ string PnlWdbePrcDetail::DpchEngData::getSrefsMask() {
 	if (has(JREF)) ss.push_back("jref");
 	if (has(CONTIAC)) ss.push_back("contiac");
 	if (has(CONTINF)) ss.push_back("continf");
+	if (has(FEEDFPUPFSMDTT)) ss.push_back("feedFPupFsmDtt");
 	if (has(STATAPP)) ss.push_back("statapp");
 	if (has(STATSHR)) ss.push_back("statshr");
 	if (has(TAG)) ss.push_back("tag");
@@ -698,6 +717,7 @@ void PnlWdbePrcDetail::DpchEngData::merge(
 	if (src->has(JREF)) {jref = src->jref; add(JREF);};
 	if (src->has(CONTIAC)) {contiac = src->contiac; add(CONTIAC);};
 	if (src->has(CONTINF)) {continf = src->continf; add(CONTINF);};
+	if (src->has(FEEDFPUPFSMDTT)) {feedFPupFsmDtt = src->feedFPupFsmDtt; add(FEEDFPUPFSMDTT);};
 	if (src->has(STATAPP)) add(STATAPP);
 	if (src->has(STATSHR)) {statshr = src->statshr; add(STATSHR);};
 	if (src->has(TAG)) add(TAG);
@@ -712,6 +732,7 @@ void PnlWdbePrcDetail::DpchEngData::writeJSON(
 	if (has(JREF)) me["scrJref"] = Scr::scramble(jref);
 	if (has(CONTIAC)) contiac.writeJSON(me);
 	if (has(CONTINF)) continf.writeJSON(me);
+	if (has(FEEDFPUPFSMDTT)) feedFPupFsmDtt.writeJSON(me);
 	if (has(STATAPP)) StatApp::writeJSON(me);
 	if (has(STATSHR)) statshr.writeJSON(me);
 	if (has(TAG)) Tag::writeJSON(ixWdbeVLocale, me);
@@ -726,6 +747,7 @@ void PnlWdbePrcDetail::DpchEngData::writeXML(
 		if (has(JREF)) writeString(wr, "scrJref", Scr::scramble(jref));
 		if (has(CONTIAC)) contiac.writeXML(wr);
 		if (has(CONTINF)) continf.writeXML(wr);
+		if (has(FEEDFPUPFSMDTT)) feedFPupFsmDtt.writeXML(wr);
 		if (has(STATAPP)) StatApp::writeXML(wr);
 		if (has(STATSHR)) statshr.writeXML(wr);
 		if (has(TAG)) Tag::writeXML(ixWdbeVLocale, wr);

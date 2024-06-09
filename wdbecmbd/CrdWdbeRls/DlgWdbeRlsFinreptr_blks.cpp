@@ -188,15 +188,14 @@ DlgWdbeRlsFinreptr::ContIac::ContIac(
 };
 
 bool DlgWdbeRlsFinreptr::ContIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["ContIacDlgWdbeRlsFinreptr"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["ContIacDlgWdbeRlsFinreptr"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -238,7 +237,7 @@ void DlgWdbeRlsFinreptr::ContIac::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["numFDse"] = numFDse;
+	me["numFDse"] = (Json::Value::UInt) numFDse;
 };
 
 void DlgWdbeRlsFinreptr::ContIac::writeXML(
@@ -303,7 +302,7 @@ void DlgWdbeRlsFinreptr::ContInf::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["numFSge"] = numFSge;
+	me["numFSge"] = (Json::Value::UInt) numFSge;
 };
 
 void DlgWdbeRlsFinreptr::ContInf::writeXML(
@@ -886,15 +885,14 @@ string DlgWdbeRlsFinreptr::DpchAppData::getSrefsMask() {
 };
 
 void DlgWdbeRlsFinreptr::DpchAppData::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppDlgWdbeRlsFinreptrData"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppDlgWdbeRlsFinreptrData"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -960,15 +958,14 @@ string DlgWdbeRlsFinreptr::DpchAppDo::getSrefsMask() {
 };
 
 void DlgWdbeRlsFinreptr::DpchAppDo::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppDlgWdbeRlsFinreptrDo"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppDlgWdbeRlsFinreptrDo"];}();
 
 	basefound = (me != Json::nullValue);
 

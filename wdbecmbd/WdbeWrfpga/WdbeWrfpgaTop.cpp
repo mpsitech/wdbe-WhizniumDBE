@@ -71,41 +71,88 @@ void WdbeWrfpgaTop::writeMdlVhd(
 			, const string& Untsref
 			, WdbeMModule* mdl
 		) {
+	unsigned int NClk;
+
+	vector<string> clks;
+
+	vector<string> ss;
+	string s;
+	///
+
 	ListWdbeMSignal sigs;
 	WdbeMSignal* sig = NULL;
 
-	// --- impl.rst.asyncrst
-	outfile << "-- IP impl.rst.asyncrst --- RBEGIN" << endl;
-	outfile << "\t\t\tstateRst <= stateRstReset;" << endl;
-	outfile << endl;
+	string reqRequest;
 
-	outfile << "\t\t\ti := 0;" << endl;
-	outfile << "-- IP impl.rst.asyncrst --- REND" << endl;
+	NClk = 1;
+	clks.resize(NClk, "mclk");
 
-	// --- impl.rst.reset.ext
-	outfile << "-- IP impl.rst.reset.ext --- IBEGIN" << endl;
-	outfile << "\t\t\t\ti := i + 1;" << endl;
-	outfile << "-- IP impl.rst.reset.ext --- IEND" << endl;
+	if (Wdbe::getMpa(dbswdbe, mdl->ref, "clks", s)) {
+		StrMod::stringToVector(s, ss);
 
-	// --- impl.rst.run
-	dbswdbe->tblwdbemsignal->loadRstBySQL("SELECT * FROM TblWdbeMSignal WHERE refWdbeCSignal = 0 AND ixVBasetype = " + to_string(VecWdbeVMSignalBasetype::HSHK) + " AND refIxVTbl = "
-				+ to_string(VecWdbeVMSignalRefTbl::MDL) + " AND refUref = " + to_string(mdl->ref) + " AND sref LIKE 'req%' ORDER BY refNum ASC", false, sigs);
-
-	outfile << "-- IP impl.rst.run --- IBEGIN" << endl;
-	if (sigs.nodes.size() > 0) {
-		outfile << "\t\t\t\tif";
-		for (unsigned int i = 0; i < sigs.nodes.size(); i++) {
-			sig = sigs.nodes[i];
-
-			if (i != 0) outfile << " or";
-			outfile << " " << sig->sref << "='1'";
+		if (ss.size() > 1) {
+			NClk = ss.size();
+			clks.resize(NClk, "mclk");
 		};
-		outfile << " then" << endl;
 
-		outfile << "\t\t\t\t\ti := 0;" << endl;
-		outfile << "\t\t\t\t\tstateRst <= stateRstReset;" << endl;
-		outfile << "\t\t\t\tend if;" << endl;
+		for (unsigned int i = 0; i < NClk; i++) clks[i] = ss[i];
 	};
-	outfile << "-- IP impl.rst.run --- IEND" << endl;
+	///
+
+	dbswdbe->tblwdbemsignal->loadRstBySQL("SELECT * FROM TblWdbeMSignal WHERE ixVBasetype = " + to_string(VecWdbeVMSignalBasetype::HSHK) + " AND refIxVTbl = " + to_string(VecWdbeVMSignalRefTbl::MDL)
+				+ " AND refUref = " + to_string(mdl->ref) + " AND sref LIKE 'reqReset%' ORDER BY sref ASC", false, sigs);
+
+	for (unsigned int i = 0; i < sigs.nodes.size(); i++) {
+		sig = sigs.nodes[i];
+
+		if (i != 0) reqRequest += " or ";
+		reqRequest += sig->sref + "='1'";
+	};
+
+	for (unsigned int i = 0; i < NClk; i++) {
+		// --- impl.xxxclk
+		outfile << "\t\t\t-- IP impl." << clks[i] << " --- IBEGIN" << endl;
+
+		if (reqRequest != "") {
+			outfile << "\t\t\tif " << reqRequest << " then" << endl;
+
+			if (i == 0) {
+				outfile << "\t\t\t\tif i=imax then" << endl;
+				outfile << "\t\t\t\t\ti := 0;" << endl;
+				outfile << "\t\t\t\t\tj := 0;" << endl;
+				outfile << endl;
+
+				outfile << "\t\t\t\telse" << endl;
+				outfile << "\t\t\t\t\tif j=jmax then" << endl;
+				outfile << "\t\t\t\t\t\treset <= '1';" << endl;
+				outfile << "\t\t\t\t\t\tj := 0;" << endl;
+				outfile << endl;
+
+				outfile << "\t\t\t\t\telse" << endl;
+				outfile << "\t\t\t\t\t\tj := j + 1;" << endl;
+				outfile << "\t\t\t\t\tend if;" << endl;
+				outfile << "\t\t\t\tend if;" << endl;
+				outfile << endl;
+
+			} else {
+				outfile << "\t\t\t\treset" << StrMod::cap(clks[i]) << " <= '1';" << endl;
+				outfile << "\t\t\t\ti := 0;" << endl;
+				outfile << endl;
+			};
+		};
+
+		outfile << "\t\t\t";
+		if (reqRequest != "") outfile << "els";
+		outfile << "if i=imax then" << endl;
+
+		outfile << "\t\t\t\treset";
+		if (i != 0) outfile << StrMod::cap(clks[i]);
+		outfile << " <= '0';" << endl;
+		outfile << "\t\t\telse" << endl;
+		outfile << "\t\t\t\ti := i + 1;" << endl;
+		outfile << "\t\t\tend if;" << endl;
+
+		outfile << "\t\t\t-- IP impl." << clks[i] << " --- IEND" << endl;
+	};
 };
 // IP cust --- IEND

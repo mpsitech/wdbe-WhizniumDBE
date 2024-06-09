@@ -1,0 +1,292 @@
+/**
+	* \file PnlWdbeCdcDetail.h
+	* API code for job PnlWdbeCdcDetail (declarations)
+	* \copyright (C) 2016-2020 MPSI Technologies GmbH
+	* \author Alexander Wirthmueller (auto-generation)
+	* \date created: 9 May 2023
+	*/
+// IP header --- ABOVE
+
+#ifndef PNLWDBECDCDETAIL_H
+#define PNLWDBECDCDETAIL_H
+
+#include "ApiWdbe_blks.h"
+
+#define VecVWdbeCdcDetailDo PnlWdbeCdcDetail::VecVDo
+
+#define ContIacWdbeCdcDetail PnlWdbeCdcDetail::ContIac
+#define ContInfWdbeCdcDetail PnlWdbeCdcDetail::ContInf
+#define StatAppWdbeCdcDetail PnlWdbeCdcDetail::StatApp
+#define StatShrWdbeCdcDetail PnlWdbeCdcDetail::StatShr
+#define TagWdbeCdcDetail PnlWdbeCdcDetail::Tag
+
+#define DpchAppWdbeCdcDetailData PnlWdbeCdcDetail::DpchAppData
+#define DpchAppWdbeCdcDetailDo PnlWdbeCdcDetail::DpchAppDo
+#define DpchEngWdbeCdcDetailData PnlWdbeCdcDetail::DpchEngData
+
+/**
+	* PnlWdbeCdcDetail
+	*/
+namespace PnlWdbeCdcDetail {
+	/**
+		* VecVDo (full: VecVWdbeCdcDetailDo)
+		*/
+	class VecVDo {
+
+	public:
+		static const Sbecore::uint BUTSAVECLICK = 1;
+		static const Sbecore::uint BUTFCKVIEWCLICK = 2;
+		static const Sbecore::uint BUTSCKVIEWCLICK = 3;
+		static const Sbecore::uint BUTMDLVIEWCLICK = 4;
+		static const Sbecore::uint BUTFARVIEWCLICK = 5;
+		static const Sbecore::uint BUTSARVIEWCLICK = 6;
+
+		static Sbecore::uint getIx(const std::string& sref);
+		static std::string getSref(const Sbecore::uint ix);
+	};
+
+	/**
+	  * ContIac (full: ContIacWdbeCdcDetail)
+	  */
+	class ContIac : public Sbecore::Block {
+
+	public:
+		static const Sbecore::uint TXFFCK = 1;
+		static const Sbecore::uint TXFSCK = 2;
+		static const Sbecore::uint TXFFAR = 3;
+		static const Sbecore::uint TXFSAR = 4;
+		static const Sbecore::uint TXFRAT = 5;
+
+	public:
+		ContIac(const std::string& TxfFck = "", const std::string& TxfSck = "", const std::string& TxfFar = "", const std::string& TxfSar = "", const std::string& TxfRat = "");
+
+	public:
+		std::string TxfFck;
+		std::string TxfSck;
+		std::string TxfFar;
+		std::string TxfSar;
+		std::string TxfRat;
+
+	public:
+		bool readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
+		void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
+		std::set<Sbecore::uint> comm(const ContIac* comp);
+		std::set<Sbecore::uint> diff(const ContIac* comp);
+	};
+
+	/**
+	  * ContInf (full: ContInfWdbeCdcDetail)
+	  */
+	class ContInf : public Sbecore::Block {
+
+	public:
+		static const Sbecore::uint TXTFCK = 1;
+		static const Sbecore::uint TXTSCK = 2;
+		static const Sbecore::uint TXTMDL = 3;
+		static const Sbecore::uint TXTFAR = 4;
+		static const Sbecore::uint TXTSAR = 5;
+
+	public:
+		ContInf(const std::string& TxtFck = "", const std::string& TxtSck = "", const std::string& TxtMdl = "", const std::string& TxtFar = "", const std::string& TxtSar = "");
+
+	public:
+		std::string TxtFck;
+		std::string TxtSck;
+		std::string TxtMdl;
+		std::string TxtFar;
+		std::string TxtSar;
+
+	public:
+		bool readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
+		std::set<Sbecore::uint> comm(const ContInf* comp);
+		std::set<Sbecore::uint> diff(const ContInf* comp);
+	};
+
+	/**
+	  * StatApp (full: StatAppWdbeCdcDetail)
+	  */
+	class StatApp : public Sbecore::Block {
+
+	public:
+		static const Sbecore::uint IXWDBEVEXPSTATE = 1;
+		static const Sbecore::uint TXTFCKALT = 2;
+		static const Sbecore::uint TXTSCKALT = 3;
+		static const Sbecore::uint TXTFARALT = 4;
+		static const Sbecore::uint TXTSARALT = 5;
+
+	public:
+		StatApp(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::MIND, const bool TxtFckAlt = false, const bool TxtSckAlt = false, const bool TxtFarAlt = false, const bool TxtSarAlt = false);
+
+	public:
+		Sbecore::uint ixWdbeVExpstate;
+		bool TxtFckAlt;
+		bool TxtSckAlt;
+		bool TxtFarAlt;
+		bool TxtSarAlt;
+
+	public:
+		bool readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
+		std::set<Sbecore::uint> comm(const StatApp* comp);
+		std::set<Sbecore::uint> diff(const StatApp* comp);
+	};
+
+	/**
+	  * StatShr (full: StatShrWdbeCdcDetail)
+	  */
+	class StatShr : public Sbecore::Block {
+
+	public:
+		static const Sbecore::uint TXFFCKVALID = 1;
+		static const Sbecore::uint TXFSCKVALID = 2;
+		static const Sbecore::uint TXFFARVALID = 3;
+		static const Sbecore::uint TXFSARVALID = 4;
+		static const Sbecore::uint BUTSAVEAVAIL = 5;
+		static const Sbecore::uint BUTSAVEACTIVE = 6;
+		static const Sbecore::uint TXTFCKACTIVE = 7;
+		static const Sbecore::uint BUTFCKVIEWAVAIL = 8;
+		static const Sbecore::uint TXTSCKACTIVE = 9;
+		static const Sbecore::uint BUTSCKVIEWAVAIL = 10;
+		static const Sbecore::uint TXTMDLACTIVE = 11;
+		static const Sbecore::uint BUTMDLVIEWAVAIL = 12;
+		static const Sbecore::uint BUTMDLVIEWACTIVE = 13;
+		static const Sbecore::uint TXTFARACTIVE = 14;
+		static const Sbecore::uint BUTFARVIEWAVAIL = 15;
+		static const Sbecore::uint TXTSARACTIVE = 16;
+		static const Sbecore::uint BUTSARVIEWAVAIL = 17;
+		static const Sbecore::uint TXFRATACTIVE = 18;
+
+	public:
+		StatShr(const bool TxfFckValid = false, const bool TxfSckValid = false, const bool TxfFarValid = false, const bool TxfSarValid = false, const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxtFckActive = true, const bool ButFckViewAvail = true, const bool TxtSckActive = true, const bool ButSckViewAvail = true, const bool TxtMdlActive = true, const bool ButMdlViewAvail = true, const bool ButMdlViewActive = true, const bool TxtFarActive = true, const bool ButFarViewAvail = true, const bool TxtSarActive = true, const bool ButSarViewAvail = true, const bool TxfRatActive = true);
+
+	public:
+		bool TxfFckValid;
+		bool TxfSckValid;
+		bool TxfFarValid;
+		bool TxfSarValid;
+		bool ButSaveAvail;
+		bool ButSaveActive;
+		bool TxtFckActive;
+		bool ButFckViewAvail;
+		bool TxtSckActive;
+		bool ButSckViewAvail;
+		bool TxtMdlActive;
+		bool ButMdlViewAvail;
+		bool ButMdlViewActive;
+		bool TxtFarActive;
+		bool ButFarViewAvail;
+		bool TxtSarActive;
+		bool ButSarViewAvail;
+		bool TxfRatActive;
+
+	public:
+		bool readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
+		std::set<Sbecore::uint> comm(const StatShr* comp);
+		std::set<Sbecore::uint> diff(const StatShr* comp);
+	};
+
+	/**
+	  * Tag (full: TagWdbeCdcDetail)
+	  */
+	class Tag : public Sbecore::Block {
+
+	public:
+		static const Sbecore::uint CPT = 1;
+		static const Sbecore::uint CPTFCK = 2;
+		static const Sbecore::uint CPTSCK = 3;
+		static const Sbecore::uint CPTMDL = 4;
+		static const Sbecore::uint CPTFAR = 5;
+		static const Sbecore::uint CPTSAR = 6;
+		static const Sbecore::uint CPTRAT = 7;
+
+	public:
+		Tag(const std::string& Cpt = "", const std::string& CptFck = "", const std::string& CptSck = "", const std::string& CptMdl = "", const std::string& CptFar = "", const std::string& CptSar = "", const std::string& CptRat = "");
+
+	public:
+		std::string Cpt;
+		std::string CptFck;
+		std::string CptSck;
+		std::string CptMdl;
+		std::string CptFar;
+		std::string CptSar;
+		std::string CptRat;
+
+	public:
+		bool readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
+	};
+
+	/**
+		* DpchAppData (full: DpchAppWdbeCdcDetailData)
+		*/
+	class DpchAppData : public DpchAppWdbe {
+
+	public:
+		static const Sbecore::uint SCRJREF = 1;
+		static const Sbecore::uint CONTIAC = 2;
+		static const Sbecore::uint ALL = 3;
+
+	public:
+		DpchAppData(const std::string& scrJref = "", ContIac* contiac = NULL, const std::set<Sbecore::uint>& mask = {NONE});
+
+	public:
+		ContIac contiac;
+
+	public:
+		std::string getSrefsMask();
+
+		void writeXML(xmlTextWriter* wr);
+	};
+
+	/**
+		* DpchAppDo (full: DpchAppWdbeCdcDetailDo)
+		*/
+	class DpchAppDo : public DpchAppWdbe {
+
+	public:
+		static const Sbecore::uint SCRJREF = 1;
+		static const Sbecore::uint IXVDO = 2;
+		static const Sbecore::uint ALL = 3;
+
+	public:
+		DpchAppDo(const std::string& scrJref = "", const Sbecore::uint ixVDo = 0, const std::set<Sbecore::uint>& mask = {NONE});
+
+	public:
+		Sbecore::uint ixVDo;
+
+	public:
+		std::string getSrefsMask();
+
+		void writeXML(xmlTextWriter* wr);
+	};
+
+	/**
+		* DpchEngData (full: DpchEngWdbeCdcDetailData)
+		*/
+	class DpchEngData : public DpchEngWdbe {
+
+	public:
+		static const Sbecore::uint SCRJREF = 1;
+		static const Sbecore::uint CONTIAC = 2;
+		static const Sbecore::uint CONTINF = 3;
+		static const Sbecore::uint STATAPP = 4;
+		static const Sbecore::uint STATSHR = 5;
+		static const Sbecore::uint TAG = 6;
+
+	public:
+		DpchEngData();
+
+	public:
+		ContIac contiac;
+		ContInf continf;
+		StatApp statapp;
+		StatShr statshr;
+		Tag tag;
+
+	public:
+		std::string getSrefsMask();
+
+		void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
+	};
+
+};
+
+#endif

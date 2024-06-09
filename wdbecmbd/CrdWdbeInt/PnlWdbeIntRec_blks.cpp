@@ -277,15 +277,14 @@ string PnlWdbeIntRec::DpchAppDo::getSrefsMask() {
 };
 
 void PnlWdbeIntRec::DpchAppDo::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbeIntRecDo"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbeIntRecDo"];}();
 
 	basefound = (me != Json::nullValue);
 

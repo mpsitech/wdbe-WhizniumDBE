@@ -62,15 +62,14 @@ PnlWdbePinDetail::ContIac::ContIac(
 };
 
 bool PnlWdbePinDetail::ContIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["ContIacWdbePinDetail"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["ContIacWdbePinDetail"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -116,8 +115,8 @@ void PnlWdbePinDetail::ContIac::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["numFPupJsr"] = numFPupJsr;
-	me["numFLstClu"] = numFLstClu;
+	me["numFPupJsr"] = (Json::Value::UInt) numFPupJsr;
+	me["numFLstClu"] = (Json::Value::UInt) numFLstClu;
 	me["TxfLoc"] = TxfLoc;
 };
 
@@ -257,7 +256,7 @@ void PnlWdbePinDetail::StatApp::writeJSON(
 
 	me["srefIxWdbeVExpstate"] = VecWdbeVExpstate::getSref(ixWdbeVExpstate);
 	me["LstCluAlt"] = LstCluAlt;
-	me["LstCluNumFirstdisp"] = LstCluNumFirstdisp;
+	me["LstCluNumFirstdisp"] = (Json::Value::UInt) LstCluNumFirstdisp;
 };
 
 void PnlWdbePinDetail::StatApp::writeXML(
@@ -473,15 +472,14 @@ string PnlWdbePinDetail::DpchAppData::getSrefsMask() {
 };
 
 void PnlWdbePinDetail::DpchAppData::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbePinDetailData"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbePinDetailData"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -543,15 +541,14 @@ string PnlWdbePinDetail::DpchAppDo::getSrefsMask() {
 };
 
 void PnlWdbePinDetail::DpchAppDo::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbePinDetailDo"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbePinDetailDo"];}();
 
 	basefound = (me != Json::nullValue);
 

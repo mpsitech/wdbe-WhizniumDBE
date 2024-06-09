@@ -221,7 +221,6 @@ uint JobWdbeIexMdl::enterSgeIdle(
 
 	icsWdbeVIop.clear();
 
-	imeimsystem.clear();
 	imeimunit.clear();
 
 	return retval;
@@ -243,7 +242,7 @@ uint JobWdbeIexMdl::enterSgeParse(
 	nextIxVSgeFailure = VecVSge::PRSERR;
 
 	try {
-		IexWdbeMdl::parseFromFile(fullpath, xmlNotTxt, rectpath, imeimsystem, imeimunit);
+		IexWdbeMdl::parseFromFile(fullpath, xmlNotTxt, rectpath, imeimunit);
 
 	} catch (SbeException& e) {
 		if (e.ix == SbeException::PATHNF) e.vals["path"] = "<hidden>";
@@ -304,11 +303,9 @@ uint JobWdbeIexMdl::enterSgeImport(
 	retval = nextIxVSgeSuccess;
 	nextIxVSgeFailure = VecVSge::IMPERR;
 
-	ImeitemIMSystem* sys = NULL;
 	ImeitemIMUnit* unt = NULL;
 	ImeitemIMModule* mdl = NULL;
 	ImeitemIMPeripheral* pph = NULL;
-	ImeitemIMTarget* trg = NULL;
 	ImeitemIAMModulePar* mdlApar = NULL;
 	ImeitemIAMPeripheralPar* pphApar = NULL;
 	ImeitemIMController* ctr = NULL;
@@ -325,7 +322,6 @@ uint JobWdbeIexMdl::enterSgeImport(
 
 	string Prjshort;
 
-	ImeitemIMUnit* unt2 = NULL;
 	ImeitemIMModule* mdl2 = NULL;
 
 	string sref, srefrootMgmt, srefrootCor;
@@ -336,36 +332,6 @@ uint JobWdbeIexMdl::enterSgeImport(
 
 	try {
 		// IP enterSgeImport.traverse --- RBEGIN
-
-		// -- ImeIMSystem
-		for (unsigned int ix0 = 0; ix0 < imeimsystem.nodes.size(); ix0++) {
-			sys = imeimsystem.nodes[ix0];
-
-			//sys->refWdbeMVersion: PRESET
-			sys->refWdbeMVersion = refWdbeMVersion;
-			//sys->refWdbeMUnit: IMPPP
-			//sys->sref: TBL
-			//sys->Comment: TBL
-
-			dbswdbe->tblwdbemsystem->insertRec(sys);
-			impcnt++;
-
-			num1 = 1;
-
-			for (unsigned int ix1 = 0; ix1 < sys->imeimtarget.nodes.size(); ix1++) {
-				trg = sys->imeimtarget.nodes[ix1];
-
-				trg->sysRefWdbeMSystem = sys->ref;
-				trg->sysNum = num1++;
-				//trg->refWdbeMUnit: IMPPP
-				//trg->sref: TBL
-				//trg->rteSrefsWdbeMModule: TBL
-				//trg->Comment: TBL
-
-				dbswdbe->tblwdbemtarget->insertRec(trg);
-				impcnt++;
-			};
-		};
 
 		// -- ImeIMUnit
 		for (unsigned int ix0 = 0; ix0 < imeimunit.nodes.size(); ix0++) {
@@ -380,7 +346,6 @@ uint JobWdbeIexMdl::enterSgeImport(
 				dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMUnit WHERE refIxVTbl <> " + to_string(VecWdbeVMUnitRefTbl::VER) + " AND sref = '" + unt->srefSilRefWdbeMUnit + "'", unt->silRefWdbeMUnit);
 				if (unt->silRefWdbeMUnit == 0) throw SbeException(SbeException::IEX_TSREF, {{"tsref",unt->srefSilRefWdbeMUnit}, {"iel","srefSilRefWdbeMUnit"}, {"lineno",to_string(unt->lineno)}});
 			};
-			//unt->refWdbeMSystem: PREVIMP
 			//unt->refWdbeMModule: SUB
 			//unt->sref: TBL
 			//unt->Fullsref: CUST
@@ -474,7 +439,6 @@ uint JobWdbeIexMdl::enterSgeImport(
 					ctr = mdl->imeimcontroller.nodes[ix2];
 
 					ctr->refWdbeMModule = mdl->ref;
-					//ctr->fwdRefWdbeMUnit: IMPPP
 					//ctr->Fullsref: CUST
 					ctr->Fullsref = "Ctr" + unt->Fullsref.substr(3) + StrMod::cap(mdl->sref);
 
@@ -546,44 +510,6 @@ uint JobWdbeIexMdl::enterSgeImport(
 		// IP enterSgeImport.traverse --- REND
 
 		// IP enterSgeImport.ppr --- IBEGIN
-		for (unsigned int ix0 = 0; ix0 < imeimsystem.nodes.size(); ix0++) {
-			sys = imeimsystem.nodes[ix0];
-
-			if (sys->srefRefWdbeMUnit != "") {
-				for (unsigned int i = 0; i < imeimunit.nodes.size(); i++) {
-					unt = imeimunit.nodes[i];
-
-					if (unt->sref == sys->srefRefWdbeMUnit) {
-						sys->refWdbeMUnit = unt->ref;
-
-						unt->refWdbeMSystem = sys->ref;
-						dbswdbe->tblwdbemunit->updateRec(unt);
-
-						break;
-					};
-				};
-
-				if (sys->refWdbeMUnit == 0) throw SbeException(SbeException::IEX_TSREF, {{"tsref",sys->srefRefWdbeMUnit}, {"iel","srefRefWdbeMUnit"}, {"lineno",to_string(sys->lineno)}});
-				else dbswdbe->tblwdbemsystem->updateRec(sys);
-			};
-
-			for (unsigned int ix1 = 0; ix1 < sys->imeimtarget.nodes.size(); ix1++) {
-				trg = sys->imeimtarget.nodes[ix1];
-
-				for (unsigned int i = 0; i < imeimunit.nodes.size(); i++) {
-					unt = imeimunit.nodes[i];
-
-					if (unt->sref == trg->srefRefWdbeMUnit) {
-						trg->refWdbeMUnit = unt->ref;
-						break;
-					};
-				};
-
-				if (trg->refWdbeMUnit == 0) throw SbeException(SbeException::IEX_TSREF, {{"tsref",trg->srefRefWdbeMUnit}, {"iel","srefRefWdbeMUnit"}, {"lineno",to_string(trg->lineno)}});
-				else dbswdbe->tblwdbemtarget->updateRec(trg);
-			};
-		};
-
 		for (unsigned int ix0 = 0; ix0 < imeimunit.nodes.size(); ix0++) {
 			unt = imeimunit.nodes[ix0];
 
@@ -630,24 +556,6 @@ uint JobWdbeIexMdl::enterSgeImport(
 					Wdbe::getImbsrefs(dbswdbe, imb->refWdbeMModule, imb->Fullsref, srefrootMgmt, srefrootCor);
 					dbswdbe->tblwdbemimbuf->updateRec(imb);
 				};
-
-				for (unsigned int ix2 = 0; ix2 < mdl->imeimcontroller.nodes.size(); ix2++) {
-					ctr = mdl->imeimcontroller.nodes[ix2];
-					
-					if (ctr->srefFwdRefWdbeMUnit != "") {
-						for (unsigned int i = 0; i < imeimunit.nodes.size(); i++) {
-							unt2 = imeimunit.nodes[i];
-
-							if (unt2->sref == ctr->srefFwdRefWdbeMUnit) {
-								ctr->fwdRefWdbeMUnit = unt2->ref;
-								break;
-							};
-						};
-
-						if (ctr->fwdRefWdbeMUnit == 0) throw SbeException(SbeException::IEX_TSREF, {{"tsref",ctr->srefFwdRefWdbeMUnit}, {"iel","srefFwdRefWdbeMUnit"}, {"lineno",to_string(ctr->lineno)}});
-						else dbswdbe->tblwdbemcontroller->updateRec(ctr);
-					};
-				};
 			};
 		};
 		// IP enterSgeImport.ppr --- IEND
@@ -690,11 +598,9 @@ uint JobWdbeIexMdl::enterSgeReverse(
 	nextIxVSgeSuccess = VecVSge::IDLE;
 	retval = nextIxVSgeSuccess;
 
-	ImeitemIMSystem* sys = NULL;
 	ImeitemIMUnit* unt = NULL;
 	ImeitemIMModule* mdl = NULL;
 	ImeitemIMPeripheral* pph = NULL;
-	ImeitemIMTarget* trg = NULL;
 	ImeitemIAMModulePar* mdlApar = NULL;
 	ImeitemIAMPeripheralPar* pphApar = NULL;
 	ImeitemIMController* ctr = NULL;
@@ -702,17 +608,6 @@ uint JobWdbeIexMdl::enterSgeReverse(
 	ImeitemIMImbuf* imb = NULL;
 	ImeitemIRMModuleMModule* mdlRmdl = NULL;
 	ImeitemIRMModuleMPeripheral* mdlRpph = NULL;
-
-	// -- ImeIMSystem
-	for (unsigned int ix0 = 0; ix0 < imeimsystem.nodes.size(); ix0++) {
-		sys = imeimsystem.nodes[ix0];
-		if (sys->ref != 0) dbswdbe->tblwdbemsystem->removeRecByRef(sys->ref);
-
-		for (unsigned int ix1 = 0; ix1 < sys->imeimtarget.nodes.size(); ix1++) {
-			trg = sys->imeimtarget.nodes[ix1];
-			if (trg->ref != 0) dbswdbe->tblwdbemtarget->removeRecByRef(trg->ref);
-		};
-	};
 
 	// -- ImeIMUnit
 	for (unsigned int ix0 = 0; ix0 < imeimunit.nodes.size(); ix0++) {
@@ -782,11 +677,9 @@ uint JobWdbeIexMdl::enterSgeCollect(
 	nextIxVSgeSuccess = VecVSge::CLTDONE;
 	retval = nextIxVSgeSuccess;
 
-	ImeitemIMSystem* sys = NULL;
 	ImeitemIMUnit* unt = NULL;
 	ImeitemIMModule* mdl = NULL;
 	ImeitemIMPeripheral* pph = NULL;
-	ImeitemIMTarget* trg = NULL;
 	ImeitemIAMModulePar* mdlApar = NULL;
 	ImeitemIAMPeripheralPar* pphApar = NULL;
 	ImeitemIMController* ctr = NULL;
@@ -802,28 +695,6 @@ uint JobWdbeIexMdl::enterSgeCollect(
 	Stcch* stcch = new Stcch(false);
 
 	// IP enterSgeCollect.traverse --- BEGIN
-
-	// -- ImeIMSystem
-	for (unsigned int ix0 = 0; ix0 < imeimsystem.nodes.size(); ix0++) {
-		sys = imeimsystem.nodes[ix0];
-
-		if (sys->ref != 0) {
-			sys->srefRefWdbeMUnit = StubWdbe::getStubUntSref(dbswdbe, sys->refWdbeMUnit, ixWdbeVLocale, Stub::VecVNonetype::VOID, stcch);
-		};
-
-		if (getIxWdbeVIop(icsWdbeVIop, VecVIme::IMEIMTARGET, ixWdbeVIop)) {
-			dbswdbe->tblwdbemtarget->loadRefsBySys(sys->ref, false, refs);
-			for (unsigned int i = 0; i < refs.size(); i++) sys->imeimtarget.nodes.push_back(new ImeitemIMTarget(dbswdbe, refs[i]));
-		};
-
-		for (unsigned int ix1 = 0; ix1 < sys->imeimtarget.nodes.size(); ix1++) {
-			trg = sys->imeimtarget.nodes[ix1];
-
-			if (trg->ref != 0) {
-				trg->srefRefWdbeMUnit = StubWdbe::getStubUntSref(dbswdbe, trg->refWdbeMUnit, ixWdbeVLocale, Stub::VecVNonetype::VOID, stcch);
-			};
-		};
-	};
 
 	// -- ImeIMUnit
 	for (unsigned int ix0 = 0; ix0 < imeimunit.nodes.size(); ix0++) {
@@ -867,7 +738,6 @@ uint JobWdbeIexMdl::enterSgeCollect(
 				ctr = mdl->imeimcontroller.nodes[ix2];
 
 				if (ctr->ref != 0) {
-					ctr->srefFwdRefWdbeMUnit = StubWdbe::getStubUntSref(dbswdbe, ctr->fwdRefWdbeMUnit, ixWdbeVLocale, Stub::VecVNonetype::VOID, stcch);
 				};
 			};
 
@@ -980,7 +850,7 @@ uint JobWdbeIexMdl::enterSgeExport(
 	nextIxVSgeSuccess = VecVSge::DONE;
 	retval = nextIxVSgeSuccess;
 
-	IexWdbeMdl::exportToFile(fullpath, xmlNotTxt, shorttags, imeimsystem, imeimunit);
+	IexWdbeMdl::exportToFile(fullpath, xmlNotTxt, shorttags, imeimunit);
 
 	return retval;
 };

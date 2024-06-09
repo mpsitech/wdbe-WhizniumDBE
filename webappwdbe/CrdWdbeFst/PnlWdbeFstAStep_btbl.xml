@@ -22,14 +22,18 @@
 		<table cellspacing="0" border="0" cellpadding="0"><form action="">
 			<colgroup id="cols">
 				<col width="20"></col>
-				<col width="45"></col>
-				<col width="45"></col>
-				<col width="45"></col>
-				<col width="45"></col>
-				<col width="45"></col>
-				<col width="45"></col>
-				<col width="45"></col>
-				<col width="45"></col>
+				<col width="30"></col>
+				<col width="30"></col>
+				<col width="30"></col>
+				<col width="30"></col>
+				<col width="30"></col>
+				<col width="30"></col>
+				<col width="30"></col>
+				<col width="30"></col>
+				<col width="30"></col>
+				<col width="30"></col>
+				<col width="30"></col>
+				<col width="30"></col>
 				<col width="45"></col>
 				<col width="15"></col>
 			</colgroup>
@@ -45,6 +49,10 @@
 				<td class="col" id="TcoIp3">TcoIp3</td>
 				<td class="col" id="TcoCn4">TcoCn4</td>
 				<td class="col" id="TcoIp4">TcoIp4</td>
+				<td class="col" id="TcoCn5">TcoCn5</td>
+				<td class="col" id="TcoIp5">TcoIp5</td>
+				<td class="col" id="TcoCn6">TcoCn6</td>
+				<td class="col" id="TcoIp6">TcoIp6</td>
 					<td class="nonsel" rowspan="11" id="tdTsb">sb</td>
 				</tr>
 			</tbody>

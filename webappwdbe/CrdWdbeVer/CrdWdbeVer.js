@@ -136,20 +136,24 @@ function initMenCrd() {
 	MitCrdPcvActive = (retrieveSi(srcdoc, "StatShrWdbeVer", "MitCrdPcvActive") == "true");
 	MspCrd3Avail = (retrieveSi(srcdoc, "StatShrWdbeVer", "MspCrd3Avail") == "true");
 	MspCrd3Active = (retrieveSi(srcdoc, "StatShrWdbeVer", "MspCrd3Active") == "true");
+	MitCrdIdpAvail = (retrieveSi(srcdoc, "StatShrWdbeVer", "MitCrdIdpAvail") == "true");
+	MitCrdIdpActive = (retrieveSi(srcdoc, "StatShrWdbeVer", "MitCrdIdpActive") == "true");
+	MspCrd4Avail = (retrieveSi(srcdoc, "StatShrWdbeVer", "MspCrd4Avail") == "true");
+	MspCrd4Active = (retrieveSi(srcdoc, "StatShrWdbeVer", "MspCrd4Active") == "true");
 	MitCrdImdAvail = (retrieveSi(srcdoc, "StatShrWdbeVer", "MitCrdImdAvail") == "true");
 	MitCrdImdActive = (retrieveSi(srcdoc, "StatShrWdbeVer", "MitCrdImdActive") == "true");
 	MitCrdIcsAvail = (retrieveSi(srcdoc, "StatShrWdbeVer", "MitCrdIcsAvail") == "true");
 	MitCrdIcsActive = (retrieveSi(srcdoc, "StatShrWdbeVer", "MitCrdIcsActive") == "true");
 	MitCrdIdaAvail = (retrieveSi(srcdoc, "StatShrWdbeVer", "MitCrdIdaAvail") == "true");
 	MitCrdIdaActive = (retrieveSi(srcdoc, "StatShrWdbeVer", "MitCrdIdaActive") == "true");
-	MspCrd4Avail = (retrieveSi(srcdoc, "StatShrWdbeVer", "MspCrd4Avail") == "true");
-	MspCrd4Active = (retrieveSi(srcdoc, "StatShrWdbeVer", "MspCrd4Active") == "true");
+	MspCrd5Avail = (retrieveSi(srcdoc, "StatShrWdbeVer", "MspCrd5Avail") == "true");
+	MspCrd5Active = (retrieveSi(srcdoc, "StatShrWdbeVer", "MspCrd5Active") == "true");
 	MitCrdGfsAvail = (retrieveSi(srcdoc, "StatShrWdbeVer", "MitCrdGfsAvail") == "true");
 	MitCrdGfsActive = (retrieveSi(srcdoc, "StatShrWdbeVer", "MitCrdGfsActive") == "true");
 	MitCrdIfsAvail = (retrieveSi(srcdoc, "StatShrWdbeVer", "MitCrdIfsAvail") == "true");
 	MitCrdIfsActive = (retrieveSi(srcdoc, "StatShrWdbeVer", "MitCrdIfsActive") == "true");
-	MspCrd5Avail = (retrieveSi(srcdoc, "StatShrWdbeVer", "MspCrd5Avail") == "true");
-	MspCrd5Active = (retrieveSi(srcdoc, "StatShrWdbeVer", "MspCrd5Active") == "true");
+	MspCrd6Avail = (retrieveSi(srcdoc, "StatShrWdbeVer", "MspCrd6Avail") == "true");
+	MspCrd6Active = (retrieveSi(srcdoc, "StatShrWdbeVer", "MspCrd6Active") == "true");
 	MitCrdFnmAvail = (retrieveSi(srcdoc, "StatShrWdbeVer", "MitCrdFnmAvail") == "true");
 	MitCrdFnmActive = (retrieveSi(srcdoc, "StatShrWdbeVer", "MitCrdFnmActive") == "true");
 
@@ -159,6 +163,8 @@ function initMenCrd() {
 	setTextContent(mendoc, mendoc.getElementById("MitCrdNew"), retrieveTi(srcdoc, "TagWdbeVer", "MitCrdNew"));
 	setTextContent(mendoc, mendoc.getElementById("MitCrdPcv"), retrieveTi(srcdoc, "TagWdbeVer", "MitCrdPcv"));
 	setMitActive("MitCrdPcv", MitCrdPcvActive);
+	setTextContent(mendoc, mendoc.getElementById("MitCrdIdp"), retrieveTi(srcdoc, "TagWdbeVer", "MitCrdIdp"));
+	setMitActive("MitCrdIdp", MitCrdIdpActive);
 	setTextContent(mendoc, mendoc.getElementById("MitCrdImd"), retrieveTi(srcdoc, "TagWdbeVer", "MitCrdImd"));
 	setMitActive("MitCrdImd", MitCrdImdActive);
 	setTextContent(mendoc, mendoc.getElementById("MitCrdIcs"), retrieveTi(srcdoc, "TagWdbeVer", "MitCrdIcs"));
@@ -176,13 +182,15 @@ function initMenCrd() {
 	height -= setMitMspAvail("MitCrdNew", MitCrdNewAvail, 20);
 	height -= setMitMspAvail("MitCrdPcv", MitCrdPcvAvail, 20);
 	height -= setMitMspAvail("MspCrd3", MspCrd3Avail, 1);
+	height -= setMitMspAvail("MitCrdIdp", MitCrdIdpAvail, 20);
+	height -= setMitMspAvail("MspCrd4", MspCrd4Avail, 1);
 	height -= setMitMspAvail("MitCrdImd", MitCrdImdAvail, 20);
 	height -= setMitMspAvail("MitCrdIcs", MitCrdIcsAvail, 20);
 	height -= setMitMspAvail("MitCrdIda", MitCrdIdaAvail, 20);
-	height -= setMitMspAvail("MspCrd4", MspCrd4Avail, 1);
+	height -= setMitMspAvail("MspCrd5", MspCrd5Avail, 1);
 	height -= setMitMspAvail("MitCrdGfs", MitCrdGfsAvail, 20);
 	height -= setMitMspAvail("MitCrdIfs", MitCrdIfsAvail, 20);
-	height -= setMitMspAvail("MspCrd5", MspCrd5Avail, 1);
+	height -= setMitMspAvail("MspCrd6", MspCrd6Avail, 1);
 	height -= setMitMspAvail("MitCrdFnm", MitCrdFnmAvail, 20);
 
 	doc.getElementById("Menu").setAttribute("height", "" + height);
@@ -280,7 +288,7 @@ function showDlg(sref, _scrJref)  {
 	myif.setAttribute("id", "Dlg");
 	myif.setAttribute("src", "./" + sref + ".html?scrJref=" + _scrJref);
 	myif.setAttribute("width", "691");
-	if ((sref == "DlgWdbeVerMdlstr") || (sref == "DlgWdbeVerCmdset") || (sref == "DlgWdbeVerDflalg") || (sref == "DlgWdbeVerCustfst") || (sref == "DlgWdbeVerFinmod")) myif.setAttribute("height", "585");
+	if ((sref == "DlgWdbeVerDeploy") || (sref == "DlgWdbeVerMdlstr") || (sref == "DlgWdbeVerCmdset") || (sref == "DlgWdbeVerDflalg") || (sref == "DlgWdbeVerCustfst") || (sref == "DlgWdbeVerFinmod")) myif.setAttribute("height", "585");
 	else myif.setAttribute("height", "555");
 	myif.setAttribute("frameborder", "0");
 	myif.setAttribute("scrolling", "no");
@@ -380,6 +388,7 @@ function changeHeight(pnlshort, height) {
 function refresh() {
 	var scrJrefDlgcmdset = retrieveSi(srcdoc, "StatShrWdbeVer", "scrJrefDlgcmdset");
 	var scrJrefDlgcustfst = retrieveSi(srcdoc, "StatShrWdbeVer", "scrJrefDlgcustfst");
+	var scrJrefDlgdeploy = retrieveSi(srcdoc, "StatShrWdbeVer", "scrJrefDlgdeploy");
 	var scrJrefDlgdflalg = retrieveSi(srcdoc, "StatShrWdbeVer", "scrJrefDlgdflalg");
 	var scrJrefDlgfinmod = retrieveSi(srcdoc, "StatShrWdbeVer", "scrJrefDlgfinmod");
 	var scrJrefDlggenfst = retrieveSi(srcdoc, "StatShrWdbeVer", "scrJrefDlggenfst");
@@ -390,6 +399,8 @@ function refresh() {
 		if (scrJrefDlg != scrJrefDlgcmdset) showDlg("DlgWdbeVerCmdset", scrJrefDlgcmdset);
 	} else if (scrJrefDlgcustfst != "") {
 		if (scrJrefDlg != scrJrefDlgcustfst) showDlg("DlgWdbeVerCustfst", scrJrefDlgcustfst);
+	} else if (scrJrefDlgdeploy != "") {
+		if (scrJrefDlg != scrJrefDlgdeploy) showDlg("DlgWdbeVerDeploy", scrJrefDlgdeploy);
 	} else if (scrJrefDlgdflalg != "") {
 		if (scrJrefDlg != scrJrefDlgdflalg) showDlg("DlgWdbeVerDflalg", scrJrefDlgdflalg);
 	} else if (scrJrefDlgfinmod != "") {
@@ -402,7 +413,7 @@ function refresh() {
 		if (scrJrefDlg != scrJrefDlgnew) showDlg("DlgWdbeVerNew", scrJrefDlgnew);
 	} else if (scrJrefDlg != "") hideDlg();
 
-	doc.title = retrieveCi(srcdoc, "ContInfWdbeVer", "MtxCrdVer") + " - WhizniumDBE v1.1.17";
+	doc.title = retrieveCi(srcdoc, "ContInfWdbeVer", "MtxCrdVer") + " - WhizniumDBE v1.1.41";
 };
 
 // --- event handlers

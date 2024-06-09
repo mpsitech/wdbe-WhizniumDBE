@@ -66,7 +66,7 @@ public:
 		Sbecore::uint numFTos;
 
 	public:
-		bool readJSON(Json::Value& sup, bool addbasetag = false);
+		bool readJSON(const Json::Value& sup, bool addbasetag = false);
 		bool readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 		void writeJSON(Json::Value& sup, std::string difftag = "");
 		void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
@@ -136,14 +136,13 @@ public:
 		static const Sbecore::uint TCOTYPWIDTH = 4;
 		static const Sbecore::uint TCORETWIDTH = 5;
 		static const Sbecore::uint TCOREUWIDTH = 6;
-		static const Sbecore::uint TCOSYSWIDTH = 7;
-		static const Sbecore::uint TCOMDLWIDTH = 8;
-		static const Sbecore::uint TCOPKGWIDTH = 9;
-		static const Sbecore::uint TCOESYWIDTH = 10;
-		static const Sbecore::uint TCOTCHWIDTH = 11;
+		static const Sbecore::uint TCOMDLWIDTH = 7;
+		static const Sbecore::uint TCOPKGWIDTH = 8;
+		static const Sbecore::uint TCOESYWIDTH = 9;
+		static const Sbecore::uint TCOTCHWIDTH = 10;
 
 	public:
-		StgIac(const Sbecore::uint TcoSrfWidth = 100, const Sbecore::uint TcoTitWidth = 200, const Sbecore::uint TcoFsrWidth = 150, const Sbecore::uint TcoTypWidth = 100, const Sbecore::uint TcoRetWidth = 100, const Sbecore::uint TcoReuWidth = 250, const Sbecore::uint TcoSysWidth = 200, const Sbecore::uint TcoMdlWidth = 100, const Sbecore::uint TcoPkgWidth = 100, const Sbecore::uint TcoEsyWidth = 100, const Sbecore::uint TcoTchWidth = 100);
+		StgIac(const Sbecore::uint TcoSrfWidth = 100, const Sbecore::uint TcoTitWidth = 200, const Sbecore::uint TcoFsrWidth = 150, const Sbecore::uint TcoTypWidth = 100, const Sbecore::uint TcoRetWidth = 100, const Sbecore::uint TcoReuWidth = 250, const Sbecore::uint TcoMdlWidth = 100, const Sbecore::uint TcoPkgWidth = 100, const Sbecore::uint TcoEsyWidth = 100, const Sbecore::uint TcoTchWidth = 100);
 
 	public:
 		Sbecore::uint TcoSrfWidth;
@@ -152,14 +151,13 @@ public:
 		Sbecore::uint TcoTypWidth;
 		Sbecore::uint TcoRetWidth;
 		Sbecore::uint TcoReuWidth;
-		Sbecore::uint TcoSysWidth;
 		Sbecore::uint TcoMdlWidth;
 		Sbecore::uint TcoPkgWidth;
 		Sbecore::uint TcoEsyWidth;
 		Sbecore::uint TcoTchWidth;
 
 	public:
-		bool readJSON(Json::Value& sup, bool addbasetag = false);
+		bool readJSON(const Json::Value& sup, bool addbasetag = false);
 		bool readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 		void writeJSON(Json::Value& sup, std::string difftag = "");
 		void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
@@ -199,7 +197,7 @@ public:
 	public:
 		std::string getSrefsMask();
 
-		void readJSON(Json::Value& sup, bool addbasetag = false);
+		void readJSON(const Json::Value& sup, bool addbasetag = false);
 		void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 	};
 
@@ -221,7 +219,7 @@ public:
 	public:
 		std::string getSrefsMask();
 
-		void readJSON(Json::Value& sup, bool addbasetag = false);
+		void readJSON(const Json::Value& sup, bool addbasetag = false);
 		void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 	};
 

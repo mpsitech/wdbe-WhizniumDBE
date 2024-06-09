@@ -109,6 +109,7 @@ PnlWdbePrcRec::StatApp::StatApp(
 			, const bool initdoneRef1NVariable
 			, const bool initdoneMge1NSignal
 			, const bool initdoneFsmFsm1NFsmstate
+			, const bool initdoneFsmHk1NVector
 		) :
 			Block()
 		{
@@ -118,8 +119,9 @@ PnlWdbePrcRec::StatApp::StatApp(
 	this->initdoneRef1NVariable = initdoneRef1NVariable;
 	this->initdoneMge1NSignal = initdoneMge1NSignal;
 	this->initdoneFsmFsm1NFsmstate = initdoneFsmFsm1NFsmstate;
+	this->initdoneFsmHk1NVector = initdoneFsmHk1NVector;
 
-	mask = {INITDONEDETAIL, INITDONEKHDLTYPE, INITDONEREF1NSENSITIVITY, INITDONEREF1NVARIABLE, INITDONEMGE1NSIGNAL, INITDONEFSMFSM1NFSMSTATE};
+	mask = {INITDONEDETAIL, INITDONEKHDLTYPE, INITDONEREF1NSENSITIVITY, INITDONEREF1NVARIABLE, INITDONEMGE1NSIGNAL, INITDONEFSMFSM1NFSMSTATE, INITDONEFSMHK1NVECTOR};
 };
 
 bool PnlWdbePrcRec::StatApp::readXML(
@@ -145,6 +147,7 @@ bool PnlWdbePrcRec::StatApp::readXML(
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneRef1NVariable", initdoneRef1NVariable)) add(INITDONEREF1NVARIABLE);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneMge1NSignal", initdoneMge1NSignal)) add(INITDONEMGE1NSIGNAL);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneFsmFsm1NFsmstate", initdoneFsmFsm1NFsmstate)) add(INITDONEFSMFSM1NFSMSTATE);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneFsmHk1NVector", initdoneFsmHk1NVector)) add(INITDONEFSMHK1NVECTOR);
 	};
 
 	return basefound;
@@ -161,6 +164,7 @@ set<uint> PnlWdbePrcRec::StatApp::comm(
 	if (initdoneRef1NVariable == comp->initdoneRef1NVariable) insert(items, INITDONEREF1NVARIABLE);
 	if (initdoneMge1NSignal == comp->initdoneMge1NSignal) insert(items, INITDONEMGE1NSIGNAL);
 	if (initdoneFsmFsm1NFsmstate == comp->initdoneFsmFsm1NFsmstate) insert(items, INITDONEFSMFSM1NFSMSTATE);
+	if (initdoneFsmHk1NVector == comp->initdoneFsmHk1NVector) insert(items, INITDONEFSMHK1NVECTOR);
 
 	return(items);
 };
@@ -173,7 +177,7 @@ set<uint> PnlWdbePrcRec::StatApp::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {INITDONEDETAIL, INITDONEKHDLTYPE, INITDONEREF1NSENSITIVITY, INITDONEREF1NVARIABLE, INITDONEMGE1NSIGNAL, INITDONEFSMFSM1NFSMSTATE};
+	diffitems = {INITDONEDETAIL, INITDONEKHDLTYPE, INITDONEREF1NSENSITIVITY, INITDONEREF1NVARIABLE, INITDONEMGE1NSIGNAL, INITDONEFSMFSM1NFSMSTATE, INITDONEFSMHK1NVECTOR};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -192,6 +196,8 @@ PnlWdbePrcRec::StatShr::StatShr(
 			, const string& scrJrefMge1NSignal
 			, const string& scrJrefFsmFsm1NFsmstate
 			, const bool pnlfsmfsm1nfsmstateAvail
+			, const string& scrJrefFsmHk1NVector
+			, const bool pnlfsmhk1nvectorAvail
 			, const bool ButRegularizeActive
 		) :
 			Block()
@@ -204,9 +210,11 @@ PnlWdbePrcRec::StatShr::StatShr(
 	this->scrJrefMge1NSignal = scrJrefMge1NSignal;
 	this->scrJrefFsmFsm1NFsmstate = scrJrefFsmFsm1NFsmstate;
 	this->pnlfsmfsm1nfsmstateAvail = pnlfsmfsm1nfsmstateAvail;
+	this->scrJrefFsmHk1NVector = scrJrefFsmHk1NVector;
+	this->pnlfsmhk1nvectorAvail = pnlfsmhk1nvectorAvail;
 	this->ButRegularizeActive = ButRegularizeActive;
 
-	mask = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFKHDLTYPE, SCRJREFREF1NSENSITIVITY, SCRJREFREF1NVARIABLE, SCRJREFMGE1NSIGNAL, SCRJREFFSMFSM1NFSMSTATE, PNLFSMFSM1NFSMSTATEAVAIL, BUTREGULARIZEACTIVE};
+	mask = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFKHDLTYPE, SCRJREFREF1NSENSITIVITY, SCRJREFREF1NVARIABLE, SCRJREFMGE1NSIGNAL, SCRJREFFSMFSM1NFSMSTATE, PNLFSMFSM1NFSMSTATEAVAIL, SCRJREFFSMHK1NVECTOR, PNLFSMHK1NVECTORAVAIL, BUTREGULARIZEACTIVE};
 };
 
 bool PnlWdbePrcRec::StatShr::readXML(
@@ -239,6 +247,8 @@ bool PnlWdbePrcRec::StatShr::readXML(
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefMge1NSignal", scrJrefMge1NSignal)) add(SCRJREFMGE1NSIGNAL);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefFsmFsm1NFsmstate", scrJrefFsmFsm1NFsmstate)) add(SCRJREFFSMFSM1NFSMSTATE);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "pnlfsmfsm1nfsmstateAvail", pnlfsmfsm1nfsmstateAvail)) add(PNLFSMFSM1NFSMSTATEAVAIL);
+		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefFsmHk1NVector", scrJrefFsmHk1NVector)) add(SCRJREFFSMHK1NVECTOR);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "pnlfsmhk1nvectorAvail", pnlfsmhk1nvectorAvail)) add(PNLFSMHK1NVECTORAVAIL);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButRegularizeActive", ButRegularizeActive)) add(BUTREGULARIZEACTIVE);
 	};
 
@@ -258,6 +268,8 @@ set<uint> PnlWdbePrcRec::StatShr::comm(
 	if (scrJrefMge1NSignal == comp->scrJrefMge1NSignal) insert(items, SCRJREFMGE1NSIGNAL);
 	if (scrJrefFsmFsm1NFsmstate == comp->scrJrefFsmFsm1NFsmstate) insert(items, SCRJREFFSMFSM1NFSMSTATE);
 	if (pnlfsmfsm1nfsmstateAvail == comp->pnlfsmfsm1nfsmstateAvail) insert(items, PNLFSMFSM1NFSMSTATEAVAIL);
+	if (scrJrefFsmHk1NVector == comp->scrJrefFsmHk1NVector) insert(items, SCRJREFFSMHK1NVECTOR);
+	if (pnlfsmhk1nvectorAvail == comp->pnlfsmhk1nvectorAvail) insert(items, PNLFSMHK1NVECTORAVAIL);
 	if (ButRegularizeActive == comp->ButRegularizeActive) insert(items, BUTREGULARIZEACTIVE);
 
 	return(items);
@@ -271,7 +283,7 @@ set<uint> PnlWdbePrcRec::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFKHDLTYPE, SCRJREFREF1NSENSITIVITY, SCRJREFREF1NVARIABLE, SCRJREFMGE1NSIGNAL, SCRJREFFSMFSM1NFSMSTATE, PNLFSMFSM1NFSMSTATEAVAIL, BUTREGULARIZEACTIVE};
+	diffitems = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFKHDLTYPE, SCRJREFREF1NSENSITIVITY, SCRJREFREF1NVARIABLE, SCRJREFMGE1NSIGNAL, SCRJREFFSMFSM1NFSMSTATE, PNLFSMFSM1NFSMSTATEAVAIL, SCRJREFFSMHK1NVECTOR, PNLFSMHK1NVECTORAVAIL, BUTREGULARIZEACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);

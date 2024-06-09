@@ -67,6 +67,7 @@ public class PnlWdbePrcDetail {
 		public static final int TXFSNR = 4;
 		public static final int CHKEIP = 5;
 		public static final int TXFCMT = 6;
+		public static final int NUMFPUPFSMDTT = 7;
 
 		public ContIac(
 					String TxfClk
@@ -75,6 +76,7 @@ public class PnlWdbePrcDetail {
 					, String TxfSnr
 					, boolean ChkEip
 					, String TxfCmt
+					, int numFPupFsmDtt
 				) {
 			this.TxfClk = TxfClk;
 			this.TxfAsr = TxfAsr;
@@ -82,8 +84,9 @@ public class PnlWdbePrcDetail {
 			this.TxfSnr = TxfSnr;
 			this.ChkEip = ChkEip;
 			this.TxfCmt = TxfCmt;
+			this.numFPupFsmDtt = numFPupFsmDtt;
 
-			mask = new HashSet<Integer>(Arrays.asList(TXFCLK, TXFASR, CHKFAL, TXFSNR, CHKEIP, TXFCMT));
+			mask = new HashSet<Integer>(Arrays.asList(TXFCLK, TXFASR, CHKFAL, TXFSNR, CHKEIP, TXFCMT, NUMFPUPFSMDTT));
 		};
 
 		public String TxfClk;
@@ -92,6 +95,7 @@ public class PnlWdbePrcDetail {
 		public String TxfSnr;
 		public boolean ChkEip;
 		public String TxfCmt;
+		public int numFPupFsmDtt;
 
 		public boolean readXML(
 					Document doc
@@ -112,6 +116,7 @@ public class PnlWdbePrcDetail {
 				TxfSnr = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ci", "sref", "TxfSnr", mask, TXFSNR);
 				ChkEip = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Ci", "sref", "ChkEip", mask, CHKEIP);
 				TxfCmt = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ci", "sref", "TxfCmt", mask, TXFCMT);
+				numFPupFsmDtt = Xmlio.extractIntegerAttrUclc(doc, basexpath, itemtag, "Ci", "sref", "numFPupFsmDtt", mask, NUMFPUPFSMDTT);
 
 				return true;
 			};
@@ -143,6 +148,7 @@ public class PnlWdbePrcDetail {
 			Xmlio.writeStringAttr(doc, el, itemtag, "sref", "TxfSnr", TxfSnr);
 			Xmlio.writeBooleanAttr(doc, el, itemtag, "sref", "ChkEip", ChkEip);
 			Xmlio.writeStringAttr(doc, el, itemtag, "sref", "TxfCmt", TxfCmt);
+			Xmlio.writeIntegerAttr(doc, el, itemtag, "sref", "numFPupFsmDtt", numFPupFsmDtt);
 		};
 
 		public HashSet<Integer> comm(
@@ -156,6 +162,7 @@ public class PnlWdbePrcDetail {
 			if (TxfSnr.equals(comp.TxfSnr)) items.add(TXFSNR);
 			if (ChkEip == comp.ChkEip) items.add(CHKEIP);
 			if (TxfCmt.equals(comp.TxfCmt)) items.add(TXFCMT);
+			if (numFPupFsmDtt == comp.numFPupFsmDtt) items.add(NUMFPUPFSMDTT);
 
 			return(items);
 		};
@@ -168,7 +175,7 @@ public class PnlWdbePrcDetail {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(TXFCLK, TXFASR, CHKFAL, TXFSNR, CHKEIP, TXFCMT));
+			diffitems = new HashSet<Integer>(Arrays.asList(TXFCLK, TXFASR, CHKFAL, TXFSNR, CHKEIP, TXFCMT, NUMFPUPFSMDTT));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);
@@ -359,6 +366,8 @@ public class PnlWdbePrcDetail {
 		public static final int TXFCMTACTIVE = 16;
 		public static final int BUTFSMNEWAVAIL = 17;
 		public static final int BUTFSMDELETEAVAIL = 18;
+		public static final int PUPFSMDTTAVAIL = 19;
+		public static final int PUPFSMDTTACTIVE = 20;
 
 		public StatShr(
 					boolean TxfClkValid
@@ -379,6 +388,8 @@ public class PnlWdbePrcDetail {
 					, boolean TxfCmtActive
 					, boolean ButFsmNewAvail
 					, boolean ButFsmDeleteAvail
+					, boolean PupFsmDttAvail
+					, boolean PupFsmDttActive
 				) {
 			this.TxfClkValid = TxfClkValid;
 			this.TxfAsrValid = TxfAsrValid;
@@ -398,8 +409,10 @@ public class PnlWdbePrcDetail {
 			this.TxfCmtActive = TxfCmtActive;
 			this.ButFsmNewAvail = ButFsmNewAvail;
 			this.ButFsmDeleteAvail = ButFsmDeleteAvail;
+			this.PupFsmDttAvail = PupFsmDttAvail;
+			this.PupFsmDttActive = PupFsmDttActive;
 
-			mask = new HashSet<Integer>(Arrays.asList(TXFCLKVALID, TXFASRVALID, BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXTMDLACTIVE, BUTMDLVIEWAVAIL, BUTMDLVIEWACTIVE, TXTCLKACTIVE, BUTCLKVIEWAVAIL, TXTASRACTIVE, BUTASRVIEWAVAIL, CHKFALACTIVE, TXFSNRACTIVE, CHKEIPACTIVE, TXFCMTACTIVE, BUTFSMNEWAVAIL, BUTFSMDELETEAVAIL));
+			mask = new HashSet<Integer>(Arrays.asList(TXFCLKVALID, TXFASRVALID, BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXTMDLACTIVE, BUTMDLVIEWAVAIL, BUTMDLVIEWACTIVE, TXTCLKACTIVE, BUTCLKVIEWAVAIL, TXTASRACTIVE, BUTASRVIEWAVAIL, CHKFALACTIVE, TXFSNRACTIVE, CHKEIPACTIVE, TXFCMTACTIVE, BUTFSMNEWAVAIL, BUTFSMDELETEAVAIL, PUPFSMDTTAVAIL, PUPFSMDTTACTIVE));
 		};
 
 		public boolean TxfClkValid;
@@ -420,6 +433,8 @@ public class PnlWdbePrcDetail {
 		public boolean TxfCmtActive;
 		public boolean ButFsmNewAvail;
 		public boolean ButFsmDeleteAvail;
+		public boolean PupFsmDttAvail;
+		public boolean PupFsmDttActive;
 
 		public boolean readXML(
 					Document doc
@@ -452,6 +467,8 @@ public class PnlWdbePrcDetail {
 				TxfCmtActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxfCmtActive", mask, TXFCMTACTIVE);
 				ButFsmNewAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButFsmNewAvail", mask, BUTFSMNEWAVAIL);
 				ButFsmDeleteAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButFsmDeleteAvail", mask, BUTFSMDELETEAVAIL);
+				PupFsmDttAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "PupFsmDttAvail", mask, PUPFSMDTTAVAIL);
+				PupFsmDttActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "PupFsmDttActive", mask, PUPFSMDTTACTIVE);
 
 				return true;
 			};
@@ -482,6 +499,8 @@ public class PnlWdbePrcDetail {
 			if (TxfCmtActive == comp.TxfCmtActive) items.add(TXFCMTACTIVE);
 			if (ButFsmNewAvail == comp.ButFsmNewAvail) items.add(BUTFSMNEWAVAIL);
 			if (ButFsmDeleteAvail == comp.ButFsmDeleteAvail) items.add(BUTFSMDELETEAVAIL);
+			if (PupFsmDttAvail == comp.PupFsmDttAvail) items.add(PUPFSMDTTAVAIL);
+			if (PupFsmDttActive == comp.PupFsmDttActive) items.add(PUPFSMDTTACTIVE);
 
 			return(items);
 		};
@@ -494,7 +513,7 @@ public class PnlWdbePrcDetail {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(TXFCLKVALID, TXFASRVALID, BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXTMDLACTIVE, BUTMDLVIEWAVAIL, BUTMDLVIEWACTIVE, TXTCLKACTIVE, BUTCLKVIEWAVAIL, TXTASRACTIVE, BUTASRVIEWAVAIL, CHKFALACTIVE, TXFSNRACTIVE, CHKEIPACTIVE, TXFCMTACTIVE, BUTFSMNEWAVAIL, BUTFSMDELETEAVAIL));
+			diffitems = new HashSet<Integer>(Arrays.asList(TXFCLKVALID, TXFASRVALID, BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXTMDLACTIVE, BUTMDLVIEWAVAIL, BUTMDLVIEWACTIVE, TXTCLKACTIVE, BUTCLKVIEWAVAIL, TXTASRACTIVE, BUTASRVIEWAVAIL, CHKFALACTIVE, TXFSNRACTIVE, CHKEIPACTIVE, TXFCMTACTIVE, BUTFSMNEWAVAIL, BUTFSMDELETEAVAIL, PUPFSMDTTAVAIL, PUPFSMDTTACTIVE));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);
@@ -517,6 +536,7 @@ public class PnlWdbePrcDetail {
 		public static final int CPTEIP = 8;
 		public static final int CPTCMT = 9;
 		public static final int HDGFSM = 10;
+		public static final int CPTFSMDTT = 11;
 
 		public Tag(
 					String Cpt
@@ -529,6 +549,7 @@ public class PnlWdbePrcDetail {
 					, String CptEip
 					, String CptCmt
 					, String HdgFsm
+					, String CptFsmDtt
 				) {
 			this.Cpt = Cpt;
 			this.CptSrf = CptSrf;
@@ -540,8 +561,9 @@ public class PnlWdbePrcDetail {
 			this.CptEip = CptEip;
 			this.CptCmt = CptCmt;
 			this.HdgFsm = HdgFsm;
+			this.CptFsmDtt = CptFsmDtt;
 
-			mask = new HashSet<Integer>(Arrays.asList(CPT, CPTSRF, CPTMDL, CPTCLK, CPTASR, CPTFAL, CPTSNR, CPTEIP, CPTCMT, HDGFSM));
+			mask = new HashSet<Integer>(Arrays.asList(CPT, CPTSRF, CPTMDL, CPTCLK, CPTASR, CPTFAL, CPTSNR, CPTEIP, CPTCMT, HDGFSM, CPTFSMDTT));
 		};
 
 		public String Cpt;
@@ -554,6 +576,7 @@ public class PnlWdbePrcDetail {
 		public String CptEip;
 		public String CptCmt;
 		public String HdgFsm;
+		public String CptFsmDtt;
 
 		public boolean readXML(
 					Document doc
@@ -578,6 +601,7 @@ public class PnlWdbePrcDetail {
 				CptEip = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "CptEip", mask, CPTEIP);
 				CptCmt = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "CptCmt", mask, CPTCMT);
 				HdgFsm = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "HdgFsm", mask, HDGFSM);
+				CptFsmDtt = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "CptFsmDtt", mask, CPTFSMDTT);
 
 				return true;
 			};
@@ -600,6 +624,7 @@ public class PnlWdbePrcDetail {
 			if (CptEip.equals(comp.CptEip)) items.add(CPTEIP);
 			if (CptCmt.equals(comp.CptCmt)) items.add(CPTCMT);
 			if (HdgFsm.equals(comp.HdgFsm)) items.add(HDGFSM);
+			if (CptFsmDtt.equals(comp.CptFsmDtt)) items.add(CPTFSMDTT);
 
 			return(items);
 		};
@@ -612,7 +637,7 @@ public class PnlWdbePrcDetail {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(CPT, CPTSRF, CPTMDL, CPTCLK, CPTASR, CPTFAL, CPTSNR, CPTEIP, CPTCMT, HDGFSM));
+			diffitems = new HashSet<Integer>(Arrays.asList(CPT, CPTSRF, CPTMDL, CPTCLK, CPTASR, CPTFAL, CPTSNR, CPTEIP, CPTCMT, HDGFSM, CPTFSMDTT));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);
@@ -738,22 +763,25 @@ public class PnlWdbePrcDetail {
 		public static final int SCRJREF = 1;
 		public static final int CONTIAC = 2;
 		public static final int CONTINF = 3;
-		public static final int STATAPP = 4;
-		public static final int STATSHR = 5;
-		public static final int TAG = 6;
+		public static final int FEEDFPUPFSMDTT = 4;
+		public static final int STATAPP = 5;
+		public static final int STATSHR = 6;
+		public static final int TAG = 7;
 
 		public DpchEngData() {
 			super(VecWdbeVDpch.DPCHENGWDBEPRCDETAILDATA);
 
-			contiac = new ContIac("", "", false, "", false, "");
+			contiac = new ContIac("", "", false, "", false, "", 0);
 			continf = new ContInf("", "", "", "");
+			feedFPupFsmDtt = new Feed("FeedFPupFsmDtt");
 			statapp = new StatApp(0, false, false);
-			statshr = new StatShr(false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false);
-			tag = new Tag("", "", "", "", "", "", "", "", "", "");
+			statshr = new StatShr(false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false);
+			tag = new Tag("", "", "", "", "", "", "", "", "", "", "");
 		};
 
 		public ContIac contiac;
 		public ContInf continf;
+		public Feed feedFPupFsmDtt;
 		public StatApp statapp;
 		public StatShr statshr;
 		public Tag tag;
@@ -764,6 +792,7 @@ public class PnlWdbePrcDetail {
 			if (has(SCRJREF)) ss.add("scrJref");
 			if (has(CONTIAC)) ss.add("contiac");
 			if (has(CONTINF)) ss.add("continf");
+			if (has(FEEDFPUPFSMDTT)) ss.add("feedFPupFsmDtt");
 			if (has(STATAPP)) ss.add("statapp");
 			if (has(STATSHR)) ss.add("statshr");
 			if (has(TAG)) ss.add("tag");
@@ -785,16 +814,18 @@ public class PnlWdbePrcDetail {
 				scrJref = Xmlio.extractStringUclc(doc, basexpath, "scrJref", "", mask, SCRJREF);
 				if (contiac.readXML(doc, basexpath, true)) add(CONTIAC);
 				if (continf.readXML(doc, basexpath, true)) add(CONTINF);
+				if (feedFPupFsmDtt.readXML(doc, basexpath, true)) add(FEEDFPUPFSMDTT);
 				if (statapp.readXML(doc, basexpath, true)) add(STATAPP);
 				if (statshr.readXML(doc, basexpath, true)) add(STATSHR);
 				if (tag.readXML(doc, basexpath, true)) add(TAG);
 			} else {
 				scrJref = "";
-				contiac = new ContIac("", "", false, "", false, "");
+				contiac = new ContIac("", "", false, "", false, "", 0);
 				continf = new ContInf("", "", "", "");
+				feedFPupFsmDtt = new Feed("FeedFPupFsmDtt");
 				statapp = new StatApp(0, false, false);
-				statshr = new StatShr(false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false);
-				tag = new Tag("", "", "", "", "", "", "", "", "", "");
+				statshr = new StatShr(false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false);
+				tag = new Tag("", "", "", "", "", "", "", "", "", "", "");
 			};
 		};
 

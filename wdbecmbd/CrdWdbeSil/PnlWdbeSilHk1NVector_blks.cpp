@@ -61,7 +61,7 @@ void PnlWdbeSilHk1NVector::ContInf::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["numFCsiQst"] = numFCsiQst;
+	me["numFCsiQst"] = (Json::Value::UInt) numFCsiQst;
 };
 
 void PnlWdbeSilHk1NVector::ContInf::writeXML(
@@ -236,15 +236,14 @@ PnlWdbeSilHk1NVector::StgIac::StgIac(
 };
 
 bool PnlWdbeSilHk1NVector::StgIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["StgIacWdbeSilHk1NVector"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["StgIacWdbeSilHk1NVector"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -286,7 +285,7 @@ void PnlWdbeSilHk1NVector::StgIac::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["TcoRefWidth"] = TcoRefWidth;
+	me["TcoRefWidth"] = (Json::Value::UInt) TcoRefWidth;
 };
 
 void PnlWdbeSilHk1NVector::StgIac::writeXML(
@@ -401,15 +400,14 @@ string PnlWdbeSilHk1NVector::DpchAppData::getSrefsMask() {
 };
 
 void PnlWdbeSilHk1NVector::DpchAppData::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbeSilHk1NVectorData"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbeSilHk1NVectorData"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -475,15 +473,14 @@ string PnlWdbeSilHk1NVector::DpchAppDo::getSrefsMask() {
 };
 
 void PnlWdbeSilHk1NVector::DpchAppDo::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbeSilHk1NVectorDo"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbeSilHk1NVectorDo"];}();
 
 	basefound = (me != Json::nullValue);
 

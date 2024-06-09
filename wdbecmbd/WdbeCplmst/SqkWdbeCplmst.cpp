@@ -17,20 +17,12 @@ using namespace Xmlio;
  namespace SqkWdbeCplmst
  ******************************************************************************/
 
-string SqkWdbeCplmst::getSquawkCtrEctr(
+string SqkWdbeCplmst::getSquawkCtrEctrHostifEhostif(
 			DbsWdbe* dbswdbe
-			, DpchInvWdbeCplmstCtrEctr* dpchinv
+			, DpchInvWdbeCplmstCtrEctrHostifEhostif* dpchinv
 		) {
 	// example: "add controller for module 'dcx3-pmmu (controller)'"
-	return(""); // IP getSquawkCtrEctr --- LINE
-};
-
-string SqkWdbeCplmst::getSquawkFwdctr(
-			DbsWdbe* dbswdbe
-			, DpchInvWdbeCplmstFwdctr* dpchinv
-		) {
-	// example: "add read and write buffers and commands for module 'dcx3-qcdif (spifwd_v1_0 forwarding controller)'"
-	return(""); // IP getSquawkFwdctr --- LINE
+	return(""); // IP getSquawkCtrEctrHostifEhostif --- LINE
 };
 
 string SqkWdbeCplmst::getSquawkImbuf(
@@ -39,14 +31,6 @@ string SqkWdbeCplmst::getSquawkImbuf(
 		) {
 	// example: "add parameters for module 'icm2-acq-buf (dpbram_v1_0)'"
 	return(""); // IP getSquawkImbuf --- LINE
-};
-
-string SqkWdbeCplmst::getSquawkSys(
-			DbsWdbe* dbswdbe
-			, DpchInvWdbeCplmstSys* dpchinv
-		) {
-	// example: "add standard vectors for version 'ICARUSDetectorHardwareControl 0.1.0'"
-	return(""); // IP getSquawkSys --- LINE
 };
 
 string SqkWdbeCplmst::getSquawkTplcpy(

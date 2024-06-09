@@ -279,9 +279,9 @@ uint WdbedOpprc::readDpchRet(
 	} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHRETWDBECPLMSTTPLCPY) {
 		req->dpchret = new DpchRetWdbeCplmstTplcpy();
 		((DpchRetWdbeCplmstTplcpy*) (req->dpchret))->readXML(docctx, "/", true);
-	} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHRETWDBEGENTEST) {
-		req->dpchret = new DpchRetWdbeGenTest();
-		((DpchRetWdbeGenTest*) (req->dpchret))->readXML(docctx, "/", true);
+	} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHRETWDBEGENAUX) {
+		req->dpchret = new DpchRetWdbeGenAux();
+		((DpchRetWdbeGenAux*) (req->dpchret))->readXML(docctx, "/", true);
 	} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHRETWDBEGENWIRING) {
 		req->dpchret = new DpchRetWdbeGenWiring();
 		((DpchRetWdbeGenWiring*) (req->dpchret))->readXML(docctx, "/", true);
@@ -297,12 +297,9 @@ uint WdbedOpprc::readDpchRet(
 	} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHRETWDBEPLHFPGACMDRET) {
 		req->dpchret = new DpchRetWdbePlhfpgaCmdret();
 		((DpchRetWdbePlhfpgaCmdret*) (req->dpchret))->readXML(docctx, "/", true);
-	} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHRETWDBEPLHFPGAEHOSTIF) {
-		req->dpchret = new DpchRetWdbePlhfpgaEhostif();
-		((DpchRetWdbePlhfpgaEhostif*) (req->dpchret))->readXML(docctx, "/", true);
-	} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHRETWDBEPLHFPGAFWDCTR) {
-		req->dpchret = new DpchRetWdbePlhfpgaFwdctr();
-		((DpchRetWdbePlhfpgaFwdctr*) (req->dpchret))->readXML(docctx, "/", true);
+	} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHRETWDBEPLHFPGACTR) {
+		req->dpchret = new DpchRetWdbePlhfpgaCtr();
+		((DpchRetWdbePlhfpgaCtr*) (req->dpchret))->readXML(docctx, "/", true);
 	} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHRETWDBEPLHMCUECTR) {
 		req->dpchret = new DpchRetWdbePlhmcuEctr();
 		((DpchRetWdbePlhmcuEctr*) (req->dpchret))->readXML(docctx, "/", true);

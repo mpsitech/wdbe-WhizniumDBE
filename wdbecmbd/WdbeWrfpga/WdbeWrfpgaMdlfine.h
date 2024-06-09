@@ -20,7 +20,7 @@ namespace WdbeWrfpgaMdlfine {
 	// IP cust --- IBEGIN
 
 	void writeMdlVhd(DbsWdbe* dbswdbe, std::fstream& outfile, WdbeMModule* mdl);
-	void writeMdlVhd_reset(std::fstream& outfile, const Sbecore::ubigint refWdbeMProcess, ListWdbeMSignal& sigs, ListWdbeMVariable& vars, const bool syncNotAsync, const unsigned int il);
+	void writeMdlVhd_reset(std::fstream& outfile, const Sbecore::uint mgeIxVTbl, const Sbecore::ubigint mgeUref, ListWdbeMSignal& sigs, ListWdbeMVariable& vars, const unsigned int il);
 
 	std::string expandCond(const std::string& Cond, const std::string& Prcsref, std::set<std::string>& srefsSlprtsigs, std::set<std::string>& srefsSlvars, const unsigned int maxlen, const unsigned int indent);
 	std::string expandCond_getTknstr(const std::string& sin, std::vector<unsigned int>& tkns, std::vector<unsigned int>& ptrsTkns, const unsigned int ix);

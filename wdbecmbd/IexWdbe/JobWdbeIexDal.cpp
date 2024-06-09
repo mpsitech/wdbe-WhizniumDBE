@@ -339,7 +339,6 @@ uint JobWdbeIexDal::enterSgeImport(
 				unt->refIxVTbl = unt_r->refIxVTbl;
 				unt->refUref = unt_r->refUref;
 				unt->silRefWdbeMUnit = unt_r->silRefWdbeMUnit;
-				unt->refWdbeMSystem = unt_r->refWdbeMSystem;
 				unt->refWdbeMModule = unt_r->refWdbeMModule;
 				//unt->sref = unt_r->sref;
 				unt->Fullsref = unt_r->Fullsref;
@@ -413,12 +412,18 @@ uint JobWdbeIexDal::enterSgeImport(
 
 						//seg->refWdbeCSegment: PREVIMP
 						if (seg->irefRefWdbeCSegment != 0) {
-							for (unsigned int i = 0; i < ppl->imeicsegment.nodes.size(); i++)
-								if (ppl->imeicsegment.nodes[i]->iref == seg->irefRefWdbeCSegment) {
-									seg->refWdbeCSegment = ppl->imeicsegment.nodes[i]->ref;
-									break;
+							if (irefs3.find(seg->irefRefWdbeCSegment) == irefs3.end()) {
+								segC = new ImeitemICSegment(seg->irefRefWdbeCSegment);
+								segC->ref = dbswdbe->tblwdbecsegment->getNewRef();
+								ppl->imeicsegment.nodes.push_back(segC);
+								irefs3.insert(segC->iref);
+							} else {
+								for (unsigned int i = 0; i < ppl->imeicsegment.nodes.size(); i++) {
+									segC = ppl->imeicsegment.nodes[i];
+									if (segC->iref == seg->irefRefWdbeCSegment) break;
 								};
-							if (seg->refWdbeCSegment == 0) throw SbeException(SbeException::IEX_IREF, {{"iref",to_string(seg->irefRefWdbeCSegment)}, {"iel","irefRefWdbeCSegment"}, {"lineno",to_string(seg->lineno)}});
+							};
+							seg->refWdbeCSegment = segC->ref;
 						};
 						seg->pplRefWdbeMPipeline = ppl->ref;
 						seg->pplNum = num3++;

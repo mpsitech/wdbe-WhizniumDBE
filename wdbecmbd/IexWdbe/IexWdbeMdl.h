@@ -18,14 +18,6 @@
 
 #define VecVIexWdbeMdlIme IexWdbeMdl::VecVIme
 
-#define ImeitemIWdbeMdlMTarget IexWdbeMdl::ImeitemIMTarget
-#define ImeIWdbeMdlMTarget IexWdbeMdl::ImeIMTarget
-#define VecWImeIWdbeMdlMTargetIel IexWdbeMdl::ImeIMTarget::VecWIel
-
-#define ImeitemIWdbeMdlMSystem IexWdbeMdl::ImeitemIMSystem
-#define ImeIWdbeMdlMSystem IexWdbeMdl::ImeIMSystem
-#define VecWImeIWdbeMdlMSystemIel IexWdbeMdl::ImeIMSystem::VecWIel
-
 #define ImeitemIWdbeMdlAMModulePar IexWdbeMdl::ImeitemIAMModulePar
 #define ImeIWdbeMdlAMModulePar IexWdbeMdl::ImeIAMModulePar
 #define VecWImeIWdbeMdlAMModuleParIel IexWdbeMdl::ImeIAMModulePar::VecWIel
@@ -83,139 +75,12 @@ namespace IexWdbeMdl {
 		static const Sbecore::uint IMEIMIMBUF = 5;
 		static const Sbecore::uint IMEIMMODULE = 6;
 		static const Sbecore::uint IMEIMPERIPHERAL = 7;
-		static const Sbecore::uint IMEIMSYSTEM = 8;
-		static const Sbecore::uint IMEIMTARGET = 9;
-		static const Sbecore::uint IMEIMUNIT = 10;
-		static const Sbecore::uint IMEIRMMODULEMMODULE = 11;
-		static const Sbecore::uint IMEIRMMODULEMPERIPHERAL = 12;
+		static const Sbecore::uint IMEIMUNIT = 8;
+		static const Sbecore::uint IMEIRMMODULEMMODULE = 9;
+		static const Sbecore::uint IMEIRMMODULEMPERIPHERAL = 10;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);
-	};
-
-	/**
-		* ImeitemIMTarget (full: ImeitemIWdbeMdlMTarget)
-		*/
-	class ImeitemIMTarget : public WdbeMTarget {
-
-	public:
-		ImeitemIMTarget(const std::string& srefRefWdbeMUnit = "", const std::string& sref = "", const std::string& rteSrefsWdbeMModule = "", const std::string& Comment = "");
-		ImeitemIMTarget(DbsWdbe* dbswdbe, const Sbecore::ubigint ref);
-
-	public:
-		Sbecore::uint lineno;
-		Sbecore::uint ixWIelValid;
-
-		std::string srefRefWdbeMUnit;
-
-	public:
-		void readTxt(Sbecore::Txtrd& txtrd);
-		void readXML(xmlXPathContext* docctx, const std::string& basexpath);
-
-		void writeTxt(std::fstream& outfile);
-		void writeXML(xmlTextWriter* wr, const Sbecore::uint num, const bool shorttags = true);
-	};
-
-	/**
-		* ImeIMTarget (full: ImeIWdbeMdlMTarget)
-		*/
-	class ImeIMTarget {
-
-	public:
-		/**
-			* VecWIel (full: VecWImeIWdbeMdlMTargetIel)
-			*/
-		class VecWIel {
-
-		public:
-			static const Sbecore::uint SREFREFWDBEMUNIT = 1;
-			static const Sbecore::uint SREF = 2;
-			static const Sbecore::uint RTESREFSWDBEMMODULE = 4;
-			static const Sbecore::uint COMMENT = 8;
-
-			static Sbecore::uint getIx(const std::string& srefs);
-			static void getIcs(const Sbecore::uint ix, std::set<Sbecore::uint>& ics);
-			static std::string getSrefs(const Sbecore::uint ix);
-		};
-
-	public:
-		ImeIMTarget();
-		~ImeIMTarget();
-
-	public:
-		std::vector<ImeitemIMTarget*> nodes;
-
-	public:
-		void clear();
-
-		void readTxt(Sbecore::Txtrd& txtrd);
-		void readXML(xmlXPathContext* docctx, std::string basexpath);
-
-		void writeTxt(std::fstream& outfile);
-		void writeXML(xmlTextWriter* wr, const bool shorttags = true);
-	};
-
-	/**
-		* ImeitemIMSystem (full: ImeitemIWdbeMdlMSystem)
-		*/
-	class ImeitemIMSystem : public WdbeMSystem {
-
-	public:
-		ImeitemIMSystem(const std::string& srefRefWdbeMUnit = "", const std::string& sref = "", const std::string& Comment = "");
-		ImeitemIMSystem(DbsWdbe* dbswdbe, const Sbecore::ubigint ref);
-
-	public:
-		Sbecore::uint lineno;
-		Sbecore::uint ixWIelValid;
-
-		std::string srefRefWdbeMUnit;
-
-		ImeIMTarget imeimtarget;
-
-	public:
-		void readTxt(Sbecore::Txtrd& txtrd);
-		void readXML(xmlXPathContext* docctx, const std::string& basexpath);
-
-		void writeTxt(std::fstream& outfile);
-		void writeXML(xmlTextWriter* wr, const Sbecore::uint num, const bool shorttags = true);
-	};
-
-	/**
-		* ImeIMSystem (full: ImeIWdbeMdlMSystem)
-		*/
-	class ImeIMSystem {
-
-	public:
-		/**
-			* VecWIel (full: VecWImeIWdbeMdlMSystemIel)
-			*/
-		class VecWIel {
-
-		public:
-			static const Sbecore::uint SREFREFWDBEMUNIT = 1;
-			static const Sbecore::uint SREF = 2;
-			static const Sbecore::uint COMMENT = 4;
-
-			static Sbecore::uint getIx(const std::string& srefs);
-			static void getIcs(const Sbecore::uint ix, std::set<Sbecore::uint>& ics);
-			static std::string getSrefs(const Sbecore::uint ix);
-		};
-
-	public:
-		ImeIMSystem();
-		~ImeIMSystem();
-
-	public:
-		std::vector<ImeitemIMSystem*> nodes;
-
-	public:
-		void clear();
-
-		void readTxt(Sbecore::Txtrd& txtrd);
-		void readXML(xmlXPathContext* docctx, std::string basexpath);
-
-		void writeTxt(std::fstream& outfile);
-		void writeXML(xmlTextWriter* wr, const bool shorttags = true);
 	};
 
 	/**
@@ -282,14 +147,12 @@ namespace IexWdbeMdl {
 	class ImeitemIMController : public WdbeMController {
 
 	public:
-		ImeitemIMController(const std::string& srefFwdRefWdbeMUnit = "");
+		ImeitemIMController();
 		ImeitemIMController(DbsWdbe* dbswdbe, const Sbecore::ubigint ref);
 
 	public:
 		Sbecore::uint lineno;
 		Sbecore::uint ixWIelValid;
-
-		std::string srefFwdRefWdbeMUnit;
 
 	public:
 		void readTxt(Sbecore::Txtrd& txtrd);
@@ -311,7 +174,6 @@ namespace IexWdbeMdl {
 		class VecWIel {
 
 		public:
-			static const Sbecore::uint SREFFWDREFWDBEMUNIT = 1;
 
 			static Sbecore::uint getIx(const std::string& srefs);
 			static void getIcs(const Sbecore::uint ix, std::set<Sbecore::uint>& ics);
@@ -833,14 +695,14 @@ namespace IexWdbeMdl {
 		void writeXML(xmlTextWriter* wr, const bool shorttags = true);
 	};
 
-	void parseFromFile(const std::string& fullpath, const bool xmlNotTxt, const std::string& rectpath, ImeIMSystem& imeimsystem, ImeIMUnit& imeimunit);
-	void exportToFile(const std::string& fullpath, const bool xmlNotTxt, const bool shorttags, ImeIMSystem& imeimsystem, ImeIMUnit& imeimunit);
+	void parseFromFile(const std::string& fullpath, const bool xmlNotTxt, const std::string& rectpath, ImeIMUnit& imeimunit);
+	void exportToFile(const std::string& fullpath, const bool xmlNotTxt, const bool shorttags, ImeIMUnit& imeimunit);
 
-	void readTxt(Sbecore::Txtrd& txtrd, ImeIMSystem& imeimsystem, ImeIMUnit& imeimunit);
-	void readXML(xmlXPathContext* docctx, std::string basexpath, ImeIMSystem& imeimsystem, ImeIMUnit& imeimunit);
+	void readTxt(Sbecore::Txtrd& txtrd, ImeIMUnit& imeimunit);
+	void readXML(xmlXPathContext* docctx, std::string basexpath, ImeIMUnit& imeimunit);
 
-	void writeTxt(std::fstream& outfile, ImeIMSystem& imeimsystem, ImeIMUnit& imeimunit);
-	void writeXML(xmlTextWriter* wr, const bool shorttags, ImeIMSystem& imeimsystem, ImeIMUnit& imeimunit);
+	void writeTxt(std::fstream& outfile, ImeIMUnit& imeimunit);
+	void writeXML(xmlTextWriter* wr, const bool shorttags, ImeIMUnit& imeimunit);
 
 	std::map<Sbecore::uint,Sbecore::uint> icsWdbeVIopInsAll();
 	Sbecore::uint getIxWdbeVIop(const std::map<Sbecore::uint,Sbecore::uint>& icsWdbeVIop, const Sbecore::uint ixVIme, Sbecore::uint& ixWdbeVIop);

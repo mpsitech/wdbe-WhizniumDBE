@@ -178,7 +178,7 @@ void WdbeWrdevCtr::writeCtrH(
 	outfile << "// IP vecs --- IBEGIN" << endl;
 	for (unsigned int i = 0; i < vecs.nodes.size(); i++) {
 		vec = vecs.nodes[i];
-		writeVecH(dbswdbe, outfile, vec, NULL, NULL, ctr, true, 1);
+		writeVecH(dbswdbe, outfile, vec, NULL, ctr, true, 1);
 	};
 	outfile << "// IP vecs --- IEND" << endl;
 
@@ -189,6 +189,18 @@ void WdbeWrdevCtr::writeCtrH(
 	// --- constructor.full*
 	if (!Easy) outfile << "// IP constructor.full --- AFFIRM" << endl;
 	else outfile << "// IP constructor.full --- REMOVE" << endl;
+
+	// --- cmdvars
+	outfile << "// IP cmdvars --- IBEGIN" << endl;
+	if (Easy) {
+		outfile << "public:" << endl;
+
+		for (unsigned int i = 0; i < cmds.nodes.size(); i++) {
+			cmd = cmds.nodes[i];
+			outfile << "\tDbecore::Cmd* cmd" << StrMod::cap(cmd->sref) << " ;" << endl;
+		};
+	};
+	outfile << "// IP cmdvars --- IEND" << endl;
 
 	// --- cmds
 	outfile << "// IP cmds --- IBEGIN" << endl;
@@ -255,7 +267,7 @@ void WdbeWrdevCtr::writeCtrCpp(
 	outfile << "// IP vecs --- IBEGIN" << endl;
 	for (unsigned int i = 0; i < vecs.nodes.size(); i++) {
 		vec = vecs.nodes[i];
-		writeVecCpp(dbswdbe, outfile, vec, NULL, NULL, ctr, true);
+		writeVecCpp(dbswdbe, outfile, vec, NULL, ctr, true);
 	};
 	outfile << "// IP vecs --- IEND" << endl;
 
@@ -263,9 +275,33 @@ void WdbeWrdevCtr::writeCtrCpp(
 	if (Easy) outfile << "// IP constructor.easy --- AFFIRM" << endl;
 	else outfile << "// IP constructor.easy --- REMOVE" << endl;
 
+	// --- constructor.cmdvars
+	outfile << "// IP constructor.cmdvars --- IBEGIN" << endl;
+	if (Easy) {
+		for (unsigned int i = 0; i < cmds.nodes.size(); i++) {
+			cmd = cmds.nodes[i];
+			outfile << "\tcmd" << StrMod::cap(cmd->sref) << " = getNewCmd" << StrMod::cap(cmd->sref) << "();" << endl;
+		};
+	};
+	outfile << "// IP constructor.cmdvars --- IEND" << endl;
+
 	// --- constructor.full*
 	if (!Easy) outfile << "// IP constructor.full --- AFFIRM" << endl;
 	else outfile << "// IP constructor.full --- REMOVE" << endl;
+
+	// --- destructor.easy*
+	if (Easy) outfile << "// IP destructor.easy --- AFFIRM" << endl;
+	else outfile << "// IP destructor.easy --- REMOVE" << endl;
+
+	// --- destructor.cmdvars
+	outfile << "// IP destructor.cmdvars --- IBEGIN" << endl;
+	if (Easy) {
+		for (unsigned int i = 0; i < cmds.nodes.size(); i++) {
+			cmd = cmds.nodes[i];
+			outfile << "\tdelete cmd" << StrMod::cap(cmd->sref) << ";" << endl;
+		};
+	};
+	outfile << "// IP destructor.cmdvars --- IEND" << endl;
 
 	// --- getNewCmd
 	outfile << "// IP getNewCmd --- IBEGIN" << endl;
@@ -274,7 +310,7 @@ void WdbeWrdevCtr::writeCtrCpp(
 
 		outfile << "\t";
 		if (i != 0) outfile << "else ";
-		outfile << "if (tixVCommand == VecVCommand::" << StrMod::uc(cmd->sref) << ") cmd = getNewCmd" << StrMod::cap(cmd->sref) << "();" << endl;
+		outfile << "if (tixVCommand == VecVCommand::" << getVitConst(cmd->sref, true) << ") cmd = getNewCmd" << StrMod::cap(cmd->sref) << "();" << endl;
 	};
 	outfile << "// IP getNewCmd --- IEND" << endl;
 

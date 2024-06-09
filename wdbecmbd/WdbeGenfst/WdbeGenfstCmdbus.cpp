@@ -104,7 +104,7 @@ DpchRetWdbe* WdbeGenfstCmdbus::run(
 		for (unsigned int i = 0; i < mdls.nodes.size(); i++) {
 			mdl = mdls.nodes[i];
 
-			if ((mdl->ixVBasetype == VecWdbeVMModuleBasetype::CTR) || (mdl->ixVBasetype == VecWdbeVMModuleBasetype::FWDCTR))
+			if ((mdl->ixVBasetype == VecWdbeVMModuleBasetype::CTR) || (mdl->ixVBasetype == VecWdbeVMModuleBasetype::DBGCTR))
 						getMaxlenRecvSend(dbswdbe, VecWdbeVMCommandRefTbl::CTR, mdl->refWdbeMController, maxlenRecv, maxlenSend);
 		};
 
@@ -169,11 +169,11 @@ DpchRetWdbe* WdbeGenfstCmdbus::run(
 
 			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OPRT, 0, VecWdbeVMSignalRefTbl::MDL, refCmdbus, 2, VecWdbeVMSignalMgeTbl::PRC, refPrcArb, 0, "ack", false, "slvdn", pairsCmdbus.size(), "", "", "", "0", false, refPrtAck, "");
 
-			// - cmdinv/cmdret/ctr/fwdctr ports
+			// - cmdinv/cmdret/ctr ports
 			for (unsigned int i = 0; i < mdls.nodes.size(); i++) {
 				mdl = mdls.nodes[i];
 
-				if ((mdl->ixVBasetype == VecWdbeVMModuleBasetype::CMDINV) || (mdl->ixVBasetype == VecWdbeVMModuleBasetype::CMDRET) || (mdl->ixVBasetype == VecWdbeVMModuleBasetype::CTR) || (mdl->ixVBasetype == VecWdbeVMModuleBasetype::FWDCTR)) {
+				if ((mdl->ixVBasetype == VecWdbeVMModuleBasetype::CMDINV) || (mdl->ixVBasetype == VecWdbeVMModuleBasetype::CMDRET) || (mdl->ixVBasetype == VecWdbeVMModuleBasetype::CTR) || (mdl->ixVBasetype == VecWdbeVMModuleBasetype::DBGCTR)) {
 					found = false;
 					ixVDir = VecWdbeVMPortDir::IN;
 

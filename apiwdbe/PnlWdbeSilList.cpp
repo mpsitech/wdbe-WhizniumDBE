@@ -268,7 +268,6 @@ PnlWdbeSilList::StgIac::StgIac(
 			, const uint TcoTypWidth
 			, const uint TcoRetWidth
 			, const uint TcoReuWidth
-			, const uint TcoSysWidth
 			, const uint TcoMdlWidth
 			, const uint TcoPkgWidth
 			, const uint TcoEsyWidth
@@ -282,13 +281,12 @@ PnlWdbeSilList::StgIac::StgIac(
 	this->TcoTypWidth = TcoTypWidth;
 	this->TcoRetWidth = TcoRetWidth;
 	this->TcoReuWidth = TcoReuWidth;
-	this->TcoSysWidth = TcoSysWidth;
 	this->TcoMdlWidth = TcoMdlWidth;
 	this->TcoPkgWidth = TcoPkgWidth;
 	this->TcoEsyWidth = TcoEsyWidth;
 	this->TcoTchWidth = TcoTchWidth;
 
-	mask = {TCOSRFWIDTH, TCOTITWIDTH, TCOFSRWIDTH, TCOTYPWIDTH, TCORETWIDTH, TCOREUWIDTH, TCOSYSWIDTH, TCOMDLWIDTH, TCOPKGWIDTH, TCOESYWIDTH, TCOTCHWIDTH};
+	mask = {TCOSRFWIDTH, TCOTITWIDTH, TCOFSRWIDTH, TCOTYPWIDTH, TCORETWIDTH, TCOREUWIDTH, TCOMDLWIDTH, TCOPKGWIDTH, TCOESYWIDTH, TCOTCHWIDTH};
 };
 
 bool PnlWdbeSilList::StgIac::readXML(
@@ -314,7 +312,6 @@ bool PnlWdbeSilList::StgIac::readXML(
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoTypWidth", TcoTypWidth)) add(TCOTYPWIDTH);
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoRetWidth", TcoRetWidth)) add(TCORETWIDTH);
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoReuWidth", TcoReuWidth)) add(TCOREUWIDTH);
-		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoSysWidth", TcoSysWidth)) add(TCOSYSWIDTH);
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoMdlWidth", TcoMdlWidth)) add(TCOMDLWIDTH);
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoPkgWidth", TcoPkgWidth)) add(TCOPKGWIDTH);
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoEsyWidth", TcoEsyWidth)) add(TCOESYWIDTH);
@@ -342,7 +339,6 @@ void PnlWdbeSilList::StgIac::writeXML(
 		writeUintAttr(wr, itemtag, "sref", "TcoTypWidth", TcoTypWidth);
 		writeUintAttr(wr, itemtag, "sref", "TcoRetWidth", TcoRetWidth);
 		writeUintAttr(wr, itemtag, "sref", "TcoReuWidth", TcoReuWidth);
-		writeUintAttr(wr, itemtag, "sref", "TcoSysWidth", TcoSysWidth);
 		writeUintAttr(wr, itemtag, "sref", "TcoMdlWidth", TcoMdlWidth);
 		writeUintAttr(wr, itemtag, "sref", "TcoPkgWidth", TcoPkgWidth);
 		writeUintAttr(wr, itemtag, "sref", "TcoEsyWidth", TcoEsyWidth);
@@ -361,7 +357,6 @@ set<uint> PnlWdbeSilList::StgIac::comm(
 	if (TcoTypWidth == comp->TcoTypWidth) insert(items, TCOTYPWIDTH);
 	if (TcoRetWidth == comp->TcoRetWidth) insert(items, TCORETWIDTH);
 	if (TcoReuWidth == comp->TcoReuWidth) insert(items, TCOREUWIDTH);
-	if (TcoSysWidth == comp->TcoSysWidth) insert(items, TCOSYSWIDTH);
 	if (TcoMdlWidth == comp->TcoMdlWidth) insert(items, TCOMDLWIDTH);
 	if (TcoPkgWidth == comp->TcoPkgWidth) insert(items, TCOPKGWIDTH);
 	if (TcoEsyWidth == comp->TcoEsyWidth) insert(items, TCOESYWIDTH);
@@ -378,7 +373,7 @@ set<uint> PnlWdbeSilList::StgIac::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {TCOSRFWIDTH, TCOTITWIDTH, TCOFSRWIDTH, TCOTYPWIDTH, TCORETWIDTH, TCOREUWIDTH, TCOSYSWIDTH, TCOMDLWIDTH, TCOPKGWIDTH, TCOESYWIDTH, TCOTCHWIDTH};
+	diffitems = {TCOSRFWIDTH, TCOTITWIDTH, TCOFSRWIDTH, TCOTYPWIDTH, TCORETWIDTH, TCOREUWIDTH, TCOMDLWIDTH, TCOPKGWIDTH, TCOESYWIDTH, TCOTCHWIDTH};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -401,7 +396,6 @@ PnlWdbeSilList::Tag::Tag(
 			, const string& TcoTyp
 			, const string& TcoRet
 			, const string& TcoReu
-			, const string& TcoSys
 			, const string& TcoMdl
 			, const string& TcoPkg
 			, const string& TcoEsy
@@ -421,13 +415,12 @@ PnlWdbeSilList::Tag::Tag(
 	this->TcoTyp = TcoTyp;
 	this->TcoRet = TcoRet;
 	this->TcoReu = TcoReu;
-	this->TcoSys = TcoSys;
 	this->TcoMdl = TcoMdl;
 	this->TcoPkg = TcoPkg;
 	this->TcoEsy = TcoEsy;
 	this->TcoTch = TcoTch;
 
-	mask = {CPT, TXTRECORD1, TXTRECORD2, TRS, TXTSHOWING1, TXTSHOWING2, TCOSRF, TCOTIT, TCOFSR, TCOTYP, TCORET, TCOREU, TCOSYS, TCOMDL, TCOPKG, TCOESY, TCOTCH};
+	mask = {CPT, TXTRECORD1, TXTRECORD2, TRS, TXTSHOWING1, TXTSHOWING2, TCOSRF, TCOTIT, TCOFSR, TCOTYP, TCORET, TCOREU, TCOMDL, TCOPKG, TCOESY, TCOTCH};
 };
 
 bool PnlWdbeSilList::Tag::readXML(
@@ -459,7 +452,6 @@ bool PnlWdbeSilList::Tag::readXML(
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "TcoTyp", TcoTyp)) add(TCOTYP);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "TcoRet", TcoRet)) add(TCORET);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "TcoReu", TcoReu)) add(TCOREU);
-		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "TcoSys", TcoSys)) add(TCOSYS);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "TcoMdl", TcoMdl)) add(TCOMDL);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "TcoPkg", TcoPkg)) add(TCOPKG);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "TcoEsy", TcoEsy)) add(TCOESY);

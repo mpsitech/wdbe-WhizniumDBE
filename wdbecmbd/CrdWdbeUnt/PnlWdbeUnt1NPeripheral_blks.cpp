@@ -61,7 +61,7 @@ void PnlWdbeUnt1NPeripheral::ContInf::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["numFCsiQst"] = numFCsiQst;
+	me["numFCsiQst"] = (Json::Value::UInt) numFCsiQst;
 };
 
 void PnlWdbeUnt1NPeripheral::ContInf::writeXML(
@@ -236,15 +236,14 @@ PnlWdbeUnt1NPeripheral::StgIac::StgIac(
 };
 
 bool PnlWdbeUnt1NPeripheral::StgIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["StgIacWdbeUnt1NPeripheral"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["StgIacWdbeUnt1NPeripheral"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -286,7 +285,7 @@ void PnlWdbeUnt1NPeripheral::StgIac::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["TcoRefWidth"] = TcoRefWidth;
+	me["TcoRefWidth"] = (Json::Value::UInt) TcoRefWidth;
 };
 
 void PnlWdbeUnt1NPeripheral::StgIac::writeXML(
@@ -401,15 +400,14 @@ string PnlWdbeUnt1NPeripheral::DpchAppData::getSrefsMask() {
 };
 
 void PnlWdbeUnt1NPeripheral::DpchAppData::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbeUnt1NPeripheralData"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbeUnt1NPeripheralData"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -475,15 +473,14 @@ string PnlWdbeUnt1NPeripheral::DpchAppDo::getSrefsMask() {
 };
 
 void PnlWdbeUnt1NPeripheral::DpchAppDo::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbeUnt1NPeripheralDo"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbeUnt1NPeripheralDo"];}();
 
 	basefound = (me != Json::nullValue);
 

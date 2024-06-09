@@ -66,7 +66,7 @@ public:
 		Sbecore::uint numFTos;
 
 	public:
-		bool readJSON(Json::Value& sup, bool addbasetag = false);
+		bool readJSON(const Json::Value& sup, bool addbasetag = false);
 		bool readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 		void writeJSON(Json::Value& sup, std::string difftag = "");
 		void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
@@ -131,21 +131,19 @@ public:
 
 	public:
 		static const Sbecore::uint TCOSRFWIDTH = 1;
-		static const Sbecore::uint TCOTYPWIDTH = 2;
-		static const Sbecore::uint TCOVERWIDTH = 3;
-		static const Sbecore::uint TCOMCHWIDTH = 4;
+		static const Sbecore::uint TCOCMPWIDTH = 2;
+		static const Sbecore::uint TCOMCHWIDTH = 3;
 
 	public:
-		StgIac(const Sbecore::uint TcoSrfWidth = 150, const Sbecore::uint TcoTypWidth = 100, const Sbecore::uint TcoVerWidth = 250, const Sbecore::uint TcoMchWidth = 100);
+		StgIac(const Sbecore::uint TcoSrfWidth = 150, const Sbecore::uint TcoCmpWidth = 100, const Sbecore::uint TcoMchWidth = 100);
 
 	public:
 		Sbecore::uint TcoSrfWidth;
-		Sbecore::uint TcoTypWidth;
-		Sbecore::uint TcoVerWidth;
+		Sbecore::uint TcoCmpWidth;
 		Sbecore::uint TcoMchWidth;
 
 	public:
-		bool readJSON(Json::Value& sup, bool addbasetag = false);
+		bool readJSON(const Json::Value& sup, bool addbasetag = false);
 		bool readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 		void writeJSON(Json::Value& sup, std::string difftag = "");
 		void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
@@ -185,7 +183,7 @@ public:
 	public:
 		std::string getSrefsMask();
 
-		void readJSON(Json::Value& sup, bool addbasetag = false);
+		void readJSON(const Json::Value& sup, bool addbasetag = false);
 		void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 	};
 
@@ -207,7 +205,7 @@ public:
 	public:
 		std::string getSrefsMask();
 
-		void readJSON(Json::Value& sup, bool addbasetag = false);
+		void readJSON(const Json::Value& sup, bool addbasetag = false);
 		void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 	};
 

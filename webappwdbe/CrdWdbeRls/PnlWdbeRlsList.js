@@ -106,8 +106,7 @@ function refreshB(chgcol) {
 		var ncol = parseInt(retrieveSi(srcdoc, "StatAppQryWdbeRlsList", "ncol"));
 
 		var TcoSrfWidth = parseInt(retrieveSi(srcdoc, "StgIacWdbeRlsList", "TcoSrfWidth"));
-		var TcoTypWidth = parseInt(retrieveSi(srcdoc, "StgIacWdbeRlsList", "TcoTypWidth"));
-		var TcoVerWidth = parseInt(retrieveSi(srcdoc, "StgIacWdbeRlsList", "TcoVerWidth"));
+		var TcoCmpWidth = parseInt(retrieveSi(srcdoc, "StgIacWdbeRlsList", "TcoCmpWidth"));
 		var TcoMchWidth = parseInt(retrieveSi(srcdoc, "StgIacWdbeRlsList", "TcoMchWidth"));
 
 		var numFTos = parseInt(retrieveCi(srcdoc, "ContIacWdbeRlsList", "numFTos"));
@@ -126,13 +125,11 @@ function refreshB(chgcol) {
 			ix++;
 
 			if (i == 1) {
-				doc.cols.push("TcoSrf"); doc.widths.push(TcoSrfWidth); doc.fs.push("srf"); doc.tos.push(1); wtot += TcoSrfWidth;
+				doc.cols.push("TcoSrf"); doc.widths.push(TcoSrfWidth); doc.fs.push("srf"); doc.tos.push(3); wtot += TcoSrfWidth;
 			} else if (i == 2) {
-				doc.cols.push("TcoTyp"); doc.widths.push(TcoTypWidth); doc.fs.push("typ2"); doc.tos.push(0); wtot += TcoTypWidth;
+				doc.cols.push("TcoCmp"); doc.widths.push(TcoCmpWidth); doc.fs.push("cmp"); doc.tos.push(1); wtot += TcoCmpWidth;
 			} else if (i == 3) {
-				doc.cols.push("TcoVer"); doc.widths.push(TcoVerWidth); doc.fs.push("ver"); doc.tos.push(3); wtot += TcoVerWidth;
-			} else if (i == 4) {
-				doc.cols.push("TcoMch"); doc.widths.push(TcoMchWidth); doc.fs.push("mch"); doc.tos.push(4); wtot += TcoMchWidth;
+				doc.cols.push("TcoMch"); doc.widths.push(TcoMchWidth); doc.fs.push("mch"); doc.tos.push(2); wtot += TcoMchWidth;
 			} else {
 				ix--;
 			};
@@ -442,8 +439,8 @@ function handleLoad() {
 
 function handleButClipboardClick() {
 	copyToClipboard(document, srcdoc, "WdbeRlsList", "ListWdbeQRlsList", retrieveTi(srcdoc, "TagWdbeRlsList", "TxtRecord1"), retrieveTi(srcdoc, "TagWdbeRlsList", "TxtRecord2"),
-				["Srf","","Typ","Ver","Mch"],
-				["srf","typ","typ2","ver","mch"]);
+				["Srf","Cmp","Mch"],
+				["srf","cmp","mch"]);
 };
 
 // --- generalized event handlers for app controls

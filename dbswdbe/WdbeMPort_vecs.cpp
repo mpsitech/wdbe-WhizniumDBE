@@ -71,7 +71,6 @@ uint TblWdbeMPort::VecVMdlCat::getIx(
 
 	if (s == "reset") return RESET;
 	if (s == "clk") return CLK;
-	if (s == "rtewrp") return RTEWRP;
 	if (s == "rtetop") return RTETOP;
 	if (s == "cmdbus") return CMDBUS;
 	if (s == "imb") return IMB;
@@ -87,7 +86,6 @@ string TblWdbeMPort::VecVMdlCat::getSref(
 		) {
 	if (ix == RESET) return("reset");
 	if (ix == CLK) return("clk");
-	if (ix == RTEWRP) return("rtewrp");
 	if (ix == RTETOP) return("rtetop");
 	if (ix == CMDBUS) return("cmdbus");
 	if (ix == IMB) return("imb");
@@ -105,7 +103,6 @@ string TblWdbeMPort::VecVMdlCat::getTitle(
 	if (ixWdbeVLocale == 1) {
 		if (ix == RESET) return("global reset");
 		if (ix == CLK) return("clock");
-		if (ix == RTEWRP) return("route to wrapper signal");
 		if (ix == RTETOP) return("route to top module signal");
 		if (ix == CMDBUS) return("command bus");
 		if (ix == IMB) return("inter-module buffer");
@@ -124,5 +121,5 @@ void TblWdbeMPort::VecVMdlCat::fillFeed(
 		) {
 	feed.clear();
 
-	for (unsigned int i = 1; i <= 9; i++) feed.appendIxSrefTitles(i, getSref(i), getTitle(i, ixWdbeVLocale));
+	for (unsigned int i = 1; i <= 8; i++) feed.appendIxSrefTitles(i, getSref(i), getTitle(i, ixWdbeVLocale));
 };

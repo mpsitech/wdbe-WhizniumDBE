@@ -83,7 +83,7 @@ namespace DlgWdbeVerFinmod {
 	public:
 		static const Sbecore::uint IDLE = 1;
 		static const Sbecore::uint ALRWER = 2;
-		static const Sbecore::uint GENTST = 3;
+		static const Sbecore::uint GENAUX = 3;
 		static const Sbecore::uint GENWRI = 4;
 		static const Sbecore::uint ASMLFI = 5;
 		static const Sbecore::uint GENSV = 6;

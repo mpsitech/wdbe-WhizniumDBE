@@ -38,14 +38,17 @@ PnlWdbePrcDetail::PnlWdbePrcDetail(
 		{
 	jref = xchg->addJob(dbswdbe, this, jrefSup);
 
+	feedFPupFsmDtt.tag = "FeedFPupFsmDtt";
+	VecWdbeVMFsmDbgtaptype::fillFeed(ixWdbeVLocale, feedFPupFsmDtt);
+
 	// IP constructor.cust1 --- INSERT
 
 	dirty = false;
 
 	// IP constructor.cust2 --- INSERT
 
-	xchg->addClstn(VecWdbeVCall::CALLWDBEPRC_FSMEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBEPRC_MDLEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBEPRC_FSMEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -71,7 +74,7 @@ DpchEngWdbe* PnlWdbePrcDetail::getNewDpchEng(
 		dpcheng = new DpchEngWdbeConfirm(true, jref, "");
 	} else {
 		insert(items, DpchEngData::JREF);
-		dpcheng = new DpchEngData(jref, &contiac, &continf, &statshr, items);
+		dpcheng = new DpchEngData(jref, &contiac, &continf, &feedFPupFsmDtt, &statshr, items);
 	};
 
 	return dpcheng;
@@ -185,8 +188,12 @@ void PnlWdbePrcDetail::refreshRecFsm(
 		delete _recFsm;
 	} else recFsm = WdbeMFsm();
 
+	contiac.numFPupFsmDtt = feedFPupFsmDtt.getNumByIx(recFsm.ixVDbgtaptype);
+
 	statshr.ButFsmNewAvail = evalButFsmNewAvail(dbswdbe);
 	statshr.ButFsmDeleteAvail = evalButFsmDeleteAvail(dbswdbe);
+	statshr.PupFsmDttAvail = evalPupFsmDttAvail(dbswdbe);
+	statshr.PupFsmDttActive = evalPupFsmDttActive(dbswdbe);
 	if (contiac.diff(&oldContiac).size() != 0) insert(moditems, DpchEngData::CONTIAC);
 	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
 	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
@@ -300,11 +307,12 @@ void PnlWdbePrcDetail::handleDpchAppDataContiac(
 
 	diffitems = _contiac->diff(&contiac);
 
-	if (hasAny(diffitems, {ContIac::CHKFAL, ContIac::TXFSNR, ContIac::CHKEIP, ContIac::TXFCMT})) {
+	if (hasAny(diffitems, {ContIac::CHKFAL, ContIac::TXFSNR, ContIac::CHKEIP, ContIac::TXFCMT, ContIac::NUMFPUPFSMDTT})) {
 		if (has(diffitems, ContIac::CHKFAL)) contiac.ChkFal = _contiac->ChkFal;
 		if (has(diffitems, ContIac::TXFSNR)) contiac.TxfSnr = _contiac->TxfSnr;
 		if (has(diffitems, ContIac::CHKEIP)) contiac.ChkEip = _contiac->ChkEip;
 		if (has(diffitems, ContIac::TXFCMT)) contiac.TxfCmt = _contiac->TxfCmt;
+		if (has(diffitems, ContIac::NUMFPUPFSMDTT)) contiac.numFPupFsmDtt = _contiac->numFPupFsmDtt;
 	};
 
 	if (has(diffitems, ContIac::TXFCLK)) {
@@ -389,25 +397,32 @@ void PnlWdbePrcDetail::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBEPRC_FSMEQ) {
-		call->abort = handleCallWdbePrc_fsmEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEPRC_MDLEQ) {
-		call->abort = handleCallWdbePrc_mdlEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
+	if (call->ixVCall == VecWdbeVCall::CALLWDBEPRCUPD_REFEQ) {
+		call->abort = handleCallWdbePrcUpd_refEq(dbswdbe, call->jref);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEFSMUPD_REFEQ) {
 		call->abort = handleCallWdbeFsmUpd_refEq(dbswdbe, call->jref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEPRCUPD_REFEQ) {
-		call->abort = handleCallWdbePrcUpd_refEq(dbswdbe, call->jref);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEPRC_MDLEQ) {
+		call->abort = handleCallWdbePrc_mdlEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEPRC_FSMEQ) {
+		call->abort = handleCallWdbePrc_fsmEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
 	};
 };
 
-bool PnlWdbePrcDetail::handleCallWdbePrc_fsmEq(
+bool PnlWdbePrcDetail::handleCallWdbePrcUpd_refEq(
 			DbsWdbe* dbswdbe
 			, const ubigint jrefTrig
-			, const ubigint refInv
-			, bool& boolvalRet
 		) {
 	bool retval = false;
-	boolvalRet = (recPrc.refWdbeMFsm == refInv); // IP handleCallWdbePrc_fsmEq --- LINE
+	// IP handleCallWdbePrcUpd_refEq --- INSERT
+	return retval;
+};
+
+bool PnlWdbePrcDetail::handleCallWdbeFsmUpd_refEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+	// IP handleCallWdbeFsmUpd_refEq --- INSERT
 	return retval;
 };
 
@@ -422,20 +437,13 @@ bool PnlWdbePrcDetail::handleCallWdbePrc_mdlEq(
 	return retval;
 };
 
-bool PnlWdbePrcDetail::handleCallWdbeFsmUpd_refEq(
+bool PnlWdbePrcDetail::handleCallWdbePrc_fsmEq(
 			DbsWdbe* dbswdbe
 			, const ubigint jrefTrig
+			, const ubigint refInv
+			, bool& boolvalRet
 		) {
 	bool retval = false;
-	// IP handleCallWdbeFsmUpd_refEq --- INSERT
-	return retval;
-};
-
-bool PnlWdbePrcDetail::handleCallWdbePrcUpd_refEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-	// IP handleCallWdbePrcUpd_refEq --- INSERT
+	boolvalRet = (recPrc.refWdbeMFsm == refInv); // IP handleCallWdbePrc_fsmEq --- LINE
 	return retval;
 };

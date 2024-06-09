@@ -74,15 +74,14 @@ PnlWdbeGenDetail::ContIac::ContIac(
 };
 
 bool PnlWdbeGenDetail::ContIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["ContIacWdbeGenDetail"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["ContIacWdbeGenDetail"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -138,8 +137,8 @@ void PnlWdbeGenDetail::ContIac::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["numFLstClu"] = numFLstClu;
-	me["numFPupHty"] = numFPupHty;
+	me["numFLstClu"] = (Json::Value::UInt) numFLstClu;
+	me["numFPupHty"] = (Json::Value::UInt) numFPupHty;
 	me["TxfHty"] = TxfHty;
 	me["TxfWid"] = TxfWid;
 	me["TxfMmx"] = TxfMmx;
@@ -303,7 +302,7 @@ void PnlWdbeGenDetail::StatApp::writeJSON(
 	me["LstCluAlt"] = LstCluAlt;
 	me["PupHtyAlt"] = PupHtyAlt;
 	me["TxtSrcAlt"] = TxtSrcAlt;
-	me["LstCluNumFirstdisp"] = LstCluNumFirstdisp;
+	me["LstCluNumFirstdisp"] = (Json::Value::UInt) LstCluNumFirstdisp;
 };
 
 void PnlWdbeGenDetail::StatApp::writeXML(
@@ -568,15 +567,14 @@ string PnlWdbeGenDetail::DpchAppData::getSrefsMask() {
 };
 
 void PnlWdbeGenDetail::DpchAppData::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbeGenDetailData"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbeGenDetailData"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -638,15 +636,14 @@ string PnlWdbeGenDetail::DpchAppDo::getSrefsMask() {
 };
 
 void PnlWdbeGenDetail::DpchAppDo::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbeGenDetailDo"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbeGenDetailDo"];}();
 
 	basefound = (me != Json::nullValue);
 

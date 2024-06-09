@@ -118,7 +118,7 @@ DpchRetWdbeCplmstTplcpy* WdbeCplmstTplcpy::run(
 				if (dbswdbe->tblwdbemunit->loadRecByRef(mdl->hkUref, &unt)) {
 					// - controller
 					if (mdl->refWdbeMController == 0) {
-						mdl->refWdbeMController = dbswdbe->tblwdbemcontroller->insertNewRec(NULL, mdl->ref, 0, "Ctr" + unt->Fullsref.substr(3) + StrMod::cap(mdl->sref), 0);
+						mdl->refWdbeMController = dbswdbe->tblwdbemcontroller->insertNewRec(NULL, mdl->ref, "Ctr" + unt->Fullsref.substr(3) + StrMod::cap(mdl->sref), 0);
 						dbswdbe->tblwdbemmodule->updateRec(mdl);
 					};
 

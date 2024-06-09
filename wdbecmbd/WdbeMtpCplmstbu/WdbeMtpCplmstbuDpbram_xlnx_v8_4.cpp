@@ -36,47 +36,37 @@ DpchRetWdbe* WdbeMtpCplmstbuDpbram_xlnx_v8_4::run(
 	utinyint ixOpVOpres = VecOpVOpres::SUCCESS;
 
 	// IP run --- IBEGIN
-	WdbeMImbuf* imb = NULL;
+	ubigint ref;
 
 	bool mgmtToNotFrom;
 	string sref, srefrootMgmt, srefrootCor;
 
-	string size;
-	unsigned short w;
+	string size, wA, wB;
+	unsigned short wAddr0, wWord;
 
-	bool a32Not8, b32Not8;
-
-	string s;
-
-	if (dbswdbe->tblwdbemimbuf->loadRecBySQL("SELECT * FROM TblWdbeMImbuf WHERE refWdbeMModule = " + to_string(refWdbeMModule), &imb)) {
-		// inter-module buffer width trumps b32Not8 parameter
-		if (imb->Width == 32) s = "true";
-		else s = "false";
-
-		Wdbe::setMpa(dbswdbe, refWdbeMModule, "b32Not8", s);
-
+	if (dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMImbuf WHERE refWdbeMModule = " + to_string(refWdbeMModule), ref)) {
 		// write enable default according to inter-module buffer direction
 		mgmtToNotFrom = Wdbe::getImbsrefs(dbswdbe, refWdbeMModule, sref, srefrootMgmt, srefrootCor);
 		if (!mgmtToNotFrom) Wdbe::setPrtDfv(dbswdbe, refWdbeMModule, "weA", "1");
 		else Wdbe::setPrtDfv(dbswdbe, refWdbeMModule, "weB", "1");
-
-		delete imb;
 	};
 
-	if (Wdbe::getMpa(dbswdbe, refWdbeMModule, "size", size)) {
-		// adapt address and data port widths
-		w = Wdbe::valToWidth(atoi(size.c_str()) * 1024 - 1);
+	if (Wdbe::getMpa(dbswdbe, refWdbeMModule, "size", size))
+		if (Wdbe::getMpa(dbswdbe, refWdbeMModule, "wA", wA))
+			if (Wdbe::getMpa(dbswdbe, refWdbeMModule, "wB", wB)) {
+				// adapt address and data port widths
+				wAddr0 = Wdbe::valToWidth(atoi(size.c_str()) * 1024 - 1);
 
-		Wdbe::getMpa(dbswdbe, refWdbeMModule, "a32Not8", s); a32Not8 = (s == "true");
-		Wdbe::setPrtWdt(dbswdbe, refWdbeMModule, "addrA", (a32Not8) ? (w-2) : w);
-		Wdbe::setPrtWdt(dbswdbe, refWdbeMModule, "doutA", (a32Not8) ? 32 : 8);
-		Wdbe::setPrtWdt(dbswdbe, refWdbeMModule, "dinA", (a32Not8) ? 32 : 8);
+				wWord = atoi(wA.c_str()) / 8;
+				Wdbe::setPrtWdt(dbswdbe, refWdbeMModule, "addrA", wAddr0 - log2(wWord));
+				Wdbe::setPrtWdt(dbswdbe, refWdbeMModule, "doutA", 8 * wWord);
+				Wdbe::setPrtWdt(dbswdbe, refWdbeMModule, "dinA", 8 * wWord);
 
-		Wdbe::getMpa(dbswdbe, refWdbeMModule, "b32Not8", s); b32Not8 = (s == "true");
-		Wdbe::setPrtWdt(dbswdbe, refWdbeMModule, "addrB", (b32Not8) ? (w-2) : w);
-		Wdbe::setPrtWdt(dbswdbe, refWdbeMModule, "doutB", (b32Not8) ? 32 : 8);
-		Wdbe::setPrtWdt(dbswdbe, refWdbeMModule, "dinB", (b32Not8) ? 32 : 8);
-	};
+				wWord = atoi(wB.c_str()) / 8;
+				Wdbe::setPrtWdt(dbswdbe, refWdbeMModule, "addrB", wAddr0 - log2(wWord));
+				Wdbe::setPrtWdt(dbswdbe, refWdbeMModule, "doutB", 8 * wWord);
+				Wdbe::setPrtWdt(dbswdbe, refWdbeMModule, "dinB", 8 * wWord);
+			};
 	// IP run --- IEND
 
 	return(new DpchRetWdbe(VecWdbeVDpch::DPCHRETWDBE, "", "", ixOpVOpres, 100));

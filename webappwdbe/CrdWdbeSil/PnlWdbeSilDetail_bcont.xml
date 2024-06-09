@@ -11,7 +11,6 @@
 			function handlePupTypChange() {parent.parent.window.handlePupChange(document,"PupTyp","");};
 			function handlePupRetChange() {parent.parent.window.handlePupChange(document,"PupRet","xs");};
 			function handleButReuViewClick() {parent.parent.window.handleButCrdopenClick("ButReuView");};
-			function handleButSysViewClick() {parent.parent.window.handleButCrdopenClick("ButSysView");};
 			function handleButMdlViewClick() {parent.parent.window.handleButCrdopenClick("ButMdlView");};
 			function handlePupPkgChange() {parent.parent.window.handlePupChange(document,"PupPkg","");};
 			function handleButPkgToggleClick() {parent.parent.window.handleButToggleClick("PupPkg");};
@@ -116,19 +115,6 @@
 					</td>
 					<td></td>
 					<td id="rdynReu" colspan="2" align="left">
-					</td>
-				</tr>
-				<tr id="trSys" class="show">
-					<td height="25"></td>
-					<td align="right">
-						<span id="CptSys" class="cpt">CptSys</span>
-					</td>
-					<td></td>
-					<td colspan="5" align="left">
-						<input id="TxtSys" class="txfnoed" type="text" readonly="readonly" value="TxtSys"/>
-					</td>
-					<td></td>
-					<td id="rdynSys" colspan="2" align="left">
 					</td>
 				</tr>
 				<tr id="trMdl" class="show">

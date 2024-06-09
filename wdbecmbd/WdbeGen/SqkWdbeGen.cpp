@@ -17,20 +17,20 @@ using namespace Xmlio;
  namespace SqkWdbeGen
  ******************************************************************************/
 
+string SqkWdbeGen::getSquawkAux(
+			DbsWdbe* dbswdbe
+			, DpchInvWdbeGenAux* dpchinv
+		) {
+	// example: "generate auxiliary infrastructure for module 'laser (easy model controller)'"
+	return(""); // IP getSquawkAux --- LINE
+};
+
 string SqkWdbeGen::getSquawkStdvec(
 			DbsWdbe* dbswdbe
 			, DpchInvWdbeGenStdvec* dpchinv
 		) {
 	// example: "fill standard vectors for unit 'icacam2'"
 	return(""); // IP getSquawkStdvec --- LINE
-};
-
-string SqkWdbeGen::getSquawkTest(
-			DbsWdbe* dbswdbe
-			, DpchInvWdbeGenTest* dpchinv
-		) {
-	// example: "generate test infrastructure for module 'laser (easy model controller)'"
-	return(""); // IP getSquawkTest --- LINE
 };
 
 string SqkWdbeGen::getSquawkWiring(

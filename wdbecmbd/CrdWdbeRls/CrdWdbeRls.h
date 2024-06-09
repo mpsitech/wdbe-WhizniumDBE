@@ -14,13 +14,12 @@
 
 // IP include.cust --- INSERT
 
-#include "DlgWdbeRlsFinreptr.h"
-#include "DlgWdbeRlsNew.h"
-#include "DlgWdbeRlsStareptr.h"
-#include "DlgWdbeRlsWrite.h"
+#include "PnlWdbeRlsList.h"
 #include "PnlWdbeRlsRec.h"
 #include "PnlWdbeRlsHeadbar.h"
-#include "PnlWdbeRlsList.h"
+#include "DlgWdbeRlsFinreptr.h"
+#include "DlgWdbeRlsStareptr.h"
+#include "DlgWdbeRlsWrite.h"
 
 #define VecVWdbeRlsDo CrdWdbeRls::VecVDo
 #define VecVWdbeRlsSge CrdWdbeRls::VecVSge
@@ -47,11 +46,10 @@ public:
 	public:
 		static const Sbecore::uint CLOSE = 1;
 		static const Sbecore::uint MITAPPABTCLICK = 2;
-		static const Sbecore::uint MITCRDNEWCLICK = 3;
-		static const Sbecore::uint MITCRDSRTCLICK = 4;
-		static const Sbecore::uint MITCRDCRTCLICK = 5;
-		static const Sbecore::uint MITCRDFRTCLICK = 6;
-		static const Sbecore::uint MITCRDWCOCLICK = 7;
+		static const Sbecore::uint MITCRDSRTCLICK = 3;
+		static const Sbecore::uint MITCRDCRTCLICK = 4;
+		static const Sbecore::uint MITCRDFRTCLICK = 5;
+		static const Sbecore::uint MITCRDWCOCLICK = 6;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);
@@ -114,36 +112,32 @@ public:
 
 	public:
 		static const Sbecore::uint JREFDLGFINREPTR = 1;
-		static const Sbecore::uint JREFDLGNEW = 2;
-		static const Sbecore::uint JREFDLGSTAREPTR = 3;
-		static const Sbecore::uint JREFDLGWRITE = 4;
-		static const Sbecore::uint JREFHEADBAR = 5;
-		static const Sbecore::uint JREFLIST = 6;
-		static const Sbecore::uint JREFREC = 7;
-		static const Sbecore::uint MSPCRD1AVAIL = 8;
-		static const Sbecore::uint MITCRDNEWAVAIL = 9;
-		static const Sbecore::uint MITCRDSRTAVAIL = 10;
-		static const Sbecore::uint MITCRDSRTACTIVE = 11;
-		static const Sbecore::uint MITCRDCRTAVAIL = 12;
-		static const Sbecore::uint MITCRDCRTACTIVE = 13;
-		static const Sbecore::uint MITCRDFRTAVAIL = 14;
-		static const Sbecore::uint MITCRDFRTACTIVE = 15;
-		static const Sbecore::uint MITCRDWCOAVAIL = 16;
-		static const Sbecore::uint MITCRDWCOACTIVE = 17;
+		static const Sbecore::uint JREFDLGSTAREPTR = 2;
+		static const Sbecore::uint JREFDLGWRITE = 3;
+		static const Sbecore::uint JREFHEADBAR = 4;
+		static const Sbecore::uint JREFLIST = 5;
+		static const Sbecore::uint JREFREC = 6;
+		static const Sbecore::uint MSPCRD1AVAIL = 7;
+		static const Sbecore::uint MITCRDSRTAVAIL = 8;
+		static const Sbecore::uint MITCRDSRTACTIVE = 9;
+		static const Sbecore::uint MITCRDCRTAVAIL = 10;
+		static const Sbecore::uint MITCRDCRTACTIVE = 11;
+		static const Sbecore::uint MITCRDFRTAVAIL = 12;
+		static const Sbecore::uint MITCRDFRTACTIVE = 13;
+		static const Sbecore::uint MITCRDWCOAVAIL = 14;
+		static const Sbecore::uint MITCRDWCOACTIVE = 15;
 
 	public:
-		StatShr(const Sbecore::ubigint jrefDlgfinreptr = 0, const Sbecore::ubigint jrefDlgnew = 0, const Sbecore::ubigint jrefDlgstareptr = 0, const Sbecore::ubigint jrefDlgwrite = 0, const Sbecore::ubigint jrefHeadbar = 0, const Sbecore::ubigint jrefList = 0, const Sbecore::ubigint jrefRec = 0, const bool MspCrd1Avail = true, const bool MitCrdNewAvail = true, const bool MitCrdSrtAvail = true, const bool MitCrdSrtActive = true, const bool MitCrdCrtAvail = true, const bool MitCrdCrtActive = true, const bool MitCrdFrtAvail = true, const bool MitCrdFrtActive = true, const bool MitCrdWcoAvail = true, const bool MitCrdWcoActive = true);
+		StatShr(const Sbecore::ubigint jrefDlgfinreptr = 0, const Sbecore::ubigint jrefDlgstareptr = 0, const Sbecore::ubigint jrefDlgwrite = 0, const Sbecore::ubigint jrefHeadbar = 0, const Sbecore::ubigint jrefList = 0, const Sbecore::ubigint jrefRec = 0, const bool MspCrd1Avail = true, const bool MitCrdSrtAvail = true, const bool MitCrdSrtActive = true, const bool MitCrdCrtAvail = true, const bool MitCrdCrtActive = true, const bool MitCrdFrtAvail = true, const bool MitCrdFrtActive = true, const bool MitCrdWcoAvail = true, const bool MitCrdWcoActive = true);
 
 	public:
 		Sbecore::ubigint jrefDlgfinreptr;
-		Sbecore::ubigint jrefDlgnew;
 		Sbecore::ubigint jrefDlgstareptr;
 		Sbecore::ubigint jrefDlgwrite;
 		Sbecore::ubigint jrefHeadbar;
 		Sbecore::ubigint jrefList;
 		Sbecore::ubigint jrefRec;
 		bool MspCrd1Avail;
-		bool MitCrdNewAvail;
 		bool MitCrdSrtAvail;
 		bool MitCrdSrtActive;
 		bool MitCrdCrtAvail;
@@ -188,7 +182,7 @@ public:
 	public:
 		std::string getSrefsMask();
 
-		void readJSON(Json::Value& sup, bool addbasetag = false);
+		void readJSON(const Json::Value& sup, bool addbasetag = false);
 		void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 	};
 
@@ -223,7 +217,6 @@ public:
 	};
 
 	bool evalMspCrd1Avail(DbsWdbe* dbswdbe);
-	bool evalMitCrdNewAvail(DbsWdbe* dbswdbe);
 	bool evalMitCrdSrtAvail(DbsWdbe* dbswdbe);
 	bool evalMitCrdSrtActive(DbsWdbe* dbswdbe);
 	bool evalMitCrdCrtAvail(DbsWdbe* dbswdbe);
@@ -244,13 +237,12 @@ public:
 	Sbecore::Feed feedFMcbAlert;
 	Sbecore::Feed feedFSge;
 
-	DlgWdbeRlsFinreptr* dlgfinreptr;
-	DlgWdbeRlsNew* dlgnew;
-	DlgWdbeRlsStareptr* dlgstareptr;
-	DlgWdbeRlsWrite* dlgwrite;
+	PnlWdbeRlsList* pnllist;
 	PnlWdbeRlsRec* pnlrec;
 	PnlWdbeRlsHeadbar* pnlheadbar;
-	PnlWdbeRlsList* pnllist;
+	DlgWdbeRlsFinreptr* dlgfinreptr;
+	DlgWdbeRlsStareptr* dlgstareptr;
+	DlgWdbeRlsWrite* dlgwrite;
 
 	// IP vars.cust --- INSERT
 
@@ -274,7 +266,6 @@ private:
 
 	void handleDpchAppDoClose(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
 	void handleDpchAppDoMitAppAbtClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
-	void handleDpchAppDoMitCrdNewClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
 	void handleDpchAppDoMitCrdSrtClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
 	void handleDpchAppDoMitCrdCrtClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
 	void handleDpchAppDoMitCrdFrtClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
@@ -285,11 +276,11 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeDlgClose(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
-	bool handleCallWdbeStatChg(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
-	bool handleCallWdbeRefPreSet(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, const Sbecore::ubigint refInv);
 	bool handleCallWdbeReptrStart(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, const std::string& txtvalInv);
 	bool handleCallWdbeReptrStop(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbeRefPreSet(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, const Sbecore::ubigint refInv);
+	bool handleCallWdbeStatChg(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbeDlgClose(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 
 private:
 	void changeStage(DbsWdbe* dbswdbe, Sbecore::uint _ixVSge, DpchEngWdbe** dpcheng = NULL);

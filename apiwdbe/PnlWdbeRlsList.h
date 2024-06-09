@@ -125,17 +125,15 @@ namespace PnlWdbeRlsList {
 
 	public:
 		static const Sbecore::uint TCOSRFWIDTH = 1;
-		static const Sbecore::uint TCOTYPWIDTH = 2;
-		static const Sbecore::uint TCOVERWIDTH = 3;
-		static const Sbecore::uint TCOMCHWIDTH = 4;
+		static const Sbecore::uint TCOCMPWIDTH = 2;
+		static const Sbecore::uint TCOMCHWIDTH = 3;
 
 	public:
-		StgIac(const Sbecore::uint TcoSrfWidth = 150, const Sbecore::uint TcoTypWidth = 100, const Sbecore::uint TcoVerWidth = 250, const Sbecore::uint TcoMchWidth = 100);
+		StgIac(const Sbecore::uint TcoSrfWidth = 150, const Sbecore::uint TcoCmpWidth = 100, const Sbecore::uint TcoMchWidth = 100);
 
 	public:
 		Sbecore::uint TcoSrfWidth;
-		Sbecore::uint TcoTypWidth;
-		Sbecore::uint TcoVerWidth;
+		Sbecore::uint TcoCmpWidth;
 		Sbecore::uint TcoMchWidth;
 
 	public:
@@ -159,12 +157,11 @@ namespace PnlWdbeRlsList {
 		static const Sbecore::uint TXTSHOWING1 = 6;
 		static const Sbecore::uint TXTSHOWING2 = 7;
 		static const Sbecore::uint TCOSRF = 8;
-		static const Sbecore::uint TCOTYP = 9;
-		static const Sbecore::uint TCOVER = 10;
-		static const Sbecore::uint TCOMCH = 11;
+		static const Sbecore::uint TCOCMP = 9;
+		static const Sbecore::uint TCOMCH = 10;
 
 	public:
-		Tag(const std::string& Cpt = "", const std::string& TxtFor = "", const std::string& TxtRecord1 = "", const std::string& TxtRecord2 = "", const std::string& Trs = "", const std::string& TxtShowing1 = "", const std::string& TxtShowing2 = "", const std::string& TcoSrf = "", const std::string& TcoTyp = "", const std::string& TcoVer = "", const std::string& TcoMch = "");
+		Tag(const std::string& Cpt = "", const std::string& TxtFor = "", const std::string& TxtRecord1 = "", const std::string& TxtRecord2 = "", const std::string& Trs = "", const std::string& TxtShowing1 = "", const std::string& TxtShowing2 = "", const std::string& TcoSrf = "", const std::string& TcoCmp = "", const std::string& TcoMch = "");
 
 	public:
 		std::string Cpt;
@@ -175,8 +172,7 @@ namespace PnlWdbeRlsList {
 		std::string TxtShowing1;
 		std::string TxtShowing2;
 		std::string TcoSrf;
-		std::string TcoTyp;
-		std::string TcoVer;
+		std::string TcoCmp;
 		std::string TcoMch;
 
 	public:

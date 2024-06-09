@@ -355,7 +355,6 @@ uint JobWdbeIexCsx::enterSgeImport(
 				unt->refIxVTbl = unt_r->refIxVTbl;
 				unt->refUref = unt_r->refUref;
 				unt->silRefWdbeMUnit = unt_r->silRefWdbeMUnit;
-				unt->refWdbeMSystem = unt_r->refWdbeMSystem;
 				unt->refWdbeMModule = unt_r->refWdbeMModule;
 				//unt->sref = unt_r->sref;
 				unt->Fullsref = unt_r->Fullsref;
@@ -560,7 +559,6 @@ uint JobWdbeIexCsx::enterSgeImport(
 					if (dbswdbe->tblwdbemcontroller->loadRecByRef(mdl->refWdbeMController, &ctr_r)) {
 						ctr->ref = ctr_r->ref;
 						ctr->refWdbeMModule = ctr_r->refWdbeMModule;
-						ctr->fwdRefWdbeMUnit = ctr_r->fwdRefWdbeMUnit;
 						ctr->Fullsref = ctr_r->Fullsref;
 						ctr->clrRefWdbeMSignal = ctr_r->clrRefWdbeMSignal;
 

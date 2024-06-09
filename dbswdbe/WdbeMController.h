@@ -25,12 +25,11 @@
 class WdbeMController {
 
 public:
-	WdbeMController(const Sbecore::ubigint ref = 0, const Sbecore::ubigint refWdbeMModule = 0, const Sbecore::ubigint fwdRefWdbeMUnit = 0, const std::string Fullsref = "", const Sbecore::ubigint clrRefWdbeMSignal = 0);
+	WdbeMController(const Sbecore::ubigint ref = 0, const Sbecore::ubigint refWdbeMModule = 0, const std::string Fullsref = "", const Sbecore::ubigint clrRefWdbeMSignal = 0);
 
 public:
 	Sbecore::ubigint ref;
 	Sbecore::ubigint refWdbeMModule;
-	Sbecore::ubigint fwdRefWdbeMUnit;
 	std::string Fullsref;
 	Sbecore::ubigint clrRefWdbeMSignal;
 
@@ -78,8 +77,8 @@ public:
 	virtual Sbecore::ubigint loadRstBySQL(const std::string& sqlstr, const bool append, ListWdbeMController& rst);
 
 	virtual Sbecore::ubigint insertRec(WdbeMController* rec);
-	Sbecore::ubigint insertNewRec(WdbeMController** rec = NULL, const Sbecore::ubigint refWdbeMModule = 0, const Sbecore::ubigint fwdRefWdbeMUnit = 0, const std::string Fullsref = "", const Sbecore::ubigint clrRefWdbeMSignal = 0);
-	Sbecore::ubigint appendNewRecToRst(ListWdbeMController& rst, WdbeMController** rec = NULL, const Sbecore::ubigint refWdbeMModule = 0, const Sbecore::ubigint fwdRefWdbeMUnit = 0, const std::string Fullsref = "", const Sbecore::ubigint clrRefWdbeMSignal = 0);
+	Sbecore::ubigint insertNewRec(WdbeMController** rec = NULL, const Sbecore::ubigint refWdbeMModule = 0, const std::string Fullsref = "", const Sbecore::ubigint clrRefWdbeMSignal = 0);
+	Sbecore::ubigint appendNewRecToRst(ListWdbeMController& rst, WdbeMController** rec = NULL, const Sbecore::ubigint refWdbeMModule = 0, const std::string Fullsref = "", const Sbecore::ubigint clrRefWdbeMSignal = 0);
 	virtual void insertRst(ListWdbeMController& rst, bool transact = false);
 	virtual void updateRec(WdbeMController* rec);
 	virtual void updateRst(ListWdbeMController& rst, bool transact = false);

@@ -19,22 +19,17 @@
 	#include <sbecore/PgDbs.h>
 #endif
 
-#include <sbecore/Xmlio.h>
-
-#define VecWdbeVMReleaseBasetype TblWdbeMRelease::VecVBasetype
-
 /**
 	* WdbeMRelease: record of TblWdbeMRelease
 	*/
 class WdbeMRelease {
 
 public:
-	WdbeMRelease(const Sbecore::ubigint ref = 0, const Sbecore::uint ixVBasetype = 0, const Sbecore::ubigint refWdbeMVersion = 0, const Sbecore::ubigint refWdbeMMachine = 0, const std::string sref = "", const std::string srefsKOption = "", const std::string Comment = "");
+	WdbeMRelease(const Sbecore::ubigint ref = 0, const Sbecore::ubigint refWdbeMComponent = 0, const Sbecore::ubigint refWdbeMMachine = 0, const std::string sref = "", const std::string srefsKOption = "", const std::string Comment = "");
 
 public:
 	Sbecore::ubigint ref;
-	Sbecore::uint ixVBasetype;
-	Sbecore::ubigint refWdbeMVersion;
+	Sbecore::ubigint refWdbeMComponent;
 	Sbecore::ubigint refWdbeMMachine;
 	std::string sref;
 	std::string srefsKOption;
@@ -74,24 +69,6 @@ public:
 class TblWdbeMRelease {
 
 public:
-	/**
-		* VecVBasetype (full: VecWdbeVMReleaseBasetype)
-		*/
-	class VecVBasetype {
-
-	public:
-		static const Sbecore::uint DEV = 1;
-		static const Sbecore::uint EZDEV = 2;
-		static const Sbecore::uint FPGA = 3;
-		static const Sbecore::uint MCU = 4;
-
-		static Sbecore::uint getIx(const std::string& sref);
-		static std::string getSref(const Sbecore::uint ix);
-
-		static std::string getTitle(const Sbecore::uint ix, const Sbecore::uint ixWdbeVLocale);
-
-		static void fillFeed(const Sbecore::uint ixWdbeVLocale, Sbecore::Feed& feed);
-	};
 
 public:
 	TblWdbeMRelease();
@@ -102,16 +79,16 @@ public:
 	virtual Sbecore::ubigint loadRstBySQL(const std::string& sqlstr, const bool append, ListWdbeMRelease& rst);
 
 	virtual Sbecore::ubigint insertRec(WdbeMRelease* rec);
-	Sbecore::ubigint insertNewRec(WdbeMRelease** rec = NULL, const Sbecore::uint ixVBasetype = 0, const Sbecore::ubigint refWdbeMVersion = 0, const Sbecore::ubigint refWdbeMMachine = 0, const std::string sref = "", const std::string srefsKOption = "", const std::string Comment = "");
-	Sbecore::ubigint appendNewRecToRst(ListWdbeMRelease& rst, WdbeMRelease** rec = NULL, const Sbecore::uint ixVBasetype = 0, const Sbecore::ubigint refWdbeMVersion = 0, const Sbecore::ubigint refWdbeMMachine = 0, const std::string sref = "", const std::string srefsKOption = "", const std::string Comment = "");
+	Sbecore::ubigint insertNewRec(WdbeMRelease** rec = NULL, const Sbecore::ubigint refWdbeMComponent = 0, const Sbecore::ubigint refWdbeMMachine = 0, const std::string sref = "", const std::string srefsKOption = "", const std::string Comment = "");
+	Sbecore::ubigint appendNewRecToRst(ListWdbeMRelease& rst, WdbeMRelease** rec = NULL, const Sbecore::ubigint refWdbeMComponent = 0, const Sbecore::ubigint refWdbeMMachine = 0, const std::string sref = "", const std::string srefsKOption = "", const std::string Comment = "");
 	virtual void insertRst(ListWdbeMRelease& rst, bool transact = false);
 	virtual void updateRec(WdbeMRelease* rec);
 	virtual void updateRst(ListWdbeMRelease& rst, bool transact = false);
 	virtual void removeRecByRef(Sbecore::ubigint ref);
 
 	virtual bool loadRecByRef(Sbecore::ubigint ref, WdbeMRelease** rec);
-	virtual Sbecore::ubigint loadRefsByVer(Sbecore::ubigint refWdbeMVersion, const bool append, std::vector<Sbecore::ubigint>& refs);
-	virtual Sbecore::ubigint loadRstByVer(Sbecore::ubigint refWdbeMVersion, const bool append, ListWdbeMRelease& rst);
+	virtual Sbecore::ubigint loadRefsByCmp(Sbecore::ubigint refWdbeMComponent, const bool append, std::vector<Sbecore::ubigint>& refs);
+	virtual Sbecore::ubigint loadRstByCmp(Sbecore::ubigint refWdbeMComponent, const bool append, ListWdbeMRelease& rst);
 	virtual bool loadSrfByRef(Sbecore::ubigint ref, std::string& sref);
 	Sbecore::ubigint loadRstByRefs(std::vector<Sbecore::ubigint>& refs, const bool append, ListWdbeMRelease& rst);
 };
@@ -145,8 +122,8 @@ public:
 	void removeRecByRef(Sbecore::ubigint ref);
 
 	bool loadRecByRef(Sbecore::ubigint ref, WdbeMRelease** rec);
-	Sbecore::ubigint loadRefsByVer(Sbecore::ubigint refWdbeMVersion, const bool append, std::vector<Sbecore::ubigint>& refs);
-	Sbecore::ubigint loadRstByVer(Sbecore::ubigint refWdbeMVersion, const bool append, ListWdbeMRelease& rst);
+	Sbecore::ubigint loadRefsByCmp(Sbecore::ubigint refWdbeMComponent, const bool append, std::vector<Sbecore::ubigint>& refs);
+	Sbecore::ubigint loadRstByCmp(Sbecore::ubigint refWdbeMComponent, const bool append, ListWdbeMRelease& rst);
 	bool loadSrfByRef(Sbecore::ubigint ref, std::string& sref);
 };
 #endif
@@ -181,8 +158,8 @@ public:
 	void removeRecByRef(Sbecore::ubigint ref);
 
 	bool loadRecByRef(Sbecore::ubigint ref, WdbeMRelease** rec);
-	Sbecore::ubigint loadRefsByVer(Sbecore::ubigint refWdbeMVersion, const bool append, std::vector<Sbecore::ubigint>& refs);
-	Sbecore::ubigint loadRstByVer(Sbecore::ubigint refWdbeMVersion, const bool append, ListWdbeMRelease& rst);
+	Sbecore::ubigint loadRefsByCmp(Sbecore::ubigint refWdbeMComponent, const bool append, std::vector<Sbecore::ubigint>& refs);
+	Sbecore::ubigint loadRstByCmp(Sbecore::ubigint refWdbeMComponent, const bool append, ListWdbeMRelease& rst);
 	bool loadSrfByRef(Sbecore::ubigint ref, std::string& sref);
 };
 #endif

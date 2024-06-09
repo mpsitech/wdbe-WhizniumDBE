@@ -36,6 +36,7 @@ uint IexWdbeFin::VecVIme::getIx(
 	if (s == "imeijavkeylistkey") return IMEIJAVKEYLISTKEY;
 	if (s == "imeijmpinsref") return IMEIJMPINSREF;
 	if (s == "imeimbank") return IMEIMBANK;
+	if (s == "imeimcdc") return IMEIMCDC;
 	if (s == "imeimcommand") return IMEIMCOMMAND;
 	if (s == "imeimcontroller") return IMEIMCONTROLLER;
 	if (s == "imeimerror") return IMEIMERROR;
@@ -54,6 +55,7 @@ uint IexWdbeFin::VecVIme::getIx(
 	if (s == "imeimunit") return IMEIMUNIT;
 	if (s == "imeimvariable1") return IMEIMVARIABLE1;
 	if (s == "imeimvariable2") return IMEIMVARIABLE2;
+	if (s == "imeirmcdcmsignal") return IMEIRMCDCMSIGNAL;
 	if (s == "imeirmcommandmcontroller") return IMEIRMCOMMANDMCONTROLLER;
 
 	return(0);
@@ -76,6 +78,7 @@ string IexWdbeFin::VecVIme::getSref(
 	if (ix == IMEIJAVKEYLISTKEY) return("ImeIJAVKeylistKey");
 	if (ix == IMEIJMPINSREF) return("ImeIJMPinSref");
 	if (ix == IMEIMBANK) return("ImeIMBank");
+	if (ix == IMEIMCDC) return("ImeIMCdc");
 	if (ix == IMEIMCOMMAND) return("ImeIMCommand");
 	if (ix == IMEIMCONTROLLER) return("ImeIMController");
 	if (ix == IMEIMERROR) return("ImeIMError");
@@ -94,6 +97,7 @@ string IexWdbeFin::VecVIme::getSref(
 	if (ix == IMEIMUNIT) return("ImeIMUnit");
 	if (ix == IMEIMVARIABLE1) return("ImeIMVariable1");
 	if (ix == IMEIMVARIABLE2) return("ImeIMVariable2");
+	if (ix == IMEIRMCDCMSIGNAL) return("ImeIRMCdcMSignal");
 	if (ix == IMEIRMCOMMANDMCONTROLLER) return("ImeIRMCommandMController");
 
 	return("");
@@ -2689,6 +2693,522 @@ void IexWdbeFin::ImeICVariable1::writeXML(
 		) {
 	if (nodes.size() > 0) {
 		xmlTextWriterStartElement(wr, BAD_CAST "ImeICVariable1");
+			for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeXML(wr, i+1, shorttags);
+		xmlTextWriterEndElement(wr);
+	};
+};
+
+/******************************************************************************
+ class IexWdbeFin::ImeitemIRMCdcMSignal
+ ******************************************************************************/
+
+IexWdbeFin::ImeitemIRMCdcMSignal::ImeitemIRMCdcMSignal(
+			const string& srefRefWdbeMSignal
+			, const uint ixVDir
+		) : WdbeRMCdcMSignal() {
+	lineno = 0;
+	ixWIelValid = 0;
+
+	this->srefRefWdbeMSignal = srefRefWdbeMSignal;
+	this->ixVDir = ixVDir;
+};
+
+IexWdbeFin::ImeitemIRMCdcMSignal::ImeitemIRMCdcMSignal(
+			DbsWdbe* dbswdbe
+			, const ubigint ref
+		) :
+			ImeitemIRMCdcMSignal()
+		{
+	WdbeRMCdcMSignal* rec = NULL;
+
+	this->ref = ref;
+
+	if (dbswdbe->tblwdbermcdcmsignal->loadRecByRef(ref, &rec)) {
+		refWdbeMCdc = rec->refWdbeMCdc;
+		refWdbeMSignal = rec->refWdbeMSignal;
+		ixVDir = rec->ixVDir;
+
+		delete rec;
+	};
+};
+
+void IexWdbeFin::ImeitemIRMCdcMSignal::readTxt(
+			Txtrd& txtrd
+		) {
+	lineno = txtrd.linecnt;
+
+	if (txtrd.fields.size() > 0) {srefRefWdbeMSignal = txtrd.fields[0]; ixWIelValid += ImeIRMCdcMSignal::VecWIel::SREFREFWDBEMSIGNAL;};
+	if (txtrd.fields.size() > 1) {srefIxVDir = txtrd.fields[1]; ixWIelValid += ImeIRMCdcMSignal::VecWIel::SREFIXVDIR;};
+
+	while (txtrd.readLine()) {
+		switch (txtrd.ixVLinetype) {
+			case Txtrd::VecVLinetype::HEADER:
+			case Txtrd::VecVLinetype::DATA:
+			case Txtrd::VecVLinetype::FOOTER:
+				txtrd.skip = true;
+				return;
+
+			case Txtrd::VecVLinetype::COMMENT:
+				continue;
+
+			default:
+				throw SbeException(SbeException::TXTRD_CONTENT, {{"ime","ImeIRMCdcMSignal"}, {"lineno",to_string(lineno)}});
+		};
+	};
+};
+
+void IexWdbeFin::ImeitemIRMCdcMSignal::readXML(
+			xmlXPathContext* docctx
+			, const string& basexpath
+		) {
+	if (checkXPath(docctx, basexpath, lineno)) {
+		if (extractStringUclc(docctx, basexpath, "srefRefWdbeMSignal", "sig", srefRefWdbeMSignal)) ixWIelValid += ImeIRMCdcMSignal::VecWIel::SREFREFWDBEMSIGNAL;
+		if (extractStringUclc(docctx, basexpath, "srefIxVDir", "dir", srefIxVDir)) ixWIelValid += ImeIRMCdcMSignal::VecWIel::SREFIXVDIR;
+	};
+};
+
+void IexWdbeFin::ImeitemIRMCdcMSignal::writeTxt(
+			fstream& outfile
+		) {
+	outfile << "\t\t\t" << srefRefWdbeMSignal << "\t" << VecWdbeVRMCdcMSignalDir::getSref(ixVDir) << endl;
+};
+
+void IexWdbeFin::ImeitemIRMCdcMSignal::writeXML(
+			xmlTextWriter* wr
+			, const uint num
+			, const bool shorttags
+		) {
+	vector<string> tags;
+	if (shorttags) tags = {"Ii","sig","dir"};
+	else tags = {"ImeitemIRMCdcMSignal","srefRefWdbeMSignal","srefIxVDir"};
+
+	xmlTextWriterStartElement(wr, BAD_CAST tags[0].c_str());
+		xmlTextWriterWriteAttribute(wr, BAD_CAST "num", BAD_CAST to_string(num).c_str());
+		writeString(wr, tags[1], srefRefWdbeMSignal);
+		writeString(wr, tags[2], VecWdbeVRMCdcMSignalDir::getSref(ixVDir));
+	xmlTextWriterEndElement(wr);
+};
+
+/******************************************************************************
+ class IexWdbeFin::ImeIRMCdcMSignal::VecWIel
+ ******************************************************************************/
+
+uint IexWdbeFin::ImeIRMCdcMSignal::VecWIel::getIx(
+			const string& srefs
+		) {
+	uint ix = 0;
+
+	vector<string> ss;
+	StrMod::srefsToVector(StrMod::lc(srefs), ss);
+
+	for (unsigned int i = 0; i < ss.size(); i++) {
+		if (ss[i] == "srefrefwdbemsignal") ix |= SREFREFWDBEMSIGNAL;
+		else if (ss[i] == "srefixvdir") ix |= SREFIXVDIR;
+	};
+
+	return(ix);
+};
+
+void IexWdbeFin::ImeIRMCdcMSignal::VecWIel::getIcs(
+			const uint ix
+			, set<uint>& ics
+		) {
+	ics.clear();
+	for (unsigned int i = 1; i < (2*SREFIXVDIR); i *= 2) if (ix & i) ics.insert(i);
+};
+
+string IexWdbeFin::ImeIRMCdcMSignal::VecWIel::getSrefs(
+			const uint ix
+		) {
+	vector<string> ss;
+	string srefs;
+
+	if (ix & SREFREFWDBEMSIGNAL) ss.push_back("srefRefWdbeMSignal");
+	if (ix & SREFIXVDIR) ss.push_back("srefIxVDir");
+
+	StrMod::vectorToString(ss, srefs);
+
+	return(srefs);
+};
+
+/******************************************************************************
+ class IexWdbeFin::ImeIRMCdcMSignal
+ ******************************************************************************/
+
+IexWdbeFin::ImeIRMCdcMSignal::ImeIRMCdcMSignal() {
+};
+
+IexWdbeFin::ImeIRMCdcMSignal::~ImeIRMCdcMSignal() {
+	clear();
+};
+
+void IexWdbeFin::ImeIRMCdcMSignal::clear() {
+	for (unsigned int i = 0; i < nodes.size(); i++) delete nodes[i];
+	nodes.resize(0);
+};
+
+void IexWdbeFin::ImeIRMCdcMSignal::readTxt(
+			Txtrd& txtrd
+		) {
+	IexWdbeFin::ImeitemIRMCdcMSignal* ii = NULL;
+
+	clear();
+
+	while (txtrd.readLine()) {
+		switch (txtrd.ixVLinetype) {
+			case Txtrd::VecVLinetype::DATA:
+				if (txtrd.il == 3) {
+					ii = new IexWdbeFin::ImeitemIRMCdcMSignal();
+					nodes.push_back(ii);
+
+					ii->readTxt(txtrd);
+
+					break;
+
+				} else if (txtrd.il < 3) {
+					throw SbeException(SbeException::TXTRD_ENDTKN, {{"ime","ImeIRMCdcMSignal"}, {"lineno",to_string(txtrd.linecnt)}});
+
+				} else throw SbeException(SbeException::TXTRD_CONTENT, {{"ime","ImeIRMCdcMSignal"}, {"lineno",to_string(txtrd.linecnt)}});
+
+			case Txtrd::VecVLinetype::FOOTER:
+				if (txtrd.ixVToken == VecVIme::IMEIRMCDCMSIGNAL) return;
+				else throw SbeException(SbeException::TXTRD_TKNMISPL, {{"tkn",VecVIme::getSref(txtrd.ixVToken)}, {"lineno",to_string(txtrd.linecnt)}});
+
+			case Txtrd::VecVLinetype::COMMENT:
+				continue;
+
+			default:
+				throw SbeException(SbeException::TXTRD_ENDTKN, {{"ime","ImeIRMCdcMSignal"}, {"lineno",to_string(txtrd.linecnt)}});
+		};
+	};
+
+	if (txtrd.eof()) throw SbeException(SbeException::TXTRD_ENDTKN, {{"ime","ImeIRMCdcMSignal"}, {"lineno",to_string(txtrd.linecnt)}});
+};
+
+void IexWdbeFin::ImeIRMCdcMSignal::readXML(
+			xmlXPathContext* docctx
+			, string basexpath
+		) {
+	vector<unsigned int> nums;
+	vector<bool> _shorttags;
+
+	IexWdbeFin::ImeitemIRMCdcMSignal* ii = NULL;
+
+	bool basefound;
+
+	string s;
+
+	basefound = checkUclcXPaths(docctx, basexpath, basexpath, "ImeIRMCdcMSignal");
+
+	clear();
+
+	if (basefound) {
+		extractList(docctx, basexpath, "ImeitemIRMCdcMSignal", "Ii", "num", nums, _shorttags);
+
+		for (unsigned int i = 0; i < nums.size(); i++) {
+			s = basexpath + "/";
+			if (_shorttags[i]) s += "Ii"; else s += "ImeitemIRMCdcMSignal";
+			s += "[@num='" + to_string(nums[i]) + "']";
+
+			ii = new IexWdbeFin::ImeitemIRMCdcMSignal();
+			ii->readXML(docctx, s);
+			nodes.push_back(ii);
+		};
+	};
+};
+
+void IexWdbeFin::ImeIRMCdcMSignal::writeTxt(
+			fstream& outfile
+		) {
+	if (nodes.size() > 0) {
+		outfile << "\t\t\tImeIRMCdcMSignal." << StrMod::replaceChar(ImeIRMCdcMSignal::VecWIel::getSrefs(3), ';', '\t') << endl;
+		for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeTxt(outfile);
+		outfile << "\t\t\tImeIRMCdcMSignal.end" << endl;
+	};
+};
+
+void IexWdbeFin::ImeIRMCdcMSignal::writeXML(
+			xmlTextWriter* wr
+			, const bool shorttags
+		) {
+	if (nodes.size() > 0) {
+		xmlTextWriterStartElement(wr, BAD_CAST "ImeIRMCdcMSignal");
+			for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeXML(wr, i+1, shorttags);
+		xmlTextWriterEndElement(wr);
+	};
+};
+
+/******************************************************************************
+ class IexWdbeFin::ImeitemIMCdc
+ ******************************************************************************/
+
+IexWdbeFin::ImeitemIMCdc::ImeitemIMCdc(
+			const string& fckSrefWdbeMSignal
+			, const string& farSrefWdbeMSignal
+			, const string& sckSrefWdbeMSignal
+			, const string& sarSrefWdbeMSignal
+			, const double Ratio
+		) : WdbeMCdc() {
+	lineno = 0;
+	ixWIelValid = 0;
+
+	this->fckSrefWdbeMSignal = fckSrefWdbeMSignal;
+	this->farSrefWdbeMSignal = farSrefWdbeMSignal;
+	this->sckSrefWdbeMSignal = sckSrefWdbeMSignal;
+	this->sarSrefWdbeMSignal = sarSrefWdbeMSignal;
+	this->Ratio = Ratio;
+};
+
+IexWdbeFin::ImeitemIMCdc::ImeitemIMCdc(
+			DbsWdbe* dbswdbe
+			, const ubigint ref
+		) :
+			ImeitemIMCdc()
+		{
+	WdbeMCdc* rec = NULL;
+
+	this->ref = ref;
+
+	if (dbswdbe->tblwdbemcdc->loadRecByRef(ref, &rec)) {
+		refWdbeMModule = rec->refWdbeMModule;
+		fckSrefWdbeMSignal = rec->fckSrefWdbeMSignal;
+		farSrefWdbeMSignal = rec->farSrefWdbeMSignal;
+		sckSrefWdbeMSignal = rec->sckSrefWdbeMSignal;
+		sarSrefWdbeMSignal = rec->sarSrefWdbeMSignal;
+		Ratio = rec->Ratio;
+
+		delete rec;
+	};
+};
+
+void IexWdbeFin::ImeitemIMCdc::readTxt(
+			Txtrd& txtrd
+		) {
+	lineno = txtrd.linecnt;
+
+	if (txtrd.fields.size() > 0) {fckSrefWdbeMSignal = txtrd.fields[0]; ixWIelValid += ImeIMCdc::VecWIel::FCKSREFWDBEMSIGNAL;};
+	if (txtrd.fields.size() > 1) {farSrefWdbeMSignal = txtrd.fields[1]; ixWIelValid += ImeIMCdc::VecWIel::FARSREFWDBEMSIGNAL;};
+	if (txtrd.fields.size() > 2) {sckSrefWdbeMSignal = txtrd.fields[2]; ixWIelValid += ImeIMCdc::VecWIel::SCKSREFWDBEMSIGNAL;};
+	if (txtrd.fields.size() > 3) {sarSrefWdbeMSignal = txtrd.fields[3]; ixWIelValid += ImeIMCdc::VecWIel::SARSREFWDBEMSIGNAL;};
+	if (txtrd.fields.size() > 4) {Ratio = atof(txtrd.fields[4].c_str()); ixWIelValid += ImeIMCdc::VecWIel::RATIO;};
+
+	while (txtrd.readLine()) {
+		switch (txtrd.ixVLinetype) {
+			case Txtrd::VecVLinetype::HEADER:
+				if ((txtrd.il == 3) && (txtrd.ixVToken == VecVIme::IMEIRMCDCMSIGNAL)) {
+					imeirmcdcmsignal.readTxt(txtrd);
+					continue;
+
+				} else {
+					txtrd.skip = true;
+					return;
+				};
+
+			case Txtrd::VecVLinetype::DATA:
+			case Txtrd::VecVLinetype::FOOTER:
+				txtrd.skip = true;
+				return;
+
+			case Txtrd::VecVLinetype::COMMENT:
+				continue;
+
+			default:
+				throw SbeException(SbeException::TXTRD_CONTENT, {{"ime","ImeIMCdc"}, {"lineno",to_string(lineno)}});
+		};
+	};
+};
+
+void IexWdbeFin::ImeitemIMCdc::readXML(
+			xmlXPathContext* docctx
+			, const string& basexpath
+		) {
+	if (checkXPath(docctx, basexpath, lineno)) {
+		if (extractStringUclc(docctx, basexpath, "fckSrefWdbeMSignal", "fck", fckSrefWdbeMSignal)) ixWIelValid += ImeIMCdc::VecWIel::FCKSREFWDBEMSIGNAL;
+		if (extractStringUclc(docctx, basexpath, "farSrefWdbeMSignal", "far", farSrefWdbeMSignal)) ixWIelValid += ImeIMCdc::VecWIel::FARSREFWDBEMSIGNAL;
+		if (extractStringUclc(docctx, basexpath, "sckSrefWdbeMSignal", "sck", sckSrefWdbeMSignal)) ixWIelValid += ImeIMCdc::VecWIel::SCKSREFWDBEMSIGNAL;
+		if (extractStringUclc(docctx, basexpath, "sarSrefWdbeMSignal", "sar", sarSrefWdbeMSignal)) ixWIelValid += ImeIMCdc::VecWIel::SARSREFWDBEMSIGNAL;
+		if (extractDoubleUclc(docctx, basexpath, "Ratio", "rat", Ratio)) ixWIelValid += ImeIMCdc::VecWIel::RATIO;
+		imeirmcdcmsignal.readXML(docctx, basexpath);
+	};
+};
+
+void IexWdbeFin::ImeitemIMCdc::writeTxt(
+			fstream& outfile
+		) {
+	outfile << "\t\t" << fckSrefWdbeMSignal << "\t" << farSrefWdbeMSignal << "\t" << sckSrefWdbeMSignal << "\t" << sarSrefWdbeMSignal << "\t" << Ratio << endl;
+	imeirmcdcmsignal.writeTxt(outfile);
+};
+
+void IexWdbeFin::ImeitemIMCdc::writeXML(
+			xmlTextWriter* wr
+			, const uint num
+			, const bool shorttags
+		) {
+	vector<string> tags;
+	if (shorttags) tags = {"Ii","fck","far","sck","sar","rat"};
+	else tags = {"ImeitemIMCdc","fckSrefWdbeMSignal","farSrefWdbeMSignal","sckSrefWdbeMSignal","sarSrefWdbeMSignal","Ratio"};
+
+	xmlTextWriterStartElement(wr, BAD_CAST tags[0].c_str());
+		xmlTextWriterWriteAttribute(wr, BAD_CAST "num", BAD_CAST to_string(num).c_str());
+		writeString(wr, tags[1], fckSrefWdbeMSignal);
+		writeString(wr, tags[2], farSrefWdbeMSignal);
+		writeString(wr, tags[3], sckSrefWdbeMSignal);
+		writeString(wr, tags[4], sarSrefWdbeMSignal);
+		writeDouble(wr, tags[5], Ratio);
+		imeirmcdcmsignal.writeXML(wr, shorttags);
+	xmlTextWriterEndElement(wr);
+};
+
+/******************************************************************************
+ class IexWdbeFin::ImeIMCdc::VecWIel
+ ******************************************************************************/
+
+uint IexWdbeFin::ImeIMCdc::VecWIel::getIx(
+			const string& srefs
+		) {
+	uint ix = 0;
+
+	vector<string> ss;
+	StrMod::srefsToVector(StrMod::lc(srefs), ss);
+
+	for (unsigned int i = 0; i < ss.size(); i++) {
+		if (ss[i] == "fcksrefwdbemsignal") ix |= FCKSREFWDBEMSIGNAL;
+		else if (ss[i] == "farsrefwdbemsignal") ix |= FARSREFWDBEMSIGNAL;
+		else if (ss[i] == "scksrefwdbemsignal") ix |= SCKSREFWDBEMSIGNAL;
+		else if (ss[i] == "sarsrefwdbemsignal") ix |= SARSREFWDBEMSIGNAL;
+		else if (ss[i] == "ratio") ix |= RATIO;
+	};
+
+	return(ix);
+};
+
+void IexWdbeFin::ImeIMCdc::VecWIel::getIcs(
+			const uint ix
+			, set<uint>& ics
+		) {
+	ics.clear();
+	for (unsigned int i = 1; i < (2*RATIO); i *= 2) if (ix & i) ics.insert(i);
+};
+
+string IexWdbeFin::ImeIMCdc::VecWIel::getSrefs(
+			const uint ix
+		) {
+	vector<string> ss;
+	string srefs;
+
+	if (ix & FCKSREFWDBEMSIGNAL) ss.push_back("fckSrefWdbeMSignal");
+	if (ix & FARSREFWDBEMSIGNAL) ss.push_back("farSrefWdbeMSignal");
+	if (ix & SCKSREFWDBEMSIGNAL) ss.push_back("sckSrefWdbeMSignal");
+	if (ix & SARSREFWDBEMSIGNAL) ss.push_back("sarSrefWdbeMSignal");
+	if (ix & RATIO) ss.push_back("Ratio");
+
+	StrMod::vectorToString(ss, srefs);
+
+	return(srefs);
+};
+
+/******************************************************************************
+ class IexWdbeFin::ImeIMCdc
+ ******************************************************************************/
+
+IexWdbeFin::ImeIMCdc::ImeIMCdc() {
+};
+
+IexWdbeFin::ImeIMCdc::~ImeIMCdc() {
+	clear();
+};
+
+void IexWdbeFin::ImeIMCdc::clear() {
+	for (unsigned int i = 0; i < nodes.size(); i++) delete nodes[i];
+	nodes.resize(0);
+};
+
+void IexWdbeFin::ImeIMCdc::readTxt(
+			Txtrd& txtrd
+		) {
+	IexWdbeFin::ImeitemIMCdc* ii = NULL;
+
+	clear();
+
+	while (txtrd.readLine()) {
+		switch (txtrd.ixVLinetype) {
+			case Txtrd::VecVLinetype::DATA:
+				if (txtrd.il == 2) {
+					ii = new IexWdbeFin::ImeitemIMCdc();
+					nodes.push_back(ii);
+
+					ii->readTxt(txtrd);
+
+					break;
+
+				} else if (txtrd.il < 2) {
+					throw SbeException(SbeException::TXTRD_ENDTKN, {{"ime","ImeIMCdc"}, {"lineno",to_string(txtrd.linecnt)}});
+
+				} else throw SbeException(SbeException::TXTRD_CONTENT, {{"ime","ImeIMCdc"}, {"lineno",to_string(txtrd.linecnt)}});
+
+			case Txtrd::VecVLinetype::FOOTER:
+				if (txtrd.ixVToken == VecVIme::IMEIMCDC) return;
+				else throw SbeException(SbeException::TXTRD_TKNMISPL, {{"tkn",VecVIme::getSref(txtrd.ixVToken)}, {"lineno",to_string(txtrd.linecnt)}});
+
+			case Txtrd::VecVLinetype::COMMENT:
+				continue;
+
+			default:
+				throw SbeException(SbeException::TXTRD_ENDTKN, {{"ime","ImeIMCdc"}, {"lineno",to_string(txtrd.linecnt)}});
+		};
+	};
+
+	if (txtrd.eof()) throw SbeException(SbeException::TXTRD_ENDTKN, {{"ime","ImeIMCdc"}, {"lineno",to_string(txtrd.linecnt)}});
+};
+
+void IexWdbeFin::ImeIMCdc::readXML(
+			xmlXPathContext* docctx
+			, string basexpath
+		) {
+	vector<unsigned int> nums;
+	vector<bool> _shorttags;
+
+	IexWdbeFin::ImeitemIMCdc* ii = NULL;
+
+	bool basefound;
+
+	string s;
+
+	basefound = checkUclcXPaths(docctx, basexpath, basexpath, "ImeIMCdc");
+
+	clear();
+
+	if (basefound) {
+		extractList(docctx, basexpath, "ImeitemIMCdc", "Ii", "num", nums, _shorttags);
+
+		for (unsigned int i = 0; i < nums.size(); i++) {
+			s = basexpath + "/";
+			if (_shorttags[i]) s += "Ii"; else s += "ImeitemIMCdc";
+			s += "[@num='" + to_string(nums[i]) + "']";
+
+			ii = new IexWdbeFin::ImeitemIMCdc();
+			ii->readXML(docctx, s);
+			nodes.push_back(ii);
+		};
+	};
+};
+
+void IexWdbeFin::ImeIMCdc::writeTxt(
+			fstream& outfile
+		) {
+	if (nodes.size() > 0) {
+		outfile << "\t\tImeIMCdc." << StrMod::replaceChar(ImeIMCdc::VecWIel::getSrefs(31), ';', '\t') << endl;
+		for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeTxt(outfile);
+		outfile << "\t\tImeIMCdc.end" << endl;
+	};
+};
+
+void IexWdbeFin::ImeIMCdc::writeXML(
+			xmlTextWriter* wr
+			, const bool shorttags
+		) {
+	if (nodes.size() > 0) {
+		xmlTextWriterStartElement(wr, BAD_CAST "ImeIMCdc");
 			for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeXML(wr, i+1, shorttags);
 		xmlTextWriterEndElement(wr);
 	};
@@ -5296,6 +5816,10 @@ IexWdbeFin::ImeitemIAMFsmstateStep::ImeitemIAMFsmstateStep(
 			, const string& Ip3
 			, const string& Cond4
 			, const string& Ip4
+			, const string& Cond5
+			, const string& Ip5
+			, const string& Cond6
+			, const string& Ip6
 		) : WdbeAMFsmstateStep() {
 	lineno = 0;
 	ixWIelValid = 0;
@@ -5309,6 +5833,10 @@ IexWdbeFin::ImeitemIAMFsmstateStep::ImeitemIAMFsmstateStep(
 	this->Ip3 = Ip3;
 	this->Cond4 = Cond4;
 	this->Ip4 = Ip4;
+	this->Cond5 = Cond5;
+	this->Ip5 = Ip5;
+	this->Cond6 = Cond6;
+	this->Ip6 = Ip6;
 };
 
 IexWdbeFin::ImeitemIAMFsmstateStep::ImeitemIAMFsmstateStep(
@@ -5333,6 +5861,10 @@ IexWdbeFin::ImeitemIAMFsmstateStep::ImeitemIAMFsmstateStep(
 		Ip3 = rec->Ip3;
 		Cond4 = rec->Cond4;
 		Ip4 = rec->Ip4;
+		Cond5 = rec->Cond5;
+		Ip5 = rec->Ip5;
+		Cond6 = rec->Cond6;
+		Ip6 = rec->Ip6;
 
 		delete rec;
 	};
@@ -5352,6 +5884,10 @@ void IexWdbeFin::ImeitemIAMFsmstateStep::readTxt(
 	if (txtrd.fields.size() > 6) {Ip3 = txtrd.fields[6]; ixWIelValid += ImeIAMFsmstateStep::VecWIel::IP3;};
 	if (txtrd.fields.size() > 7) {Cond4 = txtrd.fields[7]; ixWIelValid += ImeIAMFsmstateStep::VecWIel::COND4;};
 	if (txtrd.fields.size() > 8) {Ip4 = txtrd.fields[8]; ixWIelValid += ImeIAMFsmstateStep::VecWIel::IP4;};
+	if (txtrd.fields.size() > 9) {Cond5 = txtrd.fields[9]; ixWIelValid += ImeIAMFsmstateStep::VecWIel::COND5;};
+	if (txtrd.fields.size() > 10) {Ip5 = txtrd.fields[10]; ixWIelValid += ImeIAMFsmstateStep::VecWIel::IP5;};
+	if (txtrd.fields.size() > 11) {Cond6 = txtrd.fields[11]; ixWIelValid += ImeIAMFsmstateStep::VecWIel::COND6;};
+	if (txtrd.fields.size() > 12) {Ip6 = txtrd.fields[12]; ixWIelValid += ImeIAMFsmstateStep::VecWIel::IP6;};
 
 	while (txtrd.readLine()) {
 		switch (txtrd.ixVLinetype) {
@@ -5384,13 +5920,17 @@ void IexWdbeFin::ImeitemIAMFsmstateStep::readXML(
 		if (extractStringUclc(docctx, basexpath, "Ip3", "ip3", Ip3)) ixWIelValid += ImeIAMFsmstateStep::VecWIel::IP3;
 		if (extractStringUclc(docctx, basexpath, "Cond4", "cn4", Cond4)) ixWIelValid += ImeIAMFsmstateStep::VecWIel::COND4;
 		if (extractStringUclc(docctx, basexpath, "Ip4", "ip4", Ip4)) ixWIelValid += ImeIAMFsmstateStep::VecWIel::IP4;
+		if (extractStringUclc(docctx, basexpath, "Cond5", "cn5", Cond5)) ixWIelValid += ImeIAMFsmstateStep::VecWIel::COND5;
+		if (extractStringUclc(docctx, basexpath, "Ip5", "ip5", Ip5)) ixWIelValid += ImeIAMFsmstateStep::VecWIel::IP5;
+		if (extractStringUclc(docctx, basexpath, "Cond6", "cn6", Cond6)) ixWIelValid += ImeIAMFsmstateStep::VecWIel::COND6;
+		if (extractStringUclc(docctx, basexpath, "Ip6", "ip6", Ip6)) ixWIelValid += ImeIAMFsmstateStep::VecWIel::IP6;
 	};
 };
 
 void IexWdbeFin::ImeitemIAMFsmstateStep::writeTxt(
 			fstream& outfile
 		) {
-	outfile << "\t\t\t\t\t" << srefFnxRefWdbeMFsmstate << "\t" << Cond1 << "\t" << Ip1 << "\t" << Cond2 << "\t" << Ip2 << "\t" << Cond3 << "\t" << Ip3 << "\t" << Cond4 << "\t" << Ip4 << endl;
+	outfile << "\t\t\t\t\t" << srefFnxRefWdbeMFsmstate << "\t" << Cond1 << "\t" << Ip1 << "\t" << Cond2 << "\t" << Ip2 << "\t" << Cond3 << "\t" << Ip3 << "\t" << Cond4 << "\t" << Ip4 << "\t" << Cond5 << "\t" << Ip5 << "\t" << Cond6 << "\t" << Ip6 << endl;
 };
 
 void IexWdbeFin::ImeitemIAMFsmstateStep::writeXML(
@@ -5399,8 +5939,8 @@ void IexWdbeFin::ImeitemIAMFsmstateStep::writeXML(
 			, const bool shorttags
 		) {
 	vector<string> tags;
-	if (shorttags) tags = {"Ii","fnx","cn1","ip1","cn2","ip2","cn3","ip3","cn4","ip4"};
-	else tags = {"ImeitemIAMFsmstateStep","srefFnxRefWdbeMFsmstate","Cond1","Ip1","Cond2","Ip2","Cond3","Ip3","Cond4","Ip4"};
+	if (shorttags) tags = {"Ii","fnx","cn1","ip1","cn2","ip2","cn3","ip3","cn4","ip4","cn5","ip5","cn6","ip6"};
+	else tags = {"ImeitemIAMFsmstateStep","srefFnxRefWdbeMFsmstate","Cond1","Ip1","Cond2","Ip2","Cond3","Ip3","Cond4","Ip4","Cond5","Ip5","Cond6","Ip6"};
 
 	xmlTextWriterStartElement(wr, BAD_CAST tags[0].c_str());
 		xmlTextWriterWriteAttribute(wr, BAD_CAST "num", BAD_CAST to_string(num).c_str());
@@ -5413,6 +5953,10 @@ void IexWdbeFin::ImeitemIAMFsmstateStep::writeXML(
 		writeString(wr, tags[7], Ip3);
 		writeString(wr, tags[8], Cond4);
 		writeString(wr, tags[9], Ip4);
+		writeString(wr, tags[10], Cond5);
+		writeString(wr, tags[11], Ip5);
+		writeString(wr, tags[12], Cond6);
+		writeString(wr, tags[13], Ip6);
 	xmlTextWriterEndElement(wr);
 };
 
@@ -5438,6 +5982,10 @@ uint IexWdbeFin::ImeIAMFsmstateStep::VecWIel::getIx(
 		else if (ss[i] == "ip3") ix |= IP3;
 		else if (ss[i] == "cond4") ix |= COND4;
 		else if (ss[i] == "ip4") ix |= IP4;
+		else if (ss[i] == "cond5") ix |= COND5;
+		else if (ss[i] == "ip5") ix |= IP5;
+		else if (ss[i] == "cond6") ix |= COND6;
+		else if (ss[i] == "ip6") ix |= IP6;
 	};
 
 	return(ix);
@@ -5448,7 +5996,7 @@ void IexWdbeFin::ImeIAMFsmstateStep::VecWIel::getIcs(
 			, set<uint>& ics
 		) {
 	ics.clear();
-	for (unsigned int i = 1; i < (2*IP4); i *= 2) if (ix & i) ics.insert(i);
+	for (unsigned int i = 1; i < (2*IP6); i *= 2) if (ix & i) ics.insert(i);
 };
 
 string IexWdbeFin::ImeIAMFsmstateStep::VecWIel::getSrefs(
@@ -5466,6 +6014,10 @@ string IexWdbeFin::ImeIAMFsmstateStep::VecWIel::getSrefs(
 	if (ix & IP3) ss.push_back("Ip3");
 	if (ix & COND4) ss.push_back("Cond4");
 	if (ix & IP4) ss.push_back("Ip4");
+	if (ix & COND5) ss.push_back("Cond5");
+	if (ix & IP5) ss.push_back("Ip5");
+	if (ix & COND6) ss.push_back("Cond6");
+	if (ix & IP6) ss.push_back("Ip6");
 
 	StrMod::vectorToString(ss, srefs);
 
@@ -5562,7 +6114,7 @@ void IexWdbeFin::ImeIAMFsmstateStep::writeTxt(
 			fstream& outfile
 		) {
 	if (nodes.size() > 0) {
-		outfile << "\t\t\t\t\tImeIAMFsmstateStep." << StrMod::replaceChar(ImeIAMFsmstateStep::VecWIel::getSrefs(511), ';', '\t') << endl;
+		outfile << "\t\t\t\t\tImeIAMFsmstateStep." << StrMod::replaceChar(ImeIAMFsmstateStep::VecWIel::getSrefs(8191), ';', '\t') << endl;
 		for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeTxt(outfile);
 		outfile << "\t\t\t\t\tImeIAMFsmstateStep.end" << endl;
 	};
@@ -5853,10 +6405,12 @@ void IexWdbeFin::ImeIMFsmstate::writeXML(
  ******************************************************************************/
 
 IexWdbeFin::ImeitemIMFsm::ImeitemIMFsm(
+			const uint ixVDbgtaptype
 		) : WdbeMFsm() {
 	lineno = 0;
 	ixWIelValid = 0;
 
+	this->ixVDbgtaptype = ixVDbgtaptype;
 };
 
 IexWdbeFin::ImeitemIMFsm::ImeitemIMFsm(
@@ -5871,6 +6425,7 @@ IexWdbeFin::ImeitemIMFsm::ImeitemIMFsm(
 
 	if (dbswdbe->tblwdbemfsm->loadRecByRef(ref, &rec)) {
 		refWdbeMProcess = rec->refWdbeMProcess;
+		ixVDbgtaptype = rec->ixVDbgtaptype;
 
 		delete rec;
 	};
@@ -5880,6 +6435,8 @@ void IexWdbeFin::ImeitemIMFsm::readTxt(
 			Txtrd& txtrd
 		) {
 	lineno = txtrd.linecnt;
+
+	if (txtrd.fields.size() > 0) {srefIxVDbgtaptype = txtrd.fields[0]; ixWIelValid += ImeIMFsm::VecWIel::SREFIXVDBGTAPTYPE;};
 
 	while (txtrd.readLine()) {
 		switch (txtrd.ixVLinetype) {
@@ -5916,6 +6473,7 @@ void IexWdbeFin::ImeitemIMFsm::readXML(
 			, const string& basexpath
 		) {
 	if (checkXPath(docctx, basexpath, lineno)) {
+		if (extractStringUclc(docctx, basexpath, "srefIxVDbgtaptype", "dtt", srefIxVDbgtaptype)) ixWIelValid += ImeIMFsm::VecWIel::SREFIXVDBGTAPTYPE;
 		imeicfsmstate.readXML(docctx, basexpath);
 		imeimfsmstate.readXML(docctx, basexpath);
 	};
@@ -5924,7 +6482,7 @@ void IexWdbeFin::ImeitemIMFsm::readXML(
 void IexWdbeFin::ImeitemIMFsm::writeTxt(
 			fstream& outfile
 		) {
-	outfile << "\t\t\t" << "^" << endl;
+	outfile << "\t\t\t" << VecWdbeVMFsmDbgtaptype::getSref(ixVDbgtaptype) << endl;
 	imeicfsmstate.writeTxt(outfile);
 	imeimfsmstate.writeTxt(outfile);
 };
@@ -5935,11 +6493,12 @@ void IexWdbeFin::ImeitemIMFsm::writeXML(
 			, const bool shorttags
 		) {
 	vector<string> tags;
-	if (shorttags) tags = {"Ii"};
-	else tags = {"ImeitemIMFsm"};
+	if (shorttags) tags = {"Ii","dtt"};
+	else tags = {"ImeitemIMFsm","srefIxVDbgtaptype"};
 
 	xmlTextWriterStartElement(wr, BAD_CAST tags[0].c_str());
 		xmlTextWriterWriteAttribute(wr, BAD_CAST "num", BAD_CAST to_string(num).c_str());
+		writeString(wr, tags[1], VecWdbeVMFsmDbgtaptype::getSref(ixVDbgtaptype));
 		imeicfsmstate.writeXML(wr, shorttags);
 		imeimfsmstate.writeXML(wr, shorttags);
 	xmlTextWriterEndElement(wr);
@@ -5958,6 +6517,7 @@ uint IexWdbeFin::ImeIMFsm::VecWIel::getIx(
 	StrMod::srefsToVector(StrMod::lc(srefs), ss);
 
 	for (unsigned int i = 0; i < ss.size(); i++) {
+		if (ss[i] == "srefixvdbgtaptype") ix |= SREFIXVDBGTAPTYPE;
 	};
 
 	return(ix);
@@ -5968,7 +6528,7 @@ void IexWdbeFin::ImeIMFsm::VecWIel::getIcs(
 			, set<uint>& ics
 		) {
 	ics.clear();
-	for (unsigned int i = 1; false;) if (ix & i) ics.insert(i);
+	for (unsigned int i = 1; i < (2*SREFIXVDBGTAPTYPE); i *= 2) if (ix & i) ics.insert(i);
 };
 
 string IexWdbeFin::ImeIMFsm::VecWIel::getSrefs(
@@ -5976,6 +6536,8 @@ string IexWdbeFin::ImeIMFsm::VecWIel::getSrefs(
 		) {
 	vector<string> ss;
 	string srefs;
+
+	if (ix & SREFIXVDBGTAPTYPE) ss.push_back("srefIxVDbgtaptype");
 
 	StrMod::vectorToString(ss, srefs);
 
@@ -6072,7 +6634,7 @@ void IexWdbeFin::ImeIMFsm::writeTxt(
 			fstream& outfile
 		) {
 	if (nodes.size() > 0) {
-		outfile << "\t\t\tImeIMFsm." << StrMod::replaceChar(ImeIMFsm::VecWIel::getSrefs(0), ';', '\t') << endl;
+		outfile << "\t\t\tImeIMFsm." << StrMod::replaceChar(ImeIMFsm::VecWIel::getSrefs(1), ';', '\t') << endl;
 		for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeTxt(outfile);
 		outfile << "\t\t\tImeIMFsm.end" << endl;
 	};
@@ -7888,6 +8450,10 @@ void IexWdbeFin::ImeitemIMModule::readTxt(
 					imeicvariable1.readTxt(txtrd);
 					continue;
 
+				} else if ((txtrd.il == 2) && (txtrd.ixVToken == VecVIme::IMEIMCDC)) {
+					imeimcdc.readTxt(txtrd);
+					continue;
+
 				} else if ((txtrd.il == 2) && (txtrd.ixVToken == VecVIme::IMEIMCONTROLLER)) {
 					imeimcontroller.readTxt(txtrd);
 					continue;
@@ -7946,6 +8512,7 @@ void IexWdbeFin::ImeitemIMModule::readXML(
 		imeicport.readXML(docctx, basexpath);
 		imeicsignal2.readXML(docctx, basexpath);
 		imeicvariable1.readXML(docctx, basexpath);
+		imeimcdc.readXML(docctx, basexpath);
 		imeimcontroller.readXML(docctx, basexpath);
 		imeimgeneric.readXML(docctx, basexpath);
 		imeimport.readXML(docctx, basexpath);
@@ -7964,6 +8531,7 @@ void IexWdbeFin::ImeitemIMModule::writeTxt(
 	imeicport.writeTxt(outfile);
 	imeicsignal2.writeTxt(outfile);
 	imeicvariable1.writeTxt(outfile);
+	imeimcdc.writeTxt(outfile);
 	imeimcontroller.writeTxt(outfile);
 	imeimgeneric.writeTxt(outfile);
 	imeimport.writeTxt(outfile);
@@ -7990,6 +8558,7 @@ void IexWdbeFin::ImeitemIMModule::writeXML(
 		imeicport.writeXML(wr, shorttags);
 		imeicsignal2.writeXML(wr, shorttags);
 		imeicvariable1.writeXML(wr, shorttags);
+		imeimcdc.writeXML(wr, shorttags);
 		imeimcontroller.writeXML(wr, shorttags);
 		imeimgeneric.writeXML(wr, shorttags);
 		imeimport.writeXML(wr, shorttags);
@@ -8713,7 +9282,7 @@ void IexWdbeFin::parseFromFile(
 		};
 
 	} else {
-			Txtrd rd(fullpath, rectpath, "IexWdbeFin", Version("1.1.9"), VecVIme::getIx);
+			Txtrd rd(fullpath, rectpath, "IexWdbeFin", Version("1.1.40"), VecVIme::getIx);
 			readTxt(rd, imeimunit);
 	};
 };
@@ -8773,7 +9342,7 @@ void IexWdbeFin::readXML(
 		// validate version
 		if (checkUclcXPaths(docctx, goodxpath, basexpath, "@Version")) {
 			extractString(docctx, goodxpath, version);
-			if (Version(version) < Version("1.1.9")) throw SbeException(SbeException::IEX_VERSION, {{"version",version},{"minversion","1.1.9"}});
+			if (Version(version) < Version("1.1.40")) throw SbeException(SbeException::IEX_VERSION, {{"version",version},{"minversion","1.1.40"}});
 		};
 
 		// look for XML sub-blocks
@@ -8808,7 +9377,7 @@ void IexWdbeFin::writeXML(
 };
 
 map<uint,uint> IexWdbeFin::icsWdbeVIopInsAll() {
-	return {{(uint)VecVIme::IMEIAMFSMSTATESTEP,VecWdbeVIop::INS},{(uint)VecVIme::IMEIAMPINPAR,VecWdbeVIop::INS},{(uint)VecVIme::IMEIAVKEYLISTKEY,VecWdbeVIop::INS},{(uint)VecVIme::IMEICFSMSTATE,VecWdbeVIop::INS},{(uint)VecVIme::IMEICGENERIC,VecWdbeVIop::INS},{(uint)VecVIme::IMEICPIN,VecWdbeVIop::INS},{(uint)VecVIme::IMEICPORT,VecWdbeVIop::INS},{(uint)VecVIme::IMEICSIGNAL1,VecWdbeVIop::INS},{(uint)VecVIme::IMEICSIGNAL2,VecWdbeVIop::INS},{(uint)VecVIme::IMEICVARIABLE1,VecWdbeVIop::INS},{(uint)VecVIme::IMEICVARIABLE2,VecWdbeVIop::INS},{(uint)VecVIme::IMEIJAVKEYLISTKEY,VecWdbeVIop::INS},{(uint)VecVIme::IMEIJMPINSREF,VecWdbeVIop::INS},{(uint)VecVIme::IMEIMFSM,VecWdbeVIop::INS},{(uint)VecVIme::IMEIMFSMSTATE,VecWdbeVIop::INS},{(uint)VecVIme::IMEIMGENERIC,VecWdbeVIop::INS},{(uint)VecVIme::IMEIMINTERRUPT1,VecWdbeVIop::INS},{(uint)VecVIme::IMEIMPORT,VecWdbeVIop::INS},{(uint)VecVIme::IMEIMPROCESS,VecWdbeVIop::INS},{(uint)VecVIme::IMEIMSENSITIVITY1,VecWdbeVIop::INS},{(uint)VecVIme::IMEIMSENSITIVITY2,VecWdbeVIop::INS},{(uint)VecVIme::IMEIMSIGNAL1,VecWdbeVIop::INS},{(uint)VecVIme::IMEIMSIGNAL2,VecWdbeVIop::INS},{(uint)VecVIme::IMEIMVARIABLE1,VecWdbeVIop::INS},{(uint)VecVIme::IMEIMVARIABLE2,VecWdbeVIop::INS}};
+	return {{(uint)VecVIme::IMEIAMFSMSTATESTEP,VecWdbeVIop::INS},{(uint)VecVIme::IMEIAMPINPAR,VecWdbeVIop::INS},{(uint)VecVIme::IMEIAVKEYLISTKEY,VecWdbeVIop::INS},{(uint)VecVIme::IMEICFSMSTATE,VecWdbeVIop::INS},{(uint)VecVIme::IMEICGENERIC,VecWdbeVIop::INS},{(uint)VecVIme::IMEICPIN,VecWdbeVIop::INS},{(uint)VecVIme::IMEICPORT,VecWdbeVIop::INS},{(uint)VecVIme::IMEICSIGNAL1,VecWdbeVIop::INS},{(uint)VecVIme::IMEICSIGNAL2,VecWdbeVIop::INS},{(uint)VecVIme::IMEICVARIABLE1,VecWdbeVIop::INS},{(uint)VecVIme::IMEICVARIABLE2,VecWdbeVIop::INS},{(uint)VecVIme::IMEIJAVKEYLISTKEY,VecWdbeVIop::INS},{(uint)VecVIme::IMEIJMPINSREF,VecWdbeVIop::INS},{(uint)VecVIme::IMEIMCDC,VecWdbeVIop::INS},{(uint)VecVIme::IMEIMFSM,VecWdbeVIop::INS},{(uint)VecVIme::IMEIMFSMSTATE,VecWdbeVIop::INS},{(uint)VecVIme::IMEIMGENERIC,VecWdbeVIop::INS},{(uint)VecVIme::IMEIMINTERRUPT1,VecWdbeVIop::INS},{(uint)VecVIme::IMEIMPORT,VecWdbeVIop::INS},{(uint)VecVIme::IMEIMPROCESS,VecWdbeVIop::INS},{(uint)VecVIme::IMEIMSENSITIVITY1,VecWdbeVIop::INS},{(uint)VecVIme::IMEIMSENSITIVITY2,VecWdbeVIop::INS},{(uint)VecVIme::IMEIMSIGNAL1,VecWdbeVIop::INS},{(uint)VecVIme::IMEIMSIGNAL2,VecWdbeVIop::INS},{(uint)VecVIme::IMEIMVARIABLE1,VecWdbeVIop::INS},{(uint)VecVIme::IMEIMVARIABLE2,VecWdbeVIop::INS},{(uint)VecVIme::IMEIRMCDCMSIGNAL,VecWdbeVIop::INS}};
 };
 
 uint IexWdbeFin::getIxWdbeVIop(

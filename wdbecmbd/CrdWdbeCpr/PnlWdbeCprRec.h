@@ -14,9 +14,9 @@
 
 // IP include.cust --- INSERT
 
-#include "PnlWdbeCprDetail.h"
-#include "PnlWdbeCpr1NCoreversion.h"
 #include "PnlWdbeCprMNPerson.h"
+#include "PnlWdbeCpr1NCoreversion.h"
+#include "PnlWdbeCprDetail.h"
 
 #define VecVWdbeCprRecDo PnlWdbeCprRec::VecVDo
 
@@ -135,7 +135,7 @@ public:
 	public:
 		std::string getSrefsMask();
 
-		void readJSON(Json::Value& sup, bool addbasetag = false);
+		void readJSON(const Json::Value& sup, bool addbasetag = false);
 		void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 	};
 
@@ -177,9 +177,9 @@ public:
 	ContInf continf;
 	StatShr statshr;
 
-	PnlWdbeCprDetail* pnldetail;
-	PnlWdbeCpr1NCoreversion* pnl1ncoreversion;
 	PnlWdbeCprMNPerson* pnlmnperson;
+	PnlWdbeCpr1NCoreversion* pnl1ncoreversion;
+	PnlWdbeCprDetail* pnldetail;
 
 	WdbeMCoreproject recCpr;
 
@@ -213,8 +213,8 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeCpr_cvrEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
 	bool handleCallWdbeCprUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbeCpr_cvrEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
 
 };
 

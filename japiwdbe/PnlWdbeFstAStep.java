@@ -312,6 +312,10 @@ public class PnlWdbeFstAStep {
 		public static final int TCOIP3WIDTH = 7;
 		public static final int TCOCN4WIDTH = 8;
 		public static final int TCOIP4WIDTH = 9;
+		public static final int TCOCN5WIDTH = 10;
+		public static final int TCOIP5WIDTH = 11;
+		public static final int TCOCN6WIDTH = 12;
+		public static final int TCOIP6WIDTH = 13;
 
 		public StgIac(
 					int TcoFnxWidth
@@ -323,6 +327,10 @@ public class PnlWdbeFstAStep {
 					, int TcoIp3Width
 					, int TcoCn4Width
 					, int TcoIp4Width
+					, int TcoCn5Width
+					, int TcoIp5Width
+					, int TcoCn6Width
+					, int TcoIp6Width
 				) {
 			this.TcoFnxWidth = TcoFnxWidth;
 			this.TcoCn1Width = TcoCn1Width;
@@ -333,8 +341,12 @@ public class PnlWdbeFstAStep {
 			this.TcoIp3Width = TcoIp3Width;
 			this.TcoCn4Width = TcoCn4Width;
 			this.TcoIp4Width = TcoIp4Width;
+			this.TcoCn5Width = TcoCn5Width;
+			this.TcoIp5Width = TcoIp5Width;
+			this.TcoCn6Width = TcoCn6Width;
+			this.TcoIp6Width = TcoIp6Width;
 
-			mask = new HashSet<Integer>(Arrays.asList(TCOFNXWIDTH, TCOCN1WIDTH, TCOIP1WIDTH, TCOCN2WIDTH, TCOIP2WIDTH, TCOCN3WIDTH, TCOIP3WIDTH, TCOCN4WIDTH, TCOIP4WIDTH));
+			mask = new HashSet<Integer>(Arrays.asList(TCOFNXWIDTH, TCOCN1WIDTH, TCOIP1WIDTH, TCOCN2WIDTH, TCOIP2WIDTH, TCOCN3WIDTH, TCOIP3WIDTH, TCOCN4WIDTH, TCOIP4WIDTH, TCOCN5WIDTH, TCOIP5WIDTH, TCOCN6WIDTH, TCOIP6WIDTH));
 		};
 
 		public int TcoFnxWidth;
@@ -346,6 +358,10 @@ public class PnlWdbeFstAStep {
 		public int TcoIp3Width;
 		public int TcoCn4Width;
 		public int TcoIp4Width;
+		public int TcoCn5Width;
+		public int TcoIp5Width;
+		public int TcoCn6Width;
+		public int TcoIp6Width;
 
 		public boolean readXML(
 					Document doc
@@ -369,6 +385,10 @@ public class PnlWdbeFstAStep {
 				TcoIp3Width = Xmlio.extractIntegerAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TcoIp3Width", mask, TCOIP3WIDTH);
 				TcoCn4Width = Xmlio.extractIntegerAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TcoCn4Width", mask, TCOCN4WIDTH);
 				TcoIp4Width = Xmlio.extractIntegerAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TcoIp4Width", mask, TCOIP4WIDTH);
+				TcoCn5Width = Xmlio.extractIntegerAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TcoCn5Width", mask, TCOCN5WIDTH);
+				TcoIp5Width = Xmlio.extractIntegerAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TcoIp5Width", mask, TCOIP5WIDTH);
+				TcoCn6Width = Xmlio.extractIntegerAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TcoCn6Width", mask, TCOCN6WIDTH);
+				TcoIp6Width = Xmlio.extractIntegerAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TcoIp6Width", mask, TCOIP6WIDTH);
 
 				return true;
 			};
@@ -403,6 +423,10 @@ public class PnlWdbeFstAStep {
 			Xmlio.writeIntegerAttr(doc, el, itemtag, "sref", "TcoIp3Width", TcoIp3Width);
 			Xmlio.writeIntegerAttr(doc, el, itemtag, "sref", "TcoCn4Width", TcoCn4Width);
 			Xmlio.writeIntegerAttr(doc, el, itemtag, "sref", "TcoIp4Width", TcoIp4Width);
+			Xmlio.writeIntegerAttr(doc, el, itemtag, "sref", "TcoCn5Width", TcoCn5Width);
+			Xmlio.writeIntegerAttr(doc, el, itemtag, "sref", "TcoIp5Width", TcoIp5Width);
+			Xmlio.writeIntegerAttr(doc, el, itemtag, "sref", "TcoCn6Width", TcoCn6Width);
+			Xmlio.writeIntegerAttr(doc, el, itemtag, "sref", "TcoIp6Width", TcoIp6Width);
 		};
 
 		public HashSet<Integer> comm(
@@ -419,6 +443,10 @@ public class PnlWdbeFstAStep {
 			if (TcoIp3Width == comp.TcoIp3Width) items.add(TCOIP3WIDTH);
 			if (TcoCn4Width == comp.TcoCn4Width) items.add(TCOCN4WIDTH);
 			if (TcoIp4Width == comp.TcoIp4Width) items.add(TCOIP4WIDTH);
+			if (TcoCn5Width == comp.TcoCn5Width) items.add(TCOCN5WIDTH);
+			if (TcoIp5Width == comp.TcoIp5Width) items.add(TCOIP5WIDTH);
+			if (TcoCn6Width == comp.TcoCn6Width) items.add(TCOCN6WIDTH);
+			if (TcoIp6Width == comp.TcoIp6Width) items.add(TCOIP6WIDTH);
 
 			return(items);
 		};
@@ -431,7 +459,7 @@ public class PnlWdbeFstAStep {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(TCOFNXWIDTH, TCOCN1WIDTH, TCOIP1WIDTH, TCOCN2WIDTH, TCOIP2WIDTH, TCOCN3WIDTH, TCOIP3WIDTH, TCOCN4WIDTH, TCOIP4WIDTH));
+			diffitems = new HashSet<Integer>(Arrays.asList(TCOFNXWIDTH, TCOCN1WIDTH, TCOIP1WIDTH, TCOCN2WIDTH, TCOIP2WIDTH, TCOCN3WIDTH, TCOIP3WIDTH, TCOCN4WIDTH, TCOIP4WIDTH, TCOCN5WIDTH, TCOIP5WIDTH, TCOCN6WIDTH, TCOIP6WIDTH));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);
@@ -459,6 +487,10 @@ public class PnlWdbeFstAStep {
 		public static final int TCOIP3 = 13;
 		public static final int TCOCN4 = 14;
 		public static final int TCOIP4 = 15;
+		public static final int TCOCN5 = 16;
+		public static final int TCOIP5 = 17;
+		public static final int TCOCN6 = 18;
+		public static final int TCOIP6 = 19;
 
 		public Tag(
 					String Cpt
@@ -476,6 +508,10 @@ public class PnlWdbeFstAStep {
 					, String TcoIp3
 					, String TcoCn4
 					, String TcoIp4
+					, String TcoCn5
+					, String TcoIp5
+					, String TcoCn6
+					, String TcoIp6
 				) {
 			this.Cpt = Cpt;
 			this.TxtRecord1 = TxtRecord1;
@@ -492,8 +528,12 @@ public class PnlWdbeFstAStep {
 			this.TcoIp3 = TcoIp3;
 			this.TcoCn4 = TcoCn4;
 			this.TcoIp4 = TcoIp4;
+			this.TcoCn5 = TcoCn5;
+			this.TcoIp5 = TcoIp5;
+			this.TcoCn6 = TcoCn6;
+			this.TcoIp6 = TcoIp6;
 
-			mask = new HashSet<Integer>(Arrays.asList(CPT, TXTRECORD1, TXTRECORD2, TRS, TXTSHOWING1, TXTSHOWING2, TCOFNX, TCOCN1, TCOIP1, TCOCN2, TCOIP2, TCOCN3, TCOIP3, TCOCN4, TCOIP4));
+			mask = new HashSet<Integer>(Arrays.asList(CPT, TXTRECORD1, TXTRECORD2, TRS, TXTSHOWING1, TXTSHOWING2, TCOFNX, TCOCN1, TCOIP1, TCOCN2, TCOIP2, TCOCN3, TCOIP3, TCOCN4, TCOIP4, TCOCN5, TCOIP5, TCOCN6, TCOIP6));
 		};
 
 		public String Cpt;
@@ -511,6 +551,10 @@ public class PnlWdbeFstAStep {
 		public String TcoIp3;
 		public String TcoCn4;
 		public String TcoIp4;
+		public String TcoCn5;
+		public String TcoIp5;
+		public String TcoCn6;
+		public String TcoIp6;
 
 		public boolean readXML(
 					Document doc
@@ -540,6 +584,10 @@ public class PnlWdbeFstAStep {
 				TcoIp3 = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "TcoIp3", mask, TCOIP3);
 				TcoCn4 = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "TcoCn4", mask, TCOCN4);
 				TcoIp4 = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "TcoIp4", mask, TCOIP4);
+				TcoCn5 = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "TcoCn5", mask, TCOCN5);
+				TcoIp5 = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "TcoIp5", mask, TCOIP5);
+				TcoCn6 = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "TcoCn6", mask, TCOCN6);
+				TcoIp6 = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "TcoIp6", mask, TCOIP6);
 
 				return true;
 			};
@@ -567,6 +615,10 @@ public class PnlWdbeFstAStep {
 			if (TcoIp3.equals(comp.TcoIp3)) items.add(TCOIP3);
 			if (TcoCn4.equals(comp.TcoCn4)) items.add(TCOCN4);
 			if (TcoIp4.equals(comp.TcoIp4)) items.add(TCOIP4);
+			if (TcoCn5.equals(comp.TcoCn5)) items.add(TCOCN5);
+			if (TcoIp5.equals(comp.TcoIp5)) items.add(TCOIP5);
+			if (TcoCn6.equals(comp.TcoCn6)) items.add(TCOCN6);
+			if (TcoIp6.equals(comp.TcoIp6)) items.add(TCOIP6);
 
 			return(items);
 		};
@@ -579,7 +631,7 @@ public class PnlWdbeFstAStep {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(CPT, TXTRECORD1, TXTRECORD2, TRS, TXTSHOWING1, TXTSHOWING2, TCOFNX, TCOCN1, TCOIP1, TCOCN2, TCOIP2, TCOCN3, TCOIP3, TCOCN4, TCOIP4));
+			diffitems = new HashSet<Integer>(Arrays.asList(CPT, TXTRECORD1, TXTRECORD2, TRS, TXTSHOWING1, TXTSHOWING2, TCOFNX, TCOCN1, TCOIP1, TCOCN2, TCOIP2, TCOCN3, TCOIP3, TCOCN4, TCOIP4, TCOCN5, TCOIP5, TCOCN6, TCOIP6));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);
@@ -727,8 +779,8 @@ public class PnlWdbeFstAStep {
 			feedFCsiQst = new Feed("FeedFCsiQst");
 			statapp = new StatApp(0);
 			statshr = new StatShr(false, false, false, false, false, false, false, false, false);
-			stgiac = new StgIac(0, 0, 0, 0, 0, 0, 0, 0, 0);
-			tag = new Tag("", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
+			stgiac = new StgIac(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+			tag = new Tag("", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
 			rst = new ListWdbeQFstAStep();
 			statappqry = (new QryWdbeFstAStep()).new StatApp(0, 0, 0, 0);
 			statshrqry = (new QryWdbeFstAStep()).new StatShr(0, 0, 0);
@@ -792,8 +844,8 @@ public class PnlWdbeFstAStep {
 				feedFCsiQst = new Feed("FeedFCsiQst");
 				statapp = new StatApp(0);
 				statshr = new StatShr(false, false, false, false, false, false, false, false, false);
-				stgiac = new StgIac(0, 0, 0, 0, 0, 0, 0, 0, 0);
-				tag = new Tag("", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
+				stgiac = new StgIac(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+				tag = new Tag("", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
 				statappqry = (new QryWdbeFstAStep()).new StatApp(0, 0, 0, 0);
 				statshrqry = (new QryWdbeFstAStep()).new StatShr(0, 0, 0);
 				stgiacqry = (new QryWdbeFstAStep()).new StgIac(0, 0, 0);

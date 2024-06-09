@@ -55,7 +55,7 @@ DpchRetWdbe* WdbeWrmcuBase::run(
 		// xxxx/Xxxx.h
 		s = xchg->tmppath + "/" + folder + "/" + Untsref + ".h.ip";
 		outfile.open(s.c_str(), ios::out);
-		writeUntH(dbswdbe, outfile, unt, mdls, snsbyte, evtbyte);
+		writeUntH(dbswdbe, outfile, unt, Untsref, mdls, snsbyte, evtbyte);
 		outfile.close();
 
 		// xxxx/Xxxx_exe.c
@@ -114,6 +114,7 @@ void WdbeWrmcuBase::writeUntH(
 			DbsWdbe* dbswdbe
 			, fstream& outfile
 			, WdbeMUnit* unt
+			, const string& Untsref
 			, ListWdbeMModule& mdls
 			, unsigned int& snsbyte
 			, unsigned int& evtbyte
@@ -310,6 +311,10 @@ void WdbeWrmcuBase::writeUntH(
 	outfile << "*/" << endl;
 	outfile << "// IP summary --- IEND" << endl;
 
+	// --- define.easy*
+	if (unt->Easy) outfile << "// IP define.easy --- AFFIRM" << endl;
+	else outfile << "// IP define.easy --- REMOVE" << endl;
+
 	// --- define.full*
 	if (!unt->Easy) outfile << "// IP define.full --- AFFIRM" << endl;
 	else outfile << "// IP define.full --- REMOVE" << endl;
@@ -320,8 +325,8 @@ void WdbeWrmcuBase::writeUntH(
 	// vectors associated with unit or controllers
 	dbswdbe->tblwdbemvector->loadRstBySQL("SELECT * FROM TblWdbeMVector WHERE hkIxVTbl = " + to_string(VecWdbeVMVectorHkTbl::UNT) + " AND hkUref = " + to_string(unt->ref) + " ORDER BY sref ASC", false, vecs);
 	dbswdbe->tblwdbemvector->loadRstBySQL("SELECT TblWdbeMVector.* FROM TblWdbeMModule, TblWdbeMVector WHERE TblWdbeMModule.hkIxVTbl = " + to_string(VecWdbeVMModuleHkTbl::UNT) + " AND TblWdbeMModule.hkUref = "
-				+ to_string(unt->ref) + " AND TblWdbeMModule.ixVBasetype = " + to_string(VecWdbeVMModuleBasetype::ECTR) + " AND TblWdbeMVector.hkIxVTbl = " + to_string(VecWdbeVMVectorHkTbl::CTR)
-				+ " AND TblWdbeMVector.hkUref = TblWdbeMModule.refWdbeMController ORDER BY TblWdbeMVector.sref ASC", true, vecs);
+				+ to_string(unt->ref) + " AND (TblWdbeMModule.ixVBasetype = " + to_string(VecWdbeVMModuleBasetype::ECTR) + " OR TblWdbeMModule.ixVBasetype = " + to_string(VecWdbeVMModuleBasetype::EDBGCTR)
+				+ ") AND TblWdbeMVector.hkIxVTbl = " + to_string(VecWdbeVMVectorHkTbl::CTR) + " AND TblWdbeMVector.hkUref = TblWdbeMModule.refWdbeMController ORDER BY TblWdbeMVector.sref ASC", true, vecs);
 
 	for (unsigned int i = 0; i < vecs.nodes.size(); i++) {
 		vec = vecs.nodes[i];
@@ -333,12 +338,12 @@ void WdbeWrmcuBase::writeUntH(
 		if (vec->ixVBasetype == VecWdbeVMVectorBasetype::IXLIN) {
 			for (unsigned int j = 0; j < vits.nodes.size(); j++) {
 				vit = vits.nodes[j];
-				outfile << "#define " << StrMod::uc(vec->sref.substr(0, 4)) << StrMod::uc(vec->sref.substr(3+1+4+4)) << "_" << vit->sref << " " << vit->vecNum << endl;
+				outfile << "#define VEC" << StrMod::uc(Wdbe::getVecSubsref(Untsref, vec->sref)) << "_" << vit->sref << " " << vit->vecNum << endl;
 			};
 		} else {
 			for (unsigned int j = 0; j < vits.nodes.size(); j++) {
 				vit = vits.nodes[j];
-				outfile << "#define " << StrMod::uc(vec->sref.substr(0, 4)) << StrMod::uc(vec->sref.substr(3+1+4+4)) << "_" << vit->sref << " 0x" << Wdbe::binToHex(vit->vecNum) << endl;
+				outfile << "#define VEC" << StrMod::uc(Wdbe::getVecSubsref(Untsref, vec->sref)) << "_" << vit->sref << " 0x" << Wdbe::binToHex(vit->vecNum) << endl;
 			};
 		};
 	};

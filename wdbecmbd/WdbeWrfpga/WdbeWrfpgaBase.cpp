@@ -64,11 +64,23 @@ DpchRetWdbe* WdbeWrfpgaBase::run(
 			outfile.open(s.c_str(), ios::out);
 			writeUntUcf(dbswdbe, outfile, srefsTopprts, bnks);
 			outfile.close();
+		} else if (unt->srefKToolch == "efinity") {
+			// xxxx/Xxxx.isf
+			s = xchg->tmppath + "/" + folder + "/" + Untsref + ".isf.ip";
+			outfile.open(s.c_str(), ios::out);
+			writeUntIsf(dbswdbe, outfile, topprts, bnks);
+			outfile.close();
 		} else if (unt->srefKToolch == "libero") {
 			// xxxx/Xxxx.pcf
 			s = xchg->tmppath + "/" + folder + "/" + Untsref + ".pdc.ip";
 			outfile.open(s.c_str(), ios::out);
-			writeUntPdc(dbswdbe, outfile, topprts, bnks);
+			writeUntMchpPdc(dbswdbe, outfile, topprts, bnks);
+			outfile.close();
+		} else if (unt->srefKToolch == "radiant") {
+			// xxxx/Xxxx.pcf
+			s = xchg->tmppath + "/" + folder + "/" + Untsref + ".pdc.ip";
+			outfile.open(s.c_str(), ios::out);
+			writeUntLttcPdc(dbswdbe, outfile, topprts, bnks);
 			outfile.close();
 		} else if (unt->srefKToolch == "vivado") {
 			// xxxx/Xxxx.xdc
@@ -167,7 +179,186 @@ void WdbeWrfpgaBase::writeUntUcf(
 	outfile << "# IP pins --- IEND" << endl;
 };
 
-void WdbeWrfpgaBase::writeUntPdc(
+void WdbeWrfpgaBase::writeUntIsf(
+			DbsWdbe* dbswdbe
+			, fstream& outfile
+			, ListWdbeMPort& topprts
+			, ListWdbeMBank& bnks
+		) {
+	WdbeMBank* bnk = NULL;
+
+	ListWdbeMPin pins;
+	WdbeMPin* pin = NULL;
+	WdbeMPin* pin2 = NULL;
+
+	map<string,WdbeMPort*> prts;
+	WdbeMPort* prt = NULL;
+
+	set<string> srefsVecs;
+	int vecix, vecmin, vecmax;
+
+	string dir;
+
+	string s;
+
+	size_t ptr, ptr2;
+
+	bool first;
+
+	for (unsigned int i = 0; i < topprts.nodes.size(); i++) prts[topprts.nodes[i]->sref] = topprts.nodes[i];
+
+	// --- pins
+	outfile << "# IP pins --- IBEGIN" << endl;
+
+	// list pins by I/O bank
+	for (unsigned int i = 0; i < bnks.nodes.size(); i++) {
+		bnk = bnks.nodes[i];
+
+		dbswdbe->tblwdbempin->loadRstByBnk(bnk->ref, false, pins);
+		first = true;
+
+		srefsVecs.clear();
+		vecmin = 0;
+		vecmax = 0;
+
+		for (unsigned int j = 0; j < pins.nodes.size(); j++) {
+			pin = pins.nodes[j];
+
+			s = pin->sref;
+			ptr = s.find('[');
+			if (ptr != string::npos) s = s.substr(0, ptr);
+
+			auto it = prts.find(s);
+			if (it != prts.end()) {
+				prt = it->second;
+
+				dir = VecWdbeVMPortDir::getSref(prt->ixVDir);
+				if (dir == "in") dir = "input";
+				else if (dir == "out") dir = "output";
+
+				if (prts.find(s) != prts.end()) {
+					if ((ptr != string::npos) && (srefsVecs.find(s) == srefsVecs.end())) {
+						vecmin = atoi(pin->sref.substr(ptr + 1).c_str());
+						vecmax = vecmin;
+
+						for (unsigned int k = j + 1; k < pins.nodes.size(); k++) {
+							pin2 = pins.nodes[k];
+
+							ptr2 = pin2->sref.find('[');
+							if (ptr2 != string::npos)
+								if (pin2->sref.substr(0, ptr2) == s) {
+									vecix = atoi(pin2->sref.substr(ptr2 + 1).c_str());
+
+									if (vecix < vecmin) vecmin = vecix;
+									if (vecix > vecmax) vecmax = vecix;
+								};
+						};
+
+						outfile << "design.create_" << dir << "_gpio(\"" << s << "\", " << vecmax << ", " << vecmin << ")" << endl;
+
+						srefsVecs.insert(s);
+
+					} else outfile << "design.create_" << dir << "_gpio(\"" << pin->sref << "\")" << endl;
+
+					outfile << "design.assign_pkg_pin(\"" << pin->sref << "\", \"" << pin->Location << "\")" << endl;
+				};
+			};
+		};
+	};
+
+	outfile << "# IP pins --- IEND" << endl;
+
+	// --- bnks
+	outfile << "# IP bnks --- IBEGIN" << endl;
+
+	for (unsigned int i = 0; i < bnks.nodes.size(); i++) {
+		bnk = bnks.nodes[i];
+
+		if (bnk->sref.find("bank") == 0) bnk->sref = bnk->sref.substr(4);
+		bnk->sref = StrMod::uc(bnk->sref);
+
+		bnk->srefKVoltstd = dbswdbe->getKlstTitleBySref(VecWdbeVKeylist::KLSTWDBEKMBANKVOLTSTD, bnk->srefKVoltstd);
+		if (bnk->srefKVoltstd != "") if (bnk->srefKVoltstd[0] == '_') bnk->srefKVoltstd = bnk->srefKVoltstd.substr(1);
+		if (bnk->srefKVoltstd != "") if (bnk->srefKVoltstd[bnk->srefKVoltstd.length() - 1] == 'V') bnk->srefKVoltstd = bnk->srefKVoltstd.substr(0, bnk->srefKVoltstd.length() - 1);
+
+		outfile << "design.set_device_property(\"" << bnk->sref << "\",\"DYNAMIC_VOLTAGE\",\"0\",\"IOBANK\")" << endl;
+		outfile << "design.set_device_property(\"" << bnk->sref << "\",\"MODE_SEL_PIN\",\"" << bnk->sref << "_MODE_SEL\",\"IOBANK\")" << endl;
+		outfile << "design.set_device_property(\"" << bnk->sref << "\",\"VOLTAGE\",\"" << bnk->srefKVoltstd << "\",\"IOBANK\")" << endl;
+	};
+
+	outfile << "# IP bnks --- IEND" << endl;
+};
+
+void WdbeWrfpgaBase::writeUntLttcPdc(
+			DbsWdbe* dbswdbe
+			, fstream& outfile
+			, ListWdbeMPort& topprts
+			, ListWdbeMBank& bnks
+		) {
+	WdbeMBank* bnk = NULL;
+
+	ListWdbeMPin pins;
+	WdbeMPin* pin = NULL;
+
+	map<string,WdbeMPort*> prts;
+	WdbeMPort* prt = NULL;
+
+	string iostd;
+
+	string s;
+
+	size_t ptr;
+
+	bool first;
+
+	for (unsigned int i = 0; i < topprts.nodes.size(); i++) prts[topprts.nodes[i]->sref] = topprts.nodes[i];
+
+	// --- pins
+	outfile << "# IP pins --- IBEGIN" << endl;
+
+	// list pins by I/O bank
+	for (unsigned int i = 0; i < bnks.nodes.size(); i++) {
+		bnk = bnks.nodes[i];
+
+		iostd = "LVCMOS33";
+		if (bnk->srefKVoltstd == "_1v2") iostd = "LVCMOS12";
+		else if (bnk->srefKVoltstd == "_1v8") iostd = "LVCMOS18";
+		else if (bnk->srefKVoltstd == "_1v8h") iostd = "LVCMOS18H";
+		else if (bnk->srefKVoltstd == "_2v5") iostd = "LVCMOS25";
+
+		dbswdbe->tblwdbempin->loadRstByBnk(bnk->ref, false, pins);
+		first = true;
+
+		for (unsigned int j = 0; j < pins.nodes.size(); j++) {
+			pin = pins.nodes[j];
+
+			s = pin->sref;
+			ptr = s.find('[');
+			if (ptr != string::npos) s = s.substr(0, ptr);
+
+			auto it = prts.find(s);
+			if (it != prts.end()) {
+				prt = it->second;
+
+				if (first) {
+					outfile << endl;
+					outfile << "# " << StubWdbe::getStubBnkStd(dbswdbe, bnk->ref) << endl;
+					first = false;
+				};
+
+				outfile << "ldc_set_location -site {" << StrMod::uc(pin->Location) << "} [get_ports {" << pin->sref << "}]" << endl;
+
+				outfile << "ldc_set_port -iobuf {IO_TYPE=" << iostd;
+				if (prt->ixVDir != VecWdbeVMPortDir::OUT) outfile << " PULLMODE=NONE";
+				outfile << "} [get_ports {" << pin->sref << "}]" << endl;
+			};
+		};
+	};
+
+	outfile << "# IP pins --- IEND" << endl;
+};
+
+void WdbeWrfpgaBase::writeUntMchpPdc(
 			DbsWdbe* dbswdbe
 			, fstream& outfile
 			, ListWdbeMPort& topprts
@@ -450,16 +641,12 @@ void WdbeWrfpgaBase::writeUntVhd(
 		// buffer vectors: include all system units in reach from unit via forwarding controller
 		sysunts.nodes.push_back(new WdbeMUnit(*unt));
 
-		dbswdbe->tblwdbemunit->loadRstBySQL("SELECT TblWdbeMUnit.* FROM TblWdbeMModule, TblWdbeMController, TblWdbeMUnit WHERE TblWdbeMModule.hkIxVTbl = " + to_string(VecWdbeVMModuleHkTbl::UNT)
-					+ " AND TblWdbeMModule.hkUref = " + to_string(unt->ref) + " AND TblWdbeMController.refWdbeMModule = TblWdbeMModule.ref AND TblWdbeMUnit.ref = TblWdbeMController.fwdRefWdbeMUnit ORDER BY TblWdbeMUnit.sref ASC",
-					true, sysunts);
-
 		first = true;
 		for (unsigned int i = 0; i < sysunts.nodes.size(); i++) {
 			sysunt = sysunts.nodes[i];
 
 			if (dbswdbe->tblwdbemvector->loadRecBySQL("SELECT * FROM TblWdbeMVector WHERE hkIxVTbl = " + to_string(VecWdbeVMVectorHkTbl::UNT) + " AND hkUref = " + to_string(sysunt->ref)
-						+ " AND sref = 'VecW" + Prjshort + StrMod::cap(sysunt->sref) + "Buffer'", &vec)) {
+						+ " AND sref = 'VecV" + Prjshort + StrMod::cap(sysunt->sref) + "Buffer'", &vec)) {
 
 				if (first) first = false;
 				else outfile << endl;
@@ -503,21 +690,21 @@ void WdbeWrfpgaBase::writeUntVhd(
 			if (vec->ixVBasetype == VecWdbeVMVectorBasetype::IXLIN) {
 				for (unsigned int j = 0; j < vits.nodes.size(); j++) {
 					vit = vits.nodes[j];
-					outfile << "\tconstant ix" << vec->sref.substr(3, 1) << vec->sref.substr(3+1+4) << StrMod::cap(vit->sref) << ": natural := " << vit->vecNum << ";" << endl;
+					outfile << "\tconstant ix" << Wdbe::getVecSubsref(Prjshort, vec->sref) << StrMod::cap(vit->sref) << ": natural := " << vit->vecNum << ";" << endl;
 				};
 			} else {
 				for (unsigned int j = 0; j < vits.nodes.size(); j++) {
 					vit = vits.nodes[j];
 
-					// ex. VecWSimdArtyBuffer -> tixWArtyBuffer...
-					outfile << "\tconstant tix" << vec->sref.substr(3, 1) << vec->sref.substr(3+1+4) << StrMod::cap(vit->sref) << ": std_logic_vector(7 downto 0) := x\"" << Wdbe::binToHex(vit->vecNum) << "\";" << endl;
+					// ex. VecVSimdArtyBuffer -> tixVArtyBuffer...
+					outfile << "\tconstant tix" << Wdbe::getVecSubsref(Prjshort, vec->sref) << StrMod::cap(vit->sref) << ": std_logic_vector(7 downto 0) := x\"" << Wdbe::binToHex(vit->vecNum) << "\";" << endl;
 				};
 			};
 		};
 
 		dbswdbe->tblwdbemvector->loadRstBySQL("SELECT TblWdbeMVector.* FROM TblWdbeMModule, TblWdbeMVector WHERE TblWdbeMModule.hkIxVTbl = " + to_string(VecWdbeVMModuleHkTbl::UNT) + " AND TblWdbeMModule.hkUref = "
-					+ to_string(unt->ref) + " AND TblWdbeMModule.ixVBasetype = " + to_string(VecWdbeVMModuleBasetype::ECTR) + " AND TblWdbeMVector.hkIxVTbl = " + to_string(VecWdbeVMVectorHkTbl::CTR)
-					+ " AND TblWdbeMVector.hkUref = TblWdbeMModule.refWdbeMController AND TblWdbeMVector.sref LIKE 'VecV%Command' ORDER BY TblWdbeMVector.sref ASC", false, vecs);
+					+ to_string(unt->ref) + " AND (TblWdbeMModule.ixVBasetype = " + to_string(VecWdbeVMModuleBasetype::ECTR) + " OR TblWdbeMModule.ixVBasetype = " + to_string(VecWdbeVMModuleBasetype::EDBGCTR)
+					+ ") AND TblWdbeMVector.hkIxVTbl = " + to_string(VecWdbeVMVectorHkTbl::CTR) + " AND TblWdbeMVector.hkUref = TblWdbeMModule.refWdbeMController AND TblWdbeMVector.sref LIKE 'VecV%Command' ORDER BY TblWdbeMVector.sref ASC", false, vecs);
 
 		for (unsigned int i = 0; i < vecs.nodes.size(); i++) {
 			vec = vecs.nodes[i];
@@ -530,14 +717,14 @@ void WdbeWrfpgaBase::writeUntVhd(
 			if (vec->ixVBasetype == VecWdbeVMVectorBasetype::IXLIN) {
 				for (unsigned int j = 0; j < vits.nodes.size(); j++) {
 					vit = vits.nodes[j];
-					outfile << "\tconstant ix" << vec->sref.substr(3, 1) << vec->sref.substr(3+1+4+4) << StrMod::cap(vit->sref) << ": natural := " << vit->vecNum << ";" << endl;
+					outfile << "\tconstant ix" << Wdbe::getVecSubsref(Untsref, vec->sref) << StrMod::cap(vit->sref) << ": natural := " << vit->vecNum << ";" << endl;
 				};
 			} else {
 				for (unsigned int j = 0; j < vits.nodes.size(); j++) {
 					vit = vits.nodes[j];
 
 					// ex. VecVSimdArtyCoulcntCommand -> tixVCoulcntCommand...
-					outfile << "\tconstant tix" << vec->sref.substr(3, 1) << vec->sref.substr(3+1+4+4) << StrMod::cap(vit->sref) << ": std_logic_vector(7 downto 0) := x\"" << Wdbe::binToHex(vit->vecNum) << "\";" << endl;
+					outfile << "\tconstant tix" << Wdbe::getVecSubsref(Untsref, vec->sref) << StrMod::cap(vit->sref) << ": std_logic_vector(7 downto 0) := x\"" << Wdbe::binToHex(vit->vecNum) << "\";" << endl;
 				};
 			};
 		};
@@ -545,7 +732,7 @@ void WdbeWrfpgaBase::writeUntVhd(
 	} else {
 		// vectors associated with unit or top module signals
 		dbswdbe->tblwdbemvector->loadRstBySQL("SELECT * FROM TblWdbeMVector WHERE hkIxVTbl = " + to_string(VecWdbeVMVectorHkTbl::UNT) + " AND hkUref = " + to_string(unt->ref)
-					+ " AND sref <> 'VecW" + Prjshort + Untsref + "Buffer' ORDER BY sref ASC", false, vecs);
+					+ " AND sref <> 'VecV" + Prjshort + Untsref + "Buffer' ORDER BY sref ASC", false, vecs);
 		dbswdbe->tblwdbemvector->loadRstBySQL("SELECT TblWdbeMVector.* FROM TblWdbeMSignal, TblWdbeMVector WHERE TblWdbeMSignal.refIxVTbl = " + to_string(VecWdbeVMSignalRefTbl::MDL) + " AND TblWdbeMSignal.refUref = "
 					+ to_string(unt->refWdbeMModule) + " AND TblWdbeMVector.hkIxVTbl = " + to_string(VecWdbeVMVectorHkTbl::SIG) + " AND TblWdbeMVector.hkUref = TblWdbeMSignal.ref ORDER BY TblWdbeMVector.sref ASC", true, vecs);
 
@@ -570,6 +757,10 @@ void WdbeWrfpgaBase::writeUntVhd(
 			};
 		};
 	};
+
+	if (!first) outfile << endl;
+	outfile << "\t-- IP " << Untsref << ".cust --- INSERT" << endl;
+
 	outfile << "end " << Untsref << ";" << endl;
 
 	// types associated with module templates and modules

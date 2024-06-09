@@ -119,6 +119,7 @@ public class PnlWdbePrcRec {
 		public static final int INITDONEREF1NVARIABLE = 4;
 		public static final int INITDONEMGE1NSIGNAL = 5;
 		public static final int INITDONEFSMFSM1NFSMSTATE = 6;
+		public static final int INITDONEFSMHK1NVECTOR = 7;
 
 		public StatApp(
 					boolean initdoneDetail
@@ -127,6 +128,7 @@ public class PnlWdbePrcRec {
 					, boolean initdoneRef1NVariable
 					, boolean initdoneMge1NSignal
 					, boolean initdoneFsmFsm1NFsmstate
+					, boolean initdoneFsmHk1NVector
 				) {
 			this.initdoneDetail = initdoneDetail;
 			this.initdoneKHdltype = initdoneKHdltype;
@@ -134,8 +136,9 @@ public class PnlWdbePrcRec {
 			this.initdoneRef1NVariable = initdoneRef1NVariable;
 			this.initdoneMge1NSignal = initdoneMge1NSignal;
 			this.initdoneFsmFsm1NFsmstate = initdoneFsmFsm1NFsmstate;
+			this.initdoneFsmHk1NVector = initdoneFsmHk1NVector;
 
-			mask = new HashSet<Integer>(Arrays.asList(INITDONEDETAIL, INITDONEKHDLTYPE, INITDONEREF1NSENSITIVITY, INITDONEREF1NVARIABLE, INITDONEMGE1NSIGNAL, INITDONEFSMFSM1NFSMSTATE));
+			mask = new HashSet<Integer>(Arrays.asList(INITDONEDETAIL, INITDONEKHDLTYPE, INITDONEREF1NSENSITIVITY, INITDONEREF1NVARIABLE, INITDONEMGE1NSIGNAL, INITDONEFSMFSM1NFSMSTATE, INITDONEFSMHK1NVECTOR));
 		};
 
 		public boolean initdoneDetail;
@@ -144,6 +147,7 @@ public class PnlWdbePrcRec {
 		public boolean initdoneRef1NVariable;
 		public boolean initdoneMge1NSignal;
 		public boolean initdoneFsmFsm1NFsmstate;
+		public boolean initdoneFsmHk1NVector;
 
 		public boolean readXML(
 					Document doc
@@ -164,6 +168,7 @@ public class PnlWdbePrcRec {
 				initdoneRef1NVariable = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneRef1NVariable", mask, INITDONEREF1NVARIABLE);
 				initdoneMge1NSignal = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneMge1NSignal", mask, INITDONEMGE1NSIGNAL);
 				initdoneFsmFsm1NFsmstate = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneFsmFsm1NFsmstate", mask, INITDONEFSMFSM1NFSMSTATE);
+				initdoneFsmHk1NVector = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneFsmHk1NVector", mask, INITDONEFSMHK1NVECTOR);
 
 				return true;
 			};
@@ -182,6 +187,7 @@ public class PnlWdbePrcRec {
 			if (initdoneRef1NVariable == comp.initdoneRef1NVariable) items.add(INITDONEREF1NVARIABLE);
 			if (initdoneMge1NSignal == comp.initdoneMge1NSignal) items.add(INITDONEMGE1NSIGNAL);
 			if (initdoneFsmFsm1NFsmstate == comp.initdoneFsmFsm1NFsmstate) items.add(INITDONEFSMFSM1NFSMSTATE);
+			if (initdoneFsmHk1NVector == comp.initdoneFsmHk1NVector) items.add(INITDONEFSMHK1NVECTOR);
 
 			return(items);
 		};
@@ -194,7 +200,7 @@ public class PnlWdbePrcRec {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(INITDONEDETAIL, INITDONEKHDLTYPE, INITDONEREF1NSENSITIVITY, INITDONEREF1NVARIABLE, INITDONEMGE1NSIGNAL, INITDONEFSMFSM1NFSMSTATE));
+			diffitems = new HashSet<Integer>(Arrays.asList(INITDONEDETAIL, INITDONEKHDLTYPE, INITDONEREF1NSENSITIVITY, INITDONEREF1NVARIABLE, INITDONEMGE1NSIGNAL, INITDONEFSMFSM1NFSMSTATE, INITDONEFSMHK1NVECTOR));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);
@@ -215,7 +221,9 @@ public class PnlWdbePrcRec {
 		public static final int SCRJREFMGE1NSIGNAL = 6;
 		public static final int SCRJREFFSMFSM1NFSMSTATE = 7;
 		public static final int PNLFSMFSM1NFSMSTATEAVAIL = 8;
-		public static final int BUTREGULARIZEACTIVE = 9;
+		public static final int SCRJREFFSMHK1NVECTOR = 9;
+		public static final int PNLFSMHK1NVECTORAVAIL = 10;
+		public static final int BUTREGULARIZEACTIVE = 11;
 
 		public StatShr(
 					int ixWdbeVExpstate
@@ -226,6 +234,8 @@ public class PnlWdbePrcRec {
 					, String scrJrefMge1NSignal
 					, String scrJrefFsmFsm1NFsmstate
 					, boolean pnlfsmfsm1nfsmstateAvail
+					, String scrJrefFsmHk1NVector
+					, boolean pnlfsmhk1nvectorAvail
 					, boolean ButRegularizeActive
 				) {
 			this.ixWdbeVExpstate = ixWdbeVExpstate;
@@ -236,9 +246,11 @@ public class PnlWdbePrcRec {
 			this.scrJrefMge1NSignal = scrJrefMge1NSignal;
 			this.scrJrefFsmFsm1NFsmstate = scrJrefFsmFsm1NFsmstate;
 			this.pnlfsmfsm1nfsmstateAvail = pnlfsmfsm1nfsmstateAvail;
+			this.scrJrefFsmHk1NVector = scrJrefFsmHk1NVector;
+			this.pnlfsmhk1nvectorAvail = pnlfsmhk1nvectorAvail;
 			this.ButRegularizeActive = ButRegularizeActive;
 
-			mask = new HashSet<Integer>(Arrays.asList(IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFKHDLTYPE, SCRJREFREF1NSENSITIVITY, SCRJREFREF1NVARIABLE, SCRJREFMGE1NSIGNAL, SCRJREFFSMFSM1NFSMSTATE, PNLFSMFSM1NFSMSTATEAVAIL, BUTREGULARIZEACTIVE));
+			mask = new HashSet<Integer>(Arrays.asList(IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFKHDLTYPE, SCRJREFREF1NSENSITIVITY, SCRJREFREF1NVARIABLE, SCRJREFMGE1NSIGNAL, SCRJREFFSMFSM1NFSMSTATE, PNLFSMFSM1NFSMSTATEAVAIL, SCRJREFFSMHK1NVECTOR, PNLFSMHK1NVECTORAVAIL, BUTREGULARIZEACTIVE));
 		};
 
 		public int ixWdbeVExpstate;
@@ -249,6 +261,8 @@ public class PnlWdbePrcRec {
 		public String scrJrefMge1NSignal;
 		public String scrJrefFsmFsm1NFsmstate;
 		public boolean pnlfsmfsm1nfsmstateAvail;
+		public String scrJrefFsmHk1NVector;
+		public boolean pnlfsmhk1nvectorAvail;
 		public boolean ButRegularizeActive;
 
 		public boolean readXML(
@@ -274,6 +288,8 @@ public class PnlWdbePrcRec {
 				scrJrefMge1NSignal = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefMge1NSignal", mask, SCRJREFMGE1NSIGNAL);
 				scrJrefFsmFsm1NFsmstate = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefFsmFsm1NFsmstate", mask, SCRJREFFSMFSM1NFSMSTATE);
 				pnlfsmfsm1nfsmstateAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "pnlfsmfsm1nfsmstateAvail", mask, PNLFSMFSM1NFSMSTATEAVAIL);
+				scrJrefFsmHk1NVector = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefFsmHk1NVector", mask, SCRJREFFSMHK1NVECTOR);
+				pnlfsmhk1nvectorAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "pnlfsmhk1nvectorAvail", mask, PNLFSMHK1NVECTORAVAIL);
 				ButRegularizeActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButRegularizeActive", mask, BUTREGULARIZEACTIVE);
 
 				return true;
@@ -295,6 +311,8 @@ public class PnlWdbePrcRec {
 			if (scrJrefMge1NSignal.equals(comp.scrJrefMge1NSignal)) items.add(SCRJREFMGE1NSIGNAL);
 			if (scrJrefFsmFsm1NFsmstate.equals(comp.scrJrefFsmFsm1NFsmstate)) items.add(SCRJREFFSMFSM1NFSMSTATE);
 			if (pnlfsmfsm1nfsmstateAvail == comp.pnlfsmfsm1nfsmstateAvail) items.add(PNLFSMFSM1NFSMSTATEAVAIL);
+			if (scrJrefFsmHk1NVector.equals(comp.scrJrefFsmHk1NVector)) items.add(SCRJREFFSMHK1NVECTOR);
+			if (pnlfsmhk1nvectorAvail == comp.pnlfsmhk1nvectorAvail) items.add(PNLFSMHK1NVECTORAVAIL);
 			if (ButRegularizeActive == comp.ButRegularizeActive) items.add(BUTREGULARIZEACTIVE);
 
 			return(items);
@@ -308,7 +326,7 @@ public class PnlWdbePrcRec {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFKHDLTYPE, SCRJREFREF1NSENSITIVITY, SCRJREFREF1NVARIABLE, SCRJREFMGE1NSIGNAL, SCRJREFFSMFSM1NFSMSTATE, PNLFSMFSM1NFSMSTATEAVAIL, BUTREGULARIZEACTIVE));
+			diffitems = new HashSet<Integer>(Arrays.asList(IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFKHDLTYPE, SCRJREFREF1NSENSITIVITY, SCRJREFREF1NVARIABLE, SCRJREFMGE1NSIGNAL, SCRJREFFSMFSM1NFSMSTATE, PNLFSMFSM1NFSMSTATEAVAIL, SCRJREFFSMHK1NVECTOR, PNLFSMHK1NVECTORAVAIL, BUTREGULARIZEACTIVE));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);
@@ -450,8 +468,8 @@ public class PnlWdbePrcRec {
 			super(VecWdbeVDpch.DPCHENGWDBEPRCRECDATA);
 
 			continf = new ContInf("");
-			statapp = new StatApp(false, false, false, false, false, false);
-			statshr = new StatShr(0, "", "", "", "", "", "", false, false);
+			statapp = new StatApp(false, false, false, false, false, false, false);
+			statshr = new StatShr(0, "", "", "", "", "", "", false, "", false, false);
 			tag = new Tag("");
 		};
 
@@ -491,8 +509,8 @@ public class PnlWdbePrcRec {
 			} else {
 				scrJref = "";
 				continf = new ContInf("");
-				statapp = new StatApp(false, false, false, false, false, false);
-				statshr = new StatShr(0, "", "", "", "", "", "", false, false);
+				statapp = new StatApp(false, false, false, false, false, false, false);
+				statshr = new StatShr(0, "", "", "", "", "", "", false, "", false, false);
 				tag = new Tag("");
 			};
 		};

@@ -105,15 +105,15 @@ set<uint> PnlWdbeLibRec::ContInf::diff(
 PnlWdbeLibRec::StatApp::StatApp(
 			const bool initdoneDetail
 			, const bool initdoneAMakefile
-			, const bool initdoneMNVersion
+			, const bool initdoneMNComponent
 		) :
 			Block()
 		{
 	this->initdoneDetail = initdoneDetail;
 	this->initdoneAMakefile = initdoneAMakefile;
-	this->initdoneMNVersion = initdoneMNVersion;
+	this->initdoneMNComponent = initdoneMNComponent;
 
-	mask = {INITDONEDETAIL, INITDONEAMAKEFILE, INITDONEMNVERSION};
+	mask = {INITDONEDETAIL, INITDONEAMAKEFILE, INITDONEMNCOMPONENT};
 };
 
 bool PnlWdbeLibRec::StatApp::readXML(
@@ -135,7 +135,7 @@ bool PnlWdbeLibRec::StatApp::readXML(
 	if (basefound) {
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneDetail", initdoneDetail)) add(INITDONEDETAIL);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneAMakefile", initdoneAMakefile)) add(INITDONEAMAKEFILE);
-		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneMNVersion", initdoneMNVersion)) add(INITDONEMNVERSION);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneMNComponent", initdoneMNComponent)) add(INITDONEMNCOMPONENT);
 	};
 
 	return basefound;
@@ -148,7 +148,7 @@ set<uint> PnlWdbeLibRec::StatApp::comm(
 
 	if (initdoneDetail == comp->initdoneDetail) insert(items, INITDONEDETAIL);
 	if (initdoneAMakefile == comp->initdoneAMakefile) insert(items, INITDONEAMAKEFILE);
-	if (initdoneMNVersion == comp->initdoneMNVersion) insert(items, INITDONEMNVERSION);
+	if (initdoneMNComponent == comp->initdoneMNComponent) insert(items, INITDONEMNCOMPONENT);
 
 	return(items);
 };
@@ -161,7 +161,7 @@ set<uint> PnlWdbeLibRec::StatApp::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {INITDONEDETAIL, INITDONEAMAKEFILE, INITDONEMNVERSION};
+	diffitems = {INITDONEDETAIL, INITDONEAMAKEFILE, INITDONEMNCOMPONENT};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -175,7 +175,7 @@ PnlWdbeLibRec::StatShr::StatShr(
 			const uint ixWdbeVExpstate
 			, const string& scrJrefDetail
 			, const string& scrJrefAMakefile
-			, const string& scrJrefMNVersion
+			, const string& scrJrefMNComponent
 			, const bool ButRegularizeActive
 		) :
 			Block()
@@ -183,10 +183,10 @@ PnlWdbeLibRec::StatShr::StatShr(
 	this->ixWdbeVExpstate = ixWdbeVExpstate;
 	this->scrJrefDetail = scrJrefDetail;
 	this->scrJrefAMakefile = scrJrefAMakefile;
-	this->scrJrefMNVersion = scrJrefMNVersion;
+	this->scrJrefMNComponent = scrJrefMNComponent;
 	this->ButRegularizeActive = ButRegularizeActive;
 
-	mask = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFAMAKEFILE, SCRJREFMNVERSION, BUTREGULARIZEACTIVE};
+	mask = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFAMAKEFILE, SCRJREFMNCOMPONENT, BUTREGULARIZEACTIVE};
 };
 
 bool PnlWdbeLibRec::StatShr::readXML(
@@ -214,7 +214,7 @@ bool PnlWdbeLibRec::StatShr::readXML(
 		};
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefDetail", scrJrefDetail)) add(SCRJREFDETAIL);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefAMakefile", scrJrefAMakefile)) add(SCRJREFAMAKEFILE);
-		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefMNVersion", scrJrefMNVersion)) add(SCRJREFMNVERSION);
+		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefMNComponent", scrJrefMNComponent)) add(SCRJREFMNCOMPONENT);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButRegularizeActive", ButRegularizeActive)) add(BUTREGULARIZEACTIVE);
 	};
 
@@ -229,7 +229,7 @@ set<uint> PnlWdbeLibRec::StatShr::comm(
 	if (ixWdbeVExpstate == comp->ixWdbeVExpstate) insert(items, IXWDBEVEXPSTATE);
 	if (scrJrefDetail == comp->scrJrefDetail) insert(items, SCRJREFDETAIL);
 	if (scrJrefAMakefile == comp->scrJrefAMakefile) insert(items, SCRJREFAMAKEFILE);
-	if (scrJrefMNVersion == comp->scrJrefMNVersion) insert(items, SCRJREFMNVERSION);
+	if (scrJrefMNComponent == comp->scrJrefMNComponent) insert(items, SCRJREFMNCOMPONENT);
 	if (ButRegularizeActive == comp->ButRegularizeActive) insert(items, BUTREGULARIZEACTIVE);
 
 	return(items);
@@ -243,7 +243,7 @@ set<uint> PnlWdbeLibRec::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFAMAKEFILE, SCRJREFMNVERSION, BUTREGULARIZEACTIVE};
+	diffitems = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFAMAKEFILE, SCRJREFMNCOMPONENT, BUTREGULARIZEACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);

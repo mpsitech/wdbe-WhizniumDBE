@@ -49,8 +49,9 @@ public:
 		static const Sbecore::uint BUTPRTVIEWCLICK = 10;
 		static const Sbecore::uint BUTSIGVIEWCLICK = 11;
 		static const Sbecore::uint BUTSIGNEWCRDCLICK = 12;
-		static const Sbecore::uint BUTPRCVIEWCLICK = 13;
-		static const Sbecore::uint BUTFSTVIEWCLICK = 14;
+		static const Sbecore::uint BUTCDCVIEWCLICK = 13;
+		static const Sbecore::uint BUTPRCVIEWCLICK = 14;
+		static const Sbecore::uint BUTFSTVIEWCLICK = 15;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);
@@ -70,11 +71,12 @@ public:
 		static const Sbecore::uint NUMFLSTGEN = 6;
 		static const Sbecore::uint NUMFLSTPRT = 7;
 		static const Sbecore::uint NUMFLSTSIG = 8;
-		static const Sbecore::uint NUMFLSTPRC = 9;
-		static const Sbecore::uint NUMFLSTFST = 10;
+		static const Sbecore::uint NUMFLSTCDC = 9;
+		static const Sbecore::uint NUMFLSTPRC = 10;
+		static const Sbecore::uint NUMFLSTFST = 11;
 
 	public:
-		ContIac(const Sbecore::uint numFLstBnk = 1, const Sbecore::uint numFLstPin = 1, const Sbecore::uint numFLstInt = 1, const Sbecore::uint numFLstSns = 1, const Sbecore::uint numFLstVar = 1, const Sbecore::uint numFLstGen = 1, const Sbecore::uint numFLstPrt = 1, const Sbecore::uint numFLstSig = 1, const Sbecore::uint numFLstPrc = 1, const Sbecore::uint numFLstFst = 1);
+		ContIac(const Sbecore::uint numFLstBnk = 1, const Sbecore::uint numFLstPin = 1, const Sbecore::uint numFLstInt = 1, const Sbecore::uint numFLstSns = 1, const Sbecore::uint numFLstVar = 1, const Sbecore::uint numFLstGen = 1, const Sbecore::uint numFLstPrt = 1, const Sbecore::uint numFLstSig = 1, const Sbecore::uint numFLstCdc = 1, const Sbecore::uint numFLstPrc = 1, const Sbecore::uint numFLstFst = 1);
 
 	public:
 		Sbecore::uint numFLstBnk;
@@ -85,11 +87,12 @@ public:
 		Sbecore::uint numFLstGen;
 		Sbecore::uint numFLstPrt;
 		Sbecore::uint numFLstSig;
+		Sbecore::uint numFLstCdc;
 		Sbecore::uint numFLstPrc;
 		Sbecore::uint numFLstFst;
 
 	public:
-		bool readJSON(Json::Value& sup, bool addbasetag = false);
+		bool readJSON(const Json::Value& sup, bool addbasetag = false);
 		bool readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 		void writeJSON(Json::Value& sup, std::string difftag = "");
 		void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
@@ -103,8 +106,8 @@ public:
 	class StatApp {
 
 	public:
-		static void writeJSON(Json::Value& sup, std::string difftag = "", const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::MIND, const bool LstBnkAlt = true, const bool LstPinAlt = true, const bool LstIntAlt = true, const bool LstSnsAlt = true, const bool LstVarAlt = true, const bool LstGenAlt = true, const bool LstPrtAlt = true, const bool LstSigAlt = true, const bool LstPrcAlt = true, const bool LstFstAlt = true, const Sbecore::uint LstBnkNumFirstdisp = 1, const Sbecore::uint LstPinNumFirstdisp = 1, const Sbecore::uint LstIntNumFirstdisp = 1, const Sbecore::uint LstSnsNumFirstdisp = 1, const Sbecore::uint LstVarNumFirstdisp = 1, const Sbecore::uint LstGenNumFirstdisp = 1, const Sbecore::uint LstPrtNumFirstdisp = 1, const Sbecore::uint LstSigNumFirstdisp = 1, const Sbecore::uint LstPrcNumFirstdisp = 1, const Sbecore::uint LstFstNumFirstdisp = 1);
-		static void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true, const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::MIND, const bool LstBnkAlt = true, const bool LstPinAlt = true, const bool LstIntAlt = true, const bool LstSnsAlt = true, const bool LstVarAlt = true, const bool LstGenAlt = true, const bool LstPrtAlt = true, const bool LstSigAlt = true, const bool LstPrcAlt = true, const bool LstFstAlt = true, const Sbecore::uint LstBnkNumFirstdisp = 1, const Sbecore::uint LstPinNumFirstdisp = 1, const Sbecore::uint LstIntNumFirstdisp = 1, const Sbecore::uint LstSnsNumFirstdisp = 1, const Sbecore::uint LstVarNumFirstdisp = 1, const Sbecore::uint LstGenNumFirstdisp = 1, const Sbecore::uint LstPrtNumFirstdisp = 1, const Sbecore::uint LstSigNumFirstdisp = 1, const Sbecore::uint LstPrcNumFirstdisp = 1, const Sbecore::uint LstFstNumFirstdisp = 1);
+		static void writeJSON(Json::Value& sup, std::string difftag = "", const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::MIND, const bool LstBnkAlt = true, const bool LstPinAlt = true, const bool LstIntAlt = true, const bool LstSnsAlt = true, const bool LstVarAlt = true, const bool LstGenAlt = true, const bool LstPrtAlt = true, const bool LstSigAlt = true, const bool LstCdcAlt = true, const bool LstPrcAlt = true, const bool LstFstAlt = true, const Sbecore::uint LstBnkNumFirstdisp = 1, const Sbecore::uint LstPinNumFirstdisp = 1, const Sbecore::uint LstIntNumFirstdisp = 1, const Sbecore::uint LstSnsNumFirstdisp = 1, const Sbecore::uint LstVarNumFirstdisp = 1, const Sbecore::uint LstGenNumFirstdisp = 1, const Sbecore::uint LstPrtNumFirstdisp = 1, const Sbecore::uint LstSigNumFirstdisp = 1, const Sbecore::uint LstCdcNumFirstdisp = 1, const Sbecore::uint LstPrcNumFirstdisp = 1, const Sbecore::uint LstFstNumFirstdisp = 1);
+		static void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true, const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::MIND, const bool LstBnkAlt = true, const bool LstPinAlt = true, const bool LstIntAlt = true, const bool LstSnsAlt = true, const bool LstVarAlt = true, const bool LstGenAlt = true, const bool LstPrtAlt = true, const bool LstSigAlt = true, const bool LstCdcAlt = true, const bool LstPrcAlt = true, const bool LstFstAlt = true, const Sbecore::uint LstBnkNumFirstdisp = 1, const Sbecore::uint LstPinNumFirstdisp = 1, const Sbecore::uint LstIntNumFirstdisp = 1, const Sbecore::uint LstSnsNumFirstdisp = 1, const Sbecore::uint LstVarNumFirstdisp = 1, const Sbecore::uint LstGenNumFirstdisp = 1, const Sbecore::uint LstPrtNumFirstdisp = 1, const Sbecore::uint LstSigNumFirstdisp = 1, const Sbecore::uint LstCdcNumFirstdisp = 1, const Sbecore::uint LstPrcNumFirstdisp = 1, const Sbecore::uint LstFstNumFirstdisp = 1);
 	};
 
 	/**
@@ -133,13 +136,15 @@ public:
 		static const Sbecore::uint LSTSIGAVAIL = 18;
 		static const Sbecore::uint BUTSIGVIEWACTIVE = 19;
 		static const Sbecore::uint BUTSIGNEWCRDACTIVE = 20;
-		static const Sbecore::uint LSTPRCAVAIL = 21;
-		static const Sbecore::uint BUTPRCVIEWACTIVE = 22;
-		static const Sbecore::uint LSTFSTAVAIL = 23;
-		static const Sbecore::uint BUTFSTVIEWACTIVE = 24;
+		static const Sbecore::uint LSTCDCAVAIL = 21;
+		static const Sbecore::uint BUTCDCVIEWACTIVE = 22;
+		static const Sbecore::uint LSTPRCAVAIL = 23;
+		static const Sbecore::uint BUTPRCVIEWACTIVE = 24;
+		static const Sbecore::uint LSTFSTAVAIL = 25;
+		static const Sbecore::uint BUTFSTVIEWACTIVE = 26;
 
 	public:
-		StatShr(const bool LstBnkAvail = true, const bool ButBnkViewActive = true, const bool ButBnkNewcrdActive = true, const bool LstPinAvail = true, const bool ButPinViewActive = true, const bool ButPinNewcrdActive = true, const bool LstIntAvail = true, const bool ButIntViewActive = true, const bool ButIntNewcrdActive = true, const bool LstSnsAvail = true, const bool ButSnsViewActive = true, const bool LstVarAvail = true, const bool ButVarViewActive = true, const bool LstGenAvail = true, const bool ButGenViewActive = true, const bool LstPrtAvail = true, const bool ButPrtViewActive = true, const bool LstSigAvail = true, const bool ButSigViewActive = true, const bool ButSigNewcrdActive = true, const bool LstPrcAvail = true, const bool ButPrcViewActive = true, const bool LstFstAvail = true, const bool ButFstViewActive = true);
+		StatShr(const bool LstBnkAvail = true, const bool ButBnkViewActive = true, const bool ButBnkNewcrdActive = true, const bool LstPinAvail = true, const bool ButPinViewActive = true, const bool ButPinNewcrdActive = true, const bool LstIntAvail = true, const bool ButIntViewActive = true, const bool ButIntNewcrdActive = true, const bool LstSnsAvail = true, const bool ButSnsViewActive = true, const bool LstVarAvail = true, const bool ButVarViewActive = true, const bool LstGenAvail = true, const bool ButGenViewActive = true, const bool LstPrtAvail = true, const bool ButPrtViewActive = true, const bool LstSigAvail = true, const bool ButSigViewActive = true, const bool ButSigNewcrdActive = true, const bool LstCdcAvail = true, const bool ButCdcViewActive = true, const bool LstPrcAvail = true, const bool ButPrcViewActive = true, const bool LstFstAvail = true, const bool ButFstViewActive = true);
 
 	public:
 		bool LstBnkAvail;
@@ -162,6 +167,8 @@ public:
 		bool LstSigAvail;
 		bool ButSigViewActive;
 		bool ButSigNewcrdActive;
+		bool LstCdcAvail;
+		bool ButCdcViewActive;
 		bool LstPrcAvail;
 		bool ButPrcViewActive;
 		bool LstFstAvail;
@@ -202,7 +209,7 @@ public:
 	public:
 		std::string getSrefsMask();
 
-		void readJSON(Json::Value& sup, bool addbasetag = false);
+		void readJSON(const Json::Value& sup, bool addbasetag = false);
 		void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 	};
 
@@ -224,7 +231,7 @@ public:
 	public:
 		std::string getSrefsMask();
 
-		void readJSON(Json::Value& sup, bool addbasetag = false);
+		void readJSON(const Json::Value& sup, bool addbasetag = false);
 		void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 	};
 
@@ -237,26 +244,28 @@ public:
 		static const Sbecore::uint JREF = 1;
 		static const Sbecore::uint CONTIAC = 2;
 		static const Sbecore::uint FEEDFLSTBNK = 3;
-		static const Sbecore::uint FEEDFLSTFST = 4;
-		static const Sbecore::uint FEEDFLSTGEN = 5;
-		static const Sbecore::uint FEEDFLSTINT = 6;
-		static const Sbecore::uint FEEDFLSTPIN = 7;
-		static const Sbecore::uint FEEDFLSTPRC = 8;
-		static const Sbecore::uint FEEDFLSTPRT = 9;
-		static const Sbecore::uint FEEDFLSTSIG = 10;
-		static const Sbecore::uint FEEDFLSTSNS = 11;
-		static const Sbecore::uint FEEDFLSTVAR = 12;
-		static const Sbecore::uint STATAPP = 13;
-		static const Sbecore::uint STATSHR = 14;
-		static const Sbecore::uint TAG = 15;
-		static const Sbecore::uint ALL = 16;
+		static const Sbecore::uint FEEDFLSTCDC = 4;
+		static const Sbecore::uint FEEDFLSTFST = 5;
+		static const Sbecore::uint FEEDFLSTGEN = 6;
+		static const Sbecore::uint FEEDFLSTINT = 7;
+		static const Sbecore::uint FEEDFLSTPIN = 8;
+		static const Sbecore::uint FEEDFLSTPRC = 9;
+		static const Sbecore::uint FEEDFLSTPRT = 10;
+		static const Sbecore::uint FEEDFLSTSIG = 11;
+		static const Sbecore::uint FEEDFLSTSNS = 12;
+		static const Sbecore::uint FEEDFLSTVAR = 13;
+		static const Sbecore::uint STATAPP = 14;
+		static const Sbecore::uint STATSHR = 15;
+		static const Sbecore::uint TAG = 16;
+		static const Sbecore::uint ALL = 17;
 
 	public:
-		DpchEngData(const Sbecore::ubigint jref = 0, ContIac* contiac = NULL, Sbecore::Feed* feedFLstBnk = NULL, Sbecore::Feed* feedFLstFst = NULL, Sbecore::Feed* feedFLstGen = NULL, Sbecore::Feed* feedFLstInt = NULL, Sbecore::Feed* feedFLstPin = NULL, Sbecore::Feed* feedFLstPrc = NULL, Sbecore::Feed* feedFLstPrt = NULL, Sbecore::Feed* feedFLstSig = NULL, Sbecore::Feed* feedFLstSns = NULL, Sbecore::Feed* feedFLstVar = NULL, StatShr* statshr = NULL, const std::set<Sbecore::uint>& mask = {NONE});
+		DpchEngData(const Sbecore::ubigint jref = 0, ContIac* contiac = NULL, Sbecore::Feed* feedFLstBnk = NULL, Sbecore::Feed* feedFLstCdc = NULL, Sbecore::Feed* feedFLstFst = NULL, Sbecore::Feed* feedFLstGen = NULL, Sbecore::Feed* feedFLstInt = NULL, Sbecore::Feed* feedFLstPin = NULL, Sbecore::Feed* feedFLstPrc = NULL, Sbecore::Feed* feedFLstPrt = NULL, Sbecore::Feed* feedFLstSig = NULL, Sbecore::Feed* feedFLstSns = NULL, Sbecore::Feed* feedFLstVar = NULL, StatShr* statshr = NULL, const std::set<Sbecore::uint>& mask = {NONE});
 
 	public:
 		ContIac contiac;
 		Sbecore::Feed feedFLstBnk;
+		Sbecore::Feed feedFLstCdc;
 		Sbecore::Feed feedFLstFst;
 		Sbecore::Feed feedFLstGen;
 		Sbecore::Feed feedFLstInt;
@@ -296,6 +305,8 @@ public:
 	bool evalLstSigAvail(DbsWdbe* dbswdbe);
 	bool evalButSigViewActive(DbsWdbe* dbswdbe);
 	bool evalButSigNewcrdActive(DbsWdbe* dbswdbe);
+	bool evalLstCdcAvail(DbsWdbe* dbswdbe);
+	bool evalButCdcViewActive(DbsWdbe* dbswdbe);
 	bool evalLstPrcAvail(DbsWdbe* dbswdbe);
 	bool evalButPrcViewActive(DbsWdbe* dbswdbe);
 	bool evalLstFstAvail(DbsWdbe* dbswdbe);
@@ -310,6 +321,7 @@ public:
 	StatShr statshr;
 
 	Sbecore::Feed feedFLstBnk;
+	Sbecore::Feed feedFLstCdc;
 	Sbecore::Feed feedFLstFst;
 	Sbecore::Feed feedFLstGen;
 	Sbecore::Feed feedFLstInt;
@@ -344,6 +356,8 @@ public:
 	void refreshPrt(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems);
 	void refreshLstSig(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems);
 	void refreshSig(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems);
+	void refreshLstCdc(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems);
+	void refreshCdc(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems);
 	void refreshLstPrc(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems);
 	void refreshPrc(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems);
 	void refreshLstFst(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems);
@@ -374,6 +388,7 @@ private:
 	void handleDpchAppDoButPrtViewClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
 	void handleDpchAppDoButSigViewClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
 	void handleDpchAppDoButSigNewcrdClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
+	void handleDpchAppDoButCdcViewClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
 	void handleDpchAppDoButPrcViewClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
 	void handleDpchAppDoButFstViewClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
 

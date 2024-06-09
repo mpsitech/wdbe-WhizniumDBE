@@ -75,7 +75,7 @@ function refreshA() {
 function refreshBD(bNotD) {
 	if (!contcontdoc) return;
 
-	var height = 586; // full cont height
+	var height = 298; // full cont height
 
 	// IP refreshBD.vars --- BEGIN
 	var LstPrjAlt = (retrieveSi(srcdoc, "StatAppWdbeNavDevdev", "LstPrjAlt") == "true");
@@ -88,29 +88,11 @@ function refreshBD(bNotD) {
 	var ButVerViewAvail = !LstVerAlt;
 	var ButVerViewActive = (retrieveSi(srcdoc, "StatShrWdbeNavDevdev", "ButVerViewActive") == "true");
 
-	var LstSysAlt = (retrieveSi(srcdoc, "StatAppWdbeNavDevdev", "LstSysAlt") == "true");
-	var LstSysAvail = (retrieveSi(srcdoc, "StatShrWdbeNavDevdev", "LstSysAvail") == "true");
-	var ButSysViewAvail = !LstSysAlt;
-	var ButSysViewActive = (retrieveSi(srcdoc, "StatShrWdbeNavDevdev", "ButSysViewActive") == "true");
-	var ButSysNewcrdActive = (retrieveSi(srcdoc, "StatShrWdbeNavDevdev", "ButSysNewcrdActive") == "true");
-
-	var LstTrgAlt = (retrieveSi(srcdoc, "StatAppWdbeNavDevdev", "LstTrgAlt") == "true");
-	var LstTrgAvail = (retrieveSi(srcdoc, "StatShrWdbeNavDevdev", "LstTrgAvail") == "true");
-	var ButTrgViewAvail = !LstTrgAlt;
-	var ButTrgViewActive = (retrieveSi(srcdoc, "StatShrWdbeNavDevdev", "ButTrgViewActive") == "true");
-	var ButTrgNewcrdActive = (retrieveSi(srcdoc, "StatShrWdbeNavDevdev", "ButTrgNewcrdActive") == "true");
-
 	var LstUntAlt = (retrieveSi(srcdoc, "StatAppWdbeNavDevdev", "LstUntAlt") == "true");
 	var LstUntAvail = (retrieveSi(srcdoc, "StatShrWdbeNavDevdev", "LstUntAvail") == "true");
 	var ButUntViewAvail = !LstUntAlt;
 	var ButUntViewActive = (retrieveSi(srcdoc, "StatShrWdbeNavDevdev", "ButUntViewActive") == "true");
 	var ButUntNewcrdActive = (retrieveSi(srcdoc, "StatShrWdbeNavDevdev", "ButUntNewcrdActive") == "true");
-
-	var LstRlsAlt = (retrieveSi(srcdoc, "StatAppWdbeNavDevdev", "LstRlsAlt") == "true");
-	var LstRlsAvail = (retrieveSi(srcdoc, "StatShrWdbeNavDevdev", "LstRlsAvail") == "true");
-	var ButRlsViewAvail = !LstRlsAlt;
-	var ButRlsViewActive = (retrieveSi(srcdoc, "StatShrWdbeNavDevdev", "ButRlsViewActive") == "true");
-	var ButRlsNewcrdActive = (retrieveSi(srcdoc, "StatShrWdbeNavDevdev", "ButRlsNewcrdActive") == "true");
 
 	var mytd, first;
 	// IP refreshBD.vars --- END
@@ -224,116 +206,6 @@ function refreshBD(bNotD) {
 
 	} else setCtlAvail(contcontdoc, "Ver2", false, 0);
 
-	height -= setCtlAvail(contcontdoc, "Sys", LstSysAvail, 96);
-	height -= setCtlAvail(contcontdoc, "Sys2", LstSysAvail && !LstSysAlt, (LstSysAvail) ? 71 : 0);
-	if (LstSysAvail) {
-		if ( (LstSysAlt == !contcontdoc.getElementById("ButSysExpand")) || (!LstSysAlt == !contcontdoc.getElementById("ButSysCollapse")) ) {
-			mytd = contcontdoc.getElementById("ldynSys");
-			clearElem(mytd);
-
-			mytd.appendChild(makeSpanCpt(contcontdoc, "CptSys", retrieveTi(srcdoc, "TagWdbeNavDevdev", "CptSys")));
-
-			mytd.appendChild(contcontdoc.createTextNode("\u00a0"));
-			if (LstSysAlt) mytd.appendChild(makeImgBut(contcontdoc, "ButSysExpand", "icon/expand"));
-			else mytd.appendChild(makeImgBut(contcontdoc, "ButSysCollapse", "icon/collapse"));
-		};
-
-		if (!LstSysAlt == !contcontdoc.getElementById("LstSys")) {
-			mytd = contcontdoc.getElementById("rdynSys");
-			clearElem(mytd);
-			mytd = contcontdoc.getElementById("dynSys");
-			clearElem(mytd);
-
-			if (LstSysAlt) {
-				mytd.setAttribute("rowspan", "1");
-			} else {
-				mytd.setAttribute("rowspan", "2");
-				mytd.appendChild(makeIframeLst(contcontdoc, "LstSys", "./PnlWdbeNavDevdev_LstSys.xml", true));
-			};
-
-		} else {
-			if (!LstSysAlt) refreshLst(contcontdoc.getElementById("LstSys").contentWindow.document, srcdoc, 1, true, false, "FeedFLstSys",
-						parseInt(retrieveSi(srcdoc, "StatAppWdbeNavDevdev", "LstSysNumFirstdisp")), [parseInt(retrieveCi(srcdoc, "ContIacWdbeNavDevdev", "numFLstSys"))]);
-		};
-
-		if ((ButSysViewAvail == !contcontdoc.getElementById("ButSysView")) || !contcontdoc.getElementById("ButSysNewcrd")) {
-			if (LstSysAlt) mytd = contcontdoc.getElementById("dynSys");
-			else mytd = contcontdoc.getElementById("rdynSys");
-			clearElem(mytd);
-
-			first = true;
-
-			if (ButSysViewAvail) {
-				if (first) first = false;
-				else mytd.appendChild(contcontdoc.createTextNode("\u00a0"));
-				mytd.appendChild(makeImgBut(contcontdoc, "ButSysView", "icon/view"));
-			};
-
-			if (first) first = false;
-			else mytd.appendChild(contcontdoc.createTextNode("\u00a0"));
-			mytd.appendChild(makeImgBut(contcontdoc, "ButSysNewcrd", "icon/newcrd"));
-		};
-
-		if (ButSysViewAvail) refreshButicon(contcontdoc, "ButSysView", "icon/view", ButSysViewActive, false);
-		refreshButicon(contcontdoc, "ButSysNewcrd", "icon/newcrd", ButSysNewcrdActive, false);
-
-	} else setCtlAvail(contcontdoc, "Sys2", false, 0);
-
-	height -= setCtlAvail(contcontdoc, "Trg", LstTrgAvail, 96);
-	height -= setCtlAvail(contcontdoc, "Trg2", LstTrgAvail && !LstTrgAlt, (LstTrgAvail) ? 71 : 0);
-	if (LstTrgAvail) {
-		if ( (LstTrgAlt == !contcontdoc.getElementById("ButTrgExpand")) || (!LstTrgAlt == !contcontdoc.getElementById("ButTrgCollapse")) ) {
-			mytd = contcontdoc.getElementById("ldynTrg");
-			clearElem(mytd);
-
-			mytd.appendChild(makeSpanCpt(contcontdoc, "CptTrg", retrieveTi(srcdoc, "TagWdbeNavDevdev", "CptTrg")));
-
-			mytd.appendChild(contcontdoc.createTextNode("\u00a0"));
-			if (LstTrgAlt) mytd.appendChild(makeImgBut(contcontdoc, "ButTrgExpand", "icon/expand"));
-			else mytd.appendChild(makeImgBut(contcontdoc, "ButTrgCollapse", "icon/collapse"));
-		};
-
-		if (!LstTrgAlt == !contcontdoc.getElementById("LstTrg")) {
-			mytd = contcontdoc.getElementById("rdynTrg");
-			clearElem(mytd);
-			mytd = contcontdoc.getElementById("dynTrg");
-			clearElem(mytd);
-
-			if (LstTrgAlt) {
-				mytd.setAttribute("rowspan", "1");
-			} else {
-				mytd.setAttribute("rowspan", "2");
-				mytd.appendChild(makeIframeLst(contcontdoc, "LstTrg", "./PnlWdbeNavDevdev_LstTrg.xml", true));
-			};
-
-		} else {
-			if (!LstTrgAlt) refreshLst(contcontdoc.getElementById("LstTrg").contentWindow.document, srcdoc, 1, true, false, "FeedFLstTrg",
-						parseInt(retrieveSi(srcdoc, "StatAppWdbeNavDevdev", "LstTrgNumFirstdisp")), [parseInt(retrieveCi(srcdoc, "ContIacWdbeNavDevdev", "numFLstTrg"))]);
-		};
-
-		if ((ButTrgViewAvail == !contcontdoc.getElementById("ButTrgView")) || !contcontdoc.getElementById("ButTrgNewcrd")) {
-			if (LstTrgAlt) mytd = contcontdoc.getElementById("dynTrg");
-			else mytd = contcontdoc.getElementById("rdynTrg");
-			clearElem(mytd);
-
-			first = true;
-
-			if (ButTrgViewAvail) {
-				if (first) first = false;
-				else mytd.appendChild(contcontdoc.createTextNode("\u00a0"));
-				mytd.appendChild(makeImgBut(contcontdoc, "ButTrgView", "icon/view"));
-			};
-
-			if (first) first = false;
-			else mytd.appendChild(contcontdoc.createTextNode("\u00a0"));
-			mytd.appendChild(makeImgBut(contcontdoc, "ButTrgNewcrd", "icon/newcrd"));
-		};
-
-		if (ButTrgViewAvail) refreshButicon(contcontdoc, "ButTrgView", "icon/view", ButTrgViewActive, false);
-		refreshButicon(contcontdoc, "ButTrgNewcrd", "icon/newcrd", ButTrgNewcrdActive, false);
-
-	} else setCtlAvail(contcontdoc, "Trg2", false, 0);
-
 	height -= setCtlAvail(contcontdoc, "Unt", LstUntAvail, 96);
 	height -= setCtlAvail(contcontdoc, "Unt2", LstUntAvail && !LstUntAlt, (LstUntAvail) ? 71 : 0);
 	if (LstUntAvail) {
@@ -388,61 +260,6 @@ function refreshBD(bNotD) {
 		refreshButicon(contcontdoc, "ButUntNewcrd", "icon/newcrd", ButUntNewcrdActive, false);
 
 	} else setCtlAvail(contcontdoc, "Unt2", false, 0);
-
-	height -= setCtlAvail(contcontdoc, "Rls", LstRlsAvail, 96);
-	height -= setCtlAvail(contcontdoc, "Rls2", LstRlsAvail && !LstRlsAlt, (LstRlsAvail) ? 71 : 0);
-	if (LstRlsAvail) {
-		if ( (LstRlsAlt == !contcontdoc.getElementById("ButRlsExpand")) || (!LstRlsAlt == !contcontdoc.getElementById("ButRlsCollapse")) ) {
-			mytd = contcontdoc.getElementById("ldynRls");
-			clearElem(mytd);
-
-			mytd.appendChild(makeSpanCpt(contcontdoc, "CptRls", retrieveTi(srcdoc, "TagWdbeNavDevdev", "CptRls")));
-
-			mytd.appendChild(contcontdoc.createTextNode("\u00a0"));
-			if (LstRlsAlt) mytd.appendChild(makeImgBut(contcontdoc, "ButRlsExpand", "icon/expand"));
-			else mytd.appendChild(makeImgBut(contcontdoc, "ButRlsCollapse", "icon/collapse"));
-		};
-
-		if (!LstRlsAlt == !contcontdoc.getElementById("LstRls")) {
-			mytd = contcontdoc.getElementById("rdynRls");
-			clearElem(mytd);
-			mytd = contcontdoc.getElementById("dynRls");
-			clearElem(mytd);
-
-			if (LstRlsAlt) {
-				mytd.setAttribute("rowspan", "1");
-			} else {
-				mytd.setAttribute("rowspan", "2");
-				mytd.appendChild(makeIframeLst(contcontdoc, "LstRls", "./PnlWdbeNavDevdev_LstRls.xml", true));
-			};
-
-		} else {
-			if (!LstRlsAlt) refreshLst(contcontdoc.getElementById("LstRls").contentWindow.document, srcdoc, 1, true, false, "FeedFLstRls",
-						parseInt(retrieveSi(srcdoc, "StatAppWdbeNavDevdev", "LstRlsNumFirstdisp")), [parseInt(retrieveCi(srcdoc, "ContIacWdbeNavDevdev", "numFLstRls"))]);
-		};
-
-		if ((ButRlsViewAvail == !contcontdoc.getElementById("ButRlsView")) || !contcontdoc.getElementById("ButRlsNewcrd")) {
-			if (LstRlsAlt) mytd = contcontdoc.getElementById("dynRls");
-			else mytd = contcontdoc.getElementById("rdynRls");
-			clearElem(mytd);
-
-			first = true;
-
-			if (ButRlsViewAvail) {
-				if (first) first = false;
-				else mytd.appendChild(contcontdoc.createTextNode("\u00a0"));
-				mytd.appendChild(makeImgBut(contcontdoc, "ButRlsView", "icon/view"));
-			};
-
-			if (first) first = false;
-			else mytd.appendChild(contcontdoc.createTextNode("\u00a0"));
-			mytd.appendChild(makeImgBut(contcontdoc, "ButRlsNewcrd", "icon/newcrd"));
-		};
-
-		if (ButRlsViewAvail) refreshButicon(contcontdoc, "ButRlsView", "icon/view", ButRlsViewActive, false);
-		refreshButicon(contcontdoc, "ButRlsNewcrd", "icon/newcrd", ButRlsNewcrdActive, false);
-
-	} else setCtlAvail(contcontdoc, "Rls2", false, 0);
 
 	// IP refreshBD --- END
 
@@ -639,9 +456,6 @@ function mergeDpchEngData(dom) {
 
 	if (updateSrcblock(dom, "DpchEngWdbeNavDevdevData", "ContIacWdbeNavDevdev", srcdoc)) mask.push("contiac");
 	if (updateSrcblock(dom, "DpchEngWdbeNavDevdevData", "FeedFLstPrj", srcdoc)) mask.push("feedFLstPrj");
-	if (updateSrcblock(dom, "DpchEngWdbeNavDevdevData", "FeedFLstRls", srcdoc)) mask.push("feedFLstRls");
-	if (updateSrcblock(dom, "DpchEngWdbeNavDevdevData", "FeedFLstSys", srcdoc)) mask.push("feedFLstSys");
-	if (updateSrcblock(dom, "DpchEngWdbeNavDevdevData", "FeedFLstTrg", srcdoc)) mask.push("feedFLstTrg");
 	if (updateSrcblock(dom, "DpchEngWdbeNavDevdevData", "FeedFLstUnt", srcdoc)) mask.push("feedFLstUnt");
 	if (updateSrcblock(dom, "DpchEngWdbeNavDevdevData", "FeedFLstVer", srcdoc)) mask.push("feedFLstVer");
 	if (updateSrcblock(dom, "DpchEngWdbeNavDevdevData", "StatAppWdbeNavDevdev", srcdoc)) mask.push("statapp");

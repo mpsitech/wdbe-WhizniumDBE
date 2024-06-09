@@ -220,31 +220,7 @@ DpchRetWdbeGenWiring* WdbeGenWiring::run(
 
 					found = false;
 
-					if ((mdl->ixVBasetype == VecWdbeVMModuleBasetype::WRP) || (mdl->ixVBasetype == VecWdbeVMModuleBasetype::TOP)) {
-						// cpi becomes csi (in addition)
-						auto it = srefsSigs.find(sref);
-
-						if (it != srefsSigs.end()) {
-							sig = it->second;
-
-							if (sig->ixVBasetype == VecWdbeVMSignalBasetype::PSB) {
-								// require matching characteristics
-								match = ( ((sig->srefWdbeKHdltype == subprt->srefWdbeKHdltype) && (sig->Width == subprt->Width) && (sig->Minmax == subprt->Minmax))
-											|| ((sig->srefWdbeKHdltype == "slvdn") && (subprt->srefWdbeKHdltype == "sl"))
-											|| ((sig->srefWdbeKHdltype == "slvdn") && (subprt->srefWdbeKHdltype == "slvdn") && (sig->Width > subprt->Width)) );
-
-								if (!match) {
-									Wdbe::appendToTmpfile(xchg->tmppath, logfile, logfi, "wiring error 3: mismatch of port " + submdl->sref + "." + subprt->sref + " characteristics with superior module " + mdl->sref + "!");
-								} else {
-									subprt->csiSrefWdbeMSignal = sig->sref;
-									dbswdbe->tblwdbemport->updateRec(subprt);
-								};
-								found = true;
-							};
-						};
-					};
-
-					if (!found && (mdl->ixVBasetype == VecWdbeVMModuleBasetype::TOP)) {
+					if (mdl->ixVBasetype == VecWdbeVMModuleBasetype::TOP) {
 						// cpi becomes cpr or csi (in addition)
 						found = true;
 
@@ -498,7 +474,7 @@ DpchRetWdbeGenWiring* WdbeGenWiring::run(
 
 					} else {
 						// csi becomes cpr (in addition)
-						if (((mdl->ixVBasetype == VecWdbeVMModuleBasetype::TOP) && (subprt->mdlIxVCat != VecWdbeVMPortMdlCat::RTEWRP)) || (mdl->supRefWdbeMModule == 0)) {
+						if ((mdl->ixVBasetype == VecWdbeVMModuleBasetype::TOP) || (mdl->supRefWdbeMModule == 0)) {
 							Wdbe::appendToTmpfile(xchg->tmppath, logfile, logfi, "wiring error 9: signal connection of " + submdl->sref + "." + subprt->sref + " port does not exist in superior module " + mdl->sref + "!");
 
 						} else {

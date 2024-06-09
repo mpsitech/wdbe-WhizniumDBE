@@ -306,11 +306,10 @@ public class PnlWdbeUntList {
 		public static final int TCOTYPWIDTH = 4;
 		public static final int TCORETWIDTH = 5;
 		public static final int TCOREUWIDTH = 6;
-		public static final int TCOSYSWIDTH = 7;
-		public static final int TCOMDLWIDTH = 8;
-		public static final int TCOPKGWIDTH = 9;
-		public static final int TCOESYWIDTH = 10;
-		public static final int TCOTCHWIDTH = 11;
+		public static final int TCOMDLWIDTH = 7;
+		public static final int TCOPKGWIDTH = 8;
+		public static final int TCOESYWIDTH = 9;
+		public static final int TCOTCHWIDTH = 10;
 
 		public StgIac(
 					int TcoSrfWidth
@@ -319,7 +318,6 @@ public class PnlWdbeUntList {
 					, int TcoTypWidth
 					, int TcoRetWidth
 					, int TcoReuWidth
-					, int TcoSysWidth
 					, int TcoMdlWidth
 					, int TcoPkgWidth
 					, int TcoEsyWidth
@@ -331,13 +329,12 @@ public class PnlWdbeUntList {
 			this.TcoTypWidth = TcoTypWidth;
 			this.TcoRetWidth = TcoRetWidth;
 			this.TcoReuWidth = TcoReuWidth;
-			this.TcoSysWidth = TcoSysWidth;
 			this.TcoMdlWidth = TcoMdlWidth;
 			this.TcoPkgWidth = TcoPkgWidth;
 			this.TcoEsyWidth = TcoEsyWidth;
 			this.TcoTchWidth = TcoTchWidth;
 
-			mask = new HashSet<Integer>(Arrays.asList(TCOSRFWIDTH, TCOTITWIDTH, TCOFSRWIDTH, TCOTYPWIDTH, TCORETWIDTH, TCOREUWIDTH, TCOSYSWIDTH, TCOMDLWIDTH, TCOPKGWIDTH, TCOESYWIDTH, TCOTCHWIDTH));
+			mask = new HashSet<Integer>(Arrays.asList(TCOSRFWIDTH, TCOTITWIDTH, TCOFSRWIDTH, TCOTYPWIDTH, TCORETWIDTH, TCOREUWIDTH, TCOMDLWIDTH, TCOPKGWIDTH, TCOESYWIDTH, TCOTCHWIDTH));
 		};
 
 		public int TcoSrfWidth;
@@ -346,7 +343,6 @@ public class PnlWdbeUntList {
 		public int TcoTypWidth;
 		public int TcoRetWidth;
 		public int TcoReuWidth;
-		public int TcoSysWidth;
 		public int TcoMdlWidth;
 		public int TcoPkgWidth;
 		public int TcoEsyWidth;
@@ -371,7 +367,6 @@ public class PnlWdbeUntList {
 				TcoTypWidth = Xmlio.extractIntegerAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TcoTypWidth", mask, TCOTYPWIDTH);
 				TcoRetWidth = Xmlio.extractIntegerAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TcoRetWidth", mask, TCORETWIDTH);
 				TcoReuWidth = Xmlio.extractIntegerAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TcoReuWidth", mask, TCOREUWIDTH);
-				TcoSysWidth = Xmlio.extractIntegerAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TcoSysWidth", mask, TCOSYSWIDTH);
 				TcoMdlWidth = Xmlio.extractIntegerAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TcoMdlWidth", mask, TCOMDLWIDTH);
 				TcoPkgWidth = Xmlio.extractIntegerAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TcoPkgWidth", mask, TCOPKGWIDTH);
 				TcoEsyWidth = Xmlio.extractIntegerAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TcoEsyWidth", mask, TCOESYWIDTH);
@@ -407,7 +402,6 @@ public class PnlWdbeUntList {
 			Xmlio.writeIntegerAttr(doc, el, itemtag, "sref", "TcoTypWidth", TcoTypWidth);
 			Xmlio.writeIntegerAttr(doc, el, itemtag, "sref", "TcoRetWidth", TcoRetWidth);
 			Xmlio.writeIntegerAttr(doc, el, itemtag, "sref", "TcoReuWidth", TcoReuWidth);
-			Xmlio.writeIntegerAttr(doc, el, itemtag, "sref", "TcoSysWidth", TcoSysWidth);
 			Xmlio.writeIntegerAttr(doc, el, itemtag, "sref", "TcoMdlWidth", TcoMdlWidth);
 			Xmlio.writeIntegerAttr(doc, el, itemtag, "sref", "TcoPkgWidth", TcoPkgWidth);
 			Xmlio.writeIntegerAttr(doc, el, itemtag, "sref", "TcoEsyWidth", TcoEsyWidth);
@@ -425,7 +419,6 @@ public class PnlWdbeUntList {
 			if (TcoTypWidth == comp.TcoTypWidth) items.add(TCOTYPWIDTH);
 			if (TcoRetWidth == comp.TcoRetWidth) items.add(TCORETWIDTH);
 			if (TcoReuWidth == comp.TcoReuWidth) items.add(TCOREUWIDTH);
-			if (TcoSysWidth == comp.TcoSysWidth) items.add(TCOSYSWIDTH);
 			if (TcoMdlWidth == comp.TcoMdlWidth) items.add(TCOMDLWIDTH);
 			if (TcoPkgWidth == comp.TcoPkgWidth) items.add(TCOPKGWIDTH);
 			if (TcoEsyWidth == comp.TcoEsyWidth) items.add(TCOESYWIDTH);
@@ -442,7 +435,7 @@ public class PnlWdbeUntList {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(TCOSRFWIDTH, TCOTITWIDTH, TCOFSRWIDTH, TCOTYPWIDTH, TCORETWIDTH, TCOREUWIDTH, TCOSYSWIDTH, TCOMDLWIDTH, TCOPKGWIDTH, TCOESYWIDTH, TCOTCHWIDTH));
+			diffitems = new HashSet<Integer>(Arrays.asList(TCOSRFWIDTH, TCOTITWIDTH, TCOFSRWIDTH, TCOTYPWIDTH, TCORETWIDTH, TCOREUWIDTH, TCOMDLWIDTH, TCOPKGWIDTH, TCOESYWIDTH, TCOTCHWIDTH));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);
@@ -468,11 +461,10 @@ public class PnlWdbeUntList {
 		public static final int TCOTYP = 11;
 		public static final int TCORET = 12;
 		public static final int TCOREU = 13;
-		public static final int TCOSYS = 14;
-		public static final int TCOMDL = 15;
-		public static final int TCOPKG = 16;
-		public static final int TCOESY = 17;
-		public static final int TCOTCH = 18;
+		public static final int TCOMDL = 14;
+		public static final int TCOPKG = 15;
+		public static final int TCOESY = 16;
+		public static final int TCOTCH = 17;
 
 		public Tag(
 					String Cpt
@@ -488,7 +480,6 @@ public class PnlWdbeUntList {
 					, String TcoTyp
 					, String TcoRet
 					, String TcoReu
-					, String TcoSys
 					, String TcoMdl
 					, String TcoPkg
 					, String TcoEsy
@@ -507,13 +498,12 @@ public class PnlWdbeUntList {
 			this.TcoTyp = TcoTyp;
 			this.TcoRet = TcoRet;
 			this.TcoReu = TcoReu;
-			this.TcoSys = TcoSys;
 			this.TcoMdl = TcoMdl;
 			this.TcoPkg = TcoPkg;
 			this.TcoEsy = TcoEsy;
 			this.TcoTch = TcoTch;
 
-			mask = new HashSet<Integer>(Arrays.asList(CPT, TXTFOR, TXTRECORD1, TXTRECORD2, TRS, TXTSHOWING1, TXTSHOWING2, TCOSRF, TCOTIT, TCOFSR, TCOTYP, TCORET, TCOREU, TCOSYS, TCOMDL, TCOPKG, TCOESY, TCOTCH));
+			mask = new HashSet<Integer>(Arrays.asList(CPT, TXTFOR, TXTRECORD1, TXTRECORD2, TRS, TXTSHOWING1, TXTSHOWING2, TCOSRF, TCOTIT, TCOFSR, TCOTYP, TCORET, TCOREU, TCOMDL, TCOPKG, TCOESY, TCOTCH));
 		};
 
 		public String Cpt;
@@ -529,7 +519,6 @@ public class PnlWdbeUntList {
 		public String TcoTyp;
 		public String TcoRet;
 		public String TcoReu;
-		public String TcoSys;
 		public String TcoMdl;
 		public String TcoPkg;
 		public String TcoEsy;
@@ -561,7 +550,6 @@ public class PnlWdbeUntList {
 				TcoTyp = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "TcoTyp", mask, TCOTYP);
 				TcoRet = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "TcoRet", mask, TCORET);
 				TcoReu = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "TcoReu", mask, TCOREU);
-				TcoSys = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "TcoSys", mask, TCOSYS);
 				TcoMdl = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "TcoMdl", mask, TCOMDL);
 				TcoPkg = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "TcoPkg", mask, TCOPKG);
 				TcoEsy = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "TcoEsy", mask, TCOESY);
@@ -591,7 +579,6 @@ public class PnlWdbeUntList {
 			if (TcoTyp.equals(comp.TcoTyp)) items.add(TCOTYP);
 			if (TcoRet.equals(comp.TcoRet)) items.add(TCORET);
 			if (TcoReu.equals(comp.TcoReu)) items.add(TCOREU);
-			if (TcoSys.equals(comp.TcoSys)) items.add(TCOSYS);
 			if (TcoMdl.equals(comp.TcoMdl)) items.add(TCOMDL);
 			if (TcoPkg.equals(comp.TcoPkg)) items.add(TCOPKG);
 			if (TcoEsy.equals(comp.TcoEsy)) items.add(TCOESY);
@@ -608,7 +595,7 @@ public class PnlWdbeUntList {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(CPT, TXTFOR, TXTRECORD1, TXTRECORD2, TRS, TXTSHOWING1, TXTSHOWING2, TCOSRF, TCOTIT, TCOFSR, TCOTYP, TCORET, TCOREU, TCOSYS, TCOMDL, TCOPKG, TCOESY, TCOTCH));
+			diffitems = new HashSet<Integer>(Arrays.asList(CPT, TXTFOR, TXTRECORD1, TXTRECORD2, TRS, TXTSHOWING1, TXTSHOWING2, TCOSRF, TCOTIT, TCOFSR, TCOTYP, TCORET, TCOREU, TCOMDL, TCOPKG, TCOESY, TCOTCH));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);
@@ -764,8 +751,8 @@ public class PnlWdbeUntList {
 			feedFCsiQst = new Feed("FeedFCsiQst");
 			feedFTos = new Feed("FeedFTos");
 			statshr = new StatShr(0, false);
-			stgiac = new StgIac(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-			tag = new Tag("", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
+			stgiac = new StgIac(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+			tag = new Tag("", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
 			rst = new ListWdbeQUntList();
 			statappqry = (new QryWdbeUntList()).new StatApp(0, 0, 0, 0);
 			statshrqry = (new QryWdbeUntList()).new StatShr(0, 0, 0);
@@ -833,8 +820,8 @@ public class PnlWdbeUntList {
 				feedFCsiQst = new Feed("FeedFCsiQst");
 				feedFTos = new Feed("FeedFTos");
 				statshr = new StatShr(0, false);
-				stgiac = new StgIac(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-				tag = new Tag("", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
+				stgiac = new StgIac(0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+				tag = new Tag("", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "");
 				statappqry = (new QryWdbeUntList()).new StatApp(0, 0, 0, 0);
 				statshrqry = (new QryWdbeUntList()).new StatShr(0, 0, 0);
 				stgiacqry = (new QryWdbeUntList()).new StgIac(0, 0, 0);

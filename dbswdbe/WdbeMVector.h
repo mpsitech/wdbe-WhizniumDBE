@@ -99,8 +99,8 @@ public:
 
 	public:
 		static const Sbecore::uint CTR = 1;
-		static const Sbecore::uint SIG = 2;
-		static const Sbecore::uint SYS = 3;
+		static const Sbecore::uint FSM = 2;
+		static const Sbecore::uint SIG = 3;
 		static const Sbecore::uint UNT = 4;
 
 		static Sbecore::uint getIx(const std::string& sref);

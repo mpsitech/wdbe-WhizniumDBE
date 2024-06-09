@@ -19,7 +19,6 @@ namespace SqkWdbeWrdev {
 	std::string getSquawkBase(DbsWdbe* dbswdbe, DpchInvWdbeWrdevBase* dpchinv);
 	std::string getSquawkCtr(DbsWdbe* dbswdbe, DpchInvWdbeWrdevCtr* dpchinv);
 	std::string getSquawkDeploy(DbsWdbe* dbswdbe, DpchInvWdbeWrdevDeploy* dpchinv);
-	std::string getSquawkSys(DbsWdbe* dbswdbe, DpchInvWdbeWrdevSys* dpchinv);
 	std::string getSquawkUnt(DbsWdbe* dbswdbe, DpchInvWdbeWrdevUnt* dpchinv);
 };
 

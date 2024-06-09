@@ -1,56 +1,61 @@
-IexWznmJob v0.9.29									
-ImeIMJob.sref	Clisrv	Shrdat	Comment						
-JobWdbeLicense	true	true							
-	ImeIMBlock.srefsReaIxWznmWScope	srefsWriIxWznmWScope	sref	Comment					
-	"cmbeng;eng"	"cmbeng;eng"	StgJobWdbeLicense						
+IexWznmJob v0.9.29
+ImeIMJob.sref	Clisrv	Shrdat	Comment
+JobWdbeLicense	true	true
+	ImeIMBlock.srefsReaIxWznmWScope	srefsWriIxWznmWScope	sref	Comment
+	cmbeng;eng	cmbeng;eng	StgJobWdbeLicense
 		ImeIAMBlockItem.irefRefWznmCAMBlockItem	srefIxVBasetype	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
-		0	var	engip	string		license.mpsitech.cloud		
-		0	var	engport	uint		13110		
-		0	var	username	string				
-		0	var	password	string				
-		0	var	licenseBase	string				
-		0	var	licenseFull	string				
-		0	var	licenseTpl	string				
-		0	var	lastAttempt	string				
-		0	var	lastSuccess	string				
-		0	var	lastSync	string				
-		ImeIAMBlockItem.end							
-	ImeIMBlock.end								
-ImeIMJob.end									
-ImeIMCapability.sref									
-DlgWdbeCvrBsccd									
-	ImeIRMCapabilityUniversal.srefUnvUref	srefKKey							
-	CrdWdbeCvr	car							
-	IexWdbeBcd	iex							
-	ImeIRMCapabilityUniversal.end								
-DlgWdbeCvrDetcd									
-	ImeIRMCapabilityUniversal.srefUnvUref	srefKKey							
-	CrdWdbeCvr	car							
-	IexWdbeDcd	iex							
-	ImeIRMCapabilityUniversal.end								
-DlgWdbePrjImpex									
-	ImeIRMCapabilityUniversal.srefUnvUref	srefKKey							
-	CrdWdbePrj	car							
-	IexWdbePrj	iex							
-	ImeIRMCapabilityUniversal.end								
-DlgWdbeVerCmdset									
-	ImeIRMCapabilityUniversal.srefUnvUref	srefKKey							
-	CrdWdbeVer	car							
-	IexWdbeCsx	iex							
-	ImeIRMCapabilityUniversal.end								
-DlgWdbeVerCustfst									
-	ImeIRMCapabilityUniversal.srefUnvUref	srefKKey							
-	CrdWdbeVer	car							
-	IexWdbeFin	iex							
-	ImeIRMCapabilityUniversal.end								
-DlgWdbeVerDflalg									
-	ImeIRMCapabilityUniversal.srefUnvUref	srefKKey							
-	CrdWdbeVer	car							
-	IexWdbeDal	iex							
-	ImeIRMCapabilityUniversal.end								
-DlgWdbeVerMdlstr									
-	ImeIRMCapabilityUniversal.srefUnvUref	srefKKey							
-	CrdWdbeVer	car							
-	IexWdbeMdl	iex							
-	ImeIRMCapabilityUniversal.end								
-ImeIMCapability.end									
+		0	var	engip	string		license.mpsitech.cloud
+		0	var	engport	uint		13110
+		0	var	username	string
+		0	var	password	string
+		0	var	licenseBase	string
+		0	var	licenseFull	string
+		0	var	licenseTpl	string
+		0	var	lastAttempt	string
+		0	var	lastSuccess	string
+		0	var	lastSync	string
+		ImeIAMBlockItem.end
+	ImeIMBlock.end
+ImeIMJob.end
+ImeIMCapability.sref
+DlgWdbeCvrBsccd
+	ImeIRMCapabilityUniversal.srefUnvUref	srefKKey
+	CrdWdbeCvr	car
+	IexWdbeBcd	iex
+	ImeIRMCapabilityUniversal.end
+DlgWdbeCvrDetcd
+	ImeIRMCapabilityUniversal.srefUnvUref	srefKKey
+	CrdWdbeCvr	car
+	IexWdbeDcd	iex
+	ImeIRMCapabilityUniversal.end
+DlgWdbePrjImpex
+	ImeIRMCapabilityUniversal.srefUnvUref	srefKKey
+	CrdWdbePrj	car
+	IexWdbePrj	iex
+	ImeIRMCapabilityUniversal.end
+DlgWdbeVerCmdset
+	ImeIRMCapabilityUniversal.srefUnvUref	srefKKey
+	CrdWdbeVer	car
+	IexWdbeCsx	iex
+	ImeIRMCapabilityUniversal.end
+DlgWdbeVerCustfst
+	ImeIRMCapabilityUniversal.srefUnvUref	srefKKey
+	CrdWdbeVer	car
+	IexWdbeFin	iex
+	ImeIRMCapabilityUniversal.end
+DlgWdbeVerDeploy
+	ImeIRMCapabilityUniversal.srefUnvUref	srefKKey
+	CrdWdbeVer	car
+	IexWdbeDpl	iex
+	ImeIRMCapabilityUniversal.end
+DlgWdbeVerDflalg
+	ImeIRMCapabilityUniversal.srefUnvUref	srefKKey
+	CrdWdbeVer	car
+	IexWdbeDal	iex
+	ImeIRMCapabilityUniversal.end
+DlgWdbeVerMdlstr
+	ImeIRMCapabilityUniversal.srefUnvUref	srefKKey
+	CrdWdbeVer	car
+	IexWdbeMdl	iex
+	ImeIRMCapabilityUniversal.end
+ImeIMCapability.end

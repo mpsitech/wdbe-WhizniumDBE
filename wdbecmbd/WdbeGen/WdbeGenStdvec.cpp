@@ -61,8 +61,6 @@ DpchRetWdbe* WdbeGenStdvec::run(
 
 		// - fill command vector
 		if (dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMVector WHERE hkIxVTbl = " + to_string(VecWdbeVMVectorHkTbl::UNT) + " AND hkUref = " + to_string(refWdbeMUnit) + " AND sref = 'VecV" + unt->Fullsref.substr(3) + "Command'", ref)) {
-			vecNum = 0;
-
 			dbswdbe->tblwdbemcommand->loadRstByRetReu(VecWdbeVMCommandRefTbl::UNT, refWdbeMUnit, false, cmds);
 			for (unsigned int j = 0; j < cmds.nodes.size(); j++) {
 				cmd = cmds.nodes[j];
@@ -84,17 +82,17 @@ DpchRetWdbe* WdbeGenStdvec::run(
 		};
 
 		// - fill buffer vector
-		if (dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMVector WHERE hkIxVTbl = " + to_string(VecWdbeVMVectorHkTbl::UNT) + " AND hkUref = " + to_string(refWdbeMUnit) + " AND sref = 'VecW" + unt->Fullsref.substr(3) + "Buffer'", ref)) {
+		if (dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMVector WHERE hkIxVTbl = " + to_string(VecWdbeVMVectorHkTbl::UNT) + " AND hkUref = " + to_string(refWdbeMUnit) + " AND sref = 'VecV" + unt->Fullsref.substr(3) + "Buffer'", ref)) {
 			hostif = NULL;
 
 			if (dbswdbe->tblwdbemmodule->loadRecBySQL("SELECT * FROM TblWdbeMModule WHERE hkIxVTbl = " + to_string(VecWdbeVMModuleHkTbl::UNT) + " AND hkUref = " + to_string(refWdbeMUnit) + " AND ixVBasetype = " + to_string(VecWdbeVMModuleBasetype::HOSTIF), &hostif)) {
-				vecNum = 1;
+				vecNum = 0;
 
 			} else if (dbswdbe->tblwdbemmodule->loadRecBySQL("SELECT * FROM TblWdbeMModule WHERE hkIxVTbl = " + to_string(VecWdbeVMModuleHkTbl::UNT) + " AND hkUref = " + to_string(refWdbeMUnit) + " AND ixVBasetype = " + to_string(VecWdbeVMModuleBasetype::EHOSTIF), &hostif)) {
-				dbswdbe->tblwdbemvectoritem->insertNewRec(NULL, ref, 1, "cmdretTo" + StrMod::cap(hostif->sref), "", "");
-				dbswdbe->tblwdbemvectoritem->insertNewRec(NULL, ref, 2, hostif->sref + "ToCmdinv", "", "");
+				dbswdbe->tblwdbemvectoritem->insertNewRec(NULL, ref, 0, "cmdretTo" + StrMod::cap(hostif->sref), "", "");
+				dbswdbe->tblwdbemvectoritem->insertNewRec(NULL, ref, 1, hostif->sref + "ToCmdinv", "", "");
 
-				vecNum = 4;
+				vecNum = 2;
 			};
 
 			if (hostif) {
@@ -103,9 +101,7 @@ DpchRetWdbe* WdbeGenStdvec::run(
 
 				for (unsigned int i = 0; i < refs.size(); i++) {
 					Wdbe::getImbsrefs(dbswdbe, refs[i], sref, srefrootMgmt, srefrootCor);
-					dbswdbe->tblwdbemvectoritem->insertNewRec(NULL, ref, vecNum, sref, "", "");
-
-					vecNum *= 2;
+					dbswdbe->tblwdbemvectoritem->insertNewRec(NULL, ref, vecNum++, sref, "", "");
 				};
 			};
 		};

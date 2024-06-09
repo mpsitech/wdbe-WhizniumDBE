@@ -96,31 +96,6 @@ public:
 };
 
 /**
-	* DpchInvWdbeWrdevSys
-	*/
-class DpchInvWdbeWrdevSys : public DpchInvWdbe {
-
-public:
-	static const Sbecore::uint SCROREF = 1;
-	static const Sbecore::uint OREF = 1;
-	static const Sbecore::uint SCRJREF = 2;
-	static const Sbecore::uint JREF = 2;
-	static const Sbecore::uint REFWDBEMSYSTEM = 3;
-	static const Sbecore::uint FOLDER = 4;
-
-public:
-	DpchInvWdbeWrdevSys(const Sbecore::ubigint oref = 0, const Sbecore::ubigint jref = 0, const Sbecore::ubigint refWdbeMSystem = 0, const std::string& folder = "");
-
-public:
-	Sbecore::ubigint refWdbeMSystem;
-	std::string folder;
-
-public:
-	void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
-	void writeXML(xmlTextWriter* wr);
-};
-
-/**
 	* DpchInvWdbeWrdevUnt
 	*/
 class DpchInvWdbeWrdevUnt : public DpchInvWdbe {

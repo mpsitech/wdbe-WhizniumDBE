@@ -33,18 +33,10 @@ string SqkWdbePlhfpga::getSquawkCmdret(
 	return(""); // IP getSquawkCmdret --- LINE
 };
 
-string SqkWdbePlhfpga::getSquawkEhostif(
+string SqkWdbePlhfpga::getSquawkCtr(
 			DbsWdbe* dbswdbe
-			, DpchInvWdbePlhfpgaEhostif* dpchinv
+			, DpchInvWdbePlhfpgaCtr* dpchinv
 		) {
-	// example: "fill type-specific placeholders for module 'icm2-hostif (uarthostif_Easy_v1_0 easy model host interface)'"
-	return(""); // IP getSquawkEhostif --- LINE
-};
-
-string SqkWdbePlhfpga::getSquawkFwdctr(
-			DbsWdbe* dbswdbe
-			, DpchInvWdbePlhfpgaFwdctr* dpchinv
-		) {
-	// example: "fill type-specific placeholders for module 'dcx3-qcdif (fwdctr_v1_0 forwarding controller)'"
-	return(""); // IP getSquawkFwdctr --- LINE
+	// example: "fill type-specific placeholders for module 'dcx3-qcdif (ctr_v1_0 controller)'"
+	return(""); // IP getSquawkCtr --- LINE
 };

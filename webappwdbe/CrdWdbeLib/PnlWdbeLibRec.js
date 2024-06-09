@@ -1,19 +1,19 @@
 function updateScrJrefs() {
 	scrJrefDetail = retrieveSi(srcdoc, "StatShrWdbeLibRec", "scrJrefDetail");
 	scrJrefAMakefile = retrieveSi(srcdoc, "StatShrWdbeLibRec", "scrJrefAMakefile");
-	scrJrefMNVersion = retrieveSi(srcdoc, "StatShrWdbeLibRec", "scrJrefMNVersion");
+	scrJrefMNComponent = retrieveSi(srcdoc, "StatShrWdbeLibRec", "scrJrefMNComponent");
 };
 
 function resetInitdones() {
 	setSi(srcdoc, "StatAppWdbeLibRec", "initdoneDetail", "false");
 	setSi(srcdoc, "StatAppWdbeLibRec", "initdoneAMakefile", "false");
-	setSi(srcdoc, "StatAppWdbeLibRec", "initdoneMNVersion", "false");
+	setSi(srcdoc, "StatAppWdbeLibRec", "initdoneMNComponent", "false");
 };
 
 function resetHeights() {
 	heightDetail = 30;
 	heightAMakefile = 30;
-	heightMNVersion = 30;
+	heightMNComponent = 30;
 };
 
 function getInitdone(pnlshort) {
@@ -33,14 +33,14 @@ function checkInitdone() {
 
 	var initdoneDetail = (retrieveSi(srcdoc, "StatAppWdbeLibRec", "initdoneDetail") == "true");
 	var initdoneAMakefile = (retrieveSi(srcdoc, "StatAppWdbeLibRec", "initdoneAMakefile") == "true");
-	var initdoneMNVersion = (retrieveSi(srcdoc, "StatAppWdbeLibRec", "initdoneMNVersion") == "true");
+	var initdoneMNComponent = (retrieveSi(srcdoc, "StatAppWdbeLibRec", "initdoneMNComponent") == "true");
 
 	if (!initdoneDetail) {
 		lhsdoc.getElementById("Detail").src = "./PnlWdbeLibDetail.html?scrJref=" + scrJrefDetail;
 	} else if (!initdoneAMakefile) {
 		lhsdoc.getElementById("AMakefile").src = "./PnlWdbeLibAMakefile.html?scrJref=" + scrJrefAMakefile;
-	} else if (!initdoneMNVersion) {
-		rhsdoc.getElementById("MNVersion").src = "./PnlWdbeLibMNVersion.html?scrJref=" + scrJrefMNVersion;
+	} else if (!initdoneMNComponent) {
+		rhsdoc.getElementById("MNComponent").src = "./PnlWdbeLibMNComponent.html?scrJref=" + scrJrefMNComponent;
 
 	} else {
 		refreshB();
@@ -81,7 +81,7 @@ function setPnlAvail(short, avail) {
 		else if (short == "Rec") heightRec = height;
 		else if (short == "Detail") heightDetail = height;
 		else if (short == "AMakefile") heightAMakefile = height;
-		else if (short == "MNVersion") heightMNVersion = height;
+		else if (short == "MNComponent") heightMNComponent = height;
 	};
 
 	return(avail != oldAvail);
@@ -126,7 +126,7 @@ function changeHeight(pnlshort, height, update) {
 	else if (pnlshort == "Rec") heightRec = height;
 	else if (pnlshort == "Detail") heightDetail = height;
 	else if (pnlshort == "AMakefile") heightAMakefile = height;
-	else if (pnlshort == "MNVersion") heightMNVersion = height;
+	else if (pnlshort == "MNComponent") heightMNComponent = height;
 
 	if (update) updateHeight();
 };
@@ -135,7 +135,7 @@ function updateHeight() {
 	var heightLhs, heightRhs, heightGt;
 
 	heightLhs = heightDetail+13 + heightAMakefile+13 + 5;
-	heightRhs = heightMNVersion+13 + 5;
+	heightRhs = heightMNComponent+13 + 5;
 
 	if (heightLhs > heightRhs) {
 		lhsdoc.getElementById("tdFill").setAttribute("height", "5");
@@ -328,8 +328,8 @@ function handleDpchEng(dom, dpch) {
 				if (getInitdone("Detail")) lhsdoc.getElementById("Detail").contentWindow.handleDpchEng(dom, dpch);
 			} else if (_scrJref == scrJrefAMakefile) {
 				if (getInitdone("AMakefile")) lhsdoc.getElementById("AMakefile").contentWindow.handleDpchEng(dom, dpch);
-			} else if (_scrJref == scrJrefMNVersion) {
-				if (getInitdone("MNVersion")) rhsdoc.getElementById("MNVersion").contentWindow.handleDpchEng(dom, dpch);
+			} else if (_scrJref == scrJrefMNComponent) {
+				if (getInitdone("MNComponent")) rhsdoc.getElementById("MNComponent").contentWindow.handleDpchEng(dom, dpch);
 			} else {
 				// alert("got a '" + dpch + "' from job with scrJref " + _scrJref);
 			};

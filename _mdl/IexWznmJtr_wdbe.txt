@@ -10,6 +10,7 @@ CrdWdbeUnt
 	showMdls
 	showCmds
 	showGens
+	showPrcs
 	showPrts
 	showSigs
 	ImeIAMJobCmd.end
@@ -514,15 +515,6 @@ DlgWdbeRlsFinreptr
 		dld		lock	void					cust
 		ImeIMSensitivity2.end
 	ImeIMStage.end
-DlgWdbeRlsNew
-	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment
-	other	idle
-		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		con		lock	void			ButCre		chgsge	create
-		ImeIMSensitivity2.end
-	other	create		done	idle
-	other	done
-	ImeIMStage.end
 DlgWdbeRlsStareptr
 	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment
 	other	stadone
@@ -722,8 +714,6 @@ DlgWdbeRlsWrite
 	ImeIRMJobMOp.srefRefWznmMOp
 	WdbePlhfpgaCmdinv
 	WdbePlhfpgaCmdret
-	WdbePlhfpgaEhostif
-	WdbePlhfpgaFwdctr
 	WdbePlhmcuEctr
 	WdbePlhmcuEhostif
 	WdbePrctreeMerge
@@ -972,6 +962,42 @@ DlgWdbeVerCustfst
 		dld		lock	void					cust
 		ImeIMSensitivity2.end
 	ImeIMStage.end
+DlgWdbeVerDeploy
+	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment
+	other	idle
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		uld		lock	void					chgsge	prsidle
+		ImeIMSensitivity2.end
+	immcb	prsidle		parse
+	other	parse		prsdone	alrwdbeper
+		ImeIMSquawk.Title	Example
+		parsing deployment information
+		ImeIMSquawk.end
+	alr	alrwdbeper		idle
+		ImeIMSquawk.Title	Example
+		parse error
+		ImeIMSquawk.end
+	other	prsdone
+		ImeIMSquawk.Title	Example
+		deployment information parsed
+		ImeIMSquawk.end
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		con		lock	void			ImpButRun		chgsge	impidle
+		ImeIMSensitivity2.end
+	immcb	impidle		import
+	other	import	250000	done	alrwdbeier
+		ImeIMSquawk.Title	Example
+		importing deployment information (&impcnt; records added)	importing deployment information (1234 records added)
+		ImeIMSquawk.end
+	alr	alrwdbeier		idle
+		ImeIMSquawk.Title	Example
+		import error
+		ImeIMSquawk.end
+	other	done
+		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
+		dld		lock	void					cust
+		ImeIMSensitivity2.end
+	ImeIMStage.end
 DlgWdbeVerDflalg
 	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment
 	other	idle
@@ -1012,13 +1038,13 @@ DlgWdbeVerFinmod
 	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment
 	other	idle
 		ImeIMSensitivity2.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
-		con		lock	void			FnmButRun		chgsge	genwri
+		con		lock	void			FnmButRun		chgsge	genaux
 		ImeIMSensitivity2.end
-	oppiw	gentst	250000	genwri		genwri
+	oppiw	genaux	250000	genaux		genwri
 		ImeIMSquawk.Title	Example
-			generating test infrastructure (123/1234 operations completed, last: generate test infrastructure for module 'laser (easy model controller)')
+			generating auxiliary infrastructure top-down (123/1234 operations completed, last: generate test infrastructure for module 'laser (easy model controller)')
 			ImeIJMSquawkTitle.srefX1RefWznmMLocale	Title
-			enus	generating test infrastructure (&Ndone;/&N; operations completed, last: &sqklast;)
+			enus	generating auxiliary infrastructure top-down (&Ndone;/&N; operations completed, last: &sqklast;)
 			ImeIJMSquawkTitle.end
 		ImeIMSquawk.end
 	oppiw	genwri	250000	genwri	asmlfi	gensv
@@ -1063,7 +1089,7 @@ DlgWdbeVerFinmod
 	ImeIRMJobMJob.end
 	ImeIRMJobMOp.srefRefWznmMOp
 	WdbeGenStdvec
-	WdbeGenTest
+	WdbeGenAux
 	WdbeGenWiring
 	WdbePrcfileConcat
 	ImeIRMJobMOp.end
@@ -1085,7 +1111,6 @@ DlgWdbeVerGenfst
 	ImeIMStage.end
 	ImeIRMJobMOp.srefRefWznmMOp
 	WdbeGenfstCmdbus
-	WdbeGenfstCtrFwdctr
 	WdbeGenfstEctr
 	WdbeGenfstEhostif
 	WdbeGenfstImbuf
@@ -1188,10 +1213,8 @@ DlgWdbeVerMdlstr
 		ImeIMSensitivity2.end
 	ImeIMStage.end
 	ImeIRMJobMOp.srefRefWznmMOp
-	WdbeCplmstCtrEctr
-	WdbeCplmstFwdctr
+	WdbeCplmstCtrEctrHostifEhostif
 	WdbeCplmstImbuf
-	WdbeCplmstSys
 	WdbeCplmstTplcpy
 	WdbeCplmstUnt
 	ImeIRMJobMOp.end

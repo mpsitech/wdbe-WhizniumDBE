@@ -101,7 +101,7 @@ void WdbeWrmcuMdlraw::writeMdlC(
 				for (unsigned int j = 0; j < ipas.nodes.size(); j++) {
 					ipa = ipas.nodes[j];
 
-					outfile << "#define IXRXBUF_" << cmd->sref << StrMod::cap(ipa->sref) << " " << ix << endl;
+					outfile << "#define IXINVBUF_" << cmd->sref << StrMod::cap(ipa->sref) << " " << ix << endl;
 
 					ix += Wdbe::getParlen(ipa->ixWdbeVPartype, ipa->Length);
 				};

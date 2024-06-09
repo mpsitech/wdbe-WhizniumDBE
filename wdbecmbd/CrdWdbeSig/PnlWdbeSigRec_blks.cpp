@@ -109,6 +109,7 @@ void PnlWdbeSigRec::StatApp::writeJSON(
 			, string difftag
 			, const bool initdoneDetail
 			, const bool initdoneSrc1NSensitivity
+			, const bool initdoneMNCdc
 		) {
 	if (difftag.length() == 0) difftag = "StatAppWdbeSigRec";
 
@@ -116,6 +117,7 @@ void PnlWdbeSigRec::StatApp::writeJSON(
 
 	me["initdoneDetail"] = initdoneDetail;
 	me["initdoneSrc1NSensitivity"] = initdoneSrc1NSensitivity;
+	me["initdoneMNCdc"] = initdoneMNCdc;
 };
 
 void PnlWdbeSigRec::StatApp::writeXML(
@@ -124,6 +126,7 @@ void PnlWdbeSigRec::StatApp::writeXML(
 			, bool shorttags
 			, const bool initdoneDetail
 			, const bool initdoneSrc1NSensitivity
+			, const bool initdoneMNCdc
 		) {
 	if (difftag.length() == 0) difftag = "StatAppWdbeSigRec";
 
@@ -134,6 +137,7 @@ void PnlWdbeSigRec::StatApp::writeXML(
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
 		writeBoolAttr(wr, itemtag, "sref", "initdoneDetail", initdoneDetail);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneSrc1NSensitivity", initdoneSrc1NSensitivity);
+		writeBoolAttr(wr, itemtag, "sref", "initdoneMNCdc", initdoneMNCdc);
 	xmlTextWriterEndElement(wr);
 };
 
@@ -145,6 +149,7 @@ PnlWdbeSigRec::StatShr::StatShr(
 			const uint ixWdbeVExpstate
 			, const ubigint jrefDetail
 			, const ubigint jrefSrc1NSensitivity
+			, const ubigint jrefMNCdc
 			, const bool ButRegularizeActive
 		) :
 			Block()
@@ -152,9 +157,10 @@ PnlWdbeSigRec::StatShr::StatShr(
 	this->ixWdbeVExpstate = ixWdbeVExpstate;
 	this->jrefDetail = jrefDetail;
 	this->jrefSrc1NSensitivity = jrefSrc1NSensitivity;
+	this->jrefMNCdc = jrefMNCdc;
 	this->ButRegularizeActive = ButRegularizeActive;
 
-	mask = {IXWDBEVEXPSTATE, JREFDETAIL, JREFSRC1NSENSITIVITY, BUTREGULARIZEACTIVE};
+	mask = {IXWDBEVEXPSTATE, JREFDETAIL, JREFSRC1NSENSITIVITY, JREFMNCDC, BUTREGULARIZEACTIVE};
 };
 
 void PnlWdbeSigRec::StatShr::writeJSON(
@@ -168,6 +174,7 @@ void PnlWdbeSigRec::StatShr::writeJSON(
 	me["srefIxWdbeVExpstate"] = VecWdbeVExpstate::getSref(ixWdbeVExpstate);
 	me["scrJrefDetail"] = Scr::scramble(jrefDetail);
 	me["scrJrefSrc1NSensitivity"] = Scr::scramble(jrefSrc1NSensitivity);
+	me["scrJrefMNCdc"] = Scr::scramble(jrefMNCdc);
 	me["ButRegularizeActive"] = ButRegularizeActive;
 };
 
@@ -186,6 +193,7 @@ void PnlWdbeSigRec::StatShr::writeXML(
 		writeStringAttr(wr, itemtag, "sref", "srefIxWdbeVExpstate", VecWdbeVExpstate::getSref(ixWdbeVExpstate));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefDetail", Scr::scramble(jrefDetail));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefSrc1NSensitivity", Scr::scramble(jrefSrc1NSensitivity));
+		writeStringAttr(wr, itemtag, "sref", "scrJrefMNCdc", Scr::scramble(jrefMNCdc));
 		writeBoolAttr(wr, itemtag, "sref", "ButRegularizeActive", ButRegularizeActive);
 	xmlTextWriterEndElement(wr);
 };
@@ -198,6 +206,7 @@ set<uint> PnlWdbeSigRec::StatShr::comm(
 	if (ixWdbeVExpstate == comp->ixWdbeVExpstate) insert(items, IXWDBEVEXPSTATE);
 	if (jrefDetail == comp->jrefDetail) insert(items, JREFDETAIL);
 	if (jrefSrc1NSensitivity == comp->jrefSrc1NSensitivity) insert(items, JREFSRC1NSENSITIVITY);
+	if (jrefMNCdc == comp->jrefMNCdc) insert(items, JREFMNCDC);
 	if (ButRegularizeActive == comp->ButRegularizeActive) insert(items, BUTREGULARIZEACTIVE);
 
 	return(items);
@@ -211,7 +220,7 @@ set<uint> PnlWdbeSigRec::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {IXWDBEVEXPSTATE, JREFDETAIL, JREFSRC1NSENSITIVITY, BUTREGULARIZEACTIVE};
+	diffitems = {IXWDBEVEXPSTATE, JREFDETAIL, JREFSRC1NSENSITIVITY, JREFMNCDC, BUTREGULARIZEACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -277,15 +286,14 @@ string PnlWdbeSigRec::DpchAppDo::getSrefsMask() {
 };
 
 void PnlWdbeSigRec::DpchAppDo::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbeSigRecDo"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbeSigRecDo"];}();
 
 	basefound = (me != Json::nullValue);
 

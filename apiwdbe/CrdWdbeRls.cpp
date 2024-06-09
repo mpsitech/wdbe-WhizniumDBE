@@ -24,7 +24,6 @@ uint CrdWdbeRls::VecVDo::getIx(
 
 	if (s == "close") return CLOSE;
 	if (s == "mitappabtclick") return MITAPPABTCLICK;
-	if (s == "mitcrdnewclick") return MITCRDNEWCLICK;
 	if (s == "mitcrdsrtclick") return MITCRDSRTCLICK;
 	if (s == "mitcrdcrtclick") return MITCRDCRTCLICK;
 	if (s == "mitcrdfrtclick") return MITCRDFRTCLICK;
@@ -38,7 +37,6 @@ string CrdWdbeRls::VecVDo::getSref(
 		) {
 	if (ix == CLOSE) return("close");
 	if (ix == MITAPPABTCLICK) return("MitAppAbtClick");
-	if (ix == MITCRDNEWCLICK) return("MitCrdNewClick");
 	if (ix == MITCRDSRTCLICK) return("MitCrdSrtClick");
 	if (ix == MITCRDCRTCLICK) return("MitCrdCrtClick");
 	if (ix == MITCRDFRTCLICK) return("MitCrdFrtClick");
@@ -236,14 +234,12 @@ set<uint> CrdWdbeRls::StatApp::diff(
 
 CrdWdbeRls::StatShr::StatShr(
 			const string& scrJrefDlgfinreptr
-			, const string& scrJrefDlgnew
 			, const string& scrJrefDlgstareptr
 			, const string& scrJrefDlgwrite
 			, const string& scrJrefHeadbar
 			, const string& scrJrefList
 			, const string& scrJrefRec
 			, const bool MspCrd1Avail
-			, const bool MitCrdNewAvail
 			, const bool MitCrdSrtAvail
 			, const bool MitCrdSrtActive
 			, const bool MitCrdCrtAvail
@@ -256,14 +252,12 @@ CrdWdbeRls::StatShr::StatShr(
 			Block()
 		{
 	this->scrJrefDlgfinreptr = scrJrefDlgfinreptr;
-	this->scrJrefDlgnew = scrJrefDlgnew;
 	this->scrJrefDlgstareptr = scrJrefDlgstareptr;
 	this->scrJrefDlgwrite = scrJrefDlgwrite;
 	this->scrJrefHeadbar = scrJrefHeadbar;
 	this->scrJrefList = scrJrefList;
 	this->scrJrefRec = scrJrefRec;
 	this->MspCrd1Avail = MspCrd1Avail;
-	this->MitCrdNewAvail = MitCrdNewAvail;
 	this->MitCrdSrtAvail = MitCrdSrtAvail;
 	this->MitCrdSrtActive = MitCrdSrtActive;
 	this->MitCrdCrtAvail = MitCrdCrtAvail;
@@ -273,7 +267,7 @@ CrdWdbeRls::StatShr::StatShr(
 	this->MitCrdWcoAvail = MitCrdWcoAvail;
 	this->MitCrdWcoActive = MitCrdWcoActive;
 
-	mask = {SCRJREFDLGFINREPTR, SCRJREFDLGNEW, SCRJREFDLGSTAREPTR, SCRJREFDLGWRITE, SCRJREFHEADBAR, SCRJREFLIST, SCRJREFREC, MSPCRD1AVAIL, MITCRDNEWAVAIL, MITCRDSRTAVAIL, MITCRDSRTACTIVE, MITCRDCRTAVAIL, MITCRDCRTACTIVE, MITCRDFRTAVAIL, MITCRDFRTACTIVE, MITCRDWCOAVAIL, MITCRDWCOACTIVE};
+	mask = {SCRJREFDLGFINREPTR, SCRJREFDLGSTAREPTR, SCRJREFDLGWRITE, SCRJREFHEADBAR, SCRJREFLIST, SCRJREFREC, MSPCRD1AVAIL, MITCRDSRTAVAIL, MITCRDSRTACTIVE, MITCRDCRTAVAIL, MITCRDCRTACTIVE, MITCRDFRTAVAIL, MITCRDFRTACTIVE, MITCRDWCOAVAIL, MITCRDWCOACTIVE};
 };
 
 bool CrdWdbeRls::StatShr::readXML(
@@ -294,14 +288,12 @@ bool CrdWdbeRls::StatShr::readXML(
 
 	if (basefound) {
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefDlgfinreptr", scrJrefDlgfinreptr)) add(SCRJREFDLGFINREPTR);
-		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefDlgnew", scrJrefDlgnew)) add(SCRJREFDLGNEW);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefDlgstareptr", scrJrefDlgstareptr)) add(SCRJREFDLGSTAREPTR);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefDlgwrite", scrJrefDlgwrite)) add(SCRJREFDLGWRITE);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefHeadbar", scrJrefHeadbar)) add(SCRJREFHEADBAR);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefList", scrJrefList)) add(SCRJREFLIST);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefRec", scrJrefRec)) add(SCRJREFREC);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "MspCrd1Avail", MspCrd1Avail)) add(MSPCRD1AVAIL);
-		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "MitCrdNewAvail", MitCrdNewAvail)) add(MITCRDNEWAVAIL);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "MitCrdSrtAvail", MitCrdSrtAvail)) add(MITCRDSRTAVAIL);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "MitCrdSrtActive", MitCrdSrtActive)) add(MITCRDSRTACTIVE);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "MitCrdCrtAvail", MitCrdCrtAvail)) add(MITCRDCRTAVAIL);
@@ -321,14 +313,12 @@ set<uint> CrdWdbeRls::StatShr::comm(
 	set<uint> items;
 
 	if (scrJrefDlgfinreptr == comp->scrJrefDlgfinreptr) insert(items, SCRJREFDLGFINREPTR);
-	if (scrJrefDlgnew == comp->scrJrefDlgnew) insert(items, SCRJREFDLGNEW);
 	if (scrJrefDlgstareptr == comp->scrJrefDlgstareptr) insert(items, SCRJREFDLGSTAREPTR);
 	if (scrJrefDlgwrite == comp->scrJrefDlgwrite) insert(items, SCRJREFDLGWRITE);
 	if (scrJrefHeadbar == comp->scrJrefHeadbar) insert(items, SCRJREFHEADBAR);
 	if (scrJrefList == comp->scrJrefList) insert(items, SCRJREFLIST);
 	if (scrJrefRec == comp->scrJrefRec) insert(items, SCRJREFREC);
 	if (MspCrd1Avail == comp->MspCrd1Avail) insert(items, MSPCRD1AVAIL);
-	if (MitCrdNewAvail == comp->MitCrdNewAvail) insert(items, MITCRDNEWAVAIL);
 	if (MitCrdSrtAvail == comp->MitCrdSrtAvail) insert(items, MITCRDSRTAVAIL);
 	if (MitCrdSrtActive == comp->MitCrdSrtActive) insert(items, MITCRDSRTACTIVE);
 	if (MitCrdCrtAvail == comp->MitCrdCrtAvail) insert(items, MITCRDCRTAVAIL);
@@ -349,7 +339,7 @@ set<uint> CrdWdbeRls::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {SCRJREFDLGFINREPTR, SCRJREFDLGNEW, SCRJREFDLGSTAREPTR, SCRJREFDLGWRITE, SCRJREFHEADBAR, SCRJREFLIST, SCRJREFREC, MSPCRD1AVAIL, MITCRDNEWAVAIL, MITCRDSRTAVAIL, MITCRDSRTACTIVE, MITCRDCRTAVAIL, MITCRDCRTACTIVE, MITCRDFRTAVAIL, MITCRDFRTACTIVE, MITCRDWCOAVAIL, MITCRDWCOACTIVE};
+	diffitems = {SCRJREFDLGFINREPTR, SCRJREFDLGSTAREPTR, SCRJREFDLGWRITE, SCRJREFHEADBAR, SCRJREFLIST, SCRJREFREC, MSPCRD1AVAIL, MITCRDSRTAVAIL, MITCRDSRTACTIVE, MITCRDCRTAVAIL, MITCRDCRTACTIVE, MITCRDFRTAVAIL, MITCRDFRTACTIVE, MITCRDWCOAVAIL, MITCRDWCOACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -362,7 +352,6 @@ set<uint> CrdWdbeRls::StatShr::diff(
 CrdWdbeRls::Tag::Tag(
 			const string& MitAppAbt
 			, const string& MrlAppHlp
-			, const string& MitCrdNew
 			, const string& MitCrdSrt
 			, const string& MitCrdCrt
 			, const string& MitCrdFrt
@@ -372,13 +361,12 @@ CrdWdbeRls::Tag::Tag(
 		{
 	this->MitAppAbt = MitAppAbt;
 	this->MrlAppHlp = MrlAppHlp;
-	this->MitCrdNew = MitCrdNew;
 	this->MitCrdSrt = MitCrdSrt;
 	this->MitCrdCrt = MitCrdCrt;
 	this->MitCrdFrt = MitCrdFrt;
 	this->MitCrdWco = MitCrdWco;
 
-	mask = {MITAPPABT, MRLAPPHLP, MITCRDNEW, MITCRDSRT, MITCRDCRT, MITCRDFRT, MITCRDWCO};
+	mask = {MITAPPABT, MRLAPPHLP, MITCRDSRT, MITCRDCRT, MITCRDFRT, MITCRDWCO};
 };
 
 bool CrdWdbeRls::Tag::readXML(
@@ -400,7 +388,6 @@ bool CrdWdbeRls::Tag::readXML(
 	if (basefound) {
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "MitAppAbt", MitAppAbt)) add(MITAPPABT);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "MrlAppHlp", MrlAppHlp)) add(MRLAPPHLP);
-		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "MitCrdNew", MitCrdNew)) add(MITCRDNEW);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "MitCrdSrt", MitCrdSrt)) add(MITCRDSRT);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "MitCrdCrt", MitCrdCrt)) add(MITCRDCRT);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "MitCrdFrt", MitCrdFrt)) add(MITCRDFRT);

@@ -155,13 +155,14 @@ DpchRetWdbe* WdbeCplmstUnt::run(
 			if (mdl->ixVBasetype == VecWdbeVMModuleBasetype::HOSTIF) hashostif = true;
 			else if (mdl->ixVBasetype == VecWdbeVMModuleBasetype::EHOSTIF) hasehostif = true;
 			else if (mdl->ixVBasetype == VecWdbeVMModuleBasetype::CMDINV) hascmdinv = true;
-			else if ((mdl->ixVBasetype == VecWdbeVMModuleBasetype::CTR) || (mdl->ixVBasetype == VecWdbeVMModuleBasetype::FWDCTR) || (mdl->ixVBasetype == VecWdbeVMModuleBasetype::ECTR)) hasctr = true;
+			else if ((mdl->ixVBasetype == VecWdbeVMModuleBasetype::CTR) || (mdl->ixVBasetype == VecWdbeVMModuleBasetype::DBGCTR)
+						|| (mdl->ixVBasetype == VecWdbeVMModuleBasetype::ECTR)|| (mdl->ixVBasetype == VecWdbeVMModuleBasetype::EDBGCTR)) hasctr = true;
 
 			if (((hashostif && hascmdinv) || hasehostif) && hasctr) break;
 		};
 
 		// - buffer vector if hostif is present: fill in GenStdvec
-		if (hashostif || hasehostif) dbswdbe->tblwdbemvector->insertNewRec(NULL, VecWdbeVMVectorBasetype::TIXOR, VecWdbeVMVectorHkTbl::UNT, unt->ref, "VecW" + unt->Fullsref.substr(3) + "Buffer", "notit;filfed");
+		if (hashostif || hasehostif) dbswdbe->tblwdbemvector->insertNewRec(NULL, VecWdbeVMVectorBasetype::TIXLIN, VecWdbeVMVectorHkTbl::UNT, unt->ref, "VecV" + unt->Fullsref.substr(3) + "Buffer", "notit;filfed");
 
 		if (hashostif && hascmdinv && hasctr) {
 			// - full model: controller vector if cmdinv and controllers are present
@@ -172,11 +173,13 @@ DpchRetWdbe* WdbeCplmstUnt::run(
 			for (unsigned int i = 0; i < mdls.nodes.size(); i++) {
 				mdl = mdls.nodes[i];
 
-				if (mdl->ixVBasetype == VecWdbeVMModuleBasetype::CMDINV) {
+				if (mdl->ixVBasetype == VecWdbeVMModuleBasetype::HOSTIF) {
+					dbswdbe->tblwdbemvectoritem->insertNewRec(NULL, ref, 0, mdl->sref, "", "");
+				} else if (mdl->ixVBasetype == VecWdbeVMModuleBasetype::CMDINV) {
 					dbswdbe->tblwdbemvectoritem->insertNewRec(NULL, ref, 1, mdl->sref, "", "");
 				} else if (mdl->ixVBasetype == VecWdbeVMModuleBasetype::CMDRET) {
 					dbswdbe->tblwdbemvectoritem->insertNewRec(NULL, ref, 2, mdl->sref, "", "");
-				} else if ((mdl->ixVBasetype == VecWdbeVMModuleBasetype::CTR) || (mdl->ixVBasetype == VecWdbeVMModuleBasetype::FWDCTR)) {
+				} else if ((mdl->ixVBasetype == VecWdbeVMModuleBasetype::CTR) || (mdl->ixVBasetype == VecWdbeVMModuleBasetype::DBGCTR)) {
 					dbswdbe->tblwdbemvectoritem->insertNewRec(NULL, ref, vecNum++, mdl->sref, "", "");
 				};
 			};
@@ -190,7 +193,9 @@ DpchRetWdbe* WdbeCplmstUnt::run(
 			for (unsigned int i = 0; i < mdls.nodes.size(); i++) {
 				mdl = mdls.nodes[i];
 
-				if (mdl->ixVBasetype == VecWdbeVMModuleBasetype::ECTR) {
+				if (mdl->ixVBasetype == VecWdbeVMModuleBasetype::EHOSTIF) {
+					dbswdbe->tblwdbemvectoritem->insertNewRec(NULL, ref, 0, mdl->sref, "", "");
+				} else if ((mdl->ixVBasetype == VecWdbeVMModuleBasetype::ECTR) || (mdl->ixVBasetype == VecWdbeVMModuleBasetype::EDBGCTR)) {
 					dbswdbe->tblwdbemvectoritem->insertNewRec(NULL, ref, vecNum++, mdl->sref, "", "");
 				};
 			};
@@ -198,6 +203,8 @@ DpchRetWdbe* WdbeCplmstUnt::run(
 		} else {
 			// - unit-based command vector if no controllers are present: fill in GenStdvec
 			dbswdbe->tblwdbemvector->insertNewRec(NULL, VecWdbeVMVectorBasetype::TIXLIN, VecWdbeVMVectorHkTbl::UNT, unt->ref, "VecV" + unt->Fullsref.substr(3) + "Command", "notit;filfed");
+
+			dbswdbe->tblwdbemcommand->insertNewRec(NULL, VecWdbeVMCommandRefTbl::UNT, unt->ref, 0, "reset", "Cmd" + unt->Fullsref.substr(3) + "Reset", VecWdbeVMCommandRettype::VOID, 0, 0, 0, ""); 
 		};
 
 		delete unt;

@@ -20,16 +20,12 @@ using namespace Xmlio;
 WdbeQRlsList::WdbeQRlsList(
 			const uint jnum
 			, const string sref
-			, const string srefIxVBasetype
-			, const string titIxVBasetype
-			, const string stubRefWdbeMVersion
+			, const string stubRefWdbeMComponent
 			, const string stubRefWdbeMMachine
 		) {
 	this->jnum = jnum;
 	this->sref = sref;
-	this->srefIxVBasetype = srefIxVBasetype;
-	this->titIxVBasetype = titIxVBasetype;
-	this->stubRefWdbeMVersion = stubRefWdbeMVersion;
+	this->stubRefWdbeMComponent = stubRefWdbeMComponent;
 	this->stubRefWdbeMMachine = stubRefWdbeMMachine;
 };
 
@@ -47,9 +43,7 @@ bool WdbeQRlsList::readXML(
 
 	if (basefound) {
 		extractStringUclc(docctx, basexpath, "sref", "srf", sref);
-		extractStringUclc(docctx, basexpath, "srefIxVBasetype", "typ", srefIxVBasetype);
-		extractStringUclc(docctx, basexpath, "titIxVBasetype", "typ2", titIxVBasetype);
-		extractStringUclc(docctx, basexpath, "stubRefWdbeMVersion", "ver", stubRefWdbeMVersion);
+		extractStringUclc(docctx, basexpath, "stubRefWdbeMComponent", "cmp", stubRefWdbeMComponent);
 		extractStringUclc(docctx, basexpath, "stubRefWdbeMMachine", "mch", stubRefWdbeMMachine);
 	};
 

@@ -64,15 +64,14 @@ PnlWdbeCvrDetail::ContIac::ContIac(
 };
 
 bool PnlWdbeCvrDetail::ContIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["ContIacWdbeCvrDetail"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["ContIacWdbeCvrDetail"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -127,8 +126,8 @@ void PnlWdbeCvrDetail::ContIac::writeJSON(
 	me["TxfMaj"] = TxfMaj;
 	me["TxfMin"] = TxfMin;
 	me["TxfSub"] = TxfSub;
-	me["numFPupJst"] = numFPupJst;
-	me["numFPupSte"] = numFPupSte;
+	me["numFPupJst"] = (Json::Value::UInt) numFPupJst;
+	me["numFPupSte"] = (Json::Value::UInt) numFPupSte;
 	Jsonio::writeUintvec(me, "numsFLstSty", numsFLstSty);
 };
 
@@ -274,7 +273,7 @@ void PnlWdbeCvrDetail::StatApp::writeJSON(
 
 	me["srefIxWdbeVExpstate"] = VecWdbeVExpstate::getSref(ixWdbeVExpstate);
 	me["LstStyAlt"] = LstStyAlt;
-	me["LstStyNumFirstdisp"] = LstStyNumFirstdisp;
+	me["LstStyNumFirstdisp"] = (Json::Value::UInt) LstStyNumFirstdisp;
 };
 
 void PnlWdbeCvrDetail::StatApp::writeXML(
@@ -506,15 +505,14 @@ string PnlWdbeCvrDetail::DpchAppData::getSrefsMask() {
 };
 
 void PnlWdbeCvrDetail::DpchAppData::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbeCvrDetailData"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbeCvrDetailData"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -576,15 +574,14 @@ string PnlWdbeCvrDetail::DpchAppDo::getSrefsMask() {
 };
 
 void PnlWdbeCvrDetail::DpchAppDo::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbeCvrDetailDo"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbeCvrDetailDo"];}();
 
 	basefound = (me != Json::nullValue);
 

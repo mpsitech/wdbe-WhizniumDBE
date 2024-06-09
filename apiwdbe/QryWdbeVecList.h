@@ -28,10 +28,10 @@ namespace QryWdbeVecList {
 	class VecVOrd {
 
 	public:
-		static const Sbecore::uint SRF = 1;
-		static const Sbecore::uint TYP = 2;
-		static const Sbecore::uint HKT = 3;
-		static const Sbecore::uint HKU = 4;
+		static const Sbecore::uint HKT = 1;
+		static const Sbecore::uint HKU = 2;
+		static const Sbecore::uint SRF = 3;
+		static const Sbecore::uint TYP = 4;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);

@@ -279,6 +279,10 @@ PnlWdbeFstAStep::StgIac::StgIac(
 			, const uint TcoIp3Width
 			, const uint TcoCn4Width
 			, const uint TcoIp4Width
+			, const uint TcoCn5Width
+			, const uint TcoIp5Width
+			, const uint TcoCn6Width
+			, const uint TcoIp6Width
 		) :
 			Block()
 		{
@@ -291,8 +295,12 @@ PnlWdbeFstAStep::StgIac::StgIac(
 	this->TcoIp3Width = TcoIp3Width;
 	this->TcoCn4Width = TcoCn4Width;
 	this->TcoIp4Width = TcoIp4Width;
+	this->TcoCn5Width = TcoCn5Width;
+	this->TcoIp5Width = TcoIp5Width;
+	this->TcoCn6Width = TcoCn6Width;
+	this->TcoIp6Width = TcoIp6Width;
 
-	mask = {TCOFNXWIDTH, TCOCN1WIDTH, TCOIP1WIDTH, TCOCN2WIDTH, TCOIP2WIDTH, TCOCN3WIDTH, TCOIP3WIDTH, TCOCN4WIDTH, TCOIP4WIDTH};
+	mask = {TCOFNXWIDTH, TCOCN1WIDTH, TCOIP1WIDTH, TCOCN2WIDTH, TCOIP2WIDTH, TCOCN3WIDTH, TCOIP3WIDTH, TCOCN4WIDTH, TCOIP4WIDTH, TCOCN5WIDTH, TCOIP5WIDTH, TCOCN6WIDTH, TCOIP6WIDTH};
 };
 
 bool PnlWdbeFstAStep::StgIac::readXML(
@@ -321,6 +329,10 @@ bool PnlWdbeFstAStep::StgIac::readXML(
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoIp3Width", TcoIp3Width)) add(TCOIP3WIDTH);
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoCn4Width", TcoCn4Width)) add(TCOCN4WIDTH);
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoIp4Width", TcoIp4Width)) add(TCOIP4WIDTH);
+		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoCn5Width", TcoCn5Width)) add(TCOCN5WIDTH);
+		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoIp5Width", TcoIp5Width)) add(TCOIP5WIDTH);
+		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoCn6Width", TcoCn6Width)) add(TCOCN6WIDTH);
+		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoIp6Width", TcoIp6Width)) add(TCOIP6WIDTH);
 	};
 
 	return basefound;
@@ -347,6 +359,10 @@ void PnlWdbeFstAStep::StgIac::writeXML(
 		writeUintAttr(wr, itemtag, "sref", "TcoIp3Width", TcoIp3Width);
 		writeUintAttr(wr, itemtag, "sref", "TcoCn4Width", TcoCn4Width);
 		writeUintAttr(wr, itemtag, "sref", "TcoIp4Width", TcoIp4Width);
+		writeUintAttr(wr, itemtag, "sref", "TcoCn5Width", TcoCn5Width);
+		writeUintAttr(wr, itemtag, "sref", "TcoIp5Width", TcoIp5Width);
+		writeUintAttr(wr, itemtag, "sref", "TcoCn6Width", TcoCn6Width);
+		writeUintAttr(wr, itemtag, "sref", "TcoIp6Width", TcoIp6Width);
 	xmlTextWriterEndElement(wr);
 };
 
@@ -364,6 +380,10 @@ set<uint> PnlWdbeFstAStep::StgIac::comm(
 	if (TcoIp3Width == comp->TcoIp3Width) insert(items, TCOIP3WIDTH);
 	if (TcoCn4Width == comp->TcoCn4Width) insert(items, TCOCN4WIDTH);
 	if (TcoIp4Width == comp->TcoIp4Width) insert(items, TCOIP4WIDTH);
+	if (TcoCn5Width == comp->TcoCn5Width) insert(items, TCOCN5WIDTH);
+	if (TcoIp5Width == comp->TcoIp5Width) insert(items, TCOIP5WIDTH);
+	if (TcoCn6Width == comp->TcoCn6Width) insert(items, TCOCN6WIDTH);
+	if (TcoIp6Width == comp->TcoIp6Width) insert(items, TCOIP6WIDTH);
 
 	return(items);
 };
@@ -376,7 +396,7 @@ set<uint> PnlWdbeFstAStep::StgIac::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {TCOFNXWIDTH, TCOCN1WIDTH, TCOIP1WIDTH, TCOCN2WIDTH, TCOIP2WIDTH, TCOCN3WIDTH, TCOIP3WIDTH, TCOCN4WIDTH, TCOIP4WIDTH};
+	diffitems = {TCOFNXWIDTH, TCOCN1WIDTH, TCOIP1WIDTH, TCOCN2WIDTH, TCOIP2WIDTH, TCOCN3WIDTH, TCOIP3WIDTH, TCOCN4WIDTH, TCOIP4WIDTH, TCOCN5WIDTH, TCOIP5WIDTH, TCOCN6WIDTH, TCOIP6WIDTH};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -402,6 +422,10 @@ PnlWdbeFstAStep::Tag::Tag(
 			, const string& TcoIp3
 			, const string& TcoCn4
 			, const string& TcoIp4
+			, const string& TcoCn5
+			, const string& TcoIp5
+			, const string& TcoCn6
+			, const string& TcoIp6
 		) :
 			Block()
 		{
@@ -420,8 +444,12 @@ PnlWdbeFstAStep::Tag::Tag(
 	this->TcoIp3 = TcoIp3;
 	this->TcoCn4 = TcoCn4;
 	this->TcoIp4 = TcoIp4;
+	this->TcoCn5 = TcoCn5;
+	this->TcoIp5 = TcoIp5;
+	this->TcoCn6 = TcoCn6;
+	this->TcoIp6 = TcoIp6;
 
-	mask = {CPT, TXTRECORD1, TXTRECORD2, TRS, TXTSHOWING1, TXTSHOWING2, TCOFNX, TCOCN1, TCOIP1, TCOCN2, TCOIP2, TCOCN3, TCOIP3, TCOCN4, TCOIP4};
+	mask = {CPT, TXTRECORD1, TXTRECORD2, TRS, TXTSHOWING1, TXTSHOWING2, TCOFNX, TCOCN1, TCOIP1, TCOCN2, TCOIP2, TCOCN3, TCOIP3, TCOCN4, TCOIP4, TCOCN5, TCOIP5, TCOCN6, TCOIP6};
 };
 
 bool PnlWdbeFstAStep::Tag::readXML(
@@ -456,6 +484,10 @@ bool PnlWdbeFstAStep::Tag::readXML(
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "TcoIp3", TcoIp3)) add(TCOIP3);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "TcoCn4", TcoCn4)) add(TCOCN4);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "TcoIp4", TcoIp4)) add(TCOIP4);
+		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "TcoCn5", TcoCn5)) add(TCOCN5);
+		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "TcoIp5", TcoIp5)) add(TCOIP5);
+		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "TcoCn6", TcoCn6)) add(TCOCN6);
+		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "TcoIp6", TcoIp6)) add(TCOIP6);
 	};
 
 	return basefound;

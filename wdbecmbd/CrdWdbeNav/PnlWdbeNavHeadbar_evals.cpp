@@ -14,7 +14,7 @@ using namespace Xmlio;
 bool PnlWdbeNavHeadbar::evalMenCrdAvail(
 			DbsWdbe* dbswdbe
 		) {
-	// MspCrd1Avail()|MspCrd2Avail()|MspCrd3Avail()|MspCrd4Avail()|MspCrd5Avail()|MspCrd6Avail()|MspCrd7Avail()
+	// MspCrd1Avail()|MspCrd2Avail()|MspCrd3Avail()|MspCrd4Avail()|MspCrd5Avail()|MspCrd6Avail()|MspCrd7Avail()|MspCrd8Avail()
 
 	vector<bool> args;
 	bool a, b;
@@ -33,6 +33,11 @@ bool PnlWdbeNavHeadbar::evalMenCrdAvail(
 	args.push_back(a);
 	a = false; a = evalMspCrd7Avail(dbswdbe);
 	args.push_back(a);
+	a = false; a = evalMspCrd8Avail(dbswdbe);
+	args.push_back(a);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
 	b = args.back(); args.pop_back();
 	a = args.back(); args.pop_back();
 	args.push_back(a || b);
@@ -247,7 +252,7 @@ bool PnlWdbeNavHeadbar::evalMitCrdMtpAvail(
 bool PnlWdbeNavHeadbar::evalMspCrd3Avail(
 			DbsWdbe* dbswdbe
 		) {
-	// MitCrdPrjAvail()|MitCrdVerAvail()|MitCrdSysAvail()|MitCrdTrgAvail()|MitCrdUntAvail()|MitCrdRlsAvail()
+	// MitCrdPrjAvail()|MitCrdVerAvail()|MitCrdUntAvail()
 
 	vector<bool> args;
 	bool a, b;
@@ -256,23 +261,8 @@ bool PnlWdbeNavHeadbar::evalMspCrd3Avail(
 	args.push_back(a);
 	a = false; a = evalMitCrdVerAvail(dbswdbe);
 	args.push_back(a);
-	a = false; a = evalMitCrdSysAvail(dbswdbe);
-	args.push_back(a);
-	a = false; a = evalMitCrdTrgAvail(dbswdbe);
-	args.push_back(a);
 	a = false; a = evalMitCrdUntAvail(dbswdbe);
 	args.push_back(a);
-	a = false; a = evalMitCrdRlsAvail(dbswdbe);
-	args.push_back(a);
-	b = args.back(); args.pop_back();
-	a = args.back(); args.pop_back();
-	args.push_back(a || b);
-	b = args.back(); args.pop_back();
-	a = args.back(); args.pop_back();
-	args.push_back(a || b);
-	b = args.back(); args.pop_back();
-	a = args.back(); args.pop_back();
-	args.push_back(a || b);
 	b = args.back(); args.pop_back();
 	a = args.back(); args.pop_back();
 	args.push_back(a || b);
@@ -311,34 +301,6 @@ bool PnlWdbeNavHeadbar::evalMitCrdVerAvail(
 	return(args.back());
 };
 
-bool PnlWdbeNavHeadbar::evalMitCrdSysAvail(
-			DbsWdbe* dbswdbe
-		) {
-	// pre.ixCrdaccSys()
-
-	vector<bool> args;
-	bool a;
-
-	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCSYS, jref) != 0);
-	args.push_back(a);
-
-	return(args.back());
-};
-
-bool PnlWdbeNavHeadbar::evalMitCrdTrgAvail(
-			DbsWdbe* dbswdbe
-		) {
-	// pre.ixCrdaccTrg()
-
-	vector<bool> args;
-	bool a;
-
-	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCTRG, jref) != 0);
-	args.push_back(a);
-
-	return(args.back());
-};
-
 bool PnlWdbeNavHeadbar::evalMitCrdUntAvail(
 			DbsWdbe* dbswdbe
 		) {
@@ -348,20 +310,6 @@ bool PnlWdbeNavHeadbar::evalMitCrdUntAvail(
 	bool a;
 
 	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCUNT, jref) != 0);
-	args.push_back(a);
-
-	return(args.back());
-};
-
-bool PnlWdbeNavHeadbar::evalMitCrdRlsAvail(
-			DbsWdbe* dbswdbe
-		) {
-	// pre.ixCrdaccRls()
-
-	vector<bool> args;
-	bool a;
-
-	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCRLS, jref) != 0);
 	args.push_back(a);
 
 	return(args.back());
@@ -642,6 +590,53 @@ bool PnlWdbeNavHeadbar::evalMitCrdSigAvail(
 };
 
 bool PnlWdbeNavHeadbar::evalMspCrd7Avail(
+			DbsWdbe* dbswdbe
+		) {
+	// MitCrdCmpAvail()|MitCrdRlsAvail()
+
+	vector<bool> args;
+	bool a, b;
+
+	a = false; a = evalMitCrdCmpAvail(dbswdbe);
+	args.push_back(a);
+	a = false; a = evalMitCrdRlsAvail(dbswdbe);
+	args.push_back(a);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
+
+	return(args.back());
+};
+
+bool PnlWdbeNavHeadbar::evalMitCrdCmpAvail(
+			DbsWdbe* dbswdbe
+		) {
+	// pre.ixCrdaccCmp()
+
+	vector<bool> args;
+	bool a;
+
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCCMP, jref) != 0);
+	args.push_back(a);
+
+	return(args.back());
+};
+
+bool PnlWdbeNavHeadbar::evalMitCrdRlsAvail(
+			DbsWdbe* dbswdbe
+		) {
+	// pre.ixCrdaccRls()
+
+	vector<bool> args;
+	bool a;
+
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCRLS, jref) != 0);
+	args.push_back(a);
+
+	return(args.back());
+};
+
+bool PnlWdbeNavHeadbar::evalMspCrd8Avail(
 			DbsWdbe* dbswdbe
 		) {
 	// MitCrdUtlAvail()

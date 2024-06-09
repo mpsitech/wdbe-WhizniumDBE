@@ -97,8 +97,8 @@ void QryWdbeFstAStep::rerun(
 		else stgiac.jnumFirstload = 1;
 	};
 
-	sqlstr = "INSERT INTO TblWdbeQFstAStep(jref, jnum, ref, fstNum, fnxRefWdbeMFsmstate, Cond1, Ip1, Cond2, Ip2, Cond3, Ip3, Cond4, Ip4)";
-	sqlstr += " SELECT " + to_string(jref) + ", 0, TblWdbeAMFsmstateStep.ref, TblWdbeAMFsmstateStep.fstNum, TblWdbeAMFsmstateStep.fnxRefWdbeMFsmstate, TblWdbeAMFsmstateStep.Cond1, TblWdbeAMFsmstateStep.Ip1, TblWdbeAMFsmstateStep.Cond2, TblWdbeAMFsmstateStep.Ip2, TblWdbeAMFsmstateStep.Cond3, TblWdbeAMFsmstateStep.Ip3, TblWdbeAMFsmstateStep.Cond4, TblWdbeAMFsmstateStep.Ip4";
+	sqlstr = "INSERT INTO TblWdbeQFstAStep(jref, jnum, ref, fstNum, fnxRefWdbeMFsmstate, Cond1, Ip1, Cond2, Ip2, Cond3, Ip3, Cond4, Ip4, Cond5, Ip5, Cond6, Ip6)";
+	sqlstr += " SELECT " + to_string(jref) + ", 0, TblWdbeAMFsmstateStep.ref, TblWdbeAMFsmstateStep.fstNum, TblWdbeAMFsmstateStep.fnxRefWdbeMFsmstate, TblWdbeAMFsmstateStep.Cond1, TblWdbeAMFsmstateStep.Ip1, TblWdbeAMFsmstateStep.Cond2, TblWdbeAMFsmstateStep.Ip2, TblWdbeAMFsmstateStep.Cond3, TblWdbeAMFsmstateStep.Ip3, TblWdbeAMFsmstateStep.Cond4, TblWdbeAMFsmstateStep.Ip4, TblWdbeAMFsmstateStep.Cond5, TblWdbeAMFsmstateStep.Ip5, TblWdbeAMFsmstateStep.Cond6, TblWdbeAMFsmstateStep.Ip6";
 	sqlstr += " FROM TblWdbeAMFsmstateStep";
 	sqlstr += " WHERE TblWdbeAMFsmstateStep.fstRefWdbeMFsmstate = " + to_string(preRefFst) + "";
 	sqlstr += " ORDER BY fstNum ASC";
@@ -260,6 +260,10 @@ bool QryWdbeFstAStep::handleShow(
 	cout << "\tIp3";
 	cout << "\tCond4";
 	cout << "\tIp4";
+	cout << "\tCond5";
+	cout << "\tIp5";
+	cout << "\tCond6";
+	cout << "\tIp6";
 	cout << endl;
 
 	// record rows
@@ -281,6 +285,10 @@ bool QryWdbeFstAStep::handleShow(
 		cout << "\t" << rec->Ip3;
 		cout << "\t" << rec->Cond4;
 		cout << "\t" << rec->Ip4;
+		cout << "\t" << rec->Cond5;
+		cout << "\t" << rec->Ip5;
+		cout << "\t" << rec->Cond6;
+		cout << "\t" << rec->Ip6;
 		cout << endl;
 	};
 	return retval;
@@ -290,19 +298,11 @@ void QryWdbeFstAStep::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
-		call->abort = handleCallWdbeStubChgFromSelf(dbswdbe);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEFSTASTPMOD_FSTEQ) {
+	if (call->ixVCall == VecWdbeVCall::CALLWDBEFSTASTPMOD_FSTEQ) {
 		call->abort = handleCallWdbeFstAstpMod_fstEq(dbswdbe, call->jref);
+	} else if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
+		call->abort = handleCallWdbeStubChgFromSelf(dbswdbe);
 	};
-};
-
-bool QryWdbeFstAStep::handleCallWdbeStubChgFromSelf(
-			DbsWdbe* dbswdbe
-		) {
-	bool retval = false;
-	// IP handleCallWdbeStubChgFromSelf --- INSERT
-	return retval;
 };
 
 bool QryWdbeFstAStep::handleCallWdbeFstAstpMod_fstEq(
@@ -316,5 +316,13 @@ bool QryWdbeFstAStep::handleCallWdbeFstAstpMod_fstEq(
 		xchg->triggerCall(dbswdbe, VecWdbeVCall::CALLWDBESTATCHG, jref);
 	};
 
+	return retval;
+};
+
+bool QryWdbeFstAStep::handleCallWdbeStubChgFromSelf(
+			DbsWdbe* dbswdbe
+		) {
+	bool retval = false;
+	// IP handleCallWdbeStubChgFromSelf --- INSERT
 	return retval;
 };

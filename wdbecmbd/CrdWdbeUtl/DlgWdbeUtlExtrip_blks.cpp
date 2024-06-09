@@ -172,15 +172,14 @@ DlgWdbeUtlExtrip::ContIac::ContIac(
 };
 
 bool DlgWdbeUtlExtrip::ContIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["ContIacDlgWdbeUtlExtrip"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["ContIacDlgWdbeUtlExtrip"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -222,7 +221,7 @@ void DlgWdbeUtlExtrip::ContIac::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["numFDse"] = numFDse;
+	me["numFDse"] = (Json::Value::UInt) numFDse;
 };
 
 void DlgWdbeUtlExtrip::ContIac::writeXML(
@@ -287,7 +286,7 @@ void DlgWdbeUtlExtrip::ContInf::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["numFSge"] = numFSge;
+	me["numFSge"] = (Json::Value::UInt) numFSge;
 };
 
 void DlgWdbeUtlExtrip::ContInf::writeXML(
@@ -1107,15 +1106,14 @@ string DlgWdbeUtlExtrip::DpchAppData::getSrefsMask() {
 };
 
 void DlgWdbeUtlExtrip::DpchAppData::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppDlgWdbeUtlExtripData"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppDlgWdbeUtlExtripData"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -1179,15 +1177,14 @@ string DlgWdbeUtlExtrip::DpchAppDo::getSrefsMask() {
 };
 
 void DlgWdbeUtlExtrip::DpchAppDo::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppDlgWdbeUtlExtripDo"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppDlgWdbeUtlExtripDo"];}();
 
 	basefound = (me != Json::nullValue);
 

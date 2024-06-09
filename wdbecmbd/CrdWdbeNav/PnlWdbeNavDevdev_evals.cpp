@@ -67,90 +67,6 @@ bool PnlWdbeNavDevdev::evalButVerViewActive(
 	return(args.back());
 };
 
-bool PnlWdbeNavDevdev::evalLstSysAvail(
-			DbsWdbe* dbswdbe
-		) {
-	// pre.ixCrdaccSys()
-
-	vector<bool> args;
-	bool a;
-
-	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCSYS, jref) != 0);
-	args.push_back(a);
-
-	return(args.back());
-};
-
-bool PnlWdbeNavDevdev::evalButSysViewActive(
-			DbsWdbe* dbswdbe
-		) {
-	// LstSys.sel()
-
-	vector<bool> args;
-	bool a;
-
-	a = false; a = (contiac.numFLstSys != 0);
-	args.push_back(a);
-
-	return(args.back());
-};
-
-bool PnlWdbeNavDevdev::evalButSysNewcrdActive(
-			DbsWdbe* dbswdbe
-		) {
-	// pre.refVer()
-
-	vector<bool> args;
-	bool a;
-
-	a = false; a = (xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFVER, jref) != 0);
-	args.push_back(a);
-
-	return(args.back());
-};
-
-bool PnlWdbeNavDevdev::evalLstTrgAvail(
-			DbsWdbe* dbswdbe
-		) {
-	// pre.ixCrdaccTrg()
-
-	vector<bool> args;
-	bool a;
-
-	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCTRG, jref) != 0);
-	args.push_back(a);
-
-	return(args.back());
-};
-
-bool PnlWdbeNavDevdev::evalButTrgViewActive(
-			DbsWdbe* dbswdbe
-		) {
-	// LstTrg.sel()
-
-	vector<bool> args;
-	bool a;
-
-	a = false; a = (contiac.numFLstTrg != 0);
-	args.push_back(a);
-
-	return(args.back());
-};
-
-bool PnlWdbeNavDevdev::evalButTrgNewcrdActive(
-			DbsWdbe* dbswdbe
-		) {
-	// pre.refVer()
-
-	vector<bool> args;
-	bool a;
-
-	a = false; a = (xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFVER, jref) != 0);
-	args.push_back(a);
-
-	return(args.back());
-};
-
 bool PnlWdbeNavDevdev::evalLstUntAvail(
 			DbsWdbe* dbswdbe
 		) {
@@ -180,48 +96,6 @@ bool PnlWdbeNavDevdev::evalButUntViewActive(
 };
 
 bool PnlWdbeNavDevdev::evalButUntNewcrdActive(
-			DbsWdbe* dbswdbe
-		) {
-	// pre.refVer()
-
-	vector<bool> args;
-	bool a;
-
-	a = false; a = (xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFVER, jref) != 0);
-	args.push_back(a);
-
-	return(args.back());
-};
-
-bool PnlWdbeNavDevdev::evalLstRlsAvail(
-			DbsWdbe* dbswdbe
-		) {
-	// pre.ixCrdaccRls()
-
-	vector<bool> args;
-	bool a;
-
-	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCRLS, jref) != 0);
-	args.push_back(a);
-
-	return(args.back());
-};
-
-bool PnlWdbeNavDevdev::evalButRlsViewActive(
-			DbsWdbe* dbswdbe
-		) {
-	// LstRls.sel()
-
-	vector<bool> args;
-	bool a;
-
-	a = false; a = (contiac.numFLstRls != 0);
-	args.push_back(a);
-
-	return(args.back());
-};
-
-bool PnlWdbeNavDevdev::evalButRlsNewcrdActive(
 			DbsWdbe* dbswdbe
 		) {
 	// pre.refVer()

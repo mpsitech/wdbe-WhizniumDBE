@@ -14,20 +14,20 @@ using namespace Sbecore;
 using namespace Xmlio;
 
 /******************************************************************************
- class DpchInvWdbeCplmstCtrEctr
+ class DpchInvWdbeCplmstCtrEctrHostifEhostif
  ******************************************************************************/
 
-DpchInvWdbeCplmstCtrEctr::DpchInvWdbeCplmstCtrEctr(
+DpchInvWdbeCplmstCtrEctrHostifEhostif::DpchInvWdbeCplmstCtrEctrHostifEhostif(
 			const ubigint oref
 			, const ubigint jref
 			, const ubigint refWdbeMModule
 		) :
-			DpchInvWdbe(VecWdbeVDpch::DPCHINVWDBECPLMSTCTRECTR, oref, jref)
+			DpchInvWdbe(VecWdbeVDpch::DPCHINVWDBECPLMSTCTRECTRHOSTIFEHOSTIF, oref, jref)
 		{
 	this->refWdbeMModule = refWdbeMModule;
 };
 
-void DpchInvWdbeCplmstCtrEctr::readXML(
+void DpchInvWdbeCplmstCtrEctrHostifEhostif::readXML(
 			xmlXPathContext* docctx
 			, string basexpath
 			, bool addbasetag
@@ -37,7 +37,7 @@ void DpchInvWdbeCplmstCtrEctr::readXML(
 	bool basefound;
 
 	if (addbasetag)
-		basefound = checkUclcXPaths(docctx, basexpath, basexpath, "DpchInvWdbeCplmstCtrEctr");
+		basefound = checkUclcXPaths(docctx, basexpath, basexpath, "DpchInvWdbeCplmstCtrEctrHostifEhostif");
 	else
 		basefound = checkXPath(docctx, basexpath);
 
@@ -48,56 +48,10 @@ void DpchInvWdbeCplmstCtrEctr::readXML(
 	};
 };
 
-void DpchInvWdbeCplmstCtrEctr::writeXML(
+void DpchInvWdbeCplmstCtrEctrHostifEhostif::writeXML(
 			xmlTextWriter* wr
 		) {
-	xmlTextWriterStartElement(wr, BAD_CAST "DpchInvWdbeCplmstCtrEctr");
-	xmlTextWriterWriteAttribute(wr, BAD_CAST "xmlns", BAD_CAST "http://www.mpsitech.com/wdbe");
-		writeString(wr, "scrOref", Scr::scramble(oref));
-		writeString(wr, "scrJref", Scr::scramble(jref));
-		writeUbigint(wr, "refWdbeMModule", refWdbeMModule);
-	xmlTextWriterEndElement(wr);
-};
-
-/******************************************************************************
- class DpchInvWdbeCplmstFwdctr
- ******************************************************************************/
-
-DpchInvWdbeCplmstFwdctr::DpchInvWdbeCplmstFwdctr(
-			const ubigint oref
-			, const ubigint jref
-			, const ubigint refWdbeMModule
-		) :
-			DpchInvWdbe(VecWdbeVDpch::DPCHINVWDBECPLMSTFWDCTR, oref, jref)
-		{
-	this->refWdbeMModule = refWdbeMModule;
-};
-
-void DpchInvWdbeCplmstFwdctr::readXML(
-			xmlXPathContext* docctx
-			, string basexpath
-			, bool addbasetag
-		) {
-	clear();
-
-	bool basefound;
-
-	if (addbasetag)
-		basefound = checkUclcXPaths(docctx, basexpath, basexpath, "DpchInvWdbeCplmstFwdctr");
-	else
-		basefound = checkXPath(docctx, basexpath);
-
-	if (basefound) {
-		if (extractStringUclc(docctx, basexpath, "scrOref", "", scrOref)) add(SCROREF);
-		if (extractStringUclc(docctx, basexpath, "scrJref", "", scrJref)) add(SCRJREF);
-		if (extractUbigintUclc(docctx, basexpath, "refWdbeMModule", "", refWdbeMModule)) add(REFWDBEMMODULE);
-	};
-};
-
-void DpchInvWdbeCplmstFwdctr::writeXML(
-			xmlTextWriter* wr
-		) {
-	xmlTextWriterStartElement(wr, BAD_CAST "DpchInvWdbeCplmstFwdctr");
+	xmlTextWriterStartElement(wr, BAD_CAST "DpchInvWdbeCplmstCtrEctrHostifEhostif");
 	xmlTextWriterWriteAttribute(wr, BAD_CAST "xmlns", BAD_CAST "http://www.mpsitech.com/wdbe");
 		writeString(wr, "scrOref", Scr::scramble(oref));
 		writeString(wr, "scrJref", Scr::scramble(jref));
@@ -211,52 +165,6 @@ void DpchRetWdbeCplmstImbuf::writeXML(
 		writeString(wr, "srefIxOpVOpres", VecOpVOpres::getSref(ixOpVOpres));
 		writeUtinyint(wr, "pdone", pdone);
 		writeString(wr, "logfile", logfile);
-	xmlTextWriterEndElement(wr);
-};
-
-/******************************************************************************
- class DpchInvWdbeCplmstSys
- ******************************************************************************/
-
-DpchInvWdbeCplmstSys::DpchInvWdbeCplmstSys(
-			const ubigint oref
-			, const ubigint jref
-			, const ubigint refWdbeMVersion
-		) :
-			DpchInvWdbe(VecWdbeVDpch::DPCHINVWDBECPLMSTSYS, oref, jref)
-		{
-	this->refWdbeMVersion = refWdbeMVersion;
-};
-
-void DpchInvWdbeCplmstSys::readXML(
-			xmlXPathContext* docctx
-			, string basexpath
-			, bool addbasetag
-		) {
-	clear();
-
-	bool basefound;
-
-	if (addbasetag)
-		basefound = checkUclcXPaths(docctx, basexpath, basexpath, "DpchInvWdbeCplmstSys");
-	else
-		basefound = checkXPath(docctx, basexpath);
-
-	if (basefound) {
-		if (extractStringUclc(docctx, basexpath, "scrOref", "", scrOref)) add(SCROREF);
-		if (extractStringUclc(docctx, basexpath, "scrJref", "", scrJref)) add(SCRJREF);
-		if (extractUbigintUclc(docctx, basexpath, "refWdbeMVersion", "", refWdbeMVersion)) add(REFWDBEMVERSION);
-	};
-};
-
-void DpchInvWdbeCplmstSys::writeXML(
-			xmlTextWriter* wr
-		) {
-	xmlTextWriterStartElement(wr, BAD_CAST "DpchInvWdbeCplmstSys");
-	xmlTextWriterWriteAttribute(wr, BAD_CAST "xmlns", BAD_CAST "http://www.mpsitech.com/wdbe");
-		writeString(wr, "scrOref", Scr::scramble(oref));
-		writeString(wr, "scrJref", Scr::scramble(jref));
-		writeUbigint(wr, "refWdbeMVersion", refWdbeMVersion);
 	xmlTextWriterEndElement(wr);
 };
 

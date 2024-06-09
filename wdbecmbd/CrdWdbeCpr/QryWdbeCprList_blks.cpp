@@ -20,12 +20,12 @@ uint QryWdbeCprList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "grp") return GRP;
-	if (s == "own") return OWN;
-	if (s == "srf") return SRF;
-	if (s == "tit") return TIT;
-	if (s == "typ") return TYP;
 	if (s == "cvr") return CVR;
+	if (s == "typ") return TYP;
+	if (s == "tit") return TIT;
+	if (s == "srf") return SRF;
+	if (s == "own") return OWN;
+	if (s == "grp") return GRP;
 
 	return(0);
 };
@@ -33,12 +33,12 @@ uint QryWdbeCprList::VecVOrd::getIx(
 string QryWdbeCprList::VecVOrd::getSref(
 			const uint ix
 		) {
-	if (ix == GRP) return("grp");
-	if (ix == OWN) return("own");
-	if (ix == SRF) return("srf");
-	if (ix == TIT) return("tit");
-	if (ix == TYP) return("typ");
 	if (ix == CVR) return("cvr");
+	if (ix == TYP) return("typ");
+	if (ix == TIT) return("tit");
+	if (ix == SRF) return("srf");
+	if (ix == OWN) return("own");
+	if (ix == GRP) return("grp");
 
 	return("");
 };
@@ -67,10 +67,10 @@ void QryWdbeCprList::StatApp::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["firstcol"] = firstcol;
-	me["jnumFirstdisp"] = jnumFirstdisp;
-	me["ncol"] = ncol;
-	me["ndisp"] = ndisp;
+	me["firstcol"] = (Json::Value::UInt) firstcol;
+	me["jnumFirstdisp"] = (Json::Value::UInt) jnumFirstdisp;
+	me["ncol"] = (Json::Value::UInt) ncol;
+	me["ndisp"] = (Json::Value::UInt) ndisp;
 };
 
 void QryWdbeCprList::StatApp::writeXML(
@@ -122,9 +122,9 @@ void QryWdbeCprList::StatShr::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["ntot"] = ntot;
-	me["jnumFirstload"] = jnumFirstload;
-	me["nload"] = nload;
+	me["ntot"] = (Json::Value::UInt) ntot;
+	me["jnumFirstload"] = (Json::Value::UInt) jnumFirstload;
+	me["nload"] = (Json::Value::UInt) nload;
 };
 
 void QryWdbeCprList::StatShr::writeXML(
@@ -189,15 +189,14 @@ QryWdbeCprList::StgIac::StgIac(
 };
 
 bool QryWdbeCprList::StgIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["StgIacQryWdbeCprList"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["StgIacQryWdbeCprList"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -243,9 +242,9 @@ void QryWdbeCprList::StgIac::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["jnum"] = jnum;
-	me["jnumFirstload"] = jnumFirstload;
-	me["nload"] = nload;
+	me["jnum"] = (Json::Value::UInt) jnum;
+	me["jnumFirstload"] = (Json::Value::UInt) jnumFirstload;
+	me["nload"] = (Json::Value::UInt) nload;
 };
 
 void QryWdbeCprList::StgIac::writeXML(

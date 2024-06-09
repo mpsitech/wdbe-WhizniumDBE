@@ -45,8 +45,9 @@ namespace PnlWdbeNavLow {
 		static const Sbecore::uint BUTPRTVIEWCLICK = 10;
 		static const Sbecore::uint BUTSIGVIEWCLICK = 11;
 		static const Sbecore::uint BUTSIGNEWCRDCLICK = 12;
-		static const Sbecore::uint BUTPRCVIEWCLICK = 13;
-		static const Sbecore::uint BUTFSTVIEWCLICK = 14;
+		static const Sbecore::uint BUTCDCVIEWCLICK = 13;
+		static const Sbecore::uint BUTPRCVIEWCLICK = 14;
+		static const Sbecore::uint BUTFSTVIEWCLICK = 15;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);
@@ -66,11 +67,12 @@ namespace PnlWdbeNavLow {
 		static const Sbecore::uint NUMFLSTGEN = 6;
 		static const Sbecore::uint NUMFLSTPRT = 7;
 		static const Sbecore::uint NUMFLSTSIG = 8;
-		static const Sbecore::uint NUMFLSTPRC = 9;
-		static const Sbecore::uint NUMFLSTFST = 10;
+		static const Sbecore::uint NUMFLSTCDC = 9;
+		static const Sbecore::uint NUMFLSTPRC = 10;
+		static const Sbecore::uint NUMFLSTFST = 11;
 
 	public:
-		ContIac(const Sbecore::uint numFLstBnk = 1, const Sbecore::uint numFLstPin = 1, const Sbecore::uint numFLstInt = 1, const Sbecore::uint numFLstSns = 1, const Sbecore::uint numFLstVar = 1, const Sbecore::uint numFLstGen = 1, const Sbecore::uint numFLstPrt = 1, const Sbecore::uint numFLstSig = 1, const Sbecore::uint numFLstPrc = 1, const Sbecore::uint numFLstFst = 1);
+		ContIac(const Sbecore::uint numFLstBnk = 1, const Sbecore::uint numFLstPin = 1, const Sbecore::uint numFLstInt = 1, const Sbecore::uint numFLstSns = 1, const Sbecore::uint numFLstVar = 1, const Sbecore::uint numFLstGen = 1, const Sbecore::uint numFLstPrt = 1, const Sbecore::uint numFLstSig = 1, const Sbecore::uint numFLstCdc = 1, const Sbecore::uint numFLstPrc = 1, const Sbecore::uint numFLstFst = 1);
 
 	public:
 		Sbecore::uint numFLstBnk;
@@ -81,6 +83,7 @@ namespace PnlWdbeNavLow {
 		Sbecore::uint numFLstGen;
 		Sbecore::uint numFLstPrt;
 		Sbecore::uint numFLstSig;
+		Sbecore::uint numFLstCdc;
 		Sbecore::uint numFLstPrc;
 		Sbecore::uint numFLstFst;
 
@@ -106,21 +109,23 @@ namespace PnlWdbeNavLow {
 		static const Sbecore::uint LSTGENALT = 7;
 		static const Sbecore::uint LSTPRTALT = 8;
 		static const Sbecore::uint LSTSIGALT = 9;
-		static const Sbecore::uint LSTPRCALT = 10;
-		static const Sbecore::uint LSTFSTALT = 11;
-		static const Sbecore::uint LSTBNKNUMFIRSTDISP = 12;
-		static const Sbecore::uint LSTPINNUMFIRSTDISP = 13;
-		static const Sbecore::uint LSTINTNUMFIRSTDISP = 14;
-		static const Sbecore::uint LSTSNSNUMFIRSTDISP = 15;
-		static const Sbecore::uint LSTVARNUMFIRSTDISP = 16;
-		static const Sbecore::uint LSTGENNUMFIRSTDISP = 17;
-		static const Sbecore::uint LSTPRTNUMFIRSTDISP = 18;
-		static const Sbecore::uint LSTSIGNUMFIRSTDISP = 19;
-		static const Sbecore::uint LSTPRCNUMFIRSTDISP = 20;
-		static const Sbecore::uint LSTFSTNUMFIRSTDISP = 21;
+		static const Sbecore::uint LSTCDCALT = 10;
+		static const Sbecore::uint LSTPRCALT = 11;
+		static const Sbecore::uint LSTFSTALT = 12;
+		static const Sbecore::uint LSTBNKNUMFIRSTDISP = 13;
+		static const Sbecore::uint LSTPINNUMFIRSTDISP = 14;
+		static const Sbecore::uint LSTINTNUMFIRSTDISP = 15;
+		static const Sbecore::uint LSTSNSNUMFIRSTDISP = 16;
+		static const Sbecore::uint LSTVARNUMFIRSTDISP = 17;
+		static const Sbecore::uint LSTGENNUMFIRSTDISP = 18;
+		static const Sbecore::uint LSTPRTNUMFIRSTDISP = 19;
+		static const Sbecore::uint LSTSIGNUMFIRSTDISP = 20;
+		static const Sbecore::uint LSTCDCNUMFIRSTDISP = 21;
+		static const Sbecore::uint LSTPRCNUMFIRSTDISP = 22;
+		static const Sbecore::uint LSTFSTNUMFIRSTDISP = 23;
 
 	public:
-		StatApp(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::MIND, const bool LstBnkAlt = true, const bool LstPinAlt = true, const bool LstIntAlt = true, const bool LstSnsAlt = true, const bool LstVarAlt = true, const bool LstGenAlt = true, const bool LstPrtAlt = true, const bool LstSigAlt = true, const bool LstPrcAlt = true, const bool LstFstAlt = true, const Sbecore::uint LstBnkNumFirstdisp = 1, const Sbecore::uint LstPinNumFirstdisp = 1, const Sbecore::uint LstIntNumFirstdisp = 1, const Sbecore::uint LstSnsNumFirstdisp = 1, const Sbecore::uint LstVarNumFirstdisp = 1, const Sbecore::uint LstGenNumFirstdisp = 1, const Sbecore::uint LstPrtNumFirstdisp = 1, const Sbecore::uint LstSigNumFirstdisp = 1, const Sbecore::uint LstPrcNumFirstdisp = 1, const Sbecore::uint LstFstNumFirstdisp = 1);
+		StatApp(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::MIND, const bool LstBnkAlt = true, const bool LstPinAlt = true, const bool LstIntAlt = true, const bool LstSnsAlt = true, const bool LstVarAlt = true, const bool LstGenAlt = true, const bool LstPrtAlt = true, const bool LstSigAlt = true, const bool LstCdcAlt = true, const bool LstPrcAlt = true, const bool LstFstAlt = true, const Sbecore::uint LstBnkNumFirstdisp = 1, const Sbecore::uint LstPinNumFirstdisp = 1, const Sbecore::uint LstIntNumFirstdisp = 1, const Sbecore::uint LstSnsNumFirstdisp = 1, const Sbecore::uint LstVarNumFirstdisp = 1, const Sbecore::uint LstGenNumFirstdisp = 1, const Sbecore::uint LstPrtNumFirstdisp = 1, const Sbecore::uint LstSigNumFirstdisp = 1, const Sbecore::uint LstCdcNumFirstdisp = 1, const Sbecore::uint LstPrcNumFirstdisp = 1, const Sbecore::uint LstFstNumFirstdisp = 1);
 
 	public:
 		Sbecore::uint ixWdbeVExpstate;
@@ -132,6 +137,7 @@ namespace PnlWdbeNavLow {
 		bool LstGenAlt;
 		bool LstPrtAlt;
 		bool LstSigAlt;
+		bool LstCdcAlt;
 		bool LstPrcAlt;
 		bool LstFstAlt;
 		Sbecore::uint LstBnkNumFirstdisp;
@@ -142,6 +148,7 @@ namespace PnlWdbeNavLow {
 		Sbecore::uint LstGenNumFirstdisp;
 		Sbecore::uint LstPrtNumFirstdisp;
 		Sbecore::uint LstSigNumFirstdisp;
+		Sbecore::uint LstCdcNumFirstdisp;
 		Sbecore::uint LstPrcNumFirstdisp;
 		Sbecore::uint LstFstNumFirstdisp;
 
@@ -177,13 +184,15 @@ namespace PnlWdbeNavLow {
 		static const Sbecore::uint LSTSIGAVAIL = 18;
 		static const Sbecore::uint BUTSIGVIEWACTIVE = 19;
 		static const Sbecore::uint BUTSIGNEWCRDACTIVE = 20;
-		static const Sbecore::uint LSTPRCAVAIL = 21;
-		static const Sbecore::uint BUTPRCVIEWACTIVE = 22;
-		static const Sbecore::uint LSTFSTAVAIL = 23;
-		static const Sbecore::uint BUTFSTVIEWACTIVE = 24;
+		static const Sbecore::uint LSTCDCAVAIL = 21;
+		static const Sbecore::uint BUTCDCVIEWACTIVE = 22;
+		static const Sbecore::uint LSTPRCAVAIL = 23;
+		static const Sbecore::uint BUTPRCVIEWACTIVE = 24;
+		static const Sbecore::uint LSTFSTAVAIL = 25;
+		static const Sbecore::uint BUTFSTVIEWACTIVE = 26;
 
 	public:
-		StatShr(const bool LstBnkAvail = true, const bool ButBnkViewActive = true, const bool ButBnkNewcrdActive = true, const bool LstPinAvail = true, const bool ButPinViewActive = true, const bool ButPinNewcrdActive = true, const bool LstIntAvail = true, const bool ButIntViewActive = true, const bool ButIntNewcrdActive = true, const bool LstSnsAvail = true, const bool ButSnsViewActive = true, const bool LstVarAvail = true, const bool ButVarViewActive = true, const bool LstGenAvail = true, const bool ButGenViewActive = true, const bool LstPrtAvail = true, const bool ButPrtViewActive = true, const bool LstSigAvail = true, const bool ButSigViewActive = true, const bool ButSigNewcrdActive = true, const bool LstPrcAvail = true, const bool ButPrcViewActive = true, const bool LstFstAvail = true, const bool ButFstViewActive = true);
+		StatShr(const bool LstBnkAvail = true, const bool ButBnkViewActive = true, const bool ButBnkNewcrdActive = true, const bool LstPinAvail = true, const bool ButPinViewActive = true, const bool ButPinNewcrdActive = true, const bool LstIntAvail = true, const bool ButIntViewActive = true, const bool ButIntNewcrdActive = true, const bool LstSnsAvail = true, const bool ButSnsViewActive = true, const bool LstVarAvail = true, const bool ButVarViewActive = true, const bool LstGenAvail = true, const bool ButGenViewActive = true, const bool LstPrtAvail = true, const bool ButPrtViewActive = true, const bool LstSigAvail = true, const bool ButSigViewActive = true, const bool ButSigNewcrdActive = true, const bool LstCdcAvail = true, const bool ButCdcViewActive = true, const bool LstPrcAvail = true, const bool ButPrcViewActive = true, const bool LstFstAvail = true, const bool ButFstViewActive = true);
 
 	public:
 		bool LstBnkAvail;
@@ -206,6 +215,8 @@ namespace PnlWdbeNavLow {
 		bool LstSigAvail;
 		bool ButSigViewActive;
 		bool ButSigNewcrdActive;
+		bool LstCdcAvail;
+		bool ButCdcViewActive;
 		bool LstPrcAvail;
 		bool ButPrcViewActive;
 		bool LstFstAvail;
@@ -232,11 +243,12 @@ namespace PnlWdbeNavLow {
 		static const Sbecore::uint CPTGEN = 7;
 		static const Sbecore::uint CPTPRT = 8;
 		static const Sbecore::uint CPTSIG = 9;
-		static const Sbecore::uint CPTPRC = 10;
-		static const Sbecore::uint CPTFST = 11;
+		static const Sbecore::uint CPTCDC = 10;
+		static const Sbecore::uint CPTPRC = 11;
+		static const Sbecore::uint CPTFST = 12;
 
 	public:
-		Tag(const std::string& Cpt = "", const std::string& CptBnk = "", const std::string& CptPin = "", const std::string& CptInt = "", const std::string& CptSns = "", const std::string& CptVar = "", const std::string& CptGen = "", const std::string& CptPrt = "", const std::string& CptSig = "", const std::string& CptPrc = "", const std::string& CptFst = "");
+		Tag(const std::string& Cpt = "", const std::string& CptBnk = "", const std::string& CptPin = "", const std::string& CptInt = "", const std::string& CptSns = "", const std::string& CptVar = "", const std::string& CptGen = "", const std::string& CptPrt = "", const std::string& CptSig = "", const std::string& CptCdc = "", const std::string& CptPrc = "", const std::string& CptFst = "");
 
 	public:
 		std::string Cpt;
@@ -248,6 +260,7 @@ namespace PnlWdbeNavLow {
 		std::string CptGen;
 		std::string CptPrt;
 		std::string CptSig;
+		std::string CptCdc;
 		std::string CptPrc;
 		std::string CptFst;
 
@@ -308,18 +321,19 @@ namespace PnlWdbeNavLow {
 		static const Sbecore::uint SCRJREF = 1;
 		static const Sbecore::uint CONTIAC = 2;
 		static const Sbecore::uint FEEDFLSTBNK = 3;
-		static const Sbecore::uint FEEDFLSTFST = 4;
-		static const Sbecore::uint FEEDFLSTGEN = 5;
-		static const Sbecore::uint FEEDFLSTINT = 6;
-		static const Sbecore::uint FEEDFLSTPIN = 7;
-		static const Sbecore::uint FEEDFLSTPRC = 8;
-		static const Sbecore::uint FEEDFLSTPRT = 9;
-		static const Sbecore::uint FEEDFLSTSIG = 10;
-		static const Sbecore::uint FEEDFLSTSNS = 11;
-		static const Sbecore::uint FEEDFLSTVAR = 12;
-		static const Sbecore::uint STATAPP = 13;
-		static const Sbecore::uint STATSHR = 14;
-		static const Sbecore::uint TAG = 15;
+		static const Sbecore::uint FEEDFLSTCDC = 4;
+		static const Sbecore::uint FEEDFLSTFST = 5;
+		static const Sbecore::uint FEEDFLSTGEN = 6;
+		static const Sbecore::uint FEEDFLSTINT = 7;
+		static const Sbecore::uint FEEDFLSTPIN = 8;
+		static const Sbecore::uint FEEDFLSTPRC = 9;
+		static const Sbecore::uint FEEDFLSTPRT = 10;
+		static const Sbecore::uint FEEDFLSTSIG = 11;
+		static const Sbecore::uint FEEDFLSTSNS = 12;
+		static const Sbecore::uint FEEDFLSTVAR = 13;
+		static const Sbecore::uint STATAPP = 14;
+		static const Sbecore::uint STATSHR = 15;
+		static const Sbecore::uint TAG = 16;
 
 	public:
 		DpchEngData();
@@ -327,6 +341,7 @@ namespace PnlWdbeNavLow {
 	public:
 		ContIac contiac;
 		Sbecore::Feed feedFLstBnk;
+		Sbecore::Feed feedFLstCdc;
 		Sbecore::Feed feedFLstFst;
 		Sbecore::Feed feedFLstGen;
 		Sbecore::Feed feedFLstInt;

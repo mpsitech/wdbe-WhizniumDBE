@@ -33,6 +33,10 @@ WdbeQFstAStep::WdbeQFstAStep(
 			, const string Ip3
 			, const string Cond4
 			, const string Ip4
+			, const string Cond5
+			, const string Ip5
+			, const string Cond6
+			, const string Ip6
 		) {
 	this->qref = qref;
 	this->jref = jref;
@@ -49,6 +53,10 @@ WdbeQFstAStep::WdbeQFstAStep(
 	this->Ip3 = Ip3;
 	this->Cond4 = Cond4;
 	this->Ip4 = Ip4;
+	this->Cond5 = Cond5;
+	this->Ip5 = Ip5;
+	this->Cond6 = Cond6;
+	this->Ip6 = Ip6;
 };
 
 void WdbeQFstAStep::writeJSON(
@@ -69,6 +77,10 @@ void WdbeQFstAStep::writeJSON(
 		me["ip3"] = Ip3;
 		me["cn4"] = Cond4;
 		me["ip4"] = Ip4;
+		me["cn5"] = Cond5;
+		me["ip5"] = Ip5;
+		me["cn6"] = Cond6;
+		me["ip6"] = Ip6;
 	} else {
 		me["stubFnxRefWdbeMFsmstate"] = stubFnxRefWdbeMFsmstate;
 		me["Cond1"] = Cond1;
@@ -79,6 +91,10 @@ void WdbeQFstAStep::writeJSON(
 		me["Ip3"] = Ip3;
 		me["Cond4"] = Cond4;
 		me["Ip4"] = Ip4;
+		me["Cond5"] = Cond5;
+		me["Ip5"] = Ip5;
+		me["Cond6"] = Cond6;
+		me["Ip6"] = Ip6;
 	};
 };
 
@@ -102,6 +118,10 @@ void WdbeQFstAStep::writeXML(
 		writeString(wr, "ip3", Ip3);
 		writeString(wr, "cn4", Cond4);
 		writeString(wr, "ip4", Ip4);
+		writeString(wr, "cn5", Cond5);
+		writeString(wr, "ip5", Ip5);
+		writeString(wr, "cn6", Cond6);
+		writeString(wr, "ip6", Ip6);
 	} else {
 		writeString(wr, "stubFnxRefWdbeMFsmstate", stubFnxRefWdbeMFsmstate);
 		writeString(wr, "Cond1", Cond1);
@@ -112,6 +132,10 @@ void WdbeQFstAStep::writeXML(
 		writeString(wr, "Ip3", Ip3);
 		writeString(wr, "Cond4", Cond4);
 		writeString(wr, "Ip4", Ip4);
+		writeString(wr, "Cond5", Cond5);
+		writeString(wr, "Ip5", Ip5);
+		writeString(wr, "Cond6", Cond6);
+		writeString(wr, "Ip6", Ip6);
 	};
 	xmlTextWriterEndElement(wr);
 };
@@ -235,11 +259,15 @@ ubigint TblWdbeQFstAStep::insertNewRec(
 			, const string Ip3
 			, const string Cond4
 			, const string Ip4
+			, const string Cond5
+			, const string Ip5
+			, const string Cond6
+			, const string Ip6
 		) {
 	ubigint retval = 0;
 	WdbeQFstAStep* _rec = NULL;
 
-	_rec = new WdbeQFstAStep(0, jref, jnum, ref, fstNum, fnxRefWdbeMFsmstate, stubFnxRefWdbeMFsmstate, Cond1, Ip1, Cond2, Ip2, Cond3, Ip3, Cond4, Ip4);
+	_rec = new WdbeQFstAStep(0, jref, jnum, ref, fstNum, fnxRefWdbeMFsmstate, stubFnxRefWdbeMFsmstate, Cond1, Ip1, Cond2, Ip2, Cond3, Ip3, Cond4, Ip4, Cond5, Ip5, Cond6, Ip6);
 	insertRec(_rec);
 
 	retval = _rec->qref;
@@ -267,11 +295,15 @@ ubigint TblWdbeQFstAStep::appendNewRecToRst(
 			, const string Ip3
 			, const string Cond4
 			, const string Ip4
+			, const string Cond5
+			, const string Ip5
+			, const string Cond6
+			, const string Ip6
 		) {
 	ubigint retval = 0;
 	WdbeQFstAStep* _rec = NULL;
 
-	retval = insertNewRec(&_rec, jref, jnum, ref, fstNum, fnxRefWdbeMFsmstate, stubFnxRefWdbeMFsmstate, Cond1, Ip1, Cond2, Ip2, Cond3, Ip3, Cond4, Ip4);
+	retval = insertNewRec(&_rec, jref, jnum, ref, fstNum, fnxRefWdbeMFsmstate, stubFnxRefWdbeMFsmstate, Cond1, Ip1, Cond2, Ip2, Cond3, Ip3, Cond4, Ip4, Cond5, Ip5, Cond6, Ip6);
 	rst.nodes.push_back(_rec);
 
 	if (rec != NULL) *rec = _rec;
@@ -342,8 +374,8 @@ MyTblWdbeQFstAStep::~MyTblWdbeQFstAStep() {
 };
 
 void MyTblWdbeQFstAStep::initStatements() {
-	stmtInsertRec = createStatement("INSERT INTO TblWdbeQFstAStep (jref, jnum, ref, fstNum, fnxRefWdbeMFsmstate, Cond1, Ip1, Cond2, Ip2, Cond3, Ip3, Cond4, Ip4) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)", false);
-	stmtUpdateRec = createStatement("UPDATE TblWdbeQFstAStep SET jref = ?, jnum = ?, ref = ?, fstNum = ?, fnxRefWdbeMFsmstate = ?, Cond1 = ?, Ip1 = ?, Cond2 = ?, Ip2 = ?, Cond3 = ?, Ip3 = ?, Cond4 = ?, Ip4 = ? WHERE qref = ?", false);
+	stmtInsertRec = createStatement("INSERT INTO TblWdbeQFstAStep (jref, jnum, ref, fstNum, fnxRefWdbeMFsmstate, Cond1, Ip1, Cond2, Ip2, Cond3, Ip3, Cond4, Ip4, Cond5, Ip5, Cond6, Ip6) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", false);
+	stmtUpdateRec = createStatement("UPDATE TblWdbeQFstAStep SET jref = ?, jnum = ?, ref = ?, fstNum = ?, fnxRefWdbeMFsmstate = ?, Cond1 = ?, Ip1 = ?, Cond2 = ?, Ip2 = ?, Cond3 = ?, Ip3 = ?, Cond4 = ?, Ip4 = ?, Cond5 = ?, Ip5 = ?, Cond6 = ?, Ip6 = ? WHERE qref = ?", false);
 	stmtRemoveRecByQref = createStatement("DELETE FROM TblWdbeQFstAStep WHERE qref = ?", false);
 	stmtRemoveRstByJref = createStatement("DELETE FROM TblWdbeQFstAStep WHERE jref = ?", false);
 };
@@ -388,6 +420,10 @@ bool MyTblWdbeQFstAStep::loadRecBySQL(
 		if (dbrow[11]) _rec->Ip3.assign(dbrow[11], dblengths[11]); else _rec->Ip3 = "";
 		if (dbrow[12]) _rec->Cond4.assign(dbrow[12], dblengths[12]); else _rec->Cond4 = "";
 		if (dbrow[13]) _rec->Ip4.assign(dbrow[13], dblengths[13]); else _rec->Ip4 = "";
+		if (dbrow[14]) _rec->Cond5.assign(dbrow[14], dblengths[14]); else _rec->Cond5 = "";
+		if (dbrow[15]) _rec->Ip5.assign(dbrow[15], dblengths[15]); else _rec->Ip5 = "";
+		if (dbrow[16]) _rec->Cond6.assign(dbrow[16], dblengths[16]); else _rec->Cond6 = "";
+		if (dbrow[17]) _rec->Ip6.assign(dbrow[17], dblengths[17]); else _rec->Ip6 = "";
 
 		retval = true;
 	};
@@ -444,6 +480,10 @@ ubigint MyTblWdbeQFstAStep::loadRstBySQL(
 			if (dbrow[11]) rec->Ip3.assign(dbrow[11], dblengths[11]); else rec->Ip3 = "";
 			if (dbrow[12]) rec->Cond4.assign(dbrow[12], dblengths[12]); else rec->Cond4 = "";
 			if (dbrow[13]) rec->Ip4.assign(dbrow[13], dblengths[13]); else rec->Ip4 = "";
+			if (dbrow[14]) rec->Cond5.assign(dbrow[14], dblengths[14]); else rec->Cond5 = "";
+			if (dbrow[15]) rec->Ip5.assign(dbrow[15], dblengths[15]); else rec->Ip5 = "";
+			if (dbrow[16]) rec->Cond6.assign(dbrow[16], dblengths[16]); else rec->Cond6 = "";
+			if (dbrow[17]) rec->Ip6.assign(dbrow[17], dblengths[17]); else rec->Ip6 = "";
 			rst.nodes.push_back(rec);
 
 			numread++;
@@ -458,7 +498,7 @@ ubigint MyTblWdbeQFstAStep::loadRstBySQL(
 ubigint MyTblWdbeQFstAStep::insertRec(
 			WdbeQFstAStep* rec
 		) {
-	unsigned long l[13]; my_bool n[13]; my_bool e[13];
+	unsigned long l[17]; my_bool n[17]; my_bool e[17];
 
 	l[5] = rec->Cond1.length();
 	l[6] = rec->Ip1.length();
@@ -468,6 +508,10 @@ ubigint MyTblWdbeQFstAStep::insertRec(
 	l[10] = rec->Ip3.length();
 	l[11] = rec->Cond4.length();
 	l[12] = rec->Ip4.length();
+	l[13] = rec->Cond5.length();
+	l[14] = rec->Ip5.length();
+	l[15] = rec->Cond6.length();
+	l[16] = rec->Ip6.length();
 
 	MYSQL_BIND bind[] = {
 		bindUbigint(&rec->jref,&(l[0]),&(n[0]),&(e[0])),
@@ -482,7 +526,11 @@ ubigint MyTblWdbeQFstAStep::insertRec(
 		bindCstring((char*) (rec->Cond3.c_str()),&(l[9]),&(n[9]),&(e[9])),
 		bindCstring((char*) (rec->Ip3.c_str()),&(l[10]),&(n[10]),&(e[10])),
 		bindCstring((char*) (rec->Cond4.c_str()),&(l[11]),&(n[11]),&(e[11])),
-		bindCstring((char*) (rec->Ip4.c_str()),&(l[12]),&(n[12]),&(e[12]))
+		bindCstring((char*) (rec->Ip4.c_str()),&(l[12]),&(n[12]),&(e[12])),
+		bindCstring((char*) (rec->Cond5.c_str()),&(l[13]),&(n[13]),&(e[13])),
+		bindCstring((char*) (rec->Ip5.c_str()),&(l[14]),&(n[14]),&(e[14])),
+		bindCstring((char*) (rec->Cond6.c_str()),&(l[15]),&(n[15]),&(e[15])),
+		bindCstring((char*) (rec->Ip6.c_str()),&(l[16]),&(n[16]),&(e[16]))
 	};
 
 	if (mysql_stmt_bind_param(stmtInsertRec, bind)) {
@@ -507,7 +555,7 @@ void MyTblWdbeQFstAStep::insertRst(
 void MyTblWdbeQFstAStep::updateRec(
 			WdbeQFstAStep* rec
 		) {
-	unsigned long l[14]; my_bool n[14]; my_bool e[14];
+	unsigned long l[18]; my_bool n[18]; my_bool e[18];
 
 	l[5] = rec->Cond1.length();
 	l[6] = rec->Ip1.length();
@@ -517,6 +565,10 @@ void MyTblWdbeQFstAStep::updateRec(
 	l[10] = rec->Ip3.length();
 	l[11] = rec->Cond4.length();
 	l[12] = rec->Ip4.length();
+	l[13] = rec->Cond5.length();
+	l[14] = rec->Ip5.length();
+	l[15] = rec->Cond6.length();
+	l[16] = rec->Ip6.length();
 
 	MYSQL_BIND bind[] = {
 		bindUbigint(&rec->jref,&(l[0]),&(n[0]),&(e[0])),
@@ -532,7 +584,11 @@ void MyTblWdbeQFstAStep::updateRec(
 		bindCstring((char*) (rec->Ip3.c_str()),&(l[10]),&(n[10]),&(e[10])),
 		bindCstring((char*) (rec->Cond4.c_str()),&(l[11]),&(n[11]),&(e[11])),
 		bindCstring((char*) (rec->Ip4.c_str()),&(l[12]),&(n[12]),&(e[12])),
-		bindUbigint(&rec->qref,&(l[13]),&(n[13]),&(e[13]))
+		bindCstring((char*) (rec->Cond5.c_str()),&(l[13]),&(n[13]),&(e[13])),
+		bindCstring((char*) (rec->Ip5.c_str()),&(l[14]),&(n[14]),&(e[14])),
+		bindCstring((char*) (rec->Cond6.c_str()),&(l[15]),&(n[15]),&(e[15])),
+		bindCstring((char*) (rec->Ip6.c_str()),&(l[16]),&(n[16]),&(e[16])),
+		bindUbigint(&rec->qref,&(l[17]),&(n[17]),&(e[17]))
 	};
 
 	if (mysql_stmt_bind_param(stmtUpdateRec, bind)) {
@@ -621,13 +677,13 @@ PgTblWdbeQFstAStep::~PgTblWdbeQFstAStep() {
 };
 
 void PgTblWdbeQFstAStep::initStatements() {
-	createStatement("TblWdbeQFstAStep_insertRec", "INSERT INTO TblWdbeQFstAStep (jref, jnum, ref, fstNum, fnxRefWdbeMFsmstate, Cond1, Ip1, Cond2, Ip2, Cond3, Ip3, Cond4, Ip4) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13) RETURNING qref", 13);
-	createStatement("TblWdbeQFstAStep_updateRec", "UPDATE TblWdbeQFstAStep SET jref = $1, jnum = $2, ref = $3, fstNum = $4, fnxRefWdbeMFsmstate = $5, Cond1 = $6, Ip1 = $7, Cond2 = $8, Ip2 = $9, Cond3 = $10, Ip3 = $11, Cond4 = $12, Ip4 = $13 WHERE qref = $14", 14);
+	createStatement("TblWdbeQFstAStep_insertRec", "INSERT INTO TblWdbeQFstAStep (jref, jnum, ref, fstNum, fnxRefWdbeMFsmstate, Cond1, Ip1, Cond2, Ip2, Cond3, Ip3, Cond4, Ip4, Cond5, Ip5, Cond6, Ip6) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17) RETURNING qref", 17);
+	createStatement("TblWdbeQFstAStep_updateRec", "UPDATE TblWdbeQFstAStep SET jref = $1, jnum = $2, ref = $3, fstNum = $4, fnxRefWdbeMFsmstate = $5, Cond1 = $6, Ip1 = $7, Cond2 = $8, Ip2 = $9, Cond3 = $10, Ip3 = $11, Cond4 = $12, Ip4 = $13, Cond5 = $14, Ip5 = $15, Cond6 = $16, Ip6 = $17 WHERE qref = $18", 18);
 	createStatement("TblWdbeQFstAStep_removeRecByQref", "DELETE FROM TblWdbeQFstAStep WHERE qref = $1", 1);
 	createStatement("TblWdbeQFstAStep_removeRstByJref", "DELETE FROM TblWdbeQFstAStep WHERE jref = $1", 1);
 
-	createStatement("TblWdbeQFstAStep_loadRecByQref", "SELECT qref, jref, jnum, ref, fstNum, fnxRefWdbeMFsmstate, Cond1, Ip1, Cond2, Ip2, Cond3, Ip3, Cond4, Ip4 FROM TblWdbeQFstAStep WHERE qref = $1", 1);
-	createStatement("TblWdbeQFstAStep_loadRstByJref", "SELECT qref, jref, jnum, ref, fstNum, fnxRefWdbeMFsmstate, Cond1, Ip1, Cond2, Ip2, Cond3, Ip3, Cond4, Ip4 FROM TblWdbeQFstAStep WHERE jref = $1 ORDER BY jnum ASC", 1);
+	createStatement("TblWdbeQFstAStep_loadRecByQref", "SELECT qref, jref, jnum, ref, fstNum, fnxRefWdbeMFsmstate, Cond1, Ip1, Cond2, Ip2, Cond3, Ip3, Cond4, Ip4, Cond5, Ip5, Cond6, Ip6 FROM TblWdbeQFstAStep WHERE qref = $1", 1);
+	createStatement("TblWdbeQFstAStep_loadRstByJref", "SELECT qref, jref, jnum, ref, fstNum, fnxRefWdbeMFsmstate, Cond1, Ip1, Cond2, Ip2, Cond3, Ip3, Cond4, Ip4, Cond5, Ip5, Cond6, Ip6 FROM TblWdbeQFstAStep WHERE jref = $1 ORDER BY jnum ASC", 1);
 };
 
 bool PgTblWdbeQFstAStep::loadRec(
@@ -656,7 +712,11 @@ bool PgTblWdbeQFstAStep::loadRec(
 			PQfnumber(res, "cond3"),
 			PQfnumber(res, "ip3"),
 			PQfnumber(res, "cond4"),
-			PQfnumber(res, "ip4")
+			PQfnumber(res, "ip4"),
+			PQfnumber(res, "cond5"),
+			PQfnumber(res, "ip5"),
+			PQfnumber(res, "cond6"),
+			PQfnumber(res, "ip6")
 		};
 
 		ptr = PQgetvalue(res, 0, fnum[0]); _rec->qref = atoll(ptr);
@@ -673,6 +733,10 @@ bool PgTblWdbeQFstAStep::loadRec(
 		ptr = PQgetvalue(res, 0, fnum[11]); _rec->Ip3.assign(ptr, PQgetlength(res, 0, fnum[11]));
 		ptr = PQgetvalue(res, 0, fnum[12]); _rec->Cond4.assign(ptr, PQgetlength(res, 0, fnum[12]));
 		ptr = PQgetvalue(res, 0, fnum[13]); _rec->Ip4.assign(ptr, PQgetlength(res, 0, fnum[13]));
+		ptr = PQgetvalue(res, 0, fnum[14]); _rec->Cond5.assign(ptr, PQgetlength(res, 0, fnum[14]));
+		ptr = PQgetvalue(res, 0, fnum[15]); _rec->Ip5.assign(ptr, PQgetlength(res, 0, fnum[15]));
+		ptr = PQgetvalue(res, 0, fnum[16]); _rec->Cond6.assign(ptr, PQgetlength(res, 0, fnum[16]));
+		ptr = PQgetvalue(res, 0, fnum[17]); _rec->Ip6.assign(ptr, PQgetlength(res, 0, fnum[17]));
 
 		retval = true;
 	};
@@ -712,7 +776,11 @@ ubigint PgTblWdbeQFstAStep::loadRst(
 			PQfnumber(res, "cond3"),
 			PQfnumber(res, "ip3"),
 			PQfnumber(res, "cond4"),
-			PQfnumber(res, "ip4")
+			PQfnumber(res, "ip4"),
+			PQfnumber(res, "cond5"),
+			PQfnumber(res, "ip5"),
+			PQfnumber(res, "cond6"),
+			PQfnumber(res, "ip6")
 		};
 
 		while (numread < numrow) {
@@ -732,6 +800,10 @@ ubigint PgTblWdbeQFstAStep::loadRst(
 			ptr = PQgetvalue(res, numread, fnum[11]); rec->Ip3.assign(ptr, PQgetlength(res, numread, fnum[11]));
 			ptr = PQgetvalue(res, numread, fnum[12]); rec->Cond4.assign(ptr, PQgetlength(res, numread, fnum[12]));
 			ptr = PQgetvalue(res, numread, fnum[13]); rec->Ip4.assign(ptr, PQgetlength(res, numread, fnum[13]));
+			ptr = PQgetvalue(res, numread, fnum[14]); rec->Cond5.assign(ptr, PQgetlength(res, numread, fnum[14]));
+			ptr = PQgetvalue(res, numread, fnum[15]); rec->Ip5.assign(ptr, PQgetlength(res, numread, fnum[15]));
+			ptr = PQgetvalue(res, numread, fnum[16]); rec->Cond6.assign(ptr, PQgetlength(res, numread, fnum[16]));
+			ptr = PQgetvalue(res, numread, fnum[17]); rec->Ip6.assign(ptr, PQgetlength(res, numread, fnum[17]));
 
 			rst.nodes.push_back(rec);
 
@@ -843,7 +915,11 @@ ubigint PgTblWdbeQFstAStep::insertRec(
 		rec->Cond3.c_str(),
 		rec->Ip3.c_str(),
 		rec->Cond4.c_str(),
-		rec->Ip4.c_str()
+		rec->Ip4.c_str(),
+		rec->Cond5.c_str(),
+		rec->Ip5.c_str(),
+		rec->Cond6.c_str(),
+		rec->Ip6.c_str()
 	};
 	const int l[] = {
 		sizeof(ubigint),
@@ -858,11 +934,15 @@ ubigint PgTblWdbeQFstAStep::insertRec(
 		0,
 		0,
 		0,
+		0,
+		0,
+		0,
+		0,
 		0
 	};
-	const int f[] = {1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0};
+	const int f[] = {1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
 
-	res = PQexecPrepared(dbs, "TblWdbeQFstAStep_insertRec", 13, vals, l, f, 0);
+	res = PQexecPrepared(dbs, "TblWdbeQFstAStep_insertRec", 17, vals, l, f, 0);
 
 	if (PQresultStatus(res) != PGRES_TUPLES_OK)	{
 		string dbms = "PgTblWdbeQFstAStep::insertRec() / " + string(PQerrorMessage(dbs));
@@ -908,6 +988,10 @@ void PgTblWdbeQFstAStep::updateRec(
 		rec->Ip3.c_str(),
 		rec->Cond4.c_str(),
 		rec->Ip4.c_str(),
+		rec->Cond5.c_str(),
+		rec->Ip5.c_str(),
+		rec->Cond6.c_str(),
+		rec->Ip6.c_str(),
 		(char*) &_qref
 	};
 	const int l[] = {
@@ -924,11 +1008,15 @@ void PgTblWdbeQFstAStep::updateRec(
 		0,
 		0,
 		0,
+		0,
+		0,
+		0,
+		0,
 		sizeof(ubigint)
 	};
-	const int f[] = {1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 1};
+	const int f[] = {1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1};
 
-	res = PQexecPrepared(dbs, "TblWdbeQFstAStep_updateRec", 14, vals, l, f, 0);
+	res = PQexecPrepared(dbs, "TblWdbeQFstAStep_updateRec", 18, vals, l, f, 0);
 
 	if (PQresultStatus(res) != PGRES_COMMAND_OK) {
 		string dbms = "PgTblWdbeQFstAStep::updateRec() / " + string(PQerrorMessage(dbs));

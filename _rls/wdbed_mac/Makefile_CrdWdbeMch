@@ -2,7 +2,7 @@
 # make file for CrdWdbeMch card job handler, release wdbed_mac
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 23 Oct 2021
+# date created: 7 Feb 2024
 # IP header --- ABOVE
 
 include ../Makefile.inc
@@ -14,9 +14,9 @@ STATLIB = ar
 STATLIBFLAGS = rcs
 
 INCPATH = -I$(BUILDROOT)/dbswdbe -I$(BUILDROOT)/wdbed/VecWdbe -I$(BUILDROOT)/wdbed/IexWdbe -I$(BUILDROOT)/wdbed
-INCPATH += -I${WHIZSDKROOT}/build -I${WHIZSDKROOT}/build/apiwzlm -I/usr/local/include -I/usr/local/include/curl -I/usr/local/include/libxml2 -I/usr/local/mysql/include -I/usr/local/opt/sqlite/include
+INCPATH += -I${WHIZSDKROOT}/build -I${WHIZSDKROOT}/build/apiwzlm -I/opt/homebrew/include -I/opt/homebrew/opt/curl/include -I/opt/homebrew/opt/libgit2/include -I/opt/homebrew/opt/libmicrohttpd/include -I/opt/homebrew/opt/libxml2/include -I/opt/homebrew/opt/openssl@3/include -I/opt/homebrew/opt/sqlite3/include -I/usr/local/mysql/include
 
-OBJS = CrdWdbeMch.o PnlWdbeMchRec.o PnlWdbeMchDetail.o PnlWdbeMchAMakefile.o QryWdbeMchAMakefile.o PnlWdbeMchAPar.o QryWdbeMchAPar.o PnlWdbeMch1NRelease.o QryWdbeMch1NRelease.o PnlWdbeMchSup1NMachine.o QryWdbeMchSup1NMachine.o PnlWdbeMchHeadbar.o PnlWdbeMchList.o QryWdbeMchList.o
+OBJS = CrdWdbeMch.o PnlWdbeMchList.o QryWdbeMchList.o PnlWdbeMchHeadbar.o PnlWdbeMchRec.o PnlWdbeMchSup1NMachine.o QryWdbeMchSup1NMachine.o PnlWdbeMch1NRelease.o QryWdbeMch1NRelease.o PnlWdbeMchAPar.o QryWdbeMchAPar.o PnlWdbeMchAMakefile.o QryWdbeMchAMakefile.o PnlWdbeMchDetail.o
 
 LIB = libcrdwdbemch
 
@@ -29,7 +29,6 @@ all:	$(LIB)
 
 $(LIB):	$(OBJS)
 	$(STATLIB) $(STATLIBFLAGS) $(LIB).a $(OBJS)
-	rm -f *.o
 
 install:
 	mv $(LIB).a $(LIBROOT)/wdbed/

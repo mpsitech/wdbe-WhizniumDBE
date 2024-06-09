@@ -24,9 +24,7 @@ uint IexWdbePrj::VecVIme::getIx(
 
 	if (s == "imeijmversionstate") return IMEIJMVERSIONSTATE;
 	if (s == "imeimproject") return IMEIMPROJECT;
-	if (s == "imeimrelease") return IMEIMRELEASE;
 	if (s == "imeimversion") return IMEIMVERSION;
-	if (s == "imeirmlibrarymversion") return IMEIRMLIBRARYMVERSION;
 	if (s == "imeirmpersonmproject") return IMEIRMPERSONMPROJECT;
 
 	return(0);
@@ -37,9 +35,7 @@ string IexWdbePrj::VecVIme::getSref(
 		) {
 	if (ix == IMEIJMVERSIONSTATE) return("ImeIJMVersionState");
 	if (ix == IMEIMPROJECT) return("ImeIMProject");
-	if (ix == IMEIMRELEASE) return("ImeIMRelease");
 	if (ix == IMEIMVERSION) return("ImeIMVersion");
-	if (ix == IMEIRMLIBRARYMVERSION) return("ImeIRMLibraryMVersion");
 	if (ix == IMEIRMPERSONMPROJECT) return("ImeIRMPersonMProject");
 
 	return("");
@@ -279,502 +275,6 @@ void IexWdbePrj::ImeIJMVersionState::writeXML(
 };
 
 /******************************************************************************
- class IexWdbePrj::ImeitemIMRelease
- ******************************************************************************/
-
-IexWdbePrj::ImeitemIMRelease::ImeitemIMRelease(
-			const uint ixVBasetype
-			, const string& hsrefRefWdbeMMachine
-			, const string& sref
-			, const string& srefsKOption
-			, const string& Comment
-		) : WdbeMRelease() {
-	lineno = 0;
-	ixWIelValid = 0;
-
-	this->ixVBasetype = ixVBasetype;
-	this->hsrefRefWdbeMMachine = hsrefRefWdbeMMachine;
-	this->sref = sref;
-	this->srefsKOption = srefsKOption;
-	this->Comment = Comment;
-};
-
-IexWdbePrj::ImeitemIMRelease::ImeitemIMRelease(
-			DbsWdbe* dbswdbe
-			, const ubigint ref
-		) :
-			ImeitemIMRelease()
-		{
-	WdbeMRelease* rec = NULL;
-
-	this->ref = ref;
-
-	if (dbswdbe->tblwdbemrelease->loadRecByRef(ref, &rec)) {
-		ixVBasetype = rec->ixVBasetype;
-		refWdbeMVersion = rec->refWdbeMVersion;
-		refWdbeMMachine = rec->refWdbeMMachine;
-		sref = rec->sref;
-		srefsKOption = rec->srefsKOption;
-		Comment = rec->Comment;
-
-		delete rec;
-	};
-};
-
-void IexWdbePrj::ImeitemIMRelease::readTxt(
-			Txtrd& txtrd
-		) {
-	lineno = txtrd.linecnt;
-
-	if (txtrd.fields.size() > 0) {srefIxVBasetype = txtrd.fields[0]; ixWIelValid += ImeIMRelease::VecWIel::SREFIXVBASETYPE;};
-	if (txtrd.fields.size() > 1) {hsrefRefWdbeMMachine = txtrd.fields[1]; ixWIelValid += ImeIMRelease::VecWIel::HSREFREFWDBEMMACHINE;};
-	if (txtrd.fields.size() > 2) {sref = txtrd.fields[2]; ixWIelValid += ImeIMRelease::VecWIel::SREF;};
-	if (txtrd.fields.size() > 3) {srefsKOption = txtrd.fields[3]; ixWIelValid += ImeIMRelease::VecWIel::SREFSKOPTION;};
-	if (txtrd.fields.size() > 4) {Comment = txtrd.fields[4]; ixWIelValid += ImeIMRelease::VecWIel::COMMENT;};
-
-	while (txtrd.readLine()) {
-		switch (txtrd.ixVLinetype) {
-			case Txtrd::VecVLinetype::HEADER:
-			case Txtrd::VecVLinetype::DATA:
-			case Txtrd::VecVLinetype::FOOTER:
-				txtrd.skip = true;
-				return;
-
-			case Txtrd::VecVLinetype::COMMENT:
-				continue;
-
-			default:
-				throw SbeException(SbeException::TXTRD_CONTENT, {{"ime","ImeIMRelease"}, {"lineno",to_string(lineno)}});
-		};
-	};
-};
-
-void IexWdbePrj::ImeitemIMRelease::readXML(
-			xmlXPathContext* docctx
-			, const string& basexpath
-		) {
-	if (checkXPath(docctx, basexpath, lineno)) {
-		if (extractStringUclc(docctx, basexpath, "srefIxVBasetype", "typ", srefIxVBasetype)) ixWIelValid += ImeIMRelease::VecWIel::SREFIXVBASETYPE;
-		if (extractStringUclc(docctx, basexpath, "hsrefRefWdbeMMachine", "mch", hsrefRefWdbeMMachine)) ixWIelValid += ImeIMRelease::VecWIel::HSREFREFWDBEMMACHINE;
-		if (extractStringUclc(docctx, basexpath, "sref", "srf", sref)) ixWIelValid += ImeIMRelease::VecWIel::SREF;
-		if (extractStringUclc(docctx, basexpath, "srefsKOption", "opt", srefsKOption)) ixWIelValid += ImeIMRelease::VecWIel::SREFSKOPTION;
-		if (extractStringUclc(docctx, basexpath, "Comment", "cmt", Comment)) ixWIelValid += ImeIMRelease::VecWIel::COMMENT;
-	};
-};
-
-void IexWdbePrj::ImeitemIMRelease::writeTxt(
-			fstream& outfile
-		) {
-	outfile << "\t\t" << VecWdbeVMReleaseBasetype::getSref(ixVBasetype) << "\t" << hsrefRefWdbeMMachine << "\t" << sref << "\t" << srefsKOption << "\t" << Comment << endl;
-};
-
-void IexWdbePrj::ImeitemIMRelease::writeXML(
-			xmlTextWriter* wr
-			, const uint num
-			, const bool shorttags
-		) {
-	vector<string> tags;
-	if (shorttags) tags = {"Ii","typ","mch","srf","opt","cmt"};
-	else tags = {"ImeitemIMRelease","srefIxVBasetype","hsrefRefWdbeMMachine","sref","srefsKOption","Comment"};
-
-	xmlTextWriterStartElement(wr, BAD_CAST tags[0].c_str());
-		xmlTextWriterWriteAttribute(wr, BAD_CAST "num", BAD_CAST to_string(num).c_str());
-		writeString(wr, tags[1], VecWdbeVMReleaseBasetype::getSref(ixVBasetype));
-		writeString(wr, tags[2], hsrefRefWdbeMMachine);
-		writeString(wr, tags[3], sref);
-		writeString(wr, tags[4], srefsKOption);
-		writeString(wr, tags[5], Comment);
-	xmlTextWriterEndElement(wr);
-};
-
-/******************************************************************************
- class IexWdbePrj::ImeIMRelease::VecWIel
- ******************************************************************************/
-
-uint IexWdbePrj::ImeIMRelease::VecWIel::getIx(
-			const string& srefs
-		) {
-	uint ix = 0;
-
-	vector<string> ss;
-	StrMod::srefsToVector(StrMod::lc(srefs), ss);
-
-	for (unsigned int i = 0; i < ss.size(); i++) {
-		if (ss[i] == "srefixvbasetype") ix |= SREFIXVBASETYPE;
-		else if (ss[i] == "hsrefrefwdbemmachine") ix |= HSREFREFWDBEMMACHINE;
-		else if (ss[i] == "sref") ix |= SREF;
-		else if (ss[i] == "srefskoption") ix |= SREFSKOPTION;
-		else if (ss[i] == "comment") ix |= COMMENT;
-	};
-
-	return(ix);
-};
-
-void IexWdbePrj::ImeIMRelease::VecWIel::getIcs(
-			const uint ix
-			, set<uint>& ics
-		) {
-	ics.clear();
-	for (unsigned int i = 1; i < (2*COMMENT); i *= 2) if (ix & i) ics.insert(i);
-};
-
-string IexWdbePrj::ImeIMRelease::VecWIel::getSrefs(
-			const uint ix
-		) {
-	vector<string> ss;
-	string srefs;
-
-	if (ix & SREFIXVBASETYPE) ss.push_back("srefIxVBasetype");
-	if (ix & HSREFREFWDBEMMACHINE) ss.push_back("hsrefRefWdbeMMachine");
-	if (ix & SREF) ss.push_back("sref");
-	if (ix & SREFSKOPTION) ss.push_back("srefsKOption");
-	if (ix & COMMENT) ss.push_back("Comment");
-
-	StrMod::vectorToString(ss, srefs);
-
-	return(srefs);
-};
-
-/******************************************************************************
- class IexWdbePrj::ImeIMRelease
- ******************************************************************************/
-
-IexWdbePrj::ImeIMRelease::ImeIMRelease() {
-};
-
-IexWdbePrj::ImeIMRelease::~ImeIMRelease() {
-	clear();
-};
-
-void IexWdbePrj::ImeIMRelease::clear() {
-	for (unsigned int i = 0; i < nodes.size(); i++) delete nodes[i];
-	nodes.resize(0);
-};
-
-void IexWdbePrj::ImeIMRelease::readTxt(
-			Txtrd& txtrd
-		) {
-	IexWdbePrj::ImeitemIMRelease* ii = NULL;
-
-	clear();
-
-	while (txtrd.readLine()) {
-		switch (txtrd.ixVLinetype) {
-			case Txtrd::VecVLinetype::DATA:
-				if (txtrd.il == 2) {
-					ii = new IexWdbePrj::ImeitemIMRelease();
-					nodes.push_back(ii);
-
-					ii->readTxt(txtrd);
-
-					break;
-
-				} else if (txtrd.il < 2) {
-					throw SbeException(SbeException::TXTRD_ENDTKN, {{"ime","ImeIMRelease"}, {"lineno",to_string(txtrd.linecnt)}});
-
-				} else throw SbeException(SbeException::TXTRD_CONTENT, {{"ime","ImeIMRelease"}, {"lineno",to_string(txtrd.linecnt)}});
-
-			case Txtrd::VecVLinetype::FOOTER:
-				if (txtrd.ixVToken == VecVIme::IMEIMRELEASE) return;
-				else throw SbeException(SbeException::TXTRD_TKNMISPL, {{"tkn",VecVIme::getSref(txtrd.ixVToken)}, {"lineno",to_string(txtrd.linecnt)}});
-
-			case Txtrd::VecVLinetype::COMMENT:
-				continue;
-
-			default:
-				throw SbeException(SbeException::TXTRD_ENDTKN, {{"ime","ImeIMRelease"}, {"lineno",to_string(txtrd.linecnt)}});
-		};
-	};
-
-	if (txtrd.eof()) throw SbeException(SbeException::TXTRD_ENDTKN, {{"ime","ImeIMRelease"}, {"lineno",to_string(txtrd.linecnt)}});
-};
-
-void IexWdbePrj::ImeIMRelease::readXML(
-			xmlXPathContext* docctx
-			, string basexpath
-		) {
-	vector<unsigned int> nums;
-	vector<bool> _shorttags;
-
-	IexWdbePrj::ImeitemIMRelease* ii = NULL;
-
-	bool basefound;
-
-	string s;
-
-	basefound = checkUclcXPaths(docctx, basexpath, basexpath, "ImeIMRelease");
-
-	clear();
-
-	if (basefound) {
-		extractList(docctx, basexpath, "ImeitemIMRelease", "Ii", "num", nums, _shorttags);
-
-		for (unsigned int i = 0; i < nums.size(); i++) {
-			s = basexpath + "/";
-			if (_shorttags[i]) s += "Ii"; else s += "ImeitemIMRelease";
-			s += "[@num='" + to_string(nums[i]) + "']";
-
-			ii = new IexWdbePrj::ImeitemIMRelease();
-			ii->readXML(docctx, s);
-			nodes.push_back(ii);
-		};
-	};
-};
-
-void IexWdbePrj::ImeIMRelease::writeTxt(
-			fstream& outfile
-		) {
-	if (nodes.size() > 0) {
-		outfile << "\t\tImeIMRelease." << StrMod::replaceChar(ImeIMRelease::VecWIel::getSrefs(31), ';', '\t') << endl;
-		for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeTxt(outfile);
-		outfile << "\t\tImeIMRelease.end" << endl;
-	};
-};
-
-void IexWdbePrj::ImeIMRelease::writeXML(
-			xmlTextWriter* wr
-			, const bool shorttags
-		) {
-	if (nodes.size() > 0) {
-		xmlTextWriterStartElement(wr, BAD_CAST "ImeIMRelease");
-			for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeXML(wr, i+1, shorttags);
-		xmlTextWriterEndElement(wr);
-	};
-};
-
-/******************************************************************************
- class IexWdbePrj::ImeitemIRMLibraryMVersion
- ******************************************************************************/
-
-IexWdbePrj::ImeitemIRMLibraryMVersion::ImeitemIRMLibraryMVersion(
-			const string& srefRefWdbeMLibrary
-		) : WdbeRMLibraryMVersion() {
-	lineno = 0;
-	ixWIelValid = 0;
-
-	this->srefRefWdbeMLibrary = srefRefWdbeMLibrary;
-};
-
-IexWdbePrj::ImeitemIRMLibraryMVersion::ImeitemIRMLibraryMVersion(
-			DbsWdbe* dbswdbe
-			, const ubigint ref
-		) :
-			ImeitemIRMLibraryMVersion()
-		{
-	WdbeRMLibraryMVersion* rec = NULL;
-
-	this->ref = ref;
-
-	if (dbswdbe->tblwdbermlibrarymversion->loadRecByRef(ref, &rec)) {
-		refWdbeMLibrary = rec->refWdbeMLibrary;
-		refWdbeMVersion = rec->refWdbeMVersion;
-
-		delete rec;
-	};
-};
-
-void IexWdbePrj::ImeitemIRMLibraryMVersion::readTxt(
-			Txtrd& txtrd
-		) {
-	lineno = txtrd.linecnt;
-
-	if (txtrd.fields.size() > 0) {srefRefWdbeMLibrary = txtrd.fields[0]; ixWIelValid += ImeIRMLibraryMVersion::VecWIel::SREFREFWDBEMLIBRARY;};
-
-	while (txtrd.readLine()) {
-		switch (txtrd.ixVLinetype) {
-			case Txtrd::VecVLinetype::HEADER:
-			case Txtrd::VecVLinetype::DATA:
-			case Txtrd::VecVLinetype::FOOTER:
-				txtrd.skip = true;
-				return;
-
-			case Txtrd::VecVLinetype::COMMENT:
-				continue;
-
-			default:
-				throw SbeException(SbeException::TXTRD_CONTENT, {{"ime","ImeIRMLibraryMVersion"}, {"lineno",to_string(lineno)}});
-		};
-	};
-};
-
-void IexWdbePrj::ImeitemIRMLibraryMVersion::readXML(
-			xmlXPathContext* docctx
-			, const string& basexpath
-		) {
-	if (checkXPath(docctx, basexpath, lineno)) {
-		if (extractStringUclc(docctx, basexpath, "srefRefWdbeMLibrary", "lib", srefRefWdbeMLibrary)) ixWIelValid += ImeIRMLibraryMVersion::VecWIel::SREFREFWDBEMLIBRARY;
-	};
-};
-
-void IexWdbePrj::ImeitemIRMLibraryMVersion::writeTxt(
-			fstream& outfile
-		) {
-	outfile << "\t\t" << srefRefWdbeMLibrary << endl;
-};
-
-void IexWdbePrj::ImeitemIRMLibraryMVersion::writeXML(
-			xmlTextWriter* wr
-			, const uint num
-			, const bool shorttags
-		) {
-	vector<string> tags;
-	if (shorttags) tags = {"Ii","lib"};
-	else tags = {"ImeitemIRMLibraryMVersion","srefRefWdbeMLibrary"};
-
-	xmlTextWriterStartElement(wr, BAD_CAST tags[0].c_str());
-		xmlTextWriterWriteAttribute(wr, BAD_CAST "num", BAD_CAST to_string(num).c_str());
-		writeString(wr, tags[1], srefRefWdbeMLibrary);
-	xmlTextWriterEndElement(wr);
-};
-
-/******************************************************************************
- class IexWdbePrj::ImeIRMLibraryMVersion::VecWIel
- ******************************************************************************/
-
-uint IexWdbePrj::ImeIRMLibraryMVersion::VecWIel::getIx(
-			const string& srefs
-		) {
-	uint ix = 0;
-
-	vector<string> ss;
-	StrMod::srefsToVector(StrMod::lc(srefs), ss);
-
-	for (unsigned int i = 0; i < ss.size(); i++) {
-		if (ss[i] == "srefrefwdbemlibrary") ix |= SREFREFWDBEMLIBRARY;
-	};
-
-	return(ix);
-};
-
-void IexWdbePrj::ImeIRMLibraryMVersion::VecWIel::getIcs(
-			const uint ix
-			, set<uint>& ics
-		) {
-	ics.clear();
-	for (unsigned int i = 1; i < (2*SREFREFWDBEMLIBRARY); i *= 2) if (ix & i) ics.insert(i);
-};
-
-string IexWdbePrj::ImeIRMLibraryMVersion::VecWIel::getSrefs(
-			const uint ix
-		) {
-	vector<string> ss;
-	string srefs;
-
-	if (ix & SREFREFWDBEMLIBRARY) ss.push_back("srefRefWdbeMLibrary");
-
-	StrMod::vectorToString(ss, srefs);
-
-	return(srefs);
-};
-
-/******************************************************************************
- class IexWdbePrj::ImeIRMLibraryMVersion
- ******************************************************************************/
-
-IexWdbePrj::ImeIRMLibraryMVersion::ImeIRMLibraryMVersion() {
-};
-
-IexWdbePrj::ImeIRMLibraryMVersion::~ImeIRMLibraryMVersion() {
-	clear();
-};
-
-void IexWdbePrj::ImeIRMLibraryMVersion::clear() {
-	for (unsigned int i = 0; i < nodes.size(); i++) delete nodes[i];
-	nodes.resize(0);
-};
-
-void IexWdbePrj::ImeIRMLibraryMVersion::readTxt(
-			Txtrd& txtrd
-		) {
-	IexWdbePrj::ImeitemIRMLibraryMVersion* ii = NULL;
-
-	clear();
-
-	while (txtrd.readLine()) {
-		switch (txtrd.ixVLinetype) {
-			case Txtrd::VecVLinetype::DATA:
-				if (txtrd.il == 2) {
-					ii = new IexWdbePrj::ImeitemIRMLibraryMVersion();
-					nodes.push_back(ii);
-
-					ii->readTxt(txtrd);
-
-					break;
-
-				} else if (txtrd.il < 2) {
-					throw SbeException(SbeException::TXTRD_ENDTKN, {{"ime","ImeIRMLibraryMVersion"}, {"lineno",to_string(txtrd.linecnt)}});
-
-				} else throw SbeException(SbeException::TXTRD_CONTENT, {{"ime","ImeIRMLibraryMVersion"}, {"lineno",to_string(txtrd.linecnt)}});
-
-			case Txtrd::VecVLinetype::FOOTER:
-				if (txtrd.ixVToken == VecVIme::IMEIRMLIBRARYMVERSION) return;
-				else throw SbeException(SbeException::TXTRD_TKNMISPL, {{"tkn",VecVIme::getSref(txtrd.ixVToken)}, {"lineno",to_string(txtrd.linecnt)}});
-
-			case Txtrd::VecVLinetype::COMMENT:
-				continue;
-
-			default:
-				throw SbeException(SbeException::TXTRD_ENDTKN, {{"ime","ImeIRMLibraryMVersion"}, {"lineno",to_string(txtrd.linecnt)}});
-		};
-	};
-
-	if (txtrd.eof()) throw SbeException(SbeException::TXTRD_ENDTKN, {{"ime","ImeIRMLibraryMVersion"}, {"lineno",to_string(txtrd.linecnt)}});
-};
-
-void IexWdbePrj::ImeIRMLibraryMVersion::readXML(
-			xmlXPathContext* docctx
-			, string basexpath
-		) {
-	vector<unsigned int> nums;
-	vector<bool> _shorttags;
-
-	IexWdbePrj::ImeitemIRMLibraryMVersion* ii = NULL;
-
-	bool basefound;
-
-	string s;
-
-	basefound = checkUclcXPaths(docctx, basexpath, basexpath, "ImeIRMLibraryMVersion");
-
-	clear();
-
-	if (basefound) {
-		extractList(docctx, basexpath, "ImeitemIRMLibraryMVersion", "Ii", "num", nums, _shorttags);
-
-		for (unsigned int i = 0; i < nums.size(); i++) {
-			s = basexpath + "/";
-			if (_shorttags[i]) s += "Ii"; else s += "ImeitemIRMLibraryMVersion";
-			s += "[@num='" + to_string(nums[i]) + "']";
-
-			ii = new IexWdbePrj::ImeitemIRMLibraryMVersion();
-			ii->readXML(docctx, s);
-			nodes.push_back(ii);
-		};
-	};
-};
-
-void IexWdbePrj::ImeIRMLibraryMVersion::writeTxt(
-			fstream& outfile
-		) {
-	if (nodes.size() > 0) {
-		outfile << "\t\tImeIRMLibraryMVersion." << StrMod::replaceChar(ImeIRMLibraryMVersion::VecWIel::getSrefs(1), ';', '\t') << endl;
-		for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeTxt(outfile);
-		outfile << "\t\tImeIRMLibraryMVersion.end" << endl;
-	};
-};
-
-void IexWdbePrj::ImeIRMLibraryMVersion::writeXML(
-			xmlTextWriter* wr
-			, const bool shorttags
-		) {
-	if (nodes.size() > 0) {
-		xmlTextWriterStartElement(wr, BAD_CAST "ImeIRMLibraryMVersion");
-			for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeXML(wr, i+1, shorttags);
-		xmlTextWriterEndElement(wr);
-	};
-};
-
-/******************************************************************************
  class IexWdbePrj::ImeitemIMVersion
  ******************************************************************************/
 
@@ -843,14 +343,6 @@ void IexWdbePrj::ImeitemIMVersion::readTxt(
 					imeijmversionstate.readTxt(txtrd);
 					continue;
 
-				} else if ((txtrd.il == 2) && (txtrd.ixVToken == VecVIme::IMEIMRELEASE)) {
-					imeimrelease.readTxt(txtrd);
-					continue;
-
-				} else if ((txtrd.il == 2) && (txtrd.ixVToken == VecVIme::IMEIRMLIBRARYMVERSION)) {
-					imeirmlibrarymversion.readTxt(txtrd);
-					continue;
-
 				} else {
 					txtrd.skip = true;
 					return;
@@ -882,8 +374,6 @@ void IexWdbePrj::ImeitemIMVersion::readXML(
 		if (extractStringUclc(docctx, basexpath, "About", "abt", About)) ixWIelValid += ImeIMVersion::VecWIel::ABOUT;
 		if (extractStringUclc(docctx, basexpath, "Comment", "cmt", Comment)) ixWIelValid += ImeIMVersion::VecWIel::COMMENT;
 		imeijmversionstate.readXML(docctx, basexpath);
-		imeimrelease.readXML(docctx, basexpath);
-		imeirmlibrarymversion.readXML(docctx, basexpath);
 	};
 };
 
@@ -892,8 +382,6 @@ void IexWdbePrj::ImeitemIMVersion::writeTxt(
 		) {
 	outfile << "\t" << Major << "\t" << Minor << "\t" << Sub << "\t" << VecWdbeVMVersionState::getSref(ixVState) << "\t" << About << "\t" << Comment << endl;
 	imeijmversionstate.writeTxt(outfile);
-	imeimrelease.writeTxt(outfile);
-	imeirmlibrarymversion.writeTxt(outfile);
 };
 
 void IexWdbePrj::ImeitemIMVersion::writeXML(
@@ -914,8 +402,6 @@ void IexWdbePrj::ImeitemIMVersion::writeXML(
 		writeString(wr, tags[5], About);
 		writeString(wr, tags[6], Comment);
 		imeijmversionstate.writeXML(wr, shorttags);
-		imeimrelease.writeXML(wr, shorttags);
-		imeirmlibrarymversion.writeXML(wr, shorttags);
 	xmlTextWriterEndElement(wr);
 };
 
@@ -1623,7 +1109,7 @@ void IexWdbePrj::parseFromFile(
 		};
 
 	} else {
-			Txtrd rd(fullpath, rectpath, "IexWdbePrj", Version("1.0.6"), VecVIme::getIx);
+			Txtrd rd(fullpath, rectpath, "IexWdbePrj", Version("1.1.35"), VecVIme::getIx);
 			readTxt(rd, imeimproject);
 	};
 };
@@ -1683,7 +1169,7 @@ void IexWdbePrj::readXML(
 		// validate version
 		if (checkUclcXPaths(docctx, goodxpath, basexpath, "@Version")) {
 			extractString(docctx, goodxpath, version);
-			if (Version(version) < Version("1.0.6")) throw SbeException(SbeException::IEX_VERSION, {{"version",version},{"minversion","1.0.6"}});
+			if (Version(version) < Version("1.1.35")) throw SbeException(SbeException::IEX_VERSION, {{"version",version},{"minversion","1.1.35"}});
 		};
 
 		// look for XML sub-blocks
@@ -1718,7 +1204,7 @@ void IexWdbePrj::writeXML(
 };
 
 map<uint,uint> IexWdbePrj::icsWdbeVIopInsAll() {
-	return {{(uint)VecVIme::IMEIJMVERSIONSTATE,VecWdbeVIop::INS},{(uint)VecVIme::IMEIMPROJECT,VecWdbeVIop::RETRINS},{(uint)VecVIme::IMEIMRELEASE,VecWdbeVIop::INS},{(uint)VecVIme::IMEIMVERSION,VecWdbeVIop::INS},{(uint)VecVIme::IMEIRMLIBRARYMVERSION,VecWdbeVIop::INS},{(uint)VecVIme::IMEIRMPERSONMPROJECT,VecWdbeVIop::INS}};
+	return {{(uint)VecVIme::IMEIJMVERSIONSTATE,VecWdbeVIop::INS},{(uint)VecVIme::IMEIMPROJECT,VecWdbeVIop::RETRINS},{(uint)VecVIme::IMEIMVERSION,VecWdbeVIop::INS},{(uint)VecVIme::IMEIRMPERSONMPROJECT,VecWdbeVIop::INS}};
 };
 
 uint IexWdbePrj::getIxWdbeVIop(

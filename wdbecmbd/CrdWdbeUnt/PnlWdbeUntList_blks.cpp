@@ -58,15 +58,14 @@ PnlWdbeUntList::ContIac::ContIac(
 };
 
 bool PnlWdbeUntList::ContIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["ContIacWdbeUntList"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["ContIacWdbeUntList"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -108,7 +107,7 @@ void PnlWdbeUntList::ContIac::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["numFTos"] = numFTos;
+	me["numFTos"] = (Json::Value::UInt) numFTos;
 };
 
 void PnlWdbeUntList::ContIac::writeXML(
@@ -182,7 +181,7 @@ void PnlWdbeUntList::ContInf::writeJSON(
 	me["TxtFor"] = TxtFor;
 	me["TxtPre"] = TxtPre;
 	me["ButFilterOn"] = ButFilterOn;
-	me["numFCsiQst"] = numFCsiQst;
+	me["numFCsiQst"] = (Json::Value::UInt) numFCsiQst;
 };
 
 void PnlWdbeUntList::ContInf::writeXML(
@@ -312,7 +311,6 @@ PnlWdbeUntList::StgIac::StgIac(
 			, const uint TcoTypWidth
 			, const uint TcoRetWidth
 			, const uint TcoReuWidth
-			, const uint TcoSysWidth
 			, const uint TcoMdlWidth
 			, const uint TcoPkgWidth
 			, const uint TcoEsyWidth
@@ -326,24 +324,22 @@ PnlWdbeUntList::StgIac::StgIac(
 	this->TcoTypWidth = TcoTypWidth;
 	this->TcoRetWidth = TcoRetWidth;
 	this->TcoReuWidth = TcoReuWidth;
-	this->TcoSysWidth = TcoSysWidth;
 	this->TcoMdlWidth = TcoMdlWidth;
 	this->TcoPkgWidth = TcoPkgWidth;
 	this->TcoEsyWidth = TcoEsyWidth;
 	this->TcoTchWidth = TcoTchWidth;
-	mask = {TCOSRFWIDTH, TCOTITWIDTH, TCOFSRWIDTH, TCOTYPWIDTH, TCORETWIDTH, TCOREUWIDTH, TCOSYSWIDTH, TCOMDLWIDTH, TCOPKGWIDTH, TCOESYWIDTH, TCOTCHWIDTH};
+	mask = {TCOSRFWIDTH, TCOTITWIDTH, TCOFSRWIDTH, TCOTYPWIDTH, TCORETWIDTH, TCOREUWIDTH, TCOMDLWIDTH, TCOPKGWIDTH, TCOESYWIDTH, TCOTCHWIDTH};
 };
 
 bool PnlWdbeUntList::StgIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["StgIacWdbeUntList"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["StgIacWdbeUntList"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -354,7 +350,6 @@ bool PnlWdbeUntList::StgIac::readJSON(
 		if (me.isMember("TcoTypWidth")) {TcoTypWidth = me["TcoTypWidth"].asUInt(); add(TCOTYPWIDTH);};
 		if (me.isMember("TcoRetWidth")) {TcoRetWidth = me["TcoRetWidth"].asUInt(); add(TCORETWIDTH);};
 		if (me.isMember("TcoReuWidth")) {TcoReuWidth = me["TcoReuWidth"].asUInt(); add(TCOREUWIDTH);};
-		if (me.isMember("TcoSysWidth")) {TcoSysWidth = me["TcoSysWidth"].asUInt(); add(TCOSYSWIDTH);};
 		if (me.isMember("TcoMdlWidth")) {TcoMdlWidth = me["TcoMdlWidth"].asUInt(); add(TCOMDLWIDTH);};
 		if (me.isMember("TcoPkgWidth")) {TcoPkgWidth = me["TcoPkgWidth"].asUInt(); add(TCOPKGWIDTH);};
 		if (me.isMember("TcoEsyWidth")) {TcoEsyWidth = me["TcoEsyWidth"].asUInt(); add(TCOESYWIDTH);};
@@ -387,7 +382,6 @@ bool PnlWdbeUntList::StgIac::readXML(
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoTypWidth", TcoTypWidth)) add(TCOTYPWIDTH);
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoRetWidth", TcoRetWidth)) add(TCORETWIDTH);
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoReuWidth", TcoReuWidth)) add(TCOREUWIDTH);
-		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoSysWidth", TcoSysWidth)) add(TCOSYSWIDTH);
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoMdlWidth", TcoMdlWidth)) add(TCOMDLWIDTH);
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoPkgWidth", TcoPkgWidth)) add(TCOPKGWIDTH);
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoEsyWidth", TcoEsyWidth)) add(TCOESYWIDTH);
@@ -405,17 +399,16 @@ void PnlWdbeUntList::StgIac::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["TcoSrfWidth"] = TcoSrfWidth;
-	me["TcoTitWidth"] = TcoTitWidth;
-	me["TcoFsrWidth"] = TcoFsrWidth;
-	me["TcoTypWidth"] = TcoTypWidth;
-	me["TcoRetWidth"] = TcoRetWidth;
-	me["TcoReuWidth"] = TcoReuWidth;
-	me["TcoSysWidth"] = TcoSysWidth;
-	me["TcoMdlWidth"] = TcoMdlWidth;
-	me["TcoPkgWidth"] = TcoPkgWidth;
-	me["TcoEsyWidth"] = TcoEsyWidth;
-	me["TcoTchWidth"] = TcoTchWidth;
+	me["TcoSrfWidth"] = (Json::Value::UInt) TcoSrfWidth;
+	me["TcoTitWidth"] = (Json::Value::UInt) TcoTitWidth;
+	me["TcoFsrWidth"] = (Json::Value::UInt) TcoFsrWidth;
+	me["TcoTypWidth"] = (Json::Value::UInt) TcoTypWidth;
+	me["TcoRetWidth"] = (Json::Value::UInt) TcoRetWidth;
+	me["TcoReuWidth"] = (Json::Value::UInt) TcoReuWidth;
+	me["TcoMdlWidth"] = (Json::Value::UInt) TcoMdlWidth;
+	me["TcoPkgWidth"] = (Json::Value::UInt) TcoPkgWidth;
+	me["TcoEsyWidth"] = (Json::Value::UInt) TcoEsyWidth;
+	me["TcoTchWidth"] = (Json::Value::UInt) TcoTchWidth;
 };
 
 void PnlWdbeUntList::StgIac::writeXML(
@@ -436,7 +429,6 @@ void PnlWdbeUntList::StgIac::writeXML(
 		writeUintAttr(wr, itemtag, "sref", "TcoTypWidth", TcoTypWidth);
 		writeUintAttr(wr, itemtag, "sref", "TcoRetWidth", TcoRetWidth);
 		writeUintAttr(wr, itemtag, "sref", "TcoReuWidth", TcoReuWidth);
-		writeUintAttr(wr, itemtag, "sref", "TcoSysWidth", TcoSysWidth);
 		writeUintAttr(wr, itemtag, "sref", "TcoMdlWidth", TcoMdlWidth);
 		writeUintAttr(wr, itemtag, "sref", "TcoPkgWidth", TcoPkgWidth);
 		writeUintAttr(wr, itemtag, "sref", "TcoEsyWidth", TcoEsyWidth);
@@ -455,7 +447,6 @@ set<uint> PnlWdbeUntList::StgIac::comm(
 	if (TcoTypWidth == comp->TcoTypWidth) insert(items, TCOTYPWIDTH);
 	if (TcoRetWidth == comp->TcoRetWidth) insert(items, TCORETWIDTH);
 	if (TcoReuWidth == comp->TcoReuWidth) insert(items, TCOREUWIDTH);
-	if (TcoSysWidth == comp->TcoSysWidth) insert(items, TCOSYSWIDTH);
 	if (TcoMdlWidth == comp->TcoMdlWidth) insert(items, TCOMDLWIDTH);
 	if (TcoPkgWidth == comp->TcoPkgWidth) insert(items, TCOPKGWIDTH);
 	if (TcoEsyWidth == comp->TcoEsyWidth) insert(items, TCOESYWIDTH);
@@ -472,7 +463,7 @@ set<uint> PnlWdbeUntList::StgIac::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {TCOSRFWIDTH, TCOTITWIDTH, TCOFSRWIDTH, TCOTYPWIDTH, TCORETWIDTH, TCOREUWIDTH, TCOSYSWIDTH, TCOMDLWIDTH, TCOPKGWIDTH, TCOESYWIDTH, TCOTCHWIDTH};
+	diffitems = {TCOSRFWIDTH, TCOTITWIDTH, TCOFSRWIDTH, TCOTYPWIDTH, TCORETWIDTH, TCOREUWIDTH, TCOMDLWIDTH, TCOPKGWIDTH, TCOESYWIDTH, TCOTCHWIDTH};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -499,7 +490,6 @@ void PnlWdbeUntList::Tag::writeJSON(
 		me["TcoTyp"] = "Type";
 		me["TcoRet"] = "Table of reference";
 		me["TcoReu"] = "Reference";
-		me["TcoSys"] = "Root to system";
 		me["TcoMdl"] = "Top module";
 		me["TcoPkg"] = "Package";
 		me["TcoEsy"] = "Easy";
@@ -534,7 +524,6 @@ void PnlWdbeUntList::Tag::writeXML(
 			writeStringAttr(wr, itemtag, "sref", "TcoTyp", "Type");
 			writeStringAttr(wr, itemtag, "sref", "TcoRet", "Table of reference");
 			writeStringAttr(wr, itemtag, "sref", "TcoReu", "Reference");
-			writeStringAttr(wr, itemtag, "sref", "TcoSys", "Root to system");
 			writeStringAttr(wr, itemtag, "sref", "TcoMdl", "Top module");
 			writeStringAttr(wr, itemtag, "sref", "TcoPkg", "Package");
 			writeStringAttr(wr, itemtag, "sref", "TcoEsy", "Easy");
@@ -573,15 +562,14 @@ string PnlWdbeUntList::DpchAppData::getSrefsMask() {
 };
 
 void PnlWdbeUntList::DpchAppData::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbeUntListData"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbeUntListData"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -651,15 +639,14 @@ string PnlWdbeUntList::DpchAppDo::getSrefsMask() {
 };
 
 void PnlWdbeUntList::DpchAppDo::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbeUntListDo"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbeUntListDo"];}();
 
 	basefound = (me != Json::nullValue);
 

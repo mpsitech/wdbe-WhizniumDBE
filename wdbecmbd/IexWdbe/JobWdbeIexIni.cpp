@@ -1132,12 +1132,18 @@ uint JobWdbeIexIni::enterSgeImport(
 
 				//gen->refWdbeCGeneric: PREVIMP
 				if (gen->irefRefWdbeCGeneric != 0) {
-					for (unsigned int i = 0; i < mdl->imeicgeneric.nodes.size(); i++)
-						if (mdl->imeicgeneric.nodes[i]->iref == gen->irefRefWdbeCGeneric) {
-							gen->refWdbeCGeneric = mdl->imeicgeneric.nodes[i]->ref;
-							break;
+					if (irefs1.find(gen->irefRefWdbeCGeneric) == irefs1.end()) {
+						genC = new ImeitemICGeneric(gen->irefRefWdbeCGeneric);
+						genC->ref = dbswdbe->tblwdbecgeneric->getNewRef();
+						mdl->imeicgeneric.nodes.push_back(genC);
+						irefs1.insert(genC->iref);
+					} else {
+						for (unsigned int i = 0; i < mdl->imeicgeneric.nodes.size(); i++) {
+							genC = mdl->imeicgeneric.nodes[i];
+							if (genC->iref == gen->irefRefWdbeCGeneric) break;
 						};
-					if (gen->refWdbeCGeneric == 0) throw SbeException(SbeException::IEX_IREF, {{"iref",to_string(gen->irefRefWdbeCGeneric)}, {"iel","irefRefWdbeCGeneric"}, {"lineno",to_string(gen->lineno)}});
+					};
+					gen->refWdbeCGeneric = genC->ref;
 				};
 				gen->mdlRefWdbeMModule = mdl->ref;
 				gen->mdlNum = num1++;
@@ -1169,12 +1175,18 @@ uint JobWdbeIexIni::enterSgeImport(
 
 				//prt->refWdbeCPort: PREVIMP
 				if (prt->irefRefWdbeCPort != 0) {
-					for (unsigned int i = 0; i < mdl->imeicport.nodes.size(); i++)
-						if (mdl->imeicport.nodes[i]->iref == prt->irefRefWdbeCPort) {
-							prt->refWdbeCPort = mdl->imeicport.nodes[i]->ref;
-							break;
+					if (irefs1.find(prt->irefRefWdbeCPort) == irefs1.end()) {
+						prtC = new ImeitemICPort(prt->irefRefWdbeCPort);
+						prtC->ref = dbswdbe->tblwdbecport->getNewRef();
+						mdl->imeicport.nodes.push_back(prtC);
+						irefs1.insert(prtC->iref);
+					} else {
+						for (unsigned int i = 0; i < mdl->imeicport.nodes.size(); i++) {
+							prtC = mdl->imeicport.nodes[i];
+							if (prtC->iref == prt->irefRefWdbeCPort) break;
 						};
-					if (prt->refWdbeCPort == 0) throw SbeException(SbeException::IEX_IREF, {{"iref",to_string(prt->irefRefWdbeCPort)}, {"iel","irefRefWdbeCPort"}, {"lineno",to_string(prt->lineno)}});
+					};
+					prt->refWdbeCPort = prtC->ref;
 				};
 				prt->mdlRefWdbeMModule = mdl->ref;
 				prt->mdlNum = num1++;
@@ -1212,12 +1224,18 @@ uint JobWdbeIexIni::enterSgeImport(
 
 				//var->refWdbeCVariable: PREVIMP
 				if (var->irefRefWdbeCVariable != 0) {
-					for (unsigned int i = 0; i < mdl->imeicvariable.nodes.size(); i++)
-						if (mdl->imeicvariable.nodes[i]->iref == var->irefRefWdbeCVariable) {
-							var->refWdbeCVariable = mdl->imeicvariable.nodes[i]->ref;
-							break;
+					if (irefs1.find(var->irefRefWdbeCVariable) == irefs1.end()) {
+						varC = new ImeitemICVariable(var->irefRefWdbeCVariable);
+						varC->ref = dbswdbe->tblwdbecvariable->getNewRef();
+						mdl->imeicvariable.nodes.push_back(varC);
+						irefs1.insert(varC->iref);
+					} else {
+						for (unsigned int i = 0; i < mdl->imeicvariable.nodes.size(); i++) {
+							varC = mdl->imeicvariable.nodes[i];
+							if (varC->iref == var->irefRefWdbeCVariable) break;
 						};
-					if (var->refWdbeCVariable == 0) throw SbeException(SbeException::IEX_IREF, {{"iref",to_string(var->irefRefWdbeCVariable)}, {"iel","irefRefWdbeCVariable"}, {"lineno",to_string(var->lineno)}});
+					};
+					var->refWdbeCVariable = varC->ref;
 				};
 				var->refIxVTbl = VecWdbeVMVariableRefTbl::MDL;
 				var->refUref = mdl->ref;

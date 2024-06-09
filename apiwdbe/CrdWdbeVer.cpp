@@ -26,6 +26,7 @@ uint CrdWdbeVer::VecVDo::getIx(
 	if (s == "mitappabtclick") return MITAPPABTCLICK;
 	if (s == "mitcrdnewclick") return MITCRDNEWCLICK;
 	if (s == "mitcrdpcvclick") return MITCRDPCVCLICK;
+	if (s == "mitcrdidpclick") return MITCRDIDPCLICK;
 	if (s == "mitcrdimdclick") return MITCRDIMDCLICK;
 	if (s == "mitcrdicsclick") return MITCRDICSCLICK;
 	if (s == "mitcrdidaclick") return MITCRDIDACLICK;
@@ -43,6 +44,7 @@ string CrdWdbeVer::VecVDo::getSref(
 	if (ix == MITAPPABTCLICK) return("MitAppAbtClick");
 	if (ix == MITCRDNEWCLICK) return("MitCrdNewClick");
 	if (ix == MITCRDPCVCLICK) return("MitCrdPcvClick");
+	if (ix == MITCRDIDPCLICK) return("MitCrdIdpClick");
 	if (ix == MITCRDIMDCLICK) return("MitCrdImdClick");
 	if (ix == MITCRDICSCLICK) return("MitCrdIcsClick");
 	if (ix == MITCRDIDACLICK) return("MitCrdIdaClick");
@@ -247,6 +249,7 @@ set<uint> CrdWdbeVer::StatApp::diff(
 CrdWdbeVer::StatShr::StatShr(
 			const string& scrJrefDlgcmdset
 			, const string& scrJrefDlgcustfst
+			, const string& scrJrefDlgdeploy
 			, const string& scrJrefDlgdflalg
 			, const string& scrJrefDlgfinmod
 			, const string& scrJrefDlggenfst
@@ -261,20 +264,24 @@ CrdWdbeVer::StatShr::StatShr(
 			, const bool MitCrdPcvActive
 			, const bool MspCrd3Avail
 			, const bool MspCrd3Active
+			, const bool MitCrdIdpAvail
+			, const bool MitCrdIdpActive
+			, const bool MspCrd4Avail
+			, const bool MspCrd4Active
 			, const bool MitCrdImdAvail
 			, const bool MitCrdImdActive
 			, const bool MitCrdIcsAvail
 			, const bool MitCrdIcsActive
 			, const bool MitCrdIdaAvail
 			, const bool MitCrdIdaActive
-			, const bool MspCrd4Avail
-			, const bool MspCrd4Active
+			, const bool MspCrd5Avail
+			, const bool MspCrd5Active
 			, const bool MitCrdGfsAvail
 			, const bool MitCrdGfsActive
 			, const bool MitCrdIfsAvail
 			, const bool MitCrdIfsActive
-			, const bool MspCrd5Avail
-			, const bool MspCrd5Active
+			, const bool MspCrd6Avail
+			, const bool MspCrd6Active
 			, const bool MitCrdFnmAvail
 			, const bool MitCrdFnmActive
 		) :
@@ -282,6 +289,7 @@ CrdWdbeVer::StatShr::StatShr(
 		{
 	this->scrJrefDlgcmdset = scrJrefDlgcmdset;
 	this->scrJrefDlgcustfst = scrJrefDlgcustfst;
+	this->scrJrefDlgdeploy = scrJrefDlgdeploy;
 	this->scrJrefDlgdflalg = scrJrefDlgdflalg;
 	this->scrJrefDlgfinmod = scrJrefDlgfinmod;
 	this->scrJrefDlggenfst = scrJrefDlggenfst;
@@ -296,24 +304,28 @@ CrdWdbeVer::StatShr::StatShr(
 	this->MitCrdPcvActive = MitCrdPcvActive;
 	this->MspCrd3Avail = MspCrd3Avail;
 	this->MspCrd3Active = MspCrd3Active;
+	this->MitCrdIdpAvail = MitCrdIdpAvail;
+	this->MitCrdIdpActive = MitCrdIdpActive;
+	this->MspCrd4Avail = MspCrd4Avail;
+	this->MspCrd4Active = MspCrd4Active;
 	this->MitCrdImdAvail = MitCrdImdAvail;
 	this->MitCrdImdActive = MitCrdImdActive;
 	this->MitCrdIcsAvail = MitCrdIcsAvail;
 	this->MitCrdIcsActive = MitCrdIcsActive;
 	this->MitCrdIdaAvail = MitCrdIdaAvail;
 	this->MitCrdIdaActive = MitCrdIdaActive;
-	this->MspCrd4Avail = MspCrd4Avail;
-	this->MspCrd4Active = MspCrd4Active;
+	this->MspCrd5Avail = MspCrd5Avail;
+	this->MspCrd5Active = MspCrd5Active;
 	this->MitCrdGfsAvail = MitCrdGfsAvail;
 	this->MitCrdGfsActive = MitCrdGfsActive;
 	this->MitCrdIfsAvail = MitCrdIfsAvail;
 	this->MitCrdIfsActive = MitCrdIfsActive;
-	this->MspCrd5Avail = MspCrd5Avail;
-	this->MspCrd5Active = MspCrd5Active;
+	this->MspCrd6Avail = MspCrd6Avail;
+	this->MspCrd6Active = MspCrd6Active;
 	this->MitCrdFnmAvail = MitCrdFnmAvail;
 	this->MitCrdFnmActive = MitCrdFnmActive;
 
-	mask = {SCRJREFDLGCMDSET, SCRJREFDLGCUSTFST, SCRJREFDLGDFLALG, SCRJREFDLGFINMOD, SCRJREFDLGGENFST, SCRJREFDLGMDLSTR, SCRJREFDLGNEW, SCRJREFHEADBAR, SCRJREFLIST, SCRJREFREC, MSPCRD1AVAIL, MITCRDNEWAVAIL, MITCRDPCVAVAIL, MITCRDPCVACTIVE, MSPCRD3AVAIL, MSPCRD3ACTIVE, MITCRDIMDAVAIL, MITCRDIMDACTIVE, MITCRDICSAVAIL, MITCRDICSACTIVE, MITCRDIDAAVAIL, MITCRDIDAACTIVE, MSPCRD4AVAIL, MSPCRD4ACTIVE, MITCRDGFSAVAIL, MITCRDGFSACTIVE, MITCRDIFSAVAIL, MITCRDIFSACTIVE, MSPCRD5AVAIL, MSPCRD5ACTIVE, MITCRDFNMAVAIL, MITCRDFNMACTIVE};
+	mask = {SCRJREFDLGCMDSET, SCRJREFDLGCUSTFST, SCRJREFDLGDEPLOY, SCRJREFDLGDFLALG, SCRJREFDLGFINMOD, SCRJREFDLGGENFST, SCRJREFDLGMDLSTR, SCRJREFDLGNEW, SCRJREFHEADBAR, SCRJREFLIST, SCRJREFREC, MSPCRD1AVAIL, MITCRDNEWAVAIL, MITCRDPCVAVAIL, MITCRDPCVACTIVE, MSPCRD3AVAIL, MSPCRD3ACTIVE, MITCRDIDPAVAIL, MITCRDIDPACTIVE, MSPCRD4AVAIL, MSPCRD4ACTIVE, MITCRDIMDAVAIL, MITCRDIMDACTIVE, MITCRDICSAVAIL, MITCRDICSACTIVE, MITCRDIDAAVAIL, MITCRDIDAACTIVE, MSPCRD5AVAIL, MSPCRD5ACTIVE, MITCRDGFSAVAIL, MITCRDGFSACTIVE, MITCRDIFSAVAIL, MITCRDIFSACTIVE, MSPCRD6AVAIL, MSPCRD6ACTIVE, MITCRDFNMAVAIL, MITCRDFNMACTIVE};
 };
 
 bool CrdWdbeVer::StatShr::readXML(
@@ -335,6 +347,7 @@ bool CrdWdbeVer::StatShr::readXML(
 	if (basefound) {
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefDlgcmdset", scrJrefDlgcmdset)) add(SCRJREFDLGCMDSET);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefDlgcustfst", scrJrefDlgcustfst)) add(SCRJREFDLGCUSTFST);
+		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefDlgdeploy", scrJrefDlgdeploy)) add(SCRJREFDLGDEPLOY);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefDlgdflalg", scrJrefDlgdflalg)) add(SCRJREFDLGDFLALG);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefDlgfinmod", scrJrefDlgfinmod)) add(SCRJREFDLGFINMOD);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefDlggenfst", scrJrefDlggenfst)) add(SCRJREFDLGGENFST);
@@ -349,20 +362,24 @@ bool CrdWdbeVer::StatShr::readXML(
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "MitCrdPcvActive", MitCrdPcvActive)) add(MITCRDPCVACTIVE);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "MspCrd3Avail", MspCrd3Avail)) add(MSPCRD3AVAIL);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "MspCrd3Active", MspCrd3Active)) add(MSPCRD3ACTIVE);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "MitCrdIdpAvail", MitCrdIdpAvail)) add(MITCRDIDPAVAIL);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "MitCrdIdpActive", MitCrdIdpActive)) add(MITCRDIDPACTIVE);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "MspCrd4Avail", MspCrd4Avail)) add(MSPCRD4AVAIL);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "MspCrd4Active", MspCrd4Active)) add(MSPCRD4ACTIVE);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "MitCrdImdAvail", MitCrdImdAvail)) add(MITCRDIMDAVAIL);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "MitCrdImdActive", MitCrdImdActive)) add(MITCRDIMDACTIVE);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "MitCrdIcsAvail", MitCrdIcsAvail)) add(MITCRDICSAVAIL);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "MitCrdIcsActive", MitCrdIcsActive)) add(MITCRDICSACTIVE);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "MitCrdIdaAvail", MitCrdIdaAvail)) add(MITCRDIDAAVAIL);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "MitCrdIdaActive", MitCrdIdaActive)) add(MITCRDIDAACTIVE);
-		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "MspCrd4Avail", MspCrd4Avail)) add(MSPCRD4AVAIL);
-		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "MspCrd4Active", MspCrd4Active)) add(MSPCRD4ACTIVE);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "MspCrd5Avail", MspCrd5Avail)) add(MSPCRD5AVAIL);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "MspCrd5Active", MspCrd5Active)) add(MSPCRD5ACTIVE);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "MitCrdGfsAvail", MitCrdGfsAvail)) add(MITCRDGFSAVAIL);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "MitCrdGfsActive", MitCrdGfsActive)) add(MITCRDGFSACTIVE);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "MitCrdIfsAvail", MitCrdIfsAvail)) add(MITCRDIFSAVAIL);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "MitCrdIfsActive", MitCrdIfsActive)) add(MITCRDIFSACTIVE);
-		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "MspCrd5Avail", MspCrd5Avail)) add(MSPCRD5AVAIL);
-		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "MspCrd5Active", MspCrd5Active)) add(MSPCRD5ACTIVE);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "MspCrd6Avail", MspCrd6Avail)) add(MSPCRD6AVAIL);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "MspCrd6Active", MspCrd6Active)) add(MSPCRD6ACTIVE);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "MitCrdFnmAvail", MitCrdFnmAvail)) add(MITCRDFNMAVAIL);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "MitCrdFnmActive", MitCrdFnmActive)) add(MITCRDFNMACTIVE);
 	};
@@ -377,6 +394,7 @@ set<uint> CrdWdbeVer::StatShr::comm(
 
 	if (scrJrefDlgcmdset == comp->scrJrefDlgcmdset) insert(items, SCRJREFDLGCMDSET);
 	if (scrJrefDlgcustfst == comp->scrJrefDlgcustfst) insert(items, SCRJREFDLGCUSTFST);
+	if (scrJrefDlgdeploy == comp->scrJrefDlgdeploy) insert(items, SCRJREFDLGDEPLOY);
 	if (scrJrefDlgdflalg == comp->scrJrefDlgdflalg) insert(items, SCRJREFDLGDFLALG);
 	if (scrJrefDlgfinmod == comp->scrJrefDlgfinmod) insert(items, SCRJREFDLGFINMOD);
 	if (scrJrefDlggenfst == comp->scrJrefDlggenfst) insert(items, SCRJREFDLGGENFST);
@@ -391,20 +409,24 @@ set<uint> CrdWdbeVer::StatShr::comm(
 	if (MitCrdPcvActive == comp->MitCrdPcvActive) insert(items, MITCRDPCVACTIVE);
 	if (MspCrd3Avail == comp->MspCrd3Avail) insert(items, MSPCRD3AVAIL);
 	if (MspCrd3Active == comp->MspCrd3Active) insert(items, MSPCRD3ACTIVE);
+	if (MitCrdIdpAvail == comp->MitCrdIdpAvail) insert(items, MITCRDIDPAVAIL);
+	if (MitCrdIdpActive == comp->MitCrdIdpActive) insert(items, MITCRDIDPACTIVE);
+	if (MspCrd4Avail == comp->MspCrd4Avail) insert(items, MSPCRD4AVAIL);
+	if (MspCrd4Active == comp->MspCrd4Active) insert(items, MSPCRD4ACTIVE);
 	if (MitCrdImdAvail == comp->MitCrdImdAvail) insert(items, MITCRDIMDAVAIL);
 	if (MitCrdImdActive == comp->MitCrdImdActive) insert(items, MITCRDIMDACTIVE);
 	if (MitCrdIcsAvail == comp->MitCrdIcsAvail) insert(items, MITCRDICSAVAIL);
 	if (MitCrdIcsActive == comp->MitCrdIcsActive) insert(items, MITCRDICSACTIVE);
 	if (MitCrdIdaAvail == comp->MitCrdIdaAvail) insert(items, MITCRDIDAAVAIL);
 	if (MitCrdIdaActive == comp->MitCrdIdaActive) insert(items, MITCRDIDAACTIVE);
-	if (MspCrd4Avail == comp->MspCrd4Avail) insert(items, MSPCRD4AVAIL);
-	if (MspCrd4Active == comp->MspCrd4Active) insert(items, MSPCRD4ACTIVE);
+	if (MspCrd5Avail == comp->MspCrd5Avail) insert(items, MSPCRD5AVAIL);
+	if (MspCrd5Active == comp->MspCrd5Active) insert(items, MSPCRD5ACTIVE);
 	if (MitCrdGfsAvail == comp->MitCrdGfsAvail) insert(items, MITCRDGFSAVAIL);
 	if (MitCrdGfsActive == comp->MitCrdGfsActive) insert(items, MITCRDGFSACTIVE);
 	if (MitCrdIfsAvail == comp->MitCrdIfsAvail) insert(items, MITCRDIFSAVAIL);
 	if (MitCrdIfsActive == comp->MitCrdIfsActive) insert(items, MITCRDIFSACTIVE);
-	if (MspCrd5Avail == comp->MspCrd5Avail) insert(items, MSPCRD5AVAIL);
-	if (MspCrd5Active == comp->MspCrd5Active) insert(items, MSPCRD5ACTIVE);
+	if (MspCrd6Avail == comp->MspCrd6Avail) insert(items, MSPCRD6AVAIL);
+	if (MspCrd6Active == comp->MspCrd6Active) insert(items, MSPCRD6ACTIVE);
 	if (MitCrdFnmAvail == comp->MitCrdFnmAvail) insert(items, MITCRDFNMAVAIL);
 	if (MitCrdFnmActive == comp->MitCrdFnmActive) insert(items, MITCRDFNMACTIVE);
 
@@ -419,7 +441,7 @@ set<uint> CrdWdbeVer::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {SCRJREFDLGCMDSET, SCRJREFDLGCUSTFST, SCRJREFDLGDFLALG, SCRJREFDLGFINMOD, SCRJREFDLGGENFST, SCRJREFDLGMDLSTR, SCRJREFDLGNEW, SCRJREFHEADBAR, SCRJREFLIST, SCRJREFREC, MSPCRD1AVAIL, MITCRDNEWAVAIL, MITCRDPCVAVAIL, MITCRDPCVACTIVE, MSPCRD3AVAIL, MSPCRD3ACTIVE, MITCRDIMDAVAIL, MITCRDIMDACTIVE, MITCRDICSAVAIL, MITCRDICSACTIVE, MITCRDIDAAVAIL, MITCRDIDAACTIVE, MSPCRD4AVAIL, MSPCRD4ACTIVE, MITCRDGFSAVAIL, MITCRDGFSACTIVE, MITCRDIFSAVAIL, MITCRDIFSACTIVE, MSPCRD5AVAIL, MSPCRD5ACTIVE, MITCRDFNMAVAIL, MITCRDFNMACTIVE};
+	diffitems = {SCRJREFDLGCMDSET, SCRJREFDLGCUSTFST, SCRJREFDLGDEPLOY, SCRJREFDLGDFLALG, SCRJREFDLGFINMOD, SCRJREFDLGGENFST, SCRJREFDLGMDLSTR, SCRJREFDLGNEW, SCRJREFHEADBAR, SCRJREFLIST, SCRJREFREC, MSPCRD1AVAIL, MITCRDNEWAVAIL, MITCRDPCVAVAIL, MITCRDPCVACTIVE, MSPCRD3AVAIL, MSPCRD3ACTIVE, MITCRDIDPAVAIL, MITCRDIDPACTIVE, MSPCRD4AVAIL, MSPCRD4ACTIVE, MITCRDIMDAVAIL, MITCRDIMDACTIVE, MITCRDICSAVAIL, MITCRDICSACTIVE, MITCRDIDAAVAIL, MITCRDIDAACTIVE, MSPCRD5AVAIL, MSPCRD5ACTIVE, MITCRDGFSAVAIL, MITCRDGFSACTIVE, MITCRDIFSAVAIL, MITCRDIFSACTIVE, MSPCRD6AVAIL, MSPCRD6ACTIVE, MITCRDFNMAVAIL, MITCRDFNMACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -434,6 +456,7 @@ CrdWdbeVer::Tag::Tag(
 			, const string& MrlAppHlp
 			, const string& MitCrdNew
 			, const string& MitCrdPcv
+			, const string& MitCrdIdp
 			, const string& MitCrdImd
 			, const string& MitCrdIcs
 			, const string& MitCrdIda
@@ -447,6 +470,7 @@ CrdWdbeVer::Tag::Tag(
 	this->MrlAppHlp = MrlAppHlp;
 	this->MitCrdNew = MitCrdNew;
 	this->MitCrdPcv = MitCrdPcv;
+	this->MitCrdIdp = MitCrdIdp;
 	this->MitCrdImd = MitCrdImd;
 	this->MitCrdIcs = MitCrdIcs;
 	this->MitCrdIda = MitCrdIda;
@@ -454,7 +478,7 @@ CrdWdbeVer::Tag::Tag(
 	this->MitCrdIfs = MitCrdIfs;
 	this->MitCrdFnm = MitCrdFnm;
 
-	mask = {MITAPPABT, MRLAPPHLP, MITCRDNEW, MITCRDPCV, MITCRDIMD, MITCRDICS, MITCRDIDA, MITCRDGFS, MITCRDIFS, MITCRDFNM};
+	mask = {MITAPPABT, MRLAPPHLP, MITCRDNEW, MITCRDPCV, MITCRDIDP, MITCRDIMD, MITCRDICS, MITCRDIDA, MITCRDGFS, MITCRDIFS, MITCRDFNM};
 };
 
 bool CrdWdbeVer::Tag::readXML(
@@ -478,6 +502,7 @@ bool CrdWdbeVer::Tag::readXML(
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "MrlAppHlp", MrlAppHlp)) add(MRLAPPHLP);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "MitCrdNew", MitCrdNew)) add(MITCRDNEW);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "MitCrdPcv", MitCrdPcv)) add(MITCRDPCV);
+		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "MitCrdIdp", MitCrdIdp)) add(MITCRDIDP);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "MitCrdImd", MitCrdImd)) add(MITCRDIMD);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "MitCrdIcs", MitCrdIcs)) add(MITCRDICS);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "MitCrdIda", MitCrdIda)) add(MITCRDIDA);

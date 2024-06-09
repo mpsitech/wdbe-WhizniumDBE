@@ -19,26 +19,24 @@ public class QryWdbeSilList {
 		*/
 	public static class VecVOrd {
 
-		public static final int SRF = 1;
-		public static final int TIT = 2;
-		public static final int TYP = 3;
-		public static final int RET = 4;
-		public static final int REU = 5;
-		public static final int SYS = 6;
-		public static final int MDL = 7;
+		public static final int REU = 1;
+		public static final int MDL = 2;
+		public static final int RET = 3;
+		public static final int TYP = 4;
+		public static final int SRF = 5;
+		public static final int TIT = 6;
 
 		public static int getIx(
 					String sref
 				) {
 			String s = sref.toLowerCase();
 
+			if (s.equals("reu")) return REU;
+			if (s.equals("mdl")) return MDL;
+			if (s.equals("ret")) return RET;
+			if (s.equals("typ")) return TYP;
 			if (s.equals("srf")) return SRF;
 			if (s.equals("tit")) return TIT;
-			if (s.equals("typ")) return TYP;
-			if (s.equals("ret")) return RET;
-			if (s.equals("reu")) return REU;
-			if (s.equals("sys")) return SYS;
-			if (s.equals("mdl")) return MDL;
 
 			return 0;
 		};
@@ -46,13 +44,12 @@ public class QryWdbeSilList {
 		public static String getSref(
 					int ix
 				) {
+			if (ix == REU) return("reu");
+			if (ix == MDL) return("mdl");
+			if (ix == RET) return("ret");
+			if (ix == TYP) return("typ");
 			if (ix == SRF) return("srf");
 			if (ix == TIT) return("tit");
-			if (ix == TYP) return("typ");
-			if (ix == RET) return("ret");
-			if (ix == REU) return("reu");
-			if (ix == SYS) return("sys");
-			if (ix == MDL) return("mdl");
 
 			return "";
 		};

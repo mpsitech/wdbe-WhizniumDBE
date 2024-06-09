@@ -46,8 +46,8 @@ QryWdbeRlsList::QryWdbeRlsList(
 
 	rerun(dbswdbe);
 
-	xchg->addClstn(VecWdbeVCall::CALLWDBESTUBCHG, jref, Clstn::VecVJobmask::SELF, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBERLSMOD, jref, Clstn::VecVJobmask::ALL, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBESTUBCHG, jref, Clstn::VecVJobmask::SELF, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -89,8 +89,7 @@ void QryWdbeRlsList::rerun(
 	uint preIxOrd = xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXORD, jref);
 	ubigint preRefVer = xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFVER, jref);
 	string preSrf = xchg->getSrefPreset(VecWdbeVPreset::PREWDBERLSLIST_SRF, jref);
-	uint preTyp = xchg->getIxPreset(VecWdbeVPreset::PREWDBERLSLIST_TYP, jref);
-	ubigint preVer = xchg->getRefPreset(VecWdbeVPreset::PREWDBERLSLIST_VER, jref);
+	ubigint preCmp = xchg->getRefPreset(VecWdbeVPreset::PREWDBERLSLIST_CMP, jref);
 	ubigint preMch = xchg->getRefPreset(VecWdbeVPreset::PREWDBERLSLIST_MCH, jref);
 
 	dbswdbe->tblwdbeqselect->removeRstByJref(jref);
@@ -100,9 +99,10 @@ void QryWdbeRlsList::rerun(
 
 	if (preIxPre == VecWdbeVPreset::PREWDBEREFVER) {
 		sqlstr = "SELECT COUNT(TblWdbeMRelease.ref)";
-		sqlstr += " FROM TblWdbeMRelease";
-		sqlstr += " WHERE TblWdbeMRelease.refWdbeMVersion = " + to_string(preRefVer) + "";
-		rerun_filtSQL(sqlstr, preSrf, preTyp, preVer, preMch, false);
+		sqlstr += " FROM TblWdbeMRelease, TblWdbeMComponent";
+		sqlstr += " WHERE TblWdbeMRelease.refWdbeMComponent = TblWdbeMComponent.ref";
+		sqlstr += " AND TblWdbeMComponent.refWdbeMVersion = " + to_string(preRefVer) + "";
+		rerun_filtSQL(sqlstr, preSrf, preCmp, preMch, false);
 		dbswdbe->loadUintBySQL(sqlstr, cnt);
 		cnts.push_back(cnt); lims.push_back(0); ofss.push_back(0);
 		cntsum += cnt;
@@ -110,7 +110,7 @@ void QryWdbeRlsList::rerun(
 	} else {
 		sqlstr = "SELECT COUNT(TblWdbeMRelease.ref)";
 		sqlstr += " FROM TblWdbeMRelease";
-		rerun_filtSQL(sqlstr, preSrf, preTyp, preVer, preMch, true);
+		rerun_filtSQL(sqlstr, preSrf, preCmp, preMch, true);
 		dbswdbe->loadUintBySQL(sqlstr, cnt);
 		cnts.push_back(cnt); lims.push_back(0); ofss.push_back(0);
 		cntsum += cnt;
@@ -144,9 +144,10 @@ void QryWdbeRlsList::rerun(
 
 	if (preIxPre == VecWdbeVPreset::PREWDBEREFVER) {
 		rerun_baseSQL(sqlstr);
-		sqlstr += " FROM TblWdbeMRelease";
-		sqlstr += " WHERE TblWdbeMRelease.refWdbeMVersion = " + to_string(preRefVer) + "";
-		rerun_filtSQL(sqlstr, preSrf, preTyp, preVer, preMch, false);
+		sqlstr += " FROM TblWdbeMRelease, TblWdbeMComponent";
+		sqlstr += " WHERE TblWdbeMRelease.refWdbeMComponent = TblWdbeMComponent.ref";
+		sqlstr += " AND TblWdbeMComponent.refWdbeMVersion = " + to_string(preRefVer) + "";
+		rerun_filtSQL(sqlstr, preSrf, preCmp, preMch, false);
 		rerun_orderSQL(sqlstr, preIxOrd);
 		sqlstr += " LIMIT " + to_string(lims[0]) + " OFFSET " + to_string(ofss[0]);
 		dbswdbe->executeQuery(sqlstr);
@@ -154,7 +155,7 @@ void QryWdbeRlsList::rerun(
 	} else {
 		rerun_baseSQL(sqlstr);
 		sqlstr += " FROM TblWdbeMRelease";
-		rerun_filtSQL(sqlstr, preSrf, preTyp, preVer, preMch, true);
+		rerun_filtSQL(sqlstr, preSrf, preCmp, preMch, true);
 		rerun_orderSQL(sqlstr, preIxOrd);
 		sqlstr += " LIMIT " + to_string(lims[0]) + " OFFSET " + to_string(ofss[0]);
 		dbswdbe->executeQuery(sqlstr);
@@ -175,15 +176,14 @@ void QryWdbeRlsList::rerun(
 void QryWdbeRlsList::rerun_baseSQL(
 			string& sqlstr
 		) {
-	sqlstr = "INSERT INTO TblWdbeQRlsList(jref, jnum, ref, sref, ixVBasetype, refWdbeMVersion, refWdbeMMachine)";
-	sqlstr += " SELECT " + to_string(jref) + ", 0, TblWdbeMRelease.ref, TblWdbeMRelease.sref, TblWdbeMRelease.ixVBasetype, TblWdbeMRelease.refWdbeMVersion, TblWdbeMRelease.refWdbeMMachine";
+	sqlstr = "INSERT INTO TblWdbeQRlsList(jref, jnum, ref, sref, refWdbeMComponent, refWdbeMMachine)";
+	sqlstr += " SELECT " + to_string(jref) + ", 0, TblWdbeMRelease.ref, TblWdbeMRelease.sref, TblWdbeMRelease.refWdbeMComponent, TblWdbeMRelease.refWdbeMMachine";
 };
 
 void QryWdbeRlsList::rerun_filtSQL(
 			string& sqlstr
 			, const string& preSrf
-			, const uint preTyp
-			, const ubigint preVer
+			, const ubigint preCmp
 			, const ubigint preMch
 			, const bool addwhere
 		) {
@@ -194,14 +194,9 @@ void QryWdbeRlsList::rerun_filtSQL(
 		sqlstr += "TblWdbeMRelease.sref = '" + preSrf + "'";
 	};
 
-	if (preTyp != 0) {
+	if (preCmp != 0) {
 		rerun_filtSQL_append(sqlstr, first);
-		sqlstr += "TblWdbeMRelease.ixVBasetype = " + to_string(preTyp) + "";
-	};
-
-	if (preVer != 0) {
-		rerun_filtSQL_append(sqlstr, first);
-		sqlstr += "TblWdbeMRelease.refWdbeMVersion = " + to_string(preVer) + "";
+		sqlstr += "TblWdbeMRelease.refWdbeMComponent = " + to_string(preCmp) + "";
 	};
 
 	if (preMch != 0) {
@@ -224,10 +219,9 @@ void QryWdbeRlsList::rerun_orderSQL(
 			string& sqlstr
 			, const uint preIxOrd
 		) {
-	if (preIxOrd == VecVOrd::SRF) sqlstr += " ORDER BY TblWdbeMRelease.sref ASC";
-	else if (preIxOrd == VecVOrd::TYP) sqlstr += " ORDER BY TblWdbeMRelease.ixVBasetype ASC";
-	else if (preIxOrd == VecVOrd::VER) sqlstr += " ORDER BY TblWdbeMRelease.refWdbeMVersion ASC";
+	if (preIxOrd == VecVOrd::CMP) sqlstr += " ORDER BY TblWdbeMRelease.refWdbeMComponent ASC";
 	else if (preIxOrd == VecVOrd::MCH) sqlstr += " ORDER BY TblWdbeMRelease.refWdbeMMachine ASC";
+	else if (preIxOrd == VecVOrd::SRF) sqlstr += " ORDER BY TblWdbeMRelease.sref ASC";
 };
 
 void QryWdbeRlsList::fetch(
@@ -255,9 +249,7 @@ void QryWdbeRlsList::fetch(
 			rec = rst.nodes[i];
 
 			rec->jnum = statshr.jnumFirstload + i;
-			rec->srefIxVBasetype = VecWdbeVMReleaseBasetype::getSref(rec->ixVBasetype);
-			rec->titIxVBasetype = VecWdbeVMReleaseBasetype::getTitle(rec->ixVBasetype, ixWdbeVLocale);
-			rec->stubRefWdbeMVersion = StubWdbe::getStubVerStd(dbswdbe, rec->refWdbeMVersion, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
+			rec->stubRefWdbeMComponent = StubWdbe::getStubCmpStd(dbswdbe, rec->refWdbeMComponent, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
 			rec->stubRefWdbeMMachine = StubWdbe::getStubMchStd(dbswdbe, rec->refWdbeMMachine, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
 		};
 
@@ -365,11 +357,8 @@ bool QryWdbeRlsList::handleShow(
 	cout << "\tjnum";
 	cout << "\tref";
 	cout << "\tsref";
-	cout << "\tixVBasetype";
-	cout << "\tsrefIxVBasetype";
-	cout << "\ttitIxVBasetype";
-	cout << "\trefWdbeMVersion";
-	cout << "\tstubRefWdbeMVersion";
+	cout << "\trefWdbeMComponent";
+	cout << "\tstubRefWdbeMComponent";
 	cout << "\trefWdbeMMachine";
 	cout << "\tstubRefWdbeMMachine";
 	cout << endl;
@@ -383,11 +372,8 @@ bool QryWdbeRlsList::handleShow(
 		cout << "\t" << rec->jnum;
 		cout << "\t" << rec->ref;
 		cout << "\t" << rec->sref;
-		cout << "\t" << rec->ixVBasetype;
-		cout << "\t" << rec->srefIxVBasetype;
-		cout << "\t" << rec->titIxVBasetype;
-		cout << "\t" << rec->refWdbeMVersion;
-		cout << "\t" << rec->stubRefWdbeMVersion;
+		cout << "\t" << rec->refWdbeMComponent;
+		cout << "\t" << rec->stubRefWdbeMComponent;
 		cout << "\t" << rec->refWdbeMMachine;
 		cout << "\t" << rec->stubRefWdbeMMachine;
 		cout << endl;
@@ -399,21 +385,13 @@ void QryWdbeRlsList::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
-		call->abort = handleCallWdbeStubChgFromSelf(dbswdbe);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBERLSMOD) {
+	if (call->ixVCall == VecWdbeVCall::CALLWDBERLSMOD) {
 		call->abort = handleCallWdbeRlsMod(dbswdbe, call->jref);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBERLSUPD_REFEQ) {
 		call->abort = handleCallWdbeRlsUpd_refEq(dbswdbe, call->jref);
+	} else if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
+		call->abort = handleCallWdbeStubChgFromSelf(dbswdbe);
 	};
-};
-
-bool QryWdbeRlsList::handleCallWdbeStubChgFromSelf(
-			DbsWdbe* dbswdbe
-		) {
-	bool retval = false;
-	// IP handleCallWdbeStubChgFromSelf --- INSERT
-	return retval;
 };
 
 bool QryWdbeRlsList::handleCallWdbeRlsMod(
@@ -441,5 +419,13 @@ bool QryWdbeRlsList::handleCallWdbeRlsUpd_refEq(
 		xchg->triggerCall(dbswdbe, VecWdbeVCall::CALLWDBESTATCHG, jref);
 	};
 
+	return retval;
+};
+
+bool QryWdbeRlsList::handleCallWdbeStubChgFromSelf(
+			DbsWdbe* dbswdbe
+		) {
+	bool retval = false;
+	// IP handleCallWdbeStubChgFromSelf --- INSERT
 	return retval;
 };

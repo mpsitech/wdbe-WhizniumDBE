@@ -46,8 +46,8 @@ QryWdbeSnsList::QryWdbeSnsList(
 
 	rerun(dbswdbe);
 
-	xchg->addClstn(VecWdbeVCall::CALLWDBESTUBCHG, jref, Clstn::VecVJobmask::SELF, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBESNSMOD, jref, Clstn::VecVJobmask::ALL, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBESTUBCHG, jref, Clstn::VecVJobmask::SELF, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -267,10 +267,10 @@ void QryWdbeSnsList::rerun_orderSQL(
 			string& sqlstr
 			, const uint preIxOrd
 		) {
-	if (preIxOrd == VecVOrd::RET) sqlstr += " ORDER BY TblWdbeMSensitivity.refIxVTbl ASC";
-	else if (preIxOrd == VecVOrd::REU) sqlstr += " ORDER BY TblWdbeMSensitivity.refUref ASC";
+	if (preIxOrd == VecVOrd::SRU) sqlstr += " ORDER BY TblWdbeMSensitivity.srcUref ASC";
 	else if (preIxOrd == VecVOrd::SRT) sqlstr += " ORDER BY TblWdbeMSensitivity.srcIxVTbl ASC";
-	else if (preIxOrd == VecVOrd::SRU) sqlstr += " ORDER BY TblWdbeMSensitivity.srcUref ASC";
+	else if (preIxOrd == VecVOrd::REU) sqlstr += " ORDER BY TblWdbeMSensitivity.refUref ASC";
+	else if (preIxOrd == VecVOrd::RET) sqlstr += " ORDER BY TblWdbeMSensitivity.refIxVTbl ASC";
 };
 
 void QryWdbeSnsList::fetch(
@@ -300,19 +300,19 @@ void QryWdbeSnsList::fetch(
 			rec->jnum = statshr.jnumFirstload + i;
 			rec->srefRefIxVTbl = VecWdbeVMSensitivityRefTbl::getSref(rec->refIxVTbl);
 			rec->titRefIxVTbl = VecWdbeVMSensitivityRefTbl::getTitle(rec->refIxVTbl, ixWdbeVLocale);
-			if (rec->refIxVTbl == VecWdbeVMSensitivityRefTbl::PRC) {
-				rec->stubRefUref = StubWdbe::getStubPrcStd(dbswdbe, rec->refUref, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
-			} else if (rec->refIxVTbl == VecWdbeVMSensitivityRefTbl::MDL) {
+			if (rec->refIxVTbl == VecWdbeVMSensitivityRefTbl::MDL) {
 				rec->stubRefUref = StubWdbe::getStubMdlStd(dbswdbe, rec->refUref, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
+			} else if (rec->refIxVTbl == VecWdbeVMSensitivityRefTbl::PRC) {
+				rec->stubRefUref = StubWdbe::getStubPrcStd(dbswdbe, rec->refUref, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
 			} else rec->stubRefUref = "-";
 			rec->srefSrcIxVTbl = VecWdbeVMSensitivitySrcTbl::getSref(rec->srcIxVTbl);
 			rec->titSrcIxVTbl = VecWdbeVMSensitivitySrcTbl::getTitle(rec->srcIxVTbl, ixWdbeVLocale);
-			if (rec->srcIxVTbl == VecWdbeVMSensitivitySrcTbl::SIG) {
-				rec->stubSrcUref = StubWdbe::getStubSigStd(dbswdbe, rec->srcUref, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
+			if (rec->srcIxVTbl == VecWdbeVMSensitivitySrcTbl::INT) {
+				rec->stubSrcUref = StubWdbe::getStubIntStd(dbswdbe, rec->srcUref, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
 			} else if (rec->srcIxVTbl == VecWdbeVMSensitivitySrcTbl::PRT) {
 				rec->stubSrcUref = StubWdbe::getStubPrtStd(dbswdbe, rec->srcUref, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
-			} else if (rec->srcIxVTbl == VecWdbeVMSensitivitySrcTbl::INT) {
-				rec->stubSrcUref = StubWdbe::getStubIntStd(dbswdbe, rec->srcUref, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
+			} else if (rec->srcIxVTbl == VecWdbeVMSensitivitySrcTbl::SIG) {
+				rec->stubSrcUref = StubWdbe::getStubSigStd(dbswdbe, rec->srcUref, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
 			} else rec->stubSrcUref = "-";
 		};
 
@@ -458,21 +458,13 @@ void QryWdbeSnsList::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
-		call->abort = handleCallWdbeStubChgFromSelf(dbswdbe);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBESNSMOD) {
+	if (call->ixVCall == VecWdbeVCall::CALLWDBESNSMOD) {
 		call->abort = handleCallWdbeSnsMod(dbswdbe, call->jref);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBESNSUPD_REFEQ) {
 		call->abort = handleCallWdbeSnsUpd_refEq(dbswdbe, call->jref);
+	} else if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
+		call->abort = handleCallWdbeStubChgFromSelf(dbswdbe);
 	};
-};
-
-bool QryWdbeSnsList::handleCallWdbeStubChgFromSelf(
-			DbsWdbe* dbswdbe
-		) {
-	bool retval = false;
-	// IP handleCallWdbeStubChgFromSelf --- INSERT
-	return retval;
 };
 
 bool QryWdbeSnsList::handleCallWdbeSnsMod(
@@ -500,5 +492,13 @@ bool QryWdbeSnsList::handleCallWdbeSnsUpd_refEq(
 		xchg->triggerCall(dbswdbe, VecWdbeVCall::CALLWDBESTATCHG, jref);
 	};
 
+	return retval;
+};
+
+bool QryWdbeSnsList::handleCallWdbeStubChgFromSelf(
+			DbsWdbe* dbswdbe
+		) {
+	bool retval = false;
+	// IP handleCallWdbeStubChgFromSelf --- INSERT
 	return retval;
 };

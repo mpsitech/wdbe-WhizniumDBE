@@ -2,6 +2,16 @@ IexWznmUix v0.9.23
 ImeIMCard.sref
 CrdWdbeBnk
 CrdWdbeCmd
+CrdWdbeCmp
+	ImeIMPanel.srefIxVIop	srefIxVBasetype	carNum	sref	Detach	Avail	Comment
+	retr			PnlWdbeCmpList
+		ImeIMControl2.srefIxWznmVIop	iref	srefIxVBasetype	irefRefWznmCControl	srefHkIxVSection	srefRefIxVTbl	srefRefUref	irefSupRefWznmMControl	srefIxVScope	sref	srefIxVSubtype	srefsWznmMTag	Title	srefStdRefWznmMStub	srefShoRefWznmMStub	Avail	Active	srefsKOption
+		retr		tco							TcoVer
+			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			ins	width		250
+			ImeIAMControlPar2.end
+		ImeIMControl2.end
+	ImeIMPanel.end
 CrdWdbeCpr
 	ImeIMControl1.srefIxVBasetype	srefHkIxVSection	srefRefIxVTbl	srefRefUref	srefSupRefWznmMControl	supNum	srefIxVScope	sref	srefIxVSubtype	srefsWznmMTag	Title	Avail	Active	srefsKOption
 	msp	mbar	void		MenCrd	1	app	MspCrd1	void			MitCrdNewAvail()
@@ -789,21 +799,20 @@ CrdWdbePrs
 CrdWdbePrt
 CrdWdbeRls
 	ImeIMControl1.srefIxVBasetype	srefHkIxVSection	srefRefIxVTbl	srefRefUref	srefSupRefWznmMControl	supNum	srefIxVScope	sref	srefIxVSubtype	srefsWznmMTag	Title	Avail	Active	srefsKOption
-	msp	mbar	void		MenCrd	1	app	MspCrd1	void			MitCrdNewAvail()
-	mit	mbar	dlg	DlgWdbeRlsNew	MenCrd	2	shr	MitCrdNew	void	new		pre.ixCrdaccRlsIncl(edit)		cap;ddd
-	mit	mbar	dlg	DlgWdbeRlsStareptr	MenCrd	3	shr	MitCrdSrt	void			pre.ixCrdaccRlsIncl(exec)	!pre.ixBasereptype()
+	msp	mbar	void		MenCrd	1	app	MspCrd1	void			MitCrdSrtAvail()|MitCrdCrtAvail()|MitCrdFrtAvail()
+	mit	mbar	dlg	DlgWdbeRlsStareptr	MenCrd	2	shr	MitCrdSrt	void			pre.ixCrdaccRlsIncl(exec)	!pre.ixBasereptype()
 		ImeIJMControlTitle1.srefX1RefWznmMLocale	Title
 		enus	Start repository transaction ...
 		ImeIJMControlTitle1.end
-	mit	mbar	void		MenCrd	4	shr	MitCrdCrt	void			pre.ixCrdaccRlsIncl(exec)	pre.ixBasereptype()
+	mit	mbar	void		MenCrd	3	shr	MitCrdCrt	void			pre.ixCrdaccRlsIncl(exec)	pre.ixBasereptype()
 		ImeIJMControlTitle1.srefX1RefWznmMLocale	Title
 		enus	Cancel repository transaction
 		ImeIJMControlTitle1.end
-	mit	mbar	dlg	DlgWdbeRlsFinreptr	MenCrd	5	shr	MitCrdFrt	void			pre.ixCrdaccRlsIncl(exec)	pre.ixBasereptype()
+	mit	mbar	dlg	DlgWdbeRlsFinreptr	MenCrd	4	shr	MitCrdFrt	void			pre.ixCrdaccRlsIncl(exec)	pre.ixBasereptype()
 		ImeIJMControlTitle1.srefX1RefWznmMLocale	Title
 		enus	Finalize repository transaction ...
 		ImeIJMControlTitle1.end
-	mit	mbar	dlg	DlgWdbeRlsWrite	MenCrd	8	shr	MitCrdWco	void			pre.ixCrdaccRlsIncl(exec)	pre.refRls()
+	mit	mbar	dlg	DlgWdbeRlsWrite	MenCrd	7	shr	MitCrdWco	void			pre.ixCrdaccRlsIncl(exec)	pre.refRls()
 		ImeIJMControlTitle1.srefX1RefWznmMLocale	Title
 		enus	Write code ...
 		ImeIJMControlTitle1.end
@@ -814,10 +823,6 @@ CrdWdbeRls
 		retr		tco							TcoSrf
 			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
 			ins	width		150
-			ImeIAMControlPar2.end
-		retr		tco							TcoVer
-			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
-			ins	width		250
 			ImeIAMControlPar2.end
 		ImeIMControl2.end
 	ImeIMPanel.end
@@ -884,49 +889,6 @@ CrdWdbeRls
 			enus	Access to Git repository at &giturl; denied for user &usr;.
 			ImeIJMControlTitle3.end
 		24	mcb	0	void	void		21	shr	McbGad	void	ok						cap
-		ImeIMControl3.end
-	new	tbl	TblWdbeMRelease	DlgWdbeRlsNew
-		ImeIMControl3.iref	srefIxVBasetype	irefRefWznmCControl	srefHkIxVSection	srefRefIxVTbl	srefRefUref	irefSupRefWznmMControl	srefIxVScope	sref	srefIxVSubtype	srefsWznmMTag	Title	srefStdRefWznmMStub	srefShoRefWznmMStub	Avail	Active	srefsKOption
-		1	cpt	0	hdr	void		0	app	Cpt	void
-			ImeIJMControlTitle3.srefX1RefWznmMLocale	Title
-			enus	Create new release
-			ImeIJMControlTitle3.end
-		2	sge	0	void	void		0	shr	Sge	void
-			ImeIMFeed3.srefSrcIxVTbl	srefSrcUref	sref	srefsWznmMVectoritem	srefsWznmMTag	Comment
-			vec		FeedFSge
-				ImeIMVector3.srefIxVBasetype	sref	osrefWznmKTaggrp	srefsKOption
-				lin	VecVDlgWdbeRlsNewSge		noloc;notit;filfed
-				ImeIMVector3.end
-			ImeIMFeed3.end
-		3	pup	0	cont	void		0	shr	DetPupTyp	void
-			ImeIMFeed3.srefSrcIxVTbl	srefSrcUref	sref	srefsWznmMVectoritem	srefsWznmMTag	Comment
-			vec	VecWdbeVMReleaseBasetype	FeedFDetPupTyp
-			ImeIMFeed3.end
-		4	cpt	0	cont	void		3	app	DetCptTyp	void
-			ImeIJMControlTitle3.srefX1RefWznmMLocale	Title
-			enus	Type
-			ImeIJMControlTitle3.end
-		5	pup	0	cont	void		0	shr	DetPupMch	void
-			ImeIMFeed3.srefSrcIxVTbl	srefSrcUref	sref	srefsWznmMVectoritem	srefsWznmMTag	Comment
-			tbl	TblWdbeMMachine	FeedFDetPupMch
-			ImeIMFeed3.end
-		6	cpt	0	cont	void		5	app	DetCptMch	void
-			ImeIJMControlTitle3.srefX1RefWznmMLocale	Title
-			enus	Machine
-			ImeIJMControlTitle3.end
-		7	txf	0	cont	void		0	shr	DetTxfSrf	void							s
-		8	cpt	0	cont	void		7	app	DetCptSrf	void
-			ImeIJMControlTitle3.srefX1RefWznmMLocale	Title
-			enus	Identifier
-			ImeIJMControlTitle3.end
-		9	but	0	ftr	void		0	shr	ButCnc	void	cancel					!sge(create)	cap
-			ImeIAMControlPar3.x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
-			action		dlgclose
-			ImeIAMControlPar3.end
-		10	but	0	ftr	void		0	shr	ButCre	void	create					sge(idle)&valid()	cap
-			ImeIAMControlPar3.x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
-			action		dlgclose
-			ImeIAMControlPar3.end
 		ImeIMControl3.end
 	cust	void		DlgWdbeRlsStareptr
 		ImeICControl3.iref
@@ -1119,34 +1081,6 @@ CrdWdbeRls
 		ImeIMControl3.end
 	ImeIMDialog.end
 CrdWdbeSig
-CrdWdbeSys
-	ImeIMPanel.srefIxVIop	srefIxVBasetype	carNum	sref	Detach	Avail	Comment
-	retr			PnlWdbeSysList
-		ImeIMControl2.srefIxWznmVIop	iref	srefIxVBasetype	irefRefWznmCControl	srefHkIxVSection	srefRefIxVTbl	srefRefUref	irefSupRefWznmMControl	srefIxVScope	sref	srefIxVSubtype	srefsWznmMTag	Title	srefStdRefWznmMStub	srefShoRefWznmMStub	Avail	Active	srefsKOption
-		retr		tco							TcoSrf
-			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
-			ins	width		200
-			ImeIAMControlPar2.end
-		retr		tco							TcoVer
-			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
-			ins	width		250
-			ImeIAMControlPar2.end
-		ImeIMControl2.end
-	ImeIMPanel.end
-CrdWdbeTrg
-	ImeIMPanel.srefIxVIop	srefIxVBasetype	carNum	sref	Detach	Avail	Comment
-	retr			PnlWdbeTrgList
-		ImeIMControl2.srefIxWznmVIop	iref	srefIxVBasetype	irefRefWznmCControl	srefHkIxVSection	srefRefIxVTbl	srefRefUref	irefSupRefWznmMControl	srefIxVScope	sref	srefIxVSubtype	srefsWznmMTag	Title	srefStdRefWznmMStub	srefShoRefWznmMStub	Avail	Active	srefsKOption
-		retr		tco							TcoSrf
-			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
-			ins	width		150
-			ImeIAMControlPar2.end
-		retr		tco							TcoSys
-			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
-			ins	width		200
-			ImeIAMControlPar2.end
-		ImeIMControl2.end
-	ImeIMPanel.end
 CrdWdbeUnt
 	ImeIMPanel.srefIxVIop	srefIxVBasetype	carNum	sref	Detach	Avail	Comment
 	retr			PnlWdbeUntList
@@ -1162,10 +1096,6 @@ CrdWdbeUnt
 		retr		tco							TcoReu
 			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
 			ins	width		250
-			ImeIAMControlPar2.end
-		retr		tco							TcoSys
-			ImeIAMControlPar2.srefIxWznmVIop	x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
-			ins	width		200
 			ImeIAMControlPar2.end
 		ImeIMControl2.end
 	ImeIMPanel.end
@@ -1392,14 +1322,16 @@ CrdWdbeVer
 	mit	mbar	dlg	DlgWdbeVerNew	MenCrd	2	shr	MitCrdNew	void	new		pre.ixCrdaccVerIncl(edit&exec)		cap;ddd
 	mit	mbar	void		MenCrd	5	shr	MitCrdPcv	void		Make project's current version	pre.ixCrdaccVerIncl(edit|exec)	pre.refVer()
 	msp	mbar	void		MenCrd	6	app	MspCrd3	void			pre.ixCrdaccVerIncl(edit|exec)	pre.refVer()
-	mit	mbar	dlg	DlgWdbeVerMdlstr	MenCrd	7	shr	MitCrdImd	void		Import modular structure ...	pre.ixCrdaccVerIncl(edit|exec)	pre.refVer()&ver.steEq(newcre|newimp)
-	mit	mbar	dlg	DlgWdbeVerCmdset	MenCrd	8	shr	MitCrdIcs	void		Import command set ...	pre.ixCrdaccVerIncl(edit|exec)	pre.refVer()&ver.steEq(dsnmdlstr)
-	mit	mbar	dlg	DlgWdbeVerDflalg	MenCrd	9	shr	MitCrdIda	void		Import data flows and algorithms ...	pre.ixCrdaccVerIncl(edit|exec)	pre.refVer()&ver.steEq(dsnmdlstr|dsncmdset)
-	msp	mbar	void		MenCrd	10	app	MspCrd4	void			pre.ixCrdaccVerIncl(edit|exec)	pre.refVer()
-	mit	mbar	dlg	DlgWdbeVerGenfst	MenCrd	11	shr	MitCrdGfs	void		Generate fine structure ...	pre.ixCrdaccVerIncl(exec)	pre.refVer()&ver.steEq(dsnmdlstr|dsncmdset|dsndflalg)
-	mit	mbar	dlg	DlgWdbeVerCustfst	MenCrd	12	shr	MitCrdIfs	void		Apply custom fine structure ...	pre.ixCrdaccVerIncl(edit|exec)	pre.refVer()&ver.steEq(dsngenfst)
-	msp	mbar	void		MenCrd	13	app	MspCrd5	void			pre.ixCrdaccVerIncl(edit|exec)	pre.refVer()
-	mit	mbar	dlg	DlgWdbeVerFinmod	MenCrd	14	shr	MitCrdFnm	void		Finalize model ...	pre.ixCrdaccVerIncl(exec)	pre.refVer()&ver.steEq(dsngenfst|dsncustfst)
+	mit	mbar	dlg	DlgWdbeVerDeploy	MenCrd	7	shr	MitCrdIdp	void		Import deployment information ...	pre.ixCrdaccVerIncl(edit)	pre.refVer()&ver.steEq(newcre|newimp)
+	msp	mbar	void		MenCrd	8	app	MspCrd4	void			pre.ixCrdaccVerIncl(edit|exec)	pre.refVer()
+	mit	mbar	dlg	DlgWdbeVerMdlstr	MenCrd	9	shr	MitCrdImd	void		Import modular structure ...	pre.ixCrdaccVerIncl(edit|exec)	pre.refVer()&ver.steEq(dsndeploy)
+	mit	mbar	dlg	DlgWdbeVerCmdset	MenCrd	10	shr	MitCrdIcs	void		Import command set ...	pre.ixCrdaccVerIncl(edit|exec)	pre.refVer()&ver.steEq(dsnmdlstr)
+	mit	mbar	dlg	DlgWdbeVerDflalg	MenCrd	11	shr	MitCrdIda	void		Import data flows and algorithms ...	pre.ixCrdaccVerIncl(edit|exec)	pre.refVer()&ver.steEq(dsnmdlstr|dsncmdset)
+	msp	mbar	void		MenCrd	12	app	MspCrd5	void			pre.ixCrdaccVerIncl(edit|exec)	pre.refVer()
+	mit	mbar	dlg	DlgWdbeVerGenfst	MenCrd	13	shr	MitCrdGfs	void		Generate fine structure ...	pre.ixCrdaccVerIncl(exec)	pre.refVer()&ver.steEq(dsnmdlstr|dsncmdset|dsndflalg)
+	mit	mbar	dlg	DlgWdbeVerCustfst	MenCrd	14	shr	MitCrdIfs	void		Apply custom fine structure ...	pre.ixCrdaccVerIncl(edit|exec)	pre.refVer()&ver.steEq(dsngenfst)
+	msp	mbar	void		MenCrd	15	app	MspCrd6	void			pre.ixCrdaccVerIncl(edit|exec)	pre.refVer()
+	mit	mbar	dlg	DlgWdbeVerFinmod	MenCrd	16	shr	MitCrdFnm	void		Finalize model ...	pre.ixCrdaccVerIncl(exec)	pre.refVer()&ver.steEq(dsngenfst|dsncustfst)
 	alr	void	void				shr	AlrCvw	void
 	txt	void	void		AlrCvw	1	shr	TxtCvwCpt	void	warning				cap
 	txt	void	void		AlrCvw	2	shr	TxtCvwMsg1	void		Manual repository adjustments may be required.
@@ -1486,6 +1418,43 @@ CrdWdbeVer
 			vec		FeedFDse
 				ImeIMVector3.srefIxVBasetype	sref	osrefWznmKTaggrp	srefsKOption
 				lin	VecVDlgWdbeVerCustfstDit		filfed
+				ImeIMVector3.end
+			ImeIMFeed3.end
+		4	dit	0	void	void		0	shr	DitIfi	dituld		Input file
+		5	uld	0	cont	void		4	app	IfiUld	void	upload					sge(idle)	cap
+		6	cpt	0	cont	void		5	app	IfiCpt	void	filename						cap
+		7	dit	0	void	void		0	shr	DitImp	ditprg	import						cap
+		8	txt	0	cont	void		7	shr	ImpTxtPrg	void							t
+		9	cpt	0	cont	void		8	app	ImpCptPrg	void	progress						cap
+		10	sep	0	cont	void		7	app	ImpSep1	void
+		11	but	1	cont	void		7	shr	ImpButRun	void	run					sge(prsdone)	cap
+		12	but	1	cont	void		7	shr	ImpButSto	void	stop					sge(impidle|import)	cap
+		13	dit	0	void	void		0	shr	DitLfi	ditdld		Log file
+		14	dld	0	cont	void		13	app	LfiDld	void	download					sge(done)	cap
+		15	but	0	ftr	void		0	shr	ButDne	void	done					sge(idle|done)	cap
+			ImeIAMControlPar3.x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
+			action		dlgclose
+			ImeIAMControlPar3.end
+		ImeIMControl3.end
+	import	iex	IexWdbeDpl	DlgWdbeVerDeploy
+		ImeICControl3.iref
+		1
+		2
+		ImeICControl3.end
+		ImeIMControl3.iref	srefIxVBasetype	irefRefWznmCControl	srefHkIxVSection	srefRefIxVTbl	srefRefUref	irefSupRefWznmMControl	srefIxVScope	sref	srefIxVSubtype	srefsWznmMTag	Title	srefStdRefWznmMStub	srefShoRefWznmMStub	Avail	Active	srefsKOption
+		1	cpt	0	hdr	void		0	app	Cpt	void		Import deployment information
+		2	sge	0	void	void		0	shr	Sge	void
+			ImeIMFeed3.srefSrcIxVTbl	srefSrcUref	sref	srefsWznmMVectoritem	srefsWznmMTag	Comment
+			vec		FeedFSge
+				ImeIMVector3.srefIxVBasetype	sref	osrefWznmKTaggrp	srefsKOption
+				lin	VecVDlgWdbeVerDeploySge		noloc;notit;filfed
+				ImeIMVector3.end
+			ImeIMFeed3.end
+		3	dse	0	hdr	void		0	shr	Dse	void
+			ImeIMFeed3.srefSrcIxVTbl	srefSrcUref	sref	srefsWznmMVectoritem	srefsWznmMTag	Comment
+			vec		FeedFDse
+				ImeIMVector3.srefIxVBasetype	sref	osrefWznmKTaggrp	srefsKOption
+				lin	VecVDlgWdbeVerDeployDit		filfed
 				ImeIMVector3.end
 			ImeIMFeed3.end
 		4	dit	0	void	void		0	shr	DitIfi	dituld		Input file
@@ -1730,21 +1699,9 @@ retr					QryWdbeCpr1NCoreversion
 	ImeIMQuerycol.srefIxWznmVIop	srefIxVBasetype	srefsIxWOccurrence	srefRefWznmMTablecol	sref	Short	srefRefWznmMStub
 	retrupd				stubRef		StubWdbeCvrNo
 	ImeIMQuerycol.end
-retr					QryWdbeMch1NRelease
-	ImeIMQuerycol.srefIxWznmVIop	srefIxVBasetype	srefsIxWOccurrence	srefRefWznmMTablecol	sref	Short	srefRefWznmMStub
-	retrupd				stubRef		StubWdbeRlsLong
-	ImeIMQuerycol.end
 retr					QryWdbePrjList
 	ImeIMQuerycol.srefIxWznmVIop	srefIxVBasetype	srefsIxWOccurrence	srefRefWznmMTablecol	sref	Short	srefRefWznmMStub
 	retrupd				stubRefWdbeMVersion		StubWdbeVerNo
-	ImeIMQuerycol.end
-retr					QryWdbeSysSys1NTarget
-	ImeIMQuerycol.srefIxWznmVIop	srefIxVBasetype	srefsIxWOccurrence	srefRefWznmMTablecol	sref	Short	srefRefWznmMStub
-	retrupd				stubRef		StubWdbeTrgSref
-	ImeIMQuerycol.end
-retr					QryWdbeUntFwd1NController
-	ImeIMQuerycol.srefIxWznmVIop	srefIxVBasetype	srefsIxWOccurrence	srefRefWznmMTablecol	sref	Short	srefRefWznmMStub
-	retrupd				stubRef		StubWdbeCtrLong
 	ImeIMQuerycol.end
 retr					QryWdbeUntList
 	ImeIMQuerycol.srefIxWznmVIop	srefIxVBasetype	srefsIxWOccurrence	srefRefWznmMTablecol	sref	Short	srefRefWznmMStub

@@ -58,15 +58,14 @@ PnlWdbeLibDetail::ContIac::ContIac(
 };
 
 bool PnlWdbeLibDetail::ContIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["ContIacWdbeLibDetail"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["ContIacWdbeLibDetail"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -118,7 +117,7 @@ void PnlWdbeLibDetail::ContIac::writeJSON(
 
 	me["TxfTit"] = TxfTit;
 	me["TxfVer"] = TxfVer;
-	me["numFLstDep"] = numFLstDep;
+	me["numFLstDep"] = (Json::Value::UInt) numFLstDep;
 	me["TxfDep"] = TxfDep;
 	me["TxfCmt"] = TxfCmt;
 };
@@ -253,7 +252,7 @@ void PnlWdbeLibDetail::StatApp::writeJSON(
 
 	me["srefIxWdbeVExpstate"] = VecWdbeVExpstate::getSref(ixWdbeVExpstate);
 	me["LstDepAlt"] = LstDepAlt;
-	me["LstDepNumFirstdisp"] = LstDepNumFirstdisp;
+	me["LstDepNumFirstdisp"] = (Json::Value::UInt) LstDepNumFirstdisp;
 };
 
 void PnlWdbeLibDetail::StatApp::writeXML(
@@ -456,15 +455,14 @@ string PnlWdbeLibDetail::DpchAppData::getSrefsMask() {
 };
 
 void PnlWdbeLibDetail::DpchAppData::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbeLibDetailData"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbeLibDetailData"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -526,15 +524,14 @@ string PnlWdbeLibDetail::DpchAppDo::getSrefsMask() {
 };
 
 void PnlWdbeLibDetail::DpchAppDo::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbeLibDetailDo"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbeLibDetailDo"];}();
 
 	basefound = (me != Json::nullValue);
 

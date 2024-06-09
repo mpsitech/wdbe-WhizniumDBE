@@ -32,13 +32,13 @@ function fromBase64(str) {
 		ix = 0;
 
 		for (var i = 0; i < cnt; i++) {
-			while ((str[ix] == '\n') || (str[ix] == '\r') || (str[j] == '\t') || (str[j] == ' ')) ix++;
+			while ((str[ix] == '\n') || (str[ix] == '\r') || (str[ix] == '\t') || (str[ix] == ' ')) ix++;
 			quad[0] = str.charCodeAt(ix++);
-			while ((str[ix] == '\n') || (str[ix] == '\r') || (str[j] == '\t') || (str[j] == ' ')) ix++;
+			while ((str[ix] == '\n') || (str[ix] == '\r') || (str[ix] == '\t') || (str[ix] == ' ')) ix++;
 			quad[1] = str.charCodeAt(ix++);
-			while ((str[ix] == '\n') || (str[ix] == '\r') || (str[j] == '\t') || (str[j] == ' ')) ix++;
+			while ((str[ix] == '\n') || (str[ix] == '\r') || (str[ix] == '\t') || (str[ix] == ' ')) ix++;
 			quad[2] = str.charCodeAt(ix++);
-			while ((str[ix] == '\n') || (str[ix] == '\r') || (str[j] == '\t') || (str[j] == ' ')) ix++;
+			while ((str[ix] == '\n') || (str[ix] == '\r') || (str[ix] == '\t') || (str[ix] == ' ')) ix++;
 			quad[3] = str.charCodeAt(ix++);
 
 			for (var j = 0; j < 4; j++) {

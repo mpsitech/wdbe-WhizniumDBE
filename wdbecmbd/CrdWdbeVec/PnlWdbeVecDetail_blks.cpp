@@ -58,15 +58,14 @@ PnlWdbeVecDetail::ContIac::ContIac(
 };
 
 bool PnlWdbeVecDetail::ContIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["ContIacWdbeVecDetail"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["ContIacWdbeVecDetail"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -114,8 +113,8 @@ void PnlWdbeVecDetail::ContIac::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["numFPupTyp"] = numFPupTyp;
-	me["numFPupHkt"] = numFPupHkt;
+	me["numFPupTyp"] = (Json::Value::UInt) numFPupTyp;
+	me["numFPupHkt"] = (Json::Value::UInt) numFPupHkt;
 	Jsonio::writeUintvec(me, "numsFLstOpt", numsFLstOpt);
 	me["TxfOpt"] = TxfOpt;
 };
@@ -253,7 +252,7 @@ void PnlWdbeVecDetail::StatApp::writeJSON(
 
 	me["srefIxWdbeVExpstate"] = VecWdbeVExpstate::getSref(ixWdbeVExpstate);
 	me["LstOptAlt"] = LstOptAlt;
-	me["LstOptNumFirstdisp"] = LstOptNumFirstdisp;
+	me["LstOptNumFirstdisp"] = (Json::Value::UInt) LstOptNumFirstdisp;
 };
 
 void PnlWdbeVecDetail::StatApp::writeXML(
@@ -454,15 +453,14 @@ string PnlWdbeVecDetail::DpchAppData::getSrefsMask() {
 };
 
 void PnlWdbeVecDetail::DpchAppData::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbeVecDetailData"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbeVecDetailData"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -524,15 +522,14 @@ string PnlWdbeVecDetail::DpchAppDo::getSrefsMask() {
 };
 
 void PnlWdbeVecDetail::DpchAppDo::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbeVecDetailDo"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbeVecDetailDo"];}();
 
 	basefound = (me != Json::nullValue);
 

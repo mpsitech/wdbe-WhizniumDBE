@@ -61,23 +61,8 @@ void WdbeWrdevBase::writeDevH(
 			, const string& Prjshort
 			, const bool Easy
 		) {
-	ListWdbeMSystem syss;
-	WdbeMSystem* sys = NULL;
-
 	ListWdbeMUnit unts;
 	WdbeMUnit* unt = NULL;
-
-	// --- include.syss
-	outfile << "// IP include.syss --- IBEGIN" << endl;
-	if (!Easy) {
-		dbswdbe->tblwdbemsystem->loadRstByVer(refWdbeMVersion, false, syss);
-
-		for (unsigned int i = 0; i < syss.nodes.size(); i++) {
-			sys = syss.nodes[i];
-			outfile << "#include \"" << sys->sref << ".h\"" << endl;
-		};
-	};
-	outfile << "// IP include.syss --- IEND" << endl;
 
 	// --- include.unts
 	outfile << "// IP include.unts --- IBEGIN" << endl;

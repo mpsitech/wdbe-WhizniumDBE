@@ -9,6 +9,8 @@
 
 #include "WdbeMFsm.h"
 
+#include "WdbeMFsm_vecs.cpp"
+
 using namespace std;
 using namespace Sbecore;
 
@@ -19,10 +21,12 @@ using namespace Sbecore;
 WdbeMFsm::WdbeMFsm(
 			const ubigint ref
 			, const ubigint refWdbeMProcess
+			, const uint ixVDbgtaptype
 		) {
 
 	this->ref = ref;
 	this->refWdbeMProcess = refWdbeMProcess;
+	this->ixVDbgtaptype = ixVDbgtaptype;
 };
 
 bool WdbeMFsm::operator==(
@@ -154,11 +158,12 @@ ubigint TblWdbeMFsm::insertRec(
 ubigint TblWdbeMFsm::insertNewRec(
 			WdbeMFsm** rec
 			, const ubigint refWdbeMProcess
+			, const uint ixVDbgtaptype
 		) {
 	ubigint retval = 0;
 	WdbeMFsm* _rec = NULL;
 
-	_rec = new WdbeMFsm(0, refWdbeMProcess);
+	_rec = new WdbeMFsm(0, refWdbeMProcess, ixVDbgtaptype);
 	insertRec(_rec);
 
 	retval = _rec->ref;
@@ -173,11 +178,12 @@ ubigint TblWdbeMFsm::appendNewRecToRst(
 			ListWdbeMFsm& rst
 			, WdbeMFsm** rec
 			, const ubigint refWdbeMProcess
+			, const uint ixVDbgtaptype
 		) {
 	ubigint retval = 0;
 	WdbeMFsm* _rec = NULL;
 
-	retval = insertNewRec(&_rec, refWdbeMProcess);
+	retval = insertNewRec(&_rec, refWdbeMProcess, ixVDbgtaptype);
 	rst.nodes.push_back(_rec);
 
 	if (rec != NULL) *rec = _rec;
@@ -268,8 +274,8 @@ MyTblWdbeMFsm::~MyTblWdbeMFsm() {
 };
 
 void MyTblWdbeMFsm::initStatements() {
-	stmtInsertRec = createStatement("INSERT INTO TblWdbeMFsm (refWdbeMProcess) VALUES (?)", false);
-	stmtUpdateRec = createStatement("UPDATE TblWdbeMFsm SET refWdbeMProcess = ? WHERE ref = ?", false);
+	stmtInsertRec = createStatement("INSERT INTO TblWdbeMFsm (refWdbeMProcess, ixVDbgtaptype) VALUES (?,?)", false);
+	stmtUpdateRec = createStatement("UPDATE TblWdbeMFsm SET refWdbeMProcess = ?, ixVDbgtaptype = ? WHERE ref = ?", false);
 	stmtRemoveRecByRef = createStatement("DELETE FROM TblWdbeMFsm WHERE ref = ?", false);
 };
 
@@ -300,6 +306,7 @@ bool MyTblWdbeMFsm::loadRecBySQL(
 
 		if (dbrow[0]) _rec->ref = atoll((char*) dbrow[0]); else _rec->ref = 0;
 		if (dbrow[1]) _rec->refWdbeMProcess = atoll((char*) dbrow[1]); else _rec->refWdbeMProcess = 0;
+		if (dbrow[2]) _rec->ixVDbgtaptype = atol((char*) dbrow[2]); else _rec->ixVDbgtaptype = 0;
 
 		retval = true;
 	};
@@ -343,6 +350,7 @@ ubigint MyTblWdbeMFsm::loadRstBySQL(
 
 			if (dbrow[0]) rec->ref = atoll((char*) dbrow[0]); else rec->ref = 0;
 			if (dbrow[1]) rec->refWdbeMProcess = atoll((char*) dbrow[1]); else rec->refWdbeMProcess = 0;
+			if (dbrow[2]) rec->ixVDbgtaptype = atol((char*) dbrow[2]); else rec->ixVDbgtaptype = 0;
 			rst.nodes.push_back(rec);
 
 			numread++;
@@ -357,10 +365,11 @@ ubigint MyTblWdbeMFsm::loadRstBySQL(
 ubigint MyTblWdbeMFsm::insertRec(
 			WdbeMFsm* rec
 		) {
-	unsigned long l[1]; my_bool n[1]; my_bool e[1];
+	unsigned long l[2]; my_bool n[2]; my_bool e[2];
 
 	MYSQL_BIND bind[] = {
-		bindUbigint(&rec->refWdbeMProcess,&(l[0]),&(n[0]),&(e[0]))
+		bindUbigint(&rec->refWdbeMProcess,&(l[0]),&(n[0]),&(e[0])),
+		bindUint(&rec->ixVDbgtaptype,&(l[1]),&(n[1]),&(e[1]))
 	};
 
 	if (mysql_stmt_bind_param(stmtInsertRec, bind)) {
@@ -388,11 +397,12 @@ void MyTblWdbeMFsm::insertRst(
 void MyTblWdbeMFsm::updateRec(
 			WdbeMFsm* rec
 		) {
-	unsigned long l[2]; my_bool n[2]; my_bool e[2];
+	unsigned long l[3]; my_bool n[3]; my_bool e[3];
 
 	MYSQL_BIND bind[] = {
 		bindUbigint(&rec->refWdbeMProcess,&(l[0]),&(n[0]),&(e[0])),
-		bindUbigint(&rec->ref,&(l[1]),&(n[1]),&(e[1]))
+		bindUint(&rec->ixVDbgtaptype,&(l[1]),&(n[1]),&(e[1])),
+		bindUbigint(&rec->ref,&(l[2]),&(n[2]),&(e[2]))
 	};
 
 	if (mysql_stmt_bind_param(stmtUpdateRec, bind)) {
@@ -447,7 +457,7 @@ bool MyTblWdbeMFsm::loadRecByPrc(
 			ubigint refWdbeMProcess
 			, WdbeMFsm** rec
 		) {
-	return loadRecBySQL("SELECT ref, refWdbeMProcess FROM TblWdbeMFsm WHERE refWdbeMProcess = " + to_string(refWdbeMProcess) + "", rec);
+	return loadRecBySQL("SELECT ref, refWdbeMProcess, ixVDbgtaptype FROM TblWdbeMFsm WHERE refWdbeMProcess = " + to_string(refWdbeMProcess) + "", rec);
 };
 
 ubigint MyTblWdbeMFsm::loadRefsByPrc(
@@ -476,12 +486,12 @@ PgTblWdbeMFsm::~PgTblWdbeMFsm() {
 };
 
 void PgTblWdbeMFsm::initStatements() {
-	createStatement("TblWdbeMFsm_insertRec", "INSERT INTO TblWdbeMFsm (refWdbeMProcess) VALUES ($1) RETURNING ref", 1);
-	createStatement("TblWdbeMFsm_updateRec", "UPDATE TblWdbeMFsm SET refWdbeMProcess = $1 WHERE ref = $2", 2);
+	createStatement("TblWdbeMFsm_insertRec", "INSERT INTO TblWdbeMFsm (refWdbeMProcess, ixVDbgtaptype) VALUES ($1,$2) RETURNING ref", 2);
+	createStatement("TblWdbeMFsm_updateRec", "UPDATE TblWdbeMFsm SET refWdbeMProcess = $1, ixVDbgtaptype = $2 WHERE ref = $3", 3);
 	createStatement("TblWdbeMFsm_removeRecByRef", "DELETE FROM TblWdbeMFsm WHERE ref = $1", 1);
 
-	createStatement("TblWdbeMFsm_loadRecByRef", "SELECT ref, refWdbeMProcess FROM TblWdbeMFsm WHERE ref = $1", 1);
-	createStatement("TblWdbeMFsm_loadRecByPrc", "SELECT ref, refWdbeMProcess FROM TblWdbeMFsm WHERE refWdbeMProcess = $1", 1);
+	createStatement("TblWdbeMFsm_loadRecByRef", "SELECT ref, refWdbeMProcess, ixVDbgtaptype FROM TblWdbeMFsm WHERE ref = $1", 1);
+	createStatement("TblWdbeMFsm_loadRecByPrc", "SELECT ref, refWdbeMProcess, ixVDbgtaptype FROM TblWdbeMFsm WHERE refWdbeMProcess = $1", 1);
 	createStatement("TblWdbeMFsm_loadRefsByPrc", "SELECT ref FROM TblWdbeMFsm WHERE refWdbeMProcess = $1", 1);
 };
 
@@ -499,11 +509,13 @@ bool PgTblWdbeMFsm::loadRec(
 
 		int fnum[] = {
 			PQfnumber(res, "ref"),
-			PQfnumber(res, "refwdbemprocess")
+			PQfnumber(res, "refwdbemprocess"),
+			PQfnumber(res, "ixvdbgtaptype")
 		};
 
 		ptr = PQgetvalue(res, 0, fnum[0]); _rec->ref = atoll(ptr);
 		ptr = PQgetvalue(res, 0, fnum[1]); _rec->refWdbeMProcess = atoll(ptr);
+		ptr = PQgetvalue(res, 0, fnum[2]); _rec->ixVDbgtaptype = atol(ptr);
 
 		retval = true;
 	};
@@ -531,7 +543,8 @@ ubigint PgTblWdbeMFsm::loadRst(
 
 		int fnum[] = {
 			PQfnumber(res, "ref"),
-			PQfnumber(res, "refwdbemprocess")
+			PQfnumber(res, "refwdbemprocess"),
+			PQfnumber(res, "ixvdbgtaptype")
 		};
 
 		while (numread < numrow) {
@@ -539,6 +552,7 @@ ubigint PgTblWdbeMFsm::loadRst(
 
 			ptr = PQgetvalue(res, numread, fnum[0]); rec->ref = atoll(ptr);
 			ptr = PQgetvalue(res, numread, fnum[1]); rec->refWdbeMProcess = atoll(ptr);
+			ptr = PQgetvalue(res, numread, fnum[2]); rec->ixVDbgtaptype = atol(ptr);
 
 			rst.nodes.push_back(rec);
 
@@ -611,16 +625,19 @@ ubigint PgTblWdbeMFsm::insertRec(
 	char* ptr;
 
 	ubigint _refWdbeMProcess = htonl64(rec->refWdbeMProcess);
+	uint _ixVDbgtaptype = htonl(rec->ixVDbgtaptype);
 
 	const char* vals[] = {
-		(char*) &_refWdbeMProcess
+		(char*) &_refWdbeMProcess,
+		(char*) &_ixVDbgtaptype
 	};
 	const int l[] = {
-		sizeof(ubigint)
+		sizeof(ubigint),
+		sizeof(uint)
 	};
-	const int f[] = {1};
+	const int f[] = {1, 1};
 
-	res = PQexecPrepared(dbs, "TblWdbeMFsm_insertRec", 1, vals, l, f, 0);
+	res = PQexecPrepared(dbs, "TblWdbeMFsm_insertRec", 2, vals, l, f, 0);
 
 	if (PQresultStatus(res) != PGRES_TUPLES_OK) {
 		string dbms = "PgTblWdbeMFsm::insertRec() / " + string(PQerrorMessage(dbs));
@@ -649,19 +666,22 @@ void PgTblWdbeMFsm::updateRec(
 	PGresult* res;
 
 	ubigint _refWdbeMProcess = htonl64(rec->refWdbeMProcess);
+	uint _ixVDbgtaptype = htonl(rec->ixVDbgtaptype);
 	ubigint _ref = htonl64(rec->ref);
 
 	const char* vals[] = {
 		(char*) &_refWdbeMProcess,
+		(char*) &_ixVDbgtaptype,
 		(char*) &_ref
 	};
 	const int l[] = {
 		sizeof(ubigint),
+		sizeof(uint),
 		sizeof(ubigint)
 	};
-	const int f[] = {1, 1};
+	const int f[] = {1, 1, 1};
 
-	res = PQexecPrepared(dbs, "TblWdbeMFsm_updateRec", 2, vals, l, f, 0);
+	res = PQexecPrepared(dbs, "TblWdbeMFsm_updateRec", 3, vals, l, f, 0);
 
 	if (PQresultStatus(res) != PGRES_COMMAND_OK) {
 		string dbms = "PgTblWdbeMFsm::updateRec() / " + string(PQerrorMessage(dbs));

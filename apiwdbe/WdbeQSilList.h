@@ -18,7 +18,7 @@
 class WdbeQSilList {
 
 public:
-	WdbeQSilList(const Sbecore::uint jnum = 0, const std::string sref = "", const std::string Title = "", const std::string Fullsref = "", const std::string srefIxVBasetype = "", const std::string titIxVBasetype = "", const std::string srefRefIxVTbl = "", const std::string titRefIxVTbl = "", const std::string stubRefUref = "", const std::string stubRefWdbeMSystem = "", const std::string stubRefWdbeMModule = "", const std::string srefKPackage = "", const std::string titSrefKPackage = "", const std::string yesnoEasy = "", const std::string srefKToolch = "", const std::string titSrefKToolch = "");
+	WdbeQSilList(const Sbecore::uint jnum = 0, const std::string sref = "", const std::string Title = "", const std::string Fullsref = "", const std::string srefIxVBasetype = "", const std::string titIxVBasetype = "", const std::string srefRefIxVTbl = "", const std::string titRefIxVTbl = "", const std::string stubRefUref = "", const std::string stubRefWdbeMModule = "", const std::string srefKPackage = "", const std::string titSrefKPackage = "", const std::string yesnoEasy = "", const std::string srefKToolch = "", const std::string titSrefKToolch = "");
 
 public:
 	Sbecore::uint jnum;
@@ -30,7 +30,6 @@ public:
 	std::string srefRefIxVTbl;
 	std::string titRefIxVTbl;
 	std::string stubRefUref;
-	std::string stubRefWdbeMSystem;
 	std::string stubRefWdbeMModule;
 	std::string srefKPackage;
 	std::string titSrefKPackage;

@@ -38,21 +38,19 @@ PnlWdbeVerRec::PnlWdbeVerRec(
 		{
 	jref = xchg->addJob(dbswdbe, this, jrefSup);
 
-	pnldetail = NULL;
-	pnl1nrelease = NULL;
-	pnlbvr1nversion = NULL;
-	pnl1nsystem = NULL;
-	pnl1nunit = NULL;
 	pnlref1nfile = NULL;
-	pnlmnlibrary = NULL;
+	pnl1nunit = NULL;
+	pnl1ncomponent = NULL;
+	pnlbvr1nversion = NULL;
+	pnldetail = NULL;
 
 	// IP constructor.cust1 --- INSERT
 
 	// IP constructor.cust2 --- INSERT
 
+	xchg->addClstn(VecWdbeVCall::CALLWDBEVER_STEEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBEVER_BVREQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBEVER_PRJEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecWdbeVCall::CALLWDBEVER_STEEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -106,29 +104,23 @@ void PnlWdbeVerRec::refresh(
 
 	if (statshr.ixWdbeVExpstate == VecWdbeVExpstate::MIND) {
 		if (pnldetail) {delete pnldetail; pnldetail = NULL;};
-		if (pnl1nrelease) {delete pnl1nrelease; pnl1nrelease = NULL;};
 		if (pnlbvr1nversion) {delete pnlbvr1nversion; pnlbvr1nversion = NULL;};
-		if (pnl1nsystem) {delete pnl1nsystem; pnl1nsystem = NULL;};
+		if (pnl1ncomponent) {delete pnl1ncomponent; pnl1ncomponent = NULL;};
 		if (pnl1nunit) {delete pnl1nunit; pnl1nunit = NULL;};
 		if (pnlref1nfile) {delete pnlref1nfile; pnlref1nfile = NULL;};
-		if (pnlmnlibrary) {delete pnlmnlibrary; pnlmnlibrary = NULL;};
 	} else {
 		if (!pnldetail) pnldetail = new PnlWdbeVerDetail(xchg, dbswdbe, jref, ixWdbeVLocale);
-		if (!pnl1nrelease) pnl1nrelease = new PnlWdbeVer1NRelease(xchg, dbswdbe, jref, ixWdbeVLocale);
 		if (!pnlbvr1nversion) pnlbvr1nversion = new PnlWdbeVerBvr1NVersion(xchg, dbswdbe, jref, ixWdbeVLocale);
-		if (!pnl1nsystem) pnl1nsystem = new PnlWdbeVer1NSystem(xchg, dbswdbe, jref, ixWdbeVLocale);
+		if (!pnl1ncomponent) pnl1ncomponent = new PnlWdbeVer1NComponent(xchg, dbswdbe, jref, ixWdbeVLocale);
 		if (!pnl1nunit) pnl1nunit = new PnlWdbeVer1NUnit(xchg, dbswdbe, jref, ixWdbeVLocale);
 		if (!pnlref1nfile) pnlref1nfile = new PnlWdbeVerRef1NFile(xchg, dbswdbe, jref, ixWdbeVLocale);
-		if (!pnlmnlibrary) pnlmnlibrary = new PnlWdbeVerMNLibrary(xchg, dbswdbe, jref, ixWdbeVLocale);
 	};
 
 	statshr.jrefDetail = ((pnldetail) ? pnldetail->jref : 0);
-	statshr.jref1NRelease = ((pnl1nrelease) ? pnl1nrelease->jref : 0);
 	statshr.jrefBvr1NVersion = ((pnlbvr1nversion) ? pnlbvr1nversion->jref : 0);
-	statshr.jref1NSystem = ((pnl1nsystem) ? pnl1nsystem->jref : 0);
+	statshr.jref1NComponent = ((pnl1ncomponent) ? pnl1ncomponent->jref : 0);
 	statshr.jref1NUnit = ((pnl1nunit) ? pnl1nunit->jref : 0);
 	statshr.jrefRef1NFile = ((pnlref1nfile) ? pnlref1nfile->jref : 0);
-	statshr.jrefMNLibrary = ((pnlmnlibrary) ? pnlmnlibrary->jref : 0);
 
 	// IP refresh --- END
 	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
@@ -156,12 +148,10 @@ void PnlWdbeVerRec::updatePreset(
 
 		if (recVer.ref != 0) {
 			if (pnldetail) pnldetail->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
-			if (pnl1nrelease) pnl1nrelease->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
 			if (pnlbvr1nversion) pnlbvr1nversion->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
-			if (pnl1nsystem) pnl1nsystem->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
+			if (pnl1ncomponent) pnl1ncomponent->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
 			if (pnl1nunit) pnl1nunit->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
 			if (pnlref1nfile) pnlref1nfile->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
-			if (pnlmnlibrary) pnlmnlibrary->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
 		};
 
 		refresh(dbswdbe, moditems);
@@ -271,15 +261,35 @@ void PnlWdbeVerRec::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBEVER_BVREQ) {
+	if (call->ixVCall == VecWdbeVCall::CALLWDBEVERUPD_REFEQ) {
+		call->abort = handleCallWdbeVerUpd_refEq(dbswdbe, call->jref);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEVER_STEEQ) {
+		call->abort = handleCallWdbeVer_steEq(dbswdbe, call->jref, call->argInv.ix, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEVER_BVREQ) {
 		call->abort = handleCallWdbeVer_bvrEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEVER_PRJEQ) {
 		call->abort = handleCallWdbeVer_prjEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEVER_STEEQ) {
-		call->abort = handleCallWdbeVer_steEq(dbswdbe, call->jref, call->argInv.ix, call->argRet.boolval);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEVERUPD_REFEQ) {
-		call->abort = handleCallWdbeVerUpd_refEq(dbswdbe, call->jref);
 	};
+};
+
+bool PnlWdbeVerRec::handleCallWdbeVerUpd_refEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+	// IP handleCallWdbeVerUpd_refEq --- INSERT
+	return retval;
+};
+
+bool PnlWdbeVerRec::handleCallWdbeVer_steEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+			, const uint ixInv
+			, bool& boolvalRet
+		) {
+	bool retval = false;
+	boolvalRet = (recVer.ixVState == ixInv); // IP handleCallWdbeVer_steEq --- LINE
+	return retval;
 };
 
 bool PnlWdbeVerRec::handleCallWdbeVer_bvrEq(
@@ -301,25 +311,5 @@ bool PnlWdbeVerRec::handleCallWdbeVer_prjEq(
 		) {
 	bool retval = false;
 	boolvalRet = (recVer.prjRefWdbeMProject == refInv); // IP handleCallWdbeVer_prjEq --- LINE
-	return retval;
-};
-
-bool PnlWdbeVerRec::handleCallWdbeVer_steEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-			, const uint ixInv
-			, bool& boolvalRet
-		) {
-	bool retval = false;
-	boolvalRet = (recVer.ixVState == ixInv); // IP handleCallWdbeVer_steEq --- LINE
-	return retval;
-};
-
-bool PnlWdbeVerRec::handleCallWdbeVerUpd_refEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-	// IP handleCallWdbeVerUpd_refEq --- INSERT
 	return retval;
 };

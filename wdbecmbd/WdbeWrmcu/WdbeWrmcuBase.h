@@ -63,7 +63,7 @@ namespace WdbeWrmcuBase {
 		std::vector<Event*> evtsSet;
 	};
 
-	void writeUntH(DbsWdbe* dbswdbe, std::fstream& outfile, WdbeMUnit* unt, ListWdbeMModule& mdls, unsigned int& snsbyte, unsigned int& evtbyte);
+	void writeUntH(DbsWdbe* dbswdbe, std::fstream& outfile, WdbeMUnit* unt, const std::string& Untsref, ListWdbeMModule& mdls, unsigned int& snsbyte, unsigned int& evtbyte);
 	void writeUntExeC(DbsWdbe* dbswdbe, std::fstream& outfile, WdbeMUnit* unt, ListWdbeMModule& mdls, const unsigned int snsbyte, const unsigned int evtbyte);
 	// IP cust --- IEND
 };

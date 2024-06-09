@@ -71,9 +71,10 @@ namespace PnlWdbePrcRec {
 		static const Sbecore::uint INITDONEREF1NVARIABLE = 4;
 		static const Sbecore::uint INITDONEMGE1NSIGNAL = 5;
 		static const Sbecore::uint INITDONEFSMFSM1NFSMSTATE = 6;
+		static const Sbecore::uint INITDONEFSMHK1NVECTOR = 7;
 
 	public:
-		StatApp(const bool initdoneDetail = false, const bool initdoneKHdltype = false, const bool initdoneRef1NSensitivity = false, const bool initdoneRef1NVariable = false, const bool initdoneMge1NSignal = false, const bool initdoneFsmFsm1NFsmstate = false);
+		StatApp(const bool initdoneDetail = false, const bool initdoneKHdltype = false, const bool initdoneRef1NSensitivity = false, const bool initdoneRef1NVariable = false, const bool initdoneMge1NSignal = false, const bool initdoneFsmFsm1NFsmstate = false, const bool initdoneFsmHk1NVector = false);
 
 	public:
 		bool initdoneDetail;
@@ -82,6 +83,7 @@ namespace PnlWdbePrcRec {
 		bool initdoneRef1NVariable;
 		bool initdoneMge1NSignal;
 		bool initdoneFsmFsm1NFsmstate;
+		bool initdoneFsmHk1NVector;
 
 	public:
 		bool readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
@@ -103,10 +105,12 @@ namespace PnlWdbePrcRec {
 		static const Sbecore::uint SCRJREFMGE1NSIGNAL = 6;
 		static const Sbecore::uint SCRJREFFSMFSM1NFSMSTATE = 7;
 		static const Sbecore::uint PNLFSMFSM1NFSMSTATEAVAIL = 8;
-		static const Sbecore::uint BUTREGULARIZEACTIVE = 9;
+		static const Sbecore::uint SCRJREFFSMHK1NVECTOR = 9;
+		static const Sbecore::uint PNLFSMHK1NVECTORAVAIL = 10;
+		static const Sbecore::uint BUTREGULARIZEACTIVE = 11;
 
 	public:
-		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const std::string& scrJrefDetail = "", const std::string& scrJrefKHdltype = "", const std::string& scrJrefRef1NSensitivity = "", const std::string& scrJrefRef1NVariable = "", const std::string& scrJrefMge1NSignal = "", const std::string& scrJrefFsmFsm1NFsmstate = "", const bool pnlfsmfsm1nfsmstateAvail = false, const bool ButRegularizeActive = true);
+		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const std::string& scrJrefDetail = "", const std::string& scrJrefKHdltype = "", const std::string& scrJrefRef1NSensitivity = "", const std::string& scrJrefRef1NVariable = "", const std::string& scrJrefMge1NSignal = "", const std::string& scrJrefFsmFsm1NFsmstate = "", const bool pnlfsmfsm1nfsmstateAvail = false, const std::string& scrJrefFsmHk1NVector = "", const bool pnlfsmhk1nvectorAvail = false, const bool ButRegularizeActive = true);
 
 	public:
 		Sbecore::uint ixWdbeVExpstate;
@@ -117,6 +121,8 @@ namespace PnlWdbePrcRec {
 		std::string scrJrefMge1NSignal;
 		std::string scrJrefFsmFsm1NFsmstate;
 		bool pnlfsmfsm1nfsmstateAvail;
+		std::string scrJrefFsmHk1NVector;
+		bool pnlfsmhk1nvectorAvail;
 		bool ButRegularizeActive;
 
 	public:

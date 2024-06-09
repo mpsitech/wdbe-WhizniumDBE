@@ -32,6 +32,9 @@
 			function handleButSigCollapseClick() {parent.parent.window.handleButCollapseClick("LstSig");};
 			function handleButSigViewClick() {parent.parent.window.handleButCrdopenClick("ButSigView");};
 			function handleButSigNewcrdClick() {parent.parent.window.handleButCrdopenClick("ButSigNewcrd");};
+			function handleButCdcExpandClick() {parent.parent.window.handleButExpandClick("LstCdc");};
+			function handleButCdcCollapseClick() {parent.parent.window.handleButCollapseClick("LstCdc");};
+			function handleButCdcViewClick() {parent.parent.window.handleButCrdopenClick("ButCdcView");};
 			function handleButPrcExpandClick() {parent.parent.window.handleButExpandClick("LstPrc");};
 			function handleButPrcCollapseClick() {parent.parent.window.handleButCollapseClick("LstPrc");};
 			function handleButPrcViewClick() {parent.parent.window.handleButCrdopenClick("ButPrcView");};
@@ -177,6 +180,21 @@
 					</td>
 				</tr>
 				<tr id="trSig2" class="hide">
+					<td colspan="3" height="67"></td>
+					<td colspan="3"></td>
+				</tr>
+				<tr id="trCdc" class="show">
+					<td height="25"></td>
+					<td id="ldynCdc" align="right">
+					</td>
+					<td></td>
+					<td id="dynCdc" rowspan="1" colspan="5">
+					</td>
+					<td></td>
+					<td id="rdynCdc" colspan="2" align="left">
+					</td>
+				</tr>
+				<tr id="trCdc2" class="hide">
 					<td colspan="3" height="67"></td>
 					<td colspan="3"></td>
 				</tr>

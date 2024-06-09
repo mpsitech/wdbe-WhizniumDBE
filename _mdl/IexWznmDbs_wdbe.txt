@@ -115,9 +115,17 @@ klst	KlstWdbeKVendor		noloc
 	full	enus	vendor
 	ImeIAMVectorTitle1.end
 	ImeIMVectoritem1.sref	Avail	Implied	Title	Comment
+	efnx
+		ImeIJMVectoritem1.srefX1RefWznmMLocale	Title	Comment
+		enus	Efinix
+		ImeIJMVectoritem1.end
 	ipsg
 		ImeIJMVectoritem1.srefX1RefWznmMLocale	Title	Comment
 		enus	Intel
+		ImeIJMVectoritem1.end
+	lttc
+		ImeIJMVectoritem1.srefX1RefWznmMLocale	Title	Comment
+		enus	Lattice
 		ImeIJMVectoritem1.end
 	mchp
 		ImeIJMVectoritem1.srefX1RefWznmMLocale	Title	Comment
@@ -157,6 +165,10 @@ main	void	0	TblWdbeMBank	bnk
 			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
 			enus	1.8V
 			ImeIJMVectoritem2.end
+		_1v8h
+			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
+			enus	1.8V (high-speed)
+			ImeIJMVectoritem2.end
 		_2v5
 			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
 			enus	2.5V
@@ -175,6 +187,23 @@ main	void	0	TblWdbeMBank	bnk
 		full	enus	identifier
 		ImeIAMTablecolTitle.end
 	klref		0	vec	KlstWdbeKMBankVoltstd	srefKVoltstd	vst	klrefsng	void		true	false
+	ImeIMTablecol.end
+main	void	0	TblWdbeMCdc	cdc
+	ImeIAMTableTitle.srefX1IxVType	srefX2RefWznmMLocale	srefIxWznmVGender	Title
+	sngfull	enus	n	clock domain crossing
+	plfull	enus	n	clock domain crossings
+	ImeIAMTableTitle.end
+	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
+	idref		0	void		ref	ref	void	void		false	false
+	tblref		193	tbl	TblWdbeMModule	refWdbeMModule	mdl	trefspec	void		true	false
+	tblsref		194	tbl	TblWdbeMSignal	fckSrefWdbeMSignal	fck	tsrefsng	void		true	true
+	tblsref		77	tbl	TblWdbeMSignal	farSrefWdbeMSignal	far	tsrefsng	void		false	false
+	tblsref		195	tbl	TblWdbeMSignal	sckSrefWdbeMSignal	sck	tsrefsng	void		true	true
+	tblsref		78	tbl	TblWdbeMSignal	sarSrefWdbeMSignal	sar	tsrefsng	void		false	false
+	dblval		0	void		Ratio	rat	void	void		false	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	clock ratio fast to slow
+		ImeIAMTablecolTitle.end
 	ImeIMTablecol.end
 main	void	0	TblWdbeMCommand	cmd
 	ImeIAMTableTitle.srefX1IxVType	srefX2RefWznmMLocale	srefIxWznmVGender	Title
@@ -247,6 +276,52 @@ main	void	0	TblWdbeMCommand	cmd
 		full	enus	comment
 		ImeIAMTablecolTitle.end
 	ImeIMTablecol.end
+main	void	0	TblWdbeMComponent	cmp
+	ImeIAMTableTitle.srefX1IxVType	srefX2RefWznmMLocale	srefIxWznmVGender	Title
+	sngfull	enus	n	component
+	plfull	enus	n	components
+	ImeIAMTableTitle.end
+	ImeIMVector2.srefIxVBasetype	sref	osrefWznmKTaggrp	srefsKOption
+	lin	VecWdbeVMComponentBasetype		filfed
+		ImeIAMVectorTitle2.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	type
+		ImeIAMVectorTitle2.end
+		ImeIMVectoritem2.sref	Avail	Implied	Title	Comment
+		dev
+			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
+			enus	device access library
+			ImeIJMVectoritem2.end
+		ezdev
+			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
+			enus	easy model device access library
+			ImeIJMVectoritem2.end
+		fpga
+			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
+			enus	FPGA code
+			ImeIJMVectoritem2.end
+		mcu
+			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
+			enus	MCU code
+			ImeIJMVectoritem2.end
+		term
+			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
+			enus	interactive terminal
+			ImeIJMVectoritem2.end
+		ImeIMVectoritem2.end
+	ImeIMVector2.end
+	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
+	idref		0	void		ref	ref	void	void		false	false
+	vecref		0	vec	VecWdbeVMComponentBasetype	ixVBasetype	typ	vreflin	void	idx	true	false
+	tblref		71	tbl	TblWdbeMVersion	refWdbeMVersion	ver	trefspec	void		true	false
+	idsref			void		sref	srf	void	void		true	true
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	identifier
+		ImeIAMTablecolTitle.end
+	txtval			void		Comment	cmt	txtlong	void		false	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	comment
+		ImeIAMTablecolTitle.end
+	ImeIMTablecol.end
 main	void	0	TblWdbeMController	ctr
 	ImeIAMTableTitle.srefX1IxVType	srefX2RefWznmMLocale	srefIxWznmVGender	Title
 	sngfull	enus	n	controller
@@ -255,7 +330,6 @@ main	void	0	TblWdbeMController	ctr
 	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
 	idref		0	void		ref	ref	void	void		false	false
 	tblref		63	tbl	TblWdbeMModule	refWdbeMModule	mdl	trefspec	void		true	true
-	tblref		59	tbl	TblWdbeMUnit	fwdRefWdbeMUnit	fwd	trefspec	void		true	false
 	txtval		0	void		Fullsref	fsr	txt50	void		true	true
 		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
 		short	enus	full id.
@@ -533,9 +607,30 @@ main	void	0	TblWdbeMFsm	fsm
 	sngfull	enus	n	finite state machine
 	plfull	enus	n	finite state machines
 	ImeIAMTableTitle.end
+	ImeIMVector2.srefIxVBasetype	sref	osrefWznmKTaggrp	srefsKOption
+	lin	VecWdbeVMFsmDbgtaptype		filfed
+		ImeIAMVectorTitle2.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	debug tap type
+		ImeIAMVectorTitle2.end
+		ImeIMVectoritem2.sref	Avail	Implied	Title	Comment
+		void
+			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
+			enus	none
+			ImeIJMVectoritem2.end
+		lin
+			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
+			enus	linear
+			ImeIJMVectoritem2.end
+		clust
+			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
+			enus	clustered
+			ImeIJMVectoritem2.end
+		ImeIMVectoritem2.end
+	ImeIMVector2.end
 	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
 	idref		0	void		ref	ref	void	void		false	false
 	tblref		74	tbl	TblWdbeMProcess	refWdbeMProcess	prc	trefspec	void		true	true
+	vecref		0	vec	VecWdbeVMFsmDbgtaptype	ixVDbgtaptype	dtt	vreflin	void		true	false
 	ImeIMTablecol.end
 main	void	0	TblWdbeMFsmstate	fst
 	ImeIAMTableTitle.srefX1IxVType	srefX2RefWznmMLocale	srefIxWznmVGender	Title
@@ -711,7 +806,7 @@ main	void	0	TblWdbeMModule	mdl
 	plfull	enus	n	modules
 	ImeIAMTableTitle.end
 	ImeIMSubset.sref	Short	Cond	Comment
-	SbsWdbeBMModuleMct	mct	!(hktEq(void)&supEq(0)&tplEq(0))&typEq(ctr|fwdctr)
+	SbsWdbeBMModuleMct	mct	!(hktEq(void)&supEq(0)&tplEq(0))&typEq(ctr)
 		ImeIAMSubsetTitle.srefX1IxVType	srefX2RefWznmMLocale	srefIxWznmVGender	Title
 		sngfull	enus	n	controller module
 		plfull	enus	n	controller modules
@@ -798,17 +893,21 @@ main	void	0	TblWdbeMModule	mdl
 			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
 			enus	controller
 			ImeIJMVectoritem2.end
-		fwdctr
-			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
-			enus	forwarding controller
-			ImeIJMVectoritem2.end
 		ectr
 			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
 			enus	easy model controller
 			ImeIJMVectoritem2.end
-		wrp
+		dbg
 			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
-			enus	wrapper
+			enus	debug
+			ImeIJMVectoritem2.end
+		dbgctr
+			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
+			enus	debug controller
+			ImeIJMVectoritem2.end
+		edbgctr
+			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
+			enus	easy model debug controller
 			ImeIJMVectoritem2.end
 		oth
 			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
@@ -1009,10 +1108,6 @@ main	void	0	TblWdbeMPort	prt
 			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
 			enus	clock
 			ImeIJMVectoritem2.end
-		rtewrp
-			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
-			enus	route to wrapper signal
-			ImeIJMVectoritem2.end
 		rtetop
 			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
 			enus	route to top module signal
@@ -1156,33 +1251,10 @@ main	void	0	TblWdbeMRelease	rls
 			enus	generate dynamic link library
 			ImeIJMVectoritem2.end
 		ImeIMVectoritem2.end
-	lin	VecWdbeVMReleaseBasetype		filfed
-		ImeIAMVectorTitle2.srefX1IxVType	srefX2RefWznmMLocale	Title
-		full	enus	type
-		ImeIAMVectorTitle2.end
-		ImeIMVectoritem2.sref	Avail	Implied	Title	Comment
-		dev
-			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
-			enus	device access library
-			ImeIJMVectoritem2.end
-		ezdev
-			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
-			enus	easy model device access library
-			ImeIJMVectoritem2.end
-		fpga
-			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
-			enus	FPGA code
-			ImeIJMVectoritem2.end
-		mcu
-			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
-			enus	MCU code
-			ImeIJMVectoritem2.end
-		ImeIMVectoritem2.end
 	ImeIMVector2.end
 	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
 	idref		0	void		ref	ref	void	void		false	false
-	vecref		0	vec	VecWdbeVMReleaseBasetype	ixVBasetype	typ	vreflin	void	idx	true	false
-	tblref		71	tbl	TblWdbeMVersion	refWdbeMVersion	ver	trefspec	void		true	false
+	tblref		199	tbl	TblWdbeMComponent	refWdbeMComponent	cmp	trefspec	void		true	false
 	tblref		72	tbl	TblWdbeMMachine	refWdbeMMachine	mch	trefspec	void		true	false
 	idsref			void		sref	srf	void	void		true	true
 		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
@@ -1331,10 +1403,6 @@ main	void	0	TblWdbeMSignal	sig
 			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
 			enus	input/output port driver
 			ImeIJMVectoritem2.end
-		psb
-			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
-			enus	pin substitute
-			ImeIJMVectoritem2.end
 		strb
 			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
 			enus	strobe
@@ -1433,44 +1501,6 @@ main	void	0	TblWdbeMSignal	sig
 	ImeIAMTableLoadfct.srefIxVLoadtype	Fctname	ldSrefWznmMTablecol	lbySrefsWznmMTablecol	ordSrefsWznmMTablecol	srefIxVLimtype
 	rst	loadRstByRetReu		refIxVTbl;refUref	Const.desc;refNum	void
 	ImeIAMTableLoadfct.end
-main	void	0	TblWdbeMSystem	sys
-	ImeIAMTableTitle.srefX1IxVType	srefX2RefWznmMLocale	srefIxWznmVGender	Title
-	sngfull	enus	n	system
-	plfull	enus	n	systems
-	ImeIAMTableTitle.end
-	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
-	idref		0	void		ref	ref	void	void		false	false
-	tblref		77	tbl	TblWdbeMVersion	refWdbeMVersion	ver	trefspec	void		true	false
-	tblref		78	tbl	TblWdbeMUnit	refWdbeMUnit	unt	trefspec	void		true	false
-	idsref			void		sref	srf	void	void		true	true
-		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
-		full	enus	identifier
-		ImeIAMTablecolTitle.end
-	txtval			void		Comment	cmt	txtlong	void		false	false
-		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
-		full	enus	comment
-		ImeIAMTablecolTitle.end
-	ImeIMTablecol.end
-main	void	0	TblWdbeMTarget	trg
-	ImeIAMTableTitle.srefX1IxVType	srefX2RefWznmMLocale	srefIxWznmVGender	Title
-	sngfull	enus	n	target
-	plfull	enus	n	targets
-	ImeIAMTableTitle.end
-	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
-	idref		0	void		ref	ref	void	void		false	false
-	tblref		79	tbl	TblWdbeMSystem	sysRefWdbeMSystem	sys	trefspec	void		true	false
-	enum		79	void		sysNum	syn	enauto	void		false	false
-	tblref		80	tbl	TblWdbeMUnit	refWdbeMUnit	unt	trefspec	void		true	false
-	idsref			void		sref	srf	void	void		true	true
-		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
-		full	enus	identifier
-		ImeIAMTablecolTitle.end
-	tblsref		141	tbl	TblWdbeMModule	rteSrefsWdbeMModule	rte	tsrefmult	void		true	false
-	txtval			void		Comment	cmt	txtlong	void		false	false
-		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
-		full	enus	comment
-		ImeIAMTablecolTitle.end
-	ImeIMTablecol.end
 main	void	0	TblWdbeMUnit	unt
 	ImeIAMTableTitle.srefX1IxVType	srefX2RefWznmMLocale	srefIxWznmVGender	Title
 	sngfull	enus	n	unit
@@ -1503,8 +1533,12 @@ main	void	0	TblWdbeMUnit	unt
 		bga132
 		bga236
 		bga320
+		bga400
 		bga484
+		bga625
 		bga672
+		bga784
+		bga900
 		lqfp48
 		qfn20
 		qfn28
@@ -1517,9 +1551,9 @@ main	void	0	TblWdbeMUnit	unt
 		full	enus	tool chain
 		ImeIAMVectorTitle2.end
 		ImeIMVectoritem2.sref	Avail	Implied	Title	Comment
-		ise
+		efinity
 			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
-			enus	Xilinx ISE
+			enus	Efinix Efinity
 			ImeIJMVectoritem2.end
 		libero
 			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
@@ -1532,6 +1566,10 @@ main	void	0	TblWdbeMUnit	unt
 		quartus
 			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
 			enus	Intel Quartus
+			ImeIJMVectoritem2.end
+		radiant
+			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
+			enus	Lattice Radiant
 			ImeIJMVectoritem2.end
 		splcty
 			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
@@ -1589,7 +1627,6 @@ main	void	0	TblWdbeMUnit	unt
 	vecref		81	vec	VecWdbeVMUnitRefTbl	refIxVTbl	ret	vreflin	void	idx	true	false
 	tblref		81	tbl		refUref	reu	trefuniv	void		true	false
 	tblref		160	tbl	TblWdbeMUnit	silRefWdbeMUnit	sil	trefspec	void		true	false
-	tblref		78	tbl	TblWdbeMSystem	refWdbeMSystem	sys	trefspec	void		true	false
 	tblref		55	tbl	TblWdbeMModule	refWdbeMModule	mdl	trefspec	void		true	false
 	idsref			void		sref	srf	void	void		true	true
 		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
@@ -1788,13 +1825,13 @@ main	void	0	TblWdbeMVector	vec
 			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
 			enus	controller
 			ImeIJMVectoritem2.end
+		fsm
+			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
+			enus	finite state machine
+			ImeIJMVectoritem2.end
 		sig
 			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
 			enus	signal
-			ImeIJMVectoritem2.end
-		sys
-			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
-			enus	system
 			ImeIJMVectoritem2.end
 		unt
 			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
@@ -1875,6 +1912,10 @@ main	void	0	TblWdbeMVersion	ver
 		newimp
 			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
 			enus	newly imported
+			ImeIJMVectoritem2.end
+		dsndeploy
+			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
+			enus	design phase, deployment information imported
 			ImeIJMVectoritem2.end
 		dsnmdlstr
 			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
@@ -2109,6 +2150,22 @@ aux	void	0	TblWdbeAMFsmstateStep	fstAstp
 	txtval			void		Ip4	ip4	txt50	void		true	false
 		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
 		full	enus	insertion point 4
+		ImeIAMTablecolTitle.end
+	txtval			void		Cond5	cn5	txtlong	void		true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	condition 5
+		ImeIAMTablecolTitle.end
+	txtval			void		Ip5	ip5	txt50	void		true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	insertion point 5
+		ImeIAMTablecolTitle.end
+	txtval			void		Cond6	cn6	txtlong	void		true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	condition 6
+		ImeIAMTablecolTitle.end
+	txtval			void		Ip6	ip6	txt50	void		true	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	insertion point 6
 		ImeIAMTablecolTitle.end
 	ImeIMTablecol.end
 aux	void	0	TblWdbeAMLibraryMakefile	libAmkf
@@ -2564,6 +2621,29 @@ rel	rel	41	TblWdbeHistRMUserUniversal	husrRunv
 	rec	loadRecByUsrMtbUnvCrd		refWdbeMUser;unvIxWdbeVMaintable;unvUref;ixWdbeVCard		void
 	refs	loadRefsByUsrMtbCrd	ref	refWdbeMUser;unvIxWdbeVMaintable;ixWdbeVCard	start.desc	limofs
 	ImeIAMTableLoadfct.end
+rel	rel	196	TblWdbeRMCdcMSignal	cdcRsig
+	ImeIMVector2.srefIxVBasetype	sref	osrefWznmKTaggrp	srefsKOption
+	lin	VecWdbeVRMCdcMSignalDir		filfed
+		ImeIAMVectorTitle2.srefX1IxVType	srefX2RefWznmMLocale	Title
+		full	enus	direction
+		ImeIAMVectorTitle2.end
+		ImeIMVectoritem2.sref	Avail	Implied	Title	Comment
+		fts
+			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
+			enus	fast to slow
+			ImeIJMVectoritem2.end
+		stf
+			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
+			enus	slow to fast
+			ImeIJMVectoritem2.end
+		ImeIMVectoritem2.end
+	ImeIMVector2.end
+	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
+	idref		0	void		ref	ref	void	void		false	false
+	tblref		197	tbl	TblWdbeMCdc	refWdbeMCdc	cdc	trefspec	void		true	false
+	tblref		198	tbl	TblWdbeMSignal	refWdbeMSignal	sig	trefspec	void		true	false
+	vecref			vec	VecWdbeVRMCdcMSignalDir	ixVDir	dir	vreflin	void	idx	false	false
+	ImeIMTablecol.end
 rel	rel	151	TblWdbeRMCommandMController	cmdRctr
 	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
 	idref		0	void		ref	ref	void	void		false	false
@@ -2571,6 +2651,12 @@ rel	rel	151	TblWdbeRMCommandMController	cmdRctr
 	tblref		153	tbl	TblWdbeMController	refWdbeMController	ctr	trefspec	void		true	false
 	tblref		154	tbl	TblWdbeMSignal	ivrRefWdbeMSignal	ivr	trefmin	void		false	false
 	tblref		155	tbl	TblWdbeMSignal	rvrRefWdbeMSignal	rvr	trefmin	void		false	false
+	ImeIMTablecol.end
+rel	rel	107	TblWdbeRMComponentMLibrary	cmpRlib
+	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
+	idref			void		ref	ref	void	void		false	false
+	tblref		108	tbl	TblWdbeMComponent	refWdbeMComponent	cmp	trefspec	void		true	false
+	tblref		109	tbl	TblWdbeMLibrary	refWdbeMLibrary	lib	trefspec	void		true	false
 	ImeIMTablecol.end
 rel	rel	130	TblWdbeRMCoreprojectMPerson	cprRprs
 	ImeIMVector2.srefIxVBasetype	sref	osrefWznmKTaggrp	srefsKOption
@@ -2612,12 +2698,6 @@ rel	rel	130	TblWdbeRMCoreprojectMPerson	cprRprs
 	tblref		131	tbl	TblWdbeMCoreproject	refWdbeMCoreproject	cpr	trefspec	void		true	false
 	tblref		132	tbl	TblWdbeMPerson	refWdbeMPerson	prs	trefspec	void		true	false
 	klref			vec	KlstWdbeKRMCoreprojectMPersonFunction	srefKFunction	fct	klrefsng	void		false	false
-	ImeIMTablecol.end
-rel	rel	107	TblWdbeRMLibraryMVersion	libRver
-	ImeIMTablecol.srefIxVBasetype	srefRefWznmMSubset	irefRefWznmMRelation	srefFctIxVTbl	srefFctUref	sref	Short	srefIxVSubtype	srefIxVAxisfct	srefsKOption	Principal	Eponymous
-	idref			void		ref	ref	void	void		false	false
-	tblref		108	tbl	TblWdbeMLibrary	refWdbeMLibrary	lib	trefspec	void		true	false
-	tblref		109	tbl	TblWdbeMVersion	refWdbeMVersion	ver	trefspec	void		true	false
 	ImeIMTablecol.end
 rel	rel	171	TblWdbeRMModuleMModule	mdlRmdl
 	ImeIMVector2.srefIxVBasetype	sref	osrefWznmKTaggrp	srefsKOption
@@ -2833,11 +2913,6 @@ ImeIMRelation.iref	srefIxVBasetype	irefRefWznmCRelation	irefSupRefWznmMRelation	
 56	j	0	0	void	TblWdbeMCoreversion		TblWdbeJMCoreversionState				pref
 57	u1nsub	0	50	sub	TblWdbeMModule	SbsWdbeBMModuleMtp	TblWdbeMFile			mtp
 58	u1nsub	0	50	sub	TblWdbeMVersion		TblWdbeMFile			ver
-59	_1n	0	0	void	TblWdbeMUnit		TblWdbeMController			fwd
-	ImeIAMRelationTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
-	fromsngfull	enus	unit forwarded to
-	toplfull	enus	forwarding controllers
-	ImeIAMRelationTitle.end
 60	a1n	0	0	void	TblWdbeMSignal		TblWdbeMCommand			ivr
 	ImeIAMRelationTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
 	fromsngfull	enus	invocation request signal
@@ -2864,7 +2939,7 @@ ImeIMRelation.iref	srefIxVBasetype	irefRefWznmCRelation	irefSupRefWznmMRelation	
 	ImeIAMRelationTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
 	fromsngfull	enus	current version
 	ImeIAMRelationTitle.end
-71	_1n	0	0	void	TblWdbeMVersion		TblWdbeMRelease				affil
+71	_1n	0	0	void	TblWdbeMVersion		TblWdbeMComponent				affil
 72	_1n	0	0	void	TblWdbeMMachine		TblWdbeMRelease
 73	inc	0	0	void	TblWdbeMModule	SbsWdbeBMModuleMib	TblWdbeMImbuf				affil
 74	inc	0	0	void	TblWdbeMProcess		TblWdbeMFsm				affil
@@ -2877,16 +2952,15 @@ ImeIMRelation.iref	srefIxVBasetype	irefRefWznmCRelation	irefSupRefWznmMRelation	
 	fromsngshort	enus	async. reset sig.
 	fromsngfull	enus	asynchronous reset signal
 	ImeIAMRelationTitle.end
-77	_1n	0	0	void	TblWdbeMVersion		TblWdbeMSystem				affil
-78	_11	0	0	void	TblWdbeMSystem		TblWdbeMUnit
+77	as1n	0	0	void	TblWdbeMSignal		TblWdbeMCdc			far
 	ImeIAMRelationTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
-	fromsngfull	enus	root to system
-	tosngfull	enus	root unit
+	fromsngshort	enus	fast async. rst. sig.
+	fromsngfull	enus	fast asynchronous reset signal
 	ImeIAMRelationTitle.end
-79	_1n	0	0	void	TblWdbeMSystem		TblWdbeMTarget			sys	enum;affil
-80	_1n	0	0	void	TblWdbeMUnit		TblWdbeMTarget
+78	as1n	0	0	void	TblWdbeMSignal		TblWdbeMCdc			sar
 	ImeIAMRelationTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
-	toplfull	enus	employment as target
+	fromsngshort	enus	slow async. rst. sig.
+	fromsngfull	enus	slow asynchronous reset signal
 	ImeIAMRelationTitle.end
 81	u1n	0	0	void			TblWdbeMUnit				affil
 	ImeIAMRelationTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
@@ -2926,13 +3000,13 @@ ImeIMRelation.iref	srefIxVBasetype	irefRefWznmCRelation	irefSupRefWznmMRelation	
 100	u1nsub	0	10	sub	TblWdbeMCoreversion		TblWdbeMModule	SbsWdbeBMModuleMod		cvr	pref
 101	aux	0	0	void	TblWdbeMMachine		TblWdbeAMMachineMakefile
 102	u1nsub	0	82	sub	TblWdbeMController		TblWdbeMVector			ctr
-103	u1nsub	0	82	sub	TblWdbeMSystem		TblWdbeMVector			sys
+103	u1nsub	0	82	sub	TblWdbeMFsm		TblWdbeMVector			fsm
 104	u1nsub	0	82	sub	TblWdbeMUnit		TblWdbeMVector			unt
 105	aux	0	0	void	TblWdbeMLibrary		TblWdbeAMLibraryMakefile
 106	_1n	0	0	void	TblWdbeMMachine		TblWdbeAMLibraryMakefile
-107	mn	0	0	void	TblWdbeMLibrary		TblWdbeMVersion		TblWdbeRMLibraryMVersion
-108	_1n	0	107	from1n	TblWdbeMLibrary		TblWdbeRMLibraryMVersion
-109	_1n	0	107	to1n	TblWdbeMVersion		TblWdbeRMLibraryMVersion
+107	mn	0	0	void	TblWdbeMComponent		TblWdbeMLibrary		TblWdbeRMComponentMLibrary
+108	_1n	0	107	from1n	TblWdbeMComponent		TblWdbeRMComponentMLibrary
+109	_1n	0	107	to1n	TblWdbeMLibrary		TblWdbeRMComponentMLibrary
 110	u1nsub11	0	82	sub11	TblWdbeMSignal		TblWdbeMVector			sig
 111	_1n	0	0	void	TblWdbeMFsm		TblWdbeMFsmstate			fsm	enum;affil
 112	clust	0	0	void	TblWdbeCGeneric		TblWdbeMGeneric
@@ -2996,10 +3070,6 @@ ImeIMRelation.iref	srefIxVBasetype	irefRefWznmCRelation	irefSupRefWznmMRelation	
 140	a1n	0	0	void	TblWdbeMSignal		TblWdbeMCommand			rer
 	ImeIAMRelationTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
 	fromsngfull	enus	(new) return request signal
-	ImeIAMRelationTitle.end
-141	asmn	0	0	void	TblWdbeMModule		TblWdbeMTarget			rte
-	ImeIAMRelationTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
-	fromplfull	enus	routing
 	ImeIAMRelationTitle.end
 142	asmn	0	0	void	TblWdbeMLibrary		TblWdbeMLibrary
 	ImeIAMRelationTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
@@ -3131,11 +3201,32 @@ ImeIMRelation.iref	srefIxVBasetype	irefRefWznmCRelation	irefSupRefWznmMRelation	
 	ImeIAMRelationTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
 	toplfull	enus	controlling modules
 	ImeIAMRelationTitle.end
+193	_1n	0	0	void	TblWdbeMModule	SbsWdbeBMModuleMod	TblWdbeMCdc				affil
+194	as1n	0	0	void	TblWdbeMSignal		TblWdbeMCdc			fck
+	ImeIAMRelationTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+	fromsngfull	enus	fast clock signal
+	ImeIAMRelationTitle.end
+195	as1n	0	0	void	TblWdbeMSignal		TblWdbeMCdc			sck
+	ImeIAMRelationTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+	fromsngfull	enus	slow clock signal
+	ImeIAMRelationTitle.end
+196	mn	0	0	void	TblWdbeMCdc		TblWdbeMSignal		TblWdbeRMCdcMSignal
+197	_1n	0	196	from1n	TblWdbeMCdc		TblWdbeRMCdcMSignal
+	ImeIAMRelationTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+	toplfull	enus	invoking controllers
+	ImeIAMRelationTitle.end
+198	_1n	0	196	to1n	TblWdbeMSignal		TblWdbeRMCdcMSignal
+	ImeIAMRelationTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+	toplfull	enus	invoked commands
+	ImeIAMRelationTitle.end
+199	_1n	0	0	void	TblWdbeMComponent		TblWdbeMRelease				affil
 ImeIMRelation.end
 ImeIMStub.srefIxVBasetype	srefRefWznmMTable	srefRefWznmMSubset	sref	Hierarch	srefRefWznmMTablecol	Localized	Example
 tco	TblWdbeMBank		StubWdbeBnkSref	false	sref	false	bank3
 cust	TblWdbeMBank		StubWdbeBnkStd	false		false	bank3 3.3V
+cust	TblWdbeMCdc		StubWdbeCdcdStd	false		false	mclk to mipiclk
 cust	TblWdbeMCommand		StubWdbeCmdStd	false		false	sync.setTon
+tco	TblWdbeMComponent		StubWdbeCmpStd	false	sref	false	ezdevwskd
 tco	TblWdbeMCoreproject		StubWdbeCprStd	false	Title	false	UART host interface
 cust	TblWdbeMCoreversion		StubWdbeCvrNo	false		false	0.1.0
 cust	TblWdbeMCoreversion		StubWdbeCvrStd	false		false	UART host interface 0.1.0
@@ -3168,7 +3259,6 @@ tco	TblWdbeMProject		StubWdbePrjStd	false	Title	false	ICARUSDetectorHardwareCont
 cust	TblWdbeMPerson		StubWdbePrsStd	false		false	Franz Kuntz
 tco	TblWdbeMPort		StubWdbePrtSref	false	sref	false	mclk
 cust	TblWdbeMPort		StubWdbePrtStd	false		false	dcx3;thetaif: mclk (input/output)
-cust	TblWdbeMRelease		StubWdbeRlsLong	false		false	ICARUSDetectorHardwareControl 0.1.0: devidhw_genio
 tco	TblWdbeMRelease		StubWdbeRlsStd	false	sref	false	devidhw_genio
 tco	TblWdbeMSegment		StubWdbeSegHsref	true	sref	false	I-II;diff
 tco	TblWdbeMSegment		StubWdbeSegSref	false	sref	false	diff
@@ -3178,9 +3268,6 @@ cust	TblWdbeMSession		StubWdbeSesMenu	false		true	user fkuntz / Franz Kuntz;logg
 cust	TblWdbeMSession		StubWdbeSesStd	false		true	01-01-2010 10:34 from 127.0.0.1
 cust	TblWdbeMSignal		StubWdbeSigStd	false		false	reqCmdToOpInv (handshake)
 tco	TblWdbeMSignal		StubWdbeSigSref	false	sref	false	dCmdbus
-tco	TblWdbeMSystem		StubWdbeSysStd	false	sref	false	SysIdhwSBasys3fwd
-tco	TblWdbeMTarget		StubWdbeTrgSref	false	sref	false	axs2.theta
-cust	TblWdbeMTarget		StubWdbeTrgStd	false		false	SysIdhwSBasys3fwd axs2.theta
 tco	TblWdbeMUnit		StubWdbeUntSref	false	Fullsref	false	UntIdhwMAxs2
 cust	TblWdbeMUnit		StubWdbeUntStd	false	Title	false	axis2 - vs. - pic16f15356-X/ss
 tco	TblWdbeMUnit	SbsWdbeBMUnitUni	StubWdbeUniStd	false	Title	false	axis2
@@ -3222,9 +3309,7 @@ StubWdbePrtSref	StubWdbeSnsStd
 StubWdbeSegHsref	StubWdbeSegHsref
 StubWdbeSegHsref	StubWdbeSegStd
 StubWdbeSigSref	StubWdbeSnsStd
-StubWdbeSysStd	StubWdbeTrgStd
 StubWdbeUntSref	StubWdbeCtrLong
 StubWdbeUsrStd	StubWdbeSesMenu
 StubWdbeVecStd	StubWdbeVitStd
-StubWdbeVerStd	StubWdbeRlsLong
 ImeIRMStubMStub.end

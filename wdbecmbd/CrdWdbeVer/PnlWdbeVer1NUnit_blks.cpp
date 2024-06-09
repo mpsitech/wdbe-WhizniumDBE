@@ -61,7 +61,7 @@ void PnlWdbeVer1NUnit::ContInf::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["numFCsiQst"] = numFCsiQst;
+	me["numFCsiQst"] = (Json::Value::UInt) numFCsiQst;
 };
 
 void PnlWdbeVer1NUnit::ContInf::writeXML(
@@ -236,15 +236,14 @@ PnlWdbeVer1NUnit::StgIac::StgIac(
 };
 
 bool PnlWdbeVer1NUnit::StgIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["StgIacWdbeVer1NUnit"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["StgIacWdbeVer1NUnit"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -286,7 +285,7 @@ void PnlWdbeVer1NUnit::StgIac::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["TcoRefWidth"] = TcoRefWidth;
+	me["TcoRefWidth"] = (Json::Value::UInt) TcoRefWidth;
 };
 
 void PnlWdbeVer1NUnit::StgIac::writeXML(
@@ -401,15 +400,14 @@ string PnlWdbeVer1NUnit::DpchAppData::getSrefsMask() {
 };
 
 void PnlWdbeVer1NUnit::DpchAppData::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbeVer1NUnitData"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbeVer1NUnitData"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -475,15 +473,14 @@ string PnlWdbeVer1NUnit::DpchAppDo::getSrefsMask() {
 };
 
 void PnlWdbeVer1NUnit::DpchAppDo::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbeVer1NUnitDo"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbeVer1NUnitDo"];}();
 
 	basefound = (me != Json::nullValue);
 

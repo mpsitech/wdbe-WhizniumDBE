@@ -33,8 +33,6 @@ WdbeQSilList::WdbeQSilList(
 			, const string titRefIxVTbl
 			, const ubigint refUref
 			, const string stubRefUref
-			, const ubigint refWdbeMSystem
-			, const string stubRefWdbeMSystem
 			, const ubigint refWdbeMModule
 			, const string stubRefWdbeMModule
 			, const string srefKPackage
@@ -59,8 +57,6 @@ WdbeQSilList::WdbeQSilList(
 	this->titRefIxVTbl = titRefIxVTbl;
 	this->refUref = refUref;
 	this->stubRefUref = stubRefUref;
-	this->refWdbeMSystem = refWdbeMSystem;
-	this->stubRefWdbeMSystem = stubRefWdbeMSystem;
 	this->refWdbeMModule = refWdbeMModule;
 	this->stubRefWdbeMModule = stubRefWdbeMModule;
 	this->srefKPackage = srefKPackage;
@@ -88,7 +84,6 @@ void WdbeQSilList::writeJSON(
 		me["ret"] = srefRefIxVTbl;
 		me["ret2"] = titRefIxVTbl;
 		me["reu"] = stubRefUref;
-		me["sys"] = stubRefWdbeMSystem;
 		me["mdl"] = stubRefWdbeMModule;
 		me["pkg"] = srefKPackage;
 		me["pkg2"] = titSrefKPackage;
@@ -104,7 +99,6 @@ void WdbeQSilList::writeJSON(
 		me["srefRefIxVTbl"] = srefRefIxVTbl;
 		me["titRefIxVTbl"] = titRefIxVTbl;
 		me["stubRefUref"] = stubRefUref;
-		me["stubRefWdbeMSystem"] = stubRefWdbeMSystem;
 		me["stubRefWdbeMModule"] = stubRefWdbeMModule;
 		me["srefKPackage"] = srefKPackage;
 		me["titSrefKPackage"] = titSrefKPackage;
@@ -133,7 +127,6 @@ void WdbeQSilList::writeXML(
 		writeString(wr, "ret", srefRefIxVTbl);
 		writeString(wr, "ret2", titRefIxVTbl);
 		writeString(wr, "reu", stubRefUref);
-		writeString(wr, "sys", stubRefWdbeMSystem);
 		writeString(wr, "mdl", stubRefWdbeMModule);
 		writeString(wr, "pkg", srefKPackage);
 		writeString(wr, "pkg2", titSrefKPackage);
@@ -149,7 +142,6 @@ void WdbeQSilList::writeXML(
 		writeString(wr, "srefRefIxVTbl", srefRefIxVTbl);
 		writeString(wr, "titRefIxVTbl", titRefIxVTbl);
 		writeString(wr, "stubRefUref", stubRefUref);
-		writeString(wr, "stubRefWdbeMSystem", stubRefWdbeMSystem);
 		writeString(wr, "stubRefWdbeMModule", stubRefWdbeMModule);
 		writeString(wr, "srefKPackage", srefKPackage);
 		writeString(wr, "titSrefKPackage", titSrefKPackage);
@@ -279,8 +271,6 @@ ubigint TblWdbeQSilList::insertNewRec(
 			, const string titRefIxVTbl
 			, const ubigint refUref
 			, const string stubRefUref
-			, const ubigint refWdbeMSystem
-			, const string stubRefWdbeMSystem
 			, const ubigint refWdbeMModule
 			, const string stubRefWdbeMModule
 			, const string srefKPackage
@@ -293,7 +283,7 @@ ubigint TblWdbeQSilList::insertNewRec(
 	ubigint retval = 0;
 	WdbeQSilList* _rec = NULL;
 
-	_rec = new WdbeQSilList(0, jref, jnum, ref, sref, Title, Fullsref, ixVBasetype, srefIxVBasetype, titIxVBasetype, refIxVTbl, srefRefIxVTbl, titRefIxVTbl, refUref, stubRefUref, refWdbeMSystem, stubRefWdbeMSystem, refWdbeMModule, stubRefWdbeMModule, srefKPackage, titSrefKPackage, Easy, yesnoEasy, srefKToolch, titSrefKToolch);
+	_rec = new WdbeQSilList(0, jref, jnum, ref, sref, Title, Fullsref, ixVBasetype, srefIxVBasetype, titIxVBasetype, refIxVTbl, srefRefIxVTbl, titRefIxVTbl, refUref, stubRefUref, refWdbeMModule, stubRefWdbeMModule, srefKPackage, titSrefKPackage, Easy, yesnoEasy, srefKToolch, titSrefKToolch);
 	insertRec(_rec);
 
 	retval = _rec->qref;
@@ -321,8 +311,6 @@ ubigint TblWdbeQSilList::appendNewRecToRst(
 			, const string titRefIxVTbl
 			, const ubigint refUref
 			, const string stubRefUref
-			, const ubigint refWdbeMSystem
-			, const string stubRefWdbeMSystem
 			, const ubigint refWdbeMModule
 			, const string stubRefWdbeMModule
 			, const string srefKPackage
@@ -335,7 +323,7 @@ ubigint TblWdbeQSilList::appendNewRecToRst(
 	ubigint retval = 0;
 	WdbeQSilList* _rec = NULL;
 
-	retval = insertNewRec(&_rec, jref, jnum, ref, sref, Title, Fullsref, ixVBasetype, srefIxVBasetype, titIxVBasetype, refIxVTbl, srefRefIxVTbl, titRefIxVTbl, refUref, stubRefUref, refWdbeMSystem, stubRefWdbeMSystem, refWdbeMModule, stubRefWdbeMModule, srefKPackage, titSrefKPackage, Easy, yesnoEasy, srefKToolch, titSrefKToolch);
+	retval = insertNewRec(&_rec, jref, jnum, ref, sref, Title, Fullsref, ixVBasetype, srefIxVBasetype, titIxVBasetype, refIxVTbl, srefRefIxVTbl, titRefIxVTbl, refUref, stubRefUref, refWdbeMModule, stubRefWdbeMModule, srefKPackage, titSrefKPackage, Easy, yesnoEasy, srefKToolch, titSrefKToolch);
 	rst.nodes.push_back(_rec);
 
 	if (rec != NULL) *rec = _rec;
@@ -406,8 +394,8 @@ MyTblWdbeQSilList::~MyTblWdbeQSilList() {
 };
 
 void MyTblWdbeQSilList::initStatements() {
-	stmtInsertRec = createStatement("INSERT INTO TblWdbeQSilList (jref, jnum, ref, sref, Title, Fullsref, ixVBasetype, refIxVTbl, refUref, refWdbeMSystem, refWdbeMModule, srefKPackage, Easy, srefKToolch) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)", false);
-	stmtUpdateRec = createStatement("UPDATE TblWdbeQSilList SET jref = ?, jnum = ?, ref = ?, sref = ?, Title = ?, Fullsref = ?, ixVBasetype = ?, refIxVTbl = ?, refUref = ?, refWdbeMSystem = ?, refWdbeMModule = ?, srefKPackage = ?, Easy = ?, srefKToolch = ? WHERE qref = ?", false);
+	stmtInsertRec = createStatement("INSERT INTO TblWdbeQSilList (jref, jnum, ref, sref, Title, Fullsref, ixVBasetype, refIxVTbl, refUref, refWdbeMModule, srefKPackage, Easy, srefKToolch) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)", false);
+	stmtUpdateRec = createStatement("UPDATE TblWdbeQSilList SET jref = ?, jnum = ?, ref = ?, sref = ?, Title = ?, Fullsref = ?, ixVBasetype = ?, refIxVTbl = ?, refUref = ?, refWdbeMModule = ?, srefKPackage = ?, Easy = ?, srefKToolch = ? WHERE qref = ?", false);
 	stmtRemoveRecByQref = createStatement("DELETE FROM TblWdbeQSilList WHERE qref = ?", false);
 	stmtRemoveRstByJref = createStatement("DELETE FROM TblWdbeQSilList WHERE jref = ?", false);
 };
@@ -448,11 +436,10 @@ bool MyTblWdbeQSilList::loadRecBySQL(
 		if (dbrow[7]) _rec->ixVBasetype = atol((char*) dbrow[7]); else _rec->ixVBasetype = 0;
 		if (dbrow[8]) _rec->refIxVTbl = atol((char*) dbrow[8]); else _rec->refIxVTbl = 0;
 		if (dbrow[9]) _rec->refUref = atoll((char*) dbrow[9]); else _rec->refUref = 0;
-		if (dbrow[10]) _rec->refWdbeMSystem = atoll((char*) dbrow[10]); else _rec->refWdbeMSystem = 0;
-		if (dbrow[11]) _rec->refWdbeMModule = atoll((char*) dbrow[11]); else _rec->refWdbeMModule = 0;
-		if (dbrow[12]) _rec->srefKPackage.assign(dbrow[12], dblengths[12]); else _rec->srefKPackage = "";
-		if (dbrow[13]) _rec->Easy = (atoi((char*) dbrow[13]) != 0); else _rec->Easy = false;
-		if (dbrow[14]) _rec->srefKToolch.assign(dbrow[14], dblengths[14]); else _rec->srefKToolch = "";
+		if (dbrow[10]) _rec->refWdbeMModule = atoll((char*) dbrow[10]); else _rec->refWdbeMModule = 0;
+		if (dbrow[11]) _rec->srefKPackage.assign(dbrow[11], dblengths[11]); else _rec->srefKPackage = "";
+		if (dbrow[12]) _rec->Easy = (atoi((char*) dbrow[12]) != 0); else _rec->Easy = false;
+		if (dbrow[13]) _rec->srefKToolch.assign(dbrow[13], dblengths[13]); else _rec->srefKToolch = "";
 
 		retval = true;
 	};
@@ -505,11 +492,10 @@ ubigint MyTblWdbeQSilList::loadRstBySQL(
 			if (dbrow[7]) rec->ixVBasetype = atol((char*) dbrow[7]); else rec->ixVBasetype = 0;
 			if (dbrow[8]) rec->refIxVTbl = atol((char*) dbrow[8]); else rec->refIxVTbl = 0;
 			if (dbrow[9]) rec->refUref = atoll((char*) dbrow[9]); else rec->refUref = 0;
-			if (dbrow[10]) rec->refWdbeMSystem = atoll((char*) dbrow[10]); else rec->refWdbeMSystem = 0;
-			if (dbrow[11]) rec->refWdbeMModule = atoll((char*) dbrow[11]); else rec->refWdbeMModule = 0;
-			if (dbrow[12]) rec->srefKPackage.assign(dbrow[12], dblengths[12]); else rec->srefKPackage = "";
-			if (dbrow[13]) rec->Easy = (atoi((char*) dbrow[13]) != 0); else rec->Easy = false;
-			if (dbrow[14]) rec->srefKToolch.assign(dbrow[14], dblengths[14]); else rec->srefKToolch = "";
+			if (dbrow[10]) rec->refWdbeMModule = atoll((char*) dbrow[10]); else rec->refWdbeMModule = 0;
+			if (dbrow[11]) rec->srefKPackage.assign(dbrow[11], dblengths[11]); else rec->srefKPackage = "";
+			if (dbrow[12]) rec->Easy = (atoi((char*) dbrow[12]) != 0); else rec->Easy = false;
+			if (dbrow[13]) rec->srefKToolch.assign(dbrow[13], dblengths[13]); else rec->srefKToolch = "";
 			rst.nodes.push_back(rec);
 
 			numread++;
@@ -524,14 +510,14 @@ ubigint MyTblWdbeQSilList::loadRstBySQL(
 ubigint MyTblWdbeQSilList::insertRec(
 			WdbeQSilList* rec
 		) {
-	unsigned long l[14]; my_bool n[14]; my_bool e[14];
+	unsigned long l[13]; my_bool n[13]; my_bool e[13];
 
 	l[3] = rec->sref.length();
 	l[4] = rec->Title.length();
 	l[5] = rec->Fullsref.length();
-	l[11] = rec->srefKPackage.length();
+	l[10] = rec->srefKPackage.length();
 	tinyint Easy = rec->Easy;
-	l[13] = rec->srefKToolch.length();
+	l[12] = rec->srefKToolch.length();
 
 	MYSQL_BIND bind[] = {
 		bindUbigint(&rec->jref,&(l[0]),&(n[0]),&(e[0])),
@@ -543,11 +529,10 @@ ubigint MyTblWdbeQSilList::insertRec(
 		bindUint(&rec->ixVBasetype,&(l[6]),&(n[6]),&(e[6])),
 		bindUint(&rec->refIxVTbl,&(l[7]),&(n[7]),&(e[7])),
 		bindUbigint(&rec->refUref,&(l[8]),&(n[8]),&(e[8])),
-		bindUbigint(&rec->refWdbeMSystem,&(l[9]),&(n[9]),&(e[9])),
-		bindUbigint(&rec->refWdbeMModule,&(l[10]),&(n[10]),&(e[10])),
-		bindCstring((char*) (rec->srefKPackage.c_str()),&(l[11]),&(n[11]),&(e[11])),
-		bindTinyint(&Easy,&(l[12]),&(n[12]),&(e[12])),
-		bindCstring((char*) (rec->srefKToolch.c_str()),&(l[13]),&(n[13]),&(e[13]))
+		bindUbigint(&rec->refWdbeMModule,&(l[9]),&(n[9]),&(e[9])),
+		bindCstring((char*) (rec->srefKPackage.c_str()),&(l[10]),&(n[10]),&(e[10])),
+		bindTinyint(&Easy,&(l[11]),&(n[11]),&(e[11])),
+		bindCstring((char*) (rec->srefKToolch.c_str()),&(l[12]),&(n[12]),&(e[12]))
 	};
 
 	if (mysql_stmt_bind_param(stmtInsertRec, bind)) {
@@ -572,14 +557,14 @@ void MyTblWdbeQSilList::insertRst(
 void MyTblWdbeQSilList::updateRec(
 			WdbeQSilList* rec
 		) {
-	unsigned long l[15]; my_bool n[15]; my_bool e[15];
+	unsigned long l[14]; my_bool n[14]; my_bool e[14];
 
 	l[3] = rec->sref.length();
 	l[4] = rec->Title.length();
 	l[5] = rec->Fullsref.length();
-	l[11] = rec->srefKPackage.length();
+	l[10] = rec->srefKPackage.length();
 	tinyint Easy = rec->Easy;
-	l[13] = rec->srefKToolch.length();
+	l[12] = rec->srefKToolch.length();
 
 	MYSQL_BIND bind[] = {
 		bindUbigint(&rec->jref,&(l[0]),&(n[0]),&(e[0])),
@@ -591,12 +576,11 @@ void MyTblWdbeQSilList::updateRec(
 		bindUint(&rec->ixVBasetype,&(l[6]),&(n[6]),&(e[6])),
 		bindUint(&rec->refIxVTbl,&(l[7]),&(n[7]),&(e[7])),
 		bindUbigint(&rec->refUref,&(l[8]),&(n[8]),&(e[8])),
-		bindUbigint(&rec->refWdbeMSystem,&(l[9]),&(n[9]),&(e[9])),
-		bindUbigint(&rec->refWdbeMModule,&(l[10]),&(n[10]),&(e[10])),
-		bindCstring((char*) (rec->srefKPackage.c_str()),&(l[11]),&(n[11]),&(e[11])),
-		bindTinyint(&Easy,&(l[12]),&(n[12]),&(e[12])),
-		bindCstring((char*) (rec->srefKToolch.c_str()),&(l[13]),&(n[13]),&(e[13])),
-		bindUbigint(&rec->qref,&(l[14]),&(n[14]),&(e[14]))
+		bindUbigint(&rec->refWdbeMModule,&(l[9]),&(n[9]),&(e[9])),
+		bindCstring((char*) (rec->srefKPackage.c_str()),&(l[10]),&(n[10]),&(e[10])),
+		bindTinyint(&Easy,&(l[11]),&(n[11]),&(e[11])),
+		bindCstring((char*) (rec->srefKToolch.c_str()),&(l[12]),&(n[12]),&(e[12])),
+		bindUbigint(&rec->qref,&(l[13]),&(n[13]),&(e[13]))
 	};
 
 	if (mysql_stmt_bind_param(stmtUpdateRec, bind)) {
@@ -685,13 +669,13 @@ PgTblWdbeQSilList::~PgTblWdbeQSilList() {
 };
 
 void PgTblWdbeQSilList::initStatements() {
-	createStatement("TblWdbeQSilList_insertRec", "INSERT INTO TblWdbeQSilList (jref, jnum, ref, sref, Title, Fullsref, ixVBasetype, refIxVTbl, refUref, refWdbeMSystem, refWdbeMModule, srefKPackage, Easy, srefKToolch) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14) RETURNING qref", 14);
-	createStatement("TblWdbeQSilList_updateRec", "UPDATE TblWdbeQSilList SET jref = $1, jnum = $2, ref = $3, sref = $4, Title = $5, Fullsref = $6, ixVBasetype = $7, refIxVTbl = $8, refUref = $9, refWdbeMSystem = $10, refWdbeMModule = $11, srefKPackage = $12, Easy = $13, srefKToolch = $14 WHERE qref = $15", 15);
+	createStatement("TblWdbeQSilList_insertRec", "INSERT INTO TblWdbeQSilList (jref, jnum, ref, sref, Title, Fullsref, ixVBasetype, refIxVTbl, refUref, refWdbeMModule, srefKPackage, Easy, srefKToolch) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13) RETURNING qref", 13);
+	createStatement("TblWdbeQSilList_updateRec", "UPDATE TblWdbeQSilList SET jref = $1, jnum = $2, ref = $3, sref = $4, Title = $5, Fullsref = $6, ixVBasetype = $7, refIxVTbl = $8, refUref = $9, refWdbeMModule = $10, srefKPackage = $11, Easy = $12, srefKToolch = $13 WHERE qref = $14", 14);
 	createStatement("TblWdbeQSilList_removeRecByQref", "DELETE FROM TblWdbeQSilList WHERE qref = $1", 1);
 	createStatement("TblWdbeQSilList_removeRstByJref", "DELETE FROM TblWdbeQSilList WHERE jref = $1", 1);
 
-	createStatement("TblWdbeQSilList_loadRecByQref", "SELECT qref, jref, jnum, ref, sref, Title, Fullsref, ixVBasetype, refIxVTbl, refUref, refWdbeMSystem, refWdbeMModule, srefKPackage, Easy, srefKToolch FROM TblWdbeQSilList WHERE qref = $1", 1);
-	createStatement("TblWdbeQSilList_loadRstByJref", "SELECT qref, jref, jnum, ref, sref, Title, Fullsref, ixVBasetype, refIxVTbl, refUref, refWdbeMSystem, refWdbeMModule, srefKPackage, Easy, srefKToolch FROM TblWdbeQSilList WHERE jref = $1 ORDER BY jnum ASC", 1);
+	createStatement("TblWdbeQSilList_loadRecByQref", "SELECT qref, jref, jnum, ref, sref, Title, Fullsref, ixVBasetype, refIxVTbl, refUref, refWdbeMModule, srefKPackage, Easy, srefKToolch FROM TblWdbeQSilList WHERE qref = $1", 1);
+	createStatement("TblWdbeQSilList_loadRstByJref", "SELECT qref, jref, jnum, ref, sref, Title, Fullsref, ixVBasetype, refIxVTbl, refUref, refWdbeMModule, srefKPackage, Easy, srefKToolch FROM TblWdbeQSilList WHERE jref = $1 ORDER BY jnum ASC", 1);
 };
 
 bool PgTblWdbeQSilList::loadRec(
@@ -717,7 +701,6 @@ bool PgTblWdbeQSilList::loadRec(
 			PQfnumber(res, "ixvbasetype"),
 			PQfnumber(res, "refixvtbl"),
 			PQfnumber(res, "refuref"),
-			PQfnumber(res, "refwdbemsystem"),
 			PQfnumber(res, "refwdbemmodule"),
 			PQfnumber(res, "srefkpackage"),
 			PQfnumber(res, "easy"),
@@ -734,11 +717,10 @@ bool PgTblWdbeQSilList::loadRec(
 		ptr = PQgetvalue(res, 0, fnum[7]); _rec->ixVBasetype = atol(ptr);
 		ptr = PQgetvalue(res, 0, fnum[8]); _rec->refIxVTbl = atol(ptr);
 		ptr = PQgetvalue(res, 0, fnum[9]); _rec->refUref = atoll(ptr);
-		ptr = PQgetvalue(res, 0, fnum[10]); _rec->refWdbeMSystem = atoll(ptr);
-		ptr = PQgetvalue(res, 0, fnum[11]); _rec->refWdbeMModule = atoll(ptr);
-		ptr = PQgetvalue(res, 0, fnum[12]); _rec->srefKPackage.assign(ptr, PQgetlength(res, 0, fnum[12]));
-		ptr = PQgetvalue(res, 0, fnum[13]); _rec->Easy = (atoi(ptr) != 0);
-		ptr = PQgetvalue(res, 0, fnum[14]); _rec->srefKToolch.assign(ptr, PQgetlength(res, 0, fnum[14]));
+		ptr = PQgetvalue(res, 0, fnum[10]); _rec->refWdbeMModule = atoll(ptr);
+		ptr = PQgetvalue(res, 0, fnum[11]); _rec->srefKPackage.assign(ptr, PQgetlength(res, 0, fnum[11]));
+		ptr = PQgetvalue(res, 0, fnum[12]); _rec->Easy = (atoi(ptr) != 0);
+		ptr = PQgetvalue(res, 0, fnum[13]); _rec->srefKToolch.assign(ptr, PQgetlength(res, 0, fnum[13]));
 
 		retval = true;
 	};
@@ -775,7 +757,6 @@ ubigint PgTblWdbeQSilList::loadRst(
 			PQfnumber(res, "ixvbasetype"),
 			PQfnumber(res, "refixvtbl"),
 			PQfnumber(res, "refuref"),
-			PQfnumber(res, "refwdbemsystem"),
 			PQfnumber(res, "refwdbemmodule"),
 			PQfnumber(res, "srefkpackage"),
 			PQfnumber(res, "easy"),
@@ -795,11 +776,10 @@ ubigint PgTblWdbeQSilList::loadRst(
 			ptr = PQgetvalue(res, numread, fnum[7]); rec->ixVBasetype = atol(ptr);
 			ptr = PQgetvalue(res, numread, fnum[8]); rec->refIxVTbl = atol(ptr);
 			ptr = PQgetvalue(res, numread, fnum[9]); rec->refUref = atoll(ptr);
-			ptr = PQgetvalue(res, numread, fnum[10]); rec->refWdbeMSystem = atoll(ptr);
-			ptr = PQgetvalue(res, numread, fnum[11]); rec->refWdbeMModule = atoll(ptr);
-			ptr = PQgetvalue(res, numread, fnum[12]); rec->srefKPackage.assign(ptr, PQgetlength(res, numread, fnum[12]));
-			ptr = PQgetvalue(res, numread, fnum[13]); rec->Easy = (atoi(ptr) != 0);
-			ptr = PQgetvalue(res, numread, fnum[14]); rec->srefKToolch.assign(ptr, PQgetlength(res, numread, fnum[14]));
+			ptr = PQgetvalue(res, numread, fnum[10]); rec->refWdbeMModule = atoll(ptr);
+			ptr = PQgetvalue(res, numread, fnum[11]); rec->srefKPackage.assign(ptr, PQgetlength(res, numread, fnum[11]));
+			ptr = PQgetvalue(res, numread, fnum[12]); rec->Easy = (atoi(ptr) != 0);
+			ptr = PQgetvalue(res, numread, fnum[13]); rec->srefKToolch.assign(ptr, PQgetlength(res, numread, fnum[13]));
 
 			rst.nodes.push_back(rec);
 
@@ -898,7 +878,6 @@ ubigint PgTblWdbeQSilList::insertRec(
 	uint _ixVBasetype = htonl(rec->ixVBasetype);
 	uint _refIxVTbl = htonl(rec->refIxVTbl);
 	ubigint _refUref = htonl64(rec->refUref);
-	ubigint _refWdbeMSystem = htonl64(rec->refWdbeMSystem);
 	ubigint _refWdbeMModule = htonl64(rec->refWdbeMModule);
 	smallint _Easy = htons((smallint) rec->Easy);
 
@@ -912,7 +891,6 @@ ubigint PgTblWdbeQSilList::insertRec(
 		(char*) &_ixVBasetype,
 		(char*) &_refIxVTbl,
 		(char*) &_refUref,
-		(char*) &_refWdbeMSystem,
 		(char*) &_refWdbeMModule,
 		rec->srefKPackage.c_str(),
 		(char*) &_Easy,
@@ -929,14 +907,13 @@ ubigint PgTblWdbeQSilList::insertRec(
 		sizeof(uint),
 		sizeof(ubigint),
 		sizeof(ubigint),
-		sizeof(ubigint),
 		0,
 		sizeof(smallint),
 		0
 	};
-	const int f[] = {1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, 0};
+	const int f[] = {1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0};
 
-	res = PQexecPrepared(dbs, "TblWdbeQSilList_insertRec", 14, vals, l, f, 0);
+	res = PQexecPrepared(dbs, "TblWdbeQSilList_insertRec", 13, vals, l, f, 0);
 
 	if (PQresultStatus(res) != PGRES_TUPLES_OK)	{
 		string dbms = "PgTblWdbeQSilList::insertRec() / " + string(PQerrorMessage(dbs));
@@ -967,7 +944,6 @@ void PgTblWdbeQSilList::updateRec(
 	uint _ixVBasetype = htonl(rec->ixVBasetype);
 	uint _refIxVTbl = htonl(rec->refIxVTbl);
 	ubigint _refUref = htonl64(rec->refUref);
-	ubigint _refWdbeMSystem = htonl64(rec->refWdbeMSystem);
 	ubigint _refWdbeMModule = htonl64(rec->refWdbeMModule);
 	smallint _Easy = htons((smallint) rec->Easy);
 	ubigint _qref = htonl64(rec->qref);
@@ -982,7 +958,6 @@ void PgTblWdbeQSilList::updateRec(
 		(char*) &_ixVBasetype,
 		(char*) &_refIxVTbl,
 		(char*) &_refUref,
-		(char*) &_refWdbeMSystem,
 		(char*) &_refWdbeMModule,
 		rec->srefKPackage.c_str(),
 		(char*) &_Easy,
@@ -1000,15 +975,14 @@ void PgTblWdbeQSilList::updateRec(
 		sizeof(uint),
 		sizeof(ubigint),
 		sizeof(ubigint),
-		sizeof(ubigint),
 		0,
 		sizeof(smallint),
 		0,
 		sizeof(ubigint)
 	};
-	const int f[] = {1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 1, 0, 1, 0, 1};
+	const int f[] = {1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 1};
 
-	res = PQexecPrepared(dbs, "TblWdbeQSilList_updateRec", 15, vals, l, f, 0);
+	res = PQexecPrepared(dbs, "TblWdbeQSilList_updateRec", 14, vals, l, f, 0);
 
 	if (PQresultStatus(res) != PGRES_COMMAND_OK) {
 		string dbms = "PgTblWdbeQSilList::updateRec() / " + string(PQerrorMessage(dbs));

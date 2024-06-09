@@ -78,7 +78,10 @@ unsigned int WdbePrctree::Ipformat::get(
 		else if (ext == "sql") ipfmt = SQL;
 		else if (ext == "vhd") ipfmt = SQL;
 		else if (ext == "sh") ipfmt = MSH;
+		else if (ext == "pdc") ipfmt = MSH;
+		else if (ext == "isf") ipfmt = MSH;
 		else if (ext == "ucf") ipfmt = MSH;
+		else if (ext == "xdc") ipfmt = MSH;
 		else if (ext == "css") ipfmt = CSS;
 
 	} else if (filename.find("Makefile") == 0) {

@@ -94,7 +94,7 @@ uint DlgWdbeVerFinmod::VecVSge::getIx(
 
 	if (s == "idle") return IDLE;
 	if (s == "alrwer") return ALRWER;
-	if (s == "gentst") return GENTST;
+	if (s == "genaux") return GENAUX;
 	if (s == "genwri") return GENWRI;
 	if (s == "asmlfi") return ASMLFI;
 	if (s == "gensv") return GENSV;
@@ -110,7 +110,7 @@ string DlgWdbeVerFinmod::VecVSge::getSref(
 		) {
 	if (ix == IDLE) return("idle");
 	if (ix == ALRWER) return("alrwer");
-	if (ix == GENTST) return("gentst");
+	if (ix == GENAUX) return("genaux");
 	if (ix == GENWRI) return("genwri");
 	if (ix == ASMLFI) return("asmlfi");
 	if (ix == GENSV) return("gensv");

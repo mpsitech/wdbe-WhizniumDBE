@@ -271,18 +271,16 @@ set<uint> PnlWdbeRlsList::StatShr::diff(
 
 PnlWdbeRlsList::StgIac::StgIac(
 			const uint TcoSrfWidth
-			, const uint TcoTypWidth
-			, const uint TcoVerWidth
+			, const uint TcoCmpWidth
 			, const uint TcoMchWidth
 		) :
 			Block()
 		{
 	this->TcoSrfWidth = TcoSrfWidth;
-	this->TcoTypWidth = TcoTypWidth;
-	this->TcoVerWidth = TcoVerWidth;
+	this->TcoCmpWidth = TcoCmpWidth;
 	this->TcoMchWidth = TcoMchWidth;
 
-	mask = {TCOSRFWIDTH, TCOTYPWIDTH, TCOVERWIDTH, TCOMCHWIDTH};
+	mask = {TCOSRFWIDTH, TCOCMPWIDTH, TCOMCHWIDTH};
 };
 
 bool PnlWdbeRlsList::StgIac::readXML(
@@ -303,8 +301,7 @@ bool PnlWdbeRlsList::StgIac::readXML(
 
 	if (basefound) {
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoSrfWidth", TcoSrfWidth)) add(TCOSRFWIDTH);
-		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoTypWidth", TcoTypWidth)) add(TCOTYPWIDTH);
-		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoVerWidth", TcoVerWidth)) add(TCOVERWIDTH);
+		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoCmpWidth", TcoCmpWidth)) add(TCOCMPWIDTH);
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TcoMchWidth", TcoMchWidth)) add(TCOMCHWIDTH);
 	};
 
@@ -324,8 +321,7 @@ void PnlWdbeRlsList::StgIac::writeXML(
 
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
 		writeUintAttr(wr, itemtag, "sref", "TcoSrfWidth", TcoSrfWidth);
-		writeUintAttr(wr, itemtag, "sref", "TcoTypWidth", TcoTypWidth);
-		writeUintAttr(wr, itemtag, "sref", "TcoVerWidth", TcoVerWidth);
+		writeUintAttr(wr, itemtag, "sref", "TcoCmpWidth", TcoCmpWidth);
 		writeUintAttr(wr, itemtag, "sref", "TcoMchWidth", TcoMchWidth);
 	xmlTextWriterEndElement(wr);
 };
@@ -336,8 +332,7 @@ set<uint> PnlWdbeRlsList::StgIac::comm(
 	set<uint> items;
 
 	if (TcoSrfWidth == comp->TcoSrfWidth) insert(items, TCOSRFWIDTH);
-	if (TcoTypWidth == comp->TcoTypWidth) insert(items, TCOTYPWIDTH);
-	if (TcoVerWidth == comp->TcoVerWidth) insert(items, TCOVERWIDTH);
+	if (TcoCmpWidth == comp->TcoCmpWidth) insert(items, TCOCMPWIDTH);
 	if (TcoMchWidth == comp->TcoMchWidth) insert(items, TCOMCHWIDTH);
 
 	return(items);
@@ -351,7 +346,7 @@ set<uint> PnlWdbeRlsList::StgIac::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {TCOSRFWIDTH, TCOTYPWIDTH, TCOVERWIDTH, TCOMCHWIDTH};
+	diffitems = {TCOSRFWIDTH, TCOCMPWIDTH, TCOMCHWIDTH};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -370,8 +365,7 @@ PnlWdbeRlsList::Tag::Tag(
 			, const string& TxtShowing1
 			, const string& TxtShowing2
 			, const string& TcoSrf
-			, const string& TcoTyp
-			, const string& TcoVer
+			, const string& TcoCmp
 			, const string& TcoMch
 		) :
 			Block()
@@ -384,11 +378,10 @@ PnlWdbeRlsList::Tag::Tag(
 	this->TxtShowing1 = TxtShowing1;
 	this->TxtShowing2 = TxtShowing2;
 	this->TcoSrf = TcoSrf;
-	this->TcoTyp = TcoTyp;
-	this->TcoVer = TcoVer;
+	this->TcoCmp = TcoCmp;
 	this->TcoMch = TcoMch;
 
-	mask = {CPT, TXTFOR, TXTRECORD1, TXTRECORD2, TRS, TXTSHOWING1, TXTSHOWING2, TCOSRF, TCOTYP, TCOVER, TCOMCH};
+	mask = {CPT, TXTFOR, TXTRECORD1, TXTRECORD2, TRS, TXTSHOWING1, TXTSHOWING2, TCOSRF, TCOCMP, TCOMCH};
 };
 
 bool PnlWdbeRlsList::Tag::readXML(
@@ -416,8 +409,7 @@ bool PnlWdbeRlsList::Tag::readXML(
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "TxtShowing1", TxtShowing1)) add(TXTSHOWING1);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "TxtShowing2", TxtShowing2)) add(TXTSHOWING2);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "TcoSrf", TcoSrf)) add(TCOSRF);
-		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "TcoTyp", TcoTyp)) add(TCOTYP);
-		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "TcoVer", TcoVer)) add(TCOVER);
+		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "TcoCmp", TcoCmp)) add(TCOCMP);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "TcoMch", TcoMch)) add(TCOMCH);
 	};
 

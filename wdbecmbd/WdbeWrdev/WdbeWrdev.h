@@ -17,12 +17,12 @@
 namespace WdbeWrdev {
 
 	// IP cust --- IBEGIN
-	void writeVecH(DbsWdbe* dbswdbe, std::fstream& outfile, WdbeMVector* vec, WdbeMSystem* sys, WdbeMUnit* unt, WdbeMController* ctr, const bool subclass, const unsigned int subil = 1);
-	void writeVecCpp(DbsWdbe* dbswdbe, std::fstream& outfile, WdbeMVector* vec, WdbeMSystem* sys, WdbeMUnit* unt, WdbeMController* ctr, const bool subclass);
+	void writeVecH(DbsWdbe* dbswdbe, std::fstream& outfile, WdbeMVector* vec, WdbeMUnit* unt, WdbeMController* ctr, const bool subclass, const unsigned int subil = 1);
+	void writeVecCpp(DbsWdbe* dbswdbe, std::fstream& outfile, WdbeMVector* vec, WdbeMUnit* unt, WdbeMController* ctr, const bool subclass);
 
-	void analyzeVec(DbsWdbe* dbswdbe, WdbeMVector* vec, WdbeMSystem* sys, WdbeMUnit* unt, WdbeMController* ctr, const bool subclass, ListWdbeMVectoritem& vits, std::string& supsref, std::string& subsref, bool& tix, bool& ns, bool& notit, bool& cmt, bool& appfed, bool& filfed, std::string& ixtype, std::string& ixvar, std::string& clsnstype);
-	void getVecSupsubsref(WdbeMVector* vec, WdbeMSystem* sys, WdbeMUnit* unt, WdbeMController* ctr, std::string& supsref, std::string& subsref);
-	std::string getVitConst(WdbeMVectoritem* vit, const bool tix);
+	void analyzeVec(DbsWdbe* dbswdbe, WdbeMVector* vec, WdbeMUnit* unt, WdbeMController* ctr, const bool subclass, ListWdbeMVectoritem& vits, std::string& supsref, std::string& subsref, bool& lin, bool& tix, bool& ns, bool& notit, bool& cmt, bool& appfed, bool& filfed, std::string& ixtype, std::string& ixvar, std::string& icsvar, std::string& clsnstype);
+	void getVecSupsubsref(WdbeMVector* vec, WdbeMUnit* unt, WdbeMController* ctr, std::string& supsref, std::string& subsref);
+	std::string getVitConst(const std::string& vitsref, const bool tix);
 
 	void writeSpeccmdH(DbsWdbe* dbswdbe, std::fstream& outfile, WdbeMCommand* cmd, ListWdbeAMCommandRetpar& rpas, const std::string& supsref, const std::string& subsref);
 

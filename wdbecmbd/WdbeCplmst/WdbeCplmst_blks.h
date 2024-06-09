@@ -13,9 +13,9 @@
 #include "Wdbe.h"
 
 /**
-	* DpchInvWdbeCplmstCtrEctr
+	* DpchInvWdbeCplmstCtrEctrHostifEhostif
 	*/
-class DpchInvWdbeCplmstCtrEctr : public DpchInvWdbe {
+class DpchInvWdbeCplmstCtrEctrHostifEhostif : public DpchInvWdbe {
 
 public:
 	static const Sbecore::uint SCROREF = 1;
@@ -25,30 +25,7 @@ public:
 	static const Sbecore::uint REFWDBEMMODULE = 3;
 
 public:
-	DpchInvWdbeCplmstCtrEctr(const Sbecore::ubigint oref = 0, const Sbecore::ubigint jref = 0, const Sbecore::ubigint refWdbeMModule = 0);
-
-public:
-	Sbecore::ubigint refWdbeMModule;
-
-public:
-	void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
-	void writeXML(xmlTextWriter* wr);
-};
-
-/**
-	* DpchInvWdbeCplmstFwdctr
-	*/
-class DpchInvWdbeCplmstFwdctr : public DpchInvWdbe {
-
-public:
-	static const Sbecore::uint SCROREF = 1;
-	static const Sbecore::uint OREF = 1;
-	static const Sbecore::uint SCRJREF = 2;
-	static const Sbecore::uint JREF = 2;
-	static const Sbecore::uint REFWDBEMMODULE = 3;
-
-public:
-	DpchInvWdbeCplmstFwdctr(const Sbecore::ubigint oref = 0, const Sbecore::ubigint jref = 0, const Sbecore::ubigint refWdbeMModule = 0);
+	DpchInvWdbeCplmstCtrEctrHostifEhostif(const Sbecore::ubigint oref = 0, const Sbecore::ubigint jref = 0, const Sbecore::ubigint refWdbeMModule = 0);
 
 public:
 	Sbecore::ubigint refWdbeMModule;
@@ -100,29 +77,6 @@ public:
 
 public:
 	std::string logfile;
-
-public:
-	void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
-	void writeXML(xmlTextWriter* wr);
-};
-
-/**
-	* DpchInvWdbeCplmstSys
-	*/
-class DpchInvWdbeCplmstSys : public DpchInvWdbe {
-
-public:
-	static const Sbecore::uint SCROREF = 1;
-	static const Sbecore::uint OREF = 1;
-	static const Sbecore::uint SCRJREF = 2;
-	static const Sbecore::uint JREF = 2;
-	static const Sbecore::uint REFWDBEMVERSION = 3;
-
-public:
-	DpchInvWdbeCplmstSys(const Sbecore::ubigint oref = 0, const Sbecore::ubigint jref = 0, const Sbecore::ubigint refWdbeMVersion = 0);
-
-public:
-	Sbecore::ubigint refWdbeMVersion;
 
 public:
 	void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);

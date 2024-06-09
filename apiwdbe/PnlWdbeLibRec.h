@@ -67,15 +67,15 @@ namespace PnlWdbeLibRec {
 	public:
 		static const Sbecore::uint INITDONEDETAIL = 1;
 		static const Sbecore::uint INITDONEAMAKEFILE = 2;
-		static const Sbecore::uint INITDONEMNVERSION = 3;
+		static const Sbecore::uint INITDONEMNCOMPONENT = 3;
 
 	public:
-		StatApp(const bool initdoneDetail = false, const bool initdoneAMakefile = false, const bool initdoneMNVersion = false);
+		StatApp(const bool initdoneDetail = false, const bool initdoneAMakefile = false, const bool initdoneMNComponent = false);
 
 	public:
 		bool initdoneDetail;
 		bool initdoneAMakefile;
-		bool initdoneMNVersion;
+		bool initdoneMNComponent;
 
 	public:
 		bool readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
@@ -92,17 +92,17 @@ namespace PnlWdbeLibRec {
 		static const Sbecore::uint IXWDBEVEXPSTATE = 1;
 		static const Sbecore::uint SCRJREFDETAIL = 2;
 		static const Sbecore::uint SCRJREFAMAKEFILE = 3;
-		static const Sbecore::uint SCRJREFMNVERSION = 4;
+		static const Sbecore::uint SCRJREFMNCOMPONENT = 4;
 		static const Sbecore::uint BUTREGULARIZEACTIVE = 5;
 
 	public:
-		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const std::string& scrJrefDetail = "", const std::string& scrJrefAMakefile = "", const std::string& scrJrefMNVersion = "", const bool ButRegularizeActive = true);
+		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const std::string& scrJrefDetail = "", const std::string& scrJrefAMakefile = "", const std::string& scrJrefMNComponent = "", const bool ButRegularizeActive = true);
 
 	public:
 		Sbecore::uint ixWdbeVExpstate;
 		std::string scrJrefDetail;
 		std::string scrJrefAMakefile;
-		std::string scrJrefMNVersion;
+		std::string scrJrefMNComponent;
 		bool ButRegularizeActive;
 
 	public:

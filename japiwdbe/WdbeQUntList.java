@@ -24,7 +24,6 @@ public class WdbeQUntList {
 				, String srefRefIxVTbl
 				, String titRefIxVTbl
 				, String stubRefUref
-				, String stubRefWdbeMSystem
 				, String stubRefWdbeMModule
 				, String srefKPackage
 				, String titSrefKPackage
@@ -41,7 +40,6 @@ public class WdbeQUntList {
 		this.srefRefIxVTbl = srefRefIxVTbl;
 		this.titRefIxVTbl = titRefIxVTbl;
 		this.stubRefUref = stubRefUref;
-		this.stubRefWdbeMSystem = stubRefWdbeMSystem;
 		this.stubRefWdbeMModule = stubRefWdbeMModule;
 		this.srefKPackage = srefKPackage;
 		this.titSrefKPackage = titSrefKPackage;
@@ -59,7 +57,6 @@ public class WdbeQUntList {
 	public String srefRefIxVTbl;
 	public String titRefIxVTbl;
 	public String stubRefUref;
-	public String stubRefWdbeMSystem;
 	public String stubRefWdbeMModule;
 	public String srefKPackage;
 	public String titSrefKPackage;
@@ -83,7 +80,6 @@ public class WdbeQUntList {
 			srefRefIxVTbl = Xmlio.extractStringUclc(doc, basexpath, "srefRefIxVTbl", "ret", null, 0);
 			titRefIxVTbl = Xmlio.extractStringUclc(doc, basexpath, "titRefIxVTbl", "ret2", null, 0);
 			stubRefUref = Xmlio.extractStringUclc(doc, basexpath, "stubRefUref", "reu", null, 0);
-			stubRefWdbeMSystem = Xmlio.extractStringUclc(doc, basexpath, "stubRefWdbeMSystem", "sys", null, 0);
 			stubRefWdbeMModule = Xmlio.extractStringUclc(doc, basexpath, "stubRefWdbeMModule", "mdl", null, 0);
 			srefKPackage = Xmlio.extractStringUclc(doc, basexpath, "srefKPackage", "pkg", null, 0);
 			titSrefKPackage = Xmlio.extractStringUclc(doc, basexpath, "titSrefKPackage", "pkg2", null, 0);

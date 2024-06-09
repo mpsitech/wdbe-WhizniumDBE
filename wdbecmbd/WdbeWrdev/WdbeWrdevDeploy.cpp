@@ -39,12 +39,12 @@ DpchRetWdbe* WdbeWrdevDeploy::run(
 
 	// IP run --- IBEGIN
 	vector<ubigint> refs;
+	ubigint ref;
 
 	WdbeMRelease* rls = NULL;
 
 	vector<ubigint> hrefsMch;
 
-	ListWdbeMSystem syss;
 	ListWdbeMUnit unts;
 
 	set<string> incpaths;
@@ -59,19 +59,21 @@ DpchRetWdbe* WdbeWrdevDeploy::run(
 		dbswdbe->tblwdbemmachine->loadHrefsup(rls->refWdbeMMachine, hrefsMch);
 
 		if (Easy) {
-			dbswdbe->tblwdbemunit->loadRstBySQL("SELECT * FROM TblWdbeMUnit WHERE refIxVTbl = " + to_string(VecWdbeVMUnitRefTbl::VER) + " AND refUref = " + to_string(rls->refWdbeMVersion) + " AND Easy = 1 ORDER BY sref ASC", false, unts);
+			dbswdbe->tblwdbemunit->loadRstBySQL("SELECT TblWdbeMUnit.* FROM TblWdbeMComponent, TblWdbeMUnit WHERE TblWdbeMUnit.refIxVTbl = " + to_string(VecWdbeVMUnitRefTbl::VER)
+						+ " AND TblWdbeMUnit.refUref = TblWdbeMComponent.refWdbeMVersion AND TblWdbeMComponent.ref = " + to_string(rls->refWdbeMComponent) + " AND TblWdbeMUnit.Easy = 1 ORDER BY TblWdbeMUnit.sref ASC", false, unts);
 		} else {
-			dbswdbe->tblwdbemsystem->loadRstBySQL("SELECT * FROM TblWdbeMSystem WHERE refWdbeMVersion = " + to_string(rls->refWdbeMVersion) + " ORDER BY sref ASC", false, syss);
-			dbswdbe->tblwdbemunit->loadRstBySQL("SELECT * FROM TblWdbeMUnit WHERE refIxVTbl = " + to_string(VecWdbeVMUnitRefTbl::VER) + " AND refUref = " + to_string(rls->refWdbeMVersion) + " ORDER BY sref ASC", false, unts);
+			dbswdbe->tblwdbemunit->loadRstBySQL("SELECT TblWdbeMUnit.* FROM TblWdbeMComponent, TblWdbeMUnit WHERE TblWdbeMUnit.refIxVTbl = " + to_string(VecWdbeVMUnitRefTbl::VER)
+						+ " AND TblWdbeMUnit.refUref = TblWdbeMComponent.refWdbeMVersion AND TblWdbeMComponent.ref = " + to_string(rls->refWdbeMComponent) + " ORDER BY TblWdbeMUnit.sref ASC", false, unts);
 		};
 
 		// libraries
-		addLibBySref(dbswdbe, "dbecore", rls->refWdbeMMachine, hrefsMch, incpaths);
+		Wdbe::addLibBySref(dbswdbe, "dbecore", rls->refWdbeMMachine, hrefsMch, incpaths);
 
-		dbswdbe->tblwdbermlibrarymversion->loadVersByLib(rls->refWdbeMVersion, false, refs);
-		for (unsigned int i = 0; i < refs.size(); i++) addLibByRef(dbswdbe, refs[i], rls->refWdbeMMachine, hrefsMch, incpaths);
+		dbswdbe->tblwdbermcomponentmlibrary->loadLibsByCmp(rls->refWdbeMComponent, false, refs);
+		for (unsigned int i = 0; i < refs.size(); i++) Wdbe::addLibByRef(dbswdbe, refs[i], rls->refWdbeMMachine, hrefsMch, incpaths);
 
-		Prjshort = Wdbe::getPrjshort(dbswdbe, rls->refWdbeMVersion);
+		dbswdbe->loadRefBySQL("SELECT refWdbeMVersion FROM TblWdbeMComponent WHERE ref = " + to_string(rls->refWdbeMComponent), ref);
+		Prjshort = Wdbe::getPrjshort(dbswdbe, ref);
 
 		// checkout.sh
 		s = xchg->tmppath + "/" + folder + "/checkout.sh.ip";
@@ -82,7 +84,7 @@ DpchRetWdbe* WdbeWrdevDeploy::run(
 		// Makefile
 		s = xchg->tmppath + "/" + folder + "/Makefile.ip";
 		outfile.open(s.c_str(), ios::out);
-		writeMakefile(dbswdbe, outfile, rls, hrefsMch, syss, unts, incpaths);
+		writeMakefile(dbswdbe, outfile, rls, hrefsMch, unts, incpaths);
 		outfile.close();
 
 		delete rls;
@@ -125,13 +127,9 @@ void WdbeWrdevDeploy::writeMakefile(
 			, fstream& outfile
 			, WdbeMRelease* rls
 			, vector<ubigint>& hrefsMch
-			, ListWdbeMSystem& syss
 			, ListWdbeMUnit& unts
 			, set<string>& incpaths
 		) {
-
-	WdbeMSystem* sys = NULL;
-
 	WdbeMUnit* unt = NULL;
 
 	ListWdbeMController ctrs;
@@ -190,18 +188,11 @@ void WdbeWrdevDeploy::writeMakefile(
 
 	// --- incpath.mchspec
 	outfile << "# IP incpath.mchspec --- IBEGIN" << endl;
-	if (Wdbe::getMchmkf(dbswdbe, rls->refWdbeMMachine, hrefsMch, "incpath", s)) outfile << "INCPATH += " << pathToPathstr(s, inceq) << endl;
+	if (Wdbe::getMchmkf(dbswdbe, rls->refWdbeMMachine, hrefsMch, "incpath", s)) outfile << "INCPATH += " << Wdbe::pathToPathstr(s, false, inceq) << endl;
 	outfile << "# IP incpath.mchspec --- IEND" << endl;
 
 	// --- objs
 	outfile << "# IP objs --- IBEGIN" << endl;
-	outfile << "OBJS +=";
-	for (unsigned int i = 0; i < syss.nodes.size(); i++) {
-		sys = syss.nodes[i];
-		outfile << " " << sys->sref << ".o";
-	};
-	outfile << endl;
-
 	for (unsigned int i = 0; i < unts.nodes.size(); i++) {
 		unt = unts.nodes[i];
 
@@ -226,57 +217,5 @@ void WdbeWrdevDeploy::writeMakefile(
 	// --- instdynlib*
 	if (dynlib) outfile << "# IP instdynlib --- AFFIRM" << endl;
 	else outfile << "# IP instdynlib --- REMOVE" << endl;
-};
-
-void WdbeWrdevDeploy::addLibBySref(
-			DbsWdbe* dbswdbe
-			, const string& srefLib
-			, const ubigint refMch
-			, vector<ubigint>& hrefsMch
-			, set<string>& incpaths
-		) {
-	ubigint refLib;
-
-	if (dbswdbe->tblwdbemlibrary->loadRefBySrf(srefLib, refLib)) addLibByRef(dbswdbe, refLib, refMch, hrefsMch, incpaths);
-};
-
-void WdbeWrdevDeploy::addLibByRef(
-			DbsWdbe* dbswdbe
-			, const ubigint refLib
-			, const ubigint refMch
-			, vector<ubigint>& hrefsMch
-			, set<string>& incpaths
-		) {
-	WdbeMLibrary* lib = NULL;
-
-	vector<string> ss;
-	string s;
-
-	if (dbswdbe->tblwdbemlibrary->loadRecByRef(refLib, &lib)) {
-		if (Wdbe::getLibmkf(dbswdbe, refLib, refMch, hrefsMch, "incpath", s)) incpaths.insert(s);
-
-		StrMod::srefsToVector(lib->depSrefsWdbeMLibrary, ss);
-		for (unsigned int i = 0; i < ss.size();i++) addLibBySref(dbswdbe, ss[i], refMch, hrefsMch, incpaths);
-
-		delete lib;
-	};
-};
-
-string WdbeWrdevDeploy::pathToPathstr(
-			const string& path
-			, const string& inceq
-		) {
-	string pathstr;
-
-	vector<string> ss;
-
-	StrMod::stringToVector(path, ss, ' ');
-
-	for (unsigned int i = 0; i < ss.size();i++) {
-		if (i != 0) pathstr += " ";
-		pathstr += "-I" + inceq + ss[i];
-	};
-
-	return pathstr;
 };
 // IP cust --- IEND

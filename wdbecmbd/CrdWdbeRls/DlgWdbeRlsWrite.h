@@ -144,7 +144,7 @@ public:
 		Sbecore::uint numFDse;
 
 	public:
-		bool readJSON(Json::Value& sup, bool addbasetag = false);
+		bool readJSON(const Json::Value& sup, bool addbasetag = false);
 		bool readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 		void writeJSON(Json::Value& sup, std::string difftag = "");
 		void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
@@ -167,7 +167,7 @@ public:
 		bool ChkBso;
 
 	public:
-		bool readJSON(Json::Value& sup, bool addbasetag = false);
+		bool readJSON(const Json::Value& sup, bool addbasetag = false);
 		bool readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 		void writeJSON(Json::Value& sup, std::string difftag = "");
 		void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
@@ -462,7 +462,7 @@ public:
 	public:
 		std::string getSrefsMask();
 
-		void readJSON(Json::Value& sup, bool addbasetag = false);
+		void readJSON(const Json::Value& sup, bool addbasetag = false);
 		void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 	};
 
@@ -486,7 +486,7 @@ public:
 	public:
 		std::string getSrefsMask();
 
-		void readJSON(Json::Value& sup, bool addbasetag = false);
+		void readJSON(const Json::Value& sup, bool addbasetag = false);
 		void readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
 	};
 
@@ -545,15 +545,15 @@ public:
 		void writeXML(const Sbecore::uint ixWdbeVLocale, xmlTextWriter* wr);
 	};
 
-	bool evalCucUldAvail(DbsWdbe* dbswdbe);
-	bool evalCucUldActive(DbsWdbe* dbswdbe);
+	bool evalButDneActive(DbsWdbe* dbswdbe);
+	bool evalFiaDldAvail(DbsWdbe* dbswdbe);
+	bool evalFiaDldActive(DbsWdbe* dbswdbe);
 	bool evalWrcButAutActive(DbsWdbe* dbswdbe);
 	bool evalWrcButRunActive(DbsWdbe* dbswdbe);
 	bool evalWrcButStoActive(DbsWdbe* dbswdbe);
 	bool evalLfiDldActive(DbsWdbe* dbswdbe);
-	bool evalFiaDldAvail(DbsWdbe* dbswdbe);
-	bool evalFiaDldActive(DbsWdbe* dbswdbe);
-	bool evalButDneActive(DbsWdbe* dbswdbe);
+	bool evalCucUldAvail(DbsWdbe* dbswdbe);
+	bool evalCucUldActive(DbsWdbe* dbswdbe);
 
 public:
 	DlgWdbeRlsWrite(XchgWdbe* xchg, DbsWdbe* dbswdbe, const Sbecore::ubigint jrefSup, const Sbecore::uint ixWdbeVLocale);
@@ -581,20 +581,27 @@ public:
 	Sbecore::uint ixVDit;
 
 	// IP vars.cust --- IBEGIN
+	Sbecore::ubigint refWdbeMRelease;
+	std::string rlssref;
+
+	std::string author;
+
 	std::string PRJSHORT;
 	std::string Prjshort;
 	std::string prjshort;
 
 	bool Prjeasy;
 
-	Sbecore::uint ixRlstype;
+	Sbecore::uint ixCmptype;
 
-	std::string rtysref;
+	std::string CMPSREF;
+	std::string Cmpsref;
+	std::string cmpsref;
 
 	std::string cchost;
 	std::string ncore;
 	std::string sysroot;
-	std::string inceq;
+	std::string inclibeq;
 
 	std::string infilename;
 	std::string outfolder; // working directory
@@ -602,7 +609,7 @@ public:
 	std::string finefolder; // IP's
 	std::string typspecfolder; // module-type specific IP's
 	std::string tplspecfolder; // module-template specific IP's
-	std::string ipclrfolder; // clearing IP's
+	std::string auxfolder; // auxiliary IP's
 	std::string custfolder; // custom IP's
 
 	std::map<Sbecore::ubigint,Sbecore::ubigint> orefsToRefs;
@@ -626,6 +633,7 @@ public:
 	void createMcu(DbsWdbe* dbswdbe, const bool dplonly);
 	void createDev(DbsWdbe* dbswdbe, const bool dplonly);
 	void createEzdev(DbsWdbe* dbswdbe, const bool dplonly);
+	void createTerm(DbsWdbe* dbswdbe, const bool dplonly);
 
 	void mergeKeysVals(const Sbecore::ubigint oref, std::vector<std::string>& keys, std::vector<std::string>& vals, const bool tplNotTyp);
 	// IP cust --- IEND
@@ -661,15 +669,13 @@ private:
 
 	void handleUploadInSgeIdle(DbsWdbe* dbswdbe, const std::string& filename);
 
-	std::string handleDownloadInSgeFail(DbsWdbe* dbswdbe);
 	std::string handleDownloadInSgeDone(DbsWdbe* dbswdbe);
+	std::string handleDownloadInSgeFail(DbsWdbe* dbswdbe);
 
 	void handleDpchRetWdbeMtpPlhfpga(DbsWdbe* dbswdbe, DpchRetWdbeMtpPlhfpga* dpchret);
 	void handleDpchRetWdbeMtpPlhmcu(DbsWdbe* dbswdbe, DpchRetWdbeMtpPlhmcu* dpchret);
 	void handleDpchRetWdbePlhfpgaCmdinv(DbsWdbe* dbswdbe, DpchRetWdbePlhfpgaCmdinv* dpchret);
 	void handleDpchRetWdbePlhfpgaCmdret(DbsWdbe* dbswdbe, DpchRetWdbePlhfpgaCmdret* dpchret);
-	void handleDpchRetWdbePlhfpgaEhostif(DbsWdbe* dbswdbe, DpchRetWdbePlhfpgaEhostif* dpchret);
-	void handleDpchRetWdbePlhfpgaFwdctr(DbsWdbe* dbswdbe, DpchRetWdbePlhfpgaFwdctr* dpchret);
 	void handleDpchRetWdbePlhmcuEctr(DbsWdbe* dbswdbe, DpchRetWdbePlhmcuEctr* dpchret);
 	void handleDpchRetWdbePlhmcuEhostif(DbsWdbe* dbswdbe, DpchRetWdbePlhmcuEhostif* dpchret);
 	void handleDpchRetWdbePrctreeMerge(DbsWdbe* dbswdbe, DpchRetWdbePrctreeMerge* dpchret);

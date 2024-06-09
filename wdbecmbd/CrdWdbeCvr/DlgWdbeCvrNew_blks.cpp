@@ -137,15 +137,14 @@ DlgWdbeCvrNew::ContIac::ContIac(
 };
 
 bool DlgWdbeCvrNew::ContIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["ContIacDlgWdbeCvrNew"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["ContIacDlgWdbeCvrNew"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -191,9 +190,9 @@ void DlgWdbeCvrNew::ContIac::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["numFDetPupCpr"] = numFDetPupCpr;
-	me["numFDetPupBcv"] = numFDetPupBcv;
-	me["numFDetRbuVni"] = numFDetRbuVni;
+	me["numFDetPupCpr"] = (Json::Value::UInt) numFDetPupCpr;
+	me["numFDetPupBcv"] = (Json::Value::UInt) numFDetPupBcv;
+	me["numFDetRbuVni"] = (Json::Value::UInt) numFDetRbuVni;
 };
 
 void DlgWdbeCvrNew::ContIac::writeXML(
@@ -262,7 +261,7 @@ void DlgWdbeCvrNew::ContInf::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["numFSge"] = numFSge;
+	me["numFSge"] = (Json::Value::UInt) numFSge;
 };
 
 void DlgWdbeCvrNew::ContInf::writeXML(
@@ -477,15 +476,14 @@ string DlgWdbeCvrNew::DpchAppData::getSrefsMask() {
 };
 
 void DlgWdbeCvrNew::DpchAppData::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppDlgWdbeCvrNewData"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppDlgWdbeCvrNewData"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -547,15 +545,14 @@ string DlgWdbeCvrNew::DpchAppDo::getSrefsMask() {
 };
 
 void DlgWdbeCvrNew::DpchAppDo::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppDlgWdbeCvrNewDo"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppDlgWdbeCvrNewDo"];}();
 
 	basefound = (me != Json::nullValue);
 

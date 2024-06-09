@@ -44,9 +44,9 @@ CrdWdbeUnt::CrdWdbeUnt(
 	feedFSge.tag = "FeedFSge";
 	VecVSge::fillFeed(feedFSge);
 
-	pnlrec = NULL;
-	pnlheadbar = NULL;
 	pnllist = NULL;
+	pnlheadbar = NULL;
+	pnlrec = NULL;
 
 	// IP constructor.cust1 --- INSERT
 
@@ -58,9 +58,9 @@ CrdWdbeUnt::CrdWdbeUnt(
 	// initialize according to ref
 	changeRef(dbswdbe, jref, ((ref + 1) == 0) ? 0 : ref, false);
 
-	pnlrec = new PnlWdbeUntRec(xchg, dbswdbe, jref, ixWdbeVLocale);
-	pnlheadbar = new PnlWdbeUntHeadbar(xchg, dbswdbe, jref, ixWdbeVLocale);
 	pnllist = new PnlWdbeUntList(xchg, dbswdbe, jref, ixWdbeVLocale);
+	pnlheadbar = new PnlWdbeUntHeadbar(xchg, dbswdbe, jref, ixWdbeVLocale);
+	pnlrec = new PnlWdbeUntRec(xchg, dbswdbe, jref, ixWdbeVLocale);
 
 	// IP constructor.cust2 --- INSERT
 
@@ -73,9 +73,9 @@ CrdWdbeUnt::CrdWdbeUnt(
 
 	changeStage(dbswdbe, VecVSge::IDLE);
 
-	xchg->addClstn(VecWdbeVCall::CALLWDBEDLGCLOSE, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecWdbeVCall::CALLWDBESTATCHG, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBEREFPRESET, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBESTATCHG, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBEDLGCLOSE, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -95,6 +95,7 @@ void CrdWdbeUnt::showSubmdls(
 			DbsWdbe* dbswdbe
 			, const ubigint refWdbeMModule
 			, bool _gens
+			, bool _prcs
 			, bool _prts
 			, bool _sigs
 			, unsigned int indent
@@ -108,6 +109,9 @@ void CrdWdbeUnt::showSubmdls(
 
 	ListWdbeMGeneric gens;
 	WdbeMGeneric* gen = NULL;
+
+	ListWdbeMProcess prcs;
+	WdbeMProcess* prc = NULL;
 
 	ListWdbeMPort prts;
 	WdbeMPort* prt = NULL;
@@ -150,6 +154,23 @@ void CrdWdbeUnt::showSubmdls(
 		cout << reset;
 	};
 
+	if (_prcs) {
+		// processes
+		cout << setgray;
+
+		dbswdbe->tblwdbemprocess->loadRstBySQL("SELECT * FROM TblWdbeMProcess WHERE refWdbeMModule = " + to_string(refWdbeMModule) + " ORDER BY sref ASC", false, prcs);
+
+		for (unsigned int i = 0; i < prcs.nodes.size(); i++) {
+			prc = prcs.nodes[i];
+
+			cout << "\t\t" << id << prc->sref;
+			if (prc->Comment != "") cout << ": " << prc->Comment;
+			cout << endl;
+		};
+
+		cout << reset;
+	};
+
 	if (_prts) {
 		// ports
 		cout << setgray;
@@ -179,7 +200,7 @@ void CrdWdbeUnt::showSubmdls(
 	};
 
 	// sub-modules
-	for (unsigned int i = 0; i < refs.size(); i++) showSubmdls(dbswdbe, refs[i], _gens, _prts, _sigs, indent+1);
+	for (unsigned int i = 0; i < refs.size(); i++) showSubmdls(dbswdbe, refs[i], _gens, _prcs, _prts, _sigs, indent+1);
 };
 
 // IP cust --- IEND
@@ -260,6 +281,7 @@ void CrdWdbeUnt::handleRequest(
 			cout << "\tshowCmds" << endl;
 			cout << "\tshowGens" << endl;
 			cout << "\tshowMdls" << endl;
+			cout << "\tshowPrcs" << endl;
 			cout << "\tshowPrts" << endl;
 			cout << "\tshowSigs" << endl;
 		} else if (req->cmd == "showCmds") {
@@ -270,6 +292,9 @@ void CrdWdbeUnt::handleRequest(
 
 		} else if (req->cmd == "showMdls") {
 			req->retain = handleShowMdls(dbswdbe);
+
+		} else if (req->cmd == "showPrcs") {
+			req->retain = handleShowPrcs(dbswdbe);
 
 		} else if (req->cmd == "showPrts") {
 			req->retain = handleShowPrts(dbswdbe);
@@ -386,7 +411,7 @@ bool CrdWdbeUnt::handleShowGens(
 	ubigint ref;
 
 	if (dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMModule WHERE supRefWdbeMModule = 0 AND hkIxVTbl = " + to_string(VecWdbeVMModuleHkTbl::UNT) + " AND hkUref = "
-				+ to_string(xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFUNT, jref)), ref)) showSubmdls(dbswdbe, ref, true, false, false, 0);
+				+ to_string(xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFUNT, jref)), ref)) showSubmdls(dbswdbe, ref, true, false, false, false, 0);
 	// IP handleShowGens --- IEND
 	return retval;
 };
@@ -399,8 +424,21 @@ bool CrdWdbeUnt::handleShowMdls(
 	ubigint ref;
 
 	if (dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMModule WHERE supRefWdbeMModule = 0 AND hkIxVTbl = " + to_string(VecWdbeVMModuleHkTbl::UNT) + " AND hkUref = "
-				+ to_string(xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFUNT, jref)), ref)) showSubmdls(dbswdbe, ref, false, false, false, 0);
+				+ to_string(xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFUNT, jref)), ref)) showSubmdls(dbswdbe, ref, false, false, false, false, 0);
 	// IP handleShowMdls --- IEND
+	return retval;
+};
+
+bool CrdWdbeUnt::handleShowPrcs(
+			DbsWdbe* dbswdbe
+		) {
+	bool retval = false;
+	// IP handleShowPrcs --- IBEGIN
+	ubigint ref;
+
+	if (dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMModule WHERE supRefWdbeMModule = 0 AND hkIxVTbl = " + to_string(VecWdbeVMModuleHkTbl::UNT) + " AND hkUref = "
+				+ to_string(xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFUNT, jref)), ref)) showSubmdls(dbswdbe, ref, false, true, false, false, 0);
+	// IP handleShowPrcs --- IEND
 	return retval;
 };
 
@@ -412,7 +450,7 @@ bool CrdWdbeUnt::handleShowPrts(
 	ubigint ref;
 
 	if (dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMModule WHERE supRefWdbeMModule = 0 AND hkIxVTbl = " + to_string(VecWdbeVMModuleHkTbl::UNT) + " AND hkUref = "
-				+ to_string(xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFUNT, jref)), ref)) showSubmdls(dbswdbe, ref, false, true, false, 0);
+				+ to_string(xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFUNT, jref)), ref)) showSubmdls(dbswdbe, ref, false, false, true, false, 0);
 	// IP handleShowPrts --- IEND
 	return retval;
 };
@@ -425,7 +463,7 @@ bool CrdWdbeUnt::handleShowSigs(
 	ubigint ref;
 
 	if (dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMModule WHERE supRefWdbeMModule = 0 AND hkIxVTbl = " + to_string(VecWdbeVMModuleHkTbl::UNT) + " AND hkUref = "
-				+ to_string(xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFUNT, jref)), ref)) showSubmdls(dbswdbe, ref, false, false, true, 0);
+				+ to_string(xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFUNT, jref)), ref)) showSubmdls(dbswdbe, ref, false, false, false, true, 0);
 	// IP handleShowSigs --- IEND
 	return retval;
 };
@@ -475,31 +513,13 @@ void CrdWdbeUnt::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBEDLGCLOSE) {
-		call->abort = handleCallWdbeDlgClose(dbswdbe, call->jref);
+	if (call->ixVCall == VecWdbeVCall::CALLWDBEREFPRESET) {
+		call->abort = handleCallWdbeRefPreSet(dbswdbe, call->jref, call->argInv.ix, call->argInv.ref);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBESTATCHG) {
 		call->abort = handleCallWdbeStatChg(dbswdbe, call->jref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEREFPRESET) {
-		call->abort = handleCallWdbeRefPreSet(dbswdbe, call->jref, call->argInv.ix, call->argInv.ref);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEDLGCLOSE) {
+		call->abort = handleCallWdbeDlgClose(dbswdbe, call->jref);
 	};
-};
-
-bool CrdWdbeUnt::handleCallWdbeDlgClose(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-	// IP handleCallWdbeDlgClose --- INSERT
-	return retval;
-};
-
-bool CrdWdbeUnt::handleCallWdbeStatChg(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-	if (jrefTrig == pnlrec->jref) if ((pnllist->statshr.ixWdbeVExpstate == VecWdbeVExpstate::REGD) && (pnlrec->statshr.ixWdbeVExpstate == VecWdbeVExpstate::REGD)) pnllist->minimize(dbswdbe, true);
-	return retval;
 };
 
 bool CrdWdbeUnt::handleCallWdbeRefPreSet(
@@ -516,6 +536,24 @@ bool CrdWdbeUnt::handleCallWdbeRefPreSet(
 		if (refInv == 0) pnlrec->minimize(dbswdbe, true);
 	};
 
+	return retval;
+};
+
+bool CrdWdbeUnt::handleCallWdbeStatChg(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+	if (jrefTrig == pnlrec->jref) if ((pnllist->statshr.ixWdbeVExpstate == VecWdbeVExpstate::REGD) && (pnlrec->statshr.ixWdbeVExpstate == VecWdbeVExpstate::REGD)) pnllist->minimize(dbswdbe, true);
+	return retval;
+};
+
+bool CrdWdbeUnt::handleCallWdbeDlgClose(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+	// IP handleCallWdbeDlgClose --- INSERT
 	return retval;
 };
 

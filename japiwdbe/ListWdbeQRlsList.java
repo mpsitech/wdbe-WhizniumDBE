@@ -45,7 +45,7 @@ public class ListWdbeQRlsList {
 			clear();
 			
 			for (int i = 0; i < ics.size(); i++) {
-				rec = new WdbeQRlsList(i+1, "", "", "", "", "");
+				rec = new WdbeQRlsList(i+1, "", "", "");
 
 				if (shorttags.get(i)) s = basexpath + "/row[@jnum='" + ics.get(i).toString() + "']";
 				else s = basexpath + "/WdbeQRlsList[@jnum='" + ics.get(i).toString() + "']";

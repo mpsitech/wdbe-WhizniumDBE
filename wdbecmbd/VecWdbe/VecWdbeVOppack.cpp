@@ -39,6 +39,7 @@ uint VecWdbeVOppack::getIx(
 	if (s == "wdbewrdev") return WDBEWRDEV;
 	if (s == "wdbewrfpga") return WDBEWRFPGA;
 	if (s == "wdbewrmcu") return WDBEWRMCU;
+	if (s == "wdbewrterm") return WDBEWRTERM;
 
 	return(0);
 };
@@ -63,6 +64,7 @@ string VecWdbeVOppack::getSref(
 	if (ix == WDBEWRDEV) return("WdbeWrdev");
 	if (ix == WDBEWRFPGA) return("WdbeWrfpga");
 	if (ix == WDBEWRMCU) return("WdbeWrmcu");
+	if (ix == WDBEWRTERM) return("WdbeWrterm");
 
 	return("");
 };
@@ -87,6 +89,7 @@ string VecWdbeVOppack::getTitle(
 	if (ix == WDBEWRDEV) return("write device access library code");
 	if (ix == WDBEWRFPGA) return("write FPGA code");
 	if (ix == WDBEWRMCU) return("write MCU code");
+	if (ix == WDBEWRTERM) return("write interactive terminal code");
 	return(getSref(ix));
 
 	return("");
@@ -111,5 +114,5 @@ void VecWdbeVOppack::fillFeed(
 		) {
 	feed.clear();
 
-	for (unsigned int i = 1; i <= 17; i++) feed.appendIxSrefTitles(i, getSref(i), getTitle(i));
+	for (unsigned int i = 1; i <= 18; i++) feed.appendIxSrefTitles(i, getSref(i), getTitle(i));
 };

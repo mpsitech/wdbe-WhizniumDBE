@@ -108,7 +108,7 @@ public class DlgWdbeVerFinmod {
 
 		public static final int IDLE = 1;
 		public static final int ALRWER = 2;
-		public static final int GENTST = 3;
+		public static final int GENAUX = 3;
 		public static final int GENWRI = 4;
 		public static final int ASMLFI = 5;
 		public static final int GENSV = 6;
@@ -123,7 +123,7 @@ public class DlgWdbeVerFinmod {
 
 			if (s.equals("idle")) return IDLE;
 			if (s.equals("alrwer")) return ALRWER;
-			if (s.equals("gentst")) return GENTST;
+			if (s.equals("genaux")) return GENAUX;
 			if (s.equals("genwri")) return GENWRI;
 			if (s.equals("asmlfi")) return ASMLFI;
 			if (s.equals("gensv")) return GENSV;
@@ -139,7 +139,7 @@ public class DlgWdbeVerFinmod {
 				) {
 			if (ix == IDLE) return("idle");
 			if (ix == ALRWER) return("alrwer");
-			if (ix == GENTST) return("gentst");
+			if (ix == GENAUX) return("genaux");
 			if (ix == GENWRI) return("genwri");
 			if (ix == ASMLFI) return("asmlfi");
 			if (ix == GENSV) return("gensv");

@@ -18,8 +18,7 @@
 namespace SqkWdbePlhfpga {
 	std::string getSquawkCmdinv(DbsWdbe* dbswdbe, DpchInvWdbePlhfpgaCmdinv* dpchinv);
 	std::string getSquawkCmdret(DbsWdbe* dbswdbe, DpchInvWdbePlhfpgaCmdret* dpchinv);
-	std::string getSquawkEhostif(DbsWdbe* dbswdbe, DpchInvWdbePlhfpgaEhostif* dpchinv);
-	std::string getSquawkFwdctr(DbsWdbe* dbswdbe, DpchInvWdbePlhfpgaFwdctr* dpchinv);
+	std::string getSquawkCtr(DbsWdbe* dbswdbe, DpchInvWdbePlhfpgaCtr* dpchinv);
 };
 
 #endif

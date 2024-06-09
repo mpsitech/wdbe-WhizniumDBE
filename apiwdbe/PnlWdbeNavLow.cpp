@@ -34,6 +34,7 @@ uint PnlWdbeNavLow::VecVDo::getIx(
 	if (s == "butprtviewclick") return BUTPRTVIEWCLICK;
 	if (s == "butsigviewclick") return BUTSIGVIEWCLICK;
 	if (s == "butsignewcrdclick") return BUTSIGNEWCRDCLICK;
+	if (s == "butcdcviewclick") return BUTCDCVIEWCLICK;
 	if (s == "butprcviewclick") return BUTPRCVIEWCLICK;
 	if (s == "butfstviewclick") return BUTFSTVIEWCLICK;
 
@@ -55,6 +56,7 @@ string PnlWdbeNavLow::VecVDo::getSref(
 	if (ix == BUTPRTVIEWCLICK) return("ButPrtViewClick");
 	if (ix == BUTSIGVIEWCLICK) return("ButSigViewClick");
 	if (ix == BUTSIGNEWCRDCLICK) return("ButSigNewcrdClick");
+	if (ix == BUTCDCVIEWCLICK) return("ButCdcViewClick");
 	if (ix == BUTPRCVIEWCLICK) return("ButPrcViewClick");
 	if (ix == BUTFSTVIEWCLICK) return("ButFstViewClick");
 
@@ -74,6 +76,7 @@ PnlWdbeNavLow::ContIac::ContIac(
 			, const uint numFLstGen
 			, const uint numFLstPrt
 			, const uint numFLstSig
+			, const uint numFLstCdc
 			, const uint numFLstPrc
 			, const uint numFLstFst
 		) :
@@ -87,10 +90,11 @@ PnlWdbeNavLow::ContIac::ContIac(
 	this->numFLstGen = numFLstGen;
 	this->numFLstPrt = numFLstPrt;
 	this->numFLstSig = numFLstSig;
+	this->numFLstCdc = numFLstCdc;
 	this->numFLstPrc = numFLstPrc;
 	this->numFLstFst = numFLstFst;
 
-	mask = {NUMFLSTBNK, NUMFLSTPIN, NUMFLSTINT, NUMFLSTSNS, NUMFLSTVAR, NUMFLSTGEN, NUMFLSTPRT, NUMFLSTSIG, NUMFLSTPRC, NUMFLSTFST};
+	mask = {NUMFLSTBNK, NUMFLSTPIN, NUMFLSTINT, NUMFLSTSNS, NUMFLSTVAR, NUMFLSTGEN, NUMFLSTPRT, NUMFLSTSIG, NUMFLSTCDC, NUMFLSTPRC, NUMFLSTFST};
 };
 
 bool PnlWdbeNavLow::ContIac::readXML(
@@ -118,6 +122,7 @@ bool PnlWdbeNavLow::ContIac::readXML(
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "numFLstGen", numFLstGen)) add(NUMFLSTGEN);
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "numFLstPrt", numFLstPrt)) add(NUMFLSTPRT);
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "numFLstSig", numFLstSig)) add(NUMFLSTSIG);
+		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "numFLstCdc", numFLstCdc)) add(NUMFLSTCDC);
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "numFLstPrc", numFLstPrc)) add(NUMFLSTPRC);
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "numFLstFst", numFLstFst)) add(NUMFLSTFST);
 	};
@@ -145,6 +150,7 @@ void PnlWdbeNavLow::ContIac::writeXML(
 		writeUintAttr(wr, itemtag, "sref", "numFLstGen", numFLstGen);
 		writeUintAttr(wr, itemtag, "sref", "numFLstPrt", numFLstPrt);
 		writeUintAttr(wr, itemtag, "sref", "numFLstSig", numFLstSig);
+		writeUintAttr(wr, itemtag, "sref", "numFLstCdc", numFLstCdc);
 		writeUintAttr(wr, itemtag, "sref", "numFLstPrc", numFLstPrc);
 		writeUintAttr(wr, itemtag, "sref", "numFLstFst", numFLstFst);
 	xmlTextWriterEndElement(wr);
@@ -163,6 +169,7 @@ set<uint> PnlWdbeNavLow::ContIac::comm(
 	if (numFLstGen == comp->numFLstGen) insert(items, NUMFLSTGEN);
 	if (numFLstPrt == comp->numFLstPrt) insert(items, NUMFLSTPRT);
 	if (numFLstSig == comp->numFLstSig) insert(items, NUMFLSTSIG);
+	if (numFLstCdc == comp->numFLstCdc) insert(items, NUMFLSTCDC);
 	if (numFLstPrc == comp->numFLstPrc) insert(items, NUMFLSTPRC);
 	if (numFLstFst == comp->numFLstFst) insert(items, NUMFLSTFST);
 
@@ -177,7 +184,7 @@ set<uint> PnlWdbeNavLow::ContIac::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {NUMFLSTBNK, NUMFLSTPIN, NUMFLSTINT, NUMFLSTSNS, NUMFLSTVAR, NUMFLSTGEN, NUMFLSTPRT, NUMFLSTSIG, NUMFLSTPRC, NUMFLSTFST};
+	diffitems = {NUMFLSTBNK, NUMFLSTPIN, NUMFLSTINT, NUMFLSTSNS, NUMFLSTVAR, NUMFLSTGEN, NUMFLSTPRT, NUMFLSTSIG, NUMFLSTCDC, NUMFLSTPRC, NUMFLSTFST};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -197,6 +204,7 @@ PnlWdbeNavLow::StatApp::StatApp(
 			, const bool LstGenAlt
 			, const bool LstPrtAlt
 			, const bool LstSigAlt
+			, const bool LstCdcAlt
 			, const bool LstPrcAlt
 			, const bool LstFstAlt
 			, const uint LstBnkNumFirstdisp
@@ -207,6 +215,7 @@ PnlWdbeNavLow::StatApp::StatApp(
 			, const uint LstGenNumFirstdisp
 			, const uint LstPrtNumFirstdisp
 			, const uint LstSigNumFirstdisp
+			, const uint LstCdcNumFirstdisp
 			, const uint LstPrcNumFirstdisp
 			, const uint LstFstNumFirstdisp
 		) :
@@ -221,6 +230,7 @@ PnlWdbeNavLow::StatApp::StatApp(
 	this->LstGenAlt = LstGenAlt;
 	this->LstPrtAlt = LstPrtAlt;
 	this->LstSigAlt = LstSigAlt;
+	this->LstCdcAlt = LstCdcAlt;
 	this->LstPrcAlt = LstPrcAlt;
 	this->LstFstAlt = LstFstAlt;
 	this->LstBnkNumFirstdisp = LstBnkNumFirstdisp;
@@ -231,10 +241,11 @@ PnlWdbeNavLow::StatApp::StatApp(
 	this->LstGenNumFirstdisp = LstGenNumFirstdisp;
 	this->LstPrtNumFirstdisp = LstPrtNumFirstdisp;
 	this->LstSigNumFirstdisp = LstSigNumFirstdisp;
+	this->LstCdcNumFirstdisp = LstCdcNumFirstdisp;
 	this->LstPrcNumFirstdisp = LstPrcNumFirstdisp;
 	this->LstFstNumFirstdisp = LstFstNumFirstdisp;
 
-	mask = {IXWDBEVEXPSTATE, LSTBNKALT, LSTPINALT, LSTINTALT, LSTSNSALT, LSTVARALT, LSTGENALT, LSTPRTALT, LSTSIGALT, LSTPRCALT, LSTFSTALT, LSTBNKNUMFIRSTDISP, LSTPINNUMFIRSTDISP, LSTINTNUMFIRSTDISP, LSTSNSNUMFIRSTDISP, LSTVARNUMFIRSTDISP, LSTGENNUMFIRSTDISP, LSTPRTNUMFIRSTDISP, LSTSIGNUMFIRSTDISP, LSTPRCNUMFIRSTDISP, LSTFSTNUMFIRSTDISP};
+	mask = {IXWDBEVEXPSTATE, LSTBNKALT, LSTPINALT, LSTINTALT, LSTSNSALT, LSTVARALT, LSTGENALT, LSTPRTALT, LSTSIGALT, LSTCDCALT, LSTPRCALT, LSTFSTALT, LSTBNKNUMFIRSTDISP, LSTPINNUMFIRSTDISP, LSTINTNUMFIRSTDISP, LSTSNSNUMFIRSTDISP, LSTVARNUMFIRSTDISP, LSTGENNUMFIRSTDISP, LSTPRTNUMFIRSTDISP, LSTSIGNUMFIRSTDISP, LSTCDCNUMFIRSTDISP, LSTPRCNUMFIRSTDISP, LSTFSTNUMFIRSTDISP};
 };
 
 bool PnlWdbeNavLow::StatApp::readXML(
@@ -268,6 +279,7 @@ bool PnlWdbeNavLow::StatApp::readXML(
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "LstGenAlt", LstGenAlt)) add(LSTGENALT);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "LstPrtAlt", LstPrtAlt)) add(LSTPRTALT);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "LstSigAlt", LstSigAlt)) add(LSTSIGALT);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "LstCdcAlt", LstCdcAlt)) add(LSTCDCALT);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "LstPrcAlt", LstPrcAlt)) add(LSTPRCALT);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "LstFstAlt", LstFstAlt)) add(LSTFSTALT);
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "LstBnkNumFirstdisp", LstBnkNumFirstdisp)) add(LSTBNKNUMFIRSTDISP);
@@ -278,6 +290,7 @@ bool PnlWdbeNavLow::StatApp::readXML(
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "LstGenNumFirstdisp", LstGenNumFirstdisp)) add(LSTGENNUMFIRSTDISP);
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "LstPrtNumFirstdisp", LstPrtNumFirstdisp)) add(LSTPRTNUMFIRSTDISP);
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "LstSigNumFirstdisp", LstSigNumFirstdisp)) add(LSTSIGNUMFIRSTDISP);
+		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "LstCdcNumFirstdisp", LstCdcNumFirstdisp)) add(LSTCDCNUMFIRSTDISP);
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "LstPrcNumFirstdisp", LstPrcNumFirstdisp)) add(LSTPRCNUMFIRSTDISP);
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "LstFstNumFirstdisp", LstFstNumFirstdisp)) add(LSTFSTNUMFIRSTDISP);
 	};
@@ -299,6 +312,7 @@ set<uint> PnlWdbeNavLow::StatApp::comm(
 	if (LstGenAlt == comp->LstGenAlt) insert(items, LSTGENALT);
 	if (LstPrtAlt == comp->LstPrtAlt) insert(items, LSTPRTALT);
 	if (LstSigAlt == comp->LstSigAlt) insert(items, LSTSIGALT);
+	if (LstCdcAlt == comp->LstCdcAlt) insert(items, LSTCDCALT);
 	if (LstPrcAlt == comp->LstPrcAlt) insert(items, LSTPRCALT);
 	if (LstFstAlt == comp->LstFstAlt) insert(items, LSTFSTALT);
 	if (LstBnkNumFirstdisp == comp->LstBnkNumFirstdisp) insert(items, LSTBNKNUMFIRSTDISP);
@@ -309,6 +323,7 @@ set<uint> PnlWdbeNavLow::StatApp::comm(
 	if (LstGenNumFirstdisp == comp->LstGenNumFirstdisp) insert(items, LSTGENNUMFIRSTDISP);
 	if (LstPrtNumFirstdisp == comp->LstPrtNumFirstdisp) insert(items, LSTPRTNUMFIRSTDISP);
 	if (LstSigNumFirstdisp == comp->LstSigNumFirstdisp) insert(items, LSTSIGNUMFIRSTDISP);
+	if (LstCdcNumFirstdisp == comp->LstCdcNumFirstdisp) insert(items, LSTCDCNUMFIRSTDISP);
 	if (LstPrcNumFirstdisp == comp->LstPrcNumFirstdisp) insert(items, LSTPRCNUMFIRSTDISP);
 	if (LstFstNumFirstdisp == comp->LstFstNumFirstdisp) insert(items, LSTFSTNUMFIRSTDISP);
 
@@ -323,7 +338,7 @@ set<uint> PnlWdbeNavLow::StatApp::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {IXWDBEVEXPSTATE, LSTBNKALT, LSTPINALT, LSTINTALT, LSTSNSALT, LSTVARALT, LSTGENALT, LSTPRTALT, LSTSIGALT, LSTPRCALT, LSTFSTALT, LSTBNKNUMFIRSTDISP, LSTPINNUMFIRSTDISP, LSTINTNUMFIRSTDISP, LSTSNSNUMFIRSTDISP, LSTVARNUMFIRSTDISP, LSTGENNUMFIRSTDISP, LSTPRTNUMFIRSTDISP, LSTSIGNUMFIRSTDISP, LSTPRCNUMFIRSTDISP, LSTFSTNUMFIRSTDISP};
+	diffitems = {IXWDBEVEXPSTATE, LSTBNKALT, LSTPINALT, LSTINTALT, LSTSNSALT, LSTVARALT, LSTGENALT, LSTPRTALT, LSTSIGALT, LSTCDCALT, LSTPRCALT, LSTFSTALT, LSTBNKNUMFIRSTDISP, LSTPINNUMFIRSTDISP, LSTINTNUMFIRSTDISP, LSTSNSNUMFIRSTDISP, LSTVARNUMFIRSTDISP, LSTGENNUMFIRSTDISP, LSTPRTNUMFIRSTDISP, LSTSIGNUMFIRSTDISP, LSTCDCNUMFIRSTDISP, LSTPRCNUMFIRSTDISP, LSTFSTNUMFIRSTDISP};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -354,6 +369,8 @@ PnlWdbeNavLow::StatShr::StatShr(
 			, const bool LstSigAvail
 			, const bool ButSigViewActive
 			, const bool ButSigNewcrdActive
+			, const bool LstCdcAvail
+			, const bool ButCdcViewActive
 			, const bool LstPrcAvail
 			, const bool ButPrcViewActive
 			, const bool LstFstAvail
@@ -381,12 +398,14 @@ PnlWdbeNavLow::StatShr::StatShr(
 	this->LstSigAvail = LstSigAvail;
 	this->ButSigViewActive = ButSigViewActive;
 	this->ButSigNewcrdActive = ButSigNewcrdActive;
+	this->LstCdcAvail = LstCdcAvail;
+	this->ButCdcViewActive = ButCdcViewActive;
 	this->LstPrcAvail = LstPrcAvail;
 	this->ButPrcViewActive = ButPrcViewActive;
 	this->LstFstAvail = LstFstAvail;
 	this->ButFstViewActive = ButFstViewActive;
 
-	mask = {LSTBNKAVAIL, BUTBNKVIEWACTIVE, BUTBNKNEWCRDACTIVE, LSTPINAVAIL, BUTPINVIEWACTIVE, BUTPINNEWCRDACTIVE, LSTINTAVAIL, BUTINTVIEWACTIVE, BUTINTNEWCRDACTIVE, LSTSNSAVAIL, BUTSNSVIEWACTIVE, LSTVARAVAIL, BUTVARVIEWACTIVE, LSTGENAVAIL, BUTGENVIEWACTIVE, LSTPRTAVAIL, BUTPRTVIEWACTIVE, LSTSIGAVAIL, BUTSIGVIEWACTIVE, BUTSIGNEWCRDACTIVE, LSTPRCAVAIL, BUTPRCVIEWACTIVE, LSTFSTAVAIL, BUTFSTVIEWACTIVE};
+	mask = {LSTBNKAVAIL, BUTBNKVIEWACTIVE, BUTBNKNEWCRDACTIVE, LSTPINAVAIL, BUTPINVIEWACTIVE, BUTPINNEWCRDACTIVE, LSTINTAVAIL, BUTINTVIEWACTIVE, BUTINTNEWCRDACTIVE, LSTSNSAVAIL, BUTSNSVIEWACTIVE, LSTVARAVAIL, BUTVARVIEWACTIVE, LSTGENAVAIL, BUTGENVIEWACTIVE, LSTPRTAVAIL, BUTPRTVIEWACTIVE, LSTSIGAVAIL, BUTSIGVIEWACTIVE, BUTSIGNEWCRDACTIVE, LSTCDCAVAIL, BUTCDCVIEWACTIVE, LSTPRCAVAIL, BUTPRCVIEWACTIVE, LSTFSTAVAIL, BUTFSTVIEWACTIVE};
 };
 
 bool PnlWdbeNavLow::StatShr::readXML(
@@ -426,6 +445,8 @@ bool PnlWdbeNavLow::StatShr::readXML(
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "LstSigAvail", LstSigAvail)) add(LSTSIGAVAIL);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButSigViewActive", ButSigViewActive)) add(BUTSIGVIEWACTIVE);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButSigNewcrdActive", ButSigNewcrdActive)) add(BUTSIGNEWCRDACTIVE);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "LstCdcAvail", LstCdcAvail)) add(LSTCDCAVAIL);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButCdcViewActive", ButCdcViewActive)) add(BUTCDCVIEWACTIVE);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "LstPrcAvail", LstPrcAvail)) add(LSTPRCAVAIL);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButPrcViewActive", ButPrcViewActive)) add(BUTPRCVIEWACTIVE);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "LstFstAvail", LstFstAvail)) add(LSTFSTAVAIL);
@@ -460,6 +481,8 @@ set<uint> PnlWdbeNavLow::StatShr::comm(
 	if (LstSigAvail == comp->LstSigAvail) insert(items, LSTSIGAVAIL);
 	if (ButSigViewActive == comp->ButSigViewActive) insert(items, BUTSIGVIEWACTIVE);
 	if (ButSigNewcrdActive == comp->ButSigNewcrdActive) insert(items, BUTSIGNEWCRDACTIVE);
+	if (LstCdcAvail == comp->LstCdcAvail) insert(items, LSTCDCAVAIL);
+	if (ButCdcViewActive == comp->ButCdcViewActive) insert(items, BUTCDCVIEWACTIVE);
 	if (LstPrcAvail == comp->LstPrcAvail) insert(items, LSTPRCAVAIL);
 	if (ButPrcViewActive == comp->ButPrcViewActive) insert(items, BUTPRCVIEWACTIVE);
 	if (LstFstAvail == comp->LstFstAvail) insert(items, LSTFSTAVAIL);
@@ -476,7 +499,7 @@ set<uint> PnlWdbeNavLow::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {LSTBNKAVAIL, BUTBNKVIEWACTIVE, BUTBNKNEWCRDACTIVE, LSTPINAVAIL, BUTPINVIEWACTIVE, BUTPINNEWCRDACTIVE, LSTINTAVAIL, BUTINTVIEWACTIVE, BUTINTNEWCRDACTIVE, LSTSNSAVAIL, BUTSNSVIEWACTIVE, LSTVARAVAIL, BUTVARVIEWACTIVE, LSTGENAVAIL, BUTGENVIEWACTIVE, LSTPRTAVAIL, BUTPRTVIEWACTIVE, LSTSIGAVAIL, BUTSIGVIEWACTIVE, BUTSIGNEWCRDACTIVE, LSTPRCAVAIL, BUTPRCVIEWACTIVE, LSTFSTAVAIL, BUTFSTVIEWACTIVE};
+	diffitems = {LSTBNKAVAIL, BUTBNKVIEWACTIVE, BUTBNKNEWCRDACTIVE, LSTPINAVAIL, BUTPINVIEWACTIVE, BUTPINNEWCRDACTIVE, LSTINTAVAIL, BUTINTVIEWACTIVE, BUTINTNEWCRDACTIVE, LSTSNSAVAIL, BUTSNSVIEWACTIVE, LSTVARAVAIL, BUTVARVIEWACTIVE, LSTGENAVAIL, BUTGENVIEWACTIVE, LSTPRTAVAIL, BUTPRTVIEWACTIVE, LSTSIGAVAIL, BUTSIGVIEWACTIVE, BUTSIGNEWCRDACTIVE, LSTCDCAVAIL, BUTCDCVIEWACTIVE, LSTPRCAVAIL, BUTPRCVIEWACTIVE, LSTFSTAVAIL, BUTFSTVIEWACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -496,6 +519,7 @@ PnlWdbeNavLow::Tag::Tag(
 			, const string& CptGen
 			, const string& CptPrt
 			, const string& CptSig
+			, const string& CptCdc
 			, const string& CptPrc
 			, const string& CptFst
 		) :
@@ -510,10 +534,11 @@ PnlWdbeNavLow::Tag::Tag(
 	this->CptGen = CptGen;
 	this->CptPrt = CptPrt;
 	this->CptSig = CptSig;
+	this->CptCdc = CptCdc;
 	this->CptPrc = CptPrc;
 	this->CptFst = CptFst;
 
-	mask = {CPT, CPTBNK, CPTPIN, CPTINT, CPTSNS, CPTVAR, CPTGEN, CPTPRT, CPTSIG, CPTPRC, CPTFST};
+	mask = {CPT, CPTBNK, CPTPIN, CPTINT, CPTSNS, CPTVAR, CPTGEN, CPTPRT, CPTSIG, CPTCDC, CPTPRC, CPTFST};
 };
 
 bool PnlWdbeNavLow::Tag::readXML(
@@ -542,6 +567,7 @@ bool PnlWdbeNavLow::Tag::readXML(
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "CptGen", CptGen)) add(CPTGEN);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "CptPrt", CptPrt)) add(CPTPRT);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "CptSig", CptSig)) add(CPTSIG);
+		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "CptCdc", CptCdc)) add(CPTCDC);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "CptPrc", CptPrc)) add(CPTPRC);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "CptFst", CptFst)) add(CPTFST);
 	};
@@ -635,6 +661,7 @@ PnlWdbeNavLow::DpchEngData::DpchEngData() :
 			DpchEngWdbe(VecWdbeVDpch::DPCHENGWDBENAVLOWDATA)
 		{
 	feedFLstBnk.tag = "FeedFLstBnk";
+	feedFLstCdc.tag = "FeedFLstCdc";
 	feedFLstFst.tag = "FeedFLstFst";
 	feedFLstGen.tag = "FeedFLstGen";
 	feedFLstInt.tag = "FeedFLstInt";
@@ -653,6 +680,7 @@ string PnlWdbeNavLow::DpchEngData::getSrefsMask() {
 	if (has(SCRJREF)) ss.push_back("scrJref");
 	if (has(CONTIAC)) ss.push_back("contiac");
 	if (has(FEEDFLSTBNK)) ss.push_back("feedFLstBnk");
+	if (has(FEEDFLSTCDC)) ss.push_back("feedFLstCdc");
 	if (has(FEEDFLSTFST)) ss.push_back("feedFLstFst");
 	if (has(FEEDFLSTGEN)) ss.push_back("feedFLstGen");
 	if (has(FEEDFLSTINT)) ss.push_back("feedFLstInt");
@@ -689,6 +717,7 @@ void PnlWdbeNavLow::DpchEngData::readXML(
 		if (extractStringUclc(docctx, basexpath, "scrJref", "", scrJref)) add(SCRJREF);
 		if (contiac.readXML(docctx, basexpath, true)) add(CONTIAC);
 		if (feedFLstBnk.readXML(docctx, basexpath, true)) add(FEEDFLSTBNK);
+		if (feedFLstCdc.readXML(docctx, basexpath, true)) add(FEEDFLSTCDC);
 		if (feedFLstFst.readXML(docctx, basexpath, true)) add(FEEDFLSTFST);
 		if (feedFLstGen.readXML(docctx, basexpath, true)) add(FEEDFLSTGEN);
 		if (feedFLstInt.readXML(docctx, basexpath, true)) add(FEEDFLSTINT);
@@ -704,6 +733,7 @@ void PnlWdbeNavLow::DpchEngData::readXML(
 	} else {
 		contiac = ContIac();
 		feedFLstBnk.clear();
+		feedFLstCdc.clear();
 		feedFLstFst.clear();
 		feedFLstGen.clear();
 		feedFLstInt.clear();

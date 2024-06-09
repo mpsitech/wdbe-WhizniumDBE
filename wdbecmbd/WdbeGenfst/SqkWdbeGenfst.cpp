@@ -25,12 +25,12 @@ string SqkWdbeGenfst::getSquawkCmdbus(
 	return(""); // IP getSquawkCmdbus --- LINE
 };
 
-string SqkWdbeGenfst::getSquawkCtrFwdctr(
+string SqkWdbeGenfst::getSquawkCtr(
 			DbsWdbe* dbswdbe
-			, DpchInvWdbeGenfstCtrFwdctr* dpchinv
+			, DpchInvWdbeGenfstCtr* dpchinv
 		) {
 	// example: "add command process and FSM debug ports for module 'icm2-acq (controller)'"
-	return(""); // IP getSquawkCtrFwdctr --- LINE
+	return(""); // IP getSquawkCtr --- LINE
 };
 
 string SqkWdbeGenfst::getSquawkEctr(

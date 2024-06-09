@@ -314,6 +314,7 @@ uint JobWdbeIexFin::enterSgeImport(
 	ImeitemICPort* prtC = NULL;
 	ImeitemICSignal2* sigC2 = NULL;
 	ImeitemICVariable1* varC1 = NULL;
+	ImeitemIMCdc* cdc = NULL;
 	ImeitemIMController* ctr = NULL;
 	ImeitemIMGeneric* gen = NULL;
 	ImeitemIMPin* pin = NULL;
@@ -331,6 +332,7 @@ uint JobWdbeIexFin::enterSgeImport(
 	ImeitemIMFsm* fsm = NULL;
 	ImeitemIMSensitivity2* sns2 = NULL;
 	ImeitemIMVariable2* var2 = NULL;
+	ImeitemIRMCdcMSignal* cdcRsig = NULL;
 	ImeitemIRMCommandMController* cmdRctr = NULL;
 	ImeitemICFsmstate* fstC = NULL;
 	ImeitemIJAVKeylistKey* kakJkey = NULL;
@@ -374,7 +376,6 @@ uint JobWdbeIexFin::enterSgeImport(
 				unt->refIxVTbl = unt_r->refIxVTbl;
 				unt->refUref = unt_r->refUref;
 				unt->silRefWdbeMUnit = unt_r->silRefWdbeMUnit;
-				unt->refWdbeMSystem = unt_r->refWdbeMSystem;
 				unt->refWdbeMModule = unt_r->refWdbeMModule;
 				//unt->sref = unt_r->sref;
 				unt->Fullsref = unt_r->Fullsref;
@@ -447,12 +448,18 @@ uint JobWdbeIexFin::enterSgeImport(
 
 					//pin->refWdbeCPin: PREVIMP
 					if (pin->irefRefWdbeCPin != 0) {
-						for (unsigned int i = 0; i < bnk->imeicpin.nodes.size(); i++)
-							if (bnk->imeicpin.nodes[i]->iref == pin->irefRefWdbeCPin) {
-								pin->refWdbeCPin = bnk->imeicpin.nodes[i]->ref;
-								break;
+						if (irefs2.find(pin->irefRefWdbeCPin) == irefs2.end()) {
+							pinC = new ImeitemICPin(pin->irefRefWdbeCPin);
+							pinC->ref = dbswdbe->tblwdbecpin->getNewRef();
+							bnk->imeicpin.nodes.push_back(pinC);
+							irefs2.insert(pinC->iref);
+						} else {
+							for (unsigned int i = 0; i < bnk->imeicpin.nodes.size(); i++) {
+								pinC = bnk->imeicpin.nodes[i];
+								if (pinC->iref == pin->irefRefWdbeCPin) break;
 							};
-						if (pin->refWdbeCPin == 0) throw SbeException(SbeException::IEX_IREF, {{"iref",to_string(pin->irefRefWdbeCPin)}, {"iel","irefRefWdbeCPin"}, {"lineno",to_string(pin->lineno)}});
+						};
+						pin->refWdbeCPin = pinC->ref;
 					};
 					pin->refWdbeMBank = bnk->ref;
 					//pin->refJSref: SUB
@@ -538,12 +545,18 @@ uint JobWdbeIexFin::enterSgeImport(
 				if (sig1->ixVBasetype == 0) throw SbeException(SbeException::IEX_VSREF, {{"vsref",sig1->srefIxVBasetype}, {"iel","srefIxVBasetype"}, {"lineno",to_string(sig1->lineno)}});
 				//sig1->refWdbeCSignal: PREVIMP
 				if (sig1->irefRefWdbeCSignal != 0) {
-					for (unsigned int i = 0; i < unt->imeicsignal1.nodes.size(); i++)
-						if (unt->imeicsignal1.nodes[i]->iref == sig1->irefRefWdbeCSignal) {
-							sig1->refWdbeCSignal = unt->imeicsignal1.nodes[i]->ref;
-							break;
+					if (irefs1.find(sig1->irefRefWdbeCSignal) == irefs1.end()) {
+						sigC1 = new ImeitemICSignal1(sig1->irefRefWdbeCSignal);
+						sigC1->ref = dbswdbe->tblwdbecsignal->getNewRef();
+						unt->imeicsignal1.nodes.push_back(sigC1);
+						irefs1.insert(sigC1->iref);
+					} else {
+						for (unsigned int i = 0; i < unt->imeicsignal1.nodes.size(); i++) {
+							sigC1 = unt->imeicsignal1.nodes[i];
+							if (sigC1->iref == sig1->irefRefWdbeCSignal) break;
 						};
-					if (sig1->refWdbeCSignal == 0) throw SbeException(SbeException::IEX_IREF, {{"iref",to_string(sig1->irefRefWdbeCSignal)}, {"iel","irefRefWdbeCSignal"}, {"lineno",to_string(sig1->lineno)}});
+					};
+					sig1->refWdbeCSignal = sigC1->ref;
 				};
 				sig1->refIxVTbl = VecWdbeVMSignalRefTbl::UNT;
 				sig1->refUref = unt->ref;
@@ -621,12 +634,18 @@ uint JobWdbeIexFin::enterSgeImport(
 
 					//var1->refWdbeCVariable: PREVIMP
 					if (var1->irefRefWdbeCVariable != 0) {
-						for (unsigned int i = 0; i < mdl->imeicvariable1.nodes.size(); i++)
-							if (mdl->imeicvariable1.nodes[i]->iref == var1->irefRefWdbeCVariable) {
-								var1->refWdbeCVariable = mdl->imeicvariable1.nodes[i]->ref;
-								break;
+						if (irefs2.find(var1->irefRefWdbeCVariable) == irefs2.end()) {
+							varC1 = new ImeitemICVariable1(var1->irefRefWdbeCVariable);
+							varC1->ref = dbswdbe->tblwdbecvariable->getNewRef();
+							mdl->imeicvariable1.nodes.push_back(varC1);
+							irefs2.insert(varC1->iref);
+						} else {
+							for (unsigned int i = 0; i < mdl->imeicvariable1.nodes.size(); i++) {
+								varC1 = mdl->imeicvariable1.nodes[i];
+								if (varC1->iref == var1->irefRefWdbeCVariable) break;
 							};
-						if (var1->refWdbeCVariable == 0) throw SbeException(SbeException::IEX_IREF, {{"iref",to_string(var1->irefRefWdbeCVariable)}, {"iel","irefRefWdbeCVariable"}, {"lineno",to_string(var1->lineno)}});
+						};
+						var1->refWdbeCVariable = varC1->ref;
 					};
 					var1->refIxVTbl = VecWdbeVMVariableRefTbl::MDL;
 					var1->refUref = mdl->ref;
@@ -670,8 +689,8 @@ uint JobWdbeIexFin::enterSgeImport(
 							gen->srefWdbeKHdltype = gen_r->srefWdbeKHdltype;
 							gen->Width = gen_r->Width;
 							gen->Minmax = gen_r->Minmax;
-							//gen->Defval = gen_r->Defval;
-							//gen->srcSrefWdbeMGeneric = gen_r->srcSrefWdbeMGeneric;
+							if (gen->Defval == "") gen->Defval = gen_r->Defval;
+							if (gen->srcSrefWdbeMGeneric == "") gen->srcSrefWdbeMGeneric = gen_r->srcSrefWdbeMGeneric;
 							gen->Comment = gen_r->Comment;
 
 							delete gen_r;
@@ -686,12 +705,18 @@ uint JobWdbeIexFin::enterSgeImport(
 					} else if (gen->ixWdbeVIop == VecWdbeVIop::INS) {
 						//gen->refWdbeCGeneric: PREVIMP
 						if (gen->irefRefWdbeCGeneric != 0) {
-							for (unsigned int i = 0; i < mdl->imeicgeneric.nodes.size(); i++)
-								if (mdl->imeicgeneric.nodes[i]->iref == gen->irefRefWdbeCGeneric) {
-									gen->refWdbeCGeneric = mdl->imeicgeneric.nodes[i]->ref;
-									break;
+							if (irefs2.find(gen->irefRefWdbeCGeneric) == irefs2.end()) {
+								genC = new ImeitemICGeneric(gen->irefRefWdbeCGeneric);
+								genC->ref = dbswdbe->tblwdbecgeneric->getNewRef();
+								mdl->imeicgeneric.nodes.push_back(genC);
+								irefs2.insert(genC->iref);
+							} else {
+								for (unsigned int i = 0; i < mdl->imeicgeneric.nodes.size(); i++) {
+									genC = mdl->imeicgeneric.nodes[i];
+									if (genC->iref == gen->irefRefWdbeCGeneric) break;
 								};
-							if (gen->refWdbeCGeneric == 0) throw SbeException(SbeException::IEX_IREF, {{"iref",to_string(gen->irefRefWdbeCGeneric)}, {"iel","irefRefWdbeCGeneric"}, {"lineno",to_string(gen->lineno)}});
+							};
+							gen->refWdbeCGeneric = genC->ref;
 						};
 						gen->mdlRefWdbeMModule = mdl->ref;
 						//gen->mdlNum: CUST
@@ -758,12 +783,18 @@ uint JobWdbeIexFin::enterSgeImport(
 					} else if (prt->ixWdbeVIop == VecWdbeVIop::INS) {
 						//prt->refWdbeCPort: PREVIMP
 						if (prt->irefRefWdbeCPort != 0) {
-							for (unsigned int i = 0; i < mdl->imeicport.nodes.size(); i++)
-								if (mdl->imeicport.nodes[i]->iref == prt->irefRefWdbeCPort) {
-									prt->refWdbeCPort = mdl->imeicport.nodes[i]->ref;
-									break;
+							if (irefs2.find(prt->irefRefWdbeCPort) == irefs2.end()) {
+								prtC = new ImeitemICPort(prt->irefRefWdbeCPort);
+								prtC->ref = dbswdbe->tblwdbecport->getNewRef();
+								mdl->imeicport.nodes.push_back(prtC);
+								irefs2.insert(prtC->iref);
+							} else {
+								for (unsigned int i = 0; i < mdl->imeicport.nodes.size(); i++) {
+									prtC = mdl->imeicport.nodes[i];
+									if (prtC->iref == prt->irefRefWdbeCPort) break;
 								};
-							if (prt->refWdbeCPort == 0) throw SbeException(SbeException::IEX_IREF, {{"iref",to_string(prt->irefRefWdbeCPort)}, {"iel","irefRefWdbeCPort"}, {"lineno",to_string(prt->lineno)}});
+							};
+							prt->refWdbeCPort = prtC->ref;
 						};
 						prt->mdlRefWdbeMModule = mdl->ref;
 						//prt->mdlNum: CUST
@@ -808,12 +839,18 @@ uint JobWdbeIexFin::enterSgeImport(
 					if (sig2->ixVBasetype == 0) throw SbeException(SbeException::IEX_VSREF, {{"vsref",sig2->srefIxVBasetype}, {"iel","srefIxVBasetype"}, {"lineno",to_string(sig2->lineno)}});
 					//sig2->refWdbeCSignal: PREVIMP
 					if (sig2->irefRefWdbeCSignal != 0) {
-						for (unsigned int i = 0; i < mdl->imeicsignal2.nodes.size(); i++)
-							if (mdl->imeicsignal2.nodes[i]->iref == sig2->irefRefWdbeCSignal) {
-								sig2->refWdbeCSignal = mdl->imeicsignal2.nodes[i]->ref;
-								break;
+						if (irefs2.find(sig2->irefRefWdbeCSignal) == irefs2.end()) {
+							sigC2 = new ImeitemICSignal2(sig2->irefRefWdbeCSignal);
+							sigC2->ref = dbswdbe->tblwdbecsignal->getNewRef();
+							mdl->imeicsignal2.nodes.push_back(sigC2);
+							irefs2.insert(sigC2->iref);
+						} else {
+							for (unsigned int i = 0; i < mdl->imeicsignal2.nodes.size(); i++) {
+								sigC2 = mdl->imeicsignal2.nodes[i];
+								if (sigC2->iref == sig2->irefRefWdbeCSignal) break;
 							};
-						if (sig2->refWdbeCSignal == 0) throw SbeException(SbeException::IEX_IREF, {{"iref",to_string(sig2->irefRefWdbeCSignal)}, {"iel","irefRefWdbeCSignal"}, {"lineno",to_string(sig2->lineno)}});
+						};
+						sig2->refWdbeCSignal = sigC2->ref;
 					};
 					sig2->refIxVTbl = VecWdbeVMSignalRefTbl::MDL;
 					sig2->refUref = mdl->ref;
@@ -839,6 +876,37 @@ uint JobWdbeIexFin::enterSgeImport(
 
 					dbswdbe->tblwdbemsignal->insertRec(sig2);
 					impcnt++;
+				};
+
+				for (unsigned int ix2 = 0; ix2 < mdl->imeimcdc.nodes.size(); ix2++) {
+					cdc = mdl->imeimcdc.nodes[ix2];
+
+					cdc->refWdbeMModule = mdl->ref;
+					//cdc->fckSrefWdbeMSignal: TBL
+					//cdc->farSrefWdbeMSignal: TBL
+					//cdc->sckSrefWdbeMSignal: TBL
+					//cdc->sarSrefWdbeMSignal: TBL
+
+					dbswdbe->tblwdbemcdc->insertRec(cdc);
+					impcnt++;
+
+					for (unsigned int ix3 = 0; ix3 < cdc->imeirmcdcmsignal.nodes.size(); ix3++) {
+						cdcRsig = cdc->imeirmcdcmsignal.nodes[ix3];
+
+						cdcRsig->refWdbeMCdc = cdc->ref;
+						//cdcRsig->refWdbeMSignal: PREVIMP
+						for (unsigned int i = 0; i < mdl->imeimsignal2.nodes.size(); i++)
+							if (mdl->imeimsignal2.nodes[i]->sref == cdcRsig->srefRefWdbeMSignal) {
+								cdcRsig->refWdbeMSignal = mdl->imeimsignal2.nodes[i]->ref;
+								break;
+							};
+						if (cdcRsig->refWdbeMSignal == 0) throw SbeException(SbeException::IEX_TSREF, {{"tsref",cdcRsig->srefRefWdbeMSignal}, {"iel","srefRefWdbeMSignal"}, {"lineno",to_string(cdcRsig->lineno)}});
+						cdcRsig->ixVDir = VecWdbeVRMCdcMSignalDir::getIx(cdcRsig->srefIxVDir);
+						if (cdcRsig->ixVDir == 0) throw SbeException(SbeException::IEX_VSREF, {{"vsref",cdcRsig->srefIxVDir}, {"iel","srefIxVDir"}, {"lineno",to_string(cdcRsig->lineno)}});
+
+						dbswdbe->tblwdbermcdcmsignal->insertRec(cdcRsig);
+						impcnt++;
+					};
 				};
 
 				for (unsigned int ix2 = 0; ix2 < mdl->imeimprocess.nodes.size(); ix2++) {
@@ -934,12 +1002,18 @@ uint JobWdbeIexFin::enterSgeImport(
 
 						//var2->refWdbeCVariable: PREVIMP
 						if (var2->irefRefWdbeCVariable != 0) {
-							for (unsigned int i = 0; i < prc->imeicvariable2.nodes.size(); i++)
-								if (prc->imeicvariable2.nodes[i]->iref == var2->irefRefWdbeCVariable) {
-									var2->refWdbeCVariable = prc->imeicvariable2.nodes[i]->ref;
-									break;
+							if (irefs3.find(var2->irefRefWdbeCVariable) == irefs3.end()) {
+								varC2 = new ImeitemICVariable2(var2->irefRefWdbeCVariable);
+								varC2->ref = dbswdbe->tblwdbecvariable->getNewRef();
+								prc->imeicvariable2.nodes.push_back(varC2);
+								irefs3.insert(varC2->iref);
+							} else {
+								for (unsigned int i = 0; i < prc->imeicvariable2.nodes.size(); i++) {
+									varC2 = prc->imeicvariable2.nodes[i];
+									if (varC2->iref == var2->irefRefWdbeCVariable) break;
 								};
-							if (var2->refWdbeCVariable == 0) throw SbeException(SbeException::IEX_IREF, {{"iref",to_string(var2->irefRefWdbeCVariable)}, {"iel","irefRefWdbeCVariable"}, {"lineno",to_string(var2->lineno)}});
+							};
+							var2->refWdbeCVariable = varC2->ref;
 						};
 						var2->refIxVTbl = VecWdbeVMVariableRefTbl::PRC;
 						var2->refUref = prc->ref;
@@ -963,6 +1037,9 @@ uint JobWdbeIexFin::enterSgeImport(
 						fsm = prc->imeimfsm.nodes[ix3];
 
 						fsm->refWdbeMProcess = prc->ref;
+						if (fsm->srefIxVDbgtaptype == "") fsm->srefIxVDbgtaptype = "void";
+						fsm->ixVDbgtaptype = VecWdbeVMFsmDbgtaptype::getIx(fsm->srefIxVDbgtaptype);
+						if (fsm->ixVDbgtaptype == 0) throw SbeException(SbeException::IEX_VSREF, {{"vsref",fsm->srefIxVDbgtaptype}, {"iel","srefIxVDbgtaptype"}, {"lineno",to_string(fsm->lineno)}});
 
 						dbswdbe->tblwdbemfsm->insertRec(fsm);
 						impcnt++;
@@ -980,6 +1057,8 @@ uint JobWdbeIexFin::enterSgeImport(
 							if (irefs4.find(fstC->iref) != irefs4.end()) throw SbeException(SbeException::IEX_IDIREF, {{"idiref",to_string(fstC->iref)}, {"ime","ImeICFsmstate"}, {"lineno",to_string(fstC->lineno)}});
 							fstC->ref = dbswdbe->tblwdbecfsmstate->getNewRef();
 							irefs4.insert(fstC->iref);
+
+							impcnt++;
 						};
 
 						num4 = 1;
@@ -989,12 +1068,18 @@ uint JobWdbeIexFin::enterSgeImport(
 
 							//fst->refWdbeCFsmstate: PREVIMP
 							if (fst->irefRefWdbeCFsmstate != 0) {
-								for (unsigned int i = 0; i < fsm->imeicfsmstate.nodes.size(); i++)
-									if (fsm->imeicfsmstate.nodes[i]->iref == fst->irefRefWdbeCFsmstate) {
-										fst->refWdbeCFsmstate = fsm->imeicfsmstate.nodes[i]->ref;
-										break;
+								if (irefs4.find(fst->irefRefWdbeCFsmstate) == irefs4.end()) {
+									fstC = new ImeitemICFsmstate(fst->irefRefWdbeCFsmstate);
+									fstC->ref = dbswdbe->tblwdbecfsmstate->getNewRef();
+									fsm->imeicfsmstate.nodes.push_back(fstC);
+									irefs4.insert(fstC->iref);
+								} else {
+									for (unsigned int i = 0; i < fsm->imeicfsmstate.nodes.size(); i++) {
+										fstC = fsm->imeicfsmstate.nodes[i];
+										if (fstC->iref == fst->irefRefWdbeCFsmstate) break;
 									};
-								if (fst->refWdbeCFsmstate == 0) throw SbeException(SbeException::IEX_IREF, {{"iref",to_string(fst->irefRefWdbeCFsmstate)}, {"iel","irefRefWdbeCFsmstate"}, {"lineno",to_string(fst->lineno)}});
+								};
+								fst->refWdbeCFsmstate = fstC->ref;
 							};
 							fst->fsmRefWdbeMFsm = fsm->ref;
 							fst->fsmNum = num4++;
@@ -1021,6 +1106,10 @@ uint JobWdbeIexFin::enterSgeImport(
 								//fstAstp->Ip3: TBL
 								//fstAstp->Cond4: TBL
 								//fstAstp->Ip4: TBL
+								//fstAstp->Cond5: TBL
+								//fstAstp->Ip5: TBL
+								//fstAstp->Cond5: TBL
+								//fstAstp->Ip5: TBL
 
 								dbswdbe->tblwdbeamfsmstatestep->insertRec(fstAstp);
 								impcnt++;
@@ -1039,7 +1128,6 @@ uint JobWdbeIexFin::enterSgeImport(
 					if (dbswdbe->tblwdbemcontroller->loadRecByRef(mdl->refWdbeMController, &ctr_r)) {
 						ctr->ref = ctr_r->ref;
 						ctr->refWdbeMModule = mdl->ref;
-						ctr->fwdRefWdbeMUnit = ctr_r->fwdRefWdbeMUnit;
 						ctr->Fullsref = ctr_r->Fullsref;
 						if (ctr->ixWdbeVIop == VecWdbeVIop::RETR) ctr->clrRefWdbeMSignal = ctr_r->clrRefWdbeMSignal;
 						//ctr->clrRefWdbeMSignal: IMPPP
@@ -1326,6 +1414,7 @@ uint JobWdbeIexFin::enterSgeReverse(
 	ImeitemIMInterrupt1* int1 = NULL;
 	ImeitemIMModule* mdl = NULL;
 	ImeitemIMSignal1* sig1 = NULL;
+	ImeitemIMCdc* cdc = NULL;
 	ImeitemIMController* ctr = NULL;
 	ImeitemIMGeneric* gen = NULL;
 	ImeitemIMPin* pin = NULL;
@@ -1342,6 +1431,7 @@ uint JobWdbeIexFin::enterSgeReverse(
 	ImeitemIMFsm* fsm = NULL;
 	ImeitemIMSensitivity2* sns2 = NULL;
 	ImeitemIMVariable2* var2 = NULL;
+	ImeitemIRMCdcMSignal* cdcRsig = NULL;
 	ImeitemIRMCommandMController* cmdRctr = NULL;
 	ImeitemIJAVKeylistKey* kakJkey = NULL;
 	ImeitemIMFsmstate* fst = NULL;
@@ -1380,6 +1470,16 @@ uint JobWdbeIexFin::enterSgeReverse(
 		for (unsigned int ix1 = 0; ix1 < unt->imeimmodule.nodes.size(); ix1++) {
 			mdl = unt->imeimmodule.nodes[ix1];
 			if (mdl->ref != 0) dbswdbe->tblwdbemmodule->removeRecByRef(mdl->ref);
+
+			for (unsigned int ix2 = 0; ix2 < mdl->imeimcdc.nodes.size(); ix2++) {
+				cdc = mdl->imeimcdc.nodes[ix2];
+				if (cdc->ref != 0) dbswdbe->tblwdbemcdc->removeRecByRef(cdc->ref);
+
+				for (unsigned int ix3 = 0; ix3 < cdc->imeirmcdcmsignal.nodes.size(); ix3++) {
+					cdcRsig = cdc->imeirmcdcmsignal.nodes[ix3];
+					if (cdcRsig->ref != 0) dbswdbe->tblwdbermcdcmsignal->removeRecByRef(cdcRsig->ref);
+				};
+			};
 
 			for (unsigned int ix2 = 0; ix2 < mdl->imeimcontroller.nodes.size(); ix2++) {
 				ctr = mdl->imeimcontroller.nodes[ix2];
@@ -1501,6 +1601,7 @@ uint JobWdbeIexFin::enterSgeCollect(
 	ImeitemICPort* prtC = NULL;
 	ImeitemICSignal2* sigC2 = NULL;
 	ImeitemICVariable1* varC1 = NULL;
+	ImeitemIMCdc* cdc = NULL;
 	ImeitemIMController* ctr = NULL;
 	ImeitemIMGeneric* gen = NULL;
 	ImeitemIMPin* pin = NULL;
@@ -1518,6 +1619,7 @@ uint JobWdbeIexFin::enterSgeCollect(
 	ImeitemIMFsm* fsm = NULL;
 	ImeitemIMSensitivity2* sns2 = NULL;
 	ImeitemIMVariable2* var2 = NULL;
+	ImeitemIRMCdcMSignal* cdcRsig = NULL;
 	ImeitemIRMCommandMController* cmdRctr = NULL;
 	ImeitemICFsmstate* fstC = NULL;
 	ImeitemIJAVKeylistKey* kakJkey = NULL;
@@ -1661,6 +1763,31 @@ uint JobWdbeIexFin::enterSgeCollect(
 
 				if (varC1->ref != 0) {
 					varC1->iref = ix2+1;
+				};
+			};
+
+			if (getIxWdbeVIop(icsWdbeVIop, VecVIme::IMEIMCDC, ixWdbeVIop)) {
+				dbswdbe->tblwdbemcdc->loadRefsByMdl(mdl->ref, false, refs);
+				for (unsigned int i = 0; i < refs.size(); i++) mdl->imeimcdc.nodes.push_back(new ImeitemIMCdc(dbswdbe, refs[i]));
+			};
+
+			for (unsigned int ix2 = 0; ix2 < mdl->imeimcdc.nodes.size(); ix2++) {
+				cdc = mdl->imeimcdc.nodes[ix2];
+
+				if (cdc->ref != 0) {
+				};
+
+				if (getIxWdbeVIop(icsWdbeVIop, VecVIme::IMEIRMCDCMSIGNAL, ixWdbeVIop)) {
+					dbswdbe->tblwdbermcdcmsignal->loadRefsByCdc(cdc->ref, false, refs);
+					for (unsigned int i = 0; i < refs.size(); i++) cdc->imeirmcdcmsignal.nodes.push_back(new ImeitemIRMCdcMSignal(dbswdbe, refs[i]));
+				};
+
+				for (unsigned int ix3 = 0; ix3 < cdc->imeirmcdcmsignal.nodes.size(); ix3++) {
+					cdcRsig = cdc->imeirmcdcmsignal.nodes[ix3];
+
+					if (cdcRsig->ref != 0) {
+						cdcRsig->srefRefWdbeMSignal = StubWdbe::getStubSigSref(dbswdbe, cdcRsig->refWdbeMSignal, ixWdbeVLocale, Stub::VecVNonetype::VOID, stcch);
+					};
 				};
 			};
 

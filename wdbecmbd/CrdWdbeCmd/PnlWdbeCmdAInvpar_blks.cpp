@@ -65,7 +65,7 @@ void PnlWdbeCmdAInvpar::ContInf::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["numFCsiQst"] = numFCsiQst;
+	me["numFCsiQst"] = (Json::Value::UInt) numFCsiQst;
 };
 
 void PnlWdbeCmdAInvpar::ContInf::writeXML(
@@ -272,15 +272,14 @@ PnlWdbeCmdAInvpar::StgIac::StgIac(
 };
 
 bool PnlWdbeCmdAInvpar::StgIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["StgIacWdbeCmdAInvpar"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["StgIacWdbeCmdAInvpar"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -334,13 +333,13 @@ void PnlWdbeCmdAInvpar::StgIac::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["TcoSrfWidth"] = TcoSrfWidth;
-	me["TcoPtyWidth"] = TcoPtyWidth;
-	me["TcoVecWidth"] = TcoVecWidth;
-	me["TcoLenWidth"] = TcoLenWidth;
-	me["TcoDfvWidth"] = TcoDfvWidth;
-	me["TcoVitWidth"] = TcoVitWidth;
-	me["TcoCmtWidth"] = TcoCmtWidth;
+	me["TcoSrfWidth"] = (Json::Value::UInt) TcoSrfWidth;
+	me["TcoPtyWidth"] = (Json::Value::UInt) TcoPtyWidth;
+	me["TcoVecWidth"] = (Json::Value::UInt) TcoVecWidth;
+	me["TcoLenWidth"] = (Json::Value::UInt) TcoLenWidth;
+	me["TcoDfvWidth"] = (Json::Value::UInt) TcoDfvWidth;
+	me["TcoVitWidth"] = (Json::Value::UInt) TcoVitWidth;
+	me["TcoCmtWidth"] = (Json::Value::UInt) TcoCmtWidth;
 };
 
 void PnlWdbeCmdAInvpar::StgIac::writeXML(
@@ -479,15 +478,14 @@ string PnlWdbeCmdAInvpar::DpchAppData::getSrefsMask() {
 };
 
 void PnlWdbeCmdAInvpar::DpchAppData::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbeCmdAInvparData"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbeCmdAInvparData"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -553,15 +551,14 @@ string PnlWdbeCmdAInvpar::DpchAppDo::getSrefsMask() {
 };
 
 void PnlWdbeCmdAInvpar::DpchAppDo::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppWdbeCmdAInvparDo"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppWdbeCmdAInvparDo"];}();
 
 	basefound = (me != Json::nullValue);
 

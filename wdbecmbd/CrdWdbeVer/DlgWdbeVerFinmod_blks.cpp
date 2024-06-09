@@ -114,7 +114,7 @@ uint DlgWdbeVerFinmod::VecVSge::getIx(
 
 	if (s == "idle") return IDLE;
 	if (s == "alrwer") return ALRWER;
-	if (s == "gentst") return GENTST;
+	if (s == "genaux") return GENAUX;
 	if (s == "genwri") return GENWRI;
 	if (s == "asmlfi") return ASMLFI;
 	if (s == "gensv") return GENSV;
@@ -130,7 +130,7 @@ string DlgWdbeVerFinmod::VecVSge::getSref(
 		) {
 	if (ix == IDLE) return("idle");
 	if (ix == ALRWER) return("alrwer");
-	if (ix == GENTST) return("gentst");
+	if (ix == GENAUX) return("genaux");
 	if (ix == GENWRI) return("genwri");
 	if (ix == ASMLFI) return("asmlfi");
 	if (ix == GENSV) return("gensv");
@@ -164,15 +164,14 @@ DlgWdbeVerFinmod::ContIac::ContIac(
 };
 
 bool DlgWdbeVerFinmod::ContIac::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["ContIacDlgWdbeVerFinmod"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["ContIacDlgWdbeVerFinmod"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -214,7 +213,7 @@ void DlgWdbeVerFinmod::ContIac::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["numFDse"] = numFDse;
+	me["numFDse"] = (Json::Value::UInt) numFDse;
 };
 
 void DlgWdbeVerFinmod::ContIac::writeXML(
@@ -279,7 +278,7 @@ void DlgWdbeVerFinmod::ContInf::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["numFSge"] = numFSge;
+	me["numFSge"] = (Json::Value::UInt) numFSge;
 };
 
 void DlgWdbeVerFinmod::ContInf::writeXML(
@@ -828,15 +827,14 @@ string DlgWdbeVerFinmod::DpchAppData::getSrefsMask() {
 };
 
 void DlgWdbeVerFinmod::DpchAppData::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppDlgWdbeVerFinmodData"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppDlgWdbeVerFinmodData"];}();
 
 	basefound = (me != Json::nullValue);
 
@@ -900,15 +898,14 @@ string DlgWdbeVerFinmod::DpchAppDo::getSrefsMask() {
 };
 
 void DlgWdbeVerFinmod::DpchAppDo::readJSON(
-			Json::Value& sup
+			const Json::Value& sup
 			, bool addbasetag
 		) {
 	clear();
 
 	bool basefound;
 
-	Json::Value& me = sup;
-	if (addbasetag) me = sup["DpchAppDlgWdbeVerFinmodDo"];
+	const Json::Value& me = [&]{if (!addbasetag) return sup; return sup["DpchAppDlgWdbeVerFinmodDo"];}();
 
 	basefound = (me != Json::nullValue);
 

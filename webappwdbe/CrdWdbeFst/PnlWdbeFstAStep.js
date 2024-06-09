@@ -105,6 +105,10 @@ function refreshBD(bNotD, chgcol) {
 		var TcoIp3Width = parseInt(retrieveSi(srcdoc, "StgIacWdbeFstAStep", "TcoIp3Width"));
 		var TcoCn4Width = parseInt(retrieveSi(srcdoc, "StgIacWdbeFstAStep", "TcoCn4Width"));
 		var TcoIp4Width = parseInt(retrieveSi(srcdoc, "StgIacWdbeFstAStep", "TcoIp4Width"));
+		var TcoCn5Width = parseInt(retrieveSi(srcdoc, "StgIacWdbeFstAStep", "TcoCn5Width"));
+		var TcoIp5Width = parseInt(retrieveSi(srcdoc, "StgIacWdbeFstAStep", "TcoIp5Width"));
+		var TcoCn6Width = parseInt(retrieveSi(srcdoc, "StgIacWdbeFstAStep", "TcoCn6Width"));
+		var TcoIp6Width = parseInt(retrieveSi(srcdoc, "StgIacWdbeFstAStep", "TcoIp6Width"));
 
 		// col data is stored in document variables
 		doc.cols = new Array();
@@ -136,6 +140,14 @@ function refreshBD(bNotD, chgcol) {
 				doc.cols.push("TcoCn4"); doc.widths.push(TcoCn4Width); doc.fs.push("cn4"); wtot += TcoCn4Width;
 			} else if (i == 9) {
 				doc.cols.push("TcoIp4"); doc.widths.push(TcoIp4Width); doc.fs.push("ip4"); wtot += TcoIp4Width;
+			} else if (i == 10) {
+				doc.cols.push("TcoCn5"); doc.widths.push(TcoCn5Width); doc.fs.push("cn5"); wtot += TcoCn5Width;
+			} else if (i == 11) {
+				doc.cols.push("TcoIp5"); doc.widths.push(TcoIp5Width); doc.fs.push("ip5"); wtot += TcoIp5Width;
+			} else if (i == 12) {
+				doc.cols.push("TcoCn6"); doc.widths.push(TcoCn6Width); doc.fs.push("cn6"); wtot += TcoCn6Width;
+			} else if (i == 13) {
+				doc.cols.push("TcoIp6"); doc.widths.push(TcoIp6Width); doc.fs.push("ip6"); wtot += TcoIp6Width;
 			} else {
 				ix--;
 			};
@@ -429,8 +441,8 @@ function handleButRegularizeClick() {
 
 function handleButClipboardClick() {
 	copyToClipboard(document, srcdoc, "WdbeFstAStep", "ListWdbeQFstAStep", retrieveTi(srcdoc, "TagWdbeFstAStep", "TxtRecord1"), retrieveTi(srcdoc, "TagWdbeFstAStep", "TxtRecord2"),
-				["Fnx","Cn1","Ip1","Cn2","Ip2","Cn3","Ip3","Cn4","Ip4"],
-				["fnx","cn1","ip1","cn2","ip2","cn3","ip3","cn4","ip4"]);
+				["Fnx","Cn1","Ip1","Cn2","Ip2","Cn3","Ip3","Cn4","Ip4","Cn5","Ip5","Cn6","Ip6"],
+				["fnx","cn1","ip1","cn2","ip2","cn3","ip3","cn4","ip4","cn5","ip5","cn6","ip6"]);
 };
 
 // --- generalized event handlers for app controls

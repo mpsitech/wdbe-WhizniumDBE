@@ -268,3 +268,33 @@ bool PnlWdbePrcDetail::evalButFsmDeleteAvail(
 
 	return(args.back());
 };
+
+bool PnlWdbePrcDetail::evalPupFsmDttAvail(
+			DbsWdbe* dbswdbe
+		) {
+	// !prc.fsmEq(0)
+
+	vector<bool> args;
+	bool a;
+
+	a = false; a = (recPrc.refWdbeMFsm == 0);
+	args.push_back(a);
+	a = args.back(); args.pop_back();
+	args.push_back(!a);
+
+	return(args.back());
+};
+
+bool PnlWdbePrcDetail::evalPupFsmDttActive(
+			DbsWdbe* dbswdbe
+		) {
+	// pre.ixCrdaccPrcIncl(edit)
+
+	vector<bool> args;
+	bool a;
+
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCPRC, jref) & VecWdbeWAccess::EDIT);
+	args.push_back(a);
+
+	return(args.back());
+};

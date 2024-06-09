@@ -88,13 +88,14 @@ public:
 	public:
 		static const Sbecore::uint NEWCRE = 1;
 		static const Sbecore::uint NEWIMP = 2;
-		static const Sbecore::uint DSNMDLSTR = 3;
-		static const Sbecore::uint DSNCMDSET = 4;
-		static const Sbecore::uint DSNDFLALG = 5;
-		static const Sbecore::uint DSNGENFST = 6;
-		static const Sbecore::uint DSNCUSTFST = 7;
-		static const Sbecore::uint READY = 8;
-		static const Sbecore::uint ABANDON = 9;
+		static const Sbecore::uint DSNDEPLOY = 3;
+		static const Sbecore::uint DSNMDLSTR = 4;
+		static const Sbecore::uint DSNCMDSET = 5;
+		static const Sbecore::uint DSNDFLALG = 6;
+		static const Sbecore::uint DSNGENFST = 7;
+		static const Sbecore::uint DSNCUSTFST = 8;
+		static const Sbecore::uint READY = 9;
+		static const Sbecore::uint ABANDON = 10;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);

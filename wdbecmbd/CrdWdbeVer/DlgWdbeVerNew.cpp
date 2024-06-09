@@ -139,23 +139,23 @@ void DlgWdbeVerNew::refresh(
 	if (muteRefresh && !unmute) return;
 	muteRefresh = true;
 
-	ContInf oldContinf(continf);
 	ContIac oldContiac(contiac);
 	StatShr oldStatshr(statshr);
+	ContInf oldContinf(continf);
 
 	// IP refresh --- BEGIN
-	// continf
-	continf.numFSge = ixVSge;
-
 	// contiac
 
 	// statshr
 	statshr.ButCreActive = evalButCreActive(dbswdbe);
 
+	// continf
+	continf.numFSge = ixVSge;
+
 	// IP refresh --- END
-	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
 	if (contiac.diff(&oldContiac).size() != 0) insert(moditems, DpchEngData::CONTIAC);
 	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
+	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
 
 	muteRefresh = false;
 };
@@ -349,12 +349,6 @@ uint DlgWdbeVerNew::enterSgeCreate(
 
 	WdbeMVersion* bvr = NULL;
 
-	ListWdbeMRelease rlss;
-	WdbeMRelease* rls = NULL;
-
-	ListWdbeRMLibraryMVersion libRvers;
-	WdbeRMLibraryMVersion* libRver = NULL;
-
 	map<uint,uint> icsWdbeVIop;
 	uint ixWdbeVIop;
 
@@ -365,6 +359,7 @@ uint DlgWdbeVerNew::enterSgeCreate(
 
 	ver.grp = xchg->getRefPreset(VecWdbeVPreset::PREWDBEGROUP, jref);
 	ver.own = xchg->getRefPreset(VecWdbeVPreset::PREWDBEOWNER, jref);
+
 	ver.prjRefWdbeMProject = feedFDetPupPrj.getRefByNum(contiac.numFDetPupPrj);
 
 	ver.prjNum = 1;
@@ -402,36 +397,6 @@ uint DlgWdbeVerNew::enterSgeCreate(
 	ver.refJState = dbswdbe->tblwdbejmversionstate->insertNewRec(NULL, ver.ref, rawtime, ver.ixVState);
 
 	dbswdbe->tblwdbemversion->updateRec(&ver);
-
-	// releases
-	if (ver.bvrRefWdbeMVersion != 0) {
-		// copy from base version
-		dbswdbe->tblwdbemrelease->loadRstBySQL("SELECT * FROM TblWdbeMRelease WHERE refWdbeMVersion = " + to_string(ver.bvrRefWdbeMVersion) + " ORDER BY sref ASC", false, rlss);
-
-		for (unsigned int i = 0; i < rlss.nodes.size(); i++) {
-			rls = rlss.nodes[i];
-
-			rls->ref = 0;
-			rls->refWdbeMVersion = ver.ref;
-
-			dbswdbe->tblwdbemrelease->insertRec(rls);
-		};
-	};
-
-	// libraries
-	if (ver.bvrRefWdbeMVersion != 0) {
-		// copy from base version
-		dbswdbe->tblwdbermlibrarymversion->loadRstBySQL("SELECT * FROM TblWdbeRMLibraryMVersion WHERE refWdbeMVersion = " + to_string(ver.bvrRefWdbeMVersion), false, libRvers);
-
-		for (unsigned int i = 0; i < libRvers.nodes.size(); i++) {
-			libRver = libRvers.nodes[i];
-
-			libRver->ref = 0;
-			libRver->refWdbeMVersion = ver.ref;
-
-			dbswdbe->tblwdbermlibrarymversion->insertRec(libRver);
-		};
-	};
 
 	// generate and archive project model file as source for WhizniumDBEBootstrap
 	iexprj->reset(dbswdbe);

@@ -726,6 +726,10 @@ uint JobWdbeIexDcd::enterSgeImport(
 							//fstAstp->Ip3: TBL
 							//fstAstp->Cond4: TBL
 							//fstAstp->Ip4: TBL
+							//fstAstp->Cond5: TBL
+							//fstAstp->Ip5: TBL
+							//fstAstp->Cond6: TBL
+							//fstAstp->Ip6: TBL
 
 							dbswdbe->tblwdbeamfsmstatestep->insertRec(fstAstp);
 							impcnt++;

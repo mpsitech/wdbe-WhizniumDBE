@@ -115,23 +115,23 @@ public class PnlWdbeLibRec {
 
 		public static final int INITDONEDETAIL = 1;
 		public static final int INITDONEAMAKEFILE = 2;
-		public static final int INITDONEMNVERSION = 3;
+		public static final int INITDONEMNCOMPONENT = 3;
 
 		public StatApp(
 					boolean initdoneDetail
 					, boolean initdoneAMakefile
-					, boolean initdoneMNVersion
+					, boolean initdoneMNComponent
 				) {
 			this.initdoneDetail = initdoneDetail;
 			this.initdoneAMakefile = initdoneAMakefile;
-			this.initdoneMNVersion = initdoneMNVersion;
+			this.initdoneMNComponent = initdoneMNComponent;
 
-			mask = new HashSet<Integer>(Arrays.asList(INITDONEDETAIL, INITDONEAMAKEFILE, INITDONEMNVERSION));
+			mask = new HashSet<Integer>(Arrays.asList(INITDONEDETAIL, INITDONEAMAKEFILE, INITDONEMNCOMPONENT));
 		};
 
 		public boolean initdoneDetail;
 		public boolean initdoneAMakefile;
-		public boolean initdoneMNVersion;
+		public boolean initdoneMNComponent;
 
 		public boolean readXML(
 					Document doc
@@ -148,7 +148,7 @@ public class PnlWdbeLibRec {
 			if (Xmlio.checkXPath(doc, basexpath)) {
 				initdoneDetail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneDetail", mask, INITDONEDETAIL);
 				initdoneAMakefile = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneAMakefile", mask, INITDONEAMAKEFILE);
-				initdoneMNVersion = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneMNVersion", mask, INITDONEMNVERSION);
+				initdoneMNComponent = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneMNComponent", mask, INITDONEMNCOMPONENT);
 
 				return true;
 			};
@@ -163,7 +163,7 @@ public class PnlWdbeLibRec {
 
 			if (initdoneDetail == comp.initdoneDetail) items.add(INITDONEDETAIL);
 			if (initdoneAMakefile == comp.initdoneAMakefile) items.add(INITDONEAMAKEFILE);
-			if (initdoneMNVersion == comp.initdoneMNVersion) items.add(INITDONEMNVERSION);
+			if (initdoneMNComponent == comp.initdoneMNComponent) items.add(INITDONEMNCOMPONENT);
 
 			return(items);
 		};
@@ -176,7 +176,7 @@ public class PnlWdbeLibRec {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(INITDONEDETAIL, INITDONEAMAKEFILE, INITDONEMNVERSION));
+			diffitems = new HashSet<Integer>(Arrays.asList(INITDONEDETAIL, INITDONEAMAKEFILE, INITDONEMNCOMPONENT));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);
@@ -192,29 +192,29 @@ public class PnlWdbeLibRec {
 		public static final int IXWDBEVEXPSTATE = 1;
 		public static final int SCRJREFDETAIL = 2;
 		public static final int SCRJREFAMAKEFILE = 3;
-		public static final int SCRJREFMNVERSION = 4;
+		public static final int SCRJREFMNCOMPONENT = 4;
 		public static final int BUTREGULARIZEACTIVE = 5;
 
 		public StatShr(
 					int ixWdbeVExpstate
 					, String scrJrefDetail
 					, String scrJrefAMakefile
-					, String scrJrefMNVersion
+					, String scrJrefMNComponent
 					, boolean ButRegularizeActive
 				) {
 			this.ixWdbeVExpstate = ixWdbeVExpstate;
 			this.scrJrefDetail = scrJrefDetail;
 			this.scrJrefAMakefile = scrJrefAMakefile;
-			this.scrJrefMNVersion = scrJrefMNVersion;
+			this.scrJrefMNComponent = scrJrefMNComponent;
 			this.ButRegularizeActive = ButRegularizeActive;
 
-			mask = new HashSet<Integer>(Arrays.asList(IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFAMAKEFILE, SCRJREFMNVERSION, BUTREGULARIZEACTIVE));
+			mask = new HashSet<Integer>(Arrays.asList(IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFAMAKEFILE, SCRJREFMNCOMPONENT, BUTREGULARIZEACTIVE));
 		};
 
 		public int ixWdbeVExpstate;
 		public String scrJrefDetail;
 		public String scrJrefAMakefile;
-		public String scrJrefMNVersion;
+		public String scrJrefMNComponent;
 		public boolean ButRegularizeActive;
 
 		public boolean readXML(
@@ -235,7 +235,7 @@ public class PnlWdbeLibRec {
 				ixWdbeVExpstate = VecWdbeVExpstate.getIx(srefIxWdbeVExpstate);
 				scrJrefDetail = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefDetail", mask, SCRJREFDETAIL);
 				scrJrefAMakefile = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefAMakefile", mask, SCRJREFAMAKEFILE);
-				scrJrefMNVersion = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefMNVersion", mask, SCRJREFMNVERSION);
+				scrJrefMNComponent = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefMNComponent", mask, SCRJREFMNCOMPONENT);
 				ButRegularizeActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButRegularizeActive", mask, BUTREGULARIZEACTIVE);
 
 				return true;
@@ -252,7 +252,7 @@ public class PnlWdbeLibRec {
 			if (ixWdbeVExpstate == comp.ixWdbeVExpstate) items.add(IXWDBEVEXPSTATE);
 			if (scrJrefDetail.equals(comp.scrJrefDetail)) items.add(SCRJREFDETAIL);
 			if (scrJrefAMakefile.equals(comp.scrJrefAMakefile)) items.add(SCRJREFAMAKEFILE);
-			if (scrJrefMNVersion.equals(comp.scrJrefMNVersion)) items.add(SCRJREFMNVERSION);
+			if (scrJrefMNComponent.equals(comp.scrJrefMNComponent)) items.add(SCRJREFMNCOMPONENT);
 			if (ButRegularizeActive == comp.ButRegularizeActive) items.add(BUTREGULARIZEACTIVE);
 
 			return(items);
@@ -266,7 +266,7 @@ public class PnlWdbeLibRec {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFAMAKEFILE, SCRJREFMNVERSION, BUTREGULARIZEACTIVE));
+			diffitems = new HashSet<Integer>(Arrays.asList(IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFAMAKEFILE, SCRJREFMNCOMPONENT, BUTREGULARIZEACTIVE));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);
