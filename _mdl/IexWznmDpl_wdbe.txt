@@ -4,9 +4,6 @@ eng	wdbed	WhizniumDBE main engine
 	ImeIMRelease.srefRefWznmMMachine	sref	srefsKOption	Comment
 	any;mac	wdbed_mac
 	any;ubuntu	wdbed_ubuntu
-	// IP releases.mpsi --- IBEGIN
-	any;ubuntu;mpsitech;jack	wdbed_ubuntu_mpsi
-	// IP releases.mpsi --- IEND
 	ImeIMRelease.end
 	ImeIRMComponentMLibrary.srefRefWznmMLibrary
 	apiwzlm
@@ -19,17 +16,11 @@ openg	wdbeopd1	WhizniumDBE operation engine
 	ImeIMRelease.srefRefWznmMMachine	sref	srefsKOption	Comment
 	any;mac	wdbeopd1_mac
 	any;ubuntu	wdbeopd1_ubuntu
-	// IP releases.mpsi --- IBEGIN
-	any;ubuntu;mpsitech;jack	wdbeopd1_ubuntu_mpsi
-	// IP releases.mpsi --- IEND
 	ImeIMRelease.end
 openg	wdbeopd2	WhizniumDBE operation engine (module templates)
 	ImeIMRelease.srefRefWznmMMachine	sref	srefsKOption	Comment
 	any;mac	wdbeopd2_mac
 	any;ubuntu	wdbeopd2_ubuntu
-	// IP releases.mpsi --- IBEGIN
-	any;ubuntu;mpsitech;jack	wdbeopd2_ubuntu_mpsi
-	// IP releases.mpsi --- IEND
 	ImeIMRelease.end
 cmbeng	wdbecmbd	WhizniumDBE combined engine
 	ImeIMRelease.srefRefWznmMMachine	sref	srefsKOption	Comment
@@ -46,9 +37,6 @@ dbs	dbswdbe	WhizniumDBE database access library
 	ImeIMRelease.srefRefWznmMMachine	sref	srefsKOption	Comment
 	any;mac	dbswdbe_mac
 	any;ubuntu	dbswdbe_ubuntu
-	// IP releases.mpsi --- IBEGIN
-	any;ubuntu;mpsitech;jack	dbswdbe_ubuntu_mpsi
-	// IP releases.mpsi --- IEND
 	ImeIMRelease.end
 vueapp	vueappwdbe	WhizniumDBE Vue.js app
 	ImeIMRelease.srefRefWznmMMachine	sref	srefsKOption	Comment
