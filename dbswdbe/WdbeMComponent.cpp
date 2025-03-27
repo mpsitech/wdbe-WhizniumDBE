@@ -24,13 +24,13 @@ WdbeMComponent::WdbeMComponent(
 			, const ubigint refWdbeMVersion
 			, const string sref
 			, const string Comment
-		) {
-
-	this->ref = ref;
-	this->ixVBasetype = ixVBasetype;
-	this->refWdbeMVersion = refWdbeMVersion;
-	this->sref = sref;
-	this->Comment = Comment;
+		) :
+			ref(ref)
+			, ixVBasetype(ixVBasetype)
+			, refWdbeMVersion(refWdbeMVersion)
+			, sref(sref)
+			, Comment(Comment)
+		{
 };
 
 bool WdbeMComponent::operator==(

@@ -240,9 +240,9 @@ void QryWdbeCmdList::rerun_orderSQL(
 			string& sqlstr
 			, const uint preIxOrd
 		) {
-	if (preIxOrd == VecVOrd::SRF) sqlstr += " ORDER BY TblWdbeMCommand.sref ASC";
+	if (preIxOrd == VecVOrd::REU) sqlstr += " ORDER BY TblWdbeMCommand.refUref ASC";
 	else if (preIxOrd == VecVOrd::RET) sqlstr += " ORDER BY TblWdbeMCommand.refIxVTbl ASC";
-	else if (preIxOrd == VecVOrd::REU) sqlstr += " ORDER BY TblWdbeMCommand.refUref ASC";
+	else if (preIxOrd == VecVOrd::SRF) sqlstr += " ORDER BY TblWdbeMCommand.sref ASC";
 };
 
 void QryWdbeCmdList::fetch(

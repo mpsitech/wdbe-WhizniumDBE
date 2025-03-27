@@ -32,21 +32,22 @@ WdbeQSnsList::WdbeQSnsList(
 			, const string titSrcIxVTbl
 			, const ubigint srcUref
 			, const string stubSrcUref
-		) {
-	this->qref = qref;
-	this->jref = jref;
-	this->jnum = jnum;
-	this->ref = ref;
-	this->refIxVTbl = refIxVTbl;
-	this->srefRefIxVTbl = srefRefIxVTbl;
-	this->titRefIxVTbl = titRefIxVTbl;
-	this->refUref = refUref;
-	this->stubRefUref = stubRefUref;
-	this->srcIxVTbl = srcIxVTbl;
-	this->srefSrcIxVTbl = srefSrcIxVTbl;
-	this->titSrcIxVTbl = titSrcIxVTbl;
-	this->srcUref = srcUref;
-	this->stubSrcUref = stubSrcUref;
+		) :
+			qref(qref)
+			, jref(jref)
+			, jnum(jnum)
+			, ref(ref)
+			, refIxVTbl(refIxVTbl)
+			, srefRefIxVTbl(srefRefIxVTbl)
+			, titRefIxVTbl(titRefIxVTbl)
+			, refUref(refUref)
+			, stubRefUref(stubRefUref)
+			, srcIxVTbl(srcIxVTbl)
+			, srefSrcIxVTbl(srefSrcIxVTbl)
+			, titSrcIxVTbl(titSrcIxVTbl)
+			, srcUref(srcUref)
+			, stubSrcUref(stubSrcUref)
+		{
 };
 
 void WdbeQSnsList::writeJSON(

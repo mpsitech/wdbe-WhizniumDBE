@@ -53,9 +53,8 @@ PnlWdbeSnsList::ContIac::ContIac(
 			const uint numFTos
 		) :
 			Block()
+			, numFTos(numFTos)
 		{
-	this->numFTos = numFTos;
-
 	mask = {NUMFTOS};
 };
 
@@ -133,12 +132,11 @@ PnlWdbeSnsList::ContInf::ContInf(
 			, const uint numFCsiQst
 		) :
 			Block()
+			, TxtFor(TxtFor)
+			, TxtPre(TxtPre)
+			, ButFilterOn(ButFilterOn)
+			, numFCsiQst(numFCsiQst)
 		{
-	this->TxtFor = TxtFor;
-	this->TxtPre = TxtPre;
-	this->ButFilterOn = ButFilterOn;
-	this->numFCsiQst = numFCsiQst;
-
 	mask = {TXTFOR, TXTPRE, BUTFILTERON, NUMFCSIQST};
 };
 
@@ -204,10 +202,9 @@ PnlWdbeSnsList::StatShr::StatShr(
 			, const bool ButDeleteActive
 		) :
 			Block()
+			, ixWdbeVExpstate(ixWdbeVExpstate)
+			, ButDeleteActive(ButDeleteActive)
 		{
-	this->ixWdbeVExpstate = ixWdbeVExpstate;
-	this->ButDeleteActive = ButDeleteActive;
-
 	mask = {IXWDBEVEXPSTATE, BUTDELETEACTIVE};
 };
 
@@ -276,12 +273,11 @@ PnlWdbeSnsList::StgIac::StgIac(
 			, const uint TcoSruWidth
 		) :
 			Block()
+			, TcoRetWidth(TcoRetWidth)
+			, TcoReuWidth(TcoReuWidth)
+			, TcoSrtWidth(TcoSrtWidth)
+			, TcoSruWidth(TcoSruWidth)
 		{
-	this->TcoRetWidth = TcoRetWidth;
-	this->TcoReuWidth = TcoReuWidth;
-	this->TcoSrtWidth = TcoSrtWidth;
-	this->TcoSruWidth = TcoSruWidth;
-
 	mask = {TCORETWIDTH, TCOREUWIDTH, TCOSRTWIDTH, TCOSRUWIDTH};
 };
 
@@ -375,19 +371,18 @@ PnlWdbeSnsList::Tag::Tag(
 			, const string& TcoSru
 		) :
 			Block()
+			, Cpt(Cpt)
+			, TxtFor(TxtFor)
+			, TxtRecord1(TxtRecord1)
+			, TxtRecord2(TxtRecord2)
+			, Trs(Trs)
+			, TxtShowing1(TxtShowing1)
+			, TxtShowing2(TxtShowing2)
+			, TcoRet(TcoRet)
+			, TcoReu(TcoReu)
+			, TcoSrt(TcoSrt)
+			, TcoSru(TcoSru)
 		{
-	this->Cpt = Cpt;
-	this->TxtFor = TxtFor;
-	this->TxtRecord1 = TxtRecord1;
-	this->TxtRecord2 = TxtRecord2;
-	this->Trs = Trs;
-	this->TxtShowing1 = TxtShowing1;
-	this->TxtShowing2 = TxtShowing2;
-	this->TcoRet = TcoRet;
-	this->TcoReu = TcoReu;
-	this->TcoSrt = TcoSrt;
-	this->TcoSru = TcoSru;
-
 	mask = {CPT, TXTFOR, TXTRECORD1, TXTRECORD2, TRS, TXTSHOWING1, TXTSHOWING2, TCORET, TCOREU, TCOSRT, TCOSRU};
 };
 
@@ -481,11 +476,11 @@ PnlWdbeSnsList::DpchAppDo::DpchAppDo(
 			, const set<uint>& mask
 		) :
 			DpchAppWdbe(VecWdbeVDpch::DPCHAPPWDBESNSLISTDO, scrJref)
+			, ixVDo(ixVDo)
 		{
 	if (find(mask, ALL)) this->mask = {SCRJREF, IXVDO};
 	else this->mask = mask;
 
-	this->ixVDo = ixVDo;
 };
 
 string PnlWdbeSnsList::DpchAppDo::getSrefsMask() {

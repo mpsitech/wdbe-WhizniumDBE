@@ -45,9 +45,8 @@ PnlWdbeVerRec::ContInf::ContInf(
 			const string& TxtRef
 		) :
 			Block()
+			, TxtRef(TxtRef)
 		{
-	this->TxtRef = TxtRef;
-
 	mask = {TXTREF};
 };
 
@@ -110,13 +109,12 @@ PnlWdbeVerRec::StatApp::StatApp(
 			, const bool initdoneRef1NFile
 		) :
 			Block()
+			, initdoneDetail(initdoneDetail)
+			, initdoneBvr1NVersion(initdoneBvr1NVersion)
+			, initdone1NComponent(initdone1NComponent)
+			, initdone1NUnit(initdone1NUnit)
+			, initdoneRef1NFile(initdoneRef1NFile)
 		{
-	this->initdoneDetail = initdoneDetail;
-	this->initdoneBvr1NVersion = initdoneBvr1NVersion;
-	this->initdone1NComponent = initdone1NComponent;
-	this->initdone1NUnit = initdone1NUnit;
-	this->initdoneRef1NFile = initdoneRef1NFile;
-
 	mask = {INITDONEDETAIL, INITDONEBVR1NVERSION, INITDONE1NCOMPONENT, INITDONE1NUNIT, INITDONEREF1NFILE};
 };
 
@@ -189,15 +187,14 @@ PnlWdbeVerRec::StatShr::StatShr(
 			, const bool ButRegularizeActive
 		) :
 			Block()
+			, ixWdbeVExpstate(ixWdbeVExpstate)
+			, scrJrefDetail(scrJrefDetail)
+			, scrJrefBvr1NVersion(scrJrefBvr1NVersion)
+			, scrJref1NComponent(scrJref1NComponent)
+			, scrJref1NUnit(scrJref1NUnit)
+			, scrJrefRef1NFile(scrJrefRef1NFile)
+			, ButRegularizeActive(ButRegularizeActive)
 		{
-	this->ixWdbeVExpstate = ixWdbeVExpstate;
-	this->scrJrefDetail = scrJrefDetail;
-	this->scrJrefBvr1NVersion = scrJrefBvr1NVersion;
-	this->scrJref1NComponent = scrJref1NComponent;
-	this->scrJref1NUnit = scrJref1NUnit;
-	this->scrJrefRef1NFile = scrJrefRef1NFile;
-	this->ButRegularizeActive = ButRegularizeActive;
-
 	mask = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFBVR1NVERSION, SCRJREF1NCOMPONENT, SCRJREF1NUNIT, SCRJREFREF1NFILE, BUTREGULARIZEACTIVE};
 };
 
@@ -273,9 +270,8 @@ PnlWdbeVerRec::Tag::Tag(
 			const string& Cpt
 		) :
 			Block()
+			, Cpt(Cpt)
 		{
-	this->Cpt = Cpt;
-
 	mask = {CPT};
 };
 
@@ -312,11 +308,11 @@ PnlWdbeVerRec::DpchAppDo::DpchAppDo(
 			, const set<uint>& mask
 		) :
 			DpchAppWdbe(VecWdbeVDpch::DPCHAPPWDBEVERRECDO, scrJref)
+			, ixVDo(ixVDo)
 		{
 	if (find(mask, ALL)) this->mask = {SCRJREF, IXVDO};
 	else this->mask = mask;
 
-	this->ixVDo = ixVDo;
 };
 
 string PnlWdbeVerRec::DpchAppDo::getSrefsMask() {

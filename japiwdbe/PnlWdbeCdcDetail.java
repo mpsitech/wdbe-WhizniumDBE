@@ -352,83 +352,83 @@ public class PnlWdbeCdcDetail {
 	  */
 	public class StatShr extends Block {
 
-		public static final int TXFFCKVALID = 1;
-		public static final int TXFSCKVALID = 2;
-		public static final int TXFFARVALID = 3;
-		public static final int TXFSARVALID = 4;
-		public static final int BUTSAVEAVAIL = 5;
-		public static final int BUTSAVEACTIVE = 6;
-		public static final int TXTFCKACTIVE = 7;
-		public static final int BUTFCKVIEWAVAIL = 8;
-		public static final int TXTSCKACTIVE = 9;
-		public static final int BUTSCKVIEWAVAIL = 10;
-		public static final int TXTMDLACTIVE = 11;
-		public static final int BUTMDLVIEWAVAIL = 12;
-		public static final int BUTMDLVIEWACTIVE = 13;
-		public static final int TXTFARACTIVE = 14;
-		public static final int BUTFARVIEWAVAIL = 15;
-		public static final int TXTSARACTIVE = 16;
+		public static final int BUTSAVEAVAIL = 1;
+		public static final int BUTSAVEACTIVE = 2;
+		public static final int TXTFCKACTIVE = 3;
+		public static final int TXFFCKVALID = 4;
+		public static final int BUTFCKVIEWAVAIL = 5;
+		public static final int TXTSCKACTIVE = 6;
+		public static final int TXFSCKVALID = 7;
+		public static final int BUTSCKVIEWAVAIL = 8;
+		public static final int TXTMDLACTIVE = 9;
+		public static final int BUTMDLVIEWAVAIL = 10;
+		public static final int BUTMDLVIEWACTIVE = 11;
+		public static final int TXTFARACTIVE = 12;
+		public static final int TXFFARVALID = 13;
+		public static final int BUTFARVIEWAVAIL = 14;
+		public static final int TXTSARACTIVE = 15;
+		public static final int TXFSARVALID = 16;
 		public static final int BUTSARVIEWAVAIL = 17;
 		public static final int TXFRATACTIVE = 18;
 
 		public StatShr(
-					boolean TxfFckValid
-					, boolean TxfSckValid
-					, boolean TxfFarValid
-					, boolean TxfSarValid
-					, boolean ButSaveAvail
+					boolean ButSaveAvail
 					, boolean ButSaveActive
 					, boolean TxtFckActive
+					, boolean TxfFckValid
 					, boolean ButFckViewAvail
 					, boolean TxtSckActive
+					, boolean TxfSckValid
 					, boolean ButSckViewAvail
 					, boolean TxtMdlActive
 					, boolean ButMdlViewAvail
 					, boolean ButMdlViewActive
 					, boolean TxtFarActive
+					, boolean TxfFarValid
 					, boolean ButFarViewAvail
 					, boolean TxtSarActive
+					, boolean TxfSarValid
 					, boolean ButSarViewAvail
 					, boolean TxfRatActive
 				) {
-			this.TxfFckValid = TxfFckValid;
-			this.TxfSckValid = TxfSckValid;
-			this.TxfFarValid = TxfFarValid;
-			this.TxfSarValid = TxfSarValid;
 			this.ButSaveAvail = ButSaveAvail;
 			this.ButSaveActive = ButSaveActive;
 			this.TxtFckActive = TxtFckActive;
+			this.TxfFckValid = TxfFckValid;
 			this.ButFckViewAvail = ButFckViewAvail;
 			this.TxtSckActive = TxtSckActive;
+			this.TxfSckValid = TxfSckValid;
 			this.ButSckViewAvail = ButSckViewAvail;
 			this.TxtMdlActive = TxtMdlActive;
 			this.ButMdlViewAvail = ButMdlViewAvail;
 			this.ButMdlViewActive = ButMdlViewActive;
 			this.TxtFarActive = TxtFarActive;
+			this.TxfFarValid = TxfFarValid;
 			this.ButFarViewAvail = ButFarViewAvail;
 			this.TxtSarActive = TxtSarActive;
+			this.TxfSarValid = TxfSarValid;
 			this.ButSarViewAvail = ButSarViewAvail;
 			this.TxfRatActive = TxfRatActive;
 
-			mask = new HashSet<Integer>(Arrays.asList(TXFFCKVALID, TXFSCKVALID, TXFFARVALID, TXFSARVALID, BUTSAVEAVAIL, BUTSAVEACTIVE, TXTFCKACTIVE, BUTFCKVIEWAVAIL, TXTSCKACTIVE, BUTSCKVIEWAVAIL, TXTMDLACTIVE, BUTMDLVIEWAVAIL, BUTMDLVIEWACTIVE, TXTFARACTIVE, BUTFARVIEWAVAIL, TXTSARACTIVE, BUTSARVIEWAVAIL, TXFRATACTIVE));
+			mask = new HashSet<Integer>(Arrays.asList(BUTSAVEAVAIL, BUTSAVEACTIVE, TXTFCKACTIVE, TXFFCKVALID, BUTFCKVIEWAVAIL, TXTSCKACTIVE, TXFSCKVALID, BUTSCKVIEWAVAIL, TXTMDLACTIVE, BUTMDLVIEWAVAIL, BUTMDLVIEWACTIVE, TXTFARACTIVE, TXFFARVALID, BUTFARVIEWAVAIL, TXTSARACTIVE, TXFSARVALID, BUTSARVIEWAVAIL, TXFRATACTIVE));
 		};
 
-		public boolean TxfFckValid;
-		public boolean TxfSckValid;
-		public boolean TxfFarValid;
-		public boolean TxfSarValid;
 		public boolean ButSaveAvail;
 		public boolean ButSaveActive;
 		public boolean TxtFckActive;
+		public boolean TxfFckValid;
 		public boolean ButFckViewAvail;
 		public boolean TxtSckActive;
+		public boolean TxfSckValid;
 		public boolean ButSckViewAvail;
 		public boolean TxtMdlActive;
 		public boolean ButMdlViewAvail;
 		public boolean ButMdlViewActive;
 		public boolean TxtFarActive;
+		public boolean TxfFarValid;
 		public boolean ButFarViewAvail;
 		public boolean TxtSarActive;
+		public boolean TxfSarValid;
 		public boolean ButSarViewAvail;
 		public boolean TxfRatActive;
 
@@ -445,22 +445,22 @@ public class PnlWdbeCdcDetail {
 			String itemtag = "StatitemShrWdbeCdcDetail";
 
 			if (Xmlio.checkXPath(doc, basexpath)) {
-				TxfFckValid = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxfFckValid", mask, TXFFCKVALID);
-				TxfSckValid = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxfSckValid", mask, TXFSCKVALID);
-				TxfFarValid = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxfFarValid", mask, TXFFARVALID);
-				TxfSarValid = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxfSarValid", mask, TXFSARVALID);
 				ButSaveAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButSaveAvail", mask, BUTSAVEAVAIL);
 				ButSaveActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButSaveActive", mask, BUTSAVEACTIVE);
 				TxtFckActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxtFckActive", mask, TXTFCKACTIVE);
+				TxfFckValid = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxfFckValid", mask, TXFFCKVALID);
 				ButFckViewAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButFckViewAvail", mask, BUTFCKVIEWAVAIL);
 				TxtSckActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxtSckActive", mask, TXTSCKACTIVE);
+				TxfSckValid = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxfSckValid", mask, TXFSCKVALID);
 				ButSckViewAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButSckViewAvail", mask, BUTSCKVIEWAVAIL);
 				TxtMdlActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxtMdlActive", mask, TXTMDLACTIVE);
 				ButMdlViewAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButMdlViewAvail", mask, BUTMDLVIEWAVAIL);
 				ButMdlViewActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButMdlViewActive", mask, BUTMDLVIEWACTIVE);
 				TxtFarActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxtFarActive", mask, TXTFARACTIVE);
+				TxfFarValid = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxfFarValid", mask, TXFFARVALID);
 				ButFarViewAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButFarViewAvail", mask, BUTFARVIEWAVAIL);
 				TxtSarActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxtSarActive", mask, TXTSARACTIVE);
+				TxfSarValid = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxfSarValid", mask, TXFSARVALID);
 				ButSarViewAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButSarViewAvail", mask, BUTSARVIEWAVAIL);
 				TxfRatActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxfRatActive", mask, TXFRATACTIVE);
 
@@ -475,22 +475,22 @@ public class PnlWdbeCdcDetail {
 				) {
 			HashSet<Integer> items = new HashSet<Integer>();
 
-			if (TxfFckValid == comp.TxfFckValid) items.add(TXFFCKVALID);
-			if (TxfSckValid == comp.TxfSckValid) items.add(TXFSCKVALID);
-			if (TxfFarValid == comp.TxfFarValid) items.add(TXFFARVALID);
-			if (TxfSarValid == comp.TxfSarValid) items.add(TXFSARVALID);
 			if (ButSaveAvail == comp.ButSaveAvail) items.add(BUTSAVEAVAIL);
 			if (ButSaveActive == comp.ButSaveActive) items.add(BUTSAVEACTIVE);
 			if (TxtFckActive == comp.TxtFckActive) items.add(TXTFCKACTIVE);
+			if (TxfFckValid == comp.TxfFckValid) items.add(TXFFCKVALID);
 			if (ButFckViewAvail == comp.ButFckViewAvail) items.add(BUTFCKVIEWAVAIL);
 			if (TxtSckActive == comp.TxtSckActive) items.add(TXTSCKACTIVE);
+			if (TxfSckValid == comp.TxfSckValid) items.add(TXFSCKVALID);
 			if (ButSckViewAvail == comp.ButSckViewAvail) items.add(BUTSCKVIEWAVAIL);
 			if (TxtMdlActive == comp.TxtMdlActive) items.add(TXTMDLACTIVE);
 			if (ButMdlViewAvail == comp.ButMdlViewAvail) items.add(BUTMDLVIEWAVAIL);
 			if (ButMdlViewActive == comp.ButMdlViewActive) items.add(BUTMDLVIEWACTIVE);
 			if (TxtFarActive == comp.TxtFarActive) items.add(TXTFARACTIVE);
+			if (TxfFarValid == comp.TxfFarValid) items.add(TXFFARVALID);
 			if (ButFarViewAvail == comp.ButFarViewAvail) items.add(BUTFARVIEWAVAIL);
 			if (TxtSarActive == comp.TxtSarActive) items.add(TXTSARACTIVE);
+			if (TxfSarValid == comp.TxfSarValid) items.add(TXFSARVALID);
 			if (ButSarViewAvail == comp.ButSarViewAvail) items.add(BUTSARVIEWAVAIL);
 			if (TxfRatActive == comp.TxfRatActive) items.add(TXFRATACTIVE);
 
@@ -505,7 +505,7 @@ public class PnlWdbeCdcDetail {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(TXFFCKVALID, TXFSCKVALID, TXFFARVALID, TXFSARVALID, BUTSAVEAVAIL, BUTSAVEACTIVE, TXTFCKACTIVE, BUTFCKVIEWAVAIL, TXTSCKACTIVE, BUTSCKVIEWAVAIL, TXTMDLACTIVE, BUTMDLVIEWAVAIL, BUTMDLVIEWACTIVE, TXTFARACTIVE, BUTFARVIEWAVAIL, TXTSARACTIVE, BUTSARVIEWAVAIL, TXFRATACTIVE));
+			diffitems = new HashSet<Integer>(Arrays.asList(BUTSAVEAVAIL, BUTSAVEACTIVE, TXTFCKACTIVE, TXFFCKVALID, BUTFCKVIEWAVAIL, TXTSCKACTIVE, TXFSCKVALID, BUTSCKVIEWAVAIL, TXTMDLACTIVE, BUTMDLVIEWAVAIL, BUTMDLVIEWACTIVE, TXTFARACTIVE, TXFFARVALID, BUTFARVIEWAVAIL, TXTSARACTIVE, TXFSARVALID, BUTSARVIEWAVAIL, TXFRATACTIVE));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);

@@ -70,20 +70,19 @@ PnlWdbeModDetail::ContIac::ContIac(
 			, const string& TxfCtrFsr
 		) :
 			Block()
+			, numFPupVnd(numFPupVnd)
+			, TxfVnd(TxfVnd)
+			, numFPupTyp(numFPupTyp)
+			, numFPupHkt(numFPupHkt)
+			, TxfSrr(TxfSrr)
+			, TxfCmt(TxfCmt)
+			, TxfImbFsr(TxfImbFsr)
+			, numFPupImbRty(numFPupImbRty)
+			, TxfImbWid(TxfImbWid)
+			, TxfImbMmx(TxfImbMmx)
+			, TxfImbPri(TxfImbPri)
+			, TxfCtrFsr(TxfCtrFsr)
 		{
-	this->numFPupVnd = numFPupVnd;
-	this->TxfVnd = TxfVnd;
-	this->numFPupTyp = numFPupTyp;
-	this->numFPupHkt = numFPupHkt;
-	this->TxfSrr = TxfSrr;
-	this->TxfCmt = TxfCmt;
-	this->TxfImbFsr = TxfImbFsr;
-	this->numFPupImbRty = numFPupImbRty;
-	this->TxfImbWid = TxfImbWid;
-	this->TxfImbMmx = TxfImbMmx;
-	this->TxfImbPri = TxfImbPri;
-	this->TxfCtrFsr = TxfCtrFsr;
-
 	mask = {NUMFPUPVND, TXFVND, NUMFPUPTYP, NUMFPUPHKT, TXFSRR, TXFCMT, TXFIMBFSR, NUMFPUPIMBRTY, TXFIMBWID, TXFIMBMMX, TXFIMBPRI, TXFCTRFSR};
 };
 
@@ -247,13 +246,12 @@ PnlWdbeModDetail::ContInf::ContInf(
 			, const string& TxtCtrClr
 		) :
 			Block()
+			, TxtSrf(TxtSrf)
+			, TxtHku(TxtHku)
+			, TxtSup(TxtSup)
+			, TxtTpl(TxtTpl)
+			, TxtCtrClr(TxtCtrClr)
 		{
-	this->TxtSrf = TxtSrf;
-	this->TxtHku = TxtHku;
-	this->TxtSup = TxtSup;
-	this->TxtTpl = TxtTpl;
-	this->TxtCtrClr = TxtCtrClr;
-
 	mask = {TXTSRF, TXTHKU, TXTSUP, TXTTPL, TXTCTRCLR};
 };
 
@@ -362,11 +360,11 @@ void PnlWdbeModDetail::StatApp::writeXML(
  ******************************************************************************/
 
 PnlWdbeModDetail::StatShr::StatShr(
-			const bool TxfVndValid
-			, const bool ButSaveAvail
+			const bool ButSaveAvail
 			, const bool ButSaveActive
 			, const bool TxtSrfActive
 			, const bool PupVndActive
+			, const bool TxfVndValid
 			, const bool ButVndEditAvail
 			, const bool PupTypActive
 			, const bool TxtHkuActive
@@ -406,51 +404,50 @@ PnlWdbeModDetail::StatShr::StatShr(
 			, const bool ButCtrClrViewActive
 		) :
 			Block()
+			, ButSaveAvail(ButSaveAvail)
+			, ButSaveActive(ButSaveActive)
+			, TxtSrfActive(TxtSrfActive)
+			, PupVndActive(PupVndActive)
+			, TxfVndValid(TxfVndValid)
+			, ButVndEditAvail(ButVndEditAvail)
+			, PupTypActive(PupTypActive)
+			, TxtHkuActive(TxtHkuActive)
+			, ButHkuViewAvail(ButHkuViewAvail)
+			, ButHkuViewActive(ButHkuViewActive)
+			, TxtSupActive(TxtSupActive)
+			, ButSupViewAvail(ButSupViewAvail)
+			, ButSupViewActive(ButSupViewActive)
+			, TxtTplActive(TxtTplActive)
+			, ButTplViewAvail(ButTplViewAvail)
+			, ButTplViewActive(ButTplViewActive)
+			, TxfSrrActive(TxfSrrActive)
+			, TxfCmtActive(TxfCmtActive)
+			, SepImbAvail(SepImbAvail)
+			, HdgImbAvail(HdgImbAvail)
+			, ButImbNewAvail(ButImbNewAvail)
+			, ButImbDeleteAvail(ButImbDeleteAvail)
+			, TxfImbFsrAvail(TxfImbFsrAvail)
+			, TxfImbFsrActive(TxfImbFsrActive)
+			, PupImbRtyAvail(PupImbRtyAvail)
+			, PupImbRtyActive(PupImbRtyActive)
+			, TxfImbWidAvail(TxfImbWidAvail)
+			, TxfImbWidActive(TxfImbWidActive)
+			, TxfImbMmxAvail(TxfImbMmxAvail)
+			, TxfImbMmxActive(TxfImbMmxActive)
+			, TxfImbPriAvail(TxfImbPriAvail)
+			, TxfImbPriActive(TxfImbPriActive)
+			, SepCtrAvail(SepCtrAvail)
+			, HdgCtrAvail(HdgCtrAvail)
+			, ButCtrNewAvail(ButCtrNewAvail)
+			, ButCtrDeleteAvail(ButCtrDeleteAvail)
+			, TxfCtrFsrAvail(TxfCtrFsrAvail)
+			, TxfCtrFsrActive(TxfCtrFsrActive)
+			, TxtCtrClrAvail(TxtCtrClrAvail)
+			, TxtCtrClrActive(TxtCtrClrActive)
+			, ButCtrClrViewAvail(ButCtrClrViewAvail)
+			, ButCtrClrViewActive(ButCtrClrViewActive)
 		{
-	this->TxfVndValid = TxfVndValid;
-	this->ButSaveAvail = ButSaveAvail;
-	this->ButSaveActive = ButSaveActive;
-	this->TxtSrfActive = TxtSrfActive;
-	this->PupVndActive = PupVndActive;
-	this->ButVndEditAvail = ButVndEditAvail;
-	this->PupTypActive = PupTypActive;
-	this->TxtHkuActive = TxtHkuActive;
-	this->ButHkuViewAvail = ButHkuViewAvail;
-	this->ButHkuViewActive = ButHkuViewActive;
-	this->TxtSupActive = TxtSupActive;
-	this->ButSupViewAvail = ButSupViewAvail;
-	this->ButSupViewActive = ButSupViewActive;
-	this->TxtTplActive = TxtTplActive;
-	this->ButTplViewAvail = ButTplViewAvail;
-	this->ButTplViewActive = ButTplViewActive;
-	this->TxfSrrActive = TxfSrrActive;
-	this->TxfCmtActive = TxfCmtActive;
-	this->SepImbAvail = SepImbAvail;
-	this->HdgImbAvail = HdgImbAvail;
-	this->ButImbNewAvail = ButImbNewAvail;
-	this->ButImbDeleteAvail = ButImbDeleteAvail;
-	this->TxfImbFsrAvail = TxfImbFsrAvail;
-	this->TxfImbFsrActive = TxfImbFsrActive;
-	this->PupImbRtyAvail = PupImbRtyAvail;
-	this->PupImbRtyActive = PupImbRtyActive;
-	this->TxfImbWidAvail = TxfImbWidAvail;
-	this->TxfImbWidActive = TxfImbWidActive;
-	this->TxfImbMmxAvail = TxfImbMmxAvail;
-	this->TxfImbMmxActive = TxfImbMmxActive;
-	this->TxfImbPriAvail = TxfImbPriAvail;
-	this->TxfImbPriActive = TxfImbPriActive;
-	this->SepCtrAvail = SepCtrAvail;
-	this->HdgCtrAvail = HdgCtrAvail;
-	this->ButCtrNewAvail = ButCtrNewAvail;
-	this->ButCtrDeleteAvail = ButCtrDeleteAvail;
-	this->TxfCtrFsrAvail = TxfCtrFsrAvail;
-	this->TxfCtrFsrActive = TxfCtrFsrActive;
-	this->TxtCtrClrAvail = TxtCtrClrAvail;
-	this->TxtCtrClrActive = TxtCtrClrActive;
-	this->ButCtrClrViewAvail = ButCtrClrViewAvail;
-	this->ButCtrClrViewActive = ButCtrClrViewActive;
-
-	mask = {TXFVNDVALID, BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, PUPVNDACTIVE, BUTVNDEDITAVAIL, PUPTYPACTIVE, TXTHKUACTIVE, BUTHKUVIEWAVAIL, BUTHKUVIEWACTIVE, TXTSUPACTIVE, BUTSUPVIEWAVAIL, BUTSUPVIEWACTIVE, TXTTPLACTIVE, BUTTPLVIEWAVAIL, BUTTPLVIEWACTIVE, TXFSRRACTIVE, TXFCMTACTIVE, SEPIMBAVAIL, HDGIMBAVAIL, BUTIMBNEWAVAIL, BUTIMBDELETEAVAIL, TXFIMBFSRAVAIL, TXFIMBFSRACTIVE, PUPIMBRTYAVAIL, PUPIMBRTYACTIVE, TXFIMBWIDAVAIL, TXFIMBWIDACTIVE, TXFIMBMMXAVAIL, TXFIMBMMXACTIVE, TXFIMBPRIAVAIL, TXFIMBPRIACTIVE, SEPCTRAVAIL, HDGCTRAVAIL, BUTCTRNEWAVAIL, BUTCTRDELETEAVAIL, TXFCTRFSRAVAIL, TXFCTRFSRACTIVE, TXTCTRCLRAVAIL, TXTCTRCLRACTIVE, BUTCTRCLRVIEWAVAIL, BUTCTRCLRVIEWACTIVE};
+	mask = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, PUPVNDACTIVE, TXFVNDVALID, BUTVNDEDITAVAIL, PUPTYPACTIVE, TXTHKUACTIVE, BUTHKUVIEWAVAIL, BUTHKUVIEWACTIVE, TXTSUPACTIVE, BUTSUPVIEWAVAIL, BUTSUPVIEWACTIVE, TXTTPLACTIVE, BUTTPLVIEWAVAIL, BUTTPLVIEWACTIVE, TXFSRRACTIVE, TXFCMTACTIVE, SEPIMBAVAIL, HDGIMBAVAIL, BUTIMBNEWAVAIL, BUTIMBDELETEAVAIL, TXFIMBFSRAVAIL, TXFIMBFSRACTIVE, PUPIMBRTYAVAIL, PUPIMBRTYACTIVE, TXFIMBWIDAVAIL, TXFIMBWIDACTIVE, TXFIMBMMXAVAIL, TXFIMBMMXACTIVE, TXFIMBPRIAVAIL, TXFIMBPRIACTIVE, SEPCTRAVAIL, HDGCTRAVAIL, BUTCTRNEWAVAIL, BUTCTRDELETEAVAIL, TXFCTRFSRAVAIL, TXFCTRFSRACTIVE, TXTCTRCLRAVAIL, TXTCTRCLRACTIVE, BUTCTRCLRVIEWAVAIL, BUTCTRCLRVIEWACTIVE};
 };
 
 void PnlWdbeModDetail::StatShr::writeJSON(
@@ -461,11 +458,11 @@ void PnlWdbeModDetail::StatShr::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["TxfVndValid"] = TxfVndValid;
 	me["ButSaveAvail"] = ButSaveAvail;
 	me["ButSaveActive"] = ButSaveActive;
 	me["TxtSrfActive"] = TxtSrfActive;
 	me["PupVndActive"] = PupVndActive;
+	me["TxfVndValid"] = TxfVndValid;
 	me["ButVndEditAvail"] = ButVndEditAvail;
 	me["PupTypActive"] = PupTypActive;
 	me["TxtHkuActive"] = TxtHkuActive;
@@ -517,11 +514,11 @@ void PnlWdbeModDetail::StatShr::writeXML(
 	else itemtag = "StatitemShrWdbeModDetail";
 
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
-		writeBoolAttr(wr, itemtag, "sref", "TxfVndValid", TxfVndValid);
 		writeBoolAttr(wr, itemtag, "sref", "ButSaveAvail", ButSaveAvail);
 		writeBoolAttr(wr, itemtag, "sref", "ButSaveActive", ButSaveActive);
 		writeBoolAttr(wr, itemtag, "sref", "TxtSrfActive", TxtSrfActive);
 		writeBoolAttr(wr, itemtag, "sref", "PupVndActive", PupVndActive);
+		writeBoolAttr(wr, itemtag, "sref", "TxfVndValid", TxfVndValid);
 		writeBoolAttr(wr, itemtag, "sref", "ButVndEditAvail", ButVndEditAvail);
 		writeBoolAttr(wr, itemtag, "sref", "PupTypActive", PupTypActive);
 		writeBoolAttr(wr, itemtag, "sref", "TxtHkuActive", TxtHkuActive);
@@ -567,11 +564,11 @@ set<uint> PnlWdbeModDetail::StatShr::comm(
 		) {
 	set<uint> items;
 
-	if (TxfVndValid == comp->TxfVndValid) insert(items, TXFVNDVALID);
 	if (ButSaveAvail == comp->ButSaveAvail) insert(items, BUTSAVEAVAIL);
 	if (ButSaveActive == comp->ButSaveActive) insert(items, BUTSAVEACTIVE);
 	if (TxtSrfActive == comp->TxtSrfActive) insert(items, TXTSRFACTIVE);
 	if (PupVndActive == comp->PupVndActive) insert(items, PUPVNDACTIVE);
+	if (TxfVndValid == comp->TxfVndValid) insert(items, TXFVNDVALID);
 	if (ButVndEditAvail == comp->ButVndEditAvail) insert(items, BUTVNDEDITAVAIL);
 	if (PupTypActive == comp->PupTypActive) insert(items, PUPTYPACTIVE);
 	if (TxtHkuActive == comp->TxtHkuActive) insert(items, TXTHKUACTIVE);
@@ -621,7 +618,7 @@ set<uint> PnlWdbeModDetail::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {TXFVNDVALID, BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, PUPVNDACTIVE, BUTVNDEDITAVAIL, PUPTYPACTIVE, TXTHKUACTIVE, BUTHKUVIEWAVAIL, BUTHKUVIEWACTIVE, TXTSUPACTIVE, BUTSUPVIEWAVAIL, BUTSUPVIEWACTIVE, TXTTPLACTIVE, BUTTPLVIEWAVAIL, BUTTPLVIEWACTIVE, TXFSRRACTIVE, TXFCMTACTIVE, SEPIMBAVAIL, HDGIMBAVAIL, BUTIMBNEWAVAIL, BUTIMBDELETEAVAIL, TXFIMBFSRAVAIL, TXFIMBFSRACTIVE, PUPIMBRTYAVAIL, PUPIMBRTYACTIVE, TXFIMBWIDAVAIL, TXFIMBWIDACTIVE, TXFIMBMMXAVAIL, TXFIMBMMXACTIVE, TXFIMBPRIAVAIL, TXFIMBPRIACTIVE, SEPCTRAVAIL, HDGCTRAVAIL, BUTCTRNEWAVAIL, BUTCTRDELETEAVAIL, TXFCTRFSRAVAIL, TXFCTRFSRACTIVE, TXTCTRCLRAVAIL, TXTCTRCLRACTIVE, BUTCTRCLRVIEWAVAIL, BUTCTRCLRVIEWACTIVE};
+	diffitems = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, PUPVNDACTIVE, TXFVNDVALID, BUTVNDEDITAVAIL, PUPTYPACTIVE, TXTHKUACTIVE, BUTHKUVIEWAVAIL, BUTHKUVIEWACTIVE, TXTSUPACTIVE, BUTSUPVIEWAVAIL, BUTSUPVIEWACTIVE, TXTTPLACTIVE, BUTTPLVIEWAVAIL, BUTTPLVIEWACTIVE, TXFSRRACTIVE, TXFCMTACTIVE, SEPIMBAVAIL, HDGIMBAVAIL, BUTIMBNEWAVAIL, BUTIMBDELETEAVAIL, TXFIMBFSRAVAIL, TXFIMBFSRACTIVE, PUPIMBRTYAVAIL, PUPIMBRTYACTIVE, TXFIMBWIDAVAIL, TXFIMBWIDACTIVE, TXFIMBMMXAVAIL, TXFIMBMMXACTIVE, TXFIMBPRIAVAIL, TXFIMBPRIACTIVE, SEPCTRAVAIL, HDGCTRAVAIL, BUTCTRNEWAVAIL, BUTCTRDELETEAVAIL, TXFCTRFSRAVAIL, TXFCTRFSRACTIVE, TXTCTRCLRAVAIL, TXTCTRCLRACTIVE, BUTCTRCLRVIEWAVAIL, BUTCTRCLRVIEWACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);

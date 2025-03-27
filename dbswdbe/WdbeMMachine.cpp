@@ -22,13 +22,13 @@ WdbeMMachine::WdbeMMachine(
 			, const string sref
 			, const ubigint cchRefWdbeMMachine
 			, const string Comment
-		) {
-
-	this->ref = ref;
-	this->supRefWdbeMMachine = supRefWdbeMMachine;
-	this->sref = sref;
-	this->cchRefWdbeMMachine = cchRefWdbeMMachine;
-	this->Comment = Comment;
+		) :
+			ref(ref)
+			, supRefWdbeMMachine(supRefWdbeMMachine)
+			, sref(sref)
+			, cchRefWdbeMMachine(cchRefWdbeMMachine)
+			, Comment(Comment)
+		{
 };
 
 bool WdbeMMachine::operator==(

@@ -21,12 +21,12 @@ WdbeJMUserState::WdbeJMUserState(
 			, const ubigint refWdbeMUser
 			, const uint x1Start
 			, const uint ixVState
-		) {
-
-	this->ref = ref;
-	this->refWdbeMUser = refWdbeMUser;
-	this->x1Start = x1Start;
-	this->ixVState = ixVState;
+		) :
+			ref(ref)
+			, refWdbeMUser(refWdbeMUser)
+			, x1Start(x1Start)
+			, ixVState(ixVState)
+		{
 };
 
 bool WdbeJMUserState::operator==(

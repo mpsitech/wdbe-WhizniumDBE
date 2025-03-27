@@ -36,25 +36,26 @@ WdbeQVarList::WdbeQVarList(
 			, const string titSrefWdbeKHdltype
 			, const usmallint Width
 			, const string Minmax
-		) {
-	this->qref = qref;
-	this->jref = jref;
-	this->jnum = jnum;
-	this->ref = ref;
-	this->sref = sref;
-	this->refIxVTbl = refIxVTbl;
-	this->srefRefIxVTbl = srefRefIxVTbl;
-	this->titRefIxVTbl = titRefIxVTbl;
-	this->refUref = refUref;
-	this->stubRefUref = stubRefUref;
-	this->Const = Const;
-	this->yesnoConst = yesnoConst;
-	this->Falling = Falling;
-	this->yesnoFalling = yesnoFalling;
-	this->srefWdbeKHdltype = srefWdbeKHdltype;
-	this->titSrefWdbeKHdltype = titSrefWdbeKHdltype;
-	this->Width = Width;
-	this->Minmax = Minmax;
+		) :
+			qref(qref)
+			, jref(jref)
+			, jnum(jnum)
+			, ref(ref)
+			, sref(sref)
+			, refIxVTbl(refIxVTbl)
+			, srefRefIxVTbl(srefRefIxVTbl)
+			, titRefIxVTbl(titRefIxVTbl)
+			, refUref(refUref)
+			, stubRefUref(stubRefUref)
+			, Const(Const)
+			, yesnoConst(yesnoConst)
+			, Falling(Falling)
+			, yesnoFalling(yesnoFalling)
+			, srefWdbeKHdltype(srefWdbeKHdltype)
+			, titSrefWdbeKHdltype(titSrefWdbeKHdltype)
+			, Width(Width)
+			, Minmax(Minmax)
+		{
 };
 
 void WdbeQVarList::writeJSON(

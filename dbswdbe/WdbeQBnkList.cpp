@@ -27,16 +27,17 @@ WdbeQBnkList::WdbeQBnkList(
 			, const string stubRefWdbeMUnit
 			, const string srefKVoltstd
 			, const string titSrefKVoltstd
-		) {
-	this->qref = qref;
-	this->jref = jref;
-	this->jnum = jnum;
-	this->ref = ref;
-	this->sref = sref;
-	this->refWdbeMUnit = refWdbeMUnit;
-	this->stubRefWdbeMUnit = stubRefWdbeMUnit;
-	this->srefKVoltstd = srefKVoltstd;
-	this->titSrefKVoltstd = titSrefKVoltstd;
+		) :
+			qref(qref)
+			, jref(jref)
+			, jnum(jnum)
+			, ref(ref)
+			, sref(sref)
+			, refWdbeMUnit(refWdbeMUnit)
+			, stubRefWdbeMUnit(stubRefWdbeMUnit)
+			, srefKVoltstd(srefKVoltstd)
+			, titSrefKVoltstd(titSrefKVoltstd)
+		{
 };
 
 void WdbeQBnkList::writeJSON(

@@ -24,13 +24,13 @@ WdbeMSensitivity::WdbeMSensitivity(
 			, const ubigint refUref
 			, const uint srcIxVTbl
 			, const ubigint srcUref
-		) {
-
-	this->ref = ref;
-	this->refIxVTbl = refIxVTbl;
-	this->refUref = refUref;
-	this->srcIxVTbl = srcIxVTbl;
-	this->srcUref = srcUref;
+		) :
+			ref(ref)
+			, refIxVTbl(refIxVTbl)
+			, refUref(refUref)
+			, srcIxVTbl(srcIxVTbl)
+			, srcUref(srcUref)
+		{
 };
 
 bool WdbeMSensitivity::operator==(

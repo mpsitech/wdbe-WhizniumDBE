@@ -114,27 +114,31 @@ public class PnlWdbeCmdRec {
 	public class StatApp extends Block {
 
 		public static final int INITDONEDETAIL = 1;
-		public static final int INITDONEARETPAR = 2;
-		public static final int INITDONEAINVPAR = 3;
-		public static final int INITDONEMNCONTROLLER = 4;
+		public static final int INITDONEAINVPAR = 2;
+		public static final int INITDONEARETPAR = 3;
+		public static final int INITDONEHK1NVECTOR = 4;
+		public static final int INITDONEMNCONTROLLER = 5;
 
 		public StatApp(
 					boolean initdoneDetail
-					, boolean initdoneARetpar
 					, boolean initdoneAInvpar
+					, boolean initdoneARetpar
+					, boolean initdoneHk1NVector
 					, boolean initdoneMNController
 				) {
 			this.initdoneDetail = initdoneDetail;
-			this.initdoneARetpar = initdoneARetpar;
 			this.initdoneAInvpar = initdoneAInvpar;
+			this.initdoneARetpar = initdoneARetpar;
+			this.initdoneHk1NVector = initdoneHk1NVector;
 			this.initdoneMNController = initdoneMNController;
 
-			mask = new HashSet<Integer>(Arrays.asList(INITDONEDETAIL, INITDONEARETPAR, INITDONEAINVPAR, INITDONEMNCONTROLLER));
+			mask = new HashSet<Integer>(Arrays.asList(INITDONEDETAIL, INITDONEAINVPAR, INITDONEARETPAR, INITDONEHK1NVECTOR, INITDONEMNCONTROLLER));
 		};
 
 		public boolean initdoneDetail;
-		public boolean initdoneARetpar;
 		public boolean initdoneAInvpar;
+		public boolean initdoneARetpar;
+		public boolean initdoneHk1NVector;
 		public boolean initdoneMNController;
 
 		public boolean readXML(
@@ -151,8 +155,9 @@ public class PnlWdbeCmdRec {
 
 			if (Xmlio.checkXPath(doc, basexpath)) {
 				initdoneDetail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneDetail", mask, INITDONEDETAIL);
-				initdoneARetpar = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneARetpar", mask, INITDONEARETPAR);
 				initdoneAInvpar = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneAInvpar", mask, INITDONEAINVPAR);
+				initdoneARetpar = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneARetpar", mask, INITDONEARETPAR);
+				initdoneHk1NVector = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneHk1NVector", mask, INITDONEHK1NVECTOR);
 				initdoneMNController = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneMNController", mask, INITDONEMNCONTROLLER);
 
 				return true;
@@ -167,8 +172,9 @@ public class PnlWdbeCmdRec {
 			HashSet<Integer> items = new HashSet<Integer>();
 
 			if (initdoneDetail == comp.initdoneDetail) items.add(INITDONEDETAIL);
-			if (initdoneARetpar == comp.initdoneARetpar) items.add(INITDONEARETPAR);
 			if (initdoneAInvpar == comp.initdoneAInvpar) items.add(INITDONEAINVPAR);
+			if (initdoneARetpar == comp.initdoneARetpar) items.add(INITDONEARETPAR);
+			if (initdoneHk1NVector == comp.initdoneHk1NVector) items.add(INITDONEHK1NVECTOR);
 			if (initdoneMNController == comp.initdoneMNController) items.add(INITDONEMNCONTROLLER);
 
 			return(items);
@@ -182,7 +188,7 @@ public class PnlWdbeCmdRec {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(INITDONEDETAIL, INITDONEARETPAR, INITDONEAINVPAR, INITDONEMNCONTROLLER));
+			diffitems = new HashSet<Integer>(Arrays.asList(INITDONEDETAIL, INITDONEAINVPAR, INITDONEARETPAR, INITDONEHK1NVECTOR, INITDONEMNCONTROLLER));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);
@@ -197,33 +203,37 @@ public class PnlWdbeCmdRec {
 
 		public static final int IXWDBEVEXPSTATE = 1;
 		public static final int SCRJREFDETAIL = 2;
-		public static final int SCRJREFARETPAR = 3;
-		public static final int SCRJREFAINVPAR = 4;
-		public static final int SCRJREFMNCONTROLLER = 5;
-		public static final int BUTREGULARIZEACTIVE = 6;
+		public static final int SCRJREFAINVPAR = 3;
+		public static final int SCRJREFARETPAR = 4;
+		public static final int SCRJREFHK1NVECTOR = 5;
+		public static final int SCRJREFMNCONTROLLER = 6;
+		public static final int BUTREGULARIZEACTIVE = 7;
 
 		public StatShr(
 					int ixWdbeVExpstate
 					, String scrJrefDetail
-					, String scrJrefARetpar
 					, String scrJrefAInvpar
+					, String scrJrefARetpar
+					, String scrJrefHk1NVector
 					, String scrJrefMNController
 					, boolean ButRegularizeActive
 				) {
 			this.ixWdbeVExpstate = ixWdbeVExpstate;
 			this.scrJrefDetail = scrJrefDetail;
-			this.scrJrefARetpar = scrJrefARetpar;
 			this.scrJrefAInvpar = scrJrefAInvpar;
+			this.scrJrefARetpar = scrJrefARetpar;
+			this.scrJrefHk1NVector = scrJrefHk1NVector;
 			this.scrJrefMNController = scrJrefMNController;
 			this.ButRegularizeActive = ButRegularizeActive;
 
-			mask = new HashSet<Integer>(Arrays.asList(IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFARETPAR, SCRJREFAINVPAR, SCRJREFMNCONTROLLER, BUTREGULARIZEACTIVE));
+			mask = new HashSet<Integer>(Arrays.asList(IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFAINVPAR, SCRJREFARETPAR, SCRJREFHK1NVECTOR, SCRJREFMNCONTROLLER, BUTREGULARIZEACTIVE));
 		};
 
 		public int ixWdbeVExpstate;
 		public String scrJrefDetail;
-		public String scrJrefARetpar;
 		public String scrJrefAInvpar;
+		public String scrJrefARetpar;
+		public String scrJrefHk1NVector;
 		public String scrJrefMNController;
 		public boolean ButRegularizeActive;
 
@@ -244,8 +254,9 @@ public class PnlWdbeCmdRec {
 				srefIxWdbeVExpstate = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "srefIxWdbeVExpstate", mask, IXWDBEVEXPSTATE);
 				ixWdbeVExpstate = VecWdbeVExpstate.getIx(srefIxWdbeVExpstate);
 				scrJrefDetail = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefDetail", mask, SCRJREFDETAIL);
-				scrJrefARetpar = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefARetpar", mask, SCRJREFARETPAR);
 				scrJrefAInvpar = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefAInvpar", mask, SCRJREFAINVPAR);
+				scrJrefARetpar = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefARetpar", mask, SCRJREFARETPAR);
+				scrJrefHk1NVector = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefHk1NVector", mask, SCRJREFHK1NVECTOR);
 				scrJrefMNController = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefMNController", mask, SCRJREFMNCONTROLLER);
 				ButRegularizeActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButRegularizeActive", mask, BUTREGULARIZEACTIVE);
 
@@ -262,8 +273,9 @@ public class PnlWdbeCmdRec {
 
 			if (ixWdbeVExpstate == comp.ixWdbeVExpstate) items.add(IXWDBEVEXPSTATE);
 			if (scrJrefDetail.equals(comp.scrJrefDetail)) items.add(SCRJREFDETAIL);
-			if (scrJrefARetpar.equals(comp.scrJrefARetpar)) items.add(SCRJREFARETPAR);
 			if (scrJrefAInvpar.equals(comp.scrJrefAInvpar)) items.add(SCRJREFAINVPAR);
+			if (scrJrefARetpar.equals(comp.scrJrefARetpar)) items.add(SCRJREFARETPAR);
+			if (scrJrefHk1NVector.equals(comp.scrJrefHk1NVector)) items.add(SCRJREFHK1NVECTOR);
 			if (scrJrefMNController.equals(comp.scrJrefMNController)) items.add(SCRJREFMNCONTROLLER);
 			if (ButRegularizeActive == comp.ButRegularizeActive) items.add(BUTREGULARIZEACTIVE);
 
@@ -278,7 +290,7 @@ public class PnlWdbeCmdRec {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFARETPAR, SCRJREFAINVPAR, SCRJREFMNCONTROLLER, BUTREGULARIZEACTIVE));
+			diffitems = new HashSet<Integer>(Arrays.asList(IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFAINVPAR, SCRJREFARETPAR, SCRJREFHK1NVECTOR, SCRJREFMNCONTROLLER, BUTREGULARIZEACTIVE));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);
@@ -420,8 +432,8 @@ public class PnlWdbeCmdRec {
 			super(VecWdbeVDpch.DPCHENGWDBECMDRECDATA);
 
 			continf = new ContInf("");
-			statapp = new StatApp(false, false, false, false);
-			statshr = new StatShr(0, "", "", "", "", false);
+			statapp = new StatApp(false, false, false, false, false);
+			statshr = new StatShr(0, "", "", "", "", "", false);
 			tag = new Tag("");
 		};
 
@@ -461,8 +473,8 @@ public class PnlWdbeCmdRec {
 			} else {
 				scrJref = "";
 				continf = new ContInf("");
-				statapp = new StatApp(false, false, false, false);
-				statshr = new StatShr(0, "", "", "", "", false);
+				statapp = new StatApp(false, false, false, false, false);
+				statshr = new StatShr(0, "", "", "", "", "", false);
 				tag = new Tag("");
 			};
 		};

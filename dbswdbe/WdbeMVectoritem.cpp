@@ -23,14 +23,14 @@ WdbeMVectoritem::WdbeMVectoritem(
 			, const string sref
 			, const string Title
 			, const string Comment
-		) {
-
-	this->ref = ref;
-	this->vecRefWdbeMVector = vecRefWdbeMVector;
-	this->vecNum = vecNum;
-	this->sref = sref;
-	this->Title = Title;
-	this->Comment = Comment;
+		) :
+			ref(ref)
+			, vecRefWdbeMVector(vecRefWdbeMVector)
+			, vecNum(vecNum)
+			, sref(sref)
+			, Title(Title)
+			, Comment(Comment)
+		{
 };
 
 bool WdbeMVectoritem::operator==(

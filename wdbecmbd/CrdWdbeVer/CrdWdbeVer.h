@@ -17,14 +17,14 @@
 #include "PnlWdbeVerList.h"
 #include "PnlWdbeVerHeadbar.h"
 #include "PnlWdbeVerRec.h"
+#include "DlgWdbeVerFinmod.h"
+#include "DlgWdbeVerGenfst.h"
+#include "DlgWdbeVerNew.h"
 #include "DlgWdbeVerCmdset.h"
 #include "DlgWdbeVerCustfst.h"
 #include "DlgWdbeVerDeploy.h"
 #include "DlgWdbeVerDflalg.h"
-#include "DlgWdbeVerFinmod.h"
-#include "DlgWdbeVerNew.h"
 #include "DlgWdbeVerMdlstr.h"
-#include "DlgWdbeVerGenfst.h"
 
 #define VecVWdbeVerDo CrdWdbeVer::VecVDo
 #define VecVWdbeVerSge CrdWdbeVer::VecVSge
@@ -313,14 +313,14 @@ public:
 	PnlWdbeVerList* pnllist;
 	PnlWdbeVerHeadbar* pnlheadbar;
 	PnlWdbeVerRec* pnlrec;
+	DlgWdbeVerFinmod* dlgfinmod;
+	DlgWdbeVerGenfst* dlggenfst;
+	DlgWdbeVerNew* dlgnew;
 	DlgWdbeVerCmdset* dlgcmdset;
 	DlgWdbeVerCustfst* dlgcustfst;
 	DlgWdbeVerDeploy* dlgdeploy;
 	DlgWdbeVerDflalg* dlgdflalg;
-	DlgWdbeVerFinmod* dlgfinmod;
-	DlgWdbeVerNew* dlgnew;
 	DlgWdbeVerMdlstr* dlgmdlstr;
-	DlgWdbeVerGenfst* dlggenfst;
 
 	// IP vars.cust --- INSERT
 

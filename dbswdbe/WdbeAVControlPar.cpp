@@ -23,14 +23,14 @@ WdbeAVControlPar::WdbeAVControlPar(
 			, const uint x2IxWdbeVLocale
 			, const string Par
 			, const string Val
-		) {
-
-	this->ref = ref;
-	this->ixWdbeVControl = ixWdbeVControl;
-	this->x1RefWdbeMUser = x1RefWdbeMUser;
-	this->x2IxWdbeVLocale = x2IxWdbeVLocale;
-	this->Par = Par;
-	this->Val = Val;
+		) :
+			ref(ref)
+			, ixWdbeVControl(ixWdbeVControl)
+			, x1RefWdbeMUser(x1RefWdbeMUser)
+			, x2IxWdbeVLocale(x2IxWdbeVLocale)
+			, Par(Par)
+			, Val(Val)
+		{
 };
 
 bool WdbeAVControlPar::operator==(

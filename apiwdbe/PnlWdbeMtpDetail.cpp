@@ -49,13 +49,12 @@ PnlWdbeMtpDetail::ContIac::ContIac(
 			, const string& TxfCmt
 		) :
 			Block()
+			, numFPupVnd(numFPupVnd)
+			, TxfVnd(TxfVnd)
+			, numFPupTyp(numFPupTyp)
+			, TxfSrr(TxfSrr)
+			, TxfCmt(TxfCmt)
 		{
-	this->numFPupVnd = numFPupVnd;
-	this->TxfVnd = TxfVnd;
-	this->numFPupTyp = numFPupTyp;
-	this->TxfSrr = TxfSrr;
-	this->TxfCmt = TxfCmt;
-
 	mask = {NUMFPUPVND, TXFVND, NUMFPUPTYP, TXFSRR, TXFCMT};
 };
 
@@ -142,9 +141,8 @@ PnlWdbeMtpDetail::ContInf::ContInf(
 			const string& TxtSrf
 		) :
 			Block()
+			, TxtSrf(TxtSrf)
 		{
-	this->TxtSrf = TxtSrf;
-
 	mask = {TXTSRF};
 };
 
@@ -204,10 +202,9 @@ PnlWdbeMtpDetail::StatApp::StatApp(
 			, const bool PupVndAlt
 		) :
 			Block()
+			, ixWdbeVExpstate(ixWdbeVExpstate)
+			, PupVndAlt(PupVndAlt)
 		{
-	this->ixWdbeVExpstate = ixWdbeVExpstate;
-	this->PupVndAlt = PupVndAlt;
-
 	mask = {IXWDBEVEXPSTATE, PUPVNDALT};
 };
 
@@ -270,29 +267,28 @@ set<uint> PnlWdbeMtpDetail::StatApp::diff(
  ******************************************************************************/
 
 PnlWdbeMtpDetail::StatShr::StatShr(
-			const bool TxfVndValid
-			, const bool ButSaveAvail
+			const bool ButSaveAvail
 			, const bool ButSaveActive
 			, const bool TxtSrfActive
 			, const bool PupVndActive
+			, const bool TxfVndValid
 			, const bool ButVndEditAvail
 			, const bool PupTypActive
 			, const bool TxfSrrActive
 			, const bool TxfCmtActive
 		) :
 			Block()
+			, ButSaveAvail(ButSaveAvail)
+			, ButSaveActive(ButSaveActive)
+			, TxtSrfActive(TxtSrfActive)
+			, PupVndActive(PupVndActive)
+			, TxfVndValid(TxfVndValid)
+			, ButVndEditAvail(ButVndEditAvail)
+			, PupTypActive(PupTypActive)
+			, TxfSrrActive(TxfSrrActive)
+			, TxfCmtActive(TxfCmtActive)
 		{
-	this->TxfVndValid = TxfVndValid;
-	this->ButSaveAvail = ButSaveAvail;
-	this->ButSaveActive = ButSaveActive;
-	this->TxtSrfActive = TxtSrfActive;
-	this->PupVndActive = PupVndActive;
-	this->ButVndEditAvail = ButVndEditAvail;
-	this->PupTypActive = PupTypActive;
-	this->TxfSrrActive = TxfSrrActive;
-	this->TxfCmtActive = TxfCmtActive;
-
-	mask = {TXFVNDVALID, BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, PUPVNDACTIVE, BUTVNDEDITAVAIL, PUPTYPACTIVE, TXFSRRACTIVE, TXFCMTACTIVE};
+	mask = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, PUPVNDACTIVE, TXFVNDVALID, BUTVNDEDITAVAIL, PUPTYPACTIVE, TXFSRRACTIVE, TXFCMTACTIVE};
 };
 
 bool PnlWdbeMtpDetail::StatShr::readXML(
@@ -312,11 +308,11 @@ bool PnlWdbeMtpDetail::StatShr::readXML(
 	string itemtag = "StatitemShrWdbeMtpDetail";
 
 	if (basefound) {
-		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TxfVndValid", TxfVndValid)) add(TXFVNDVALID);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButSaveAvail", ButSaveAvail)) add(BUTSAVEAVAIL);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButSaveActive", ButSaveActive)) add(BUTSAVEACTIVE);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TxtSrfActive", TxtSrfActive)) add(TXTSRFACTIVE);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "PupVndActive", PupVndActive)) add(PUPVNDACTIVE);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TxfVndValid", TxfVndValid)) add(TXFVNDVALID);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButVndEditAvail", ButVndEditAvail)) add(BUTVNDEDITAVAIL);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "PupTypActive", PupTypActive)) add(PUPTYPACTIVE);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TxfSrrActive", TxfSrrActive)) add(TXFSRRACTIVE);
@@ -331,11 +327,11 @@ set<uint> PnlWdbeMtpDetail::StatShr::comm(
 		) {
 	set<uint> items;
 
-	if (TxfVndValid == comp->TxfVndValid) insert(items, TXFVNDVALID);
 	if (ButSaveAvail == comp->ButSaveAvail) insert(items, BUTSAVEAVAIL);
 	if (ButSaveActive == comp->ButSaveActive) insert(items, BUTSAVEACTIVE);
 	if (TxtSrfActive == comp->TxtSrfActive) insert(items, TXTSRFACTIVE);
 	if (PupVndActive == comp->PupVndActive) insert(items, PUPVNDACTIVE);
+	if (TxfVndValid == comp->TxfVndValid) insert(items, TXFVNDVALID);
 	if (ButVndEditAvail == comp->ButVndEditAvail) insert(items, BUTVNDEDITAVAIL);
 	if (PupTypActive == comp->PupTypActive) insert(items, PUPTYPACTIVE);
 	if (TxfSrrActive == comp->TxfSrrActive) insert(items, TXFSRRACTIVE);
@@ -352,7 +348,7 @@ set<uint> PnlWdbeMtpDetail::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {TXFVNDVALID, BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, PUPVNDACTIVE, BUTVNDEDITAVAIL, PUPTYPACTIVE, TXFSRRACTIVE, TXFCMTACTIVE};
+	diffitems = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, PUPVNDACTIVE, TXFVNDVALID, BUTVNDEDITAVAIL, PUPTYPACTIVE, TXFSRRACTIVE, TXFCMTACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -371,14 +367,13 @@ PnlWdbeMtpDetail::Tag::Tag(
 			, const string& CptCmt
 		) :
 			Block()
+			, Cpt(Cpt)
+			, CptSrf(CptSrf)
+			, CptVnd(CptVnd)
+			, CptTyp(CptTyp)
+			, CptSrr(CptSrr)
+			, CptCmt(CptCmt)
 		{
-	this->Cpt = Cpt;
-	this->CptSrf = CptSrf;
-	this->CptVnd = CptVnd;
-	this->CptTyp = CptTyp;
-	this->CptSrr = CptSrr;
-	this->CptCmt = CptCmt;
-
 	mask = {CPT, CPTSRF, CPTVND, CPTTYP, CPTSRR, CPTCMT};
 };
 
@@ -459,11 +454,11 @@ PnlWdbeMtpDetail::DpchAppDo::DpchAppDo(
 			, const set<uint>& mask
 		) :
 			DpchAppWdbe(VecWdbeVDpch::DPCHAPPWDBEMTPDETAILDO, scrJref)
+			, ixVDo(ixVDo)
 		{
 	if (find(mask, ALL)) this->mask = {SCRJREF, IXVDO};
 	else this->mask = mask;
 
-	this->ixVDo = ixVDo;
 };
 
 string PnlWdbeMtpDetail::DpchAppDo::getSrefsMask() {

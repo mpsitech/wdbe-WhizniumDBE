@@ -263,6 +263,7 @@ cust	WdbeMtpPlhfpga	fill module template-specific FPGA code placeholders	false
 	WdbeMtpPlhfpgaHostif_v1_0	false
 	WdbeMtpPlhfpgaCohostif_v1_0	false
 	WdbeMtpPlhfpgaHostif_Easy_v1_0	false
+	WdbeMtpPlhfpgaAximmcohostif_Easy_v1_0	false
 	WdbeMtpPlhfpgaCohostif_Easy_v1_0	false
 	ImeIMOp.end
 cust	WdbeMtpPlhmcu	fill module template-specific MCU code placeholders	false
@@ -309,6 +310,7 @@ cust	WdbeMtpCplmstbu	complement module template-specific modular structure botto
 	WdbeMtpCplmstbuCmdinv_v2_0	false	connect buffer
 	WdbeMtpCplmstbuCmdret_v2_0	false	connect buffer
 	WdbeMtpCplmstbuCmult_xlnx_v6_0	false	adapt port widths
+	WdbeMtpCplmstbuAximmcohostif_Easy_v1_0	false	adapt port widths
 	WdbeMtpCplmstbuCohostif_Easy_v1_0	false	connect PHY, CRC and timeout
 	WdbeMtpCplmstbuCohostif_v1_0	false	connect PHY, CRC and timeout
 	WdbeMtpCplmstbuCrcspec_v2_0	false	adapt port widths
@@ -416,7 +418,9 @@ cust	WdbeMtpGenfst	generate module template-specific fine structure	false
 	WdbeMtpGenfstFsmtrack_Easy_v1_0	false	add clock domain crossing
 	WdbeMtpGenfstGpio_Easy_v1_0	false	add process, signals and command handshake
 	WdbeMtpGenfstGptrack_Easy_v1_0	false	add clock domain crossing
+	WdbeMtpGenfstHostif_Easy_v1_0	false	add process
 	WdbeMtpGenfstTkclksrc_v1_0	false	add command process handshake
+	WdbeMtpGenfstTkclksrc_Easy_v1_0	false	add process
 	WdbeMtpGenfstUarthostif_Easy_v2_0_Mcu	false	add process and sensitivities
 	WdbeMtpGenfstUsbhostif_Easy_v2_0_Mcu	false	add process and sensitivity
 	ImeIMOp.end
@@ -442,6 +446,7 @@ cust	WdbeMtpWrfpga	write module template-specific FPGA code	false
 	ImeIMOp.sref	Shrdat	Comment
 	WdbeMtpWrfpgaCmdinv_v2_0	false
 	WdbeMtpWrfpgaCmdret_v2_0	false
+	WdbeMtpWrfpgaAximmcohostif_Easy_v1_0	false
 	WdbeMtpWrfpgaCohostif_Easy_v1_0	false
 	WdbeMtpWrfpgaCohostif_v1_0	false
 	WdbeMtpWrfpgaCrcspec_32_v1_0	false

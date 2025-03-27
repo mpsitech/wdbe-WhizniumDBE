@@ -81,11 +81,10 @@ CrdWdbePrj::ContInf::ContInf(
 			, const string& MtxCrdPrj
 		) :
 			Block()
+			, numFSge(numFSge)
+			, MrlAppHlp(MrlAppHlp)
+			, MtxCrdPrj(MtxCrdPrj)
 		{
-	this->numFSge = numFSge;
-	this->MrlAppHlp = MrlAppHlp;
-	this->MtxCrdPrj = MtxCrdPrj;
-
 	mask = {NUMFSGE, MRLAPPHLP, MTXCRDPRJ};
 };
 
@@ -218,16 +217,15 @@ CrdWdbePrj::StatShr::StatShr(
 			, const bool MitCrdIpxAvail
 		) :
 			Block()
+			, jrefDlgimpex(jrefDlgimpex)
+			, jrefDlgnew(jrefDlgnew)
+			, jrefHeadbar(jrefHeadbar)
+			, jrefList(jrefList)
+			, jrefRec(jrefRec)
+			, MspCrd1Avail(MspCrd1Avail)
+			, MitCrdNewAvail(MitCrdNewAvail)
+			, MitCrdIpxAvail(MitCrdIpxAvail)
 		{
-	this->jrefDlgimpex = jrefDlgimpex;
-	this->jrefDlgnew = jrefDlgnew;
-	this->jrefHeadbar = jrefHeadbar;
-	this->jrefList = jrefList;
-	this->jrefRec = jrefRec;
-	this->MspCrd1Avail = MspCrd1Avail;
-	this->MitCrdNewAvail = MitCrdNewAvail;
-	this->MitCrdIpxAvail = MitCrdIpxAvail;
-
 	mask = {JREFDLGIMPEX, JREFDLGNEW, JREFHEADBAR, JREFLIST, JREFREC, MSPCRD1AVAIL, MITCRDNEWAVAIL, MITCRDIPXAVAIL};
 };
 

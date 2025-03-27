@@ -20,9 +20,10 @@ using namespace Xmlio;
 WdbeQModCtrRef1NError::WdbeQModCtrRef1NError(
 			const uint jnum
 			, const string stubRef
-		) {
-	this->jnum = jnum;
-	this->stubRef = stubRef;
+		) :
+			jnum(jnum)
+			, stubRef(stubRef)
+		{
 };
 
 bool WdbeQModCtrRef1NError::readXML(

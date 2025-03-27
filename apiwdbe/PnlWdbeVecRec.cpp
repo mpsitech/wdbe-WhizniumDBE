@@ -45,9 +45,8 @@ PnlWdbeVecRec::ContInf::ContInf(
 			const string& TxtRef
 		) :
 			Block()
+			, TxtRef(TxtRef)
 		{
-	this->TxtRef = TxtRef;
-
 	mask = {TXTREF};
 };
 
@@ -107,10 +106,9 @@ PnlWdbeVecRec::StatApp::StatApp(
 			, const bool initdoneVec1NVectoritem
 		) :
 			Block()
+			, initdoneDetail(initdoneDetail)
+			, initdoneVec1NVectoritem(initdoneVec1NVectoritem)
 		{
-	this->initdoneDetail = initdoneDetail;
-	this->initdoneVec1NVectoritem = initdoneVec1NVectoritem;
-
 	mask = {INITDONEDETAIL, INITDONEVEC1NVECTORITEM};
 };
 
@@ -174,12 +172,11 @@ PnlWdbeVecRec::StatShr::StatShr(
 			, const bool ButRegularizeActive
 		) :
 			Block()
+			, ixWdbeVExpstate(ixWdbeVExpstate)
+			, scrJrefDetail(scrJrefDetail)
+			, scrJrefVec1NVectoritem(scrJrefVec1NVectoritem)
+			, ButRegularizeActive(ButRegularizeActive)
 		{
-	this->ixWdbeVExpstate = ixWdbeVExpstate;
-	this->scrJrefDetail = scrJrefDetail;
-	this->scrJrefVec1NVectoritem = scrJrefVec1NVectoritem;
-	this->ButRegularizeActive = ButRegularizeActive;
-
 	mask = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFVEC1NVECTORITEM, BUTREGULARIZEACTIVE};
 };
 
@@ -249,9 +246,8 @@ PnlWdbeVecRec::Tag::Tag(
 			const string& Cpt
 		) :
 			Block()
+			, Cpt(Cpt)
 		{
-	this->Cpt = Cpt;
-
 	mask = {CPT};
 };
 
@@ -288,11 +284,11 @@ PnlWdbeVecRec::DpchAppDo::DpchAppDo(
 			, const set<uint>& mask
 		) :
 			DpchAppWdbe(VecWdbeVDpch::DPCHAPPWDBEVECRECDO, scrJref)
+			, ixVDo(ixVDo)
 		{
 	if (find(mask, ALL)) this->mask = {SCRJREF, IXVDO};
 	else this->mask = mask;
 
-	this->ixVDo = ixVDo;
 };
 
 string PnlWdbeVecRec::DpchAppDo::getSrefsMask() {

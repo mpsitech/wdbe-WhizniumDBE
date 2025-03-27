@@ -55,15 +55,14 @@ PnlWdbeVerDetail::ContIac::ContIac(
 			, const string& TxfCmt
 		) :
 			Block()
+			, TxfMaj(TxfMaj)
+			, TxfMin(TxfMin)
+			, TxfSub(TxfSub)
+			, numFPupJst(numFPupJst)
+			, numFPupSte(numFPupSte)
+			, TxfAbt(TxfAbt)
+			, TxfCmt(TxfCmt)
 		{
-	this->TxfMaj = TxfMaj;
-	this->TxfMin = TxfMin;
-	this->TxfSub = TxfSub;
-	this->numFPupJst = numFPupJst;
-	this->numFPupSte = numFPupSte;
-	this->TxfAbt = TxfAbt;
-	this->TxfCmt = TxfCmt;
-
 	mask = {TXFMAJ, TXFMIN, TXFSUB, NUMFPUPJST, NUMFPUPSTE, TXFABT, TXFCMT};
 };
 
@@ -157,10 +156,9 @@ PnlWdbeVerDetail::ContInf::ContInf(
 			, const string& TxtBvr
 		) :
 			Block()
+			, TxtPrj(TxtPrj)
+			, TxtBvr(TxtBvr)
 		{
-	this->TxtPrj = TxtPrj;
-	this->TxtBvr = TxtBvr;
-
 	mask = {TXTPRJ, TXTBVR};
 };
 
@@ -221,9 +219,8 @@ PnlWdbeVerDetail::StatApp::StatApp(
 			const uint ixWdbeVExpstate
 		) :
 			Block()
+			, ixWdbeVExpstate(ixWdbeVExpstate)
 		{
-	this->ixWdbeVExpstate = ixWdbeVExpstate;
-
 	mask = {IXWDBEVEXPSTATE};
 };
 
@@ -302,24 +299,23 @@ PnlWdbeVerDetail::StatShr::StatShr(
 			, const bool TxfCmtActive
 		) :
 			Block()
+			, ButSaveAvail(ButSaveAvail)
+			, ButSaveActive(ButSaveActive)
+			, TxtPrjActive(TxtPrjActive)
+			, ButPrjViewAvail(ButPrjViewAvail)
+			, ButPrjViewActive(ButPrjViewActive)
+			, TxfMajActive(TxfMajActive)
+			, TxfMinActive(TxfMinActive)
+			, TxfSubActive(TxfSubActive)
+			, TxtBvrActive(TxtBvrActive)
+			, ButBvrViewAvail(ButBvrViewAvail)
+			, ButBvrViewActive(ButBvrViewActive)
+			, PupJstActive(PupJstActive)
+			, ButJstEditAvail(ButJstEditAvail)
+			, PupSteActive(PupSteActive)
+			, TxfAbtActive(TxfAbtActive)
+			, TxfCmtActive(TxfCmtActive)
 		{
-	this->ButSaveAvail = ButSaveAvail;
-	this->ButSaveActive = ButSaveActive;
-	this->TxtPrjActive = TxtPrjActive;
-	this->ButPrjViewAvail = ButPrjViewAvail;
-	this->ButPrjViewActive = ButPrjViewActive;
-	this->TxfMajActive = TxfMajActive;
-	this->TxfMinActive = TxfMinActive;
-	this->TxfSubActive = TxfSubActive;
-	this->TxtBvrActive = TxtBvrActive;
-	this->ButBvrViewAvail = ButBvrViewAvail;
-	this->ButBvrViewActive = ButBvrViewActive;
-	this->PupJstActive = PupJstActive;
-	this->ButJstEditAvail = ButJstEditAvail;
-	this->PupSteActive = PupSteActive;
-	this->TxfAbtActive = TxfAbtActive;
-	this->TxfCmtActive = TxfCmtActive;
-
 	mask = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTPRJACTIVE, BUTPRJVIEWAVAIL, BUTPRJVIEWACTIVE, TXFMAJACTIVE, TXFMINACTIVE, TXFSUBACTIVE, TXTBVRACTIVE, BUTBVRVIEWAVAIL, BUTBVRVIEWACTIVE, PUPJSTACTIVE, BUTJSTEDITAVAIL, PUPSTEACTIVE, TXFABTACTIVE, TXFCMTACTIVE};
 };
 
@@ -416,17 +412,16 @@ PnlWdbeVerDetail::Tag::Tag(
 			, const string& CptCmt
 		) :
 			Block()
+			, Cpt(Cpt)
+			, CptPrj(CptPrj)
+			, CptMaj(CptMaj)
+			, CptMin(CptMin)
+			, CptSub(CptSub)
+			, CptBvr(CptBvr)
+			, CptSte(CptSte)
+			, CptAbt(CptAbt)
+			, CptCmt(CptCmt)
 		{
-	this->Cpt = Cpt;
-	this->CptPrj = CptPrj;
-	this->CptMaj = CptMaj;
-	this->CptMin = CptMin;
-	this->CptSub = CptSub;
-	this->CptBvr = CptBvr;
-	this->CptSte = CptSte;
-	this->CptAbt = CptAbt;
-	this->CptCmt = CptCmt;
-
 	mask = {CPT, CPTPRJ, CPTMAJ, CPTMIN, CPTSUB, CPTBVR, CPTSTE, CPTABT, CPTCMT};
 };
 
@@ -510,11 +505,11 @@ PnlWdbeVerDetail::DpchAppDo::DpchAppDo(
 			, const set<uint>& mask
 		) :
 			DpchAppWdbe(VecWdbeVDpch::DPCHAPPWDBEVERDETAILDO, scrJref)
+			, ixVDo(ixVDo)
 		{
 	if (find(mask, ALL)) this->mask = {SCRJREF, IXVDO};
 	else this->mask = mask;
 
-	this->ixVDo = ixVDo;
 };
 
 string PnlWdbeVerDetail::DpchAppDo::getSrefsMask() {

@@ -115,21 +115,20 @@ namespace PnlWdbeBnkDetail {
 	class StatShr : public Sbecore::Block {
 
 	public:
-		static const Sbecore::uint TXFVSTVALID = 1;
-		static const Sbecore::uint BUTSAVEAVAIL = 2;
-		static const Sbecore::uint BUTSAVEACTIVE = 3;
-		static const Sbecore::uint TXTSRFACTIVE = 4;
-		static const Sbecore::uint TXTUNTACTIVE = 5;
-		static const Sbecore::uint BUTUNTVIEWAVAIL = 6;
-		static const Sbecore::uint BUTUNTVIEWACTIVE = 7;
-		static const Sbecore::uint PUPVSTACTIVE = 8;
+		static const Sbecore::uint BUTSAVEAVAIL = 1;
+		static const Sbecore::uint BUTSAVEACTIVE = 2;
+		static const Sbecore::uint TXTSRFACTIVE = 3;
+		static const Sbecore::uint TXTUNTACTIVE = 4;
+		static const Sbecore::uint BUTUNTVIEWAVAIL = 5;
+		static const Sbecore::uint BUTUNTVIEWACTIVE = 6;
+		static const Sbecore::uint PUPVSTACTIVE = 7;
+		static const Sbecore::uint TXFVSTVALID = 8;
 		static const Sbecore::uint BUTVSTEDITAVAIL = 9;
 
 	public:
-		StatShr(const bool TxfVstValid = false, const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxtSrfActive = true, const bool TxtUntActive = true, const bool ButUntViewAvail = true, const bool ButUntViewActive = true, const bool PupVstActive = true, const bool ButVstEditAvail = true);
+		StatShr(const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxtSrfActive = true, const bool TxtUntActive = true, const bool ButUntViewAvail = true, const bool ButUntViewActive = true, const bool PupVstActive = true, const bool TxfVstValid = false, const bool ButVstEditAvail = true);
 
 	public:
-		bool TxfVstValid;
 		bool ButSaveAvail;
 		bool ButSaveActive;
 		bool TxtSrfActive;
@@ -137,6 +136,7 @@ namespace PnlWdbeBnkDetail {
 		bool ButUntViewAvail;
 		bool ButUntViewActive;
 		bool PupVstActive;
+		bool TxfVstValid;
 		bool ButVstEditAvail;
 
 	public:

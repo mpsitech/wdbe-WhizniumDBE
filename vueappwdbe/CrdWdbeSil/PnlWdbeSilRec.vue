@@ -79,11 +79,11 @@
 					/>
 				</v-col>
 				<v-col cols="12" md="6">
-					<PnlWdbeSilHk1NModule
+					<PnlWdbeSilRef1NSignal
 						v-on:crdopen="handleCrdopen"
 						v-on:request="handleRequest"
-						ref="PnlWdbeSilHk1NModule"
-						:scrJref=statshr.scrJrefHk1NModule
+						ref="PnlWdbeSilRef1NSignal"
+						:scrJref=statshr.scrJrefRef1NSignal
 					/>
 				</v-col>
 				<v-col cols="12" md="6">
@@ -95,19 +95,19 @@
 					/>
 				</v-col>
 				<v-col cols="12" md="6">
-					<PnlWdbeSilRef1NSignal
-						v-on:crdopen="handleCrdopen"
-						v-on:request="handleRequest"
-						ref="PnlWdbeSilRef1NSignal"
-						:scrJref=statshr.scrJrefRef1NSignal
-					/>
-				</v-col>
-				<v-col cols="12" md="6">
 					<PnlWdbeSilHk1NVector
 						v-on:crdopen="handleCrdopen"
 						v-on:request="handleRequest"
 						ref="PnlWdbeSilHk1NVector"
 						:scrJref=statshr.scrJrefHk1NVector
+					/>
+				</v-col>
+				<v-col cols="12" md="6">
+					<PnlWdbeSilHk1NModule
+						v-on:crdopen="handleCrdopen"
+						v-on:request="handleRequest"
+						ref="PnlWdbeSilHk1NModule"
+						:scrJref=statshr.scrJrefHk1NModule
 					/>
 				</v-col>
 				<v-col cols="12" md="6">
@@ -133,10 +133,10 @@
 	import PnlWdbeSil1NPeripheral from './PnlWdbeSil1NPeripheral';
 	import PnlWdbeSilSil1NUnit from './PnlWdbeSilSil1NUnit';
 	import PnlWdbeSil1NBank from './PnlWdbeSil1NBank';
-	import PnlWdbeSilHk1NModule from './PnlWdbeSilHk1NModule';
-	import PnlWdbeSilRef1NError from './PnlWdbeSilRef1NError';
 	import PnlWdbeSilRef1NSignal from './PnlWdbeSilRef1NSignal';
+	import PnlWdbeSilRef1NError from './PnlWdbeSilRef1NError';
 	import PnlWdbeSilHk1NVector from './PnlWdbeSilHk1NVector';
+	import PnlWdbeSilHk1NModule from './PnlWdbeSilHk1NModule';
 	import PnlWdbeSilRef1NCommand from './PnlWdbeSilRef1NCommand';
 	/*
 	*/
@@ -160,10 +160,10 @@
 			PnlWdbeSil1NPeripheral,
 			PnlWdbeSilSil1NUnit,
 			PnlWdbeSil1NBank,
-			PnlWdbeSilHk1NModule,
-			PnlWdbeSilRef1NError,
 			PnlWdbeSilRef1NSignal,
+			PnlWdbeSilRef1NError,
 			PnlWdbeSilHk1NVector,
+			PnlWdbeSilHk1NModule,
 			PnlWdbeSilRef1NCommand
 			/*
 			*/
@@ -230,10 +230,10 @@
 						else if (obj.scrJref == this.statshr.scrJref1NPeripheral) this.$refs.PnlWdbeSil1NPeripheral.handleReply(obj);
 						else if (obj.scrJref == this.statshr.scrJrefSil1NUnit) this.$refs.PnlWdbeSilSil1NUnit.handleReply(obj);
 						else if (obj.scrJref == this.statshr.scrJref1NBank) this.$refs.PnlWdbeSil1NBank.handleReply(obj);
-						else if (obj.scrJref == this.statshr.scrJrefHk1NModule) this.$refs.PnlWdbeSilHk1NModule.handleReply(obj);
-						else if (obj.scrJref == this.statshr.scrJrefRef1NError) this.$refs.PnlWdbeSilRef1NError.handleReply(obj);
 						else if (obj.scrJref == this.statshr.scrJrefRef1NSignal) this.$refs.PnlWdbeSilRef1NSignal.handleReply(obj);
+						else if (obj.scrJref == this.statshr.scrJrefRef1NError) this.$refs.PnlWdbeSilRef1NError.handleReply(obj);
 						else if (obj.scrJref == this.statshr.scrJrefHk1NVector) this.$refs.PnlWdbeSilHk1NVector.handleReply(obj);
+						else if (obj.scrJref == this.statshr.scrJrefHk1NModule) this.$refs.PnlWdbeSilHk1NModule.handleReply(obj);
 						else if (obj.scrJref == this.statshr.scrJrefRef1NCommand) this.$refs.PnlWdbeSilRef1NCommand.handleReply(obj);
 						/*
 						*/
@@ -269,10 +269,10 @@
 						else if (obj.dpcheng.scrJref == this.statshr.scrJref1NPeripheral) this.$refs.PnlWdbeSil1NPeripheral.handleUpdate(obj);
 						else if (obj.dpcheng.scrJref == this.statshr.scrJrefSil1NUnit) this.$refs.PnlWdbeSilSil1NUnit.handleUpdate(obj);
 						else if (obj.dpcheng.scrJref == this.statshr.scrJref1NBank) this.$refs.PnlWdbeSil1NBank.handleUpdate(obj);
-						else if (obj.dpcheng.scrJref == this.statshr.scrJrefHk1NModule) this.$refs.PnlWdbeSilHk1NModule.handleUpdate(obj);
-						else if (obj.dpcheng.scrJref == this.statshr.scrJrefRef1NError) this.$refs.PnlWdbeSilRef1NError.handleUpdate(obj);
 						else if (obj.dpcheng.scrJref == this.statshr.scrJrefRef1NSignal) this.$refs.PnlWdbeSilRef1NSignal.handleUpdate(obj);
+						else if (obj.dpcheng.scrJref == this.statshr.scrJrefRef1NError) this.$refs.PnlWdbeSilRef1NError.handleUpdate(obj);
 						else if (obj.dpcheng.scrJref == this.statshr.scrJrefHk1NVector) this.$refs.PnlWdbeSilHk1NVector.handleUpdate(obj);
+						else if (obj.dpcheng.scrJref == this.statshr.scrJrefHk1NModule) this.$refs.PnlWdbeSilHk1NModule.handleUpdate(obj);
 						else if (obj.dpcheng.scrJref == this.statshr.scrJrefRef1NCommand) this.$refs.PnlWdbeSilRef1NCommand.handleUpdate(obj);
 						/*
 						*/

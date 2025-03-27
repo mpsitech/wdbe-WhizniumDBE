@@ -25,16 +25,16 @@ WdbeAMCommandRetpar::WdbeAMCommandRetpar(
 			, const ubigint refWdbeMVector
 			, const utinyint Length
 			, const string Comment
-		) {
-
-	this->ref = ref;
-	this->cmdRefWdbeMCommand = cmdRefWdbeMCommand;
-	this->cmdNum = cmdNum;
-	this->sref = sref;
-	this->ixWdbeVPartype = ixWdbeVPartype;
-	this->refWdbeMVector = refWdbeMVector;
-	this->Length = Length;
-	this->Comment = Comment;
+		) :
+			ref(ref)
+			, cmdRefWdbeMCommand(cmdRefWdbeMCommand)
+			, cmdNum(cmdNum)
+			, sref(sref)
+			, ixWdbeVPartype(ixWdbeVPartype)
+			, refWdbeMVector(refWdbeMVector)
+			, Length(Length)
+			, Comment(Comment)
+		{
 };
 
 bool WdbeAMCommandRetpar::operator==(

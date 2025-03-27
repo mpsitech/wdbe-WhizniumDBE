@@ -71,8 +71,11 @@ void WdbeMtpWrfpgaDdrmux_Easy_v1_0::writeMdlVhd(
 		) {
 	bool phyNotAxi;
 	unsigned int wAPhy, wDPhy;
+
+	string memclk;
 	bool memclkIntNotExt;
-	int fMemclk;
+	double ratioMemclk;
+
 	unsigned int wA, wAConst;
 	string aConst;
 	unsigned int NBeat;
@@ -106,11 +109,14 @@ void WdbeMtpWrfpgaDdrmux_Easy_v1_0::writeMdlVhd(
 		if (Wdbe::getMpa(dbswdbe, mdl->ref, "wDPhy", s)) wDPhy = atoi(s.c_str());
 	};
 
+	memclk = "memclk";
+	Wdbe::getMpa(dbswdbe, mdl->ref, "memclk", memclk);
+
 	memclkIntNotExt = false;
 	if (Wdbe::getMpa(dbswdbe, mdl->ref, "memclkIntNotExt", s)) memclkIntNotExt = (s == "true");
 
-	fMemclk = 333000;
-	if (Wdbe::getMpa(dbswdbe, mdl->ref, "fMemclk", s)) fMemclk = atoi(s.c_str());
+	ratioMemclk = 1.0;
+	if (Wdbe::getMpa(dbswdbe, mdl->ref, "ratioMemclk", s)) ratioMemclk = atof(s.c_str());
 
 	wA = 32;
 	if (Wdbe::getMpa(dbswdbe, mdl->ref, "wA", s)) wA = atoi(s.c_str());
@@ -142,7 +148,7 @@ void WdbeMtpWrfpgaDdrmux_Easy_v1_0::writeMdlVhd(
 		if (ss.size() == NRd) for (unsigned int i = 0; i < NRd; i++) wDRds[i] = atoi(ss[i].c_str());
 	};
 
-	clkRds.resize(NRd, "memclk");
+	clkRds.resize(NRd, memclk);
 	if (Wdbe::getMpa(dbswdbe, mdl->ref, "clkRds", s)) {
 		StrMod::stringToVector(s, ss);
 		if (ss.size() == NRd) clkRds = ss;
@@ -169,7 +175,7 @@ void WdbeMtpWrfpgaDdrmux_Easy_v1_0::writeMdlVhd(
 		if (ss.size() == NWr) for (unsigned int i = 0; i < NWr; i++) wDWrs[i] = atoi(ss[i].c_str());
 	};
 
-	clkWrs.resize(NWr, "memclk");
+	clkWrs.resize(NWr, memclk);
 	if (Wdbe::getMpa(dbswdbe, mdl->ref, "clkWrs", s)) {
 		StrMod::stringToVector(s, ss);
 		if (ss.size() == NWr) clkWrs = ss;
@@ -195,6 +201,9 @@ void WdbeMtpWrfpgaDdrmux_Easy_v1_0::writeMdlVhd(
 
 		// --- impl.read.wiring
 		outfile << "-- IP impl.read.wiring --- RBEGIN" << endl;
+
+		outfile << "\tddrAXI_arid <= (others => '0');" << endl;
+		outfile << endl;
 
 		outfile << "\tddrAXI_araddr <= ";
 		for (unsigned int i = 0; i < NRd; i++) {
@@ -257,7 +266,8 @@ void WdbeMtpWrfpgaDdrmux_Easy_v1_0::writeMdlVhd(
 		outfile << "\"; -- " << wD << "-bit wide transfers" << endl;
 		outfile << endl;
 
-		outfile << "\tddrAXI_arvalid <= ";
+		outfile << "\tddrAXI_arvalid <= ddrAXI_arvalid_sig;" << endl;
+		outfile << "\tddrAXI_arvalid_sig <= ";
 		for (unsigned int i = 0; i < NRd; i++) {
 			outfile << getChsref(false, i, false) << "AXI_arvalid";
 			if (wDRds[i] != wD) outfile << "_sig";
@@ -281,11 +291,12 @@ void WdbeMtpWrfpgaDdrmux_Easy_v1_0::writeMdlVhd(
 		};
 		outfile << endl;
 
-		outfile << "\tddrAXI_rready <= ";
+		outfile << "\tddrAXI_rready <= ddrAXI_rready_sig;" << endl;
+		outfile << "\tddrAXI_rready_sig <= ";
 		for (unsigned int i = 0; i < NRd; i++) {
 			outfile << getChsref(false, i, false) << "AXI_rready";
 			if (wDRds[i] != wD) outfile << "_sig";
-			outfile << " when rdmutex=mutex" << string(1, (char) (0x41+i)) << endl;
+			outfile << " when rdid(ixRdidEgr)=mutex" << string(1, (char) (0x41+i)) << endl;
 			outfile << "\t\t\t\telse ";
 		};
 		outfile << "'0';" << endl;
@@ -301,7 +312,7 @@ void WdbeMtpWrfpgaDdrmux_Easy_v1_0::writeMdlVhd(
 		for (unsigned int i = 0; i < NRd; i++) {
 			outfile << "\t" << getChsref(false, i, false) << "AXI_rvalid";
 			if (wDRds[i] != wD) outfile << "_sig";
-			outfile << " <= ddrAXI_rvalid when rdmutex=mutex" << string(1, (char) (0x41+i)) << " else '0';" << endl;
+			outfile << " <= ddrAXI_rvalid when rdid(ixRdidEgr)=mutex" << string(1, (char) (0x41+i)) << " else '0';" << endl;
 		};
 		outfile << endl;
 
@@ -312,6 +323,20 @@ void WdbeMtpWrfpgaDdrmux_Easy_v1_0::writeMdlVhd(
 		outfile << endl;
 		outfile << "-- IP impl.read.wiring --- REND" << endl;
 
+		// --- impl.read.ext
+		outfile << "\t\t\t-- IP impl.read.ext --- IBEGIN" << endl;
+		outfile << "\t\t\tif ddrAXI_rready_sig='1' and ddrAXI_rvalid='1' and ddrAXI_rlast='1' then" << endl;
+		outfile << "\t\t\t\trdid(ixRdidEgr) <= mutexIdle;" << endl;
+		outfile << endl;
+
+		outfile << "\t\t\t\tif ixRdidEgr=31 then" << endl;
+		outfile << "\t\t\t\t\tixRdidEgr <= 0;" << endl;
+		outfile << "\t\t\t\telse" << endl;
+		outfile << "\t\t\t\t\tixRdidEgr <= ixRdidEgr + 1;" << endl;
+		outfile << "\t\t\t\tend if;" << endl;
+		outfile << "\t\t\tend if;" << endl;
+		outfile << "\t\t\t-- IP impl.read.ext --- IEND" << endl;
+
 		// --- impl.read.idle.start*
 		for (unsigned int i = 0; i < NRd; i++) {
 			outfile << "-- IP impl.read.idle.start" << string(1, (char) (0x41+i)) << " --- IBEGIN" << endl;
@@ -320,6 +345,9 @@ void WdbeMtpWrfpgaDdrmux_Easy_v1_0::writeMdlVhd(
 			outfile << endl;
 
 			outfile << "\t\t\t\t\tstrbRdlock <= '1';" << endl;
+			outfile << endl;
+
+			outfile << "\t\t\t\t\trdid(ixRdid) <= mutex" << string(1, (char) (0x41+i)) << ";" << endl;
 			outfile << "-- IP impl.read.idle.start" << string(1, (char) (0x41+i)) << " --- IEND" << endl;
 		};
 
@@ -327,7 +355,16 @@ void WdbeMtpWrfpgaDdrmux_Easy_v1_0::writeMdlVhd(
 		outfile << "\t\t\t\tstrbRdlock <= '0'; -- IP impl.read.locked.ext --- ILINE" << endl;
 
 		// --- impl.read.locked.unlock
-		outfile << "\t\t\t\t\trdmutex <= mutexIdle; -- IP impl.read.locked.unlock --- ILINE" << endl;
+		outfile << "\t\t\t\t\t-- IP impl.read.locked.unlock --- IBEGIN" << endl;
+		outfile << "\t\t\t\t\trdmutex <= mutexIdle;" << endl;
+		outfile << endl;
+
+		outfile << "\t\t\t\t\tif ixRdid=31 then" << endl;
+		outfile << "\t\t\t\t\t\tixRdid <= 0;" << endl;
+		outfile << "\t\t\t\t\telse" << endl;
+		outfile << "\t\t\t\t\t\tixRdid <= ixRdid + 1;" << endl;
+		outfile << "\t\t\t\t\tend if;" << endl;
+		outfile << "\t\t\t\t\t-- IP impl.read.locked.unlock --- IEND" << endl;
 	};
 
 	if (NWr > 0) {
@@ -338,6 +375,9 @@ void WdbeMtpWrfpgaDdrmux_Easy_v1_0::writeMdlVhd(
 
 		// --- impl.write.wiring
 		outfile << "-- IP impl.write.wiring --- RBEGIN" << endl;
+
+		outfile << "\tddrAXI_awid <= (others => '0');" << endl;
+		outfile << endl;
 
 		outfile << "\tddrAXI_awaddr <= ";
 		for (unsigned int i = 0; i < NWr; i++) {
@@ -452,36 +492,36 @@ void WdbeMtpWrfpgaDdrmux_Easy_v1_0::writeMdlVhd(
 		outfile << "'0';" << endl;
 		outfile << endl;
 
-		outfile << "\tddrAXI_bready <= ";
-		for (unsigned int i = 0; i < NWr; i++) {
-			outfile << getChsref(true, i, false) << "AXI_bready";
-			if (wDWrs[i] != wD) outfile << "_sig";
-			outfile << " when wrmutex=mutex" << string(1, (char) (0x41+i)) << endl;
-			outfile << "\t\t\t\telse ";
-		};
-		outfile << "'1';" << endl;
+		outfile << "\tddrAXI_bready <= ddrAXI_bready_sig;" << endl;
 		outfile << endl;
 
-		for (unsigned int i = 0; i < NWr; i++) {
-			outfile << "\t" << getChsref(true, i, false) << "AXI_bresp";
-			if (wDWrs[i] != wD) outfile << "_sig";
-			outfile << " <= ddrAXI_bresp;" << endl;
-		};
-		outfile << endl;
-
-		for (unsigned int i = 0; i < NWr; i++) {
-			outfile << "\t" << getChsref(true, i, false) << "AXI_bvalid";
-			if (wDWrs[i] != wD) outfile << "_sig";
-			outfile << " <= ddrAXI_bvalid;" << endl;
-		};
-		outfile << endl;
-
-		outfile << "\tackWr <= '1' when stateWrite=stateWriteLockedA else '0';" << endl;
+		outfile << "\tackWr <= '1' when stateWrite=stateWriteLocked else '0';" << endl;
 		outfile << endl;
 
 		for (unsigned int i = 0; i < NWr; i++) outfile << "\tack" << getChsref(true, i, true) << " <= ackWr when wrmutex=mutex" << string(1, (char) (0x41+i)) << " else '0';" << endl;
 		outfile << endl;
 		outfile << "-- IP impl.write.wiring --- REND" << endl;
+
+		// --- impl.write.ext
+		outfile << "-- IP impl.write.ext --- IBEGIN" << endl;
+		outfile << "\t\t\tif ddrAXI_bvalid='1' then" << endl;
+		outfile << "\t\t\t\twrid(ixWridIgr) <= '0';" << endl;
+		outfile << endl;
+
+		outfile << "\t\t\t\tif ixWridIgr=31 then" << endl;
+		outfile << "\t\t\t\t\tixWridIgr <= 0;" << endl;
+		outfile << "\t\t\t\telse" << endl;
+		outfile << "\t\t\t\t\tixWridIgr <= ixWridIgr + 1;" << endl;
+		outfile << "\t\t\t\tend if;" << endl;
+		outfile << "\t\t\tend if;" << endl;
+		outfile << endl;
+
+		outfile << "\t\t\tif unsigned(wrid)=0 then -- one clock late" << endl;
+		outfile << "\t\t\t\tddrAXI_bready_sig <= '0';" << endl;
+		outfile << "\t\t\telse" << endl;
+		outfile << "\t\t\t\tddrAXI_bready_sig <= '1';" << endl;
+		outfile << "\t\t\tend if;" << endl;
+		outfile << "-- IP impl.write.ext --- IEND" << endl;
 
 		// --- impl.write.idle.start*
 		for (unsigned int i = 0; i < NWr; i++) {
@@ -491,14 +531,26 @@ void WdbeMtpWrfpgaDdrmux_Easy_v1_0::writeMdlVhd(
 			outfile << endl;
 
 			outfile << "\t\t\t\t\tstrbWrlock <= '1';" << endl;
+			outfile << endl;
+
+			outfile << "\t\t\t\t\twrid(ixWrid) <= '1';" << endl;
 			outfile << "-- IP impl.write.idle.start" << string(1, (char) (0x41+i)) << " --- IEND" << endl;
 		};
 
-		// --- impl.write.lockedA.ext
-		outfile << "\t\t\t\tstrbWrlock <= '0'; -- IP impl.write.lockedA.ext --- ILINE" << endl;
+		// --- impl.write.locked.ext
+		outfile << "\t\t\t\tstrbWrlock <= '0'; -- IP impl.write.locked.ext --- ILINE" << endl;
 
-		// --- impl.write.lockedA.unlock
-		outfile << "\t\t\t\t\twrmutex <= mutexIdle; -- IP impl.write.lockedA.unlock --- ILINE" << endl;
+		// --- impl.write.locked.unlock
+		outfile << "-- IP impl.write.locked.unlock --- IBEGIN" << endl;
+		outfile << "\t\t\t\t\twrmutex <= mutexIdle;" << endl;
+		outfile << endl;
+
+		outfile << "\t\t\t\t\tif ixWrid=31 then" << endl;
+		outfile << "\t\t\t\t\t\tixWrid <= 0;" << endl;
+		outfile << "\t\t\t\t\telse" << endl;
+		outfile << "\t\t\t\t\t\tixWrid <= ixWrid + 1;" << endl;
+		outfile << "\t\t\t\t\tend if;" << endl;
+		outfile << "-- IP impl.write.locked.unlock --- IEND" << endl;
 
 	};
 
@@ -508,7 +560,10 @@ void WdbeMtpWrfpgaDdrmux_Easy_v1_0::writeMdlVhd(
 	outfile << "-- IP impl.stats.ext --- IBEGIN" << endl;
 
 	if (NRd > 0) {
-		outfile << "\t\t\tif strbRdlock_mclk='1' then" << endl;
+		outfile << "\t\t\tif strbRdlock";
+		if (memclk != "mclk") outfile << "_mclk";
+		outfile << "='1' then" << endl;
+
 		outfile << "\t\t\t\tcase rdmutex is" << endl;
 		for (unsigned int i = 0; i < NRd; i++) {
 			outfile << "\t\t\t\t\twhen mutex" << string(1, (char) (0x41+i)) << " =>" << endl;
@@ -522,7 +577,10 @@ void WdbeMtpWrfpgaDdrmux_Easy_v1_0::writeMdlVhd(
 	if ((NRd > 0) && (NWr > 0)) outfile << endl;
 
 	if (NWr > 0) {
-		outfile << "\t\t\tif strbWrlock_mclk='1' then" << endl;
+		outfile << "\t\t\tif strbWrlock";
+		if (memclk != "mclk") outfile << "_mclk";
+		outfile << "='1' then" << endl;
+
 		outfile << "\t\t\t\tcase wrmutex is" << endl;
 		for (unsigned int i = 0; i < NWr; i++) {
 			outfile << "\t\t\t\t\twhen mutex" << string(1, (char) (0x41+i)) << " =>" << endl;
@@ -573,7 +631,7 @@ void WdbeMtpWrfpgaDdrmux_Easy_v1_0::writeMdlVhd(
 		outfile << "\t\t\tfor i in 0 to NBeat-1 loop" << endl;
 		outfile << "\t\t\t\t" << chsref << "Buf(i) <= (others => '0');" << endl;
 		outfile << "\t\t\tend loop;" << endl;
-		outfile << "-- IP impl.rd" << chsref << "GearIgr.asyncrst --- REND" << endl;
+		outfile << "-- IP impl." << chsref << "GearIgr.asyncrst --- REND" << endl;
 
 		// --- impl.rdXGearIgr.ext
 		outfile << "-- IP impl." << chsref << "GearIgr.ext --- IBEGIN" << endl;

@@ -98,10 +98,11 @@ public:
 	class VecVHkTbl {
 
 	public:
-		static const Sbecore::uint CTR = 1;
-		static const Sbecore::uint FSM = 2;
-		static const Sbecore::uint SIG = 3;
-		static const Sbecore::uint UNT = 4;
+		static const Sbecore::uint CMD = 1;
+		static const Sbecore::uint CTR = 2;
+		static const Sbecore::uint FSM = 3;
+		static const Sbecore::uint SIG = 4;
+		static const Sbecore::uint UNT = 5;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);

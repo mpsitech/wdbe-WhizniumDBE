@@ -28,17 +28,18 @@ WdbeQMtpList::WdbeQMtpList(
 			, const string titHkIxVTbl
 			, const string stubHkUref
 			, const string Srefrule
-		) {
-	this->jnum = jnum;
-	this->sref = sref;
-	this->srefWdbeKVendor = srefWdbeKVendor;
-	this->titSrefWdbeKVendor = titSrefWdbeKVendor;
-	this->srefIxVBasetype = srefIxVBasetype;
-	this->titIxVBasetype = titIxVBasetype;
-	this->srefHkIxVTbl = srefHkIxVTbl;
-	this->titHkIxVTbl = titHkIxVTbl;
-	this->stubHkUref = stubHkUref;
-	this->Srefrule = Srefrule;
+		) :
+			jnum(jnum)
+			, sref(sref)
+			, srefWdbeKVendor(srefWdbeKVendor)
+			, titSrefWdbeKVendor(titSrefWdbeKVendor)
+			, srefIxVBasetype(srefIxVBasetype)
+			, titIxVBasetype(titIxVBasetype)
+			, srefHkIxVTbl(srefHkIxVTbl)
+			, titHkIxVTbl(titHkIxVTbl)
+			, stubHkUref(stubHkUref)
+			, Srefrule(Srefrule)
+		{
 };
 
 bool WdbeQMtpList::readXML(

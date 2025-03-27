@@ -33,22 +33,23 @@ WdbeQPrjList::WdbeQPrjList(
 			, const bool Easy
 			, const string yesnoEasy
 			, const string Giturl
-		) {
-	this->qref = qref;
-	this->jref = jref;
-	this->jnum = jnum;
-	this->ref = ref;
-	this->grp = grp;
-	this->stubGrp = stubGrp;
-	this->own = own;
-	this->stubOwn = stubOwn;
-	this->Short = Short;
-	this->Title = Title;
-	this->refWdbeMVersion = refWdbeMVersion;
-	this->stubRefWdbeMVersion = stubRefWdbeMVersion;
-	this->Easy = Easy;
-	this->yesnoEasy = yesnoEasy;
-	this->Giturl = Giturl;
+		) :
+			qref(qref)
+			, jref(jref)
+			, jnum(jnum)
+			, ref(ref)
+			, grp(grp)
+			, stubGrp(stubGrp)
+			, own(own)
+			, stubOwn(stubOwn)
+			, Short(Short)
+			, Title(Title)
+			, refWdbeMVersion(refWdbeMVersion)
+			, stubRefWdbeMVersion(stubRefWdbeMVersion)
+			, Easy(Easy)
+			, yesnoEasy(yesnoEasy)
+			, Giturl(Giturl)
+		{
 };
 
 void WdbeQPrjList::writeJSON(

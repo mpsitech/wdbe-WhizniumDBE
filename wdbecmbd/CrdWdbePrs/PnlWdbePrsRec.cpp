@@ -38,8 +38,8 @@ PnlWdbePrsRec::PnlWdbePrsRec(
 		{
 	jref = xchg->addJob(dbswdbe, this, jrefSup);
 
-	pnlmnproject = NULL;
 	pnlmncoreproject = NULL;
+	pnlmnproject = NULL;
 	pnladetail = NULL;
 	pnldetail = NULL;
 

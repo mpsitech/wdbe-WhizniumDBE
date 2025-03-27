@@ -117,9 +117,8 @@ DlgWdbeFilNew::ContIac::ContIac(
 			const uint numFDse
 		) :
 			Block()
+			, numFDse(numFDse)
 		{
-	this->numFDse = numFDse;
-
 	mask = {NUMFDSE};
 };
 
@@ -199,14 +198,13 @@ DlgWdbeFilNew::ContIacDet::ContIacDet(
 			, const string& TxfCmt
 		) :
 			Block()
+			, TxfFnm(TxfFnm)
+			, numFPupRet(numFPupRet)
+			, TxfReu(TxfReu)
+			, numFPupCnt(numFPupCnt)
+			, numFPupMim(numFPupMim)
+			, TxfCmt(TxfCmt)
 		{
-	this->TxfFnm = TxfFnm;
-	this->numFPupRet = numFPupRet;
-	this->TxfReu = TxfReu;
-	this->numFPupCnt = numFPupCnt;
-	this->numFPupMim = numFPupMim;
-	this->TxfCmt = TxfCmt;
-
 	mask = {TXFFNM, NUMFPUPRET, TXFREU, NUMFPUPCNT, NUMFPUPMIM, TXFCMT};
 };
 
@@ -296,9 +294,8 @@ DlgWdbeFilNew::ContInf::ContInf(
 			const uint numFSge
 		) :
 			Block()
+			, numFSge(numFSge)
 		{
-	this->numFSge = numFSge;
-
 	mask = {NUMFSGE};
 };
 
@@ -358,10 +355,9 @@ DlgWdbeFilNew::StatApp::StatApp(
 			, const string& shortMenu
 		) :
 			Block()
+			, initdone(initdone)
+			, shortMenu(shortMenu)
 		{
-	this->initdone = initdone;
-	this->shortMenu = shortMenu;
-
 	mask = {INITDONE, SHORTMENU};
 };
 
@@ -422,9 +418,8 @@ DlgWdbeFilNew::StatShr::StatShr(
 			const bool ButDneActive
 		) :
 			Block()
+			, ButDneActive(ButDneActive)
 		{
-	this->ButDneActive = ButDneActive;
-
 	mask = {BUTDNEACTIVE};
 };
 
@@ -483,9 +478,8 @@ DlgWdbeFilNew::StatShrDet::StatShrDet(
 			const bool ButCreActive
 		) :
 			Block()
+			, ButCreActive(ButCreActive)
 		{
-	this->ButCreActive = ButCreActive;
-
 	mask = {BUTCREACTIVE};
 };
 
@@ -544,9 +538,8 @@ DlgWdbeFilNew::StatShrFil::StatShrFil(
 			const bool UldActive
 		) :
 			Block()
+			, UldActive(UldActive)
 		{
-	this->UldActive = UldActive;
-
 	mask = {ULDACTIVE};
 };
 
@@ -606,10 +599,9 @@ DlgWdbeFilNew::Tag::Tag(
 			, const string& ButDne
 		) :
 			Block()
+			, Cpt(Cpt)
+			, ButDne(ButDne)
 		{
-	this->Cpt = Cpt;
-	this->ButDne = ButDne;
-
 	mask = {CPT, BUTDNE};
 };
 
@@ -651,15 +643,14 @@ DlgWdbeFilNew::TagDet::TagDet(
 			, const string& ButCre
 		) :
 			Block()
+			, CptFnm(CptFnm)
+			, CptRet(CptRet)
+			, CptReu(CptReu)
+			, CptCnt(CptCnt)
+			, CptMim(CptMim)
+			, CptCmt(CptCmt)
+			, ButCre(ButCre)
 		{
-	this->CptFnm = CptFnm;
-	this->CptRet = CptRet;
-	this->CptReu = CptReu;
-	this->CptCnt = CptCnt;
-	this->CptMim = CptMim;
-	this->CptCmt = CptCmt;
-	this->ButCre = ButCre;
-
 	mask = {CPTFNM, CPTRET, CPTREU, CPTCNT, CPTMIM, CPTCMT, BUTCRE};
 };
 
@@ -701,10 +692,9 @@ DlgWdbeFilNew::TagFil::TagFil(
 			, const string& Cpt
 		) :
 			Block()
+			, Uld(Uld)
+			, Cpt(Cpt)
 		{
-	this->Uld = Uld;
-	this->Cpt = Cpt;
-
 	mask = {ULD, CPT};
 };
 
@@ -786,12 +776,12 @@ DlgWdbeFilNew::DpchAppDo::DpchAppDo(
 			, const set<uint>& mask
 		) :
 			DpchAppWdbe(VecWdbeVDpch::DPCHAPPDLGWDBEFILNEWDO, scrJref)
+			, ixVDo(ixVDo)
+			, ixVDoDet(ixVDoDet)
 		{
 	if (find(mask, ALL)) this->mask = {SCRJREF, IXVDO, IXVDODET};
 	else this->mask = mask;
 
-	this->ixVDo = ixVDo;
-	this->ixVDoDet = ixVDoDet;
 };
 
 string DlgWdbeFilNew::DpchAppDo::getSrefsMask() {

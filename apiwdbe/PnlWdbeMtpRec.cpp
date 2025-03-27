@@ -45,9 +45,8 @@ PnlWdbeMtpRec::ContInf::ContInf(
 			const string& TxtRef
 		) :
 			Block()
+			, TxtRef(TxtRef)
 		{
-	this->TxtRef = TxtRef;
-
 	mask = {TXTREF};
 };
 
@@ -107,33 +106,32 @@ PnlWdbeMtpRec::StatApp::StatApp(
 			, const bool initdoneKParKey
 			, const bool initdoneKHdltype
 			, const bool initdoneAPar
-			, const bool initdoneMdl1NGeneric
-			, const bool initdoneHsm1NPipeline
 			, const bool initdoneMdl1NPort
+			, const bool initdoneHsm1NPipeline
 			, const bool initdoneTpl1NModule
+			, const bool initdoneMdl1NGeneric
 			, const bool initdoneSup1NModule
-			, const bool initdoneRef1NSensitivity
 			, const bool initdoneRef1NVariable
+			, const bool initdoneRef1NSensitivity
 			, const bool initdoneMge1NSignal
 			, const bool initdoneRef1NFile
 		) :
 			Block()
+			, initdoneDetail(initdoneDetail)
+			, initdoneKParKey(initdoneKParKey)
+			, initdoneKHdltype(initdoneKHdltype)
+			, initdoneAPar(initdoneAPar)
+			, initdoneMdl1NPort(initdoneMdl1NPort)
+			, initdoneHsm1NPipeline(initdoneHsm1NPipeline)
+			, initdoneTpl1NModule(initdoneTpl1NModule)
+			, initdoneMdl1NGeneric(initdoneMdl1NGeneric)
+			, initdoneSup1NModule(initdoneSup1NModule)
+			, initdoneRef1NVariable(initdoneRef1NVariable)
+			, initdoneRef1NSensitivity(initdoneRef1NSensitivity)
+			, initdoneMge1NSignal(initdoneMge1NSignal)
+			, initdoneRef1NFile(initdoneRef1NFile)
 		{
-	this->initdoneDetail = initdoneDetail;
-	this->initdoneKParKey = initdoneKParKey;
-	this->initdoneKHdltype = initdoneKHdltype;
-	this->initdoneAPar = initdoneAPar;
-	this->initdoneMdl1NGeneric = initdoneMdl1NGeneric;
-	this->initdoneHsm1NPipeline = initdoneHsm1NPipeline;
-	this->initdoneMdl1NPort = initdoneMdl1NPort;
-	this->initdoneTpl1NModule = initdoneTpl1NModule;
-	this->initdoneSup1NModule = initdoneSup1NModule;
-	this->initdoneRef1NSensitivity = initdoneRef1NSensitivity;
-	this->initdoneRef1NVariable = initdoneRef1NVariable;
-	this->initdoneMge1NSignal = initdoneMge1NSignal;
-	this->initdoneRef1NFile = initdoneRef1NFile;
-
-	mask = {INITDONEDETAIL, INITDONEKPARKEY, INITDONEKHDLTYPE, INITDONEAPAR, INITDONEMDL1NGENERIC, INITDONEHSM1NPIPELINE, INITDONEMDL1NPORT, INITDONETPL1NMODULE, INITDONESUP1NMODULE, INITDONEREF1NSENSITIVITY, INITDONEREF1NVARIABLE, INITDONEMGE1NSIGNAL, INITDONEREF1NFILE};
+	mask = {INITDONEDETAIL, INITDONEKPARKEY, INITDONEKHDLTYPE, INITDONEAPAR, INITDONEMDL1NPORT, INITDONEHSM1NPIPELINE, INITDONETPL1NMODULE, INITDONEMDL1NGENERIC, INITDONESUP1NMODULE, INITDONEREF1NVARIABLE, INITDONEREF1NSENSITIVITY, INITDONEMGE1NSIGNAL, INITDONEREF1NFILE};
 };
 
 bool PnlWdbeMtpRec::StatApp::readXML(
@@ -157,13 +155,13 @@ bool PnlWdbeMtpRec::StatApp::readXML(
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneKParKey", initdoneKParKey)) add(INITDONEKPARKEY);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneKHdltype", initdoneKHdltype)) add(INITDONEKHDLTYPE);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneAPar", initdoneAPar)) add(INITDONEAPAR);
-		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneMdl1NGeneric", initdoneMdl1NGeneric)) add(INITDONEMDL1NGENERIC);
-		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneHsm1NPipeline", initdoneHsm1NPipeline)) add(INITDONEHSM1NPIPELINE);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneMdl1NPort", initdoneMdl1NPort)) add(INITDONEMDL1NPORT);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneHsm1NPipeline", initdoneHsm1NPipeline)) add(INITDONEHSM1NPIPELINE);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneTpl1NModule", initdoneTpl1NModule)) add(INITDONETPL1NMODULE);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneMdl1NGeneric", initdoneMdl1NGeneric)) add(INITDONEMDL1NGENERIC);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneSup1NModule", initdoneSup1NModule)) add(INITDONESUP1NMODULE);
-		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneRef1NSensitivity", initdoneRef1NSensitivity)) add(INITDONEREF1NSENSITIVITY);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneRef1NVariable", initdoneRef1NVariable)) add(INITDONEREF1NVARIABLE);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneRef1NSensitivity", initdoneRef1NSensitivity)) add(INITDONEREF1NSENSITIVITY);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneMge1NSignal", initdoneMge1NSignal)) add(INITDONEMGE1NSIGNAL);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneRef1NFile", initdoneRef1NFile)) add(INITDONEREF1NFILE);
 	};
@@ -180,13 +178,13 @@ set<uint> PnlWdbeMtpRec::StatApp::comm(
 	if (initdoneKParKey == comp->initdoneKParKey) insert(items, INITDONEKPARKEY);
 	if (initdoneKHdltype == comp->initdoneKHdltype) insert(items, INITDONEKHDLTYPE);
 	if (initdoneAPar == comp->initdoneAPar) insert(items, INITDONEAPAR);
-	if (initdoneMdl1NGeneric == comp->initdoneMdl1NGeneric) insert(items, INITDONEMDL1NGENERIC);
-	if (initdoneHsm1NPipeline == comp->initdoneHsm1NPipeline) insert(items, INITDONEHSM1NPIPELINE);
 	if (initdoneMdl1NPort == comp->initdoneMdl1NPort) insert(items, INITDONEMDL1NPORT);
+	if (initdoneHsm1NPipeline == comp->initdoneHsm1NPipeline) insert(items, INITDONEHSM1NPIPELINE);
 	if (initdoneTpl1NModule == comp->initdoneTpl1NModule) insert(items, INITDONETPL1NMODULE);
+	if (initdoneMdl1NGeneric == comp->initdoneMdl1NGeneric) insert(items, INITDONEMDL1NGENERIC);
 	if (initdoneSup1NModule == comp->initdoneSup1NModule) insert(items, INITDONESUP1NMODULE);
-	if (initdoneRef1NSensitivity == comp->initdoneRef1NSensitivity) insert(items, INITDONEREF1NSENSITIVITY);
 	if (initdoneRef1NVariable == comp->initdoneRef1NVariable) insert(items, INITDONEREF1NVARIABLE);
+	if (initdoneRef1NSensitivity == comp->initdoneRef1NSensitivity) insert(items, INITDONEREF1NSENSITIVITY);
 	if (initdoneMge1NSignal == comp->initdoneMge1NSignal) insert(items, INITDONEMGE1NSIGNAL);
 	if (initdoneRef1NFile == comp->initdoneRef1NFile) insert(items, INITDONEREF1NFILE);
 
@@ -201,7 +199,7 @@ set<uint> PnlWdbeMtpRec::StatApp::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {INITDONEDETAIL, INITDONEKPARKEY, INITDONEKHDLTYPE, INITDONEAPAR, INITDONEMDL1NGENERIC, INITDONEHSM1NPIPELINE, INITDONEMDL1NPORT, INITDONETPL1NMODULE, INITDONESUP1NMODULE, INITDONEREF1NSENSITIVITY, INITDONEREF1NVARIABLE, INITDONEMGE1NSIGNAL, INITDONEREF1NFILE};
+	diffitems = {INITDONEDETAIL, INITDONEKPARKEY, INITDONEKHDLTYPE, INITDONEAPAR, INITDONEMDL1NPORT, INITDONEHSM1NPIPELINE, INITDONETPL1NMODULE, INITDONEMDL1NGENERIC, INITDONESUP1NMODULE, INITDONEREF1NVARIABLE, INITDONEREF1NSENSITIVITY, INITDONEMGE1NSIGNAL, INITDONEREF1NFILE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -217,36 +215,35 @@ PnlWdbeMtpRec::StatShr::StatShr(
 			, const string& scrJrefKParKey
 			, const string& scrJrefKHdltype
 			, const string& scrJrefAPar
-			, const string& scrJrefMdl1NGeneric
-			, const string& scrJrefHsm1NPipeline
 			, const string& scrJrefMdl1NPort
+			, const string& scrJrefHsm1NPipeline
 			, const string& scrJrefTpl1NModule
+			, const string& scrJrefMdl1NGeneric
 			, const string& scrJrefSup1NModule
-			, const string& scrJrefRef1NSensitivity
 			, const string& scrJrefRef1NVariable
+			, const string& scrJrefRef1NSensitivity
 			, const string& scrJrefMge1NSignal
 			, const string& scrJrefRef1NFile
 			, const bool ButRegularizeActive
 		) :
 			Block()
+			, ixWdbeVExpstate(ixWdbeVExpstate)
+			, scrJrefDetail(scrJrefDetail)
+			, scrJrefKParKey(scrJrefKParKey)
+			, scrJrefKHdltype(scrJrefKHdltype)
+			, scrJrefAPar(scrJrefAPar)
+			, scrJrefMdl1NPort(scrJrefMdl1NPort)
+			, scrJrefHsm1NPipeline(scrJrefHsm1NPipeline)
+			, scrJrefTpl1NModule(scrJrefTpl1NModule)
+			, scrJrefMdl1NGeneric(scrJrefMdl1NGeneric)
+			, scrJrefSup1NModule(scrJrefSup1NModule)
+			, scrJrefRef1NVariable(scrJrefRef1NVariable)
+			, scrJrefRef1NSensitivity(scrJrefRef1NSensitivity)
+			, scrJrefMge1NSignal(scrJrefMge1NSignal)
+			, scrJrefRef1NFile(scrJrefRef1NFile)
+			, ButRegularizeActive(ButRegularizeActive)
 		{
-	this->ixWdbeVExpstate = ixWdbeVExpstate;
-	this->scrJrefDetail = scrJrefDetail;
-	this->scrJrefKParKey = scrJrefKParKey;
-	this->scrJrefKHdltype = scrJrefKHdltype;
-	this->scrJrefAPar = scrJrefAPar;
-	this->scrJrefMdl1NGeneric = scrJrefMdl1NGeneric;
-	this->scrJrefHsm1NPipeline = scrJrefHsm1NPipeline;
-	this->scrJrefMdl1NPort = scrJrefMdl1NPort;
-	this->scrJrefTpl1NModule = scrJrefTpl1NModule;
-	this->scrJrefSup1NModule = scrJrefSup1NModule;
-	this->scrJrefRef1NSensitivity = scrJrefRef1NSensitivity;
-	this->scrJrefRef1NVariable = scrJrefRef1NVariable;
-	this->scrJrefMge1NSignal = scrJrefMge1NSignal;
-	this->scrJrefRef1NFile = scrJrefRef1NFile;
-	this->ButRegularizeActive = ButRegularizeActive;
-
-	mask = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFKPARKEY, SCRJREFKHDLTYPE, SCRJREFAPAR, SCRJREFMDL1NGENERIC, SCRJREFHSM1NPIPELINE, SCRJREFMDL1NPORT, SCRJREFTPL1NMODULE, SCRJREFSUP1NMODULE, SCRJREFREF1NSENSITIVITY, SCRJREFREF1NVARIABLE, SCRJREFMGE1NSIGNAL, SCRJREFREF1NFILE, BUTREGULARIZEACTIVE};
+	mask = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFKPARKEY, SCRJREFKHDLTYPE, SCRJREFAPAR, SCRJREFMDL1NPORT, SCRJREFHSM1NPIPELINE, SCRJREFTPL1NMODULE, SCRJREFMDL1NGENERIC, SCRJREFSUP1NMODULE, SCRJREFREF1NVARIABLE, SCRJREFREF1NSENSITIVITY, SCRJREFMGE1NSIGNAL, SCRJREFREF1NFILE, BUTREGULARIZEACTIVE};
 };
 
 bool PnlWdbeMtpRec::StatShr::readXML(
@@ -276,13 +273,13 @@ bool PnlWdbeMtpRec::StatShr::readXML(
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefKParKey", scrJrefKParKey)) add(SCRJREFKPARKEY);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefKHdltype", scrJrefKHdltype)) add(SCRJREFKHDLTYPE);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefAPar", scrJrefAPar)) add(SCRJREFAPAR);
-		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefMdl1NGeneric", scrJrefMdl1NGeneric)) add(SCRJREFMDL1NGENERIC);
-		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefHsm1NPipeline", scrJrefHsm1NPipeline)) add(SCRJREFHSM1NPIPELINE);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefMdl1NPort", scrJrefMdl1NPort)) add(SCRJREFMDL1NPORT);
+		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefHsm1NPipeline", scrJrefHsm1NPipeline)) add(SCRJREFHSM1NPIPELINE);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefTpl1NModule", scrJrefTpl1NModule)) add(SCRJREFTPL1NMODULE);
+		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefMdl1NGeneric", scrJrefMdl1NGeneric)) add(SCRJREFMDL1NGENERIC);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefSup1NModule", scrJrefSup1NModule)) add(SCRJREFSUP1NMODULE);
-		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefRef1NSensitivity", scrJrefRef1NSensitivity)) add(SCRJREFREF1NSENSITIVITY);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefRef1NVariable", scrJrefRef1NVariable)) add(SCRJREFREF1NVARIABLE);
+		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefRef1NSensitivity", scrJrefRef1NSensitivity)) add(SCRJREFREF1NSENSITIVITY);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefMge1NSignal", scrJrefMge1NSignal)) add(SCRJREFMGE1NSIGNAL);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefRef1NFile", scrJrefRef1NFile)) add(SCRJREFREF1NFILE);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButRegularizeActive", ButRegularizeActive)) add(BUTREGULARIZEACTIVE);
@@ -301,13 +298,13 @@ set<uint> PnlWdbeMtpRec::StatShr::comm(
 	if (scrJrefKParKey == comp->scrJrefKParKey) insert(items, SCRJREFKPARKEY);
 	if (scrJrefKHdltype == comp->scrJrefKHdltype) insert(items, SCRJREFKHDLTYPE);
 	if (scrJrefAPar == comp->scrJrefAPar) insert(items, SCRJREFAPAR);
-	if (scrJrefMdl1NGeneric == comp->scrJrefMdl1NGeneric) insert(items, SCRJREFMDL1NGENERIC);
-	if (scrJrefHsm1NPipeline == comp->scrJrefHsm1NPipeline) insert(items, SCRJREFHSM1NPIPELINE);
 	if (scrJrefMdl1NPort == comp->scrJrefMdl1NPort) insert(items, SCRJREFMDL1NPORT);
+	if (scrJrefHsm1NPipeline == comp->scrJrefHsm1NPipeline) insert(items, SCRJREFHSM1NPIPELINE);
 	if (scrJrefTpl1NModule == comp->scrJrefTpl1NModule) insert(items, SCRJREFTPL1NMODULE);
+	if (scrJrefMdl1NGeneric == comp->scrJrefMdl1NGeneric) insert(items, SCRJREFMDL1NGENERIC);
 	if (scrJrefSup1NModule == comp->scrJrefSup1NModule) insert(items, SCRJREFSUP1NMODULE);
-	if (scrJrefRef1NSensitivity == comp->scrJrefRef1NSensitivity) insert(items, SCRJREFREF1NSENSITIVITY);
 	if (scrJrefRef1NVariable == comp->scrJrefRef1NVariable) insert(items, SCRJREFREF1NVARIABLE);
+	if (scrJrefRef1NSensitivity == comp->scrJrefRef1NSensitivity) insert(items, SCRJREFREF1NSENSITIVITY);
 	if (scrJrefMge1NSignal == comp->scrJrefMge1NSignal) insert(items, SCRJREFMGE1NSIGNAL);
 	if (scrJrefRef1NFile == comp->scrJrefRef1NFile) insert(items, SCRJREFREF1NFILE);
 	if (ButRegularizeActive == comp->ButRegularizeActive) insert(items, BUTREGULARIZEACTIVE);
@@ -323,7 +320,7 @@ set<uint> PnlWdbeMtpRec::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFKPARKEY, SCRJREFKHDLTYPE, SCRJREFAPAR, SCRJREFMDL1NGENERIC, SCRJREFHSM1NPIPELINE, SCRJREFMDL1NPORT, SCRJREFTPL1NMODULE, SCRJREFSUP1NMODULE, SCRJREFREF1NSENSITIVITY, SCRJREFREF1NVARIABLE, SCRJREFMGE1NSIGNAL, SCRJREFREF1NFILE, BUTREGULARIZEACTIVE};
+	diffitems = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFKPARKEY, SCRJREFKHDLTYPE, SCRJREFAPAR, SCRJREFMDL1NPORT, SCRJREFHSM1NPIPELINE, SCRJREFTPL1NMODULE, SCRJREFMDL1NGENERIC, SCRJREFSUP1NMODULE, SCRJREFREF1NVARIABLE, SCRJREFREF1NSENSITIVITY, SCRJREFMGE1NSIGNAL, SCRJREFREF1NFILE, BUTREGULARIZEACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -337,9 +334,8 @@ PnlWdbeMtpRec::Tag::Tag(
 			const string& Cpt
 		) :
 			Block()
+			, Cpt(Cpt)
 		{
-	this->Cpt = Cpt;
-
 	mask = {CPT};
 };
 
@@ -376,11 +372,11 @@ PnlWdbeMtpRec::DpchAppDo::DpchAppDo(
 			, const set<uint>& mask
 		) :
 			DpchAppWdbe(VecWdbeVDpch::DPCHAPPWDBEMTPRECDO, scrJref)
+			, ixVDo(ixVDo)
 		{
 	if (find(mask, ALL)) this->mask = {SCRJREF, IXVDO};
 	else this->mask = mask;
 
-	this->ixVDo = ixVDo;
 };
 
 string PnlWdbeMtpRec::DpchAppDo::getSrefsMask() {

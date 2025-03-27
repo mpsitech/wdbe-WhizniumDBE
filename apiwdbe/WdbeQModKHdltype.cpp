@@ -25,14 +25,15 @@ WdbeQModKHdltype::WdbeQModKHdltype(
 			, const string Implied
 			, const string Title
 			, const string Comment
-		) {
-	this->jnum = jnum;
-	this->yesnoFixed = yesnoFixed;
-	this->sref = sref;
-	this->Avail = Avail;
-	this->Implied = Implied;
-	this->Title = Title;
-	this->Comment = Comment;
+		) :
+			jnum(jnum)
+			, yesnoFixed(yesnoFixed)
+			, sref(sref)
+			, Avail(Avail)
+			, Implied(Implied)
+			, Title(Title)
+			, Comment(Comment)
+		{
 };
 
 bool WdbeQModKHdltype::readXML(

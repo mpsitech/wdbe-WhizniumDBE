@@ -21,12 +21,12 @@ WdbeAMPinPar::WdbeAMPinPar(
 			, const ubigint refWdbeMPin
 			, const string x1SrefKKey
 			, const string Val
-		) {
-
-	this->ref = ref;
-	this->refWdbeMPin = refWdbeMPin;
-	this->x1SrefKKey = x1SrefKKey;
-	this->Val = Val;
+		) :
+			ref(ref)
+			, refWdbeMPin(refWdbeMPin)
+			, x1SrefKKey(x1SrefKKey)
+			, Val(Val)
+		{
 };
 
 bool WdbeAMPinPar::operator==(

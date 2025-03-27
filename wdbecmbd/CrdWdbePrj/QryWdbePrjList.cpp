@@ -186,9 +186,9 @@ void QryWdbePrjList::rerun_orderSQL(
 		) {
 	if (preIxOrd == VecVOrd::VER) sqlstr += " ORDER BY TblWdbeMProject.refWdbeMVersion ASC";
 	else if (preIxOrd == VecVOrd::TIT) sqlstr += " ORDER BY TblWdbeMProject.Title ASC";
-	else if (preIxOrd == VecVOrd::GRP) sqlstr += " ORDER BY TblWdbeMProject.grp ASC";
-	else if (preIxOrd == VecVOrd::OWN) sqlstr += " ORDER BY TblWdbeMProject.own ASC";
 	else if (preIxOrd == VecVOrd::SHO) sqlstr += " ORDER BY TblWdbeMProject.Short ASC";
+	else if (preIxOrd == VecVOrd::OWN) sqlstr += " ORDER BY TblWdbeMProject.own ASC";
+	else if (preIxOrd == VecVOrd::GRP) sqlstr += " ORDER BY TblWdbeMProject.grp ASC";
 };
 
 void QryWdbePrjList::fetch(
@@ -366,27 +366,13 @@ void QryWdbePrjList::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBEPRJMOD) {
-		call->abort = handleCallWdbePrjMod(dbswdbe, call->jref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEPRJUPD_REFEQ) {
+	if (call->ixVCall == VecWdbeVCall::CALLWDBEPRJUPD_REFEQ) {
 		call->abort = handleCallWdbePrjUpd_refEq(dbswdbe, call->jref);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEPRJMOD) {
+		call->abort = handleCallWdbePrjMod(dbswdbe, call->jref);
 	} else if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
 		call->abort = handleCallWdbeStubChgFromSelf(dbswdbe);
 	};
-};
-
-bool QryWdbePrjList::handleCallWdbePrjMod(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-
-	if ((ixWdbeVQrystate == VecWdbeVQrystate::UTD) || (ixWdbeVQrystate == VecWdbeVQrystate::SLM)) {
-		ixWdbeVQrystate = VecWdbeVQrystate::MNR;
-		xchg->triggerCall(dbswdbe, VecWdbeVCall::CALLWDBESTATCHG, jref);
-	};
-
-	return retval;
 };
 
 bool QryWdbePrjList::handleCallWdbePrjUpd_refEq(
@@ -397,6 +383,20 @@ bool QryWdbePrjList::handleCallWdbePrjUpd_refEq(
 
 	if (ixWdbeVQrystate != VecWdbeVQrystate::OOD) {
 		ixWdbeVQrystate = VecWdbeVQrystate::OOD;
+		xchg->triggerCall(dbswdbe, VecWdbeVCall::CALLWDBESTATCHG, jref);
+	};
+
+	return retval;
+};
+
+bool QryWdbePrjList::handleCallWdbePrjMod(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+
+	if ((ixWdbeVQrystate == VecWdbeVQrystate::UTD) || (ixWdbeVQrystate == VecWdbeVQrystate::SLM)) {
+		ixWdbeVQrystate = VecWdbeVQrystate::MNR;
 		xchg->triggerCall(dbswdbe, VecWdbeVCall::CALLWDBESTATCHG, jref);
 	};
 

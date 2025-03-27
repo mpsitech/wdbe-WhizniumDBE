@@ -265,6 +265,8 @@ void DbsWdbe::initMy() {
 	((MyTblWdbeQCmdAInvpar*) tblwdbeqcmdainvpar)->init(dbsMy);
 	tblwdbeqcmdaretpar = new MyTblWdbeQCmdARetpar();
 	((MyTblWdbeQCmdARetpar*) tblwdbeqcmdaretpar)->init(dbsMy);
+	tblwdbeqcmdhk1nvector = new MyTblWdbeQCmdHk1NVector();
+	((MyTblWdbeQCmdHk1NVector*) tblwdbeqcmdhk1nvector)->init(dbsMy);
 	tblwdbeqcmdlist = new MyTblWdbeQCmdList();
 	((MyTblWdbeQCmdList*) tblwdbeqcmdlist)->init(dbsMy);
 	tblwdbeqcmdmncontroller = new MyTblWdbeQCmdMNController();
@@ -720,6 +722,8 @@ void DbsWdbe::initPg() {
 	((PgTblWdbeQCmdAInvpar*) tblwdbeqcmdainvpar)->init(dbsPg);
 	tblwdbeqcmdaretpar = new PgTblWdbeQCmdARetpar();
 	((PgTblWdbeQCmdARetpar*) tblwdbeqcmdaretpar)->init(dbsPg);
+	tblwdbeqcmdhk1nvector = new PgTblWdbeQCmdHk1NVector();
+	((PgTblWdbeQCmdHk1NVector*) tblwdbeqcmdhk1nvector)->init(dbsPg);
 	tblwdbeqcmdlist = new PgTblWdbeQCmdList();
 	((PgTblWdbeQCmdList*) tblwdbeqcmdlist)->init(dbsPg);
 	tblwdbeqcmdmncontroller = new PgTblWdbeQCmdMNController();

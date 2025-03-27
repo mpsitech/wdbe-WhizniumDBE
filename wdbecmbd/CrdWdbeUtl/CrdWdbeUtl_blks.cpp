@@ -80,10 +80,9 @@ CrdWdbeUtl::ContInf::ContInf(
 			, const string& MrlAppHlp
 		) :
 			Block()
+			, numFSge(numFSge)
+			, MrlAppHlp(MrlAppHlp)
 		{
-	this->numFSge = numFSge;
-	this->MrlAppHlp = MrlAppHlp;
-
 	mask = {NUMFSGE, MRLAPPHLP};
 };
 
@@ -200,11 +199,10 @@ CrdWdbeUtl::StatShr::StatShr(
 			, const ubigint jrefHeadbar
 		) :
 			Block()
+			, jrefDlgextrip(jrefDlgextrip)
+			, jrefDlgmrgip(jrefDlgmrgip)
+			, jrefHeadbar(jrefHeadbar)
 		{
-	this->jrefDlgextrip = jrefDlgextrip;
-	this->jrefDlgmrgip = jrefDlgmrgip;
-	this->jrefHeadbar = jrefHeadbar;
-
 	mask = {JREFDLGEXTRIP, JREFDLGMRGIP, JREFHEADBAR};
 };
 

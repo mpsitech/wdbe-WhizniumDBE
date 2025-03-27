@@ -32,21 +32,22 @@ WdbeQCmdList::WdbeQCmdList(
 			, const uint ixVRettype
 			, const string srefIxVRettype
 			, const string titIxVRettype
-		) {
-	this->qref = qref;
-	this->jref = jref;
-	this->jnum = jnum;
-	this->ref = ref;
-	this->sref = sref;
-	this->Fullsref = Fullsref;
-	this->refIxVTbl = refIxVTbl;
-	this->srefRefIxVTbl = srefRefIxVTbl;
-	this->titRefIxVTbl = titRefIxVTbl;
-	this->refUref = refUref;
-	this->stubRefUref = stubRefUref;
-	this->ixVRettype = ixVRettype;
-	this->srefIxVRettype = srefIxVRettype;
-	this->titIxVRettype = titIxVRettype;
+		) :
+			qref(qref)
+			, jref(jref)
+			, jnum(jnum)
+			, ref(ref)
+			, sref(sref)
+			, Fullsref(Fullsref)
+			, refIxVTbl(refIxVTbl)
+			, srefRefIxVTbl(srefRefIxVTbl)
+			, titRefIxVTbl(titRefIxVTbl)
+			, refUref(refUref)
+			, stubRefUref(stubRefUref)
+			, ixVRettype(ixVRettype)
+			, srefIxVRettype(srefIxVRettype)
+			, titIxVRettype(titIxVRettype)
+		{
 };
 
 void WdbeQCmdList::writeJSON(

@@ -64,11 +64,19 @@
 			<v-divider/>
 			<v-row>
 				<v-col cols="12" md="6">
-					<PnlWdbeModMdl1NGeneric
+					<PnlWdbeMod1NProcess
 						v-on:crdopen="handleCrdopen"
 						v-on:request="handleRequest"
-						ref="PnlWdbeModMdl1NGeneric"
-						:scrJref=statshr.scrJrefMdl1NGeneric
+						ref="PnlWdbeMod1NProcess"
+						:scrJref=statshr.scrJref1NProcess
+					/>
+				</v-col>
+				<v-col cols="12" md="6">
+					<PnlWdbeModMdl1NPort
+						v-on:crdopen="handleCrdopen"
+						v-on:request="handleRequest"
+						ref="PnlWdbeModMdl1NPort"
+						:scrJref=statshr.scrJrefMdl1NPort
 					/>
 				</v-col>
 				<v-col cols="12" md="6">
@@ -88,19 +96,11 @@
 					/>
 				</v-col>
 				<v-col cols="12" md="6">
-					<PnlWdbeMod1NProcess
+					<PnlWdbeModMdl1NGeneric
 						v-on:crdopen="handleCrdopen"
 						v-on:request="handleRequest"
-						ref="PnlWdbeMod1NProcess"
-						:scrJref=statshr.scrJref1NProcess
-					/>
-				</v-col>
-				<v-col cols="12" md="6">
-					<PnlWdbeModMdl1NPort
-						v-on:crdopen="handleCrdopen"
-						v-on:request="handleRequest"
-						ref="PnlWdbeModMdl1NPort"
-						:scrJref=statshr.scrJrefMdl1NPort
+						ref="PnlWdbeModMdl1NGeneric"
+						:scrJref=statshr.scrJrefMdl1NGeneric
 					/>
 				</v-col>
 				<v-col cols="12" md="6">
@@ -109,6 +109,14 @@
 						v-on:request="handleRequest"
 						ref="PnlWdbeModSup1NModule"
 						:scrJref=statshr.scrJrefSup1NModule
+					/>
+				</v-col>
+				<v-col cols="12" md="6">
+					<PnlWdbeModRef1NVariable
+						v-on:crdopen="handleCrdopen"
+						v-on:request="handleRequest"
+						ref="PnlWdbeModRef1NVariable"
+						:scrJref=statshr.scrJrefRef1NVariable
 					/>
 				</v-col>
 				<v-col cols="12" md="6">
@@ -128,14 +136,6 @@
 					/>
 				</v-col>
 				<v-col cols="12" md="6">
-					<PnlWdbeModRef1NVariable
-						v-on:crdopen="handleCrdopen"
-						v-on:request="handleRequest"
-						ref="PnlWdbeModRef1NVariable"
-						:scrJref=statshr.scrJrefRef1NVariable
-					/>
-				</v-col>
-				<v-col cols="12" md="6">
 					<PnlWdbeModMge1NSignal
 						v-on:crdopen="handleCrdopen"
 						v-on:request="handleRequest"
@@ -144,19 +144,19 @@
 					/>
 				</v-col>
 				<v-col cols="12" md="6">
-					<PnlWdbeModCtrHk1NVector
-						v-on:crdopen="handleCrdopen"
-						v-on:request="handleRequest"
-						ref="PnlWdbeModCtrHk1NVector"
-						:scrJref=statshr.scrJrefCtrHk1NVector
-					/>
-				</v-col>
-				<v-col cols="12" md="6">
 					<PnlWdbeModCtrRef1NError
 						v-on:crdopen="handleCrdopen"
 						v-on:request="handleRequest"
 						ref="PnlWdbeModCtrRef1NError"
 						:scrJref=statshr.scrJrefCtrRef1NError
+					/>
+				</v-col>
+				<v-col cols="12" md="6">
+					<PnlWdbeModCtrHk1NVector
+						v-on:crdopen="handleCrdopen"
+						v-on:request="handleRequest"
+						ref="PnlWdbeModCtrHk1NVector"
+						:scrJref=statshr.scrJrefCtrHk1NVector
 					/>
 				</v-col>
 				<v-col cols="12" md="6">
@@ -212,18 +212,18 @@
 	import PnlWdbeModDetail from './PnlWdbeModDetail';
 	import PnlWdbeModKHdltype from './PnlWdbeModKHdltype';
 	import PnlWdbeModAPar from './PnlWdbeModAPar';
-	import PnlWdbeModMdl1NGeneric from './PnlWdbeModMdl1NGeneric';
-	import PnlWdbeMod1NCdc from './PnlWdbeMod1NCdc';
-	import PnlWdbeModHsm1NPipeline from './PnlWdbeModHsm1NPipeline';
 	import PnlWdbeMod1NProcess from './PnlWdbeMod1NProcess';
 	import PnlWdbeModMdl1NPort from './PnlWdbeModMdl1NPort';
+	import PnlWdbeMod1NCdc from './PnlWdbeMod1NCdc';
+	import PnlWdbeModHsm1NPipeline from './PnlWdbeModHsm1NPipeline';
+	import PnlWdbeModMdl1NGeneric from './PnlWdbeModMdl1NGeneric';
 	import PnlWdbeModSup1NModule from './PnlWdbeModSup1NModule';
+	import PnlWdbeModRef1NVariable from './PnlWdbeModRef1NVariable';
 	import PnlWdbeModRef1NSignal from './PnlWdbeModRef1NSignal';
 	import PnlWdbeModRef1NSensitivity from './PnlWdbeModRef1NSensitivity';
-	import PnlWdbeModRef1NVariable from './PnlWdbeModRef1NVariable';
 	import PnlWdbeModMge1NSignal from './PnlWdbeModMge1NSignal';
-	import PnlWdbeModCtrHk1NVector from './PnlWdbeModCtrHk1NVector';
 	import PnlWdbeModCtrRef1NError from './PnlWdbeModCtrRef1NError';
+	import PnlWdbeModCtrHk1NVector from './PnlWdbeModCtrHk1NVector';
 	import PnlWdbeModCtrRef1NCommand from './PnlWdbeModCtrRef1NCommand';
 	import PnlWdbeModMNPeripheral from './PnlWdbeModMNPeripheral';
 	import PnlWdbeModCtdMNModule from './PnlWdbeModCtdMNModule';
@@ -249,18 +249,18 @@
 			PnlWdbeModDetail,
 			PnlWdbeModKHdltype,
 			PnlWdbeModAPar,
-			PnlWdbeModMdl1NGeneric,
-			PnlWdbeMod1NCdc,
-			PnlWdbeModHsm1NPipeline,
 			PnlWdbeMod1NProcess,
 			PnlWdbeModMdl1NPort,
+			PnlWdbeMod1NCdc,
+			PnlWdbeModHsm1NPipeline,
+			PnlWdbeModMdl1NGeneric,
 			PnlWdbeModSup1NModule,
+			PnlWdbeModRef1NVariable,
 			PnlWdbeModRef1NSignal,
 			PnlWdbeModRef1NSensitivity,
-			PnlWdbeModRef1NVariable,
 			PnlWdbeModMge1NSignal,
-			PnlWdbeModCtrHk1NVector,
 			PnlWdbeModCtrRef1NError,
+			PnlWdbeModCtrHk1NVector,
 			PnlWdbeModCtrRef1NCommand,
 			PnlWdbeModMNPeripheral,
 			PnlWdbeModCtdMNModule,
@@ -329,18 +329,18 @@
 						if (obj.scrJref == this.statshr.scrJrefDetail) this.$refs.PnlWdbeModDetail.handleReply(obj);
 						else if (obj.scrJref == this.statshr.scrJrefKHdltype) this.$refs.PnlWdbeModKHdltype.handleReply(obj);
 						else if (obj.scrJref == this.statshr.scrJrefAPar) this.$refs.PnlWdbeModAPar.handleReply(obj);
-						else if (obj.scrJref == this.statshr.scrJrefMdl1NGeneric) this.$refs.PnlWdbeModMdl1NGeneric.handleReply(obj);
-						else if (obj.scrJref == this.statshr.scrJref1NCdc) this.$refs.PnlWdbeMod1NCdc.handleReply(obj);
-						else if (obj.scrJref == this.statshr.scrJrefHsm1NPipeline) this.$refs.PnlWdbeModHsm1NPipeline.handleReply(obj);
 						else if (obj.scrJref == this.statshr.scrJref1NProcess) this.$refs.PnlWdbeMod1NProcess.handleReply(obj);
 						else if (obj.scrJref == this.statshr.scrJrefMdl1NPort) this.$refs.PnlWdbeModMdl1NPort.handleReply(obj);
+						else if (obj.scrJref == this.statshr.scrJref1NCdc) this.$refs.PnlWdbeMod1NCdc.handleReply(obj);
+						else if (obj.scrJref == this.statshr.scrJrefHsm1NPipeline) this.$refs.PnlWdbeModHsm1NPipeline.handleReply(obj);
+						else if (obj.scrJref == this.statshr.scrJrefMdl1NGeneric) this.$refs.PnlWdbeModMdl1NGeneric.handleReply(obj);
 						else if (obj.scrJref == this.statshr.scrJrefSup1NModule) this.$refs.PnlWdbeModSup1NModule.handleReply(obj);
+						else if (obj.scrJref == this.statshr.scrJrefRef1NVariable) this.$refs.PnlWdbeModRef1NVariable.handleReply(obj);
 						else if (obj.scrJref == this.statshr.scrJrefRef1NSignal) this.$refs.PnlWdbeModRef1NSignal.handleReply(obj);
 						else if (obj.scrJref == this.statshr.scrJrefRef1NSensitivity) this.$refs.PnlWdbeModRef1NSensitivity.handleReply(obj);
-						else if (obj.scrJref == this.statshr.scrJrefRef1NVariable) this.$refs.PnlWdbeModRef1NVariable.handleReply(obj);
 						else if (obj.scrJref == this.statshr.scrJrefMge1NSignal) this.$refs.PnlWdbeModMge1NSignal.handleReply(obj);
-						else if (obj.scrJref == this.statshr.scrJrefCtrHk1NVector) this.$refs.PnlWdbeModCtrHk1NVector.handleReply(obj);
 						else if (obj.scrJref == this.statshr.scrJrefCtrRef1NError) this.$refs.PnlWdbeModCtrRef1NError.handleReply(obj);
+						else if (obj.scrJref == this.statshr.scrJrefCtrHk1NVector) this.$refs.PnlWdbeModCtrHk1NVector.handleReply(obj);
 						else if (obj.scrJref == this.statshr.scrJrefCtrRef1NCommand) this.$refs.PnlWdbeModCtrRef1NCommand.handleReply(obj);
 						else if (obj.scrJref == this.statshr.scrJrefMNPeripheral) this.$refs.PnlWdbeModMNPeripheral.handleReply(obj);
 						else if (obj.scrJref == this.statshr.scrJrefCtdMNModule) this.$refs.PnlWdbeModCtdMNModule.handleReply(obj);
@@ -378,18 +378,18 @@
 						if (obj.dpcheng.scrJref == this.statshr.scrJrefDetail) this.$refs.PnlWdbeModDetail.handleUpdate(obj);
 						else if (obj.dpcheng.scrJref == this.statshr.scrJrefKHdltype) this.$refs.PnlWdbeModKHdltype.handleUpdate(obj);
 						else if (obj.dpcheng.scrJref == this.statshr.scrJrefAPar) this.$refs.PnlWdbeModAPar.handleUpdate(obj);
-						else if (obj.dpcheng.scrJref == this.statshr.scrJrefMdl1NGeneric) this.$refs.PnlWdbeModMdl1NGeneric.handleUpdate(obj);
-						else if (obj.dpcheng.scrJref == this.statshr.scrJref1NCdc) this.$refs.PnlWdbeMod1NCdc.handleUpdate(obj);
-						else if (obj.dpcheng.scrJref == this.statshr.scrJrefHsm1NPipeline) this.$refs.PnlWdbeModHsm1NPipeline.handleUpdate(obj);
 						else if (obj.dpcheng.scrJref == this.statshr.scrJref1NProcess) this.$refs.PnlWdbeMod1NProcess.handleUpdate(obj);
 						else if (obj.dpcheng.scrJref == this.statshr.scrJrefMdl1NPort) this.$refs.PnlWdbeModMdl1NPort.handleUpdate(obj);
+						else if (obj.dpcheng.scrJref == this.statshr.scrJref1NCdc) this.$refs.PnlWdbeMod1NCdc.handleUpdate(obj);
+						else if (obj.dpcheng.scrJref == this.statshr.scrJrefHsm1NPipeline) this.$refs.PnlWdbeModHsm1NPipeline.handleUpdate(obj);
+						else if (obj.dpcheng.scrJref == this.statshr.scrJrefMdl1NGeneric) this.$refs.PnlWdbeModMdl1NGeneric.handleUpdate(obj);
 						else if (obj.dpcheng.scrJref == this.statshr.scrJrefSup1NModule) this.$refs.PnlWdbeModSup1NModule.handleUpdate(obj);
+						else if (obj.dpcheng.scrJref == this.statshr.scrJrefRef1NVariable) this.$refs.PnlWdbeModRef1NVariable.handleUpdate(obj);
 						else if (obj.dpcheng.scrJref == this.statshr.scrJrefRef1NSignal) this.$refs.PnlWdbeModRef1NSignal.handleUpdate(obj);
 						else if (obj.dpcheng.scrJref == this.statshr.scrJrefRef1NSensitivity) this.$refs.PnlWdbeModRef1NSensitivity.handleUpdate(obj);
-						else if (obj.dpcheng.scrJref == this.statshr.scrJrefRef1NVariable) this.$refs.PnlWdbeModRef1NVariable.handleUpdate(obj);
 						else if (obj.dpcheng.scrJref == this.statshr.scrJrefMge1NSignal) this.$refs.PnlWdbeModMge1NSignal.handleUpdate(obj);
-						else if (obj.dpcheng.scrJref == this.statshr.scrJrefCtrHk1NVector) this.$refs.PnlWdbeModCtrHk1NVector.handleUpdate(obj);
 						else if (obj.dpcheng.scrJref == this.statshr.scrJrefCtrRef1NError) this.$refs.PnlWdbeModCtrRef1NError.handleUpdate(obj);
+						else if (obj.dpcheng.scrJref == this.statshr.scrJrefCtrHk1NVector) this.$refs.PnlWdbeModCtrHk1NVector.handleUpdate(obj);
 						else if (obj.dpcheng.scrJref == this.statshr.scrJrefCtrRef1NCommand) this.$refs.PnlWdbeModCtrRef1NCommand.handleUpdate(obj);
 						else if (obj.dpcheng.scrJref == this.statshr.scrJrefMNPeripheral) this.$refs.PnlWdbeModMNPeripheral.handleUpdate(obj);
 						else if (obj.dpcheng.scrJref == this.statshr.scrJrefCtdMNModule) this.$refs.PnlWdbeModCtdMNModule.handleUpdate(obj);

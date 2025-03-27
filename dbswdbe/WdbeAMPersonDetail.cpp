@@ -21,12 +21,12 @@ WdbeAMPersonDetail::WdbeAMPersonDetail(
 			, const ubigint refWdbeMPerson
 			, const string x1SrefKType
 			, const string Val
-		) {
-
-	this->ref = ref;
-	this->refWdbeMPerson = refWdbeMPerson;
-	this->x1SrefKType = x1SrefKType;
-	this->Val = Val;
+		) :
+			ref(ref)
+			, refWdbeMPerson(refWdbeMPerson)
+			, x1SrefKType(x1SrefKType)
+			, Val(Val)
+		{
 };
 
 bool WdbeAMPersonDetail::operator==(

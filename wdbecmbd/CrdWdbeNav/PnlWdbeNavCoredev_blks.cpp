@@ -48,10 +48,9 @@ PnlWdbeNavCoredev::ContIac::ContIac(
 			, const uint numFLstCvr
 		) :
 			Block()
+			, numFLstCpr(numFLstCpr)
+			, numFLstCvr(numFLstCvr)
 		{
-	this->numFLstCpr = numFLstCpr;
-	this->numFLstCvr = numFLstCvr;
-
 	mask = {NUMFLSTCPR, NUMFLSTCVR};
 };
 
@@ -213,12 +212,11 @@ PnlWdbeNavCoredev::StatShr::StatShr(
 			, const bool ButCvrViewActive
 		) :
 			Block()
+			, LstCprAvail(LstCprAvail)
+			, ButCprViewActive(ButCprViewActive)
+			, LstCvrAvail(LstCvrAvail)
+			, ButCvrViewActive(ButCvrViewActive)
 		{
-	this->LstCprAvail = LstCprAvail;
-	this->ButCprViewActive = ButCprViewActive;
-	this->LstCvrAvail = LstCvrAvail;
-	this->ButCvrViewActive = ButCvrViewActive;
-
 	mask = {LSTCPRAVAIL, BUTCPRVIEWACTIVE, LSTCVRAVAIL, BUTCVRVIEWACTIVE};
 };
 

@@ -23,14 +23,14 @@ WdbeMPin::WdbeMPin(
 			, const ubigint refJSref
 			, const string sref
 			, const string Location
-		) {
-
-	this->ref = ref;
-	this->refWdbeCPin = refWdbeCPin;
-	this->refWdbeMBank = refWdbeMBank;
-	this->refJSref = refJSref;
-	this->sref = sref;
-	this->Location = Location;
+		) :
+			ref(ref)
+			, refWdbeCPin(refWdbeCPin)
+			, refWdbeMBank(refWdbeMBank)
+			, refJSref(refJSref)
+			, sref(sref)
+			, Location(Location)
+		{
 };
 
 bool WdbeMPin::operator==(

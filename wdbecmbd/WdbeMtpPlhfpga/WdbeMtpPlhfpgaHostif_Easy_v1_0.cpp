@@ -119,15 +119,4 @@ DpchRetWdbeMtpPlhfpga* WdbeMtpPlhfpgaHostif_Easy_v1_0::run(
 	return(new DpchRetWdbeMtpPlhfpga("", "", ixOpVOpres, 100, keys, vals));
 };
 
-// IP cust --- IBEGIN
-unsigned int WdbeMtpPlhfpgaHostif_Easy_v1_0::extendToWD(
-			const unsigned int size
-			, const unsigned int wD
-			, unsigned int& resid
-		) {
-	resid = size % (wD/8);
-
-	if (resid == 0) return size;
-	else return(size-resid + wD/8);
-};
-// IP cust --- IEND
+// IP cust --- INSERT

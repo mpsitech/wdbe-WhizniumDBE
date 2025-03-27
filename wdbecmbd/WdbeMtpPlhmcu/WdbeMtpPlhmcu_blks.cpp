@@ -24,9 +24,9 @@ DpchInvWdbeMtpPlhmcu::DpchInvWdbeMtpPlhmcu(
 			, const ubigint refWdbeMModule
 		) :
 			DpchInvWdbe(VecWdbeVDpch::DPCHINVWDBEMTPPLHMCU, oref, jref)
+			, srefKCustop(srefKCustop)
+			, refWdbeMModule(refWdbeMModule)
 		{
-	this->srefKCustop = srefKCustop;
-	this->refWdbeMModule = refWdbeMModule;
 };
 
 void DpchInvWdbeMtpPlhmcu::readXML(
@@ -76,9 +76,9 @@ DpchRetWdbeMtpPlhmcu::DpchRetWdbeMtpPlhmcu(
 			, const vector<string>& vals
 		) :
 			DpchRetWdbe(VecWdbeVDpch::DPCHRETWDBEMTPPLHMCU, scrOref, scrJref, ixOpVOpres, pdone)
+			, keys(keys)
+			, vals(vals)
 		{
-	this->keys = keys;
-	this->vals = vals;
 };
 
 void DpchRetWdbeMtpPlhmcu::readXML(

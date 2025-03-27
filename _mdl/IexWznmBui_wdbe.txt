@@ -6,6 +6,7 @@ MdlWdbeAdmin	administration module
 	tbl	TblWdbeMUser	CrdWdbeUsr
 	tbl	TblWdbeMPerson	CrdWdbePrs
 	tbl	TblWdbeMFile	CrdWdbeFil
+	void		CrdWdbePrf	preferences
 	ImeIMCard.end
 MdlWdbeGlobal	global data module
 	ImeIMCard.srefRefIxVTbl	srefRefUref	sref	Title	Avail	Active

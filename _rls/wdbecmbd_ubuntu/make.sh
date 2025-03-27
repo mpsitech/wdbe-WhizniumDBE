@@ -3,7 +3,7 @@
 # make script for Wdbe combined daemon, release wdbecmbd_ubuntu
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 7 Feb 2024
+# date created: 3 Mar 2025
 # IP header --- ABOVE
 
 if [ -z ${WHIZROOT+x} ]; then
@@ -12,7 +12,7 @@ if [ -z ${WHIZROOT+x} ]; then
 fi
 
 if [ "$1" = "all" ] || [ "$1" = "clean" ]; then
-	subs=("IexWdbe" "VecWdbe" "CrdWdbeUsg" "CrdWdbeUsr" "CrdWdbePrs" "CrdWdbeFil" "CrdWdbeNav" "CrdWdbeMch" "CrdWdbeLib" "CrdWdbeFam" "CrdWdbeSil" "CrdWdbeMtp" "CrdWdbePrj" "CrdWdbeVer" "CrdWdbeUnt" "CrdWdbeCpr" "CrdWdbeCvr" "CrdWdbePph" "CrdWdbeMod" "CrdWdbeVec" "CrdWdbeVit" "CrdWdbeCmd" "CrdWdbeErr" "CrdWdbePpl" "CrdWdbeSeg" "CrdWdbeBnk" "CrdWdbePin" "CrdWdbeInt" "CrdWdbeSns" "CrdWdbeVar" "CrdWdbeGen" "CrdWdbePrt" "CrdWdbeSig" "CrdWdbeCdc" "CrdWdbePrc" "CrdWdbeFst" "CrdWdbeCmp" "CrdWdbeRls" "CrdWdbeUtl" "WdbeWrdev" "WdbeWrfpga" "WdbeWrmcu" "WdbeWrterm" "WdbePrcfile" "WdbePrctree" "WdbePlhmcu" "WdbePlhfpga" "WdbeMtpWrmcu" "WdbeMtpWrfpga" "WdbeMtpGenfst" "WdbeMtpCplmsttd" "WdbeMtpPlhmcu" "WdbeMtpCplmstbu" "WdbeGenfst" "WdbeMtpPlhfpga" "WdbeCplmst" "WdbeGen")
+	subs=("IexWdbe" "VecWdbe" "CrdWdbeUsg" "CrdWdbeUsr" "CrdWdbePrs" "CrdWdbeFil" "CrdWdbePrf" "CrdWdbeNav" "CrdWdbeMch" "CrdWdbeLib" "CrdWdbeFam" "CrdWdbeSil" "CrdWdbeMtp" "CrdWdbePrj" "CrdWdbeVer" "CrdWdbeUnt" "CrdWdbeCpr" "CrdWdbeCvr" "CrdWdbePph" "CrdWdbeMod" "CrdWdbeVec" "CrdWdbeVit" "CrdWdbeCmd" "CrdWdbeErr" "CrdWdbePpl" "CrdWdbeSeg" "CrdWdbeBnk" "CrdWdbePin" "CrdWdbeInt" "CrdWdbeSns" "CrdWdbeVar" "CrdWdbeGen" "CrdWdbePrt" "CrdWdbeSig" "CrdWdbeCdc" "CrdWdbePrc" "CrdWdbeFst" "CrdWdbeCmp" "CrdWdbeRls" "CrdWdbeUtl" "WdbeWrdev" "WdbePrctree" "WdbePrcfile" "WdbePlhmcu" "WdbePlhfpga" "WdbeMtpWrmcu" "WdbeMtpWrfpga" "WdbeMtpGenfst" "WdbeMtpCplmsttd" "WdbeMtpCplmstbu" "WdbeMtpPlhmcu" "WdbeMtpPlhfpga" "WdbeGenfst" "WdbeGen" "WdbeCplmst" "WdbeWrfpga" "WdbeWrmcu" "WdbeWrterm")
 else
 	subs=("$@")
 fi

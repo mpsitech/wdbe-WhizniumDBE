@@ -21,12 +21,12 @@ WdbeMFamily::WdbeMFamily(
 			, const string srefWdbeKVendor
 			, const string Title
 			, const string Comment
-		) {
-
-	this->ref = ref;
-	this->srefWdbeKVendor = srefWdbeKVendor;
-	this->Title = Title;
-	this->Comment = Comment;
+		) :
+			ref(ref)
+			, srefWdbeKVendor(srefWdbeKVendor)
+			, Title(Title)
+			, Comment(Comment)
+		{
 };
 
 bool WdbeMFamily::operator==(

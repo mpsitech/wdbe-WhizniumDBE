@@ -3,7 +3,7 @@
 # checkout script for Wdbe Vue.js UI, release vueappwdbe_any
 # copyright: (C) 2022 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 7 Feb 2024
+# date created: 3 Mar 2025
 # IP header --- ABOVE
 
 if [ -z ${WHIZROOT+x} ]; then
@@ -48,6 +48,10 @@ cp ../../vueappwdbe/CrdWdbePrs/*.vue $WEBROOT/vueappwdbe/src/components/CrdWdbeP
 mkdir $WEBROOT/vueappwdbe/src/components/CrdWdbeFil
 
 cp ../../vueappwdbe/CrdWdbeFil/*.vue $WEBROOT/vueappwdbe/src/components/CrdWdbeFil/
+
+mkdir $WEBROOT/vueappwdbe/src/components/CrdWdbePrf
+
+cp ../../vueappwdbe/CrdWdbePrf/*.vue $WEBROOT/vueappwdbe/src/components/CrdWdbePrf/
 
 mkdir $WEBROOT/vueappwdbe/src/components/CrdWdbeNav
 

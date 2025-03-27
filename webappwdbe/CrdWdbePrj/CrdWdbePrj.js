@@ -346,7 +346,7 @@ function refresh() {
 		if (scrJrefDlg != scrJrefDlgnew) showDlg("DlgWdbePrjNew", scrJrefDlgnew);
 	} else if (scrJrefDlg != "") hideDlg();
 
-	doc.title = retrieveCi(srcdoc, "ContInfWdbePrj", "MtxCrdPrj") + " - WhizniumDBE v1.1.41";
+	doc.title = retrieveCi(srcdoc, "ContInfWdbePrj", "MtxCrdPrj") + " - WhizniumDBE v1.1.44";
 };
 
 // --- event handlers
@@ -516,7 +516,7 @@ function handleDpchAppResumeReply() {
 	} else if (doc.req.readyState == 4) {
 		dom = doc.req.responseXML;
 
-		blk = retrieveBlock(dom, "//wdbe:*");
+		if (dom) blk = retrieveBlock(dom, "//wdbe:*");
 
 		if (blk) if (blk.nodeName == "DpchEngWdbeAck") restartNotify();
 	};
@@ -527,6 +527,8 @@ function iteratePoll() {
 };
 
 function iterateReqit(ev) {
+	var dom, blk;
+
 	var accepted, _scrJref, mask;
 
 	var news = false;
@@ -548,7 +550,7 @@ function iterateReqit(ev) {
 			dom = doc.reqit.responseXML;
 
 			// check dispatch type
-			blk = retrieveBlock(dom, "//wdbe:*");
+			if (dom) blk = retrieveBlock(dom, "//wdbe:*");
 
 			if (blk) {
 				if (blk.nodeName == "DpchEngWdbeAck") {

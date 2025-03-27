@@ -45,9 +45,8 @@ PnlWdbeMtpRef1NSensitivity::ContInf::ContInf(
 			const uint numFCsiQst
 		) :
 			Block()
+			, numFCsiQst(numFCsiQst)
 		{
-	this->numFCsiQst = numFCsiQst;
-
 	mask = {NUMFCSIQST};
 };
 
@@ -106,9 +105,8 @@ PnlWdbeMtpRef1NSensitivity::StatApp::StatApp(
 			const uint ixWdbeVExpstate
 		) :
 			Block()
+			, ixWdbeVExpstate(ixWdbeVExpstate)
 		{
-	this->ixWdbeVExpstate = ixWdbeVExpstate;
-
 	mask = {IXWDBEVEXPSTATE};
 };
 
@@ -173,10 +171,9 @@ PnlWdbeMtpRef1NSensitivity::StatShr::StatShr(
 			, const bool ButDeleteActive
 		) :
 			Block()
+			, ButDeleteAvail(ButDeleteAvail)
+			, ButDeleteActive(ButDeleteActive)
 		{
-	this->ButDeleteAvail = ButDeleteAvail;
-	this->ButDeleteActive = ButDeleteActive;
-
 	mask = {BUTDELETEAVAIL, BUTDELETEACTIVE};
 };
 
@@ -237,9 +234,8 @@ PnlWdbeMtpRef1NSensitivity::StgIac::StgIac(
 			const uint TcoRefWidth
 		) :
 			Block()
+			, TcoRefWidth(TcoRefWidth)
 		{
-	this->TcoRefWidth = TcoRefWidth;
-
 	mask = {TCOREFWIDTH};
 };
 
@@ -320,15 +316,14 @@ PnlWdbeMtpRef1NSensitivity::Tag::Tag(
 			, const string& TcoRef
 		) :
 			Block()
+			, Cpt(Cpt)
+			, TxtRecord1(TxtRecord1)
+			, TxtRecord2(TxtRecord2)
+			, Trs(Trs)
+			, TxtShowing1(TxtShowing1)
+			, TxtShowing2(TxtShowing2)
+			, TcoRef(TcoRef)
 		{
-	this->Cpt = Cpt;
-	this->TxtRecord1 = TxtRecord1;
-	this->TxtRecord2 = TxtRecord2;
-	this->Trs = Trs;
-	this->TxtShowing1 = TxtShowing1;
-	this->TxtShowing2 = TxtShowing2;
-	this->TcoRef = TcoRef;
-
 	mask = {CPT, TXTRECORD1, TXTRECORD2, TRS, TXTSHOWING1, TXTSHOWING2, TCOREF};
 };
 
@@ -414,11 +409,11 @@ PnlWdbeMtpRef1NSensitivity::DpchAppDo::DpchAppDo(
 			, const set<uint>& mask
 		) :
 			DpchAppWdbe(VecWdbeVDpch::DPCHAPPWDBEMTPREF1NSENSITIVITYDO, scrJref)
+			, ixVDo(ixVDo)
 		{
 	if (find(mask, ALL)) this->mask = {SCRJREF, IXVDO};
 	else this->mask = mask;
 
-	this->ixVDo = ixVDo;
 };
 
 string PnlWdbeMtpRef1NSensitivity::DpchAppDo::getSrefsMask() {

@@ -14,8 +14,8 @@
 
 // IP include.cust --- INSERT
 
-#include "PnlWdbePrsMNProject.h"
 #include "PnlWdbePrsMNCoreproject.h"
+#include "PnlWdbePrsMNProject.h"
 #include "PnlWdbePrsADetail.h"
 #include "PnlWdbePrsDetail.h"
 
@@ -180,8 +180,8 @@ public:
 	ContInf continf;
 	StatShr statshr;
 
-	PnlWdbePrsMNProject* pnlmnproject;
 	PnlWdbePrsMNCoreproject* pnlmncoreproject;
+	PnlWdbePrsMNProject* pnlmnproject;
 	PnlWdbePrsADetail* pnladetail;
 	PnlWdbePrsDetail* pnldetail;
 

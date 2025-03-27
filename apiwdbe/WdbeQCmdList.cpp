@@ -26,15 +26,16 @@ WdbeQCmdList::WdbeQCmdList(
 			, const string stubRefUref
 			, const string srefIxVRettype
 			, const string titIxVRettype
-		) {
-	this->jnum = jnum;
-	this->sref = sref;
-	this->Fullsref = Fullsref;
-	this->srefRefIxVTbl = srefRefIxVTbl;
-	this->titRefIxVTbl = titRefIxVTbl;
-	this->stubRefUref = stubRefUref;
-	this->srefIxVRettype = srefIxVRettype;
-	this->titIxVRettype = titIxVRettype;
+		) :
+			jnum(jnum)
+			, sref(sref)
+			, Fullsref(Fullsref)
+			, srefRefIxVTbl(srefRefIxVTbl)
+			, titRefIxVTbl(titRefIxVTbl)
+			, stubRefUref(stubRefUref)
+			, srefIxVRettype(srefIxVRettype)
+			, titIxVRettype(titIxVRettype)
+		{
 };
 
 bool WdbeQCmdList::readXML(

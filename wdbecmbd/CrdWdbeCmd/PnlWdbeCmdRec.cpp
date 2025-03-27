@@ -39,8 +39,9 @@ PnlWdbeCmdRec::PnlWdbeCmdRec(
 	jref = xchg->addJob(dbswdbe, this, jrefSup);
 
 	pnlmncontroller = NULL;
-	pnlainvpar = NULL;
+	pnlhk1nvector = NULL;
 	pnlaretpar = NULL;
+	pnlainvpar = NULL;
 	pnldetail = NULL;
 
 	// IP constructor.cust1 --- INSERT
@@ -107,19 +108,22 @@ void PnlWdbeCmdRec::refresh(
 
 	if (statshr.ixWdbeVExpstate == VecWdbeVExpstate::MIND) {
 		if (pnldetail) {delete pnldetail; pnldetail = NULL;};
-		if (pnlaretpar) {delete pnlaretpar; pnlaretpar = NULL;};
 		if (pnlainvpar) {delete pnlainvpar; pnlainvpar = NULL;};
+		if (pnlaretpar) {delete pnlaretpar; pnlaretpar = NULL;};
+		if (pnlhk1nvector) {delete pnlhk1nvector; pnlhk1nvector = NULL;};
 		if (pnlmncontroller) {delete pnlmncontroller; pnlmncontroller = NULL;};
 	} else {
 		if (!pnldetail) pnldetail = new PnlWdbeCmdDetail(xchg, dbswdbe, jref, ixWdbeVLocale);
-		if (!pnlaretpar) pnlaretpar = new PnlWdbeCmdARetpar(xchg, dbswdbe, jref, ixWdbeVLocale);
 		if (!pnlainvpar) pnlainvpar = new PnlWdbeCmdAInvpar(xchg, dbswdbe, jref, ixWdbeVLocale);
+		if (!pnlaretpar) pnlaretpar = new PnlWdbeCmdARetpar(xchg, dbswdbe, jref, ixWdbeVLocale);
+		if (!pnlhk1nvector) pnlhk1nvector = new PnlWdbeCmdHk1NVector(xchg, dbswdbe, jref, ixWdbeVLocale);
 		if (!pnlmncontroller) pnlmncontroller = new PnlWdbeCmdMNController(xchg, dbswdbe, jref, ixWdbeVLocale);
 	};
 
 	statshr.jrefDetail = ((pnldetail) ? pnldetail->jref : 0);
-	statshr.jrefARetpar = ((pnlaretpar) ? pnlaretpar->jref : 0);
 	statshr.jrefAInvpar = ((pnlainvpar) ? pnlainvpar->jref : 0);
+	statshr.jrefARetpar = ((pnlaretpar) ? pnlaretpar->jref : 0);
+	statshr.jrefHk1NVector = ((pnlhk1nvector) ? pnlhk1nvector->jref : 0);
 	statshr.jrefMNController = ((pnlmncontroller) ? pnlmncontroller->jref : 0);
 
 	// IP refresh --- END
@@ -148,8 +152,9 @@ void PnlWdbeCmdRec::updatePreset(
 
 		if (recCmd.ref != 0) {
 			if (pnldetail) pnldetail->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
-			if (pnlaretpar) pnlaretpar->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
 			if (pnlainvpar) pnlainvpar->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
+			if (pnlaretpar) pnlaretpar->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
+			if (pnlhk1nvector) pnlhk1nvector->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
 			if (pnlmncontroller) pnlmncontroller->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
 		};
 

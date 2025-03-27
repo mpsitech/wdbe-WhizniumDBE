@@ -235,8 +235,8 @@ void DlgWdbePrjImpex::handleRequest(
 
 	} else if (req->ixVBasetype == ReqWdbe::VecVBasetype::TIMER) {
 		if (ixVSge == VecVSge::PRSIDLE) handleTimerInSgePrsidle(dbswdbe, req->sref);
-		else if ((req->sref == "mon") && (ixVSge == VecVSge::IMPORT)) handleTimerWithSrefMonInSgeImport(dbswdbe);
 		else if (ixVSge == VecVSge::IMPIDLE) handleTimerInSgeImpidle(dbswdbe, req->sref);
+		else if ((req->sref == "mon") && (ixVSge == VecVSge::IMPORT)) handleTimerWithSrefMonInSgeImport(dbswdbe);
 	};
 };
 
@@ -341,18 +341,18 @@ void DlgWdbePrjImpex::handleTimerInSgePrsidle(
 	changeStage(dbswdbe, nextIxVSgeSuccess);
 };
 
-void DlgWdbePrjImpex::handleTimerWithSrefMonInSgeImport(
-			DbsWdbe* dbswdbe
-		) {
-	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
-	refreshWithDpchEng(dbswdbe); // IP handleTimerWithSrefMonInSgeImport --- ILINE
-};
-
 void DlgWdbePrjImpex::handleTimerInSgeImpidle(
 			DbsWdbe* dbswdbe
 			, const string& sref
 		) {
 	changeStage(dbswdbe, nextIxVSgeSuccess);
+};
+
+void DlgWdbePrjImpex::handleTimerWithSrefMonInSgeImport(
+			DbsWdbe* dbswdbe
+		) {
+	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
+	refreshWithDpchEng(dbswdbe); // IP handleTimerWithSrefMonInSgeImport --- ILINE
 };
 
 void DlgWdbePrjImpex::changeStage(

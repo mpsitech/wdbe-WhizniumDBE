@@ -24,13 +24,14 @@ WdbeQUsgAAccess::WdbeQUsgAAccess(
 			, const string x2FeaSrefUix
 			, const string srefsIxWdbeWAccess
 			, const string titsIxWdbeWAccess
-		) {
-	this->jnum = jnum;
-	this->srefX1IxWdbeVFeatgroup = srefX1IxWdbeVFeatgroup;
-	this->titX1IxWdbeVFeatgroup = titX1IxWdbeVFeatgroup;
-	this->x2FeaSrefUix = x2FeaSrefUix;
-	this->srefsIxWdbeWAccess = srefsIxWdbeWAccess;
-	this->titsIxWdbeWAccess = titsIxWdbeWAccess;
+		) :
+			jnum(jnum)
+			, srefX1IxWdbeVFeatgroup(srefX1IxWdbeVFeatgroup)
+			, titX1IxWdbeVFeatgroup(titX1IxWdbeVFeatgroup)
+			, x2FeaSrefUix(x2FeaSrefUix)
+			, srefsIxWdbeWAccess(srefsIxWdbeWAccess)
+			, titsIxWdbeWAccess(titsIxWdbeWAccess)
+		{
 };
 
 bool WdbeQUsgAAccess::readXML(

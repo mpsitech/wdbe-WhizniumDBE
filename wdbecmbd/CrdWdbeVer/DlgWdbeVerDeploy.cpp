@@ -228,8 +228,8 @@ void DlgWdbeVerDeploy::handleRequest(
 		if (ixVSge == VecVSge::DONE) req->filename = handleDownloadInSgeDone(dbswdbe);
 
 	} else if (req->ixVBasetype == ReqWdbe::VecVBasetype::TIMER) {
-		if (ixVSge == VecVSge::IMPIDLE) handleTimerInSgeImpidle(dbswdbe, req->sref);
-		else if (ixVSge == VecVSge::PRSIDLE) handleTimerInSgePrsidle(dbswdbe, req->sref);
+		if (ixVSge == VecVSge::PRSIDLE) handleTimerInSgePrsidle(dbswdbe, req->sref);
+		else if (ixVSge == VecVSge::IMPIDLE) handleTimerInSgeImpidle(dbswdbe, req->sref);
 		else if ((req->sref == "mon") && (ixVSge == VecVSge::IMPORT)) handleTimerWithSrefMonInSgeImport(dbswdbe);
 	};
 };
@@ -320,14 +320,14 @@ string DlgWdbeVerDeploy::handleDownloadInSgeDone(
 	return(""); // IP handleDownloadInSgeDone --- LINE
 };
 
-void DlgWdbeVerDeploy::handleTimerInSgeImpidle(
+void DlgWdbeVerDeploy::handleTimerInSgePrsidle(
 			DbsWdbe* dbswdbe
 			, const string& sref
 		) {
 	changeStage(dbswdbe, nextIxVSgeSuccess);
 };
 
-void DlgWdbeVerDeploy::handleTimerInSgePrsidle(
+void DlgWdbeVerDeploy::handleTimerInSgeImpidle(
 			DbsWdbe* dbswdbe
 			, const string& sref
 		) {

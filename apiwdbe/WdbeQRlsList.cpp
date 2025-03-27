@@ -22,11 +22,12 @@ WdbeQRlsList::WdbeQRlsList(
 			, const string sref
 			, const string stubRefWdbeMComponent
 			, const string stubRefWdbeMMachine
-		) {
-	this->jnum = jnum;
-	this->sref = sref;
-	this->stubRefWdbeMComponent = stubRefWdbeMComponent;
-	this->stubRefWdbeMMachine = stubRefWdbeMMachine;
+		) :
+			jnum(jnum)
+			, sref(sref)
+			, stubRefWdbeMComponent(stubRefWdbeMComponent)
+			, stubRefWdbeMMachine(stubRefWdbeMMachine)
+		{
 };
 
 bool WdbeQRlsList::readXML(

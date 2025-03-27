@@ -69,31 +69,31 @@ namespace PnlWdbeMtpRec {
 		static const Sbecore::uint INITDONEKPARKEY = 2;
 		static const Sbecore::uint INITDONEKHDLTYPE = 3;
 		static const Sbecore::uint INITDONEAPAR = 4;
-		static const Sbecore::uint INITDONEMDL1NGENERIC = 5;
+		static const Sbecore::uint INITDONEMDL1NPORT = 5;
 		static const Sbecore::uint INITDONEHSM1NPIPELINE = 6;
-		static const Sbecore::uint INITDONEMDL1NPORT = 7;
-		static const Sbecore::uint INITDONETPL1NMODULE = 8;
+		static const Sbecore::uint INITDONETPL1NMODULE = 7;
+		static const Sbecore::uint INITDONEMDL1NGENERIC = 8;
 		static const Sbecore::uint INITDONESUP1NMODULE = 9;
-		static const Sbecore::uint INITDONEREF1NSENSITIVITY = 10;
-		static const Sbecore::uint INITDONEREF1NVARIABLE = 11;
+		static const Sbecore::uint INITDONEREF1NVARIABLE = 10;
+		static const Sbecore::uint INITDONEREF1NSENSITIVITY = 11;
 		static const Sbecore::uint INITDONEMGE1NSIGNAL = 12;
 		static const Sbecore::uint INITDONEREF1NFILE = 13;
 
 	public:
-		StatApp(const bool initdoneDetail = false, const bool initdoneKParKey = false, const bool initdoneKHdltype = false, const bool initdoneAPar = false, const bool initdoneMdl1NGeneric = false, const bool initdoneHsm1NPipeline = false, const bool initdoneMdl1NPort = false, const bool initdoneTpl1NModule = false, const bool initdoneSup1NModule = false, const bool initdoneRef1NSensitivity = false, const bool initdoneRef1NVariable = false, const bool initdoneMge1NSignal = false, const bool initdoneRef1NFile = false);
+		StatApp(const bool initdoneDetail = false, const bool initdoneKParKey = false, const bool initdoneKHdltype = false, const bool initdoneAPar = false, const bool initdoneMdl1NPort = false, const bool initdoneHsm1NPipeline = false, const bool initdoneTpl1NModule = false, const bool initdoneMdl1NGeneric = false, const bool initdoneSup1NModule = false, const bool initdoneRef1NVariable = false, const bool initdoneRef1NSensitivity = false, const bool initdoneMge1NSignal = false, const bool initdoneRef1NFile = false);
 
 	public:
 		bool initdoneDetail;
 		bool initdoneKParKey;
 		bool initdoneKHdltype;
 		bool initdoneAPar;
-		bool initdoneMdl1NGeneric;
-		bool initdoneHsm1NPipeline;
 		bool initdoneMdl1NPort;
+		bool initdoneHsm1NPipeline;
 		bool initdoneTpl1NModule;
+		bool initdoneMdl1NGeneric;
 		bool initdoneSup1NModule;
-		bool initdoneRef1NSensitivity;
 		bool initdoneRef1NVariable;
+		bool initdoneRef1NSensitivity;
 		bool initdoneMge1NSignal;
 		bool initdoneRef1NFile;
 
@@ -114,19 +114,19 @@ namespace PnlWdbeMtpRec {
 		static const Sbecore::uint SCRJREFKPARKEY = 3;
 		static const Sbecore::uint SCRJREFKHDLTYPE = 4;
 		static const Sbecore::uint SCRJREFAPAR = 5;
-		static const Sbecore::uint SCRJREFMDL1NGENERIC = 6;
+		static const Sbecore::uint SCRJREFMDL1NPORT = 6;
 		static const Sbecore::uint SCRJREFHSM1NPIPELINE = 7;
-		static const Sbecore::uint SCRJREFMDL1NPORT = 8;
-		static const Sbecore::uint SCRJREFTPL1NMODULE = 9;
+		static const Sbecore::uint SCRJREFTPL1NMODULE = 8;
+		static const Sbecore::uint SCRJREFMDL1NGENERIC = 9;
 		static const Sbecore::uint SCRJREFSUP1NMODULE = 10;
-		static const Sbecore::uint SCRJREFREF1NSENSITIVITY = 11;
-		static const Sbecore::uint SCRJREFREF1NVARIABLE = 12;
+		static const Sbecore::uint SCRJREFREF1NVARIABLE = 11;
+		static const Sbecore::uint SCRJREFREF1NSENSITIVITY = 12;
 		static const Sbecore::uint SCRJREFMGE1NSIGNAL = 13;
 		static const Sbecore::uint SCRJREFREF1NFILE = 14;
 		static const Sbecore::uint BUTREGULARIZEACTIVE = 15;
 
 	public:
-		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const std::string& scrJrefDetail = "", const std::string& scrJrefKParKey = "", const std::string& scrJrefKHdltype = "", const std::string& scrJrefAPar = "", const std::string& scrJrefMdl1NGeneric = "", const std::string& scrJrefHsm1NPipeline = "", const std::string& scrJrefMdl1NPort = "", const std::string& scrJrefTpl1NModule = "", const std::string& scrJrefSup1NModule = "", const std::string& scrJrefRef1NSensitivity = "", const std::string& scrJrefRef1NVariable = "", const std::string& scrJrefMge1NSignal = "", const std::string& scrJrefRef1NFile = "", const bool ButRegularizeActive = true);
+		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const std::string& scrJrefDetail = "", const std::string& scrJrefKParKey = "", const std::string& scrJrefKHdltype = "", const std::string& scrJrefAPar = "", const std::string& scrJrefMdl1NPort = "", const std::string& scrJrefHsm1NPipeline = "", const std::string& scrJrefTpl1NModule = "", const std::string& scrJrefMdl1NGeneric = "", const std::string& scrJrefSup1NModule = "", const std::string& scrJrefRef1NVariable = "", const std::string& scrJrefRef1NSensitivity = "", const std::string& scrJrefMge1NSignal = "", const std::string& scrJrefRef1NFile = "", const bool ButRegularizeActive = true);
 
 	public:
 		Sbecore::uint ixWdbeVExpstate;
@@ -134,13 +134,13 @@ namespace PnlWdbeMtpRec {
 		std::string scrJrefKParKey;
 		std::string scrJrefKHdltype;
 		std::string scrJrefAPar;
-		std::string scrJrefMdl1NGeneric;
-		std::string scrJrefHsm1NPipeline;
 		std::string scrJrefMdl1NPort;
+		std::string scrJrefHsm1NPipeline;
 		std::string scrJrefTpl1NModule;
+		std::string scrJrefMdl1NGeneric;
 		std::string scrJrefSup1NModule;
-		std::string scrJrefRef1NSensitivity;
 		std::string scrJrefRef1NVariable;
+		std::string scrJrefRef1NSensitivity;
 		std::string scrJrefMge1NSignal;
 		std::string scrJrefRef1NFile;
 		bool ButRegularizeActive;

@@ -135,9 +135,8 @@ DlgWdbeCvrWrite::ContIac::ContIac(
 			const uint numFDse
 		) :
 			Block()
+			, numFDse(numFDse)
 		{
-	this->numFDse = numFDse;
-
 	mask = {NUMFDSE};
 };
 
@@ -212,9 +211,8 @@ DlgWdbeCvrWrite::ContInf::ContInf(
 			const uint numFSge
 		) :
 			Block()
+			, numFSge(numFSge)
 		{
-	this->numFSge = numFSge;
-
 	mask = {NUMFSGE};
 };
 
@@ -273,9 +271,8 @@ DlgWdbeCvrWrite::ContInfFia::ContInfFia(
 			const string& Dld
 		) :
 			Block()
+			, Dld(Dld)
 		{
-	this->Dld = Dld;
-
 	mask = {DLD};
 };
 
@@ -334,9 +331,8 @@ DlgWdbeCvrWrite::ContInfWrc::ContInfWrc(
 			const string& TxtPrg
 		) :
 			Block()
+			, TxtPrg(TxtPrg)
 		{
-	this->TxtPrg = TxtPrg;
-
 	mask = {TXTPRG};
 };
 
@@ -396,10 +392,9 @@ DlgWdbeCvrWrite::StatApp::StatApp(
 			, const string& shortMenu
 		) :
 			Block()
+			, initdone(initdone)
+			, shortMenu(shortMenu)
 		{
-	this->initdone = initdone;
-	this->shortMenu = shortMenu;
-
 	mask = {INITDONE, SHORTMENU};
 };
 
@@ -460,9 +455,8 @@ DlgWdbeCvrWrite::StatShr::StatShr(
 			const bool ButDneActive
 		) :
 			Block()
+			, ButDneActive(ButDneActive)
 		{
-	this->ButDneActive = ButDneActive;
-
 	mask = {BUTDNEACTIVE};
 };
 
@@ -521,9 +515,8 @@ DlgWdbeCvrWrite::StatShrCuc::StatShrCuc(
 			const bool UldActive
 		) :
 			Block()
+			, UldActive(UldActive)
 		{
-	this->UldActive = UldActive;
-
 	mask = {ULDACTIVE};
 };
 
@@ -582,9 +575,8 @@ DlgWdbeCvrWrite::StatShrFia::StatShrFia(
 			const bool DldActive
 		) :
 			Block()
+			, DldActive(DldActive)
 		{
-	this->DldActive = DldActive;
-
 	mask = {DLDACTIVE};
 };
 
@@ -644,10 +636,9 @@ DlgWdbeCvrWrite::StatShrWrc::StatShrWrc(
 			, const bool ButStoActive
 		) :
 			Block()
+			, ButRunActive(ButRunActive)
+			, ButStoActive(ButStoActive)
 		{
-	this->ButRunActive = ButRunActive;
-	this->ButStoActive = ButStoActive;
-
 	mask = {BUTRUNACTIVE, BUTSTOACTIVE};
 };
 
@@ -709,10 +700,9 @@ DlgWdbeCvrWrite::Tag::Tag(
 			, const string& ButDne
 		) :
 			Block()
+			, Cpt(Cpt)
+			, ButDne(ButDne)
 		{
-	this->Cpt = Cpt;
-	this->ButDne = ButDne;
-
 	mask = {CPT, BUTDNE};
 };
 
@@ -749,10 +739,9 @@ DlgWdbeCvrWrite::TagCuc::TagCuc(
 			, const string& Cpt
 		) :
 			Block()
+			, Uld(Uld)
+			, Cpt(Cpt)
 		{
-	this->Uld = Uld;
-	this->Cpt = Cpt;
-
 	mask = {ULD, CPT};
 };
 
@@ -788,9 +777,8 @@ DlgWdbeCvrWrite::TagFia::TagFia(
 			const string& Dld
 		) :
 			Block()
+			, Dld(Dld)
 		{
-	this->Dld = Dld;
-
 	mask = {DLD};
 };
 
@@ -827,11 +815,10 @@ DlgWdbeCvrWrite::TagWrc::TagWrc(
 			, const string& ButSto
 		) :
 			Block()
+			, CptPrg(CptPrg)
+			, ButRun(ButRun)
+			, ButSto(ButSto)
 		{
-	this->CptPrg = CptPrg;
-	this->ButRun = ButRun;
-	this->ButSto = ButSto;
-
 	mask = {CPTPRG, BUTRUN, BUTSTO};
 };
 
@@ -910,12 +897,12 @@ DlgWdbeCvrWrite::DpchAppDo::DpchAppDo(
 			, const set<uint>& mask
 		) :
 			DpchAppWdbe(VecWdbeVDpch::DPCHAPPDLGWDBECVRWRITEDO, scrJref)
+			, ixVDo(ixVDo)
+			, ixVDoWrc(ixVDoWrc)
 		{
 	if (find(mask, ALL)) this->mask = {SCRJREF, IXVDO, IXVDOWRC};
 	else this->mask = mask;
 
-	this->ixVDo = ixVDo;
-	this->ixVDoWrc = ixVDoWrc;
 };
 
 string DlgWdbeCvrWrite::DpchAppDo::getSrefsMask() {

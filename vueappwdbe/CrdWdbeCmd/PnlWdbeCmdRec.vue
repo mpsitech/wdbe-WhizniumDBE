@@ -47,22 +47,30 @@
 			</v-row>
 			<v-row>
 				<v-col cols="12" md="6">
-					<PnlWdbeCmdARetpar
-						v-on:request="handleRequest"
-						ref="PnlWdbeCmdARetpar"
-						:scrJref=statshr.scrJrefARetpar
-					/>
-				</v-col>
-				<v-col cols="12" md="6">
 					<PnlWdbeCmdAInvpar
 						v-on:request="handleRequest"
 						ref="PnlWdbeCmdAInvpar"
 						:scrJref=statshr.scrJrefAInvpar
 					/>
 				</v-col>
+				<v-col cols="12" md="6">
+					<PnlWdbeCmdARetpar
+						v-on:request="handleRequest"
+						ref="PnlWdbeCmdARetpar"
+						:scrJref=statshr.scrJrefARetpar
+					/>
+				</v-col>
 			</v-row>
 			<v-divider/>
 			<v-row>
+				<v-col cols="12" md="6">
+					<PnlWdbeCmdHk1NVector
+						v-on:crdopen="handleCrdopen"
+						v-on:request="handleRequest"
+						ref="PnlWdbeCmdHk1NVector"
+						:scrJref=statshr.scrJrefHk1NVector
+					/>
+				</v-col>
 				<v-col cols="12" md="6">
 					<PnlWdbeCmdMNController
 						v-on:crdopen="handleCrdopen"
@@ -82,8 +90,9 @@
 	/*
 	*/
 	import PnlWdbeCmdDetail from './PnlWdbeCmdDetail';
-	import PnlWdbeCmdARetpar from './PnlWdbeCmdARetpar';
 	import PnlWdbeCmdAInvpar from './PnlWdbeCmdAInvpar';
+	import PnlWdbeCmdARetpar from './PnlWdbeCmdARetpar';
+	import PnlWdbeCmdHk1NVector from './PnlWdbeCmdHk1NVector';
 	import PnlWdbeCmdMNController from './PnlWdbeCmdMNController';
 	/*
 	*/
@@ -103,8 +112,9 @@
 			/*
 			*/
 			PnlWdbeCmdDetail,
-			PnlWdbeCmdARetpar,
 			PnlWdbeCmdAInvpar,
+			PnlWdbeCmdARetpar,
+			PnlWdbeCmdHk1NVector,
 			PnlWdbeCmdMNController
 			/*
 			*/
@@ -167,8 +177,9 @@
 						/*
 						*/
 						if (obj.scrJref == this.statshr.scrJrefDetail) this.$refs.PnlWdbeCmdDetail.handleReply(obj);
-						else if (obj.scrJref == this.statshr.scrJrefARetpar) this.$refs.PnlWdbeCmdARetpar.handleReply(obj);
 						else if (obj.scrJref == this.statshr.scrJrefAInvpar) this.$refs.PnlWdbeCmdAInvpar.handleReply(obj);
+						else if (obj.scrJref == this.statshr.scrJrefARetpar) this.$refs.PnlWdbeCmdARetpar.handleReply(obj);
+						else if (obj.scrJref == this.statshr.scrJrefHk1NVector) this.$refs.PnlWdbeCmdHk1NVector.handleReply(obj);
 						else if (obj.scrJref == this.statshr.scrJrefMNController) this.$refs.PnlWdbeCmdMNController.handleReply(obj);
 						/*
 						*/
@@ -200,8 +211,9 @@
 						/*
 						*/
 						if (obj.dpcheng.scrJref == this.statshr.scrJrefDetail) this.$refs.PnlWdbeCmdDetail.handleUpdate(obj);
-						else if (obj.dpcheng.scrJref == this.statshr.scrJrefARetpar) this.$refs.PnlWdbeCmdARetpar.handleUpdate(obj);
 						else if (obj.dpcheng.scrJref == this.statshr.scrJrefAInvpar) this.$refs.PnlWdbeCmdAInvpar.handleUpdate(obj);
+						else if (obj.dpcheng.scrJref == this.statshr.scrJrefARetpar) this.$refs.PnlWdbeCmdARetpar.handleUpdate(obj);
+						else if (obj.dpcheng.scrJref == this.statshr.scrJrefHk1NVector) this.$refs.PnlWdbeCmdHk1NVector.handleUpdate(obj);
 						else if (obj.dpcheng.scrJref == this.statshr.scrJrefMNController) this.$refs.PnlWdbeCmdMNController.handleUpdate(obj);
 						/*
 						*/

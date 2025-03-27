@@ -78,16 +78,15 @@ PnlWdbeNavHigh::ContIac::ContIac(
 			, const uint numFLstSeg
 		) :
 			Block()
+			, numFLstPph(numFLstPph)
+			, numFLstMod(numFLstMod)
+			, numFLstVec(numFLstVec)
+			, numFLstVit(numFLstVit)
+			, numFLstCmd(numFLstCmd)
+			, numFLstErr(numFLstErr)
+			, numFLstPpl(numFLstPpl)
+			, numFLstSeg(numFLstSeg)
 		{
-	this->numFLstPph = numFLstPph;
-	this->numFLstMod = numFLstMod;
-	this->numFLstVec = numFLstVec;
-	this->numFLstVit = numFLstVit;
-	this->numFLstCmd = numFLstCmd;
-	this->numFLstErr = numFLstErr;
-	this->numFLstPpl = numFLstPpl;
-	this->numFLstSeg = numFLstSeg;
-
 	mask = {NUMFLSTPPH, NUMFLSTMOD, NUMFLSTVEC, NUMFLSTVIT, NUMFLSTCMD, NUMFLSTERR, NUMFLSTPPL, NUMFLSTSEG};
 };
 
@@ -199,25 +198,24 @@ PnlWdbeNavHigh::StatApp::StatApp(
 			, const uint LstSegNumFirstdisp
 		) :
 			Block()
+			, ixWdbeVExpstate(ixWdbeVExpstate)
+			, LstPphAlt(LstPphAlt)
+			, LstModAlt(LstModAlt)
+			, LstVecAlt(LstVecAlt)
+			, LstVitAlt(LstVitAlt)
+			, LstCmdAlt(LstCmdAlt)
+			, LstErrAlt(LstErrAlt)
+			, LstPplAlt(LstPplAlt)
+			, LstSegAlt(LstSegAlt)
+			, LstPphNumFirstdisp(LstPphNumFirstdisp)
+			, LstModNumFirstdisp(LstModNumFirstdisp)
+			, LstVecNumFirstdisp(LstVecNumFirstdisp)
+			, LstVitNumFirstdisp(LstVitNumFirstdisp)
+			, LstCmdNumFirstdisp(LstCmdNumFirstdisp)
+			, LstErrNumFirstdisp(LstErrNumFirstdisp)
+			, LstPplNumFirstdisp(LstPplNumFirstdisp)
+			, LstSegNumFirstdisp(LstSegNumFirstdisp)
 		{
-	this->ixWdbeVExpstate = ixWdbeVExpstate;
-	this->LstPphAlt = LstPphAlt;
-	this->LstModAlt = LstModAlt;
-	this->LstVecAlt = LstVecAlt;
-	this->LstVitAlt = LstVitAlt;
-	this->LstCmdAlt = LstCmdAlt;
-	this->LstErrAlt = LstErrAlt;
-	this->LstPplAlt = LstPplAlt;
-	this->LstSegAlt = LstSegAlt;
-	this->LstPphNumFirstdisp = LstPphNumFirstdisp;
-	this->LstModNumFirstdisp = LstModNumFirstdisp;
-	this->LstVecNumFirstdisp = LstVecNumFirstdisp;
-	this->LstVitNumFirstdisp = LstVitNumFirstdisp;
-	this->LstCmdNumFirstdisp = LstCmdNumFirstdisp;
-	this->LstErrNumFirstdisp = LstErrNumFirstdisp;
-	this->LstPplNumFirstdisp = LstPplNumFirstdisp;
-	this->LstSegNumFirstdisp = LstSegNumFirstdisp;
-
 	mask = {IXWDBEVEXPSTATE, LSTPPHALT, LSTMODALT, LSTVECALT, LSTVITALT, LSTCMDALT, LSTERRALT, LSTPPLALT, LSTSEGALT, LSTPPHNUMFIRSTDISP, LSTMODNUMFIRSTDISP, LSTVECNUMFIRSTDISP, LSTVITNUMFIRSTDISP, LSTCMDNUMFIRSTDISP, LSTERRNUMFIRSTDISP, LSTPPLNUMFIRSTDISP, LSTSEGNUMFIRSTDISP};
 };
 
@@ -335,31 +333,30 @@ PnlWdbeNavHigh::StatShr::StatShr(
 			, const bool ButSegNewcrdActive
 		) :
 			Block()
+			, LstPphAvail(LstPphAvail)
+			, ButPphViewActive(ButPphViewActive)
+			, ButPphNewcrdActive(ButPphNewcrdActive)
+			, LstModAvail(LstModAvail)
+			, ButModViewActive(ButModViewActive)
+			, ButModNewcrdActive(ButModNewcrdActive)
+			, LstVecAvail(LstVecAvail)
+			, ButVecViewActive(ButVecViewActive)
+			, ButVecNewcrdActive(ButVecNewcrdActive)
+			, LstVitAvail(LstVitAvail)
+			, ButVitViewActive(ButVitViewActive)
+			, LstCmdAvail(LstCmdAvail)
+			, ButCmdViewActive(ButCmdViewActive)
+			, ButCmdNewcrdActive(ButCmdNewcrdActive)
+			, LstErrAvail(LstErrAvail)
+			, ButErrViewActive(ButErrViewActive)
+			, ButErrNewcrdActive(ButErrNewcrdActive)
+			, LstPplAvail(LstPplAvail)
+			, ButPplViewActive(ButPplViewActive)
+			, ButPplNewcrdActive(ButPplNewcrdActive)
+			, LstSegAvail(LstSegAvail)
+			, ButSegViewActive(ButSegViewActive)
+			, ButSegNewcrdActive(ButSegNewcrdActive)
 		{
-	this->LstPphAvail = LstPphAvail;
-	this->ButPphViewActive = ButPphViewActive;
-	this->ButPphNewcrdActive = ButPphNewcrdActive;
-	this->LstModAvail = LstModAvail;
-	this->ButModViewActive = ButModViewActive;
-	this->ButModNewcrdActive = ButModNewcrdActive;
-	this->LstVecAvail = LstVecAvail;
-	this->ButVecViewActive = ButVecViewActive;
-	this->ButVecNewcrdActive = ButVecNewcrdActive;
-	this->LstVitAvail = LstVitAvail;
-	this->ButVitViewActive = ButVitViewActive;
-	this->LstCmdAvail = LstCmdAvail;
-	this->ButCmdViewActive = ButCmdViewActive;
-	this->ButCmdNewcrdActive = ButCmdNewcrdActive;
-	this->LstErrAvail = LstErrAvail;
-	this->ButErrViewActive = ButErrViewActive;
-	this->ButErrNewcrdActive = ButErrNewcrdActive;
-	this->LstPplAvail = LstPplAvail;
-	this->ButPplViewActive = ButPplViewActive;
-	this->ButPplNewcrdActive = ButPplNewcrdActive;
-	this->LstSegAvail = LstSegAvail;
-	this->ButSegViewActive = ButSegViewActive;
-	this->ButSegNewcrdActive = ButSegNewcrdActive;
-
 	mask = {LSTPPHAVAIL, BUTPPHVIEWACTIVE, BUTPPHNEWCRDACTIVE, LSTMODAVAIL, BUTMODVIEWACTIVE, BUTMODNEWCRDACTIVE, LSTVECAVAIL, BUTVECVIEWACTIVE, BUTVECNEWCRDACTIVE, LSTVITAVAIL, BUTVITVIEWACTIVE, LSTCMDAVAIL, BUTCMDVIEWACTIVE, BUTCMDNEWCRDACTIVE, LSTERRAVAIL, BUTERRVIEWACTIVE, BUTERRNEWCRDACTIVE, LSTPPLAVAIL, BUTPPLVIEWACTIVE, BUTPPLNEWCRDACTIVE, LSTSEGAVAIL, BUTSEGVIEWACTIVE, BUTSEGNEWCRDACTIVE};
 };
 
@@ -470,17 +467,16 @@ PnlWdbeNavHigh::Tag::Tag(
 			, const string& CptSeg
 		) :
 			Block()
+			, Cpt(Cpt)
+			, CptPph(CptPph)
+			, CptMod(CptMod)
+			, CptVec(CptVec)
+			, CptVit(CptVit)
+			, CptCmd(CptCmd)
+			, CptErr(CptErr)
+			, CptPpl(CptPpl)
+			, CptSeg(CptSeg)
 		{
-	this->Cpt = Cpt;
-	this->CptPph = CptPph;
-	this->CptMod = CptMod;
-	this->CptVec = CptVec;
-	this->CptVit = CptVit;
-	this->CptCmd = CptCmd;
-	this->CptErr = CptErr;
-	this->CptPpl = CptPpl;
-	this->CptSeg = CptSeg;
-
 	mask = {CPT, CPTPPH, CPTMOD, CPTVEC, CPTVIT, CPTCMD, CPTERR, CPTPPL, CPTSEG};
 };
 
@@ -564,11 +560,11 @@ PnlWdbeNavHigh::DpchAppDo::DpchAppDo(
 			, const set<uint>& mask
 		) :
 			DpchAppWdbe(VecWdbeVDpch::DPCHAPPWDBENAVHIGHDO, scrJref)
+			, ixVDo(ixVDo)
 		{
 	if (find(mask, ALL)) this->mask = {SCRJREF, IXVDO};
 	else this->mask = mask;
 
-	this->ixVDo = ixVDo;
 };
 
 string PnlWdbeNavHigh::DpchAppDo::getSrefsMask() {

@@ -20,9 +20,10 @@ using namespace Xmlio;
 WdbeQUntHk1NVector::WdbeQUntHk1NVector(
 			const uint jnum
 			, const string stubRef
-		) {
-	this->jnum = jnum;
-	this->stubRef = stubRef;
+		) :
+			jnum(jnum)
+			, stubRef(stubRef)
+		{
 };
 
 bool WdbeQUntHk1NVector::readXML(

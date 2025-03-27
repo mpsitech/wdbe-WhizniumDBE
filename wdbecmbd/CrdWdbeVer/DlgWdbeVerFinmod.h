@@ -389,9 +389,9 @@ public:
 	};
 
 	bool evalButDneActive(DbsWdbe* dbswdbe);
+	bool evalLfiDldActive(DbsWdbe* dbswdbe);
 	bool evalFnmButRunActive(DbsWdbe* dbswdbe);
 	bool evalFnmButStoActive(DbsWdbe* dbswdbe);
-	bool evalLfiDldActive(DbsWdbe* dbswdbe);
 
 public:
 	DlgWdbeVerFinmod(XchgWdbe* xchg, DbsWdbe* dbswdbe, const Sbecore::ubigint jrefSup, const Sbecore::uint ixWdbeVLocale);
@@ -459,15 +459,15 @@ private:
 	void handleDpchAppDoFnmButStoClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
 	void handleDpchAppWdbeAlert(DbsWdbe* dbswdbe, DpchAppWdbeAlert* dpchappwdbealert, DpchEngWdbe** dpcheng);
 
-	std::string handleDownloadInSgeFail(DbsWdbe* dbswdbe);
 	std::string handleDownloadInSgeDone(DbsWdbe* dbswdbe);
+	std::string handleDownloadInSgeFail(DbsWdbe* dbswdbe);
 
 	void handleDpchRetWdbe(DbsWdbe* dbswdbe, DpchRetWdbe* dpchret);
 	void handleDpchRetWdbeGenAux(DbsWdbe* dbswdbe, DpchRetWdbeGenAux* dpchret);
 	void handleDpchRetWdbeGenWiring(DbsWdbe* dbswdbe, DpchRetWdbeGenWiring* dpchret);
 
-	void handleTimerWithSrefMonInSgeGenwri(DbsWdbe* dbswdbe);
 	void handleTimerWithSrefMonInSgeGenaux(DbsWdbe* dbswdbe);
+	void handleTimerWithSrefMonInSgeGenwri(DbsWdbe* dbswdbe);
 	void handleTimerWithSrefMonInSgeGensv(DbsWdbe* dbswdbe);
 
 private:

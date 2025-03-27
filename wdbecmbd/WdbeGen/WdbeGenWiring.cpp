@@ -182,7 +182,7 @@ DpchRetWdbeGenWiring* WdbeGenWiring::run(
 						gen = it->second;
 
 						// require matching characteristics
-						match = ((gen->srefWdbeKHdltype == subgen->srefWdbeKHdltype) && (gen->Width == subgen->Width) && (gen->Minmax == subgen->Minmax));
+						match = ((gen->srefWdbeKHdltype == subgen->srefWdbeKHdltype) && (gen->Width == subgen->Width));// && (gen->Minmax == subgen->Minmax));
 						if (match) match = ((gen->srcSrefWdbeMGeneric == "") || (gen->srcSrefWdbeMGeneric == subgen->srcSrefWdbeMGeneric));
 
 						if (!match) Wdbe::appendToTmpfile(xchg->tmppath, logfile, logfi, "wiring error 2: mismatch of generic " + submdl->sref + "." + subgen->sref + " characteristics with superior module " + mdl->sref + "!");

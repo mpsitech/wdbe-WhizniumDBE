@@ -27,6 +27,7 @@ public class PnlWdbeNavAdmin {
 		public static final int BUTPRSNEWCRDCLICK = 6;
 		public static final int BUTFILVIEWCLICK = 7;
 		public static final int BUTFILNEWCRDCLICK = 8;
+		public static final int BUTPRFNEWCRDCLICK = 9;
 
 		public static int getIx(
 					String sref
@@ -41,6 +42,7 @@ public class PnlWdbeNavAdmin {
 			if (s.equals("butprsnewcrdclick")) return BUTPRSNEWCRDCLICK;
 			if (s.equals("butfilviewclick")) return BUTFILVIEWCLICK;
 			if (s.equals("butfilnewcrdclick")) return BUTFILNEWCRDCLICK;
+			if (s.equals("butprfnewcrdclick")) return BUTPRFNEWCRDCLICK;
 
 			return 0;
 		};
@@ -56,6 +58,7 @@ public class PnlWdbeNavAdmin {
 			if (ix == BUTPRSNEWCRDCLICK) return("ButPrsNewcrdClick");
 			if (ix == BUTFILVIEWCLICK) return("ButFilViewClick");
 			if (ix == BUTFILNEWCRDCLICK) return("ButFilNewcrdClick");
+			if (ix == BUTPRFNEWCRDCLICK) return("ButPrfNewcrdClick");
 
 			return "";
 		};
@@ -295,6 +298,7 @@ public class PnlWdbeNavAdmin {
 		public static final int BUTPRSVIEWACTIVE = 6;
 		public static final int LSTFILAVAIL = 7;
 		public static final int BUTFILVIEWACTIVE = 8;
+		public static final int BUTPRFNEWCRDAVAIL = 9;
 
 		public StatShr(
 					boolean LstUsgAvail
@@ -305,6 +309,7 @@ public class PnlWdbeNavAdmin {
 					, boolean ButPrsViewActive
 					, boolean LstFilAvail
 					, boolean ButFilViewActive
+					, boolean ButPrfNewcrdAvail
 				) {
 			this.LstUsgAvail = LstUsgAvail;
 			this.ButUsgViewActive = ButUsgViewActive;
@@ -314,8 +319,9 @@ public class PnlWdbeNavAdmin {
 			this.ButPrsViewActive = ButPrsViewActive;
 			this.LstFilAvail = LstFilAvail;
 			this.ButFilViewActive = ButFilViewActive;
+			this.ButPrfNewcrdAvail = ButPrfNewcrdAvail;
 
-			mask = new HashSet<Integer>(Arrays.asList(LSTUSGAVAIL, BUTUSGVIEWACTIVE, LSTUSRAVAIL, BUTUSRVIEWACTIVE, LSTPRSAVAIL, BUTPRSVIEWACTIVE, LSTFILAVAIL, BUTFILVIEWACTIVE));
+			mask = new HashSet<Integer>(Arrays.asList(LSTUSGAVAIL, BUTUSGVIEWACTIVE, LSTUSRAVAIL, BUTUSRVIEWACTIVE, LSTPRSAVAIL, BUTPRSVIEWACTIVE, LSTFILAVAIL, BUTFILVIEWACTIVE, BUTPRFNEWCRDAVAIL));
 		};
 
 		public boolean LstUsgAvail;
@@ -326,6 +332,7 @@ public class PnlWdbeNavAdmin {
 		public boolean ButPrsViewActive;
 		public boolean LstFilAvail;
 		public boolean ButFilViewActive;
+		public boolean ButPrfNewcrdAvail;
 
 		public boolean readXML(
 					Document doc
@@ -348,6 +355,7 @@ public class PnlWdbeNavAdmin {
 				ButPrsViewActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButPrsViewActive", mask, BUTPRSVIEWACTIVE);
 				LstFilAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "LstFilAvail", mask, LSTFILAVAIL);
 				ButFilViewActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButFilViewActive", mask, BUTFILVIEWACTIVE);
+				ButPrfNewcrdAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButPrfNewcrdAvail", mask, BUTPRFNEWCRDAVAIL);
 
 				return true;
 			};
@@ -368,6 +376,7 @@ public class PnlWdbeNavAdmin {
 			if (ButPrsViewActive == comp.ButPrsViewActive) items.add(BUTPRSVIEWACTIVE);
 			if (LstFilAvail == comp.LstFilAvail) items.add(LSTFILAVAIL);
 			if (ButFilViewActive == comp.ButFilViewActive) items.add(BUTFILVIEWACTIVE);
+			if (ButPrfNewcrdAvail == comp.ButPrfNewcrdAvail) items.add(BUTPRFNEWCRDAVAIL);
 
 			return(items);
 		};
@@ -380,7 +389,7 @@ public class PnlWdbeNavAdmin {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(LSTUSGAVAIL, BUTUSGVIEWACTIVE, LSTUSRAVAIL, BUTUSRVIEWACTIVE, LSTPRSAVAIL, BUTPRSVIEWACTIVE, LSTFILAVAIL, BUTFILVIEWACTIVE));
+			diffitems = new HashSet<Integer>(Arrays.asList(LSTUSGAVAIL, BUTUSGVIEWACTIVE, LSTUSRAVAIL, BUTUSRVIEWACTIVE, LSTPRSAVAIL, BUTPRSVIEWACTIVE, LSTFILAVAIL, BUTFILVIEWACTIVE, BUTPRFNEWCRDAVAIL));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);
@@ -398,6 +407,7 @@ public class PnlWdbeNavAdmin {
 		public static final int CPTUSR = 3;
 		public static final int CPTPRS = 4;
 		public static final int CPTFIL = 5;
+		public static final int CPTPRF = 6;
 
 		public Tag(
 					String Cpt
@@ -405,14 +415,16 @@ public class PnlWdbeNavAdmin {
 					, String CptUsr
 					, String CptPrs
 					, String CptFil
+					, String CptPrf
 				) {
 			this.Cpt = Cpt;
 			this.CptUsg = CptUsg;
 			this.CptUsr = CptUsr;
 			this.CptPrs = CptPrs;
 			this.CptFil = CptFil;
+			this.CptPrf = CptPrf;
 
-			mask = new HashSet<Integer>(Arrays.asList(CPT, CPTUSG, CPTUSR, CPTPRS, CPTFIL));
+			mask = new HashSet<Integer>(Arrays.asList(CPT, CPTUSG, CPTUSR, CPTPRS, CPTFIL, CPTPRF));
 		};
 
 		public String Cpt;
@@ -420,6 +432,7 @@ public class PnlWdbeNavAdmin {
 		public String CptUsr;
 		public String CptPrs;
 		public String CptFil;
+		public String CptPrf;
 
 		public boolean readXML(
 					Document doc
@@ -439,6 +452,7 @@ public class PnlWdbeNavAdmin {
 				CptUsr = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "CptUsr", mask, CPTUSR);
 				CptPrs = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "CptPrs", mask, CPTPRS);
 				CptFil = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "CptFil", mask, CPTFIL);
+				CptPrf = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "CptPrf", mask, CPTPRF);
 
 				return true;
 			};
@@ -456,6 +470,7 @@ public class PnlWdbeNavAdmin {
 			if (CptUsr.equals(comp.CptUsr)) items.add(CPTUSR);
 			if (CptPrs.equals(comp.CptPrs)) items.add(CPTPRS);
 			if (CptFil.equals(comp.CptFil)) items.add(CPTFIL);
+			if (CptPrf.equals(comp.CptPrf)) items.add(CPTPRF);
 
 			return(items);
 		};
@@ -468,7 +483,7 @@ public class PnlWdbeNavAdmin {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(CPT, CPTUSG, CPTUSR, CPTPRS, CPTFIL));
+			diffitems = new HashSet<Integer>(Arrays.asList(CPT, CPTUSG, CPTUSR, CPTPRS, CPTFIL, CPTPRF));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);
@@ -610,8 +625,8 @@ public class PnlWdbeNavAdmin {
 			feedFLstUsg = new Feed("FeedFLstUsg");
 			feedFLstUsr = new Feed("FeedFLstUsr");
 			statapp = new StatApp(0, false, false, false, false, 0, 0, 0, 0);
-			statshr = new StatShr(false, false, false, false, false, false, false, false);
-			tag = new Tag("", "", "", "", "");
+			statshr = new StatShr(false, false, false, false, false, false, false, false, false);
+			tag = new Tag("", "", "", "", "", "");
 		};
 
 		public ContIac contiac;
@@ -667,8 +682,8 @@ public class PnlWdbeNavAdmin {
 				feedFLstUsg = new Feed("FeedFLstUsg");
 				feedFLstUsr = new Feed("FeedFLstUsr");
 				statapp = new StatApp(0, false, false, false, false, 0, 0, 0, 0);
-				statshr = new StatShr(false, false, false, false, false, false, false, false);
-				tag = new Tag("", "", "", "", "");
+				statshr = new StatShr(false, false, false, false, false, false, false, false, false);
+				tag = new Tag("", "", "", "", "", "");
 			};
 		};
 

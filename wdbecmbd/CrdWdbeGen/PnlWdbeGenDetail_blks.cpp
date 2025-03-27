@@ -60,16 +60,15 @@ PnlWdbeGenDetail::ContIac::ContIac(
 			, const string& TxfCmt
 		) :
 			Block()
+			, numFLstClu(numFLstClu)
+			, numFPupHty(numFPupHty)
+			, TxfHty(TxfHty)
+			, TxfWid(TxfWid)
+			, TxfMmx(TxfMmx)
+			, TxfDfv(TxfDfv)
+			, TxfSrc(TxfSrc)
+			, TxfCmt(TxfCmt)
 		{
-	this->numFLstClu = numFLstClu;
-	this->numFPupHty = numFPupHty;
-	this->TxfHty = TxfHty;
-	this->TxfWid = TxfWid;
-	this->TxfMmx = TxfMmx;
-	this->TxfDfv = TxfDfv;
-	this->TxfSrc = TxfSrc;
-	this->TxfCmt = TxfCmt;
-
 	mask = {NUMFLSTCLU, NUMFPUPHTY, TXFHTY, TXFWID, TXFMMX, TXFDFV, TXFSRC, TXFCMT};
 };
 
@@ -212,12 +211,11 @@ PnlWdbeGenDetail::ContInf::ContInf(
 			, const string& TxtSrc
 		) :
 			Block()
+			, TxtSrf(TxtSrf)
+			, TxtClu(TxtClu)
+			, TxtMdl(TxtMdl)
+			, TxtSrc(TxtSrc)
 		{
-	this->TxtSrf = TxtSrf;
-	this->TxtClu = TxtClu;
-	this->TxtMdl = TxtMdl;
-	this->TxtSrc = TxtSrc;
-
 	mask = {TXTSRF, TXTCLU, TXTMDL, TXTSRC};
 };
 
@@ -335,9 +333,7 @@ void PnlWdbeGenDetail::StatApp::writeXML(
  ******************************************************************************/
 
 PnlWdbeGenDetail::StatShr::StatShr(
-			const bool TxfHtyValid
-			, const bool TxfSrcValid
-			, const bool ButSaveAvail
+			const bool ButSaveAvail
 			, const bool ButSaveActive
 			, const bool TxtSrfActive
 			, const bool LstCluActive
@@ -348,38 +344,39 @@ PnlWdbeGenDetail::StatShr::StatShr(
 			, const bool ButMdlViewAvail
 			, const bool ButMdlViewActive
 			, const bool PupHtyActive
+			, const bool TxfHtyValid
 			, const bool ButHtyEditAvail
 			, const bool TxfWidActive
 			, const bool TxfMmxActive
 			, const bool TxfDfvActive
 			, const bool TxtSrcActive
+			, const bool TxfSrcValid
 			, const bool ButSrcViewAvail
 			, const bool TxfCmtActive
 		) :
 			Block()
+			, ButSaveAvail(ButSaveAvail)
+			, ButSaveActive(ButSaveActive)
+			, TxtSrfActive(TxtSrfActive)
+			, LstCluActive(LstCluActive)
+			, ButCluViewActive(ButCluViewActive)
+			, ButCluClusterAvail(ButCluClusterAvail)
+			, ButCluUnclusterAvail(ButCluUnclusterAvail)
+			, TxtMdlActive(TxtMdlActive)
+			, ButMdlViewAvail(ButMdlViewAvail)
+			, ButMdlViewActive(ButMdlViewActive)
+			, PupHtyActive(PupHtyActive)
+			, TxfHtyValid(TxfHtyValid)
+			, ButHtyEditAvail(ButHtyEditAvail)
+			, TxfWidActive(TxfWidActive)
+			, TxfMmxActive(TxfMmxActive)
+			, TxfDfvActive(TxfDfvActive)
+			, TxtSrcActive(TxtSrcActive)
+			, TxfSrcValid(TxfSrcValid)
+			, ButSrcViewAvail(ButSrcViewAvail)
+			, TxfCmtActive(TxfCmtActive)
 		{
-	this->TxfHtyValid = TxfHtyValid;
-	this->TxfSrcValid = TxfSrcValid;
-	this->ButSaveAvail = ButSaveAvail;
-	this->ButSaveActive = ButSaveActive;
-	this->TxtSrfActive = TxtSrfActive;
-	this->LstCluActive = LstCluActive;
-	this->ButCluViewActive = ButCluViewActive;
-	this->ButCluClusterAvail = ButCluClusterAvail;
-	this->ButCluUnclusterAvail = ButCluUnclusterAvail;
-	this->TxtMdlActive = TxtMdlActive;
-	this->ButMdlViewAvail = ButMdlViewAvail;
-	this->ButMdlViewActive = ButMdlViewActive;
-	this->PupHtyActive = PupHtyActive;
-	this->ButHtyEditAvail = ButHtyEditAvail;
-	this->TxfWidActive = TxfWidActive;
-	this->TxfMmxActive = TxfMmxActive;
-	this->TxfDfvActive = TxfDfvActive;
-	this->TxtSrcActive = TxtSrcActive;
-	this->ButSrcViewAvail = ButSrcViewAvail;
-	this->TxfCmtActive = TxfCmtActive;
-
-	mask = {TXFHTYVALID, TXFSRCVALID, BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, LSTCLUACTIVE, BUTCLUVIEWACTIVE, BUTCLUCLUSTERAVAIL, BUTCLUUNCLUSTERAVAIL, TXTMDLACTIVE, BUTMDLVIEWAVAIL, BUTMDLVIEWACTIVE, PUPHTYACTIVE, BUTHTYEDITAVAIL, TXFWIDACTIVE, TXFMMXACTIVE, TXFDFVACTIVE, TXTSRCACTIVE, BUTSRCVIEWAVAIL, TXFCMTACTIVE};
+	mask = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, LSTCLUACTIVE, BUTCLUVIEWACTIVE, BUTCLUCLUSTERAVAIL, BUTCLUUNCLUSTERAVAIL, TXTMDLACTIVE, BUTMDLVIEWAVAIL, BUTMDLVIEWACTIVE, PUPHTYACTIVE, TXFHTYVALID, BUTHTYEDITAVAIL, TXFWIDACTIVE, TXFMMXACTIVE, TXFDFVACTIVE, TXTSRCACTIVE, TXFSRCVALID, BUTSRCVIEWAVAIL, TXFCMTACTIVE};
 };
 
 void PnlWdbeGenDetail::StatShr::writeJSON(
@@ -390,8 +387,6 @@ void PnlWdbeGenDetail::StatShr::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["TxfHtyValid"] = TxfHtyValid;
-	me["TxfSrcValid"] = TxfSrcValid;
 	me["ButSaveAvail"] = ButSaveAvail;
 	me["ButSaveActive"] = ButSaveActive;
 	me["TxtSrfActive"] = TxtSrfActive;
@@ -403,11 +398,13 @@ void PnlWdbeGenDetail::StatShr::writeJSON(
 	me["ButMdlViewAvail"] = ButMdlViewAvail;
 	me["ButMdlViewActive"] = ButMdlViewActive;
 	me["PupHtyActive"] = PupHtyActive;
+	me["TxfHtyValid"] = TxfHtyValid;
 	me["ButHtyEditAvail"] = ButHtyEditAvail;
 	me["TxfWidActive"] = TxfWidActive;
 	me["TxfMmxActive"] = TxfMmxActive;
 	me["TxfDfvActive"] = TxfDfvActive;
 	me["TxtSrcActive"] = TxtSrcActive;
+	me["TxfSrcValid"] = TxfSrcValid;
 	me["ButSrcViewAvail"] = ButSrcViewAvail;
 	me["TxfCmtActive"] = TxfCmtActive;
 };
@@ -424,8 +421,6 @@ void PnlWdbeGenDetail::StatShr::writeXML(
 	else itemtag = "StatitemShrWdbeGenDetail";
 
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
-		writeBoolAttr(wr, itemtag, "sref", "TxfHtyValid", TxfHtyValid);
-		writeBoolAttr(wr, itemtag, "sref", "TxfSrcValid", TxfSrcValid);
 		writeBoolAttr(wr, itemtag, "sref", "ButSaveAvail", ButSaveAvail);
 		writeBoolAttr(wr, itemtag, "sref", "ButSaveActive", ButSaveActive);
 		writeBoolAttr(wr, itemtag, "sref", "TxtSrfActive", TxtSrfActive);
@@ -437,11 +432,13 @@ void PnlWdbeGenDetail::StatShr::writeXML(
 		writeBoolAttr(wr, itemtag, "sref", "ButMdlViewAvail", ButMdlViewAvail);
 		writeBoolAttr(wr, itemtag, "sref", "ButMdlViewActive", ButMdlViewActive);
 		writeBoolAttr(wr, itemtag, "sref", "PupHtyActive", PupHtyActive);
+		writeBoolAttr(wr, itemtag, "sref", "TxfHtyValid", TxfHtyValid);
 		writeBoolAttr(wr, itemtag, "sref", "ButHtyEditAvail", ButHtyEditAvail);
 		writeBoolAttr(wr, itemtag, "sref", "TxfWidActive", TxfWidActive);
 		writeBoolAttr(wr, itemtag, "sref", "TxfMmxActive", TxfMmxActive);
 		writeBoolAttr(wr, itemtag, "sref", "TxfDfvActive", TxfDfvActive);
 		writeBoolAttr(wr, itemtag, "sref", "TxtSrcActive", TxtSrcActive);
+		writeBoolAttr(wr, itemtag, "sref", "TxfSrcValid", TxfSrcValid);
 		writeBoolAttr(wr, itemtag, "sref", "ButSrcViewAvail", ButSrcViewAvail);
 		writeBoolAttr(wr, itemtag, "sref", "TxfCmtActive", TxfCmtActive);
 	xmlTextWriterEndElement(wr);
@@ -452,8 +449,6 @@ set<uint> PnlWdbeGenDetail::StatShr::comm(
 		) {
 	set<uint> items;
 
-	if (TxfHtyValid == comp->TxfHtyValid) insert(items, TXFHTYVALID);
-	if (TxfSrcValid == comp->TxfSrcValid) insert(items, TXFSRCVALID);
 	if (ButSaveAvail == comp->ButSaveAvail) insert(items, BUTSAVEAVAIL);
 	if (ButSaveActive == comp->ButSaveActive) insert(items, BUTSAVEACTIVE);
 	if (TxtSrfActive == comp->TxtSrfActive) insert(items, TXTSRFACTIVE);
@@ -465,11 +460,13 @@ set<uint> PnlWdbeGenDetail::StatShr::comm(
 	if (ButMdlViewAvail == comp->ButMdlViewAvail) insert(items, BUTMDLVIEWAVAIL);
 	if (ButMdlViewActive == comp->ButMdlViewActive) insert(items, BUTMDLVIEWACTIVE);
 	if (PupHtyActive == comp->PupHtyActive) insert(items, PUPHTYACTIVE);
+	if (TxfHtyValid == comp->TxfHtyValid) insert(items, TXFHTYVALID);
 	if (ButHtyEditAvail == comp->ButHtyEditAvail) insert(items, BUTHTYEDITAVAIL);
 	if (TxfWidActive == comp->TxfWidActive) insert(items, TXFWIDACTIVE);
 	if (TxfMmxActive == comp->TxfMmxActive) insert(items, TXFMMXACTIVE);
 	if (TxfDfvActive == comp->TxfDfvActive) insert(items, TXFDFVACTIVE);
 	if (TxtSrcActive == comp->TxtSrcActive) insert(items, TXTSRCACTIVE);
+	if (TxfSrcValid == comp->TxfSrcValid) insert(items, TXFSRCVALID);
 	if (ButSrcViewAvail == comp->ButSrcViewAvail) insert(items, BUTSRCVIEWAVAIL);
 	if (TxfCmtActive == comp->TxfCmtActive) insert(items, TXFCMTACTIVE);
 
@@ -484,7 +481,7 @@ set<uint> PnlWdbeGenDetail::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {TXFHTYVALID, TXFSRCVALID, BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, LSTCLUACTIVE, BUTCLUVIEWACTIVE, BUTCLUCLUSTERAVAIL, BUTCLUUNCLUSTERAVAIL, TXTMDLACTIVE, BUTMDLVIEWAVAIL, BUTMDLVIEWACTIVE, PUPHTYACTIVE, BUTHTYEDITAVAIL, TXFWIDACTIVE, TXFMMXACTIVE, TXFDFVACTIVE, TXTSRCACTIVE, BUTSRCVIEWAVAIL, TXFCMTACTIVE};
+	diffitems = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, LSTCLUACTIVE, BUTCLUVIEWACTIVE, BUTCLUCLUSTERAVAIL, BUTCLUUNCLUSTERAVAIL, TXTMDLACTIVE, BUTMDLVIEWAVAIL, BUTMDLVIEWACTIVE, PUPHTYACTIVE, TXFHTYVALID, BUTHTYEDITAVAIL, TXFWIDACTIVE, TXFMMXACTIVE, TXFDFVACTIVE, TXTSRCACTIVE, TXFSRCVALID, BUTSRCVIEWAVAIL, TXFCMTACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);

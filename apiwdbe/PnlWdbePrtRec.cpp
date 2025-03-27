@@ -45,9 +45,8 @@ PnlWdbePrtRec::ContInf::ContInf(
 			const string& TxtRef
 		) :
 			Block()
+			, TxtRef(TxtRef)
 		{
-	this->TxtRef = TxtRef;
-
 	mask = {TXTREF};
 };
 
@@ -107,10 +106,9 @@ PnlWdbePrtRec::StatApp::StatApp(
 			, const bool initdoneSrc1NSensitivity
 		) :
 			Block()
+			, initdoneDetail(initdoneDetail)
+			, initdoneSrc1NSensitivity(initdoneSrc1NSensitivity)
 		{
-	this->initdoneDetail = initdoneDetail;
-	this->initdoneSrc1NSensitivity = initdoneSrc1NSensitivity;
-
 	mask = {INITDONEDETAIL, INITDONESRC1NSENSITIVITY};
 };
 
@@ -174,12 +172,11 @@ PnlWdbePrtRec::StatShr::StatShr(
 			, const bool ButRegularizeActive
 		) :
 			Block()
+			, ixWdbeVExpstate(ixWdbeVExpstate)
+			, scrJrefDetail(scrJrefDetail)
+			, scrJrefSrc1NSensitivity(scrJrefSrc1NSensitivity)
+			, ButRegularizeActive(ButRegularizeActive)
 		{
-	this->ixWdbeVExpstate = ixWdbeVExpstate;
-	this->scrJrefDetail = scrJrefDetail;
-	this->scrJrefSrc1NSensitivity = scrJrefSrc1NSensitivity;
-	this->ButRegularizeActive = ButRegularizeActive;
-
 	mask = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFSRC1NSENSITIVITY, BUTREGULARIZEACTIVE};
 };
 
@@ -249,9 +246,8 @@ PnlWdbePrtRec::Tag::Tag(
 			const string& Cpt
 		) :
 			Block()
+			, Cpt(Cpt)
 		{
-	this->Cpt = Cpt;
-
 	mask = {CPT};
 };
 
@@ -288,11 +284,11 @@ PnlWdbePrtRec::DpchAppDo::DpchAppDo(
 			, const set<uint>& mask
 		) :
 			DpchAppWdbe(VecWdbeVDpch::DPCHAPPWDBEPRTRECDO, scrJref)
+			, ixVDo(ixVDo)
 		{
 	if (find(mask, ALL)) this->mask = {SCRJREF, IXVDO};
 	else this->mask = mask;
 
-	this->ixVDo = ixVDo;
 };
 
 string PnlWdbePrtRec::DpchAppDo::getSrefsMask() {

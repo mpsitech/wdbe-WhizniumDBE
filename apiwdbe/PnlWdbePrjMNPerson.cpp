@@ -49,9 +49,8 @@ PnlWdbePrjMNPerson::ContInf::ContInf(
 			const uint numFCsiQst
 		) :
 			Block()
+			, numFCsiQst(numFCsiQst)
 		{
-	this->numFCsiQst = numFCsiQst;
-
 	mask = {NUMFCSIQST};
 };
 
@@ -110,9 +109,8 @@ PnlWdbePrjMNPerson::StatApp::StatApp(
 			const uint ixWdbeVExpstate
 		) :
 			Block()
+			, ixWdbeVExpstate(ixWdbeVExpstate)
 		{
-	this->ixWdbeVExpstate = ixWdbeVExpstate;
-
 	mask = {IXWDBEVEXPSTATE};
 };
 
@@ -180,13 +178,12 @@ PnlWdbePrjMNPerson::StatShr::StatShr(
 			, const bool ButSubActive
 		) :
 			Block()
+			, ButViewAvail(ButViewAvail)
+			, ButViewActive(ButViewActive)
+			, ButAddAvail(ButAddAvail)
+			, ButSubAvail(ButSubAvail)
+			, ButSubActive(ButSubActive)
 		{
-	this->ButViewAvail = ButViewAvail;
-	this->ButViewActive = ButViewActive;
-	this->ButAddAvail = ButAddAvail;
-	this->ButSubAvail = ButSubAvail;
-	this->ButSubActive = ButSubActive;
-
 	mask = {BUTVIEWAVAIL, BUTVIEWACTIVE, BUTADDAVAIL, BUTSUBAVAIL, BUTSUBACTIVE};
 };
 
@@ -256,12 +253,11 @@ PnlWdbePrjMNPerson::StgIac::StgIac(
 			, const uint TcoFctWidth
 		) :
 			Block()
+			, TcoMrefWidth(TcoMrefWidth)
+			, TcoStaWidth(TcoStaWidth)
+			, TcoStoWidth(TcoStoWidth)
+			, TcoFctWidth(TcoFctWidth)
 		{
-	this->TcoMrefWidth = TcoMrefWidth;
-	this->TcoStaWidth = TcoStaWidth;
-	this->TcoStoWidth = TcoStoWidth;
-	this->TcoFctWidth = TcoFctWidth;
-
 	mask = {TCOMREFWIDTH, TCOSTAWIDTH, TCOSTOWIDTH, TCOFCTWIDTH};
 };
 
@@ -354,18 +350,17 @@ PnlWdbePrjMNPerson::Tag::Tag(
 			, const string& TcoFct
 		) :
 			Block()
+			, Cpt(Cpt)
+			, TxtRecord1(TxtRecord1)
+			, TxtRecord2(TxtRecord2)
+			, Trs(Trs)
+			, TxtShowing1(TxtShowing1)
+			, TxtShowing2(TxtShowing2)
+			, TcoMref(TcoMref)
+			, TcoSta(TcoSta)
+			, TcoSto(TcoSto)
+			, TcoFct(TcoFct)
 		{
-	this->Cpt = Cpt;
-	this->TxtRecord1 = TxtRecord1;
-	this->TxtRecord2 = TxtRecord2;
-	this->Trs = Trs;
-	this->TxtShowing1 = TxtShowing1;
-	this->TxtShowing2 = TxtShowing2;
-	this->TcoMref = TcoMref;
-	this->TcoSta = TcoSta;
-	this->TcoSto = TcoSto;
-	this->TcoFct = TcoFct;
-
 	mask = {CPT, TXTRECORD1, TXTRECORD2, TRS, TXTSHOWING1, TXTSHOWING2, TCOMREF, TCOSTA, TCOSTO, TCOFCT};
 };
 
@@ -454,11 +449,11 @@ PnlWdbePrjMNPerson::DpchAppDo::DpchAppDo(
 			, const set<uint>& mask
 		) :
 			DpchAppWdbe(VecWdbeVDpch::DPCHAPPWDBEPRJMNPERSONDO, scrJref)
+			, ixVDo(ixVDo)
 		{
 	if (find(mask, ALL)) this->mask = {SCRJREF, IXVDO};
 	else this->mask = mask;
 
-	this->ixVDo = ixVDo;
 };
 
 string PnlWdbePrjMNPerson::DpchAppDo::getSrefsMask() {

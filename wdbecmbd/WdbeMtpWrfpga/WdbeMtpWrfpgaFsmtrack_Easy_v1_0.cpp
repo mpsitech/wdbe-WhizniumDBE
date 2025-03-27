@@ -74,7 +74,7 @@ void WdbeMtpWrfpgaFsmtrack_Easy_v1_0::writeMdlVhd(
 	string cross;
 
 	string capts; // ex. tkclksrc.op;camif.stream.cdc (.cdc optional)
-	string trigs; // ex. strbFrame.strb.cdc;ackXyz.falling (choice of rising/falling/strb; .cdc optional)
+	string trigs; // ex. strbFrame.cdc;ackXyz (.cdc optional)
 
 	vector<string> ss, ss2;
 	string s;
@@ -89,86 +89,54 @@ void WdbeMtpWrfpgaFsmtrack_Easy_v1_0::writeMdlVhd(
 	if (hascdc) outfile << "-- IP sigs.cdc --- AFFIRM" << endl;
 	else outfile << "-- IP sigs.cdc --- REMOVE" << endl;
 
-	// --- impl.op.state
-	outfile << "-- IP impl.op.state --- IBEGIN" << endl;
+	// --- impl.sample.state
+	outfile << "-- IP impl.sample.state --- IBEGIN" << endl;
 	if (Wdbe::getMpa(dbswdbe, mdl->ref, "capts", capts)) StrMod::stringToVector(capts, ss, ';');
-
-	outfile << "\tstate <=";
-
-	first = true;
 
 	for (unsigned int i = 0; i < ss.size(); i++) {
 		StrMod::stringToVector(ss[i], ss2, '.');
 
 		if (ss2.size() >= 2) {
-			if (first) first = false;
-			else  outfile << "\t\t\t\telse";
-
-			outfile << " " << ss2[0] << "State" << StrMod::cap(ss2[1]);
-			if (ss2.size() == 3) if (ss2[2] == "cdc") outfile << cross;
-			outfile << " when tixVSource" << cross << "=tixVSource" << StrMod::cap(ss2[0]) << StrMod::cap(ss2[1]) << endl;
-		}
+			outfile << "\t\t\t\twhen tixVCapture" << StrMod::cap(ss2[0]) << StrMod::cap(ss2[1]) << " =>" << endl;
+			outfile << "\t\t\t\t\tstate <= " << ss2[0] << "State" << StrMod::cap(ss2[1]) << ";" << endl;
+		};
 	};
+	outfile << "-- IP impl.sample.state --- IEND" << endl;
 
-	if (!first) outfile << "\t\t\t\telse";
-	outfile << " (others => '1');" << endl;
-
-	outfile << "-- IP impl.op.state --- IEND" << endl;
-
-	// --- impl.op.start
+	// --- impl.sample.start
 	ss.clear();
 	if (Wdbe::getMpa(dbswdbe, mdl->ref, "trigs", trigs)) StrMod::stringToVector(trigs, ss, ';');
 
-	outfile << "-- IP impl.op.start --- IBEGIN" << endl;
-
-	outfile << "\tstart <=";
-
-	first = true;
+	outfile << "-- IP impl.sample.start --- IBEGIN" << endl;
 
 	for (unsigned int i = 0; i < ss.size(); i++) {
 		StrMod::stringToVector(ss[i], ss2, '.');
 
-		if (ss2.size() >= 2) {
-			if (first) first = false;
-			else outfile << "\t\t\t\telse";
-
-			if (ss2[1] == "falling") outfile << " not";
-			outfile << " " << ss2[0];
-			if (ss2.size() == 3) if (ss2[2] == "cdc") outfile << cross;
-			outfile << " when staTixVTrigger" << cross << "=tixVTrigger" << StrMod::cap(ss2[0]) << endl;
+		if (ss2.size() >= 1) {
+			outfile << "\t\t\t\twhen tixVTrigger" << StrMod::cap(ss2[0]) << " =>" << endl;
+			outfile << "\t\t\t\t\tstart <= " << ss2[0];
+			if (ss2.size() >= 2) if (ss2[1] == "cdc") outfile << cross;
+			outfile << ";" << endl;
 		};
 	};
 
-	if (!first) outfile << "\t\t\t\telse";
-	outfile << " '0';" << endl;
+	outfile << "-- IP impl.sample.start --- IEND" << endl;
 
-	outfile << "-- IP impl.op.start --- IEND" << endl;
-
-	// --- impl.op.stop
-	outfile << "-- IP impl.op.stop --- IBEGIN" << endl;
-
-	outfile << "\tstop <=";
-
-	first = true;
+	// --- impl.sample.stop
+	outfile << "-- IP impl.sample.stop --- IBEGIN" << endl;
 
 	for (unsigned int i = 0; i < ss.size(); i++) {
 		StrMod::stringToVector(ss[i], ss2, '.');
 
-		if (ss2.size() >= 2) {
-			if (first) first = false;
-			else outfile << "\t\t\t\telse";
-
-			if (ss2[1] == "falling") outfile << " not";
-			outfile << " " << ss2[0];
-			if (ss2.size() == 3) if (ss2[2] == "cdc") outfile << cross;
-			outfile << " when stoTixVTrigger" << cross << "=tixVTrigger" << StrMod::cap(ss2[0]) << endl;
+		if (ss2.size() >= 1) {
+			outfile << "\t\t\t\twhen tixVTrigger" << StrMod::cap(ss2[0]) << " =>" << endl;
+			outfile << "\t\t\t\t\tstop <= " << ss2[0];
+			if (ss2.size() >= 2) if (ss2[1] == "cdc") outfile << cross;
+			outfile << ";" << endl;
 		};
 	};
 
-	if (!first) outfile << "\t\t\t\telse";
-	outfile << " '0';" << endl;
-
-	outfile << "-- IP impl.op.stop --- IEND" << endl;
+	outfile << "-- IP impl.sample.stop --- IEND" << endl;
 
 	// --- impl.cdc*
 	if (hascdc) outfile << "-- IP impl.cdc --- AFFIRM" << endl;

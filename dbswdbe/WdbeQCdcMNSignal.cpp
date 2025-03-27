@@ -27,16 +27,17 @@ WdbeQCdcMNSignal::WdbeQCdcMNSignal(
 			, const uint ixVDir
 			, const string srefIxVDir
 			, const string titIxVDir
-		) {
-	this->qref = qref;
-	this->jref = jref;
-	this->jnum = jnum;
-	this->mref = mref;
-	this->stubMref = stubMref;
-	this->ref = ref;
-	this->ixVDir = ixVDir;
-	this->srefIxVDir = srefIxVDir;
-	this->titIxVDir = titIxVDir;
+		) :
+			qref(qref)
+			, jref(jref)
+			, jnum(jnum)
+			, mref(mref)
+			, stubMref(stubMref)
+			, ref(ref)
+			, ixVDir(ixVDir)
+			, srefIxVDir(srefIxVDir)
+			, titIxVDir(titIxVDir)
+		{
 };
 
 void WdbeQCdcMNSignal::writeJSON(

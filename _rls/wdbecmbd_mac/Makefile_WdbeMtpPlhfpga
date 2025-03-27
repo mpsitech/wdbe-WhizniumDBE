@@ -2,7 +2,7 @@
 # make file for operation pack WdbeMtpPlhfpga, release wdbecmbd_mac
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 7 Feb 2024
+# date created: 3 Mar 2025
 # IP header --- ABOVE
 
 include ../Makefile.inc
@@ -17,7 +17,7 @@ INCPATH = -I$(BUILDROOT)/dbswdbe -I$(BUILDROOT)/wdbecmbd/VecWdbe -I$(BUILDROOT)/
 INCPATH += -I${WHIZSDKROOT}/build -I${WHIZSDKROOT}/build/apiwzlm -I/opt/homebrew/include -I/opt/homebrew/opt/curl/include -I/opt/homebrew/opt/libgit2/include -I/opt/homebrew/opt/libmicrohttpd/include -I/opt/homebrew/opt/libxml2/include -I/opt/homebrew/opt/openssl@3/include -I/opt/homebrew/opt/sqlite3/include -I/usr/local/mysql/include
 
 OBJS = WdbeMtpPlhfpga_blks.o WdbeMtpPlhfpga.o
-OBJS += WdbeMtpPlhfpgaCohostif_Easy_v1_0.o WdbeMtpPlhfpgaCohostif_v1_0.o WdbeMtpPlhfpgaCrcspec_v2_0.o WdbeMtpPlhfpgaCrcspec_v3_0.o WdbeMtpPlhfpgaFsmtrack_Easy_v1_0.o WdbeMtpPlhfpgaGptrack_Easy_v1_0.o WdbeMtpPlhfpgaHostif_Easy_v1_0.o WdbeMtpPlhfpgaHostif_v1_0.o WdbeMtpPlhfpgaIdent_Easy_v1_0.o SqkWdbeMtpPlhfpga.o
+OBJS += WdbeMtpPlhfpgaAximmcohostif_Easy_v1_0.o WdbeMtpPlhfpgaCohostif_Easy_v1_0.o WdbeMtpPlhfpgaCohostif_v1_0.o WdbeMtpPlhfpgaCrcspec_v2_0.o WdbeMtpPlhfpgaCrcspec_v3_0.o WdbeMtpPlhfpgaFsmtrack_Easy_v1_0.o WdbeMtpPlhfpgaGptrack_Easy_v1_0.o WdbeMtpPlhfpgaHostif_Easy_v1_0.o WdbeMtpPlhfpgaHostif_v1_0.o WdbeMtpPlhfpgaIdent_Easy_v1_0.o SqkWdbeMtpPlhfpga.o
 
 LIB = libwdbemtpplhfpga
 

@@ -53,9 +53,8 @@ PnlWdbePrcRef1NVariable::ContInf::ContInf(
 			const uint numFCsiQst
 		) :
 			Block()
+			, numFCsiQst(numFCsiQst)
 		{
-	this->numFCsiQst = numFCsiQst;
-
 	mask = {NUMFCSIQST};
 };
 
@@ -114,9 +113,8 @@ PnlWdbePrcRef1NVariable::StatApp::StatApp(
 			const uint ixWdbeVExpstate
 		) :
 			Block()
+			, ixWdbeVExpstate(ixWdbeVExpstate)
 		{
-	this->ixWdbeVExpstate = ixWdbeVExpstate;
-
 	mask = {IXWDBEVEXPSTATE};
 };
 
@@ -188,17 +186,16 @@ PnlWdbePrcRef1NVariable::StatShr::StatShr(
 			, const bool ButDeleteActive
 		) :
 			Block()
+			, ButUpAvail(ButUpAvail)
+			, ButUpActive(ButUpActive)
+			, ButDownAvail(ButDownAvail)
+			, ButDownActive(ButDownActive)
+			, ButViewAvail(ButViewAvail)
+			, ButViewActive(ButViewActive)
+			, ButNewAvail(ButNewAvail)
+			, ButDeleteAvail(ButDeleteAvail)
+			, ButDeleteActive(ButDeleteActive)
 		{
-	this->ButUpAvail = ButUpAvail;
-	this->ButUpActive = ButUpActive;
-	this->ButDownAvail = ButDownAvail;
-	this->ButDownActive = ButDownActive;
-	this->ButViewAvail = ButViewAvail;
-	this->ButViewActive = ButViewActive;
-	this->ButNewAvail = ButNewAvail;
-	this->ButDeleteAvail = ButDeleteAvail;
-	this->ButDeleteActive = ButDeleteActive;
-
 	mask = {BUTUPAVAIL, BUTUPACTIVE, BUTDOWNAVAIL, BUTDOWNACTIVE, BUTVIEWAVAIL, BUTVIEWACTIVE, BUTNEWAVAIL, BUTDELETEAVAIL, BUTDELETEACTIVE};
 };
 
@@ -273,9 +270,8 @@ PnlWdbePrcRef1NVariable::StgIac::StgIac(
 			const uint TcoRefWidth
 		) :
 			Block()
+			, TcoRefWidth(TcoRefWidth)
 		{
-	this->TcoRefWidth = TcoRefWidth;
-
 	mask = {TCOREFWIDTH};
 };
 
@@ -356,15 +352,14 @@ PnlWdbePrcRef1NVariable::Tag::Tag(
 			, const string& TcoRef
 		) :
 			Block()
+			, Cpt(Cpt)
+			, TxtRecord1(TxtRecord1)
+			, TxtRecord2(TxtRecord2)
+			, Trs(Trs)
+			, TxtShowing1(TxtShowing1)
+			, TxtShowing2(TxtShowing2)
+			, TcoRef(TcoRef)
 		{
-	this->Cpt = Cpt;
-	this->TxtRecord1 = TxtRecord1;
-	this->TxtRecord2 = TxtRecord2;
-	this->Trs = Trs;
-	this->TxtShowing1 = TxtShowing1;
-	this->TxtShowing2 = TxtShowing2;
-	this->TcoRef = TcoRef;
-
 	mask = {CPT, TXTRECORD1, TXTRECORD2, TRS, TXTSHOWING1, TXTSHOWING2, TCOREF};
 };
 
@@ -450,11 +445,11 @@ PnlWdbePrcRef1NVariable::DpchAppDo::DpchAppDo(
 			, const set<uint>& mask
 		) :
 			DpchAppWdbe(VecWdbeVDpch::DPCHAPPWDBEPRCREF1NVARIABLEDO, scrJref)
+			, ixVDo(ixVDo)
 		{
 	if (find(mask, ALL)) this->mask = {SCRJREF, IXVDO};
 	else this->mask = mask;
 
-	this->ixVDo = ixVDo;
 };
 
 string PnlWdbePrcRef1NVariable::DpchAppDo::getSrefsMask() {

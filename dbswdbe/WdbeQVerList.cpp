@@ -36,25 +36,26 @@ WdbeQVerList::WdbeQVerList(
 			, const uint ixVState
 			, const string srefIxVState
 			, const string titIxVState
-		) {
-	this->qref = qref;
-	this->jref = jref;
-	this->jnum = jnum;
-	this->ref = ref;
-	this->grp = grp;
-	this->stubGrp = stubGrp;
-	this->own = own;
-	this->stubOwn = stubOwn;
-	this->prjRefWdbeMProject = prjRefWdbeMProject;
-	this->stubPrjRefWdbeMProject = stubPrjRefWdbeMProject;
-	this->Major = Major;
-	this->Minor = Minor;
-	this->Sub = Sub;
-	this->bvrRefWdbeMVersion = bvrRefWdbeMVersion;
-	this->stubBvrRefWdbeMVersion = stubBvrRefWdbeMVersion;
-	this->ixVState = ixVState;
-	this->srefIxVState = srefIxVState;
-	this->titIxVState = titIxVState;
+		) :
+			qref(qref)
+			, jref(jref)
+			, jnum(jnum)
+			, ref(ref)
+			, grp(grp)
+			, stubGrp(stubGrp)
+			, own(own)
+			, stubOwn(stubOwn)
+			, prjRefWdbeMProject(prjRefWdbeMProject)
+			, stubPrjRefWdbeMProject(stubPrjRefWdbeMProject)
+			, Major(Major)
+			, Minor(Minor)
+			, Sub(Sub)
+			, bvrRefWdbeMVersion(bvrRefWdbeMVersion)
+			, stubBvrRefWdbeMVersion(stubBvrRefWdbeMVersion)
+			, ixVState(ixVState)
+			, srefIxVState(srefIxVState)
+			, titIxVState(titIxVState)
+		{
 };
 
 void WdbeQVerList::writeJSON(

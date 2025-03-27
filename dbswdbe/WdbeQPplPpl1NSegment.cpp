@@ -24,13 +24,14 @@ WdbeQPplPpl1NSegment::WdbeQPplPpl1NSegment(
 			, const ubigint ref
 			, const string stubRef
 			, const uint pplNum
-		) {
-	this->qref = qref;
-	this->jref = jref;
-	this->jnum = jnum;
-	this->ref = ref;
-	this->stubRef = stubRef;
-	this->pplNum = pplNum;
+		) :
+			qref(qref)
+			, jref(jref)
+			, jnum(jnum)
+			, ref(ref)
+			, stubRef(stubRef)
+			, pplNum(pplNum)
+		{
 };
 
 void WdbeQPplPpl1NSegment::writeJSON(

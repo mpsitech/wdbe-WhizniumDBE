@@ -47,9 +47,8 @@ PnlWdbeUsgAAccess::ContInf::ContInf(
 			const uint numFCsiQst
 		) :
 			Block()
+			, numFCsiQst(numFCsiQst)
 		{
-	this->numFCsiQst = numFCsiQst;
-
 	mask = {NUMFCSIQST};
 };
 
@@ -149,13 +148,12 @@ PnlWdbeUsgAAccess::StatShr::StatShr(
 			, const bool ButDeleteActive
 		) :
 			Block()
+			, ButNewAvail(ButNewAvail)
+			, ButDuplicateAvail(ButDuplicateAvail)
+			, ButDuplicateActive(ButDuplicateActive)
+			, ButDeleteAvail(ButDeleteAvail)
+			, ButDeleteActive(ButDeleteActive)
 		{
-	this->ButNewAvail = ButNewAvail;
-	this->ButDuplicateAvail = ButDuplicateAvail;
-	this->ButDuplicateActive = ButDuplicateActive;
-	this->ButDeleteAvail = ButDeleteAvail;
-	this->ButDeleteActive = ButDeleteActive;
-
 	mask = {BUTNEWAVAIL, BUTDUPLICATEAVAIL, BUTDUPLICATEACTIVE, BUTDELETEAVAIL, BUTDELETEACTIVE};
 };
 
@@ -232,10 +230,10 @@ PnlWdbeUsgAAccess::StgIac::StgIac(
 			, const uint TcoAccWidth
 		) :
 			Block()
+			, TcoFegWidth(TcoFegWidth)
+			, TcoFeaWidth(TcoFeaWidth)
+			, TcoAccWidth(TcoAccWidth)
 		{
-	this->TcoFegWidth = TcoFegWidth;
-	this->TcoFeaWidth = TcoFeaWidth;
-	this->TcoAccWidth = TcoAccWidth;
 	mask = {TCOFEGWIDTH, TCOFEAWIDTH, TCOACCWIDTH};
 };
 

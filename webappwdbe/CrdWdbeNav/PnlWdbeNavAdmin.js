@@ -52,6 +52,7 @@ function initBD(bNotD) {
 
 	// IP initBD --- BEGIN
 	initCpt(hdrdoc, "Cpt", retrieveTi(srcdoc, "TagWdbeNavAdmin", "Cpt"));
+	initCpt(contcontdoc, "CptPrf", retrieveTi(srcdoc, "TagWdbeNavAdmin", "CptPrf"));
 	// IP initBD --- END
 
 	refreshBD(bNotD);
@@ -75,7 +76,7 @@ function refreshA() {
 function refreshBD(bNotD) {
 	if (!contcontdoc) return;
 
-	var height = 394; // full cont height
+	var height = 419; // full cont height
 
 	// IP refreshBD.vars --- BEGIN
 	var LstUsgAlt = (retrieveSi(srcdoc, "StatAppWdbeNavAdmin", "LstUsgAlt") == "true");
@@ -97,6 +98,8 @@ function refreshBD(bNotD) {
 	var LstFilAvail = (retrieveSi(srcdoc, "StatShrWdbeNavAdmin", "LstFilAvail") == "true");
 	var ButFilViewAvail = !LstFilAlt;
 	var ButFilViewActive = (retrieveSi(srcdoc, "StatShrWdbeNavAdmin", "ButFilViewActive") == "true");
+
+	var ButPrfNewcrdAvail = (retrieveSi(srcdoc, "StatShrWdbeNavAdmin", "ButPrfNewcrdAvail") == "true");
 
 	var mytd, first;
 	// IP refreshBD.vars --- END
@@ -318,6 +321,23 @@ function refreshBD(bNotD) {
 
 	} else setCtlAvail(contcontdoc, "Fil2", false, 0);
 
+	height -= setCtlAvail(contcontdoc, "Prf", ButPrfNewcrdAvail, 25);
+	if (ButPrfNewcrdAvail) {
+		if ((ButPrfNewcrdAvail == !contcontdoc.getElementById("ButPrfNewcrd"))) {
+			mytd = contcontdoc.getElementById("dynPrf");
+			clearElem(mytd);
+
+			first = true;
+
+			if (ButPrfNewcrdAvail) {
+				if (first) first = false;
+				else mytd.appendChild(contcontdoc.createTextNode("\u00a0"));
+				mytd.appendChild(makeImgBut(contcontdoc, "ButPrfNewcrd", "icon/newcrd"));
+			};
+		};
+
+	};
+
 	// IP refreshBD --- END
 
 	getCrdwnd().changeHeight("Admin", height+31);
@@ -511,6 +531,7 @@ function changeLstNumFirstdisp(lstdoc, ctlsref, ncol, multsel, numFirstdisp, dNu
 function mergeDpchEngData(dom) {
 	var mask = [];
 
+	// IP mergeDpchEngData --- BEGIN
 	if (updateSrcblock(dom, "DpchEngWdbeNavAdminData", "ContIacWdbeNavAdmin", srcdoc)) mask.push("contiac");
 	if (updateSrcblock(dom, "DpchEngWdbeNavAdminData", "FeedFLstFil", srcdoc)) mask.push("feedFLstFil");
 	if (updateSrcblock(dom, "DpchEngWdbeNavAdminData", "FeedFLstPrs", srcdoc)) mask.push("feedFLstPrs");
@@ -519,6 +540,7 @@ function mergeDpchEngData(dom) {
 	if (updateSrcblock(dom, "DpchEngWdbeNavAdminData", "StatAppWdbeNavAdmin", srcdoc)) mask.push("statapp");
 	if (updateSrcblock(dom, "DpchEngWdbeNavAdminData", "StatShrWdbeNavAdmin", srcdoc)) mask.push("statshr");
 	if (updateSrcblock(dom, "DpchEngWdbeNavAdminData", "TagWdbeNavAdmin", srcdoc)) mask.push("tag");
+	// IP mergeDpchEngData --- END
 
 	return mask;
 };

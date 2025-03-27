@@ -22,13 +22,13 @@ WdbeJAVKeylistKey::WdbeJAVKeylistKey(
 			, const uint x1IxWdbeVLocale
 			, const string Title
 			, const string Comment
-		) {
-
-	this->ref = ref;
-	this->refWdbeAVKeylistKey = refWdbeAVKeylistKey;
-	this->x1IxWdbeVLocale = x1IxWdbeVLocale;
-	this->Title = Title;
-	this->Comment = Comment;
+		) :
+			ref(ref)
+			, refWdbeAVKeylistKey(refWdbeAVKeylistKey)
+			, x1IxWdbeVLocale(x1IxWdbeVLocale)
+			, Title(Title)
+			, Comment(Comment)
+		{
 };
 
 bool WdbeJAVKeylistKey::operator==(

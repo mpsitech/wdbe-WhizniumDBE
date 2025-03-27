@@ -485,10 +485,10 @@ private:
 
 	void handleDpchRetWdbePrctreeMerge(DbsWdbe* dbswdbe, DpchRetWdbePrctreeMerge* dpchret);
 
+	void handleTimerInSgeUpkidle(DbsWdbe* dbswdbe, const std::string& sref);
 	void handleTimerInSgeCreidle(DbsWdbe* dbswdbe, const std::string& sref);
 	void handleTimerWithSrefMonInSgeCreate(DbsWdbe* dbswdbe);
 	void handleTimerWithSrefMonInSgeWrite(DbsWdbe* dbswdbe);
-	void handleTimerInSgeUpkidle(DbsWdbe* dbswdbe, const std::string& sref);
 
 private:
 	void changeStage(DbsWdbe* dbswdbe, Sbecore::uint _ixVSge, DpchEngWdbe** dpcheng = NULL);

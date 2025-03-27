@@ -299,8 +299,8 @@ void DlgWdbeRlsFinreptr::handleRequest(
 
 	} else if (req->ixVBasetype == ReqWdbe::VecVBasetype::TIMER) {
 		if (ixVSge == VecVSge::FINIDLE) handleTimerInSgeFinidle(dbswdbe, req->sref);
-		else if ((req->sref == "mon") && (ixVSge == VecVSge::PUSHGIT)) handleTimerWithSrefMonInSgePushgit(dbswdbe);
 		else if (ixVSge == VecVSge::PSGIDLE) handleTimerInSgePsgidle(dbswdbe, req->sref);
+		else if ((req->sref == "mon") && (ixVSge == VecVSge::PUSHGIT)) handleTimerWithSrefMonInSgePushgit(dbswdbe);
 	};
 };
 
@@ -397,18 +397,18 @@ void DlgWdbeRlsFinreptr::handleTimerInSgeFinidle(
 	changeStage(dbswdbe, nextIxVSgeSuccess);
 };
 
-void DlgWdbeRlsFinreptr::handleTimerWithSrefMonInSgePushgit(
-			DbsWdbe* dbswdbe
-		) {
-	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
-	refreshWithDpchEng(dbswdbe); // IP handleTimerWithSrefMonInSgePushgit --- ILINE
-};
-
 void DlgWdbeRlsFinreptr::handleTimerInSgePsgidle(
 			DbsWdbe* dbswdbe
 			, const string& sref
 		) {
 	changeStage(dbswdbe, nextIxVSgeSuccess);
+};
+
+void DlgWdbeRlsFinreptr::handleTimerWithSrefMonInSgePushgit(
+			DbsWdbe* dbswdbe
+		) {
+	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
+	refreshWithDpchEng(dbswdbe); // IP handleTimerWithSrefMonInSgePushgit --- ILINE
 };
 
 void DlgWdbeRlsFinreptr::changeStage(

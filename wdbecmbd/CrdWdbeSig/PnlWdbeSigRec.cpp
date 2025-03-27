@@ -39,8 +39,8 @@ PnlWdbeSigRec::PnlWdbeSigRec(
 	jref = xchg->addJob(dbswdbe, this, jrefSup);
 
 	pnlmncdc = NULL;
-	pnldetail = NULL;
 	pnlsrc1nsensitivity = NULL;
+	pnldetail = NULL;
 
 	// IP constructor.cust1 --- INSERT
 

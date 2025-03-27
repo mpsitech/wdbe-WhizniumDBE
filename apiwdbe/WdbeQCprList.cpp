@@ -27,16 +27,17 @@ WdbeQCprList::WdbeQCprList(
 			, const string titIxVBasetype
 			, const string stubRefWdbeMCoreversion
 			, const string Giturl
-		) {
-	this->jnum = jnum;
-	this->stubGrp = stubGrp;
-	this->stubOwn = stubOwn;
-	this->sref = sref;
-	this->Title = Title;
-	this->srefIxVBasetype = srefIxVBasetype;
-	this->titIxVBasetype = titIxVBasetype;
-	this->stubRefWdbeMCoreversion = stubRefWdbeMCoreversion;
-	this->Giturl = Giturl;
+		) :
+			jnum(jnum)
+			, stubGrp(stubGrp)
+			, stubOwn(stubOwn)
+			, sref(sref)
+			, Title(Title)
+			, srefIxVBasetype(srefIxVBasetype)
+			, titIxVBasetype(titIxVBasetype)
+			, stubRefWdbeMCoreversion(stubRefWdbeMCoreversion)
+			, Giturl(Giturl)
+		{
 };
 
 bool WdbeQCprList::readXML(

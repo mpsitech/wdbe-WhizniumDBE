@@ -191,9 +191,8 @@ DlgWdbeCvrDetcd::ContIac::ContIac(
 			const uint numFDse
 		) :
 			Block()
+			, numFDse(numFDse)
 		{
-	this->numFDse = numFDse;
-
 	mask = {NUMFDSE};
 };
 
@@ -298,9 +297,8 @@ DlgWdbeCvrDetcd::ContInf::ContInf(
 			const uint numFSge
 		) :
 			Block()
+			, numFSge(numFSge)
 		{
-	this->numFSge = numFSge;
-
 	mask = {NUMFSGE};
 };
 
@@ -363,9 +361,8 @@ DlgWdbeCvrDetcd::ContInfImp::ContInfImp(
 			const string& TxtPrg
 		) :
 			Block()
+			, TxtPrg(TxtPrg)
 		{
-	this->TxtPrg = TxtPrg;
-
 	mask = {TXTPRG};
 };
 
@@ -428,9 +425,8 @@ DlgWdbeCvrDetcd::ContInfLfi::ContInfLfi(
 			const string& Dld
 		) :
 			Block()
+			, Dld(Dld)
 		{
-	this->Dld = Dld;
-
 	mask = {DLD};
 };
 
@@ -493,9 +489,8 @@ DlgWdbeCvrDetcd::ContInfPpr::ContInfPpr(
 			const string& TxtPrg
 		) :
 			Block()
+			, TxtPrg(TxtPrg)
 		{
-	this->TxtPrg = TxtPrg;
-
 	mask = {TXTPRG};
 };
 
@@ -595,9 +590,8 @@ DlgWdbeCvrDetcd::StatShr::StatShr(
 			const bool ButDneActive
 		) :
 			Block()
+			, ButDneActive(ButDneActive)
 		{
-	this->ButDneActive = ButDneActive;
-
 	mask = {BUTDNEACTIVE};
 };
 
@@ -660,9 +654,8 @@ DlgWdbeCvrDetcd::StatShrIfi::StatShrIfi(
 			const bool UldActive
 		) :
 			Block()
+			, UldActive(UldActive)
 		{
-	this->UldActive = UldActive;
-
 	mask = {ULDACTIVE};
 };
 
@@ -726,10 +719,9 @@ DlgWdbeCvrDetcd::StatShrImp::StatShrImp(
 			, const bool ButStoActive
 		) :
 			Block()
+			, ButRunActive(ButRunActive)
+			, ButStoActive(ButStoActive)
 		{
-	this->ButRunActive = ButRunActive;
-	this->ButStoActive = ButStoActive;
-
 	mask = {BUTRUNACTIVE, BUTSTOACTIVE};
 };
 
@@ -795,9 +787,8 @@ DlgWdbeCvrDetcd::StatShrLfi::StatShrLfi(
 			const bool DldActive
 		) :
 			Block()
+			, DldActive(DldActive)
 		{
-	this->DldActive = DldActive;
-
 	mask = {DLDACTIVE};
 };
 
@@ -861,10 +852,9 @@ DlgWdbeCvrDetcd::StatShrPpr::StatShrPpr(
 			, const bool ButStoActive
 		) :
 			Block()
+			, ButRunActive(ButRunActive)
+			, ButStoActive(ButStoActive)
 		{
-	this->ButRunActive = ButRunActive;
-	this->ButStoActive = ButStoActive;
-
 	mask = {BUTRUNACTIVE, BUTSTOACTIVE};
 };
 

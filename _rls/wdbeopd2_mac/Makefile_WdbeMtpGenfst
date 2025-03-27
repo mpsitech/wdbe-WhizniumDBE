@@ -2,7 +2,7 @@
 # make file for operation pack WdbeMtpGenfst, release wdbeopd2_mac
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 7 Feb 2024
+# date created: 3 Mar 2025
 # IP header --- ABOVE
 
 include ../Makefile.inc
@@ -17,7 +17,7 @@ INCPATH = -I$(BUILDROOT)/dbswdbe -I$(BUILDROOT)/wdbeopd2/VecWdbe -I$(BUILDROOT)/
 INCPATH += -I${WHIZSDKROOT}/build -I/opt/homebrew/include -I/opt/homebrew/opt/curl/include -I/opt/homebrew/opt/libmicrohttpd/include -I/opt/homebrew/opt/libxml2/include -I/usr/local/mysql/include
 
 OBJS = WdbeMtpGenfst_blks.o WdbeMtpGenfst.o
-OBJS += WdbeMtpGenfstDdrmux_Easy_v1_0.o WdbeMtpGenfstFsmtrack_Easy_v1_0.o WdbeMtpGenfstGpio_Easy_v1_0.o WdbeMtpGenfstGptrack_Easy_v1_0.o WdbeMtpGenfstTkclksrc_v1_0.o WdbeMtpGenfstUarthostif_Easy_v2_0_Mcu.o WdbeMtpGenfstUsbhostif_Easy_v2_0_Mcu.o
+OBJS += WdbeMtpGenfstDdrmux_Easy_v1_0.o WdbeMtpGenfstFsmtrack_Easy_v1_0.o WdbeMtpGenfstGpio_Easy_v1_0.o WdbeMtpGenfstGptrack_Easy_v1_0.o WdbeMtpGenfstHostif_Easy_v1_0.o WdbeMtpGenfstTkclksrc_Easy_v1_0.o WdbeMtpGenfstTkclksrc_v1_0.o WdbeMtpGenfstUarthostif_Easy_v2_0_Mcu.o WdbeMtpGenfstUsbhostif_Easy_v2_0_Mcu.o
 
 LIB = libwdbemtpgenfst
 

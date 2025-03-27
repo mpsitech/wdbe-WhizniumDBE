@@ -45,8 +45,8 @@ PnlWdbeFstRec::PnlWdbeFstRec(
 
 	// IP constructor.cust2 --- INSERT
 
-	xchg->addClstn(VecWdbeVCall::CALLWDBEFST_CLUEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBEFST_FSMEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBEFST_CLUEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -247,10 +247,10 @@ void PnlWdbeFstRec::handleCall(
 		) {
 	if (call->ixVCall == VecWdbeVCall::CALLWDBEFSTUPD_REFEQ) {
 		call->abort = handleCallWdbeFstUpd_refEq(dbswdbe, call->jref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEFST_CLUEQ) {
-		call->abort = handleCallWdbeFst_cluEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEFST_FSMEQ) {
 		call->abort = handleCallWdbeFst_fsmEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEFST_CLUEQ) {
+		call->abort = handleCallWdbeFst_cluEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
 	};
 };
 
@@ -263,17 +263,6 @@ bool PnlWdbeFstRec::handleCallWdbeFstUpd_refEq(
 	return retval;
 };
 
-bool PnlWdbeFstRec::handleCallWdbeFst_cluEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-			, const ubigint refInv
-			, bool& boolvalRet
-		) {
-	bool retval = false;
-	boolvalRet = (recFst.refWdbeCFsmstate == refInv); // IP handleCallWdbeFst_cluEq --- LINE
-	return retval;
-};
-
 bool PnlWdbeFstRec::handleCallWdbeFst_fsmEq(
 			DbsWdbe* dbswdbe
 			, const ubigint jrefTrig
@@ -282,5 +271,16 @@ bool PnlWdbeFstRec::handleCallWdbeFst_fsmEq(
 		) {
 	bool retval = false;
 	boolvalRet = (recFst.fsmRefWdbeMFsm == refInv); // IP handleCallWdbeFst_fsmEq --- LINE
+	return retval;
+};
+
+bool PnlWdbeFstRec::handleCallWdbeFst_cluEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+			, const ubigint refInv
+			, bool& boolvalRet
+		) {
+	bool retval = false;
+	boolvalRet = (recFst.refWdbeCFsmstate == refInv); // IP handleCallWdbeFst_cluEq --- LINE
 	return retval;
 };

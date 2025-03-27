@@ -30,19 +30,19 @@ WdbeMCommand::WdbeMCommand(
 			, const ubigint rvrRefWdbeMSignal
 			, const ubigint rerRefWdbeMSignal
 			, const string Comment
-		) {
-
-	this->ref = ref;
-	this->refIxVTbl = refIxVTbl;
-	this->refUref = refUref;
-	this->refNum = refNum;
-	this->sref = sref;
-	this->Fullsref = Fullsref;
-	this->ixVRettype = ixVRettype;
-	this->ivrRefWdbeMSignal = ivrRefWdbeMSignal;
-	this->rvrRefWdbeMSignal = rvrRefWdbeMSignal;
-	this->rerRefWdbeMSignal = rerRefWdbeMSignal;
-	this->Comment = Comment;
+		) :
+			ref(ref)
+			, refIxVTbl(refIxVTbl)
+			, refUref(refUref)
+			, refNum(refNum)
+			, sref(sref)
+			, Fullsref(Fullsref)
+			, ixVRettype(ixVRettype)
+			, ivrRefWdbeMSignal(ivrRefWdbeMSignal)
+			, rvrRefWdbeMSignal(rvrRefWdbeMSignal)
+			, rerRefWdbeMSignal(rerRefWdbeMSignal)
+			, Comment(Comment)
+		{
 };
 
 bool WdbeMCommand::operator==(

@@ -47,9 +47,8 @@ PnlWdbeSigMNCdc::ContInf::ContInf(
 			const uint numFCsiQst
 		) :
 			Block()
+			, numFCsiQst(numFCsiQst)
 		{
-	this->numFCsiQst = numFCsiQst;
-
 	mask = {NUMFCSIQST};
 };
 
@@ -149,13 +148,12 @@ PnlWdbeSigMNCdc::StatShr::StatShr(
 			, const bool ButSubActive
 		) :
 			Block()
+			, ButViewAvail(ButViewAvail)
+			, ButViewActive(ButViewActive)
+			, ButAddAvail(ButAddAvail)
+			, ButSubAvail(ButSubAvail)
+			, ButSubActive(ButSubActive)
 		{
-	this->ButViewAvail = ButViewAvail;
-	this->ButViewActive = ButViewActive;
-	this->ButAddAvail = ButAddAvail;
-	this->ButSubAvail = ButSubAvail;
-	this->ButSubActive = ButSubActive;
-
 	mask = {BUTVIEWAVAIL, BUTVIEWACTIVE, BUTADDAVAIL, BUTSUBAVAIL, BUTSUBACTIVE};
 };
 
@@ -231,9 +229,9 @@ PnlWdbeSigMNCdc::StgIac::StgIac(
 			, const uint TcoDirWidth
 		) :
 			Block()
+			, TcoMrefWidth(TcoMrefWidth)
+			, TcoDirWidth(TcoDirWidth)
 		{
-	this->TcoMrefWidth = TcoMrefWidth;
-	this->TcoDirWidth = TcoDirWidth;
 	mask = {TCOMREFWIDTH, TCODIRWIDTH};
 };
 
@@ -349,7 +347,7 @@ void PnlWdbeSigMNCdc::Tag::writeJSON(
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
 	if (ixWdbeVLocale == VecWdbeVLocale::ENUS) {
-		me["Cpt"] = "Invoked commands";
+		me["Cpt"] = "Clock domain crossings";
 		me["TcoMref"] = "Clock domain crossing";
 		me["TcoDir"] = "Direction";
 	};
@@ -374,7 +372,7 @@ void PnlWdbeSigMNCdc::Tag::writeXML(
 
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
 		if (ixWdbeVLocale == VecWdbeVLocale::ENUS) {
-			writeStringAttr(wr, itemtag, "sref", "Cpt", "Invoked commands");
+			writeStringAttr(wr, itemtag, "sref", "Cpt", "Clock domain crossings");
 			writeStringAttr(wr, itemtag, "sref", "TcoMref", "Clock domain crossing");
 			writeStringAttr(wr, itemtag, "sref", "TcoDir", "Direction");
 		};

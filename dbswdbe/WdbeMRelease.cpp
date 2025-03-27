@@ -23,14 +23,14 @@ WdbeMRelease::WdbeMRelease(
 			, const string sref
 			, const string srefsKOption
 			, const string Comment
-		) {
-
-	this->ref = ref;
-	this->refWdbeMComponent = refWdbeMComponent;
-	this->refWdbeMMachine = refWdbeMMachine;
-	this->sref = sref;
-	this->srefsKOption = srefsKOption;
-	this->Comment = Comment;
+		) :
+			ref(ref)
+			, refWdbeMComponent(refWdbeMComponent)
+			, refWdbeMMachine(refWdbeMMachine)
+			, sref(sref)
+			, srefsKOption(srefsKOption)
+			, Comment(Comment)
+		{
 };
 
 bool WdbeMRelease::operator==(

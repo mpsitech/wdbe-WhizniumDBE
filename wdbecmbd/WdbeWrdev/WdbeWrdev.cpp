@@ -32,6 +32,7 @@ void WdbeWrdev::writeVecH(
 			, WdbeMVector* vec
 			, WdbeMUnit* unt
 			, WdbeMController* ctr
+			, WdbeMCommand* cmd
 			, const bool subclass
 			, const unsigned int subil
 		) {
@@ -46,7 +47,7 @@ void WdbeWrdev::writeVecH(
 
 	string indent, pre;
 
-	analyzeVec(dbswdbe, vec, unt, ctr, subclass, vits, supsref, subsref, lin, tix, ns, notit, cmt, appfed, filfed, ixtype, ixvar, icsvar, clsnstype);
+	analyzeVec(dbswdbe, vec, unt, ctr, cmd, subclass, vits, supsref, subsref, lin, tix, ns, notit, cmt, appfed, filfed, ixtype, ixvar, icsvar, clsnstype);
 
 	if (subclass) for (unsigned int i = 0; i < subil; i++) indent += "\t";
 
@@ -121,6 +122,7 @@ void WdbeWrdev::writeVecCpp(
 			, WdbeMVector* vec
 			, WdbeMUnit* unt
 			, WdbeMController* ctr
+			, WdbeMCommand* cmd
 			, const bool subclass
 		) {
 	ListWdbeMVectoritem vits;
@@ -132,7 +134,7 @@ void WdbeWrdev::writeVecCpp(
 
 	WdbeMVectoritem* vit = NULL;
 
-	analyzeVec(dbswdbe, vec, unt, ctr, subclass, vits, supsref, subsref, lin, tix, ns, notit, cmt, appfed, filfed, ixtype, ixvar, icsvar, clsnstype);
+	analyzeVec(dbswdbe, vec, unt, ctr, cmd, subclass, vits, supsref, subsref, lin, tix, ns, notit, cmt, appfed, filfed, ixtype, ixvar, icsvar, clsnstype);
 
 	outfile << "/******************************************************************************" << endl;
 	outfile << " " << clsnstype << " ";
@@ -154,14 +156,12 @@ void WdbeWrdev::writeVecCpp(
 
 		for (unsigned int i = 0; i < vits.nodes.size(); i++) {
 			vit = vits.nodes[i];
-
-			outfile << "\t";
-			if (i != 0) outfile << "else ";
-			outfile << "if (s == \"" << StrMod::lc(vit->sref) << "\") return " << getVitConst(vit->sref, tix) << ";" << endl;
+			outfile << "\tif (s == \"" << StrMod::lc(vit->sref) << "\") return " << getVitConst(vit->sref, tix) << ";" << endl;
 		};
 		outfile << endl;
 
-		outfile << "\treturn(0xFF);" << endl;
+		if (tix) outfile << "\treturn(0xFF);" << endl;
+		else outfile << "\treturn(0);" << endl;
 		outfile << "};" << endl;
 		outfile << endl;
 
@@ -224,10 +224,7 @@ void WdbeWrdev::writeVecCpp(
 
 		for (unsigned int i = 0; i < vits.nodes.size(); i++) {
 			vit = vits.nodes[i];
-
-			outfile << "\t";
-			if (i != 0) outfile << "else ";
-			outfile << "if (" << ixvar << " == " << getVitConst(vit->sref, tix) << ") return(\"" << vit->sref << "\");" << endl;
+			outfile << "\tif (" << ixvar << " == " << getVitConst(vit->sref, tix) << ") return(\"" << vit->sref << "\");" << endl;
 		};
 		outfile << endl;
 
@@ -378,6 +375,7 @@ void WdbeWrdev::analyzeVec(
 			, WdbeMVector* vec
 			, WdbeMUnit* unt
 			, WdbeMController* ctr
+			, WdbeMCommand* cmd
 			, const bool subclass
 			, ListWdbeMVectoritem& vits
 			, string& supsref
@@ -396,7 +394,7 @@ void WdbeWrdev::analyzeVec(
 		) {
 	dbswdbe->tblwdbemvectoritem->loadRstByVec(vec->ref, false, vits);
 
-	if (subclass) getVecSupsubsref(vec, unt, ctr, supsref, subsref);
+	if (subclass) getVecSupsubsref(vec, unt, ctr, cmd, supsref, subsref);
 
 	lin = ((vec->ixVBasetype == VecWdbeVMVectorBasetype::IXLIN) || (vec->ixVBasetype == VecWdbeVMVectorBasetype::TIXLIN));
 	tix = ((vec->ixVBasetype == VecWdbeVMVectorBasetype::TIXLIN) || (vec->ixVBasetype == VecWdbeVMVectorBasetype::TIXOR));
@@ -425,6 +423,7 @@ void WdbeWrdev::getVecSupsubsref(
 			WdbeMVector* vec
 			, WdbeMUnit* unt
 			, WdbeMController* ctr
+			, WdbeMCommand* cmd
 			, string& supsref
 			, string& subsref
 		) {
@@ -434,7 +433,14 @@ void WdbeWrdev::getVecSupsubsref(
 	supsref = "";
 	subsref = vec->sref;
 
-	if (ctr) {
+	if (cmd) {
+		// ex. VecVIdhwIcm2RoicBiasGetInvpar -> CmdIdhwIcm2RoicBias::VecVGetInvpar
+		supsref = cmd->Fullsref;
+
+		ptr = subsref.find(supsref.substr(3));
+		if (ptr != string::npos) subsref = subsref.substr(0, ptr) + subsref.substr(ptr + supsref.length()-3);
+
+	} else if (ctr) {
 		// ex. VecVIdhwIcm2RoicBias -> CtrIdhwIcm2Roic::VecVBias
 		supsref = ctr->Fullsref;
 
@@ -458,11 +464,14 @@ string WdbeWrdev::getVitConst(
 void WdbeWrdev::writeSpeccmdH(
 			DbsWdbe* dbswdbe
 			, fstream& outfile
+			, const bool Easy
 			, WdbeMCommand* cmd
+			, ListWdbeAMCommandInvpar& ipas
 			, ListWdbeAMCommandRetpar& rpas
 			, const string& supsref
 			, const string& subsref
 		) {
+	WdbeMVector* vec = NULL;
 	WdbeAMCommandRetpar* rpa = NULL;
 
 	outfile << "\t/**" << endl;
@@ -471,28 +480,46 @@ void WdbeWrdev::writeSpeccmdH(
 	outfile << "\tclass " << subsref << " : public Dbecore::Cmd {" << endl;
 	outfile << endl;
 
-	outfile << "\tpublic:" << endl;
-	outfile << "\t\t" << subsref << "();" << endl;
-	outfile << endl;
-	
-	outfile << "\tpublic:" << endl;
-	outfile << "\t\tvoid (*returnSpeccallback)(Dbecore::Cmd* cmd, void* arg";
-	for (unsigned int i = 0; i < rpas.nodes.size(); i++) {
-		rpa = rpas.nodes[i];
-		wrIparpa(outfile, rpa->sref, rpa->ixWdbeVPartype, false, false, true, true, false, false);
+	if ((ipas.nodes.size() > 0) || (rpas.nodes.size() > 0)) {
+		outfile << "\tpublic:" << endl;
+		if (ipas.nodes.size() > 0) if (dbswdbe->tblwdbemvector->loadRecBySQL("SELECT * FROM TblWdbeMVector WHERE hkIxVTbl = " + to_string(VecWdbeVMVectorHkTbl::CMD) + " AND hkUref = " + to_string(cmd->ref) + " AND sref LIKE '%Invpar'", &vec)) {
+			writeVecH(dbswdbe, outfile, vec, NULL, NULL, cmd, true, 2);
+			delete vec;
+		};
+		if (rpas.nodes.size() > 0) if (dbswdbe->tblwdbemvector->loadRecBySQL("SELECT * FROM TblWdbeMVector WHERE hkIxVTbl = " + to_string(VecWdbeVMVectorHkTbl::CMD) + " AND hkUref = " + to_string(cmd->ref) + " AND sref LIKE '%Retpar'", &vec)) {
+			writeVecH(dbswdbe, outfile, vec, NULL, NULL, cmd, true, 2);
+			delete vec;
+		};
 	};
-	outfile << ");" << endl;
-	outfile << "\t\tvoid* argReturnSpeccallback;" << endl;
-	outfile << endl;
 
 	outfile << "\tpublic:" << endl;
-	outfile << "\t\tvoid setReturnSpeccallback(void (*_returnSpeccallback)(Dbecore::Cmd* cmd, void* arg";
-	for (unsigned int i = 0; i < rpas.nodes.size(); i++) {
-		rpa = rpas.nodes[i];
-		wrIparpa(outfile, rpa->sref, rpa->ixWdbeVPartype, false, false, true, true, false, false);
+	outfile << "\t\t" << subsref << "();" << endl;
+
+	if (Easy) {
+
+	} else {
+		outfile << endl;
+
+		outfile << "\tpublic:" << endl;
+		outfile << "\t\tvoid (*returnSpeccallback)(Dbecore::Cmd* cmd, void* arg";
+		for (unsigned int i = 0; i < rpas.nodes.size(); i++) {
+			rpa = rpas.nodes[i];
+			wrIparpa(outfile, rpa->sref, rpa->ixWdbeVPartype, false, false, true, true, false, false);
+		};
+		outfile << ");" << endl;
+		outfile << "\t\tvoid* argReturnSpeccallback;" << endl;
+		outfile << endl;
+
+		outfile << "\tpublic:" << endl;
+		outfile << "\t\tvoid setReturnSpeccallback(void (*_returnSpeccallback)(Dbecore::Cmd* cmd, void* arg";
+		for (unsigned int i = 0; i < rpas.nodes.size(); i++) {
+			rpa = rpas.nodes[i];
+			wrIparpa(outfile, rpa->sref, rpa->ixWdbeVPartype, false, false, true, true, false, false);
+		};
+		outfile << "), void* _argReturnSpeccallback);" << endl;
+		outfile << "\t\tvoid returnToCallback();" << endl;
 	};
-	outfile << "), void* _argReturnSpeccallback);" << endl;
-	outfile << "\t\tvoid returnToCallback();" << endl;
+
 	outfile << "\t};" << endl;
 	outfile << endl;
 };
@@ -500,13 +527,27 @@ void WdbeWrdev::writeSpeccmdH(
 void WdbeWrdev::writeSpeccmdCpp(
 			DbsWdbe* dbswdbe
 			, fstream& outfile
+			, const bool Easy
 			, const utinyint tixCtr
 			, WdbeMCommand* cmd
+			, ListWdbeAMCommandInvpar& ipas
 			, ListWdbeAMCommandRetpar& rpas
 			, const string& supsref
 			, const string& subsref
 		) {
+	WdbeMVector* vec = NULL;
+
 	WdbeAMCommandRetpar* rpa = NULL;
+	WdbeAMCommandInvpar* ipa = NULL;
+
+	if (ipas.nodes.size() > 0) if (dbswdbe->tblwdbemvector->loadRecBySQL("SELECT * FROM TblWdbeMVector WHERE hkIxVTbl = " + to_string(VecWdbeVMVectorHkTbl::CMD) + " AND hkUref = " + to_string(cmd->ref) + " AND sref LIKE '%Invpar'", &vec)) {
+		writeVecCpp(dbswdbe, outfile, vec, NULL, NULL, cmd, true);
+		delete vec;
+	};
+	if (rpas.nodes.size() > 0) if (dbswdbe->tblwdbemvector->loadRecBySQL("SELECT * FROM TblWdbeMVector WHERE hkIxVTbl = " + to_string(VecWdbeVMVectorHkTbl::CMD) + " AND hkUref = " + to_string(cmd->ref) + " AND sref LIKE '%Retpar'", &vec)) {
+		writeVecCpp(dbswdbe, outfile, vec, NULL, NULL, cmd, true);
+		delete vec;
+	};
 
 	outfile << "/******************************************************************************" << endl;
 	outfile << " class " << supsref << "::" << subsref << endl;
@@ -514,41 +555,73 @@ void WdbeWrdev::writeSpeccmdCpp(
 	outfile << endl;
 
 	outfile << supsref << "::" << subsref << "::" << subsref << "() :" << endl;
-	outfile << "\t\t\tCmd(";
-	if (cmd->refIxVTbl == VecWdbeVMCommandRefTbl::CTR) outfile << "tixVController, VecVCommand";
-	else outfile << "VecV" << supsref.substr(3) << "Command";
-	outfile << "::" << getVitConst(cmd->sref, true) << ", Cmd::VecVRettype::" << StrMod::uc(VecWdbeVMCommandRettype::getSref(cmd->ixVRettype)) << ")" << endl;
+	outfile << "\t\t\tCmd(" << endl;
+	if (cmd->refIxVTbl == VecWdbeVMCommandRefTbl::CTR) {
+		outfile << "\t\t\t\t" << supsref << "::tixVController" << endl;
+		outfile << "\t\t\t\t, VecVCommand";
+	} else outfile << "\t\t\t\tVecV" << supsref.substr(3) << "Command";
+	outfile << "::" << getVitConst(cmd->sref, true) << endl;
+	outfile << "\t\t\t\t, Cmd::VecVRettype::" << StrMod::uc(VecWdbeVMCommandRettype::getSref(cmd->ixVRettype)) << endl;
+	outfile << "\t\t\t\t, " << ((ipas.nodes.size() > 0) ? "VecVInvpar::getIx" : "NULL") << endl;
+	outfile << "\t\t\t\t, " << ((ipas.nodes.size() > 0) ? "VecVInvpar::getSref" : "NULL") << endl;
+	outfile << "\t\t\t\t, " << ((rpas.nodes.size() > 0) ? "VecVRetpar::getIx" : "NULL") << endl;
+	outfile << "\t\t\t\t, " << ((rpas.nodes.size() > 0) ? "VecVRetpar::getSref" : "NULL") << endl;
+	outfile << "\t\t\t)" << endl;
 	outfile << "\t\t{" << endl;
-	outfile << "\treturnSpeccallback = NULL;" << endl;
-	outfile << "\targReturnSpeccallback = NULL;" << endl;
-	outfile << "};" << endl;
-	outfile << endl;
 
-	outfile << "void " << supsref << "::" << subsref << "::setReturnSpeccallback(" << endl;
-
-	outfile << "\t\t\tvoid (*_returnSpeccallback)(Cmd* cmd, void* arg";
-	for (unsigned int i = 0; i < rpas.nodes.size(); i++) {
-		rpa = rpas.nodes[i];
-		wrIparpa(outfile, rpa->sref, rpa->ixWdbeVPartype, false, false, true, false, false, false);
+	if (ipas.nodes.size() > 0) {
+		for (unsigned int i = 0; i < ipas.nodes.size(); i++) {
+			ipa = ipas.nodes[i];
+			wrAddpar(dbswdbe, outfile, ipa->sref, ipa->ixWdbeVPartype, ipa->refWdbeMVector, ipa->Length, false, false);
+		};
+		outfile << endl;
 	};
-	outfile << ")" << endl;
-	outfile << "\t\t\t, void* _argReturnSpeccallback" << endl;
-	outfile << "\t\t) {" << endl;
-	outfile << "\treturnSpeccallback = _returnSpeccallback;" << endl;
-	outfile << "\targReturnSpeccallback = _argReturnSpeccallback;" << endl;
+
+	if (rpas.nodes.size() > 0) {
+		for (unsigned int i = 0; i < rpas.nodes.size(); i++) {
+			rpa = rpas.nodes[i];
+			wrAddpar(dbswdbe, outfile, rpa->sref, rpa->ixWdbeVPartype, rpa->refWdbeMVector, rpa->Length, false, true);
+		};
+		outfile << endl;
+	};
+
+	outfile << "\tcomposeFixed();" << endl;
+
+	if (!Easy) {
+		outfile << endl;
+		outfile << "\treturnSpeccallback = NULL;" << endl;
+		outfile << "\targReturnSpeccallback = NULL;" << endl;
+	};
 	outfile << "};" << endl;
 	outfile << endl;
 
-	outfile << "void " << supsref << "::" << subsref << "::returnToCallback() {" << endl;
-	outfile << "\tif (returnCallback) returnCallback(this, argReturnCallback);" << endl;
-	outfile << "\tif (returnSpeccallback) returnSpeccallback(this, argReturnSpeccallback";
-	for (unsigned int i = 0; i < rpas.nodes.size(); i++) {
-		rpa = rpas.nodes[i];
-		writeSpeccmdCpp_getrpa(outfile, rpa);
+	if (!Easy) {
+		outfile << "void " << supsref << "::" << subsref << "::setReturnSpeccallback(" << endl;
+
+		outfile << "\t\t\tvoid (*_returnSpeccallback)(Cmd* cmd, void* arg";
+		for (unsigned int i = 0; i < rpas.nodes.size(); i++) {
+			rpa = rpas.nodes[i];
+			wrIparpa(outfile, rpa->sref, rpa->ixWdbeVPartype, false, false, true, false, false, false);
+		};
+		outfile << ")" << endl;
+		outfile << "\t\t\t, void* _argReturnSpeccallback" << endl;
+		outfile << "\t\t) {" << endl;
+		outfile << "\treturnSpeccallback = _returnSpeccallback;" << endl;
+		outfile << "\targReturnSpeccallback = _argReturnSpeccallback;" << endl;
+		outfile << "};" << endl;
+		outfile << endl;
+
+		outfile << "void " << supsref << "::" << subsref << "::returnToCallback() {" << endl;
+		outfile << "\tif (returnCallback) returnCallback(this, argReturnCallback);" << endl;
+		outfile << "\tif (returnSpeccallback) returnSpeccallback(this, argReturnSpeccallback";
+		for (unsigned int i = 0; i < rpas.nodes.size(); i++) {
+			rpa = rpas.nodes[i];
+			writeSpeccmdCpp_getrpa(outfile, rpa);
+		};
+		outfile << ");" << endl;
+		outfile << "};" << endl;
+		outfile << endl;
 	};
-	outfile << ");" << endl;
-	outfile << "};" << endl;
-	outfile << endl;
 };
 
 void WdbeWrdev::writeSpeccmdCpp_getrpa(
@@ -582,8 +655,6 @@ void WdbeWrdev::writeCmdH(
 	WdbeAMCommandRetpar* rpa = NULL;
 
 	if (Easy) {
-		outfile << "\tstatic Dbecore::Cmd* getNewCmd" << StrMod::cap(cmd->sref) << "();" << endl;
-
 		outfile << "\tvoid " << cmd->sref << "(";
 		for (unsigned int i = 0; i < ipas.nodes.size(); i++) {
 			ipa = ipas.nodes[i];
@@ -596,10 +667,7 @@ void WdbeWrdev::writeCmdH(
 		outfile << ");" << endl;
 
 	} else {
-		outfile << "\tstatic ";
-		if (rpas.nodes.size() > 0) outfile << subsref;
-		else outfile << "Dbecore::Cmd";
-		outfile << "* getNewCmd" << StrMod::cap(cmd->sref) << "(";
+		outfile << "\tstatic Cmd" << StrMod::cap(cmd->sref) << "* getNewCmd" << StrMod::cap(cmd->sref) << "(";
 		for (unsigned int i = 0; i < ipas.nodes.size(); i++) {
 			ipa = ipas.nodes[i];
 			wrIparpa(outfile, ipa->sref, ipa->ixWdbeVPartype, (i==0), false, false, true, false, false);
@@ -621,8 +689,6 @@ void WdbeWrdev::writeCmdH(
 			outfile << ");" << endl;
 		};
 	};
-
-	outfile << endl;
 };
 
 void WdbeWrdev::writeCmdCpp(
@@ -642,34 +708,6 @@ void WdbeWrdev::writeCmdCpp(
 	WdbeAMCommandRetpar* rpa = NULL;
 
 	if (Easy) {
-		outfile << "Cmd* " << supsref << "::getNewCmd" << StrMod::cap(cmd->sref) << "() {" << endl;
-
-		outfile << "\tCmd* cmd = new Cmd(";
-		if (cmd->refIxVTbl == VecWdbeVMCommandRefTbl::CTR) outfile << "tixVController, VecVCommand";
-		else outfile << "VecV" << supsref.substr(3) << "Command";
-		outfile << "::" << getVitConst(cmd->sref, true) << ", Cmd::VecVRettype::" << StrMod::uc(VecWdbeVMCommandRettype::getSref(cmd->ixVRettype)) << ");" << endl;
-		outfile << endl;
-
-		if (ipas.nodes.size() > 0) {
-			for (unsigned int i = 0; i < ipas.nodes.size(); i++) {
-				ipa = ipas.nodes[i];
-				wrAddpar(dbswdbe, outfile, ipa->sref, ipa->ixWdbeVPartype, ipa->refWdbeMVector, ipa->Length, false, false);
-			};
-			outfile << endl;
-		};
-
-		if (rpas.nodes.size() > 0) {
-			for (unsigned int i = 0; i < rpas.nodes.size(); i++) {
-				rpa = rpas.nodes[i];
-				wrAddpar(dbswdbe, outfile, rpa->sref, rpa->ixWdbeVPartype, rpa->refWdbeMVector, rpa->Length, false, true);
-			};
-			outfile << endl;
-		};
-
-		outfile << "\treturn cmd;" << endl;
-		outfile << "};" << endl;
-		outfile << endl;
-
 		outfile << "void " << supsref << "::" << cmd->sref << "(" << endl;
 		for (unsigned int i = 0; i < ipas.nodes.size(); i++) {
 			ipa = ipas.nodes[i];
@@ -681,9 +719,7 @@ void WdbeWrdev::writeCmdCpp(
 		};
 		outfile << "\t\t) {" << endl;
 
-		outfile << "\t";
-		if (cmd->refIxVTbl == VecWdbeVMCommandRefTbl::CTR) outfile << "unt->";
-		outfile << "lockAccess(\"" << supsref << "::" << cmd->sref << "\");" << endl;
+		outfile << "\tlockAccess(\"" << cmd->sref << "\");" << endl;
 		outfile << endl;
 
 		outfile << "\tCmd* cmd = cmd" << StrMod::cap(cmd->sref) << ";" << endl;
@@ -692,7 +728,7 @@ void WdbeWrdev::writeCmdCpp(
 		if (ipas.nodes.size() > 0) {
 			for (unsigned int i = 0; i < ipas.nodes.size(); i++) {
 				ipa = ipas.nodes[i];
-				writeCmdCpp_setipa(outfile, ipa);
+				writeCmdCpp_setipa(outfile, cmd, ipa);
 			};
 			outfile << endl;
 		};
@@ -701,14 +737,12 @@ void WdbeWrdev::writeCmdCpp(
 		else outfile << "\tif (unt->runCmd(cmd)) {" << endl;
 		for (unsigned int i = 0; i < rpas.nodes.size(); i++) {
 			rpa = rpas.nodes[i];
-			writeCmdCpp_getrpa(outfile, rpa);
+			writeCmdCpp_getrpa(outfile, cmd, rpa);
 		};
 		outfile << "\t} else throw DbeException(\"error running " << cmd->sref << "\");" << endl;
 		outfile << endl;
 
-		outfile << "\t";
-		if (cmd->refIxVTbl == VecWdbeVMCommandRefTbl::CTR) outfile << "unt->";
-		outfile << "unlockAccess(\"" << supsref << "::" << cmd->sref << "\");" << endl;
+		outfile << "\tunlockAccess(\"" << cmd->sref << "\");" << endl;
 
 		outfile << "};" << endl;
 		outfile << endl;
@@ -749,7 +783,7 @@ void WdbeWrdev::writeCmdCpp(
 
 			for (unsigned int i = 0; i < ipas.nodes.size(); i++) {
 				ipa = ipas.nodes[i];
-				writeCmdCpp_setipa(outfile, ipa);
+				writeCmdCpp_setipa(outfile, cmd, ipa);
 			};
 			outfile << endl;
 		};
@@ -810,7 +844,7 @@ void WdbeWrdev::writeCmdCpp(
 				outfile << "\telse {" << endl;
 				for (unsigned int i = 0; i < rpas.nodes.size(); i++) {
 					rpa = rpas.nodes[i];
-					writeCmdCpp_getrpa(outfile, rpa);
+					writeCmdCpp_getrpa(outfile, cmd, rpa);
 				};
 				outfile << "\t};" << endl;
 			};
@@ -827,31 +861,39 @@ void WdbeWrdev::writeCmdCpp(
 
 void WdbeWrdev::writeCmdCpp_setipa(
 			fstream& outfile
+			, WdbeMCommand* cmd
 			, WdbeAMCommandInvpar* ipa
 		) {
-	outfile << "\tcmd->parsInv[\"" << ipa->sref << "\"].set";
+	outfile << "\tPar::set";
 	if (ipa->ixWdbeVPartype == VecWdbeVPartype::_BOOL) outfile << "Bool";
 	else outfile << StrMod::cap(VecWdbeVPartype::getSref(ipa->ixWdbeVPartype));
-	outfile << "(" << ipa->sref;
+	outfile << "(cmd->parbufInv, Cmd" << StrMod::cap(cmd->sref) << "::VecVInvpar::" << StrMod::uc(ipa->sref);
+	if ((ipa->ixWdbeVPartype == VecWdbeVPartype::BLOB) || (ipa->ixWdbeVPartype == VecWdbeVPartype::VBLOB)) outfile << ", " << to_string(ipa->Length);
+	outfile << ", " << ipa->sref;
 	if ((ipa->ixWdbeVPartype == VecWdbeVPartype::BLOB) || (ipa->ixWdbeVPartype == VecWdbeVPartype::VBLOB)) outfile << ", " << ipa->sref << "len";
 	outfile << ");" << endl;
 };
 
 void WdbeWrdev::writeCmdCpp_getrpa(
 			fstream& outfile
+			, WdbeMCommand* cmd
 			, WdbeAMCommandRetpar* rpa
 		) {
-	outfile << "\t\t" << rpa->sref << " = cmd->parsRet[\"" << rpa->sref << "\"].get";
+	if (rpa->ixWdbeVPartype == VecWdbeVPartype::BLOB) {
+		outfile << "\t\t" << rpa->sref << "len = " << to_string(rpa->Length) << ";" << endl;
+	} else if (rpa->ixWdbeVPartype == VecWdbeVPartype::VBLOB) {
+		outfile << "\t\t" << rpa->sref << "len = Par::getVblobLen(cmd->parbufRet, Cmd" << StrMod::cap(cmd->sref) << "::VecVRetpar::" << StrMod::uc(rpa->sref) << ");" << endl;
+	};
+
+	outfile << "\t\t" << rpa->sref << " = Par::get";
 	if (rpa->ixWdbeVPartype == VecWdbeVPartype::_BOOL) outfile << "Bool";
 	else {
 		// TIX, [U]INT{8/16/32}, [V]BLOB
 		outfile << StrMod::cap(VecWdbeVPartype::getSref(rpa->ixWdbeVPartype));
 	};
-	outfile << "();" << endl;
-
-	if ((rpa->ixWdbeVPartype == VecWdbeVPartype::BLOB) || (rpa->ixWdbeVPartype == VecWdbeVPartype::VBLOB)) {
-		outfile << "\t\t" << rpa->sref << "len = cmd->parsRet[\"" << rpa->sref << "\"].getLen();" << endl;
-	};
+	outfile << "(cmd->parbufRet, Cmd" << StrMod::cap(cmd->sref) << "::VecVRetpar::" << StrMod::uc(rpa->sref);
+	if ((rpa->ixWdbeVPartype == VecWdbeVPartype::BLOB) || (rpa->ixWdbeVPartype == VecWdbeVPartype::VBLOB)) outfile << ", " << rpa->sref << "len";
+	outfile << ");" << endl;
 };
 
 void WdbeWrdev::writeErrH(
@@ -904,15 +946,15 @@ void WdbeWrdev::wrAddpar(
 	WdbeMController* ctr = NULL;
 	string supsref, subsref;
 
-	if (errNotCmd) outfile << "\terr.addPar";
-	else if (retNotInv) outfile << "\tcmd->addParRet";
-	else outfile << "\tcmd->addParInv";
-	outfile << "(\"" << sref << "\", Par::VecVType::" << StrMod::uc(VecWdbeVPartype::getSref(ixWdbeVPartype));
+	if (errNotCmd) outfile << "\terr.addPar(\"" << sref << "\"";
+	else if (retNotInv) outfile << "\taddRetpar(VecVRetpar::" << StrMod::uc(sref);
+	else outfile << "\taddInvpar(VecVInvpar::" << StrMod::uc(sref);
+	outfile << ", Par::VecVType::" << StrMod::uc(VecWdbeVPartype::getSref(ixWdbeVPartype));
 
 	if (ixWdbeVPartype == VecWdbeVPartype::TIX) {
 		if (dbswdbe->tblwdbemvector->loadRecByRef(refWdbeMVector, &vec)) {
 			if (vec->hkIxVTbl == VecWdbeVMVectorHkTbl::CTR) dbswdbe->tblwdbemcontroller->loadRecByRef(vec->hkUref, &ctr);
-			getVecSupsubsref(vec, NULL, ctr, supsref, subsref);
+			getVecSupsubsref(vec, NULL, ctr, NULL, supsref, subsref);
 			if (ctr) delete ctr;
 
 			if (supsref != "") {

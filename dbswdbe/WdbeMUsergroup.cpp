@@ -22,13 +22,13 @@ WdbeMUsergroup::WdbeMUsergroup(
 			, const ubigint own
 			, const string sref
 			, const string Comment
-		) {
-
-	this->ref = ref;
-	this->grp = grp;
-	this->own = own;
-	this->sref = sref;
-	this->Comment = Comment;
+		) :
+			ref(ref)
+			, grp(grp)
+			, own(own)
+			, sref(sref)
+			, Comment(Comment)
+		{
 };
 
 bool WdbeMUsergroup::operator==(

@@ -68,7 +68,7 @@ DpchRetWdbe* WdbeMtpGenfstFsmtrack_Easy_v1_0::run(
 		refSig = dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::VOID, 0, 0, "aCntbufB", false, "nat", 0, "0..255", "", "", "", false, 0, "");
 		dbswdbe->tblwdbermcdcmsignal->insertNewRec(NULL, refCdc, refSig, ixVDir);
 
-		refSig = dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::VOID, 0, 0, "tixVSource", false, "slvdn", 8, "", "", "", "", false, 0, "");
+		refSig = dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::VOID, 0, 0, "tixVCapture", false, "slvdn", 8, "", "", "", "", false, 0, "");
 		dbswdbe->tblwdbermcdcmsignal->insertNewRec(NULL, refCdc, refSig, ixVDir);
 		refSig = dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::VOID, 0, 0, "staTixVTrigger", false, "slvdn", 8, "", "", "", "", false, 0, "");
 		dbswdbe->tblwdbermcdcmsignal->insertNewRec(NULL, refCdc, refSig, ixVDir);
@@ -87,14 +87,23 @@ DpchRetWdbe* WdbeMtpGenfstFsmtrack_Easy_v1_0::run(
 		refSig = dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::VOID, 0, 0, "reqSeqbufBToSeqClear", false, "sl", 1, "", "", "", "", false, 0, "");
 		dbswdbe->tblwdbermcdcmsignal->insertNewRec(NULL, refCdc, refSig, ixVDir);
 
+		// triggers based on port inputs: signals defined here will not exist but the CDC code will capture the corresponding port all the same
+		if (Wdbe::getMpa(dbswdbe, refWdbeMModule, "trigs", trigs)) {
+			StrMod::stringToVector(trigs, ss, ';');
+
+			for (unsigned int i = 0; i < ss.size(); i++) {
+				StrMod::stringToVector(ss[i], ss2, '.');
+
+				if (ss2.size() == 2) if (ss2[1] == "cdc") {
+					refSig = dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::VOID, 0, 0, ss2[0], false, "sl", 1, "", "", "", "", false, 0, "");
+					dbswdbe->tblwdbermcdcmsignal->insertNewRec(NULL, refCdc, refSig, ixVDir);
+				};
+			};
+		};
+
 		// - trkclk to mclk
 		if (ratioTrkclk >= 1.0) ixVDir = VecWdbeVRMCdcMSignalDir::FTS;
 		else ixVDir = VecWdbeVRMCdcMSignalDir::STF;
-
-		refSig = dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::VOID, 0, 0, "start", false, "sl", 1, "", "", "", "", false, 0, "");
-		dbswdbe->tblwdbermcdcmsignal->insertNewRec(NULL, refCdc, refSig, ixVDir);
-		refSig = dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::VOID, 0, 0, "stop", false, "sl", 1, "", "", "", "", false, 0, "");
-		dbswdbe->tblwdbermcdcmsignal->insertNewRec(NULL, refCdc, refSig, ixVDir);
 
 		refSig = dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::VOID, 0, 0, "rdyCount", false, "sl", 1, "", "", "", "", false, 0, "");
 		dbswdbe->tblwdbermcdcmsignal->insertNewRec(NULL, refCdc, refSig, ixVDir);
@@ -110,28 +119,23 @@ DpchRetWdbe* WdbeMtpGenfstFsmtrack_Easy_v1_0::run(
 		dbswdbe->tblwdbermcdcmsignal->insertNewRec(NULL, refCdc, refSig, ixVDir);
 		refSig = dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::VOID, 0, 0, "dneSeq", false, "sl", 1, "", "", "", "", false, 0, "");
 		dbswdbe->tblwdbermcdcmsignal->insertNewRec(NULL, refCdc, refSig, ixVDir);
+		refSig = dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::VOID, 0, 0, "TCapt", false, "slvdn", 32, "", "", "", "", false, 0, "");
+		dbswdbe->tblwdbermcdcmsignal->insertNewRec(NULL, refCdc, refSig, ixVDir);
+		refSig = dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::VOID, 0, 0, "ptr0Seqbuf", false, "nat", 0, "0..sizeSeqbuf/4-1", "", "", "", false, 0, "");
+		dbswdbe->tblwdbermcdcmsignal->insertNewRec(NULL, refCdc, refSig, ixVDir);
 
 		refSig = dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::VOID, 0, 0, "drdCntbufB", false, "slvdn", 32, "", "", "", "", false, 0, "");
+		dbswdbe->tblwdbermcdcmsignal->insertNewRec(NULL, refCdc, refSig, ixVDir);
+
+		refSig = dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::VOID, 0, 0, "start", false, "sl", 1, "", "", "", "", false, 0, "");
+		dbswdbe->tblwdbermcdcmsignal->insertNewRec(NULL, refCdc, refSig, ixVDir);
+		refSig = dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::VOID, 0, 0, "stop", false, "sl", 1, "", "", "", "", false, 0, "");
 		dbswdbe->tblwdbermcdcmsignal->insertNewRec(NULL, refCdc, refSig, ixVDir);
 
 		refSig = dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::VOID, 0, 0, "ackFstoccbufBToFirstClear", false, "sl", 1, "", "", "", "", false, 0, "");
 		dbswdbe->tblwdbermcdcmsignal->insertNewRec(NULL, refCdc, refSig, ixVDir);
 		refSig = dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::VOID, 0, 0, "ackSeqbufBToSeqClear", false, "sl", 1, "", "", "", "", false, 0, "");
 		dbswdbe->tblwdbermcdcmsignal->insertNewRec(NULL, refCdc, refSig, ixVDir);
-
-		// - triggers based on port inputs: signals defined here will not exist but the CDC code will capture the corresponding port all the same
-		if (Wdbe::getMpa(dbswdbe, refWdbeMModule, "trigs", trigs)) {
-			StrMod::stringToVector(trigs, ss, ';');
-
-			for (unsigned int i = 0; i < ss.size(); i++) {
-				StrMod::stringToVector(ss[i], ss2, '.');
-
-				if (ss2.size() == 3) if (ss2[2] == "cdc") {
-					refSig = dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::VOID, 0, 0, ss2[0], false, "sl", 1, "", "", "", "", false, 0, "");
-					dbswdbe->tblwdbermcdcmsignal->insertNewRec(NULL, refCdc, refSig, ixVDir);
-				};
-			};
-		};
 	};
 	// IP run --- IEND
 

@@ -21,8 +21,8 @@ public class QryWdbeSigList {
 
 		public static final int CON = 1;
 		public static final int VEC = 2;
-		public static final int MGT = 3;
-		public static final int MGU = 4;
+		public static final int MGU = 3;
+		public static final int MGT = 4;
 		public static final int REU = 5;
 		public static final int RET = 6;
 		public static final int TYP = 7;
@@ -35,8 +35,8 @@ public class QryWdbeSigList {
 
 			if (s.equals("con")) return CON;
 			if (s.equals("vec")) return VEC;
-			if (s.equals("mgt")) return MGT;
 			if (s.equals("mgu")) return MGU;
+			if (s.equals("mgt")) return MGT;
 			if (s.equals("reu")) return REU;
 			if (s.equals("ret")) return RET;
 			if (s.equals("typ")) return TYP;
@@ -50,8 +50,8 @@ public class QryWdbeSigList {
 				) {
 			if (ix == CON) return("con");
 			if (ix == VEC) return("vec");
-			if (ix == MGT) return("mgt");
 			if (ix == MGU) return("mgu");
+			if (ix == MGT) return("mgt");
 			if (ix == REU) return("reu");
 			if (ix == RET) return("ret");
 			if (ix == TYP) return("typ");

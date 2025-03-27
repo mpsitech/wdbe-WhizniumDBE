@@ -24,13 +24,14 @@ WdbeQModMdl1NPort::WdbeQModMdl1NPort(
 			, const ubigint ref
 			, const string stubRef
 			, const uint mdlNum
-		) {
-	this->qref = qref;
-	this->jref = jref;
-	this->jnum = jnum;
-	this->ref = ref;
-	this->stubRef = stubRef;
-	this->mdlNum = mdlNum;
+		) :
+			qref(qref)
+			, jref(jref)
+			, jnum(jnum)
+			, ref(ref)
+			, stubRef(stubRef)
+			, mdlNum(mdlNum)
+		{
 };
 
 void WdbeQModMdl1NPort::writeJSON(

@@ -20,9 +20,10 @@ using namespace Xmlio;
 WdbeQSegSup1NSegment::WdbeQSegSup1NSegment(
 			const uint jnum
 			, const string stubRef
-		) {
-	this->jnum = jnum;
-	this->stubRef = stubRef;
+		) :
+			jnum(jnum)
+			, stubRef(stubRef)
+		{
 };
 
 bool WdbeQSegSup1NSegment::readXML(

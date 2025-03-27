@@ -45,9 +45,8 @@ PnlWdbeErrRec::ContInf::ContInf(
 			const string& TxtRef
 		) :
 			Block()
+			, TxtRef(TxtRef)
 		{
-	this->TxtRef = TxtRef;
-
 	mask = {TXTREF};
 };
 
@@ -107,10 +106,9 @@ PnlWdbeErrRec::StatApp::StatApp(
 			, const bool initdoneAPar
 		) :
 			Block()
+			, initdoneDetail(initdoneDetail)
+			, initdoneAPar(initdoneAPar)
 		{
-	this->initdoneDetail = initdoneDetail;
-	this->initdoneAPar = initdoneAPar;
-
 	mask = {INITDONEDETAIL, INITDONEAPAR};
 };
 
@@ -174,12 +172,11 @@ PnlWdbeErrRec::StatShr::StatShr(
 			, const bool ButRegularizeActive
 		) :
 			Block()
+			, ixWdbeVExpstate(ixWdbeVExpstate)
+			, scrJrefDetail(scrJrefDetail)
+			, scrJrefAPar(scrJrefAPar)
+			, ButRegularizeActive(ButRegularizeActive)
 		{
-	this->ixWdbeVExpstate = ixWdbeVExpstate;
-	this->scrJrefDetail = scrJrefDetail;
-	this->scrJrefAPar = scrJrefAPar;
-	this->ButRegularizeActive = ButRegularizeActive;
-
 	mask = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFAPAR, BUTREGULARIZEACTIVE};
 };
 
@@ -249,9 +246,8 @@ PnlWdbeErrRec::Tag::Tag(
 			const string& Cpt
 		) :
 			Block()
+			, Cpt(Cpt)
 		{
-	this->Cpt = Cpt;
-
 	mask = {CPT};
 };
 
@@ -288,11 +284,11 @@ PnlWdbeErrRec::DpchAppDo::DpchAppDo(
 			, const set<uint>& mask
 		) :
 			DpchAppWdbe(VecWdbeVDpch::DPCHAPPWDBEERRRECDO, scrJref)
+			, ixVDo(ixVDo)
 		{
 	if (find(mask, ALL)) this->mask = {SCRJREF, IXVDO};
 	else this->mask = mask;
 
-	this->ixVDo = ixVDo;
 };
 
 string PnlWdbeErrRec::DpchAppDo::getSrefsMask() {

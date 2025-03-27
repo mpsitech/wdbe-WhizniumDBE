@@ -27,16 +27,17 @@ WdbeQLibAMakefile::WdbeQLibAMakefile(
 			, const string x2SrefKTag
 			, const string titX2SrefKTag
 			, const string Val
-		) {
-	this->qref = qref;
-	this->jref = jref;
-	this->jnum = jnum;
-	this->ref = ref;
-	this->x1RefWdbeMMachine = x1RefWdbeMMachine;
-	this->stubX1RefWdbeMMachine = stubX1RefWdbeMMachine;
-	this->x2SrefKTag = x2SrefKTag;
-	this->titX2SrefKTag = titX2SrefKTag;
-	this->Val = Val;
+		) :
+			qref(qref)
+			, jref(jref)
+			, jnum(jnum)
+			, ref(ref)
+			, x1RefWdbeMMachine(x1RefWdbeMMachine)
+			, stubX1RefWdbeMMachine(stubX1RefWdbeMMachine)
+			, x2SrefKTag(x2SrefKTag)
+			, titX2SrefKTag(titX2SrefKTag)
+			, Val(Val)
+		{
 };
 
 void WdbeQLibAMakefile::writeJSON(

@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PrefWdbed>
-	<StgWdbeAppearance>
-		<Si sref="histlength">20</Si>
-		<Si sref="suspsess">true</Si>
-		<Si sref="sesstterm">0</Si>
-		<Si sref="sesstwarn">0</Si>
-		<Si sref="roottterm">0</Si>
-	</StgWdbeAppearance>
 	<StgWdbeAppsrv>
 		<Si sref="port">13100</Si>
 		<Si sref="https">false</Si>
 		<Si sref="cors"></Si>
 	</StgWdbeAppsrv>
+	<StgWdbeBehavior>
+		<Si sref="histlength">20</Si>
+		<Si sref="suspsess">true</Si>
+		<Si sref="sesstterm">0</Si>
+		<Si sref="sesstwarn">0</Si>
+		<Si sref="roottterm">0</Si>
+	</StgWdbeBehavior>
 	<StgWdbed>
 		<Si sref="jobprcn">4</Si>
 		<Si sref="opengsrvport">13120</Si>

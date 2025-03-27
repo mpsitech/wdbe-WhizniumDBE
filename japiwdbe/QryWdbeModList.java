@@ -22,8 +22,8 @@ public class QryWdbeModList {
 		public static final int TPL = 1;
 		public static final int SUP = 2;
 		public static final int HKU = 3;
-		public static final int TYP = 4;
-		public static final int HKT = 5;
+		public static final int HKT = 4;
+		public static final int TYP = 5;
 		public static final int SRF = 6;
 
 		public static int getIx(
@@ -34,8 +34,8 @@ public class QryWdbeModList {
 			if (s.equals("tpl")) return TPL;
 			if (s.equals("sup")) return SUP;
 			if (s.equals("hku")) return HKU;
-			if (s.equals("typ")) return TYP;
 			if (s.equals("hkt")) return HKT;
+			if (s.equals("typ")) return TYP;
 			if (s.equals("srf")) return SRF;
 
 			return 0;
@@ -47,8 +47,8 @@ public class QryWdbeModList {
 			if (ix == TPL) return("tpl");
 			if (ix == SUP) return("sup");
 			if (ix == HKU) return("hku");
-			if (ix == TYP) return("typ");
 			if (ix == HKT) return("hkt");
+			if (ix == TYP) return("typ");
 			if (ix == SRF) return("srf");
 
 			return "";

@@ -22,13 +22,13 @@ WdbeAccRMUserUniversal::WdbeAccRMUserUniversal(
 			, const uint unvIxWdbeVMaintable
 			, const ubigint unvUref
 			, const uint ixWdbeVRecaccess
-		) {
-
-	this->ref = ref;
-	this->refWdbeMUser = refWdbeMUser;
-	this->unvIxWdbeVMaintable = unvIxWdbeVMaintable;
-	this->unvUref = unvUref;
-	this->ixWdbeVRecaccess = ixWdbeVRecaccess;
+		) :
+			ref(ref)
+			, refWdbeMUser(refWdbeMUser)
+			, unvIxWdbeVMaintable(unvIxWdbeVMaintable)
+			, unvUref(unvUref)
+			, ixWdbeVRecaccess(ixWdbeVRecaccess)
+		{
 };
 
 bool WdbeAccRMUserUniversal::operator==(

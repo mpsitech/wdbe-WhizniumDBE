@@ -51,9 +51,8 @@ PnlWdbeFamList::ContIac::ContIac(
 			const uint numFTos
 		) :
 			Block()
+			, numFTos(numFTos)
 		{
-	this->numFTos = numFTos;
-
 	mask = {NUMFTOS};
 };
 
@@ -159,10 +158,9 @@ PnlWdbeFamList::ContInf::ContInf(
 			, const uint numFCsiQst
 		) :
 			Block()
+			, ButFilterOn(ButFilterOn)
+			, numFCsiQst(numFCsiQst)
 		{
-	this->ButFilterOn = ButFilterOn;
-	this->numFCsiQst = numFCsiQst;
-
 	mask = {BUTFILTERON, NUMFCSIQST};
 };
 
@@ -229,10 +227,9 @@ PnlWdbeFamList::StatShr::StatShr(
 			, const bool ButDeleteActive
 		) :
 			Block()
+			, ixWdbeVExpstate(ixWdbeVExpstate)
+			, ButDeleteActive(ButDeleteActive)
 		{
-	this->ixWdbeVExpstate = ixWdbeVExpstate;
-	this->ButDeleteActive = ButDeleteActive;
-
 	mask = {IXWDBEVEXPSTATE, BUTDELETEACTIVE};
 };
 
@@ -299,9 +296,9 @@ PnlWdbeFamList::StgIac::StgIac(
 			, const uint TcoTitWidth
 		) :
 			Block()
+			, TcoVndWidth(TcoVndWidth)
+			, TcoTitWidth(TcoTitWidth)
 		{
-	this->TcoVndWidth = TcoVndWidth;
-	this->TcoTitWidth = TcoTitWidth;
 	mask = {TCOVNDWIDTH, TCOTITWIDTH};
 };
 

@@ -27,16 +27,16 @@ WdbeMError::WdbeMError(
 			, const string Fullsref
 			, const ubigint traRefWdbeMSignal
 			, const string Comment
-		) {
-
-	this->ref = ref;
-	this->refIxVTbl = refIxVTbl;
-	this->refUref = refUref;
-	this->refNum = refNum;
-	this->sref = sref;
-	this->Fullsref = Fullsref;
-	this->traRefWdbeMSignal = traRefWdbeMSignal;
-	this->Comment = Comment;
+		) :
+			ref(ref)
+			, refIxVTbl(refIxVTbl)
+			, refUref(refUref)
+			, refNum(refNum)
+			, sref(sref)
+			, Fullsref(Fullsref)
+			, traRefWdbeMSignal(traRefWdbeMSignal)
+			, Comment(Comment)
+		{
 };
 
 bool WdbeMError::operator==(

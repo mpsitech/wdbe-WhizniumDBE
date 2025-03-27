@@ -47,9 +47,8 @@ PnlWdbeCdcMNSignal::ContInf::ContInf(
 			const uint numFCsiQst
 		) :
 			Block()
+			, numFCsiQst(numFCsiQst)
 		{
-	this->numFCsiQst = numFCsiQst;
-
 	mask = {NUMFCSIQST};
 };
 
@@ -149,13 +148,12 @@ PnlWdbeCdcMNSignal::StatShr::StatShr(
 			, const bool ButSubActive
 		) :
 			Block()
+			, ButViewAvail(ButViewAvail)
+			, ButViewActive(ButViewActive)
+			, ButAddAvail(ButAddAvail)
+			, ButSubAvail(ButSubAvail)
+			, ButSubActive(ButSubActive)
 		{
-	this->ButViewAvail = ButViewAvail;
-	this->ButViewActive = ButViewActive;
-	this->ButAddAvail = ButAddAvail;
-	this->ButSubAvail = ButSubAvail;
-	this->ButSubActive = ButSubActive;
-
 	mask = {BUTVIEWAVAIL, BUTVIEWACTIVE, BUTADDAVAIL, BUTSUBAVAIL, BUTSUBACTIVE};
 };
 
@@ -231,9 +229,9 @@ PnlWdbeCdcMNSignal::StgIac::StgIac(
 			, const uint TcoDirWidth
 		) :
 			Block()
+			, TcoMrefWidth(TcoMrefWidth)
+			, TcoDirWidth(TcoDirWidth)
 		{
-	this->TcoMrefWidth = TcoMrefWidth;
-	this->TcoDirWidth = TcoDirWidth;
 	mask = {TCOMREFWIDTH, TCODIRWIDTH};
 };
 
@@ -349,7 +347,7 @@ void PnlWdbeCdcMNSignal::Tag::writeJSON(
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
 	if (ixWdbeVLocale == VecWdbeVLocale::ENUS) {
-		me["Cpt"] = "Invoking controllers";
+		me["Cpt"] = "Signals";
 		me["TcoMref"] = "Signal";
 		me["TcoDir"] = "Direction";
 	};
@@ -374,7 +372,7 @@ void PnlWdbeCdcMNSignal::Tag::writeXML(
 
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
 		if (ixWdbeVLocale == VecWdbeVLocale::ENUS) {
-			writeStringAttr(wr, itemtag, "sref", "Cpt", "Invoking controllers");
+			writeStringAttr(wr, itemtag, "sref", "Cpt", "Signals");
 			writeStringAttr(wr, itemtag, "sref", "TcoMref", "Signal");
 			writeStringAttr(wr, itemtag, "sref", "TcoDir", "Direction");
 		};

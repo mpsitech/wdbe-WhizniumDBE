@@ -395,12 +395,14 @@ function changeLstNumFirstdisp(lstdoc, ctlsref, ncol, multsel, numFirstdisp, dNu
 function mergeDpchEngData(dom) {
 	var mask = [];
 
+	// IP mergeDpchEngData --- BEGIN
 	if (updateSrcblock(dom, "DpchEngWdbeNavDeployData", "ContIacWdbeNavDeploy", srcdoc)) mask.push("contiac");
 	if (updateSrcblock(dom, "DpchEngWdbeNavDeployData", "FeedFLstCmp", srcdoc)) mask.push("feedFLstCmp");
 	if (updateSrcblock(dom, "DpchEngWdbeNavDeployData", "FeedFLstRls", srcdoc)) mask.push("feedFLstRls");
 	if (updateSrcblock(dom, "DpchEngWdbeNavDeployData", "StatAppWdbeNavDeploy", srcdoc)) mask.push("statapp");
 	if (updateSrcblock(dom, "DpchEngWdbeNavDeployData", "StatShrWdbeNavDeploy", srcdoc)) mask.push("statshr");
 	if (updateSrcblock(dom, "DpchEngWdbeNavDeployData", "TagWdbeNavDeploy", srcdoc)) mask.push("tag");
+	// IP mergeDpchEngData --- END
 
 	return mask;
 };

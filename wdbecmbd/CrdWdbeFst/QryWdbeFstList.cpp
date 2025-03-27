@@ -370,27 +370,13 @@ void QryWdbeFstList::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBEFSTMOD) {
-		call->abort = handleCallWdbeFstMod(dbswdbe, call->jref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEFSTUPD_REFEQ) {
+	if (call->ixVCall == VecWdbeVCall::CALLWDBEFSTUPD_REFEQ) {
 		call->abort = handleCallWdbeFstUpd_refEq(dbswdbe, call->jref);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEFSTMOD) {
+		call->abort = handleCallWdbeFstMod(dbswdbe, call->jref);
 	} else if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
 		call->abort = handleCallWdbeStubChgFromSelf(dbswdbe);
 	};
-};
-
-bool QryWdbeFstList::handleCallWdbeFstMod(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-
-	if ((ixWdbeVQrystate == VecWdbeVQrystate::UTD) || (ixWdbeVQrystate == VecWdbeVQrystate::SLM)) {
-		ixWdbeVQrystate = VecWdbeVQrystate::MNR;
-		xchg->triggerCall(dbswdbe, VecWdbeVCall::CALLWDBESTATCHG, jref);
-	};
-
-	return retval;
 };
 
 bool QryWdbeFstList::handleCallWdbeFstUpd_refEq(
@@ -401,6 +387,20 @@ bool QryWdbeFstList::handleCallWdbeFstUpd_refEq(
 
 	if (ixWdbeVQrystate != VecWdbeVQrystate::OOD) {
 		ixWdbeVQrystate = VecWdbeVQrystate::OOD;
+		xchg->triggerCall(dbswdbe, VecWdbeVCall::CALLWDBESTATCHG, jref);
+	};
+
+	return retval;
+};
+
+bool QryWdbeFstList::handleCallWdbeFstMod(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+
+	if ((ixWdbeVQrystate == VecWdbeVQrystate::UTD) || (ixWdbeVQrystate == VecWdbeVQrystate::SLM)) {
+		ixWdbeVQrystate = VecWdbeVQrystate::MNR;
 		xchg->triggerCall(dbswdbe, VecWdbeVCall::CALLWDBESTATCHG, jref);
 	};
 

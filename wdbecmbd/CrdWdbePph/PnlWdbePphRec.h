@@ -14,8 +14,8 @@
 
 // IP include.cust --- INSERT
 
-#include "PnlWdbePphAPar.h"
 #include "PnlWdbePphMNModule.h"
+#include "PnlWdbePphAPar.h"
 #include "PnlWdbePphDetail.h"
 
 #define VecVWdbePphRecDo PnlWdbePphRec::VecVDo
@@ -177,8 +177,8 @@ public:
 	ContInf continf;
 	StatShr statshr;
 
-	PnlWdbePphAPar* pnlapar;
 	PnlWdbePphMNModule* pnlmnmodule;
+	PnlWdbePphAPar* pnlapar;
 	PnlWdbePphDetail* pnldetail;
 
 	WdbeMPeripheral recPph;

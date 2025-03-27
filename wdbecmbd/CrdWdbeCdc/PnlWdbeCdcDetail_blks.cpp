@@ -55,13 +55,12 @@ PnlWdbeCdcDetail::ContIac::ContIac(
 			, const string& TxfRat
 		) :
 			Block()
+			, TxfFck(TxfFck)
+			, TxfSck(TxfSck)
+			, TxfFar(TxfFar)
+			, TxfSar(TxfSar)
+			, TxfRat(TxfRat)
 		{
-	this->TxfFck = TxfFck;
-	this->TxfSck = TxfSck;
-	this->TxfFar = TxfFar;
-	this->TxfSar = TxfSar;
-	this->TxfRat = TxfRat;
-
 	mask = {TXFFCK, TXFSCK, TXFFAR, TXFSAR, TXFRAT};
 };
 
@@ -190,13 +189,12 @@ PnlWdbeCdcDetail::ContInf::ContInf(
 			, const string& TxtSar
 		) :
 			Block()
+			, TxtFck(TxtFck)
+			, TxtSck(TxtSck)
+			, TxtMdl(TxtMdl)
+			, TxtFar(TxtFar)
+			, TxtSar(TxtSar)
 		{
-	this->TxtFck = TxtFck;
-	this->TxtSck = TxtSck;
-	this->TxtMdl = TxtMdl;
-	this->TxtFar = TxtFar;
-	this->TxtSar = TxtSar;
-
 	mask = {TXTFCK, TXTSCK, TXTMDL, TXTFAR, TXTSAR};
 };
 
@@ -317,47 +315,46 @@ void PnlWdbeCdcDetail::StatApp::writeXML(
  ******************************************************************************/
 
 PnlWdbeCdcDetail::StatShr::StatShr(
-			const bool TxfFckValid
-			, const bool TxfSckValid
-			, const bool TxfFarValid
-			, const bool TxfSarValid
-			, const bool ButSaveAvail
+			const bool ButSaveAvail
 			, const bool ButSaveActive
 			, const bool TxtFckActive
+			, const bool TxfFckValid
 			, const bool ButFckViewAvail
 			, const bool TxtSckActive
+			, const bool TxfSckValid
 			, const bool ButSckViewAvail
 			, const bool TxtMdlActive
 			, const bool ButMdlViewAvail
 			, const bool ButMdlViewActive
 			, const bool TxtFarActive
+			, const bool TxfFarValid
 			, const bool ButFarViewAvail
 			, const bool TxtSarActive
+			, const bool TxfSarValid
 			, const bool ButSarViewAvail
 			, const bool TxfRatActive
 		) :
 			Block()
+			, ButSaveAvail(ButSaveAvail)
+			, ButSaveActive(ButSaveActive)
+			, TxtFckActive(TxtFckActive)
+			, TxfFckValid(TxfFckValid)
+			, ButFckViewAvail(ButFckViewAvail)
+			, TxtSckActive(TxtSckActive)
+			, TxfSckValid(TxfSckValid)
+			, ButSckViewAvail(ButSckViewAvail)
+			, TxtMdlActive(TxtMdlActive)
+			, ButMdlViewAvail(ButMdlViewAvail)
+			, ButMdlViewActive(ButMdlViewActive)
+			, TxtFarActive(TxtFarActive)
+			, TxfFarValid(TxfFarValid)
+			, ButFarViewAvail(ButFarViewAvail)
+			, TxtSarActive(TxtSarActive)
+			, TxfSarValid(TxfSarValid)
+			, ButSarViewAvail(ButSarViewAvail)
+			, TxfRatActive(TxfRatActive)
 		{
-	this->TxfFckValid = TxfFckValid;
-	this->TxfSckValid = TxfSckValid;
-	this->TxfFarValid = TxfFarValid;
-	this->TxfSarValid = TxfSarValid;
-	this->ButSaveAvail = ButSaveAvail;
-	this->ButSaveActive = ButSaveActive;
-	this->TxtFckActive = TxtFckActive;
-	this->ButFckViewAvail = ButFckViewAvail;
-	this->TxtSckActive = TxtSckActive;
-	this->ButSckViewAvail = ButSckViewAvail;
-	this->TxtMdlActive = TxtMdlActive;
-	this->ButMdlViewAvail = ButMdlViewAvail;
-	this->ButMdlViewActive = ButMdlViewActive;
-	this->TxtFarActive = TxtFarActive;
-	this->ButFarViewAvail = ButFarViewAvail;
-	this->TxtSarActive = TxtSarActive;
-	this->ButSarViewAvail = ButSarViewAvail;
-	this->TxfRatActive = TxfRatActive;
-
-	mask = {TXFFCKVALID, TXFSCKVALID, TXFFARVALID, TXFSARVALID, BUTSAVEAVAIL, BUTSAVEACTIVE, TXTFCKACTIVE, BUTFCKVIEWAVAIL, TXTSCKACTIVE, BUTSCKVIEWAVAIL, TXTMDLACTIVE, BUTMDLVIEWAVAIL, BUTMDLVIEWACTIVE, TXTFARACTIVE, BUTFARVIEWAVAIL, TXTSARACTIVE, BUTSARVIEWAVAIL, TXFRATACTIVE};
+	mask = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTFCKACTIVE, TXFFCKVALID, BUTFCKVIEWAVAIL, TXTSCKACTIVE, TXFSCKVALID, BUTSCKVIEWAVAIL, TXTMDLACTIVE, BUTMDLVIEWAVAIL, BUTMDLVIEWACTIVE, TXTFARACTIVE, TXFFARVALID, BUTFARVIEWAVAIL, TXTSARACTIVE, TXFSARVALID, BUTSARVIEWAVAIL, TXFRATACTIVE};
 };
 
 void PnlWdbeCdcDetail::StatShr::writeJSON(
@@ -368,22 +365,22 @@ void PnlWdbeCdcDetail::StatShr::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["TxfFckValid"] = TxfFckValid;
-	me["TxfSckValid"] = TxfSckValid;
-	me["TxfFarValid"] = TxfFarValid;
-	me["TxfSarValid"] = TxfSarValid;
 	me["ButSaveAvail"] = ButSaveAvail;
 	me["ButSaveActive"] = ButSaveActive;
 	me["TxtFckActive"] = TxtFckActive;
+	me["TxfFckValid"] = TxfFckValid;
 	me["ButFckViewAvail"] = ButFckViewAvail;
 	me["TxtSckActive"] = TxtSckActive;
+	me["TxfSckValid"] = TxfSckValid;
 	me["ButSckViewAvail"] = ButSckViewAvail;
 	me["TxtMdlActive"] = TxtMdlActive;
 	me["ButMdlViewAvail"] = ButMdlViewAvail;
 	me["ButMdlViewActive"] = ButMdlViewActive;
 	me["TxtFarActive"] = TxtFarActive;
+	me["TxfFarValid"] = TxfFarValid;
 	me["ButFarViewAvail"] = ButFarViewAvail;
 	me["TxtSarActive"] = TxtSarActive;
+	me["TxfSarValid"] = TxfSarValid;
 	me["ButSarViewAvail"] = ButSarViewAvail;
 	me["TxfRatActive"] = TxfRatActive;
 };
@@ -400,22 +397,22 @@ void PnlWdbeCdcDetail::StatShr::writeXML(
 	else itemtag = "StatitemShrWdbeCdcDetail";
 
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
-		writeBoolAttr(wr, itemtag, "sref", "TxfFckValid", TxfFckValid);
-		writeBoolAttr(wr, itemtag, "sref", "TxfSckValid", TxfSckValid);
-		writeBoolAttr(wr, itemtag, "sref", "TxfFarValid", TxfFarValid);
-		writeBoolAttr(wr, itemtag, "sref", "TxfSarValid", TxfSarValid);
 		writeBoolAttr(wr, itemtag, "sref", "ButSaveAvail", ButSaveAvail);
 		writeBoolAttr(wr, itemtag, "sref", "ButSaveActive", ButSaveActive);
 		writeBoolAttr(wr, itemtag, "sref", "TxtFckActive", TxtFckActive);
+		writeBoolAttr(wr, itemtag, "sref", "TxfFckValid", TxfFckValid);
 		writeBoolAttr(wr, itemtag, "sref", "ButFckViewAvail", ButFckViewAvail);
 		writeBoolAttr(wr, itemtag, "sref", "TxtSckActive", TxtSckActive);
+		writeBoolAttr(wr, itemtag, "sref", "TxfSckValid", TxfSckValid);
 		writeBoolAttr(wr, itemtag, "sref", "ButSckViewAvail", ButSckViewAvail);
 		writeBoolAttr(wr, itemtag, "sref", "TxtMdlActive", TxtMdlActive);
 		writeBoolAttr(wr, itemtag, "sref", "ButMdlViewAvail", ButMdlViewAvail);
 		writeBoolAttr(wr, itemtag, "sref", "ButMdlViewActive", ButMdlViewActive);
 		writeBoolAttr(wr, itemtag, "sref", "TxtFarActive", TxtFarActive);
+		writeBoolAttr(wr, itemtag, "sref", "TxfFarValid", TxfFarValid);
 		writeBoolAttr(wr, itemtag, "sref", "ButFarViewAvail", ButFarViewAvail);
 		writeBoolAttr(wr, itemtag, "sref", "TxtSarActive", TxtSarActive);
+		writeBoolAttr(wr, itemtag, "sref", "TxfSarValid", TxfSarValid);
 		writeBoolAttr(wr, itemtag, "sref", "ButSarViewAvail", ButSarViewAvail);
 		writeBoolAttr(wr, itemtag, "sref", "TxfRatActive", TxfRatActive);
 	xmlTextWriterEndElement(wr);
@@ -426,22 +423,22 @@ set<uint> PnlWdbeCdcDetail::StatShr::comm(
 		) {
 	set<uint> items;
 
-	if (TxfFckValid == comp->TxfFckValid) insert(items, TXFFCKVALID);
-	if (TxfSckValid == comp->TxfSckValid) insert(items, TXFSCKVALID);
-	if (TxfFarValid == comp->TxfFarValid) insert(items, TXFFARVALID);
-	if (TxfSarValid == comp->TxfSarValid) insert(items, TXFSARVALID);
 	if (ButSaveAvail == comp->ButSaveAvail) insert(items, BUTSAVEAVAIL);
 	if (ButSaveActive == comp->ButSaveActive) insert(items, BUTSAVEACTIVE);
 	if (TxtFckActive == comp->TxtFckActive) insert(items, TXTFCKACTIVE);
+	if (TxfFckValid == comp->TxfFckValid) insert(items, TXFFCKVALID);
 	if (ButFckViewAvail == comp->ButFckViewAvail) insert(items, BUTFCKVIEWAVAIL);
 	if (TxtSckActive == comp->TxtSckActive) insert(items, TXTSCKACTIVE);
+	if (TxfSckValid == comp->TxfSckValid) insert(items, TXFSCKVALID);
 	if (ButSckViewAvail == comp->ButSckViewAvail) insert(items, BUTSCKVIEWAVAIL);
 	if (TxtMdlActive == comp->TxtMdlActive) insert(items, TXTMDLACTIVE);
 	if (ButMdlViewAvail == comp->ButMdlViewAvail) insert(items, BUTMDLVIEWAVAIL);
 	if (ButMdlViewActive == comp->ButMdlViewActive) insert(items, BUTMDLVIEWACTIVE);
 	if (TxtFarActive == comp->TxtFarActive) insert(items, TXTFARACTIVE);
+	if (TxfFarValid == comp->TxfFarValid) insert(items, TXFFARVALID);
 	if (ButFarViewAvail == comp->ButFarViewAvail) insert(items, BUTFARVIEWAVAIL);
 	if (TxtSarActive == comp->TxtSarActive) insert(items, TXTSARACTIVE);
+	if (TxfSarValid == comp->TxfSarValid) insert(items, TXFSARVALID);
 	if (ButSarViewAvail == comp->ButSarViewAvail) insert(items, BUTSARVIEWAVAIL);
 	if (TxfRatActive == comp->TxfRatActive) insert(items, TXFRATACTIVE);
 
@@ -456,7 +453,7 @@ set<uint> PnlWdbeCdcDetail::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {TXFFCKVALID, TXFSCKVALID, TXFFARVALID, TXFSARVALID, BUTSAVEAVAIL, BUTSAVEACTIVE, TXTFCKACTIVE, BUTFCKVIEWAVAIL, TXTSCKACTIVE, BUTSCKVIEWAVAIL, TXTMDLACTIVE, BUTMDLVIEWAVAIL, BUTMDLVIEWACTIVE, TXTFARACTIVE, BUTFARVIEWAVAIL, TXTSARACTIVE, BUTSARVIEWAVAIL, TXFRATACTIVE};
+	diffitems = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTFCKACTIVE, TXFFCKVALID, BUTFCKVIEWAVAIL, TXTSCKACTIVE, TXFSCKVALID, BUTSCKVIEWAVAIL, TXTMDLACTIVE, BUTMDLVIEWAVAIL, BUTMDLVIEWACTIVE, TXTFARACTIVE, TXFFARVALID, BUTFARVIEWAVAIL, TXTSARACTIVE, TXFSARVALID, BUTSARVIEWAVAIL, TXFRATACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);

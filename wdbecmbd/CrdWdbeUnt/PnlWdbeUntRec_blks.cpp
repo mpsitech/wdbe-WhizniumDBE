@@ -43,9 +43,8 @@ PnlWdbeUntRec::ContInf::ContInf(
 			const string& TxtRef
 		) :
 			Block()
+			, TxtRef(TxtRef)
 		{
-	this->TxtRef = TxtRef;
-
 	mask = {TXTREF};
 };
 
@@ -112,10 +111,10 @@ void PnlWdbeUntRec::StatApp::writeJSON(
 			, const bool initdone1NPeripheral
 			, const bool initdoneSil1NUnit
 			, const bool initdone1NBank
-			, const bool initdoneHk1NModule
-			, const bool initdoneRef1NError
 			, const bool initdoneRef1NSignal
+			, const bool initdoneRef1NError
 			, const bool initdoneHk1NVector
+			, const bool initdoneHk1NModule
 			, const bool initdoneRef1NCommand
 		) {
 	if (difftag.length() == 0) difftag = "StatAppWdbeUntRec";
@@ -127,10 +126,10 @@ void PnlWdbeUntRec::StatApp::writeJSON(
 	me["initdone1NPeripheral"] = initdone1NPeripheral;
 	me["initdoneSil1NUnit"] = initdoneSil1NUnit;
 	me["initdone1NBank"] = initdone1NBank;
-	me["initdoneHk1NModule"] = initdoneHk1NModule;
-	me["initdoneRef1NError"] = initdoneRef1NError;
 	me["initdoneRef1NSignal"] = initdoneRef1NSignal;
+	me["initdoneRef1NError"] = initdoneRef1NError;
 	me["initdoneHk1NVector"] = initdoneHk1NVector;
+	me["initdoneHk1NModule"] = initdoneHk1NModule;
 	me["initdoneRef1NCommand"] = initdoneRef1NCommand;
 };
 
@@ -143,10 +142,10 @@ void PnlWdbeUntRec::StatApp::writeXML(
 			, const bool initdone1NPeripheral
 			, const bool initdoneSil1NUnit
 			, const bool initdone1NBank
-			, const bool initdoneHk1NModule
-			, const bool initdoneRef1NError
 			, const bool initdoneRef1NSignal
+			, const bool initdoneRef1NError
 			, const bool initdoneHk1NVector
+			, const bool initdoneHk1NModule
 			, const bool initdoneRef1NCommand
 		) {
 	if (difftag.length() == 0) difftag = "StatAppWdbeUntRec";
@@ -161,10 +160,10 @@ void PnlWdbeUntRec::StatApp::writeXML(
 		writeBoolAttr(wr, itemtag, "sref", "initdone1NPeripheral", initdone1NPeripheral);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneSil1NUnit", initdoneSil1NUnit);
 		writeBoolAttr(wr, itemtag, "sref", "initdone1NBank", initdone1NBank);
-		writeBoolAttr(wr, itemtag, "sref", "initdoneHk1NModule", initdoneHk1NModule);
-		writeBoolAttr(wr, itemtag, "sref", "initdoneRef1NError", initdoneRef1NError);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneRef1NSignal", initdoneRef1NSignal);
+		writeBoolAttr(wr, itemtag, "sref", "initdoneRef1NError", initdoneRef1NError);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneHk1NVector", initdoneHk1NVector);
+		writeBoolAttr(wr, itemtag, "sref", "initdoneHk1NModule", initdoneHk1NModule);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneRef1NCommand", initdoneRef1NCommand);
 	xmlTextWriterEndElement(wr);
 };
@@ -181,30 +180,29 @@ PnlWdbeUntRec::StatShr::StatShr(
 			, const ubigint jrefSil1NUnit
 			, const bool pnlsil1nunitAvail
 			, const ubigint jref1NBank
-			, const ubigint jrefHk1NModule
-			, const ubigint jrefRef1NError
 			, const ubigint jrefRef1NSignal
+			, const ubigint jrefRef1NError
 			, const ubigint jrefHk1NVector
+			, const ubigint jrefHk1NModule
 			, const ubigint jrefRef1NCommand
 			, const bool ButRegularizeActive
 		) :
 			Block()
+			, ixWdbeVExpstate(ixWdbeVExpstate)
+			, jrefDetail(jrefDetail)
+			, jref1NInterrupt(jref1NInterrupt)
+			, jref1NPeripheral(jref1NPeripheral)
+			, jrefSil1NUnit(jrefSil1NUnit)
+			, pnlsil1nunitAvail(pnlsil1nunitAvail)
+			, jref1NBank(jref1NBank)
+			, jrefRef1NSignal(jrefRef1NSignal)
+			, jrefRef1NError(jrefRef1NError)
+			, jrefHk1NVector(jrefHk1NVector)
+			, jrefHk1NModule(jrefHk1NModule)
+			, jrefRef1NCommand(jrefRef1NCommand)
+			, ButRegularizeActive(ButRegularizeActive)
 		{
-	this->ixWdbeVExpstate = ixWdbeVExpstate;
-	this->jrefDetail = jrefDetail;
-	this->jref1NInterrupt = jref1NInterrupt;
-	this->jref1NPeripheral = jref1NPeripheral;
-	this->jrefSil1NUnit = jrefSil1NUnit;
-	this->pnlsil1nunitAvail = pnlsil1nunitAvail;
-	this->jref1NBank = jref1NBank;
-	this->jrefHk1NModule = jrefHk1NModule;
-	this->jrefRef1NError = jrefRef1NError;
-	this->jrefRef1NSignal = jrefRef1NSignal;
-	this->jrefHk1NVector = jrefHk1NVector;
-	this->jrefRef1NCommand = jrefRef1NCommand;
-	this->ButRegularizeActive = ButRegularizeActive;
-
-	mask = {IXWDBEVEXPSTATE, JREFDETAIL, JREF1NINTERRUPT, JREF1NPERIPHERAL, JREFSIL1NUNIT, PNLSIL1NUNITAVAIL, JREF1NBANK, JREFHK1NMODULE, JREFREF1NERROR, JREFREF1NSIGNAL, JREFHK1NVECTOR, JREFREF1NCOMMAND, BUTREGULARIZEACTIVE};
+	mask = {IXWDBEVEXPSTATE, JREFDETAIL, JREF1NINTERRUPT, JREF1NPERIPHERAL, JREFSIL1NUNIT, PNLSIL1NUNITAVAIL, JREF1NBANK, JREFREF1NSIGNAL, JREFREF1NERROR, JREFHK1NVECTOR, JREFHK1NMODULE, JREFREF1NCOMMAND, BUTREGULARIZEACTIVE};
 };
 
 void PnlWdbeUntRec::StatShr::writeJSON(
@@ -222,10 +220,10 @@ void PnlWdbeUntRec::StatShr::writeJSON(
 	me["scrJrefSil1NUnit"] = Scr::scramble(jrefSil1NUnit);
 	me["pnlsil1nunitAvail"] = pnlsil1nunitAvail;
 	me["scrJref1NBank"] = Scr::scramble(jref1NBank);
-	me["scrJrefHk1NModule"] = Scr::scramble(jrefHk1NModule);
-	me["scrJrefRef1NError"] = Scr::scramble(jrefRef1NError);
 	me["scrJrefRef1NSignal"] = Scr::scramble(jrefRef1NSignal);
+	me["scrJrefRef1NError"] = Scr::scramble(jrefRef1NError);
 	me["scrJrefHk1NVector"] = Scr::scramble(jrefHk1NVector);
+	me["scrJrefHk1NModule"] = Scr::scramble(jrefHk1NModule);
 	me["scrJrefRef1NCommand"] = Scr::scramble(jrefRef1NCommand);
 	me["ButRegularizeActive"] = ButRegularizeActive;
 };
@@ -249,10 +247,10 @@ void PnlWdbeUntRec::StatShr::writeXML(
 		writeStringAttr(wr, itemtag, "sref", "scrJrefSil1NUnit", Scr::scramble(jrefSil1NUnit));
 		writeBoolAttr(wr, itemtag, "sref", "pnlsil1nunitAvail", pnlsil1nunitAvail);
 		writeStringAttr(wr, itemtag, "sref", "scrJref1NBank", Scr::scramble(jref1NBank));
-		writeStringAttr(wr, itemtag, "sref", "scrJrefHk1NModule", Scr::scramble(jrefHk1NModule));
-		writeStringAttr(wr, itemtag, "sref", "scrJrefRef1NError", Scr::scramble(jrefRef1NError));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefRef1NSignal", Scr::scramble(jrefRef1NSignal));
+		writeStringAttr(wr, itemtag, "sref", "scrJrefRef1NError", Scr::scramble(jrefRef1NError));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefHk1NVector", Scr::scramble(jrefHk1NVector));
+		writeStringAttr(wr, itemtag, "sref", "scrJrefHk1NModule", Scr::scramble(jrefHk1NModule));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefRef1NCommand", Scr::scramble(jrefRef1NCommand));
 		writeBoolAttr(wr, itemtag, "sref", "ButRegularizeActive", ButRegularizeActive);
 	xmlTextWriterEndElement(wr);
@@ -270,10 +268,10 @@ set<uint> PnlWdbeUntRec::StatShr::comm(
 	if (jrefSil1NUnit == comp->jrefSil1NUnit) insert(items, JREFSIL1NUNIT);
 	if (pnlsil1nunitAvail == comp->pnlsil1nunitAvail) insert(items, PNLSIL1NUNITAVAIL);
 	if (jref1NBank == comp->jref1NBank) insert(items, JREF1NBANK);
-	if (jrefHk1NModule == comp->jrefHk1NModule) insert(items, JREFHK1NMODULE);
-	if (jrefRef1NError == comp->jrefRef1NError) insert(items, JREFREF1NERROR);
 	if (jrefRef1NSignal == comp->jrefRef1NSignal) insert(items, JREFREF1NSIGNAL);
+	if (jrefRef1NError == comp->jrefRef1NError) insert(items, JREFREF1NERROR);
 	if (jrefHk1NVector == comp->jrefHk1NVector) insert(items, JREFHK1NVECTOR);
+	if (jrefHk1NModule == comp->jrefHk1NModule) insert(items, JREFHK1NMODULE);
 	if (jrefRef1NCommand == comp->jrefRef1NCommand) insert(items, JREFREF1NCOMMAND);
 	if (ButRegularizeActive == comp->ButRegularizeActive) insert(items, BUTREGULARIZEACTIVE);
 
@@ -288,7 +286,7 @@ set<uint> PnlWdbeUntRec::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {IXWDBEVEXPSTATE, JREFDETAIL, JREF1NINTERRUPT, JREF1NPERIPHERAL, JREFSIL1NUNIT, PNLSIL1NUNITAVAIL, JREF1NBANK, JREFHK1NMODULE, JREFREF1NERROR, JREFREF1NSIGNAL, JREFHK1NVECTOR, JREFREF1NCOMMAND, BUTREGULARIZEACTIVE};
+	diffitems = {IXWDBEVEXPSTATE, JREFDETAIL, JREF1NINTERRUPT, JREF1NPERIPHERAL, JREFSIL1NUNIT, PNLSIL1NUNITAVAIL, JREF1NBANK, JREFREF1NSIGNAL, JREFREF1NERROR, JREFHK1NVECTOR, JREFHK1NMODULE, JREFREF1NCOMMAND, BUTREGULARIZEACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);

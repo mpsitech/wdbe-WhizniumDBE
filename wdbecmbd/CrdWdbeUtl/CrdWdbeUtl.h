@@ -15,8 +15,8 @@
 // IP include.cust --- INSERT
 
 #include "PnlWdbeUtlHeadbar.h"
-#include "DlgWdbeUtlMrgip.h"
 #include "DlgWdbeUtlExtrip.h"
+#include "DlgWdbeUtlMrgip.h"
 
 #define VecVWdbeUtlDo CrdWdbeUtl::VecVDo
 #define VecVWdbeUtlSge CrdWdbeUtl::VecVSge
@@ -197,8 +197,8 @@ public:
 	Sbecore::Feed feedFSge;
 
 	PnlWdbeUtlHeadbar* pnlheadbar;
-	DlgWdbeUtlMrgip* dlgmrgip;
 	DlgWdbeUtlExtrip* dlgextrip;
+	DlgWdbeUtlMrgip* dlgmrgip;
 
 	// IP vars.cust --- INSERT
 

@@ -45,8 +45,8 @@ PnlWdbePinRec::PnlWdbePinRec(
 
 	// IP constructor.cust2 --- INSERT
 
-	xchg->addClstn(VecWdbeVCall::CALLWDBEPIN_BNKEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBEPIN_CLUEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBEPIN_BNKEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -247,10 +247,10 @@ void PnlWdbePinRec::handleCall(
 		) {
 	if (call->ixVCall == VecWdbeVCall::CALLWDBEPINUPD_REFEQ) {
 		call->abort = handleCallWdbePinUpd_refEq(dbswdbe, call->jref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEPIN_BNKEQ) {
-		call->abort = handleCallWdbePin_bnkEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEPIN_CLUEQ) {
 		call->abort = handleCallWdbePin_cluEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEPIN_BNKEQ) {
+		call->abort = handleCallWdbePin_bnkEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
 	};
 };
 
@@ -263,17 +263,6 @@ bool PnlWdbePinRec::handleCallWdbePinUpd_refEq(
 	return retval;
 };
 
-bool PnlWdbePinRec::handleCallWdbePin_bnkEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-			, const ubigint refInv
-			, bool& boolvalRet
-		) {
-	bool retval = false;
-	boolvalRet = (recPin.refWdbeMBank == refInv); // IP handleCallWdbePin_bnkEq --- LINE
-	return retval;
-};
-
 bool PnlWdbePinRec::handleCallWdbePin_cluEq(
 			DbsWdbe* dbswdbe
 			, const ubigint jrefTrig
@@ -282,5 +271,16 @@ bool PnlWdbePinRec::handleCallWdbePin_cluEq(
 		) {
 	bool retval = false;
 	boolvalRet = (recPin.refWdbeCPin == refInv); // IP handleCallWdbePin_cluEq --- LINE
+	return retval;
+};
+
+bool PnlWdbePinRec::handleCallWdbePin_bnkEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+			, const ubigint refInv
+			, bool& boolvalRet
+		) {
+	bool retval = false;
+	boolvalRet = (recPin.refWdbeMBank == refInv); // IP handleCallWdbePin_bnkEq --- LINE
 	return retval;
 };

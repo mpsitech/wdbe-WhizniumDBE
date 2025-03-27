@@ -25,10 +25,10 @@ DpchInvWdbePrcfileConcat::DpchInvWdbePrcfileConcat(
 			, const string& outfile
 		) :
 			DpchInvWdbe(VecWdbeVDpch::DPCHINVWDBEPRCFILECONCAT, oref, jref)
+			, infiles(infiles)
+			, headers(headers)
+			, outfile(outfile)
 		{
-	this->infiles = infiles;
-	this->headers = headers;
-	this->outfile = outfile;
 };
 
 void DpchInvWdbePrcfileConcat::readXML(
@@ -81,12 +81,12 @@ DpchInvWdbePrcfilePlhrpl::DpchInvWdbePrcfilePlhrpl(
 			, const vector<string>& vals
 		) :
 			DpchInvWdbe(VecWdbeVDpch::DPCHINVWDBEPRCFILEPLHRPL, oref, jref)
+			, inRefWdbeMFile(inRefWdbeMFile)
+			, infile(infile)
+			, outfile(outfile)
+			, keys(keys)
+			, vals(vals)
 		{
-	this->inRefWdbeMFile = inRefWdbeMFile;
-	this->infile = infile;
-	this->outfile = outfile;
-	this->keys = keys;
-	this->vals = vals;
 };
 
 void DpchInvWdbePrcfilePlhrpl::readXML(

@@ -43,9 +43,8 @@ PnlWdbePphDetail::ContIac::ContIac(
 			const string& TxfCmt
 		) :
 			Block()
+			, TxfCmt(TxfCmt)
 		{
-	this->TxfCmt = TxfCmt;
-
 	mask = {TXFCMT};
 };
 
@@ -151,10 +150,9 @@ PnlWdbePphDetail::ContInf::ContInf(
 			, const string& TxtUnt
 		) :
 			Block()
+			, TxtSrf(TxtSrf)
+			, TxtUnt(TxtUnt)
 		{
-	this->TxtSrf = TxtSrf;
-	this->TxtUnt = TxtUnt;
-
 	mask = {TXTSRF, TXTUNT};
 };
 
@@ -259,15 +257,14 @@ PnlWdbePphDetail::StatShr::StatShr(
 			, const bool TxfCmtActive
 		) :
 			Block()
+			, ButSaveAvail(ButSaveAvail)
+			, ButSaveActive(ButSaveActive)
+			, TxtSrfActive(TxtSrfActive)
+			, TxtUntActive(TxtUntActive)
+			, ButUntViewAvail(ButUntViewAvail)
+			, ButUntViewActive(ButUntViewActive)
+			, TxfCmtActive(TxfCmtActive)
 		{
-	this->ButSaveAvail = ButSaveAvail;
-	this->ButSaveActive = ButSaveActive;
-	this->TxtSrfActive = TxtSrfActive;
-	this->TxtUntActive = TxtUntActive;
-	this->ButUntViewAvail = ButUntViewAvail;
-	this->ButUntViewActive = ButUntViewActive;
-	this->TxfCmtActive = TxfCmtActive;
-
 	mask = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXTUNTACTIVE, BUTUNTVIEWAVAIL, BUTUNTVIEWACTIVE, TXFCMTACTIVE};
 };
 

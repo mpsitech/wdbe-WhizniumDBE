@@ -43,9 +43,8 @@ PnlWdbeVerBvr1NVersion::ContInf::ContInf(
 			const uint numFCsiQst
 		) :
 			Block()
+			, numFCsiQst(numFCsiQst)
 		{
-	this->numFCsiQst = numFCsiQst;
-
 	mask = {NUMFCSIQST};
 };
 
@@ -142,10 +141,9 @@ PnlWdbeVerBvr1NVersion::StatShr::StatShr(
 			, const bool ButViewActive
 		) :
 			Block()
+			, ButViewAvail(ButViewAvail)
+			, ButViewActive(ButViewActive)
 		{
-	this->ButViewAvail = ButViewAvail;
-	this->ButViewActive = ButViewActive;
-
 	mask = {BUTVIEWAVAIL, BUTVIEWACTIVE};
 };
 
@@ -211,8 +209,8 @@ PnlWdbeVerBvr1NVersion::StgIac::StgIac(
 			const uint TcoRefWidth
 		) :
 			Block()
+			, TcoRefWidth(TcoRefWidth)
 		{
-	this->TcoRefWidth = TcoRefWidth;
 	mask = {TCOREFWIDTH};
 };
 

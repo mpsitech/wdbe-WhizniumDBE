@@ -43,9 +43,8 @@ PnlWdbeNavAuxfct::StatApp::StatApp(
 			const uint ixWdbeVExpstate
 		) :
 			Block()
+			, ixWdbeVExpstate(ixWdbeVExpstate)
 		{
-	this->ixWdbeVExpstate = ixWdbeVExpstate;
-
 	mask = {IXWDBEVEXPSTATE};
 };
 
@@ -109,9 +108,8 @@ PnlWdbeNavAuxfct::StatShr::StatShr(
 			const bool ButUtlNewcrdAvail
 		) :
 			Block()
+			, ButUtlNewcrdAvail(ButUtlNewcrdAvail)
 		{
-	this->ButUtlNewcrdAvail = ButUtlNewcrdAvail;
-
 	mask = {BUTUTLNEWCRDAVAIL};
 };
 
@@ -171,10 +169,9 @@ PnlWdbeNavAuxfct::Tag::Tag(
 			, const string& CptUtl
 		) :
 			Block()
+			, Cpt(Cpt)
+			, CptUtl(CptUtl)
 		{
-	this->Cpt = Cpt;
-	this->CptUtl = CptUtl;
-
 	mask = {CPT, CPTUTL};
 };
 
@@ -212,11 +209,11 @@ PnlWdbeNavAuxfct::DpchAppDo::DpchAppDo(
 			, const set<uint>& mask
 		) :
 			DpchAppWdbe(VecWdbeVDpch::DPCHAPPWDBENAVAUXFCTDO, scrJref)
+			, ixVDo(ixVDo)
 		{
 	if (find(mask, ALL)) this->mask = {SCRJREF, IXVDO};
 	else this->mask = mask;
 
-	this->ixVDo = ixVDo;
 };
 
 string PnlWdbeNavAuxfct::DpchAppDo::getSrefsMask() {

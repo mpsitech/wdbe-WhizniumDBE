@@ -10,10 +10,10 @@
 #ifndef WDBE_H
 #define WDBE_H
 
-#define WDBE_VERSION "1.1.41"
+#define WDBE_VERSION "1.1.44"
 #define WDBE_VERSION_MAJOR 1
 #define WDBE_VERSION_MINOR 1
-#define WDBE_VERSION_SUB 41
+#define WDBE_VERSION_SUB 44
 
 #include <sys/wait.h> // IP include.cust --- ILINE
 

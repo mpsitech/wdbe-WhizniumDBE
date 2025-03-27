@@ -63,7 +63,7 @@ bool PnlWdbeNavHeadbar::evalMenCrdAvail(
 bool PnlWdbeNavHeadbar::evalMspCrd1Avail(
 			DbsWdbe* dbswdbe
 		) {
-	// MitCrdUsgAvail()|MitCrdUsrAvail()|MitCrdPrsAvail()|MitCrdFilAvail()
+	// MitCrdUsgAvail()|MitCrdUsrAvail()|MitCrdPrsAvail()|MitCrdFilAvail()|MitCrdPrfAvail()
 
 	vector<bool> args;
 	bool a, b;
@@ -76,6 +76,11 @@ bool PnlWdbeNavHeadbar::evalMspCrd1Avail(
 	args.push_back(a);
 	a = false; a = evalMitCrdFilAvail(dbswdbe);
 	args.push_back(a);
+	a = false; a = evalMitCrdPrfAvail(dbswdbe);
+	args.push_back(a);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
 	b = args.back(); args.pop_back();
 	a = args.back(); args.pop_back();
 	args.push_back(a || b);
@@ -140,6 +145,20 @@ bool PnlWdbeNavHeadbar::evalMitCrdFilAvail(
 	bool a;
 
 	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCFIL, jref) != 0);
+	args.push_back(a);
+
+	return(args.back());
+};
+
+bool PnlWdbeNavHeadbar::evalMitCrdPrfAvail(
+			DbsWdbe* dbswdbe
+		) {
+	// pre.ixCrdaccPrf()
+
+	vector<bool> args;
+	bool a;
+
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCPRF, jref) != 0);
 	args.push_back(a);
 
 	return(args.back());

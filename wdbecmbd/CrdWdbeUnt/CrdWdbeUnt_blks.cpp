@@ -77,11 +77,10 @@ CrdWdbeUnt::ContInf::ContInf(
 			, const string& MtxCrdUnt
 		) :
 			Block()
+			, numFSge(numFSge)
+			, MrlAppHlp(MrlAppHlp)
+			, MtxCrdUnt(MtxCrdUnt)
 		{
-	this->numFSge = numFSge;
-	this->MrlAppHlp = MrlAppHlp;
-	this->MtxCrdUnt = MtxCrdUnt;
-
 	mask = {NUMFSGE, MRLAPPHLP, MTXCRDUNT};
 };
 
@@ -209,11 +208,10 @@ CrdWdbeUnt::StatShr::StatShr(
 			, const ubigint jrefRec
 		) :
 			Block()
+			, jrefHeadbar(jrefHeadbar)
+			, jrefList(jrefList)
+			, jrefRec(jrefRec)
 		{
-	this->jrefHeadbar = jrefHeadbar;
-	this->jrefList = jrefList;
-	this->jrefRec = jrefRec;
-
 	mask = {JREFHEADBAR, JREFLIST, JREFREC};
 };
 

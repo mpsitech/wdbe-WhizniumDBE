@@ -43,9 +43,8 @@ PnlWdbeSigSrc1NSensitivity::ContInf::ContInf(
 			const uint numFCsiQst
 		) :
 			Block()
+			, numFCsiQst(numFCsiQst)
 		{
-	this->numFCsiQst = numFCsiQst;
-
 	mask = {NUMFCSIQST};
 };
 
@@ -142,10 +141,9 @@ PnlWdbeSigSrc1NSensitivity::StatShr::StatShr(
 			, const bool ButViewActive
 		) :
 			Block()
+			, ButViewAvail(ButViewAvail)
+			, ButViewActive(ButViewActive)
 		{
-	this->ButViewAvail = ButViewAvail;
-	this->ButViewActive = ButViewActive;
-
 	mask = {BUTVIEWAVAIL, BUTVIEWACTIVE};
 };
 
@@ -211,8 +209,8 @@ PnlWdbeSigSrc1NSensitivity::StgIac::StgIac(
 			const uint TcoRefWidth
 		) :
 			Block()
+			, TcoRefWidth(TcoRefWidth)
 		{
-	this->TcoRefWidth = TcoRefWidth;
 	mask = {TCOREFWIDTH};
 };
 

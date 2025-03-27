@@ -43,9 +43,8 @@ PnlWdbePrcRec::ContInf::ContInf(
 			const string& TxtRef
 		) :
 			Block()
+			, TxtRef(TxtRef)
 		{
-	this->TxtRef = TxtRef;
-
 	mask = {TXTREF};
 };
 
@@ -175,19 +174,18 @@ PnlWdbePrcRec::StatShr::StatShr(
 			, const bool ButRegularizeActive
 		) :
 			Block()
+			, ixWdbeVExpstate(ixWdbeVExpstate)
+			, jrefDetail(jrefDetail)
+			, jrefKHdltype(jrefKHdltype)
+			, jrefRef1NSensitivity(jrefRef1NSensitivity)
+			, jrefRef1NVariable(jrefRef1NVariable)
+			, jrefMge1NSignal(jrefMge1NSignal)
+			, jrefFsmFsm1NFsmstate(jrefFsmFsm1NFsmstate)
+			, pnlfsmfsm1nfsmstateAvail(pnlfsmfsm1nfsmstateAvail)
+			, jrefFsmHk1NVector(jrefFsmHk1NVector)
+			, pnlfsmhk1nvectorAvail(pnlfsmhk1nvectorAvail)
+			, ButRegularizeActive(ButRegularizeActive)
 		{
-	this->ixWdbeVExpstate = ixWdbeVExpstate;
-	this->jrefDetail = jrefDetail;
-	this->jrefKHdltype = jrefKHdltype;
-	this->jrefRef1NSensitivity = jrefRef1NSensitivity;
-	this->jrefRef1NVariable = jrefRef1NVariable;
-	this->jrefMge1NSignal = jrefMge1NSignal;
-	this->jrefFsmFsm1NFsmstate = jrefFsmFsm1NFsmstate;
-	this->pnlfsmfsm1nfsmstateAvail = pnlfsmfsm1nfsmstateAvail;
-	this->jrefFsmHk1NVector = jrefFsmHk1NVector;
-	this->pnlfsmhk1nvectorAvail = pnlfsmhk1nvectorAvail;
-	this->ButRegularizeActive = ButRegularizeActive;
-
 	mask = {IXWDBEVEXPSTATE, JREFDETAIL, JREFKHDLTYPE, JREFREF1NSENSITIVITY, JREFREF1NVARIABLE, JREFMGE1NSIGNAL, JREFFSMFSM1NFSMSTATE, PNLFSMFSM1NFSMSTATEAVAIL, JREFFSMHK1NVECTOR, PNLFSMHK1NVECTORAVAIL, BUTREGULARIZEACTIVE};
 };
 

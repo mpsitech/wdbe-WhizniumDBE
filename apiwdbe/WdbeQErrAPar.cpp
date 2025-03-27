@@ -25,14 +25,15 @@ WdbeQErrAPar::WdbeQErrAPar(
 			, const string stubRefWdbeMVector
 			, const utinyint Length
 			, const string Comment
-		) {
-	this->jnum = jnum;
-	this->sref = sref;
-	this->srefIxWdbeVPartype = srefIxWdbeVPartype;
-	this->titIxWdbeVPartype = titIxWdbeVPartype;
-	this->stubRefWdbeMVector = stubRefWdbeMVector;
-	this->Length = Length;
-	this->Comment = Comment;
+		) :
+			jnum(jnum)
+			, sref(sref)
+			, srefIxWdbeVPartype(srefIxWdbeVPartype)
+			, titIxWdbeVPartype(titIxWdbeVPartype)
+			, stubRefWdbeMVector(stubRefWdbeMVector)
+			, Length(Length)
+			, Comment(Comment)
+		{
 };
 
 bool WdbeQErrAPar::readXML(

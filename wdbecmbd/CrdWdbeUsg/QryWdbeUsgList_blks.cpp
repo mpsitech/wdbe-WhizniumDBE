@@ -21,8 +21,8 @@ uint QryWdbeUsgList::VecVOrd::getIx(
 	string s = StrMod::lc(sref);
 
 	if (s == "srf") return SRF;
-	if (s == "grp") return GRP;
 	if (s == "own") return OWN;
+	if (s == "grp") return GRP;
 
 	return(0);
 };
@@ -31,8 +31,8 @@ string QryWdbeUsgList::VecVOrd::getSref(
 			const uint ix
 		) {
 	if (ix == SRF) return("srf");
-	if (ix == GRP) return("grp");
 	if (ix == OWN) return("own");
+	if (ix == GRP) return("grp");
 
 	return("");
 };
@@ -100,11 +100,10 @@ QryWdbeUsgList::StatShr::StatShr(
 			, const uint nload
 		) :
 			Block()
+			, ntot(ntot)
+			, jnumFirstload(jnumFirstload)
+			, nload(nload)
 		{
-	this->ntot = ntot;
-	this->jnumFirstload = jnumFirstload;
-	this->nload = nload;
-
 	mask = {NTOT, JNUMFIRSTLOAD, NLOAD};
 };
 
@@ -175,10 +174,10 @@ QryWdbeUsgList::StgIac::StgIac(
 			, const uint nload
 		) :
 			Block()
+			, jnum(jnum)
+			, jnumFirstload(jnumFirstload)
+			, nload(nload)
 		{
-	this->jnum = jnum;
-	this->jnumFirstload = jnumFirstload;
-	this->nload = nload;
 	mask = {JNUM, JNUMFIRSTLOAD, NLOAD};
 };
 

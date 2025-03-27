@@ -11,7 +11,7 @@ using namespace std;
 using namespace Sbecore;
 using namespace Xmlio;
 
-bool PnlWdbeModRec::evalPnlctrhk1nvectorAvail(
+bool PnlWdbeModRec::evalPnlctrref1nerrorAvail(
 			DbsWdbe* dbswdbe
 		) {
 	// !mdl.ctrEq(0)
@@ -27,7 +27,7 @@ bool PnlWdbeModRec::evalPnlctrhk1nvectorAvail(
 	return(args.back());
 };
 
-bool PnlWdbeModRec::evalPnlctrref1nerrorAvail(
+bool PnlWdbeModRec::evalPnlctrhk1nvectorAvail(
 			DbsWdbe* dbswdbe
 		) {
 	// !mdl.ctrEq(0)

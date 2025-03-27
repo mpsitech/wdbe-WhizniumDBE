@@ -28,6 +28,7 @@ uint CrdWdbeNav::VecVDo::getIx(
 	if (s == "mitcrdusrclick") return MITCRDUSRCLICK;
 	if (s == "mitcrdprsclick") return MITCRDPRSCLICK;
 	if (s == "mitcrdfilclick") return MITCRDFILCLICK;
+	if (s == "mitcrdprfclick") return MITCRDPRFCLICK;
 	if (s == "mitcrdmchclick") return MITCRDMCHCLICK;
 	if (s == "mitcrdlibclick") return MITCRDLIBCLICK;
 	if (s == "mitcrdfamclick") return MITCRDFAMCLICK;
@@ -69,6 +70,7 @@ string CrdWdbeNav::VecVDo::getSref(
 	if (ix == MITCRDUSRCLICK) return("MitCrdUsrClick");
 	if (ix == MITCRDPRSCLICK) return("MitCrdPrsClick");
 	if (ix == MITCRDFILCLICK) return("MitCrdFilClick");
+	if (ix == MITCRDPRFCLICK) return("MitCrdPrfClick");
 	if (ix == MITCRDMCHCLICK) return("MitCrdMchClick");
 	if (ix == MITCRDLIBCLICK) return("MitCrdLibClick");
 	if (ix == MITCRDFAMCLICK) return("MitCrdFamClick");
@@ -145,13 +147,12 @@ CrdWdbeNav::ContInf::ContInf(
 			, const string& MtxSesSes3
 		) :
 			Block()
+			, numFSge(numFSge)
+			, MrlAppHlp(MrlAppHlp)
+			, MtxSesSes1(MtxSesSes1)
+			, MtxSesSes2(MtxSesSes2)
+			, MtxSesSes3(MtxSesSes3)
 		{
-	this->numFSge = numFSge;
-	this->MrlAppHlp = MrlAppHlp;
-	this->MtxSesSes1 = MtxSesSes1;
-	this->MtxSesSes2 = MtxSesSes2;
-	this->MtxSesSes3 = MtxSesSes3;
-
 	mask = {NUMFSGE, MRLAPPHLP, MTXSESSES1, MTXSESSES2, MTXSESSES3};
 };
 
@@ -335,6 +336,7 @@ CrdWdbeNav::StatShr::StatShr(
 			, const bool MitCrdUsrAvail
 			, const bool MitCrdPrsAvail
 			, const bool MitCrdFilAvail
+			, const bool MitCrdPrfAvail
 			, const bool MspCrd2Avail
 			, const bool MitCrdMchAvail
 			, const bool MitCrdLibAvail
@@ -384,83 +386,83 @@ CrdWdbeNav::StatShr::StatShr(
 			, const bool MitAppLoiAvail
 		) :
 			Block()
+			, jrefDlgloaini(jrefDlgloaini)
+			, jrefDlgmnglic(jrefDlgmnglic)
+			, jrefHeadbar(jrefHeadbar)
+			, jrefPre(jrefPre)
+			, pnlpreAvail(pnlpreAvail)
+			, jrefAdmin(jrefAdmin)
+			, pnladminAvail(pnladminAvail)
+			, jrefGlobal(jrefGlobal)
+			, pnlglobalAvail(pnlglobalAvail)
+			, jrefDevdev(jrefDevdev)
+			, pnldevdevAvail(pnldevdevAvail)
+			, jrefCoredev(jrefCoredev)
+			, pnlcoredevAvail(pnlcoredevAvail)
+			, jrefHigh(jrefHigh)
+			, pnlhighAvail(pnlhighAvail)
+			, jrefLow(jrefLow)
+			, pnllowAvail(pnllowAvail)
+			, jrefDeploy(jrefDeploy)
+			, pnldeployAvail(pnldeployAvail)
+			, jrefAuxfct(jrefAuxfct)
+			, pnlauxfctAvail(pnlauxfctAvail)
+			, MitSesSpsAvail(MitSesSpsAvail)
+			, MspCrd1Avail(MspCrd1Avail)
+			, MitCrdUsgAvail(MitCrdUsgAvail)
+			, MitCrdUsrAvail(MitCrdUsrAvail)
+			, MitCrdPrsAvail(MitCrdPrsAvail)
+			, MitCrdFilAvail(MitCrdFilAvail)
+			, MitCrdPrfAvail(MitCrdPrfAvail)
+			, MspCrd2Avail(MspCrd2Avail)
+			, MitCrdMchAvail(MitCrdMchAvail)
+			, MitCrdLibAvail(MitCrdLibAvail)
+			, MitCrdFamAvail(MitCrdFamAvail)
+			, MitCrdSilAvail(MitCrdSilAvail)
+			, MitCrdMtpAvail(MitCrdMtpAvail)
+			, MspCrd3Avail(MspCrd3Avail)
+			, MitCrdPrjAvail(MitCrdPrjAvail)
+			, MitCrdVerAvail(MitCrdVerAvail)
+			, MitCrdUntAvail(MitCrdUntAvail)
+			, MitCrdUntActive(MitCrdUntActive)
+			, MspCrd4Avail(MspCrd4Avail)
+			, MitCrdCprAvail(MitCrdCprAvail)
+			, MitCrdCvrAvail(MitCrdCvrAvail)
+			, MspCrd5Avail(MspCrd5Avail)
+			, MitCrdPphAvail(MitCrdPphAvail)
+			, MitCrdPphActive(MitCrdPphActive)
+			, MitCrdModAvail(MitCrdModAvail)
+			, MitCrdModActive(MitCrdModActive)
+			, MitCrdVecAvail(MitCrdVecAvail)
+			, MitCrdVecActive(MitCrdVecActive)
+			, MitCrdCmdAvail(MitCrdCmdAvail)
+			, MitCrdCmdActive(MitCrdCmdActive)
+			, MitCrdErrAvail(MitCrdErrAvail)
+			, MitCrdErrActive(MitCrdErrActive)
+			, MitCrdPplAvail(MitCrdPplAvail)
+			, MitCrdPplActive(MitCrdPplActive)
+			, MitCrdSegAvail(MitCrdSegAvail)
+			, MitCrdSegActive(MitCrdSegActive)
+			, MspCrd6Avail(MspCrd6Avail)
+			, MitCrdBnkAvail(MitCrdBnkAvail)
+			, MitCrdBnkActive(MitCrdBnkActive)
+			, MitCrdPinAvail(MitCrdPinAvail)
+			, MitCrdPinActive(MitCrdPinActive)
+			, MitCrdIntAvail(MitCrdIntAvail)
+			, MitCrdIntActive(MitCrdIntActive)
+			, MitCrdSigAvail(MitCrdSigAvail)
+			, MitCrdSigActive(MitCrdSigActive)
+			, MspCrd7Avail(MspCrd7Avail)
+			, MitCrdCmpAvail(MitCrdCmpAvail)
+			, MitCrdRlsAvail(MitCrdRlsAvail)
+			, MitCrdRlsActive(MitCrdRlsActive)
+			, MspCrd8Avail(MspCrd8Avail)
+			, MitCrdUtlAvail(MitCrdUtlAvail)
+			, MspApp2Avail(MspApp2Avail)
+			, MitAppMlcAvail(MitAppMlcAvail)
+			, MitAppLoiAvail(MitAppLoiAvail)
 		{
-	this->jrefDlgloaini = jrefDlgloaini;
-	this->jrefDlgmnglic = jrefDlgmnglic;
-	this->jrefHeadbar = jrefHeadbar;
-	this->jrefPre = jrefPre;
-	this->pnlpreAvail = pnlpreAvail;
-	this->jrefAdmin = jrefAdmin;
-	this->pnladminAvail = pnladminAvail;
-	this->jrefGlobal = jrefGlobal;
-	this->pnlglobalAvail = pnlglobalAvail;
-	this->jrefDevdev = jrefDevdev;
-	this->pnldevdevAvail = pnldevdevAvail;
-	this->jrefCoredev = jrefCoredev;
-	this->pnlcoredevAvail = pnlcoredevAvail;
-	this->jrefHigh = jrefHigh;
-	this->pnlhighAvail = pnlhighAvail;
-	this->jrefLow = jrefLow;
-	this->pnllowAvail = pnllowAvail;
-	this->jrefDeploy = jrefDeploy;
-	this->pnldeployAvail = pnldeployAvail;
-	this->jrefAuxfct = jrefAuxfct;
-	this->pnlauxfctAvail = pnlauxfctAvail;
-	this->MitSesSpsAvail = MitSesSpsAvail;
-	this->MspCrd1Avail = MspCrd1Avail;
-	this->MitCrdUsgAvail = MitCrdUsgAvail;
-	this->MitCrdUsrAvail = MitCrdUsrAvail;
-	this->MitCrdPrsAvail = MitCrdPrsAvail;
-	this->MitCrdFilAvail = MitCrdFilAvail;
-	this->MspCrd2Avail = MspCrd2Avail;
-	this->MitCrdMchAvail = MitCrdMchAvail;
-	this->MitCrdLibAvail = MitCrdLibAvail;
-	this->MitCrdFamAvail = MitCrdFamAvail;
-	this->MitCrdSilAvail = MitCrdSilAvail;
-	this->MitCrdMtpAvail = MitCrdMtpAvail;
-	this->MspCrd3Avail = MspCrd3Avail;
-	this->MitCrdPrjAvail = MitCrdPrjAvail;
-	this->MitCrdVerAvail = MitCrdVerAvail;
-	this->MitCrdUntAvail = MitCrdUntAvail;
-	this->MitCrdUntActive = MitCrdUntActive;
-	this->MspCrd4Avail = MspCrd4Avail;
-	this->MitCrdCprAvail = MitCrdCprAvail;
-	this->MitCrdCvrAvail = MitCrdCvrAvail;
-	this->MspCrd5Avail = MspCrd5Avail;
-	this->MitCrdPphAvail = MitCrdPphAvail;
-	this->MitCrdPphActive = MitCrdPphActive;
-	this->MitCrdModAvail = MitCrdModAvail;
-	this->MitCrdModActive = MitCrdModActive;
-	this->MitCrdVecAvail = MitCrdVecAvail;
-	this->MitCrdVecActive = MitCrdVecActive;
-	this->MitCrdCmdAvail = MitCrdCmdAvail;
-	this->MitCrdCmdActive = MitCrdCmdActive;
-	this->MitCrdErrAvail = MitCrdErrAvail;
-	this->MitCrdErrActive = MitCrdErrActive;
-	this->MitCrdPplAvail = MitCrdPplAvail;
-	this->MitCrdPplActive = MitCrdPplActive;
-	this->MitCrdSegAvail = MitCrdSegAvail;
-	this->MitCrdSegActive = MitCrdSegActive;
-	this->MspCrd6Avail = MspCrd6Avail;
-	this->MitCrdBnkAvail = MitCrdBnkAvail;
-	this->MitCrdBnkActive = MitCrdBnkActive;
-	this->MitCrdPinAvail = MitCrdPinAvail;
-	this->MitCrdPinActive = MitCrdPinActive;
-	this->MitCrdIntAvail = MitCrdIntAvail;
-	this->MitCrdIntActive = MitCrdIntActive;
-	this->MitCrdSigAvail = MitCrdSigAvail;
-	this->MitCrdSigActive = MitCrdSigActive;
-	this->MspCrd7Avail = MspCrd7Avail;
-	this->MitCrdCmpAvail = MitCrdCmpAvail;
-	this->MitCrdRlsAvail = MitCrdRlsAvail;
-	this->MitCrdRlsActive = MitCrdRlsActive;
-	this->MspCrd8Avail = MspCrd8Avail;
-	this->MitCrdUtlAvail = MitCrdUtlAvail;
-	this->MspApp2Avail = MspApp2Avail;
-	this->MitAppMlcAvail = MitAppMlcAvail;
-	this->MitAppLoiAvail = MitAppLoiAvail;
-
-	mask = {JREFDLGLOAINI, JREFDLGMNGLIC, JREFHEADBAR, JREFPRE, PNLPREAVAIL, JREFADMIN, PNLADMINAVAIL, JREFGLOBAL, PNLGLOBALAVAIL, JREFDEVDEV, PNLDEVDEVAVAIL, JREFCOREDEV, PNLCOREDEVAVAIL, JREFHIGH, PNLHIGHAVAIL, JREFLOW, PNLLOWAVAIL, JREFDEPLOY, PNLDEPLOYAVAIL, JREFAUXFCT, PNLAUXFCTAVAIL, MITSESSPSAVAIL, MSPCRD1AVAIL, MITCRDUSGAVAIL, MITCRDUSRAVAIL, MITCRDPRSAVAIL, MITCRDFILAVAIL, MSPCRD2AVAIL, MITCRDMCHAVAIL, MITCRDLIBAVAIL, MITCRDFAMAVAIL, MITCRDSILAVAIL, MITCRDMTPAVAIL, MSPCRD3AVAIL, MITCRDPRJAVAIL, MITCRDVERAVAIL, MITCRDUNTAVAIL, MITCRDUNTACTIVE, MSPCRD4AVAIL, MITCRDCPRAVAIL, MITCRDCVRAVAIL, MSPCRD5AVAIL, MITCRDPPHAVAIL, MITCRDPPHACTIVE, MITCRDMODAVAIL, MITCRDMODACTIVE, MITCRDVECAVAIL, MITCRDVECACTIVE, MITCRDCMDAVAIL, MITCRDCMDACTIVE, MITCRDERRAVAIL, MITCRDERRACTIVE, MITCRDPPLAVAIL, MITCRDPPLACTIVE, MITCRDSEGAVAIL, MITCRDSEGACTIVE, MSPCRD6AVAIL, MITCRDBNKAVAIL, MITCRDBNKACTIVE, MITCRDPINAVAIL, MITCRDPINACTIVE, MITCRDINTAVAIL, MITCRDINTACTIVE, MITCRDSIGAVAIL, MITCRDSIGACTIVE, MSPCRD7AVAIL, MITCRDCMPAVAIL, MITCRDRLSAVAIL, MITCRDRLSACTIVE, MSPCRD8AVAIL, MITCRDUTLAVAIL, MSPAPP2AVAIL, MITAPPMLCAVAIL, MITAPPLOIAVAIL};
+	mask = {JREFDLGLOAINI, JREFDLGMNGLIC, JREFHEADBAR, JREFPRE, PNLPREAVAIL, JREFADMIN, PNLADMINAVAIL, JREFGLOBAL, PNLGLOBALAVAIL, JREFDEVDEV, PNLDEVDEVAVAIL, JREFCOREDEV, PNLCOREDEVAVAIL, JREFHIGH, PNLHIGHAVAIL, JREFLOW, PNLLOWAVAIL, JREFDEPLOY, PNLDEPLOYAVAIL, JREFAUXFCT, PNLAUXFCTAVAIL, MITSESSPSAVAIL, MSPCRD1AVAIL, MITCRDUSGAVAIL, MITCRDUSRAVAIL, MITCRDPRSAVAIL, MITCRDFILAVAIL, MITCRDPRFAVAIL, MSPCRD2AVAIL, MITCRDMCHAVAIL, MITCRDLIBAVAIL, MITCRDFAMAVAIL, MITCRDSILAVAIL, MITCRDMTPAVAIL, MSPCRD3AVAIL, MITCRDPRJAVAIL, MITCRDVERAVAIL, MITCRDUNTAVAIL, MITCRDUNTACTIVE, MSPCRD4AVAIL, MITCRDCPRAVAIL, MITCRDCVRAVAIL, MSPCRD5AVAIL, MITCRDPPHAVAIL, MITCRDPPHACTIVE, MITCRDMODAVAIL, MITCRDMODACTIVE, MITCRDVECAVAIL, MITCRDVECACTIVE, MITCRDCMDAVAIL, MITCRDCMDACTIVE, MITCRDERRAVAIL, MITCRDERRACTIVE, MITCRDPPLAVAIL, MITCRDPPLACTIVE, MITCRDSEGAVAIL, MITCRDSEGACTIVE, MSPCRD6AVAIL, MITCRDBNKAVAIL, MITCRDBNKACTIVE, MITCRDPINAVAIL, MITCRDPINACTIVE, MITCRDINTAVAIL, MITCRDINTACTIVE, MITCRDSIGAVAIL, MITCRDSIGACTIVE, MSPCRD7AVAIL, MITCRDCMPAVAIL, MITCRDRLSAVAIL, MITCRDRLSACTIVE, MSPCRD8AVAIL, MITCRDUTLAVAIL, MSPAPP2AVAIL, MITAPPMLCAVAIL, MITAPPLOIAVAIL};
 };
 
 void CrdWdbeNav::StatShr::writeJSON(
@@ -498,6 +500,7 @@ void CrdWdbeNav::StatShr::writeJSON(
 	me["MitCrdUsrAvail"] = MitCrdUsrAvail;
 	me["MitCrdPrsAvail"] = MitCrdPrsAvail;
 	me["MitCrdFilAvail"] = MitCrdFilAvail;
+	me["MitCrdPrfAvail"] = MitCrdPrfAvail;
 	me["MspCrd2Avail"] = MspCrd2Avail;
 	me["MitCrdMchAvail"] = MitCrdMchAvail;
 	me["MitCrdLibAvail"] = MitCrdLibAvail;
@@ -586,6 +589,7 @@ void CrdWdbeNav::StatShr::writeXML(
 		writeBoolAttr(wr, itemtag, "sref", "MitCrdUsrAvail", MitCrdUsrAvail);
 		writeBoolAttr(wr, itemtag, "sref", "MitCrdPrsAvail", MitCrdPrsAvail);
 		writeBoolAttr(wr, itemtag, "sref", "MitCrdFilAvail", MitCrdFilAvail);
+		writeBoolAttr(wr, itemtag, "sref", "MitCrdPrfAvail", MitCrdPrfAvail);
 		writeBoolAttr(wr, itemtag, "sref", "MspCrd2Avail", MspCrd2Avail);
 		writeBoolAttr(wr, itemtag, "sref", "MitCrdMchAvail", MitCrdMchAvail);
 		writeBoolAttr(wr, itemtag, "sref", "MitCrdLibAvail", MitCrdLibAvail);
@@ -668,6 +672,7 @@ set<uint> CrdWdbeNav::StatShr::comm(
 	if (MitCrdUsrAvail == comp->MitCrdUsrAvail) insert(items, MITCRDUSRAVAIL);
 	if (MitCrdPrsAvail == comp->MitCrdPrsAvail) insert(items, MITCRDPRSAVAIL);
 	if (MitCrdFilAvail == comp->MitCrdFilAvail) insert(items, MITCRDFILAVAIL);
+	if (MitCrdPrfAvail == comp->MitCrdPrfAvail) insert(items, MITCRDPRFAVAIL);
 	if (MspCrd2Avail == comp->MspCrd2Avail) insert(items, MSPCRD2AVAIL);
 	if (MitCrdMchAvail == comp->MitCrdMchAvail) insert(items, MITCRDMCHAVAIL);
 	if (MitCrdLibAvail == comp->MitCrdLibAvail) insert(items, MITCRDLIBAVAIL);
@@ -727,7 +732,7 @@ set<uint> CrdWdbeNav::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {JREFDLGLOAINI, JREFDLGMNGLIC, JREFHEADBAR, JREFPRE, PNLPREAVAIL, JREFADMIN, PNLADMINAVAIL, JREFGLOBAL, PNLGLOBALAVAIL, JREFDEVDEV, PNLDEVDEVAVAIL, JREFCOREDEV, PNLCOREDEVAVAIL, JREFHIGH, PNLHIGHAVAIL, JREFLOW, PNLLOWAVAIL, JREFDEPLOY, PNLDEPLOYAVAIL, JREFAUXFCT, PNLAUXFCTAVAIL, MITSESSPSAVAIL, MSPCRD1AVAIL, MITCRDUSGAVAIL, MITCRDUSRAVAIL, MITCRDPRSAVAIL, MITCRDFILAVAIL, MSPCRD2AVAIL, MITCRDMCHAVAIL, MITCRDLIBAVAIL, MITCRDFAMAVAIL, MITCRDSILAVAIL, MITCRDMTPAVAIL, MSPCRD3AVAIL, MITCRDPRJAVAIL, MITCRDVERAVAIL, MITCRDUNTAVAIL, MITCRDUNTACTIVE, MSPCRD4AVAIL, MITCRDCPRAVAIL, MITCRDCVRAVAIL, MSPCRD5AVAIL, MITCRDPPHAVAIL, MITCRDPPHACTIVE, MITCRDMODAVAIL, MITCRDMODACTIVE, MITCRDVECAVAIL, MITCRDVECACTIVE, MITCRDCMDAVAIL, MITCRDCMDACTIVE, MITCRDERRAVAIL, MITCRDERRACTIVE, MITCRDPPLAVAIL, MITCRDPPLACTIVE, MITCRDSEGAVAIL, MITCRDSEGACTIVE, MSPCRD6AVAIL, MITCRDBNKAVAIL, MITCRDBNKACTIVE, MITCRDPINAVAIL, MITCRDPINACTIVE, MITCRDINTAVAIL, MITCRDINTACTIVE, MITCRDSIGAVAIL, MITCRDSIGACTIVE, MSPCRD7AVAIL, MITCRDCMPAVAIL, MITCRDRLSAVAIL, MITCRDRLSACTIVE, MSPCRD8AVAIL, MITCRDUTLAVAIL, MSPAPP2AVAIL, MITAPPMLCAVAIL, MITAPPLOIAVAIL};
+	diffitems = {JREFDLGLOAINI, JREFDLGMNGLIC, JREFHEADBAR, JREFPRE, PNLPREAVAIL, JREFADMIN, PNLADMINAVAIL, JREFGLOBAL, PNLGLOBALAVAIL, JREFDEVDEV, PNLDEVDEVAVAIL, JREFCOREDEV, PNLCOREDEVAVAIL, JREFHIGH, PNLHIGHAVAIL, JREFLOW, PNLLOWAVAIL, JREFDEPLOY, PNLDEPLOYAVAIL, JREFAUXFCT, PNLAUXFCTAVAIL, MITSESSPSAVAIL, MSPCRD1AVAIL, MITCRDUSGAVAIL, MITCRDUSRAVAIL, MITCRDPRSAVAIL, MITCRDFILAVAIL, MITCRDPRFAVAIL, MSPCRD2AVAIL, MITCRDMCHAVAIL, MITCRDLIBAVAIL, MITCRDFAMAVAIL, MITCRDSILAVAIL, MITCRDMTPAVAIL, MSPCRD3AVAIL, MITCRDPRJAVAIL, MITCRDVERAVAIL, MITCRDUNTAVAIL, MITCRDUNTACTIVE, MSPCRD4AVAIL, MITCRDCPRAVAIL, MITCRDCVRAVAIL, MSPCRD5AVAIL, MITCRDPPHAVAIL, MITCRDPPHACTIVE, MITCRDMODAVAIL, MITCRDMODACTIVE, MITCRDVECAVAIL, MITCRDVECACTIVE, MITCRDCMDAVAIL, MITCRDCMDACTIVE, MITCRDERRAVAIL, MITCRDERRACTIVE, MITCRDPPLAVAIL, MITCRDPPLACTIVE, MITCRDSEGAVAIL, MITCRDSEGACTIVE, MSPCRD6AVAIL, MITCRDBNKAVAIL, MITCRDBNKACTIVE, MITCRDPINAVAIL, MITCRDPINACTIVE, MITCRDINTAVAIL, MITCRDINTACTIVE, MITCRDSIGAVAIL, MITCRDSIGACTIVE, MSPCRD7AVAIL, MITCRDCMPAVAIL, MITCRDRLSAVAIL, MITCRDRLSACTIVE, MSPCRD8AVAIL, MITCRDUTLAVAIL, MSPAPP2AVAIL, MITAPPMLCAVAIL, MITAPPLOIAVAIL};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -751,6 +756,7 @@ void CrdWdbeNav::Tag::writeJSON(
 		me["MitCrdUsr"] = "Users ...";
 		me["MitCrdPrs"] = "Persons ...";
 		me["MitCrdFil"] = "Files ...";
+		me["MitCrdPrf"] = "Preferences ...";
 		me["MitCrdMch"] = "Machines ...";
 		me["MitCrdLib"] = "Libraries ...";
 		me["MitCrdFam"] = "Product families ...";
@@ -802,6 +808,7 @@ void CrdWdbeNav::Tag::writeXML(
 			writeStringAttr(wr, itemtag, "sref", "MitCrdUsr", "Users ...");
 			writeStringAttr(wr, itemtag, "sref", "MitCrdPrs", "Persons ...");
 			writeStringAttr(wr, itemtag, "sref", "MitCrdFil", "Files ...");
+			writeStringAttr(wr, itemtag, "sref", "MitCrdPrf", "Preferences ...");
 			writeStringAttr(wr, itemtag, "sref", "MitCrdMch", "Machines ...");
 			writeStringAttr(wr, itemtag, "sref", "MitCrdLib", "Libraries ...");
 			writeStringAttr(wr, itemtag, "sref", "MitCrdFam", "Product families ...");

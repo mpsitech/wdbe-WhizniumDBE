@@ -22,13 +22,13 @@ WdbeAMCoreversionPlh::WdbeAMCoreversionPlh(
 			, const uint cvrNum
 			, const string sref
 			, const string Comment
-		) {
-
-	this->ref = ref;
-	this->cvrRefWdbeMCoreversion = cvrRefWdbeMCoreversion;
-	this->cvrNum = cvrNum;
-	this->sref = sref;
-	this->Comment = Comment;
+		) :
+			ref(ref)
+			, cvrRefWdbeMCoreversion(cvrRefWdbeMCoreversion)
+			, cvrNum(cvrNum)
+			, sref(sref)
+			, Comment(Comment)
+		{
 };
 
 bool WdbeAMCoreversionPlh::operator==(

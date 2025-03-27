@@ -294,10 +294,10 @@ DpchRetWdbe* WdbeGenfstEhostif::run(
 
 								} else {
 									// ports in invoking controller
-									// ex. vmonGetVpdVpd (same as in host interface)
+									// ex. finitetxFreeIx (same as in host interface), connect to top module signel rpuifToFiniterxFreeIx
 
-									if (ipa->ixWdbeVPartype == VecWdbeVPartype::VBLOB) dbswdbe->tblwdbemport->insertNewRec(NULL, refCprt, mdl2->ref, mdlNumPrts[icsInvctrs[k]]++, VecWdbeVMPortMdlCat::CMDBUS, mdl->sref + StrMod::cap(cmd->sref) + "Len" + StrMod::cap(ipa->sref), VecWdbeVMPortDir::OUT, "slvdn", 8, "", "", "", "", mdl->sref + StrMod::cap(cmd->sref) + "Len" + StrMod::cap(ipa->sref), "");
-									dbswdbe->tblwdbemport->insertNewRec(NULL, refCprt, mdl2->ref, mdlNumPrts[icsInvctrs[k]]++, VecWdbeVMPortMdlCat::CMDBUS, mdl->sref + StrMod::cap(cmd->sref) + StrMod::cap(ipa->sref), VecWdbeVMPortDir::OUT, "slvdn", w, "", "", "", "", mdl->sref + StrMod::cap(cmd->sref) + StrMod::cap(ipa->sref), "");
+									if (ipa->ixWdbeVPartype == VecWdbeVPartype::VBLOB) dbswdbe->tblwdbemport->insertNewRec(NULL, refCprt, mdl2->ref, mdlNumPrts[icsInvctrs[k]]++, VecWdbeVMPortMdlCat::CMDBUS, mdl->sref + StrMod::cap(cmd->sref) + "Len" + StrMod::cap(ipa->sref), VecWdbeVMPortDir::OUT, "slvdn", 8, "", "", "", "", To + "Len" + StrMod::cap(ipa->sref), "");
+									dbswdbe->tblwdbemport->insertNewRec(NULL, refCprt, mdl2->ref, mdlNumPrts[icsInvctrs[k]]++, VecWdbeVMPortMdlCat::CMDBUS, mdl->sref + StrMod::cap(cmd->sref) + StrMod::cap(ipa->sref), VecWdbeVMPortDir::OUT, "slvdn", w, "", "", "", "", To + StrMod::cap(ipa->sref), "");
 								};
 
 								// signals in top module

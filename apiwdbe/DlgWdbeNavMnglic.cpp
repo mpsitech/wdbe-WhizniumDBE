@@ -75,11 +75,10 @@ DlgWdbeNavMnglic::ContIac::ContIac(
 			, const uint numFDetLstLcs
 		) :
 			Block()
+			, numFDetPupFis(numFDetPupFis)
+			, DetChkFis(DetChkFis)
+			, numFDetLstLcs(numFDetLstLcs)
 		{
-	this->numFDetPupFis = numFDetPupFis;
-	this->DetChkFis = DetChkFis;
-	this->numFDetLstLcs = numFDetLstLcs;
-
 	mask = {NUMFDETPUPFIS, DETCHKFIS, NUMFDETLSTLCS};
 };
 
@@ -166,15 +165,14 @@ DlgWdbeNavMnglic::ContInf::ContInf(
 			, const string& DetTxtLex
 		) :
 			Block()
+			, numFSge(numFSge)
+			, DetTxtSip(DetTxtSip)
+			, DetTxtScp(DetTxtScp)
+			, DetTxtLsr(DetTxtLsr)
+			, DetTxtLar(DetTxtLar)
+			, DetTxtLst(DetTxtLst)
+			, DetTxtLex(DetTxtLex)
 		{
-	this->numFSge = numFSge;
-	this->DetTxtSip = DetTxtSip;
-	this->DetTxtScp = DetTxtScp;
-	this->DetTxtLsr = DetTxtLsr;
-	this->DetTxtLar = DetTxtLar;
-	this->DetTxtLst = DetTxtLst;
-	this->DetTxtLex = DetTxtLex;
-
 	mask = {NUMFSGE, DETTXTSIP, DETTXTSCP, DETTXTLSR, DETTXTLAR, DETTXTLST, DETTXTLEX};
 };
 
@@ -246,10 +244,9 @@ DlgWdbeNavMnglic::StatApp::StatApp(
 			, const uint DetLstLcsNumFirstdisp
 		) :
 			Block()
+			, shortMenu(shortMenu)
+			, DetLstLcsNumFirstdisp(DetLstLcsNumFirstdisp)
 		{
-	this->shortMenu = shortMenu;
-	this->DetLstLcsNumFirstdisp = DetLstLcsNumFirstdisp;
-
 	mask = {SHORTMENU, DETLSTLCSNUMFIRSTDISP};
 };
 
@@ -310,9 +307,8 @@ DlgWdbeNavMnglic::StatShr::StatShr(
 			const bool DetButActActive
 		) :
 			Block()
+			, DetButActActive(DetButActActive)
 		{
-	this->DetButActActive = DetButActActive;
-
 	mask = {DETBUTACTACTIVE};
 };
 
@@ -385,23 +381,22 @@ DlgWdbeNavMnglic::Tag::Tag(
 			, const string& ButDne
 		) :
 			Block()
+			, Cpt(Cpt)
+			, DetHdgSrv(DetHdgSrv)
+			, DetCptSip(DetCptSip)
+			, DetCptScp(DetCptScp)
+			, DetButScn(DetButScn)
+			, DetButSdc(DetButSdc)
+			, DetCptFis(DetCptFis)
+			, DetCptLcs(DetCptLcs)
+			, DetButAct(DetButAct)
+			, DetHdgLic(DetHdgLic)
+			, DetCptLsr(DetCptLsr)
+			, DetCptLar(DetCptLar)
+			, DetCptLst(DetCptLst)
+			, DetCptLex(DetCptLex)
+			, ButDne(ButDne)
 		{
-	this->Cpt = Cpt;
-	this->DetHdgSrv = DetHdgSrv;
-	this->DetCptSip = DetCptSip;
-	this->DetCptScp = DetCptScp;
-	this->DetButScn = DetButScn;
-	this->DetButSdc = DetButSdc;
-	this->DetCptFis = DetCptFis;
-	this->DetCptLcs = DetCptLcs;
-	this->DetButAct = DetButAct;
-	this->DetHdgLic = DetHdgLic;
-	this->DetCptLsr = DetCptLsr;
-	this->DetCptLar = DetCptLar;
-	this->DetCptLst = DetCptLst;
-	this->DetCptLex = DetCptLex;
-	this->ButDne = ButDne;
-
 	mask = {CPT, DETHDGSRV, DETCPTSIP, DETCPTSCP, DETBUTSCN, DETBUTSDC, DETCPTFIS, DETCPTLCS, DETBUTACT, DETHDGLIC, DETCPTLSR, DETCPTLAR, DETCPTLST, DETCPTLEX, BUTDNE};
 };
 
@@ -491,11 +486,11 @@ DlgWdbeNavMnglic::DpchAppDo::DpchAppDo(
 			, const set<uint>& mask
 		) :
 			DpchAppWdbe(VecWdbeVDpch::DPCHAPPDLGWDBENAVMNGLICDO, scrJref)
+			, ixVDo(ixVDo)
 		{
 	if (find(mask, ALL)) this->mask = {SCRJREF, IXVDO};
 	else this->mask = mask;
 
-	this->ixVDo = ixVDo;
 };
 
 string DlgWdbeNavMnglic::DpchAppDo::getSrefsMask() {

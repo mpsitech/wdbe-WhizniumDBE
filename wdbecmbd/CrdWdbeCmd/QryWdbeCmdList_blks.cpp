@@ -20,9 +20,9 @@ uint QryWdbeCmdList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "srf") return SRF;
-	if (s == "ret") return RET;
 	if (s == "reu") return REU;
+	if (s == "ret") return RET;
+	if (s == "srf") return SRF;
 
 	return(0);
 };
@@ -30,9 +30,9 @@ uint QryWdbeCmdList::VecVOrd::getIx(
 string QryWdbeCmdList::VecVOrd::getSref(
 			const uint ix
 		) {
-	if (ix == SRF) return("srf");
-	if (ix == RET) return("ret");
 	if (ix == REU) return("reu");
+	if (ix == RET) return("ret");
+	if (ix == SRF) return("srf");
 
 	return("");
 };
@@ -100,11 +100,10 @@ QryWdbeCmdList::StatShr::StatShr(
 			, const uint nload
 		) :
 			Block()
+			, ntot(ntot)
+			, jnumFirstload(jnumFirstload)
+			, nload(nload)
 		{
-	this->ntot = ntot;
-	this->jnumFirstload = jnumFirstload;
-	this->nload = nload;
-
 	mask = {NTOT, JNUMFIRSTLOAD, NLOAD};
 };
 
@@ -175,10 +174,10 @@ QryWdbeCmdList::StgIac::StgIac(
 			, const uint nload
 		) :
 			Block()
+			, jnum(jnum)
+			, jnumFirstload(jnumFirstload)
+			, nload(nload)
 		{
-	this->jnum = jnum;
-	this->jnumFirstload = jnumFirstload;
-	this->nload = nload;
 	mask = {JNUM, JNUMFIRSTLOAD, NLOAD};
 };
 

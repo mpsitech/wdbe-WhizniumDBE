@@ -26,15 +26,16 @@ WdbeQModCorMNModule::WdbeQModCorMNModule(
 			, const ubigint ref
 			, const string srefKFunction
 			, const string titSrefKFunction
-		) {
-	this->qref = qref;
-	this->jref = jref;
-	this->jnum = jnum;
-	this->mref = mref;
-	this->stubMref = stubMref;
-	this->ref = ref;
-	this->srefKFunction = srefKFunction;
-	this->titSrefKFunction = titSrefKFunction;
+		) :
+			qref(qref)
+			, jref(jref)
+			, jnum(jnum)
+			, mref(mref)
+			, stubMref(stubMref)
+			, ref(ref)
+			, srefKFunction(srefKFunction)
+			, titSrefKFunction(titSrefKFunction)
+		{
 };
 
 void WdbeQModCorMNModule::writeJSON(

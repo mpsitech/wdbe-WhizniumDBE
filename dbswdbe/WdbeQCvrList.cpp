@@ -36,25 +36,26 @@ WdbeQCvrList::WdbeQCvrList(
 			, const uint ixVState
 			, const string srefIxVState
 			, const string titIxVState
-		) {
-	this->qref = qref;
-	this->jref = jref;
-	this->jnum = jnum;
-	this->ref = ref;
-	this->grp = grp;
-	this->stubGrp = stubGrp;
-	this->own = own;
-	this->stubOwn = stubOwn;
-	this->refWdbeMCoreproject = refWdbeMCoreproject;
-	this->stubRefWdbeMCoreproject = stubRefWdbeMCoreproject;
-	this->Major = Major;
-	this->Minor = Minor;
-	this->Sub = Sub;
-	this->bcvRefWdbeMCoreversion = bcvRefWdbeMCoreversion;
-	this->stubBcvRefWdbeMCoreversion = stubBcvRefWdbeMCoreversion;
-	this->ixVState = ixVState;
-	this->srefIxVState = srefIxVState;
-	this->titIxVState = titIxVState;
+		) :
+			qref(qref)
+			, jref(jref)
+			, jnum(jnum)
+			, ref(ref)
+			, grp(grp)
+			, stubGrp(stubGrp)
+			, own(own)
+			, stubOwn(stubOwn)
+			, refWdbeMCoreproject(refWdbeMCoreproject)
+			, stubRefWdbeMCoreproject(stubRefWdbeMCoreproject)
+			, Major(Major)
+			, Minor(Minor)
+			, Sub(Sub)
+			, bcvRefWdbeMCoreversion(bcvRefWdbeMCoreversion)
+			, stubBcvRefWdbeMCoreversion(stubBcvRefWdbeMCoreversion)
+			, ixVState(ixVState)
+			, srefIxVState(srefIxVState)
+			, titIxVState(titIxVState)
+		{
 };
 
 void WdbeQCvrList::writeJSON(

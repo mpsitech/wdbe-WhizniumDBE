@@ -85,6 +85,7 @@
 	import CrdWdbeFil from './CrdWdbeFil/CrdWdbeFil';
 	import DlgWdbeFilDownload from './CrdWdbeFil/DlgWdbeFilDownload';
 	import DlgWdbeFilNew from './CrdWdbeFil/DlgWdbeFilNew';
+	import CrdWdbePrf from './CrdWdbePrf/CrdWdbePrf';
 	import CrdWdbeNav from './CrdWdbeNav/CrdWdbeNav';
 	import DlgWdbeNavLoaini from './CrdWdbeNav/DlgWdbeNavLoaini';
 	import DlgWdbeNavMnglic from './CrdWdbeNav/DlgWdbeNavMnglic';
@@ -172,6 +173,7 @@
 			CrdWdbeFil,
 			DlgWdbeFilDownload,
 			DlgWdbeFilNew,
+			CrdWdbePrf,
 			CrdWdbeNav,
 			DlgWdbeNavLoaini,
 			DlgWdbeNavMnglic,

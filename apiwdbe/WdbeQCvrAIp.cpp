@@ -23,12 +23,13 @@ WdbeQCvrAIp::WdbeQCvrAIp(
 			, const string srefIxVTagtype
 			, const string titIxVTagtype
 			, const string Comment
-		) {
-	this->jnum = jnum;
-	this->sref = sref;
-	this->srefIxVTagtype = srefIxVTagtype;
-	this->titIxVTagtype = titIxVTagtype;
-	this->Comment = Comment;
+		) :
+			jnum(jnum)
+			, sref(sref)
+			, srefIxVTagtype(srefIxVTagtype)
+			, titIxVTagtype(titIxVTagtype)
+			, Comment(Comment)
+		{
 };
 
 bool WdbeQCvrAIp::readXML(

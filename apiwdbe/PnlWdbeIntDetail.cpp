@@ -45,9 +45,8 @@ PnlWdbeIntDetail::ContIac::ContIac(
 			const string& TxfCmt
 		) :
 			Block()
+			, TxfCmt(TxfCmt)
 		{
-	this->TxfCmt = TxfCmt;
-
 	mask = {TXFCMT};
 };
 
@@ -123,10 +122,9 @@ PnlWdbeIntDetail::ContInf::ContInf(
 			, const string& TxtUnt
 		) :
 			Block()
+			, TxtSrf(TxtSrf)
+			, TxtUnt(TxtUnt)
 		{
-	this->TxtSrf = TxtSrf;
-	this->TxtUnt = TxtUnt;
-
 	mask = {TXTSRF, TXTUNT};
 };
 
@@ -187,9 +185,8 @@ PnlWdbeIntDetail::StatApp::StatApp(
 			const uint ixWdbeVExpstate
 		) :
 			Block()
+			, ixWdbeVExpstate(ixWdbeVExpstate)
 		{
-	this->ixWdbeVExpstate = ixWdbeVExpstate;
-
 	mask = {IXWDBEVEXPSTATE};
 };
 
@@ -259,15 +256,14 @@ PnlWdbeIntDetail::StatShr::StatShr(
 			, const bool TxfCmtActive
 		) :
 			Block()
+			, ButSaveAvail(ButSaveAvail)
+			, ButSaveActive(ButSaveActive)
+			, TxtSrfActive(TxtSrfActive)
+			, TxtUntActive(TxtUntActive)
+			, ButUntViewAvail(ButUntViewAvail)
+			, ButUntViewActive(ButUntViewActive)
+			, TxfCmtActive(TxfCmtActive)
 		{
-	this->ButSaveAvail = ButSaveAvail;
-	this->ButSaveActive = ButSaveActive;
-	this->TxtSrfActive = TxtSrfActive;
-	this->TxtUntActive = TxtUntActive;
-	this->ButUntViewAvail = ButUntViewAvail;
-	this->ButUntViewActive = ButUntViewActive;
-	this->TxfCmtActive = TxfCmtActive;
-
 	mask = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXTUNTACTIVE, BUTUNTVIEWAVAIL, BUTUNTVIEWACTIVE, TXFCMTACTIVE};
 };
 
@@ -341,12 +337,11 @@ PnlWdbeIntDetail::Tag::Tag(
 			, const string& CptCmt
 		) :
 			Block()
+			, Cpt(Cpt)
+			, CptSrf(CptSrf)
+			, CptUnt(CptUnt)
+			, CptCmt(CptCmt)
 		{
-	this->Cpt = Cpt;
-	this->CptSrf = CptSrf;
-	this->CptUnt = CptUnt;
-	this->CptCmt = CptCmt;
-
 	mask = {CPT, CPTSRF, CPTUNT, CPTCMT};
 };
 
@@ -425,11 +420,11 @@ PnlWdbeIntDetail::DpchAppDo::DpchAppDo(
 			, const set<uint>& mask
 		) :
 			DpchAppWdbe(VecWdbeVDpch::DPCHAPPWDBEINTDETAILDO, scrJref)
+			, ixVDo(ixVDo)
 		{
 	if (find(mask, ALL)) this->mask = {SCRJREF, IXVDO};
 	else this->mask = mask;
 
-	this->ixVDo = ixVDo;
 };
 
 string PnlWdbeIntDetail::DpchAppDo::getSrefsMask() {

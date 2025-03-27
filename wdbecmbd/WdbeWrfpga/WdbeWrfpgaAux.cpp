@@ -126,30 +126,31 @@ void WdbeWrfpgaAux::writeCdcVhd_impl(
 		to = cdc->fckSrefWdbeMSignal;
 	};
 
-	if ((ixVDir == VecWdbeVRMCdcMSignalDir::FTS) || (cdc->Ratio <= 2.0)) {
-		stretch = "_to_" + to;
+	stretch = "_to_" + to;
 
-		outfile << "-- IP impl." + from + "To" + StrMod::cap(to) + "Stretch --- IBEGIN" << endl;
+	outfile << "-- IP impl." + from + "To" + StrMod::cap(to) + "Stretch --- IBEGIN" << endl;
 
-		for (unsigned int j = 0; j < crss.nodes.size(); j++) {
-			crs = crss.nodes[j];
+	for (unsigned int j = 0; j < crss.nodes.size(); j++) {
+		crs = crss.nodes[j];
 
-			if (crs->ixVDir == ixVDir)
-				if (dbswdbe->tblwdbemsignal->loadRecByRef(crs->refWdbeMSignal, &sig)) {
+		if (crs->ixVDir == ixVDir)
+			if (dbswdbe->tblwdbemsignal->loadRecByRef(crs->refWdbeMSignal, &sig)) {
+
+				if ((ixVDir == VecWdbeVRMCdcMSignalDir::FTS) || (cdc->Ratio <= 2.0)) {
 					if (sig->ixVBasetype == VecWdbeVMSignalBasetype::STRB) {
 						outfile << "\t\t\tif " << sig->sref << "='1' then" << endl;
-						outfile << "\t\t\t\t" << sig->sref << "_to_" << to << " <= '1';" << endl;
+						outfile << "\t\t\t\t" << sig->sref << stretch << " <= '1';" << endl;
 						outfile << "\t\t\t\t" << sig->sref << "_i := 0;" << endl;
 						outfile << "\t\t\telsif " << sig->sref << "_i=imax then" << endl;
-						outfile << "\t\t\t\t" << sig->sref << "_to_" << to << " <= '0';" << endl;
+						outfile << "\t\t\t\t" << sig->sref << stretch << " <= '0';" << endl;
 						outfile << "\t\t\telse" << endl;
 						outfile << "\t\t\t\t" << sig->sref << "_i := " << sig->sref << "_i + 1;" << endl;
 						outfile << "\t\t\tend if;" << endl;
 
 					} else {
 						outfile << "\t\t\tif " << sig->sref << "_i=imax then" << endl;
-						outfile << "\t\t\t\tif " << sig->sref << "/=" << sig->sref << "_to_" << to << " then" << endl;
-						outfile << "\t\t\t\t\t" << sig->sref << "_to_" << to << " <= " << sig->sref << ";" << endl;
+						outfile << "\t\t\t\tif " << sig->sref << "/=" << sig->sref << stretch << " then" << endl;
+						outfile << "\t\t\t\t\t" << sig->sref << stretch << " <= " << sig->sref << ";" << endl;
 						outfile << "\t\t\t\t\t" << sig->sref << "_i := 0;" << endl;
 						outfile << "\t\t\t\tend if;" << endl;
 						outfile << "\t\t\telse" << endl;
@@ -157,14 +158,18 @@ void WdbeWrfpgaAux::writeCdcVhd_impl(
 						outfile << "\t\t\tend if;" << endl;
 					};
 
-					outfile << endl;
-
-					delete sig;
+				} else {
+					// simple sampling
+					outfile << "\t\t\t" << sig->sref << stretch << " <= " << sig->sref << ";" << endl;
 				};
-		};
+
+				outfile << endl;
+
+				delete sig;
+			};
+	};
 
 		outfile << "-- IP impl." + from + "To" + StrMod::cap(to) + "Stretch --- IEND" << endl;
-	};
 
 	outfile << "-- IP impl." + from + "To" + StrMod::cap(to) + "Sample --- IBEGIN" << endl;
 
@@ -176,20 +181,22 @@ void WdbeWrfpgaAux::writeCdcVhd_impl(
 				if (sig->ixVBasetype == VecWdbeVMSignalBasetype::STRB) {
 					outfile << "\t\t\tif " << sig->sref << "_" << to << "='1' then" << endl;
 					outfile << "\t\t\t\t" << sig->sref << "_" << to << " <= '0';" << endl;
-					outfile << "\t\t\telsif " << sig->sref << stretch << "='1' and not " << sig->sref << "_wait then" << endl;
+					outfile << "\t\t\telsif " << sig->sref << stretch << "m1='1' and " << sig->sref << stretch << "m2='1' and not " << sig->sref << "_wait then" << endl;
 					outfile << "\t\t\t\t" << sig->sref << "_" << to << " <= '1';" << endl;
 					outfile << "\t\t\t\t" << sig->sref << "_wait := true;" << endl;
 					outfile << "\t\t\tend if;" << endl;
-					outfile << "\t\t\tif " << sig->sref << stretch << "='0' and " << sig->sref << "_wait then" << endl;
+					outfile << "\t\t\tif " << sig->sref << stretch << "m1='0' and " << sig->sref << stretch << "m2='0' and " << sig->sref << "_wait then" << endl;
 					outfile << "\t\t\t\t" << sig->sref << "_wait := false;" << endl;
 					outfile << "\t\t\tend if;" << endl;
 
 				} else {
-					outfile << "\t\t\tif " << sig->sref << stretch << "=" << sig->sref << "_last then" << endl;
-					outfile << "\t\t\t\t" << sig->sref << "_" << to << " <= " << sig->sref << stretch << ";" << endl;
+					outfile << "\t\t\tif " << sig->sref << stretch << "m1=" << sig->sref << stretch << "m2 then" << endl;
+					outfile << "\t\t\t\t" << sig->sref << "_" << to << " <= " << sig->sref << stretch << "m2;" << endl;
 					outfile << "\t\t\tend if;" << endl;
-					outfile << "\t\t\t" << sig->sref << "_last := " << sig->sref << stretch << ";" << endl;
 				};
+
+				outfile << "\t\t\t" << sig->sref << stretch << "m1 <= " << sig->sref << stretch << ";" << endl;
+				outfile << "\t\t\t" << sig->sref << stretch << "m2 <= " << sig->sref << stretch << "m1;" << endl;
 
 				outfile << endl;
 

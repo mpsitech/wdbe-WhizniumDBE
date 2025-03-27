@@ -50,10 +50,9 @@ PnlWdbeNavDeploy::ContIac::ContIac(
 			, const uint numFLstRls
 		) :
 			Block()
+			, numFLstCmp(numFLstCmp)
+			, numFLstRls(numFLstRls)
 		{
-	this->numFLstCmp = numFLstCmp;
-	this->numFLstRls = numFLstRls;
-
 	mask = {NUMFLSTCMP, NUMFLSTRLS};
 };
 
@@ -135,13 +134,12 @@ PnlWdbeNavDeploy::StatApp::StatApp(
 			, const uint LstRlsNumFirstdisp
 		) :
 			Block()
+			, ixWdbeVExpstate(ixWdbeVExpstate)
+			, LstCmpAlt(LstCmpAlt)
+			, LstRlsAlt(LstRlsAlt)
+			, LstCmpNumFirstdisp(LstCmpNumFirstdisp)
+			, LstRlsNumFirstdisp(LstRlsNumFirstdisp)
 		{
-	this->ixWdbeVExpstate = ixWdbeVExpstate;
-	this->LstCmpAlt = LstCmpAlt;
-	this->LstRlsAlt = LstRlsAlt;
-	this->LstCmpNumFirstdisp = LstCmpNumFirstdisp;
-	this->LstRlsNumFirstdisp = LstRlsNumFirstdisp;
-
 	mask = {IXWDBEVEXPSTATE, LSTCMPALT, LSTRLSALT, LSTCMPNUMFIRSTDISP, LSTRLSNUMFIRSTDISP};
 };
 
@@ -217,13 +215,12 @@ PnlWdbeNavDeploy::StatShr::StatShr(
 			, const bool ButRlsNewcrdActive
 		) :
 			Block()
+			, LstCmpAvail(LstCmpAvail)
+			, ButCmpViewActive(ButCmpViewActive)
+			, LstRlsAvail(LstRlsAvail)
+			, ButRlsViewActive(ButRlsViewActive)
+			, ButRlsNewcrdActive(ButRlsNewcrdActive)
 		{
-	this->LstCmpAvail = LstCmpAvail;
-	this->ButCmpViewActive = ButCmpViewActive;
-	this->LstRlsAvail = LstRlsAvail;
-	this->ButRlsViewActive = ButRlsViewActive;
-	this->ButRlsNewcrdActive = ButRlsNewcrdActive;
-
 	mask = {LSTCMPAVAIL, BUTCMPVIEWACTIVE, LSTRLSAVAIL, BUTRLSVIEWACTIVE, BUTRLSNEWCRDACTIVE};
 };
 
@@ -292,11 +289,10 @@ PnlWdbeNavDeploy::Tag::Tag(
 			, const string& CptRls
 		) :
 			Block()
+			, Cpt(Cpt)
+			, CptCmp(CptCmp)
+			, CptRls(CptRls)
 		{
-	this->Cpt = Cpt;
-	this->CptCmp = CptCmp;
-	this->CptRls = CptRls;
-
 	mask = {CPT, CPTCMP, CPTRLS};
 };
 
@@ -374,11 +370,11 @@ PnlWdbeNavDeploy::DpchAppDo::DpchAppDo(
 			, const set<uint>& mask
 		) :
 			DpchAppWdbe(VecWdbeVDpch::DPCHAPPWDBENAVDEPLOYDO, scrJref)
+			, ixVDo(ixVDo)
 		{
 	if (find(mask, ALL)) this->mask = {SCRJREF, IXVDO};
 	else this->mask = mask;
 
-	this->ixVDo = ixVDo;
 };
 
 string PnlWdbeNavDeploy::DpchAppDo::getSrefsMask() {

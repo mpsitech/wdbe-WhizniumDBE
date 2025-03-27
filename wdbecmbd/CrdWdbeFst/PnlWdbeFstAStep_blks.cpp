@@ -51,9 +51,8 @@ PnlWdbeFstAStep::ContInf::ContInf(
 			const uint numFCsiQst
 		) :
 			Block()
+			, numFCsiQst(numFCsiQst)
 		{
-	this->numFCsiQst = numFCsiQst;
-
 	mask = {NUMFCSIQST};
 };
 
@@ -157,17 +156,16 @@ PnlWdbeFstAStep::StatShr::StatShr(
 			, const bool ButDeleteActive
 		) :
 			Block()
+			, ButUpAvail(ButUpAvail)
+			, ButUpActive(ButUpActive)
+			, ButDownAvail(ButDownAvail)
+			, ButDownActive(ButDownActive)
+			, ButNewAvail(ButNewAvail)
+			, ButDuplicateAvail(ButDuplicateAvail)
+			, ButDuplicateActive(ButDuplicateActive)
+			, ButDeleteAvail(ButDeleteAvail)
+			, ButDeleteActive(ButDeleteActive)
 		{
-	this->ButUpAvail = ButUpAvail;
-	this->ButUpActive = ButUpActive;
-	this->ButDownAvail = ButDownAvail;
-	this->ButDownActive = ButDownActive;
-	this->ButNewAvail = ButNewAvail;
-	this->ButDuplicateAvail = ButDuplicateAvail;
-	this->ButDuplicateActive = ButDuplicateActive;
-	this->ButDeleteAvail = ButDeleteAvail;
-	this->ButDeleteActive = ButDeleteActive;
-
 	mask = {BUTUPAVAIL, BUTUPACTIVE, BUTDOWNAVAIL, BUTDOWNACTIVE, BUTNEWAVAIL, BUTDUPLICATEAVAIL, BUTDUPLICATEACTIVE, BUTDELETEAVAIL, BUTDELETEACTIVE};
 };
 
@@ -266,20 +264,20 @@ PnlWdbeFstAStep::StgIac::StgIac(
 			, const uint TcoIp6Width
 		) :
 			Block()
+			, TcoFnxWidth(TcoFnxWidth)
+			, TcoCn1Width(TcoCn1Width)
+			, TcoIp1Width(TcoIp1Width)
+			, TcoCn2Width(TcoCn2Width)
+			, TcoIp2Width(TcoIp2Width)
+			, TcoCn3Width(TcoCn3Width)
+			, TcoIp3Width(TcoIp3Width)
+			, TcoCn4Width(TcoCn4Width)
+			, TcoIp4Width(TcoIp4Width)
+			, TcoCn5Width(TcoCn5Width)
+			, TcoIp5Width(TcoIp5Width)
+			, TcoCn6Width(TcoCn6Width)
+			, TcoIp6Width(TcoIp6Width)
 		{
-	this->TcoFnxWidth = TcoFnxWidth;
-	this->TcoCn1Width = TcoCn1Width;
-	this->TcoIp1Width = TcoIp1Width;
-	this->TcoCn2Width = TcoCn2Width;
-	this->TcoIp2Width = TcoIp2Width;
-	this->TcoCn3Width = TcoCn3Width;
-	this->TcoIp3Width = TcoIp3Width;
-	this->TcoCn4Width = TcoCn4Width;
-	this->TcoIp4Width = TcoIp4Width;
-	this->TcoCn5Width = TcoCn5Width;
-	this->TcoIp5Width = TcoIp5Width;
-	this->TcoCn6Width = TcoCn6Width;
-	this->TcoIp6Width = TcoIp6Width;
 	mask = {TCOFNXWIDTH, TCOCN1WIDTH, TCOIP1WIDTH, TCOCN2WIDTH, TCOIP2WIDTH, TCOCN3WIDTH, TCOIP3WIDTH, TCOCN4WIDTH, TCOIP4WIDTH, TCOCN5WIDTH, TCOIP5WIDTH, TCOCN6WIDTH, TCOIP6WIDTH};
 };
 

@@ -53,9 +53,8 @@ PnlWdbeCvrAIp::ContInf::ContInf(
 			const uint numFCsiQst
 		) :
 			Block()
+			, numFCsiQst(numFCsiQst)
 		{
-	this->numFCsiQst = numFCsiQst;
-
 	mask = {NUMFCSIQST};
 };
 
@@ -114,9 +113,8 @@ PnlWdbeCvrAIp::StatApp::StatApp(
 			const uint ixWdbeVExpstate
 		) :
 			Block()
+			, ixWdbeVExpstate(ixWdbeVExpstate)
 		{
-	this->ixWdbeVExpstate = ixWdbeVExpstate;
-
 	mask = {IXWDBEVEXPSTATE};
 };
 
@@ -188,17 +186,16 @@ PnlWdbeCvrAIp::StatShr::StatShr(
 			, const bool ButDeleteActive
 		) :
 			Block()
+			, ButUpAvail(ButUpAvail)
+			, ButUpActive(ButUpActive)
+			, ButDownAvail(ButDownAvail)
+			, ButDownActive(ButDownActive)
+			, ButNewAvail(ButNewAvail)
+			, ButDuplicateAvail(ButDuplicateAvail)
+			, ButDuplicateActive(ButDuplicateActive)
+			, ButDeleteAvail(ButDeleteAvail)
+			, ButDeleteActive(ButDeleteActive)
 		{
-	this->ButUpAvail = ButUpAvail;
-	this->ButUpActive = ButUpActive;
-	this->ButDownAvail = ButDownAvail;
-	this->ButDownActive = ButDownActive;
-	this->ButNewAvail = ButNewAvail;
-	this->ButDuplicateAvail = ButDuplicateAvail;
-	this->ButDuplicateActive = ButDuplicateActive;
-	this->ButDeleteAvail = ButDeleteAvail;
-	this->ButDeleteActive = ButDeleteActive;
-
 	mask = {BUTUPAVAIL, BUTUPACTIVE, BUTDOWNAVAIL, BUTDOWNACTIVE, BUTNEWAVAIL, BUTDUPLICATEAVAIL, BUTDUPLICATEACTIVE, BUTDELETEAVAIL, BUTDELETEACTIVE};
 };
 
@@ -275,11 +272,10 @@ PnlWdbeCvrAIp::StgIac::StgIac(
 			, const uint TcoCmtWidth
 		) :
 			Block()
+			, TcoSrfWidth(TcoSrfWidth)
+			, TcoTtyWidth(TcoTtyWidth)
+			, TcoCmtWidth(TcoCmtWidth)
 		{
-	this->TcoSrfWidth = TcoSrfWidth;
-	this->TcoTtyWidth = TcoTtyWidth;
-	this->TcoCmtWidth = TcoCmtWidth;
-
 	mask = {TCOSRFWIDTH, TCOTTYWIDTH, TCOCMTWIDTH};
 };
 
@@ -368,17 +364,16 @@ PnlWdbeCvrAIp::Tag::Tag(
 			, const string& TcoCmt
 		) :
 			Block()
+			, Cpt(Cpt)
+			, TxtRecord1(TxtRecord1)
+			, TxtRecord2(TxtRecord2)
+			, Trs(Trs)
+			, TxtShowing1(TxtShowing1)
+			, TxtShowing2(TxtShowing2)
+			, TcoSrf(TcoSrf)
+			, TcoTty(TcoTty)
+			, TcoCmt(TcoCmt)
 		{
-	this->Cpt = Cpt;
-	this->TxtRecord1 = TxtRecord1;
-	this->TxtRecord2 = TxtRecord2;
-	this->Trs = Trs;
-	this->TxtShowing1 = TxtShowing1;
-	this->TxtShowing2 = TxtShowing2;
-	this->TcoSrf = TcoSrf;
-	this->TcoTty = TcoTty;
-	this->TcoCmt = TcoCmt;
-
 	mask = {CPT, TXTRECORD1, TXTRECORD2, TRS, TXTSHOWING1, TXTSHOWING2, TCOSRF, TCOTTY, TCOCMT};
 };
 
@@ -466,11 +461,11 @@ PnlWdbeCvrAIp::DpchAppDo::DpchAppDo(
 			, const set<uint>& mask
 		) :
 			DpchAppWdbe(VecWdbeVDpch::DPCHAPPWDBECVRAIPDO, scrJref)
+			, ixVDo(ixVDo)
 		{
 	if (find(mask, ALL)) this->mask = {SCRJREF, IXVDO};
 	else this->mask = mask;
 
-	this->ixVDo = ixVDo;
 };
 
 string PnlWdbeCvrAIp::DpchAppDo::getSrefsMask() {

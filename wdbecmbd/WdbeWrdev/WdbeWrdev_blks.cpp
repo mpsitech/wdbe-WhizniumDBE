@@ -26,11 +26,11 @@ DpchInvWdbeWrdevBase::DpchInvWdbeWrdevBase(
 			, const bool Easy
 		) :
 			DpchInvWdbe(VecWdbeVDpch::DPCHINVWDBEWRDEVBASE, oref, jref)
+			, refWdbeMVersion(refWdbeMVersion)
+			, folder(folder)
+			, Prjshort(Prjshort)
+			, Easy(Easy)
 		{
-	this->refWdbeMVersion = refWdbeMVersion;
-	this->folder = folder;
-	this->Prjshort = Prjshort;
-	this->Easy = Easy;
 };
 
 void DpchInvWdbeWrdevBase::readXML(
@@ -83,10 +83,10 @@ DpchInvWdbeWrdevCtr::DpchInvWdbeWrdevCtr(
 			, const bool Easy
 		) :
 			DpchInvWdbe(VecWdbeVDpch::DPCHINVWDBEWRDEVCTR, oref, jref)
+			, refWdbeMController(refWdbeMController)
+			, folder(folder)
+			, Easy(Easy)
 		{
-	this->refWdbeMController = refWdbeMController;
-	this->folder = folder;
-	this->Easy = Easy;
 };
 
 void DpchInvWdbeWrdevCtr::readXML(
@@ -137,10 +137,10 @@ DpchInvWdbeWrdevDeploy::DpchInvWdbeWrdevDeploy(
 			, const bool Easy
 		) :
 			DpchInvWdbe(VecWdbeVDpch::DPCHINVWDBEWRDEVDEPLOY, oref, jref)
+			, refWdbeMRelease(refWdbeMRelease)
+			, folder(folder)
+			, Easy(Easy)
 		{
-	this->refWdbeMRelease = refWdbeMRelease;
-	this->folder = folder;
-	this->Easy = Easy;
 };
 
 void DpchInvWdbeWrdevDeploy::readXML(
@@ -191,10 +191,10 @@ DpchInvWdbeWrdevUnt::DpchInvWdbeWrdevUnt(
 			, const bool Easy
 		) :
 			DpchInvWdbe(VecWdbeVDpch::DPCHINVWDBEWRDEVUNT, oref, jref)
+			, refWdbeMUnit(refWdbeMUnit)
+			, folder(folder)
+			, Easy(Easy)
 		{
-	this->refWdbeMUnit = refWdbeMUnit;
-	this->folder = folder;
-	this->Easy = Easy;
 };
 
 void DpchInvWdbeWrdevUnt::readXML(

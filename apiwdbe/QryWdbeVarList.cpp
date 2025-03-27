@@ -50,12 +50,11 @@ QryWdbeVarList::StatApp::StatApp(
 			, const uint ndisp
 		) :
 			Block()
+			, firstcol(firstcol)
+			, jnumFirstdisp(jnumFirstdisp)
+			, ncol(ncol)
+			, ndisp(ndisp)
 		{
-	this->firstcol = firstcol;
-	this->jnumFirstdisp = jnumFirstdisp;
-	this->ncol = ncol;
-	this->ndisp = ndisp;
-
 	mask = {FIRSTCOL, JNUMFIRSTDISP, NCOL, NDISP};
 };
 
@@ -122,11 +121,10 @@ QryWdbeVarList::StatShr::StatShr(
 			, const uint nload
 		) :
 			Block()
+			, ntot(ntot)
+			, jnumFirstload(jnumFirstload)
+			, nload(nload)
 		{
-	this->ntot = ntot;
-	this->jnumFirstload = jnumFirstload;
-	this->nload = nload;
-
 	mask = {NTOT, JNUMFIRSTLOAD, NLOAD};
 };
 
@@ -191,11 +189,10 @@ QryWdbeVarList::StgIac::StgIac(
 			, const uint nload
 		) :
 			Block()
+			, jnum(jnum)
+			, jnumFirstload(jnumFirstload)
+			, nload(nload)
 		{
-	this->jnum = jnum;
-	this->jnumFirstload = jnumFirstload;
-	this->nload = nload;
-
 	mask = {JNUM, JNUMFIRSTLOAD, NLOAD};
 };
 

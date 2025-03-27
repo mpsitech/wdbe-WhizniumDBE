@@ -47,11 +47,10 @@ PnlWdbeErrDetail::ContIac::ContIac(
 			, const string& TxfCmt
 		) :
 			Block()
+			, TxfFsr(TxfFsr)
+			, numFPupRet(numFPupRet)
+			, TxfCmt(TxfCmt)
 		{
-	this->TxfFsr = TxfFsr;
-	this->numFPupRet = numFPupRet;
-	this->TxfCmt = TxfCmt;
-
 	mask = {TXFFSR, NUMFPUPRET, TXFCMT};
 };
 
@@ -168,11 +167,10 @@ PnlWdbeErrDetail::ContInf::ContInf(
 			, const string& TxtTra
 		) :
 			Block()
+			, TxtSrf(TxtSrf)
+			, TxtReu(TxtReu)
+			, TxtTra(TxtTra)
 		{
-	this->TxtSrf = TxtSrf;
-	this->TxtReu = TxtReu;
-	this->TxtTra = TxtTra;
-
 	mask = {TXTSRF, TXTREU, TXTTRA};
 };
 
@@ -284,19 +282,18 @@ PnlWdbeErrDetail::StatShr::StatShr(
 			, const bool TxfCmtActive
 		) :
 			Block()
+			, ButSaveAvail(ButSaveAvail)
+			, ButSaveActive(ButSaveActive)
+			, TxtSrfActive(TxtSrfActive)
+			, TxfFsrActive(TxfFsrActive)
+			, TxtReuActive(TxtReuActive)
+			, ButReuViewAvail(ButReuViewAvail)
+			, ButReuViewActive(ButReuViewActive)
+			, TxtTraActive(TxtTraActive)
+			, ButTraViewAvail(ButTraViewAvail)
+			, ButTraViewActive(ButTraViewActive)
+			, TxfCmtActive(TxfCmtActive)
 		{
-	this->ButSaveAvail = ButSaveAvail;
-	this->ButSaveActive = ButSaveActive;
-	this->TxtSrfActive = TxtSrfActive;
-	this->TxfFsrActive = TxfFsrActive;
-	this->TxtReuActive = TxtReuActive;
-	this->ButReuViewAvail = ButReuViewAvail;
-	this->ButReuViewActive = ButReuViewActive;
-	this->TxtTraActive = TxtTraActive;
-	this->ButTraViewAvail = ButTraViewAvail;
-	this->ButTraViewActive = ButTraViewActive;
-	this->TxfCmtActive = TxfCmtActive;
-
 	mask = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXFFSRACTIVE, TXTREUACTIVE, BUTREUVIEWAVAIL, BUTREUVIEWACTIVE, TXTTRAACTIVE, BUTTRAVIEWAVAIL, BUTTRAVIEWACTIVE, TXFCMTACTIVE};
 };
 

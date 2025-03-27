@@ -309,10 +309,10 @@ void QryWdbeSnsList::fetch(
 			rec->titSrcIxVTbl = VecWdbeVMSensitivitySrcTbl::getTitle(rec->srcIxVTbl, ixWdbeVLocale);
 			if (rec->srcIxVTbl == VecWdbeVMSensitivitySrcTbl::INT) {
 				rec->stubSrcUref = StubWdbe::getStubIntStd(dbswdbe, rec->srcUref, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
-			} else if (rec->srcIxVTbl == VecWdbeVMSensitivitySrcTbl::PRT) {
-				rec->stubSrcUref = StubWdbe::getStubPrtStd(dbswdbe, rec->srcUref, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
 			} else if (rec->srcIxVTbl == VecWdbeVMSensitivitySrcTbl::SIG) {
 				rec->stubSrcUref = StubWdbe::getStubSigStd(dbswdbe, rec->srcUref, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
+			} else if (rec->srcIxVTbl == VecWdbeVMSensitivitySrcTbl::PRT) {
+				rec->stubSrcUref = StubWdbe::getStubPrtStd(dbswdbe, rec->srcUref, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
 			} else rec->stubSrcUref = "-";
 		};
 
@@ -458,27 +458,13 @@ void QryWdbeSnsList::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBESNSMOD) {
-		call->abort = handleCallWdbeSnsMod(dbswdbe, call->jref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBESNSUPD_REFEQ) {
+	if (call->ixVCall == VecWdbeVCall::CALLWDBESNSUPD_REFEQ) {
 		call->abort = handleCallWdbeSnsUpd_refEq(dbswdbe, call->jref);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBESNSMOD) {
+		call->abort = handleCallWdbeSnsMod(dbswdbe, call->jref);
 	} else if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
 		call->abort = handleCallWdbeStubChgFromSelf(dbswdbe);
 	};
-};
-
-bool QryWdbeSnsList::handleCallWdbeSnsMod(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-
-	if ((ixWdbeVQrystate == VecWdbeVQrystate::UTD) || (ixWdbeVQrystate == VecWdbeVQrystate::SLM)) {
-		ixWdbeVQrystate = VecWdbeVQrystate::MNR;
-		xchg->triggerCall(dbswdbe, VecWdbeVCall::CALLWDBESTATCHG, jref);
-	};
-
-	return retval;
 };
 
 bool QryWdbeSnsList::handleCallWdbeSnsUpd_refEq(
@@ -489,6 +475,20 @@ bool QryWdbeSnsList::handleCallWdbeSnsUpd_refEq(
 
 	if (ixWdbeVQrystate != VecWdbeVQrystate::OOD) {
 		ixWdbeVQrystate = VecWdbeVQrystate::OOD;
+		xchg->triggerCall(dbswdbe, VecWdbeVCall::CALLWDBESTATCHG, jref);
+	};
+
+	return retval;
+};
+
+bool QryWdbeSnsList::handleCallWdbeSnsMod(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+
+	if ((ixWdbeVQrystate == VecWdbeVQrystate::UTD) || (ixWdbeVQrystate == VecWdbeVQrystate::SLM)) {
+		ixWdbeVQrystate = VecWdbeVQrystate::MNR;
 		xchg->triggerCall(dbswdbe, VecWdbeVCall::CALLWDBESTATCHG, jref);
 	};
 

@@ -43,9 +43,8 @@ PnlWdbePphRec::ContInf::ContInf(
 			const string& TxtRef
 		) :
 			Block()
+			, TxtRef(TxtRef)
 		{
-	this->TxtRef = TxtRef;
-
 	mask = {TXTREF};
 };
 
@@ -153,13 +152,12 @@ PnlWdbePphRec::StatShr::StatShr(
 			, const bool ButRegularizeActive
 		) :
 			Block()
+			, ixWdbeVExpstate(ixWdbeVExpstate)
+			, jrefDetail(jrefDetail)
+			, jrefAPar(jrefAPar)
+			, jrefMNModule(jrefMNModule)
+			, ButRegularizeActive(ButRegularizeActive)
 		{
-	this->ixWdbeVExpstate = ixWdbeVExpstate;
-	this->jrefDetail = jrefDetail;
-	this->jrefAPar = jrefAPar;
-	this->jrefMNModule = jrefMNModule;
-	this->ButRegularizeActive = ButRegularizeActive;
-
 	mask = {IXWDBEVEXPSTATE, JREFDETAIL, JREFAPAR, JREFMNMODULE, BUTREGULARIZEACTIVE};
 };
 

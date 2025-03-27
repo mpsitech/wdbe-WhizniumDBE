@@ -81,11 +81,10 @@ DlgWdbeNavMnglic::ContIac::ContIac(
 			, const uint numFDetLstLcs
 		) :
 			Block()
+			, numFDetPupFis(numFDetPupFis)
+			, DetChkFis(DetChkFis)
+			, numFDetLstLcs(numFDetLstLcs)
 		{
-	this->numFDetPupFis = numFDetPupFis;
-	this->DetChkFis = DetChkFis;
-	this->numFDetLstLcs = numFDetLstLcs;
-
 	mask = {NUMFDETPUPFIS, DETCHKFIS, NUMFDETLSTLCS};
 };
 
@@ -206,15 +205,14 @@ DlgWdbeNavMnglic::ContInf::ContInf(
 			, const string& DetTxtLex
 		) :
 			Block()
+			, numFSge(numFSge)
+			, DetTxtSip(DetTxtSip)
+			, DetTxtScp(DetTxtScp)
+			, DetTxtLsr(DetTxtLsr)
+			, DetTxtLar(DetTxtLar)
+			, DetTxtLst(DetTxtLst)
+			, DetTxtLex(DetTxtLex)
 		{
-	this->numFSge = numFSge;
-	this->DetTxtSip = DetTxtSip;
-	this->DetTxtScp = DetTxtScp;
-	this->DetTxtLsr = DetTxtLsr;
-	this->DetTxtLar = DetTxtLar;
-	this->DetTxtLst = DetTxtLst;
-	this->DetTxtLex = DetTxtLex;
-
 	mask = {NUMFSGE, DETTXTSIP, DETTXTSCP, DETTXTLSR, DETTXTLAR, DETTXTLST, DETTXTLEX};
 };
 
@@ -332,9 +330,8 @@ DlgWdbeNavMnglic::StatShr::StatShr(
 			const bool DetButActActive
 		) :
 			Block()
+			, DetButActActive(DetButActActive)
 		{
-	this->DetButActActive = DetButActActive;
-
 	mask = {DETBUTACTACTIVE};
 };
 

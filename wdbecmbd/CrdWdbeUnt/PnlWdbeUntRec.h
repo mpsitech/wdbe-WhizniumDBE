@@ -15,12 +15,12 @@
 // IP include.cust --- INSERT
 
 #include "PnlWdbeUntRef1NCommand.h"
-#include "PnlWdbeUntRef1NSignal.h"
+#include "PnlWdbeUntHk1NModule.h"
 #include "PnlWdbeUntHk1NVector.h"
 #include "PnlWdbeUntRef1NError.h"
-#include "PnlWdbeUntHk1NModule.h"
-#include "PnlWdbeUntSil1NUnit.h"
+#include "PnlWdbeUntRef1NSignal.h"
 #include "PnlWdbeUnt1NBank.h"
+#include "PnlWdbeUntSil1NUnit.h"
 #include "PnlWdbeUnt1NPeripheral.h"
 #include "PnlWdbeUnt1NInterrupt.h"
 #include "PnlWdbeUntDetail.h"
@@ -81,8 +81,8 @@ public:
 	class StatApp {
 
 	public:
-		static void writeJSON(Json::Value& sup, std::string difftag = "", const bool initdoneDetail = false, const bool initdone1NInterrupt = false, const bool initdone1NPeripheral = false, const bool initdoneSil1NUnit = false, const bool initdone1NBank = false, const bool initdoneHk1NModule = false, const bool initdoneRef1NError = false, const bool initdoneRef1NSignal = false, const bool initdoneHk1NVector = false, const bool initdoneRef1NCommand = false);
-		static void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true, const bool initdoneDetail = false, const bool initdone1NInterrupt = false, const bool initdone1NPeripheral = false, const bool initdoneSil1NUnit = false, const bool initdone1NBank = false, const bool initdoneHk1NModule = false, const bool initdoneRef1NError = false, const bool initdoneRef1NSignal = false, const bool initdoneHk1NVector = false, const bool initdoneRef1NCommand = false);
+		static void writeJSON(Json::Value& sup, std::string difftag = "", const bool initdoneDetail = false, const bool initdone1NInterrupt = false, const bool initdone1NPeripheral = false, const bool initdoneSil1NUnit = false, const bool initdone1NBank = false, const bool initdoneRef1NSignal = false, const bool initdoneRef1NError = false, const bool initdoneHk1NVector = false, const bool initdoneHk1NModule = false, const bool initdoneRef1NCommand = false);
+		static void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true, const bool initdoneDetail = false, const bool initdone1NInterrupt = false, const bool initdone1NPeripheral = false, const bool initdoneSil1NUnit = false, const bool initdone1NBank = false, const bool initdoneRef1NSignal = false, const bool initdoneRef1NError = false, const bool initdoneHk1NVector = false, const bool initdoneHk1NModule = false, const bool initdoneRef1NCommand = false);
 	};
 
 	/**
@@ -98,15 +98,15 @@ public:
 		static const Sbecore::uint JREFSIL1NUNIT = 5;
 		static const Sbecore::uint PNLSIL1NUNITAVAIL = 6;
 		static const Sbecore::uint JREF1NBANK = 7;
-		static const Sbecore::uint JREFHK1NMODULE = 8;
+		static const Sbecore::uint JREFREF1NSIGNAL = 8;
 		static const Sbecore::uint JREFREF1NERROR = 9;
-		static const Sbecore::uint JREFREF1NSIGNAL = 10;
-		static const Sbecore::uint JREFHK1NVECTOR = 11;
+		static const Sbecore::uint JREFHK1NVECTOR = 10;
+		static const Sbecore::uint JREFHK1NMODULE = 11;
 		static const Sbecore::uint JREFREF1NCOMMAND = 12;
 		static const Sbecore::uint BUTREGULARIZEACTIVE = 13;
 
 	public:
-		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const Sbecore::ubigint jrefDetail = 0, const Sbecore::ubigint jref1NInterrupt = 0, const Sbecore::ubigint jref1NPeripheral = 0, const Sbecore::ubigint jrefSil1NUnit = 0, const bool pnlsil1nunitAvail = false, const Sbecore::ubigint jref1NBank = 0, const Sbecore::ubigint jrefHk1NModule = 0, const Sbecore::ubigint jrefRef1NError = 0, const Sbecore::ubigint jrefRef1NSignal = 0, const Sbecore::ubigint jrefHk1NVector = 0, const Sbecore::ubigint jrefRef1NCommand = 0, const bool ButRegularizeActive = true);
+		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const Sbecore::ubigint jrefDetail = 0, const Sbecore::ubigint jref1NInterrupt = 0, const Sbecore::ubigint jref1NPeripheral = 0, const Sbecore::ubigint jrefSil1NUnit = 0, const bool pnlsil1nunitAvail = false, const Sbecore::ubigint jref1NBank = 0, const Sbecore::ubigint jrefRef1NSignal = 0, const Sbecore::ubigint jrefRef1NError = 0, const Sbecore::ubigint jrefHk1NVector = 0, const Sbecore::ubigint jrefHk1NModule = 0, const Sbecore::ubigint jrefRef1NCommand = 0, const bool ButRegularizeActive = true);
 
 	public:
 		Sbecore::uint ixWdbeVExpstate;
@@ -116,10 +116,10 @@ public:
 		Sbecore::ubigint jrefSil1NUnit;
 		bool pnlsil1nunitAvail;
 		Sbecore::ubigint jref1NBank;
-		Sbecore::ubigint jrefHk1NModule;
-		Sbecore::ubigint jrefRef1NError;
 		Sbecore::ubigint jrefRef1NSignal;
+		Sbecore::ubigint jrefRef1NError;
 		Sbecore::ubigint jrefHk1NVector;
+		Sbecore::ubigint jrefHk1NModule;
 		Sbecore::ubigint jrefRef1NCommand;
 		bool ButRegularizeActive;
 
@@ -202,12 +202,12 @@ public:
 	StatShr statshr;
 
 	PnlWdbeUntRef1NCommand* pnlref1ncommand;
-	PnlWdbeUntRef1NSignal* pnlref1nsignal;
+	PnlWdbeUntHk1NModule* pnlhk1nmodule;
 	PnlWdbeUntHk1NVector* pnlhk1nvector;
 	PnlWdbeUntRef1NError* pnlref1nerror;
-	PnlWdbeUntHk1NModule* pnlhk1nmodule;
-	PnlWdbeUntSil1NUnit* pnlsil1nunit;
+	PnlWdbeUntRef1NSignal* pnlref1nsignal;
 	PnlWdbeUnt1NBank* pnl1nbank;
+	PnlWdbeUntSil1NUnit* pnlsil1nunit;
 	PnlWdbeUnt1NPeripheral* pnl1nperipheral;
 	PnlWdbeUnt1NInterrupt* pnl1ninterrupt;
 	PnlWdbeUntDetail* pnldetail;

@@ -32,8 +32,8 @@ public:
 	class VecVOrd {
 
 	public:
-		static const Sbecore::uint CMP = 1;
-		static const Sbecore::uint MCH = 2;
+		static const Sbecore::uint MCH = 1;
+		static const Sbecore::uint CMP = 2;
 		static const Sbecore::uint SRF = 3;
 
 		static Sbecore::uint getIx(const std::string& sref);
@@ -149,8 +149,8 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeRlsMod(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 	bool handleCallWdbeRlsUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbeRlsMod(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 	bool handleCallWdbeStubChgFromSelf(DbsWdbe* dbswdbe);
 
 };

@@ -132,33 +132,31 @@ public:
 	class StatShr : public Sbecore::Block {
 
 	public:
-		static const Sbecore::uint TXFCNTVALID = 1;
-		static const Sbecore::uint TXFMIMVALID = 2;
-		static const Sbecore::uint BUTSAVEAVAIL = 3;
-		static const Sbecore::uint BUTSAVEACTIVE = 4;
-		static const Sbecore::uint TXFFNMACTIVE = 5;
-		static const Sbecore::uint LSTCLUACTIVE = 6;
-		static const Sbecore::uint BUTCLUVIEWACTIVE = 7;
-		static const Sbecore::uint BUTCLUCLUSTERAVAIL = 8;
-		static const Sbecore::uint BUTCLUUNCLUSTERAVAIL = 9;
-		static const Sbecore::uint TXTREUACTIVE = 10;
-		static const Sbecore::uint BUTREUVIEWAVAIL = 11;
-		static const Sbecore::uint BUTREUVIEWACTIVE = 12;
-		static const Sbecore::uint PUPCNTACTIVE = 13;
-		static const Sbecore::uint BUTCNTEDITAVAIL = 14;
-		static const Sbecore::uint TXFACVACTIVE = 15;
-		static const Sbecore::uint TXFANMACTIVE = 16;
-		static const Sbecore::uint PUPMIMACTIVE = 17;
+		static const Sbecore::uint BUTSAVEAVAIL = 1;
+		static const Sbecore::uint BUTSAVEACTIVE = 2;
+		static const Sbecore::uint TXFFNMACTIVE = 3;
+		static const Sbecore::uint LSTCLUACTIVE = 4;
+		static const Sbecore::uint BUTCLUVIEWACTIVE = 5;
+		static const Sbecore::uint BUTCLUCLUSTERAVAIL = 6;
+		static const Sbecore::uint BUTCLUUNCLUSTERAVAIL = 7;
+		static const Sbecore::uint TXTREUACTIVE = 8;
+		static const Sbecore::uint BUTREUVIEWAVAIL = 9;
+		static const Sbecore::uint BUTREUVIEWACTIVE = 10;
+		static const Sbecore::uint PUPCNTACTIVE = 11;
+		static const Sbecore::uint TXFCNTVALID = 12;
+		static const Sbecore::uint BUTCNTEDITAVAIL = 13;
+		static const Sbecore::uint TXFACVACTIVE = 14;
+		static const Sbecore::uint TXFANMACTIVE = 15;
+		static const Sbecore::uint PUPMIMACTIVE = 16;
+		static const Sbecore::uint TXFMIMVALID = 17;
 		static const Sbecore::uint BUTMIMEDITAVAIL = 18;
 		static const Sbecore::uint TXFSIZACTIVE = 19;
 		static const Sbecore::uint TXFCMTACTIVE = 20;
 
 	public:
-		StatShr(const bool TxfCntValid = false, const bool TxfMimValid = false, const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxfFnmActive = true, const bool LstCluActive = true, const bool ButCluViewActive = true, const bool ButCluClusterAvail = true, const bool ButCluUnclusterAvail = true, const bool TxtReuActive = true, const bool ButReuViewAvail = true, const bool ButReuViewActive = true, const bool PupCntActive = true, const bool ButCntEditAvail = true, const bool TxfAcvActive = true, const bool TxfAnmActive = true, const bool PupMimActive = true, const bool ButMimEditAvail = true, const bool TxfSizActive = true, const bool TxfCmtActive = true);
+		StatShr(const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxfFnmActive = true, const bool LstCluActive = true, const bool ButCluViewActive = true, const bool ButCluClusterAvail = true, const bool ButCluUnclusterAvail = true, const bool TxtReuActive = true, const bool ButReuViewAvail = true, const bool ButReuViewActive = true, const bool PupCntActive = true, const bool TxfCntValid = false, const bool ButCntEditAvail = true, const bool TxfAcvActive = true, const bool TxfAnmActive = true, const bool PupMimActive = true, const bool TxfMimValid = false, const bool ButMimEditAvail = true, const bool TxfSizActive = true, const bool TxfCmtActive = true);
 
 	public:
-		bool TxfCntValid;
-		bool TxfMimValid;
 		bool ButSaveAvail;
 		bool ButSaveActive;
 		bool TxfFnmActive;
@@ -170,10 +168,12 @@ public:
 		bool ButReuViewAvail;
 		bool ButReuViewActive;
 		bool PupCntActive;
+		bool TxfCntValid;
 		bool ButCntEditAvail;
 		bool TxfAcvActive;
 		bool TxfAnmActive;
 		bool PupMimActive;
+		bool TxfMimValid;
 		bool ButMimEditAvail;
 		bool TxfSizActive;
 		bool TxfCmtActive;
@@ -362,8 +362,8 @@ private:
 	bool handleCallWdbeFilMod_cluEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 	bool handleCallWdbeKlsAkeyMod_klsEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv);
 	bool handleCallWdbeFilUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
-	bool handleCallWdbeFil_retEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
 	bool handleCallWdbeFil_reuEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeFil_retEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
 	bool handleCallWdbeFil_cluEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
 
 };

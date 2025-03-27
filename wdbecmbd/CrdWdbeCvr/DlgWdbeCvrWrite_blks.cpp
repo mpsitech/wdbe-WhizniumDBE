@@ -164,9 +164,8 @@ DlgWdbeCvrWrite::ContIac::ContIac(
 			const uint numFDse
 		) :
 			Block()
+			, numFDse(numFDse)
 		{
-	this->numFDse = numFDse;
-
 	mask = {NUMFDSE};
 };
 
@@ -271,9 +270,8 @@ DlgWdbeCvrWrite::ContInf::ContInf(
 			const uint numFSge
 		) :
 			Block()
+			, numFSge(numFSge)
 		{
-	this->numFSge = numFSge;
-
 	mask = {NUMFSGE};
 };
 
@@ -336,9 +334,8 @@ DlgWdbeCvrWrite::ContInfFia::ContInfFia(
 			const string& Dld
 		) :
 			Block()
+			, Dld(Dld)
 		{
-	this->Dld = Dld;
-
 	mask = {DLD};
 };
 
@@ -401,9 +398,8 @@ DlgWdbeCvrWrite::ContInfWrc::ContInfWrc(
 			const string& TxtPrg
 		) :
 			Block()
+			, TxtPrg(TxtPrg)
 		{
-	this->TxtPrg = TxtPrg;
-
 	mask = {TXTPRG};
 };
 
@@ -503,9 +499,8 @@ DlgWdbeCvrWrite::StatShr::StatShr(
 			const bool ButDneActive
 		) :
 			Block()
+			, ButDneActive(ButDneActive)
 		{
-	this->ButDneActive = ButDneActive;
-
 	mask = {BUTDNEACTIVE};
 };
 
@@ -568,9 +563,8 @@ DlgWdbeCvrWrite::StatShrCuc::StatShrCuc(
 			const bool UldActive
 		) :
 			Block()
+			, UldActive(UldActive)
 		{
-	this->UldActive = UldActive;
-
 	mask = {ULDACTIVE};
 };
 
@@ -633,9 +627,8 @@ DlgWdbeCvrWrite::StatShrFia::StatShrFia(
 			const bool DldActive
 		) :
 			Block()
+			, DldActive(DldActive)
 		{
-	this->DldActive = DldActive;
-
 	mask = {DLDACTIVE};
 };
 
@@ -699,10 +692,9 @@ DlgWdbeCvrWrite::StatShrWrc::StatShrWrc(
 			, const bool ButStoActive
 		) :
 			Block()
+			, ButRunActive(ButRunActive)
+			, ButStoActive(ButStoActive)
 		{
-	this->ButRunActive = ButRunActive;
-	this->ButStoActive = ButStoActive;
-
 	mask = {BUTRUNACTIVE, BUTSTOACTIVE};
 };
 

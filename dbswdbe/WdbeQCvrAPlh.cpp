@@ -25,14 +25,15 @@ WdbeQCvrAPlh::WdbeQCvrAPlh(
 			, const uint cvrNum
 			, const string sref
 			, const string Comment
-		) {
-	this->qref = qref;
-	this->jref = jref;
-	this->jnum = jnum;
-	this->ref = ref;
-	this->cvrNum = cvrNum;
-	this->sref = sref;
-	this->Comment = Comment;
+		) :
+			qref(qref)
+			, jref(jref)
+			, jnum(jnum)
+			, ref(ref)
+			, cvrNum(cvrNum)
+			, sref(sref)
+			, Comment(Comment)
+		{
 };
 
 void WdbeQCvrAPlh::writeJSON(

@@ -29,20 +29,20 @@ WdbeAVKeylistKey::WdbeAVKeylistKey(
 			, const ubigint refJ
 			, const string Title
 			, const string Comment
-		) {
-
-	this->ref = ref;
-	this->klsIxWdbeVKeylist = klsIxWdbeVKeylist;
-	this->klsNum = klsNum;
-	this->x1IxWdbeVMaintable = x1IxWdbeVMaintable;
-	this->x1Uref = x1Uref;
-	this->Fixed = Fixed;
-	this->sref = sref;
-	this->Avail = Avail;
-	this->Implied = Implied;
-	this->refJ = refJ;
-	this->Title = Title;
-	this->Comment = Comment;
+		) :
+			ref(ref)
+			, klsIxWdbeVKeylist(klsIxWdbeVKeylist)
+			, klsNum(klsNum)
+			, x1IxWdbeVMaintable(x1IxWdbeVMaintable)
+			, x1Uref(x1Uref)
+			, Fixed(Fixed)
+			, sref(sref)
+			, Avail(Avail)
+			, Implied(Implied)
+			, refJ(refJ)
+			, Title(Title)
+			, Comment(Comment)
+		{
 };
 
 bool WdbeAVKeylistKey::operator==(

@@ -79,11 +79,11 @@
 					/>
 				</v-col>
 				<v-col cols="12" md="6">
-					<PnlWdbeUntHk1NModule
+					<PnlWdbeUntRef1NSignal
 						v-on:crdopen="handleCrdopen"
 						v-on:request="handleRequest"
-						ref="PnlWdbeUntHk1NModule"
-						:scrJref=statshr.scrJrefHk1NModule
+						ref="PnlWdbeUntRef1NSignal"
+						:scrJref=statshr.scrJrefRef1NSignal
 					/>
 				</v-col>
 				<v-col cols="12" md="6">
@@ -95,19 +95,19 @@
 					/>
 				</v-col>
 				<v-col cols="12" md="6">
-					<PnlWdbeUntRef1NSignal
-						v-on:crdopen="handleCrdopen"
-						v-on:request="handleRequest"
-						ref="PnlWdbeUntRef1NSignal"
-						:scrJref=statshr.scrJrefRef1NSignal
-					/>
-				</v-col>
-				<v-col cols="12" md="6">
 					<PnlWdbeUntHk1NVector
 						v-on:crdopen="handleCrdopen"
 						v-on:request="handleRequest"
 						ref="PnlWdbeUntHk1NVector"
 						:scrJref=statshr.scrJrefHk1NVector
+					/>
+				</v-col>
+				<v-col cols="12" md="6">
+					<PnlWdbeUntHk1NModule
+						v-on:crdopen="handleCrdopen"
+						v-on:request="handleRequest"
+						ref="PnlWdbeUntHk1NModule"
+						:scrJref=statshr.scrJrefHk1NModule
 					/>
 				</v-col>
 				<v-col cols="12" md="6">
@@ -133,10 +133,10 @@
 	import PnlWdbeUnt1NPeripheral from './PnlWdbeUnt1NPeripheral';
 	import PnlWdbeUntSil1NUnit from './PnlWdbeUntSil1NUnit';
 	import PnlWdbeUnt1NBank from './PnlWdbeUnt1NBank';
-	import PnlWdbeUntHk1NModule from './PnlWdbeUntHk1NModule';
-	import PnlWdbeUntRef1NError from './PnlWdbeUntRef1NError';
 	import PnlWdbeUntRef1NSignal from './PnlWdbeUntRef1NSignal';
+	import PnlWdbeUntRef1NError from './PnlWdbeUntRef1NError';
 	import PnlWdbeUntHk1NVector from './PnlWdbeUntHk1NVector';
+	import PnlWdbeUntHk1NModule from './PnlWdbeUntHk1NModule';
 	import PnlWdbeUntRef1NCommand from './PnlWdbeUntRef1NCommand';
 	/*
 	*/
@@ -160,10 +160,10 @@
 			PnlWdbeUnt1NPeripheral,
 			PnlWdbeUntSil1NUnit,
 			PnlWdbeUnt1NBank,
-			PnlWdbeUntHk1NModule,
-			PnlWdbeUntRef1NError,
 			PnlWdbeUntRef1NSignal,
+			PnlWdbeUntRef1NError,
 			PnlWdbeUntHk1NVector,
+			PnlWdbeUntHk1NModule,
 			PnlWdbeUntRef1NCommand
 			/*
 			*/
@@ -230,10 +230,10 @@
 						else if (obj.scrJref == this.statshr.scrJref1NPeripheral) this.$refs.PnlWdbeUnt1NPeripheral.handleReply(obj);
 						else if (obj.scrJref == this.statshr.scrJrefSil1NUnit) this.$refs.PnlWdbeUntSil1NUnit.handleReply(obj);
 						else if (obj.scrJref == this.statshr.scrJref1NBank) this.$refs.PnlWdbeUnt1NBank.handleReply(obj);
-						else if (obj.scrJref == this.statshr.scrJrefHk1NModule) this.$refs.PnlWdbeUntHk1NModule.handleReply(obj);
-						else if (obj.scrJref == this.statshr.scrJrefRef1NError) this.$refs.PnlWdbeUntRef1NError.handleReply(obj);
 						else if (obj.scrJref == this.statshr.scrJrefRef1NSignal) this.$refs.PnlWdbeUntRef1NSignal.handleReply(obj);
+						else if (obj.scrJref == this.statshr.scrJrefRef1NError) this.$refs.PnlWdbeUntRef1NError.handleReply(obj);
 						else if (obj.scrJref == this.statshr.scrJrefHk1NVector) this.$refs.PnlWdbeUntHk1NVector.handleReply(obj);
+						else if (obj.scrJref == this.statshr.scrJrefHk1NModule) this.$refs.PnlWdbeUntHk1NModule.handleReply(obj);
 						else if (obj.scrJref == this.statshr.scrJrefRef1NCommand) this.$refs.PnlWdbeUntRef1NCommand.handleReply(obj);
 						/*
 						*/
@@ -269,10 +269,10 @@
 						else if (obj.dpcheng.scrJref == this.statshr.scrJref1NPeripheral) this.$refs.PnlWdbeUnt1NPeripheral.handleUpdate(obj);
 						else if (obj.dpcheng.scrJref == this.statshr.scrJrefSil1NUnit) this.$refs.PnlWdbeUntSil1NUnit.handleUpdate(obj);
 						else if (obj.dpcheng.scrJref == this.statshr.scrJref1NBank) this.$refs.PnlWdbeUnt1NBank.handleUpdate(obj);
-						else if (obj.dpcheng.scrJref == this.statshr.scrJrefHk1NModule) this.$refs.PnlWdbeUntHk1NModule.handleUpdate(obj);
-						else if (obj.dpcheng.scrJref == this.statshr.scrJrefRef1NError) this.$refs.PnlWdbeUntRef1NError.handleUpdate(obj);
 						else if (obj.dpcheng.scrJref == this.statshr.scrJrefRef1NSignal) this.$refs.PnlWdbeUntRef1NSignal.handleUpdate(obj);
+						else if (obj.dpcheng.scrJref == this.statshr.scrJrefRef1NError) this.$refs.PnlWdbeUntRef1NError.handleUpdate(obj);
 						else if (obj.dpcheng.scrJref == this.statshr.scrJrefHk1NVector) this.$refs.PnlWdbeUntHk1NVector.handleUpdate(obj);
+						else if (obj.dpcheng.scrJref == this.statshr.scrJrefHk1NModule) this.$refs.PnlWdbeUntHk1NModule.handleUpdate(obj);
 						else if (obj.dpcheng.scrJref == this.statshr.scrJrefRef1NCommand) this.$refs.PnlWdbeUntRef1NCommand.handleUpdate(obj);
 						/*
 						*/

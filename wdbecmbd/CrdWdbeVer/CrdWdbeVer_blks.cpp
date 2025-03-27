@@ -99,11 +99,10 @@ CrdWdbeVer::ContInf::ContInf(
 			, const string& MtxCrdVer
 		) :
 			Block()
+			, numFSge(numFSge)
+			, MrlAppHlp(MrlAppHlp)
+			, MtxCrdVer(MtxCrdVer)
 		{
-	this->numFSge = numFSge;
-	this->MrlAppHlp = MrlAppHlp;
-	this->MtxCrdVer = MtxCrdVer;
-
 	mask = {NUMFSGE, MRLAPPHLP, MTXCRDVER};
 };
 
@@ -265,45 +264,44 @@ CrdWdbeVer::StatShr::StatShr(
 			, const bool MitCrdFnmActive
 		) :
 			Block()
+			, jrefDlgcmdset(jrefDlgcmdset)
+			, jrefDlgcustfst(jrefDlgcustfst)
+			, jrefDlgdeploy(jrefDlgdeploy)
+			, jrefDlgdflalg(jrefDlgdflalg)
+			, jrefDlgfinmod(jrefDlgfinmod)
+			, jrefDlggenfst(jrefDlggenfst)
+			, jrefDlgmdlstr(jrefDlgmdlstr)
+			, jrefDlgnew(jrefDlgnew)
+			, jrefHeadbar(jrefHeadbar)
+			, jrefList(jrefList)
+			, jrefRec(jrefRec)
+			, MspCrd1Avail(MspCrd1Avail)
+			, MitCrdNewAvail(MitCrdNewAvail)
+			, MitCrdPcvAvail(MitCrdPcvAvail)
+			, MitCrdPcvActive(MitCrdPcvActive)
+			, MspCrd3Avail(MspCrd3Avail)
+			, MspCrd3Active(MspCrd3Active)
+			, MitCrdIdpAvail(MitCrdIdpAvail)
+			, MitCrdIdpActive(MitCrdIdpActive)
+			, MspCrd4Avail(MspCrd4Avail)
+			, MspCrd4Active(MspCrd4Active)
+			, MitCrdImdAvail(MitCrdImdAvail)
+			, MitCrdImdActive(MitCrdImdActive)
+			, MitCrdIcsAvail(MitCrdIcsAvail)
+			, MitCrdIcsActive(MitCrdIcsActive)
+			, MitCrdIdaAvail(MitCrdIdaAvail)
+			, MitCrdIdaActive(MitCrdIdaActive)
+			, MspCrd5Avail(MspCrd5Avail)
+			, MspCrd5Active(MspCrd5Active)
+			, MitCrdGfsAvail(MitCrdGfsAvail)
+			, MitCrdGfsActive(MitCrdGfsActive)
+			, MitCrdIfsAvail(MitCrdIfsAvail)
+			, MitCrdIfsActive(MitCrdIfsActive)
+			, MspCrd6Avail(MspCrd6Avail)
+			, MspCrd6Active(MspCrd6Active)
+			, MitCrdFnmAvail(MitCrdFnmAvail)
+			, MitCrdFnmActive(MitCrdFnmActive)
 		{
-	this->jrefDlgcmdset = jrefDlgcmdset;
-	this->jrefDlgcustfst = jrefDlgcustfst;
-	this->jrefDlgdeploy = jrefDlgdeploy;
-	this->jrefDlgdflalg = jrefDlgdflalg;
-	this->jrefDlgfinmod = jrefDlgfinmod;
-	this->jrefDlggenfst = jrefDlggenfst;
-	this->jrefDlgmdlstr = jrefDlgmdlstr;
-	this->jrefDlgnew = jrefDlgnew;
-	this->jrefHeadbar = jrefHeadbar;
-	this->jrefList = jrefList;
-	this->jrefRec = jrefRec;
-	this->MspCrd1Avail = MspCrd1Avail;
-	this->MitCrdNewAvail = MitCrdNewAvail;
-	this->MitCrdPcvAvail = MitCrdPcvAvail;
-	this->MitCrdPcvActive = MitCrdPcvActive;
-	this->MspCrd3Avail = MspCrd3Avail;
-	this->MspCrd3Active = MspCrd3Active;
-	this->MitCrdIdpAvail = MitCrdIdpAvail;
-	this->MitCrdIdpActive = MitCrdIdpActive;
-	this->MspCrd4Avail = MspCrd4Avail;
-	this->MspCrd4Active = MspCrd4Active;
-	this->MitCrdImdAvail = MitCrdImdAvail;
-	this->MitCrdImdActive = MitCrdImdActive;
-	this->MitCrdIcsAvail = MitCrdIcsAvail;
-	this->MitCrdIcsActive = MitCrdIcsActive;
-	this->MitCrdIdaAvail = MitCrdIdaAvail;
-	this->MitCrdIdaActive = MitCrdIdaActive;
-	this->MspCrd5Avail = MspCrd5Avail;
-	this->MspCrd5Active = MspCrd5Active;
-	this->MitCrdGfsAvail = MitCrdGfsAvail;
-	this->MitCrdGfsActive = MitCrdGfsActive;
-	this->MitCrdIfsAvail = MitCrdIfsAvail;
-	this->MitCrdIfsActive = MitCrdIfsActive;
-	this->MspCrd6Avail = MspCrd6Avail;
-	this->MspCrd6Active = MspCrd6Active;
-	this->MitCrdFnmAvail = MitCrdFnmAvail;
-	this->MitCrdFnmActive = MitCrdFnmActive;
-
 	mask = {JREFDLGCMDSET, JREFDLGCUSTFST, JREFDLGDEPLOY, JREFDLGDFLALG, JREFDLGFINMOD, JREFDLGGENFST, JREFDLGMDLSTR, JREFDLGNEW, JREFHEADBAR, JREFLIST, JREFREC, MSPCRD1AVAIL, MITCRDNEWAVAIL, MITCRDPCVAVAIL, MITCRDPCVACTIVE, MSPCRD3AVAIL, MSPCRD3ACTIVE, MITCRDIDPAVAIL, MITCRDIDPACTIVE, MSPCRD4AVAIL, MSPCRD4ACTIVE, MITCRDIMDAVAIL, MITCRDIMDACTIVE, MITCRDICSAVAIL, MITCRDICSACTIVE, MITCRDIDAAVAIL, MITCRDIDAACTIVE, MSPCRD5AVAIL, MSPCRD5ACTIVE, MITCRDGFSAVAIL, MITCRDGFSACTIVE, MITCRDIFSAVAIL, MITCRDIFSACTIVE, MSPCRD6AVAIL, MSPCRD6ACTIVE, MITCRDFNMAVAIL, MITCRDFNMACTIVE};
 };
 

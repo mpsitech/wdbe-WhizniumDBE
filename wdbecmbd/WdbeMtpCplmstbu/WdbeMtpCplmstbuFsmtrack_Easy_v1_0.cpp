@@ -43,7 +43,7 @@ DpchRetWdbe* WdbeMtpCplmstbuFsmtrack_Easy_v1_0::run(
 	string capts; // ex. tkclksrc.op;camif.stream
 	string trigs; // ex. strbFrame.rising;ackXyz.falling
 
-	ubigint refVecSrc, refVecTrig;
+	ubigint refVecCapt, refVecTrig;
 	uint vecNum;
 
 	uint mdlNum;
@@ -94,7 +94,7 @@ DpchRetWdbe* WdbeMtpCplmstbuFsmtrack_Easy_v1_0::run(
 			dbswdbe->executeQuery("UPDATE TblWdbeMPort SET sref = '" + trkclk + "' WHERE mdlRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'trkclk'");
 		};
 
-		if (dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMVector WHERE hkIxVTbl = " + to_string(VecWdbeVMVectorHkTbl::CTR) + " AND hkUref = " + to_string(mdl->refWdbeMController) + " AND sref LIKE 'VecV%Source'", refVecSrc)) {
+		if (dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMVector WHERE hkIxVTbl = " + to_string(VecWdbeVMVectorHkTbl::CTR) + " AND hkUref = " + to_string(mdl->refWdbeMController) + " AND sref LIKE 'VecV%Capture'", refVecCapt)) {
 			vecNum = 1;
 
 			if (Wdbe::getMpa(dbswdbe, refWdbeMModule, "capts", capts)) {
@@ -104,7 +104,7 @@ DpchRetWdbe* WdbeMtpCplmstbuFsmtrack_Easy_v1_0::run(
 					StrMod::stringToVector(ss[i], ss2, '.');
 
 					if (ss2.size() == 2) {
-						dbswdbe->tblwdbemvectoritem->insertNewRec(NULL, refVecSrc, vecNum++, ss2[0] + StrMod::cap(ss2[1]), "", "");
+						dbswdbe->tblwdbemvectoritem->insertNewRec(NULL, refVecCapt, vecNum++, ss2[0] + StrMod::cap(ss2[1]), "", "");
 
 						sref = ss2[0] + "State" + StrMod::cap(ss2[1]);
 						dbswdbe->tblwdbemport->insertNewRec(NULL, 0, refWdbeMModule, mdlNum++, VecWdbeVMPortMdlCat::DBG, sref, VecWdbeVMPortDir::IN, "slvdn", 8, "", "", "", "", sref + "_dbg", "");
@@ -122,7 +122,7 @@ DpchRetWdbe* WdbeMtpCplmstbuFsmtrack_Easy_v1_0::run(
 				for (unsigned int i = 0; i < ss.size(); i++) {
 					StrMod::stringToVector(ss[i], ss2, '.');
 
-					if (ss2.size() >= 2) if ((ss2[1] == "rising") || (ss2[1] == "falling")) {
+					if (ss2.size() >= 1) {
 						dbswdbe->tblwdbemvectoritem->insertNewRec(NULL, refVecTrig, vecNum++, ss2[0], "", "");
 						dbswdbe->tblwdbemport->insertNewRec(NULL, 0, refWdbeMModule, mdlNum++, VecWdbeVMPortMdlCat::RTETOP, ss2[0], VecWdbeVMPortDir::IN, "sl", 1, "", "", "", "", ss2[0], "");
 					};

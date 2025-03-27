@@ -34,23 +34,24 @@ WdbeQSigList::WdbeQSigList(
 			, const string titSrefWdbeKHdltype
 			, const usmallint Width
 			, const string Minmax
-		) {
-	this->jnum = jnum;
-	this->sref = sref;
-	this->srefIxVBasetype = srefIxVBasetype;
-	this->titIxVBasetype = titIxVBasetype;
-	this->srefRefIxVTbl = srefRefIxVTbl;
-	this->titRefIxVTbl = titRefIxVTbl;
-	this->stubRefUref = stubRefUref;
-	this->srefMgeIxVTbl = srefMgeIxVTbl;
-	this->titMgeIxVTbl = titMgeIxVTbl;
-	this->stubMgeUref = stubMgeUref;
-	this->stubRefWdbeMVector = stubRefWdbeMVector;
-	this->yesnoConst = yesnoConst;
-	this->srefWdbeKHdltype = srefWdbeKHdltype;
-	this->titSrefWdbeKHdltype = titSrefWdbeKHdltype;
-	this->Width = Width;
-	this->Minmax = Minmax;
+		) :
+			jnum(jnum)
+			, sref(sref)
+			, srefIxVBasetype(srefIxVBasetype)
+			, titIxVBasetype(titIxVBasetype)
+			, srefRefIxVTbl(srefRefIxVTbl)
+			, titRefIxVTbl(titRefIxVTbl)
+			, stubRefUref(stubRefUref)
+			, srefMgeIxVTbl(srefMgeIxVTbl)
+			, titMgeIxVTbl(titMgeIxVTbl)
+			, stubMgeUref(stubMgeUref)
+			, stubRefWdbeMVector(stubRefWdbeMVector)
+			, yesnoConst(yesnoConst)
+			, srefWdbeKHdltype(srefWdbeKHdltype)
+			, titSrefWdbeKHdltype(titSrefWdbeKHdltype)
+			, Width(Width)
+			, Minmax(Minmax)
+		{
 };
 
 bool WdbeQSigList::readXML(

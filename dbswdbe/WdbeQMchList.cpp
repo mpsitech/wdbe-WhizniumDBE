@@ -25,14 +25,15 @@ WdbeQMchList::WdbeQMchList(
 			, const string sref
 			, const ubigint supRefWdbeMMachine
 			, const string stubSupRefWdbeMMachine
-		) {
-	this->qref = qref;
-	this->jref = jref;
-	this->jnum = jnum;
-	this->ref = ref;
-	this->sref = sref;
-	this->supRefWdbeMMachine = supRefWdbeMMachine;
-	this->stubSupRefWdbeMMachine = stubSupRefWdbeMMachine;
+		) :
+			qref(qref)
+			, jref(jref)
+			, jnum(jnum)
+			, ref(ref)
+			, sref(sref)
+			, supRefWdbeMMachine(supRefWdbeMMachine)
+			, stubSupRefWdbeMMachine(stubSupRefWdbeMMachine)
+		{
 };
 
 void WdbeQMchList::writeJSON(

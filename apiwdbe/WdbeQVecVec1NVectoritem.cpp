@@ -20,9 +20,10 @@ using namespace Xmlio;
 WdbeQVecVec1NVectoritem::WdbeQVecVec1NVectoritem(
 			const uint jnum
 			, const string stubRef
-		) {
-	this->jnum = jnum;
-	this->stubRef = stubRef;
+		) :
+			jnum(jnum)
+			, stubRef(stubRef)
+		{
 };
 
 bool WdbeQVecVec1NVectoritem::readXML(

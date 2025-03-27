@@ -28,17 +28,18 @@ WdbeQModCtrMNCommand::WdbeQModCtrMNCommand(
 			, const string stubIvrRefWdbeMSignal
 			, const ubigint rvrRefWdbeMSignal
 			, const string stubRvrRefWdbeMSignal
-		) {
-	this->qref = qref;
-	this->jref = jref;
-	this->jnum = jnum;
-	this->mref = mref;
-	this->stubMref = stubMref;
-	this->ref = ref;
-	this->ivrRefWdbeMSignal = ivrRefWdbeMSignal;
-	this->stubIvrRefWdbeMSignal = stubIvrRefWdbeMSignal;
-	this->rvrRefWdbeMSignal = rvrRefWdbeMSignal;
-	this->stubRvrRefWdbeMSignal = stubRvrRefWdbeMSignal;
+		) :
+			qref(qref)
+			, jref(jref)
+			, jnum(jnum)
+			, mref(mref)
+			, stubMref(stubMref)
+			, ref(ref)
+			, ivrRefWdbeMSignal(ivrRefWdbeMSignal)
+			, stubIvrRefWdbeMSignal(stubIvrRefWdbeMSignal)
+			, rvrRefWdbeMSignal(rvrRefWdbeMSignal)
+			, stubRvrRefWdbeMSignal(stubRvrRefWdbeMSignal)
+		{
 };
 
 void WdbeQModCtrMNCommand::writeJSON(

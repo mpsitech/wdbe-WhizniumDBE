@@ -44,8 +44,8 @@ CrdWdbeUsr::CrdWdbeUsr(
 	VecVSge::fillFeed(feedFSge);
 
 	pnllist = NULL;
-	pnlrec = NULL;
 	pnlheadbar = NULL;
+	pnlrec = NULL;
 	dlgmngkeypair = NULL;
 
 	// IP constructor.cust1 --- INSERT
@@ -56,8 +56,8 @@ CrdWdbeUsr::CrdWdbeUsr(
 	changeRef(dbswdbe, jref, ((ref + 1) == 0) ? 0 : ref, false);
 
 	pnllist = new PnlWdbeUsrList(xchg, dbswdbe, jref, ixWdbeVLocale);
-	pnlrec = new PnlWdbeUsrRec(xchg, dbswdbe, jref, ixWdbeVLocale);
 	pnlheadbar = new PnlWdbeUsrHeadbar(xchg, dbswdbe, jref, ixWdbeVLocale);
+	pnlrec = new PnlWdbeUsrRec(xchg, dbswdbe, jref, ixWdbeVLocale);
 
 	// IP constructor.cust2 --- INSERT
 

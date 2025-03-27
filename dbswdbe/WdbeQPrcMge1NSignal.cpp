@@ -23,12 +23,13 @@ WdbeQPrcMge1NSignal::WdbeQPrcMge1NSignal(
 			, const uint jnum
 			, const ubigint ref
 			, const string stubRef
-		) {
-	this->qref = qref;
-	this->jref = jref;
-	this->jnum = jnum;
-	this->ref = ref;
-	this->stubRef = stubRef;
+		) :
+			qref(qref)
+			, jref(jref)
+			, jnum(jnum)
+			, ref(ref)
+			, stubRef(stubRef)
+		{
 };
 
 void WdbeQPrcMge1NSignal::writeJSON(

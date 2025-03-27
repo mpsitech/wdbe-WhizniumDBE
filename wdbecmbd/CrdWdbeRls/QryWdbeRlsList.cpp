@@ -219,8 +219,8 @@ void QryWdbeRlsList::rerun_orderSQL(
 			string& sqlstr
 			, const uint preIxOrd
 		) {
-	if (preIxOrd == VecVOrd::CMP) sqlstr += " ORDER BY TblWdbeMRelease.refWdbeMComponent ASC";
-	else if (preIxOrd == VecVOrd::MCH) sqlstr += " ORDER BY TblWdbeMRelease.refWdbeMMachine ASC";
+	if (preIxOrd == VecVOrd::MCH) sqlstr += " ORDER BY TblWdbeMRelease.refWdbeMMachine ASC";
+	else if (preIxOrd == VecVOrd::CMP) sqlstr += " ORDER BY TblWdbeMRelease.refWdbeMComponent ASC";
 	else if (preIxOrd == VecVOrd::SRF) sqlstr += " ORDER BY TblWdbeMRelease.sref ASC";
 };
 
@@ -385,27 +385,13 @@ void QryWdbeRlsList::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBERLSMOD) {
-		call->abort = handleCallWdbeRlsMod(dbswdbe, call->jref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBERLSUPD_REFEQ) {
+	if (call->ixVCall == VecWdbeVCall::CALLWDBERLSUPD_REFEQ) {
 		call->abort = handleCallWdbeRlsUpd_refEq(dbswdbe, call->jref);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBERLSMOD) {
+		call->abort = handleCallWdbeRlsMod(dbswdbe, call->jref);
 	} else if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
 		call->abort = handleCallWdbeStubChgFromSelf(dbswdbe);
 	};
-};
-
-bool QryWdbeRlsList::handleCallWdbeRlsMod(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-
-	if ((ixWdbeVQrystate == VecWdbeVQrystate::UTD) || (ixWdbeVQrystate == VecWdbeVQrystate::SLM)) {
-		ixWdbeVQrystate = VecWdbeVQrystate::MNR;
-		xchg->triggerCall(dbswdbe, VecWdbeVCall::CALLWDBESTATCHG, jref);
-	};
-
-	return retval;
 };
 
 bool QryWdbeRlsList::handleCallWdbeRlsUpd_refEq(
@@ -416,6 +402,20 @@ bool QryWdbeRlsList::handleCallWdbeRlsUpd_refEq(
 
 	if (ixWdbeVQrystate != VecWdbeVQrystate::OOD) {
 		ixWdbeVQrystate = VecWdbeVQrystate::OOD;
+		xchg->triggerCall(dbswdbe, VecWdbeVCall::CALLWDBESTATCHG, jref);
+	};
+
+	return retval;
+};
+
+bool QryWdbeRlsList::handleCallWdbeRlsMod(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+
+	if ((ixWdbeVQrystate == VecWdbeVQrystate::UTD) || (ixWdbeVQrystate == VecWdbeVQrystate::SLM)) {
+		ixWdbeVQrystate = VecWdbeVQrystate::MNR;
 		xchg->triggerCall(dbswdbe, VecWdbeVCall::CALLWDBESTATCHG, jref);
 	};
 

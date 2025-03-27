@@ -21,10 +21,11 @@ WdbeQIntList::WdbeQIntList(
 			const uint jnum
 			, const string sref
 			, const string stubRefWdbeMUnit
-		) {
-	this->jnum = jnum;
-	this->sref = sref;
-	this->stubRefWdbeMUnit = stubRefWdbeMUnit;
+		) :
+			jnum(jnum)
+			, sref(sref)
+			, stubRefWdbeMUnit(stubRefWdbeMUnit)
+		{
 };
 
 bool WdbeQIntList::readXML(

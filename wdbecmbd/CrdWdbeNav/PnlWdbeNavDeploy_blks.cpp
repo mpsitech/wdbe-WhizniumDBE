@@ -48,10 +48,9 @@ PnlWdbeNavDeploy::ContIac::ContIac(
 			, const uint numFLstRls
 		) :
 			Block()
+			, numFLstCmp(numFLstCmp)
+			, numFLstRls(numFLstRls)
 		{
-	this->numFLstCmp = numFLstCmp;
-	this->numFLstRls = numFLstRls;
-
 	mask = {NUMFLSTCMP, NUMFLSTRLS};
 };
 
@@ -214,13 +213,12 @@ PnlWdbeNavDeploy::StatShr::StatShr(
 			, const bool ButRlsNewcrdActive
 		) :
 			Block()
+			, LstCmpAvail(LstCmpAvail)
+			, ButCmpViewActive(ButCmpViewActive)
+			, LstRlsAvail(LstRlsAvail)
+			, ButRlsViewActive(ButRlsViewActive)
+			, ButRlsNewcrdActive(ButRlsNewcrdActive)
 		{
-	this->LstCmpAvail = LstCmpAvail;
-	this->ButCmpViewActive = ButCmpViewActive;
-	this->LstRlsAvail = LstRlsAvail;
-	this->ButRlsViewActive = ButRlsViewActive;
-	this->ButRlsNewcrdActive = ButRlsNewcrdActive;
-
 	mask = {LSTCMPAVAIL, BUTCMPVIEWACTIVE, LSTRLSAVAIL, BUTRLSVIEWACTIVE, BUTRLSNEWCRDACTIVE};
 };
 

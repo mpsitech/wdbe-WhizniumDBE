@@ -47,9 +47,8 @@ PnlWdbePinAPar::ContInf::ContInf(
 			const uint numFCsiQst
 		) :
 			Block()
+			, numFCsiQst(numFCsiQst)
 		{
-	this->numFCsiQst = numFCsiQst;
-
 	mask = {NUMFCSIQST};
 };
 
@@ -149,13 +148,12 @@ PnlWdbePinAPar::StatShr::StatShr(
 			, const bool ButDeleteActive
 		) :
 			Block()
+			, ButNewAvail(ButNewAvail)
+			, ButDuplicateAvail(ButDuplicateAvail)
+			, ButDuplicateActive(ButDuplicateActive)
+			, ButDeleteAvail(ButDeleteAvail)
+			, ButDeleteActive(ButDeleteActive)
 		{
-	this->ButNewAvail = ButNewAvail;
-	this->ButDuplicateAvail = ButDuplicateAvail;
-	this->ButDuplicateActive = ButDuplicateActive;
-	this->ButDeleteAvail = ButDeleteAvail;
-	this->ButDeleteActive = ButDeleteActive;
-
 	mask = {BUTNEWAVAIL, BUTDUPLICATEAVAIL, BUTDUPLICATEACTIVE, BUTDELETEAVAIL, BUTDELETEACTIVE};
 };
 
@@ -231,9 +229,9 @@ PnlWdbePinAPar::StgIac::StgIac(
 			, const uint TcoValWidth
 		) :
 			Block()
+			, TcoKeyWidth(TcoKeyWidth)
+			, TcoValWidth(TcoValWidth)
 		{
-	this->TcoKeyWidth = TcoKeyWidth;
-	this->TcoValWidth = TcoValWidth;
 	mask = {TCOKEYWIDTH, TCOVALWIDTH};
 };
 

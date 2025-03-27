@@ -47,13 +47,12 @@ PnlWdbeMtpDetail::ContIac::ContIac(
 			, const string& TxfCmt
 		) :
 			Block()
+			, numFPupVnd(numFPupVnd)
+			, TxfVnd(TxfVnd)
+			, numFPupTyp(numFPupTyp)
+			, TxfSrr(TxfSrr)
+			, TxfCmt(TxfCmt)
 		{
-	this->numFPupVnd = numFPupVnd;
-	this->TxfVnd = TxfVnd;
-	this->numFPupTyp = numFPupTyp;
-	this->TxfSrr = TxfSrr;
-	this->TxfCmt = TxfCmt;
-
 	mask = {NUMFPUPVND, TXFVND, NUMFPUPTYP, TXFSRR, TXFCMT};
 };
 
@@ -178,9 +177,8 @@ PnlWdbeMtpDetail::ContInf::ContInf(
 			const string& TxtSrf
 		) :
 			Block()
+			, TxtSrf(TxtSrf)
 		{
-	this->TxtSrf = TxtSrf;
-
 	mask = {TXTSRF};
 };
 
@@ -277,29 +275,28 @@ void PnlWdbeMtpDetail::StatApp::writeXML(
  ******************************************************************************/
 
 PnlWdbeMtpDetail::StatShr::StatShr(
-			const bool TxfVndValid
-			, const bool ButSaveAvail
+			const bool ButSaveAvail
 			, const bool ButSaveActive
 			, const bool TxtSrfActive
 			, const bool PupVndActive
+			, const bool TxfVndValid
 			, const bool ButVndEditAvail
 			, const bool PupTypActive
 			, const bool TxfSrrActive
 			, const bool TxfCmtActive
 		) :
 			Block()
+			, ButSaveAvail(ButSaveAvail)
+			, ButSaveActive(ButSaveActive)
+			, TxtSrfActive(TxtSrfActive)
+			, PupVndActive(PupVndActive)
+			, TxfVndValid(TxfVndValid)
+			, ButVndEditAvail(ButVndEditAvail)
+			, PupTypActive(PupTypActive)
+			, TxfSrrActive(TxfSrrActive)
+			, TxfCmtActive(TxfCmtActive)
 		{
-	this->TxfVndValid = TxfVndValid;
-	this->ButSaveAvail = ButSaveAvail;
-	this->ButSaveActive = ButSaveActive;
-	this->TxtSrfActive = TxtSrfActive;
-	this->PupVndActive = PupVndActive;
-	this->ButVndEditAvail = ButVndEditAvail;
-	this->PupTypActive = PupTypActive;
-	this->TxfSrrActive = TxfSrrActive;
-	this->TxfCmtActive = TxfCmtActive;
-
-	mask = {TXFVNDVALID, BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, PUPVNDACTIVE, BUTVNDEDITAVAIL, PUPTYPACTIVE, TXFSRRACTIVE, TXFCMTACTIVE};
+	mask = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, PUPVNDACTIVE, TXFVNDVALID, BUTVNDEDITAVAIL, PUPTYPACTIVE, TXFSRRACTIVE, TXFCMTACTIVE};
 };
 
 void PnlWdbeMtpDetail::StatShr::writeJSON(
@@ -310,11 +307,11 @@ void PnlWdbeMtpDetail::StatShr::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["TxfVndValid"] = TxfVndValid;
 	me["ButSaveAvail"] = ButSaveAvail;
 	me["ButSaveActive"] = ButSaveActive;
 	me["TxtSrfActive"] = TxtSrfActive;
 	me["PupVndActive"] = PupVndActive;
+	me["TxfVndValid"] = TxfVndValid;
 	me["ButVndEditAvail"] = ButVndEditAvail;
 	me["PupTypActive"] = PupTypActive;
 	me["TxfSrrActive"] = TxfSrrActive;
@@ -333,11 +330,11 @@ void PnlWdbeMtpDetail::StatShr::writeXML(
 	else itemtag = "StatitemShrWdbeMtpDetail";
 
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
-		writeBoolAttr(wr, itemtag, "sref", "TxfVndValid", TxfVndValid);
 		writeBoolAttr(wr, itemtag, "sref", "ButSaveAvail", ButSaveAvail);
 		writeBoolAttr(wr, itemtag, "sref", "ButSaveActive", ButSaveActive);
 		writeBoolAttr(wr, itemtag, "sref", "TxtSrfActive", TxtSrfActive);
 		writeBoolAttr(wr, itemtag, "sref", "PupVndActive", PupVndActive);
+		writeBoolAttr(wr, itemtag, "sref", "TxfVndValid", TxfVndValid);
 		writeBoolAttr(wr, itemtag, "sref", "ButVndEditAvail", ButVndEditAvail);
 		writeBoolAttr(wr, itemtag, "sref", "PupTypActive", PupTypActive);
 		writeBoolAttr(wr, itemtag, "sref", "TxfSrrActive", TxfSrrActive);
@@ -350,11 +347,11 @@ set<uint> PnlWdbeMtpDetail::StatShr::comm(
 		) {
 	set<uint> items;
 
-	if (TxfVndValid == comp->TxfVndValid) insert(items, TXFVNDVALID);
 	if (ButSaveAvail == comp->ButSaveAvail) insert(items, BUTSAVEAVAIL);
 	if (ButSaveActive == comp->ButSaveActive) insert(items, BUTSAVEACTIVE);
 	if (TxtSrfActive == comp->TxtSrfActive) insert(items, TXTSRFACTIVE);
 	if (PupVndActive == comp->PupVndActive) insert(items, PUPVNDACTIVE);
+	if (TxfVndValid == comp->TxfVndValid) insert(items, TXFVNDVALID);
 	if (ButVndEditAvail == comp->ButVndEditAvail) insert(items, BUTVNDEDITAVAIL);
 	if (PupTypActive == comp->PupTypActive) insert(items, PUPTYPACTIVE);
 	if (TxfSrrActive == comp->TxfSrrActive) insert(items, TXFSRRACTIVE);
@@ -371,7 +368,7 @@ set<uint> PnlWdbeMtpDetail::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {TXFVNDVALID, BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, PUPVNDACTIVE, BUTVNDEDITAVAIL, PUPTYPACTIVE, TXFSRRACTIVE, TXFCMTACTIVE};
+	diffitems = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, PUPVNDACTIVE, TXFVNDVALID, BUTVNDEDITAVAIL, PUPTYPACTIVE, TXFSRRACTIVE, TXFCMTACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);

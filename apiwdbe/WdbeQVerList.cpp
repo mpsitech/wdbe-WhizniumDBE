@@ -28,17 +28,18 @@ WdbeQVerList::WdbeQVerList(
 			, const string stubBvrRefWdbeMVersion
 			, const string srefIxVState
 			, const string titIxVState
-		) {
-	this->jnum = jnum;
-	this->stubGrp = stubGrp;
-	this->stubOwn = stubOwn;
-	this->stubPrjRefWdbeMProject = stubPrjRefWdbeMProject;
-	this->Major = Major;
-	this->Minor = Minor;
-	this->Sub = Sub;
-	this->stubBvrRefWdbeMVersion = stubBvrRefWdbeMVersion;
-	this->srefIxVState = srefIxVState;
-	this->titIxVState = titIxVState;
+		) :
+			jnum(jnum)
+			, stubGrp(stubGrp)
+			, stubOwn(stubOwn)
+			, stubPrjRefWdbeMProject(stubPrjRefWdbeMProject)
+			, Major(Major)
+			, Minor(Minor)
+			, Sub(Sub)
+			, stubBvrRefWdbeMVersion(stubBvrRefWdbeMVersion)
+			, srefIxVState(srefIxVState)
+			, titIxVState(titIxVState)
+		{
 };
 
 bool WdbeQVerList::readXML(

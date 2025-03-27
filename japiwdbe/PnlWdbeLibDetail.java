@@ -304,50 +304,50 @@ public class PnlWdbeLibDetail {
 	  */
 	public class StatShr extends Block {
 
-		public static final int TXFDEPVALID = 1;
-		public static final int BUTSAVEAVAIL = 2;
-		public static final int BUTSAVEACTIVE = 3;
-		public static final int TXTSRFACTIVE = 4;
-		public static final int TXFTITACTIVE = 5;
-		public static final int TXFVERACTIVE = 6;
-		public static final int LSTDEPACTIVE = 7;
+		public static final int BUTSAVEAVAIL = 1;
+		public static final int BUTSAVEACTIVE = 2;
+		public static final int TXTSRFACTIVE = 3;
+		public static final int TXFTITACTIVE = 4;
+		public static final int TXFVERACTIVE = 5;
+		public static final int LSTDEPACTIVE = 6;
+		public static final int TXFDEPVALID = 7;
 		public static final int BUTDEPVIEWAVAIL = 8;
 		public static final int BUTDEPVIEWACTIVE = 9;
 		public static final int TXFCMTACTIVE = 10;
 
 		public StatShr(
-					boolean TxfDepValid
-					, boolean ButSaveAvail
+					boolean ButSaveAvail
 					, boolean ButSaveActive
 					, boolean TxtSrfActive
 					, boolean TxfTitActive
 					, boolean TxfVerActive
 					, boolean LstDepActive
+					, boolean TxfDepValid
 					, boolean ButDepViewAvail
 					, boolean ButDepViewActive
 					, boolean TxfCmtActive
 				) {
-			this.TxfDepValid = TxfDepValid;
 			this.ButSaveAvail = ButSaveAvail;
 			this.ButSaveActive = ButSaveActive;
 			this.TxtSrfActive = TxtSrfActive;
 			this.TxfTitActive = TxfTitActive;
 			this.TxfVerActive = TxfVerActive;
 			this.LstDepActive = LstDepActive;
+			this.TxfDepValid = TxfDepValid;
 			this.ButDepViewAvail = ButDepViewAvail;
 			this.ButDepViewActive = ButDepViewActive;
 			this.TxfCmtActive = TxfCmtActive;
 
-			mask = new HashSet<Integer>(Arrays.asList(TXFDEPVALID, BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXFTITACTIVE, TXFVERACTIVE, LSTDEPACTIVE, BUTDEPVIEWAVAIL, BUTDEPVIEWACTIVE, TXFCMTACTIVE));
+			mask = new HashSet<Integer>(Arrays.asList(BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXFTITACTIVE, TXFVERACTIVE, LSTDEPACTIVE, TXFDEPVALID, BUTDEPVIEWAVAIL, BUTDEPVIEWACTIVE, TXFCMTACTIVE));
 		};
 
-		public boolean TxfDepValid;
 		public boolean ButSaveAvail;
 		public boolean ButSaveActive;
 		public boolean TxtSrfActive;
 		public boolean TxfTitActive;
 		public boolean TxfVerActive;
 		public boolean LstDepActive;
+		public boolean TxfDepValid;
 		public boolean ButDepViewAvail;
 		public boolean ButDepViewActive;
 		public boolean TxfCmtActive;
@@ -365,13 +365,13 @@ public class PnlWdbeLibDetail {
 			String itemtag = "StatitemShrWdbeLibDetail";
 
 			if (Xmlio.checkXPath(doc, basexpath)) {
-				TxfDepValid = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxfDepValid", mask, TXFDEPVALID);
 				ButSaveAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButSaveAvail", mask, BUTSAVEAVAIL);
 				ButSaveActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButSaveActive", mask, BUTSAVEACTIVE);
 				TxtSrfActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxtSrfActive", mask, TXTSRFACTIVE);
 				TxfTitActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxfTitActive", mask, TXFTITACTIVE);
 				TxfVerActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxfVerActive", mask, TXFVERACTIVE);
 				LstDepActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "LstDepActive", mask, LSTDEPACTIVE);
+				TxfDepValid = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxfDepValid", mask, TXFDEPVALID);
 				ButDepViewAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButDepViewAvail", mask, BUTDEPVIEWAVAIL);
 				ButDepViewActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButDepViewActive", mask, BUTDEPVIEWACTIVE);
 				TxfCmtActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxfCmtActive", mask, TXFCMTACTIVE);
@@ -387,13 +387,13 @@ public class PnlWdbeLibDetail {
 				) {
 			HashSet<Integer> items = new HashSet<Integer>();
 
-			if (TxfDepValid == comp.TxfDepValid) items.add(TXFDEPVALID);
 			if (ButSaveAvail == comp.ButSaveAvail) items.add(BUTSAVEAVAIL);
 			if (ButSaveActive == comp.ButSaveActive) items.add(BUTSAVEACTIVE);
 			if (TxtSrfActive == comp.TxtSrfActive) items.add(TXTSRFACTIVE);
 			if (TxfTitActive == comp.TxfTitActive) items.add(TXFTITACTIVE);
 			if (TxfVerActive == comp.TxfVerActive) items.add(TXFVERACTIVE);
 			if (LstDepActive == comp.LstDepActive) items.add(LSTDEPACTIVE);
+			if (TxfDepValid == comp.TxfDepValid) items.add(TXFDEPVALID);
 			if (ButDepViewAvail == comp.ButDepViewAvail) items.add(BUTDEPVIEWAVAIL);
 			if (ButDepViewActive == comp.ButDepViewActive) items.add(BUTDEPVIEWACTIVE);
 			if (TxfCmtActive == comp.TxfCmtActive) items.add(TXFCMTACTIVE);
@@ -409,7 +409,7 @@ public class PnlWdbeLibDetail {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(TXFDEPVALID, BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXFTITACTIVE, TXFVERACTIVE, LSTDEPACTIVE, BUTDEPVIEWAVAIL, BUTDEPVIEWACTIVE, TXFCMTACTIVE));
+			diffitems = new HashSet<Integer>(Arrays.asList(BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXFTITACTIVE, TXFVERACTIVE, LSTDEPACTIVE, TXFDEPVALID, BUTDEPVIEWAVAIL, BUTDEPVIEWACTIVE, TXFCMTACTIVE));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);

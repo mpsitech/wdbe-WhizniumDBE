@@ -19,8 +19,8 @@ public class QryWdbeRlsList {
 		*/
 	public static class VecVOrd {
 
-		public static final int CMP = 1;
-		public static final int MCH = 2;
+		public static final int MCH = 1;
+		public static final int CMP = 2;
 		public static final int SRF = 3;
 
 		public static int getIx(
@@ -28,8 +28,8 @@ public class QryWdbeRlsList {
 				) {
 			String s = sref.toLowerCase();
 
-			if (s.equals("cmp")) return CMP;
 			if (s.equals("mch")) return MCH;
+			if (s.equals("cmp")) return CMP;
 			if (s.equals("srf")) return SRF;
 
 			return 0;
@@ -38,8 +38,8 @@ public class QryWdbeRlsList {
 		public static String getSref(
 					int ix
 				) {
-			if (ix == CMP) return("cmp");
 			if (ix == MCH) return("mch");
+			if (ix == CMP) return("cmp");
 			if (ix == SRF) return("srf");
 
 			return "";

@@ -27,16 +27,17 @@ WdbeQPrcList::WdbeQPrcList(
 			, const string stubRefWdbeMModule
 			, const bool Falling
 			, const string yesnoFalling
-		) {
-	this->qref = qref;
-	this->jref = jref;
-	this->jnum = jnum;
-	this->ref = ref;
-	this->sref = sref;
-	this->refWdbeMModule = refWdbeMModule;
-	this->stubRefWdbeMModule = stubRefWdbeMModule;
-	this->Falling = Falling;
-	this->yesnoFalling = yesnoFalling;
+		) :
+			qref(qref)
+			, jref(jref)
+			, jnum(jnum)
+			, ref(ref)
+			, sref(sref)
+			, refWdbeMModule(refWdbeMModule)
+			, stubRefWdbeMModule(stubRefWdbeMModule)
+			, Falling(Falling)
+			, yesnoFalling(yesnoFalling)
+		{
 };
 
 void WdbeQPrcList::writeJSON(

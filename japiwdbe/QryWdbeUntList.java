@@ -23,8 +23,8 @@ public class QryWdbeUntList {
 		public static final int REU = 2;
 		public static final int RET = 3;
 		public static final int TYP = 4;
-		public static final int SRF = 5;
-		public static final int TIT = 6;
+		public static final int TIT = 5;
+		public static final int SRF = 6;
 
 		public static int getIx(
 					String sref
@@ -35,8 +35,8 @@ public class QryWdbeUntList {
 			if (s.equals("reu")) return REU;
 			if (s.equals("ret")) return RET;
 			if (s.equals("typ")) return TYP;
-			if (s.equals("srf")) return SRF;
 			if (s.equals("tit")) return TIT;
+			if (s.equals("srf")) return SRF;
 
 			return 0;
 		};
@@ -48,8 +48,8 @@ public class QryWdbeUntList {
 			if (ix == REU) return("reu");
 			if (ix == RET) return("ret");
 			if (ix == TYP) return("typ");
-			if (ix == SRF) return("srf");
 			if (ix == TIT) return("tit");
+			if (ix == SRF) return("srf");
 
 			return "";
 		};

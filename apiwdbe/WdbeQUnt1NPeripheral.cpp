@@ -20,9 +20,10 @@ using namespace Xmlio;
 WdbeQUnt1NPeripheral::WdbeQUnt1NPeripheral(
 			const uint jnum
 			, const string stubRef
-		) {
-	this->jnum = jnum;
-	this->stubRef = stubRef;
+		) :
+			jnum(jnum)
+			, stubRef(stubRef)
+		{
 };
 
 bool WdbeQUnt1NPeripheral::readXML(

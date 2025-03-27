@@ -81,7 +81,8 @@ void* WdbeopdOpprc::run(
 				else if (((DpchInvWdbeMtpWrmcu*) req->dpchinv)->srefKCustop == "WdbeMtpWrmcuUsbhostif_Easy_v2_0_Mcu") req->dpchret = WdbeMtpWrmcuUsbhostif_Easy_v2_0_Mcu::run(xchg, &dbswdbe, (DpchInvWdbeMtpWrmcu*) req->dpchinv);
 			};
 			if (req->dpchinv->ixWdbeVDpch == VecWdbeVDpch::DPCHINVWDBEMTPWRFPGA) {
-				if (((DpchInvWdbeMtpWrfpga*) req->dpchinv)->srefKCustop == "WdbeMtpWrfpgaCmdinv_v2_0") req->dpchret = WdbeMtpWrfpgaCmdinv_v2_0::run(xchg, &dbswdbe, (DpchInvWdbeMtpWrfpga*) req->dpchinv);
+				if (((DpchInvWdbeMtpWrfpga*) req->dpchinv)->srefKCustop == "WdbeMtpWrfpgaAximmcohostif_Easy_v1_0") req->dpchret = WdbeMtpWrfpgaAximmcohostif_Easy_v1_0::run(xchg, &dbswdbe, (DpchInvWdbeMtpWrfpga*) req->dpchinv);
+				else if (((DpchInvWdbeMtpWrfpga*) req->dpchinv)->srefKCustop == "WdbeMtpWrfpgaCmdinv_v2_0") req->dpchret = WdbeMtpWrfpgaCmdinv_v2_0::run(xchg, &dbswdbe, (DpchInvWdbeMtpWrfpga*) req->dpchinv);
 				else if (((DpchInvWdbeMtpWrfpga*) req->dpchinv)->srefKCustop == "WdbeMtpWrfpgaCmdret_v2_0") req->dpchret = WdbeMtpWrfpgaCmdret_v2_0::run(xchg, &dbswdbe, (DpchInvWdbeMtpWrfpga*) req->dpchinv);
 				else if (((DpchInvWdbeMtpWrfpga*) req->dpchinv)->srefKCustop == "WdbeMtpWrfpgaCohostif_Easy_v1_0") req->dpchret = WdbeMtpWrfpgaCohostif_Easy_v1_0::run(xchg, &dbswdbe, (DpchInvWdbeMtpWrfpga*) req->dpchinv);
 				else if (((DpchInvWdbeMtpWrfpga*) req->dpchinv)->srefKCustop == "WdbeMtpWrfpgaCohostif_v1_0") req->dpchret = WdbeMtpWrfpgaCohostif_v1_0::run(xchg, &dbswdbe, (DpchInvWdbeMtpWrfpga*) req->dpchinv);
@@ -108,6 +109,8 @@ void* WdbeopdOpprc::run(
 				else if (((DpchInvWdbeMtpGenfst*) req->dpchinv)->srefKCustop == "WdbeMtpGenfstFsmtrack_Easy_v1_0") req->dpchret = WdbeMtpGenfstFsmtrack_Easy_v1_0::run(xchg, &dbswdbe, (DpchInvWdbeMtpGenfst*) req->dpchinv);
 				else if (((DpchInvWdbeMtpGenfst*) req->dpchinv)->srefKCustop == "WdbeMtpGenfstGpio_Easy_v1_0") req->dpchret = WdbeMtpGenfstGpio_Easy_v1_0::run(xchg, &dbswdbe, (DpchInvWdbeMtpGenfst*) req->dpchinv);
 				else if (((DpchInvWdbeMtpGenfst*) req->dpchinv)->srefKCustop == "WdbeMtpGenfstGptrack_Easy_v1_0") req->dpchret = WdbeMtpGenfstGptrack_Easy_v1_0::run(xchg, &dbswdbe, (DpchInvWdbeMtpGenfst*) req->dpchinv);
+				else if (((DpchInvWdbeMtpGenfst*) req->dpchinv)->srefKCustop == "WdbeMtpGenfstHostif_Easy_v1_0") req->dpchret = WdbeMtpGenfstHostif_Easy_v1_0::run(xchg, &dbswdbe, (DpchInvWdbeMtpGenfst*) req->dpchinv);
+				else if (((DpchInvWdbeMtpGenfst*) req->dpchinv)->srefKCustop == "WdbeMtpGenfstTkclksrc_Easy_v1_0") req->dpchret = WdbeMtpGenfstTkclksrc_Easy_v1_0::run(xchg, &dbswdbe, (DpchInvWdbeMtpGenfst*) req->dpchinv);
 				else if (((DpchInvWdbeMtpGenfst*) req->dpchinv)->srefKCustop == "WdbeMtpGenfstTkclksrc_v1_0") req->dpchret = WdbeMtpGenfstTkclksrc_v1_0::run(xchg, &dbswdbe, (DpchInvWdbeMtpGenfst*) req->dpchinv);
 				else if (((DpchInvWdbeMtpGenfst*) req->dpchinv)->srefKCustop == "WdbeMtpGenfstUarthostif_Easy_v2_0_Mcu") req->dpchret = WdbeMtpGenfstUarthostif_Easy_v2_0_Mcu::run(xchg, &dbswdbe, (DpchInvWdbeMtpGenfst*) req->dpchinv);
 				else if (((DpchInvWdbeMtpGenfst*) req->dpchinv)->srefKCustop == "WdbeMtpGenfstUsbhostif_Easy_v2_0_Mcu") req->dpchret = WdbeMtpGenfstUsbhostif_Easy_v2_0_Mcu::run(xchg, &dbswdbe, (DpchInvWdbeMtpGenfst*) req->dpchinv);
@@ -130,6 +133,7 @@ void* WdbeopdOpprc::run(
 			};
 			if (req->dpchinv->ixWdbeVDpch == VecWdbeVDpch::DPCHINVWDBEMTPCPLMSTBU) {
 				if (((DpchInvWdbeMtpCplmstbu*) req->dpchinv)->srefKCustop == "WdbeMtpCplmstbuAdd_xlnx_v12_0") req->dpchret = WdbeMtpCplmstbuAdd_xlnx_v12_0::run(xchg, &dbswdbe, (DpchInvWdbeMtpCplmstbu*) req->dpchinv);
+				else if (((DpchInvWdbeMtpCplmstbu*) req->dpchinv)->srefKCustop == "WdbeMtpCplmstbuAximmcohostif_Easy_v1_0") req->dpchret = WdbeMtpCplmstbuAximmcohostif_Easy_v1_0::run(xchg, &dbswdbe, (DpchInvWdbeMtpCplmstbu*) req->dpchinv);
 				else if (((DpchInvWdbeMtpCplmstbu*) req->dpchinv)->srefKCustop == "WdbeMtpCplmstbuAxislave_v1_0") req->dpchret = WdbeMtpCplmstbuAxislave_v1_0::run(xchg, &dbswdbe, (DpchInvWdbeMtpCplmstbu*) req->dpchinv);
 				else if (((DpchInvWdbeMtpCplmstbu*) req->dpchinv)->srefKCustop == "WdbeMtpCplmstbuCmdinv_v2_0") req->dpchret = WdbeMtpCplmstbuCmdinv_v2_0::run(xchg, &dbswdbe, (DpchInvWdbeMtpCplmstbu*) req->dpchinv);
 				else if (((DpchInvWdbeMtpCplmstbu*) req->dpchinv)->srefKCustop == "WdbeMtpCplmstbuCmdret_v2_0") req->dpchret = WdbeMtpCplmstbuCmdret_v2_0::run(xchg, &dbswdbe, (DpchInvWdbeMtpCplmstbu*) req->dpchinv);
@@ -191,7 +195,8 @@ void* WdbeopdOpprc::run(
 			if (req->dpchinv->ixWdbeVDpch == VecWdbeVDpch::DPCHINVWDBEMTPPLHMCU) {
 			};
 			if (req->dpchinv->ixWdbeVDpch == VecWdbeVDpch::DPCHINVWDBEMTPPLHFPGA) {
-				if (((DpchInvWdbeMtpPlhfpga*) req->dpchinv)->srefKCustop == "WdbeMtpPlhfpgaCohostif_Easy_v1_0") req->dpchret = WdbeMtpPlhfpgaCohostif_Easy_v1_0::run(xchg, &dbswdbe, (DpchInvWdbeMtpPlhfpga*) req->dpchinv);
+				if (((DpchInvWdbeMtpPlhfpga*) req->dpchinv)->srefKCustop == "WdbeMtpPlhfpgaAximmcohostif_Easy_v1_0") req->dpchret = WdbeMtpPlhfpgaAximmcohostif_Easy_v1_0::run(xchg, &dbswdbe, (DpchInvWdbeMtpPlhfpga*) req->dpchinv);
+				else if (((DpchInvWdbeMtpPlhfpga*) req->dpchinv)->srefKCustop == "WdbeMtpPlhfpgaCohostif_Easy_v1_0") req->dpchret = WdbeMtpPlhfpgaCohostif_Easy_v1_0::run(xchg, &dbswdbe, (DpchInvWdbeMtpPlhfpga*) req->dpchinv);
 				else if (((DpchInvWdbeMtpPlhfpga*) req->dpchinv)->srefKCustop == "WdbeMtpPlhfpgaCohostif_v1_0") req->dpchret = WdbeMtpPlhfpgaCohostif_v1_0::run(xchg, &dbswdbe, (DpchInvWdbeMtpPlhfpga*) req->dpchinv);
 				else if (((DpchInvWdbeMtpPlhfpga*) req->dpchinv)->srefKCustop == "WdbeMtpPlhfpgaCrcspec_v2_0") req->dpchret = WdbeMtpPlhfpgaCrcspec_v2_0::run(xchg, &dbswdbe, (DpchInvWdbeMtpPlhfpga*) req->dpchinv);
 				else if (((DpchInvWdbeMtpPlhfpga*) req->dpchinv)->srefKCustop == "WdbeMtpPlhfpgaCrcspec_v3_0") req->dpchret = WdbeMtpPlhfpgaCrcspec_v3_0::run(xchg, &dbswdbe, (DpchInvWdbeMtpPlhfpga*) req->dpchinv);

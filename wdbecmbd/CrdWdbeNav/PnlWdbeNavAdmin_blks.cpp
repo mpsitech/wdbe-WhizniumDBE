@@ -28,6 +28,7 @@ uint PnlWdbeNavAdmin::VecVDo::getIx(
 	if (s == "butprsnewcrdclick") return BUTPRSNEWCRDCLICK;
 	if (s == "butfilviewclick") return BUTFILVIEWCLICK;
 	if (s == "butfilnewcrdclick") return BUTFILNEWCRDCLICK;
+	if (s == "butprfnewcrdclick") return BUTPRFNEWCRDCLICK;
 
 	return(0);
 };
@@ -43,6 +44,7 @@ string PnlWdbeNavAdmin::VecVDo::getSref(
 	if (ix == BUTPRSNEWCRDCLICK) return("ButPrsNewcrdClick");
 	if (ix == BUTFILVIEWCLICK) return("ButFilViewClick");
 	if (ix == BUTFILNEWCRDCLICK) return("ButFilNewcrdClick");
+	if (ix == BUTPRFNEWCRDCLICK) return("ButPrfNewcrdClick");
 
 	return("");
 };
@@ -58,12 +60,11 @@ PnlWdbeNavAdmin::ContIac::ContIac(
 			, const uint numFLstFil
 		) :
 			Block()
+			, numFLstUsg(numFLstUsg)
+			, numFLstUsr(numFLstUsr)
+			, numFLstPrs(numFLstPrs)
+			, numFLstFil(numFLstFil)
 		{
-	this->numFLstUsg = numFLstUsg;
-	this->numFLstUsr = numFLstUsr;
-	this->numFLstPrs = numFLstPrs;
-	this->numFLstFil = numFLstFil;
-
 	mask = {NUMFLSTUSG, NUMFLSTUSR, NUMFLSTPRS, NUMFLSTFIL};
 };
 
@@ -253,19 +254,20 @@ PnlWdbeNavAdmin::StatShr::StatShr(
 			, const bool ButPrsViewActive
 			, const bool LstFilAvail
 			, const bool ButFilViewActive
+			, const bool ButPrfNewcrdAvail
 		) :
 			Block()
+			, LstUsgAvail(LstUsgAvail)
+			, ButUsgViewActive(ButUsgViewActive)
+			, LstUsrAvail(LstUsrAvail)
+			, ButUsrViewActive(ButUsrViewActive)
+			, LstPrsAvail(LstPrsAvail)
+			, ButPrsViewActive(ButPrsViewActive)
+			, LstFilAvail(LstFilAvail)
+			, ButFilViewActive(ButFilViewActive)
+			, ButPrfNewcrdAvail(ButPrfNewcrdAvail)
 		{
-	this->LstUsgAvail = LstUsgAvail;
-	this->ButUsgViewActive = ButUsgViewActive;
-	this->LstUsrAvail = LstUsrAvail;
-	this->ButUsrViewActive = ButUsrViewActive;
-	this->LstPrsAvail = LstPrsAvail;
-	this->ButPrsViewActive = ButPrsViewActive;
-	this->LstFilAvail = LstFilAvail;
-	this->ButFilViewActive = ButFilViewActive;
-
-	mask = {LSTUSGAVAIL, BUTUSGVIEWACTIVE, LSTUSRAVAIL, BUTUSRVIEWACTIVE, LSTPRSAVAIL, BUTPRSVIEWACTIVE, LSTFILAVAIL, BUTFILVIEWACTIVE};
+	mask = {LSTUSGAVAIL, BUTUSGVIEWACTIVE, LSTUSRAVAIL, BUTUSRVIEWACTIVE, LSTPRSAVAIL, BUTPRSVIEWACTIVE, LSTFILAVAIL, BUTFILVIEWACTIVE, BUTPRFNEWCRDAVAIL};
 };
 
 void PnlWdbeNavAdmin::StatShr::writeJSON(
@@ -284,6 +286,7 @@ void PnlWdbeNavAdmin::StatShr::writeJSON(
 	me["ButPrsViewActive"] = ButPrsViewActive;
 	me["LstFilAvail"] = LstFilAvail;
 	me["ButFilViewActive"] = ButFilViewActive;
+	me["ButPrfNewcrdAvail"] = ButPrfNewcrdAvail;
 };
 
 void PnlWdbeNavAdmin::StatShr::writeXML(
@@ -306,6 +309,7 @@ void PnlWdbeNavAdmin::StatShr::writeXML(
 		writeBoolAttr(wr, itemtag, "sref", "ButPrsViewActive", ButPrsViewActive);
 		writeBoolAttr(wr, itemtag, "sref", "LstFilAvail", LstFilAvail);
 		writeBoolAttr(wr, itemtag, "sref", "ButFilViewActive", ButFilViewActive);
+		writeBoolAttr(wr, itemtag, "sref", "ButPrfNewcrdAvail", ButPrfNewcrdAvail);
 	xmlTextWriterEndElement(wr);
 };
 
@@ -322,6 +326,7 @@ set<uint> PnlWdbeNavAdmin::StatShr::comm(
 	if (ButPrsViewActive == comp->ButPrsViewActive) insert(items, BUTPRSVIEWACTIVE);
 	if (LstFilAvail == comp->LstFilAvail) insert(items, LSTFILAVAIL);
 	if (ButFilViewActive == comp->ButFilViewActive) insert(items, BUTFILVIEWACTIVE);
+	if (ButPrfNewcrdAvail == comp->ButPrfNewcrdAvail) insert(items, BUTPRFNEWCRDAVAIL);
 
 	return(items);
 };
@@ -334,7 +339,7 @@ set<uint> PnlWdbeNavAdmin::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {LSTUSGAVAIL, BUTUSGVIEWACTIVE, LSTUSRAVAIL, BUTUSRVIEWACTIVE, LSTPRSAVAIL, BUTPRSVIEWACTIVE, LSTFILAVAIL, BUTFILVIEWACTIVE};
+	diffitems = {LSTUSGAVAIL, BUTUSGVIEWACTIVE, LSTUSRAVAIL, BUTUSRVIEWACTIVE, LSTPRSAVAIL, BUTPRSVIEWACTIVE, LSTFILAVAIL, BUTFILVIEWACTIVE, BUTPRFNEWCRDAVAIL};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -359,6 +364,7 @@ void PnlWdbeNavAdmin::Tag::writeJSON(
 		me["CptUsr"] = "users";
 		me["CptPrs"] = "persons";
 		me["CptFil"] = "files";
+		me["CptPrf"] = "preferences";
 	};
 };
 
@@ -381,6 +387,7 @@ void PnlWdbeNavAdmin::Tag::writeXML(
 			writeStringAttr(wr, itemtag, "sref", "CptUsr", "users");
 			writeStringAttr(wr, itemtag, "sref", "CptPrs", "persons");
 			writeStringAttr(wr, itemtag, "sref", "CptFil", "files");
+			writeStringAttr(wr, itemtag, "sref", "CptPrf", "preferences");
 		};
 	xmlTextWriterEndElement(wr);
 };

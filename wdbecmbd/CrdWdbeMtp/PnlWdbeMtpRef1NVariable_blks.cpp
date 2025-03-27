@@ -47,9 +47,8 @@ PnlWdbeMtpRef1NVariable::ContInf::ContInf(
 			const uint numFCsiQst
 		) :
 			Block()
+			, numFCsiQst(numFCsiQst)
 		{
-	this->numFCsiQst = numFCsiQst;
-
 	mask = {NUMFCSIQST};
 };
 
@@ -150,14 +149,13 @@ PnlWdbeMtpRef1NVariable::StatShr::StatShr(
 			, const bool ButDeleteActive
 		) :
 			Block()
+			, ButUpAvail(ButUpAvail)
+			, ButUpActive(ButUpActive)
+			, ButDownAvail(ButDownAvail)
+			, ButDownActive(ButDownActive)
+			, ButDeleteAvail(ButDeleteAvail)
+			, ButDeleteActive(ButDeleteActive)
 		{
-	this->ButUpAvail = ButUpAvail;
-	this->ButUpActive = ButUpActive;
-	this->ButDownAvail = ButDownAvail;
-	this->ButDownActive = ButDownActive;
-	this->ButDeleteAvail = ButDeleteAvail;
-	this->ButDeleteActive = ButDeleteActive;
-
 	mask = {BUTUPAVAIL, BUTUPACTIVE, BUTDOWNAVAIL, BUTDOWNACTIVE, BUTDELETEAVAIL, BUTDELETEACTIVE};
 };
 
@@ -235,8 +233,8 @@ PnlWdbeMtpRef1NVariable::StgIac::StgIac(
 			const uint TcoRefWidth
 		) :
 			Block()
+			, TcoRefWidth(TcoRefWidth)
 		{
-	this->TcoRefWidth = TcoRefWidth;
 	mask = {TCOREFWIDTH};
 };
 

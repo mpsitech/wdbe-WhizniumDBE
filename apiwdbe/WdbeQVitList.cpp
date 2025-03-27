@@ -22,11 +22,12 @@ WdbeQVitList::WdbeQVitList(
 			, const string sref
 			, const string Title
 			, const string stubVecRefWdbeMVector
-		) {
-	this->jnum = jnum;
-	this->sref = sref;
-	this->Title = Title;
-	this->stubVecRefWdbeMVector = stubVecRefWdbeMVector;
+		) :
+			jnum(jnum)
+			, sref(sref)
+			, Title(Title)
+			, stubVecRefWdbeMVector(stubVecRefWdbeMVector)
+		{
 };
 
 bool WdbeQVitList::readXML(

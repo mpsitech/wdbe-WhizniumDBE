@@ -10,10 +10,10 @@
 #ifndef APIWDBE_H
 #define APIWDBE_H
 
-#define WDBE_VERSION "1.1.41"
+#define WDBE_VERSION "1.1.44"
 #define WDBE_VERSION_MAJOR 1
 #define WDBE_VERSION_MINOR 1
-#define WDBE_VERSION_SUB 41
+#define WDBE_VERSION_SUB 44
 
 #include "ApiWdbe_blks.h"
 
@@ -23,6 +23,7 @@
 #include "WdbeQCdcMNSignal.h"
 #include "WdbeQCmdAInvpar.h"
 #include "WdbeQCmdARetpar.h"
+#include "WdbeQCmdHk1NVector.h"
 #include "WdbeQCmdList.h"
 #include "WdbeQCmdMNController.h"
 #include "WdbeQCmp1NRelease.h"
@@ -175,6 +176,7 @@
 #include "CrdWdbePph.h"
 #include "CrdWdbePpl.h"
 #include "CrdWdbePrc.h"
+#include "CrdWdbePrf.h"
 #include "CrdWdbePrj.h"
 #include "CrdWdbePrs.h"
 #include "CrdWdbePrt.h"
@@ -230,6 +232,7 @@
 #include "PnlWdbeCmdARetpar.h"
 #include "PnlWdbeCmdDetail.h"
 #include "PnlWdbeCmdHeadbar.h"
+#include "PnlWdbeCmdHk1NVector.h"
 #include "PnlWdbeCmdList.h"
 #include "PnlWdbeCmdMNController.h"
 #include "PnlWdbeCmdRec.h"
@@ -370,6 +373,9 @@
 #include "PnlWdbePrcRec.h"
 #include "PnlWdbePrcRef1NSensitivity.h"
 #include "PnlWdbePrcRef1NVariable.h"
+#include "PnlWdbePrfDaemon.h"
+#include "PnlWdbePrfHeadbar.h"
+#include "PnlWdbePrfLicense.h"
 #include "PnlWdbePrjDetail.h"
 #include "PnlWdbePrjHeadbar.h"
 #include "PnlWdbePrjList.h"
@@ -474,6 +480,7 @@
 #include "QryWdbeCdcMNSignal.h"
 #include "QryWdbeCmdAInvpar.h"
 #include "QryWdbeCmdARetpar.h"
+#include "QryWdbeCmdHk1NVector.h"
 #include "QryWdbeCmdList.h"
 #include "QryWdbeCmdMNController.h"
 #include "QryWdbeCmp1NRelease.h"

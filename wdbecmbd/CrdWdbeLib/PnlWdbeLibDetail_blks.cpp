@@ -47,13 +47,12 @@ PnlWdbeLibDetail::ContIac::ContIac(
 			, const string& TxfCmt
 		) :
 			Block()
+			, TxfTit(TxfTit)
+			, TxfVer(TxfVer)
+			, numFLstDep(numFLstDep)
+			, TxfDep(TxfDep)
+			, TxfCmt(TxfCmt)
 		{
-	this->TxfTit = TxfTit;
-	this->TxfVer = TxfVer;
-	this->numFLstDep = numFLstDep;
-	this->TxfDep = TxfDep;
-	this->TxfCmt = TxfCmt;
-
 	mask = {TXFTIT, TXFVER, NUMFLSTDEP, TXFDEP, TXFCMT};
 };
 
@@ -178,9 +177,8 @@ PnlWdbeLibDetail::ContInf::ContInf(
 			const string& TxtSrf
 		) :
 			Block()
+			, TxtSrf(TxtSrf)
 		{
-	this->TxtSrf = TxtSrf;
-
 	mask = {TXTSRF};
 };
 
@@ -281,31 +279,30 @@ void PnlWdbeLibDetail::StatApp::writeXML(
  ******************************************************************************/
 
 PnlWdbeLibDetail::StatShr::StatShr(
-			const bool TxfDepValid
-			, const bool ButSaveAvail
+			const bool ButSaveAvail
 			, const bool ButSaveActive
 			, const bool TxtSrfActive
 			, const bool TxfTitActive
 			, const bool TxfVerActive
 			, const bool LstDepActive
+			, const bool TxfDepValid
 			, const bool ButDepViewAvail
 			, const bool ButDepViewActive
 			, const bool TxfCmtActive
 		) :
 			Block()
+			, ButSaveAvail(ButSaveAvail)
+			, ButSaveActive(ButSaveActive)
+			, TxtSrfActive(TxtSrfActive)
+			, TxfTitActive(TxfTitActive)
+			, TxfVerActive(TxfVerActive)
+			, LstDepActive(LstDepActive)
+			, TxfDepValid(TxfDepValid)
+			, ButDepViewAvail(ButDepViewAvail)
+			, ButDepViewActive(ButDepViewActive)
+			, TxfCmtActive(TxfCmtActive)
 		{
-	this->TxfDepValid = TxfDepValid;
-	this->ButSaveAvail = ButSaveAvail;
-	this->ButSaveActive = ButSaveActive;
-	this->TxtSrfActive = TxtSrfActive;
-	this->TxfTitActive = TxfTitActive;
-	this->TxfVerActive = TxfVerActive;
-	this->LstDepActive = LstDepActive;
-	this->ButDepViewAvail = ButDepViewAvail;
-	this->ButDepViewActive = ButDepViewActive;
-	this->TxfCmtActive = TxfCmtActive;
-
-	mask = {TXFDEPVALID, BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXFTITACTIVE, TXFVERACTIVE, LSTDEPACTIVE, BUTDEPVIEWAVAIL, BUTDEPVIEWACTIVE, TXFCMTACTIVE};
+	mask = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXFTITACTIVE, TXFVERACTIVE, LSTDEPACTIVE, TXFDEPVALID, BUTDEPVIEWAVAIL, BUTDEPVIEWACTIVE, TXFCMTACTIVE};
 };
 
 void PnlWdbeLibDetail::StatShr::writeJSON(
@@ -316,13 +313,13 @@ void PnlWdbeLibDetail::StatShr::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["TxfDepValid"] = TxfDepValid;
 	me["ButSaveAvail"] = ButSaveAvail;
 	me["ButSaveActive"] = ButSaveActive;
 	me["TxtSrfActive"] = TxtSrfActive;
 	me["TxfTitActive"] = TxfTitActive;
 	me["TxfVerActive"] = TxfVerActive;
 	me["LstDepActive"] = LstDepActive;
+	me["TxfDepValid"] = TxfDepValid;
 	me["ButDepViewAvail"] = ButDepViewAvail;
 	me["ButDepViewActive"] = ButDepViewActive;
 	me["TxfCmtActive"] = TxfCmtActive;
@@ -340,13 +337,13 @@ void PnlWdbeLibDetail::StatShr::writeXML(
 	else itemtag = "StatitemShrWdbeLibDetail";
 
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
-		writeBoolAttr(wr, itemtag, "sref", "TxfDepValid", TxfDepValid);
 		writeBoolAttr(wr, itemtag, "sref", "ButSaveAvail", ButSaveAvail);
 		writeBoolAttr(wr, itemtag, "sref", "ButSaveActive", ButSaveActive);
 		writeBoolAttr(wr, itemtag, "sref", "TxtSrfActive", TxtSrfActive);
 		writeBoolAttr(wr, itemtag, "sref", "TxfTitActive", TxfTitActive);
 		writeBoolAttr(wr, itemtag, "sref", "TxfVerActive", TxfVerActive);
 		writeBoolAttr(wr, itemtag, "sref", "LstDepActive", LstDepActive);
+		writeBoolAttr(wr, itemtag, "sref", "TxfDepValid", TxfDepValid);
 		writeBoolAttr(wr, itemtag, "sref", "ButDepViewAvail", ButDepViewAvail);
 		writeBoolAttr(wr, itemtag, "sref", "ButDepViewActive", ButDepViewActive);
 		writeBoolAttr(wr, itemtag, "sref", "TxfCmtActive", TxfCmtActive);
@@ -358,13 +355,13 @@ set<uint> PnlWdbeLibDetail::StatShr::comm(
 		) {
 	set<uint> items;
 
-	if (TxfDepValid == comp->TxfDepValid) insert(items, TXFDEPVALID);
 	if (ButSaveAvail == comp->ButSaveAvail) insert(items, BUTSAVEAVAIL);
 	if (ButSaveActive == comp->ButSaveActive) insert(items, BUTSAVEACTIVE);
 	if (TxtSrfActive == comp->TxtSrfActive) insert(items, TXTSRFACTIVE);
 	if (TxfTitActive == comp->TxfTitActive) insert(items, TXFTITACTIVE);
 	if (TxfVerActive == comp->TxfVerActive) insert(items, TXFVERACTIVE);
 	if (LstDepActive == comp->LstDepActive) insert(items, LSTDEPACTIVE);
+	if (TxfDepValid == comp->TxfDepValid) insert(items, TXFDEPVALID);
 	if (ButDepViewAvail == comp->ButDepViewAvail) insert(items, BUTDEPVIEWAVAIL);
 	if (ButDepViewActive == comp->ButDepViewActive) insert(items, BUTDEPVIEWACTIVE);
 	if (TxfCmtActive == comp->TxfCmtActive) insert(items, TXFCMTACTIVE);
@@ -380,7 +377,7 @@ set<uint> PnlWdbeLibDetail::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {TXFDEPVALID, BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXFTITACTIVE, TXFVERACTIVE, LSTDEPACTIVE, BUTDEPVIEWAVAIL, BUTDEPVIEWACTIVE, TXFCMTACTIVE};
+	diffitems = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXFTITACTIVE, TXFVERACTIVE, LSTDEPACTIVE, TXFDEPVALID, BUTDEPVIEWAVAIL, BUTDEPVIEWACTIVE, TXFCMTACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);

@@ -34,23 +34,24 @@ WdbeQCprList::WdbeQCprList(
 			, const ubigint refWdbeMCoreversion
 			, const string stubRefWdbeMCoreversion
 			, const string Giturl
-		) {
-	this->qref = qref;
-	this->jref = jref;
-	this->jnum = jnum;
-	this->ref = ref;
-	this->grp = grp;
-	this->stubGrp = stubGrp;
-	this->own = own;
-	this->stubOwn = stubOwn;
-	this->sref = sref;
-	this->Title = Title;
-	this->ixVBasetype = ixVBasetype;
-	this->srefIxVBasetype = srefIxVBasetype;
-	this->titIxVBasetype = titIxVBasetype;
-	this->refWdbeMCoreversion = refWdbeMCoreversion;
-	this->stubRefWdbeMCoreversion = stubRefWdbeMCoreversion;
-	this->Giturl = Giturl;
+		) :
+			qref(qref)
+			, jref(jref)
+			, jnum(jnum)
+			, ref(ref)
+			, grp(grp)
+			, stubGrp(stubGrp)
+			, own(own)
+			, stubOwn(stubOwn)
+			, sref(sref)
+			, Title(Title)
+			, ixVBasetype(ixVBasetype)
+			, srefIxVBasetype(srefIxVBasetype)
+			, titIxVBasetype(titIxVBasetype)
+			, refWdbeMCoreversion(refWdbeMCoreversion)
+			, stubRefWdbeMCoreversion(stubRefWdbeMCoreversion)
+			, Giturl(Giturl)
+		{
 };
 
 void WdbeQCprList::writeJSON(

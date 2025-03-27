@@ -38,7 +38,7 @@ bool CrdWdbeNav::evalPnlpreAvail(
 bool CrdWdbeNav::evalPnladminAvail(
 			DbsWdbe* dbswdbe
 		) {
-	// pre.ixCrdaccUsg()|pre.ixCrdaccUsr()|pre.ixCrdaccPrs()|pre.ixCrdaccFil()
+	// pre.ixCrdaccUsg()|pre.ixCrdaccUsr()|pre.ixCrdaccPrs()|pre.ixCrdaccFil()|pre.ixCrdaccPrf()
 
 	vector<bool> args;
 	bool a, b;
@@ -51,6 +51,11 @@ bool CrdWdbeNav::evalPnladminAvail(
 	args.push_back(a);
 	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCFIL, jref) != 0);
 	args.push_back(a);
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCPRF, jref) != 0);
+	args.push_back(a);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
 	b = args.back(); args.pop_back();
 	a = args.back(); args.pop_back();
 	args.push_back(a || b);
@@ -290,12 +295,12 @@ bool CrdWdbeNav::evalPnlauxfctAvail(
 bool CrdWdbeNav::evalMitSesSpsAvail(
 			DbsWdbe* dbswdbe
 		) {
-	// stgwdbeappearance.suspsessEq(true)
+	// stgwdbebehavior.suspsessEq(true)
 
 	vector<bool> args;
 	bool a;
 
-	a = false; a = (xchg->stgwdbeappearance.suspsess == true);
+	a = false; a = (xchg->stgwdbebehavior.suspsess == true);
 	args.push_back(a);
 
 	return(args.back());
@@ -304,7 +309,7 @@ bool CrdWdbeNav::evalMitSesSpsAvail(
 bool CrdWdbeNav::evalMspCrd1Avail(
 			DbsWdbe* dbswdbe
 		) {
-	// MitCrdUsgAvail()|MitCrdUsrAvail()|MitCrdPrsAvail()|MitCrdFilAvail()
+	// MitCrdUsgAvail()|MitCrdUsrAvail()|MitCrdPrsAvail()|MitCrdFilAvail()|MitCrdPrfAvail()
 
 	vector<bool> args;
 	bool a, b;
@@ -317,6 +322,11 @@ bool CrdWdbeNav::evalMspCrd1Avail(
 	args.push_back(a);
 	a = false; a = evalMitCrdFilAvail(dbswdbe);
 	args.push_back(a);
+	a = false; a = evalMitCrdPrfAvail(dbswdbe);
+	args.push_back(a);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
 	b = args.back(); args.pop_back();
 	a = args.back(); args.pop_back();
 	args.push_back(a || b);
@@ -381,6 +391,20 @@ bool CrdWdbeNav::evalMitCrdFilAvail(
 	bool a;
 
 	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCFIL, jref) != 0);
+	args.push_back(a);
+
+	return(args.back());
+};
+
+bool CrdWdbeNav::evalMitCrdPrfAvail(
+			DbsWdbe* dbswdbe
+		) {
+	// pre.ixCrdaccPrf()
+
+	vector<bool> args;
+	bool a;
+
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCPRF, jref) != 0);
 	args.push_back(a);
 
 	return(args.back());

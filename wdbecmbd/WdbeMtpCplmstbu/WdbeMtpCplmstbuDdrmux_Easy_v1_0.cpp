@@ -40,8 +40,11 @@ DpchRetWdbe* WdbeMtpCplmstbuDdrmux_Easy_v1_0::run(
 
 	bool phyNotAxi;
 	unsigned int wAPhy, wDPhy;
+
+	string memclk;
 	bool memclkIntNotExt;
-	int fMemclk;
+	double ratioMemclk;
+
 	unsigned int wA, wAConst;
 	string aConst;
 	unsigned int NBeat;
@@ -73,11 +76,14 @@ DpchRetWdbe* WdbeMtpCplmstbuDdrmux_Easy_v1_0::run(
 			if (Wdbe::getMpa(dbswdbe, refWdbeMModule, "wDPhy", s)) wDPhy = atoi(s.c_str());
 		};
 
+		memclk = "memclk";
+		Wdbe::getMpa(dbswdbe, refWdbeMModule, "memclk", memclk);
+
 		memclkIntNotExt = false;
 		if (Wdbe::getMpa(dbswdbe, refWdbeMModule, "memclkIntNotExt", s)) memclkIntNotExt = (s == "true");
 
-		fMemclk = 333000;
-		if (Wdbe::getMpa(dbswdbe, refWdbeMModule, "fMemclk", s)) fMemclk = atoi(s.c_str());
+		ratioMemclk = 1.0;
+		if (Wdbe::getMpa(dbswdbe, refWdbeMModule, "ratioMemclk", s)) ratioMemclk = atof(s.c_str());
 
 		wA = 32;
 		if (Wdbe::getMpa(dbswdbe, refWdbeMModule, "wA", s)) wA = atoi(s.c_str());
@@ -159,8 +165,14 @@ DpchRetWdbe* WdbeMtpCplmstbuDdrmux_Easy_v1_0::run(
 		unsigned int w;
 
 		mdlNum = Wdbe::getNextPrtMdlNum(dbswdbe, refWdbeMModule);
-		dbswdbe->tblwdbemport->insertNewRec(NULL, 0, refWdbeMModule, mdlNum++, VecWdbeVMPortMdlCat::RESET, "resetMemclk", (memclkIntNotExt) ? VecWdbeVMPortDir::OUT : VecWdbeVMPortDir::IN, "sl", 1, "", "", "", "", "", "");
-		dbswdbe->tblwdbemport->insertNewRec(NULL, 0, refWdbeMModule, mdlNum++, VecWdbeVMPortMdlCat::CLK, "memclk", (memclkIntNotExt) ? VecWdbeVMPortDir::OUT : VecWdbeVMPortDir::IN, "sl", 1, "", "", "", "", "", "");
+
+		if (memclk == "mclk") {
+			dbswdbe->executeQuery("DELETE FROM TblWdbeMPort WHERE mdlRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'resetMemclk'");
+			dbswdbe->executeQuery("DELETE FROM TblWdbeMPort WHERE mdlRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'memclk'");
+		} else {
+			dbswdbe->executeQuery("UPDATE TblWdbeMPort SET sref = 'reset" + StrMod::cap(memclk) + "' WHERE mdlRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'resetMemclk'");
+			dbswdbe->executeQuery("UPDATE TblWdbeMPort SET sref = '" + memclk + "' WHERE mdlRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'memclk'");
+		};
 
 		if (dbswdbe->loadRefBySQL("SELECT refWdbeCPort FROM TblWdbeMPort WHERE mdlRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'ddrAXI_araddr'", refC)) {
 			if (!phyNotAxi) Wdbe::setPrtWdt(dbswdbe, refWdbeMModule, "ddrAXI_araddr", wA);
@@ -223,9 +235,6 @@ DpchRetWdbe* WdbeMtpCplmstbuDdrmux_Easy_v1_0::run(
 			dbswdbe->tblwdbemport->insertNewRec(NULL, refC, refWdbeMModule, mdlNum++, VecWdbeVMPortMdlCat::RTESUP, chsref + "AXI_wlast", VecWdbeVMPortDir::IN, "sl", 1, "", "", "", "", "", "");
 			dbswdbe->tblwdbemport->insertNewRec(NULL, refC, refWdbeMModule, mdlNum++, VecWdbeVMPortMdlCat::RTESUP, chsref + "AXI_wready", VecWdbeVMPortDir::OUT, "sl", 1, "", "", "", "", "", "");
 			dbswdbe->tblwdbemport->insertNewRec(NULL, refC, refWdbeMModule, mdlNum++, VecWdbeVMPortMdlCat::RTESUP, chsref + "AXI_wvalid", VecWdbeVMPortDir::IN, "sl", 1, "", "", "", "", "", "");
-			dbswdbe->tblwdbemport->insertNewRec(NULL, refC, refWdbeMModule, mdlNum++, VecWdbeVMPortMdlCat::RTESUP, chsref + "AXI_bready", VecWdbeVMPortDir::IN, "sl", 1, "", "", "", "", "", "");
-			dbswdbe->tblwdbemport->insertNewRec(NULL, refC, refWdbeMModule, mdlNum++, VecWdbeVMPortMdlCat::RTESUP, chsref + "AXI_bresp", VecWdbeVMPortDir::OUT, "slvdn", 2, "", "", "", "", "", "");
-			dbswdbe->tblwdbemport->insertNewRec(NULL, refC, refWdbeMModule, mdlNum++, VecWdbeVMPortMdlCat::RTESUP, chsref + "AXI_bvalid", VecWdbeVMPortDir::OUT, "sl", 1, "", "", "", "", "", "");
 		};
 
 		if (dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMCommand WHERE refIxVTbl = " + to_string(VecWdbeVMCommandRefTbl::CTR) + " AND refUref = " + to_string(mdl->refWdbeMController) + " AND sref = 'getStats'", ref)) {

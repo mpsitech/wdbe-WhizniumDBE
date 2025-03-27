@@ -25,14 +25,15 @@ WdbeQSnsList::WdbeQSnsList(
 			, const string srefSrcIxVTbl
 			, const string titSrcIxVTbl
 			, const string stubSrcUref
-		) {
-	this->jnum = jnum;
-	this->srefRefIxVTbl = srefRefIxVTbl;
-	this->titRefIxVTbl = titRefIxVTbl;
-	this->stubRefUref = stubRefUref;
-	this->srefSrcIxVTbl = srefSrcIxVTbl;
-	this->titSrcIxVTbl = titSrcIxVTbl;
-	this->stubSrcUref = stubSrcUref;
+		) :
+			jnum(jnum)
+			, srefRefIxVTbl(srefRefIxVTbl)
+			, titRefIxVTbl(titRefIxVTbl)
+			, stubRefUref(stubRefUref)
+			, srefSrcIxVTbl(srefSrcIxVTbl)
+			, titSrcIxVTbl(titSrcIxVTbl)
+			, stubSrcUref(stubSrcUref)
+		{
 };
 
 bool WdbeQSnsList::readXML(

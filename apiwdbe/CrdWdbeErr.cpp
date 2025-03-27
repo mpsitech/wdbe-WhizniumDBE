@@ -71,11 +71,10 @@ CrdWdbeErr::ContInf::ContInf(
 			, const string& MtxCrdErr
 		) :
 			Block()
+			, numFSge(numFSge)
+			, MrlAppHlp(MrlAppHlp)
+			, MtxCrdErr(MtxCrdErr)
 		{
-	this->numFSge = numFSge;
-	this->MrlAppHlp = MrlAppHlp;
-	this->MtxCrdErr = MtxCrdErr;
-
 	mask = {NUMFSGE, MRLAPPHLP, MTXCRDERR};
 };
 
@@ -144,15 +143,14 @@ CrdWdbeErr::StatApp::StatApp(
 			, const bool initdoneRec
 		) :
 			Block()
+			, ixWdbeVReqitmode(ixWdbeVReqitmode)
+			, latency(latency)
+			, shortMenu(shortMenu)
+			, widthMenu(widthMenu)
+			, initdoneHeadbar(initdoneHeadbar)
+			, initdoneList(initdoneList)
+			, initdoneRec(initdoneRec)
 		{
-	this->ixWdbeVReqitmode = ixWdbeVReqitmode;
-	this->latency = latency;
-	this->shortMenu = shortMenu;
-	this->widthMenu = widthMenu;
-	this->initdoneHeadbar = initdoneHeadbar;
-	this->initdoneList = initdoneList;
-	this->initdoneRec = initdoneRec;
-
 	mask = {IXWDBEVREQITMODE, LATENCY, SHORTMENU, WIDTHMENU, INITDONEHEADBAR, INITDONELIST, INITDONEREC};
 };
 
@@ -230,11 +228,10 @@ CrdWdbeErr::StatShr::StatShr(
 			, const string& scrJrefRec
 		) :
 			Block()
+			, scrJrefHeadbar(scrJrefHeadbar)
+			, scrJrefList(scrJrefList)
+			, scrJrefRec(scrJrefRec)
 		{
-	this->scrJrefHeadbar = scrJrefHeadbar;
-	this->scrJrefList = scrJrefList;
-	this->scrJrefRec = scrJrefRec;
-
 	mask = {SCRJREFHEADBAR, SCRJREFLIST, SCRJREFREC};
 };
 
@@ -298,10 +295,9 @@ CrdWdbeErr::Tag::Tag(
 			, const string& MrlAppHlp
 		) :
 			Block()
+			, MitAppAbt(MitAppAbt)
+			, MrlAppHlp(MrlAppHlp)
 		{
-	this->MitAppAbt = MitAppAbt;
-	this->MrlAppHlp = MrlAppHlp;
-
 	mask = {MITAPPABT, MRLAPPHLP};
 };
 
@@ -339,11 +335,11 @@ CrdWdbeErr::DpchAppDo::DpchAppDo(
 			, const set<uint>& mask
 		) :
 			DpchAppWdbe(VecWdbeVDpch::DPCHAPPWDBEERRDO, scrJref)
+			, ixVDo(ixVDo)
 		{
 	if (find(mask, ALL)) this->mask = {SCRJREF, IXVDO};
 	else this->mask = mask;
 
-	this->ixVDo = ixVDo;
 };
 
 string CrdWdbeErr::DpchAppDo::getSrefsMask() {

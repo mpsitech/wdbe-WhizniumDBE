@@ -47,9 +47,8 @@ PnlWdbeModSup1NModule::ContInf::ContInf(
 			const uint numFCsiQst
 		) :
 			Block()
+			, numFCsiQst(numFCsiQst)
 		{
-	this->numFCsiQst = numFCsiQst;
-
 	mask = {NUMFCSIQST};
 };
 
@@ -150,14 +149,13 @@ PnlWdbeModSup1NModule::StatShr::StatShr(
 			, const bool ButViewActive
 		) :
 			Block()
+			, ButUpAvail(ButUpAvail)
+			, ButUpActive(ButUpActive)
+			, ButDownAvail(ButDownAvail)
+			, ButDownActive(ButDownActive)
+			, ButViewAvail(ButViewAvail)
+			, ButViewActive(ButViewActive)
 		{
-	this->ButUpAvail = ButUpAvail;
-	this->ButUpActive = ButUpActive;
-	this->ButDownAvail = ButDownAvail;
-	this->ButDownActive = ButDownActive;
-	this->ButViewAvail = ButViewAvail;
-	this->ButViewActive = ButViewActive;
-
 	mask = {BUTUPAVAIL, BUTUPACTIVE, BUTDOWNAVAIL, BUTDOWNACTIVE, BUTVIEWAVAIL, BUTVIEWACTIVE};
 };
 
@@ -235,8 +233,8 @@ PnlWdbeModSup1NModule::StgIac::StgIac(
 			const uint TcoRefWidth
 		) :
 			Block()
+			, TcoRefWidth(TcoRefWidth)
 		{
-	this->TcoRefWidth = TcoRefWidth;
 	mask = {TCOREFWIDTH};
 };
 

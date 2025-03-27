@@ -53,9 +53,8 @@ PnlWdbeCdcList::ContIac::ContIac(
 			const uint numFTos
 		) :
 			Block()
+			, numFTos(numFTos)
 		{
-	this->numFTos = numFTos;
-
 	mask = {NUMFTOS};
 };
 
@@ -133,12 +132,11 @@ PnlWdbeCdcList::ContInf::ContInf(
 			, const uint numFCsiQst
 		) :
 			Block()
+			, TxtFor(TxtFor)
+			, TxtPre(TxtPre)
+			, ButFilterOn(ButFilterOn)
+			, numFCsiQst(numFCsiQst)
 		{
-	this->TxtFor = TxtFor;
-	this->TxtPre = TxtPre;
-	this->ButFilterOn = ButFilterOn;
-	this->numFCsiQst = numFCsiQst;
-
 	mask = {TXTFOR, TXTPRE, BUTFILTERON, NUMFCSIQST};
 };
 
@@ -204,10 +202,9 @@ PnlWdbeCdcList::StatShr::StatShr(
 			, const bool ButDeleteActive
 		) :
 			Block()
+			, ixWdbeVExpstate(ixWdbeVExpstate)
+			, ButDeleteActive(ButDeleteActive)
 		{
-	this->ixWdbeVExpstate = ixWdbeVExpstate;
-	this->ButDeleteActive = ButDeleteActive;
-
 	mask = {IXWDBEVEXPSTATE, BUTDELETEACTIVE};
 };
 
@@ -273,9 +270,8 @@ PnlWdbeCdcList::StgIac::StgIac(
 			const uint TcoMdlWidth
 		) :
 			Block()
+			, TcoMdlWidth(TcoMdlWidth)
 		{
-	this->TcoMdlWidth = TcoMdlWidth;
-
 	mask = {TCOMDLWIDTH};
 };
 
@@ -357,16 +353,15 @@ PnlWdbeCdcList::Tag::Tag(
 			, const string& TcoMdl
 		) :
 			Block()
+			, Cpt(Cpt)
+			, TxtFor(TxtFor)
+			, TxtRecord1(TxtRecord1)
+			, TxtRecord2(TxtRecord2)
+			, Trs(Trs)
+			, TxtShowing1(TxtShowing1)
+			, TxtShowing2(TxtShowing2)
+			, TcoMdl(TcoMdl)
 		{
-	this->Cpt = Cpt;
-	this->TxtFor = TxtFor;
-	this->TxtRecord1 = TxtRecord1;
-	this->TxtRecord2 = TxtRecord2;
-	this->Trs = Trs;
-	this->TxtShowing1 = TxtShowing1;
-	this->TxtShowing2 = TxtShowing2;
-	this->TcoMdl = TcoMdl;
-
 	mask = {CPT, TXTFOR, TXTRECORD1, TXTRECORD2, TRS, TXTSHOWING1, TXTSHOWING2, TCOMDL};
 };
 
@@ -457,11 +452,11 @@ PnlWdbeCdcList::DpchAppDo::DpchAppDo(
 			, const set<uint>& mask
 		) :
 			DpchAppWdbe(VecWdbeVDpch::DPCHAPPWDBECDCLISTDO, scrJref)
+			, ixVDo(ixVDo)
 		{
 	if (find(mask, ALL)) this->mask = {SCRJREF, IXVDO};
 	else this->mask = mask;
 
-	this->ixVDo = ixVDo;
 };
 
 string PnlWdbeCdcList::DpchAppDo::getSrefsMask() {

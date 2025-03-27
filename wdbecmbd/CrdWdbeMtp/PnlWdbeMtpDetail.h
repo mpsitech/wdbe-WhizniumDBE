@@ -113,25 +113,25 @@ public:
 	class StatShr : public Sbecore::Block {
 
 	public:
-		static const Sbecore::uint TXFVNDVALID = 1;
-		static const Sbecore::uint BUTSAVEAVAIL = 2;
-		static const Sbecore::uint BUTSAVEACTIVE = 3;
-		static const Sbecore::uint TXTSRFACTIVE = 4;
-		static const Sbecore::uint PUPVNDACTIVE = 5;
+		static const Sbecore::uint BUTSAVEAVAIL = 1;
+		static const Sbecore::uint BUTSAVEACTIVE = 2;
+		static const Sbecore::uint TXTSRFACTIVE = 3;
+		static const Sbecore::uint PUPVNDACTIVE = 4;
+		static const Sbecore::uint TXFVNDVALID = 5;
 		static const Sbecore::uint BUTVNDEDITAVAIL = 6;
 		static const Sbecore::uint PUPTYPACTIVE = 7;
 		static const Sbecore::uint TXFSRRACTIVE = 8;
 		static const Sbecore::uint TXFCMTACTIVE = 9;
 
 	public:
-		StatShr(const bool TxfVndValid = false, const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxtSrfActive = true, const bool PupVndActive = true, const bool ButVndEditAvail = true, const bool PupTypActive = true, const bool TxfSrrActive = true, const bool TxfCmtActive = true);
+		StatShr(const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxtSrfActive = true, const bool PupVndActive = true, const bool TxfVndValid = false, const bool ButVndEditAvail = true, const bool PupTypActive = true, const bool TxfSrrActive = true, const bool TxfCmtActive = true);
 
 	public:
-		bool TxfVndValid;
 		bool ButSaveAvail;
 		bool ButSaveActive;
 		bool TxtSrfActive;
 		bool PupVndActive;
+		bool TxfVndValid;
 		bool ButVndEditAvail;
 		bool PupTypActive;
 		bool TxfSrrActive;

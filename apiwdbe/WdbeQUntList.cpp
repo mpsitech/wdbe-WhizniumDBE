@@ -33,22 +33,23 @@ WdbeQUntList::WdbeQUntList(
 			, const string yesnoEasy
 			, const string srefKToolch
 			, const string titSrefKToolch
-		) {
-	this->jnum = jnum;
-	this->sref = sref;
-	this->Title = Title;
-	this->Fullsref = Fullsref;
-	this->srefIxVBasetype = srefIxVBasetype;
-	this->titIxVBasetype = titIxVBasetype;
-	this->srefRefIxVTbl = srefRefIxVTbl;
-	this->titRefIxVTbl = titRefIxVTbl;
-	this->stubRefUref = stubRefUref;
-	this->stubRefWdbeMModule = stubRefWdbeMModule;
-	this->srefKPackage = srefKPackage;
-	this->titSrefKPackage = titSrefKPackage;
-	this->yesnoEasy = yesnoEasy;
-	this->srefKToolch = srefKToolch;
-	this->titSrefKToolch = titSrefKToolch;
+		) :
+			jnum(jnum)
+			, sref(sref)
+			, Title(Title)
+			, Fullsref(Fullsref)
+			, srefIxVBasetype(srefIxVBasetype)
+			, titIxVBasetype(titIxVBasetype)
+			, srefRefIxVTbl(srefRefIxVTbl)
+			, titRefIxVTbl(titRefIxVTbl)
+			, stubRefUref(stubRefUref)
+			, stubRefWdbeMModule(stubRefWdbeMModule)
+			, srefKPackage(srefKPackage)
+			, titSrefKPackage(titSrefKPackage)
+			, yesnoEasy(yesnoEasy)
+			, srefKToolch(srefKToolch)
+			, titSrefKToolch(titSrefKToolch)
+		{
 };
 
 bool WdbeQUntList::readXML(

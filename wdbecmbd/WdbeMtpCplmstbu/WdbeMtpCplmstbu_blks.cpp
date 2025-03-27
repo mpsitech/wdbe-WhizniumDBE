@@ -24,9 +24,9 @@ DpchInvWdbeMtpCplmstbu::DpchInvWdbeMtpCplmstbu(
 			, const ubigint refWdbeMModule
 		) :
 			DpchInvWdbe(VecWdbeVDpch::DPCHINVWDBEMTPCPLMSTBU, oref, jref)
+			, srefKCustop(srefKCustop)
+			, refWdbeMModule(refWdbeMModule)
 		{
-	this->srefKCustop = srefKCustop;
-	this->refWdbeMModule = refWdbeMModule;
 };
 
 void DpchInvWdbeMtpCplmstbu::readXML(

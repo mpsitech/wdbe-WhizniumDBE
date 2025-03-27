@@ -15,8 +15,8 @@
 // IP include.cust --- INSERT
 
 #include "PnlWdbeSigMNCdc.h"
-#include "PnlWdbeSigDetail.h"
 #include "PnlWdbeSigSrc1NSensitivity.h"
+#include "PnlWdbeSigDetail.h"
 
 #define VecVWdbeSigRecDo PnlWdbeSigRec::VecVDo
 
@@ -178,8 +178,8 @@ public:
 	StatShr statshr;
 
 	PnlWdbeSigMNCdc* pnlmncdc;
-	PnlWdbeSigDetail* pnldetail;
 	PnlWdbeSigSrc1NSensitivity* pnlsrc1nsensitivity;
+	PnlWdbeSigDetail* pnldetail;
 
 	WdbeMSignal recSig;
 

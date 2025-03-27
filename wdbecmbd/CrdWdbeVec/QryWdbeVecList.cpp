@@ -109,11 +109,35 @@ void QryWdbeVecList::rerun(
 		cnts.push_back(cnt); lims.push_back(0); ofss.push_back(0);
 		cntsum += cnt;
 
+		sqlstr = "SELECT COUNT(TblWdbeMVector.ref)";
+		sqlstr += " FROM TblWdbeMVector, TblWdbeMCommand";
+		sqlstr += " WHERE TblWdbeMVector.hkIxVTbl = " + to_string(VecWdbeVMVectorHkTbl::CMD);
+		sqlstr += " AND TblWdbeMVector.hkUref = TblWdbeMCommand.ref";
+		sqlstr += " AND TblWdbeMCommand.refIxVTbl = " + to_string(VecWdbeVMCommandRefTbl::UNT);
+		sqlstr += " AND TblWdbeMCommand.refUref = " + to_string(preRefUnt) + "";
+		rerun_filtSQL(sqlstr, preSrf, preTyp, preHkt, preHku, false);
+		dbswdbe->loadUintBySQL(sqlstr, cnt);
+		cnts.push_back(cnt); lims.push_back(0); ofss.push_back(0);
+		cntsum += cnt;
+
 	} else if (preIxPre == VecWdbeVPreset::PREWDBEREFVER) {
 		sqlstr = "SELECT COUNT(TblWdbeMVector.ref)";
 		sqlstr += " FROM TblWdbeMVector, TblWdbeMUnit";
 		sqlstr += " WHERE TblWdbeMVector.hkIxVTbl = " + to_string(VecWdbeVMVectorHkTbl::UNT);
 		sqlstr += " AND TblWdbeMVector.hkUref = TblWdbeMUnit.ref";
+		sqlstr += " AND TblWdbeMUnit.refIxVTbl = " + to_string(VecWdbeVMUnitRefTbl::VER);
+		sqlstr += " AND TblWdbeMUnit.refUref = " + to_string(preRefVer) + "";
+		rerun_filtSQL(sqlstr, preSrf, preTyp, preHkt, preHku, false);
+		dbswdbe->loadUintBySQL(sqlstr, cnt);
+		cnts.push_back(cnt); lims.push_back(0); ofss.push_back(0);
+		cntsum += cnt;
+
+		sqlstr = "SELECT COUNT(TblWdbeMVector.ref)";
+		sqlstr += " FROM TblWdbeMVector, TblWdbeMUnit, TblWdbeMCommand";
+		sqlstr += " WHERE TblWdbeMVector.hkIxVTbl = " + to_string(VecWdbeVMVectorHkTbl::CMD);
+		sqlstr += " AND TblWdbeMVector.hkUref = TblWdbeMCommand.ref";
+		sqlstr += " AND TblWdbeMCommand.refIxVTbl = " + to_string(VecWdbeVMCommandRefTbl::UNT);
+		sqlstr += " AND TblWdbeMCommand.refUref = TblWdbeMUnit.ref";
 		sqlstr += " AND TblWdbeMUnit.refIxVTbl = " + to_string(VecWdbeVMUnitRefTbl::VER);
 		sqlstr += " AND TblWdbeMUnit.refUref = " + to_string(preRefVer) + "";
 		rerun_filtSQL(sqlstr, preSrf, preTyp, preHkt, preHku, false);
@@ -166,6 +190,17 @@ void QryWdbeVecList::rerun(
 		sqlstr += " LIMIT " + to_string(lims[0]) + " OFFSET " + to_string(ofss[0]);
 		dbswdbe->executeQuery(sqlstr);
 
+		rerun_baseSQL(sqlstr);
+		sqlstr += " FROM TblWdbeMVector, TblWdbeMCommand";
+		sqlstr += " WHERE TblWdbeMVector.hkIxVTbl = " + to_string(VecWdbeVMVectorHkTbl::CMD);
+		sqlstr += " AND TblWdbeMVector.hkUref = TblWdbeMCommand.ref";
+		sqlstr += " AND TblWdbeMCommand.refIxVTbl = " + to_string(VecWdbeVMCommandRefTbl::UNT);
+		sqlstr += " AND TblWdbeMCommand.refUref = " + to_string(preRefUnt) + "";
+		rerun_filtSQL(sqlstr, preSrf, preTyp, preHkt, preHku, false);
+		rerun_orderSQL(sqlstr, preIxOrd);
+		sqlstr += " LIMIT " + to_string(lims[1]) + " OFFSET " + to_string(ofss[1]);
+		dbswdbe->executeQuery(sqlstr);
+
 	} else if (preIxPre == VecWdbeVPreset::PREWDBEREFVER) {
 		rerun_baseSQL(sqlstr);
 		sqlstr += " FROM TblWdbeMVector, TblWdbeMUnit";
@@ -176,6 +211,19 @@ void QryWdbeVecList::rerun(
 		rerun_filtSQL(sqlstr, preSrf, preTyp, preHkt, preHku, false);
 		rerun_orderSQL(sqlstr, preIxOrd);
 		sqlstr += " LIMIT " + to_string(lims[0]) + " OFFSET " + to_string(ofss[0]);
+		dbswdbe->executeQuery(sqlstr);
+
+		rerun_baseSQL(sqlstr);
+		sqlstr += " FROM TblWdbeMVector, TblWdbeMUnit, TblWdbeMCommand";
+		sqlstr += " WHERE TblWdbeMVector.hkIxVTbl = " + to_string(VecWdbeVMVectorHkTbl::CMD);
+		sqlstr += " AND TblWdbeMVector.hkUref = TblWdbeMCommand.ref";
+		sqlstr += " AND TblWdbeMCommand.refIxVTbl = " + to_string(VecWdbeVMCommandRefTbl::UNT);
+		sqlstr += " AND TblWdbeMCommand.refUref = TblWdbeMUnit.ref";
+		sqlstr += " AND TblWdbeMUnit.refIxVTbl = " + to_string(VecWdbeVMUnitRefTbl::VER);
+		sqlstr += " AND TblWdbeMUnit.refUref = " + to_string(preRefVer) + "";
+		rerun_filtSQL(sqlstr, preSrf, preTyp, preHkt, preHku, false);
+		rerun_orderSQL(sqlstr, preIxOrd);
+		sqlstr += " LIMIT " + to_string(lims[1]) + " OFFSET " + to_string(ofss[1]);
 		dbswdbe->executeQuery(sqlstr);
 
 	} else {
@@ -251,10 +299,10 @@ void QryWdbeVecList::rerun_orderSQL(
 			string& sqlstr
 			, const uint preIxOrd
 		) {
-	if (preIxOrd == VecVOrd::HKT) sqlstr += " ORDER BY TblWdbeMVector.hkIxVTbl ASC";
-	else if (preIxOrd == VecVOrd::HKU) sqlstr += " ORDER BY TblWdbeMVector.hkUref ASC";
-	else if (preIxOrd == VecVOrd::SRF) sqlstr += " ORDER BY TblWdbeMVector.sref ASC";
+	if (preIxOrd == VecVOrd::HKU) sqlstr += " ORDER BY TblWdbeMVector.hkUref ASC";
+	else if (preIxOrd == VecVOrd::HKT) sqlstr += " ORDER BY TblWdbeMVector.hkIxVTbl ASC";
 	else if (preIxOrd == VecVOrd::TYP) sqlstr += " ORDER BY TblWdbeMVector.ixVBasetype ASC";
+	else if (preIxOrd == VecVOrd::SRF) sqlstr += " ORDER BY TblWdbeMVector.sref ASC";
 };
 
 void QryWdbeVecList::fetch(
@@ -286,12 +334,14 @@ void QryWdbeVecList::fetch(
 			rec->titIxVBasetype = VecWdbeVMVectorBasetype::getTitle(rec->ixVBasetype, ixWdbeVLocale);
 			rec->srefHkIxVTbl = VecWdbeVMVectorHkTbl::getSref(rec->hkIxVTbl);
 			rec->titHkIxVTbl = VecWdbeVMVectorHkTbl::getTitle(rec->hkIxVTbl, ixWdbeVLocale);
-			if (rec->hkIxVTbl == VecWdbeVMVectorHkTbl::UNT) {
-				rec->stubHkUref = StubWdbe::getStubUntStd(dbswdbe, rec->hkUref, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
-			} else if (rec->hkIxVTbl == VecWdbeVMVectorHkTbl::FSM) {
-				rec->stubHkUref = StubWdbe::getStubFsmStd(dbswdbe, rec->hkUref, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
+			if (rec->hkIxVTbl == VecWdbeVMVectorHkTbl::CMD) {
+				rec->stubHkUref = StubWdbe::getStubCmdStd(dbswdbe, rec->hkUref, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
 			} else if (rec->hkIxVTbl == VecWdbeVMVectorHkTbl::CTR) {
 				rec->stubHkUref = StubWdbe::getStubCtrStd(dbswdbe, rec->hkUref, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
+			} else if (rec->hkIxVTbl == VecWdbeVMVectorHkTbl::FSM) {
+				rec->stubHkUref = StubWdbe::getStubFsmStd(dbswdbe, rec->hkUref, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
+			} else if (rec->hkIxVTbl == VecWdbeVMVectorHkTbl::UNT) {
+				rec->stubHkUref = StubWdbe::getStubUntStd(dbswdbe, rec->hkUref, ixWdbeVLocale, Stub::VecVNonetype::SHORT, stcch);
 			} else rec->stubHkUref = "-";
 		};
 

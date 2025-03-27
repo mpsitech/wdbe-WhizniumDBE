@@ -33,22 +33,22 @@ WdbeMUser::WdbeMUser(
 			, const string Password
 			, const string Fullkey
 			, const string Comment
-		) {
-
-	this->ref = ref;
-	this->grp = grp;
-	this->own = own;
-	this->refRUsergroup = refRUsergroup;
-	this->refWdbeMUsergroup = refWdbeMUsergroup;
-	this->refWdbeMPerson = refWdbeMPerson;
-	this->sref = sref;
-	this->refJState = refJState;
-	this->ixVState = ixVState;
-	this->ixWdbeVLocale = ixWdbeVLocale;
-	this->ixWdbeVUserlevel = ixWdbeVUserlevel;
-	this->Password = Password;
-	this->Fullkey = Fullkey;
-	this->Comment = Comment;
+		) :
+			ref(ref)
+			, grp(grp)
+			, own(own)
+			, refRUsergroup(refRUsergroup)
+			, refWdbeMUsergroup(refWdbeMUsergroup)
+			, refWdbeMPerson(refWdbeMPerson)
+			, sref(sref)
+			, refJState(refJState)
+			, ixVState(ixVState)
+			, ixWdbeVLocale(ixWdbeVLocale)
+			, ixWdbeVUserlevel(ixWdbeVUserlevel)
+			, Password(Password)
+			, Fullkey(Fullkey)
+			, Comment(Comment)
+		{
 };
 
 bool WdbeMUser::operator==(

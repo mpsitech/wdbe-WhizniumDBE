@@ -22,11 +22,12 @@ WdbeQLibList::WdbeQLibList(
 			, const string sref
 			, const string Title
 			, const string Version
-		) {
-	this->jnum = jnum;
-	this->sref = sref;
-	this->Title = Title;
-	this->Version = Version;
+		) :
+			jnum(jnum)
+			, sref(sref)
+			, Title(Title)
+			, Version(Version)
+		{
 };
 
 bool WdbeQLibList::readXML(

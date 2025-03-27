@@ -289,35 +289,6 @@ public:
 };
 
 /**
-	* StgWdbeAppearance
-	*/
-class StgWdbeAppearance : public Sbecore::Block {
-
-public:
-	static const Sbecore::uint HISTLENGTH = 1;
-	static const Sbecore::uint SUSPSESS = 2;
-	static const Sbecore::uint SESSTTERM = 3;
-	static const Sbecore::uint SESSTWARN = 4;
-	static const Sbecore::uint ROOTTTERM = 5;
-
-public:
-	StgWdbeAppearance(const Sbecore::usmallint histlength = 20, const bool suspsess = true, const Sbecore::uint sesstterm = 0, const Sbecore::uint sesstwarn = 0, const Sbecore::uint roottterm = 0);
-
-public:
-	Sbecore::usmallint histlength;
-	bool suspsess;
-	Sbecore::uint sesstterm;
-	Sbecore::uint sesstwarn;
-	Sbecore::uint roottterm;
-
-public:
-	bool readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
-	void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
-	std::set<Sbecore::uint> comm(const StgWdbeAppearance* comp);
-	std::set<Sbecore::uint> diff(const StgWdbeAppearance* comp);
-};
-
-/**
 	* StgWdbeAppsrv
 	*/
 class StgWdbeAppsrv : public Sbecore::Block {
@@ -340,6 +311,35 @@ public:
 	void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
 	std::set<Sbecore::uint> comm(const StgWdbeAppsrv* comp);
 	std::set<Sbecore::uint> diff(const StgWdbeAppsrv* comp);
+};
+
+/**
+	* StgWdbeBehavior
+	*/
+class StgWdbeBehavior : public Sbecore::Block {
+
+public:
+	static const Sbecore::uint HISTLENGTH = 1;
+	static const Sbecore::uint SUSPSESS = 2;
+	static const Sbecore::uint SESSTTERM = 3;
+	static const Sbecore::uint SESSTWARN = 4;
+	static const Sbecore::uint ROOTTTERM = 5;
+
+public:
+	StgWdbeBehavior(const Sbecore::usmallint histlength = 20, const bool suspsess = true, const Sbecore::uint sesstterm = 0, const Sbecore::uint sesstwarn = 0, const Sbecore::uint roottterm = 0);
+
+public:
+	Sbecore::usmallint histlength;
+	bool suspsess;
+	Sbecore::uint sesstterm;
+	Sbecore::uint sesstwarn;
+	Sbecore::uint roottterm;
+
+public:
+	bool readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
+	void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true);
+	std::set<Sbecore::uint> comm(const StgWdbeBehavior* comp);
+	std::set<Sbecore::uint> diff(const StgWdbeBehavior* comp);
 };
 
 /**
@@ -929,8 +929,8 @@ public:
 	~XchgWdbed();
 
 public:
-	StgWdbeAppearance stgwdbeappearance;
 	StgWdbeAppsrv stgwdbeappsrv;
+	StgWdbeBehavior stgwdbebehavior;
 	StgWdbed stgwdbed;
 	StgWdbeDatabase stgwdbedatabase;
 	StgWdbeMonitor stgwdbemonitor;

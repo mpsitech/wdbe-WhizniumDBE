@@ -51,9 +51,8 @@ PnlWdbeSigList::ContIac::ContIac(
 			const uint numFTos
 		) :
 			Block()
+			, numFTos(numFTos)
 		{
-	this->numFTos = numFTos;
-
 	mask = {NUMFTOS};
 };
 
@@ -161,12 +160,11 @@ PnlWdbeSigList::ContInf::ContInf(
 			, const uint numFCsiQst
 		) :
 			Block()
+			, TxtFor(TxtFor)
+			, TxtPre(TxtPre)
+			, ButFilterOn(ButFilterOn)
+			, numFCsiQst(numFCsiQst)
 		{
-	this->TxtFor = TxtFor;
-	this->TxtPre = TxtPre;
-	this->ButFilterOn = ButFilterOn;
-	this->numFCsiQst = numFCsiQst;
-
 	mask = {TXTFOR, TXTPRE, BUTFILTERON, NUMFCSIQST};
 };
 
@@ -239,10 +237,9 @@ PnlWdbeSigList::StatShr::StatShr(
 			, const bool ButDeleteActive
 		) :
 			Block()
+			, ixWdbeVExpstate(ixWdbeVExpstate)
+			, ButDeleteActive(ButDeleteActive)
 		{
-	this->ixWdbeVExpstate = ixWdbeVExpstate;
-	this->ButDeleteActive = ButDeleteActive;
-
 	mask = {IXWDBEVEXPSTATE, BUTDELETEACTIVE};
 };
 
@@ -318,18 +315,18 @@ PnlWdbeSigList::StgIac::StgIac(
 			, const uint TcoMmxWidth
 		) :
 			Block()
+			, TcoSrfWidth(TcoSrfWidth)
+			, TcoTypWidth(TcoTypWidth)
+			, TcoRetWidth(TcoRetWidth)
+			, TcoReuWidth(TcoReuWidth)
+			, TcoMgtWidth(TcoMgtWidth)
+			, TcoMguWidth(TcoMguWidth)
+			, TcoVecWidth(TcoVecWidth)
+			, TcoConWidth(TcoConWidth)
+			, TcoHtyWidth(TcoHtyWidth)
+			, TcoWidWidth(TcoWidWidth)
+			, TcoMmxWidth(TcoMmxWidth)
 		{
-	this->TcoSrfWidth = TcoSrfWidth;
-	this->TcoTypWidth = TcoTypWidth;
-	this->TcoRetWidth = TcoRetWidth;
-	this->TcoReuWidth = TcoReuWidth;
-	this->TcoMgtWidth = TcoMgtWidth;
-	this->TcoMguWidth = TcoMguWidth;
-	this->TcoVecWidth = TcoVecWidth;
-	this->TcoConWidth = TcoConWidth;
-	this->TcoHtyWidth = TcoHtyWidth;
-	this->TcoWidWidth = TcoWidWidth;
-	this->TcoMmxWidth = TcoMmxWidth;
 	mask = {TCOSRFWIDTH, TCOTYPWIDTH, TCORETWIDTH, TCOREUWIDTH, TCOMGTWIDTH, TCOMGUWIDTH, TCOVECWIDTH, TCOCONWIDTH, TCOHTYWIDTH, TCOWIDWIDTH, TCOMMXWIDTH};
 };
 

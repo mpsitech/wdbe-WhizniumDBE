@@ -65,13 +65,12 @@ PnlWdbeNavGlobal::ContIac::ContIac(
 			, const uint numFLstMtp
 		) :
 			Block()
+			, numFLstMch(numFLstMch)
+			, numFLstLib(numFLstLib)
+			, numFLstFam(numFLstFam)
+			, numFLstSil(numFLstSil)
+			, numFLstMtp(numFLstMtp)
 		{
-	this->numFLstMch = numFLstMch;
-	this->numFLstLib = numFLstLib;
-	this->numFLstFam = numFLstFam;
-	this->numFLstSil = numFLstSil;
-	this->numFLstMtp = numFLstMtp;
-
 	mask = {NUMFLSTMCH, NUMFLSTLIB, NUMFLSTFAM, NUMFLSTSIL, NUMFLSTMTP};
 };
 
@@ -168,19 +167,18 @@ PnlWdbeNavGlobal::StatApp::StatApp(
 			, const uint LstMtpNumFirstdisp
 		) :
 			Block()
+			, ixWdbeVExpstate(ixWdbeVExpstate)
+			, LstMchAlt(LstMchAlt)
+			, LstLibAlt(LstLibAlt)
+			, LstFamAlt(LstFamAlt)
+			, LstSilAlt(LstSilAlt)
+			, LstMtpAlt(LstMtpAlt)
+			, LstMchNumFirstdisp(LstMchNumFirstdisp)
+			, LstLibNumFirstdisp(LstLibNumFirstdisp)
+			, LstFamNumFirstdisp(LstFamNumFirstdisp)
+			, LstSilNumFirstdisp(LstSilNumFirstdisp)
+			, LstMtpNumFirstdisp(LstMtpNumFirstdisp)
 		{
-	this->ixWdbeVExpstate = ixWdbeVExpstate;
-	this->LstMchAlt = LstMchAlt;
-	this->LstLibAlt = LstLibAlt;
-	this->LstFamAlt = LstFamAlt;
-	this->LstSilAlt = LstSilAlt;
-	this->LstMtpAlt = LstMtpAlt;
-	this->LstMchNumFirstdisp = LstMchNumFirstdisp;
-	this->LstLibNumFirstdisp = LstLibNumFirstdisp;
-	this->LstFamNumFirstdisp = LstFamNumFirstdisp;
-	this->LstSilNumFirstdisp = LstSilNumFirstdisp;
-	this->LstMtpNumFirstdisp = LstMtpNumFirstdisp;
-
 	mask = {IXWDBEVEXPSTATE, LSTMCHALT, LSTLIBALT, LSTFAMALT, LSTSILALT, LSTMTPALT, LSTMCHNUMFIRSTDISP, LSTLIBNUMFIRSTDISP, LSTFAMNUMFIRSTDISP, LSTSILNUMFIRSTDISP, LSTMTPNUMFIRSTDISP};
 };
 
@@ -273,18 +271,17 @@ PnlWdbeNavGlobal::StatShr::StatShr(
 			, const bool ButMtpViewActive
 		) :
 			Block()
+			, LstMchAvail(LstMchAvail)
+			, ButMchViewActive(ButMchViewActive)
+			, LstLibAvail(LstLibAvail)
+			, ButLibViewActive(ButLibViewActive)
+			, LstFamAvail(LstFamAvail)
+			, ButFamViewActive(ButFamViewActive)
+			, LstSilAvail(LstSilAvail)
+			, ButSilViewActive(ButSilViewActive)
+			, LstMtpAvail(LstMtpAvail)
+			, ButMtpViewActive(ButMtpViewActive)
 		{
-	this->LstMchAvail = LstMchAvail;
-	this->ButMchViewActive = ButMchViewActive;
-	this->LstLibAvail = LstLibAvail;
-	this->ButLibViewActive = ButLibViewActive;
-	this->LstFamAvail = LstFamAvail;
-	this->ButFamViewActive = ButFamViewActive;
-	this->LstSilAvail = LstSilAvail;
-	this->ButSilViewActive = ButSilViewActive;
-	this->LstMtpAvail = LstMtpAvail;
-	this->ButMtpViewActive = ButMtpViewActive;
-
 	mask = {LSTMCHAVAIL, BUTMCHVIEWACTIVE, LSTLIBAVAIL, BUTLIBVIEWACTIVE, LSTFAMAVAIL, BUTFAMVIEWACTIVE, LSTSILAVAIL, BUTSILVIEWACTIVE, LSTMTPAVAIL, BUTMTPVIEWACTIVE};
 };
 
@@ -366,14 +363,13 @@ PnlWdbeNavGlobal::Tag::Tag(
 			, const string& CptMtp
 		) :
 			Block()
+			, Cpt(Cpt)
+			, CptMch(CptMch)
+			, CptLib(CptLib)
+			, CptFam(CptFam)
+			, CptSil(CptSil)
+			, CptMtp(CptMtp)
 		{
-	this->Cpt = Cpt;
-	this->CptMch = CptMch;
-	this->CptLib = CptLib;
-	this->CptFam = CptFam;
-	this->CptSil = CptSil;
-	this->CptMtp = CptMtp;
-
 	mask = {CPT, CPTMCH, CPTLIB, CPTFAM, CPTSIL, CPTMTP};
 };
 
@@ -454,11 +450,11 @@ PnlWdbeNavGlobal::DpchAppDo::DpchAppDo(
 			, const set<uint>& mask
 		) :
 			DpchAppWdbe(VecWdbeVDpch::DPCHAPPWDBENAVGLOBALDO, scrJref)
+			, ixVDo(ixVDo)
 		{
 	if (find(mask, ALL)) this->mask = {SCRJREF, IXVDO};
 	else this->mask = mask;
 
-	this->ixVDo = ixVDo;
 };
 
 string PnlWdbeNavGlobal::DpchAppDo::getSrefsMask() {

@@ -30,8 +30,8 @@ namespace QryWdbeSigList {
 	public:
 		static const Sbecore::uint CON = 1;
 		static const Sbecore::uint VEC = 2;
-		static const Sbecore::uint MGT = 3;
-		static const Sbecore::uint MGU = 4;
+		static const Sbecore::uint MGU = 3;
+		static const Sbecore::uint MGT = 4;
 		static const Sbecore::uint REU = 5;
 		static const Sbecore::uint RET = 6;
 		static const Sbecore::uint TYP = 7;

@@ -34,23 +34,24 @@ WdbeQCmdAInvpar::WdbeQCmdAInvpar(
 			, const ubigint refWdbeMVectoritem
 			, const string stubRefWdbeMVectoritem
 			, const string Comment
-		) {
-	this->qref = qref;
-	this->jref = jref;
-	this->jnum = jnum;
-	this->ref = ref;
-	this->cmdNum = cmdNum;
-	this->sref = sref;
-	this->ixWdbeVPartype = ixWdbeVPartype;
-	this->srefIxWdbeVPartype = srefIxWdbeVPartype;
-	this->titIxWdbeVPartype = titIxWdbeVPartype;
-	this->refWdbeMVector = refWdbeMVector;
-	this->stubRefWdbeMVector = stubRefWdbeMVector;
-	this->Length = Length;
-	this->Defval = Defval;
-	this->refWdbeMVectoritem = refWdbeMVectoritem;
-	this->stubRefWdbeMVectoritem = stubRefWdbeMVectoritem;
-	this->Comment = Comment;
+		) :
+			qref(qref)
+			, jref(jref)
+			, jnum(jnum)
+			, ref(ref)
+			, cmdNum(cmdNum)
+			, sref(sref)
+			, ixWdbeVPartype(ixWdbeVPartype)
+			, srefIxWdbeVPartype(srefIxWdbeVPartype)
+			, titIxWdbeVPartype(titIxWdbeVPartype)
+			, refWdbeMVector(refWdbeMVector)
+			, stubRefWdbeMVector(stubRefWdbeMVector)
+			, Length(Length)
+			, Defval(Defval)
+			, refWdbeMVectoritem(refWdbeMVectoritem)
+			, stubRefWdbeMVectoritem(stubRefWdbeMVectoritem)
+			, Comment(Comment)
+		{
 };
 
 void WdbeQCmdAInvpar::writeJSON(

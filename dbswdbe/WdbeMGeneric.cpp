@@ -28,19 +28,19 @@ WdbeMGeneric::WdbeMGeneric(
 			, const string Defval
 			, const string srcSrefWdbeMGeneric
 			, const string Comment
-		) {
-
-	this->ref = ref;
-	this->refWdbeCGeneric = refWdbeCGeneric;
-	this->mdlRefWdbeMModule = mdlRefWdbeMModule;
-	this->mdlNum = mdlNum;
-	this->sref = sref;
-	this->srefWdbeKHdltype = srefWdbeKHdltype;
-	this->Width = Width;
-	this->Minmax = Minmax;
-	this->Defval = Defval;
-	this->srcSrefWdbeMGeneric = srcSrefWdbeMGeneric;
-	this->Comment = Comment;
+		) :
+			ref(ref)
+			, refWdbeCGeneric(refWdbeCGeneric)
+			, mdlRefWdbeMModule(mdlRefWdbeMModule)
+			, mdlNum(mdlNum)
+			, sref(sref)
+			, srefWdbeKHdltype(srefWdbeKHdltype)
+			, Width(Width)
+			, Minmax(Minmax)
+			, Defval(Defval)
+			, srcSrefWdbeMGeneric(srcSrefWdbeMGeneric)
+			, Comment(Comment)
+		{
 };
 
 bool WdbeMGeneric::operator==(

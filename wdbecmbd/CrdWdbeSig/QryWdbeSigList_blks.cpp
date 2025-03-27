@@ -22,8 +22,8 @@ uint QryWdbeSigList::VecVOrd::getIx(
 
 	if (s == "con") return CON;
 	if (s == "vec") return VEC;
-	if (s == "mgt") return MGT;
 	if (s == "mgu") return MGU;
+	if (s == "mgt") return MGT;
 	if (s == "reu") return REU;
 	if (s == "ret") return RET;
 	if (s == "typ") return TYP;
@@ -37,8 +37,8 @@ string QryWdbeSigList::VecVOrd::getSref(
 		) {
 	if (ix == CON) return("con");
 	if (ix == VEC) return("vec");
-	if (ix == MGT) return("mgt");
 	if (ix == MGU) return("mgu");
+	if (ix == MGT) return("mgt");
 	if (ix == REU) return("reu");
 	if (ix == RET) return("ret");
 	if (ix == TYP) return("typ");
@@ -110,11 +110,10 @@ QryWdbeSigList::StatShr::StatShr(
 			, const uint nload
 		) :
 			Block()
+			, ntot(ntot)
+			, jnumFirstload(jnumFirstload)
+			, nload(nload)
 		{
-	this->ntot = ntot;
-	this->jnumFirstload = jnumFirstload;
-	this->nload = nload;
-
 	mask = {NTOT, JNUMFIRSTLOAD, NLOAD};
 };
 
@@ -185,10 +184,10 @@ QryWdbeSigList::StgIac::StgIac(
 			, const uint nload
 		) :
 			Block()
+			, jnum(jnum)
+			, jnumFirstload(jnumFirstload)
+			, nload(nload)
 		{
-	this->jnum = jnum;
-	this->jnumFirstload = jnumFirstload;
-	this->nload = nload;
 	mask = {JNUM, JNUMFIRSTLOAD, NLOAD};
 };
 

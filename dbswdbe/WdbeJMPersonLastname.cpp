@@ -21,12 +21,12 @@ WdbeJMPersonLastname::WdbeJMPersonLastname(
 			, const ubigint refWdbeMPerson
 			, const uint x1Startd
 			, const string Lastname
-		) {
-
-	this->ref = ref;
-	this->refWdbeMPerson = refWdbeMPerson;
-	this->x1Startd = x1Startd;
-	this->Lastname = Lastname;
+		) :
+			ref(ref)
+			, refWdbeMPerson(refWdbeMPerson)
+			, x1Startd(x1Startd)
+			, Lastname(Lastname)
+		{
 };
 
 bool WdbeJMPersonLastname::operator==(

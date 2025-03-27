@@ -16,7 +16,9 @@
 
 namespace WdbeMtpPlhfpga {
 
-	// IP cust --- INSERT
+	// IP cust --- IBEGIN
+	unsigned int extendToWD(const unsigned int size, const unsigned int wD, unsigned int& resid);
+	// IP cust --- IEND
 };
 
 #endif

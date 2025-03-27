@@ -143,11 +143,11 @@ public:
 	class StatShr : public Sbecore::Block {
 
 	public:
-		static const Sbecore::uint TXFVNDVALID = 1;
-		static const Sbecore::uint BUTSAVEAVAIL = 2;
-		static const Sbecore::uint BUTSAVEACTIVE = 3;
-		static const Sbecore::uint TXTSRFACTIVE = 4;
-		static const Sbecore::uint PUPVNDACTIVE = 5;
+		static const Sbecore::uint BUTSAVEAVAIL = 1;
+		static const Sbecore::uint BUTSAVEACTIVE = 2;
+		static const Sbecore::uint TXTSRFACTIVE = 3;
+		static const Sbecore::uint PUPVNDACTIVE = 4;
+		static const Sbecore::uint TXFVNDVALID = 5;
 		static const Sbecore::uint BUTVNDEDITAVAIL = 6;
 		static const Sbecore::uint PUPTYPACTIVE = 7;
 		static const Sbecore::uint TXTHKUACTIVE = 8;
@@ -187,14 +187,14 @@ public:
 		static const Sbecore::uint BUTCTRCLRVIEWACTIVE = 42;
 
 	public:
-		StatShr(const bool TxfVndValid = false, const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxtSrfActive = true, const bool PupVndActive = true, const bool ButVndEditAvail = true, const bool PupTypActive = true, const bool TxtHkuActive = true, const bool ButHkuViewAvail = true, const bool ButHkuViewActive = true, const bool TxtSupActive = true, const bool ButSupViewAvail = true, const bool ButSupViewActive = true, const bool TxtTplActive = true, const bool ButTplViewAvail = true, const bool ButTplViewActive = true, const bool TxfSrrActive = true, const bool TxfCmtActive = true, const bool SepImbAvail = true, const bool HdgImbAvail = true, const bool ButImbNewAvail = true, const bool ButImbDeleteAvail = true, const bool TxfImbFsrAvail = true, const bool TxfImbFsrActive = true, const bool PupImbRtyAvail = true, const bool PupImbRtyActive = true, const bool TxfImbWidAvail = true, const bool TxfImbWidActive = true, const bool TxfImbMmxAvail = true, const bool TxfImbMmxActive = true, const bool TxfImbPriAvail = true, const bool TxfImbPriActive = true, const bool SepCtrAvail = true, const bool HdgCtrAvail = true, const bool ButCtrNewAvail = true, const bool ButCtrDeleteAvail = true, const bool TxfCtrFsrAvail = true, const bool TxfCtrFsrActive = true, const bool TxtCtrClrAvail = true, const bool TxtCtrClrActive = true, const bool ButCtrClrViewAvail = true, const bool ButCtrClrViewActive = true);
+		StatShr(const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxtSrfActive = true, const bool PupVndActive = true, const bool TxfVndValid = false, const bool ButVndEditAvail = true, const bool PupTypActive = true, const bool TxtHkuActive = true, const bool ButHkuViewAvail = true, const bool ButHkuViewActive = true, const bool TxtSupActive = true, const bool ButSupViewAvail = true, const bool ButSupViewActive = true, const bool TxtTplActive = true, const bool ButTplViewAvail = true, const bool ButTplViewActive = true, const bool TxfSrrActive = true, const bool TxfCmtActive = true, const bool SepImbAvail = true, const bool HdgImbAvail = true, const bool ButImbNewAvail = true, const bool ButImbDeleteAvail = true, const bool TxfImbFsrAvail = true, const bool TxfImbFsrActive = true, const bool PupImbRtyAvail = true, const bool PupImbRtyActive = true, const bool TxfImbWidAvail = true, const bool TxfImbWidActive = true, const bool TxfImbMmxAvail = true, const bool TxfImbMmxActive = true, const bool TxfImbPriAvail = true, const bool TxfImbPriActive = true, const bool SepCtrAvail = true, const bool HdgCtrAvail = true, const bool ButCtrNewAvail = true, const bool ButCtrDeleteAvail = true, const bool TxfCtrFsrAvail = true, const bool TxfCtrFsrActive = true, const bool TxtCtrClrAvail = true, const bool TxtCtrClrActive = true, const bool ButCtrClrViewAvail = true, const bool ButCtrClrViewActive = true);
 
 	public:
-		bool TxfVndValid;
 		bool ButSaveAvail;
 		bool ButSaveActive;
 		bool TxtSrfActive;
 		bool PupVndActive;
+		bool TxfVndValid;
 		bool ButVndEditAvail;
 		bool PupTypActive;
 		bool TxtHkuActive;

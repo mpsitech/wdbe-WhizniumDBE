@@ -82,10 +82,9 @@ DlgWdbePrjNew::ContIac::ContIac(
 			, const string& DetTxfTit
 		) :
 			Block()
+			, DetTxfSho(DetTxfSho)
+			, DetTxfTit(DetTxfTit)
 		{
-	this->DetTxfSho = DetTxfSho;
-	this->DetTxfTit = DetTxfTit;
-
 	mask = {DETTXFSHO, DETTXFTIT};
 };
 
@@ -163,9 +162,8 @@ DlgWdbePrjNew::ContInf::ContInf(
 			const uint numFSge
 		) :
 			Block()
+			, numFSge(numFSge)
 		{
-	this->numFSge = numFSge;
-
 	mask = {NUMFSGE};
 };
 
@@ -224,9 +222,8 @@ DlgWdbePrjNew::StatApp::StatApp(
 			const string& shortMenu
 		) :
 			Block()
+			, shortMenu(shortMenu)
 		{
-	this->shortMenu = shortMenu;
-
 	mask = {SHORTMENU};
 };
 
@@ -287,11 +284,10 @@ DlgWdbePrjNew::StatShr::StatShr(
 			, const bool ButCreActive
 		) :
 			Block()
+			, DetButAutActive(DetButAutActive)
+			, ButCncActive(ButCncActive)
+			, ButCreActive(ButCreActive)
 		{
-	this->DetButAutActive = DetButAutActive;
-	this->ButCncActive = ButCncActive;
-	this->ButCreActive = ButCreActive;
-
 	mask = {DETBUTAUTACTIVE, BUTCNCACTIVE, BUTCREACTIVE};
 };
 
@@ -359,14 +355,13 @@ DlgWdbePrjNew::Tag::Tag(
 			, const string& ButCre
 		) :
 			Block()
+			, Cpt(Cpt)
+			, DetCptSho(DetCptSho)
+			, DetCptTit(DetCptTit)
+			, DetButAut(DetButAut)
+			, ButCnc(ButCnc)
+			, ButCre(ButCre)
 		{
-	this->Cpt = Cpt;
-	this->DetCptSho = DetCptSho;
-	this->DetCptTit = DetCptTit;
-	this->DetButAut = DetButAut;
-	this->ButCnc = ButCnc;
-	this->ButCre = ButCre;
-
 	mask = {CPT, DETCPTSHO, DETCPTTIT, DETBUTAUT, BUTCNC, BUTCRE};
 };
 
@@ -447,11 +442,11 @@ DlgWdbePrjNew::DpchAppDo::DpchAppDo(
 			, const set<uint>& mask
 		) :
 			DpchAppWdbe(VecWdbeVDpch::DPCHAPPDLGWDBEPRJNEWDO, scrJref)
+			, ixVDo(ixVDo)
 		{
 	if (find(mask, ALL)) this->mask = {SCRJREF, IXVDO};
 	else this->mask = mask;
 
-	this->ixVDo = ixVDo;
 };
 
 string DlgWdbePrjNew::DpchAppDo::getSrefsMask() {

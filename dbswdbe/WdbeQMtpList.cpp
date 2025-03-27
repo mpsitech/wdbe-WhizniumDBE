@@ -34,23 +34,24 @@ WdbeQMtpList::WdbeQMtpList(
 			, const ubigint hkUref
 			, const string stubHkUref
 			, const string Srefrule
-		) {
-	this->qref = qref;
-	this->jref = jref;
-	this->jnum = jnum;
-	this->ref = ref;
-	this->sref = sref;
-	this->srefWdbeKVendor = srefWdbeKVendor;
-	this->titSrefWdbeKVendor = titSrefWdbeKVendor;
-	this->ixVBasetype = ixVBasetype;
-	this->srefIxVBasetype = srefIxVBasetype;
-	this->titIxVBasetype = titIxVBasetype;
-	this->hkIxVTbl = hkIxVTbl;
-	this->srefHkIxVTbl = srefHkIxVTbl;
-	this->titHkIxVTbl = titHkIxVTbl;
-	this->hkUref = hkUref;
-	this->stubHkUref = stubHkUref;
-	this->Srefrule = Srefrule;
+		) :
+			qref(qref)
+			, jref(jref)
+			, jnum(jnum)
+			, ref(ref)
+			, sref(sref)
+			, srefWdbeKVendor(srefWdbeKVendor)
+			, titSrefWdbeKVendor(titSrefWdbeKVendor)
+			, ixVBasetype(ixVBasetype)
+			, srefIxVBasetype(srefIxVBasetype)
+			, titIxVBasetype(titIxVBasetype)
+			, hkIxVTbl(hkIxVTbl)
+			, srefHkIxVTbl(srefHkIxVTbl)
+			, titHkIxVTbl(titHkIxVTbl)
+			, hkUref(hkUref)
+			, stubHkUref(stubHkUref)
+			, Srefrule(Srefrule)
+		{
 };
 
 void WdbeQMtpList::writeJSON(

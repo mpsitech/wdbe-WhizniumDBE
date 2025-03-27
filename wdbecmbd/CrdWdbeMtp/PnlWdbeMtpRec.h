@@ -16,13 +16,13 @@
 
 #include "PnlWdbeMtpRef1NFile.h"
 #include "PnlWdbeMtpMge1NSignal.h"
-#include "PnlWdbeMtpRef1NVariable.h"
 #include "PnlWdbeMtpRef1NSensitivity.h"
+#include "PnlWdbeMtpRef1NVariable.h"
 #include "PnlWdbeMtpSup1NModule.h"
-#include "PnlWdbeMtpTpl1NModule.h"
-#include "PnlWdbeMtpMdl1NPort.h"
-#include "PnlWdbeMtpHsm1NPipeline.h"
 #include "PnlWdbeMtpMdl1NGeneric.h"
+#include "PnlWdbeMtpTpl1NModule.h"
+#include "PnlWdbeMtpHsm1NPipeline.h"
+#include "PnlWdbeMtpMdl1NPort.h"
 #include "PnlWdbeMtpAPar.h"
 #include "PnlWdbeMtpKHdltype.h"
 #include "PnlWdbeMtpKParKey.h"
@@ -84,8 +84,8 @@ public:
 	class StatApp {
 
 	public:
-		static void writeJSON(Json::Value& sup, std::string difftag = "", const bool initdoneDetail = false, const bool initdoneKParKey = false, const bool initdoneKHdltype = false, const bool initdoneAPar = false, const bool initdoneMdl1NGeneric = false, const bool initdoneHsm1NPipeline = false, const bool initdoneMdl1NPort = false, const bool initdoneTpl1NModule = false, const bool initdoneSup1NModule = false, const bool initdoneRef1NSensitivity = false, const bool initdoneRef1NVariable = false, const bool initdoneMge1NSignal = false, const bool initdoneRef1NFile = false);
-		static void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true, const bool initdoneDetail = false, const bool initdoneKParKey = false, const bool initdoneKHdltype = false, const bool initdoneAPar = false, const bool initdoneMdl1NGeneric = false, const bool initdoneHsm1NPipeline = false, const bool initdoneMdl1NPort = false, const bool initdoneTpl1NModule = false, const bool initdoneSup1NModule = false, const bool initdoneRef1NSensitivity = false, const bool initdoneRef1NVariable = false, const bool initdoneMge1NSignal = false, const bool initdoneRef1NFile = false);
+		static void writeJSON(Json::Value& sup, std::string difftag = "", const bool initdoneDetail = false, const bool initdoneKParKey = false, const bool initdoneKHdltype = false, const bool initdoneAPar = false, const bool initdoneMdl1NPort = false, const bool initdoneHsm1NPipeline = false, const bool initdoneTpl1NModule = false, const bool initdoneMdl1NGeneric = false, const bool initdoneSup1NModule = false, const bool initdoneRef1NVariable = false, const bool initdoneRef1NSensitivity = false, const bool initdoneMge1NSignal = false, const bool initdoneRef1NFile = false);
+		static void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true, const bool initdoneDetail = false, const bool initdoneKParKey = false, const bool initdoneKHdltype = false, const bool initdoneAPar = false, const bool initdoneMdl1NPort = false, const bool initdoneHsm1NPipeline = false, const bool initdoneTpl1NModule = false, const bool initdoneMdl1NGeneric = false, const bool initdoneSup1NModule = false, const bool initdoneRef1NVariable = false, const bool initdoneRef1NSensitivity = false, const bool initdoneMge1NSignal = false, const bool initdoneRef1NFile = false);
 	};
 
 	/**
@@ -99,19 +99,19 @@ public:
 		static const Sbecore::uint JREFKPARKEY = 3;
 		static const Sbecore::uint JREFKHDLTYPE = 4;
 		static const Sbecore::uint JREFAPAR = 5;
-		static const Sbecore::uint JREFMDL1NGENERIC = 6;
+		static const Sbecore::uint JREFMDL1NPORT = 6;
 		static const Sbecore::uint JREFHSM1NPIPELINE = 7;
-		static const Sbecore::uint JREFMDL1NPORT = 8;
-		static const Sbecore::uint JREFTPL1NMODULE = 9;
+		static const Sbecore::uint JREFTPL1NMODULE = 8;
+		static const Sbecore::uint JREFMDL1NGENERIC = 9;
 		static const Sbecore::uint JREFSUP1NMODULE = 10;
-		static const Sbecore::uint JREFREF1NSENSITIVITY = 11;
-		static const Sbecore::uint JREFREF1NVARIABLE = 12;
+		static const Sbecore::uint JREFREF1NVARIABLE = 11;
+		static const Sbecore::uint JREFREF1NSENSITIVITY = 12;
 		static const Sbecore::uint JREFMGE1NSIGNAL = 13;
 		static const Sbecore::uint JREFREF1NFILE = 14;
 		static const Sbecore::uint BUTREGULARIZEACTIVE = 15;
 
 	public:
-		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const Sbecore::ubigint jrefDetail = 0, const Sbecore::ubigint jrefKParKey = 0, const Sbecore::ubigint jrefKHdltype = 0, const Sbecore::ubigint jrefAPar = 0, const Sbecore::ubigint jrefMdl1NGeneric = 0, const Sbecore::ubigint jrefHsm1NPipeline = 0, const Sbecore::ubigint jrefMdl1NPort = 0, const Sbecore::ubigint jrefTpl1NModule = 0, const Sbecore::ubigint jrefSup1NModule = 0, const Sbecore::ubigint jrefRef1NSensitivity = 0, const Sbecore::ubigint jrefRef1NVariable = 0, const Sbecore::ubigint jrefMge1NSignal = 0, const Sbecore::ubigint jrefRef1NFile = 0, const bool ButRegularizeActive = true);
+		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const Sbecore::ubigint jrefDetail = 0, const Sbecore::ubigint jrefKParKey = 0, const Sbecore::ubigint jrefKHdltype = 0, const Sbecore::ubigint jrefAPar = 0, const Sbecore::ubigint jrefMdl1NPort = 0, const Sbecore::ubigint jrefHsm1NPipeline = 0, const Sbecore::ubigint jrefTpl1NModule = 0, const Sbecore::ubigint jrefMdl1NGeneric = 0, const Sbecore::ubigint jrefSup1NModule = 0, const Sbecore::ubigint jrefRef1NVariable = 0, const Sbecore::ubigint jrefRef1NSensitivity = 0, const Sbecore::ubigint jrefMge1NSignal = 0, const Sbecore::ubigint jrefRef1NFile = 0, const bool ButRegularizeActive = true);
 
 	public:
 		Sbecore::uint ixWdbeVExpstate;
@@ -119,13 +119,13 @@ public:
 		Sbecore::ubigint jrefKParKey;
 		Sbecore::ubigint jrefKHdltype;
 		Sbecore::ubigint jrefAPar;
-		Sbecore::ubigint jrefMdl1NGeneric;
-		Sbecore::ubigint jrefHsm1NPipeline;
 		Sbecore::ubigint jrefMdl1NPort;
+		Sbecore::ubigint jrefHsm1NPipeline;
 		Sbecore::ubigint jrefTpl1NModule;
+		Sbecore::ubigint jrefMdl1NGeneric;
 		Sbecore::ubigint jrefSup1NModule;
-		Sbecore::ubigint jrefRef1NSensitivity;
 		Sbecore::ubigint jrefRef1NVariable;
+		Sbecore::ubigint jrefRef1NSensitivity;
 		Sbecore::ubigint jrefMge1NSignal;
 		Sbecore::ubigint jrefRef1NFile;
 		bool ButRegularizeActive;
@@ -209,13 +209,13 @@ public:
 
 	PnlWdbeMtpRef1NFile* pnlref1nfile;
 	PnlWdbeMtpMge1NSignal* pnlmge1nsignal;
-	PnlWdbeMtpRef1NVariable* pnlref1nvariable;
 	PnlWdbeMtpRef1NSensitivity* pnlref1nsensitivity;
+	PnlWdbeMtpRef1NVariable* pnlref1nvariable;
 	PnlWdbeMtpSup1NModule* pnlsup1nmodule;
-	PnlWdbeMtpTpl1NModule* pnltpl1nmodule;
-	PnlWdbeMtpMdl1NPort* pnlmdl1nport;
-	PnlWdbeMtpHsm1NPipeline* pnlhsm1npipeline;
 	PnlWdbeMtpMdl1NGeneric* pnlmdl1ngeneric;
+	PnlWdbeMtpTpl1NModule* pnltpl1nmodule;
+	PnlWdbeMtpHsm1NPipeline* pnlhsm1npipeline;
+	PnlWdbeMtpMdl1NPort* pnlmdl1nport;
 	PnlWdbeMtpAPar* pnlapar;
 	PnlWdbeMtpKHdltype* pnlkhdltype;
 	PnlWdbeMtpKParKey* pnlkparkey;

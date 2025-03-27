@@ -38,27 +38,28 @@ WdbeQModList::WdbeQModList(
 			, const ubigint tplRefWdbeMModule
 			, const string stubTplRefWdbeMModule
 			, const string Srefrule
-		) {
-	this->qref = qref;
-	this->jref = jref;
-	this->jnum = jnum;
-	this->ref = ref;
-	this->sref = sref;
-	this->srefWdbeKVendor = srefWdbeKVendor;
-	this->titSrefWdbeKVendor = titSrefWdbeKVendor;
-	this->ixVBasetype = ixVBasetype;
-	this->srefIxVBasetype = srefIxVBasetype;
-	this->titIxVBasetype = titIxVBasetype;
-	this->hkIxVTbl = hkIxVTbl;
-	this->srefHkIxVTbl = srefHkIxVTbl;
-	this->titHkIxVTbl = titHkIxVTbl;
-	this->hkUref = hkUref;
-	this->stubHkUref = stubHkUref;
-	this->supRefWdbeMModule = supRefWdbeMModule;
-	this->stubSupRefWdbeMModule = stubSupRefWdbeMModule;
-	this->tplRefWdbeMModule = tplRefWdbeMModule;
-	this->stubTplRefWdbeMModule = stubTplRefWdbeMModule;
-	this->Srefrule = Srefrule;
+		) :
+			qref(qref)
+			, jref(jref)
+			, jnum(jnum)
+			, ref(ref)
+			, sref(sref)
+			, srefWdbeKVendor(srefWdbeKVendor)
+			, titSrefWdbeKVendor(titSrefWdbeKVendor)
+			, ixVBasetype(ixVBasetype)
+			, srefIxVBasetype(srefIxVBasetype)
+			, titIxVBasetype(titIxVBasetype)
+			, hkIxVTbl(hkIxVTbl)
+			, srefHkIxVTbl(srefHkIxVTbl)
+			, titHkIxVTbl(titHkIxVTbl)
+			, hkUref(hkUref)
+			, stubHkUref(stubHkUref)
+			, supRefWdbeMModule(supRefWdbeMModule)
+			, stubSupRefWdbeMModule(stubSupRefWdbeMModule)
+			, tplRefWdbeMModule(tplRefWdbeMModule)
+			, stubTplRefWdbeMModule(stubTplRefWdbeMModule)
+			, Srefrule(Srefrule)
+		{
 };
 
 void WdbeQModList::writeJSON(

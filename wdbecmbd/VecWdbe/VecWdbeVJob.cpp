@@ -43,6 +43,7 @@ uint VecWdbeVJob::getIx(
 	if (s == "crdwdbepph") return CRDWDBEPPH;
 	if (s == "crdwdbeppl") return CRDWDBEPPL;
 	if (s == "crdwdbeprc") return CRDWDBEPRC;
+	if (s == "crdwdbeprf") return CRDWDBEPRF;
 	if (s == "crdwdbeprj") return CRDWDBEPRJ;
 	if (s == "crdwdbeprs") return CRDWDBEPRS;
 	if (s == "crdwdbeprt") return CRDWDBEPRT;
@@ -108,6 +109,7 @@ uint VecWdbeVJob::getIx(
 	if (s == "pnlwdbecmdaretpar") return PNLWDBECMDARETPAR;
 	if (s == "pnlwdbecmddetail") return PNLWDBECMDDETAIL;
 	if (s == "pnlwdbecmdheadbar") return PNLWDBECMDHEADBAR;
+	if (s == "pnlwdbecmdhk1nvector") return PNLWDBECMDHK1NVECTOR;
 	if (s == "pnlwdbecmdlist") return PNLWDBECMDLIST;
 	if (s == "pnlwdbecmdmncontroller") return PNLWDBECMDMNCONTROLLER;
 	if (s == "pnlwdbecmdrec") return PNLWDBECMDREC;
@@ -248,6 +250,9 @@ uint VecWdbeVJob::getIx(
 	if (s == "pnlwdbeprcrec") return PNLWDBEPRCREC;
 	if (s == "pnlwdbeprcref1nsensitivity") return PNLWDBEPRCREF1NSENSITIVITY;
 	if (s == "pnlwdbeprcref1nvariable") return PNLWDBEPRCREF1NVARIABLE;
+	if (s == "pnlwdbeprfdaemon") return PNLWDBEPRFDAEMON;
+	if (s == "pnlwdbeprfheadbar") return PNLWDBEPRFHEADBAR;
+	if (s == "pnlwdbeprflicense") return PNLWDBEPRFLICENSE;
 	if (s == "pnlwdbeprjdetail") return PNLWDBEPRJDETAIL;
 	if (s == "pnlwdbeprjheadbar") return PNLWDBEPRJHEADBAR;
 	if (s == "pnlwdbeprjlist") return PNLWDBEPRJLIST;
@@ -352,6 +357,7 @@ uint VecWdbeVJob::getIx(
 	if (s == "qrywdbecdcmnsignal") return QRYWDBECDCMNSIGNAL;
 	if (s == "qrywdbecmdainvpar") return QRYWDBECMDAINVPAR;
 	if (s == "qrywdbecmdaretpar") return QRYWDBECMDARETPAR;
+	if (s == "qrywdbecmdhk1nvector") return QRYWDBECMDHK1NVECTOR;
 	if (s == "qrywdbecmdlist") return QRYWDBECMDLIST;
 	if (s == "qrywdbecmdmncontroller") return QRYWDBECMDMNCONTROLLER;
 	if (s == "qrywdbecmp1nrelease") return QRYWDBECMP1NRELEASE;
@@ -512,6 +518,7 @@ string VecWdbeVJob::getSref(
 	if (ix == CRDWDBEPPH) return("CrdWdbePph");
 	if (ix == CRDWDBEPPL) return("CrdWdbePpl");
 	if (ix == CRDWDBEPRC) return("CrdWdbePrc");
+	if (ix == CRDWDBEPRF) return("CrdWdbePrf");
 	if (ix == CRDWDBEPRJ) return("CrdWdbePrj");
 	if (ix == CRDWDBEPRS) return("CrdWdbePrs");
 	if (ix == CRDWDBEPRT) return("CrdWdbePrt");
@@ -577,6 +584,7 @@ string VecWdbeVJob::getSref(
 	if (ix == PNLWDBECMDARETPAR) return("PnlWdbeCmdARetpar");
 	if (ix == PNLWDBECMDDETAIL) return("PnlWdbeCmdDetail");
 	if (ix == PNLWDBECMDHEADBAR) return("PnlWdbeCmdHeadbar");
+	if (ix == PNLWDBECMDHK1NVECTOR) return("PnlWdbeCmdHk1NVector");
 	if (ix == PNLWDBECMDLIST) return("PnlWdbeCmdList");
 	if (ix == PNLWDBECMDMNCONTROLLER) return("PnlWdbeCmdMNController");
 	if (ix == PNLWDBECMDREC) return("PnlWdbeCmdRec");
@@ -717,6 +725,9 @@ string VecWdbeVJob::getSref(
 	if (ix == PNLWDBEPRCREC) return("PnlWdbePrcRec");
 	if (ix == PNLWDBEPRCREF1NSENSITIVITY) return("PnlWdbePrcRef1NSensitivity");
 	if (ix == PNLWDBEPRCREF1NVARIABLE) return("PnlWdbePrcRef1NVariable");
+	if (ix == PNLWDBEPRFDAEMON) return("PnlWdbePrfDaemon");
+	if (ix == PNLWDBEPRFHEADBAR) return("PnlWdbePrfHeadbar");
+	if (ix == PNLWDBEPRFLICENSE) return("PnlWdbePrfLicense");
 	if (ix == PNLWDBEPRJDETAIL) return("PnlWdbePrjDetail");
 	if (ix == PNLWDBEPRJHEADBAR) return("PnlWdbePrjHeadbar");
 	if (ix == PNLWDBEPRJLIST) return("PnlWdbePrjList");
@@ -821,6 +832,7 @@ string VecWdbeVJob::getSref(
 	if (ix == QRYWDBECDCMNSIGNAL) return("QryWdbeCdcMNSignal");
 	if (ix == QRYWDBECMDAINVPAR) return("QryWdbeCmdAInvpar");
 	if (ix == QRYWDBECMDARETPAR) return("QryWdbeCmdARetpar");
+	if (ix == QRYWDBECMDHK1NVECTOR) return("QryWdbeCmdHk1NVector");
 	if (ix == QRYWDBECMDLIST) return("QryWdbeCmdList");
 	if (ix == QRYWDBECMDMNCONTROLLER) return("QryWdbeCmdMNController");
 	if (ix == QRYWDBECMP1NRELEASE) return("QryWdbeCmp1NRelease");

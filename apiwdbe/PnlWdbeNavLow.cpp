@@ -81,19 +81,18 @@ PnlWdbeNavLow::ContIac::ContIac(
 			, const uint numFLstFst
 		) :
 			Block()
+			, numFLstBnk(numFLstBnk)
+			, numFLstPin(numFLstPin)
+			, numFLstInt(numFLstInt)
+			, numFLstSns(numFLstSns)
+			, numFLstVar(numFLstVar)
+			, numFLstGen(numFLstGen)
+			, numFLstPrt(numFLstPrt)
+			, numFLstSig(numFLstSig)
+			, numFLstCdc(numFLstCdc)
+			, numFLstPrc(numFLstPrc)
+			, numFLstFst(numFLstFst)
 		{
-	this->numFLstBnk = numFLstBnk;
-	this->numFLstPin = numFLstPin;
-	this->numFLstInt = numFLstInt;
-	this->numFLstSns = numFLstSns;
-	this->numFLstVar = numFLstVar;
-	this->numFLstGen = numFLstGen;
-	this->numFLstPrt = numFLstPrt;
-	this->numFLstSig = numFLstSig;
-	this->numFLstCdc = numFLstCdc;
-	this->numFLstPrc = numFLstPrc;
-	this->numFLstFst = numFLstFst;
-
 	mask = {NUMFLSTBNK, NUMFLSTPIN, NUMFLSTINT, NUMFLSTSNS, NUMFLSTVAR, NUMFLSTGEN, NUMFLSTPRT, NUMFLSTSIG, NUMFLSTCDC, NUMFLSTPRC, NUMFLSTFST};
 };
 
@@ -220,31 +219,30 @@ PnlWdbeNavLow::StatApp::StatApp(
 			, const uint LstFstNumFirstdisp
 		) :
 			Block()
+			, ixWdbeVExpstate(ixWdbeVExpstate)
+			, LstBnkAlt(LstBnkAlt)
+			, LstPinAlt(LstPinAlt)
+			, LstIntAlt(LstIntAlt)
+			, LstSnsAlt(LstSnsAlt)
+			, LstVarAlt(LstVarAlt)
+			, LstGenAlt(LstGenAlt)
+			, LstPrtAlt(LstPrtAlt)
+			, LstSigAlt(LstSigAlt)
+			, LstCdcAlt(LstCdcAlt)
+			, LstPrcAlt(LstPrcAlt)
+			, LstFstAlt(LstFstAlt)
+			, LstBnkNumFirstdisp(LstBnkNumFirstdisp)
+			, LstPinNumFirstdisp(LstPinNumFirstdisp)
+			, LstIntNumFirstdisp(LstIntNumFirstdisp)
+			, LstSnsNumFirstdisp(LstSnsNumFirstdisp)
+			, LstVarNumFirstdisp(LstVarNumFirstdisp)
+			, LstGenNumFirstdisp(LstGenNumFirstdisp)
+			, LstPrtNumFirstdisp(LstPrtNumFirstdisp)
+			, LstSigNumFirstdisp(LstSigNumFirstdisp)
+			, LstCdcNumFirstdisp(LstCdcNumFirstdisp)
+			, LstPrcNumFirstdisp(LstPrcNumFirstdisp)
+			, LstFstNumFirstdisp(LstFstNumFirstdisp)
 		{
-	this->ixWdbeVExpstate = ixWdbeVExpstate;
-	this->LstBnkAlt = LstBnkAlt;
-	this->LstPinAlt = LstPinAlt;
-	this->LstIntAlt = LstIntAlt;
-	this->LstSnsAlt = LstSnsAlt;
-	this->LstVarAlt = LstVarAlt;
-	this->LstGenAlt = LstGenAlt;
-	this->LstPrtAlt = LstPrtAlt;
-	this->LstSigAlt = LstSigAlt;
-	this->LstCdcAlt = LstCdcAlt;
-	this->LstPrcAlt = LstPrcAlt;
-	this->LstFstAlt = LstFstAlt;
-	this->LstBnkNumFirstdisp = LstBnkNumFirstdisp;
-	this->LstPinNumFirstdisp = LstPinNumFirstdisp;
-	this->LstIntNumFirstdisp = LstIntNumFirstdisp;
-	this->LstSnsNumFirstdisp = LstSnsNumFirstdisp;
-	this->LstVarNumFirstdisp = LstVarNumFirstdisp;
-	this->LstGenNumFirstdisp = LstGenNumFirstdisp;
-	this->LstPrtNumFirstdisp = LstPrtNumFirstdisp;
-	this->LstSigNumFirstdisp = LstSigNumFirstdisp;
-	this->LstCdcNumFirstdisp = LstCdcNumFirstdisp;
-	this->LstPrcNumFirstdisp = LstPrcNumFirstdisp;
-	this->LstFstNumFirstdisp = LstFstNumFirstdisp;
-
 	mask = {IXWDBEVEXPSTATE, LSTBNKALT, LSTPINALT, LSTINTALT, LSTSNSALT, LSTVARALT, LSTGENALT, LSTPRTALT, LSTSIGALT, LSTCDCALT, LSTPRCALT, LSTFSTALT, LSTBNKNUMFIRSTDISP, LSTPINNUMFIRSTDISP, LSTINTNUMFIRSTDISP, LSTSNSNUMFIRSTDISP, LSTVARNUMFIRSTDISP, LSTGENNUMFIRSTDISP, LSTPRTNUMFIRSTDISP, LSTSIGNUMFIRSTDISP, LSTCDCNUMFIRSTDISP, LSTPRCNUMFIRSTDISP, LSTFSTNUMFIRSTDISP};
 };
 
@@ -377,34 +375,33 @@ PnlWdbeNavLow::StatShr::StatShr(
 			, const bool ButFstViewActive
 		) :
 			Block()
+			, LstBnkAvail(LstBnkAvail)
+			, ButBnkViewActive(ButBnkViewActive)
+			, ButBnkNewcrdActive(ButBnkNewcrdActive)
+			, LstPinAvail(LstPinAvail)
+			, ButPinViewActive(ButPinViewActive)
+			, ButPinNewcrdActive(ButPinNewcrdActive)
+			, LstIntAvail(LstIntAvail)
+			, ButIntViewActive(ButIntViewActive)
+			, ButIntNewcrdActive(ButIntNewcrdActive)
+			, LstSnsAvail(LstSnsAvail)
+			, ButSnsViewActive(ButSnsViewActive)
+			, LstVarAvail(LstVarAvail)
+			, ButVarViewActive(ButVarViewActive)
+			, LstGenAvail(LstGenAvail)
+			, ButGenViewActive(ButGenViewActive)
+			, LstPrtAvail(LstPrtAvail)
+			, ButPrtViewActive(ButPrtViewActive)
+			, LstSigAvail(LstSigAvail)
+			, ButSigViewActive(ButSigViewActive)
+			, ButSigNewcrdActive(ButSigNewcrdActive)
+			, LstCdcAvail(LstCdcAvail)
+			, ButCdcViewActive(ButCdcViewActive)
+			, LstPrcAvail(LstPrcAvail)
+			, ButPrcViewActive(ButPrcViewActive)
+			, LstFstAvail(LstFstAvail)
+			, ButFstViewActive(ButFstViewActive)
 		{
-	this->LstBnkAvail = LstBnkAvail;
-	this->ButBnkViewActive = ButBnkViewActive;
-	this->ButBnkNewcrdActive = ButBnkNewcrdActive;
-	this->LstPinAvail = LstPinAvail;
-	this->ButPinViewActive = ButPinViewActive;
-	this->ButPinNewcrdActive = ButPinNewcrdActive;
-	this->LstIntAvail = LstIntAvail;
-	this->ButIntViewActive = ButIntViewActive;
-	this->ButIntNewcrdActive = ButIntNewcrdActive;
-	this->LstSnsAvail = LstSnsAvail;
-	this->ButSnsViewActive = ButSnsViewActive;
-	this->LstVarAvail = LstVarAvail;
-	this->ButVarViewActive = ButVarViewActive;
-	this->LstGenAvail = LstGenAvail;
-	this->ButGenViewActive = ButGenViewActive;
-	this->LstPrtAvail = LstPrtAvail;
-	this->ButPrtViewActive = ButPrtViewActive;
-	this->LstSigAvail = LstSigAvail;
-	this->ButSigViewActive = ButSigViewActive;
-	this->ButSigNewcrdActive = ButSigNewcrdActive;
-	this->LstCdcAvail = LstCdcAvail;
-	this->ButCdcViewActive = ButCdcViewActive;
-	this->LstPrcAvail = LstPrcAvail;
-	this->ButPrcViewActive = ButPrcViewActive;
-	this->LstFstAvail = LstFstAvail;
-	this->ButFstViewActive = ButFstViewActive;
-
 	mask = {LSTBNKAVAIL, BUTBNKVIEWACTIVE, BUTBNKNEWCRDACTIVE, LSTPINAVAIL, BUTPINVIEWACTIVE, BUTPINNEWCRDACTIVE, LSTINTAVAIL, BUTINTVIEWACTIVE, BUTINTNEWCRDACTIVE, LSTSNSAVAIL, BUTSNSVIEWACTIVE, LSTVARAVAIL, BUTVARVIEWACTIVE, LSTGENAVAIL, BUTGENVIEWACTIVE, LSTPRTAVAIL, BUTPRTVIEWACTIVE, LSTSIGAVAIL, BUTSIGVIEWACTIVE, BUTSIGNEWCRDACTIVE, LSTCDCAVAIL, BUTCDCVIEWACTIVE, LSTPRCAVAIL, BUTPRCVIEWACTIVE, LSTFSTAVAIL, BUTFSTVIEWACTIVE};
 };
 
@@ -524,20 +521,19 @@ PnlWdbeNavLow::Tag::Tag(
 			, const string& CptFst
 		) :
 			Block()
+			, Cpt(Cpt)
+			, CptBnk(CptBnk)
+			, CptPin(CptPin)
+			, CptInt(CptInt)
+			, CptSns(CptSns)
+			, CptVar(CptVar)
+			, CptGen(CptGen)
+			, CptPrt(CptPrt)
+			, CptSig(CptSig)
+			, CptCdc(CptCdc)
+			, CptPrc(CptPrc)
+			, CptFst(CptFst)
 		{
-	this->Cpt = Cpt;
-	this->CptBnk = CptBnk;
-	this->CptPin = CptPin;
-	this->CptInt = CptInt;
-	this->CptSns = CptSns;
-	this->CptVar = CptVar;
-	this->CptGen = CptGen;
-	this->CptPrt = CptPrt;
-	this->CptSig = CptSig;
-	this->CptCdc = CptCdc;
-	this->CptPrc = CptPrc;
-	this->CptFst = CptFst;
-
 	mask = {CPT, CPTBNK, CPTPIN, CPTINT, CPTSNS, CPTVAR, CPTGEN, CPTPRT, CPTSIG, CPTCDC, CPTPRC, CPTFST};
 };
 
@@ -624,11 +620,11 @@ PnlWdbeNavLow::DpchAppDo::DpchAppDo(
 			, const set<uint>& mask
 		) :
 			DpchAppWdbe(VecWdbeVDpch::DPCHAPPWDBENAVLOWDO, scrJref)
+			, ixVDo(ixVDo)
 		{
 	if (find(mask, ALL)) this->mask = {SCRJREF, IXVDO};
 	else this->mask = mask;
 
-	this->ixVDo = ixVDo;
 };
 
 string PnlWdbeNavLow::DpchAppDo::getSrefsMask() {

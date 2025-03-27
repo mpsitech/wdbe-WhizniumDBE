@@ -237,7 +237,9 @@ void WdbeGenAux::genCdc(
 	string from, fromRst;
 	string to, toRst;
 
-	string Ratio;
+	string imax;
+
+	string sigsref;
 
 	if (ixVDir == VecWdbeVRMCdcMSignalDir::FTS) {
 		from = cdc->fckSrefWdbeMSignal;
@@ -246,7 +248,7 @@ void WdbeGenAux::genCdc(
 		to = cdc->sckSrefWdbeMSignal;
 		toRst = cdc->sarSrefWdbeMSignal;
 
-		Ratio = to_string(lround(ceil(cdc->Ratio)) + 1);
+		imax = to_string(lround(ceil(2.0*cdc->Ratio))-1);
 
 	} else {
 		from = cdc->sckSrefWdbeMSignal;
@@ -255,43 +257,41 @@ void WdbeGenAux::genCdc(
 		to = cdc->fckSrefWdbeMSignal;
 		toRst = cdc->farSrefWdbeMSignal;
 
-		if (cdc->Ratio >= 2.0) Ratio = "";
-		else Ratio = "2";
+		if (cdc->Ratio <= 2.0) imax = "1";
+		else imax = "0";
 	};
 
-	if (Ratio != "") {
-		refPrc = dbswdbe->tblwdbemprocess->insertNewRec(NULL, cdc->refWdbeMModule, 0, from + "To" + StrMod::cap(to) + "Stretch", from, fromRst, false, "", false, from + " to " + to + " CDC stretching");
+	refPrc = dbswdbe->tblwdbemprocess->insertNewRec(NULL, cdc->refWdbeMModule, 0, from + "To" + StrMod::cap(to) + "Stretch", from, fromRst, false, "", false, from + " to " + to + " CDC stretching");
 
-		refNumVar = 1;
+	refNumVar = 1;
 
-		dbswdbe->tblwdbemvariable->insertNewRec(NULL, 0, VecWdbeVMVariableRefTbl::PRC, refPrc, refNumVar++, "imax", true, false, "nat", 0, "", "", Ratio, false, "");
+	if (imax != "0") dbswdbe->tblwdbemvariable->insertNewRec(NULL, 0, VecWdbeVMVariableRefTbl::PRC, refPrc, refNumVar++, "imax", true, false, "nat", 0, "", "", imax, false, "");
 
-		refCSig = dbswdbe->tblwdbecsignal->getNewRef();
-		refCVar = dbswdbe->tblwdbecvariable->getNewRef();
+	refCSig = dbswdbe->tblwdbecsignal->getNewRef();
+	refCVar = dbswdbe->tblwdbecvariable->getNewRef();
 
-		for (unsigned int j = 0; j < crss.nodes.size(); j++) {
-			crs = crss.nodes[j];
+	for (unsigned int j = 0; j < crss.nodes.size(); j++) {
+		crs = crss.nodes[j];
 
-			if (crs->ixVDir == ixVDir) {
-				if (dbswdbe->tblwdbemsignal->loadRecByRef(crs->refWdbeMSignal, &sig)) {
-					dbswdbe->tblwdbemvariable->insertNewRec(NULL, refCVar, VecWdbeVMVariableRefTbl::PRC, refPrc, refNumVar++, sig->sref + "_i", false, false, "nat", 0, "0..imax", "", "0", false, "");
+		if (crs->ixVDir == ixVDir) {
+			if (dbswdbe->tblwdbemsignal->loadRecByRef(crs->refWdbeMSignal, &sig)) {
+				if (imax != "0") dbswdbe->tblwdbemvariable->insertNewRec(NULL, refCVar, VecWdbeVMVariableRefTbl::PRC, refPrc, refNumVar++, sig->sref + "_i", false, false, "nat", 0, "0..imax", "", "0", false, "");
 
-					sig->ref = 0;
-					sig->ixVBasetype = VecWdbeVMSignalBasetype::OTH;
-					sig->refWdbeCSignal = refCSig;
-					sig->refNum = refNumSig++;
-					sig->mgeIxVTbl = VecWdbeVMSignalMgeTbl::PRC;
-					sig->mgeUref = refPrc;
-					sig->sref += "_to_" + to;
-					sig->Comb = "";
-					if (sig->Offval == "") sig->Offval = "0";
-					sig->drvRefWdbeMPort = 0;
-					sig->Comment = "";
+				sig->ref = 0;
+				sig->ixVBasetype = VecWdbeVMSignalBasetype::OTH;
+				sig->refWdbeCSignal = refCSig;
+				sig->refNum = refNumSig++;
+				sig->mgeIxVTbl = VecWdbeVMSignalMgeTbl::PRC;
+				sig->mgeUref = refPrc;
+				sig->sref += "_to_" + to;
+				sig->Comb = "";
+				if (sig->Offval == "") sig->Offval = "0";
+				sig->drvRefWdbeMPort = 0;
+				sig->Comment = "";
 
-					dbswdbe->tblwdbemsignal->insertRec(sig);
+				dbswdbe->tblwdbemsignal->insertRec(sig);
 
-					delete sig;
-				};
+				delete sig;
 			};
 		};
 	};
@@ -313,11 +313,9 @@ void WdbeGenAux::genCdc(
 					else if ((sig->srefWdbeKHdltype.rfind("_t") + 2) != sig->srefWdbeKHdltype.length()) sig->Offval = "0";
 				};
 
-				if (sig->ixVBasetype == VecWdbeVMSignalBasetype::STRB) {
-					dbswdbe->tblwdbemvariable->insertNewRec(NULL, refCVar, VecWdbeVMVariableRefTbl::PRC, refPrc, refNumVar++, sig->sref + "_wait", false, false, "_bool", 0, "", "", "false", false, "");
-				} else {
-					dbswdbe->tblwdbemvariable->insertNewRec(NULL, refCVar, VecWdbeVMVariableRefTbl::PRC, refPrc, refNumVar++, sig->sref + "_last", false, false, sig->srefWdbeKHdltype, sig->Width, sig->Minmax, "", sig->Offval, false, "");
-				};
+				if (sig->ixVBasetype == VecWdbeVMSignalBasetype::STRB) dbswdbe->tblwdbemvariable->insertNewRec(NULL, refCVar, VecWdbeVMVariableRefTbl::PRC, refPrc, refNumVar++, sig->sref + "_wait", false, false, "_bool", 0, "", "", "false", false, "");
+
+				sigsref = sig->sref;
 
 				sig->ref = 0;
 				sig->ixVBasetype = VecWdbeVMSignalBasetype::OTH;
@@ -325,10 +323,20 @@ void WdbeGenAux::genCdc(
 				sig->refNum = refNumSig++;
 				sig->mgeIxVTbl = VecWdbeVMSignalMgeTbl::PRC;
 				sig->mgeUref = refPrc;
-				sig->sref += "_" + to;
+				sig->sref = sigsref + "_" + to;
 				sig->Comb = "";
 				sig->drvRefWdbeMPort = 0;
 				sig->Comment = "";
+				dbswdbe->tblwdbemsignal->insertRec(sig);
+
+				sig->ref = 0;
+				sig->refNum = refNumSig++;
+				sig->sref = sigsref + "_to_" + to + "m1";
+				dbswdbe->tblwdbemsignal->insertRec(sig);
+
+				sig->ref = 0;
+				sig->refNum = refNumSig++;
+				sig->sref = sigsref + "_to_" + to + "m2";
 				dbswdbe->tblwdbemsignal->insertRec(sig);
 
 				delete sig;

@@ -170,9 +170,8 @@ DlgWdbePrjImpex::ContIac::ContIac(
 			const uint numFDse
 		) :
 			Block()
+			, numFDse(numFDse)
 		{
-	this->numFDse = numFDse;
-
 	mask = {NUMFDSE};
 };
 
@@ -277,9 +276,8 @@ DlgWdbePrjImpex::ContInf::ContInf(
 			const uint numFSge
 		) :
 			Block()
+			, numFSge(numFSge)
 		{
-	this->numFSge = numFSge;
-
 	mask = {NUMFSGE};
 };
 
@@ -342,9 +340,8 @@ DlgWdbePrjImpex::ContInfImp::ContInfImp(
 			const string& TxtPrg
 		) :
 			Block()
+			, TxtPrg(TxtPrg)
 		{
-	this->TxtPrg = TxtPrg;
-
 	mask = {TXTPRG};
 };
 
@@ -407,9 +404,8 @@ DlgWdbePrjImpex::ContInfLfi::ContInfLfi(
 			const string& Dld
 		) :
 			Block()
+			, Dld(Dld)
 		{
-	this->Dld = Dld;
-
 	mask = {DLD};
 };
 
@@ -509,9 +505,8 @@ DlgWdbePrjImpex::StatShr::StatShr(
 			const bool ButDneActive
 		) :
 			Block()
+			, ButDneActive(ButDneActive)
 		{
-	this->ButDneActive = ButDneActive;
-
 	mask = {BUTDNEACTIVE};
 };
 
@@ -574,9 +569,8 @@ DlgWdbePrjImpex::StatShrIfi::StatShrIfi(
 			const bool UldActive
 		) :
 			Block()
+			, UldActive(UldActive)
 		{
-	this->UldActive = UldActive;
-
 	mask = {ULDACTIVE};
 };
 
@@ -641,11 +635,10 @@ DlgWdbePrjImpex::StatShrImp::StatShrImp(
 			, const bool ButStoActive
 		) :
 			Block()
+			, ButAutActive(ButAutActive)
+			, ButRunActive(ButRunActive)
+			, ButStoActive(ButStoActive)
 		{
-	this->ButAutActive = ButAutActive;
-	this->ButRunActive = ButRunActive;
-	this->ButStoActive = ButStoActive;
-
 	mask = {BUTAUTACTIVE, BUTRUNACTIVE, BUTSTOACTIVE};
 };
 
@@ -714,9 +707,8 @@ DlgWdbePrjImpex::StatShrLfi::StatShrLfi(
 			const bool DldActive
 		) :
 			Block()
+			, DldActive(DldActive)
 		{
-	this->DldActive = DldActive;
-
 	mask = {DLDACTIVE};
 };
 

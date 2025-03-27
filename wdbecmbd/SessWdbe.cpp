@@ -114,6 +114,7 @@ SessWdbe::SessWdbe(
 	ixWdbeWAccess = ixWdbeWAccessBase; if (!adm) getIxCrdacc(dbswdbe, VecWdbeVCard::CRDWDBEUSR, adm, urus, refWdbeMUser, ixWdbeWAccess); xchg->addIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCUSR, jref, ixWdbeWAccess);
 	ixWdbeWAccess = ixWdbeWAccessBase; if (!adm) getIxCrdacc(dbswdbe, VecWdbeVCard::CRDWDBEPRS, adm, urus, refWdbeMUser, ixWdbeWAccess); xchg->addIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCPRS, jref, ixWdbeWAccess);
 	ixWdbeWAccess = ixWdbeWAccessBase; if (!adm) getIxCrdacc(dbswdbe, VecWdbeVCard::CRDWDBEFIL, adm, urus, refWdbeMUser, ixWdbeWAccess); xchg->addIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCFIL, jref, ixWdbeWAccess);
+	ixWdbeWAccess = ixWdbeWAccessBase; if (!adm) getIxCrdacc(dbswdbe, VecWdbeVCard::CRDWDBEPRF, adm, urus, refWdbeMUser, ixWdbeWAccess); xchg->addIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCPRF, jref, ixWdbeWAccess);
 	ixWdbeWAccess = ixWdbeWAccessBase; if (!adm) getIxCrdacc(dbswdbe, VecWdbeVCard::CRDWDBEMCH, adm, urus, refWdbeMUser, ixWdbeWAccess); xchg->addIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCMCH, jref, ixWdbeWAccess);
 	ixWdbeWAccess = ixWdbeWAccessBase; if (!adm) getIxCrdacc(dbswdbe, VecWdbeVCard::CRDWDBELIB, adm, urus, refWdbeMUser, ixWdbeWAccess); xchg->addIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCLIB, jref, ixWdbeWAccess);
 	ixWdbeWAccess = ixWdbeWAccessBase; if (!adm) getIxCrdacc(dbswdbe, VecWdbeVCard::CRDWDBEFAM, adm, urus, refWdbeMUser, ixWdbeWAccess); xchg->addIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCFAM, jref, ixWdbeWAccess);
@@ -217,29 +218,29 @@ uint SessWdbe::checkCrdActive(
 			const uint ixWdbeVCard
 		) {
 	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEVER) return evalCrdverActive();
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEUNT) return evalCrduntActive();
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBECVR) return evalCrdcvrActive();
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEPPH) return evalCrdpphActive();
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEMOD) return evalCrdmodActive();
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEVEC) return evalCrdvecActive();
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEVIT) return evalCrdvitActive();
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBECMD) return evalCrdcmdActive();
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEERR) return evalCrderrActive();
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEPPL) return evalCrdpplActive();
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBESEG) return evalCrdsegActive();
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEBNK) return evalCrdbnkActive();
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEPIN) return evalCrdpinActive();
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEINT) return evalCrdintActive();
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBESNS) return evalCrdsnsActive();
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEVAR) return evalCrdvarActive();
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEGEN) return evalCrdgenActive();
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEPRT) return evalCrdprtActive();
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBESIG) return evalCrdsigActive();
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBECDC) return evalCrdcdcActive();
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEPRC) return evalCrdprcActive();
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEFST) return evalCrdfstActive();
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBECMP) return evalCrdcmpActive();
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBERLS) return evalCrdrlsActive();
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEUNT) return evalCrduntActive();
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBECVR) return evalCrdcvrActive();
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEPPH) return evalCrdpphActive();
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEMOD) return evalCrdmodActive();
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEVEC) return evalCrdvecActive();
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEVIT) return evalCrdvitActive();
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBECMD) return evalCrdcmdActive();
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEERR) return evalCrderrActive();
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEPPL) return evalCrdpplActive();
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBESEG) return evalCrdsegActive();
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEBNK) return evalCrdbnkActive();
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEPIN) return evalCrdpinActive();
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEINT) return evalCrdintActive();
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBESNS) return evalCrdsnsActive();
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEVAR) return evalCrdvarActive();
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEGEN) return evalCrdgenActive();
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEPRT) return evalCrdprtActive();
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBESIG) return evalCrdsigActive();
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBECDC) return evalCrdcdcActive();
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEPRC) return evalCrdprcActive();
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEFST) return evalCrdfstActive();
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBECMP) return evalCrdcmpActive();
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBERLS) return evalCrdrlsActive();
 
 	return 0;
 };
@@ -599,41 +600,42 @@ uint SessWdbe::checkCrdaccess(
 			const uint ixWdbeVCard
 		) {
 	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEUSG) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCUSG, jref);
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEUSR) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCUSR, jref);
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEPRS) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCPRS, jref);
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEFIL) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCFIL, jref);
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEMCH) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCMCH, jref);
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBELIB) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCLIB, jref);
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEFAM) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCFAM, jref);
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBESIL) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCSIL, jref);
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEMTP) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCMTP, jref);
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEPRJ) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCPRJ, jref);
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEVER) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCVER, jref);
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEUNT) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCUNT, jref);
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBECPR) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCCPR, jref);
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBECVR) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCCVR, jref);
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEPPH) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCPPH, jref);
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEMOD) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCMOD, jref);
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEVEC) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCVEC, jref);
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEVIT) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCVIT, jref);
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBECMD) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCCMD, jref);
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEERR) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCERR, jref);
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEPPL) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCPPL, jref);
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBESEG) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCSEG, jref);
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEBNK) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCBNK, jref);
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEPIN) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCPIN, jref);
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEINT) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCINT, jref);
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBESNS) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCSNS, jref);
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEVAR) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCVAR, jref);
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEGEN) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCGEN, jref);
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEPRT) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCPRT, jref);
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBESIG) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCSIG, jref);
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBECDC) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCCDC, jref);
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEPRC) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCPRC, jref);
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEFST) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCFST, jref);
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBECMP) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCCMP, jref);
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBERLS) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCRLS, jref);
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEUTL) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCUTL, jref);
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEUSR) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCUSR, jref);
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEPRS) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCPRS, jref);
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEFIL) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCFIL, jref);
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEPRF) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCPRF, jref);
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEMCH) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCMCH, jref);
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBELIB) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCLIB, jref);
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEFAM) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCFAM, jref);
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBESIL) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCSIL, jref);
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEMTP) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCMTP, jref);
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEPRJ) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCPRJ, jref);
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEVER) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCVER, jref);
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEUNT) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCUNT, jref);
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBECPR) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCCPR, jref);
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBECVR) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCCVR, jref);
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEPPH) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCPPH, jref);
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEMOD) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCMOD, jref);
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEVEC) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCVEC, jref);
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEVIT) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCVIT, jref);
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBECMD) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCCMD, jref);
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEERR) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCERR, jref);
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEPPL) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCPPL, jref);
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBESEG) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCSEG, jref);
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEBNK) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCBNK, jref);
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEPIN) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCPIN, jref);
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEINT) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCINT, jref);
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBESNS) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCSNS, jref);
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEVAR) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCVAR, jref);
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEGEN) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCGEN, jref);
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEPRT) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCPRT, jref);
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBESIG) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCSIG, jref);
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBECDC) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCCDC, jref);
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEPRC) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCPRC, jref);
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEFST) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCFST, jref);
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBECMP) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCCMP, jref);
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBERLS) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCRLS, jref);
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEUTL) return xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCUTL, jref);
 
 	return 0;
 };
@@ -778,7 +780,7 @@ void SessWdbe::logRecaccess(
 
 	WdbeHistRMUserUniversal* husrRunv = NULL;
 
-	if (xchg->stgwdbeappearance.histlength > 0) {
+	if (xchg->stgwdbebehavior.histlength > 0) {
 		refWdbeMUser = xchg->getRefPreset(VecWdbeVPreset::PREWDBEOWNER, jref);
 		unvIxWdbeVMaintable = crdToMtb(ixWdbeVCard);
 		preIxWdbeVMaintable = preToMtb(ixWdbeVPreset);
@@ -792,7 +794,7 @@ void SessWdbe::logRecaccess(
 		if (husrRunv->ref == 0) {
 			dbswdbe->tblwdbehistrmuseruniversal->insertRec(husrRunv);
 
-			dbswdbe->tblwdbehistrmuseruniversal->loadRefsByUsrMtbCrd(refWdbeMUser, unvIxWdbeVMaintable, ixWdbeVCard, false, refs, 4294967296, xchg->stgwdbeappearance.histlength);
+			dbswdbe->tblwdbehistrmuseruniversal->loadRefsByUsrMtbCrd(refWdbeMUser, unvIxWdbeVMaintable, ixWdbeVCard, false, refs, 4294967296, xchg->stgwdbebehavior.histlength);
 			for (unsigned int i = 0; i < refs.size(); i++) dbswdbe->tblwdbehistrmuseruniversal->removeRecByRef(refs[i]);
 
 		} else dbswdbe->tblwdbehistrmuseruniversal->updateRec(husrRunv);
@@ -807,40 +809,40 @@ uint SessWdbe::crdToMtb(
 			const uint ixWdbeVCard
 		) {
 	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEUSG) return VecWdbeVMaintable::TBLWDBEMUSERGROUP;
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEUSR) return VecWdbeVMaintable::TBLWDBEMUSER;
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEPRS) return VecWdbeVMaintable::TBLWDBEMPERSON;
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEFIL) return VecWdbeVMaintable::TBLWDBEMFILE;
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEMCH) return VecWdbeVMaintable::TBLWDBEMMACHINE;
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBELIB) return VecWdbeVMaintable::TBLWDBEMLIBRARY;
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEFAM) return VecWdbeVMaintable::TBLWDBEMFAMILY;
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBESIL) return VecWdbeVMaintable::TBLWDBEMUNIT;
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEMTP) return VecWdbeVMaintable::TBLWDBEMMODULE;
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEPRJ) return VecWdbeVMaintable::TBLWDBEMPROJECT;
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEVER) return VecWdbeVMaintable::TBLWDBEMVERSION;
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEUNT) return VecWdbeVMaintable::TBLWDBEMUNIT;
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBECPR) return VecWdbeVMaintable::TBLWDBEMCOREPROJECT;
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBECVR) return VecWdbeVMaintable::TBLWDBEMCOREVERSION;
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEPPH) return VecWdbeVMaintable::TBLWDBEMPERIPHERAL;
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEMOD) return VecWdbeVMaintable::TBLWDBEMMODULE;
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEVEC) return VecWdbeVMaintable::TBLWDBEMVECTOR;
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEVIT) return VecWdbeVMaintable::TBLWDBEMVECTORITEM;
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBECMD) return VecWdbeVMaintable::TBLWDBEMCOMMAND;
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEERR) return VecWdbeVMaintable::TBLWDBEMERROR;
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEPPL) return VecWdbeVMaintable::TBLWDBEMPIPELINE;
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBESEG) return VecWdbeVMaintable::TBLWDBEMSEGMENT;
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEBNK) return VecWdbeVMaintable::TBLWDBEMBANK;
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEPIN) return VecWdbeVMaintable::TBLWDBEMPIN;
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEINT) return VecWdbeVMaintable::TBLWDBEMINTERRUPT;
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBESNS) return VecWdbeVMaintable::TBLWDBEMSENSITIVITY;
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEVAR) return VecWdbeVMaintable::TBLWDBEMVARIABLE;
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEGEN) return VecWdbeVMaintable::TBLWDBEMGENERIC;
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEPRT) return VecWdbeVMaintable::TBLWDBEMPORT;
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBESIG) return VecWdbeVMaintable::TBLWDBEMSIGNAL;
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBECDC) return VecWdbeVMaintable::TBLWDBEMCDC;
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEPRC) return VecWdbeVMaintable::TBLWDBEMPROCESS;
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEFST) return VecWdbeVMaintable::TBLWDBEMFSMSTATE;
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBECMP) return VecWdbeVMaintable::TBLWDBEMCOMPONENT;
-	else if (ixWdbeVCard == VecWdbeVCard::CRDWDBERLS) return VecWdbeVMaintable::TBLWDBEMRELEASE;
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEUSR) return VecWdbeVMaintable::TBLWDBEMUSER;
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEPRS) return VecWdbeVMaintable::TBLWDBEMPERSON;
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEFIL) return VecWdbeVMaintable::TBLWDBEMFILE;
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEMCH) return VecWdbeVMaintable::TBLWDBEMMACHINE;
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBELIB) return VecWdbeVMaintable::TBLWDBEMLIBRARY;
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEFAM) return VecWdbeVMaintable::TBLWDBEMFAMILY;
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBESIL) return VecWdbeVMaintable::TBLWDBEMUNIT;
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEMTP) return VecWdbeVMaintable::TBLWDBEMMODULE;
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEPRJ) return VecWdbeVMaintable::TBLWDBEMPROJECT;
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEVER) return VecWdbeVMaintable::TBLWDBEMVERSION;
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEUNT) return VecWdbeVMaintable::TBLWDBEMUNIT;
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBECPR) return VecWdbeVMaintable::TBLWDBEMCOREPROJECT;
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBECVR) return VecWdbeVMaintable::TBLWDBEMCOREVERSION;
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEPPH) return VecWdbeVMaintable::TBLWDBEMPERIPHERAL;
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEMOD) return VecWdbeVMaintable::TBLWDBEMMODULE;
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEVEC) return VecWdbeVMaintable::TBLWDBEMVECTOR;
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEVIT) return VecWdbeVMaintable::TBLWDBEMVECTORITEM;
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBECMD) return VecWdbeVMaintable::TBLWDBEMCOMMAND;
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEERR) return VecWdbeVMaintable::TBLWDBEMERROR;
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEPPL) return VecWdbeVMaintable::TBLWDBEMPIPELINE;
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBESEG) return VecWdbeVMaintable::TBLWDBEMSEGMENT;
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEBNK) return VecWdbeVMaintable::TBLWDBEMBANK;
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEPIN) return VecWdbeVMaintable::TBLWDBEMPIN;
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEINT) return VecWdbeVMaintable::TBLWDBEMINTERRUPT;
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBESNS) return VecWdbeVMaintable::TBLWDBEMSENSITIVITY;
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEVAR) return VecWdbeVMaintable::TBLWDBEMVARIABLE;
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEGEN) return VecWdbeVMaintable::TBLWDBEMGENERIC;
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEPRT) return VecWdbeVMaintable::TBLWDBEMPORT;
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBESIG) return VecWdbeVMaintable::TBLWDBEMSIGNAL;
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBECDC) return VecWdbeVMaintable::TBLWDBEMCDC;
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEPRC) return VecWdbeVMaintable::TBLWDBEMPROCESS;
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBEFST) return VecWdbeVMaintable::TBLWDBEMFSMSTATE;
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBECMP) return VecWdbeVMaintable::TBLWDBEMCOMPONENT;
+	if (ixWdbeVCard == VecWdbeVCard::CRDWDBERLS) return VecWdbeVMaintable::TBLWDBEMRELEASE;
 
 	return VecWdbeVMaintable::VOID;
 };
@@ -849,48 +851,48 @@ uint SessWdbe::preToMtb(
 			const uint ixWdbeVPreset
 		) {
 	if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFBNK) return VecWdbeVMaintable::TBLWDBEMBANK;
-	else if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFCDC) return VecWdbeVMaintable::TBLWDBEMCDC;
-	else if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFCMD) return VecWdbeVMaintable::TBLWDBEMCOMMAND;
-	else if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFCMP) return VecWdbeVMaintable::TBLWDBEMCOMPONENT;
-	else if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFCPR) return VecWdbeVMaintable::TBLWDBEMCOREPROJECT;
-	else if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFCTR) return VecWdbeVMaintable::TBLWDBEMCONTROLLER;
-	else if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFCVR) return VecWdbeVMaintable::TBLWDBEMCOREVERSION;
-	else if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFERR) return VecWdbeVMaintable::TBLWDBEMERROR;
-	else if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFFAM) return VecWdbeVMaintable::TBLWDBEMFAMILY;
-	else if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFFIL) return VecWdbeVMaintable::TBLWDBEMFILE;
-	else if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFFSM) return VecWdbeVMaintable::TBLWDBEMFSM;
-	else if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFFST) return VecWdbeVMaintable::TBLWDBEMFSMSTATE;
-	else if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFGEN) return VecWdbeVMaintable::TBLWDBEMGENERIC;
-	else if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFIMB) return VecWdbeVMaintable::TBLWDBEMIMBUF;
-	else if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFINT) return VecWdbeVMaintable::TBLWDBEMINTERRUPT;
-	else if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFLIB) return VecWdbeVMaintable::TBLWDBEMLIBRARY;
-	else if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFMCH) return VecWdbeVMaintable::TBLWDBEMMACHINE;
-	else if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFMCT) return VecWdbeVMaintable::TBLWDBEMMODULE;
-	else if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFMDL) return VecWdbeVMaintable::TBLWDBEMMODULE;
-	else if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFMIB) return VecWdbeVMaintable::TBLWDBEMMODULE;
-	else if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFMOD) return VecWdbeVMaintable::TBLWDBEMMODULE;
-	else if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFMTP) return VecWdbeVMaintable::TBLWDBEMMODULE;
-	else if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFPIN) return VecWdbeVMaintable::TBLWDBEMPIN;
-	else if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFPPH) return VecWdbeVMaintable::TBLWDBEMPERIPHERAL;
-	else if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFPPL) return VecWdbeVMaintable::TBLWDBEMPIPELINE;
-	else if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFPRC) return VecWdbeVMaintable::TBLWDBEMPROCESS;
-	else if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFPRJ) return VecWdbeVMaintable::TBLWDBEMPROJECT;
-	else if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFPRS) return VecWdbeVMaintable::TBLWDBEMPERSON;
-	else if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFPRT) return VecWdbeVMaintable::TBLWDBEMPORT;
-	else if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFRLS) return VecWdbeVMaintable::TBLWDBEMRELEASE;
-	else if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFSEG) return VecWdbeVMaintable::TBLWDBEMSEGMENT;
-	else if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFSES) return VecWdbeVMaintable::TBLWDBEMSESSION;
-	else if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFSIG) return VecWdbeVMaintable::TBLWDBEMSIGNAL;
-	else if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFSIL) return VecWdbeVMaintable::TBLWDBEMUNIT;
-	else if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFSNS) return VecWdbeVMaintable::TBLWDBEMSENSITIVITY;
-	else if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFUNI) return VecWdbeVMaintable::TBLWDBEMUNIT;
-	else if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFUNT) return VecWdbeVMaintable::TBLWDBEMUNIT;
-	else if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFUSG) return VecWdbeVMaintable::TBLWDBEMUSERGROUP;
-	else if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFUSR) return VecWdbeVMaintable::TBLWDBEMUSER;
-	else if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFVAR) return VecWdbeVMaintable::TBLWDBEMVARIABLE;
-	else if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFVEC) return VecWdbeVMaintable::TBLWDBEMVECTOR;
-	else if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFVER) return VecWdbeVMaintable::TBLWDBEMVERSION;
-	else if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFVIT) return VecWdbeVMaintable::TBLWDBEMVECTORITEM;
+	if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFCDC) return VecWdbeVMaintable::TBLWDBEMCDC;
+	if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFCMD) return VecWdbeVMaintable::TBLWDBEMCOMMAND;
+	if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFCMP) return VecWdbeVMaintable::TBLWDBEMCOMPONENT;
+	if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFCPR) return VecWdbeVMaintable::TBLWDBEMCOREPROJECT;
+	if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFCTR) return VecWdbeVMaintable::TBLWDBEMCONTROLLER;
+	if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFCVR) return VecWdbeVMaintable::TBLWDBEMCOREVERSION;
+	if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFERR) return VecWdbeVMaintable::TBLWDBEMERROR;
+	if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFFAM) return VecWdbeVMaintable::TBLWDBEMFAMILY;
+	if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFFIL) return VecWdbeVMaintable::TBLWDBEMFILE;
+	if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFFSM) return VecWdbeVMaintable::TBLWDBEMFSM;
+	if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFFST) return VecWdbeVMaintable::TBLWDBEMFSMSTATE;
+	if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFGEN) return VecWdbeVMaintable::TBLWDBEMGENERIC;
+	if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFIMB) return VecWdbeVMaintable::TBLWDBEMIMBUF;
+	if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFINT) return VecWdbeVMaintable::TBLWDBEMINTERRUPT;
+	if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFLIB) return VecWdbeVMaintable::TBLWDBEMLIBRARY;
+	if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFMCH) return VecWdbeVMaintable::TBLWDBEMMACHINE;
+	if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFMCT) return VecWdbeVMaintable::TBLWDBEMMODULE;
+	if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFMDL) return VecWdbeVMaintable::TBLWDBEMMODULE;
+	if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFMIB) return VecWdbeVMaintable::TBLWDBEMMODULE;
+	if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFMOD) return VecWdbeVMaintable::TBLWDBEMMODULE;
+	if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFMTP) return VecWdbeVMaintable::TBLWDBEMMODULE;
+	if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFPIN) return VecWdbeVMaintable::TBLWDBEMPIN;
+	if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFPPH) return VecWdbeVMaintable::TBLWDBEMPERIPHERAL;
+	if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFPPL) return VecWdbeVMaintable::TBLWDBEMPIPELINE;
+	if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFPRC) return VecWdbeVMaintable::TBLWDBEMPROCESS;
+	if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFPRJ) return VecWdbeVMaintable::TBLWDBEMPROJECT;
+	if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFPRS) return VecWdbeVMaintable::TBLWDBEMPERSON;
+	if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFPRT) return VecWdbeVMaintable::TBLWDBEMPORT;
+	if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFRLS) return VecWdbeVMaintable::TBLWDBEMRELEASE;
+	if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFSEG) return VecWdbeVMaintable::TBLWDBEMSEGMENT;
+	if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFSES) return VecWdbeVMaintable::TBLWDBEMSESSION;
+	if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFSIG) return VecWdbeVMaintable::TBLWDBEMSIGNAL;
+	if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFSIL) return VecWdbeVMaintable::TBLWDBEMUNIT;
+	if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFSNS) return VecWdbeVMaintable::TBLWDBEMSENSITIVITY;
+	if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFUNI) return VecWdbeVMaintable::TBLWDBEMUNIT;
+	if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFUNT) return VecWdbeVMaintable::TBLWDBEMUNIT;
+	if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFUSG) return VecWdbeVMaintable::TBLWDBEMUSERGROUP;
+	if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFUSR) return VecWdbeVMaintable::TBLWDBEMUSER;
+	if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFVAR) return VecWdbeVMaintable::TBLWDBEMVARIABLE;
+	if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFVEC) return VecWdbeVMaintable::TBLWDBEMVECTOR;
+	if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFVER) return VecWdbeVMaintable::TBLWDBEMVERSION;
+	if (ixWdbeVPreset == VecWdbeVPreset::PREWDBEREFVIT) return VecWdbeVMaintable::TBLWDBEMVECTORITEM;
 
 	return VecWdbeVMaintable::VOID;
 };
@@ -935,6 +937,7 @@ void SessWdbe::handleRequest(
 			cout << "\tcreateCrdpph" << endl;
 			cout << "\tcreateCrdppl" << endl;
 			cout << "\tcreateCrdprc" << endl;
+			cout << "\tcreateCrdprf" << endl;
 			cout << "\tcreateCrdprj" << endl;
 			cout << "\tcreateCrdprs" << endl;
 			cout << "\tcreateCrdprt" << endl;
@@ -971,6 +974,7 @@ void SessWdbe::handleRequest(
 			cout << "\teraseCrdpph" << endl;
 			cout << "\teraseCrdppl" << endl;
 			cout << "\teraseCrdprc" << endl;
+			cout << "\teraseCrdprf" << endl;
 			cout << "\teraseCrdprj" << endl;
 			cout << "\teraseCrdprs" << endl;
 			cout << "\teraseCrdprt" << endl;
@@ -1046,6 +1050,9 @@ void SessWdbe::handleRequest(
 
 		} else if (req->cmd == "createCrdprc") {
 			req->retain = handleCreateCrdprc(dbswdbe);
+
+		} else if (req->cmd == "createCrdprf") {
+			req->retain = handleCreateCrdprf(dbswdbe);
 
 		} else if (req->cmd == "createCrdprj") {
 			req->retain = handleCreateCrdprj(dbswdbe);
@@ -1154,6 +1161,9 @@ void SessWdbe::handleRequest(
 
 		} else if (req->cmd == "eraseCrdprc") {
 			req->retain = handleEraseCrdprc(dbswdbe);
+
+		} else if (req->cmd == "eraseCrdprf") {
+			req->retain = handleEraseCrdprf(dbswdbe);
 
 		} else if (req->cmd == "eraseCrdprj") {
 			req->retain = handleEraseCrdprj(dbswdbe);
@@ -1517,6 +1527,17 @@ bool SessWdbe::handleCreateCrdprc(
 		xchg->jrefCmd = insertSubjob(crdprcs, new CrdWdbePrc(xchg, dbswdbe, jref, ixWdbeVLocale, 0, ixWdbeVPreset, xchg->getRefPreset(ixWdbeVPreset, jref)));
 		cout << "\tjob reference: " << xchg->jrefCmd << endl;
 	};
+
+	return retval;
+};
+
+bool SessWdbe::handleCreateCrdprf(
+			DbsWdbe* dbswdbe
+		) {
+	bool retval = false;
+
+	xchg->jrefCmd = insertSubjob(crdprfs, new CrdWdbePrf(xchg, dbswdbe, jref, ixWdbeVLocale));
+	cout << "\tjob reference: " << xchg->jrefCmd << endl;
 
 	return retval;
 };
@@ -1917,6 +1938,14 @@ bool SessWdbe::handleEraseCrdprc(
 	return retval;
 };
 
+bool SessWdbe::handleEraseCrdprf(
+			DbsWdbe* dbswdbe
+		) {
+	bool retval = false;
+	eraseCrd(crdprfs);
+	return retval;
+};
+
 bool SessWdbe::handleEraseCrdprj(
 			DbsWdbe* dbswdbe
 		) {
@@ -2059,6 +2088,7 @@ void SessWdbe::handleDpchAppWdbeInit(
 	for (auto it = crdusrs.begin(); it != crdusrs.end(); it++) feedFEnsSec.appendIxSrefTitles(0, Scr::scramble(it->second->jref), "CrdWdbeUsr");
 	for (auto it = crdprss.begin(); it != crdprss.end(); it++) feedFEnsSec.appendIxSrefTitles(0, Scr::scramble(it->second->jref), "CrdWdbePrs");
 	for (auto it = crdfils.begin(); it != crdfils.end(); it++) feedFEnsSec.appendIxSrefTitles(0, Scr::scramble(it->second->jref), "CrdWdbeFil");
+	for (auto it = crdprfs.begin(); it != crdprfs.end(); it++) feedFEnsSec.appendIxSrefTitles(0, Scr::scramble(it->second->jref), "CrdWdbePrf");
 	for (auto it = crdmchs.begin(); it != crdmchs.end(); it++) feedFEnsSec.appendIxSrefTitles(0, Scr::scramble(it->second->jref), "CrdWdbeMch");
 	for (auto it = crdlibs.begin(); it != crdlibs.end(); it++) feedFEnsSec.appendIxSrefTitles(0, Scr::scramble(it->second->jref), "CrdWdbeLib");
 	for (auto it = crdfams.begin(); it != crdfams.end(); it++) feedFEnsSec.appendIxSrefTitles(0, Scr::scramble(it->second->jref), "CrdWdbeFam");
@@ -2133,7 +2163,7 @@ bool SessWdbe::handleCallWdbeRefPreSet(
 		};
 
 	} else if (ixInv == VecWdbeVPreset::PREWDBETLAST) {
-		if (xchg->stgwdbeappearance.sesstterm != 0) xchg->addRefPreset(ixInv, jref, refInv);
+		if (xchg->stgwdbebehavior.sesstterm != 0) xchg->addRefPreset(ixInv, jref, refInv);
 
 	} else if ((ixInv == VecWdbeVPreset::PREWDBEREFCVR) || (ixInv == VecWdbeVPreset::PREWDBEREFUNT) || (ixInv == VecWdbeVPreset::PREWDBEREFVER)) {
 		if (refInv == 0) xchg->removePreset(ixInv, jref);
@@ -2233,6 +2263,7 @@ bool SessWdbe::handleCallWdbeCrdOpen(
 		else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEUSR) refRet = insertSubjob(crdusrs, new CrdWdbeUsr(xchg, dbswdbe, jref, ixWdbeVLocale, ref));
 		else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEPRS) refRet = insertSubjob(crdprss, new CrdWdbePrs(xchg, dbswdbe, jref, ixWdbeVLocale, ref));
 		else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEFIL) refRet = insertSubjob(crdfils, new CrdWdbeFil(xchg, dbswdbe, jref, ixWdbeVLocale, ref));
+		else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEPRF) refRet = insertSubjob(crdprfs, new CrdWdbePrf(xchg, dbswdbe, jref, ixWdbeVLocale));
 		else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEMCH) refRet = insertSubjob(crdmchs, new CrdWdbeMch(xchg, dbswdbe, jref, ixWdbeVLocale, ref));
 		else if (ixWdbeVCard == VecWdbeVCard::CRDWDBELIB) refRet = insertSubjob(crdlibs, new CrdWdbeLib(xchg, dbswdbe, jref, ixWdbeVLocale, ref));
 		else if (ixWdbeVCard == VecWdbeVCard::CRDWDBEFAM) refRet = insertSubjob(crdfams, new CrdWdbeFam(xchg, dbswdbe, jref, ixWdbeVLocale, ref));
@@ -2286,6 +2317,7 @@ bool SessWdbe::handleCallWdbeCrdClose(
 	else if (ixInv == VecWdbeVCard::CRDWDBEUSR) eraseSubjobByJref(crdusrs, jrefTrig);
 	else if (ixInv == VecWdbeVCard::CRDWDBEPRS) eraseSubjobByJref(crdprss, jrefTrig);
 	else if (ixInv == VecWdbeVCard::CRDWDBEFIL) eraseSubjobByJref(crdfils, jrefTrig);
+	else if (ixInv == VecWdbeVCard::CRDWDBEPRF) eraseSubjobByJref(crdprfs, jrefTrig);
 	else if (ixInv == VecWdbeVCard::CRDWDBENAV) {
 		if (crdnav) {
 			delete crdnav;

@@ -24,13 +24,14 @@ WdbeQModRef1NVariable::WdbeQModRef1NVariable(
 			, const ubigint ref
 			, const string stubRef
 			, const uint refNum
-		) {
-	this->qref = qref;
-	this->jref = jref;
-	this->jnum = jnum;
-	this->ref = ref;
-	this->stubRef = stubRef;
-	this->refNum = refNum;
+		) :
+			qref(qref)
+			, jref(jref)
+			, jnum(jnum)
+			, ref(ref)
+			, stubRef(stubRef)
+			, refNum(refNum)
+		{
 };
 
 void WdbeQModRef1NVariable::writeJSON(

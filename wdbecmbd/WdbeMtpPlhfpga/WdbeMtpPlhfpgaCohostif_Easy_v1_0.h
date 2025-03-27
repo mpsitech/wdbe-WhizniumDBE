@@ -17,9 +17,7 @@
 namespace WdbeMtpPlhfpgaCohostif_Easy_v1_0 {
 
 	DpchRetWdbeMtpPlhfpga* run(XchgWdbe* xchg, DbsWdbe* dbswdbe, DpchInvWdbeMtpPlhfpga* dpchinv);
-	// IP cust --- IBEGIN
-	unsigned int extendToWD(const unsigned int size, const unsigned int wD, unsigned int& resid);
-	// IP cust --- IEND
+	// IP cust --- INSERT
 };
 
 #endif

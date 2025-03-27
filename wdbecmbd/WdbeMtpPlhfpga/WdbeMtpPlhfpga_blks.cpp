@@ -24,9 +24,9 @@ DpchInvWdbeMtpPlhfpga::DpchInvWdbeMtpPlhfpga(
 			, const ubigint refWdbeMModule
 		) :
 			DpchInvWdbe(VecWdbeVDpch::DPCHINVWDBEMTPPLHFPGA, oref, jref)
+			, srefKCustop(srefKCustop)
+			, refWdbeMModule(refWdbeMModule)
 		{
-	this->srefKCustop = srefKCustop;
-	this->refWdbeMModule = refWdbeMModule;
 };
 
 void DpchInvWdbeMtpPlhfpga::readXML(
@@ -76,9 +76,9 @@ DpchRetWdbeMtpPlhfpga::DpchRetWdbeMtpPlhfpga(
 			, const vector<string>& vals
 		) :
 			DpchRetWdbe(VecWdbeVDpch::DPCHRETWDBEMTPPLHFPGA, scrOref, scrJref, ixOpVOpres, pdone)
+			, keys(keys)
+			, vals(vals)
 		{
-	this->keys = keys;
-	this->vals = vals;
 };
 
 void DpchRetWdbeMtpPlhfpga::readXML(

@@ -548,10 +548,10 @@ public:
 	bool evalButDneActive(DbsWdbe* dbswdbe);
 	bool evalFiaDldAvail(DbsWdbe* dbswdbe);
 	bool evalFiaDldActive(DbsWdbe* dbswdbe);
+	bool evalLfiDldActive(DbsWdbe* dbswdbe);
 	bool evalWrcButAutActive(DbsWdbe* dbswdbe);
 	bool evalWrcButRunActive(DbsWdbe* dbswdbe);
 	bool evalWrcButStoActive(DbsWdbe* dbswdbe);
-	bool evalLfiDldActive(DbsWdbe* dbswdbe);
 	bool evalCucUldAvail(DbsWdbe* dbswdbe);
 	bool evalCucUldActive(DbsWdbe* dbswdbe);
 

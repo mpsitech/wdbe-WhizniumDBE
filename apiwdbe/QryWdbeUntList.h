@@ -32,8 +32,8 @@ namespace QryWdbeUntList {
 		static const Sbecore::uint REU = 2;
 		static const Sbecore::uint RET = 3;
 		static const Sbecore::uint TYP = 4;
-		static const Sbecore::uint SRF = 5;
-		static const Sbecore::uint TIT = 6;
+		static const Sbecore::uint TIT = 5;
+		static const Sbecore::uint SRF = 6;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);

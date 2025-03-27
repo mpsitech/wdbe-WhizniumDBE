@@ -1821,6 +1821,10 @@ main	void	0	TblWdbeMVector	vec
 		full	enus	hook table of reference
 		ImeIAMVectorTitle2.end
 		ImeIMVectoritem2.sref	Avail	Implied	Title	Comment
+		cmd
+			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
+			enus	command
+			ImeIJMVectoritem2.end
 		ctr
 			ImeIJMVectoritem2.srefX1RefWznmMLocale	Title	Comment
 			enus	controller
@@ -2306,7 +2310,7 @@ aux	void	0	TblWdbeAMModulePar	mdlApar
 	tblref		128	tbl	TblWdbeMModule	mdlRefWdbeMModule	mdl	trefspec	void		true	false
 	enum		128	void		mdlNum	mdn	enauto	void		false	false
 	klref			vec	KlstWdbeKAMModuleParKey	x1SrefKKey	key	klrefsng	pt	idx	true	true
-	txtval			void		Val	val	txt192	void		true	false
+	txtval			void		Val	val	txtlong	void		true	false
 		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
 		full	enus	value
 		ImeIAMTablecolTitle.end
@@ -2913,6 +2917,7 @@ ImeIMRelation.iref	srefIxVBasetype	irefRefWznmCRelation	irefSupRefWznmMRelation	
 56	j	0	0	void	TblWdbeMCoreversion		TblWdbeJMCoreversionState				pref
 57	u1nsub	0	50	sub	TblWdbeMModule	SbsWdbeBMModuleMtp	TblWdbeMFile			mtp
 58	u1nsub	0	50	sub	TblWdbeMVersion		TblWdbeMFile			ver
+59	u1nsub	0	82	sub	TblWdbeMCommand		TblWdbeMVector			cmd
 60	a1n	0	0	void	TblWdbeMSignal		TblWdbeMCommand			ivr
 	ImeIAMRelationTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
 	fromsngfull	enus	invocation request signal
@@ -3212,13 +3217,7 @@ ImeIMRelation.iref	srefIxVBasetype	irefRefWznmCRelation	irefSupRefWznmMRelation	
 	ImeIAMRelationTitle.end
 196	mn	0	0	void	TblWdbeMCdc		TblWdbeMSignal		TblWdbeRMCdcMSignal
 197	_1n	0	196	from1n	TblWdbeMCdc		TblWdbeRMCdcMSignal
-	ImeIAMRelationTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
-	toplfull	enus	invoking controllers
-	ImeIAMRelationTitle.end
 198	_1n	0	196	to1n	TblWdbeMSignal		TblWdbeRMCdcMSignal
-	ImeIAMRelationTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
-	toplfull	enus	invoked commands
-	ImeIAMRelationTitle.end
 199	_1n	0	0	void	TblWdbeMComponent		TblWdbeMRelease				affil
 ImeIMRelation.end
 ImeIMStub.srefIxVBasetype	srefRefWznmMTable	srefRefWznmMSubset	sref	Hierarch	srefRefWznmMTablecol	Localized	Example
@@ -3236,7 +3235,7 @@ cust	TblWdbeMController		StubWdbeCtrStd	false		false	acq
 cust	TblWdbeMError		StubWdbeErrStd	false		false	bufxferr
 cust	TblWdbeMFamily		StubWdbeFamStd	false		false	Microchip PIC12
 tco	TblWdbeMFile		StubWdbeFilStd	false	Filename	false	customers.xlsx
-cust	TblWdbeMFsm		StubWdbeFsmStd	false		false	op
+cust	TblWdbeMFsm		StubWdbeFsmStd	false		false	op (mclk)
 tco	TblWdbeMFsmstate		StubWdbeFstStd	false	sref	false	waitStrbA
 tco	TblWdbeMGeneric		StubWdbeGenStd	false	sref	false	fMclk
 tco	TblWdbeMImbuf		StubWdbeImbStd	false	Fullsref	false	pvwabufCamacqToHostif
@@ -3253,7 +3252,7 @@ cust	TblWdbeMModule	SbsWdbeBMModuleMtp	StubWdbeMtpStd	false		false	spifwd_v1_0 f
 tco	TblWdbeMPeripheral		StubWdbePphStd	false	sref	false	spi1
 cust	TblWdbeMPin		StubWdbePinStd	false		false	mclkn (bank3, P23)
 tco	TblWdbeMPipeline		StubWdbePplStd	false	sref	false	corner
-tco	TblWdbeMProcess		StubWdbePrcStd	false	sref	false	op
+cust	TblWdbeMProcess		StubWdbePrcStd	false		false	op (mclk)
 tco	TblWdbeMProject		StubWdbePrjShort	false	Short	false	idhw
 tco	TblWdbeMProject		StubWdbePrjStd	false	Title	false	ICARUSDetectorHardwareControl
 cust	TblWdbeMPerson		StubWdbePrsStd	false		false	Franz Kuntz

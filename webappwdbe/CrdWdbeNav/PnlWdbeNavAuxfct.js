@@ -164,9 +164,11 @@ function handleButCrdopenClick(ctlsref) {
 function mergeDpchEngData(dom) {
 	var mask = [];
 
+	// IP mergeDpchEngData --- BEGIN
 	if (updateSrcblock(dom, "DpchEngWdbeNavAuxfctData", "StatAppWdbeNavAuxfct", srcdoc)) mask.push("statapp");
 	if (updateSrcblock(dom, "DpchEngWdbeNavAuxfctData", "StatShrWdbeNavAuxfct", srcdoc)) mask.push("statshr");
 	if (updateSrcblock(dom, "DpchEngWdbeNavAuxfctData", "TagWdbeNavAuxfct", srcdoc)) mask.push("tag");
+	// IP mergeDpchEngData --- END
 
 	return mask;
 };

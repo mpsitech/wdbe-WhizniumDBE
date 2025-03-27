@@ -88,6 +88,7 @@ void WdbeMtpWrfpgaGpio_Easy_v1_0::writeMdlVhd(
 		outfile << "-- IP impl.op.init.invConfig --- IBEGIN" << endl;
 		outfile << "\t\t\t\t\tbitsDir_sig <= (bitsDir_sig and not configMask) or (configMask and configOutNotIn);" << endl;
 		outfile << "\t\t\t\t\tackInvConfig_sig <= '1';" << endl;
+		if (cmdSet) outfile << "\t\t\t\t\tackInvSet_sig <= '0';" << endl;
 		outfile << "-- IP impl.op.init.invConfig --- IEND" << endl;
 	};
 
@@ -95,6 +96,7 @@ void WdbeMtpWrfpgaGpio_Easy_v1_0::writeMdlVhd(
 		// --- impl.op.init.invSet
 		outfile << "-- IP impl.op.init.invSet --- IBEGIN" << endl;
 		outfile << "\t\t\t\t\tbitsOut_sig <= (bitsOut_sig and not setMask) or (setMask and setBits);" << endl;
+		if (cmdConfig) outfile << "\t\t\t\t\tackInvConfig_sig <= '0';" << endl;
 		outfile << "\t\t\t\t\tackInvSet_sig <= '1';" << endl;
 		outfile << "-- IP impl.op.init.invSet --- IEND" << endl;
 	};

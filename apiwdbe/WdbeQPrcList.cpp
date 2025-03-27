@@ -22,11 +22,12 @@ WdbeQPrcList::WdbeQPrcList(
 			, const string sref
 			, const string stubRefWdbeMModule
 			, const string yesnoFalling
-		) {
-	this->jnum = jnum;
-	this->sref = sref;
-	this->stubRefWdbeMModule = stubRefWdbeMModule;
-	this->yesnoFalling = yesnoFalling;
+		) :
+			jnum(jnum)
+			, sref(sref)
+			, stubRefWdbeMModule(stubRefWdbeMModule)
+			, yesnoFalling(yesnoFalling)
+		{
 };
 
 bool WdbeQPrcList::readXML(

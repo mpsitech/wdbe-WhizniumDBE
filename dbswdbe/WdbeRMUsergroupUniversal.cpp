@@ -22,13 +22,13 @@ WdbeRMUsergroupUniversal::WdbeRMUsergroupUniversal(
 			, const uint unvIxWdbeVMaintable
 			, const ubigint unvUref
 			, const uint ixWdbeVRecaccess
-		) {
-
-	this->ref = ref;
-	this->refWdbeMUsergroup = refWdbeMUsergroup;
-	this->unvIxWdbeVMaintable = unvIxWdbeVMaintable;
-	this->unvUref = unvUref;
-	this->ixWdbeVRecaccess = ixWdbeVRecaccess;
+		) :
+			ref(ref)
+			, refWdbeMUsergroup(refWdbeMUsergroup)
+			, unvIxWdbeVMaintable(unvIxWdbeVMaintable)
+			, unvUref(unvUref)
+			, ixWdbeVRecaccess(ixWdbeVRecaccess)
+		{
 };
 
 bool WdbeRMUsergroupUniversal::operator==(

@@ -45,9 +45,8 @@ PnlWdbePphRec::ContInf::ContInf(
 			const string& TxtRef
 		) :
 			Block()
+			, TxtRef(TxtRef)
 		{
-	this->TxtRef = TxtRef;
-
 	mask = {TXTREF};
 };
 
@@ -108,11 +107,10 @@ PnlWdbePphRec::StatApp::StatApp(
 			, const bool initdoneMNModule
 		) :
 			Block()
+			, initdoneDetail(initdoneDetail)
+			, initdoneAPar(initdoneAPar)
+			, initdoneMNModule(initdoneMNModule)
 		{
-	this->initdoneDetail = initdoneDetail;
-	this->initdoneAPar = initdoneAPar;
-	this->initdoneMNModule = initdoneMNModule;
-
 	mask = {INITDONEDETAIL, INITDONEAPAR, INITDONEMNMODULE};
 };
 
@@ -179,13 +177,12 @@ PnlWdbePphRec::StatShr::StatShr(
 			, const bool ButRegularizeActive
 		) :
 			Block()
+			, ixWdbeVExpstate(ixWdbeVExpstate)
+			, scrJrefDetail(scrJrefDetail)
+			, scrJrefAPar(scrJrefAPar)
+			, scrJrefMNModule(scrJrefMNModule)
+			, ButRegularizeActive(ButRegularizeActive)
 		{
-	this->ixWdbeVExpstate = ixWdbeVExpstate;
-	this->scrJrefDetail = scrJrefDetail;
-	this->scrJrefAPar = scrJrefAPar;
-	this->scrJrefMNModule = scrJrefMNModule;
-	this->ButRegularizeActive = ButRegularizeActive;
-
 	mask = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFAPAR, SCRJREFMNMODULE, BUTREGULARIZEACTIVE};
 };
 
@@ -257,9 +254,8 @@ PnlWdbePphRec::Tag::Tag(
 			const string& Cpt
 		) :
 			Block()
+			, Cpt(Cpt)
 		{
-	this->Cpt = Cpt;
-
 	mask = {CPT};
 };
 
@@ -296,11 +292,11 @@ PnlWdbePphRec::DpchAppDo::DpchAppDo(
 			, const set<uint>& mask
 		) :
 			DpchAppWdbe(VecWdbeVDpch::DPCHAPPWDBEPPHRECDO, scrJref)
+			, ixVDo(ixVDo)
 		{
 	if (find(mask, ALL)) this->mask = {SCRJREF, IXVDO};
 	else this->mask = mask;
 
-	this->ixVDo = ixVDo;
 };
 
 string PnlWdbePphRec::DpchAppDo::getSrefsMask() {

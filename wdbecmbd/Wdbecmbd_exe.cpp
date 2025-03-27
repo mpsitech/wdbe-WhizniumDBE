@@ -38,8 +38,9 @@ Wdbecmbd::Wdbecmbd(
 	xchg = new XchgWdbecmbd();
 	xchg->exedir = exedir;
 
-	// 2. load preferences and SSL key/certificate
+	// 2. load then store preferences, load SSL key/certificate
 	loadPref();
+	storePref();
 	if (xchg->stgwdbeappsrv.https) loadKeycert();
 
 	// 3. connect to database
@@ -138,10 +139,7 @@ Wdbecmbd::~Wdbecmbd() {
 
 	xchg->shrdatJobprc.term(xchg);
 
-	// 8. store preferences
-	storePref();
-
-	// 9. delete exchange object
+	// 8. delete exchange object
 	delete xchg;
 };
 
@@ -154,8 +152,8 @@ void Wdbecmbd::loadPref() {
 	parseFile(xchg->exedir + "/PrefWdbecmbd.xml", &doc, &docctx);
 
 	if (checkUclcXPaths(docctx, basexpath, "/", "PrefWdbecmbd")) {
-		xchg->stgwdbeappearance.readXML(docctx, basexpath, true);
 		xchg->stgwdbeappsrv.readXML(docctx, basexpath, true);
+		xchg->stgwdbebehavior.readXML(docctx, basexpath, true);
 		xchg->stgwdbecmbd.readXML(docctx, basexpath, true);
 		xchg->stgwdbedatabase.readXML(docctx, basexpath, true);
 		xchg->stgwdbemonitor.readXML(docctx, basexpath, true);
@@ -187,9 +185,11 @@ void Wdbecmbd::storePref() {
 	xmlTextWriter* wr = NULL;
 
 	startwriteFile(xchg->exedir + "/PrefWdbecmbd.xml", &wr);
+	xmlTextWriterSetIndent(wr, 1);
+	xmlTextWriterSetIndentString(wr, BAD_CAST "\t");
 	xmlTextWriterStartElement(wr, BAD_CAST "PrefWdbecmbd");
-		xchg->stgwdbeappearance.writeXML(wr);
 		xchg->stgwdbeappsrv.writeXML(wr);
+		xchg->stgwdbebehavior.writeXML(wr);
 		xchg->stgwdbecmbd.writeXML(wr);
 		xchg->stgwdbedatabase.writeXML(wr);
 		xchg->stgwdbemonitor.writeXML(wr);
@@ -494,7 +494,7 @@ int main(
 
 	try {
 		// welcome message
-		cout << "Welcome to WhizniumDBE v1.1.41!" << endl;
+		cout << "Welcome to WhizniumDBE v1.1.44!" << endl;
 
 		// calls wdbecmbd.init()
 		wdbecmbd = new Wdbecmbd(exedir, clearAll, startMon);

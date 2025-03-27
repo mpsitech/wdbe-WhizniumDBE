@@ -20,9 +20,10 @@ using namespace Xmlio;
 WdbeQCpr1NCoreversion::WdbeQCpr1NCoreversion(
 			const uint jnum
 			, const string stubRef
-		) {
-	this->jnum = jnum;
-	this->stubRef = stubRef;
+		) :
+			jnum(jnum)
+			, stubRef(stubRef)
+		{
 };
 
 bool WdbeQCpr1NCoreversion::readXML(

@@ -26,15 +26,16 @@ WdbeQVitList::WdbeQVitList(
 			, const string Title
 			, const ubigint vecRefWdbeMVector
 			, const string stubVecRefWdbeMVector
-		) {
-	this->qref = qref;
-	this->jref = jref;
-	this->jnum = jnum;
-	this->ref = ref;
-	this->sref = sref;
-	this->Title = Title;
-	this->vecRefWdbeMVector = vecRefWdbeMVector;
-	this->stubVecRefWdbeMVector = stubVecRefWdbeMVector;
+		) :
+			qref(qref)
+			, jref(jref)
+			, jnum(jnum)
+			, ref(ref)
+			, sref(sref)
+			, Title(Title)
+			, vecRefWdbeMVector(vecRefWdbeMVector)
+			, stubVecRefWdbeMVector(stubVecRefWdbeMVector)
+		{
 };
 
 void WdbeQVitList::writeJSON(

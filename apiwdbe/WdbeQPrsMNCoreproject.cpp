@@ -24,13 +24,14 @@ WdbeQPrsMNCoreproject::WdbeQPrsMNCoreproject(
 			, const string ftmX1Stopd
 			, const string srefKFunction
 			, const string titSrefKFunction
-		) {
-	this->jnum = jnum;
-	this->stubMref = stubMref;
-	this->ftmX1Startd = ftmX1Startd;
-	this->ftmX1Stopd = ftmX1Stopd;
-	this->srefKFunction = srefKFunction;
-	this->titSrefKFunction = titSrefKFunction;
+		) :
+			jnum(jnum)
+			, stubMref(stubMref)
+			, ftmX1Startd(ftmX1Startd)
+			, ftmX1Stopd(ftmX1Stopd)
+			, srefKFunction(srefKFunction)
+			, titSrefKFunction(titSrefKFunction)
+		{
 };
 
 bool WdbeQPrsMNCoreproject::readXML(

@@ -453,19 +453,19 @@ void PnlWdbeModDetail::handleDpchAppDoButHkuViewClick(
 	ubigint refVer = xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFVER, jref);
 
 	if (statshr.ButHkuViewAvail && statshr.ButHkuViewActive) {
-		if (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCUNT, jref)) if (recMdl.hkIxVTbl == VecWdbeVMModuleHkTbl::UNT) if (refVer != 0) {
-			sref = "CrdWdbeUnt";
-			xchg->triggerIxRefSrefIntvalToRefCall(dbswdbe, VecWdbeVCall::CALLWDBECRDOPEN, jref, VecWdbeVPreset::PREWDBEREFVER, refVer, sref, recMdl.hkUref, jrefNew);
+		if (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCCVR, jref)) if (recMdl.hkIxVTbl == VecWdbeVMModuleHkTbl::CVR) {
+			sref = "CrdWdbeCvr";
+			xchg->triggerIxRefSrefIntvalToRefCall(dbswdbe, VecWdbeVCall::CALLWDBECRDOPEN, jref, 0, 0, sref, recMdl.hkUref, jrefNew);
+		};
+		if (jrefNew == 0) {
+			if (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCUNT, jref)) if (recMdl.hkIxVTbl == VecWdbeVMModuleHkTbl::UNT) if (refVer != 0) {
+				sref = "CrdWdbeUnt";
+				xchg->triggerIxRefSrefIntvalToRefCall(dbswdbe, VecWdbeVCall::CALLWDBECRDOPEN, jref, VecWdbeVPreset::PREWDBEREFVER, refVer, sref, recMdl.hkUref, jrefNew);
+			};
 		};
 		if (jrefNew == 0) {
 			if (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCSIL, jref)) if (recMdl.hkIxVTbl == VecWdbeVMModuleHkTbl::UNT) if ((dbswdbe->getIxWSubsetByRefWdbeMUnit(recMdl.hkUref) & VecWdbeWMUnitSubset::SBSWDBEBMUNITSIL) != 0) {
 				sref = "CrdWdbeSil";
-				xchg->triggerIxRefSrefIntvalToRefCall(dbswdbe, VecWdbeVCall::CALLWDBECRDOPEN, jref, 0, 0, sref, recMdl.hkUref, jrefNew);
-			};
-		};
-		if (jrefNew == 0) {
-			if (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCCVR, jref)) if (recMdl.hkIxVTbl == VecWdbeVMModuleHkTbl::CVR) {
-				sref = "CrdWdbeCvr";
 				xchg->triggerIxRefSrefIntvalToRefCall(dbswdbe, VecWdbeVCall::CALLWDBECRDOPEN, jref, 0, 0, sref, recMdl.hkUref, jrefNew);
 			};
 		};

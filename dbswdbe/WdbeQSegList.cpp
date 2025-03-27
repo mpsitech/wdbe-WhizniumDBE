@@ -30,19 +30,20 @@ WdbeQSegList::WdbeQSegList(
 			, const string Infmt
 			, const string Outfmt
 			, const usmallint Latency
-		) {
-	this->qref = qref;
-	this->jref = jref;
-	this->jnum = jnum;
-	this->ref = ref;
-	this->sref = sref;
-	this->pplRefWdbeMPipeline = pplRefWdbeMPipeline;
-	this->stubPplRefWdbeMPipeline = stubPplRefWdbeMPipeline;
-	this->supRefWdbeMSegment = supRefWdbeMSegment;
-	this->stubSupRefWdbeMSegment = stubSupRefWdbeMSegment;
-	this->Infmt = Infmt;
-	this->Outfmt = Outfmt;
-	this->Latency = Latency;
+		) :
+			qref(qref)
+			, jref(jref)
+			, jnum(jnum)
+			, ref(ref)
+			, sref(sref)
+			, pplRefWdbeMPipeline(pplRefWdbeMPipeline)
+			, stubPplRefWdbeMPipeline(stubPplRefWdbeMPipeline)
+			, supRefWdbeMSegment(supRefWdbeMSegment)
+			, stubSupRefWdbeMSegment(stubSupRefWdbeMSegment)
+			, Infmt(Infmt)
+			, Outfmt(Outfmt)
+			, Latency(Latency)
+		{
 };
 
 void WdbeQSegList::writeJSON(

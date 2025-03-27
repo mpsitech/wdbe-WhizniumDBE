@@ -23,14 +23,14 @@ WdbeRMPersonMProject::WdbeRMPersonMProject(
 			, const ubigint refWdbeMPerson
 			, const ubigint refWdbeMProject
 			, const string srefKFunction
-		) {
-
-	this->ref = ref;
-	this->x1Startd = x1Startd;
-	this->x1Stopd = x1Stopd;
-	this->refWdbeMPerson = refWdbeMPerson;
-	this->refWdbeMProject = refWdbeMProject;
-	this->srefKFunction = srefKFunction;
+		) :
+			ref(ref)
+			, x1Startd(x1Startd)
+			, x1Stopd(x1Stopd)
+			, refWdbeMPerson(refWdbeMPerson)
+			, refWdbeMProject(refWdbeMProject)
+			, srefKFunction(srefKFunction)
+		{
 };
 
 bool WdbeRMPersonMProject::operator==(

@@ -23,8 +23,8 @@ DpchInvWdbeCplmstCtrEctrHostifEhostif::DpchInvWdbeCplmstCtrEctrHostifEhostif(
 			, const ubigint refWdbeMModule
 		) :
 			DpchInvWdbe(VecWdbeVDpch::DPCHINVWDBECPLMSTCTRECTRHOSTIFEHOSTIF, oref, jref)
+			, refWdbeMModule(refWdbeMModule)
 		{
-	this->refWdbeMModule = refWdbeMModule;
 };
 
 void DpchInvWdbeCplmstCtrEctrHostifEhostif::readXML(
@@ -69,8 +69,8 @@ DpchInvWdbeCplmstImbuf::DpchInvWdbeCplmstImbuf(
 			, const ubigint refWdbeMModule
 		) :
 			DpchInvWdbe(VecWdbeVDpch::DPCHINVWDBECPLMSTIMBUF, oref, jref)
+			, refWdbeMModule(refWdbeMModule)
 		{
-	this->refWdbeMModule = refWdbeMModule;
 };
 
 void DpchInvWdbeCplmstImbuf::readXML(
@@ -117,8 +117,8 @@ DpchRetWdbeCplmstImbuf::DpchRetWdbeCplmstImbuf(
 			, const string& logfile
 		) :
 			DpchRetWdbe(VecWdbeVDpch::DPCHRETWDBECPLMSTIMBUF, scrOref, scrJref, ixOpVOpres, pdone)
+			, logfile(logfile)
 		{
-	this->logfile = logfile;
 };
 
 void DpchRetWdbeCplmstImbuf::readXML(
@@ -178,8 +178,8 @@ DpchInvWdbeCplmstTplcpy::DpchInvWdbeCplmstTplcpy(
 			, const ubigint refWdbeMModule
 		) :
 			DpchInvWdbe(VecWdbeVDpch::DPCHINVWDBECPLMSTTPLCPY, oref, jref)
+			, refWdbeMModule(refWdbeMModule)
 		{
-	this->refWdbeMModule = refWdbeMModule;
 };
 
 void DpchInvWdbeCplmstTplcpy::readXML(
@@ -226,8 +226,8 @@ DpchRetWdbeCplmstTplcpy::DpchRetWdbeCplmstTplcpy(
 			, const string& logfile
 		) :
 			DpchRetWdbe(VecWdbeVDpch::DPCHRETWDBECPLMSTTPLCPY, scrOref, scrJref, ixOpVOpres, pdone)
+			, logfile(logfile)
 		{
-	this->logfile = logfile;
 };
 
 void DpchRetWdbeCplmstTplcpy::readXML(
@@ -287,8 +287,8 @@ DpchInvWdbeCplmstUnt::DpchInvWdbeCplmstUnt(
 			, const ubigint refWdbeMUnit
 		) :
 			DpchInvWdbe(VecWdbeVDpch::DPCHINVWDBECPLMSTUNT, oref, jref)
+			, refWdbeMUnit(refWdbeMUnit)
 		{
-	this->refWdbeMUnit = refWdbeMUnit;
 };
 
 void DpchInvWdbeCplmstUnt::readXML(

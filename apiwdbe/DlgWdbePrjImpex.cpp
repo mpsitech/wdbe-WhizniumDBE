@@ -141,9 +141,8 @@ DlgWdbePrjImpex::ContIac::ContIac(
 			const uint numFDse
 		) :
 			Block()
+			, numFDse(numFDse)
 		{
-	this->numFDse = numFDse;
-
 	mask = {NUMFDSE};
 };
 
@@ -218,9 +217,8 @@ DlgWdbePrjImpex::ContInf::ContInf(
 			const uint numFSge
 		) :
 			Block()
+			, numFSge(numFSge)
 		{
-	this->numFSge = numFSge;
-
 	mask = {NUMFSGE};
 };
 
@@ -279,9 +277,8 @@ DlgWdbePrjImpex::ContInfImp::ContInfImp(
 			const string& TxtPrg
 		) :
 			Block()
+			, TxtPrg(TxtPrg)
 		{
-	this->TxtPrg = TxtPrg;
-
 	mask = {TXTPRG};
 };
 
@@ -340,9 +337,8 @@ DlgWdbePrjImpex::ContInfLfi::ContInfLfi(
 			const string& Dld
 		) :
 			Block()
+			, Dld(Dld)
 		{
-	this->Dld = Dld;
-
 	mask = {DLD};
 };
 
@@ -402,10 +398,9 @@ DlgWdbePrjImpex::StatApp::StatApp(
 			, const string& shortMenu
 		) :
 			Block()
+			, initdone(initdone)
+			, shortMenu(shortMenu)
 		{
-	this->initdone = initdone;
-	this->shortMenu = shortMenu;
-
 	mask = {INITDONE, SHORTMENU};
 };
 
@@ -466,9 +461,8 @@ DlgWdbePrjImpex::StatShr::StatShr(
 			const bool ButDneActive
 		) :
 			Block()
+			, ButDneActive(ButDneActive)
 		{
-	this->ButDneActive = ButDneActive;
-
 	mask = {BUTDNEACTIVE};
 };
 
@@ -527,9 +521,8 @@ DlgWdbePrjImpex::StatShrIfi::StatShrIfi(
 			const bool UldActive
 		) :
 			Block()
+			, UldActive(UldActive)
 		{
-	this->UldActive = UldActive;
-
 	mask = {ULDACTIVE};
 };
 
@@ -590,11 +583,10 @@ DlgWdbePrjImpex::StatShrImp::StatShrImp(
 			, const bool ButStoActive
 		) :
 			Block()
+			, ButAutActive(ButAutActive)
+			, ButRunActive(ButRunActive)
+			, ButStoActive(ButStoActive)
 		{
-	this->ButAutActive = ButAutActive;
-	this->ButRunActive = ButRunActive;
-	this->ButStoActive = ButStoActive;
-
 	mask = {BUTAUTACTIVE, BUTRUNACTIVE, BUTSTOACTIVE};
 };
 
@@ -657,9 +649,8 @@ DlgWdbePrjImpex::StatShrLfi::StatShrLfi(
 			const bool DldActive
 		) :
 			Block()
+			, DldActive(DldActive)
 		{
-	this->DldActive = DldActive;
-
 	mask = {DLDACTIVE};
 };
 
@@ -719,10 +710,9 @@ DlgWdbePrjImpex::Tag::Tag(
 			, const string& ButDne
 		) :
 			Block()
+			, Cpt(Cpt)
+			, ButDne(ButDne)
 		{
-	this->Cpt = Cpt;
-	this->ButDne = ButDne;
-
 	mask = {CPT, BUTDNE};
 };
 
@@ -759,10 +749,9 @@ DlgWdbePrjImpex::TagIfi::TagIfi(
 			, const string& Cpt
 		) :
 			Block()
+			, Uld(Uld)
+			, Cpt(Cpt)
 		{
-	this->Uld = Uld;
-	this->Cpt = Cpt;
-
 	mask = {ULD, CPT};
 };
 
@@ -801,12 +790,11 @@ DlgWdbePrjImpex::TagImp::TagImp(
 			, const string& ButSto
 		) :
 			Block()
+			, CptPrg(CptPrg)
+			, ButAut(ButAut)
+			, ButRun(ButRun)
+			, ButSto(ButSto)
 		{
-	this->CptPrg = CptPrg;
-	this->ButAut = ButAut;
-	this->ButRun = ButRun;
-	this->ButSto = ButSto;
-
 	mask = {CPTPRG, BUTAUT, BUTRUN, BUTSTO};
 };
 
@@ -844,9 +832,8 @@ DlgWdbePrjImpex::TagLfi::TagLfi(
 			const string& Dld
 		) :
 			Block()
+			, Dld(Dld)
 		{
-	this->Dld = Dld;
-
 	mask = {DLD};
 };
 
@@ -923,12 +910,12 @@ DlgWdbePrjImpex::DpchAppDo::DpchAppDo(
 			, const set<uint>& mask
 		) :
 			DpchAppWdbe(VecWdbeVDpch::DPCHAPPDLGWDBEPRJIMPEXDO, scrJref)
+			, ixVDo(ixVDo)
+			, ixVDoImp(ixVDoImp)
 		{
 	if (find(mask, ALL)) this->mask = {SCRJREF, IXVDO, IXVDOIMP};
 	else this->mask = mask;
 
-	this->ixVDo = ixVDo;
-	this->ixVDoImp = ixVDoImp;
 };
 
 string DlgWdbePrjImpex::DpchAppDo::getSrefsMask() {

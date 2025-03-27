@@ -286,28 +286,27 @@ public class PnlWdbeBnkDetail {
 	  */
 	public class StatShr extends Block {
 
-		public static final int TXFVSTVALID = 1;
-		public static final int BUTSAVEAVAIL = 2;
-		public static final int BUTSAVEACTIVE = 3;
-		public static final int TXTSRFACTIVE = 4;
-		public static final int TXTUNTACTIVE = 5;
-		public static final int BUTUNTVIEWAVAIL = 6;
-		public static final int BUTUNTVIEWACTIVE = 7;
-		public static final int PUPVSTACTIVE = 8;
+		public static final int BUTSAVEAVAIL = 1;
+		public static final int BUTSAVEACTIVE = 2;
+		public static final int TXTSRFACTIVE = 3;
+		public static final int TXTUNTACTIVE = 4;
+		public static final int BUTUNTVIEWAVAIL = 5;
+		public static final int BUTUNTVIEWACTIVE = 6;
+		public static final int PUPVSTACTIVE = 7;
+		public static final int TXFVSTVALID = 8;
 		public static final int BUTVSTEDITAVAIL = 9;
 
 		public StatShr(
-					boolean TxfVstValid
-					, boolean ButSaveAvail
+					boolean ButSaveAvail
 					, boolean ButSaveActive
 					, boolean TxtSrfActive
 					, boolean TxtUntActive
 					, boolean ButUntViewAvail
 					, boolean ButUntViewActive
 					, boolean PupVstActive
+					, boolean TxfVstValid
 					, boolean ButVstEditAvail
 				) {
-			this.TxfVstValid = TxfVstValid;
 			this.ButSaveAvail = ButSaveAvail;
 			this.ButSaveActive = ButSaveActive;
 			this.TxtSrfActive = TxtSrfActive;
@@ -315,12 +314,12 @@ public class PnlWdbeBnkDetail {
 			this.ButUntViewAvail = ButUntViewAvail;
 			this.ButUntViewActive = ButUntViewActive;
 			this.PupVstActive = PupVstActive;
+			this.TxfVstValid = TxfVstValid;
 			this.ButVstEditAvail = ButVstEditAvail;
 
-			mask = new HashSet<Integer>(Arrays.asList(TXFVSTVALID, BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXTUNTACTIVE, BUTUNTVIEWAVAIL, BUTUNTVIEWACTIVE, PUPVSTACTIVE, BUTVSTEDITAVAIL));
+			mask = new HashSet<Integer>(Arrays.asList(BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXTUNTACTIVE, BUTUNTVIEWAVAIL, BUTUNTVIEWACTIVE, PUPVSTACTIVE, TXFVSTVALID, BUTVSTEDITAVAIL));
 		};
 
-		public boolean TxfVstValid;
 		public boolean ButSaveAvail;
 		public boolean ButSaveActive;
 		public boolean TxtSrfActive;
@@ -328,6 +327,7 @@ public class PnlWdbeBnkDetail {
 		public boolean ButUntViewAvail;
 		public boolean ButUntViewActive;
 		public boolean PupVstActive;
+		public boolean TxfVstValid;
 		public boolean ButVstEditAvail;
 
 		public boolean readXML(
@@ -343,7 +343,6 @@ public class PnlWdbeBnkDetail {
 			String itemtag = "StatitemShrWdbeBnkDetail";
 
 			if (Xmlio.checkXPath(doc, basexpath)) {
-				TxfVstValid = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxfVstValid", mask, TXFVSTVALID);
 				ButSaveAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButSaveAvail", mask, BUTSAVEAVAIL);
 				ButSaveActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButSaveActive", mask, BUTSAVEACTIVE);
 				TxtSrfActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxtSrfActive", mask, TXTSRFACTIVE);
@@ -351,6 +350,7 @@ public class PnlWdbeBnkDetail {
 				ButUntViewAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButUntViewAvail", mask, BUTUNTVIEWAVAIL);
 				ButUntViewActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButUntViewActive", mask, BUTUNTVIEWACTIVE);
 				PupVstActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "PupVstActive", mask, PUPVSTACTIVE);
+				TxfVstValid = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxfVstValid", mask, TXFVSTVALID);
 				ButVstEditAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButVstEditAvail", mask, BUTVSTEDITAVAIL);
 
 				return true;
@@ -364,7 +364,6 @@ public class PnlWdbeBnkDetail {
 				) {
 			HashSet<Integer> items = new HashSet<Integer>();
 
-			if (TxfVstValid == comp.TxfVstValid) items.add(TXFVSTVALID);
 			if (ButSaveAvail == comp.ButSaveAvail) items.add(BUTSAVEAVAIL);
 			if (ButSaveActive == comp.ButSaveActive) items.add(BUTSAVEACTIVE);
 			if (TxtSrfActive == comp.TxtSrfActive) items.add(TXTSRFACTIVE);
@@ -372,6 +371,7 @@ public class PnlWdbeBnkDetail {
 			if (ButUntViewAvail == comp.ButUntViewAvail) items.add(BUTUNTVIEWAVAIL);
 			if (ButUntViewActive == comp.ButUntViewActive) items.add(BUTUNTVIEWACTIVE);
 			if (PupVstActive == comp.PupVstActive) items.add(PUPVSTACTIVE);
+			if (TxfVstValid == comp.TxfVstValid) items.add(TXFVSTVALID);
 			if (ButVstEditAvail == comp.ButVstEditAvail) items.add(BUTVSTEDITAVAIL);
 
 			return(items);
@@ -385,7 +385,7 @@ public class PnlWdbeBnkDetail {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(TXFVSTVALID, BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXTUNTACTIVE, BUTUNTVIEWAVAIL, BUTUNTVIEWACTIVE, PUPVSTACTIVE, BUTVSTEDITAVAIL));
+			diffitems = new HashSet<Integer>(Arrays.asList(BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXTUNTACTIVE, BUTUNTVIEWAVAIL, BUTUNTVIEWACTIVE, PUPVSTACTIVE, TXFVSTVALID, BUTVSTEDITAVAIL));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);

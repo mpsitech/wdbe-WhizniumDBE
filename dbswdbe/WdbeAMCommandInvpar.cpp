@@ -27,18 +27,18 @@ WdbeAMCommandInvpar::WdbeAMCommandInvpar(
 			, const string Defval
 			, const ubigint refWdbeMVectoritem
 			, const string Comment
-		) {
-
-	this->ref = ref;
-	this->cmdRefWdbeMCommand = cmdRefWdbeMCommand;
-	this->cmdNum = cmdNum;
-	this->sref = sref;
-	this->ixWdbeVPartype = ixWdbeVPartype;
-	this->refWdbeMVector = refWdbeMVector;
-	this->Length = Length;
-	this->Defval = Defval;
-	this->refWdbeMVectoritem = refWdbeMVectoritem;
-	this->Comment = Comment;
+		) :
+			ref(ref)
+			, cmdRefWdbeMCommand(cmdRefWdbeMCommand)
+			, cmdNum(cmdNum)
+			, sref(sref)
+			, ixWdbeVPartype(ixWdbeVPartype)
+			, refWdbeMVector(refWdbeMVector)
+			, Length(Length)
+			, Defval(Defval)
+			, refWdbeMVectoritem(refWdbeMVectoritem)
+			, Comment(Comment)
+		{
 };
 
 bool WdbeAMCommandInvpar::operator==(

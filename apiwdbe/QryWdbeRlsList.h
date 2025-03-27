@@ -28,8 +28,8 @@ namespace QryWdbeRlsList {
 	class VecVOrd {
 
 	public:
-		static const Sbecore::uint CMP = 1;
-		static const Sbecore::uint MCH = 2;
+		static const Sbecore::uint MCH = 1;
+		static const Sbecore::uint CMP = 2;
 		static const Sbecore::uint SRF = 3;
 
 		static Sbecore::uint getIx(const std::string& sref);

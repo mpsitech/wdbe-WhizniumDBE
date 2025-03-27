@@ -34,23 +34,23 @@ WdbeMVariable::WdbeMVariable(
 			, const string Offval
 			, const bool Defon
 			, const string Comment
-		) {
-
-	this->ref = ref;
-	this->refWdbeCVariable = refWdbeCVariable;
-	this->refIxVTbl = refIxVTbl;
-	this->refUref = refUref;
-	this->refNum = refNum;
-	this->sref = sref;
-	this->Const = Const;
-	this->Falling = Falling;
-	this->srefWdbeKHdltype = srefWdbeKHdltype;
-	this->Width = Width;
-	this->Minmax = Minmax;
-	this->Onval = Onval;
-	this->Offval = Offval;
-	this->Defon = Defon;
-	this->Comment = Comment;
+		) :
+			ref(ref)
+			, refWdbeCVariable(refWdbeCVariable)
+			, refIxVTbl(refIxVTbl)
+			, refUref(refUref)
+			, refNum(refNum)
+			, sref(sref)
+			, Const(Const)
+			, Falling(Falling)
+			, srefWdbeKHdltype(srefWdbeKHdltype)
+			, Width(Width)
+			, Minmax(Minmax)
+			, Onval(Onval)
+			, Offval(Offval)
+			, Defon(Defon)
+			, Comment(Comment)
+		{
 };
 
 bool WdbeMVariable::operator==(

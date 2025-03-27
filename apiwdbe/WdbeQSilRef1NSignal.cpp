@@ -20,9 +20,10 @@ using namespace Xmlio;
 WdbeQSilRef1NSignal::WdbeQSilRef1NSignal(
 			const uint jnum
 			, const string stubRef
-		) {
-	this->jnum = jnum;
-	this->stubRef = stubRef;
+		) :
+			jnum(jnum)
+			, stubRef(stubRef)
+		{
 };
 
 bool WdbeQSilRef1NSignal::readXML(

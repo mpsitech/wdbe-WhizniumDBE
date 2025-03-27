@@ -15,8 +15,8 @@
 // IP include.cust --- INSERT
 
 #include "PnlWdbeRlsList.h"
-#include "PnlWdbeRlsRec.h"
 #include "PnlWdbeRlsHeadbar.h"
+#include "PnlWdbeRlsRec.h"
 #include "DlgWdbeRlsFinreptr.h"
 #include "DlgWdbeRlsStareptr.h"
 #include "DlgWdbeRlsWrite.h"
@@ -238,8 +238,8 @@ public:
 	Sbecore::Feed feedFSge;
 
 	PnlWdbeRlsList* pnllist;
-	PnlWdbeRlsRec* pnlrec;
 	PnlWdbeRlsHeadbar* pnlheadbar;
+	PnlWdbeRlsRec* pnlrec;
 	DlgWdbeRlsFinreptr* dlgfinreptr;
 	DlgWdbeRlsStareptr* dlgstareptr;
 	DlgWdbeRlsWrite* dlgwrite;
@@ -276,8 +276,8 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeReptrStart(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, const std::string& txtvalInv);
 	bool handleCallWdbeReptrStop(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbeReptrStart(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, const std::string& txtvalInv);
 	bool handleCallWdbeRefPreSet(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, const Sbecore::ubigint refInv);
 	bool handleCallWdbeStatChg(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 	bool handleCallWdbeDlgClose(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);

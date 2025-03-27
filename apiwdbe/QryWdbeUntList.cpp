@@ -26,8 +26,8 @@ uint QryWdbeUntList::VecVOrd::getIx(
 	if (s == "reu") return REU;
 	if (s == "ret") return RET;
 	if (s == "typ") return TYP;
-	if (s == "srf") return SRF;
 	if (s == "tit") return TIT;
+	if (s == "srf") return SRF;
 
 	return(0);
 };
@@ -39,8 +39,8 @@ string QryWdbeUntList::VecVOrd::getSref(
 	if (ix == REU) return("reu");
 	if (ix == RET) return("ret");
 	if (ix == TYP) return("typ");
-	if (ix == SRF) return("srf");
 	if (ix == TIT) return("tit");
+	if (ix == SRF) return("srf");
 
 	return("");
 };
@@ -56,12 +56,11 @@ QryWdbeUntList::StatApp::StatApp(
 			, const uint ndisp
 		) :
 			Block()
+			, firstcol(firstcol)
+			, jnumFirstdisp(jnumFirstdisp)
+			, ncol(ncol)
+			, ndisp(ndisp)
 		{
-	this->firstcol = firstcol;
-	this->jnumFirstdisp = jnumFirstdisp;
-	this->ncol = ncol;
-	this->ndisp = ndisp;
-
 	mask = {FIRSTCOL, JNUMFIRSTDISP, NCOL, NDISP};
 };
 
@@ -128,11 +127,10 @@ QryWdbeUntList::StatShr::StatShr(
 			, const uint nload
 		) :
 			Block()
+			, ntot(ntot)
+			, jnumFirstload(jnumFirstload)
+			, nload(nload)
 		{
-	this->ntot = ntot;
-	this->jnumFirstload = jnumFirstload;
-	this->nload = nload;
-
 	mask = {NTOT, JNUMFIRSTLOAD, NLOAD};
 };
 
@@ -197,11 +195,10 @@ QryWdbeUntList::StgIac::StgIac(
 			, const uint nload
 		) :
 			Block()
+			, jnum(jnum)
+			, jnumFirstload(jnumFirstload)
+			, nload(nload)
 		{
-	this->jnum = jnum;
-	this->jnumFirstload = jnumFirstload;
-	this->nload = nload;
-
 	mask = {JNUM, JNUMFIRSTLOAD, NLOAD};
 };
 

@@ -52,14 +52,13 @@ PnlWdbeCvrDetail::ContIac::ContIac(
 			, const vector<uint>& numsFLstSty
 		) :
 			Block()
+			, TxfMaj(TxfMaj)
+			, TxfMin(TxfMin)
+			, TxfSub(TxfSub)
+			, numFPupJst(numFPupJst)
+			, numFPupSte(numFPupSte)
+			, numsFLstSty(numsFLstSty)
 		{
-	this->TxfMaj = TxfMaj;
-	this->TxfMin = TxfMin;
-	this->TxfSub = TxfSub;
-	this->numFPupJst = numFPupJst;
-	this->numFPupSte = numFPupSte;
-	this->numsFLstSty = numsFLstSty;
-
 	mask = {TXFMAJ, TXFMIN, TXFSUB, NUMFPUPJST, NUMFPUPSTE, NUMSFLSTSTY};
 };
 
@@ -191,11 +190,10 @@ PnlWdbeCvrDetail::ContInf::ContInf(
 			, const string& TxtSty
 		) :
 			Block()
+			, TxtCpr(TxtCpr)
+			, TxtBcv(TxtBcv)
+			, TxtSty(TxtSty)
 		{
-	this->TxtCpr = TxtCpr;
-	this->TxtBcv = TxtBcv;
-	this->TxtSty = TxtSty;
-
 	mask = {TXTCPR, TXTBCV, TXTSTY};
 };
 
@@ -319,23 +317,22 @@ PnlWdbeCvrDetail::StatShr::StatShr(
 			, const bool LstStyActive
 		) :
 			Block()
+			, ButSaveAvail(ButSaveAvail)
+			, ButSaveActive(ButSaveActive)
+			, TxtCprActive(TxtCprActive)
+			, ButCprViewAvail(ButCprViewAvail)
+			, ButCprViewActive(ButCprViewActive)
+			, TxfMajActive(TxfMajActive)
+			, TxfMinActive(TxfMinActive)
+			, TxfSubActive(TxfSubActive)
+			, TxtBcvActive(TxtBcvActive)
+			, ButBcvViewAvail(ButBcvViewAvail)
+			, ButBcvViewActive(ButBcvViewActive)
+			, PupJstActive(PupJstActive)
+			, ButJstEditAvail(ButJstEditAvail)
+			, PupSteActive(PupSteActive)
+			, LstStyActive(LstStyActive)
 		{
-	this->ButSaveAvail = ButSaveAvail;
-	this->ButSaveActive = ButSaveActive;
-	this->TxtCprActive = TxtCprActive;
-	this->ButCprViewAvail = ButCprViewAvail;
-	this->ButCprViewActive = ButCprViewActive;
-	this->TxfMajActive = TxfMajActive;
-	this->TxfMinActive = TxfMinActive;
-	this->TxfSubActive = TxfSubActive;
-	this->TxtBcvActive = TxtBcvActive;
-	this->ButBcvViewAvail = ButBcvViewAvail;
-	this->ButBcvViewActive = ButBcvViewActive;
-	this->PupJstActive = PupJstActive;
-	this->ButJstEditAvail = ButJstEditAvail;
-	this->PupSteActive = PupSteActive;
-	this->LstStyActive = LstStyActive;
-
 	mask = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTCPRACTIVE, BUTCPRVIEWAVAIL, BUTCPRVIEWACTIVE, TXFMAJACTIVE, TXFMINACTIVE, TXFSUBACTIVE, TXTBCVACTIVE, BUTBCVVIEWAVAIL, BUTBCVVIEWACTIVE, PUPJSTACTIVE, BUTJSTEDITAVAIL, PUPSTEACTIVE, LSTSTYACTIVE};
 };
 

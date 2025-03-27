@@ -45,9 +45,8 @@ PnlWdbeSilRec::ContInf::ContInf(
 			const string& TxtRef
 		) :
 			Block()
+			, TxtRef(TxtRef)
 		{
-	this->TxtRef = TxtRef;
-
 	mask = {TXTREF};
 };
 
@@ -108,26 +107,25 @@ PnlWdbeSilRec::StatApp::StatApp(
 			, const bool initdone1NPeripheral
 			, const bool initdoneSil1NUnit
 			, const bool initdone1NBank
-			, const bool initdoneHk1NModule
-			, const bool initdoneRef1NError
 			, const bool initdoneRef1NSignal
+			, const bool initdoneRef1NError
 			, const bool initdoneHk1NVector
+			, const bool initdoneHk1NModule
 			, const bool initdoneRef1NCommand
 		) :
 			Block()
+			, initdoneDetail(initdoneDetail)
+			, initdone1NInterrupt(initdone1NInterrupt)
+			, initdone1NPeripheral(initdone1NPeripheral)
+			, initdoneSil1NUnit(initdoneSil1NUnit)
+			, initdone1NBank(initdone1NBank)
+			, initdoneRef1NSignal(initdoneRef1NSignal)
+			, initdoneRef1NError(initdoneRef1NError)
+			, initdoneHk1NVector(initdoneHk1NVector)
+			, initdoneHk1NModule(initdoneHk1NModule)
+			, initdoneRef1NCommand(initdoneRef1NCommand)
 		{
-	this->initdoneDetail = initdoneDetail;
-	this->initdone1NInterrupt = initdone1NInterrupt;
-	this->initdone1NPeripheral = initdone1NPeripheral;
-	this->initdoneSil1NUnit = initdoneSil1NUnit;
-	this->initdone1NBank = initdone1NBank;
-	this->initdoneHk1NModule = initdoneHk1NModule;
-	this->initdoneRef1NError = initdoneRef1NError;
-	this->initdoneRef1NSignal = initdoneRef1NSignal;
-	this->initdoneHk1NVector = initdoneHk1NVector;
-	this->initdoneRef1NCommand = initdoneRef1NCommand;
-
-	mask = {INITDONEDETAIL, INITDONE1NINTERRUPT, INITDONE1NPERIPHERAL, INITDONESIL1NUNIT, INITDONE1NBANK, INITDONEHK1NMODULE, INITDONEREF1NERROR, INITDONEREF1NSIGNAL, INITDONEHK1NVECTOR, INITDONEREF1NCOMMAND};
+	mask = {INITDONEDETAIL, INITDONE1NINTERRUPT, INITDONE1NPERIPHERAL, INITDONESIL1NUNIT, INITDONE1NBANK, INITDONEREF1NSIGNAL, INITDONEREF1NERROR, INITDONEHK1NVECTOR, INITDONEHK1NMODULE, INITDONEREF1NCOMMAND};
 };
 
 bool PnlWdbeSilRec::StatApp::readXML(
@@ -152,10 +150,10 @@ bool PnlWdbeSilRec::StatApp::readXML(
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdone1NPeripheral", initdone1NPeripheral)) add(INITDONE1NPERIPHERAL);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneSil1NUnit", initdoneSil1NUnit)) add(INITDONESIL1NUNIT);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdone1NBank", initdone1NBank)) add(INITDONE1NBANK);
-		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneHk1NModule", initdoneHk1NModule)) add(INITDONEHK1NMODULE);
-		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneRef1NError", initdoneRef1NError)) add(INITDONEREF1NERROR);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneRef1NSignal", initdoneRef1NSignal)) add(INITDONEREF1NSIGNAL);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneRef1NError", initdoneRef1NError)) add(INITDONEREF1NERROR);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneHk1NVector", initdoneHk1NVector)) add(INITDONEHK1NVECTOR);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneHk1NModule", initdoneHk1NModule)) add(INITDONEHK1NMODULE);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneRef1NCommand", initdoneRef1NCommand)) add(INITDONEREF1NCOMMAND);
 	};
 
@@ -172,10 +170,10 @@ set<uint> PnlWdbeSilRec::StatApp::comm(
 	if (initdone1NPeripheral == comp->initdone1NPeripheral) insert(items, INITDONE1NPERIPHERAL);
 	if (initdoneSil1NUnit == comp->initdoneSil1NUnit) insert(items, INITDONESIL1NUNIT);
 	if (initdone1NBank == comp->initdone1NBank) insert(items, INITDONE1NBANK);
-	if (initdoneHk1NModule == comp->initdoneHk1NModule) insert(items, INITDONEHK1NMODULE);
-	if (initdoneRef1NError == comp->initdoneRef1NError) insert(items, INITDONEREF1NERROR);
 	if (initdoneRef1NSignal == comp->initdoneRef1NSignal) insert(items, INITDONEREF1NSIGNAL);
+	if (initdoneRef1NError == comp->initdoneRef1NError) insert(items, INITDONEREF1NERROR);
 	if (initdoneHk1NVector == comp->initdoneHk1NVector) insert(items, INITDONEHK1NVECTOR);
+	if (initdoneHk1NModule == comp->initdoneHk1NModule) insert(items, INITDONEHK1NMODULE);
 	if (initdoneRef1NCommand == comp->initdoneRef1NCommand) insert(items, INITDONEREF1NCOMMAND);
 
 	return(items);
@@ -189,7 +187,7 @@ set<uint> PnlWdbeSilRec::StatApp::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {INITDONEDETAIL, INITDONE1NINTERRUPT, INITDONE1NPERIPHERAL, INITDONESIL1NUNIT, INITDONE1NBANK, INITDONEHK1NMODULE, INITDONEREF1NERROR, INITDONEREF1NSIGNAL, INITDONEHK1NVECTOR, INITDONEREF1NCOMMAND};
+	diffitems = {INITDONEDETAIL, INITDONE1NINTERRUPT, INITDONE1NPERIPHERAL, INITDONESIL1NUNIT, INITDONE1NBANK, INITDONEREF1NSIGNAL, INITDONEREF1NERROR, INITDONEHK1NVECTOR, INITDONEHK1NMODULE, INITDONEREF1NCOMMAND};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -206,29 +204,28 @@ PnlWdbeSilRec::StatShr::StatShr(
 			, const string& scrJref1NPeripheral
 			, const string& scrJrefSil1NUnit
 			, const string& scrJref1NBank
-			, const string& scrJrefHk1NModule
-			, const string& scrJrefRef1NError
 			, const string& scrJrefRef1NSignal
+			, const string& scrJrefRef1NError
 			, const string& scrJrefHk1NVector
+			, const string& scrJrefHk1NModule
 			, const string& scrJrefRef1NCommand
 			, const bool ButRegularizeActive
 		) :
 			Block()
+			, ixWdbeVExpstate(ixWdbeVExpstate)
+			, scrJrefDetail(scrJrefDetail)
+			, scrJref1NInterrupt(scrJref1NInterrupt)
+			, scrJref1NPeripheral(scrJref1NPeripheral)
+			, scrJrefSil1NUnit(scrJrefSil1NUnit)
+			, scrJref1NBank(scrJref1NBank)
+			, scrJrefRef1NSignal(scrJrefRef1NSignal)
+			, scrJrefRef1NError(scrJrefRef1NError)
+			, scrJrefHk1NVector(scrJrefHk1NVector)
+			, scrJrefHk1NModule(scrJrefHk1NModule)
+			, scrJrefRef1NCommand(scrJrefRef1NCommand)
+			, ButRegularizeActive(ButRegularizeActive)
 		{
-	this->ixWdbeVExpstate = ixWdbeVExpstate;
-	this->scrJrefDetail = scrJrefDetail;
-	this->scrJref1NInterrupt = scrJref1NInterrupt;
-	this->scrJref1NPeripheral = scrJref1NPeripheral;
-	this->scrJrefSil1NUnit = scrJrefSil1NUnit;
-	this->scrJref1NBank = scrJref1NBank;
-	this->scrJrefHk1NModule = scrJrefHk1NModule;
-	this->scrJrefRef1NError = scrJrefRef1NError;
-	this->scrJrefRef1NSignal = scrJrefRef1NSignal;
-	this->scrJrefHk1NVector = scrJrefHk1NVector;
-	this->scrJrefRef1NCommand = scrJrefRef1NCommand;
-	this->ButRegularizeActive = ButRegularizeActive;
-
-	mask = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREF1NINTERRUPT, SCRJREF1NPERIPHERAL, SCRJREFSIL1NUNIT, SCRJREF1NBANK, SCRJREFHK1NMODULE, SCRJREFREF1NERROR, SCRJREFREF1NSIGNAL, SCRJREFHK1NVECTOR, SCRJREFREF1NCOMMAND, BUTREGULARIZEACTIVE};
+	mask = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREF1NINTERRUPT, SCRJREF1NPERIPHERAL, SCRJREFSIL1NUNIT, SCRJREF1NBANK, SCRJREFREF1NSIGNAL, SCRJREFREF1NERROR, SCRJREFHK1NVECTOR, SCRJREFHK1NMODULE, SCRJREFREF1NCOMMAND, BUTREGULARIZEACTIVE};
 };
 
 bool PnlWdbeSilRec::StatShr::readXML(
@@ -259,10 +256,10 @@ bool PnlWdbeSilRec::StatShr::readXML(
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJref1NPeripheral", scrJref1NPeripheral)) add(SCRJREF1NPERIPHERAL);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefSil1NUnit", scrJrefSil1NUnit)) add(SCRJREFSIL1NUNIT);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJref1NBank", scrJref1NBank)) add(SCRJREF1NBANK);
-		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefHk1NModule", scrJrefHk1NModule)) add(SCRJREFHK1NMODULE);
-		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefRef1NError", scrJrefRef1NError)) add(SCRJREFREF1NERROR);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefRef1NSignal", scrJrefRef1NSignal)) add(SCRJREFREF1NSIGNAL);
+		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefRef1NError", scrJrefRef1NError)) add(SCRJREFREF1NERROR);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefHk1NVector", scrJrefHk1NVector)) add(SCRJREFHK1NVECTOR);
+		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefHk1NModule", scrJrefHk1NModule)) add(SCRJREFHK1NMODULE);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefRef1NCommand", scrJrefRef1NCommand)) add(SCRJREFREF1NCOMMAND);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButRegularizeActive", ButRegularizeActive)) add(BUTREGULARIZEACTIVE);
 	};
@@ -281,10 +278,10 @@ set<uint> PnlWdbeSilRec::StatShr::comm(
 	if (scrJref1NPeripheral == comp->scrJref1NPeripheral) insert(items, SCRJREF1NPERIPHERAL);
 	if (scrJrefSil1NUnit == comp->scrJrefSil1NUnit) insert(items, SCRJREFSIL1NUNIT);
 	if (scrJref1NBank == comp->scrJref1NBank) insert(items, SCRJREF1NBANK);
-	if (scrJrefHk1NModule == comp->scrJrefHk1NModule) insert(items, SCRJREFHK1NMODULE);
-	if (scrJrefRef1NError == comp->scrJrefRef1NError) insert(items, SCRJREFREF1NERROR);
 	if (scrJrefRef1NSignal == comp->scrJrefRef1NSignal) insert(items, SCRJREFREF1NSIGNAL);
+	if (scrJrefRef1NError == comp->scrJrefRef1NError) insert(items, SCRJREFREF1NERROR);
 	if (scrJrefHk1NVector == comp->scrJrefHk1NVector) insert(items, SCRJREFHK1NVECTOR);
+	if (scrJrefHk1NModule == comp->scrJrefHk1NModule) insert(items, SCRJREFHK1NMODULE);
 	if (scrJrefRef1NCommand == comp->scrJrefRef1NCommand) insert(items, SCRJREFREF1NCOMMAND);
 	if (ButRegularizeActive == comp->ButRegularizeActive) insert(items, BUTREGULARIZEACTIVE);
 
@@ -299,7 +296,7 @@ set<uint> PnlWdbeSilRec::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREF1NINTERRUPT, SCRJREF1NPERIPHERAL, SCRJREFSIL1NUNIT, SCRJREF1NBANK, SCRJREFHK1NMODULE, SCRJREFREF1NERROR, SCRJREFREF1NSIGNAL, SCRJREFHK1NVECTOR, SCRJREFREF1NCOMMAND, BUTREGULARIZEACTIVE};
+	diffitems = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREF1NINTERRUPT, SCRJREF1NPERIPHERAL, SCRJREFSIL1NUNIT, SCRJREF1NBANK, SCRJREFREF1NSIGNAL, SCRJREFREF1NERROR, SCRJREFHK1NVECTOR, SCRJREFHK1NMODULE, SCRJREFREF1NCOMMAND, BUTREGULARIZEACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -313,9 +310,8 @@ PnlWdbeSilRec::Tag::Tag(
 			const string& Cpt
 		) :
 			Block()
+			, Cpt(Cpt)
 		{
-	this->Cpt = Cpt;
-
 	mask = {CPT};
 };
 
@@ -352,11 +348,11 @@ PnlWdbeSilRec::DpchAppDo::DpchAppDo(
 			, const set<uint>& mask
 		) :
 			DpchAppWdbe(VecWdbeVDpch::DPCHAPPWDBESILRECDO, scrJref)
+			, ixVDo(ixVDo)
 		{
 	if (find(mask, ALL)) this->mask = {SCRJREF, IXVDO};
 	else this->mask = mask;
 
-	this->ixVDo = ixVDo;
 };
 
 string PnlWdbeSilRec::DpchAppDo::getSrefsMask() {

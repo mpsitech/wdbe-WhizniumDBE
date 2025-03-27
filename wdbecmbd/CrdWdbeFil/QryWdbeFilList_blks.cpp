@@ -23,8 +23,8 @@ uint QryWdbeFilList::VecVOrd::getIx(
 	if (s == "reu") return REU;
 	if (s == "ret") return RET;
 	if (s == "fnm") return FNM;
-	if (s == "grp") return GRP;
 	if (s == "own") return OWN;
+	if (s == "grp") return GRP;
 
 	return(0);
 };
@@ -35,8 +35,8 @@ string QryWdbeFilList::VecVOrd::getSref(
 	if (ix == REU) return("reu");
 	if (ix == RET) return("ret");
 	if (ix == FNM) return("fnm");
-	if (ix == GRP) return("grp");
 	if (ix == OWN) return("own");
+	if (ix == GRP) return("grp");
 
 	return("");
 };
@@ -104,11 +104,10 @@ QryWdbeFilList::StatShr::StatShr(
 			, const uint nload
 		) :
 			Block()
+			, ntot(ntot)
+			, jnumFirstload(jnumFirstload)
+			, nload(nload)
 		{
-	this->ntot = ntot;
-	this->jnumFirstload = jnumFirstload;
-	this->nload = nload;
-
 	mask = {NTOT, JNUMFIRSTLOAD, NLOAD};
 };
 
@@ -179,10 +178,10 @@ QryWdbeFilList::StgIac::StgIac(
 			, const uint nload
 		) :
 			Block()
+			, jnum(jnum)
+			, jnumFirstload(jnumFirstload)
+			, nload(nload)
 		{
-	this->jnum = jnum;
-	this->jnumFirstload = jnumFirstload;
-	this->nload = nload;
 	mask = {JNUM, JNUMFIRSTLOAD, NLOAD};
 };
 

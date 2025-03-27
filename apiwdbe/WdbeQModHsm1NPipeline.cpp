@@ -20,9 +20,10 @@ using namespace Xmlio;
 WdbeQModHsm1NPipeline::WdbeQModHsm1NPipeline(
 			const uint jnum
 			, const string stubRef
-		) {
-	this->jnum = jnum;
-	this->stubRef = stubRef;
+		) :
+			jnum(jnum)
+			, stubRef(stubRef)
+		{
 };
 
 bool WdbeQModHsm1NPipeline::readXML(

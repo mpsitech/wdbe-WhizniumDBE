@@ -22,8 +22,8 @@ uint QryWdbePinList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "srf") return SRF;
 	if (s == "bnk") return BNK;
+	if (s == "srf") return SRF;
 
 	return(0);
 };
@@ -31,8 +31,8 @@ uint QryWdbePinList::VecVOrd::getIx(
 string QryWdbePinList::VecVOrd::getSref(
 			const uint ix
 		) {
-	if (ix == SRF) return("srf");
 	if (ix == BNK) return("bnk");
+	if (ix == SRF) return("srf");
 
 	return("");
 };
@@ -48,12 +48,11 @@ QryWdbePinList::StatApp::StatApp(
 			, const uint ndisp
 		) :
 			Block()
+			, firstcol(firstcol)
+			, jnumFirstdisp(jnumFirstdisp)
+			, ncol(ncol)
+			, ndisp(ndisp)
 		{
-	this->firstcol = firstcol;
-	this->jnumFirstdisp = jnumFirstdisp;
-	this->ncol = ncol;
-	this->ndisp = ndisp;
-
 	mask = {FIRSTCOL, JNUMFIRSTDISP, NCOL, NDISP};
 };
 
@@ -120,11 +119,10 @@ QryWdbePinList::StatShr::StatShr(
 			, const uint nload
 		) :
 			Block()
+			, ntot(ntot)
+			, jnumFirstload(jnumFirstload)
+			, nload(nload)
 		{
-	this->ntot = ntot;
-	this->jnumFirstload = jnumFirstload;
-	this->nload = nload;
-
 	mask = {NTOT, JNUMFIRSTLOAD, NLOAD};
 };
 
@@ -189,11 +187,10 @@ QryWdbePinList::StgIac::StgIac(
 			, const uint nload
 		) :
 			Block()
+			, jnum(jnum)
+			, jnumFirstload(jnumFirstload)
+			, nload(nload)
 		{
-	this->jnum = jnum;
-	this->jnumFirstload = jnumFirstload;
-	this->nload = nload;
-
 	mask = {JNUM, JNUMFIRSTLOAD, NLOAD};
 };
 

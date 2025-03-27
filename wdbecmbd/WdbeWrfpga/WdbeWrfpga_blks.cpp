@@ -24,9 +24,9 @@ DpchInvWdbeWrfpgaAux::DpchInvWdbeWrfpgaAux(
 			, const string& folder
 		) :
 			DpchInvWdbe(VecWdbeVDpch::DPCHINVWDBEWRFPGAAUX, oref, jref)
+			, refWdbeMModule(refWdbeMModule)
+			, folder(folder)
 		{
-	this->refWdbeMModule = refWdbeMModule;
-	this->folder = folder;
 };
 
 void DpchInvWdbeWrfpgaAux::readXML(
@@ -76,11 +76,11 @@ DpchInvWdbeWrfpgaBase::DpchInvWdbeWrfpgaBase(
 			, const string& Untsref
 		) :
 			DpchInvWdbe(VecWdbeVDpch::DPCHINVWDBEWRFPGABASE, oref, jref)
+			, refWdbeMUnit(refWdbeMUnit)
+			, folder(folder)
+			, Prjshort(Prjshort)
+			, Untsref(Untsref)
 		{
-	this->refWdbeMUnit = refWdbeMUnit;
-	this->folder = folder;
-	this->Prjshort = Prjshort;
-	this->Untsref = Untsref;
 };
 
 void DpchInvWdbeWrfpgaBase::readXML(
@@ -134,11 +134,11 @@ DpchInvWdbeWrfpgaCtr::DpchInvWdbeWrfpgaCtr(
 			, const string& Untsref
 		) :
 			DpchInvWdbe(VecWdbeVDpch::DPCHINVWDBEWRFPGACTR, oref, jref)
+			, refWdbeMModule(refWdbeMModule)
+			, folder(folder)
+			, Prjshort(Prjshort)
+			, Untsref(Untsref)
 		{
-	this->refWdbeMModule = refWdbeMModule;
-	this->folder = folder;
-	this->Prjshort = Prjshort;
-	this->Untsref = Untsref;
 };
 
 void DpchInvWdbeWrfpgaCtr::readXML(
@@ -190,9 +190,9 @@ DpchInvWdbeWrfpgaDeploy::DpchInvWdbeWrfpgaDeploy(
 			, const string& folder
 		) :
 			DpchInvWdbe(VecWdbeVDpch::DPCHINVWDBEWRFPGADEPLOY, oref, jref)
+			, refWdbeMRelease(refWdbeMRelease)
+			, folder(folder)
 		{
-	this->refWdbeMRelease = refWdbeMRelease;
-	this->folder = folder;
 };
 
 void DpchInvWdbeWrfpgaDeploy::readXML(
@@ -240,9 +240,9 @@ DpchInvWdbeWrfpgaMdlfine::DpchInvWdbeWrfpgaMdlfine(
 			, const string& folder
 		) :
 			DpchInvWdbe(VecWdbeVDpch::DPCHINVWDBEWRFPGAMDLFINE, oref, jref)
+			, refWdbeMModule(refWdbeMModule)
+			, folder(folder)
 		{
-	this->refWdbeMModule = refWdbeMModule;
-	this->folder = folder;
 };
 
 void DpchInvWdbeWrfpgaMdlfine::readXML(
@@ -293,12 +293,12 @@ DpchInvWdbeWrfpgaMdlraw::DpchInvWdbeWrfpgaMdlraw(
 			, const string& srefKToolch
 		) :
 			DpchInvWdbe(VecWdbeVDpch::DPCHINVWDBEWRFPGAMDLRAW, oref, jref)
+			, refWdbeMModule(refWdbeMModule)
+			, folder(folder)
+			, Prjshort(Prjshort)
+			, Untsref(Untsref)
+			, srefKToolch(srefKToolch)
 		{
-	this->refWdbeMModule = refWdbeMModule;
-	this->folder = folder;
-	this->Prjshort = Prjshort;
-	this->Untsref = Untsref;
-	this->srefKToolch = srefKToolch;
 };
 
 void DpchInvWdbeWrfpgaMdlraw::readXML(
@@ -354,11 +354,11 @@ DpchInvWdbeWrfpgaTop::DpchInvWdbeWrfpgaTop(
 			, const string& Untsref
 		) :
 			DpchInvWdbe(VecWdbeVDpch::DPCHINVWDBEWRFPGATOP, oref, jref)
+			, refWdbeMModule(refWdbeMModule)
+			, folder(folder)
+			, Prjshort(Prjshort)
+			, Untsref(Untsref)
 		{
-	this->refWdbeMModule = refWdbeMModule;
-	this->folder = folder;
-	this->Prjshort = Prjshort;
-	this->Untsref = Untsref;
 };
 
 void DpchInvWdbeWrfpgaTop::readXML(

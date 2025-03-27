@@ -22,13 +22,13 @@ WdbeAMLibraryMakefile::WdbeAMLibraryMakefile(
 			, const ubigint x1RefWdbeMMachine
 			, const string x2SrefKTag
 			, const string Val
-		) {
-
-	this->ref = ref;
-	this->refWdbeMLibrary = refWdbeMLibrary;
-	this->x1RefWdbeMMachine = x1RefWdbeMMachine;
-	this->x2SrefKTag = x2SrefKTag;
-	this->Val = Val;
+		) :
+			ref(ref)
+			, refWdbeMLibrary(refWdbeMLibrary)
+			, x1RefWdbeMMachine(x1RefWdbeMMachine)
+			, x2SrefKTag(x2SrefKTag)
+			, Val(Val)
+		{
 };
 
 bool WdbeAMLibraryMakefile::operator==(

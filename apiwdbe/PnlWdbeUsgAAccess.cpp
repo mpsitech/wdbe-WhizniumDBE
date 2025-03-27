@@ -49,9 +49,8 @@ PnlWdbeUsgAAccess::ContInf::ContInf(
 			const uint numFCsiQst
 		) :
 			Block()
+			, numFCsiQst(numFCsiQst)
 		{
-	this->numFCsiQst = numFCsiQst;
-
 	mask = {NUMFCSIQST};
 };
 
@@ -110,9 +109,8 @@ PnlWdbeUsgAAccess::StatApp::StatApp(
 			const uint ixWdbeVExpstate
 		) :
 			Block()
+			, ixWdbeVExpstate(ixWdbeVExpstate)
 		{
-	this->ixWdbeVExpstate = ixWdbeVExpstate;
-
 	mask = {IXWDBEVEXPSTATE};
 };
 
@@ -180,13 +178,12 @@ PnlWdbeUsgAAccess::StatShr::StatShr(
 			, const bool ButDeleteActive
 		) :
 			Block()
+			, ButNewAvail(ButNewAvail)
+			, ButDuplicateAvail(ButDuplicateAvail)
+			, ButDuplicateActive(ButDuplicateActive)
+			, ButDeleteAvail(ButDeleteAvail)
+			, ButDeleteActive(ButDeleteActive)
 		{
-	this->ButNewAvail = ButNewAvail;
-	this->ButDuplicateAvail = ButDuplicateAvail;
-	this->ButDuplicateActive = ButDuplicateActive;
-	this->ButDeleteAvail = ButDeleteAvail;
-	this->ButDeleteActive = ButDeleteActive;
-
 	mask = {BUTNEWAVAIL, BUTDUPLICATEAVAIL, BUTDUPLICATEACTIVE, BUTDELETEAVAIL, BUTDELETEACTIVE};
 };
 
@@ -255,11 +252,10 @@ PnlWdbeUsgAAccess::StgIac::StgIac(
 			, const uint TcoAccWidth
 		) :
 			Block()
+			, TcoFegWidth(TcoFegWidth)
+			, TcoFeaWidth(TcoFeaWidth)
+			, TcoAccWidth(TcoAccWidth)
 		{
-	this->TcoFegWidth = TcoFegWidth;
-	this->TcoFeaWidth = TcoFeaWidth;
-	this->TcoAccWidth = TcoAccWidth;
-
 	mask = {TCOFEGWIDTH, TCOFEAWIDTH, TCOACCWIDTH};
 };
 
@@ -348,17 +344,16 @@ PnlWdbeUsgAAccess::Tag::Tag(
 			, const string& TcoAcc
 		) :
 			Block()
+			, Cpt(Cpt)
+			, TxtRecord1(TxtRecord1)
+			, TxtRecord2(TxtRecord2)
+			, Trs(Trs)
+			, TxtShowing1(TxtShowing1)
+			, TxtShowing2(TxtShowing2)
+			, TcoFeg(TcoFeg)
+			, TcoFea(TcoFea)
+			, TcoAcc(TcoAcc)
 		{
-	this->Cpt = Cpt;
-	this->TxtRecord1 = TxtRecord1;
-	this->TxtRecord2 = TxtRecord2;
-	this->Trs = Trs;
-	this->TxtShowing1 = TxtShowing1;
-	this->TxtShowing2 = TxtShowing2;
-	this->TcoFeg = TcoFeg;
-	this->TcoFea = TcoFea;
-	this->TcoAcc = TcoAcc;
-
 	mask = {CPT, TXTRECORD1, TXTRECORD2, TRS, TXTSHOWING1, TXTSHOWING2, TCOFEG, TCOFEA, TCOACC};
 };
 
@@ -446,11 +441,11 @@ PnlWdbeUsgAAccess::DpchAppDo::DpchAppDo(
 			, const set<uint>& mask
 		) :
 			DpchAppWdbe(VecWdbeVDpch::DPCHAPPWDBEUSGAACCESSDO, scrJref)
+			, ixVDo(ixVDo)
 		{
 	if (find(mask, ALL)) this->mask = {SCRJREF, IXVDO};
 	else this->mask = mask;
 
-	this->ixVDo = ixVDo;
 };
 
 string PnlWdbeUsgAAccess::DpchAppDo::getSrefsMask() {

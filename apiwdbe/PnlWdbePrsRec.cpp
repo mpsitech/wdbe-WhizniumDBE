@@ -45,9 +45,8 @@ PnlWdbePrsRec::ContInf::ContInf(
 			const string& TxtRef
 		) :
 			Block()
+			, TxtRef(TxtRef)
 		{
-	this->TxtRef = TxtRef;
-
 	mask = {TXTREF};
 };
 
@@ -109,12 +108,11 @@ PnlWdbePrsRec::StatApp::StatApp(
 			, const bool initdoneMNCoreproject
 		) :
 			Block()
+			, initdoneDetail(initdoneDetail)
+			, initdoneADetail(initdoneADetail)
+			, initdoneMNProject(initdoneMNProject)
+			, initdoneMNCoreproject(initdoneMNCoreproject)
 		{
-	this->initdoneDetail = initdoneDetail;
-	this->initdoneADetail = initdoneADetail;
-	this->initdoneMNProject = initdoneMNProject;
-	this->initdoneMNCoreproject = initdoneMNCoreproject;
-
 	mask = {INITDONEDETAIL, INITDONEADETAIL, INITDONEMNPROJECT, INITDONEMNCOREPROJECT};
 };
 
@@ -184,14 +182,13 @@ PnlWdbePrsRec::StatShr::StatShr(
 			, const bool ButRegularizeActive
 		) :
 			Block()
+			, ixWdbeVExpstate(ixWdbeVExpstate)
+			, scrJrefDetail(scrJrefDetail)
+			, scrJrefADetail(scrJrefADetail)
+			, scrJrefMNProject(scrJrefMNProject)
+			, scrJrefMNCoreproject(scrJrefMNCoreproject)
+			, ButRegularizeActive(ButRegularizeActive)
 		{
-	this->ixWdbeVExpstate = ixWdbeVExpstate;
-	this->scrJrefDetail = scrJrefDetail;
-	this->scrJrefADetail = scrJrefADetail;
-	this->scrJrefMNProject = scrJrefMNProject;
-	this->scrJrefMNCoreproject = scrJrefMNCoreproject;
-	this->ButRegularizeActive = ButRegularizeActive;
-
 	mask = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFADETAIL, SCRJREFMNPROJECT, SCRJREFMNCOREPROJECT, BUTREGULARIZEACTIVE};
 };
 
@@ -265,9 +262,8 @@ PnlWdbePrsRec::Tag::Tag(
 			const string& Cpt
 		) :
 			Block()
+			, Cpt(Cpt)
 		{
-	this->Cpt = Cpt;
-
 	mask = {CPT};
 };
 
@@ -304,11 +300,11 @@ PnlWdbePrsRec::DpchAppDo::DpchAppDo(
 			, const set<uint>& mask
 		) :
 			DpchAppWdbe(VecWdbeVDpch::DPCHAPPWDBEPRSRECDO, scrJref)
+			, ixVDo(ixVDo)
 		{
 	if (find(mask, ALL)) this->mask = {SCRJREF, IXVDO};
 	else this->mask = mask;
 
-	this->ixVDo = ixVDo;
 };
 
 string PnlWdbePrsRec::DpchAppDo::getSrefsMask() {

@@ -67,6 +67,7 @@ uint VecWdbeVDpch::getIx(
 	if (s == "dpchengwdbecmddata") return DPCHENGWDBECMDDATA;
 	if (s == "dpchengwdbecmddetaildata") return DPCHENGWDBECMDDETAILDATA;
 	if (s == "dpchengwdbecmdheadbardata") return DPCHENGWDBECMDHEADBARDATA;
+	if (s == "dpchengwdbecmdhk1nvectordata") return DPCHENGWDBECMDHK1NVECTORDATA;
 	if (s == "dpchengwdbecmdlistdata") return DPCHENGWDBECMDLISTDATA;
 	if (s == "dpchengwdbecmdmncontrollerdata") return DPCHENGWDBECMDMNCONTROLLERDATA;
 	if (s == "dpchengwdbecmdrecdata") return DPCHENGWDBECMDRECDATA;
@@ -226,6 +227,10 @@ uint VecWdbeVDpch::getIx(
 	if (s == "dpchengwdbeprcrecdata") return DPCHENGWDBEPRCRECDATA;
 	if (s == "dpchengwdbeprcref1nsensitivitydata") return DPCHENGWDBEPRCREF1NSENSITIVITYDATA;
 	if (s == "dpchengwdbeprcref1nvariabledata") return DPCHENGWDBEPRCREF1NVARIABLEDATA;
+	if (s == "dpchengwdbeprfdaemondata") return DPCHENGWDBEPRFDAEMONDATA;
+	if (s == "dpchengwdbeprfdata") return DPCHENGWDBEPRFDATA;
+	if (s == "dpchengwdbeprfheadbardata") return DPCHENGWDBEPRFHEADBARDATA;
+	if (s == "dpchengwdbeprflicensedata") return DPCHENGWDBEPRFLICENSEDATA;
 	if (s == "dpchengwdbeprjdata") return DPCHENGWDBEPRJDATA;
 	if (s == "dpchengwdbeprjdetaildata") return DPCHENGWDBEPRJDETAILDATA;
 	if (s == "dpchengwdbeprjheadbardata") return DPCHENGWDBEPRJHEADBARDATA;
@@ -413,6 +418,8 @@ uint VecWdbeVDpch::getIx(
 	if (s == "dpchappwdbecmddetaildata") return DPCHAPPWDBECMDDETAILDATA;
 	if (s == "dpchappwdbecmddetaildo") return DPCHAPPWDBECMDDETAILDO;
 	if (s == "dpchappwdbecmddo") return DPCHAPPWDBECMDDO;
+	if (s == "dpchappwdbecmdhk1nvectordata") return DPCHAPPWDBECMDHK1NVECTORDATA;
+	if (s == "dpchappwdbecmdhk1nvectordo") return DPCHAPPWDBECMDHK1NVECTORDO;
 	if (s == "dpchappwdbecmdlistdata") return DPCHAPPWDBECMDLISTDATA;
 	if (s == "dpchappwdbecmdlistdo") return DPCHAPPWDBECMDLISTDO;
 	if (s == "dpchappwdbecmdmncontrollerdata") return DPCHAPPWDBECMDMNCONTROLLERDATA;
@@ -656,6 +663,11 @@ uint VecWdbeVDpch::getIx(
 	if (s == "dpchappwdbeprcref1nsensitivitydo") return DPCHAPPWDBEPRCREF1NSENSITIVITYDO;
 	if (s == "dpchappwdbeprcref1nvariabledata") return DPCHAPPWDBEPRCREF1NVARIABLEDATA;
 	if (s == "dpchappwdbeprcref1nvariabledo") return DPCHAPPWDBEPRCREF1NVARIABLEDO;
+	if (s == "dpchappwdbeprfdaemondata") return DPCHAPPWDBEPRFDAEMONDATA;
+	if (s == "dpchappwdbeprfdaemondo") return DPCHAPPWDBEPRFDAEMONDO;
+	if (s == "dpchappwdbeprfdo") return DPCHAPPWDBEPRFDO;
+	if (s == "dpchappwdbeprflicensedata") return DPCHAPPWDBEPRFLICENSEDATA;
+	if (s == "dpchappwdbeprflicensedo") return DPCHAPPWDBEPRFLICENSEDO;
 	if (s == "dpchappwdbeprjdetaildata") return DPCHAPPWDBEPRJDETAILDATA;
 	if (s == "dpchappwdbeprjdetaildo") return DPCHAPPWDBEPRJDETAILDO;
 	if (s == "dpchappwdbeprjdo") return DPCHAPPWDBEPRJDO;
@@ -875,6 +887,7 @@ string VecWdbeVDpch::getSref(
 	if (ix == DPCHENGWDBECMDDATA) return("DpchEngWdbeCmdData");
 	if (ix == DPCHENGWDBECMDDETAILDATA) return("DpchEngWdbeCmdDetailData");
 	if (ix == DPCHENGWDBECMDHEADBARDATA) return("DpchEngWdbeCmdHeadbarData");
+	if (ix == DPCHENGWDBECMDHK1NVECTORDATA) return("DpchEngWdbeCmdHk1NVectorData");
 	if (ix == DPCHENGWDBECMDLISTDATA) return("DpchEngWdbeCmdListData");
 	if (ix == DPCHENGWDBECMDMNCONTROLLERDATA) return("DpchEngWdbeCmdMNControllerData");
 	if (ix == DPCHENGWDBECMDRECDATA) return("DpchEngWdbeCmdRecData");
@@ -1034,6 +1047,10 @@ string VecWdbeVDpch::getSref(
 	if (ix == DPCHENGWDBEPRCRECDATA) return("DpchEngWdbePrcRecData");
 	if (ix == DPCHENGWDBEPRCREF1NSENSITIVITYDATA) return("DpchEngWdbePrcRef1NSensitivityData");
 	if (ix == DPCHENGWDBEPRCREF1NVARIABLEDATA) return("DpchEngWdbePrcRef1NVariableData");
+	if (ix == DPCHENGWDBEPRFDAEMONDATA) return("DpchEngWdbePrfDaemonData");
+	if (ix == DPCHENGWDBEPRFDATA) return("DpchEngWdbePrfData");
+	if (ix == DPCHENGWDBEPRFHEADBARDATA) return("DpchEngWdbePrfHeadbarData");
+	if (ix == DPCHENGWDBEPRFLICENSEDATA) return("DpchEngWdbePrfLicenseData");
 	if (ix == DPCHENGWDBEPRJDATA) return("DpchEngWdbePrjData");
 	if (ix == DPCHENGWDBEPRJDETAILDATA) return("DpchEngWdbePrjDetailData");
 	if (ix == DPCHENGWDBEPRJHEADBARDATA) return("DpchEngWdbePrjHeadbarData");
@@ -1221,6 +1238,8 @@ string VecWdbeVDpch::getSref(
 	if (ix == DPCHAPPWDBECMDDETAILDATA) return("DpchAppWdbeCmdDetailData");
 	if (ix == DPCHAPPWDBECMDDETAILDO) return("DpchAppWdbeCmdDetailDo");
 	if (ix == DPCHAPPWDBECMDDO) return("DpchAppWdbeCmdDo");
+	if (ix == DPCHAPPWDBECMDHK1NVECTORDATA) return("DpchAppWdbeCmdHk1NVectorData");
+	if (ix == DPCHAPPWDBECMDHK1NVECTORDO) return("DpchAppWdbeCmdHk1NVectorDo");
 	if (ix == DPCHAPPWDBECMDLISTDATA) return("DpchAppWdbeCmdListData");
 	if (ix == DPCHAPPWDBECMDLISTDO) return("DpchAppWdbeCmdListDo");
 	if (ix == DPCHAPPWDBECMDMNCONTROLLERDATA) return("DpchAppWdbeCmdMNControllerData");
@@ -1464,6 +1483,11 @@ string VecWdbeVDpch::getSref(
 	if (ix == DPCHAPPWDBEPRCREF1NSENSITIVITYDO) return("DpchAppWdbePrcRef1NSensitivityDo");
 	if (ix == DPCHAPPWDBEPRCREF1NVARIABLEDATA) return("DpchAppWdbePrcRef1NVariableData");
 	if (ix == DPCHAPPWDBEPRCREF1NVARIABLEDO) return("DpchAppWdbePrcRef1NVariableDo");
+	if (ix == DPCHAPPWDBEPRFDAEMONDATA) return("DpchAppWdbePrfDaemonData");
+	if (ix == DPCHAPPWDBEPRFDAEMONDO) return("DpchAppWdbePrfDaemonDo");
+	if (ix == DPCHAPPWDBEPRFDO) return("DpchAppWdbePrfDo");
+	if (ix == DPCHAPPWDBEPRFLICENSEDATA) return("DpchAppWdbePrfLicenseData");
+	if (ix == DPCHAPPWDBEPRFLICENSEDO) return("DpchAppWdbePrfLicenseDo");
 	if (ix == DPCHAPPWDBEPRJDETAILDATA) return("DpchAppWdbePrjDetailData");
 	if (ix == DPCHAPPWDBEPRJDETAILDO) return("DpchAppWdbePrjDetailDo");
 	if (ix == DPCHAPPWDBEPRJDO) return("DpchAppWdbePrjDo");

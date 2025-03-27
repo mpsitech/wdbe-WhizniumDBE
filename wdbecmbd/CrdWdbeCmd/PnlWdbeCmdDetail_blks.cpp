@@ -52,12 +52,11 @@ PnlWdbeCmdDetail::ContIac::ContIac(
 			, const string& TxfCmt
 		) :
 			Block()
+			, TxfFsr(TxfFsr)
+			, numFPupRet(numFPupRet)
+			, numFPupRty(numFPupRty)
+			, TxfCmt(TxfCmt)
 		{
-	this->TxfFsr = TxfFsr;
-	this->numFPupRet = numFPupRet;
-	this->numFPupRty = numFPupRty;
-	this->TxfCmt = TxfCmt;
-
 	mask = {TXFFSR, NUMFPUPRET, NUMFPUPRTY, TXFCMT};
 };
 
@@ -181,13 +180,12 @@ PnlWdbeCmdDetail::ContInf::ContInf(
 			, const string& TxtRer
 		) :
 			Block()
+			, TxtSrf(TxtSrf)
+			, TxtReu(TxtReu)
+			, TxtIvr(TxtIvr)
+			, TxtRvr(TxtRvr)
+			, TxtRer(TxtRer)
 		{
-	this->TxtSrf = TxtSrf;
-	this->TxtReu = TxtReu;
-	this->TxtIvr = TxtIvr;
-	this->TxtRvr = TxtRvr;
-	this->TxtRer = TxtRer;
-
 	mask = {TXTSRF, TXTREU, TXTIVR, TXTRVR, TXTRER};
 };
 
@@ -312,26 +310,25 @@ PnlWdbeCmdDetail::StatShr::StatShr(
 			, const bool TxfCmtActive
 		) :
 			Block()
+			, ButSaveAvail(ButSaveAvail)
+			, ButSaveActive(ButSaveActive)
+			, TxtSrfActive(TxtSrfActive)
+			, TxfFsrActive(TxfFsrActive)
+			, TxtReuActive(TxtReuActive)
+			, ButReuViewAvail(ButReuViewAvail)
+			, ButReuViewActive(ButReuViewActive)
+			, PupRtyActive(PupRtyActive)
+			, TxtIvrActive(TxtIvrActive)
+			, ButIvrViewAvail(ButIvrViewAvail)
+			, ButIvrViewActive(ButIvrViewActive)
+			, TxtRvrActive(TxtRvrActive)
+			, ButRvrViewAvail(ButRvrViewAvail)
+			, ButRvrViewActive(ButRvrViewActive)
+			, TxtRerActive(TxtRerActive)
+			, ButRerViewAvail(ButRerViewAvail)
+			, ButRerViewActive(ButRerViewActive)
+			, TxfCmtActive(TxfCmtActive)
 		{
-	this->ButSaveAvail = ButSaveAvail;
-	this->ButSaveActive = ButSaveActive;
-	this->TxtSrfActive = TxtSrfActive;
-	this->TxfFsrActive = TxfFsrActive;
-	this->TxtReuActive = TxtReuActive;
-	this->ButReuViewAvail = ButReuViewAvail;
-	this->ButReuViewActive = ButReuViewActive;
-	this->PupRtyActive = PupRtyActive;
-	this->TxtIvrActive = TxtIvrActive;
-	this->ButIvrViewAvail = ButIvrViewAvail;
-	this->ButIvrViewActive = ButIvrViewActive;
-	this->TxtRvrActive = TxtRvrActive;
-	this->ButRvrViewAvail = ButRvrViewAvail;
-	this->ButRvrViewActive = ButRvrViewActive;
-	this->TxtRerActive = TxtRerActive;
-	this->ButRerViewAvail = ButRerViewAvail;
-	this->ButRerViewActive = ButRerViewActive;
-	this->TxfCmtActive = TxfCmtActive;
-
 	mask = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXFFSRACTIVE, TXTREUACTIVE, BUTREUVIEWAVAIL, BUTREUVIEWACTIVE, PUPRTYACTIVE, TXTIVRACTIVE, BUTIVRVIEWAVAIL, BUTIVRVIEWACTIVE, TXTRVRACTIVE, BUTRVRVIEWAVAIL, BUTRVRVIEWACTIVE, TXTRERACTIVE, BUTRERVIEWAVAIL, BUTRERVIEWACTIVE, TXFCMTACTIVE};
 };
 

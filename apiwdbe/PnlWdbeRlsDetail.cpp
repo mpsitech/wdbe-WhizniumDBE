@@ -51,11 +51,10 @@ PnlWdbeRlsDetail::ContIac::ContIac(
 			, const string& TxfCmt
 		) :
 			Block()
+			, numsFLstOpt(numsFLstOpt)
+			, TxfOpt(TxfOpt)
+			, TxfCmt(TxfCmt)
 		{
-	this->numsFLstOpt = numsFLstOpt;
-	this->TxfOpt = TxfOpt;
-	this->TxfCmt = TxfCmt;
-
 	mask = {NUMSFLSTOPT, TXFOPT, TXFCMT};
 };
 
@@ -138,11 +137,10 @@ PnlWdbeRlsDetail::ContInf::ContInf(
 			, const string& TxtMch
 		) :
 			Block()
+			, TxtSrf(TxtSrf)
+			, TxtCmp(TxtCmp)
+			, TxtMch(TxtMch)
 		{
-	this->TxtSrf = TxtSrf;
-	this->TxtCmp = TxtCmp;
-	this->TxtMch = TxtMch;
-
 	mask = {TXTSRF, TXTCMP, TXTMCH};
 };
 
@@ -207,11 +205,10 @@ PnlWdbeRlsDetail::StatApp::StatApp(
 			, const uint LstOptNumFirstdisp
 		) :
 			Block()
+			, ixWdbeVExpstate(ixWdbeVExpstate)
+			, LstOptAlt(LstOptAlt)
+			, LstOptNumFirstdisp(LstOptNumFirstdisp)
 		{
-	this->ixWdbeVExpstate = ixWdbeVExpstate;
-	this->LstOptAlt = LstOptAlt;
-	this->LstOptNumFirstdisp = LstOptNumFirstdisp;
-
 	mask = {IXWDBEVEXPSTATE, LSTOPTALT, LSTOPTNUMFIRSTDISP};
 };
 
@@ -276,8 +273,7 @@ set<uint> PnlWdbeRlsDetail::StatApp::diff(
  ******************************************************************************/
 
 PnlWdbeRlsDetail::StatShr::StatShr(
-			const bool TxfOptValid
-			, const bool ButSaveAvail
+			const bool ButSaveAvail
 			, const bool ButSaveActive
 			, const bool TxtSrfActive
 			, const bool TxtCmpActive
@@ -287,26 +283,26 @@ PnlWdbeRlsDetail::StatShr::StatShr(
 			, const bool ButMchViewAvail
 			, const bool ButMchViewActive
 			, const bool LstOptActive
+			, const bool TxfOptValid
 			, const bool ButOptEditAvail
 			, const bool TxfCmtActive
 		) :
 			Block()
+			, ButSaveAvail(ButSaveAvail)
+			, ButSaveActive(ButSaveActive)
+			, TxtSrfActive(TxtSrfActive)
+			, TxtCmpActive(TxtCmpActive)
+			, ButCmpViewAvail(ButCmpViewAvail)
+			, ButCmpViewActive(ButCmpViewActive)
+			, TxtMchActive(TxtMchActive)
+			, ButMchViewAvail(ButMchViewAvail)
+			, ButMchViewActive(ButMchViewActive)
+			, LstOptActive(LstOptActive)
+			, TxfOptValid(TxfOptValid)
+			, ButOptEditAvail(ButOptEditAvail)
+			, TxfCmtActive(TxfCmtActive)
 		{
-	this->TxfOptValid = TxfOptValid;
-	this->ButSaveAvail = ButSaveAvail;
-	this->ButSaveActive = ButSaveActive;
-	this->TxtSrfActive = TxtSrfActive;
-	this->TxtCmpActive = TxtCmpActive;
-	this->ButCmpViewAvail = ButCmpViewAvail;
-	this->ButCmpViewActive = ButCmpViewActive;
-	this->TxtMchActive = TxtMchActive;
-	this->ButMchViewAvail = ButMchViewAvail;
-	this->ButMchViewActive = ButMchViewActive;
-	this->LstOptActive = LstOptActive;
-	this->ButOptEditAvail = ButOptEditAvail;
-	this->TxfCmtActive = TxfCmtActive;
-
-	mask = {TXFOPTVALID, BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXTCMPACTIVE, BUTCMPVIEWAVAIL, BUTCMPVIEWACTIVE, TXTMCHACTIVE, BUTMCHVIEWAVAIL, BUTMCHVIEWACTIVE, LSTOPTACTIVE, BUTOPTEDITAVAIL, TXFCMTACTIVE};
+	mask = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXTCMPACTIVE, BUTCMPVIEWAVAIL, BUTCMPVIEWACTIVE, TXTMCHACTIVE, BUTMCHVIEWAVAIL, BUTMCHVIEWACTIVE, LSTOPTACTIVE, TXFOPTVALID, BUTOPTEDITAVAIL, TXFCMTACTIVE};
 };
 
 bool PnlWdbeRlsDetail::StatShr::readXML(
@@ -326,7 +322,6 @@ bool PnlWdbeRlsDetail::StatShr::readXML(
 	string itemtag = "StatitemShrWdbeRlsDetail";
 
 	if (basefound) {
-		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TxfOptValid", TxfOptValid)) add(TXFOPTVALID);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButSaveAvail", ButSaveAvail)) add(BUTSAVEAVAIL);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButSaveActive", ButSaveActive)) add(BUTSAVEACTIVE);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TxtSrfActive", TxtSrfActive)) add(TXTSRFACTIVE);
@@ -337,6 +332,7 @@ bool PnlWdbeRlsDetail::StatShr::readXML(
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButMchViewAvail", ButMchViewAvail)) add(BUTMCHVIEWAVAIL);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButMchViewActive", ButMchViewActive)) add(BUTMCHVIEWACTIVE);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "LstOptActive", LstOptActive)) add(LSTOPTACTIVE);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TxfOptValid", TxfOptValid)) add(TXFOPTVALID);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButOptEditAvail", ButOptEditAvail)) add(BUTOPTEDITAVAIL);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TxfCmtActive", TxfCmtActive)) add(TXFCMTACTIVE);
 	};
@@ -349,7 +345,6 @@ set<uint> PnlWdbeRlsDetail::StatShr::comm(
 		) {
 	set<uint> items;
 
-	if (TxfOptValid == comp->TxfOptValid) insert(items, TXFOPTVALID);
 	if (ButSaveAvail == comp->ButSaveAvail) insert(items, BUTSAVEAVAIL);
 	if (ButSaveActive == comp->ButSaveActive) insert(items, BUTSAVEACTIVE);
 	if (TxtSrfActive == comp->TxtSrfActive) insert(items, TXTSRFACTIVE);
@@ -360,6 +355,7 @@ set<uint> PnlWdbeRlsDetail::StatShr::comm(
 	if (ButMchViewAvail == comp->ButMchViewAvail) insert(items, BUTMCHVIEWAVAIL);
 	if (ButMchViewActive == comp->ButMchViewActive) insert(items, BUTMCHVIEWACTIVE);
 	if (LstOptActive == comp->LstOptActive) insert(items, LSTOPTACTIVE);
+	if (TxfOptValid == comp->TxfOptValid) insert(items, TXFOPTVALID);
 	if (ButOptEditAvail == comp->ButOptEditAvail) insert(items, BUTOPTEDITAVAIL);
 	if (TxfCmtActive == comp->TxfCmtActive) insert(items, TXFCMTACTIVE);
 
@@ -374,7 +370,7 @@ set<uint> PnlWdbeRlsDetail::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {TXFOPTVALID, BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXTCMPACTIVE, BUTCMPVIEWAVAIL, BUTCMPVIEWACTIVE, TXTMCHACTIVE, BUTMCHVIEWAVAIL, BUTMCHVIEWACTIVE, LSTOPTACTIVE, BUTOPTEDITAVAIL, TXFCMTACTIVE};
+	diffitems = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXTCMPACTIVE, BUTCMPVIEWAVAIL, BUTCMPVIEWACTIVE, TXTMCHACTIVE, BUTMCHVIEWAVAIL, BUTMCHVIEWACTIVE, LSTOPTACTIVE, TXFOPTVALID, BUTOPTEDITAVAIL, TXFCMTACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -393,14 +389,13 @@ PnlWdbeRlsDetail::Tag::Tag(
 			, const string& CptCmt
 		) :
 			Block()
+			, Cpt(Cpt)
+			, CptSrf(CptSrf)
+			, CptCmp(CptCmp)
+			, CptMch(CptMch)
+			, CptOpt(CptOpt)
+			, CptCmt(CptCmt)
 		{
-	this->Cpt = Cpt;
-	this->CptSrf = CptSrf;
-	this->CptCmp = CptCmp;
-	this->CptMch = CptMch;
-	this->CptOpt = CptOpt;
-	this->CptCmt = CptCmt;
-
 	mask = {CPT, CPTSRF, CPTCMP, CPTMCH, CPTOPT, CPTCMT};
 };
 
@@ -481,11 +476,11 @@ PnlWdbeRlsDetail::DpchAppDo::DpchAppDo(
 			, const set<uint>& mask
 		) :
 			DpchAppWdbe(VecWdbeVDpch::DPCHAPPWDBERLSDETAILDO, scrJref)
+			, ixVDo(ixVDo)
 		{
 	if (find(mask, ALL)) this->mask = {SCRJREF, IXVDO};
 	else this->mask = mask;
 
-	this->ixVDo = ixVDo;
 };
 
 string PnlWdbeRlsDetail::DpchAppDo::getSrefsMask() {

@@ -48,8 +48,8 @@ DpchRetWdbe* WdbeMtpCplmstbuToc_v1_0::run(
 
 	if (dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMModule WHERE supRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'reg'", ref)) {
 		refC = dbswdbe->tblwdbecsignal->getNewRef();
-		dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::HSHK, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, refPrcOp, 0, "reqClearAll", false, "sl", 1, "", "", "", "0", false, 0, "");
-		dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::HSHK, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::MDL, ref, 0, "ackClearAll", false, "sl", 1, "", "", "", "", false, 0, "");
+		dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::HSHK, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, refPrcOp, 0, "reqRegClearAll", false, "sl", 1, "", "", "", "0", false, 0, "");
+		dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::HSHK, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::MDL, ref, 0, "ackRegClearAll", false, "sl", 1, "", "", "", "", false, 0, "");
 
 		refC = dbswdbe->tblwdbecsignal->getNewRef();
 		dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::HSHK, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, refPrcOp, 0, "reqSetOne", false, "sl", 1, "", "", "", "0", false, 0, "");
@@ -69,13 +69,14 @@ DpchRetWdbe* WdbeMtpCplmstbuToc_v1_0::run(
 		dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, refPrcOp, 0, "findFirstOneIx1", false, "slvdn", 16, "", "", "", "0", false, 0, "");
 		dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::MDL, ref, 0, "findFirstOneIxFirstOne", false, "slvdn", 16, "", "", "", "", false, 0, "");
 
+		Wdbe::setGenDfv(dbswdbe, ref, "size", "NSlot");
 		Wdbe::setGenDfv(dbswdbe, ref, "clearOneNotZero", "true");
 
 		Wdbe::setPrtCpr(dbswdbe, ref, "reset", "reset");
 		Wdbe::setPrtCpr(dbswdbe, ref, "mclk", "mclk");
 
-		Wdbe::setPrtCsi(dbswdbe, ref, "reqClearAll", "reqClearAll");
-		Wdbe::setPrtCsi(dbswdbe, ref, "ackClearAll", "ackClearAll");
+		Wdbe::setPrtCsi(dbswdbe, ref, "reqClearAll", "reqRegClearAll");
+		Wdbe::setPrtCsi(dbswdbe, ref, "ackClearAll", "ackRegClearAll");
 
 		Wdbe::setPrtCsi(dbswdbe, ref, "reqSetOne", "reqSetOne");
 		Wdbe::setPrtCsi(dbswdbe, ref, "ackSetOne", "ackSetOne");

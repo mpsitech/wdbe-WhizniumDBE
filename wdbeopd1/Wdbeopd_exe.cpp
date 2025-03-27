@@ -44,10 +44,11 @@ Wdbeopd::Wdbeopd(
 	xchg = new XchgWdbeopd();
 	xchg->exedir = exedir;
 
-	// 2. load preferences
+	// 2. load then store preferences
 	loadPref();
 
 	if (engsrvportofs != 0) xchg->stgwdbeopd.engsrvportofs = engsrvportofs;
+	else storePref();
 
 	// 3. connect to database
 	dbswdbe.init(xchg->stgwdbedatabase.ixDbsVDbstype, xchg->stgwdbedatabase.dbspath, xchg->stgwdbedatabase.dbsname, xchg->stgwdbedatabase.ip
@@ -154,10 +155,7 @@ Wdbeopd::~Wdbeopd() {
 	// 4. terminate shared data
 	xchg->shrdatOpprc.term(xchg);
 
-	// 5. store preferences
-	if (xchg->stgwdbeopd.engsrvportofs == 0) storePref();
-
-	// 6. delete exchange object
+	// 5. delete exchange object
 	delete xchg;
 };
 
@@ -315,6 +313,8 @@ void Wdbeopd::storePref() {
 	xmlTextWriter* wr = NULL;
 
 	startwriteFile(xchg->exedir + "/PrefWdbeopd.xml", &wr);
+	xmlTextWriterSetIndent(wr, 1);
+	xmlTextWriterSetIndentString(wr, BAD_CAST "\t");
 	xmlTextWriterStartElement(wr, BAD_CAST "PrefWdbeopd");
 		xchg->stgwdbedatabase.writeXML(wr);
 		xchg->stgwdbemonitor.writeXML(wr);

@@ -23,8 +23,8 @@ DpchInvWdbePlhmcuEctr::DpchInvWdbePlhmcuEctr(
 			, const ubigint refWdbeMModule
 		) :
 			DpchInvWdbe(VecWdbeVDpch::DPCHINVWDBEPLHMCUECTR, oref, jref)
+			, refWdbeMModule(refWdbeMModule)
 		{
-	this->refWdbeMModule = refWdbeMModule;
 };
 
 void DpchInvWdbePlhmcuEctr::readXML(
@@ -72,9 +72,9 @@ DpchRetWdbePlhmcuEctr::DpchRetWdbePlhmcuEctr(
 			, const vector<string>& vals
 		) :
 			DpchRetWdbe(VecWdbeVDpch::DPCHRETWDBEPLHMCUECTR, scrOref, scrJref, ixOpVOpres, pdone)
+			, keys(keys)
+			, vals(vals)
 		{
-	this->keys = keys;
-	this->vals = vals;
 };
 
 void DpchRetWdbePlhmcuEctr::readXML(
@@ -136,8 +136,8 @@ DpchInvWdbePlhmcuEhostif::DpchInvWdbePlhmcuEhostif(
 			, const ubigint refWdbeMModule
 		) :
 			DpchInvWdbe(VecWdbeVDpch::DPCHINVWDBEPLHMCUEHOSTIF, oref, jref)
+			, refWdbeMModule(refWdbeMModule)
 		{
-	this->refWdbeMModule = refWdbeMModule;
 };
 
 void DpchInvWdbePlhmcuEhostif::readXML(
@@ -185,9 +185,9 @@ DpchRetWdbePlhmcuEhostif::DpchRetWdbePlhmcuEhostif(
 			, const vector<string>& vals
 		) :
 			DpchRetWdbe(VecWdbeVDpch::DPCHRETWDBEPLHMCUEHOSTIF, scrOref, scrJref, ixOpVOpres, pdone)
+			, keys(keys)
+			, vals(vals)
 		{
-	this->keys = keys;
-	this->vals = vals;
 };
 
 void DpchRetWdbePlhmcuEhostif::readXML(

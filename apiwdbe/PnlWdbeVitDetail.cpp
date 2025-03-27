@@ -46,10 +46,9 @@ PnlWdbeVitDetail::ContIac::ContIac(
 			, const string& TxfCmt
 		) :
 			Block()
+			, TxfTit(TxfTit)
+			, TxfCmt(TxfCmt)
 		{
-	this->TxfTit = TxfTit;
-	this->TxfCmt = TxfCmt;
-
 	mask = {TXFTIT, TXFCMT};
 };
 
@@ -128,10 +127,9 @@ PnlWdbeVitDetail::ContInf::ContInf(
 			, const string& TxtVec
 		) :
 			Block()
+			, TxtSrf(TxtSrf)
+			, TxtVec(TxtVec)
 		{
-	this->TxtSrf = TxtSrf;
-	this->TxtVec = TxtVec;
-
 	mask = {TXTSRF, TXTVEC};
 };
 
@@ -192,9 +190,8 @@ PnlWdbeVitDetail::StatApp::StatApp(
 			const uint ixWdbeVExpstate
 		) :
 			Block()
+			, ixWdbeVExpstate(ixWdbeVExpstate)
 		{
-	this->ixWdbeVExpstate = ixWdbeVExpstate;
-
 	mask = {IXWDBEVEXPSTATE};
 };
 
@@ -265,16 +262,15 @@ PnlWdbeVitDetail::StatShr::StatShr(
 			, const bool TxfCmtActive
 		) :
 			Block()
+			, ButSaveAvail(ButSaveAvail)
+			, ButSaveActive(ButSaveActive)
+			, TxtSrfActive(TxtSrfActive)
+			, TxfTitActive(TxfTitActive)
+			, TxtVecActive(TxtVecActive)
+			, ButVecViewAvail(ButVecViewAvail)
+			, ButVecViewActive(ButVecViewActive)
+			, TxfCmtActive(TxfCmtActive)
 		{
-	this->ButSaveAvail = ButSaveAvail;
-	this->ButSaveActive = ButSaveActive;
-	this->TxtSrfActive = TxtSrfActive;
-	this->TxfTitActive = TxfTitActive;
-	this->TxtVecActive = TxtVecActive;
-	this->ButVecViewAvail = ButVecViewAvail;
-	this->ButVecViewActive = ButVecViewActive;
-	this->TxfCmtActive = TxfCmtActive;
-
 	mask = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXFTITACTIVE, TXTVECACTIVE, BUTVECVIEWAVAIL, BUTVECVIEWACTIVE, TXFCMTACTIVE};
 };
 
@@ -351,13 +347,12 @@ PnlWdbeVitDetail::Tag::Tag(
 			, const string& CptCmt
 		) :
 			Block()
+			, Cpt(Cpt)
+			, CptSrf(CptSrf)
+			, CptTit(CptTit)
+			, CptVec(CptVec)
+			, CptCmt(CptCmt)
 		{
-	this->Cpt = Cpt;
-	this->CptSrf = CptSrf;
-	this->CptTit = CptTit;
-	this->CptVec = CptVec;
-	this->CptCmt = CptCmt;
-
 	mask = {CPT, CPTSRF, CPTTIT, CPTVEC, CPTCMT};
 };
 
@@ -437,11 +432,11 @@ PnlWdbeVitDetail::DpchAppDo::DpchAppDo(
 			, const set<uint>& mask
 		) :
 			DpchAppWdbe(VecWdbeVDpch::DPCHAPPWDBEVITDETAILDO, scrJref)
+			, ixVDo(ixVDo)
 		{
 	if (find(mask, ALL)) this->mask = {SCRJREF, IXVDO};
 	else this->mask = mask;
 
-	this->ixVDo = ixVDo;
 };
 
 string PnlWdbeVitDetail::DpchAppDo::getSrefsMask() {

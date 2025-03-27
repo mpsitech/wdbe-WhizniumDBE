@@ -21,10 +21,11 @@ WdbeQMchList::WdbeQMchList(
 			const uint jnum
 			, const string sref
 			, const string stubSupRefWdbeMMachine
-		) {
-	this->jnum = jnum;
-	this->sref = sref;
-	this->stubSupRefWdbeMMachine = stubSupRefWdbeMMachine;
+		) :
+			jnum(jnum)
+			, sref(sref)
+			, stubSupRefWdbeMMachine(stubSupRefWdbeMMachine)
+		{
 };
 
 bool WdbeQMchList::readXML(

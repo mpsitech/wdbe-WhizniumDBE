@@ -41,9 +41,8 @@ PnlWdbeUntSil1NUnit::ContInf::ContInf(
 			const uint numFCsiQst
 		) :
 			Block()
+			, numFCsiQst(numFCsiQst)
 		{
-	this->numFCsiQst = numFCsiQst;
-
 	mask = {NUMFCSIQST};
 };
 
@@ -139,8 +138,8 @@ PnlWdbeUntSil1NUnit::StgIac::StgIac(
 			const uint TcoRefWidth
 		) :
 			Block()
+			, TcoRefWidth(TcoRefWidth)
 		{
-	this->TcoRefWidth = TcoRefWidth;
 	mask = {TCOREFWIDTH};
 };
 

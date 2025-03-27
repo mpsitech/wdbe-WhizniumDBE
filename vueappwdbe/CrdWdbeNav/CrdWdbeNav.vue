@@ -708,7 +708,7 @@
 			MenCrd: [
 				{
 					pnlsref: "pnladmin",
-					mits: ["MitCrdUsg", "MitCrdUsr", "MitCrdPrs", "MitCrdFil"]
+					mits: ["MitCrdUsg", "MitCrdUsr", "MitCrdPrs", "MitCrdFil", "MitCrdPrf"]
 				},
 				{
 					pnlsref: "pnlglobal",
@@ -810,6 +810,13 @@
 				{
 					sref: "MenCrd",
 					mits: ["MitCrdNew", "MitCrdDld"]
+				}
+			],
+
+			MbarPrf: [
+				{
+					sref: "MenCrd",
+					mits: ["MitCrdRvr", "MitCrdSto"]
 				}
 			],
 

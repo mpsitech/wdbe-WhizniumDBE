@@ -46,12 +46,11 @@ PnlWdbeCprDetail::ContIac::ContIac(
 			, const string& TxfCmt
 		) :
 			Block()
+			, TxfTit(TxfTit)
+			, numFPupTyp(numFPupTyp)
+			, TxfGrl(TxfGrl)
+			, TxfCmt(TxfCmt)
 		{
-	this->TxfTit = TxfTit;
-	this->numFPupTyp = numFPupTyp;
-	this->TxfGrl = TxfGrl;
-	this->TxfCmt = TxfCmt;
-
 	mask = {TXFTIT, NUMFPUPTYP, TXFGRL, TXFCMT};
 };
 
@@ -172,10 +171,9 @@ PnlWdbeCprDetail::ContInf::ContInf(
 			, const string& TxtCvr
 		) :
 			Block()
+			, TxtSrf(TxtSrf)
+			, TxtCvr(TxtCvr)
 		{
-	this->TxtSrf = TxtSrf;
-	this->TxtCvr = TxtCvr;
-
 	mask = {TXTSRF, TXTCVR};
 };
 
@@ -283,18 +281,17 @@ PnlWdbeCprDetail::StatShr::StatShr(
 			, const bool TxfCmtActive
 		) :
 			Block()
+			, ButSaveAvail(ButSaveAvail)
+			, ButSaveActive(ButSaveActive)
+			, TxtSrfActive(TxtSrfActive)
+			, TxfTitActive(TxfTitActive)
+			, PupTypActive(PupTypActive)
+			, TxtCvrActive(TxtCvrActive)
+			, ButCvrViewAvail(ButCvrViewAvail)
+			, ButCvrViewActive(ButCvrViewActive)
+			, TxfGrlActive(TxfGrlActive)
+			, TxfCmtActive(TxfCmtActive)
 		{
-	this->ButSaveAvail = ButSaveAvail;
-	this->ButSaveActive = ButSaveActive;
-	this->TxtSrfActive = TxtSrfActive;
-	this->TxfTitActive = TxfTitActive;
-	this->PupTypActive = PupTypActive;
-	this->TxtCvrActive = TxtCvrActive;
-	this->ButCvrViewAvail = ButCvrViewAvail;
-	this->ButCvrViewActive = ButCvrViewActive;
-	this->TxfGrlActive = TxfGrlActive;
-	this->TxfCmtActive = TxfCmtActive;
-
 	mask = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXFTITACTIVE, PUPTYPACTIVE, TXTCVRACTIVE, BUTCVRVIEWAVAIL, BUTCVRVIEWACTIVE, TXFGRLACTIVE, TXFCMTACTIVE};
 };
 

@@ -53,9 +53,8 @@ PnlWdbeMtpList::ContIac::ContIac(
 			const uint numFTos
 		) :
 			Block()
+			, numFTos(numFTos)
 		{
-	this->numFTos = numFTos;
-
 	mask = {NUMFTOS};
 };
 
@@ -131,10 +130,9 @@ PnlWdbeMtpList::ContInf::ContInf(
 			, const uint numFCsiQst
 		) :
 			Block()
+			, ButFilterOn(ButFilterOn)
+			, numFCsiQst(numFCsiQst)
 		{
-	this->ButFilterOn = ButFilterOn;
-	this->numFCsiQst = numFCsiQst;
-
 	mask = {BUTFILTERON, NUMFCSIQST};
 };
 
@@ -196,10 +194,9 @@ PnlWdbeMtpList::StatShr::StatShr(
 			, const bool ButDeleteActive
 		) :
 			Block()
+			, ixWdbeVExpstate(ixWdbeVExpstate)
+			, ButDeleteActive(ButDeleteActive)
 		{
-	this->ixWdbeVExpstate = ixWdbeVExpstate;
-	this->ButDeleteActive = ButDeleteActive;
-
 	mask = {IXWDBEVEXPSTATE, BUTDELETEACTIVE};
 };
 
@@ -268,12 +265,11 @@ PnlWdbeMtpList::StgIac::StgIac(
 			, const uint TcoSrrWidth
 		) :
 			Block()
+			, TcoSrfWidth(TcoSrfWidth)
+			, TcoVndWidth(TcoVndWidth)
+			, TcoTypWidth(TcoTypWidth)
+			, TcoSrrWidth(TcoSrrWidth)
 		{
-	this->TcoSrfWidth = TcoSrfWidth;
-	this->TcoVndWidth = TcoVndWidth;
-	this->TcoTypWidth = TcoTypWidth;
-	this->TcoSrrWidth = TcoSrrWidth;
-
 	mask = {TCOSRFWIDTH, TCOVNDWIDTH, TCOTYPWIDTH, TCOSRRWIDTH};
 };
 
@@ -366,18 +362,17 @@ PnlWdbeMtpList::Tag::Tag(
 			, const string& TcoSrr
 		) :
 			Block()
+			, Cpt(Cpt)
+			, TxtRecord1(TxtRecord1)
+			, TxtRecord2(TxtRecord2)
+			, Trs(Trs)
+			, TxtShowing1(TxtShowing1)
+			, TxtShowing2(TxtShowing2)
+			, TcoSrf(TcoSrf)
+			, TcoVnd(TcoVnd)
+			, TcoTyp(TcoTyp)
+			, TcoSrr(TcoSrr)
 		{
-	this->Cpt = Cpt;
-	this->TxtRecord1 = TxtRecord1;
-	this->TxtRecord2 = TxtRecord2;
-	this->Trs = Trs;
-	this->TxtShowing1 = TxtShowing1;
-	this->TxtShowing2 = TxtShowing2;
-	this->TcoSrf = TcoSrf;
-	this->TcoVnd = TcoVnd;
-	this->TcoTyp = TcoTyp;
-	this->TcoSrr = TcoSrr;
-
 	mask = {CPT, TXTRECORD1, TXTRECORD2, TRS, TXTSHOWING1, TXTSHOWING2, TCOSRF, TCOVND, TCOTYP, TCOSRR};
 };
 
@@ -470,11 +465,11 @@ PnlWdbeMtpList::DpchAppDo::DpchAppDo(
 			, const set<uint>& mask
 		) :
 			DpchAppWdbe(VecWdbeVDpch::DPCHAPPWDBEMTPLISTDO, scrJref)
+			, ixVDo(ixVDo)
 		{
 	if (find(mask, ALL)) this->mask = {SCRJREF, IXVDO};
 	else this->mask = mask;
 
-	this->ixVDo = ixVDo;
 };
 
 string PnlWdbeMtpList::DpchAppDo::getSrefsMask() {

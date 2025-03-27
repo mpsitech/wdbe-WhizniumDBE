@@ -328,11 +328,13 @@ function handleTxftChange(_doc, ctlsref) {
 function mergeDpchEngData(dom) {
 	var mask = [];
 
+	// IP mergeDpchEngData --- BEGIN
 	if (updateSrcblock(dom, "DpchEngWdbePplDetailData", "ContIacWdbePplDetail", srcdoc)) mask.push("contiac");
 	if (updateSrcblock(dom, "DpchEngWdbePplDetailData", "ContInfWdbePplDetail", srcdoc)) mask.push("continf");
 	if (updateSrcblock(dom, "DpchEngWdbePplDetailData", "StatAppWdbePplDetail", srcdoc)) mask.push("statapp");
 	if (updateSrcblock(dom, "DpchEngWdbePplDetailData", "StatShrWdbePplDetail", srcdoc)) mask.push("statshr");
 	if (updateSrcblock(dom, "DpchEngWdbePplDetailData", "TagWdbePplDetail", srcdoc)) mask.push("tag");
+	// IP mergeDpchEngData --- END
 
 	return mask;
 };

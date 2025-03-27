@@ -15,8 +15,9 @@
 // IP include.cust --- INSERT
 
 #include "PnlWdbeCmdMNController.h"
-#include "PnlWdbeCmdAInvpar.h"
+#include "PnlWdbeCmdHk1NVector.h"
 #include "PnlWdbeCmdARetpar.h"
+#include "PnlWdbeCmdAInvpar.h"
 #include "PnlWdbeCmdDetail.h"
 
 #define VecVWdbeCmdRecDo PnlWdbeCmdRec::VecVDo
@@ -75,8 +76,8 @@ public:
 	class StatApp {
 
 	public:
-		static void writeJSON(Json::Value& sup, std::string difftag = "", const bool initdoneDetail = false, const bool initdoneARetpar = false, const bool initdoneAInvpar = false, const bool initdoneMNController = false);
-		static void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true, const bool initdoneDetail = false, const bool initdoneARetpar = false, const bool initdoneAInvpar = false, const bool initdoneMNController = false);
+		static void writeJSON(Json::Value& sup, std::string difftag = "", const bool initdoneDetail = false, const bool initdoneAInvpar = false, const bool initdoneARetpar = false, const bool initdoneHk1NVector = false, const bool initdoneMNController = false);
+		static void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true, const bool initdoneDetail = false, const bool initdoneAInvpar = false, const bool initdoneARetpar = false, const bool initdoneHk1NVector = false, const bool initdoneMNController = false);
 	};
 
 	/**
@@ -87,19 +88,21 @@ public:
 	public:
 		static const Sbecore::uint IXWDBEVEXPSTATE = 1;
 		static const Sbecore::uint JREFDETAIL = 2;
-		static const Sbecore::uint JREFARETPAR = 3;
-		static const Sbecore::uint JREFAINVPAR = 4;
-		static const Sbecore::uint JREFMNCONTROLLER = 5;
-		static const Sbecore::uint BUTREGULARIZEACTIVE = 6;
+		static const Sbecore::uint JREFAINVPAR = 3;
+		static const Sbecore::uint JREFARETPAR = 4;
+		static const Sbecore::uint JREFHK1NVECTOR = 5;
+		static const Sbecore::uint JREFMNCONTROLLER = 6;
+		static const Sbecore::uint BUTREGULARIZEACTIVE = 7;
 
 	public:
-		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const Sbecore::ubigint jrefDetail = 0, const Sbecore::ubigint jrefARetpar = 0, const Sbecore::ubigint jrefAInvpar = 0, const Sbecore::ubigint jrefMNController = 0, const bool ButRegularizeActive = true);
+		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const Sbecore::ubigint jrefDetail = 0, const Sbecore::ubigint jrefAInvpar = 0, const Sbecore::ubigint jrefARetpar = 0, const Sbecore::ubigint jrefHk1NVector = 0, const Sbecore::ubigint jrefMNController = 0, const bool ButRegularizeActive = true);
 
 	public:
 		Sbecore::uint ixWdbeVExpstate;
 		Sbecore::ubigint jrefDetail;
-		Sbecore::ubigint jrefARetpar;
 		Sbecore::ubigint jrefAInvpar;
+		Sbecore::ubigint jrefARetpar;
+		Sbecore::ubigint jrefHk1NVector;
 		Sbecore::ubigint jrefMNController;
 		bool ButRegularizeActive;
 
@@ -181,8 +184,9 @@ public:
 	StatShr statshr;
 
 	PnlWdbeCmdMNController* pnlmncontroller;
-	PnlWdbeCmdAInvpar* pnlainvpar;
+	PnlWdbeCmdHk1NVector* pnlhk1nvector;
 	PnlWdbeCmdARetpar* pnlaretpar;
+	PnlWdbeCmdAInvpar* pnlainvpar;
 	PnlWdbeCmdDetail* pnldetail;
 
 	WdbeMCommand recCmd;

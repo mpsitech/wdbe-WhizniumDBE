@@ -133,31 +133,28 @@ namespace PnlWdbePplDetail {
 	class StatShr : public Sbecore::Block {
 
 	public:
-		static const Sbecore::uint TXFCLKVALID = 1;
-		static const Sbecore::uint TXFCLGVALID = 2;
-		static const Sbecore::uint TXFASRVALID = 3;
-		static const Sbecore::uint BUTSAVEAVAIL = 4;
-		static const Sbecore::uint BUTSAVEACTIVE = 5;
-		static const Sbecore::uint TXTSRFACTIVE = 6;
-		static const Sbecore::uint TXTHSMACTIVE = 7;
-		static const Sbecore::uint BUTHSMVIEWAVAIL = 8;
-		static const Sbecore::uint BUTHSMVIEWACTIVE = 9;
-		static const Sbecore::uint TXTCLKACTIVE = 10;
-		static const Sbecore::uint BUTCLKVIEWAVAIL = 11;
-		static const Sbecore::uint TXTCLGACTIVE = 12;
-		static const Sbecore::uint BUTCLGVIEWAVAIL = 13;
-		static const Sbecore::uint TXTASRACTIVE = 14;
+		static const Sbecore::uint BUTSAVEAVAIL = 1;
+		static const Sbecore::uint BUTSAVEACTIVE = 2;
+		static const Sbecore::uint TXTSRFACTIVE = 3;
+		static const Sbecore::uint TXTHSMACTIVE = 4;
+		static const Sbecore::uint BUTHSMVIEWAVAIL = 5;
+		static const Sbecore::uint BUTHSMVIEWACTIVE = 6;
+		static const Sbecore::uint TXTCLKACTIVE = 7;
+		static const Sbecore::uint TXFCLKVALID = 8;
+		static const Sbecore::uint BUTCLKVIEWAVAIL = 9;
+		static const Sbecore::uint TXTCLGACTIVE = 10;
+		static const Sbecore::uint TXFCLGVALID = 11;
+		static const Sbecore::uint BUTCLGVIEWAVAIL = 12;
+		static const Sbecore::uint TXTASRACTIVE = 13;
+		static const Sbecore::uint TXFASRVALID = 14;
 		static const Sbecore::uint BUTASRVIEWAVAIL = 15;
 		static const Sbecore::uint TXFDPTACTIVE = 16;
 		static const Sbecore::uint TXFCMTACTIVE = 17;
 
 	public:
-		StatShr(const bool TxfClkValid = false, const bool TxfClgValid = false, const bool TxfAsrValid = false, const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxtSrfActive = true, const bool TxtHsmActive = true, const bool ButHsmViewAvail = true, const bool ButHsmViewActive = true, const bool TxtClkActive = true, const bool ButClkViewAvail = true, const bool TxtClgActive = true, const bool ButClgViewAvail = true, const bool TxtAsrActive = true, const bool ButAsrViewAvail = true, const bool TxfDptActive = true, const bool TxfCmtActive = true);
+		StatShr(const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxtSrfActive = true, const bool TxtHsmActive = true, const bool ButHsmViewAvail = true, const bool ButHsmViewActive = true, const bool TxtClkActive = true, const bool TxfClkValid = false, const bool ButClkViewAvail = true, const bool TxtClgActive = true, const bool TxfClgValid = false, const bool ButClgViewAvail = true, const bool TxtAsrActive = true, const bool TxfAsrValid = false, const bool ButAsrViewAvail = true, const bool TxfDptActive = true, const bool TxfCmtActive = true);
 
 	public:
-		bool TxfClkValid;
-		bool TxfClgValid;
-		bool TxfAsrValid;
 		bool ButSaveAvail;
 		bool ButSaveActive;
 		bool TxtSrfActive;
@@ -165,10 +162,13 @@ namespace PnlWdbePplDetail {
 		bool ButHsmViewAvail;
 		bool ButHsmViewActive;
 		bool TxtClkActive;
+		bool TxfClkValid;
 		bool ButClkViewAvail;
 		bool TxtClgActive;
+		bool TxfClgValid;
 		bool ButClgViewAvail;
 		bool TxtAsrActive;
+		bool TxfAsrValid;
 		bool ButAsrViewAvail;
 		bool TxfDptActive;
 		bool TxfCmtActive;

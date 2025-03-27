@@ -21,10 +21,11 @@ WdbeQCvrAPlh::WdbeQCvrAPlh(
 			const uint jnum
 			, const string sref
 			, const string Comment
-		) {
-	this->jnum = jnum;
-	this->sref = sref;
-	this->Comment = Comment;
+		) :
+			jnum(jnum)
+			, sref(sref)
+			, Comment(Comment)
+		{
 };
 
 bool WdbeQCvrAPlh::readXML(

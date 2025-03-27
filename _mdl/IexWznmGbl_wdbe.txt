@@ -62,4 +62,5 @@ dlgimp	DlgWdbeVerCmdset
 dlgimp	DlgWdbeVerCustfst
 dlgimp	DlgWdbeVerDflalg
 dlgimp	DlgWdbeVerMdlstr
+prefs	CrdWdbePrf
 ImeIMCapability.end

@@ -53,11 +53,10 @@ PnlWdbeFstDetail::ContIac::ContIac(
 			, const string& TxfCmt
 		) :
 			Block()
+			, numFLstClu(numFLstClu)
+			, ChkEip(ChkEip)
+			, TxfCmt(TxfCmt)
 		{
-	this->numFLstClu = numFLstClu;
-	this->ChkEip = ChkEip;
-	this->TxfCmt = TxfCmt;
-
 	mask = {NUMFLSTCLU, CHKEIP, TXFCMT};
 };
 
@@ -140,11 +139,10 @@ PnlWdbeFstDetail::ContInf::ContInf(
 			, const string& TxtFsm
 		) :
 			Block()
+			, TxtSrf(TxtSrf)
+			, TxtClu(TxtClu)
+			, TxtFsm(TxtFsm)
 		{
-	this->TxtSrf = TxtSrf;
-	this->TxtClu = TxtClu;
-	this->TxtFsm = TxtFsm;
-
 	mask = {TXTSRF, TXTCLU, TXTFSM};
 };
 
@@ -209,11 +207,10 @@ PnlWdbeFstDetail::StatApp::StatApp(
 			, const uint LstCluNumFirstdisp
 		) :
 			Block()
+			, ixWdbeVExpstate(ixWdbeVExpstate)
+			, LstCluAlt(LstCluAlt)
+			, LstCluNumFirstdisp(LstCluNumFirstdisp)
 		{
-	this->ixWdbeVExpstate = ixWdbeVExpstate;
-	this->LstCluAlt = LstCluAlt;
-	this->LstCluNumFirstdisp = LstCluNumFirstdisp;
-
 	mask = {IXWDBEVEXPSTATE, LSTCLUALT, LSTCLUNUMFIRSTDISP};
 };
 
@@ -292,20 +289,19 @@ PnlWdbeFstDetail::StatShr::StatShr(
 			, const bool TxfCmtActive
 		) :
 			Block()
+			, ButSaveAvail(ButSaveAvail)
+			, ButSaveActive(ButSaveActive)
+			, TxtSrfActive(TxtSrfActive)
+			, LstCluActive(LstCluActive)
+			, ButCluViewActive(ButCluViewActive)
+			, ButCluClusterAvail(ButCluClusterAvail)
+			, ButCluUnclusterAvail(ButCluUnclusterAvail)
+			, TxtFsmActive(TxtFsmActive)
+			, ButFsmViewAvail(ButFsmViewAvail)
+			, ButFsmViewActive(ButFsmViewActive)
+			, ChkEipActive(ChkEipActive)
+			, TxfCmtActive(TxfCmtActive)
 		{
-	this->ButSaveAvail = ButSaveAvail;
-	this->ButSaveActive = ButSaveActive;
-	this->TxtSrfActive = TxtSrfActive;
-	this->LstCluActive = LstCluActive;
-	this->ButCluViewActive = ButCluViewActive;
-	this->ButCluClusterAvail = ButCluClusterAvail;
-	this->ButCluUnclusterAvail = ButCluUnclusterAvail;
-	this->TxtFsmActive = TxtFsmActive;
-	this->ButFsmViewAvail = ButFsmViewAvail;
-	this->ButFsmViewActive = ButFsmViewActive;
-	this->ChkEipActive = ChkEipActive;
-	this->TxfCmtActive = TxfCmtActive;
-
 	mask = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, LSTCLUACTIVE, BUTCLUVIEWACTIVE, BUTCLUCLUSTERAVAIL, BUTCLUUNCLUSTERAVAIL, TXTFSMACTIVE, BUTFSMVIEWAVAIL, BUTFSMVIEWACTIVE, CHKEIPACTIVE, TXFCMTACTIVE};
 };
 
@@ -391,14 +387,13 @@ PnlWdbeFstDetail::Tag::Tag(
 			, const string& CptCmt
 		) :
 			Block()
+			, Cpt(Cpt)
+			, CptSrf(CptSrf)
+			, CptClu(CptClu)
+			, CptFsm(CptFsm)
+			, CptEip(CptEip)
+			, CptCmt(CptCmt)
 		{
-	this->Cpt = Cpt;
-	this->CptSrf = CptSrf;
-	this->CptClu = CptClu;
-	this->CptFsm = CptFsm;
-	this->CptEip = CptEip;
-	this->CptCmt = CptCmt;
-
 	mask = {CPT, CPTSRF, CPTCLU, CPTFSM, CPTEIP, CPTCMT};
 };
 
@@ -479,11 +474,11 @@ PnlWdbeFstDetail::DpchAppDo::DpchAppDo(
 			, const set<uint>& mask
 		) :
 			DpchAppWdbe(VecWdbeVDpch::DPCHAPPWDBEFSTDETAILDO, scrJref)
+			, ixVDo(ixVDo)
 		{
 	if (find(mask, ALL)) this->mask = {SCRJREF, IXVDO};
 	else this->mask = mask;
 
-	this->ixVDo = ixVDo;
 };
 
 string PnlWdbeFstDetail::DpchAppDo::getSrefsMask() {

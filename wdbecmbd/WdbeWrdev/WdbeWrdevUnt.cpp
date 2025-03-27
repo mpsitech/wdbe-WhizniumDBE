@@ -142,13 +142,11 @@ void WdbeWrdevUnt::writeUntH(
 
 	// --- speccmds
 	outfile << "// IP speccmds --- IBEGIN" << endl;
-	if (!Easy) {
-		for (unsigned int i = 0; i < cmds.nodes.size(); i++) {
-			cmd = cmds.nodes[i];
+	for (unsigned int i = 0; i < cmds.nodes.size(); i++) {
+		cmd = cmds.nodes[i];
 
-			Wdbe::analyzeCmd(dbswdbe, cmd, unt, NULL, ipas, rpas, supsref, subsref);
-			if (rpas.nodes.size() > 0) writeSpeccmdH(dbswdbe, outfile, cmd, rpas, supsref, subsref);
-		};
+		Wdbe::analyzeCmd(dbswdbe, cmd, unt, NULL, ipas, rpas, supsref, subsref);
+		writeSpeccmdH(dbswdbe, outfile, Easy, cmd, ipas, rpas, supsref, subsref);
 	};
 	outfile << "// IP speccmds --- IEND" << endl;
 
@@ -164,7 +162,7 @@ void WdbeWrdevUnt::writeUntH(
 		// --- cmdvars
 		for (unsigned int i = 0; i < cmds.nodes.size(); i++) {
 			cmd = cmds.nodes[i];
-			outfile << "\tDbecore::Cmd* cmd" << StrMod::cap(cmd->sref) << " ;" << endl;
+			outfile << "\tCmd" << StrMod::cap(cmd->sref) << " cmd" << StrMod::cap(cmd->sref) << ";" << endl;
 		};
 	};
 
@@ -345,7 +343,7 @@ void WdbeWrdevUnt::writeUntCpp(
 			cmd = cmds.nodes[i];
 
 			Wdbe::analyzeCmd(dbswdbe, cmd, unt, NULL, ipas, rpas, supsref, subsref);
-			if (rpas.nodes.size() > 0) writeSpeccmdCpp(dbswdbe, outfile, 0, cmd, rpas, supsref, subsref);
+			writeSpeccmdCpp(dbswdbe, outfile, Easy, 0, cmd, ipas, rpas, supsref, subsref);
 		};
 		outfile << "// IP speccmds --- IEND" << endl;
 
@@ -585,7 +583,7 @@ void WdbeWrdevUnt::writeUntCpp(
 			else outfile << ", false";
 			outfile << ", reqlen";
 			if (Easy) {
-				if (mgmtToNotFrom) outfile << ", (txburst) ? 7 : 0, 2";
+				if (mgmtToNotFrom) outfile << ", 0, 2";
 				else outfile << ", 0, 2";
 				outfile << ", buf";
 			};
@@ -747,7 +745,7 @@ void WdbeWrdevUnt::writeUntvecsH(
 	outfile << "// IP vecs --- IBEGIN" << endl;
 	for (unsigned int i = 0; i < vecs.nodes.size(); i++) {
 		vec = vecs.nodes[i];
-		writeVecH(dbswdbe, outfile, vec, unt, NULL, false);
+		writeVecH(dbswdbe, outfile, vec, unt, NULL, NULL, false);
 	};
 	outfile << "// IP vecs --- IEND" << endl;
 };
@@ -764,7 +762,7 @@ void WdbeWrdevUnt::writeUntvecsCpp(
 	outfile << "// IP vecs --- IBEGIN" << endl;
 	for (unsigned int i = 0; i < vecs.nodes.size(); i++) {
 		vec = vecs.nodes[i];
-		writeVecCpp(dbswdbe, outfile, vec, unt, NULL, false);
+		writeVecCpp(dbswdbe, outfile, vec, unt, NULL, NULL, false);
 	};
 	outfile << "// IP vecs --- IEND" << endl;
 };

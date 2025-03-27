@@ -40,13 +40,13 @@ PnlWdbeMtpRec::PnlWdbeMtpRec(
 
 	pnlref1nfile = NULL;
 	pnlmge1nsignal = NULL;
-	pnlref1nvariable = NULL;
 	pnlref1nsensitivity = NULL;
+	pnlref1nvariable = NULL;
 	pnlsup1nmodule = NULL;
-	pnltpl1nmodule = NULL;
-	pnlmdl1nport = NULL;
-	pnlhsm1npipeline = NULL;
 	pnlmdl1ngeneric = NULL;
+	pnltpl1nmodule = NULL;
+	pnlhsm1npipeline = NULL;
+	pnlmdl1nport = NULL;
 	pnlapar = NULL;
 	pnlkhdltype = NULL;
 	pnlkparkey = NULL;
@@ -122,13 +122,13 @@ void PnlWdbeMtpRec::refresh(
 		if (pnlkparkey) {delete pnlkparkey; pnlkparkey = NULL;};
 		if (pnlkhdltype) {delete pnlkhdltype; pnlkhdltype = NULL;};
 		if (pnlapar) {delete pnlapar; pnlapar = NULL;};
-		if (pnlmdl1ngeneric) {delete pnlmdl1ngeneric; pnlmdl1ngeneric = NULL;};
-		if (pnlhsm1npipeline) {delete pnlhsm1npipeline; pnlhsm1npipeline = NULL;};
 		if (pnlmdl1nport) {delete pnlmdl1nport; pnlmdl1nport = NULL;};
+		if (pnlhsm1npipeline) {delete pnlhsm1npipeline; pnlhsm1npipeline = NULL;};
 		if (pnltpl1nmodule) {delete pnltpl1nmodule; pnltpl1nmodule = NULL;};
+		if (pnlmdl1ngeneric) {delete pnlmdl1ngeneric; pnlmdl1ngeneric = NULL;};
 		if (pnlsup1nmodule) {delete pnlsup1nmodule; pnlsup1nmodule = NULL;};
-		if (pnlref1nsensitivity) {delete pnlref1nsensitivity; pnlref1nsensitivity = NULL;};
 		if (pnlref1nvariable) {delete pnlref1nvariable; pnlref1nvariable = NULL;};
+		if (pnlref1nsensitivity) {delete pnlref1nsensitivity; pnlref1nsensitivity = NULL;};
 		if (pnlmge1nsignal) {delete pnlmge1nsignal; pnlmge1nsignal = NULL;};
 		if (pnlref1nfile) {delete pnlref1nfile; pnlref1nfile = NULL;};
 	} else {
@@ -136,13 +136,13 @@ void PnlWdbeMtpRec::refresh(
 		if (!pnlkparkey) pnlkparkey = new PnlWdbeMtpKParKey(xchg, dbswdbe, jref, ixWdbeVLocale);
 		if (!pnlkhdltype) pnlkhdltype = new PnlWdbeMtpKHdltype(xchg, dbswdbe, jref, ixWdbeVLocale);
 		if (!pnlapar) pnlapar = new PnlWdbeMtpAPar(xchg, dbswdbe, jref, ixWdbeVLocale);
-		if (!pnlmdl1ngeneric) pnlmdl1ngeneric = new PnlWdbeMtpMdl1NGeneric(xchg, dbswdbe, jref, ixWdbeVLocale);
-		if (!pnlhsm1npipeline) pnlhsm1npipeline = new PnlWdbeMtpHsm1NPipeline(xchg, dbswdbe, jref, ixWdbeVLocale);
 		if (!pnlmdl1nport) pnlmdl1nport = new PnlWdbeMtpMdl1NPort(xchg, dbswdbe, jref, ixWdbeVLocale);
+		if (!pnlhsm1npipeline) pnlhsm1npipeline = new PnlWdbeMtpHsm1NPipeline(xchg, dbswdbe, jref, ixWdbeVLocale);
 		if (!pnltpl1nmodule) pnltpl1nmodule = new PnlWdbeMtpTpl1NModule(xchg, dbswdbe, jref, ixWdbeVLocale);
+		if (!pnlmdl1ngeneric) pnlmdl1ngeneric = new PnlWdbeMtpMdl1NGeneric(xchg, dbswdbe, jref, ixWdbeVLocale);
 		if (!pnlsup1nmodule) pnlsup1nmodule = new PnlWdbeMtpSup1NModule(xchg, dbswdbe, jref, ixWdbeVLocale);
-		if (!pnlref1nsensitivity) pnlref1nsensitivity = new PnlWdbeMtpRef1NSensitivity(xchg, dbswdbe, jref, ixWdbeVLocale);
 		if (!pnlref1nvariable) pnlref1nvariable = new PnlWdbeMtpRef1NVariable(xchg, dbswdbe, jref, ixWdbeVLocale);
+		if (!pnlref1nsensitivity) pnlref1nsensitivity = new PnlWdbeMtpRef1NSensitivity(xchg, dbswdbe, jref, ixWdbeVLocale);
 		if (!pnlmge1nsignal) pnlmge1nsignal = new PnlWdbeMtpMge1NSignal(xchg, dbswdbe, jref, ixWdbeVLocale);
 		if (!pnlref1nfile) pnlref1nfile = new PnlWdbeMtpRef1NFile(xchg, dbswdbe, jref, ixWdbeVLocale);
 	};
@@ -151,13 +151,13 @@ void PnlWdbeMtpRec::refresh(
 	statshr.jrefKParKey = ((pnlkparkey) ? pnlkparkey->jref : 0);
 	statshr.jrefKHdltype = ((pnlkhdltype) ? pnlkhdltype->jref : 0);
 	statshr.jrefAPar = ((pnlapar) ? pnlapar->jref : 0);
-	statshr.jrefMdl1NGeneric = ((pnlmdl1ngeneric) ? pnlmdl1ngeneric->jref : 0);
-	statshr.jrefHsm1NPipeline = ((pnlhsm1npipeline) ? pnlhsm1npipeline->jref : 0);
 	statshr.jrefMdl1NPort = ((pnlmdl1nport) ? pnlmdl1nport->jref : 0);
+	statshr.jrefHsm1NPipeline = ((pnlhsm1npipeline) ? pnlhsm1npipeline->jref : 0);
 	statshr.jrefTpl1NModule = ((pnltpl1nmodule) ? pnltpl1nmodule->jref : 0);
+	statshr.jrefMdl1NGeneric = ((pnlmdl1ngeneric) ? pnlmdl1ngeneric->jref : 0);
 	statshr.jrefSup1NModule = ((pnlsup1nmodule) ? pnlsup1nmodule->jref : 0);
-	statshr.jrefRef1NSensitivity = ((pnlref1nsensitivity) ? pnlref1nsensitivity->jref : 0);
 	statshr.jrefRef1NVariable = ((pnlref1nvariable) ? pnlref1nvariable->jref : 0);
+	statshr.jrefRef1NSensitivity = ((pnlref1nsensitivity) ? pnlref1nsensitivity->jref : 0);
 	statshr.jrefMge1NSignal = ((pnlmge1nsignal) ? pnlmge1nsignal->jref : 0);
 	statshr.jrefRef1NFile = ((pnlref1nfile) ? pnlref1nfile->jref : 0);
 
@@ -194,13 +194,13 @@ void PnlWdbeMtpRec::updatePreset(
 			if (pnlkparkey) pnlkparkey->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
 			if (pnlkhdltype) pnlkhdltype->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
 			if (pnlapar) pnlapar->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
-			if (pnlmdl1ngeneric) pnlmdl1ngeneric->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
-			if (pnlhsm1npipeline) pnlhsm1npipeline->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
 			if (pnlmdl1nport) pnlmdl1nport->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
+			if (pnlhsm1npipeline) pnlhsm1npipeline->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
 			if (pnltpl1nmodule) pnltpl1nmodule->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
+			if (pnlmdl1ngeneric) pnlmdl1ngeneric->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
 			if (pnlsup1nmodule) pnlsup1nmodule->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
-			if (pnlref1nsensitivity) pnlref1nsensitivity->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
 			if (pnlref1nvariable) pnlref1nvariable->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
+			if (pnlref1nsensitivity) pnlref1nsensitivity->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
 			if (pnlmge1nsignal) pnlmge1nsignal->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
 			if (pnlref1nfile) pnlref1nfile->updatePreset(dbswdbe, ixWdbeVPreset, jrefTrig, notif);
 		};

@@ -43,14 +43,14 @@ CrdWdbeNav::CrdWdbeNav(
 	VecVSge::fillFeed(feedFSge);
 
 	pnlauxfct = NULL;
-	pnllow = NULL;
 	pnldeploy = NULL;
-	pnlcoredev = NULL;
+	pnllow = NULL;
 	pnlhigh = NULL;
-	pnlglobal = NULL;
+	pnlcoredev = NULL;
 	pnldevdev = NULL;
-	pnlpre = NULL;
+	pnlglobal = NULL;
 	pnladmin = NULL;
+	pnlpre = NULL;
 	pnlheadbar = NULL;
 	dlgloaini = NULL;
 	dlgmnglic = NULL;
@@ -61,14 +61,14 @@ CrdWdbeNav::CrdWdbeNav(
 	refresh(dbswdbe, moditems);
 
 	pnlauxfct = new PnlWdbeNavAuxfct(xchg, dbswdbe, jref, ixWdbeVLocale);
-	pnllow = new PnlWdbeNavLow(xchg, dbswdbe, jref, ixWdbeVLocale);
 	pnldeploy = new PnlWdbeNavDeploy(xchg, dbswdbe, jref, ixWdbeVLocale);
-	pnlcoredev = new PnlWdbeNavCoredev(xchg, dbswdbe, jref, ixWdbeVLocale);
+	pnllow = new PnlWdbeNavLow(xchg, dbswdbe, jref, ixWdbeVLocale);
 	pnlhigh = new PnlWdbeNavHigh(xchg, dbswdbe, jref, ixWdbeVLocale);
-	pnlglobal = new PnlWdbeNavGlobal(xchg, dbswdbe, jref, ixWdbeVLocale);
+	pnlcoredev = new PnlWdbeNavCoredev(xchg, dbswdbe, jref, ixWdbeVLocale);
 	pnldevdev = new PnlWdbeNavDevdev(xchg, dbswdbe, jref, ixWdbeVLocale);
-	pnlpre = new PnlWdbeNavPre(xchg, dbswdbe, jref, ixWdbeVLocale);
+	pnlglobal = new PnlWdbeNavGlobal(xchg, dbswdbe, jref, ixWdbeVLocale);
 	pnladmin = new PnlWdbeNavAdmin(xchg, dbswdbe, jref, ixWdbeVLocale);
+	pnlpre = new PnlWdbeNavPre(xchg, dbswdbe, jref, ixWdbeVLocale);
 	pnlheadbar = new PnlWdbeNavHeadbar(xchg, dbswdbe, jref, ixWdbeVLocale);
 
 	// IP constructor.cust2 --- INSERT
@@ -161,6 +161,7 @@ void CrdWdbeNav::refresh(
 	statshr.MitCrdUsrAvail = evalMitCrdUsrAvail(dbswdbe);
 	statshr.MitCrdPrsAvail = evalMitCrdPrsAvail(dbswdbe);
 	statshr.MitCrdFilAvail = evalMitCrdFilAvail(dbswdbe);
+	statshr.MitCrdPrfAvail = evalMitCrdPrfAvail(dbswdbe);
 	statshr.MspCrd2Avail = evalMspCrd2Avail(dbswdbe);
 	statshr.MitCrdMchAvail = evalMitCrdMchAvail(dbswdbe);
 	statshr.MitCrdLibAvail = evalMitCrdLibAvail(dbswdbe);
@@ -285,6 +286,8 @@ void CrdWdbeNav::handleRequest(
 					handleDpchAppDoMitCrdPrsClick(dbswdbe, &(req->dpcheng));
 				} else if (dpchappdo->ixVDo == VecVDo::MITCRDFILCLICK) {
 					handleDpchAppDoMitCrdFilClick(dbswdbe, &(req->dpcheng));
+				} else if (dpchappdo->ixVDo == VecVDo::MITCRDPRFCLICK) {
+					handleDpchAppDoMitCrdPrfClick(dbswdbe, &(req->dpcheng));
 				} else if (dpchappdo->ixVDo == VecVDo::MITCRDMCHCLICK) {
 					handleDpchAppDoMitCrdMchClick(dbswdbe, &(req->dpcheng));
 				} else if (dpchappdo->ixVDo == VecVDo::MITCRDLIBCLICK) {
@@ -364,7 +367,7 @@ void CrdWdbeNav::handleDpchAppDoClose(
 
 	*dpcheng = new DpchEngWdbeConfirm(true, jref, "");
 
-	if (xchg->stgwdbeappearance.suspsess) xchg->triggerCall(dbswdbe, VecWdbeVCall::CALLWDBESUSPSESS, xchg->getRefPreset(VecWdbeVPreset::PREWDBEJREFSESS, jref));
+	if (xchg->stgwdbebehavior.suspsess) xchg->triggerCall(dbswdbe, VecWdbeVCall::CALLWDBESUSPSESS, xchg->getRefPreset(VecWdbeVPreset::PREWDBEJREFSESS, jref));
 	else xchg->triggerBoolvalCall(dbswdbe, VecWdbeVCall::CALLWDBELOGOUT, xchg->getRefPreset(VecWdbeVPreset::PREWDBEJREFSESS, jref), false);
 };
 
@@ -445,6 +448,18 @@ void CrdWdbeNav::handleDpchAppDoMitCrdFilClick(
 
 	if (jrefNew == 0) *dpcheng = new DpchEngWdbeConfirm(false, 0, "");
 	else *dpcheng = new DpchEngWdbeConfirm(true, jrefNew, "CrdWdbeFil");
+};
+
+void CrdWdbeNav::handleDpchAppDoMitCrdPrfClick(
+			DbsWdbe* dbswdbe
+			, DpchEngWdbe** dpcheng
+		) {
+	ubigint jrefNew = 0;
+
+	xchg->triggerIxRefSrefIntvalToRefCall(dbswdbe, VecWdbeVCall::CALLWDBECRDOPEN, jref, 0, 0, "CrdWdbePrf", 0, jrefNew);
+
+	if (jrefNew == 0) *dpcheng = new DpchEngWdbeConfirm(false, 0, "");
+	else *dpcheng = new DpchEngWdbeConfirm(true, jrefNew, "CrdWdbePrf");
 };
 
 void CrdWdbeNav::handleDpchAppDoMitCrdMchClick(
@@ -884,7 +899,7 @@ uint CrdWdbeNav::enterSgeAlrwdbetrm(
 	uint retval = VecVSge::ALRWDBETRM;
 	nextIxVSgeSuccess = VecVSge::IDLE;
 
-	xchg->submitDpch(AlrWdbe::prepareAlrTrm(jref, ixWdbeVLocale, xchg->stgwdbeappearance.sesstterm, xchg->stgwdbeappearance.sesstwarn, feedFMcbAlert)); // IP enterSgeAlrwdbetrm --- LINE
+	xchg->submitDpch(AlrWdbe::prepareAlrTrm(jref, ixWdbeVLocale, xchg->stgwdbebehavior.sesstterm, xchg->stgwdbebehavior.sesstwarn, feedFMcbAlert)); // IP enterSgeAlrwdbetrm --- LINE
 
 	return retval;
 };

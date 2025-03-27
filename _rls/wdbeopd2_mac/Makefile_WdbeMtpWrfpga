@@ -2,7 +2,7 @@
 # make file for operation pack WdbeMtpWrfpga, release wdbeopd2_mac
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 7 Feb 2024
+# date created: 3 Mar 2025
 # IP header --- ABOVE
 
 include ../Makefile.inc
@@ -17,7 +17,7 @@ INCPATH = -I$(BUILDROOT)/dbswdbe -I$(BUILDROOT)/wdbeopd2/VecWdbe -I$(BUILDROOT)/
 INCPATH += -I${WHIZSDKROOT}/build -I/opt/homebrew/include -I/opt/homebrew/opt/curl/include -I/opt/homebrew/opt/libmicrohttpd/include -I/opt/homebrew/opt/libxml2/include -I/usr/local/mysql/include
 
 OBJS = WdbeMtpWrfpga_blks.o WdbeMtpWrfpga.o
-OBJS += WdbeMtpWrfpgaCmdinv_v2_0.o WdbeMtpWrfpgaCmdret_v2_0.o WdbeMtpWrfpgaCohostif_Easy_v1_0.o WdbeMtpWrfpgaCohostif_v1_0.o WdbeMtpWrfpgaCrcspec_32_v1_0.o WdbeMtpWrfpgaCrcspec_v1_0.o WdbeMtpWrfpgaCrcspec_v2_0.o WdbeMtpWrfpgaCrcspec_v3_0.o WdbeMtpWrfpgaDdrmux_Easy_v1_0.o WdbeMtpWrfpgaDpram_efnx_v1_0.o WdbeMtpWrfpgaFsmprobe_Easy_v1_0.o WdbeMtpWrfpgaFsmtrack_Easy_v1_0.o WdbeMtpWrfpgaGpio_Easy_v1_0.o WdbeMtpWrfpgaGptrack_Easy_v1_0.o WdbeMtpWrfpgaHostif_Easy_v1_0.o WdbeMtpWrfpgaHostif_v1_0.o WdbeMtpWrfpgaI2cmaster_v1_0.o WdbeMtpWrfpgaIdent_Easy_v1_0.o WdbeMtpWrfpgaIrq_Easy_v1_0.o WdbeMtpWrfpgaSpram_efnx_v1_0.o WdbeMtpWrfpgaTkclksrc_v1_0.o
+OBJS += WdbeMtpWrfpgaAximmcohostif_Easy_v1_0.o WdbeMtpWrfpgaCmdinv_v2_0.o WdbeMtpWrfpgaCmdret_v2_0.o WdbeMtpWrfpgaCohostif_Easy_v1_0.o WdbeMtpWrfpgaCohostif_v1_0.o WdbeMtpWrfpgaCrcspec_32_v1_0.o WdbeMtpWrfpgaCrcspec_v1_0.o WdbeMtpWrfpgaCrcspec_v2_0.o WdbeMtpWrfpgaCrcspec_v3_0.o WdbeMtpWrfpgaDdrmux_Easy_v1_0.o WdbeMtpWrfpgaDpram_efnx_v1_0.o WdbeMtpWrfpgaFsmprobe_Easy_v1_0.o WdbeMtpWrfpgaFsmtrack_Easy_v1_0.o WdbeMtpWrfpgaGpio_Easy_v1_0.o WdbeMtpWrfpgaGptrack_Easy_v1_0.o WdbeMtpWrfpgaHostif_Easy_v1_0.o WdbeMtpWrfpgaHostif_v1_0.o WdbeMtpWrfpgaI2cmaster_v1_0.o WdbeMtpWrfpgaIdent_Easy_v1_0.o WdbeMtpWrfpgaIrq_Easy_v1_0.o WdbeMtpWrfpgaSpram_efnx_v1_0.o WdbeMtpWrfpgaTkclksrc_v1_0.o
 
 LIB = libwdbemtpwrfpga
 

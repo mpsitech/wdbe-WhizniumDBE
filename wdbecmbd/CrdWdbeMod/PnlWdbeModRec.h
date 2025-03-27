@@ -19,18 +19,18 @@
 #include "PnlWdbeModCtdMNModule.h"
 #include "PnlWdbeModMNPeripheral.h"
 #include "PnlWdbeModCtrRef1NCommand.h"
-#include "PnlWdbeModCtrRef1NError.h"
 #include "PnlWdbeModCtrHk1NVector.h"
-#include "PnlWdbeModRef1NVariable.h"
+#include "PnlWdbeModCtrRef1NError.h"
 #include "PnlWdbeModMge1NSignal.h"
 #include "PnlWdbeModRef1NSensitivity.h"
 #include "PnlWdbeModRef1NSignal.h"
+#include "PnlWdbeModRef1NVariable.h"
 #include "PnlWdbeModSup1NModule.h"
-#include "PnlWdbeModMdl1NPort.h"
-#include "PnlWdbeModHsm1NPipeline.h"
-#include "PnlWdbeMod1NProcess.h"
-#include "PnlWdbeMod1NCdc.h"
 #include "PnlWdbeModMdl1NGeneric.h"
+#include "PnlWdbeModHsm1NPipeline.h"
+#include "PnlWdbeMod1NCdc.h"
+#include "PnlWdbeModMdl1NPort.h"
+#include "PnlWdbeMod1NProcess.h"
 #include "PnlWdbeModAPar.h"
 #include "PnlWdbeModKHdltype.h"
 #include "PnlWdbeModDetail.h"
@@ -91,8 +91,8 @@ public:
 	class StatApp {
 
 	public:
-		static void writeJSON(Json::Value& sup, std::string difftag = "", const bool initdoneDetail = false, const bool initdoneKHdltype = false, const bool initdoneAPar = false, const bool initdoneMdl1NGeneric = false, const bool initdone1NCdc = false, const bool initdoneHsm1NPipeline = false, const bool initdone1NProcess = false, const bool initdoneMdl1NPort = false, const bool initdoneSup1NModule = false, const bool initdoneRef1NSignal = false, const bool initdoneRef1NSensitivity = false, const bool initdoneRef1NVariable = false, const bool initdoneMge1NSignal = false, const bool initdoneCtrHk1NVector = false, const bool initdoneCtrRef1NError = false, const bool initdoneCtrRef1NCommand = false, const bool initdoneMNPeripheral = false, const bool initdoneCtdMNModule = false, const bool initdoneCorMNModule = false, const bool initdoneCtrMNCommand = false);
-		static void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true, const bool initdoneDetail = false, const bool initdoneKHdltype = false, const bool initdoneAPar = false, const bool initdoneMdl1NGeneric = false, const bool initdone1NCdc = false, const bool initdoneHsm1NPipeline = false, const bool initdone1NProcess = false, const bool initdoneMdl1NPort = false, const bool initdoneSup1NModule = false, const bool initdoneRef1NSignal = false, const bool initdoneRef1NSensitivity = false, const bool initdoneRef1NVariable = false, const bool initdoneMge1NSignal = false, const bool initdoneCtrHk1NVector = false, const bool initdoneCtrRef1NError = false, const bool initdoneCtrRef1NCommand = false, const bool initdoneMNPeripheral = false, const bool initdoneCtdMNModule = false, const bool initdoneCorMNModule = false, const bool initdoneCtrMNCommand = false);
+		static void writeJSON(Json::Value& sup, std::string difftag = "", const bool initdoneDetail = false, const bool initdoneKHdltype = false, const bool initdoneAPar = false, const bool initdone1NProcess = false, const bool initdoneMdl1NPort = false, const bool initdone1NCdc = false, const bool initdoneHsm1NPipeline = false, const bool initdoneMdl1NGeneric = false, const bool initdoneSup1NModule = false, const bool initdoneRef1NVariable = false, const bool initdoneRef1NSignal = false, const bool initdoneRef1NSensitivity = false, const bool initdoneMge1NSignal = false, const bool initdoneCtrRef1NError = false, const bool initdoneCtrHk1NVector = false, const bool initdoneCtrRef1NCommand = false, const bool initdoneMNPeripheral = false, const bool initdoneCtdMNModule = false, const bool initdoneCorMNModule = false, const bool initdoneCtrMNCommand = false);
+		static void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true, const bool initdoneDetail = false, const bool initdoneKHdltype = false, const bool initdoneAPar = false, const bool initdone1NProcess = false, const bool initdoneMdl1NPort = false, const bool initdone1NCdc = false, const bool initdoneHsm1NPipeline = false, const bool initdoneMdl1NGeneric = false, const bool initdoneSup1NModule = false, const bool initdoneRef1NVariable = false, const bool initdoneRef1NSignal = false, const bool initdoneRef1NSensitivity = false, const bool initdoneMge1NSignal = false, const bool initdoneCtrRef1NError = false, const bool initdoneCtrHk1NVector = false, const bool initdoneCtrRef1NCommand = false, const bool initdoneMNPeripheral = false, const bool initdoneCtdMNModule = false, const bool initdoneCorMNModule = false, const bool initdoneCtrMNCommand = false);
 	};
 
 	/**
@@ -105,20 +105,20 @@ public:
 		static const Sbecore::uint JREFDETAIL = 2;
 		static const Sbecore::uint JREFKHDLTYPE = 3;
 		static const Sbecore::uint JREFAPAR = 4;
-		static const Sbecore::uint JREFMDL1NGENERIC = 5;
-		static const Sbecore::uint JREF1NCDC = 6;
-		static const Sbecore::uint JREFHSM1NPIPELINE = 7;
-		static const Sbecore::uint JREF1NPROCESS = 8;
-		static const Sbecore::uint JREFMDL1NPORT = 9;
+		static const Sbecore::uint JREF1NPROCESS = 5;
+		static const Sbecore::uint JREFMDL1NPORT = 6;
+		static const Sbecore::uint JREF1NCDC = 7;
+		static const Sbecore::uint JREFHSM1NPIPELINE = 8;
+		static const Sbecore::uint JREFMDL1NGENERIC = 9;
 		static const Sbecore::uint JREFSUP1NMODULE = 10;
-		static const Sbecore::uint JREFREF1NSIGNAL = 11;
-		static const Sbecore::uint JREFREF1NSENSITIVITY = 12;
-		static const Sbecore::uint JREFREF1NVARIABLE = 13;
+		static const Sbecore::uint JREFREF1NVARIABLE = 11;
+		static const Sbecore::uint JREFREF1NSIGNAL = 12;
+		static const Sbecore::uint JREFREF1NSENSITIVITY = 13;
 		static const Sbecore::uint JREFMGE1NSIGNAL = 14;
-		static const Sbecore::uint JREFCTRHK1NVECTOR = 15;
-		static const Sbecore::uint PNLCTRHK1NVECTORAVAIL = 16;
-		static const Sbecore::uint JREFCTRREF1NERROR = 17;
-		static const Sbecore::uint PNLCTRREF1NERRORAVAIL = 18;
+		static const Sbecore::uint JREFCTRREF1NERROR = 15;
+		static const Sbecore::uint PNLCTRREF1NERRORAVAIL = 16;
+		static const Sbecore::uint JREFCTRHK1NVECTOR = 17;
+		static const Sbecore::uint PNLCTRHK1NVECTORAVAIL = 18;
 		static const Sbecore::uint JREFCTRREF1NCOMMAND = 19;
 		static const Sbecore::uint PNLCTRREF1NCOMMANDAVAIL = 20;
 		static const Sbecore::uint JREFMNPERIPHERAL = 21;
@@ -129,27 +129,27 @@ public:
 		static const Sbecore::uint BUTREGULARIZEACTIVE = 26;
 
 	public:
-		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const Sbecore::ubigint jrefDetail = 0, const Sbecore::ubigint jrefKHdltype = 0, const Sbecore::ubigint jrefAPar = 0, const Sbecore::ubigint jrefMdl1NGeneric = 0, const Sbecore::ubigint jref1NCdc = 0, const Sbecore::ubigint jrefHsm1NPipeline = 0, const Sbecore::ubigint jref1NProcess = 0, const Sbecore::ubigint jrefMdl1NPort = 0, const Sbecore::ubigint jrefSup1NModule = 0, const Sbecore::ubigint jrefRef1NSignal = 0, const Sbecore::ubigint jrefRef1NSensitivity = 0, const Sbecore::ubigint jrefRef1NVariable = 0, const Sbecore::ubigint jrefMge1NSignal = 0, const Sbecore::ubigint jrefCtrHk1NVector = 0, const bool pnlctrhk1nvectorAvail = false, const Sbecore::ubigint jrefCtrRef1NError = 0, const bool pnlctrref1nerrorAvail = false, const Sbecore::ubigint jrefCtrRef1NCommand = 0, const bool pnlctrref1ncommandAvail = false, const Sbecore::ubigint jrefMNPeripheral = 0, const Sbecore::ubigint jrefCtdMNModule = 0, const Sbecore::ubigint jrefCorMNModule = 0, const Sbecore::ubigint jrefCtrMNCommand = 0, const bool pnlctrmncommandAvail = false, const bool ButRegularizeActive = true);
+		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const Sbecore::ubigint jrefDetail = 0, const Sbecore::ubigint jrefKHdltype = 0, const Sbecore::ubigint jrefAPar = 0, const Sbecore::ubigint jref1NProcess = 0, const Sbecore::ubigint jrefMdl1NPort = 0, const Sbecore::ubigint jref1NCdc = 0, const Sbecore::ubigint jrefHsm1NPipeline = 0, const Sbecore::ubigint jrefMdl1NGeneric = 0, const Sbecore::ubigint jrefSup1NModule = 0, const Sbecore::ubigint jrefRef1NVariable = 0, const Sbecore::ubigint jrefRef1NSignal = 0, const Sbecore::ubigint jrefRef1NSensitivity = 0, const Sbecore::ubigint jrefMge1NSignal = 0, const Sbecore::ubigint jrefCtrRef1NError = 0, const bool pnlctrref1nerrorAvail = false, const Sbecore::ubigint jrefCtrHk1NVector = 0, const bool pnlctrhk1nvectorAvail = false, const Sbecore::ubigint jrefCtrRef1NCommand = 0, const bool pnlctrref1ncommandAvail = false, const Sbecore::ubigint jrefMNPeripheral = 0, const Sbecore::ubigint jrefCtdMNModule = 0, const Sbecore::ubigint jrefCorMNModule = 0, const Sbecore::ubigint jrefCtrMNCommand = 0, const bool pnlctrmncommandAvail = false, const bool ButRegularizeActive = true);
 
 	public:
 		Sbecore::uint ixWdbeVExpstate;
 		Sbecore::ubigint jrefDetail;
 		Sbecore::ubigint jrefKHdltype;
 		Sbecore::ubigint jrefAPar;
-		Sbecore::ubigint jrefMdl1NGeneric;
-		Sbecore::ubigint jref1NCdc;
-		Sbecore::ubigint jrefHsm1NPipeline;
 		Sbecore::ubigint jref1NProcess;
 		Sbecore::ubigint jrefMdl1NPort;
+		Sbecore::ubigint jref1NCdc;
+		Sbecore::ubigint jrefHsm1NPipeline;
+		Sbecore::ubigint jrefMdl1NGeneric;
 		Sbecore::ubigint jrefSup1NModule;
+		Sbecore::ubigint jrefRef1NVariable;
 		Sbecore::ubigint jrefRef1NSignal;
 		Sbecore::ubigint jrefRef1NSensitivity;
-		Sbecore::ubigint jrefRef1NVariable;
 		Sbecore::ubigint jrefMge1NSignal;
-		Sbecore::ubigint jrefCtrHk1NVector;
-		bool pnlctrhk1nvectorAvail;
 		Sbecore::ubigint jrefCtrRef1NError;
 		bool pnlctrref1nerrorAvail;
+		Sbecore::ubigint jrefCtrHk1NVector;
+		bool pnlctrhk1nvectorAvail;
 		Sbecore::ubigint jrefCtrRef1NCommand;
 		bool pnlctrref1ncommandAvail;
 		Sbecore::ubigint jrefMNPeripheral;
@@ -226,8 +226,8 @@ public:
 		void writeXML(const Sbecore::uint ixWdbeVLocale, xmlTextWriter* wr);
 	};
 
-	bool evalPnlctrhk1nvectorAvail(DbsWdbe* dbswdbe);
 	bool evalPnlctrref1nerrorAvail(DbsWdbe* dbswdbe);
+	bool evalPnlctrhk1nvectorAvail(DbsWdbe* dbswdbe);
 	bool evalPnlctrref1ncommandAvail(DbsWdbe* dbswdbe);
 	bool evalPnlctrmncommandAvail(DbsWdbe* dbswdbe);
 	bool evalButRegularizeActive(DbsWdbe* dbswdbe);
@@ -245,18 +245,18 @@ public:
 	PnlWdbeModCtdMNModule* pnlctdmnmodule;
 	PnlWdbeModMNPeripheral* pnlmnperipheral;
 	PnlWdbeModCtrRef1NCommand* pnlctrref1ncommand;
-	PnlWdbeModCtrRef1NError* pnlctrref1nerror;
 	PnlWdbeModCtrHk1NVector* pnlctrhk1nvector;
-	PnlWdbeModRef1NVariable* pnlref1nvariable;
+	PnlWdbeModCtrRef1NError* pnlctrref1nerror;
 	PnlWdbeModMge1NSignal* pnlmge1nsignal;
 	PnlWdbeModRef1NSensitivity* pnlref1nsensitivity;
 	PnlWdbeModRef1NSignal* pnlref1nsignal;
+	PnlWdbeModRef1NVariable* pnlref1nvariable;
 	PnlWdbeModSup1NModule* pnlsup1nmodule;
-	PnlWdbeModMdl1NPort* pnlmdl1nport;
-	PnlWdbeModHsm1NPipeline* pnlhsm1npipeline;
-	PnlWdbeMod1NProcess* pnl1nprocess;
-	PnlWdbeMod1NCdc* pnl1ncdc;
 	PnlWdbeModMdl1NGeneric* pnlmdl1ngeneric;
+	PnlWdbeModHsm1NPipeline* pnlhsm1npipeline;
+	PnlWdbeMod1NCdc* pnl1ncdc;
+	PnlWdbeModMdl1NPort* pnlmdl1nport;
+	PnlWdbeMod1NProcess* pnl1nprocess;
 	PnlWdbeModAPar* pnlapar;
 	PnlWdbeModKHdltype* pnlkhdltype;
 	PnlWdbeModDetail* pnldetail;

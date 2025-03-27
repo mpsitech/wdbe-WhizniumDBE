@@ -140,37 +140,35 @@ namespace PnlWdbeUntDetail {
 	class StatShr : public Sbecore::Block {
 
 	public:
-		static const Sbecore::uint TXFPKGVALID = 1;
-		static const Sbecore::uint TXFTCHVALID = 2;
-		static const Sbecore::uint BUTSAVEAVAIL = 3;
-		static const Sbecore::uint BUTSAVEACTIVE = 4;
-		static const Sbecore::uint TXTSRFACTIVE = 5;
-		static const Sbecore::uint TXFTITACTIVE = 6;
-		static const Sbecore::uint TXFFSRACTIVE = 7;
-		static const Sbecore::uint PUPTYPACTIVE = 8;
-		static const Sbecore::uint TXTREUACTIVE = 9;
-		static const Sbecore::uint BUTREUVIEWAVAIL = 10;
-		static const Sbecore::uint BUTREUVIEWACTIVE = 11;
-		static const Sbecore::uint TXTSILAVAIL = 12;
-		static const Sbecore::uint TXTSILACTIVE = 13;
-		static const Sbecore::uint BUTSILVIEWAVAIL = 14;
-		static const Sbecore::uint BUTSILVIEWACTIVE = 15;
-		static const Sbecore::uint TXTMDLACTIVE = 16;
-		static const Sbecore::uint BUTMDLVIEWAVAIL = 17;
-		static const Sbecore::uint BUTMDLVIEWACTIVE = 18;
-		static const Sbecore::uint PUPPKGACTIVE = 19;
-		static const Sbecore::uint BUTPKGEDITAVAIL = 20;
-		static const Sbecore::uint CHKESYACTIVE = 21;
-		static const Sbecore::uint PUPTCHACTIVE = 22;
+		static const Sbecore::uint BUTSAVEAVAIL = 1;
+		static const Sbecore::uint BUTSAVEACTIVE = 2;
+		static const Sbecore::uint TXTSRFACTIVE = 3;
+		static const Sbecore::uint TXFTITACTIVE = 4;
+		static const Sbecore::uint TXFFSRACTIVE = 5;
+		static const Sbecore::uint PUPTYPACTIVE = 6;
+		static const Sbecore::uint TXTREUACTIVE = 7;
+		static const Sbecore::uint BUTREUVIEWAVAIL = 8;
+		static const Sbecore::uint BUTREUVIEWACTIVE = 9;
+		static const Sbecore::uint TXTSILAVAIL = 10;
+		static const Sbecore::uint TXTSILACTIVE = 11;
+		static const Sbecore::uint BUTSILVIEWAVAIL = 12;
+		static const Sbecore::uint BUTSILVIEWACTIVE = 13;
+		static const Sbecore::uint TXTMDLACTIVE = 14;
+		static const Sbecore::uint BUTMDLVIEWAVAIL = 15;
+		static const Sbecore::uint BUTMDLVIEWACTIVE = 16;
+		static const Sbecore::uint PUPPKGACTIVE = 17;
+		static const Sbecore::uint TXFPKGVALID = 18;
+		static const Sbecore::uint BUTPKGEDITAVAIL = 19;
+		static const Sbecore::uint CHKESYACTIVE = 20;
+		static const Sbecore::uint PUPTCHACTIVE = 21;
+		static const Sbecore::uint TXFTCHVALID = 22;
 		static const Sbecore::uint BUTTCHEDITAVAIL = 23;
 		static const Sbecore::uint TXFCMTACTIVE = 24;
 
 	public:
-		StatShr(const bool TxfPkgValid = false, const bool TxfTchValid = false, const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxtSrfActive = true, const bool TxfTitActive = true, const bool TxfFsrActive = true, const bool PupTypActive = true, const bool TxtReuActive = true, const bool ButReuViewAvail = true, const bool ButReuViewActive = true, const bool TxtSilAvail = true, const bool TxtSilActive = true, const bool ButSilViewAvail = true, const bool ButSilViewActive = true, const bool TxtMdlActive = true, const bool ButMdlViewAvail = true, const bool ButMdlViewActive = true, const bool PupPkgActive = true, const bool ButPkgEditAvail = true, const bool ChkEsyActive = true, const bool PupTchActive = true, const bool ButTchEditAvail = true, const bool TxfCmtActive = true);
+		StatShr(const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxtSrfActive = true, const bool TxfTitActive = true, const bool TxfFsrActive = true, const bool PupTypActive = true, const bool TxtReuActive = true, const bool ButReuViewAvail = true, const bool ButReuViewActive = true, const bool TxtSilAvail = true, const bool TxtSilActive = true, const bool ButSilViewAvail = true, const bool ButSilViewActive = true, const bool TxtMdlActive = true, const bool ButMdlViewAvail = true, const bool ButMdlViewActive = true, const bool PupPkgActive = true, const bool TxfPkgValid = false, const bool ButPkgEditAvail = true, const bool ChkEsyActive = true, const bool PupTchActive = true, const bool TxfTchValid = false, const bool ButTchEditAvail = true, const bool TxfCmtActive = true);
 
 	public:
-		bool TxfPkgValid;
-		bool TxfTchValid;
 		bool ButSaveAvail;
 		bool ButSaveActive;
 		bool TxtSrfActive;
@@ -188,9 +186,11 @@ namespace PnlWdbeUntDetail {
 		bool ButMdlViewAvail;
 		bool ButMdlViewActive;
 		bool PupPkgActive;
+		bool TxfPkgValid;
 		bool ButPkgEditAvail;
 		bool ChkEsyActive;
 		bool PupTchActive;
+		bool TxfTchValid;
 		bool ButTchEditAvail;
 		bool TxfCmtActive;
 

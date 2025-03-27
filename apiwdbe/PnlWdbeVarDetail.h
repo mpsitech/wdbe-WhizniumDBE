@@ -144,20 +144,20 @@ namespace PnlWdbeVarDetail {
 	class StatShr : public Sbecore::Block {
 
 	public:
-		static const Sbecore::uint TXFHTYVALID = 1;
-		static const Sbecore::uint BUTSAVEAVAIL = 2;
-		static const Sbecore::uint BUTSAVEACTIVE = 3;
-		static const Sbecore::uint TXTSRFACTIVE = 4;
-		static const Sbecore::uint LSTCLUACTIVE = 5;
-		static const Sbecore::uint BUTCLUVIEWACTIVE = 6;
-		static const Sbecore::uint BUTCLUCLUSTERAVAIL = 7;
-		static const Sbecore::uint BUTCLUUNCLUSTERAVAIL = 8;
-		static const Sbecore::uint TXTREUACTIVE = 9;
-		static const Sbecore::uint BUTREUVIEWAVAIL = 10;
-		static const Sbecore::uint BUTREUVIEWACTIVE = 11;
-		static const Sbecore::uint CHKCONACTIVE = 12;
-		static const Sbecore::uint CHKFALACTIVE = 13;
-		static const Sbecore::uint PUPHTYACTIVE = 14;
+		static const Sbecore::uint BUTSAVEAVAIL = 1;
+		static const Sbecore::uint BUTSAVEACTIVE = 2;
+		static const Sbecore::uint TXTSRFACTIVE = 3;
+		static const Sbecore::uint LSTCLUACTIVE = 4;
+		static const Sbecore::uint BUTCLUVIEWACTIVE = 5;
+		static const Sbecore::uint BUTCLUCLUSTERAVAIL = 6;
+		static const Sbecore::uint BUTCLUUNCLUSTERAVAIL = 7;
+		static const Sbecore::uint TXTREUACTIVE = 8;
+		static const Sbecore::uint BUTREUVIEWAVAIL = 9;
+		static const Sbecore::uint BUTREUVIEWACTIVE = 10;
+		static const Sbecore::uint CHKCONACTIVE = 11;
+		static const Sbecore::uint CHKFALACTIVE = 12;
+		static const Sbecore::uint PUPHTYACTIVE = 13;
+		static const Sbecore::uint TXFHTYVALID = 14;
 		static const Sbecore::uint BUTHTYEDITAVAIL = 15;
 		static const Sbecore::uint TXFWIDACTIVE = 16;
 		static const Sbecore::uint TXFMMXACTIVE = 17;
@@ -167,10 +167,9 @@ namespace PnlWdbeVarDetail {
 		static const Sbecore::uint TXFCMTACTIVE = 21;
 
 	public:
-		StatShr(const bool TxfHtyValid = false, const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxtSrfActive = true, const bool LstCluActive = true, const bool ButCluViewActive = true, const bool ButCluClusterAvail = true, const bool ButCluUnclusterAvail = true, const bool TxtReuActive = true, const bool ButReuViewAvail = true, const bool ButReuViewActive = true, const bool ChkConActive = true, const bool ChkFalActive = true, const bool PupHtyActive = true, const bool ButHtyEditAvail = true, const bool TxfWidActive = true, const bool TxfMmxActive = true, const bool TxfOnvActive = true, const bool TxfOfvActive = true, const bool ChkDfoActive = true, const bool TxfCmtActive = true);
+		StatShr(const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxtSrfActive = true, const bool LstCluActive = true, const bool ButCluViewActive = true, const bool ButCluClusterAvail = true, const bool ButCluUnclusterAvail = true, const bool TxtReuActive = true, const bool ButReuViewAvail = true, const bool ButReuViewActive = true, const bool ChkConActive = true, const bool ChkFalActive = true, const bool PupHtyActive = true, const bool TxfHtyValid = false, const bool ButHtyEditAvail = true, const bool TxfWidActive = true, const bool TxfMmxActive = true, const bool TxfOnvActive = true, const bool TxfOfvActive = true, const bool ChkDfoActive = true, const bool TxfCmtActive = true);
 
 	public:
-		bool TxfHtyValid;
 		bool ButSaveAvail;
 		bool ButSaveActive;
 		bool TxtSrfActive;
@@ -184,6 +183,7 @@ namespace PnlWdbeVarDetail {
 		bool ChkConActive;
 		bool ChkFalActive;
 		bool PupHtyActive;
+		bool TxfHtyValid;
 		bool ButHtyEditAvail;
 		bool TxfWidActive;
 		bool TxfMmxActive;

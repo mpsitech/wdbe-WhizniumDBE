@@ -39,28 +39,28 @@ WdbeMSignal::WdbeMSignal(
 			, const bool Defon
 			, const ubigint drvRefWdbeMPort
 			, const string Comment
-		) {
-
-	this->ref = ref;
-	this->ixVBasetype = ixVBasetype;
-	this->refWdbeCSignal = refWdbeCSignal;
-	this->refIxVTbl = refIxVTbl;
-	this->refUref = refUref;
-	this->refNum = refNum;
-	this->mgeIxVTbl = mgeIxVTbl;
-	this->mgeUref = mgeUref;
-	this->refWdbeMVector = refWdbeMVector;
-	this->sref = sref;
-	this->Const = Const;
-	this->srefWdbeKHdltype = srefWdbeKHdltype;
-	this->Width = Width;
-	this->Minmax = Minmax;
-	this->Comb = Comb;
-	this->Onval = Onval;
-	this->Offval = Offval;
-	this->Defon = Defon;
-	this->drvRefWdbeMPort = drvRefWdbeMPort;
-	this->Comment = Comment;
+		) :
+			ref(ref)
+			, ixVBasetype(ixVBasetype)
+			, refWdbeCSignal(refWdbeCSignal)
+			, refIxVTbl(refIxVTbl)
+			, refUref(refUref)
+			, refNum(refNum)
+			, mgeIxVTbl(mgeIxVTbl)
+			, mgeUref(mgeUref)
+			, refWdbeMVector(refWdbeMVector)
+			, sref(sref)
+			, Const(Const)
+			, srefWdbeKHdltype(srefWdbeKHdltype)
+			, Width(Width)
+			, Minmax(Minmax)
+			, Comb(Comb)
+			, Onval(Onval)
+			, Offval(Offval)
+			, Defon(Defon)
+			, drvRefWdbeMPort(drvRefWdbeMPort)
+			, Comment(Comment)
+		{
 };
 
 bool WdbeMSignal::operator==(

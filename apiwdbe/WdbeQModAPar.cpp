@@ -22,11 +22,12 @@ WdbeQModAPar::WdbeQModAPar(
 			, const string x1SrefKKey
 			, const string titX1SrefKKey
 			, const string Val
-		) {
-	this->jnum = jnum;
-	this->x1SrefKKey = x1SrefKKey;
-	this->titX1SrefKKey = titX1SrefKKey;
-	this->Val = Val;
+		) :
+			jnum(jnum)
+			, x1SrefKKey(x1SrefKKey)
+			, titX1SrefKKey(titX1SrefKKey)
+			, Val(Val)
+		{
 };
 
 bool WdbeQModAPar::readXML(

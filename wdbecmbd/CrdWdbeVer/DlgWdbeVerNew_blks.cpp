@@ -132,12 +132,11 @@ DlgWdbeVerNew::ContIac::ContIac(
 			, const string& DetTxfCmt
 		) :
 			Block()
+			, numFDetPupPrj(numFDetPupPrj)
+			, numFDetPupBvr(numFDetPupBvr)
+			, numFDetRbuVni(numFDetRbuVni)
+			, DetTxfCmt(DetTxfCmt)
 		{
-	this->numFDetPupPrj = numFDetPupPrj;
-	this->numFDetPupBvr = numFDetPupBvr;
-	this->numFDetRbuVni = numFDetRbuVni;
-	this->DetTxfCmt = DetTxfCmt;
-
 	mask = {NUMFDETPUPPRJ, NUMFDETPUPBVR, NUMFDETRBUVNI, DETTXFCMT};
 };
 
@@ -257,9 +256,8 @@ DlgWdbeVerNew::ContInf::ContInf(
 			const uint numFSge
 		) :
 			Block()
+			, numFSge(numFSge)
 		{
-	this->numFSge = numFSge;
-
 	mask = {NUMFSGE};
 };
 
@@ -355,9 +353,8 @@ DlgWdbeVerNew::StatShr::StatShr(
 			const bool ButCreActive
 		) :
 			Block()
+			, ButCreActive(ButCreActive)
 		{
-	this->ButCreActive = ButCreActive;
-
 	mask = {BUTCREACTIVE};
 };
 

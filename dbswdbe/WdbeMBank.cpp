@@ -21,12 +21,12 @@ WdbeMBank::WdbeMBank(
 			, const ubigint refWdbeMUnit
 			, const string sref
 			, const string srefKVoltstd
-		) {
-
-	this->ref = ref;
-	this->refWdbeMUnit = refWdbeMUnit;
-	this->sref = sref;
-	this->srefKVoltstd = srefKVoltstd;
+		) :
+			ref(ref)
+			, refWdbeMUnit(refWdbeMUnit)
+			, sref(sref)
+			, srefKVoltstd(srefKVoltstd)
+		{
 };
 
 bool WdbeMBank::operator==(

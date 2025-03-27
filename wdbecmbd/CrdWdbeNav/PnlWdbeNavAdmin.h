@@ -45,6 +45,7 @@ public:
 		static const Sbecore::uint BUTPRSNEWCRDCLICK = 6;
 		static const Sbecore::uint BUTFILVIEWCLICK = 7;
 		static const Sbecore::uint BUTFILNEWCRDCLICK = 8;
+		static const Sbecore::uint BUTPRFNEWCRDCLICK = 9;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);
@@ -103,9 +104,10 @@ public:
 		static const Sbecore::uint BUTPRSVIEWACTIVE = 6;
 		static const Sbecore::uint LSTFILAVAIL = 7;
 		static const Sbecore::uint BUTFILVIEWACTIVE = 8;
+		static const Sbecore::uint BUTPRFNEWCRDAVAIL = 9;
 
 	public:
-		StatShr(const bool LstUsgAvail = true, const bool ButUsgViewActive = true, const bool LstUsrAvail = true, const bool ButUsrViewActive = true, const bool LstPrsAvail = true, const bool ButPrsViewActive = true, const bool LstFilAvail = true, const bool ButFilViewActive = true);
+		StatShr(const bool LstUsgAvail = true, const bool ButUsgViewActive = true, const bool LstUsrAvail = true, const bool ButUsrViewActive = true, const bool LstPrsAvail = true, const bool ButPrsViewActive = true, const bool LstFilAvail = true, const bool ButFilViewActive = true, const bool ButPrfNewcrdAvail = true);
 
 	public:
 		bool LstUsgAvail;
@@ -116,6 +118,7 @@ public:
 		bool ButPrsViewActive;
 		bool LstFilAvail;
 		bool ButFilViewActive;
+		bool ButPrfNewcrdAvail;
 
 	public:
 		void writeJSON(Json::Value& sup, std::string difftag = "");
@@ -222,6 +225,7 @@ public:
 	bool evalButPrsViewActive(DbsWdbe* dbswdbe);
 	bool evalLstFilAvail(DbsWdbe* dbswdbe);
 	bool evalButFilViewActive(DbsWdbe* dbswdbe);
+	bool evalButPrfNewcrdAvail(DbsWdbe* dbswdbe);
 
 public:
 	PnlWdbeNavAdmin(XchgWdbe* xchg, DbsWdbe* dbswdbe, const Sbecore::ubigint jrefSup, const Sbecore::uint ixWdbeVLocale);
@@ -274,6 +278,7 @@ private:
 	void handleDpchAppDoButPrsNewcrdClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
 	void handleDpchAppDoButFilViewClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
 	void handleDpchAppDoButFilNewcrdClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
+	void handleDpchAppDoButPrfNewcrdClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
 
 public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);

@@ -275,10 +275,10 @@ void DlgWdbeCvrDetcd::handleRequest(
 		};
 
 	} else if (req->ixVBasetype == ReqWdbe::VecVBasetype::TIMER) {
-		if ((req->sref == "mon") && (ixVSge == VecVSge::IMPORT)) handleTimerWithSrefMonInSgeImport(dbswdbe);
-		else if (ixVSge == VecVSge::PRSIDLE) handleTimerInSgePrsidle(dbswdbe, req->sref);
-		else if ((req->sref == "mon") && (ixVSge == VecVSge::POSTPRC)) handleTimerWithSrefMonInSgePostprc(dbswdbe);
+		if (ixVSge == VecVSge::PRSIDLE) handleTimerInSgePrsidle(dbswdbe, req->sref);
 		else if (ixVSge == VecVSge::IMPIDLE) handleTimerInSgeImpidle(dbswdbe, req->sref);
+		else if ((req->sref == "mon") && (ixVSge == VecVSge::IMPORT)) handleTimerWithSrefMonInSgeImport(dbswdbe);
+		else if ((req->sref == "mon") && (ixVSge == VecVSge::POSTPRC)) handleTimerWithSrefMonInSgePostprc(dbswdbe);
 	};
 };
 
@@ -374,13 +374,6 @@ string DlgWdbeCvrDetcd::handleDownload(
 	return(""); // IP handleDownload --- LINE
 };
 
-void DlgWdbeCvrDetcd::handleTimerWithSrefMonInSgeImport(
-			DbsWdbe* dbswdbe
-		) {
-	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
-	// IP handleTimerWithSrefMonInSgeImport --- INSERT
-};
-
 void DlgWdbeCvrDetcd::handleTimerInSgePrsidle(
 			DbsWdbe* dbswdbe
 			, const string& sref
@@ -388,18 +381,25 @@ void DlgWdbeCvrDetcd::handleTimerInSgePrsidle(
 	changeStage(dbswdbe, nextIxVSgeSuccess);
 };
 
-void DlgWdbeCvrDetcd::handleTimerWithSrefMonInSgePostprc(
-			DbsWdbe* dbswdbe
-		) {
-	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
-	// IP handleTimerWithSrefMonInSgePostprc --- INSERT
-};
-
 void DlgWdbeCvrDetcd::handleTimerInSgeImpidle(
 			DbsWdbe* dbswdbe
 			, const string& sref
 		) {
 	changeStage(dbswdbe, nextIxVSgeSuccess);
+};
+
+void DlgWdbeCvrDetcd::handleTimerWithSrefMonInSgeImport(
+			DbsWdbe* dbswdbe
+		) {
+	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
+	// IP handleTimerWithSrefMonInSgeImport --- INSERT
+};
+
+void DlgWdbeCvrDetcd::handleTimerWithSrefMonInSgePostprc(
+			DbsWdbe* dbswdbe
+		) {
+	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
+	// IP handleTimerWithSrefMonInSgePostprc --- INSERT
 };
 
 void DlgWdbeCvrDetcd::changeStage(

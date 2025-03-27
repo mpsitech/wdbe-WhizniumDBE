@@ -114,22 +114,21 @@ public:
 	class StatShr : public Sbecore::Block {
 
 	public:
-		static const Sbecore::uint TXFOPTVALID = 1;
-		static const Sbecore::uint BUTSAVEAVAIL = 2;
-		static const Sbecore::uint BUTSAVEACTIVE = 3;
-		static const Sbecore::uint TXTSRFACTIVE = 4;
-		static const Sbecore::uint PUPTYPACTIVE = 5;
-		static const Sbecore::uint TXTHKUACTIVE = 6;
-		static const Sbecore::uint BUTHKUVIEWAVAIL = 7;
-		static const Sbecore::uint BUTHKUVIEWACTIVE = 8;
-		static const Sbecore::uint LSTOPTACTIVE = 9;
+		static const Sbecore::uint BUTSAVEAVAIL = 1;
+		static const Sbecore::uint BUTSAVEACTIVE = 2;
+		static const Sbecore::uint TXTSRFACTIVE = 3;
+		static const Sbecore::uint PUPTYPACTIVE = 4;
+		static const Sbecore::uint TXTHKUACTIVE = 5;
+		static const Sbecore::uint BUTHKUVIEWAVAIL = 6;
+		static const Sbecore::uint BUTHKUVIEWACTIVE = 7;
+		static const Sbecore::uint LSTOPTACTIVE = 8;
+		static const Sbecore::uint TXFOPTVALID = 9;
 		static const Sbecore::uint BUTOPTEDITAVAIL = 10;
 
 	public:
-		StatShr(const bool TxfOptValid = false, const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxtSrfActive = true, const bool PupTypActive = true, const bool TxtHkuActive = true, const bool ButHkuViewAvail = true, const bool ButHkuViewActive = true, const bool LstOptActive = true, const bool ButOptEditAvail = true);
+		StatShr(const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxtSrfActive = true, const bool PupTypActive = true, const bool TxtHkuActive = true, const bool ButHkuViewAvail = true, const bool ButHkuViewActive = true, const bool LstOptActive = true, const bool TxfOptValid = false, const bool ButOptEditAvail = true);
 
 	public:
-		bool TxfOptValid;
 		bool ButSaveAvail;
 		bool ButSaveActive;
 		bool TxtSrfActive;
@@ -138,6 +137,7 @@ public:
 		bool ButHkuViewAvail;
 		bool ButHkuViewActive;
 		bool LstOptActive;
+		bool TxfOptValid;
 		bool ButOptEditAvail;
 
 	public:
@@ -304,8 +304,8 @@ private:
 	bool handleCallWdbeVecUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 	bool handleCallWdbeVec_hkuEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
 	bool handleCallWdbeVec_hku_mdl_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
-	bool handleCallWdbeVec_hktEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
 	bool handleCallWdbeVec_hku_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
+	bool handleCallWdbeVec_hktEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
 
 };
 

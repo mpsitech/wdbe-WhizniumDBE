@@ -47,6 +47,7 @@
 #include "CrdWdbeLib.h"
 #include "CrdWdbeMch.h"
 #include "CrdWdbeNav.h"
+#include "CrdWdbePrf.h"
 #include "CrdWdbeFil.h"
 #include "CrdWdbePrs.h"
 #include "CrdWdbeUsr.h"
@@ -149,6 +150,7 @@ public:
 	std::map<Sbecore::ubigint, JobWdbe*> crdlibs;
 	std::map<Sbecore::ubigint, JobWdbe*> crdmchs;
 	CrdWdbeNav* crdnav;
+	std::map<Sbecore::ubigint, JobWdbe*> crdprfs;
 	std::map<Sbecore::ubigint, JobWdbe*> crdfils;
 	std::map<Sbecore::ubigint, JobWdbe*> crdprss;
 	std::map<Sbecore::ubigint, JobWdbe*> crdusrs;
@@ -233,6 +235,7 @@ private:
 	bool handleCreateCrdpph(DbsWdbe* dbswdbe);
 	bool handleCreateCrdppl(DbsWdbe* dbswdbe);
 	bool handleCreateCrdprc(DbsWdbe* dbswdbe);
+	bool handleCreateCrdprf(DbsWdbe* dbswdbe);
 	bool handleCreateCrdprj(DbsWdbe* dbswdbe);
 	bool handleCreateCrdprs(DbsWdbe* dbswdbe);
 	bool handleCreateCrdprt(DbsWdbe* dbswdbe);
@@ -269,6 +272,7 @@ private:
 	bool handleEraseCrdpph(DbsWdbe* dbswdbe);
 	bool handleEraseCrdppl(DbsWdbe* dbswdbe);
 	bool handleEraseCrdprc(DbsWdbe* dbswdbe);
+	bool handleEraseCrdprf(DbsWdbe* dbswdbe);
 	bool handleEraseCrdprj(DbsWdbe* dbswdbe);
 	bool handleEraseCrdprs(DbsWdbe* dbswdbe);
 	bool handleEraseCrdprt(DbsWdbe* dbswdbe);

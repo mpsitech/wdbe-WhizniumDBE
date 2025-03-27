@@ -51,8 +51,8 @@ PnlWdbeUsrDetail::PnlWdbeUsrDetail(
 
 	// IP constructor.cust2 --- INSERT
 
-	xchg->addClstn(VecWdbeVCall::CALLWDBEUSR_PRSEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBEUSR_USGEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBEUSR_PRSEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -320,10 +320,10 @@ void PnlWdbeUsrDetail::handleCall(
 		call->abort = handleCallWdbeUsrJsteMod_usrEq(dbswdbe, call->jref);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEUSRUPD_REFEQ) {
 		call->abort = handleCallWdbeUsrUpd_refEq(dbswdbe, call->jref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEUSR_PRSEQ) {
-		call->abort = handleCallWdbeUsr_prsEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEUSR_USGEQ) {
 		call->abort = handleCallWdbeUsr_usgEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEUSR_PRSEQ) {
+		call->abort = handleCallWdbeUsr_prsEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
 	};
 };
 
@@ -345,17 +345,6 @@ bool PnlWdbeUsrDetail::handleCallWdbeUsrUpd_refEq(
 	return retval;
 };
 
-bool PnlWdbeUsrDetail::handleCallWdbeUsr_prsEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-			, const ubigint refInv
-			, bool& boolvalRet
-		) {
-	bool retval = false;
-	boolvalRet = (recUsr.refWdbeMPerson == refInv); // IP handleCallWdbeUsr_prsEq --- LINE
-	return retval;
-};
-
 bool PnlWdbeUsrDetail::handleCallWdbeUsr_usgEq(
 			DbsWdbe* dbswdbe
 			, const ubigint jrefTrig
@@ -364,5 +353,16 @@ bool PnlWdbeUsrDetail::handleCallWdbeUsr_usgEq(
 		) {
 	bool retval = false;
 	boolvalRet = (recUsr.refWdbeMUsergroup == refInv); // IP handleCallWdbeUsr_usgEq --- LINE
+	return retval;
+};
+
+bool PnlWdbeUsrDetail::handleCallWdbeUsr_prsEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+			, const ubigint refInv
+			, bool& boolvalRet
+		) {
+	bool retval = false;
+	boolvalRet = (recUsr.refWdbeMPerson == refInv); // IP handleCallWdbeUsr_prsEq --- LINE
 	return retval;
 };

@@ -2,7 +2,7 @@
 -- MySQL / MariaDB database create script
 -- copyright: (C) 2016-2020 MPSI Technologies GmbH
 -- author: Alexander Wirthmueller (auto-generation)
--- date created: 7 Feb 2024
+-- date created: 3 Mar 2025
 -- IP header --- ABOVE
 
 DROP DATABASE IF EXISTS DbsWdbe;
@@ -148,7 +148,7 @@ CREATE TABLE TblWdbeAMModulePar(
 	mdlRefWdbeMModule BIGINT UNSIGNED,
 	mdlNum INT UNSIGNED,
 	x1SrefKKey VARCHAR(50),
-	Val VARCHAR(192),
+	Val TEXT,
 	INDEX (mdlRefWdbeMModule),
 	INDEX (mdlNum),
 	INDEX (x1SrefKKey)
@@ -1090,6 +1090,15 @@ CREATE TABLE TblWdbeQCmdARetpar(
 	INDEX (jnum)
 ) ENGINE = ARIA;
 
+CREATE TABLE TblWdbeQCmdHk1NVector(
+	qref BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+	jref BIGINT UNSIGNED,
+	jnum INT UNSIGNED,
+	ref BIGINT UNSIGNED,
+	INDEX (jref),
+	INDEX (jnum)
+) ENGINE = ARIA;
+
 CREATE TABLE TblWdbeQCmdList(
 	qref BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 	jref BIGINT UNSIGNED,
@@ -1489,7 +1498,7 @@ CREATE TABLE TblWdbeQModAPar(
 	ref BIGINT UNSIGNED,
 	mdlNum INT UNSIGNED,
 	x1SrefKKey VARCHAR(50),
-	Val VARCHAR(192),
+	Val TEXT,
 	INDEX (jref),
 	INDEX (jnum)
 ) ENGINE = ARIA;
@@ -1684,7 +1693,7 @@ CREATE TABLE TblWdbeQMtpAPar(
 	ref BIGINT UNSIGNED,
 	mdlNum INT UNSIGNED,
 	x1SrefKKey VARCHAR(50),
-	Val VARCHAR(192),
+	Val TEXT,
 	INDEX (jref),
 	INDEX (jnum)
 ) ENGINE = ARIA;

@@ -37,26 +37,27 @@ WdbeQFilList::WdbeQFilList(
 			, const string srefKMimetype
 			, const string titSrefKMimetype
 			, const usmallint Size
-		) {
-	this->qref = qref;
-	this->jref = jref;
-	this->jnum = jnum;
-	this->ref = ref;
-	this->grp = grp;
-	this->stubGrp = stubGrp;
-	this->own = own;
-	this->stubOwn = stubOwn;
-	this->Filename = Filename;
-	this->refIxVTbl = refIxVTbl;
-	this->srefRefIxVTbl = srefRefIxVTbl;
-	this->titRefIxVTbl = titRefIxVTbl;
-	this->refUref = refUref;
-	this->stubRefUref = stubRefUref;
-	this->osrefKContent = osrefKContent;
-	this->titOsrefKContent = titOsrefKContent;
-	this->srefKMimetype = srefKMimetype;
-	this->titSrefKMimetype = titSrefKMimetype;
-	this->Size = Size;
+		) :
+			qref(qref)
+			, jref(jref)
+			, jnum(jnum)
+			, ref(ref)
+			, grp(grp)
+			, stubGrp(stubGrp)
+			, own(own)
+			, stubOwn(stubOwn)
+			, Filename(Filename)
+			, refIxVTbl(refIxVTbl)
+			, srefRefIxVTbl(srefRefIxVTbl)
+			, titRefIxVTbl(titRefIxVTbl)
+			, refUref(refUref)
+			, stubRefUref(stubRefUref)
+			, osrefKContent(osrefKContent)
+			, titOsrefKContent(titOsrefKContent)
+			, srefKMimetype(srefKMimetype)
+			, titSrefKMimetype(titSrefKMimetype)
+			, Size(Size)
+		{
 };
 
 void WdbeQFilList::writeJSON(

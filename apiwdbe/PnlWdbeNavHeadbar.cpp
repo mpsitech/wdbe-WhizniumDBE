@@ -21,9 +21,8 @@ PnlWdbeNavHeadbar::StatShr::StatShr(
 			const bool MenCrdAvail
 		) :
 			Block()
+			, MenCrdAvail(MenCrdAvail)
 		{
-	this->MenCrdAvail = MenCrdAvail;
-
 	mask = {MENCRDAVAIL};
 };
 
@@ -87,14 +86,13 @@ PnlWdbeNavHeadbar::StgInf::StgInf(
 			, const uint MenCrdWidth
 		) :
 			Block()
+			, MenAppCptwidth(MenAppCptwidth)
+			, MenAppWidth(MenAppWidth)
+			, MenSesCptwidth(MenSesCptwidth)
+			, MenSesWidth(MenSesWidth)
+			, MenCrdCptwidth(MenCrdCptwidth)
+			, MenCrdWidth(MenCrdWidth)
 		{
-	this->MenAppCptwidth = MenAppCptwidth;
-	this->MenAppWidth = MenAppWidth;
-	this->MenSesCptwidth = MenSesCptwidth;
-	this->MenSesWidth = MenSesWidth;
-	this->MenCrdCptwidth = MenCrdCptwidth;
-	this->MenCrdWidth = MenCrdWidth;
-
 	mask = {MENAPPCPTWIDTH, MENAPPWIDTH, MENSESCPTWIDTH, MENSESWIDTH, MENCRDCPTWIDTH, MENCRDWIDTH};
 };
 
@@ -165,11 +163,10 @@ PnlWdbeNavHeadbar::Tag::Tag(
 			, const string& MenCrd
 		) :
 			Block()
+			, MenApp(MenApp)
+			, MenSes(MenSes)
+			, MenCrd(MenCrd)
 		{
-	this->MenApp = MenApp;
-	this->MenSes = MenSes;
-	this->MenCrd = MenCrd;
-
 	mask = {MENAPP, MENSES, MENCRD};
 };
 

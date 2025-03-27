@@ -512,9 +512,9 @@ public:
 	};
 
 	bool evalButDneActive(DbsWdbe* dbswdbe);
+	bool evalLfiDldActive(DbsWdbe* dbswdbe);
 	bool evalPprButRunActive(DbsWdbe* dbswdbe);
 	bool evalPprButStoActive(DbsWdbe* dbswdbe);
-	bool evalLfiDldActive(DbsWdbe* dbswdbe);
 	bool evalImpButRunActive(DbsWdbe* dbswdbe);
 	bool evalImpButStoActive(DbsWdbe* dbswdbe);
 	bool evalIfiUldActive(DbsWdbe* dbswdbe);
@@ -610,11 +610,11 @@ private:
 	void handleDpchRetWdbeCplmstImbuf(DbsWdbe* dbswdbe, DpchRetWdbeCplmstImbuf* dpchret);
 	void handleDpchRetWdbeCplmstTplcpy(DbsWdbe* dbswdbe, DpchRetWdbeCplmstTplcpy* dpchret);
 
-	void handleTimerWithSrefMonInSgeImport(DbsWdbe* dbswdbe);
-	void handleTimerInSgeImpidle(DbsWdbe* dbswdbe, const std::string& sref);
 	void handleTimerWithSrefMonInSgePostprc1(DbsWdbe* dbswdbe);
-	void handleTimerWithSrefMonInSgePostprc2(DbsWdbe* dbswdbe);
 	void handleTimerInSgePrsidle(DbsWdbe* dbswdbe, const std::string& sref);
+	void handleTimerInSgeImpidle(DbsWdbe* dbswdbe, const std::string& sref);
+	void handleTimerWithSrefMonInSgeImport(DbsWdbe* dbswdbe);
+	void handleTimerWithSrefMonInSgePostprc2(DbsWdbe* dbswdbe);
 	void handleTimerWithSrefMonInSgePostprc3(DbsWdbe* dbswdbe);
 
 private:

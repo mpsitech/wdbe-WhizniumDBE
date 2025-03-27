@@ -45,9 +45,8 @@ PnlWdbePrcRec::ContInf::ContInf(
 			const string& TxtRef
 		) :
 			Block()
+			, TxtRef(TxtRef)
 		{
-	this->TxtRef = TxtRef;
-
 	mask = {TXTREF};
 };
 
@@ -112,15 +111,14 @@ PnlWdbePrcRec::StatApp::StatApp(
 			, const bool initdoneFsmHk1NVector
 		) :
 			Block()
+			, initdoneDetail(initdoneDetail)
+			, initdoneKHdltype(initdoneKHdltype)
+			, initdoneRef1NSensitivity(initdoneRef1NSensitivity)
+			, initdoneRef1NVariable(initdoneRef1NVariable)
+			, initdoneMge1NSignal(initdoneMge1NSignal)
+			, initdoneFsmFsm1NFsmstate(initdoneFsmFsm1NFsmstate)
+			, initdoneFsmHk1NVector(initdoneFsmHk1NVector)
 		{
-	this->initdoneDetail = initdoneDetail;
-	this->initdoneKHdltype = initdoneKHdltype;
-	this->initdoneRef1NSensitivity = initdoneRef1NSensitivity;
-	this->initdoneRef1NVariable = initdoneRef1NVariable;
-	this->initdoneMge1NSignal = initdoneMge1NSignal;
-	this->initdoneFsmFsm1NFsmstate = initdoneFsmFsm1NFsmstate;
-	this->initdoneFsmHk1NVector = initdoneFsmHk1NVector;
-
 	mask = {INITDONEDETAIL, INITDONEKHDLTYPE, INITDONEREF1NSENSITIVITY, INITDONEREF1NVARIABLE, INITDONEMGE1NSIGNAL, INITDONEFSMFSM1NFSMSTATE, INITDONEFSMHK1NVECTOR};
 };
 
@@ -201,19 +199,18 @@ PnlWdbePrcRec::StatShr::StatShr(
 			, const bool ButRegularizeActive
 		) :
 			Block()
+			, ixWdbeVExpstate(ixWdbeVExpstate)
+			, scrJrefDetail(scrJrefDetail)
+			, scrJrefKHdltype(scrJrefKHdltype)
+			, scrJrefRef1NSensitivity(scrJrefRef1NSensitivity)
+			, scrJrefRef1NVariable(scrJrefRef1NVariable)
+			, scrJrefMge1NSignal(scrJrefMge1NSignal)
+			, scrJrefFsmFsm1NFsmstate(scrJrefFsmFsm1NFsmstate)
+			, pnlfsmfsm1nfsmstateAvail(pnlfsmfsm1nfsmstateAvail)
+			, scrJrefFsmHk1NVector(scrJrefFsmHk1NVector)
+			, pnlfsmhk1nvectorAvail(pnlfsmhk1nvectorAvail)
+			, ButRegularizeActive(ButRegularizeActive)
 		{
-	this->ixWdbeVExpstate = ixWdbeVExpstate;
-	this->scrJrefDetail = scrJrefDetail;
-	this->scrJrefKHdltype = scrJrefKHdltype;
-	this->scrJrefRef1NSensitivity = scrJrefRef1NSensitivity;
-	this->scrJrefRef1NVariable = scrJrefRef1NVariable;
-	this->scrJrefMge1NSignal = scrJrefMge1NSignal;
-	this->scrJrefFsmFsm1NFsmstate = scrJrefFsmFsm1NFsmstate;
-	this->pnlfsmfsm1nfsmstateAvail = pnlfsmfsm1nfsmstateAvail;
-	this->scrJrefFsmHk1NVector = scrJrefFsmHk1NVector;
-	this->pnlfsmhk1nvectorAvail = pnlfsmhk1nvectorAvail;
-	this->ButRegularizeActive = ButRegularizeActive;
-
 	mask = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFKHDLTYPE, SCRJREFREF1NSENSITIVITY, SCRJREFREF1NVARIABLE, SCRJREFMGE1NSIGNAL, SCRJREFFSMFSM1NFSMSTATE, PNLFSMFSM1NFSMSTATEAVAIL, SCRJREFFSMHK1NVECTOR, PNLFSMHK1NVECTORAVAIL, BUTREGULARIZEACTIVE};
 };
 
@@ -297,9 +294,8 @@ PnlWdbePrcRec::Tag::Tag(
 			const string& Cpt
 		) :
 			Block()
+			, Cpt(Cpt)
 		{
-	this->Cpt = Cpt;
-
 	mask = {CPT};
 };
 
@@ -336,11 +332,11 @@ PnlWdbePrcRec::DpchAppDo::DpchAppDo(
 			, const set<uint>& mask
 		) :
 			DpchAppWdbe(VecWdbeVDpch::DPCHAPPWDBEPRCRECDO, scrJref)
+			, ixVDo(ixVDo)
 		{
 	if (find(mask, ALL)) this->mask = {SCRJREF, IXVDO};
 	else this->mask = mask;
 
-	this->ixVDo = ixVDo;
 };
 
 string PnlWdbePrcRec::DpchAppDo::getSrefsMask() {

@@ -20,11 +20,11 @@ WdbeRMModuleMPeripheral::WdbeRMModuleMPeripheral(
 			const ubigint ref
 			, const ubigint refWdbeMModule
 			, const ubigint refWdbeMPeripheral
-		) {
-
-	this->ref = ref;
-	this->refWdbeMModule = refWdbeMModule;
-	this->refWdbeMPeripheral = refWdbeMPeripheral;
+		) :
+			ref(ref)
+			, refWdbeMModule(refWdbeMModule)
+			, refWdbeMPeripheral(refWdbeMPeripheral)
+		{
 };
 
 bool WdbeRMModuleMPeripheral::operator==(

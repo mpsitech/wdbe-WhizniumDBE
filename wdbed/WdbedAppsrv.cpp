@@ -951,6 +951,12 @@ uint WdbedAppsrv::readDpchApp(
 			} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHAPPWDBECMDDO) {
 				req->dpchapp = new CrdWdbeCmd::DpchAppDo();
 				((CrdWdbeCmd::DpchAppDo*) (req->dpchapp))->readXML(docctx, "/", true);
+			} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHAPPWDBECMDHK1NVECTORDATA) {
+				req->dpchapp = new PnlWdbeCmdHk1NVector::DpchAppData();
+				((PnlWdbeCmdHk1NVector::DpchAppData*) (req->dpchapp))->readXML(docctx, "/", true);
+			} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHAPPWDBECMDHK1NVECTORDO) {
+				req->dpchapp = new PnlWdbeCmdHk1NVector::DpchAppDo();
+				((PnlWdbeCmdHk1NVector::DpchAppDo*) (req->dpchapp))->readXML(docctx, "/", true);
 			} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHAPPWDBECMDLISTDATA) {
 				req->dpchapp = new PnlWdbeCmdList::DpchAppData();
 				((PnlWdbeCmdList::DpchAppData*) (req->dpchapp))->readXML(docctx, "/", true);
@@ -1680,6 +1686,21 @@ uint WdbedAppsrv::readDpchApp(
 			} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHAPPWDBEPRCREF1NVARIABLEDO) {
 				req->dpchapp = new PnlWdbePrcRef1NVariable::DpchAppDo();
 				((PnlWdbePrcRef1NVariable::DpchAppDo*) (req->dpchapp))->readXML(docctx, "/", true);
+			} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHAPPWDBEPRFDAEMONDATA) {
+				req->dpchapp = new PnlWdbePrfDaemon::DpchAppData();
+				((PnlWdbePrfDaemon::DpchAppData*) (req->dpchapp))->readXML(docctx, "/", true);
+			} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHAPPWDBEPRFDAEMONDO) {
+				req->dpchapp = new PnlWdbePrfDaemon::DpchAppDo();
+				((PnlWdbePrfDaemon::DpchAppDo*) (req->dpchapp))->readXML(docctx, "/", true);
+			} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHAPPWDBEPRFDO) {
+				req->dpchapp = new CrdWdbePrf::DpchAppDo();
+				((CrdWdbePrf::DpchAppDo*) (req->dpchapp))->readXML(docctx, "/", true);
+			} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHAPPWDBEPRFLICENSEDATA) {
+				req->dpchapp = new PnlWdbePrfLicense::DpchAppData();
+				((PnlWdbePrfLicense::DpchAppData*) (req->dpchapp))->readXML(docctx, "/", true);
+			} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHAPPWDBEPRFLICENSEDO) {
+				req->dpchapp = new PnlWdbePrfLicense::DpchAppDo();
+				((PnlWdbePrfLicense::DpchAppDo*) (req->dpchapp))->readXML(docctx, "/", true);
 			} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHAPPWDBEPRJDETAILDATA) {
 				req->dpchapp = new PnlWdbePrjDetail::DpchAppData();
 				((PnlWdbePrjDetail::DpchAppData*) (req->dpchapp))->readXML(docctx, "/", true);
@@ -2408,6 +2429,12 @@ uint WdbedAppsrv::readDpchApp(
 			} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHAPPWDBECMDDO) {
 				req->dpchapp = new CrdWdbeCmd::DpchAppDo();
 				((CrdWdbeCmd::DpchAppDo*) (req->dpchapp))->readJSON(root, true);
+			} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHAPPWDBECMDHK1NVECTORDATA) {
+				req->dpchapp = new PnlWdbeCmdHk1NVector::DpchAppData();
+				((PnlWdbeCmdHk1NVector::DpchAppData*) (req->dpchapp))->readJSON(root, true);
+			} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHAPPWDBECMDHK1NVECTORDO) {
+				req->dpchapp = new PnlWdbeCmdHk1NVector::DpchAppDo();
+				((PnlWdbeCmdHk1NVector::DpchAppDo*) (req->dpchapp))->readJSON(root, true);
 			} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHAPPWDBECMDLISTDATA) {
 				req->dpchapp = new PnlWdbeCmdList::DpchAppData();
 				((PnlWdbeCmdList::DpchAppData*) (req->dpchapp))->readJSON(root, true);
@@ -3137,6 +3164,21 @@ uint WdbedAppsrv::readDpchApp(
 			} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHAPPWDBEPRCREF1NVARIABLEDO) {
 				req->dpchapp = new PnlWdbePrcRef1NVariable::DpchAppDo();
 				((PnlWdbePrcRef1NVariable::DpchAppDo*) (req->dpchapp))->readJSON(root, true);
+			} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHAPPWDBEPRFDAEMONDATA) {
+				req->dpchapp = new PnlWdbePrfDaemon::DpchAppData();
+				((PnlWdbePrfDaemon::DpchAppData*) (req->dpchapp))->readJSON(root, true);
+			} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHAPPWDBEPRFDAEMONDO) {
+				req->dpchapp = new PnlWdbePrfDaemon::DpchAppDo();
+				((PnlWdbePrfDaemon::DpchAppDo*) (req->dpchapp))->readJSON(root, true);
+			} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHAPPWDBEPRFDO) {
+				req->dpchapp = new CrdWdbePrf::DpchAppDo();
+				((CrdWdbePrf::DpchAppDo*) (req->dpchapp))->readJSON(root, true);
+			} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHAPPWDBEPRFLICENSEDATA) {
+				req->dpchapp = new PnlWdbePrfLicense::DpchAppData();
+				((PnlWdbePrfLicense::DpchAppData*) (req->dpchapp))->readJSON(root, true);
+			} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHAPPWDBEPRFLICENSEDO) {
+				req->dpchapp = new PnlWdbePrfLicense::DpchAppDo();
+				((PnlWdbePrfLicense::DpchAppDo*) (req->dpchapp))->readJSON(root, true);
 			} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHAPPWDBEPRJDETAILDATA) {
 				req->dpchapp = new PnlWdbePrjDetail::DpchAppData();
 				((PnlWdbePrjDetail::DpchAppData*) (req->dpchapp))->readJSON(root, true);

@@ -424,26 +424,26 @@ public class PnlWdbeSigDetail {
 	  */
 	public class StatShr extends Block {
 
-		public static final int TXFHTYVALID = 1;
-		public static final int BUTSAVEAVAIL = 2;
-		public static final int BUTSAVEACTIVE = 3;
-		public static final int TXTSRFACTIVE = 4;
-		public static final int PUPTYPACTIVE = 5;
-		public static final int LSTCLUACTIVE = 6;
-		public static final int BUTCLUVIEWACTIVE = 7;
-		public static final int BUTCLUCLUSTERAVAIL = 8;
-		public static final int BUTCLUUNCLUSTERAVAIL = 9;
-		public static final int TXTREUACTIVE = 10;
-		public static final int BUTREUVIEWAVAIL = 11;
-		public static final int BUTREUVIEWACTIVE = 12;
-		public static final int TXTMGUACTIVE = 13;
-		public static final int BUTMGUVIEWAVAIL = 14;
-		public static final int BUTMGUVIEWACTIVE = 15;
-		public static final int TXTVECACTIVE = 16;
-		public static final int BUTVECVIEWAVAIL = 17;
-		public static final int BUTVECVIEWACTIVE = 18;
-		public static final int CHKCONACTIVE = 19;
-		public static final int PUPHTYACTIVE = 20;
+		public static final int BUTSAVEAVAIL = 1;
+		public static final int BUTSAVEACTIVE = 2;
+		public static final int TXTSRFACTIVE = 3;
+		public static final int PUPTYPACTIVE = 4;
+		public static final int LSTCLUACTIVE = 5;
+		public static final int BUTCLUVIEWACTIVE = 6;
+		public static final int BUTCLUCLUSTERAVAIL = 7;
+		public static final int BUTCLUUNCLUSTERAVAIL = 8;
+		public static final int TXTREUACTIVE = 9;
+		public static final int BUTREUVIEWAVAIL = 10;
+		public static final int BUTREUVIEWACTIVE = 11;
+		public static final int TXTMGUACTIVE = 12;
+		public static final int BUTMGUVIEWAVAIL = 13;
+		public static final int BUTMGUVIEWACTIVE = 14;
+		public static final int TXTVECACTIVE = 15;
+		public static final int BUTVECVIEWAVAIL = 16;
+		public static final int BUTVECVIEWACTIVE = 17;
+		public static final int CHKCONACTIVE = 18;
+		public static final int PUPHTYACTIVE = 19;
+		public static final int TXFHTYVALID = 20;
 		public static final int BUTHTYEDITAVAIL = 21;
 		public static final int TXFWIDACTIVE = 22;
 		public static final int TXFMMXACTIVE = 23;
@@ -457,8 +457,7 @@ public class PnlWdbeSigDetail {
 		public static final int TXFCMTACTIVE = 31;
 
 		public StatShr(
-					boolean TxfHtyValid
-					, boolean ButSaveAvail
+					boolean ButSaveAvail
 					, boolean ButSaveActive
 					, boolean TxtSrfActive
 					, boolean PupTypActive
@@ -477,6 +476,7 @@ public class PnlWdbeSigDetail {
 					, boolean ButVecViewActive
 					, boolean ChkConActive
 					, boolean PupHtyActive
+					, boolean TxfHtyValid
 					, boolean ButHtyEditAvail
 					, boolean TxfWidActive
 					, boolean TxfMmxActive
@@ -489,7 +489,6 @@ public class PnlWdbeSigDetail {
 					, boolean ButDrvViewActive
 					, boolean TxfCmtActive
 				) {
-			this.TxfHtyValid = TxfHtyValid;
 			this.ButSaveAvail = ButSaveAvail;
 			this.ButSaveActive = ButSaveActive;
 			this.TxtSrfActive = TxtSrfActive;
@@ -509,6 +508,7 @@ public class PnlWdbeSigDetail {
 			this.ButVecViewActive = ButVecViewActive;
 			this.ChkConActive = ChkConActive;
 			this.PupHtyActive = PupHtyActive;
+			this.TxfHtyValid = TxfHtyValid;
 			this.ButHtyEditAvail = ButHtyEditAvail;
 			this.TxfWidActive = TxfWidActive;
 			this.TxfMmxActive = TxfMmxActive;
@@ -521,10 +521,9 @@ public class PnlWdbeSigDetail {
 			this.ButDrvViewActive = ButDrvViewActive;
 			this.TxfCmtActive = TxfCmtActive;
 
-			mask = new HashSet<Integer>(Arrays.asList(TXFHTYVALID, BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, PUPTYPACTIVE, LSTCLUACTIVE, BUTCLUVIEWACTIVE, BUTCLUCLUSTERAVAIL, BUTCLUUNCLUSTERAVAIL, TXTREUACTIVE, BUTREUVIEWAVAIL, BUTREUVIEWACTIVE, TXTMGUACTIVE, BUTMGUVIEWAVAIL, BUTMGUVIEWACTIVE, TXTVECACTIVE, BUTVECVIEWAVAIL, BUTVECVIEWACTIVE, CHKCONACTIVE, PUPHTYACTIVE, BUTHTYEDITAVAIL, TXFWIDACTIVE, TXFMMXACTIVE, TXFCMBACTIVE, TXFONVACTIVE, TXFOFVACTIVE, CHKDFOACTIVE, TXTDRVACTIVE, BUTDRVVIEWAVAIL, BUTDRVVIEWACTIVE, TXFCMTACTIVE));
+			mask = new HashSet<Integer>(Arrays.asList(BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, PUPTYPACTIVE, LSTCLUACTIVE, BUTCLUVIEWACTIVE, BUTCLUCLUSTERAVAIL, BUTCLUUNCLUSTERAVAIL, TXTREUACTIVE, BUTREUVIEWAVAIL, BUTREUVIEWACTIVE, TXTMGUACTIVE, BUTMGUVIEWAVAIL, BUTMGUVIEWACTIVE, TXTVECACTIVE, BUTVECVIEWAVAIL, BUTVECVIEWACTIVE, CHKCONACTIVE, PUPHTYACTIVE, TXFHTYVALID, BUTHTYEDITAVAIL, TXFWIDACTIVE, TXFMMXACTIVE, TXFCMBACTIVE, TXFONVACTIVE, TXFOFVACTIVE, CHKDFOACTIVE, TXTDRVACTIVE, BUTDRVVIEWAVAIL, BUTDRVVIEWACTIVE, TXFCMTACTIVE));
 		};
 
-		public boolean TxfHtyValid;
 		public boolean ButSaveAvail;
 		public boolean ButSaveActive;
 		public boolean TxtSrfActive;
@@ -544,6 +543,7 @@ public class PnlWdbeSigDetail {
 		public boolean ButVecViewActive;
 		public boolean ChkConActive;
 		public boolean PupHtyActive;
+		public boolean TxfHtyValid;
 		public boolean ButHtyEditAvail;
 		public boolean TxfWidActive;
 		public boolean TxfMmxActive;
@@ -569,7 +569,6 @@ public class PnlWdbeSigDetail {
 			String itemtag = "StatitemShrWdbeSigDetail";
 
 			if (Xmlio.checkXPath(doc, basexpath)) {
-				TxfHtyValid = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxfHtyValid", mask, TXFHTYVALID);
 				ButSaveAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButSaveAvail", mask, BUTSAVEAVAIL);
 				ButSaveActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButSaveActive", mask, BUTSAVEACTIVE);
 				TxtSrfActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxtSrfActive", mask, TXTSRFACTIVE);
@@ -589,6 +588,7 @@ public class PnlWdbeSigDetail {
 				ButVecViewActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButVecViewActive", mask, BUTVECVIEWACTIVE);
 				ChkConActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ChkConActive", mask, CHKCONACTIVE);
 				PupHtyActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "PupHtyActive", mask, PUPHTYACTIVE);
+				TxfHtyValid = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxfHtyValid", mask, TXFHTYVALID);
 				ButHtyEditAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButHtyEditAvail", mask, BUTHTYEDITAVAIL);
 				TxfWidActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxfWidActive", mask, TXFWIDACTIVE);
 				TxfMmxActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxfMmxActive", mask, TXFMMXACTIVE);
@@ -612,7 +612,6 @@ public class PnlWdbeSigDetail {
 				) {
 			HashSet<Integer> items = new HashSet<Integer>();
 
-			if (TxfHtyValid == comp.TxfHtyValid) items.add(TXFHTYVALID);
 			if (ButSaveAvail == comp.ButSaveAvail) items.add(BUTSAVEAVAIL);
 			if (ButSaveActive == comp.ButSaveActive) items.add(BUTSAVEACTIVE);
 			if (TxtSrfActive == comp.TxtSrfActive) items.add(TXTSRFACTIVE);
@@ -632,6 +631,7 @@ public class PnlWdbeSigDetail {
 			if (ButVecViewActive == comp.ButVecViewActive) items.add(BUTVECVIEWACTIVE);
 			if (ChkConActive == comp.ChkConActive) items.add(CHKCONACTIVE);
 			if (PupHtyActive == comp.PupHtyActive) items.add(PUPHTYACTIVE);
+			if (TxfHtyValid == comp.TxfHtyValid) items.add(TXFHTYVALID);
 			if (ButHtyEditAvail == comp.ButHtyEditAvail) items.add(BUTHTYEDITAVAIL);
 			if (TxfWidActive == comp.TxfWidActive) items.add(TXFWIDACTIVE);
 			if (TxfMmxActive == comp.TxfMmxActive) items.add(TXFMMXACTIVE);
@@ -655,7 +655,7 @@ public class PnlWdbeSigDetail {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(TXFHTYVALID, BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, PUPTYPACTIVE, LSTCLUACTIVE, BUTCLUVIEWACTIVE, BUTCLUCLUSTERAVAIL, BUTCLUUNCLUSTERAVAIL, TXTREUACTIVE, BUTREUVIEWAVAIL, BUTREUVIEWACTIVE, TXTMGUACTIVE, BUTMGUVIEWAVAIL, BUTMGUVIEWACTIVE, TXTVECACTIVE, BUTVECVIEWAVAIL, BUTVECVIEWACTIVE, CHKCONACTIVE, PUPHTYACTIVE, BUTHTYEDITAVAIL, TXFWIDACTIVE, TXFMMXACTIVE, TXFCMBACTIVE, TXFONVACTIVE, TXFOFVACTIVE, CHKDFOACTIVE, TXTDRVACTIVE, BUTDRVVIEWAVAIL, BUTDRVVIEWACTIVE, TXFCMTACTIVE));
+			diffitems = new HashSet<Integer>(Arrays.asList(BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, PUPTYPACTIVE, LSTCLUACTIVE, BUTCLUVIEWACTIVE, BUTCLUCLUSTERAVAIL, BUTCLUUNCLUSTERAVAIL, TXTREUACTIVE, BUTREUVIEWAVAIL, BUTREUVIEWACTIVE, TXTMGUACTIVE, BUTMGUVIEWAVAIL, BUTMGUVIEWACTIVE, TXTVECACTIVE, BUTVECVIEWAVAIL, BUTVECVIEWACTIVE, CHKCONACTIVE, PUPHTYACTIVE, TXFHTYVALID, BUTHTYEDITAVAIL, TXFWIDACTIVE, TXFMMXACTIVE, TXFCMBACTIVE, TXFONVACTIVE, TXFOFVACTIVE, CHKDFOACTIVE, TXTDRVACTIVE, BUTDRVVIEWAVAIL, BUTDRVVIEWACTIVE, TXFCMTACTIVE));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);

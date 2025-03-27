@@ -128,11 +128,10 @@ DlgWdbeCvrNew::ContIac::ContIac(
 			, const uint numFDetRbuVni
 		) :
 			Block()
+			, numFDetPupCpr(numFDetPupCpr)
+			, numFDetPupBcv(numFDetPupBcv)
+			, numFDetRbuVni(numFDetRbuVni)
 		{
-	this->numFDetPupCpr = numFDetPupCpr;
-	this->numFDetPupBcv = numFDetPupBcv;
-	this->numFDetRbuVni = numFDetRbuVni;
-
 	mask = {NUMFDETPUPCPR, NUMFDETPUPBCV, NUMFDETRBUVNI};
 };
 
@@ -247,9 +246,8 @@ DlgWdbeCvrNew::ContInf::ContInf(
 			const uint numFSge
 		) :
 			Block()
+			, numFSge(numFSge)
 		{
-	this->numFSge = numFSge;
-
 	mask = {NUMFSGE};
 };
 
@@ -346,10 +344,9 @@ DlgWdbeCvrNew::StatShr::StatShr(
 			, const bool ButCreActive
 		) :
 			Block()
+			, ButCncActive(ButCncActive)
+			, ButCreActive(ButCreActive)
 		{
-	this->ButCncActive = ButCncActive;
-	this->ButCreActive = ButCreActive;
-
 	mask = {BUTCNCACTIVE, BUTCREACTIVE};
 };
 

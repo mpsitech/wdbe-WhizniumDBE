@@ -48,8 +48,13 @@ DpchRetWdbe* WdbeMtpGenfstDdrmux_Easy_v1_0::run(
 
 	bool phyNotAxi;
 	unsigned int wAPhy, wDPhy;
+
+	string resetMemclk;
+	string memclk;
+
 	bool memclkIntNotExt;
-	int fMemclk;
+	double ratioMemclk;
+
 	unsigned int wA, wAConst;
 	string aConst;
 	unsigned int NBeat;
@@ -66,7 +71,6 @@ DpchRetWdbe* WdbeMtpGenfstDdrmux_Easy_v1_0::run(
 	vector<double> ratioClkWrs;
 
 	ubigint refFstInit, refFstIdle, refFstLocked;
-	ubigint refFstLockedA, refFstLockedB;
 	ubigint refFstCollectA, refFstCollectB;
 	ubigint refFstAddr, refFstXfer;
 	ubigint refFstWaitFull, refFstDone;
@@ -89,11 +93,16 @@ DpchRetWdbe* WdbeMtpGenfstDdrmux_Easy_v1_0::run(
 			if (Wdbe::getMpa(dbswdbe, refWdbeMModule, "wDPhy", s)) wDPhy = atoi(s.c_str());
 		};
 
+		resetMemclk = "reset";
+		memclk = "memclk";
+		Wdbe::getMpa(dbswdbe, refWdbeMModule, "memclk", memclk);
+		if (memclk != "mclk") resetMemclk += StrMod::cap(memclk);
+
 		memclkIntNotExt = false;
 		if (Wdbe::getMpa(dbswdbe, refWdbeMModule, "memclkIntNotExt", s)) memclkIntNotExt = (s == "true");
 
-		fMemclk = 333000;
-		if (Wdbe::getMpa(dbswdbe, refWdbeMModule, "fMemclk", s)) fMemclk = atoi(s.c_str());
+		ratioMemclk = 1.0;
+		if (Wdbe::getMpa(dbswdbe, refWdbeMModule, "ratioMemclk", s)) ratioMemclk = atof(s.c_str());
 
 		wA = 32;
 		if (Wdbe::getMpa(dbswdbe, refWdbeMModule, "wA", s)) wA = atoi(s.c_str());
@@ -119,7 +128,7 @@ DpchRetWdbe* WdbeMtpGenfstDdrmux_Easy_v1_0::run(
 			if (ss.size() == NRd) for (unsigned int i = 0; i < NRd; i++) wDRds[i] = atoi(ss[i].c_str());
 		};
 
-		clkRds.resize(NRd, "memclk");
+		clkRds.resize(NRd, memclk);
 		if (Wdbe::getMpa(dbswdbe, refWdbeMModule, "clkRds", s)) {
 			StrMod::stringToVector(s, ss);
 			if (ss.size() == NRd) clkRds = ss;
@@ -140,7 +149,7 @@ DpchRetWdbe* WdbeMtpGenfstDdrmux_Easy_v1_0::run(
 			if (ss.size() == NWr) for (unsigned int i = 0; i < NWr; i++) wDWrs[i] = atoi(ss[i].c_str());
 		};
 
-		clkWrs.resize(NWr, "memclk");
+		clkWrs.resize(NWr, memclk);
 		if (Wdbe::getMpa(dbswdbe, refWdbeMModule, "clkWrs", s)) {
 			StrMod::stringToVector(s, ss);
 			if (ss.size() == NWr) clkWrs = ss;
@@ -173,10 +182,8 @@ DpchRetWdbe* WdbeMtpGenfstDdrmux_Easy_v1_0::run(
 		refNumSig = Wdbe::getNextSigRefNum(dbswdbe, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule);
 
 		// CDC memclk <-> mclk
-		// somehow find fMclk and fMemclk; assume that fMemclk/fMclk >= 1.0
-		double fMclk = 100000.0;
-		double fMemclk = 333000.0;
-		refCdcMclk = dbswdbe->tblwdbemcdc->insertNewRec(NULL, refWdbeMModule, "memclk", "resetMemclk", "mclk", "reset", fMemclk/fMclk);
+		refCdcMclk = 0;
+		if (memclk != "mclk") refCdcMclk = dbswdbe->tblwdbemcdc->insertNewRec(NULL, refWdbeMModule, memclk, resetMemclk, "mclk", "reset", ratioMemclk);
 
 		if (NRd > 0) {
 			// - read (custom wiring)
@@ -184,11 +191,23 @@ DpchRetWdbe* WdbeMtpGenfstDdrmux_Easy_v1_0::run(
 			for (unsigned int i = 0; i < NRd; i++) mutexsref += string(1, (char) (0x61+i));
 			mutexsref += "Rd";
 
-			dbswdbe->tblwdbemprocess->insertNewRec(&prc, refWdbeMModule, 0, "read", "memclk", "resetMemclk", false, "state(init)", false, "read access negotiation");
+			dbswdbe->tblwdbemprocess->insertNewRec(&prc, refWdbeMModule, 0, "read", memclk, resetMemclk, false, "state(init)", true, "read access negotiation");
 			if (refPrcRdWrFirst == 0) refPrcRdWrFirst = prc->ref;
 
 			prc->refWdbeMFsm = dbswdbe->tblwdbemfsm->insertNewRec(NULL, prc->ref, VecWdbeVMFsmDbgtaptype::VOID);
 			dbswdbe->tblwdbemprocess->updateRec(prc);
+
+			// rdid_t
+			dbswdbe->tblwdbeavkeylistkey->insertNewRec(&klsAkey, VecWdbeVKeylist::KLSTWDBEKHDLTYPE, 2, VecWdbeVMaintable::TBLWDBEMPROCESS, prc->ref, true, "rdid_t", "", "", 0, "", "");
+			dbswdbe->tblwdbejavkeylistkey->insertNewRec(&kakJ, klsAkey->ref, VecWdbeVLocale::ENUS, "array (0 to 31) of mutex_t", "(others => mutexIdle)");
+
+			klsAkey->refJ = kakJ->ref;
+			klsAkey->Title = kakJ->Title;
+			klsAkey->Comment = kakJ->Comment;
+			dbswdbe->tblwdbeavkeylistkey->updateRec(klsAkey);
+
+			delete kakJ;
+			delete klsAkey;
 
 			refFstInit = dbswdbe->tblwdbemfsmstate->insertNewRec(NULL, 0, prc->refWdbeMFsm, 1, "init", false, "");
 			refFstIdle = dbswdbe->tblwdbemfsmstate->insertNewRec(NULL, 0, prc->refWdbeMFsm, 2, "idle", false, "");
@@ -222,9 +241,11 @@ DpchRetWdbe* WdbeMtpGenfstDdrmux_Easy_v1_0::run(
 					s += ")";
 				};
 
+				s += " and rdid(ixRdid)=mutexIdle";
+
 				dbswdbe->tblwdbeamfsmstatestep->insertNewRec(NULL, refFstIdle, i + 1, refFstLocked, s, "start" + string(1, (char) (0x41+i)), "", "", "", "", "", "");
 			};
-			dbswdbe->tblwdbeamfsmstatestep->insertNewRec(NULL, refFstLocked, 1, refFstIdle, "ddrAXI_rvalid and ddrAXI_rlast", "unlock", "", "", "", "", "", "");
+			dbswdbe->tblwdbeamfsmstatestep->insertNewRec(NULL, refFstLocked, 1, refFstIdle, "ddrAXI_arready and ddrAXI_arvalid_sig", "unlock", "", "", "", "", "", "");
 
 			// signals
 			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, refNumSig++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "NRd", true, "nat", 0, "", "", "", to_string(NRd), false, 0, "");
@@ -236,12 +257,21 @@ DpchRetWdbe* WdbeMtpGenfstDdrmux_Easy_v1_0::run(
 			refC = dbswdbe->tblwdbecsignal->getNewRef();
 			for (unsigned int i = 0; i < NRd; i++) dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, refNumSig++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "ack" + getChsref(false, i, true) + "_sig", false, "sl", 1, "", "", "", "", false, 0, "");
 
-			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OPRT, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, refNumSig++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "ddrAXI_arlen", false, "slvdn", 8, "", "", "", "", false, refsPrts["ddrAXI_arlen"], "");
+			refC = dbswdbe->tblwdbecsignal->getNewRef();
+			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OPRT, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, refNumSig++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "ddrAXI_arlen", false, "slvdn", 8, "", "", "", "", false, refsPrts["ddrAXI_arlen"], "");
+			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OPRT, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, refNumSig++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "ddrAXI_arvalid", false, "sl", 1, "", "", "", "", false, refsPrts["ddrAXI_arvalid"], "");
+
+			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OPRT, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, refNumSig++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "ddrAXI_rready", false, "sl", 1, "", "", "", "", false, refsPrts["ddrAXI_rready"], "");
 
 			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, refNumSig++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "rdmutex", false, "mutex_t", 0, "", "", "", "mutexIdle", false, 0, "");
 
 			refSig = dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::STRB, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, refNumSig++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "strbRdlock", false, "sl", 1, "", "", "", "0", false, 0, "");
-			dbswdbe->tblwdbermcdcmsignal->insertNewRec(NULL, refCdcMclk, refSig, VecWdbeVRMCdcMSignalDir::FTS);
+			if (refCdcMclk != 0) dbswdbe->tblwdbermcdcmsignal->insertNewRec(NULL, refCdcMclk, refSig, VecWdbeVRMCdcMSignalDir::FTS);
+
+			refC = dbswdbe->tblwdbecsignal->getNewRef();
+			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, refNumSig++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "rdid", false, "rdid_t", 0, "", "", "", "(others => mutexIdle)", false, 0, "");
+			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, refNumSig++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "ixRdid", false, "nat", 0, "0..31", "", "", "0", false, 0, "");
+			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, refNumSig++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "ixRdidEgr", false, "nat", 0, "0..31", "", "", "0", false, 0, "");
 
 			for (unsigned int i = 0; i < NRd; i++) if (wDRds[i] != wD) {
 				// TBD: most likely, these aren't required and can be replaced by ddrAXI_r* directly
@@ -263,7 +293,7 @@ DpchRetWdbe* WdbeMtpGenfstDdrmux_Easy_v1_0::run(
 			for (unsigned int i = 0; i < NWr; i++) mutexsref += string(1, (char) (0x61+i));
 			mutexsref += "Wr";
 
-			dbswdbe->tblwdbemprocess->insertNewRec(&prc, refWdbeMModule, 0, "write", "memclk", "resetMemclk", false, "state(init)", false, "write access negotiation");
+			dbswdbe->tblwdbemprocess->insertNewRec(&prc, refWdbeMModule, 0, "write", memclk, resetMemclk, false, "state(init)", true, "write access negotiation");
 			if (refPrcRdWrFirst == 0) refPrcRdWrFirst = prc->ref;
 
 			prc->refWdbeMFsm = dbswdbe->tblwdbemfsm->insertNewRec(NULL, prc->ref, VecWdbeVMFsmDbgtaptype::VOID);
@@ -271,10 +301,7 @@ DpchRetWdbe* WdbeMtpGenfstDdrmux_Easy_v1_0::run(
 
 			refFstInit = dbswdbe->tblwdbemfsmstate->insertNewRec(NULL, 0, prc->refWdbeMFsm, 1, "init", false, "");
 			refFstIdle = dbswdbe->tblwdbemfsmstate->insertNewRec(NULL, 0, prc->refWdbeMFsm, 2, "idle", false, "");
-
-			refC = dbswdbe->tblwdbecfsmstate->getNewRef();
-			refFstLockedA = dbswdbe->tblwdbemfsmstate->insertNewRec(NULL, refC, prc->refWdbeMFsm, 3, "lockedA", true, "");
-			refFstLockedB = dbswdbe->tblwdbemfsmstate->insertNewRec(NULL, refC, prc->refWdbeMFsm, 4, "lockedB", false, "");
+			refFstLocked = dbswdbe->tblwdbemfsmstate->insertNewRec(NULL, refC, prc->refWdbeMFsm, 3, "locked", true, "");
 
 			dbswdbe->tblwdbeamfsmstatestep->insertNewRec(NULL, refFstInit, 1, refFstIdle, "", "syncrst", "", "", "", "", "", "");
 			for (unsigned int i = 0; i < NWr; i++) {
@@ -304,10 +331,11 @@ DpchRetWdbe* WdbeMtpGenfstDdrmux_Easy_v1_0::run(
 					s += ")";
 				};
 
-				dbswdbe->tblwdbeamfsmstatestep->insertNewRec(NULL, refFstIdle, i + 1, refFstLockedA, s, "start" + string(1, (char) (0x41+i)), "", "", "", "", "", "");
+				s += " and wrid(ixWrid)='0'";
+
+				dbswdbe->tblwdbeamfsmstatestep->insertNewRec(NULL, refFstIdle, i + 1, refFstLocked, s, "start" + string(1, (char) (0x41+i)), "", "", "", "", "", "");
 			};
-			dbswdbe->tblwdbeamfsmstatestep->insertNewRec(NULL, refFstLockedA, 1, refFstLockedB, "ddrAXI_wready and ddrAXI_wvalid_sig and ddrAXI_wlast_sig", "unlock", "", "", "", "", "", "");
-			dbswdbe->tblwdbeamfsmstatestep->insertNewRec(NULL, refFstLockedB, 1, refFstIdle, "ddrAXI_bvalid", "", "", "", "", "", "", "");
+			dbswdbe->tblwdbeamfsmstatestep->insertNewRec(NULL, refFstLocked, 1, refFstIdle, "ddrAXI_wready and ddrAXI_wvalid_sig and ddrAXI_wlast_sig", "unlock", "", "", "", "", "", "");
 
 			// signals
 			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, refNumSig++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "NWr", true, "nat", 0, "", "", "", to_string(NWr), false, 0, "");
@@ -325,10 +353,17 @@ DpchRetWdbe* WdbeMtpGenfstDdrmux_Easy_v1_0::run(
 			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OPRT, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, refNumSig++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "ddrAXI_wvalid", false, "sl", 1, "", "", "", "", false, refsPrts["ddrAXI_wvalid"], "");
 			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OPRT, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, refNumSig++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "ddrAXI_wlast", false, "sl", 1, "", "", "", "", false, refsPrts["ddrAXI_wlast"], "");
 
+			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OPRT, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, refNumSig++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "ddrAXI_bready", false, "sl", 1, "", "", "", "", false, refsPrts["ddrAXI_bready"], "");
+
 			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, refNumSig++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "wrmutex", false, "mutex_t", 0, "", "", "", "mutexIdle", false, 0, "");
 
 			refSig = dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::STRB, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, refNumSig++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "strbWrlock", false, "sl", 1, "", "", "", "0", false, 0, "");
-			dbswdbe->tblwdbermcdcmsignal->insertNewRec(NULL, refCdcMclk, refSig, VecWdbeVRMCdcMSignalDir::FTS);
+			if (refCdcMclk != 0) dbswdbe->tblwdbermcdcmsignal->insertNewRec(NULL, refCdcMclk, refSig, VecWdbeVRMCdcMSignalDir::FTS);
+
+			refC = dbswdbe->tblwdbecsignal->getNewRef();
+			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, refNumSig++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "wrid", false, "slvdn", 32, "", "", "", "0", false, 0, "");
+			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, refNumSig++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "ixWrid", false, "nat", 0, "0..31", "", "", "0", false, 0, "");
+			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, refNumSig++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "ixWridIgr", false, "nat", 0, "0..31", "", "", "0", false, 0, "");
 
 			for (unsigned int i = 0; i < NWr; i++) if (wDWrs[i] != wD) {
 				// TBD: most likely, these aren't required and can be replaced by ddrAXI_r* directly (in )
@@ -337,8 +372,6 @@ DpchRetWdbe* WdbeMtpGenfstDdrmux_Easy_v1_0::run(
 				refC = dbswdbe->tblwdbecsignal->getNewRef();
 				dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, refNumSig++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, chsref + "AXI_awready_sig", false, "sl", 1, "", "", "", "", false, 0, "");
 				dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, refNumSig++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, chsref + "AXI_wready_sig", false, "sl", 1, "", "", "", "", false, 0, "");
-				dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, refNumSig++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, chsref + "AXI_bresp_sig", false, "slvdn", 2, "", "", "", "", false, 0, "");
-				dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, refNumSig++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, chsref + "AXI_bvalid_sig", false, "sl", 1, "", "", "", "", false, 0, "");
 			};
 
 			delete prc;
@@ -429,7 +462,7 @@ DpchRetWdbe* WdbeMtpGenfstDdrmux_Easy_v1_0::run(
 			delete prc;
 
 			// - rdXGearEgr (auto-generated wiring)
-			dbswdbe->tblwdbemprocess->insertNewRec(&prc, refWdbeMModule, 0, chsref + "GearEgr", "memclk", "resetMemclk", false, "", false, chsref + " geared egress operation");
+			dbswdbe->tblwdbemprocess->insertNewRec(&prc, refWdbeMModule, 0, chsref + "GearEgr", memclk, resetMemclk, false, "", false, chsref + " geared egress operation");
 
 			prc->refWdbeMFsm = dbswdbe->tblwdbemfsm->insertNewRec(NULL, prc->ref, VecWdbeVMFsmDbgtaptype::VOID);
 			dbswdbe->tblwdbemprocess->updateRec(prc);
@@ -474,7 +507,7 @@ DpchRetWdbe* WdbeMtpGenfstDdrmux_Easy_v1_0::run(
 			// - wrXGearIgr (auto-generated wiring)
 			chsref = getChsref(true, i, false);
 
-			dbswdbe->tblwdbemprocess->insertNewRec(&prc, refWdbeMModule, 0, chsref + "GearIgr", "memclk", "resetMemclk", false, "", true, chsref + " geared ingress operation");
+			dbswdbe->tblwdbemprocess->insertNewRec(&prc, refWdbeMModule, 0, chsref + "GearIgr", memclk, resetMemclk, false, "", true, chsref + " geared ingress operation");
 			if (refPrcGearFirst == 0) refPrcGearFirst = prc->ref;
 
 			prc->refWdbeMFsm = dbswdbe->tblwdbemfsm->insertNewRec(NULL, prc->ref, VecWdbeVMFsmDbgtaptype::VOID);
@@ -489,14 +522,13 @@ DpchRetWdbe* WdbeMtpGenfstDdrmux_Easy_v1_0::run(
 			dbswdbe->tblwdbeamfsmstatestep->insertNewRec(NULL, refFstXfer, 1, refFstResp, "wrAAXI_wvalid", "xfer", "j=jmax", "beatDone", "i=imax-1", "burstDone", "", "");
 			dbswdbe->tblwdbeamfsmstatestep->insertNewRec(NULL, refFstXfer, 2, refFstXfer, "wrAAXI_wvalid", "xfer", "j=jmax", "beatDone", "else", "nextBeat", "", "");
 			dbswdbe->tblwdbeamfsmstatestep->insertNewRec(NULL, refFstXfer, 3, refFstXfer, "wrAAXI_wvalid", "xfer", "else", "nextWord", "", "", "", "");
-			dbswdbe->tblwdbeamfsmstatestep->insertNewRec(NULL, refFstResp, 1, refFstFull, "wrAAXI_bready", "", "", "", "", "", "", "");
+			dbswdbe->tblwdbeamfsmstatestep->insertNewRec(NULL, refFstResp, 1, refFstFull, "", "", "", "", "", "", "", "");
 			dbswdbe->tblwdbeamfsmstatestep->insertNewRec(NULL, refFstFull, 1, refFstIdle, "(not wrAFillBNotA and not wrAFullA) or (wrAFillBNotA and not wrAFullB)", "", "", "", "", "", "", "");
 
 			// signals
 			refC = dbswdbe->tblwdbecsignal->getNewRef();
 			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OPRT, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, refNumSig++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, chsref + "AXI_awready_oprt", false, "sl", 1, "", "state(idle)", "1", "0", false, refsPrts[chsref + "AXI_awready"], "");
 			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OPRT, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, refNumSig++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, chsref + "AXI_wready_oprt", false, "sl", 1, "", "state(xfer)", "1", "0", false, refsPrts[chsref + "AXI_wready"], "");
-			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OPRT, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, refNumSig++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, chsref + "AXI_bvalid_oprt", false, "sl", 1, "", "state(resp)", "1", "0", false, refsPrts[chsref + "AXI_bvalid"], "");
 
 			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, refNumSig++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, chsref + "FillBNotA", false, "_bool", 0, "", "", "", "false", false, 0, "");
 
@@ -540,7 +572,7 @@ DpchRetWdbe* WdbeMtpGenfstDdrmux_Easy_v1_0::run(
 			dbswdbe->tblwdbeamfsmstatestep->insertNewRec(NULL, refFstAddr, 1, refFstXfer, "wrAAXI_awready_sig", "addr", "", "", "", "", "", "");
 			dbswdbe->tblwdbeamfsmstatestep->insertNewRec(NULL, refFstXfer, 1, refFstResp, "wrAAXI_wready_sig", "", "i=imax-1", "done", "", "", "", "");
 			dbswdbe->tblwdbeamfsmstatestep->insertNewRec(NULL, refFstXfer, 2, refFstXfer, "wrAAXI_wready_sig", "", "else", "next", "", "", "", "");
-			dbswdbe->tblwdbeamfsmstatestep->insertNewRec(NULL, refFstResp, 1, refFstIdle, "wrAAXI_bvalid", "", "", "", "", "", "", "");
+			dbswdbe->tblwdbeamfsmstatestep->insertNewRec(NULL, refFstResp, 1, refFstIdle, "", "", "", "", "", "", "", "");
 
 			// signals
 			refC = dbswdbe->tblwdbecsignal->getNewRef();
@@ -549,7 +581,6 @@ DpchRetWdbe* WdbeMtpGenfstDdrmux_Easy_v1_0::run(
 			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, refNumSig++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, chsref + "AXI_wdata_sig", false, "slvdn", wD, "", "", "", "0", false, 0, "");
 			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, refNumSig++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, chsref + "AXI_wlast_sig", false, "sl", 1, "", "", "", "0", false, 0, "");
 			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, refNumSig++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, chsref + "AXI_wvalid_sig", false, "sl", 1, "", "state(xfer)", "1", "0", false, 0, "");
-			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, refNumSig++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, chsref + "AXI_bready_sig", false, "sl", 1, "", "state(resp)", "1", "0", false, 0, "");
 
 			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, refNumSig++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "req" + StrMod::cap(chsref) + "_sig", false, "sl", 1, "", "state(addr;xfer)", "1", "0", false, 0, "");
 

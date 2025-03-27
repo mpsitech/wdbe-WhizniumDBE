@@ -88,7 +88,7 @@ DpchRetWdbe* WdbeMtpGenfstGpio_Easy_v1_0::run(
 	if (cmdConfig || cmdSet) {
 		Syncrst += " or (state(!inv) and ";
 
-		if (cmdConfig && cmdSet) Syncrst += "(reqInvConfig and reqInvSet)";
+		if (cmdConfig && cmdSet) Syncrst += "(reqInvConfig or reqInvSet)";
 		else if (cmdConfig) Syncrst += "reqInvConfig";
 		else Syncrst += "reqInvSet";
 
@@ -125,8 +125,8 @@ DpchRetWdbe* WdbeMtpGenfstGpio_Easy_v1_0::run(
 	dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "w", true, "nat", 0, "", "", "", to_string(w), false, 0, "");
 
 	refC = dbswdbe->tblwdbecsignal->getNewRef();
-	if (cmdConfig) dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OPRT, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "ackInvConfig", false, "sl", 1, "", "", "", "", false, refPrtAckInvConfig, "");
-	if (cmdSet) dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OPRT, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "ackInvSet", false, "sl", 1, "", "", "", "", false, refPrtAckInvSet, "");
+	if (cmdConfig) dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OPRT, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "ackInvConfig", false, "sl", 1, "", "", "", "0", false, refPrtAckInvConfig, "");
+	if (cmdSet) dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OPRT, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "ackInvSet", false, "sl", 1, "", "", "", "0", false, refPrtAckInvSet, "");
 
 	if (cmdGet) dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OPRT, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "getBits", false, "slvdn", w, "", "", "", "0", false, refPrtGetBits, "");
 

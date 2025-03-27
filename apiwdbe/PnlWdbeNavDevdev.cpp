@@ -55,11 +55,10 @@ PnlWdbeNavDevdev::ContIac::ContIac(
 			, const uint numFLstUnt
 		) :
 			Block()
+			, numFLstPrj(numFLstPrj)
+			, numFLstVer(numFLstVer)
+			, numFLstUnt(numFLstUnt)
 		{
-	this->numFLstPrj = numFLstPrj;
-	this->numFLstVer = numFLstVer;
-	this->numFLstUnt = numFLstUnt;
-
 	mask = {NUMFLSTPRJ, NUMFLSTVER, NUMFLSTUNT};
 };
 
@@ -146,15 +145,14 @@ PnlWdbeNavDevdev::StatApp::StatApp(
 			, const uint LstUntNumFirstdisp
 		) :
 			Block()
+			, ixWdbeVExpstate(ixWdbeVExpstate)
+			, LstPrjAlt(LstPrjAlt)
+			, LstVerAlt(LstVerAlt)
+			, LstUntAlt(LstUntAlt)
+			, LstPrjNumFirstdisp(LstPrjNumFirstdisp)
+			, LstVerNumFirstdisp(LstVerNumFirstdisp)
+			, LstUntNumFirstdisp(LstUntNumFirstdisp)
 		{
-	this->ixWdbeVExpstate = ixWdbeVExpstate;
-	this->LstPrjAlt = LstPrjAlt;
-	this->LstVerAlt = LstVerAlt;
-	this->LstUntAlt = LstUntAlt;
-	this->LstPrjNumFirstdisp = LstPrjNumFirstdisp;
-	this->LstVerNumFirstdisp = LstVerNumFirstdisp;
-	this->LstUntNumFirstdisp = LstUntNumFirstdisp;
-
 	mask = {IXWDBEVEXPSTATE, LSTPRJALT, LSTVERALT, LSTUNTALT, LSTPRJNUMFIRSTDISP, LSTVERNUMFIRSTDISP, LSTUNTNUMFIRSTDISP};
 };
 
@@ -236,15 +234,14 @@ PnlWdbeNavDevdev::StatShr::StatShr(
 			, const bool ButUntNewcrdActive
 		) :
 			Block()
+			, LstPrjAvail(LstPrjAvail)
+			, ButPrjViewActive(ButPrjViewActive)
+			, LstVerAvail(LstVerAvail)
+			, ButVerViewActive(ButVerViewActive)
+			, LstUntAvail(LstUntAvail)
+			, ButUntViewActive(ButUntViewActive)
+			, ButUntNewcrdActive(ButUntNewcrdActive)
 		{
-	this->LstPrjAvail = LstPrjAvail;
-	this->ButPrjViewActive = ButPrjViewActive;
-	this->LstVerAvail = LstVerAvail;
-	this->ButVerViewActive = ButVerViewActive;
-	this->LstUntAvail = LstUntAvail;
-	this->ButUntViewActive = ButUntViewActive;
-	this->ButUntNewcrdActive = ButUntNewcrdActive;
-
 	mask = {LSTPRJAVAIL, BUTPRJVIEWACTIVE, LSTVERAVAIL, BUTVERVIEWACTIVE, LSTUNTAVAIL, BUTUNTVIEWACTIVE, BUTUNTNEWCRDACTIVE};
 };
 
@@ -318,12 +315,11 @@ PnlWdbeNavDevdev::Tag::Tag(
 			, const string& CptUnt
 		) :
 			Block()
+			, Cpt(Cpt)
+			, CptPrj(CptPrj)
+			, CptVer(CptVer)
+			, CptUnt(CptUnt)
 		{
-	this->Cpt = Cpt;
-	this->CptPrj = CptPrj;
-	this->CptVer = CptVer;
-	this->CptUnt = CptUnt;
-
 	mask = {CPT, CPTPRJ, CPTVER, CPTUNT};
 };
 
@@ -402,11 +398,11 @@ PnlWdbeNavDevdev::DpchAppDo::DpchAppDo(
 			, const set<uint>& mask
 		) :
 			DpchAppWdbe(VecWdbeVDpch::DPCHAPPWDBENAVDEVDEVDO, scrJref)
+			, ixVDo(ixVDo)
 		{
 	if (find(mask, ALL)) this->mask = {SCRJREF, IXVDO};
 	else this->mask = mask;
 
-	this->ixVDo = ixVDo;
 };
 
 string PnlWdbeNavDevdev::DpchAppDo::getSrefsMask() {

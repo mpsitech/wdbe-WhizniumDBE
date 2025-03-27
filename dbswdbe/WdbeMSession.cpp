@@ -22,13 +22,13 @@ WdbeMSession::WdbeMSession(
 			, const uint start
 			, const uint stop
 			, const string Ip
-		) {
-
-	this->ref = ref;
-	this->refWdbeMUser = refWdbeMUser;
-	this->start = start;
-	this->stop = stop;
-	this->Ip = Ip;
+		) :
+			ref(ref)
+			, refWdbeMUser(refWdbeMUser)
+			, start(start)
+			, stop(stop)
+			, Ip(Ip)
+		{
 };
 
 bool WdbeMSession::operator==(

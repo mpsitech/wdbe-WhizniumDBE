@@ -111,18 +111,18 @@ void DlgWdbeVerFinmod::refreshLfi(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
 		) {
-	StatShrLfi oldStatshrlfi(statshrlfi);
 	ContInfLfi oldContinflfi(continflfi);
+	StatShrLfi oldStatshrlfi(statshrlfi);
 
 	// IP refreshLfi --- BEGIN
+	// continflfi
+
 	// statshrlfi
 	statshrlfi.DldActive = evalLfiDldActive(dbswdbe);
 
-	// continflfi
-
 	// IP refreshLfi --- END
-	if (statshrlfi.diff(&oldStatshrlfi).size() != 0) insert(moditems, DpchEngData::STATSHRLFI);
 	if (continflfi.diff(&oldContinflfi).size() != 0) insert(moditems, DpchEngData::CONTINFLFI);
+	if (statshrlfi.diff(&oldStatshrlfi).size() != 0) insert(moditems, DpchEngData::STATSHRLFI);
 };
 
 void DlgWdbeVerFinmod::refresh(
@@ -207,8 +207,8 @@ void DlgWdbeVerFinmod::handleRequest(
 		};
 
 	} else if (req->ixVBasetype == ReqWdbe::VecVBasetype::DOWNLOAD) {
-		if (ixVSge == VecVSge::FAIL) req->filename = handleDownloadInSgeFail(dbswdbe);
-		else if (ixVSge == VecVSge::DONE) req->filename = handleDownloadInSgeDone(dbswdbe);
+		if (ixVSge == VecVSge::DONE) req->filename = handleDownloadInSgeDone(dbswdbe);
+		else if (ixVSge == VecVSge::FAIL) req->filename = handleDownloadInSgeFail(dbswdbe);
 
 	} else if (req->ixVBasetype == ReqWdbe::VecVBasetype::DPCHRET) {
 		if (req->dpchret->ixOpVOpres == VecOpVOpres::PROGRESS) {
@@ -239,8 +239,8 @@ void DlgWdbeVerFinmod::handleRequest(
 		};
 
 	} else if (req->ixVBasetype == ReqWdbe::VecVBasetype::TIMER) {
-		if ((req->sref == "mon") && (ixVSge == VecVSge::GENWRI)) handleTimerWithSrefMonInSgeGenwri(dbswdbe);
-		else if ((req->sref == "mon") && (ixVSge == VecVSge::GENAUX)) handleTimerWithSrefMonInSgeGenaux(dbswdbe);
+		if ((req->sref == "mon") && (ixVSge == VecVSge::GENAUX)) handleTimerWithSrefMonInSgeGenaux(dbswdbe);
+		else if ((req->sref == "mon") && (ixVSge == VecVSge::GENWRI)) handleTimerWithSrefMonInSgeGenwri(dbswdbe);
 		else if ((req->sref == "mon") && (ixVSge == VecVSge::GENSV)) handleTimerWithSrefMonInSgeGensv(dbswdbe);
 	};
 };
@@ -353,23 +353,16 @@ void DlgWdbeVerFinmod::handleDpchRetWdbeGenWiring(
 	// IP handleDpchRetWdbeGenWiring --- IEND
 };
 
-string DlgWdbeVerFinmod::handleDownloadInSgeFail(
-			DbsWdbe* dbswdbe
-		) {
-	return(xchg->tmppath + "/" + logfile); // IP handleDownloadInSgeFail --- RLINE
-};
-
 string DlgWdbeVerFinmod::handleDownloadInSgeDone(
 			DbsWdbe* dbswdbe
 		) {
 	return(""); // IP handleDownloadInSgeDone --- LINE
 };
 
-void DlgWdbeVerFinmod::handleTimerWithSrefMonInSgeGenwri(
+string DlgWdbeVerFinmod::handleDownloadInSgeFail(
 			DbsWdbe* dbswdbe
 		) {
-	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
-	refreshWithDpchEng(dbswdbe); // IP handleTimerWithSrefMonInSgeGenwri --- ILINE
+	return(xchg->tmppath + "/" + logfile); // IP handleDownloadInSgeFail --- RLINE
 };
 
 void DlgWdbeVerFinmod::handleTimerWithSrefMonInSgeGenaux(
@@ -377,6 +370,13 @@ void DlgWdbeVerFinmod::handleTimerWithSrefMonInSgeGenaux(
 		) {
 	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
 	// IP handleTimerWithSrefMonInSgeGenaux --- INSERT
+};
+
+void DlgWdbeVerFinmod::handleTimerWithSrefMonInSgeGenwri(
+			DbsWdbe* dbswdbe
+		) {
+	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
+	refreshWithDpchEng(dbswdbe); // IP handleTimerWithSrefMonInSgeGenwri --- ILINE
 };
 
 void DlgWdbeVerFinmod::handleTimerWithSrefMonInSgeGensv(

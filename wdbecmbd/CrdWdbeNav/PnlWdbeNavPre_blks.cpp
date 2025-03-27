@@ -47,11 +47,10 @@ PnlWdbeNavPre::ContInf::ContInf(
 			, const string& TxtVer
 		) :
 			Block()
+			, TxtCvr(TxtCvr)
+			, TxtUnt(TxtUnt)
+			, TxtVer(TxtVer)
 		{
-	this->TxtCvr = TxtCvr;
-	this->TxtUnt = TxtUnt;
-	this->TxtVer = TxtVer;
-
 	mask = {TXTCVR, TXTUNT, TXTVER};
 };
 
@@ -122,11 +121,10 @@ PnlWdbeNavPre::StatShr::StatShr(
 			, const bool TxtVerAvail
 		) :
 			Block()
+			, TxtCvrAvail(TxtCvrAvail)
+			, TxtUntAvail(TxtUntAvail)
+			, TxtVerAvail(TxtVerAvail)
 		{
-	this->TxtCvrAvail = TxtCvrAvail;
-	this->TxtUntAvail = TxtUntAvail;
-	this->TxtVerAvail = TxtVerAvail;
-
 	mask = {TXTCVRAVAIL, TXTUNTAVAIL, TXTVERAVAIL};
 };
 

@@ -88,10 +88,9 @@ DlgWdbePrjNew::ContIac::ContIac(
 			, const string& DetTxfTit
 		) :
 			Block()
+			, DetTxfSho(DetTxfSho)
+			, DetTxfTit(DetTxfTit)
 		{
-	this->DetTxfSho = DetTxfSho;
-	this->DetTxfTit = DetTxfTit;
-
 	mask = {DETTXFSHO, DETTXFTIT};
 };
 
@@ -201,9 +200,8 @@ DlgWdbePrjNew::ContInf::ContInf(
 			const uint numFSge
 		) :
 			Block()
+			, numFSge(numFSge)
 		{
-	this->numFSge = numFSge;
-
 	mask = {NUMFSGE};
 };
 
@@ -301,11 +299,10 @@ DlgWdbePrjNew::StatShr::StatShr(
 			, const bool ButCreActive
 		) :
 			Block()
+			, DetButAutActive(DetButAutActive)
+			, ButCncActive(ButCncActive)
+			, ButCreActive(ButCreActive)
 		{
-	this->DetButAutActive = DetButAutActive;
-	this->ButCncActive = ButCncActive;
-	this->ButCreActive = ButCreActive;
-
 	mask = {DETBUTAUTACTIVE, BUTCNCACTIVE, BUTCREACTIVE};
 };
 

@@ -25,14 +25,14 @@ WdbeMVector::WdbeMVector(
 			, const ubigint hkUref
 			, const string sref
 			, const string srefsKOption
-		) {
-
-	this->ref = ref;
-	this->ixVBasetype = ixVBasetype;
-	this->hkIxVTbl = hkIxVTbl;
-	this->hkUref = hkUref;
-	this->sref = sref;
-	this->srefsKOption = srefsKOption;
+		) :
+			ref(ref)
+			, ixVBasetype(ixVBasetype)
+			, hkIxVTbl(hkIxVTbl)
+			, hkUref(hkUref)
+			, sref(sref)
+			, srefsKOption(srefsKOption)
+		{
 };
 
 bool WdbeMVector::operator==(

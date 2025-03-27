@@ -291,20 +291,20 @@ void PnlWdbeSnsDetail::handleDpchAppDoButSruViewClick(
 	ubigint refUnt = xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFUNT, jref);
 
 	if (statshr.ButSruViewAvail && statshr.ButSruViewActive) {
-		if (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCSIG, jref)) if (recSns.srcIxVTbl == VecWdbeVMSensitivitySrcTbl::SIG) if (ixPre == VecWdbeVPreset::PREWDBEREFMOD) {
-			sref = "CrdWdbeSig";
+		if (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCPRT, jref)) if (recSns.srcIxVTbl == VecWdbeVMSensitivitySrcTbl::PRT) if (ixPre == VecWdbeVPreset::PREWDBEREFMOD) {
+			sref = "CrdWdbePrt";
 			xchg->triggerIxRefSrefIntvalToRefCall(dbswdbe, VecWdbeVCall::CALLWDBECRDOPEN, jref, ixPre, refPre, sref, recSns.srcUref, jrefNew);
+		};
+		if (jrefNew == 0) {
+			if (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCSIG, jref)) if (recSns.srcIxVTbl == VecWdbeVMSensitivitySrcTbl::SIG) if (ixPre == VecWdbeVPreset::PREWDBEREFMOD) {
+				sref = "CrdWdbeSig";
+				xchg->triggerIxRefSrefIntvalToRefCall(dbswdbe, VecWdbeVCall::CALLWDBECRDOPEN, jref, ixPre, refPre, sref, recSns.srcUref, jrefNew);
+			};
 		};
 		if (jrefNew == 0) {
 			if (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCSIG, jref)) if (recSns.srcIxVTbl == VecWdbeVMSensitivitySrcTbl::SIG) if (refUnt != 0) {
 				sref = "CrdWdbeSig";
 				xchg->triggerIxRefSrefIntvalToRefCall(dbswdbe, VecWdbeVCall::CALLWDBECRDOPEN, jref, VecWdbeVPreset::PREWDBEREFUNT, refUnt, sref, recSns.srcUref, jrefNew);
-			};
-		};
-		if (jrefNew == 0) {
-			if (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCPRT, jref)) if (recSns.srcIxVTbl == VecWdbeVMSensitivitySrcTbl::PRT) if (ixPre == VecWdbeVPreset::PREWDBEREFMOD) {
-				sref = "CrdWdbePrt";
-				xchg->triggerIxRefSrefIntvalToRefCall(dbswdbe, VecWdbeVCall::CALLWDBECRDOPEN, jref, ixPre, refPre, sref, recSns.srcUref, jrefNew);
 			};
 		};
 		if (jrefNew == 0) {

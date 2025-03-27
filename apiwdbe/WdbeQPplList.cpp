@@ -22,11 +22,12 @@ WdbeQPplList::WdbeQPplList(
 			, const string sref
 			, const string stubHsmRefWdbeMModule
 			, const usmallint Depth
-		) {
-	this->jnum = jnum;
-	this->sref = sref;
-	this->stubHsmRefWdbeMModule = stubHsmRefWdbeMModule;
-	this->Depth = Depth;
+		) :
+			jnum(jnum)
+			, sref(sref)
+			, stubHsmRefWdbeMModule(stubHsmRefWdbeMModule)
+			, Depth(Depth)
+		{
 };
 
 bool WdbeQPplList::readXML(

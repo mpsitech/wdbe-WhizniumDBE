@@ -25,14 +25,15 @@ WdbeQSegList::WdbeQSegList(
 			, const string Infmt
 			, const string Outfmt
 			, const usmallint Latency
-		) {
-	this->jnum = jnum;
-	this->sref = sref;
-	this->stubPplRefWdbeMPipeline = stubPplRefWdbeMPipeline;
-	this->stubSupRefWdbeMSegment = stubSupRefWdbeMSegment;
-	this->Infmt = Infmt;
-	this->Outfmt = Outfmt;
-	this->Latency = Latency;
+		) :
+			jnum(jnum)
+			, sref(sref)
+			, stubPplRefWdbeMPipeline(stubPplRefWdbeMPipeline)
+			, stubSupRefWdbeMSegment(stubSupRefWdbeMSegment)
+			, Infmt(Infmt)
+			, Outfmt(Outfmt)
+			, Latency(Latency)
+		{
 };
 
 bool WdbeQSegList::readXML(
