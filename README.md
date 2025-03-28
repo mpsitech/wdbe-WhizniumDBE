@@ -12,7 +12,7 @@ WhizniumDBE extends the concept of model-based source code generation to the wor
 
 To prepare your system for use with Whiznium and to learn how to make your first steps, please visit this [separate Git repository](https://github.com/mpsitech/The-Whiznium-Documentation).
 
-Also included is a full [WhizniumDBE model file reference](https://github.com/mpsitech/The-Whiznium-Documentation/blob/main/dbemdl.md).
+The primary source for all WhizniumDBE-related information is the [WhizniumDBE reference](https://mpsitech.github.io/The-WhizniumDBE-Reference).
 
 To streamline the everyday WhizniumDBE-enhanced development workflow, the [WhizniumDBE .pdf cheat sheet](https://content.mpsitech.cloud/cheatsheet_wdbe.pdf), packed with useful information, might come in handy. A paper copy (size A3) can be ordered free of charge [here](https://content.mpsitech.cloud/cheatsheet.html).
 
