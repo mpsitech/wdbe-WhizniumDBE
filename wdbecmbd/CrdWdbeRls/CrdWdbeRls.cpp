@@ -45,12 +45,12 @@ CrdWdbeRls::CrdWdbeRls(
 	feedFSge.tag = "FeedFSge";
 	VecVSge::fillFeed(feedFSge);
 
-	pnllist = NULL;
-	pnlrec = NULL;
-	pnlheadbar = NULL;
 	dlgfinreptr = NULL;
 	dlgstareptr = NULL;
 	dlgwrite = NULL;
+	pnlrec = NULL;
+	pnlheadbar = NULL;
+	pnllist = NULL;
 
 	// IP constructor.cust1 --- INSERT
 
@@ -62,9 +62,9 @@ CrdWdbeRls::CrdWdbeRls(
 	// initialize according to ref
 	changeRef(dbswdbe, jref, ((ref + 1) == 0) ? 0 : ref, false);
 
-	pnllist = new PnlWdbeRlsList(xchg, dbswdbe, jref, ixWdbeVLocale);
 	pnlrec = new PnlWdbeRlsRec(xchg, dbswdbe, jref, ixWdbeVLocale);
 	pnlheadbar = new PnlWdbeRlsHeadbar(xchg, dbswdbe, jref, ixWdbeVLocale);
+	pnllist = new PnlWdbeRlsList(xchg, dbswdbe, jref, ixWdbeVLocale);
 
 	// IP constructor.cust2 --- INSERT
 
@@ -77,11 +77,11 @@ CrdWdbeRls::CrdWdbeRls(
 
 	changeStage(dbswdbe, VecVSge::IDLE);
 
+	xchg->addClstn(VecWdbeVCall::CALLWDBEDLGCLOSE, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBESTATCHG, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBEREFPRESET, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBEREPTRSTART, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBEREPTRSTOP, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecWdbeVCall::CALLWDBEREFPRESET, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecWdbeVCall::CALLWDBESTATCHG, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecWdbeVCall::CALLWDBEDLGCLOSE, jref, Clstn::VecVJobmask::IMM, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -320,17 +320,72 @@ void CrdWdbeRls::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBEREPTRSTART) {
+	if (call->ixVCall == VecWdbeVCall::CALLWDBEDLGCLOSE) {
+		call->abort = handleCallWdbeDlgClose(dbswdbe, call->jref);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBESTATCHG) {
+		call->abort = handleCallWdbeStatChg(dbswdbe, call->jref);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEREFPRESET) {
+		call->abort = handleCallWdbeRefPreSet(dbswdbe, call->jref, call->argInv.ix, call->argInv.ref);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEREPTRSTART) {
 		call->abort = handleCallWdbeReptrStart(dbswdbe, call->jref, call->argInv.ix, call->argInv.txtval);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEREPTRSTOP) {
 		call->abort = handleCallWdbeReptrStop(dbswdbe, call->jref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEREFPRESET) {
-		call->abort = handleCallWdbeRefPreSet(dbswdbe, call->jref, call->argInv.ix, call->argInv.ref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBESTATCHG) {
-		call->abort = handleCallWdbeStatChg(dbswdbe, call->jref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEDLGCLOSE) {
-		call->abort = handleCallWdbeDlgClose(dbswdbe, call->jref);
 	};
+};
+
+bool CrdWdbeRls::handleCallWdbeDlgClose(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+
+	if (dlgfinreptr) {
+		delete dlgfinreptr;
+		dlgfinreptr = NULL;
+		statshr.jrefDlgfinreptr = 0;
+
+		xchg->submitDpch(getNewDpchEng({DpchEngData::STATSHR}));
+	} else if (dlgstareptr) {
+		delete dlgstareptr;
+		dlgstareptr = NULL;
+		statshr.jrefDlgstareptr = 0;
+
+		xchg->submitDpch(getNewDpchEng({DpchEngData::STATSHR}));
+	} else if (dlgwrite) {
+		delete dlgwrite;
+		dlgwrite = NULL;
+		statshr.jrefDlgwrite = 0;
+
+		xchg->submitDpch(getNewDpchEng({DpchEngData::STATSHR}));
+	};
+
+	return retval;
+};
+
+bool CrdWdbeRls::handleCallWdbeStatChg(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+	if (jrefTrig == pnlrec->jref) if ((pnllist->statshr.ixWdbeVExpstate == VecWdbeVExpstate::REGD) && (pnlrec->statshr.ixWdbeVExpstate == VecWdbeVExpstate::REGD)) pnllist->minimize(dbswdbe, true);
+	return retval;
+};
+
+bool CrdWdbeRls::handleCallWdbeRefPreSet(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+			, const uint ixInv
+			, const ubigint refInv
+		) {
+	bool retval = false;
+
+	if (ixInv == VecWdbeVPreset::PREWDBEREFRLS) {
+		changeRef(dbswdbe, jrefTrig, refInv, true);
+
+		if (refInv == 0) pnlrec->minimize(dbswdbe, true);
+	};
+
+	return retval;
 };
 
 bool CrdWdbeRls::handleCallWdbeReptrStart(
@@ -370,61 +425,6 @@ bool CrdWdbeRls::handleCallWdbeReptrStop(
 	if (!muteRefresh) refreshWithDpchEng(dbswdbe);
 
 	// IP handleCallWdbeReptrStop --- IEND
-	return retval;
-};
-
-bool CrdWdbeRls::handleCallWdbeRefPreSet(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-			, const uint ixInv
-			, const ubigint refInv
-		) {
-	bool retval = false;
-
-	if (ixInv == VecWdbeVPreset::PREWDBEREFRLS) {
-		changeRef(dbswdbe, jrefTrig, refInv, true);
-
-		if (refInv == 0) pnlrec->minimize(dbswdbe, true);
-	};
-
-	return retval;
-};
-
-bool CrdWdbeRls::handleCallWdbeStatChg(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-	if (jrefTrig == pnlrec->jref) if ((pnllist->statshr.ixWdbeVExpstate == VecWdbeVExpstate::REGD) && (pnlrec->statshr.ixWdbeVExpstate == VecWdbeVExpstate::REGD)) pnllist->minimize(dbswdbe, true);
-	return retval;
-};
-
-bool CrdWdbeRls::handleCallWdbeDlgClose(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-
-	if (dlgfinreptr) {
-		delete dlgfinreptr;
-		dlgfinreptr = NULL;
-		statshr.jrefDlgfinreptr = 0;
-
-		xchg->submitDpch(getNewDpchEng({DpchEngData::STATSHR}));
-	} else if (dlgstareptr) {
-		delete dlgstareptr;
-		dlgstareptr = NULL;
-		statshr.jrefDlgstareptr = 0;
-
-		xchg->submitDpch(getNewDpchEng({DpchEngData::STATSHR}));
-	} else if (dlgwrite) {
-		delete dlgwrite;
-		dlgwrite = NULL;
-		statshr.jrefDlgwrite = 0;
-
-		xchg->submitDpch(getNewDpchEng({DpchEngData::STATSHR}));
-	};
-
 	return retval;
 };
 

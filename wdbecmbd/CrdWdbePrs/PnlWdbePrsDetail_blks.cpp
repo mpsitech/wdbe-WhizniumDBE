@@ -50,16 +50,15 @@ PnlWdbePrsDetail::ContIac::ContIac(
 			, const string& TxfSal
 		) :
 			Block()
+			, TxfTit(TxfTit)
+			, TxfFnm(TxfFnm)
+			, numFPupJ(numFPupJ)
+			, numsFLstDrv(numsFLstDrv)
+			, numFPupSex(numFPupSex)
+			, TxfTel(TxfTel)
+			, TxfEml(TxfEml)
+			, TxfSal(TxfSal)
 		{
-	this->TxfTit = TxfTit;
-	this->TxfFnm = TxfFnm;
-	this->numFPupJ = numFPupJ;
-	this->numsFLstDrv = numsFLstDrv;
-	this->numFPupSex = numFPupSex;
-	this->TxfTel = TxfTel;
-	this->TxfEml = TxfEml;
-	this->TxfSal = TxfSal;
-
 	mask = {TXFTIT, TXFFNM, NUMFPUPJ, NUMSFLSTDRV, NUMFPUPSEX, TXFTEL, TXFEML, TXFSAL};
 };
 
@@ -200,10 +199,9 @@ PnlWdbePrsDetail::ContInf::ContInf(
 			, const string& TxtDrv
 		) :
 			Block()
+			, TxtLnm(TxtLnm)
+			, TxtDrv(TxtDrv)
 		{
-	this->TxtLnm = TxtLnm;
-	this->TxtDrv = TxtDrv;
-
 	mask = {TXTLNM, TXTDRV};
 };
 
@@ -321,20 +319,19 @@ PnlWdbePrsDetail::StatShr::StatShr(
 			, const bool TxfSalActive
 		) :
 			Block()
+			, ButSaveAvail(ButSaveAvail)
+			, ButSaveActive(ButSaveActive)
+			, TxfTitActive(TxfTitActive)
+			, TxfFnmActive(TxfFnmActive)
+			, PupJActive(PupJActive)
+			, ButJEditAvail(ButJEditAvail)
+			, TxtLnmActive(TxtLnmActive)
+			, LstDrvActive(LstDrvActive)
+			, PupSexActive(PupSexActive)
+			, TxfTelActive(TxfTelActive)
+			, TxfEmlActive(TxfEmlActive)
+			, TxfSalActive(TxfSalActive)
 		{
-	this->ButSaveAvail = ButSaveAvail;
-	this->ButSaveActive = ButSaveActive;
-	this->TxfTitActive = TxfTitActive;
-	this->TxfFnmActive = TxfFnmActive;
-	this->PupJActive = PupJActive;
-	this->ButJEditAvail = ButJEditAvail;
-	this->TxtLnmActive = TxtLnmActive;
-	this->LstDrvActive = LstDrvActive;
-	this->PupSexActive = PupSexActive;
-	this->TxfTelActive = TxfTelActive;
-	this->TxfEmlActive = TxfEmlActive;
-	this->TxfSalActive = TxfSalActive;
-
 	mask = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXFTITACTIVE, TXFFNMACTIVE, PUPJACTIVE, BUTJEDITAVAIL, TXTLNMACTIVE, LSTDRVACTIVE, PUPSEXACTIVE, TXFTELACTIVE, TXFEMLACTIVE, TXFSALACTIVE};
 };
 

@@ -20,12 +20,12 @@ uint QryWdbeUsrList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "ste") return STE;
-	if (s == "usg") return USG;
-	if (s == "srf") return SRF;
-	if (s == "prs") return PRS;
-	if (s == "own") return OWN;
 	if (s == "grp") return GRP;
+	if (s == "own") return OWN;
+	if (s == "prs") return PRS;
+	if (s == "srf") return SRF;
+	if (s == "usg") return USG;
+	if (s == "ste") return STE;
 
 	return(0);
 };
@@ -33,12 +33,12 @@ uint QryWdbeUsrList::VecVOrd::getIx(
 string QryWdbeUsrList::VecVOrd::getSref(
 			const uint ix
 		) {
-	if (ix == STE) return("ste");
-	if (ix == USG) return("usg");
-	if (ix == SRF) return("srf");
-	if (ix == PRS) return("prs");
-	if (ix == OWN) return("own");
 	if (ix == GRP) return("grp");
+	if (ix == OWN) return("own");
+	if (ix == PRS) return("prs");
+	if (ix == SRF) return("srf");
+	if (ix == USG) return("usg");
+	if (ix == STE) return("ste");
 
 	return("");
 };
@@ -106,11 +106,10 @@ QryWdbeUsrList::StatShr::StatShr(
 			, const uint nload
 		) :
 			Block()
+			, ntot(ntot)
+			, jnumFirstload(jnumFirstload)
+			, nload(nload)
 		{
-	this->ntot = ntot;
-	this->jnumFirstload = jnumFirstload;
-	this->nload = nload;
-
 	mask = {NTOT, JNUMFIRSTLOAD, NLOAD};
 };
 
@@ -181,10 +180,10 @@ QryWdbeUsrList::StgIac::StgIac(
 			, const uint nload
 		) :
 			Block()
+			, jnum(jnum)
+			, jnumFirstload(jnumFirstload)
+			, nload(nload)
 		{
-	this->jnum = jnum;
-	this->jnumFirstload = jnumFirstload;
-	this->nload = nload;
 	mask = {JNUM, JNUMFIRSTLOAD, NLOAD};
 };
 

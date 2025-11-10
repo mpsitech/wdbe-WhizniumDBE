@@ -182,7 +182,7 @@ DpchRetWdbeGenWiring* WdbeGenWiring::run(
 						gen = it->second;
 
 						// require matching characteristics
-						match = ((gen->srefWdbeKHdltype == subgen->srefWdbeKHdltype) && (gen->Width == subgen->Width) && (gen->Minmax == subgen->Minmax));
+						match = ((gen->srefWdbeKHdltype == subgen->srefWdbeKHdltype) && (gen->Width == subgen->Width));// && (gen->Minmax == subgen->Minmax));
 						if (match) match = ((gen->srcSrefWdbeMGeneric == "") || (gen->srcSrefWdbeMGeneric == subgen->srcSrefWdbeMGeneric));
 
 						if (!match) Wdbe::appendToTmpfile(xchg->tmppath, logfile, logfi, "wiring error 2: mismatch of generic " + submdl->sref + "." + subgen->sref + " characteristics with superior module " + mdl->sref + "!");
@@ -252,7 +252,7 @@ DpchRetWdbeGenWiring* WdbeGenWiring::run(
 
 								if ((prt->ixVDir == VecWdbeVMPortDir::OUT) && hasrng && ((to-from+1) < prt->Width)) {
 									// generate driver signal
-									dbswdbe->tblwdbemsignal->appendNewRecToRst(sigs, NULL, VecWdbeVMSignalBasetype::OPRT, 0, VecWdbeVMSignalRefTbl::MDL, mdl->ref, sigs.nodes.size()+1, VecWdbeVMSignalMgeTbl::VOID, 0, 0, prt->sref, false, prt->srefWdbeKHdltype, prt->Width, "", "", "", "0", false, prt->ref, "");
+									dbswdbe->tblwdbemsignal->appendNewRecToRst(sigs, NULL, VecWdbeVMSignalBasetype::OPRT, 0, VecWdbeVMSignalRefTbl::MDL, mdl->ref, sigs.nodes.size()+1, VecWdbeVMSignalMgeTbl::VOID, 0, 0, prt->sref, false, prt->srefWdbeKHdltype, prt->Width, "", "", "", "0", prt->ref, "");
 									srefsSigs[prt->sref] = sigs.nodes[sigs.nodes.size()-1];
 								};
 							};
@@ -350,7 +350,7 @@ DpchRetWdbeGenWiring* WdbeGenWiring::run(
 										};
 									};
 
-									dbswdbe->tblwdbemsignal->appendNewRecToRst(sigs, NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, mdl->ref, sigs.nodes.size()+1, VecWdbeVMSignalMgeTbl::VOID, 0, 0, prt->sref, false, "sl", 1, "", "", "", "", false, 0, "");
+									dbswdbe->tblwdbemsignal->appendNewRecToRst(sigs, NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, mdl->ref, sigs.nodes.size()+1, VecWdbeVMSignalMgeTbl::VOID, 0, 0, prt->sref, false, "sl", 1, "", "", "", "", 0, "");
 									srefsSigs[prt->sref] = sigs.nodes[sigs.nodes.size()-1];
 								};
 

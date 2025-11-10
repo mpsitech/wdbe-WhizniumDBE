@@ -28,17 +28,18 @@ WdbeQCvrList::WdbeQCvrList(
 			, const string stubBcvRefWdbeMCoreversion
 			, const string srefIxVState
 			, const string titIxVState
-		) {
-	this->jnum = jnum;
-	this->stubGrp = stubGrp;
-	this->stubOwn = stubOwn;
-	this->stubRefWdbeMCoreproject = stubRefWdbeMCoreproject;
-	this->Major = Major;
-	this->Minor = Minor;
-	this->Sub = Sub;
-	this->stubBcvRefWdbeMCoreversion = stubBcvRefWdbeMCoreversion;
-	this->srefIxVState = srefIxVState;
-	this->titIxVState = titIxVState;
+		) :
+			jnum(jnum)
+			, stubGrp(stubGrp)
+			, stubOwn(stubOwn)
+			, stubRefWdbeMCoreproject(stubRefWdbeMCoreproject)
+			, Major(Major)
+			, Minor(Minor)
+			, Sub(Sub)
+			, stubBcvRefWdbeMCoreversion(stubBcvRefWdbeMCoreversion)
+			, srefIxVState(srefIxVState)
+			, titIxVState(titIxVState)
+		{
 };
 
 bool WdbeQCvrList::readXML(

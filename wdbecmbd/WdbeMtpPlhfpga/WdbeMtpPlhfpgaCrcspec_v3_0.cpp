@@ -40,19 +40,19 @@ DpchRetWdbeMtpPlhfpga* WdbeMtpPlhfpgaCrcspec_v3_0::run(
 
 	// IP run --- IBEGIN
 	// keys / ex.:
-	// wPolym1 = 7
-	// wDm1 = 31
+	// wPoly = 8
+	// wD = 32
 
 	string poly, wD;
 
 	if (Wdbe::getMpa(dbswdbe, refWdbeMModule, "poly", poly)) {
-		keys.push_back("wPolym1");
-		vals.push_back((poly.length() > 4) ? "31" : "15");
+		keys.push_back("wPoly");
+		vals.push_back((poly.length() > 4) ? "32" : (poly.length() > 2) ? "16" : "8");
 	};
 
 	if (Wdbe::getMpa(dbswdbe, refWdbeMModule, "wD", wD)) {
-		keys.push_back("wDm1");
-		vals.push_back(to_string(atoi(wD.c_str()) - 1));
+		keys.push_back("wD");
+		vals.push_back(wD);
 	};
 	// IP run --- IEND
 

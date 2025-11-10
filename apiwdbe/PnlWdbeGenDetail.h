@@ -141,33 +141,31 @@ namespace PnlWdbeGenDetail {
 	class StatShr : public Sbecore::Block {
 
 	public:
-		static const Sbecore::uint TXFHTYVALID = 1;
-		static const Sbecore::uint TXFSRCVALID = 2;
-		static const Sbecore::uint BUTSAVEAVAIL = 3;
-		static const Sbecore::uint BUTSAVEACTIVE = 4;
-		static const Sbecore::uint TXTSRFACTIVE = 5;
-		static const Sbecore::uint LSTCLUACTIVE = 6;
-		static const Sbecore::uint BUTCLUVIEWACTIVE = 7;
-		static const Sbecore::uint BUTCLUCLUSTERAVAIL = 8;
-		static const Sbecore::uint BUTCLUUNCLUSTERAVAIL = 9;
-		static const Sbecore::uint TXTMDLACTIVE = 10;
-		static const Sbecore::uint BUTMDLVIEWAVAIL = 11;
-		static const Sbecore::uint BUTMDLVIEWACTIVE = 12;
-		static const Sbecore::uint PUPHTYACTIVE = 13;
-		static const Sbecore::uint BUTHTYEDITAVAIL = 14;
-		static const Sbecore::uint TXFWIDACTIVE = 15;
-		static const Sbecore::uint TXFMMXACTIVE = 16;
-		static const Sbecore::uint TXFDFVACTIVE = 17;
-		static const Sbecore::uint TXTSRCACTIVE = 18;
+		static const Sbecore::uint BUTSAVEAVAIL = 1;
+		static const Sbecore::uint BUTSAVEACTIVE = 2;
+		static const Sbecore::uint TXTSRFACTIVE = 3;
+		static const Sbecore::uint LSTCLUACTIVE = 4;
+		static const Sbecore::uint BUTCLUVIEWACTIVE = 5;
+		static const Sbecore::uint BUTCLUCLUSTERAVAIL = 6;
+		static const Sbecore::uint BUTCLUUNCLUSTERAVAIL = 7;
+		static const Sbecore::uint TXTMDLACTIVE = 8;
+		static const Sbecore::uint BUTMDLVIEWAVAIL = 9;
+		static const Sbecore::uint BUTMDLVIEWACTIVE = 10;
+		static const Sbecore::uint PUPHTYACTIVE = 11;
+		static const Sbecore::uint TXFHTYVALID = 12;
+		static const Sbecore::uint BUTHTYEDITAVAIL = 13;
+		static const Sbecore::uint TXFWIDACTIVE = 14;
+		static const Sbecore::uint TXFMMXACTIVE = 15;
+		static const Sbecore::uint TXFDFVACTIVE = 16;
+		static const Sbecore::uint TXTSRCACTIVE = 17;
+		static const Sbecore::uint TXFSRCVALID = 18;
 		static const Sbecore::uint BUTSRCVIEWAVAIL = 19;
 		static const Sbecore::uint TXFCMTACTIVE = 20;
 
 	public:
-		StatShr(const bool TxfHtyValid = false, const bool TxfSrcValid = false, const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxtSrfActive = true, const bool LstCluActive = true, const bool ButCluViewActive = true, const bool ButCluClusterAvail = true, const bool ButCluUnclusterAvail = true, const bool TxtMdlActive = true, const bool ButMdlViewAvail = true, const bool ButMdlViewActive = true, const bool PupHtyActive = true, const bool ButHtyEditAvail = true, const bool TxfWidActive = true, const bool TxfMmxActive = true, const bool TxfDfvActive = true, const bool TxtSrcActive = true, const bool ButSrcViewAvail = true, const bool TxfCmtActive = true);
+		StatShr(const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxtSrfActive = true, const bool LstCluActive = true, const bool ButCluViewActive = true, const bool ButCluClusterAvail = true, const bool ButCluUnclusterAvail = true, const bool TxtMdlActive = true, const bool ButMdlViewAvail = true, const bool ButMdlViewActive = true, const bool PupHtyActive = true, const bool TxfHtyValid = false, const bool ButHtyEditAvail = true, const bool TxfWidActive = true, const bool TxfMmxActive = true, const bool TxfDfvActive = true, const bool TxtSrcActive = true, const bool TxfSrcValid = false, const bool ButSrcViewAvail = true, const bool TxfCmtActive = true);
 
 	public:
-		bool TxfHtyValid;
-		bool TxfSrcValid;
 		bool ButSaveAvail;
 		bool ButSaveActive;
 		bool TxtSrfActive;
@@ -179,11 +177,13 @@ namespace PnlWdbeGenDetail {
 		bool ButMdlViewAvail;
 		bool ButMdlViewActive;
 		bool PupHtyActive;
+		bool TxfHtyValid;
 		bool ButHtyEditAvail;
 		bool TxfWidActive;
 		bool TxfMmxActive;
 		bool TxfDfvActive;
 		bool TxtSrcActive;
+		bool TxfSrcValid;
 		bool ButSrcViewAvail;
 		bool TxfCmtActive;
 

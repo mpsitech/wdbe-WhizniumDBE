@@ -82,10 +82,9 @@ DlgWdbeVerGenfst::ContInf::ContInf(
 			, const string& GfsTxtPrg
 		) :
 			Block()
+			, numFSge(numFSge)
+			, GfsTxtPrg(GfsTxtPrg)
 		{
-	this->numFSge = numFSge;
-	this->GfsTxtPrg = GfsTxtPrg;
-
 	mask = {NUMFSGE, GFSTXTPRG};
 };
 
@@ -186,11 +185,10 @@ DlgWdbeVerGenfst::StatShr::StatShr(
 			, const bool ButDneActive
 		) :
 			Block()
+			, GfsButRunActive(GfsButRunActive)
+			, GfsButStoActive(GfsButStoActive)
+			, ButDneActive(ButDneActive)
 		{
-	this->GfsButRunActive = GfsButRunActive;
-	this->GfsButStoActive = GfsButStoActive;
-	this->ButDneActive = ButDneActive;
-
 	mask = {GFSBUTRUNACTIVE, GFSBUTSTOACTIVE, BUTDNEACTIVE};
 };
 

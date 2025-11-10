@@ -14,9 +14,9 @@
 
 // IP include.cust --- INSERT
 
-#include "PnlWdbeCprMNPerson.h"
-#include "PnlWdbeCpr1NCoreversion.h"
 #include "PnlWdbeCprDetail.h"
+#include "PnlWdbeCpr1NCoreversion.h"
+#include "PnlWdbeCprMNPerson.h"
 
 #define VecVWdbeCprRecDo PnlWdbeCprRec::VecVDo
 
@@ -177,9 +177,9 @@ public:
 	ContInf continf;
 	StatShr statshr;
 
-	PnlWdbeCprMNPerson* pnlmnperson;
-	PnlWdbeCpr1NCoreversion* pnl1ncoreversion;
 	PnlWdbeCprDetail* pnldetail;
+	PnlWdbeCpr1NCoreversion* pnl1ncoreversion;
+	PnlWdbeCprMNPerson* pnlmnperson;
 
 	WdbeMCoreproject recCpr;
 
@@ -213,8 +213,8 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeCprUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 	bool handleCallWdbeCpr_cvrEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeCprUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 
 };
 

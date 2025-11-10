@@ -115,25 +115,24 @@ public:
 	class StatShr : public Sbecore::Block {
 
 	public:
-		static const Sbecore::uint TXFOPTVALID = 1;
-		static const Sbecore::uint BUTSAVEAVAIL = 2;
-		static const Sbecore::uint BUTSAVEACTIVE = 3;
-		static const Sbecore::uint TXTSRFACTIVE = 4;
-		static const Sbecore::uint TXTCMPACTIVE = 5;
-		static const Sbecore::uint BUTCMPVIEWAVAIL = 6;
-		static const Sbecore::uint BUTCMPVIEWACTIVE = 7;
-		static const Sbecore::uint TXTMCHACTIVE = 8;
-		static const Sbecore::uint BUTMCHVIEWAVAIL = 9;
-		static const Sbecore::uint BUTMCHVIEWACTIVE = 10;
-		static const Sbecore::uint LSTOPTACTIVE = 11;
+		static const Sbecore::uint BUTSAVEAVAIL = 1;
+		static const Sbecore::uint BUTSAVEACTIVE = 2;
+		static const Sbecore::uint TXTSRFACTIVE = 3;
+		static const Sbecore::uint TXTCMPACTIVE = 4;
+		static const Sbecore::uint BUTCMPVIEWAVAIL = 5;
+		static const Sbecore::uint BUTCMPVIEWACTIVE = 6;
+		static const Sbecore::uint TXTMCHACTIVE = 7;
+		static const Sbecore::uint BUTMCHVIEWAVAIL = 8;
+		static const Sbecore::uint BUTMCHVIEWACTIVE = 9;
+		static const Sbecore::uint LSTOPTACTIVE = 10;
+		static const Sbecore::uint TXFOPTVALID = 11;
 		static const Sbecore::uint BUTOPTEDITAVAIL = 12;
 		static const Sbecore::uint TXFCMTACTIVE = 13;
 
 	public:
-		StatShr(const bool TxfOptValid = false, const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxtSrfActive = true, const bool TxtCmpActive = true, const bool ButCmpViewAvail = true, const bool ButCmpViewActive = true, const bool TxtMchActive = true, const bool ButMchViewAvail = true, const bool ButMchViewActive = true, const bool LstOptActive = true, const bool ButOptEditAvail = true, const bool TxfCmtActive = true);
+		StatShr(const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxtSrfActive = true, const bool TxtCmpActive = true, const bool ButCmpViewAvail = true, const bool ButCmpViewActive = true, const bool TxtMchActive = true, const bool ButMchViewAvail = true, const bool ButMchViewActive = true, const bool LstOptActive = true, const bool TxfOptValid = false, const bool ButOptEditAvail = true, const bool TxfCmtActive = true);
 
 	public:
-		bool TxfOptValid;
 		bool ButSaveAvail;
 		bool ButSaveActive;
 		bool TxtSrfActive;
@@ -144,6 +143,7 @@ public:
 		bool ButMchViewAvail;
 		bool ButMchViewActive;
 		bool LstOptActive;
+		bool TxfOptValid;
 		bool ButOptEditAvail;
 		bool TxfCmtActive;
 
@@ -305,10 +305,10 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeKlsAkeyMod_klsEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv);
-	bool handleCallWdbeRlsUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
-	bool handleCallWdbeRls_mchEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
 	bool handleCallWdbeRls_cmpEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeRls_mchEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeRlsUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbeKlsAkeyMod_klsEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv);
 
 };
 

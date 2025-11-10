@@ -22,13 +22,13 @@ WdbeRMCommandMController::WdbeRMCommandMController(
 			, const ubigint refWdbeMController
 			, const ubigint ivrRefWdbeMSignal
 			, const ubigint rvrRefWdbeMSignal
-		) {
-
-	this->ref = ref;
-	this->refWdbeMCommand = refWdbeMCommand;
-	this->refWdbeMController = refWdbeMController;
-	this->ivrRefWdbeMSignal = ivrRefWdbeMSignal;
-	this->rvrRefWdbeMSignal = rvrRefWdbeMSignal;
+		) :
+			ref(ref)
+			, refWdbeMCommand(refWdbeMCommand)
+			, refWdbeMController(refWdbeMController)
+			, ivrRefWdbeMSignal(ivrRefWdbeMSignal)
+			, rvrRefWdbeMSignal(rvrRefWdbeMSignal)
+		{
 };
 
 bool WdbeRMCommandMController::operator==(

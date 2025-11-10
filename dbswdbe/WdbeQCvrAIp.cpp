@@ -28,17 +28,18 @@ WdbeQCvrAIp::WdbeQCvrAIp(
 			, const string srefIxVTagtype
 			, const string titIxVTagtype
 			, const string Comment
-		) {
-	this->qref = qref;
-	this->jref = jref;
-	this->jnum = jnum;
-	this->ref = ref;
-	this->cvrNum = cvrNum;
-	this->sref = sref;
-	this->ixVTagtype = ixVTagtype;
-	this->srefIxVTagtype = srefIxVTagtype;
-	this->titIxVTagtype = titIxVTagtype;
-	this->Comment = Comment;
+		) :
+			qref(qref)
+			, jref(jref)
+			, jnum(jnum)
+			, ref(ref)
+			, cvrNum(cvrNum)
+			, sref(sref)
+			, ixVTagtype(ixVTagtype)
+			, srefIxVTagtype(srefIxVTagtype)
+			, titIxVTagtype(titIxVTagtype)
+			, Comment(Comment)
+		{
 };
 
 void WdbeQCvrAIp::writeJSON(

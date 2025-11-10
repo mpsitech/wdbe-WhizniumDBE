@@ -6,6 +6,7 @@ MdlWdbeAdmin	administration module
 	tbl	TblWdbeMUser	CrdWdbeUsr
 	tbl	TblWdbeMPerson	CrdWdbePrs
 	tbl	TblWdbeMFile	CrdWdbeFil
+	void		CrdWdbePrf	preferences
 	ImeIMCard.end
 MdlWdbeGlobal	global data module
 	ImeIMCard.srefRefIxVTbl	srefRefUref	sref	Title	Avail	Active
@@ -58,6 +59,7 @@ MdlWdbeDeploy	deployment module
 	ImeIMCard.end
 MdlWdbeAuxfct	auxiliary functionality
 	ImeIMCard.srefRefIxVTbl	srefRefUref	sref	Title	Avail	Active
+	void		CrdWdbeIdf	interactive diff
 	void		CrdWdbeUtl	utilities
 	ImeIMCard.end
 ImeIMModule.end

@@ -49,9 +49,8 @@ PnlWdbeLibAMakefile::ContInf::ContInf(
 			const uint numFCsiQst
 		) :
 			Block()
+			, numFCsiQst(numFCsiQst)
 		{
-	this->numFCsiQst = numFCsiQst;
-
 	mask = {NUMFCSIQST};
 };
 
@@ -110,9 +109,8 @@ PnlWdbeLibAMakefile::StatApp::StatApp(
 			const uint ixWdbeVExpstate
 		) :
 			Block()
+			, ixWdbeVExpstate(ixWdbeVExpstate)
 		{
-	this->ixWdbeVExpstate = ixWdbeVExpstate;
-
 	mask = {IXWDBEVEXPSTATE};
 };
 
@@ -180,13 +178,12 @@ PnlWdbeLibAMakefile::StatShr::StatShr(
 			, const bool ButDeleteActive
 		) :
 			Block()
+			, ButNewAvail(ButNewAvail)
+			, ButDuplicateAvail(ButDuplicateAvail)
+			, ButDuplicateActive(ButDuplicateActive)
+			, ButDeleteAvail(ButDeleteAvail)
+			, ButDeleteActive(ButDeleteActive)
 		{
-	this->ButNewAvail = ButNewAvail;
-	this->ButDuplicateAvail = ButDuplicateAvail;
-	this->ButDuplicateActive = ButDuplicateActive;
-	this->ButDeleteAvail = ButDeleteAvail;
-	this->ButDeleteActive = ButDeleteActive;
-
 	mask = {BUTNEWAVAIL, BUTDUPLICATEAVAIL, BUTDUPLICATEACTIVE, BUTDELETEAVAIL, BUTDELETEACTIVE};
 };
 
@@ -255,11 +252,10 @@ PnlWdbeLibAMakefile::StgIac::StgIac(
 			, const uint TcoValWidth
 		) :
 			Block()
+			, TcoMchWidth(TcoMchWidth)
+			, TcoTagWidth(TcoTagWidth)
+			, TcoValWidth(TcoValWidth)
 		{
-	this->TcoMchWidth = TcoMchWidth;
-	this->TcoTagWidth = TcoTagWidth;
-	this->TcoValWidth = TcoValWidth;
-
 	mask = {TCOMCHWIDTH, TCOTAGWIDTH, TCOVALWIDTH};
 };
 
@@ -348,17 +344,16 @@ PnlWdbeLibAMakefile::Tag::Tag(
 			, const string& TcoVal
 		) :
 			Block()
+			, Cpt(Cpt)
+			, TxtRecord1(TxtRecord1)
+			, TxtRecord2(TxtRecord2)
+			, Trs(Trs)
+			, TxtShowing1(TxtShowing1)
+			, TxtShowing2(TxtShowing2)
+			, TcoMch(TcoMch)
+			, TcoTag(TcoTag)
+			, TcoVal(TcoVal)
 		{
-	this->Cpt = Cpt;
-	this->TxtRecord1 = TxtRecord1;
-	this->TxtRecord2 = TxtRecord2;
-	this->Trs = Trs;
-	this->TxtShowing1 = TxtShowing1;
-	this->TxtShowing2 = TxtShowing2;
-	this->TcoMch = TcoMch;
-	this->TcoTag = TcoTag;
-	this->TcoVal = TcoVal;
-
 	mask = {CPT, TXTRECORD1, TXTRECORD2, TRS, TXTSHOWING1, TXTSHOWING2, TCOMCH, TCOTAG, TCOVAL};
 };
 
@@ -446,11 +441,11 @@ PnlWdbeLibAMakefile::DpchAppDo::DpchAppDo(
 			, const set<uint>& mask
 		) :
 			DpchAppWdbe(VecWdbeVDpch::DPCHAPPWDBELIBAMAKEFILEDO, scrJref)
+			, ixVDo(ixVDo)
 		{
 	if (find(mask, ALL)) this->mask = {SCRJREF, IXVDO};
 	else this->mask = mask;
 
-	this->ixVDo = ixVDo;
 };
 
 string PnlWdbeLibAMakefile::DpchAppDo::getSrefsMask() {

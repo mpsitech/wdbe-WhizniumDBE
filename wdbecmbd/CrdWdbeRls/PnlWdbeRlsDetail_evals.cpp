@@ -178,12 +178,12 @@ bool PnlWdbeRlsDetail::evalLstOptActive(
 bool PnlWdbeRlsDetail::evalButOptEditAvail(
 			DbsWdbe* dbswdbe
 		) {
-	// pre.adm()
+	// pre.ixCrdaccRlsIncl(edit)
 
 	vector<bool> args;
 	bool a;
 
-	a = false;
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCRLS, jref) & VecWdbeWAccess::EDIT);
 	args.push_back(a);
 
 	return(args.back());

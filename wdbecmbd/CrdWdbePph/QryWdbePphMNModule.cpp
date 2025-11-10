@@ -85,7 +85,7 @@ void QryWdbePphMNModule::rerun(
 	dbswdbe->tblwdbeqpphmnmodule->removeRstByJref(jref);
 
 	sqlstr = "SELECT COUNT(TblWdbeRMModuleMPeripheral.ref)";
-	sqlstr += " FROM TblWdbeMModule, TblWdbeRMModuleMPeripheral";
+	sqlstr += " FROM TblWdbeRMModuleMPeripheral, TblWdbeMModule";
 	sqlstr += " WHERE TblWdbeRMModuleMPeripheral.refWdbeMModule = TblWdbeMModule.ref";
 	sqlstr += " AND TblWdbeRMModuleMPeripheral.refWdbeMPeripheral = " + to_string(preRefPph) + "";
 	dbswdbe->loadUintBySQL(sqlstr, cnt);
@@ -100,7 +100,7 @@ void QryWdbePphMNModule::rerun(
 
 	sqlstr = "INSERT INTO TblWdbeQPphMNModule(jref, jnum, mref, ref)";
 	sqlstr += " SELECT " + to_string(jref) + ", 0, TblWdbeMModule.ref, TblWdbeRMModuleMPeripheral.ref";
-	sqlstr += " FROM TblWdbeMModule, TblWdbeRMModuleMPeripheral";
+	sqlstr += " FROM TblWdbeRMModuleMPeripheral, TblWdbeMModule";
 	sqlstr += " WHERE TblWdbeRMModuleMPeripheral.refWdbeMModule = TblWdbeMModule.ref";
 	sqlstr += " AND TblWdbeRMModuleMPeripheral.refWdbeMPeripheral = " + to_string(preRefPph) + "";
 	sqlstr += " ORDER BY TblWdbeMModule.sref ASC";
@@ -274,11 +274,19 @@ void QryWdbePphMNModule::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBEMDLRPPHMOD_PPHEQ) {
-		call->abort = handleCallWdbeMdlRpphMod_pphEq(dbswdbe, call->jref);
-	} else if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
+	if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
 		call->abort = handleCallWdbeStubChgFromSelf(dbswdbe);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEMDLRPPHMOD_PPHEQ) {
+		call->abort = handleCallWdbeMdlRpphMod_pphEq(dbswdbe, call->jref);
 	};
+};
+
+bool QryWdbePphMNModule::handleCallWdbeStubChgFromSelf(
+			DbsWdbe* dbswdbe
+		) {
+	bool retval = false;
+	// IP handleCallWdbeStubChgFromSelf --- INSERT
+	return retval;
 };
 
 bool QryWdbePphMNModule::handleCallWdbeMdlRpphMod_pphEq(
@@ -292,13 +300,5 @@ bool QryWdbePphMNModule::handleCallWdbeMdlRpphMod_pphEq(
 		xchg->triggerCall(dbswdbe, VecWdbeVCall::CALLWDBESTATCHG, jref);
 	};
 
-	return retval;
-};
-
-bool QryWdbePphMNModule::handleCallWdbeStubChgFromSelf(
-			DbsWdbe* dbswdbe
-		) {
-	bool retval = false;
-	// IP handleCallWdbeStubChgFromSelf --- INSERT
 	return retval;
 };

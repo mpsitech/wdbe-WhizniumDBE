@@ -87,14 +87,6 @@
 				:disabled="!statshr.TxfOfvActive"
 			/>
 
-			<v-checkbox
-				class="my-1"
-				v-model="contiac.ChkDfo"
-				v-on:change='updateEng(["contiac"])'
-				:label="tag.CptDfo"
-				:disabled="!statshr.ChkDfoActive"
-			/>
-
 			<v-text-field
 				class="my-1"
 				v-model="contiac.TxfCmt"

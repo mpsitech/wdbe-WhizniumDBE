@@ -25,14 +25,15 @@ WdbeQVecList::WdbeQVecList(
 			, const string srefHkIxVTbl
 			, const string titHkIxVTbl
 			, const string stubHkUref
-		) {
-	this->jnum = jnum;
-	this->sref = sref;
-	this->srefIxVBasetype = srefIxVBasetype;
-	this->titIxVBasetype = titIxVBasetype;
-	this->srefHkIxVTbl = srefHkIxVTbl;
-	this->titHkIxVTbl = titHkIxVTbl;
-	this->stubHkUref = stubHkUref;
+		) :
+			jnum(jnum)
+			, sref(sref)
+			, srefIxVBasetype(srefIxVBasetype)
+			, titIxVBasetype(titIxVBasetype)
+			, srefHkIxVTbl(srefHkIxVTbl)
+			, titHkIxVTbl(titHkIxVTbl)
+			, stubHkUref(stubHkUref)
+		{
 };
 
 bool WdbeQVecList::readXML(

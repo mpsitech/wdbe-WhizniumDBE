@@ -53,11 +53,10 @@ PnlWdbePinDetail::ContIac::ContIac(
 			, const string& TxfLoc
 		) :
 			Block()
+			, numFPupJsr(numFPupJsr)
+			, numFLstClu(numFLstClu)
+			, TxfLoc(TxfLoc)
 		{
-	this->numFPupJsr = numFPupJsr;
-	this->numFLstClu = numFLstClu;
-	this->TxfLoc = TxfLoc;
-
 	mask = {NUMFPUPJSR, NUMFLSTCLU, TXFLOC};
 };
 
@@ -174,11 +173,10 @@ PnlWdbePinDetail::ContInf::ContInf(
 			, const string& TxtBnk
 		) :
 			Block()
+			, TxtSrf(TxtSrf)
+			, TxtClu(TxtClu)
+			, TxtBnk(TxtBnk)
 		{
-	this->TxtSrf = TxtSrf;
-	this->TxtClu = TxtClu;
-	this->TxtBnk = TxtBnk;
-
 	mask = {TXTSRF, TXTCLU, TXTBNK};
 };
 
@@ -300,21 +298,20 @@ PnlWdbePinDetail::StatShr::StatShr(
 			, const bool TxfLocActive
 		) :
 			Block()
+			, ButSaveAvail(ButSaveAvail)
+			, ButSaveActive(ButSaveActive)
+			, PupJsrActive(PupJsrActive)
+			, ButJsrEditAvail(ButJsrEditAvail)
+			, TxtSrfActive(TxtSrfActive)
+			, LstCluActive(LstCluActive)
+			, ButCluViewActive(ButCluViewActive)
+			, ButCluClusterAvail(ButCluClusterAvail)
+			, ButCluUnclusterAvail(ButCluUnclusterAvail)
+			, TxtBnkActive(TxtBnkActive)
+			, ButBnkViewAvail(ButBnkViewAvail)
+			, ButBnkViewActive(ButBnkViewActive)
+			, TxfLocActive(TxfLocActive)
 		{
-	this->ButSaveAvail = ButSaveAvail;
-	this->ButSaveActive = ButSaveActive;
-	this->PupJsrActive = PupJsrActive;
-	this->ButJsrEditAvail = ButJsrEditAvail;
-	this->TxtSrfActive = TxtSrfActive;
-	this->LstCluActive = LstCluActive;
-	this->ButCluViewActive = ButCluViewActive;
-	this->ButCluClusterAvail = ButCluClusterAvail;
-	this->ButCluUnclusterAvail = ButCluUnclusterAvail;
-	this->TxtBnkActive = TxtBnkActive;
-	this->ButBnkViewAvail = ButBnkViewAvail;
-	this->ButBnkViewActive = ButBnkViewActive;
-	this->TxfLocActive = TxfLocActive;
-
 	mask = {BUTSAVEAVAIL, BUTSAVEACTIVE, PUPJSRACTIVE, BUTJSREDITAVAIL, TXTSRFACTIVE, LSTCLUACTIVE, BUTCLUVIEWACTIVE, BUTCLUCLUSTERAVAIL, BUTCLUUNCLUSTERAVAIL, TXTBNKACTIVE, BUTBNKVIEWAVAIL, BUTBNKVIEWACTIVE, TXFLOCACTIVE};
 };
 

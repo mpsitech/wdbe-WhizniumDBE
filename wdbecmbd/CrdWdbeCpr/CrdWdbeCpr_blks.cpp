@@ -79,11 +79,10 @@ CrdWdbeCpr::ContInf::ContInf(
 			, const string& MtxCrdCpr
 		) :
 			Block()
+			, numFSge(numFSge)
+			, MrlAppHlp(MrlAppHlp)
+			, MtxCrdCpr(MtxCrdCpr)
 		{
-	this->numFSge = numFSge;
-	this->MrlAppHlp = MrlAppHlp;
-	this->MtxCrdCpr = MtxCrdCpr;
-
 	mask = {NUMFSGE, MRLAPPHLP, MTXCRDCPR};
 };
 
@@ -214,14 +213,13 @@ CrdWdbeCpr::StatShr::StatShr(
 			, const bool MitCrdNewAvail
 		) :
 			Block()
+			, jrefDlgnew(jrefDlgnew)
+			, jrefHeadbar(jrefHeadbar)
+			, jrefList(jrefList)
+			, jrefRec(jrefRec)
+			, MspCrd1Avail(MspCrd1Avail)
+			, MitCrdNewAvail(MitCrdNewAvail)
 		{
-	this->jrefDlgnew = jrefDlgnew;
-	this->jrefHeadbar = jrefHeadbar;
-	this->jrefList = jrefList;
-	this->jrefRec = jrefRec;
-	this->MspCrd1Avail = MspCrd1Avail;
-	this->MitCrdNewAvail = MitCrdNewAvail;
-
 	mask = {JREFDLGNEW, JREFHEADBAR, JREFLIST, JREFREC, MSPCRD1AVAIL, MITCRDNEWAVAIL};
 };
 

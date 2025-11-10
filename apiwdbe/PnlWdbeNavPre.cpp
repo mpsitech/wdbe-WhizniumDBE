@@ -49,11 +49,10 @@ PnlWdbeNavPre::ContInf::ContInf(
 			, const string& TxtVer
 		) :
 			Block()
+			, TxtCvr(TxtCvr)
+			, TxtUnt(TxtUnt)
+			, TxtVer(TxtVer)
 		{
-	this->TxtCvr = TxtCvr;
-	this->TxtUnt = TxtUnt;
-	this->TxtVer = TxtVer;
-
 	mask = {TXTCVR, TXTUNT, TXTVER};
 };
 
@@ -118,11 +117,10 @@ PnlWdbeNavPre::StatShr::StatShr(
 			, const bool TxtVerAvail
 		) :
 			Block()
+			, TxtCvrAvail(TxtCvrAvail)
+			, TxtUntAvail(TxtUntAvail)
+			, TxtVerAvail(TxtVerAvail)
 		{
-	this->TxtCvrAvail = TxtCvrAvail;
-	this->TxtUntAvail = TxtUntAvail;
-	this->TxtVerAvail = TxtVerAvail;
-
 	mask = {TXTCVRAVAIL, TXTUNTAVAIL, TXTVERAVAIL};
 };
 
@@ -187,11 +185,10 @@ PnlWdbeNavPre::Tag::Tag(
 			, const string& CptVer
 		) :
 			Block()
+			, CptCvr(CptCvr)
+			, CptUnt(CptUnt)
+			, CptVer(CptVer)
 		{
-	this->CptCvr = CptCvr;
-	this->CptUnt = CptUnt;
-	this->CptVer = CptVer;
-
 	mask = {CPTCVR, CPTUNT, CPTVER};
 };
 
@@ -230,11 +227,11 @@ PnlWdbeNavPre::DpchAppDo::DpchAppDo(
 			, const set<uint>& mask
 		) :
 			DpchAppWdbe(VecWdbeVDpch::DPCHAPPWDBENAVPREDO, scrJref)
+			, ixVDo(ixVDo)
 		{
 	if (find(mask, ALL)) this->mask = {SCRJREF, IXVDO};
 	else this->mask = mask;
 
-	this->ixVDo = ixVDo;
 };
 
 string PnlWdbeNavPre::DpchAppDo::getSrefsMask() {

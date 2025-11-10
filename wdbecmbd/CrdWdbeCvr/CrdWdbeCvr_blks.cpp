@@ -85,11 +85,10 @@ CrdWdbeCvr::ContInf::ContInf(
 			, const string& MtxCrdCvr
 		) :
 			Block()
+			, numFSge(numFSge)
+			, MrlAppHlp(MrlAppHlp)
+			, MtxCrdCvr(MtxCrdCvr)
 		{
-	this->numFSge = numFSge;
-	this->MrlAppHlp = MrlAppHlp;
-	this->MtxCrdCvr = MtxCrdCvr;
-
 	mask = {NUMFSGE, MRLAPPHLP, MTXCRDCVR};
 };
 
@@ -230,24 +229,23 @@ CrdWdbeCvr::StatShr::StatShr(
 			, const bool MitCrdWcoActive
 		) :
 			Block()
+			, jrefDlgbsccd(jrefDlgbsccd)
+			, jrefDlgdetcd(jrefDlgdetcd)
+			, jrefDlgnew(jrefDlgnew)
+			, jrefDlgwrite(jrefDlgwrite)
+			, jrefHeadbar(jrefHeadbar)
+			, jrefList(jrefList)
+			, jrefRec(jrefRec)
+			, MspCrd1Avail(MspCrd1Avail)
+			, MitCrdNewAvail(MitCrdNewAvail)
+			, MitCrdIbsAvail(MitCrdIbsAvail)
+			, MitCrdIbsActive(MitCrdIbsActive)
+			, MitCrdIdsAvail(MitCrdIdsAvail)
+			, MitCrdIdsActive(MitCrdIdsActive)
+			, MspCrd2Avail(MspCrd2Avail)
+			, MitCrdWcoAvail(MitCrdWcoAvail)
+			, MitCrdWcoActive(MitCrdWcoActive)
 		{
-	this->jrefDlgbsccd = jrefDlgbsccd;
-	this->jrefDlgdetcd = jrefDlgdetcd;
-	this->jrefDlgnew = jrefDlgnew;
-	this->jrefDlgwrite = jrefDlgwrite;
-	this->jrefHeadbar = jrefHeadbar;
-	this->jrefList = jrefList;
-	this->jrefRec = jrefRec;
-	this->MspCrd1Avail = MspCrd1Avail;
-	this->MitCrdNewAvail = MitCrdNewAvail;
-	this->MitCrdIbsAvail = MitCrdIbsAvail;
-	this->MitCrdIbsActive = MitCrdIbsActive;
-	this->MitCrdIdsAvail = MitCrdIdsAvail;
-	this->MitCrdIdsActive = MitCrdIdsActive;
-	this->MspCrd2Avail = MspCrd2Avail;
-	this->MitCrdWcoAvail = MitCrdWcoAvail;
-	this->MitCrdWcoActive = MitCrdWcoActive;
-
 	mask = {JREFDLGBSCCD, JREFDLGDETCD, JREFDLGNEW, JREFDLGWRITE, JREFHEADBAR, JREFLIST, JREFREC, MSPCRD1AVAIL, MITCRDNEWAVAIL, MITCRDIBSAVAIL, MITCRDIBSACTIVE, MITCRDIDSAVAIL, MITCRDIDSACTIVE, MSPCRD2AVAIL, MITCRDWCOAVAIL, MITCRDWCOACTIVE};
 };
 

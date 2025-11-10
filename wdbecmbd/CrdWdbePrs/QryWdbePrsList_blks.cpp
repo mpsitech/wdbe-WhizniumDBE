@@ -20,9 +20,9 @@ uint QryWdbePrsList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "lnm") return LNM;
-	if (s == "own") return OWN;
 	if (s == "grp") return GRP;
+	if (s == "own") return OWN;
+	if (s == "lnm") return LNM;
 
 	return(0);
 };
@@ -30,9 +30,9 @@ uint QryWdbePrsList::VecVOrd::getIx(
 string QryWdbePrsList::VecVOrd::getSref(
 			const uint ix
 		) {
-	if (ix == LNM) return("lnm");
-	if (ix == OWN) return("own");
 	if (ix == GRP) return("grp");
+	if (ix == OWN) return("own");
+	if (ix == LNM) return("lnm");
 
 	return("");
 };
@@ -100,11 +100,10 @@ QryWdbePrsList::StatShr::StatShr(
 			, const uint nload
 		) :
 			Block()
+			, ntot(ntot)
+			, jnumFirstload(jnumFirstload)
+			, nload(nload)
 		{
-	this->ntot = ntot;
-	this->jnumFirstload = jnumFirstload;
-	this->nload = nload;
-
 	mask = {NTOT, JNUMFIRSTLOAD, NLOAD};
 };
 
@@ -175,10 +174,10 @@ QryWdbePrsList::StgIac::StgIac(
 			, const uint nload
 		) :
 			Block()
+			, jnum(jnum)
+			, jnumFirstload(jnumFirstload)
+			, nload(nload)
 		{
-	this->jnum = jnum;
-	this->jnumFirstload = jnumFirstload;
-	this->nload = nload;
 	mask = {JNUM, JNUMFIRSTLOAD, NLOAD};
 };
 

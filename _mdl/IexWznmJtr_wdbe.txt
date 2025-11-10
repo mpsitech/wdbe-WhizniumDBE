@@ -1,4 +1,4 @@
-IexWznmJtr v0.9.29
+IexWznmJtr v1.1.15
 ImeIMJob.sref
 CrdWdbeRls
 	ImeIMSensitivity1.srefIxVBasetype	srefRefWznmMCall	srefIxVJactype	srefIxVJobmask	Jobshort	Argpatt	srefRefWznmMControl	Srefmask	srefIxVAction	srefCsgRefWznmMStage	Custcode
@@ -354,8 +354,8 @@ DlgWdbeNavMnglic
 			ImeIJMSquawkTitle.end
 		ImeIMSquawk.end
 	ImeIMStage.end
-	ImeIRMJobMJob.srefSubRefWznmMJob	Short	Multi	srefIxVConstract
-	JobWdbeLicense	license	false	cre
+	ImeIRMJobMJob.srefSubRefWznmMJob	Short	Multi	Constr
+	JobWdbeLicense	license	false
 	ImeIRMJobMJob.end
 DlgWdbePrjImpex
 	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment
@@ -432,8 +432,8 @@ DlgWdbePrjImpex
 		dld		lock	void					cust
 		ImeIMSensitivity2.end
 	ImeIMStage.end
-	ImeIRMJobMJob.srefSubRefWznmMJob	Short	Multi	srefIxVConstract
-	JobWdbeLicense	license	false	cre
+	ImeIRMJobMJob.srefSubRefWznmMJob	Short	Multi	Constr
+	JobWdbeLicense	license	false
 	ImeIRMJobMJob.end
 DlgWdbePrjNew
 	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment
@@ -468,8 +468,8 @@ DlgWdbePrjNew
 		ImeIMSquawk.end
 	other	done
 	ImeIMStage.end
-	ImeIRMJobMJob.srefSubRefWznmMJob	Short	Multi	srefIxVConstract
-	JobWdbeLicense	license	false	cre
+	ImeIRMJobMJob.srefSubRefWznmMJob	Short	Multi	Constr
+	JobWdbeLicense	license	false
 	ImeIRMJobMJob.end
 DlgWdbeRlsFinreptr
 	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment
@@ -708,8 +708,8 @@ DlgWdbeRlsWrite
 		dld		lock	void					cust
 		ImeIMSensitivity2.end
 	ImeIMStage.end
-	ImeIRMJobMJob.srefSubRefWznmMJob	Short	Multi	srefIxVConstract
-	JobWdbeLicense	license	false	cre
+	ImeIRMJobMJob.srefSubRefWznmMJob	Short	Multi	Constr
+	JobWdbeLicense	license	false
 	ImeIRMJobMJob.end
 	ImeIRMJobMOp.srefRefWznmMOp
 	WdbePlhfpgaCmdinv
@@ -1084,8 +1084,8 @@ DlgWdbeVerFinmod
 		dld		lock	void					cust
 		ImeIMSensitivity2.end
 	ImeIMStage.end
-	ImeIRMJobMJob.srefSubRefWznmMJob	Short	Multi	srefIxVConstract
-	JobWdbeLicense	license	false	cre
+	ImeIRMJobMJob.srefSubRefWznmMJob	Short	Multi	Constr
+	JobWdbeLicense	license	false
 	ImeIRMJobMJob.end
 	ImeIRMJobMOp.srefRefWznmMOp
 	WdbeGenStdvec
@@ -1249,8 +1249,8 @@ DlgWdbeVerNew
 	other	create		done	idle
 	other	done
 	ImeIMStage.end
-	ImeIRMJobMJob.srefSubRefWznmMJob	Short	Multi	srefIxVConstract
-	JobWdbeIexPrj	iexprj	false	cre
+	ImeIRMJobMJob.srefSubRefWznmMJob	Short	Multi	Constr
+	JobWdbeIexPrj	iexprj	false
 	ImeIRMJobMJob.end
 JobWdbeLicense	true	true
 	ImeIMStage.srefIxVBasetype	sref	Monitvl	srefSnxRefWznmMStage	srefFnxRefWznmMStage	srefEnxRefWznmMStage	Comment

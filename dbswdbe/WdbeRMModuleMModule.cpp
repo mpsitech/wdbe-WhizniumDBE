@@ -21,12 +21,12 @@ WdbeRMModuleMModule::WdbeRMModuleMModule(
 			, const ubigint ctdRefWdbeMModule
 			, const ubigint corRefWdbeMModule
 			, const string srefKFunction
-		) {
-
-	this->ref = ref;
-	this->ctdRefWdbeMModule = ctdRefWdbeMModule;
-	this->corRefWdbeMModule = corRefWdbeMModule;
-	this->srefKFunction = srefKFunction;
+		) :
+			ref(ref)
+			, ctdRefWdbeMModule(ctdRefWdbeMModule)
+			, corRefWdbeMModule(corRefWdbeMModule)
+			, srefKFunction(srefKFunction)
+		{
 };
 
 bool WdbeRMModuleMModule::operator==(

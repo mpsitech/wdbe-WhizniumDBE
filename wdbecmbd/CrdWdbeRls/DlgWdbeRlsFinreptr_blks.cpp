@@ -181,9 +181,8 @@ DlgWdbeRlsFinreptr::ContIac::ContIac(
 			const uint numFDse
 		) :
 			Block()
+			, numFDse(numFDse)
 		{
-	this->numFDse = numFDse;
-
 	mask = {NUMFDSE};
 };
 
@@ -288,9 +287,8 @@ DlgWdbeRlsFinreptr::ContInf::ContInf(
 			const uint numFSge
 		) :
 			Block()
+			, numFSge(numFSge)
 		{
-	this->numFSge = numFSge;
-
 	mask = {NUMFSGE};
 };
 
@@ -353,9 +351,8 @@ DlgWdbeRlsFinreptr::ContInfFin::ContInfFin(
 			const string& TxtPrg
 		) :
 			Block()
+			, TxtPrg(TxtPrg)
 		{
-	this->TxtPrg = TxtPrg;
-
 	mask = {TXTPRG};
 };
 
@@ -419,10 +416,9 @@ DlgWdbeRlsFinreptr::ContInfRes::ContInfRes(
 			, const string& TxtPrg
 		) :
 			Block()
+			, Dld(Dld)
+			, TxtPrg(TxtPrg)
 		{
-	this->Dld = Dld;
-	this->TxtPrg = TxtPrg;
-
 	mask = {DLD, TXTPRG};
 };
 
@@ -525,9 +521,8 @@ DlgWdbeRlsFinreptr::StatShr::StatShr(
 			const bool ButDneActive
 		) :
 			Block()
+			, ButDneActive(ButDneActive)
 		{
-	this->ButDneActive = ButDneActive;
-
 	mask = {BUTDNEACTIVE};
 };
 
@@ -591,10 +586,9 @@ DlgWdbeRlsFinreptr::StatShrFin::StatShrFin(
 			, const bool ButStoActive
 		) :
 			Block()
+			, ButRunActive(ButRunActive)
+			, ButStoActive(ButStoActive)
 		{
-	this->ButRunActive = ButRunActive;
-	this->ButStoActive = ButStoActive;
-
 	mask = {BUTRUNACTIVE, BUTSTOACTIVE};
 };
 
@@ -665,14 +659,13 @@ DlgWdbeRlsFinreptr::StatShrRes::StatShrRes(
 			, const bool ButPsgActive
 		) :
 			Block()
+			, DldAvail(DldAvail)
+			, DldActive(DldActive)
+			, TxtPrgAvail(TxtPrgAvail)
+			, Sep1Avail(Sep1Avail)
+			, ButPsgAvail(ButPsgAvail)
+			, ButPsgActive(ButPsgActive)
 		{
-	this->DldAvail = DldAvail;
-	this->DldActive = DldActive;
-	this->TxtPrgAvail = TxtPrgAvail;
-	this->Sep1Avail = Sep1Avail;
-	this->ButPsgAvail = ButPsgAvail;
-	this->ButPsgActive = ButPsgActive;
-
 	mask = {DLDAVAIL, DLDACTIVE, TXTPRGAVAIL, SEP1AVAIL, BUTPSGAVAIL, BUTPSGACTIVE};
 };
 

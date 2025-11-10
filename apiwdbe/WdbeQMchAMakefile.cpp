@@ -22,11 +22,12 @@ WdbeQMchAMakefile::WdbeQMchAMakefile(
 			, const string x1SrefKTag
 			, const string titX1SrefKTag
 			, const string Val
-		) {
-	this->jnum = jnum;
-	this->x1SrefKTag = x1SrefKTag;
-	this->titX1SrefKTag = titX1SrefKTag;
-	this->Val = Val;
+		) :
+			jnum(jnum)
+			, x1SrefKTag(x1SrefKTag)
+			, titX1SrefKTag(titX1SrefKTag)
+			, Val(Val)
+		{
 };
 
 bool WdbeQMchAMakefile::readXML(

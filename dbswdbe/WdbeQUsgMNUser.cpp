@@ -27,16 +27,17 @@ WdbeQUsgMNUser::WdbeQUsgMNUser(
 			, const uint ixWdbeVUserlevel
 			, const string srefIxWdbeVUserlevel
 			, const string titIxWdbeVUserlevel
-		) {
-	this->qref = qref;
-	this->jref = jref;
-	this->jnum = jnum;
-	this->mref = mref;
-	this->stubMref = stubMref;
-	this->ref = ref;
-	this->ixWdbeVUserlevel = ixWdbeVUserlevel;
-	this->srefIxWdbeVUserlevel = srefIxWdbeVUserlevel;
-	this->titIxWdbeVUserlevel = titIxWdbeVUserlevel;
+		) :
+			qref(qref)
+			, jref(jref)
+			, jnum(jnum)
+			, mref(mref)
+			, stubMref(stubMref)
+			, ref(ref)
+			, ixWdbeVUserlevel(ixWdbeVUserlevel)
+			, srefIxWdbeVUserlevel(srefIxWdbeVUserlevel)
+			, titIxWdbeVUserlevel(titIxWdbeVUserlevel)
+		{
 };
 
 void WdbeQUsgMNUser::writeJSON(

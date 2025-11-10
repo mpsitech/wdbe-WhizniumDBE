@@ -1,0 +1,9 @@
+IexWznmOpk v1.1.14
+ImeIMOppack.srefIxVIop	srefIxVBasetype	sref	Title	Shrdat	Comment
+retr		WdbeMtpCplmstbu
+	ImeIMOp.sref	Shrdat	Comment
+	WdbeMtpCplmstbuSmartreg_v1_0	false	connect memory
+	WdbeMtpCplmstbuSmartreg_Easy_v1_0	false	connect memory
+	WdbeMtpCplmstbuToc_v1_0	false	connect memory
+	ImeIMOp.end
+ImeIMOppack.end

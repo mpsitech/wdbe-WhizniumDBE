@@ -41,7 +41,7 @@ DpchRetWdbe* WdbeMtpCplmstbuIdent_Easy_v1_0::run(
 	WdbeMModule* mdl = NULL;
 	WdbeMController* ctr = NULL;
 
-	uint refNum = 2; // ident.get() always present
+	uint refNum = 1; // ident.get() always present with opcode 0x00
 
 	uint mdlNum = 1;
 	string srefWdbeKHdltype;

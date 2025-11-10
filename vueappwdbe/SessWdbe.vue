@@ -78,6 +78,9 @@
 
 	/*
 	*/
+	import CrdWdbeNav from './CrdWdbeNav/CrdWdbeNav';
+	import DlgWdbeNavLoaini from './CrdWdbeNav/DlgWdbeNavLoaini';
+	import DlgWdbeNavMnglic from './CrdWdbeNav/DlgWdbeNavMnglic';
 	import CrdWdbeUsg from './CrdWdbeUsg/CrdWdbeUsg';
 	import CrdWdbeUsr from './CrdWdbeUsr/CrdWdbeUsr';
 	import DlgWdbeUsrMngkeypair from './CrdWdbeUsr/DlgWdbeUsrMngkeypair';
@@ -85,9 +88,7 @@
 	import CrdWdbeFil from './CrdWdbeFil/CrdWdbeFil';
 	import DlgWdbeFilDownload from './CrdWdbeFil/DlgWdbeFilDownload';
 	import DlgWdbeFilNew from './CrdWdbeFil/DlgWdbeFilNew';
-	import CrdWdbeNav from './CrdWdbeNav/CrdWdbeNav';
-	import DlgWdbeNavLoaini from './CrdWdbeNav/DlgWdbeNavLoaini';
-	import DlgWdbeNavMnglic from './CrdWdbeNav/DlgWdbeNavMnglic';
+	import CrdWdbePrf from './CrdWdbePrf/CrdWdbePrf';
 	import CrdWdbeMch from './CrdWdbeMch/CrdWdbeMch';
 	import CrdWdbeLib from './CrdWdbeLib/CrdWdbeLib';
 	import CrdWdbeFam from './CrdWdbeFam/CrdWdbeFam';
@@ -137,6 +138,7 @@
 	import DlgWdbeRlsFinreptr from './CrdWdbeRls/DlgWdbeRlsFinreptr';
 	import DlgWdbeRlsStareptr from './CrdWdbeRls/DlgWdbeRlsStareptr';
 	import DlgWdbeRlsWrite from './CrdWdbeRls/DlgWdbeRlsWrite';
+	import CrdWdbeIdf from './CrdWdbeIdf/CrdWdbeIdf';
 	import CrdWdbeUtl from './CrdWdbeUtl/CrdWdbeUtl';
 	import DlgWdbeUtlExtrip from './CrdWdbeUtl/DlgWdbeUtlExtrip';
 	import DlgWdbeUtlMrgip from './CrdWdbeUtl/DlgWdbeUtlMrgip';
@@ -165,6 +167,9 @@
 		components: {
 			/*
 			*/
+			CrdWdbeNav,
+			DlgWdbeNavLoaini,
+			DlgWdbeNavMnglic,
 			CrdWdbeUsg,
 			CrdWdbeUsr,
 			DlgWdbeUsrMngkeypair,
@@ -172,9 +177,7 @@
 			CrdWdbeFil,
 			DlgWdbeFilDownload,
 			DlgWdbeFilNew,
-			CrdWdbeNav,
-			DlgWdbeNavLoaini,
-			DlgWdbeNavMnglic,
+			CrdWdbePrf,
 			CrdWdbeMch,
 			CrdWdbeLib,
 			CrdWdbeFam,
@@ -224,6 +227,7 @@
 			DlgWdbeRlsFinreptr,
 			DlgWdbeRlsStareptr,
 			DlgWdbeRlsWrite,
+			CrdWdbeIdf,
 			CrdWdbeUtl,
 			DlgWdbeUtlExtrip,
 			DlgWdbeUtlMrgip

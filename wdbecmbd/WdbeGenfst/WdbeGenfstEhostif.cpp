@@ -133,7 +133,7 @@ DpchRetWdbe* WdbeGenfstEhostif::run(
 			if (dbswdbe->tblwdbemport->loadRecBySQL("SELECT * FROM TblWdbeMPort WHERE mdlRefWdbeMModule = " + to_string(refEhostif) + " AND sref = 'reqReset'", &prt)) {
 				s = "reqResetFrom" + StrMod::cap(srefEhostif);
 
-				dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::HSHK, 0, VecWdbeVMSignalRefTbl::MDL, refTop, mdlNumSigTop++, VecWdbeVMSignalMgeTbl::MDL, refEhostif, 0, s, false, "sl", 1, "", "", "", "", false, 0, "");
+				dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::HSHK, 0, VecWdbeVMSignalRefTbl::MDL, refTop, mdlNumSigTop++, VecWdbeVMSignalMgeTbl::MDL, refEhostif, 0, s, false, "sl", 1, "", "", "", "", 0, "");
 
 				prt->csiSrefWdbeMSignal = s;
 				dbswdbe->tblwdbemport->updateRec(prt);
@@ -163,7 +163,7 @@ DpchRetWdbe* WdbeGenfstEhostif::run(
 			// -- receive buffer in host interface shared data
 			Wdbe::getHostifSizeInvretbuf(dbswdbe, refUnt, sizeInvbuf, sizeRetbuf);
 
-			dbswdbe->tblwdbemvariable->insertNewRec(NULL, 0, VecWdbeVMVariableRefTbl::MDL, refEhostif, 1, "invbuf", false, false, "btarr", sizeInvbuf, "", "", "", false, "");
+			dbswdbe->tblwdbemvariable->insertNewRec(NULL, 0, VecWdbeVMVariableRefTbl::MDL, refEhostif, 1, "invbuf", false, false, "btarr", sizeInvbuf, "", "", "", "");
 		};
 
 		// --- top/ehostif/ectr ports and signals
@@ -224,21 +224,21 @@ DpchRetWdbe* WdbeGenfstEhostif::run(
 
 							// signals in top module
 							refC = dbswdbe->tblwdbecsignal->getNewRef();
-							dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::HSHK, refC, VecWdbeVMSignalRefTbl::MDL, refTop, mdlNumSigTop++, VecWdbeVMSignalMgeTbl::MDL, refEhostif, 0, "reqInv" + To + StrMod::cap(mdl->sref) + StrMod::cap(cmd->sref), false, "sl", 1, "", "", "", "", false, 0, "");
-							dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::HSHK, refC, VecWdbeVMSignalRefTbl::MDL, refTop, mdlNumSigTop++, VecWdbeVMSignalMgeTbl::MDL, mdl->ref, 0, "ackInv" + To + StrMod::cap(mdl->sref) + StrMod::cap(cmd->sref), false, "sl", 1, "", "", "", "", false, 0, "");
+							dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::HSHK, refC, VecWdbeVMSignalRefTbl::MDL, refTop, mdlNumSigTop++, VecWdbeVMSignalMgeTbl::MDL, refEhostif, 0, "reqInv" + To + StrMod::cap(mdl->sref) + StrMod::cap(cmd->sref), false, "sl", 1, "", "", "", "", 0, "");
+							dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::HSHK, refC, VecWdbeVMSignalRefTbl::MDL, refTop, mdlNumSigTop++, VecWdbeVMSignalMgeTbl::MDL, mdl->ref, 0, "ackInv" + To + StrMod::cap(mdl->sref) + StrMod::cap(cmd->sref), false, "sl", 1, "", "", "", "", 0, "");
 
 						} else {
 							// signals associated with unit
 							refC = dbswdbe->tblwdbecsignal->getNewRef();
-							dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::HSHK, refC, VecWdbeVMSignalRefTbl::UNT, refUnt, untNumSig++, VecWdbeVMSignalMgeTbl::MDL, refEhostif, 0, "reqInv" + To + StrMod::cap(mdl->sref) + StrMod::cap(cmd->sref), false, "bit", 1, "", "", "", "", false, 0, "");
-							dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::HSHK, refC, VecWdbeVMSignalRefTbl::UNT, refUnt, untNumSig++, VecWdbeVMSignalMgeTbl::MDL, mdl->ref, 0, "ackInv" + To + StrMod::cap(mdl->sref) + StrMod::cap(cmd->sref), false, "bit", 1, "", "", "", "", false, 0, "");
+							dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::HSHK, refC, VecWdbeVMSignalRefTbl::UNT, refUnt, untNumSig++, VecWdbeVMSignalMgeTbl::MDL, refEhostif, 0, "reqInv" + To + StrMod::cap(mdl->sref) + StrMod::cap(cmd->sref), false, "bit", 1, "", "", "", "", 0, "");
+							dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::HSHK, refC, VecWdbeVMSignalRefTbl::UNT, refUnt, untNumSig++, VecWdbeVMSignalMgeTbl::MDL, mdl->ref, 0, "ackInv" + To + StrMod::cap(mdl->sref) + StrMod::cap(cmd->sref), false, "bit", 1, "", "", "", "", 0, "");
 						};
 
 					} else if (cmd->ixVRettype == VecWdbeVMCommandRettype::STATSNG) {
 						if (mcuNotFpga) {
 							if (k == 0) {
 								// update signal associated with unit
-								dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::STRB, 0, VecWdbeVMSignalRefTbl::UNT, refUnt, untNumSig++, VecWdbeVMSignalMgeTbl::MDL, mdl->ref, 0, mdl->sref + StrMod::cap(cmd->sref), false, "bit", 1, "", "", "", "", false, 0, "");
+								dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::STRB, 0, VecWdbeVMSignalRefTbl::UNT, refUnt, untNumSig++, VecWdbeVMSignalMgeTbl::MDL, mdl->ref, 0, mdl->sref + StrMod::cap(cmd->sref), false, "bit", 1, "", "", "", "", 0, "");
 							};
 						};
 					};
@@ -282,7 +282,7 @@ DpchRetWdbe* WdbeGenfstEhostif::run(
 									// ports and signals in host interface
 									if (ipa->ixWdbeVPartype == VecWdbeVPartype::VBLOB) {
 										ref = dbswdbe->tblwdbemport->insertNewRec(NULL, refCprt, refEhostif, mdlNumPrtEhostif++, VecWdbeVMPortMdlCat::CMDBUS, mdl->sref + StrMod::cap(cmd->sref) + "Len" + StrMod::cap(ipa->sref), VecWdbeVMPortDir::OUT, "slvdn", 8, "", "", "", "", mdl->sref + StrMod::cap(cmd->sref) + "Len" + StrMod::cap(ipa->sref), "");
-										dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OPRT, refCsighostif, VecWdbeVMSignalRefTbl::MDL, refEhostif, mdlNumSigEhostif++, VecWdbeVMSignalMgeTbl::PRC, refPrcOp, 0, mdl->sref + StrMod::cap(cmd->sref) + "Len" + StrMod::cap(ipa->sref), false, "slvdn", 8, "", "", "", to_string(ipa->Length), false, ref, "");
+										dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OPRT, refCsighostif, VecWdbeVMSignalRefTbl::MDL, refEhostif, mdlNumSigEhostif++, VecWdbeVMSignalMgeTbl::PRC, refPrcOp, 0, mdl->sref + StrMod::cap(cmd->sref) + "Len" + StrMod::cap(ipa->sref), false, "slvdn", 8, "", "", "", to_string(ipa->Length), ref, "");
 									};
 
 									ref = dbswdbe->tblwdbemport->insertNewRec(NULL, refCprt, refEhostif, mdlNumPrtEhostif++, VecWdbeVMPortMdlCat::CMDBUS, mdl->sref + StrMod::cap(cmd->sref) + StrMod::cap(ipa->sref), VecWdbeVMPortDir::OUT, "slvdn", w, "", "", "", "", mdl->sref + StrMod::cap(cmd->sref) + StrMod::cap(ipa->sref), "");
@@ -290,19 +290,19 @@ DpchRetWdbe* WdbeGenfstEhostif::run(
 									Offval = ipa->Defval;
 									if (ipa->refWdbeMVectoritem != 0) if (dbswdbe->loadUintBySQL("SELECT vecNum FROM TblWdbeMVectoritem WHERE ref = " + to_string(ipa->refWdbeMVectoritem), vecNum)) Offval = to_string(vecNum);
 
-									dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OPRT, refCsighostif, VecWdbeVMSignalRefTbl::MDL, refEhostif, mdlNumSigEhostif++, VecWdbeVMSignalMgeTbl::PRC, refPrcOp, 0, mdl->sref + StrMod::cap(cmd->sref) + StrMod::cap(ipa->sref), false, "slvdn", w, "", "", "", Offval, false, ref, "");
+									dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OPRT, refCsighostif, VecWdbeVMSignalRefTbl::MDL, refEhostif, mdlNumSigEhostif++, VecWdbeVMSignalMgeTbl::PRC, refPrcOp, 0, mdl->sref + StrMod::cap(cmd->sref) + StrMod::cap(ipa->sref), false, "slvdn", w, "", "", "", Offval, ref, "");
 
 								} else {
 									// ports in invoking controller
-									// ex. vmonGetVpdVpd (same as in host interface)
+									// ex. finitetxFreeIx (same as in host interface), connect to top module signel rpuifToFiniterxFreeIx
 
-									if (ipa->ixWdbeVPartype == VecWdbeVPartype::VBLOB) dbswdbe->tblwdbemport->insertNewRec(NULL, refCprt, mdl2->ref, mdlNumPrts[icsInvctrs[k]]++, VecWdbeVMPortMdlCat::CMDBUS, mdl->sref + StrMod::cap(cmd->sref) + "Len" + StrMod::cap(ipa->sref), VecWdbeVMPortDir::OUT, "slvdn", 8, "", "", "", "", mdl->sref + StrMod::cap(cmd->sref) + "Len" + StrMod::cap(ipa->sref), "");
-									dbswdbe->tblwdbemport->insertNewRec(NULL, refCprt, mdl2->ref, mdlNumPrts[icsInvctrs[k]]++, VecWdbeVMPortMdlCat::CMDBUS, mdl->sref + StrMod::cap(cmd->sref) + StrMod::cap(ipa->sref), VecWdbeVMPortDir::OUT, "slvdn", w, "", "", "", "", mdl->sref + StrMod::cap(cmd->sref) + StrMod::cap(ipa->sref), "");
+									if (ipa->ixWdbeVPartype == VecWdbeVPartype::VBLOB) dbswdbe->tblwdbemport->insertNewRec(NULL, refCprt, mdl2->ref, mdlNumPrts[icsInvctrs[k]]++, VecWdbeVMPortMdlCat::CMDBUS, mdl->sref + StrMod::cap(cmd->sref) + "Len" + StrMod::cap(ipa->sref), VecWdbeVMPortDir::OUT, "slvdn", 8, "", "", "", "", To + "Len" + StrMod::cap(ipa->sref), "");
+									dbswdbe->tblwdbemport->insertNewRec(NULL, refCprt, mdl2->ref, mdlNumPrts[icsInvctrs[k]]++, VecWdbeVMPortMdlCat::CMDBUS, mdl->sref + StrMod::cap(cmd->sref) + StrMod::cap(ipa->sref), VecWdbeVMPortDir::OUT, "slvdn", w, "", "", "", "", To + StrMod::cap(ipa->sref), "");
 								};
 
 								// signals in top module
-								if (ipa->ixWdbeVPartype == VecWdbeVPartype::VBLOB) dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refCsigtop, VecWdbeVMSignalRefTbl::MDL, refTop, mdlNumSigTop++, VecWdbeVMSignalMgeTbl::MDL, refEhostif, 0, To + "Len" + StrMod::cap(ipa->sref), false, "slvdn", 8, "", "", "", "", false, 0, "");
-								dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refCsigtop, VecWdbeVMSignalRefTbl::MDL, refTop, mdlNumSigTop++, VecWdbeVMSignalMgeTbl::MDL, refEhostif, 0, To + StrMod::cap(ipa->sref), false, "slvdn", w, "", "", "", "", false, 0, "");
+								if (ipa->ixWdbeVPartype == VecWdbeVPartype::VBLOB) dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refCsigtop, VecWdbeVMSignalRefTbl::MDL, refTop, mdlNumSigTop++, VecWdbeVMSignalMgeTbl::MDL, refEhostif, 0, To + "Len" + StrMod::cap(ipa->sref), false, "slvdn", 8, "", "", "", "", 0, "");
+								dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refCsigtop, VecWdbeVMSignalRefTbl::MDL, refTop, mdlNumSigTop++, VecWdbeVMSignalMgeTbl::MDL, refEhostif, 0, To + StrMod::cap(ipa->sref), false, "slvdn", w, "", "", "", "", 0, "");
 							};
 						};
 
@@ -339,8 +339,8 @@ DpchRetWdbe* WdbeGenfstEhostif::run(
 
 								if (k == 0) {
 									// signals in top module (return parameters are not specific to the host interface / invoking controller)
-									if (rpa->ixWdbeVPartype == VecWdbeVPartype::VBLOB) dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refCsigtop, VecWdbeVMSignalRefTbl::MDL, refTop, mdlNumSigTop++, VecWdbeVMSignalMgeTbl::MDL, mdl->ref, 0, mdl->sref + StrMod::cap(cmd->sref) + "Len" + StrMod::cap(rpa->sref), false, "slvdn", 8, "", "", "", "", false, 0, "");
-									dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refCsigtop, VecWdbeVMSignalRefTbl::MDL, refTop, mdlNumSigTop++, VecWdbeVMSignalMgeTbl::MDL, mdl->ref, 0, mdl->sref + StrMod::cap(cmd->sref) + StrMod::cap(rpa->sref), false, "slvdn", w, "", "", "", "", false, 0, "");
+									if (rpa->ixWdbeVPartype == VecWdbeVPartype::VBLOB) dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refCsigtop, VecWdbeVMSignalRefTbl::MDL, refTop, mdlNumSigTop++, VecWdbeVMSignalMgeTbl::MDL, mdl->ref, 0, mdl->sref + StrMod::cap(cmd->sref) + "Len" + StrMod::cap(rpa->sref), false, "slvdn", 8, "", "", "", "", 0, "");
+									dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refCsigtop, VecWdbeVMSignalRefTbl::MDL, refTop, mdlNumSigTop++, VecWdbeVMSignalMgeTbl::MDL, mdl->ref, 0, mdl->sref + StrMod::cap(cmd->sref) + StrMod::cap(rpa->sref), false, "slvdn", w, "", "", "", "", 0, "");
 								};
 							};
 						};
@@ -388,8 +388,8 @@ DpchRetWdbe* WdbeGenfstEhostif::run(
 										w = 8;
 								};
 
-								if (rpa->ixWdbeVPartype == VecWdbeVPartype::VBLOB) dbswdbe->tblwdbemvariable->insertNewRec(NULL, refCvarctr, VecWdbeVMVariableRefTbl::MDL, mdl->ref, mdlNumVars[i]++, cmd->sref + "Len" + StrMod::cap(rpa->sref), false, false, "usgn", 8, "", "", "", false, "");
-								dbswdbe->tblwdbemvariable->insertNewRec(NULL, refCvarctr, VecWdbeVMVariableRefTbl::MDL, mdl->ref, mdlNumVars[i]++, cmd->sref + StrMod::cap(rpa->sref), false, false, srefWdbeKHdltype, w, "", "", "", false, "");
+								if (rpa->ixWdbeVPartype == VecWdbeVPartype::VBLOB) dbswdbe->tblwdbemvariable->insertNewRec(NULL, refCvarctr, VecWdbeVMVariableRefTbl::MDL, mdl->ref, mdlNumVars[i]++, cmd->sref + "Len" + StrMod::cap(rpa->sref), false, false, "usgn", 8, "", "", "", "");
+								dbswdbe->tblwdbemvariable->insertNewRec(NULL, refCvarctr, VecWdbeVMVariableRefTbl::MDL, mdl->ref, mdlNumVars[i]++, cmd->sref + StrMod::cap(rpa->sref), false, false, srefWdbeKHdltype, w, "", "", "", "");
 							};
 						};
 					};

@@ -26,17 +26,17 @@ WdbeMProject::WdbeMProject(
 			, const bool Easy
 			, const string Giturl
 			, const string Comment
-		) {
-
-	this->ref = ref;
-	this->grp = grp;
-	this->own = own;
-	this->refWdbeMVersion = refWdbeMVersion;
-	this->Short = Short;
-	this->Title = Title;
-	this->Easy = Easy;
-	this->Giturl = Giturl;
-	this->Comment = Comment;
+		) :
+			ref(ref)
+			, grp(grp)
+			, own(own)
+			, refWdbeMVersion(refWdbeMVersion)
+			, Short(Short)
+			, Title(Title)
+			, Easy(Easy)
+			, Giturl(Giturl)
+			, Comment(Comment)
+		{
 };
 
 bool WdbeMProject::operator==(

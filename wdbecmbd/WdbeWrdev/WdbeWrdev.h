@@ -17,23 +17,23 @@
 namespace WdbeWrdev {
 
 	// IP cust --- IBEGIN
-	void writeVecH(DbsWdbe* dbswdbe, std::fstream& outfile, WdbeMVector* vec, WdbeMUnit* unt, WdbeMController* ctr, const bool subclass, const unsigned int subil = 1);
-	void writeVecCpp(DbsWdbe* dbswdbe, std::fstream& outfile, WdbeMVector* vec, WdbeMUnit* unt, WdbeMController* ctr, const bool subclass);
+	void writeVecH(DbsWdbe* dbswdbe, std::fstream& outfile, WdbeMVector* vec, WdbeMUnit* unt, WdbeMController* ctr, WdbeMCommand* cmd, const bool subclass, const unsigned int subil = 1);
+	void writeVecCpp(DbsWdbe* dbswdbe, std::fstream& outfile, WdbeMVector* vec, WdbeMUnit* unt, WdbeMController* ctr, WdbeMCommand* cmd, const bool subclass);
 
-	void analyzeVec(DbsWdbe* dbswdbe, WdbeMVector* vec, WdbeMUnit* unt, WdbeMController* ctr, const bool subclass, ListWdbeMVectoritem& vits, std::string& supsref, std::string& subsref, bool& lin, bool& tix, bool& ns, bool& notit, bool& cmt, bool& appfed, bool& filfed, std::string& ixtype, std::string& ixvar, std::string& icsvar, std::string& clsnstype);
-	void getVecSupsubsref(WdbeMVector* vec, WdbeMUnit* unt, WdbeMController* ctr, std::string& supsref, std::string& subsref);
+	void analyzeVec(DbsWdbe* dbswdbe, WdbeMVector* vec, WdbeMUnit* unt, WdbeMController* ctr, WdbeMCommand* cmd, const bool subclass, ListWdbeMVectoritem& vits, std::string& supsref, std::string& subsref, bool& lin, bool& tix, bool& ns, bool& notit, bool& cmt, bool& appfed, bool& filfed, std::string& ixtype, std::string& ixvar, std::string& icsvar, std::string& clsnstype);
+	void getVecSupsubsref(WdbeMVector* vec, WdbeMUnit* unt, WdbeMController* ctr, WdbeMCommand* cmd, std::string& supsref, std::string& subsref);
 	std::string getVitConst(const std::string& vitsref, const bool tix);
 
-	void writeSpeccmdH(DbsWdbe* dbswdbe, std::fstream& outfile, WdbeMCommand* cmd, ListWdbeAMCommandRetpar& rpas, const std::string& supsref, const std::string& subsref);
+	void writeSpeccmdH(DbsWdbe* dbswdbe, std::fstream& outfile, const bool Easy, WdbeMCommand* cmd, ListWdbeAMCommandInvpar& ipas, ListWdbeAMCommandRetpar& rpas, const std::string& supsref, const std::string& subsref);
 
-	void writeSpeccmdCpp(DbsWdbe* dbswdbe, std::fstream& outfile, const Sbecore::utinyint tixCtr, WdbeMCommand* cmd, ListWdbeAMCommandRetpar& rpas, const std::string& supsref, const std::string& subsref);
+	void writeSpeccmdCpp(DbsWdbe* dbswdbe, std::fstream& outfile, const bool Easy, const Sbecore::utinyint tixCtr, WdbeMCommand* cmd, ListWdbeAMCommandInvpar& ipas, ListWdbeAMCommandRetpar& rpas, const std::string& supsref, const std::string& subsref);
 	void writeSpeccmdCpp_getrpa(std::fstream& outfile, WdbeAMCommandRetpar* rpa);
 
 	void writeCmdH(DbsWdbe* dbswdbe, std::fstream& outfile, const bool Easy, WdbeMCommand* cmd, ListWdbeAMCommandInvpar& ipas, ListWdbeAMCommandRetpar& rpas, const std::string& supsref, const std::string& subsref);
 
 	void writeCmdCpp(DbsWdbe* dbswdbe, std::fstream& outfile, const bool Easy, const Sbecore::utinyint tixCtr, const std::string& srefCtr, const bool hasvecerr, WdbeMCommand* cmd, ListWdbeAMCommandInvpar& ipas, ListWdbeAMCommandRetpar& rpas, const std::string& supsref, const std::string& subsref);
-	void writeCmdCpp_setipa(std::fstream& outfile, WdbeAMCommandInvpar* ipa);
-	void writeCmdCpp_getrpa(std::fstream& outfile, WdbeAMCommandRetpar* rpa);
+	void writeCmdCpp_setipa(std::fstream& outfile, WdbeMCommand* cmd, WdbeAMCommandInvpar* ipa);
+	void writeCmdCpp_getrpa(std::fstream& outfile, WdbeMCommand* cmd, WdbeAMCommandRetpar* rpa);
 
 	void writeErrH(DbsWdbe* dbswdbe, std::fstream& outfile, WdbeMError* err);
 

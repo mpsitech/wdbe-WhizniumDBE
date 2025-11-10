@@ -19,18 +19,18 @@ public class QryWdbeSegList {
 		*/
 	public static class VecVOrd {
 
-		public static final int SUP = 1;
+		public static final int SRF = 1;
 		public static final int PPL = 2;
-		public static final int SRF = 3;
+		public static final int SUP = 3;
 
 		public static int getIx(
 					String sref
 				) {
 			String s = sref.toLowerCase();
 
-			if (s.equals("sup")) return SUP;
-			if (s.equals("ppl")) return PPL;
 			if (s.equals("srf")) return SRF;
+			if (s.equals("ppl")) return PPL;
+			if (s.equals("sup")) return SUP;
 
 			return 0;
 		};
@@ -38,9 +38,9 @@ public class QryWdbeSegList {
 		public static String getSref(
 					int ix
 				) {
-			if (ix == SUP) return("sup");
-			if (ix == PPL) return("ppl");
 			if (ix == SRF) return("srf");
+			if (ix == PPL) return("ppl");
+			if (ix == SUP) return("sup");
 
 			return "";
 		};

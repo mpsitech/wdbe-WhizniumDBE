@@ -1,6 +1,6 @@
-IexWznmOpk v0.9.23
-ImeIMOppack.srefIxVBasetype	sref	Title	Shrdat	Comment
-stat	WdbeCplmst	complement modular structure	false
+IexWznmOpk v1.1.14
+ImeIMOppack.srefIxVIop	srefIxVBasetype	sref	Title	Shrdat	Comment
+ins	stat	WdbeCplmst	complement modular structure	false
 	ImeIRMComponentMOppack.srefRefWznmMComponent
 	wdbeopd1
 	ImeIRMComponentMOppack.end
@@ -64,7 +64,7 @@ stat	WdbeCplmst	complement modular structure	false
 			ImeIRMSquawkMStub2.end
 		ImeIMSquawk2.end
 	ImeIMOp.end
-stat	WdbeGen	generate	false
+ins	stat	WdbeGen	generate	false
 	ImeIRMComponentMOppack.srefRefWznmMComponent
 	wdbeopd1
 	ImeIRMComponentMOppack.end
@@ -118,7 +118,7 @@ stat	WdbeGen	generate	false
 			ImeIRMSquawkMStub2.end
 		ImeIMSquawk2.end
 	ImeIMOp.end
-stat	WdbeGenfst	generate fine structure	false
+ins	stat	WdbeGenfst	generate fine structure	false
 	ImeIRMComponentMOppack.srefRefWznmMComponent
 	wdbeopd1
 	ImeIRMComponentMOppack.end
@@ -234,7 +234,7 @@ stat	WdbeGenfst	generate fine structure	false
 			ImeIRMSquawkMStub2.end
 		ImeIMSquawk2.end
 	ImeIMOp.end
-cust	WdbeMtpPlhfpga	fill module template-specific FPGA code placeholders	false
+ins	cust	WdbeMtpPlhfpga	fill module template-specific FPGA code placeholders	false
 	ImeIAMOppackInvarg.irefRefWznmCAMOppackInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
 	0	refWdbeMModule	ubigint
 	ImeIAMOppackInvarg.end
@@ -255,17 +255,18 @@ cust	WdbeMtpPlhfpga	fill module template-specific FPGA code placeholders	false
 	wdbeopd2
 	ImeIRMComponentMOppack.end
 	ImeIMOp.sref	Shrdat	Comment
+	WdbeMtpPlhfpgaAximmcohostif_Easy_v1_0	false
+	WdbeMtpPlhfpgaCohostif_Easy_v1_0	false
+	WdbeMtpPlhfpgaCohostif_v1_0	false
 	WdbeMtpPlhfpgaCrcspec_v2_0	false
-	WdbeMtpPlhfpgaIdent_Easy_v1_0	false
 	WdbeMtpPlhfpgaCrcspec_v3_0	false
 	WdbeMtpPlhfpgaFsmtrack_Easy_v1_0	false
 	WdbeMtpPlhfpgaGptrack_Easy_v1_0	false
-	WdbeMtpPlhfpgaHostif_v1_0	false
-	WdbeMtpPlhfpgaCohostif_v1_0	false
 	WdbeMtpPlhfpgaHostif_Easy_v1_0	false
-	WdbeMtpPlhfpgaCohostif_Easy_v1_0	false
+	WdbeMtpPlhfpgaHostif_v1_0	false
+	WdbeMtpPlhfpgaIdent_Easy_v1_0	false
 	ImeIMOp.end
-cust	WdbeMtpPlhmcu	fill module template-specific MCU code placeholders	false
+ins	cust	WdbeMtpPlhmcu	fill module template-specific MCU code placeholders	false
 	ImeIAMOppackInvarg.irefRefWznmCAMOppackInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
 	0	refWdbeMModule	ubigint
 	ImeIAMOppackInvarg.end
@@ -287,7 +288,7 @@ cust	WdbeMtpPlhmcu	fill module template-specific MCU code placeholders	false
 	ImeIRMComponentMOppack.end
 	ImeIMOp.sref	Shrdat	Comment
 	ImeIMOp.end
-cust	WdbeMtpCplmstbu	complement module template-specific modular structure bottom-up	false
+ins	cust	WdbeMtpCplmstbu	complement module template-specific modular structure bottom-up	false
 	ImeIAMOppackInvarg.irefRefWznmCAMOppackInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
 	0	refWdbeMModule	ubigint
 	ImeIAMOppackInvarg.end
@@ -304,7 +305,7 @@ cust	WdbeMtpCplmstbu	complement module template-specific modular structure botto
 	wdbeopd2
 	ImeIRMComponentMOppack.end
 	ImeIMOp.sref	Shrdat	Comment
-	WdbeMtpCplmstbuAdd_xlnx_v12_0	false	adapt port widths
+	WdbeMtpCplmstbuAximmcohostif_Easy_v1_0	false	adapt port widths
 	WdbeMtpCplmstbuAxislave_v1_0	false	adapt port widths
 	WdbeMtpCplmstbuCmdinv_v2_0	false	connect buffer
 	WdbeMtpCplmstbuCmdret_v2_0	false	connect buffer
@@ -319,25 +320,25 @@ cust	WdbeMtpCplmstbu	complement module template-specific modular structure botto
 	WdbeMtpCplmstbuDiv_xlnx_v3_0	false	adapt port widths
 	WdbeMtpCplmstbuDiv_xlnx_v5_1	false	adapt port widths
 	WdbeMtpCplmstbuDotmx2x16_v1_0	false	connect SPI master
+	WdbeMtpCplmstbuDpbram_efnx_v6_1	false	adapt port widths
+	WdbeMtpCplmstbuDpbram_v1_0	false	adapt port widths, connect buffer
 	WdbeMtpCplmstbuDpbram_xlnx_v8_4	false	adapt port widths
 	WdbeMtpCplmstbuDpebram_lttc_v1_2	false	adapt port widths
 	WdbeMtpCplmstbuDphy_rx_lttc_v1_4_csi	false	adapt port widths
 	WdbeMtpCplmstbuDpram_efnx_v1_0	false	adapt internal wiring
-	WdbeMtpCplmstbuDpsram_mchp_v1_0	false	adapt port identifiers and widths
-	WdbeMtpCplmstbuDsp48_xlnx_v3_0_aMultB	false	adapt port widths
-	WdbeMtpCplmstbuDsp48_xlnx_v3_0_aPlusDPlusC	false	adapt port widths
+	WdbeMtpCplmstbuDpsram_mchp_v1_1_110	false	adapt port identifiers and widths
 	WdbeMtpCplmstbuEbrom_lttc_v1_3	false	adapt port widths
 	WdbeMtpCplmstbuEFX_DPRAM10	false	adapt port widths
 	WdbeMtpCplmstbuEFX_RAM10	false	adapt port widths
 	WdbeMtpCplmstbuFifo_lttc_v1_3	false	adapt port widths
 	WdbeMtpCplmstbuFsmprobe_Easy_v1_0	false	add capture ports and fill vector
 	WdbeMtpCplmstbuFsmtrack_Easy_v1_0	false	add capture/trigger ports, fill vectors and connect buffers
-	WdbeMtpCplmstbuGpio_Easy_v1_0	false	adapt port widths
+	WdbeMtpCplmstbuGpio_Easy_v1_0	false	adapt port widths and commands
 	WdbeMtpCplmstbuGptrack_Easy_v1_0	false	add capture/trigger ports, fill vectors and connect buffer
 	WdbeMtpCplmstbuHostif_Easy_v1_0	false	connect PHY, CRC and timeout
 	WdbeMtpCplmstbuHostif_v1_0	false	connect PHY, CRC and timeout
 	WdbeMtpCplmstbuI2c_Easy_v1_0	false	connect I2C master
-	WdbeMtpCplmstbuI2cmaster_v1_0	false	connect tri-state buffer primitive
+	WdbeMtpCplmstbuI2cmaster_v1_0	false	remove unneeded ports
 	WdbeMtpCplmstbuIdent_Easy_v1_0	false	add configuration ports and signals
 	WdbeMtpCplmstbuIod_mchp_v1_0_mipirx	false	adapt port widths
 	WdbeMtpCplmstbuIrq_Easy_v1_0	false	add capture port
@@ -347,15 +348,13 @@ cust	WdbeMtpCplmstbu	complement module template-specific modular structure botto
 	WdbeMtpCplmstbuMult_xlnx_v12_0	false	adapt port widths
 	WdbeMtpCplmstbuOled128x32_v1_0	false	connect SPI master
 	WdbeMtpCplmstbuSelectio_xlnx_v5_1_mipirx	false	adapt port widths
-	WdbeMtpCplmstbuSmartreg_v1_0	false	connect memory
-	WdbeMtpCplmstbuSmartreg_Easy_v1_0	false	connect memory
+	WdbeMtpCplmstbuSpbram_efnx_v6_1	false	adapt port widths
+	WdbeMtpCplmstbuSpbram_v1_0	false	adapt port widths, connect buffer
 	WdbeMtpCplmstbuSpbram_xlnx_v8_4	false	adapt port widths
 	WdbeMtpCplmstbuSpebram_lttc_v1_4	false	adapt port widths
 	WdbeMtpCplmstbuSpram_efnx_v1_0	false	adapt internal wiring
-	WdbeMtpCplmstbuSub_xlnx_v12_0	false	adapt port widths
-	WdbeMtpCplmstbuToc_v1_0	false	connect memory
 	WdbeMtpCplmstbuTop_v1_0	false	connect clock primitives
-	WdbeMtpCplmstbuTpsram_mchp_v1_0	false	adapt port identifiers and widths
+	WdbeMtpCplmstbuTpsram_mchp_v1_1_108	false	adapt port identifiers and widths
 	WdbeMtpCplmstbuUart_Easy_v1_0	false	connect UART controllers and timeout
 	WdbeMtpCplmstbuUartrx_v1_0_Mcu	false	add handshake with managing module
 	WdbeMtpCplmstbuUarttx_v1_0_Mcu	false	add handshake with managing module
@@ -363,7 +362,7 @@ cust	WdbeMtpCplmstbu	complement module template-specific modular structure botto
 	WdbeMtpCplmstbuXadc_xlnx_v3_3	false	add analog input ports
 	WdbeMtpCplmstbuXfft_xlnx_v9_1	false	adapt port widths
 	ImeIMOp.end
-cust	WdbeMtpCplmsttd	complement module template-specific modular structure top-down	false
+ins	cust	WdbeMtpCplmsttd	complement module template-specific modular structure top-down	false
 	ImeIAMOppackInvarg.irefRefWznmCAMOppackInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
 	0	refWdbeMModule	ubigint
 	ImeIAMOppackInvarg.end
@@ -380,22 +379,22 @@ cust	WdbeMtpCplmsttd	complement module template-specific modular structure top-d
 	wdbeopd2
 	ImeIRMComponentMOppack.end
 	ImeIMOp.sref	Shrdat	Comment
-	WdbeMtpCplmsttdDdrmux_Easy_v1_0	false	infer PHY
-	WdbeMtpCplmsttdDpram_efnx_v1_0	false	infer EFX_DPRAM10  primitives
-	WdbeMtpCplmsttdFsmtrack_Easy_v1_0	false	infer buffers
-	WdbeMtpCplmsttdGpio_Easy_v1_0	false	infer tri-state buffer primitives
-	WdbeMtpCplmsttdGptrack_Easy_v1_0	false	infer buffer
-	WdbeMtpCplmsttdI2cmaster_v1_0	false	infer tri-state buffer primitive
-	WdbeMtpCplmsttdSpram_efnx_v1_0	false	infer EFX_RAM10 primitives
-	WdbeMtpCplmsttdTop_v1_0	false	infer clock primitives and adapt ports
 	WdbeMtpCplmsttdCmdinv_v2_0	false	infer buffer
 	WdbeMtpCplmsttdCmdret_v2_0	false	infer buffer
-	WdbeMtpCplmsttdHostif_v1_0	false	infer PHY
-	WdbeMtpCplmsttdCohostif_v1_0	false	infer PHY
-	WdbeMtpCplmsttdHostif_Easy_v1_0	false	infer PHY
 	WdbeMtpCplmsttdCohostif_Easy_v1_0	false	infer PHY
+	WdbeMtpCplmsttdCohostif_v1_0	false	infer PHY
+	WdbeMtpCplmsttdDdrmux_Easy_v1_0	false	infer PHY
+	WdbeMtpCplmsttdDpbram_v1_0	false	infer buffer
+	WdbeMtpCplmsttdDpram_efnx_v1_0	false	infer EFX_DPRAM10  primitives
+	WdbeMtpCplmsttdFsmtrack_Easy_v1_0	false	infer buffers
+	WdbeMtpCplmsttdGptrack_Easy_v1_0	false	infer buffer
+	WdbeMtpCplmsttdHostif_Easy_v1_0	false	infer PHY
+	WdbeMtpCplmsttdHostif_v1_0	false	infer PHY
+	WdbeMtpCplmsttdSpbram_v1_0	false	infer buffer
+	WdbeMtpCplmsttdSpram_efnx_v1_0	false	infer EFX_RAM10 primitives
+	WdbeMtpCplmsttdTop_v1_0	false	infer clock primitives and adapt ports
 	ImeIMOp.end
-cust	WdbeMtpGenfst	generate module template-specific fine structure	false
+ins	cust	WdbeMtpGenfst	generate module template-specific fine structure	false
 	ImeIAMOppackInvarg.irefRefWznmCAMOppackInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
 	0	refWdbeMModule	ubigint
 	ImeIAMOppackInvarg.end
@@ -412,15 +411,18 @@ cust	WdbeMtpGenfst	generate module template-specific fine structure	false
 	wdbeopd2
 	ImeIRMComponentMOppack.end
 	ImeIMOp.sref	Shrdat	Comment
+	WdbeMtpGenfstCohostif_Easy_v1_0	false	add process
 	WdbeMtpGenfstDdrmux_Easy_v1_0	false	add A/B buffers, processes and clock domain crossing
 	WdbeMtpGenfstFsmtrack_Easy_v1_0	false	add clock domain crossing
 	WdbeMtpGenfstGpio_Easy_v1_0	false	add process, signals and command handshake
 	WdbeMtpGenfstGptrack_Easy_v1_0	false	add clock domain crossing
+	WdbeMtpGenfstHostif_Easy_v1_0	false	add process
 	WdbeMtpGenfstTkclksrc_v1_0	false	add command process handshake
+	WdbeMtpGenfstTkclksrc_Easy_v1_0	false	add process
 	WdbeMtpGenfstUarthostif_Easy_v2_0_Mcu	false	add process and sensitivities
 	WdbeMtpGenfstUsbhostif_Easy_v2_0_Mcu	false	add process and sensitivity
 	ImeIMOp.end
-cust	WdbeMtpWrfpga	write module template-specific FPGA code	false
+ins	cust	WdbeMtpWrfpga	write module template-specific FPGA code	false
 	ImeIAMOppackInvarg.irefRefWznmCAMOppackInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
 	0	refWdbeMModule	ubigint
 	0	folder	string
@@ -442,6 +444,7 @@ cust	WdbeMtpWrfpga	write module template-specific FPGA code	false
 	ImeIMOp.sref	Shrdat	Comment
 	WdbeMtpWrfpgaCmdinv_v2_0	false
 	WdbeMtpWrfpgaCmdret_v2_0	false
+	WdbeMtpWrfpgaAximmcohostif_Easy_v1_0	false
 	WdbeMtpWrfpgaCohostif_Easy_v1_0	false
 	WdbeMtpWrfpgaCohostif_v1_0	false
 	WdbeMtpWrfpgaCrcspec_32_v1_0	false
@@ -449,6 +452,7 @@ cust	WdbeMtpWrfpga	write module template-specific FPGA code	false
 	WdbeMtpWrfpgaCrcspec_v2_0	false
 	WdbeMtpWrfpgaCrcspec_v3_0	false
 	WdbeMtpWrfpgaDdrmux_Easy_v1_0	false
+	WdbeMtpWrfpgaDpbram_v1_0	false
 	WdbeMtpWrfpgaDpram_efnx_v1_0	false
 	WdbeMtpWrfpgaFsmprobe_Easy_v1_0	false
 	WdbeMtpWrfpgaFsmtrack_Easy_v1_0	false
@@ -459,10 +463,11 @@ cust	WdbeMtpWrfpga	write module template-specific FPGA code	false
 	WdbeMtpWrfpgaI2cmaster_v1_0	false
 	WdbeMtpWrfpgaIdent_Easy_v1_0	false
 	WdbeMtpWrfpgaIrq_Easy_v1_0	false
+	WdbeMtpWrfpgaSpbram_v1_0	false
 	WdbeMtpWrfpgaSpram_efnx_v1_0	false
 	WdbeMtpWrfpgaTkclksrc_v1_0	false
 	ImeIMOp.end
-cust	WdbeMtpWrmcu	write module template-specific MCU code	false
+ins	cust	WdbeMtpWrmcu	write module template-specific MCU code	false
 	ImeIAMOppackInvarg.irefRefWznmCAMOppackInvarg	sref	srefIxWznmVVartype	srefRefWznmMVector	Defval	srefRefWznmMVectoritem	Comment
 	0	refWdbeMModule	ubigint
 	0	folder	string
@@ -485,7 +490,7 @@ cust	WdbeMtpWrmcu	write module template-specific MCU code	false
 	WdbeMtpWrmcuUarthostif_Easy_v2_0_Mcu	false
 	WdbeMtpWrmcuUsbhostif_Easy_v2_0_Mcu	false
 	ImeIMOp.end
-stat	WdbePlhfpga	fill FPGA code placeholders	false
+ins	stat	WdbePlhfpga	fill FPGA code placeholders	false
 	ImeIRMComponentMOppack.srefRefWznmMComponent
 	wdbeopd1
 	ImeIRMComponentMOppack.end
@@ -542,7 +547,7 @@ stat	WdbePlhfpga	fill FPGA code placeholders	false
 			ImeIRMSquawkMStub2.end
 		ImeIMSquawk2.end
 	ImeIMOp.end
-stat	WdbePlhmcu	fill MCU code placeholders	false
+ins	stat	WdbePlhmcu	fill MCU code placeholders	false
 	ImeIRMComponentMOppack.srefRefWznmMComponent
 	wdbeopd1
 	ImeIRMComponentMOppack.end
@@ -582,7 +587,7 @@ stat	WdbePlhmcu	fill MCU code placeholders	false
 			ImeIRMSquawkMStub2.end
 		ImeIMSquawk2.end
 	ImeIMOp.end
-stat	WdbePrcfile	process file	false
+ins	stat	WdbePrcfile	process file	false
 	ImeIRMComponentMOppack.srefRefWznmMComponent
 	wdbeopd1
 	ImeIRMComponentMOppack.end
@@ -614,7 +619,7 @@ stat	WdbePrcfile	process file	false
 			ImeIJMSquawkTitle2.end
 		ImeIMSquawk2.end
 	ImeIMOp.end
-stat	WdbePrctree	process file tree	false
+ins	stat	WdbePrctree	process file tree	false
 	ImeIRMComponentMOppack.srefRefWznmMComponent
 	wdbeopd1
 	ImeIRMComponentMOppack.end
@@ -661,7 +666,7 @@ stat	WdbePrctree	process file tree	false
 			ImeIJMSquawkTitle2.end
 		ImeIMSquawk2.end
 	ImeIMOp.end
-stat	WdbeWrdev	write device access library code	false
+ins	stat	WdbeWrdev	write device access library code	false
 	ImeIRMComponentMOppack.srefRefWznmMComponent
 	wdbeopd1
 	ImeIRMComponentMOppack.end
@@ -728,7 +733,7 @@ stat	WdbeWrdev	write device access library code	false
 			ImeIRMSquawkMStub2.end
 		ImeIMSquawk2.end
 	ImeIMOp.end
-stat	WdbeWrfpga	write FPGA code	false
+ins	stat	WdbeWrfpga	write FPGA code	false
 	ImeIRMComponentMOppack.srefRefWznmMComponent
 	wdbeopd1
 	ImeIRMComponentMOppack.end
@@ -841,7 +846,7 @@ stat	WdbeWrfpga	write FPGA code	false
 			ImeIRMSquawkMStub2.end
 		ImeIMSquawk2.end
 	ImeIMOp.end
-stat	WdbeWrmcu	write MCU code	false
+ins	stat	WdbeWrmcu	write MCU code	false
 	ImeIRMComponentMOppack.srefRefWznmMComponent
 	wdbeopd1
 	ImeIRMComponentMOppack.end
@@ -923,7 +928,7 @@ stat	WdbeWrmcu	write MCU code	false
 			ImeIRMSquawkMStub2.end
 		ImeIMSquawk2.end
 	ImeIMOp.end
-stat	WdbeWrterm	write interactive terminal code	false
+ins	stat	WdbeWrterm	write interactive terminal code	false
 	ImeIRMComponentMOppack.srefRefWznmMComponent
 	wdbeopd1
 	ImeIRMComponentMOppack.end

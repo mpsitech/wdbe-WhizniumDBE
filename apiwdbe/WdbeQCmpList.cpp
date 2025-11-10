@@ -23,12 +23,13 @@ WdbeQCmpList::WdbeQCmpList(
 			, const string srefIxVBasetype
 			, const string titIxVBasetype
 			, const string stubRefWdbeMVersion
-		) {
-	this->jnum = jnum;
-	this->sref = sref;
-	this->srefIxVBasetype = srefIxVBasetype;
-	this->titIxVBasetype = titIxVBasetype;
-	this->stubRefWdbeMVersion = stubRefWdbeMVersion;
+		) :
+			jnum(jnum)
+			, sref(sref)
+			, srefIxVBasetype(srefIxVBasetype)
+			, titIxVBasetype(titIxVBasetype)
+			, stubRefWdbeMVersion(stubRefWdbeMVersion)
+		{
 };
 
 bool WdbeQCmpList::readXML(

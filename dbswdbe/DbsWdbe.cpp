@@ -265,6 +265,8 @@ void DbsWdbe::initMy() {
 	((MyTblWdbeQCmdAInvpar*) tblwdbeqcmdainvpar)->init(dbsMy);
 	tblwdbeqcmdaretpar = new MyTblWdbeQCmdARetpar();
 	((MyTblWdbeQCmdARetpar*) tblwdbeqcmdaretpar)->init(dbsMy);
+	tblwdbeqcmdhk1nvector = new MyTblWdbeQCmdHk1NVector();
+	((MyTblWdbeQCmdHk1NVector*) tblwdbeqcmdhk1nvector)->init(dbsMy);
 	tblwdbeqcmdlist = new MyTblWdbeQCmdList();
 	((MyTblWdbeQCmdList*) tblwdbeqcmdlist)->init(dbsMy);
 	tblwdbeqcmdmncontroller = new MyTblWdbeQCmdMNController();
@@ -720,6 +722,8 @@ void DbsWdbe::initPg() {
 	((PgTblWdbeQCmdAInvpar*) tblwdbeqcmdainvpar)->init(dbsPg);
 	tblwdbeqcmdaretpar = new PgTblWdbeQCmdARetpar();
 	((PgTblWdbeQCmdARetpar*) tblwdbeqcmdaretpar)->init(dbsPg);
+	tblwdbeqcmdhk1nvector = new PgTblWdbeQCmdHk1NVector();
+	((PgTblWdbeQCmdHk1NVector*) tblwdbeqcmdhk1nvector)->init(dbsPg);
 	tblwdbeqcmdlist = new PgTblWdbeQCmdList();
 	((PgTblWdbeQCmdList*) tblwdbeqcmdlist)->init(dbsPg);
 	tblwdbeqcmdmncontroller = new PgTblWdbeQCmdMNController();
@@ -1493,10 +1497,10 @@ uint DbsWdbe::getIxWSubsetByWdbeMModule(
 		args.push_back(a && b);
 		if (args.back()) {
 			ixWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMCT;
-			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMTP;
+			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMIB;
 			ixWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMOD;
 			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMOD;
-			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMIB;
+			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMTP;
 		} else {
 		};
 
@@ -1526,10 +1530,10 @@ uint DbsWdbe::getIxWSubsetByWdbeMModule(
 		args.push_back(a && b);
 		if (args.back()) {
 			ixWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMIB;
-			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMTP;
+			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMCT;
 			ixWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMOD;
 			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMOD;
-			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMCT;
+			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMTP;
 		} else {
 		};
 
@@ -1555,9 +1559,9 @@ uint DbsWdbe::getIxWSubsetByWdbeMModule(
 		if (args.back()) {
 			ixWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMOD;
 		} else {
-			ixWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMTP;
-			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMIB;
 			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMCT;
+			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMIB;
+			ixWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMTP;
 		};
 
 		dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMOD;
@@ -1580,8 +1584,8 @@ uint DbsWdbe::getIxWSubsetByWdbeMModule(
 		args.push_back(a && b);
 		if (args.back()) {
 			ixWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMTP;
-			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMIB;
 			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMCT;
+			dneIxWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMIB;
 		} else {
 			ixWSubset |= TblWdbeMModule::VecWSubset::SBSWDBEBMMODULEMOD;
 		};

@@ -11,48 +11,15 @@ using namespace std;
 using namespace Sbecore;
 using namespace Xmlio;
 
-bool DlgWdbeNavLoaini::evalButDneActive(
+bool DlgWdbeNavLoaini::evalIfiUldActive(
 			DbsWdbe* dbswdbe
 		) {
-	// sge(idle|done)
+	// sge(idle)
 
 	vector<bool> args;
-	bool a, b;
+	bool a;
 
 	a = false; a = (ixVSge == VecVSge::IDLE);
-	args.push_back(a);
-	a = false; a = (ixVSge == VecVSge::DONE);
-	args.push_back(a);
-	b = args.back(); args.pop_back();
-	a = args.back(); args.pop_back();
-	args.push_back(a || b);
-
-	return(args.back());
-};
-
-bool DlgWdbeNavLoaini::evalLfiDldActive(
-			DbsWdbe* dbswdbe
-		) {
-	// sge(done)
-
-	vector<bool> args;
-	bool a;
-
-	a = false; a = (ixVSge == VecVSge::DONE);
-	args.push_back(a);
-
-	return(args.back());
-};
-
-bool DlgWdbeNavLoaini::evalAcvUldActive(
-			DbsWdbe* dbswdbe
-		) {
-	// sge(impdone)
-
-	vector<bool> args;
-	bool a;
-
-	a = false; a = (ixVSge == VecVSge::IMPDONE);
 	args.push_back(a);
 
 	return(args.back());
@@ -91,16 +58,54 @@ bool DlgWdbeNavLoaini::evalImpButStoActive(
 	return(args.back());
 };
 
-bool DlgWdbeNavLoaini::evalIfiUldActive(
+bool DlgWdbeNavLoaini::evalAcvUldActive(
 			DbsWdbe* dbswdbe
 		) {
-	// sge(idle)
+	// sge(impdone)
 
 	vector<bool> args;
 	bool a;
 
+	a = false; a = (ixVSge == VecVSge::IMPDONE);
+	args.push_back(a);
+
+	return(args.back());
+};
+
+bool DlgWdbeNavLoaini::evalLfiDldActive(
+			DbsWdbe* dbswdbe
+		) {
+	// sge(done)
+
+	vector<bool> args;
+	bool a;
+
+	a = false; a = (ixVSge == VecVSge::DONE);
+	args.push_back(a);
+
+	return(args.back());
+};
+
+bool DlgWdbeNavLoaini::evalButDneActive(
+			DbsWdbe* dbswdbe
+		) {
+	// sge(idle|impdone|done)
+
+	vector<bool> args;
+	bool a, b;
+
 	a = false; a = (ixVSge == VecVSge::IDLE);
 	args.push_back(a);
+	a = false; a = (ixVSge == VecVSge::IMPDONE);
+	args.push_back(a);
+	a = false; a = (ixVSge == VecVSge::DONE);
+	args.push_back(a);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
 
 	return(args.back());
 };

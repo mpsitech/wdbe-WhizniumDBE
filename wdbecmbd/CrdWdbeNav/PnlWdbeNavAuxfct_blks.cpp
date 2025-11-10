@@ -20,6 +20,7 @@ uint PnlWdbeNavAuxfct::VecVDo::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
+	if (s == "butidfnewcrdclick") return BUTIDFNEWCRDCLICK;
 	if (s == "bututlnewcrdclick") return BUTUTLNEWCRDCLICK;
 
 	return(0);
@@ -28,6 +29,7 @@ uint PnlWdbeNavAuxfct::VecVDo::getIx(
 string PnlWdbeNavAuxfct::VecVDo::getSref(
 			const uint ix
 		) {
+	if (ix == BUTIDFNEWCRDCLICK) return("ButIdfNewcrdClick");
 	if (ix == BUTUTLNEWCRDCLICK) return("ButUtlNewcrdClick");
 
 	return("");
@@ -71,13 +73,14 @@ void PnlWdbeNavAuxfct::StatApp::writeXML(
  ******************************************************************************/
 
 PnlWdbeNavAuxfct::StatShr::StatShr(
-			const bool ButUtlNewcrdAvail
+			const bool ButIdfNewcrdAvail
+			, const bool ButUtlNewcrdAvail
 		) :
 			Block()
+			, ButIdfNewcrdAvail(ButIdfNewcrdAvail)
+			, ButUtlNewcrdAvail(ButUtlNewcrdAvail)
 		{
-	this->ButUtlNewcrdAvail = ButUtlNewcrdAvail;
-
-	mask = {BUTUTLNEWCRDAVAIL};
+	mask = {BUTIDFNEWCRDAVAIL, BUTUTLNEWCRDAVAIL};
 };
 
 void PnlWdbeNavAuxfct::StatShr::writeJSON(
@@ -88,6 +91,7 @@ void PnlWdbeNavAuxfct::StatShr::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
+	me["ButIdfNewcrdAvail"] = ButIdfNewcrdAvail;
 	me["ButUtlNewcrdAvail"] = ButUtlNewcrdAvail;
 };
 
@@ -103,6 +107,7 @@ void PnlWdbeNavAuxfct::StatShr::writeXML(
 	else itemtag = "StatitemShrWdbeNavAuxfct";
 
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
+		writeBoolAttr(wr, itemtag, "sref", "ButIdfNewcrdAvail", ButIdfNewcrdAvail);
 		writeBoolAttr(wr, itemtag, "sref", "ButUtlNewcrdAvail", ButUtlNewcrdAvail);
 	xmlTextWriterEndElement(wr);
 };
@@ -112,6 +117,7 @@ set<uint> PnlWdbeNavAuxfct::StatShr::comm(
 		) {
 	set<uint> items;
 
+	if (ButIdfNewcrdAvail == comp->ButIdfNewcrdAvail) insert(items, BUTIDFNEWCRDAVAIL);
 	if (ButUtlNewcrdAvail == comp->ButUtlNewcrdAvail) insert(items, BUTUTLNEWCRDAVAIL);
 
 	return(items);
@@ -125,7 +131,7 @@ set<uint> PnlWdbeNavAuxfct::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {BUTUTLNEWCRDAVAIL};
+	diffitems = {BUTIDFNEWCRDAVAIL, BUTUTLNEWCRDAVAIL};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -146,6 +152,7 @@ void PnlWdbeNavAuxfct::Tag::writeJSON(
 
 	if (ixWdbeVLocale == VecWdbeVLocale::ENUS) {
 		me["Cpt"] = "Auxiliary functionality";
+		me["CptIdf"] = "interactive diff";
 		me["CptUtl"] = "utilities";
 	};
 };
@@ -165,6 +172,7 @@ void PnlWdbeNavAuxfct::Tag::writeXML(
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
 		if (ixWdbeVLocale == VecWdbeVLocale::ENUS) {
 			writeStringAttr(wr, itemtag, "sref", "Cpt", "Auxiliary functionality");
+			writeStringAttr(wr, itemtag, "sref", "CptIdf", "interactive diff");
 			writeStringAttr(wr, itemtag, "sref", "CptUtl", "utilities");
 		};
 	xmlTextWriterEndElement(wr);

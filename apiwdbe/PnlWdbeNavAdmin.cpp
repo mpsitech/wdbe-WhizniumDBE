@@ -30,6 +30,7 @@ uint PnlWdbeNavAdmin::VecVDo::getIx(
 	if (s == "butprsnewcrdclick") return BUTPRSNEWCRDCLICK;
 	if (s == "butfilviewclick") return BUTFILVIEWCLICK;
 	if (s == "butfilnewcrdclick") return BUTFILNEWCRDCLICK;
+	if (s == "butprfnewcrdclick") return BUTPRFNEWCRDCLICK;
 
 	return(0);
 };
@@ -45,6 +46,7 @@ string PnlWdbeNavAdmin::VecVDo::getSref(
 	if (ix == BUTPRSNEWCRDCLICK) return("ButPrsNewcrdClick");
 	if (ix == BUTFILVIEWCLICK) return("ButFilViewClick");
 	if (ix == BUTFILNEWCRDCLICK) return("ButFilNewcrdClick");
+	if (ix == BUTPRFNEWCRDCLICK) return("ButPrfNewcrdClick");
 
 	return("");
 };
@@ -60,12 +62,11 @@ PnlWdbeNavAdmin::ContIac::ContIac(
 			, const uint numFLstFil
 		) :
 			Block()
+			, numFLstUsg(numFLstUsg)
+			, numFLstUsr(numFLstUsr)
+			, numFLstPrs(numFLstPrs)
+			, numFLstFil(numFLstFil)
 		{
-	this->numFLstUsg = numFLstUsg;
-	this->numFLstUsr = numFLstUsr;
-	this->numFLstPrs = numFLstPrs;
-	this->numFLstFil = numFLstFil;
-
 	mask = {NUMFLSTUSG, NUMFLSTUSR, NUMFLSTPRS, NUMFLSTFIL};
 };
 
@@ -157,17 +158,16 @@ PnlWdbeNavAdmin::StatApp::StatApp(
 			, const uint LstFilNumFirstdisp
 		) :
 			Block()
+			, ixWdbeVExpstate(ixWdbeVExpstate)
+			, LstUsgAlt(LstUsgAlt)
+			, LstUsrAlt(LstUsrAlt)
+			, LstPrsAlt(LstPrsAlt)
+			, LstFilAlt(LstFilAlt)
+			, LstUsgNumFirstdisp(LstUsgNumFirstdisp)
+			, LstUsrNumFirstdisp(LstUsrNumFirstdisp)
+			, LstPrsNumFirstdisp(LstPrsNumFirstdisp)
+			, LstFilNumFirstdisp(LstFilNumFirstdisp)
 		{
-	this->ixWdbeVExpstate = ixWdbeVExpstate;
-	this->LstUsgAlt = LstUsgAlt;
-	this->LstUsrAlt = LstUsrAlt;
-	this->LstPrsAlt = LstPrsAlt;
-	this->LstFilAlt = LstFilAlt;
-	this->LstUsgNumFirstdisp = LstUsgNumFirstdisp;
-	this->LstUsrNumFirstdisp = LstUsrNumFirstdisp;
-	this->LstPrsNumFirstdisp = LstPrsNumFirstdisp;
-	this->LstFilNumFirstdisp = LstFilNumFirstdisp;
-
 	mask = {IXWDBEVEXPSTATE, LSTUSGALT, LSTUSRALT, LSTPRSALT, LSTFILALT, LSTUSGNUMFIRSTDISP, LSTUSRNUMFIRSTDISP, LSTPRSNUMFIRSTDISP, LSTFILNUMFIRSTDISP};
 };
 
@@ -252,19 +252,20 @@ PnlWdbeNavAdmin::StatShr::StatShr(
 			, const bool ButPrsViewActive
 			, const bool LstFilAvail
 			, const bool ButFilViewActive
+			, const bool ButPrfNewcrdAvail
 		) :
 			Block()
+			, LstUsgAvail(LstUsgAvail)
+			, ButUsgViewActive(ButUsgViewActive)
+			, LstUsrAvail(LstUsrAvail)
+			, ButUsrViewActive(ButUsrViewActive)
+			, LstPrsAvail(LstPrsAvail)
+			, ButPrsViewActive(ButPrsViewActive)
+			, LstFilAvail(LstFilAvail)
+			, ButFilViewActive(ButFilViewActive)
+			, ButPrfNewcrdAvail(ButPrfNewcrdAvail)
 		{
-	this->LstUsgAvail = LstUsgAvail;
-	this->ButUsgViewActive = ButUsgViewActive;
-	this->LstUsrAvail = LstUsrAvail;
-	this->ButUsrViewActive = ButUsrViewActive;
-	this->LstPrsAvail = LstPrsAvail;
-	this->ButPrsViewActive = ButPrsViewActive;
-	this->LstFilAvail = LstFilAvail;
-	this->ButFilViewActive = ButFilViewActive;
-
-	mask = {LSTUSGAVAIL, BUTUSGVIEWACTIVE, LSTUSRAVAIL, BUTUSRVIEWACTIVE, LSTPRSAVAIL, BUTPRSVIEWACTIVE, LSTFILAVAIL, BUTFILVIEWACTIVE};
+	mask = {LSTUSGAVAIL, BUTUSGVIEWACTIVE, LSTUSRAVAIL, BUTUSRVIEWACTIVE, LSTPRSAVAIL, BUTPRSVIEWACTIVE, LSTFILAVAIL, BUTFILVIEWACTIVE, BUTPRFNEWCRDAVAIL};
 };
 
 bool PnlWdbeNavAdmin::StatShr::readXML(
@@ -292,6 +293,7 @@ bool PnlWdbeNavAdmin::StatShr::readXML(
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButPrsViewActive", ButPrsViewActive)) add(BUTPRSVIEWACTIVE);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "LstFilAvail", LstFilAvail)) add(LSTFILAVAIL);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButFilViewActive", ButFilViewActive)) add(BUTFILVIEWACTIVE);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButPrfNewcrdAvail", ButPrfNewcrdAvail)) add(BUTPRFNEWCRDAVAIL);
 	};
 
 	return basefound;
@@ -310,6 +312,7 @@ set<uint> PnlWdbeNavAdmin::StatShr::comm(
 	if (ButPrsViewActive == comp->ButPrsViewActive) insert(items, BUTPRSVIEWACTIVE);
 	if (LstFilAvail == comp->LstFilAvail) insert(items, LSTFILAVAIL);
 	if (ButFilViewActive == comp->ButFilViewActive) insert(items, BUTFILVIEWACTIVE);
+	if (ButPrfNewcrdAvail == comp->ButPrfNewcrdAvail) insert(items, BUTPRFNEWCRDAVAIL);
 
 	return(items);
 };
@@ -322,7 +325,7 @@ set<uint> PnlWdbeNavAdmin::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {LSTUSGAVAIL, BUTUSGVIEWACTIVE, LSTUSRAVAIL, BUTUSRVIEWACTIVE, LSTPRSAVAIL, BUTPRSVIEWACTIVE, LSTFILAVAIL, BUTFILVIEWACTIVE};
+	diffitems = {LSTUSGAVAIL, BUTUSGVIEWACTIVE, LSTUSRAVAIL, BUTUSRVIEWACTIVE, LSTPRSAVAIL, BUTPRSVIEWACTIVE, LSTFILAVAIL, BUTFILVIEWACTIVE, BUTPRFNEWCRDAVAIL};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -338,16 +341,17 @@ PnlWdbeNavAdmin::Tag::Tag(
 			, const string& CptUsr
 			, const string& CptPrs
 			, const string& CptFil
+			, const string& CptPrf
 		) :
 			Block()
+			, Cpt(Cpt)
+			, CptUsg(CptUsg)
+			, CptUsr(CptUsr)
+			, CptPrs(CptPrs)
+			, CptFil(CptFil)
+			, CptPrf(CptPrf)
 		{
-	this->Cpt = Cpt;
-	this->CptUsg = CptUsg;
-	this->CptUsr = CptUsr;
-	this->CptPrs = CptPrs;
-	this->CptFil = CptFil;
-
-	mask = {CPT, CPTUSG, CPTUSR, CPTPRS, CPTFIL};
+	mask = {CPT, CPTUSG, CPTUSR, CPTPRS, CPTFIL, CPTPRF};
 };
 
 bool PnlWdbeNavAdmin::Tag::readXML(
@@ -372,6 +376,7 @@ bool PnlWdbeNavAdmin::Tag::readXML(
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "CptUsr", CptUsr)) add(CPTUSR);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "CptPrs", CptPrs)) add(CPTPRS);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "CptFil", CptFil)) add(CPTFIL);
+		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "CptPrf", CptPrf)) add(CPTPRF);
 	};
 
 	return basefound;
@@ -426,11 +431,11 @@ PnlWdbeNavAdmin::DpchAppDo::DpchAppDo(
 			, const set<uint>& mask
 		) :
 			DpchAppWdbe(VecWdbeVDpch::DPCHAPPWDBENAVADMINDO, scrJref)
+			, ixVDo(ixVDo)
 		{
 	if (find(mask, ALL)) this->mask = {SCRJREF, IXVDO};
 	else this->mask = mask;
 
-	this->ixVDo = ixVDo;
 };
 
 string PnlWdbeNavAdmin::DpchAppDo::getSrefsMask() {

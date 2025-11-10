@@ -188,7 +188,7 @@ void WdbecmbdJobprc::accessJob(
 	JobWdbe* job = NULL;
 
 	if ((req->ixVBasetype == ReqWdbe::VecVBasetype::CMD) || (req->ixVBasetype == ReqWdbe::VecVBasetype::DPCHAPP) || (req->ixVBasetype == ReqWdbe::VecVBasetype::UPLOAD) || (req->ixVBasetype == ReqWdbe::VecVBasetype::DOWNLOAD)) {
-		if ((xchg->stgwdbeappearance.roottterm != 0) || (xchg->stgwdbeappearance.sesstterm != 0)) {
+		if ((xchg->stgwdbebehavior.roottterm != 0) || (xchg->stgwdbebehavior.sesstterm != 0)) {
 			time(&rawtime);
 			xchg->triggerIxRefCall(dbswdbe, VecWdbeVCall::CALLWDBEREFPRESET, req->jref, VecWdbeVPreset::PREWDBETLAST, rawtime);
 		};

@@ -25,10 +25,10 @@ DpchInvWdbeWrtermDeploy::DpchInvWdbeWrtermDeploy(
 			, const bool Easy
 		) :
 			DpchInvWdbe(VecWdbeVDpch::DPCHINVWDBEWRTERMDEPLOY, oref, jref)
+			, refWdbeMRelease(refWdbeMRelease)
+			, folder(folder)
+			, Easy(Easy)
 		{
-	this->refWdbeMRelease = refWdbeMRelease;
-	this->folder = folder;
-	this->Easy = Easy;
 };
 
 void DpchInvWdbeWrtermDeploy::readXML(
@@ -80,11 +80,11 @@ DpchInvWdbeWrtermMain::DpchInvWdbeWrtermMain(
 			, const bool Easy
 		) :
 			DpchInvWdbe(VecWdbeVDpch::DPCHINVWDBEWRTERMMAIN, oref, jref)
+			, refWdbeMRelease(refWdbeMRelease)
+			, folder(folder)
+			, Prjshort(Prjshort)
+			, Easy(Easy)
 		{
-	this->refWdbeMRelease = refWdbeMRelease;
-	this->folder = folder;
-	this->Prjshort = Prjshort;
-	this->Easy = Easy;
 };
 
 void DpchInvWdbeWrtermMain::readXML(

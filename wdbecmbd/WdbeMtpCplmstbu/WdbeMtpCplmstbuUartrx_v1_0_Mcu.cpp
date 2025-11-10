@@ -54,11 +54,11 @@ DpchRetWdbe* WdbeMtpCplmstbuUartrx_v1_0_Mcu::run(
 			mdlNum = Wdbe::getNextSigRefNum(dbswdbe, VecWdbeVMSignalRefTbl::UNT, mdl->hkUref);
 
 			refC = dbswdbe->tblwdbecsignal->getNewRef();
-			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::HSHK, refC, VecWdbeVMSignalRefTbl::UNT, mdl->hkUref, mdlNum++, VecWdbeVMSignalMgeTbl::MDL, mgmt->ref, 0, "req" + s, false, "sl", 1, "", "", "", "0", false, 0, "");
-			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::HSHK, refC, VecWdbeVMSignalRefTbl::UNT, mdl->hkUref, mdlNum++, VecWdbeVMSignalMgeTbl::MDL, refWdbeMModule, 0, "ack" + s, false, "sl", 1, "", "", "", "0", false, 0, "");
-			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::HSHK, refC, VecWdbeVMSignalRefTbl::UNT, mdl->hkUref, mdlNum++, VecWdbeVMSignalMgeTbl::MDL, refWdbeMModule, 0, "dne" + s, false, "sl", 1, "", "", "", "0", false, 0, "");
+			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::HSHK, refC, VecWdbeVMSignalRefTbl::UNT, mdl->hkUref, mdlNum++, VecWdbeVMSignalMgeTbl::MDL, mgmt->ref, 0, "req" + s, false, "sl", 1, "", "", "", "0", 0, "");
+			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::HSHK, refC, VecWdbeVMSignalRefTbl::UNT, mdl->hkUref, mdlNum++, VecWdbeVMSignalMgeTbl::MDL, refWdbeMModule, 0, "ack" + s, false, "sl", 1, "", "", "", "0", 0, "");
+			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::HSHK, refC, VecWdbeVMSignalRefTbl::UNT, mdl->hkUref, mdlNum++, VecWdbeVMSignalMgeTbl::MDL, refWdbeMModule, 0, "dne" + s, false, "sl", 1, "", "", "", "0", 0, "");
 
-			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::STRB, 0, VecWdbeVMSignalRefTbl::UNT, mdl->hkUref, mdlNum++, VecWdbeVMSignalMgeTbl::MDL, refWdbeMModule, 0, "strb" + StrMod::cap(mdl->sref) + "D", false, "sl", 1, "", "", "", "0", false, 0, "");
+			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::STRB, 0, VecWdbeVMSignalRefTbl::UNT, mdl->hkUref, mdlNum++, VecWdbeVMSignalMgeTbl::MDL, refWdbeMModule, 0, "strb" + StrMod::cap(mdl->sref) + "D", false, "sl", 1, "", "", "", "0", 0, "");
 
 			delete mgmt;
 		};

@@ -41,30 +41,31 @@ WdbeQSilList::WdbeQSilList(
 			, const string yesnoEasy
 			, const string srefKToolch
 			, const string titSrefKToolch
-		) {
-	this->qref = qref;
-	this->jref = jref;
-	this->jnum = jnum;
-	this->ref = ref;
-	this->sref = sref;
-	this->Title = Title;
-	this->Fullsref = Fullsref;
-	this->ixVBasetype = ixVBasetype;
-	this->srefIxVBasetype = srefIxVBasetype;
-	this->titIxVBasetype = titIxVBasetype;
-	this->refIxVTbl = refIxVTbl;
-	this->srefRefIxVTbl = srefRefIxVTbl;
-	this->titRefIxVTbl = titRefIxVTbl;
-	this->refUref = refUref;
-	this->stubRefUref = stubRefUref;
-	this->refWdbeMModule = refWdbeMModule;
-	this->stubRefWdbeMModule = stubRefWdbeMModule;
-	this->srefKPackage = srefKPackage;
-	this->titSrefKPackage = titSrefKPackage;
-	this->Easy = Easy;
-	this->yesnoEasy = yesnoEasy;
-	this->srefKToolch = srefKToolch;
-	this->titSrefKToolch = titSrefKToolch;
+		) :
+			qref(qref)
+			, jref(jref)
+			, jnum(jnum)
+			, ref(ref)
+			, sref(sref)
+			, Title(Title)
+			, Fullsref(Fullsref)
+			, ixVBasetype(ixVBasetype)
+			, srefIxVBasetype(srefIxVBasetype)
+			, titIxVBasetype(titIxVBasetype)
+			, refIxVTbl(refIxVTbl)
+			, srefRefIxVTbl(srefRefIxVTbl)
+			, titRefIxVTbl(titRefIxVTbl)
+			, refUref(refUref)
+			, stubRefUref(stubRefUref)
+			, refWdbeMModule(refWdbeMModule)
+			, stubRefWdbeMModule(stubRefWdbeMModule)
+			, srefKPackage(srefKPackage)
+			, titSrefKPackage(titSrefKPackage)
+			, Easy(Easy)
+			, yesnoEasy(yesnoEasy)
+			, srefKToolch(srefKToolch)
+			, titSrefKToolch(titSrefKToolch)
+		{
 };
 
 void WdbeQSilList::writeJSON(

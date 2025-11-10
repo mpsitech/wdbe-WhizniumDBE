@@ -76,16 +76,15 @@ PnlWdbeNavHigh::ContIac::ContIac(
 			, const uint numFLstSeg
 		) :
 			Block()
+			, numFLstPph(numFLstPph)
+			, numFLstMod(numFLstMod)
+			, numFLstVec(numFLstVec)
+			, numFLstVit(numFLstVit)
+			, numFLstCmd(numFLstCmd)
+			, numFLstErr(numFLstErr)
+			, numFLstPpl(numFLstPpl)
+			, numFLstSeg(numFLstSeg)
 		{
-	this->numFLstPph = numFLstPph;
-	this->numFLstMod = numFLstMod;
-	this->numFLstVec = numFLstVec;
-	this->numFLstVit = numFLstVit;
-	this->numFLstCmd = numFLstCmd;
-	this->numFLstErr = numFLstErr;
-	this->numFLstPpl = numFLstPpl;
-	this->numFLstSeg = numFLstSeg;
-
 	mask = {NUMFLSTPPH, NUMFLSTMOD, NUMFLSTVEC, NUMFLSTVIT, NUMFLSTCMD, NUMFLSTERR, NUMFLSTPPL, NUMFLSTSEG};
 };
 
@@ -344,31 +343,30 @@ PnlWdbeNavHigh::StatShr::StatShr(
 			, const bool ButSegNewcrdActive
 		) :
 			Block()
+			, LstPphAvail(LstPphAvail)
+			, ButPphViewActive(ButPphViewActive)
+			, ButPphNewcrdActive(ButPphNewcrdActive)
+			, LstModAvail(LstModAvail)
+			, ButModViewActive(ButModViewActive)
+			, ButModNewcrdActive(ButModNewcrdActive)
+			, LstVecAvail(LstVecAvail)
+			, ButVecViewActive(ButVecViewActive)
+			, ButVecNewcrdActive(ButVecNewcrdActive)
+			, LstVitAvail(LstVitAvail)
+			, ButVitViewActive(ButVitViewActive)
+			, LstCmdAvail(LstCmdAvail)
+			, ButCmdViewActive(ButCmdViewActive)
+			, ButCmdNewcrdActive(ButCmdNewcrdActive)
+			, LstErrAvail(LstErrAvail)
+			, ButErrViewActive(ButErrViewActive)
+			, ButErrNewcrdActive(ButErrNewcrdActive)
+			, LstPplAvail(LstPplAvail)
+			, ButPplViewActive(ButPplViewActive)
+			, ButPplNewcrdActive(ButPplNewcrdActive)
+			, LstSegAvail(LstSegAvail)
+			, ButSegViewActive(ButSegViewActive)
+			, ButSegNewcrdActive(ButSegNewcrdActive)
 		{
-	this->LstPphAvail = LstPphAvail;
-	this->ButPphViewActive = ButPphViewActive;
-	this->ButPphNewcrdActive = ButPphNewcrdActive;
-	this->LstModAvail = LstModAvail;
-	this->ButModViewActive = ButModViewActive;
-	this->ButModNewcrdActive = ButModNewcrdActive;
-	this->LstVecAvail = LstVecAvail;
-	this->ButVecViewActive = ButVecViewActive;
-	this->ButVecNewcrdActive = ButVecNewcrdActive;
-	this->LstVitAvail = LstVitAvail;
-	this->ButVitViewActive = ButVitViewActive;
-	this->LstCmdAvail = LstCmdAvail;
-	this->ButCmdViewActive = ButCmdViewActive;
-	this->ButCmdNewcrdActive = ButCmdNewcrdActive;
-	this->LstErrAvail = LstErrAvail;
-	this->ButErrViewActive = ButErrViewActive;
-	this->ButErrNewcrdActive = ButErrNewcrdActive;
-	this->LstPplAvail = LstPplAvail;
-	this->ButPplViewActive = ButPplViewActive;
-	this->ButPplNewcrdActive = ButPplNewcrdActive;
-	this->LstSegAvail = LstSegAvail;
-	this->ButSegViewActive = ButSegViewActive;
-	this->ButSegNewcrdActive = ButSegNewcrdActive;
-
 	mask = {LSTPPHAVAIL, BUTPPHVIEWACTIVE, BUTPPHNEWCRDACTIVE, LSTMODAVAIL, BUTMODVIEWACTIVE, BUTMODNEWCRDACTIVE, LSTVECAVAIL, BUTVECVIEWACTIVE, BUTVECNEWCRDACTIVE, LSTVITAVAIL, BUTVITVIEWACTIVE, LSTCMDAVAIL, BUTCMDVIEWACTIVE, BUTCMDNEWCRDACTIVE, LSTERRAVAIL, BUTERRVIEWACTIVE, BUTERRNEWCRDACTIVE, LSTPPLAVAIL, BUTPPLVIEWACTIVE, BUTPPLNEWCRDACTIVE, LSTSEGAVAIL, BUTSEGVIEWACTIVE, BUTSEGNEWCRDACTIVE};
 };
 

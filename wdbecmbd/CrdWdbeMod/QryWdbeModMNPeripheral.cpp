@@ -85,7 +85,7 @@ void QryWdbeModMNPeripheral::rerun(
 	dbswdbe->tblwdbeqmodmnperipheral->removeRstByJref(jref);
 
 	sqlstr = "SELECT COUNT(TblWdbeRMModuleMPeripheral.ref)";
-	sqlstr += " FROM TblWdbeMPeripheral, TblWdbeRMModuleMPeripheral";
+	sqlstr += " FROM TblWdbeRMModuleMPeripheral, TblWdbeMPeripheral";
 	sqlstr += " WHERE TblWdbeRMModuleMPeripheral.refWdbeMPeripheral = TblWdbeMPeripheral.ref";
 	sqlstr += " AND TblWdbeRMModuleMPeripheral.refWdbeMModule = " + to_string(preRefMod) + "";
 	dbswdbe->loadUintBySQL(sqlstr, cnt);
@@ -100,7 +100,7 @@ void QryWdbeModMNPeripheral::rerun(
 
 	sqlstr = "INSERT INTO TblWdbeQModMNPeripheral(jref, jnum, mref, ref)";
 	sqlstr += " SELECT " + to_string(jref) + ", 0, TblWdbeMPeripheral.ref, TblWdbeRMModuleMPeripheral.ref";
-	sqlstr += " FROM TblWdbeMPeripheral, TblWdbeRMModuleMPeripheral";
+	sqlstr += " FROM TblWdbeRMModuleMPeripheral, TblWdbeMPeripheral";
 	sqlstr += " WHERE TblWdbeRMModuleMPeripheral.refWdbeMPeripheral = TblWdbeMPeripheral.ref";
 	sqlstr += " AND TblWdbeRMModuleMPeripheral.refWdbeMModule = " + to_string(preRefMod) + "";
 	sqlstr += " ORDER BY TblWdbeMPeripheral.sref ASC";
@@ -274,11 +274,19 @@ void QryWdbeModMNPeripheral::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBEMDLRPPHMOD_MDLEQ) {
-		call->abort = handleCallWdbeMdlRpphMod_mdlEq(dbswdbe, call->jref);
-	} else if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
+	if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
 		call->abort = handleCallWdbeStubChgFromSelf(dbswdbe);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEMDLRPPHMOD_MDLEQ) {
+		call->abort = handleCallWdbeMdlRpphMod_mdlEq(dbswdbe, call->jref);
 	};
+};
+
+bool QryWdbeModMNPeripheral::handleCallWdbeStubChgFromSelf(
+			DbsWdbe* dbswdbe
+		) {
+	bool retval = false;
+	// IP handleCallWdbeStubChgFromSelf --- INSERT
+	return retval;
 };
 
 bool QryWdbeModMNPeripheral::handleCallWdbeMdlRpphMod_mdlEq(
@@ -292,13 +300,5 @@ bool QryWdbeModMNPeripheral::handleCallWdbeMdlRpphMod_mdlEq(
 		xchg->triggerCall(dbswdbe, VecWdbeVCall::CALLWDBESTATCHG, jref);
 	};
 
-	return retval;
-};
-
-bool QryWdbeModMNPeripheral::handleCallWdbeStubChgFromSelf(
-			DbsWdbe* dbswdbe
-		) {
-	bool retval = false;
-	// IP handleCallWdbeStubChgFromSelf --- INSERT
 	return retval;
 };

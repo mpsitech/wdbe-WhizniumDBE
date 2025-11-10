@@ -25,16 +25,16 @@ WdbeAMErrorPar::WdbeAMErrorPar(
 			, const ubigint refWdbeMVector
 			, const utinyint Length
 			, const string Comment
-		) {
-
-	this->ref = ref;
-	this->errRefWdbeMError = errRefWdbeMError;
-	this->errNum = errNum;
-	this->sref = sref;
-	this->ixWdbeVPartype = ixWdbeVPartype;
-	this->refWdbeMVector = refWdbeMVector;
-	this->Length = Length;
-	this->Comment = Comment;
+		) :
+			ref(ref)
+			, errRefWdbeMError(errRefWdbeMError)
+			, errNum(errNum)
+			, sref(sref)
+			, ixWdbeVPartype(ixWdbeVPartype)
+			, refWdbeMVector(refWdbeMVector)
+			, Length(Length)
+			, Comment(Comment)
+		{
 };
 
 bool WdbeAMErrorPar::operator==(

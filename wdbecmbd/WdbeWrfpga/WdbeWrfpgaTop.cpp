@@ -77,7 +77,6 @@ void WdbeWrfpgaTop::writeMdlVhd(
 
 	vector<string> ss;
 	string s;
-	///
 
 	ListWdbeMSignal sigs;
 	WdbeMSignal* sig = NULL;
@@ -97,7 +96,6 @@ void WdbeWrfpgaTop::writeMdlVhd(
 
 		for (unsigned int i = 0; i < NClk; i++) clks[i] = ss[i];
 	};
-	///
 
 	dbswdbe->tblwdbemsignal->loadRstBySQL("SELECT * FROM TblWdbeMSignal WHERE ixVBasetype = " + to_string(VecWdbeVMSignalBasetype::HSHK) + " AND refIxVTbl = " + to_string(VecWdbeVMSignalRefTbl::MDL)
 				+ " AND refUref = " + to_string(mdl->ref) + " AND sref LIKE 'reqReset%' ORDER BY sref ASC", false, sigs);
@@ -110,49 +108,52 @@ void WdbeWrfpgaTop::writeMdlVhd(
 	};
 
 	for (unsigned int i = 0; i < NClk; i++) {
-		// --- impl.xxxclk
-		outfile << "\t\t\t-- IP impl." << clks[i] << " --- IBEGIN" << endl;
-
-		if (reqRequest != "") {
-			outfile << "\t\t\tif " << reqRequest << " then" << endl;
-
-			if (i == 0) {
-				outfile << "\t\t\t\tif i=imax then" << endl;
-				outfile << "\t\t\t\t\ti := 0;" << endl;
-				outfile << "\t\t\t\t\tj := 0;" << endl;
-				outfile << endl;
-
-				outfile << "\t\t\t\telse" << endl;
-				outfile << "\t\t\t\t\tif j=jmax then" << endl;
-				outfile << "\t\t\t\t\t\treset <= '1';" << endl;
-				outfile << "\t\t\t\t\t\tj := 0;" << endl;
-				outfile << endl;
-
-				outfile << "\t\t\t\t\telse" << endl;
-				outfile << "\t\t\t\t\t\tj := j + 1;" << endl;
-				outfile << "\t\t\t\t\tend if;" << endl;
-				outfile << "\t\t\t\tend if;" << endl;
-				outfile << endl;
-
-			} else {
-				outfile << "\t\t\t\treset" << StrMod::cap(clks[i]) << " <= '1';" << endl;
-				outfile << "\t\t\t\ti := 0;" << endl;
-				outfile << endl;
-			};
+		if (i != 0) {
+			// --- impl.xxxclk.ext
+			outfile << "\t\t\t-- IP impl." << clks[i] << ".ext --- IBEGIN" << endl;
+			outfile << "\t\t\tif reset_to_" << clks[i] << "m1=reset_to_" << clks[i] << "m2 then" << endl;
+			outfile << "\t\t\t\treset_" << clks[i] << " <= reset_to_" << clks[i] << "m2;" << endl;
+			outfile << "\t\t\tend if;" << endl;
+			outfile << "\t\t\treset_to_" << clks[i] << "m1 <= reset;" << endl;
+			outfile << "\t\t\treset_to_" << clks[i] << "m2 <= reset_to_" << clks[i] << "m1;" << endl;
+			outfile << "\t\t\t-- IP impl." << clks[i] << ".ext --- IEND" << endl;
 		};
 
-		outfile << "\t\t\t";
-		if (reqRequest != "") outfile << "els";
-		outfile << "if i=imax then" << endl;
-
-		outfile << "\t\t\t\treset";
+		// --- impl.xxxclk.reset.done
+		outfile << "\t\t\t\t\t";
+		if (i != 0) outfile << "\t";
+		outfile << "reset";
 		if (i != 0) outfile << StrMod::cap(clks[i]);
-		outfile << " <= '0';" << endl;
-		outfile << "\t\t\telse" << endl;
-		outfile << "\t\t\t\ti := i + 1;" << endl;
-		outfile << "\t\t\tend if;" << endl;
+		outfile << " <= '0'; -- IP impl." << clks[i] << ".reset.done --- ILINE" << endl;
 
-		outfile << "\t\t\t-- IP impl." << clks[i] << " --- IEND" << endl;
+		// --- impl.xxxclk.reset.inc
+		outfile << "\t\t\t\t\ti := i + 1; -- IP impl." << clks[i] << ".reset.inc --- ILINE" << endl;
+
+		if (i == 0) {
+			// --- impl.xxxclk.run
+			outfile << "\t\t\t\t-- IP impl." << clks[i] << ".run --- IBEGIN" << endl;
+			if (reqRequest != "") {
+				outfile << "\t\t\t\tif " << reqRequest << " then" << endl;
+				outfile << "\t\t\t\t\treset <= '1';" << endl;
+				outfile << endl;
+
+				outfile << "\t\t\t\t\ti := 0;" << endl;
+				outfile << endl;
+
+				outfile << "\t\t\t\t\tstate" << StrMod::cap(clks[i]) << " <= state" << StrMod::cap(clks[i]) << "Reset;" << endl;
+				outfile << "\t\t\t\tend if;" << endl;
+			};
+			outfile << "\t\t\t\t-- IP impl." << clks[i] << ".run --- IEND" << endl;
+
+		} else {
+			// --- impl.xxxclk.run.reset
+			outfile << "\t\t\t\t\t-- IP impl." << clks[i] << ".run.reset --- IBEGIN" << endl;
+			outfile << "\t\t\t\t\treset" << StrMod::cap(clks[i]) << " <= '1';" << endl;
+			outfile << endl;
+
+			outfile << "\t\t\t\t\ti := 0;" << endl;
+			outfile << "\t\t\t\t\t-- IP impl." << clks[i] << ".run.reset --- IEND" << endl;
+		};
 	};
 };
 // IP cust --- IEND

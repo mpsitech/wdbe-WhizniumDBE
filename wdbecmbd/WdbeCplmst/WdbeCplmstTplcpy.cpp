@@ -220,11 +220,19 @@ DpchRetWdbeCplmstTplcpy* WdbeCplmstTplcpy::run(
 				};
 			};
 
-			// - parameters unless they are present already
+			// - parameters unless they are present already; if Val sup.*, try to copy from sup
 			mpakeys.clear();
 
 			dbswdbe->tblwdbeammodulepar->loadRstByMdl(refWdbeMModule, false, mpas);
-			for (unsigned int i = 0; i < mpas.nodes.size(); i++) mpakeys.insert(mpas.nodes[i]->x1SrefKKey);
+			for (unsigned int i = 0; i < mpas.nodes.size(); i++) {
+				mpa = mpas.nodes[i];
+
+				if (mpa->x1SrefKKey.find("sup.") == 0)
+					if (dbswdbe->loadStringBySQL("SELECT Val FROM TblWdbeAMModulePar WHERE mdlRefWdbeMModule = " + to_string(mdl->supRefWdbeMModule) + " AND x1SrefKKey = '" + mpa->x1SrefKKey.substr(4) + "'", mpa->Val)) dbswdbe->tblwdbeammodulepar->updateRec(mpa);
+					else Wdbe::appendToTmpfile(xchg->tmppath, logfile, logfi, "modular structure error: super module doesn't provide parameter " + mpa->x1SrefKKey.substr(4) + "!");
+
+				mpakeys.insert(mpa->x1SrefKKey);
+			};
 
 			mdlNum = mpas.nodes.size() + 1;
 

@@ -474,11 +474,11 @@ DpchRetWdbe* WdbeGenfstCtr::run(
 			if (maxlenRecv > maxlenSend) sizeCmdbuf = maxlenRecv;
 			else sizeCmdbuf = maxlenSend;
 
-			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, mdl->ref, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "sizeCmdbuf", true, "nat", 0, "", "", "", to_string(sizeCmdbuf), false, 0, "");
+			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, mdl->ref, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "sizeCmdbuf", true, "nat", 0, "", "", "", to_string(sizeCmdbuf), 0, "");
 
 			dbswdbe->tblwdbeavkeylistkey->insertNewRec(NULL, VecWdbeVKeylist::KLSTWDBEKHDLTYPE, 0, VecWdbeVMaintable::TBLWDBEMPROCESS, prc->ref, true, "cmdbuf_t", "", "", 0, "array (0 to sizeCmdbuf-1) of std_logic_vector(7 downto 0)", "");
 
-			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, mdl->ref, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "cmdbuf", false, "cmdbuf_t", 0, "", "", "", "", false, 0, "");
+			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, mdl->ref, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "cmdbuf", false, "cmdbuf_t", 0, "", "", "", "", 0, "");
 
 			// lenCmdbuf: pre-existing signal vs. variable
 			hasSigLenCmdbuf = false;
@@ -494,17 +494,17 @@ DpchRetWdbe* WdbeGenfstCtr::run(
 					break;
 				};
 			};
-			if (!hasSigLenCmdbuf) dbswdbe->tblwdbemvariable->insertNewRec(NULL, refC, VecWdbeVMVariableRefTbl::PRC, prc->ref, prcNum++, "lenCmdbuf", false, false, "nat", 0, "0..sizeCmdbuf", "", "0", false, "");
+			if (!hasSigLenCmdbuf) dbswdbe->tblwdbemvariable->insertNewRec(NULL, refC, VecWdbeVMVariableRefTbl::PRC, prc->ref, prcNum++, "lenCmdbuf", false, false, "nat", 0, "0..sizeCmdbuf", "", "0", "");
 
 			if (hasFwderr || hasRecvShrte) {
 				refC = dbswdbe->tblwdbecvariable->getNewRef();
 
-				dbswdbe->tblwdbemvariable->insertNewRec(NULL, refC, VecWdbeVMVariableRefTbl::PRC, prc->ref, prcNum++, "i", false, false, "nat", 0, "0..sizeCmdbuf", "", "0", false, "");
-				dbswdbe->tblwdbemvariable->insertNewRec(NULL, refC, VecWdbeVMVariableRefTbl::PRC, prc->ref, prcNum++, "j", false, false, "nat", 0, "0..sizeCmdbuf", "", "0", false, "");
-				dbswdbe->tblwdbemvariable->insertNewRec(NULL, refC, VecWdbeVMVariableRefTbl::PRC, prc->ref, prcNum++, "x", false, false, "slvdn", 8, "", "", "0", false, "");
+				dbswdbe->tblwdbemvariable->insertNewRec(NULL, refC, VecWdbeVMVariableRefTbl::PRC, prc->ref, prcNum++, "i", false, false, "nat", 0, "0..sizeCmdbuf", "", "0", "");
+				dbswdbe->tblwdbemvariable->insertNewRec(NULL, refC, VecWdbeVMVariableRefTbl::PRC, prc->ref, prcNum++, "j", false, false, "nat", 0, "0..sizeCmdbuf", "", "0", "");
+				dbswdbe->tblwdbemvariable->insertNewRec(NULL, refC, VecWdbeVMVariableRefTbl::PRC, prc->ref, prcNum++, "x", false, false, "slvdn", 8, "", "", "0", "");
 			};
 
-			if (hasSend) dbswdbe->tblwdbemvariable->insertNewRec(NULL, 0, VecWdbeVMVariableRefTbl::PRC, prc->ref, prcNum++, "bytecnt", false, false, "nat", 0, "0..sizeCmdbuf", "", "0", false, "");
+			if (hasSend) dbswdbe->tblwdbemvariable->insertNewRec(NULL, 0, VecWdbeVMVariableRefTbl::PRC, prc->ref, prcNum++, "bytecnt", false, false, "nat", 0, "0..sizeCmdbuf", "", "0", "");
 
 			// - vector items
 			addCtrVits(dbswdbe, ctr, cmds, mdlNum, Prjshort, Untsref);
@@ -544,7 +544,7 @@ DpchRetWdbe* WdbeGenfstCtr::run(
 			};
 
 			if (found) if (dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMPort WHERE mdlRefWdbeMModule = " + to_string(mdl->ref) + " AND sref = 'd" + Cmdbussref + "'", ref))
-						dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::IOPRT, 0, VecWdbeVMSignalRefTbl::MDL, mdl->ref, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "d" + Cmdbussref, false, "slvdn", 8, "", "state(sendA..C)", "", "", false, ref, "");
+						dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::IOPRT, 0, VecWdbeVMSignalRefTbl::MDL, mdl->ref, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "d" + Cmdbussref, false, "slvdn", 8, "", "state(sendA..C)", "", "", ref, "");
 
 			// - rdy/req signals
 			refC = 0;
@@ -558,10 +558,10 @@ DpchRetWdbe* WdbeGenfstCtr::run(
 
 					if (it->first == mdl->sref) {
 						if (dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMPort WHERE mdlRefWdbeMModule = " + to_string(mdl->ref) + " AND sref = 'req" + Cmdbussref + "To" + StrMod::cap(it->second) + "'", ref))
-									dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OPRT, refC, VecWdbeVMSignalRefTbl::MDL, mdl->ref, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "req" + Cmdbussref + "To" + StrMod::cap(it->second), false, "sl", 1, "", "", "1", "0", false, ref, "");
+									dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OPRT, refC, VecWdbeVMSignalRefTbl::MDL, mdl->ref, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "req" + Cmdbussref + "To" + StrMod::cap(it->second), false, "sl", 1, "", "", "1", "0", ref, "");
 					} else if (it->second == mdl->sref) {
 						if (dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMPort WHERE mdlRefWdbeMModule = " + to_string(mdl->ref) + " AND sref = 'rdy" + Cmdbussref + "From" + StrMod::cap(it->first) + "'", ref))
-									dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OPRT, refC, VecWdbeVMSignalRefTbl::MDL, mdl->ref, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "rdy" + Cmdbussref + "From" + StrMod::cap(it->first), false, "sl", 1, "", "", "1", "0", true, ref, "");
+									dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OPRT, refC, VecWdbeVMSignalRefTbl::MDL, mdl->ref, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "rdy" + Cmdbussref + "From" + StrMod::cap(it->first), false, "sl", 1, "", "", "0", "1", ref, "");
 					};
 				};
 			};
@@ -571,9 +571,9 @@ DpchRetWdbe* WdbeGenfstCtr::run(
 				if (dbswdbe->tblwdbemprocess->loadRecByRef(it->first, &prc2)) {
 					refC = dbswdbe->tblwdbecsignal->getNewRef();
 
-					dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, mdl->ref, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, prc2->ref, 0, "route" + StrMod::cap(it->second), false, "slvdn", 8, "", "", "", "", false, 0, "");
-					dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, mdl->ref, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, prc2->ref, 0, "cref" + StrMod::cap(it->second), false, "slvdn", 32, "", "", "", "", false, 0, "");
-					if (it->second == prc2->sref) dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, mdl->ref, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, prc2->ref, 0, "tixVCommand" + StrMod::cap(it->second), false, "slvdn", 8, "", "", "", "", false, 0, "");
+					dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, mdl->ref, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, prc2->ref, 0, "route" + StrMod::cap(it->second), false, "slvdn", 8, "", "", "", "", 0, "");
+					dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, mdl->ref, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, prc2->ref, 0, "cref" + StrMod::cap(it->second), false, "slvdn", 32, "", "", "", "", 0, "");
+					if (it->second == prc2->sref) dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, mdl->ref, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, prc2->ref, 0, "tixVCommand" + StrMod::cap(it->second), false, "slvdn", 8, "", "", "", "", 0, "");
 
 					delete prc2;
 				};
@@ -1184,10 +1184,10 @@ void WdbeGenfstCtr::addCmdErrSigs(
 		refC = dbswdbe->tblwdbecsignal->getNewRef();
 
 		// tixVCommand...
-		dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, mdl->ref, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "tixV" + UntsrefExtcmd + MdlsrefExtcmd + "Command" + Cmdsref, true, "slvdn", 8, "", "", "", to_string(cmd->refNum), false, 0, "");
+		dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, mdl->ref, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "tixV" + UntsrefExtcmd + MdlsrefExtcmd + "Command" + Cmdsref, true, "slvdn", 8, "", "", "", to_string(cmd->refNum), 0, "");
 
 		// len/maxlenCmdbufInv...
-		ref = dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, mdl->ref, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "lenCmdbufInv" + MdlsrefExtcmd + Cmdsref, true, "nat", 0, "", "", "", "10", false, 0, "");
+		ref = dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, mdl->ref, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "lenCmdbufInv" + MdlsrefExtcmd + Cmdsref, true, "nat", 0, "", "", "", "10", 0, "");
 
 		dbswdbe->tblwdbeamcommandinvpar->loadRstByCmd(cmd->ref, false, ipas);
 
@@ -1198,7 +1198,7 @@ void WdbeGenfstCtr::addCmdErrSigs(
 		for (unsigned int k = 0; k < ipas.nodes.size(); k++) {
 			ipa = ipas.nodes[k];
 
-			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, mdl->ref, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "ixCmdbufInv" + MdlsrefExtcmd + Cmdsref + StrMod::cap(ipa->sref), true, "nat", 0, "", "", "", to_string(ix), false, 0, "");
+			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, mdl->ref, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "ixCmdbufInv" + MdlsrefExtcmd + Cmdsref + StrMod::cap(ipa->sref), true, "nat", 0, "", "", "", to_string(ix), 0, "");
 			ix += Wdbe::getParlen(ipa->ixWdbeVPartype, ipa->Length);
 
 			first = false;
@@ -1218,7 +1218,7 @@ void WdbeGenfstCtr::addCmdErrSigs(
 			if (cmd->ixVRettype == VecWdbeVMCommandRettype::MULT) s = "Newret";
 			else s = "Ret";
 
-			ref = dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, mdl->ref, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "lenCmdbuf" + s + MdlsrefExtcmd + Cmdsref, true, "nat", 0, "", "", "", "10", false, 0, "");
+			ref = dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, mdl->ref, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "lenCmdbuf" + s + MdlsrefExtcmd + Cmdsref, true, "nat", 0, "", "", "", "10", 0, "");
 
 			dbswdbe->tblwdbeamcommandretpar->loadRstByCmd(cmd->ref, false, rpas);
 
@@ -1229,7 +1229,7 @@ void WdbeGenfstCtr::addCmdErrSigs(
 			for (unsigned int k = 0; k < rpas.nodes.size(); k++) {
 				rpa = rpas.nodes[k];
 
-				dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, mdl->ref, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "ixCmdbuf" + s + MdlsrefExtcmd + Cmdsref + StrMod::cap(rpa->sref), true, "nat", 0, "", "", "", to_string(ix), false, 0, "");
+				dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, mdl->ref, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "ixCmdbuf" + s + MdlsrefExtcmd + Cmdsref + StrMod::cap(rpa->sref), true, "nat", 0, "", "", "", to_string(ix), 0, "");
 				ix += Wdbe::getParlen(rpa->ixWdbeVPartype, rpa->Length);
 
 				first = false;
@@ -1250,10 +1250,10 @@ void WdbeGenfstCtr::addCmdErrSigs(
 		refC = dbswdbe->tblwdbecsignal->getNewRef();
 
 		// tixVError...
-		dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, mdl->ref, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "tixVError" + StrMod::cap(err->sref), true, "slvdn", 8, "", "", "", to_string(err->refNum), false, 0, "");
+		dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, mdl->ref, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "tixVError" + StrMod::cap(err->sref), true, "slvdn", 8, "", "", "", to_string(err->refNum), 0, "");
 
 		// len/maxlenCmdbufErr...
-		ref = dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, mdl->ref, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "lenCmdbufErr" + StrMod::cap(err->sref), true, "nat", 0, "", "", "", "10", false, 0, "");
+		ref = dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, mdl->ref, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "lenCmdbufErr" + StrMod::cap(err->sref), true, "nat", 0, "", "", "", "10", 0, "");
 
 		dbswdbe->tblwdbeamerrorpar->loadRstByErr(err->ref, false, epas);
 
@@ -1264,7 +1264,7 @@ void WdbeGenfstCtr::addCmdErrSigs(
 		for (unsigned int k = 0; k < epas.nodes.size(); k++) {
 			epa = epas.nodes[k];
 
-			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, mdl->ref, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "ixCmdbufErr" + StrMod::cap(err->sref) + StrMod::cap(epa->sref), true, "nat", 0, "", "", "", to_string(ix), false, 0, "");
+			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, mdl->ref, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "ixCmdbufErr" + StrMod::cap(err->sref) + StrMod::cap(epa->sref), true, "nat", 0, "", "", "", to_string(ix), 0, "");
 			ix += Wdbe::getParlen(epa->ixWdbeVPartype, epa->Length);
 
 			first = false;

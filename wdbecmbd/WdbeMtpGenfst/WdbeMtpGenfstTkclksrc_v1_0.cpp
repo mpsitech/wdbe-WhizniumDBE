@@ -55,8 +55,8 @@ DpchRetWdbe* WdbeMtpGenfstTkclksrc_v1_0::run(
 			mdlNum = Wdbe::getNextSigRefNum(dbswdbe, VecWdbeVMSignalRefTbl::MDL, mdl->ref);
 
 			refC = dbswdbe->tblwdbecsignal->getNewRef();
-			cmdSetTkst->ivrRefWdbeMSignal = dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::HSHK, refC, VecWdbeVMSignalRefTbl::MDL, mdl->ref, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, refPrcCmd, 0, "reqCmdToOpInvSetTkst", false, "sl", 1, "", "", "", "0", false, 0, "");
-			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::HSHK, refC, VecWdbeVMSignalRefTbl::MDL, mdl->ref, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, refPrcOp, 0, "ackCmdToOpInvSetTkst", false, "sl", 1, "", "", "", "0", false, 0, "");
+			cmdSetTkst->ivrRefWdbeMSignal = dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::HSHK, refC, VecWdbeVMSignalRefTbl::MDL, mdl->ref, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, refPrcCmd, 0, "reqCmdToOpInvSetTkst", false, "sl", 1, "", "", "", "0", 0, "");
+			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::HSHK, refC, VecWdbeVMSignalRefTbl::MDL, mdl->ref, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, refPrcOp, 0, "ackCmdToOpInvSetTkst", false, "sl", 1, "", "", "", "0", 0, "");
 
 			dbswdbe->tblwdbemcommand->updateRec(cmdSetTkst);
 

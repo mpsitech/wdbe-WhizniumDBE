@@ -313,9 +313,8 @@ DpchEngWdbe::DpchEngWdbe(
 			, const ubigint jref
 		) :
 			DpchWdbe(ixWdbeVDpch)
+			, jref(jref)
 		{
-	this->jref = jref;
-
 	mask = {JREF};
 };
 
@@ -461,11 +460,9 @@ DpchEngWdbeConfirm::DpchEngWdbeConfirm(
 			, const set<uint>& mask
 		) :
 			DpchEngWdbe(VecWdbeVDpch::DPCHENGWDBECONFIRM, jref)
+			, accepted(accepted)
+			, sref(sref)
 		{
-	this->accepted = accepted;
-	this->jref = jref;
-	this->sref = sref;
-
 	if (find(mask, ALL)) this->mask = {ACCEPTED, JREF, SREF};
 	else this->mask = mask;
 };
@@ -538,102 +535,6 @@ DpchEngWdbeSuspend::DpchEngWdbeSuspend(
 };
 
 /******************************************************************************
- class StgWdbeAppearance
- ******************************************************************************/
-
-StgWdbeAppearance::StgWdbeAppearance(
-			const usmallint histlength
-			, const bool suspsess
-			, const uint sesstterm
-			, const uint sesstwarn
-			, const uint roottterm
-		) :
-			Block()
-		{
-	this->histlength = histlength;
-	this->suspsess = suspsess;
-	this->sesstterm = sesstterm;
-	this->sesstwarn = sesstwarn;
-	this->roottterm = roottterm;
-	mask = {HISTLENGTH, SUSPSESS, SESSTTERM, SESSTWARN, ROOTTTERM};
-};
-
-bool StgWdbeAppearance::readXML(
-			xmlXPathContext* docctx
-			, string basexpath
-			, bool addbasetag
-		) {
-	clear();
-
-	bool basefound;
-
-	if (addbasetag)
-		basefound = checkUclcXPaths(docctx, basexpath, basexpath, "StgWdbeAppearance");
-	else
-		basefound = checkXPath(docctx, basexpath);
-
-	string itemtag = "StgitemWdbeAppearance";
-
-	if (basefound) {
-		if (extractUsmallintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "histlength", histlength)) add(HISTLENGTH);
-		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "suspsess", suspsess)) add(SUSPSESS);
-		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "sesstterm", sesstterm)) add(SESSTTERM);
-		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "sesstwarn", sesstwarn)) add(SESSTWARN);
-		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "roottterm", roottterm)) add(ROOTTTERM);
-	};
-
-	return basefound;
-};
-
-void StgWdbeAppearance::writeXML(
-			xmlTextWriter* wr
-			, string difftag
-			, bool shorttags
-		) {
-	if (difftag.length() == 0) difftag = "StgWdbeAppearance";
-
-	string itemtag;
-	if (shorttags) itemtag = "Si";
-	else itemtag = "StgitemWdbeAppearance";
-
-	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
-		writeUsmallintAttr(wr, itemtag, "sref", "histlength", histlength);
-		writeBoolAttr(wr, itemtag, "sref", "suspsess", suspsess);
-		writeUintAttr(wr, itemtag, "sref", "sesstterm", sesstterm);
-		writeUintAttr(wr, itemtag, "sref", "sesstwarn", sesstwarn);
-		writeUintAttr(wr, itemtag, "sref", "roottterm", roottterm);
-	xmlTextWriterEndElement(wr);
-};
-
-set<uint> StgWdbeAppearance::comm(
-			const StgWdbeAppearance* comp
-		) {
-	set<uint> items;
-
-	if (histlength == comp->histlength) insert(items, HISTLENGTH);
-	if (suspsess == comp->suspsess) insert(items, SUSPSESS);
-	if (sesstterm == comp->sesstterm) insert(items, SESSTTERM);
-	if (sesstwarn == comp->sesstwarn) insert(items, SESSTWARN);
-	if (roottterm == comp->roottterm) insert(items, ROOTTTERM);
-
-	return(items);
-};
-
-set<uint> StgWdbeAppearance::diff(
-			const StgWdbeAppearance* comp
-		) {
-	set<uint> commitems;
-	set<uint> diffitems;
-
-	commitems = comm(comp);
-
-	diffitems = {HISTLENGTH, SUSPSESS, SESSTTERM, SESSTWARN, ROOTTTERM};
-	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
-
-	return(diffitems);
-};
-
-/******************************************************************************
  class StgWdbeAppsrv
  ******************************************************************************/
 
@@ -643,10 +544,10 @@ StgWdbeAppsrv::StgWdbeAppsrv(
 			, const string& cors
 		) :
 			Block()
+			, port(port)
+			, https(https)
+			, cors(cors)
 		{
-	this->port = port;
-	this->https = https;
-	this->cors = cors;
 	mask = {PORT, HTTPS, CORS};
 };
 
@@ -720,6 +621,102 @@ set<uint> StgWdbeAppsrv::diff(
 };
 
 /******************************************************************************
+ class StgWdbeBehavior
+ ******************************************************************************/
+
+StgWdbeBehavior::StgWdbeBehavior(
+			const usmallint histlength
+			, const bool suspsess
+			, const uint sesstterm
+			, const uint sesstwarn
+			, const uint roottterm
+		) :
+			Block()
+			, histlength(histlength)
+			, suspsess(suspsess)
+			, sesstterm(sesstterm)
+			, sesstwarn(sesstwarn)
+			, roottterm(roottterm)
+		{
+	mask = {HISTLENGTH, SUSPSESS, SESSTTERM, SESSTWARN, ROOTTTERM};
+};
+
+bool StgWdbeBehavior::readXML(
+			xmlXPathContext* docctx
+			, string basexpath
+			, bool addbasetag
+		) {
+	clear();
+
+	bool basefound;
+
+	if (addbasetag)
+		basefound = checkUclcXPaths(docctx, basexpath, basexpath, "StgWdbeBehavior");
+	else
+		basefound = checkXPath(docctx, basexpath);
+
+	string itemtag = "StgitemWdbeBehavior";
+
+	if (basefound) {
+		if (extractUsmallintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "histlength", histlength)) add(HISTLENGTH);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "suspsess", suspsess)) add(SUSPSESS);
+		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "sesstterm", sesstterm)) add(SESSTTERM);
+		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "sesstwarn", sesstwarn)) add(SESSTWARN);
+		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "roottterm", roottterm)) add(ROOTTTERM);
+	};
+
+	return basefound;
+};
+
+void StgWdbeBehavior::writeXML(
+			xmlTextWriter* wr
+			, string difftag
+			, bool shorttags
+		) {
+	if (difftag.length() == 0) difftag = "StgWdbeBehavior";
+
+	string itemtag;
+	if (shorttags) itemtag = "Si";
+	else itemtag = "StgitemWdbeBehavior";
+
+	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
+		writeUsmallintAttr(wr, itemtag, "sref", "histlength", histlength);
+		writeBoolAttr(wr, itemtag, "sref", "suspsess", suspsess);
+		writeUintAttr(wr, itemtag, "sref", "sesstterm", sesstterm);
+		writeUintAttr(wr, itemtag, "sref", "sesstwarn", sesstwarn);
+		writeUintAttr(wr, itemtag, "sref", "roottterm", roottterm);
+	xmlTextWriterEndElement(wr);
+};
+
+set<uint> StgWdbeBehavior::comm(
+			const StgWdbeBehavior* comp
+		) {
+	set<uint> items;
+
+	if (histlength == comp->histlength) insert(items, HISTLENGTH);
+	if (suspsess == comp->suspsess) insert(items, SUSPSESS);
+	if (sesstterm == comp->sesstterm) insert(items, SESSTTERM);
+	if (sesstwarn == comp->sesstwarn) insert(items, SESSTWARN);
+	if (roottterm == comp->roottterm) insert(items, ROOTTTERM);
+
+	return(items);
+};
+
+set<uint> StgWdbeBehavior::diff(
+			const StgWdbeBehavior* comp
+		) {
+	set<uint> commitems;
+	set<uint> diffitems;
+
+	commitems = comm(comp);
+
+	diffitems = {HISTLENGTH, SUSPSESS, SESSTTERM, SESSTWARN, ROOTTTERM};
+	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
+
+	return(diffitems);
+};
+
+/******************************************************************************
  class StgWdbed
  ******************************************************************************/
 
@@ -729,10 +726,10 @@ StgWdbed::StgWdbed(
 			, const bool appsrv
 		) :
 			Block()
+			, jobprcn(jobprcn)
+			, opengsrvport(opengsrvport)
+			, appsrv(appsrv)
 		{
-	this->jobprcn = jobprcn;
-	this->opengsrvport = opengsrvport;
-	this->appsrv = appsrv;
 	mask = {JOBPRCN, OPENGSRVPORT, APPSRV};
 };
 
@@ -819,14 +816,14 @@ StgWdbeDatabase::StgWdbeDatabase(
 			, const usmallint port
 		) :
 			Block()
+			, ixDbsVDbstype(ixDbsVDbstype)
+			, dbspath(dbspath)
+			, dbsname(dbsname)
+			, username(username)
+			, password(password)
+			, ip(ip)
+			, port(port)
 		{
-	this->ixDbsVDbstype = ixDbsVDbstype;
-	this->dbspath = dbspath;
-	this->dbsname = dbsname;
-	this->username = username;
-	this->password = password;
-	this->ip = ip;
-	this->port = port;
 	mask = {IXDBSVDBSTYPE, DBSPATH, DBSNAME, USERNAME, PASSWORD, IP, PORT};
 };
 
@@ -932,16 +929,16 @@ StgWdbeMonitor::StgWdbeMonitor(
 			, const string& dbspassword
 		) :
 			Block()
+			, username(username)
+			, password(password)
+			, ip(ip)
+			, port(port)
+			, ixDbsVDbstype(ixDbsVDbstype)
+			, dbspath(dbspath)
+			, dbsname(dbsname)
+			, dbsusername(dbsusername)
+			, dbspassword(dbspassword)
 		{
-	this->username = username;
-	this->password = password;
-	this->ip = ip;
-	this->port = port;
-	this->ixDbsVDbstype = ixDbsVDbstype;
-	this->dbspath = dbspath;
-	this->dbsname = dbsname;
-	this->dbsusername = dbsusername;
-	this->dbspassword = dbspassword;
 	mask = {USERNAME, PASSWORD, IP, PORT, IXDBSVDBSTYPE, DBSPATH, DBSNAME, DBSUSERNAME, DBSPASSWORD};
 };
 
@@ -1050,13 +1047,13 @@ StgWdbePath::StgWdbePath(
 			, const string& helpurl
 		) :
 			Block()
+			, acvpath(acvpath)
+			, keypath(keypath)
+			, monpath(monpath)
+			, tmppath(tmppath)
+			, webpath(webpath)
+			, helpurl(helpurl)
 		{
-	this->acvpath = acvpath;
-	this->keypath = keypath;
-	this->monpath = monpath;
-	this->tmppath = tmppath;
-	this->webpath = webpath;
-	this->helpurl = helpurl;
 	mask = {ACVPATH, KEYPATH, MONPATH, TMPPATH, WEBPATH, HELPURL};
 };
 
@@ -1147,9 +1144,9 @@ StgWdbeTenant::StgWdbeTenant(
 			, const string& orgweb
 		) :
 			Block()
+			, orgname(orgname)
+			, orgweb(orgweb)
 		{
-	this->orgname = orgname;
-	this->orgweb = orgweb;
 	mask = {ORGNAME, ORGWEB};
 };
 
@@ -1234,7 +1231,7 @@ DpchEngWdbeAlert* AlrWdbe::prepareAlrAbt(
 	continf.TxtCpt = StrMod::cap(continf.TxtCpt);
 
 	if (ixWdbeVLocale == VecWdbeVLocale::ENUS) {
-		continf.TxtMsg1 = "WhizniumDBE version v1.1.41 released on 7-2-2024";
+		continf.TxtMsg1 = "WhizniumDBE version v1.1.49 released on 5-11-2025";
 		continf.TxtMsg2 = "\\u00a9 MPSI Technologies GmbH";
 		continf.TxtMsg4 = "contributors: Alexander Wirthmueller";
 		continf.TxtMsg6 = "libraries: apiwzlm 1.0.0, curl 7.65, git2 0.24.0, jsoncpp 1.8.4 and openssl 1.1.1";
@@ -1381,12 +1378,11 @@ ReqWdbe::ReqWdbe(
 			, const uint ixVState
 			, const string& ip
 		) :
-			cReady("cReady", "ReqWdbe", "ReqWdbe")
+			ixVBasetype(ixVBasetype)
+			, ixVState(ixVState)
+			, ip(ip)
+			, cReady("cReady", "ReqWdbe", "ReqWdbe")
 		{
-	this->ixVBasetype = ixVBasetype;
-	this->ixVState = ixVState;
-	this->ip = ip;
-
 	pp = NULL;
 
 	retain = !((ixVBasetype == VecVBasetype::CMD) || (ixVBasetype == VecVBasetype::DPCHAPP) || (ixVBasetype == VecVBasetype::NOTIFY)
@@ -1461,10 +1457,10 @@ void ReqWdbe::setStateReply() {
 ReqopengconWdbe::ReqopengconWdbe(
 			const uint ixVState
 			, const string& ip
-		) {
-	this->ixVState = ixVState;
-	this->ip = ip;
-
+		) :
+			ixVState(ixVState)
+			, ip(ip)
+		{
 	pp = NULL;
 
 	request = NULL;
@@ -1494,11 +1490,10 @@ DcolWdbe::DcolWdbe(
 			const ubigint jref
 			, const uint ixWdbeVLocale
 		) :
-			mAccess("dcol.mAccess", "DcolWdbe", "DcolWdbe", "jref=" + to_string(jref))
+			jref(jref)
+			, ixWdbeVLocale(ixWdbeVLocale)
+			, mAccess("dcol.mAccess", "DcolWdbe", "DcolWdbe", "jref=" + to_string(jref))
 		{
-	this->jref = jref;
-	this->ixWdbeVLocale = ixWdbeVLocale;
-
 	hot = false;
 
 	req = NULL;
@@ -1537,16 +1532,13 @@ JobWdbe::JobWdbe(
 			, const ubigint jrefSup
 			, const uint ixWdbeVLocale
 		) :
-			mAccess("mAccess", VecWdbeVJob::getSref(ixWdbeVJob), VecWdbeVJob::getSref(ixWdbeVJob), "jrefSup=" + to_string(jrefSup))
+			xchg(xchg)
+			, ixWdbeVJob(ixWdbeVJob)
+			, ixWdbeVLocale(ixWdbeVLocale)
+			, mAccess("mAccess", VecWdbeVJob::getSref(ixWdbeVJob), VecWdbeVJob::getSref(ixWdbeVJob), "jrefSup=" + to_string(jrefSup))
 			, mOps("mOps", VecWdbeVJob::getSref(ixWdbeVJob), VecWdbeVJob::getSref(ixWdbeVJob), "jrefSup=" + to_string(jrefSup))
 		{
-	this->xchg = xchg;
-
 	jref = 0;
-
-	this->ixWdbeVJob = ixWdbeVJob;
-
-	this->ixWdbeVLocale = ixWdbeVLocale;
 
 	muteRefresh = false;
 
@@ -1963,10 +1955,10 @@ ShrdatWdbe::ShrdatWdbe(
 			const string& srefSupclass
 			, const string& srefObject
 		) :
-			rwmAccess("shrdat.mAccess", srefSupclass + "::" + srefObject, srefObject)
+			srefSupclass(srefSupclass)
+			, srefObject(srefObject)
+			, rwmAccess("shrdat.mAccess", srefSupclass + "::" + srefObject, srefObject)
 		{
-	this->srefSupclass = srefSupclass;
-	this->srefObject = srefObject;
 };
 
 ShrdatWdbe::~ShrdatWdbe() {
@@ -2052,13 +2044,11 @@ StmgrWdbe::StmgrWdbe(
 			, const ubigint jref
 			, const uint ixVNonetype
 		) :
-			mAccess("stmgr.mAccess", "StmgrWdbe", "StmgrWdbe", "jref=" + to_string(jref))
+			xchg(xchg)
+			, jref(jref)
+			, ixVNonetype(ixVNonetype)
+			, mAccess("stmgr.mAccess", "StmgrWdbe", "StmgrWdbe", "jref=" + to_string(jref))
 		{
-	this->xchg = xchg;
-
-	this->jref = jref;
-	this->ixVNonetype = ixVNonetype;
-
 	stcch = new Stcch(true);
 };
 
@@ -2081,8 +2071,8 @@ void StmgrWdbe::handleCall(
 	begin();
 
 	if (call->ixVCall == VecWdbeVCall::CALLWDBEBNKUPD_REFEQ) {
-		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEBNKSREF);
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEBNKSTD);
+		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEBNKSREF);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECDCUPD_REFEQ) {
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBECDCDSTD);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECMDUPD_REFEQ) {
@@ -2092,12 +2082,12 @@ void StmgrWdbe::handleCall(
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECPRUPD_REFEQ) {
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBECPRSTD);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECTRUPD_REFEQ) {
-		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBECTRLONG);
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBECTRSTD);
+		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBECTRLONG);
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBECTRSREF);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECVRUPD_REFEQ) {
-		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBECVRNO);
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBECVRSTD);
+		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBECVRNO);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEERRUPD_REFEQ) {
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEERRSTD);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEFAMUPD_REFEQ) {
@@ -2115,8 +2105,8 @@ void StmgrWdbe::handleCall(
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEINTUPD_REFEQ) {
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEINTSTD);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBELIBUPD_REFEQ) {
-		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBELIBSREF);
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBELIBSTD);
+		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBELIBSREF);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEMCHUPD_REFEQ) {
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEMCHSTD);
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEMCHSREF);
@@ -2140,14 +2130,14 @@ void StmgrWdbe::handleCall(
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEPRSUPD_REFEQ) {
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEPRSSTD);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEPRTUPD_REFEQ) {
-		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEPRTSREF);
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEPRTSTD);
+		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEPRTSREF);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBERLSUPD_REFEQ) {
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBERLSSTD);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBESEGUPD_REFEQ) {
-		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBESEGSTD);
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBESEGSREF);
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBESEGHSREF);
+		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBESEGSTD);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBESESUPD_REFEQ) {
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBESESSTD);
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBESESMENU);
@@ -2165,16 +2155,16 @@ void StmgrWdbe::handleCall(
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEGROUP);
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEUSGSTD);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEUSRUPD_REFEQ) {
+		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEUSRPRS);
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEOWNER);
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEUSRSTD);
-		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEUSRPRS);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEVARUPD_REFEQ) {
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEVARSTD);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEVECUPD_REFEQ) {
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEVECSTD);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEVERUPD_REFEQ) {
-		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEVERSHORT);
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEVERSTD);
+		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEVERSHORT);
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEVERNO);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEVITUPD_REFEQ) {
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEVITSTD);
@@ -2369,13 +2359,14 @@ WakeupWdbe::WakeupWdbe(
 			, const string sref
 			, const uint64_t deltat
 			, const bool weak
-		) {
-	this->xchg = xchg;
-	this->wref = wref;
-	this->jref = jref;
-	this->sref = sref;
-	this->deltat = deltat;
-	this->weak = weak;
+		) :
+			xchg(xchg)
+			, wref(wref)
+			, jref(jref)
+			, sref(sref)
+			, deltat(deltat)
+			, weak(weak)
+		{
 };
 
 /******************************************************************************
@@ -2385,9 +2376,10 @@ WakeupWdbe::WakeupWdbe(
 ExtcallWdbe::ExtcallWdbe(
 			XchgWdbe* xchg
 			, Call* call
-		) {
-	this->xchg = xchg;
-	this->call = call;
+		) :
+			xchg(xchg)
+			, call(call)
+		{
 };
 
 /******************************************************************************
@@ -2400,13 +2392,13 @@ NodeWdbe::NodeWdbe(
 			, const uint port
 			, const uint opprcn
 			, const uint ixWdbeVOpengtype
-		) {
-	this->nref = nref;
-	this->ip = ip;
-	this->port = port;
-	this->opprcn = opprcn;
-	this->ixWdbeVOpengtype = ixWdbeVOpengtype;
-
+		) :
+			nref(nref)
+			, ip(ip)
+			, port(port)
+			, opprcn(opprcn)
+			, ixWdbeVOpengtype(ixWdbeVOpengtype)
+		{
 	vector<uint> icsWdbeVOppack;
 	
 	OpengWdbe::getIcsWdbeVOppackByIxWdbeVOpengtype(ixWdbeVOpengtype, icsWdbeVOppack);
@@ -2509,7 +2501,7 @@ void XchgWdbed::startMon() {
 	Preset* preset = NULL;
 	NodeWdbe* node = NULL;
 
-	mon.start("WhizniumDBE v1.1.41", stgwdbemonitor.ixDbsVDbstype, stgwdbemonitor.dbspath, stgwdbemonitor.dbsname, stgwdbemonitor.ip, stgwdbemonitor.port, stgwdbemonitor.dbsusername, stgwdbemonitor.dbspassword, stgwdbemonitor.username, stgwdbemonitor.password);
+	mon.start("WhizniumDBE v1.1.49", stgwdbemonitor.ixDbsVDbstype, stgwdbemonitor.dbspath, stgwdbemonitor.dbsname, stgwdbemonitor.ip, stgwdbemonitor.port, stgwdbemonitor.dbsusername, stgwdbemonitor.dbspassword, stgwdbemonitor.username, stgwdbemonitor.password);
 
 	rwmJobs.rlock("XchgWdbed", "startMon");
 	for (auto it = jobs.begin(); it != jobs.end(); it++) {

@@ -21,12 +21,12 @@ WdbeMController::WdbeMController(
 			, const ubigint refWdbeMModule
 			, const string Fullsref
 			, const ubigint clrRefWdbeMSignal
-		) {
-
-	this->ref = ref;
-	this->refWdbeMModule = refWdbeMModule;
-	this->Fullsref = Fullsref;
-	this->clrRefWdbeMSignal = clrRefWdbeMSignal;
+		) :
+			ref(ref)
+			, refWdbeMModule(refWdbeMModule)
+			, Fullsref(Fullsref)
+			, clrRefWdbeMSignal(clrRefWdbeMSignal)
+		{
 };
 
 bool WdbeMController::operator==(

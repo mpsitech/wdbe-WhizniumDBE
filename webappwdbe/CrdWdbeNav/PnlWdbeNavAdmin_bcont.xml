@@ -20,6 +20,7 @@
 			function handleButFilCollapseClick() {parent.parent.window.handleButCollapseClick("LstFil");};
 			function handleButFilViewClick() {parent.parent.window.handleButCrdopenClick("ButFilView");};
 			function handleButFilNewcrdClick() {parent.parent.window.handleButCrdopenClick("ButFilNewcrd");};
+			function handleButPrfNewcrdClick() {parent.parent.window.handleButCrdopenClick("ButPrfNewcrd");};
 			<!-- IP custScript - INSERT -->
 		</script>
 		<link href="../style/pnlDetail3_2.css" rel="styleSheet" type="text/css"/>
@@ -101,6 +102,15 @@
 				<tr id="trFil2" class="hide">
 					<td colspan="3" height="67"></td>
 					<td colspan="3"></td>
+				</tr>
+				<tr id="trPrf" class="show">
+					<td height="25"></td>
+					<td align="right">
+						<span id="CptPrf" class="cpt">CptPrf</span>
+					</td>
+					<td></td>
+					<td id="dynPrf" colspan="8" align="left">
+					</td>
 				</tr>
 				<tr><td colspan="11" height="4"></td></tr>
 			</tbody>

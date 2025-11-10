@@ -24,15 +24,15 @@ WdbeMFsmstate::WdbeMFsmstate(
 			, const string sref
 			, const bool Extip
 			, const string Comment
-		) {
-
-	this->ref = ref;
-	this->refWdbeCFsmstate = refWdbeCFsmstate;
-	this->fsmRefWdbeMFsm = fsmRefWdbeMFsm;
-	this->fsmNum = fsmNum;
-	this->sref = sref;
-	this->Extip = Extip;
-	this->Comment = Comment;
+		) :
+			ref(ref)
+			, refWdbeCFsmstate(refWdbeCFsmstate)
+			, fsmRefWdbeMFsm(fsmRefWdbeMFsm)
+			, fsmNum(fsmNum)
+			, sref(sref)
+			, Extip(Extip)
+			, Comment(Comment)
+		{
 };
 
 bool WdbeMFsmstate::operator==(

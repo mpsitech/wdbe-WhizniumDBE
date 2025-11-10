@@ -22,11 +22,12 @@ WdbeQSigMNCdc::WdbeQSigMNCdc(
 			, const string stubMref
 			, const string srefIxVDir
 			, const string titIxVDir
-		) {
-	this->jnum = jnum;
-	this->stubMref = stubMref;
-	this->srefIxVDir = srefIxVDir;
-	this->titIxVDir = titIxVDir;
+		) :
+			jnum(jnum)
+			, stubMref(stubMref)
+			, srefIxVDir(srefIxVDir)
+			, titIxVDir(titIxVDir)
+		{
 };
 
 bool WdbeQSigMNCdc::readXML(

@@ -46,10 +46,9 @@ PnlWdbeSnsDetail::ContIac::ContIac(
 			, const uint numFPupSrt
 		) :
 			Block()
+			, numFPupRet(numFPupRet)
+			, numFPupSrt(numFPupSrt)
 		{
-	this->numFPupRet = numFPupRet;
-	this->numFPupSrt = numFPupSrt;
-
 	mask = {NUMFPUPRET, NUMFPUPSRT};
 };
 
@@ -160,10 +159,9 @@ PnlWdbeSnsDetail::ContInf::ContInf(
 			, const string& TxtSru
 		) :
 			Block()
+			, TxtReu(TxtReu)
+			, TxtSru(TxtSru)
 		{
-	this->TxtReu = TxtReu;
-	this->TxtSru = TxtSru;
-
 	mask = {TXTREU, TXTSRU};
 };
 
@@ -269,16 +267,15 @@ PnlWdbeSnsDetail::StatShr::StatShr(
 			, const bool ButSruViewActive
 		) :
 			Block()
+			, ButSaveAvail(ButSaveAvail)
+			, ButSaveActive(ButSaveActive)
+			, TxtReuActive(TxtReuActive)
+			, ButReuViewAvail(ButReuViewAvail)
+			, ButReuViewActive(ButReuViewActive)
+			, TxtSruActive(TxtSruActive)
+			, ButSruViewAvail(ButSruViewAvail)
+			, ButSruViewActive(ButSruViewActive)
 		{
-	this->ButSaveAvail = ButSaveAvail;
-	this->ButSaveActive = ButSaveActive;
-	this->TxtReuActive = TxtReuActive;
-	this->ButReuViewAvail = ButReuViewAvail;
-	this->ButReuViewActive = ButReuViewActive;
-	this->TxtSruActive = TxtSruActive;
-	this->ButSruViewAvail = ButSruViewAvail;
-	this->ButSruViewActive = ButSruViewActive;
-
 	mask = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTREUACTIVE, BUTREUVIEWAVAIL, BUTREUVIEWACTIVE, TXTSRUACTIVE, BUTSRUVIEWAVAIL, BUTSRUVIEWACTIVE};
 };
 

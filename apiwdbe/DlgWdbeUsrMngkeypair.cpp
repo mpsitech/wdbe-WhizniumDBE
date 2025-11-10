@@ -73,11 +73,10 @@ DlgWdbeUsrMngkeypair::ContInf::ContInf(
 			, const string& DetDld
 		) :
 			Block()
+			, numFSge(numFSge)
+			, DetTxtSte(DetTxtSte)
+			, DetDld(DetDld)
 		{
-	this->numFSge = numFSge;
-	this->DetTxtSte = DetTxtSte;
-	this->DetDld = DetDld;
-
 	mask = {NUMFSGE, DETTXTSTE, DETDLD};
 };
 
@@ -140,9 +139,8 @@ DlgWdbeUsrMngkeypair::StatApp::StatApp(
 			const string& shortMenu
 		) :
 			Block()
+			, shortMenu(shortMenu)
 		{
-	this->shortMenu = shortMenu;
-
 	mask = {SHORTMENU};
 };
 
@@ -203,11 +201,10 @@ DlgWdbeUsrMngkeypair::StatShr::StatShr(
 			, const bool DetDldActive
 		) :
 			Block()
+			, DetButDelAvail(DetButDelAvail)
+			, DetButGenAvail(DetButGenAvail)
+			, DetDldActive(DetDldActive)
 		{
-	this->DetButDelAvail = DetButDelAvail;
-	this->DetButGenAvail = DetButGenAvail;
-	this->DetDldActive = DetDldActive;
-
 	mask = {DETBUTDELAVAIL, DETBUTGENAVAIL, DETDLDACTIVE};
 };
 
@@ -275,14 +272,13 @@ DlgWdbeUsrMngkeypair::Tag::Tag(
 			, const string& ButDne
 		) :
 			Block()
+			, Cpt(Cpt)
+			, DetCptSte(DetCptSte)
+			, DetButDel(DetButDel)
+			, DetButGen(DetButGen)
+			, DetDld(DetDld)
+			, ButDne(ButDne)
 		{
-	this->Cpt = Cpt;
-	this->DetCptSte = DetCptSte;
-	this->DetButDel = DetButDel;
-	this->DetButGen = DetButGen;
-	this->DetDld = DetDld;
-	this->ButDne = ButDne;
-
 	mask = {CPT, DETCPTSTE, DETBUTDEL, DETBUTGEN, DETDLD, BUTDNE};
 };
 
@@ -324,11 +320,11 @@ DlgWdbeUsrMngkeypair::DpchAppDo::DpchAppDo(
 			, const set<uint>& mask
 		) :
 			DpchAppWdbe(VecWdbeVDpch::DPCHAPPDLGWDBEUSRMNGKEYPAIRDO, scrJref)
+			, ixVDo(ixVDo)
 		{
 	if (find(mask, ALL)) this->mask = {SCRJREF, IXVDO};
 	else this->mask = mask;
 
-	this->ixVDo = ixVDo;
 };
 
 string DlgWdbeUsrMngkeypair::DpchAppDo::getSrefsMask() {

@@ -2,7 +2,7 @@
 # make file for CrdWdbeErr card job handler, release wdbed_mac
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 7 Feb 2024
+# date created: 5 Nov 2025
 # IP header --- ABOVE
 
 include ../Makefile.inc
@@ -16,7 +16,7 @@ STATLIBFLAGS = rcs
 INCPATH = -I$(BUILDROOT)/dbswdbe -I$(BUILDROOT)/wdbed/VecWdbe -I$(BUILDROOT)/wdbed/IexWdbe -I$(BUILDROOT)/wdbed
 INCPATH += -I${WHIZSDKROOT}/build -I${WHIZSDKROOT}/build/apiwzlm -I/opt/homebrew/include -I/opt/homebrew/opt/curl/include -I/opt/homebrew/opt/libgit2/include -I/opt/homebrew/opt/libmicrohttpd/include -I/opt/homebrew/opt/libxml2/include -I/opt/homebrew/opt/openssl@3/include -I/opt/homebrew/opt/sqlite3/include -I/usr/local/mysql/include
 
-OBJS = CrdWdbeErr.o PnlWdbeErrList.o QryWdbeErrList.o PnlWdbeErrHeadbar.o PnlWdbeErrRec.o PnlWdbeErrAPar.o QryWdbeErrAPar.o PnlWdbeErrDetail.o
+OBJS = CrdWdbeErr.o PnlWdbeErrRec.o PnlWdbeErrDetail.o PnlWdbeErrAPar.o QryWdbeErrAPar.o PnlWdbeErrHeadbar.o PnlWdbeErrList.o QryWdbeErrList.o
 
 LIB = libcrdwdbeerr
 

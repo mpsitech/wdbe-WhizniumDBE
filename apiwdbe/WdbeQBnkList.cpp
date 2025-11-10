@@ -23,12 +23,13 @@ WdbeQBnkList::WdbeQBnkList(
 			, const string stubRefWdbeMUnit
 			, const string srefKVoltstd
 			, const string titSrefKVoltstd
-		) {
-	this->jnum = jnum;
-	this->sref = sref;
-	this->stubRefWdbeMUnit = stubRefWdbeMUnit;
-	this->srefKVoltstd = srefKVoltstd;
-	this->titSrefKVoltstd = titSrefKVoltstd;
+		) :
+			jnum(jnum)
+			, sref(sref)
+			, stubRefWdbeMUnit(stubRefWdbeMUnit)
+			, srefKVoltstd(srefKVoltstd)
+			, titSrefKVoltstd(titSrefKVoltstd)
+		{
 };
 
 bool WdbeQBnkList::readXML(

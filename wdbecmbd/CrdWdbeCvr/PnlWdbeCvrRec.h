@@ -14,11 +14,11 @@
 
 // IP include.cust --- INSERT
 
-#include "PnlWdbeCvrHk1NModule.h"
-#include "PnlWdbeCvrBcv1NCoreversion.h"
+#include "PnlWdbeCvrDetail.h"
 #include "PnlWdbeCvrAIp.h"
 #include "PnlWdbeCvrAPlh.h"
-#include "PnlWdbeCvrDetail.h"
+#include "PnlWdbeCvrBcv1NCoreversion.h"
+#include "PnlWdbeCvrHk1NModule.h"
 
 #define VecVWdbeCvrRecDo PnlWdbeCvrRec::VecVDo
 
@@ -183,11 +183,11 @@ public:
 	ContInf continf;
 	StatShr statshr;
 
-	PnlWdbeCvrHk1NModule* pnlhk1nmodule;
-	PnlWdbeCvrBcv1NCoreversion* pnlbcv1ncoreversion;
+	PnlWdbeCvrDetail* pnldetail;
 	PnlWdbeCvrAIp* pnlaip;
 	PnlWdbeCvrAPlh* pnlaplh;
-	PnlWdbeCvrDetail* pnldetail;
+	PnlWdbeCvrBcv1NCoreversion* pnlbcv1ncoreversion;
+	PnlWdbeCvrHk1NModule* pnlhk1nmodule;
 
 	WdbeMCoreversion recCvr;
 
@@ -221,9 +221,9 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeCvrUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
-	bool handleCallWdbeCvr_cprEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
 	bool handleCallWdbeCvr_bcvEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeCvr_cprEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeCvrUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 
 };
 

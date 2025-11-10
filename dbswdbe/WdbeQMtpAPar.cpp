@@ -26,15 +26,16 @@ WdbeQMtpAPar::WdbeQMtpAPar(
 			, const string x1SrefKKey
 			, const string titX1SrefKKey
 			, const string Val
-		) {
-	this->qref = qref;
-	this->jref = jref;
-	this->jnum = jnum;
-	this->ref = ref;
-	this->mdlNum = mdlNum;
-	this->x1SrefKKey = x1SrefKKey;
-	this->titX1SrefKKey = titX1SrefKKey;
-	this->Val = Val;
+		) :
+			qref(qref)
+			, jref(jref)
+			, jnum(jnum)
+			, ref(ref)
+			, mdlNum(mdlNum)
+			, x1SrefKKey(x1SrefKKey)
+			, titX1SrefKKey(titX1SrefKKey)
+			, Val(Val)
+		{
 };
 
 void WdbeQMtpAPar::writeJSON(

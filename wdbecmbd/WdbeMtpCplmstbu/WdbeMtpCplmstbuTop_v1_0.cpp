@@ -132,7 +132,7 @@ DpchRetWdbe* WdbeMtpCplmstbuTop_v1_0::run(
 				refGBUFCE = 0; dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMModule WHERE supRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'gbufceAclk'", refGBUFCE);
 
 				if (refGBUFCE != 0) {
-					dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::MDL, refGBUFCE, 0, "aclk_sig", false, "sl", 1, "", "", "", "0", false, 0, "");
+					dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::MDL, refGBUFCE, 0, "aclk_sig", false, "sl", 1, "", "", "", "0", 0, "");
 
 					Wdbe::setPrtDfv(dbswdbe, refGBUFCE, "CE", "1");
 					Wdbe::setPrtCpi(dbswdbe, refGBUFCE, "I", "aclk");
@@ -145,7 +145,7 @@ DpchRetWdbe* WdbeMtpCplmstbuTop_v1_0::run(
 				refOscAclk = 0; dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMModule WHERE supRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'oscAclk'", refOscAclk);
 
 				if (refOscAclk != 0) {
-					dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::MDL, ref, 0, "aclk", false, "sl", 1, "", "", "", "0", false, 0, "");
+					dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::MDL, ref, 0, "aclk", false, "sl", 1, "", "", "", "0", 0, "");
 
 					Wdbe::setPrtDfv(dbswdbe, refOscAclk, "hf_out_en_i", "1");
 					Wdbe::setPrtCsi(dbswdbe, refOscAclk, "hf_clk_out_o", "aclk");
@@ -155,7 +155,7 @@ DpchRetWdbe* WdbeMtpCplmstbuTop_v1_0::run(
 				refIB = 0; dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMModule WHERE supRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'ibAclk'", refIB);
 
 				if (refIB != 0) {
-					dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::MDL, refIB, 0, "aclk_sig", false, "sl", 1, "", "", "", "0", false, 0, "");
+					dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::MDL, refIB, 0, "aclk_sig", false, "sl", 1, "", "", "", "0", 0, "");
 
 					Wdbe::setPrtCpi(dbswdbe, refIB, "I", "aclk");
 					Wdbe::setPrtCsi(dbswdbe, refIB, "O", "aclk_sig");
@@ -168,7 +168,7 @@ DpchRetWdbe* WdbeMtpCplmstbuTop_v1_0::run(
 					refCLKBUF = 0; dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMModule WHERE supRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'clkbufAclk'", refCLKBUF);
 
 					if (refCLKBUF != 0) {
-						dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::MDL, refCLKBUF, 0, "aclk_sig", false, "sl", 1, "", "", "", "0", false, 0, "");
+						dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::MDL, refCLKBUF, 0, "aclk_sig", false, "sl", 1, "", "", "", "0", 0, "");
 
 						Wdbe::setPrtCpi(dbswdbe, refCLKBUF, "PAD", "aclk");
 						Wdbe::setPrtCsi(dbswdbe, refCLKBUF, "Y", "aclk_sig");
@@ -178,7 +178,7 @@ DpchRetWdbe* WdbeMtpCplmstbuTop_v1_0::run(
 					refINBUF_DIFF = 0; dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMModule WHERE supRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'inbuf_diffAclk'", refINBUF_DIFF);
 
 					if (refINBUF_DIFF != 0) {
-						dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::MDL, refINBUF_DIFF, 0, "aclk", false, "sl", 1, "", "", "", "0", false, 0, "");
+						dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::MDL, refINBUF_DIFF, 0, "aclk", false, "sl", 1, "", "", "", "0", 0, "");
 
 						Wdbe::setPrtCpi(dbswdbe, refINBUF_DIFF, "PADP", "aclkp");
 						Wdbe::setPrtCpi(dbswdbe, refINBUF_DIFF, "PADN", "aclkn");
@@ -193,7 +193,7 @@ DpchRetWdbe* WdbeMtpCplmstbuTop_v1_0::run(
 					refBUFG = 0; dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMModule WHERE supRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'bufgAclk'", refBUFG);
 
 					if (refBUFG != 0) {
-						dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::MDL, refBUFG, 0, "aclk_sig", false, "sl", 1, "", "", "", "0", false, 0, "");
+						dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::MDL, refBUFG, 0, "aclk_sig", false, "sl", 1, "", "", "", "0", 0, "");
 
 						Wdbe::setPrtCpi(dbswdbe, refBUFG, "I", "aclk");
 						Wdbe::setPrtCsi(dbswdbe, refBUFG, "O", "aclk_sig");
@@ -203,7 +203,7 @@ DpchRetWdbe* WdbeMtpCplmstbuTop_v1_0::run(
 					refIBUFGDS = 0; dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMModule WHERE supRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'ibufgdsAclk'", refIBUFGDS);
 
 					if (refIBUFGDS != 0) {
-						dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::MDL, refIBUFGDS, 0, "aclk", false, "sl", 1, "", "", "", "0", false, 0, "");
+						dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::MDL, refIBUFGDS, 0, "aclk", false, "sl", 1, "", "", "", "0", 0, "");
 
 						Wdbe::setPrtCpi(dbswdbe, refIBUFGDS, "I", "aclkp");
 						Wdbe::setPrtCpi(dbswdbe, refIBUFGDS, "IB", "aclkn");
@@ -235,7 +235,7 @@ DpchRetWdbe* WdbeMtpCplmstbuTop_v1_0::run(
 						refPll = 0; dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMModule WHERE supRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'pll" + Clk + "'", refPll);
 
 						if (refPll != 0) {
-							dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::MDL, refPll, 0, clks[i], false, "sl", 1, "", "", "", "0", false, 0, "");
+							dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::MDL, refPll, 0, clks[i], false, "sl", 1, "", "", "", "0", 0, "");
 
 							Wdbe::setPrtDfv(dbswdbe, refPll, "rstn_i", "1");
 							if (!aclkIntNotExt) Wdbe::setPrtCpi(dbswdbe, refPll, "clki_i", "aclk");
@@ -255,7 +255,7 @@ DpchRetWdbe* WdbeMtpCplmstbuTop_v1_0::run(
 							refINBUF_DIFF = 0; dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMModule WHERE supRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'inbuf_diff" + Clk +  "'", refINBUF_DIFF);
 
 							if (refINBUF_DIFF != 0) {
-								dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::MDL, refINBUF_DIFF, 0, clks[i], false, "sl", 1, "", "", "", "0", false, 0, "");
+								dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::MDL, refINBUF_DIFF, 0, clks[i], false, "sl", 1, "", "", "", "0", 0, "");
 
 								Wdbe::setPrtCpi(dbswdbe, refINBUF_DIFF, "PADP", clks[i] + "p");
 								Wdbe::setPrtCpi(dbswdbe, refINBUF_DIFF, "PADN", clks[i] + "n");
@@ -267,7 +267,7 @@ DpchRetWdbe* WdbeMtpCplmstbuTop_v1_0::run(
 						refCcc = 0; dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMModule WHERE supRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'ccc" + Clk + "'", refCcc);
 
 						if (refCcc != 0) {
-							dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::MDL, refCcc, 0, clks[i], false, "sl", 1, "", "", "", "0", false, 0, "");
+							dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::MDL, refCcc, 0, clks[i], false, "sl", 1, "", "", "", "0", 0, "");
 
 							Wdbe::setPrtDfv(dbswdbe, refCcc, "PLL_POWERDOWN_N_0", "0");
 							if (!aclkIntNotExt) Wdbe::setPrtCpi(dbswdbe, refCcc, "REF_CLK_0", "aclk");
@@ -287,7 +287,7 @@ DpchRetWdbe* WdbeMtpCplmstbuTop_v1_0::run(
 							refIBUFGDS = 0; dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMModule WHERE supRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'ibufgds" + Clk + "'", refIBUFGDS);
 
 							if (refIBUFGDS != 0) {
-								dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::MDL, refIBUFGDS, 0, clks[i], false, "sl", 1, "", "", "", "0", false, 0, "");
+								dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::MDL, refIBUFGDS, 0, clks[i], false, "sl", 1, "", "", "", "0", 0, "");
 
 								Wdbe::setPrtCpi(dbswdbe, refIBUFGDS, "I", clks[i] + "p");
 								Wdbe::setPrtCpi(dbswdbe, refIBUFGDS, "IB", clks[i] + "n");
@@ -299,7 +299,7 @@ DpchRetWdbe* WdbeMtpCplmstbuTop_v1_0::run(
 						refMmcm = 0; dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMModule WHERE supRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'mmcm" + Clk + "'", refMmcm);
 
 						if (refMmcm != 0) {
-							dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::MDL, refMmcm, 0, clks[i], false, "sl", 1, "", "", "", "0", false, 0, "");
+							dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::MDL, refMmcm, 0, clks[i], false, "sl", 1, "", "", "", "0", 0, "");
 
 							Wdbe::setPrtDfv(dbswdbe, refMmcm, "reset", "0");
 							if (!aclkIntNotExt) Wdbe::setPrtCpi(dbswdbe, refMmcm, "clk_in1", "aclk");

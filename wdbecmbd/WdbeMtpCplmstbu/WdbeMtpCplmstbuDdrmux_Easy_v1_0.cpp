@@ -40,24 +40,30 @@ DpchRetWdbe* WdbeMtpCplmstbuDdrmux_Easy_v1_0::run(
 
 	bool phyNotAxi;
 	unsigned int wAPhy, wDPhy;
+
+	string memclk;
 	bool memclkIntNotExt;
-	int fMemclk;
+	double ratioMemclk;
+
 	unsigned int wA, wAConst;
 	string aConst;
-	unsigned int NBeat;
 	unsigned int wD;
 
 	unsigned int NRd;
 	vector<bool> flexNBeatRds;
+	unsigned int NBeatRd;
 	vector<unsigned int> wDRds;
 	vector<string> clkRds;
 	vector<double> ratioClkRds;
+	bool rdgear;
 
 	unsigned int NWr;
 	vector<bool> flexNBeatWrs;
+	unsigned int NBeatWr;
 	vector<unsigned int> wDWrs;
 	vector<string> clkWrs;
 	vector<double> ratioClkWrs;
+	bool wrgear;
 
 	vector<string> ss;
 	string s;
@@ -73,11 +79,14 @@ DpchRetWdbe* WdbeMtpCplmstbuDdrmux_Easy_v1_0::run(
 			if (Wdbe::getMpa(dbswdbe, refWdbeMModule, "wDPhy", s)) wDPhy = atoi(s.c_str());
 		};
 
+		memclk = "memclk";
+		Wdbe::getMpa(dbswdbe, refWdbeMModule, "memclk", memclk);
+
 		memclkIntNotExt = false;
 		if (Wdbe::getMpa(dbswdbe, refWdbeMModule, "memclkIntNotExt", s)) memclkIntNotExt = (s == "true");
 
-		fMemclk = 333000;
-		if (Wdbe::getMpa(dbswdbe, refWdbeMModule, "fMemclk", s)) fMemclk = atoi(s.c_str());
+		ratioMemclk = 1.0;
+		if (Wdbe::getMpa(dbswdbe, refWdbeMModule, "ratioMemclk", s)) ratioMemclk = atof(s.c_str());
 
 		wA = 32;
 		if (Wdbe::getMpa(dbswdbe, refWdbeMModule, "wA", s)) wA = atoi(s.c_str());
@@ -88,11 +97,10 @@ DpchRetWdbe* WdbeMtpCplmstbuDdrmux_Easy_v1_0::run(
 		aConst = "0000000000";
 		Wdbe::getMpa(dbswdbe, refWdbeMModule, "aConst", aConst);
 
-		NBeat = 16;
-		if (Wdbe::getMpa(dbswdbe, refWdbeMModule, "NBeat", s)) NBeat = atoi(s.c_str());
-
 		wD = 128;
 		if (Wdbe::getMpa(dbswdbe, refWdbeMModule, "wD", s)) wD = atoi(s.c_str());
+
+		rdgear = false;
 
 		NRd = 1;
 		if (Wdbe::getMpa(dbswdbe, refWdbeMModule, "NRd", s)) NRd = atoi(s.c_str());
@@ -103,10 +111,19 @@ DpchRetWdbe* WdbeMtpCplmstbuDdrmux_Easy_v1_0::run(
 			if (ss.size() == NRd) for (unsigned int i = 0; i < NRd; i++) flexNBeatRds[i] = (ss[i] == "true");
 		};
 
+		NBeatRd = 16;
+		if (Wdbe::getMpa(dbswdbe, refWdbeMModule, "NBeatRd", s)) NBeatRd = atoi(s.c_str());
+
 		wDRds.resize(NRd, wD);
 		if (Wdbe::getMpa(dbswdbe, refWdbeMModule, "wDRds", s)) {
 			StrMod::stringToVector(s, ss);
-			if (ss.size() == NRd) for (unsigned int i = 0; i < NRd; i++) wDRds[i] = atoi(ss[i].c_str());
+
+			if (ss.size() == NRd) {
+				for (unsigned int i = 0; i < NRd; i++) {
+					wDRds[i] = atoi(ss[i].c_str());
+					if (wDRds[i] != wD) rdgear = true;
+				};
+			};
 		};
 
 		clkRds.resize(NRd, "memclk");
@@ -121,6 +138,10 @@ DpchRetWdbe* WdbeMtpCplmstbuDdrmux_Easy_v1_0::run(
 			if (ss.size() == NRd) for (unsigned int i = 0; i < NRd; i++) ratioClkRds[i] = atof(ss[i].c_str());
 		};
 
+		if (rdgear) for (unsigned int i = 0; i < NRd; i++) flexNBeatRds[i] = false;
+
+		wrgear = false;
+
 		NWr = 1;
 		if (Wdbe::getMpa(dbswdbe, refWdbeMModule, "NWr", s)) NWr = atoi(s.c_str());
 
@@ -130,10 +151,19 @@ DpchRetWdbe* WdbeMtpCplmstbuDdrmux_Easy_v1_0::run(
 			if (ss.size() == NWr) for (unsigned int i = 0; i < NWr; i++) flexNBeatWrs[i] = (ss[i] == "true");
 		};
 
+		NBeatWr = 16;
+		if (Wdbe::getMpa(dbswdbe, refWdbeMModule, "NBeatWr", s)) NBeatWr = atoi(s.c_str());
+
 		wDWrs.resize(NWr, wD);
 		if (Wdbe::getMpa(dbswdbe, refWdbeMModule, "wDWrs", s)) {
 			StrMod::stringToVector(s, ss);
-			if (ss.size() == NWr) for (unsigned int i = 0; i < NWr; i++) wDWrs[i] = atoi(ss[i].c_str());
+
+			if (ss.size() == NWr) {
+				for (unsigned int i = 0; i < NWr; i++) {
+					wDWrs[i] = atoi(ss[i].c_str());
+					if (wDWrs[i] != wD) wrgear = true;
+				};
+			};
 		};
 
 		clkWrs.resize(NWr, "memclk");
@@ -148,6 +178,8 @@ DpchRetWdbe* WdbeMtpCplmstbuDdrmux_Easy_v1_0::run(
 			if (ss.size() == NWr) for (unsigned int i = 0; i < NWr; i++) ratioClkWrs[i] = atof(ss[i].c_str());
 		};
 
+		if (wrgear) for (unsigned int i = 0; i < NWr; i++) flexNBeatWrs[i] = false;
+
 		///
 		ubigint ref, refC;
 
@@ -159,8 +191,14 @@ DpchRetWdbe* WdbeMtpCplmstbuDdrmux_Easy_v1_0::run(
 		unsigned int w;
 
 		mdlNum = Wdbe::getNextPrtMdlNum(dbswdbe, refWdbeMModule);
-		dbswdbe->tblwdbemport->insertNewRec(NULL, 0, refWdbeMModule, mdlNum++, VecWdbeVMPortMdlCat::RESET, "resetMemclk", (memclkIntNotExt) ? VecWdbeVMPortDir::OUT : VecWdbeVMPortDir::IN, "sl", 1, "", "", "", "", "", "");
-		dbswdbe->tblwdbemport->insertNewRec(NULL, 0, refWdbeMModule, mdlNum++, VecWdbeVMPortMdlCat::CLK, "memclk", (memclkIntNotExt) ? VecWdbeVMPortDir::OUT : VecWdbeVMPortDir::IN, "sl", 1, "", "", "", "", "", "");
+
+		if (memclk == "mclk") {
+			dbswdbe->executeQuery("DELETE FROM TblWdbeMPort WHERE mdlRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'resetMemclk'");
+			dbswdbe->executeQuery("DELETE FROM TblWdbeMPort WHERE mdlRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'memclk'");
+		} else {
+			dbswdbe->executeQuery("UPDATE TblWdbeMPort SET sref = 'reset" + StrMod::cap(memclk) + "' WHERE mdlRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'resetMemclk'");
+			dbswdbe->executeQuery("UPDATE TblWdbeMPort SET sref = '" + memclk + "' WHERE mdlRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'memclk'");
+		};
 
 		if (dbswdbe->loadRefBySQL("SELECT refWdbeCPort FROM TblWdbeMPort WHERE mdlRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'ddrAXI_araddr'", refC)) {
 			if (!phyNotAxi) Wdbe::setPrtWdt(dbswdbe, refWdbeMModule, "ddrAXI_araddr", wA);
@@ -192,9 +230,7 @@ DpchRetWdbe* WdbeMtpCplmstbuDdrmux_Easy_v1_0::run(
 			dbswdbe->tblwdbemport->insertNewRec(NULL, refC, refWdbeMModule, mdlNum++, VecWdbeVMPortMdlCat::RTESUP, "ack" + StrMod::cap(chsref), VecWdbeVMPortDir::OUT, "sl", 1, "", "", "", "", "", "");
 
 			refC = dbswdbe->tblwdbecport->getNewRef();
-			w = wA-wAConst-log2(wDRds[i]/8);
-			if (!flexNBeatRds[i]) w -= log2(NBeat);
-			dbswdbe->tblwdbemport->insertNewRec(NULL, refC, refWdbeMModule, mdlNum++, VecWdbeVMPortMdlCat::RTESUP, chsref + "AXI_araddr", VecWdbeVMPortDir::IN, "slvdn", w, "", "", "", "", "", "");
+			dbswdbe->tblwdbemport->insertNewRec(NULL, refC, refWdbeMModule, mdlNum++, VecWdbeVMPortMdlCat::RTESUP, chsref + "AXI_araddr", VecWdbeVMPortDir::IN, "slvdn", wA-wAConst-log2(NBeatRd)-log2(wD/8), "", "", "", "", "", "");
 			if (flexNBeatRds[i]) dbswdbe->tblwdbemport->insertNewRec(NULL, refC, refWdbeMModule, mdlNum++, VecWdbeVMPortMdlCat::RTESUP, chsref + "AXI_arlen", VecWdbeVMPortDir::IN, "slvdn", 8, "", "", "", "", "", "");
 			dbswdbe->tblwdbemport->insertNewRec(NULL, refC, refWdbeMModule, mdlNum++, VecWdbeVMPortMdlCat::RTESUP, chsref + "AXI_arready", VecWdbeVMPortDir::OUT, "sl", 1, "", "", "", "", "", "");
 			dbswdbe->tblwdbemport->insertNewRec(NULL, refC, refWdbeMModule, mdlNum++, VecWdbeVMPortMdlCat::RTESUP, chsref + "AXI_arvalid", VecWdbeVMPortDir::IN, "sl", 1, "", "", "", "", "", "");
@@ -213,9 +249,7 @@ DpchRetWdbe* WdbeMtpCplmstbuDdrmux_Easy_v1_0::run(
 			dbswdbe->tblwdbemport->insertNewRec(NULL, refC, refWdbeMModule, mdlNum++, VecWdbeVMPortMdlCat::RTESUP, "ack" + StrMod::cap(chsref), VecWdbeVMPortDir::OUT, "sl", 1, "", "", "", "", "", "");
 
 			refC = dbswdbe->tblwdbecport->getNewRef();
-			w = wA-wAConst-log2(wDWrs[i]/8);
-			if (!flexNBeatWrs[i]) w -= log2(NBeat);
-			dbswdbe->tblwdbemport->insertNewRec(NULL, refC, refWdbeMModule, mdlNum++, VecWdbeVMPortMdlCat::RTESUP, chsref + "AXI_awaddr", VecWdbeVMPortDir::IN, "slvdn", w, "", "", "", "", "", "");
+			dbswdbe->tblwdbemport->insertNewRec(NULL, refC, refWdbeMModule, mdlNum++, VecWdbeVMPortMdlCat::RTESUP, chsref + "AXI_awaddr", VecWdbeVMPortDir::IN, "slvdn", wA-wAConst-log2(NBeatWr)-log2(wD/8), "", "", "", "", "", "");
 			if (flexNBeatWrs[i]) dbswdbe->tblwdbemport->insertNewRec(NULL, refC, refWdbeMModule, mdlNum++, VecWdbeVMPortMdlCat::RTESUP, chsref + "AXI_awlen", VecWdbeVMPortDir::IN, "slvdn", 8, "", "", "", "", "", "");
 			dbswdbe->tblwdbemport->insertNewRec(NULL, refC, refWdbeMModule, mdlNum++, VecWdbeVMPortMdlCat::RTESUP, chsref + "AXI_awready", VecWdbeVMPortDir::OUT, "sl", 1, "", "", "", "", "", "");
 			dbswdbe->tblwdbemport->insertNewRec(NULL, refC, refWdbeMModule, mdlNum++, VecWdbeVMPortMdlCat::RTESUP, chsref + "AXI_awvalid", VecWdbeVMPortDir::IN, "sl", 1, "", "", "", "", "", "");
@@ -223,9 +257,6 @@ DpchRetWdbe* WdbeMtpCplmstbuDdrmux_Easy_v1_0::run(
 			dbswdbe->tblwdbemport->insertNewRec(NULL, refC, refWdbeMModule, mdlNum++, VecWdbeVMPortMdlCat::RTESUP, chsref + "AXI_wlast", VecWdbeVMPortDir::IN, "sl", 1, "", "", "", "", "", "");
 			dbswdbe->tblwdbemport->insertNewRec(NULL, refC, refWdbeMModule, mdlNum++, VecWdbeVMPortMdlCat::RTESUP, chsref + "AXI_wready", VecWdbeVMPortDir::OUT, "sl", 1, "", "", "", "", "", "");
 			dbswdbe->tblwdbemport->insertNewRec(NULL, refC, refWdbeMModule, mdlNum++, VecWdbeVMPortMdlCat::RTESUP, chsref + "AXI_wvalid", VecWdbeVMPortDir::IN, "sl", 1, "", "", "", "", "", "");
-			dbswdbe->tblwdbemport->insertNewRec(NULL, refC, refWdbeMModule, mdlNum++, VecWdbeVMPortMdlCat::RTESUP, chsref + "AXI_bready", VecWdbeVMPortDir::IN, "sl", 1, "", "", "", "", "", "");
-			dbswdbe->tblwdbemport->insertNewRec(NULL, refC, refWdbeMModule, mdlNum++, VecWdbeVMPortMdlCat::RTESUP, chsref + "AXI_bresp", VecWdbeVMPortDir::OUT, "slvdn", 2, "", "", "", "", "", "");
-			dbswdbe->tblwdbemport->insertNewRec(NULL, refC, refWdbeMModule, mdlNum++, VecWdbeVMPortMdlCat::RTESUP, chsref + "AXI_bvalid", VecWdbeVMPortDir::OUT, "sl", 1, "", "", "", "", "", "");
 		};
 
 		if (dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMCommand WHERE refIxVTbl = " + to_string(VecWdbeVMCommandRefTbl::CTR) + " AND refUref = " + to_string(mdl->refWdbeMController) + " AND sref = 'getStats'", ref)) {

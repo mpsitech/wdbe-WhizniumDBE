@@ -25,14 +25,15 @@ WdbeQMchAMakefile::WdbeQMchAMakefile(
 			, const string x1SrefKTag
 			, const string titX1SrefKTag
 			, const string Val
-		) {
-	this->qref = qref;
-	this->jref = jref;
-	this->jnum = jnum;
-	this->ref = ref;
-	this->x1SrefKTag = x1SrefKTag;
-	this->titX1SrefKTag = titX1SrefKTag;
-	this->Val = Val;
+		) :
+			qref(qref)
+			, jref(jref)
+			, jnum(jnum)
+			, ref(ref)
+			, x1SrefKTag(x1SrefKTag)
+			, titX1SrefKTag(titX1SrefKTag)
+			, Val(Val)
+		{
 };
 
 void WdbeQMchAMakefile::writeJSON(

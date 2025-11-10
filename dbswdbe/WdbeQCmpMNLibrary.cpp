@@ -24,13 +24,14 @@ WdbeQCmpMNLibrary::WdbeQCmpMNLibrary(
 			, const ubigint mref
 			, const string stubMref
 			, const ubigint ref
-		) {
-	this->qref = qref;
-	this->jref = jref;
-	this->jnum = jnum;
-	this->mref = mref;
-	this->stubMref = stubMref;
-	this->ref = ref;
+		) :
+			qref(qref)
+			, jref(jref)
+			, jnum(jnum)
+			, mref(mref)
+			, stubMref(stubMref)
+			, ref(ref)
+		{
 };
 
 void WdbeQCmpMNLibrary::writeJSON(

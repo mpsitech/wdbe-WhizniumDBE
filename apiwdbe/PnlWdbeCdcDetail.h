@@ -136,45 +136,45 @@ namespace PnlWdbeCdcDetail {
 	class StatShr : public Sbecore::Block {
 
 	public:
-		static const Sbecore::uint TXFFCKVALID = 1;
-		static const Sbecore::uint TXFSCKVALID = 2;
-		static const Sbecore::uint TXFFARVALID = 3;
-		static const Sbecore::uint TXFSARVALID = 4;
-		static const Sbecore::uint BUTSAVEAVAIL = 5;
-		static const Sbecore::uint BUTSAVEACTIVE = 6;
-		static const Sbecore::uint TXTFCKACTIVE = 7;
-		static const Sbecore::uint BUTFCKVIEWAVAIL = 8;
-		static const Sbecore::uint TXTSCKACTIVE = 9;
-		static const Sbecore::uint BUTSCKVIEWAVAIL = 10;
-		static const Sbecore::uint TXTMDLACTIVE = 11;
-		static const Sbecore::uint BUTMDLVIEWAVAIL = 12;
-		static const Sbecore::uint BUTMDLVIEWACTIVE = 13;
-		static const Sbecore::uint TXTFARACTIVE = 14;
-		static const Sbecore::uint BUTFARVIEWAVAIL = 15;
-		static const Sbecore::uint TXTSARACTIVE = 16;
+		static const Sbecore::uint BUTSAVEAVAIL = 1;
+		static const Sbecore::uint BUTSAVEACTIVE = 2;
+		static const Sbecore::uint TXTFCKACTIVE = 3;
+		static const Sbecore::uint TXFFCKVALID = 4;
+		static const Sbecore::uint BUTFCKVIEWAVAIL = 5;
+		static const Sbecore::uint TXTSCKACTIVE = 6;
+		static const Sbecore::uint TXFSCKVALID = 7;
+		static const Sbecore::uint BUTSCKVIEWAVAIL = 8;
+		static const Sbecore::uint TXTMDLACTIVE = 9;
+		static const Sbecore::uint BUTMDLVIEWAVAIL = 10;
+		static const Sbecore::uint BUTMDLVIEWACTIVE = 11;
+		static const Sbecore::uint TXTFARACTIVE = 12;
+		static const Sbecore::uint TXFFARVALID = 13;
+		static const Sbecore::uint BUTFARVIEWAVAIL = 14;
+		static const Sbecore::uint TXTSARACTIVE = 15;
+		static const Sbecore::uint TXFSARVALID = 16;
 		static const Sbecore::uint BUTSARVIEWAVAIL = 17;
 		static const Sbecore::uint TXFRATACTIVE = 18;
 
 	public:
-		StatShr(const bool TxfFckValid = false, const bool TxfSckValid = false, const bool TxfFarValid = false, const bool TxfSarValid = false, const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxtFckActive = true, const bool ButFckViewAvail = true, const bool TxtSckActive = true, const bool ButSckViewAvail = true, const bool TxtMdlActive = true, const bool ButMdlViewAvail = true, const bool ButMdlViewActive = true, const bool TxtFarActive = true, const bool ButFarViewAvail = true, const bool TxtSarActive = true, const bool ButSarViewAvail = true, const bool TxfRatActive = true);
+		StatShr(const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxtFckActive = true, const bool TxfFckValid = false, const bool ButFckViewAvail = true, const bool TxtSckActive = true, const bool TxfSckValid = false, const bool ButSckViewAvail = true, const bool TxtMdlActive = true, const bool ButMdlViewAvail = true, const bool ButMdlViewActive = true, const bool TxtFarActive = true, const bool TxfFarValid = false, const bool ButFarViewAvail = true, const bool TxtSarActive = true, const bool TxfSarValid = false, const bool ButSarViewAvail = true, const bool TxfRatActive = true);
 
 	public:
-		bool TxfFckValid;
-		bool TxfSckValid;
-		bool TxfFarValid;
-		bool TxfSarValid;
 		bool ButSaveAvail;
 		bool ButSaveActive;
 		bool TxtFckActive;
+		bool TxfFckValid;
 		bool ButFckViewAvail;
 		bool TxtSckActive;
+		bool TxfSckValid;
 		bool ButSckViewAvail;
 		bool TxtMdlActive;
 		bool ButMdlViewAvail;
 		bool ButMdlViewActive;
 		bool TxtFarActive;
+		bool TxfFarValid;
 		bool ButFarViewAvail;
 		bool TxtSarActive;
+		bool TxfSarValid;
 		bool ButSarViewAvail;
 		bool TxfRatActive;
 

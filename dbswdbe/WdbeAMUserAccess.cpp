@@ -22,13 +22,13 @@ WdbeAMUserAccess::WdbeAMUserAccess(
 			, const uint x1IxWdbeVFeatgroup
 			, const string x2FeaSrefUix
 			, const uint ixWdbeWAccess
-		) {
-
-	this->ref = ref;
-	this->refWdbeMUser = refWdbeMUser;
-	this->x1IxWdbeVFeatgroup = x1IxWdbeVFeatgroup;
-	this->x2FeaSrefUix = x2FeaSrefUix;
-	this->ixWdbeWAccess = ixWdbeWAccess;
+		) :
+			ref(ref)
+			, refWdbeMUser(refWdbeMUser)
+			, x1IxWdbeVFeatgroup(x1IxWdbeVFeatgroup)
+			, x2FeaSrefUix(x2FeaSrefUix)
+			, ixWdbeWAccess(ixWdbeWAccess)
+		{
 };
 
 bool WdbeAMUserAccess::operator==(

@@ -22,8 +22,8 @@ uint QryWdbeIntList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "unt") return UNT;
 	if (s == "srf") return SRF;
+	if (s == "unt") return UNT;
 
 	return(0);
 };
@@ -31,8 +31,8 @@ uint QryWdbeIntList::VecVOrd::getIx(
 string QryWdbeIntList::VecVOrd::getSref(
 			const uint ix
 		) {
-	if (ix == UNT) return("unt");
 	if (ix == SRF) return("srf");
+	if (ix == UNT) return("unt");
 
 	return("");
 };
@@ -48,12 +48,11 @@ QryWdbeIntList::StatApp::StatApp(
 			, const uint ndisp
 		) :
 			Block()
+			, firstcol(firstcol)
+			, jnumFirstdisp(jnumFirstdisp)
+			, ncol(ncol)
+			, ndisp(ndisp)
 		{
-	this->firstcol = firstcol;
-	this->jnumFirstdisp = jnumFirstdisp;
-	this->ncol = ncol;
-	this->ndisp = ndisp;
-
 	mask = {FIRSTCOL, JNUMFIRSTDISP, NCOL, NDISP};
 };
 
@@ -120,11 +119,10 @@ QryWdbeIntList::StatShr::StatShr(
 			, const uint nload
 		) :
 			Block()
+			, ntot(ntot)
+			, jnumFirstload(jnumFirstload)
+			, nload(nload)
 		{
-	this->ntot = ntot;
-	this->jnumFirstload = jnumFirstload;
-	this->nload = nload;
-
 	mask = {NTOT, JNUMFIRSTLOAD, NLOAD};
 };
 
@@ -189,11 +187,10 @@ QryWdbeIntList::StgIac::StgIac(
 			, const uint nload
 		) :
 			Block()
+			, jnum(jnum)
+			, jnumFirstload(jnumFirstload)
+			, nload(nload)
 		{
-	this->jnum = jnum;
-	this->jnumFirstload = jnumFirstload;
-	this->nload = nload;
-
 	mask = {JNUM, JNUMFIRSTLOAD, NLOAD};
 };
 

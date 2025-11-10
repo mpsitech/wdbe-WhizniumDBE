@@ -21,10 +21,11 @@ WdbeQFstList::WdbeQFstList(
 			const uint jnum
 			, const string sref
 			, const string stubFsmRefWdbeMFsm
-		) {
-	this->jnum = jnum;
-	this->sref = sref;
-	this->stubFsmRefWdbeMFsm = stubFsmRefWdbeMFsm;
+		) :
+			jnum(jnum)
+			, sref(sref)
+			, stubFsmRefWdbeMFsm(stubFsmRefWdbeMFsm)
+		{
 };
 
 bool WdbeQFstList::readXML(

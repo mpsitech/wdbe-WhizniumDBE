@@ -25,4 +25,15 @@ using namespace Xmlio;
  namespace WdbeMtpPlhfpga
  ******************************************************************************/
 
-// IP cust --- INSERT
+// IP cust --- IBEGIN
+unsigned int WdbeMtpPlhfpga::extendToWD(
+			const unsigned int size
+			, const unsigned int wD
+			, unsigned int& resid
+		) {
+	resid = size % (wD/8);
+
+	if (resid == 0) return size;
+	else return(size-resid + wD/8);
+};
+// IP cust --- IEND

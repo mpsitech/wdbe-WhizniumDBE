@@ -94,7 +94,6 @@ public:
 	virtual bool loadRecByFsm(Sbecore::ubigint refWdbeMFsm, WdbeMProcess** rec);
 	virtual Sbecore::ubigint loadRefsByMdl(Sbecore::ubigint refWdbeMModule, const bool append, std::vector<Sbecore::ubigint>& refs);
 	virtual Sbecore::ubigint loadRstByMdl(Sbecore::ubigint refWdbeMModule, const bool append, ListWdbeMProcess& rst);
-	virtual bool loadSrfByRef(Sbecore::ubigint ref, std::string& sref);
 	Sbecore::ubigint loadRstByRefs(std::vector<Sbecore::ubigint>& refs, const bool append, ListWdbeMProcess& rst);
 };
 
@@ -130,7 +129,6 @@ public:
 	bool loadRecByFsm(Sbecore::ubigint refWdbeMFsm, WdbeMProcess** rec);
 	Sbecore::ubigint loadRefsByMdl(Sbecore::ubigint refWdbeMModule, const bool append, std::vector<Sbecore::ubigint>& refs);
 	Sbecore::ubigint loadRstByMdl(Sbecore::ubigint refWdbeMModule, const bool append, ListWdbeMProcess& rst);
-	bool loadSrfByRef(Sbecore::ubigint ref, std::string& sref);
 };
 #endif
 
@@ -167,7 +165,6 @@ public:
 	bool loadRecByFsm(Sbecore::ubigint refWdbeMFsm, WdbeMProcess** rec);
 	Sbecore::ubigint loadRefsByMdl(Sbecore::ubigint refWdbeMModule, const bool append, std::vector<Sbecore::ubigint>& refs);
 	Sbecore::ubigint loadRstByMdl(Sbecore::ubigint refWdbeMModule, const bool append, ListWdbeMProcess& rst);
-	bool loadSrfByRef(Sbecore::ubigint ref, std::string& sref);
 };
 #endif
 

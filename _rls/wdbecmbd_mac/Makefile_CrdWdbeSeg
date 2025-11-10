@@ -2,7 +2,7 @@
 # make file for CrdWdbeSeg card job handler, release wdbecmbd_mac
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 7 Feb 2024
+# date created: 5 Nov 2025
 # IP header --- ABOVE
 
 include ../Makefile.inc
@@ -16,7 +16,7 @@ STATLIBFLAGS = rcs
 INCPATH = -I$(BUILDROOT)/dbswdbe -I$(BUILDROOT)/wdbecmbd/VecWdbe -I$(BUILDROOT)/wdbecmbd/IexWdbe -I$(BUILDROOT)/wdbecmbd
 INCPATH += -I${WHIZSDKROOT}/build -I${WHIZSDKROOT}/build/apiwzlm -I/opt/homebrew/include -I/opt/homebrew/opt/curl/include -I/opt/homebrew/opt/libgit2/include -I/opt/homebrew/opt/libmicrohttpd/include -I/opt/homebrew/opt/libxml2/include -I/opt/homebrew/opt/openssl@3/include -I/opt/homebrew/opt/sqlite3/include -I/usr/local/mysql/include
 
-OBJS = CrdWdbeSeg.o PnlWdbeSegList.o QryWdbeSegList.o PnlWdbeSegHeadbar.o PnlWdbeSegRec.o PnlWdbeSegSup1NSegment.o QryWdbeSegSup1NSegment.o PnlWdbeSegDetail.o
+OBJS = CrdWdbeSeg.o PnlWdbeSegRec.o PnlWdbeSegDetail.o PnlWdbeSegSup1NSegment.o QryWdbeSegSup1NSegment.o PnlWdbeSegHeadbar.o PnlWdbeSegList.o QryWdbeSegList.o
 
 LIB = libcrdwdbeseg
 

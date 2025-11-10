@@ -24,13 +24,14 @@ WdbeQCdcList::WdbeQCdcList(
 			, const ubigint ref
 			, const ubigint refWdbeMModule
 			, const string stubRefWdbeMModule
-		) {
-	this->qref = qref;
-	this->jref = jref;
-	this->jnum = jnum;
-	this->ref = ref;
-	this->refWdbeMModule = refWdbeMModule;
-	this->stubRefWdbeMModule = stubRefWdbeMModule;
+		) :
+			qref(qref)
+			, jref(jref)
+			, jnum(jnum)
+			, ref(ref)
+			, refWdbeMModule(refWdbeMModule)
+			, stubRefWdbeMModule(stubRefWdbeMModule)
+		{
 };
 
 void WdbeQCdcList::writeJSON(

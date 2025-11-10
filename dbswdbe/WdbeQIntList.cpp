@@ -25,14 +25,15 @@ WdbeQIntList::WdbeQIntList(
 			, const string sref
 			, const ubigint refWdbeMUnit
 			, const string stubRefWdbeMUnit
-		) {
-	this->qref = qref;
-	this->jref = jref;
-	this->jnum = jnum;
-	this->ref = ref;
-	this->sref = sref;
-	this->refWdbeMUnit = refWdbeMUnit;
-	this->stubRefWdbeMUnit = stubRefWdbeMUnit;
+		) :
+			qref(qref)
+			, jref(jref)
+			, jnum(jnum)
+			, ref(ref)
+			, sref(sref)
+			, refWdbeMUnit(refWdbeMUnit)
+			, stubRefWdbeMUnit(stubRefWdbeMUnit)
+		{
 };
 
 void WdbeQIntList::writeJSON(

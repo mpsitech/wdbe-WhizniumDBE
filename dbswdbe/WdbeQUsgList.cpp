@@ -27,16 +27,17 @@ WdbeQUsgList::WdbeQUsgList(
 			, const ubigint own
 			, const string stubOwn
 			, const string sref
-		) {
-	this->qref = qref;
-	this->jref = jref;
-	this->jnum = jnum;
-	this->ref = ref;
-	this->grp = grp;
-	this->stubGrp = stubGrp;
-	this->own = own;
-	this->stubOwn = stubOwn;
-	this->sref = sref;
+		) :
+			qref(qref)
+			, jref(jref)
+			, jnum(jnum)
+			, ref(ref)
+			, grp(grp)
+			, stubGrp(stubGrp)
+			, own(own)
+			, stubOwn(stubOwn)
+			, sref(sref)
+		{
 };
 
 void WdbeQUsgList::writeJSON(

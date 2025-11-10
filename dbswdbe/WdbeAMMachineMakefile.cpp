@@ -21,12 +21,12 @@ WdbeAMMachineMakefile::WdbeAMMachineMakefile(
 			, const ubigint refWdbeMMachine
 			, const string x1SrefKTag
 			, const string Val
-		) {
-
-	this->ref = ref;
-	this->refWdbeMMachine = refWdbeMMachine;
-	this->x1SrefKTag = x1SrefKTag;
-	this->Val = Val;
+		) :
+			ref(ref)
+			, refWdbeMMachine(refWdbeMMachine)
+			, x1SrefKTag(x1SrefKTag)
+			, Val(Val)
+		{
 };
 
 bool WdbeAMMachineMakefile::operator==(

@@ -17,7 +17,10 @@
 namespace WdbeMtpWrfpgaGptrack_Easy_v1_0 {
 
 	DpchRetWdbe* run(XchgWdbe* xchg, DbsWdbe* dbswdbe, DpchInvWdbeMtpWrfpga* dpchinv);
-	// IP cust --- INSERT
+	// IP cust --- IBEGIN
+
+	void writeMdlVhd(DbsWdbe* dbswdbe, std::fstream& outfile, WdbeMModule* mdl);
+	// IP cust --- IEND
 };
 
 #endif

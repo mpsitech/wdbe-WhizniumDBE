@@ -1493,7 +1493,7 @@ namespace IexWdbeDcd {
 	class ImeitemIMVariable : public WdbeMVariable {
 
 	public:
-		ImeitemIMVariable(const Sbecore::ubigint irefRefWdbeCVariable = 0, const std::string& sref = "", const bool Const = false, const bool Falling = false, const std::string& srefWdbeKHdltype = "", const Sbecore::usmallint Width = 0, const std::string& Minmax = "", const std::string& Onval = "", const std::string& Offval = "", const bool Defon = false, const std::string& Comment = "");
+		ImeitemIMVariable(const Sbecore::ubigint irefRefWdbeCVariable = 0, const std::string& sref = "", const bool Const = false, const bool Falling = false, const std::string& srefWdbeKHdltype = "", const Sbecore::usmallint Width = 0, const std::string& Minmax = "", const std::string& Onval = "", const std::string& Offval = "", const std::string& Comment = "");
 		ImeitemIMVariable(DbsWdbe* dbswdbe, const Sbecore::ubigint ref);
 
 	public:
@@ -1531,8 +1531,7 @@ namespace IexWdbeDcd {
 			static const Sbecore::uint MINMAX = 64;
 			static const Sbecore::uint ONVAL = 128;
 			static const Sbecore::uint OFFVAL = 256;
-			static const Sbecore::uint DEFON = 512;
-			static const Sbecore::uint COMMENT = 1024;
+			static const Sbecore::uint COMMENT = 512;
 
 			static Sbecore::uint getIx(const std::string& srefs);
 			static void getIcs(const Sbecore::uint ix, std::set<Sbecore::uint>& ics);
@@ -1630,7 +1629,7 @@ namespace IexWdbeDcd {
 	class ImeitemIMSignal : public WdbeMSignal {
 
 	public:
-		ImeitemIMSignal(const Sbecore::uint ixVBasetype = 0, const Sbecore::ubigint irefRefWdbeCSignal = 0, const Sbecore::uint mgeIxVTbl = 0, const std::string& srefMgeUref = "", const std::string& sref = "", const bool Const = false, const std::string& srefWdbeKHdltype = "", const Sbecore::usmallint Width = 0, const std::string& Minmax = "", const std::string& Comb = "", const std::string& Onval = "", const std::string& Offval = "", const bool Defon = false, const std::string& srefDrvRefWdbeMPort = "", const std::string& Comment = "");
+		ImeitemIMSignal(const Sbecore::uint ixVBasetype = 0, const Sbecore::ubigint irefRefWdbeCSignal = 0, const Sbecore::uint mgeIxVTbl = 0, const std::string& srefMgeUref = "", const std::string& sref = "", const bool Const = false, const std::string& srefWdbeKHdltype = "", const Sbecore::usmallint Width = 0, const std::string& Minmax = "", const std::string& Comb = "", const std::string& Onval = "", const std::string& Offval = "", const std::string& srefDrvRefWdbeMPort = "", const std::string& Comment = "");
 		ImeitemIMSignal(DbsWdbe* dbswdbe, const Sbecore::ubigint ref);
 
 	public:
@@ -1675,9 +1674,8 @@ namespace IexWdbeDcd {
 			static const Sbecore::uint COMB = 512;
 			static const Sbecore::uint ONVAL = 1024;
 			static const Sbecore::uint OFFVAL = 2048;
-			static const Sbecore::uint DEFON = 4096;
-			static const Sbecore::uint SREFDRVREFWDBEMPORT = 8192;
-			static const Sbecore::uint COMMENT = 16384;
+			static const Sbecore::uint SREFDRVREFWDBEMPORT = 4096;
+			static const Sbecore::uint COMMENT = 8192;
 
 			static Sbecore::uint getIx(const std::string& srefs);
 			static void getIcs(const Sbecore::uint ix, std::set<Sbecore::uint>& ics);

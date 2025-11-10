@@ -41,6 +41,7 @@ namespace PnlWdbeNavAdmin {
 		static const Sbecore::uint BUTPRSNEWCRDCLICK = 6;
 		static const Sbecore::uint BUTFILVIEWCLICK = 7;
 		static const Sbecore::uint BUTFILNEWCRDCLICK = 8;
+		static const Sbecore::uint BUTPRFNEWCRDCLICK = 9;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);
@@ -123,9 +124,10 @@ namespace PnlWdbeNavAdmin {
 		static const Sbecore::uint BUTPRSVIEWACTIVE = 6;
 		static const Sbecore::uint LSTFILAVAIL = 7;
 		static const Sbecore::uint BUTFILVIEWACTIVE = 8;
+		static const Sbecore::uint BUTPRFNEWCRDAVAIL = 9;
 
 	public:
-		StatShr(const bool LstUsgAvail = true, const bool ButUsgViewActive = true, const bool LstUsrAvail = true, const bool ButUsrViewActive = true, const bool LstPrsAvail = true, const bool ButPrsViewActive = true, const bool LstFilAvail = true, const bool ButFilViewActive = true);
+		StatShr(const bool LstUsgAvail = true, const bool ButUsgViewActive = true, const bool LstUsrAvail = true, const bool ButUsrViewActive = true, const bool LstPrsAvail = true, const bool ButPrsViewActive = true, const bool LstFilAvail = true, const bool ButFilViewActive = true, const bool ButPrfNewcrdAvail = true);
 
 	public:
 		bool LstUsgAvail;
@@ -136,6 +138,7 @@ namespace PnlWdbeNavAdmin {
 		bool ButPrsViewActive;
 		bool LstFilAvail;
 		bool ButFilViewActive;
+		bool ButPrfNewcrdAvail;
 
 	public:
 		bool readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
@@ -154,9 +157,10 @@ namespace PnlWdbeNavAdmin {
 		static const Sbecore::uint CPTUSR = 3;
 		static const Sbecore::uint CPTPRS = 4;
 		static const Sbecore::uint CPTFIL = 5;
+		static const Sbecore::uint CPTPRF = 6;
 
 	public:
-		Tag(const std::string& Cpt = "", const std::string& CptUsg = "", const std::string& CptUsr = "", const std::string& CptPrs = "", const std::string& CptFil = "");
+		Tag(const std::string& Cpt = "", const std::string& CptUsg = "", const std::string& CptUsr = "", const std::string& CptPrs = "", const std::string& CptFil = "", const std::string& CptPrf = "");
 
 	public:
 		std::string Cpt;
@@ -164,6 +168,7 @@ namespace PnlWdbeNavAdmin {
 		std::string CptUsr;
 		std::string CptPrs;
 		std::string CptFil;
+		std::string CptPrf;
 
 	public:
 		bool readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);

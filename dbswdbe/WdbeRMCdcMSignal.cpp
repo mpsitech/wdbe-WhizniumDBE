@@ -23,12 +23,12 @@ WdbeRMCdcMSignal::WdbeRMCdcMSignal(
 			, const ubigint refWdbeMCdc
 			, const ubigint refWdbeMSignal
 			, const uint ixVDir
-		) {
-
-	this->ref = ref;
-	this->refWdbeMCdc = refWdbeMCdc;
-	this->refWdbeMSignal = refWdbeMSignal;
-	this->ixVDir = ixVDir;
+		) :
+			ref(ref)
+			, refWdbeMCdc(refWdbeMCdc)
+			, refWdbeMSignal(refWdbeMSignal)
+			, ixVDir(ixVDir)
+		{
 };
 
 bool WdbeRMCdcMSignal::operator==(

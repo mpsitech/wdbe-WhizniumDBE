@@ -708,7 +708,7 @@
 			MenCrd: [
 				{
 					pnlsref: "pnladmin",
-					mits: ["MitCrdUsg", "MitCrdUsr", "MitCrdPrs", "MitCrdFil"]
+					mits: ["MitCrdUsg", "MitCrdUsr", "MitCrdPrs", "MitCrdFil", "MitCrdPrf"]
 				},
 				{
 					pnlsref: "pnlglobal",
@@ -736,7 +736,7 @@
 				},
 				{
 					pnlsref: "pnlauxfct",
-					mits: ["MitCrdUtl"]
+					mits: ["MitCrdIdf", "MitCrdUtl"]
 				}
 			],
 			/*
@@ -810,6 +810,13 @@
 				{
 					sref: "MenCrd",
 					mits: ["MitCrdNew", "MitCrdDld"]
+				}
+			],
+
+			MbarPrf: [
+				{
+					sref: "MenCrd",
+					mits: ["MitCrdRvr", "MitCrdSto"]
 				}
 			],
 
@@ -924,6 +931,9 @@
 					sref: "MenCrd",
 					mits: ["MitCrdSrt", "MitCrdCrt", "MitCrdFrt", "MitCrdWco"]
 				}
+			],
+
+			MbarIdf: [
 			],
 
 			MbarUtl: [

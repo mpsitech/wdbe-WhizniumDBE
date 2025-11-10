@@ -35,7 +35,42 @@ DpchRetWdbe* WdbeMtpCplmsttdGptrack_Easy_v1_0::run(
 
 	utinyint ixOpVOpres = VecOpVOpres::SUCCESS;
 
-	// IP run --- INSERT
+	// IP run --- IBEGIN
+	WdbeMModule* mdl = NULL;
+	uint mdlNum;
+
+	WdbeMModule* submdl = NULL;
+
+	ubigint refHostif;
+	string srefHostif;
+	unsigned int wHostif;
+
+	unsigned int sizeSeqbuf = 4;
+
+	string s;
+
+	if (dbswdbe->tblwdbemmodule->loadRecByRef(refWdbeMModule, &mdl)) {
+		refHostif = Wdbe::getHostifRef(dbswdbe, mdl->hkUref);
+		srefHostif = Wdbe::getHostifSref(dbswdbe, mdl->hkUref);
+		wHostif = Wdbe::getHostifWidth(dbswdbe, mdl->hkUref);
+
+		if (Wdbe::getMpa(dbswdbe, refWdbeMModule, "sizeSeqbuf", s)) sizeSeqbuf = atoi(s.c_str());
+
+		if (dbswdbe->tblwdbemmodule->loadRecBySQL("SELECT * FROM TblWdbeMModule WHERE supRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'seqbuf'", &submdl)) {
+			Wdbe::setMpa(dbswdbe, submdl->ref, "size", to_string(sizeSeqbuf));
+			Wdbe::setMpa(dbswdbe, submdl->ref, "wB", to_string(wHostif));
+
+			dbswdbe->tblwdbermmodulemmodule->insertNewRec(NULL, submdl->ref, refHostif, "snk");
+
+			submdl->refWdbeMImbuf = dbswdbe->tblwdbemimbuf->insertNewRec(NULL, VecWdbeVMImbufRotype::MULTATMT, submdl->ref, "seqbuf" + StrMod::cap(mdl->sref) + "To" + StrMod::cap(srefHostif), wHostif, "0.." + to_string(1024 * sizeSeqbuf), 2);
+			dbswdbe->tblwdbemmodule->updateRec(submdl);
+
+			delete submdl;
+		};
+
+		delete mdl;
+	};
+	// IP run --- IEND
 
 	return(new DpchRetWdbe(VecWdbeVDpch::DPCHRETWDBE, "", "", ixOpVOpres, 100));
 };

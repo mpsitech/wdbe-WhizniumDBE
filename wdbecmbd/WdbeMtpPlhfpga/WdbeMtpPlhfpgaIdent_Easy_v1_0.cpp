@@ -45,12 +45,18 @@ DpchRetWdbeMtpPlhfpga* WdbeMtpPlhfpgaIdent_Easy_v1_0::run(
 
 	ubigint refWdbeMVersion;
 
-	string ver, hash, who;
+	string unt, ver, hash, who;
+
+	dbswdbe->loadStringBySQL("SELECT TblWdbeMUnit.sref FROM TblWdbeMUnit, TblWdbeMModule WHERE TblWdbeMUnit.ref = TblWdbeMModule.hkUref AND TblWdbeMModule.hkIxVTbl = " + to_string(VecWdbeVMModuleHkTbl::UNT)
+				+ " AND TblWdbeMModule.ref = " + to_string(refWdbeMModule), unt);
 
 	dbswdbe->loadRefBySQL("SELECT TblWdbeMUnit.refUref FROM TblWdbeMUnit, TblWdbeMModule WHERE TblWdbeMUnit.ref = TblWdbeMModule.hkUref AND TblWdbeMModule.hkIxVTbl = " + to_string(VecWdbeVMModuleHkTbl::UNT)
 				+ " AND TblWdbeMModule.ref = " + to_string(refWdbeMModule), refWdbeMVersion);
 
 	ver = StubWdbe::getStubVerNo(dbswdbe, refWdbeMVersion);
+
+	keys.push_back("unt");
+	vals.push_back(trimVal(unt, 12));
 
 	keys.push_back("ver");
 	vals.push_back(trimVal(ver, 8));

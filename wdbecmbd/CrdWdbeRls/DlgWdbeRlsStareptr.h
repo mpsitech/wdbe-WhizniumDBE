@@ -567,10 +567,6 @@ public:
 		void writeXML(const Sbecore::uint ixWdbeVLocale, xmlTextWriter* wr);
 	};
 
-	bool evalButDneActive(DbsWdbe* dbswdbe);
-	bool evalLfiDldActive(DbsWdbe* dbswdbe);
-	bool evalExtButRunActive(DbsWdbe* dbswdbe);
-	bool evalExtButStoActive(DbsWdbe* dbswdbe);
 	bool evalDetTxfGrlAvail(DbsWdbe* dbswdbe);
 	bool evalDetButStaActive(DbsWdbe* dbswdbe);
 	bool evalIniUldAvail(DbsWdbe* dbswdbe);
@@ -579,6 +575,10 @@ public:
 	bool evalIniSep1Avail(DbsWdbe* dbswdbe);
 	bool evalIniButClgAvail(DbsWdbe* dbswdbe);
 	bool evalIniButClgActive(DbsWdbe* dbswdbe);
+	bool evalExtButRunActive(DbsWdbe* dbswdbe);
+	bool evalExtButStoActive(DbsWdbe* dbswdbe);
+	bool evalLfiDldActive(DbsWdbe* dbswdbe);
+	bool evalButDneActive(DbsWdbe* dbswdbe);
 
 public:
 	DlgWdbeRlsStareptr(XchgWdbe* xchg, DbsWdbe* dbswdbe, const Sbecore::ubigint jrefSup, const Sbecore::uint ixWdbeVLocale);

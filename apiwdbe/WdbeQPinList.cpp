@@ -22,11 +22,12 @@ WdbeQPinList::WdbeQPinList(
 			, const string sref
 			, const string stubRefWdbeMBank
 			, const string Location
-		) {
-	this->jnum = jnum;
-	this->sref = sref;
-	this->stubRefWdbeMBank = stubRefWdbeMBank;
-	this->Location = Location;
+		) :
+			jnum(jnum)
+			, sref(sref)
+			, stubRefWdbeMBank(stubRefWdbeMBank)
+			, Location(Location)
+		{
 };
 
 bool WdbeQPinList::readXML(

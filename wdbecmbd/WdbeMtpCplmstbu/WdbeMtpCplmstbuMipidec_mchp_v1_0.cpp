@@ -36,18 +36,19 @@ DpchRetWdbe* WdbeMtpCplmstbuMipidec_mchp_v1_0::run(
 	utinyint ixOpVOpres = VecOpVOpres::SUCCESS;
 
 	// IP run --- IBEGIN
+	string g_DATATYPE;
 	string g_LANE_WIDTH_s;
 	string g_NUM_OF_PIXELS_s;
 
+	int wData = 8;
 	int g_LANE_WIDTH;
 	int g_NUM_OF_PIXELS;
-
-	const int wData = 12; // currently fixed for g_DATATYPE = RAW-12
 
 	ubigint refC;
 	uint mdlNum;
 
-	if (Wdbe::getMpa(dbswdbe, refWdbeMModule, "g_LANE_WIDTH", g_LANE_WIDTH_s) && Wdbe::getMpa(dbswdbe, refWdbeMModule, "g_NUM_OF_PIXELS", g_NUM_OF_PIXELS_s)) {
+	if (Wdbe::getMpa(dbswdbe, refWdbeMModule, "g_DATATYPE", g_DATATYPE) && Wdbe::getMpa(dbswdbe, refWdbeMModule, "g_LANE_WIDTH", g_LANE_WIDTH_s) && Wdbe::getMpa(dbswdbe, refWdbeMModule, "g_NUM_OF_PIXELS", g_NUM_OF_PIXELS_s)) {
+		if (g_DATATYPE.find("RAW-") == 0) wData = atoi(g_DATATYPE.substr(4).c_str());
 		g_LANE_WIDTH = atoi(g_LANE_WIDTH_s.c_str());
 		g_NUM_OF_PIXELS = atoi(g_NUM_OF_PIXELS_s.c_str());
 

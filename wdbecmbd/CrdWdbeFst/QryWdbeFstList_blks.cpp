@@ -20,8 +20,8 @@ uint QryWdbeFstList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "fsm") return FSM;
 	if (s == "srf") return SRF;
+	if (s == "fsm") return FSM;
 
 	return(0);
 };
@@ -29,8 +29,8 @@ uint QryWdbeFstList::VecVOrd::getIx(
 string QryWdbeFstList::VecVOrd::getSref(
 			const uint ix
 		) {
-	if (ix == FSM) return("fsm");
 	if (ix == SRF) return("srf");
+	if (ix == FSM) return("fsm");
 
 	return("");
 };
@@ -98,11 +98,10 @@ QryWdbeFstList::StatShr::StatShr(
 			, const uint nload
 		) :
 			Block()
+			, ntot(ntot)
+			, jnumFirstload(jnumFirstload)
+			, nload(nload)
 		{
-	this->ntot = ntot;
-	this->jnumFirstload = jnumFirstload;
-	this->nload = nload;
-
 	mask = {NTOT, JNUMFIRSTLOAD, NLOAD};
 };
 
@@ -173,10 +172,10 @@ QryWdbeFstList::StgIac::StgIac(
 			, const uint nload
 		) :
 			Block()
+			, jnum(jnum)
+			, jnumFirstload(jnumFirstload)
+			, nload(nload)
 		{
-	this->jnum = jnum;
-	this->jnumFirstload = jnumFirstload;
-	this->nload = nload;
 	mask = {JNUM, JNUMFIRSTLOAD, NLOAD};
 };
 

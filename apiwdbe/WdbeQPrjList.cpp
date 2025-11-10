@@ -26,15 +26,16 @@ WdbeQPrjList::WdbeQPrjList(
 			, const string stubRefWdbeMVersion
 			, const string yesnoEasy
 			, const string Giturl
-		) {
-	this->jnum = jnum;
-	this->stubGrp = stubGrp;
-	this->stubOwn = stubOwn;
-	this->Short = Short;
-	this->Title = Title;
-	this->stubRefWdbeMVersion = stubRefWdbeMVersion;
-	this->yesnoEasy = yesnoEasy;
-	this->Giturl = Giturl;
+		) :
+			jnum(jnum)
+			, stubGrp(stubGrp)
+			, stubOwn(stubOwn)
+			, Short(Short)
+			, Title(Title)
+			, stubRefWdbeMVersion(stubRefWdbeMVersion)
+			, yesnoEasy(yesnoEasy)
+			, Giturl(Giturl)
+		{
 };
 
 bool WdbeQPrjList::readXML(

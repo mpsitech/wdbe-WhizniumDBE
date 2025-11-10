@@ -227,38 +227,38 @@ public class PnlWdbeFamDetail {
 	  */
 	public class StatShr extends Block {
 
-		public static final int TXFVNDVALID = 1;
-		public static final int BUTSAVEAVAIL = 2;
-		public static final int BUTSAVEACTIVE = 3;
-		public static final int PUPVNDACTIVE = 4;
+		public static final int BUTSAVEAVAIL = 1;
+		public static final int BUTSAVEACTIVE = 2;
+		public static final int PUPVNDACTIVE = 3;
+		public static final int TXFVNDVALID = 4;
 		public static final int BUTVNDEDITAVAIL = 5;
 		public static final int TXFTITACTIVE = 6;
 		public static final int TXFCMTACTIVE = 7;
 
 		public StatShr(
-					boolean TxfVndValid
-					, boolean ButSaveAvail
+					boolean ButSaveAvail
 					, boolean ButSaveActive
 					, boolean PupVndActive
+					, boolean TxfVndValid
 					, boolean ButVndEditAvail
 					, boolean TxfTitActive
 					, boolean TxfCmtActive
 				) {
-			this.TxfVndValid = TxfVndValid;
 			this.ButSaveAvail = ButSaveAvail;
 			this.ButSaveActive = ButSaveActive;
 			this.PupVndActive = PupVndActive;
+			this.TxfVndValid = TxfVndValid;
 			this.ButVndEditAvail = ButVndEditAvail;
 			this.TxfTitActive = TxfTitActive;
 			this.TxfCmtActive = TxfCmtActive;
 
-			mask = new HashSet<Integer>(Arrays.asList(TXFVNDVALID, BUTSAVEAVAIL, BUTSAVEACTIVE, PUPVNDACTIVE, BUTVNDEDITAVAIL, TXFTITACTIVE, TXFCMTACTIVE));
+			mask = new HashSet<Integer>(Arrays.asList(BUTSAVEAVAIL, BUTSAVEACTIVE, PUPVNDACTIVE, TXFVNDVALID, BUTVNDEDITAVAIL, TXFTITACTIVE, TXFCMTACTIVE));
 		};
 
-		public boolean TxfVndValid;
 		public boolean ButSaveAvail;
 		public boolean ButSaveActive;
 		public boolean PupVndActive;
+		public boolean TxfVndValid;
 		public boolean ButVndEditAvail;
 		public boolean TxfTitActive;
 		public boolean TxfCmtActive;
@@ -276,10 +276,10 @@ public class PnlWdbeFamDetail {
 			String itemtag = "StatitemShrWdbeFamDetail";
 
 			if (Xmlio.checkXPath(doc, basexpath)) {
-				TxfVndValid = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxfVndValid", mask, TXFVNDVALID);
 				ButSaveAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButSaveAvail", mask, BUTSAVEAVAIL);
 				ButSaveActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButSaveActive", mask, BUTSAVEACTIVE);
 				PupVndActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "PupVndActive", mask, PUPVNDACTIVE);
+				TxfVndValid = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxfVndValid", mask, TXFVNDVALID);
 				ButVndEditAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButVndEditAvail", mask, BUTVNDEDITAVAIL);
 				TxfTitActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxfTitActive", mask, TXFTITACTIVE);
 				TxfCmtActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxfCmtActive", mask, TXFCMTACTIVE);
@@ -295,10 +295,10 @@ public class PnlWdbeFamDetail {
 				) {
 			HashSet<Integer> items = new HashSet<Integer>();
 
-			if (TxfVndValid == comp.TxfVndValid) items.add(TXFVNDVALID);
 			if (ButSaveAvail == comp.ButSaveAvail) items.add(BUTSAVEAVAIL);
 			if (ButSaveActive == comp.ButSaveActive) items.add(BUTSAVEACTIVE);
 			if (PupVndActive == comp.PupVndActive) items.add(PUPVNDACTIVE);
+			if (TxfVndValid == comp.TxfVndValid) items.add(TXFVNDVALID);
 			if (ButVndEditAvail == comp.ButVndEditAvail) items.add(BUTVNDEDITAVAIL);
 			if (TxfTitActive == comp.TxfTitActive) items.add(TXFTITACTIVE);
 			if (TxfCmtActive == comp.TxfCmtActive) items.add(TXFCMTACTIVE);
@@ -314,7 +314,7 @@ public class PnlWdbeFamDetail {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(TXFVNDVALID, BUTSAVEAVAIL, BUTSAVEACTIVE, PUPVNDACTIVE, BUTVNDEDITAVAIL, TXFTITACTIVE, TXFCMTACTIVE));
+			diffitems = new HashSet<Integer>(Arrays.asList(BUTSAVEAVAIL, BUTSAVEACTIVE, PUPVNDACTIVE, TXFVNDVALID, BUTVNDEDITAVAIL, TXFTITACTIVE, TXFCMTACTIVE));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);

@@ -25,16 +25,16 @@ WdbeMPipeline::WdbeMPipeline(
 			, const string asrSrefWdbeMSignal
 			, const usmallint Depth
 			, const string Comment
-		) {
-
-	this->ref = ref;
-	this->hsmRefWdbeMModule = hsmRefWdbeMModule;
-	this->sref = sref;
-	this->clkSrefWdbeMSignal = clkSrefWdbeMSignal;
-	this->clgSrefWdbeMSignal = clgSrefWdbeMSignal;
-	this->asrSrefWdbeMSignal = asrSrefWdbeMSignal;
-	this->Depth = Depth;
-	this->Comment = Comment;
+		) :
+			ref(ref)
+			, hsmRefWdbeMModule(hsmRefWdbeMModule)
+			, sref(sref)
+			, clkSrefWdbeMSignal(clkSrefWdbeMSignal)
+			, clgSrefWdbeMSignal(clgSrefWdbeMSignal)
+			, asrSrefWdbeMSignal(asrSrefWdbeMSignal)
+			, Depth(Depth)
+			, Comment(Comment)
+		{
 };
 
 bool WdbeMPipeline::operator==(

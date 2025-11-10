@@ -21,12 +21,12 @@ WdbeMPeripheral::WdbeMPeripheral(
 			, const ubigint refWdbeMUnit
 			, const string sref
 			, const string Comment
-		) {
-
-	this->ref = ref;
-	this->refWdbeMUnit = refWdbeMUnit;
-	this->sref = sref;
-	this->Comment = Comment;
+		) :
+			ref(ref)
+			, refWdbeMUnit(refWdbeMUnit)
+			, sref(sref)
+			, Comment(Comment)
+		{
 };
 
 bool WdbeMPeripheral::operator==(

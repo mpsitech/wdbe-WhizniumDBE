@@ -32,21 +32,21 @@ WdbeMVersion::WdbeMVersion(
 			, const uint ixVState
 			, const string About
 			, const string Comment
-		) {
-
-	this->ref = ref;
-	this->grp = grp;
-	this->own = own;
-	this->prjRefWdbeMProject = prjRefWdbeMProject;
-	this->prjNum = prjNum;
-	this->bvrRefWdbeMVersion = bvrRefWdbeMVersion;
-	this->Major = Major;
-	this->Minor = Minor;
-	this->Sub = Sub;
-	this->refJState = refJState;
-	this->ixVState = ixVState;
-	this->About = About;
-	this->Comment = Comment;
+		) :
+			ref(ref)
+			, grp(grp)
+			, own(own)
+			, prjRefWdbeMProject(prjRefWdbeMProject)
+			, prjNum(prjNum)
+			, bvrRefWdbeMVersion(bvrRefWdbeMVersion)
+			, Major(Major)
+			, Minor(Minor)
+			, Sub(Sub)
+			, refJState(refJState)
+			, ixVState(ixVState)
+			, About(About)
+			, Comment(Comment)
+		{
 };
 
 bool WdbeMVersion::operator==(

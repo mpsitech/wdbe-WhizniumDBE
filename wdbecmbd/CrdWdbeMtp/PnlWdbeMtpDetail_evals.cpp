@@ -70,12 +70,12 @@ bool PnlWdbeMtpDetail::evalPupVndActive(
 bool PnlWdbeMtpDetail::evalButVndEditAvail(
 			DbsWdbe* dbswdbe
 		) {
-	// pre.adm()
+	// pre.ixCrdaccMtpIncl(edit)
 
 	vector<bool> args;
 	bool a;
 
-	a = false;
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCMTP, jref) & VecWdbeWAccess::EDIT);
 	args.push_back(a);
 
 	return(args.back());

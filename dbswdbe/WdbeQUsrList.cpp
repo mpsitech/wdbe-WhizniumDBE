@@ -40,29 +40,30 @@ WdbeQUsrList::WdbeQUsrList(
 			, const uint ixWdbeVUserlevel
 			, const string srefIxWdbeVUserlevel
 			, const string titIxWdbeVUserlevel
-		) {
-	this->qref = qref;
-	this->jref = jref;
-	this->jnum = jnum;
-	this->ref = ref;
-	this->grp = grp;
-	this->stubGrp = stubGrp;
-	this->own = own;
-	this->stubOwn = stubOwn;
-	this->refWdbeMPerson = refWdbeMPerson;
-	this->stubRefWdbeMPerson = stubRefWdbeMPerson;
-	this->sref = sref;
-	this->refWdbeMUsergroup = refWdbeMUsergroup;
-	this->stubRefWdbeMUsergroup = stubRefWdbeMUsergroup;
-	this->ixVState = ixVState;
-	this->srefIxVState = srefIxVState;
-	this->titIxVState = titIxVState;
-	this->ixWdbeVLocale = ixWdbeVLocale;
-	this->srefIxWdbeVLocale = srefIxWdbeVLocale;
-	this->titIxWdbeVLocale = titIxWdbeVLocale;
-	this->ixWdbeVUserlevel = ixWdbeVUserlevel;
-	this->srefIxWdbeVUserlevel = srefIxWdbeVUserlevel;
-	this->titIxWdbeVUserlevel = titIxWdbeVUserlevel;
+		) :
+			qref(qref)
+			, jref(jref)
+			, jnum(jnum)
+			, ref(ref)
+			, grp(grp)
+			, stubGrp(stubGrp)
+			, own(own)
+			, stubOwn(stubOwn)
+			, refWdbeMPerson(refWdbeMPerson)
+			, stubRefWdbeMPerson(stubRefWdbeMPerson)
+			, sref(sref)
+			, refWdbeMUsergroup(refWdbeMUsergroup)
+			, stubRefWdbeMUsergroup(stubRefWdbeMUsergroup)
+			, ixVState(ixVState)
+			, srefIxVState(srefIxVState)
+			, titIxVState(titIxVState)
+			, ixWdbeVLocale(ixWdbeVLocale)
+			, srefIxWdbeVLocale(srefIxWdbeVLocale)
+			, titIxWdbeVLocale(titIxWdbeVLocale)
+			, ixWdbeVUserlevel(ixWdbeVUserlevel)
+			, srefIxWdbeVUserlevel(srefIxWdbeVUserlevel)
+			, titIxWdbeVUserlevel(titIxWdbeVUserlevel)
+		{
 };
 
 void WdbeQUsrList::writeJSON(

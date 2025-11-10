@@ -23,12 +23,13 @@ WdbeQLibAMakefile::WdbeQLibAMakefile(
 			, const string x2SrefKTag
 			, const string titX2SrefKTag
 			, const string Val
-		) {
-	this->jnum = jnum;
-	this->stubX1RefWdbeMMachine = stubX1RefWdbeMMachine;
-	this->x2SrefKTag = x2SrefKTag;
-	this->titX2SrefKTag = titX2SrefKTag;
-	this->Val = Val;
+		) :
+			jnum(jnum)
+			, stubX1RefWdbeMMachine(stubX1RefWdbeMMachine)
+			, x2SrefKTag(x2SrefKTag)
+			, titX2SrefKTag(titX2SrefKTag)
+			, Val(Val)
+		{
 };
 
 bool WdbeQLibAMakefile::readXML(

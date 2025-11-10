@@ -127,17 +127,17 @@ public:
 	class StatShr : public Sbecore::Block {
 
 	public:
-		static const Sbecore::uint TXFCLKVALID = 1;
-		static const Sbecore::uint TXFASRVALID = 2;
-		static const Sbecore::uint BUTSAVEAVAIL = 3;
-		static const Sbecore::uint BUTSAVEACTIVE = 4;
-		static const Sbecore::uint TXTSRFACTIVE = 5;
-		static const Sbecore::uint TXTMDLACTIVE = 6;
-		static const Sbecore::uint BUTMDLVIEWAVAIL = 7;
-		static const Sbecore::uint BUTMDLVIEWACTIVE = 8;
-		static const Sbecore::uint TXTCLKACTIVE = 9;
-		static const Sbecore::uint BUTCLKVIEWAVAIL = 10;
-		static const Sbecore::uint TXTASRACTIVE = 11;
+		static const Sbecore::uint BUTSAVEAVAIL = 1;
+		static const Sbecore::uint BUTSAVEACTIVE = 2;
+		static const Sbecore::uint TXTSRFACTIVE = 3;
+		static const Sbecore::uint TXTMDLACTIVE = 4;
+		static const Sbecore::uint BUTMDLVIEWAVAIL = 5;
+		static const Sbecore::uint BUTMDLVIEWACTIVE = 6;
+		static const Sbecore::uint TXTCLKACTIVE = 7;
+		static const Sbecore::uint TXFCLKVALID = 8;
+		static const Sbecore::uint BUTCLKVIEWAVAIL = 9;
+		static const Sbecore::uint TXTASRACTIVE = 10;
+		static const Sbecore::uint TXFASRVALID = 11;
 		static const Sbecore::uint BUTASRVIEWAVAIL = 12;
 		static const Sbecore::uint CHKFALACTIVE = 13;
 		static const Sbecore::uint TXFSNRACTIVE = 14;
@@ -149,11 +149,9 @@ public:
 		static const Sbecore::uint PUPFSMDTTACTIVE = 20;
 
 	public:
-		StatShr(const bool TxfClkValid = false, const bool TxfAsrValid = false, const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxtSrfActive = true, const bool TxtMdlActive = true, const bool ButMdlViewAvail = true, const bool ButMdlViewActive = true, const bool TxtClkActive = true, const bool ButClkViewAvail = true, const bool TxtAsrActive = true, const bool ButAsrViewAvail = true, const bool ChkFalActive = true, const bool TxfSnrActive = true, const bool ChkEipActive = true, const bool TxfCmtActive = true, const bool ButFsmNewAvail = true, const bool ButFsmDeleteAvail = true, const bool PupFsmDttAvail = true, const bool PupFsmDttActive = true);
+		StatShr(const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxtSrfActive = true, const bool TxtMdlActive = true, const bool ButMdlViewAvail = true, const bool ButMdlViewActive = true, const bool TxtClkActive = true, const bool TxfClkValid = false, const bool ButClkViewAvail = true, const bool TxtAsrActive = true, const bool TxfAsrValid = false, const bool ButAsrViewAvail = true, const bool ChkFalActive = true, const bool TxfSnrActive = true, const bool ChkEipActive = true, const bool TxfCmtActive = true, const bool ButFsmNewAvail = true, const bool ButFsmDeleteAvail = true, const bool PupFsmDttAvail = true, const bool PupFsmDttActive = true);
 
 	public:
-		bool TxfClkValid;
-		bool TxfAsrValid;
 		bool ButSaveAvail;
 		bool ButSaveActive;
 		bool TxtSrfActive;
@@ -161,8 +159,10 @@ public:
 		bool ButMdlViewAvail;
 		bool ButMdlViewActive;
 		bool TxtClkActive;
+		bool TxfClkValid;
 		bool ButClkViewAvail;
 		bool TxtAsrActive;
+		bool TxfAsrValid;
 		bool ButAsrViewAvail;
 		bool ChkFalActive;
 		bool TxfSnrActive;
@@ -341,10 +341,10 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbePrcUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
-	bool handleCallWdbeFsmUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
-	bool handleCallWdbePrc_mdlEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
 	bool handleCallWdbePrc_fsmEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbePrc_mdlEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeFsmUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbePrcUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 
 };
 

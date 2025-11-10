@@ -459,7 +459,7 @@ void WdbeMtpWrfpgaHostif_Easy_v1_0::writeMdlVhd(
 	};
 
 	if (!srefsImbRd.empty()) outfile << "\t\t\t\telse ";
-	outfile << "'0';" << endl;
+	outfile << "'1';" << endl;
 
 	outfile << "-- IP impl.op.wiring.txbufAXIS --- IEND" << endl;
 

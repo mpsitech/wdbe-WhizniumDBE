@@ -10,10 +10,10 @@
 #ifndef WDBE_H
 #define WDBE_H
 
-#define WDBE_VERSION "1.1.41"
+#define WDBE_VERSION "1.1.49"
 #define WDBE_VERSION_MAJOR 1
 #define WDBE_VERSION_MINOR 1
-#define WDBE_VERSION_SUB 41
+#define WDBE_VERSION_SUB 49
 
 #include <sys/wait.h> // IP include.cust --- ILINE
 
@@ -157,6 +157,7 @@ namespace Wdbe {
 	void levelUntmdls(DbsWdbe* dbswdbe, const Sbecore::ubigint refWdbeMUnit, ListWdbeMModule& mdls, std::vector<unsigned int>& lvlsMdls);
 	void sortMdls(ListWdbeMModule& mdls, std::vector<unsigned int>& lvlsMdls, bool buNotTd = false);
 	void levelMdls(DbsWdbe* dbswdbe, const Sbecore::ubigint refWdbeMVersion, ListWdbeMModule& mdls, std::vector<unsigned int>& lvlsMdls, bool buNotTd = false);
+	void levelMdls(DbsWdbe* dbswdbe, const std::vector<Sbecore::ubigint>& untrefs, ListWdbeMModule& mdls, std::vector<unsigned int>& lvlsMdls, bool buNotTd = false);
 	void showLvlsMdls(DbsWdbe* dbswdbe, ListWdbeMModule& mdls, std::vector<unsigned int>& lvlsMdls);
 
 	Sbecore::uint getNextPrtMdlNum(DbsWdbe* dbswdbe, const Sbecore::ubigint refWdbeMModule);

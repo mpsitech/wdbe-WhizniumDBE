@@ -1571,22 +1571,28 @@ void Wdbe::levelMdls(
 			, vector<unsigned int>& lvlsMdls
 			, bool buNotTd
 		) {
-	ListWdbeMUnit unts;
-	WdbeMUnit* unt = NULL;
-	vector<unsigned int> lvlsUnts;
+	vector<ubigint> untrefs;
 
+	dbswdbe->loadRefsBySQL("SELECT ref FROM TblWdbeMUnit WHERE refIxVTbl = " + to_string(VecWdbeVMUnitRefTbl::VER) + " AND refUref = " + to_string(refWdbeMVersion), false, untrefs);
+
+	levelMdls(dbswdbe, untrefs, mdls, lvlsMdls, buNotTd);
+};
+
+void Wdbe::levelMdls(
+			DbsWdbe* dbswdbe
+			, const vector<ubigint>& untrefs
+			, ListWdbeMModule& mdls
+			, vector<unsigned int>& lvlsMdls
+			, bool buNotTd
+		) {
 	ListWdbeMModule untmdls;
 	vector<unsigned int> lvlsUntmdls;
-
-	dbswdbe->tblwdbemunit->loadRstBySQL("SELECT * FROM TblWdbeMUnit WHERE refIxVTbl = " + to_string(VecWdbeVMUnitRefTbl::VER) + " AND refUref = " + to_string(refWdbeMVersion), false, unts);
 
 	mdls.clear();
 	lvlsMdls.clear();
 
-	for (unsigned int i = 0; i < unts.nodes.size(); i++) {
-		unt = unts.nodes[i];
-
-		levelUntmdls(dbswdbe, unt->ref, untmdls, lvlsUntmdls);
+	for (unsigned int i = 0; i < untrefs.size(); i++) {
+		levelUntmdls(dbswdbe, untrefs[i], untmdls, lvlsUntmdls);
 
 		for (unsigned int j = 0; j < untmdls.nodes.size(); j++) {
 			mdls.nodes.push_back(untmdls.nodes[j]);
@@ -1835,15 +1841,15 @@ unsigned char Wdbe::hexToBin(
 
 	c = hex[0];
 	if ((c >= '0') && (c <= '9')) c -= 0x30;
-	else if ((c >= 'A') && (c <= 'F')) c -= 0x41;
-	else if ((c >= 'a') && (c <= 'f')) c -= 0x61;
+	else if ((c >= 'A') && (c <= 'F')) c = c - 0x41 + 0x0A;
+	else if ((c >= 'a') && (c <= 'f')) c = c - 0x61 + 0x0A;
 	else c = 0;
 	bin = (c << 4);
 
 	c = hex[1];
 	if ((c >= '0') && (c <= '9')) c -= 0x30;
-	else if ((c >= 'A') && (c <= 'F')) c -= 0x41;
-	else if ((c >= 'a') && (c <= 'f')) c -= 0x61;
+	else if ((c >= 'A') && (c <= 'F')) c = c - 0x41 + 0x0A;
+	else if ((c >= 'a') && (c <= 'f')) c = c - 0x61 + 0x0A;
 	else c = 0;
 	bin += c;
 
@@ -2070,66 +2076,66 @@ string StubWdbe::getStub(
 			, const bool refresh
 		) {
 	if (ixWdbeVStub == VecWdbeVStub::STUBWDBEBNKSREF) return getStubBnkSref(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEBNKSTD) return getStubBnkStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBECDCDSTD) return getStubCdcdStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBECMDSTD) return getStubCmdStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBECMPSTD) return getStubCmpStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBECPRSTD) return getStubCprStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBECTRLONG) return getStubCtrLong(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBECTRSREF) return getStubCtrSref(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBECTRSTD) return getStubCtrStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBECVRNO) return getStubCvrNo(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBECVRSTD) return getStubCvrStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEERRSTD) return getStubErrStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEFAMSTD) return getStubFamStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEFILSTD) return getStubFilStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEFSMSTD) return getStubFsmStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEFSTSTD) return getStubFstStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEGENSTD) return getStubGenStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEGROUP) return getStubGroup(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEIMBSTD) return getStubImbStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEINTSTD) return getStubIntStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBELIBSREF) return getStubLibSref(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBELIBSTD) return getStubLibStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEMCHSREF) return getStubMchSref(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEMCHSTD) return getStubMchStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEMDLHSREF) return getStubMdlHsref(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEMDLSREF) return getStubMdlSref(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEMDLSTD) return getStubMdlStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEMODSTD) return getStubModStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEMTPSTD) return getStubMtpStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEOWNER) return getStubOwner(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEPINSTD) return getStubPinStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEPPHSTD) return getStubPphStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEPPLSTD) return getStubPplStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEPRCSTD) return getStubPrcStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEPRJSHORT) return getStubPrjShort(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEPRJSTD) return getStubPrjStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEPRSSTD) return getStubPrsStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEPRTSREF) return getStubPrtSref(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEPRTSTD) return getStubPrtStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBERLSSTD) return getStubRlsStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBESEGHSREF) return getStubSegHsref(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBESEGSREF) return getStubSegSref(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBESEGSTD) return getStubSegStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBESESMENU) return getStubSesMenu(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBESESSTD) return getStubSesStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBESIGSREF) return getStubSigSref(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBESIGSTD) return getStubSigStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBESILSTD) return getStubSilStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBESNSSTD) return getStubSnsStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEUNISTD) return getStubUniStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEUNTSREF) return getStubUntSref(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEUNTSTD) return getStubUntStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEUSGSTD) return getStubUsgStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEUSRPRS) return getStubUsrPrs(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEUSRSTD) return getStubUsrStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEVARSTD) return getStubVarStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEVECSTD) return getStubVecStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEVERNO) return getStubVerNo(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEVERSHORT) return getStubVerShort(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEVERSTD) return getStubVerStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
-	else if (ixWdbeVStub == VecWdbeVStub::STUBWDBEVITSTD) return getStubVitStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBEBNKSTD) return getStubBnkStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBECDCDSTD) return getStubCdcdStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBECMDSTD) return getStubCmdStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBECMPSTD) return getStubCmpStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBECPRSTD) return getStubCprStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBECTRLONG) return getStubCtrLong(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBECTRSREF) return getStubCtrSref(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBECTRSTD) return getStubCtrStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBECVRNO) return getStubCvrNo(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBECVRSTD) return getStubCvrStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBEERRSTD) return getStubErrStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBEFAMSTD) return getStubFamStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBEFILSTD) return getStubFilStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBEFSMSTD) return getStubFsmStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBEFSTSTD) return getStubFstStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBEGENSTD) return getStubGenStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBEGROUP) return getStubGroup(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBEIMBSTD) return getStubImbStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBEINTSTD) return getStubIntStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBELIBSREF) return getStubLibSref(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBELIBSTD) return getStubLibStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBEMCHSREF) return getStubMchSref(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBEMCHSTD) return getStubMchStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBEMDLHSREF) return getStubMdlHsref(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBEMDLSREF) return getStubMdlSref(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBEMDLSTD) return getStubMdlStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBEMODSTD) return getStubModStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBEMTPSTD) return getStubMtpStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBEOWNER) return getStubOwner(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBEPINSTD) return getStubPinStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBEPPHSTD) return getStubPphStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBEPPLSTD) return getStubPplStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBEPRCSTD) return getStubPrcStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBEPRJSHORT) return getStubPrjShort(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBEPRJSTD) return getStubPrjStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBEPRSSTD) return getStubPrsStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBEPRTSREF) return getStubPrtSref(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBEPRTSTD) return getStubPrtStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBERLSSTD) return getStubRlsStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBESEGHSREF) return getStubSegHsref(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBESEGSREF) return getStubSegSref(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBESEGSTD) return getStubSegStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBESESMENU) return getStubSesMenu(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBESESSTD) return getStubSesStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBESIGSREF) return getStubSigSref(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBESIGSTD) return getStubSigStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBESILSTD) return getStubSilStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBESNSSTD) return getStubSnsStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBEUNISTD) return getStubUniStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBEUNTSREF) return getStubUntSref(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBEUNTSTD) return getStubUntStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBEUSGSTD) return getStubUsgStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBEUSRPRS) return getStubUsrPrs(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBEUSRSTD) return getStubUsrStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBEVARSTD) return getStubVarStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBEVECSTD) return getStubVecStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBEVERNO) return getStubVerNo(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBEVERSHORT) return getStubVerShort(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBEVERSTD) return getStubVerStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
+	if (ixWdbeVStub == VecWdbeVStub::STUBWDBEVITSTD) return getStubVitStd(dbswdbe, ref, ixWdbeVLocale, ixVNonetype, stcch, strefSub, refresh);
 
 	return("");
 };
@@ -2783,7 +2789,7 @@ string StubWdbe::getStubFsmStd(
 			, stcchitemref_t* strefSub
 			, const bool refresh
 		) {
-	// example: "op"
+	// example: "op (mclk)"
 	string stub;
 
 	WdbeMFsm* rec = NULL;
@@ -3631,8 +3637,10 @@ string StubWdbe::getStubPrcStd(
 			, stcchitemref_t* strefSub
 			, const bool refresh
 		) {
-	// example: "op"
+	// example: "op (mclk)"
 	string stub;
+
+	WdbeMProcess* rec = NULL;
 
 	stcchitemref_t stref(VecWdbeVStub::STUBWDBEPRCSTD, ref, ixWdbeVLocale);
 	Stcchitem* stit = NULL;
@@ -3653,11 +3661,13 @@ string StubWdbe::getStubPrcStd(
 	};
 
 	if (ref != 0) {
-		if (dbswdbe->tblwdbemprocess->loadSrfByRef(ref, stub)) {
-			if (stcch) {
-				if (!stit) stit = stcch->addStit(stref);
-				stit->stub = stub;
-			};
+		if (dbswdbe->tblwdbemprocess->loadRecByRef(ref, &rec)) {
+			if (stcch && !stit) stit = stcch->addStit(stref);
+			// IP getStubPrcStd --- IBEGIN
+			stub = rec->sref + " (" + rec->clkSrefWdbeMSignal + ")";
+			// IP getStubPrcStd --- IEND
+			if (stit) stit->stub = stub;
+			delete rec;
 		};
 	};
 
@@ -4911,20 +4921,20 @@ ContInfWdbeAlert::ContInfWdbeAlert(
 			, const string& TxtMsg12
 		) :
 			Block()
+			, TxtCpt(TxtCpt)
+			, TxtMsg1(TxtMsg1)
+			, TxtMsg2(TxtMsg2)
+			, TxtMsg3(TxtMsg3)
+			, TxtMsg4(TxtMsg4)
+			, TxtMsg5(TxtMsg5)
+			, TxtMsg6(TxtMsg6)
+			, TxtMsg7(TxtMsg7)
+			, TxtMsg8(TxtMsg8)
+			, TxtMsg9(TxtMsg9)
+			, TxtMsg10(TxtMsg10)
+			, TxtMsg11(TxtMsg11)
+			, TxtMsg12(TxtMsg12)
 		{
-	this->TxtCpt = TxtCpt;
-	this->TxtMsg1 = TxtMsg1;
-	this->TxtMsg2 = TxtMsg2;
-	this->TxtMsg3 = TxtMsg3;
-	this->TxtMsg4 = TxtMsg4;
-	this->TxtMsg5 = TxtMsg5;
-	this->TxtMsg6 = TxtMsg6;
-	this->TxtMsg7 = TxtMsg7;
-	this->TxtMsg8 = TxtMsg8;
-	this->TxtMsg9 = TxtMsg9;
-	this->TxtMsg10 = TxtMsg10;
-	this->TxtMsg11 = TxtMsg11;
-	this->TxtMsg12 = TxtMsg12;
 
 	mask = {TXTCPT, TXTMSG1, TXTMSG2, TXTMSG3, TXTMSG4, TXTMSG5, TXTMSG6, TXTMSG7, TXTMSG8, TXTMSG9, TXTMSG10, TXTMSG11, TXTMSG12};
 };
@@ -5030,8 +5040,9 @@ set<uint> ContInfWdbeAlert::compare(
 
 DpchWdbe::DpchWdbe(
 			const uint ixWdbeVDpch
-		) {
-	this->ixWdbeVDpch = ixWdbeVDpch;
+		) :
+			ixWdbeVDpch(ixWdbeVDpch)
+		{
 };
 
 DpchWdbe::~DpchWdbe() {
@@ -5047,9 +5058,9 @@ DpchInvWdbe::DpchInvWdbe(
 			, const ubigint jref
 		) :
 			DpchWdbe(ixWdbeVDpch)
+			, oref(oref)
+			, jref(jref)
 		{
-	this->oref = oref;
-	this->jref = jref;
 };
 
 DpchInvWdbe::~DpchInvWdbe() {
@@ -5097,11 +5108,11 @@ DpchRetWdbe::DpchRetWdbe(
 			, const utinyint pdone
 		) :
 			DpchWdbe(ixWdbeVDpch)
+			, scrOref(scrOref)
+			, scrJref(scrJref)
+			, ixOpVOpres(ixOpVOpres)
+			, pdone(pdone)
 		{
-	this->scrOref = scrOref;
-	this->scrJref = scrJref;
-	this->ixOpVOpres = ixOpVOpres;
-	this->pdone = pdone;
 };
 
 DpchRetWdbe::~DpchRetWdbe() {

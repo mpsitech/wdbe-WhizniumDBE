@@ -30,19 +30,20 @@ WdbeQFilList::WdbeQFilList(
 			, const string srefKMimetype
 			, const string titSrefKMimetype
 			, const usmallint Size
-		) {
-	this->jnum = jnum;
-	this->stubGrp = stubGrp;
-	this->stubOwn = stubOwn;
-	this->Filename = Filename;
-	this->srefRefIxVTbl = srefRefIxVTbl;
-	this->titRefIxVTbl = titRefIxVTbl;
-	this->stubRefUref = stubRefUref;
-	this->osrefKContent = osrefKContent;
-	this->titOsrefKContent = titOsrefKContent;
-	this->srefKMimetype = srefKMimetype;
-	this->titSrefKMimetype = titSrefKMimetype;
-	this->Size = Size;
+		) :
+			jnum(jnum)
+			, stubGrp(stubGrp)
+			, stubOwn(stubOwn)
+			, Filename(Filename)
+			, srefRefIxVTbl(srefRefIxVTbl)
+			, titRefIxVTbl(titRefIxVTbl)
+			, stubRefUref(stubRefUref)
+			, osrefKContent(osrefKContent)
+			, titOsrefKContent(titOsrefKContent)
+			, srefKMimetype(srefKMimetype)
+			, titSrefKMimetype(titSrefKMimetype)
+			, Size(Size)
+		{
 };
 
 bool WdbeQFilList::readXML(

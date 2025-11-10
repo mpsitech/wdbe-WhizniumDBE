@@ -1,0 +1,19 @@
+IexWznmOpk v1.1.14
+ImeIMOppack.srefIxVIop	srefIxVBasetype	sref	Title	Shrdat	Comment
+retr		WdbeMtpPlhfpga
+	ImeIMOp.sref	Shrdat	Comment
+	WdbeMtpPlhfpgaOscoll_v1_0	false
+	ImeIMOp.end
+retr		WdbeMtpCplmstbu
+	ImeIMOp.sref	Shrdat	Comment
+	WdbeMtpCplmstbuOscoll_v1_0	false	connect inter-module buffer
+	ImeIMOp.end
+retr		WdbeMtpGenfst
+	ImeIMOp.sref	Shrdat	Comment
+	WdbeMtpGenfstBtshuffle_v1_0	false	add process and signals
+	ImeIMOp.end
+retr		WdbeMtpWrfpga
+	ImeIMOp.sref	Shrdat	Comment
+	WdbeMtpWrfpgaBtshuffle_v1_0	false
+	ImeIMOp.end
+ImeIMOppack.end

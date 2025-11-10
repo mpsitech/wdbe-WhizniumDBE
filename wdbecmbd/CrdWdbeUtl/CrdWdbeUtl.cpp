@@ -41,9 +41,9 @@ CrdWdbeUtl::CrdWdbeUtl(
 	feedFSge.tag = "FeedFSge";
 	VecVSge::fillFeed(feedFSge);
 
-	pnlheadbar = NULL;
-	dlgmrgip = NULL;
 	dlgextrip = NULL;
+	dlgmrgip = NULL;
+	pnlheadbar = NULL;
 
 	// IP constructor.cust1 --- INSERT
 

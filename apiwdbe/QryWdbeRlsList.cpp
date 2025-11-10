@@ -22,9 +22,9 @@ uint QryWdbeRlsList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
+	if (s == "srf") return SRF;
 	if (s == "cmp") return CMP;
 	if (s == "mch") return MCH;
-	if (s == "srf") return SRF;
 
 	return(0);
 };
@@ -32,9 +32,9 @@ uint QryWdbeRlsList::VecVOrd::getIx(
 string QryWdbeRlsList::VecVOrd::getSref(
 			const uint ix
 		) {
+	if (ix == SRF) return("srf");
 	if (ix == CMP) return("cmp");
 	if (ix == MCH) return("mch");
-	if (ix == SRF) return("srf");
 
 	return("");
 };
@@ -50,12 +50,11 @@ QryWdbeRlsList::StatApp::StatApp(
 			, const uint ndisp
 		) :
 			Block()
+			, firstcol(firstcol)
+			, jnumFirstdisp(jnumFirstdisp)
+			, ncol(ncol)
+			, ndisp(ndisp)
 		{
-	this->firstcol = firstcol;
-	this->jnumFirstdisp = jnumFirstdisp;
-	this->ncol = ncol;
-	this->ndisp = ndisp;
-
 	mask = {FIRSTCOL, JNUMFIRSTDISP, NCOL, NDISP};
 };
 
@@ -122,11 +121,10 @@ QryWdbeRlsList::StatShr::StatShr(
 			, const uint nload
 		) :
 			Block()
+			, ntot(ntot)
+			, jnumFirstload(jnumFirstload)
+			, nload(nload)
 		{
-	this->ntot = ntot;
-	this->jnumFirstload = jnumFirstload;
-	this->nload = nload;
-
 	mask = {NTOT, JNUMFIRSTLOAD, NLOAD};
 };
 
@@ -191,11 +189,10 @@ QryWdbeRlsList::StgIac::StgIac(
 			, const uint nload
 		) :
 			Block()
+			, jnum(jnum)
+			, jnumFirstload(jnumFirstload)
+			, nload(nload)
 		{
-	this->jnum = jnum;
-	this->jnumFirstload = jnumFirstload;
-	this->nload = nload;
-
 	mask = {JNUM, JNUMFIRSTLOAD, NLOAD};
 };
 

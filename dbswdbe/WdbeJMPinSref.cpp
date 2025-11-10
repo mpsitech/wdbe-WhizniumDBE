@@ -21,12 +21,12 @@ WdbeJMPinSref::WdbeJMPinSref(
 			, const ubigint refWdbeMPin
 			, const ubigint x1RefWdbeMPeripheral
 			, const string sref
-		) {
-
-	this->ref = ref;
-	this->refWdbeMPin = refWdbeMPin;
-	this->x1RefWdbeMPeripheral = x1RefWdbeMPeripheral;
-	this->sref = sref;
+		) :
+			ref(ref)
+			, refWdbeMPin(refWdbeMPin)
+			, x1RefWdbeMPeripheral(x1RefWdbeMPeripheral)
+			, sref(sref)
+		{
 };
 
 bool WdbeJMPinSref::operator==(

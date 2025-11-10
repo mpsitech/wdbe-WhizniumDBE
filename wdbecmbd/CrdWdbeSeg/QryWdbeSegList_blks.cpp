@@ -20,9 +20,9 @@ uint QryWdbeSegList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "sup") return SUP;
-	if (s == "ppl") return PPL;
 	if (s == "srf") return SRF;
+	if (s == "ppl") return PPL;
+	if (s == "sup") return SUP;
 
 	return(0);
 };
@@ -30,9 +30,9 @@ uint QryWdbeSegList::VecVOrd::getIx(
 string QryWdbeSegList::VecVOrd::getSref(
 			const uint ix
 		) {
-	if (ix == SUP) return("sup");
-	if (ix == PPL) return("ppl");
 	if (ix == SRF) return("srf");
+	if (ix == PPL) return("ppl");
+	if (ix == SUP) return("sup");
 
 	return("");
 };
@@ -100,11 +100,10 @@ QryWdbeSegList::StatShr::StatShr(
 			, const uint nload
 		) :
 			Block()
+			, ntot(ntot)
+			, jnumFirstload(jnumFirstload)
+			, nload(nload)
 		{
-	this->ntot = ntot;
-	this->jnumFirstload = jnumFirstload;
-	this->nload = nload;
-
 	mask = {NTOT, JNUMFIRSTLOAD, NLOAD};
 };
 
@@ -175,10 +174,10 @@ QryWdbeSegList::StgIac::StgIac(
 			, const uint nload
 		) :
 			Block()
+			, jnum(jnum)
+			, jnumFirstload(jnumFirstload)
+			, nload(nload)
 		{
-	this->jnum = jnum;
-	this->jnumFirstload = jnumFirstload;
-	this->nload = nload;
 	mask = {JNUM, JNUMFIRSTLOAD, NLOAD};
 };
 

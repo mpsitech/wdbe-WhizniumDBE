@@ -20,9 +20,10 @@ using namespace Xmlio;
 WdbeQUsr1NSession::WdbeQUsr1NSession(
 			const uint jnum
 			, const string stubRef
-		) {
-	this->jnum = jnum;
-	this->stubRef = stubRef;
+		) :
+			jnum(jnum)
+			, stubRef(stubRef)
+		{
 };
 
 bool WdbeQUsr1NSession::readXML(

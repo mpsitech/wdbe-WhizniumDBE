@@ -22,11 +22,11 @@ uint QryWdbeCvrList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "ste") return STE;
-	if (s == "bcv") return BCV;
-	if (s == "cpr") return CPR;
-	if (s == "own") return OWN;
 	if (s == "grp") return GRP;
+	if (s == "own") return OWN;
+	if (s == "cpr") return CPR;
+	if (s == "bcv") return BCV;
+	if (s == "ste") return STE;
 
 	return(0);
 };
@@ -34,11 +34,11 @@ uint QryWdbeCvrList::VecVOrd::getIx(
 string QryWdbeCvrList::VecVOrd::getSref(
 			const uint ix
 		) {
-	if (ix == STE) return("ste");
-	if (ix == BCV) return("bcv");
-	if (ix == CPR) return("cpr");
-	if (ix == OWN) return("own");
 	if (ix == GRP) return("grp");
+	if (ix == OWN) return("own");
+	if (ix == CPR) return("cpr");
+	if (ix == BCV) return("bcv");
+	if (ix == STE) return("ste");
 
 	return("");
 };
@@ -54,12 +54,11 @@ QryWdbeCvrList::StatApp::StatApp(
 			, const uint ndisp
 		) :
 			Block()
+			, firstcol(firstcol)
+			, jnumFirstdisp(jnumFirstdisp)
+			, ncol(ncol)
+			, ndisp(ndisp)
 		{
-	this->firstcol = firstcol;
-	this->jnumFirstdisp = jnumFirstdisp;
-	this->ncol = ncol;
-	this->ndisp = ndisp;
-
 	mask = {FIRSTCOL, JNUMFIRSTDISP, NCOL, NDISP};
 };
 
@@ -126,11 +125,10 @@ QryWdbeCvrList::StatShr::StatShr(
 			, const uint nload
 		) :
 			Block()
+			, ntot(ntot)
+			, jnumFirstload(jnumFirstload)
+			, nload(nload)
 		{
-	this->ntot = ntot;
-	this->jnumFirstload = jnumFirstload;
-	this->nload = nload;
-
 	mask = {NTOT, JNUMFIRSTLOAD, NLOAD};
 };
 
@@ -195,11 +193,10 @@ QryWdbeCvrList::StgIac::StgIac(
 			, const uint nload
 		) :
 			Block()
+			, jnum(jnum)
+			, jnumFirstload(jnumFirstload)
+			, nload(nload)
 		{
-	this->jnum = jnum;
-	this->jnumFirstload = jnumFirstload;
-	this->nload = nload;
-
 	mask = {JNUM, JNUMFIRSTLOAD, NLOAD};
 };
 

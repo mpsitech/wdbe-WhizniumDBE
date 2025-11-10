@@ -22,6 +22,21 @@ uint VecWdbeVStub::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
+	if (s == "stubwdbebnksref") return STUBWDBEBNKSREF;
+	if (s == "stubwdbebnkstd") return STUBWDBEBNKSTD;
+	if (s == "stubwdbecdcdstd") return STUBWDBECDCDSTD;
+	if (s == "stubwdbecmdstd") return STUBWDBECMDSTD;
+	if (s == "stubwdbecmpstd") return STUBWDBECMPSTD;
+	if (s == "stubwdbectrlong") return STUBWDBECTRLONG;
+	if (s == "stubwdbectrsref") return STUBWDBECTRSREF;
+	if (s == "stubwdbectrstd") return STUBWDBECTRSTD;
+	if (s == "stubwdbecprstd") return STUBWDBECPRSTD;
+	if (s == "stubwdbecvrno") return STUBWDBECVRNO;
+	if (s == "stubwdbecvrstd") return STUBWDBECVRSTD;
+	if (s == "stubwdbeerrstd") return STUBWDBEERRSTD;
+	if (s == "stubwdbefamstd") return STUBWDBEFAMSTD;
+	if (s == "stubwdbefilstd") return STUBWDBEFILSTD;
+	if (s == "stubwdbefsmstd") return STUBWDBEFSMSTD;
 	if (s == "stubwdbefststd") return STUBWDBEFSTSTD;
 	if (s == "stubwdbegenstd") return STUBWDBEGENSTD;
 	if (s == "stubwdbeimbstd") return STUBWDBEIMBSTD;
@@ -68,21 +83,6 @@ uint VecWdbeVStub::getIx(
 	if (s == "stubwdbeverno") return STUBWDBEVERNO;
 	if (s == "stubwdbevershort") return STUBWDBEVERSHORT;
 	if (s == "stubwdbeverstd") return STUBWDBEVERSTD;
-	if (s == "stubwdbefsmstd") return STUBWDBEFSMSTD;
-	if (s == "stubwdbefilstd") return STUBWDBEFILSTD;
-	if (s == "stubwdbefamstd") return STUBWDBEFAMSTD;
-	if (s == "stubwdbeerrstd") return STUBWDBEERRSTD;
-	if (s == "stubwdbecvrno") return STUBWDBECVRNO;
-	if (s == "stubwdbecvrstd") return STUBWDBECVRSTD;
-	if (s == "stubwdbecprstd") return STUBWDBECPRSTD;
-	if (s == "stubwdbectrlong") return STUBWDBECTRLONG;
-	if (s == "stubwdbectrsref") return STUBWDBECTRSREF;
-	if (s == "stubwdbectrstd") return STUBWDBECTRSTD;
-	if (s == "stubwdbecmpstd") return STUBWDBECMPSTD;
-	if (s == "stubwdbecmdstd") return STUBWDBECMDSTD;
-	if (s == "stubwdbecdcdstd") return STUBWDBECDCDSTD;
-	if (s == "stubwdbebnksref") return STUBWDBEBNKSREF;
-	if (s == "stubwdbebnkstd") return STUBWDBEBNKSTD;
 
 	return(0);
 };
@@ -90,6 +90,21 @@ uint VecWdbeVStub::getIx(
 string VecWdbeVStub::getSref(
 			const uint ix
 		) {
+	if (ix == STUBWDBEBNKSREF) return("StubWdbeBnkSref");
+	if (ix == STUBWDBEBNKSTD) return("StubWdbeBnkStd");
+	if (ix == STUBWDBECDCDSTD) return("StubWdbeCdcdStd");
+	if (ix == STUBWDBECMDSTD) return("StubWdbeCmdStd");
+	if (ix == STUBWDBECMPSTD) return("StubWdbeCmpStd");
+	if (ix == STUBWDBECTRLONG) return("StubWdbeCtrLong");
+	if (ix == STUBWDBECTRSREF) return("StubWdbeCtrSref");
+	if (ix == STUBWDBECTRSTD) return("StubWdbeCtrStd");
+	if (ix == STUBWDBECPRSTD) return("StubWdbeCprStd");
+	if (ix == STUBWDBECVRNO) return("StubWdbeCvrNo");
+	if (ix == STUBWDBECVRSTD) return("StubWdbeCvrStd");
+	if (ix == STUBWDBEERRSTD) return("StubWdbeErrStd");
+	if (ix == STUBWDBEFAMSTD) return("StubWdbeFamStd");
+	if (ix == STUBWDBEFILSTD) return("StubWdbeFilStd");
+	if (ix == STUBWDBEFSMSTD) return("StubWdbeFsmStd");
 	if (ix == STUBWDBEFSTSTD) return("StubWdbeFstStd");
 	if (ix == STUBWDBEGENSTD) return("StubWdbeGenStd");
 	if (ix == STUBWDBEIMBSTD) return("StubWdbeImbStd");
@@ -136,21 +151,6 @@ string VecWdbeVStub::getSref(
 	if (ix == STUBWDBEVERNO) return("StubWdbeVerNo");
 	if (ix == STUBWDBEVERSHORT) return("StubWdbeVerShort");
 	if (ix == STUBWDBEVERSTD) return("StubWdbeVerStd");
-	if (ix == STUBWDBEFSMSTD) return("StubWdbeFsmStd");
-	if (ix == STUBWDBEFILSTD) return("StubWdbeFilStd");
-	if (ix == STUBWDBEFAMSTD) return("StubWdbeFamStd");
-	if (ix == STUBWDBEERRSTD) return("StubWdbeErrStd");
-	if (ix == STUBWDBECVRNO) return("StubWdbeCvrNo");
-	if (ix == STUBWDBECVRSTD) return("StubWdbeCvrStd");
-	if (ix == STUBWDBECPRSTD) return("StubWdbeCprStd");
-	if (ix == STUBWDBECTRLONG) return("StubWdbeCtrLong");
-	if (ix == STUBWDBECTRSREF) return("StubWdbeCtrSref");
-	if (ix == STUBWDBECTRSTD) return("StubWdbeCtrStd");
-	if (ix == STUBWDBECMPSTD) return("StubWdbeCmpStd");
-	if (ix == STUBWDBECMDSTD) return("StubWdbeCmdStd");
-	if (ix == STUBWDBECDCDSTD) return("StubWdbeCdcdStd");
-	if (ix == STUBWDBEBNKSREF) return("StubWdbeBnkSref");
-	if (ix == STUBWDBEBNKSTD) return("StubWdbeBnkStd");
 
 	return("");
 };

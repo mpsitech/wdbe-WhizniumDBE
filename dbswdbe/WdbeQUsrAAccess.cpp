@@ -29,18 +29,19 @@ WdbeQUsrAAccess::WdbeQUsrAAccess(
 			, const uint ixWdbeWAccess
 			, const string srefsIxWdbeWAccess
 			, const string titsIxWdbeWAccess
-		) {
-	this->qref = qref;
-	this->jref = jref;
-	this->jnum = jnum;
-	this->ref = ref;
-	this->x1IxWdbeVFeatgroup = x1IxWdbeVFeatgroup;
-	this->srefX1IxWdbeVFeatgroup = srefX1IxWdbeVFeatgroup;
-	this->titX1IxWdbeVFeatgroup = titX1IxWdbeVFeatgroup;
-	this->x2FeaSrefUix = x2FeaSrefUix;
-	this->ixWdbeWAccess = ixWdbeWAccess;
-	this->srefsIxWdbeWAccess = srefsIxWdbeWAccess;
-	this->titsIxWdbeWAccess = titsIxWdbeWAccess;
+		) :
+			qref(qref)
+			, jref(jref)
+			, jnum(jnum)
+			, ref(ref)
+			, x1IxWdbeVFeatgroup(x1IxWdbeVFeatgroup)
+			, srefX1IxWdbeVFeatgroup(srefX1IxWdbeVFeatgroup)
+			, titX1IxWdbeVFeatgroup(titX1IxWdbeVFeatgroup)
+			, x2FeaSrefUix(x2FeaSrefUix)
+			, ixWdbeWAccess(ixWdbeWAccess)
+			, srefsIxWdbeWAccess(srefsIxWdbeWAccess)
+			, titsIxWdbeWAccess(titsIxWdbeWAccess)
+		{
 };
 
 void WdbeQUsrAAccess::writeJSON(

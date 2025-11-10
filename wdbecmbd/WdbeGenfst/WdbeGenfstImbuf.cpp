@@ -91,28 +91,28 @@ DpchRetWdbe* WdbeGenfstImbuf::run(
 				refNum = Wdbe::getNextSigRefNum(dbswdbe, sigsRefIxVTbl, sigsRefUref);
 
 				refC = dbswdbe->tblwdbecsignal->getNewRef();
-				dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::HSHK, refC, sigsRefIxVTbl, sigsRefUref, refNum++, VecWdbeVMSignalMgeTbl::MDL, refCor, 0, "req" + StrMod::cap(sref), false, srefWdbeKHdltype, 1, "", "", "", Defval, false, 0, "");
-				dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::HSHK, refC, sigsRefIxVTbl, sigsRefUref, refNum++, VecWdbeVMSignalMgeTbl::MDL, refMgmt, 0, "ack" + StrMod::cap(sref), false, srefWdbeKHdltype, 1, "", "", "", Defval, false, 0, "");
-				dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::HSHK, refC, sigsRefIxVTbl, sigsRefUref, refNum++, VecWdbeVMSignalMgeTbl::MDL, refCor, 0, "dne" + StrMod::cap(sref), false, srefWdbeKHdltype, 1, "", "", "", Defval, false, 0, "");
+				dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::HSHK, refC, sigsRefIxVTbl, sigsRefUref, refNum++, VecWdbeVMSignalMgeTbl::MDL, refCor, 0, "req" + StrMod::cap(sref), false, srefWdbeKHdltype, 1, "", "", "", Defval, 0, "");
+				dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::HSHK, refC, sigsRefIxVTbl, sigsRefUref, refNum++, VecWdbeVMSignalMgeTbl::MDL, refMgmt, 0, "ack" + StrMod::cap(sref), false, srefWdbeKHdltype, 1, "", "", "", Defval, 0, "");
+				dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::HSHK, refC, sigsRefIxVTbl, sigsRefUref, refNum++, VecWdbeVMSignalMgeTbl::MDL, refCor, 0, "dne" + StrMod::cap(sref), false, srefWdbeKHdltype, 1, "", "", "", Defval, 0, "");
 
-				dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, sigsRefIxVTbl, sigsRefUref, refNum++, VecWdbeVMSignalMgeTbl::MDL, refMgmt, 0, "avllen" + StrMod::cap(sref), false, "slvdn", w, "", "", "", "0", false, 0, "");
+				dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, sigsRefIxVTbl, sigsRefUref, refNum++, VecWdbeVMSignalMgeTbl::MDL, refMgmt, 0, "avllen" + StrMod::cap(sref), false, "slvdn", w, "", "", "", "0", 0, "");
 
 				refC = dbswdbe->tblwdbecsignal->getNewRef();
-				dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::STRB, refC, sigsRefIxVTbl, sigsRefUref, refNum++, VecWdbeVMSignalMgeTbl::MDL, (mgmtToNotFrom) ? refMgmt : refCor, 0, sref + "AXIS_tready", false, srefWdbeKHdltype, 1, "", "", "", Defval, false, 0, "");
-				dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::STRB, refC, sigsRefIxVTbl, sigsRefUref, refNum++, VecWdbeVMSignalMgeTbl::MDL, (mgmtToNotFrom) ? refCor : refMgmt, 0, sref + "AXIS_tvalid", false, srefWdbeKHdltype, 1, "", "", "", Defval, false, 0, "");
-				dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, sigsRefIxVTbl, sigsRefUref, refNum++, VecWdbeVMSignalMgeTbl::MDL, (mgmtToNotFrom) ? refCor : refMgmt, 0, sref + "AXIS_tdata", false, "slvdn", imb->Width, "", "", "", "0", false, 0, "");
-				dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::STRB, refC, sigsRefIxVTbl, sigsRefUref, refNum++, VecWdbeVMSignalMgeTbl::MDL, (mgmtToNotFrom) ? refCor : refMgmt, 0, sref + "AXIS_tlast", false, srefWdbeKHdltype, 1, "", "", "", Defval, false, 0, "");
+				dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::STRB, refC, sigsRefIxVTbl, sigsRefUref, refNum++, VecWdbeVMSignalMgeTbl::MDL, (mgmtToNotFrom) ? refMgmt : refCor, 0, sref + "AXIS_tready", false, srefWdbeKHdltype, 1, "", "", "", Defval, 0, "");
+				dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::STRB, refC, sigsRefIxVTbl, sigsRefUref, refNum++, VecWdbeVMSignalMgeTbl::MDL, (mgmtToNotFrom) ? refCor : refMgmt, 0, sref + "AXIS_tvalid", false, srefWdbeKHdltype, 1, "", "", "", Defval, 0, "");
+				dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, sigsRefIxVTbl, sigsRefUref, refNum++, VecWdbeVMSignalMgeTbl::MDL, (mgmtToNotFrom) ? refCor : refMgmt, 0, sref + "AXIS_tdata", false, "slvdn", imb->Width, "", "", "", "0", 0, "");
+				dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::STRB, refC, sigsRefIxVTbl, sigsRefUref, refNum++, VecWdbeVMSignalMgeTbl::MDL, (mgmtToNotFrom) ? refCor : refMgmt, 0, sref + "AXIS_tlast", false, srefWdbeKHdltype, 1, "", "", "", Defval, 0, "");
 
 			} else {
 				// NOT thread safe
 				refNum = Wdbe::getNextSigRefNum(dbswdbe, sigsRefIxVTbl, sigsRefUref);
 
 				refC = dbswdbe->tblwdbecsignal->getNewRef();
-				dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::HSHK, refC, sigsRefIxVTbl, sigsRefUref, refNum++, VecWdbeVMSignalMgeTbl::MDL, refCor, 0, "req" + StrMod::cap(sref), false, srefWdbeKHdltype, 1, "", "", "", Defval, false, 0, "");
-				dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::HSHK, refC, sigsRefIxVTbl, sigsRefUref, refNum++, VecWdbeVMSignalMgeTbl::MDL, refMgmt, 0, "ack" + StrMod::cap(sref), false, srefWdbeKHdltype, 1, "", "", "", Defval, false, 0, "");
-				dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::HSHK, refC, sigsRefIxVTbl, sigsRefUref, refNum++, VecWdbeVMSignalMgeTbl::MDL, refCor, 0, "dne" + StrMod::cap(sref), false, srefWdbeKHdltype, 1, "", "", "", Defval, false, 0, "");
+				dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::HSHK, refC, sigsRefIxVTbl, sigsRefUref, refNum++, VecWdbeVMSignalMgeTbl::MDL, refCor, 0, "req" + StrMod::cap(sref), false, srefWdbeKHdltype, 1, "", "", "", Defval, 0, "");
+				dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::HSHK, refC, sigsRefIxVTbl, sigsRefUref, refNum++, VecWdbeVMSignalMgeTbl::MDL, refMgmt, 0, "ack" + StrMod::cap(sref), false, srefWdbeKHdltype, 1, "", "", "", Defval, 0, "");
+				dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::HSHK, refC, sigsRefIxVTbl, sigsRefUref, refNum++, VecWdbeVMSignalMgeTbl::MDL, refCor, 0, "dne" + StrMod::cap(sref), false, srefWdbeKHdltype, 1, "", "", "", Defval, 0, "");
 
-				dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::STRB, 0, sigsRefIxVTbl, sigsRefUref, refNum++, VecWdbeVMSignalMgeTbl::MDL, refCor, 0, "strbD" + StrMod::cap(sref), false, srefWdbeKHdltype, 1, "", "", "", Defval, false, 0, "");
+				dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::STRB, 0, sigsRefIxVTbl, sigsRefUref, refNum++, VecWdbeVMSignalMgeTbl::MDL, refCor, 0, "strbD" + StrMod::cap(sref), false, srefWdbeKHdltype, 1, "", "", "", Defval, 0, "");
 			};
 
 			// - managing module ports / variables
@@ -146,8 +146,8 @@ DpchRetWdbe* WdbeGenfstImbuf::run(
 				// NOT thread safe
 				refNum = Wdbe::getNextVarRefNum(dbswdbe, VecWdbeVMVariableRefTbl::MDL, refMgmt);
 
-				dbswdbe->tblwdbemvariable->insertNewRec(NULL, 0, VecWdbeVMVariableRefTbl::MDL, refMgmt, refNum++, "avllen" + srefrootMgmt, false, false, "usgn", 8, "", "", "", false, "");
-				dbswdbe->tblwdbemvariable->insertNewRec(NULL, 0, VecWdbeVMVariableRefTbl::MDL, refMgmt, refNum++, "d" + srefrootMgmt, false, false, "usgn", 8, "", "", "", false, "");
+				dbswdbe->tblwdbemvariable->insertNewRec(NULL, 0, VecWdbeVMVariableRefTbl::MDL, refMgmt, refNum++, "avllen" + srefrootMgmt, false, false, "usgn", 8, "", "", "", "");
+				dbswdbe->tblwdbemvariable->insertNewRec(NULL, 0, VecWdbeVMVariableRefTbl::MDL, refMgmt, refNum++, "d" + srefrootMgmt, false, false, "usgn", 8, "", "", "", "");
 			};
 
 			if (!mcuNotFpga) {

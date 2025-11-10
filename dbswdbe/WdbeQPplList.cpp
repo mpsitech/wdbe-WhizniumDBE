@@ -26,15 +26,16 @@ WdbeQPplList::WdbeQPplList(
 			, const ubigint hsmRefWdbeMModule
 			, const string stubHsmRefWdbeMModule
 			, const usmallint Depth
-		) {
-	this->qref = qref;
-	this->jref = jref;
-	this->jnum = jnum;
-	this->ref = ref;
-	this->sref = sref;
-	this->hsmRefWdbeMModule = hsmRefWdbeMModule;
-	this->stubHsmRefWdbeMModule = stubHsmRefWdbeMModule;
-	this->Depth = Depth;
+		) :
+			qref(qref)
+			, jref(jref)
+			, jnum(jnum)
+			, ref(ref)
+			, sref(sref)
+			, hsmRefWdbeMModule(hsmRefWdbeMModule)
+			, stubHsmRefWdbeMModule(stubHsmRefWdbeMModule)
+			, Depth(Depth)
+		{
 };
 
 void WdbeQPplList::writeJSON(

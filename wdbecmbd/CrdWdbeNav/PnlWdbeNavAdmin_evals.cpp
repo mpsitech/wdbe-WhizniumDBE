@@ -122,3 +122,17 @@ bool PnlWdbeNavAdmin::evalButFilViewActive(
 
 	return(args.back());
 };
+
+bool PnlWdbeNavAdmin::evalButPrfNewcrdAvail(
+			DbsWdbe* dbswdbe
+		) {
+	// pre.ixCrdaccPrf()
+
+	vector<bool> args;
+	bool a;
+
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCPRF, jref) != 0);
+	args.push_back(a);
+
+	return(args.back());
+};

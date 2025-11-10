@@ -46,10 +46,9 @@ PnlWdbeBnkDetail::ContIac::ContIac(
 			, const string& TxfVst
 		) :
 			Block()
+			, numFPupVst(numFPupVst)
+			, TxfVst(TxfVst)
 		{
-	this->numFPupVst = numFPupVst;
-	this->TxfVst = TxfVst;
-
 	mask = {NUMFPUPVST, TXFVST};
 };
 
@@ -160,10 +159,9 @@ PnlWdbeBnkDetail::ContInf::ContInf(
 			, const string& TxtUnt
 		) :
 			Block()
+			, TxtSrf(TxtSrf)
+			, TxtUnt(TxtUnt)
 		{
-	this->TxtSrf = TxtSrf;
-	this->TxtUnt = TxtUnt;
-
 	mask = {TXTSRF, TXTUNT};
 };
 
@@ -263,29 +261,28 @@ void PnlWdbeBnkDetail::StatApp::writeXML(
  ******************************************************************************/
 
 PnlWdbeBnkDetail::StatShr::StatShr(
-			const bool TxfVstValid
-			, const bool ButSaveAvail
+			const bool ButSaveAvail
 			, const bool ButSaveActive
 			, const bool TxtSrfActive
 			, const bool TxtUntActive
 			, const bool ButUntViewAvail
 			, const bool ButUntViewActive
 			, const bool PupVstActive
+			, const bool TxfVstValid
 			, const bool ButVstEditAvail
 		) :
 			Block()
+			, ButSaveAvail(ButSaveAvail)
+			, ButSaveActive(ButSaveActive)
+			, TxtSrfActive(TxtSrfActive)
+			, TxtUntActive(TxtUntActive)
+			, ButUntViewAvail(ButUntViewAvail)
+			, ButUntViewActive(ButUntViewActive)
+			, PupVstActive(PupVstActive)
+			, TxfVstValid(TxfVstValid)
+			, ButVstEditAvail(ButVstEditAvail)
 		{
-	this->TxfVstValid = TxfVstValid;
-	this->ButSaveAvail = ButSaveAvail;
-	this->ButSaveActive = ButSaveActive;
-	this->TxtSrfActive = TxtSrfActive;
-	this->TxtUntActive = TxtUntActive;
-	this->ButUntViewAvail = ButUntViewAvail;
-	this->ButUntViewActive = ButUntViewActive;
-	this->PupVstActive = PupVstActive;
-	this->ButVstEditAvail = ButVstEditAvail;
-
-	mask = {TXFVSTVALID, BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXTUNTACTIVE, BUTUNTVIEWAVAIL, BUTUNTVIEWACTIVE, PUPVSTACTIVE, BUTVSTEDITAVAIL};
+	mask = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXTUNTACTIVE, BUTUNTVIEWAVAIL, BUTUNTVIEWACTIVE, PUPVSTACTIVE, TXFVSTVALID, BUTVSTEDITAVAIL};
 };
 
 void PnlWdbeBnkDetail::StatShr::writeJSON(
@@ -296,7 +293,6 @@ void PnlWdbeBnkDetail::StatShr::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["TxfVstValid"] = TxfVstValid;
 	me["ButSaveAvail"] = ButSaveAvail;
 	me["ButSaveActive"] = ButSaveActive;
 	me["TxtSrfActive"] = TxtSrfActive;
@@ -304,6 +300,7 @@ void PnlWdbeBnkDetail::StatShr::writeJSON(
 	me["ButUntViewAvail"] = ButUntViewAvail;
 	me["ButUntViewActive"] = ButUntViewActive;
 	me["PupVstActive"] = PupVstActive;
+	me["TxfVstValid"] = TxfVstValid;
 	me["ButVstEditAvail"] = ButVstEditAvail;
 };
 
@@ -319,7 +316,6 @@ void PnlWdbeBnkDetail::StatShr::writeXML(
 	else itemtag = "StatitemShrWdbeBnkDetail";
 
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
-		writeBoolAttr(wr, itemtag, "sref", "TxfVstValid", TxfVstValid);
 		writeBoolAttr(wr, itemtag, "sref", "ButSaveAvail", ButSaveAvail);
 		writeBoolAttr(wr, itemtag, "sref", "ButSaveActive", ButSaveActive);
 		writeBoolAttr(wr, itemtag, "sref", "TxtSrfActive", TxtSrfActive);
@@ -327,6 +323,7 @@ void PnlWdbeBnkDetail::StatShr::writeXML(
 		writeBoolAttr(wr, itemtag, "sref", "ButUntViewAvail", ButUntViewAvail);
 		writeBoolAttr(wr, itemtag, "sref", "ButUntViewActive", ButUntViewActive);
 		writeBoolAttr(wr, itemtag, "sref", "PupVstActive", PupVstActive);
+		writeBoolAttr(wr, itemtag, "sref", "TxfVstValid", TxfVstValid);
 		writeBoolAttr(wr, itemtag, "sref", "ButVstEditAvail", ButVstEditAvail);
 	xmlTextWriterEndElement(wr);
 };
@@ -336,7 +333,6 @@ set<uint> PnlWdbeBnkDetail::StatShr::comm(
 		) {
 	set<uint> items;
 
-	if (TxfVstValid == comp->TxfVstValid) insert(items, TXFVSTVALID);
 	if (ButSaveAvail == comp->ButSaveAvail) insert(items, BUTSAVEAVAIL);
 	if (ButSaveActive == comp->ButSaveActive) insert(items, BUTSAVEACTIVE);
 	if (TxtSrfActive == comp->TxtSrfActive) insert(items, TXTSRFACTIVE);
@@ -344,6 +340,7 @@ set<uint> PnlWdbeBnkDetail::StatShr::comm(
 	if (ButUntViewAvail == comp->ButUntViewAvail) insert(items, BUTUNTVIEWAVAIL);
 	if (ButUntViewActive == comp->ButUntViewActive) insert(items, BUTUNTVIEWACTIVE);
 	if (PupVstActive == comp->PupVstActive) insert(items, PUPVSTACTIVE);
+	if (TxfVstValid == comp->TxfVstValid) insert(items, TXFVSTVALID);
 	if (ButVstEditAvail == comp->ButVstEditAvail) insert(items, BUTVSTEDITAVAIL);
 
 	return(items);
@@ -357,7 +354,7 @@ set<uint> PnlWdbeBnkDetail::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {TXFVSTVALID, BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXTUNTACTIVE, BUTUNTVIEWAVAIL, BUTUNTVIEWACTIVE, PUPVSTACTIVE, BUTVSTEDITAVAIL};
+	diffitems = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXTUNTACTIVE, BUTUNTVIEWAVAIL, BUTUNTVIEWACTIVE, PUPVSTACTIVE, TXFVSTVALID, BUTVSTEDITAVAIL};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);

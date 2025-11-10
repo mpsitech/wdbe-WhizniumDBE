@@ -26,11 +26,11 @@ DpchInvWdbeWrmcuBase::DpchInvWdbeWrmcuBase(
 			, const string& Untsref
 		) :
 			DpchInvWdbe(VecWdbeVDpch::DPCHINVWDBEWRMCUBASE, oref, jref)
+			, refWdbeMUnit(refWdbeMUnit)
+			, folder(folder)
+			, Prjshort(Prjshort)
+			, Untsref(Untsref)
 		{
-	this->refWdbeMUnit = refWdbeMUnit;
-	this->folder = folder;
-	this->Prjshort = Prjshort;
-	this->Untsref = Untsref;
 };
 
 void DpchInvWdbeWrmcuBase::readXML(
@@ -84,11 +84,11 @@ DpchInvWdbeWrmcuCtr::DpchInvWdbeWrmcuCtr(
 			, const string& Untsref
 		) :
 			DpchInvWdbe(VecWdbeVDpch::DPCHINVWDBEWRMCUCTR, oref, jref)
+			, refWdbeMModule(refWdbeMModule)
+			, folder(folder)
+			, Prjshort(Prjshort)
+			, Untsref(Untsref)
 		{
-	this->refWdbeMModule = refWdbeMModule;
-	this->folder = folder;
-	this->Prjshort = Prjshort;
-	this->Untsref = Untsref;
 };
 
 void DpchInvWdbeWrmcuCtr::readXML(
@@ -140,9 +140,9 @@ DpchInvWdbeWrmcuDeploy::DpchInvWdbeWrmcuDeploy(
 			, const string& folder
 		) :
 			DpchInvWdbe(VecWdbeVDpch::DPCHINVWDBEWRMCUDEPLOY, oref, jref)
+			, refWdbeMRelease(refWdbeMRelease)
+			, folder(folder)
 		{
-	this->refWdbeMRelease = refWdbeMRelease;
-	this->folder = folder;
 };
 
 void DpchInvWdbeWrmcuDeploy::readXML(
@@ -190,9 +190,9 @@ DpchInvWdbeWrmcuMdlfine::DpchInvWdbeWrmcuMdlfine(
 			, const string& folder
 		) :
 			DpchInvWdbe(VecWdbeVDpch::DPCHINVWDBEWRMCUMDLFINE, oref, jref)
+			, refWdbeMModule(refWdbeMModule)
+			, folder(folder)
 		{
-	this->refWdbeMModule = refWdbeMModule;
-	this->folder = folder;
 };
 
 void DpchInvWdbeWrmcuMdlfine::readXML(
@@ -242,11 +242,11 @@ DpchInvWdbeWrmcuMdlraw::DpchInvWdbeWrmcuMdlraw(
 			, const string& Untsref
 		) :
 			DpchInvWdbe(VecWdbeVDpch::DPCHINVWDBEWRMCUMDLRAW, oref, jref)
+			, refWdbeMModule(refWdbeMModule)
+			, folder(folder)
+			, Prjshort(Prjshort)
+			, Untsref(Untsref)
 		{
-	this->refWdbeMModule = refWdbeMModule;
-	this->folder = folder;
-	this->Prjshort = Prjshort;
-	this->Untsref = Untsref;
 };
 
 void DpchInvWdbeWrmcuMdlraw::readXML(

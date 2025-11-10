@@ -189,7 +189,7 @@ void WdbePrctreeMerge::invscanFolder(
 			s = tmppath + "/" + tplfolder + extsub + "/" + files[i];
 
 			// chop off .ip extension
-			if (s.rfind(".ip") == (s.length()-3)) s = s.substr(0, s.length()-3);
+			if (s.length() > 3) if (s.rfind(".ip") == (s.length()-3)) s = s.substr(0, s.length()-3);
 
 			if (access(s.c_str(), R_OK) == -1) {
 				// corresponding tplfile does not exist

@@ -43,9 +43,8 @@ PnlWdbeMchRec::ContInf::ContInf(
 			const string& TxtRef
 		) :
 			Block()
+			, TxtRef(TxtRef)
 		{
-	this->TxtRef = TxtRef;
-
 	mask = {TXTREF};
 };
 
@@ -108,8 +107,8 @@ void PnlWdbeMchRec::StatApp::writeJSON(
 			Json::Value& sup
 			, string difftag
 			, const bool initdoneDetail
-			, const bool initdoneAMakefile
 			, const bool initdoneAPar
+			, const bool initdoneAMakefile
 			, const bool initdone1NRelease
 			, const bool initdoneSup1NMachine
 		) {
@@ -118,8 +117,8 @@ void PnlWdbeMchRec::StatApp::writeJSON(
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
 	me["initdoneDetail"] = initdoneDetail;
-	me["initdoneAMakefile"] = initdoneAMakefile;
 	me["initdoneAPar"] = initdoneAPar;
+	me["initdoneAMakefile"] = initdoneAMakefile;
 	me["initdone1NRelease"] = initdone1NRelease;
 	me["initdoneSup1NMachine"] = initdoneSup1NMachine;
 };
@@ -129,8 +128,8 @@ void PnlWdbeMchRec::StatApp::writeXML(
 			, string difftag
 			, bool shorttags
 			, const bool initdoneDetail
-			, const bool initdoneAMakefile
 			, const bool initdoneAPar
+			, const bool initdoneAMakefile
 			, const bool initdone1NRelease
 			, const bool initdoneSup1NMachine
 		) {
@@ -142,8 +141,8 @@ void PnlWdbeMchRec::StatApp::writeXML(
 
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
 		writeBoolAttr(wr, itemtag, "sref", "initdoneDetail", initdoneDetail);
-		writeBoolAttr(wr, itemtag, "sref", "initdoneAMakefile", initdoneAMakefile);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneAPar", initdoneAPar);
+		writeBoolAttr(wr, itemtag, "sref", "initdoneAMakefile", initdoneAMakefile);
 		writeBoolAttr(wr, itemtag, "sref", "initdone1NRelease", initdone1NRelease);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneSup1NMachine", initdoneSup1NMachine);
 	xmlTextWriterEndElement(wr);
@@ -156,23 +155,22 @@ void PnlWdbeMchRec::StatApp::writeXML(
 PnlWdbeMchRec::StatShr::StatShr(
 			const uint ixWdbeVExpstate
 			, const ubigint jrefDetail
-			, const ubigint jrefAMakefile
 			, const ubigint jrefAPar
+			, const ubigint jrefAMakefile
 			, const ubigint jref1NRelease
 			, const ubigint jrefSup1NMachine
 			, const bool ButRegularizeActive
 		) :
 			Block()
+			, ixWdbeVExpstate(ixWdbeVExpstate)
+			, jrefDetail(jrefDetail)
+			, jrefAPar(jrefAPar)
+			, jrefAMakefile(jrefAMakefile)
+			, jref1NRelease(jref1NRelease)
+			, jrefSup1NMachine(jrefSup1NMachine)
+			, ButRegularizeActive(ButRegularizeActive)
 		{
-	this->ixWdbeVExpstate = ixWdbeVExpstate;
-	this->jrefDetail = jrefDetail;
-	this->jrefAMakefile = jrefAMakefile;
-	this->jrefAPar = jrefAPar;
-	this->jref1NRelease = jref1NRelease;
-	this->jrefSup1NMachine = jrefSup1NMachine;
-	this->ButRegularizeActive = ButRegularizeActive;
-
-	mask = {IXWDBEVEXPSTATE, JREFDETAIL, JREFAMAKEFILE, JREFAPAR, JREF1NRELEASE, JREFSUP1NMACHINE, BUTREGULARIZEACTIVE};
+	mask = {IXWDBEVEXPSTATE, JREFDETAIL, JREFAPAR, JREFAMAKEFILE, JREF1NRELEASE, JREFSUP1NMACHINE, BUTREGULARIZEACTIVE};
 };
 
 void PnlWdbeMchRec::StatShr::writeJSON(
@@ -185,8 +183,8 @@ void PnlWdbeMchRec::StatShr::writeJSON(
 
 	me["srefIxWdbeVExpstate"] = VecWdbeVExpstate::getSref(ixWdbeVExpstate);
 	me["scrJrefDetail"] = Scr::scramble(jrefDetail);
-	me["scrJrefAMakefile"] = Scr::scramble(jrefAMakefile);
 	me["scrJrefAPar"] = Scr::scramble(jrefAPar);
+	me["scrJrefAMakefile"] = Scr::scramble(jrefAMakefile);
 	me["scrJref1NRelease"] = Scr::scramble(jref1NRelease);
 	me["scrJrefSup1NMachine"] = Scr::scramble(jrefSup1NMachine);
 	me["ButRegularizeActive"] = ButRegularizeActive;
@@ -206,8 +204,8 @@ void PnlWdbeMchRec::StatShr::writeXML(
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
 		writeStringAttr(wr, itemtag, "sref", "srefIxWdbeVExpstate", VecWdbeVExpstate::getSref(ixWdbeVExpstate));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefDetail", Scr::scramble(jrefDetail));
-		writeStringAttr(wr, itemtag, "sref", "scrJrefAMakefile", Scr::scramble(jrefAMakefile));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefAPar", Scr::scramble(jrefAPar));
+		writeStringAttr(wr, itemtag, "sref", "scrJrefAMakefile", Scr::scramble(jrefAMakefile));
 		writeStringAttr(wr, itemtag, "sref", "scrJref1NRelease", Scr::scramble(jref1NRelease));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefSup1NMachine", Scr::scramble(jrefSup1NMachine));
 		writeBoolAttr(wr, itemtag, "sref", "ButRegularizeActive", ButRegularizeActive);
@@ -221,8 +219,8 @@ set<uint> PnlWdbeMchRec::StatShr::comm(
 
 	if (ixWdbeVExpstate == comp->ixWdbeVExpstate) insert(items, IXWDBEVEXPSTATE);
 	if (jrefDetail == comp->jrefDetail) insert(items, JREFDETAIL);
-	if (jrefAMakefile == comp->jrefAMakefile) insert(items, JREFAMAKEFILE);
 	if (jrefAPar == comp->jrefAPar) insert(items, JREFAPAR);
+	if (jrefAMakefile == comp->jrefAMakefile) insert(items, JREFAMAKEFILE);
 	if (jref1NRelease == comp->jref1NRelease) insert(items, JREF1NRELEASE);
 	if (jrefSup1NMachine == comp->jrefSup1NMachine) insert(items, JREFSUP1NMACHINE);
 	if (ButRegularizeActive == comp->ButRegularizeActive) insert(items, BUTREGULARIZEACTIVE);
@@ -238,7 +236,7 @@ set<uint> PnlWdbeMchRec::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {IXWDBEVEXPSTATE, JREFDETAIL, JREFAMAKEFILE, JREFAPAR, JREF1NRELEASE, JREFSUP1NMACHINE, BUTREGULARIZEACTIVE};
+	diffitems = {IXWDBEVEXPSTATE, JREFDETAIL, JREFAPAR, JREFAMAKEFILE, JREF1NRELEASE, JREFSUP1NMACHINE, BUTREGULARIZEACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);

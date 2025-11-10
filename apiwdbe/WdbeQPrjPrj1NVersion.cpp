@@ -20,9 +20,10 @@ using namespace Xmlio;
 WdbeQPrjPrj1NVersion::WdbeQPrjPrj1NVersion(
 			const uint jnum
 			, const string stubRef
-		) {
-	this->jnum = jnum;
-	this->stubRef = stubRef;
+		) :
+			jnum(jnum)
+			, stubRef(stubRef)
+		{
 };
 
 bool WdbeQPrjPrj1NVersion::readXML(

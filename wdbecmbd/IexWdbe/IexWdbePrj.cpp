@@ -1204,7 +1204,7 @@ void IexWdbePrj::writeXML(
 };
 
 map<uint,uint> IexWdbePrj::icsWdbeVIopInsAll() {
-	return {{(uint)VecVIme::IMEIJMVERSIONSTATE,VecWdbeVIop::INS},{(uint)VecVIme::IMEIMPROJECT,VecWdbeVIop::RETRINS},{(uint)VecVIme::IMEIMVERSION,VecWdbeVIop::INS},{(uint)VecVIme::IMEIRMPERSONMPROJECT,VecWdbeVIop::INS}};
+	return {{(uint)VecVIme::IMEIJMVERSIONSTATE,VecWdbeVIop::INS},{(uint)VecVIme::IMEIMPROJECT,VecWdbeVIop::INS},{(uint)VecVIme::IMEIMVERSION,VecWdbeVIop::INS},{(uint)VecVIme::IMEIRMPERSONMPROJECT,VecWdbeVIop::INS}};
 };
 
 uint IexWdbePrj::getIxWdbeVIop(

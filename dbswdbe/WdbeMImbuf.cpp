@@ -26,15 +26,15 @@ WdbeMImbuf::WdbeMImbuf(
 			, const usmallint Width
 			, const string Minmax
 			, const utinyint Prio
-		) {
-
-	this->ref = ref;
-	this->ixVRotype = ixVRotype;
-	this->refWdbeMModule = refWdbeMModule;
-	this->Fullsref = Fullsref;
-	this->Width = Width;
-	this->Minmax = Minmax;
-	this->Prio = Prio;
+		) :
+			ref(ref)
+			, ixVRotype(ixVRotype)
+			, refWdbeMModule(refWdbeMModule)
+			, Fullsref(Fullsref)
+			, Width(Width)
+			, Minmax(Minmax)
+			, Prio(Prio)
+		{
 };
 
 bool WdbeMImbuf::operator==(

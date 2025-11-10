@@ -29,7 +29,7 @@
 class WdbeMVariable {
 
 public:
-	WdbeMVariable(const Sbecore::ubigint ref = 0, const Sbecore::ubigint refWdbeCVariable = 0, const Sbecore::uint refIxVTbl = 0, const Sbecore::ubigint refUref = 0, const Sbecore::uint refNum = 0, const std::string sref = "", const bool Const = false, const bool Falling = false, const std::string srefWdbeKHdltype = "", const Sbecore::usmallint Width = 0, const std::string Minmax = "", const std::string Onval = "", const std::string Offval = "", const bool Defon = false, const std::string Comment = "");
+	WdbeMVariable(const Sbecore::ubigint ref = 0, const Sbecore::ubigint refWdbeCVariable = 0, const Sbecore::uint refIxVTbl = 0, const Sbecore::ubigint refUref = 0, const Sbecore::uint refNum = 0, const std::string sref = "", const bool Const = false, const bool Falling = false, const std::string srefWdbeKHdltype = "", const Sbecore::usmallint Width = 0, const std::string Minmax = "", const std::string Onval = "", const std::string Offval = "", const std::string Comment = "");
 
 public:
 	Sbecore::ubigint ref;
@@ -45,7 +45,6 @@ public:
 	std::string Minmax;
 	std::string Onval;
 	std::string Offval;
-	bool Defon;
 	std::string Comment;
 
 public:
@@ -108,8 +107,8 @@ public:
 	virtual Sbecore::ubigint loadRstBySQL(const std::string& sqlstr, const bool append, ListWdbeMVariable& rst);
 
 	virtual Sbecore::ubigint insertRec(WdbeMVariable* rec);
-	Sbecore::ubigint insertNewRec(WdbeMVariable** rec = NULL, const Sbecore::ubigint refWdbeCVariable = 0, const Sbecore::uint refIxVTbl = 0, const Sbecore::ubigint refUref = 0, const Sbecore::uint refNum = 0, const std::string sref = "", const bool Const = false, const bool Falling = false, const std::string srefWdbeKHdltype = "", const Sbecore::usmallint Width = 0, const std::string Minmax = "", const std::string Onval = "", const std::string Offval = "", const bool Defon = false, const std::string Comment = "");
-	Sbecore::ubigint appendNewRecToRst(ListWdbeMVariable& rst, WdbeMVariable** rec = NULL, const Sbecore::ubigint refWdbeCVariable = 0, const Sbecore::uint refIxVTbl = 0, const Sbecore::ubigint refUref = 0, const Sbecore::uint refNum = 0, const std::string sref = "", const bool Const = false, const bool Falling = false, const std::string srefWdbeKHdltype = "", const Sbecore::usmallint Width = 0, const std::string Minmax = "", const std::string Onval = "", const std::string Offval = "", const bool Defon = false, const std::string Comment = "");
+	Sbecore::ubigint insertNewRec(WdbeMVariable** rec = NULL, const Sbecore::ubigint refWdbeCVariable = 0, const Sbecore::uint refIxVTbl = 0, const Sbecore::ubigint refUref = 0, const Sbecore::uint refNum = 0, const std::string sref = "", const bool Const = false, const bool Falling = false, const std::string srefWdbeKHdltype = "", const Sbecore::usmallint Width = 0, const std::string Minmax = "", const std::string Onval = "", const std::string Offval = "", const std::string Comment = "");
+	Sbecore::ubigint appendNewRecToRst(ListWdbeMVariable& rst, WdbeMVariable** rec = NULL, const Sbecore::ubigint refWdbeCVariable = 0, const Sbecore::uint refIxVTbl = 0, const Sbecore::ubigint refUref = 0, const Sbecore::uint refNum = 0, const std::string sref = "", const bool Const = false, const bool Falling = false, const std::string srefWdbeKHdltype = "", const Sbecore::usmallint Width = 0, const std::string Minmax = "", const std::string Onval = "", const std::string Offval = "", const std::string Comment = "");
 	virtual void insertRst(ListWdbeMVariable& rst, bool transact = false);
 	virtual void updateRec(WdbeMVariable* rec);
 	virtual void updateRst(ListWdbeMVariable& rst, bool transact = false);

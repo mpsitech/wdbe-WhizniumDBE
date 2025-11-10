@@ -23,8 +23,8 @@ DpchInvWdbePlhfpgaCmdinv::DpchInvWdbePlhfpgaCmdinv(
 			, const ubigint refWdbeMModule
 		) :
 			DpchInvWdbe(VecWdbeVDpch::DPCHINVWDBEPLHFPGACMDINV, oref, jref)
+			, refWdbeMModule(refWdbeMModule)
 		{
-	this->refWdbeMModule = refWdbeMModule;
 };
 
 void DpchInvWdbePlhfpgaCmdinv::readXML(
@@ -72,9 +72,9 @@ DpchRetWdbePlhfpgaCmdinv::DpchRetWdbePlhfpgaCmdinv(
 			, const vector<string>& vals
 		) :
 			DpchRetWdbe(VecWdbeVDpch::DPCHRETWDBEPLHFPGACMDINV, scrOref, scrJref, ixOpVOpres, pdone)
+			, keys(keys)
+			, vals(vals)
 		{
-	this->keys = keys;
-	this->vals = vals;
 };
 
 void DpchRetWdbePlhfpgaCmdinv::readXML(
@@ -136,8 +136,8 @@ DpchInvWdbePlhfpgaCmdret::DpchInvWdbePlhfpgaCmdret(
 			, const ubigint refWdbeMModule
 		) :
 			DpchInvWdbe(VecWdbeVDpch::DPCHINVWDBEPLHFPGACMDRET, oref, jref)
+			, refWdbeMModule(refWdbeMModule)
 		{
-	this->refWdbeMModule = refWdbeMModule;
 };
 
 void DpchInvWdbePlhfpgaCmdret::readXML(
@@ -185,9 +185,9 @@ DpchRetWdbePlhfpgaCmdret::DpchRetWdbePlhfpgaCmdret(
 			, const vector<string>& vals
 		) :
 			DpchRetWdbe(VecWdbeVDpch::DPCHRETWDBEPLHFPGACMDRET, scrOref, scrJref, ixOpVOpres, pdone)
+			, keys(keys)
+			, vals(vals)
 		{
-	this->keys = keys;
-	this->vals = vals;
 };
 
 void DpchRetWdbePlhfpgaCmdret::readXML(
@@ -249,8 +249,8 @@ DpchInvWdbePlhfpgaCtr::DpchInvWdbePlhfpgaCtr(
 			, const ubigint refWdbeMModule
 		) :
 			DpchInvWdbe(VecWdbeVDpch::DPCHINVWDBEPLHFPGACTR, oref, jref)
+			, refWdbeMModule(refWdbeMModule)
 		{
-	this->refWdbeMModule = refWdbeMModule;
 };
 
 void DpchInvWdbePlhfpgaCtr::readXML(
@@ -298,9 +298,9 @@ DpchRetWdbePlhfpgaCtr::DpchRetWdbePlhfpgaCtr(
 			, const vector<string>& vals
 		) :
 			DpchRetWdbe(VecWdbeVDpch::DPCHRETWDBEPLHFPGACTR, scrOref, scrJref, ixOpVOpres, pdone)
+			, keys(keys)
+			, vals(vals)
 		{
-	this->keys = keys;
-	this->vals = vals;
 };
 
 void DpchRetWdbePlhfpgaCtr::readXML(

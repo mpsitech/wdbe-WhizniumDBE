@@ -24,13 +24,14 @@ WdbeQVecVec1NVectoritem::WdbeQVecVec1NVectoritem(
 			, const ubigint ref
 			, const string stubRef
 			, const uint vecNum
-		) {
-	this->qref = qref;
-	this->jref = jref;
-	this->jnum = jnum;
-	this->ref = ref;
-	this->stubRef = stubRef;
-	this->vecNum = vecNum;
+		) :
+			qref(qref)
+			, jref(jref)
+			, jnum(jnum)
+			, ref(ref)
+			, stubRef(stubRef)
+			, vecNum(vecNum)
+		{
 };
 
 void WdbeQVecVec1NVectoritem::writeJSON(

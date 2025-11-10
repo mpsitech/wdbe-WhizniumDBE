@@ -22,13 +22,13 @@ WdbeAMModulePar::WdbeAMModulePar(
 			, const uint mdlNum
 			, const string x1SrefKKey
 			, const string Val
-		) {
-
-	this->ref = ref;
-	this->mdlRefWdbeMModule = mdlRefWdbeMModule;
-	this->mdlNum = mdlNum;
-	this->x1SrefKKey = x1SrefKKey;
-	this->Val = Val;
+		) :
+			ref(ref)
+			, mdlRefWdbeMModule(mdlRefWdbeMModule)
+			, mdlNum(mdlNum)
+			, x1SrefKKey(x1SrefKKey)
+			, Val(Val)
+		{
 };
 
 bool WdbeAMModulePar::operator==(

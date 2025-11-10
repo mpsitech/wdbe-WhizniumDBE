@@ -2,7 +2,7 @@
 # make file for CrdWdbeMod card job handler, release wdbed_mac
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 7 Feb 2024
+# date created: 5 Nov 2025
 # IP header --- ABOVE
 
 include ../Makefile.inc
@@ -16,7 +16,7 @@ STATLIBFLAGS = rcs
 INCPATH = -I$(BUILDROOT)/dbswdbe -I$(BUILDROOT)/wdbed/VecWdbe -I$(BUILDROOT)/wdbed/IexWdbe -I$(BUILDROOT)/wdbed
 INCPATH += -I${WHIZSDKROOT}/build -I${WHIZSDKROOT}/build/apiwzlm -I/opt/homebrew/include -I/opt/homebrew/opt/curl/include -I/opt/homebrew/opt/libgit2/include -I/opt/homebrew/opt/libmicrohttpd/include -I/opt/homebrew/opt/libxml2/include -I/opt/homebrew/opt/openssl@3/include -I/opt/homebrew/opt/sqlite3/include -I/usr/local/mysql/include
 
-OBJS = CrdWdbeMod.o PnlWdbeModList.o QryWdbeModList.o PnlWdbeModHeadbar.o PnlWdbeModRec.o PnlWdbeModCtrMNCommand.o QryWdbeModCtrMNCommand.o PnlWdbeModCorMNModule.o QryWdbeModCorMNModule.o PnlWdbeModCtdMNModule.o QryWdbeModCtdMNModule.o PnlWdbeModMNPeripheral.o QryWdbeModMNPeripheral.o PnlWdbeModCtrRef1NCommand.o QryWdbeModCtrRef1NCommand.o PnlWdbeModCtrRef1NError.o QryWdbeModCtrRef1NError.o PnlWdbeModCtrHk1NVector.o QryWdbeModCtrHk1NVector.o PnlWdbeModRef1NVariable.o QryWdbeModRef1NVariable.o PnlWdbeModMge1NSignal.o QryWdbeModMge1NSignal.o PnlWdbeModRef1NSensitivity.o QryWdbeModRef1NSensitivity.o PnlWdbeModRef1NSignal.o QryWdbeModRef1NSignal.o PnlWdbeModSup1NModule.o QryWdbeModSup1NModule.o PnlWdbeModMdl1NPort.o QryWdbeModMdl1NPort.o PnlWdbeModHsm1NPipeline.o QryWdbeModHsm1NPipeline.o PnlWdbeMod1NProcess.o QryWdbeMod1NProcess.o PnlWdbeMod1NCdc.o QryWdbeMod1NCdc.o PnlWdbeModMdl1NGeneric.o QryWdbeModMdl1NGeneric.o PnlWdbeModAPar.o QryWdbeModAPar.o PnlWdbeModKHdltype.o QryWdbeModKHdltype.o PnlWdbeModDetail.o
+OBJS = CrdWdbeMod.o PnlWdbeModRec.o PnlWdbeModDetail.o PnlWdbeModKHdltype.o QryWdbeModKHdltype.o PnlWdbeModAPar.o QryWdbeModAPar.o PnlWdbeModMdl1NGeneric.o QryWdbeModMdl1NGeneric.o PnlWdbeModMdl1NPort.o QryWdbeModMdl1NPort.o PnlWdbeMod1NProcess.o QryWdbeMod1NProcess.o PnlWdbeModHsm1NPipeline.o QryWdbeModHsm1NPipeline.o PnlWdbeMod1NCdc.o QryWdbeMod1NCdc.o PnlWdbeModSup1NModule.o QryWdbeModSup1NModule.o PnlWdbeModMge1NSignal.o QryWdbeModMge1NSignal.o PnlWdbeModRef1NVariable.o QryWdbeModRef1NVariable.o PnlWdbeModRef1NSensitivity.o QryWdbeModRef1NSensitivity.o PnlWdbeModRef1NSignal.o QryWdbeModRef1NSignal.o PnlWdbeModCtrRef1NCommand.o QryWdbeModCtrRef1NCommand.o PnlWdbeModCtrHk1NVector.o QryWdbeModCtrHk1NVector.o PnlWdbeModCtrRef1NError.o QryWdbeModCtrRef1NError.o PnlWdbeModCtdMNModule.o QryWdbeModCtdMNModule.o PnlWdbeModMNPeripheral.o QryWdbeModMNPeripheral.o PnlWdbeModCorMNModule.o QryWdbeModCorMNModule.o PnlWdbeModCtrMNCommand.o QryWdbeModCtrMNCommand.o PnlWdbeModHeadbar.o PnlWdbeModList.o QryWdbeModList.o
 
 LIB = libcrdwdbemod
 

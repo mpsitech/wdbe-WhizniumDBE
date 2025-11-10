@@ -63,13 +63,12 @@ PnlWdbeNavGlobal::ContIac::ContIac(
 			, const uint numFLstMtp
 		) :
 			Block()
+			, numFLstMch(numFLstMch)
+			, numFLstLib(numFLstLib)
+			, numFLstFam(numFLstFam)
+			, numFLstSil(numFLstSil)
+			, numFLstMtp(numFLstMtp)
 		{
-	this->numFLstMch = numFLstMch;
-	this->numFLstLib = numFLstLib;
-	this->numFLstFam = numFLstFam;
-	this->numFLstSil = numFLstSil;
-	this->numFLstMtp = numFLstMtp;
-
 	mask = {NUMFLSTMCH, NUMFLSTLIB, NUMFLSTFAM, NUMFLSTSIL, NUMFLSTMTP};
 };
 
@@ -276,18 +275,17 @@ PnlWdbeNavGlobal::StatShr::StatShr(
 			, const bool ButMtpViewActive
 		) :
 			Block()
+			, LstMchAvail(LstMchAvail)
+			, ButMchViewActive(ButMchViewActive)
+			, LstLibAvail(LstLibAvail)
+			, ButLibViewActive(ButLibViewActive)
+			, LstFamAvail(LstFamAvail)
+			, ButFamViewActive(ButFamViewActive)
+			, LstSilAvail(LstSilAvail)
+			, ButSilViewActive(ButSilViewActive)
+			, LstMtpAvail(LstMtpAvail)
+			, ButMtpViewActive(ButMtpViewActive)
 		{
-	this->LstMchAvail = LstMchAvail;
-	this->ButMchViewActive = ButMchViewActive;
-	this->LstLibAvail = LstLibAvail;
-	this->ButLibViewActive = ButLibViewActive;
-	this->LstFamAvail = LstFamAvail;
-	this->ButFamViewActive = ButFamViewActive;
-	this->LstSilAvail = LstSilAvail;
-	this->ButSilViewActive = ButSilViewActive;
-	this->LstMtpAvail = LstMtpAvail;
-	this->ButMtpViewActive = ButMtpViewActive;
-
 	mask = {LSTMCHAVAIL, BUTMCHVIEWACTIVE, LSTLIBAVAIL, BUTLIBVIEWACTIVE, LSTFAMAVAIL, BUTFAMVIEWACTIVE, LSTSILAVAIL, BUTSILVIEWACTIVE, LSTMTPAVAIL, BUTMTPVIEWACTIVE};
 };
 

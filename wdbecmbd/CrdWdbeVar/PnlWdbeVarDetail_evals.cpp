@@ -138,25 +138,13 @@ bool PnlWdbeVarDetail::evalTxtReuActive(
 bool PnlWdbeVarDetail::evalButReuViewAvail(
 			DbsWdbe* dbswdbe
 		) {
-	// var.reuEq(0)|((pre.ixCrdaccPrc()&var.retEq(prc)&pre.refMod())|(pre.ixCrdaccMod()&var.retEq(mdl)&var.reu.inSbs(mod)&pre.refUnt())|(pre.ixCrdaccMod()&var.retEq(mdl)&var.reu.inSbs(mod)&pre.refCvr())|(pre.ixCrdaccMtp()&var.retEq(mdl)&var.reu.inSbs(mtp)))
+	// var.reuEq(0)|((pre.ixCrdaccMod()&var.retEq(mdl)&var.reu.inSbs(mod)&pre.refUnt())|(pre.ixCrdaccMod()&var.retEq(mdl)&var.reu.inSbs(mod)&pre.refCvr())|(pre.ixCrdaccMtp()&var.retEq(mdl)&var.reu.inSbs(mtp))|(pre.ixCrdaccPrc()&var.retEq(prc)&pre.refMod()))
 
 	vector<bool> args;
 	bool a, b;
 
 	a = false; a = (recVar.refUref == 0);
 	args.push_back(a);
-	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCPRC, jref) != 0);
-	args.push_back(a);
-	a = false; a = (recVar.refIxVTbl == VecWdbeVMVariableRefTbl::PRC);
-	args.push_back(a);
-	a = false; a = (xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFMOD, jref) != 0);
-	args.push_back(a);
-	b = args.back(); args.pop_back();
-	a = args.back(); args.pop_back();
-	args.push_back(a && b);
-	b = args.back(); args.pop_back();
-	a = args.back(); args.pop_back();
-	args.push_back(a && b);
 	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCMOD, jref) != 0);
 	args.push_back(a);
 	a = false; a = (recVar.refIxVTbl == VecWdbeVMVariableRefTbl::MDL);
@@ -196,6 +184,18 @@ bool PnlWdbeVarDetail::evalButReuViewAvail(
 	a = false; a = (recVar.refIxVTbl == VecWdbeVMVariableRefTbl::MDL);
 	args.push_back(a);
 	a = false; a = ((dbswdbe->getIxWSubsetByRefWdbeMModule(recVar.refUref) & VecWdbeWMModuleSubset::SBSWDBEBMMODULEMTP) != 0);
+	args.push_back(a);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a && b);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a && b);
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCPRC, jref) != 0);
+	args.push_back(a);
+	a = false; a = (recVar.refIxVTbl == VecWdbeVMVariableRefTbl::PRC);
+	args.push_back(a);
+	a = false; a = (xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFMOD, jref) != 0);
 	args.push_back(a);
 	b = args.back(); args.pop_back();
 	a = args.back(); args.pop_back();
@@ -280,12 +280,12 @@ bool PnlWdbeVarDetail::evalPupHtyActive(
 bool PnlWdbeVarDetail::evalButHtyEditAvail(
 			DbsWdbe* dbswdbe
 		) {
-	// pre.adm()
+	// pre.ixCrdaccVarIncl(edit)
 
 	vector<bool> args;
 	bool a;
 
-	a = false;
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCVAR, jref) & VecWdbeWAccess::EDIT);
 	args.push_back(a);
 
 	return(args.back());
@@ -334,20 +334,6 @@ bool PnlWdbeVarDetail::evalTxfOnvActive(
 };
 
 bool PnlWdbeVarDetail::evalTxfOfvActive(
-			DbsWdbe* dbswdbe
-		) {
-	// pre.ixCrdaccVarIncl(edit)
-
-	vector<bool> args;
-	bool a;
-
-	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCVAR, jref) & VecWdbeWAccess::EDIT);
-	args.push_back(a);
-
-	return(args.back());
-};
-
-bool PnlWdbeVarDetail::evalChkDfoActive(
 			DbsWdbe* dbswdbe
 		) {
 	// pre.ixCrdaccVarIncl(edit)

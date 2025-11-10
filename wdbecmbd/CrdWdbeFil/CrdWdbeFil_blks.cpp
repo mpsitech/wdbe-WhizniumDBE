@@ -81,11 +81,10 @@ CrdWdbeFil::ContInf::ContInf(
 			, const string& MtxCrdFil
 		) :
 			Block()
+			, numFSge(numFSge)
+			, MrlAppHlp(MrlAppHlp)
+			, MtxCrdFil(MtxCrdFil)
 		{
-	this->numFSge = numFSge;
-	this->MrlAppHlp = MrlAppHlp;
-	this->MtxCrdFil = MtxCrdFil;
-
 	mask = {NUMFSGE, MRLAPPHLP, MTXCRDFIL};
 };
 
@@ -219,17 +218,16 @@ CrdWdbeFil::StatShr::StatShr(
 			, const bool MitCrdDldActive
 		) :
 			Block()
+			, jrefDlgdownload(jrefDlgdownload)
+			, jrefDlgnew(jrefDlgnew)
+			, jrefHeadbar(jrefHeadbar)
+			, jrefList(jrefList)
+			, jrefRec(jrefRec)
+			, MspCrd1Avail(MspCrd1Avail)
+			, MitCrdNewAvail(MitCrdNewAvail)
+			, MitCrdDldAvail(MitCrdDldAvail)
+			, MitCrdDldActive(MitCrdDldActive)
 		{
-	this->jrefDlgdownload = jrefDlgdownload;
-	this->jrefDlgnew = jrefDlgnew;
-	this->jrefHeadbar = jrefHeadbar;
-	this->jrefList = jrefList;
-	this->jrefRec = jrefRec;
-	this->MspCrd1Avail = MspCrd1Avail;
-	this->MitCrdNewAvail = MitCrdNewAvail;
-	this->MitCrdDldAvail = MitCrdDldAvail;
-	this->MitCrdDldActive = MitCrdDldActive;
-
 	mask = {JREFDLGDOWNLOAD, JREFDLGNEW, JREFHEADBAR, JREFLIST, JREFREC, MSPCRD1AVAIL, MITCRDNEWAVAIL, MITCRDDLDAVAIL, MITCRDDLDACTIVE};
 };
 

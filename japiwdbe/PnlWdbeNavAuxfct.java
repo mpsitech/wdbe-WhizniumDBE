@@ -19,13 +19,15 @@ public class PnlWdbeNavAuxfct {
 		*/
 	public static class VecVDo {
 
-		public static final int BUTUTLNEWCRDCLICK = 1;
+		public static final int BUTIDFNEWCRDCLICK = 1;
+		public static final int BUTUTLNEWCRDCLICK = 2;
 
 		public static int getIx(
 					String sref
 				) {
 			String s = sref.toLowerCase();
 
+			if (s.equals("butidfnewcrdclick")) return BUTIDFNEWCRDCLICK;
 			if (s.equals("bututlnewcrdclick")) return BUTUTLNEWCRDCLICK;
 
 			return 0;
@@ -34,6 +36,7 @@ public class PnlWdbeNavAuxfct {
 		public static String getSref(
 					int ix
 				) {
+			if (ix == BUTIDFNEWCRDCLICK) return("ButIdfNewcrdClick");
 			if (ix == BUTUTLNEWCRDCLICK) return("ButUtlNewcrdClick");
 
 			return "";
@@ -112,16 +115,20 @@ public class PnlWdbeNavAuxfct {
 	  */
 	public class StatShr extends Block {
 
-		public static final int BUTUTLNEWCRDAVAIL = 1;
+		public static final int BUTIDFNEWCRDAVAIL = 1;
+		public static final int BUTUTLNEWCRDAVAIL = 2;
 
 		public StatShr(
-					boolean ButUtlNewcrdAvail
+					boolean ButIdfNewcrdAvail
+					, boolean ButUtlNewcrdAvail
 				) {
+			this.ButIdfNewcrdAvail = ButIdfNewcrdAvail;
 			this.ButUtlNewcrdAvail = ButUtlNewcrdAvail;
 
-			mask = new HashSet<Integer>(Arrays.asList(BUTUTLNEWCRDAVAIL));
+			mask = new HashSet<Integer>(Arrays.asList(BUTIDFNEWCRDAVAIL, BUTUTLNEWCRDAVAIL));
 		};
 
+		public boolean ButIdfNewcrdAvail;
 		public boolean ButUtlNewcrdAvail;
 
 		public boolean readXML(
@@ -137,6 +144,7 @@ public class PnlWdbeNavAuxfct {
 			String itemtag = "StatitemShrWdbeNavAuxfct";
 
 			if (Xmlio.checkXPath(doc, basexpath)) {
+				ButIdfNewcrdAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButIdfNewcrdAvail", mask, BUTIDFNEWCRDAVAIL);
 				ButUtlNewcrdAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButUtlNewcrdAvail", mask, BUTUTLNEWCRDAVAIL);
 
 				return true;
@@ -150,6 +158,7 @@ public class PnlWdbeNavAuxfct {
 				) {
 			HashSet<Integer> items = new HashSet<Integer>();
 
+			if (ButIdfNewcrdAvail == comp.ButIdfNewcrdAvail) items.add(BUTIDFNEWCRDAVAIL);
 			if (ButUtlNewcrdAvail == comp.ButUtlNewcrdAvail) items.add(BUTUTLNEWCRDAVAIL);
 
 			return(items);
@@ -163,7 +172,7 @@ public class PnlWdbeNavAuxfct {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(BUTUTLNEWCRDAVAIL));
+			diffitems = new HashSet<Integer>(Arrays.asList(BUTIDFNEWCRDAVAIL, BUTUTLNEWCRDAVAIL));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);
@@ -177,19 +186,23 @@ public class PnlWdbeNavAuxfct {
 	public class Tag extends Block {
 
 		public static final int CPT = 1;
-		public static final int CPTUTL = 2;
+		public static final int CPTIDF = 2;
+		public static final int CPTUTL = 3;
 
 		public Tag(
 					String Cpt
+					, String CptIdf
 					, String CptUtl
 				) {
 			this.Cpt = Cpt;
+			this.CptIdf = CptIdf;
 			this.CptUtl = CptUtl;
 
-			mask = new HashSet<Integer>(Arrays.asList(CPT, CPTUTL));
+			mask = new HashSet<Integer>(Arrays.asList(CPT, CPTIDF, CPTUTL));
 		};
 
 		public String Cpt;
+		public String CptIdf;
 		public String CptUtl;
 
 		public boolean readXML(
@@ -206,6 +219,7 @@ public class PnlWdbeNavAuxfct {
 
 			if (Xmlio.checkXPath(doc, basexpath)) {
 				Cpt = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "Cpt", mask, CPT);
+				CptIdf = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "CptIdf", mask, CPTIDF);
 				CptUtl = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "CptUtl", mask, CPTUTL);
 
 				return true;
@@ -220,6 +234,7 @@ public class PnlWdbeNavAuxfct {
 			HashSet<Integer> items = new HashSet<Integer>();
 
 			if (Cpt.equals(comp.Cpt)) items.add(CPT);
+			if (CptIdf.equals(comp.CptIdf)) items.add(CPTIDF);
 			if (CptUtl.equals(comp.CptUtl)) items.add(CPTUTL);
 
 			return(items);
@@ -233,7 +248,7 @@ public class PnlWdbeNavAuxfct {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(CPT, CPTUTL));
+			diffitems = new HashSet<Integer>(Arrays.asList(CPT, CPTIDF, CPTUTL));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);
@@ -310,8 +325,8 @@ public class PnlWdbeNavAuxfct {
 			super(VecWdbeVDpch.DPCHENGWDBENAVAUXFCTDATA);
 
 			statapp = new StatApp(0);
-			statshr = new StatShr(false);
-			tag = new Tag("", "");
+			statshr = new StatShr(false, false);
+			tag = new Tag("", "", "");
 		};
 
 		public StatApp statapp;
@@ -347,8 +362,8 @@ public class PnlWdbeNavAuxfct {
 			} else {
 				scrJref = "";
 				statapp = new StatApp(0);
-				statshr = new StatShr(false);
-				tag = new Tag("", "");
+				statshr = new StatShr(false, false);
+				tag = new Tag("", "", "");
 			};
 		};
 

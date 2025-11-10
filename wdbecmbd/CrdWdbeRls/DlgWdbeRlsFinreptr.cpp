@@ -167,8 +167,8 @@ void DlgWdbeRlsFinreptr::refreshFin(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
 		) {
-	StatShrFin oldStatshrfin(statshrfin);
 	ContInfFin oldContinffin(continffin);
+	StatShrFin oldStatshrfin(statshrfin);
 
 	// IP refreshFin --- RBEGIN
 	// continffin
@@ -179,16 +179,16 @@ void DlgWdbeRlsFinreptr::refreshFin(
 	statshrfin.ButStoActive = evalFinButStoActive(dbswdbe);
 
 	// IP refreshFin --- REND
-	if (statshrfin.diff(&oldStatshrfin).size() != 0) insert(moditems, DpchEngData::STATSHRFIN);
 	if (continffin.diff(&oldContinffin).size() != 0) insert(moditems, DpchEngData::CONTINFFIN);
+	if (statshrfin.diff(&oldStatshrfin).size() != 0) insert(moditems, DpchEngData::STATSHRFIN);
 };
 
 void DlgWdbeRlsFinreptr::refreshRes(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
 		) {
-	ContInfRes oldContinfres(continfres);
 	StatShrRes oldStatshrres(statshrres);
+	ContInfRes oldContinfres(continfres);
 
 	// IP refreshRes --- RBEGIN
 	// statshrres
@@ -204,8 +204,8 @@ void DlgWdbeRlsFinreptr::refreshRes(
 	continfres.TxtPrg = getSquawk(dbswdbe);
 
 	// IP refreshRes --- REND
-	if (continfres.diff(&oldContinfres).size() != 0) insert(moditems, DpchEngData::CONTINFRES);
 	if (statshrres.diff(&oldStatshrres).size() != 0) insert(moditems, DpchEngData::STATSHRRES);
+	if (continfres.diff(&oldContinfres).size() != 0) insert(moditems, DpchEngData::CONTINFRES);
 };
 
 void DlgWdbeRlsFinreptr::refresh(
@@ -216,24 +216,24 @@ void DlgWdbeRlsFinreptr::refresh(
 	if (muteRefresh && !unmute) return;
 	muteRefresh = true;
 
-	StatShr oldStatshr(statshr);
-	ContIac oldContiac(contiac);
 	ContInf oldContinf(continf);
+	ContIac oldContiac(contiac);
+	StatShr oldStatshr(statshr);
 
 	// IP refresh --- BEGIN
-	// statshr
-	statshr.ButDneActive = evalButDneActive(dbswdbe);
+	// continf
+	continf.numFSge = ixVSge;
 
 	// contiac
 	contiac.numFDse = ixVDit;
 
-	// continf
-	continf.numFSge = ixVSge;
+	// statshr
+	statshr.ButDneActive = evalButDneActive(dbswdbe);
 
 	// IP refresh --- END
-	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
-	if (contiac.diff(&oldContiac).size() != 0) insert(moditems, DpchEngData::CONTIAC);
 	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
+	if (contiac.diff(&oldContiac).size() != 0) insert(moditems, DpchEngData::CONTIAC);
+	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
 
 	refreshFin(dbswdbe, moditems);
 	refreshRes(dbswdbe, moditems);
@@ -299,8 +299,8 @@ void DlgWdbeRlsFinreptr::handleRequest(
 
 	} else if (req->ixVBasetype == ReqWdbe::VecVBasetype::TIMER) {
 		if (ixVSge == VecVSge::FINIDLE) handleTimerInSgeFinidle(dbswdbe, req->sref);
-		else if ((req->sref == "mon") && (ixVSge == VecVSge::PUSHGIT)) handleTimerWithSrefMonInSgePushgit(dbswdbe);
 		else if (ixVSge == VecVSge::PSGIDLE) handleTimerInSgePsgidle(dbswdbe, req->sref);
+		else if ((req->sref == "mon") && (ixVSge == VecVSge::PUSHGIT)) handleTimerWithSrefMonInSgePushgit(dbswdbe);
 	};
 };
 
@@ -397,18 +397,18 @@ void DlgWdbeRlsFinreptr::handleTimerInSgeFinidle(
 	changeStage(dbswdbe, nextIxVSgeSuccess);
 };
 
-void DlgWdbeRlsFinreptr::handleTimerWithSrefMonInSgePushgit(
-			DbsWdbe* dbswdbe
-		) {
-	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
-	refreshWithDpchEng(dbswdbe); // IP handleTimerWithSrefMonInSgePushgit --- ILINE
-};
-
 void DlgWdbeRlsFinreptr::handleTimerInSgePsgidle(
 			DbsWdbe* dbswdbe
 			, const string& sref
 		) {
 	changeStage(dbswdbe, nextIxVSgeSuccess);
+};
+
+void DlgWdbeRlsFinreptr::handleTimerWithSrefMonInSgePushgit(
+			DbsWdbe* dbswdbe
+		) {
+	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
+	refreshWithDpchEng(dbswdbe); // IP handleTimerWithSrefMonInSgePushgit --- ILINE
 };
 
 void DlgWdbeRlsFinreptr::changeStage(

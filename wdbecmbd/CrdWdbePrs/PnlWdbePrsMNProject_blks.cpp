@@ -47,9 +47,8 @@ PnlWdbePrsMNProject::ContInf::ContInf(
 			const uint numFCsiQst
 		) :
 			Block()
+			, numFCsiQst(numFCsiQst)
 		{
-	this->numFCsiQst = numFCsiQst;
-
 	mask = {NUMFCSIQST};
 };
 
@@ -149,13 +148,12 @@ PnlWdbePrsMNProject::StatShr::StatShr(
 			, const bool ButSubActive
 		) :
 			Block()
+			, ButViewAvail(ButViewAvail)
+			, ButViewActive(ButViewActive)
+			, ButAddAvail(ButAddAvail)
+			, ButSubAvail(ButSubAvail)
+			, ButSubActive(ButSubActive)
 		{
-	this->ButViewAvail = ButViewAvail;
-	this->ButViewActive = ButViewActive;
-	this->ButAddAvail = ButAddAvail;
-	this->ButSubAvail = ButSubAvail;
-	this->ButSubActive = ButSubActive;
-
 	mask = {BUTVIEWAVAIL, BUTVIEWACTIVE, BUTADDAVAIL, BUTSUBAVAIL, BUTSUBACTIVE};
 };
 
@@ -233,11 +231,11 @@ PnlWdbePrsMNProject::StgIac::StgIac(
 			, const uint TcoFctWidth
 		) :
 			Block()
+			, TcoMrefWidth(TcoMrefWidth)
+			, TcoStaWidth(TcoStaWidth)
+			, TcoStoWidth(TcoStoWidth)
+			, TcoFctWidth(TcoFctWidth)
 		{
-	this->TcoMrefWidth = TcoMrefWidth;
-	this->TcoStaWidth = TcoStaWidth;
-	this->TcoStoWidth = TcoStoWidth;
-	this->TcoFctWidth = TcoFctWidth;
 	mask = {TCOMREFWIDTH, TCOSTAWIDTH, TCOSTOWIDTH, TCOFCTWIDTH};
 };
 

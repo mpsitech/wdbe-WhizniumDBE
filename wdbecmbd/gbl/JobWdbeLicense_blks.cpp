@@ -70,17 +70,17 @@ JobWdbeLicense::Stg::Stg(
 			, const string& lastSync
 		) :
 			Block()
+			, engip(engip)
+			, engport(engport)
+			, username(username)
+			, password(password)
+			, licenseBase(licenseBase)
+			, licenseFull(licenseFull)
+			, licenseTpl(licenseTpl)
+			, lastAttempt(lastAttempt)
+			, lastSuccess(lastSuccess)
+			, lastSync(lastSync)
 		{
-	this->engip = engip;
-	this->engport = engport;
-	this->username = username;
-	this->password = password;
-	this->licenseBase = licenseBase;
-	this->licenseFull = licenseFull;
-	this->licenseTpl = licenseTpl;
-	this->lastAttempt = lastAttempt;
-	this->lastSuccess = lastSuccess;
-	this->lastSync = lastSync;
 	mask = {ENGIP, ENGPORT, USERNAME, PASSWORD, LICENSEBASE, LICENSEFULL, LICENSETPL, LASTATTEMPT, LASTSUCCESS, LASTSYNC};
 };
 

@@ -32,25 +32,23 @@ WdbeMVariable::WdbeMVariable(
 			, const string Minmax
 			, const string Onval
 			, const string Offval
-			, const bool Defon
 			, const string Comment
-		) {
-
-	this->ref = ref;
-	this->refWdbeCVariable = refWdbeCVariable;
-	this->refIxVTbl = refIxVTbl;
-	this->refUref = refUref;
-	this->refNum = refNum;
-	this->sref = sref;
-	this->Const = Const;
-	this->Falling = Falling;
-	this->srefWdbeKHdltype = srefWdbeKHdltype;
-	this->Width = Width;
-	this->Minmax = Minmax;
-	this->Onval = Onval;
-	this->Offval = Offval;
-	this->Defon = Defon;
-	this->Comment = Comment;
+		) :
+			ref(ref)
+			, refWdbeCVariable(refWdbeCVariable)
+			, refIxVTbl(refIxVTbl)
+			, refUref(refUref)
+			, refNum(refNum)
+			, sref(sref)
+			, Const(Const)
+			, Falling(Falling)
+			, srefWdbeKHdltype(srefWdbeKHdltype)
+			, Width(Width)
+			, Minmax(Minmax)
+			, Onval(Onval)
+			, Offval(Offval)
+			, Comment(Comment)
+		{
 };
 
 bool WdbeMVariable::operator==(
@@ -193,13 +191,12 @@ ubigint TblWdbeMVariable::insertNewRec(
 			, const string Minmax
 			, const string Onval
 			, const string Offval
-			, const bool Defon
 			, const string Comment
 		) {
 	ubigint retval = 0;
 	WdbeMVariable* _rec = NULL;
 
-	_rec = new WdbeMVariable(0, refWdbeCVariable, refIxVTbl, refUref, refNum, sref, Const, Falling, srefWdbeKHdltype, Width, Minmax, Onval, Offval, Defon, Comment);
+	_rec = new WdbeMVariable(0, refWdbeCVariable, refIxVTbl, refUref, refNum, sref, Const, Falling, srefWdbeKHdltype, Width, Minmax, Onval, Offval, Comment);
 	insertRec(_rec);
 
 	retval = _rec->ref;
@@ -225,13 +222,12 @@ ubigint TblWdbeMVariable::appendNewRecToRst(
 			, const string Minmax
 			, const string Onval
 			, const string Offval
-			, const bool Defon
 			, const string Comment
 		) {
 	ubigint retval = 0;
 	WdbeMVariable* _rec = NULL;
 
-	retval = insertNewRec(&_rec, refWdbeCVariable, refIxVTbl, refUref, refNum, sref, Const, Falling, srefWdbeKHdltype, Width, Minmax, Onval, Offval, Defon, Comment);
+	retval = insertNewRec(&_rec, refWdbeCVariable, refIxVTbl, refUref, refNum, sref, Const, Falling, srefWdbeKHdltype, Width, Minmax, Onval, Offval, Comment);
 	rst.nodes.push_back(_rec);
 
 	if (rec != NULL) *rec = _rec;
@@ -348,8 +344,8 @@ MyTblWdbeMVariable::~MyTblWdbeMVariable() {
 };
 
 void MyTblWdbeMVariable::initStatements() {
-	stmtInsertRec = createStatement("INSERT INTO TblWdbeMVariable (refWdbeCVariable, refIxVTbl, refUref, refNum, sref, Const, Falling, srefWdbeKHdltype, Width, Minmax, Onval, Offval, Defon, Comment) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)", false);
-	stmtUpdateRec = createStatement("UPDATE TblWdbeMVariable SET refWdbeCVariable = ?, refIxVTbl = ?, refUref = ?, refNum = ?, sref = ?, Const = ?, Falling = ?, srefWdbeKHdltype = ?, Width = ?, Minmax = ?, Onval = ?, Offval = ?, Defon = ?, Comment = ? WHERE ref = ?", false);
+	stmtInsertRec = createStatement("INSERT INTO TblWdbeMVariable (refWdbeCVariable, refIxVTbl, refUref, refNum, sref, Const, Falling, srefWdbeKHdltype, Width, Minmax, Onval, Offval, Comment) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)", false);
+	stmtUpdateRec = createStatement("UPDATE TblWdbeMVariable SET refWdbeCVariable = ?, refIxVTbl = ?, refUref = ?, refNum = ?, sref = ?, Const = ?, Falling = ?, srefWdbeKHdltype = ?, Width = ?, Minmax = ?, Onval = ?, Offval = ?, Comment = ? WHERE ref = ?", false);
 	stmtRemoveRecByRef = createStatement("DELETE FROM TblWdbeMVariable WHERE ref = ?", false);
 };
 
@@ -392,8 +388,7 @@ bool MyTblWdbeMVariable::loadRecBySQL(
 		if (dbrow[10]) _rec->Minmax.assign(dbrow[10], dblengths[10]); else _rec->Minmax = "";
 		if (dbrow[11]) _rec->Onval.assign(dbrow[11], dblengths[11]); else _rec->Onval = "";
 		if (dbrow[12]) _rec->Offval.assign(dbrow[12], dblengths[12]); else _rec->Offval = "";
-		if (dbrow[13]) _rec->Defon = (atoi((char*) dbrow[13]) != 0); else _rec->Defon = false;
-		if (dbrow[14]) _rec->Comment.assign(dbrow[14], dblengths[14]); else _rec->Comment = "";
+		if (dbrow[13]) _rec->Comment.assign(dbrow[13], dblengths[13]); else _rec->Comment = "";
 
 		retval = true;
 	};
@@ -449,8 +444,7 @@ ubigint MyTblWdbeMVariable::loadRstBySQL(
 			if (dbrow[10]) rec->Minmax.assign(dbrow[10], dblengths[10]); else rec->Minmax = "";
 			if (dbrow[11]) rec->Onval.assign(dbrow[11], dblengths[11]); else rec->Onval = "";
 			if (dbrow[12]) rec->Offval.assign(dbrow[12], dblengths[12]); else rec->Offval = "";
-			if (dbrow[13]) rec->Defon = (atoi((char*) dbrow[13]) != 0); else rec->Defon = false;
-			if (dbrow[14]) rec->Comment.assign(dbrow[14], dblengths[14]); else rec->Comment = "";
+			if (dbrow[13]) rec->Comment.assign(dbrow[13], dblengths[13]); else rec->Comment = "";
 			rst.nodes.push_back(rec);
 
 			numread++;
@@ -465,7 +459,7 @@ ubigint MyTblWdbeMVariable::loadRstBySQL(
 ubigint MyTblWdbeMVariable::insertRec(
 			WdbeMVariable* rec
 		) {
-	unsigned long l[14]; my_bool n[14]; my_bool e[14];
+	unsigned long l[13]; my_bool n[13]; my_bool e[13];
 
 	l[4] = rec->sref.length();
 	tinyint Const = rec->Const;
@@ -474,8 +468,7 @@ ubigint MyTblWdbeMVariable::insertRec(
 	l[9] = rec->Minmax.length();
 	l[10] = rec->Onval.length();
 	l[11] = rec->Offval.length();
-	tinyint Defon = rec->Defon;
-	l[13] = rec->Comment.length();
+	l[12] = rec->Comment.length();
 
 	MYSQL_BIND bind[] = {
 		bindUbigint(&rec->refWdbeCVariable,&(l[0]),&(n[0]),&(e[0])),
@@ -490,8 +483,7 @@ ubigint MyTblWdbeMVariable::insertRec(
 		bindCstring((char*) (rec->Minmax.c_str()),&(l[9]),&(n[9]),&(e[9])),
 		bindCstring((char*) (rec->Onval.c_str()),&(l[10]),&(n[10]),&(e[10])),
 		bindCstring((char*) (rec->Offval.c_str()),&(l[11]),&(n[11]),&(e[11])),
-		bindTinyint(&Defon,&(l[12]),&(n[12]),&(e[12])),
-		bindCstring((char*) (rec->Comment.c_str()),&(l[13]),&(n[13]),&(e[13]))
+		bindCstring((char*) (rec->Comment.c_str()),&(l[12]),&(n[12]),&(e[12]))
 	};
 
 	if (mysql_stmt_bind_param(stmtInsertRec, bind)) {
@@ -519,7 +511,7 @@ void MyTblWdbeMVariable::insertRst(
 void MyTblWdbeMVariable::updateRec(
 			WdbeMVariable* rec
 		) {
-	unsigned long l[15]; my_bool n[15]; my_bool e[15];
+	unsigned long l[14]; my_bool n[14]; my_bool e[14];
 
 	l[4] = rec->sref.length();
 	tinyint Const = rec->Const;
@@ -528,8 +520,7 @@ void MyTblWdbeMVariable::updateRec(
 	l[9] = rec->Minmax.length();
 	l[10] = rec->Onval.length();
 	l[11] = rec->Offval.length();
-	tinyint Defon = rec->Defon;
-	l[13] = rec->Comment.length();
+	l[12] = rec->Comment.length();
 
 	MYSQL_BIND bind[] = {
 		bindUbigint(&rec->refWdbeCVariable,&(l[0]),&(n[0]),&(e[0])),
@@ -544,9 +535,8 @@ void MyTblWdbeMVariable::updateRec(
 		bindCstring((char*) (rec->Minmax.c_str()),&(l[9]),&(n[9]),&(e[9])),
 		bindCstring((char*) (rec->Onval.c_str()),&(l[10]),&(n[10]),&(e[10])),
 		bindCstring((char*) (rec->Offval.c_str()),&(l[11]),&(n[11]),&(e[11])),
-		bindTinyint(&Defon,&(l[12]),&(n[12]),&(e[12])),
-		bindCstring((char*) (rec->Comment.c_str()),&(l[13]),&(n[13]),&(e[13])),
-		bindUbigint(&rec->ref,&(l[14]),&(n[14]),&(e[14]))
+		bindCstring((char*) (rec->Comment.c_str()),&(l[12]),&(n[12]),&(e[12])),
+		bindUbigint(&rec->ref,&(l[13]),&(n[13]),&(e[13]))
 	};
 
 	if (mysql_stmt_bind_param(stmtUpdateRec, bind)) {
@@ -619,7 +609,7 @@ ubigint MyTblWdbeMVariable::loadRstByClu(
 			, const bool append
 			, ListWdbeMVariable& rst
 		) {
-	return loadRstBySQL("SELECT ref, refWdbeCVariable, refIxVTbl, refUref, refNum, sref, Const, Falling, srefWdbeKHdltype, Width, Minmax, Onval, Offval, Defon, Comment FROM TblWdbeMVariable WHERE refWdbeCVariable = " + to_string(refWdbeCVariable) + "", append, rst);
+	return loadRstBySQL("SELECT ref, refWdbeCVariable, refIxVTbl, refUref, refNum, sref, Const, Falling, srefWdbeKHdltype, Width, Minmax, Onval, Offval, Comment FROM TblWdbeMVariable WHERE refWdbeCVariable = " + to_string(refWdbeCVariable) + "", append, rst);
 };
 
 ubigint MyTblWdbeMVariable::loadRstByRetReu(
@@ -628,7 +618,7 @@ ubigint MyTblWdbeMVariable::loadRstByRetReu(
 			, const bool append
 			, ListWdbeMVariable& rst
 		) {
-	return loadRstBySQL("SELECT ref, refWdbeCVariable, refIxVTbl, refUref, refNum, sref, Const, Falling, srefWdbeKHdltype, Width, Minmax, Onval, Offval, Defon, Comment FROM TblWdbeMVariable WHERE refIxVTbl = " + to_string(refIxVTbl) + " AND refUref = " + to_string(refUref) + " ORDER BY refNum ASC", append, rst);
+	return loadRstBySQL("SELECT ref, refWdbeCVariable, refIxVTbl, refUref, refNum, sref, Const, Falling, srefWdbeKHdltype, Width, Minmax, Onval, Offval, Comment FROM TblWdbeMVariable WHERE refIxVTbl = " + to_string(refIxVTbl) + " AND refUref = " + to_string(refUref) + " ORDER BY refNum ASC", append, rst);
 };
 
 bool MyTblWdbeMVariable::loadSrfByRef(
@@ -656,15 +646,15 @@ PgTblWdbeMVariable::~PgTblWdbeMVariable() {
 };
 
 void PgTblWdbeMVariable::initStatements() {
-	createStatement("TblWdbeMVariable_insertRec", "INSERT INTO TblWdbeMVariable (refWdbeCVariable, refIxVTbl, refUref, refNum, sref, Const, Falling, srefWdbeKHdltype, Width, Minmax, Onval, Offval, Defon, Comment) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14) RETURNING ref", 14);
-	createStatement("TblWdbeMVariable_updateRec", "UPDATE TblWdbeMVariable SET refWdbeCVariable = $1, refIxVTbl = $2, refUref = $3, refNum = $4, sref = $5, Const = $6, Falling = $7, srefWdbeKHdltype = $8, Width = $9, Minmax = $10, Onval = $11, Offval = $12, Defon = $13, Comment = $14 WHERE ref = $15", 15);
+	createStatement("TblWdbeMVariable_insertRec", "INSERT INTO TblWdbeMVariable (refWdbeCVariable, refIxVTbl, refUref, refNum, sref, Const, Falling, srefWdbeKHdltype, Width, Minmax, Onval, Offval, Comment) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13) RETURNING ref", 13);
+	createStatement("TblWdbeMVariable_updateRec", "UPDATE TblWdbeMVariable SET refWdbeCVariable = $1, refIxVTbl = $2, refUref = $3, refNum = $4, sref = $5, Const = $6, Falling = $7, srefWdbeKHdltype = $8, Width = $9, Minmax = $10, Onval = $11, Offval = $12, Comment = $13 WHERE ref = $14", 14);
 	createStatement("TblWdbeMVariable_removeRecByRef", "DELETE FROM TblWdbeMVariable WHERE ref = $1", 1);
 
-	createStatement("TblWdbeMVariable_loadRecByRef", "SELECT ref, refWdbeCVariable, refIxVTbl, refUref, refNum, sref, Const, Falling, srefWdbeKHdltype, Width, Minmax, Onval, Offval, Defon, Comment FROM TblWdbeMVariable WHERE ref = $1", 1);
+	createStatement("TblWdbeMVariable_loadRecByRef", "SELECT ref, refWdbeCVariable, refIxVTbl, refUref, refNum, sref, Const, Falling, srefWdbeKHdltype, Width, Minmax, Onval, Offval, Comment FROM TblWdbeMVariable WHERE ref = $1", 1);
 	createStatement("TblWdbeMVariable_loadRefsByClu", "SELECT ref FROM TblWdbeMVariable WHERE refWdbeCVariable = $1", 1);
 	createStatement("TblWdbeMVariable_loadRefsByRetReu", "SELECT ref FROM TblWdbeMVariable WHERE refIxVTbl = $1 AND refUref = $2", 2);
-	createStatement("TblWdbeMVariable_loadRstByClu", "SELECT ref, refWdbeCVariable, refIxVTbl, refUref, refNum, sref, Const, Falling, srefWdbeKHdltype, Width, Minmax, Onval, Offval, Defon, Comment FROM TblWdbeMVariable WHERE refWdbeCVariable = $1", 1);
-	createStatement("TblWdbeMVariable_loadRstByRetReu", "SELECT ref, refWdbeCVariable, refIxVTbl, refUref, refNum, sref, Const, Falling, srefWdbeKHdltype, Width, Minmax, Onval, Offval, Defon, Comment FROM TblWdbeMVariable WHERE refIxVTbl = $1 AND refUref = $2 ORDER BY refNum ASC", 2);
+	createStatement("TblWdbeMVariable_loadRstByClu", "SELECT ref, refWdbeCVariable, refIxVTbl, refUref, refNum, sref, Const, Falling, srefWdbeKHdltype, Width, Minmax, Onval, Offval, Comment FROM TblWdbeMVariable WHERE refWdbeCVariable = $1", 1);
+	createStatement("TblWdbeMVariable_loadRstByRetReu", "SELECT ref, refWdbeCVariable, refIxVTbl, refUref, refNum, sref, Const, Falling, srefWdbeKHdltype, Width, Minmax, Onval, Offval, Comment FROM TblWdbeMVariable WHERE refIxVTbl = $1 AND refUref = $2 ORDER BY refNum ASC", 2);
 	createStatement("TblWdbeMVariable_loadSrfByRef", "SELECT sref FROM TblWdbeMVariable WHERE ref = $1", 1);
 };
 
@@ -694,7 +684,6 @@ bool PgTblWdbeMVariable::loadRec(
 			PQfnumber(res, "minmax"),
 			PQfnumber(res, "onval"),
 			PQfnumber(res, "offval"),
-			PQfnumber(res, "defon"),
 			PQfnumber(res, "comment")
 		};
 
@@ -711,8 +700,7 @@ bool PgTblWdbeMVariable::loadRec(
 		ptr = PQgetvalue(res, 0, fnum[10]); _rec->Minmax.assign(ptr, PQgetlength(res, 0, fnum[10]));
 		ptr = PQgetvalue(res, 0, fnum[11]); _rec->Onval.assign(ptr, PQgetlength(res, 0, fnum[11]));
 		ptr = PQgetvalue(res, 0, fnum[12]); _rec->Offval.assign(ptr, PQgetlength(res, 0, fnum[12]));
-		ptr = PQgetvalue(res, 0, fnum[13]); _rec->Defon = (atoi(ptr) != 0);
-		ptr = PQgetvalue(res, 0, fnum[14]); _rec->Comment.assign(ptr, PQgetlength(res, 0, fnum[14]));
+		ptr = PQgetvalue(res, 0, fnum[13]); _rec->Comment.assign(ptr, PQgetlength(res, 0, fnum[13]));
 
 		retval = true;
 	};
@@ -752,7 +740,6 @@ ubigint PgTblWdbeMVariable::loadRst(
 			PQfnumber(res, "minmax"),
 			PQfnumber(res, "onval"),
 			PQfnumber(res, "offval"),
-			PQfnumber(res, "defon"),
 			PQfnumber(res, "comment")
 		};
 
@@ -772,8 +759,7 @@ ubigint PgTblWdbeMVariable::loadRst(
 			ptr = PQgetvalue(res, numread, fnum[10]); rec->Minmax.assign(ptr, PQgetlength(res, numread, fnum[10]));
 			ptr = PQgetvalue(res, numread, fnum[11]); rec->Onval.assign(ptr, PQgetlength(res, numread, fnum[11]));
 			ptr = PQgetvalue(res, numread, fnum[12]); rec->Offval.assign(ptr, PQgetlength(res, numread, fnum[12]));
-			ptr = PQgetvalue(res, numread, fnum[13]); rec->Defon = (atoi(ptr) != 0);
-			ptr = PQgetvalue(res, numread, fnum[14]); rec->Comment.assign(ptr, PQgetlength(res, numread, fnum[14]));
+			ptr = PQgetvalue(res, numread, fnum[13]); rec->Comment.assign(ptr, PQgetlength(res, numread, fnum[13]));
 
 			rst.nodes.push_back(rec);
 
@@ -873,7 +859,6 @@ ubigint PgTblWdbeMVariable::insertRec(
 	smallint _Const = htons((smallint) rec->Const);
 	smallint _Falling = htons((smallint) rec->Falling);
 	usmallint _Width = htons(rec->Width);
-	smallint _Defon = htons((smallint) rec->Defon);
 
 	const char* vals[] = {
 		(char*) &_refWdbeCVariable,
@@ -888,7 +873,6 @@ ubigint PgTblWdbeMVariable::insertRec(
 		rec->Minmax.c_str(),
 		rec->Onval.c_str(),
 		rec->Offval.c_str(),
-		(char*) &_Defon,
 		rec->Comment.c_str()
 	};
 	const int l[] = {
@@ -904,12 +888,11 @@ ubigint PgTblWdbeMVariable::insertRec(
 		0,
 		0,
 		0,
-		sizeof(smallint),
 		0
 	};
-	const int f[] = {1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 1, 0};
+	const int f[] = {1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0};
 
-	res = PQexecPrepared(dbs, "TblWdbeMVariable_insertRec", 14, vals, l, f, 0);
+	res = PQexecPrepared(dbs, "TblWdbeMVariable_insertRec", 13, vals, l, f, 0);
 
 	if (PQresultStatus(res) != PGRES_TUPLES_OK) {
 		string dbms = "PgTblWdbeMVariable::insertRec() / " + string(PQerrorMessage(dbs));
@@ -944,7 +927,6 @@ void PgTblWdbeMVariable::updateRec(
 	smallint _Const = htons((smallint) rec->Const);
 	smallint _Falling = htons((smallint) rec->Falling);
 	usmallint _Width = htons(rec->Width);
-	smallint _Defon = htons((smallint) rec->Defon);
 	ubigint _ref = htonl64(rec->ref);
 
 	const char* vals[] = {
@@ -960,7 +942,6 @@ void PgTblWdbeMVariable::updateRec(
 		rec->Minmax.c_str(),
 		rec->Onval.c_str(),
 		rec->Offval.c_str(),
-		(char*) &_Defon,
 		rec->Comment.c_str(),
 		(char*) &_ref
 	};
@@ -977,13 +958,12 @@ void PgTblWdbeMVariable::updateRec(
 		0,
 		0,
 		0,
-		sizeof(smallint),
 		0,
 		sizeof(ubigint)
 	};
-	const int f[] = {1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 1, 0, 1};
+	const int f[] = {1, 1, 1, 1, 0, 1, 1, 0, 1, 0, 0, 0, 0, 1};
 
-	res = PQexecPrepared(dbs, "TblWdbeMVariable_updateRec", 15, vals, l, f, 0);
+	res = PQexecPrepared(dbs, "TblWdbeMVariable_updateRec", 14, vals, l, f, 0);
 
 	if (PQresultStatus(res) != PGRES_COMMAND_OK) {
 		string dbms = "PgTblWdbeMVariable::updateRec() / " + string(PQerrorMessage(dbs));

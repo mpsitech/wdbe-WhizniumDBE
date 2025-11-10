@@ -30,19 +30,20 @@ WdbeQPrsMNCoreproject::WdbeQPrsMNCoreproject(
 			, const string ftmX1Stopd
 			, const string srefKFunction
 			, const string titSrefKFunction
-		) {
-	this->qref = qref;
-	this->jref = jref;
-	this->jnum = jnum;
-	this->mref = mref;
-	this->stubMref = stubMref;
-	this->ref = ref;
-	this->x1Startd = x1Startd;
-	this->ftmX1Startd = ftmX1Startd;
-	this->x1Stopd = x1Stopd;
-	this->ftmX1Stopd = ftmX1Stopd;
-	this->srefKFunction = srefKFunction;
-	this->titSrefKFunction = titSrefKFunction;
+		) :
+			qref(qref)
+			, jref(jref)
+			, jnum(jnum)
+			, mref(mref)
+			, stubMref(stubMref)
+			, ref(ref)
+			, x1Startd(x1Startd)
+			, ftmX1Startd(ftmX1Startd)
+			, x1Stopd(x1Stopd)
+			, ftmX1Stopd(ftmX1Stopd)
+			, srefKFunction(srefKFunction)
+			, titSrefKFunction(titSrefKFunction)
+		{
 };
 
 void WdbeQPrsMNCoreproject::writeJSON(

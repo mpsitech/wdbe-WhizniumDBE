@@ -23,10 +23,10 @@ import sbecore.*;
 
 public class ApiWdbe {
 
-	public static final String WDBE_VERSION = "1.1.41";
+	public static final String WDBE_VERSION = "1.1.49";
 	public static final int WDBE_VERSION_MAJOR = 1;
 	public static final int WDBE_VERSION_MINOR = 1;
-	public static final int WDBE_VERSION_SUB = 41;
+	public static final int WDBE_VERSION_SUB = 49;
 
 	public static DpchEngWdbe readDpchEng(
 				String s
@@ -87,6 +87,7 @@ public class ApiWdbe {
 			else if (ixWdbeVDpch == VecWdbeVDpch.DPCHENGWDBECMDDATA) dpcheng = (new CrdWdbeCmd()).new DpchEngData();
 			else if (ixWdbeVDpch == VecWdbeVDpch.DPCHENGWDBECMDDETAILDATA) dpcheng = (new PnlWdbeCmdDetail()).new DpchEngData();
 			else if (ixWdbeVDpch == VecWdbeVDpch.DPCHENGWDBECMDHEADBARDATA) dpcheng = (new PnlWdbeCmdHeadbar()).new DpchEngData();
+			else if (ixWdbeVDpch == VecWdbeVDpch.DPCHENGWDBECMDHK1NVECTORDATA) dpcheng = (new PnlWdbeCmdHk1NVector()).new DpchEngData();
 			else if (ixWdbeVDpch == VecWdbeVDpch.DPCHENGWDBECMDLISTDATA) dpcheng = (new PnlWdbeCmdList()).new DpchEngData();
 			else if (ixWdbeVDpch == VecWdbeVDpch.DPCHENGWDBECMDMNCONTROLLERDATA) dpcheng = (new PnlWdbeCmdMNController()).new DpchEngData();
 			else if (ixWdbeVDpch == VecWdbeVDpch.DPCHENGWDBECMDRECDATA) dpcheng = (new PnlWdbeCmdRec()).new DpchEngData();
@@ -142,6 +143,8 @@ public class ApiWdbe {
 			else if (ixWdbeVDpch == VecWdbeVDpch.DPCHENGWDBEGENHEADBARDATA) dpcheng = (new PnlWdbeGenHeadbar()).new DpchEngData();
 			else if (ixWdbeVDpch == VecWdbeVDpch.DPCHENGWDBEGENLISTDATA) dpcheng = (new PnlWdbeGenList()).new DpchEngData();
 			else if (ixWdbeVDpch == VecWdbeVDpch.DPCHENGWDBEGENRECDATA) dpcheng = (new PnlWdbeGenRec()).new DpchEngData();
+			else if (ixWdbeVDpch == VecWdbeVDpch.DPCHENGWDBEIDFDATA) dpcheng = (new CrdWdbeIdf()).new DpchEngData();
+			else if (ixWdbeVDpch == VecWdbeVDpch.DPCHENGWDBEIDFHEADBARDATA) dpcheng = (new PnlWdbeIdfHeadbar()).new DpchEngData();
 			else if (ixWdbeVDpch == VecWdbeVDpch.DPCHENGWDBEINTDATA) dpcheng = (new CrdWdbeInt()).new DpchEngData();
 			else if (ixWdbeVDpch == VecWdbeVDpch.DPCHENGWDBEINTDETAILDATA) dpcheng = (new PnlWdbeIntDetail()).new DpchEngData();
 			else if (ixWdbeVDpch == VecWdbeVDpch.DPCHENGWDBEINTHEADBARDATA) dpcheng = (new PnlWdbeIntHeadbar()).new DpchEngData();
@@ -246,6 +249,10 @@ public class ApiWdbe {
 			else if (ixWdbeVDpch == VecWdbeVDpch.DPCHENGWDBEPRCRECDATA) dpcheng = (new PnlWdbePrcRec()).new DpchEngData();
 			else if (ixWdbeVDpch == VecWdbeVDpch.DPCHENGWDBEPRCREF1NSENSITIVITYDATA) dpcheng = (new PnlWdbePrcRef1NSensitivity()).new DpchEngData();
 			else if (ixWdbeVDpch == VecWdbeVDpch.DPCHENGWDBEPRCREF1NVARIABLEDATA) dpcheng = (new PnlWdbePrcRef1NVariable()).new DpchEngData();
+			else if (ixWdbeVDpch == VecWdbeVDpch.DPCHENGWDBEPRFDAEMONDATA) dpcheng = (new PnlWdbePrfDaemon()).new DpchEngData();
+			else if (ixWdbeVDpch == VecWdbeVDpch.DPCHENGWDBEPRFDATA) dpcheng = (new CrdWdbePrf()).new DpchEngData();
+			else if (ixWdbeVDpch == VecWdbeVDpch.DPCHENGWDBEPRFHEADBARDATA) dpcheng = (new PnlWdbePrfHeadbar()).new DpchEngData();
+			else if (ixWdbeVDpch == VecWdbeVDpch.DPCHENGWDBEPRFLICENSEDATA) dpcheng = (new PnlWdbePrfLicense()).new DpchEngData();
 			else if (ixWdbeVDpch == VecWdbeVDpch.DPCHENGWDBEPRJDATA) dpcheng = (new CrdWdbePrj()).new DpchEngData();
 			else if (ixWdbeVDpch == VecWdbeVDpch.DPCHENGWDBEPRJDETAILDATA) dpcheng = (new PnlWdbePrjDetail()).new DpchEngData();
 			else if (ixWdbeVDpch == VecWdbeVDpch.DPCHENGWDBEPRJHEADBARDATA) dpcheng = (new PnlWdbePrjHeadbar()).new DpchEngData();

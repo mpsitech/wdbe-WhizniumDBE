@@ -86,6 +86,7 @@ void PnlWdbeNavAuxfct::refresh(
 
 	// IP refresh --- BEGIN
 	// statshr
+	statshr.ButIdfNewcrdAvail = evalButIdfNewcrdAvail(dbswdbe);
 	statshr.ButUtlNewcrdAvail = evalButUtlNewcrdAvail(dbswdbe);
 	// IP refresh --- END
 
@@ -132,7 +133,9 @@ void PnlWdbeNavAuxfct::handleRequest(
 			DpchAppDo* dpchappdo = (DpchAppDo*) (req->dpchapp);
 
 			if (dpchappdo->ixVDo != 0) {
-				if (dpchappdo->ixVDo == VecVDo::BUTUTLNEWCRDCLICK) {
+				if (dpchappdo->ixVDo == VecVDo::BUTIDFNEWCRDCLICK) {
+					handleDpchAppDoButIdfNewcrdClick(dbswdbe, &(req->dpcheng));
+				} else if (dpchappdo->ixVDo == VecVDo::BUTUTLNEWCRDCLICK) {
 					handleDpchAppDoButUtlNewcrdClick(dbswdbe, &(req->dpcheng));
 				};
 
@@ -148,6 +151,18 @@ void PnlWdbeNavAuxfct::handleDpchAppWdbeInit(
 			, DpchEngWdbe** dpcheng
 		) {
 	*dpcheng = getNewDpchEng({DpchEngData::ALL});
+};
+
+void PnlWdbeNavAuxfct::handleDpchAppDoButIdfNewcrdClick(
+			DbsWdbe* dbswdbe
+			, DpchEngWdbe** dpcheng
+		) {
+	ubigint jrefNew = 0;
+
+	xchg->triggerIxRefSrefIntvalToRefCall(dbswdbe, VecWdbeVCall::CALLWDBECRDOPEN, jref, 0, 0, "CrdWdbeIdf", 0, jrefNew);
+
+	if (jrefNew == 0) *dpcheng = new DpchEngWdbeConfirm(false, 0, "");
+	else *dpcheng = new DpchEngWdbeConfirm(true, jrefNew, "CrdWdbeIdf");
 };
 
 void PnlWdbeNavAuxfct::handleDpchAppDoButUtlNewcrdClick(

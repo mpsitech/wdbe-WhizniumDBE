@@ -222,12 +222,12 @@ bool PnlWdbeGenDetail::evalPupHtyActive(
 bool PnlWdbeGenDetail::evalButHtyEditAvail(
 			DbsWdbe* dbswdbe
 		) {
-	// pre.adm()
+	// pre.ixCrdaccGenIncl(edit)
 
 	vector<bool> args;
 	bool a;
 
-	a = false;
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCGEN, jref) & VecWdbeWAccess::EDIT);
 	args.push_back(a);
 
 	return(args.back());

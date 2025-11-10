@@ -54,14 +54,14 @@ DpchRetWdbe* WdbeMtpCplmstbuUsbslave_slbs_v1_0_Mcu::run(
 			mdlNum = Wdbe::getNextSigRefNum(dbswdbe, VecWdbeVMSignalRefTbl::UNT, mdl->hkUref);
 
 			refC = dbswdbe->tblwdbecsignal->getNewRef();
-			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::HSHK, refC, VecWdbeVMSignalRefTbl::UNT, mdl->hkUref, mdlNum++, VecWdbeVMSignalMgeTbl::MDL, mgmt->ref, 0, "req" + s + "Send", false, "sl", 1, "", "", "", "0", false, 0, "");
-			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::HSHK, refC, VecWdbeVMSignalRefTbl::UNT, mdl->hkUref, mdlNum++, VecWdbeVMSignalMgeTbl::MDL, refWdbeMModule, 0, "ack" + s + "Send", false, "sl", 1, "", "", "", "0", false, 0, "");
-			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::HSHK, refC, VecWdbeVMSignalRefTbl::UNT, mdl->hkUref, mdlNum++, VecWdbeVMSignalMgeTbl::MDL, refWdbeMModule, 0, "dne" + s + "Send", false, "sl", 1, "", "", "", "0", false, 0, "");
+			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::HSHK, refC, VecWdbeVMSignalRefTbl::UNT, mdl->hkUref, mdlNum++, VecWdbeVMSignalMgeTbl::MDL, mgmt->ref, 0, "req" + s + "Send", false, "sl", 1, "", "", "", "0", 0, "");
+			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::HSHK, refC, VecWdbeVMSignalRefTbl::UNT, mdl->hkUref, mdlNum++, VecWdbeVMSignalMgeTbl::MDL, refWdbeMModule, 0, "ack" + s + "Send", false, "sl", 1, "", "", "", "0", 0, "");
+			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::HSHK, refC, VecWdbeVMSignalRefTbl::UNT, mdl->hkUref, mdlNum++, VecWdbeVMSignalMgeTbl::MDL, refWdbeMModule, 0, "dne" + s + "Send", false, "sl", 1, "", "", "", "0", 0, "");
 
 			refC = dbswdbe->tblwdbecsignal->getNewRef();
-			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::HSHK, refC, VecWdbeVMSignalRefTbl::UNT, mdl->hkUref, mdlNum++, VecWdbeVMSignalMgeTbl::MDL, mgmt->ref, 0, "req" + s + "Recv", false, "sl", 1, "", "", "", "0", false, 0, "");
-			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::HSHK, refC, VecWdbeVMSignalRefTbl::UNT, mdl->hkUref, mdlNum++, VecWdbeVMSignalMgeTbl::MDL, refWdbeMModule, 0, "ack" + s + "Recv", false, "sl", 1, "", "", "", "0", false, 0, "");
-			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::HSHK, refC, VecWdbeVMSignalRefTbl::UNT, mdl->hkUref, mdlNum++, VecWdbeVMSignalMgeTbl::MDL, refWdbeMModule, 0, "dne" + s + "Recv", false, "sl", 1, "", "", "", "0", false, 0, "");
+			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::HSHK, refC, VecWdbeVMSignalRefTbl::UNT, mdl->hkUref, mdlNum++, VecWdbeVMSignalMgeTbl::MDL, mgmt->ref, 0, "req" + s + "Recv", false, "sl", 1, "", "", "", "0", 0, "");
+			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::HSHK, refC, VecWdbeVMSignalRefTbl::UNT, mdl->hkUref, mdlNum++, VecWdbeVMSignalMgeTbl::MDL, refWdbeMModule, 0, "ack" + s + "Recv", false, "sl", 1, "", "", "", "0", 0, "");
+			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::HSHK, refC, VecWdbeVMSignalRefTbl::UNT, mdl->hkUref, mdlNum++, VecWdbeVMSignalMgeTbl::MDL, refWdbeMModule, 0, "dne" + s + "Recv", false, "sl", 1, "", "", "", "0", 0, "");
 
 			delete mgmt;
 		};

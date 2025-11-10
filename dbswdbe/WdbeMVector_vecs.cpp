@@ -69,6 +69,7 @@ uint TblWdbeMVector::VecVHkTbl::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
+	if (s == "cmd") return CMD;
 	if (s == "ctr") return CTR;
 	if (s == "fsm") return FSM;
 	if (s == "sig") return SIG;
@@ -80,6 +81,7 @@ uint TblWdbeMVector::VecVHkTbl::getIx(
 string TblWdbeMVector::VecVHkTbl::getSref(
 			const uint ix
 		) {
+	if (ix == CMD) return("cmd");
 	if (ix == CTR) return("ctr");
 	if (ix == FSM) return("fsm");
 	if (ix == SIG) return("sig");
@@ -93,6 +95,7 @@ string TblWdbeMVector::VecVHkTbl::getTitle(
 			, const uint ixWdbeVLocale
 		) {
 	if (ixWdbeVLocale == 1) {
+		if (ix == CMD) return("command");
 		if (ix == CTR) return("controller");
 		if (ix == FSM) return("finite state machine");
 		if (ix == SIG) return("signal");
@@ -109,5 +112,5 @@ void TblWdbeMVector::VecVHkTbl::fillFeed(
 		) {
 	feed.clear();
 
-	for (unsigned int i = 1; i <= 4; i++) feed.appendIxSrefTitles(i, getSref(i), getTitle(i, ixWdbeVLocale));
+	for (unsigned int i = 1; i <= 5; i++) feed.appendIxSrefTitles(i, getSref(i), getTitle(i, ixWdbeVLocale));
 };

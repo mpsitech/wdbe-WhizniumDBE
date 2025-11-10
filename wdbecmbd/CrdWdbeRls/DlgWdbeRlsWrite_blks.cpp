@@ -190,9 +190,8 @@ DlgWdbeRlsWrite::ContIac::ContIac(
 			const uint numFDse
 		) :
 			Block()
+			, numFDse(numFDse)
 		{
-	this->numFDse = numFDse;
-
 	mask = {NUMFDSE};
 };
 
@@ -297,9 +296,8 @@ DlgWdbeRlsWrite::ContIacDet::ContIacDet(
 			const bool ChkBso
 		) :
 			Block()
+			, ChkBso(ChkBso)
 		{
-	this->ChkBso = ChkBso;
-
 	mask = {CHKBSO};
 };
 
@@ -404,9 +402,8 @@ DlgWdbeRlsWrite::ContInf::ContInf(
 			const uint numFSge
 		) :
 			Block()
+			, numFSge(numFSge)
 		{
-	this->numFSge = numFSge;
-
 	mask = {NUMFSGE};
 };
 
@@ -469,9 +466,8 @@ DlgWdbeRlsWrite::ContInfFia::ContInfFia(
 			const string& Dld
 		) :
 			Block()
+			, Dld(Dld)
 		{
-	this->Dld = Dld;
-
 	mask = {DLD};
 };
 
@@ -534,9 +530,8 @@ DlgWdbeRlsWrite::ContInfLfi::ContInfLfi(
 			const string& Dld
 		) :
 			Block()
+			, Dld(Dld)
 		{
-	this->Dld = Dld;
-
 	mask = {DLD};
 };
 
@@ -599,9 +594,8 @@ DlgWdbeRlsWrite::ContInfWrc::ContInfWrc(
 			const string& TxtPrg
 		) :
 			Block()
+			, TxtPrg(TxtPrg)
 		{
-	this->TxtPrg = TxtPrg;
-
 	mask = {TXTPRG};
 };
 
@@ -701,9 +695,8 @@ DlgWdbeRlsWrite::StatShr::StatShr(
 			const bool ButDneActive
 		) :
 			Block()
+			, ButDneActive(ButDneActive)
 		{
-	this->ButDneActive = ButDneActive;
-
 	mask = {BUTDNEACTIVE};
 };
 
@@ -767,10 +760,9 @@ DlgWdbeRlsWrite::StatShrCuc::StatShrCuc(
 			, const bool UldActive
 		) :
 			Block()
+			, UldAvail(UldAvail)
+			, UldActive(UldActive)
 		{
-	this->UldAvail = UldAvail;
-	this->UldActive = UldActive;
-
 	mask = {ULDAVAIL, ULDACTIVE};
 };
 
@@ -837,10 +829,9 @@ DlgWdbeRlsWrite::StatShrFia::StatShrFia(
 			, const bool DldActive
 		) :
 			Block()
+			, DldAvail(DldAvail)
+			, DldActive(DldActive)
 		{
-	this->DldAvail = DldAvail;
-	this->DldActive = DldActive;
-
 	mask = {DLDAVAIL, DLDACTIVE};
 };
 
@@ -906,9 +897,8 @@ DlgWdbeRlsWrite::StatShrLfi::StatShrLfi(
 			const bool DldActive
 		) :
 			Block()
+			, DldActive(DldActive)
 		{
-	this->DldActive = DldActive;
-
 	mask = {DLDACTIVE};
 };
 
@@ -973,11 +963,10 @@ DlgWdbeRlsWrite::StatShrWrc::StatShrWrc(
 			, const bool ButStoActive
 		) :
 			Block()
+			, ButAutActive(ButAutActive)
+			, ButRunActive(ButRunActive)
+			, ButStoActive(ButStoActive)
 		{
-	this->ButAutActive = ButAutActive;
-	this->ButRunActive = ButRunActive;
-	this->ButStoActive = ButStoActive;
-
 	mask = {BUTAUTACTIVE, BUTRUNACTIVE, BUTSTOACTIVE};
 };
 

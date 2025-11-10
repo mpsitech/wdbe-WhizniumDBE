@@ -24,13 +24,14 @@ WdbeQPrcFsmFsm1NFsmstate::WdbeQPrcFsmFsm1NFsmstate(
 			, const ubigint ref
 			, const string stubRef
 			, const uint fsmNum
-		) {
-	this->qref = qref;
-	this->jref = jref;
-	this->jnum = jnum;
-	this->ref = ref;
-	this->stubRef = stubRef;
-	this->fsmNum = fsmNum;
+		) :
+			qref(qref)
+			, jref(jref)
+			, jnum(jnum)
+			, ref(ref)
+			, stubRef(stubRef)
+			, fsmNum(fsmNum)
+		{
 };
 
 void WdbeQPrcFsmFsm1NFsmstate::writeJSON(

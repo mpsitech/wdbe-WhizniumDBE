@@ -50,10 +50,9 @@ PnlWdbeNavCoredev::ContIac::ContIac(
 			, const uint numFLstCvr
 		) :
 			Block()
+			, numFLstCpr(numFLstCpr)
+			, numFLstCvr(numFLstCvr)
 		{
-	this->numFLstCpr = numFLstCpr;
-	this->numFLstCvr = numFLstCvr;
-
 	mask = {NUMFLSTCPR, NUMFLSTCVR};
 };
 
@@ -135,13 +134,12 @@ PnlWdbeNavCoredev::StatApp::StatApp(
 			, const uint LstCvrNumFirstdisp
 		) :
 			Block()
+			, ixWdbeVExpstate(ixWdbeVExpstate)
+			, LstCprAlt(LstCprAlt)
+			, LstCvrAlt(LstCvrAlt)
+			, LstCprNumFirstdisp(LstCprNumFirstdisp)
+			, LstCvrNumFirstdisp(LstCvrNumFirstdisp)
 		{
-	this->ixWdbeVExpstate = ixWdbeVExpstate;
-	this->LstCprAlt = LstCprAlt;
-	this->LstCvrAlt = LstCvrAlt;
-	this->LstCprNumFirstdisp = LstCprNumFirstdisp;
-	this->LstCvrNumFirstdisp = LstCvrNumFirstdisp;
-
 	mask = {IXWDBEVEXPSTATE, LSTCPRALT, LSTCVRALT, LSTCPRNUMFIRSTDISP, LSTCVRNUMFIRSTDISP};
 };
 
@@ -216,12 +214,11 @@ PnlWdbeNavCoredev::StatShr::StatShr(
 			, const bool ButCvrViewActive
 		) :
 			Block()
+			, LstCprAvail(LstCprAvail)
+			, ButCprViewActive(ButCprViewActive)
+			, LstCvrAvail(LstCvrAvail)
+			, ButCvrViewActive(ButCvrViewActive)
 		{
-	this->LstCprAvail = LstCprAvail;
-	this->ButCprViewActive = ButCprViewActive;
-	this->LstCvrAvail = LstCvrAvail;
-	this->ButCvrViewActive = ButCvrViewActive;
-
 	mask = {LSTCPRAVAIL, BUTCPRVIEWACTIVE, LSTCVRAVAIL, BUTCVRVIEWACTIVE};
 };
 
@@ -288,11 +285,10 @@ PnlWdbeNavCoredev::Tag::Tag(
 			, const string& CptCvr
 		) :
 			Block()
+			, Cpt(Cpt)
+			, CptCpr(CptCpr)
+			, CptCvr(CptCvr)
 		{
-	this->Cpt = Cpt;
-	this->CptCpr = CptCpr;
-	this->CptCvr = CptCvr;
-
 	mask = {CPT, CPTCPR, CPTCVR};
 };
 
@@ -370,11 +366,11 @@ PnlWdbeNavCoredev::DpchAppDo::DpchAppDo(
 			, const set<uint>& mask
 		) :
 			DpchAppWdbe(VecWdbeVDpch::DPCHAPPWDBENAVCOREDEVDO, scrJref)
+			, ixVDo(ixVDo)
 		{
 	if (find(mask, ALL)) this->mask = {SCRJREF, IXVDO};
 	else this->mask = mask;
 
-	this->ixVDo = ixVDo;
 };
 
 string PnlWdbeNavCoredev::DpchAppDo::getSrefsMask() {

@@ -36,31 +36,29 @@ WdbeMSignal::WdbeMSignal(
 			, const string Comb
 			, const string Onval
 			, const string Offval
-			, const bool Defon
 			, const ubigint drvRefWdbeMPort
 			, const string Comment
-		) {
-
-	this->ref = ref;
-	this->ixVBasetype = ixVBasetype;
-	this->refWdbeCSignal = refWdbeCSignal;
-	this->refIxVTbl = refIxVTbl;
-	this->refUref = refUref;
-	this->refNum = refNum;
-	this->mgeIxVTbl = mgeIxVTbl;
-	this->mgeUref = mgeUref;
-	this->refWdbeMVector = refWdbeMVector;
-	this->sref = sref;
-	this->Const = Const;
-	this->srefWdbeKHdltype = srefWdbeKHdltype;
-	this->Width = Width;
-	this->Minmax = Minmax;
-	this->Comb = Comb;
-	this->Onval = Onval;
-	this->Offval = Offval;
-	this->Defon = Defon;
-	this->drvRefWdbeMPort = drvRefWdbeMPort;
-	this->Comment = Comment;
+		) :
+			ref(ref)
+			, ixVBasetype(ixVBasetype)
+			, refWdbeCSignal(refWdbeCSignal)
+			, refIxVTbl(refIxVTbl)
+			, refUref(refUref)
+			, refNum(refNum)
+			, mgeIxVTbl(mgeIxVTbl)
+			, mgeUref(mgeUref)
+			, refWdbeMVector(refWdbeMVector)
+			, sref(sref)
+			, Const(Const)
+			, srefWdbeKHdltype(srefWdbeKHdltype)
+			, Width(Width)
+			, Minmax(Minmax)
+			, Comb(Comb)
+			, Onval(Onval)
+			, Offval(Offval)
+			, drvRefWdbeMPort(drvRefWdbeMPort)
+			, Comment(Comment)
+		{
 };
 
 bool WdbeMSignal::operator==(
@@ -207,14 +205,13 @@ ubigint TblWdbeMSignal::insertNewRec(
 			, const string Comb
 			, const string Onval
 			, const string Offval
-			, const bool Defon
 			, const ubigint drvRefWdbeMPort
 			, const string Comment
 		) {
 	ubigint retval = 0;
 	WdbeMSignal* _rec = NULL;
 
-	_rec = new WdbeMSignal(0, ixVBasetype, refWdbeCSignal, refIxVTbl, refUref, refNum, mgeIxVTbl, mgeUref, refWdbeMVector, sref, Const, srefWdbeKHdltype, Width, Minmax, Comb, Onval, Offval, Defon, drvRefWdbeMPort, Comment);
+	_rec = new WdbeMSignal(0, ixVBasetype, refWdbeCSignal, refIxVTbl, refUref, refNum, mgeIxVTbl, mgeUref, refWdbeMVector, sref, Const, srefWdbeKHdltype, Width, Minmax, Comb, Onval, Offval, drvRefWdbeMPort, Comment);
 	insertRec(_rec);
 
 	retval = _rec->ref;
@@ -244,14 +241,13 @@ ubigint TblWdbeMSignal::appendNewRecToRst(
 			, const string Comb
 			, const string Onval
 			, const string Offval
-			, const bool Defon
 			, const ubigint drvRefWdbeMPort
 			, const string Comment
 		) {
 	ubigint retval = 0;
 	WdbeMSignal* _rec = NULL;
 
-	retval = insertNewRec(&_rec, ixVBasetype, refWdbeCSignal, refIxVTbl, refUref, refNum, mgeIxVTbl, mgeUref, refWdbeMVector, sref, Const, srefWdbeKHdltype, Width, Minmax, Comb, Onval, Offval, Defon, drvRefWdbeMPort, Comment);
+	retval = insertNewRec(&_rec, ixVBasetype, refWdbeCSignal, refIxVTbl, refUref, refNum, mgeIxVTbl, mgeUref, refWdbeMVector, sref, Const, srefWdbeKHdltype, Width, Minmax, Comb, Onval, Offval, drvRefWdbeMPort, Comment);
 	rst.nodes.push_back(_rec);
 
 	if (rec != NULL) *rec = _rec;
@@ -375,8 +371,8 @@ MyTblWdbeMSignal::~MyTblWdbeMSignal() {
 };
 
 void MyTblWdbeMSignal::initStatements() {
-	stmtInsertRec = createStatement("INSERT INTO TblWdbeMSignal (ixVBasetype, refWdbeCSignal, refIxVTbl, refUref, refNum, mgeIxVTbl, mgeUref, refWdbeMVector, sref, Const, srefWdbeKHdltype, Width, Minmax, Comb, Onval, Offval, Defon, drvRefWdbeMPort, Comment) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", false);
-	stmtUpdateRec = createStatement("UPDATE TblWdbeMSignal SET ixVBasetype = ?, refWdbeCSignal = ?, refIxVTbl = ?, refUref = ?, refNum = ?, mgeIxVTbl = ?, mgeUref = ?, refWdbeMVector = ?, sref = ?, Const = ?, srefWdbeKHdltype = ?, Width = ?, Minmax = ?, Comb = ?, Onval = ?, Offval = ?, Defon = ?, drvRefWdbeMPort = ?, Comment = ? WHERE ref = ?", false);
+	stmtInsertRec = createStatement("INSERT INTO TblWdbeMSignal (ixVBasetype, refWdbeCSignal, refIxVTbl, refUref, refNum, mgeIxVTbl, mgeUref, refWdbeMVector, sref, Const, srefWdbeKHdltype, Width, Minmax, Comb, Onval, Offval, drvRefWdbeMPort, Comment) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", false);
+	stmtUpdateRec = createStatement("UPDATE TblWdbeMSignal SET ixVBasetype = ?, refWdbeCSignal = ?, refIxVTbl = ?, refUref = ?, refNum = ?, mgeIxVTbl = ?, mgeUref = ?, refWdbeMVector = ?, sref = ?, Const = ?, srefWdbeKHdltype = ?, Width = ?, Minmax = ?, Comb = ?, Onval = ?, Offval = ?, drvRefWdbeMPort = ?, Comment = ? WHERE ref = ?", false);
 	stmtRemoveRecByRef = createStatement("DELETE FROM TblWdbeMSignal WHERE ref = ?", false);
 };
 
@@ -423,9 +419,8 @@ bool MyTblWdbeMSignal::loadRecBySQL(
 		if (dbrow[14]) _rec->Comb.assign(dbrow[14], dblengths[14]); else _rec->Comb = "";
 		if (dbrow[15]) _rec->Onval.assign(dbrow[15], dblengths[15]); else _rec->Onval = "";
 		if (dbrow[16]) _rec->Offval.assign(dbrow[16], dblengths[16]); else _rec->Offval = "";
-		if (dbrow[17]) _rec->Defon = (atoi((char*) dbrow[17]) != 0); else _rec->Defon = false;
-		if (dbrow[18]) _rec->drvRefWdbeMPort = atoll((char*) dbrow[18]); else _rec->drvRefWdbeMPort = 0;
-		if (dbrow[19]) _rec->Comment.assign(dbrow[19], dblengths[19]); else _rec->Comment = "";
+		if (dbrow[17]) _rec->drvRefWdbeMPort = atoll((char*) dbrow[17]); else _rec->drvRefWdbeMPort = 0;
+		if (dbrow[18]) _rec->Comment.assign(dbrow[18], dblengths[18]); else _rec->Comment = "";
 
 		retval = true;
 	};
@@ -485,9 +480,8 @@ ubigint MyTblWdbeMSignal::loadRstBySQL(
 			if (dbrow[14]) rec->Comb.assign(dbrow[14], dblengths[14]); else rec->Comb = "";
 			if (dbrow[15]) rec->Onval.assign(dbrow[15], dblengths[15]); else rec->Onval = "";
 			if (dbrow[16]) rec->Offval.assign(dbrow[16], dblengths[16]); else rec->Offval = "";
-			if (dbrow[17]) rec->Defon = (atoi((char*) dbrow[17]) != 0); else rec->Defon = false;
-			if (dbrow[18]) rec->drvRefWdbeMPort = atoll((char*) dbrow[18]); else rec->drvRefWdbeMPort = 0;
-			if (dbrow[19]) rec->Comment.assign(dbrow[19], dblengths[19]); else rec->Comment = "";
+			if (dbrow[17]) rec->drvRefWdbeMPort = atoll((char*) dbrow[17]); else rec->drvRefWdbeMPort = 0;
+			if (dbrow[18]) rec->Comment.assign(dbrow[18], dblengths[18]); else rec->Comment = "";
 			rst.nodes.push_back(rec);
 
 			numread++;
@@ -502,7 +496,7 @@ ubigint MyTblWdbeMSignal::loadRstBySQL(
 ubigint MyTblWdbeMSignal::insertRec(
 			WdbeMSignal* rec
 		) {
-	unsigned long l[19]; my_bool n[19]; my_bool e[19];
+	unsigned long l[18]; my_bool n[18]; my_bool e[18];
 
 	l[8] = rec->sref.length();
 	tinyint Const = rec->Const;
@@ -511,8 +505,7 @@ ubigint MyTblWdbeMSignal::insertRec(
 	l[13] = rec->Comb.length();
 	l[14] = rec->Onval.length();
 	l[15] = rec->Offval.length();
-	tinyint Defon = rec->Defon;
-	l[18] = rec->Comment.length();
+	l[17] = rec->Comment.length();
 
 	MYSQL_BIND bind[] = {
 		bindUint(&rec->ixVBasetype,&(l[0]),&(n[0]),&(e[0])),
@@ -531,9 +524,8 @@ ubigint MyTblWdbeMSignal::insertRec(
 		bindCstring((char*) (rec->Comb.c_str()),&(l[13]),&(n[13]),&(e[13])),
 		bindCstring((char*) (rec->Onval.c_str()),&(l[14]),&(n[14]),&(e[14])),
 		bindCstring((char*) (rec->Offval.c_str()),&(l[15]),&(n[15]),&(e[15])),
-		bindTinyint(&Defon,&(l[16]),&(n[16]),&(e[16])),
-		bindUbigint(&rec->drvRefWdbeMPort,&(l[17]),&(n[17]),&(e[17])),
-		bindCstring((char*) (rec->Comment.c_str()),&(l[18]),&(n[18]),&(e[18]))
+		bindUbigint(&rec->drvRefWdbeMPort,&(l[16]),&(n[16]),&(e[16])),
+		bindCstring((char*) (rec->Comment.c_str()),&(l[17]),&(n[17]),&(e[17]))
 	};
 
 	if (mysql_stmt_bind_param(stmtInsertRec, bind)) {
@@ -561,7 +553,7 @@ void MyTblWdbeMSignal::insertRst(
 void MyTblWdbeMSignal::updateRec(
 			WdbeMSignal* rec
 		) {
-	unsigned long l[20]; my_bool n[20]; my_bool e[20];
+	unsigned long l[19]; my_bool n[19]; my_bool e[19];
 
 	l[8] = rec->sref.length();
 	tinyint Const = rec->Const;
@@ -570,8 +562,7 @@ void MyTblWdbeMSignal::updateRec(
 	l[13] = rec->Comb.length();
 	l[14] = rec->Onval.length();
 	l[15] = rec->Offval.length();
-	tinyint Defon = rec->Defon;
-	l[18] = rec->Comment.length();
+	l[17] = rec->Comment.length();
 
 	MYSQL_BIND bind[] = {
 		bindUint(&rec->ixVBasetype,&(l[0]),&(n[0]),&(e[0])),
@@ -590,10 +581,9 @@ void MyTblWdbeMSignal::updateRec(
 		bindCstring((char*) (rec->Comb.c_str()),&(l[13]),&(n[13]),&(e[13])),
 		bindCstring((char*) (rec->Onval.c_str()),&(l[14]),&(n[14]),&(e[14])),
 		bindCstring((char*) (rec->Offval.c_str()),&(l[15]),&(n[15]),&(e[15])),
-		bindTinyint(&Defon,&(l[16]),&(n[16]),&(e[16])),
-		bindUbigint(&rec->drvRefWdbeMPort,&(l[17]),&(n[17]),&(e[17])),
-		bindCstring((char*) (rec->Comment.c_str()),&(l[18]),&(n[18]),&(e[18])),
-		bindUbigint(&rec->ref,&(l[19]),&(n[19]),&(e[19]))
+		bindUbigint(&rec->drvRefWdbeMPort,&(l[16]),&(n[16]),&(e[16])),
+		bindCstring((char*) (rec->Comment.c_str()),&(l[17]),&(n[17]),&(e[17])),
+		bindUbigint(&rec->ref,&(l[18]),&(n[18]),&(e[18]))
 	};
 
 	if (mysql_stmt_bind_param(stmtUpdateRec, bind)) {
@@ -648,7 +638,7 @@ bool MyTblWdbeMSignal::loadRecByVec(
 			ubigint refWdbeMVector
 			, WdbeMSignal** rec
 		) {
-	return loadRecBySQL("SELECT ref, ixVBasetype, refWdbeCSignal, refIxVTbl, refUref, refNum, mgeIxVTbl, mgeUref, refWdbeMVector, sref, Const, srefWdbeKHdltype, Width, Minmax, Comb, Onval, Offval, Defon, drvRefWdbeMPort, Comment FROM TblWdbeMSignal WHERE refWdbeMVector = " + to_string(refWdbeMVector) + "", rec);
+	return loadRecBySQL("SELECT ref, ixVBasetype, refWdbeCSignal, refIxVTbl, refUref, refNum, mgeIxVTbl, mgeUref, refWdbeMVector, sref, Const, srefWdbeKHdltype, Width, Minmax, Comb, Onval, Offval, drvRefWdbeMPort, Comment FROM TblWdbeMSignal WHERE refWdbeMVector = " + to_string(refWdbeMVector) + "", rec);
 };
 
 ubigint MyTblWdbeMSignal::loadRefsByClu(
@@ -673,7 +663,7 @@ ubigint MyTblWdbeMSignal::loadRstByClu(
 			, const bool append
 			, ListWdbeMSignal& rst
 		) {
-	return loadRstBySQL("SELECT ref, ixVBasetype, refWdbeCSignal, refIxVTbl, refUref, refNum, mgeIxVTbl, mgeUref, refWdbeMVector, sref, Const, srefWdbeKHdltype, Width, Minmax, Comb, Onval, Offval, Defon, drvRefWdbeMPort, Comment FROM TblWdbeMSignal WHERE refWdbeCSignal = " + to_string(refWdbeCSignal) + "", append, rst);
+	return loadRstBySQL("SELECT ref, ixVBasetype, refWdbeCSignal, refIxVTbl, refUref, refNum, mgeIxVTbl, mgeUref, refWdbeMVector, sref, Const, srefWdbeKHdltype, Width, Minmax, Comb, Onval, Offval, drvRefWdbeMPort, Comment FROM TblWdbeMSignal WHERE refWdbeCSignal = " + to_string(refWdbeCSignal) + "", append, rst);
 };
 
 ubigint MyTblWdbeMSignal::loadRstByRetReu(
@@ -682,7 +672,7 @@ ubigint MyTblWdbeMSignal::loadRstByRetReu(
 			, const bool append
 			, ListWdbeMSignal& rst
 		) {
-	return loadRstBySQL("SELECT ref, ixVBasetype, refWdbeCSignal, refIxVTbl, refUref, refNum, mgeIxVTbl, mgeUref, refWdbeMVector, sref, Const, srefWdbeKHdltype, Width, Minmax, Comb, Onval, Offval, Defon, drvRefWdbeMPort, Comment FROM TblWdbeMSignal WHERE refIxVTbl = " + to_string(refIxVTbl) + " AND refUref = " + to_string(refUref) + " ORDER BY Const DESC, refNum ASC", append, rst);
+	return loadRstBySQL("SELECT ref, ixVBasetype, refWdbeCSignal, refIxVTbl, refUref, refNum, mgeIxVTbl, mgeUref, refWdbeMVector, sref, Const, srefWdbeKHdltype, Width, Minmax, Comb, Onval, Offval, drvRefWdbeMPort, Comment FROM TblWdbeMSignal WHERE refIxVTbl = " + to_string(refIxVTbl) + " AND refUref = " + to_string(refUref) + " ORDER BY Const DESC, refNum ASC", append, rst);
 };
 
 bool MyTblWdbeMSignal::loadSrfByRef(
@@ -710,16 +700,16 @@ PgTblWdbeMSignal::~PgTblWdbeMSignal() {
 };
 
 void PgTblWdbeMSignal::initStatements() {
-	createStatement("TblWdbeMSignal_insertRec", "INSERT INTO TblWdbeMSignal (ixVBasetype, refWdbeCSignal, refIxVTbl, refUref, refNum, mgeIxVTbl, mgeUref, refWdbeMVector, sref, Const, srefWdbeKHdltype, Width, Minmax, Comb, Onval, Offval, Defon, drvRefWdbeMPort, Comment) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18,$19) RETURNING ref", 19);
-	createStatement("TblWdbeMSignal_updateRec", "UPDATE TblWdbeMSignal SET ixVBasetype = $1, refWdbeCSignal = $2, refIxVTbl = $3, refUref = $4, refNum = $5, mgeIxVTbl = $6, mgeUref = $7, refWdbeMVector = $8, sref = $9, Const = $10, srefWdbeKHdltype = $11, Width = $12, Minmax = $13, Comb = $14, Onval = $15, Offval = $16, Defon = $17, drvRefWdbeMPort = $18, Comment = $19 WHERE ref = $20", 20);
+	createStatement("TblWdbeMSignal_insertRec", "INSERT INTO TblWdbeMSignal (ixVBasetype, refWdbeCSignal, refIxVTbl, refUref, refNum, mgeIxVTbl, mgeUref, refWdbeMVector, sref, Const, srefWdbeKHdltype, Width, Minmax, Comb, Onval, Offval, drvRefWdbeMPort, Comment) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,$11,$12,$13,$14,$15,$16,$17,$18) RETURNING ref", 18);
+	createStatement("TblWdbeMSignal_updateRec", "UPDATE TblWdbeMSignal SET ixVBasetype = $1, refWdbeCSignal = $2, refIxVTbl = $3, refUref = $4, refNum = $5, mgeIxVTbl = $6, mgeUref = $7, refWdbeMVector = $8, sref = $9, Const = $10, srefWdbeKHdltype = $11, Width = $12, Minmax = $13, Comb = $14, Onval = $15, Offval = $16, drvRefWdbeMPort = $17, Comment = $18 WHERE ref = $19", 19);
 	createStatement("TblWdbeMSignal_removeRecByRef", "DELETE FROM TblWdbeMSignal WHERE ref = $1", 1);
 
-	createStatement("TblWdbeMSignal_loadRecByRef", "SELECT ref, ixVBasetype, refWdbeCSignal, refIxVTbl, refUref, refNum, mgeIxVTbl, mgeUref, refWdbeMVector, sref, Const, srefWdbeKHdltype, Width, Minmax, Comb, Onval, Offval, Defon, drvRefWdbeMPort, Comment FROM TblWdbeMSignal WHERE ref = $1", 1);
-	createStatement("TblWdbeMSignal_loadRecByVec", "SELECT ref, ixVBasetype, refWdbeCSignal, refIxVTbl, refUref, refNum, mgeIxVTbl, mgeUref, refWdbeMVector, sref, Const, srefWdbeKHdltype, Width, Minmax, Comb, Onval, Offval, Defon, drvRefWdbeMPort, Comment FROM TblWdbeMSignal WHERE refWdbeMVector = $1", 1);
+	createStatement("TblWdbeMSignal_loadRecByRef", "SELECT ref, ixVBasetype, refWdbeCSignal, refIxVTbl, refUref, refNum, mgeIxVTbl, mgeUref, refWdbeMVector, sref, Const, srefWdbeKHdltype, Width, Minmax, Comb, Onval, Offval, drvRefWdbeMPort, Comment FROM TblWdbeMSignal WHERE ref = $1", 1);
+	createStatement("TblWdbeMSignal_loadRecByVec", "SELECT ref, ixVBasetype, refWdbeCSignal, refIxVTbl, refUref, refNum, mgeIxVTbl, mgeUref, refWdbeMVector, sref, Const, srefWdbeKHdltype, Width, Minmax, Comb, Onval, Offval, drvRefWdbeMPort, Comment FROM TblWdbeMSignal WHERE refWdbeMVector = $1", 1);
 	createStatement("TblWdbeMSignal_loadRefsByClu", "SELECT ref FROM TblWdbeMSignal WHERE refWdbeCSignal = $1", 1);
 	createStatement("TblWdbeMSignal_loadRefsByRetReu", "SELECT ref FROM TblWdbeMSignal WHERE refIxVTbl = $1 AND refUref = $2", 2);
-	createStatement("TblWdbeMSignal_loadRstByClu", "SELECT ref, ixVBasetype, refWdbeCSignal, refIxVTbl, refUref, refNum, mgeIxVTbl, mgeUref, refWdbeMVector, sref, Const, srefWdbeKHdltype, Width, Minmax, Comb, Onval, Offval, Defon, drvRefWdbeMPort, Comment FROM TblWdbeMSignal WHERE refWdbeCSignal = $1", 1);
-	createStatement("TblWdbeMSignal_loadRstByRetReu", "SELECT ref, ixVBasetype, refWdbeCSignal, refIxVTbl, refUref, refNum, mgeIxVTbl, mgeUref, refWdbeMVector, sref, Const, srefWdbeKHdltype, Width, Minmax, Comb, Onval, Offval, Defon, drvRefWdbeMPort, Comment FROM TblWdbeMSignal WHERE refIxVTbl = $1 AND refUref = $2 ORDER BY Const DESC, refNum ASC", 2);
+	createStatement("TblWdbeMSignal_loadRstByClu", "SELECT ref, ixVBasetype, refWdbeCSignal, refIxVTbl, refUref, refNum, mgeIxVTbl, mgeUref, refWdbeMVector, sref, Const, srefWdbeKHdltype, Width, Minmax, Comb, Onval, Offval, drvRefWdbeMPort, Comment FROM TblWdbeMSignal WHERE refWdbeCSignal = $1", 1);
+	createStatement("TblWdbeMSignal_loadRstByRetReu", "SELECT ref, ixVBasetype, refWdbeCSignal, refIxVTbl, refUref, refNum, mgeIxVTbl, mgeUref, refWdbeMVector, sref, Const, srefWdbeKHdltype, Width, Minmax, Comb, Onval, Offval, drvRefWdbeMPort, Comment FROM TblWdbeMSignal WHERE refIxVTbl = $1 AND refUref = $2 ORDER BY Const DESC, refNum ASC", 2);
 	createStatement("TblWdbeMSignal_loadSrfByRef", "SELECT sref FROM TblWdbeMSignal WHERE ref = $1", 1);
 };
 
@@ -753,7 +743,6 @@ bool PgTblWdbeMSignal::loadRec(
 			PQfnumber(res, "comb"),
 			PQfnumber(res, "onval"),
 			PQfnumber(res, "offval"),
-			PQfnumber(res, "defon"),
 			PQfnumber(res, "drvrefwdbemport"),
 			PQfnumber(res, "comment")
 		};
@@ -775,9 +764,8 @@ bool PgTblWdbeMSignal::loadRec(
 		ptr = PQgetvalue(res, 0, fnum[14]); _rec->Comb.assign(ptr, PQgetlength(res, 0, fnum[14]));
 		ptr = PQgetvalue(res, 0, fnum[15]); _rec->Onval.assign(ptr, PQgetlength(res, 0, fnum[15]));
 		ptr = PQgetvalue(res, 0, fnum[16]); _rec->Offval.assign(ptr, PQgetlength(res, 0, fnum[16]));
-		ptr = PQgetvalue(res, 0, fnum[17]); _rec->Defon = (atoi(ptr) != 0);
-		ptr = PQgetvalue(res, 0, fnum[18]); _rec->drvRefWdbeMPort = atoll(ptr);
-		ptr = PQgetvalue(res, 0, fnum[19]); _rec->Comment.assign(ptr, PQgetlength(res, 0, fnum[19]));
+		ptr = PQgetvalue(res, 0, fnum[17]); _rec->drvRefWdbeMPort = atoll(ptr);
+		ptr = PQgetvalue(res, 0, fnum[18]); _rec->Comment.assign(ptr, PQgetlength(res, 0, fnum[18]));
 
 		retval = true;
 	};
@@ -821,7 +809,6 @@ ubigint PgTblWdbeMSignal::loadRst(
 			PQfnumber(res, "comb"),
 			PQfnumber(res, "onval"),
 			PQfnumber(res, "offval"),
-			PQfnumber(res, "defon"),
 			PQfnumber(res, "drvrefwdbemport"),
 			PQfnumber(res, "comment")
 		};
@@ -846,9 +833,8 @@ ubigint PgTblWdbeMSignal::loadRst(
 			ptr = PQgetvalue(res, numread, fnum[14]); rec->Comb.assign(ptr, PQgetlength(res, numread, fnum[14]));
 			ptr = PQgetvalue(res, numread, fnum[15]); rec->Onval.assign(ptr, PQgetlength(res, numread, fnum[15]));
 			ptr = PQgetvalue(res, numread, fnum[16]); rec->Offval.assign(ptr, PQgetlength(res, numread, fnum[16]));
-			ptr = PQgetvalue(res, numread, fnum[17]); rec->Defon = (atoi(ptr) != 0);
-			ptr = PQgetvalue(res, numread, fnum[18]); rec->drvRefWdbeMPort = atoll(ptr);
-			ptr = PQgetvalue(res, numread, fnum[19]); rec->Comment.assign(ptr, PQgetlength(res, numread, fnum[19]));
+			ptr = PQgetvalue(res, numread, fnum[17]); rec->drvRefWdbeMPort = atoll(ptr);
+			ptr = PQgetvalue(res, numread, fnum[18]); rec->Comment.assign(ptr, PQgetlength(res, numread, fnum[18]));
 
 			rst.nodes.push_back(rec);
 
@@ -951,7 +937,6 @@ ubigint PgTblWdbeMSignal::insertRec(
 	ubigint _refWdbeMVector = htonl64(rec->refWdbeMVector);
 	smallint _Const = htons((smallint) rec->Const);
 	usmallint _Width = htons(rec->Width);
-	smallint _Defon = htons((smallint) rec->Defon);
 	ubigint _drvRefWdbeMPort = htonl64(rec->drvRefWdbeMPort);
 
 	const char* vals[] = {
@@ -971,7 +956,6 @@ ubigint PgTblWdbeMSignal::insertRec(
 		rec->Comb.c_str(),
 		rec->Onval.c_str(),
 		rec->Offval.c_str(),
-		(char*) &_Defon,
 		(char*) &_drvRefWdbeMPort,
 		rec->Comment.c_str()
 	};
@@ -992,13 +976,12 @@ ubigint PgTblWdbeMSignal::insertRec(
 		0,
 		0,
 		0,
-		sizeof(smallint),
 		sizeof(ubigint),
 		0
 	};
-	const int f[] = {1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0};
+	const int f[] = {1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0};
 
-	res = PQexecPrepared(dbs, "TblWdbeMSignal_insertRec", 19, vals, l, f, 0);
+	res = PQexecPrepared(dbs, "TblWdbeMSignal_insertRec", 18, vals, l, f, 0);
 
 	if (PQresultStatus(res) != PGRES_TUPLES_OK) {
 		string dbms = "PgTblWdbeMSignal::insertRec() / " + string(PQerrorMessage(dbs));
@@ -1036,7 +1019,6 @@ void PgTblWdbeMSignal::updateRec(
 	ubigint _refWdbeMVector = htonl64(rec->refWdbeMVector);
 	smallint _Const = htons((smallint) rec->Const);
 	usmallint _Width = htons(rec->Width);
-	smallint _Defon = htons((smallint) rec->Defon);
 	ubigint _drvRefWdbeMPort = htonl64(rec->drvRefWdbeMPort);
 	ubigint _ref = htonl64(rec->ref);
 
@@ -1057,7 +1039,6 @@ void PgTblWdbeMSignal::updateRec(
 		rec->Comb.c_str(),
 		rec->Onval.c_str(),
 		rec->Offval.c_str(),
-		(char*) &_Defon,
 		(char*) &_drvRefWdbeMPort,
 		rec->Comment.c_str(),
 		(char*) &_ref
@@ -1079,14 +1060,13 @@ void PgTblWdbeMSignal::updateRec(
 		0,
 		0,
 		0,
-		sizeof(smallint),
 		sizeof(ubigint),
 		0,
 		sizeof(ubigint)
 	};
-	const int f[] = {1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 1, 0, 1};
+	const int f[] = {1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 1, 0, 1};
 
-	res = PQexecPrepared(dbs, "TblWdbeMSignal_updateRec", 20, vals, l, f, 0);
+	res = PQexecPrepared(dbs, "TblWdbeMSignal_updateRec", 19, vals, l, f, 0);
 
 	if (PQresultStatus(res) != PGRES_COMMAND_OK) {
 		string dbms = "PgTblWdbeMSignal::updateRec() / " + string(PQerrorMessage(dbs));

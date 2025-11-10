@@ -3,7 +3,7 @@
 # checkin script for Wdbe Vue.js UI, release vueappwdbe_any
 # copyright: (C) 2022 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 7 Feb 2024
+# date created: 5 Nov 2025
 # IP header --- ABOVE
 
 if [ -z ${WHIZROOT+x} ]; then

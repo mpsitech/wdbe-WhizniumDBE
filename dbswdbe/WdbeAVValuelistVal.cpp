@@ -22,13 +22,13 @@ WdbeAVValuelistVal::WdbeAVValuelistVal(
 			, const uint vlsNum
 			, const uint x1IxWdbeVLocale
 			, const string Val
-		) {
-
-	this->ref = ref;
-	this->vlsIxWdbeVValuelist = vlsIxWdbeVValuelist;
-	this->vlsNum = vlsNum;
-	this->x1IxWdbeVLocale = x1IxWdbeVLocale;
-	this->Val = Val;
+		) :
+			ref(ref)
+			, vlsIxWdbeVValuelist(vlsIxWdbeVValuelist)
+			, vlsNum(vlsNum)
+			, x1IxWdbeVLocale(x1IxWdbeVLocale)
+			, Val(Val)
+		{
 };
 
 bool WdbeAVValuelistVal::operator==(

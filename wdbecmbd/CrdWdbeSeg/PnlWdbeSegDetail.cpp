@@ -46,9 +46,9 @@ PnlWdbeSegDetail::PnlWdbeSegDetail(
 
 	// IP constructor.cust2 --- INSERT
 
-	xchg->addClstn(VecWdbeVCall::CALLWDBESEG_SUPEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecWdbeVCall::CALLWDBESEG_PPLEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBESEG_CLUEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBESEG_PPLEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBESEG_SUPEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -384,49 +384,27 @@ void PnlWdbeSegDetail::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBESEGMOD_CLUEQ) {
-		call->abort = handleCallWdbeSegMod_cluEq(dbswdbe, call->jref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBESEGUPD_REFEQ) {
-		call->abort = handleCallWdbeSegUpd_refEq(dbswdbe, call->jref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBESEG_SUPEQ) {
-		call->abort = handleCallWdbeSeg_supEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
+	if (call->ixVCall == VecWdbeVCall::CALLWDBESEG_CLUEQ) {
+		call->abort = handleCallWdbeSeg_cluEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBESEG_PPLEQ) {
 		call->abort = handleCallWdbeSeg_pplEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBESEG_CLUEQ) {
-		call->abort = handleCallWdbeSeg_cluEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBESEG_SUPEQ) {
+		call->abort = handleCallWdbeSeg_supEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBESEGUPD_REFEQ) {
+		call->abort = handleCallWdbeSegUpd_refEq(dbswdbe, call->jref);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBESEGMOD_CLUEQ) {
+		call->abort = handleCallWdbeSegMod_cluEq(dbswdbe, call->jref);
 	};
 };
 
-bool PnlWdbeSegDetail::handleCallWdbeSegMod_cluEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-	set<uint> moditems;
-
-	refreshClu(dbswdbe, moditems);
-
-	xchg->submitDpch(getNewDpchEng(moditems));
-	return retval;
-};
-
-bool PnlWdbeSegDetail::handleCallWdbeSegUpd_refEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-	// IP handleCallWdbeSegUpd_refEq --- INSERT
-	return retval;
-};
-
-bool PnlWdbeSegDetail::handleCallWdbeSeg_supEq(
+bool PnlWdbeSegDetail::handleCallWdbeSeg_cluEq(
 			DbsWdbe* dbswdbe
 			, const ubigint jrefTrig
 			, const ubigint refInv
 			, bool& boolvalRet
 		) {
 	bool retval = false;
-	boolvalRet = (recSeg.supRefWdbeMSegment == refInv); // IP handleCallWdbeSeg_supEq --- LINE
+	boolvalRet = (recSeg.refWdbeCSegment == refInv); // IP handleCallWdbeSeg_cluEq --- LINE
 	return retval;
 };
 
@@ -441,13 +419,35 @@ bool PnlWdbeSegDetail::handleCallWdbeSeg_pplEq(
 	return retval;
 };
 
-bool PnlWdbeSegDetail::handleCallWdbeSeg_cluEq(
+bool PnlWdbeSegDetail::handleCallWdbeSeg_supEq(
 			DbsWdbe* dbswdbe
 			, const ubigint jrefTrig
 			, const ubigint refInv
 			, bool& boolvalRet
 		) {
 	bool retval = false;
-	boolvalRet = (recSeg.refWdbeCSegment == refInv); // IP handleCallWdbeSeg_cluEq --- LINE
+	boolvalRet = (recSeg.supRefWdbeMSegment == refInv); // IP handleCallWdbeSeg_supEq --- LINE
+	return retval;
+};
+
+bool PnlWdbeSegDetail::handleCallWdbeSegUpd_refEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+	// IP handleCallWdbeSegUpd_refEq --- INSERT
+	return retval;
+};
+
+bool PnlWdbeSegDetail::handleCallWdbeSegMod_cluEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+	set<uint> moditems;
+
+	refreshClu(dbswdbe, moditems);
+
+	xchg->submitDpch(getNewDpchEng(moditems));
 	return retval;
 };

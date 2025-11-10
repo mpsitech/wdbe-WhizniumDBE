@@ -43,9 +43,8 @@ PnlWdbeVerRec::ContInf::ContInf(
 			const string& TxtRef
 		) :
 			Block()
+			, TxtRef(TxtRef)
 		{
-	this->TxtRef = TxtRef;
-
 	mask = {TXTREF};
 };
 
@@ -108,20 +107,20 @@ void PnlWdbeVerRec::StatApp::writeJSON(
 			Json::Value& sup
 			, string difftag
 			, const bool initdoneDetail
-			, const bool initdoneBvr1NVersion
 			, const bool initdone1NComponent
-			, const bool initdone1NUnit
+			, const bool initdoneBvr1NVersion
 			, const bool initdoneRef1NFile
+			, const bool initdone1NUnit
 		) {
 	if (difftag.length() == 0) difftag = "StatAppWdbeVerRec";
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
 	me["initdoneDetail"] = initdoneDetail;
-	me["initdoneBvr1NVersion"] = initdoneBvr1NVersion;
 	me["initdone1NComponent"] = initdone1NComponent;
-	me["initdone1NUnit"] = initdone1NUnit;
+	me["initdoneBvr1NVersion"] = initdoneBvr1NVersion;
 	me["initdoneRef1NFile"] = initdoneRef1NFile;
+	me["initdone1NUnit"] = initdone1NUnit;
 };
 
 void PnlWdbeVerRec::StatApp::writeXML(
@@ -129,10 +128,10 @@ void PnlWdbeVerRec::StatApp::writeXML(
 			, string difftag
 			, bool shorttags
 			, const bool initdoneDetail
-			, const bool initdoneBvr1NVersion
 			, const bool initdone1NComponent
-			, const bool initdone1NUnit
+			, const bool initdoneBvr1NVersion
 			, const bool initdoneRef1NFile
+			, const bool initdone1NUnit
 		) {
 	if (difftag.length() == 0) difftag = "StatAppWdbeVerRec";
 
@@ -142,10 +141,10 @@ void PnlWdbeVerRec::StatApp::writeXML(
 
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
 		writeBoolAttr(wr, itemtag, "sref", "initdoneDetail", initdoneDetail);
-		writeBoolAttr(wr, itemtag, "sref", "initdoneBvr1NVersion", initdoneBvr1NVersion);
 		writeBoolAttr(wr, itemtag, "sref", "initdone1NComponent", initdone1NComponent);
-		writeBoolAttr(wr, itemtag, "sref", "initdone1NUnit", initdone1NUnit);
+		writeBoolAttr(wr, itemtag, "sref", "initdoneBvr1NVersion", initdoneBvr1NVersion);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneRef1NFile", initdoneRef1NFile);
+		writeBoolAttr(wr, itemtag, "sref", "initdone1NUnit", initdone1NUnit);
 	xmlTextWriterEndElement(wr);
 };
 
@@ -156,23 +155,22 @@ void PnlWdbeVerRec::StatApp::writeXML(
 PnlWdbeVerRec::StatShr::StatShr(
 			const uint ixWdbeVExpstate
 			, const ubigint jrefDetail
-			, const ubigint jrefBvr1NVersion
 			, const ubigint jref1NComponent
-			, const ubigint jref1NUnit
+			, const ubigint jrefBvr1NVersion
 			, const ubigint jrefRef1NFile
+			, const ubigint jref1NUnit
 			, const bool ButRegularizeActive
 		) :
 			Block()
+			, ixWdbeVExpstate(ixWdbeVExpstate)
+			, jrefDetail(jrefDetail)
+			, jref1NComponent(jref1NComponent)
+			, jrefBvr1NVersion(jrefBvr1NVersion)
+			, jrefRef1NFile(jrefRef1NFile)
+			, jref1NUnit(jref1NUnit)
+			, ButRegularizeActive(ButRegularizeActive)
 		{
-	this->ixWdbeVExpstate = ixWdbeVExpstate;
-	this->jrefDetail = jrefDetail;
-	this->jrefBvr1NVersion = jrefBvr1NVersion;
-	this->jref1NComponent = jref1NComponent;
-	this->jref1NUnit = jref1NUnit;
-	this->jrefRef1NFile = jrefRef1NFile;
-	this->ButRegularizeActive = ButRegularizeActive;
-
-	mask = {IXWDBEVEXPSTATE, JREFDETAIL, JREFBVR1NVERSION, JREF1NCOMPONENT, JREF1NUNIT, JREFREF1NFILE, BUTREGULARIZEACTIVE};
+	mask = {IXWDBEVEXPSTATE, JREFDETAIL, JREF1NCOMPONENT, JREFBVR1NVERSION, JREFREF1NFILE, JREF1NUNIT, BUTREGULARIZEACTIVE};
 };
 
 void PnlWdbeVerRec::StatShr::writeJSON(
@@ -185,10 +183,10 @@ void PnlWdbeVerRec::StatShr::writeJSON(
 
 	me["srefIxWdbeVExpstate"] = VecWdbeVExpstate::getSref(ixWdbeVExpstate);
 	me["scrJrefDetail"] = Scr::scramble(jrefDetail);
-	me["scrJrefBvr1NVersion"] = Scr::scramble(jrefBvr1NVersion);
 	me["scrJref1NComponent"] = Scr::scramble(jref1NComponent);
-	me["scrJref1NUnit"] = Scr::scramble(jref1NUnit);
+	me["scrJrefBvr1NVersion"] = Scr::scramble(jrefBvr1NVersion);
 	me["scrJrefRef1NFile"] = Scr::scramble(jrefRef1NFile);
+	me["scrJref1NUnit"] = Scr::scramble(jref1NUnit);
 	me["ButRegularizeActive"] = ButRegularizeActive;
 };
 
@@ -206,10 +204,10 @@ void PnlWdbeVerRec::StatShr::writeXML(
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
 		writeStringAttr(wr, itemtag, "sref", "srefIxWdbeVExpstate", VecWdbeVExpstate::getSref(ixWdbeVExpstate));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefDetail", Scr::scramble(jrefDetail));
-		writeStringAttr(wr, itemtag, "sref", "scrJrefBvr1NVersion", Scr::scramble(jrefBvr1NVersion));
 		writeStringAttr(wr, itemtag, "sref", "scrJref1NComponent", Scr::scramble(jref1NComponent));
-		writeStringAttr(wr, itemtag, "sref", "scrJref1NUnit", Scr::scramble(jref1NUnit));
+		writeStringAttr(wr, itemtag, "sref", "scrJrefBvr1NVersion", Scr::scramble(jrefBvr1NVersion));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefRef1NFile", Scr::scramble(jrefRef1NFile));
+		writeStringAttr(wr, itemtag, "sref", "scrJref1NUnit", Scr::scramble(jref1NUnit));
 		writeBoolAttr(wr, itemtag, "sref", "ButRegularizeActive", ButRegularizeActive);
 	xmlTextWriterEndElement(wr);
 };
@@ -221,10 +219,10 @@ set<uint> PnlWdbeVerRec::StatShr::comm(
 
 	if (ixWdbeVExpstate == comp->ixWdbeVExpstate) insert(items, IXWDBEVEXPSTATE);
 	if (jrefDetail == comp->jrefDetail) insert(items, JREFDETAIL);
-	if (jrefBvr1NVersion == comp->jrefBvr1NVersion) insert(items, JREFBVR1NVERSION);
 	if (jref1NComponent == comp->jref1NComponent) insert(items, JREF1NCOMPONENT);
-	if (jref1NUnit == comp->jref1NUnit) insert(items, JREF1NUNIT);
+	if (jrefBvr1NVersion == comp->jrefBvr1NVersion) insert(items, JREFBVR1NVERSION);
 	if (jrefRef1NFile == comp->jrefRef1NFile) insert(items, JREFREF1NFILE);
+	if (jref1NUnit == comp->jref1NUnit) insert(items, JREF1NUNIT);
 	if (ButRegularizeActive == comp->ButRegularizeActive) insert(items, BUTREGULARIZEACTIVE);
 
 	return(items);
@@ -238,7 +236,7 @@ set<uint> PnlWdbeVerRec::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {IXWDBEVEXPSTATE, JREFDETAIL, JREFBVR1NVERSION, JREF1NCOMPONENT, JREF1NUNIT, JREFREF1NFILE, BUTREGULARIZEACTIVE};
+	diffitems = {IXWDBEVEXPSTATE, JREFDETAIL, JREF1NCOMPONENT, JREFBVR1NVERSION, JREFREF1NFILE, JREF1NUNIT, BUTREGULARIZEACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);

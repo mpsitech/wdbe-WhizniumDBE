@@ -19,9 +19,8 @@ PnlWdbeNavHeadbar::StatShr::StatShr(
 			const bool MenCrdAvail
 		) :
 			Block()
+			, MenCrdAvail(MenCrdAvail)
 		{
-	this->MenCrdAvail = MenCrdAvail;
-
 	mask = {MENCRDAVAIL};
 };
 

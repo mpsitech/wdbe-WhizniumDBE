@@ -40,7 +40,7 @@ DpchRetWdbe* WdbeMtpCplmstbuFsmprobe_Easy_v1_0::run(
 
 	string capts; // ex. tkclksrc.op;camif.stream
 
-	ubigint refVecSrc;
+	ubigint refVecCapt;
 	uint vecNum = 1;
 
 	uint mdlNum = 4;
@@ -50,7 +50,7 @@ DpchRetWdbe* WdbeMtpCplmstbuFsmprobe_Easy_v1_0::run(
 	string sref;
 
 	if (dbswdbe->tblwdbemmodule->loadRecByRef(refWdbeMModule, &mdl)) {
-		if (dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMVector WHERE hkIxVTbl = " + to_string(VecWdbeVMVectorHkTbl::CTR) + " AND hkUref = " + to_string(mdl->refWdbeMController) + " AND sref LIKE 'VecV%Source'", refVecSrc)) {
+		if (dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMVector WHERE hkIxVTbl = " + to_string(VecWdbeVMVectorHkTbl::CTR) + " AND hkUref = " + to_string(mdl->refWdbeMController) + " AND sref LIKE 'VecV%Capture'", refVecCapt)) {
 			if (Wdbe::getMpa(dbswdbe, refWdbeMModule, "capts", capts)) {
 				StrMod::stringToVector(capts, ss, ';');
 
@@ -58,7 +58,7 @@ DpchRetWdbe* WdbeMtpCplmstbuFsmprobe_Easy_v1_0::run(
 					StrMod::stringToVector(ss[i], ss2, '.');
 
 					if (ss2.size() == 2) {
-						dbswdbe->tblwdbemvectoritem->insertNewRec(NULL, refVecSrc, vecNum++, ss2[0] + StrMod::cap(ss2[1]), "", "");
+						dbswdbe->tblwdbemvectoritem->insertNewRec(NULL, refVecCapt, vecNum++, ss2[0] + StrMod::cap(ss2[1]), "", "");
 
 						sref = ss2[0] + "State" + StrMod::cap(ss2[1]);
 						dbswdbe->tblwdbemport->insertNewRec(NULL, 0, refWdbeMModule, mdlNum++, VecWdbeVMPortMdlCat::DBG, sref, VecWdbeVMPortDir::IN, "slvdn", 8, "", "", "", "", sref + "_dbg", "");

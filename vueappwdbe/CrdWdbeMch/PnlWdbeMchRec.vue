@@ -47,17 +47,17 @@
 			</v-row>
 			<v-row>
 				<v-col cols="12" md="6">
-					<PnlWdbeMchAMakefile
-						v-on:request="handleRequest"
-						ref="PnlWdbeMchAMakefile"
-						:scrJref=statshr.scrJrefAMakefile
-					/>
-				</v-col>
-				<v-col cols="12" md="6">
 					<PnlWdbeMchAPar
 						v-on:request="handleRequest"
 						ref="PnlWdbeMchAPar"
 						:scrJref=statshr.scrJrefAPar
+					/>
+				</v-col>
+				<v-col cols="12" md="6">
+					<PnlWdbeMchAMakefile
+						v-on:request="handleRequest"
+						ref="PnlWdbeMchAMakefile"
+						:scrJref=statshr.scrJrefAMakefile
 					/>
 				</v-col>
 			</v-row>
@@ -90,8 +90,8 @@
 	/*
 	*/
 	import PnlWdbeMchDetail from './PnlWdbeMchDetail';
-	import PnlWdbeMchAMakefile from './PnlWdbeMchAMakefile';
 	import PnlWdbeMchAPar from './PnlWdbeMchAPar';
+	import PnlWdbeMchAMakefile from './PnlWdbeMchAMakefile';
 	import PnlWdbeMch1NRelease from './PnlWdbeMch1NRelease';
 	import PnlWdbeMchSup1NMachine from './PnlWdbeMchSup1NMachine';
 	/*
@@ -112,8 +112,8 @@
 			/*
 			*/
 			PnlWdbeMchDetail,
-			PnlWdbeMchAMakefile,
 			PnlWdbeMchAPar,
+			PnlWdbeMchAMakefile,
 			PnlWdbeMch1NRelease,
 			PnlWdbeMchSup1NMachine
 			/*
@@ -177,8 +177,8 @@
 						/*
 						*/
 						if (obj.scrJref == this.statshr.scrJrefDetail) this.$refs.PnlWdbeMchDetail.handleReply(obj);
-						else if (obj.scrJref == this.statshr.scrJrefAMakefile) this.$refs.PnlWdbeMchAMakefile.handleReply(obj);
 						else if (obj.scrJref == this.statshr.scrJrefAPar) this.$refs.PnlWdbeMchAPar.handleReply(obj);
+						else if (obj.scrJref == this.statshr.scrJrefAMakefile) this.$refs.PnlWdbeMchAMakefile.handleReply(obj);
 						else if (obj.scrJref == this.statshr.scrJref1NRelease) this.$refs.PnlWdbeMch1NRelease.handleReply(obj);
 						else if (obj.scrJref == this.statshr.scrJrefSup1NMachine) this.$refs.PnlWdbeMchSup1NMachine.handleReply(obj);
 						/*
@@ -211,8 +211,8 @@
 						/*
 						*/
 						if (obj.dpcheng.scrJref == this.statshr.scrJrefDetail) this.$refs.PnlWdbeMchDetail.handleUpdate(obj);
-						else if (obj.dpcheng.scrJref == this.statshr.scrJrefAMakefile) this.$refs.PnlWdbeMchAMakefile.handleUpdate(obj);
 						else if (obj.dpcheng.scrJref == this.statshr.scrJrefAPar) this.$refs.PnlWdbeMchAPar.handleUpdate(obj);
+						else if (obj.dpcheng.scrJref == this.statshr.scrJrefAMakefile) this.$refs.PnlWdbeMchAMakefile.handleUpdate(obj);
 						else if (obj.dpcheng.scrJref == this.statshr.scrJref1NRelease) this.$refs.PnlWdbeMch1NRelease.handleUpdate(obj);
 						else if (obj.dpcheng.scrJref == this.statshr.scrJrefSup1NMachine) this.$refs.PnlWdbeMchSup1NMachine.handleUpdate(obj);
 						/*

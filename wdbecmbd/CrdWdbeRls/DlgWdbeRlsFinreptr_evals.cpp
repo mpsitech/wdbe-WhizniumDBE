@@ -11,25 +11,6 @@ using namespace std;
 using namespace Sbecore;
 using namespace Xmlio;
 
-bool DlgWdbeRlsFinreptr::evalButDneActive(
-			DbsWdbe* dbswdbe
-		) {
-	// sge(idle|done)
-
-	vector<bool> args;
-	bool a, b;
-
-	a = false; a = (ixVSge == VecVSge::IDLE);
-	args.push_back(a);
-	a = false; a = (ixVSge == VecVSge::DONE);
-	args.push_back(a);
-	b = args.back(); args.pop_back();
-	a = args.back(); args.pop_back();
-	args.push_back(a || b);
-
-	return(args.back());
-};
-
 bool DlgWdbeRlsFinreptr::evalFinButRunActive(
 			DbsWdbe* dbswdbe
 		) {
@@ -170,6 +151,25 @@ bool DlgWdbeRlsFinreptr::evalResButPsgActive(
 
 	a = false; a = (ixVSge == VecVSge::FINDONE);
 	args.push_back(a);
+
+	return(args.back());
+};
+
+bool DlgWdbeRlsFinreptr::evalButDneActive(
+			DbsWdbe* dbswdbe
+		) {
+	// sge(idle|done)
+
+	vector<bool> args;
+	bool a, b;
+
+	a = false; a = (ixVSge == VecVSge::IDLE);
+	args.push_back(a);
+	a = false; a = (ixVSge == VecVSge::DONE);
+	args.push_back(a);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
 
 	return(args.back());
 };

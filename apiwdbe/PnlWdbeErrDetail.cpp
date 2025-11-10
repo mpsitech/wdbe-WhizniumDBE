@@ -49,11 +49,10 @@ PnlWdbeErrDetail::ContIac::ContIac(
 			, const string& TxfCmt
 		) :
 			Block()
+			, TxfFsr(TxfFsr)
+			, numFPupRet(numFPupRet)
+			, TxfCmt(TxfCmt)
 		{
-	this->TxfFsr = TxfFsr;
-	this->numFPupRet = numFPupRet;
-	this->TxfCmt = TxfCmt;
-
 	mask = {TXFFSR, NUMFPUPRET, TXFCMT};
 };
 
@@ -136,11 +135,10 @@ PnlWdbeErrDetail::ContInf::ContInf(
 			, const string& TxtTra
 		) :
 			Block()
+			, TxtSrf(TxtSrf)
+			, TxtReu(TxtReu)
+			, TxtTra(TxtTra)
 		{
-	this->TxtSrf = TxtSrf;
-	this->TxtReu = TxtReu;
-	this->TxtTra = TxtTra;
-
 	mask = {TXTSRF, TXTREU, TXTTRA};
 };
 
@@ -203,9 +201,8 @@ PnlWdbeErrDetail::StatApp::StatApp(
 			const uint ixWdbeVExpstate
 		) :
 			Block()
+			, ixWdbeVExpstate(ixWdbeVExpstate)
 		{
-	this->ixWdbeVExpstate = ixWdbeVExpstate;
-
 	mask = {IXWDBEVEXPSTATE};
 };
 
@@ -279,19 +276,18 @@ PnlWdbeErrDetail::StatShr::StatShr(
 			, const bool TxfCmtActive
 		) :
 			Block()
+			, ButSaveAvail(ButSaveAvail)
+			, ButSaveActive(ButSaveActive)
+			, TxtSrfActive(TxtSrfActive)
+			, TxfFsrActive(TxfFsrActive)
+			, TxtReuActive(TxtReuActive)
+			, ButReuViewAvail(ButReuViewAvail)
+			, ButReuViewActive(ButReuViewActive)
+			, TxtTraActive(TxtTraActive)
+			, ButTraViewAvail(ButTraViewAvail)
+			, ButTraViewActive(ButTraViewActive)
+			, TxfCmtActive(TxfCmtActive)
 		{
-	this->ButSaveAvail = ButSaveAvail;
-	this->ButSaveActive = ButSaveActive;
-	this->TxtSrfActive = TxtSrfActive;
-	this->TxfFsrActive = TxfFsrActive;
-	this->TxtReuActive = TxtReuActive;
-	this->ButReuViewAvail = ButReuViewAvail;
-	this->ButReuViewActive = ButReuViewActive;
-	this->TxtTraActive = TxtTraActive;
-	this->ButTraViewAvail = ButTraViewAvail;
-	this->ButTraViewActive = ButTraViewActive;
-	this->TxfCmtActive = TxfCmtActive;
-
 	mask = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXFFSRACTIVE, TXTREUACTIVE, BUTREUVIEWAVAIL, BUTREUVIEWACTIVE, TXTTRAACTIVE, BUTTRAVIEWAVAIL, BUTTRAVIEWACTIVE, TXFCMTACTIVE};
 };
 
@@ -375,14 +371,13 @@ PnlWdbeErrDetail::Tag::Tag(
 			, const string& CptCmt
 		) :
 			Block()
+			, Cpt(Cpt)
+			, CptSrf(CptSrf)
+			, CptFsr(CptFsr)
+			, CptReu(CptReu)
+			, CptTra(CptTra)
+			, CptCmt(CptCmt)
 		{
-	this->Cpt = Cpt;
-	this->CptSrf = CptSrf;
-	this->CptFsr = CptFsr;
-	this->CptReu = CptReu;
-	this->CptTra = CptTra;
-	this->CptCmt = CptCmt;
-
 	mask = {CPT, CPTSRF, CPTFSR, CPTREU, CPTTRA, CPTCMT};
 };
 
@@ -463,11 +458,11 @@ PnlWdbeErrDetail::DpchAppDo::DpchAppDo(
 			, const set<uint>& mask
 		) :
 			DpchAppWdbe(VecWdbeVDpch::DPCHAPPWDBEERRDETAILDO, scrJref)
+			, ixVDo(ixVDo)
 		{
 	if (find(mask, ALL)) this->mask = {SCRJREF, IXVDO};
 	else this->mask = mask;
 
-	this->ixVDo = ixVDo;
 };
 
 string PnlWdbeErrDetail::DpchAppDo::getSrefsMask() {

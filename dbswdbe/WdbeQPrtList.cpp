@@ -35,24 +35,25 @@ WdbeQPrtList::WdbeQPrtList(
 			, const string titSrefWdbeKHdltype
 			, const usmallint Width
 			, const string Minmax
-		) {
-	this->qref = qref;
-	this->jref = jref;
-	this->jnum = jnum;
-	this->ref = ref;
-	this->sref = sref;
-	this->mdlRefWdbeMModule = mdlRefWdbeMModule;
-	this->stubMdlRefWdbeMModule = stubMdlRefWdbeMModule;
-	this->mdlIxVCat = mdlIxVCat;
-	this->srefMdlIxVCat = srefMdlIxVCat;
-	this->titMdlIxVCat = titMdlIxVCat;
-	this->ixVDir = ixVDir;
-	this->srefIxVDir = srefIxVDir;
-	this->titIxVDir = titIxVDir;
-	this->srefWdbeKHdltype = srefWdbeKHdltype;
-	this->titSrefWdbeKHdltype = titSrefWdbeKHdltype;
-	this->Width = Width;
-	this->Minmax = Minmax;
+		) :
+			qref(qref)
+			, jref(jref)
+			, jnum(jnum)
+			, ref(ref)
+			, sref(sref)
+			, mdlRefWdbeMModule(mdlRefWdbeMModule)
+			, stubMdlRefWdbeMModule(stubMdlRefWdbeMModule)
+			, mdlIxVCat(mdlIxVCat)
+			, srefMdlIxVCat(srefMdlIxVCat)
+			, titMdlIxVCat(titMdlIxVCat)
+			, ixVDir(ixVDir)
+			, srefIxVDir(srefIxVDir)
+			, titIxVDir(titIxVDir)
+			, srefWdbeKHdltype(srefWdbeKHdltype)
+			, titSrefWdbeKHdltype(titSrefWdbeKHdltype)
+			, Width(Width)
+			, Minmax(Minmax)
+		{
 };
 
 void WdbeQPrtList::writeJSON(

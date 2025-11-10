@@ -91,8 +91,8 @@ void DlgWdbeVerFinmod::refreshFnm(
 			DbsWdbe* dbswdbe
 			, set<uint>& moditems
 		) {
-	StatShrFnm oldStatshrfnm(statshrfnm);
 	ContInfFnm oldContinffnm(continffnm);
+	StatShrFnm oldStatshrfnm(statshrfnm);
 
 	// IP refreshFnm --- RBEGIN
 	// continffnm
@@ -103,8 +103,8 @@ void DlgWdbeVerFinmod::refreshFnm(
 	statshrfnm.ButStoActive = evalFnmButStoActive(dbswdbe);
 
 	// IP refreshFnm --- REND
-	if (statshrfnm.diff(&oldStatshrfnm).size() != 0) insert(moditems, DpchEngData::STATSHRFNM);
 	if (continffnm.diff(&oldContinffnm).size() != 0) insert(moditems, DpchEngData::CONTINFFNM);
+	if (statshrfnm.diff(&oldStatshrfnm).size() != 0) insert(moditems, DpchEngData::STATSHRFNM);
 };
 
 void DlgWdbeVerFinmod::refreshLfi(
@@ -133,24 +133,24 @@ void DlgWdbeVerFinmod::refresh(
 	if (muteRefresh && !unmute) return;
 	muteRefresh = true;
 
-	StatShr oldStatshr(statshr);
-	ContIac oldContiac(contiac);
 	ContInf oldContinf(continf);
+	ContIac oldContiac(contiac);
+	StatShr oldStatshr(statshr);
 
 	// IP refresh --- BEGIN
-	// statshr
-	statshr.ButDneActive = evalButDneActive(dbswdbe);
+	// continf
+	continf.numFSge = ixVSge;
 
 	// contiac
 	contiac.numFDse = ixVDit;
 
-	// continf
-	continf.numFSge = ixVSge;
+	// statshr
+	statshr.ButDneActive = evalButDneActive(dbswdbe);
 
 	// IP refresh --- END
-	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
-	if (contiac.diff(&oldContiac).size() != 0) insert(moditems, DpchEngData::CONTIAC);
 	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
+	if (contiac.diff(&oldContiac).size() != 0) insert(moditems, DpchEngData::CONTIAC);
+	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
 
 	refreshFnm(dbswdbe, moditems);
 	refreshLfi(dbswdbe, moditems);
@@ -239,8 +239,8 @@ void DlgWdbeVerFinmod::handleRequest(
 		};
 
 	} else if (req->ixVBasetype == ReqWdbe::VecVBasetype::TIMER) {
-		if ((req->sref == "mon") && (ixVSge == VecVSge::GENWRI)) handleTimerWithSrefMonInSgeGenwri(dbswdbe);
-		else if ((req->sref == "mon") && (ixVSge == VecVSge::GENAUX)) handleTimerWithSrefMonInSgeGenaux(dbswdbe);
+		if ((req->sref == "mon") && (ixVSge == VecVSge::GENAUX)) handleTimerWithSrefMonInSgeGenaux(dbswdbe);
+		else if ((req->sref == "mon") && (ixVSge == VecVSge::GENWRI)) handleTimerWithSrefMonInSgeGenwri(dbswdbe);
 		else if ((req->sref == "mon") && (ixVSge == VecVSge::GENSV)) handleTimerWithSrefMonInSgeGensv(dbswdbe);
 	};
 };
@@ -365,18 +365,18 @@ string DlgWdbeVerFinmod::handleDownloadInSgeDone(
 	return(""); // IP handleDownloadInSgeDone --- LINE
 };
 
-void DlgWdbeVerFinmod::handleTimerWithSrefMonInSgeGenwri(
-			DbsWdbe* dbswdbe
-		) {
-	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
-	refreshWithDpchEng(dbswdbe); // IP handleTimerWithSrefMonInSgeGenwri --- ILINE
-};
-
 void DlgWdbeVerFinmod::handleTimerWithSrefMonInSgeGenaux(
 			DbsWdbe* dbswdbe
 		) {
 	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
 	// IP handleTimerWithSrefMonInSgeGenaux --- INSERT
+};
+
+void DlgWdbeVerFinmod::handleTimerWithSrefMonInSgeGenwri(
+			DbsWdbe* dbswdbe
+		) {
+	wrefLast = xchg->addWakeup(jref, "mon", 250000, true);
+	refreshWithDpchEng(dbswdbe); // IP handleTimerWithSrefMonInSgeGenwri --- ILINE
 };
 
 void DlgWdbeVerFinmod::handleTimerWithSrefMonInSgeGensv(

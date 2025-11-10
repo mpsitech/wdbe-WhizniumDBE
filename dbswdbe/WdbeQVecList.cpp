@@ -31,20 +31,21 @@ WdbeQVecList::WdbeQVecList(
 			, const string titHkIxVTbl
 			, const ubigint hkUref
 			, const string stubHkUref
-		) {
-	this->qref = qref;
-	this->jref = jref;
-	this->jnum = jnum;
-	this->ref = ref;
-	this->sref = sref;
-	this->ixVBasetype = ixVBasetype;
-	this->srefIxVBasetype = srefIxVBasetype;
-	this->titIxVBasetype = titIxVBasetype;
-	this->hkIxVTbl = hkIxVTbl;
-	this->srefHkIxVTbl = srefHkIxVTbl;
-	this->titHkIxVTbl = titHkIxVTbl;
-	this->hkUref = hkUref;
-	this->stubHkUref = stubHkUref;
+		) :
+			qref(qref)
+			, jref(jref)
+			, jnum(jnum)
+			, ref(ref)
+			, sref(sref)
+			, ixVBasetype(ixVBasetype)
+			, srefIxVBasetype(srefIxVBasetype)
+			, titIxVBasetype(titIxVBasetype)
+			, hkIxVTbl(hkIxVTbl)
+			, srefHkIxVTbl(srefHkIxVTbl)
+			, titHkIxVTbl(titHkIxVTbl)
+			, hkUref(hkUref)
+			, stubHkUref(stubHkUref)
+		{
 };
 
 void WdbeQVecList::writeJSON(

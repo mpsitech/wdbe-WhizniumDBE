@@ -4,6 +4,7 @@
 	<head>
 		<title>Auxfct_bcont</title>
 		<script>
+			function handleButIdfNewcrdClick() {parent.parent.window.handleButCrdopenClick("ButIdfNewcrd");};
 			function handleButUtlNewcrdClick() {parent.parent.window.handleButCrdopenClick("ButUtlNewcrd");};
 			<!-- IP custScript - INSERT -->
 		</script>
@@ -27,6 +28,15 @@
 			</colgroup>
 			<tbody id="tbl">
 				<tr><td colspan="11" height="5"></td></tr>
+				<tr id="trIdf" class="show">
+					<td height="25"></td>
+					<td align="right">
+						<span id="CptIdf" class="cpt">CptIdf</span>
+					</td>
+					<td></td>
+					<td id="dynIdf" colspan="8" align="left">
+					</td>
+				</tr>
 				<tr id="trUtl" class="show">
 					<td height="25"></td>
 					<td align="right">

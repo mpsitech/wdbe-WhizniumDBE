@@ -21,12 +21,12 @@ WdbeJMCoreversionState::WdbeJMCoreversionState(
 			, const ubigint refWdbeMCoreversion
 			, const uint x1Start
 			, const uint ixVState
-		) {
-
-	this->ref = ref;
-	this->refWdbeMCoreversion = refWdbeMCoreversion;
-	this->x1Start = x1Start;
-	this->ixVState = ixVState;
+		) :
+			ref(ref)
+			, refWdbeMCoreversion(refWdbeMCoreversion)
+			, x1Start(x1Start)
+			, ixVState(ixVState)
+		{
 };
 
 bool WdbeJMCoreversionState::operator==(

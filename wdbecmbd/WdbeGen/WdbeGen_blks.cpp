@@ -25,10 +25,10 @@ DpchInvWdbeGenAux::DpchInvWdbeGenAux(
 			, const string& Untsref
 		) :
 			DpchInvWdbe(VecWdbeVDpch::DPCHINVWDBEGENAUX, oref, jref)
+			, refWdbeMModule(refWdbeMModule)
+			, Prjshort(Prjshort)
+			, Untsref(Untsref)
 		{
-	this->refWdbeMModule = refWdbeMModule;
-	this->Prjshort = Prjshort;
-	this->Untsref = Untsref;
 };
 
 void DpchInvWdbeGenAux::readXML(
@@ -79,8 +79,8 @@ DpchRetWdbeGenAux::DpchRetWdbeGenAux(
 			, const string& logfile
 		) :
 			DpchRetWdbe(VecWdbeVDpch::DPCHRETWDBEGENAUX, scrOref, scrJref, ixOpVOpres, pdone)
+			, logfile(logfile)
 		{
-	this->logfile = logfile;
 };
 
 void DpchRetWdbeGenAux::readXML(
@@ -140,8 +140,8 @@ DpchInvWdbeGenStdvec::DpchInvWdbeGenStdvec(
 			, const ubigint refWdbeMUnit
 		) :
 			DpchInvWdbe(VecWdbeVDpch::DPCHINVWDBEGENSTDVEC, oref, jref)
+			, refWdbeMUnit(refWdbeMUnit)
 		{
-	this->refWdbeMUnit = refWdbeMUnit;
 };
 
 void DpchInvWdbeGenStdvec::readXML(
@@ -187,9 +187,9 @@ DpchInvWdbeGenWiring::DpchInvWdbeGenWiring(
 			, const string& srefKToolch
 		) :
 			DpchInvWdbe(VecWdbeVDpch::DPCHINVWDBEGENWIRING, oref, jref)
+			, refWdbeMModule(refWdbeMModule)
+			, srefKToolch(srefKToolch)
 		{
-	this->refWdbeMModule = refWdbeMModule;
-	this->srefKToolch = srefKToolch;
 };
 
 void DpchInvWdbeGenWiring::readXML(
@@ -238,8 +238,8 @@ DpchRetWdbeGenWiring::DpchRetWdbeGenWiring(
 			, const string& logfile
 		) :
 			DpchRetWdbe(VecWdbeVDpch::DPCHRETWDBEGENWIRING, scrOref, scrJref, ixOpVOpres, pdone)
+			, logfile(logfile)
 		{
-	this->logfile = logfile;
 };
 
 void DpchRetWdbeGenWiring::readXML(

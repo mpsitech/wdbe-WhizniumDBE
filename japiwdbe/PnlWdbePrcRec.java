@@ -115,37 +115,37 @@ public class PnlWdbePrcRec {
 
 		public static final int INITDONEDETAIL = 1;
 		public static final int INITDONEKHDLTYPE = 2;
-		public static final int INITDONEREF1NSENSITIVITY = 3;
+		public static final int INITDONEMGE1NSIGNAL = 3;
 		public static final int INITDONEREF1NVARIABLE = 4;
-		public static final int INITDONEMGE1NSIGNAL = 5;
+		public static final int INITDONEREF1NSENSITIVITY = 5;
 		public static final int INITDONEFSMFSM1NFSMSTATE = 6;
 		public static final int INITDONEFSMHK1NVECTOR = 7;
 
 		public StatApp(
 					boolean initdoneDetail
 					, boolean initdoneKHdltype
-					, boolean initdoneRef1NSensitivity
-					, boolean initdoneRef1NVariable
 					, boolean initdoneMge1NSignal
+					, boolean initdoneRef1NVariable
+					, boolean initdoneRef1NSensitivity
 					, boolean initdoneFsmFsm1NFsmstate
 					, boolean initdoneFsmHk1NVector
 				) {
 			this.initdoneDetail = initdoneDetail;
 			this.initdoneKHdltype = initdoneKHdltype;
-			this.initdoneRef1NSensitivity = initdoneRef1NSensitivity;
-			this.initdoneRef1NVariable = initdoneRef1NVariable;
 			this.initdoneMge1NSignal = initdoneMge1NSignal;
+			this.initdoneRef1NVariable = initdoneRef1NVariable;
+			this.initdoneRef1NSensitivity = initdoneRef1NSensitivity;
 			this.initdoneFsmFsm1NFsmstate = initdoneFsmFsm1NFsmstate;
 			this.initdoneFsmHk1NVector = initdoneFsmHk1NVector;
 
-			mask = new HashSet<Integer>(Arrays.asList(INITDONEDETAIL, INITDONEKHDLTYPE, INITDONEREF1NSENSITIVITY, INITDONEREF1NVARIABLE, INITDONEMGE1NSIGNAL, INITDONEFSMFSM1NFSMSTATE, INITDONEFSMHK1NVECTOR));
+			mask = new HashSet<Integer>(Arrays.asList(INITDONEDETAIL, INITDONEKHDLTYPE, INITDONEMGE1NSIGNAL, INITDONEREF1NVARIABLE, INITDONEREF1NSENSITIVITY, INITDONEFSMFSM1NFSMSTATE, INITDONEFSMHK1NVECTOR));
 		};
 
 		public boolean initdoneDetail;
 		public boolean initdoneKHdltype;
-		public boolean initdoneRef1NSensitivity;
-		public boolean initdoneRef1NVariable;
 		public boolean initdoneMge1NSignal;
+		public boolean initdoneRef1NVariable;
+		public boolean initdoneRef1NSensitivity;
 		public boolean initdoneFsmFsm1NFsmstate;
 		public boolean initdoneFsmHk1NVector;
 
@@ -164,9 +164,9 @@ public class PnlWdbePrcRec {
 			if (Xmlio.checkXPath(doc, basexpath)) {
 				initdoneDetail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneDetail", mask, INITDONEDETAIL);
 				initdoneKHdltype = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneKHdltype", mask, INITDONEKHDLTYPE);
-				initdoneRef1NSensitivity = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneRef1NSensitivity", mask, INITDONEREF1NSENSITIVITY);
-				initdoneRef1NVariable = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneRef1NVariable", mask, INITDONEREF1NVARIABLE);
 				initdoneMge1NSignal = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneMge1NSignal", mask, INITDONEMGE1NSIGNAL);
+				initdoneRef1NVariable = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneRef1NVariable", mask, INITDONEREF1NVARIABLE);
+				initdoneRef1NSensitivity = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneRef1NSensitivity", mask, INITDONEREF1NSENSITIVITY);
 				initdoneFsmFsm1NFsmstate = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneFsmFsm1NFsmstate", mask, INITDONEFSMFSM1NFSMSTATE);
 				initdoneFsmHk1NVector = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "initdoneFsmHk1NVector", mask, INITDONEFSMHK1NVECTOR);
 
@@ -183,9 +183,9 @@ public class PnlWdbePrcRec {
 
 			if (initdoneDetail == comp.initdoneDetail) items.add(INITDONEDETAIL);
 			if (initdoneKHdltype == comp.initdoneKHdltype) items.add(INITDONEKHDLTYPE);
-			if (initdoneRef1NSensitivity == comp.initdoneRef1NSensitivity) items.add(INITDONEREF1NSENSITIVITY);
-			if (initdoneRef1NVariable == comp.initdoneRef1NVariable) items.add(INITDONEREF1NVARIABLE);
 			if (initdoneMge1NSignal == comp.initdoneMge1NSignal) items.add(INITDONEMGE1NSIGNAL);
+			if (initdoneRef1NVariable == comp.initdoneRef1NVariable) items.add(INITDONEREF1NVARIABLE);
+			if (initdoneRef1NSensitivity == comp.initdoneRef1NSensitivity) items.add(INITDONEREF1NSENSITIVITY);
 			if (initdoneFsmFsm1NFsmstate == comp.initdoneFsmFsm1NFsmstate) items.add(INITDONEFSMFSM1NFSMSTATE);
 			if (initdoneFsmHk1NVector == comp.initdoneFsmHk1NVector) items.add(INITDONEFSMHK1NVECTOR);
 
@@ -200,7 +200,7 @@ public class PnlWdbePrcRec {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(INITDONEDETAIL, INITDONEKHDLTYPE, INITDONEREF1NSENSITIVITY, INITDONEREF1NVARIABLE, INITDONEMGE1NSIGNAL, INITDONEFSMFSM1NFSMSTATE, INITDONEFSMHK1NVECTOR));
+			diffitems = new HashSet<Integer>(Arrays.asList(INITDONEDETAIL, INITDONEKHDLTYPE, INITDONEMGE1NSIGNAL, INITDONEREF1NVARIABLE, INITDONEREF1NSENSITIVITY, INITDONEFSMFSM1NFSMSTATE, INITDONEFSMHK1NVECTOR));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);
@@ -216,9 +216,9 @@ public class PnlWdbePrcRec {
 		public static final int IXWDBEVEXPSTATE = 1;
 		public static final int SCRJREFDETAIL = 2;
 		public static final int SCRJREFKHDLTYPE = 3;
-		public static final int SCRJREFREF1NSENSITIVITY = 4;
+		public static final int SCRJREFMGE1NSIGNAL = 4;
 		public static final int SCRJREFREF1NVARIABLE = 5;
-		public static final int SCRJREFMGE1NSIGNAL = 6;
+		public static final int SCRJREFREF1NSENSITIVITY = 6;
 		public static final int SCRJREFFSMFSM1NFSMSTATE = 7;
 		public static final int PNLFSMFSM1NFSMSTATEAVAIL = 8;
 		public static final int SCRJREFFSMHK1NVECTOR = 9;
@@ -229,9 +229,9 @@ public class PnlWdbePrcRec {
 					int ixWdbeVExpstate
 					, String scrJrefDetail
 					, String scrJrefKHdltype
-					, String scrJrefRef1NSensitivity
-					, String scrJrefRef1NVariable
 					, String scrJrefMge1NSignal
+					, String scrJrefRef1NVariable
+					, String scrJrefRef1NSensitivity
 					, String scrJrefFsmFsm1NFsmstate
 					, boolean pnlfsmfsm1nfsmstateAvail
 					, String scrJrefFsmHk1NVector
@@ -241,24 +241,24 @@ public class PnlWdbePrcRec {
 			this.ixWdbeVExpstate = ixWdbeVExpstate;
 			this.scrJrefDetail = scrJrefDetail;
 			this.scrJrefKHdltype = scrJrefKHdltype;
-			this.scrJrefRef1NSensitivity = scrJrefRef1NSensitivity;
-			this.scrJrefRef1NVariable = scrJrefRef1NVariable;
 			this.scrJrefMge1NSignal = scrJrefMge1NSignal;
+			this.scrJrefRef1NVariable = scrJrefRef1NVariable;
+			this.scrJrefRef1NSensitivity = scrJrefRef1NSensitivity;
 			this.scrJrefFsmFsm1NFsmstate = scrJrefFsmFsm1NFsmstate;
 			this.pnlfsmfsm1nfsmstateAvail = pnlfsmfsm1nfsmstateAvail;
 			this.scrJrefFsmHk1NVector = scrJrefFsmHk1NVector;
 			this.pnlfsmhk1nvectorAvail = pnlfsmhk1nvectorAvail;
 			this.ButRegularizeActive = ButRegularizeActive;
 
-			mask = new HashSet<Integer>(Arrays.asList(IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFKHDLTYPE, SCRJREFREF1NSENSITIVITY, SCRJREFREF1NVARIABLE, SCRJREFMGE1NSIGNAL, SCRJREFFSMFSM1NFSMSTATE, PNLFSMFSM1NFSMSTATEAVAIL, SCRJREFFSMHK1NVECTOR, PNLFSMHK1NVECTORAVAIL, BUTREGULARIZEACTIVE));
+			mask = new HashSet<Integer>(Arrays.asList(IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFKHDLTYPE, SCRJREFMGE1NSIGNAL, SCRJREFREF1NVARIABLE, SCRJREFREF1NSENSITIVITY, SCRJREFFSMFSM1NFSMSTATE, PNLFSMFSM1NFSMSTATEAVAIL, SCRJREFFSMHK1NVECTOR, PNLFSMHK1NVECTORAVAIL, BUTREGULARIZEACTIVE));
 		};
 
 		public int ixWdbeVExpstate;
 		public String scrJrefDetail;
 		public String scrJrefKHdltype;
-		public String scrJrefRef1NSensitivity;
-		public String scrJrefRef1NVariable;
 		public String scrJrefMge1NSignal;
+		public String scrJrefRef1NVariable;
+		public String scrJrefRef1NSensitivity;
 		public String scrJrefFsmFsm1NFsmstate;
 		public boolean pnlfsmfsm1nfsmstateAvail;
 		public String scrJrefFsmHk1NVector;
@@ -283,9 +283,9 @@ public class PnlWdbePrcRec {
 				ixWdbeVExpstate = VecWdbeVExpstate.getIx(srefIxWdbeVExpstate);
 				scrJrefDetail = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefDetail", mask, SCRJREFDETAIL);
 				scrJrefKHdltype = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefKHdltype", mask, SCRJREFKHDLTYPE);
-				scrJrefRef1NSensitivity = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefRef1NSensitivity", mask, SCRJREFREF1NSENSITIVITY);
-				scrJrefRef1NVariable = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefRef1NVariable", mask, SCRJREFREF1NVARIABLE);
 				scrJrefMge1NSignal = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefMge1NSignal", mask, SCRJREFMGE1NSIGNAL);
+				scrJrefRef1NVariable = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefRef1NVariable", mask, SCRJREFREF1NVARIABLE);
+				scrJrefRef1NSensitivity = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefRef1NSensitivity", mask, SCRJREFREF1NSENSITIVITY);
 				scrJrefFsmFsm1NFsmstate = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefFsmFsm1NFsmstate", mask, SCRJREFFSMFSM1NFSMSTATE);
 				pnlfsmfsm1nfsmstateAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "pnlfsmfsm1nfsmstateAvail", mask, PNLFSMFSM1NFSMSTATEAVAIL);
 				scrJrefFsmHk1NVector = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Si", "sref", "scrJrefFsmHk1NVector", mask, SCRJREFFSMHK1NVECTOR);
@@ -306,9 +306,9 @@ public class PnlWdbePrcRec {
 			if (ixWdbeVExpstate == comp.ixWdbeVExpstate) items.add(IXWDBEVEXPSTATE);
 			if (scrJrefDetail.equals(comp.scrJrefDetail)) items.add(SCRJREFDETAIL);
 			if (scrJrefKHdltype.equals(comp.scrJrefKHdltype)) items.add(SCRJREFKHDLTYPE);
-			if (scrJrefRef1NSensitivity.equals(comp.scrJrefRef1NSensitivity)) items.add(SCRJREFREF1NSENSITIVITY);
-			if (scrJrefRef1NVariable.equals(comp.scrJrefRef1NVariable)) items.add(SCRJREFREF1NVARIABLE);
 			if (scrJrefMge1NSignal.equals(comp.scrJrefMge1NSignal)) items.add(SCRJREFMGE1NSIGNAL);
+			if (scrJrefRef1NVariable.equals(comp.scrJrefRef1NVariable)) items.add(SCRJREFREF1NVARIABLE);
+			if (scrJrefRef1NSensitivity.equals(comp.scrJrefRef1NSensitivity)) items.add(SCRJREFREF1NSENSITIVITY);
 			if (scrJrefFsmFsm1NFsmstate.equals(comp.scrJrefFsmFsm1NFsmstate)) items.add(SCRJREFFSMFSM1NFSMSTATE);
 			if (pnlfsmfsm1nfsmstateAvail == comp.pnlfsmfsm1nfsmstateAvail) items.add(PNLFSMFSM1NFSMSTATEAVAIL);
 			if (scrJrefFsmHk1NVector.equals(comp.scrJrefFsmHk1NVector)) items.add(SCRJREFFSMHK1NVECTOR);
@@ -326,7 +326,7 @@ public class PnlWdbePrcRec {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFKHDLTYPE, SCRJREFREF1NSENSITIVITY, SCRJREFREF1NVARIABLE, SCRJREFMGE1NSIGNAL, SCRJREFFSMFSM1NFSMSTATE, PNLFSMFSM1NFSMSTATEAVAIL, SCRJREFFSMHK1NVECTOR, PNLFSMHK1NVECTORAVAIL, BUTREGULARIZEACTIVE));
+			diffitems = new HashSet<Integer>(Arrays.asList(IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFKHDLTYPE, SCRJREFMGE1NSIGNAL, SCRJREFREF1NVARIABLE, SCRJREFREF1NSENSITIVITY, SCRJREFFSMFSM1NFSMSTATE, PNLFSMFSM1NFSMSTATEAVAIL, SCRJREFFSMHK1NVECTOR, PNLFSMHK1NVECTORAVAIL, BUTREGULARIZEACTIVE));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);

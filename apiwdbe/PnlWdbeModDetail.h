@@ -39,11 +39,11 @@ namespace PnlWdbeModDetail {
 		static const Sbecore::uint BUTHKUVIEWCLICK = 3;
 		static const Sbecore::uint BUTSUPVIEWCLICK = 4;
 		static const Sbecore::uint BUTTPLVIEWCLICK = 5;
-		static const Sbecore::uint BUTIMBNEWCLICK = 6;
-		static const Sbecore::uint BUTIMBDELETECLICK = 7;
-		static const Sbecore::uint BUTCTRNEWCLICK = 8;
-		static const Sbecore::uint BUTCTRDELETECLICK = 9;
-		static const Sbecore::uint BUTCTRCLRVIEWCLICK = 10;
+		static const Sbecore::uint BUTCTRNEWCLICK = 6;
+		static const Sbecore::uint BUTCTRDELETECLICK = 7;
+		static const Sbecore::uint BUTCTRCLRVIEWCLICK = 8;
+		static const Sbecore::uint BUTIMBNEWCLICK = 9;
+		static const Sbecore::uint BUTIMBDELETECLICK = 10;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);
@@ -61,15 +61,15 @@ namespace PnlWdbeModDetail {
 		static const Sbecore::uint NUMFPUPHKT = 4;
 		static const Sbecore::uint TXFSRR = 5;
 		static const Sbecore::uint TXFCMT = 6;
-		static const Sbecore::uint TXFIMBFSR = 7;
-		static const Sbecore::uint NUMFPUPIMBRTY = 8;
-		static const Sbecore::uint TXFIMBWID = 9;
-		static const Sbecore::uint TXFIMBMMX = 10;
-		static const Sbecore::uint TXFIMBPRI = 11;
-		static const Sbecore::uint TXFCTRFSR = 12;
+		static const Sbecore::uint TXFCTRFSR = 7;
+		static const Sbecore::uint TXFIMBFSR = 8;
+		static const Sbecore::uint NUMFPUPIMBRTY = 9;
+		static const Sbecore::uint TXFIMBWID = 10;
+		static const Sbecore::uint TXFIMBMMX = 11;
+		static const Sbecore::uint TXFIMBPRI = 12;
 
 	public:
-		ContIac(const Sbecore::uint numFPupVnd = 1, const std::string& TxfVnd = "", const Sbecore::uint numFPupTyp = 1, const Sbecore::uint numFPupHkt = 1, const std::string& TxfSrr = "", const std::string& TxfCmt = "", const std::string& TxfImbFsr = "", const Sbecore::uint numFPupImbRty = 1, const std::string& TxfImbWid = "", const std::string& TxfImbMmx = "", const std::string& TxfImbPri = "", const std::string& TxfCtrFsr = "");
+		ContIac(const Sbecore::uint numFPupVnd = 1, const std::string& TxfVnd = "", const Sbecore::uint numFPupTyp = 1, const Sbecore::uint numFPupHkt = 1, const std::string& TxfSrr = "", const std::string& TxfCmt = "", const std::string& TxfCtrFsr = "", const std::string& TxfImbFsr = "", const Sbecore::uint numFPupImbRty = 1, const std::string& TxfImbWid = "", const std::string& TxfImbMmx = "", const std::string& TxfImbPri = "");
 
 	public:
 		Sbecore::uint numFPupVnd;
@@ -78,12 +78,12 @@ namespace PnlWdbeModDetail {
 		Sbecore::uint numFPupHkt;
 		std::string TxfSrr;
 		std::string TxfCmt;
+		std::string TxfCtrFsr;
 		std::string TxfImbFsr;
 		Sbecore::uint numFPupImbRty;
 		std::string TxfImbWid;
 		std::string TxfImbMmx;
 		std::string TxfImbPri;
-		std::string TxfCtrFsr;
 
 	public:
 		bool readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
@@ -148,11 +148,11 @@ namespace PnlWdbeModDetail {
 	class StatShr : public Sbecore::Block {
 
 	public:
-		static const Sbecore::uint TXFVNDVALID = 1;
-		static const Sbecore::uint BUTSAVEAVAIL = 2;
-		static const Sbecore::uint BUTSAVEACTIVE = 3;
-		static const Sbecore::uint TXTSRFACTIVE = 4;
-		static const Sbecore::uint PUPVNDACTIVE = 5;
+		static const Sbecore::uint BUTSAVEAVAIL = 1;
+		static const Sbecore::uint BUTSAVEACTIVE = 2;
+		static const Sbecore::uint TXTSRFACTIVE = 3;
+		static const Sbecore::uint PUPVNDACTIVE = 4;
+		static const Sbecore::uint TXFVNDVALID = 5;
 		static const Sbecore::uint BUTVNDEDITAVAIL = 6;
 		static const Sbecore::uint PUPTYPACTIVE = 7;
 		static const Sbecore::uint TXTHKUACTIVE = 8;
@@ -166,40 +166,40 @@ namespace PnlWdbeModDetail {
 		static const Sbecore::uint BUTTPLVIEWACTIVE = 16;
 		static const Sbecore::uint TXFSRRACTIVE = 17;
 		static const Sbecore::uint TXFCMTACTIVE = 18;
-		static const Sbecore::uint SEPIMBAVAIL = 19;
-		static const Sbecore::uint HDGIMBAVAIL = 20;
-		static const Sbecore::uint BUTIMBNEWAVAIL = 21;
-		static const Sbecore::uint BUTIMBDELETEAVAIL = 22;
-		static const Sbecore::uint TXFIMBFSRAVAIL = 23;
-		static const Sbecore::uint TXFIMBFSRACTIVE = 24;
-		static const Sbecore::uint PUPIMBRTYAVAIL = 25;
-		static const Sbecore::uint PUPIMBRTYACTIVE = 26;
-		static const Sbecore::uint TXFIMBWIDAVAIL = 27;
-		static const Sbecore::uint TXFIMBWIDACTIVE = 28;
-		static const Sbecore::uint TXFIMBMMXAVAIL = 29;
-		static const Sbecore::uint TXFIMBMMXACTIVE = 30;
-		static const Sbecore::uint TXFIMBPRIAVAIL = 31;
-		static const Sbecore::uint TXFIMBPRIACTIVE = 32;
-		static const Sbecore::uint SEPCTRAVAIL = 33;
-		static const Sbecore::uint HDGCTRAVAIL = 34;
-		static const Sbecore::uint BUTCTRNEWAVAIL = 35;
-		static const Sbecore::uint BUTCTRDELETEAVAIL = 36;
-		static const Sbecore::uint TXFCTRFSRAVAIL = 37;
-		static const Sbecore::uint TXFCTRFSRACTIVE = 38;
-		static const Sbecore::uint TXTCTRCLRAVAIL = 39;
-		static const Sbecore::uint TXTCTRCLRACTIVE = 40;
-		static const Sbecore::uint BUTCTRCLRVIEWAVAIL = 41;
-		static const Sbecore::uint BUTCTRCLRVIEWACTIVE = 42;
+		static const Sbecore::uint SEPCTRAVAIL = 19;
+		static const Sbecore::uint HDGCTRAVAIL = 20;
+		static const Sbecore::uint BUTCTRNEWAVAIL = 21;
+		static const Sbecore::uint BUTCTRDELETEAVAIL = 22;
+		static const Sbecore::uint TXFCTRFSRAVAIL = 23;
+		static const Sbecore::uint TXFCTRFSRACTIVE = 24;
+		static const Sbecore::uint TXTCTRCLRAVAIL = 25;
+		static const Sbecore::uint TXTCTRCLRACTIVE = 26;
+		static const Sbecore::uint BUTCTRCLRVIEWAVAIL = 27;
+		static const Sbecore::uint BUTCTRCLRVIEWACTIVE = 28;
+		static const Sbecore::uint SEPIMBAVAIL = 29;
+		static const Sbecore::uint HDGIMBAVAIL = 30;
+		static const Sbecore::uint BUTIMBNEWAVAIL = 31;
+		static const Sbecore::uint BUTIMBDELETEAVAIL = 32;
+		static const Sbecore::uint TXFIMBFSRAVAIL = 33;
+		static const Sbecore::uint TXFIMBFSRACTIVE = 34;
+		static const Sbecore::uint PUPIMBRTYAVAIL = 35;
+		static const Sbecore::uint PUPIMBRTYACTIVE = 36;
+		static const Sbecore::uint TXFIMBWIDAVAIL = 37;
+		static const Sbecore::uint TXFIMBWIDACTIVE = 38;
+		static const Sbecore::uint TXFIMBMMXAVAIL = 39;
+		static const Sbecore::uint TXFIMBMMXACTIVE = 40;
+		static const Sbecore::uint TXFIMBPRIAVAIL = 41;
+		static const Sbecore::uint TXFIMBPRIACTIVE = 42;
 
 	public:
-		StatShr(const bool TxfVndValid = false, const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxtSrfActive = true, const bool PupVndActive = true, const bool ButVndEditAvail = true, const bool PupTypActive = true, const bool TxtHkuActive = true, const bool ButHkuViewAvail = true, const bool ButHkuViewActive = true, const bool TxtSupActive = true, const bool ButSupViewAvail = true, const bool ButSupViewActive = true, const bool TxtTplActive = true, const bool ButTplViewAvail = true, const bool ButTplViewActive = true, const bool TxfSrrActive = true, const bool TxfCmtActive = true, const bool SepImbAvail = true, const bool HdgImbAvail = true, const bool ButImbNewAvail = true, const bool ButImbDeleteAvail = true, const bool TxfImbFsrAvail = true, const bool TxfImbFsrActive = true, const bool PupImbRtyAvail = true, const bool PupImbRtyActive = true, const bool TxfImbWidAvail = true, const bool TxfImbWidActive = true, const bool TxfImbMmxAvail = true, const bool TxfImbMmxActive = true, const bool TxfImbPriAvail = true, const bool TxfImbPriActive = true, const bool SepCtrAvail = true, const bool HdgCtrAvail = true, const bool ButCtrNewAvail = true, const bool ButCtrDeleteAvail = true, const bool TxfCtrFsrAvail = true, const bool TxfCtrFsrActive = true, const bool TxtCtrClrAvail = true, const bool TxtCtrClrActive = true, const bool ButCtrClrViewAvail = true, const bool ButCtrClrViewActive = true);
+		StatShr(const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxtSrfActive = true, const bool PupVndActive = true, const bool TxfVndValid = false, const bool ButVndEditAvail = true, const bool PupTypActive = true, const bool TxtHkuActive = true, const bool ButHkuViewAvail = true, const bool ButHkuViewActive = true, const bool TxtSupActive = true, const bool ButSupViewAvail = true, const bool ButSupViewActive = true, const bool TxtTplActive = true, const bool ButTplViewAvail = true, const bool ButTplViewActive = true, const bool TxfSrrActive = true, const bool TxfCmtActive = true, const bool SepCtrAvail = true, const bool HdgCtrAvail = true, const bool ButCtrNewAvail = true, const bool ButCtrDeleteAvail = true, const bool TxfCtrFsrAvail = true, const bool TxfCtrFsrActive = true, const bool TxtCtrClrAvail = true, const bool TxtCtrClrActive = true, const bool ButCtrClrViewAvail = true, const bool ButCtrClrViewActive = true, const bool SepImbAvail = true, const bool HdgImbAvail = true, const bool ButImbNewAvail = true, const bool ButImbDeleteAvail = true, const bool TxfImbFsrAvail = true, const bool TxfImbFsrActive = true, const bool PupImbRtyAvail = true, const bool PupImbRtyActive = true, const bool TxfImbWidAvail = true, const bool TxfImbWidActive = true, const bool TxfImbMmxAvail = true, const bool TxfImbMmxActive = true, const bool TxfImbPriAvail = true, const bool TxfImbPriActive = true);
 
 	public:
-		bool TxfVndValid;
 		bool ButSaveAvail;
 		bool ButSaveActive;
 		bool TxtSrfActive;
 		bool PupVndActive;
+		bool TxfVndValid;
 		bool ButVndEditAvail;
 		bool PupTypActive;
 		bool TxtHkuActive;
@@ -213,6 +213,16 @@ namespace PnlWdbeModDetail {
 		bool ButTplViewActive;
 		bool TxfSrrActive;
 		bool TxfCmtActive;
+		bool SepCtrAvail;
+		bool HdgCtrAvail;
+		bool ButCtrNewAvail;
+		bool ButCtrDeleteAvail;
+		bool TxfCtrFsrAvail;
+		bool TxfCtrFsrActive;
+		bool TxtCtrClrAvail;
+		bool TxtCtrClrActive;
+		bool ButCtrClrViewAvail;
+		bool ButCtrClrViewActive;
 		bool SepImbAvail;
 		bool HdgImbAvail;
 		bool ButImbNewAvail;
@@ -227,16 +237,6 @@ namespace PnlWdbeModDetail {
 		bool TxfImbMmxActive;
 		bool TxfImbPriAvail;
 		bool TxfImbPriActive;
-		bool SepCtrAvail;
-		bool HdgCtrAvail;
-		bool ButCtrNewAvail;
-		bool ButCtrDeleteAvail;
-		bool TxfCtrFsrAvail;
-		bool TxfCtrFsrActive;
-		bool TxtCtrClrAvail;
-		bool TxtCtrClrActive;
-		bool ButCtrClrViewAvail;
-		bool ButCtrClrViewActive;
 
 	public:
 		bool readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);
@@ -259,18 +259,18 @@ namespace PnlWdbeModDetail {
 		static const Sbecore::uint CPTTPL = 7;
 		static const Sbecore::uint CPTSRR = 8;
 		static const Sbecore::uint CPTCMT = 9;
-		static const Sbecore::uint HDGIMB = 10;
-		static const Sbecore::uint CPTIMBFSR = 11;
-		static const Sbecore::uint CPTIMBRTY = 12;
-		static const Sbecore::uint CPTIMBWID = 13;
-		static const Sbecore::uint CPTIMBMMX = 14;
-		static const Sbecore::uint CPTIMBPRI = 15;
-		static const Sbecore::uint HDGCTR = 16;
-		static const Sbecore::uint CPTCTRFSR = 17;
-		static const Sbecore::uint CPTCTRCLR = 18;
+		static const Sbecore::uint HDGCTR = 10;
+		static const Sbecore::uint CPTCTRFSR = 11;
+		static const Sbecore::uint CPTCTRCLR = 12;
+		static const Sbecore::uint HDGIMB = 13;
+		static const Sbecore::uint CPTIMBFSR = 14;
+		static const Sbecore::uint CPTIMBRTY = 15;
+		static const Sbecore::uint CPTIMBWID = 16;
+		static const Sbecore::uint CPTIMBMMX = 17;
+		static const Sbecore::uint CPTIMBPRI = 18;
 
 	public:
-		Tag(const std::string& Cpt = "", const std::string& CptSrf = "", const std::string& CptVnd = "", const std::string& CptTyp = "", const std::string& CptHku = "", const std::string& CptSup = "", const std::string& CptTpl = "", const std::string& CptSrr = "", const std::string& CptCmt = "", const std::string& HdgImb = "", const std::string& CptImbFsr = "", const std::string& CptImbRty = "", const std::string& CptImbWid = "", const std::string& CptImbMmx = "", const std::string& CptImbPri = "", const std::string& HdgCtr = "", const std::string& CptCtrFsr = "", const std::string& CptCtrClr = "");
+		Tag(const std::string& Cpt = "", const std::string& CptSrf = "", const std::string& CptVnd = "", const std::string& CptTyp = "", const std::string& CptHku = "", const std::string& CptSup = "", const std::string& CptTpl = "", const std::string& CptSrr = "", const std::string& CptCmt = "", const std::string& HdgCtr = "", const std::string& CptCtrFsr = "", const std::string& CptCtrClr = "", const std::string& HdgImb = "", const std::string& CptImbFsr = "", const std::string& CptImbRty = "", const std::string& CptImbWid = "", const std::string& CptImbMmx = "", const std::string& CptImbPri = "");
 
 	public:
 		std::string Cpt;
@@ -282,15 +282,15 @@ namespace PnlWdbeModDetail {
 		std::string CptTpl;
 		std::string CptSrr;
 		std::string CptCmt;
+		std::string HdgCtr;
+		std::string CptCtrFsr;
+		std::string CptCtrClr;
 		std::string HdgImb;
 		std::string CptImbFsr;
 		std::string CptImbRty;
 		std::string CptImbWid;
 		std::string CptImbMmx;
 		std::string CptImbPri;
-		std::string HdgCtr;
-		std::string CptCtrFsr;
-		std::string CptCtrClr;
 
 	public:
 		bool readXML(xmlXPathContext* docctx, std::string basexpath = "", bool addbasetag = false);

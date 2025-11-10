@@ -14,9 +14,9 @@
 
 // IP include.cust --- INSERT
 
-#include "PnlWdbePrjMNPerson.h"
-#include "PnlWdbePrjPrj1NVersion.h"
 #include "PnlWdbePrjDetail.h"
+#include "PnlWdbePrjPrj1NVersion.h"
+#include "PnlWdbePrjMNPerson.h"
 
 #define VecVWdbePrjRecDo PnlWdbePrjRec::VecVDo
 
@@ -177,9 +177,9 @@ public:
 	ContInf continf;
 	StatShr statshr;
 
-	PnlWdbePrjMNPerson* pnlmnperson;
-	PnlWdbePrjPrj1NVersion* pnlprj1nversion;
 	PnlWdbePrjDetail* pnldetail;
+	PnlWdbePrjPrj1NVersion* pnlprj1nversion;
+	PnlWdbePrjMNPerson* pnlmnperson;
 
 	WdbeMProject recPrj;
 
@@ -213,8 +213,8 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbePrjUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 	bool handleCallWdbePrj_verEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbePrjUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 
 };
 

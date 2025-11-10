@@ -3,7 +3,7 @@
 # checkout script for Wdbe Vue.js UI, release vueappwdbe_any
 # copyright: (C) 2022 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 7 Feb 2024
+# date created: 5 Nov 2025
 # IP header --- ABOVE
 
 if [ -z ${WHIZROOT+x} ]; then
@@ -33,6 +33,10 @@ mkdir $WEBROOT/vueappwdbe/src/components/CrdWdbeStart
 
 cp ../../vueappwdbe/CrdWdbeStart/CrdWdbeStart.vue $WEBROOT/vueappwdbe/src/components/CrdWdbeStart/
 
+mkdir $WEBROOT/vueappwdbe/src/components/CrdWdbeNav
+
+cp ../../vueappwdbe/CrdWdbeNav/*.vue $WEBROOT/vueappwdbe/src/components/CrdWdbeNav/
+
 mkdir $WEBROOT/vueappwdbe/src/components/CrdWdbeUsg
 
 cp ../../vueappwdbe/CrdWdbeUsg/*.vue $WEBROOT/vueappwdbe/src/components/CrdWdbeUsg/
@@ -49,9 +53,9 @@ mkdir $WEBROOT/vueappwdbe/src/components/CrdWdbeFil
 
 cp ../../vueappwdbe/CrdWdbeFil/*.vue $WEBROOT/vueappwdbe/src/components/CrdWdbeFil/
 
-mkdir $WEBROOT/vueappwdbe/src/components/CrdWdbeNav
+mkdir $WEBROOT/vueappwdbe/src/components/CrdWdbePrf
 
-cp ../../vueappwdbe/CrdWdbeNav/*.vue $WEBROOT/vueappwdbe/src/components/CrdWdbeNav/
+cp ../../vueappwdbe/CrdWdbePrf/*.vue $WEBROOT/vueappwdbe/src/components/CrdWdbePrf/
 
 mkdir $WEBROOT/vueappwdbe/src/components/CrdWdbeMch
 
@@ -176,6 +180,10 @@ cp ../../vueappwdbe/CrdWdbeCmp/*.vue $WEBROOT/vueappwdbe/src/components/CrdWdbeC
 mkdir $WEBROOT/vueappwdbe/src/components/CrdWdbeRls
 
 cp ../../vueappwdbe/CrdWdbeRls/*.vue $WEBROOT/vueappwdbe/src/components/CrdWdbeRls/
+
+mkdir $WEBROOT/vueappwdbe/src/components/CrdWdbeIdf
+
+cp ../../vueappwdbe/CrdWdbeIdf/*.vue $WEBROOT/vueappwdbe/src/components/CrdWdbeIdf/
 
 mkdir $WEBROOT/vueappwdbe/src/components/CrdWdbeUtl
 

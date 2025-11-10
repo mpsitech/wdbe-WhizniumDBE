@@ -44,10 +44,9 @@ PnlWdbeVitDetail::ContIac::ContIac(
 			, const string& TxfCmt
 		) :
 			Block()
+			, TxfTit(TxfTit)
+			, TxfCmt(TxfCmt)
 		{
-	this->TxfTit = TxfTit;
-	this->TxfCmt = TxfCmt;
-
 	mask = {TXFTIT, TXFCMT};
 };
 
@@ -158,10 +157,9 @@ PnlWdbeVitDetail::ContInf::ContInf(
 			, const string& TxtVec
 		) :
 			Block()
+			, TxtSrf(TxtSrf)
+			, TxtVec(TxtVec)
 		{
-	this->TxtSrf = TxtSrf;
-	this->TxtVec = TxtVec;
-
 	mask = {TXTSRF, TXTVEC};
 };
 
@@ -267,16 +265,15 @@ PnlWdbeVitDetail::StatShr::StatShr(
 			, const bool TxfCmtActive
 		) :
 			Block()
+			, ButSaveAvail(ButSaveAvail)
+			, ButSaveActive(ButSaveActive)
+			, TxtSrfActive(TxtSrfActive)
+			, TxfTitActive(TxfTitActive)
+			, TxtVecActive(TxtVecActive)
+			, ButVecViewAvail(ButVecViewAvail)
+			, ButVecViewActive(ButVecViewActive)
+			, TxfCmtActive(TxfCmtActive)
 		{
-	this->ButSaveAvail = ButSaveAvail;
-	this->ButSaveActive = ButSaveActive;
-	this->TxtSrfActive = TxtSrfActive;
-	this->TxfTitActive = TxfTitActive;
-	this->TxtVecActive = TxtVecActive;
-	this->ButVecViewAvail = ButVecViewAvail;
-	this->ButVecViewActive = ButVecViewActive;
-	this->TxfCmtActive = TxfCmtActive;
-
 	mask = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXFTITACTIVE, TXTVECACTIVE, BUTVECVIEWAVAIL, BUTVECVIEWACTIVE, TXFCMTACTIVE};
 };
 

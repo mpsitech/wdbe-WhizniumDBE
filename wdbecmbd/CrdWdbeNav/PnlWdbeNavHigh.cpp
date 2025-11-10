@@ -436,7 +436,7 @@ void PnlWdbeNavHigh::refresh(
 	if (muteRefresh && !unmute) return;
 	muteRefresh = true;
 
-	// IP refresh --- INSERT
+	// IP refresh --- LINE
 
 	muteRefresh = false;
 };

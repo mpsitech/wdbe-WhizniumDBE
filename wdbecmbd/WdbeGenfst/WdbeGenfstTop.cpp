@@ -52,15 +52,14 @@ DpchRetWdbe* WdbeGenfstTop::run(
 
 	vector<string> ss;
 	string s;
-	///
 
 	ubigint refC;
-	ubigint refPrc;
+
+	WdbeMProcess* prc = NULL;
+
+	ubigint refFstReset, refFstRun;
 
 	uint refNum;
-
-	double ratio;
-	///
 
 	if (dbswdbe->tblwdbemmodule->loadRecByRef(refWdbeMModule, &mdl)) {
 		aresetNNotP = false;
@@ -106,35 +105,41 @@ DpchRetWdbe* WdbeGenfstTop::run(
 			StrMod::stringToVector(s, ss);
 			if (ss.size() == NClk) for (unsigned int i = 0; i < NClk; i++) clkDiffNotSngs[i] = (ss[i] == "true");
 		};
-		///
 
 		for (unsigned int i = 0; i < NClk; i++) {
-			refPrc = dbswdbe->tblwdbemprocess->insertNewRec(NULL, mdl->ref, 0, clks[i], clks[i], (aresetNNotP) ? "aresetn" : "areset", false, "", false, clks[i] + " wiring and reset");
+			dbswdbe->tblwdbemprocess->insertNewRec(&prc, mdl->ref, 0, clks[i], clks[i], (aresetNNotP) ? "aresetn" : "areset", false, "", (i != 0), clks[i] + " wiring and reset");
+			prc->refWdbeMFsm = dbswdbe->tblwdbemfsm->insertNewRec(NULL, prc->ref, VecWdbeVMFsmDbgtaptype::VOID);
+			dbswdbe->tblwdbemprocess->updateRec(prc);
 
-			refC = dbswdbe->tblwdbecvariable->getNewRef();
-			dbswdbe->tblwdbemvariable->insertNewRec(NULL, refC, VecWdbeVMVariableRefTbl::PRC, refPrc, 1, "imax", true, false, "nat", 0, "", "", (i == 0) ? "16" : ("(16*f" + StrMod::cap(clks[i]) + ")/f" + StrMod::cap(clks[0]) + "+1"), false, "");
-			dbswdbe->tblwdbemvariable->insertNewRec(NULL, refC, VecWdbeVMVariableRefTbl::PRC, refPrc, 2, "i", false, false, "nat", 0, "0..imax", "", "0", false, "");
+			refFstReset = dbswdbe->tblwdbemfsmstate->insertNewRec(NULL, 0, prc->refWdbeMFsm, 1, "reset", false, "");
+			refFstRun =dbswdbe->tblwdbemfsmstate->insertNewRec(NULL, 0, prc->refWdbeMFsm, 2, "run", false, "");
 
-			if (i == 0) {
-				ratio = 1.0;
+			if (i == 0) dbswdbe->tblwdbeamfsmstatestep->insertNewRec(NULL, refFstReset, 1, refFstRun, "i=imax", "done", "", "", "", "", "", "");
+			else dbswdbe->tblwdbeamfsmstatestep->insertNewRec(NULL, refFstReset, 1, refFstRun, "i=imax", "", "!reset_" + clks[i], "done", "", "", "", "");
+			dbswdbe->tblwdbeamfsmstatestep->insertNewRec(NULL, refFstReset, 2, refFstReset, "else", "inc", "", "", "", "", "", "");
 
-				for (unsigned int j = 1; j < NClk; j++) if (fClks[j] < fClks[0]) ratio = fClks[0]/fClks[j];
-
-				refC = dbswdbe->tblwdbecvariable->getNewRef();
-				dbswdbe->tblwdbemvariable->insertNewRec(NULL, refC, VecWdbeVMVariableRefTbl::PRC, refPrc, 3, "jmax", true, false, "nat", 0, "", "", to_string(lround(ceil(ratio))), false, "");
-				dbswdbe->tblwdbemvariable->insertNewRec(NULL, refC, VecWdbeVMVariableRefTbl::PRC, refPrc, 4, "j", false, false, "nat", 0, "0..jmax", "", "0", false, "");
-			};
+			if (i != 0) dbswdbe->tblwdbeamfsmstatestep->insertNewRec(NULL, refFstRun, 1, refFstReset, "reset_" + clks[i], "reset", "", "", "", "", "", "");
 
 			refNum = Wdbe::getNextSigRefNum(dbswdbe, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule);
 
-			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, mdl->ref, refNum++, VecWdbeVMSignalMgeTbl::PRC, refPrc, 0, (i == 0) ? "reset" : ("reset" + StrMod::cap(clks[i])), false, "sl", 1, "", "", "", "1", false, 0, "");
-			if (fAclk == fClks[i]) dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, mdl->ref, refNum++, VecWdbeVMSignalMgeTbl::PRC, refPrc, 0, clks[i], false, "sl", 1, "", "*", "", (aclkIntNotExt || aclkDiffNotSng) ? "aclk" : "aclk_sig", false, 0, "");
-		};
+			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, mdl->ref, refNum++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, (i == 0) ? "reset" : ("reset" + StrMod::cap(clks[i])), false, "sl", 1, "", "", "", "1", 0, "");
+			if (fAclk == fClks[i]) dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, mdl->ref, refNum++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, clks[i], false, "sl", 1, "", "*", "", (aclkIntNotExt || aclkDiffNotSng) ? "aclk" : "aclk_sig", 0, "");
+			if (i != 0) {
+				refC = dbswdbe->tblwdbecsignal->getNewRef();
+				dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, mdl->ref, refNum++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "reset_" + clks[i], false, "sl", 1, "", "", "", "1", 0, "");
+				dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, mdl->ref, refNum++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "reset_to_" + clks[i] + "m1", false, "sl", 1, "", "", "", "1", 0, "");
+				dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, mdl->ref, refNum++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "reset_to_" + clks[i] + "m2", false, "sl", 1, "", "", "", "1", 0, "");
+			};
 
+			refC = dbswdbe->tblwdbecvariable->getNewRef();
+			dbswdbe->tblwdbemvariable->insertNewRec(NULL, refC, VecWdbeVMVariableRefTbl::PRC, prc->ref, 1, "imax", true, false, "nat", 0, "", "", (i == 0) ? "8" : ("(16*f" + StrMod::cap(clks[i]) + ")/f" + StrMod::cap(clks[0]) + "+1"), "");
+			dbswdbe->tblwdbemvariable->insertNewRec(NULL, refC, VecWdbeVMVariableRefTbl::PRC, prc->ref, 2, "i", false, false, "nat", 0, "0..imax", "", "0", "");
+
+			delete prc;
+		};
 
 		delete mdl;
 	};
-///
 	// IP run --- IEND
 
 	return(new DpchRetWdbe(VecWdbeVDpch::DPCHRETWDBE, "", "", ixOpVOpres, 100));

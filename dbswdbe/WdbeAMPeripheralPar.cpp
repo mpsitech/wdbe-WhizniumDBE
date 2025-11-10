@@ -21,12 +21,12 @@ WdbeAMPeripheralPar::WdbeAMPeripheralPar(
 			, const ubigint refWdbeMPeripheral
 			, const string x1SrefKKey
 			, const string Val
-		) {
-
-	this->ref = ref;
-	this->refWdbeMPeripheral = refWdbeMPeripheral;
-	this->x1SrefKKey = x1SrefKKey;
-	this->Val = Val;
+		) :
+			ref(ref)
+			, refWdbeMPeripheral(refWdbeMPeripheral)
+			, x1SrefKKey(x1SrefKKey)
+			, Val(Val)
+		{
 };
 
 bool WdbeAMPeripheralPar::operator==(

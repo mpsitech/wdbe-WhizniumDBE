@@ -197,6 +197,7 @@ function initMenCrd() {
 	MitCrdUsrAvail = (retrieveSi(srcdoc, "StatShrWdbeNav", "MitCrdUsrAvail") == "true");
 	MitCrdPrsAvail = (retrieveSi(srcdoc, "StatShrWdbeNav", "MitCrdPrsAvail") == "true");
 	MitCrdFilAvail = (retrieveSi(srcdoc, "StatShrWdbeNav", "MitCrdFilAvail") == "true");
+	MitCrdPrfAvail = (retrieveSi(srcdoc, "StatShrWdbeNav", "MitCrdPrfAvail") == "true");
 	MspCrd2Avail = (retrieveSi(srcdoc, "StatShrWdbeNav", "MspCrd2Avail") == "true");
 	MitCrdMchAvail = (retrieveSi(srcdoc, "StatShrWdbeNav", "MitCrdMchAvail") == "true");
 	MitCrdLibAvail = (retrieveSi(srcdoc, "StatShrWdbeNav", "MitCrdLibAvail") == "true");
@@ -240,6 +241,7 @@ function initMenCrd() {
 	MitCrdRlsAvail = (retrieveSi(srcdoc, "StatShrWdbeNav", "MitCrdRlsAvail") == "true");
 	MitCrdRlsActive = (retrieveSi(srcdoc, "StatShrWdbeNav", "MitCrdRlsActive") == "true");
 	MspCrd8Avail = (retrieveSi(srcdoc, "StatShrWdbeNav", "MspCrd8Avail") == "true");
+	MitCrdIdfAvail = (retrieveSi(srcdoc, "StatShrWdbeNav", "MitCrdIdfAvail") == "true");
 	MitCrdUtlAvail = (retrieveSi(srcdoc, "StatShrWdbeNav", "MitCrdUtlAvail") == "true");
 
 	mendoc.getElementById("colCont").setAttribute("width", retrieveSi(srcdoc, "StatAppWdbeNav", "widthMenu"));
@@ -248,6 +250,7 @@ function initMenCrd() {
 	setTextContent(mendoc, mendoc.getElementById("MitCrdUsr"), retrieveTi(srcdoc, "TagWdbeNav", "MitCrdUsr"));
 	setTextContent(mendoc, mendoc.getElementById("MitCrdPrs"), retrieveTi(srcdoc, "TagWdbeNav", "MitCrdPrs"));
 	setTextContent(mendoc, mendoc.getElementById("MitCrdFil"), retrieveTi(srcdoc, "TagWdbeNav", "MitCrdFil"));
+	setTextContent(mendoc, mendoc.getElementById("MitCrdPrf"), retrieveTi(srcdoc, "TagWdbeNav", "MitCrdPrf"));
 	setTextContent(mendoc, mendoc.getElementById("MitCrdMch"), retrieveTi(srcdoc, "TagWdbeNav", "MitCrdMch"));
 	setTextContent(mendoc, mendoc.getElementById("MitCrdLib"), retrieveTi(srcdoc, "TagWdbeNav", "MitCrdLib"));
 	setTextContent(mendoc, mendoc.getElementById("MitCrdFam"), retrieveTi(srcdoc, "TagWdbeNav", "MitCrdFam"));
@@ -284,6 +287,7 @@ function initMenCrd() {
 	setTextContent(mendoc, mendoc.getElementById("MitCrdCmp"), retrieveTi(srcdoc, "TagWdbeNav", "MitCrdCmp"));
 	setTextContent(mendoc, mendoc.getElementById("MitCrdRls"), retrieveTi(srcdoc, "TagWdbeNav", "MitCrdRls"));
 	setMitActive("MitCrdRls", MitCrdRlsActive);
+	setTextContent(mendoc, mendoc.getElementById("MitCrdIdf"), retrieveTi(srcdoc, "TagWdbeNav", "MitCrdIdf"));
 	setTextContent(mendoc, mendoc.getElementById("MitCrdUtl"), retrieveTi(srcdoc, "TagWdbeNav", "MitCrdUtl"));
 
 	height -= setMitMspAvail("MspCrd1", MspCrd1Avail, 1);
@@ -291,6 +295,7 @@ function initMenCrd() {
 	height -= setMitMspAvail("MitCrdUsr", MitCrdUsrAvail, 20);
 	height -= setMitMspAvail("MitCrdPrs", MitCrdPrsAvail, 20);
 	height -= setMitMspAvail("MitCrdFil", MitCrdFilAvail, 20);
+	height -= setMitMspAvail("MitCrdPrf", MitCrdPrfAvail, 20);
 	height -= setMitMspAvail("MspCrd2", MspCrd2Avail, 1);
 	height -= setMitMspAvail("MitCrdMch", MitCrdMchAvail, 20);
 	height -= setMitMspAvail("MitCrdLib", MitCrdLibAvail, 20);
@@ -321,6 +326,7 @@ function initMenCrd() {
 	height -= setMitMspAvail("MitCrdCmp", MitCrdCmpAvail, 20);
 	height -= setMitMspAvail("MitCrdRls", MitCrdRlsAvail, 20);
 	height -= setMitMspAvail("MspCrd8", MspCrd8Avail, 1);
+	height -= setMitMspAvail("MitCrdIdf", MitCrdIdfAvail, 20);
 	height -= setMitMspAvail("MitCrdUtl", MitCrdUtlAvail, 20);
 
 	doc.getElementById("Menu").setAttribute("height", "" + height);
@@ -786,7 +792,7 @@ function handleDpchAppResumeReply() {
 	} else if (doc.req.readyState == 4) {
 		dom = doc.req.responseXML;
 
-		blk = retrieveBlock(dom, "//wdbe:*");
+		if (dom) blk = retrieveBlock(dom, "//wdbe:*");
 
 		if (blk) if (blk.nodeName == "DpchEngWdbeAck") restartNotify();
 	};
@@ -797,6 +803,8 @@ function iteratePoll() {
 };
 
 function iterateReqit(ev) {
+	var dom, blk;
+
 	var accepted, _scrJref, mask;
 
 	var news = false;
@@ -818,7 +826,7 @@ function iterateReqit(ev) {
 			dom = doc.reqit.responseXML;
 
 			// check dispatch type
-			blk = retrieveBlock(dom, "//wdbe:*");
+			if (dom) blk = retrieveBlock(dom, "//wdbe:*");
 
 			if (blk) {
 				if (blk.nodeName == "DpchEngWdbeAck") {

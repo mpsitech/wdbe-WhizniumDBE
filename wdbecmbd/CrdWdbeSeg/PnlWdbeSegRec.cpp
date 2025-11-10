@@ -38,16 +38,16 @@ PnlWdbeSegRec::PnlWdbeSegRec(
 		{
 	jref = xchg->addJob(dbswdbe, this, jrefSup);
 
-	pnlsup1nsegment = NULL;
 	pnldetail = NULL;
+	pnlsup1nsegment = NULL;
 
 	// IP constructor.cust1 --- INSERT
 
 	// IP constructor.cust2 --- INSERT
 
-	xchg->addClstn(VecWdbeVCall::CALLWDBESEG_SUPEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
-	xchg->addClstn(VecWdbeVCall::CALLWDBESEG_PPLEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBESEG_CLUEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBESEG_PPLEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBESEG_SUPEQ, jref, Clstn::VecVJobmask::TREE, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -246,34 +246,25 @@ void PnlWdbeSegRec::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBESEGUPD_REFEQ) {
-		call->abort = handleCallWdbeSegUpd_refEq(dbswdbe, call->jref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBESEG_SUPEQ) {
-		call->abort = handleCallWdbeSeg_supEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
+	if (call->ixVCall == VecWdbeVCall::CALLWDBESEG_CLUEQ) {
+		call->abort = handleCallWdbeSeg_cluEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBESEG_PPLEQ) {
 		call->abort = handleCallWdbeSeg_pplEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBESEG_CLUEQ) {
-		call->abort = handleCallWdbeSeg_cluEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBESEG_SUPEQ) {
+		call->abort = handleCallWdbeSeg_supEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBESEGUPD_REFEQ) {
+		call->abort = handleCallWdbeSegUpd_refEq(dbswdbe, call->jref);
 	};
 };
 
-bool PnlWdbeSegRec::handleCallWdbeSegUpd_refEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-	// IP handleCallWdbeSegUpd_refEq --- INSERT
-	return retval;
-};
-
-bool PnlWdbeSegRec::handleCallWdbeSeg_supEq(
+bool PnlWdbeSegRec::handleCallWdbeSeg_cluEq(
 			DbsWdbe* dbswdbe
 			, const ubigint jrefTrig
 			, const ubigint refInv
 			, bool& boolvalRet
 		) {
 	bool retval = false;
-	boolvalRet = (recSeg.supRefWdbeMSegment == refInv); // IP handleCallWdbeSeg_supEq --- LINE
+	boolvalRet = (recSeg.refWdbeCSegment == refInv); // IP handleCallWdbeSeg_cluEq --- LINE
 	return retval;
 };
 
@@ -288,13 +279,22 @@ bool PnlWdbeSegRec::handleCallWdbeSeg_pplEq(
 	return retval;
 };
 
-bool PnlWdbeSegRec::handleCallWdbeSeg_cluEq(
+bool PnlWdbeSegRec::handleCallWdbeSeg_supEq(
 			DbsWdbe* dbswdbe
 			, const ubigint jrefTrig
 			, const ubigint refInv
 			, bool& boolvalRet
 		) {
 	bool retval = false;
-	boolvalRet = (recSeg.refWdbeCSegment == refInv); // IP handleCallWdbeSeg_cluEq --- LINE
+	boolvalRet = (recSeg.supRefWdbeMSegment == refInv); // IP handleCallWdbeSeg_supEq --- LINE
+	return retval;
+};
+
+bool PnlWdbeSegRec::handleCallWdbeSegUpd_refEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+	// IP handleCallWdbeSegUpd_refEq --- INSERT
 	return retval;
 };

@@ -107,14 +107,14 @@ StgWdbeDatabase::StgWdbeDatabase(
 			, const usmallint port
 		) :
 			Block()
+			, ixDbsVDbstype(ixDbsVDbstype)
+			, dbspath(dbspath)
+			, dbsname(dbsname)
+			, username(username)
+			, password(password)
+			, ip(ip)
+			, port(port)
 		{
-	this->ixDbsVDbstype = ixDbsVDbstype;
-	this->dbspath = dbspath;
-	this->dbsname = dbsname;
-	this->username = username;
-	this->password = password;
-	this->ip = ip;
-	this->port = port;
 	mask = {IXDBSVDBSTYPE, DBSPATH, DBSNAME, USERNAME, PASSWORD, IP, PORT};
 };
 
@@ -220,16 +220,16 @@ StgWdbeMonitor::StgWdbeMonitor(
 			, const string& dbspassword
 		) :
 			Block()
+			, username(username)
+			, password(password)
+			, ip(ip)
+			, port(port)
+			, ixDbsVDbstype(ixDbsVDbstype)
+			, dbspath(dbspath)
+			, dbsname(dbsname)
+			, dbsusername(dbsusername)
+			, dbspassword(dbspassword)
 		{
-	this->username = username;
-	this->password = password;
-	this->ip = ip;
-	this->port = port;
-	this->ixDbsVDbstype = ixDbsVDbstype;
-	this->dbspath = dbspath;
-	this->dbsname = dbsname;
-	this->dbsusername = dbsusername;
-	this->dbspassword = dbspassword;
 	mask = {USERNAME, PASSWORD, IP, PORT, IXDBSVDBSTYPE, DBSPATH, DBSNAME, DBSUSERNAME, DBSPASSWORD};
 };
 
@@ -337,12 +337,12 @@ StgWdbeopd::StgWdbeopd(
 			, const usmallint opprcn
 		) :
 			Block()
+			, engip(engip)
+			, engport(engport)
+			, engsrvportbase(engsrvportbase)
+			, engsrvportofs(engsrvportofs)
+			, opprcn(opprcn)
 		{
-	this->engip = engip;
-	this->engport = engport;
-	this->engsrvportbase = engsrvportbase;
-	this->engsrvportofs = engsrvportofs;
-	this->opprcn = opprcn;
 	mask = {ENGIP, ENGPORT, ENGSRVPORTBASE, ENGSRVPORTOFS, OPPRCN};
 };
 
@@ -434,13 +434,13 @@ StgWdbePath::StgWdbePath(
 			, const string& helpurl
 		) :
 			Block()
+			, acvpath(acvpath)
+			, keypath(keypath)
+			, monpath(monpath)
+			, tmppath(tmppath)
+			, webpath(webpath)
+			, helpurl(helpurl)
 		{
-	this->acvpath = acvpath;
-	this->keypath = keypath;
-	this->monpath = monpath;
-	this->tmppath = tmppath;
-	this->webpath = webpath;
-	this->helpurl = helpurl;
 	mask = {ACVPATH, KEYPATH, MONPATH, TMPPATH, WEBPATH, HELPURL};
 };
 
@@ -530,11 +530,10 @@ ReqopWdbe::ReqopWdbe(
 			const uint ixVBasetype
 			, const uint ixVState
 		) :
-			cReady("cReady", "ReqopWdbe", "ReqopWdbe")
+			ixVBasetype(ixVBasetype)
+			, ixVState(ixVState)
+			, cReady("cReady", "ReqopWdbe", "ReqopWdbe")
 		{
-	this->ixVBasetype = ixVBasetype;
-	this->ixVState = ixVState;
-
 	pdone = 0;
 
 	pp = NULL;
@@ -589,10 +588,10 @@ ShrdatWdbe::ShrdatWdbe(
 			const string& srefSupclass
 			, const string& srefObject
 		) :
-			rwmAccess("shrdat.mAccess", srefSupclass + "::" + srefObject, srefObject)
+			srefSupclass(srefSupclass)
+			, srefObject(srefObject)
+			, rwmAccess("shrdat.mAccess", srefSupclass + "::" + srefObject, srefObject)
 		{
-	this->srefSupclass = srefSupclass;
-	this->srefObject = srefObject;
 };
 
 ShrdatWdbe::~ShrdatWdbe() {

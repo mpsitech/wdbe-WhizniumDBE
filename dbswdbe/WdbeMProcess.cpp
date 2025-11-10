@@ -27,18 +27,18 @@ WdbeMProcess::WdbeMProcess(
 			, const string Syncrst
 			, const bool Extip
 			, const string Comment
-		) {
-
-	this->ref = ref;
-	this->refWdbeMModule = refWdbeMModule;
-	this->refWdbeMFsm = refWdbeMFsm;
-	this->sref = sref;
-	this->clkSrefWdbeMSignal = clkSrefWdbeMSignal;
-	this->asrSrefWdbeMSignal = asrSrefWdbeMSignal;
-	this->Falling = Falling;
-	this->Syncrst = Syncrst;
-	this->Extip = Extip;
-	this->Comment = Comment;
+		) :
+			ref(ref)
+			, refWdbeMModule(refWdbeMModule)
+			, refWdbeMFsm(refWdbeMFsm)
+			, sref(sref)
+			, clkSrefWdbeMSignal(clkSrefWdbeMSignal)
+			, asrSrefWdbeMSignal(asrSrefWdbeMSignal)
+			, Falling(Falling)
+			, Syncrst(Syncrst)
+			, Extip(Extip)
+			, Comment(Comment)
+		{
 };
 
 bool WdbeMProcess::operator==(
@@ -267,13 +267,6 @@ ubigint TblWdbeMProcess::loadRstByMdl(
 			, ListWdbeMProcess& rst
 		) {
 	return 0;
-};
-
-bool TblWdbeMProcess::loadSrfByRef(
-			ubigint ref
-			, string& sref
-		) {
-	return false;
 };
 
 ubigint TblWdbeMProcess::loadRstByRefs(
@@ -563,13 +556,6 @@ ubigint MyTblWdbeMProcess::loadRstByMdl(
 	return loadRstBySQL("SELECT ref, refWdbeMModule, refWdbeMFsm, sref, clkSrefWdbeMSignal, asrSrefWdbeMSignal, Falling, Syncrst, Extip, Comment FROM TblWdbeMProcess WHERE refWdbeMModule = " + to_string(refWdbeMModule) + " ORDER BY sref ASC", append, rst);
 };
 
-bool MyTblWdbeMProcess::loadSrfByRef(
-			ubigint ref
-			, string& sref
-		) {
-	return loadStringBySQL("SELECT sref FROM TblWdbeMProcess WHERE ref = " + to_string(ref) + "", sref);
-};
-
 #endif
 
 #if defined(SBECORE_PG)
@@ -596,7 +582,6 @@ void PgTblWdbeMProcess::initStatements() {
 	createStatement("TblWdbeMProcess_loadRecByFsm", "SELECT ref, refWdbeMModule, refWdbeMFsm, sref, clkSrefWdbeMSignal, asrSrefWdbeMSignal, Falling, Syncrst, Extip, Comment FROM TblWdbeMProcess WHERE refWdbeMFsm = $1", 1);
 	createStatement("TblWdbeMProcess_loadRefsByMdl", "SELECT ref FROM TblWdbeMProcess WHERE refWdbeMModule = $1", 1);
 	createStatement("TblWdbeMProcess_loadRstByMdl", "SELECT ref, refWdbeMModule, refWdbeMFsm, sref, clkSrefWdbeMSignal, asrSrefWdbeMSignal, Falling, Syncrst, Extip, Comment FROM TblWdbeMProcess WHERE refWdbeMModule = $1 ORDER BY sref ASC", 1);
-	createStatement("TblWdbeMProcess_loadSrfByRef", "SELECT sref FROM TblWdbeMProcess WHERE ref = $1", 1);
 };
 
 bool PgTblWdbeMProcess::loadRec(
@@ -983,23 +968,6 @@ ubigint PgTblWdbeMProcess::loadRstByMdl(
 	const int f[] = {1};
 
 	return loadRstByStmt("TblWdbeMProcess_loadRstByMdl", 1, vals, l, f, append, rst);
-};
-
-bool PgTblWdbeMProcess::loadSrfByRef(
-			ubigint ref
-			, string& sref
-		) {
-	ubigint _ref = htonl64(ref);
-
-	const char* vals[] = {
-		(char*) &_ref
-	};
-	const int l[] = {
-		sizeof(ubigint)
-	};
-	const int f[] = {1};
-
-	return loadStringByStmt("TblWdbeMProcess_loadSrfByRef", 1, vals, l, f, sref);
 };
 
 #endif

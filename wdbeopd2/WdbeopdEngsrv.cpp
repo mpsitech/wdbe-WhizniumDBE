@@ -302,27 +302,27 @@ uint WdbeopdEngsrv::readDpchInv(
 	if (ixWdbeVDpch == VecWdbeVDpch::DPCHINVWDBE) {
 		req->dpchinv = new DpchInvWdbe();
 		((DpchInvWdbe*) (req->dpchinv))->readXML(docctx, "/", true);
-	} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHINVWDBEMTPWRMCU) {
-		req->dpchinv = new DpchInvWdbeMtpWrmcu();
-		((DpchInvWdbeMtpWrmcu*) (req->dpchinv))->readXML(docctx, "/", true);
-	} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHINVWDBEMTPWRFPGA) {
-		req->dpchinv = new DpchInvWdbeMtpWrfpga();
-		((DpchInvWdbeMtpWrfpga*) (req->dpchinv))->readXML(docctx, "/", true);
-	} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHINVWDBEMTPGENFST) {
-		req->dpchinv = new DpchInvWdbeMtpGenfst();
-		((DpchInvWdbeMtpGenfst*) (req->dpchinv))->readXML(docctx, "/", true);
-	} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHINVWDBEMTPCPLMSTTD) {
-		req->dpchinv = new DpchInvWdbeMtpCplmsttd();
-		((DpchInvWdbeMtpCplmsttd*) (req->dpchinv))->readXML(docctx, "/", true);
-	} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHINVWDBEMTPCPLMSTBU) {
-		req->dpchinv = new DpchInvWdbeMtpCplmstbu();
-		((DpchInvWdbeMtpCplmstbu*) (req->dpchinv))->readXML(docctx, "/", true);
-	} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHINVWDBEMTPPLHMCU) {
-		req->dpchinv = new DpchInvWdbeMtpPlhmcu();
-		((DpchInvWdbeMtpPlhmcu*) (req->dpchinv))->readXML(docctx, "/", true);
 	} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHINVWDBEMTPPLHFPGA) {
 		req->dpchinv = new DpchInvWdbeMtpPlhfpga();
 		((DpchInvWdbeMtpPlhfpga*) (req->dpchinv))->readXML(docctx, "/", true);
+	} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHINVWDBEMTPPLHMCU) {
+		req->dpchinv = new DpchInvWdbeMtpPlhmcu();
+		((DpchInvWdbeMtpPlhmcu*) (req->dpchinv))->readXML(docctx, "/", true);
+	} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHINVWDBEMTPCPLMSTBU) {
+		req->dpchinv = new DpchInvWdbeMtpCplmstbu();
+		((DpchInvWdbeMtpCplmstbu*) (req->dpchinv))->readXML(docctx, "/", true);
+	} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHINVWDBEMTPCPLMSTTD) {
+		req->dpchinv = new DpchInvWdbeMtpCplmsttd();
+		((DpchInvWdbeMtpCplmsttd*) (req->dpchinv))->readXML(docctx, "/", true);
+	} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHINVWDBEMTPGENFST) {
+		req->dpchinv = new DpchInvWdbeMtpGenfst();
+		((DpchInvWdbeMtpGenfst*) (req->dpchinv))->readXML(docctx, "/", true);
+	} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHINVWDBEMTPWRFPGA) {
+		req->dpchinv = new DpchInvWdbeMtpWrfpga();
+		((DpchInvWdbeMtpWrfpga*) (req->dpchinv))->readXML(docctx, "/", true);
+	} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHINVWDBEMTPWRMCU) {
+		req->dpchinv = new DpchInvWdbeMtpWrmcu();
+		((DpchInvWdbeMtpWrmcu*) (req->dpchinv))->readXML(docctx, "/", true);
 	};
 
 	if (docctx) xmlXPathFreeContext(docctx);

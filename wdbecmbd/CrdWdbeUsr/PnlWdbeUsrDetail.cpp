@@ -316,33 +316,15 @@ void PnlWdbeUsrDetail::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBEUSRJSTEMOD_USREQ) {
-		call->abort = handleCallWdbeUsrJsteMod_usrEq(dbswdbe, call->jref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEUSRUPD_REFEQ) {
-		call->abort = handleCallWdbeUsrUpd_refEq(dbswdbe, call->jref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEUSR_PRSEQ) {
+	if (call->ixVCall == VecWdbeVCall::CALLWDBEUSR_PRSEQ) {
 		call->abort = handleCallWdbeUsr_prsEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEUSR_USGEQ) {
 		call->abort = handleCallWdbeUsr_usgEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEUSRUPD_REFEQ) {
+		call->abort = handleCallWdbeUsrUpd_refEq(dbswdbe, call->jref);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEUSRJSTEMOD_USREQ) {
+		call->abort = handleCallWdbeUsrJsteMod_usrEq(dbswdbe, call->jref);
 	};
-};
-
-bool PnlWdbeUsrDetail::handleCallWdbeUsrJsteMod_usrEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-	// IP handleCallWdbeUsrJsteMod_usrEq --- INSERT
-	return retval;
-};
-
-bool PnlWdbeUsrDetail::handleCallWdbeUsrUpd_refEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-	// IP handleCallWdbeUsrUpd_refEq --- INSERT
-	return retval;
 };
 
 bool PnlWdbeUsrDetail::handleCallWdbeUsr_prsEq(
@@ -364,5 +346,23 @@ bool PnlWdbeUsrDetail::handleCallWdbeUsr_usgEq(
 		) {
 	bool retval = false;
 	boolvalRet = (recUsr.refWdbeMUsergroup == refInv); // IP handleCallWdbeUsr_usgEq --- LINE
+	return retval;
+};
+
+bool PnlWdbeUsrDetail::handleCallWdbeUsrUpd_refEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+	// IP handleCallWdbeUsrUpd_refEq --- INSERT
+	return retval;
+};
+
+bool PnlWdbeUsrDetail::handleCallWdbeUsrJsteMod_usrEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+	// IP handleCallWdbeUsrJsteMod_usrEq --- INSERT
 	return retval;
 };

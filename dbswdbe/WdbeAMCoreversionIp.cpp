@@ -25,14 +25,14 @@ WdbeAMCoreversionIp::WdbeAMCoreversionIp(
 			, const string sref
 			, const uint ixVTagtype
 			, const string Comment
-		) {
-
-	this->ref = ref;
-	this->cvrRefWdbeMCoreversion = cvrRefWdbeMCoreversion;
-	this->cvrNum = cvrNum;
-	this->sref = sref;
-	this->ixVTagtype = ixVTagtype;
-	this->Comment = Comment;
+		) :
+			ref(ref)
+			, cvrRefWdbeMCoreversion(cvrRefWdbeMCoreversion)
+			, cvrNum(cvrNum)
+			, sref(sref)
+			, ixVTagtype(ixVTagtype)
+			, Comment(Comment)
+		{
 };
 
 bool WdbeAMCoreversionIp::operator==(

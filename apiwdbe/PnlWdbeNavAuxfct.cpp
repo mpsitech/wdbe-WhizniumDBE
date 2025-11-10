@@ -22,6 +22,7 @@ uint PnlWdbeNavAuxfct::VecVDo::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
+	if (s == "butidfnewcrdclick") return BUTIDFNEWCRDCLICK;
 	if (s == "bututlnewcrdclick") return BUTUTLNEWCRDCLICK;
 
 	return(0);
@@ -30,6 +31,7 @@ uint PnlWdbeNavAuxfct::VecVDo::getIx(
 string PnlWdbeNavAuxfct::VecVDo::getSref(
 			const uint ix
 		) {
+	if (ix == BUTIDFNEWCRDCLICK) return("ButIdfNewcrdClick");
 	if (ix == BUTUTLNEWCRDCLICK) return("ButUtlNewcrdClick");
 
 	return("");
@@ -43,9 +45,8 @@ PnlWdbeNavAuxfct::StatApp::StatApp(
 			const uint ixWdbeVExpstate
 		) :
 			Block()
+			, ixWdbeVExpstate(ixWdbeVExpstate)
 		{
-	this->ixWdbeVExpstate = ixWdbeVExpstate;
-
 	mask = {IXWDBEVEXPSTATE};
 };
 
@@ -106,13 +107,14 @@ set<uint> PnlWdbeNavAuxfct::StatApp::diff(
  ******************************************************************************/
 
 PnlWdbeNavAuxfct::StatShr::StatShr(
-			const bool ButUtlNewcrdAvail
+			const bool ButIdfNewcrdAvail
+			, const bool ButUtlNewcrdAvail
 		) :
 			Block()
+			, ButIdfNewcrdAvail(ButIdfNewcrdAvail)
+			, ButUtlNewcrdAvail(ButUtlNewcrdAvail)
 		{
-	this->ButUtlNewcrdAvail = ButUtlNewcrdAvail;
-
-	mask = {BUTUTLNEWCRDAVAIL};
+	mask = {BUTIDFNEWCRDAVAIL, BUTUTLNEWCRDAVAIL};
 };
 
 bool PnlWdbeNavAuxfct::StatShr::readXML(
@@ -132,6 +134,7 @@ bool PnlWdbeNavAuxfct::StatShr::readXML(
 	string itemtag = "StatitemShrWdbeNavAuxfct";
 
 	if (basefound) {
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButIdfNewcrdAvail", ButIdfNewcrdAvail)) add(BUTIDFNEWCRDAVAIL);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButUtlNewcrdAvail", ButUtlNewcrdAvail)) add(BUTUTLNEWCRDAVAIL);
 	};
 
@@ -143,6 +146,7 @@ set<uint> PnlWdbeNavAuxfct::StatShr::comm(
 		) {
 	set<uint> items;
 
+	if (ButIdfNewcrdAvail == comp->ButIdfNewcrdAvail) insert(items, BUTIDFNEWCRDAVAIL);
 	if (ButUtlNewcrdAvail == comp->ButUtlNewcrdAvail) insert(items, BUTUTLNEWCRDAVAIL);
 
 	return(items);
@@ -156,7 +160,7 @@ set<uint> PnlWdbeNavAuxfct::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {BUTUTLNEWCRDAVAIL};
+	diffitems = {BUTIDFNEWCRDAVAIL, BUTUTLNEWCRDAVAIL};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -168,14 +172,15 @@ set<uint> PnlWdbeNavAuxfct::StatShr::diff(
 
 PnlWdbeNavAuxfct::Tag::Tag(
 			const string& Cpt
+			, const string& CptIdf
 			, const string& CptUtl
 		) :
 			Block()
+			, Cpt(Cpt)
+			, CptIdf(CptIdf)
+			, CptUtl(CptUtl)
 		{
-	this->Cpt = Cpt;
-	this->CptUtl = CptUtl;
-
-	mask = {CPT, CPTUTL};
+	mask = {CPT, CPTIDF, CPTUTL};
 };
 
 bool PnlWdbeNavAuxfct::Tag::readXML(
@@ -196,6 +201,7 @@ bool PnlWdbeNavAuxfct::Tag::readXML(
 
 	if (basefound) {
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "Cpt", Cpt)) add(CPT);
+		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "CptIdf", CptIdf)) add(CPTIDF);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "CptUtl", CptUtl)) add(CPTUTL);
 	};
 
@@ -212,11 +218,11 @@ PnlWdbeNavAuxfct::DpchAppDo::DpchAppDo(
 			, const set<uint>& mask
 		) :
 			DpchAppWdbe(VecWdbeVDpch::DPCHAPPWDBENAVAUXFCTDO, scrJref)
+			, ixVDo(ixVDo)
 		{
 	if (find(mask, ALL)) this->mask = {SCRJREF, IXVDO};
 	else this->mask = mask;
 
-	this->ixVDo = ixVDo;
 };
 
 string PnlWdbeNavAuxfct::DpchAppDo::getSrefsMask() {

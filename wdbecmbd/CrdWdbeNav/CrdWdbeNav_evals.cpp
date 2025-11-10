@@ -38,7 +38,7 @@ bool CrdWdbeNav::evalPnlpreAvail(
 bool CrdWdbeNav::evalPnladminAvail(
 			DbsWdbe* dbswdbe
 		) {
-	// pre.ixCrdaccUsg()|pre.ixCrdaccUsr()|pre.ixCrdaccPrs()|pre.ixCrdaccFil()
+	// pre.ixCrdaccUsg()|pre.ixCrdaccUsr()|pre.ixCrdaccPrs()|pre.ixCrdaccFil()|pre.ixCrdaccPrf()
 
 	vector<bool> args;
 	bool a, b;
@@ -51,6 +51,11 @@ bool CrdWdbeNav::evalPnladminAvail(
 	args.push_back(a);
 	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCFIL, jref) != 0);
 	args.push_back(a);
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCPRF, jref) != 0);
+	args.push_back(a);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
 	b = args.back(); args.pop_back();
 	a = args.back(); args.pop_back();
 	args.push_back(a || b);
@@ -276,13 +281,18 @@ bool CrdWdbeNav::evalPnldeployAvail(
 bool CrdWdbeNav::evalPnlauxfctAvail(
 			DbsWdbe* dbswdbe
 		) {
-	// pre.ixCrdaccUtl()
+	// pre.ixCrdaccIdf()|pre.ixCrdaccUtl()
 
 	vector<bool> args;
-	bool a;
+	bool a, b;
 
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCIDF, jref) != 0);
+	args.push_back(a);
 	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCUTL, jref) != 0);
 	args.push_back(a);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
 
 	return(args.back());
 };
@@ -290,12 +300,12 @@ bool CrdWdbeNav::evalPnlauxfctAvail(
 bool CrdWdbeNav::evalMitSesSpsAvail(
 			DbsWdbe* dbswdbe
 		) {
-	// stgwdbeappearance.suspsessEq(true)
+	// stgwdbebehavior.suspsessEq(true)
 
 	vector<bool> args;
 	bool a;
 
-	a = false; a = (xchg->stgwdbeappearance.suspsess == true);
+	a = false; a = (xchg->stgwdbebehavior.suspsess == true);
 	args.push_back(a);
 
 	return(args.back());
@@ -304,7 +314,7 @@ bool CrdWdbeNav::evalMitSesSpsAvail(
 bool CrdWdbeNav::evalMspCrd1Avail(
 			DbsWdbe* dbswdbe
 		) {
-	// MitCrdUsgAvail()|MitCrdUsrAvail()|MitCrdPrsAvail()|MitCrdFilAvail()
+	// MitCrdUsgAvail()|MitCrdUsrAvail()|MitCrdPrsAvail()|MitCrdFilAvail()|MitCrdPrfAvail()
 
 	vector<bool> args;
 	bool a, b;
@@ -317,6 +327,11 @@ bool CrdWdbeNav::evalMspCrd1Avail(
 	args.push_back(a);
 	a = false; a = evalMitCrdFilAvail(dbswdbe);
 	args.push_back(a);
+	a = false; a = evalMitCrdPrfAvail(dbswdbe);
+	args.push_back(a);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
 	b = args.back(); args.pop_back();
 	a = args.back(); args.pop_back();
 	args.push_back(a || b);
@@ -381,6 +396,20 @@ bool CrdWdbeNav::evalMitCrdFilAvail(
 	bool a;
 
 	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCFIL, jref) != 0);
+	args.push_back(a);
+
+	return(args.back());
+};
+
+bool CrdWdbeNav::evalMitCrdPrfAvail(
+			DbsWdbe* dbswdbe
+		) {
+	// pre.ixCrdaccPrf()
+
+	vector<bool> args;
+	bool a;
+
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCPRF, jref) != 0);
 	args.push_back(a);
 
 	return(args.back());
@@ -1077,12 +1106,31 @@ bool CrdWdbeNav::evalMitCrdRlsActive(
 bool CrdWdbeNav::evalMspCrd8Avail(
 			DbsWdbe* dbswdbe
 		) {
-	// MitCrdUtlAvail()
+	// MitCrdIdfAvail()|MitCrdUtlAvail()
+
+	vector<bool> args;
+	bool a, b;
+
+	a = false; a = evalMitCrdIdfAvail(dbswdbe);
+	args.push_back(a);
+	a = false; a = evalMitCrdUtlAvail(dbswdbe);
+	args.push_back(a);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
+
+	return(args.back());
+};
+
+bool CrdWdbeNav::evalMitCrdIdfAvail(
+			DbsWdbe* dbswdbe
+		) {
+	// pre.ixCrdaccIdf()
 
 	vector<bool> args;
 	bool a;
 
-	a = false; a = evalMitCrdUtlAvail(dbswdbe);
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCIDF, jref) != 0);
 	args.push_back(a);
 
 	return(args.back());
@@ -1124,12 +1172,12 @@ bool CrdWdbeNav::evalMspApp2Avail(
 bool CrdWdbeNav::evalMitAppMlcAvail(
 			DbsWdbe* dbswdbe
 		) {
-	// pre.adm()
+	// pre.admin()
 
 	vector<bool> args;
 	bool a;
 
-	a = false;
+	a = false; a = (xchg->getBoolvalPreset(VecWdbeVPreset::PREWDBEADMIN, jref));
 	args.push_back(a);
 
 	return(args.back());
@@ -1143,7 +1191,7 @@ bool CrdWdbeNav::evalMitAppLoiAvail(
 	vector<bool> args;
 	bool a;
 
-	a = false; {uint cnt = 0; dbswdbe->loadUintBySQL("SELECT COUNT(ref) FROM TblWdbeMUser WHERE sref <> 'temp'", cnt); a = (cnt == 0);};
+	a = false; {ubigint ref = 0; a = dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMUsergroup WHERE ref = " + to_string(xchg->getRefPreset(VecWdbeVPreset::PREWDBEGROUP, jref)) + " AND sref = 'temp'", ref);};
 	args.push_back(a);
 
 	return(args.back());

@@ -755,7 +755,6 @@ uint JobWdbeIexDcd::enterSgeImport(
 					//var->Minmax: TBL
 					//var->Onval: TBL
 					//var->Offval: TBL
-					//var->Defon: TBL
 					//var->Comment: TBL
 
 					dbswdbe->tblwdbemvariable->insertRec(var);
@@ -786,7 +785,6 @@ uint JobWdbeIexDcd::enterSgeImport(
 				//sig->Comb: TBL
 				//sig->Onval: TBL
 				//sig->Offval: TBL
-				//sig->Defon: TBL
 				//sig->drvRefWdbeMPort: PREVIMP
 				//if (sig->drvRefWdbeMPort == 0) throw SbeException(SbeException::IEX_TSREF, {{"tsref",sig->srefDrvRefWdbeMPort}, {"iel","srefDrvRefWdbeMPort"}, {"lineno",to_string(sig->lineno)}});
 				//sig->Comment: TBL

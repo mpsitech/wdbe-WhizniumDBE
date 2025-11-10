@@ -48,12 +48,11 @@ PnlWdbeVecDetail::ContIac::ContIac(
 			, const string& TxfOpt
 		) :
 			Block()
+			, numFPupTyp(numFPupTyp)
+			, numFPupHkt(numFPupHkt)
+			, numsFLstOpt(numsFLstOpt)
+			, TxfOpt(TxfOpt)
 		{
-	this->numFPupTyp = numFPupTyp;
-	this->numFPupHkt = numFPupHkt;
-	this->numsFLstOpt = numsFLstOpt;
-	this->TxfOpt = TxfOpt;
-
 	mask = {NUMFPUPTYP, NUMFPUPHKT, NUMSFLSTOPT, TXFOPT};
 };
 
@@ -174,10 +173,9 @@ PnlWdbeVecDetail::ContInf::ContInf(
 			, const string& TxtHku
 		) :
 			Block()
+			, TxtSrf(TxtSrf)
+			, TxtHku(TxtHku)
 		{
-	this->TxtSrf = TxtSrf;
-	this->TxtHku = TxtHku;
-
 	mask = {TXTSRF, TXTHKU};
 };
 
@@ -281,8 +279,7 @@ void PnlWdbeVecDetail::StatApp::writeXML(
  ******************************************************************************/
 
 PnlWdbeVecDetail::StatShr::StatShr(
-			const bool TxfOptValid
-			, const bool ButSaveAvail
+			const bool ButSaveAvail
 			, const bool ButSaveActive
 			, const bool TxtSrfActive
 			, const bool PupTypActive
@@ -290,22 +287,22 @@ PnlWdbeVecDetail::StatShr::StatShr(
 			, const bool ButHkuViewAvail
 			, const bool ButHkuViewActive
 			, const bool LstOptActive
+			, const bool TxfOptValid
 			, const bool ButOptEditAvail
 		) :
 			Block()
+			, ButSaveAvail(ButSaveAvail)
+			, ButSaveActive(ButSaveActive)
+			, TxtSrfActive(TxtSrfActive)
+			, PupTypActive(PupTypActive)
+			, TxtHkuActive(TxtHkuActive)
+			, ButHkuViewAvail(ButHkuViewAvail)
+			, ButHkuViewActive(ButHkuViewActive)
+			, LstOptActive(LstOptActive)
+			, TxfOptValid(TxfOptValid)
+			, ButOptEditAvail(ButOptEditAvail)
 		{
-	this->TxfOptValid = TxfOptValid;
-	this->ButSaveAvail = ButSaveAvail;
-	this->ButSaveActive = ButSaveActive;
-	this->TxtSrfActive = TxtSrfActive;
-	this->PupTypActive = PupTypActive;
-	this->TxtHkuActive = TxtHkuActive;
-	this->ButHkuViewAvail = ButHkuViewAvail;
-	this->ButHkuViewActive = ButHkuViewActive;
-	this->LstOptActive = LstOptActive;
-	this->ButOptEditAvail = ButOptEditAvail;
-
-	mask = {TXFOPTVALID, BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, PUPTYPACTIVE, TXTHKUACTIVE, BUTHKUVIEWAVAIL, BUTHKUVIEWACTIVE, LSTOPTACTIVE, BUTOPTEDITAVAIL};
+	mask = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, PUPTYPACTIVE, TXTHKUACTIVE, BUTHKUVIEWAVAIL, BUTHKUVIEWACTIVE, LSTOPTACTIVE, TXFOPTVALID, BUTOPTEDITAVAIL};
 };
 
 void PnlWdbeVecDetail::StatShr::writeJSON(
@@ -316,7 +313,6 @@ void PnlWdbeVecDetail::StatShr::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["TxfOptValid"] = TxfOptValid;
 	me["ButSaveAvail"] = ButSaveAvail;
 	me["ButSaveActive"] = ButSaveActive;
 	me["TxtSrfActive"] = TxtSrfActive;
@@ -325,6 +321,7 @@ void PnlWdbeVecDetail::StatShr::writeJSON(
 	me["ButHkuViewAvail"] = ButHkuViewAvail;
 	me["ButHkuViewActive"] = ButHkuViewActive;
 	me["LstOptActive"] = LstOptActive;
+	me["TxfOptValid"] = TxfOptValid;
 	me["ButOptEditAvail"] = ButOptEditAvail;
 };
 
@@ -340,7 +337,6 @@ void PnlWdbeVecDetail::StatShr::writeXML(
 	else itemtag = "StatitemShrWdbeVecDetail";
 
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
-		writeBoolAttr(wr, itemtag, "sref", "TxfOptValid", TxfOptValid);
 		writeBoolAttr(wr, itemtag, "sref", "ButSaveAvail", ButSaveAvail);
 		writeBoolAttr(wr, itemtag, "sref", "ButSaveActive", ButSaveActive);
 		writeBoolAttr(wr, itemtag, "sref", "TxtSrfActive", TxtSrfActive);
@@ -349,6 +345,7 @@ void PnlWdbeVecDetail::StatShr::writeXML(
 		writeBoolAttr(wr, itemtag, "sref", "ButHkuViewAvail", ButHkuViewAvail);
 		writeBoolAttr(wr, itemtag, "sref", "ButHkuViewActive", ButHkuViewActive);
 		writeBoolAttr(wr, itemtag, "sref", "LstOptActive", LstOptActive);
+		writeBoolAttr(wr, itemtag, "sref", "TxfOptValid", TxfOptValid);
 		writeBoolAttr(wr, itemtag, "sref", "ButOptEditAvail", ButOptEditAvail);
 	xmlTextWriterEndElement(wr);
 };
@@ -358,7 +355,6 @@ set<uint> PnlWdbeVecDetail::StatShr::comm(
 		) {
 	set<uint> items;
 
-	if (TxfOptValid == comp->TxfOptValid) insert(items, TXFOPTVALID);
 	if (ButSaveAvail == comp->ButSaveAvail) insert(items, BUTSAVEAVAIL);
 	if (ButSaveActive == comp->ButSaveActive) insert(items, BUTSAVEACTIVE);
 	if (TxtSrfActive == comp->TxtSrfActive) insert(items, TXTSRFACTIVE);
@@ -367,6 +363,7 @@ set<uint> PnlWdbeVecDetail::StatShr::comm(
 	if (ButHkuViewAvail == comp->ButHkuViewAvail) insert(items, BUTHKUVIEWAVAIL);
 	if (ButHkuViewActive == comp->ButHkuViewActive) insert(items, BUTHKUVIEWACTIVE);
 	if (LstOptActive == comp->LstOptActive) insert(items, LSTOPTACTIVE);
+	if (TxfOptValid == comp->TxfOptValid) insert(items, TXFOPTVALID);
 	if (ButOptEditAvail == comp->ButOptEditAvail) insert(items, BUTOPTEDITAVAIL);
 
 	return(items);
@@ -380,7 +377,7 @@ set<uint> PnlWdbeVecDetail::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {TXFOPTVALID, BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, PUPTYPACTIVE, TXTHKUACTIVE, BUTHKUVIEWAVAIL, BUTHKUVIEWACTIVE, LSTOPTACTIVE, BUTOPTEDITAVAIL};
+	diffitems = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, PUPTYPACTIVE, TXTHKUACTIVE, BUTHKUVIEWAVAIL, BUTHKUVIEWACTIVE, LSTOPTACTIVE, TXFOPTVALID, BUTOPTEDITAVAIL};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);

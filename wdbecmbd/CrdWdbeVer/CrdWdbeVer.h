@@ -14,17 +14,17 @@
 
 // IP include.cust --- INSERT
 
-#include "PnlWdbeVerList.h"
-#include "PnlWdbeVerHeadbar.h"
-#include "PnlWdbeVerRec.h"
 #include "DlgWdbeVerCmdset.h"
 #include "DlgWdbeVerCustfst.h"
 #include "DlgWdbeVerDeploy.h"
 #include "DlgWdbeVerDflalg.h"
 #include "DlgWdbeVerFinmod.h"
-#include "DlgWdbeVerNew.h"
-#include "DlgWdbeVerMdlstr.h"
 #include "DlgWdbeVerGenfst.h"
+#include "DlgWdbeVerMdlstr.h"
+#include "DlgWdbeVerNew.h"
+#include "PnlWdbeVerRec.h"
+#include "PnlWdbeVerHeadbar.h"
+#include "PnlWdbeVerList.h"
 
 #define VecVWdbeVerDo CrdWdbeVer::VecVDo
 #define VecVWdbeVerSge CrdWdbeVer::VecVSge
@@ -310,17 +310,17 @@ public:
 	Sbecore::Feed feedFMcbAlert;
 	Sbecore::Feed feedFSge;
 
-	PnlWdbeVerList* pnllist;
-	PnlWdbeVerHeadbar* pnlheadbar;
-	PnlWdbeVerRec* pnlrec;
 	DlgWdbeVerCmdset* dlgcmdset;
 	DlgWdbeVerCustfst* dlgcustfst;
 	DlgWdbeVerDeploy* dlgdeploy;
 	DlgWdbeVerDflalg* dlgdflalg;
 	DlgWdbeVerFinmod* dlgfinmod;
-	DlgWdbeVerNew* dlgnew;
-	DlgWdbeVerMdlstr* dlgmdlstr;
 	DlgWdbeVerGenfst* dlggenfst;
+	DlgWdbeVerMdlstr* dlgmdlstr;
+	DlgWdbeVerNew* dlgnew;
+	PnlWdbeVerRec* pnlrec;
+	PnlWdbeVerHeadbar* pnlheadbar;
+	PnlWdbeVerList* pnllist;
 
 	// IP vars.cust --- INSERT
 
@@ -359,9 +359,9 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeRefPreSet(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, const Sbecore::ubigint refInv);
-	bool handleCallWdbeStatChg(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 	bool handleCallWdbeDlgClose(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbeStatChg(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbeRefPreSet(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, const Sbecore::ubigint refInv);
 
 private:
 	void changeStage(DbsWdbe* dbswdbe, Sbecore::uint _ixVSge, DpchEngWdbe** dpcheng = NULL);

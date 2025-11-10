@@ -73,6 +73,32 @@
 				:disabled="!statshr.TxfCmtActive"
 			/>
 
+			<v-divider v-if="statshr.SepCtrAvail"/>
+
+			<h3
+				v-if="statshr.HdgCtrAvail"
+				class="text-5 my-1"
+			>
+				{{tag.HdgCtr}}
+			</h3>
+
+			<v-text-field
+				v-if="statshr.TxfCtrFsrAvail"
+				class="my-1"
+				v-model="contiac.TxfCtrFsr"
+				:label="tag.CptCtrFsr"
+				:disabled="!statshr.TxfCtrFsrActive"
+			/>
+
+			<v-text-field
+				v-if="statshr.TxtCtrClrAvail"
+				class="my-1"
+				readonly
+				outlined
+				v-model="continf.TxtCtrClr"
+				:label="tag.CptCtrClr"
+			/>
+
 			<v-divider v-if="statshr.SepImbAvail"/>
 
 			<h3
@@ -125,32 +151,6 @@
 				v-model="contiac.TxfImbPri"
 				:label="tag.CptImbPri"
 				:disabled="!statshr.TxfImbPriActive"
-			/>
-
-			<v-divider v-if="statshr.SepCtrAvail"/>
-
-			<h3
-				v-if="statshr.HdgCtrAvail"
-				class="text-5 my-1"
-			>
-				{{tag.HdgCtr}}
-			</h3>
-
-			<v-text-field
-				v-if="statshr.TxfCtrFsrAvail"
-				class="my-1"
-				v-model="contiac.TxfCtrFsr"
-				:label="tag.CptCtrFsr"
-				:disabled="!statshr.TxfCtrFsrActive"
-			/>
-
-			<v-text-field
-				v-if="statshr.TxtCtrClrAvail"
-				class="my-1"
-				readonly
-				outlined
-				v-model="continf.TxtCtrClr"
-				:label="tag.CptCtrClr"
 			/>
 
 		</v-card-text>

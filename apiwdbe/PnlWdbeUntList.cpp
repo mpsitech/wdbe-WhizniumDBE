@@ -53,9 +53,8 @@ PnlWdbeUntList::ContIac::ContIac(
 			const uint numFTos
 		) :
 			Block()
+			, numFTos(numFTos)
 		{
-	this->numFTos = numFTos;
-
 	mask = {NUMFTOS};
 };
 
@@ -133,12 +132,11 @@ PnlWdbeUntList::ContInf::ContInf(
 			, const uint numFCsiQst
 		) :
 			Block()
+			, TxtFor(TxtFor)
+			, TxtPre(TxtPre)
+			, ButFilterOn(ButFilterOn)
+			, numFCsiQst(numFCsiQst)
 		{
-	this->TxtFor = TxtFor;
-	this->TxtPre = TxtPre;
-	this->ButFilterOn = ButFilterOn;
-	this->numFCsiQst = numFCsiQst;
-
 	mask = {TXTFOR, TXTPRE, BUTFILTERON, NUMFCSIQST};
 };
 
@@ -204,10 +202,9 @@ PnlWdbeUntList::StatShr::StatShr(
 			, const bool ButDeleteActive
 		) :
 			Block()
+			, ixWdbeVExpstate(ixWdbeVExpstate)
+			, ButDeleteActive(ButDeleteActive)
 		{
-	this->ixWdbeVExpstate = ixWdbeVExpstate;
-	this->ButDeleteActive = ButDeleteActive;
-
 	mask = {IXWDBEVEXPSTATE, BUTDELETEACTIVE};
 };
 
@@ -282,18 +279,17 @@ PnlWdbeUntList::StgIac::StgIac(
 			, const uint TcoTchWidth
 		) :
 			Block()
+			, TcoSrfWidth(TcoSrfWidth)
+			, TcoTitWidth(TcoTitWidth)
+			, TcoFsrWidth(TcoFsrWidth)
+			, TcoTypWidth(TcoTypWidth)
+			, TcoRetWidth(TcoRetWidth)
+			, TcoReuWidth(TcoReuWidth)
+			, TcoMdlWidth(TcoMdlWidth)
+			, TcoPkgWidth(TcoPkgWidth)
+			, TcoEsyWidth(TcoEsyWidth)
+			, TcoTchWidth(TcoTchWidth)
 		{
-	this->TcoSrfWidth = TcoSrfWidth;
-	this->TcoTitWidth = TcoTitWidth;
-	this->TcoFsrWidth = TcoFsrWidth;
-	this->TcoTypWidth = TcoTypWidth;
-	this->TcoRetWidth = TcoRetWidth;
-	this->TcoReuWidth = TcoReuWidth;
-	this->TcoMdlWidth = TcoMdlWidth;
-	this->TcoPkgWidth = TcoPkgWidth;
-	this->TcoEsyWidth = TcoEsyWidth;
-	this->TcoTchWidth = TcoTchWidth;
-
 	mask = {TCOSRFWIDTH, TCOTITWIDTH, TCOFSRWIDTH, TCOTYPWIDTH, TCORETWIDTH, TCOREUWIDTH, TCOMDLWIDTH, TCOPKGWIDTH, TCOESYWIDTH, TCOTCHWIDTH};
 };
 
@@ -411,25 +407,24 @@ PnlWdbeUntList::Tag::Tag(
 			, const string& TcoTch
 		) :
 			Block()
+			, Cpt(Cpt)
+			, TxtFor(TxtFor)
+			, TxtRecord1(TxtRecord1)
+			, TxtRecord2(TxtRecord2)
+			, Trs(Trs)
+			, TxtShowing1(TxtShowing1)
+			, TxtShowing2(TxtShowing2)
+			, TcoSrf(TcoSrf)
+			, TcoTit(TcoTit)
+			, TcoFsr(TcoFsr)
+			, TcoTyp(TcoTyp)
+			, TcoRet(TcoRet)
+			, TcoReu(TcoReu)
+			, TcoMdl(TcoMdl)
+			, TcoPkg(TcoPkg)
+			, TcoEsy(TcoEsy)
+			, TcoTch(TcoTch)
 		{
-	this->Cpt = Cpt;
-	this->TxtFor = TxtFor;
-	this->TxtRecord1 = TxtRecord1;
-	this->TxtRecord2 = TxtRecord2;
-	this->Trs = Trs;
-	this->TxtShowing1 = TxtShowing1;
-	this->TxtShowing2 = TxtShowing2;
-	this->TcoSrf = TcoSrf;
-	this->TcoTit = TcoTit;
-	this->TcoFsr = TcoFsr;
-	this->TcoTyp = TcoTyp;
-	this->TcoRet = TcoRet;
-	this->TcoReu = TcoReu;
-	this->TcoMdl = TcoMdl;
-	this->TcoPkg = TcoPkg;
-	this->TcoEsy = TcoEsy;
-	this->TcoTch = TcoTch;
-
 	mask = {CPT, TXTFOR, TXTRECORD1, TXTRECORD2, TRS, TXTSHOWING1, TXTSHOWING2, TCOSRF, TCOTIT, TCOFSR, TCOTYP, TCORET, TCOREU, TCOMDL, TCOPKG, TCOESY, TCOTCH};
 };
 
@@ -529,11 +524,11 @@ PnlWdbeUntList::DpchAppDo::DpchAppDo(
 			, const set<uint>& mask
 		) :
 			DpchAppWdbe(VecWdbeVDpch::DPCHAPPWDBEUNTLISTDO, scrJref)
+			, ixVDo(ixVDo)
 		{
 	if (find(mask, ALL)) this->mask = {SCRJREF, IXVDO};
 	else this->mask = mask;
 
-	this->ixVDo = ixVDo;
 };
 
 string PnlWdbeUntList::DpchAppDo::getSrefsMask() {

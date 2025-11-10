@@ -14,9 +14,9 @@
 
 // IP include.cust --- INSERT
 
+#include "PnlWdbePphDetail.h"
 #include "PnlWdbePphAPar.h"
 #include "PnlWdbePphMNModule.h"
-#include "PnlWdbePphDetail.h"
 
 #define VecVWdbePphRecDo PnlWdbePphRec::VecVDo
 
@@ -177,9 +177,9 @@ public:
 	ContInf continf;
 	StatShr statshr;
 
+	PnlWdbePphDetail* pnldetail;
 	PnlWdbePphAPar* pnlapar;
 	PnlWdbePphMNModule* pnlmnmodule;
-	PnlWdbePphDetail* pnldetail;
 
 	WdbeMPeripheral recPph;
 
@@ -213,9 +213,9 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbePphUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
-	bool handleCallWdbePph_untEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
 	bool handleCallWdbePph_unt_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
+	bool handleCallWdbePph_untEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbePphUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 
 };
 

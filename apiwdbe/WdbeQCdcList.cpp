@@ -20,9 +20,10 @@ using namespace Xmlio;
 WdbeQCdcList::WdbeQCdcList(
 			const uint jnum
 			, const string stubRefWdbeMModule
-		) {
-	this->jnum = jnum;
-	this->stubRefWdbeMModule = stubRefWdbeMModule;
+		) :
+			jnum(jnum)
+			, stubRefWdbeMModule(stubRefWdbeMModule)
+		{
 };
 
 bool WdbeQCdcList::readXML(

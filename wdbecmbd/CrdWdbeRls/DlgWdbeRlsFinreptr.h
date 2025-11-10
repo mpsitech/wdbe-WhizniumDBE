@@ -416,7 +416,6 @@ public:
 		void writeXML(const Sbecore::uint ixWdbeVLocale, xmlTextWriter* wr);
 	};
 
-	bool evalButDneActive(DbsWdbe* dbswdbe);
 	bool evalFinButRunActive(DbsWdbe* dbswdbe);
 	bool evalFinButStoActive(DbsWdbe* dbswdbe);
 	bool evalResDldAvail(DbsWdbe* dbswdbe);
@@ -425,6 +424,7 @@ public:
 	bool evalResSep1Avail(DbsWdbe* dbswdbe);
 	bool evalResButPsgAvail(DbsWdbe* dbswdbe);
 	bool evalResButPsgActive(DbsWdbe* dbswdbe);
+	bool evalButDneActive(DbsWdbe* dbswdbe);
 
 public:
 	DlgWdbeRlsFinreptr(XchgWdbe* xchg, DbsWdbe* dbswdbe, const Sbecore::ubigint jrefSup, const Sbecore::uint ixWdbeVLocale);
@@ -496,8 +496,8 @@ private:
 	std::string handleDownloadInSgeDone(DbsWdbe* dbswdbe);
 
 	void handleTimerInSgeFinidle(DbsWdbe* dbswdbe, const std::string& sref);
-	void handleTimerWithSrefMonInSgePushgit(DbsWdbe* dbswdbe);
 	void handleTimerInSgePsgidle(DbsWdbe* dbswdbe, const std::string& sref);
+	void handleTimerWithSrefMonInSgePushgit(DbsWdbe* dbswdbe);
 
 private:
 	void changeStage(DbsWdbe* dbswdbe, Sbecore::uint _ixVSge, DpchEngWdbe** dpcheng = NULL);

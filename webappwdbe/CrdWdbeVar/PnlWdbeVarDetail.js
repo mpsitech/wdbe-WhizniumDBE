@@ -61,7 +61,6 @@ function initBD(bNotD) {
 	initCpt(contcontdoc, "CptMmx", retrieveTi(srcdoc, "TagWdbeVarDetail", "CptMmx"));
 	initCpt(contcontdoc, "CptOnv", retrieveTi(srcdoc, "TagWdbeVarDetail", "CptOnv"));
 	initCpt(contcontdoc, "CptOfv", retrieveTi(srcdoc, "TagWdbeVarDetail", "CptOfv"));
-	initCpt(contcontdoc, "CptDfo", retrieveTi(srcdoc, "TagWdbeVarDetail", "CptDfo"));
 	initCpt(contcontdoc, "CptCmt", retrieveTi(srcdoc, "TagWdbeVarDetail", "CptCmt"));
 	// IP initBD --- END
 
@@ -86,7 +85,7 @@ function refreshA() {
 function refreshBD(bNotD) {
 	if (!contcontdoc) return;
 
-	var height = 538; // full cont height
+	var height = 513; // full cont height
 
 	// IP refreshBD.vars --- BEGIN
 	var TxtSrfActive = (retrieveSi(srcdoc, "StatShrWdbeVarDetail", "TxtSrfActive") == "true");
@@ -118,8 +117,6 @@ function refreshBD(bNotD) {
 	var TxfOnvActive = (retrieveSi(srcdoc, "StatShrWdbeVarDetail", "TxfOnvActive") == "true");
 
 	var TxfOfvActive = (retrieveSi(srcdoc, "StatShrWdbeVarDetail", "TxfOfvActive") == "true");
-
-	var ChkDfoActive = (retrieveSi(srcdoc, "StatShrWdbeVarDetail", "ChkDfoActive") == "true");
 
 	var TxfCmtActive = (retrieveSi(srcdoc, "StatShrWdbeVarDetail", "TxfCmtActive") == "true");
 
@@ -241,8 +238,6 @@ function refreshBD(bNotD) {
 	refreshTxft(contcontdoc, "TxfOnv", retrieveCi(srcdoc, "ContIacWdbeVarDetail", "TxfOnv"), TxfOnvActive, false, true);
 
 	refreshTxft(contcontdoc, "TxfOfv", retrieveCi(srcdoc, "ContIacWdbeVarDetail", "TxfOfv"), TxfOfvActive, false, true);
-
-	refreshChk(contcontdoc, "ChkDfo", (retrieveCi(srcdoc, "ContIacWdbeVarDetail", "ChkDfo") == "true"), ChkDfoActive);
 
 	refreshTxft(contcontdoc, "TxfCmt", retrieveCi(srcdoc, "ContIacWdbeVarDetail", "TxfCmt"), TxfCmtActive, false, true);
 
@@ -524,6 +519,7 @@ function handleTxftChange(_doc, ctlsref) {
 function mergeDpchEngData(dom) {
 	var mask = [];
 
+	// IP mergeDpchEngData --- BEGIN
 	if (updateSrcblock(dom, "DpchEngWdbeVarDetailData", "ContIacWdbeVarDetail", srcdoc)) mask.push("contiac");
 	if (updateSrcblock(dom, "DpchEngWdbeVarDetailData", "ContInfWdbeVarDetail", srcdoc)) mask.push("continf");
 	if (updateSrcblock(dom, "DpchEngWdbeVarDetailData", "FeedFLstClu", srcdoc)) mask.push("feedFLstClu");
@@ -532,6 +528,7 @@ function mergeDpchEngData(dom) {
 	if (updateSrcblock(dom, "DpchEngWdbeVarDetailData", "StatAppWdbeVarDetail", srcdoc)) mask.push("statapp");
 	if (updateSrcblock(dom, "DpchEngWdbeVarDetailData", "StatShrWdbeVarDetail", srcdoc)) mask.push("statshr");
 	if (updateSrcblock(dom, "DpchEngWdbeVarDetailData", "TagWdbeVarDetail", srcdoc)) mask.push("tag");
+	// IP mergeDpchEngData --- END
 
 	return mask;
 };

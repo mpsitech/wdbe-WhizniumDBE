@@ -76,10 +76,9 @@ DlgWdbeVerGenfst::ContInf::ContInf(
 			, const string& GfsTxtPrg
 		) :
 			Block()
+			, numFSge(numFSge)
+			, GfsTxtPrg(GfsTxtPrg)
 		{
-	this->numFSge = numFSge;
-	this->GfsTxtPrg = GfsTxtPrg;
-
 	mask = {NUMFSGE, GFSTXTPRG};
 };
 
@@ -140,9 +139,8 @@ DlgWdbeVerGenfst::StatApp::StatApp(
 			const string& shortMenu
 		) :
 			Block()
+			, shortMenu(shortMenu)
 		{
-	this->shortMenu = shortMenu;
-
 	mask = {SHORTMENU};
 };
 
@@ -203,11 +201,10 @@ DlgWdbeVerGenfst::StatShr::StatShr(
 			, const bool ButDneActive
 		) :
 			Block()
+			, GfsButRunActive(GfsButRunActive)
+			, GfsButStoActive(GfsButStoActive)
+			, ButDneActive(ButDneActive)
 		{
-	this->GfsButRunActive = GfsButRunActive;
-	this->GfsButStoActive = GfsButStoActive;
-	this->ButDneActive = ButDneActive;
-
 	mask = {GFSBUTRUNACTIVE, GFSBUTSTOACTIVE, BUTDNEACTIVE};
 };
 
@@ -274,13 +271,12 @@ DlgWdbeVerGenfst::Tag::Tag(
 			, const string& ButDne
 		) :
 			Block()
+			, Cpt(Cpt)
+			, GfsCptPrg(GfsCptPrg)
+			, GfsButRun(GfsButRun)
+			, GfsButSto(GfsButSto)
+			, ButDne(ButDne)
 		{
-	this->Cpt = Cpt;
-	this->GfsCptPrg = GfsCptPrg;
-	this->GfsButRun = GfsButRun;
-	this->GfsButSto = GfsButSto;
-	this->ButDne = ButDne;
-
 	mask = {CPT, GFSCPTPRG, GFSBUTRUN, GFSBUTSTO, BUTDNE};
 };
 
@@ -321,11 +317,11 @@ DlgWdbeVerGenfst::DpchAppDo::DpchAppDo(
 			, const set<uint>& mask
 		) :
 			DpchAppWdbe(VecWdbeVDpch::DPCHAPPDLGWDBEVERGENFSTDO, scrJref)
+			, ixVDo(ixVDo)
 		{
 	if (find(mask, ALL)) this->mask = {SCRJREF, IXVDO};
 	else this->mask = mask;
 
-	this->ixVDo = ixVDo;
 };
 
 string DlgWdbeVerGenfst::DpchAppDo::getSrefsMask() {

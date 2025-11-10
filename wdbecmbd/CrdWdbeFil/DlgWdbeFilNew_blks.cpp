@@ -145,9 +145,8 @@ DlgWdbeFilNew::ContIac::ContIac(
 			const uint numFDse
 		) :
 			Block()
+			, numFDse(numFDse)
 		{
-	this->numFDse = numFDse;
-
 	mask = {NUMFDSE};
 };
 
@@ -257,14 +256,13 @@ DlgWdbeFilNew::ContIacDet::ContIacDet(
 			, const string& TxfCmt
 		) :
 			Block()
+			, TxfFnm(TxfFnm)
+			, numFPupRet(numFPupRet)
+			, TxfReu(TxfReu)
+			, numFPupCnt(numFPupCnt)
+			, numFPupMim(numFPupMim)
+			, TxfCmt(TxfCmt)
 		{
-	this->TxfFnm = TxfFnm;
-	this->numFPupRet = numFPupRet;
-	this->TxfReu = TxfReu;
-	this->numFPupCnt = numFPupCnt;
-	this->numFPupMim = numFPupMim;
-	this->TxfCmt = TxfCmt;
-
 	mask = {TXFFNM, NUMFPUPRET, TXFREU, NUMFPUPCNT, NUMFPUPMIM, TXFCMT};
 };
 
@@ -394,9 +392,8 @@ DlgWdbeFilNew::ContInf::ContInf(
 			const uint numFSge
 		) :
 			Block()
+			, numFSge(numFSge)
 		{
-	this->numFSge = numFSge;
-
 	mask = {NUMFSGE};
 };
 
@@ -496,9 +493,8 @@ DlgWdbeFilNew::StatShr::StatShr(
 			const bool ButDneActive
 		) :
 			Block()
+			, ButDneActive(ButDneActive)
 		{
-	this->ButDneActive = ButDneActive;
-
 	mask = {BUTDNEACTIVE};
 };
 
@@ -561,9 +557,8 @@ DlgWdbeFilNew::StatShrDet::StatShrDet(
 			const bool ButCreActive
 		) :
 			Block()
+			, ButCreActive(ButCreActive)
 		{
-	this->ButCreActive = ButCreActive;
-
 	mask = {BUTCREACTIVE};
 };
 
@@ -626,9 +621,8 @@ DlgWdbeFilNew::StatShrFil::StatShrFil(
 			const bool UldActive
 		) :
 			Block()
+			, UldActive(UldActive)
 		{
-	this->UldActive = UldActive;
-
 	mask = {ULDACTIVE};
 };
 

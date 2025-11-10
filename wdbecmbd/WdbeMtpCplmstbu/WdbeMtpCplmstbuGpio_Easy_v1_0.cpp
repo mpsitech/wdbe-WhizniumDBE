@@ -1,6 +1,6 @@
 /**
 	* \file WdbeMtpCplmstbuGpio_Easy_v1_0.cpp
-	* Wdbe operation processor - adapt port widths, connect tri-state primitives (implementation)
+	* Wdbe operation processor - adapt port widths and commands (implementation)
 	* \copyright (C) 2016-2020 MPSI Technologies GmbH
 	* \author Alexander Wirthmueller (auto-generation)
 	* \date created: 7 Jun 2022
@@ -36,53 +36,87 @@ DpchRetWdbe* WdbeMtpCplmstbuGpio_Easy_v1_0::run(
 	utinyint ixOpVOpres = VecOpVOpres::SUCCESS;
 
 	// IP run --- IBEGIN
-	unsigned int w = 32;
-
-	vector<ubigint> refsSubmdls;
-	string srefIobuf;
+	WdbeMModule* mdl = NULL;
 
 	string s;
 
+	unsigned int w = 32;
+	bool threeNotInout = false;
+	bool bidirNotUnidir = false;
+	bool inNotOut = false;
+
+	bool cmdConfig, cmdGet, cmdSet;
+	uint ixWdbeVPartype = VecWdbeVPartype::UINT32;
+
+	ubigint ref, refC;
+
 	if (Wdbe::getMpa(dbswdbe, refWdbeMModule, "w", s)) w = atoi(s.c_str());
+	if (Wdbe::getMpa(dbswdbe, refWdbeMModule, "threeNotInout", s)) threeNotInout = (s == "true");
+	if (Wdbe::getMpa(dbswdbe, refWdbeMModule, "bidirNotUnidir", s)) bidirNotUnidir = (s == "true");
+	if (Wdbe::getMpa(dbswdbe, refWdbeMModule, "inNotOut", s)) inNotOut = (s == "true");
 
-	dbswdbe->loadRefsBySQL("SELECT ref FROM TblWdbeMModule WHERE supRefWdbeMModule = " + to_string(refWdbeMModule) + " ORDER BY ref ASC", false, refsSubmdls); // to ensure correct numerical order
-	if (refsSubmdls.size() > 0) {
-		dbswdbe->loadStringBySQL("SELECT sref FROM TblWdbeMModule WHERE ref = " + to_string(refsSubmdls[0]), srefIobuf);
-		srefIobuf = srefIobuf.substr(0, srefIobuf.length() - 1);
-	};
+	cmdConfig = bidirNotUnidir;
+	cmdGet = !(!bidirNotUnidir && !inNotOut);
+	cmdSet = !(!bidirNotUnidir && inNotOut);
 
-	// - port widths
-	if (refsSubmdls.size() > 0) {
-		Wdbe::setPrtWdt(dbswdbe, refWdbeMModule, "bitsIo", w);
+	if (w == 8) ixWdbeVPartype = VecWdbeVPartype::UINT8;
+	else if (w == 16) ixWdbeVPartype = VecWdbeVPartype::UINT16;
 
-	} else {
-		Wdbe::setPrtWdt(dbswdbe, refWdbeMModule, "bitsIn", w);
-		Wdbe::setPrtWdt(dbswdbe, refWdbeMModule, "bitsOut", w);
-		Wdbe::setPrtWdt(dbswdbe, refWdbeMModule, "bitsDir", w);
-	};
+	if (dbswdbe->tblwdbemmodule->loadRecByRef(refWdbeMModule, &mdl)) {
+		// - ports
+		if (!threeNotInout && bidirNotUnidir) {
+			refC = 0; dbswdbe->loadRefBySQL("SELECT refWdbeCPort FROM TblWdbeMPort WHERE mdlRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'bits_in'", refC);
+			if (refC != 0) dbswdbe->executeQuery("DELETE FROM TblWdbeMPort WHERE refWdbeCPort = " + to_string(refC));
 
-	// - sub-module wiring
-	if (srefIobuf == "bb")
-		for (unsigned int i = 0; i < refsSubmdls.size(); i++) {
-			Wdbe::setPrtCsi(dbswdbe, refsSubmdls[i], "O", "bitsIn_sig[" + to_string(i) + "]");
-			Wdbe::setPrtCpr(dbswdbe, refsSubmdls[i], "B", "bitsIo[" + to_string(i) + "]");
-			Wdbe::setPrtCsi(dbswdbe, refsSubmdls[i], "I", "bitsOut_sig[" + to_string(i) + "]");
-			Wdbe::setPrtCsi(dbswdbe, refsSubmdls[i], "T", "bitsDirn_sig[" + to_string(i) + "]");
-		}
-	else if (srefIobuf == "bibuf")
-		for (unsigned int i = 0; i < refsSubmdls.size(); i++) {
-			Wdbe::setPrtCsi(dbswdbe, refsSubmdls[i], "Y", "bitsIn_sig[" + to_string(i) + "]");
-			Wdbe::setPrtCpr(dbswdbe, refsSubmdls[i], "PAD", "bitsIo[" + to_string(i) + "]");
-			Wdbe::setPrtCsi(dbswdbe, refsSubmdls[i], "D", "bitsOut_sig[" + to_string(i) + "]");
-			Wdbe::setPrtCsi(dbswdbe, refsSubmdls[i], "E", "bitsDir_sig[" + to_string(i) + "]");
-		}
-	else if (srefIobuf == "iobuf")
-		for (unsigned int i = 0; i < refsSubmdls.size(); i++) {
-			Wdbe::setPrtCsi(dbswdbe, refsSubmdls[i], "O", "bitsIn_sig[" + to_string(i) + "]");
-			Wdbe::setPrtCpr(dbswdbe, refsSubmdls[i], "IO", "bitsIo[" + to_string(i) + "]");
-			Wdbe::setPrtCsi(dbswdbe, refsSubmdls[i], "I", "bitsOut_sig[" + to_string(i) + "]");
-			Wdbe::setPrtCsi(dbswdbe, refsSubmdls[i], "T", "bitsDirn_sig[" + to_string(i) + "]");
+			Wdbe::setPrtWdt(dbswdbe, refWdbeMModule, "bits", w);
+
+		} else {
+			dbswdbe->executeQuery("DELETE FROM TblWdbeMPort WHERE mdlRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'bits'");
+
+			if (!bidirNotUnidir && !inNotOut) dbswdbe->executeQuery("DELETE FROM TblWdbeMPort WHERE mdlRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'bits_in'");
+			else Wdbe::setPrtWdt(dbswdbe, refWdbeMModule, "bits_in", w);
+
+			if (!bidirNotUnidir && inNotOut) dbswdbe->executeQuery("DELETE FROM TblWdbeMPort WHERE mdlRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'bits_out'");
+			else Wdbe::setPrtWdt(dbswdbe, refWdbeMModule, "bits_out", w);
+
+			if (!bidirNotUnidir) dbswdbe->executeQuery("DELETE FROM TblWdbeMPort WHERE mdlRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'bits_tri'");
+			else Wdbe::setPrtWdt(dbswdbe, refWdbeMModule, "bits_tri", w);
 		};
+
+		// - commands
+		if (dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMCommand WHERE refIxVTbl = " + to_string(VecWdbeVMCommandRefTbl::CTR) + " AND refUref = " + to_string(mdl->refWdbeMController) + " AND sref = 'config'", ref)) {
+			if (cmdConfig) {
+				dbswdbe->executeQuery("UPDATE TblWdbeAMCommandInvpar SET ixWdbeVPartype = " + to_string(ixWdbeVPartype) + " WHERE cmdRefWdbeMCommand = " + to_string(ref) + " AND sref = 'outmask'");
+
+			} else {
+				dbswdbe->executeQuery("DELETE FROM TblWdbeAMCommandInvpar WHERE cmdRefWdbeMCommand = " + to_string(ref));
+				dbswdbe->tblwdbemcommand->removeRecByRef(ref);
+			};
+		};
+
+		if (dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMCommand WHERE refIxVTbl = " + to_string(VecWdbeVMCommandRefTbl::CTR) + " AND refUref = " + to_string(mdl->refWdbeMController) + " AND sref = 'get'", ref)) {
+			if (cmdGet) {
+				dbswdbe->executeQuery("UPDATE TblWdbeAMCommandRetpar SET ixWdbeVPartype = " + to_string(ixWdbeVPartype) + " WHERE cmdRefWdbeMCommand = " + to_string(ref) + " AND sref = 'bits'");
+
+			} else {
+				dbswdbe->executeQuery("DELETE FROM TblWdbeAMCommandRetpar WHERE cmdRefWdbeMCommand = " + to_string(ref));
+				dbswdbe->tblwdbemcommand->removeRecByRef(ref);
+			};
+		};
+
+		if (dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMCommand WHERE refIxVTbl = " + to_string(VecWdbeVMCommandRefTbl::CTR) + " AND refUref = " + to_string(mdl->refWdbeMController) + " AND sref = 'set'", ref)) {
+			if (cmdSet) {
+				dbswdbe->executeQuery("UPDATE TblWdbeAMCommandInvpar SET ixWdbeVPartype = " + to_string(ixWdbeVPartype) + " WHERE cmdRefWdbeMCommand = " + to_string(ref) + " AND sref = 'mask'");
+				dbswdbe->executeQuery("UPDATE TblWdbeAMCommandInvpar SET ixWdbeVPartype = " + to_string(ixWdbeVPartype) + " WHERE cmdRefWdbeMCommand = " + to_string(ref) + " AND sref = 'bits'");
+
+			} else {
+				dbswdbe->executeQuery("DELETE FROM TblWdbeAMCommandInvpar WHERE cmdRefWdbeMCommand = " + to_string(ref));
+				dbswdbe->tblwdbemcommand->removeRecByRef(ref);
+			};
+		};
+
+		delete mdl;
+	};
 	// IP run --- IEND
 
 	return(new DpchRetWdbe(VecWdbeVDpch::DPCHRETWDBE, "", "", ixOpVOpres, 100));

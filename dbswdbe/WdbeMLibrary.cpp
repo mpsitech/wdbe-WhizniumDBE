@@ -23,14 +23,14 @@ WdbeMLibrary::WdbeMLibrary(
 			, const string Version
 			, const string depSrefsWdbeMLibrary
 			, const string Comment
-		) {
-
-	this->ref = ref;
-	this->sref = sref;
-	this->Title = Title;
-	this->Version = Version;
-	this->depSrefsWdbeMLibrary = depSrefsWdbeMLibrary;
-	this->Comment = Comment;
+		) :
+			ref(ref)
+			, sref(sref)
+			, Title(Title)
+			, Version(Version)
+			, depSrefsWdbeMLibrary(depSrefsWdbeMLibrary)
+			, Comment(Comment)
+		{
 };
 
 bool WdbeMLibrary::operator==(

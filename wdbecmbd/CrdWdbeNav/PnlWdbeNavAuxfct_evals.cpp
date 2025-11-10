@@ -11,6 +11,20 @@ using namespace std;
 using namespace Sbecore;
 using namespace Xmlio;
 
+bool PnlWdbeNavAuxfct::evalButIdfNewcrdAvail(
+			DbsWdbe* dbswdbe
+		) {
+	// pre.ixCrdaccIdf()
+
+	vector<bool> args;
+	bool a;
+
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCIDF, jref) != 0);
+	args.push_back(a);
+
+	return(args.back());
+};
+
 bool PnlWdbeNavAuxfct::evalButUtlNewcrdAvail(
 			DbsWdbe* dbswdbe
 		) {

@@ -43,9 +43,8 @@ PnlWdbePrcRec::ContInf::ContInf(
 			const string& TxtRef
 		) :
 			Block()
+			, TxtRef(TxtRef)
 		{
-	this->TxtRef = TxtRef;
-
 	mask = {TXTREF};
 };
 
@@ -109,9 +108,9 @@ void PnlWdbePrcRec::StatApp::writeJSON(
 			, string difftag
 			, const bool initdoneDetail
 			, const bool initdoneKHdltype
-			, const bool initdoneRef1NSensitivity
-			, const bool initdoneRef1NVariable
 			, const bool initdoneMge1NSignal
+			, const bool initdoneRef1NVariable
+			, const bool initdoneRef1NSensitivity
 			, const bool initdoneFsmFsm1NFsmstate
 			, const bool initdoneFsmHk1NVector
 		) {
@@ -121,9 +120,9 @@ void PnlWdbePrcRec::StatApp::writeJSON(
 
 	me["initdoneDetail"] = initdoneDetail;
 	me["initdoneKHdltype"] = initdoneKHdltype;
-	me["initdoneRef1NSensitivity"] = initdoneRef1NSensitivity;
-	me["initdoneRef1NVariable"] = initdoneRef1NVariable;
 	me["initdoneMge1NSignal"] = initdoneMge1NSignal;
+	me["initdoneRef1NVariable"] = initdoneRef1NVariable;
+	me["initdoneRef1NSensitivity"] = initdoneRef1NSensitivity;
 	me["initdoneFsmFsm1NFsmstate"] = initdoneFsmFsm1NFsmstate;
 	me["initdoneFsmHk1NVector"] = initdoneFsmHk1NVector;
 };
@@ -134,9 +133,9 @@ void PnlWdbePrcRec::StatApp::writeXML(
 			, bool shorttags
 			, const bool initdoneDetail
 			, const bool initdoneKHdltype
-			, const bool initdoneRef1NSensitivity
-			, const bool initdoneRef1NVariable
 			, const bool initdoneMge1NSignal
+			, const bool initdoneRef1NVariable
+			, const bool initdoneRef1NSensitivity
 			, const bool initdoneFsmFsm1NFsmstate
 			, const bool initdoneFsmHk1NVector
 		) {
@@ -149,9 +148,9 @@ void PnlWdbePrcRec::StatApp::writeXML(
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
 		writeBoolAttr(wr, itemtag, "sref", "initdoneDetail", initdoneDetail);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneKHdltype", initdoneKHdltype);
-		writeBoolAttr(wr, itemtag, "sref", "initdoneRef1NSensitivity", initdoneRef1NSensitivity);
-		writeBoolAttr(wr, itemtag, "sref", "initdoneRef1NVariable", initdoneRef1NVariable);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneMge1NSignal", initdoneMge1NSignal);
+		writeBoolAttr(wr, itemtag, "sref", "initdoneRef1NVariable", initdoneRef1NVariable);
+		writeBoolAttr(wr, itemtag, "sref", "initdoneRef1NSensitivity", initdoneRef1NSensitivity);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneFsmFsm1NFsmstate", initdoneFsmFsm1NFsmstate);
 		writeBoolAttr(wr, itemtag, "sref", "initdoneFsmHk1NVector", initdoneFsmHk1NVector);
 	xmlTextWriterEndElement(wr);
@@ -165,9 +164,9 @@ PnlWdbePrcRec::StatShr::StatShr(
 			const uint ixWdbeVExpstate
 			, const ubigint jrefDetail
 			, const ubigint jrefKHdltype
-			, const ubigint jrefRef1NSensitivity
-			, const ubigint jrefRef1NVariable
 			, const ubigint jrefMge1NSignal
+			, const ubigint jrefRef1NVariable
+			, const ubigint jrefRef1NSensitivity
 			, const ubigint jrefFsmFsm1NFsmstate
 			, const bool pnlfsmfsm1nfsmstateAvail
 			, const ubigint jrefFsmHk1NVector
@@ -175,20 +174,19 @@ PnlWdbePrcRec::StatShr::StatShr(
 			, const bool ButRegularizeActive
 		) :
 			Block()
+			, ixWdbeVExpstate(ixWdbeVExpstate)
+			, jrefDetail(jrefDetail)
+			, jrefKHdltype(jrefKHdltype)
+			, jrefMge1NSignal(jrefMge1NSignal)
+			, jrefRef1NVariable(jrefRef1NVariable)
+			, jrefRef1NSensitivity(jrefRef1NSensitivity)
+			, jrefFsmFsm1NFsmstate(jrefFsmFsm1NFsmstate)
+			, pnlfsmfsm1nfsmstateAvail(pnlfsmfsm1nfsmstateAvail)
+			, jrefFsmHk1NVector(jrefFsmHk1NVector)
+			, pnlfsmhk1nvectorAvail(pnlfsmhk1nvectorAvail)
+			, ButRegularizeActive(ButRegularizeActive)
 		{
-	this->ixWdbeVExpstate = ixWdbeVExpstate;
-	this->jrefDetail = jrefDetail;
-	this->jrefKHdltype = jrefKHdltype;
-	this->jrefRef1NSensitivity = jrefRef1NSensitivity;
-	this->jrefRef1NVariable = jrefRef1NVariable;
-	this->jrefMge1NSignal = jrefMge1NSignal;
-	this->jrefFsmFsm1NFsmstate = jrefFsmFsm1NFsmstate;
-	this->pnlfsmfsm1nfsmstateAvail = pnlfsmfsm1nfsmstateAvail;
-	this->jrefFsmHk1NVector = jrefFsmHk1NVector;
-	this->pnlfsmhk1nvectorAvail = pnlfsmhk1nvectorAvail;
-	this->ButRegularizeActive = ButRegularizeActive;
-
-	mask = {IXWDBEVEXPSTATE, JREFDETAIL, JREFKHDLTYPE, JREFREF1NSENSITIVITY, JREFREF1NVARIABLE, JREFMGE1NSIGNAL, JREFFSMFSM1NFSMSTATE, PNLFSMFSM1NFSMSTATEAVAIL, JREFFSMHK1NVECTOR, PNLFSMHK1NVECTORAVAIL, BUTREGULARIZEACTIVE};
+	mask = {IXWDBEVEXPSTATE, JREFDETAIL, JREFKHDLTYPE, JREFMGE1NSIGNAL, JREFREF1NVARIABLE, JREFREF1NSENSITIVITY, JREFFSMFSM1NFSMSTATE, PNLFSMFSM1NFSMSTATEAVAIL, JREFFSMHK1NVECTOR, PNLFSMHK1NVECTORAVAIL, BUTREGULARIZEACTIVE};
 };
 
 void PnlWdbePrcRec::StatShr::writeJSON(
@@ -202,9 +200,9 @@ void PnlWdbePrcRec::StatShr::writeJSON(
 	me["srefIxWdbeVExpstate"] = VecWdbeVExpstate::getSref(ixWdbeVExpstate);
 	me["scrJrefDetail"] = Scr::scramble(jrefDetail);
 	me["scrJrefKHdltype"] = Scr::scramble(jrefKHdltype);
-	me["scrJrefRef1NSensitivity"] = Scr::scramble(jrefRef1NSensitivity);
-	me["scrJrefRef1NVariable"] = Scr::scramble(jrefRef1NVariable);
 	me["scrJrefMge1NSignal"] = Scr::scramble(jrefMge1NSignal);
+	me["scrJrefRef1NVariable"] = Scr::scramble(jrefRef1NVariable);
+	me["scrJrefRef1NSensitivity"] = Scr::scramble(jrefRef1NSensitivity);
 	me["scrJrefFsmFsm1NFsmstate"] = Scr::scramble(jrefFsmFsm1NFsmstate);
 	me["pnlfsmfsm1nfsmstateAvail"] = pnlfsmfsm1nfsmstateAvail;
 	me["scrJrefFsmHk1NVector"] = Scr::scramble(jrefFsmHk1NVector);
@@ -227,9 +225,9 @@ void PnlWdbePrcRec::StatShr::writeXML(
 		writeStringAttr(wr, itemtag, "sref", "srefIxWdbeVExpstate", VecWdbeVExpstate::getSref(ixWdbeVExpstate));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefDetail", Scr::scramble(jrefDetail));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefKHdltype", Scr::scramble(jrefKHdltype));
-		writeStringAttr(wr, itemtag, "sref", "scrJrefRef1NSensitivity", Scr::scramble(jrefRef1NSensitivity));
-		writeStringAttr(wr, itemtag, "sref", "scrJrefRef1NVariable", Scr::scramble(jrefRef1NVariable));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefMge1NSignal", Scr::scramble(jrefMge1NSignal));
+		writeStringAttr(wr, itemtag, "sref", "scrJrefRef1NVariable", Scr::scramble(jrefRef1NVariable));
+		writeStringAttr(wr, itemtag, "sref", "scrJrefRef1NSensitivity", Scr::scramble(jrefRef1NSensitivity));
 		writeStringAttr(wr, itemtag, "sref", "scrJrefFsmFsm1NFsmstate", Scr::scramble(jrefFsmFsm1NFsmstate));
 		writeBoolAttr(wr, itemtag, "sref", "pnlfsmfsm1nfsmstateAvail", pnlfsmfsm1nfsmstateAvail);
 		writeStringAttr(wr, itemtag, "sref", "scrJrefFsmHk1NVector", Scr::scramble(jrefFsmHk1NVector));
@@ -246,9 +244,9 @@ set<uint> PnlWdbePrcRec::StatShr::comm(
 	if (ixWdbeVExpstate == comp->ixWdbeVExpstate) insert(items, IXWDBEVEXPSTATE);
 	if (jrefDetail == comp->jrefDetail) insert(items, JREFDETAIL);
 	if (jrefKHdltype == comp->jrefKHdltype) insert(items, JREFKHDLTYPE);
-	if (jrefRef1NSensitivity == comp->jrefRef1NSensitivity) insert(items, JREFREF1NSENSITIVITY);
-	if (jrefRef1NVariable == comp->jrefRef1NVariable) insert(items, JREFREF1NVARIABLE);
 	if (jrefMge1NSignal == comp->jrefMge1NSignal) insert(items, JREFMGE1NSIGNAL);
+	if (jrefRef1NVariable == comp->jrefRef1NVariable) insert(items, JREFREF1NVARIABLE);
+	if (jrefRef1NSensitivity == comp->jrefRef1NSensitivity) insert(items, JREFREF1NSENSITIVITY);
 	if (jrefFsmFsm1NFsmstate == comp->jrefFsmFsm1NFsmstate) insert(items, JREFFSMFSM1NFSMSTATE);
 	if (pnlfsmfsm1nfsmstateAvail == comp->pnlfsmfsm1nfsmstateAvail) insert(items, PNLFSMFSM1NFSMSTATEAVAIL);
 	if (jrefFsmHk1NVector == comp->jrefFsmHk1NVector) insert(items, JREFFSMHK1NVECTOR);
@@ -266,7 +264,7 @@ set<uint> PnlWdbePrcRec::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {IXWDBEVEXPSTATE, JREFDETAIL, JREFKHDLTYPE, JREFREF1NSENSITIVITY, JREFREF1NVARIABLE, JREFMGE1NSIGNAL, JREFFSMFSM1NFSMSTATE, PNLFSMFSM1NFSMSTATEAVAIL, JREFFSMHK1NVECTOR, PNLFSMHK1NVECTORAVAIL, BUTREGULARIZEACTIVE};
+	diffitems = {IXWDBEVEXPSTATE, JREFDETAIL, JREFKHDLTYPE, JREFMGE1NSIGNAL, JREFREF1NVARIABLE, JREFREF1NSENSITIVITY, JREFFSMFSM1NFSMSTATE, PNLFSMFSM1NFSMSTATEAVAIL, JREFFSMHK1NVECTOR, PNLFSMHK1NVECTORAVAIL, BUTREGULARIZEACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);

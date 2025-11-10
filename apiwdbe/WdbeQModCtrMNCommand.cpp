@@ -22,11 +22,12 @@ WdbeQModCtrMNCommand::WdbeQModCtrMNCommand(
 			, const string stubMref
 			, const string stubIvrRefWdbeMSignal
 			, const string stubRvrRefWdbeMSignal
-		) {
-	this->jnum = jnum;
-	this->stubMref = stubMref;
-	this->stubIvrRefWdbeMSignal = stubIvrRefWdbeMSignal;
-	this->stubRvrRefWdbeMSignal = stubRvrRefWdbeMSignal;
+		) :
+			jnum(jnum)
+			, stubMref(stubMref)
+			, stubIvrRefWdbeMSignal(stubIvrRefWdbeMSignal)
+			, stubRvrRefWdbeMSignal(stubRvrRefWdbeMSignal)
+		{
 };
 
 bool WdbeQModCtrMNCommand::readXML(

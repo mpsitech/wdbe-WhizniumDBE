@@ -22,11 +22,12 @@ WdbeQFamList::WdbeQFamList(
 			, const string srefWdbeKVendor
 			, const string titSrefWdbeKVendor
 			, const string Title
-		) {
-	this->jnum = jnum;
-	this->srefWdbeKVendor = srefWdbeKVendor;
-	this->titSrefWdbeKVendor = titSrefWdbeKVendor;
-	this->Title = Title;
+		) :
+			jnum(jnum)
+			, srefWdbeKVendor(srefWdbeKVendor)
+			, titSrefWdbeKVendor(titSrefWdbeKVendor)
+			, Title(Title)
+		{
 };
 
 bool WdbeQFamList::readXML(

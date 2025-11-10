@@ -5543,7 +5543,6 @@ IexWdbeDcd::ImeitemIMVariable::ImeitemIMVariable(
 			, const string& Minmax
 			, const string& Onval
 			, const string& Offval
-			, const bool Defon
 			, const string& Comment
 		) : WdbeMVariable() {
 	lineno = 0;
@@ -5558,7 +5557,6 @@ IexWdbeDcd::ImeitemIMVariable::ImeitemIMVariable(
 	this->Minmax = Minmax;
 	this->Onval = Onval;
 	this->Offval = Offval;
-	this->Defon = Defon;
 	this->Comment = Comment;
 };
 
@@ -5585,7 +5583,6 @@ IexWdbeDcd::ImeitemIMVariable::ImeitemIMVariable(
 		Minmax = rec->Minmax;
 		Onval = rec->Onval;
 		Offval = rec->Offval;
-		Defon = rec->Defon;
 		Comment = rec->Comment;
 
 		delete rec;
@@ -5606,8 +5603,7 @@ void IexWdbeDcd::ImeitemIMVariable::readTxt(
 	if (txtrd.fields.size() > 6) {Minmax = txtrd.fields[6]; ixWIelValid += ImeIMVariable::VecWIel::MINMAX;};
 	if (txtrd.fields.size() > 7) {Onval = txtrd.fields[7]; ixWIelValid += ImeIMVariable::VecWIel::ONVAL;};
 	if (txtrd.fields.size() > 8) {Offval = txtrd.fields[8]; ixWIelValid += ImeIMVariable::VecWIel::OFFVAL;};
-	if (txtrd.fields.size() > 9) {Defon = (txtrd.fields[9] == "true"); ixWIelValid += ImeIMVariable::VecWIel::DEFON;};
-	if (txtrd.fields.size() > 10) {Comment = txtrd.fields[10]; ixWIelValid += ImeIMVariable::VecWIel::COMMENT;};
+	if (txtrd.fields.size() > 9) {Comment = txtrd.fields[9]; ixWIelValid += ImeIMVariable::VecWIel::COMMENT;};
 
 	while (txtrd.readLine()) {
 		switch (txtrd.ixVLinetype) {
@@ -5640,7 +5636,6 @@ void IexWdbeDcd::ImeitemIMVariable::readXML(
 		if (extractStringUclc(docctx, basexpath, "Minmax", "mmx", Minmax)) ixWIelValid += ImeIMVariable::VecWIel::MINMAX;
 		if (extractStringUclc(docctx, basexpath, "Onval", "onv", Onval)) ixWIelValid += ImeIMVariable::VecWIel::ONVAL;
 		if (extractStringUclc(docctx, basexpath, "Offval", "ofv", Offval)) ixWIelValid += ImeIMVariable::VecWIel::OFFVAL;
-		if (extractBoolUclc(docctx, basexpath, "Defon", "dfo", Defon)) ixWIelValid += ImeIMVariable::VecWIel::DEFON;
 		if (extractStringUclc(docctx, basexpath, "Comment", "cmt", Comment)) ixWIelValid += ImeIMVariable::VecWIel::COMMENT;
 	};
 };
@@ -5648,7 +5643,7 @@ void IexWdbeDcd::ImeitemIMVariable::readXML(
 void IexWdbeDcd::ImeitemIMVariable::writeTxt(
 			fstream& outfile
 		) {
-	outfile << "\t\t" << irefRefWdbeCVariable << "\t" << sref << "\t" << StrMod::boolToString(Const) << "\t" << StrMod::boolToString(Falling) << "\t" << srefWdbeKHdltype << "\t" << Width << "\t" << Minmax << "\t" << Onval << "\t" << Offval << "\t" << StrMod::boolToString(Defon) << "\t" << Comment << endl;
+	outfile << "\t\t" << irefRefWdbeCVariable << "\t" << sref << "\t" << StrMod::boolToString(Const) << "\t" << StrMod::boolToString(Falling) << "\t" << srefWdbeKHdltype << "\t" << Width << "\t" << Minmax << "\t" << Onval << "\t" << Offval << "\t" << Comment << endl;
 };
 
 void IexWdbeDcd::ImeitemIMVariable::writeXML(
@@ -5657,8 +5652,8 @@ void IexWdbeDcd::ImeitemIMVariable::writeXML(
 			, const bool shorttags
 		) {
 	vector<string> tags;
-	if (shorttags) tags = {"Ii","clu","srf","con","fal","hty","wid","mmx","onv","ofv","dfo","cmt"};
-	else tags = {"ImeitemIMVariable","irefRefWdbeCVariable","sref","Const","Falling","srefWdbeKHdltype","Width","Minmax","Onval","Offval","Defon","Comment"};
+	if (shorttags) tags = {"Ii","clu","srf","con","fal","hty","wid","mmx","onv","ofv","cmt"};
+	else tags = {"ImeitemIMVariable","irefRefWdbeCVariable","sref","Const","Falling","srefWdbeKHdltype","Width","Minmax","Onval","Offval","Comment"};
 
 	xmlTextWriterStartElement(wr, BAD_CAST tags[0].c_str());
 		xmlTextWriterWriteAttribute(wr, BAD_CAST "num", BAD_CAST to_string(num).c_str());
@@ -5671,8 +5666,7 @@ void IexWdbeDcd::ImeitemIMVariable::writeXML(
 		writeString(wr, tags[7], Minmax);
 		writeString(wr, tags[8], Onval);
 		writeString(wr, tags[9], Offval);
-		writeBool(wr, tags[10], Defon);
-		writeString(wr, tags[11], Comment);
+		writeString(wr, tags[10], Comment);
 	xmlTextWriterEndElement(wr);
 };
 
@@ -5698,7 +5692,6 @@ uint IexWdbeDcd::ImeIMVariable::VecWIel::getIx(
 		else if (ss[i] == "minmax") ix |= MINMAX;
 		else if (ss[i] == "onval") ix |= ONVAL;
 		else if (ss[i] == "offval") ix |= OFFVAL;
-		else if (ss[i] == "defon") ix |= DEFON;
 		else if (ss[i] == "comment") ix |= COMMENT;
 	};
 
@@ -5728,7 +5721,6 @@ string IexWdbeDcd::ImeIMVariable::VecWIel::getSrefs(
 	if (ix & MINMAX) ss.push_back("Minmax");
 	if (ix & ONVAL) ss.push_back("Onval");
 	if (ix & OFFVAL) ss.push_back("Offval");
-	if (ix & DEFON) ss.push_back("Defon");
 	if (ix & COMMENT) ss.push_back("Comment");
 
 	StrMod::vectorToString(ss, srefs);
@@ -5826,7 +5818,7 @@ void IexWdbeDcd::ImeIMVariable::writeTxt(
 			fstream& outfile
 		) {
 	if (nodes.size() > 0) {
-		outfile << "\t\tImeIMVariable." << StrMod::replaceChar(ImeIMVariable::VecWIel::getSrefs(2047), ';', '\t') << endl;
+		outfile << "\t\tImeIMVariable." << StrMod::replaceChar(ImeIMVariable::VecWIel::getSrefs(1023), ';', '\t') << endl;
 		for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeTxt(outfile);
 		outfile << "\t\tImeIMVariable.end" << endl;
 	};
@@ -6174,7 +6166,6 @@ IexWdbeDcd::ImeitemIMSignal::ImeitemIMSignal(
 			, const string& Comb
 			, const string& Onval
 			, const string& Offval
-			, const bool Defon
 			, const string& srefDrvRefWdbeMPort
 			, const string& Comment
 		) : WdbeMSignal() {
@@ -6193,7 +6184,6 @@ IexWdbeDcd::ImeitemIMSignal::ImeitemIMSignal(
 	this->Comb = Comb;
 	this->Onval = Onval;
 	this->Offval = Offval;
-	this->Defon = Defon;
 	this->srefDrvRefWdbeMPort = srefDrvRefWdbeMPort;
 	this->Comment = Comment;
 };
@@ -6224,7 +6214,6 @@ IexWdbeDcd::ImeitemIMSignal::ImeitemIMSignal(
 		Comb = rec->Comb;
 		Onval = rec->Onval;
 		Offval = rec->Offval;
-		Defon = rec->Defon;
 		drvRefWdbeMPort = rec->drvRefWdbeMPort;
 		Comment = rec->Comment;
 
@@ -6249,9 +6238,8 @@ void IexWdbeDcd::ImeitemIMSignal::readTxt(
 	if (txtrd.fields.size() > 9) {Comb = txtrd.fields[9]; ixWIelValid += ImeIMSignal::VecWIel::COMB;};
 	if (txtrd.fields.size() > 10) {Onval = txtrd.fields[10]; ixWIelValid += ImeIMSignal::VecWIel::ONVAL;};
 	if (txtrd.fields.size() > 11) {Offval = txtrd.fields[11]; ixWIelValid += ImeIMSignal::VecWIel::OFFVAL;};
-	if (txtrd.fields.size() > 12) {Defon = (txtrd.fields[12] == "true"); ixWIelValid += ImeIMSignal::VecWIel::DEFON;};
-	if (txtrd.fields.size() > 13) {srefDrvRefWdbeMPort = txtrd.fields[13]; ixWIelValid += ImeIMSignal::VecWIel::SREFDRVREFWDBEMPORT;};
-	if (txtrd.fields.size() > 14) {Comment = txtrd.fields[14]; ixWIelValid += ImeIMSignal::VecWIel::COMMENT;};
+	if (txtrd.fields.size() > 12) {srefDrvRefWdbeMPort = txtrd.fields[12]; ixWIelValid += ImeIMSignal::VecWIel::SREFDRVREFWDBEMPORT;};
+	if (txtrd.fields.size() > 13) {Comment = txtrd.fields[13]; ixWIelValid += ImeIMSignal::VecWIel::COMMENT;};
 
 	while (txtrd.readLine()) {
 		switch (txtrd.ixVLinetype) {
@@ -6287,7 +6275,6 @@ void IexWdbeDcd::ImeitemIMSignal::readXML(
 		if (extractStringUclc(docctx, basexpath, "Comb", "cmb", Comb)) ixWIelValid += ImeIMSignal::VecWIel::COMB;
 		if (extractStringUclc(docctx, basexpath, "Onval", "onv", Onval)) ixWIelValid += ImeIMSignal::VecWIel::ONVAL;
 		if (extractStringUclc(docctx, basexpath, "Offval", "ofv", Offval)) ixWIelValid += ImeIMSignal::VecWIel::OFFVAL;
-		if (extractBoolUclc(docctx, basexpath, "Defon", "dfo", Defon)) ixWIelValid += ImeIMSignal::VecWIel::DEFON;
 		if (extractStringUclc(docctx, basexpath, "srefDrvRefWdbeMPort", "drv", srefDrvRefWdbeMPort)) ixWIelValid += ImeIMSignal::VecWIel::SREFDRVREFWDBEMPORT;
 		if (extractStringUclc(docctx, basexpath, "Comment", "cmt", Comment)) ixWIelValid += ImeIMSignal::VecWIel::COMMENT;
 	};
@@ -6296,7 +6283,7 @@ void IexWdbeDcd::ImeitemIMSignal::readXML(
 void IexWdbeDcd::ImeitemIMSignal::writeTxt(
 			fstream& outfile
 		) {
-	outfile << "\t" << VecWdbeVMSignalBasetype::getSref(ixVBasetype) << "\t" << irefRefWdbeCSignal << "\t" << VecWdbeVMSignalMgeTbl::getSref(mgeIxVTbl) << "\t" << srefMgeUref << "\t" << sref << "\t" << StrMod::boolToString(Const) << "\t" << srefWdbeKHdltype << "\t" << Width << "\t" << Minmax << "\t" << Comb << "\t" << Onval << "\t" << Offval << "\t" << StrMod::boolToString(Defon) << "\t" << srefDrvRefWdbeMPort << "\t" << Comment << endl;
+	outfile << "\t" << VecWdbeVMSignalBasetype::getSref(ixVBasetype) << "\t" << irefRefWdbeCSignal << "\t" << VecWdbeVMSignalMgeTbl::getSref(mgeIxVTbl) << "\t" << srefMgeUref << "\t" << sref << "\t" << StrMod::boolToString(Const) << "\t" << srefWdbeKHdltype << "\t" << Width << "\t" << Minmax << "\t" << Comb << "\t" << Onval << "\t" << Offval << "\t" << srefDrvRefWdbeMPort << "\t" << Comment << endl;
 };
 
 void IexWdbeDcd::ImeitemIMSignal::writeXML(
@@ -6305,8 +6292,8 @@ void IexWdbeDcd::ImeitemIMSignal::writeXML(
 			, const bool shorttags
 		) {
 	vector<string> tags;
-	if (shorttags) tags = {"Ii","typ","clu","mgt","mgu","srf","con","hty","wid","mmx","cmb","onv","ofv","dfo","drv","cmt"};
-	else tags = {"ImeitemIMSignal","srefIxVBasetype","irefRefWdbeCSignal","srefMgeIxVTbl","srefMgeUref","sref","Const","srefWdbeKHdltype","Width","Minmax","Comb","Onval","Offval","Defon","srefDrvRefWdbeMPort","Comment"};
+	if (shorttags) tags = {"Ii","typ","clu","mgt","mgu","srf","con","hty","wid","mmx","cmb","onv","ofv","drv","cmt"};
+	else tags = {"ImeitemIMSignal","srefIxVBasetype","irefRefWdbeCSignal","srefMgeIxVTbl","srefMgeUref","sref","Const","srefWdbeKHdltype","Width","Minmax","Comb","Onval","Offval","srefDrvRefWdbeMPort","Comment"};
 
 	xmlTextWriterStartElement(wr, BAD_CAST tags[0].c_str());
 		xmlTextWriterWriteAttribute(wr, BAD_CAST "num", BAD_CAST to_string(num).c_str());
@@ -6322,9 +6309,8 @@ void IexWdbeDcd::ImeitemIMSignal::writeXML(
 		writeString(wr, tags[10], Comb);
 		writeString(wr, tags[11], Onval);
 		writeString(wr, tags[12], Offval);
-		writeBool(wr, tags[13], Defon);
-		writeString(wr, tags[14], srefDrvRefWdbeMPort);
-		writeString(wr, tags[15], Comment);
+		writeString(wr, tags[13], srefDrvRefWdbeMPort);
+		writeString(wr, tags[14], Comment);
 	xmlTextWriterEndElement(wr);
 };
 
@@ -6353,7 +6339,6 @@ uint IexWdbeDcd::ImeIMSignal::VecWIel::getIx(
 		else if (ss[i] == "comb") ix |= COMB;
 		else if (ss[i] == "onval") ix |= ONVAL;
 		else if (ss[i] == "offval") ix |= OFFVAL;
-		else if (ss[i] == "defon") ix |= DEFON;
 		else if (ss[i] == "srefdrvrefwdbemport") ix |= SREFDRVREFWDBEMPORT;
 		else if (ss[i] == "comment") ix |= COMMENT;
 	};
@@ -6387,7 +6372,6 @@ string IexWdbeDcd::ImeIMSignal::VecWIel::getSrefs(
 	if (ix & COMB) ss.push_back("Comb");
 	if (ix & ONVAL) ss.push_back("Onval");
 	if (ix & OFFVAL) ss.push_back("Offval");
-	if (ix & DEFON) ss.push_back("Defon");
 	if (ix & SREFDRVREFWDBEMPORT) ss.push_back("srefDrvRefWdbeMPort");
 	if (ix & COMMENT) ss.push_back("Comment");
 
@@ -6486,7 +6470,7 @@ void IexWdbeDcd::ImeIMSignal::writeTxt(
 			fstream& outfile
 		) {
 	if (nodes.size() > 0) {
-		outfile << "\tImeIMSignal." << StrMod::replaceChar(ImeIMSignal::VecWIel::getSrefs(32767), ';', '\t') << endl;
+		outfile << "\tImeIMSignal." << StrMod::replaceChar(ImeIMSignal::VecWIel::getSrefs(16383), ';', '\t') << endl;
 		for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeTxt(outfile);
 		outfile << "\tImeIMSignal.end" << endl;
 	};
@@ -6829,7 +6813,7 @@ void IexWdbeDcd::parseFromFile(
 		};
 
 	} else {
-			Txtrd rd(fullpath, rectpath, "IexWdbeDcd", Version("1.1.40"), VecVIme::getIx);
+			Txtrd rd(fullpath, rectpath, "IexWdbeDcd", Version("1.1.49"), VecVIme::getIx);
 			readTxt(rd, imeiamcoreversionip, imeiamcoreversionplh, imeimmodule);
 	};
 };
@@ -6897,7 +6881,7 @@ void IexWdbeDcd::readXML(
 		// validate version
 		if (checkUclcXPaths(docctx, goodxpath, basexpath, "@Version")) {
 			extractString(docctx, goodxpath, version);
-			if (Version(version) < Version("1.1.40")) throw SbeException(SbeException::IEX_VERSION, {{"version",version},{"minversion","1.1.40"}});
+			if (Version(version) < Version("1.1.49")) throw SbeException(SbeException::IEX_VERSION, {{"version",version},{"minversion","1.1.49"}});
 		};
 
 		// look for XML sub-blocks

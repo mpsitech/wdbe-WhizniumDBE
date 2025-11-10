@@ -368,15 +368,52 @@ uint JobWdbeIexIni::enterSgeImport(
 	uint num0, num1, num2, num3;
 
 	// IP enterSgeImport.prep --- IBEGIN
+	vector<ubigint> refs;
+
 	WdbeRMUserMUsergroup uru;
 
+	ListWdbeMMachine mchs2;
+	WdbeMMachine* mch2 = NULL;
+	WdbeMMachine* mch2_2 = NULL;
 	map<string,ubigint> refsMchs; // by hsref
 
 	ImeitemIMModule* mdl2 = NULL;
 
+	ListWdbeMModule mtps;
+	map<string,ubigint> refsMtps; // by sref
+	
 	uint refNum;
 
 	vector<string> ss;
+	string s;
+
+	dbswdbe->tblwdbemmachine->loadRstBySQL("SELECT * FROM TblWdbeMMachine", false, mchs2);
+	for (unsigned int i = 0; i < mchs2.nodes.size(); i++) {
+		mch2 = mchs2.nodes[i];
+
+		s = mch2->sref;
+
+		while (true) {
+			mch2_2 = NULL;
+
+			if (mch2->supRefWdbeMMachine != 0)
+				for (unsigned int j = 0; j < mchs2.nodes.size(); j++)
+					if (mchs2.nodes[j]->ref == mch2->supRefWdbeMMachine) {
+						mch2_2 = mchs2.nodes[j];
+						break;
+					};
+
+			if (!mch2_2) break;
+
+			s = mch2_2->sref + ";" + s;
+			mch2 = mch2_2;
+		};
+
+		refsMchs[s] = mchs2.nodes[i]->ref;
+	};
+
+	dbswdbe->tblwdbemmodule->loadRstBySQL("SELECT * FROM TblWdbeMModule WHERE supRefWdbeMModule = 0 AND tplRefWdbeMModule = 0", false, mtps);
+	for (unsigned int i = 0; i < mtps.nodes.size(); i++) refsMtps[mtps.nodes[i]->sref] = mtps.nodes[i]->ref;
 	// IP enterSgeImport.prep --- IEND
 
 	try {
@@ -862,6 +899,8 @@ uint JobWdbeIexIni::enterSgeImport(
 
 			dbswdbe->tblwdbemmodule->insertRec(mdl);
 			impcnt++;
+
+			if ((mdl->hsrefSupRefWdbeMModule == "") && (mdl->srefTplRefWdbeMModule == "")) refsMtps[mdl->sref] = mdl->ref;
 
 			for (unsigned int ix1 = 0; ix1 < mdl->imeimcontroller.nodes.size(); ix1++) {
 				ctr = mdl->imeimcontroller.nodes[ix1];
@@ -1369,17 +1408,11 @@ uint JobWdbeIexIni::enterSgeImport(
 			};
 
 			if (mdl->srefTplRefWdbeMModule != "") {
-				for (unsigned int i = 0; i < imeimmodule.nodes.size(); i++) {
-					mdl2 = imeimmodule.nodes[i];
-
-					if ((mdl2->hsrefSupRefWdbeMModule == "") && (mdl2->sref == mdl->srefTplRefWdbeMModule)) {
-						mdl->tplRefWdbeMModule = mdl2->ref;
-						break;
-					};
-				};
-
-				if (mdl->tplRefWdbeMModule == 0) throw SbeException(SbeException::IEX_TSREF, {{"tsref",mdl->srefTplRefWdbeMModule}, {"iel","srefTplRefWdbeMModule"}, {"lineno",to_string(mdl->lineno)}});
-				else dbswdbe->tblwdbemmodule->updateRec(mdl);
+				auto it = refsMtps.find(mdl->srefTplRefWdbeMModule);
+				if (it != refsMtps.end()) {
+					mdl->tplRefWdbeMModule = it->second;
+					dbswdbe->tblwdbemmodule->updateRec(mdl);
+				} else throw SbeException(SbeException::IEX_TSREF, {{"tsref",mdl->srefTplRefWdbeMModule}, {"iel","srefTplRefWdbeMModule"}, {"lineno",to_string(mdl->lineno)}});
 			};
 		};
 		// IP enterSgeImport.ppr --- IEND

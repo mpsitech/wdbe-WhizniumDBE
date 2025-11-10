@@ -45,9 +45,8 @@ PnlWdbeLibRec::ContInf::ContInf(
 			const string& TxtRef
 		) :
 			Block()
+			, TxtRef(TxtRef)
 		{
-	this->TxtRef = TxtRef;
-
 	mask = {TXTREF};
 };
 
@@ -108,11 +107,10 @@ PnlWdbeLibRec::StatApp::StatApp(
 			, const bool initdoneMNComponent
 		) :
 			Block()
+			, initdoneDetail(initdoneDetail)
+			, initdoneAMakefile(initdoneAMakefile)
+			, initdoneMNComponent(initdoneMNComponent)
 		{
-	this->initdoneDetail = initdoneDetail;
-	this->initdoneAMakefile = initdoneAMakefile;
-	this->initdoneMNComponent = initdoneMNComponent;
-
 	mask = {INITDONEDETAIL, INITDONEAMAKEFILE, INITDONEMNCOMPONENT};
 };
 
@@ -179,13 +177,12 @@ PnlWdbeLibRec::StatShr::StatShr(
 			, const bool ButRegularizeActive
 		) :
 			Block()
+			, ixWdbeVExpstate(ixWdbeVExpstate)
+			, scrJrefDetail(scrJrefDetail)
+			, scrJrefAMakefile(scrJrefAMakefile)
+			, scrJrefMNComponent(scrJrefMNComponent)
+			, ButRegularizeActive(ButRegularizeActive)
 		{
-	this->ixWdbeVExpstate = ixWdbeVExpstate;
-	this->scrJrefDetail = scrJrefDetail;
-	this->scrJrefAMakefile = scrJrefAMakefile;
-	this->scrJrefMNComponent = scrJrefMNComponent;
-	this->ButRegularizeActive = ButRegularizeActive;
-
 	mask = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFAMAKEFILE, SCRJREFMNCOMPONENT, BUTREGULARIZEACTIVE};
 };
 
@@ -257,9 +254,8 @@ PnlWdbeLibRec::Tag::Tag(
 			const string& Cpt
 		) :
 			Block()
+			, Cpt(Cpt)
 		{
-	this->Cpt = Cpt;
-
 	mask = {CPT};
 };
 
@@ -296,11 +292,11 @@ PnlWdbeLibRec::DpchAppDo::DpchAppDo(
 			, const set<uint>& mask
 		) :
 			DpchAppWdbe(VecWdbeVDpch::DPCHAPPWDBELIBRECDO, scrJref)
+			, ixVDo(ixVDo)
 		{
 	if (find(mask, ALL)) this->mask = {SCRJREF, IXVDO};
 	else this->mask = mask;
 
-	this->ixVDo = ixVDo;
 };
 
 string PnlWdbeLibRec::DpchAppDo::getSrefsMask() {

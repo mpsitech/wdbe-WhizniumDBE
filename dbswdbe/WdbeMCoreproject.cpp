@@ -28,17 +28,17 @@ WdbeMCoreproject::WdbeMCoreproject(
 			, const string Title
 			, const string Giturl
 			, const string Comment
-		) {
-
-	this->ref = ref;
-	this->grp = grp;
-	this->own = own;
-	this->ixVBasetype = ixVBasetype;
-	this->refWdbeMCoreversion = refWdbeMCoreversion;
-	this->sref = sref;
-	this->Title = Title;
-	this->Giturl = Giturl;
-	this->Comment = Comment;
+		) :
+			ref(ref)
+			, grp(grp)
+			, own(own)
+			, ixVBasetype(ixVBasetype)
+			, refWdbeMCoreversion(refWdbeMCoreversion)
+			, sref(sref)
+			, Title(Title)
+			, Giturl(Giturl)
+			, Comment(Comment)
+		{
 };
 
 bool WdbeMCoreproject::operator==(

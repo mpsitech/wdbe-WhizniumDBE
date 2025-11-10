@@ -20,10 +20,10 @@ uint QryWdbeSnsList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "sru") return SRU;
-	if (s == "srt") return SRT;
-	if (s == "reu") return REU;
 	if (s == "ret") return RET;
+	if (s == "reu") return REU;
+	if (s == "srt") return SRT;
+	if (s == "sru") return SRU;
 
 	return(0);
 };
@@ -31,10 +31,10 @@ uint QryWdbeSnsList::VecVOrd::getIx(
 string QryWdbeSnsList::VecVOrd::getSref(
 			const uint ix
 		) {
-	if (ix == SRU) return("sru");
-	if (ix == SRT) return("srt");
-	if (ix == REU) return("reu");
 	if (ix == RET) return("ret");
+	if (ix == REU) return("reu");
+	if (ix == SRT) return("srt");
+	if (ix == SRU) return("sru");
 
 	return("");
 };
@@ -102,11 +102,10 @@ QryWdbeSnsList::StatShr::StatShr(
 			, const uint nload
 		) :
 			Block()
+			, ntot(ntot)
+			, jnumFirstload(jnumFirstload)
+			, nload(nload)
 		{
-	this->ntot = ntot;
-	this->jnumFirstload = jnumFirstload;
-	this->nload = nload;
-
 	mask = {NTOT, JNUMFIRSTLOAD, NLOAD};
 };
 
@@ -177,10 +176,10 @@ QryWdbeSnsList::StgIac::StgIac(
 			, const uint nload
 		) :
 			Block()
+			, jnum(jnum)
+			, jnumFirstload(jnumFirstload)
+			, nload(nload)
 		{
-	this->jnum = jnum;
-	this->jnumFirstload = jnumFirstload;
-	this->nload = nload;
 	mask = {JNUM, JNUMFIRSTLOAD, NLOAD};
 };
 

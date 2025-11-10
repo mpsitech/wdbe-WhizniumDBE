@@ -86,8 +86,8 @@ void DlgWdbeVerGenfst::refresh(
 	if (muteRefresh && !unmute) return;
 	muteRefresh = true;
 
-	StatShr oldStatshr(statshr);
 	ContInf oldContinf(continf);
+	StatShr oldStatshr(statshr);
 
 	// IP refresh --- RBEGIN
 	// continf
@@ -100,8 +100,8 @@ void DlgWdbeVerGenfst::refresh(
 	statshr.ButDneActive = evalButDneActive(dbswdbe);
 
 	// IP refresh --- REND
-	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
 	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
+	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
 
 	muteRefresh = false;
 };

@@ -25,14 +25,15 @@ WdbeQFamList::WdbeQFamList(
 			, const string srefWdbeKVendor
 			, const string titSrefWdbeKVendor
 			, const string Title
-		) {
-	this->qref = qref;
-	this->jref = jref;
-	this->jnum = jnum;
-	this->ref = ref;
-	this->srefWdbeKVendor = srefWdbeKVendor;
-	this->titSrefWdbeKVendor = titSrefWdbeKVendor;
-	this->Title = Title;
+		) :
+			qref(qref)
+			, jref(jref)
+			, jnum(jnum)
+			, ref(ref)
+			, srefWdbeKVendor(srefWdbeKVendor)
+			, titSrefWdbeKVendor(titSrefWdbeKVendor)
+			, Title(Title)
+		{
 };
 
 void WdbeQFamList::writeJSON(

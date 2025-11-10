@@ -28,17 +28,18 @@ WdbeQPrsList::WdbeQPrsList(
 			, const string titIxVSex
 			, const string telVal
 			, const string emlVal
-		) {
-	this->jnum = jnum;
-	this->stubGrp = stubGrp;
-	this->stubOwn = stubOwn;
-	this->Title = Title;
-	this->Firstname = Firstname;
-	this->Lastname = Lastname;
-	this->srefIxVSex = srefIxVSex;
-	this->titIxVSex = titIxVSex;
-	this->telVal = telVal;
-	this->emlVal = emlVal;
+		) :
+			jnum(jnum)
+			, stubGrp(stubGrp)
+			, stubOwn(stubOwn)
+			, Title(Title)
+			, Firstname(Firstname)
+			, Lastname(Lastname)
+			, srefIxVSex(srefIxVSex)
+			, titIxVSex(titIxVSex)
+			, telVal(telVal)
+			, emlVal(emlVal)
+		{
 };
 
 bool WdbeQPrsList::readXML(

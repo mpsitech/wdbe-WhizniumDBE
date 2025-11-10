@@ -130,7 +130,7 @@ void WdbeGenfst::addCtrVits(
 
 			for (unsigned int j = 0; j < vits.nodes.size(); j++) {
 				vit = vits.nodes[j];
-				dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, ctr->refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::VOID, 0, vec->ref, "tix" + s + StrMod::cap(vit->sref), true, "slvdn", 8, "", "", "", Wdbe::binToHex(vit->vecNum), false, 0, "");
+				dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, ctr->refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::VOID, 0, vec->ref, "tix" + s + StrMod::cap(vit->sref), true, "slvdn", 8, "", "", "", Wdbe::binToHex(vit->vecNum), 0, "");
 			};
 		};
 	};

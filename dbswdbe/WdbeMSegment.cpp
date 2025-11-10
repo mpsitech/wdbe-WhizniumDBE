@@ -27,18 +27,18 @@ WdbeMSegment::WdbeMSegment(
 			, const string Outfmt
 			, const usmallint Latency
 			, const string Comment
-		) {
-
-	this->ref = ref;
-	this->refWdbeCSegment = refWdbeCSegment;
-	this->pplRefWdbeMPipeline = pplRefWdbeMPipeline;
-	this->pplNum = pplNum;
-	this->supRefWdbeMSegment = supRefWdbeMSegment;
-	this->sref = sref;
-	this->Infmt = Infmt;
-	this->Outfmt = Outfmt;
-	this->Latency = Latency;
-	this->Comment = Comment;
+		) :
+			ref(ref)
+			, refWdbeCSegment(refWdbeCSegment)
+			, pplRefWdbeMPipeline(pplRefWdbeMPipeline)
+			, pplNum(pplNum)
+			, supRefWdbeMSegment(supRefWdbeMSegment)
+			, sref(sref)
+			, Infmt(Infmt)
+			, Outfmt(Outfmt)
+			, Latency(Latency)
+			, Comment(Comment)
+		{
 };
 
 bool WdbeMSegment::operator==(

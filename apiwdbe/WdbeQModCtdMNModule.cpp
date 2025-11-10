@@ -22,11 +22,12 @@ WdbeQModCtdMNModule::WdbeQModCtdMNModule(
 			, const string stubMref
 			, const string srefKFunction
 			, const string titSrefKFunction
-		) {
-	this->jnum = jnum;
-	this->stubMref = stubMref;
-	this->srefKFunction = srefKFunction;
-	this->titSrefKFunction = titSrefKFunction;
+		) :
+			jnum(jnum)
+			, stubMref(stubMref)
+			, srefKFunction(srefKFunction)
+			, titSrefKFunction(titSrefKFunction)
+		{
 };
 
 bool WdbeQModCtdMNModule::readXML(

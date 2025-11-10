@@ -26,15 +26,16 @@ WdbeQPinList::WdbeQPinList(
 			, const ubigint refWdbeMBank
 			, const string stubRefWdbeMBank
 			, const string Location
-		) {
-	this->qref = qref;
-	this->jref = jref;
-	this->jnum = jnum;
-	this->ref = ref;
-	this->sref = sref;
-	this->refWdbeMBank = refWdbeMBank;
-	this->stubRefWdbeMBank = stubRefWdbeMBank;
-	this->Location = Location;
+		) :
+			qref(qref)
+			, jref(jref)
+			, jnum(jnum)
+			, ref(ref)
+			, sref(sref)
+			, refWdbeMBank(refWdbeMBank)
+			, stubRefWdbeMBank(stubRefWdbeMBank)
+			, Location(Location)
+		{
 };
 
 void WdbeQPinList::writeJSON(

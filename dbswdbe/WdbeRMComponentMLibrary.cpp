@@ -20,11 +20,11 @@ WdbeRMComponentMLibrary::WdbeRMComponentMLibrary(
 			const ubigint ref
 			, const ubigint refWdbeMComponent
 			, const ubigint refWdbeMLibrary
-		) {
-
-	this->ref = ref;
-	this->refWdbeMComponent = refWdbeMComponent;
-	this->refWdbeMLibrary = refWdbeMLibrary;
+		) :
+			ref(ref)
+			, refWdbeMComponent(refWdbeMComponent)
+			, refWdbeMLibrary(refWdbeMLibrary)
+		{
 };
 
 bool WdbeRMComponentMLibrary::operator==(

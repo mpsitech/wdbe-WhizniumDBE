@@ -388,10 +388,10 @@ public:
 		void writeXML(const Sbecore::uint ixWdbeVLocale, xmlTextWriter* wr);
 	};
 
-	bool evalButDneActive(DbsWdbe* dbswdbe);
 	bool evalFnmButRunActive(DbsWdbe* dbswdbe);
 	bool evalFnmButStoActive(DbsWdbe* dbswdbe);
 	bool evalLfiDldActive(DbsWdbe* dbswdbe);
+	bool evalButDneActive(DbsWdbe* dbswdbe);
 
 public:
 	DlgWdbeVerFinmod(XchgWdbe* xchg, DbsWdbe* dbswdbe, const Sbecore::ubigint jrefSup, const Sbecore::uint ixWdbeVLocale);
@@ -466,8 +466,8 @@ private:
 	void handleDpchRetWdbeGenAux(DbsWdbe* dbswdbe, DpchRetWdbeGenAux* dpchret);
 	void handleDpchRetWdbeGenWiring(DbsWdbe* dbswdbe, DpchRetWdbeGenWiring* dpchret);
 
-	void handleTimerWithSrefMonInSgeGenwri(DbsWdbe* dbswdbe);
 	void handleTimerWithSrefMonInSgeGenaux(DbsWdbe* dbswdbe);
+	void handleTimerWithSrefMonInSgeGenwri(DbsWdbe* dbswdbe);
 	void handleTimerWithSrefMonInSgeGensv(DbsWdbe* dbswdbe);
 
 private:

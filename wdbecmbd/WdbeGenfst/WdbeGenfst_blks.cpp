@@ -24,9 +24,9 @@ DpchInvWdbeGenfstCmdbus::DpchInvWdbeGenfstCmdbus(
 			, const bool mcuNotFpga
 		) :
 			DpchInvWdbe(VecWdbeVDpch::DPCHINVWDBEGENFSTCMDBUS, oref, jref)
+			, refWdbeMModule(refWdbeMModule)
+			, mcuNotFpga(mcuNotFpga)
 		{
-	this->refWdbeMModule = refWdbeMModule;
-	this->mcuNotFpga = mcuNotFpga;
 };
 
 void DpchInvWdbeGenfstCmdbus::readXML(
@@ -75,10 +75,10 @@ DpchInvWdbeGenfstCtr::DpchInvWdbeGenfstCtr(
 			, const string& Untsref
 		) :
 			DpchInvWdbe(VecWdbeVDpch::DPCHINVWDBEGENFSTCTR, oref, jref)
+			, refWdbeMModule(refWdbeMModule)
+			, Prjshort(Prjshort)
+			, Untsref(Untsref)
 		{
-	this->refWdbeMModule = refWdbeMModule;
-	this->Prjshort = Prjshort;
-	this->Untsref = Untsref;
 };
 
 void DpchInvWdbeGenfstCtr::readXML(
@@ -129,10 +129,10 @@ DpchInvWdbeGenfstEctr::DpchInvWdbeGenfstEctr(
 			, const string& Untsref
 		) :
 			DpchInvWdbe(VecWdbeVDpch::DPCHINVWDBEGENFSTECTR, oref, jref)
+			, refWdbeMModule(refWdbeMModule)
+			, Prjshort(Prjshort)
+			, Untsref(Untsref)
 		{
-	this->refWdbeMModule = refWdbeMModule;
-	this->Prjshort = Prjshort;
-	this->Untsref = Untsref;
 };
 
 void DpchInvWdbeGenfstEctr::readXML(
@@ -182,9 +182,9 @@ DpchInvWdbeGenfstEhostif::DpchInvWdbeGenfstEhostif(
 			, const bool mcuNotFpga
 		) :
 			DpchInvWdbe(VecWdbeVDpch::DPCHINVWDBEGENFSTEHOSTIF, oref, jref)
+			, refWdbeMModule(refWdbeMModule)
+			, mcuNotFpga(mcuNotFpga)
 		{
-	this->refWdbeMModule = refWdbeMModule;
-	this->mcuNotFpga = mcuNotFpga;
 };
 
 void DpchInvWdbeGenfstEhostif::readXML(
@@ -231,8 +231,8 @@ DpchInvWdbeGenfstHostif::DpchInvWdbeGenfstHostif(
 			, const ubigint refWdbeMModule
 		) :
 			DpchInvWdbe(VecWdbeVDpch::DPCHINVWDBEGENFSTHOSTIF, oref, jref)
+			, refWdbeMModule(refWdbeMModule)
 		{
-	this->refWdbeMModule = refWdbeMModule;
 };
 
 void DpchInvWdbeGenfstHostif::readXML(
@@ -277,8 +277,8 @@ DpchInvWdbeGenfstImbuf::DpchInvWdbeGenfstImbuf(
 			, const ubigint refWdbeMModule
 		) :
 			DpchInvWdbe(VecWdbeVDpch::DPCHINVWDBEGENFSTIMBUF, oref, jref)
+			, refWdbeMModule(refWdbeMModule)
 		{
-	this->refWdbeMModule = refWdbeMModule;
 };
 
 void DpchInvWdbeGenfstImbuf::readXML(
@@ -323,8 +323,8 @@ DpchInvWdbeGenfstPpl::DpchInvWdbeGenfstPpl(
 			, const ubigint refWdbeMPipeline
 		) :
 			DpchInvWdbe(VecWdbeVDpch::DPCHINVWDBEGENFSTPPL, oref, jref)
+			, refWdbeMPipeline(refWdbeMPipeline)
 		{
-	this->refWdbeMPipeline = refWdbeMPipeline;
 };
 
 void DpchInvWdbeGenfstPpl::readXML(
@@ -369,8 +369,8 @@ DpchInvWdbeGenfstTop::DpchInvWdbeGenfstTop(
 			, const ubigint refWdbeMModule
 		) :
 			DpchInvWdbe(VecWdbeVDpch::DPCHINVWDBEGENFSTTOP, oref, jref)
+			, refWdbeMModule(refWdbeMModule)
 		{
-	this->refWdbeMModule = refWdbeMModule;
 };
 
 void DpchInvWdbeGenfstTop::readXML(

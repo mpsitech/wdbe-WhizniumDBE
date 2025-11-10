@@ -21,12 +21,12 @@ WdbeAMMachinePar::WdbeAMMachinePar(
 			, const ubigint refWdbeMMachine
 			, const string x1SrefKKey
 			, const string Val
-		) {
-
-	this->ref = ref;
-	this->refWdbeMMachine = refWdbeMMachine;
-	this->x1SrefKKey = x1SrefKKey;
-	this->Val = Val;
+		) :
+			ref(ref)
+			, refWdbeMMachine(refWdbeMMachine)
+			, x1SrefKKey(x1SrefKKey)
+			, Val(Val)
+		{
 };
 
 bool WdbeAMMachinePar::operator==(

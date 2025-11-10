@@ -2,7 +2,7 @@
 -- MySQL / MariaDB database create script
 -- copyright: (C) 2016-2020 MPSI Technologies GmbH
 -- author: Alexander Wirthmueller (auto-generation)
--- date created: 7 Feb 2024
+-- date created: 5 Nov 2025
 -- IP header --- ABOVE
 
 DROP DATABASE IF EXISTS DbsWdbe;
@@ -148,7 +148,7 @@ CREATE TABLE TblWdbeAMModulePar(
 	mdlRefWdbeMModule BIGINT UNSIGNED,
 	mdlNum INT UNSIGNED,
 	x1SrefKKey VARCHAR(50),
-	Val VARCHAR(192),
+	Val TEXT,
 	INDEX (mdlRefWdbeMModule),
 	INDEX (mdlNum),
 	INDEX (x1SrefKKey)
@@ -781,7 +781,6 @@ CREATE TABLE TblWdbeMSignal(
 	Comb VARCHAR(192),
 	Onval TEXT,
 	Offval TEXT,
-	Defon TINYINT,
 	drvRefWdbeMPort BIGINT UNSIGNED,
 	Comment TEXT,
 	INDEX (ixVBasetype),
@@ -868,7 +867,6 @@ CREATE TABLE TblWdbeMVariable(
 	Minmax VARCHAR(30),
 	Onval TEXT,
 	Offval TEXT,
-	Defon TINYINT,
 	Comment TEXT,
 	INDEX (refWdbeCVariable),
 	INDEX (refIxVTbl),
@@ -1086,6 +1084,15 @@ CREATE TABLE TblWdbeQCmdARetpar(
 	refWdbeMVector BIGINT UNSIGNED,
 	Length TINYINT UNSIGNED,
 	Comment TEXT,
+	INDEX (jref),
+	INDEX (jnum)
+) ENGINE = MYISAM;
+
+CREATE TABLE TblWdbeQCmdHk1NVector(
+	qref BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+	jref BIGINT UNSIGNED,
+	jnum INT UNSIGNED,
+	ref BIGINT UNSIGNED,
 	INDEX (jref),
 	INDEX (jnum)
 ) ENGINE = MYISAM;
@@ -1489,7 +1496,7 @@ CREATE TABLE TblWdbeQModAPar(
 	ref BIGINT UNSIGNED,
 	mdlNum INT UNSIGNED,
 	x1SrefKKey VARCHAR(50),
-	Val VARCHAR(192),
+	Val TEXT,
 	INDEX (jref),
 	INDEX (jnum)
 ) ENGINE = MYISAM;
@@ -1684,7 +1691,7 @@ CREATE TABLE TblWdbeQMtpAPar(
 	ref BIGINT UNSIGNED,
 	mdlNum INT UNSIGNED,
 	x1SrefKKey VARCHAR(50),
-	Val VARCHAR(192),
+	Val TEXT,
 	INDEX (jref),
 	INDEX (jnum)
 ) ENGINE = MYISAM;

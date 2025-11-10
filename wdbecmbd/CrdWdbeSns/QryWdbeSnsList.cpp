@@ -46,8 +46,8 @@ QryWdbeSnsList::QryWdbeSnsList(
 
 	rerun(dbswdbe);
 
-	xchg->addClstn(VecWdbeVCall::CALLWDBESNSMOD, jref, Clstn::VecVJobmask::ALL, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 	xchg->addClstn(VecWdbeVCall::CALLWDBESTUBCHG, jref, Clstn::VecVJobmask::SELF, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
+	xchg->addClstn(VecWdbeVCall::CALLWDBESNSMOD, jref, Clstn::VecVJobmask::ALL, 0, false, Arg(), 0, Clstn::VecVJactype::LOCK);
 
 	// IP constructor.cust3 --- INSERT
 
@@ -101,19 +101,19 @@ void QryWdbeSnsList::rerun(
 
 	if (preIxPre == VecWdbeVPreset::PREWDBEREFMOD) {
 		sqlstr = "SELECT COUNT(TblWdbeMSensitivity.ref)";
-		sqlstr += " FROM TblWdbeMSensitivity, TblWdbeMProcess";
-		sqlstr += " WHERE TblWdbeMSensitivity.refIxVTbl = " + to_string(VecWdbeVMSensitivityRefTbl::PRC);
-		sqlstr += " AND TblWdbeMSensitivity.refUref = TblWdbeMProcess.ref";
-		sqlstr += " AND TblWdbeMProcess.refWdbeMModule = " + to_string(preRefMod) + "";
+		sqlstr += " FROM TblWdbeMSensitivity";
+		sqlstr += " WHERE TblWdbeMSensitivity.refIxVTbl = " + to_string(VecWdbeVMSensitivityRefTbl::MDL);
+		sqlstr += " AND TblWdbeMSensitivity.refUref = " + to_string(preRefMod) + "";
 		rerun_filtSQL(sqlstr, preRet, preReu, preSrt, preSru, false);
 		dbswdbe->loadUintBySQL(sqlstr, cnt);
 		cnts.push_back(cnt); lims.push_back(0); ofss.push_back(0);
 		cntsum += cnt;
 
 		sqlstr = "SELECT COUNT(TblWdbeMSensitivity.ref)";
-		sqlstr += " FROM TblWdbeMSensitivity";
-		sqlstr += " WHERE TblWdbeMSensitivity.refIxVTbl = " + to_string(VecWdbeVMSensitivityRefTbl::MDL);
-		sqlstr += " AND TblWdbeMSensitivity.refUref = " + to_string(preRefMod) + "";
+		sqlstr += " FROM TblWdbeMSensitivity, TblWdbeMProcess";
+		sqlstr += " WHERE TblWdbeMSensitivity.refIxVTbl = " + to_string(VecWdbeVMSensitivityRefTbl::PRC);
+		sqlstr += " AND TblWdbeMSensitivity.refUref = TblWdbeMProcess.ref";
+		sqlstr += " AND TblWdbeMProcess.refWdbeMModule = " + to_string(preRefMod) + "";
 		rerun_filtSQL(sqlstr, preRet, preReu, preSrt, preSru, false);
 		dbswdbe->loadUintBySQL(sqlstr, cnt);
 		cnts.push_back(cnt); lims.push_back(0); ofss.push_back(0);
@@ -166,19 +166,19 @@ void QryWdbeSnsList::rerun(
 
 	if (preIxPre == VecWdbeVPreset::PREWDBEREFMOD) {
 		rerun_baseSQL(sqlstr);
-		sqlstr += " FROM TblWdbeMSensitivity, TblWdbeMProcess";
-		sqlstr += " WHERE TblWdbeMSensitivity.refIxVTbl = " + to_string(VecWdbeVMSensitivityRefTbl::PRC);
-		sqlstr += " AND TblWdbeMSensitivity.refUref = TblWdbeMProcess.ref";
-		sqlstr += " AND TblWdbeMProcess.refWdbeMModule = " + to_string(preRefMod) + "";
+		sqlstr += " FROM TblWdbeMSensitivity";
+		sqlstr += " WHERE TblWdbeMSensitivity.refIxVTbl = " + to_string(VecWdbeVMSensitivityRefTbl::MDL);
+		sqlstr += " AND TblWdbeMSensitivity.refUref = " + to_string(preRefMod) + "";
 		rerun_filtSQL(sqlstr, preRet, preReu, preSrt, preSru, false);
 		rerun_orderSQL(sqlstr, preIxOrd);
 		sqlstr += " LIMIT " + to_string(lims[0]) + " OFFSET " + to_string(ofss[0]);
 		dbswdbe->executeQuery(sqlstr);
 
 		rerun_baseSQL(sqlstr);
-		sqlstr += " FROM TblWdbeMSensitivity";
-		sqlstr += " WHERE TblWdbeMSensitivity.refIxVTbl = " + to_string(VecWdbeVMSensitivityRefTbl::MDL);
-		sqlstr += " AND TblWdbeMSensitivity.refUref = " + to_string(preRefMod) + "";
+		sqlstr += " FROM TblWdbeMSensitivity, TblWdbeMProcess";
+		sqlstr += " WHERE TblWdbeMSensitivity.refIxVTbl = " + to_string(VecWdbeVMSensitivityRefTbl::PRC);
+		sqlstr += " AND TblWdbeMSensitivity.refUref = TblWdbeMProcess.ref";
+		sqlstr += " AND TblWdbeMProcess.refWdbeMModule = " + to_string(preRefMod) + "";
 		rerun_filtSQL(sqlstr, preRet, preReu, preSrt, preSru, false);
 		rerun_orderSQL(sqlstr, preIxOrd);
 		sqlstr += " LIMIT " + to_string(lims[1]) + " OFFSET " + to_string(ofss[1]);
@@ -267,10 +267,10 @@ void QryWdbeSnsList::rerun_orderSQL(
 			string& sqlstr
 			, const uint preIxOrd
 		) {
-	if (preIxOrd == VecVOrd::SRU) sqlstr += " ORDER BY TblWdbeMSensitivity.srcUref ASC";
-	else if (preIxOrd == VecVOrd::SRT) sqlstr += " ORDER BY TblWdbeMSensitivity.srcIxVTbl ASC";
+	if (preIxOrd == VecVOrd::RET) sqlstr += " ORDER BY TblWdbeMSensitivity.refIxVTbl ASC";
 	else if (preIxOrd == VecVOrd::REU) sqlstr += " ORDER BY TblWdbeMSensitivity.refUref ASC";
-	else if (preIxOrd == VecVOrd::RET) sqlstr += " ORDER BY TblWdbeMSensitivity.refIxVTbl ASC";
+	else if (preIxOrd == VecVOrd::SRT) sqlstr += " ORDER BY TblWdbeMSensitivity.srcIxVTbl ASC";
+	else if (preIxOrd == VecVOrd::SRU) sqlstr += " ORDER BY TblWdbeMSensitivity.srcUref ASC";
 };
 
 void QryWdbeSnsList::fetch(
@@ -458,13 +458,21 @@ void QryWdbeSnsList::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBESNSMOD) {
+	if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
+		call->abort = handleCallWdbeStubChgFromSelf(dbswdbe);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBESNSMOD) {
 		call->abort = handleCallWdbeSnsMod(dbswdbe, call->jref);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBESNSUPD_REFEQ) {
 		call->abort = handleCallWdbeSnsUpd_refEq(dbswdbe, call->jref);
-	} else if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
-		call->abort = handleCallWdbeStubChgFromSelf(dbswdbe);
 	};
+};
+
+bool QryWdbeSnsList::handleCallWdbeStubChgFromSelf(
+			DbsWdbe* dbswdbe
+		) {
+	bool retval = false;
+	// IP handleCallWdbeStubChgFromSelf --- INSERT
+	return retval;
 };
 
 bool QryWdbeSnsList::handleCallWdbeSnsMod(
@@ -492,13 +500,5 @@ bool QryWdbeSnsList::handleCallWdbeSnsUpd_refEq(
 		xchg->triggerCall(dbswdbe, VecWdbeVCall::CALLWDBESTATCHG, jref);
 	};
 
-	return retval;
-};
-
-bool QryWdbeSnsList::handleCallWdbeStubChgFromSelf(
-			DbsWdbe* dbswdbe
-		) {
-	bool retval = false;
-	// IP handleCallWdbeStubChgFromSelf --- INSERT
 	return retval;
 };

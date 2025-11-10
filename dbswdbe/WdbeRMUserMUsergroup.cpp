@@ -21,12 +21,12 @@ WdbeRMUserMUsergroup::WdbeRMUserMUsergroup(
 			, const ubigint refWdbeMUser
 			, const ubigint refWdbeMUsergroup
 			, const uint ixWdbeVUserlevel
-		) {
-
-	this->ref = ref;
-	this->refWdbeMUser = refWdbeMUser;
-	this->refWdbeMUsergroup = refWdbeMUsergroup;
-	this->ixWdbeVUserlevel = ixWdbeVUserlevel;
+		) :
+			ref(ref)
+			, refWdbeMUser(refWdbeMUser)
+			, refWdbeMUsergroup(refWdbeMUsergroup)
+			, ixWdbeVUserlevel(ixWdbeVUserlevel)
+		{
 };
 
 bool WdbeRMUserMUsergroup::operator==(

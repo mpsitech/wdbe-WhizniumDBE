@@ -2,7 +2,7 @@
 # make file for Wdbe operation daemon, release wdbeopd2_mac
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 7 Feb 2024
+# date created: 5 Nov 2025
 # IP header --- ABOVE
 
 include Makefile.inc
@@ -14,7 +14,7 @@ LINK = g++
 LINKFLAGS =
 
 INCPATH = -I$(BUILDROOT)/dbswdbe -I$(BUILDROOT)/wdbeopd2/VecWdbe -I$(BUILDROOT)/wdbeopd2/IexWdbe -I$(BUILDROOT)/wdbeopd2
-INCPATH += -I$(BUILDROOT)/wdbeopd2/WdbeMtpWrmcu -I$(BUILDROOT)/wdbeopd2/WdbeMtpWrfpga -I$(BUILDROOT)/wdbeopd2/WdbeMtpGenfst -I$(BUILDROOT)/wdbeopd2/WdbeMtpCplmsttd -I$(BUILDROOT)/wdbeopd2/WdbeMtpCplmstbu -I$(BUILDROOT)/wdbeopd2/WdbeMtpPlhmcu -I$(BUILDROOT)/wdbeopd2/WdbeMtpPlhfpga
+INCPATH += -I$(BUILDROOT)/wdbeopd2/WdbeMtpPlhfpga -I$(BUILDROOT)/wdbeopd2/WdbeMtpPlhmcu -I$(BUILDROOT)/wdbeopd2/WdbeMtpCplmstbu -I$(BUILDROOT)/wdbeopd2/WdbeMtpCplmsttd -I$(BUILDROOT)/wdbeopd2/WdbeMtpGenfst -I$(BUILDROOT)/wdbeopd2/WdbeMtpWrfpga -I$(BUILDROOT)/wdbeopd2/WdbeMtpWrmcu
 INCPATH += -I${WHIZSDKROOT}/build -I/opt/homebrew/include -I/opt/homebrew/opt/curl/include -I/opt/homebrew/opt/libmicrohttpd/include -I/opt/homebrew/opt/libxml2/include -I/usr/local/mysql/include
 
 PCHS = Wdbeopd.h.gch
@@ -26,7 +26,7 @@ LIBPATH = -L$(LIBROOT)
 LIBPATH += -L$(LIBROOT)/wdbeopd2
 LIBPATH += -L${WHIZSDKROOT}/lib -L/opt/homebrew/lib -L/opt/homebrew/opt/curl/lib -L/opt/homebrew/opt/libmicrohttpd/lib -L/opt/homebrew/opt/libxml2/include -L/usr/local/mysql/lib
 
-LIBS = -lwdbemtpwrmcu -lwdbemtpwrfpga -lwdbemtpgenfst -lwdbemtpcplmsttd -lwdbemtpcplmstbu -lwdbemtpplhmcu -lwdbemtpplhfpga
+LIBS = -lwdbemtpplhfpga -lwdbemtpplhmcu -lwdbemtpcplmstbu -lwdbemtpcplmsttd -lwdbemtpgenfst -lwdbemtpwrfpga -lwdbemtpwrmcu
 LIBS += -liexwdbe -lvecwdbe -ldbswdbe
 LIBS += -lcurl -lmicrohttpd -lsbecore_my
 LIBS += -lmysqlclient -lsbecore_plus

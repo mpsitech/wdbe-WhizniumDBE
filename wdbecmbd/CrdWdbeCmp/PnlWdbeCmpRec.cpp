@@ -38,9 +38,9 @@ PnlWdbeCmpRec::PnlWdbeCmpRec(
 		{
 	jref = xchg->addJob(dbswdbe, this, jrefSup);
 
-	pnlmnlibrary = NULL;
-	pnl1nrelease = NULL;
 	pnldetail = NULL;
+	pnl1nrelease = NULL;
+	pnlmnlibrary = NULL;
 
 	// IP constructor.cust1 --- INSERT
 
@@ -249,20 +249,11 @@ void PnlWdbeCmpRec::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBECMPUPD_REFEQ) {
-		call->abort = handleCallWdbeCmpUpd_refEq(dbswdbe, call->jref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECMP_VEREQ) {
+	if (call->ixVCall == VecWdbeVCall::CALLWDBECMP_VEREQ) {
 		call->abort = handleCallWdbeCmp_verEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECMPUPD_REFEQ) {
+		call->abort = handleCallWdbeCmpUpd_refEq(dbswdbe, call->jref);
 	};
-};
-
-bool PnlWdbeCmpRec::handleCallWdbeCmpUpd_refEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-	// IP handleCallWdbeCmpUpd_refEq --- INSERT
-	return retval;
 };
 
 bool PnlWdbeCmpRec::handleCallWdbeCmp_verEq(
@@ -273,5 +264,14 @@ bool PnlWdbeCmpRec::handleCallWdbeCmp_verEq(
 		) {
 	bool retval = false;
 	boolvalRet = (recCmp.refWdbeMVersion == refInv); // IP handleCallWdbeCmp_verEq --- LINE
+	return retval;
+};
+
+bool PnlWdbeCmpRec::handleCallWdbeCmpUpd_refEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+	// IP handleCallWdbeCmpUpd_refEq --- INSERT
 	return retval;
 };

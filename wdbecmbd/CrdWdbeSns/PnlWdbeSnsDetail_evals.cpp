@@ -56,25 +56,13 @@ bool PnlWdbeSnsDetail::evalTxtReuActive(
 bool PnlWdbeSnsDetail::evalButReuViewAvail(
 			DbsWdbe* dbswdbe
 		) {
-	// sns.reuEq(0)|((pre.ixCrdaccPrc()&sns.retEq(prc)&pre.refMod())|(pre.ixCrdaccMod()&sns.retEq(mdl)&sns.reu.inSbs(mod)&pre.refUnt())|(pre.ixCrdaccMod()&sns.retEq(mdl)&sns.reu.inSbs(mod)&pre.refCvr())|(pre.ixCrdaccMtp()&sns.retEq(mdl)&sns.reu.inSbs(mtp)))
+	// sns.reuEq(0)|((pre.ixCrdaccMod()&sns.retEq(mdl)&sns.reu.inSbs(mod)&pre.refUnt())|(pre.ixCrdaccMod()&sns.retEq(mdl)&sns.reu.inSbs(mod)&pre.refCvr())|(pre.ixCrdaccMtp()&sns.retEq(mdl)&sns.reu.inSbs(mtp))|(pre.ixCrdaccPrc()&sns.retEq(prc)&pre.refMod()))
 
 	vector<bool> args;
 	bool a, b;
 
 	a = false; a = (recSns.refUref == 0);
 	args.push_back(a);
-	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCPRC, jref) != 0);
-	args.push_back(a);
-	a = false; a = (recSns.refIxVTbl == VecWdbeVMSensitivityRefTbl::PRC);
-	args.push_back(a);
-	a = false; a = (xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFMOD, jref) != 0);
-	args.push_back(a);
-	b = args.back(); args.pop_back();
-	a = args.back(); args.pop_back();
-	args.push_back(a && b);
-	b = args.back(); args.pop_back();
-	a = args.back(); args.pop_back();
-	args.push_back(a && b);
 	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCMOD, jref) != 0);
 	args.push_back(a);
 	a = false; a = (recSns.refIxVTbl == VecWdbeVMSensitivityRefTbl::MDL);
@@ -114,6 +102,18 @@ bool PnlWdbeSnsDetail::evalButReuViewAvail(
 	a = false; a = (recSns.refIxVTbl == VecWdbeVMSensitivityRefTbl::MDL);
 	args.push_back(a);
 	a = false; a = ((dbswdbe->getIxWSubsetByRefWdbeMModule(recSns.refUref) & VecWdbeWMModuleSubset::SBSWDBEBMMODULEMTP) != 0);
+	args.push_back(a);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a && b);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a && b);
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCPRC, jref) != 0);
+	args.push_back(a);
+	a = false; a = (recSns.refIxVTbl == VecWdbeVMSensitivityRefTbl::PRC);
+	args.push_back(a);
+	a = false; a = (xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFMOD, jref) != 0);
 	args.push_back(a);
 	b = args.back(); args.pop_back();
 	a = args.back(); args.pop_back();
@@ -170,28 +170,16 @@ bool PnlWdbeSnsDetail::evalTxtSruActive(
 bool PnlWdbeSnsDetail::evalButSruViewAvail(
 			DbsWdbe* dbswdbe
 		) {
-	// sns.sruEq(0)|((pre.ixCrdaccSig()&sns.srtEq(sig)&pre.refMod())|(pre.ixCrdaccSig()&sns.srtEq(sig)&pre.refUnt())|(pre.ixCrdaccPrt()&sns.srtEq(prt)&pre.refMod())|(pre.ixCrdaccInt()&sns.srtEq(int)&pre.refUnt()))
+	// sns.sruEq(0)|((pre.ixCrdaccInt()&sns.srtEq(int)&pre.refUnt())|(pre.ixCrdaccPrt()&sns.srtEq(prt)&pre.refMod())|(pre.ixCrdaccSig()&sns.srtEq(sig)&pre.refMod())|(pre.ixCrdaccSig()&sns.srtEq(sig)&pre.refUnt()))
 
 	vector<bool> args;
 	bool a, b;
 
 	a = false; a = (recSns.srcUref == 0);
 	args.push_back(a);
-	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCSIG, jref) != 0);
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCINT, jref) != 0);
 	args.push_back(a);
-	a = false; a = (recSns.srcIxVTbl == VecWdbeVMSensitivitySrcTbl::SIG);
-	args.push_back(a);
-	a = false; a = (xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFMOD, jref) != 0);
-	args.push_back(a);
-	b = args.back(); args.pop_back();
-	a = args.back(); args.pop_back();
-	args.push_back(a && b);
-	b = args.back(); args.pop_back();
-	a = args.back(); args.pop_back();
-	args.push_back(a && b);
-	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCSIG, jref) != 0);
-	args.push_back(a);
-	a = false; a = (recSns.srcIxVTbl == VecWdbeVMSensitivitySrcTbl::SIG);
+	a = false; a = (recSns.srcIxVTbl == VecWdbeVMSensitivitySrcTbl::INT);
 	args.push_back(a);
 	a = false; a = (xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFUNT, jref) != 0);
 	args.push_back(a);
@@ -213,9 +201,21 @@ bool PnlWdbeSnsDetail::evalButSruViewAvail(
 	b = args.back(); args.pop_back();
 	a = args.back(); args.pop_back();
 	args.push_back(a && b);
-	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCINT, jref) != 0);
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCSIG, jref) != 0);
 	args.push_back(a);
-	a = false; a = (recSns.srcIxVTbl == VecWdbeVMSensitivitySrcTbl::INT);
+	a = false; a = (recSns.srcIxVTbl == VecWdbeVMSensitivitySrcTbl::SIG);
+	args.push_back(a);
+	a = false; a = (xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFMOD, jref) != 0);
+	args.push_back(a);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a && b);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a && b);
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCSIG, jref) != 0);
+	args.push_back(a);
+	a = false; a = (recSns.srcIxVTbl == VecWdbeVMSensitivitySrcTbl::SIG);
 	args.push_back(a);
 	a = false; a = (xchg->getRefPreset(VecWdbeVPreset::PREWDBEREFUNT, jref) != 0);
 	args.push_back(a);

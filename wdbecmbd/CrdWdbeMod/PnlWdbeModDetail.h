@@ -43,11 +43,11 @@ public:
 		static const Sbecore::uint BUTHKUVIEWCLICK = 3;
 		static const Sbecore::uint BUTSUPVIEWCLICK = 4;
 		static const Sbecore::uint BUTTPLVIEWCLICK = 5;
-		static const Sbecore::uint BUTIMBNEWCLICK = 6;
-		static const Sbecore::uint BUTIMBDELETECLICK = 7;
-		static const Sbecore::uint BUTCTRNEWCLICK = 8;
-		static const Sbecore::uint BUTCTRDELETECLICK = 9;
-		static const Sbecore::uint BUTCTRCLRVIEWCLICK = 10;
+		static const Sbecore::uint BUTCTRNEWCLICK = 6;
+		static const Sbecore::uint BUTCTRDELETECLICK = 7;
+		static const Sbecore::uint BUTCTRCLRVIEWCLICK = 8;
+		static const Sbecore::uint BUTIMBNEWCLICK = 9;
+		static const Sbecore::uint BUTIMBDELETECLICK = 10;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);
@@ -65,15 +65,15 @@ public:
 		static const Sbecore::uint NUMFPUPHKT = 4;
 		static const Sbecore::uint TXFSRR = 5;
 		static const Sbecore::uint TXFCMT = 6;
-		static const Sbecore::uint TXFIMBFSR = 7;
-		static const Sbecore::uint NUMFPUPIMBRTY = 8;
-		static const Sbecore::uint TXFIMBWID = 9;
-		static const Sbecore::uint TXFIMBMMX = 10;
-		static const Sbecore::uint TXFIMBPRI = 11;
-		static const Sbecore::uint TXFCTRFSR = 12;
+		static const Sbecore::uint TXFCTRFSR = 7;
+		static const Sbecore::uint TXFIMBFSR = 8;
+		static const Sbecore::uint NUMFPUPIMBRTY = 9;
+		static const Sbecore::uint TXFIMBWID = 10;
+		static const Sbecore::uint TXFIMBMMX = 11;
+		static const Sbecore::uint TXFIMBPRI = 12;
 
 	public:
-		ContIac(const Sbecore::uint numFPupVnd = 1, const std::string& TxfVnd = "", const Sbecore::uint numFPupTyp = 1, const Sbecore::uint numFPupHkt = 1, const std::string& TxfSrr = "", const std::string& TxfCmt = "", const std::string& TxfImbFsr = "", const Sbecore::uint numFPupImbRty = 1, const std::string& TxfImbWid = "", const std::string& TxfImbMmx = "", const std::string& TxfImbPri = "", const std::string& TxfCtrFsr = "");
+		ContIac(const Sbecore::uint numFPupVnd = 1, const std::string& TxfVnd = "", const Sbecore::uint numFPupTyp = 1, const Sbecore::uint numFPupHkt = 1, const std::string& TxfSrr = "", const std::string& TxfCmt = "", const std::string& TxfCtrFsr = "", const std::string& TxfImbFsr = "", const Sbecore::uint numFPupImbRty = 1, const std::string& TxfImbWid = "", const std::string& TxfImbMmx = "", const std::string& TxfImbPri = "");
 
 	public:
 		Sbecore::uint numFPupVnd;
@@ -82,12 +82,12 @@ public:
 		Sbecore::uint numFPupHkt;
 		std::string TxfSrr;
 		std::string TxfCmt;
+		std::string TxfCtrFsr;
 		std::string TxfImbFsr;
 		Sbecore::uint numFPupImbRty;
 		std::string TxfImbWid;
 		std::string TxfImbMmx;
 		std::string TxfImbPri;
-		std::string TxfCtrFsr;
 
 	public:
 		bool readJSON(const Json::Value& sup, bool addbasetag = false);
@@ -143,11 +143,11 @@ public:
 	class StatShr : public Sbecore::Block {
 
 	public:
-		static const Sbecore::uint TXFVNDVALID = 1;
-		static const Sbecore::uint BUTSAVEAVAIL = 2;
-		static const Sbecore::uint BUTSAVEACTIVE = 3;
-		static const Sbecore::uint TXTSRFACTIVE = 4;
-		static const Sbecore::uint PUPVNDACTIVE = 5;
+		static const Sbecore::uint BUTSAVEAVAIL = 1;
+		static const Sbecore::uint BUTSAVEACTIVE = 2;
+		static const Sbecore::uint TXTSRFACTIVE = 3;
+		static const Sbecore::uint PUPVNDACTIVE = 4;
+		static const Sbecore::uint TXFVNDVALID = 5;
 		static const Sbecore::uint BUTVNDEDITAVAIL = 6;
 		static const Sbecore::uint PUPTYPACTIVE = 7;
 		static const Sbecore::uint TXTHKUACTIVE = 8;
@@ -161,40 +161,40 @@ public:
 		static const Sbecore::uint BUTTPLVIEWACTIVE = 16;
 		static const Sbecore::uint TXFSRRACTIVE = 17;
 		static const Sbecore::uint TXFCMTACTIVE = 18;
-		static const Sbecore::uint SEPIMBAVAIL = 19;
-		static const Sbecore::uint HDGIMBAVAIL = 20;
-		static const Sbecore::uint BUTIMBNEWAVAIL = 21;
-		static const Sbecore::uint BUTIMBDELETEAVAIL = 22;
-		static const Sbecore::uint TXFIMBFSRAVAIL = 23;
-		static const Sbecore::uint TXFIMBFSRACTIVE = 24;
-		static const Sbecore::uint PUPIMBRTYAVAIL = 25;
-		static const Sbecore::uint PUPIMBRTYACTIVE = 26;
-		static const Sbecore::uint TXFIMBWIDAVAIL = 27;
-		static const Sbecore::uint TXFIMBWIDACTIVE = 28;
-		static const Sbecore::uint TXFIMBMMXAVAIL = 29;
-		static const Sbecore::uint TXFIMBMMXACTIVE = 30;
-		static const Sbecore::uint TXFIMBPRIAVAIL = 31;
-		static const Sbecore::uint TXFIMBPRIACTIVE = 32;
-		static const Sbecore::uint SEPCTRAVAIL = 33;
-		static const Sbecore::uint HDGCTRAVAIL = 34;
-		static const Sbecore::uint BUTCTRNEWAVAIL = 35;
-		static const Sbecore::uint BUTCTRDELETEAVAIL = 36;
-		static const Sbecore::uint TXFCTRFSRAVAIL = 37;
-		static const Sbecore::uint TXFCTRFSRACTIVE = 38;
-		static const Sbecore::uint TXTCTRCLRAVAIL = 39;
-		static const Sbecore::uint TXTCTRCLRACTIVE = 40;
-		static const Sbecore::uint BUTCTRCLRVIEWAVAIL = 41;
-		static const Sbecore::uint BUTCTRCLRVIEWACTIVE = 42;
+		static const Sbecore::uint SEPCTRAVAIL = 19;
+		static const Sbecore::uint HDGCTRAVAIL = 20;
+		static const Sbecore::uint BUTCTRNEWAVAIL = 21;
+		static const Sbecore::uint BUTCTRDELETEAVAIL = 22;
+		static const Sbecore::uint TXFCTRFSRAVAIL = 23;
+		static const Sbecore::uint TXFCTRFSRACTIVE = 24;
+		static const Sbecore::uint TXTCTRCLRAVAIL = 25;
+		static const Sbecore::uint TXTCTRCLRACTIVE = 26;
+		static const Sbecore::uint BUTCTRCLRVIEWAVAIL = 27;
+		static const Sbecore::uint BUTCTRCLRVIEWACTIVE = 28;
+		static const Sbecore::uint SEPIMBAVAIL = 29;
+		static const Sbecore::uint HDGIMBAVAIL = 30;
+		static const Sbecore::uint BUTIMBNEWAVAIL = 31;
+		static const Sbecore::uint BUTIMBDELETEAVAIL = 32;
+		static const Sbecore::uint TXFIMBFSRAVAIL = 33;
+		static const Sbecore::uint TXFIMBFSRACTIVE = 34;
+		static const Sbecore::uint PUPIMBRTYAVAIL = 35;
+		static const Sbecore::uint PUPIMBRTYACTIVE = 36;
+		static const Sbecore::uint TXFIMBWIDAVAIL = 37;
+		static const Sbecore::uint TXFIMBWIDACTIVE = 38;
+		static const Sbecore::uint TXFIMBMMXAVAIL = 39;
+		static const Sbecore::uint TXFIMBMMXACTIVE = 40;
+		static const Sbecore::uint TXFIMBPRIAVAIL = 41;
+		static const Sbecore::uint TXFIMBPRIACTIVE = 42;
 
 	public:
-		StatShr(const bool TxfVndValid = false, const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxtSrfActive = true, const bool PupVndActive = true, const bool ButVndEditAvail = true, const bool PupTypActive = true, const bool TxtHkuActive = true, const bool ButHkuViewAvail = true, const bool ButHkuViewActive = true, const bool TxtSupActive = true, const bool ButSupViewAvail = true, const bool ButSupViewActive = true, const bool TxtTplActive = true, const bool ButTplViewAvail = true, const bool ButTplViewActive = true, const bool TxfSrrActive = true, const bool TxfCmtActive = true, const bool SepImbAvail = true, const bool HdgImbAvail = true, const bool ButImbNewAvail = true, const bool ButImbDeleteAvail = true, const bool TxfImbFsrAvail = true, const bool TxfImbFsrActive = true, const bool PupImbRtyAvail = true, const bool PupImbRtyActive = true, const bool TxfImbWidAvail = true, const bool TxfImbWidActive = true, const bool TxfImbMmxAvail = true, const bool TxfImbMmxActive = true, const bool TxfImbPriAvail = true, const bool TxfImbPriActive = true, const bool SepCtrAvail = true, const bool HdgCtrAvail = true, const bool ButCtrNewAvail = true, const bool ButCtrDeleteAvail = true, const bool TxfCtrFsrAvail = true, const bool TxfCtrFsrActive = true, const bool TxtCtrClrAvail = true, const bool TxtCtrClrActive = true, const bool ButCtrClrViewAvail = true, const bool ButCtrClrViewActive = true);
+		StatShr(const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxtSrfActive = true, const bool PupVndActive = true, const bool TxfVndValid = false, const bool ButVndEditAvail = true, const bool PupTypActive = true, const bool TxtHkuActive = true, const bool ButHkuViewAvail = true, const bool ButHkuViewActive = true, const bool TxtSupActive = true, const bool ButSupViewAvail = true, const bool ButSupViewActive = true, const bool TxtTplActive = true, const bool ButTplViewAvail = true, const bool ButTplViewActive = true, const bool TxfSrrActive = true, const bool TxfCmtActive = true, const bool SepCtrAvail = true, const bool HdgCtrAvail = true, const bool ButCtrNewAvail = true, const bool ButCtrDeleteAvail = true, const bool TxfCtrFsrAvail = true, const bool TxfCtrFsrActive = true, const bool TxtCtrClrAvail = true, const bool TxtCtrClrActive = true, const bool ButCtrClrViewAvail = true, const bool ButCtrClrViewActive = true, const bool SepImbAvail = true, const bool HdgImbAvail = true, const bool ButImbNewAvail = true, const bool ButImbDeleteAvail = true, const bool TxfImbFsrAvail = true, const bool TxfImbFsrActive = true, const bool PupImbRtyAvail = true, const bool PupImbRtyActive = true, const bool TxfImbWidAvail = true, const bool TxfImbWidActive = true, const bool TxfImbMmxAvail = true, const bool TxfImbMmxActive = true, const bool TxfImbPriAvail = true, const bool TxfImbPriActive = true);
 
 	public:
-		bool TxfVndValid;
 		bool ButSaveAvail;
 		bool ButSaveActive;
 		bool TxtSrfActive;
 		bool PupVndActive;
+		bool TxfVndValid;
 		bool ButVndEditAvail;
 		bool PupTypActive;
 		bool TxtHkuActive;
@@ -208,6 +208,16 @@ public:
 		bool ButTplViewActive;
 		bool TxfSrrActive;
 		bool TxfCmtActive;
+		bool SepCtrAvail;
+		bool HdgCtrAvail;
+		bool ButCtrNewAvail;
+		bool ButCtrDeleteAvail;
+		bool TxfCtrFsrAvail;
+		bool TxfCtrFsrActive;
+		bool TxtCtrClrAvail;
+		bool TxtCtrClrActive;
+		bool ButCtrClrViewAvail;
+		bool ButCtrClrViewActive;
 		bool SepImbAvail;
 		bool HdgImbAvail;
 		bool ButImbNewAvail;
@@ -222,16 +232,6 @@ public:
 		bool TxfImbMmxActive;
 		bool TxfImbPriAvail;
 		bool TxfImbPriActive;
-		bool SepCtrAvail;
-		bool HdgCtrAvail;
-		bool ButCtrNewAvail;
-		bool ButCtrDeleteAvail;
-		bool TxfCtrFsrAvail;
-		bool TxfCtrFsrActive;
-		bool TxtCtrClrAvail;
-		bool TxtCtrClrActive;
-		bool ButCtrClrViewAvail;
-		bool ButCtrClrViewActive;
 
 	public:
 		void writeJSON(Json::Value& sup, std::string difftag = "");
@@ -349,6 +349,16 @@ public:
 	bool evalButTplViewActive(DbsWdbe* dbswdbe);
 	bool evalTxfSrrActive(DbsWdbe* dbswdbe);
 	bool evalTxfCmtActive(DbsWdbe* dbswdbe);
+	bool evalSepCtrAvail(DbsWdbe* dbswdbe);
+	bool evalHdgCtrAvail(DbsWdbe* dbswdbe);
+	bool evalButCtrNewAvail(DbsWdbe* dbswdbe);
+	bool evalButCtrDeleteAvail(DbsWdbe* dbswdbe);
+	bool evalTxfCtrFsrAvail(DbsWdbe* dbswdbe);
+	bool evalTxfCtrFsrActive(DbsWdbe* dbswdbe);
+	bool evalTxtCtrClrAvail(DbsWdbe* dbswdbe);
+	bool evalTxtCtrClrActive(DbsWdbe* dbswdbe);
+	bool evalButCtrClrViewAvail(DbsWdbe* dbswdbe);
+	bool evalButCtrClrViewActive(DbsWdbe* dbswdbe);
 	bool evalSepImbAvail(DbsWdbe* dbswdbe);
 	bool evalHdgImbAvail(DbsWdbe* dbswdbe);
 	bool evalButImbNewAvail(DbsWdbe* dbswdbe);
@@ -363,16 +373,6 @@ public:
 	bool evalTxfImbMmxActive(DbsWdbe* dbswdbe);
 	bool evalTxfImbPriAvail(DbsWdbe* dbswdbe);
 	bool evalTxfImbPriActive(DbsWdbe* dbswdbe);
-	bool evalSepCtrAvail(DbsWdbe* dbswdbe);
-	bool evalHdgCtrAvail(DbsWdbe* dbswdbe);
-	bool evalButCtrNewAvail(DbsWdbe* dbswdbe);
-	bool evalButCtrDeleteAvail(DbsWdbe* dbswdbe);
-	bool evalTxfCtrFsrAvail(DbsWdbe* dbswdbe);
-	bool evalTxfCtrFsrActive(DbsWdbe* dbswdbe);
-	bool evalTxtCtrClrAvail(DbsWdbe* dbswdbe);
-	bool evalTxtCtrClrActive(DbsWdbe* dbswdbe);
-	bool evalButCtrClrViewAvail(DbsWdbe* dbswdbe);
-	bool evalButCtrClrViewActive(DbsWdbe* dbswdbe);
 
 public:
 	PnlWdbeModDetail(XchgWdbe* xchg, DbsWdbe* dbswdbe, const Sbecore::ubigint jrefSup, const Sbecore::uint ixWdbeVLocale);
@@ -391,9 +391,9 @@ public:
 	WdbeMModule recMdl;
 	Sbecore::uint ixWSubsetMdl;
 
-	WdbeMImbuf recImb;
-
 	WdbeMController recCtr;
+
+	WdbeMImbuf recImb;
 
 	bool dirty;
 
@@ -410,8 +410,8 @@ public:
 	void refreshVnd(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems);
 
 	void refreshRecMdl(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems);
-	void refreshRecImb(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems);
 	void refreshRecCtr(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems);
+	void refreshRecImb(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems);
 
 	void refresh(DbsWdbe* dbswdbe, std::set<Sbecore::uint>& moditems, const bool unmute = false);
 
@@ -432,32 +432,32 @@ private:
 	void handleDpchAppDoButHkuViewClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
 	void handleDpchAppDoButSupViewClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
 	void handleDpchAppDoButTplViewClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
-	void handleDpchAppDoButImbNewClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
-	void handleDpchAppDoButImbDeleteClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
 	void handleDpchAppDoButCtrNewClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
 	void handleDpchAppDoButCtrDeleteClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
 	void handleDpchAppDoButCtrClrViewClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
+	void handleDpchAppDoButImbNewClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
+	void handleDpchAppDoButImbDeleteClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
 
 public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeKlsAkeyMod_klsEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv);
-	bool handleCallWdbeMdlUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
-	bool handleCallWdbeImbUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
-	bool handleCallWdbeCtrUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
-	bool handleCallWdbeMdl_typEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
-	bool handleCallWdbeMdl_tplEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
-	bool handleCallWdbeMdl_supEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
-	bool handleCallWdbeMdl_sup_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
-	bool handleCallWdbeMdl_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
-	bool handleCallWdbeMdl_imbEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
-	bool handleCallWdbeMdl_hkuEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
-	bool handleCallWdbeMdl_hku_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
-	bool handleCallWdbeMdl_hktEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
-	bool handleCallWdbeMdl_ctrEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
-	bool handleCallWdbeCtr_mdl_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
 	bool handleCallWdbeCtr_clrEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeCtr_mdl_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
+	bool handleCallWdbeMdl_ctrEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeMdl_hktEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
+	bool handleCallWdbeMdl_hku_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
+	bool handleCallWdbeMdl_hkuEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeMdl_imbEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeMdl_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
+	bool handleCallWdbeMdl_sup_inSbs(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
+	bool handleCallWdbeMdl_supEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeMdl_tplEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeMdl_typEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
+	bool handleCallWdbeCtrUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbeImbUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbeMdlUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbeKlsAkeyMod_klsEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv);
 
 };
 

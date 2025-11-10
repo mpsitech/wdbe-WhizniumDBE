@@ -37,6 +37,7 @@ DpchRetWdbe* WdbeMtpGenfstGpio_Easy_v1_0::run(
 
 	// IP run --- IBEGIN
 	unsigned int w = 32;
+	bool threeNotInout = false;
 	bool bidirNotUnidir = false;
 	bool inNotOut = false;
 
@@ -57,13 +58,14 @@ DpchRetWdbe* WdbeMtpGenfstGpio_Easy_v1_0::run(
 	ubigint refPrtAckInvSet = 0;
 
 	ubigint refPrtBitsOut = 0;
-	ubigint refPrtBitsDir = 0;
+	ubigint refPrtBitsTri = 0;
 
 	string Syncrst, Comb, Onval, Cond1;
 
 	string s;
 
 	if (Wdbe::getMpa(dbswdbe, refWdbeMModule, "w", s)) w = atoi(s.c_str());
+	if (Wdbe::getMpa(dbswdbe, refWdbeMModule, "threeNotInout", s)) threeNotInout = (s == "true");
 	if (Wdbe::getMpa(dbswdbe, refWdbeMModule, "bidirNotUnidir", s)) bidirNotUnidir = (s == "true");
 	if (Wdbe::getMpa(dbswdbe, refWdbeMModule, "inNotOut", s)) inNotOut = (s == "true");
 
@@ -80,15 +82,15 @@ DpchRetWdbe* WdbeMtpGenfstGpio_Easy_v1_0::run(
 	dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMPort WHERE mdlRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'getBits'", refPrtGetBits);
 	dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMPort WHERE mdlRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'ackInvSet'", refPrtAckInvSet);
 
-	dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMPort WHERE mdlRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'bitsOut'", refPrtBitsOut);
-	dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMPort WHERE mdlRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'bitsDir'", refPrtBitsDir);
+	dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMPort WHERE mdlRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'bits_out'", refPrtBitsOut);
+	dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMPort WHERE mdlRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'bits_tri'", refPrtBitsTri);
 
 	// - main operation FSM
 	Syncrst = "state(init)";
 	if (cmdConfig || cmdSet) {
 		Syncrst += " or (state(!inv) and ";
 
-		if (cmdConfig && cmdSet) Syncrst += "(reqInvConfig and reqInvSet)";
+		if (cmdConfig && cmdSet) Syncrst += "(reqInvConfig or reqInvSet)";
 		else if (cmdConfig) Syncrst += "reqInvConfig";
 		else Syncrst += "reqInvSet";
 
@@ -122,31 +124,28 @@ DpchRetWdbe* WdbeMtpGenfstGpio_Easy_v1_0::run(
 	// - signals
 	mdlNum = 1;
 
-	dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "w", true, "nat", 0, "", "", "", to_string(w), false, 0, "");
+	dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "w", true, "nat", 0, "", "", "", to_string(w), 0, "");
 
 	refC = dbswdbe->tblwdbecsignal->getNewRef();
-	if (cmdConfig) dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OPRT, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "ackInvConfig", false, "sl", 1, "", "", "", "", false, refPrtAckInvConfig, "");
-	if (cmdSet) dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OPRT, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "ackInvSet", false, "sl", 1, "", "", "", "", false, refPrtAckInvSet, "");
+	if (cmdConfig) dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OPRT, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "ackInvConfig", false, "sl", 1, "", "", "", "0", refPrtAckInvConfig, "");
+	if (cmdSet) dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OPRT, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "ackInvSet", false, "sl", 1, "", "", "", "0", refPrtAckInvSet, "");
 
-	if (cmdGet) dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OPRT, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "getBits", false, "slvdn", w, "", "", "", "0", false, refPrtGetBits, "");
+	if (cmdGet) dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OPRT, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "getBits", false, "slvdn", w, "", "", "", "0", refPrtGetBits, "");
 
 	refC = dbswdbe->tblwdbecsignal->getNewRef();
 
-	if (!(!bidirNotUnidir && inNotOut)) dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OPRT, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "bitsOut_sig", false, "slvdn", w, "", "", "", "0", false, refPrtBitsOut, "");
-	if (bidirNotUnidir) dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OPRT, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "bitsDir_sig", false, "slvdn", w, "", "", "", "0", false, refPrtBitsDir, "");
-
-	if (bidirNotUnidir && ((srefIobuf == "bb") || (srefIobuf == "iobuf")))
-				dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "bitsDirn_sig", false, "slvdn", w, "", "*", "not bitsDir_sig", "", false, 0, "");
+	if (!(!bidirNotUnidir && inNotOut)) dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OPRT, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "bitsOut_sig", false, "slvdn", w, "", "", "", "0", refPrtBitsOut, "");
+	if (bidirNotUnidir) dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OPRT, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "bitsDir_sig", false, "slvdn", w, "", "", "", "0", refPrtBitsTri, "");
 
 	if (!(!bidirNotUnidir && !inNotOut)) {
-		if (srefIobuf != "") {
+		if (!threeNotInout) {
 			Comb = "";
 			Onval = "";
 		} else {
 			Comb = "*";
-			Onval = "bitsIn";
+			Onval = "bits_in";
 		};
-		dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::VOID, 0, 0, "bitsIn_sig", false, "slvdn", w, "", Comb, Onval, "", false, 0, "");
+		dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::VOID, 0, 0, "bitsIn_sig", false, "slvdn", w, "", Comb, Onval, "", 0, "");
 	};
 
 	delete prc;

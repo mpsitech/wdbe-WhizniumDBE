@@ -24,12 +24,11 @@ PnlWdbeUsgHeadbar::StgInf::StgInf(
 			, const uint MenCrdWidth
 		) :
 			Block()
+			, MenAppCptwidth(MenAppCptwidth)
+			, MenAppWidth(MenAppWidth)
+			, MenCrdCptwidth(MenCrdCptwidth)
+			, MenCrdWidth(MenCrdWidth)
 		{
-	this->MenAppCptwidth = MenAppCptwidth;
-	this->MenAppWidth = MenAppWidth;
-	this->MenCrdCptwidth = MenCrdCptwidth;
-	this->MenCrdWidth = MenCrdWidth;
-
 	mask = {MENAPPCPTWIDTH, MENAPPWIDTH, MENCRDCPTWIDTH, MENCRDWIDTH};
 };
 
@@ -95,10 +94,9 @@ PnlWdbeUsgHeadbar::Tag::Tag(
 			, const string& MenCrd
 		) :
 			Block()
+			, MenApp(MenApp)
+			, MenCrd(MenCrd)
 		{
-	this->MenApp = MenApp;
-	this->MenCrd = MenCrd;
-
 	mask = {MENAPP, MENCRD};
 };
 

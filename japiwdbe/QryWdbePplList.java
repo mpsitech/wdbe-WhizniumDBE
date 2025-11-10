@@ -19,16 +19,16 @@ public class QryWdbePplList {
 		*/
 	public static class VecVOrd {
 
-		public static final int HSM = 1;
-		public static final int SRF = 2;
+		public static final int SRF = 1;
+		public static final int HSM = 2;
 
 		public static int getIx(
 					String sref
 				) {
 			String s = sref.toLowerCase();
 
-			if (s.equals("hsm")) return HSM;
 			if (s.equals("srf")) return SRF;
+			if (s.equals("hsm")) return HSM;
 
 			return 0;
 		};
@@ -36,8 +36,8 @@ public class QryWdbePplList {
 		public static String getSref(
 					int ix
 				) {
-			if (ix == HSM) return("hsm");
 			if (ix == SRF) return("srf");
+			if (ix == HSM) return("hsm");
 
 			return "";
 		};

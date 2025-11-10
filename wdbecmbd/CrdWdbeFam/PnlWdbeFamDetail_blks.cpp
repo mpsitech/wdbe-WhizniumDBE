@@ -46,12 +46,11 @@ PnlWdbeFamDetail::ContIac::ContIac(
 			, const string& TxfCmt
 		) :
 			Block()
+			, numFPupVnd(numFPupVnd)
+			, TxfVnd(TxfVnd)
+			, TxfTit(TxfTit)
+			, TxfCmt(TxfCmt)
 		{
-	this->numFPupVnd = numFPupVnd;
-	this->TxfVnd = TxfVnd;
-	this->TxfTit = TxfTit;
-	this->TxfCmt = TxfCmt;
-
 	mask = {NUMFPUPVND, TXFVND, TXFTIT, TXFCMT};
 };
 
@@ -205,25 +204,24 @@ void PnlWdbeFamDetail::StatApp::writeXML(
  ******************************************************************************/
 
 PnlWdbeFamDetail::StatShr::StatShr(
-			const bool TxfVndValid
-			, const bool ButSaveAvail
+			const bool ButSaveAvail
 			, const bool ButSaveActive
 			, const bool PupVndActive
+			, const bool TxfVndValid
 			, const bool ButVndEditAvail
 			, const bool TxfTitActive
 			, const bool TxfCmtActive
 		) :
 			Block()
+			, ButSaveAvail(ButSaveAvail)
+			, ButSaveActive(ButSaveActive)
+			, PupVndActive(PupVndActive)
+			, TxfVndValid(TxfVndValid)
+			, ButVndEditAvail(ButVndEditAvail)
+			, TxfTitActive(TxfTitActive)
+			, TxfCmtActive(TxfCmtActive)
 		{
-	this->TxfVndValid = TxfVndValid;
-	this->ButSaveAvail = ButSaveAvail;
-	this->ButSaveActive = ButSaveActive;
-	this->PupVndActive = PupVndActive;
-	this->ButVndEditAvail = ButVndEditAvail;
-	this->TxfTitActive = TxfTitActive;
-	this->TxfCmtActive = TxfCmtActive;
-
-	mask = {TXFVNDVALID, BUTSAVEAVAIL, BUTSAVEACTIVE, PUPVNDACTIVE, BUTVNDEDITAVAIL, TXFTITACTIVE, TXFCMTACTIVE};
+	mask = {BUTSAVEAVAIL, BUTSAVEACTIVE, PUPVNDACTIVE, TXFVNDVALID, BUTVNDEDITAVAIL, TXFTITACTIVE, TXFCMTACTIVE};
 };
 
 void PnlWdbeFamDetail::StatShr::writeJSON(
@@ -234,10 +232,10 @@ void PnlWdbeFamDetail::StatShr::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["TxfVndValid"] = TxfVndValid;
 	me["ButSaveAvail"] = ButSaveAvail;
 	me["ButSaveActive"] = ButSaveActive;
 	me["PupVndActive"] = PupVndActive;
+	me["TxfVndValid"] = TxfVndValid;
 	me["ButVndEditAvail"] = ButVndEditAvail;
 	me["TxfTitActive"] = TxfTitActive;
 	me["TxfCmtActive"] = TxfCmtActive;
@@ -255,10 +253,10 @@ void PnlWdbeFamDetail::StatShr::writeXML(
 	else itemtag = "StatitemShrWdbeFamDetail";
 
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
-		writeBoolAttr(wr, itemtag, "sref", "TxfVndValid", TxfVndValid);
 		writeBoolAttr(wr, itemtag, "sref", "ButSaveAvail", ButSaveAvail);
 		writeBoolAttr(wr, itemtag, "sref", "ButSaveActive", ButSaveActive);
 		writeBoolAttr(wr, itemtag, "sref", "PupVndActive", PupVndActive);
+		writeBoolAttr(wr, itemtag, "sref", "TxfVndValid", TxfVndValid);
 		writeBoolAttr(wr, itemtag, "sref", "ButVndEditAvail", ButVndEditAvail);
 		writeBoolAttr(wr, itemtag, "sref", "TxfTitActive", TxfTitActive);
 		writeBoolAttr(wr, itemtag, "sref", "TxfCmtActive", TxfCmtActive);
@@ -270,10 +268,10 @@ set<uint> PnlWdbeFamDetail::StatShr::comm(
 		) {
 	set<uint> items;
 
-	if (TxfVndValid == comp->TxfVndValid) insert(items, TXFVNDVALID);
 	if (ButSaveAvail == comp->ButSaveAvail) insert(items, BUTSAVEAVAIL);
 	if (ButSaveActive == comp->ButSaveActive) insert(items, BUTSAVEACTIVE);
 	if (PupVndActive == comp->PupVndActive) insert(items, PUPVNDACTIVE);
+	if (TxfVndValid == comp->TxfVndValid) insert(items, TXFVNDVALID);
 	if (ButVndEditAvail == comp->ButVndEditAvail) insert(items, BUTVNDEDITAVAIL);
 	if (TxfTitActive == comp->TxfTitActive) insert(items, TXFTITACTIVE);
 	if (TxfCmtActive == comp->TxfCmtActive) insert(items, TXFCMTACTIVE);
@@ -289,7 +287,7 @@ set<uint> PnlWdbeFamDetail::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {TXFVNDVALID, BUTSAVEAVAIL, BUTSAVEACTIVE, PUPVNDACTIVE, BUTVNDEDITAVAIL, TXFTITACTIVE, TXFCMTACTIVE};
+	diffitems = {BUTSAVEAVAIL, BUTSAVEACTIVE, PUPVNDACTIVE, TXFVNDVALID, BUTVNDEDITAVAIL, TXFTITACTIVE, TXFCMTACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);

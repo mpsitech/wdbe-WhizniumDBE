@@ -52,6 +52,7 @@ function initBD(bNotD) {
 
 	// IP initBD --- BEGIN
 	initCpt(hdrdoc, "Cpt", retrieveTi(srcdoc, "TagWdbeNavAuxfct", "Cpt"));
+	initCpt(contcontdoc, "CptIdf", retrieveTi(srcdoc, "TagWdbeNavAuxfct", "CptIdf"));
 	initCpt(contcontdoc, "CptUtl", retrieveTi(srcdoc, "TagWdbeNavAuxfct", "CptUtl"));
 	// IP initBD --- END
 
@@ -76,15 +77,34 @@ function refreshA() {
 function refreshBD(bNotD) {
 	if (!contcontdoc) return;
 
-	var height = 35; // full cont height
+	var height = 60; // full cont height
 
 	// IP refreshBD.vars --- BEGIN
+	var ButIdfNewcrdAvail = (retrieveSi(srcdoc, "StatShrWdbeNavAuxfct", "ButIdfNewcrdAvail") == "true");
+
 	var ButUtlNewcrdAvail = (retrieveSi(srcdoc, "StatShrWdbeNavAuxfct", "ButUtlNewcrdAvail") == "true");
 
 	var mytd, first;
 	// IP refreshBD.vars --- END
 
 	// IP refreshBD --- BEGIN
+	height -= setCtlAvail(contcontdoc, "Idf", ButIdfNewcrdAvail, 25);
+	if (ButIdfNewcrdAvail) {
+		if ((ButIdfNewcrdAvail == !contcontdoc.getElementById("ButIdfNewcrd"))) {
+			mytd = contcontdoc.getElementById("dynIdf");
+			clearElem(mytd);
+
+			first = true;
+
+			if (ButIdfNewcrdAvail) {
+				if (first) first = false;
+				else mytd.appendChild(contcontdoc.createTextNode("\u00a0"));
+				mytd.appendChild(makeImgBut(contcontdoc, "ButIdfNewcrd", "icon/newcrd"));
+			};
+		};
+
+	};
+
 	height -= setCtlAvail(contcontdoc, "Utl", ButUtlNewcrdAvail, 25);
 	if (ButUtlNewcrdAvail) {
 		if ((ButUtlNewcrdAvail == !contcontdoc.getElementById("ButUtlNewcrd"))) {
@@ -164,9 +184,11 @@ function handleButCrdopenClick(ctlsref) {
 function mergeDpchEngData(dom) {
 	var mask = [];
 
+	// IP mergeDpchEngData --- BEGIN
 	if (updateSrcblock(dom, "DpchEngWdbeNavAuxfctData", "StatAppWdbeNavAuxfct", srcdoc)) mask.push("statapp");
 	if (updateSrcblock(dom, "DpchEngWdbeNavAuxfctData", "StatShrWdbeNavAuxfct", srcdoc)) mask.push("statshr");
 	if (updateSrcblock(dom, "DpchEngWdbeNavAuxfctData", "TagWdbeNavAuxfct", srcdoc)) mask.push("tag");
+	// IP mergeDpchEngData --- END
 
 	return mask;
 };

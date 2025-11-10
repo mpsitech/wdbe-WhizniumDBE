@@ -14,10 +14,10 @@
 
 // IP include.cust --- INSERT
 
+#include "PnlWdbePrsDetail.h"
+#include "PnlWdbePrsADetail.h"
 #include "PnlWdbePrsMNProject.h"
 #include "PnlWdbePrsMNCoreproject.h"
-#include "PnlWdbePrsADetail.h"
-#include "PnlWdbePrsDetail.h"
 
 #define VecVWdbePrsRecDo PnlWdbePrsRec::VecVDo
 
@@ -180,10 +180,10 @@ public:
 	ContInf continf;
 	StatShr statshr;
 
+	PnlWdbePrsDetail* pnldetail;
+	PnlWdbePrsADetail* pnladetail;
 	PnlWdbePrsMNProject* pnlmnproject;
 	PnlWdbePrsMNCoreproject* pnlmncoreproject;
-	PnlWdbePrsADetail* pnladetail;
-	PnlWdbePrsDetail* pnldetail;
 
 	WdbeMPerson recPrs;
 

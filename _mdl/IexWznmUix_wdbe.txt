@@ -442,6 +442,7 @@ CrdWdbeFil
 	ImeIMDialog.end
 CrdWdbeFst
 CrdWdbeGen
+CrdWdbeIdf
 CrdWdbeLib
 	ImeIMPanel.srefIxVIop	srefIxVBasetype	carNum	sref	Detach	Avail	Comment
 	retr			PnlWdbeLibList
@@ -503,7 +504,7 @@ CrdWdbeMtp
 CrdWdbeNav
 	ImeIMControl1.srefIxVBasetype	srefHkIxVSection	srefRefIxVTbl	srefRefUref	srefSupRefWznmMControl	supNum	srefIxVScope	sref	srefIxVSubtype	srefsWznmMTag	Title	Avail	Active	srefsKOption
 	msp	mbar	void		MenApp	4	app	MspApp2	void			MitAppMlcAvail()|MitAppLoiAvail()
-	mit	mbar	dlg	DlgWdbeNavMnglic	MenApp	5	shr	MitAppMlc	void			pre.adm()
+	mit	mbar	dlg	DlgWdbeNavMnglic	MenApp	5	shr	MitAppMlc	void			pre.admin()
 		ImeIJMControlTitle1.srefX1RefWznmMLocale	Title
 		enus	Manage licenses ...
 		ImeIJMControlTitle1.end
@@ -553,7 +554,7 @@ CrdWdbeNav
 			enus	Log file
 			ImeIJMControlTitle3.end
 		17	dld	0	cont	void		16	app	LfiDld	void	download					sge(done)	cap
-		18	but	0	ftr	void		0	shr	ButDne	void	done					sge(idle|done)	cap
+		18	but	0	ftr	void		0	shr	ButDne	void	done					sge(idle|impdone|done)	cap
 			ImeIAMControlPar3.x1SrefKKey	srefX2RefWznmMLocale	osrefKVal
 			action		dlgclose
 			ImeIAMControlPar3.end
@@ -1324,12 +1325,12 @@ CrdWdbeVer
 	msp	mbar	void		MenCrd	6	app	MspCrd3	void			pre.ixCrdaccVerIncl(edit|exec)	pre.refVer()
 	mit	mbar	dlg	DlgWdbeVerDeploy	MenCrd	7	shr	MitCrdIdp	void		Import deployment information ...	pre.ixCrdaccVerIncl(edit)	pre.refVer()&ver.steEq(newcre|newimp)
 	msp	mbar	void		MenCrd	8	app	MspCrd4	void			pre.ixCrdaccVerIncl(edit|exec)	pre.refVer()
-	mit	mbar	dlg	DlgWdbeVerMdlstr	MenCrd	9	shr	MitCrdImd	void		Import modular structure ...	pre.ixCrdaccVerIncl(edit|exec)	pre.refVer()&ver.steEq(dsndeploy)
-	mit	mbar	dlg	DlgWdbeVerCmdset	MenCrd	10	shr	MitCrdIcs	void		Import command set ...	pre.ixCrdaccVerIncl(edit|exec)	pre.refVer()&ver.steEq(dsnmdlstr)
-	mit	mbar	dlg	DlgWdbeVerDflalg	MenCrd	11	shr	MitCrdIda	void		Import data flows and algorithms ...	pre.ixCrdaccVerIncl(edit|exec)	pre.refVer()&ver.steEq(dsnmdlstr|dsncmdset)
+	mit	mbar	dlg	DlgWdbeVerMdlstr	MenCrd	9	shr	MitCrdImd	void		Import modular structure ...	pre.ixCrdaccVerIncl(edit|exec)	pre.refVer()&ver.steEq(dsndeploy|dsnmdlstr)
+	mit	mbar	dlg	DlgWdbeVerCmdset	MenCrd	10	shr	MitCrdIcs	void		Import command set ...	pre.ixCrdaccVerIncl(edit|exec)	pre.refVer()&ver.steEq(dsnmdlstr|dsncmdset)
+	mit	mbar	dlg	DlgWdbeVerDflalg	MenCrd	11	shr	MitCrdIda	void		Import data flows and algorithms ...	pre.ixCrdaccVerIncl(edit|exec)	pre.refVer()&ver.steEq(dsnmdlstr|dsncmdset|dsndflalg)
 	msp	mbar	void		MenCrd	12	app	MspCrd5	void			pre.ixCrdaccVerIncl(edit|exec)	pre.refVer()
 	mit	mbar	dlg	DlgWdbeVerGenfst	MenCrd	13	shr	MitCrdGfs	void		Generate fine structure ...	pre.ixCrdaccVerIncl(exec)	pre.refVer()&ver.steEq(dsnmdlstr|dsncmdset|dsndflalg)
-	mit	mbar	dlg	DlgWdbeVerCustfst	MenCrd	14	shr	MitCrdIfs	void		Apply custom fine structure ...	pre.ixCrdaccVerIncl(edit|exec)	pre.refVer()&ver.steEq(dsngenfst)
+	mit	mbar	dlg	DlgWdbeVerCustfst	MenCrd	14	shr	MitCrdIfs	void		Apply custom fine structure ...	pre.ixCrdaccVerIncl(edit|exec)	pre.refVer()&ver.steEq(dsngenfst|dsncustfst)
 	msp	mbar	void		MenCrd	15	app	MspCrd6	void			pre.ixCrdaccVerIncl(edit|exec)	pre.refVer()
 	mit	mbar	dlg	DlgWdbeVerFinmod	MenCrd	16	shr	MitCrdFnm	void		Finalize model ...	pre.ixCrdaccVerIncl(exec)	pre.refVer()&ver.steEq(dsngenfst|dsncustfst)
 	alr	void	void				shr	AlrCvw	void

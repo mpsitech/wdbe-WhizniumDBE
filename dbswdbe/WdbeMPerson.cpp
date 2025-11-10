@@ -33,22 +33,22 @@ WdbeMPerson::WdbeMPerson(
 			, const ubigint emlRefADetail
 			, const string emlVal
 			, const string Salutation
-		) {
-
-	this->ref = ref;
-	this->grp = grp;
-	this->own = own;
-	this->ixWDerivate = ixWDerivate;
-	this->ixVSex = ixVSex;
-	this->Title = Title;
-	this->Firstname = Firstname;
-	this->refJLastname = refJLastname;
-	this->Lastname = Lastname;
-	this->telRefADetail = telRefADetail;
-	this->telVal = telVal;
-	this->emlRefADetail = emlRefADetail;
-	this->emlVal = emlVal;
-	this->Salutation = Salutation;
+		) :
+			ref(ref)
+			, grp(grp)
+			, own(own)
+			, ixWDerivate(ixWDerivate)
+			, ixVSex(ixVSex)
+			, Title(Title)
+			, Firstname(Firstname)
+			, refJLastname(refJLastname)
+			, Lastname(Lastname)
+			, telRefADetail(telRefADetail)
+			, telVal(telVal)
+			, emlRefADetail(emlRefADetail)
+			, emlVal(emlVal)
+			, Salutation(Salutation)
+		{
 };
 
 bool WdbeMPerson::operator==(

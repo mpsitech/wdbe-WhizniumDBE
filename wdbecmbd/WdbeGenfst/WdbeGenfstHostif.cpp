@@ -54,7 +54,7 @@ DpchRetWdbe* WdbeGenfstHostif::run(
 
 				s = "reqResetFrom" + StrMod::cap(mdl->sref);
 
-				dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::HSHK, 0, VecWdbeVMSignalRefTbl::MDL, mdl->supRefWdbeMModule, refNum++, VecWdbeVMSignalMgeTbl::MDL, refWdbeMModule, 0, s, false, "sl", 1, "", "", "", "", false, 0, "");
+				dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::HSHK, 0, VecWdbeVMSignalRefTbl::MDL, mdl->supRefWdbeMModule, refNum++, VecWdbeVMSignalMgeTbl::MDL, refWdbeMModule, 0, s, false, "sl", 1, "", "", "", "", 0, "");
 
 				prt->csiSrefWdbeMSignal = s;
 				dbswdbe->tblwdbemport->updateRec(prt);

@@ -31,7 +31,8 @@ namespace PnlWdbeNavAuxfct {
 	class VecVDo {
 
 	public:
-		static const Sbecore::uint BUTUTLNEWCRDCLICK = 1;
+		static const Sbecore::uint BUTIDFNEWCRDCLICK = 1;
+		static const Sbecore::uint BUTUTLNEWCRDCLICK = 2;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);
@@ -63,12 +64,14 @@ namespace PnlWdbeNavAuxfct {
 	class StatShr : public Sbecore::Block {
 
 	public:
-		static const Sbecore::uint BUTUTLNEWCRDAVAIL = 1;
+		static const Sbecore::uint BUTIDFNEWCRDAVAIL = 1;
+		static const Sbecore::uint BUTUTLNEWCRDAVAIL = 2;
 
 	public:
-		StatShr(const bool ButUtlNewcrdAvail = true);
+		StatShr(const bool ButIdfNewcrdAvail = true, const bool ButUtlNewcrdAvail = true);
 
 	public:
+		bool ButIdfNewcrdAvail;
 		bool ButUtlNewcrdAvail;
 
 	public:
@@ -84,13 +87,15 @@ namespace PnlWdbeNavAuxfct {
 
 	public:
 		static const Sbecore::uint CPT = 1;
-		static const Sbecore::uint CPTUTL = 2;
+		static const Sbecore::uint CPTIDF = 2;
+		static const Sbecore::uint CPTUTL = 3;
 
 	public:
-		Tag(const std::string& Cpt = "", const std::string& CptUtl = "");
+		Tag(const std::string& Cpt = "", const std::string& CptIdf = "", const std::string& CptUtl = "");
 
 	public:
 		std::string Cpt;
+		std::string CptIdf;
 		std::string CptUtl;
 
 	public:

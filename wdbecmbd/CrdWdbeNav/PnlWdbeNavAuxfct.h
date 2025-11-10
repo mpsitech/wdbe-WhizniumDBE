@@ -35,7 +35,8 @@ public:
 	class VecVDo {
 
 	public:
-		static const Sbecore::uint BUTUTLNEWCRDCLICK = 1;
+		static const Sbecore::uint BUTIDFNEWCRDCLICK = 1;
+		static const Sbecore::uint BUTUTLNEWCRDCLICK = 2;
 
 		static Sbecore::uint getIx(const std::string& sref);
 		static std::string getSref(const Sbecore::uint ix);
@@ -57,12 +58,14 @@ public:
 	class StatShr : public Sbecore::Block {
 
 	public:
-		static const Sbecore::uint BUTUTLNEWCRDAVAIL = 1;
+		static const Sbecore::uint BUTIDFNEWCRDAVAIL = 1;
+		static const Sbecore::uint BUTUTLNEWCRDAVAIL = 2;
 
 	public:
-		StatShr(const bool ButUtlNewcrdAvail = true);
+		StatShr(const bool ButIdfNewcrdAvail = true, const bool ButUtlNewcrdAvail = true);
 
 	public:
+		bool ButIdfNewcrdAvail;
 		bool ButUtlNewcrdAvail;
 
 	public:
@@ -130,6 +133,7 @@ public:
 		void writeXML(const Sbecore::uint ixWdbeVLocale, xmlTextWriter* wr);
 	};
 
+	bool evalButIdfNewcrdAvail(DbsWdbe* dbswdbe);
 	bool evalButUtlNewcrdAvail(DbsWdbe* dbswdbe);
 
 public:
@@ -160,6 +164,7 @@ private:
 
 	void handleDpchAppWdbeInit(DbsWdbe* dbswdbe, DpchAppWdbeInit* dpchappwdbeinit, DpchEngWdbe** dpcheng);
 
+	void handleDpchAppDoButIdfNewcrdClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
 	void handleDpchAppDoButUtlNewcrdClick(DbsWdbe* dbswdbe, DpchEngWdbe** dpcheng);
 
 };

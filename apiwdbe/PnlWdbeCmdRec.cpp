@@ -45,9 +45,8 @@ PnlWdbeCmdRec::ContInf::ContInf(
 			const string& TxtRef
 		) :
 			Block()
+			, TxtRef(TxtRef)
 		{
-	this->TxtRef = TxtRef;
-
 	mask = {TXTREF};
 };
 
@@ -104,18 +103,19 @@ set<uint> PnlWdbeCmdRec::ContInf::diff(
 
 PnlWdbeCmdRec::StatApp::StatApp(
 			const bool initdoneDetail
-			, const bool initdoneARetpar
 			, const bool initdoneAInvpar
+			, const bool initdoneARetpar
+			, const bool initdoneHk1NVector
 			, const bool initdoneMNController
 		) :
 			Block()
+			, initdoneDetail(initdoneDetail)
+			, initdoneAInvpar(initdoneAInvpar)
+			, initdoneARetpar(initdoneARetpar)
+			, initdoneHk1NVector(initdoneHk1NVector)
+			, initdoneMNController(initdoneMNController)
 		{
-	this->initdoneDetail = initdoneDetail;
-	this->initdoneARetpar = initdoneARetpar;
-	this->initdoneAInvpar = initdoneAInvpar;
-	this->initdoneMNController = initdoneMNController;
-
-	mask = {INITDONEDETAIL, INITDONEARETPAR, INITDONEAINVPAR, INITDONEMNCONTROLLER};
+	mask = {INITDONEDETAIL, INITDONEAINVPAR, INITDONEARETPAR, INITDONEHK1NVECTOR, INITDONEMNCONTROLLER};
 };
 
 bool PnlWdbeCmdRec::StatApp::readXML(
@@ -136,8 +136,9 @@ bool PnlWdbeCmdRec::StatApp::readXML(
 
 	if (basefound) {
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneDetail", initdoneDetail)) add(INITDONEDETAIL);
-		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneARetpar", initdoneARetpar)) add(INITDONEARETPAR);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneAInvpar", initdoneAInvpar)) add(INITDONEAINVPAR);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneARetpar", initdoneARetpar)) add(INITDONEARETPAR);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneHk1NVector", initdoneHk1NVector)) add(INITDONEHK1NVECTOR);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneMNController", initdoneMNController)) add(INITDONEMNCONTROLLER);
 	};
 
@@ -150,8 +151,9 @@ set<uint> PnlWdbeCmdRec::StatApp::comm(
 	set<uint> items;
 
 	if (initdoneDetail == comp->initdoneDetail) insert(items, INITDONEDETAIL);
-	if (initdoneARetpar == comp->initdoneARetpar) insert(items, INITDONEARETPAR);
 	if (initdoneAInvpar == comp->initdoneAInvpar) insert(items, INITDONEAINVPAR);
+	if (initdoneARetpar == comp->initdoneARetpar) insert(items, INITDONEARETPAR);
+	if (initdoneHk1NVector == comp->initdoneHk1NVector) insert(items, INITDONEHK1NVECTOR);
 	if (initdoneMNController == comp->initdoneMNController) insert(items, INITDONEMNCONTROLLER);
 
 	return(items);
@@ -165,7 +167,7 @@ set<uint> PnlWdbeCmdRec::StatApp::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {INITDONEDETAIL, INITDONEARETPAR, INITDONEAINVPAR, INITDONEMNCONTROLLER};
+	diffitems = {INITDONEDETAIL, INITDONEAINVPAR, INITDONEARETPAR, INITDONEHK1NVECTOR, INITDONEMNCONTROLLER};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -178,21 +180,22 @@ set<uint> PnlWdbeCmdRec::StatApp::diff(
 PnlWdbeCmdRec::StatShr::StatShr(
 			const uint ixWdbeVExpstate
 			, const string& scrJrefDetail
-			, const string& scrJrefARetpar
 			, const string& scrJrefAInvpar
+			, const string& scrJrefARetpar
+			, const string& scrJrefHk1NVector
 			, const string& scrJrefMNController
 			, const bool ButRegularizeActive
 		) :
 			Block()
+			, ixWdbeVExpstate(ixWdbeVExpstate)
+			, scrJrefDetail(scrJrefDetail)
+			, scrJrefAInvpar(scrJrefAInvpar)
+			, scrJrefARetpar(scrJrefARetpar)
+			, scrJrefHk1NVector(scrJrefHk1NVector)
+			, scrJrefMNController(scrJrefMNController)
+			, ButRegularizeActive(ButRegularizeActive)
 		{
-	this->ixWdbeVExpstate = ixWdbeVExpstate;
-	this->scrJrefDetail = scrJrefDetail;
-	this->scrJrefARetpar = scrJrefARetpar;
-	this->scrJrefAInvpar = scrJrefAInvpar;
-	this->scrJrefMNController = scrJrefMNController;
-	this->ButRegularizeActive = ButRegularizeActive;
-
-	mask = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFARETPAR, SCRJREFAINVPAR, SCRJREFMNCONTROLLER, BUTREGULARIZEACTIVE};
+	mask = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFAINVPAR, SCRJREFARETPAR, SCRJREFHK1NVECTOR, SCRJREFMNCONTROLLER, BUTREGULARIZEACTIVE};
 };
 
 bool PnlWdbeCmdRec::StatShr::readXML(
@@ -219,8 +222,9 @@ bool PnlWdbeCmdRec::StatShr::readXML(
 			add(IXWDBEVEXPSTATE);
 		};
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefDetail", scrJrefDetail)) add(SCRJREFDETAIL);
-		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefARetpar", scrJrefARetpar)) add(SCRJREFARETPAR);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefAInvpar", scrJrefAInvpar)) add(SCRJREFAINVPAR);
+		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefARetpar", scrJrefARetpar)) add(SCRJREFARETPAR);
+		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefHk1NVector", scrJrefHk1NVector)) add(SCRJREFHK1NVECTOR);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefMNController", scrJrefMNController)) add(SCRJREFMNCONTROLLER);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButRegularizeActive", ButRegularizeActive)) add(BUTREGULARIZEACTIVE);
 	};
@@ -235,8 +239,9 @@ set<uint> PnlWdbeCmdRec::StatShr::comm(
 
 	if (ixWdbeVExpstate == comp->ixWdbeVExpstate) insert(items, IXWDBEVEXPSTATE);
 	if (scrJrefDetail == comp->scrJrefDetail) insert(items, SCRJREFDETAIL);
-	if (scrJrefARetpar == comp->scrJrefARetpar) insert(items, SCRJREFARETPAR);
 	if (scrJrefAInvpar == comp->scrJrefAInvpar) insert(items, SCRJREFAINVPAR);
+	if (scrJrefARetpar == comp->scrJrefARetpar) insert(items, SCRJREFARETPAR);
+	if (scrJrefHk1NVector == comp->scrJrefHk1NVector) insert(items, SCRJREFHK1NVECTOR);
 	if (scrJrefMNController == comp->scrJrefMNController) insert(items, SCRJREFMNCONTROLLER);
 	if (ButRegularizeActive == comp->ButRegularizeActive) insert(items, BUTREGULARIZEACTIVE);
 
@@ -251,7 +256,7 @@ set<uint> PnlWdbeCmdRec::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFARETPAR, SCRJREFAINVPAR, SCRJREFMNCONTROLLER, BUTREGULARIZEACTIVE};
+	diffitems = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFAINVPAR, SCRJREFARETPAR, SCRJREFHK1NVECTOR, SCRJREFMNCONTROLLER, BUTREGULARIZEACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -265,9 +270,8 @@ PnlWdbeCmdRec::Tag::Tag(
 			const string& Cpt
 		) :
 			Block()
+			, Cpt(Cpt)
 		{
-	this->Cpt = Cpt;
-
 	mask = {CPT};
 };
 
@@ -304,11 +308,11 @@ PnlWdbeCmdRec::DpchAppDo::DpchAppDo(
 			, const set<uint>& mask
 		) :
 			DpchAppWdbe(VecWdbeVDpch::DPCHAPPWDBECMDRECDO, scrJref)
+			, ixVDo(ixVDo)
 		{
 	if (find(mask, ALL)) this->mask = {SCRJREF, IXVDO};
 	else this->mask = mask;
 
-	this->ixVDo = ixVDo;
 };
 
 string PnlWdbeCmdRec::DpchAppDo::getSrefsMask() {

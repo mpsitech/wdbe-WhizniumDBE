@@ -43,9 +43,8 @@ PnlWdbeMtpRef1NSensitivity::ContInf::ContInf(
 			const uint numFCsiQst
 		) :
 			Block()
+			, numFCsiQst(numFCsiQst)
 		{
-	this->numFCsiQst = numFCsiQst;
-
 	mask = {NUMFCSIQST};
 };
 
@@ -142,10 +141,9 @@ PnlWdbeMtpRef1NSensitivity::StatShr::StatShr(
 			, const bool ButDeleteActive
 		) :
 			Block()
+			, ButDeleteAvail(ButDeleteAvail)
+			, ButDeleteActive(ButDeleteActive)
 		{
-	this->ButDeleteAvail = ButDeleteAvail;
-	this->ButDeleteActive = ButDeleteActive;
-
 	mask = {BUTDELETEAVAIL, BUTDELETEACTIVE};
 };
 
@@ -211,8 +209,8 @@ PnlWdbeMtpRef1NSensitivity::StgIac::StgIac(
 			const uint TcoRefWidth
 		) :
 			Block()
+			, TcoRefWidth(TcoRefWidth)
 		{
-	this->TcoRefWidth = TcoRefWidth;
 	mask = {TCOREFWIDTH};
 };
 

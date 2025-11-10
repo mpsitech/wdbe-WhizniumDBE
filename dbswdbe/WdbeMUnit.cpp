@@ -32,21 +32,21 @@ WdbeMUnit::WdbeMUnit(
 			, const bool Easy
 			, const string srefKToolch
 			, const string Comment
-		) {
-
-	this->ref = ref;
-	this->ixVBasetype = ixVBasetype;
-	this->refIxVTbl = refIxVTbl;
-	this->refUref = refUref;
-	this->silRefWdbeMUnit = silRefWdbeMUnit;
-	this->refWdbeMModule = refWdbeMModule;
-	this->sref = sref;
-	this->Title = Title;
-	this->Fullsref = Fullsref;
-	this->srefKPackage = srefKPackage;
-	this->Easy = Easy;
-	this->srefKToolch = srefKToolch;
-	this->Comment = Comment;
+		) :
+			ref(ref)
+			, ixVBasetype(ixVBasetype)
+			, refIxVTbl(refIxVTbl)
+			, refUref(refUref)
+			, silRefWdbeMUnit(silRefWdbeMUnit)
+			, refWdbeMModule(refWdbeMModule)
+			, sref(sref)
+			, Title(Title)
+			, Fullsref(Fullsref)
+			, srefKPackage(srefKPackage)
+			, Easy(Easy)
+			, srefKToolch(srefKToolch)
+			, Comment(Comment)
+		{
 };
 
 bool WdbeMUnit::operator==(

@@ -14,8 +14,8 @@
 
 // IP include.cust --- INSERT
 
-#include "PnlWdbeFam1NUnit.h"
 #include "PnlWdbeFamDetail.h"
+#include "PnlWdbeFam1NUnit.h"
 
 #define VecVWdbeFamRecDo PnlWdbeFamRec::VecVDo
 
@@ -174,8 +174,8 @@ public:
 	ContInf continf;
 	StatShr statshr;
 
-	PnlWdbeFam1NUnit* pnl1nunit;
 	PnlWdbeFamDetail* pnldetail;
+	PnlWdbeFam1NUnit* pnl1nunit;
 
 	WdbeMFamily recFam;
 

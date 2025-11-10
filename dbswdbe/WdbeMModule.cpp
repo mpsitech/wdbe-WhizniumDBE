@@ -32,21 +32,21 @@ WdbeMModule::WdbeMModule(
 			, const string srefWdbeKVendor
 			, const string Srefrule
 			, const string Comment
-		) {
-
-	this->ref = ref;
-	this->ixVBasetype = ixVBasetype;
-	this->hkIxVTbl = hkIxVTbl;
-	this->hkUref = hkUref;
-	this->hkNum = hkNum;
-	this->supRefWdbeMModule = supRefWdbeMModule;
-	this->tplRefWdbeMModule = tplRefWdbeMModule;
-	this->refWdbeMController = refWdbeMController;
-	this->refWdbeMImbuf = refWdbeMImbuf;
-	this->sref = sref;
-	this->srefWdbeKVendor = srefWdbeKVendor;
-	this->Srefrule = Srefrule;
-	this->Comment = Comment;
+		) :
+			ref(ref)
+			, ixVBasetype(ixVBasetype)
+			, hkIxVTbl(hkIxVTbl)
+			, hkUref(hkUref)
+			, hkNum(hkNum)
+			, supRefWdbeMModule(supRefWdbeMModule)
+			, tplRefWdbeMModule(tplRefWdbeMModule)
+			, refWdbeMController(refWdbeMController)
+			, refWdbeMImbuf(refWdbeMImbuf)
+			, sref(sref)
+			, srefWdbeKVendor(srefWdbeKVendor)
+			, Srefrule(Srefrule)
+			, Comment(Comment)
+		{
 };
 
 bool WdbeMModule::operator==(

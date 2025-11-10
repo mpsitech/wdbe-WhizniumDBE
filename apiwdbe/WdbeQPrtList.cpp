@@ -29,18 +29,19 @@ WdbeQPrtList::WdbeQPrtList(
 			, const string titSrefWdbeKHdltype
 			, const usmallint Width
 			, const string Minmax
-		) {
-	this->jnum = jnum;
-	this->sref = sref;
-	this->stubMdlRefWdbeMModule = stubMdlRefWdbeMModule;
-	this->srefMdlIxVCat = srefMdlIxVCat;
-	this->titMdlIxVCat = titMdlIxVCat;
-	this->srefIxVDir = srefIxVDir;
-	this->titIxVDir = titIxVDir;
-	this->srefWdbeKHdltype = srefWdbeKHdltype;
-	this->titSrefWdbeKHdltype = titSrefWdbeKHdltype;
-	this->Width = Width;
-	this->Minmax = Minmax;
+		) :
+			jnum(jnum)
+			, sref(sref)
+			, stubMdlRefWdbeMModule(stubMdlRefWdbeMModule)
+			, srefMdlIxVCat(srefMdlIxVCat)
+			, titMdlIxVCat(titMdlIxVCat)
+			, srefIxVDir(srefIxVDir)
+			, titIxVDir(titIxVDir)
+			, srefWdbeKHdltype(srefWdbeKHdltype)
+			, titSrefWdbeKHdltype(titSrefWdbeKHdltype)
+			, Width(Width)
+			, Minmax(Minmax)
+		{
 };
 
 bool WdbeQPrtList::readXML(

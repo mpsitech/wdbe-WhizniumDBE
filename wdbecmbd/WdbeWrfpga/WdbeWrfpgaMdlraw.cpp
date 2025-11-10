@@ -75,6 +75,9 @@ void WdbeWrfpgaMdlraw::writeMdlVhd(
 		) {
 	ubigint ref;
 
+	ListWdbeAMModulePar mpas;
+	WdbeAMModulePar* mpa = NULL;
+
 	ListWdbeMModule submdls;
 	WdbeMModule* submdl = NULL;
 
@@ -129,6 +132,8 @@ void WdbeWrfpgaMdlraw::writeMdlVhd(
 	bool first, found;
 
 	fillIcsMdc(icsMdc);
+
+	if (mdl->tplRefWdbeMModule != 0) dbswdbe->tblwdbeammodulepar->loadRstByMdl(mdl->ref, false, mpas);
 
 	dbswdbe->tblwdbemmodule->loadRstBySup(mdl->ref, false, submdls);
 
@@ -248,7 +253,7 @@ void WdbeWrfpgaMdlraw::writeMdlVhd(
 
 		if (sig->drvRefWdbeMPort != 0) {
 			auto it = srefsPrts.find(sig->drvRefWdbeMPort);
-			if (it != srefsPrts.end()) if (it->second == sig->sref) sig->sref += "_sig";
+			if (it != srefsPrts.end()) if (it->second == sig->sref) sig->sref += (((sig->ixVBasetype == VecWdbeVMSignalBasetype::OPRT) && (sig->Comb != "")) ? "_virt" : "_sig");
 		};
 	};
 
@@ -274,6 +279,24 @@ void WdbeWrfpgaMdlraw::writeMdlVhd(
 		it = srefsSigs.find(prc->asrSrefWdbeMSignal);
 		if (it != srefsSigs.end()) prc->asrSrefWdbeMSignal = it->second->sref;
 	};
+
+	// --- mpas
+	outfile << "-- IP mpas --- IBEGIN" << endl;
+	if (mpas.nodes.size() > 0) {
+		outfile << "-- module parameters:" << endl;
+
+		for (unsigned int i = 0; i < mpas.nodes.size(); i++) {
+			mpa = mpas.nodes[i];
+
+			outfile << "-- " << mpa->x1SrefKKey;
+
+			s = dbswdbe->getKlstTitleByMtbUrefSref(VecWdbeVKeylist::KLSTWDBEKAMMODULEPARKEY, VecWdbeVMaintable::TBLWDBEMMODULE, mdl->tplRefWdbeMModule, mpa->x1SrefKKey, 0);
+			if (s != "") outfile << " (" << s << ")";
+
+			outfile << ": " << mpa->Val << endl;
+		};
+	};
+	outfile << "-- IP mpas --- IEND" << endl;
 
 	// --- libs
 	outfile << "-- IP libs --- IBEGIN" << endl;
@@ -522,7 +545,7 @@ void WdbeWrfpgaMdlraw::writeMdlVhd(
 		for (unsigned int j = 0; j < sigs.nodes.size(); j++) {
 			sig = sigs.nodes[j];
 
-			if ((sig->ixVBasetype != VecWdbeVMSignalBasetype::HSHK) && (sig->mgeIxVTbl == VecWdbeVMSignalMgeTbl::MDL) && (sig->mgeUref == submdl->ref)) {
+			if ( (sig->ixVBasetype != VecWdbeVMSignalBasetype::HSHK) && (sig->mgeIxVTbl == VecWdbeVMSignalMgeTbl::MDL) && (sig->mgeUref == submdl->ref) ) {
 				found = true;
 				break;
 			};
@@ -711,6 +734,9 @@ void WdbeWrfpgaMdlraw::writeMdlVhd(
 				outfile << endl;
 
 				outfile << "\t-- IP impl." << prc->sref << ".wiring --- INSERT" << endl;
+				outfile << endl;
+
+				outfile << "\t-- IP impl." << prc->sref << ".wiring.cust --- LINE" << endl;
 				outfile << endl;
 
 				if (prc->refWdbeMFsm != 0) {

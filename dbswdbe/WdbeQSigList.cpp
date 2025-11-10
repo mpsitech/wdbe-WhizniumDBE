@@ -44,33 +44,34 @@ WdbeQSigList::WdbeQSigList(
 			, const string titSrefWdbeKHdltype
 			, const usmallint Width
 			, const string Minmax
-		) {
-	this->qref = qref;
-	this->jref = jref;
-	this->jnum = jnum;
-	this->ref = ref;
-	this->sref = sref;
-	this->ixVBasetype = ixVBasetype;
-	this->srefIxVBasetype = srefIxVBasetype;
-	this->titIxVBasetype = titIxVBasetype;
-	this->refIxVTbl = refIxVTbl;
-	this->srefRefIxVTbl = srefRefIxVTbl;
-	this->titRefIxVTbl = titRefIxVTbl;
-	this->refUref = refUref;
-	this->stubRefUref = stubRefUref;
-	this->mgeIxVTbl = mgeIxVTbl;
-	this->srefMgeIxVTbl = srefMgeIxVTbl;
-	this->titMgeIxVTbl = titMgeIxVTbl;
-	this->mgeUref = mgeUref;
-	this->stubMgeUref = stubMgeUref;
-	this->refWdbeMVector = refWdbeMVector;
-	this->stubRefWdbeMVector = stubRefWdbeMVector;
-	this->Const = Const;
-	this->yesnoConst = yesnoConst;
-	this->srefWdbeKHdltype = srefWdbeKHdltype;
-	this->titSrefWdbeKHdltype = titSrefWdbeKHdltype;
-	this->Width = Width;
-	this->Minmax = Minmax;
+		) :
+			qref(qref)
+			, jref(jref)
+			, jnum(jnum)
+			, ref(ref)
+			, sref(sref)
+			, ixVBasetype(ixVBasetype)
+			, srefIxVBasetype(srefIxVBasetype)
+			, titIxVBasetype(titIxVBasetype)
+			, refIxVTbl(refIxVTbl)
+			, srefRefIxVTbl(srefRefIxVTbl)
+			, titRefIxVTbl(titRefIxVTbl)
+			, refUref(refUref)
+			, stubRefUref(stubRefUref)
+			, mgeIxVTbl(mgeIxVTbl)
+			, srefMgeIxVTbl(srefMgeIxVTbl)
+			, titMgeIxVTbl(titMgeIxVTbl)
+			, mgeUref(mgeUref)
+			, stubMgeUref(stubMgeUref)
+			, refWdbeMVector(refWdbeMVector)
+			, stubRefWdbeMVector(stubRefWdbeMVector)
+			, Const(Const)
+			, yesnoConst(yesnoConst)
+			, srefWdbeKHdltype(srefWdbeKHdltype)
+			, titSrefWdbeKHdltype(titSrefWdbeKHdltype)
+			, Width(Width)
+			, Minmax(Minmax)
+		{
 };
 
 void WdbeQSigList::writeJSON(

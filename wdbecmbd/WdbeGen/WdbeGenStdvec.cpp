@@ -37,12 +37,18 @@ DpchRetWdbe* WdbeGenStdvec::run(
 
 	// IP run --- IBEGIN
 	vector<ubigint> refs;
-	ubigint ref;
+	ubigint ref, ref2;
 
 	WdbeMUnit* unt = NULL;
 
 	ListWdbeMCommand cmds;
 	WdbeMCommand* cmd = NULL;
+
+	ListWdbeAMCommandInvpar ipas;
+	WdbeAMCommandInvpar* ipa = NULL;
+
+	ListWdbeAMCommandRetpar rpas;
+	WdbeAMCommandRetpar* rpa = NULL;
 
 	ListWdbeMError errs;
 	WdbeMError* err = NULL;
@@ -54,7 +60,7 @@ DpchRetWdbe* WdbeGenStdvec::run(
 	ListWdbeMController ctrs;
 	WdbeMController* ctr = NULL;
 
-	uint vecNum;
+	uint vecNum, vecNum2;
 
 	if (dbswdbe->tblwdbemunit->loadRecByRef(refWdbeMUnit, &unt)) {
 		// -- unit vectors
@@ -121,6 +127,34 @@ DpchRetWdbe* WdbeGenStdvec::run(
 				for (unsigned int j = 0; j < cmds.nodes.size(); j++) {
 					cmd = cmds.nodes[j];
 					dbswdbe->tblwdbemvectoritem->insertNewRec(NULL, ref, cmd->refNum, cmd->sref, "", "");
+
+					// create and fill invocation parameter vector
+					dbswdbe->tblwdbeamcommandinvpar->loadRstByCmd(cmd->ref, false, ipas);
+					if (ipas.nodes.size() > 0) {
+						ref2 = dbswdbe->tblwdbemvector->insertNewRec(NULL, VecWdbeVMVectorBasetype::IXLIN, VecWdbeVMVectorHkTbl::CMD, cmd->ref, "VecV" + cmd->Fullsref.substr(3) + "Invpar", "noloc;notit;filfed");
+
+						vecNum2 = 0;
+						for (unsigned int k = 0; k < ipas.nodes.size(); k++) {
+							ipa = ipas.nodes[k];
+
+							dbswdbe->tblwdbemvectoritem->insertNewRec(NULL, ref2, vecNum2, ipa->sref, "", "");
+							vecNum2 += Wdbe::getParlen(ipa->ixWdbeVPartype, ipa->Length);
+						};
+					};
+
+					// create and fill return parameter vector
+					dbswdbe->tblwdbeamcommandretpar->loadRstByCmd(cmd->ref, false, rpas);
+					if (rpas.nodes.size() > 0) {
+						ref2 = dbswdbe->tblwdbemvector->insertNewRec(NULL, VecWdbeVMVectorBasetype::IXLIN, VecWdbeVMVectorHkTbl::CMD, cmd->ref, "VecV" + cmd->Fullsref.substr(3) + "Retpar", "noloc;notit;filfed");
+
+						vecNum2 = 0;
+						for (unsigned int k = 0; k < rpas.nodes.size(); k++) {
+							rpa = rpas.nodes[k];
+
+							dbswdbe->tblwdbemvectoritem->insertNewRec(NULL, ref2, vecNum2, rpa->sref, "", "");
+							vecNum2 += Wdbe::getParlen(rpa->ixWdbeVPartype, rpa->Length);
+						};
+					};
 				};
 			};
 

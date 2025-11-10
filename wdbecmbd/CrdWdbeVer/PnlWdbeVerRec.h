@@ -14,11 +14,11 @@
 
 // IP include.cust --- INSERT
 
-#include "PnlWdbeVerRef1NFile.h"
-#include "PnlWdbeVer1NUnit.h"
+#include "PnlWdbeVerDetail.h"
 #include "PnlWdbeVer1NComponent.h"
 #include "PnlWdbeVerBvr1NVersion.h"
-#include "PnlWdbeVerDetail.h"
+#include "PnlWdbeVerRef1NFile.h"
+#include "PnlWdbeVer1NUnit.h"
 
 #define VecVWdbeVerRecDo PnlWdbeVerRec::VecVDo
 
@@ -76,8 +76,8 @@ public:
 	class StatApp {
 
 	public:
-		static void writeJSON(Json::Value& sup, std::string difftag = "", const bool initdoneDetail = false, const bool initdoneBvr1NVersion = false, const bool initdone1NComponent = false, const bool initdone1NUnit = false, const bool initdoneRef1NFile = false);
-		static void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true, const bool initdoneDetail = false, const bool initdoneBvr1NVersion = false, const bool initdone1NComponent = false, const bool initdone1NUnit = false, const bool initdoneRef1NFile = false);
+		static void writeJSON(Json::Value& sup, std::string difftag = "", const bool initdoneDetail = false, const bool initdone1NComponent = false, const bool initdoneBvr1NVersion = false, const bool initdoneRef1NFile = false, const bool initdone1NUnit = false);
+		static void writeXML(xmlTextWriter* wr, std::string difftag = "", bool shorttags = true, const bool initdoneDetail = false, const bool initdone1NComponent = false, const bool initdoneBvr1NVersion = false, const bool initdoneRef1NFile = false, const bool initdone1NUnit = false);
 	};
 
 	/**
@@ -88,22 +88,22 @@ public:
 	public:
 		static const Sbecore::uint IXWDBEVEXPSTATE = 1;
 		static const Sbecore::uint JREFDETAIL = 2;
-		static const Sbecore::uint JREFBVR1NVERSION = 3;
-		static const Sbecore::uint JREF1NCOMPONENT = 4;
-		static const Sbecore::uint JREF1NUNIT = 5;
-		static const Sbecore::uint JREFREF1NFILE = 6;
+		static const Sbecore::uint JREF1NCOMPONENT = 3;
+		static const Sbecore::uint JREFBVR1NVERSION = 4;
+		static const Sbecore::uint JREFREF1NFILE = 5;
+		static const Sbecore::uint JREF1NUNIT = 6;
 		static const Sbecore::uint BUTREGULARIZEACTIVE = 7;
 
 	public:
-		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const Sbecore::ubigint jrefDetail = 0, const Sbecore::ubigint jrefBvr1NVersion = 0, const Sbecore::ubigint jref1NComponent = 0, const Sbecore::ubigint jref1NUnit = 0, const Sbecore::ubigint jrefRef1NFile = 0, const bool ButRegularizeActive = true);
+		StatShr(const Sbecore::uint ixWdbeVExpstate = VecWdbeVExpstate::REGD, const Sbecore::ubigint jrefDetail = 0, const Sbecore::ubigint jref1NComponent = 0, const Sbecore::ubigint jrefBvr1NVersion = 0, const Sbecore::ubigint jrefRef1NFile = 0, const Sbecore::ubigint jref1NUnit = 0, const bool ButRegularizeActive = true);
 
 	public:
 		Sbecore::uint ixWdbeVExpstate;
 		Sbecore::ubigint jrefDetail;
-		Sbecore::ubigint jrefBvr1NVersion;
 		Sbecore::ubigint jref1NComponent;
-		Sbecore::ubigint jref1NUnit;
+		Sbecore::ubigint jrefBvr1NVersion;
 		Sbecore::ubigint jrefRef1NFile;
+		Sbecore::ubigint jref1NUnit;
 		bool ButRegularizeActive;
 
 	public:
@@ -183,11 +183,11 @@ public:
 	ContInf continf;
 	StatShr statshr;
 
-	PnlWdbeVerRef1NFile* pnlref1nfile;
-	PnlWdbeVer1NUnit* pnl1nunit;
+	PnlWdbeVerDetail* pnldetail;
 	PnlWdbeVer1NComponent* pnl1ncomponent;
 	PnlWdbeVerBvr1NVersion* pnlbvr1nversion;
-	PnlWdbeVerDetail* pnldetail;
+	PnlWdbeVerRef1NFile* pnlref1nfile;
+	PnlWdbeVer1NUnit* pnl1nunit;
 
 	WdbeMVersion recVer;
 
@@ -221,10 +221,10 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeVerUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
-	bool handleCallWdbeVer_steEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
 	bool handleCallWdbeVer_bvrEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
 	bool handleCallWdbeVer_prjEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeVer_steEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv, bool& boolvalRet);
+	bool handleCallWdbeVerUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 
 };
 

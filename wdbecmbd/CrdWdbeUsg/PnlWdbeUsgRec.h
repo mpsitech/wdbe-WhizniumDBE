@@ -14,9 +14,9 @@
 
 // IP include.cust --- INSERT
 
-#include "PnlWdbeUsgMNUser.h"
-#include "PnlWdbeUsgAAccess.h"
 #include "PnlWdbeUsgDetail.h"
+#include "PnlWdbeUsgAAccess.h"
+#include "PnlWdbeUsgMNUser.h"
 
 #define VecVWdbeUsgRecDo PnlWdbeUsgRec::VecVDo
 
@@ -177,9 +177,9 @@ public:
 	ContInf continf;
 	StatShr statshr;
 
-	PnlWdbeUsgMNUser* pnlmnuser;
-	PnlWdbeUsgAAccess* pnlaaccess;
 	PnlWdbeUsgDetail* pnldetail;
+	PnlWdbeUsgAAccess* pnlaaccess;
+	PnlWdbeUsgMNUser* pnlmnuser;
 
 	WdbeMUsergroup recUsg;
 

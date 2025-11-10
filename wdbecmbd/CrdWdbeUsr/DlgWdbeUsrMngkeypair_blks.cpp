@@ -79,11 +79,10 @@ DlgWdbeUsrMngkeypair::ContInf::ContInf(
 			, const string& DetDld
 		) :
 			Block()
+			, numFSge(numFSge)
+			, DetTxtSte(DetTxtSte)
+			, DetDld(DetDld)
 		{
-	this->numFSge = numFSge;
-	this->DetTxtSte = DetTxtSte;
-	this->DetDld = DetDld;
-
 	mask = {NUMFSGE, DETTXTSTE, DETDLD};
 };
 
@@ -187,11 +186,10 @@ DlgWdbeUsrMngkeypair::StatShr::StatShr(
 			, const bool DetDldActive
 		) :
 			Block()
+			, DetButDelAvail(DetButDelAvail)
+			, DetButGenAvail(DetButGenAvail)
+			, DetDldActive(DetDldActive)
 		{
-	this->DetButDelAvail = DetButDelAvail;
-	this->DetButGenAvail = DetButGenAvail;
-	this->DetDldActive = DetDldActive;
-
 	mask = {DETBUTDELAVAIL, DETBUTGENAVAIL, DETDLDACTIVE};
 };
 

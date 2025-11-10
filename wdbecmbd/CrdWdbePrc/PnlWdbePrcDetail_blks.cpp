@@ -57,15 +57,14 @@ PnlWdbePrcDetail::ContIac::ContIac(
 			, const uint numFPupFsmDtt
 		) :
 			Block()
+			, TxfClk(TxfClk)
+			, TxfAsr(TxfAsr)
+			, ChkFal(ChkFal)
+			, TxfSnr(TxfSnr)
+			, ChkEip(ChkEip)
+			, TxfCmt(TxfCmt)
+			, numFPupFsmDtt(numFPupFsmDtt)
 		{
-	this->TxfClk = TxfClk;
-	this->TxfAsr = TxfAsr;
-	this->ChkFal = ChkFal;
-	this->TxfSnr = TxfSnr;
-	this->ChkEip = ChkEip;
-	this->TxfCmt = TxfCmt;
-	this->numFPupFsmDtt = numFPupFsmDtt;
-
 	mask = {TXFCLK, TXFASR, CHKFAL, TXFSNR, CHKEIP, TXFCMT, NUMFPUPFSMDTT};
 };
 
@@ -203,12 +202,11 @@ PnlWdbePrcDetail::ContInf::ContInf(
 			, const string& TxtAsr
 		) :
 			Block()
+			, TxtSrf(TxtSrf)
+			, TxtMdl(TxtMdl)
+			, TxtClk(TxtClk)
+			, TxtAsr(TxtAsr)
 		{
-	this->TxtSrf = TxtSrf;
-	this->TxtMdl = TxtMdl;
-	this->TxtClk = TxtClk;
-	this->TxtAsr = TxtAsr;
-
 	mask = {TXTSRF, TXTMDL, TXTCLK, TXTASR};
 };
 
@@ -318,17 +316,17 @@ void PnlWdbePrcDetail::StatApp::writeXML(
  ******************************************************************************/
 
 PnlWdbePrcDetail::StatShr::StatShr(
-			const bool TxfClkValid
-			, const bool TxfAsrValid
-			, const bool ButSaveAvail
+			const bool ButSaveAvail
 			, const bool ButSaveActive
 			, const bool TxtSrfActive
 			, const bool TxtMdlActive
 			, const bool ButMdlViewAvail
 			, const bool ButMdlViewActive
 			, const bool TxtClkActive
+			, const bool TxfClkValid
 			, const bool ButClkViewAvail
 			, const bool TxtAsrActive
+			, const bool TxfAsrValid
 			, const bool ButAsrViewAvail
 			, const bool ChkFalActive
 			, const bool TxfSnrActive
@@ -340,29 +338,28 @@ PnlWdbePrcDetail::StatShr::StatShr(
 			, const bool PupFsmDttActive
 		) :
 			Block()
+			, ButSaveAvail(ButSaveAvail)
+			, ButSaveActive(ButSaveActive)
+			, TxtSrfActive(TxtSrfActive)
+			, TxtMdlActive(TxtMdlActive)
+			, ButMdlViewAvail(ButMdlViewAvail)
+			, ButMdlViewActive(ButMdlViewActive)
+			, TxtClkActive(TxtClkActive)
+			, TxfClkValid(TxfClkValid)
+			, ButClkViewAvail(ButClkViewAvail)
+			, TxtAsrActive(TxtAsrActive)
+			, TxfAsrValid(TxfAsrValid)
+			, ButAsrViewAvail(ButAsrViewAvail)
+			, ChkFalActive(ChkFalActive)
+			, TxfSnrActive(TxfSnrActive)
+			, ChkEipActive(ChkEipActive)
+			, TxfCmtActive(TxfCmtActive)
+			, ButFsmNewAvail(ButFsmNewAvail)
+			, ButFsmDeleteAvail(ButFsmDeleteAvail)
+			, PupFsmDttAvail(PupFsmDttAvail)
+			, PupFsmDttActive(PupFsmDttActive)
 		{
-	this->TxfClkValid = TxfClkValid;
-	this->TxfAsrValid = TxfAsrValid;
-	this->ButSaveAvail = ButSaveAvail;
-	this->ButSaveActive = ButSaveActive;
-	this->TxtSrfActive = TxtSrfActive;
-	this->TxtMdlActive = TxtMdlActive;
-	this->ButMdlViewAvail = ButMdlViewAvail;
-	this->ButMdlViewActive = ButMdlViewActive;
-	this->TxtClkActive = TxtClkActive;
-	this->ButClkViewAvail = ButClkViewAvail;
-	this->TxtAsrActive = TxtAsrActive;
-	this->ButAsrViewAvail = ButAsrViewAvail;
-	this->ChkFalActive = ChkFalActive;
-	this->TxfSnrActive = TxfSnrActive;
-	this->ChkEipActive = ChkEipActive;
-	this->TxfCmtActive = TxfCmtActive;
-	this->ButFsmNewAvail = ButFsmNewAvail;
-	this->ButFsmDeleteAvail = ButFsmDeleteAvail;
-	this->PupFsmDttAvail = PupFsmDttAvail;
-	this->PupFsmDttActive = PupFsmDttActive;
-
-	mask = {TXFCLKVALID, TXFASRVALID, BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXTMDLACTIVE, BUTMDLVIEWAVAIL, BUTMDLVIEWACTIVE, TXTCLKACTIVE, BUTCLKVIEWAVAIL, TXTASRACTIVE, BUTASRVIEWAVAIL, CHKFALACTIVE, TXFSNRACTIVE, CHKEIPACTIVE, TXFCMTACTIVE, BUTFSMNEWAVAIL, BUTFSMDELETEAVAIL, PUPFSMDTTAVAIL, PUPFSMDTTACTIVE};
+	mask = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXTMDLACTIVE, BUTMDLVIEWAVAIL, BUTMDLVIEWACTIVE, TXTCLKACTIVE, TXFCLKVALID, BUTCLKVIEWAVAIL, TXTASRACTIVE, TXFASRVALID, BUTASRVIEWAVAIL, CHKFALACTIVE, TXFSNRACTIVE, CHKEIPACTIVE, TXFCMTACTIVE, BUTFSMNEWAVAIL, BUTFSMDELETEAVAIL, PUPFSMDTTAVAIL, PUPFSMDTTACTIVE};
 };
 
 void PnlWdbePrcDetail::StatShr::writeJSON(
@@ -373,8 +370,6 @@ void PnlWdbePrcDetail::StatShr::writeJSON(
 
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
-	me["TxfClkValid"] = TxfClkValid;
-	me["TxfAsrValid"] = TxfAsrValid;
 	me["ButSaveAvail"] = ButSaveAvail;
 	me["ButSaveActive"] = ButSaveActive;
 	me["TxtSrfActive"] = TxtSrfActive;
@@ -382,8 +377,10 @@ void PnlWdbePrcDetail::StatShr::writeJSON(
 	me["ButMdlViewAvail"] = ButMdlViewAvail;
 	me["ButMdlViewActive"] = ButMdlViewActive;
 	me["TxtClkActive"] = TxtClkActive;
+	me["TxfClkValid"] = TxfClkValid;
 	me["ButClkViewAvail"] = ButClkViewAvail;
 	me["TxtAsrActive"] = TxtAsrActive;
+	me["TxfAsrValid"] = TxfAsrValid;
 	me["ButAsrViewAvail"] = ButAsrViewAvail;
 	me["ChkFalActive"] = ChkFalActive;
 	me["TxfSnrActive"] = TxfSnrActive;
@@ -407,8 +404,6 @@ void PnlWdbePrcDetail::StatShr::writeXML(
 	else itemtag = "StatitemShrWdbePrcDetail";
 
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
-		writeBoolAttr(wr, itemtag, "sref", "TxfClkValid", TxfClkValid);
-		writeBoolAttr(wr, itemtag, "sref", "TxfAsrValid", TxfAsrValid);
 		writeBoolAttr(wr, itemtag, "sref", "ButSaveAvail", ButSaveAvail);
 		writeBoolAttr(wr, itemtag, "sref", "ButSaveActive", ButSaveActive);
 		writeBoolAttr(wr, itemtag, "sref", "TxtSrfActive", TxtSrfActive);
@@ -416,8 +411,10 @@ void PnlWdbePrcDetail::StatShr::writeXML(
 		writeBoolAttr(wr, itemtag, "sref", "ButMdlViewAvail", ButMdlViewAvail);
 		writeBoolAttr(wr, itemtag, "sref", "ButMdlViewActive", ButMdlViewActive);
 		writeBoolAttr(wr, itemtag, "sref", "TxtClkActive", TxtClkActive);
+		writeBoolAttr(wr, itemtag, "sref", "TxfClkValid", TxfClkValid);
 		writeBoolAttr(wr, itemtag, "sref", "ButClkViewAvail", ButClkViewAvail);
 		writeBoolAttr(wr, itemtag, "sref", "TxtAsrActive", TxtAsrActive);
+		writeBoolAttr(wr, itemtag, "sref", "TxfAsrValid", TxfAsrValid);
 		writeBoolAttr(wr, itemtag, "sref", "ButAsrViewAvail", ButAsrViewAvail);
 		writeBoolAttr(wr, itemtag, "sref", "ChkFalActive", ChkFalActive);
 		writeBoolAttr(wr, itemtag, "sref", "TxfSnrActive", TxfSnrActive);
@@ -435,8 +432,6 @@ set<uint> PnlWdbePrcDetail::StatShr::comm(
 		) {
 	set<uint> items;
 
-	if (TxfClkValid == comp->TxfClkValid) insert(items, TXFCLKVALID);
-	if (TxfAsrValid == comp->TxfAsrValid) insert(items, TXFASRVALID);
 	if (ButSaveAvail == comp->ButSaveAvail) insert(items, BUTSAVEAVAIL);
 	if (ButSaveActive == comp->ButSaveActive) insert(items, BUTSAVEACTIVE);
 	if (TxtSrfActive == comp->TxtSrfActive) insert(items, TXTSRFACTIVE);
@@ -444,8 +439,10 @@ set<uint> PnlWdbePrcDetail::StatShr::comm(
 	if (ButMdlViewAvail == comp->ButMdlViewAvail) insert(items, BUTMDLVIEWAVAIL);
 	if (ButMdlViewActive == comp->ButMdlViewActive) insert(items, BUTMDLVIEWACTIVE);
 	if (TxtClkActive == comp->TxtClkActive) insert(items, TXTCLKACTIVE);
+	if (TxfClkValid == comp->TxfClkValid) insert(items, TXFCLKVALID);
 	if (ButClkViewAvail == comp->ButClkViewAvail) insert(items, BUTCLKVIEWAVAIL);
 	if (TxtAsrActive == comp->TxtAsrActive) insert(items, TXTASRACTIVE);
+	if (TxfAsrValid == comp->TxfAsrValid) insert(items, TXFASRVALID);
 	if (ButAsrViewAvail == comp->ButAsrViewAvail) insert(items, BUTASRVIEWAVAIL);
 	if (ChkFalActive == comp->ChkFalActive) insert(items, CHKFALACTIVE);
 	if (TxfSnrActive == comp->TxfSnrActive) insert(items, TXFSNRACTIVE);
@@ -467,7 +464,7 @@ set<uint> PnlWdbePrcDetail::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {TXFCLKVALID, TXFASRVALID, BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXTMDLACTIVE, BUTMDLVIEWAVAIL, BUTMDLVIEWACTIVE, TXTCLKACTIVE, BUTCLKVIEWAVAIL, TXTASRACTIVE, BUTASRVIEWAVAIL, CHKFALACTIVE, TXFSNRACTIVE, CHKEIPACTIVE, TXFCMTACTIVE, BUTFSMNEWAVAIL, BUTFSMDELETEAVAIL, PUPFSMDTTAVAIL, PUPFSMDTTACTIVE};
+	diffitems = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXTMDLACTIVE, BUTMDLVIEWAVAIL, BUTMDLVIEWACTIVE, TXTCLKACTIVE, TXFCLKVALID, BUTCLKVIEWAVAIL, TXTASRACTIVE, TXFASRVALID, BUTASRVIEWAVAIL, CHKFALACTIVE, TXFSNRACTIVE, CHKEIPACTIVE, TXFCMTACTIVE, BUTFSMNEWAVAIL, BUTFSMDELETEAVAIL, PUPFSMDTTAVAIL, PUPFSMDTTACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);

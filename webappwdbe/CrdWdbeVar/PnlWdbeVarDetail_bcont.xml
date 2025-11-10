@@ -26,7 +26,6 @@
 			function handleTxfOnvChange() {parent.parent.window.handleTxftChange(document,"TxfOnv");};
 			function handleTxfOfvKey(evt) {return parent.parent.window.handleTxftKey(document,"TxfOfv",evt);};
 			function handleTxfOfvChange() {parent.parent.window.handleTxftChange(document,"TxfOfv");};
-			function handleChkDfoChange() {parent.parent.window.handleChkChange(document,"ChkDfo");};
 			function handleTxfCmtKey(evt) {return parent.parent.window.handleTxftKey(document,"TxfCmt",evt);};
 			function handleTxfCmtChange() {parent.parent.window.handleTxftChange(document,"TxfCmt");};
 			<!-- IP custScript - INSERT -->
@@ -182,17 +181,6 @@
 					</td>
 					<td></td>
 					<td colspan="2"></td>
-				</tr>
-				<tr id="trDfo" class="show">
-					<td height="25"></td>
-					<td align="right">
-						<span id="CptDfo" class="cpt">CptDfo</span>
-					</td>
-					<td></td>
-					<td align="left">
-						<input id="ChkDfo" class="chk" name="ChkDfo" type="checkbox" checked="checked" onchange="handleChkDfoChange()"/>
-					</td>
-					<td colspan="7"></td>
 				</tr>
 				<tr id="trCmt" class="show">
 					<td height="75"></td>

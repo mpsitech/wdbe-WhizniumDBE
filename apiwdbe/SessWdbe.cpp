@@ -21,9 +21,8 @@ SessWdbe::StatShr::StatShr(
 			const string& scrJrefCrdnav
 		) :
 			Block()
+			, scrJrefCrdnav(scrJrefCrdnav)
 		{
-	this->scrJrefCrdnav = scrJrefCrdnav;
-
 	mask = {SCRJREFCRDNAV};
 };
 

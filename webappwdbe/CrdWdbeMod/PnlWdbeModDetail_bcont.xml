@@ -18,6 +18,11 @@
 			function handleTxfSrrChange() {parent.parent.window.handleTxfChange(document,"TxfSrr","");};
 			function handleTxfCmtKey(evt) {return parent.parent.window.handleTxftKey(document,"TxfCmt",evt);};
 			function handleTxfCmtChange() {parent.parent.window.handleTxftChange(document,"TxfCmt");};
+			function handleButCtrNewClick() {parent.parent.window.handleButClick("ButCtrNew");};
+			function handleButCtrDeleteClick() {parent.parent.window.handleButClick("ButCtrDelete");};
+			function handleTxfCtrFsrKey(evt) {return parent.parent.window.handleTxfKey(document,"TxfCtrFsr","",evt);};
+			function handleTxfCtrFsrChange() {parent.parent.window.handleTxfChange(document,"TxfCtrFsr","");};
+			function handleButCtrClrViewClick() {parent.parent.window.handleButCrdopenClick("ButCtrClrView");};
 			function handleButImbNewClick() {parent.parent.window.handleButClick("ButImbNew");};
 			function handleButImbDeleteClick() {parent.parent.window.handleButClick("ButImbDelete");};
 			function handleTxfImbFsrKey(evt) {return parent.parent.window.handleTxfKey(document,"TxfImbFsr","",evt);};
@@ -29,11 +34,6 @@
 			function handleTxfImbMmxChange() {parent.parent.window.handleTxfChange(document,"TxfImbMmx","s");};
 			function handleTxfImbPriKey(evt) {return parent.parent.window.handleTxfKey(document,"TxfImbPri","s",evt);};
 			function handleTxfImbPriChange() {parent.parent.window.handleTxfChange(document,"TxfImbPri","s");};
-			function handleButCtrNewClick() {parent.parent.window.handleButClick("ButCtrNew");};
-			function handleButCtrDeleteClick() {parent.parent.window.handleButClick("ButCtrDelete");};
-			function handleTxfCtrFsrKey(evt) {return parent.parent.window.handleTxfKey(document,"TxfCtrFsr","",evt);};
-			function handleTxfCtrFsrChange() {parent.parent.window.handleTxfChange(document,"TxfCtrFsr","");};
-			function handleButCtrClrViewClick() {parent.parent.window.handleButCrdopenClick("ButCtrClrView");};
 			<!-- IP custScript - INSERT -->
 		</script>
 		<link href="../style/pnlDetail.css" rel="styleSheet" type="text/css"/>
@@ -165,6 +165,43 @@
 					<td></td>
 					<td colspan="2"></td>
 				</tr>
+				<tr id="trCtr1" class="show"><td colspan="11" height="3"></td></tr>
+				<tr id="trCtr2" class="show">
+					<td height="1"></td>
+					<td colspan="10" bgcolor="#7f7f7f"></td>
+				</tr>
+				<tr id="trCtr3" class="show"><td colspan="11" height="3"></td></tr>
+				<tr id="trCtr" class="show">
+					<td height="25"></td>
+					<td colspan="2"></td>
+					<td id="dynCtr" colspan="8" align="left">
+					</td>
+				</tr>
+				<tr id="trCtrFsr" class="show">
+					<td height="25"></td>
+					<td align="right">
+						<span id="CptCtrFsr" class="cpt">CptCtrFsr</span>
+					</td>
+					<td></td>
+					<td colspan="5" align="left">
+						<input id="TxfCtrFsr" class="txf" type="text" value="TxfCtrFsr" onchange="handleTxfCtrFsrChange()" onkeypress="return handleTxfCtrFsrKey(event)"/>
+					</td>
+					<td></td>
+					<td colspan="2"></td>
+				</tr>
+				<tr id="trCtrClr" class="show">
+					<td height="25"></td>
+					<td align="right">
+						<span id="CptCtrClr" class="cpt">CptCtrClr</span>
+					</td>
+					<td></td>
+					<td colspan="5" align="left">
+						<input id="TxtCtrClr" class="txfnoed" type="text" readonly="readonly" value="TxtCtrClr"/>
+					</td>
+					<td></td>
+					<td id="rdynCtrClr" colspan="2" align="left">
+					</td>
+				</tr>
 				<tr id="trImb1" class="show"><td colspan="11" height="3"></td></tr>
 				<tr id="trImb2" class="show">
 					<td height="1"></td>
@@ -236,43 +273,6 @@
 					</td>
 					<td></td>
 					<td colspan="4"></td>
-				</tr>
-				<tr id="trCtr1" class="show"><td colspan="11" height="3"></td></tr>
-				<tr id="trCtr2" class="show">
-					<td height="1"></td>
-					<td colspan="10" bgcolor="#7f7f7f"></td>
-				</tr>
-				<tr id="trCtr3" class="show"><td colspan="11" height="3"></td></tr>
-				<tr id="trCtr" class="show">
-					<td height="25"></td>
-					<td colspan="2"></td>
-					<td id="dynCtr" colspan="8" align="left">
-					</td>
-				</tr>
-				<tr id="trCtrFsr" class="show">
-					<td height="25"></td>
-					<td align="right">
-						<span id="CptCtrFsr" class="cpt">CptCtrFsr</span>
-					</td>
-					<td></td>
-					<td colspan="5" align="left">
-						<input id="TxfCtrFsr" class="txf" type="text" value="TxfCtrFsr" onchange="handleTxfCtrFsrChange()" onkeypress="return handleTxfCtrFsrKey(event)"/>
-					</td>
-					<td></td>
-					<td colspan="2"></td>
-				</tr>
-				<tr id="trCtrClr" class="show">
-					<td height="25"></td>
-					<td align="right">
-						<span id="CptCtrClr" class="cpt">CptCtrClr</span>
-					</td>
-					<td></td>
-					<td colspan="5" align="left">
-						<input id="TxtCtrClr" class="txfnoed" type="text" readonly="readonly" value="TxtCtrClr"/>
-					</td>
-					<td></td>
-					<td id="rdynCtrClr" colspan="2" align="left">
-					</td>
 				</tr>
 				<tr><td colspan="11" height="4"></td></tr>
 			</tbody>

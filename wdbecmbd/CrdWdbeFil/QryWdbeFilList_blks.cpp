@@ -20,11 +20,11 @@ uint QryWdbeFilList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "reu") return REU;
-	if (s == "ret") return RET;
-	if (s == "fnm") return FNM;
 	if (s == "grp") return GRP;
 	if (s == "own") return OWN;
+	if (s == "fnm") return FNM;
+	if (s == "ret") return RET;
+	if (s == "reu") return REU;
 
 	return(0);
 };
@@ -32,11 +32,11 @@ uint QryWdbeFilList::VecVOrd::getIx(
 string QryWdbeFilList::VecVOrd::getSref(
 			const uint ix
 		) {
-	if (ix == REU) return("reu");
-	if (ix == RET) return("ret");
-	if (ix == FNM) return("fnm");
 	if (ix == GRP) return("grp");
 	if (ix == OWN) return("own");
+	if (ix == FNM) return("fnm");
+	if (ix == RET) return("ret");
+	if (ix == REU) return("reu");
 
 	return("");
 };
@@ -104,11 +104,10 @@ QryWdbeFilList::StatShr::StatShr(
 			, const uint nload
 		) :
 			Block()
+			, ntot(ntot)
+			, jnumFirstload(jnumFirstload)
+			, nload(nload)
 		{
-	this->ntot = ntot;
-	this->jnumFirstload = jnumFirstload;
-	this->nload = nload;
-
 	mask = {NTOT, JNUMFIRSTLOAD, NLOAD};
 };
 
@@ -179,10 +178,10 @@ QryWdbeFilList::StgIac::StgIac(
 			, const uint nload
 		) :
 			Block()
+			, jnum(jnum)
+			, jnumFirstload(jnumFirstload)
+			, nload(nload)
 		{
-	this->jnum = jnum;
-	this->jnumFirstload = jnumFirstload;
-	this->nload = nload;
 	mask = {JNUM, JNUMFIRSTLOAD, NLOAD};
 };
 

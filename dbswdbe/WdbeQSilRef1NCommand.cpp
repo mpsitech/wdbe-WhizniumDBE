@@ -24,13 +24,14 @@ WdbeQSilRef1NCommand::WdbeQSilRef1NCommand(
 			, const ubigint ref
 			, const string stubRef
 			, const uint refNum
-		) {
-	this->qref = qref;
-	this->jref = jref;
-	this->jnum = jnum;
-	this->ref = ref;
-	this->stubRef = stubRef;
-	this->refNum = refNum;
+		) :
+			qref(qref)
+			, jref(jref)
+			, jnum(jnum)
+			, ref(ref)
+			, stubRef(stubRef)
+			, refNum(refNum)
+		{
 };
 
 void WdbeQSilRef1NCommand::writeJSON(

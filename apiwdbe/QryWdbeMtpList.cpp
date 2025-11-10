@@ -22,10 +22,10 @@ uint QryWdbeMtpList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "hku") return HKU;
-	if (s == "hkt") return HKT;
-	if (s == "typ") return TYP;
 	if (s == "srf") return SRF;
+	if (s == "typ") return TYP;
+	if (s == "hkt") return HKT;
+	if (s == "hku") return HKU;
 
 	return(0);
 };
@@ -33,10 +33,10 @@ uint QryWdbeMtpList::VecVOrd::getIx(
 string QryWdbeMtpList::VecVOrd::getSref(
 			const uint ix
 		) {
-	if (ix == HKU) return("hku");
-	if (ix == HKT) return("hkt");
-	if (ix == TYP) return("typ");
 	if (ix == SRF) return("srf");
+	if (ix == TYP) return("typ");
+	if (ix == HKT) return("hkt");
+	if (ix == HKU) return("hku");
 
 	return("");
 };
@@ -52,12 +52,11 @@ QryWdbeMtpList::StatApp::StatApp(
 			, const uint ndisp
 		) :
 			Block()
+			, firstcol(firstcol)
+			, jnumFirstdisp(jnumFirstdisp)
+			, ncol(ncol)
+			, ndisp(ndisp)
 		{
-	this->firstcol = firstcol;
-	this->jnumFirstdisp = jnumFirstdisp;
-	this->ncol = ncol;
-	this->ndisp = ndisp;
-
 	mask = {FIRSTCOL, JNUMFIRSTDISP, NCOL, NDISP};
 };
 
@@ -124,11 +123,10 @@ QryWdbeMtpList::StatShr::StatShr(
 			, const uint nload
 		) :
 			Block()
+			, ntot(ntot)
+			, jnumFirstload(jnumFirstload)
+			, nload(nload)
 		{
-	this->ntot = ntot;
-	this->jnumFirstload = jnumFirstload;
-	this->nload = nload;
-
 	mask = {NTOT, JNUMFIRSTLOAD, NLOAD};
 };
 
@@ -193,11 +191,10 @@ QryWdbeMtpList::StgIac::StgIac(
 			, const uint nload
 		) :
 			Block()
+			, jnum(jnum)
+			, jnumFirstload(jnumFirstload)
+			, nload(nload)
 		{
-	this->jnum = jnum;
-	this->jnumFirstload = jnumFirstload;
-	this->nload = nload;
-
 	mask = {JNUM, JNUMFIRSTLOAD, NLOAD};
 };
 

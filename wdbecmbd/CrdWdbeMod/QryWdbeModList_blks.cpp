@@ -20,12 +20,12 @@ uint QryWdbeModList::VecVOrd::getIx(
 		) {
 	string s = StrMod::lc(sref);
 
-	if (s == "tpl") return TPL;
-	if (s == "sup") return SUP;
-	if (s == "hku") return HKU;
+	if (s == "srf") return SRF;
 	if (s == "typ") return TYP;
 	if (s == "hkt") return HKT;
-	if (s == "srf") return SRF;
+	if (s == "hku") return HKU;
+	if (s == "sup") return SUP;
+	if (s == "tpl") return TPL;
 
 	return(0);
 };
@@ -33,12 +33,12 @@ uint QryWdbeModList::VecVOrd::getIx(
 string QryWdbeModList::VecVOrd::getSref(
 			const uint ix
 		) {
-	if (ix == TPL) return("tpl");
-	if (ix == SUP) return("sup");
-	if (ix == HKU) return("hku");
+	if (ix == SRF) return("srf");
 	if (ix == TYP) return("typ");
 	if (ix == HKT) return("hkt");
-	if (ix == SRF) return("srf");
+	if (ix == HKU) return("hku");
+	if (ix == SUP) return("sup");
+	if (ix == TPL) return("tpl");
 
 	return("");
 };
@@ -106,11 +106,10 @@ QryWdbeModList::StatShr::StatShr(
 			, const uint nload
 		) :
 			Block()
+			, ntot(ntot)
+			, jnumFirstload(jnumFirstload)
+			, nload(nload)
 		{
-	this->ntot = ntot;
-	this->jnumFirstload = jnumFirstload;
-	this->nload = nload;
-
 	mask = {NTOT, JNUMFIRSTLOAD, NLOAD};
 };
 
@@ -181,10 +180,10 @@ QryWdbeModList::StgIac::StgIac(
 			, const uint nload
 		) :
 			Block()
+			, jnum(jnum)
+			, jnumFirstload(jnumFirstload)
+			, nload(nload)
 		{
-	this->jnum = jnum;
-	this->jnumFirstload = jnumFirstload;
-	this->nload = nload;
 	mask = {JNUM, JNUMFIRSTLOAD, NLOAD};
 };
 

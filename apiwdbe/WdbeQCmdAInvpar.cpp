@@ -27,16 +27,17 @@ WdbeQCmdAInvpar::WdbeQCmdAInvpar(
 			, const string Defval
 			, const string stubRefWdbeMVectoritem
 			, const string Comment
-		) {
-	this->jnum = jnum;
-	this->sref = sref;
-	this->srefIxWdbeVPartype = srefIxWdbeVPartype;
-	this->titIxWdbeVPartype = titIxWdbeVPartype;
-	this->stubRefWdbeMVector = stubRefWdbeMVector;
-	this->Length = Length;
-	this->Defval = Defval;
-	this->stubRefWdbeMVectoritem = stubRefWdbeMVectoritem;
-	this->Comment = Comment;
+		) :
+			jnum(jnum)
+			, sref(sref)
+			, srefIxWdbeVPartype(srefIxWdbeVPartype)
+			, titIxWdbeVPartype(titIxWdbeVPartype)
+			, stubRefWdbeMVector(stubRefWdbeMVector)
+			, Length(Length)
+			, Defval(Defval)
+			, stubRefWdbeMVectoritem(stubRefWdbeMVectoritem)
+			, Comment(Comment)
+		{
 };
 
 bool WdbeQCmdAInvpar::readXML(

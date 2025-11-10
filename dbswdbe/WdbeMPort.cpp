@@ -34,23 +34,23 @@ WdbeMPort::WdbeMPort(
 			, const string cprSrefWdbeMPort
 			, const string csiSrefWdbeMSignal
 			, const string Comment
-		) {
-
-	this->ref = ref;
-	this->refWdbeCPort = refWdbeCPort;
-	this->mdlRefWdbeMModule = mdlRefWdbeMModule;
-	this->mdlNum = mdlNum;
-	this->mdlIxVCat = mdlIxVCat;
-	this->sref = sref;
-	this->ixVDir = ixVDir;
-	this->srefWdbeKHdltype = srefWdbeKHdltype;
-	this->Width = Width;
-	this->Minmax = Minmax;
-	this->Defval = Defval;
-	this->cpiSrefWdbeMPin = cpiSrefWdbeMPin;
-	this->cprSrefWdbeMPort = cprSrefWdbeMPort;
-	this->csiSrefWdbeMSignal = csiSrefWdbeMSignal;
-	this->Comment = Comment;
+		) :
+			ref(ref)
+			, refWdbeCPort(refWdbeCPort)
+			, mdlRefWdbeMModule(mdlRefWdbeMModule)
+			, mdlNum(mdlNum)
+			, mdlIxVCat(mdlIxVCat)
+			, sref(sref)
+			, ixVDir(ixVDir)
+			, srefWdbeKHdltype(srefWdbeKHdltype)
+			, Width(Width)
+			, Minmax(Minmax)
+			, Defval(Defval)
+			, cpiSrefWdbeMPin(cpiSrefWdbeMPin)
+			, cprSrefWdbeMPort(cprSrefWdbeMPort)
+			, csiSrefWdbeMSignal(csiSrefWdbeMSignal)
+			, Comment(Comment)
+		{
 };
 
 bool WdbeMPort::operator==(

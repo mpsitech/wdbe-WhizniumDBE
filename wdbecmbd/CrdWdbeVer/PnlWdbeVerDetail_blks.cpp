@@ -53,15 +53,14 @@ PnlWdbeVerDetail::ContIac::ContIac(
 			, const string& TxfCmt
 		) :
 			Block()
+			, TxfMaj(TxfMaj)
+			, TxfMin(TxfMin)
+			, TxfSub(TxfSub)
+			, numFPupJst(numFPupJst)
+			, numFPupSte(numFPupSte)
+			, TxfAbt(TxfAbt)
+			, TxfCmt(TxfCmt)
 		{
-	this->TxfMaj = TxfMaj;
-	this->TxfMin = TxfMin;
-	this->TxfSub = TxfSub;
-	this->numFPupJst = numFPupJst;
-	this->numFPupSte = numFPupSte;
-	this->TxfAbt = TxfAbt;
-	this->TxfCmt = TxfCmt;
-
 	mask = {TXFMAJ, TXFMIN, TXFSUB, NUMFPUPJST, NUMFPUPSTE, TXFABT, TXFCMT};
 };
 
@@ -197,10 +196,9 @@ PnlWdbeVerDetail::ContInf::ContInf(
 			, const string& TxtBvr
 		) :
 			Block()
+			, TxtPrj(TxtPrj)
+			, TxtBvr(TxtBvr)
 		{
-	this->TxtPrj = TxtPrj;
-	this->TxtBvr = TxtBvr;
-
 	mask = {TXTPRJ, TXTBVR};
 };
 
@@ -314,24 +312,23 @@ PnlWdbeVerDetail::StatShr::StatShr(
 			, const bool TxfCmtActive
 		) :
 			Block()
+			, ButSaveAvail(ButSaveAvail)
+			, ButSaveActive(ButSaveActive)
+			, TxtPrjActive(TxtPrjActive)
+			, ButPrjViewAvail(ButPrjViewAvail)
+			, ButPrjViewActive(ButPrjViewActive)
+			, TxfMajActive(TxfMajActive)
+			, TxfMinActive(TxfMinActive)
+			, TxfSubActive(TxfSubActive)
+			, TxtBvrActive(TxtBvrActive)
+			, ButBvrViewAvail(ButBvrViewAvail)
+			, ButBvrViewActive(ButBvrViewActive)
+			, PupJstActive(PupJstActive)
+			, ButJstEditAvail(ButJstEditAvail)
+			, PupSteActive(PupSteActive)
+			, TxfAbtActive(TxfAbtActive)
+			, TxfCmtActive(TxfCmtActive)
 		{
-	this->ButSaveAvail = ButSaveAvail;
-	this->ButSaveActive = ButSaveActive;
-	this->TxtPrjActive = TxtPrjActive;
-	this->ButPrjViewAvail = ButPrjViewAvail;
-	this->ButPrjViewActive = ButPrjViewActive;
-	this->TxfMajActive = TxfMajActive;
-	this->TxfMinActive = TxfMinActive;
-	this->TxfSubActive = TxfSubActive;
-	this->TxtBvrActive = TxtBvrActive;
-	this->ButBvrViewAvail = ButBvrViewAvail;
-	this->ButBvrViewActive = ButBvrViewActive;
-	this->PupJstActive = PupJstActive;
-	this->ButJstEditAvail = ButJstEditAvail;
-	this->PupSteActive = PupSteActive;
-	this->TxfAbtActive = TxfAbtActive;
-	this->TxfCmtActive = TxfCmtActive;
-
 	mask = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTPRJACTIVE, BUTPRJVIEWAVAIL, BUTPRJVIEWACTIVE, TXFMAJACTIVE, TXFMINACTIVE, TXFSUBACTIVE, TXTBVRACTIVE, BUTBVRVIEWAVAIL, BUTBVRVIEWACTIVE, PUPJSTACTIVE, BUTJSTEDITAVAIL, PUPSTEACTIVE, TXFABTACTIVE, TXFCMTACTIVE};
 };
 

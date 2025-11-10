@@ -89,22 +89,22 @@ public:
 	class StatShr : public Sbecore::Block {
 
 	public:
-		static const Sbecore::uint TXFVNDVALID = 1;
-		static const Sbecore::uint BUTSAVEAVAIL = 2;
-		static const Sbecore::uint BUTSAVEACTIVE = 3;
-		static const Sbecore::uint PUPVNDACTIVE = 4;
+		static const Sbecore::uint BUTSAVEAVAIL = 1;
+		static const Sbecore::uint BUTSAVEACTIVE = 2;
+		static const Sbecore::uint PUPVNDACTIVE = 3;
+		static const Sbecore::uint TXFVNDVALID = 4;
 		static const Sbecore::uint BUTVNDEDITAVAIL = 5;
 		static const Sbecore::uint TXFTITACTIVE = 6;
 		static const Sbecore::uint TXFCMTACTIVE = 7;
 
 	public:
-		StatShr(const bool TxfVndValid = false, const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool PupVndActive = true, const bool ButVndEditAvail = true, const bool TxfTitActive = true, const bool TxfCmtActive = true);
+		StatShr(const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool PupVndActive = true, const bool TxfVndValid = false, const bool ButVndEditAvail = true, const bool TxfTitActive = true, const bool TxfCmtActive = true);
 
 	public:
-		bool TxfVndValid;
 		bool ButSaveAvail;
 		bool ButSaveActive;
 		bool PupVndActive;
+		bool TxfVndValid;
 		bool ButVndEditAvail;
 		bool TxfTitActive;
 		bool TxfCmtActive;
@@ -256,8 +256,8 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeKlsAkeyMod_klsEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv);
 	bool handleCallWdbeFamUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
+	bool handleCallWdbeKlsAkeyMod_klsEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::uint ixInv);
 
 };
 

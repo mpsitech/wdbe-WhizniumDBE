@@ -30,19 +30,20 @@ WdbeQUsrList::WdbeQUsrList(
 			, const string titIxWdbeVLocale
 			, const string srefIxWdbeVUserlevel
 			, const string titIxWdbeVUserlevel
-		) {
-	this->jnum = jnum;
-	this->stubGrp = stubGrp;
-	this->stubOwn = stubOwn;
-	this->stubRefWdbeMPerson = stubRefWdbeMPerson;
-	this->sref = sref;
-	this->stubRefWdbeMUsergroup = stubRefWdbeMUsergroup;
-	this->srefIxVState = srefIxVState;
-	this->titIxVState = titIxVState;
-	this->srefIxWdbeVLocale = srefIxWdbeVLocale;
-	this->titIxWdbeVLocale = titIxWdbeVLocale;
-	this->srefIxWdbeVUserlevel = srefIxWdbeVUserlevel;
-	this->titIxWdbeVUserlevel = titIxWdbeVUserlevel;
+		) :
+			jnum(jnum)
+			, stubGrp(stubGrp)
+			, stubOwn(stubOwn)
+			, stubRefWdbeMPerson(stubRefWdbeMPerson)
+			, sref(sref)
+			, stubRefWdbeMUsergroup(stubRefWdbeMUsergroup)
+			, srefIxVState(srefIxVState)
+			, titIxVState(titIxVState)
+			, srefIxWdbeVLocale(srefIxWdbeVLocale)
+			, titIxWdbeVLocale(titIxWdbeVLocale)
+			, srefIxWdbeVUserlevel(srefIxWdbeVUserlevel)
+			, titIxWdbeVUserlevel(titIxWdbeVUserlevel)
+		{
 };
 
 bool WdbeQUsrList::readXML(

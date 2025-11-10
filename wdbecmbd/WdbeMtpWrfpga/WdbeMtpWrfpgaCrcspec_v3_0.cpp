@@ -69,11 +69,12 @@ void WdbeMtpWrfpgaCrcspec_v3_0::writeMdlVhd(
 			, fstream& outfile
 			, WdbeMModule* mdl
 		) {
+	typedef unsigned __int128 uint128_t;
 	bool leNotBe;
 	unsigned int wDinc0;
-	vector<unsigned long long> dincs;
-	unsigned long long dinc;
-	unsigned long long ix; // index running along dinc bits
+	vector<uint128_t> dincs;
+	uint128_t dinc;
+	uint128_t ix; // index running along dinc bits
 
 	unsigned int wPoly;
 	unsigned int crcpoly;
@@ -86,9 +87,6 @@ void WdbeMtpWrfpgaCrcspec_v3_0::writeMdlVhd(
 	string s;
 
 	bool first;
-
-	// --- crccalc
-	outfile << "-- IP crccalc --- IBEGIN" << endl;
 
 	leNotBe = false;
 
@@ -118,6 +116,23 @@ void WdbeMtpWrfpgaCrcspec_v3_0::writeMdlVhd(
 		
 		for (unsigned int i = 0; i < s.length(); i += 2) crcpoly = (crcpoly << 8) + Wdbe::hexToBin(s.substr(i, 2));
 	};
+
+	// --- initInvert.wDGtWPoly*
+	if (wDinc0 > wPoly) outfile << "-- IP initInvert.wDGtWPoly --- AFFIRM" << endl;
+	else outfile << "-- IP initInvert.wDGtWPoly --- REMOVE" << endl;
+
+	// --- initInvert.wDGeqWPoly*
+	if (wDinc0 >= wPoly) outfile << "-- IP initInvert.wDGeqWPoly --- AFFIRM" << endl;
+	else outfile << "-- IP initInvert.wDGeqWPoly --- REMOVE" << endl;
+
+	// --- initInvert.wDLtWPoly*
+	if (wDinc0 < wPoly) outfile << "-- IP initInvert.wDLtWPoly --- AFFIRM" << endl;
+	else outfile << "-- IP initInvert.wDLtWPoly --- REMOVE" << endl;
+
+	// --- crccalc
+	outfile << "-- IP crccalc --- IBEGIN" << endl;
+
+	//cout << "working with crcpoly = " << crcpoly << endl;
 
 	// 16/32 entries corr. to crc_sig(0) to crc_sig(15/31)
 	dincs.resize(wPoly);
@@ -181,7 +196,7 @@ void WdbeMtpWrfpgaCrcspec_v3_0::writeMdlVhd(
 
 		// - output
 		for (unsigned int i = wPoly; i > 0; i--) {
-			outfile << indent << "crc_sig(" << (i-1) << ") <=";
+			outfile << indent << "crc_imd(" << (i-1) << ") <=";
 
 			first = true;
 
@@ -193,8 +208,8 @@ void WdbeMtpWrfpgaCrcspec_v3_0::writeMdlVhd(
 					if (first) first = false;
 					else outfile << " xor";
 					
-					if (!leNotBe) outfile << " AXIS_tdata(" << (j + (wDinc0 - wDinc) - 1) << ")";
-					else outfile << " AXIS_tdata(" << getLittleEndian(wDinc0, j + (wDinc0 - wDinc) - 1) << ")";
+					if (!leNotBe) outfile << " word(" << (j + (wDinc0 - wDinc) - 1) << ")";
+					else outfile << " word(" << getLittleEndian(wDinc0, j + (wDinc0 - wDinc) - 1) << ")";
 				};
 			};
 
@@ -204,7 +219,7 @@ void WdbeMtpWrfpgaCrcspec_v3_0::writeMdlVhd(
 					if (first) first = false;
 					else outfile << " xor";
 					
-					outfile << " crc_sig(" << j << ")";
+					outfile << " crc_imd(" << j << ")";
 				};
 			};
 
@@ -214,7 +229,7 @@ void WdbeMtpWrfpgaCrcspec_v3_0::writeMdlVhd(
 	};
 
 	if (wDinc0 > 8) {
-		outfile << "\t\t\t\t\twhen others =>" << endl;
+		outfile << "\t\t\t\t\t\twhen others =>" << endl;
 		outfile << "\t\t\t\t\t\t\tvalidCrc_sig <= '0';" << endl;
 		outfile << "\t\t\t\t\tend case;" << endl;
 	};

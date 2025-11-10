@@ -257,7 +257,14 @@ void PnlWdbeNavAdmin::refresh(
 	if (muteRefresh && !unmute) return;
 	muteRefresh = true;
 
-	// IP refresh --- INSERT
+	StatShr oldStatshr(statshr);
+
+	// IP refresh --- BEGIN
+	// statshr
+	statshr.ButPrfNewcrdAvail = evalButPrfNewcrdAvail(dbswdbe);
+	// IP refresh --- END
+
+	if (statshr.diff(&oldStatshr).size() != 0) insert(moditems, DpchEngData::STATSHR);
 
 	muteRefresh = false;
 };
@@ -327,6 +334,8 @@ void PnlWdbeNavAdmin::handleRequest(
 					handleDpchAppDoButFilViewClick(dbswdbe, &(req->dpcheng));
 				} else if (dpchappdo->ixVDo == VecVDo::BUTFILNEWCRDCLICK) {
 					handleDpchAppDoButFilNewcrdClick(dbswdbe, &(req->dpcheng));
+				} else if (dpchappdo->ixVDo == VecVDo::BUTPRFNEWCRDCLICK) {
+					handleDpchAppDoButPrfNewcrdClick(dbswdbe, &(req->dpcheng));
 				};
 
 			};
@@ -495,6 +504,18 @@ void PnlWdbeNavAdmin::handleDpchAppDoButFilNewcrdClick(
 
 	if (jrefNew == 0) *dpcheng = new DpchEngWdbeConfirm(false, 0, "");
 	else *dpcheng = new DpchEngWdbeConfirm(true, jrefNew, "CrdWdbeFil");
+};
+
+void PnlWdbeNavAdmin::handleDpchAppDoButPrfNewcrdClick(
+			DbsWdbe* dbswdbe
+			, DpchEngWdbe** dpcheng
+		) {
+	ubigint jrefNew = 0;
+
+	xchg->triggerIxRefSrefIntvalToRefCall(dbswdbe, VecWdbeVCall::CALLWDBECRDOPEN, jref, 0, 0, "CrdWdbePrf", 0, jrefNew);
+
+	if (jrefNew == 0) *dpcheng = new DpchEngWdbeConfirm(false, 0, "");
+	else *dpcheng = new DpchEngWdbeConfirm(true, jrefNew, "CrdWdbePrf");
 };
 
 void PnlWdbeNavAdmin::handleCall(

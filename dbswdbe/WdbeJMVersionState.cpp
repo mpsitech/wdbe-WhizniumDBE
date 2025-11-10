@@ -21,12 +21,12 @@ WdbeJMVersionState::WdbeJMVersionState(
 			, const ubigint refWdbeMVersion
 			, const uint x1Start
 			, const uint ixVState
-		) {
-
-	this->ref = ref;
-	this->refWdbeMVersion = refWdbeMVersion;
-	this->x1Start = x1Start;
-	this->ixVState = ixVState;
+		) :
+			ref(ref)
+			, refWdbeMVersion(refWdbeMVersion)
+			, x1Start(x1Start)
+			, ixVState(ixVState)
+		{
 };
 
 bool WdbeJMVersionState::operator==(

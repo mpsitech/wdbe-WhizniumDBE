@@ -14,9 +14,9 @@
 
 // IP include.cust --- INSERT
 
-#include "PnlWdbeCmpMNLibrary.h"
-#include "PnlWdbeCmp1NRelease.h"
 #include "PnlWdbeCmpDetail.h"
+#include "PnlWdbeCmp1NRelease.h"
+#include "PnlWdbeCmpMNLibrary.h"
 
 #define VecVWdbeCmpRecDo PnlWdbeCmpRec::VecVDo
 
@@ -177,9 +177,9 @@ public:
 	ContInf continf;
 	StatShr statshr;
 
-	PnlWdbeCmpMNLibrary* pnlmnlibrary;
-	PnlWdbeCmp1NRelease* pnl1nrelease;
 	PnlWdbeCmpDetail* pnldetail;
+	PnlWdbeCmp1NRelease* pnl1nrelease;
+	PnlWdbeCmpMNLibrary* pnlmnlibrary;
 
 	WdbeMComponent recCmp;
 
@@ -213,8 +213,8 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeCmpUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 	bool handleCallWdbeCmp_verEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeCmpUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 
 };
 

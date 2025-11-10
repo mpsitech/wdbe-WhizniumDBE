@@ -24,12 +24,11 @@ StgWdbeapi::StgWdbeapi(
 			, const string password
 		) :
 			Block()
+			, engip(engip)
+			, engport(engport)
+			, username(username)
+			, password(password)
 		{
-	this->engip = engip;
-	this->engport = engport;
-	this->username = username;
-	this->password = password;
-
 	mask = {ENGIP, ENGPORT, USERNAME, PASSWORD};
 };
 
@@ -262,6 +261,9 @@ uint ApiWdbe::readDpchEng(
 		} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHENGWDBECMDHEADBARDATA) {
 			*dpcheng = new PnlWdbeCmdHeadbar::DpchEngData();
 			((PnlWdbeCmdHeadbar::DpchEngData*) *dpcheng)->readXML(docctx, "/", true);
+		} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHENGWDBECMDHK1NVECTORDATA) {
+			*dpcheng = new PnlWdbeCmdHk1NVector::DpchEngData();
+			((PnlWdbeCmdHk1NVector::DpchEngData*) *dpcheng)->readXML(docctx, "/", true);
 		} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHENGWDBECMDLISTDATA) {
 			*dpcheng = new PnlWdbeCmdList::DpchEngData();
 			((PnlWdbeCmdList::DpchEngData*) *dpcheng)->readXML(docctx, "/", true);
@@ -427,6 +429,12 @@ uint ApiWdbe::readDpchEng(
 		} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHENGWDBEGENRECDATA) {
 			*dpcheng = new PnlWdbeGenRec::DpchEngData();
 			((PnlWdbeGenRec::DpchEngData*) *dpcheng)->readXML(docctx, "/", true);
+		} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHENGWDBEIDFDATA) {
+			*dpcheng = new CrdWdbeIdf::DpchEngData();
+			((CrdWdbeIdf::DpchEngData*) *dpcheng)->readXML(docctx, "/", true);
+		} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHENGWDBEIDFHEADBARDATA) {
+			*dpcheng = new PnlWdbeIdfHeadbar::DpchEngData();
+			((PnlWdbeIdfHeadbar::DpchEngData*) *dpcheng)->readXML(docctx, "/", true);
 		} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHENGWDBEINTDATA) {
 			*dpcheng = new CrdWdbeInt::DpchEngData();
 			((CrdWdbeInt::DpchEngData*) *dpcheng)->readXML(docctx, "/", true);
@@ -739,6 +747,18 @@ uint ApiWdbe::readDpchEng(
 		} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHENGWDBEPRCREF1NVARIABLEDATA) {
 			*dpcheng = new PnlWdbePrcRef1NVariable::DpchEngData();
 			((PnlWdbePrcRef1NVariable::DpchEngData*) *dpcheng)->readXML(docctx, "/", true);
+		} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHENGWDBEPRFDAEMONDATA) {
+			*dpcheng = new PnlWdbePrfDaemon::DpchEngData();
+			((PnlWdbePrfDaemon::DpchEngData*) *dpcheng)->readXML(docctx, "/", true);
+		} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHENGWDBEPRFDATA) {
+			*dpcheng = new CrdWdbePrf::DpchEngData();
+			((CrdWdbePrf::DpchEngData*) *dpcheng)->readXML(docctx, "/", true);
+		} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHENGWDBEPRFHEADBARDATA) {
+			*dpcheng = new PnlWdbePrfHeadbar::DpchEngData();
+			((PnlWdbePrfHeadbar::DpchEngData*) *dpcheng)->readXML(docctx, "/", true);
+		} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHENGWDBEPRFLICENSEDATA) {
+			*dpcheng = new PnlWdbePrfLicense::DpchEngData();
+			((PnlWdbePrfLicense::DpchEngData*) *dpcheng)->readXML(docctx, "/", true);
 		} else if (ixWdbeVDpch == VecWdbeVDpch::DPCHENGWDBEPRJDATA) {
 			*dpcheng = new CrdWdbePrj::DpchEngData();
 			((CrdWdbePrj::DpchEngData*) *dpcheng)->readXML(docctx, "/", true);

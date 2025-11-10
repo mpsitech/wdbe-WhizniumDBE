@@ -31,20 +31,21 @@ WdbeQPrcKHdltype::WdbeQPrcKHdltype(
 			, const ubigint refJ
 			, const string Title
 			, const string Comment
-		) {
-	this->qref = qref;
-	this->jref = jref;
-	this->jnum = jnum;
-	this->ref = ref;
-	this->klsNum = klsNum;
-	this->Fixed = Fixed;
-	this->yesnoFixed = yesnoFixed;
-	this->sref = sref;
-	this->Avail = Avail;
-	this->Implied = Implied;
-	this->refJ = refJ;
-	this->Title = Title;
-	this->Comment = Comment;
+		) :
+			qref(qref)
+			, jref(jref)
+			, jnum(jnum)
+			, ref(ref)
+			, klsNum(klsNum)
+			, Fixed(Fixed)
+			, yesnoFixed(yesnoFixed)
+			, sref(sref)
+			, Avail(Avail)
+			, Implied(Implied)
+			, refJ(refJ)
+			, Title(Title)
+			, Comment(Comment)
+		{
 };
 
 void WdbeQPrcKHdltype::writeJSON(

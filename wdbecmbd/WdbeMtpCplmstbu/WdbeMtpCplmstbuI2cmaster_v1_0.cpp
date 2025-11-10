@@ -36,35 +36,25 @@ DpchRetWdbe* WdbeMtpCplmstbuI2cmaster_v1_0::run(
 	utinyint ixOpVOpres = VecOpVOpres::SUCCESS;
 
 	// IP run --- IBEGIN
-	ubigint refBb, refBibuf, refIobuf;
+	ubigint refC;
 
-	uint mdlNum = 1;
+	bool threeNotInout;
 
-	refBb = 0; dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMModule WHERE supRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'bbSda'", refBb);
-	refBibuf = 0; dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMModule WHERE supRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'bibufSda'", refBibuf);
-	refIobuf = 0; dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMModule WHERE supRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'iobufSda'", refIobuf);
+	string s;
 
-	dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::VOID, 0, 0, "sda_sig", false, "sl", 1, "", "", "", "0", false, 0, "");
-	if (refBibuf) dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::MDL, refBibuf + refIobuf + refBb, 0, "sdan_sig", false, "sl", 1, "", "", "", "0", false, 0, "");
-	if (refBb + refBibuf + refIobuf) dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::MDL, refBibuf + refIobuf + refBb, 0, "sda_in", false, "sl", 1, "", "", "", "0", false, 0, "");
+	Wdbe::getMpa(dbswdbe, refWdbeMModule, "threeNotInout", s);
+	threeNotInout = (s == "true");
 
-	if (refBb != 0) {
-		Wdbe::setPrtCsi(dbswdbe, refBb, "O", "sda_in");
-		Wdbe::setPrtCpr(dbswdbe, refBb, "B", "sda");
-		Wdbe::setPrtDfv(dbswdbe, refBb, "I", "0");
-		Wdbe::setPrtCsi(dbswdbe, refBb, "T", "sda_sig");
+	if (threeNotInout) {
+		dbswdbe->executeQuery("DELETE FROM TblWdbeMPort WHERE mdlRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'scl'");
+		dbswdbe->executeQuery("DELETE FROM TblWdbeMPort WHERE mdlRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'sda'");
 
-	} else if (refBibuf != 0) {
-		Wdbe::setPrtCsi(dbswdbe, refBibuf, "Y", "sda_in");
-		Wdbe::setPrtCpr(dbswdbe, refBibuf, "PAD", "sda");
-		Wdbe::setPrtDfv(dbswdbe, refBibuf, "D", "0");
-		Wdbe::setPrtCsi(dbswdbe, refBibuf, "E", "sdan_sig");
+	} else {
+		refC = 0; dbswdbe->loadRefBySQL("SELECT refWdbeCPort FROM TblWdbeMPort WHERE mdlRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'scl_in'", refC);
+		if (refC != 0) dbswdbe->executeQuery("DELETE FROM TblWdbeMPort WHERE refWdbeCPort = " + to_string(refC));
 
-	} else if (refIobuf != 0) {
-		Wdbe::setPrtCsi(dbswdbe, refIobuf, "O", "sda_in");
-		Wdbe::setPrtCpr(dbswdbe, refIobuf, "IO", "sda");
-		Wdbe::setPrtDfv(dbswdbe, refIobuf, "I", "0");
-		Wdbe::setPrtCsi(dbswdbe, refIobuf, "T", "sda_sig");
+		refC = 0; dbswdbe->loadRefBySQL("SELECT refWdbeCPort FROM TblWdbeMPort WHERE mdlRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'sda_in'", refC);
+		if (refC != 0) dbswdbe->executeQuery("DELETE FROM TblWdbeMPort WHERE refWdbeCPort = " + to_string(refC));
 	};
 	// IP run --- IEND
 

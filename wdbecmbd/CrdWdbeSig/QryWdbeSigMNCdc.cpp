@@ -85,7 +85,7 @@ void QryWdbeSigMNCdc::rerun(
 	dbswdbe->tblwdbeqsigmncdc->removeRstByJref(jref);
 
 	sqlstr = "SELECT COUNT(TblWdbeRMCdcMSignal.ref)";
-	sqlstr += " FROM TblWdbeMCdc, TblWdbeRMCdcMSignal";
+	sqlstr += " FROM TblWdbeRMCdcMSignal, TblWdbeMCdc";
 	sqlstr += " WHERE TblWdbeRMCdcMSignal.refWdbeMCdc = TblWdbeMCdc.ref";
 	sqlstr += " AND TblWdbeRMCdcMSignal.refWdbeMSignal = " + to_string(preRefSig) + "";
 	dbswdbe->loadUintBySQL(sqlstr, cnt);
@@ -100,7 +100,7 @@ void QryWdbeSigMNCdc::rerun(
 
 	sqlstr = "INSERT INTO TblWdbeQSigMNCdc(jref, jnum, mref, ref, ixVDir)";
 	sqlstr += " SELECT " + to_string(jref) + ", 0, TblWdbeMCdc.ref, TblWdbeRMCdcMSignal.ref, TblWdbeRMCdcMSignal.ixVDir";
-	sqlstr += " FROM TblWdbeMCdc, TblWdbeRMCdcMSignal";
+	sqlstr += " FROM TblWdbeRMCdcMSignal, TblWdbeMCdc";
 	sqlstr += " WHERE TblWdbeRMCdcMSignal.refWdbeMCdc = TblWdbeMCdc.ref";
 	sqlstr += " AND TblWdbeRMCdcMSignal.refWdbeMSignal = " + to_string(preRefSig) + "";
 	sqlstr += " LIMIT " + to_string(stgiac.nload) + " OFFSET " + to_string(stgiac.jnumFirstload-1);
@@ -281,11 +281,19 @@ void QryWdbeSigMNCdc::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBECDCRSIGMOD_SIGEQ) {
-		call->abort = handleCallWdbeCdcRsigMod_sigEq(dbswdbe, call->jref);
-	} else if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
+	if ((call->ixVCall == VecWdbeVCall::CALLWDBESTUBCHG) && (call->jref == jref)) {
 		call->abort = handleCallWdbeStubChgFromSelf(dbswdbe);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECDCRSIGMOD_SIGEQ) {
+		call->abort = handleCallWdbeCdcRsigMod_sigEq(dbswdbe, call->jref);
 	};
+};
+
+bool QryWdbeSigMNCdc::handleCallWdbeStubChgFromSelf(
+			DbsWdbe* dbswdbe
+		) {
+	bool retval = false;
+	// IP handleCallWdbeStubChgFromSelf --- INSERT
+	return retval;
 };
 
 bool QryWdbeSigMNCdc::handleCallWdbeCdcRsigMod_sigEq(
@@ -299,13 +307,5 @@ bool QryWdbeSigMNCdc::handleCallWdbeCdcRsigMod_sigEq(
 		xchg->triggerCall(dbswdbe, VecWdbeVCall::CALLWDBESTATCHG, jref);
 	};
 
-	return retval;
-};
-
-bool QryWdbeSigMNCdc::handleCallWdbeStubChgFromSelf(
-			DbsWdbe* dbswdbe
-		) {
-	bool retval = false;
-	// IP handleCallWdbeStubChgFromSelf --- INSERT
 	return retval;
 };

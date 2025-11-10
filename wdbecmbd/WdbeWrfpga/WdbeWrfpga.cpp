@@ -109,7 +109,7 @@ string WdbeWrfpga::getValStr(
 			WdbeMGeneric* gen
 			, const bool othNotFull
 		) {
-	WdbeMSignal sig(0, 0, 0, 0, 0, 0, 0, 0, 0, "", false, gen->srefWdbeKHdltype, gen->Width, gen->Minmax, "", "", gen->Defval, false, 0, "");
+	WdbeMSignal sig(0, 0, 0, 0, 0, 0, 0, 0, 0, "", false, gen->srefWdbeKHdltype, gen->Width, gen->Minmax, "", "", gen->Defval, 0, "");
 	return(getValStr(&sig, othNotFull));
 };
 
@@ -117,7 +117,7 @@ string WdbeWrfpga::getValStr(
 			WdbeMPort* prt
 			, const bool othNotFull
 		) {
-	WdbeMSignal sig(0, 0, 0, 0, 0, 0, 0, 0, 0, "", false, prt->srefWdbeKHdltype, prt->Width, prt->Minmax, "", "", prt->Defval, false, 0, "");
+	WdbeMSignal sig(0, 0, 0, 0, 0, 0, 0, 0, 0, "", false, prt->srefWdbeKHdltype, prt->Width, prt->Minmax, "", "", prt->Defval, 0, "");
 	return(getValStr(&sig, othNotFull));
 };
 
@@ -129,7 +129,6 @@ string WdbeWrfpga::getValStr(
 	string s;
 
 	if (altval != "") s = altval;
-	else if (sig->Defon) s = sig->Onval;
 	else s = sig->Offval;
 
 	bool val;
@@ -162,21 +161,21 @@ string WdbeWrfpga::getValStr(
 			, const bool othNotFull
 			, const string& altval
 		) {
-	WdbeMSignal sig(0, 0, 0, 0, 0, 0, 0, 0, 0, "", false, var->srefWdbeKHdltype, var->Width, var->Minmax, "", var->Onval, var->Offval, var->Defon, 0, "");
+	WdbeMSignal sig(0, 0, 0, 0, 0, 0, 0, 0, 0, "", false, var->srefWdbeKHdltype, var->Width, var->Minmax, "", var->Onval, var->Offval, 0, "");
 	return(getValStr(&sig, othNotFull, altval));
 };
 
 string WdbeWrfpga::getVarStr(
 			WdbeMGeneric* gen
 		) {
-	WdbeMSignal sig(0, 0, 0, 0, 0, 0, VecWdbeVMSignalMgeTbl::VOID, 0, 0, "", false, gen->srefWdbeKHdltype, gen->Width, gen->Minmax, "", "", gen->Defval, false, 0, "");
+	WdbeMSignal sig(0, 0, 0, 0, 0, 0, VecWdbeVMSignalMgeTbl::VOID, 0, 0, "", false, gen->srefWdbeKHdltype, gen->Width, gen->Minmax, "", "", gen->Defval, 0, "");
 	return(getVarStr(&sig));
 };
 
 string WdbeWrfpga::getVarStr(
 			WdbeMPort* prt
 		) {
-	WdbeMSignal sig(0, 0, 0, 0, 0, 0, VecWdbeVMSignalMgeTbl::VOID, 0, 0, "", false, prt->srefWdbeKHdltype, prt->Width, prt->Minmax, "", "", "", false, 0, "");
+	WdbeMSignal sig(0, 0, 0, 0, 0, 0, VecWdbeVMSignalMgeTbl::VOID, 0, 0, "", false, prt->srefWdbeKHdltype, prt->Width, prt->Minmax, "", "", "", 0, "");
 	return(getVarStr(&sig));
 };
 
@@ -209,7 +208,7 @@ string WdbeWrfpga::getVarStr(
 	ptr = sig->Minmax.find("..");
 	if (ptr != string::npos) s += " range " + sig->Minmax.substr(0, ptr) + " to " + sig->Minmax.substr(ptr+2);
 
-	if ((sig->mgeIxVTbl == VecWdbeVMSignalMgeTbl::VOID) || sig->Const) if ((!sig->Defon && (sig->Offval != "")) || (sig->Defon && (sig->Onval != ""))) s += " := " + getValStr(sig, true);
+	if ((sig->mgeIxVTbl == VecWdbeVMSignalMgeTbl::VOID) || sig->Const) if (sig->Offval != "") s += " := " + getValStr(sig, true);
 
 	return s;
 };
@@ -217,7 +216,7 @@ string WdbeWrfpga::getVarStr(
 string WdbeWrfpga::getVarStr(
 			WdbeMVariable* var
 		) {
-	WdbeMSignal sig(0, 0, 0, 0, 0, 0, VecWdbeVMSignalMgeTbl::PRC, 0, 0, "", var->Const, var->srefWdbeKHdltype, var->Width, var->Minmax, "", var->Onval, var->Offval, var->Defon, 0, "");
+	WdbeMSignal sig(0, 0, 0, 0, 0, 0, VecWdbeVMSignalMgeTbl::PRC, 0, 0, "", var->Const, var->srefWdbeKHdltype, var->Width, var->Minmax, "", var->Onval, var->Offval, 0, "");
 	return(getVarStr(&sig));
 };
 

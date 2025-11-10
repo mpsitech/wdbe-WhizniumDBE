@@ -20,9 +20,10 @@ using namespace Xmlio;
 WdbeQMtpRef1NVariable::WdbeQMtpRef1NVariable(
 			const uint jnum
 			, const string stubRef
-		) {
-	this->jnum = jnum;
-	this->stubRef = stubRef;
+		) :
+			jnum(jnum)
+			, stubRef(stubRef)
+		{
 };
 
 bool WdbeQMtpRef1NVariable::readXML(

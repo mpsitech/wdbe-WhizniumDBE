@@ -29,18 +29,19 @@ WdbeQGenList::WdbeQGenList(
 			, const string titSrefWdbeKHdltype
 			, const usmallint Width
 			, const string Minmax
-		) {
-	this->qref = qref;
-	this->jref = jref;
-	this->jnum = jnum;
-	this->ref = ref;
-	this->sref = sref;
-	this->mdlRefWdbeMModule = mdlRefWdbeMModule;
-	this->stubMdlRefWdbeMModule = stubMdlRefWdbeMModule;
-	this->srefWdbeKHdltype = srefWdbeKHdltype;
-	this->titSrefWdbeKHdltype = titSrefWdbeKHdltype;
-	this->Width = Width;
-	this->Minmax = Minmax;
+		) :
+			qref(qref)
+			, jref(jref)
+			, jnum(jnum)
+			, ref(ref)
+			, sref(sref)
+			, mdlRefWdbeMModule(mdlRefWdbeMModule)
+			, stubMdlRefWdbeMModule(stubMdlRefWdbeMModule)
+			, srefWdbeKHdltype(srefWdbeKHdltype)
+			, titSrefWdbeKHdltype(titSrefWdbeKHdltype)
+			, Width(Width)
+			, Minmax(Minmax)
+		{
 };
 
 void WdbeQGenList::writeJSON(

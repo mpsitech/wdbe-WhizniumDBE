@@ -866,7 +866,6 @@ uint JobWdbeIexFin::enterSgeImport(
 					//sig2->Comb: TBL
 					//sig2->Onval: TBL
 					//sig2->Offval: TBL
-					//sig2->Defon: TBL
 					//sig2->drvRefWdbeMPort: CUSTSQL
 					if (sig2->srefDrvRefWdbeMPort != "") {
 						dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMPort WHERE mdlRefWdbeMModule = " + to_string(mdl->ref) + " AND sref = '" + sig2->srefDrvRefWdbeMPort + "'", sig2->drvRefWdbeMPort);
@@ -1026,7 +1025,6 @@ uint JobWdbeIexFin::enterSgeImport(
 						//var2->Minmax: TBL
 						//var2->Onval: TBL
 						//var2->Offval: TBL
-						//var2->Defon: TBL
 						//var2->Comment: TBL
 
 						dbswdbe->tblwdbemvariable->insertRec(var2);

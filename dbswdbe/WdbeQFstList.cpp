@@ -25,14 +25,15 @@ WdbeQFstList::WdbeQFstList(
 			, const string sref
 			, const ubigint fsmRefWdbeMFsm
 			, const string stubFsmRefWdbeMFsm
-		) {
-	this->qref = qref;
-	this->jref = jref;
-	this->jnum = jnum;
-	this->ref = ref;
-	this->sref = sref;
-	this->fsmRefWdbeMFsm = fsmRefWdbeMFsm;
-	this->stubFsmRefWdbeMFsm = stubFsmRefWdbeMFsm;
+		) :
+			qref(qref)
+			, jref(jref)
+			, jnum(jnum)
+			, ref(ref)
+			, sref(sref)
+			, fsmRefWdbeMFsm(fsmRefWdbeMFsm)
+			, stubFsmRefWdbeMFsm(stubFsmRefWdbeMFsm)
+		{
 };
 
 void WdbeQFstList::writeJSON(

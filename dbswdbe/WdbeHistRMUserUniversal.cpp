@@ -26,17 +26,17 @@ WdbeHistRMUserUniversal::WdbeHistRMUserUniversal(
 			, const uint preIxWdbeVMaintable
 			, const ubigint preUref
 			, const uint start
-		) {
-
-	this->ref = ref;
-	this->refWdbeMUser = refWdbeMUser;
-	this->unvIxWdbeVMaintable = unvIxWdbeVMaintable;
-	this->unvUref = unvUref;
-	this->ixWdbeVCard = ixWdbeVCard;
-	this->ixWdbeVPreset = ixWdbeVPreset;
-	this->preIxWdbeVMaintable = preIxWdbeVMaintable;
-	this->preUref = preUref;
-	this->start = start;
+		) :
+			ref(ref)
+			, refWdbeMUser(refWdbeMUser)
+			, unvIxWdbeVMaintable(unvIxWdbeVMaintable)
+			, unvUref(unvUref)
+			, ixWdbeVCard(ixWdbeVCard)
+			, ixWdbeVPreset(ixWdbeVPreset)
+			, preIxWdbeVMaintable(preIxWdbeVMaintable)
+			, preUref(preUref)
+			, start(start)
+		{
 };
 
 bool WdbeHistRMUserUniversal::operator==(

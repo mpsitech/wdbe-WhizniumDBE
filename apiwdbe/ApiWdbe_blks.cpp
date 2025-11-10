@@ -33,20 +33,20 @@ ContInfWdbeAlert::ContInfWdbeAlert(
 			, const string& TxtMsg12
 		) :
 			Block()
+			, TxtCpt(TxtCpt)
+			, TxtMsg1(TxtMsg1)
+			, TxtMsg2(TxtMsg2)
+			, TxtMsg3(TxtMsg3)
+			, TxtMsg4(TxtMsg4)
+			, TxtMsg5(TxtMsg5)
+			, TxtMsg6(TxtMsg6)
+			, TxtMsg7(TxtMsg7)
+			, TxtMsg8(TxtMsg8)
+			, TxtMsg9(TxtMsg9)
+			, TxtMsg10(TxtMsg10)
+			, TxtMsg11(TxtMsg11)
+			, TxtMsg12(TxtMsg12)
 		{
-	this->TxtCpt = TxtCpt;
-	this->TxtMsg1 = TxtMsg1;
-	this->TxtMsg2 = TxtMsg2;
-	this->TxtMsg3 = TxtMsg3;
-	this->TxtMsg4 = TxtMsg4;
-	this->TxtMsg5 = TxtMsg5;
-	this->TxtMsg6 = TxtMsg6;
-	this->TxtMsg7 = TxtMsg7;
-	this->TxtMsg8 = TxtMsg8;
-	this->TxtMsg9 = TxtMsg9;
-	this->TxtMsg10 = TxtMsg10;
-	this->TxtMsg10 = TxtMsg11;
-	this->TxtMsg10 = TxtMsg12;
 
 	mask = {TXTCPT, TXTMSG1, TXTMSG2, TXTMSG3, TXTMSG4, TXTMSG5, TXTMSG6, TXTMSG7, TXTMSG8, TXTMSG9, TXTMSG10, TXTMSG11, TXTMSG12};
 };
@@ -134,8 +134,9 @@ set<uint> ContInfWdbeAlert::compare(
 
 DpchWdbe::DpchWdbe(
 			const uint ixWdbeVDpch
-		) {
-	this->ixWdbeVDpch = ixWdbeVDpch;
+		) :
+			ixWdbeVDpch(ixWdbeVDpch)
+		{
 };
 
 DpchWdbe::~DpchWdbe() {
@@ -150,9 +151,8 @@ DpchAppWdbe::DpchAppWdbe(
 			, const string& scrJref
 		) :
 			DpchWdbe(ixWdbeVDpch)
+			, scrJref(scrJref)
 		{
-	this->scrJref = scrJref;
-
 	mask = {SCRJREF};
 };
 
@@ -193,9 +193,8 @@ DpchAppWdbeAlert::DpchAppWdbeAlert(
 			, const set<uint>& mask
 		) :
 			DpchAppWdbe(VecWdbeVDpch::DPCHAPPWDBEALERT, scrJref)
+			, numFMcb(numFMcb)
 		{
-	this->numFMcb = numFMcb;
-
 	if (find(mask, ALL)) this->mask = {SCRJREF, NUMFMCB};
 	else this->mask = mask;
 };

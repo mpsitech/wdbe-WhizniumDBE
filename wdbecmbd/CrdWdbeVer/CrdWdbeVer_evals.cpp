@@ -203,7 +203,7 @@ bool CrdWdbeVer::evalMitCrdImdAvail(
 bool CrdWdbeVer::evalMitCrdImdActive(
 			DbsWdbe* dbswdbe
 		) {
-	// pre.refVer()&ver.steEq(dsndeploy)
+	// pre.refVer()&ver.steEq(dsndeploy|dsnmdlstr)
 
 	vector<bool> args;
 	bool a, b;
@@ -212,6 +212,11 @@ bool CrdWdbeVer::evalMitCrdImdActive(
 	args.push_back(a);
 	a = false; xchg->triggerIxToBoolvalCall(dbswdbe, VecWdbeVCall::CALLWDBEVER_STEEQ, statshr.jrefRec, VecWdbeVMVersionState::DSNDEPLOY, a);
 	args.push_back(a);
+	a = false; xchg->triggerIxToBoolvalCall(dbswdbe, VecWdbeVCall::CALLWDBEVER_STEEQ, statshr.jrefRec, VecWdbeVMVersionState::DSNMDLSTR, a);
+	args.push_back(a);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
 	b = args.back(); args.pop_back();
 	a = args.back(); args.pop_back();
 	args.push_back(a && b);
@@ -241,7 +246,7 @@ bool CrdWdbeVer::evalMitCrdIcsAvail(
 bool CrdWdbeVer::evalMitCrdIcsActive(
 			DbsWdbe* dbswdbe
 		) {
-	// pre.refVer()&ver.steEq(dsnmdlstr)
+	// pre.refVer()&ver.steEq(dsnmdlstr|dsncmdset)
 
 	vector<bool> args;
 	bool a, b;
@@ -250,6 +255,11 @@ bool CrdWdbeVer::evalMitCrdIcsActive(
 	args.push_back(a);
 	a = false; xchg->triggerIxToBoolvalCall(dbswdbe, VecWdbeVCall::CALLWDBEVER_STEEQ, statshr.jrefRec, VecWdbeVMVersionState::DSNMDLSTR, a);
 	args.push_back(a);
+	a = false; xchg->triggerIxToBoolvalCall(dbswdbe, VecWdbeVCall::CALLWDBEVER_STEEQ, statshr.jrefRec, VecWdbeVMVersionState::DSNCMDSET, a);
+	args.push_back(a);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
 	b = args.back(); args.pop_back();
 	a = args.back(); args.pop_back();
 	args.push_back(a && b);
@@ -279,7 +289,7 @@ bool CrdWdbeVer::evalMitCrdIdaAvail(
 bool CrdWdbeVer::evalMitCrdIdaActive(
 			DbsWdbe* dbswdbe
 		) {
-	// pre.refVer()&ver.steEq(dsnmdlstr|dsncmdset)
+	// pre.refVer()&ver.steEq(dsnmdlstr|dsncmdset|dsndflalg)
 
 	vector<bool> args;
 	bool a, b;
@@ -290,6 +300,11 @@ bool CrdWdbeVer::evalMitCrdIdaActive(
 	args.push_back(a);
 	a = false; xchg->triggerIxToBoolvalCall(dbswdbe, VecWdbeVCall::CALLWDBEVER_STEEQ, statshr.jrefRec, VecWdbeVMVersionState::DSNCMDSET, a);
 	args.push_back(a);
+	a = false; xchg->triggerIxToBoolvalCall(dbswdbe, VecWdbeVCall::CALLWDBEVER_STEEQ, statshr.jrefRec, VecWdbeVMVersionState::DSNDFLALG, a);
+	args.push_back(a);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
 	b = args.back(); args.pop_back();
 	a = args.back(); args.pop_back();
 	args.push_back(a || b);
@@ -398,7 +413,7 @@ bool CrdWdbeVer::evalMitCrdIfsAvail(
 bool CrdWdbeVer::evalMitCrdIfsActive(
 			DbsWdbe* dbswdbe
 		) {
-	// pre.refVer()&ver.steEq(dsngenfst)
+	// pre.refVer()&ver.steEq(dsngenfst|dsncustfst)
 
 	vector<bool> args;
 	bool a, b;
@@ -407,6 +422,11 @@ bool CrdWdbeVer::evalMitCrdIfsActive(
 	args.push_back(a);
 	a = false; xchg->triggerIxToBoolvalCall(dbswdbe, VecWdbeVCall::CALLWDBEVER_STEEQ, statshr.jrefRec, VecWdbeVMVersionState::DSNGENFST, a);
 	args.push_back(a);
+	a = false; xchg->triggerIxToBoolvalCall(dbswdbe, VecWdbeVCall::CALLWDBEVER_STEEQ, statshr.jrefRec, VecWdbeVMVersionState::DSNCUSTFST, a);
+	args.push_back(a);
+	b = args.back(); args.pop_back();
+	a = args.back(); args.pop_back();
+	args.push_back(a || b);
 	b = args.back(); args.pop_back();
 	a = args.back(); args.pop_back();
 	args.push_back(a && b);

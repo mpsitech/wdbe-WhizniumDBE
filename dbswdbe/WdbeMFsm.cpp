@@ -22,11 +22,11 @@ WdbeMFsm::WdbeMFsm(
 			const ubigint ref
 			, const ubigint refWdbeMProcess
 			, const uint ixVDbgtaptype
-		) {
-
-	this->ref = ref;
-	this->refWdbeMProcess = refWdbeMProcess;
-	this->ixVDbgtaptype = ixVDbgtaptype;
+		) :
+			ref(ref)
+			, refWdbeMProcess(refWdbeMProcess)
+			, ixVDbgtaptype(ixVDbgtaptype)
+		{
 };
 
 bool WdbeMFsm::operator==(

@@ -36,7 +36,7 @@ DpchRetWdbe* WdbeMtpCplmstbuI2c_Easy_v1_0::run(
 	utinyint ixOpVOpres = VecOpVOpres::SUCCESS;
 
 	// IP run --- IBEGIN
-	ubigint ref, refC;
+	ubigint refRxtx, refC;
 
 	WdbeMModule* mdl = NULL;
 	uint mdlNum;
@@ -48,66 +48,73 @@ DpchRetWdbe* WdbeMtpCplmstbuI2c_Easy_v1_0::run(
 
 		refPrcOp = dbswdbe->tblwdbemprocess->insertNewRec(NULL, refWdbeMModule, 0, "op", "mclk", "reset", true, "", false, "main operation");
 
-		if (dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMModule WHERE supRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'rxtx'", ref)) {
+		if (dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMModule WHERE supRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'rxtx'", refRxtx)) {
 			refC = dbswdbe->tblwdbecsignal->getNewRef();
-			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::HSHK, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, refPrcOp, 0, "reqRxtx", false, "sl", 1, "", "", "", "0", false, 0, "");
-			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::HSHK, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::MDL, ref, 0, "ackRxtx", false, "sl", 1, "", "", "", "0", false, 0, "");
-			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::HSHK, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::MDL, ref, 0, "dneRxtx", false, "sl", 1, "", "", "", "0", false, 0, "");
+			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::HSHK, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, refPrcOp, 0, "reqRxtx", false, "sl", 1, "", "", "", "0", 0, "");
+			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::HSHK, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::MDL, refRxtx, 0, "ackRxtx", false, "sl", 1, "", "", "", "0", 0, "");
+			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::HSHK, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::MDL, refRxtx, 0, "dneRxtx", false, "sl", 1, "", "", "", "0", 0, "");
 
-			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, refPrcOp, 0, "devaddr", false, "slvdn", 8, "", "", "", "0", false, 0, "");
-
-			refC = dbswdbe->tblwdbecsignal->getNewRef();
-			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, refPrcOp, 0, "r16Not8", false, "sl", 1, "", "", "", "0", false, 0, "");
-			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, refPrcOp, 0, "d16Not8", false, "sl", 1, "", "", "", "0", false, 0, "");
+			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, refPrcOp, 0, "devaddr", false, "slvdn", 8, "", "", "", "0", 0, "");
 
 			refC = dbswdbe->tblwdbecsignal->getNewRef();
-			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, refPrcOp, 0, "readNotWrite", false, "sl", 1, "", "", "", "0", false, 0, "");
-			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, refPrcOp, 0, "readAradNotArd", false, "sl", 1, "", "", "", "0", false, 0, "");
-			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, refPrcOp, 0, "writeAdNotArd", false, "sl", 1, "", "", "", "0", false, 0, "");
-			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, refPrcOp, 0, "regaddr", false, "slvdn", 16, "", "", "", "0", false, 0, "");
+			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, refPrcOp, 0, "r16Not8", false, "sl", 1, "", "", "", "0", 0, "");
+			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, refPrcOp, 0, "d16Not8", false, "sl", 1, "", "", "", "0", 0, "");
 
 			refC = dbswdbe->tblwdbecsignal->getNewRef();
-			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, refPrcOp, 0, "rxtxSend", false, "slvdn", 16, "", "", "", "0", false, 0, "");
-			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::MDL, ref, 0, "rxtxRecv", false, "slvdn", 16, "", "", "", "0", false, 0, "");
+			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, refPrcOp, 0, "readNotWrite", false, "sl", 1, "", "", "", "0", 0, "");
+			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, refPrcOp, 0, "readAradNotArd", false, "sl", 1, "", "", "", "0", 0, "");
+			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, refPrcOp, 0, "writeAdNotArd", false, "sl", 1, "", "", "", "0", 0, "");
+			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, refPrcOp, 0, "regaddr", false, "slvdn", 16, "", "", "", "0", 0, "");
 
-			Wdbe::setGenSrc(dbswdbe, ref, "fMclk", "fMclk");
+			refC = dbswdbe->tblwdbecsignal->getNewRef();
+			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, refPrcOp, 0, "rxtxSend", false, "slvdn", 16, "", "", "", "0", 0, "");
+			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::MDL, refRxtx, 0, "rxtxRecv", false, "slvdn", 16, "", "", "", "0", 0, "");
 
-			Wdbe::setGenSrc(dbswdbe, ref, "clkFastNotStd", "clkFastNotStd");
-			Wdbe::setGenSrc(dbswdbe, ref, "clkFastplusNotFast", "clkFastplusNotFast");
+			Wdbe::setGenSrc(dbswdbe, refRxtx, "fMclk", "fMclk");
 
-			Wdbe::setPrtCpr(dbswdbe, ref, "reset", "reset");
+			Wdbe::setGenSrc(dbswdbe, refRxtx, "clkFastNotStd", "clkFastNotStd");
+			Wdbe::setGenSrc(dbswdbe, refRxtx, "clkFastplusNotFast", "clkFastplusNotFast");
 
-			Wdbe::setPrtCpr(dbswdbe, ref, "mclk", "mclk");
+			Wdbe::setPrtCpr(dbswdbe, refRxtx, "reset", "reset");
 
-			Wdbe::setPrtCsi(dbswdbe, ref, "req", "reqRxtx");
-			Wdbe::setPrtCsi(dbswdbe, ref, "ack", "ackRxtx");
-			Wdbe::setPrtCsi(dbswdbe, ref, "dne", "dneRxtx");
+			Wdbe::setPrtCpr(dbswdbe, refRxtx, "mclk", "mclk");
 
-			Wdbe::setPrtCsi(dbswdbe, ref, "devaddr", "devaddr");
+			Wdbe::setPrtCsi(dbswdbe, refRxtx, "req", "reqRxtx");
+			Wdbe::setPrtCsi(dbswdbe, refRxtx, "ack", "ackRxtx");
+			Wdbe::setPrtCsi(dbswdbe, refRxtx, "dne", "dneRxtx");
 
-			Wdbe::setPrtCsi(dbswdbe, ref, "r16Not8", "r16Not8");
-			Wdbe::setPrtCsi(dbswdbe, ref, "d16Not8", "d16Not8");
+			Wdbe::setPrtCsi(dbswdbe, refRxtx, "devaddr", "devaddr");
 
-			Wdbe::setPrtCsi(dbswdbe, ref, "readNotWrite", "readNotWrite");
-			Wdbe::setPrtCsi(dbswdbe, ref, "readAradNotArd", "readAradNotArd");
-			Wdbe::setPrtCsi(dbswdbe, ref, "writeAdNotArd", "writeAdNotArd");
-			Wdbe::setPrtCsi(dbswdbe, ref, "regaddr", "regaddr");
+			Wdbe::setPrtCsi(dbswdbe, refRxtx, "r16Not8", "r16Not8");
+			Wdbe::setPrtCsi(dbswdbe, refRxtx, "d16Not8", "d16Not8");
 
-			Wdbe::setPrtCsi(dbswdbe, ref, "send", "rxtxSend");
-			Wdbe::setPrtCsi(dbswdbe, ref, "recv", "rxtxRecv");
+			Wdbe::setPrtCsi(dbswdbe, refRxtx, "readNotWrite", "readNotWrite");
+			Wdbe::setPrtCsi(dbswdbe, refRxtx, "readAradNotArd", "readAradNotArd");
+			Wdbe::setPrtCsi(dbswdbe, refRxtx, "writeAdNotArd", "writeAdNotArd");
+			Wdbe::setPrtCsi(dbswdbe, refRxtx, "regaddr", "regaddr");
 
-			Wdbe::setPrtCpr(dbswdbe, ref, "scl", "scl");
+			Wdbe::setPrtCsi(dbswdbe, refRxtx, "send", "rxtxSend");
+			Wdbe::setPrtCsi(dbswdbe, refRxtx, "recv", "rxtxRecv");
 
-			refC = 0; dbswdbe->loadRefBySQL("SELECT refWdbeCPort FROM TblWdbeMPort WHERE mdlRefWdbeMModule = " + to_string(ref) + " AND sref = 'sda_in'", refC);
+			refC = 0; dbswdbe->loadRefBySQL("SELECT refWdbeCPort FROM TblWdbeMPort WHERE mdlRefWdbeMModule = " + to_string(refRxtx) + " AND sref = 'scl_in'", refC);
 			if (refC) {
-				Wdbe::setPrtCpr(dbswdbe, ref, "sda_in", "sda_in");
-				Wdbe::setPrtCpr(dbswdbe, ref, "sda_out", "sda_out");
-				Wdbe::setPrtCpr(dbswdbe, ref, "sda_dir", "sda_dir");
+				Wdbe::setPrtCpr(dbswdbe, refRxtx, "scl_in", "scl_in");
+				Wdbe::setPrtCpr(dbswdbe, refRxtx, "scl_out", "scl_out");
+				Wdbe::setPrtCpr(dbswdbe, refRxtx, "scl_tri", "scl_tri");
 
+				Wdbe::setPrtCpr(dbswdbe, refRxtx, "sda_in", "sda_in");
+				Wdbe::setPrtCpr(dbswdbe, refRxtx, "sda_out", "sda_out");
+				Wdbe::setPrtCpr(dbswdbe, refRxtx, "sda_tri", "sda_tri");
+
+				dbswdbe->executeQuery("DELETE FROM TblWdbeMPort WHERE mdlRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'scl'");
 				dbswdbe->executeQuery("DELETE FROM TblWdbeMPort WHERE mdlRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'sda'");
 
 			} else {
-				Wdbe::setPrtCpr(dbswdbe, ref, "sda", "sda");
+				Wdbe::setPrtCpr(dbswdbe, refRxtx, "scl", "scl");
+				Wdbe::setPrtCpr(dbswdbe, refRxtx, "sda", "sda");
+
+				refC = 0; dbswdbe->loadRefBySQL("SELECT refWdbeCPort FROM TblWdbeMPort WHERE mdlRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'scl_in'", refC);
+				if (refC != 0) dbswdbe->executeQuery("DELETE FROM TblWdbeMPort WHERE refWdbeCPort = " + to_string(refC));
 
 				refC = 0; dbswdbe->loadRefBySQL("SELECT refWdbeCPort FROM TblWdbeMPort WHERE mdlRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'sda_in'", refC);
 				if (refC != 0) dbswdbe->executeQuery("DELETE FROM TblWdbeMPort WHERE refWdbeCPort = " + to_string(refC));

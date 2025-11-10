@@ -25,14 +25,15 @@ WdbeQPrsADetail::WdbeQPrsADetail(
 			, const string x1SrefKType
 			, const string titX1SrefKType
 			, const string Val
-		) {
-	this->qref = qref;
-	this->jref = jref;
-	this->jnum = jnum;
-	this->ref = ref;
-	this->x1SrefKType = x1SrefKType;
-	this->titX1SrefKType = titX1SrefKType;
-	this->Val = Val;
+		) :
+			qref(qref)
+			, jref(jref)
+			, jnum(jnum)
+			, ref(ref)
+			, x1SrefKType(x1SrefKType)
+			, titX1SrefKType(titX1SrefKType)
+			, Val(Val)
+		{
 };
 
 void WdbeQPrsADetail::writeJSON(

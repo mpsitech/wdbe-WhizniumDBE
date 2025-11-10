@@ -31,20 +31,20 @@ WdbeMCoreversion::WdbeMCoreversion(
 			, const ubigint refJState
 			, const uint ixVState
 			, const uint ixWSpectype
-		) {
-
-	this->ref = ref;
-	this->grp = grp;
-	this->own = own;
-	this->refWdbeMCoreproject = refWdbeMCoreproject;
-	this->bcvRefWdbeMCoreversion = bcvRefWdbeMCoreversion;
-	this->refWdbeMModule = refWdbeMModule;
-	this->Major = Major;
-	this->Minor = Minor;
-	this->Sub = Sub;
-	this->refJState = refJState;
-	this->ixVState = ixVState;
-	this->ixWSpectype = ixWSpectype;
+		) :
+			ref(ref)
+			, grp(grp)
+			, own(own)
+			, refWdbeMCoreproject(refWdbeMCoreproject)
+			, bcvRefWdbeMCoreversion(bcvRefWdbeMCoreversion)
+			, refWdbeMModule(refWdbeMModule)
+			, Major(Major)
+			, Minor(Minor)
+			, Sub(Sub)
+			, refJState(refJState)
+			, ixVState(ixVState)
+			, ixWSpectype(ixWSpectype)
+		{
 };
 
 bool WdbeMCoreversion::operator==(

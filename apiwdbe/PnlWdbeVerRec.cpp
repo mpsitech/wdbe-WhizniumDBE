@@ -45,9 +45,8 @@ PnlWdbeVerRec::ContInf::ContInf(
 			const string& TxtRef
 		) :
 			Block()
+			, TxtRef(TxtRef)
 		{
-	this->TxtRef = TxtRef;
-
 	mask = {TXTREF};
 };
 
@@ -104,20 +103,19 @@ set<uint> PnlWdbeVerRec::ContInf::diff(
 
 PnlWdbeVerRec::StatApp::StatApp(
 			const bool initdoneDetail
-			, const bool initdoneBvr1NVersion
 			, const bool initdone1NComponent
-			, const bool initdone1NUnit
+			, const bool initdoneBvr1NVersion
 			, const bool initdoneRef1NFile
+			, const bool initdone1NUnit
 		) :
 			Block()
+			, initdoneDetail(initdoneDetail)
+			, initdone1NComponent(initdone1NComponent)
+			, initdoneBvr1NVersion(initdoneBvr1NVersion)
+			, initdoneRef1NFile(initdoneRef1NFile)
+			, initdone1NUnit(initdone1NUnit)
 		{
-	this->initdoneDetail = initdoneDetail;
-	this->initdoneBvr1NVersion = initdoneBvr1NVersion;
-	this->initdone1NComponent = initdone1NComponent;
-	this->initdone1NUnit = initdone1NUnit;
-	this->initdoneRef1NFile = initdoneRef1NFile;
-
-	mask = {INITDONEDETAIL, INITDONEBVR1NVERSION, INITDONE1NCOMPONENT, INITDONE1NUNIT, INITDONEREF1NFILE};
+	mask = {INITDONEDETAIL, INITDONE1NCOMPONENT, INITDONEBVR1NVERSION, INITDONEREF1NFILE, INITDONE1NUNIT};
 };
 
 bool PnlWdbeVerRec::StatApp::readXML(
@@ -138,10 +136,10 @@ bool PnlWdbeVerRec::StatApp::readXML(
 
 	if (basefound) {
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneDetail", initdoneDetail)) add(INITDONEDETAIL);
-		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneBvr1NVersion", initdoneBvr1NVersion)) add(INITDONEBVR1NVERSION);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdone1NComponent", initdone1NComponent)) add(INITDONE1NCOMPONENT);
-		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdone1NUnit", initdone1NUnit)) add(INITDONE1NUNIT);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneBvr1NVersion", initdoneBvr1NVersion)) add(INITDONEBVR1NVERSION);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdoneRef1NFile", initdoneRef1NFile)) add(INITDONEREF1NFILE);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "initdone1NUnit", initdone1NUnit)) add(INITDONE1NUNIT);
 	};
 
 	return basefound;
@@ -153,10 +151,10 @@ set<uint> PnlWdbeVerRec::StatApp::comm(
 	set<uint> items;
 
 	if (initdoneDetail == comp->initdoneDetail) insert(items, INITDONEDETAIL);
-	if (initdoneBvr1NVersion == comp->initdoneBvr1NVersion) insert(items, INITDONEBVR1NVERSION);
 	if (initdone1NComponent == comp->initdone1NComponent) insert(items, INITDONE1NCOMPONENT);
-	if (initdone1NUnit == comp->initdone1NUnit) insert(items, INITDONE1NUNIT);
+	if (initdoneBvr1NVersion == comp->initdoneBvr1NVersion) insert(items, INITDONEBVR1NVERSION);
 	if (initdoneRef1NFile == comp->initdoneRef1NFile) insert(items, INITDONEREF1NFILE);
+	if (initdone1NUnit == comp->initdone1NUnit) insert(items, INITDONE1NUNIT);
 
 	return(items);
 };
@@ -169,7 +167,7 @@ set<uint> PnlWdbeVerRec::StatApp::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {INITDONEDETAIL, INITDONEBVR1NVERSION, INITDONE1NCOMPONENT, INITDONE1NUNIT, INITDONEREF1NFILE};
+	diffitems = {INITDONEDETAIL, INITDONE1NCOMPONENT, INITDONEBVR1NVERSION, INITDONEREF1NFILE, INITDONE1NUNIT};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -182,23 +180,22 @@ set<uint> PnlWdbeVerRec::StatApp::diff(
 PnlWdbeVerRec::StatShr::StatShr(
 			const uint ixWdbeVExpstate
 			, const string& scrJrefDetail
-			, const string& scrJrefBvr1NVersion
 			, const string& scrJref1NComponent
-			, const string& scrJref1NUnit
+			, const string& scrJrefBvr1NVersion
 			, const string& scrJrefRef1NFile
+			, const string& scrJref1NUnit
 			, const bool ButRegularizeActive
 		) :
 			Block()
+			, ixWdbeVExpstate(ixWdbeVExpstate)
+			, scrJrefDetail(scrJrefDetail)
+			, scrJref1NComponent(scrJref1NComponent)
+			, scrJrefBvr1NVersion(scrJrefBvr1NVersion)
+			, scrJrefRef1NFile(scrJrefRef1NFile)
+			, scrJref1NUnit(scrJref1NUnit)
+			, ButRegularizeActive(ButRegularizeActive)
 		{
-	this->ixWdbeVExpstate = ixWdbeVExpstate;
-	this->scrJrefDetail = scrJrefDetail;
-	this->scrJrefBvr1NVersion = scrJrefBvr1NVersion;
-	this->scrJref1NComponent = scrJref1NComponent;
-	this->scrJref1NUnit = scrJref1NUnit;
-	this->scrJrefRef1NFile = scrJrefRef1NFile;
-	this->ButRegularizeActive = ButRegularizeActive;
-
-	mask = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFBVR1NVERSION, SCRJREF1NCOMPONENT, SCRJREF1NUNIT, SCRJREFREF1NFILE, BUTREGULARIZEACTIVE};
+	mask = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREF1NCOMPONENT, SCRJREFBVR1NVERSION, SCRJREFREF1NFILE, SCRJREF1NUNIT, BUTREGULARIZEACTIVE};
 };
 
 bool PnlWdbeVerRec::StatShr::readXML(
@@ -225,10 +222,10 @@ bool PnlWdbeVerRec::StatShr::readXML(
 			add(IXWDBEVEXPSTATE);
 		};
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefDetail", scrJrefDetail)) add(SCRJREFDETAIL);
-		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefBvr1NVersion", scrJrefBvr1NVersion)) add(SCRJREFBVR1NVERSION);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJref1NComponent", scrJref1NComponent)) add(SCRJREF1NCOMPONENT);
-		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJref1NUnit", scrJref1NUnit)) add(SCRJREF1NUNIT);
+		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefBvr1NVersion", scrJrefBvr1NVersion)) add(SCRJREFBVR1NVERSION);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJrefRef1NFile", scrJrefRef1NFile)) add(SCRJREFREF1NFILE);
+		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "scrJref1NUnit", scrJref1NUnit)) add(SCRJREF1NUNIT);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButRegularizeActive", ButRegularizeActive)) add(BUTREGULARIZEACTIVE);
 	};
 
@@ -242,10 +239,10 @@ set<uint> PnlWdbeVerRec::StatShr::comm(
 
 	if (ixWdbeVExpstate == comp->ixWdbeVExpstate) insert(items, IXWDBEVEXPSTATE);
 	if (scrJrefDetail == comp->scrJrefDetail) insert(items, SCRJREFDETAIL);
-	if (scrJrefBvr1NVersion == comp->scrJrefBvr1NVersion) insert(items, SCRJREFBVR1NVERSION);
 	if (scrJref1NComponent == comp->scrJref1NComponent) insert(items, SCRJREF1NCOMPONENT);
-	if (scrJref1NUnit == comp->scrJref1NUnit) insert(items, SCRJREF1NUNIT);
+	if (scrJrefBvr1NVersion == comp->scrJrefBvr1NVersion) insert(items, SCRJREFBVR1NVERSION);
 	if (scrJrefRef1NFile == comp->scrJrefRef1NFile) insert(items, SCRJREFREF1NFILE);
+	if (scrJref1NUnit == comp->scrJref1NUnit) insert(items, SCRJREF1NUNIT);
 	if (ButRegularizeActive == comp->ButRegularizeActive) insert(items, BUTREGULARIZEACTIVE);
 
 	return(items);
@@ -259,7 +256,7 @@ set<uint> PnlWdbeVerRec::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREFBVR1NVERSION, SCRJREF1NCOMPONENT, SCRJREF1NUNIT, SCRJREFREF1NFILE, BUTREGULARIZEACTIVE};
+	diffitems = {IXWDBEVEXPSTATE, SCRJREFDETAIL, SCRJREF1NCOMPONENT, SCRJREFBVR1NVERSION, SCRJREFREF1NFILE, SCRJREF1NUNIT, BUTREGULARIZEACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -273,9 +270,8 @@ PnlWdbeVerRec::Tag::Tag(
 			const string& Cpt
 		) :
 			Block()
+			, Cpt(Cpt)
 		{
-	this->Cpt = Cpt;
-
 	mask = {CPT};
 };
 
@@ -312,11 +308,11 @@ PnlWdbeVerRec::DpchAppDo::DpchAppDo(
 			, const set<uint>& mask
 		) :
 			DpchAppWdbe(VecWdbeVDpch::DPCHAPPWDBEVERRECDO, scrJref)
+			, ixVDo(ixVDo)
 		{
 	if (find(mask, ALL)) this->mask = {SCRJREF, IXVDO};
 	else this->mask = mask;
 
-	this->ixVDo = ixVDo;
 };
 
 string PnlWdbeVerRec::DpchAppDo::getSrefsMask() {

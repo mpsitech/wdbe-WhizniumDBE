@@ -27,12 +27,12 @@ DpchInvWdbeMtpWrfpga::DpchInvWdbeMtpWrfpga(
 			, const string& Untsref
 		) :
 			DpchInvWdbe(VecWdbeVDpch::DPCHINVWDBEMTPWRFPGA, oref, jref)
+			, srefKCustop(srefKCustop)
+			, refWdbeMModule(refWdbeMModule)
+			, folder(folder)
+			, Prjshort(Prjshort)
+			, Untsref(Untsref)
 		{
-	this->srefKCustop = srefKCustop;
-	this->refWdbeMModule = refWdbeMModule;
-	this->folder = folder;
-	this->Prjshort = Prjshort;
-	this->Untsref = Untsref;
 };
 
 void DpchInvWdbeMtpWrfpga::readXML(

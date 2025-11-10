@@ -138,23 +138,23 @@ bool PnlWdbeFilDetail::evalTxtReuActive(
 bool PnlWdbeFilDetail::evalButReuViewAvail(
 			DbsWdbe* dbswdbe
 		) {
-	// fil.reuEq(0)|((pre.ixCrdaccVer()&fil.retEq(ver))|(pre.ixCrdaccMtp()&fil.retEq(mtp)))
+	// fil.reuEq(0)|((pre.ixCrdaccMtp()&fil.retEq(mtp))|(pre.ixCrdaccVer()&fil.retEq(ver)))
 
 	vector<bool> args;
 	bool a, b;
 
 	a = false; a = (recFil.refUref == 0);
 	args.push_back(a);
-	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCVER, jref) != 0);
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCMTP, jref) != 0);
 	args.push_back(a);
-	a = false; a = (recFil.refIxVTbl == VecWdbeVMFileRefTbl::VER);
+	a = false; a = (recFil.refIxVTbl == VecWdbeVMFileRefTbl::MTP);
 	args.push_back(a);
 	b = args.back(); args.pop_back();
 	a = args.back(); args.pop_back();
 	args.push_back(a && b);
-	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCMTP, jref) != 0);
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCVER, jref) != 0);
 	args.push_back(a);
-	a = false; a = (recFil.refIxVTbl == VecWdbeVMFileRefTbl::MTP);
+	a = false; a = (recFil.refIxVTbl == VecWdbeVMFileRefTbl::VER);
 	args.push_back(a);
 	b = args.back(); args.pop_back();
 	a = args.back(); args.pop_back();
@@ -202,12 +202,12 @@ bool PnlWdbeFilDetail::evalPupCntActive(
 bool PnlWdbeFilDetail::evalButCntEditAvail(
 			DbsWdbe* dbswdbe
 		) {
-	// pre.adm()
+	// pre.ixCrdaccFilIncl(edit)
 
 	vector<bool> args;
 	bool a;
 
-	a = false;
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCFIL, jref) & VecWdbeWAccess::EDIT);
 	args.push_back(a);
 
 	return(args.back());
@@ -258,12 +258,12 @@ bool PnlWdbeFilDetail::evalPupMimActive(
 bool PnlWdbeFilDetail::evalButMimEditAvail(
 			DbsWdbe* dbswdbe
 		) {
-	// pre.adm()
+	// pre.ixCrdaccFilIncl(edit)
 
 	vector<bool> args;
 	bool a;
 
-	a = false;
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCFIL, jref) & VecWdbeWAccess::EDIT);
 	args.push_back(a);
 
 	return(args.back());

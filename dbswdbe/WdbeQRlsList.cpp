@@ -27,16 +27,17 @@ WdbeQRlsList::WdbeQRlsList(
 			, const string stubRefWdbeMComponent
 			, const ubigint refWdbeMMachine
 			, const string stubRefWdbeMMachine
-		) {
-	this->qref = qref;
-	this->jref = jref;
-	this->jnum = jnum;
-	this->ref = ref;
-	this->sref = sref;
-	this->refWdbeMComponent = refWdbeMComponent;
-	this->stubRefWdbeMComponent = stubRefWdbeMComponent;
-	this->refWdbeMMachine = refWdbeMMachine;
-	this->stubRefWdbeMMachine = stubRefWdbeMMachine;
+		) :
+			qref(qref)
+			, jref(jref)
+			, jnum(jnum)
+			, ref(ref)
+			, sref(sref)
+			, refWdbeMComponent(refWdbeMComponent)
+			, stubRefWdbeMComponent(stubRefWdbeMComponent)
+			, refWdbeMMachine(refWdbeMMachine)
+			, stubRefWdbeMMachine(stubRefWdbeMMachine)
+		{
 };
 
 void WdbeQRlsList::writeJSON(

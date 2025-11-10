@@ -14,8 +14,8 @@
 
 // IP include.cust --- INSERT
 
-#include "PnlWdbeCdcMNSignal.h"
 #include "PnlWdbeCdcDetail.h"
+#include "PnlWdbeCdcMNSignal.h"
 
 #define VecVWdbeCdcRecDo PnlWdbeCdcRec::VecVDo
 
@@ -174,8 +174,8 @@ public:
 	ContInf continf;
 	StatShr statshr;
 
-	PnlWdbeCdcMNSignal* pnlmnsignal;
 	PnlWdbeCdcDetail* pnldetail;
+	PnlWdbeCdcMNSignal* pnlmnsignal;
 
 	WdbeMCdc recCdc;
 
@@ -209,8 +209,8 @@ public:
 	void handleCall(DbsWdbe* dbswdbe, Sbecore::Call* call);
 
 private:
-	bool handleCallWdbeCdcUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 	bool handleCallWdbeCdc_mdlEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig, const Sbecore::ubigint refInv, bool& boolvalRet);
+	bool handleCallWdbeCdcUpd_refEq(DbsWdbe* dbswdbe, const Sbecore::ubigint jrefTrig);
 
 };
 

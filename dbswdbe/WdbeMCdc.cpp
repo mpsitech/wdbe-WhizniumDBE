@@ -24,15 +24,15 @@ WdbeMCdc::WdbeMCdc(
 			, const string sckSrefWdbeMSignal
 			, const string sarSrefWdbeMSignal
 			, const double Ratio
-		) {
-
-	this->ref = ref;
-	this->refWdbeMModule = refWdbeMModule;
-	this->fckSrefWdbeMSignal = fckSrefWdbeMSignal;
-	this->farSrefWdbeMSignal = farSrefWdbeMSignal;
-	this->sckSrefWdbeMSignal = sckSrefWdbeMSignal;
-	this->sarSrefWdbeMSignal = sarSrefWdbeMSignal;
-	this->Ratio = Ratio;
+		) :
+			ref(ref)
+			, refWdbeMModule(refWdbeMModule)
+			, fckSrefWdbeMSignal(fckSrefWdbeMSignal)
+			, farSrefWdbeMSignal(farSrefWdbeMSignal)
+			, sckSrefWdbeMSignal(sckSrefWdbeMSignal)
+			, sarSrefWdbeMSignal(sarSrefWdbeMSignal)
+			, Ratio(Ratio)
+		{
 };
 
 bool WdbeMCdc::operator==(

@@ -53,11 +53,10 @@ PnlWdbeNavDevdev::ContIac::ContIac(
 			, const uint numFLstUnt
 		) :
 			Block()
+			, numFLstPrj(numFLstPrj)
+			, numFLstVer(numFLstVer)
+			, numFLstUnt(numFLstUnt)
 		{
-	this->numFLstPrj = numFLstPrj;
-	this->numFLstVer = numFLstVer;
-	this->numFLstUnt = numFLstUnt;
-
 	mask = {NUMFLSTPRJ, NUMFLSTVER, NUMFLSTUNT};
 };
 
@@ -235,15 +234,14 @@ PnlWdbeNavDevdev::StatShr::StatShr(
 			, const bool ButUntNewcrdActive
 		) :
 			Block()
+			, LstPrjAvail(LstPrjAvail)
+			, ButPrjViewActive(ButPrjViewActive)
+			, LstVerAvail(LstVerAvail)
+			, ButVerViewActive(ButVerViewActive)
+			, LstUntAvail(LstUntAvail)
+			, ButUntViewActive(ButUntViewActive)
+			, ButUntNewcrdActive(ButUntNewcrdActive)
 		{
-	this->LstPrjAvail = LstPrjAvail;
-	this->ButPrjViewActive = ButPrjViewActive;
-	this->LstVerAvail = LstVerAvail;
-	this->ButVerViewActive = ButVerViewActive;
-	this->LstUntAvail = LstUntAvail;
-	this->ButUntViewActive = ButUntViewActive;
-	this->ButUntNewcrdActive = ButUntNewcrdActive;
-
 	mask = {LSTPRJAVAIL, BUTPRJVIEWACTIVE, LSTVERAVAIL, BUTVERVIEWACTIVE, LSTUNTAVAIL, BUTUNTVIEWACTIVE, BUTUNTNEWCRDACTIVE};
 };
 

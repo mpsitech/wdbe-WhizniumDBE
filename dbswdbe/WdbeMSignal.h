@@ -31,7 +31,7 @@
 class WdbeMSignal {
 
 public:
-	WdbeMSignal(const Sbecore::ubigint ref = 0, const Sbecore::uint ixVBasetype = 0, const Sbecore::ubigint refWdbeCSignal = 0, const Sbecore::uint refIxVTbl = 0, const Sbecore::ubigint refUref = 0, const Sbecore::uint refNum = 0, const Sbecore::uint mgeIxVTbl = 0, const Sbecore::ubigint mgeUref = 0, const Sbecore::ubigint refWdbeMVector = 0, const std::string sref = "", const bool Const = false, const std::string srefWdbeKHdltype = "", const Sbecore::usmallint Width = 0, const std::string Minmax = "", const std::string Comb = "", const std::string Onval = "", const std::string Offval = "", const bool Defon = false, const Sbecore::ubigint drvRefWdbeMPort = 0, const std::string Comment = "");
+	WdbeMSignal(const Sbecore::ubigint ref = 0, const Sbecore::uint ixVBasetype = 0, const Sbecore::ubigint refWdbeCSignal = 0, const Sbecore::uint refIxVTbl = 0, const Sbecore::ubigint refUref = 0, const Sbecore::uint refNum = 0, const Sbecore::uint mgeIxVTbl = 0, const Sbecore::ubigint mgeUref = 0, const Sbecore::ubigint refWdbeMVector = 0, const std::string sref = "", const bool Const = false, const std::string srefWdbeKHdltype = "", const Sbecore::usmallint Width = 0, const std::string Minmax = "", const std::string Comb = "", const std::string Onval = "", const std::string Offval = "", const Sbecore::ubigint drvRefWdbeMPort = 0, const std::string Comment = "");
 
 public:
 	Sbecore::ubigint ref;
@@ -51,7 +51,6 @@ public:
 	std::string Comb;
 	std::string Onval;
 	std::string Offval;
-	bool Defon;
 	Sbecore::ubigint drvRefWdbeMPort;
 	std::string Comment;
 
@@ -154,8 +153,8 @@ public:
 	virtual Sbecore::ubigint loadRstBySQL(const std::string& sqlstr, const bool append, ListWdbeMSignal& rst);
 
 	virtual Sbecore::ubigint insertRec(WdbeMSignal* rec);
-	Sbecore::ubigint insertNewRec(WdbeMSignal** rec = NULL, const Sbecore::uint ixVBasetype = 0, const Sbecore::ubigint refWdbeCSignal = 0, const Sbecore::uint refIxVTbl = 0, const Sbecore::ubigint refUref = 0, const Sbecore::uint refNum = 0, const Sbecore::uint mgeIxVTbl = 0, const Sbecore::ubigint mgeUref = 0, const Sbecore::ubigint refWdbeMVector = 0, const std::string sref = "", const bool Const = false, const std::string srefWdbeKHdltype = "", const Sbecore::usmallint Width = 0, const std::string Minmax = "", const std::string Comb = "", const std::string Onval = "", const std::string Offval = "", const bool Defon = false, const Sbecore::ubigint drvRefWdbeMPort = 0, const std::string Comment = "");
-	Sbecore::ubigint appendNewRecToRst(ListWdbeMSignal& rst, WdbeMSignal** rec = NULL, const Sbecore::uint ixVBasetype = 0, const Sbecore::ubigint refWdbeCSignal = 0, const Sbecore::uint refIxVTbl = 0, const Sbecore::ubigint refUref = 0, const Sbecore::uint refNum = 0, const Sbecore::uint mgeIxVTbl = 0, const Sbecore::ubigint mgeUref = 0, const Sbecore::ubigint refWdbeMVector = 0, const std::string sref = "", const bool Const = false, const std::string srefWdbeKHdltype = "", const Sbecore::usmallint Width = 0, const std::string Minmax = "", const std::string Comb = "", const std::string Onval = "", const std::string Offval = "", const bool Defon = false, const Sbecore::ubigint drvRefWdbeMPort = 0, const std::string Comment = "");
+	Sbecore::ubigint insertNewRec(WdbeMSignal** rec = NULL, const Sbecore::uint ixVBasetype = 0, const Sbecore::ubigint refWdbeCSignal = 0, const Sbecore::uint refIxVTbl = 0, const Sbecore::ubigint refUref = 0, const Sbecore::uint refNum = 0, const Sbecore::uint mgeIxVTbl = 0, const Sbecore::ubigint mgeUref = 0, const Sbecore::ubigint refWdbeMVector = 0, const std::string sref = "", const bool Const = false, const std::string srefWdbeKHdltype = "", const Sbecore::usmallint Width = 0, const std::string Minmax = "", const std::string Comb = "", const std::string Onval = "", const std::string Offval = "", const Sbecore::ubigint drvRefWdbeMPort = 0, const std::string Comment = "");
+	Sbecore::ubigint appendNewRecToRst(ListWdbeMSignal& rst, WdbeMSignal** rec = NULL, const Sbecore::uint ixVBasetype = 0, const Sbecore::ubigint refWdbeCSignal = 0, const Sbecore::uint refIxVTbl = 0, const Sbecore::ubigint refUref = 0, const Sbecore::uint refNum = 0, const Sbecore::uint mgeIxVTbl = 0, const Sbecore::ubigint mgeUref = 0, const Sbecore::ubigint refWdbeMVector = 0, const std::string sref = "", const bool Const = false, const std::string srefWdbeKHdltype = "", const Sbecore::usmallint Width = 0, const std::string Minmax = "", const std::string Comb = "", const std::string Onval = "", const std::string Offval = "", const Sbecore::ubigint drvRefWdbeMPort = 0, const std::string Comment = "");
 	virtual void insertRst(ListWdbeMSignal& rst, bool transact = false);
 	virtual void updateRec(WdbeMSignal* rec);
 	virtual void updateRst(ListWdbeMSignal& rst, bool transact = false);

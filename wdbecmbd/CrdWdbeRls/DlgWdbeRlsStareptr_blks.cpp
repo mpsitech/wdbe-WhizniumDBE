@@ -221,9 +221,8 @@ DlgWdbeRlsStareptr::ContIac::ContIac(
 			const uint numFDse
 		) :
 			Block()
+			, numFDse(numFDse)
 		{
-	this->numFDse = numFDse;
-
 	mask = {NUMFDSE};
 };
 
@@ -329,10 +328,9 @@ DlgWdbeRlsStareptr::ContIacDet::ContIacDet(
 			, const string& TxfGrl
 		) :
 			Block()
+			, numFRbuBrt(numFRbuBrt)
+			, TxfGrl(TxfGrl)
 		{
-	this->numFRbuBrt = numFRbuBrt;
-	this->TxfGrl = TxfGrl;
-
 	mask = {NUMFRBUBRT, TXFGRL};
 };
 
@@ -442,9 +440,8 @@ DlgWdbeRlsStareptr::ContInf::ContInf(
 			const uint numFSge
 		) :
 			Block()
+			, numFSge(numFSge)
 		{
-	this->numFSge = numFSge;
-
 	mask = {NUMFSGE};
 };
 
@@ -507,9 +504,8 @@ DlgWdbeRlsStareptr::ContInfExt::ContInfExt(
 			const string& TxtPrg
 		) :
 			Block()
+			, TxtPrg(TxtPrg)
 		{
-	this->TxtPrg = TxtPrg;
-
 	mask = {TXTPRG};
 };
 
@@ -572,9 +568,8 @@ DlgWdbeRlsStareptr::ContInfIni::ContInfIni(
 			const string& TxtPrg
 		) :
 			Block()
+			, TxtPrg(TxtPrg)
 		{
-	this->TxtPrg = TxtPrg;
-
 	mask = {TXTPRG};
 };
 
@@ -637,9 +632,8 @@ DlgWdbeRlsStareptr::ContInfLfi::ContInfLfi(
 			const string& Dld
 		) :
 			Block()
+			, Dld(Dld)
 		{
-	this->Dld = Dld;
-
 	mask = {DLD};
 };
 
@@ -739,9 +733,8 @@ DlgWdbeRlsStareptr::StatShr::StatShr(
 			const bool ButDneActive
 		) :
 			Block()
+			, ButDneActive(ButDneActive)
 		{
-	this->ButDneActive = ButDneActive;
-
 	mask = {BUTDNEACTIVE};
 };
 
@@ -805,10 +798,9 @@ DlgWdbeRlsStareptr::StatShrDet::StatShrDet(
 			, const bool ButStaActive
 		) :
 			Block()
+			, TxfGrlAvail(TxfGrlAvail)
+			, ButStaActive(ButStaActive)
 		{
-	this->TxfGrlAvail = TxfGrlAvail;
-	this->ButStaActive = ButStaActive;
-
 	mask = {TXFGRLAVAIL, BUTSTAACTIVE};
 };
 
@@ -875,10 +867,9 @@ DlgWdbeRlsStareptr::StatShrExt::StatShrExt(
 			, const bool ButStoActive
 		) :
 			Block()
+			, ButRunActive(ButRunActive)
+			, ButStoActive(ButStoActive)
 		{
-	this->ButRunActive = ButRunActive;
-	this->ButStoActive = ButStoActive;
-
 	mask = {BUTRUNACTIVE, BUTSTOACTIVE};
 };
 
@@ -949,14 +940,13 @@ DlgWdbeRlsStareptr::StatShrIni::StatShrIni(
 			, const bool ButClgActive
 		) :
 			Block()
+			, UldAvail(UldAvail)
+			, UldActive(UldActive)
+			, TxtPrgAvail(TxtPrgAvail)
+			, Sep1Avail(Sep1Avail)
+			, ButClgAvail(ButClgAvail)
+			, ButClgActive(ButClgActive)
 		{
-	this->UldAvail = UldAvail;
-	this->UldActive = UldActive;
-	this->TxtPrgAvail = TxtPrgAvail;
-	this->Sep1Avail = Sep1Avail;
-	this->ButClgAvail = ButClgAvail;
-	this->ButClgActive = ButClgActive;
-
 	mask = {ULDAVAIL, ULDACTIVE, TXTPRGAVAIL, SEP1AVAIL, BUTCLGAVAIL, BUTCLGACTIVE};
 };
 
@@ -1034,9 +1024,8 @@ DlgWdbeRlsStareptr::StatShrLfi::StatShrLfi(
 			const bool DldActive
 		) :
 			Block()
+			, DldActive(DldActive)
 		{
-	this->DldActive = DldActive;
-
 	mask = {DLDACTIVE};
 };
 

@@ -51,9 +51,8 @@ PnlWdbeMtpKParKey::ContInf::ContInf(
 			const uint numFCsiQst
 		) :
 			Block()
+			, numFCsiQst(numFCsiQst)
 		{
-	this->numFCsiQst = numFCsiQst;
-
 	mask = {NUMFCSIQST};
 };
 
@@ -152,12 +151,11 @@ PnlWdbeMtpKParKey::StatShr::StatShr(
 			, const bool ButDeleteActive
 		) :
 			Block()
+			, ButUpActive(ButUpActive)
+			, ButDownActive(ButDownActive)
+			, ButDuplicateActive(ButDuplicateActive)
+			, ButDeleteActive(ButDeleteActive)
 		{
-	this->ButUpActive = ButUpActive;
-	this->ButDownActive = ButDownActive;
-	this->ButDuplicateActive = ButDuplicateActive;
-	this->ButDeleteActive = ButDeleteActive;
-
 	mask = {BUTUPACTIVE, BUTDOWNACTIVE, BUTDUPLICATEACTIVE, BUTDELETEACTIVE};
 };
 
@@ -234,13 +232,13 @@ PnlWdbeMtpKParKey::StgIac::StgIac(
 			, const uint TcoCmtWidth
 		) :
 			Block()
+			, TcoFixWidth(TcoFixWidth)
+			, TcoSrfWidth(TcoSrfWidth)
+			, TcoAvlWidth(TcoAvlWidth)
+			, TcoImpWidth(TcoImpWidth)
+			, TcoTitWidth(TcoTitWidth)
+			, TcoCmtWidth(TcoCmtWidth)
 		{
-	this->TcoFixWidth = TcoFixWidth;
-	this->TcoSrfWidth = TcoSrfWidth;
-	this->TcoAvlWidth = TcoAvlWidth;
-	this->TcoImpWidth = TcoImpWidth;
-	this->TcoTitWidth = TcoTitWidth;
-	this->TcoCmtWidth = TcoCmtWidth;
 	mask = {TCOFIXWIDTH, TCOSRFWIDTH, TCOAVLWIDTH, TCOIMPWIDTH, TCOTITWIDTH, TCOCMTWIDTH};
 };
 

@@ -36,6 +36,8 @@ DpchRetWdbe* WdbeMtpCplmsttdDdrmux_Easy_v1_0::run(
 	utinyint ixOpVOpres = VecOpVOpres::SUCCESS;
 
 	// IP run --- IBEGIN
+	ubigint ref;
+
 	WdbeMModule* mdl = NULL;
 
 	string srefKVendor;
@@ -45,6 +47,9 @@ DpchRetWdbe* WdbeMtpCplmsttdDdrmux_Easy_v1_0::run(
 	bool phyNotAxi;
 
 	bool memclkIntNotExt;
+	double ratioMemclk;
+
+	string divstr;
 
 	string s;
 
@@ -68,6 +73,9 @@ DpchRetWdbe* WdbeMtpCplmsttdDdrmux_Easy_v1_0::run(
 		memclkIntNotExt = false;
 		if (Wdbe::getMpa(dbswdbe, refWdbeMModule, "memclkIntNotExt", s)) memclkIntNotExt = (s == "true");
 
+		ratioMemclk = 1.0;
+		if (Wdbe::getMpa(dbswdbe, refWdbeMModule, "ratioMemclk", s)) ratioMemclk = atof(s.c_str());
+
 		if (memclkIntNotExt) {
 			refMtp = 0;
 			if (srefKVendor == "xlnx") refMtp = Wdbe::getRefMtp(dbswdbe, "mmcm_xlnx_v5_4");
@@ -75,7 +83,10 @@ DpchRetWdbe* WdbeMtpCplmsttdDdrmux_Easy_v1_0::run(
 			if (refMtp != 0) {
 				dbswdbe->executeQuery("UPDATE TblWdbeMModule SET hkNum = hkNum + 1 WHERE hkIxVTbl = " + to_string(mdl->hkIxVTbl) + " AND hkUref = " + to_string(mdl->hkUref) + " AND hkNum > " + to_string(mdl->hkNum));
 
-				dbswdbe->tblwdbemmodule->insertNewRec(NULL, VecWdbeVMModuleBasetype::OTH, mdl->hkIxVTbl, mdl->hkUref, mdl->hkNum + 1, mdl->ref, refMtp, 0, 0, "mmcmMemclk", "", "", "");
+				divstr = getDivstr(ratioMemclk);
+
+				ref = dbswdbe->tblwdbemmodule->insertNewRec(NULL, VecWdbeVMModuleBasetype::OTH, mdl->hkIxVTbl, mdl->hkUref, mdl->hkNum + 1, mdl->ref, refMtp, 0, 0, "mmcmMemclk", "", "", "");
+				Wdbe::setMpa(dbswdbe, ref, "div", divstr);
 			};
 		};
 

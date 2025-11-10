@@ -38,8 +38,8 @@ PnlWdbeCdcRec::PnlWdbeCdcRec(
 		{
 	jref = xchg->addJob(dbswdbe, this, jrefSup);
 
-	pnlmnsignal = NULL;
 	pnldetail = NULL;
+	pnlmnsignal = NULL;
 
 	// IP constructor.cust1 --- INSERT
 
@@ -244,20 +244,11 @@ void PnlWdbeCdcRec::handleCall(
 			DbsWdbe* dbswdbe
 			, Call* call
 		) {
-	if (call->ixVCall == VecWdbeVCall::CALLWDBECDCUPD_REFEQ) {
-		call->abort = handleCallWdbeCdcUpd_refEq(dbswdbe, call->jref);
-	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECDC_MDLEQ) {
+	if (call->ixVCall == VecWdbeVCall::CALLWDBECDC_MDLEQ) {
 		call->abort = handleCallWdbeCdc_mdlEq(dbswdbe, call->jref, call->argInv.ref, call->argRet.boolval);
+	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECDCUPD_REFEQ) {
+		call->abort = handleCallWdbeCdcUpd_refEq(dbswdbe, call->jref);
 	};
-};
-
-bool PnlWdbeCdcRec::handleCallWdbeCdcUpd_refEq(
-			DbsWdbe* dbswdbe
-			, const ubigint jrefTrig
-		) {
-	bool retval = false;
-	// IP handleCallWdbeCdcUpd_refEq --- INSERT
-	return retval;
 };
 
 bool PnlWdbeCdcRec::handleCallWdbeCdc_mdlEq(
@@ -268,5 +259,14 @@ bool PnlWdbeCdcRec::handleCallWdbeCdc_mdlEq(
 		) {
 	bool retval = false;
 	boolvalRet = (recCdc.refWdbeMModule == refInv); // IP handleCallWdbeCdc_mdlEq --- LINE
+	return retval;
+};
+
+bool PnlWdbeCdcRec::handleCallWdbeCdcUpd_refEq(
+			DbsWdbe* dbswdbe
+			, const ubigint jrefTrig
+		) {
+	bool retval = false;
+	// IP handleCallWdbeCdcUpd_refEq --- INSERT
 	return retval;
 };

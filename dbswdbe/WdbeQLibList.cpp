@@ -25,14 +25,15 @@ WdbeQLibList::WdbeQLibList(
 			, const string sref
 			, const string Title
 			, const string Version
-		) {
-	this->qref = qref;
-	this->jref = jref;
-	this->jnum = jnum;
-	this->ref = ref;
-	this->sref = sref;
-	this->Title = Title;
-	this->Version = Version;
+		) :
+			qref(qref)
+			, jref(jref)
+			, jnum(jnum)
+			, ref(ref)
+			, sref(sref)
+			, Title(Title)
+			, Version(Version)
+		{
 };
 
 void WdbeQLibList::writeJSON(

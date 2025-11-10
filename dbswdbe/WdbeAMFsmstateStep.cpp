@@ -33,24 +33,24 @@ WdbeAMFsmstateStep::WdbeAMFsmstateStep(
 			, const string Ip5
 			, const string Cond6
 			, const string Ip6
-		) {
-
-	this->ref = ref;
-	this->fstRefWdbeMFsmstate = fstRefWdbeMFsmstate;
-	this->fstNum = fstNum;
-	this->fnxRefWdbeMFsmstate = fnxRefWdbeMFsmstate;
-	this->Cond1 = Cond1;
-	this->Ip1 = Ip1;
-	this->Cond2 = Cond2;
-	this->Ip2 = Ip2;
-	this->Cond3 = Cond3;
-	this->Ip3 = Ip3;
-	this->Cond4 = Cond4;
-	this->Ip4 = Ip4;
-	this->Cond5 = Cond5;
-	this->Ip5 = Ip5;
-	this->Cond6 = Cond6;
-	this->Ip6 = Ip6;
+		) :
+			ref(ref)
+			, fstRefWdbeMFsmstate(fstRefWdbeMFsmstate)
+			, fstNum(fstNum)
+			, fnxRefWdbeMFsmstate(fnxRefWdbeMFsmstate)
+			, Cond1(Cond1)
+			, Ip1(Ip1)
+			, Cond2(Cond2)
+			, Ip2(Ip2)
+			, Cond3(Cond3)
+			, Ip3(Ip3)
+			, Cond4(Cond4)
+			, Ip4(Ip4)
+			, Cond5(Cond5)
+			, Ip5(Ip5)
+			, Cond6(Cond6)
+			, Ip6(Ip6)
+		{
 };
 
 bool WdbeAMFsmstateStep::operator==(
