@@ -1,4 +1,4 @@
-IexWdbeIni v1.1.49
+IexWdbeIni v1.1.50
 ImeIAVKeylistKey1.srefKlsIxWdbeVKeylist	sref	Avail	Implied	Title	Comment
 KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuAximmcohostif_Easy_v1_0			adapt port widths	
 KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuAxislave_v1_0			adapt port widths	
@@ -39,7 +39,6 @@ KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuIod_mchp_v1_0_mipirx			adapt port widt
 KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuIrq_Easy_v1_0			add capture port	
 KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuMipidec_mchp_v1_0			adapt port widths	
 KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuMipirx_xlnx_v5_1			adapt port configuration and widths	
-KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuMpfs_ip_AXI_v1_0			add pin substitute signals	
 KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuMult_xlnx_v12_0			adapt port widths	
 KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuOled128x32_v1_0			connect SPI master	
 KlstKWdbeMtpCplmstbuCustop	WdbeMtpCplmstbuOscoll_v1_0			connect inter-module buffer	
@@ -68,9 +67,11 @@ KlstKWdbeMtpCplmsttdCustop	WdbeMtpCplmsttdDdrmux_Easy_v1_0			infer PHY
 KlstKWdbeMtpCplmsttdCustop	WdbeMtpCplmsttdDpbram_v1_0			infer buffer	
 KlstKWdbeMtpCplmsttdCustop	WdbeMtpCplmsttdDpram_efnx_v1_0			infer EFX_DPRAM10  primitives	
 KlstKWdbeMtpCplmsttdCustop	WdbeMtpCplmsttdFsmtrack_Easy_v1_0			infer buffers	
+KlstKWdbeMtpCplmsttdCustop	WdbeMtpCplmsttdGpio_Easy_v1_0			infer tristate primitives and adapt commands	
 KlstKWdbeMtpCplmsttdCustop	WdbeMtpCplmsttdGptrack_Easy_v1_0			infer buffer	
 KlstKWdbeMtpCplmsttdCustop	WdbeMtpCplmsttdHostif_Easy_v1_0			infer PHY	
 KlstKWdbeMtpCplmsttdCustop	WdbeMtpCplmsttdHostif_v1_0			infer PHY	
+KlstKWdbeMtpCplmsttdCustop	WdbeMtpCplmsttdI2cmaster_v1_0			infer tristate primitives	
 KlstKWdbeMtpCplmsttdCustop	WdbeMtpCplmsttdSpbram_v1_0			infer buffer	
 KlstKWdbeMtpCplmsttdCustop	WdbeMtpCplmsttdSpram_efnx_v1_0			infer EFX_RAM10 primitives	
 KlstKWdbeMtpCplmsttdCustop	WdbeMtpCplmsttdTop_v1_0			infer clock primitives and adapt ports	

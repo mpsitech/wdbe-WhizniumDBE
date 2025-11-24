@@ -599,7 +599,7 @@ void WdbeWrfpgaMdlfine::writeMdlVhd(
 							outfile << endl;
 						};
 						
-						if ((sig->drvRefWdbeMPort != 0) && (sig->sref.length() > 5) && ((sig->sref.rfind("_virt")+5) != sig->sref.length())) outfile << "\t" << srefsPrts[sig->drvRefWdbeMPort] << " <= " << sig->sref << ";" << endl;
+						if ((sig->drvRefWdbeMPort != 0) && !((sig->sref.length() > 5) && ((sig->sref.rfind("_virt")+5) == sig->sref.length()))) outfile << "\t" << srefsPrts[sig->drvRefWdbeMPort] << " <= " << sig->sref << ";" << endl;
 					};
 
 					refC = sig->refWdbeCSignal;

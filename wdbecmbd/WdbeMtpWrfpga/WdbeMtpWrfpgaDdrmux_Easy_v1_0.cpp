@@ -288,7 +288,8 @@ void WdbeMtpWrfpgaDdrmux_Easy_v1_0::writeMdlVhd(
 			outfile << endl;
 		};
 
-		outfile << "\tddrAXI_arvalid <= ";
+		outfile << "\tddrAXI_arvalid <= ddrAXI_arvalid_sig;" << endl;
+		outfile << "\tddrAXI_arvalid_sig <= ";
 		for (unsigned int i = 0; i < NRd; i++) {
 			outfile << getChsref(false, i, false) << "AXI_arvalid";
 			if (wDRds[i] != wD) outfile << "_sig";
@@ -298,7 +299,8 @@ void WdbeMtpWrfpgaDdrmux_Easy_v1_0::writeMdlVhd(
 		outfile << "'0';" << endl;
 		outfile << endl;
 
-		outfile << "\tddrAXI_rready <= ";
+		outfile << "\tddrAXI_rready <= ddrAXI_rready_sig;" << endl;
+		outfile << "\tddrAXI_rready_sig <= ";
 		for (unsigned int i = 0; i < NRd; i++) {
 			outfile << getChsref(false, i, false) << "AXI_rready";
 			if (wDRds[i] != wD) outfile << "_sig";
@@ -419,7 +421,8 @@ void WdbeMtpWrfpgaDdrmux_Easy_v1_0::writeMdlVhd(
 		outfile << "(others => '0');" << endl;
 		outfile << endl;
 
-		outfile << "\tddrAXI_wlast <= ";
+		outfile << "\tddrAXI_wlast <= ddrAXI_wlast_sig;" << endl;
+		outfile << "\tddrAXI_wlast_sig <= ";
 		for (unsigned int i = 0; i < NWr; i++) {
 			outfile << getChsref(true, i, false) << "AXI_wlast";
 			if (wDWrs[i] != wD) outfile << "_sig";
@@ -429,7 +432,8 @@ void WdbeMtpWrfpgaDdrmux_Easy_v1_0::writeMdlVhd(
 		outfile << "'1';" << endl;
 		outfile << endl;
 
-		outfile << "\tddrAXI_wvalid <= ";
+		outfile << "\tddrAXI_wvalid <= ddrAXI_wvalid_sig;" << endl;
+		outfile << "\tddrAXI_wvalid_sig <= ";
 		for (unsigned int i = 0; i < NWr; i++) {
 			outfile << getChsref(true, i, false) << "AXI_wvalid";
 			if (wDWrs[i] != wD) outfile << "_sig";

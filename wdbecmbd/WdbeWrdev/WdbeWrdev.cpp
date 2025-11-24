@@ -734,7 +734,7 @@ void WdbeWrdev::writeCmdCpp(
 		};
 
 		if (cmd->refIxVTbl == VecWdbeVMCommandRefTbl::UNT) outfile << "\tif (runCmd(cmd)) {" << endl;
-		else outfile << "\tif (unt->runCmd(cmd)) {" << endl;
+		else outfile << "\tif (this->unt->runCmd(cmd)) {" << endl;
 		for (unsigned int i = 0; i < rpas.nodes.size(); i++) {
 			rpa = rpas.nodes[i];
 			writeCmdCpp_getrpa(outfile, cmd, rpa);

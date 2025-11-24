@@ -344,7 +344,6 @@ ins	cust	WdbeMtpCplmstbu	complement module template-specific modular structure b
 	WdbeMtpCplmstbuIrq_Easy_v1_0	false	add capture port
 	WdbeMtpCplmstbuMipidec_mchp_v1_0	false	adapt port widths
 	WdbeMtpCplmstbuMipirx_xlnx_v5_1	false	adapt port configuration and widths
-	WdbeMtpCplmstbuMpfs_ip_AXI_v1_0	false	add pin substitute signals
 	WdbeMtpCplmstbuMult_xlnx_v12_0	false	adapt port widths
 	WdbeMtpCplmstbuOled128x32_v1_0	false	connect SPI master
 	WdbeMtpCplmstbuSelectio_xlnx_v5_1_mipirx	false	adapt port widths
@@ -387,9 +386,11 @@ ins	cust	WdbeMtpCplmsttd	complement module template-specific modular structure t
 	WdbeMtpCplmsttdDpbram_v1_0	false	infer buffer
 	WdbeMtpCplmsttdDpram_efnx_v1_0	false	infer EFX_DPRAM10  primitives
 	WdbeMtpCplmsttdFsmtrack_Easy_v1_0	false	infer buffers
+	WdbeMtpCplmsttdGpio_Easy_v1_0	false	infer tristate primitives and adapt commands
 	WdbeMtpCplmsttdGptrack_Easy_v1_0	false	infer buffer
 	WdbeMtpCplmsttdHostif_Easy_v1_0	false	infer PHY
 	WdbeMtpCplmsttdHostif_v1_0	false	infer PHY
+	WdbeMtpCplmsttdI2cmaster_v1_0	false	infer tristate primitives
 	WdbeMtpCplmsttdSpbram_v1_0	false	infer buffer
 	WdbeMtpCplmsttdSpram_efnx_v1_0	false	infer EFX_RAM10 primitives
 	WdbeMtpCplmsttdTop_v1_0	false	infer clock primitives and adapt ports

@@ -2,7 +2,7 @@
 # make file for operation pack WdbeMtpCplmsttd, release wdbecmbd_mac
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 5 Nov 2025
+# date created: 23 Nov 2025
 # IP header --- ABOVE
 
 include ../Makefile.inc
@@ -17,7 +17,7 @@ INCPATH = -I$(BUILDROOT)/dbswdbe -I$(BUILDROOT)/wdbecmbd/VecWdbe -I$(BUILDROOT)/
 INCPATH += -I${WHIZSDKROOT}/build -I${WHIZSDKROOT}/build/apiwzlm -I/opt/homebrew/include -I/opt/homebrew/opt/curl/include -I/opt/homebrew/opt/libgit2/include -I/opt/homebrew/opt/libmicrohttpd/include -I/opt/homebrew/opt/libxml2/include -I/opt/homebrew/opt/openssl@3/include -I/opt/homebrew/opt/sqlite3/include -I/usr/local/mysql/include
 
 OBJS = WdbeMtpCplmsttd_blks.o WdbeMtpCplmsttd.o
-OBJS += WdbeMtpCplmsttdCmdinv_v2_0.o WdbeMtpCplmsttdCmdret_v2_0.o WdbeMtpCplmsttdCohostif_Easy_v1_0.o WdbeMtpCplmsttdCohostif_v1_0.o WdbeMtpCplmsttdDdrmux_Easy_v1_0.o WdbeMtpCplmsttdDpbram_v1_0.o WdbeMtpCplmsttdDpram_efnx_v1_0.o WdbeMtpCplmsttdFsmtrack_Easy_v1_0.o WdbeMtpCplmsttdGptrack_Easy_v1_0.o WdbeMtpCplmsttdHostif_Easy_v1_0.o WdbeMtpCplmsttdHostif_v1_0.o WdbeMtpCplmsttdSpbram_v1_0.o WdbeMtpCplmsttdSpram_efnx_v1_0.o WdbeMtpCplmsttdTop_v1_0.o SqkWdbeMtpCplmsttd.o
+OBJS += WdbeMtpCplmsttdCmdinv_v2_0.o WdbeMtpCplmsttdCmdret_v2_0.o WdbeMtpCplmsttdCohostif_Easy_v1_0.o WdbeMtpCplmsttdCohostif_v1_0.o WdbeMtpCplmsttdDdrmux_Easy_v1_0.o WdbeMtpCplmsttdDpbram_v1_0.o WdbeMtpCplmsttdDpram_efnx_v1_0.o WdbeMtpCplmsttdFsmtrack_Easy_v1_0.o WdbeMtpCplmsttdGpio_Easy_v1_0.o WdbeMtpCplmsttdGptrack_Easy_v1_0.o WdbeMtpCplmsttdHostif_Easy_v1_0.o WdbeMtpCplmsttdHostif_v1_0.o WdbeMtpCplmsttdI2cmaster_v1_0.o WdbeMtpCplmsttdSpbram_v1_0.o WdbeMtpCplmsttdSpram_efnx_v1_0.o WdbeMtpCplmsttdTop_v1_0.o SqkWdbeMtpCplmsttd.o
 
 LIB = libwdbemtpcplmsttd
 

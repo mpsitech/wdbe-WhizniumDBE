@@ -363,7 +363,7 @@ function refresh() {
 		if (scrJrefDlg != scrJrefDlgwrite) showDlg("DlgWdbeRlsWrite", scrJrefDlgwrite);
 	} else if (scrJrefDlg != "") hideDlg();
 
-	doc.title = retrieveCi(srcdoc, "ContInfWdbeRls", "MtxCrdRls") + " - WhizniumDBE v1.1.49";
+	doc.title = retrieveCi(srcdoc, "ContInfWdbeRls", "MtxCrdRls") + " - WhizniumDBE v1.1.50";
 };
 
 // --- event handlers

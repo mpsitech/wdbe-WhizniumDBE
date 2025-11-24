@@ -363,14 +363,15 @@ DpchRetWdbe* WdbeMtpGenfstDdrmux_Easy_v1_0::run(
 			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, refNumSig++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "ixRdidEgr", false, "nat", 0, "0..31", "", "", "0", 0, "");
 
 			// per read channel
-			for (unsigned int i = 0; i < NRd; i++) if (wDRds[i] != wD) {
+			for (unsigned int i = 0; i < NRd; i++) if (wDRds[i] == wD) {
 				chsref = getChsref(false, i, false);
 
 				refC = dbswdbe->tblwdbecsignal->getNewRef();
-				dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, refNumSig++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, chsref + "AXI_arready_sig", false, "sl", 1, "", "rdmutex=mutex" + string(1, (char) (0x41+i)), "ddrAXI_arready", "0", 0, "");
-				dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, refNumSig++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, chsref + "AXI_rdata_sig", false, "slvdn", wD, "", "*", "ddrAXI_rdata", "0", 0, "");
-				dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, refNumSig++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, chsref + "AXI_rlast_sig", false, "sl", 1, "", "*", "ddrAXI_rlast", "1", 0, "");
-				dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, refNumSig++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, chsref + "AXI_rvalid_sig", false, "sl", 1, "", "rdmutex=mutex" + string(1, (char) (0x41+i)), "ddrAXI_rvalid", "0", 0, "");
+				dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OPRT, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, refNumSig++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, chsref + "AXI_arready", false, "sl", 1, "", "rdmutex=mutex" + string(1, (char) (0x41+i)), "ddrAXI_arready", "0", refsPrts[chsref + "AXI_arready"], "");
+				dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OPRT, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, refNumSig++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, chsref + "AXI_rdata", false, "slvdn", wD, "", "*", "ddrAXI_rdata", "", refsPrts[chsref + "AXI_rdata"], "");
+				dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OPRT, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, refNumSig++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, chsref + "AXI_rlast", false, "sl", 1, "", "rdid(ixRdidEgr)=mutex" + string(1, (char) (0x41+i)), "ddrAXI_rlast", "1", refsPrts[chsref + "AXI_rlast"], "");
+				dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OPRT, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, refNumSig++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, chsref + "AXI_rresp", false, "sl", 1, "", "*", "ddrAXI_rresp", "", refsPrts[chsref + "AXI_rresp"], "");
+				dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OPRT, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, refNumSig++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, chsref + "AXI_rvalid", false, "sl", 1, "", "rdid(ixRdidEgr)=mutex" + string(1, (char) (0x41+i)), "ddrAXI_rvalid", "0", refsPrts[chsref + "AXI_rvalid"], "");
 			};
 
 			delete prc;
@@ -484,12 +485,12 @@ DpchRetWdbe* WdbeMtpGenfstDdrmux_Easy_v1_0::run(
 			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, refNumSig++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "ixWridIgr", false, "nat", 0, "0..31", "", "", "0", 0, "");
 
 			// per write channel
-			for (unsigned int i = 0; i < NWr; i++) if (wDWrs[i] != wD) {
+			for (unsigned int i = 0; i < NWr; i++) if (wDWrs[i] == wD) {
 				chsref = getChsref(true, i, false);
 
 				refC = dbswdbe->tblwdbecsignal->getNewRef();
-				dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, refNumSig++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, chsref + "AXI_awready_sig", false, "sl", 1, "", "wrmutex=mutex" + string(1, (char) (0x41+i)), "ddrAXI_awready", "0", 0, "");
-				dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, refNumSig++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, chsref + "AXI_wready_sig", false, "sl", 1, "", "wrmutex=mutex" + string(1, (char) (0x41+i)), "ddrAXI_wready", "0", 0, "");
+				dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OPRT, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, refNumSig++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, chsref + "AXI_awready", false, "sl", 1, "", "wrmutex=mutex" + string(1, (char) (0x41+i)), "ddrAXI_awready", "0", refsPrts[chsref + "AXI_awready"], "");
+				dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OPRT, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, refNumSig++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, chsref + "AXI_wready", false, "sl", 1, "", "wrmutex=mutex" + string(1, (char) (0x41+i)), "ddrAXI_wready", "0", refsPrts[chsref + "AXI_wready"], "");
 			};
 
 			delete prc;

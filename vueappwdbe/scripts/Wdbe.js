@@ -1,7 +1,7 @@
 export default {
 	title: "WhizniumDBE",
 
-	version: "1.1.49",
+	version: "1.1.50",
 
 	hostname: function() {
 		if (process.env.NODE_ENV === "development") return "127.0.0.1"; // IP hostname --- LINE

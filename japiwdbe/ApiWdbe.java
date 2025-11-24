@@ -23,10 +23,10 @@ import sbecore.*;
 
 public class ApiWdbe {
 
-	public static final String WDBE_VERSION = "1.1.49";
+	public static final String WDBE_VERSION = "1.1.50";
 	public static final int WDBE_VERSION_MAJOR = 1;
 	public static final int WDBE_VERSION_MINOR = 1;
-	public static final int WDBE_VERSION_SUB = 49;
+	public static final int WDBE_VERSION_SUB = 50;
 
 	public static DpchEngWdbe readDpchEng(
 				String s

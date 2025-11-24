@@ -1107,7 +1107,7 @@ DpchEngWdbeAlert* AlrWdbe::prepareAlrAbt(
 	continf.TxtCpt = StrMod::cap(continf.TxtCpt);
 
 	if (ixWdbeVLocale == VecWdbeVLocale::ENUS) {
-		continf.TxtMsg1 = "WhizniumDBE version v1.1.49 released on 5-11-2025";
+		continf.TxtMsg1 = "WhizniumDBE version v1.1.50 released on 23-11-2025";
 		continf.TxtMsg2 = "\\u00a9 MPSI Technologies GmbH";
 		continf.TxtMsg4 = "contributors: Alexander Wirthmueller";
 		continf.TxtMsg6 = "libraries: apiwzlm 1.0.0, curl 7.65, git2 0.24.0, jsoncpp 1.8.4 and openssl 1.1.1";
@@ -1926,9 +1926,9 @@ void StmgrWdbe::handleCall(
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECPRUPD_REFEQ) {
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBECPRSTD);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECTRUPD_REFEQ) {
+		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBECTRSTD);
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBECTRLONG);
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBECTRSREF);
-		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBECTRSTD);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBECVRUPD_REFEQ) {
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBECVRSTD);
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBECVRNO);
@@ -1949,8 +1949,8 @@ void StmgrWdbe::handleCall(
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEINTUPD_REFEQ) {
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEINTSTD);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBELIBUPD_REFEQ) {
-		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBELIBSTD);
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBELIBSREF);
+		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBELIBSTD);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEMCHUPD_REFEQ) {
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEMCHSTD);
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEMCHSREF);
@@ -1979,9 +1979,9 @@ void StmgrWdbe::handleCall(
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBERLSUPD_REFEQ) {
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBERLSSTD);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBESEGUPD_REFEQ) {
-		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBESEGHSREF);
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBESEGSTD);
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBESEGSREF);
+		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBESEGHSREF);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBESESUPD_REFEQ) {
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBESESSTD);
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBESESMENU);
@@ -1999,17 +1999,17 @@ void StmgrWdbe::handleCall(
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEGROUP);
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEUSGSTD);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEUSRUPD_REFEQ) {
-		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEOWNER);
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEUSRSTD);
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEUSRPRS);
+		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEOWNER);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEVARUPD_REFEQ) {
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEVARSTD);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEVECUPD_REFEQ) {
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEVECSTD);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEVERUPD_REFEQ) {
+		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEVERSTD);
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEVERSHORT);
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEVERNO);
-		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEVERSTD);
 	} else if (call->ixVCall == VecWdbeVCall::CALLWDBEVITUPD_REFEQ) {
 		insert(icsWdbeVStub, VecWdbeVStub::STUBWDBEVITSTD);
 	};
@@ -2334,7 +2334,7 @@ void XchgWdbecmbd::startMon() {
 	Clstn* clstn = NULL;
 	Preset* preset = NULL;
 
-	mon.start("WhizniumDBE v1.1.49", stgwdbemonitor.ixDbsVDbstype, stgwdbemonitor.dbspath, stgwdbemonitor.dbsname, stgwdbemonitor.ip, stgwdbemonitor.port, stgwdbemonitor.dbsusername, stgwdbemonitor.dbspassword, stgwdbemonitor.username, stgwdbemonitor.password);
+	mon.start("WhizniumDBE v1.1.50", stgwdbemonitor.ixDbsVDbstype, stgwdbemonitor.dbspath, stgwdbemonitor.dbsname, stgwdbemonitor.ip, stgwdbemonitor.port, stgwdbemonitor.dbsusername, stgwdbemonitor.dbspassword, stgwdbemonitor.username, stgwdbemonitor.password);
 
 	rwmJobs.rlock("XchgWdbecmbd", "startMon");
 	for (auto it = jobs.begin(); it != jobs.end(); it++) {
