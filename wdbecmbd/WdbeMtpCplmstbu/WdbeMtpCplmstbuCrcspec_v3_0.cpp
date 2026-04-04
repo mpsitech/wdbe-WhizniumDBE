@@ -51,7 +51,7 @@ DpchRetWdbe* WdbeMtpCplmstbuCrcspec_v3_0::run(
 			else Wdbe::setPrtWdt(dbswdbe, refWdbeMModule, "AXIS_tkeep", wWord);
 
 			// adapt output CRC port width
-			Wdbe::setPrtWdt(dbswdbe, refWdbeMModule, "crc", (poly.length() > 4) ? 32 : 16);
+			Wdbe::setPrtWdt(dbswdbe, refWdbeMModule, "crc", (poly.length() > 4) ? 32 : (poly.length() > 2) ? 16 : 8);
 		};
 	};
 	// IP run --- IEND

@@ -89,8 +89,10 @@ void WdbeWrfpgaMdlfine::writeMdlVhd(
 
 	WdbeMFsm* fsm = NULL;
 
-	ListWdbeAVKeylistKey klsAkeys;
+	ListWdbeAVKeylistKey klsAkeys, klsAkeys2;
 	WdbeAVKeylistKey* klsAkey = NULL;
+
+	map<string,WdbeAVKeylistKey*> srefsMdlhtys;
 
 	map<string,WdbeAVKeylistKey*> srefsHtys;
 	set<ubigint> refsHtys;
@@ -185,7 +187,10 @@ void WdbeWrfpgaMdlfine::writeMdlVhd(
 
 		if (srefsSigs.find(prc->clkSrefWdbeMSignal + "_sig") != srefsSigs.end()) prc->clkSrefWdbeMSignal += "_sig";
 		if (srefsSigs.find(prc->asrSrefWdbeMSignal + "_sig") != srefsSigs.end()) prc->asrSrefWdbeMSignal += "_sig";
+
+		dbswdbe->tblwdbeavkeylistkey->loadRstByKlsMtbUrf(VecWdbeVKeylist::KLSTWDBEKHDLTYPE, VecWdbeVMaintable::TBLWDBEMPROCESS, prc->ref, true, klsAkeys2);
 	};
+	for (unsigned int j = 0; j < klsAkeys2.nodes.size(); j++) srefsMdlhtys[klsAkeys2.nodes[j]->sref] = klsAkeys2.nodes[j];
 
 	// ---- signals
 
@@ -201,7 +206,7 @@ void WdbeWrfpgaMdlfine::writeMdlVhd(
 			if (first) first = false;
 			else if (sig->refWdbeCSignal != refC) outfile << endl;
 
-			outfile << "\tconstant " << sig->sref << ": " << getVarStr(sig) << ";";
+			outfile << "\tconstant " << sig->sref << ": " << getVarStr(sig, srefsMdlhtys) << ";"; /// FIRST VAR
 			if (sig->Comment != "") outfile << " -- " << sig->Comment;
 			outfile << endl;
 
@@ -281,7 +286,7 @@ void WdbeWrfpgaMdlfine::writeMdlVhd(
 				outfile << sig->sref;
 				if ((sig->ixVBasetype == VecWdbeVMSignalBasetype::CLK) && (sig->drvRefWdbeMPort == 0)) outfile << ", " << sig->sref << "_sig";
 				
-				outfile << ": " << getVarStr(sig) << ";";
+				outfile << ": " << getVarStr(sig, srefsMdlhtys) << ";";
 				if (sig->Comment != "") outfile << " -- " << sig->Comment;
 				outfile << endl;
 
@@ -314,7 +319,7 @@ void WdbeWrfpgaMdlfine::writeMdlVhd(
 				outfile << sig->sref;
 				if ((sig->ixVBasetype == VecWdbeVMSignalBasetype::CLK) && (sig->drvRefWdbeMPort == 0)) outfile << ", " << sig->sref << "_sig";
 				
-				outfile << ": " << getVarStr(sig) << ";";
+				outfile << ": " << getVarStr(sig, srefsMdlhtys) << ";";
 				if (sig->Comment != "") outfile << " -- " << sig->Comment;
 				outfile << endl;
 
@@ -385,7 +390,7 @@ void WdbeWrfpgaMdlfine::writeMdlVhd(
 					for (unsigned int j = 0; j < sigreqs.size();j++) {
 						sig = sigreqs[j];
 
-						outfile << "\tsignal " << sig->sref << ": " << getVarStr(sig) << ";";
+						outfile << "\tsignal " << sig->sref << ": " << getVarStr(sig, srefsMdlhtys) << ";";
 						if (sig->Comment != "") outfile << " -- " << sig->Comment;
 						outfile << endl;
 
@@ -394,7 +399,7 @@ void WdbeWrfpgaMdlfine::writeMdlVhd(
 					for (unsigned int j = 0; j < sigacks.size();j++) {
 						sig = sigacks[j];
 
-						outfile << "\tsignal " << sig->sref << ": " << getVarStr(sig) << ";";
+						outfile << "\tsignal " << sig->sref << ": " << getVarStr(sig, srefsMdlhtys) << ";";
 						if (sig->Comment != "") outfile << " -- " << sig->Comment;
 						outfile << endl;
 
@@ -403,7 +408,7 @@ void WdbeWrfpgaMdlfine::writeMdlVhd(
 					for (unsigned int j = 0; j < sigdnys.size();j++) {
 						sig = sigdnys[j];
 
-						outfile << "\tsignal " << sig->sref << ": " << getVarStr(sig) << ";";
+						outfile << "\tsignal " << sig->sref << ": " << getVarStr(sig, srefsMdlhtys) << ";";
 						if (sig->Comment != "") outfile << " -- " << sig->Comment;
 						outfile << endl;
 
@@ -412,7 +417,7 @@ void WdbeWrfpgaMdlfine::writeMdlVhd(
 					for (unsigned int j = 0; j < sigdnes.size();j++) {
 						sig = sigdnes[j];
 
-						outfile << "\tsignal " << sig->sref << ": " << getVarStr(sig) << ";";
+						outfile << "\tsignal " << sig->sref << ": " << getVarStr(sig, srefsMdlhtys) << ";";
 						if (sig->Comment != "") outfile << " -- " << sig->Comment;
 						outfile << endl;
 
@@ -469,7 +474,7 @@ void WdbeWrfpgaMdlfine::writeMdlVhd(
 					for (unsigned int j = 0; j < sigreqs.size();j++) {
 						sig = sigreqs[j];
 
-						outfile << "\tsignal " << sig->sref << ": " << getVarStr(sig) << ";";
+						outfile << "\tsignal " << sig->sref << ": " << getVarStr(sig, srefsMdlhtys) << ";";
 						if (sig->Comment != "") outfile << " -- " << sig->Comment;
 						outfile << endl;
 
@@ -478,7 +483,7 @@ void WdbeWrfpgaMdlfine::writeMdlVhd(
 					for (unsigned int j = 0; j < sigacks.size();j++) {
 						sig = sigacks[j];
 
-						outfile << "\tsignal " << sig->sref << ": " << getVarStr(sig) << ";";
+						outfile << "\tsignal " << sig->sref << ": " << getVarStr(sig, srefsMdlhtys) << ";";
 						if (sig->Comment != "") outfile << " -- " << sig->Comment;
 						outfile << endl;
 
@@ -487,7 +492,7 @@ void WdbeWrfpgaMdlfine::writeMdlVhd(
 					for (unsigned int j = 0; j < sigdnys.size();j++) {
 						sig = sigdnys[j];
 
-						outfile << "\tsignal " << sig->sref << ": " << getVarStr(sig) << ";";
+						outfile << "\tsignal " << sig->sref << ": " << getVarStr(sig, srefsMdlhtys) << ";";
 						if (sig->Comment != "") outfile << " -- " << sig->Comment;
 						outfile << endl;
 
@@ -515,7 +520,7 @@ void WdbeWrfpgaMdlfine::writeMdlVhd(
 
 			if (sig->Const) outfile << "\tconstant ";
 			else outfile << "\tsignal ";
-			outfile << sig->sref << ": " << getVarStr(sig) << ";";
+			outfile << sig->sref << ": " << getVarStr(sig, srefsMdlhtys) << ";";
 			if (sig->Comment != "") outfile << " -- " << sig->Comment;
 			outfile << endl;
 
@@ -589,9 +594,9 @@ void WdbeWrfpgaMdlfine::writeMdlVhd(
 							outfile << "\t";
 							if ((sig->drvRefWdbeMPort != 0) && (sig->sref.length() > 5) && ((sig->sref.rfind("_virt")+5) == sig->sref.length())) outfile << sig->sref.substr(0, sig->sref.length()-5);
 							else outfile << sig->sref;
-							outfile << " <= " << getValStr(sig, false, sig->Onval);
+							outfile << " <= " << getValStr(sig, srefsMdlhtys, false, sig->Onval); /// FIRST VAL
 
-							if (sig->Comb != "*") outfile << " when " << expandCond(sig->Comb, Prcsref, srefsSlprtsigs, srefsSlvars, 80, 4) << " else " << getValStr(sig);
+							if (sig->Comb != "*") outfile << " when " << expandCond(sig->Comb, Prcsref, srefsSlprtsigs, srefsSlvars, 80, 4) << " else " << getValStr(sig, srefsMdlhtys);
 							outfile << ";";
 							
 							if ((sig->drvRefWdbeMPort != 0) && (sig->sref.length() > 5) && ((sig->sref.rfind("_virt")+5) == sig->sref.length()) && (sig->Comment != "")) outfile << " -- " << sig->Comment;
@@ -674,9 +679,7 @@ void WdbeWrfpgaMdlfine::writeMdlVhd(
 		if (prc->clkSrefWdbeMSignal != "") {
 			outfile << "\tprocess (";
 			if (prc->asrSrefWdbeMSignal != "") outfile << prc->asrSrefWdbeMSignal << ", ";
-			outfile << prc->clkSrefWdbeMSignal;
-			if (prc->refWdbeMFsm != 0) outfile << ", state" << Prcsref;
-			outfile << ")" << endl;
+			outfile << prc->clkSrefWdbeMSignal << ")" << endl;
 
 			// -- impl.xxxx.vars
 			outfile << "\t\t-- IP impl." << prc->sref << ".vars --- BEGIN" << endl;
@@ -704,7 +707,7 @@ void WdbeWrfpgaMdlfine::writeMdlVhd(
 
 					if (var->Const) outfile << "\t\tconstant ";
 					else outfile << "\t\tvariable ";
-					outfile << var->sref << ": " << getVarStr(var) << ";";
+					outfile << var->sref << ": " << getVarStr(var, srefsMdlhtys) << ";";
 					if (var->Comment != "") outfile << " -- " << var->Comment;
 					outfile << endl;
 
@@ -725,7 +728,7 @@ void WdbeWrfpgaMdlfine::writeMdlVhd(
 
 				outfile << "\t\t\t-- IP impl." << prc->sref << ".asyncrst --- BEGIN" << endl;
 				if (fsts.nodes.size() > 0) outfile << "\t\t\tstate" << Prcsref << " <= state" << Prcsref << StrMod::cap(fsts.nodes[0]->sref) << ";" << endl;
-				writeMdlVhd_reset(outfile, VecWdbeVMSignalMgeTbl::PRC, prc->ref, sigs, vars, 3);
+				writeMdlVhd_reset(outfile, VecWdbeVMSignalMgeTbl::PRC, prc->ref, sigs, vars, srefsMdlhtys, 3);
 				outfile << "\t\t\t-- IP impl." << prc->sref << ".asyncrst --- END" << endl;
 				outfile << "\t\t\t-- IP impl." << prc->sref << ".asyncrst.cust --- INSERT" << endl;
 
@@ -735,14 +738,14 @@ void WdbeWrfpgaMdlfine::writeMdlVhd(
 
 			outfile << "if rising_edge(" << prc->clkSrefWdbeMSignal << ") then" << endl;
 
-			if (prc->Extip) {
-				outfile << "\t\t-- IP impl." << prc->sref << ".ext --- INSERT" << endl;
+			first = true;
+
+			if (prc->Preip) {
+				outfile << "\t\t-- IP impl." << prc->sref << ".pre --- INSERT" << endl;
 				outfile << endl;
 
 				first = false;
 			};
-
-			first = true;
 
 			refFstSyncrst = 0;
 
@@ -761,7 +764,7 @@ void WdbeWrfpgaMdlfine::writeMdlVhd(
 				if (refFstSyncrst == 0) {
 					outfile << "\t\t\tif " << expandCond(prc->Syncrst, Prcsref, srefsSlprtsigs, srefsSlvars, 0, 0) << " then" << endl;
 					outfile << "\t\t\t\t-- IP impl." << prc->sref << ".syncrst --- BEGIN" << endl;
-					writeMdlVhd_reset(outfile, VecWdbeVMSignalMgeTbl::PRC, prc->ref, sigs, vars, 4);
+					writeMdlVhd_reset(outfile, VecWdbeVMSignalMgeTbl::PRC, prc->ref, sigs, vars, srefsMdlhtys, 4);
 
 					if (fsts.nodes.size() > 0) {
 						outfile << endl;
@@ -814,7 +817,7 @@ void WdbeWrfpgaMdlfine::writeMdlVhd(
 
 					if (gblrst) {
 						outfile << "\t\t\t\t-- IP impl." << prc->sref << ".syncrst --- BEGIN" << endl;
-						writeMdlVhd_reset(outfile, VecWdbeVMSignalMgeTbl::PRC, prc->ref, sigs, vars, 4);
+						writeMdlVhd_reset(outfile, VecWdbeVMSignalMgeTbl::PRC, prc->ref, sigs, vars, srefsMdlhtys, 4);
 
 						if ((fass.nodes.size() == 0) && (fsts.nodes.size() > 1)) {
 							outfile << endl;
@@ -830,8 +833,8 @@ void WdbeWrfpgaMdlfine::writeMdlVhd(
 					if (fst->ref != refFstSyncrst) outfile << "\t\t\t\t-- IP impl." << prc->sref << "." << fst->sref << " --- INSERT" << endl;
 
 				} else {
-					if (fst->Extip) {
-						outfile << "\t\t\t\t-- IP impl." << prc->sref << "." << fst->sref << ".ext --- INSERT" << endl;
+					if (fst->Preip) {
+						outfile << "\t\t\t\t-- IP impl." << prc->sref << "." << fst->sref << ".pre --- INSERT" << endl;
 						outfile << endl;
 					};
 
@@ -885,7 +888,7 @@ void WdbeWrfpgaMdlfine::writeMdlVhd(
 
 								if ((ips[l] == "syncrst") && !gblrst) {
 									outfile << string(il, '\t') << "-- IP impl." << prc->sref << ".syncrst --- BEGIN" << endl;
-									writeMdlVhd_reset(outfile, VecWdbeVMSignalMgeTbl::PRC, prc->ref, sigs, vars, il);
+									writeMdlVhd_reset(outfile, VecWdbeVMSignalMgeTbl::PRC, prc->ref, sigs, vars, srefsMdlhtys, il);
 									outfile << string(il, '\t') << "-- IP impl." << prc->sref << ".syncrst --- END" << endl;
 									outfile << string(il, '\t') << "-- IP impl." << prc->sref << ".syncrst.cust --- INSERT" << endl;
 									outfile << endl;
@@ -919,6 +922,13 @@ void WdbeWrfpgaMdlfine::writeMdlVhd(
 
 			if (first) outfile << "\t\t\t-- IP impl." << prc->sref << " --- INSERT" << endl;
 			else outfile << "\t\t\tend if;" << endl;
+
+			if (prc->Postip) {
+				outfile << "\t\t-- IP impl." << prc->sref << ".post --- INSERT" << endl;
+				outfile << endl;
+
+				first = false;
+			};
 
 			outfile << "\t\tend if;" << endl;
 			outfile << "\tend process;" << endl;
@@ -960,7 +970,7 @@ void WdbeWrfpgaMdlfine::writeMdlVhd(
 
 						if (var->Const) outfile << "\t\tconstant ";
 						else outfile << "\t\tvariable ";
-						outfile << var->sref << ": " << getVarStr(var) << ";" << endl;
+						outfile << var->sref << ": " << getVarStr(var, srefsMdlhtys) << ";" << endl;
 
 						refC = var->refWdbeCVariable;
 					};
@@ -998,6 +1008,7 @@ void WdbeWrfpgaMdlfine::writeMdlVhd_reset(
 			, const ubigint mgeUref
 			, ListWdbeMSignal& sigs
 			, ListWdbeMVariable& vars
+			, map<string,WdbeAVKeylistKey*>& srefsMdlhtys
 			, const unsigned int il
 		) {
 	WdbeMSignal* sig = NULL;
@@ -1011,7 +1022,7 @@ void WdbeWrfpgaMdlfine::writeMdlVhd_reset(
 		if ((sig->mgeIxVTbl == mgeIxVTbl) && (sig->mgeUref == mgeUref) && !sig->Const && (sig->Comb == "") && (sig->Offval != "")) {
 			first = false;
 
-			outfile << string(il, '\t') << sig->sref << " <= " << getValStr(sig, true) << ";" << endl;
+			outfile << string(il, '\t') << sig->sref << " <= " << getValStr(sig, srefsMdlhtys, true) << ";" << endl;
 		};
 	};
 
@@ -1020,7 +1031,7 @@ void WdbeWrfpgaMdlfine::writeMdlVhd_reset(
 	for (unsigned int i = 0; i < vars.nodes.size(); i++) {
 		var = vars.nodes[i];
 
-		if (!var->Const && (var->Offval != "")) outfile << string(il, '\t') << var->sref << " := " << getValStr(var, true) << ";" << endl;
+		if (!var->Const && (var->Offval != "")) outfile << string(il, '\t') << var->sref << " := " << getValStr(var, srefsMdlhtys, true) << ";" << endl;
 	};
 };
 

@@ -102,7 +102,7 @@ DpchRetWdbe* WdbeMtpCplmsttdDpram_efnx_v1_0::run(
 			// - multiplexer processes and signals
 			mdlNum = 1;
 
-			refPrcMux = dbswdbe->tblwdbemprocess->insertNewRec(NULL, mdl->ref, 0, "muxA", "clkA", "resetA", false, "", false, "A-side multiplexing");
+			refPrcMux = dbswdbe->tblwdbemprocess->insertNewRec(NULL, mdl->ref, 0, "muxA", "clkA", "resetA", false, "", false, false, "A-side multiplexing");
 
 			if (wAA_int > wAA) {
 				Onval = "\"";
@@ -123,7 +123,7 @@ DpchRetWdbe* WdbeMtpCplmsttdDpram_efnx_v1_0::run(
 				dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, mdl->ref, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, refPrcMux, 0, "enA_i" + to_string(i) + "m1", false, "sl", 1, "", getComb(NRam, wA, i, "A", "m1", ""), "1", "0", 0, "");
 			};
 
-			refPrcMux = dbswdbe->tblwdbemprocess->insertNewRec(NULL, mdl->ref, 0, "muxB", "clkB", "resetB", false, "", false, "B-side multiplexing");
+			refPrcMux = dbswdbe->tblwdbemprocess->insertNewRec(NULL, mdl->ref, 0, "muxB", "clkB", "resetB", false, "", false, false, "B-side multiplexing");
 
 			if (wAB_int > wAB) {
 				Onval = "\"";

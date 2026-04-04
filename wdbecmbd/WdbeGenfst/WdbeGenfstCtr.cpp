@@ -186,7 +186,7 @@ DpchRetWdbe* WdbeGenfstCtr::run(
 				};
 			};
 
-			if (!dbswdbe->tblwdbemprocess->loadRecBySQL("SELECT * FROM TblWdbeMProcess WHERE refWdbeMModule = " + to_string(mdl->ref) + " AND sref = 'cmd'", &prc)) dbswdbe->tblwdbemprocess->insertNewRec(&prc, mdl->ref, 0, "cmd", "mclk", "reset", true, "", false, "command execution");
+			if (!dbswdbe->tblwdbemprocess->loadRecBySQL("SELECT * FROM TblWdbeMProcess WHERE refWdbeMModule = " + to_string(mdl->ref) + " AND sref = 'cmd'", &prc)) dbswdbe->tblwdbemprocess->insertNewRec(&prc, mdl->ref, 0, "cmd", "mclk", "reset", true, "", false, false, "command execution");
 			
 			if (prc->refWdbeMFsm == 0) {
 				prc->refWdbeMFsm = dbswdbe->tblwdbemfsm->insertNewRec(NULL, prc->ref);

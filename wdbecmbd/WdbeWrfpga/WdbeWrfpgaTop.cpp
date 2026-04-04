@@ -109,14 +109,14 @@ void WdbeWrfpgaTop::writeMdlVhd(
 
 	for (unsigned int i = 0; i < NClk; i++) {
 		if (i != 0) {
-			// --- impl.xxxclk.ext
-			outfile << "\t\t\t-- IP impl." << clks[i] << ".ext --- IBEGIN" << endl;
+			// --- impl.xxxclk.pre
+			outfile << "\t\t\t-- IP impl." << clks[i] << ".pre --- IBEGIN" << endl;
 			outfile << "\t\t\tif reset_to_" << clks[i] << "m1=reset_to_" << clks[i] << "m2 then" << endl;
 			outfile << "\t\t\t\treset_" << clks[i] << " <= reset_to_" << clks[i] << "m2;" << endl;
 			outfile << "\t\t\tend if;" << endl;
 			outfile << "\t\t\treset_to_" << clks[i] << "m1 <= reset;" << endl;
 			outfile << "\t\t\treset_to_" << clks[i] << "m2 <= reset_to_" << clks[i] << "m1;" << endl;
-			outfile << "\t\t\t-- IP impl." << clks[i] << ".ext --- IEND" << endl;
+			outfile << "\t\t\t-- IP impl." << clks[i] << ".pre --- IEND" << endl;
 		};
 
 		// --- impl.xxxclk.reset.done

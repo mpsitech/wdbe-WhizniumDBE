@@ -46,8 +46,8 @@ DpchRetWdbe* WdbeMtpCplmstbuUart_Easy_v1_0::run(
 	if (dbswdbe->tblwdbemmodule->loadRecByRef(refWdbeMModule, &mdl)) {
 		mdlNum = 1;
 
-		refPrcOp = dbswdbe->tblwdbemprocess->insertNewRec(NULL, mdl->ref, 0, "op", "mclk", "reset", true, "", false, "main operation");
-		refPrcXfer = dbswdbe->tblwdbemprocess->insertNewRec(NULL, mdl->ref, 0, "xfer", "mclk", "reset", true, "", false, "transfer operation");
+		refPrcOp = dbswdbe->tblwdbemprocess->insertNewRec(NULL, mdl->ref, 0, "op", "mclk", "reset", true, "", false, false, "main operation");
+		refPrcXfer = dbswdbe->tblwdbemprocess->insertNewRec(NULL, mdl->ref, 0, "xfer", "mclk", "reset", true, "", false, false, "transfer operation");
 
 		if (dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMModule WHERE supRefWdbeMModule = " + to_string(mdl->ref) + " AND sref = 'timeout'", ref)) {
 			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, mdl->ref, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, refPrcXfer, 0, "torestart", false, "sl", 1, "", "", "", "0", 0, "");

@@ -54,7 +54,7 @@ DpchRetWdbe* WdbeMtpGenfstUsbhostif_Easy_v2_0_Mcu::run(
 	hasrxbuf = (cnt > 0);
 
 	// main operation process (leave out state(init) to get external syncrst)
-	dbswdbe->tblwdbemprocess->insertNewRec(&prc, refWdbeMModule, 0, "op", "", "", false, "state(init)", false, "main operation");
+	dbswdbe->tblwdbemprocess->insertNewRec(&prc, refWdbeMModule, 0, "op", "", "", false, "state(init)", false, false, "main operation");
 
 	prc->refWdbeMFsm = dbswdbe->tblwdbemfsm->insertNewRec(NULL, prc->ref, VecWdbeVMFsmDbgtaptype::VOID);
 	dbswdbe->tblwdbemprocess->updateRec(prc);

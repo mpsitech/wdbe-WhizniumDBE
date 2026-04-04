@@ -107,22 +107,25 @@ string WdbeWrfpga::valToSlv(
 
 string WdbeWrfpga::getValStr(
 			WdbeMGeneric* gen
+			, map<string,WdbeAVKeylistKey*>& srefsHtys
 			, const bool othNotFull
 		) {
 	WdbeMSignal sig(0, 0, 0, 0, 0, 0, 0, 0, 0, "", false, gen->srefWdbeKHdltype, gen->Width, gen->Minmax, "", "", gen->Defval, 0, "");
-	return(getValStr(&sig, othNotFull));
+	return(getValStr(&sig, srefsHtys, othNotFull));
 };
 
 string WdbeWrfpga::getValStr(
 			WdbeMPort* prt
+			, map<string,WdbeAVKeylistKey*>& srefsHtys
 			, const bool othNotFull
 		) {
 	WdbeMSignal sig(0, 0, 0, 0, 0, 0, 0, 0, 0, "", false, prt->srefWdbeKHdltype, prt->Width, prt->Minmax, "", "", prt->Defval, 0, "");
-	return(getValStr(&sig, othNotFull));
+	return(getValStr(&sig, srefsHtys, othNotFull));
 };
 
 string WdbeWrfpga::getValStr(
 			WdbeMSignal* sig
+			, map<string,WdbeAVKeylistKey*>& srefsHtys
 			, const bool othNotFull
 			, const string& altval
 		) {
@@ -151,6 +154,11 @@ string WdbeWrfpga::getValStr(
 
 	} else if (sig->srefWdbeKHdltype == "str") {
 		s = "\"" + s + "\"";
+	
+	} else if (s == "#") {
+		auto it = srefsHtys.find(sig->srefWdbeKHdltype);
+
+		if (it != srefsHtys.end()) s = it->second->Comment;
 	};
 
 	return s;
@@ -158,29 +166,33 @@ string WdbeWrfpga::getValStr(
 
 string WdbeWrfpga::getValStr(
 			WdbeMVariable* var
+			, map<string,WdbeAVKeylistKey*>& srefsHtys
 			, const bool othNotFull
 			, const string& altval
 		) {
 	WdbeMSignal sig(0, 0, 0, 0, 0, 0, 0, 0, 0, "", false, var->srefWdbeKHdltype, var->Width, var->Minmax, "", var->Onval, var->Offval, 0, "");
-	return(getValStr(&sig, othNotFull, altval));
+	return(getValStr(&sig, srefsHtys, othNotFull, altval));
 };
 
 string WdbeWrfpga::getVarStr(
 			WdbeMGeneric* gen
+			, map<string,WdbeAVKeylistKey*>& srefsHtys
 		) {
 	WdbeMSignal sig(0, 0, 0, 0, 0, 0, VecWdbeVMSignalMgeTbl::VOID, 0, 0, "", false, gen->srefWdbeKHdltype, gen->Width, gen->Minmax, "", "", gen->Defval, 0, "");
-	return(getVarStr(&sig));
+	return(getVarStr(&sig, srefsHtys));
 };
 
 string WdbeWrfpga::getVarStr(
 			WdbeMPort* prt
+			, map<string,WdbeAVKeylistKey*>& srefsHtys
 		) {
 	WdbeMSignal sig(0, 0, 0, 0, 0, 0, VecWdbeVMSignalMgeTbl::VOID, 0, 0, "", false, prt->srefWdbeKHdltype, prt->Width, prt->Minmax, "", "", "", 0, "");
-	return(getVarStr(&sig));
+	return(getVarStr(&sig, srefsHtys));
 };
 
 string WdbeWrfpga::getVarStr(
 			WdbeMSignal* sig
+			, map<string,WdbeAVKeylistKey*>& srefsHtys
 		) {
 	string s;
 
@@ -208,16 +220,17 @@ string WdbeWrfpga::getVarStr(
 	ptr = sig->Minmax.find("..");
 	if (ptr != string::npos) s += " range " + sig->Minmax.substr(0, ptr) + " to " + sig->Minmax.substr(ptr+2);
 
-	if ((sig->mgeIxVTbl == VecWdbeVMSignalMgeTbl::VOID) || sig->Const) if (sig->Offval != "") s += " := " + getValStr(sig, true);
+	if ((sig->mgeIxVTbl == VecWdbeVMSignalMgeTbl::VOID) || sig->Const) if (sig->Offval != "") s += " := " + getValStr(sig, srefsHtys, true);
 
 	return s;
 };
 
 string WdbeWrfpga::getVarStr(
 			WdbeMVariable* var
+			, map<string,WdbeAVKeylistKey*>& srefsHtys
 		) {
 	WdbeMSignal sig(0, 0, 0, 0, 0, 0, VecWdbeVMSignalMgeTbl::PRC, 0, 0, "", var->Const, var->srefWdbeKHdltype, var->Width, var->Minmax, "", var->Onval, var->Offval, 0, "");
-	return(getVarStr(&sig));
+	return(getVarStr(&sig, srefsHtys));
 };
 
 void WdbeWrfpga::srefsFstsToVector(

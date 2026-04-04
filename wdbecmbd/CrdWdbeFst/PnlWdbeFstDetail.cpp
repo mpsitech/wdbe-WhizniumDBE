@@ -155,14 +155,14 @@ void PnlWdbeFstDetail::refreshRecFst(
 
 	continf.TxtSrf = recFst.sref;
 	continf.TxtFsm = StubWdbe::getStubFsmStd(dbswdbe, recFst.fsmRefWdbeMFsm, ixWdbeVLocale, Stub::VecVNonetype::FULL);
-	contiac.ChkEip = recFst.Extip;
+	contiac.ChkPri = recFst.Preip;
 	contiac.TxfCmt = recFst.Comment;
 
 	statshr.TxtSrfActive = evalTxtSrfActive(dbswdbe);
 	statshr.TxtFsmActive = evalTxtFsmActive(dbswdbe);
 	statshr.ButFsmViewAvail = evalButFsmViewAvail(dbswdbe);
 	statshr.ButFsmViewActive = evalButFsmViewActive(dbswdbe);
-	statshr.ChkEipActive = evalChkEipActive(dbswdbe);
+	statshr.ChkPriActive = evalChkPriActive(dbswdbe);
 	statshr.TxfCmtActive = evalTxfCmtActive(dbswdbe);
 	if (contiac.diff(&oldContiac).size() != 0) insert(moditems, DpchEngData::CONTIAC);
 	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
@@ -277,8 +277,8 @@ void PnlWdbeFstDetail::handleDpchAppDataContiac(
 
 	diffitems = _contiac->diff(&contiac);
 
-	if (hasAny(diffitems, {ContIac::CHKEIP, ContIac::TXFCMT})) {
-		if (has(diffitems, ContIac::CHKEIP)) contiac.ChkEip = _contiac->ChkEip;
+	if (hasAny(diffitems, {ContIac::CHKPRI, ContIac::TXFCMT})) {
+		if (has(diffitems, ContIac::CHKPRI)) contiac.ChkPri = _contiac->ChkPri;
 		if (has(diffitems, ContIac::TXFCMT)) contiac.TxfCmt = _contiac->TxfCmt;
 	};
 

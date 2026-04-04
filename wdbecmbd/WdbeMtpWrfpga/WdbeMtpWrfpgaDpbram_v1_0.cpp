@@ -81,7 +81,9 @@ void WdbeMtpWrfpgaDpbram_v1_0::writeMdlVhd(
 		for (unsigned int i = 0; i < sigs.nodes.size(); i++) {
 			sig = sigs.nodes[i];
 
-			outfile << "\t" << sig->sref << "(0) <= " << sig->Comment << ";" << endl;
+			outfile << "\t" << sig->sref;
+			if (sig->srefWdbeKHdltype == "slvdn") outfile << "(0)";
+			outfile << " <= " << sig->Comment << ";" << endl;
 
 			sig->Comment = "";
 			dbswdbe->tblwdbemsignal->updateRec(sig);

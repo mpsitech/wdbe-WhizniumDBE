@@ -10,7 +10,7 @@
 			function handleButCluClusterClick() {parent.parent.window.handleButClick("ButCluCluster");};
 			function handleButCluUnclusterClick() {parent.parent.window.handleButClick("ButCluUncluster");};
 			function handleButFsmViewClick() {parent.parent.window.handleButCrdopenClick("ButFsmView");};
-			function handleChkEipChange() {parent.parent.window.handleChkChange(document,"ChkEip");};
+			function handleChkPriChange() {parent.parent.window.handleChkChange(document,"ChkPri");};
 			function handleTxfCmtKey(evt) {return parent.parent.window.handleTxftKey(document,"TxfCmt",evt);};
 			function handleTxfCmtChange() {parent.parent.window.handleTxftChange(document,"TxfCmt");};
 			<!-- IP custScript - INSERT -->
@@ -81,14 +81,14 @@
 					<td id="rdynFsm" colspan="2" align="left">
 					</td>
 				</tr>
-				<tr id="trEip" class="show">
+				<tr id="trPri" class="show">
 					<td height="25"></td>
 					<td align="right">
-						<span id="CptEip" class="cpt">CptEip</span>
+						<span id="CptPri" class="cpt">CptPri</span>
 					</td>
 					<td></td>
 					<td align="left">
-						<input id="ChkEip" class="chk" name="ChkEip" type="checkbox" checked="checked" onchange="handleChkEipChange()"/>
+						<input id="ChkPri" class="chk" name="ChkPri" type="checkbox" checked="checked" onchange="handleChkPriChange()"/>
 					</td>
 					<td colspan="7"></td>
 				</tr>

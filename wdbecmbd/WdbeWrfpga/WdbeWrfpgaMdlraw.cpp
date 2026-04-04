@@ -102,6 +102,9 @@ void WdbeWrfpgaMdlraw::writeMdlVhd(
 
 	WdbeMFsm* fsm = NULL;
 
+	ListWdbeAVKeylistKey klsAkeys2;
+	map<string,WdbeAVKeylistKey*> srefsMdlhtys;
+
 	ListWdbeMPort subprts;
 
 	set<string> srefsLibmdls;
@@ -278,7 +281,10 @@ void WdbeWrfpgaMdlraw::writeMdlVhd(
 
 		it = srefsSigs.find(prc->asrSrefWdbeMSignal);
 		if (it != srefsSigs.end()) prc->asrSrefWdbeMSignal = it->second->sref;
+
+		dbswdbe->tblwdbeavkeylistkey->loadRstByKlsMtbUrf(VecWdbeVKeylist::KLSTWDBEKHDLTYPE, VecWdbeVMaintable::TBLWDBEMPROCESS, prc->ref, true, klsAkeys2);
 	};
+	for (unsigned int j = 0; j < klsAkeys2.nodes.size(); j++) srefsMdlhtys[klsAkeys2.nodes[j]->sref] = klsAkeys2.nodes[j];
 
 	// --- mpas
 	outfile << "-- IP mpas --- IBEGIN" << endl;
@@ -375,7 +381,7 @@ void WdbeWrfpgaMdlraw::writeMdlVhd(
 				if (gen->refWdbeCGeneric != refC) outfile << endl;
 			};
 
-			outfile << "\t\t" << gen->sref << ": " << getVarStr(gen);
+			outfile << "\t\t" << gen->sref << ": " << getVarStr(gen, srefsMdlhtys); /// FIRST VAR
 			refC = gen->refWdbeCGeneric;
 			Comment = gen->Comment;
 		};
@@ -410,7 +416,7 @@ void WdbeWrfpgaMdlraw::writeMdlVhd(
 					if (prt->refWdbeCPort != refC) outfile << endl;
 				};
 
-				outfile << "\t\t" << prt->sref << ": " << VecWdbeVMPortDir::getSref(prt->ixVDir) << " " << getVarStr(prt);
+				outfile << "\t\t" << prt->sref << ": " << VecWdbeVMPortDir::getSref(prt->ixVDir) << " " << getVarStr(prt, srefsMdlhtys);
 				refC = prt->refWdbeCPort;
 				Comment = prt->Comment;
 			};
@@ -457,7 +463,7 @@ void WdbeWrfpgaMdlraw::writeMdlVhd(
 							if (gen->refWdbeCGeneric != refC) outfile << endl;
 						};
 
-						outfile << "\t\t\t" << gen->sref << ": " << getVarStr(gen);
+						outfile << "\t\t\t" << gen->sref << ": " << getVarStr(gen, srefsMdlhtys);
 						refC = gen->refWdbeCGeneric;
 					};
 
@@ -486,7 +492,7 @@ void WdbeWrfpgaMdlraw::writeMdlVhd(
 								if (prt->refWdbeCPort != refC) outfile << endl;
 							};
 
-							outfile << "\t\t\t" << prt->sref << ": " << VecWdbeVMPortDir::getSref(prt->ixVDir) << " " << getVarStr(prt);
+							outfile << "\t\t\t" << prt->sref << ": " << VecWdbeVMPortDir::getSref(prt->ixVDir) << " " << getVarStr(prt, srefsMdlhtys);
 							refC = prt->refWdbeCPort;
 						};
 					};
@@ -616,7 +622,7 @@ void WdbeWrfpgaMdlraw::writeMdlVhd(
 						outfile << "\t\t\t" << gen->sref << " => ";
 
 						if (gen->srcSrefWdbeMGeneric != "") outfile << gen->srcSrefWdbeMGeneric;
-						else if (gen->Defval != "") outfile << getValStr(gen, true);
+						else if (gen->Defval != "") outfile << getValStr(gen, srefsMdlhtys, true); /// FIRST VAL
 						
 						refC = gen->refWdbeCGeneric;
 						Comment = gen->Comment;
@@ -696,7 +702,7 @@ void WdbeWrfpgaMdlraw::writeMdlVhd(
 						};
 
 					} else if (prt->Defval != "") {
-						outfile << getValStr(prt, true);
+						outfile << getValStr(prt, srefsMdlhtys, true);
 
 					} else {
 						outfile << "open";

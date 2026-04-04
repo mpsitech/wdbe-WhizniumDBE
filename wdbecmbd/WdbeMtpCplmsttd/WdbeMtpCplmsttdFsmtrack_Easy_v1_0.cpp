@@ -46,8 +46,6 @@ DpchRetWdbe* WdbeMtpCplmsttdFsmtrack_Easy_v1_0::run(
 	string srefHostif;
 	unsigned int wHostif;
 
-	const unsigned int sizeCntbuf = 1;
-	const unsigned int sizeFstoccbuf = 1;
 	unsigned int sizeSeqbuf = 4;
 
 	string s;
@@ -58,26 +56,6 @@ DpchRetWdbe* WdbeMtpCplmsttdFsmtrack_Easy_v1_0::run(
 		wHostif = Wdbe::getHostifWidth(dbswdbe, mdl->hkUref);
 
 		if (Wdbe::getMpa(dbswdbe, refWdbeMModule, "sizeSeqbuf", s)) sizeSeqbuf = atoi(s.c_str());
-
-		if (dbswdbe->tblwdbemmodule->loadRecBySQL("SELECT * FROM TblWdbeMModule WHERE supRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'cntbuf'", &submdl)) {
-			dbswdbe->tblwdbermmodulemmodule->insertNewRec(NULL, submdl->ref, refHostif, "snk");
-
-			submdl->refWdbeMImbuf = dbswdbe->tblwdbemimbuf->insertNewRec(NULL, VecWdbeVMImbufRotype::MULTATMT, submdl->ref, "cntbuf" + StrMod::cap(mdl->sref) + "To" + StrMod::cap(srefHostif), wHostif, "0..1024", 2);
-			dbswdbe->tblwdbemmodule->updateRec(submdl);
-
-			delete submdl;
-		};
-
-		if (dbswdbe->tblwdbemmodule->loadRecBySQL("SELECT * FROM TblWdbeMModule WHERE supRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'fstoccbuf'", &submdl)) {
-			Wdbe::setMpa(dbswdbe, submdl->ref, "wB", to_string(wHostif));
-
-			dbswdbe->tblwdbermmodulemmodule->insertNewRec(NULL, submdl->ref, refHostif, "snk");
-
-			submdl->refWdbeMImbuf = dbswdbe->tblwdbemimbuf->insertNewRec(NULL, VecWdbeVMImbufRotype::MULTATMT, submdl->ref, "fstoccbuf" + StrMod::cap(mdl->sref) + "To" + StrMod::cap(srefHostif), wHostif, "0..1024", 2);
-			dbswdbe->tblwdbemmodule->updateRec(submdl);
-
-			delete submdl;
-		};
 
 		if (dbswdbe->tblwdbemmodule->loadRecBySQL("SELECT * FROM TblWdbeMModule WHERE supRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'seqbuf'", &submdl)) {
 			Wdbe::setMpa(dbswdbe, submdl->ref, "size", to_string(sizeSeqbuf));

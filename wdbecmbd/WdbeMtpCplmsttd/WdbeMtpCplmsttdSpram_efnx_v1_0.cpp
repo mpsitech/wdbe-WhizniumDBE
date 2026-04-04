@@ -83,7 +83,7 @@ DpchRetWdbe* WdbeMtpCplmsttdSpram_efnx_v1_0::run(
 			// - multiplexer process and signals
 			mdlNum = 1;
 
-			refPrcMux = dbswdbe->tblwdbemprocess->insertNewRec(NULL, mdl->ref, 0, "mux", "clk", "reset", false, "", false, "multiplexing");
+			refPrcMux = dbswdbe->tblwdbemprocess->insertNewRec(NULL, mdl->ref, 0, "mux", "clk", "reset", false, "", false, false, "multiplexing");
 
 			if (wA_int > wA) {
 				Onval = "\"";

@@ -50,25 +50,25 @@ DpchRetWdbe* WdbeWrdevUnt::run(
 
 	ubigint refHostif;
 	uint ixImbCmdinv, ixImbCmdret;
-	bool hasvecbuf, hasvecctr, hasveccmd, hasvecerr, hasspeccmd;
+	bool hasvecbuf, hasvecctr, hasvecfsm, hasveccmd, hasvecerr, hasspeccmd;
 
 	fstream outfile;
 
 	string s;
 
 	if (dbswdbe->tblwdbemunit->loadRecByRef(refWdbeMUnit, &unt)) {
-		Wdbe::analyzeUnt(dbswdbe, unt, srefroot, vecs, ctrs, imbs, cmds, errs, refHostif, ixImbCmdinv, ixImbCmdret, hasvecbuf, hasvecctr, hasveccmd, hasvecerr, hasspeccmd);
+		Wdbe::analyzeUnt(dbswdbe, unt, srefroot, vecs, ctrs, imbs, cmds, errs, refHostif, ixImbCmdinv, ixImbCmdret, hasvecbuf, hasvecctr, hasvecfsm, hasveccmd, hasvecerr, hasspeccmd);
 
 		// UntXxxxYyyy.h
 		s = xchg->tmppath + "/" + folder + "/" + unt->Fullsref + ".h.ip";
 		outfile.open(s.c_str(), ios::out);
-		writeUntH(dbswdbe, outfile, Easy, unt, srefroot, ctrs, imbs, cmds, errs, refHostif, ixImbCmdinv, ixImbCmdret, hasvecbuf, hasvecctr, hasveccmd, hasvecerr, hasspeccmd);
+		writeUntH(dbswdbe, outfile, Easy, unt, srefroot, ctrs, imbs, cmds, errs, refHostif, ixImbCmdinv, ixImbCmdret, hasvecbuf, hasvecctr, hasvecfsm, hasveccmd, hasvecerr, hasspeccmd);
 		outfile.close();
 
 		// UntXxxxYyyy.cpp
 		s = xchg->tmppath + "/" + folder + "/" + unt->Fullsref + ".cpp.ip";
 		outfile.open(s.c_str(), ios::out);
-		writeUntCpp(dbswdbe, outfile, Easy, unt, srefroot, ctrs, imbs, cmds, errs, refHostif, ixImbCmdinv, ixImbCmdret, hasvecbuf, hasvecctr, hasveccmd, hasvecerr);
+		writeUntCpp(dbswdbe, outfile, Easy, unt, srefroot, vecs, ctrs, imbs, cmds, errs, refHostif, ixImbCmdinv, ixImbCmdret, hasvecbuf, hasvecctr, hasvecfsm, hasveccmd, hasvecerr);
 		outfile.close();
 
 		// UntXxxxYyyy_vecs.h
@@ -106,6 +106,7 @@ void WdbeWrdevUnt::writeUntH(
 			, const uint ixImbCmdret
 			, const bool hasvecbuf
 			, const bool hasvecctr
+			, const bool hasvecfsm
 			, const bool hasveccmd
 			, const bool hasvecerr
 			, const bool hasspeccmd
@@ -222,6 +223,10 @@ void WdbeWrdevUnt::writeUntH(
 		else outfile << "// IP ufpgetNewErr --- REMOVE" << endl;
 	};
 
+	// --- vecfsm*
+	if (hasvecfsm) outfile << "// IP vecfsm --- AFFIRM" << endl;
+	else outfile << "// IP vecfsm --- REMOVE" << endl;
+
 	// --- bufxfs
 	outfile << "// IP bufxfs --- IBEGIN" << endl;
 	for (unsigned int i = 0; i < imbs.nodes.size(); i++) {
@@ -237,11 +242,11 @@ void WdbeWrdevUnt::writeUntH(
 			outfile << ");" << endl;
 
 			if (mgmtToNotFrom) {
-				outfile << "\tvoid write" << srefrootCor << "(const unsigned char* data, const size_t datalen";
+				outfile << "\tint write" << srefrootCor << "(const unsigned char* data, const size_t datalen";
 				if (Easy) outfile << ", const bool copy";
-				outfile << ");" << endl;
+				outfile << ", Dbecore::Reseval* reseval = NULL);" << endl;
 			} else {
-				outfile << "\tvoid read" << srefrootCor << "(const size_t reqlen, unsigned char*& data, size_t& datalen);" << endl;
+				outfile << "\tint read" << srefrootCor << "(const size_t reqlen, unsigned char*& data, size_t& datalen, Dbecore::Reseval* reseval = NULL);" << endl;
 			};
 			outfile << endl;
 		};
@@ -277,6 +282,7 @@ void WdbeWrdevUnt::writeUntCpp(
 			, const bool Easy
 			, WdbeMUnit* unt
 			, const string& srefroot
+			, ListWdbeMVector& vecs
 			, ListWdbeMController& ctrs
 			, ListWdbeMImbuf& imbs
 			, ListWdbeMCommand& cmds
@@ -286,9 +292,12 @@ void WdbeWrdevUnt::writeUntCpp(
 			, const uint ixImbCmdret
 			, const bool hasvecbuf
 			, const bool hasvecctr
+			, const bool hasvecfsm
 			, const bool hasveccmd
 			, const bool hasvecerr
 		) {
+	WdbeMVector* vec = NULL;
+
 	WdbeMController* ctr = NULL;
 
 	WdbeMImbuf* imb = NULL;
@@ -563,6 +572,39 @@ void WdbeWrdevUnt::writeUntCpp(
 		};
 	};
 
+	// --- vecfsm*
+	if (hasvecfsm) outfile << "// IP vecfsm --- AFFIRM" << endl;
+	else outfile << "// IP vecfsm --- REMOVE" << endl;
+
+	if (hasvecfsm) {
+		// --- getGetSrefFsmstate
+		outfile << "// IP getGetSrefFsmstate --- IBEGIN" << endl;
+		for (unsigned int i = 0; i < vecs.nodes.size(); i++) {
+			vec = vecs.nodes[i];
+
+			if (vec->hkIxVTbl == VecWdbeVMVectorHkTbl::FSM) outfile << "\tif (s == \"" << StrMod::lc(vec->sref.substr(3+1+srefroot.length())) << "\") return " << vec->sref << "::getSref;" << endl;
+		};
+		outfile << "// IP getGetSrefFsmstate --- IEND" << endl;
+
+		// --- fillFeedFFsmstate
+		outfile << "// IP fillFeedFFsmstate --- IBEGIN" << endl;
+		first = true;
+		for (unsigned int i = 0; i < vecs.nodes.size(); i++) {
+			vec = vecs.nodes[i];
+
+			if (vec->hkIxVTbl == VecWdbeVMVectorHkTbl::FSM) {
+				outfile << "\t";
+
+				if (first) first = false;
+				else outfile << "else ";
+
+				outfile << "if (s == \"" << StrMod::lc(vec->sref.substr(3+1+srefroot.length())) << "\") " << vec->sref << "::fillFeed(feed);" << endl;
+			};
+		};
+		outfile << "// IP fillFeedFFsmstate --- IEND" << endl;
+	};
+	// IP getGetSrefFsmstate --- INSERT
+
 	// --- bufxfs
 	outfile << "// IP bufxfs --- IBEGIN" << endl;
 
@@ -594,13 +636,17 @@ void WdbeWrdevUnt::writeUntCpp(
 
 			if (mgmtToNotFrom) {
 				// -- writeTo...
-				outfile << "void " << unt->Fullsref << "::write" << srefrootCor << "(" << endl;
+				outfile << "int " << unt->Fullsref << "::write" << srefrootCor << "(" << endl;
 				outfile << "\t\t\tconst unsigned char* data" << endl;
 				outfile << "\t\t\t, const size_t datalen" << endl;
 				if (Easy) outfile << "\t\t\t, const bool copy" << endl;
+				outfile << "\t\t\t, Reseval* reseval" << endl;
 				outfile << "\t\t) {" << endl;
 
 				if (Easy) {
+					outfile << "\tint res;" << endl;
+					outfile << endl;
+
 					outfile << "\tBufxf* bufxf;" << endl;
 					outfile << endl;
 
@@ -610,16 +656,21 @@ void WdbeWrdevUnt::writeUntCpp(
 					outfile << "\t} else bufxf = getNewBufxf" << srefrootCor << "(datalen, (unsigned char*) data);" << endl;
 					outfile << endl;
 
-					outfile << "\tif (!runBufxf(bufxf)) {" << endl;
+					outfile << "\ttry {" << endl;
+					outfile << "\t\tres = runBufxf(bufxf, reseval);" << endl;
+					outfile << "\t} catch (const DbeException& e) {" << endl;
 					outfile << "\t\tdelete bufxf;" << endl;
-					outfile << "\t\tthrow DbeException(\"error running write" << srefrootCor << "\");" << endl;
+					outfile << "\t\tthrow;" << endl;
 					outfile << "\t};" << endl;
 					outfile << endl;
 
 					outfile << "\tdelete bufxf;" << endl;
+					outfile << endl;
+
+					outfile << "\treturn res;" << endl;
 
 				} else {
-					outfile << "\tstring msg;" << endl;
+					outfile << "\tint res;" << endl;
 					outfile << endl;
 
 					outfile << "\tBufxf* bufxf = getNewBufxf" << srefrootCor << "(datalen);" << endl;
@@ -632,16 +683,18 @@ void WdbeWrdevUnt::writeUntCpp(
 					outfile << "\tbufxf->setWriteData(data, datalen);" << endl;
 					outfile << endl;
 
-					outfile << "\txchg->runBufxf(bufxf);" << endl;
-					outfile << endl;
-
-					outfile << "\tif (!bufxf->success) msg = \"error writing data to buffer " << sref << "\";" << endl;
+					outfile << "\ttry {" << endl;
+					outfile << "\t\tres = runBufxf(bufxf, reseval);" << endl;
+					outfile << "\t} catch (const DbeException& e) {" << endl;
+					outfile << "\t\tdelete bufxf;" << endl;
+					outfile << "\t\tthrow;" << endl;
+					outfile << "\t};" << endl;
 					outfile << endl;
 
 					outfile << "\tdelete bufxf;" << endl;
 					outfile << endl;
 
-					outfile << "\tif (msg != \"\") throw(DbeException(msg));" << endl;
+					outfile << "\treturn res;" << endl;
 				};
 
 				outfile << "};" << endl;
@@ -649,34 +702,45 @@ void WdbeWrdevUnt::writeUntCpp(
 
 			} else {
 				// -- readFrom...
-				outfile << "void " << unt->Fullsref << "::read" << srefrootCor << "(" << endl;
+				outfile << "int " << unt->Fullsref << "::read" << srefrootCor << "(" << endl;
 				outfile << "\t\t\tconst size_t reqlen" << endl;
 				outfile << "\t\t\t, unsigned char*& data" << endl;
 				outfile << "\t\t\t, size_t& datalen" << endl;
+				outfile << "\t\t\t, Reseval* reseval" << endl;
 				outfile << "\t\t) {" << endl;
 
 				if (Easy) {
+					outfile << "\tint res;" << endl;
+					outfile << endl;
+
 					outfile << "\tBufxf* bufxf = getNewBufxf" << srefrootCor << "(reqlen, data);" << endl;
 					outfile << endl;
 
-					outfile << "\tif (runBufxf(bufxf)) {" << endl;
-					outfile << "\t\tif (!data) data = bufxf->getReadData();" << endl;
-					outfile << "\t\tdatalen = bufxf->getReadDatalen();" << endl;
+					outfile << "\ttry {" << endl;
+					outfile << "\t\tres = runBufxf(bufxf, reseval);" << endl;
 					outfile << endl;
 
-					outfile << "\t} else {" << endl;
-					outfile << "\t\tdatalen = 0;" << endl;
+					outfile << "\t\tif (res == 0) {" << endl;
+					outfile << "\t\t\tif (!data) data = bufxf->getReadData();" << endl;
+					outfile << "\t\t\tdatalen = bufxf->getReadDatalen();" << endl;
+					outfile << "\t\t} else {" << endl;
+					outfile << "\t\t\tdatalen = 0;" << endl;
+					outfile << "\t\t};" << endl;
 					outfile << endl;
-	
+
+					outfile << "\t} catch (const DbeException& e) {" << endl;
 					outfile << "\t\tdelete bufxf;" << endl;
-					outfile << "\t\tthrow DbeException(\"error running read" << srefrootCor << "\");" << endl;
+					outfile << "\t\tthrow;" << endl;
 					outfile << "\t};" << endl;
 					outfile << endl;
 
 					outfile << "\tdelete bufxf;" << endl;
+					outfile << endl;
+
+					outfile << "\treturn res;" << endl;
 
 				} else {
-					outfile << "\tstring msg;" << endl;
+					outfile << "\tint res;" << endl;
 					outfile << endl;
 
 					outfile << "\tBufxf* bufxf = getNewBufxf" << srefrootCor << "(reqlen);" << endl;
@@ -686,21 +750,28 @@ void WdbeWrdevUnt::writeUntCpp(
 					outfile << "\tbufxf->uref = uref;" << endl;
 					outfile << endl;
 
-					outfile << "\txchg->runBufxf(bufxf);" << endl;
+					outfile << "\ttry {" << endl;
+					outfile << "\t\tres = runBufxf(bufxf, reseval);" << endl;
 					outfile << endl;
 
-					outfile << "\tif (bufxf->success) {" << endl;
-					outfile << "\t\tdata = bufxf->getReadData();" << endl;
-					outfile << "\t\tdatalen = bufxf->getReadDatalen();" << endl;
-					outfile << "\t} else {" << endl;
-					outfile << "\t\tmsg = \"error reading data from buffer " << sref << "\";" << endl;
+					outfile << "\t\tif (res == 0) {" << endl;
+					outfile << "\t\t\tif (!data) data = bufxf->getReadData();" << endl;
+					outfile << "\t\t\tdatalen = bufxf->getReadDatalen();" << endl;
+					outfile << "\t\t} else {" << endl;
+					outfile << "\t\t\tdatalen = 0;" << endl;
+					outfile << "\t\t};" << endl;
+					outfile << endl;
+
+					outfile << "\t} catch (const DbeException& e) {" << endl;
+					outfile << "\t\tdelete bufxf;" << endl;
+					outfile << "\t\tthrow;" << endl;
 					outfile << "\t};" << endl;
 					outfile << endl;
 
 					outfile << "\tdelete bufxf;" << endl;
 					outfile << endl;
 
-					outfile << "\tif (msg != \"\") throw(DbeException(msg));" << endl;
+					outfile << "\treturn res;" << endl;
 				};
 
 				outfile << "};" << endl;

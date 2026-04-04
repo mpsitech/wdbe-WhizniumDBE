@@ -25,7 +25,7 @@
 class WdbeMFsmstate {
 
 public:
-	WdbeMFsmstate(const Sbecore::ubigint ref = 0, const Sbecore::ubigint refWdbeCFsmstate = 0, const Sbecore::ubigint fsmRefWdbeMFsm = 0, const Sbecore::uint fsmNum = 0, const std::string sref = "", const bool Extip = false, const std::string Comment = "");
+	WdbeMFsmstate(const Sbecore::ubigint ref = 0, const Sbecore::ubigint refWdbeCFsmstate = 0, const Sbecore::ubigint fsmRefWdbeMFsm = 0, const Sbecore::uint fsmNum = 0, const std::string sref = "", const bool Preip = false, const std::string Comment = "");
 
 public:
 	Sbecore::ubigint ref;
@@ -33,7 +33,7 @@ public:
 	Sbecore::ubigint fsmRefWdbeMFsm;
 	Sbecore::uint fsmNum;
 	std::string sref;
-	bool Extip;
+	bool Preip;
 	std::string Comment;
 
 public:
@@ -80,8 +80,8 @@ public:
 	virtual Sbecore::ubigint loadRstBySQL(const std::string& sqlstr, const bool append, ListWdbeMFsmstate& rst);
 
 	virtual Sbecore::ubigint insertRec(WdbeMFsmstate* rec);
-	Sbecore::ubigint insertNewRec(WdbeMFsmstate** rec = NULL, const Sbecore::ubigint refWdbeCFsmstate = 0, const Sbecore::ubigint fsmRefWdbeMFsm = 0, const Sbecore::uint fsmNum = 0, const std::string sref = "", const bool Extip = false, const std::string Comment = "");
-	Sbecore::ubigint appendNewRecToRst(ListWdbeMFsmstate& rst, WdbeMFsmstate** rec = NULL, const Sbecore::ubigint refWdbeCFsmstate = 0, const Sbecore::ubigint fsmRefWdbeMFsm = 0, const Sbecore::uint fsmNum = 0, const std::string sref = "", const bool Extip = false, const std::string Comment = "");
+	Sbecore::ubigint insertNewRec(WdbeMFsmstate** rec = NULL, const Sbecore::ubigint refWdbeCFsmstate = 0, const Sbecore::ubigint fsmRefWdbeMFsm = 0, const Sbecore::uint fsmNum = 0, const std::string sref = "", const bool Preip = false, const std::string Comment = "");
+	Sbecore::ubigint appendNewRecToRst(ListWdbeMFsmstate& rst, WdbeMFsmstate** rec = NULL, const Sbecore::ubigint refWdbeCFsmstate = 0, const Sbecore::ubigint fsmRefWdbeMFsm = 0, const Sbecore::uint fsmNum = 0, const std::string sref = "", const bool Preip = false, const std::string Comment = "");
 	virtual void insertRst(ListWdbeMFsmstate& rst, bool transact = false);
 	virtual void updateRec(WdbeMFsmstate* rec);
 	virtual void updateRst(ListWdbeMFsmstate& rst, bool transact = false);

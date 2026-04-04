@@ -150,7 +150,7 @@ void WdbeWrdevDeploy::writeMakefile(
 	outfile << "CPP = " << s << endl;
 
 	outfile << "CPPFLAGS =";
-	if (sysroot != "") outfile << " --sysroot=" << sysroot;
+	if (sysroot != "") outfile << " --sysroot=$(SYSROOT)";
 
 	if (Wdbe::getMchmkf(dbswdbe, rls->refWdbeMMachine, hrefsMch, "cppflags", s)) outfile << " " << s;
 	if (dynlib) outfile << " -fPIC";
@@ -170,7 +170,7 @@ void WdbeWrdevDeploy::writeMakefile(
 		outfile << "DYNLIB = " << s << endl;
 
 		outfile << "DYNLIBFLAGS =";
-		if (sysroot != "") outfile << " --sysroot=" << sysroot;
+		if (sysroot != "") outfile << " --sysroot=$(SYSROOT)";
 		if (Wdbe::getMchmkf(dbswdbe, rls->refWdbeMMachine, hrefsMch, "dynlibflags", s)) outfile << " " << s;
 		outfile << endl;
 
@@ -182,7 +182,7 @@ void WdbeWrdevDeploy::writeMakefile(
 	// --- incpath.libspec
 	outfile << "# IP incpath.libspec --- IBEGIN" << endl;
 	outfile << "INCPATH +=";
-	for (auto it = incpaths.begin(); it != incpaths.end(); it++) outfile << " -I" << inceq << (*it);
+	for (auto it = incpaths.begin(); it != incpaths.end(); it++) outfile << " -I" << Wdbe::getInclibeqstr(*it, inceq);
 	outfile << endl;
 	outfile << "# IP incpath.libspec --- IEND" << endl;
 

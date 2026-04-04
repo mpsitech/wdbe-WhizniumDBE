@@ -107,7 +107,7 @@ void WdbeWrtermDeploy::writeMakefile(
 	outfile << "CPP = " << s << endl;
 
 	outfile << "CPPFLAGS =";
-	if (sysroot != "") outfile << " --sysroot=" << sysroot;
+	if (sysroot != "") outfile << " --sysroot=$(SYSROOT)";
 
 	if (Wdbe::getMchmkf(dbswdbe, rls->refWdbeMMachine, hrefsMch, "cppflags", s)) outfile << " " << s;
 	for (auto it = cppflags.begin(); it != cppflags.end(); it++) outfile << " " << (*it);
@@ -118,7 +118,7 @@ void WdbeWrtermDeploy::writeMakefile(
 	outfile << "LINK = " << s << endl;
 
 	outfile << "LINKFLAGS =";
-	if (sysroot != "") outfile << " --sysroot=" << sysroot;
+	if (sysroot != "") outfile << " --sysroot=$(SYSROOT)";
 	if (Wdbe::getMchmkf(dbswdbe, rls->refWdbeMMachine, hrefsMch, "linkflags", s)) outfile << " " << s;
 	if (stripdbg) outfile << " -s";
 	for (auto it = linkflags.begin(); it != linkflags.end(); it++) outfile << " " << (*it);
@@ -128,7 +128,7 @@ void WdbeWrtermDeploy::writeMakefile(
 	// --- incpath.libspec
 	outfile << "# IP incpath.libspec --- IBEGIN" << endl;
 	outfile << "INCPATH +=";
-	for (auto it = incpaths.begin(); it != incpaths.end(); it++) outfile << " -I" << inclibeq << (*it);
+	for (auto it = incpaths.begin(); it != incpaths.end(); it++) outfile << " -I" << Wdbe::getInclibeqstr(*it, inclibeq);
 	outfile << endl;
 	outfile << "# IP incpath.libspec --- IEND" << endl;
 
@@ -140,7 +140,7 @@ void WdbeWrtermDeploy::writeMakefile(
 	// --- libpath.libspec
 	outfile << "# IP libpath.libspec --- IBEGIN" << endl;
 	outfile << "LIBPATH +=";
-	for (auto it = libpaths.begin(); it != libpaths.end(); it++) outfile << " -L" << inclibeq << (*it);
+	for (auto it = libpaths.begin(); it != libpaths.end(); it++) outfile << " -L" << Wdbe::getInclibeqstr(*it, inclibeq);
 	outfile << endl;
 	outfile << "# IP libpath.libspec --- IEND" << endl;
 

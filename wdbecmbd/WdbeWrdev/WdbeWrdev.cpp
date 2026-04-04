@@ -655,7 +655,7 @@ void WdbeWrdev::writeCmdH(
 	WdbeAMCommandRetpar* rpa = NULL;
 
 	if (Easy) {
-		outfile << "\tvoid " << cmd->sref << "(";
+		outfile << "\tint " << cmd->sref << "(";
 		for (unsigned int i = 0; i < ipas.nodes.size(); i++) {
 			ipa = ipas.nodes[i];
 			wrIparpa(outfile, ipa->sref, ipa->ixWdbeVPartype, (i == 0), false, false, true, false, false);
@@ -664,7 +664,8 @@ void WdbeWrdev::writeCmdH(
 			rpa = rpas.nodes[i];
 			wrIparpa(outfile, rpa->sref, rpa->ixWdbeVPartype, ((ipas.nodes.size() == 0) && (i == 0)), false, true, true, false, false);
 		};
-		outfile << ");" << endl;
+		if ((ipas.nodes.size() > 0) || (rpas.nodes.size() > 0)) outfile << ", ";
+		outfile << "Dbecore::Reseval* reseval = NULL);" << endl;
 
 	} else {
 		outfile << "\tstatic Cmd" << StrMod::cap(cmd->sref) << "* getNewCmd" << StrMod::cap(cmd->sref) << "(";
@@ -675,7 +676,7 @@ void WdbeWrdev::writeCmdH(
 		outfile << ");" << endl;
 
 		if ((cmd->ixVRettype == VecWdbeVMCommandRettype::VOID) || (cmd->ixVRettype == VecWdbeVMCommandRettype::STATSNG) || (cmd->ixVRettype == VecWdbeVMCommandRettype::IMMSNG)) {
-			outfile << "\tvoid " << cmd->sref << "(";
+			outfile << "\tint " << cmd->sref << "(";
 			for (unsigned int i = 0; i < ipas.nodes.size(); i++) {
 				ipa = ipas.nodes[i];
 				wrIparpa(outfile, ipa->sref, ipa->ixWdbeVPartype, (i == 0), false, false, true, false, false);
@@ -686,7 +687,7 @@ void WdbeWrdev::writeCmdH(
 			};
 			if ((ipas.nodes.size() > 0) || (rpas.nodes.size() > 0)) outfile << ", ";
 			outfile << "const unsigned int to = 0";
-			outfile << ");" << endl;
+			outfile << ", Dbecore::Reseval* reseval = NULL);" << endl;
 		};
 	};
 };
@@ -708,7 +709,7 @@ void WdbeWrdev::writeCmdCpp(
 	WdbeAMCommandRetpar* rpa = NULL;
 
 	if (Easy) {
-		outfile << "void " << supsref << "::" << cmd->sref << "(" << endl;
+		outfile << "int " << supsref << "::" << cmd->sref << "(" << endl;
 		for (unsigned int i = 0; i < ipas.nodes.size(); i++) {
 			ipa = ipas.nodes[i];
 			wrIparpa(outfile, ipa->sref, ipa->ixWdbeVPartype, (i == 0), true, false, false, false, false);
@@ -717,7 +718,12 @@ void WdbeWrdev::writeCmdCpp(
 			rpa = rpas.nodes[i];
 			wrIparpa(outfile, rpa->sref, rpa->ixWdbeVPartype, ((ipas.nodes.size() == 0) && (i == 0)), true, true, false, false, false);
 		};
+		outfile << "\t\t\t";
+		if ((ipas.nodes.size() != 0) || (rpas.nodes.size() != 0)) outfile << ", ";
+		outfile << "Reseval* reseval" << endl;
 		outfile << "\t\t) {" << endl;
+		outfile << "\tint res;" << endl;
+		outfile << endl;
 
 		outfile << "\tlockAccess(\"" << cmd->sref << "\");" << endl;
 		outfile << endl;
@@ -733,17 +739,31 @@ void WdbeWrdev::writeCmdCpp(
 			outfile << endl;
 		};
 
-		if (cmd->refIxVTbl == VecWdbeVMCommandRefTbl::UNT) outfile << "\tif (runCmd(cmd)) {" << endl;
-		else outfile << "\tif (this->unt->runCmd(cmd)) {" << endl;
-		for (unsigned int i = 0; i < rpas.nodes.size(); i++) {
-			rpa = rpas.nodes[i];
-			writeCmdCpp_getrpa(outfile, cmd, rpa);
+		outfile << "\ttry {" << endl;
+		if (cmd->refIxVTbl == VecWdbeVMCommandRefTbl::UNT) outfile << "\t\tres = runCmd(cmd, reseval);" << endl;
+		else outfile << "\t\tres = this->unt->runCmd(cmd, reseval);" << endl;
+		outfile << endl;
+
+		if (rpas.nodes.size() > 0) {
+			outfile << "\t\tif (res == 0) {" << endl;
+			for (unsigned int i = 0; i < rpas.nodes.size(); i++) {
+				rpa = rpas.nodes[i];
+				writeCmdCpp_getrpa(outfile, cmd, rpa);
+			};
+			outfile << "\t\t};" << endl;
+			outfile << endl;
 		};
-		outfile << "\t} else throw DbeException(\"error running " << cmd->sref << "\");" << endl;
+
+		outfile << "\t} catch (const DbeException& e) {" << endl;
+		outfile << "\t\tunlockAccess(\"" << cmd->sref << "\");" << endl;
+		outfile << "\t\tthrow;" << endl;
+		outfile << "\t};" << endl;
 		outfile << endl;
 
 		outfile << "\tunlockAccess(\"" << cmd->sref << "\");" << endl;
+		outfile << endl;
 
+		outfile << "\treturn res;" << endl;
 		outfile << "};" << endl;
 		outfile << endl;
 
@@ -801,7 +821,7 @@ void WdbeWrdev::writeCmdCpp(
 		outfile << endl;
 
 		if ((cmd->ixVRettype == VecWdbeVMCommandRettype::VOID) || (cmd->ixVRettype == VecWdbeVMCommandRettype::STATSNG) || (cmd->ixVRettype == VecWdbeVMCommandRettype::IMMSNG)) {
-			outfile << "void " << supsref << "::" << cmd->sref << "(" << endl;
+			outfile << "int " << supsref << "::" << cmd->sref << "(" << endl;
 			for (unsigned int i = 0; i < ipas.nodes.size(); i++) {
 				ipa = ipas.nodes[i];
 				wrIparpa(outfile, ipa->sref, ipa->ixWdbeVPartype, (i == 0), true, false, false, false, false);
@@ -813,9 +833,9 @@ void WdbeWrdev::writeCmdCpp(
 			outfile << "\t\t\t";
 			if ((ipas.nodes.size() != 0) || (rpas.nodes.size() != 0)) outfile << ", ";
 			outfile << "const unsigned int to" << endl;
+			outfile << "\t\t\t, Reseval* reseval" << endl;
 			outfile << "\t\t) {" << endl;
-
-			outfile << "\tstring msg;" << endl;
+			outfile << "\tint res;" << endl;
 			outfile << endl;
 
 			outfile << "\tCmd* cmd = getNewCmd" << StrMod::cap(cmd->sref) << "(";
@@ -833,26 +853,35 @@ void WdbeWrdev::writeCmdCpp(
 			outfile << "\tcmd->uref = uref;" << endl;
 			outfile << endl;
 
-			outfile << "\txchg->runCmd(cmd, to);" << endl;
+			outfile << "\ttry {" << endl;
+			outfile << "\t\tres = xchg->runCmd(cmd, to, reseval);" << endl;
 			outfile << endl;
 
-			outfile << "\tif (cmd->err.tixDbeVAction != 0x00) msg = cmd->err.getMessage(\"" << srefCtr << "\", \"" << cmd->sref << "\", cmd->cref";
-			if (hasvecerr) outfile << ", VecVError::getSref(cmd->err.tixVError), VecVError::getTitle(cmd->err.tixVError)";
-			else outfile << ", \"\", \"\"";
-			outfile << ", true, true);" << endl;
+			//outfile << "\tif (cmd->err.tixDbeVAction != 0x00) msg = cmd->err.getMessage(\"" << srefCtr << "\", \"" << cmd->sref << "\", cmd->cref";
+			//if (hasvecerr) outfile << ", VecVError::getSref(cmd->err.tixVError), VecVError::getTitle(cmd->err.tixVError)";
+			//else outfile << ", \"\", \"\"";
+			//outfile << ", true, true);" << endl;
+
 			if (rpas.nodes.size() > 0) {
-				outfile << "\telse {" << endl;
+				outfile << "\t\tif (res == 0) {" << endl;
 				for (unsigned int i = 0; i < rpas.nodes.size(); i++) {
 					rpa = rpas.nodes[i];
 					writeCmdCpp_getrpa(outfile, cmd, rpa);
 				};
-				outfile << "\t};" << endl;
+				outfile << "\t\t};" << endl;
+				outfile << endl;
 			};
+
+			outfile << "\t} catch (const DbeException& e) {" << endl;
+			outfile << "\t\tdelete cmd;" << endl;
+			outfile << "\t\tthrow;" << endl;
+			outfile << "\t};" << endl;
+			outfile << endl;
 
 			outfile << "\tdelete cmd;" << endl;
 			outfile << endl;
 
-			outfile << "\tif (msg != \"\") throw(DbeException(msg));" << endl;
+			outfile << "\treturn res;" << endl;
 			outfile << "};" << endl;
 			outfile << endl;
 		};
@@ -879,20 +908,17 @@ void WdbeWrdev::writeCmdCpp_getrpa(
 			, WdbeMCommand* cmd
 			, WdbeAMCommandRetpar* rpa
 		) {
-	if (rpa->ixWdbeVPartype == VecWdbeVPartype::BLOB) {
-		outfile << "\t\t" << rpa->sref << "len = " << to_string(rpa->Length) << ";" << endl;
-	} else if (rpa->ixWdbeVPartype == VecWdbeVPartype::VBLOB) {
-		outfile << "\t\t" << rpa->sref << "len = Par::getVblobLen(cmd->parbufRet, Cmd" << StrMod::cap(cmd->sref) << "::VecVRetpar::" << StrMod::uc(rpa->sref) << ");" << endl;
-	};
-
-	outfile << "\t\t" << rpa->sref << " = Par::get";
+	outfile << "\t\t\t" << rpa->sref;
+	if ((rpa->ixWdbeVPartype == VecWdbeVPartype::BLOB) || (rpa->ixWdbeVPartype == VecWdbeVPartype::VBLOB)) outfile << "len";
+	outfile << " = Par::get";
 	if (rpa->ixWdbeVPartype == VecWdbeVPartype::_BOOL) outfile << "Bool";
 	else {
 		// TIX, [U]INT{8/16/32}, [V]BLOB
 		outfile << StrMod::cap(VecWdbeVPartype::getSref(rpa->ixWdbeVPartype));
 	};
 	outfile << "(cmd->parbufRet, Cmd" << StrMod::cap(cmd->sref) << "::VecVRetpar::" << StrMod::uc(rpa->sref);
-	if ((rpa->ixWdbeVPartype == VecWdbeVPartype::BLOB) || (rpa->ixWdbeVPartype == VecWdbeVPartype::VBLOB)) outfile << ", " << rpa->sref << "len";
+	if (rpa->ixWdbeVPartype == VecWdbeVPartype::BLOB) outfile << ", " << to_string(rpa->Length);
+	if ((rpa->ixWdbeVPartype == VecWdbeVPartype::BLOB) || (rpa->ixWdbeVPartype == VecWdbeVPartype::VBLOB)) outfile << ", " << rpa->sref << ", " << rpa->sref << "len";
 	outfile << ");" << endl;
 };
 
@@ -1004,7 +1030,7 @@ void WdbeWrdev::wrIparpa(
 		outfile << VecWdbeVPartype::getSref(ixWdbeVPartype) << "_t";
 	};
 
-	if (refNotConst) outfile << "&";
+	if (refNotConst) if (! (((ixWdbeVPartype == VecWdbeVPartype::BLOB) || (ixWdbeVPartype == VecWdbeVPartype::VBLOB)) && !len) )  outfile << "&";
 
 	outfile << " " << sref;
 	if (((ixWdbeVPartype == VecWdbeVPartype::BLOB) || (ixWdbeVPartype == VecWdbeVPartype::VBLOB)) && len) outfile << "len";

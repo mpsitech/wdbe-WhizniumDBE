@@ -59,19 +59,21 @@ public:
 		static const Sbecore::uint TXFASR = 2;
 		static const Sbecore::uint CHKFAL = 3;
 		static const Sbecore::uint TXFSNR = 4;
-		static const Sbecore::uint CHKEIP = 5;
-		static const Sbecore::uint TXFCMT = 6;
-		static const Sbecore::uint NUMFPUPFSMDTT = 7;
+		static const Sbecore::uint CHKPRI = 5;
+		static const Sbecore::uint CHKPOI = 6;
+		static const Sbecore::uint TXFCMT = 7;
+		static const Sbecore::uint NUMFPUPFSMDTT = 8;
 
 	public:
-		ContIac(const std::string& TxfClk = "", const std::string& TxfAsr = "", const bool ChkFal = false, const std::string& TxfSnr = "", const bool ChkEip = false, const std::string& TxfCmt = "", const Sbecore::uint numFPupFsmDtt = 1);
+		ContIac(const std::string& TxfClk = "", const std::string& TxfAsr = "", const bool ChkFal = false, const std::string& TxfSnr = "", const bool ChkPri = false, const bool ChkPoi = false, const std::string& TxfCmt = "", const Sbecore::uint numFPupFsmDtt = 1);
 
 	public:
 		std::string TxfClk;
 		std::string TxfAsr;
 		bool ChkFal;
 		std::string TxfSnr;
-		bool ChkEip;
+		bool ChkPri;
+		bool ChkPoi;
 		std::string TxfCmt;
 		Sbecore::uint numFPupFsmDtt;
 
@@ -141,15 +143,16 @@ public:
 		static const Sbecore::uint BUTASRVIEWAVAIL = 12;
 		static const Sbecore::uint CHKFALACTIVE = 13;
 		static const Sbecore::uint TXFSNRACTIVE = 14;
-		static const Sbecore::uint CHKEIPACTIVE = 15;
-		static const Sbecore::uint TXFCMTACTIVE = 16;
-		static const Sbecore::uint BUTFSMNEWAVAIL = 17;
-		static const Sbecore::uint BUTFSMDELETEAVAIL = 18;
-		static const Sbecore::uint PUPFSMDTTAVAIL = 19;
-		static const Sbecore::uint PUPFSMDTTACTIVE = 20;
+		static const Sbecore::uint CHKPRIACTIVE = 15;
+		static const Sbecore::uint CHKPOIACTIVE = 16;
+		static const Sbecore::uint TXFCMTACTIVE = 17;
+		static const Sbecore::uint BUTFSMNEWAVAIL = 18;
+		static const Sbecore::uint BUTFSMDELETEAVAIL = 19;
+		static const Sbecore::uint PUPFSMDTTAVAIL = 20;
+		static const Sbecore::uint PUPFSMDTTACTIVE = 21;
 
 	public:
-		StatShr(const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxtSrfActive = true, const bool TxtMdlActive = true, const bool ButMdlViewAvail = true, const bool ButMdlViewActive = true, const bool TxtClkActive = true, const bool TxfClkValid = false, const bool ButClkViewAvail = true, const bool TxtAsrActive = true, const bool TxfAsrValid = false, const bool ButAsrViewAvail = true, const bool ChkFalActive = true, const bool TxfSnrActive = true, const bool ChkEipActive = true, const bool TxfCmtActive = true, const bool ButFsmNewAvail = true, const bool ButFsmDeleteAvail = true, const bool PupFsmDttAvail = true, const bool PupFsmDttActive = true);
+		StatShr(const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxtSrfActive = true, const bool TxtMdlActive = true, const bool ButMdlViewAvail = true, const bool ButMdlViewActive = true, const bool TxtClkActive = true, const bool TxfClkValid = false, const bool ButClkViewAvail = true, const bool TxtAsrActive = true, const bool TxfAsrValid = false, const bool ButAsrViewAvail = true, const bool ChkFalActive = true, const bool TxfSnrActive = true, const bool ChkPriActive = true, const bool ChkPoiActive = true, const bool TxfCmtActive = true, const bool ButFsmNewAvail = true, const bool ButFsmDeleteAvail = true, const bool PupFsmDttAvail = true, const bool PupFsmDttActive = true);
 
 	public:
 		bool ButSaveAvail;
@@ -166,7 +169,8 @@ public:
 		bool ButAsrViewAvail;
 		bool ChkFalActive;
 		bool TxfSnrActive;
-		bool ChkEipActive;
+		bool ChkPriActive;
+		bool ChkPoiActive;
 		bool TxfCmtActive;
 		bool ButFsmNewAvail;
 		bool ButFsmDeleteAvail;
@@ -278,7 +282,8 @@ public:
 	bool evalButAsrViewAvail(DbsWdbe* dbswdbe);
 	bool evalChkFalActive(DbsWdbe* dbswdbe);
 	bool evalTxfSnrActive(DbsWdbe* dbswdbe);
-	bool evalChkEipActive(DbsWdbe* dbswdbe);
+	bool evalChkPriActive(DbsWdbe* dbswdbe);
+	bool evalChkPoiActive(DbsWdbe* dbswdbe);
 	bool evalTxfCmtActive(DbsWdbe* dbswdbe);
 	bool evalButFsmNewAvail(DbsWdbe* dbswdbe);
 	bool evalButFsmDeleteAvail(DbsWdbe* dbswdbe);

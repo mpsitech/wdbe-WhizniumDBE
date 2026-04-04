@@ -40,7 +40,7 @@ DpchRetWdbe* WdbeMtpGenfstTkclksrc_Easy_v1_0::run(
 
 	WdbeMProcess* prc = NULL;
 
-	dbswdbe->tblwdbemprocess->insertNewRec(&prc, refWdbeMModule, 0, "op", "mclk", "reset", false, "state(init) or (!state(inv) and reqInvSetTkst)", false, "main operation");
+	dbswdbe->tblwdbemprocess->insertNewRec(&prc, refWdbeMModule, 0, "op", "mclk", "reset", false, "state(init) or (!state(inv) and reqInvSetTkst)", false, false, "main operation");
 
 	prc->refWdbeMFsm = dbswdbe->tblwdbemfsm->insertNewRec(NULL, prc->ref, VecWdbeVMFsmDbgtaptype::CLUST);
 	dbswdbe->tblwdbemprocess->updateRec(prc);

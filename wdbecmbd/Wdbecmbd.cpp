@@ -1107,7 +1107,7 @@ DpchEngWdbeAlert* AlrWdbe::prepareAlrAbt(
 	continf.TxtCpt = StrMod::cap(continf.TxtCpt);
 
 	if (ixWdbeVLocale == VecWdbeVLocale::ENUS) {
-		continf.TxtMsg1 = "WhizniumDBE version v1.1.50 released on 23-11-2025";
+		continf.TxtMsg1 = "WhizniumDBE version v1.1.51 released on 1-2-2026";
 		continf.TxtMsg2 = "\\u00a9 MPSI Technologies GmbH";
 		continf.TxtMsg4 = "contributors: Alexander Wirthmueller";
 		continf.TxtMsg6 = "libraries: apiwzlm 1.0.0, curl 7.65, git2 0.24.0, jsoncpp 1.8.4 and openssl 1.1.1";
@@ -2334,7 +2334,7 @@ void XchgWdbecmbd::startMon() {
 	Clstn* clstn = NULL;
 	Preset* preset = NULL;
 
-	mon.start("WhizniumDBE v1.1.50", stgwdbemonitor.ixDbsVDbstype, stgwdbemonitor.dbspath, stgwdbemonitor.dbsname, stgwdbemonitor.ip, stgwdbemonitor.port, stgwdbemonitor.dbsusername, stgwdbemonitor.dbspassword, stgwdbemonitor.username, stgwdbemonitor.password);
+	mon.start("WhizniumDBE v1.1.51", stgwdbemonitor.ixDbsVDbstype, stgwdbemonitor.dbspath, stgwdbemonitor.dbsname, stgwdbemonitor.ip, stgwdbemonitor.port, stgwdbemonitor.dbsusername, stgwdbemonitor.dbspassword, stgwdbemonitor.username, stgwdbemonitor.password, MtMon::t0);
 
 	rwmJobs.rlock("XchgWdbecmbd", "startMon");
 	for (auto it = jobs.begin(); it != jobs.end(); it++) {
@@ -2379,6 +2379,14 @@ void XchgWdbecmbd::stopMon() {
 	mon.stop();
 
 	triggerCall(NULL, VecWdbeVCall::CALLWDBEMONSTATCHG, jrefRoot);
+};
+
+void XchgWdbecmbd::startMtmon() {
+	MtMon::start("WhizniumDBE v1.1.51", MtMon::VecVLevel::ALL, stgwdbepath.monpath, mon.t0);
+};
+
+void XchgWdbecmbd::stopMtmon() {
+	MtMon::stop();
 };
 
 void XchgWdbecmbd::appendToLogfile(

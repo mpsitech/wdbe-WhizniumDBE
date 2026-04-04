@@ -55,15 +55,15 @@ public:
 
 	public:
 		static const Sbecore::uint NUMFLSTCLU = 1;
-		static const Sbecore::uint CHKEIP = 2;
+		static const Sbecore::uint CHKPRI = 2;
 		static const Sbecore::uint TXFCMT = 3;
 
 	public:
-		ContIac(const Sbecore::uint numFLstClu = 1, const bool ChkEip = false, const std::string& TxfCmt = "");
+		ContIac(const Sbecore::uint numFLstClu = 1, const bool ChkPri = false, const std::string& TxfCmt = "");
 
 	public:
 		Sbecore::uint numFLstClu;
-		bool ChkEip;
+		bool ChkPri;
 		std::string TxfCmt;
 
 	public:
@@ -126,11 +126,11 @@ public:
 		static const Sbecore::uint TXTFSMACTIVE = 8;
 		static const Sbecore::uint BUTFSMVIEWAVAIL = 9;
 		static const Sbecore::uint BUTFSMVIEWACTIVE = 10;
-		static const Sbecore::uint CHKEIPACTIVE = 11;
+		static const Sbecore::uint CHKPRIACTIVE = 11;
 		static const Sbecore::uint TXFCMTACTIVE = 12;
 
 	public:
-		StatShr(const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxtSrfActive = true, const bool LstCluActive = true, const bool ButCluViewActive = true, const bool ButCluClusterAvail = true, const bool ButCluUnclusterAvail = true, const bool TxtFsmActive = true, const bool ButFsmViewAvail = true, const bool ButFsmViewActive = true, const bool ChkEipActive = true, const bool TxfCmtActive = true);
+		StatShr(const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxtSrfActive = true, const bool LstCluActive = true, const bool ButCluViewActive = true, const bool ButCluClusterAvail = true, const bool ButCluUnclusterAvail = true, const bool TxtFsmActive = true, const bool ButFsmViewAvail = true, const bool ButFsmViewActive = true, const bool ChkPriActive = true, const bool TxfCmtActive = true);
 
 	public:
 		bool ButSaveAvail;
@@ -143,7 +143,7 @@ public:
 		bool TxtFsmActive;
 		bool ButFsmViewAvail;
 		bool ButFsmViewActive;
-		bool ChkEipActive;
+		bool ChkPriActive;
 		bool TxfCmtActive;
 
 	public:
@@ -249,7 +249,7 @@ public:
 	bool evalTxtFsmActive(DbsWdbe* dbswdbe);
 	bool evalButFsmViewAvail(DbsWdbe* dbswdbe);
 	bool evalButFsmViewActive(DbsWdbe* dbswdbe);
-	bool evalChkEipActive(DbsWdbe* dbswdbe);
+	bool evalChkPriActive(DbsWdbe* dbswdbe);
 	bool evalTxfCmtActive(DbsWdbe* dbswdbe);
 
 public:

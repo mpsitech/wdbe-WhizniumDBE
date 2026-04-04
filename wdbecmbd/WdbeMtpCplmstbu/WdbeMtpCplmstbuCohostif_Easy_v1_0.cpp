@@ -54,7 +54,7 @@ DpchRetWdbe* WdbeMtpCplmstbuCohostif_Easy_v1_0::run(
 
 	mdlNum = 1;
 
-	refPrcOp = dbswdbe->tblwdbemprocess->insertNewRec(NULL, refWdbeMModule, 0, "op", "mclk", "reset", true, "", false, "main operation");
+	refPrcOp = dbswdbe->tblwdbemprocess->insertNewRec(NULL, refWdbeMModule, 0, "op", "mclk", "reset", true, "", false, false, "main operation");
 
 	// - AXI
 	if (dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMModule WHERE supRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'axi'", ref)) {

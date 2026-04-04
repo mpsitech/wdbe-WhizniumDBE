@@ -47,15 +47,15 @@ string PnlWdbeFstDetail::VecVDo::getSref(
 
 PnlWdbeFstDetail::ContIac::ContIac(
 			const uint numFLstClu
-			, const bool ChkEip
+			, const bool ChkPri
 			, const string& TxfCmt
 		) :
 			Block()
 			, numFLstClu(numFLstClu)
-			, ChkEip(ChkEip)
+			, ChkPri(ChkPri)
 			, TxfCmt(TxfCmt)
 		{
-	mask = {NUMFLSTCLU, CHKEIP, TXFCMT};
+	mask = {NUMFLSTCLU, CHKPRI, TXFCMT};
 };
 
 bool PnlWdbeFstDetail::ContIac::readJSON(
@@ -72,7 +72,7 @@ bool PnlWdbeFstDetail::ContIac::readJSON(
 
 	if (basefound) {
 		if (me.isMember("numFLstClu")) {numFLstClu = me["numFLstClu"].asUInt(); add(NUMFLSTCLU);};
-		if (me.isMember("ChkEip")) {ChkEip = me["ChkEip"].asBool(); add(CHKEIP);};
+		if (me.isMember("ChkPri")) {ChkPri = me["ChkPri"].asBool(); add(CHKPRI);};
 		if (me.isMember("TxfCmt")) {TxfCmt = me["TxfCmt"].asString(); add(TXFCMT);};
 	};
 
@@ -97,7 +97,7 @@ bool PnlWdbeFstDetail::ContIac::readXML(
 
 	if (basefound) {
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "numFLstClu", numFLstClu)) add(NUMFLSTCLU);
-		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "ChkEip", ChkEip)) add(CHKEIP);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "ChkPri", ChkPri)) add(CHKPRI);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "TxfCmt", TxfCmt)) add(TXFCMT);
 	};
 
@@ -113,7 +113,7 @@ void PnlWdbeFstDetail::ContIac::writeJSON(
 	Json::Value& me = sup[difftag] = Json::Value(Json::objectValue);
 
 	me["numFLstClu"] = (Json::Value::UInt) numFLstClu;
-	me["ChkEip"] = ChkEip;
+	me["ChkPri"] = ChkPri;
 	me["TxfCmt"] = TxfCmt;
 };
 
@@ -130,7 +130,7 @@ void PnlWdbeFstDetail::ContIac::writeXML(
 
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
 		writeUintAttr(wr, itemtag, "sref", "numFLstClu", numFLstClu);
-		writeBoolAttr(wr, itemtag, "sref", "ChkEip", ChkEip);
+		writeBoolAttr(wr, itemtag, "sref", "ChkPri", ChkPri);
 		writeStringAttr(wr, itemtag, "sref", "TxfCmt", TxfCmt);
 	xmlTextWriterEndElement(wr);
 };
@@ -141,7 +141,7 @@ set<uint> PnlWdbeFstDetail::ContIac::comm(
 	set<uint> items;
 
 	if (numFLstClu == comp->numFLstClu) insert(items, NUMFLSTCLU);
-	if (ChkEip == comp->ChkEip) insert(items, CHKEIP);
+	if (ChkPri == comp->ChkPri) insert(items, CHKPRI);
 	if (TxfCmt == comp->TxfCmt) insert(items, TXFCMT);
 
 	return(items);
@@ -155,7 +155,7 @@ set<uint> PnlWdbeFstDetail::ContIac::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {NUMFLSTCLU, CHKEIP, TXFCMT};
+	diffitems = {NUMFLSTCLU, CHKPRI, TXFCMT};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -291,7 +291,7 @@ PnlWdbeFstDetail::StatShr::StatShr(
 			, const bool TxtFsmActive
 			, const bool ButFsmViewAvail
 			, const bool ButFsmViewActive
-			, const bool ChkEipActive
+			, const bool ChkPriActive
 			, const bool TxfCmtActive
 		) :
 			Block()
@@ -305,10 +305,10 @@ PnlWdbeFstDetail::StatShr::StatShr(
 			, TxtFsmActive(TxtFsmActive)
 			, ButFsmViewAvail(ButFsmViewAvail)
 			, ButFsmViewActive(ButFsmViewActive)
-			, ChkEipActive(ChkEipActive)
+			, ChkPriActive(ChkPriActive)
 			, TxfCmtActive(TxfCmtActive)
 		{
-	mask = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, LSTCLUACTIVE, BUTCLUVIEWACTIVE, BUTCLUCLUSTERAVAIL, BUTCLUUNCLUSTERAVAIL, TXTFSMACTIVE, BUTFSMVIEWAVAIL, BUTFSMVIEWACTIVE, CHKEIPACTIVE, TXFCMTACTIVE};
+	mask = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, LSTCLUACTIVE, BUTCLUVIEWACTIVE, BUTCLUCLUSTERAVAIL, BUTCLUUNCLUSTERAVAIL, TXTFSMACTIVE, BUTFSMVIEWAVAIL, BUTFSMVIEWACTIVE, CHKPRIACTIVE, TXFCMTACTIVE};
 };
 
 void PnlWdbeFstDetail::StatShr::writeJSON(
@@ -329,7 +329,7 @@ void PnlWdbeFstDetail::StatShr::writeJSON(
 	me["TxtFsmActive"] = TxtFsmActive;
 	me["ButFsmViewAvail"] = ButFsmViewAvail;
 	me["ButFsmViewActive"] = ButFsmViewActive;
-	me["ChkEipActive"] = ChkEipActive;
+	me["ChkPriActive"] = ChkPriActive;
 	me["TxfCmtActive"] = TxfCmtActive;
 };
 
@@ -355,7 +355,7 @@ void PnlWdbeFstDetail::StatShr::writeXML(
 		writeBoolAttr(wr, itemtag, "sref", "TxtFsmActive", TxtFsmActive);
 		writeBoolAttr(wr, itemtag, "sref", "ButFsmViewAvail", ButFsmViewAvail);
 		writeBoolAttr(wr, itemtag, "sref", "ButFsmViewActive", ButFsmViewActive);
-		writeBoolAttr(wr, itemtag, "sref", "ChkEipActive", ChkEipActive);
+		writeBoolAttr(wr, itemtag, "sref", "ChkPriActive", ChkPriActive);
 		writeBoolAttr(wr, itemtag, "sref", "TxfCmtActive", TxfCmtActive);
 	xmlTextWriterEndElement(wr);
 };
@@ -375,7 +375,7 @@ set<uint> PnlWdbeFstDetail::StatShr::comm(
 	if (TxtFsmActive == comp->TxtFsmActive) insert(items, TXTFSMACTIVE);
 	if (ButFsmViewAvail == comp->ButFsmViewAvail) insert(items, BUTFSMVIEWAVAIL);
 	if (ButFsmViewActive == comp->ButFsmViewActive) insert(items, BUTFSMVIEWACTIVE);
-	if (ChkEipActive == comp->ChkEipActive) insert(items, CHKEIPACTIVE);
+	if (ChkPriActive == comp->ChkPriActive) insert(items, CHKPRIACTIVE);
 	if (TxfCmtActive == comp->TxfCmtActive) insert(items, TXFCMTACTIVE);
 
 	return(items);
@@ -389,7 +389,7 @@ set<uint> PnlWdbeFstDetail::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, LSTCLUACTIVE, BUTCLUVIEWACTIVE, BUTCLUCLUSTERAVAIL, BUTCLUUNCLUSTERAVAIL, TXTFSMACTIVE, BUTFSMVIEWAVAIL, BUTFSMVIEWACTIVE, CHKEIPACTIVE, TXFCMTACTIVE};
+	diffitems = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, LSTCLUACTIVE, BUTCLUVIEWACTIVE, BUTCLUCLUSTERAVAIL, BUTCLUUNCLUSTERAVAIL, TXTFSMACTIVE, BUTFSMVIEWAVAIL, BUTFSMVIEWACTIVE, CHKPRIACTIVE, TXFCMTACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -411,7 +411,7 @@ void PnlWdbeFstDetail::Tag::writeJSON(
 	if (ixWdbeVLocale == VecWdbeVLocale::ENUS) {
 		me["CptSrf"] = "identifier";
 		me["CptFsm"] = "finite state machine";
-		me["CptEip"] = "external insertion point";
+		me["CptPri"] = "pre-handling IP";
 		me["CptCmt"] = "comment";
 	};
 	me["Cpt"] = StrMod::cap(VecWdbeVTag::getTitle(VecWdbeVTag::DETAIL, ixWdbeVLocale));
@@ -434,7 +434,7 @@ void PnlWdbeFstDetail::Tag::writeXML(
 		if (ixWdbeVLocale == VecWdbeVLocale::ENUS) {
 			writeStringAttr(wr, itemtag, "sref", "CptSrf", "identifier");
 			writeStringAttr(wr, itemtag, "sref", "CptFsm", "finite state machine");
-			writeStringAttr(wr, itemtag, "sref", "CptEip", "external insertion point");
+			writeStringAttr(wr, itemtag, "sref", "CptPri", "pre-handling IP");
 			writeStringAttr(wr, itemtag, "sref", "CptCmt", "comment");
 		};
 		writeStringAttr(wr, itemtag, "sref", "Cpt", StrMod::cap(VecWdbeVTag::getTitle(VecWdbeVTag::DETAIL, ixWdbeVLocale)));

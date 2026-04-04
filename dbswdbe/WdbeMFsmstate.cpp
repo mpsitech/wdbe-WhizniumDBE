@@ -22,7 +22,7 @@ WdbeMFsmstate::WdbeMFsmstate(
 			, const ubigint fsmRefWdbeMFsm
 			, const uint fsmNum
 			, const string sref
-			, const bool Extip
+			, const bool Preip
 			, const string Comment
 		) :
 			ref(ref)
@@ -30,7 +30,7 @@ WdbeMFsmstate::WdbeMFsmstate(
 			, fsmRefWdbeMFsm(fsmRefWdbeMFsm)
 			, fsmNum(fsmNum)
 			, sref(sref)
-			, Extip(Extip)
+			, Preip(Preip)
 			, Comment(Comment)
 		{
 };
@@ -167,13 +167,13 @@ ubigint TblWdbeMFsmstate::insertNewRec(
 			, const ubigint fsmRefWdbeMFsm
 			, const uint fsmNum
 			, const string sref
-			, const bool Extip
+			, const bool Preip
 			, const string Comment
 		) {
 	ubigint retval = 0;
 	WdbeMFsmstate* _rec = NULL;
 
-	_rec = new WdbeMFsmstate(0, refWdbeCFsmstate, fsmRefWdbeMFsm, fsmNum, sref, Extip, Comment);
+	_rec = new WdbeMFsmstate(0, refWdbeCFsmstate, fsmRefWdbeMFsm, fsmNum, sref, Preip, Comment);
 	insertRec(_rec);
 
 	retval = _rec->ref;
@@ -191,13 +191,13 @@ ubigint TblWdbeMFsmstate::appendNewRecToRst(
 			, const ubigint fsmRefWdbeMFsm
 			, const uint fsmNum
 			, const string sref
-			, const bool Extip
+			, const bool Preip
 			, const string Comment
 		) {
 	ubigint retval = 0;
 	WdbeMFsmstate* _rec = NULL;
 
-	retval = insertNewRec(&_rec, refWdbeCFsmstate, fsmRefWdbeMFsm, fsmNum, sref, Extip, Comment);
+	retval = insertNewRec(&_rec, refWdbeCFsmstate, fsmRefWdbeMFsm, fsmNum, sref, Preip, Comment);
 	rst.nodes.push_back(_rec);
 
 	if (rec != NULL) *rec = _rec;
@@ -312,8 +312,8 @@ MyTblWdbeMFsmstate::~MyTblWdbeMFsmstate() {
 };
 
 void MyTblWdbeMFsmstate::initStatements() {
-	stmtInsertRec = createStatement("INSERT INTO TblWdbeMFsmstate (refWdbeCFsmstate, fsmRefWdbeMFsm, fsmNum, sref, Extip, Comment) VALUES (?,?,?,?,?,?)", false);
-	stmtUpdateRec = createStatement("UPDATE TblWdbeMFsmstate SET refWdbeCFsmstate = ?, fsmRefWdbeMFsm = ?, fsmNum = ?, sref = ?, Extip = ?, Comment = ? WHERE ref = ?", false);
+	stmtInsertRec = createStatement("INSERT INTO TblWdbeMFsmstate (refWdbeCFsmstate, fsmRefWdbeMFsm, fsmNum, sref, Preip, Comment) VALUES (?,?,?,?,?,?)", false);
+	stmtUpdateRec = createStatement("UPDATE TblWdbeMFsmstate SET refWdbeCFsmstate = ?, fsmRefWdbeMFsm = ?, fsmNum = ?, sref = ?, Preip = ?, Comment = ? WHERE ref = ?", false);
 	stmtRemoveRecByRef = createStatement("DELETE FROM TblWdbeMFsmstate WHERE ref = ?", false);
 };
 
@@ -348,7 +348,7 @@ bool MyTblWdbeMFsmstate::loadRecBySQL(
 		if (dbrow[2]) _rec->fsmRefWdbeMFsm = atoll((char*) dbrow[2]); else _rec->fsmRefWdbeMFsm = 0;
 		if (dbrow[3]) _rec->fsmNum = atol((char*) dbrow[3]); else _rec->fsmNum = 0;
 		if (dbrow[4]) _rec->sref.assign(dbrow[4], dblengths[4]); else _rec->sref = "";
-		if (dbrow[5]) _rec->Extip = (atoi((char*) dbrow[5]) != 0); else _rec->Extip = false;
+		if (dbrow[5]) _rec->Preip = (atoi((char*) dbrow[5]) != 0); else _rec->Preip = false;
 		if (dbrow[6]) _rec->Comment.assign(dbrow[6], dblengths[6]); else _rec->Comment = "";
 
 		retval = true;
@@ -397,7 +397,7 @@ ubigint MyTblWdbeMFsmstate::loadRstBySQL(
 			if (dbrow[2]) rec->fsmRefWdbeMFsm = atoll((char*) dbrow[2]); else rec->fsmRefWdbeMFsm = 0;
 			if (dbrow[3]) rec->fsmNum = atol((char*) dbrow[3]); else rec->fsmNum = 0;
 			if (dbrow[4]) rec->sref.assign(dbrow[4], dblengths[4]); else rec->sref = "";
-			if (dbrow[5]) rec->Extip = (atoi((char*) dbrow[5]) != 0); else rec->Extip = false;
+			if (dbrow[5]) rec->Preip = (atoi((char*) dbrow[5]) != 0); else rec->Preip = false;
 			if (dbrow[6]) rec->Comment.assign(dbrow[6], dblengths[6]); else rec->Comment = "";
 			rst.nodes.push_back(rec);
 
@@ -416,7 +416,7 @@ ubigint MyTblWdbeMFsmstate::insertRec(
 	unsigned long l[6]; my_bool n[6]; my_bool e[6];
 
 	l[3] = rec->sref.length();
-	tinyint Extip = rec->Extip;
+	tinyint Preip = rec->Preip;
 	l[5] = rec->Comment.length();
 
 	MYSQL_BIND bind[] = {
@@ -424,7 +424,7 @@ ubigint MyTblWdbeMFsmstate::insertRec(
 		bindUbigint(&rec->fsmRefWdbeMFsm,&(l[1]),&(n[1]),&(e[1])),
 		bindUint(&rec->fsmNum,&(l[2]),&(n[2]),&(e[2])),
 		bindCstring((char*) (rec->sref.c_str()),&(l[3]),&(n[3]),&(e[3])),
-		bindTinyint(&Extip,&(l[4]),&(n[4]),&(e[4])),
+		bindTinyint(&Preip,&(l[4]),&(n[4]),&(e[4])),
 		bindCstring((char*) (rec->Comment.c_str()),&(l[5]),&(n[5]),&(e[5]))
 	};
 
@@ -456,7 +456,7 @@ void MyTblWdbeMFsmstate::updateRec(
 	unsigned long l[7]; my_bool n[7]; my_bool e[7];
 
 	l[3] = rec->sref.length();
-	tinyint Extip = rec->Extip;
+	tinyint Preip = rec->Preip;
 	l[5] = rec->Comment.length();
 
 	MYSQL_BIND bind[] = {
@@ -464,7 +464,7 @@ void MyTblWdbeMFsmstate::updateRec(
 		bindUbigint(&rec->fsmRefWdbeMFsm,&(l[1]),&(n[1]),&(e[1])),
 		bindUint(&rec->fsmNum,&(l[2]),&(n[2]),&(e[2])),
 		bindCstring((char*) (rec->sref.c_str()),&(l[3]),&(n[3]),&(e[3])),
-		bindTinyint(&Extip,&(l[4]),&(n[4]),&(e[4])),
+		bindTinyint(&Preip,&(l[4]),&(n[4]),&(e[4])),
 		bindCstring((char*) (rec->Comment.c_str()),&(l[5]),&(n[5]),&(e[5])),
 		bindUbigint(&rec->ref,&(l[6]),&(n[6]),&(e[6]))
 	};
@@ -538,7 +538,7 @@ ubigint MyTblWdbeMFsmstate::loadRstByClu(
 			, const bool append
 			, ListWdbeMFsmstate& rst
 		) {
-	return loadRstBySQL("SELECT ref, refWdbeCFsmstate, fsmRefWdbeMFsm, fsmNum, sref, Extip, Comment FROM TblWdbeMFsmstate WHERE refWdbeCFsmstate = " + to_string(refWdbeCFsmstate) + "", append, rst);
+	return loadRstBySQL("SELECT ref, refWdbeCFsmstate, fsmRefWdbeMFsm, fsmNum, sref, Preip, Comment FROM TblWdbeMFsmstate WHERE refWdbeCFsmstate = " + to_string(refWdbeCFsmstate) + "", append, rst);
 };
 
 ubigint MyTblWdbeMFsmstate::loadRstByFsm(
@@ -546,7 +546,7 @@ ubigint MyTblWdbeMFsmstate::loadRstByFsm(
 			, const bool append
 			, ListWdbeMFsmstate& rst
 		) {
-	return loadRstBySQL("SELECT ref, refWdbeCFsmstate, fsmRefWdbeMFsm, fsmNum, sref, Extip, Comment FROM TblWdbeMFsmstate WHERE fsmRefWdbeMFsm = " + to_string(fsmRefWdbeMFsm) + " ORDER BY fsmNum ASC", append, rst);
+	return loadRstBySQL("SELECT ref, refWdbeCFsmstate, fsmRefWdbeMFsm, fsmNum, sref, Preip, Comment FROM TblWdbeMFsmstate WHERE fsmRefWdbeMFsm = " + to_string(fsmRefWdbeMFsm) + " ORDER BY fsmNum ASC", append, rst);
 };
 
 bool MyTblWdbeMFsmstate::loadSrfByRef(
@@ -574,15 +574,15 @@ PgTblWdbeMFsmstate::~PgTblWdbeMFsmstate() {
 };
 
 void PgTblWdbeMFsmstate::initStatements() {
-	createStatement("TblWdbeMFsmstate_insertRec", "INSERT INTO TblWdbeMFsmstate (refWdbeCFsmstate, fsmRefWdbeMFsm, fsmNum, sref, Extip, Comment) VALUES ($1,$2,$3,$4,$5,$6) RETURNING ref", 6);
-	createStatement("TblWdbeMFsmstate_updateRec", "UPDATE TblWdbeMFsmstate SET refWdbeCFsmstate = $1, fsmRefWdbeMFsm = $2, fsmNum = $3, sref = $4, Extip = $5, Comment = $6 WHERE ref = $7", 7);
+	createStatement("TblWdbeMFsmstate_insertRec", "INSERT INTO TblWdbeMFsmstate (refWdbeCFsmstate, fsmRefWdbeMFsm, fsmNum, sref, Preip, Comment) VALUES ($1,$2,$3,$4,$5,$6) RETURNING ref", 6);
+	createStatement("TblWdbeMFsmstate_updateRec", "UPDATE TblWdbeMFsmstate SET refWdbeCFsmstate = $1, fsmRefWdbeMFsm = $2, fsmNum = $3, sref = $4, Preip = $5, Comment = $6 WHERE ref = $7", 7);
 	createStatement("TblWdbeMFsmstate_removeRecByRef", "DELETE FROM TblWdbeMFsmstate WHERE ref = $1", 1);
 
-	createStatement("TblWdbeMFsmstate_loadRecByRef", "SELECT ref, refWdbeCFsmstate, fsmRefWdbeMFsm, fsmNum, sref, Extip, Comment FROM TblWdbeMFsmstate WHERE ref = $1", 1);
+	createStatement("TblWdbeMFsmstate_loadRecByRef", "SELECT ref, refWdbeCFsmstate, fsmRefWdbeMFsm, fsmNum, sref, Preip, Comment FROM TblWdbeMFsmstate WHERE ref = $1", 1);
 	createStatement("TblWdbeMFsmstate_loadRefsByClu", "SELECT ref FROM TblWdbeMFsmstate WHERE refWdbeCFsmstate = $1", 1);
 	createStatement("TblWdbeMFsmstate_loadRefsByFsm", "SELECT ref FROM TblWdbeMFsmstate WHERE fsmRefWdbeMFsm = $1", 1);
-	createStatement("TblWdbeMFsmstate_loadRstByClu", "SELECT ref, refWdbeCFsmstate, fsmRefWdbeMFsm, fsmNum, sref, Extip, Comment FROM TblWdbeMFsmstate WHERE refWdbeCFsmstate = $1", 1);
-	createStatement("TblWdbeMFsmstate_loadRstByFsm", "SELECT ref, refWdbeCFsmstate, fsmRefWdbeMFsm, fsmNum, sref, Extip, Comment FROM TblWdbeMFsmstate WHERE fsmRefWdbeMFsm = $1 ORDER BY fsmNum ASC", 1);
+	createStatement("TblWdbeMFsmstate_loadRstByClu", "SELECT ref, refWdbeCFsmstate, fsmRefWdbeMFsm, fsmNum, sref, Preip, Comment FROM TblWdbeMFsmstate WHERE refWdbeCFsmstate = $1", 1);
+	createStatement("TblWdbeMFsmstate_loadRstByFsm", "SELECT ref, refWdbeCFsmstate, fsmRefWdbeMFsm, fsmNum, sref, Preip, Comment FROM TblWdbeMFsmstate WHERE fsmRefWdbeMFsm = $1 ORDER BY fsmNum ASC", 1);
 	createStatement("TblWdbeMFsmstate_loadSrfByRef", "SELECT sref FROM TblWdbeMFsmstate WHERE ref = $1", 1);
 };
 
@@ -604,7 +604,7 @@ bool PgTblWdbeMFsmstate::loadRec(
 			PQfnumber(res, "fsmrefwdbemfsm"),
 			PQfnumber(res, "fsmnum"),
 			PQfnumber(res, "sref"),
-			PQfnumber(res, "extip"),
+			PQfnumber(res, "preip"),
 			PQfnumber(res, "comment")
 		};
 
@@ -613,7 +613,7 @@ bool PgTblWdbeMFsmstate::loadRec(
 		ptr = PQgetvalue(res, 0, fnum[2]); _rec->fsmRefWdbeMFsm = atoll(ptr);
 		ptr = PQgetvalue(res, 0, fnum[3]); _rec->fsmNum = atol(ptr);
 		ptr = PQgetvalue(res, 0, fnum[4]); _rec->sref.assign(ptr, PQgetlength(res, 0, fnum[4]));
-		ptr = PQgetvalue(res, 0, fnum[5]); _rec->Extip = (atoi(ptr) != 0);
+		ptr = PQgetvalue(res, 0, fnum[5]); _rec->Preip = (atoi(ptr) != 0);
 		ptr = PQgetvalue(res, 0, fnum[6]); _rec->Comment.assign(ptr, PQgetlength(res, 0, fnum[6]));
 
 		retval = true;
@@ -646,7 +646,7 @@ ubigint PgTblWdbeMFsmstate::loadRst(
 			PQfnumber(res, "fsmrefwdbemfsm"),
 			PQfnumber(res, "fsmnum"),
 			PQfnumber(res, "sref"),
-			PQfnumber(res, "extip"),
+			PQfnumber(res, "preip"),
 			PQfnumber(res, "comment")
 		};
 
@@ -658,7 +658,7 @@ ubigint PgTblWdbeMFsmstate::loadRst(
 			ptr = PQgetvalue(res, numread, fnum[2]); rec->fsmRefWdbeMFsm = atoll(ptr);
 			ptr = PQgetvalue(res, numread, fnum[3]); rec->fsmNum = atol(ptr);
 			ptr = PQgetvalue(res, numread, fnum[4]); rec->sref.assign(ptr, PQgetlength(res, numread, fnum[4]));
-			ptr = PQgetvalue(res, numread, fnum[5]); rec->Extip = (atoi(ptr) != 0);
+			ptr = PQgetvalue(res, numread, fnum[5]); rec->Preip = (atoi(ptr) != 0);
 			ptr = PQgetvalue(res, numread, fnum[6]); rec->Comment.assign(ptr, PQgetlength(res, numread, fnum[6]));
 
 			rst.nodes.push_back(rec);
@@ -755,14 +755,14 @@ ubigint PgTblWdbeMFsmstate::insertRec(
 	ubigint _refWdbeCFsmstate = htonl64(rec->refWdbeCFsmstate);
 	ubigint _fsmRefWdbeMFsm = htonl64(rec->fsmRefWdbeMFsm);
 	uint _fsmNum = htonl(rec->fsmNum);
-	smallint _Extip = htons((smallint) rec->Extip);
+	smallint _Preip = htons((smallint) rec->Preip);
 
 	const char* vals[] = {
 		(char*) &_refWdbeCFsmstate,
 		(char*) &_fsmRefWdbeMFsm,
 		(char*) &_fsmNum,
 		rec->sref.c_str(),
-		(char*) &_Extip,
+		(char*) &_Preip,
 		rec->Comment.c_str()
 	};
 	const int l[] = {
@@ -806,7 +806,7 @@ void PgTblWdbeMFsmstate::updateRec(
 	ubigint _refWdbeCFsmstate = htonl64(rec->refWdbeCFsmstate);
 	ubigint _fsmRefWdbeMFsm = htonl64(rec->fsmRefWdbeMFsm);
 	uint _fsmNum = htonl(rec->fsmNum);
-	smallint _Extip = htons((smallint) rec->Extip);
+	smallint _Preip = htons((smallint) rec->Preip);
 	ubigint _ref = htonl64(rec->ref);
 
 	const char* vals[] = {
@@ -814,7 +814,7 @@ void PgTblWdbeMFsmstate::updateRec(
 		(char*) &_fsmRefWdbeMFsm,
 		(char*) &_fsmNum,
 		rec->sref.c_str(),
-		(char*) &_Extip,
+		(char*) &_Preip,
 		rec->Comment.c_str(),
 		(char*) &_ref
 	};

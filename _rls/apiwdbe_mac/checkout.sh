@@ -3,7 +3,7 @@
 # checkout script for Wdbe API library, release apiwdbe_mac
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 23 Nov 2025
+# date created: 1 Feb 2026
 # IP header --- ABOVE
 
 if [ -z ${WHIZROOT+x} ]; then
@@ -11,13 +11,13 @@ if [ -z ${WHIZROOT+x} ]; then
 	exit 1
 fi
 
-export set BUILDROOT=${WHIZSDKROOT}/build
+export set BUILDROOT=${SYSROOT}${WHIZSDKROOT}/build
 
-mkdir $BUILDROOT/apiwdbe
+mkdir ${BUILDROOT}/apiwdbe
 
-cp makeall.sh $BUILDROOT/apiwdbe/
+cp makeall.sh ${BUILDROOT}/apiwdbe/
 
-cp Makefile $BUILDROOT/apiwdbe/
+cp Makefile ${BUILDROOT}/apiwdbe/
 
-cp ../../apiwdbe/*.h $BUILDROOT/apiwdbe/
-cp ../../apiwdbe/*.cpp $BUILDROOT/apiwdbe/
+cp ../../apiwdbe/*.h ${BUILDROOT}/apiwdbe/
+cp ../../apiwdbe/*.cpp ${BUILDROOT}/apiwdbe/

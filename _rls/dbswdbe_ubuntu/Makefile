@@ -2,10 +2,10 @@
 # make file for Wdbe database access library, release dbswdbe_ubuntu
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 23 Nov 2025
+# date created: 1 Feb 2026
 # IP header --- ABOVE
 
-LIBROOT = ${WHIZSDKROOT}/lib
+LIBROOT = $(SYSROOT)${WHIZSDKROOT}/lib
 
 CPP = g++
 CPPFLAGS = -std=c++11 -g -Wall -Os -pthread

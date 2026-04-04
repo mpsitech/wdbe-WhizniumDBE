@@ -2,7 +2,7 @@
 -- MySQL / MariaDB database create script
 -- copyright: (C) 2016-2020 MPSI Technologies GmbH
 -- author: Alexander Wirthmueller (auto-generation)
--- date created: 23 Nov 2025
+-- date created: 1 Feb 2026
 -- IP header --- ABOVE
 
 DROP DATABASE IF EXISTS DbsWdbe;
@@ -509,7 +509,7 @@ CREATE TABLE TblWdbeMFsmstate(
 	fsmRefWdbeMFsm BIGINT UNSIGNED,
 	fsmNum INT UNSIGNED,
 	sref VARCHAR(50),
-	Extip TINYINT,
+	Preip TINYINT,
 	Comment TEXT,
 	INDEX (refWdbeCFsmstate),
 	INDEX (fsmRefWdbeMFsm),
@@ -687,7 +687,8 @@ CREATE TABLE TblWdbeMProcess(
 	asrSrefWdbeMSignal VARCHAR(50),
 	Falling TINYINT,
 	Syncrst VARCHAR(192),
-	Extip TINYINT,
+	Preip TINYINT,
+	Postip TINYINT,
 	Comment TEXT,
 	INDEX (refWdbeMModule),
 	INDEX (refWdbeMFsm),

@@ -3,7 +3,7 @@
 # checkout script for Wdbe operation daemon, release wdbeopd1_ubuntu
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 23 Nov 2025
+# date created: 1 Feb 2026
 # IP header --- ABOVE
 
 if [ -z ${WHIZROOT+x} ]; then
@@ -11,15 +11,15 @@ if [ -z ${WHIZROOT+x} ]; then
 	exit 1
 fi
 
-export set BUILDROOT=${WHIZSDKROOT}/build
-export set LIBROOT=${WHIZSDKROOT}/lib
-export set BINROOT=${WHIZROOT}/bin
+export set BUILDROOT=${SYSROOT}${WHIZSDKROOT}/build
+export set LIBROOT=${SYSROOT}${WHIZSDKROOT}/lib
+export set BINROOT=${SYSROOT}${WHIZROOT}/bin
 export set REPROOT=${WHIZDEVROOT}/rep
-export set CMBDBUILDROOT=$REPROOT/wdbe/wdbecmbd
+export set CMBDBUILDROOT=${REPROOT}/wdbe/wdbecmbd
 
-mkdir $BUILDROOT/wdbeopd1
-mkdir $BUILDROOT/wdbeopd1/IexWdbe
-mkdir $BUILDROOT/wdbeopd1/VecWdbe
+mkdir ${BUILDROOT}/wdbeopd1
+mkdir ${BUILDROOT}/wdbeopd1/IexWdbe
+mkdir ${BUILDROOT}/wdbeopd1/VecWdbe
 mkdir $BUILDROOT/wdbeopd1/WdbeCplmst
 mkdir $BUILDROOT/wdbeopd1/WdbeGen
 mkdir $BUILDROOT/wdbeopd1/WdbeGenfst
@@ -32,40 +32,40 @@ mkdir $BUILDROOT/wdbeopd1/WdbeWrfpga
 mkdir $BUILDROOT/wdbeopd1/WdbeWrmcu
 mkdir $BUILDROOT/wdbeopd1/WdbeWrterm
 
-mkdir $LIBROOT/wdbeopd1
+mkdir ${LIBROOT}/wdbeopd1
 
-mkdir $BINROOT/wdbeopd1
+mkdir ${BINROOT}/wdbeopd1
 
-cp make.sh $BUILDROOT/wdbeopd1/
-cp remake.sh $BUILDROOT/wdbeopd1/
+cp make.sh ${BUILDROOT}/wdbeopd1/
+cp remake.sh ${BUILDROOT}/wdbeopd1/
 
-cp Makefile.inc $BUILDROOT/wdbeopd1/
-cp Makefile $BUILDROOT/wdbeopd1/
+cp Makefile.inc ${BUILDROOT}/wdbeopd1/
+cp Makefile ${BUILDROOT}/wdbeopd1/
 
-cp ../../wdbeopd1/Wdbeopd.h $BUILDROOT/wdbeopd1/
-cp ../../wdbeopd1/Wdbeopd.cpp $BUILDROOT/wdbeopd1/
+cp ../../wdbeopd1/Wdbeopd.h ${BUILDROOT}/wdbeopd1/
+cp ../../wdbeopd1/Wdbeopd.cpp ${BUILDROOT}/wdbeopd1/
 
-cp ../../wdbeopd1/WdbeopdEngsrv.h $BUILDROOT/wdbeopd1/
-cp ../../wdbeopd1/WdbeopdEngsrv.cpp $BUILDROOT/wdbeopd1/
+cp ../../wdbeopd1/WdbeopdEngsrv.h ${BUILDROOT}/wdbeopd1/
+cp ../../wdbeopd1/WdbeopdEngsrv.cpp ${BUILDROOT}/wdbeopd1/
 
-cp ../../wdbeopd1/WdbeopdOpprc.h $BUILDROOT/wdbeopd1/
-cp ../../wdbeopd1/WdbeopdOpprc.cpp $BUILDROOT/wdbeopd1/
+cp ../../wdbeopd1/WdbeopdOpprc.h ${BUILDROOT}/wdbeopd1/
+cp ../../wdbeopd1/WdbeopdOpprc.cpp ${BUILDROOT}/wdbeopd1/
 
-cp ../../wdbeopd1/Wdbeopd_exe.h $BUILDROOT/wdbeopd1/
-cp ../../wdbeopd1/Wdbeopd_exe.cpp $BUILDROOT/wdbeopd1/
+cp ../../wdbeopd1/Wdbeopd_exe.h ${BUILDROOT}/wdbeopd1/
+cp ../../wdbeopd1/Wdbeopd_exe.cpp ${BUILDROOT}/wdbeopd1/
 
-cp $CMBDBUILDROOT/Wdbe.h $BUILDROOT/wdbeopd1/
-cp $CMBDBUILDROOT/Wdbe.cpp $BUILDROOT/wdbeopd1/
+cp ${CMBDBUILDROOT}/Wdbe.h ${BUILDROOT}/wdbeopd1/
+cp ${CMBDBUILDROOT}/Wdbe.cpp ${BUILDROOT}/wdbeopd1/
 
-cp Makefile_IexWdbe $BUILDROOT/wdbeopd1/IexWdbe/Makefile
+cp Makefile_IexWdbe ${BUILDROOT}/wdbeopd1/IexWdbe/Makefile
 
-cp $CMBDBUILDROOT/IexWdbe/IexWdbe*.h $BUILDROOT/wdbeopd1/IexWdbe/
-cp $CMBDBUILDROOT/IexWdbe/IexWdbe*.cpp $BUILDROOT/wdbeopd1/IexWdbe/
+cp ${CMBDBUILDROOT}/IexWdbe/IexWdbe*.h ${BUILDROOT}/wdbeopd1/IexWdbe/
+cp ${CMBDBUILDROOT}/IexWdbe/IexWdbe*.cpp ${BUILDROOT}/wdbeopd1/IexWdbe/
 
-cp Makefile_VecWdbe $BUILDROOT/wdbeopd1/VecWdbe/Makefile
+cp Makefile_VecWdbe ${BUILDROOT}/wdbeopd1/VecWdbe/Makefile
 
-cp $CMBDBUILDROOT/VecWdbe/Vec*.h $BUILDROOT/wdbeopd1/VecWdbe/
-cp $CMBDBUILDROOT/VecWdbe/Vec*.cpp $BUILDROOT/wdbeopd1/VecWdbe/
+cp ${CMBDBUILDROOT}/VecWdbe/Vec*.h ${BUILDROOT}/wdbeopd1/VecWdbe/
+cp ${CMBDBUILDROOT}/VecWdbe/Vec*.cpp ${BUILDROOT}/wdbeopd1/VecWdbe/
 
 cp Makefile_WdbeCplmst $BUILDROOT/wdbeopd1/WdbeCplmst/Makefile
 

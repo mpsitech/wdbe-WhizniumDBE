@@ -47,7 +47,7 @@ DpchRetWdbeMtpPlhfpga* WdbeMtpPlhfpgaCrcspec_v2_0::run(
 
 	if (Wdbe::getMpa(dbswdbe, refWdbeMModule, "poly", poly)) {
 		keys.push_back("wPolym1");
-		vals.push_back((poly.length() > 4) ? "31" : "15");
+		vals.push_back((poly.length() > 4) ? "31" : (poly.length() > 2) ? "15" : "7");
 	};
 
 	if (Wdbe::getMpa(dbswdbe, refWdbeMModule, "wD", wD)) {

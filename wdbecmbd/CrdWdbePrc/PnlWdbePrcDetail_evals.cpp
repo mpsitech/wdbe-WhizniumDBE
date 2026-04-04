@@ -201,7 +201,21 @@ bool PnlWdbePrcDetail::evalTxfSnrActive(
 	return(args.back());
 };
 
-bool PnlWdbePrcDetail::evalChkEipActive(
+bool PnlWdbePrcDetail::evalChkPriActive(
+			DbsWdbe* dbswdbe
+		) {
+	// pre.ixCrdaccPrcIncl(edit)
+
+	vector<bool> args;
+	bool a;
+
+	a = false; a = (xchg->getIxPreset(VecWdbeVPreset::PREWDBEIXCRDACCPRC, jref) & VecWdbeWAccess::EDIT);
+	args.push_back(a);
+
+	return(args.back());
+};
+
+bool PnlWdbePrcDetail::evalChkPoiActive(
 			DbsWdbe* dbswdbe
 		) {
 	// pre.ixCrdaccPrcIncl(edit)

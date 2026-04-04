@@ -3,7 +3,7 @@
 # checkout script for Wdbe combined daemon, release wdbecmbd_mac
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 23 Nov 2025
+# date created: 1 Feb 2026
 # IP header --- ABOVE
 
 if [ -z ${WHIZROOT+x} ]; then
@@ -11,13 +11,13 @@ if [ -z ${WHIZROOT+x} ]; then
 	exit 1
 fi
 
-export set BUILDROOT=${WHIZSDKROOT}/build
-export set LIBROOT=${WHIZSDKROOT}/lib
-export set BINROOT=${WHIZROOT}/bin
+export set BUILDROOT=${SYSROOT}${WHIZSDKROOT}/build
+export set LIBROOT=${SYSROOT}${WHIZSDKROOT}/lib
+export set BINROOT=${SYSROOT}${WHIZROOT}/bin
 
-mkdir $BUILDROOT/wdbecmbd
-mkdir $BUILDROOT/wdbecmbd/IexWdbe
-mkdir $BUILDROOT/wdbecmbd/VecWdbe
+mkdir ${BUILDROOT}/wdbecmbd
+mkdir ${BUILDROOT}/wdbecmbd/IexWdbe
+mkdir ${BUILDROOT}/wdbecmbd/VecWdbe
 mkdir $BUILDROOT/wdbecmbd/CrdWdbeNav
 mkdir $BUILDROOT/wdbecmbd/CrdWdbeUsg
 mkdir $BUILDROOT/wdbecmbd/CrdWdbeUsr
@@ -80,51 +80,51 @@ mkdir $LIBROOT/wdbecmbd
 
 mkdir $BINROOT/wdbecmbd
 
-cp make.sh $BUILDROOT/wdbecmbd/
-cp remake.sh $BUILDROOT/wdbecmbd/
+cp make.sh ${BUILDROOT}/wdbecmbd/
+cp remake.sh ${BUILDROOT}/wdbecmbd/
 
-cp Makefile.inc $BUILDROOT/wdbecmbd/
-cp Makefile $BUILDROOT/wdbecmbd/
+cp Makefile.inc ${BUILDROOT}/wdbecmbd/
+cp Makefile ${BUILDROOT}/wdbecmbd/
 
-cp ../../wdbecmbd/Wdbecmbd.h $BUILDROOT/wdbecmbd/
-cp ../../wdbecmbd/Wdbecmbd.cpp $BUILDROOT/wdbecmbd/
+cp ../../wdbecmbd/Wdbecmbd.h ${BUILDROOT}/wdbecmbd/
+cp ../../wdbecmbd/Wdbecmbd.cpp ${BUILDROOT}/wdbecmbd/
 
-cp ../../wdbecmbd/WdbecmbdAppsrv.h $BUILDROOT/wdbecmbd/
-cp ../../wdbecmbd/WdbecmbdAppsrv.cpp $BUILDROOT/wdbecmbd/
+cp ../../wdbecmbd/WdbecmbdAppsrv.h ${BUILDROOT}/wdbecmbd/
+cp ../../wdbecmbd/WdbecmbdAppsrv.cpp ${BUILDROOT}/wdbecmbd/
 
-cp ../../wdbecmbd/WdbecmbdJobprc.h $BUILDROOT/wdbecmbd/
-cp ../../wdbecmbd/WdbecmbdJobprc.cpp $BUILDROOT/wdbecmbd/
+cp ../../wdbecmbd/WdbecmbdJobprc.h ${BUILDROOT}/wdbecmbd/
+cp ../../wdbecmbd/WdbecmbdJobprc.cpp ${BUILDROOT}/wdbecmbd/
 
-cp ../../wdbecmbd/WdbecmbdOpprc.h $BUILDROOT/wdbecmbd/
-cp ../../wdbecmbd/WdbecmbdOpprc.cpp $BUILDROOT/wdbecmbd/
+cp ../../wdbecmbd/WdbecmbdOpprc.h ${BUILDROOT}/wdbecmbd/
+cp ../../wdbecmbd/WdbecmbdOpprc.cpp ${BUILDROOT}/wdbecmbd/
 
-cp ../../wdbecmbd/Wdbecmbd_exe.h $BUILDROOT/wdbecmbd/
-cp ../../wdbecmbd/Wdbecmbd_exe.cpp $BUILDROOT/wdbecmbd/
+cp ../../wdbecmbd/Wdbecmbd_exe.h ${BUILDROOT}/wdbecmbd/
+cp ../../wdbecmbd/Wdbecmbd_exe.cpp ${BUILDROOT}/wdbecmbd/
 
-cp ../../wdbecmbd/Wdbe.h $BUILDROOT/wdbecmbd/
-cp ../../wdbecmbd/Wdbe.cpp $BUILDROOT/wdbecmbd/
+cp ../../wdbecmbd/Wdbe.h ${BUILDROOT}/wdbecmbd/
+cp ../../wdbecmbd/Wdbe.cpp ${BUILDROOT}/wdbecmbd/
 
-cp ../../wdbecmbd/Root*.h $BUILDROOT/wdbecmbd/
-cp ../../wdbecmbd/Root*.cpp $BUILDROOT/wdbecmbd/
+cp ../../wdbecmbd/Root*.h ${BUILDROOT}/wdbecmbd/
+cp ../../wdbecmbd/Root*.cpp ${BUILDROOT}/wdbecmbd/
 
-cp ../../wdbecmbd/Sess*.h $BUILDROOT/wdbecmbd/
-cp ../../wdbecmbd/Sess*.cpp $BUILDROOT/wdbecmbd/
+cp ../../wdbecmbd/Sess*.h ${BUILDROOT}/wdbecmbd/
+cp ../../wdbecmbd/Sess*.cpp ${BUILDROOT}/wdbecmbd/
 
-cp ../../wdbecmbd/gbl/*.h $BUILDROOT/wdbecmbd/
-cp ../../wdbecmbd/gbl/*.cpp $BUILDROOT/wdbecmbd/
+cp ../../wdbecmbd/gbl/*.h ${BUILDROOT}/wdbecmbd/
+cp ../../wdbecmbd/gbl/*.cpp ${BUILDROOT}/wdbecmbd/
 
-cp Makefile_IexWdbe $BUILDROOT/wdbecmbd/IexWdbe/Makefile
+cp Makefile_IexWdbe ${BUILDROOT}/wdbecmbd/IexWdbe/Makefile
 
-cp ../../wdbecmbd/IexWdbe/IexWdbe*.h $BUILDROOT/wdbecmbd/IexWdbe/
-cp ../../wdbecmbd/IexWdbe/IexWdbe*.cpp $BUILDROOT/wdbecmbd/IexWdbe/
+cp ../../wdbecmbd/IexWdbe/IexWdbe*.h ${BUILDROOT}/wdbecmbd/IexWdbe/
+cp ../../wdbecmbd/IexWdbe/IexWdbe*.cpp ${BUILDROOT}/wdbecmbd/IexWdbe/
 
-cp ../../wdbecmbd/IexWdbe/JobWdbeIex*.h $BUILDROOT/wdbecmbd/IexWdbe/
-cp ../../wdbecmbd/IexWdbe/JobWdbeIex*.cpp $BUILDROOT/wdbecmbd/IexWdbe/
+cp ../../wdbecmbd/IexWdbe/JobWdbeIex*.h ${BUILDROOT}/wdbecmbd/IexWdbe/
+cp ../../wdbecmbd/IexWdbe/JobWdbeIex*.cpp ${BUILDROOT}/wdbecmbd/IexWdbe/
 
-cp Makefile_VecWdbe $BUILDROOT/wdbecmbd/VecWdbe/Makefile
+cp Makefile_VecWdbe ${BUILDROOT}/wdbecmbd/VecWdbe/Makefile
 
-cp ../../wdbecmbd/VecWdbe/Vec*.h $BUILDROOT/wdbecmbd/VecWdbe/
-cp ../../wdbecmbd/VecWdbe/Vec*.cpp $BUILDROOT/wdbecmbd/VecWdbe/
+cp ../../wdbecmbd/VecWdbe/Vec*.h ${BUILDROOT}/wdbecmbd/VecWdbe/
+cp ../../wdbecmbd/VecWdbe/Vec*.cpp ${BUILDROOT}/wdbecmbd/VecWdbe/
 
 cp Makefile_CrdWdbeNav $BUILDROOT/wdbecmbd/CrdWdbeNav/Makefile
 

@@ -185,7 +185,7 @@ bool PnlWdbeFstDetail::evalButFsmViewActive(
 	return(args.back());
 };
 
-bool PnlWdbeFstDetail::evalChkEipActive(
+bool PnlWdbeFstDetail::evalChkPriActive(
 			DbsWdbe* dbswdbe
 		) {
 	// pre.ixCrdaccFstIncl(edit)

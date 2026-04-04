@@ -1028,6 +1028,10 @@ public:
 	void startMon();
 	void stopMon();
 
+	// multi-threading monitor methods
+	void startMtmon();
+	void stopMtmon();
+
 	// log file methods
 	void appendToLogfile(const std::string& str);
 

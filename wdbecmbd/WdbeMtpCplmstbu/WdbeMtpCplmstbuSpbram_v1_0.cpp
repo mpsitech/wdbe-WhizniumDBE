@@ -69,7 +69,7 @@ DpchRetWdbe* WdbeMtpCplmstbuSpbram_v1_0::run(
 		if (srefKVendor == "efnx") {
 			srefsPrts["clk"] = "clk";
 			srefsPrts["en"] = "addren";
-			srefsPrts["we"] = "we_a.sig"; // slvdn
+			srefsPrts["we"] = "re.sig;we.sig"; // re_sig <= en and not we, we_sig <= en and we
 			srefsPrts["a"] = "addr";
 			srefsPrts["dwr"] = "wdata_a";
 			srefsPrts["drd"] = "rdata_a";
@@ -85,7 +85,7 @@ DpchRetWdbe* WdbeMtpCplmstbuSpbram_v1_0::run(
 
 		} else if (srefKVendor == "mchp") {
 			srefsPrts["clk"] = "CLK";
-			srefsPrts["en"] = "R_EN.sig;W_EN.sig"; // R_EN_sig <= en and not we, W_EN <= en and we
+			srefsPrts["en"] = "R_EN.sig;W_EN.sig"; // R_EN_sig <= en and not we, W_EN_sig <= en and we
 			srefsPrts["a"] = "R_ADDR;W_ADDR";
 			srefsPrts["dwr"] = "W_DATA";
 			srefsPrts["drd"] = "R_DATA";
@@ -108,9 +108,9 @@ DpchRetWdbe* WdbeMtpCplmstbuSpbram_v1_0::run(
 				if ((srefPrt.length() > 4) && ((srefPrt.rfind(".sig") + 4) == srefPrt.length())) {
 					srefPrt = srefPrt.substr(0, srefPrt.length() - 4);
 
-					if (srefPrt == "R_EN") dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::VOID, 0, 0, srefPrt + "_sig", false, "sl", 1, "", "", "", "", 0, "en and not we");
-					else if (srefPrt == "W_EN") dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::VOID, 0, 0, srefPrt + "_sig", false, "sl", 1, "", "", "", "", 0, "en and we");
-					else dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::VOID, 0, 0, srefPrt + "_sig", false, "slvdn", 1, "", "", "", "", 0, it->first);
+					if (srefKVendor == "xlnx") dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::VOID, 0, 0, srefPrt + "_sig", false, "slvdn", 1, "", "", "", "", 0, it->first);
+					else if ((srefPrt == "re") || (srefPrt == "R_EN")) dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::VOID, 0, 0, srefPrt + "_sig", false, "sl", 1, "", "", "", "", 0, "en and not we");
+					else if ((srefPrt == "we") || (srefPrt == "W_EN")) dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::VOID, 0, 0, srefPrt + "_sig", false, "sl", 1, "", "", "", "", 0, "en and we");
 
 					Wdbe::setPrtCsi(dbswdbe, mdl->ref, srefPrt, srefPrt + "_sig");
 

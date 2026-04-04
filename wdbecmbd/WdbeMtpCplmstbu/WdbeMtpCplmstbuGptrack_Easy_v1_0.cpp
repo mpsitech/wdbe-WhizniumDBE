@@ -150,12 +150,12 @@ DpchRetWdbe* WdbeMtpCplmstbuGptrack_Easy_v1_0::run(
 		mdlNum = 1;
 
 		if (dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMModule WHERE supRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'seqbuf'", refMdl)) {
-			refPrc = dbswdbe->tblwdbemprocess->insertNewRec(NULL, mdl->ref, 0, "seq", trkclk, resetTrkclk, true, "", false, "sequence operation");
+			refPrc = dbswdbe->tblwdbemprocess->insertNewRec(NULL, mdl->ref, 0, "seq", trkclk, resetTrkclk, true, "", false, false, "sequence operation");
 			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, mdl->ref, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, refPrc, 0, "enSeqbuf", false, "sl", 1, "", "", "", "0", 0, "");
 			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, mdl->ref, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, refPrc, 0, "aSeqbuf_vec", false, "slvdn", ceil(log2(sizeSeqbuf)) + 10, "", "", "", "", 0, "");
 			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, mdl->ref, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, refPrc, 0, "dwrSeqbuf", false, "slvdn", 32, "", "", "", "0", 0, "");
 
-			refPrc = dbswdbe->tblwdbemprocess->insertNewRec(NULL, mdl->ref, 0, "seqbufB", "mclk", "reset", true, "", false, "sequence buffer B/" + StrMod::uncap(srefHostif) + "-facing operation");
+			refPrc = dbswdbe->tblwdbemprocess->insertNewRec(NULL, mdl->ref, 0, "seqbufB", "mclk", "reset", true, "", false, false, "sequence buffer B/" + StrMod::uncap(srefHostif) + "-facing operation");
 			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, mdl->ref, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, refPrc, 0, "enSeqbufB", false, "sl", 1, "", "", "", "0", 0, "");
 			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, mdl->ref, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, refPrc, 0, "aSeqbufB_vec", false, "slvdn", ceil(log2(sizeSeqbuf)) + 10 - log2(wHostif/8), "", "", "", "", 0, "");
 

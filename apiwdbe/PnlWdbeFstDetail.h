@@ -51,15 +51,15 @@ namespace PnlWdbeFstDetail {
 
 	public:
 		static const Sbecore::uint NUMFLSTCLU = 1;
-		static const Sbecore::uint CHKEIP = 2;
+		static const Sbecore::uint CHKPRI = 2;
 		static const Sbecore::uint TXFCMT = 3;
 
 	public:
-		ContIac(const Sbecore::uint numFLstClu = 1, const bool ChkEip = false, const std::string& TxfCmt = "");
+		ContIac(const Sbecore::uint numFLstClu = 1, const bool ChkPri = false, const std::string& TxfCmt = "");
 
 	public:
 		Sbecore::uint numFLstClu;
-		bool ChkEip;
+		bool ChkPri;
 		std::string TxfCmt;
 
 	public:
@@ -133,11 +133,11 @@ namespace PnlWdbeFstDetail {
 		static const Sbecore::uint TXTFSMACTIVE = 8;
 		static const Sbecore::uint BUTFSMVIEWAVAIL = 9;
 		static const Sbecore::uint BUTFSMVIEWACTIVE = 10;
-		static const Sbecore::uint CHKEIPACTIVE = 11;
+		static const Sbecore::uint CHKPRIACTIVE = 11;
 		static const Sbecore::uint TXFCMTACTIVE = 12;
 
 	public:
-		StatShr(const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxtSrfActive = true, const bool LstCluActive = true, const bool ButCluViewActive = true, const bool ButCluClusterAvail = true, const bool ButCluUnclusterAvail = true, const bool TxtFsmActive = true, const bool ButFsmViewAvail = true, const bool ButFsmViewActive = true, const bool ChkEipActive = true, const bool TxfCmtActive = true);
+		StatShr(const bool ButSaveAvail = true, const bool ButSaveActive = true, const bool TxtSrfActive = true, const bool LstCluActive = true, const bool ButCluViewActive = true, const bool ButCluClusterAvail = true, const bool ButCluUnclusterAvail = true, const bool TxtFsmActive = true, const bool ButFsmViewAvail = true, const bool ButFsmViewActive = true, const bool ChkPriActive = true, const bool TxfCmtActive = true);
 
 	public:
 		bool ButSaveAvail;
@@ -150,7 +150,7 @@ namespace PnlWdbeFstDetail {
 		bool TxtFsmActive;
 		bool ButFsmViewAvail;
 		bool ButFsmViewActive;
-		bool ChkEipActive;
+		bool ChkPriActive;
 		bool TxfCmtActive;
 
 	public:
@@ -169,18 +169,18 @@ namespace PnlWdbeFstDetail {
 		static const Sbecore::uint CPTSRF = 2;
 		static const Sbecore::uint CPTCLU = 3;
 		static const Sbecore::uint CPTFSM = 4;
-		static const Sbecore::uint CPTEIP = 5;
+		static const Sbecore::uint CPTPRI = 5;
 		static const Sbecore::uint CPTCMT = 6;
 
 	public:
-		Tag(const std::string& Cpt = "", const std::string& CptSrf = "", const std::string& CptClu = "", const std::string& CptFsm = "", const std::string& CptEip = "", const std::string& CptCmt = "");
+		Tag(const std::string& Cpt = "", const std::string& CptSrf = "", const std::string& CptClu = "", const std::string& CptFsm = "", const std::string& CptPri = "", const std::string& CptCmt = "");
 
 	public:
 		std::string Cpt;
 		std::string CptSrf;
 		std::string CptClu;
 		std::string CptFsm;
-		std::string CptEip;
+		std::string CptPri;
 		std::string CptCmt;
 
 	public:

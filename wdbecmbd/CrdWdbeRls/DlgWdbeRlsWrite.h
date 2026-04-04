@@ -600,7 +600,6 @@ public:
 
 	std::string cchost;
 	std::string ncore;
-	std::string sysroot;
 	std::string inclibeq;
 
 	std::string infilename;

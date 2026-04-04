@@ -33,10 +33,10 @@
 
 			<v-checkbox
 				class="my-1"
-				v-model="contiac.ChkEip"
+				v-model="contiac.ChkPri"
 				v-on:change='updateEng(["contiac"])'
-				:label="tag.CptEip"
-				:disabled="!statshr.ChkEipActive"
+				:label="tag.CptPri"
+				:disabled="!statshr.ChkPriActive"
 			/>
 
 			<v-text-field

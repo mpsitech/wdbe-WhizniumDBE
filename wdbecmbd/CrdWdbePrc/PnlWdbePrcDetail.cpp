@@ -151,7 +151,8 @@ void PnlWdbePrcDetail::refreshRecPrc(
 	contiac.TxfAsr = recPrc.asrSrefWdbeMSignal;
 	contiac.ChkFal = recPrc.Falling;
 	contiac.TxfSnr = recPrc.Syncrst;
-	contiac.ChkEip = recPrc.Extip;
+	contiac.ChkPri = recPrc.Preip;
+	contiac.ChkPoi = recPrc.Postip;
 	contiac.TxfCmt = recPrc.Comment;
 
 	statshr.TxtSrfActive = evalTxtSrfActive(dbswdbe);
@@ -160,7 +161,8 @@ void PnlWdbePrcDetail::refreshRecPrc(
 	statshr.ButMdlViewActive = evalButMdlViewActive(dbswdbe);
 	statshr.ChkFalActive = evalChkFalActive(dbswdbe);
 	statshr.TxfSnrActive = evalTxfSnrActive(dbswdbe);
-	statshr.ChkEipActive = evalChkEipActive(dbswdbe);
+	statshr.ChkPriActive = evalChkPriActive(dbswdbe);
+	statshr.ChkPoiActive = evalChkPoiActive(dbswdbe);
 	statshr.TxfCmtActive = evalTxfCmtActive(dbswdbe);
 	if (contiac.diff(&oldContiac).size() != 0) insert(moditems, DpchEngData::CONTIAC);
 	if (continf.diff(&oldContinf).size() != 0) insert(moditems, DpchEngData::CONTINF);
@@ -307,10 +309,11 @@ void PnlWdbePrcDetail::handleDpchAppDataContiac(
 
 	diffitems = _contiac->diff(&contiac);
 
-	if (hasAny(diffitems, {ContIac::CHKFAL, ContIac::TXFSNR, ContIac::CHKEIP, ContIac::TXFCMT, ContIac::NUMFPUPFSMDTT})) {
+	if (hasAny(diffitems, {ContIac::CHKFAL, ContIac::TXFSNR, ContIac::CHKPRI, ContIac::CHKPOI, ContIac::TXFCMT, ContIac::NUMFPUPFSMDTT})) {
 		if (has(diffitems, ContIac::CHKFAL)) contiac.ChkFal = _contiac->ChkFal;
 		if (has(diffitems, ContIac::TXFSNR)) contiac.TxfSnr = _contiac->TxfSnr;
-		if (has(diffitems, ContIac::CHKEIP)) contiac.ChkEip = _contiac->ChkEip;
+		if (has(diffitems, ContIac::CHKPRI)) contiac.ChkPri = _contiac->ChkPri;
+		if (has(diffitems, ContIac::CHKPOI)) contiac.ChkPoi = _contiac->ChkPoi;
 		if (has(diffitems, ContIac::TXFCMT)) contiac.TxfCmt = _contiac->TxfCmt;
 		if (has(diffitems, ContIac::NUMFPUPFSMDTT)) contiac.numFPupFsmDtt = _contiac->numFPupFsmDtt;
 	};

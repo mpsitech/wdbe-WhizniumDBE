@@ -53,7 +53,7 @@ function initBD(bNotD) {
 	// IP initBD --- BEGIN
 	initCpt(contcontdoc, "CptSrf", retrieveTi(srcdoc, "TagWdbeFstDetail", "CptSrf"));
 	initCpt(contcontdoc, "CptFsm", retrieveTi(srcdoc, "TagWdbeFstDetail", "CptFsm"));
-	initCpt(contcontdoc, "CptEip", retrieveTi(srcdoc, "TagWdbeFstDetail", "CptEip"));
+	initCpt(contcontdoc, "CptPri", retrieveTi(srcdoc, "TagWdbeFstDetail", "CptPri"));
 	initCpt(contcontdoc, "CptCmt", retrieveTi(srcdoc, "TagWdbeFstDetail", "CptCmt"));
 	// IP initBD --- END
 
@@ -94,7 +94,7 @@ function refreshBD(bNotD) {
 	var ButFsmViewAvail = (retrieveSi(srcdoc, "StatShrWdbeFstDetail", "ButFsmViewAvail") == "true");
 	var ButFsmViewActive = (retrieveSi(srcdoc, "StatShrWdbeFstDetail", "ButFsmViewActive") == "true");
 
-	var ChkEipActive = (retrieveSi(srcdoc, "StatShrWdbeFstDetail", "ChkEipActive") == "true");
+	var ChkPriActive = (retrieveSi(srcdoc, "StatShrWdbeFstDetail", "ChkPriActive") == "true");
 
 	var TxfCmtActive = (retrieveSi(srcdoc, "StatShrWdbeFstDetail", "TxfCmtActive") == "true");
 
@@ -180,7 +180,7 @@ function refreshBD(bNotD) {
 
 	if (ButFsmViewAvail) refreshButicon(contcontdoc, "ButFsmView", "icon/view", ButFsmViewActive, false);
 
-	refreshChk(contcontdoc, "ChkEip", (retrieveCi(srcdoc, "ContIacWdbeFstDetail", "ChkEip") == "true"), ChkEipActive);
+	refreshChk(contcontdoc, "ChkPri", (retrieveCi(srcdoc, "ContIacWdbeFstDetail", "ChkPri") == "true"), ChkPriActive);
 
 	refreshTxft(contcontdoc, "TxfCmt", retrieveCi(srcdoc, "ContIacWdbeFstDetail", "TxfCmt"), TxfCmtActive, false, true);
 

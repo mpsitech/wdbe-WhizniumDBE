@@ -138,66 +138,13 @@ DpchRetWdbe* WdbeMtpCplmstbuFsmtrack_Easy_v1_0::run(
 		// - buffer connections
 		mdlNum = 1;
 
-		if (dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMModule WHERE supRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'cntbuf'", refMdl)) {
-			refPrc = dbswdbe->tblwdbemprocess->insertNewRec(NULL, mdl->ref, 0, "count", trkclk, resetTrkclk, true, "", false, "count operation");
-
-			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, mdl->ref, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, refPrc, 0, "enCntbuf", false, "sl", 1, "", "", "", "0", 0, "");
-			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, mdl->ref, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, refPrc, 0, "aCntbuf_vec", false, "slvdn", 9, "", "", "", "", 0, "");
-			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, mdl->ref, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, refPrc, 0, "dwrCntbuf", false, "slvdn", 32, "", "", "", "0", 0, "");
-			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, mdl->ref, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, refPrc, 0, "enCntbufB", false, "sl", 1, "", "", "", "0", 0, "");
-			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, mdl->ref, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, refPrc, 0, "aCntbufB_vec", false, "slvdn", 9, "", "", "", "", 0, "");
-
-			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, mdl->ref, mdlNum++, VecWdbeVMSignalMgeTbl::MDL, refMdl, 0, "drdCntbufB", false, "slvdn", 32, "", "", "", "", 0, "");
-
-			Wdbe::setPrtCpr(dbswdbe, refMdl, "rstA", resetTrkclk);
-			Wdbe::setPrtCpr(dbswdbe, refMdl, "clkA", trkclk);
-			Wdbe::setPrtCsi(dbswdbe, refMdl, "enA", "enCntbuf");
-			Wdbe::setPrtDfv(dbswdbe, refMdl, "weA", "1");
-			Wdbe::setPrtCsi(dbswdbe, refMdl, "aA", "aCntbuf_vec");
-			Wdbe::setPrtCsi(dbswdbe, refMdl, "dwrA", "dwrCntbuf");
-
-			Wdbe::setPrtCpr(dbswdbe, refMdl, "rstB", resetTrkclk);
-			Wdbe::setPrtCpr(dbswdbe, refMdl, "clkB", trkclk);
-			Wdbe::setPrtCsi(dbswdbe, refMdl, "enB", "enCntbufB");
-			Wdbe::setPrtDfv(dbswdbe, refMdl, "weB", "0");
-			Wdbe::setPrtCsi(dbswdbe, refMdl, "aB", "aCntbufB_vec");
-			Wdbe::setPrtDfv(dbswdbe, refMdl, "dwrB", "0");
-			Wdbe::setPrtCsi(dbswdbe, refMdl, "drdB", "drdCntbufB");
-		};
-
-		if (dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMModule WHERE supRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'fstoccbuf'", refMdl)) {
-			refPrc = dbswdbe->tblwdbemprocess->insertNewRec(NULL, mdl->ref, 0, "first", trkclk, resetTrkclk, true, "", false, "first occurrence operation");
-			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, mdl->ref, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, refPrc, 0, "enFstoccbuf", false, "sl", 1, "", "", "", "0", 0, "");
-			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, mdl->ref, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, refPrc, 0, "aFstoccbuf_vec", false, "slvdn", 9, "", "", "", "", 0, "");
-			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, mdl->ref, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, refPrc, 0, "dwrFstoccbuf", false, "slvdn", 32, "", "", "", "0", 0, "");
-
-			refPrc = dbswdbe->tblwdbemprocess->insertNewRec(NULL, mdl->ref, 0, "fstoccbufB", "mclk", "reset", true, "", false, "first occurrence buffer B/" + StrMod::uncap(srefHostif) + "-facing operation");
-			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, mdl->ref, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, refPrc, 0, "enFstoccbufB", false, "sl", 1, "", "", "", "0", 0, "");
-			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, mdl->ref, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, refPrc, 0, "aFstoccbufB_vec", false, "slvdn", 11 - log2(wHostif/8), "", "", "", "", 0, "");
-
-			Wdbe::setPrtCpr(dbswdbe, refMdl, "rstA", resetTrkclk);
-			Wdbe::setPrtCpr(dbswdbe, refMdl, "clkA", trkclk);
-			Wdbe::setPrtCsi(dbswdbe, refMdl, "enA", "enFstoccbuf");
-			Wdbe::setPrtDfv(dbswdbe, refMdl, "weA", "1");
-			Wdbe::setPrtCsi(dbswdbe, refMdl, "aA", "aFstoccbuf_vec");
-			Wdbe::setPrtCsi(dbswdbe, refMdl, "dwrA", "dwrFstoccbuf");
-
-			Wdbe::setPrtCpr(dbswdbe, refMdl, "rstB", "reset");
-			Wdbe::setPrtCpr(dbswdbe, refMdl, "clkB", "mclk");
-			Wdbe::setPrtCsi(dbswdbe, refMdl, "enB", "enFstoccbufB");
-			Wdbe::setPrtDfv(dbswdbe, refMdl, "weB", "0");
-			Wdbe::setPrtCsi(dbswdbe, refMdl, "aB", "aFstoccbufB_vec");
-			Wdbe::setPrtDfv(dbswdbe, refMdl, "dwrB", "0");
-			Wdbe::setPrtCpr(dbswdbe, refMdl, "drdB", "fstoccbufTo" + srefHostif + "AXIS_tdata");
-		};
-
 		if (dbswdbe->loadRefBySQL("SELECT ref FROM TblWdbeMModule WHERE supRefWdbeMModule = " + to_string(refWdbeMModule) + " AND sref = 'seqbuf'", refMdl)) {
-			refPrc = dbswdbe->tblwdbemprocess->insertNewRec(NULL, mdl->ref, 0, "seq", trkclk, resetTrkclk, true, "", false, "sequence operation");
+			refPrc = dbswdbe->tblwdbemprocess->insertNewRec(NULL, mdl->ref, 0, "seq", trkclk, resetTrkclk, true, "", false, false, "sequence operation");
 			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, mdl->ref, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, refPrc, 0, "enSeqbuf", false, "sl", 1, "", "", "", "0", 0, "");
 			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, mdl->ref, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, refPrc, 0, "aSeqbuf_vec", false, "slvdn", ceil(log2(sizeSeqbuf)) + 10, "", "", "", "", 0, "");
 			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, mdl->ref, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, refPrc, 0, "dwrSeqbuf", false, "slvdn", 32, "", "", "", "0", 0, "");
 
-			refPrc = dbswdbe->tblwdbemprocess->insertNewRec(NULL, mdl->ref, 0, "seqbufB", "mclk", "reset", true, "", false, "sequence buffer B/" + StrMod::uncap(srefHostif) + "-facing operation");
+			refPrc = dbswdbe->tblwdbemprocess->insertNewRec(NULL, mdl->ref, 0, "seqbufB", "mclk", "reset", true, "", false, false, "sequence buffer B/" + StrMod::uncap(srefHostif) + "-facing operation");
 			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, mdl->ref, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, refPrc, 0, "enSeqbufB", false, "sl", 1, "", "", "", "0", 0, "");
 			dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, mdl->ref, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, refPrc, 0, "aSeqbufB_vec", false, "slvdn", ceil(log2(sizeSeqbuf)) + 10 - log2(wHostif/8), "", "", "", "", 0, "");
 

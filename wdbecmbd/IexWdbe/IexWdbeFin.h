@@ -1713,7 +1713,7 @@ namespace IexWdbeFin {
 	class ImeitemIMFsmstate : public WdbeMFsmstate {
 
 	public:
-		ImeitemIMFsmstate(const Sbecore::ubigint irefRefWdbeCFsmstate = 0, const std::string& sref = "", const bool Extip = false, const std::string& Comment = "");
+		ImeitemIMFsmstate(const Sbecore::ubigint irefRefWdbeCFsmstate = 0, const std::string& sref = "", const bool Preip = false, const std::string& Comment = "");
 		ImeitemIMFsmstate(DbsWdbe* dbswdbe, const Sbecore::ubigint ref);
 
 	public:
@@ -1746,7 +1746,7 @@ namespace IexWdbeFin {
 		public:
 			static const Sbecore::uint IREFREFWDBECFSMSTATE = 1;
 			static const Sbecore::uint SREF = 2;
-			static const Sbecore::uint EXTIP = 4;
+			static const Sbecore::uint PREIP = 4;
 			static const Sbecore::uint COMMENT = 8;
 
 			static Sbecore::uint getIx(const std::string& srefs);
@@ -1968,7 +1968,7 @@ namespace IexWdbeFin {
 	class ImeitemIMProcess : public WdbeMProcess {
 
 	public:
-		ImeitemIMProcess(const std::string& sref = "", const std::string& clkSrefWdbeMSignal = "", const std::string& asrSrefWdbeMSignal = "", const bool Falling = false, const std::string& Syncrst = "", const bool Extip = false, const std::string& Comment = "");
+		ImeitemIMProcess(const std::string& sref = "", const std::string& clkSrefWdbeMSignal = "", const std::string& asrSrefWdbeMSignal = "", const bool Falling = false, const std::string& Syncrst = "", const bool Preip = false, const bool Postip = false, const std::string& Comment = "");
 		ImeitemIMProcess(DbsWdbe* dbswdbe, const Sbecore::ubigint ref);
 
 	public:
@@ -2006,8 +2006,9 @@ namespace IexWdbeFin {
 			static const Sbecore::uint ASRSREFWDBEMSIGNAL = 4;
 			static const Sbecore::uint FALLING = 8;
 			static const Sbecore::uint SYNCRST = 16;
-			static const Sbecore::uint EXTIP = 32;
-			static const Sbecore::uint COMMENT = 64;
+			static const Sbecore::uint PREIP = 32;
+			static const Sbecore::uint POSTIP = 64;
+			static const Sbecore::uint COMMENT = 128;
 
 			static Sbecore::uint getIx(const std::string& srefs);
 			static void getIcs(const Sbecore::uint ix, std::set<Sbecore::uint>& ics);

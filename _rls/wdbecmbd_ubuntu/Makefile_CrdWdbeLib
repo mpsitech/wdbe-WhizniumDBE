@@ -2,7 +2,7 @@
 # make file for CrdWdbeLib card job handler, release wdbecmbd_ubuntu
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 23 Nov 2025
+# date created: 1 Feb 2026
 # IP header --- ABOVE
 
 include ../Makefile.inc
@@ -31,7 +31,7 @@ $(LIB):	$(OBJS)
 	$(STATLIB) $(STATLIBFLAGS) $(LIB).a $(OBJS)
 
 install:
-	mv $(LIB).a $(LIBROOT)/wdbecmbd/
+	mv $(LIB).a $(SYSROOT)$(LIBROOT)/wdbecmbd/
 
 clean:
 	rm -f *.o

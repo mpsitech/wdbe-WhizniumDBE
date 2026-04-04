@@ -41,7 +41,7 @@ DpchRetWdbe* WdbeMtpGenfstHostif_Easy_v1_0::run(
 
 	WdbeMProcess* prc = NULL;
 
-	dbswdbe->tblwdbemprocess->insertNewRec(&prc, refWdbeMModule, 0, "op", "mclk", "reset", false, "state(init) or wordto or xferto", false, "main operation");
+	dbswdbe->tblwdbemprocess->insertNewRec(&prc, refWdbeMModule, 0, "op", "mclk", "reset", false, "state(init) or wordto or xferto", false, false, "main operation");
 
 	prc->refWdbeMFsm = dbswdbe->tblwdbemfsm->insertNewRec(NULL, prc->ref, VecWdbeVMFsmDbgtaptype::CLUST);
 	dbswdbe->tblwdbemprocess->updateRec(prc);

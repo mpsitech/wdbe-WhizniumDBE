@@ -107,7 +107,7 @@ DpchRetWdbe* WdbeGenfstTop::run(
 		};
 
 		for (unsigned int i = 0; i < NClk; i++) {
-			dbswdbe->tblwdbemprocess->insertNewRec(&prc, mdl->ref, 0, clks[i], clks[i], (aresetNNotP) ? "aresetn" : "areset", false, "", (i != 0), clks[i] + " wiring and reset");
+			dbswdbe->tblwdbemprocess->insertNewRec(&prc, mdl->ref, 0, clks[i], clks[i], (aresetNNotP) ? "aresetn" : "areset", false, "", (i != 0), false, clks[i] + " wiring and reset");
 			prc->refWdbeMFsm = dbswdbe->tblwdbemfsm->insertNewRec(NULL, prc->ref, VecWdbeVMFsmDbgtaptype::VOID);
 			dbswdbe->tblwdbemprocess->updateRec(prc);
 

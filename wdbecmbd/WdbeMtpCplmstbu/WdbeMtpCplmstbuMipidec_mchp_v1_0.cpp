@@ -64,7 +64,7 @@ DpchRetWdbe* WdbeMtpCplmstbuMipidec_mchp_v1_0::run(
 			dbswdbe->tblwdbemport->insertNewRec(NULL, refC, refWdbeMModule, mdlNum++, VecWdbeVMPortMdlCat::RTESUP, "l" + to_string(i) + "_lp_data_n_i", VecWdbeVMPortDir::IN, "sl", 1, "", "", "", "", "", "");
 		};
 
-		Wdbe::setPrtWdt(dbswdbe, refWdbeMModule, "data_out_o", wData * g_NUM_OF_PIXELS);
+		Wdbe::setPrtWdt(dbswdbe, refWdbeMModule, "tdata_o", wData * g_NUM_OF_PIXELS);
 	};
 	// IP run --- IEND
 

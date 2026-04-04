@@ -59,23 +59,23 @@ public class PnlWdbeFstDetail {
 	public class ContIac extends Block {
 
 		public static final int NUMFLSTCLU = 1;
-		public static final int CHKEIP = 2;
+		public static final int CHKPRI = 2;
 		public static final int TXFCMT = 3;
 
 		public ContIac(
 					int numFLstClu
-					, boolean ChkEip
+					, boolean ChkPri
 					, String TxfCmt
 				) {
 			this.numFLstClu = numFLstClu;
-			this.ChkEip = ChkEip;
+			this.ChkPri = ChkPri;
 			this.TxfCmt = TxfCmt;
 
-			mask = new HashSet<Integer>(Arrays.asList(NUMFLSTCLU, CHKEIP, TXFCMT));
+			mask = new HashSet<Integer>(Arrays.asList(NUMFLSTCLU, CHKPRI, TXFCMT));
 		};
 
 		public int numFLstClu;
-		public boolean ChkEip;
+		public boolean ChkPri;
 		public String TxfCmt;
 
 		public boolean readXML(
@@ -92,7 +92,7 @@ public class PnlWdbeFstDetail {
 
 			if (Xmlio.checkXPath(doc, basexpath)) {
 				numFLstClu = Xmlio.extractIntegerAttrUclc(doc, basexpath, itemtag, "Ci", "sref", "numFLstClu", mask, NUMFLSTCLU);
-				ChkEip = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Ci", "sref", "ChkEip", mask, CHKEIP);
+				ChkPri = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Ci", "sref", "ChkPri", mask, CHKPRI);
 				TxfCmt = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ci", "sref", "TxfCmt", mask, TXFCMT);
 
 				return true;
@@ -120,7 +120,7 @@ public class PnlWdbeFstDetail {
 			else sup.appendChild(el);
 
 			Xmlio.writeIntegerAttr(doc, el, itemtag, "sref", "numFLstClu", numFLstClu);
-			Xmlio.writeBooleanAttr(doc, el, itemtag, "sref", "ChkEip", ChkEip);
+			Xmlio.writeBooleanAttr(doc, el, itemtag, "sref", "ChkPri", ChkPri);
 			Xmlio.writeStringAttr(doc, el, itemtag, "sref", "TxfCmt", TxfCmt);
 		};
 
@@ -130,7 +130,7 @@ public class PnlWdbeFstDetail {
 			HashSet<Integer> items = new HashSet<Integer>();
 
 			if (numFLstClu == comp.numFLstClu) items.add(NUMFLSTCLU);
-			if (ChkEip == comp.ChkEip) items.add(CHKEIP);
+			if (ChkPri == comp.ChkPri) items.add(CHKPRI);
 			if (TxfCmt.equals(comp.TxfCmt)) items.add(TXFCMT);
 
 			return(items);
@@ -144,7 +144,7 @@ public class PnlWdbeFstDetail {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(NUMFLSTCLU, CHKEIP, TXFCMT));
+			diffitems = new HashSet<Integer>(Arrays.asList(NUMFLSTCLU, CHKPRI, TXFCMT));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);
@@ -321,7 +321,7 @@ public class PnlWdbeFstDetail {
 		public static final int TXTFSMACTIVE = 8;
 		public static final int BUTFSMVIEWAVAIL = 9;
 		public static final int BUTFSMVIEWACTIVE = 10;
-		public static final int CHKEIPACTIVE = 11;
+		public static final int CHKPRIACTIVE = 11;
 		public static final int TXFCMTACTIVE = 12;
 
 		public StatShr(
@@ -335,7 +335,7 @@ public class PnlWdbeFstDetail {
 					, boolean TxtFsmActive
 					, boolean ButFsmViewAvail
 					, boolean ButFsmViewActive
-					, boolean ChkEipActive
+					, boolean ChkPriActive
 					, boolean TxfCmtActive
 				) {
 			this.ButSaveAvail = ButSaveAvail;
@@ -348,10 +348,10 @@ public class PnlWdbeFstDetail {
 			this.TxtFsmActive = TxtFsmActive;
 			this.ButFsmViewAvail = ButFsmViewAvail;
 			this.ButFsmViewActive = ButFsmViewActive;
-			this.ChkEipActive = ChkEipActive;
+			this.ChkPriActive = ChkPriActive;
 			this.TxfCmtActive = TxfCmtActive;
 
-			mask = new HashSet<Integer>(Arrays.asList(BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, LSTCLUACTIVE, BUTCLUVIEWACTIVE, BUTCLUCLUSTERAVAIL, BUTCLUUNCLUSTERAVAIL, TXTFSMACTIVE, BUTFSMVIEWAVAIL, BUTFSMVIEWACTIVE, CHKEIPACTIVE, TXFCMTACTIVE));
+			mask = new HashSet<Integer>(Arrays.asList(BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, LSTCLUACTIVE, BUTCLUVIEWACTIVE, BUTCLUCLUSTERAVAIL, BUTCLUUNCLUSTERAVAIL, TXTFSMACTIVE, BUTFSMVIEWAVAIL, BUTFSMVIEWACTIVE, CHKPRIACTIVE, TXFCMTACTIVE));
 		};
 
 		public boolean ButSaveAvail;
@@ -364,7 +364,7 @@ public class PnlWdbeFstDetail {
 		public boolean TxtFsmActive;
 		public boolean ButFsmViewAvail;
 		public boolean ButFsmViewActive;
-		public boolean ChkEipActive;
+		public boolean ChkPriActive;
 		public boolean TxfCmtActive;
 
 		public boolean readXML(
@@ -390,7 +390,7 @@ public class PnlWdbeFstDetail {
 				TxtFsmActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxtFsmActive", mask, TXTFSMACTIVE);
 				ButFsmViewAvail = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButFsmViewAvail", mask, BUTFSMVIEWAVAIL);
 				ButFsmViewActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ButFsmViewActive", mask, BUTFSMVIEWACTIVE);
-				ChkEipActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ChkEipActive", mask, CHKEIPACTIVE);
+				ChkPriActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "ChkPriActive", mask, CHKPRIACTIVE);
 				TxfCmtActive = Xmlio.extractBooleanAttrUclc(doc, basexpath, itemtag, "Si", "sref", "TxfCmtActive", mask, TXFCMTACTIVE);
 
 				return true;
@@ -414,7 +414,7 @@ public class PnlWdbeFstDetail {
 			if (TxtFsmActive == comp.TxtFsmActive) items.add(TXTFSMACTIVE);
 			if (ButFsmViewAvail == comp.ButFsmViewAvail) items.add(BUTFSMVIEWAVAIL);
 			if (ButFsmViewActive == comp.ButFsmViewActive) items.add(BUTFSMVIEWACTIVE);
-			if (ChkEipActive == comp.ChkEipActive) items.add(CHKEIPACTIVE);
+			if (ChkPriActive == comp.ChkPriActive) items.add(CHKPRIACTIVE);
 			if (TxfCmtActive == comp.TxfCmtActive) items.add(TXFCMTACTIVE);
 
 			return(items);
@@ -428,7 +428,7 @@ public class PnlWdbeFstDetail {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, LSTCLUACTIVE, BUTCLUVIEWACTIVE, BUTCLUCLUSTERAVAIL, BUTCLUUNCLUSTERAVAIL, TXTFSMACTIVE, BUTFSMVIEWAVAIL, BUTFSMVIEWACTIVE, CHKEIPACTIVE, TXFCMTACTIVE));
+			diffitems = new HashSet<Integer>(Arrays.asList(BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, LSTCLUACTIVE, BUTCLUVIEWACTIVE, BUTCLUCLUSTERAVAIL, BUTCLUUNCLUSTERAVAIL, TXTFSMACTIVE, BUTFSMVIEWAVAIL, BUTFSMVIEWACTIVE, CHKPRIACTIVE, TXFCMTACTIVE));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);
@@ -445,7 +445,7 @@ public class PnlWdbeFstDetail {
 		public static final int CPTSRF = 2;
 		public static final int CPTCLU = 3;
 		public static final int CPTFSM = 4;
-		public static final int CPTEIP = 5;
+		public static final int CPTPRI = 5;
 		public static final int CPTCMT = 6;
 
 		public Tag(
@@ -453,24 +453,24 @@ public class PnlWdbeFstDetail {
 					, String CptSrf
 					, String CptClu
 					, String CptFsm
-					, String CptEip
+					, String CptPri
 					, String CptCmt
 				) {
 			this.Cpt = Cpt;
 			this.CptSrf = CptSrf;
 			this.CptClu = CptClu;
 			this.CptFsm = CptFsm;
-			this.CptEip = CptEip;
+			this.CptPri = CptPri;
 			this.CptCmt = CptCmt;
 
-			mask = new HashSet<Integer>(Arrays.asList(CPT, CPTSRF, CPTCLU, CPTFSM, CPTEIP, CPTCMT));
+			mask = new HashSet<Integer>(Arrays.asList(CPT, CPTSRF, CPTCLU, CPTFSM, CPTPRI, CPTCMT));
 		};
 
 		public String Cpt;
 		public String CptSrf;
 		public String CptClu;
 		public String CptFsm;
-		public String CptEip;
+		public String CptPri;
 		public String CptCmt;
 
 		public boolean readXML(
@@ -490,7 +490,7 @@ public class PnlWdbeFstDetail {
 				CptSrf = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "CptSrf", mask, CPTSRF);
 				CptClu = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "CptClu", mask, CPTCLU);
 				CptFsm = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "CptFsm", mask, CPTFSM);
-				CptEip = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "CptEip", mask, CPTEIP);
+				CptPri = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "CptPri", mask, CPTPRI);
 				CptCmt = Xmlio.extractStringAttrUclc(doc, basexpath, itemtag, "Ti", "sref", "CptCmt", mask, CPTCMT);
 
 				return true;
@@ -508,7 +508,7 @@ public class PnlWdbeFstDetail {
 			if (CptSrf.equals(comp.CptSrf)) items.add(CPTSRF);
 			if (CptClu.equals(comp.CptClu)) items.add(CPTCLU);
 			if (CptFsm.equals(comp.CptFsm)) items.add(CPTFSM);
-			if (CptEip.equals(comp.CptEip)) items.add(CPTEIP);
+			if (CptPri.equals(comp.CptPri)) items.add(CPTPRI);
 			if (CptCmt.equals(comp.CptCmt)) items.add(CPTCMT);
 
 			return(items);
@@ -522,7 +522,7 @@ public class PnlWdbeFstDetail {
 
 			commitems = comm(comp);
 
-			diffitems = new HashSet<Integer>(Arrays.asList(CPT, CPTSRF, CPTCLU, CPTFSM, CPTEIP, CPTCMT));
+			diffitems = new HashSet<Integer>(Arrays.asList(CPT, CPTSRF, CPTCLU, CPTFSM, CPTPRI, CPTCMT));
 			for (Integer ci: commitems) diffitems.remove(ci);
 
 			return(diffitems);

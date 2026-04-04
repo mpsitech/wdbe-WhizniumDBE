@@ -3,7 +3,7 @@
 # checkout script for Wdbe Vue.js UI, release vueappwdbe_any
 # copyright: (C) 2022 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 23 Nov 2025
+# date created: 1 Feb 2026
 # IP header --- ABOVE
 
 if [ -z ${WHIZROOT+x} ]; then
@@ -11,27 +11,27 @@ if [ -z ${WHIZROOT+x} ]; then
 	exit 1
 fi
 
-export set WEBROOT=${WHIZROOT}/web
+export set WEBROOT=${SYSROOT}${WHIZROOT}/web
 
-mkdir $WEBROOT/vueappwdbe/src
+mkdir ${WEBROOT}/vueappwdbe/src
 
-cp checkin.sh $WEBROOT/vueappwdbe/src
+cp checkin.sh ${WEBROOT}/vueappwdbe/src
 
-cp ../../vueappwdbe/AppWdbe.vue $WEBROOT/vueappwdbe/src/
-cp ../../vueappwdbe/main.js $WEBROOT/vueappwdbe/src/
+cp ../../vueappwdbe/AppWdbe.vue ${WEBROOT}/vueappwdbe/src/
+cp ../../vueappwdbe/main.js ${WEBROOT}/vueappwdbe/src/
 
-mkdir $WEBROOT/vueappwdbe/src/assets
+mkdir ${WEBROOT}/vueappwdbe/src/assets
 
-cp ../../vueappwdbe/assets/* $WEBROOT/vueappwdbe/src/assets/
-cp ../../vueappwdbe/assets/favicon.ico $WEBROOT/vueappwdbe/public/
+cp ../../vueappwdbe/assets/* ${WEBROOT}/vueappwdbe/src/assets/
+cp ../../vueappwdbe/assets/favicon.ico ${WEBROOT}/vueappwdbe/public/
 
-mkdir $WEBROOT/vueappwdbe/src/components
+mkdir ${WEBROOT}/vueappwdbe/src/components
 
-cp ../../vueappwdbe/SessWdbe.vue $WEBROOT/vueappwdbe/src/components/
+cp ../../vueappwdbe/SessWdbe.vue ${WEBROOT}/vueappwdbe/src/components/
 
-mkdir $WEBROOT/vueappwdbe/src/components/CrdWdbeStart
+mkdir ${WEBROOT}/vueappwdbe/src/components/CrdWdbeStart
 
-cp ../../vueappwdbe/CrdWdbeStart/CrdWdbeStart.vue $WEBROOT/vueappwdbe/src/components/CrdWdbeStart/
+cp ../../vueappwdbe/CrdWdbeStart/CrdWdbeStart.vue ${WEBROOT}/vueappwdbe/src/components/CrdWdbeStart/
 
 mkdir $WEBROOT/vueappwdbe/src/components/CrdWdbeNav
 
@@ -189,6 +189,6 @@ mkdir $WEBROOT/vueappwdbe/src/components/CrdWdbeUtl
 
 cp ../../vueappwdbe/CrdWdbeUtl/*.vue $WEBROOT/vueappwdbe/src/components/CrdWdbeUtl/
 
-mkdir $WEBROOT/vueappwdbe/src/scripts
+mkdir ${WEBROOT}/vueappwdbe/src/scripts
 
-cp ../../vueappwdbe/scripts/*.js $WEBROOT/vueappwdbe/src/scripts/
+cp ../../vueappwdbe/scripts/*.js ${WEBROOT}/vueappwdbe/src/scripts/

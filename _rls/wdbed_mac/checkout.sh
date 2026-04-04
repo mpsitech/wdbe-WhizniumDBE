@@ -3,7 +3,7 @@
 # checkout script for Wdbe daemon, release wdbed_mac
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 23 Nov 2025
+# date created: 1 Feb 2026
 # IP header --- ABOVE
 
 if [ -z ${WHIZROOT+x} ]; then
@@ -11,15 +11,15 @@ if [ -z ${WHIZROOT+x} ]; then
 	exit 1
 fi
 
-export set BUILDROOT=${WHIZSDKROOT}/build
-export set LIBROOT=${WHIZSDKROOT}/lib
-export set BINROOT=${WHIZROOT}/bin
+export set BUILDROOT=${SYSROOT}${WHIZSDKROOT}/build
+export set LIBROOT=${SYSROOT}${WHIZSDKROOT}/lib
+export set BINROOT=${SYSROOT}${WHIZROOT}/bin
 export set REPROOT=${WHIZDEVROOT}/rep
-export set CMBDBUILDROOT=$REPROOT/wdbe/wdbecmbd
+export set CMBDBUILDROOT=${REPROOT}/wdbe/wdbecmbd
 
-mkdir $BUILDROOT/wdbed
-mkdir $BUILDROOT/wdbed/IexWdbe
-mkdir $BUILDROOT/wdbed/VecWdbe
+mkdir ${BUILDROOT}/wdbed
+mkdir ${BUILDROOT}/wdbed/IexWdbe
+mkdir ${BUILDROOT}/wdbed/VecWdbe
 mkdir $BUILDROOT/wdbed/CrdWdbeNav
 mkdir $BUILDROOT/wdbed/CrdWdbeUsg
 mkdir $BUILDROOT/wdbed/CrdWdbeUsr
@@ -60,61 +60,61 @@ mkdir $BUILDROOT/wdbed/CrdWdbeRls
 mkdir $BUILDROOT/wdbed/CrdWdbeIdf
 mkdir $BUILDROOT/wdbed/CrdWdbeUtl
 
-mkdir $LIBROOT/wdbed
+mkdir ${LIBROOT}/wdbed
 
-mkdir $BINROOT/wdbed
+mkdir ${BINROOT}/wdbed
 
-cp make.sh $BUILDROOT/wdbed/
-cp remake.sh $BUILDROOT/wdbed/
+cp make.sh ${BUILDROOT}/wdbed/
+cp remake.sh ${BUILDROOT}/wdbed/
 
-cp Makefile.inc $BUILDROOT/wdbed/
-cp Makefile $BUILDROOT/wdbed/
+cp Makefile.inc ${BUILDROOT}/wdbed/
+cp Makefile ${BUILDROOT}/wdbed/
 
-cp ../../wdbed/Wdbed.h $BUILDROOT/wdbed/
-cp ../../wdbed/Wdbed.cpp $BUILDROOT/wdbed/
+cp ../../wdbed/Wdbed.h ${BUILDROOT}/wdbed/
+cp ../../wdbed/Wdbed.cpp ${BUILDROOT}/wdbed/
 
-cp ../../wdbed/WdbedAppsrv.h $BUILDROOT/wdbed/
-cp ../../wdbed/WdbedAppsrv.cpp $BUILDROOT/wdbed/
+cp ../../wdbed/WdbedAppsrv.h ${BUILDROOT}/wdbed/
+cp ../../wdbed/WdbedAppsrv.cpp ${BUILDROOT}/wdbed/
 
-cp ../../wdbed/WdbedJobprc.h $BUILDROOT/wdbed/
-cp ../../wdbed/WdbedJobprc.cpp $BUILDROOT/wdbed/
+cp ../../wdbed/WdbedJobprc.h ${BUILDROOT}/wdbed/
+cp ../../wdbed/WdbedJobprc.cpp ${BUILDROOT}/wdbed/
 
-cp ../../wdbed/WdbedOpprc.h $BUILDROOT/wdbed/
-cp ../../wdbed/WdbedOpprc.cpp $BUILDROOT/wdbed/
+cp ../../wdbed/WdbedOpprc.h ${BUILDROOT}/wdbed/
+cp ../../wdbed/WdbedOpprc.cpp ${BUILDROOT}/wdbed/
 
-cp ../../wdbed/WdbedOpengsrv.h $BUILDROOT/wdbed/
-cp ../../wdbed/WdbedOpengsrv.cpp $BUILDROOT/wdbed/
+cp ../../wdbed/WdbedOpengsrv.h ${BUILDROOT}/wdbed/
+cp ../../wdbed/WdbedOpengsrv.cpp ${BUILDROOT}/wdbed/
 
-cp ../../wdbed/WdbedOpengcli.h $BUILDROOT/wdbed/
-cp ../../wdbed/WdbedOpengcli.cpp $BUILDROOT/wdbed/
+cp ../../wdbed/WdbedOpengcli.h ${BUILDROOT}/wdbed/
+cp ../../wdbed/WdbedOpengcli.cpp ${BUILDROOT}/wdbed/
 
-cp ../../wdbed/Wdbed_exe.h $BUILDROOT/wdbed/
-cp ../../wdbed/Wdbed_exe.cpp $BUILDROOT/wdbed/
+cp ../../wdbed/Wdbed_exe.h ${BUILDROOT}/wdbed/
+cp ../../wdbed/Wdbed_exe.cpp ${BUILDROOT}/wdbed/
 
-cp $CMBDBUILDROOT/Wdbe.h $BUILDROOT/wdbed/
-cp $CMBDBUILDROOT/Wdbe.cpp $BUILDROOT/wdbed/
+cp ${CMBDBUILDROOT}/Wdbe.h ${BUILDROOT}/wdbed/
+cp ${CMBDBUILDROOT}/Wdbe.cpp ${BUILDROOT}/wdbed/
 
-cp $CMBDBUILDROOT/Root*.h $BUILDROOT/wdbed/
-cp $CMBDBUILDROOT/Root*.cpp $BUILDROOT/wdbed/
+cp ${CMBDBUILDROOT}/Root*.h ${BUILDROOT}/wdbed/
+cp ${CMBDBUILDROOT}/Root*.cpp ${BUILDROOT}/wdbed/
 
-cp $CMBDBUILDROOT/Sess*.h $BUILDROOT/wdbed/
-cp $CMBDBUILDROOT/Sess*.cpp $BUILDROOT/wdbed/
+cp ${CMBDBUILDROOT}/Sess*.h ${BUILDROOT}/wdbed/
+cp ${CMBDBUILDROOT}/Sess*.cpp ${BUILDROOT}/wdbed/
 
-cp $CMBDBUILDROOT/gbl/*.h $BUILDROOT/wdbed/
-cp $CMBDBUILDROOT/gbl/*.cpp $BUILDROOT/wdbed/
+cp ${CMBDBUILDROOT}/gbl/*.h ${BUILDROOT}/wdbed/
+cp ${CMBDBUILDROOT}/gbl/*.cpp ${BUILDROOT}/wdbed/
 
-cp Makefile_IexWdbe $BUILDROOT/wdbed/IexWdbe/Makefile
+cp Makefile_IexWdbe ${BUILDROOT}/wdbed/IexWdbe/Makefile
 
-cp $CMBDBUILDROOT/IexWdbe/IexWdbe*.h $BUILDROOT/wdbed/IexWdbe/
-cp $CMBDBUILDROOT/IexWdbe/IexWdbe*.cpp $BUILDROOT/wdbed/IexWdbe/
+cp ${CMBDBUILDROOT}/IexWdbe/IexWdbe*.h ${BUILDROOT}/wdbed/IexWdbe/
+cp ${CMBDBUILDROOT}/IexWdbe/IexWdbe*.cpp ${BUILDROOT}/wdbed/IexWdbe/
 
-cp $CMBDBUILDROOT/IexWdbe/JobWdbeIex*.h $BUILDROOT/wdbed/IexWdbe/
-cp $CMBDBUILDROOT/IexWdbe/JobWdbeIex*.cpp $BUILDROOT/wdbed/IexWdbe/
+cp ${CMBDBUILDROOT}/IexWdbe/JobWdbeIex*.h ${BUILDROOT}/wdbed/IexWdbe/
+cp ${CMBDBUILDROOT}/IexWdbe/JobWdbeIex*.cpp ${BUILDROOT}/wdbed/IexWdbe/
 
-cp Makefile_VecWdbe $BUILDROOT/wdbed/VecWdbe/Makefile
+cp Makefile_VecWdbe ${BUILDROOT}/wdbed/VecWdbe/Makefile
 
-cp $CMBDBUILDROOT/VecWdbe/Vec*.h $BUILDROOT/wdbed/VecWdbe/
-cp $CMBDBUILDROOT/VecWdbe/Vec*.cpp $BUILDROOT/wdbed/VecWdbe/
+cp ${CMBDBUILDROOT}/VecWdbe/Vec*.h ${BUILDROOT}/wdbed/VecWdbe/
+cp ${CMBDBUILDROOT}/VecWdbe/Vec*.cpp ${BUILDROOT}/wdbed/VecWdbe/
 
 cp Makefile_CrdWdbeNav $BUILDROOT/wdbed/CrdWdbeNav/Makefile
 

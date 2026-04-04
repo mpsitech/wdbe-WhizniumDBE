@@ -261,7 +261,7 @@ void WdbeGenAux::genCdc(
 		else imax = "0";
 	};
 
-	refPrc = dbswdbe->tblwdbemprocess->insertNewRec(NULL, cdc->refWdbeMModule, 0, from + "To" + StrMod::cap(to) + "Stretch", from, fromRst, false, "", false, from + " to " + to + " CDC stretching");
+	refPrc = dbswdbe->tblwdbemprocess->insertNewRec(NULL, cdc->refWdbeMModule, 0, from + "To" + StrMod::cap(to) + "Stretch", from, fromRst, false, "", false, false, from + " to " + to + " CDC stretching");
 
 	refNumVar = 1;
 
@@ -296,7 +296,7 @@ void WdbeGenAux::genCdc(
 		};
 	};
 
-	refPrc = dbswdbe->tblwdbemprocess->insertNewRec(NULL, cdc->refWdbeMModule, 0, from + "To" + StrMod::cap(to) + "Sample", to, toRst, false, "", false, from + " to " + to + " CDC sampling");
+	refPrc = dbswdbe->tblwdbemprocess->insertNewRec(NULL, cdc->refWdbeMModule, 0, from + "To" + StrMod::cap(to) + "Sample", to, toRst, false, "", false, false, from + " to " + to + " CDC sampling");
 
 	refNumVar = 1;
 

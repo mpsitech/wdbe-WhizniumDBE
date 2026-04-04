@@ -3,7 +3,7 @@
 # re-make script for Wdbe operation daemon, release wdbeopd1_ubuntu
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 23 Nov 2025
+# date created: 1 Feb 2026
 # IP header --- ABOVE
 
 if [ -z ${WHIZROOT+x} ]; then
@@ -11,12 +11,12 @@ if [ -z ${WHIZROOT+x} ]; then
 	exit 1
 fi
 
-export set BUILDROOT=${WHIZSDKROOT}/build
+export set BUILDROOT=${SYSROOT}${WHIZSDKROOT}/build
 export set REPROOT=${WHIZDEVROOT}/rep
 
-cd $REPROOT/wdbe/_rls/wdbeopd1_ubuntu
+cd ${REPROOT}/wdbe/_rls/wdbeopd1_ubuntu
 ./checkout.sh
 
-cd $BUILDROOT/wdbeopd1
+cd ${BUILDROOT}/wdbeopd1
 
 ./make.sh "$@"

@@ -108,11 +108,12 @@ void WdbeMtpWrfpgaCrcspec_v3_0::writeMdlVhd(
 	crcpoly = 0;
 
 	if (Wdbe::getMpa(dbswdbe, mdl->ref, "poly", s)) {
-		if (s.length() <= 4) while (s.length() < 4) s = "0" + s;
+		if (s.length() <= 2) while (s.length() < 2) s = "0" + s;
+		else if (s.length() <= 4) while (s.length() < 4) s = "0" + s;
 		else if (s.length() <= 8) while (s.length() < 8) s = "0" + s;
 		else s = s.substr(0, 8);
 
-		wPoly = (s.length() == 8) ? 32 : 16;
+		wPoly = s.length() * 4;
 		
 		for (unsigned int i = 0; i < s.length(); i += 2) crcpoly = (crcpoly << 8) + Wdbe::hexToBin(s.substr(i, 2));
 	};

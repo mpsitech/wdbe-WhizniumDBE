@@ -25,7 +25,7 @@
 class WdbeMProcess {
 
 public:
-	WdbeMProcess(const Sbecore::ubigint ref = 0, const Sbecore::ubigint refWdbeMModule = 0, const Sbecore::ubigint refWdbeMFsm = 0, const std::string sref = "", const std::string clkSrefWdbeMSignal = "", const std::string asrSrefWdbeMSignal = "", const bool Falling = false, const std::string Syncrst = "", const bool Extip = false, const std::string Comment = "");
+	WdbeMProcess(const Sbecore::ubigint ref = 0, const Sbecore::ubigint refWdbeMModule = 0, const Sbecore::ubigint refWdbeMFsm = 0, const std::string sref = "", const std::string clkSrefWdbeMSignal = "", const std::string asrSrefWdbeMSignal = "", const bool Falling = false, const std::string Syncrst = "", const bool Preip = false, const bool Postip = false, const std::string Comment = "");
 
 public:
 	Sbecore::ubigint ref;
@@ -36,7 +36,8 @@ public:
 	std::string asrSrefWdbeMSignal;
 	bool Falling;
 	std::string Syncrst;
-	bool Extip;
+	bool Preip;
+	bool Postip;
 	std::string Comment;
 
 public:
@@ -83,8 +84,8 @@ public:
 	virtual Sbecore::ubigint loadRstBySQL(const std::string& sqlstr, const bool append, ListWdbeMProcess& rst);
 
 	virtual Sbecore::ubigint insertRec(WdbeMProcess* rec);
-	Sbecore::ubigint insertNewRec(WdbeMProcess** rec = NULL, const Sbecore::ubigint refWdbeMModule = 0, const Sbecore::ubigint refWdbeMFsm = 0, const std::string sref = "", const std::string clkSrefWdbeMSignal = "", const std::string asrSrefWdbeMSignal = "", const bool Falling = false, const std::string Syncrst = "", const bool Extip = false, const std::string Comment = "");
-	Sbecore::ubigint appendNewRecToRst(ListWdbeMProcess& rst, WdbeMProcess** rec = NULL, const Sbecore::ubigint refWdbeMModule = 0, const Sbecore::ubigint refWdbeMFsm = 0, const std::string sref = "", const std::string clkSrefWdbeMSignal = "", const std::string asrSrefWdbeMSignal = "", const bool Falling = false, const std::string Syncrst = "", const bool Extip = false, const std::string Comment = "");
+	Sbecore::ubigint insertNewRec(WdbeMProcess** rec = NULL, const Sbecore::ubigint refWdbeMModule = 0, const Sbecore::ubigint refWdbeMFsm = 0, const std::string sref = "", const std::string clkSrefWdbeMSignal = "", const std::string asrSrefWdbeMSignal = "", const bool Falling = false, const std::string Syncrst = "", const bool Preip = false, const bool Postip = false, const std::string Comment = "");
+	Sbecore::ubigint appendNewRecToRst(ListWdbeMProcess& rst, WdbeMProcess** rec = NULL, const Sbecore::ubigint refWdbeMModule = 0, const Sbecore::ubigint refWdbeMFsm = 0, const std::string sref = "", const std::string clkSrefWdbeMSignal = "", const std::string asrSrefWdbeMSignal = "", const bool Falling = false, const std::string Syncrst = "", const bool Preip = false, const bool Postip = false, const std::string Comment = "");
 	virtual void insertRst(ListWdbeMProcess& rst, bool transact = false);
 	virtual void updateRec(WdbeMProcess* rec);
 	virtual void updateRst(ListWdbeMProcess& rst, bool transact = false);

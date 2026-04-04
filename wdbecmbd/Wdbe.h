@@ -10,10 +10,10 @@
 #ifndef WDBE_H
 #define WDBE_H
 
-#define WDBE_VERSION "1.1.50"
+#define WDBE_VERSION "1.1.51"
 #define WDBE_VERSION_MAJOR 1
 #define WDBE_VERSION_MINOR 1
-#define WDBE_VERSION_SUB 50
+#define WDBE_VERSION_SUB 51
 
 #include <sys/wait.h> // IP include.cust --- ILINE
 
@@ -116,7 +116,9 @@ namespace Wdbe {
 	std::string pathToPathstr(const std::string& path, const bool libNotInc, const std::string& inclibeq);
 	std::string libsToLibstr(const std::string& libs, const bool statNotDyn);
 
-	void analyzeUnt(DbsWdbe* dbswdbe, WdbeMUnit* unt, std::string& srefroot, ListWdbeMVector& vecs, ListWdbeMController& ctrs, ListWdbeMImbuf& imbs, ListWdbeMCommand& cmds, ListWdbeMError& errs, Sbecore::ubigint& refHostif, Sbecore::uint& ixImbCmdinv, Sbecore::uint& ixImbCmdret, bool& hasvecbuf, bool& hasvecctr, bool& hasveccmd, bool& hasvecerr, bool& hasspeccmd);
+	std::string getInclibeqstr(const std::string& path, const std::string& inclibeq);
+
+	void analyzeUnt(DbsWdbe* dbswdbe, WdbeMUnit* unt, std::string& srefroot, ListWdbeMVector& vecs, ListWdbeMController& ctrs, ListWdbeMImbuf& imbs, ListWdbeMCommand& cmds, ListWdbeMError& errs, Sbecore::ubigint& refHostif, Sbecore::uint& ixImbCmdinv, Sbecore::uint& ixImbCmdret, bool& hasvecbuf, bool& hasvecctr, bool& hasvecfsm, bool& hasveccmd, bool& hasvecerr, bool& hasspeccmd);
 
 	std::string getUntVendor(DbsWdbe* dbswdbe, const Sbecore::ubigint refWdbeMUnit);
 	std::string getMdlVendor(DbsWdbe* dbswdbe, const Sbecore::ubigint refWdbeMModule);

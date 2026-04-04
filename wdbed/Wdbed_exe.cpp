@@ -219,7 +219,7 @@ void Wdbed::loadKeycert() {
 	infile.close();
 
 	// certificate file
-	s = xchg->exedir + "/server.pem";
+	s = xchg->exedir + "/server.crt";
 	infile.open(s.c_str(), ifstream::in);
 	if (infile.fail()) throw SbeException(SbeException::PATHNF, {{"path",s}});
 
@@ -494,7 +494,7 @@ int main(
 
 	try {
 		// welcome message
-		cout << "Welcome to WhizniumDBE v1.1.50!" << endl;
+		cout << "Welcome to WhizniumDBE v1.1.51!" << endl;
 
 		// calls wdbed.init()
 		wdbed = new Wdbed(exedir, clearAll, startMon);
@@ -512,7 +512,11 @@ int main(
 		} else {
 			// main command loop
 			while (cmd != "quit") {
-				cout << "Wdbed >> ";
+				cout << "Wdbed";
+				if (xchg->mon.isRunning() && MtMon::isRunning()) cout << " [mon,mtmon]";
+				else if (xchg->mon.isRunning()) cout << " [mon]";
+				else if (MtMon::isRunning()) cout << " [mtmon]";
+				cout << " >> ";
 
 				do {
 					cin.clear();
@@ -527,8 +531,8 @@ int main(
 					cout << "\tstartMon" << endl;
 					cout << "\tstopMon" << endl;
 
-					cout << "\tstartMtdump" << endl;
-					cout << "\tstopMtdump" << endl;
+					cout << "\tstartMtmon" << endl;
+					cout << "\tstopMtmon" << endl;
 
 					cout << "\tshowNodes" << endl;
 
@@ -552,11 +556,11 @@ int main(
 				} else if (cmd == "stopMon") {
 					xchg->stopMon();
 
-				} else if (cmd == "startMtdump") {
-					Mt::ixVVerbose = Mt::VecVVerbose::ALL;
+				} else if (cmd == "startMtmon") {
+					xchg->startMtmon();
 
-				} else if (cmd == "stopMtdump") {
-					Mt::ixVVerbose = Mt::VecVVerbose::ERROR;
+				} else if (cmd == "stopMtmon") {
+					xchg->stopMtmon();
 
 				} else if (cmd == "showNodes") {
 					NodeWdbe* node = NULL;

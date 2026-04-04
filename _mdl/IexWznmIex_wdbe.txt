@@ -250,7 +250,7 @@ IexWdbeDal	dal		1.1.6
 		tbl	fil;tbl	Comment	Comment	cmt	0	void
 		ImeIMImpexpcol.end
 	ImeIMImpexp.end
-IexWdbeDcd	dcd		1.1.49
+IexWdbeDcd	dcd		1.1.51
 	ImeIJMImpexpcplxTitle.srefX1RefWznmMLocale	Title
 	enus	detailed core description
 	ImeIJMImpexpcplxTitle.end
@@ -417,7 +417,8 @@ IexWdbeDcd	dcd		1.1.49
 		tbl	fil;tbl	asrSrefWdbeMSignal	asrSrefWdbeMSignal	asr	0	void
 		tbl	fil;tbl	Falling	Falling	fal	0	void
 		tbl	fil;tbl	Syncrst	Syncrst	snr	0	void
-		tbl	fil;tbl	Extip	Extip	eip	0	void
+		tbl	fil;tbl	Preip	Preip	pri	0	void
+		tbl	fil;tbl	Postip	Postip	poi	0	void
 		tbl	fil;tbl	Comment	Comment	cmt	0	void
 		ImeIMImpexpcol.end
 	119	93	TblWdbeAVKeylistKey	ImeIAVKeylistKey		ins
@@ -473,7 +474,7 @@ IexWdbeDcd	dcd		1.1.49
 		tbl	tbl	fsmRefWdbeMFsm	fsmRefWdbeMFsm		94	sup
 		tbl	tbl	fsmNum	fsmNum		0	incr
 		tbl	fil;tbl	sref	sref	srf	0	void
-		tbl	fil;tbl	Extip	Extip	eip	0	void
+		tbl	fil;tbl	Preip	Preip	pri	0	void
 		tbl	fil;tbl	Comment	Comment	cmt	0	void
 		ImeIMImpexpcol.end
 	118	96	TblWdbeAMFsmstateStep	ImeIAMFsmstateStep		ins
@@ -521,7 +522,7 @@ IexWdbeDpl	dpl		1.1.35
 		tsref	fil	refWdbeMLibrary	srefRefWdbeMLibrary	lib	0	custsql			StubWdbeLibSref
 		ImeIMImpexpcol.end
 	ImeIMImpexp.end
-IexWdbeFin	fin		1.1.49
+IexWdbeFin	fin		1.1.51
 	ImeIJMImpexpcplxTitle.srefX1RefWznmMLocale	Title
 	enus	fine structure
 	ImeIJMImpexpcplxTitle.end
@@ -706,7 +707,8 @@ IexWdbeFin	fin		1.1.49
 		tbl	fil;tbl	asrSrefWdbeMSignal	asrSrefWdbeMSignal	asr	0	void
 		tbl	fil;tbl	Falling	Falling	fal	0	void
 		tbl	fil;tbl	Syncrst	Syncrst	snr	0	void
-		tbl	fil;tbl	Extip	Extip	eip	0	void
+		tbl	fil;tbl	Preip	Preip	pri	0	void
+		tbl	fil;tbl	Postip	Postip	poi	0	void
 		tbl	fil;tbl	Comment	Comment	cmt	0	void
 		ImeIMImpexpcol.end
 	149	71	TblWdbeMSensitivity	ImeIMSensitivity2		ins
@@ -770,7 +772,7 @@ IexWdbeFin	fin		1.1.49
 		tbl	tbl	fsmRefWdbeMFsm	fsmRefWdbeMFsm		72	sup
 		tbl	tbl	fsmNum	fsmNum		0	incr
 		tbl	fil;tbl	sref	sref	srf	0	void
-		tbl	fil;tbl	Extip	Extip	eip	0	void
+		tbl	fil;tbl	Preip	Preip	pri	0	void
 		tbl	fil;tbl	Comment	Comment	cmt	0	void
 		ImeIMImpexpcol.end
 	113	74	TblWdbeAMFsmstateStep	ImeIAMFsmstateStep		ins

@@ -312,8 +312,8 @@ void WdbeMtpWrfpgaDdrmux_Easy_v1_0::writeMdlVhd(
 
 		outfile << "-- IP impl.read.wiring.cust --- REND" << endl;
 
-		// --- impl.read.ext
-		outfile << "\t\t\t-- IP impl.read.ext --- IBEGIN" << endl;
+		// --- impl.read.pre
+		outfile << "\t\t\t-- IP impl.read.pre --- IBEGIN" << endl;
 		outfile << "\t\t\tif ddrAXI_rready_sig='1' and ddrAXI_rvalid='1' and ddrAXI_rlast='1' then" << endl;
 		outfile << "\t\t\t\trdid(ixRdidEgr) <= mutexIdle;" << endl;
 		outfile << endl;
@@ -324,7 +324,7 @@ void WdbeMtpWrfpgaDdrmux_Easy_v1_0::writeMdlVhd(
 		outfile << "\t\t\t\t\tixRdidEgr <= ixRdidEgr + 1;" << endl;
 		outfile << "\t\t\t\tend if;" << endl;
 		outfile << "\t\t\tend if;" << endl;
-		outfile << "\t\t\t-- IP impl.read.ext --- IEND" << endl;
+		outfile << "\t\t\t-- IP impl.read.pre --- IEND" << endl;
 
 		// --- impl.read.idle.start*
 		for (unsigned int i = 0; i < NRd; i++) {
@@ -341,7 +341,7 @@ void WdbeMtpWrfpgaDdrmux_Easy_v1_0::writeMdlVhd(
 		};
 
 		// --- impl.read.idle.lock
-		outfile << "\t\t\t\tstrbRdlock <= '0'; -- IP impl.read.locked.ext --- ILINE" << endl;
+		outfile << "\t\t\t\tstrbRdlock <= '0'; -- IP impl.read.locked.pre --- ILINE" << endl;
 
 		// --- impl.read.locked.unlock
 		outfile << "\t\t\t\t\t-- IP impl.read.locked.unlock --- IBEGIN" << endl;
@@ -401,7 +401,8 @@ void WdbeMtpWrfpgaDdrmux_Easy_v1_0::writeMdlVhd(
 			outfile << endl;
 		};
 
-		outfile << "\tddrAXI_awvalid <= ";
+		outfile << "\tddrAXI_awvalid <= ddrAXI_awvalid_sig;" << endl;
+		outfile << "\tddrAXI_awvalid_sig <= ";
 		for (unsigned int i = 0; i < NWr; i++) {
 			outfile << getChsref(true, i, false) << "AXI_awvalid";
 			if (wDWrs[i] != wD) outfile << "_sig";
@@ -445,62 +446,77 @@ void WdbeMtpWrfpgaDdrmux_Easy_v1_0::writeMdlVhd(
 
 		outfile << "-- IP impl.write.wiring.cust --- REND" << endl;
 
-		// --- impl.write.ext
-		outfile << "-- IP impl.write.ext --- IBEGIN" << endl;
-		outfile << "\t\t\tif ddrAXI_bvalid='1' then" << endl;
-		outfile << "\t\t\t\twrid(ixWridIgr) <= '0';" << endl;
-		outfile << endl;
-
-		outfile << "\t\t\t\tif ixWridIgr=31 then" << endl;
-		outfile << "\t\t\t\t\tixWridIgr <= 0;" << endl;
-		outfile << "\t\t\t\telse" << endl;
-		outfile << "\t\t\t\t\tixWridIgr <= ixWridIgr + 1;" << endl;
-		outfile << "\t\t\t\tend if;" << endl;
-		outfile << "\t\t\tend if;" << endl;
-		outfile << endl;
-
-		outfile << "\t\t\tif unsigned(wrid)=0 then -- one clock late" << endl;
-		outfile << "\t\t\t\tddrAXI_bready_sig <= '0';" << endl;
+		// --- impl.write.pre
+		outfile << "-- IP impl.write.pre --- IBEGIN" << endl;
+		outfile << "\t\t\tinc := false;" << endl;
+		outfile << "\t\t\tif ddrAXI_bready_sig='1' and ddrAXI_bvalid='1' then" << endl;
+		outfile << "\t\t\t\tdec := true;" << endl;
 		outfile << "\t\t\telse" << endl;
-		outfile << "\t\t\t\tddrAXI_bready_sig <= '1';" << endl;
+		outfile << "\t\t\t\tdec := false;" << endl;
 		outfile << "\t\t\tend if;" << endl;
-		outfile << "-- IP impl.write.ext --- IEND" << endl;
+		outfile << "-- IP impl.write.pre --- IEND" << endl;
 
 		// --- impl.write.idle.start*
 		for (unsigned int i = 0; i < NWr; i++) {
 			outfile << "-- IP impl.write.idle.start" << string(1, (char) (0x41+i)) << " --- IBEGIN" << endl;
-			outfile << "\t\t\t\t\t" << mutexsref << " <= " << i << ";" << endl;
-			outfile << "\t\t\t\t\twrmutex <= mutex" << string(1, (char) (0x41+i)) << ";" << endl;
+			outfile << "\t\t\t\t\t\t" << mutexsref << " <= " << i << ";" << endl;
+			outfile << "\t\t\t\t\t\twrmutex <= mutex" << string(1, (char) (0x41+i)) << ";" << endl;
 			outfile << endl;
 
-			outfile << "\t\t\t\t\tstrbWrlock <= '1';" << endl;
+			outfile << "\t\t\t\t\t\tstrbWrlock <= '1';" << endl;
 			outfile << endl;
 
-			outfile << "\t\t\t\t\twrid(ixWrid) <= '1';" << endl;
+			outfile << "\t\t\t\t\t\tinc := true;" << endl;
+			outfile << endl;
+
+			outfile << "\t\t\t\t\t\tawdone := false;" << endl;
+			outfile << "\t\t\t\t\t\twdone := false;" << endl;
 			outfile << "-- IP impl.write.idle.start" << string(1, (char) (0x41+i)) << " --- IEND" << endl;
 		};
 
-		// --- impl.write.locked.ext
-		outfile << "\t\t\t\tstrbWrlock <= '0'; -- IP impl.write.locked.ext --- ILINE" << endl;
+		// --- impl.write.locked.pre
+		outfile << "-- IP impl.write.locked.pre --- IBEGIN" << endl;
+		outfile << "\t\t\t\tstrbWrlock <= '0';" << endl;
+		outfile << endl;
+
+		outfile << "\t\t\t\tif not awdone and ddrAXI_awready='1' and ddrAXI_awvalid_sig='1' then" << endl;
+		outfile << "\t\t\t\t\tawdone := true;" << endl;
+		outfile << "\t\t\t\tend if;" << endl;
+		outfile << endl;
+				
+		outfile << "\t\t\t\tif not wdone and ddrAXI_wready='1' and ddrAXI_wvalid_sig='1' and ddrAXI_wlast_sig='1' then" << endl;
+		outfile << "\t\t\t\t\twdone := true;" << endl;
+		outfile << "\t\t\t\tend if;" << endl;
+		outfile << "-- IP impl.write.locked.pre --- IEND" << endl;
 
 		// --- impl.write.locked.unlock
 		outfile << "-- IP impl.write.locked.unlock --- IBEGIN" << endl;
 		outfile << "\t\t\t\t\twrmutex <= mutexIdle;" << endl;
-		outfile << endl;
-
-		outfile << "\t\t\t\t\tif ixWrid=31 then" << endl;
-		outfile << "\t\t\t\t\t\tixWrid <= 0;" << endl;
-		outfile << "\t\t\t\t\telse" << endl;
-		outfile << "\t\t\t\t\t\tixWrid <= ixWrid + 1;" << endl;
-		outfile << "\t\t\t\t\tend if;" << endl;
 		outfile << "-- IP impl.write.locked.unlock --- IEND" << endl;
 
+		// --- impl.write.post
+		outfile << "-- IP impl.write.post --- IBEGIN" << endl;
+		outfile << endl;
+		outfile << "\t\t\tif inc and not dec and wtr/=wtrmax then" << endl;
+		outfile << "\t\t\t\tddrAXI_bready_sig <= '1';" << endl;
+		outfile << "\t\t\t\twtr <= wtr + 1;" << endl;
+		outfile << endl;
+
+		outfile << "\t\t\telsif not inc and dec and wtr/=0 then" << endl;
+		outfile << "\t\t\t\tif wtr=1 then" << endl;
+		outfile << "\t\t\t\t\tddrAXI_bready_sig <= '0';" << endl;
+		outfile << "\t\t\t\tend if;" << endl;
+		outfile << endl;
+
+		outfile << "\t\t\t\twtr <= wtr - 1;" << endl;
+		outfile << "\t\t\tend if;" << endl;
+		outfile << "-- IP impl.write.post --- IEND" << endl;
 	};
 
 	// - stats
 
-	// --- impl.stats.ext
-	outfile << "-- IP impl.stats.ext --- IBEGIN" << endl;
+	// --- impl.stats.pre
+	outfile << "-- IP impl.stats.pre --- IBEGIN" << endl;
 
 	if (NRd > 0) {
 		outfile << "\t\t\tif strbRdlock";
@@ -534,7 +550,7 @@ void WdbeMtpWrfpgaDdrmux_Easy_v1_0::writeMdlVhd(
 		outfile << "\t\t\tend if;" << endl;
 	};
 
-	outfile << "-- IP impl.stats.ext --- IEND" << endl;
+	outfile << "-- IP impl.stats.pre --- IEND" << endl;
 
 	// --- impl.stats.collectA
 	outfile << "-- IP impl.stats.collectA --- IBEGIN" << endl;
@@ -567,23 +583,21 @@ void WdbeMtpWrfpgaDdrmux_Easy_v1_0::writeMdlVhd(
 		outfile << "-- IP impl." << chsref << "GearIgr.asyncrst --- RBEGIN" << endl;
 		outfile << "\t\t\tstate" << StrMod::cap(chsref) << "GearIgr <= state" << StrMod::cap(chsref) << "GearIgrInit;" << endl;
 		outfile << "\t\t\t" << chsref << "AXI_araddr_sig <= (others => '0');" << endl;
-		outfile << "\t\t\t" << chsref << "AXI_araddr_sig <= (others => '0');" << endl;
 		outfile << "\t\t\t" << chsref << "Full <= false;" << endl;
 		outfile << "\t\t\tfor i in 0 to NBeatRd-1 loop" << endl;
 		outfile << "\t\t\t\t" << chsref << "Buf(i) <= (others => '0');" << endl;
 		outfile << "\t\t\tend loop;" << endl;
 		outfile << "-- IP impl." << chsref << "GearIgr.asyncrst --- REND" << endl;
 
-		// --- impl.rdXGearIgr.ext
-		outfile << "-- IP impl." << chsref << "GearIgr.ext --- IBEGIN" << endl;
+		// --- impl.rdXGearIgr.pre
+		outfile << "-- IP impl." << chsref << "GearIgr.pre --- IBEGIN" << endl;
 		outfile << "\t\t\tif not " << chsref << "Ready" << clkRds[i] << " and " << chsref << "Full then" << endl;
 		outfile << "\t\t\t\t" << chsref << "Full <= false;" << endl;
 		outfile << "\t\t\tend if;" << endl;
-		outfile << "-- IP impl." << chsref << "GearIgr.ext --- IEND" << endl;
+		outfile << "-- IP impl." << chsref << "GearIgr.pre --- IEND" << endl;
 
 		// --- impl.rdXGearIgr.syncrst
 		outfile << "-- IP impl." << chsref << "GearIgr.syncrst --- RBEGIN" << endl;
-		outfile << "\t\t\t\t" << chsref << "AXI_araddr_sig <= (others => '0');" << endl;
 		outfile << "\t\t\t\t" << chsref << "AXI_araddr_sig <= (others => '0');" << endl;
 		outfile << "\t\t\t\t" << chsref << "Full <= false;" << endl;
 		outfile << "\t\t\t\tfor i in 0 to NBeatRd-1 loop" << endl;
@@ -662,7 +676,7 @@ void WdbeMtpWrfpgaDdrmux_Easy_v1_0::writeMdlVhd(
 		// --- impl.wrXGearIgr.asyncrst
 		outfile << "-- IP impl." << chsref << "GearIgr.asyncrst --- RBEGIN" << endl;
 		outfile << "\t\t\tstate" << StrMod::cap(chsref) << "GearIgr <= state" << StrMod::cap(chsref) << "GearIgrInit;" << endl;
-		outfile << "\t\t\t" << chsref << "FillBNotA <= true;" << endl;
+		outfile << "\t\t\t" << chsref << "FillBNotA <= false;" << endl;
 		outfile << "\t\t\t" << chsref << "FullA <= false;" << endl;
 		outfile << "\t\t\t" << chsref << "FullB <= false;" << endl;
 		outfile << "\t\t\t" << chsref << "Aa <= (others => '0');" << endl;
@@ -675,8 +689,8 @@ void WdbeMtpWrfpgaDdrmux_Easy_v1_0::writeMdlVhd(
 		outfile << "\t\t\tend loop;" << endl;
 		outfile << "-- IP impl." << chsref << "GearIgr.asyncrst --- REND" << endl;
 
-		// --- impl.wrXGearIgr.ext
-		outfile << "-- IP impl." << chsref << "GearIgr.ext --- IBEGIN" << endl;
+		// --- impl.wrXGearIgr.pre
+		outfile << "-- IP impl." << chsref << "GearIgr.pre --- IBEGIN" << endl;
 		outfile << "\t\t\tif not " << chsref << "FillBNotA and " << chsref << "FullB and " << chsref << "DoneB" << clkWrs[i] << " then" << endl;
 		outfile << "\t\t\t\t" << chsref << "FullB <= false;" << endl;
 		outfile << "\t\t\tend if;" << endl;
@@ -685,13 +699,11 @@ void WdbeMtpWrfpgaDdrmux_Easy_v1_0::writeMdlVhd(
 		outfile << "\t\t\tif " << chsref << "FillBNotA and " << chsref << "FullA and " << chsref << "DoneA" << clkWrs[i] << " then" << endl;
 		outfile << "\t\t\t\t" << chsref << "FullA <= false;" << endl;
 		outfile << "\t\t\tend if;" << endl;
-		outfile << "-- IP impl." << chsref << "GearIgr.ext --- IEND" << endl;
+		outfile << "-- IP impl." << chsref << "GearIgr.pre --- IEND" << endl;
 
 		// --- impl.wrXGearIgr.syncrst
 		outfile << "-- IP impl." << chsref << "GearIgr.syncrst --- RBEGIN" << endl;
-		outfile << "\t\t\t\t" << chsref << "FillBNotA <= true;" << endl;
-		outfile << "\t\t\t\t" << chsref << "FullA <= false;" << endl;
-		outfile << "\t\t\t\t" << chsref << "FullB <= false;" << endl;
+		outfile << "\t\t\t\t" << chsref << "FillBNotA <= false;" << endl;
 		outfile << "\t\t\t\t" << chsref << "Aa <= (others => '0');" << endl;
 		outfile << "\t\t\t\tfor i in 0 to NBeatWr-1 loop" << endl;
 		outfile << "\t\t\t\t\t" << chsref << "Abuf(i) <= (others => '0');" << endl;
@@ -747,8 +759,8 @@ void WdbeMtpWrfpgaDdrmux_Easy_v1_0::writeMdlVhd(
 
 		// - wrXGearEgr
 
-		// --- impl.wrXGearEgr.ext
-		outfile << "-- IP impl." << chsref << "GearEgr.ext --- IBEGIN" << endl;
+		// --- impl.wrXGearEgr.pre
+		outfile << "-- IP impl." << chsref << "GearEgr.pre --- IBEGIN" << endl;
 		outfile << "\t\t\tif " << chsref << "FillBNotA" << clkWrs[i] << " and not " << chsref << "FullA" << clkWrs[i] << " and " << chsref << "DoneA then" << endl;
 		outfile << "\t\t\t\t" << chsref << "DoneA <= false;" << endl;
 		outfile << "\t\t\tend if;" << endl;
@@ -757,44 +769,79 @@ void WdbeMtpWrfpgaDdrmux_Easy_v1_0::writeMdlVhd(
 		outfile << "\t\t\tif not " << chsref << "FillBNotA" << clkWrs[i] << " and not " << chsref << "FullB" << clkWrs[i] << " and " << chsref << "DoneB then" << endl;
 		outfile << "\t\t\t\t" << chsref << "DoneB <= false;" << endl;
 		outfile << "\t\t\tend if;" << endl;
-		outfile << "-- IP impl." << chsref << "GearEgr.ext --- IEND" << endl;
+		outfile << "-- IP impl." << chsref << "GearEgr.pre --- IEND" << endl;
 
-		// --- impl.wrXGearEgr.idle.startA
-		outfile << "\t\t\t\t\t" << chsref << "AXI_awaddr_sig <= " << chsref << "Aa; -- IP impl." << chsref << "GearEgr.idle.startA --- ILINE" << endl;
-
-		// --- impl.wrXGearEgr.idle.startB
-		outfile << "\t\t\t\t\t" << chsref << "AXI_awaddr_sig <= " << chsref << "Ba; -- IP impl." << chsref << "GearEgr.idle.startB --- ILINE" << endl;
-
-		// --- impl.wrXGearEgr.addr
-		outfile << "-- IP impl." << chsref << "GearEgr.addr --- IBEGIN" << endl;
-		outfile << "\t\t\t\t\t" << chsref << "AXI_wlast_sig <= '0';" << endl;
+		// --- impl.wrXGearEgr.syncrst
+		outfile << "-- IP impl." << chsref << "GearEgr.syncrst --- RBEGIN" << endl;
+		outfile << "\t\t\t\t" << chsref << "AXI_awaddr_sig <= (others => '0');" << endl;
+		outfile << "\t\t\t\t" << chsref << "AXI_awvalid_sig <= '0';" << endl;
+		outfile << "\t\t\t\t" << chsref << "AXI_wdata_sig <= (others => '0');" << endl;
+		outfile << "\t\t\t\t" << chsref << "AXI_wlast_sig <= '1';" << endl;
+		outfile << "\t\t\t\t" << chsref << "AXI_wvalid_sig <= '0';" << endl;
 		outfile << endl;
 
-		outfile << "\t\t\t\t\tif " << chsref << "FillBNotA" << clkWrs[i] << " then" << endl;
-		outfile << "\t\t\t\t\t\t" << chsref << "AXI_wdata_sig <= " << chsref << "Abuf(0);" << endl;
-		outfile << "\t\t\t\t\telse" << endl;
-		outfile << "\t\t\t\t\t\t" << chsref << "AXI_wdata_sig <= " << chsref << "Bbuf(0);" << endl;
-		outfile << "\t\t\t\t\tend if;" << endl;
+		outfile << "\t\t\t\ti := 0;" << endl;
+		outfile << "\t\t\t\tawdone := false;" << endl;
+		outfile << "\t\t\t\twdone := false;" << endl;
+		outfile << "-- IP impl." << chsref << "GearEgr.syncrst --- REND" << endl;
+
+		// --- impl.wrXGearEgr.idle.startA
+		outfile << "-- IP impl." << chsref << "GearEgr.idle.startA --- IBEGIN" << endl;
+		outfile << "\t\t\t\t\t" << chsref << "AXI_awaddr_sig <= " << chsref << "Aa;" << endl;
+		outfile << "\t\t\t\t\t" << chsref << "AXI_awvalid_sig <= '1';" << endl;
+		outfile << endl;
+
+		outfile << "\t\t\t\t\t" << chsref << "AXI_wdata_sig <= " << chsref << "Abuf(0);" << endl;
+		outfile << "\t\t\t\t\t" << chsref << "AXI_wlast_sig <= '0';" << endl;
+		outfile << "\t\t\t\t\t" << chsref << "AXI_wvalid_sig <= '1';" << endl;
 		outfile << endl;
 
 		outfile << "\t\t\t\t\ti := 0;" << endl;
-		outfile << "-- IP impl." << chsref << "GearEgr.addr --- IEND" << endl;
+		outfile << endl;
 
-		// --- impl.wrXGearEgr.xfer.done
-		outfile << "-- IP impl." << chsref << "GearEgr.xfer.done --- IBEGIN" << endl;
-		outfile << "\t\t\t\t\t\tif " << chsref << "FillBNotA" << clkWrs[i] << " then" << endl;
-		outfile << "\t\t\t\t\t\t\t" << chsref << "DoneA <= true;" << endl;
-		outfile << "\t\t\t\t\t\telse" << endl;
-		outfile << "\t\t\t\t\t\t\t" << chsref << "DoneB <= true;" << endl;
-		outfile << "\t\t\t\t\t\tend if;" << endl;
-		outfile << "-- IP impl." << chsref << "GearEgr.xfer.done --- IEND" << endl;
+		outfile << "\t\t\t\t\tawdone := false;" << endl;
+		outfile << "\t\t\t\t\twdone := false;" << endl;
+		outfile << "-- IP impl." << chsref << "GearEgr.idle.startA --- IEND" << endl;
 
-		// --- impl.wrXGearEgr.xfer.next
-		outfile << "-- IP impl." << chsref << "GearEgr.xfer.next --- IBEGIN" << endl;
+		// --- impl.wrXGearEgr.idle.startB
+		outfile << "-- IP impl." << chsref << "GearEgr.idle.startB --- IBEGIN" << endl;
+		outfile << "\t\t\t\t\t" << chsref << "AXI_awaddr_sig <= " << chsref << "Ba;" << endl;
+		outfile << "\t\t\t\t\t" << chsref << "AXI_awvalid_sig <= '1';" << endl;
+		outfile << endl;
+
+		outfile << "\t\t\t\t\t" << chsref << "AXI_wdata_sig <= " << chsref << "Bbuf(0);" << endl;
+		outfile << "\t\t\t\t\t" << chsref << "AXI_wlast_sig <= '0';" << endl;
+		outfile << "\t\t\t\t\t" << chsref << "AXI_wvalid_sig <= '1';" << endl;
+		outfile << endl;
+
+		outfile << "\t\t\t\t\ti := 0;" << endl;
+		outfile << endl;
+
+		outfile << "\t\t\t\t\tawdone := false;" << endl;
+		outfile << "\t\t\t\t\twdone := false;" << endl;
+		outfile << "-- IP impl." << chsref << "GearEgr.idle.startB --- IEND" << endl;
+
+		// --- impl.wrXGearEgr.xfer.pre
+		outfile << "-- IP impl." << chsref << "GearEgr.xfer.pre --- IBEGIN" << endl;
+		outfile << "\t\t\t\tif not awdone and " << chsref << "AXI_awready_sig='1' then" << endl;
+		outfile << "\t\t\t\t\t" << chsref << "AXI_awvalid_sig <= '0';" << endl;
+		outfile << endl;
+
+		outfile << "\t\t\t\t\tawdone := true;" << endl;
+		outfile << "\t\t\t\tend if;" << endl;
+		outfile << endl;
+
+		outfile << "\t\t\t\tif not wdone and " << chsref << "AXI_wready_sig='1' then" << endl;
+		outfile << "\t\t\t\t\tif " << chsref << "AXI_wlast_sig='1' then" << endl;
+		outfile << "\t\t\t\t\t\t" << chsref << "AXI_wvalid_sig <= '0';" << endl;
+		outfile << endl;
+
+		outfile << "\t\t\t\t\t\twdone := true;" << endl;
+		outfile << "\t\t\t\t\telse" << endl;
 		outfile << "\t\t\t\t\t\ti := i + 1;" << endl;
 		outfile << endl;
 
-		outfile << "\t\t\t\t\t\tif " << chsref << "FillBNotA" << clkWrs[i] << " then" << endl;
+		outfile << "\t\t\t\t\t\tif " << chsref << "FillBNotA then" << endl;
 		outfile << "\t\t\t\t\t\t\t" << chsref << "AXI_wdata_sig <= " << chsref << "Abuf(i);" << endl;
 		outfile << "\t\t\t\t\t\telse" << endl;
 		outfile << "\t\t\t\t\t\t\t" << chsref << "AXI_wdata_sig <= " << chsref << "Bbuf(i);" << endl;
@@ -804,7 +851,18 @@ void WdbeMtpWrfpgaDdrmux_Easy_v1_0::writeMdlVhd(
 		outfile << "\t\t\t\t\t\tif i=NBeatWr-1 then" << endl;
 		outfile << "\t\t\t\t\t\t\t" << chsref << "AXI_wlast_sig <= '1';" << endl;
 		outfile << "\t\t\t\t\t\tend if;" << endl;
-		outfile << "-- IP impl." << chsref << "GearEgr.xfer.next --- IEND" << endl;
+		outfile << "\t\t\t\t\tend if;" << endl;
+		outfile << "\t\t\t\tend if;" << endl;
+		outfile << "-- IP impl." << chsref << "GearEgr.xfer.pre --- IEND" << endl;
+
+		// --- impl.wrXGearEgr.xfer.done
+		outfile << "-- IP impl." << chsref << "GearEgr.xfer.done --- IBEGIN" << endl;
+		outfile << "\t\t\t\t\tif " << chsref << "FillBNotA" << clkWrs[i] << " then" << endl;
+		outfile << "\t\t\t\t\t\t" << chsref << "DoneA <= true;" << endl;
+		outfile << "\t\t\t\t\telse" << endl;
+		outfile << "\t\t\t\t\t\t" << chsref << "DoneB <= true;" << endl;
+		outfile << "\t\t\t\t\tend if;" << endl;
+		outfile << "-- IP impl." << chsref << "GearEgr.xfer.done --- IEND" << endl;
 	};
 
 	// --- impl.oth.cust

@@ -90,7 +90,7 @@ DpchRetWdbeMtpPlhfpga* WdbeMtpPlhfpgaCohostif_Easy_v1_0::run(
 
 		s = "";
 		for (unsigned int i = 0; i < wD/8; i++)
-			if (i < resid) s += "1";
+			if ((resid == 0) || (i < resid)) s += "1";
 			else s = "0" + s;
 
 		keys.push_back("opbufLastAXIS_tkeep");
@@ -103,7 +103,7 @@ DpchRetWdbeMtpPlhfpga* WdbeMtpPlhfpgaCohostif_Easy_v1_0::run(
 
 		s = "";
 		for (unsigned int i = 0; i < wD/8; i++)
-			if (i < resid) s += "1";
+			if ((resid == 0) || (i < resid)) s += "1";
 			else s = "0" + s;
 
 		keys.push_back("pollbufLastAXIS_tkeep");

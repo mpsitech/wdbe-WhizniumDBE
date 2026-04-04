@@ -918,7 +918,8 @@ uint JobWdbeIexFin::enterSgeImport(
 					//prc->asrSrefWdbeMSignal: TBL
 					//prc->Falling: TBL
 					//prc->Syncrst: TBL
-					//prc->Extip: TBL
+					//prc->Preip: TBL
+					//prc->Postip: TBL
 					//prc->Comment: TBL
 
 					dbswdbe->tblwdbemprocess->insertRec(prc);
@@ -1082,7 +1083,7 @@ uint JobWdbeIexFin::enterSgeImport(
 							fst->fsmRefWdbeMFsm = fsm->ref;
 							fst->fsmNum = num4++;
 							//fst->sref: TBL
-							//fst->Extip: TBL
+							//fst->Preip: TBL
 							//fst->Comment: TBL
 
 							dbswdbe->tblwdbemfsmstate->insertRec(fst);

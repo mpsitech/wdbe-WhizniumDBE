@@ -52,7 +52,8 @@ PnlWdbePrcDetail::ContIac::ContIac(
 			, const string& TxfAsr
 			, const bool ChkFal
 			, const string& TxfSnr
-			, const bool ChkEip
+			, const bool ChkPri
+			, const bool ChkPoi
 			, const string& TxfCmt
 			, const uint numFPupFsmDtt
 		) :
@@ -61,11 +62,12 @@ PnlWdbePrcDetail::ContIac::ContIac(
 			, TxfAsr(TxfAsr)
 			, ChkFal(ChkFal)
 			, TxfSnr(TxfSnr)
-			, ChkEip(ChkEip)
+			, ChkPri(ChkPri)
+			, ChkPoi(ChkPoi)
 			, TxfCmt(TxfCmt)
 			, numFPupFsmDtt(numFPupFsmDtt)
 		{
-	mask = {TXFCLK, TXFASR, CHKFAL, TXFSNR, CHKEIP, TXFCMT, NUMFPUPFSMDTT};
+	mask = {TXFCLK, TXFASR, CHKFAL, TXFSNR, CHKPRI, CHKPOI, TXFCMT, NUMFPUPFSMDTT};
 };
 
 bool PnlWdbePrcDetail::ContIac::readJSON(
@@ -85,7 +87,8 @@ bool PnlWdbePrcDetail::ContIac::readJSON(
 		if (me.isMember("TxfAsr")) {TxfAsr = me["TxfAsr"].asString(); add(TXFASR);};
 		if (me.isMember("ChkFal")) {ChkFal = me["ChkFal"].asBool(); add(CHKFAL);};
 		if (me.isMember("TxfSnr")) {TxfSnr = me["TxfSnr"].asString(); add(TXFSNR);};
-		if (me.isMember("ChkEip")) {ChkEip = me["ChkEip"].asBool(); add(CHKEIP);};
+		if (me.isMember("ChkPri")) {ChkPri = me["ChkPri"].asBool(); add(CHKPRI);};
+		if (me.isMember("ChkPoi")) {ChkPoi = me["ChkPoi"].asBool(); add(CHKPOI);};
 		if (me.isMember("TxfCmt")) {TxfCmt = me["TxfCmt"].asString(); add(TXFCMT);};
 		if (me.isMember("numFPupFsmDtt")) {numFPupFsmDtt = me["numFPupFsmDtt"].asUInt(); add(NUMFPUPFSMDTT);};
 	};
@@ -114,7 +117,8 @@ bool PnlWdbePrcDetail::ContIac::readXML(
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "TxfAsr", TxfAsr)) add(TXFASR);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "ChkFal", ChkFal)) add(CHKFAL);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "TxfSnr", TxfSnr)) add(TXFSNR);
-		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "ChkEip", ChkEip)) add(CHKEIP);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "ChkPri", ChkPri)) add(CHKPRI);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "ChkPoi", ChkPoi)) add(CHKPOI);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "TxfCmt", TxfCmt)) add(TXFCMT);
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "numFPupFsmDtt", numFPupFsmDtt)) add(NUMFPUPFSMDTT);
 	};
@@ -134,7 +138,8 @@ void PnlWdbePrcDetail::ContIac::writeJSON(
 	me["TxfAsr"] = TxfAsr;
 	me["ChkFal"] = ChkFal;
 	me["TxfSnr"] = TxfSnr;
-	me["ChkEip"] = ChkEip;
+	me["ChkPri"] = ChkPri;
+	me["ChkPoi"] = ChkPoi;
 	me["TxfCmt"] = TxfCmt;
 	me["numFPupFsmDtt"] = (Json::Value::UInt) numFPupFsmDtt;
 };
@@ -155,7 +160,8 @@ void PnlWdbePrcDetail::ContIac::writeXML(
 		writeStringAttr(wr, itemtag, "sref", "TxfAsr", TxfAsr);
 		writeBoolAttr(wr, itemtag, "sref", "ChkFal", ChkFal);
 		writeStringAttr(wr, itemtag, "sref", "TxfSnr", TxfSnr);
-		writeBoolAttr(wr, itemtag, "sref", "ChkEip", ChkEip);
+		writeBoolAttr(wr, itemtag, "sref", "ChkPri", ChkPri);
+		writeBoolAttr(wr, itemtag, "sref", "ChkPoi", ChkPoi);
 		writeStringAttr(wr, itemtag, "sref", "TxfCmt", TxfCmt);
 		writeUintAttr(wr, itemtag, "sref", "numFPupFsmDtt", numFPupFsmDtt);
 	xmlTextWriterEndElement(wr);
@@ -170,7 +176,8 @@ set<uint> PnlWdbePrcDetail::ContIac::comm(
 	if (TxfAsr == comp->TxfAsr) insert(items, TXFASR);
 	if (ChkFal == comp->ChkFal) insert(items, CHKFAL);
 	if (TxfSnr == comp->TxfSnr) insert(items, TXFSNR);
-	if (ChkEip == comp->ChkEip) insert(items, CHKEIP);
+	if (ChkPri == comp->ChkPri) insert(items, CHKPRI);
+	if (ChkPoi == comp->ChkPoi) insert(items, CHKPOI);
 	if (TxfCmt == comp->TxfCmt) insert(items, TXFCMT);
 	if (numFPupFsmDtt == comp->numFPupFsmDtt) insert(items, NUMFPUPFSMDTT);
 
@@ -185,7 +192,7 @@ set<uint> PnlWdbePrcDetail::ContIac::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {TXFCLK, TXFASR, CHKFAL, TXFSNR, CHKEIP, TXFCMT, NUMFPUPFSMDTT};
+	diffitems = {TXFCLK, TXFASR, CHKFAL, TXFSNR, CHKPRI, CHKPOI, TXFCMT, NUMFPUPFSMDTT};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -330,7 +337,8 @@ PnlWdbePrcDetail::StatShr::StatShr(
 			, const bool ButAsrViewAvail
 			, const bool ChkFalActive
 			, const bool TxfSnrActive
-			, const bool ChkEipActive
+			, const bool ChkPriActive
+			, const bool ChkPoiActive
 			, const bool TxfCmtActive
 			, const bool ButFsmNewAvail
 			, const bool ButFsmDeleteAvail
@@ -352,14 +360,15 @@ PnlWdbePrcDetail::StatShr::StatShr(
 			, ButAsrViewAvail(ButAsrViewAvail)
 			, ChkFalActive(ChkFalActive)
 			, TxfSnrActive(TxfSnrActive)
-			, ChkEipActive(ChkEipActive)
+			, ChkPriActive(ChkPriActive)
+			, ChkPoiActive(ChkPoiActive)
 			, TxfCmtActive(TxfCmtActive)
 			, ButFsmNewAvail(ButFsmNewAvail)
 			, ButFsmDeleteAvail(ButFsmDeleteAvail)
 			, PupFsmDttAvail(PupFsmDttAvail)
 			, PupFsmDttActive(PupFsmDttActive)
 		{
-	mask = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXTMDLACTIVE, BUTMDLVIEWAVAIL, BUTMDLVIEWACTIVE, TXTCLKACTIVE, TXFCLKVALID, BUTCLKVIEWAVAIL, TXTASRACTIVE, TXFASRVALID, BUTASRVIEWAVAIL, CHKFALACTIVE, TXFSNRACTIVE, CHKEIPACTIVE, TXFCMTACTIVE, BUTFSMNEWAVAIL, BUTFSMDELETEAVAIL, PUPFSMDTTAVAIL, PUPFSMDTTACTIVE};
+	mask = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXTMDLACTIVE, BUTMDLVIEWAVAIL, BUTMDLVIEWACTIVE, TXTCLKACTIVE, TXFCLKVALID, BUTCLKVIEWAVAIL, TXTASRACTIVE, TXFASRVALID, BUTASRVIEWAVAIL, CHKFALACTIVE, TXFSNRACTIVE, CHKPRIACTIVE, CHKPOIACTIVE, TXFCMTACTIVE, BUTFSMNEWAVAIL, BUTFSMDELETEAVAIL, PUPFSMDTTAVAIL, PUPFSMDTTACTIVE};
 };
 
 void PnlWdbePrcDetail::StatShr::writeJSON(
@@ -384,7 +393,8 @@ void PnlWdbePrcDetail::StatShr::writeJSON(
 	me["ButAsrViewAvail"] = ButAsrViewAvail;
 	me["ChkFalActive"] = ChkFalActive;
 	me["TxfSnrActive"] = TxfSnrActive;
-	me["ChkEipActive"] = ChkEipActive;
+	me["ChkPriActive"] = ChkPriActive;
+	me["ChkPoiActive"] = ChkPoiActive;
 	me["TxfCmtActive"] = TxfCmtActive;
 	me["ButFsmNewAvail"] = ButFsmNewAvail;
 	me["ButFsmDeleteAvail"] = ButFsmDeleteAvail;
@@ -418,7 +428,8 @@ void PnlWdbePrcDetail::StatShr::writeXML(
 		writeBoolAttr(wr, itemtag, "sref", "ButAsrViewAvail", ButAsrViewAvail);
 		writeBoolAttr(wr, itemtag, "sref", "ChkFalActive", ChkFalActive);
 		writeBoolAttr(wr, itemtag, "sref", "TxfSnrActive", TxfSnrActive);
-		writeBoolAttr(wr, itemtag, "sref", "ChkEipActive", ChkEipActive);
+		writeBoolAttr(wr, itemtag, "sref", "ChkPriActive", ChkPriActive);
+		writeBoolAttr(wr, itemtag, "sref", "ChkPoiActive", ChkPoiActive);
 		writeBoolAttr(wr, itemtag, "sref", "TxfCmtActive", TxfCmtActive);
 		writeBoolAttr(wr, itemtag, "sref", "ButFsmNewAvail", ButFsmNewAvail);
 		writeBoolAttr(wr, itemtag, "sref", "ButFsmDeleteAvail", ButFsmDeleteAvail);
@@ -446,7 +457,8 @@ set<uint> PnlWdbePrcDetail::StatShr::comm(
 	if (ButAsrViewAvail == comp->ButAsrViewAvail) insert(items, BUTASRVIEWAVAIL);
 	if (ChkFalActive == comp->ChkFalActive) insert(items, CHKFALACTIVE);
 	if (TxfSnrActive == comp->TxfSnrActive) insert(items, TXFSNRACTIVE);
-	if (ChkEipActive == comp->ChkEipActive) insert(items, CHKEIPACTIVE);
+	if (ChkPriActive == comp->ChkPriActive) insert(items, CHKPRIACTIVE);
+	if (ChkPoiActive == comp->ChkPoiActive) insert(items, CHKPOIACTIVE);
 	if (TxfCmtActive == comp->TxfCmtActive) insert(items, TXFCMTACTIVE);
 	if (ButFsmNewAvail == comp->ButFsmNewAvail) insert(items, BUTFSMNEWAVAIL);
 	if (ButFsmDeleteAvail == comp->ButFsmDeleteAvail) insert(items, BUTFSMDELETEAVAIL);
@@ -464,7 +476,7 @@ set<uint> PnlWdbePrcDetail::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXTMDLACTIVE, BUTMDLVIEWAVAIL, BUTMDLVIEWACTIVE, TXTCLKACTIVE, TXFCLKVALID, BUTCLKVIEWAVAIL, TXTASRACTIVE, TXFASRVALID, BUTASRVIEWAVAIL, CHKFALACTIVE, TXFSNRACTIVE, CHKEIPACTIVE, TXFCMTACTIVE, BUTFSMNEWAVAIL, BUTFSMDELETEAVAIL, PUPFSMDTTAVAIL, PUPFSMDTTACTIVE};
+	diffitems = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, TXTMDLACTIVE, BUTMDLVIEWAVAIL, BUTMDLVIEWACTIVE, TXTCLKACTIVE, TXFCLKVALID, BUTCLKVIEWAVAIL, TXTASRACTIVE, TXFASRVALID, BUTASRVIEWAVAIL, CHKFALACTIVE, TXFSNRACTIVE, CHKPRIACTIVE, CHKPOIACTIVE, TXFCMTACTIVE, BUTFSMNEWAVAIL, BUTFSMDELETEAVAIL, PUPFSMDTTAVAIL, PUPFSMDTTACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -490,7 +502,8 @@ void PnlWdbePrcDetail::Tag::writeJSON(
 		me["CptAsr"] = "asynchronous reset signal";
 		me["CptFal"] = "falling edge sub-process";
 		me["CptSnr"] = "synchronized reset condition";
-		me["CptEip"] = "external insertion point";
+		me["CptPri"] = "pre-handling insertion point";
+		me["CptPoi"] = "post-handling insertion point";
 		me["CptCmt"] = "comment";
 		me["HdgFsm"] = "Finite state machine";
 		me["CptFsmDtt"] = "debug tap type";
@@ -518,7 +531,8 @@ void PnlWdbePrcDetail::Tag::writeXML(
 			writeStringAttr(wr, itemtag, "sref", "CptAsr", "asynchronous reset signal");
 			writeStringAttr(wr, itemtag, "sref", "CptFal", "falling edge sub-process");
 			writeStringAttr(wr, itemtag, "sref", "CptSnr", "synchronized reset condition");
-			writeStringAttr(wr, itemtag, "sref", "CptEip", "external insertion point");
+			writeStringAttr(wr, itemtag, "sref", "CptPri", "pre-handling insertion point");
+			writeStringAttr(wr, itemtag, "sref", "CptPoi", "post-handling insertion point");
 			writeStringAttr(wr, itemtag, "sref", "CptCmt", "comment");
 			writeStringAttr(wr, itemtag, "sref", "HdgFsm", "Finite state machine");
 			writeStringAttr(wr, itemtag, "sref", "CptFsmDtt", "debug tap type");

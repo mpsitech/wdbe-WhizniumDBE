@@ -96,7 +96,7 @@ DpchRetWdbe* WdbeMtpGenfstGpio_Easy_v1_0::run(
 
 		Syncrst += ")";
 	};
-	dbswdbe->tblwdbemprocess->insertNewRec(&prc, refWdbeMModule, 0, "op", "mclk", "reset", false, Syncrst, false, "main operation");
+	dbswdbe->tblwdbemprocess->insertNewRec(&prc, refWdbeMModule, 0, "op", "mclk", "reset", false, Syncrst, false, false, "main operation");
 
 	prc->refWdbeMFsm = dbswdbe->tblwdbemfsm->insertNewRec(NULL, prc->ref, VecWdbeVMFsmDbgtaptype::VOID);
 	dbswdbe->tblwdbemprocess->updateRec(prc);
@@ -136,6 +136,9 @@ DpchRetWdbe* WdbeMtpGenfstGpio_Easy_v1_0::run(
 
 	if (!(!bidirNotUnidir && inNotOut)) dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OPRT, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "bitsOut_sig", false, "slvdn", w, "", "", "", "0", refPrtBitsOut, "");
 	if (bidirNotUnidir) dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OPRT, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "bitsDir_sig", false, "slvdn", w, "", "", "", "0", refPrtBitsTri, "");
+
+	if (bidirNotUnidir && ((srefIobuf == "bb") || (srefIobuf == "iobuf")))
+				dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, refC, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::PRC, prc->ref, 0, "bitsDirn_sig", false, "slvdn", w, "", "*", "", "not bitsDir_sig", 0, "");
 
 	if (!(!bidirNotUnidir && !inNotOut)) {
 		if (!threeNotInout) {

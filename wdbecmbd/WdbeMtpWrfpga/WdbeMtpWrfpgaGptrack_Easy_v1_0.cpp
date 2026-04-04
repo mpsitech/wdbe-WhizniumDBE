@@ -50,7 +50,7 @@ DpchRetWdbe* WdbeMtpWrfpgaGptrack_Easy_v1_0::run(
 	if (dbswdbe->tblwdbemmodule->loadRecByRef(refWdbeMModule, &mdl)) {
 		Compsref = StrMod::cap(Wdbe::getCompsref(dbswdbe, mdl));
 
-		// xxxx/Fsmtrack.vhd
+		// xxxx/Gptrack.vhd
 		s = xchg->tmppath + "/" + folder + "/" + Compsref + ".vhd.ip";
 		outfile.open(s.c_str(), ios::out);
 		writeMdlVhd(dbswdbe, outfile, mdl);
@@ -118,7 +118,7 @@ void WdbeMtpWrfpgaGptrack_Easy_v1_0::writeMdlVhd(
 		s = "\"" + string(15-w, '0') + "\"" + s;
 	};
 
-	outfile << "\t\t\tcapt <= " << s << ";" << endl;
+	outfile << "\t\t\tcapt <= (" << s << ") and not mask;" << endl;
 
 	outfile << "-- IP impl.sample.capt --- IEND" << endl;
 

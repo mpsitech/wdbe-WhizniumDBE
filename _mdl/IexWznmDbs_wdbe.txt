@@ -646,10 +646,10 @@ main	void	0	TblWdbeMFsmstate	fst
 		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
 		full	enus	identifier
 		ImeIAMTablecolTitle.end
-	boolval		0	void		Extip	eip	void	void		false	false
+	boolval		0	void		Preip	pri	void	void		false	false
 		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
-		short	enus	ext. IP
-		full	enus	external insertion point
+		short	enus	pre IP
+		full	enus	pre-handling IP
 		ImeIAMTablecolTitle.end
 	txtval		0	void		Comment	cmt	txtlong	void		false	false
 		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
@@ -1192,10 +1192,15 @@ main	void	0	TblWdbeMProcess	prc
 		short	enus	sync. rst. cond.
 		full	enus	synchronized reset condition
 		ImeIAMTablecolTitle.end
-	boolval		0	void		Extip	eip	void	void		false	false
+	boolval		0	void		Preip	pri	void	void		false	false
 		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
-		short	enus	ext. IP
-		full	enus	external insertion point
+		short	enus	pre IP
+		full	enus	pre-handling insertion point
+		ImeIAMTablecolTitle.end
+	boolval		0	void		Postip	poi	void	void		false	false
+		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title
+		short	enus	post IP
+		full	enus	post-handling insertion point
 		ImeIAMTablecolTitle.end
 	txtval			void		Comment	cmt	txtlong	void		false	false
 		ImeIAMTablecolTitle.srefX1IxVType	srefX2RefWznmMLocale	Title

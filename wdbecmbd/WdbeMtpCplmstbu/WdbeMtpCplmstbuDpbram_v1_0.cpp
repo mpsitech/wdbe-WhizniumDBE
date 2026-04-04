@@ -84,14 +84,14 @@ DpchRetWdbe* WdbeMtpCplmstbuDpbram_v1_0::run(
 		if (srefKVendor == "efnx") {
 			srefsPrts["clkA"] = "clk_a";
 			srefsPrts["enA"] = "addren_a";
-			srefsPrts["weA"] = "we_a.sig"; // slvdn
+			srefsPrts["weA"] = "we_a.sig"; // we_a_sig(0) <= weA and enA
 			srefsPrts["aA"] = "addr_a";
 			srefsPrts["dwrA"] = "wdata_a";
 			srefsPrts["drdA"] = "rdata_a";
 
 			srefsPrts["clkB"] = "clk_b";
 			srefsPrts["enB"] = "addren_b";
-			srefsPrts["weB"] = "we_b.sig"; // slvdn
+			srefsPrts["weB"] = "we_b.sig"; // we_b_sig(0) <= weB and enB
 			srefsPrts["aB"] = "addr_b";
 			srefsPrts["dwrB"] = "wdata_b";
 			srefsPrts["drdB"] = "rdata_b";
@@ -150,7 +150,9 @@ DpchRetWdbe* WdbeMtpCplmstbuDpbram_v1_0::run(
 			if ((srefPrt.length() > 4) && ((srefPrt.rfind(".sig") + 4) == srefPrt.length())) {
 				srefPrt = srefPrt.substr(0, srefPrt.length() - 4);
 
-				dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::VOID, 0, 0, srefPrt + "_sig", false, "slvdn", 1, "", "", "", "", 0, it->first);
+				if (srefPrt == "we_a") dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::VOID, 0, 0, srefPrt + "_sig", false, "slvdn", 1, "", "", "", "", 0, "weA and enA");
+				else if (srefPrt == "we_b") dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::VOID, 0, 0, srefPrt + "_sig", false, "slvdn", 1, "", "", "", "", 0, "weB and enB");
+				else dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::VOID, 0, 0, srefPrt + "_sig", false, "slvdn", 1, "", "", "", "", 0, it->first);
 
 				Wdbe::setPrtCsi(dbswdbe, mdl->ref, srefPrt, srefPrt + "_sig");
 

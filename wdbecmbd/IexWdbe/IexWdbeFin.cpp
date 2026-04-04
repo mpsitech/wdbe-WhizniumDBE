@@ -6138,7 +6138,7 @@ void IexWdbeFin::ImeIAMFsmstateStep::writeXML(
 IexWdbeFin::ImeitemIMFsmstate::ImeitemIMFsmstate(
 			const ubigint irefRefWdbeCFsmstate
 			, const string& sref
-			, const bool Extip
+			, const bool Preip
 			, const string& Comment
 		) : WdbeMFsmstate() {
 	lineno = 0;
@@ -6146,7 +6146,7 @@ IexWdbeFin::ImeitemIMFsmstate::ImeitemIMFsmstate(
 
 	this->irefRefWdbeCFsmstate = irefRefWdbeCFsmstate;
 	this->sref = sref;
-	this->Extip = Extip;
+	this->Preip = Preip;
 	this->Comment = Comment;
 };
 
@@ -6165,7 +6165,7 @@ IexWdbeFin::ImeitemIMFsmstate::ImeitemIMFsmstate(
 		fsmRefWdbeMFsm = rec->fsmRefWdbeMFsm;
 		fsmNum = rec->fsmNum;
 		sref = rec->sref;
-		Extip = rec->Extip;
+		Preip = rec->Preip;
 		Comment = rec->Comment;
 
 		delete rec;
@@ -6179,7 +6179,7 @@ void IexWdbeFin::ImeitemIMFsmstate::readTxt(
 
 	if (txtrd.fields.size() > 0) {irefRefWdbeCFsmstate = atoll(txtrd.fields[0].c_str()); ixWIelValid += ImeIMFsmstate::VecWIel::IREFREFWDBECFSMSTATE;};
 	if (txtrd.fields.size() > 1) {sref = txtrd.fields[1]; ixWIelValid += ImeIMFsmstate::VecWIel::SREF;};
-	if (txtrd.fields.size() > 2) {Extip = (txtrd.fields[2] == "true"); ixWIelValid += ImeIMFsmstate::VecWIel::EXTIP;};
+	if (txtrd.fields.size() > 2) {Preip = (txtrd.fields[2] == "true"); ixWIelValid += ImeIMFsmstate::VecWIel::PREIP;};
 	if (txtrd.fields.size() > 3) {Comment = txtrd.fields[3]; ixWIelValid += ImeIMFsmstate::VecWIel::COMMENT;};
 
 	while (txtrd.readLine()) {
@@ -6215,7 +6215,7 @@ void IexWdbeFin::ImeitemIMFsmstate::readXML(
 	if (checkXPath(docctx, basexpath, lineno)) {
 		if (extractUbigintUclc(docctx, basexpath, "irefRefWdbeCFsmstate", "clu", irefRefWdbeCFsmstate)) ixWIelValid += ImeIMFsmstate::VecWIel::IREFREFWDBECFSMSTATE;
 		if (extractStringUclc(docctx, basexpath, "sref", "srf", sref)) ixWIelValid += ImeIMFsmstate::VecWIel::SREF;
-		if (extractBoolUclc(docctx, basexpath, "Extip", "eip", Extip)) ixWIelValid += ImeIMFsmstate::VecWIel::EXTIP;
+		if (extractBoolUclc(docctx, basexpath, "Preip", "pri", Preip)) ixWIelValid += ImeIMFsmstate::VecWIel::PREIP;
 		if (extractStringUclc(docctx, basexpath, "Comment", "cmt", Comment)) ixWIelValid += ImeIMFsmstate::VecWIel::COMMENT;
 		imeiamfsmstatestep.readXML(docctx, basexpath);
 	};
@@ -6224,7 +6224,7 @@ void IexWdbeFin::ImeitemIMFsmstate::readXML(
 void IexWdbeFin::ImeitemIMFsmstate::writeTxt(
 			fstream& outfile
 		) {
-	outfile << "\t\t\t\t" << irefRefWdbeCFsmstate << "\t" << sref << "\t" << StrMod::boolToString(Extip) << "\t" << Comment << endl;
+	outfile << "\t\t\t\t" << irefRefWdbeCFsmstate << "\t" << sref << "\t" << StrMod::boolToString(Preip) << "\t" << Comment << endl;
 	imeiamfsmstatestep.writeTxt(outfile);
 };
 
@@ -6234,14 +6234,14 @@ void IexWdbeFin::ImeitemIMFsmstate::writeXML(
 			, const bool shorttags
 		) {
 	vector<string> tags;
-	if (shorttags) tags = {"Ii","clu","srf","eip","cmt"};
-	else tags = {"ImeitemIMFsmstate","irefRefWdbeCFsmstate","sref","Extip","Comment"};
+	if (shorttags) tags = {"Ii","clu","srf","pri","cmt"};
+	else tags = {"ImeitemIMFsmstate","irefRefWdbeCFsmstate","sref","Preip","Comment"};
 
 	xmlTextWriterStartElement(wr, BAD_CAST tags[0].c_str());
 		xmlTextWriterWriteAttribute(wr, BAD_CAST "num", BAD_CAST to_string(num).c_str());
 		writeUbigint(wr, tags[1], irefRefWdbeCFsmstate);
 		writeString(wr, tags[2], sref);
-		writeBool(wr, tags[3], Extip);
+		writeBool(wr, tags[3], Preip);
 		writeString(wr, tags[4], Comment);
 		imeiamfsmstatestep.writeXML(wr, shorttags);
 	xmlTextWriterEndElement(wr);
@@ -6262,7 +6262,7 @@ uint IexWdbeFin::ImeIMFsmstate::VecWIel::getIx(
 	for (unsigned int i = 0; i < ss.size(); i++) {
 		if (ss[i] == "irefrefwdbecfsmstate") ix |= IREFREFWDBECFSMSTATE;
 		else if (ss[i] == "sref") ix |= SREF;
-		else if (ss[i] == "extip") ix |= EXTIP;
+		else if (ss[i] == "preip") ix |= PREIP;
 		else if (ss[i] == "comment") ix |= COMMENT;
 	};
 
@@ -6285,7 +6285,7 @@ string IexWdbeFin::ImeIMFsmstate::VecWIel::getSrefs(
 
 	if (ix & IREFREFWDBECFSMSTATE) ss.push_back("irefRefWdbeCFsmstate");
 	if (ix & SREF) ss.push_back("sref");
-	if (ix & EXTIP) ss.push_back("Extip");
+	if (ix & PREIP) ss.push_back("Preip");
 	if (ix & COMMENT) ss.push_back("Comment");
 
 	StrMod::vectorToString(ss, srefs);
@@ -7208,7 +7208,8 @@ IexWdbeFin::ImeitemIMProcess::ImeitemIMProcess(
 			, const string& asrSrefWdbeMSignal
 			, const bool Falling
 			, const string& Syncrst
-			, const bool Extip
+			, const bool Preip
+			, const bool Postip
 			, const string& Comment
 		) : WdbeMProcess() {
 	lineno = 0;
@@ -7219,7 +7220,8 @@ IexWdbeFin::ImeitemIMProcess::ImeitemIMProcess(
 	this->asrSrefWdbeMSignal = asrSrefWdbeMSignal;
 	this->Falling = Falling;
 	this->Syncrst = Syncrst;
-	this->Extip = Extip;
+	this->Preip = Preip;
+	this->Postip = Postip;
 	this->Comment = Comment;
 };
 
@@ -7241,7 +7243,8 @@ IexWdbeFin::ImeitemIMProcess::ImeitemIMProcess(
 		asrSrefWdbeMSignal = rec->asrSrefWdbeMSignal;
 		Falling = rec->Falling;
 		Syncrst = rec->Syncrst;
-		Extip = rec->Extip;
+		Preip = rec->Preip;
+		Postip = rec->Postip;
 		Comment = rec->Comment;
 
 		delete rec;
@@ -7258,8 +7261,9 @@ void IexWdbeFin::ImeitemIMProcess::readTxt(
 	if (txtrd.fields.size() > 2) {asrSrefWdbeMSignal = txtrd.fields[2]; ixWIelValid += ImeIMProcess::VecWIel::ASRSREFWDBEMSIGNAL;};
 	if (txtrd.fields.size() > 3) {Falling = (txtrd.fields[3] == "true"); ixWIelValid += ImeIMProcess::VecWIel::FALLING;};
 	if (txtrd.fields.size() > 4) {Syncrst = txtrd.fields[4]; ixWIelValid += ImeIMProcess::VecWIel::SYNCRST;};
-	if (txtrd.fields.size() > 5) {Extip = (txtrd.fields[5] == "true"); ixWIelValid += ImeIMProcess::VecWIel::EXTIP;};
-	if (txtrd.fields.size() > 6) {Comment = txtrd.fields[6]; ixWIelValid += ImeIMProcess::VecWIel::COMMENT;};
+	if (txtrd.fields.size() > 5) {Preip = (txtrd.fields[5] == "true"); ixWIelValid += ImeIMProcess::VecWIel::PREIP;};
+	if (txtrd.fields.size() > 6) {Postip = (txtrd.fields[6] == "true"); ixWIelValid += ImeIMProcess::VecWIel::POSTIP;};
+	if (txtrd.fields.size() > 7) {Comment = txtrd.fields[7]; ixWIelValid += ImeIMProcess::VecWIel::COMMENT;};
 
 	while (txtrd.readLine()) {
 		switch (txtrd.ixVLinetype) {
@@ -7313,7 +7317,8 @@ void IexWdbeFin::ImeitemIMProcess::readXML(
 		if (extractStringUclc(docctx, basexpath, "asrSrefWdbeMSignal", "asr", asrSrefWdbeMSignal)) ixWIelValid += ImeIMProcess::VecWIel::ASRSREFWDBEMSIGNAL;
 		if (extractBoolUclc(docctx, basexpath, "Falling", "fal", Falling)) ixWIelValid += ImeIMProcess::VecWIel::FALLING;
 		if (extractStringUclc(docctx, basexpath, "Syncrst", "snr", Syncrst)) ixWIelValid += ImeIMProcess::VecWIel::SYNCRST;
-		if (extractBoolUclc(docctx, basexpath, "Extip", "eip", Extip)) ixWIelValid += ImeIMProcess::VecWIel::EXTIP;
+		if (extractBoolUclc(docctx, basexpath, "Preip", "pri", Preip)) ixWIelValid += ImeIMProcess::VecWIel::PREIP;
+		if (extractBoolUclc(docctx, basexpath, "Postip", "poi", Postip)) ixWIelValid += ImeIMProcess::VecWIel::POSTIP;
 		if (extractStringUclc(docctx, basexpath, "Comment", "cmt", Comment)) ixWIelValid += ImeIMProcess::VecWIel::COMMENT;
 		imeiavkeylistkey.readXML(docctx, basexpath);
 		imeicvariable2.readXML(docctx, basexpath);
@@ -7326,7 +7331,7 @@ void IexWdbeFin::ImeitemIMProcess::readXML(
 void IexWdbeFin::ImeitemIMProcess::writeTxt(
 			fstream& outfile
 		) {
-	outfile << "\t\t" << sref << "\t" << clkSrefWdbeMSignal << "\t" << asrSrefWdbeMSignal << "\t" << StrMod::boolToString(Falling) << "\t" << Syncrst << "\t" << StrMod::boolToString(Extip) << "\t" << Comment << endl;
+	outfile << "\t\t" << sref << "\t" << clkSrefWdbeMSignal << "\t" << asrSrefWdbeMSignal << "\t" << StrMod::boolToString(Falling) << "\t" << Syncrst << "\t" << StrMod::boolToString(Preip) << "\t" << StrMod::boolToString(Postip) << "\t" << Comment << endl;
 	imeiavkeylistkey.writeTxt(outfile);
 	imeicvariable2.writeTxt(outfile);
 	imeimfsm.writeTxt(outfile);
@@ -7340,8 +7345,8 @@ void IexWdbeFin::ImeitemIMProcess::writeXML(
 			, const bool shorttags
 		) {
 	vector<string> tags;
-	if (shorttags) tags = {"Ii","srf","clk","asr","fal","snr","eip","cmt"};
-	else tags = {"ImeitemIMProcess","sref","clkSrefWdbeMSignal","asrSrefWdbeMSignal","Falling","Syncrst","Extip","Comment"};
+	if (shorttags) tags = {"Ii","srf","clk","asr","fal","snr","pri","poi","cmt"};
+	else tags = {"ImeitemIMProcess","sref","clkSrefWdbeMSignal","asrSrefWdbeMSignal","Falling","Syncrst","Preip","Postip","Comment"};
 
 	xmlTextWriterStartElement(wr, BAD_CAST tags[0].c_str());
 		xmlTextWriterWriteAttribute(wr, BAD_CAST "num", BAD_CAST to_string(num).c_str());
@@ -7350,8 +7355,9 @@ void IexWdbeFin::ImeitemIMProcess::writeXML(
 		writeString(wr, tags[3], asrSrefWdbeMSignal);
 		writeBool(wr, tags[4], Falling);
 		writeString(wr, tags[5], Syncrst);
-		writeBool(wr, tags[6], Extip);
-		writeString(wr, tags[7], Comment);
+		writeBool(wr, tags[6], Preip);
+		writeBool(wr, tags[7], Postip);
+		writeString(wr, tags[8], Comment);
 		imeiavkeylistkey.writeXML(wr, shorttags);
 		imeicvariable2.writeXML(wr, shorttags);
 		imeimfsm.writeXML(wr, shorttags);
@@ -7378,7 +7384,8 @@ uint IexWdbeFin::ImeIMProcess::VecWIel::getIx(
 		else if (ss[i] == "asrsrefwdbemsignal") ix |= ASRSREFWDBEMSIGNAL;
 		else if (ss[i] == "falling") ix |= FALLING;
 		else if (ss[i] == "syncrst") ix |= SYNCRST;
-		else if (ss[i] == "extip") ix |= EXTIP;
+		else if (ss[i] == "preip") ix |= PREIP;
+		else if (ss[i] == "postip") ix |= POSTIP;
 		else if (ss[i] == "comment") ix |= COMMENT;
 	};
 
@@ -7404,7 +7411,8 @@ string IexWdbeFin::ImeIMProcess::VecWIel::getSrefs(
 	if (ix & ASRSREFWDBEMSIGNAL) ss.push_back("asrSrefWdbeMSignal");
 	if (ix & FALLING) ss.push_back("Falling");
 	if (ix & SYNCRST) ss.push_back("Syncrst");
-	if (ix & EXTIP) ss.push_back("Extip");
+	if (ix & PREIP) ss.push_back("Preip");
+	if (ix & POSTIP) ss.push_back("Postip");
 	if (ix & COMMENT) ss.push_back("Comment");
 
 	StrMod::vectorToString(ss, srefs);
@@ -7502,7 +7510,7 @@ void IexWdbeFin::ImeIMProcess::writeTxt(
 			fstream& outfile
 		) {
 	if (nodes.size() > 0) {
-		outfile << "\t\tImeIMProcess." << StrMod::replaceChar(ImeIMProcess::VecWIel::getSrefs(127), ';', '\t') << endl;
+		outfile << "\t\tImeIMProcess." << StrMod::replaceChar(ImeIMProcess::VecWIel::getSrefs(255), ';', '\t') << endl;
 		for (unsigned int i = 0; i < nodes.size(); i++) nodes[i]->writeTxt(outfile);
 		outfile << "\t\tImeIMProcess.end" << endl;
 	};
@@ -9266,7 +9274,7 @@ void IexWdbeFin::parseFromFile(
 		};
 
 	} else {
-			Txtrd rd(fullpath, rectpath, "IexWdbeFin", Version("1.1.49"), VecVIme::getIx);
+			Txtrd rd(fullpath, rectpath, "IexWdbeFin", Version("1.1.51"), VecVIme::getIx);
 			readTxt(rd, imeimunit);
 	};
 };
@@ -9326,7 +9334,7 @@ void IexWdbeFin::readXML(
 		// validate version
 		if (checkUclcXPaths(docctx, goodxpath, basexpath, "@Version")) {
 			extractString(docctx, goodxpath, version);
-			if (Version(version) < Version("1.1.49")) throw SbeException(SbeException::IEX_VERSION, {{"version",version},{"minversion","1.1.49"}});
+			if (Version(version) < Version("1.1.51")) throw SbeException(SbeException::IEX_VERSION, {{"version",version},{"minversion","1.1.51"}});
 		};
 
 		// look for XML sub-blocks

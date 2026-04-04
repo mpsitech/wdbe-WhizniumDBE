@@ -729,10 +729,10 @@ string Wdbe::pathToPathstr(
 	StrMod::stringToVector(path, ss, ' ');
 
 	for (unsigned int i = 0; i < ss.size(); i++) {
-		if (i != 0) pathstr += " ";
+		if (ss[i] == "") continue;
 
-		if (libNotInc) pathstr += "-L" + inclibeq + ss[i];
-		else pathstr += "-I" + inclibeq + ss[i];
+		if (pathstr != "") pathstr += " ";
+		pathstr += ((libNotInc) ? "-L" : "-I") + getInclibeqstr(ss[i], inclibeq);
 	};
 
 	return pathstr;
@@ -758,6 +758,16 @@ string Wdbe::libsToLibstr(
 	return libstr;
 };
 
+string Wdbe::getInclibeqstr(
+			const string& path
+			, const string& inclibeq
+		) {
+	if (path == "") return "";
+	if (path[0] == '~') return path.substr(1);
+
+	return(inclibeq + path);
+};
+
 void Wdbe::analyzeUnt(
 			DbsWdbe* dbswdbe
 			, WdbeMUnit* unt
@@ -772,6 +782,9 @@ void Wdbe::analyzeUnt(
 			, uint& ixImbCmdret
 			, bool& hasvecbuf
 			, bool& hasvecctr
+
+			, bool& hasvecfsm
+
 			, bool& hasveccmd
 			, bool& hasvecerr
 			, bool& hasspeccmd
@@ -802,8 +815,8 @@ void Wdbe::analyzeUnt(
 	srefroot = unt->Fullsref.substr(3);
 
 	dbswdbe->tblwdbemvector->loadRstByHktHku(VecWdbeVMVectorHkTbl::UNT, unt->ref, false, vecs);
-	dbswdbe->tblwdbemvector->loadRstBySQL("SELECT TblWdbeMVector.* FROM TblWdbeMModule, TblWdbeMProcess, TblWdbeMVector WHERE TblWdbeMModule.hkIxVTbl = " + to_string(VecWdbeVMModuleHkTbl::UNT) + " AND TblWdbeMModule.hkUref = " + to_string(unt->ref)
-				+ " AND TblWdbeMProcess.refWdbeMModule = TblWdbeMModule.ref AND TblWdbeMVector.hkIxVTbl = " + to_string(VecWdbeVMVectorHkTbl::FSM) + " AND TblWdbeMVector.hkUref = TblWdbeMProcess.refWdbeMFsm ORDER BY TblWdbeMVector.sref ASC", true, vecs);
+	hasvecfsm = (dbswdbe->tblwdbemvector->loadRstBySQL("SELECT TblWdbeMVector.* FROM TblWdbeMModule, TblWdbeMProcess, TblWdbeMVector WHERE TblWdbeMModule.hkIxVTbl = " + to_string(VecWdbeVMModuleHkTbl::UNT) + " AND TblWdbeMModule.hkUref = " + to_string(unt->ref)
+				+ " AND TblWdbeMProcess.refWdbeMModule = TblWdbeMModule.ref AND TblWdbeMVector.hkIxVTbl = " + to_string(VecWdbeVMVectorHkTbl::FSM) + " AND TblWdbeMVector.hkUref = TblWdbeMProcess.refWdbeMFsm ORDER BY TblWdbeMVector.sref ASC", true, vecs) > 0);
 
 	dbswdbe->tblwdbemcontroller->loadRstBySQL("SELECT TblWdbeMController.* FROM TblWdbeMModule, TblWdbeMController WHERE TblWdbeMModule.hkIxVTbl = " + to_string(VecWdbeVMModuleHkTbl::UNT) + " AND TblWdbeMModule.hkUref = "
 				+ to_string(unt->ref) + " AND TblWdbeMController.refWdbeMModule = TblWdbeMModule.ref ORDER BY TblWdbeMController.Fullsref ASC", false, ctrs);

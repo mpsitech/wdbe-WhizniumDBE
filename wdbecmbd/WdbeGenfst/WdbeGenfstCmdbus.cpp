@@ -153,8 +153,8 @@ DpchRetWdbe* WdbeGenfstCmdbus::run(
 			// - command bus ports, signals and processes
 			mdlNum = 1;
 
-			refPrcClk = dbswdbe->tblwdbemprocess->insertNewRec(NULL, refCmdbus, 0, "clk", "mclk", "", true, "", false, "clock");
-			refPrcArb = dbswdbe->tblwdbemprocess->insertNewRec(NULL, refCmdbus, 0, "arb", "clk", "", true, "", false, "arbiter operation");
+			refPrcClk = dbswdbe->tblwdbemprocess->insertNewRec(NULL, refCmdbus, 0, "clk", "mclk", "", true, "", false, false, "clock");
+			refPrcArb = dbswdbe->tblwdbemprocess->insertNewRec(NULL, refCmdbus, 0, "arb", "clk", "", true, "", false, false, "arbiter operation");
 
 			refPrtClk = dbswdbe->tblwdbemport->insertNewRec(NULL, 0, refCmdbus, mdlNum++, VecWdbeVMPortMdlCat::CMDBUS, "clk", VecWdbeVMPortDir::OUT, "sl", 1, "", "", "", "", "clk" + Cmdbussref, "");
 

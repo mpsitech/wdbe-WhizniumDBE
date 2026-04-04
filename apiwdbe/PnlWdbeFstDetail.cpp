@@ -49,15 +49,15 @@ string PnlWdbeFstDetail::VecVDo::getSref(
 
 PnlWdbeFstDetail::ContIac::ContIac(
 			const uint numFLstClu
-			, const bool ChkEip
+			, const bool ChkPri
 			, const string& TxfCmt
 		) :
 			Block()
 			, numFLstClu(numFLstClu)
-			, ChkEip(ChkEip)
+			, ChkPri(ChkPri)
 			, TxfCmt(TxfCmt)
 		{
-	mask = {NUMFLSTCLU, CHKEIP, TXFCMT};
+	mask = {NUMFLSTCLU, CHKPRI, TXFCMT};
 };
 
 bool PnlWdbeFstDetail::ContIac::readXML(
@@ -78,7 +78,7 @@ bool PnlWdbeFstDetail::ContIac::readXML(
 
 	if (basefound) {
 		if (extractUintAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "numFLstClu", numFLstClu)) add(NUMFLSTCLU);
-		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "ChkEip", ChkEip)) add(CHKEIP);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "ChkPri", ChkPri)) add(CHKPRI);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ci", "sref", "TxfCmt", TxfCmt)) add(TXFCMT);
 	};
 
@@ -98,7 +98,7 @@ void PnlWdbeFstDetail::ContIac::writeXML(
 
 	xmlTextWriterStartElement(wr, BAD_CAST difftag.c_str());
 		writeUintAttr(wr, itemtag, "sref", "numFLstClu", numFLstClu);
-		writeBoolAttr(wr, itemtag, "sref", "ChkEip", ChkEip);
+		writeBoolAttr(wr, itemtag, "sref", "ChkPri", ChkPri);
 		writeStringAttr(wr, itemtag, "sref", "TxfCmt", TxfCmt);
 	xmlTextWriterEndElement(wr);
 };
@@ -109,7 +109,7 @@ set<uint> PnlWdbeFstDetail::ContIac::comm(
 	set<uint> items;
 
 	if (numFLstClu == comp->numFLstClu) insert(items, NUMFLSTCLU);
-	if (ChkEip == comp->ChkEip) insert(items, CHKEIP);
+	if (ChkPri == comp->ChkPri) insert(items, CHKPRI);
 	if (TxfCmt == comp->TxfCmt) insert(items, TXFCMT);
 
 	return(items);
@@ -123,7 +123,7 @@ set<uint> PnlWdbeFstDetail::ContIac::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {NUMFLSTCLU, CHKEIP, TXFCMT};
+	diffitems = {NUMFLSTCLU, CHKPRI, TXFCMT};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -285,7 +285,7 @@ PnlWdbeFstDetail::StatShr::StatShr(
 			, const bool TxtFsmActive
 			, const bool ButFsmViewAvail
 			, const bool ButFsmViewActive
-			, const bool ChkEipActive
+			, const bool ChkPriActive
 			, const bool TxfCmtActive
 		) :
 			Block()
@@ -299,10 +299,10 @@ PnlWdbeFstDetail::StatShr::StatShr(
 			, TxtFsmActive(TxtFsmActive)
 			, ButFsmViewAvail(ButFsmViewAvail)
 			, ButFsmViewActive(ButFsmViewActive)
-			, ChkEipActive(ChkEipActive)
+			, ChkPriActive(ChkPriActive)
 			, TxfCmtActive(TxfCmtActive)
 		{
-	mask = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, LSTCLUACTIVE, BUTCLUVIEWACTIVE, BUTCLUCLUSTERAVAIL, BUTCLUUNCLUSTERAVAIL, TXTFSMACTIVE, BUTFSMVIEWAVAIL, BUTFSMVIEWACTIVE, CHKEIPACTIVE, TXFCMTACTIVE};
+	mask = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, LSTCLUACTIVE, BUTCLUVIEWACTIVE, BUTCLUCLUSTERAVAIL, BUTCLUUNCLUSTERAVAIL, TXTFSMACTIVE, BUTFSMVIEWAVAIL, BUTFSMVIEWACTIVE, CHKPRIACTIVE, TXFCMTACTIVE};
 };
 
 bool PnlWdbeFstDetail::StatShr::readXML(
@@ -332,7 +332,7 @@ bool PnlWdbeFstDetail::StatShr::readXML(
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TxtFsmActive", TxtFsmActive)) add(TXTFSMACTIVE);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButFsmViewAvail", ButFsmViewAvail)) add(BUTFSMVIEWAVAIL);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ButFsmViewActive", ButFsmViewActive)) add(BUTFSMVIEWACTIVE);
-		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ChkEipActive", ChkEipActive)) add(CHKEIPACTIVE);
+		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "ChkPriActive", ChkPriActive)) add(CHKPRIACTIVE);
 		if (extractBoolAttrUclc(docctx, basexpath, itemtag, "Si", "sref", "TxfCmtActive", TxfCmtActive)) add(TXFCMTACTIVE);
 	};
 
@@ -354,7 +354,7 @@ set<uint> PnlWdbeFstDetail::StatShr::comm(
 	if (TxtFsmActive == comp->TxtFsmActive) insert(items, TXTFSMACTIVE);
 	if (ButFsmViewAvail == comp->ButFsmViewAvail) insert(items, BUTFSMVIEWAVAIL);
 	if (ButFsmViewActive == comp->ButFsmViewActive) insert(items, BUTFSMVIEWACTIVE);
-	if (ChkEipActive == comp->ChkEipActive) insert(items, CHKEIPACTIVE);
+	if (ChkPriActive == comp->ChkPriActive) insert(items, CHKPRIACTIVE);
 	if (TxfCmtActive == comp->TxfCmtActive) insert(items, TXFCMTACTIVE);
 
 	return(items);
@@ -368,7 +368,7 @@ set<uint> PnlWdbeFstDetail::StatShr::diff(
 
 	commitems = comm(comp);
 
-	diffitems = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, LSTCLUACTIVE, BUTCLUVIEWACTIVE, BUTCLUCLUSTERAVAIL, BUTCLUUNCLUSTERAVAIL, TXTFSMACTIVE, BUTFSMVIEWAVAIL, BUTFSMVIEWACTIVE, CHKEIPACTIVE, TXFCMTACTIVE};
+	diffitems = {BUTSAVEAVAIL, BUTSAVEACTIVE, TXTSRFACTIVE, LSTCLUACTIVE, BUTCLUVIEWACTIVE, BUTCLUCLUSTERAVAIL, BUTCLUUNCLUSTERAVAIL, TXTFSMACTIVE, BUTFSMVIEWAVAIL, BUTFSMVIEWACTIVE, CHKPRIACTIVE, TXFCMTACTIVE};
 	for (auto it = commitems.begin(); it != commitems.end(); it++) diffitems.erase(*it);
 
 	return(diffitems);
@@ -383,7 +383,7 @@ PnlWdbeFstDetail::Tag::Tag(
 			, const string& CptSrf
 			, const string& CptClu
 			, const string& CptFsm
-			, const string& CptEip
+			, const string& CptPri
 			, const string& CptCmt
 		) :
 			Block()
@@ -391,10 +391,10 @@ PnlWdbeFstDetail::Tag::Tag(
 			, CptSrf(CptSrf)
 			, CptClu(CptClu)
 			, CptFsm(CptFsm)
-			, CptEip(CptEip)
+			, CptPri(CptPri)
 			, CptCmt(CptCmt)
 		{
-	mask = {CPT, CPTSRF, CPTCLU, CPTFSM, CPTEIP, CPTCMT};
+	mask = {CPT, CPTSRF, CPTCLU, CPTFSM, CPTPRI, CPTCMT};
 };
 
 bool PnlWdbeFstDetail::Tag::readXML(
@@ -418,7 +418,7 @@ bool PnlWdbeFstDetail::Tag::readXML(
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "CptSrf", CptSrf)) add(CPTSRF);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "CptClu", CptClu)) add(CPTCLU);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "CptFsm", CptFsm)) add(CPTFSM);
-		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "CptEip", CptEip)) add(CPTEIP);
+		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "CptPri", CptPri)) add(CPTPRI);
 		if (extractStringAttrUclc(docctx, basexpath, itemtag, "Ti", "sref", "CptCmt", CptCmt)) add(CPTCMT);
 	};
 

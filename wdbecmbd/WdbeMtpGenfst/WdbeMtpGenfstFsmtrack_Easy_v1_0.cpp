@@ -63,11 +63,6 @@ DpchRetWdbe* WdbeMtpGenfstFsmtrack_Easy_v1_0::run(
 		if (ratioTrkclk >= 1.0) ixVDir = VecWdbeVRMCdcMSignalDir::STF;
 		else ixVDir = VecWdbeVRMCdcMSignalDir::FTS;
 
-		refSig = dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::VOID, 0, 0, "enCntbufB_sig", false, "sl", 1, "", "", "", "", 0, "");
-		dbswdbe->tblwdbermcdcmsignal->insertNewRec(NULL, refCdc, refSig, ixVDir);
-		refSig = dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::VOID, 0, 0, "aCntbufB", false, "nat", 0, "0..255", "", "", "", 0, "");
-		dbswdbe->tblwdbermcdcmsignal->insertNewRec(NULL, refCdc, refSig, ixVDir);
-
 		refSig = dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::VOID, 0, 0, "tixVCapture", false, "slvdn", 8, "", "", "", "", 0, "");
 		dbswdbe->tblwdbermcdcmsignal->insertNewRec(NULL, refCdc, refSig, ixVDir);
 		refSig = dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::VOID, 0, 0, "staTixVTrigger", false, "slvdn", 8, "", "", "", "", 0, "");
@@ -80,8 +75,6 @@ DpchRetWdbe* WdbeMtpGenfstFsmtrack_Easy_v1_0::run(
 		refSig = dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::STRB, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::VOID, 0, 0, "strbStop", false, "sl", 1, "", "", "", "", 0, "");
 		dbswdbe->tblwdbermcdcmsignal->insertNewRec(NULL, refCdc, refSig, ixVDir);
 
-		refSig = dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::VOID, 0, 0, "reqFstoccbufBToFirstClear", false, "sl", 1, "", "", "", "", 0, "");
-		dbswdbe->tblwdbermcdcmsignal->insertNewRec(NULL, refCdc, refSig, ixVDir);
 		refSig = dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::VOID, 0, 0, "reqOpClear", false, "sl", 1, "", "", "", "", 0, "");
 		dbswdbe->tblwdbermcdcmsignal->insertNewRec(NULL, refCdc, refSig, ixVDir);
 		refSig = dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::VOID, 0, 0, "reqSeqbufBToSeqClear", false, "sl", 1, "", "", "", "", 0, "");
@@ -105,16 +98,6 @@ DpchRetWdbe* WdbeMtpGenfstFsmtrack_Easy_v1_0::run(
 		if (ratioTrkclk >= 1.0) ixVDir = VecWdbeVRMCdcMSignalDir::FTS;
 		else ixVDir = VecWdbeVRMCdcMSignalDir::STF;
 
-		refSig = dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::VOID, 0, 0, "rdyCount", false, "sl", 1, "", "", "", "", 0, "");
-		dbswdbe->tblwdbermcdcmsignal->insertNewRec(NULL, refCdc, refSig, ixVDir);
-		refSig = dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::VOID, 0, 0, "dneCount", false, "sl", 1, "", "", "", "", 0, "");
-		dbswdbe->tblwdbermcdcmsignal->insertNewRec(NULL, refCdc, refSig, ixVDir);
-
-		refSig = dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::VOID, 0, 0, "rdyFirst", false, "sl", 1, "", "", "", "", 0, "");
-		dbswdbe->tblwdbermcdcmsignal->insertNewRec(NULL, refCdc, refSig, ixVDir);
-		refSig = dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::VOID, 0, 0, "dneFirst", false, "sl", 1, "", "", "", "", 0, "");
-		dbswdbe->tblwdbermcdcmsignal->insertNewRec(NULL, refCdc, refSig, ixVDir);
-
 		refSig = dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::VOID, 0, 0, "rdySeq", false, "sl", 1, "", "", "", "", 0, "");
 		dbswdbe->tblwdbermcdcmsignal->insertNewRec(NULL, refCdc, refSig, ixVDir);
 		refSig = dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::VOID, 0, 0, "dneSeq", false, "sl", 1, "", "", "", "", 0, "");
@@ -124,16 +107,11 @@ DpchRetWdbe* WdbeMtpGenfstFsmtrack_Easy_v1_0::run(
 		refSig = dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::VOID, 0, 0, "ptr0Seqbuf", false, "nat", 0, "0..sizeSeqbuf/4-1", "", "", "", 0, "");
 		dbswdbe->tblwdbermcdcmsignal->insertNewRec(NULL, refCdc, refSig, ixVDir);
 
-		refSig = dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::VOID, 0, 0, "drdCntbufB", false, "slvdn", 32, "", "", "", "", 0, "");
-		dbswdbe->tblwdbermcdcmsignal->insertNewRec(NULL, refCdc, refSig, ixVDir);
-
 		refSig = dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::VOID, 0, 0, "start", false, "sl", 1, "", "", "", "", 0, "");
 		dbswdbe->tblwdbermcdcmsignal->insertNewRec(NULL, refCdc, refSig, ixVDir);
 		refSig = dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::VOID, 0, 0, "stop", false, "sl", 1, "", "", "", "", 0, "");
 		dbswdbe->tblwdbermcdcmsignal->insertNewRec(NULL, refCdc, refSig, ixVDir);
 
-		refSig = dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::VOID, 0, 0, "ackFstoccbufBToFirstClear", false, "sl", 1, "", "", "", "", 0, "");
-		dbswdbe->tblwdbermcdcmsignal->insertNewRec(NULL, refCdc, refSig, ixVDir);
 		refSig = dbswdbe->tblwdbemsignal->insertNewRec(NULL, VecWdbeVMSignalBasetype::OTH, 0, VecWdbeVMSignalRefTbl::MDL, refWdbeMModule, mdlNum++, VecWdbeVMSignalMgeTbl::VOID, 0, 0, "ackSeqbufBToSeqClear", false, "sl", 1, "", "", "", "", 0, "");
 		dbswdbe->tblwdbermcdcmsignal->insertNewRec(NULL, refCdc, refSig, ixVDir);
 	};

@@ -230,7 +230,9 @@ DpchRetWdbe* WdbeMtpCplmstbuDdrmux_Easy_v1_0::run(
 			dbswdbe->tblwdbemport->insertNewRec(NULL, refC, refWdbeMModule, mdlNum++, VecWdbeVMPortMdlCat::RTESUP, "ack" + StrMod::cap(chsref), VecWdbeVMPortDir::OUT, "sl", 1, "", "", "", "", "", "");
 
 			refC = dbswdbe->tblwdbecport->getNewRef();
-			dbswdbe->tblwdbemport->insertNewRec(NULL, refC, refWdbeMModule, mdlNum++, VecWdbeVMPortMdlCat::RTESUP, chsref + "AXI_araddr", VecWdbeVMPortDir::IN, "slvdn", wA-wAConst-log2(NBeatRd)-log2(wD/8), "", "", "", "", "", "");
+			w = wA-wAConst-log2(wD/8); // not log2(wDRds[i]/8), start addresses need to be aligned with memory interface width
+			if (!flexNBeatRds[i]) w -= log2(NBeatRd);
+			dbswdbe->tblwdbemport->insertNewRec(NULL, refC, refWdbeMModule, mdlNum++, VecWdbeVMPortMdlCat::RTESUP, chsref + "AXI_araddr", VecWdbeVMPortDir::IN, "slvdn", w, "", "", "", "", "", "");
 			if (flexNBeatRds[i]) dbswdbe->tblwdbemport->insertNewRec(NULL, refC, refWdbeMModule, mdlNum++, VecWdbeVMPortMdlCat::RTESUP, chsref + "AXI_arlen", VecWdbeVMPortDir::IN, "slvdn", 8, "", "", "", "", "", "");
 			dbswdbe->tblwdbemport->insertNewRec(NULL, refC, refWdbeMModule, mdlNum++, VecWdbeVMPortMdlCat::RTESUP, chsref + "AXI_arready", VecWdbeVMPortDir::OUT, "sl", 1, "", "", "", "", "", "");
 			dbswdbe->tblwdbemport->insertNewRec(NULL, refC, refWdbeMModule, mdlNum++, VecWdbeVMPortMdlCat::RTESUP, chsref + "AXI_arvalid", VecWdbeVMPortDir::IN, "sl", 1, "", "", "", "", "", "");
@@ -249,7 +251,9 @@ DpchRetWdbe* WdbeMtpCplmstbuDdrmux_Easy_v1_0::run(
 			dbswdbe->tblwdbemport->insertNewRec(NULL, refC, refWdbeMModule, mdlNum++, VecWdbeVMPortMdlCat::RTESUP, "ack" + StrMod::cap(chsref), VecWdbeVMPortDir::OUT, "sl", 1, "", "", "", "", "", "");
 
 			refC = dbswdbe->tblwdbecport->getNewRef();
-			dbswdbe->tblwdbemport->insertNewRec(NULL, refC, refWdbeMModule, mdlNum++, VecWdbeVMPortMdlCat::RTESUP, chsref + "AXI_awaddr", VecWdbeVMPortDir::IN, "slvdn", wA-wAConst-log2(NBeatWr)-log2(wD/8), "", "", "", "", "", "");
+			w = wA-wAConst-log2(wD/8);
+			if (!flexNBeatWrs[i]) w -= log2(NBeatWr);
+			dbswdbe->tblwdbemport->insertNewRec(NULL, refC, refWdbeMModule, mdlNum++, VecWdbeVMPortMdlCat::RTESUP, chsref + "AXI_awaddr", VecWdbeVMPortDir::IN, "slvdn", w, "", "", "", "", "", "");
 			if (flexNBeatWrs[i]) dbswdbe->tblwdbemport->insertNewRec(NULL, refC, refWdbeMModule, mdlNum++, VecWdbeVMPortMdlCat::RTESUP, chsref + "AXI_awlen", VecWdbeVMPortDir::IN, "slvdn", 8, "", "", "", "", "", "");
 			dbswdbe->tblwdbemport->insertNewRec(NULL, refC, refWdbeMModule, mdlNum++, VecWdbeVMPortMdlCat::RTESUP, chsref + "AXI_awready", VecWdbeVMPortDir::OUT, "sl", 1, "", "", "", "", "", "");
 			dbswdbe->tblwdbemport->insertNewRec(NULL, refC, refWdbeMModule, mdlNum++, VecWdbeVMPortMdlCat::RTESUP, chsref + "AXI_awvalid", VecWdbeVMPortDir::IN, "sl", 1, "", "", "", "", "", "");

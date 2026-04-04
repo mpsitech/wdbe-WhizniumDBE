@@ -57,7 +57,8 @@ function initBD(bNotD) {
 	initCpt(contcontdoc, "CptAsr", retrieveTi(srcdoc, "TagWdbePrcDetail", "CptAsr"));
 	initCpt(contcontdoc, "CptFal", retrieveTi(srcdoc, "TagWdbePrcDetail", "CptFal"));
 	initCpt(contcontdoc, "CptSnr", retrieveTi(srcdoc, "TagWdbePrcDetail", "CptSnr"));
-	initCpt(contcontdoc, "CptEip", retrieveTi(srcdoc, "TagWdbePrcDetail", "CptEip"));
+	initCpt(contcontdoc, "CptPri", retrieveTi(srcdoc, "TagWdbePrcDetail", "CptPri"));
+	initCpt(contcontdoc, "CptPoi", retrieveTi(srcdoc, "TagWdbePrcDetail", "CptPoi"));
 	initCpt(contcontdoc, "CptCmt", retrieveTi(srcdoc, "TagWdbePrcDetail", "CptCmt"));
 	initCpt(contcontdoc, "CptFsmDtt", retrieveTi(srcdoc, "TagWdbePrcDetail", "CptFsmDtt"));
 	refreshPup(contcontdoc, srcdoc, "PupFsmDtt", "", "FeedFPupFsmDtt", retrieveCi(srcdoc, "ContIacWdbePrcDetail", "numFPupFsmDtt"), retrieveSi(srcdoc, "StatShrWdbePrcDetail", "PupFsmDttActive"), false);
@@ -84,7 +85,7 @@ function refreshA() {
 function refreshBD(bNotD) {
 	if (!contcontdoc) return;
 
-	var height = 324; // full cont height
+	var height = 349; // full cont height
 
 	// IP refreshBD.vars --- BEGIN
 	var TxtSrfActive = (retrieveSi(srcdoc, "StatShrWdbePrcDetail", "TxtSrfActive") == "true");
@@ -107,7 +108,9 @@ function refreshBD(bNotD) {
 
 	var TxfSnrActive = (retrieveSi(srcdoc, "StatShrWdbePrcDetail", "TxfSnrActive") == "true");
 
-	var ChkEipActive = (retrieveSi(srcdoc, "StatShrWdbePrcDetail", "ChkEipActive") == "true");
+	var ChkPriActive = (retrieveSi(srcdoc, "StatShrWdbePrcDetail", "ChkPriActive") == "true");
+
+	var ChkPoiActive = (retrieveSi(srcdoc, "StatShrWdbePrcDetail", "ChkPoiActive") == "true");
 
 	var TxfCmtActive = (retrieveSi(srcdoc, "StatShrWdbePrcDetail", "TxfCmtActive") == "true");
 
@@ -193,7 +196,9 @@ function refreshBD(bNotD) {
 
 	refreshTxf(contcontdoc, "TxfSnr", "", retrieveCi(srcdoc, "ContIacWdbePrcDetail", "TxfSnr"), TxfSnrActive, false, true);
 
-	refreshChk(contcontdoc, "ChkEip", (retrieveCi(srcdoc, "ContIacWdbePrcDetail", "ChkEip") == "true"), ChkEipActive);
+	refreshChk(contcontdoc, "ChkPri", (retrieveCi(srcdoc, "ContIacWdbePrcDetail", "ChkPri") == "true"), ChkPriActive);
+
+	refreshChk(contcontdoc, "ChkPoi", (retrieveCi(srcdoc, "ContIacWdbePrcDetail", "ChkPoi") == "true"), ChkPoiActive);
 
 	refreshTxft(contcontdoc, "TxfCmt", retrieveCi(srcdoc, "ContIacWdbePrcDetail", "TxfCmt"), TxfCmtActive, false, true);
 

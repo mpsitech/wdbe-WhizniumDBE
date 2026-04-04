@@ -33,7 +33,7 @@ void* WdbecmbdJobprc::run(
 	pthread_setcanceltype(PTHREAD_CANCEL_DEFERRED, 0);
 	pthread_cleanup_push(&cleanup, arg);
 
-	cout << Mt::getTid() << flush;
+	cout << MtMon::getTid() << flush;
 
 	// open database connection
 	DbsWdbe dbswdbe;
@@ -49,7 +49,7 @@ void* WdbecmbdJobprc::run(
 			contry--;
 
 			if (contry == 0) {
-				e.vals["tid"] = Mt::getTid();
+				e.vals["tid"] = MtMon::getTid();
 				e.vals["object"] = "WdbecmbdJobprc";
 				e.vals["member"] = "run";
 

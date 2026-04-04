@@ -25,7 +25,8 @@ WdbeMProcess::WdbeMProcess(
 			, const string asrSrefWdbeMSignal
 			, const bool Falling
 			, const string Syncrst
-			, const bool Extip
+			, const bool Preip
+			, const bool Postip
 			, const string Comment
 		) :
 			ref(ref)
@@ -36,7 +37,8 @@ WdbeMProcess::WdbeMProcess(
 			, asrSrefWdbeMSignal(asrSrefWdbeMSignal)
 			, Falling(Falling)
 			, Syncrst(Syncrst)
-			, Extip(Extip)
+			, Preip(Preip)
+			, Postip(Postip)
 			, Comment(Comment)
 		{
 };
@@ -176,13 +178,14 @@ ubigint TblWdbeMProcess::insertNewRec(
 			, const string asrSrefWdbeMSignal
 			, const bool Falling
 			, const string Syncrst
-			, const bool Extip
+			, const bool Preip
+			, const bool Postip
 			, const string Comment
 		) {
 	ubigint retval = 0;
 	WdbeMProcess* _rec = NULL;
 
-	_rec = new WdbeMProcess(0, refWdbeMModule, refWdbeMFsm, sref, clkSrefWdbeMSignal, asrSrefWdbeMSignal, Falling, Syncrst, Extip, Comment);
+	_rec = new WdbeMProcess(0, refWdbeMModule, refWdbeMFsm, sref, clkSrefWdbeMSignal, asrSrefWdbeMSignal, Falling, Syncrst, Preip, Postip, Comment);
 	insertRec(_rec);
 
 	retval = _rec->ref;
@@ -203,13 +206,14 @@ ubigint TblWdbeMProcess::appendNewRecToRst(
 			, const string asrSrefWdbeMSignal
 			, const bool Falling
 			, const string Syncrst
-			, const bool Extip
+			, const bool Preip
+			, const bool Postip
 			, const string Comment
 		) {
 	ubigint retval = 0;
 	WdbeMProcess* _rec = NULL;
 
-	retval = insertNewRec(&_rec, refWdbeMModule, refWdbeMFsm, sref, clkSrefWdbeMSignal, asrSrefWdbeMSignal, Falling, Syncrst, Extip, Comment);
+	retval = insertNewRec(&_rec, refWdbeMModule, refWdbeMFsm, sref, clkSrefWdbeMSignal, asrSrefWdbeMSignal, Falling, Syncrst, Preip, Postip, Comment);
 	rst.nodes.push_back(_rec);
 
 	if (rec != NULL) *rec = _rec;
@@ -308,8 +312,8 @@ MyTblWdbeMProcess::~MyTblWdbeMProcess() {
 };
 
 void MyTblWdbeMProcess::initStatements() {
-	stmtInsertRec = createStatement("INSERT INTO TblWdbeMProcess (refWdbeMModule, refWdbeMFsm, sref, clkSrefWdbeMSignal, asrSrefWdbeMSignal, Falling, Syncrst, Extip, Comment) VALUES (?,?,?,?,?,?,?,?,?)", false);
-	stmtUpdateRec = createStatement("UPDATE TblWdbeMProcess SET refWdbeMModule = ?, refWdbeMFsm = ?, sref = ?, clkSrefWdbeMSignal = ?, asrSrefWdbeMSignal = ?, Falling = ?, Syncrst = ?, Extip = ?, Comment = ? WHERE ref = ?", false);
+	stmtInsertRec = createStatement("INSERT INTO TblWdbeMProcess (refWdbeMModule, refWdbeMFsm, sref, clkSrefWdbeMSignal, asrSrefWdbeMSignal, Falling, Syncrst, Preip, Postip, Comment) VALUES (?,?,?,?,?,?,?,?,?,?)", false);
+	stmtUpdateRec = createStatement("UPDATE TblWdbeMProcess SET refWdbeMModule = ?, refWdbeMFsm = ?, sref = ?, clkSrefWdbeMSignal = ?, asrSrefWdbeMSignal = ?, Falling = ?, Syncrst = ?, Preip = ?, Postip = ?, Comment = ? WHERE ref = ?", false);
 	stmtRemoveRecByRef = createStatement("DELETE FROM TblWdbeMProcess WHERE ref = ?", false);
 };
 
@@ -347,8 +351,9 @@ bool MyTblWdbeMProcess::loadRecBySQL(
 		if (dbrow[5]) _rec->asrSrefWdbeMSignal.assign(dbrow[5], dblengths[5]); else _rec->asrSrefWdbeMSignal = "";
 		if (dbrow[6]) _rec->Falling = (atoi((char*) dbrow[6]) != 0); else _rec->Falling = false;
 		if (dbrow[7]) _rec->Syncrst.assign(dbrow[7], dblengths[7]); else _rec->Syncrst = "";
-		if (dbrow[8]) _rec->Extip = (atoi((char*) dbrow[8]) != 0); else _rec->Extip = false;
-		if (dbrow[9]) _rec->Comment.assign(dbrow[9], dblengths[9]); else _rec->Comment = "";
+		if (dbrow[8]) _rec->Preip = (atoi((char*) dbrow[8]) != 0); else _rec->Preip = false;
+		if (dbrow[9]) _rec->Postip = (atoi((char*) dbrow[9]) != 0); else _rec->Postip = false;
+		if (dbrow[10]) _rec->Comment.assign(dbrow[10], dblengths[10]); else _rec->Comment = "";
 
 		retval = true;
 	};
@@ -399,8 +404,9 @@ ubigint MyTblWdbeMProcess::loadRstBySQL(
 			if (dbrow[5]) rec->asrSrefWdbeMSignal.assign(dbrow[5], dblengths[5]); else rec->asrSrefWdbeMSignal = "";
 			if (dbrow[6]) rec->Falling = (atoi((char*) dbrow[6]) != 0); else rec->Falling = false;
 			if (dbrow[7]) rec->Syncrst.assign(dbrow[7], dblengths[7]); else rec->Syncrst = "";
-			if (dbrow[8]) rec->Extip = (atoi((char*) dbrow[8]) != 0); else rec->Extip = false;
-			if (dbrow[9]) rec->Comment.assign(dbrow[9], dblengths[9]); else rec->Comment = "";
+			if (dbrow[8]) rec->Preip = (atoi((char*) dbrow[8]) != 0); else rec->Preip = false;
+			if (dbrow[9]) rec->Postip = (atoi((char*) dbrow[9]) != 0); else rec->Postip = false;
+			if (dbrow[10]) rec->Comment.assign(dbrow[10], dblengths[10]); else rec->Comment = "";
 			rst.nodes.push_back(rec);
 
 			numread++;
@@ -415,15 +421,16 @@ ubigint MyTblWdbeMProcess::loadRstBySQL(
 ubigint MyTblWdbeMProcess::insertRec(
 			WdbeMProcess* rec
 		) {
-	unsigned long l[9]; my_bool n[9]; my_bool e[9];
+	unsigned long l[10]; my_bool n[10]; my_bool e[10];
 
 	l[2] = rec->sref.length();
 	l[3] = rec->clkSrefWdbeMSignal.length();
 	l[4] = rec->asrSrefWdbeMSignal.length();
 	tinyint Falling = rec->Falling;
 	l[6] = rec->Syncrst.length();
-	tinyint Extip = rec->Extip;
-	l[8] = rec->Comment.length();
+	tinyint Preip = rec->Preip;
+	tinyint Postip = rec->Postip;
+	l[9] = rec->Comment.length();
 
 	MYSQL_BIND bind[] = {
 		bindUbigint(&rec->refWdbeMModule,&(l[0]),&(n[0]),&(e[0])),
@@ -433,8 +440,9 @@ ubigint MyTblWdbeMProcess::insertRec(
 		bindCstring((char*) (rec->asrSrefWdbeMSignal.c_str()),&(l[4]),&(n[4]),&(e[4])),
 		bindTinyint(&Falling,&(l[5]),&(n[5]),&(e[5])),
 		bindCstring((char*) (rec->Syncrst.c_str()),&(l[6]),&(n[6]),&(e[6])),
-		bindTinyint(&Extip,&(l[7]),&(n[7]),&(e[7])),
-		bindCstring((char*) (rec->Comment.c_str()),&(l[8]),&(n[8]),&(e[8]))
+		bindTinyint(&Preip,&(l[7]),&(n[7]),&(e[7])),
+		bindTinyint(&Postip,&(l[8]),&(n[8]),&(e[8])),
+		bindCstring((char*) (rec->Comment.c_str()),&(l[9]),&(n[9]),&(e[9]))
 	};
 
 	if (mysql_stmt_bind_param(stmtInsertRec, bind)) {
@@ -462,15 +470,16 @@ void MyTblWdbeMProcess::insertRst(
 void MyTblWdbeMProcess::updateRec(
 			WdbeMProcess* rec
 		) {
-	unsigned long l[10]; my_bool n[10]; my_bool e[10];
+	unsigned long l[11]; my_bool n[11]; my_bool e[11];
 
 	l[2] = rec->sref.length();
 	l[3] = rec->clkSrefWdbeMSignal.length();
 	l[4] = rec->asrSrefWdbeMSignal.length();
 	tinyint Falling = rec->Falling;
 	l[6] = rec->Syncrst.length();
-	tinyint Extip = rec->Extip;
-	l[8] = rec->Comment.length();
+	tinyint Preip = rec->Preip;
+	tinyint Postip = rec->Postip;
+	l[9] = rec->Comment.length();
 
 	MYSQL_BIND bind[] = {
 		bindUbigint(&rec->refWdbeMModule,&(l[0]),&(n[0]),&(e[0])),
@@ -480,9 +489,10 @@ void MyTblWdbeMProcess::updateRec(
 		bindCstring((char*) (rec->asrSrefWdbeMSignal.c_str()),&(l[4]),&(n[4]),&(e[4])),
 		bindTinyint(&Falling,&(l[5]),&(n[5]),&(e[5])),
 		bindCstring((char*) (rec->Syncrst.c_str()),&(l[6]),&(n[6]),&(e[6])),
-		bindTinyint(&Extip,&(l[7]),&(n[7]),&(e[7])),
-		bindCstring((char*) (rec->Comment.c_str()),&(l[8]),&(n[8]),&(e[8])),
-		bindUbigint(&rec->ref,&(l[9]),&(n[9]),&(e[9]))
+		bindTinyint(&Preip,&(l[7]),&(n[7]),&(e[7])),
+		bindTinyint(&Postip,&(l[8]),&(n[8]),&(e[8])),
+		bindCstring((char*) (rec->Comment.c_str()),&(l[9]),&(n[9]),&(e[9])),
+		bindUbigint(&rec->ref,&(l[10]),&(n[10]),&(e[10]))
 	};
 
 	if (mysql_stmt_bind_param(stmtUpdateRec, bind)) {
@@ -537,7 +547,7 @@ bool MyTblWdbeMProcess::loadRecByFsm(
 			ubigint refWdbeMFsm
 			, WdbeMProcess** rec
 		) {
-	return loadRecBySQL("SELECT ref, refWdbeMModule, refWdbeMFsm, sref, clkSrefWdbeMSignal, asrSrefWdbeMSignal, Falling, Syncrst, Extip, Comment FROM TblWdbeMProcess WHERE refWdbeMFsm = " + to_string(refWdbeMFsm) + "", rec);
+	return loadRecBySQL("SELECT ref, refWdbeMModule, refWdbeMFsm, sref, clkSrefWdbeMSignal, asrSrefWdbeMSignal, Falling, Syncrst, Preip, Postip, Comment FROM TblWdbeMProcess WHERE refWdbeMFsm = " + to_string(refWdbeMFsm) + "", rec);
 };
 
 ubigint MyTblWdbeMProcess::loadRefsByMdl(
@@ -553,7 +563,7 @@ ubigint MyTblWdbeMProcess::loadRstByMdl(
 			, const bool append
 			, ListWdbeMProcess& rst
 		) {
-	return loadRstBySQL("SELECT ref, refWdbeMModule, refWdbeMFsm, sref, clkSrefWdbeMSignal, asrSrefWdbeMSignal, Falling, Syncrst, Extip, Comment FROM TblWdbeMProcess WHERE refWdbeMModule = " + to_string(refWdbeMModule) + " ORDER BY sref ASC", append, rst);
+	return loadRstBySQL("SELECT ref, refWdbeMModule, refWdbeMFsm, sref, clkSrefWdbeMSignal, asrSrefWdbeMSignal, Falling, Syncrst, Preip, Postip, Comment FROM TblWdbeMProcess WHERE refWdbeMModule = " + to_string(refWdbeMModule) + " ORDER BY sref ASC", append, rst);
 };
 
 #endif
@@ -574,14 +584,14 @@ PgTblWdbeMProcess::~PgTblWdbeMProcess() {
 };
 
 void PgTblWdbeMProcess::initStatements() {
-	createStatement("TblWdbeMProcess_insertRec", "INSERT INTO TblWdbeMProcess (refWdbeMModule, refWdbeMFsm, sref, clkSrefWdbeMSignal, asrSrefWdbeMSignal, Falling, Syncrst, Extip, Comment) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9) RETURNING ref", 9);
-	createStatement("TblWdbeMProcess_updateRec", "UPDATE TblWdbeMProcess SET refWdbeMModule = $1, refWdbeMFsm = $2, sref = $3, clkSrefWdbeMSignal = $4, asrSrefWdbeMSignal = $5, Falling = $6, Syncrst = $7, Extip = $8, Comment = $9 WHERE ref = $10", 10);
+	createStatement("TblWdbeMProcess_insertRec", "INSERT INTO TblWdbeMProcess (refWdbeMModule, refWdbeMFsm, sref, clkSrefWdbeMSignal, asrSrefWdbeMSignal, Falling, Syncrst, Preip, Postip, Comment) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) RETURNING ref", 10);
+	createStatement("TblWdbeMProcess_updateRec", "UPDATE TblWdbeMProcess SET refWdbeMModule = $1, refWdbeMFsm = $2, sref = $3, clkSrefWdbeMSignal = $4, asrSrefWdbeMSignal = $5, Falling = $6, Syncrst = $7, Preip = $8, Postip = $9, Comment = $10 WHERE ref = $11", 11);
 	createStatement("TblWdbeMProcess_removeRecByRef", "DELETE FROM TblWdbeMProcess WHERE ref = $1", 1);
 
-	createStatement("TblWdbeMProcess_loadRecByRef", "SELECT ref, refWdbeMModule, refWdbeMFsm, sref, clkSrefWdbeMSignal, asrSrefWdbeMSignal, Falling, Syncrst, Extip, Comment FROM TblWdbeMProcess WHERE ref = $1", 1);
-	createStatement("TblWdbeMProcess_loadRecByFsm", "SELECT ref, refWdbeMModule, refWdbeMFsm, sref, clkSrefWdbeMSignal, asrSrefWdbeMSignal, Falling, Syncrst, Extip, Comment FROM TblWdbeMProcess WHERE refWdbeMFsm = $1", 1);
+	createStatement("TblWdbeMProcess_loadRecByRef", "SELECT ref, refWdbeMModule, refWdbeMFsm, sref, clkSrefWdbeMSignal, asrSrefWdbeMSignal, Falling, Syncrst, Preip, Postip, Comment FROM TblWdbeMProcess WHERE ref = $1", 1);
+	createStatement("TblWdbeMProcess_loadRecByFsm", "SELECT ref, refWdbeMModule, refWdbeMFsm, sref, clkSrefWdbeMSignal, asrSrefWdbeMSignal, Falling, Syncrst, Preip, Postip, Comment FROM TblWdbeMProcess WHERE refWdbeMFsm = $1", 1);
 	createStatement("TblWdbeMProcess_loadRefsByMdl", "SELECT ref FROM TblWdbeMProcess WHERE refWdbeMModule = $1", 1);
-	createStatement("TblWdbeMProcess_loadRstByMdl", "SELECT ref, refWdbeMModule, refWdbeMFsm, sref, clkSrefWdbeMSignal, asrSrefWdbeMSignal, Falling, Syncrst, Extip, Comment FROM TblWdbeMProcess WHERE refWdbeMModule = $1 ORDER BY sref ASC", 1);
+	createStatement("TblWdbeMProcess_loadRstByMdl", "SELECT ref, refWdbeMModule, refWdbeMFsm, sref, clkSrefWdbeMSignal, asrSrefWdbeMSignal, Falling, Syncrst, Preip, Postip, Comment FROM TblWdbeMProcess WHERE refWdbeMModule = $1 ORDER BY sref ASC", 1);
 };
 
 bool PgTblWdbeMProcess::loadRec(
@@ -605,7 +615,8 @@ bool PgTblWdbeMProcess::loadRec(
 			PQfnumber(res, "asrsrefwdbemsignal"),
 			PQfnumber(res, "falling"),
 			PQfnumber(res, "syncrst"),
-			PQfnumber(res, "extip"),
+			PQfnumber(res, "preip"),
+			PQfnumber(res, "postip"),
 			PQfnumber(res, "comment")
 		};
 
@@ -617,8 +628,9 @@ bool PgTblWdbeMProcess::loadRec(
 		ptr = PQgetvalue(res, 0, fnum[5]); _rec->asrSrefWdbeMSignal.assign(ptr, PQgetlength(res, 0, fnum[5]));
 		ptr = PQgetvalue(res, 0, fnum[6]); _rec->Falling = (atoi(ptr) != 0);
 		ptr = PQgetvalue(res, 0, fnum[7]); _rec->Syncrst.assign(ptr, PQgetlength(res, 0, fnum[7]));
-		ptr = PQgetvalue(res, 0, fnum[8]); _rec->Extip = (atoi(ptr) != 0);
-		ptr = PQgetvalue(res, 0, fnum[9]); _rec->Comment.assign(ptr, PQgetlength(res, 0, fnum[9]));
+		ptr = PQgetvalue(res, 0, fnum[8]); _rec->Preip = (atoi(ptr) != 0);
+		ptr = PQgetvalue(res, 0, fnum[9]); _rec->Postip = (atoi(ptr) != 0);
+		ptr = PQgetvalue(res, 0, fnum[10]); _rec->Comment.assign(ptr, PQgetlength(res, 0, fnum[10]));
 
 		retval = true;
 	};
@@ -653,7 +665,8 @@ ubigint PgTblWdbeMProcess::loadRst(
 			PQfnumber(res, "asrsrefwdbemsignal"),
 			PQfnumber(res, "falling"),
 			PQfnumber(res, "syncrst"),
-			PQfnumber(res, "extip"),
+			PQfnumber(res, "preip"),
+			PQfnumber(res, "postip"),
 			PQfnumber(res, "comment")
 		};
 
@@ -668,8 +681,9 @@ ubigint PgTblWdbeMProcess::loadRst(
 			ptr = PQgetvalue(res, numread, fnum[5]); rec->asrSrefWdbeMSignal.assign(ptr, PQgetlength(res, numread, fnum[5]));
 			ptr = PQgetvalue(res, numread, fnum[6]); rec->Falling = (atoi(ptr) != 0);
 			ptr = PQgetvalue(res, numread, fnum[7]); rec->Syncrst.assign(ptr, PQgetlength(res, numread, fnum[7]));
-			ptr = PQgetvalue(res, numread, fnum[8]); rec->Extip = (atoi(ptr) != 0);
-			ptr = PQgetvalue(res, numread, fnum[9]); rec->Comment.assign(ptr, PQgetlength(res, numread, fnum[9]));
+			ptr = PQgetvalue(res, numread, fnum[8]); rec->Preip = (atoi(ptr) != 0);
+			ptr = PQgetvalue(res, numread, fnum[9]); rec->Postip = (atoi(ptr) != 0);
+			ptr = PQgetvalue(res, numread, fnum[10]); rec->Comment.assign(ptr, PQgetlength(res, numread, fnum[10]));
 
 			rst.nodes.push_back(rec);
 
@@ -765,7 +779,8 @@ ubigint PgTblWdbeMProcess::insertRec(
 	ubigint _refWdbeMModule = htonl64(rec->refWdbeMModule);
 	ubigint _refWdbeMFsm = htonl64(rec->refWdbeMFsm);
 	smallint _Falling = htons((smallint) rec->Falling);
-	smallint _Extip = htons((smallint) rec->Extip);
+	smallint _Preip = htons((smallint) rec->Preip);
+	smallint _Postip = htons((smallint) rec->Postip);
 
 	const char* vals[] = {
 		(char*) &_refWdbeMModule,
@@ -775,7 +790,8 @@ ubigint PgTblWdbeMProcess::insertRec(
 		rec->asrSrefWdbeMSignal.c_str(),
 		(char*) &_Falling,
 		rec->Syncrst.c_str(),
-		(char*) &_Extip,
+		(char*) &_Preip,
+		(char*) &_Postip,
 		rec->Comment.c_str()
 	};
 	const int l[] = {
@@ -787,11 +803,12 @@ ubigint PgTblWdbeMProcess::insertRec(
 		sizeof(smallint),
 		0,
 		sizeof(smallint),
+		sizeof(smallint),
 		0
 	};
-	const int f[] = {1, 1, 0, 0, 0, 1, 0, 1, 0};
+	const int f[] = {1, 1, 0, 0, 0, 1, 0, 1, 1, 0};
 
-	res = PQexecPrepared(dbs, "TblWdbeMProcess_insertRec", 9, vals, l, f, 0);
+	res = PQexecPrepared(dbs, "TblWdbeMProcess_insertRec", 10, vals, l, f, 0);
 
 	if (PQresultStatus(res) != PGRES_TUPLES_OK) {
 		string dbms = "PgTblWdbeMProcess::insertRec() / " + string(PQerrorMessage(dbs));
@@ -822,7 +839,8 @@ void PgTblWdbeMProcess::updateRec(
 	ubigint _refWdbeMModule = htonl64(rec->refWdbeMModule);
 	ubigint _refWdbeMFsm = htonl64(rec->refWdbeMFsm);
 	smallint _Falling = htons((smallint) rec->Falling);
-	smallint _Extip = htons((smallint) rec->Extip);
+	smallint _Preip = htons((smallint) rec->Preip);
+	smallint _Postip = htons((smallint) rec->Postip);
 	ubigint _ref = htonl64(rec->ref);
 
 	const char* vals[] = {
@@ -833,7 +851,8 @@ void PgTblWdbeMProcess::updateRec(
 		rec->asrSrefWdbeMSignal.c_str(),
 		(char*) &_Falling,
 		rec->Syncrst.c_str(),
-		(char*) &_Extip,
+		(char*) &_Preip,
+		(char*) &_Postip,
 		rec->Comment.c_str(),
 		(char*) &_ref
 	};
@@ -846,12 +865,13 @@ void PgTblWdbeMProcess::updateRec(
 		sizeof(smallint),
 		0,
 		sizeof(smallint),
+		sizeof(smallint),
 		0,
 		sizeof(ubigint)
 	};
-	const int f[] = {1, 1, 0, 0, 0, 1, 0, 1, 0, 1};
+	const int f[] = {1, 1, 0, 0, 0, 1, 0, 1, 1, 0, 1};
 
-	res = PQexecPrepared(dbs, "TblWdbeMProcess_updateRec", 10, vals, l, f, 0);
+	res = PQexecPrepared(dbs, "TblWdbeMProcess_updateRec", 11, vals, l, f, 0);
 
 	if (PQresultStatus(res) != PGRES_COMMAND_OK) {
 		string dbms = "PgTblWdbeMProcess::updateRec() / " + string(PQerrorMessage(dbs));

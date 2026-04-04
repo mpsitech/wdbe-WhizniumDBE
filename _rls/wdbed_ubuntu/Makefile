@@ -2,7 +2,7 @@
 # make file for Wdbe daemon, release wdbed_ubuntu
 # copyright: (C) 2016-2020 MPSI Technologies GmbH
 # author: Alexander Wirthmueller (auto-generation)
-# date created: 23 Nov 2025
+# date created: 1 Feb 2026
 # IP header --- ABOVE
 
 include Makefile.inc
@@ -57,7 +57,7 @@ $(EXE):	$(OBJS)
 pch:	$(PCHS)
 
 install:
-	mv $(EXE) $(BINROOT)/wdbed/
+	mv $(EXE) $(SYSROOT)$(BINROOT)/wdbed/
 
 clean:
 	rm -f *.gch

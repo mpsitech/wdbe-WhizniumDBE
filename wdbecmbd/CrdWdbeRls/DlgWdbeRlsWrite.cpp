@@ -112,8 +112,6 @@ DlgWdbeRlsWrite::DlgWdbeRlsWrite(
 
 			} else {
 				// cross-compilation
-				Wdbe::getMchpar(dbswdbe, rls->refWdbeMMachine, refs, "sysroot", sysroot);
-
 				cchost = " (" + StubWdbe::getStubMchSref(dbswdbe, ref) + " cross-compilation)";
 				inclibeq = "=";
 
@@ -912,7 +910,6 @@ void DlgWdbeRlsWrite::createDev(
 	keys.push_back("rlssref"); vals.push_back(rlssref);
 	keys.push_back("cchost"); vals.push_back(cchost);
 
-	keys.push_back("sysroot"); vals.push_back(sysroot);
 	keys.push_back("buildroot"); vals.push_back(buildroot);
 	keys.push_back("libroot"); vals.push_back(libroot);
 	keys.push_back("ncore"); vals.push_back(ncore);
@@ -1124,7 +1121,6 @@ void DlgWdbeRlsWrite::createEzdev(
 	keys.push_back("rlssref"); vals.push_back(rlssref);
 	keys.push_back("cchost"); vals.push_back(cchost);
 
-	keys.push_back("sysroot"); vals.push_back(sysroot);
 	keys.push_back("buildroot"); vals.push_back(buildroot);
 	keys.push_back("libroot"); vals.push_back(libroot);
 	keys.push_back("ncore"); vals.push_back(ncore);
@@ -1309,7 +1305,6 @@ void DlgWdbeRlsWrite::createTerm(
 	keys.push_back("rlssref"); vals.push_back(rlssref);
 	keys.push_back("cchost"); vals.push_back(cchost);
 
-	keys.push_back("sysroot"); vals.push_back(sysroot);
 	keys.push_back("buildroot"); vals.push_back(buildroot);
 	keys.push_back("libroot"); vals.push_back(libroot);
 	keys.push_back("binroot"); vals.push_back(binroot);

@@ -48,8 +48,8 @@ DpchRetWdbe* WdbeMtpGenfstTkclksrc_v1_0::run(
 	if (dbswdbe->tblwdbemmodule->loadRecByRef(refWdbeMModule, &mdl)) {
 		if (dbswdbe->tblwdbemcommand->loadRecBySQL("SELECT * FROM TblWdbeMCommand WHERE refIxVTbl = " + to_string(VecWdbeVMCommandRefTbl::CTR) + " AND refUref = " + to_string(mdl->refWdbeMController) + " AND sref = 'setTkst'", &cmdSetTkst)) {
 			// set up state machines to be identified by WrfpgaMdlfine
-			refPrcCmd = dbswdbe->tblwdbemprocess->insertNewRec(NULL, mdl->ref, 0, "cmd", "mclk", "reset", true, "", false, "command execution");
-			refPrcOp = dbswdbe->tblwdbemprocess->insertNewRec(NULL, mdl->ref, 0, "op", "mclk", "reset", true, "", false, "main operation");
+			refPrcCmd = dbswdbe->tblwdbemprocess->insertNewRec(NULL, mdl->ref, 0, "cmd", "mclk", "reset", true, "", false, false, "command execution");
+			refPrcOp = dbswdbe->tblwdbemprocess->insertNewRec(NULL, mdl->ref, 0, "op", "mclk", "reset", true, "", false, false, "main operation");
 
 			// handshake signals
 			mdlNum = Wdbe::getNextSigRefNum(dbswdbe, VecWdbeVMSignalRefTbl::MDL, mdl->ref);
